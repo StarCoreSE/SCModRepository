@@ -3,7 +3,7 @@ name: "Upload MA_Afterburner"
 on:
   push:
     paths:
-      - 'MA_Afterburner/**'
+      - "MA_Afterburner/**"
 
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2582915617
-          path: 'MA_Afterburner'
+          path: "MA_Afterburner"
           changelog: ${{ github.event.head_commit.message }}             
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

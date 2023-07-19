@@ -3,7 +3,7 @@ name: "Upload TIOStarcore-Bad-Modder-Beta-Branch"
 on:
   push:
     paths:
-      - 'TIOStarcore-Bad-Modder-Beta-Branch/**'
+      - "TIOStarcore-Bad-Modder-Beta-Branch/**"
 
 jobs:
   upload:

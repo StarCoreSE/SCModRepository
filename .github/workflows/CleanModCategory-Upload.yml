@@ -3,7 +3,7 @@ name: "Upload to SCCleanDLCCattegories"
 on:
   push:
     paths:
-      - 'SCCleanModCategories/**'
+      - "SCCleanModCategories/**"
 
 jobs:
   upload:

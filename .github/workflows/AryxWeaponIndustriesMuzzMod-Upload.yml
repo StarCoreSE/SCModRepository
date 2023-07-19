@@ -3,7 +3,7 @@ name: "Upload AryxWeaponIndustriesMuzzMod"
 on:
   push:
     paths:
-      - 'AryxWeaponIndustriesMuzzMod/**'
+      - "AryxWeaponIndustriesMuzzMod/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2659227392
-          path: 'AryxWeaponIndustriesMuzzMod'
+          path: "AryxWeaponIndustriesMuzzMod"
           changelog: ${{ github.event.head_commit.message }}              
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

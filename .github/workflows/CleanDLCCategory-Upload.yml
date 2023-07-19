@@ -3,7 +3,7 @@ name: "Upload SCCleanDLCCategories"
 on:
   push:
     paths:
-      - 'SCCleanDLCCategories/**'
+      - "SCCleanDLCCategories/**"
 
 jobs:
   upload:

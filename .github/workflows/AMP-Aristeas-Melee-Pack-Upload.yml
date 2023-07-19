@@ -3,7 +3,7 @@ name: "Upload AMP-Aristeas-Melee-Pack"
 on:
   push:
     paths:
-      - 'AMP-Aristeas-Melee-Pack/**'
+      - "AMP-Aristeas-Melee-Pack/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2870210922
-          path: 'AMP-Aristeas-Melee-Pack'
+          path: "AMP-Aristeas-Melee-Pack"
           changelog: ${{ github.event.head_commit.message }}           
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

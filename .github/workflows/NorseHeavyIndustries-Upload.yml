@@ -3,7 +3,7 @@ name: "Upload NHI"
 on:
   push:
     paths:
-      - 'NorseHeavyIndustries/**'
+      - "NorseHeavyIndustries/**"
 jobs:
   upload:
     runs-on: ubuntu-latest

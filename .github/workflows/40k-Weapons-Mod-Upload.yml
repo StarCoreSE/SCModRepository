@@ -3,7 +3,7 @@ name: "Upload 40k-Weapons-Mod"
 on:
   push:
     paths:
-      - '40k-Weapons-Mod/**'
+      - "40k-Weapons-Mod/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2956906605
-          path: '40k-Weapons-Mod'
+          path: "40k-Weapons-Mod"
           changelog: ${{ github.event.head_commit.message }}                  
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

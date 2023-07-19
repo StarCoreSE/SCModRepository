@@ -3,7 +3,7 @@ name: "Upload Starcore_Serpent_Arms_Heavy_Metal"
 on:
   push:
     paths:
-      - 'Starcore_Serpent_Arms_Heavy_Metal/**'
+      - "Starcore_Serpent_Arms_Heavy_Metal/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2683126590
-          path: 'Starcore_Serpent_Arms_Heavy_Metal'
+          path: "Starcore_Serpent_Arms_Heavy_Metal"
           changelog: ${{ github.event.head_commit.message }}            
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}
