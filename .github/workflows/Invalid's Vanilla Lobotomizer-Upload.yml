@@ -3,7 +3,7 @@ name: "Upload Invalid's Vanilla Lobotomizer"
 on:
   push:
     paths:
-      - 'Invalid's Vanilla Lobotomizer/**'
+      - "Invalid's Vanilla Lobotomizer/**"
 
 jobs:
   upload:
