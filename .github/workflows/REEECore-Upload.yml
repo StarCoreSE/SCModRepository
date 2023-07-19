@@ -3,7 +3,7 @@ name: "Upload to Workshop"
 on:
   push:
     paths:
-      - 'SCCleanDLCCattegories/**'
+      - 'REEECore/**'
 
 jobs:
   upload:
@@ -13,8 +13,8 @@ jobs:
       - uses: AnarkisGaming/workshop@v1
         with:
           appID: 244850
-          publishedFileID: 2893360271
-          path: SCCleanDLCCattegories
+          publishedFileID: 2683126168
+          path: REEECore
           changelog: ${{ github.event.head_commit.message }}
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}
