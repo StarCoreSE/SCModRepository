@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <CubeBlocks>
+ 
+	
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>Starcore_Arrow_Block</SubtypeId>
+      </Id>
+      <DisplayName>Starcore Arrow-IV Launcher</DisplayName>
+	  <Description> 
+      [12km Targeting Range]
+      [500m minimum range]
+      [Energy damage]
+      [370~ m/s] 
+      [Does not reload]
+      Fires decoys when near the target to confuse point defense.
+	 </Description>
+     <Icon>Textures\Icons\arrowiv.dds</Icon>
+      <CubeSize>Large</CubeSize>
+	  <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="3" z="4" />
+      <ModelOffset x="0" y="0" z="0" />
+	   <Model>Models\Starcore\Starcore_Arrow_Large.mwm</Model>
+       <Components>
+       <Component Subtype="SteelPlate" Count="365" />
+        <Component Subtype="Construction" Count="115" />
+        <Component Subtype="MetalGrid" Count="45" />
+        <Component Subtype="LargeTube" Count="35" />
+        <Component Subtype="Motor" Count="250" />
+        <Component Subtype="Computer" Count="100" />
+        <Component Subtype="Construction" Count="90" />
+        <Component Subtype="SteelPlate" Count="400" />
+      </Components>
+      <CriticalComponent Subtype="LargeTube" Index="0" />
+      <BlockPairName>Starcore_Arrow_Block</BlockPairName>
+      <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+	   <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>65</BuildTimeSeconds>
+      <DisassembleRatio>5</DisassembleRatio>
+      <NavigationDefinition>Default</NavigationDefinition>
+	   <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <MinElevationDegrees>-15</MinElevationDegrees>
+      <MaxElevationDegrees>75</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+	  <AiEnabled>false</AiEnabled>
+      <MaxRangeMeters>7000</MaxRangeMeters>
+      <RotationSpeed>0.0005</RotationSpeed>
+      <ElevationSpeed>0.0002 </ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+  <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+    </Definition>	
+			
+
+
+  </CubeBlocks>
+</Definitions>
