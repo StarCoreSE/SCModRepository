@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <CubeBlocks>
+		
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> <!-- VI Launcher Hunt -->  <!--  SRM , Bypass Medium Missile   -->
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>K_SA_Launcher_VI</SubtypeId>
+      </Id>
+      <DisplayName>Tartarus VIII</DisplayName>
+	  <Description>High health, Direct tracking, Very high damage.
+	  10km Range, Kinetic, Low Shield Damage. 8 Missiles per launcher.
+	  </Description>
+     <Icon>Textures\Icons\tartarusVIII_Icon.dds</Icon>
+      <CubeSize>Large</CubeSize>
+	  <GuiVisible>false</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+       <Size x="1" y="2" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\SerpentArms\SA_Launcher_VI_Large.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+       <Component Subtype="TartarusComponent" Count="1" />
+        <Component Subtype="Computer" Count="1" />
+		<Component Subtype="TartarusComponent" Count="3" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+
+       <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>K_SA_Launcher_VI</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>30</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_HSR_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+	   <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees> 
+      <MaxElevationDegrees>100</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>3500</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
+		
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> <!-- VIV Launcher  ATM --> <!--  ER Kinetic Impactor -->
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>K_SA_Launcher_VIV</SubtypeId>
+      </Id>
+      <DisplayName>Cocytus IX</DisplayName>
+	  <Description>
+		  Very High health, Direct tracking, Extreme damage.
+		  10km Range, Kinetic, Low Shield Damage. 2 Missiles per launcher.
+		  
+		  Ring The Funeral Bell
+	  </Description>
+     <Icon>Textures\Icons\CocytisIX_Icon.dds</Icon>
+      <CubeSize>Large</CubeSize>
+	  <GuiVisible>false</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+       <Size x="1" y="3" z="5" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\SerpentArms\SA_Launcher_VIV_Large.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+       <Component Subtype="CocytusComponent" Count="1" />
+        <Component Subtype="Computer" Count="1" />
+		<Component Subtype="CocytusComponent" Count="4" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+
+       <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>K_SA_Launcher_VIV</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>30</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_HSR_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+	   <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees> 
+      <MaxElevationDegrees>100</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>3500</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
+	 
+ <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>SC_Flare</SubtypeId>
+      </Id>
+      <DisplayName>Flares</DisplayName>
+	  <Description>Anti-Missile Chaff. 2km AMS Attraction, will attract all missiles inside its range.
+	  8 Flare charges per launcher.
+	 </Description>
+     <Icon>Textures\Icons\flares_Icon.dds</Icon>
+      <CubeSize>Large</CubeSize>
+	  <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+	   <Model>Models\Starcore\Starcore_Flare_Launcher.mwm</Model>
+       <Components>
+        <Component Subtype="Computer" Count="1" />
+		<Component Subtype="FlareComponent" Count="2" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BlockPairName>Starcore_Flare</BlockPairName>
+	   <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>25</BuildTimeSeconds>
+      <DisassembleRatio>5</DisassembleRatio>
+      <NavigationDefinition>Default</NavigationDefinition>
+	   <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <MinElevationDegrees>-15</MinElevationDegrees>
+      <MaxElevationDegrees>75</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+	  <MirroringY>Z</MirroringY>
+	  <MirroringZ>Y</MirroringZ>
+      <IdleRotation>false</IdleRotation>
+	  <AiEnabled>false</AiEnabled>
+      <MaxRangeMeters>7000</MaxRangeMeters>
+      <RotationSpeed>0.0005</RotationSpeed>
+      <ElevationSpeed>0.0002 </ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+    </Definition>
+
+  </CubeBlocks>
+</Definitions>

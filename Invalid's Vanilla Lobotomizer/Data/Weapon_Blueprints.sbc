@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Blueprints>
+
+
+
+	
+	
+			<!--AMMO IS ABOVE, COMPONENTS BELOW.-->	
+	
+	
+	
+	
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>AvalancheComponentBP</SubtypeId>
+      </Id>
+      <DisplayName>Avalanche Component</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\HeavyCalibreTurret.dds</Icon>
+      <Prerequisites>
+        <Item Amount="300" TypeId="Component" SubtypeId="SteelPlate" />
+        <Item Amount="300" TypeId="Component" SubtypeId="Construction" />
+        <Item Amount="30" TypeId="Component" SubtypeId="Computer" />
+        <Item Amount="35" TypeId="Component" SubtypeId="Motor" />
+        <Item Amount="16" TypeId="Component" SubtypeId="MetalGrid" />		  
+        <Item Amount="14" TypeId="Component" SubtypeId="LargeTube" />		  
+        <Item Amount="12" TypeId="Component" SubtypeId="SmallTube" />		  
+		
+      </Prerequisites>
+      <Result Amount="1" TypeId="Component" SubtypeId="AvalancheComponent" />
+      <BaseProductionTimeInSeconds>60</BaseProductionTimeInSeconds>
+    </Blueprint>		
+	
+  </Blueprints>
+</Definitions>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <BlockVariantGroups>
+
+      <!-- PD Turret Variants-->
+      <BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="NHI_PDC_Variants" />
+        <Icon>Textures\GUI\Icons\MyGat.dds</Icon>
+        <DisplayName>20mm 'Heimdallr' Point-Defense Cannon</DisplayName>
+        <Description>20mm 'Heimdallr' Point-Defense Cannon Group</Description>
+        <Blocks>
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="NHI_PD_Turret" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="NHI_PD_Turret_Half_Slope_Tip" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="NHI_PD_Turret_45_Slope" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="NHI_PD_Turret_Half" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="NHI_PD_Turret_Half_Slope_Top" />
+        </Blocks>
+      </BlockVariantGroup>
+
+      <!-- Mk1 Turret Variants-->
+      <BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="NHI_TurretVariants_Mk1" />
+        <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk1.dds</Icon>
+        <DisplayName>Mk1 Battleship Cannon</DisplayName>
+        <Description>Mk1 Battleship Cannon Group</Description>
+        <Blocks>
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="NHI_Mk1_Cannon_Turret" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="NHI_Mk1_Cannon_Surface_Turret" />
+        </Blocks>
+      </BlockVariantGroup>
+
+      <!-- Mk2 Turret Variants-->
+      <BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="NHI_TurretVariants_Mk2" />
+        <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk2.dds</Icon>
+        <DisplayName>Mk2 Battleship Cannon</DisplayName>
+        <Description>Mk2 Battleship Cannon Group</Description>
+        <Blocks>
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="NHI_Mk2_Cannon_Turret" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="NHI_Mk2_Cannon_Surface_Turret" />
+        </Blocks>
+      </BlockVariantGroup>
+
+      <!-- Mk3 Turret Variants-->
+      <BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="NHI_TurretVariants_Mk3" />
+        <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk3.dds</Icon>
+        <DisplayName>Mk3 Battleship Cannon</DisplayName>
+        <Description>Mk3 Battleship Cannon Group</Description>
+        <Blocks>
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="NHI_Mk3_Cannon_Turret" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="NHI_Mk3_Cannon_Surface_Turret" />
+        </Blocks>
+      </BlockVariantGroup>
+	
+    </BlockVariantGroups>
+</Definitions>

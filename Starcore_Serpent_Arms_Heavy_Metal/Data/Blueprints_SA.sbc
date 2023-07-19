@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Blueprints>
+   <!--  Gauss -->  
+   
+   <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>K_SA_Main_GaussMagazine_Case</SubtypeId>
+      </Id>
+      <DisplayName>Standard-Gauss Case
+	  Serpent Arms, Gauss Ammunition, Standard Load comes in 120 shots
+	  Used by Ceis</DisplayName>
+<Icon>Textures\GUI\Icons\K_APGauss.dds</Icon>
+      <Prerequisites>
+        <Item Amount="15" TypeId="Ingot" SubtypeId="Iron" />
+		   <Item Amount="15" TypeId="Ingot" SubtypeId="Nickel" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="K_GaussCase_S" />
+      <BaseProductionTimeInSeconds>125</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+	
+	  <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>K_SA_Main_GaussMagazine_CaseFlash</SubtypeId>
+      </Id>
+      <DisplayName>Flashfire-Gauss Case
+	  Serpent Arms, Gauss Ammunition, Flashfire Load comes in 30 shots
+	  Used by Ceis</DisplayName>
+  <Icon>Textures\GUI\Icons\K_APGauss.dds</Icon>
+      <Prerequisites>
+        <Item Amount="10" TypeId="Ingot" SubtypeId="Iron" />
+		   <Item Amount="15" TypeId="Ingot" SubtypeId="Nickel" />
+		   <Item Amount="1" TypeId="Ingot" SubtypeId="Uranium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="K_GaussCase_Flashfire" />
+      <BaseProductionTimeInSeconds>125</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+	
+	   <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>K_SA_Main_GaussMagazine_CaseHeavy</SubtypeId>
+      </Id>
+      <DisplayName>Heavy-Gauss Case
+	  Serpent Arms, Heavy Gauss Ammunition, Standard Load comes in 30 shots
+	  Used by ER Gauss</DisplayName>
+  <Icon>Textures\GUI\Icons\K_ERGauss.dds</Icon>
+      <Prerequisites>
+        <Item Amount="20" TypeId="Ingot" SubtypeId="Iron" />
+		   <Item Amount="30" TypeId="Ingot" SubtypeId="Nickel" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="K_GaussHeavyCase_S" />
+      <BaseProductionTimeInSeconds>125</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+	
+	<!--  Missile -->  
+	
+	  <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>K_SA_Main_Missile_Grimlock_Standard</SubtypeId>
+      </Id>
+      <DisplayName>Grimlock Standard
+	  Serpent Arms, Grimlock Missile, Standard Load, comes in pairs
+	  Used by Grimlock</DisplayName>
+     <Icon>Textures\GUI\Icons\K_GrimLock.dds</Icon>
+      <Prerequisites>
+        <Item Amount="65" TypeId="Ingot" SubtypeId="Iron" />
+		   <Item Amount="35" TypeId="Ingot" SubtypeId="Nickel" />
+		   <Item Amount="60" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="K_Grimlock_S" />
+      <BaseProductionTimeInSeconds>245</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+	  <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>K_SA_Main_Missile_Grimlock_KineticKill</SubtypeId>
+      </Id>
+      <DisplayName>Grimlock Kinetic-Kill
+	  Serpent Arms, Grimlock Missile, Kinetic-Kill Load, comes in pairs
+	  Used by Grimlock</DisplayName>
+     <Icon>Textures\GUI\Icons\K_GrimLock.dds</Icon>
+      <Prerequisites>
+        <Item Amount="90" TypeId="Ingot" SubtypeId="Iron" />
+		   <Item Amount="35" TypeId="Ingot" SubtypeId="Nickel" />
+		   <Item Amount="30" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="K_Grimlock_KineticKill" />
+      <BaseProductionTimeInSeconds>245</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+	  <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>K_SA_Main_Missile_Grimlock_GravityFissure</SubtypeId>
+      </Id>
+      <DisplayName>Grimlock Gravity-Fissure
+	  Serpent Arms, Grimlock Missile, Gravity-Fissure Load, comes in pairs
+	  Used by Grimlock</DisplayName>
+    <Icon>Textures\GUI\Icons\K_GrimLock.dds</Icon>
+      <Prerequisites>
+        <Item Amount="90" TypeId="Ingot" SubtypeId="Iron" />
+		   <Item Amount="75" TypeId="Ingot" SubtypeId="Nickel" />
+		   <Item Amount="30" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="K_Grimlock_GravFissure" />
+      <BaseProductionTimeInSeconds>245</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+	
+  </Blueprints>
+</Definitions>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AmmoMagazines>
+	<!--  Heavy Missile -->  
+	
+	
+		<AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>K_SA_ATM_I</SubtypeId>
+      </Id>
+      <DisplayName>ATM-I Missile</DisplayName>
+      <Icon>Textures\GUI\Icons\K_SA_MSI_ATM.dds</Icon>
+	  <ExtraInventoryTooltipLine>Serpent Arms, ATM Missile, Standard Load, comes in sets of 2.</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>50</Mass>
+      <Volume>5</Volume>
+      <Model>Models\SerpentArms\SA_LauncherMissile_VII_Large.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>2</Capacity>
+      <AmmoDefinitionId Subtype="K_HSR_FakeMissile" />
+    </AmmoMagazine>  
+	
+  </AmmoMagazines>
+</Definitions>

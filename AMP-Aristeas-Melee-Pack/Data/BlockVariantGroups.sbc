@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <BlockVariantGroups>
+    <BlockVariantGroup>
+      <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="ArcEmitterGroup" />
+      <Icon>Textures\GUI\Icons\ArcMelee.dds</Icon>
+      <DisplayName>Chiasm Arc Emitter</DisplayName>
+      <Description>
+		  [UNLIMITED POWAH]
+		  [250m] range arc emitter.
+		  [Energy] || [Hitscan]
+		  EFFECTIVE AGAINST: shields
+		  INEFFECTIVE AGAINST: armor
+	  </Description>
+      <Blocks>
+        <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="AMP_ArcMelee" />
+        <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="AMP_ArcMeleeReskin" />
+      </Blocks>
+    </BlockVariantGroup>
+  </BlockVariantGroups>
+</Definitions>

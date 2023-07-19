@@ -1,0 +1,278 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!--MAKE SURE TO CHANGE SECLEANMODCATEGORIES TOO IF YOU'RE ADDING A NEW CATEGORY-->
+  <CategoryClasses>
+    <!--not pointless-->
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+
+      </Id>
+      <DisplayName>.STARCORE TOURNAMENT WEAPONS</DisplayName>
+      <Name>.SC Tournament Weapons</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+
+        <!--VANILLA? moved to its own thing-->
+
+
+        <!--FUCKING NATE-->
+        <string>Type18_Artillery</string>
+        <string>Type21_Artillery</string>
+        <string>Assault_Coil_Turret</string>
+        <string>Light_Coil_Turret</string>
+        <string>Fixed_Rockets</string>
+        <string>Heavy_Repeater</string>
+
+
+
+        <!--MA-->
+        <string>MA_AC150</string>
+        <string>MA_Gladius</string>
+        <string>MA_Gimbal_Laser</string>
+        <string>MA_PDT</string>
+        <string>MA_Fixed_T3</string>
+        <string>MA_Tiger</string>
+        <string>AMSlaser</string>
+        <string>MA_Derecho</string>
+        <string>MA_Guardian</string>
+
+        <!--SA-->
+        <string>K_SA_Gauss_APC</string>
+        <string>K_SA_Gauss_ERC</string>
+        <string>K_SA_Launcher_FixedMount</string>
+        <string>K_SA_Launcher_FixedMountv2</string>
+        <string>K_SA_HeavyMetal_Gauss_ERII</string>
+        <string>K_SA_HeavyMetal_Gauss_ERIIRF</string>
+        <string>K_SA_Launcher_FixedMountv2</string>
+        <string>K_SA_LoW_CapitalSpinalA</string>
+        <string>K_SA_HeavyMetal_Spinal_Rotary</string>
+        <string>K_SA_HeavyMetal_Gauss_ERFM</string>
+        <string>K_SA_HeavyMetal_Gauss_A</string>
+        <string>K_SA_HeavyMetal_Gauss_PGBC</string>
+        <string>K_SA_Gauss_AMSIIC</string>
+        <string>SA_HMI_Erebos</string>
+        <string>K_SA_HeavyMetal_Spinal_Rotary_Reskin</string>
+
+        <!--ARYX-->
+        <string>ARYXGaussCannon</string>
+        <string>ARYXMagnetarCannon</string>
+        <string>ARYXPlasmaPulser</string>
+        <string>ARYXBurstTurret</string>
+        <string>ARYXTempestCannon</string>
+        <string>ARYXLightCoilgun</string>
+        <string>ARYXRailgun</string>
+        <string>ARYXRailgunTurret</string>
+        <string>ARYXFocusLance</string>
+        <string>ARYXBurstCannon</string>
+
+        <!--NORSE-->
+        <string>NHI_PD_Turret</string>
+        <string>NHI_Light_Autocannon_Turret</string>
+        <string>NHI_Autocannon_Turret</string>
+        <string>NHI_Gatling_Laser_Turret</string>
+        <string>NHI_Light_Railgun_Turret</string>
+        <string>NHI_Heavy_Railgun_Turret</string>
+        <string>NHI_Heavy_Gun_Turret</string>
+        <string>NHI_Mk1_Cannon_Turret</string>
+        <string>NHI_Mk2_Cannon_Turret</string>
+        <string>NHI_Mk3_Cannon_Turret</string>
+        <string>NHI_Fixed_Autocannon</string>
+        <string>NHI_Fixed_Gatling_Laser</string>
+        <string>SC_Coil_Cannon</string>
+        <string>NHI_Kinetic_Cannon_Turret</string>
+
+        <!--INVALID-->
+        <string>MetalStorm</string>
+        <string>CLB2X</string>
+        <string>SLAM</string>
+        <string>banshee</string>
+        <string>TaiidanRail</string>
+        <string>Hexcannon</string>
+        <string>longsword</string>
+
+
+
+        <!--REEECORE-->
+        <string>Starcore_AMS_I_Block</string>
+        <string>Starcore_PPC_Block</string>
+        <string>ERPPC</string>
+        <string>ModularSRM8</string>
+        <string>ModularLRM5</string>
+        <string>ModularMRM10</string>
+        <string>Starcore_Arrow_Block</string>
+        <string>Starcore_Fixed_Coil_Cannon</string>
+        <string>Starcore_M_Laser_Block</string>
+        <string>Starcore_L_Laser_Block</string>
+
+        <!--KILLER - is laser_block also adding the M and L lasers?-->
+        <string>Laser_Block</string>
+        <string>Torp_Block</string>
+
+        <!--DARTH-->
+        <string>NovaCannon</string>
+
+
+        <!--HAS-->
+        <string>HAS_Thanatos</string>
+        <!--<string>HAS_Alecto</string>-->
+        <string>HAS_Assault</string>
+        <string>HAS_Mammon</string>
+        <string>HAS_Esper</string>
+        <string>HAS_Vulcan</string>
+        <string>HAS_Cyclops</string>
+        <string>HAS_Crossfield</string>
+
+        <!--WYSEMAN ONESHOT-->
+        <string>K_SA_Launcher_VI</string>
+        <string>K_SA_Launcher_VIV</string>
+
+        <!--EXPANSE-->
+        <string>MCRN_Heavy_Torpedo</string>
+
+        <!--Jnick/nate meme weapons
+		<string>JN_175Fixed</string>-->
+        <!--<string>AMP_FlameThrower</string>-->
+        <string>AMP_ArcMelee</string>
+        <!--<string>AMP_CryoShotgun</string>
+		<string>AMP_FlameThrowerSmall</string>-->
+
+
+      </ItemIds>
+    </Category>
+
+    <!-->tfw pointless-->
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+
+      </Id>
+      <DisplayName>.STARCORE WIP WEAPONS</DisplayName>
+      <Name>.SC WIP Weapons</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+
+        <!--INVALID-->
+
+        <!--REEE-->
+
+
+
+        <!--Tait Fletcher -->
+        <string>LargeMissileTurret/16InchTriple</string>
+        <string>LargeMissileTurret/6InchTriple</string>
+        <string>LargeMissileTurret/127mmMk32</string>
+        <string>LargeMissileTurret/127mmMk12</string>
+        <string>LargeMissileTurret/127mmMk24</string>
+        <string>LargeMissileTurret/127mmMk56</string>
+        <string>LargeMissileTurret/381mmDualR</string>
+        <string>LargeMissileTurret/15cmTbtsKC36</string>
+        <string>LargeMissileTurret/15cmTbtsKC36T</string>
+        <string>LargeMissileTurret/128mmSKC34</string>
+        <string>LargeMissileTurret/128mmL45</string>
+        <string>ConveyorSorter/105mmTwin</string>
+        <string>LargeMissileTurret/380mmMLE1935</string>
+        <string>LargeMissileTurret/203mm50MLE1931_R</string>
+        <string>LargeMissileTurret/152mmMLE1930R</string>
+        <string>LargeMissileTurret/152mmMLE1930NR</string>
+        <string>LargeMissileTurret/152mmMLE1936HA</string>
+        <string>LargeMissileTurret/15cmSKC28R</string>
+        <string>LargeMissileTurret/15cmSKC28NR</string>
+        <string>ConveyorSorter/PomPomMain</string>
+        <string>ConveyorSorter/150mmCasemate</string>
+        <string>ConveyorSorter/BoforTwinRemodel</string>
+        <string>ConveyorSorter/BoforSingleRemodel</string>
+        <string>ConveyorSorter/QuadBofor</string>
+        <string>ConveyorSorter/TorpTestBuidl</string>
+        <string>ConveyorSorter/203mmQuad</string>
+        <string>ConveyorSorter/203mmTwin</string>
+        <string>ConveyorSorter/quintupleTorpedoLauncher</string>
+
+        <!-- Anomaly Testing -->
+        <string>ConveyorSorter/AMP_HealGenerator</string>
+        <string>CapacitorLarge</string>
+
+
+      </ItemIds>
+    </Category>
+
+    <!--rest of the fucking owl-->
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+
+      </Id>
+      <DisplayName>.STARCORE UTILITY</DisplayName>
+      <Name>.SC Utility</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+        <!--FUCK-->
+        <string>SubgridBase</string>
+
+        <!--BAR-->
+        <string>SELtdLargeNanobotBuildAndRepairSystem</string>
+
+        <!--MADAR-->
+        <!--<string>MADAR</string>-->
+
+        <!--INVALID-->
+        <string>MA_Afterburner_Large</string>
+        <string>MA_Afterburner_Large_small</string>
+        <string>MA_Afterburner_Large_5x</string>
+        <string>Afterburner_LG_Ion_Large</string>
+        <string>SC_SRB</string>
+        <string>DETPAK</string>
+
+        <!--ARYX-->
+        <string>ARYXLargeRadar</string>
+
+        <!--WYSEMAN-->
+        <string>SC_Flare</string>
+
+        <!--MUZZ-->
+        <string>Starcore_RWR_Projectiles</string>
+
+      </ItemIds>
+    </Category>
+
+    <!--drone whitelisted weps-->
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+
+      </Id>
+      <DisplayName>.STARCORE DRONE WHITELIST</DisplayName>
+      <Name>.SC zDrone Whitelist</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+
+        <string>AMP_ArcMelee</string>
+        <string>Starcore_M_Laser_Block</string>
+        <string>Starcore_L_Laser_Block</string>
+        <string>MA_Fixed_T3</string>
+        <string>MA_Tiger</string>
+        <string>Fixed_Rockets</string>
+        <string>NHI_Fixed_Autocannon</string>
+        <string>NHI_Fixed_Gatling_Laser</string>
+        <string>ARYXPlasmaPulser</string>
+        <string>ARYXTempestCannon</string>
+        <string>HAS_Thanatos</string>
+        <string>HAS_Esper</string>
+        <string>HAS_Cyclops</string>
+        <string>CLB2X</string>
+        <string>Hexcannon</string>
+		<string>K_SA_HeavyMetal_Spinal_Rotary_Reskin</string>
+
+
+
+      </ItemIds>
+    </Category>
+
+
+
+  </CategoryClasses>
+</Definitions>

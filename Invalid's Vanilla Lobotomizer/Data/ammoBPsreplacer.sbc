@@ -1,0 +1,305 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	
+  <Blueprints>   
+      <!--  <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>Missile200mm</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_Item_Missile200mm</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\Small_Rocket.dds</Icon>
+            <Prerequisites>
+                <Item Amount="16" TypeId="Component" SubtypeId="RadioCommunication" />  // Block Subtypeid. Your Cubeblocks contain this information
+                <Item Amount="16" TypeId="Component" SubtypeId="Detector" />
+                <Item Amount="64" TypeId="Component" SubtypeId="Computer" />
+                <Item Amount="32" TypeId="Component" SubtypeId="PowerCell" />
+                <Item Amount="32" TypeId="Component" SubtypeId="Explosives" />
+			    <Item Amount="64" TypeId="Component" SubtypeId="SmallTube" />
+			    <Item Amount="2" TypeId="OxygenContainerObject" SubtypeId="OxygenBottle" />
+			    <Item Amount="6" TypeId="GasContainerObject" SubtypeId="HydrogenBottle" />
+			    <Item Amount="32" TypeId="Component" SubtypeId="MetalGrid" />			
+            </Prerequisites>
+            <Result Amount="32" TypeId="AmmoMagazine" SubtypeId="Missile200mm" />
+            <BaseProductionTimeInSeconds>60</BaseProductionTimeInSeconds>
+        </Blueprint>
+
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>MediumCalibreAmmo</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_Item_MediumCalibreAmmo</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\MediumCalibreShell.dds</Icon>
+            <Prerequisites>
+				<Item Amount="24" TypeId="Ingot" SubtypeId="Cobalt" />
+                <Item Amount="24" TypeId="Component" SubtypeId="Explosives" />
+                <Item Amount="24" TypeId="Component" SubtypeId="Construction" />
+				<Item Amount="192" TypeId="Component" SubtypeId="Girder" />
+                <Item Amount="48" TypeId="Ingot" SubtypeId="Nickel" />
+                <Item Amount="9.6" TypeId="Ingot" SubtypeId="Magnesium" />
+			    <Item Amount="24" TypeId="Component" SubtypeId="SmallTube" />
+            </Prerequisites>
+            <Result Amount="24" TypeId="AmmoMagazine" SubtypeId="MediumCalibreAmmo" />
+            <BaseProductionTimeInSeconds>60</BaseProductionTimeInSeconds>
+        </Blueprint>
+
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>LargeCalibreAmmo</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_Item_LargeCalibreAmmo</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\LargeCalibreShell.dds</Icon>
+            <Prerequisites>
+				<Item Amount="48" TypeId="Ingot" SubtypeId="Cobalt" />
+                <Item Amount="8" TypeId="Component" SubtypeId="Detector" />
+                <Item Amount="32" TypeId="Component" SubtypeId="Explosives" />
+				<Item Amount="288" TypeId="Ingot" SubtypeId="Girder" />
+                <Item Amount="96" TypeId="Ingot" SubtypeId="Nickel" />
+			    <Item Amount="16" TypeId="Component" SubtypeId="SmallTube" />
+                <Item Amount="12.8" TypeId="Ingot" SubtypeId="Magnesium" />
+			    <Item Amount="16" TypeId="Component" SubtypeId="LargeTube" />
+            </Prerequisites>
+            <Result Amount="16" TypeId="AmmoMagazine" SubtypeId="LargeCalibreAmmo" />
+            <BaseProductionTimeInSeconds>60</BaseProductionTimeInSeconds>
+        </Blueprint>
+
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>LargeRailgunAmmo</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_Item_LargeRailgunAmmo</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\RailgunAmmoLarge.dds</Icon>
+            <Prerequisites>
+                <Item Amount="20" TypeId="Ingot" SubtypeId="Iron" />
+                <Item Amount="3" TypeId="Ingot" SubtypeId="Nickel" />
+                <Item Amount="30" TypeId="Ingot" SubtypeId="Silicon" />
+                <Item Amount="2" TypeId="Ingot" SubtypeId="Uranium" />
+            </Prerequisites>
+            <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="LargeRailgunAmmo" />
+            <BaseProductionTimeInSeconds>14</BaseProductionTimeInSeconds>
+        </Blueprint>
+
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>SmallRailgunAmmo</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_Item_SmallRailgunAmmo</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\RailgunAmmo.dds</Icon>
+            <Prerequisites>
+                <Item Amount="4" TypeId="Ingot" SubtypeId="Iron" />
+                <Item Amount="0.5" TypeId="Ingot" SubtypeId="Nickel" />
+                <Item Amount="5" TypeId="Ingot" SubtypeId="Silicon" />
+                <Item Amount="0.3" TypeId="Ingot" SubtypeId="Uranium" />
+            </Prerequisites>
+            <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="SmallRailgunAmmo" />
+            <BaseProductionTimeInSeconds>8</BaseProductionTimeInSeconds>
+        </Blueprint>
+
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>AutocannonClip</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_Item_AutoCannonClip</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\AutoCanonShellBox.dds</Icon>
+            <Prerequisites>
+                <Item Amount="25" TypeId="Ingot" SubtypeId="Iron" />
+                <Item Amount="3" TypeId="Ingot" SubtypeId="Nickel" />
+                <Item Amount="2" TypeId="Ingot" SubtypeId="Magnesium" />
+            </Prerequisites>
+            <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="AutocannonClip" />
+            <BaseProductionTimeInSeconds>6</BaseProductionTimeInSeconds>
+        </Blueprint>   -->
+		
+		<!--These are for x1 assembler settings   -->
+		
+		
+		
+	  
+		  
+			  
+			  
+		  
+		
+			 <!-- the following are for x3 assembler settings -->
+      <!--  <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>Missile200mm</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_Item_Missile200mm</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\Small_Rocket.dds</Icon>
+            <Prerequisites>
+                <Item Amount="27" TypeId="Component" SubtypeId="RadioCommunication" />  // Block Subtypeid. Your Cubeblocks contain this information
+                <Item Amount="27" TypeId="Component" SubtypeId="Detector" />
+                <Item Amount="108" TypeId="Component" SubtypeId="Computer" />
+                <Item Amount="54" TypeId="Component" SubtypeId="PowerCell" />
+                <Item Amount="54" TypeId="Component" SubtypeId="Explosives" />
+			    <Item Amount="108" TypeId="Component" SubtypeId="SmallTube" />
+			    <Item Amount="6" TypeId="OxygenContainerObject" SubtypeId="OxygenBottle" />
+			    <Item Amount="12" TypeId="GasContainerObject" SubtypeId="HydrogenBottle" />
+			    <Item Amount="54" TypeId="Component" SubtypeId="MetalGrid" />			
+            </Prerequisites>
+            <Result Amount="18" TypeId="AmmoMagazine" SubtypeId="Missile200mm" />
+            <BaseProductionTimeInSeconds>90</BaseProductionTimeInSeconds>
+        </Blueprint>
+
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>MediumCalibreAmmo</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_Item_MediumCalibreAmmo</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\MediumCalibreShell.dds</Icon>
+            <Prerequisites>
+				<Item Amount="72" TypeId="Ingot" SubtypeId="Cobalt" />
+                <Item Amount="72" TypeId="Component" SubtypeId="Explosives" />
+                <Item Amount="72" TypeId="Component" SubtypeId="Construction" />
+				<Item Amount="576" TypeId="Component" SubtypeId="Girder" />
+                <Item Amount="144" TypeId="Ingot" SubtypeId="Nickel" />
+                <Item Amount="9.6" TypeId="Ingot" SubtypeId="Magnesium" />
+			    <Item Amount="72" TypeId="Component" SubtypeId="SmallTube" />
+            </Prerequisites>
+            <Result Amount="24" TypeId="AmmoMagazine" SubtypeId="MediumCalibreAmmo" />
+            <BaseProductionTimeInSeconds>90</BaseProductionTimeInSeconds>
+        </Blueprint>
+
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>LargeCalibreAmmo</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_Item_LargeCalibreAmmo</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\LargeCalibreShell.dds</Icon>
+            <Prerequisites>
+				<Item Amount="48" TypeId="Ingot" SubtypeId="Cobalt" />
+                <Item Amount="48" TypeId="Component" SubtypeId="Detector" />
+                <Item Amount="96" TypeId="Component" SubtypeId="Explosives" />
+				<Item Amount="864" TypeId="Component" SubtypeId="Girder" />
+                <Item Amount="96" TypeId="Ingot" SubtypeId="Nickel" />
+			    <Item Amount="48" TypeId="Component" SubtypeId="SmallTube" />
+                <Item Amount="12.8" TypeId="Ingot" SubtypeId="Magnesium" />
+			    <Item Amount="48" TypeId="Component" SubtypeId="LargeTube" />
+            </Prerequisites>
+            <Result Amount="16" TypeId="AmmoMagazine" SubtypeId="LargeCalibreAmmo" />
+            <BaseProductionTimeInSeconds>90</BaseProductionTimeInSeconds>
+        </Blueprint>-->
+
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>LargeRailgunAmmo</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_Item_LargeRailgunAmmo</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\RailgunAmmoLarge.dds</Icon>
+            <Prerequisites>
+                <Item Amount="279" TypeId="Ingot" SubtypeId="Iron" />
+                <Item Amount="150" TypeId="Ingot" SubtypeId="Nickel" />
+                <Item Amount="27" TypeId="Ingot" SubtypeId="Cobalt" />
+                <Item Amount="9" TypeId="Ingot" SubtypeId="Silver" />
+            </Prerequisites>
+            <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="LargeRailgunAmmo" />
+            <BaseProductionTimeInSeconds>30</BaseProductionTimeInSeconds>
+        </Blueprint>
+
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>SmallRailgunAmmo</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_Item_SmallRailgunAmmo</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\RailgunAmmo.dds</Icon>
+            <Prerequisites>
+                <Item Amount="27" TypeId="Ingot" SubtypeId="Iron" />
+                <Item Amount="27" TypeId="Ingot" SubtypeId="Nickel" />
+                <Item Amount="9" TypeId="Ingot" SubtypeId="Cobalt" />
+                <Item Amount="1" TypeId="Ingot" SubtypeId="Silver" />
+            </Prerequisites>
+            <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="SmallRailgunAmmo" />
+            <BaseProductionTimeInSeconds>18</BaseProductionTimeInSeconds>
+        </Blueprint>
+
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>AutocannonClip</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_Item_AutoCannonClip</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\AutoCanonShellBox.dds</Icon>
+            <Prerequisites>
+                <Item Amount="25" TypeId="Ingot" SubtypeId="Iron" />
+                <Item Amount="3" TypeId="Ingot" SubtypeId="Nickel" />
+                <Item Amount="2" TypeId="Ingot" SubtypeId="Magnesium" />
+            </Prerequisites>
+            <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="AutocannonClip" />
+            <BaseProductionTimeInSeconds>6</BaseProductionTimeInSeconds>
+        </Blueprint>         
+
+  
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>Missile200mm</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_Item_Missile200mm</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\Small_Rocket.dds</Icon>
+            <Prerequisites>
+                <Item Amount="66" TypeId="Ingot" SubtypeId="Iron" />
+                <Item Amount="18" TypeId="Ingot" SubtypeId="Nickel" />
+                <Item Amount="4.5" TypeId="Ingot" SubtypeId="Silicon" />
+                <Item Amount="3" TypeId="Ingot" SubtypeId="Cobalt" />
+                <Item Amount="1.5" TypeId="Ingot" SubtypeId="Magnesium" />
+            </Prerequisites>
+            <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="Missile200mm" />
+            <BaseProductionTimeInSeconds>3</BaseProductionTimeInSeconds>
+        </Blueprint>
+
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>MediumCalibreAmmo</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_Item_MediumCalibreAmmo</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\MediumCalibreShell.dds</Icon>
+            <Prerequisites>
+                <Item Amount="45" TypeId="Ingot" SubtypeId="Iron" />
+                <Item Amount="24" TypeId="Ingot" SubtypeId="Nickel" />
+                <Item Amount="2.1" TypeId="Ingot" SubtypeId="Silicon" />
+                <Item Amount="0.9" TypeId="Ingot" SubtypeId="Magnesium" />
+                <Item Amount="3" TypeId="Ingot" SubtypeId="Cobalt" />
+            </Prerequisites>
+            <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="MediumCalibreAmmo" />
+            <BaseProductionTimeInSeconds>2</BaseProductionTimeInSeconds>
+        </Blueprint>
+
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>LargeCalibreAmmo</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_Item_LargeCalibreAmmo</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\LargeCalibreShell.dds</Icon>
+            <Prerequisites>
+                <Item Amount="120" TypeId="Ingot" SubtypeId="Iron" />
+                <Item Amount="60" TypeId="Ingot" SubtypeId="Nickel" />
+                <Item Amount="3" TypeId="Ingot" SubtypeId="Silicon" />				
+                <Item Amount="1.8" TypeId="Ingot" SubtypeId="Magnesium" />
+                <Item Amount="9" TypeId="Ingot" SubtypeId="Cobalt" />
+            </Prerequisites>
+            <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="LargeCalibreAmmo" />
+            <BaseProductionTimeInSeconds>6</BaseProductionTimeInSeconds>
+        </Blueprint>
+	
+	
+
+
+
+
+  </Blueprints>
+
+  
+</Definitions>

@@ -1,0 +1,26 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <CategoryClasses>
+    
+
+        <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+            <Id>
+                <TypeId>GuiBlockCategoryDefinition</TypeId>
+                <SubtypeId/>
+            </Id>
+            <DisplayName>.SC Vanilla 2.0 Weapons</DisplayName>
+            <Name>.SC Vanilla 2.0 Weapons</Name>
+            <StrictSearch>true</StrictSearch>
+            <ItemIds>
+                <string>LargeBlockMediumCalibreTurret_SC</string>
+                <string>LargeMissileTurret_SC</string>
+                <string>LargeMissileLauncher_SC</string>
+                <string>LargeBlockLargeCalibreGun_SC</string>
+                <string>LargeCalibreTurret_SC</string>
+                <string>LargeGatlingTurret_SC</string>
+                <string>LargeRailgun_SC</string>
+			</ItemIds>
+        </Category>
+
+    </CategoryClasses>
+</Definitions>

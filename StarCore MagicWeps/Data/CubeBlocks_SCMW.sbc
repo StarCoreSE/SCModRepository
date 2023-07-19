@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <CubeBlocks>
+
+
+<!-- Hakkero Beam -->
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+        <Id>
+          <TypeId>ConveyorSorter</TypeId>
+          <SubtypeId>DisabledHakkeroBeam</SubtypeId>
+        </Id>
+        <DisplayName>Arcane Octagon (Beam)</DisplayName>
+        <Description>
+          WIP
+          Fires a variety of beam attacks. Will eventually burn out.
+          Ammo 1: MasterSpark [EN]
+          Ammo 2: HealingSpark [HEAL]
+          Ammo 2: StardustLaser [EN]
+          Ammo 3: StardustSentry [EN]
+        </Description>
+        <Icon>Textures\GUI\hakkero.png</Icon>
+        <CubeSize>Large</CubeSize>
+        <BlockTopology>TriangleMesh</BlockTopology>
+        <Size x="9" y="9" z="3" />
+        <ModelOffset x="0" y="0" z="0"/>
+        <Center x="4" y="4" z="0" />
+        <Model>Models\Cubes\Large\Hakkero.mwm</Model>
+        <Components>
+          <Component Subtype="SteelPlate" Count="300" />
+          <Component Subtype="Construction" Count="120" />
+          <Component Subtype="MetalGrid" Count="80" />
+          <Component Subtype="SmallTube" Count="30" />
+          <Component Subtype="LargeTube" Count="60" />
+          <Component Subtype="Motor" Count="20" />
+          <Component Subtype="Superconductor" Count="120" />
+          <Component Subtype="PowerCell" Count="240" />
+          <Component Subtype="Computer" Count="30" />
+          <Component Subtype="Construction" Count="100" />
+          <Component Subtype="SteelPlate" Count="3500" />
+        </Components>
+        <CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="9.00" EndY="9.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="2.00" EndY="9.00"/>
+				<MountPoint Side="Right" StartX="1.00" StartY="0.00" EndX="3.00" EndY="9.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="1.00" EndX="9.00" EndY="3.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="9.00" EndY="2.00"/>
+			</MountPoints>
+        <StandbyPowerConsumption>1</StandbyPowerConsumption>
+        <BlockPairName>HBEAM</BlockPairName>
+        <MirroringY>Z</MirroringY>
+        <MirroringZ>Y</MirroringZ>
+        <BuildTimeSeconds>600</BuildTimeSeconds>
+        <EdgeType>Heavy</EdgeType>
+        <WeaponDefinitionId Subtype="HBEAM" />
+        <InventoryMaxVolume>0.960</InventoryMaxVolume>
+        <ResourceSinkGroup>Defense</ResourceSinkGroup>
+        <DamageEffectId>213</DamageEffectId>
+        <DeformationRatio>0.2</DeformationRatio>
+        <PCU>1800</PCU>
+      </Definition>
+
+<!-- Hakkero Beam Compact -->
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+        <Id>
+          <TypeId>ConveyorSorter</TypeId>
+          <SubtypeId>DisabledHakkeroBeamMini</SubtypeId>
+        </Id>
+        <DisplayName>Arcane Octagon Compact (Beam)</DisplayName>
+        <Description>
+          WIP
+          Fires a variety of beam attacks. Will quickly burn out.
+          Ammo 1: MasterSpark [EN]
+          Ammo 2: HealingSpark [HEAL]
+          Ammo 2: StardustLaser [EN]
+          Ammo 3: StardustSentry [EN]
+        </Description>
+        <Icon>Textures\GUI\hakkeromini.png</Icon>
+        <CubeSize>Large</CubeSize>
+        <BlockTopology>TriangleMesh</BlockTopology>
+        <Size x="5" y="5" z="3" />
+        <ModelOffset x="0" y="0" z="0"/>
+        <Center x="2" y="2" z="0" />
+        <Model>Models\Cubes\Large\HakkeroMini.mwm</Model>
+        <Components>
+          <Component Subtype="SteelPlate" Count="300" />
+          <Component Subtype="Construction" Count="120" />
+          <Component Subtype="MetalGrid" Count="80" />
+          <Component Subtype="SmallTube" Count="30" />
+          <Component Subtype="LargeTube" Count="60" />
+          <Component Subtype="Motor" Count="20" />
+          <Component Subtype="Superconductor" Count="120" />
+          <Component Subtype="PowerCell" Count="240" />
+          <Component Subtype="Computer" Count="30" />
+          <Component Subtype="Construction" Count="100" />
+          <Component Subtype="SteelPlate" Count="1500" />
+        </Components>
+        <CriticalComponent Subtype="Computer" Index="0" />
+        <MountPoints>
+          <MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
+          <MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="2.00" EndY="5.00"/>
+          <MountPoint Side="Right" StartX="1.00" StartY="0.00" EndX="3.00" EndY="5.00"/>
+          <MountPoint Side="Top" StartX="0.00" StartY="1.00" EndX="5.00" EndY="3.00"/>
+          <MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="5.00" EndY="2.00"/>
+        </MountPoints>
+        <StandbyPowerConsumption>1</StandbyPowerConsumption>
+        <BlockPairName>HBEAMMINI</BlockPairName>
+        <MirroringY>Z</MirroringY>
+        <MirroringZ>Y</MirroringZ>
+        <BuildTimeSeconds>600</BuildTimeSeconds>
+        <EdgeType>Heavy</EdgeType>
+        <WeaponDefinitionId Subtype="HBEAMMINI" />
+        <InventoryMaxVolume>0.960</InventoryMaxVolume>
+        <ResourceSinkGroup>Defense</ResourceSinkGroup>
+        <DamageEffectId>213</DamageEffectId>
+        <DeformationRatio>0.2</DeformationRatio>
+        <PCU>1800</PCU>
+      </Definition>
+
+
+ <!-- Hakkero Projectile -->
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+        <Id>
+          <TypeId>ConveyorSorter</TypeId>
+          <SubtypeId>DisabledHakkeroProjectile</SubtypeId>
+        </Id>
+        <DisplayName>Arcane Octagon (Projectile)</DisplayName>
+        <Description>
+          WIP
+          Fires a variety of projectile attacks. Will eventually burn out.
+          Ammo 1: ChromaticRock [KIN]
+          Ammo 2: Mystic Squares [KIN]
+          Ammo 3: Healer [HEAL]
+          Ammo 4: Telegrapher [?]
+        </Description>
+        <Icon>Textures\GUI\hakkero.png</Icon>
+        <CubeSize>Large</CubeSize>
+        <BlockTopology>TriangleMesh</BlockTopology>
+        <Size x="9" y="9" z="3" />
+        <ModelOffset x="0" y="0" z="0"/>
+        <Center x="4" y="4" z="0" />
+        <Model>Models\Cubes\Large\Hakkero.mwm</Model>
+        <Components>
+          <Component Subtype="SteelPlate" Count="300" />
+          <Component Subtype="Construction" Count="120" />
+          <Component Subtype="MetalGrid" Count="80" />
+          <Component Subtype="SmallTube" Count="30" />
+          <Component Subtype="LargeTube" Count="60" />
+          <Component Subtype="Motor" Count="20" />
+          <Component Subtype="Superconductor" Count="120" />
+          <Component Subtype="PowerCell" Count="240" />
+          <Component Subtype="Computer" Count="30" />
+          <Component Subtype="Construction" Count="100" />
+          <Component Subtype="SteelPlate" Count="3500" />
+        </Components>
+        <CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="9.00" EndY="9.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="2.00" EndY="9.00"/>
+				<MountPoint Side="Right" StartX="1.00" StartY="0.00" EndX="3.00" EndY="9.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="1.00" EndX="9.00" EndY="3.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="9.00" EndY="2.00"/>
+			</MountPoints>
+        <StandbyPowerConsumption>1</StandbyPowerConsumption>
+        <BlockPairName>HPROJ</BlockPairName>
+        <MirroringY>Z</MirroringY>
+        <MirroringZ>Y</MirroringZ>
+        <BuildTimeSeconds>600</BuildTimeSeconds>
+        <EdgeType>Heavy</EdgeType>
+        <WeaponDefinitionId Subtype="HPROJ" />
+        <InventoryMaxVolume>0.960</InventoryMaxVolume>
+        <ResourceSinkGroup>Defense</ResourceSinkGroup>
+        <DamageEffectId>213</DamageEffectId>
+        <DeformationRatio>0.2</DeformationRatio>
+        <PCU>1800</PCU>
+      </Definition>
+
+<!-- Hakkero Projectile Compact -->
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+        <Id>
+          <TypeId>ConveyorSorter</TypeId>
+          <SubtypeId>DisabledHakkeroProjectileMini</SubtypeId>
+        </Id>
+        <DisplayName>Arcane Octagon Compact (Projectile)</DisplayName>
+        <Description>
+          WIP
+          Fires a variety of projectile attacks. Will quickly burn out.
+          Ammo 1: ChromaticRock [KIN]
+          Ammo 2: Mystic Squares [KIN]
+          Ammo 3: Healer [HEAL]
+          Ammo 4: Telegrapher [?]
+        </Description>
+        <Icon>Textures\GUI\hakkeromini.png</Icon>
+        <CubeSize>Large</CubeSize>
+        <BlockTopology>TriangleMesh</BlockTopology>
+        <Size x="5" y="5" z="3" />
+        <ModelOffset x="0" y="0" z="0"/>
+        <Center x="2" y="2" z="0" />
+        <Model>Models\Cubes\Large\HakkeroMini.mwm</Model>
+        <Components>
+          <Component Subtype="SteelPlate" Count="300" />
+          <Component Subtype="Construction" Count="120" />
+          <Component Subtype="MetalGrid" Count="80" />
+          <Component Subtype="SmallTube" Count="30" />
+          <Component Subtype="LargeTube" Count="60" />
+          <Component Subtype="Motor" Count="20" />
+          <Component Subtype="Superconductor" Count="120" />
+          <Component Subtype="PowerCell" Count="240" />
+          <Component Subtype="Computer" Count="30" />
+          <Component Subtype="Construction" Count="100" />
+          <Component Subtype="SteelPlate" Count="1500" />
+        </Components>
+        <CriticalComponent Subtype="Computer" Index="0" />
+        <MountPoints>
+          <MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
+          <MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="2.00" EndY="5.00"/>
+          <MountPoint Side="Right" StartX="1.00" StartY="0.00" EndX="3.00" EndY="5.00"/>
+          <MountPoint Side="Top" StartX="0.00" StartY="1.00" EndX="5.00" EndY="3.00"/>
+          <MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="5.00" EndY="2.00"/>
+        </MountPoints>
+        <StandbyPowerConsumption>1</StandbyPowerConsumption>
+        <BlockPairName>HPROJMINI</BlockPairName>
+        <MirroringY>Z</MirroringY>
+        <MirroringZ>Y</MirroringZ>
+        <BuildTimeSeconds>600</BuildTimeSeconds>
+        <EdgeType>Heavy</EdgeType>
+        <WeaponDefinitionId Subtype="HPROJMINI" />
+        <InventoryMaxVolume>0.960</InventoryMaxVolume>
+        <ResourceSinkGroup>Defense</ResourceSinkGroup>
+        <DamageEffectId>213</DamageEffectId>
+        <DeformationRatio>0.2</DeformationRatio>
+        <PCU>1800</PCU>
+      </Definition>
+
+
+
+<!-- Hexcannon -->
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+        <Id>
+          <TypeId>ConveyorSorter</TypeId>
+          <SubtypeId>Hexcannon</SubtypeId>
+        </Id>
+        <DisplayName>Artificial Sun Launcher</DisplayName>
+        <Description>
+    ☢ CAUTION!! ☢
+    Fires a singularity that
+    travels for [3km].
+    At the end, an artificial
+    sun is spawned, with a
+    [2km pull EWAR field],
+    lasting 1 minute.
+    
+		Anything pulled to the center 
+    will experience
+    Ultimate Nuclear Fusion™
+    2 minute reload.
+        </Description>
+        <Icon>Textures\GUI\HexCannon.png</Icon>
+        <CubeSize>Large</CubeSize>
+        <BlockTopology>TriangleMesh</BlockTopology>
+        <Size x="3" y="3" z="12" />
+        <ModelOffset x="0" y="0" z="0"/>
+        <Center x="1" y="0" z="1" />
+        <Model>Models\Cubes\Large\HexCannon.mwm</Model>
+        <Components>
+          <Component Subtype="SteelPlate" Count="300" />
+          <Component Subtype="Construction" Count="120" />
+          <Component Subtype="MetalGrid" Count="80" />
+          <Component Subtype="SmallTube" Count="30" />
+          <Component Subtype="LargeTube" Count="60" />
+          <Component Subtype="Motor" Count="20" />
+          <Component Subtype="Superconductor" Count="120" />
+          <Component Subtype="PowerCell" Count="240" />
+          <Component Subtype="Computer" Count="30" />
+          <Component Subtype="Construction" Count="100" />
+          <Component Subtype="SteelPlate" Count="3500" />
+        </Components>
+        <CriticalComponent Subtype="Computer" Index="0" />
+     	<MountPoints>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Left" StartX="4.00" StartY="0.00" EndX="12.00" EndY="3.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="8.00" EndY="3.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="3.00" EndY="8.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="4.00" EndX="3.00" EndY="12.00"/>
+		</MountPoints>
+        <StandbyPowerConsumption>1</StandbyPowerConsumption>
+        <BlockPairName>HEXCANNON</BlockPairName>
+        <MirroringY>Z</MirroringY>
+        <MirroringZ>Y</MirroringZ>
+        <BuildTimeSeconds>600</BuildTimeSeconds>
+        <EdgeType>Heavy</EdgeType>
+        <WeaponDefinitionId Subtype="HEXCANNON" />
+        <InventoryMaxVolume>0.960</InventoryMaxVolume>
+        <ResourceSinkGroup>Defense</ResourceSinkGroup>
+        <DamageEffectId>213</DamageEffectId>
+        <DeformationRatio>0.2</DeformationRatio>
+        <PCU>1800</PCU>
+      </Definition>
+
+
+    </CubeBlocks>
+</Definitions>

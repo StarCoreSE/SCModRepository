@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AmmoMagazines>
+
+    <AmmoMagazine>
+          <Id>
+            <TypeId>AmmoMagazine</TypeId>
+            <SubtypeId>Flamer_Magazine</SubtypeId>
+          </Id>
+          <DisplayName>Flamer Fuel Cartridge</DisplayName>
+          <Icon>Textures\GUI\Icons\Flamer_Magazine.dds</Icon>
+          <Size>
+            <X>0.25</X>
+            <Y>0.2</Y>
+            <Z>0.2</Z>
+          </Size>
+          <Mass>1000</Mass>
+          <Volume>10</Volume>
+          <Model>Models\Ammos\Flamer_Magazine.mwm</Model>
+          <Capacity>15</Capacity>
+          <AmmoDefinitionId Subtype="Flamer_Mag" />
+	      </AmmoMagazine>
+
+		<AmmoMagazine>
+			<Id>
+				<TypeId>AmmoMagazine</TypeId>
+				<SubtypeId>CryoShotgun_Magazine</SubtypeId>
+			</Id>
+			<DisplayName>Shotgun Shell</DisplayName>
+			<Icon>Textures\GUI\Icons\Flamer_Magazine.dds</Icon>
+			<Size>
+				<X>0.25</X>
+				<Y>0.2</Y>
+				<Z>0.2</Z>
+			</Size>
+			<Mass>1000</Mass>
+			<Volume>10</Volume>
+			<Model>Models\Ammos\LBX5_AmmoShellShotgun.mwm</Model>
+			<Capacity>1</Capacity>
+			<AmmoDefinitionId Subtype="CryoShotgun_Mag" />
+		</AmmoMagazine>
+	</AmmoMagazines>
+</Definitions>

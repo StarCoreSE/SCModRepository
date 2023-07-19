@@ -1,0 +1,673 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Sounds>
+    
+    <!-- Heimdallr Sounds -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Heimdall_Firesound</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <Volume>0.75</Volume>
+      <Loopable>true</Loopable>
+      <PreventSynchronization>1</PreventSynchronization>
+      <MaxSounds>3</MaxSounds>
+      <PitchVariation>25</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="20" Distance="600" Sound="Heimdall_Firesound_Distant" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Loop>Audio\20mmRotaryLoop.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Heimdall_Firesound_Distant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <Volume>0.5</Volume>
+      <Loopable>true</Loopable>
+      <PreventSynchronization>1</PreventSynchronization>
+      <MaxSounds>3</MaxSounds>
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+
+          <Loop>Audio\20mmRotaryLoopDist.wav</Loop>
+
+        </Wave>
+      </Waves>
+    </Sound>
+	
+    <!-- Unused Rotate Sound--> 
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>RE30mmMotorLoop</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>160</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>true</Loopable>	  
+      <Waves>
+        <Wave Type="D3">
+		  <Start>Audio\MotorLoopStart.wav</Start>
+          <Loop>Audio\MotorLoop.wav</Loop>
+          <End>Audio\MotorLoopEnd.wav</End>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <!-- Aesir/Fenrir Sounds -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Autocannon_Firesound</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>4000</MaxDistance>
+      <Volume>0.33</Volume>
+      <Loopable>true</Loopable>
+      <PitchVariation>75</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="40" Distance="650" Sound="Autocannon_Firesound_Dist" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Autocannon_Fire_2.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Autocannon_Firesound_Dist</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>4000</MaxDistance>
+      <Volume>0.33</Volume>
+      <Loopable>true</Loopable>
+
+      <PitchVariation>75</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+
+          <Loop>Audio\Autocannon_Fire_Dist.wav</Loop>
+
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Auto_Fire_Test</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <Volume>1.25</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>10</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Fixed_Auto_Firesound.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Auto_Fire_Test_Two</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <Volume>0.1</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>75</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\UAC_Firesound.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+
+    <!-- Skadi/Odins Eye Sounds -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Railgun_Charge</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>800</MaxDistance>
+      <Volume>2</Volume>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Railgun_Charge.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Railgun_Reload</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>800</MaxDistance>
+      <Volume>4</Volume>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Railgun_Reload_2_Ext.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Railgun_Reload_S</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>800</MaxDistance>
+      <Volume>4</Volume>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Railgun_Reload_2.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Railgun_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>4000</MaxDistance>
+      <Volume>4</Volume>
+      <Loopable>false</Loopable>
+     <PitchVariation>25</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="20" Distance="800" Sound="Railgun_Fire_Dist" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Railgun_Firesound_2.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Railgun_Fire_Dist</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>4000</MaxDistance>
+      <Volume>4</Volume>
+      <Loopable>false</Loopable>
+
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+
+          <Start>Audio\Railgun_Firesound_2_Distant.wav</Start>
+
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <!-- Thors Wrath Sounds -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Missile_Battery_Travel</SubtypeId>
+      </Id>
+      <Category>Travel</Category>
+      <MaxDistance>800</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>true</Loopable>
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Missile_Battery_Travel.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Missile_Battery_Frag</SubtypeId>
+      </Id>
+      <Volume>1.5</Volume>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+
+      <PreventSynchronization>1</PreventSynchronization>
+      <Loopable>false</Loopable>
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Lightning_3.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+ 
+    <!-- Vanir Sounds -->
+  <Sound>
+    <Id>
+      <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+      <SubtypeId>DefenseFiresound</SubtypeId>
+    </Id>
+    <Category>SHOT</Category>
+    <MaxDistance>800</MaxDistance>
+    <Volume>0.8</Volume>
+    <Loopable>true</Loopable>
+    <PitchVariation>150</PitchVariation>
+    <Waves>
+      <Wave Type="D3">
+        <Start>Audio\DefenseCannonSound1.wav</Start>
+        <Loop></Loop>
+        <End></End>
+      </Wave>
+    </Waves>
+  </Sound>
+
+    <!-- Miscellanious Sounds -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>TravelPop</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+            <DistantSounds>
+        <DistantSound DistanceCrossfade="50" Distance="400" Sound="TravelPop2" />
+                <DistantSound DistanceCrossfade="50" Distance="1200" Sound="TravelPop3" />
+      </DistantSounds>
+      <Volume>5</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>150</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\TravelPop.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>TravelPop2</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <Volume>3</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>150</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\TravelPop.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>TravelPop3</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>150</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\TravelPop.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>LaserNuked</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>200</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1.5</Volume>
+      <Loopable>false</Loopable>
+      <!--<PitchVariation>50</PitchVariation>-->
+      <PreventSynchronization>0</PreventSynchronization>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="50" Distance="215" Sound="LaserNuked2" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\CloseNuked.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>LaserNuked2</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2000</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Loopable>false</Loopable>
+      <PreventSynchronization>0</PreventSynchronization>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\FarNuked.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+    <Id>
+      <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+      <SubtypeId>NukeLaser_Fire</SubtypeId>
+    </Id>
+    <Category>SHOT</Category>
+    <MaxDistance>1500</MaxDistance>
+    <Volume>3</Volume>
+    <Loopable>true</Loopable>
+    <PitchVariation>25</PitchVariation>
+    <Waves>
+      <Wave Type="D3">
+        <Start>Audio\NukeLaserFire.wav</Start>
+        <Loop></Loop>
+        <End></End>
+      </Wave>
+    </Waves>
+    </Sound>
+
+    <!-- Surtur/Jotunn Sounds-->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Gatling_Laser_Firesound</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3600</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>75</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="20" Distance="800" Sound="Gatling_Laser_Firesound_Dist" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\DeBassedLaser.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Gatling_Laser_Firesound_Dist</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3600</MaxDistance>
+  <Volume>2</Volume>
+      <Loopable>false</Loopable>	  
+      
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\DistantHardLaser.wav</Start>
+          <Loop></Loop>
+
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Gatling_Laser_Charge</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>800</MaxDistance>
+      <Volume>3</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>10</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\GatlingLaserCool.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+  
+
+    <!-- Gugnir Sounds-->
+     <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Gugnir_Firesound</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>6000</MaxDistance>
+      <Volume>18</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>75</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="20" Distance="1800" Sound="Gugnir_Firesound_Distant" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gugnir_Firesound_New_1.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Gugnir_Firesound_Distant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>6000</MaxDistance>
+  <Volume>3</Volume>
+      <Loopable>false</Loopable>	  
+      
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+
+          <Start>Audio\27InchFiresoundDistant.wav</Start>
+
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Gugnir_Travelsound</SubtypeId>
+      </Id>
+      <Category>Travel</Category>
+      <MaxDistance>800</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\27-Inch_Travel.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Gugnir_Reload</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>800</MaxDistance>
+      <Volume>8</Volume>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Thumper_Reload_6s.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <!-- Battleship Cannon Sounds-->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Battleship_Cannon_Firesound</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>8000</MaxDistance>
+      <Volume>2</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>75</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="20" Distance="500" Sound="Battleship_Cannon_Firesound_close2" />
+        <DistantSound DistanceCrossfade="20" Distance="1000" Sound="Battleship_Cannon_Firesound_Dist1" />
+                <DistantSound DistanceCrossfade="20" Distance="2000" Sound="Battleship_Cannon_Firesound_Dist2" />
+                        <DistantSound DistanceCrossfade="20" Distance="4000" Sound="Battleship_Cannon_Firesound_Dist3" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\BC_Firesound.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Battleship_Cannon_Firesound_close2</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>8000</MaxDistance>
+      <Volume>1.3</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>75</PitchVariation>
+
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\BC_Firesound.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Battleship_Cannon_Firesound_Dist1</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>8000</MaxDistance>
+      <Volume>2.5</Volume>
+      <Loopable>false</Loopable>
+
+      <PitchVariation>75</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\BC_Firesound_Far.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+        <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Battleship_Cannon_Firesound_Dist2</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>8000</MaxDistance>
+      <Volume>1.8</Volume>
+      <Loopable>false</Loopable>
+
+      <PitchVariation>50</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\BC_Firesound_Far.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Battleship_Cannon_Firesound_Dist3</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>8000</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\BC_Firesound_Far.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+  </Sounds>
+</Definitions>
+

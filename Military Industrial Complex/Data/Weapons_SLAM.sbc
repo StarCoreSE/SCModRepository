@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Weapons>
+   
+	<Weapon>
+	  <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>SLAMMO</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="0" ShootSoundName="220mmMissileShot" ShotsInBurst="8"/>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <DeviateShotAngle>2</DeviateShotAngle>
+      <AmmoMagazines>
+		<AmmoMagazine Subtype="Energy" />
+      </AmmoMagazines>
+	  <ReloadTime>0</ReloadTime>
+    </Weapon>
+
+	
+  </Weapons>
+</Definitions>

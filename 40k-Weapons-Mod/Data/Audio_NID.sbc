@@ -1,0 +1,384 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Sounds>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Taunt</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <VolumeVariation>0.6</VolumeVariation>
+      <PitchVariation>50</PitchVariation>
+      <!--<DistantSounds>
+			  <DistantSound DistanceCrossFade="10" Distance="1850" Sound = "MyAssaultDistantHit" />
+		  </DistantSounds>-->
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_specialcompleted10.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_specialcompleted03.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_specialcompleted02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\SandwichEat09.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_dominationsnp05.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_specialcompleted02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_specialcompleted03.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_taunts01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_taunts051.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_taunts08.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_specialcompleted03.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_specialcompleted02.wav</Start>
+        </Wave>
+
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_mvm_resurrect03.wav</Start>
+
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Cm_scout_pregamewonlast_05.wav</Start>
+
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_award12.wav</Start>
+
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_beingshotinvincible03.wav</Start>
+
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_cartgoingbackdefense01.wav</Start>
+        </Wave>
+
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_cartmovingforwarddefense02.wav</Start>
+        </Wave>
+
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_cheers02.wav</Start>
+        </Wave>
+
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_domination21.wav</Start>
+        </Wave>
+
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_generic01.wav</Start>
+        </Wave>
+
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_mvm_resurrect08.wav</Start>
+        </Wave>
+
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_quest_complete_easy_05.wav</Start>
+        </Wave>
+
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_revenge03.wav</Start>
+        </Wave>
+
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_revenge05.wav</Start>
+        </Wave>
+
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_specialcompleted-assistedkill02.wav</Start>
+        </Wave>
+
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_stunballhit02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_stunballhit06.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_stunballhit07.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_stunballhit08.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_stunballhit10.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_stunballhit11.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_stunballhit12.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_stunballhit13.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_stunballhit14.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_stunballhit15.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_taunts09.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Taunt\Scout_stunballhit02.wav</Start>
+        </Wave>
+
+
+
+
+      </Waves>
+    </Sound>
+
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Screech</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1600</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>5</DynamicMusicAmount>
+      <Volume>0.6</Volume>
+      <VolumeVariation>0.4</VolumeVariation>
+      <PitchVariation>25</PitchVariation>
+      <!--<DistantSounds>
+			  <DistantSound DistanceCrossFade="10" Distance="200" Sound = "MyAssaultDistantHit" />
+		  </DistantSounds>-->
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Screech\Screech1.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Screech\Screech2.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Screech\Screech3.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Screech\Screech4.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Screech\Screech5.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Screech\Screech6.wav</Start>
+        </Wave>
+
+        </Waves>
+    </Sound>
+
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Distant_Screech</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>7000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <VolumeVariation>0.5</VolumeVariation>
+      <PitchVariation>25</PitchVariation>
+      <!--<DistantSounds>
+			  <DistantSound DistanceCrossFade="10" Distance="2000" Sound = "MyAssaultDistantHit" />
+		  </DistantSounds>-->
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Distant_Screech\Distant_Screech1.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Distant_Screech\Distant_Screech2.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Distant_Screech\Distant_Screech3.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Distant_Screech\Distant_Screech4.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Distant_Screech\Distant_Screech5.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Distant_Screech\Distant_Screech6.wav</Start>
+        </Wave>
+
+      </Waves>
+    </Sound>
+    
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Craunch</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <VolumeVariation>0.5</VolumeVariation>
+      <PitchVariation>50</PitchVariation>
+      <!--<DistantSounds>
+			  <DistantSound DistanceCrossFade="10" Distance="200" Sound = "MyAssaultDistantHit" />
+		  </DistantSounds>-->
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Craunch\Craunch1.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Craunch\Craunch2.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Craunch\Craunch3.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Craunch\Craunch4.wav</Start>
+        </Wave>
+
+      </Waves>
+    </Sound>
+
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Pyroacid_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <VolumeVariation>0</VolumeVariation>
+      <PitchVariation>50</PitchVariation>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Nid\Pyroacid_Fire.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Pyroacid_Fire2</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <VolumeVariation>0</VolumeVariation>
+      <PitchVariation>50</PitchVariation>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Nid\Pyroacid_Fire2.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Pyroacid_Bubble</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1.5</Volume>
+      <VolumeVariation>0.5</VolumeVariation>
+      <PitchVariation>100</PitchVariation>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Nid\Pyroacid_Bubble.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Pyroacid_Impact</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <VolumeVariation>0.2</VolumeVariation>
+      <PitchVariation>100</PitchVariation>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Nid\Pyroacid_Impact.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+   <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Bioplasma_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <VolumeVariation>0.3</VolumeVariation>
+      <PitchVariation>0</PitchVariation>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Nid\Bioplasma_Fire.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+  </Sounds>
+</Definitions>

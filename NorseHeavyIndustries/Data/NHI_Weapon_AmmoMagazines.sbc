@@ -1,0 +1,565 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AmmoMagazines>
+
+    <!-- Point Defense Cannon Ammo-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>20mmPDCAmmo</SubtypeId>
+      </Id>
+      <DisplayName>350x 20x42mm CRAM</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>0</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>350</Capacity>
+      <AmmoDefinitionId Subtype="20mmPDCAmmo_Mag" />
+	  </AmmoMagazine>
+
+    <!-- Light Autocannon HE Ammo - Unused-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>20mmDC1Ammo</SubtypeId>
+      </Id>
+      <DisplayName>26x 20x102mm HE Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>1</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>28</Capacity>
+      <AmmoDefinitionId Subtype="20mmDC1Ammo_Mag" />
+	  </AmmoMagazine>
+
+    <!-- Light Autocannon AP Ammo - Unused--> 
+    <AmmoMagazine>
+       <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>20mmDC2Ammo</SubtypeId>
+      </Id>
+      <DisplayName>26x 20x102mm AP Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>1</Mass>
+      <Volume>28</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="20mmDC2Ammo_Mag" />
+	  </AmmoMagazine>
+
+    <!-- Autocannon HE Ammo - Unused-->
+    <AmmoMagazine>  
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>80mmAC1Ammo</SubtypeId>
+      </Id>
+      <DisplayName>28x 80mm HE Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>1</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>28</Capacity>
+      <AmmoDefinitionId Subtype="80mmAC1Ammo_Mag" />
+	  </AmmoMagazine>
+
+    <!-- Autocannon AP Ammo - Unused-->
+    <AmmoMagazine>  
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>80mmAC2Ammo</SubtypeId>
+      </Id>
+      <DisplayName>28x 80mm AP Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>1</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>28</Capacity>
+      <AmmoDefinitionId Subtype="80mmAC2Ammo_Mag" />
+	  </AmmoMagazine>
+
+    <!-- Autocannon APHE Ammo-->
+    <AmmoMagazine>  
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>80mmAC3Ammo</SubtypeId>
+      </Id>
+      <DisplayName>28x 80mm APHE Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>1</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>28</Capacity>
+      <AmmoDefinitionId Subtype="80mmAC3Ammo_Mag" />
+	  </AmmoMagazine>
+
+    <!-- Fixed Autocannon Cannon HE Ammo-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>80mmFAC1Ammo</SubtypeId>
+      </Id>
+      <DisplayName>40x 80mm HE Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>1</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>3</Capacity>
+      <AmmoDefinitionId Subtype="80mmFAC1Ammo_Mag" />
+    </AmmoMagazine>
+
+    <!-- Fixed Autocannon Cannon AP Ammo-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>80mmFAC2Ammo</SubtypeId>
+      </Id>
+      <DisplayName>40x 80mm AP Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>1</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>3</Capacity>
+      <AmmoDefinitionId Subtype="80mmFAC2Ammo_Mag" />
+    </AmmoMagazine>
+    
+    <!-- Fixed Light Autocannon HE Ammo-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>60mmFLAC1Ammo</SubtypeId>
+      </Id>
+      <DisplayName>60x 60mm HE Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>1</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>60</Capacity>
+      <AmmoDefinitionId Subtype="80mmFAC1Ammo_Mag" />
+    </AmmoMagazine>
+
+    <!-- Fixed Light Autocannon AP Ammo-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>60mmFLAC2Ammo</SubtypeId>
+      </Id>
+      <DisplayName>60x 60mm AP Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>1</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>60</Capacity>
+      <AmmoDefinitionId Subtype="80mmFAC2Ammo_Mag" />
+    </AmmoMagazine>
+
+    <!-- Light Railgun Burst Ammo-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>150mmRGBAmmo</SubtypeId>
+      </Id>
+      <DisplayName>150mm Slug</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>375</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>15</Capacity>
+      <AmmoDefinitionId Subtype="150mmRGBAmmo_Mag" />
+	  </AmmoMagazine>
+
+    <!-- Heavy Railgun Slug Ammo-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>150mmRGAmmo</SubtypeId>
+      </Id>
+      <DisplayName>150mm Slug</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>750</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="150mmRGAmmo_Mag" />
+	  </AmmoMagazine>
+
+    <!-- Horizon Torpedo MIRV Ammo-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>TorpAmmo</SubtypeId>
+      </Id>
+      <DisplayName>Cluster Torpedo</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>20</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Ammo\Odin_Torpedo_Projectile.mwm</Model>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="TorpAmmo_Mag" />
+	  </AmmoMagazine>
+
+    <!-- Thor Missile Battery Missile Ammo-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>200mmMBTAmmo</SubtypeId>
+      </Id>
+      <DisplayName>200mm Missile</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.12</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>20</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Ammo\Odin_Missile_Battery_Projectile.mwm</Model>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="200mmMBTAmmo_Mag" />
+	  </AmmoMagazine>
+    
+ <!--<AmmoMagazine>
+     Missile Battery Delayed Ammo
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>200mmMBDAmmo</SubtypeId>
+      </Id>
+      <DisplayName>200mm Delayed Missile</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>20</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Ammo\Odin_Missile_Battery_Projectile.mwm</Model>
+      <Capacity>16</Capacity>
+      <AmmoDefinitionId Subtype="200mmMBDAmmo_Mag" />
+	  </AmmoMagazine> -->
+    <!-- Hela Plasma Projectile Ammo-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>PlasmaPulseOD</SubtypeId>
+      </Id>
+      <DisplayName>PLASMA</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>1</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>6</Capacity>
+      <AmmoDefinitionId Subtype="PlasmaPulseOD_Mag" />
+    </AmmoMagazine>
+
+    <!-- Norn Flak Cannon Ammo-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>FlakAmmo1</SubtypeId>
+      </Id>
+      <DisplayName>x30 175mm Flak Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>1</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>30</Capacity>
+      <AmmoDefinitionId Subtype="FlakAmmo1_Mag" />
+	  </AmmoMagazine>
+
+    <!-- Norn Direct Fire Cannon Ammo-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>FlakAmmo2</SubtypeId>
+      </Id>
+      <DisplayName>30x 175mm HE Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>80</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>30</Capacity>
+      <AmmoDefinitionId Subtype="FlakAmmo2_Mag" />
+	  </AmmoMagazine>
+
+    <!-- Gugnir 5-Inch Cluster Shell-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>ThumpAmmo1</SubtypeId>
+      </Id>
+      <DisplayName>1x 27-Inch HE Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>180</Mass>
+      <Volume>3</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="ThumpAmmo1_Mag" />
+	  </AmmoMagazine>
+    
+    <!-- Gugnir 5-Inch Cluster Shell-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>ThumperFlare</SubtypeId>
+      </Id>
+      <DisplayName>1x 27-Inch Flare Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>180</Mass>
+      <Volume>3</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="ThumperFlare_Mag" />
+    </AmmoMagazine>
+    
+    <!-- Mk3 Battleship Cannon HE Ammo-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>BC7Ammo1</SubtypeId>
+      </Id>
+      <DisplayName>3x HE Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>180</Mass>
+      <Volume>3</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>3</Capacity>
+      <AmmoDefinitionId Subtype="BC7Ammo1_Mag" />
+    </AmmoMagazine>
+
+    <!-- Mk3 Battleship Cannon Cluster Ammo - Unused-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>BC7CAmmo1</SubtypeId>
+      </Id>
+      <DisplayName>3x HE Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>180</Mass>
+      <Volume>3</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>3</Capacity>
+      <AmmoDefinitionId Subtype="BC7CAmmo1_Mag" />
+    </AmmoMagazine>
+
+    <!-- Mk2 Battleship Cannon HE Ammo-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>BC5Ammo1</SubtypeId>
+      </Id>
+      <DisplayName>2x HE Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>180</Mass>
+      <Volume>3</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>2</Capacity>
+      <AmmoDefinitionId Subtype="BC5Ammo1_Mag" />
+    </AmmoMagazine>
+
+    <!-- Mk2 Battleship Cannon Cluster Ammo - Unused-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>BC5CAmmo1</SubtypeId>
+      </Id>
+      <DisplayName>2x HE Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>180</Mass>
+      <Volume>3</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>2</Capacity>
+      <AmmoDefinitionId Subtype="BC5CAmmo1_Mag" />
+    </AmmoMagazine>
+
+    <!-- Mk1 Battleship Cannon HE Ammo-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>BC3Ammo1</SubtypeId>
+      </Id>
+      <DisplayName>2x HE Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>180</Mass>
+      <Volume>3</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="BC3Ammo1_Mag" />
+    </AmmoMagazine>
+
+    <!-- Mk1 Battleship Cannon Cluster Ammo - Unused-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>BC3CAmmo1</SubtypeId>
+      </Id>
+      <DisplayName>2x HE Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>180</Mass>
+      <Volume>3</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="BC3CAmmo1_Mag" />
+    </AmmoMagazine>
+
+    <!-- Surtr Gatling Laser Ammo--> 
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>LaserPulse</SubtypeId>
+      </Id>
+      <DisplayName>LaserPulse</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>0</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>50</Capacity>
+      <AmmoDefinitionId Subtype="LaserPulse_Mag" />
+    </AmmoMagazine>
+
+    <!-- Ammo Magazine Example-->
+    <AmmoMagazine>
+    <Id>
+      <TypeId>AmmoMagazine</TypeId>
+      <SubtypeId>TestAmmo</SubtypeId>
+    </Id>
+    <DisplayName>350x 20x42mm CRAM</DisplayName>
+    <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+    <Size>
+      <X>0.25</X>
+      <Y>0.2</Y>
+      <Z>0.2</Z>
+    </Size>
+    <Mass>0</Mass>
+    <Volume>1</Volume>
+    <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+    <Capacity>600</Capacity>
+    <AmmoDefinitionId Subtype="TestAmmo_Mag" />
+    </AmmoMagazine>
+    
+  </AmmoMagazines>
+</Definitions>

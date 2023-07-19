@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AmmoMagazines>
+  
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>VanillaGatPainlessAmmo</SubtypeId>
+      </Id>
+      <DisplayName>absolute state of vanilla replacers</DisplayName>
+      <Icon></Icon>
+	  <ExtraInventoryTooltipLine>why</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>150</Mass>
+      <Volume>1</Volume>
+      <Model></Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>350</Capacity>
+      <AmmoDefinitionId Subtype="blue projectile go really fast" />
+    </AmmoMagazine>  
+	
+	
+
+  </AmmoMagazines>
+</Definitions>

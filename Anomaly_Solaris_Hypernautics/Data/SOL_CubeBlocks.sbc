@@ -1,0 +1,202 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http:www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http:www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<!-- Solaris Hypernautics -->
+
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>AMP_HealGenerator</SubtypeId>
+			</Id>
+			<DisplayName>Goncol MagnaPulse</DisplayName>
+			<Description>
+				Refresh your buddy's shields by manually shooting at it.
+				Grid limit 1
+				Range: 1.75km technically
+				Heal: 12-20 mill shields (surface area dependent)
+				Reload Charge: 1 gigawatt
+				Relaod Time: 2 minutes
+			</Description>
+			<Icon>Textures\GUI\Icons\LargeArcEmitter.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="3" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\ElectroShield3x3.mwm</Model>
+			<Components>
+				<Component Subtype="AMP_FrameComponent" Count="2"/>
+				<Component Subtype="Computer" Count="1"/>
+				<Component Subtype="AMP_PlateComponent" Count="6"/>
+			</Components>
+      <BuildTimeSeconds>60</BuildTimeSeconds>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0"/>
+				<MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="1.0" EndY="3.0"/>
+				<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="1.0" EndY="3.0"/>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+			</MountPoints>
+			<BlockPairName>HealGenerator</BlockPairName>
+			<MirroringZ>Y</MirroringZ>
+		</Definition>
+
+
+
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>AMP_FlakShotgun</SubtypeId>
+			</Id>
+			<DisplayName>Flechette Shotgun</DisplayName>
+			<Description>
+				Two shotguns duct taped together, what's to know
+				Range: 8km technically
+				Damage: Kinetic
+				Reload Charge: 20 megawatts
+				Relaod Time: 15 seconds
+			</Description>
+			<Icon>Textures\GUI\Icons\FlakShotgun.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="2" y="1" z="6"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\FlakShotgun.mwm</Model>
+			<Components>
+				<Component Subtype="AMP_FrameComponent" Count="1"/>
+				<Component Subtype="Computer" Count="1"/>
+				<Component Subtype="AMP_PlateComponent" Count="1"/>
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="2.00" EndY="1.00" Default="true"/>
+				<MountPoint Side="Left" StartX="4.00" StartY="0.00" EndX="6.00" EndY="1.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="2.00" EndY="1.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="4.00" EndX="2.00" EndY="6.00"/>
+			</MountPoints>
+			<BlockPairName>FlakShotgun</BlockPairName>
+		</Definition>
+
+
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>AMP_ImpulseTorch</SubtypeId>
+			</Id>
+			<DisplayName>Impulse Torch</DisplayName>
+			<Description>
+				Its a offensive afterburner that gimbals
+				Range: 1km technically
+				Damage: Energy
+				Reload Charge: 4 megawatts
+				Relaod Time: 10 seconds
+			</Description>
+			<Icon>Textures\GUI\Icons\ImpulseTorchBase.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="2" z="4"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\ImpulseTorchBase.mwm</Model>
+			<Components>
+				<Component Subtype="AMP_FrameComponent" Count="1"/>
+				<Component Subtype="Computer" Count="1"/>
+				<Component Subtype="AMP_FrameComponent" Count="2"/>
+				<Component Subtype="AMP_PlateComponent" Count="1"/>
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+			<BlockPairName>ImpulseTorchBase</BlockPairName>
+
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="1.00" EndY="2.00" Default="true"/>
+				<MountPoint Side="Left" StartX="1.50" StartY="0.00" EndX="4.00" EndY="2.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="2.50" EndY="2.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="1.00" EndY="2.50"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="1.50" EndX="1.00" EndY="4.00"/>
+			</MountPoints>
+
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+		</Definition>
+
+
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<!-- Ceis Anti Armour -->
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>K_SA_Gauss_APC</SubtypeId>
+			</Id>
+			<DisplayName>Ceis Hybrid Gauss Turret</DisplayName>
+			<Description>
+				Dual purpose turret
+			</Description>
+			<Icon>Textures\GUI\Icons\Ceis.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<GuiVisible>false</GuiVisible>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="2" z="3" />
+			<ModelOffset x="0" y="0" z="0" />
+			<Model>Models\SA_GaussAP_Large.mwm</Model>
+			<UseModelIntersection>true</UseModelIntersection>
+			<Components>
+				<Component Subtype="SteelPlate" Count="50" />
+				<Component Subtype="Superconductor" Count="150" />
+				<Component Subtype="Construction" Count="240" />
+				<Component Subtype="Motor" Count="120" />
+				<Component Subtype="Reactor" Count="30" />
+				<Component Subtype="Detector" Count="45" />
+				<Component Subtype="Computer" Count="200" />
+				<Component Subtype="MetalGrid" Count="125" />
+				<Component Subtype="SteelPlate" Count="750" />
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
+			</MountPoints>
+			<!--<BuildProgressModels>
+			<Model BuildPercentUpperBound="0.10" File="Models\SA_GaussAP_Large_Constr1.mwm" />
+			<Model BuildPercentUpperBound="0.5" File="Models\SA_GaussAP_Large_Constr2.mwm" />
+			<Model BuildPercentUpperBound="0.90" File="Models\SA_GaussAP_Large_Constr3.mwm" />
+		</BuildProgressModels>-->
+			<VoxelPlacement>
+				<!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+				<StaticMode>
+					<PlacementMode>OutsideVoxel</PlacementMode>
+					<MaxAllowed>0.2</MaxAllowed>
+					<MinAllowed>0</MinAllowed>
+				</StaticMode>
+				<DynamicMode>
+					<PlacementMode>OutsideVoxel</PlacementMode>
+					<MaxAllowed>0.2</MaxAllowed>
+					<MinAllowed>0.01</MinAllowed>
+				</DynamicMode>
+			</VoxelPlacement>
+			<BlockPairName>K_SA_Gauss_APC</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>30</BuildTimeSeconds>
+			<OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+			<WeaponDefinitionId Subtype="K_SA_Gun"/>
+			<InventoryMaxVolume>1</InventoryMaxVolume>
+			<DamageEffectId>213</DamageEffectId>
+			<AiEnabled>false</AiEnabled>
+			<DamagedSound>ParticleWeapExpl</DamagedSound>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<MinElevationDegrees>-5</MinElevationDegrees>
+			<MaxElevationDegrees>100</MaxElevationDegrees>
+			<MinAzimuthDegrees>-180</MinAzimuthDegrees>
+			<MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+			<RotationSpeed>0.0001</RotationSpeed>
+			<ElevationSpeed>0.0001 </ElevationSpeed>
+			<IdleRotation>false</IdleRotation>
+			<MaxRangeMeters>3500</MaxRangeMeters>
+			<MinFov>0.0001</MinFov>
+			<MaxFov>2</MaxFov>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+		</Definition>
+
+
+	</CubeBlocks>
+</Definitions>

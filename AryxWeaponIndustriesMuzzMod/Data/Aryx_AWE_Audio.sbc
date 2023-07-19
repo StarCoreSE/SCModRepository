@@ -1,0 +1,1761 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Sounds>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXAutocannon_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>200</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.75</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_autocannon_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_autocannon_fire_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_autocannon_fire_03.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound> 
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXATLAS_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>400</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.25</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_atlas_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_atlas_fire_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_atlas_fire_03.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_atlas_fire_04.wav</Start>
+        </Wave>		
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXATLAS_LoopFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>400</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Loopable>true</Loopable>
+      <PreventSynchronization>3</PreventSynchronization>	  
+      <SoundLimit>10</SoundLimit>	  
+      <Waves>
+        <Wave Type="D3">
+			<Loop>Audio\Aryx\gatlings\aryx_guardian_gatling_loop_01.wav</Loop>
+			<Stop>Audio\Aryx\gatlings\aryx_guardian_gatling_stop_01.wav</Stop>
+        </Wave>	
+		
+      </Waves>
+    </Sound>	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXWarriorFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>500</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>  
+	  <DistantSounds>
+		<DistantSound DistanceCrossFade="10" Distance="400" Sound = "ArcWepShipARYX_WarriorFireDistant" />
+	  </DistantSounds>		  
+      <Waves>
+        <Wave Type="D3">
+			<Start>Audio\Aryx\gatlings\aryx_warrior_gatling_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+			<Start>Audio\Aryx\gatlings\aryx_warrior_gatling_02.wav</Start>
+        </Wave>			
+      </Waves>
+    </Sound>	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYX_WarriorFireDistant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>800</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>  		  
+      <Waves>
+        <Wave Type="D3">
+			<Start>Audio\Aryx\gatlings\aryx_warrior_gatling_distant_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+			<Start>Audio\Aryx\gatlings\aryx_warrior_gatling_distant_02.wav</Start>
+        </Wave>	
+        <Wave Type="D3">
+			<Start>Audio\Aryx\gatlings\aryx_warrior_gatling_distant_03.wav</Start>
+        </Wave>			
+      </Waves>
+    </Sound>	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXCODEX_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>400</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.5</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_codex_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_codex_fire_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_codex_fire_03.wav</Start>
+        </Wave>	
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXAVALANCHE_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>400</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.75</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_avalanche_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_avalanche_fire_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_avalanche_fire_03.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_avalanche_fire_04.wav</Start>
+        </Wave>		
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYX_TacticalModuleFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1500</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>5</Volume>
+	  <DistantSounds>
+		<DistantSound DistanceCrossFade="10" Distance="1000" Sound = "ArcWepShipARYX_TacticalModuleFireDistant" />
+	  </DistantSounds>	  
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\misc\aryx_tactical_module_fire_01.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYX_TacticalModuleFireDistant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>4</Volume>  
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\misc\aryx_tactical_module_fire_distant_01.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXLightCoilgunFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1500</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\railguns\aryx_light_coilgun_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\railguns\aryx_light_coilgun_fire_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\railguns\aryx_light_coilgun_fire_03.wav</Start>
+        </Wave>	
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXCoilgun_Impact</SubtypeId>
+      </Id>
+      <Category>WEP_EXPL</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+	  <DistantSounds>
+		<DistantSound DistanceCrossFade="10" Distance="3000" Sound = "ArcWepShipARYXGauss_DistantImpact" />
+	  </DistantSounds>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1.75</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\railguns\aryx_light_coilgun_hit_01.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound> 	
+	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXSmallRailgunFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>800</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\railguns\aryx_small_railgun_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\railguns\aryx_small_railgun_fire_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\railguns\aryx_small_railgun_fire_03.wav</Start>
+        </Wave>	
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYX_HeavyCannonHit</SubtypeId>
+      </Id>
+      <Category>WEP_EXPL</Category>
+      <MaxDistance>1750</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <DistantSounds>
+		<DistantSound DistanceCrossFade="10" Distance="400" Sound = "ArcWepShipARYX_HeavyCannonHitDistant" />
+	  </DistantSounds>		  
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\explosions\aryx_heavy_explosion_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+         <Start>Audio\Aryx\explosions\aryx_heavy_explosion_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+         <Start>Audio\Aryx\explosions\aryx_heavy_explosion_03.wav</Start>
+        </Wave>	
+        <Wave Type="D3">
+         <Start>Audio\Aryx\explosions\aryx_heavy_explosion_04.wav</Start>
+        </Wave>			
+        <Wave Type="D3">
+         <Start>Audio\Aryx\explosions\aryx_heavy_explosion_05.wav</Start>
+        </Wave>					
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYX_HeavyCannonHitDistant</SubtypeId>
+      </Id>
+      <Category>WEP_EXPL</Category>
+      <MaxDistance>1750</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\explosions\aryx_heavy_explosion_distant_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\explosions\aryx_heavy_explosion_distant_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\explosions\aryx_heavy_explosion_distant_03.wav</Start>
+        </Wave>					
+      </Waves>
+    </Sound>	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYX_RocketExplosion</SubtypeId>
+      </Id>
+      <Category>WEP_EXPL</Category>
+      <MaxDistance>700</MaxDistance>
+      <PreventSynchronization>3</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <VolumeVariation>0.1</VolumeVariation>
+      <PitchVariation>50</PitchVariation>
+      <Volume>0.75</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\explosions\aryx_rocket_explosion_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\explosions\aryx_rocket_explosion_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\explosions\aryx_rocket_explosion_03.wav</Start>
+        </Wave>	
+      </Waves>
+    </Sound>	
+        <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Helios_Bap_Explosion</SubtypeId>
+      </Id>
+      <Category>WEP_EXPL</Category>
+      <MaxDistance>700</MaxDistance>
+      <PreventSynchronization>3</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <VolumeVariation>0.1</VolumeVariation>
+      <PitchVariation>50</PitchVariation>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\explosions\Helios_Hitsound_Bap_Fragments.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXExplosionLarge</SubtypeId>
+      </Id>
+      <Category>WEP_EXPL</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_explosion_large_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_explosion_large_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_explosion_large_03.wav</Start>
+        </Wave>	
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXDesolatorImpact</SubtypeId>
+      </Id>
+      <Category>WEP_EXPL</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\explosions\aryx_desolator_blast_01.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXExplosionPulse</SubtypeId>
+      </Id>
+      <Category>WEP_EXPL</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_explosion_pulse_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_explosion_pulse_02.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXOCULUS_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>500</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.35</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_oculus_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_oculus_fire_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_oculus_fire_03.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXJudge_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>700</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.60</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_judge_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_judge_fire_02.wav</Start>
+        </Wave>	
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_judge_fire_03.wav</Start>
+        </Wave>			
+      </Waves>
+    </Sound>	
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXThrasher_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <DistantSounds>
+		<DistantSound DistanceCrossFade="10" Distance="500" Sound = "ArcWepShipARYXCyclone_DistantFire" />
+	  </DistantSounds>	  
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_thrasher_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_thrasher_fire_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_thrasher_fire_03.wav</Start>
+        </Wave>				
+      </Waves>
+    </Sound>
+
+	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXCyclone_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <DistantSounds>
+		<DistantSound DistanceCrossFade="10" Distance="500" Sound = "ArcWepShipARYXCyclone_DistantFire" />
+	  </DistantSounds>	  
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_cyclone_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_cyclone_fire_02.wav</Start>
+        </Wave>			
+      </Waves>
+    </Sound>		
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXCyclone_DistantFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>	  
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_cyclone_fire_distant_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_cyclone_fire_distant_02.wav</Start>
+        </Wave>			
+      </Waves>
+    </Sound>	
+	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXHurricane_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <DistantSounds>
+		<DistantSound DistanceCrossFade="10" Distance="500" Sound = "ArcWepShipARYXHurricane_DistantFire" />
+	  </DistantSounds>		  
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_hurricane_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_hurricane_fire_02.wav</Start>
+        </Wave>			
+      </Waves>
+    </Sound>			
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXHurricane_DistantFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>	  
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_typhoon_fire_distant_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_typhoon_fire_distant_02.wav</Start>
+        </Wave>			
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXTyphoon_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>15000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1.5</Volume>
+	  <DistantSounds>
+		<DistantSound DistanceCrossFade="10" Distance="1500" Sound = "ArcWepShipARYXTyphoon_DistantFire" />
+	  </DistantSounds>		  
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_typhoon_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_typhoon_fire_02.wav</Start>
+        </Wave>		
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_typhoon_fire_03.wav</Start>
+        </Wave>			
+      </Waves>
+    </Sound>
+
+<!--ChetSound-->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXTyphoon_Fire2</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <PitchVariation>80</PitchVariation>
+      <Volume>0.9</Volume>
+	  <DistantSounds>
+		<DistantSound DistanceCrossFade="40" Distance="800" Sound = "ArcWepShipARYXTyphoon_DistantFire2" />
+	  </DistantSounds>		  
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_typhoon_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_typhoon_fire_02.wav</Start>
+        </Wave>		
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_typhoon_fire_03.wav</Start>
+        </Wave>			
+      </Waves>
+    </Sound>
+	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXTridentFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>800</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\misc\aryx_trident_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\misc\aryx_trident_fire_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\misc\aryx_trident_fire_03.wav</Start>
+        </Wave>	
+      </Waves>
+    </Sound>		
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXFocusBeamFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.7</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\lasers\aryx_focus_beam_high_fire_01.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>	
+	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXTyphoon_DistantFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>15000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1.5</Volume>	  
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_hurricane_fire_distant_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_hurricane_fire_distant_02.wav</Start>
+        </Wave>			
+      </Waves>
+    </Sound>
+
+<!--ChetSound-->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXTyphoon_DistantFire2</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <Volume>0.9</Volume>
+	<PitchVariation>80</PitchVariation>	  
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_hurricane_fire_distant_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\heavy_cannons\aryx_hurricane_fire_distant_02.wav</Start>
+        </Wave>			
+      </Waves>
+    </Sound>
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXHydra_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>600</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\missiles\aryx_missile_fire_B_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\missiles\aryx_missile_fire_B_02.wav</Start>
+        </Wave>	
+        <Wave Type="D3">
+          <Start>Audio\Aryx\missiles\aryx_missile_fire_B_03.wav</Start>
+        </Wave>			
+      </Waves>
+    </Sound>	
+	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXJury_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>700</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.65</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_jury_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_jury_fire_02.wav</Start>
+        </Wave>			
+      </Waves>
+    </Sound>		
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXSentinel_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>400</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_sentinel_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_sentinel_fire_02.wav</Start>
+        </Wave>			
+      </Waves>
+    </Sound>		
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXMace_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>400</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.15</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_mace_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_mace_fire_02.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXBurstCannon_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\burst_cannon_fire_01.wav</Start>
+        </Wave>
+
+      </Waves>
+    </Sound> 
+	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXReaper_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>600</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.8</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_reaper_fire_01.wav</Start>
+        </Wave>
+
+      </Waves>
+    </Sound> 	
+	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXReaper_windup</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>600</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.9</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_reaper_windup_01.wav</Start>
+        </Wave>
+
+      </Waves>
+    </Sound> 		
+	
+	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXFlak_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>300</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.75</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_flak_cannon_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_flak_cannon_fire_02.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound> 
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXGauss_Windup</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\railguns\aryx_gauss_windup_01.wav</Start>
+        </Wave>
+
+      </Waves>
+    </Sound> 	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>AresMacReskinShotSound</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>15000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+	  <DistantSounds>
+		<DistantSound DistanceCrossFade="10" Distance="3000" Sound = "AresMacReskinShotSound_DistantFire" />
+	  </DistantSounds>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>3</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\railguns\Ares_Mac_Reskin_Shot_Near.wav</Start>
+        </Wave>	
+      </Waves>
+    </Sound> 	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>AresMacReskinShotSound_DistantFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>15000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\railguns\Ares_Mac_Reskin_Shot_Far.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>     
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXGauss_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>15000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+	  <DistantSounds>
+		<DistantSound DistanceCrossFade="10" Distance="3000" Sound = "ArcWepShipARYXGauss_DistantFire" />
+	  </DistantSounds>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>3</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\railguns\aryx_gauss_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\railguns\aryx_gauss_fire_02.wav</Start>
+        </Wave>		
+      </Waves>
+    </Sound> 
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXGauss_DistantFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>15000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\railguns\aryx_gauss_fire_distant.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound> 
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXGauss_Impact</SubtypeId>
+      </Id>
+      <Category>WEP_EXPL</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+	  <DistantSounds>
+		<DistantSound DistanceCrossFade="10" Distance="3000" Sound = "ArcWepShipARYXGauss_DistantImpact" />
+	  </DistantSounds>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>3</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\explosions\aryx_gauss_hit_01.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound> 
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXGauss_DistantImpact</SubtypeId>
+      </Id>
+      <Category>WEP_EXPL</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\explosions\aryx_gauss_hit_distant_01.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>AresRailcannonShotSound</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>15000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.3</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\ares\RailcannonFire1.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>AresRailcannonReloadSound</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\ares\RailcannonFull.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXRailgun_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\railguns\aryx_railgun_fire_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\railguns\aryx_railgun_fire_03.wav</Start>
+        </Wave>		
+      </Waves>
+    </Sound> 
+    
+        <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXRailgun_Fire_Ping</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\railguns\artemisPING.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound> 
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXRailgun_Windup</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\railguns\aryx_railgun_windup_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\railguns\aryx_railgun_windup_03.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound> 
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXTorp_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>500</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_torpedo_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_torpedo_fire_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_torpedo_fire_03.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_torpedo_fire_04.wav</Start>
+        </Wave>		
+      </Waves>
+    </Sound> 
+	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXLongbow_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>500</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.75</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_longbow_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_longbow_fire_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_longbow_fire_03.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_longbow_fire_04.wav</Start>
+        </Wave>		
+      </Waves>
+    </Sound> 	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXDevastator_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>300</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1.2</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_devastator_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_devastator_fire_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_devastator_fire_03.wav</Start>
+        </Wave>	
+      </Waves>
+    </Sound> 	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXDevastator_launch</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>300</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_devastator_launch_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_devastator_launch_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_devastator_launch_03.wav</Start>
+        </Wave>	
+      </Waves>
+    </Sound> 
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYX_FireMissilesA</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>400</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\missiles\aryx_missile_fire_A_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\missiles\aryx_missile_fire_A_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\missiles\aryx_missile_fire_A_03.wav</Start>
+        </Wave>	
+      </Waves>
+    </Sound> 	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXPlasmaHelios_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>300</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_plasma_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_plasma_fire_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_plasma_fire_03.wav</Start>
+        </Wave>		
+      </Waves>
+    </Sound>	
+	
+	
+	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYX_PulseLaserFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>300</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\gravastar_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\gravastar_fire_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\gravastar_fire_03.wav</Start>
+        </Wave>		
+      </Waves>
+    </Sound> 	
+	
+	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYX_NucleonLaserFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>300</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.9</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_laser_shotty_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_laser_shotty_02.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound> 	
+
+	 <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYX_SuperLaserWindup</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>0.70</Volume>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+           <Start>Audio\Aryx\superlaser_prefire.wav</Start>
+        
+        </Wave>
+        </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYX_SuperLaserFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>0.70</Volume>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+           <Start>Audio\Aryx\superlaser_firing.wav</Start>
+        
+        </Wave>
+        </Waves>
+    </Sound>
+	
+
+	 <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYX_MarkV_AtlasWindup</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+           <Start>Audio\Aryx\aryx_markV_superlaser_windup.wav</Start>        
+        </Wave>
+	  </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYX_MarkV_AtlasFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+           <Start>Audio\Aryx\aryx_markV_superlaser_fire.wav</Start>        
+        </Wave>
+      </Waves>
+    </Sound>
+	
+	
+	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYX_AuroraFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>400</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.5</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_aurora_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_aurora_fire_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_aurora_fire_04.wav</Start>
+        </Wave>		
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYX_NovaBlasterFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>500</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.7</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_nova_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_nova_fire_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_nova_fire_03.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aryx_nova_fire_04.wav</Start>
+        </Wave>		
+      </Waves>
+    </Sound> 
+
+
+
+
+
+
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXMagnetar_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <DistantSounds>
+		<DistantSound DistanceCrossFade="10" Distance="500" Sound = "ArcWepShipARYXShockCannon_DistantFire" />
+	  </DistantSounds>		  
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\shock_cannons\aryx_magnetar_fire_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\shock_cannons\aryx_magnetar_fire_02.wav</Start>
+        </Wave>	
+        <Wave Type="D3">
+          <Start>Audio\Aryx\shock_cannons\aryx_magnetar_fire_03.wav</Start>
+        </Wave>			
+      </Waves>
+    </Sound>			
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXShockCannon_DistantFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>	  
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\shock_cannons\aryx_shock_fire_distant_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\shock_cannons\aryx_shock_fire_distant_02.wav</Start>
+        </Wave>			
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYX_ShockCannonHit</SubtypeId>
+      </Id>
+      <Category>WEP_EXPL</Category>
+      <MaxDistance>700</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>	  
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\shock_cannons\aryx_magnetar_hit_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+         <Start>Audio\Aryx\shock_cannons\aryx_magnetar_hit_02.wav</Start>
+        </Wave>				
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXKingswordFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>4000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>6</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\railguns\aryx_kingsword_fire_01.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcWepShipARYXKingswordWindup</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>4000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>5</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\railguns\aryx_kingsword_chargeup_01.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>ion_cannon_fire_01</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>2000</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>35</DynamicMusicAmount>
+		  <Volume>1.5</Volume>
+      <Pitch>-2</Pitch>
+		  <Loopable>false</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Aryx\ion_cannon_fire_01.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ARESHitSoundMaymay</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>4000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\aresHitSound.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+        <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>HunterCLANG</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>10000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\hunterclang.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+     <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>HunterBUZZ</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.01</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\hunterbuzz.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+         <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>HeliosKlang</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aryx\HeliosTracker.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>Helios_Tracking_Reload</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>350</MaxDistance>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>35</DynamicMusicAmount>
+		  <Volume>1</Volume>
+		  <Loopable>false</Loopable>
+      <VolumeVariation>0.1</VolumeVariation>
+      <PitchVariation>10</PitchVariation>
+      <PreventSynchronization>20</PreventSynchronization>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Aryx\Helios_Tracking_Reload.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+    
+    <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>Helios_Zap_laser</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>700</MaxDistance>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>35</DynamicMusicAmount>
+		  <Volume>1.2</Volume>
+		  <Loopable>false</Loopable>
+      <VolumeVariation>0.2</VolumeVariation>
+      <PitchVariation>75</PitchVariation>
+      <PreventSynchronization>10</PreventSynchronization>
+      <Pitch>-3</Pitch>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Aryx\Helios_Zap_laser.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+    
+    <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>Helios_Travel_Tracking</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>700</MaxDistance>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>35</DynamicMusicAmount>
+		  <Volume>5</Volume>
+		  <Loopable>true</Loopable>
+      <PreventSynchronization>8</PreventSynchronization>
+      <VolumeVariation>0.1</VolumeVariation>
+      <PitchVariation>35</PitchVariation>
+      <Pitch>3</Pitch>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Aryx\Helios_Travel_Tracking_Woosh.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+    
+        <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>Helios_Travel_Tracking_Zap</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>700</MaxDistance>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>35</DynamicMusicAmount>
+		  <Volume>5</Volume>
+		  <Loopable>true</Loopable>
+      <PreventSynchronization>8</PreventSynchronization>
+      <VolumeVariation>0.1</VolumeVariation>
+      <PitchVariation>35</PitchVariation>
+      <Pitch>1</Pitch>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Aryx\Helios_Travel_Tracking.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+  </Sounds> 
+</Definitions>

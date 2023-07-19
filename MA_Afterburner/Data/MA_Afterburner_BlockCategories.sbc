@@ -1,0 +1,21 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CategoryClasses>
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+        <SubtypeId/>
+      </Id>
+      <DisplayName>MA</DisplayName>
+      <Name>AutoMcD_Astronautical</Name>
+      <ItemIds>
+	    <string>MA_Afterburner_Large_small</string>
+	    <string>MA_Afterburner_Large</string>
+	    <string>MA_Afterburner_Large_5x</string>
+	    <string>Afterburner_LG_Ion_Large</string>		
+		<string>MA_SideBooster_Small</string>
+		<string>DETPAK</string>
+      </ItemIds>
+    </Category>
+  </CategoryClasses>
+</Definitions>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <BlockVariantGroups>
+  
+		<BlockVariantGroup>
+            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="SCMWBlockVariantGroup" />
+            <Icon>Textures\GUI\HexCannon.png</Icon>
+            <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
+            <Description>Description_BlockGroup_TurretGroup</Description>
+            <Blocks>
+			<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Hexcannon" />
+              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HakkeroBeam" />
+              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HakkeroProjectile" />
+              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HakkeroBeamMini" />
+			  <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HakkeroProjectileMini" />
+            </Blocks>
+        </BlockVariantGroup>
+      
+    </BlockVariantGroups>
+</Definitions>

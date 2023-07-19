@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+   <EntityComponents>
+   
+        <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+            <Id>
+                <TypeId>Inventory</TypeId>
+                <SubtypeId>MA_Tiger</SubtypeId>
+            </Id>
+            <Size x="1" y="1" z=".5" />
+            <InputConstraint Whitelist="true" Description="MA 150mm type ammo" Icon="Textures\GUI\Icons\filter_MA_150mm.dds">
+                
+                <Entry>
+                    <TypeId>AmmoMagazine</TypeId>
+                    <SubtypeId>MA_150mm</SubtypeId>
+                </Entry>
+            </InputConstraint>
+        </EntityComponent>
+		
+		<EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+            <Id>
+                <TypeId>Inventory</TypeId>
+                <SubtypeId>MA_Tiger_sm</SubtypeId>
+            </Id>
+            <Size x="1" y="1" z=".5" />
+            <InputConstraint Whitelist="true" Description="MA 150mm type ammo" Icon="Textures\GUI\Icons\filter_MA_150mm.dds">
+                
+                <Entry>
+                    <TypeId>AmmoMagazine</TypeId>
+                    <SubtypeId>MA_150mm</SubtypeId>
+                </Entry>
+            </InputConstraint>
+        </EntityComponent>
+		
+		<EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+            <Id>
+                <TypeId>Inventory</TypeId>
+                <SubtypeId>MA_Tiger_30_sm</SubtypeId>
+            </Id>
+            <Size x=".5" y=".5" z=".5" />
+            <InputConstraint Whitelist="true" Description="MA 30mm type ammo" Icon="Textures\GUI\Icons\filter_MA_30mm.dds">
+                
+                <Entry>
+                    <TypeId>AmmoMagazine</TypeId>
+                    <SubtypeId>MA_30mm</SubtypeId>
+                </Entry>
+            </InputConstraint>
+        </EntityComponent>
+		
+
+
+
+
+		
+	</EntityComponents>
+	
+</Definitions>

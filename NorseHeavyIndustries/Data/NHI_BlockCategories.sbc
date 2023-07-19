@@ -1,0 +1,56 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CategoryClasses>
+    
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+        <SubtypeId>NHI_Weapons_GUI</SubtypeId>
+      </Id>
+      <DisplayName>NHI - Weapons</DisplayName>
+      <Name>Norse Heavy Industries - Weapons</Name>
+      <StrictSearch>false</StrictSearch>
+      <ItemIds>
+        <string>NHI_PD_Turret</string>
+        <string>NHI_Light_Autocannon_Turret</string>
+        <string>NHI_Autocannon_Turret</string>
+        <string>NHI_Gatling_Laser_Turret</string>
+        <string>NHI_Light_Railgun_Turret</string>
+        <string>NHI_Heavy_Railgun_Turret</string>
+        <string>NHI_Heavy_Gun_Turret</string>
+        <string>NHI_Mk3_Cannon_Turret</string>
+        <string>NHI_Mk2_Cannon_Turret</string>
+        <string>NHI_Mk1_Cannon_Turret</string>
+        <string>NHI_Fixed_Torpedo_Launcher</string>
+        <string>NHI_Fixed_Missile_Battery</string>
+        <string>NHI_Fixed_Autocannon</string>
+        <string>NHI_Fixed_Gatling_Laser</string>
+        <string>NHI_Fixed_Light_Railgun</string>
+        <string>NHI_Fixed_Heavy_Railgun</string>
+      </ItemIds>
+    </Category>   
+    
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+        <SubtypeId>NHI_Weapons_GUI_2</SubtypeId>
+      </Id>
+      <DisplayName>NHI - Experimental</DisplayName>
+      <Name>NHI - Experimental</Name>
+      <ItemIds>
+        <string>NHI_Flak_Cannon</string>
+        <string>NHI_Plasma_Turret</string>
+        <string>EXP_Fission_Beam_Turret</string>
+        <string>EXP_BFG_Ammo_Cannon</string>
+        <string>EXP_Horizon_Mine_Launcher</string>
+        <string>EXP_Fixed_Scattergun</string>
+      </ItemIds>
+    </Category>
+
+ 
+    
+	
+	
+	
+  </CategoryClasses>
+</Definitions>

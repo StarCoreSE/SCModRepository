@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Sounds>
+    
+    <!-- CoilCannon Firesound--> 
+	 <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcMK1CoilCannon</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1250</MaxDistance>
+	  <VolumeVariation>0.05</VolumeVariation>
+	  <!-- <Pitch>0</Pitch> -->
+      <PitchVariation>2</PitchVariation>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="100" Distance="1150" Sound="MK1CoilCannonDistant1" />
+      </DistantSounds>
+      <Volume>0.85</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\MK1CoilCannon3.xwm</Start>
+        </Wave> 
+      </Waves>
+    </Sound>
+	
+   <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcMK1CoilCannonDistant1</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3200</MaxDistance>
+	  <VolumeVariation>0.05</VolumeVariation>
+	  <!-- <Pitch>0</Pitch> -->
+      <PitchVariation>2</PitchVariation>
+      <Volume>0.5</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\MK1CoilCannon_far2.xwm</Start>
+        </Wave>       
+      </Waves>
+    </Sound>
+
+   <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>RealMK1CoilCannon</SubtypeId>
+      </Id>
+      <Category>SHOT_R</Category>
+      <MaxDistance>400</MaxDistance>
+	  <VolumeVariation>3</VolumeVariation>
+	  <!-- <Pitch>0</Pitch> -->
+      <PitchVariation>50</PitchVariation>
+      <PreventSynchronization>2</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <RealisticFilter>realShipFilter</RealisticFilter>
+      <RealisticVolumeChange>0.65</RealisticVolumeChange>
+      <Volume>0.85</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\MK1CoilCannon3-1.xwm</Start>
+        </Wave> 
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Cov_Plas_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <Volume>2</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>25</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="20" Distance="1400" Sound="Railgun_Fire_Dist" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Plasma_Firesound.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+  </Sounds>
+</Definitions>
+

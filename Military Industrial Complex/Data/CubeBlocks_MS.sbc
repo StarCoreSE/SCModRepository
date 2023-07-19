@@ -1,0 +1,86 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<CubeBlocks>
+	    	
+		<!-- MetalStorm -->
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>MetalStorm</SubtypeId>
+			</Id>
+			<DisplayName>METAL STORM 2077</DisplayName>
+			<Description>
+			4km Range
+			Adjustable RoF
+			64-round...uh...volley?
+			20 second reload
+			Technically, it could fire at 115,200 RPM, but it's limited to 14,400 for performance reasons.
+			</Description>
+			<Icon>Textures\GUI\Icons\Cubes\Metal_Storm.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\Large\Metal_Storm.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="360" />
+                <Component Subtype="Construction" Count="42" />
+								<Component Subtype="SmallTube" Count="8" />
+                <Component Subtype="Motor" Count="15" />
+                <Component Subtype="LargeTube" Count="8" />
+                <Component Subtype="Computer" Count="6" />
+                <Component Subtype="InteriorPlate" Count="12" />
+                <Component Subtype="Construction" Count="14" />
+                <Component Subtype="SteelPlate" Count="220" />
+			</Components>
+			<CriticalComponent Index="0" Subtype="Computer"/>
+			<MountPoints>
+			
+				<MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+
+			</MountPoints>
+			<BuildProgressModels>
+			</BuildProgressModels>
+			<VoxelPlacement>
+			  <StaticMode>
+				<PlacementMode>OutsideVoxel</PlacementMode>
+				<MaxAllowed>0.2</MaxAllowed>
+				<MinAllowed>0</MinAllowed>
+			  </StaticMode>
+			  <DynamicMode>
+				<PlacementMode>OutsideVoxel</PlacementMode>
+				<MaxAllowed>0.2</MaxAllowed>
+				<MinAllowed>0.01</MinAllowed>
+			  </DynamicMode>
+			</VoxelPlacement>
+			<BlockPairName>MetalStorm</BlockPairName>
+			<MirroringY>Z</MirroringY>
+            <MirroringZ>Y</MirroringZ>
+            <EdgeType>Light</EdgeType>
+            <BuildTimeSeconds>22</BuildTimeSeconds>
+            <OverlayTexture>Textures\GUI\Screens\AWP_TurretOverlay_Universal.dds</OverlayTexture>
+            <WeaponDefinitionId Subtype="Ace_Turret_220MissileBattery" />
+            <InventoryMaxVolume>1.056</InventoryMaxVolume>
+            <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+            <DamagedSound>ParticleWeapExpl</DamagedSound>
+            <ResourceSinkGroup>Defense</ResourceSinkGroup>
+            <MinElevationDegrees>-9</MinElevationDegrees>
+            <MaxElevationDegrees>85</MaxElevationDegrees>
+            <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+            <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+            <IdleRotation>false</IdleRotation>
+            <MaxRangeMeters>800</MaxRangeMeters>
+            <RotationSpeed>0.002</RotationSpeed>
+            <ElevationSpeed>0.003 </ElevationSpeed>
+            <EmissiveColorPreset>Default</EmissiveColorPreset>
+            <MinFov>0.1</MinFov>
+            <MaxFov>1.0</MaxFov>
+            <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+            <DestroySound>WepSmallWarheadExpl</DestroySound>
+            <PCU>280</PCU>
+            <IsAirTight>false</IsAirTight>
+			<InventoryFillFactorMin>1</InventoryFillFactorMin>
+		</Definition>
+			
+	</CubeBlocks>
+</Definitions>

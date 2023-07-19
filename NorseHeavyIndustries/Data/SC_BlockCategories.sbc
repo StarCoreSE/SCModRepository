@@ -1,0 +1,19 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CategoryClasses>
+    
+   <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+        <SubtypeId>NHI_Weapons_GUI_1</SubtypeId>
+      </Id>
+      <DisplayName>NHI - Starcore Replacements</DisplayName>
+      <Name>NHI - Starcore Replacements</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+        <string>SC_Coil_Cannon</string>
+      </ItemIds>
+    </Category>   
+    
+  </CategoryClasses>
+</Definitions>

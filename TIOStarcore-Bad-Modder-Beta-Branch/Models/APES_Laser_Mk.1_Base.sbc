@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition>
+			<Id>
+				<TypeId>CubeBlock</TypeId>
+				<SubtypeId>APES_Laser_Mk.1_Base</SubtypeId>
+			</Id>
+			<DisplayName>DisplayName_APES_Laser_Mk.1_Base</DisplayName>
+			<Description>Description_APES_Laser_Mk.1_Base</Description>
+			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="7" z="3"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\APES_Laser_Mk.1_Base.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="10"/>
+			</Components>
+			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.01" EndX="3.00" EndY="4.21"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.01" EndX="3.00" EndY="4.21"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.01" EndX="3.00" EndY="4.21"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.01" EndX="3.00" EndY="4.21"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+			</MountPoints>
+			<BlockPairName>APES_Laser_Mk.1_Base</BlockPairName>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

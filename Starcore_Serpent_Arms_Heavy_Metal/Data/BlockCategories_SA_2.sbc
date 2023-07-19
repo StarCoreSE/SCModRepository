@@ -1,0 +1,37 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CategoryClasses>
+  
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+        <SubtypeId>K_SerpentArms_Main</SubtypeId>
+      </Id>
+      <DisplayName>Serpent Arms</DisplayName>
+      <Name>Serpent Arms</Name>
+      <ItemIds>
+<string>K_SA_Gauss_APC</string>
+<string>K_SA_Launcher_FixedMount</string>
+<string>K_SA_Gauss_AMS</string>
+<string>K_SA_Gauss_ERC</string>
+<string>K_SA_Mortar_FixedLauncher</string>
+<string>K_SA_HeavyMetal_Gauss_A</string>
+<string>K_SA_HeavyMetal_Gauss_ERII</string>
+<string>K_SA_HeavyMetal_Gauss_ERIIRF</string>
+<string>K_SA_HeavyMetal_Gauss_PGBC</string>
+<string>K_SA_HeavyMetal_HelixGauss</string>
+<string>K_SA_HeavyMetal_Flak</string>
+<string>K_SA_Gauss_AMSIIC</string>
+<string>K_SA_Launcher_FixedMountv2</string>
+<string>K_SA_HeavyMetal_Gauss_ERFM</string>
+<string>K_SA_LoW_CapitalSpinalA</string>
+<string>SA_HMI_Erebos</string>
+        <string>K_SA_HeavyMetal_Spinal_Rotary</string>
+        <string>K_SA_HeavyMetal_Spinal_Rotary_Reskin</string>
+      </ItemIds>
+    </Category>
+	
+	
+	
+  </CategoryClasses>
+</Definitions>

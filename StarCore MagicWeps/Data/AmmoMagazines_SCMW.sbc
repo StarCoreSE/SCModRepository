@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AmmoMagazines>
+  
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>RockMagazine</SubtypeId>
+      </Id>
+      <DisplayName>no one reads this</DisplayName>
+      <Icon></Icon>
+	  <ExtraInventoryTooltipLine>pain</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>150</Mass>
+      <Volume>1</Volume>
+      <Model></Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>16</Capacity>
+      <AmmoDefinitionId Subtype="tfw no okuu gf" />
+    </AmmoMagazine>
+
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>SquareMagazine</SubtypeId>
+      </Id>
+      <DisplayName>no one reads this</DisplayName>
+      <Icon></Icon>
+      <ExtraInventoryTooltipLine>pain</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>150</Mass>
+      <Volume>1</Volume>
+      <Model></Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>6</Capacity>
+      <AmmoDefinitionId Subtype="nice syncing nerd" />
+    </AmmoMagazine>
+
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>MSMagazine</SubtypeId>
+      </Id>
+      <DisplayName>no one reads this</DisplayName>
+      <Icon></Icon>
+      <ExtraInventoryTooltipLine>pain</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>150</Mass>
+      <Volume>1</Volume>
+      <Model></Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>360</Capacity>
+      <AmmoDefinitionId Subtype="i have no memes and i must sync" />
+    </AmmoMagazine>
+
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>SubterraneanSun</SubtypeId>
+      </Id>
+      <DisplayName>no one reads this</DisplayName>
+      <Icon></Icon>
+      <ExtraInventoryTooltipLine>pain</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>150</Mass>
+      <Volume>1</Volume>
+      <Model></Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="THE POWER OF THE SUN" />
+    </AmmoMagazine>
+
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>StardustLaserMag</SubtypeId>
+      </Id>
+      <DisplayName>no one reads this</DisplayName>
+      <Icon></Icon>
+      <ExtraInventoryTooltipLine>pain</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>150</Mass>
+      <Volume>1</Volume>
+      <Model></Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>360</Capacity>
+      <AmmoDefinitionId Subtype="pewpewpewpew1" />
+    </AmmoMagazine>
+
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>StardustSentryMag</SubtypeId>
+      </Id>
+      <DisplayName>no one reads this</DisplayName>
+      <Icon></Icon>
+      <ExtraInventoryTooltipLine>pain</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>150</Mass>
+      <Volume>1</Volume>
+      <Model></Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>4</Capacity>
+      <AmmoDefinitionId Subtype="pewpewpewpew2" />
+    </AmmoMagazine>
+
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>OrreryMag</SubtypeId>
+      </Id>
+      <DisplayName>no one reads this</DisplayName>
+      <Icon></Icon>
+      <ExtraInventoryTooltipLine>pain</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>150</Mass>
+      <Volume>1</Volume>
+      <Model></Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="epic touhou reference guys!!!haha!!!" />
+    </AmmoMagazine>
+
+
+  </AmmoMagazines>
+</Definitions>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AmmoMagazines>
+  
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>MetalStormProjectileFuckEnergyWeaponsJFCDarkstar</SubtypeId>
+      </Id>
+      <DisplayName>I HATE THE ANTICHRIST</DisplayName>
+      <Icon></Icon>
+	  <ExtraInventoryTooltipLine>pain</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>150</Mass>
+      <Volume>1</Volume>
+      <Model></Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>32</Capacity>
+      <AmmoDefinitionId Subtype="what" />
+    </AmmoMagazine>  
+	
+	
+
+  </AmmoMagazines>
+</Definitions>

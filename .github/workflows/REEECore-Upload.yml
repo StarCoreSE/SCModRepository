@@ -1,4 +1,4 @@
-name: "Upload to Workshop"
+name: "Upload to REEECore"
 
 on:
   push:

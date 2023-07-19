@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <CubeBlocks>
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>BALLER</SubtypeId>
+      </Id>
+      <DisplayName>Ballistic Accelerated Lobber Lacking Endless Reloads (BALLER)</DisplayName>
+      <Description>he ballin
+      </Description>
+      <Icon>Textures\Icons\SLAM.png</Icon>
+      <CubeSize>Large</CubeSize>
+      <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="5"/>
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\SLAM_Launcher.mwm</Model>
+      <Components>
+        <Component Subtype="Construction" Count="2000" />
+        <Component Subtype="GravityGenerator" Count="200" />
+        <Component Subtype="Computer" Count="120" />
+        <Component Subtype="SmallTube" Count="1060" />
+        <Component Subtype="Motor" Count="1080" />
+        <Component Subtype="LargeTube" Count="120" />
+        <Component Subtype="MetalGrid" Count="650" />
+        <Component Subtype="Construction" Count="400" />
+        <Component Subtype="SteelPlate" Count="400" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" Default="true"/>
+        <MountPoint Side="Left" StartX="3.00" StartY="0.00" EndX="5.00" EndY="1.00"/>
+        <MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="2.00" EndY="1.00"/>
+        <MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="1.00" EndY="2.00"/>
+        <MountPoint Side="Bottom" StartX="0.00" StartY="3.00" EndX="1.00" EndY="5.00"/>
+      </MountPoints>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <BlockPairName>BALLER</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>125</BuildTimeSeconds>
+      <DisassembleRatio>5</DisassembleRatio>
+      <NavigationDefinition>Default</NavigationDefinition>
+      <WeaponDefinitionId Subtype="BALLER" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>100</InventoryMaxVolume>
+      <MinElevationDegrees>-1</MinElevationDegrees>
+      <MaxElevationDegrees>1</MaxElevationDegrees>
+      <MinAzimuthDegrees>-1</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>1</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <AiEnabled>false</AiEnabled>
+      <MaxRangeMeters>10000</MaxRangeMeters>
+      <RotationSpeed>0</RotationSpeed>
+      <ElevationSpeed>0</ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.1</MaxFov>
+    </Definition>
+
+  </CubeBlocks>
+  <BlueprintClassEntries>
+  </BlueprintClassEntries>
+</Definitions>

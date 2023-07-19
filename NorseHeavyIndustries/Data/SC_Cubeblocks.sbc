@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <CubeBlocks>
+  
+<!-- Coilcannon -->Plasma_Accelerator.mwm
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>SC_Coil_Cannon</SubtypeId>
+     </Id>
+     <DisplayName>Magnetic Coil Cannon Mk.2</DisplayName>
+     <Description>
+A Turreted Magnetic Coil Cannon
+Exceptional Shield Damage and Range
+[Range: 6800]
+[Shell Speed: 1800m/s]
+[Damage Type: KIN]
+     </Description>
+     <Icon>Textures\GUI\Icons\CoilCannon.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="5" y="4" z="5" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\CoilCannon_Replacement.mwm</Model>
+     <Components>
+				<Component Subtype="Construction" Count="300" />
+				<Component Subtype="GravityGenerator" Count="300" />
+				<Component Subtype="Computer" Count="100" />
+				<Component Subtype="MetalGrid" Count="640" />
+				<Component Subtype="SmallTube" Count="200" />
+				<Component Subtype="Motor" Count="180" />
+				<Component Subtype="LargeTube" Count="50" />
+				<Component Subtype="Construction" Count="300" />
+				<Component Subtype="SteelPlate" Count="500" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <MountPoints>
+       <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="0.0" EndY="0.0"/>
+       <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="0.0" EndY="0.0"/>
+       <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="0.0" EndY="0.0"/>
+       <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="0.0" EndY="0.0"/>
+       <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="5.0" EndY="5.0" Default="true"/>
+     </MountPoints>
+     <BlockPairName>SC_Coil_Cannon_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>160</BuildTimeSeconds>
+     <DisassembleRatio>2</DisassembleRatio>
+  <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>7000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+   </Definition>
+
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>SC_COV_Plasma_Turret</SubtypeId>
+     </Id>
+     <DisplayName>Covenant Plasma Accelerator</DisplayName>
+     <Description>
+       Blurple Beam go Brrr
+     </Description>
+     <Icon>Textures\GUI\Icons\CoilCannon.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="3" y="2" z="3" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Plasma_Accelerator.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="900" />
+       <Component Subtype="Construction" Count="300" />
+       <Component Subtype="Computer" Count="120" />
+       <Component Subtype="MetalGrid" Count="640" />
+       <Component Subtype="SmallTube" Count="200" />
+       <Component Subtype="Motor" Count="180" />
+       <Component Subtype="LargeTube" Count="50" />
+       <Component Subtype="Construction" Count="300" />
+       <Component Subtype="SteelPlate" Count="1100" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <MountPoints>
+       <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="0.0" EndY="0.0"/>
+       <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="0.0" EndY="0.0"/>
+       <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="0.0" EndY="0.0"/>
+       <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="0.0" EndY="0.0"/>
+       <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="5.0" EndY="5.0"/>
+     </MountPoints>
+     <BlockPairName>SC_COV_Plasma_Turret_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>80</BuildTimeSeconds>
+     <DisassembleRatio>2</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>7000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+   </Definition>
+
+ </CubeBlocks>
+</Definitions>

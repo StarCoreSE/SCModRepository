@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Sounds>
+    <!--IHarpo, a glorious man. Damnable Keen file structure.-->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>BALLERbounce</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2250</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>0.4</Volume>
+      <PitchVariation>100</PitchVariation>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\BALLER\dodgeball.wav</Start>
+        </Wave>
+        <!-- <Wave Type="D3">
+				  <Start>Audio\Crunch\HeavyCannonHit1.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\Crunch\HeavyCannonHit2.wav</Start>
+			  </Wave>-->
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>BALLERcomplete</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2250</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>0.4</Volume>
+      <PitchVariation>100</PitchVariation>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\BALLER\ballercomplete.wav</Start>
+        </Wave>
+        <!-- <Wave Type="D3">
+				  <Start>Audio\Crunch\HeavyCannonHit1.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\Crunch\HeavyCannonHit2.wav</Start>
+			  </Wave>-->
+      </Waves>
+    </Sound>
+
+
+  </Sounds>
+</Definitions>

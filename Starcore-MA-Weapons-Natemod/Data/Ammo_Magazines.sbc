@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AmmoMagazines>
+	
+	<AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>MA_150mm</SubtypeId>
+      </Id>
+      <DisplayName>150mm HE Rounds</DisplayName>
+      <Icon>Textures\GUI\Icons\MA_150mm.dds</Icon>
+      <Size>
+        <X>1.4</X>
+        <Y>0.75</Y>
+        <Z>1.4</Z>
+      </Size>
+      <Mass>640</Mass>
+      <Volume>24</Volume>
+      <Model>Models\Ammo\MA_150mm.mwm</Model>
+      <Capacity>16</Capacity>
+      <AmmoDefinitionId Subtype="Energy" />
+    </AmmoMagazine>
+
+	<AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>MA_30mm</SubtypeId>
+      </Id>
+      <DisplayName>30mm Rounds</DisplayName>
+      <Icon>Textures\GUI\Icons\MA_150mm.dds</Icon>
+      <Size>
+        <X>.12</X>
+        <Y>0.15</Y>
+        <Z>.12</Z>
+ 	  </Size>
+      <Mass>96</Mass>
+      <Volume>5</Volume>
+      <Model>Models\Ammo\MA_30mm.mwm</Model>
+      <Capacity>36</Capacity>
+      <AmmoDefinitionId Subtype="Energy" />
+    </AmmoMagazine>
+
+	<AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>MA_Missile</SubtypeId>
+      </Id>
+      <DisplayName>MA Missile</DisplayName>
+      <Icon>Textures\GUI\Icons\MA_Missile_AmmoMag.png</Icon>
+      <Size>
+        <X>1.4</X>
+        <Y>0.75</Y>
+        <Z>1.4</Z>
+ 	  </Size>
+      <Mass>640</Mass>
+      <Volume>24</Volume>
+      <Model>Models\Ammo\MA_Missile_AmmoMag.mwm</Model>
+      <Capacity>12</Capacity>
+      <AmmoDefinitionId Subtype="Energy" />
+    </AmmoMagazine>
+
+  </AmmoMagazines>
+</Definitions>

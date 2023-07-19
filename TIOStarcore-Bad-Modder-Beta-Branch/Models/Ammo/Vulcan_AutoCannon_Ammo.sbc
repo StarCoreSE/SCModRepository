@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition>
+			<Id>
+				<TypeId>CubeBlock</TypeId>
+				<SubtypeId>Vulcan_AutoCannon_Ammo</SubtypeId>
+			</Id>
+			<DisplayName>DisplayName_Vulcan_AutoCannon_Ammo</DisplayName>
+			<Description>Description_Vulcan_AutoCannon_Ammo</Description>
+			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Ammo\Vulcan_AutoCannon_Ammo.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="10"/>
+			</Components>
+			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<BlockPairName>Vulcan_AutoCannon_Ammo</BlockPairName>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

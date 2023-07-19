@@ -1,0 +1,356 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Components>
+        <Component>
+            <Id>
+                <TypeId>Component</TypeId>
+                <SubtypeId>AvalancheComponent</SubtypeId>
+            </Id>
+            <DisplayName>Avalanche Component</DisplayName>
+            <Icon>Textures\GUI\Icons\Cubes\HeavyCalibreTurret.dds</Icon>
+            <Size>
+                <X>0.5</X>
+                <Y>0.5</Y>
+                <Z>0.1</Z>
+            </Size>
+            <Mass>7000</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Cubes\Large\generic_component.mwm</Model>
+            <PhysicalMaterial>Metal</PhysicalMaterial>
+            <MaxIntegrity>32000</MaxIntegrity>
+            <DropProbability>0.9</DropProbability>
+            <Health>25000</Health>
+            <MinimumOfferAmount>100000</MinimumOfferAmount>
+            <MaximumOfferAmount>500000</MaximumOfferAmount>
+            <MinimumOrderAmount>10</MinimumOrderAmount>
+            <MaximumOrderAmount>100</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+
+            <MinimumAcquisitionAmount>100000</MinimumAcquisitionAmount>
+            <MaximumAcquisitionAmount>20000000</MaximumAcquisitionAmount>
+        </Component> 
+	
+		<Component>
+            <Id>
+                <TypeId>Component</TypeId>
+                <SubtypeId>AssaultComponent</SubtypeId>
+            </Id>
+            <DisplayName>Assault Component</DisplayName>
+            <Icon>Textures\GUI\Icons\Cubes\MediumCalibreTurretLarge.dds</Icon>
+            <Size>
+                <X>0.5</X>
+                <Y>0.5</Y>
+                <Z>0.1</Z>
+            </Size>
+            <Mass>2200</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Cubes\Large\generic_component.mwm</Model>
+            <PhysicalMaterial>Metal</PhysicalMaterial>
+            <MaxIntegrity>10500</MaxIntegrity>
+            <DropProbability>0.9</DropProbability>
+            <Health>25000</Health>
+            <MinimumOfferAmount>100000</MinimumOfferAmount>
+            <MaximumOfferAmount>500000</MaximumOfferAmount>
+            <MinimumOrderAmount>10</MinimumOrderAmount>
+            <MaximumOrderAmount>100</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+
+            <MinimumAcquisitionAmount>100000</MinimumAcquisitionAmount>
+            <MaximumAcquisitionAmount>20000000</MaximumAcquisitionAmount>
+        </Component> 
+	
+		<Component>
+            <Id>
+                <TypeId>Component</TypeId>
+                <SubtypeId>MissileTurretComponent</SubtypeId>
+            </Id>
+            <DisplayName>Guided Rocket Turret Component</DisplayName>
+            <Icon>Textures\GUI\Icons\Cubes\missile_turret.dds</Icon>
+            <Size>
+                <X>0.5</X>
+                <Y>0.5</Y>
+                <Z>0.1</Z>
+            </Size>
+            <Mass>2950</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Cubes\Large\generic_component.mwm</Model>
+            <PhysicalMaterial>Metal</PhysicalMaterial>
+            <MaxIntegrity>15000</MaxIntegrity>
+            <DropProbability>0.9</DropProbability>
+            <Health>25000</Health>
+            <MinimumOfferAmount>100000</MinimumOfferAmount>
+            <MaximumOfferAmount>500000</MaximumOfferAmount>
+            <MinimumOrderAmount>10</MinimumOrderAmount>
+            <MaximumOrderAmount>100</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+
+            <MinimumAcquisitionAmount>100000</MinimumAcquisitionAmount>
+            <MaximumAcquisitionAmount>20000000</MaximumAcquisitionAmount>
+        </Component> 
+					
+				<Component>
+            <Id>
+                <TypeId>Component</TypeId>
+                <SubtypeId>GatlingTurretComponent</SubtypeId>
+            </Id>
+            <DisplayName>Gatling Turret Component</DisplayName>
+            <Icon>Textures\GUI\Icons\Cubes\gatling_turret.dds</Icon>
+            <Size>
+                <X>0.5</X>
+                <Y>0.5</Y>
+                <Z>0.1</Z>
+            </Size>
+            <Mass>1850</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Cubes\Large\generic_component.mwm</Model>
+            <PhysicalMaterial>Metal</PhysicalMaterial>
+            <MaxIntegrity>10000</MaxIntegrity>
+            <DropProbability>0.9</DropProbability>
+            <Health>25000</Health>
+            <MinimumOfferAmount>100000</MinimumOfferAmount>
+            <MaximumOfferAmount>500000</MaximumOfferAmount>
+            <MinimumOrderAmount>10</MinimumOrderAmount>
+            <MaximumOrderAmount>100</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+
+            <MinimumAcquisitionAmount>100000</MinimumAcquisitionAmount>
+            <MaximumAcquisitionAmount>20000000</MaximumAcquisitionAmount>
+        </Component> 
+			
+        <Component>
+            <Id>
+                <TypeId>Component</TypeId>
+                <SubtypeId>3x3TurretRotorComponent</SubtypeId>
+            </Id>
+            <DisplayName>3x3 Turret Ring Component</DisplayName>
+            <Icon>Textures\GUI\Icons\TRR_5x5x1_TR_Rotor.dds</Icon>
+            <Size>
+                <X>0.5</X>
+                <Y>0.5</Y>
+                <Z>0.1</Z>
+            </Size>
+            <Mass>2500</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Cubes\Large\generic_component.mwm</Model>
+            <PhysicalMaterial>Metal</PhysicalMaterial>
+            <MaxIntegrity>9999</MaxIntegrity>
+            <DropProbability>0.9</DropProbability>
+            <Health>25000</Health>
+            <MinimumOfferAmount>100000</MinimumOfferAmount>
+            <MaximumOfferAmount>500000</MaximumOfferAmount>
+            <MinimumOrderAmount>10</MinimumOrderAmount>
+            <MaximumOrderAmount>100</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+
+            <MinimumAcquisitionAmount>100000</MinimumAcquisitionAmount>
+            <MaximumAcquisitionAmount>20000000</MaximumAcquisitionAmount>
+        </Component> 
+	
+        <Component>
+            <Id>
+                <TypeId>Component</TypeId>
+                <SubtypeId>3x3TurretBaseComponent</SubtypeId>
+            </Id>
+            <DisplayName>3x3 Turret Base Component</DisplayName>
+            <Icon>Textures\GUI\Icons\TRR_LG_to_SG_Stator_7x7.dds</Icon>
+            <Size>
+                <X>0.5</X>
+                <Y>0.5</Y>
+                <Z>0.1</Z>
+            </Size>
+            <Mass>2500</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Cubes\Large\generic_component.mwm</Model>
+            <PhysicalMaterial>Metal</PhysicalMaterial>
+            <MaxIntegrity>10000</MaxIntegrity>
+            <DropProbability>0.9</DropProbability>
+            <Health>25000</Health>
+            <MinimumOfferAmount>100000</MinimumOfferAmount>
+            <MaximumOfferAmount>500000</MaximumOfferAmount>
+            <MinimumOrderAmount>10</MinimumOrderAmount>
+            <MaximumOrderAmount>100</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+
+            <MinimumAcquisitionAmount>100000</MinimumAcquisitionAmount>
+            <MaximumAcquisitionAmount>20000000</MaximumAcquisitionAmount>
+        </Component> 
+		
+			
+        <Component>
+            <Id>
+                <TypeId>Component</TypeId>
+                <SubtypeId>1x1TurretRotorComponent</SubtypeId>
+            </Id>
+            <DisplayName>1x1 Turret Ring Component</DisplayName>
+            <Icon>Textures\GUI\Icons\TRR_LG_to_SG_Stator_5x5_BU.dds</Icon>
+            <Size>
+                <X>0.5</X>
+                <Y>0.5</Y>
+                <Z>0.1</Z>
+            </Size>
+            <Mass>1250</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Cubes\Large\generic_component.mwm</Model>
+            <PhysicalMaterial>Metal</PhysicalMaterial>
+            <MaxIntegrity>4999</MaxIntegrity>
+            <DropProbability>0.9</DropProbability>
+            <Health>25000</Health>
+            <MinimumOfferAmount>100000</MinimumOfferAmount>
+            <MaximumOfferAmount>500000</MaximumOfferAmount>
+            <MinimumOrderAmount>10</MinimumOrderAmount>
+            <MaximumOrderAmount>100</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+
+            <MinimumAcquisitionAmount>100000</MinimumAcquisitionAmount>
+            <MaximumAcquisitionAmount>20000000</MaximumAcquisitionAmount>
+        </Component> 
+	
+		
+        <Component>
+            <Id>
+                <TypeId>Component</TypeId>
+                <SubtypeId>1x1TurretBaseComponent</SubtypeId>
+            </Id>
+            <DisplayName>1x1 Turret Base Component</DisplayName>
+            <Icon>Textures\GUI\Icons\TRR_LG_to_SG_Stator_5x5_BU.dds</Icon>
+            <Size>
+                <X>0.5</X>
+                <Y>0.5</Y>
+                <Z>0.1</Z>
+            </Size>
+            <Mass>1250</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Cubes\Large\generic_component.mwm</Model>
+            <PhysicalMaterial>Metal</PhysicalMaterial>
+            <MaxIntegrity>5000</MaxIntegrity>
+            <DropProbability>0.9</DropProbability>
+            <Health>25000</Health>
+            <MinimumOfferAmount>100000</MinimumOfferAmount>
+            <MaximumOfferAmount>500000</MaximumOfferAmount>
+            <MinimumOrderAmount>10</MinimumOrderAmount>
+            <MaximumOrderAmount>100</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+
+            <MinimumAcquisitionAmount>100000</MinimumAcquisitionAmount>
+            <MaximumAcquisitionAmount>20000000</MaximumAcquisitionAmount>
+        </Component> 	
+
+		        <Component>
+            <Id>
+                <TypeId>Component</TypeId>
+                <SubtypeId>1x1FixedGunHarnessComponent</SubtypeId>
+            </Id>
+            <DisplayName>3x3 Turret Base Component</DisplayName>
+            <Icon>Textures\GUI\Icons\TRR_7x7x1_TR_Stator.dds</Icon>
+            <Size>
+                <X>0.5</X>
+                <Y>0.5</Y>
+                <Z>0.1</Z>
+            </Size>
+            <Mass>2500</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Cubes\Large\generic_component.mwm</Model>
+            <PhysicalMaterial>Metal</PhysicalMaterial>
+            <MaxIntegrity>9999</MaxIntegrity>
+            <DropProbability>0.9</DropProbability>
+            <Health>25000</Health>
+            <MinimumOfferAmount>100000</MinimumOfferAmount>
+            <MaximumOfferAmount>500000</MaximumOfferAmount>
+            <MinimumOrderAmount>10</MinimumOrderAmount>
+            <MaximumOrderAmount>100</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+
+            <MinimumAcquisitionAmount>100000</MinimumAcquisitionAmount>
+            <MaximumAcquisitionAmount>20000000</MaximumAcquisitionAmount>
+        </Component> 
+			
+		<Component>
+            <Id>
+                <TypeId>Component</TypeId>
+                <SubtypeId>FixedRocketComponent</SubtypeId>
+            </Id>
+            <DisplayName>Multiple Rocket Pod Component</DisplayName>
+            <Icon>Textures\GUI\Icons\Cubes\missile_launcher.dds</Icon>
+            <Size>
+                <X>0.5</X>
+                <Y>0.5</Y>
+                <Z>0.1</Z>
+            </Size>
+            <Mass>7500</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Cubes\Large\generic_component.mwm</Model>
+            <PhysicalMaterial>Metal</PhysicalMaterial>
+            <MaxIntegrity>28000</MaxIntegrity>
+            <DropProbability>0.9</DropProbability>
+            <Health>25000</Health>
+            <MinimumOfferAmount>100000</MinimumOfferAmount>
+            <MaximumOfferAmount>500000</MaximumOfferAmount>
+            <MinimumOrderAmount>10</MinimumOrderAmount>
+            <MaximumOrderAmount>100</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+
+            <MinimumAcquisitionAmount>100000</MinimumAcquisitionAmount>
+            <MaximumAcquisitionAmount>20000000</MaximumAcquisitionAmount>
+        </Component> 	
+
+		<Component>
+            <Id>
+                <TypeId>Component</TypeId>
+                <SubtypeId>FixedAvalancheComponent</SubtypeId>
+            </Id>
+            <DisplayName>Avalanche Cannon Component</DisplayName>
+            <Icon>Textures\GUI\Icons\Cubes\HeavyCalibreGun.dds</Icon>
+            <Size>
+                <X>0.5</X>
+                <Y>0.5</Y>
+                <Z>0.1</Z>
+            </Size>
+            <Mass>5500</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Cubes\Large\generic_component.mwm</Model>
+            <PhysicalMaterial>Metal</PhysicalMaterial>
+            <MaxIntegrity>19000</MaxIntegrity>
+            <DropProbability>0.9</DropProbability>
+            <Health>25000</Health>
+            <MinimumOfferAmount>100000</MinimumOfferAmount>
+            <MaximumOfferAmount>500000</MaximumOfferAmount>
+            <MinimumOrderAmount>10</MinimumOrderAmount>
+            <MaximumOrderAmount>100</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+
+            <MinimumAcquisitionAmount>100000</MinimumAcquisitionAmount>
+            <MaximumAcquisitionAmount>20000000</MaximumAcquisitionAmount>
+		
+        </Component> 
+
+				<Component>
+            <Id>
+                <TypeId>Component</TypeId>
+                <SubtypeId>RailgunComponent</SubtypeId>
+            </Id>
+            <DisplayName>Railgun Component</DisplayName>
+            <Icon>Textures\GUI\Icons\Cubes\RailGun.dds</Icon>
+            <Size>
+                <X>0.5</X>
+                <Y>0.5</Y>
+                <Z>0.1</Z>
+            </Size>
+            <Mass>29000</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Cubes\Large\generic_component.mwm</Model>
+            <PhysicalMaterial>Metal</PhysicalMaterial>
+            <MaxIntegrity>51400</MaxIntegrity>
+            <DropProbability>0.9</DropProbability>
+            <Health>25000</Health>
+            <MinimumOfferAmount>100000</MinimumOfferAmount>
+            <MaximumOfferAmount>500000</MaximumOfferAmount>
+            <MinimumOrderAmount>10</MinimumOrderAmount>
+            <MaximumOrderAmount>100</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+
+            <MinimumAcquisitionAmount>100000</MinimumAcquisitionAmount>
+            <MaximumAcquisitionAmount>20000000</MaximumAcquisitionAmount>
+        </Component> 
+
+    </Components>
+</Definitions>

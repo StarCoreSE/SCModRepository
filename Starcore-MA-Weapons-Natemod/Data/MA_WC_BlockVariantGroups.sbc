@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <BlockVariantGroups>
+
+
+        <BlockVariantGroup>
+            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="MA_WC_Gatlings" />
+            <Icon>Textures\GUI\Icons\Cubes\blister.png</Icon>
+            <DisplayName>MA WC Gatlings</DisplayName>
+            <Description>All MA WC 25mm gatling turrets.</Description>
+            <Blocks>
+                <Block Type="MyObjectBuilder_ConveyorSorterDefinition" Subtype="MA_Blister" />
+                <Block Type="MyObjectBuilder_ConveyorSorterDefinition" Subtype="MA_Blister45" />
+                <Block Type="MyObjectBuilder_ConveyorSorterDefinition" Subtype="MA_Blister30" />
+                <Block Type="MyObjectBuilder_ConveyorSorterDefinition" Subtype="MA_Blister32" />
+                <Block Type="MyObjectBuilder_ConveyorSorterDefinition" Subtype="MA_Meatball" />				
+
+
+
+            </Blocks>
+        </BlockVariantGroup>
+
+        <BlockVariantGroup>
+            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="MA_WC_Cannons" />
+            <Icon>Textures\GUI\Icons\Cubes\MA_AC150.png</Icon>
+            <DisplayName>MA WC Cannons</DisplayName>
+            <Description>All MA WC Cannons.</Description>
+            <Blocks>
+                <Block Type="MyObjectBuilder_ConveyorSorterDefinition" Subtype="MA_AC150" />
+                <Block Type="MyObjectBuilder_ConveyorSorterDefinition" Subtype="MA_AC150_30" />
+                <Block Type="MyObjectBuilder_ConveyorSorterDefinition" Subtype="MA_AC150_45" />
+                <Block Type="MyObjectBuilder_ConveyorSorterDefinition" Subtype="MA_AC150_Tiger" />
+
+
+
+            </Blocks>
+        </BlockVariantGroup>
+
+        
+    </BlockVariantGroups>
+</Definitions>

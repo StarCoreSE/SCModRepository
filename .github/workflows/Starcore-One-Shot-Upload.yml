@@ -1,0 +1,21 @@
+name: "Upload Starcore-One-Shot"
+
+on:
+  push:
+    paths:
+      - 'Starcore-One-Shot/**'
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: AnarkisGaming/workshop@v1
+        with:
+          appID: 244850
+          publishedFileID: 2822027695
+          path: 'Starcore-One-Shot'
+          changelog: ${{ github.event.head_commit.message }}             
+        env:
+          STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}
+          STEAM_PASSWORD: ${{ secrets.password }}

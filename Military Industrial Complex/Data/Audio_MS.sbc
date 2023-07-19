@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Sounds>
+	
+	<!-- Metalstorm -->
+	<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>metalstorm</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2100</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+	  <DistantSounds>
+        <DistantSound DistanceCrossfade="10" Distance="1000" Sound="metalstormdistant" />
+      </DistantSounds>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>15</DynamicMusicAmount>
+      <Loopable>false</Loopable>
+	  <SoundLimit>32</SoundLimit>
+      <Volume>0.1</Volume>
+	  <PitchVariation>5</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Arcade\metalstorm.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>	
+
+<!-- Metalstorm Distant-->
+	<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>metalstormdistant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2100</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>15</DynamicMusicAmount>
+      <Loopable>false</Loopable>
+	  <SoundLimit>32</SoundLimit>
+      <Volume>0.1</Volume>
+	  <PitchVariation>5</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Arcade\metalstorm.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+	
+	<!-- Metalstorm Hit -->
+	<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>cbar</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>15</DynamicMusicAmount>
+      <Loopable>false</Loopable>
+      <Volume>0.1</Volume>
+	  <PitchVariation>5</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Arcade\cbar_hit1A.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+	<!-- Metalstorm Shield Hit -->
+	<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>shit</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>15</DynamicMusicAmount>
+      <Loopable>false</Loopable>
+      <Volume>0.1</Volume>
+	  <PitchVariation>5</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Arcade\shieldhit1.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>	
+	
+<!-- Metalstorm Reload-->
+	<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>metalstormreload</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>250</MaxDistance>
+	  <SoundLimit>10</SoundLimit>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>15</DynamicMusicAmount>
+      <Loopable>false</Loopable>
+      <Volume>1</Volume>
+	  <PitchVariation>5</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Arcade\metalstormreload.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>	
+	
+	
+  </Sounds>
+</Definitions>

@@ -1,0 +1,20 @@
+F:\SteamLibrary\steamapps\common\SpaceEngineers\Bin64 "SEWorkshopTool push --mods "%appdata%\SpaceEngineers\Mods\Heavy Assault Systems""
+
+
+SEWorkshopTool push --mods "%appdata%\SpaceEngineers\Mods\Heavy Assault Systems"
+
+SEWorkshopTool push --mods "%appdata%\SpaceEngineers\Mods\Light Assault Systems"
+
+SEWorkshopTool push --mods "%appdata%\SpaceEngineers\Mods\Wysemans BP Balance"
+
+SEWorkshopTool push --mods "%appdata%\SpaceEngineers\Mods\Galados High Friction"
+
+SEWorkshopTool push --mods "%appdata%\SpaceEngineers\Mods\Starcore One-Shot"
+
+SEWorkshopTool push --mods "%appdata%\SpaceEngineers\Mods\GroundCore Thruster Adjustments"
+
+SEWorkshopTool push --mods "%appdata%\SpaceEngineers\Mods\WysemodAI"
+
+SEWorkshopTool push --mods "%appdata%\SpaceEngineers\Mods\StarCore Royale RespawnShip"
+
+SEWorkshopTool push --mods "%appdata%\SpaceEngineers\Mods\Wysemod CTF"

@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Weapons>
+	  <!-- PD -->
+	  <Weapon>
+		  <Id>
+			<TypeId>WeaponDefinition</TypeId>
+			<SubtypeId>Laser_Weapon</SubtypeId>
+		  </Id>
+		  <ProjectileAmmoData RateOfFire="30" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+		  <ReleaseTimeAfterFire>204</ReleaseTimeAfterFire>
+		  <DeviateShotAngle>10</DeviateShotAngle>
+		  <MuzzleFlashLifeSpan>40</MuzzleFlashLifeSpan>
+		  <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+		  <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+		  <AmmoMagazines>
+			<AmmoMagazine Subtype="Laser_MagazineLarge" />
+		  </AmmoMagazines>
+		  <ReloadTime>150</ReloadTime>
+	  </Weapon>
+	  
+	  <Weapon>
+		  <Id>
+			  <TypeId>WeaponDefinition</TypeId>
+			  <SubtypeId>IronMaiden_Weapon</SubtypeId>
+		  </Id>
+		  <ProjectileAmmoData RateOfFire="30" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+		  <ReleaseTimeAfterFire>204</ReleaseTimeAfterFire>
+		  <DeviateShotAngle>10</DeviateShotAngle>
+		  <MuzzleFlashLifeSpan>40</MuzzleFlashLifeSpan>
+		  <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+		  <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+		  <AmmoMagazines>
+			  <AmmoMagazine Subtype="NATO_25x184mm" />
+		  </AmmoMagazines>
+		  <ReloadTime>150</ReloadTime>
+	  </Weapon>
+	  
+	  
+	  <!-- Naval Artillery -->	  
+	  <Weapon>
+		  <Id>
+			  <TypeId>WeaponDefinition</TypeId>
+			  <SubtypeId>MK1BattleshipGun_Weapon</SubtypeId>
+		  </Id>
+		  <ProjectileAmmoData RateOfFire="30" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+		  <ReleaseTimeAfterFire>204</ReleaseTimeAfterFire>
+		  <DeviateShotAngle>10</DeviateShotAngle>
+		  <MuzzleFlashLifeSpan>40</MuzzleFlashLifeSpan>
+		  <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+		  <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+		  <AmmoMagazines>
+			  <AmmoMagazine Subtype="MK1BattleshipGun_MagazineLarge" />
+		  </AmmoMagazines>
+		  <ReloadTime>150</ReloadTime>
+	  </Weapon>
+	  
+	  <Weapon>
+		  <Id>
+			  <TypeId>WeaponDefinition</TypeId>
+			  <SubtypeId>MK2_Battleship_Weapon</SubtypeId>
+		  </Id>
+		  <ProjectileAmmoData RateOfFire="30" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+		  <ReleaseTimeAfterFire>204</ReleaseTimeAfterFire>
+		  <DeviateShotAngle>10</DeviateShotAngle>
+		  <MuzzleFlashLifeSpan>40</MuzzleFlashLifeSpan>
+		  <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+		  <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+		  <AmmoMagazines>
+			  <AmmoMagazine Subtype="MK2_Battleship_MagazineLarge" />
+		  </AmmoMagazines>
+		  <ReloadTime>150</ReloadTime>
+	  </Weapon>
+
+	  <Weapon>
+		  <Id>
+			  <TypeId>WeaponDefinition</TypeId>
+			  <SubtypeId>K_HSR_Gun</SubtypeId>
+		  </Id>
+		  <ProjectileAmmoData RateOfFire="30" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+		  <ReleaseTimeAfterFire>100</ReleaseTimeAfterFire>
+		  <DeviateShotAngle>0</DeviateShotAngle>
+		  <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+		  <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+		  <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+		  <ReloadTime>0</ReloadTime>
+		  <AmmoMagazines>
+
+			  <AmmoMagazine Subtype="Energy" />
+
+		  </AmmoMagazines>
+	  </Weapon>
+	  
+	  
+	  <!-- trident -->
+	  <Weapon>
+		  <Id>
+			  <TypeId>WeaponDefinition</TypeId>
+			  <SubtypeId>Torp_Weapon</SubtypeId>
+		  </Id>
+		  <ProjectileAmmoData RateOfFire="30" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+		  <ReleaseTimeAfterFire>204</ReleaseTimeAfterFire>
+		  <DeviateShotAngle>10</DeviateShotAngle>
+		  <MuzzleFlashLifeSpan>40</MuzzleFlashLifeSpan>
+		  <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+		  <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+		  <AmmoMagazines>
+			  <AmmoMagazine Subtype="Torp_MagazineLarge" />
+		  </AmmoMagazines>
+		  <ReloadTime>1500</ReloadTime>
+	  </Weapon>
+
+	  
+	  <!-- coilguns -->
+	  <Weapon>
+		  <Id>
+			  <TypeId>WeaponDefinition</TypeId>
+			  <SubtypeId>UNSC_Coilgun_Weapon</SubtypeId>
+		  </Id>
+		  <ProjectileAmmoData RateOfFire="30" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+		  <ReleaseTimeAfterFire>204</ReleaseTimeAfterFire>
+		  <DeviateShotAngle>10</DeviateShotAngle>
+		  <MuzzleFlashLifeSpan>40</MuzzleFlashLifeSpan>
+		  <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+		  <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+		  <AmmoMagazines>
+			  <AmmoMagazine Subtype="UNSC_Coilgun_MagazineLarge" />
+		  </AmmoMagazines>
+		  <ReloadTime>150</ReloadTime>
+	  </Weapon>
+	  
+	  <Weapon>
+		  <Id>
+			  <TypeId>WeaponDefinition</TypeId>
+			  <SubtypeId>CoilgunMk2_Weapon</SubtypeId>
+		  </Id>
+		  <ProjectileAmmoData RateOfFire="30" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+		  <ReleaseTimeAfterFire>204</ReleaseTimeAfterFire>
+		  <DeviateShotAngle>10</DeviateShotAngle>
+		  <MuzzleFlashLifeSpan>40</MuzzleFlashLifeSpan>
+		  <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+		  <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+		  <AmmoMagazines>
+			  <AmmoMagazine Subtype="CoilgunMk2_MagazineLarge" />
+		  </AmmoMagazines>
+		  <ReloadTime>150</ReloadTime>
+	  </Weapon>
+	  
+	  <Weapon>
+		  <Id>
+			  <TypeId>WeaponDefinition</TypeId>
+			  <SubtypeId>RailgunTurret_Weapon</SubtypeId>
+		  </Id>
+		  <ProjectileAmmoData RateOfFire="30" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+		  <ReleaseTimeAfterFire>204</ReleaseTimeAfterFire>
+		  <DeviateShotAngle>10</DeviateShotAngle>
+		  <MuzzleFlashLifeSpan>40</MuzzleFlashLifeSpan>
+		  <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+		  <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+		  <AmmoMagazines>
+			  <AmmoMagazine Subtype="RailgunTurret_MagazineLarge" />
+		  </AmmoMagazines>
+		  <ReloadTime>150</ReloadTime>
+	  </Weapon>
+
+	  
+	  <!-- MLRS -->
+	  <Weapon>
+		  <Id>
+			  <TypeId>WeaponDefinition</TypeId>
+			  <SubtypeId>VMLS_Weapon</SubtypeId>
+		  </Id>
+		  <ProjectileAmmoData RateOfFire="30" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+		  <ReleaseTimeAfterFire>204</ReleaseTimeAfterFire>
+		  <DeviateShotAngle>10</DeviateShotAngle>
+		  <MuzzleFlashLifeSpan>40</MuzzleFlashLifeSpan>
+		  <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+		  <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+		  <AmmoMagazines>
+			  <AmmoMagazine Subtype="VMLS_MagazineLarge" />
+		  </AmmoMagazines>
+		  <ReloadTime>1500</ReloadTime>
+	  </Weapon>
+
+	  
+	  <!-- JDD -->
+	  <Weapon>
+		  <Id>
+			  <TypeId>WeaponDefinition</TypeId>
+			  <SubtypeId>Null_Point_Jump_Disruptor</SubtypeId>
+		  </Id>
+		  <ProjectileAmmoData RateOfFire="30" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+		  <ReleaseTimeAfterFire>204</ReleaseTimeAfterFire>
+		  <DeviateShotAngle>10</DeviateShotAngle>
+		  <MuzzleFlashLifeSpan>40</MuzzleFlashLifeSpan>
+		  <AmmoMagazines>
+			  <AmmoMagazine Subtype="JDD_EnergyCharge_MagazineLarge" />
+		  </AmmoMagazines>
+		  <ReloadTime>1500</ReloadTime>
+	  </Weapon>
+
+
+
+
+
+
+
+
+
+  </Weapons>
+
+</Definitions>

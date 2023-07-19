@@ -1,9 +1,9 @@
-name: "Upload to Workshop"
+name: "Upload SCCleanDLCCategories"
 
 on:
   push:
     paths:
-      - 'SCCleanDLCCattegories/**'
+      - 'SCCleanDLCCategories/**'
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2893360271
-          path: SCCleanDLCCattegories
+          path: SCCleanDLCCategories
           changelog: ${{ github.event.head_commit.message }}
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

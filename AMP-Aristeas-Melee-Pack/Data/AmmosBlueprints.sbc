@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+ <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	 
+	 
+	 <Blueprints>
+		 <Blueprint>
+			 <Id>
+				 <TypeId>BlueprintDefinition</TypeId>
+				 <SubtypeId>Flamer_Magazine</SubtypeId>
+			 </Id>
+			 <DisplayName>Flamer Fuel Cartridge</DisplayName>
+			 <Icon>Textures\GUI\Icons\Flamer_Magazine.dds</Icon>
+			 <Prerequisites>
+				 <Item Amount="40" TypeId="Ingot" SubtypeId="Iron" />
+				 <Item Amount="5" TypeId="Ingot" SubtypeId="Magnesium" />
+				 <Item Amount="2" TypeId="GasContainerObject" SubtypeId="HydrogenBottle" />
+			 </Prerequisites>
+			 <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="Flamer_Magazine" />
+			 <BaseProductionTimeInSeconds>10</BaseProductionTimeInSeconds>
+		 </Blueprint>
+
+		 <Blueprint>
+			 <Id>
+				 <TypeId>BlueprintDefinition</TypeId>
+				 <SubtypeId>CryoShotgun_Magazine</SubtypeId>
+			 </Id>
+			 <DisplayName>Shotgun Shell</DisplayName>
+			 <Icon>Textures\GUI\Icons\Flamer_Magazine.dds</Icon>
+			 <Prerequisites>
+				 <Item Amount="40" TypeId="Ingot" SubtypeId="Iron" />
+				 <Item Amount="5" TypeId="Ingot" SubtypeId="Magnesium" />
+			 </Prerequisites>
+			 <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="CryoShotgun_Magazine" />
+			 <BaseProductionTimeInSeconds>10</BaseProductionTimeInSeconds>
+		 </Blueprint>
+
+		 <Blueprint>
+			 <Id>
+				 <TypeId>BlueprintDefinition</TypeId>
+				 <SubtypeId>AMP_FrameComponent</SubtypeId>
+			 </Id>
+			 <DisplayName>Insulated Frame [AMP]</DisplayName>
+			 <Icon>Textures\GUI\Icons\component\construction_components_component.dds</Icon>
+			 <Prerequisites>
+				 <Item Amount="240" TypeId="Component" SubtypeId="SteelPlate" />
+			 </Prerequisites>
+			 <Result Amount="1" TypeId="Component" SubtypeId="AMP_FrameComponent" />
+			 <BaseProductionTimeInSeconds>10</BaseProductionTimeInSeconds>
+		 </Blueprint>
+
+		 <Blueprint>
+			 <Id>
+				 <TypeId>BlueprintDefinition</TypeId>
+				 <SubtypeId>AMP_PlateComponent</SubtypeId>
+			 </Id>
+			 <DisplayName>Armored Plating [AMP]</DisplayName>
+			 <Icon>Textures\GUI\Icons\component\interior_plate_component.dds</Icon>
+			 <Prerequisites>
+				 <Item Amount="900" TypeId="Component" SubtypeId="SteelPlate" />
+			 </Prerequisites>
+			 <Result Amount="1" TypeId="Component" SubtypeId="AMP_PlateComponent" />
+			 <BaseProductionTimeInSeconds>10</BaseProductionTimeInSeconds>
+		 </Blueprint>
+	 </Blueprints>
+
+	 
+
+	 <BlueprintClassEntries>
+		<Entry Class="EliteConsumables" BlueprintSubtypeId="Flamer_Magazine"/>
+		<Entry Class="EliteConsumables" BlueprintSubtypeId="CryoShotgun_Magazine"/>
+
+		<Entry Class="Components" BlueprintSubtypeId="AMP_PlateComponent" />
+		<Entry Class="Components" BlueprintSubtypeId="AMP_FrameComponent" />
+	 
+		<Entry Class="EliteConsumables" BlueprintSubtypeId="CryoShotgun_Magazine"/>
+		<Entry Class="EliteConsumables" BlueprintSubtypeId="CryoShotgun_Magazine"/>
+	 </BlueprintClassEntries>
+	 
+</Definitions>

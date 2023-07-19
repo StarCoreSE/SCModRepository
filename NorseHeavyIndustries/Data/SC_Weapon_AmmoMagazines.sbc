@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AmmoMagazines>
+
+    <!-- Coilcannon Ammo-->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>EMSlug460mm</SubtypeId>
+      </Id>
+      <DisplayName>460mm Magnetic Slug</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <!-- <Icon>Textures\GUI\Icons\ammo\RailShell.dds</Icon>-->
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <!--  <Mass>45</Mass>
+      <Volume>60</Volume> Baseline 200mm Missile-->
+      <Mass>103.5</Mass>
+      <!-- 103.5 per shell -->
+      <!-- In Kilograms -->
+      <Volume>138</Volume>
+      <!-- 138 per shell -->
+      <!-- In Liters -->
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <!-- <Model>Models\Weapons\BFG_Round.mwm</Model>-->
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="Energy" />
+    </AmmoMagazine>
+    
+  </AmmoMagazines>
+</Definitions>
