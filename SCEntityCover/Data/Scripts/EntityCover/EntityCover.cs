@@ -90,8 +90,8 @@ namespace klime.EntityCover
             ent.Init(null, modelPath, null, null, null);
             ent.DefinitionId = new MyDefinitionId(MyObjectBuilderType.Invalid, "CustomEntity");
             ent.Save = false;
+            ent.Render.EnableColorMaskHsv = true;
             ent.Render.ColorMaskHsv = new Vector3(277, 87, 95);
-            //ent.Render.EnableColorMaskHsv = true;
             //ent.Render.MetalnessColorable = false;
             ent.WorldMatrix = initialMatrix;
             MyEntities.Add(ent, true);
