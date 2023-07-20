@@ -29,8 +29,10 @@ In StarCore, teams build their own ships and battle for the spot of champion in 
 ### Step 4:
 - Make your edits and throw it back in the repository folder.
 
-###Step 5:
+### Step 5:
 - Submit a pull request so that the branch can be merged into the master one.
+
+
 
 
 
