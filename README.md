@@ -2,9 +2,18 @@
 A much better way to manage mods instead of creating 70 repositories. Oh god what was I thinking?
 
 
-
 ## Contribution guide
-Make a pull request. More info soon :^)
+
+prerequsites:
+- knowing the layout of SE mod files
+- enough space to download the entire git repo (~5gb)? (there's probably a better way to do this)
+
+Step 1: Using github desktop or whatever software, clone this repository to a folder on your computer somewhere. 
+Step 2: Make a branch for the changes you want to do.
+Step 3: To test your changes ingame, Copy the mod you want to edit to your %Appdata%/ (There will be a better way to sync this in the future, probably)
+Step 4: Make your edits and throw it back in the repository folder.
+Step 5: Submit a pull request so that the branch can be merged into the master one.
+
 
 
 ## How does this work?
