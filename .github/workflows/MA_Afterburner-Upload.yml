@@ -2,6 +2,8 @@ name: "Upload MA_Afterburner"
 
 on:
   push:
+  branches:
+      - "master"
     paths:
       - "MA_Afterburner/**"
 

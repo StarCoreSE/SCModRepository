@@ -2,6 +2,8 @@ name: "Upload Harmzone-Muzzmod"
 
 on:
   push:
+  branches:
+      - "master"
     paths:
       - "Harmzone-Muzzmod/**"
 

@@ -2,6 +2,8 @@ name: "Upload SCCleanDLCCategories"
 
 on:
   push:
+  branches:
+      - "master"
     paths:
       - "SCCleanDLCCategories/**"
 

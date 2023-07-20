@@ -2,6 +2,8 @@ name: "Upload AMP-Aristeas-Melee-Pack"
 
 on:
   push:
+  branches:
+      - "master"
     paths:
       - "AMP-Aristeas-Melee-Pack/**"
 

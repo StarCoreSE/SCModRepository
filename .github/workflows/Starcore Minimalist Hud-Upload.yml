@@ -2,6 +2,8 @@ name: "Upload Starcore Minimalist Hud"
 
 on:
   push:
+  branches:
+      - "master"
     paths:
       - "Starcore Minimalist Hud/**"
 

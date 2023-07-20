@@ -2,6 +2,8 @@ name: "Upload Heavy-Assault-Systems"
 
 on:
   push:
+  branches:
+      - "master"
     paths:
       - "Heavy-Assault-Systems/**"
 

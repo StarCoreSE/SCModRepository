@@ -2,6 +2,8 @@ name: "Upload TIOStarcore-Bad-Modder-Beta-Branch"
 
 on:
   push:
+  branches:
+      - "master"
     paths:
       - "TIOStarcore-Bad-Modder-Beta-Branch/**"
 

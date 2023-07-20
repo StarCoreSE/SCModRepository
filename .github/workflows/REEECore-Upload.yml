@@ -2,6 +2,8 @@ name: "Upload to REEECore"
 
 on:
   push:
+  branches:
+      - "master"
     paths:
       - "REEECore/**"
 

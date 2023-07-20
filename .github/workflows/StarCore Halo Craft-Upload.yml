@@ -2,6 +2,8 @@ name: "Upload StarCore Halo Craft"
 
 on:
   push:
+  branches:
+      - "master"
     paths:
       - "StarCore Halo Craft/**"
 

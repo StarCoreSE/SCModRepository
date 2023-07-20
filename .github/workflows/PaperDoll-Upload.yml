@@ -2,6 +2,8 @@ name: "Upload PaperDoll PLEASE"
 
 on:
   push:
+  branches:
+      - "master"
     paths:
       - "PaperDoll/**"
 

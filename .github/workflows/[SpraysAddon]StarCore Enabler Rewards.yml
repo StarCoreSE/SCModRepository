@@ -2,6 +2,8 @@ name: "Upload [SpraysAddon]StarCore Enabler Rewards"
 
 on:
   push:
+  branches:
+      - "master"
     paths:
       - "[SpraysAddon]StarCore Enabler Rewards/**"
 

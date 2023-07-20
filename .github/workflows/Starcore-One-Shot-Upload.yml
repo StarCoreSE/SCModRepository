@@ -2,6 +2,8 @@ name: "Upload Starcore-One-Shot"
 
 on:
   push:
+  branches:
+      - "master"
     paths:
       - "Starcore-One-Shot/**"
 
