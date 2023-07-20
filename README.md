@@ -18,19 +18,19 @@ In StarCore, teams build their own ships and battle for the spot of champion in 
 - enough space to download the entire git repo (~5gb)?
 
 ### Step 1:
- clone this repository to a folder on your computer somewhere.
+- Clone this repository to a folder on your computer somewhere.
 
 ### Step 2:
- Make a branch for the changes you want to do.
+- Make a branch for the changes you want to do.
 
 ### Step 3:
- To test your changes ingame, Copy the mod you want to edit to your ``%Appdata%/SpaceEngineers/Mods`` folder.
+- To test your changes ingame, Copy the mod you want to edit to your ``%Appdata%/SpaceEngineers/Mods`` folder.
  
 ### Step 4:
-Make your edits and throw it back in the repository folder.
+- Make your edits and throw it back in the repository folder.
 
 ###Step 5:
-Submit a pull request so that the branch can be merged into the master one.
+- Submit a pull request so that the branch can be merged into the master one.
 
 
 
