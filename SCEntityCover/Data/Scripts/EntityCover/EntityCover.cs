@@ -48,8 +48,8 @@ namespace klime.EntityCover
         public static EntityCover Instance;
         public List<BlockerEnt> allCoverEnts = new List<BlockerEnt>();
 
-        public string modelName = "eveobstacle3a.mwm";
-        public Vector3 modelDimensions = new Vector3(160, 40 ,400); //250, 400, 80
+        public string modelName = "REMlikeblocker2x.mwm";
+        public Vector3 modelDimensions = new Vector3(275, 275, 275); //250, 400, 80
 
         public override void Init(MyObjectBuilder_SessionComponent sessionComponent)
         {
@@ -90,9 +90,9 @@ namespace klime.EntityCover
             ent.Init(null, modelPath, null, null, null);
             ent.DefinitionId = new MyDefinitionId(MyObjectBuilderType.Invalid, "CustomEntity");
             ent.Save = false;
-            ent.Render.ColorMaskHsv = new Vector3(20, 80, 20);
-            ent.Render.EnableColorMaskHsv = true;
-            ent.Render.MetalnessColorable = false;
+            //ent.Render.ColorMaskHsv = new Vector3(20, 80, 20);
+            //ent.Render.EnableColorMaskHsv = true;
+            //ent.Render.MetalnessColorable = false;
             ent.WorldMatrix = initialMatrix;
             MyEntities.Add(ent, true);
 
@@ -141,8 +141,9 @@ namespace klime.EntityCover
                 var force = forceDir * forceMag;
                 
                 // Reflect the force direction
-                var reflection = Vector3D.Reflect(forceDir, cGrid.WorldMatrix.Up);
-                var reflectedForce = (reflection + forceDir) * forceMag;
+                //problematic and untrustworthy
+               // var reflection = Vector3D.Reflect(forceDir, cGrid.WorldMatrix.Up);
+               // var reflectedForce = (reflection / forceDir) * forceMag;
 
                 cGrid.Physics.ApplyImpulse(force, cGrid.Physics.CenterOfMassWorld);
                 //cGrid.Physics.AddForce(MyPhysicsForceType.APPLY_WORLD_FORCE, reflectedForce, cGrid.Physics.CenterOfMassWorld, null);
