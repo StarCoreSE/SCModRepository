@@ -66,7 +66,7 @@ namespace klime.EntityCover
             var blockEnt = CreateBlocker(block.EntityId, block.WorldMatrix, modelName);
             allCoverEnts.Add(blockEnt);
 
-            MyAPIGateway.Utilities.ShowMessage("", $"Added cover: {block.EntityId}");
+            //MyAPIGateway.Utilities.ShowMessage("", $"Added cover: {block.EntityId}");
         }
 
         public void RemoveCover(IMyTerminalBlock block)
@@ -77,7 +77,7 @@ namespace klime.EntityCover
             blockEnt.Close();
             allCoverEnts.Remove(blockEnt);
 
-            MyAPIGateway.Utilities.ShowMessage("", $"Removed cover: {block.EntityId}");
+            //MyAPIGateway.Utilities.ShowMessage("", $"Removed cover: {block.EntityId}");
         }
 
 
