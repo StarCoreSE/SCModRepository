@@ -147,7 +147,7 @@ namespace klime.EntityCover
 
                 cGrid.Physics.ApplyImpulse(force, cGrid.Physics.CenterOfMassWorld);
                 //cGrid.Physics.AddForce(MyPhysicsForceType.APPLY_WORLD_FORCE, reflectedForce, cGrid.Physics.CenterOfMassWorld, null);
-                MyAPIGateway.Utilities.ShowMessage("", $"Hit: {cGrid.EntityId}, Force: {forceMag}");
+                //MyAPIGateway.Utilities.ShowMessage("", $"Hit: {cGrid.EntityId}, Force: {forceMag}");
             }
         }
 
