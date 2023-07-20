@@ -48,7 +48,7 @@ namespace klime.EntityCover
         public static EntityCover Instance;
         public List<BlockerEnt> allCoverEnts = new List<BlockerEnt>();
 
-        public string modelName = "REMlikeblocker2xB.mwm";
+        public string modelName = "REMlikeblocker2x_purple.mwm";
         public Vector3 modelDimensions = new Vector3(275, 275, 275); //250, 400, 80
 
         public override void Init(MyObjectBuilder_SessionComponent sessionComponent)
