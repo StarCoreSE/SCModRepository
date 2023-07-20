@@ -48,7 +48,7 @@ namespace klime.EntityCover
         public static EntityCover Instance;
         public List<BlockerEnt> allCoverEnts = new List<BlockerEnt>();
 
-        public string modelName = "REMlikeblocker2xB.mwm";
+        public string modelName = "REMlikeblocker2x_purple.mwm";
         public Vector3 modelDimensions = new Vector3(275, 275, 275); //250, 400, 80
 
         public override void Init(MyObjectBuilder_SessionComponent sessionComponent)
@@ -90,8 +90,8 @@ namespace klime.EntityCover
             ent.Init(null, modelPath, null, null, null);
             ent.DefinitionId = new MyDefinitionId(MyObjectBuilderType.Invalid, "CustomEntity");
             ent.Save = false;
-            //ent.Render.ColorMaskHsv = new Vector3(20, 80, 20);
-            //ent.Render.EnableColorMaskHsv = true;
+            ent.Render.EnableColorMaskHsv = true;
+            ent.Render.ColorMaskHsv = new Vector3(277, 87, 95);
             //ent.Render.MetalnessColorable = false;
             ent.WorldMatrix = initialMatrix;
             MyEntities.Add(ent, true);
