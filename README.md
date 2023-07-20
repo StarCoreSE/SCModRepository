@@ -18,10 +18,10 @@ In StarCore, teams build their own ships and battle for the spot of champion in 
 - enough space to download the entire git repo (~5gb)?
 
 ### Step 1:
-- Clone this repository to a folder on your computer somewhere.
+- ``Fork`` this repository to a folder on your computer. Name it something like SCModRepository-Yourname. This is where your edits can be made, and is apparently how actual projects do it.
 
 ### Step 2:
-- Make a branch for the changes you want to do.
+- Make a branch for the changes you want to do on your local repository.
 
 ### Step 3:
 - To test your changes ingame, Copy the mod you want to edit to your ``%Appdata%/SpaceEngineers/Mods`` folder.
