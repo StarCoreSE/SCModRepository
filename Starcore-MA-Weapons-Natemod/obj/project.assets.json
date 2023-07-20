@@ -185,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\AppData\\Roaming\\SpaceEngineers\\Mods\\Starcore-MA-Weapons-But-It-Was-Driven-Like-It-Was-Stolen\\CoreParts.csproj",
+      "projectUniqueName": "Y:\\Modding Assets\\SCModRepository\\Starcore-MA-Weapons-Natemod\\CoreParts.csproj",
       "projectName": "CoreParts",
-      "projectPath": "C:\\Users\\User\\AppData\\Roaming\\SpaceEngineers\\Mods\\Starcore-MA-Weapons-But-It-Was-Driven-Like-It-Was-Stolen\\CoreParts.csproj",
+      "projectPath": "Y:\\Modding Assets\\SCModRepository\\Starcore-MA-Weapons-Natemod\\CoreParts.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\AppData\\Roaming\\SpaceEngineers\\Mods\\Starcore-MA-Weapons-But-It-Was-Driven-Like-It-Was-Stolen\\obj\\",
+      "outputPath": "Y:\\Modding Assets\\SCModRepository\\Starcore-MA-Weapons-Natemod\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
