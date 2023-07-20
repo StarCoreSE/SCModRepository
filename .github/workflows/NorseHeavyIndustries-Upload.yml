@@ -2,8 +2,6 @@ name: "Upload NHI"
 
 on:
   push:
-  branches:
-      - "master"
     paths:
       - "NorseHeavyIndustries/**"
 jobs:

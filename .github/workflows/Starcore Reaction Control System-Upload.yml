@@ -2,8 +2,6 @@ name: "Upload to Starcore Reaction Control System"
 
 on:
   push:
-  branches:
-      - "master"
     paths:
       - "Starcore Reaction Control System/**"
 

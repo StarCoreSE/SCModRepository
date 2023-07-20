@@ -2,8 +2,6 @@ name: "Upload Anomaly-Solaris-Hypernautics"
 
 on:
   push:
-  branches:
-      - "master"
     paths:
       - "Anomaly-Solaris-Hypernautics/**"
 

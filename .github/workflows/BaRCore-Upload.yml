@@ -2,8 +2,6 @@ name: "Upload BaRCore"
 
 on:
   push:
-  branches:
-      - "master"
     paths:
       - "BaRCore/**"
 

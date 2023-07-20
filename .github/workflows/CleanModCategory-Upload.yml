@@ -2,8 +2,6 @@ name: "Upload to SCCleanDLCCattegories"
 
 on:
   push:
-  branches:
-      - "master"
     paths:
       - "SCCleanModCategories/**"
 

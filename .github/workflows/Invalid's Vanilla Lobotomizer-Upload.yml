@@ -2,8 +2,6 @@ name: "Upload Invalid"s Vanilla Lobotomizer"
 
 on:
   push:
-  branches:
-      - "master"
     paths:
       - "Invalid's Vanilla Lobotomizer/**"
 

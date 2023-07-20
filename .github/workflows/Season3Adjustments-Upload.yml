@@ -2,8 +2,6 @@ name: "Upload Season3Adjustments"
 
 on:
   push:
-  branches:
-      - "master"
     paths:
       - "Season3Adjustments/**"
 

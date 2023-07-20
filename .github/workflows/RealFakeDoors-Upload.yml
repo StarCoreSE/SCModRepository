@@ -2,8 +2,6 @@ name: "Upload RealFakeDoors"
 
 on:
   push:
-  branches:
-      - "master"
     paths:
       - "RealFakeDoors/**"
 

@@ -2,8 +2,6 @@ name: "Upload I NEED MORE JETPACK ACCELERATION"
 
 on:
   push:
-  branches:
-      - "master"
     paths:
       - "I NEED MORE JETPACK ACCELERATION/**"
 

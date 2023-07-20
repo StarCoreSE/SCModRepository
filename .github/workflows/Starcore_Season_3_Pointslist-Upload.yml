@@ -2,8 +2,6 @@ name: "Upload Starcore_Season_3_Pointslist"
 
 on:
   push:
-  branches:
-      - "master"
     paths:
       - "Starcore_Season_3_Pointslist/**"
 

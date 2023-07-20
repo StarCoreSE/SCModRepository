@@ -2,8 +2,6 @@ name: "Upload StarCore Tournament Weapon Category"
 
 on:
   push:
-  branches:
-      - "master"
     paths:
       - "StarCore Tournament Weapon Category/**"
 

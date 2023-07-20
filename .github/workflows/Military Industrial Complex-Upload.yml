@@ -2,8 +2,6 @@ name: "Upload Military Industrial Complex"
 
 on:
   push:
-  branches:
-      - "master"
     paths:
       - "Military Industrial Complex/**"
 

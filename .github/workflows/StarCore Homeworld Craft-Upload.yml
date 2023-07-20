@@ -2,8 +2,6 @@ name: "Upload StarCore Homeworld Craft"
 
 on:
   push:
-  branches:
-      - "master"
     paths:
       - "StarCore Homeworld Craft/**"
 

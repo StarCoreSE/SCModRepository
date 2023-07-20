@@ -2,8 +2,6 @@ name: "Upload Starcore-MA-Weapons-Natemod"
 
 on:
   push:
-  branches:
-      - "master"
     paths:
       - 'Starcore-MA-Weapons-Natemod/**'
 
