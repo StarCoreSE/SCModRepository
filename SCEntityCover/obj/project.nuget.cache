@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "F28dKzUj1LMH5EKdIoqwN7t/DLx73ezlT/xx+XRG7dsTDABtRWNrf/GmKmMzwN31b4Ne8FDvI4qO+Uq2plD/rg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Muzzled\\AppData\\Roaming\\SpaceEngineers\\Mods\\SCEntityCover\\SCEntityCover.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Muzzled\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Muzzled\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
