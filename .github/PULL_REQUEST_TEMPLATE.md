@@ -1,9 +1,16 @@
-**When merged this pull request will:**
-- _Describe what this pull request will do_
-- _Each change in a separate line_
 
-### IMPORTANT
 
-- [ ] If the contribution affects [the documentation](https://github.com/acemod/ACE3/tree/master/docs), please include your changes in this pull request so the documentation will appear on the [website](https://ace3.acemod.org/).
-- [ ] [Development Guidelines](https://ace3.acemod.org/wiki/development/) are read, understood and applied.
-- [ ] Title of this PR uses our standard template `Component - Add|Fix|Improve|Change|Make|Remove {changes}`.
+### ADDING A NEW MOD
+
+- First, the mod needs to be uploaded ingame once so a steamworkshop link is set.
+- Then add https://steamcommunity.com/id/starcoretv/  as a friend and contributor to the mod. 
+- Create a [Mod Name].yml file, and place it in your local repository's ``.github/workflows``  folder.
+- Copy the template from HERE into it.
+- Fill out the following fields with your mod's details:
+![image](https://github.com/StarCoreSE/SCModRepository/assets/51190031/f3697d5a-eb95-4bef-b3d4-d21306cffe85)
+
+
+
+
+### UPDATING AN EXISTING MOD
+- List changes made.
