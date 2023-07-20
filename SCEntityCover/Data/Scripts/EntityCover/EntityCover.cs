@@ -137,7 +137,7 @@ namespace klime.EntityCover
             {
                 isBouncing = true;
                 var forceDir = -1 * Vector3D.Normalize(cGrid.LinearVelocity + cGrid.Physics.AngularVelocity);
-                var forceMag = cGrid.Mass * (cGrid.Speed * 1.65f);
+                var forceMag = cGrid.Mass * ((cGrid.Speed + (float)cGrid.Physics.AngularVelocity.Length()) * 1.65f);
                 var force = forceDir * forceMag;
                 
                 // Reflect the force direction
