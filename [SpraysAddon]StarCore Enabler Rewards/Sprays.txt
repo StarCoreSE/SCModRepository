@@ -1,0 +1,245 @@
+[Bullet Dent 2]
+ID=4c5e478c-34ad-f05c-eeeb-029ac961c9dc
+Group=Battle Damage
+Flags=0
+
+[Bullet Dent]
+ID=b7593fb1-0d98-07c0-9666-ea4c5d85b2bd
+Group=Battle Damage
+Flags=0
+
+[bullet hole]
+ID=f7a1967a-099e-665c-7108-6a8fbfa73f65
+Group=Battle Damage
+Flags=0
+
+[Bullet Impact 1]
+ID=69a6d4b4-1415-a63f-766c-bcc2f777b064
+Group=Battle Damage
+Flags=0
+
+[Bullet Impact 1A]
+ID=174cd584-44fe-1ac7-8285-5e6da0170d96
+Group=Battle Damage
+Flags=0
+
+[Bullet Impact 2]
+ID=d30ed819-395d-a741-a9d7-9240b87516fe
+Group=Battle Damage
+Flags=0
+
+[Bullet Impact 2A]
+ID=d365bb21-4fd5-5416-4955-ec24d9ec448a
+Group=Battle Damage
+Flags=0
+
+[Bullet Impact 3]
+ID=977af181-f844-246f-85de-5a6c04072533
+Group=Battle Damage
+Flags=0
+
+[Bullet Impact 3A]
+ID=c607830d-1bb9-b01a-d143-249e2d23b8a4
+Group=Battle Damage
+Flags=0
+
+[Bullet Impact 4]
+ID=b3fa13e8-bf4d-5235-1e12-181a796c7280
+Group=Battle Damage
+Flags=0
+
+[Crack 1]
+ID=8d7dad3e-ff0e-0e42-223c-2df640a92cee
+Group=Battle Damage
+Flags=0
+
+[Crack 2]
+ID=ed99a0ed-ea82-b82b-f1e8-5c17c45cd448
+Group=Battle Damage
+Flags=0
+
+[Explosion Mark 1]
+ID=bc7c0354-5220-4071-3cbe-82f1f8412455
+Group=Battle Damage
+Flags=0
+
+[Explosion mark 2]
+ID=51343b2e-3c36-4e8a-b620-813d5abaef74
+Group=Battle Damage
+Flags=0
+
+[Patch 1]
+ID=7e01b576-4d15-6d5d-6f3d-e965901d7832
+Group=Battle Damage
+Flags=0
+
+[CRsLogo]
+ID=b7ae92d3-d66d-7ecd-c69c-592758052cdb
+Group=CYB
+Flags=0
+
+[CYB1]
+ID=60121ffb-f841-266e-a835-d33ca3e94c93
+Group=CYB
+Flags=0
+
+[Cybran_Logo]
+ID=ba9b16c3-c077-dccb-828f-5b05bd912c2d
+Group=CYB
+Flags=0
+
+[3b4]
+ID=803b9863-cb04-fb41-f8f9-8c28216a8217
+Group=gifs
+Flags=824180740
+
+[pet_muzz]
+ID=5b9366da-391f-7318-9464-59cc1d67a51d
+Group=gifs
+Flags=168296452
+
+[KST_StarCore_Logo_Neon]
+ID=097ad56f-b7f2-7837-55ce-c715553ab838
+Group=KST
+Flags=0
+
+[MCR1]
+ID=8200593e-ed36-2fd3-e980-56e42a2f668f
+Group=MCR
+Flags=0
+
+[MCR2]
+ID=1de9dc1b-6c57-9dae-0d5b-8abe75b10e13
+Group=MCR
+Flags=0
+
+[MCR3]
+ID=d2ea8ae1-2b60-c633-fcb2-503217a65c8f
+Group=MCR
+Flags=0
+
+[MCR3nobg]
+ID=327617e1-7e65-fa6d-6c23-4e5abdfcbb0b
+Group=MCR
+Flags=0
+
+[MCR4]
+ID=afa9de63-bd99-8822-4ae7-48e017194952
+Group=MCR
+Flags=0
+
+[MCR4nobg]
+ID=684689ef-fc4e-f57f-8311-81e4e46bba32
+Group=MCR
+Flags=0
+
+[1513749234567]
+ID=da0048f2-bbf0-dfc0-0ba2-a75e21754fe2
+Group=misc
+Flags=0
+
+[1527455191311]
+ID=fa19d74e-5c7e-f6be-64cb-9bea129b16d6
+Group=misc
+Flags=0
+
+[1552424_tilio_v1-ultrakill]
+ID=21f4b402-2ffd-9533-b839-3ac3e53eef58
+Group=misc
+Flags=0
+
+[1593704371389]
+ID=cbb75753-60ac-a0b6-41e0-a51d320697b8
+Group=misc
+Flags=0
+
+[Class_4_Laser_Safety_Sign__99900_1024x]
+ID=61f94477-3574-6c3e-a138-61301deefcee
+Group=misc
+Flags=0
+
+[donottouch]
+ID=96ac5a82-3c9e-9a7c-642c-8dc55d2d9572
+Group=misc
+Flags=0
+
+[Egg_logo_redux]
+ID=4d101276-d5fc-0de5-938e-7f01b95f5886
+Group=misc
+Flags=0
+
+[firefox_2022-12-07_20-41-29]
+ID=17414c4e-a97e-4c3e-21c9-6d90e8b661e6
+Group=misc
+Flags=0
+
+[HATE]
+ID=99f9d5ac-584e-1251-e306-64553ac0f42b
+Group=misc
+Flags=0
+
+[laser-danger-sign-s-2466]
+ID=f298d1c1-4c30-d5df-1af9-07ac51bd50a5
+Group=misc
+Flags=0
+
+[nomacs_2023-02-11_17-41-30]
+ID=90d29324-2cab-2e5f-5f8b-a1fae5842580
+Group=misc
+Flags=0
+
+[outofyourfriends]
+ID=7077428d-8fc8-64ce-98a5-f95dda7fe244
+Group=misc
+Flags=0
+
+[SEVIER-COUNTY-EMA_TDF_FIRE-DANGER-SCALE-FOR-MONDAY-4-APRIL-2022_040422]
+ID=79ba3edf-88aa-1a3c-1f0f-693b97ca970f
+Group=misc
+Flags=0
+
+[STOP_ENGINEERING_chart_meme]
+ID=28749513-d80d-acbc-13d6-cc5005117d03
+Group=misc
+Flags=0
+
+[vidthumbnail]
+ID=d3b90501-f143-bfae-4714-954b9430b149
+Group=misc
+Flags=0
+
+[Starcore]
+ID=9c7795b0-7bb0-1cf6-a6de-12a436ece71a
+Group=Starcore Logos
+Flags=0
+
+[YOUR_AD_HERE]
+ID=f8a93d21-5988-cbc2-a495-39eee2c397ed
+Group=Starcore Logos
+Flags=0
+
+[Best_Bug]
+ID=75728310-1168-4ef4-1f9e-c6751edf5d81
+Group=TGS
+Flags=155189252
+
+[TLD1]
+ID=28c15a33-99a7-1a25-3eef-8fc076e353a7
+Group=TLD
+Flags=0
+
+[TLD2]
+ID=1d5413d3-6201-2f53-a6a6-ddafbbb15e31
+Group=TLD
+Flags=16777220
+
+[UEF1]
+ID=d5fa1d0f-f138-d0b0-abcc-06fff0809742
+Group=UEF
+Flags=0
+
+[UEF2]
+ID=3da22c46-b41d-c852-616a-caad635e4d1e
+Group=UEF
+Flags=0
+

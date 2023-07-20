@@ -1,0 +1,89 @@
+<?xml version="1.0" ?>
+<Model Name="Generic_Banner_1x2">
+	<Parameter Name="RescaleFactor">1.0</Parameter>
+	<Parameter Name="Centered">false</Parameter>
+	<Parameter Name="RescaleToLengthInMeters">false</Parameter>
+	<Material Name="BlackMattePlastic">
+		<Parameter Name="Technique">MESH</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Cubes\BlackMattePlastic_cm.dds</Parameter>
+		<Parameter Name="NormalGlossTexture">Textures\Models\Cubes\BlackMattePlastic_ng.dds</Parameter>
+	</Material>
+	<Material Name="BlackMattePlastic.001">
+		<Parameter Name="Technique">MESH</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Cubes\BlackMattePlastic_cm.dds</Parameter>
+		<Parameter Name="NormalGlossTexture">Textures\Models\Cubes\BlackMattePlastic_ng.dds</Parameter>
+	</Material>
+	<Material Name="BlackMetal">
+		<Parameter Name="Technique">MESH</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Cubes\BlackMetal_cm.dds</Parameter>
+		<Parameter Name="NormalGlossTexture">Textures\Models\Cubes\BlackMetal_ng.dds</Parameter>
+	</Material>
+	<Material Name="Chrome">
+		<Parameter Name="Technique">MESH</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Cubes\Chrome_cm.dds</Parameter>
+		<Parameter Name="NormalGlossTexture">Textures\Models\Cubes\Chrome_ng.dds</Parameter>
+	</Material>
+	<Material Name="ClothBag">
+		<Parameter Name="Technique">MESH</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Cubes\ClothBag_cm.dds</Parameter>
+		<Parameter Name="NormalGlossTexture">Textures\Models\Cubes\ClothBag_ng.dds</Parameter>
+		<Parameter Name="AddMapsTexture">Textures\Models\Cubes\ClothBag_add.dds</Parameter>
+	</Material>
+	<Material Name="Construction">
+		<Parameter Name="Technique">MESH</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Cubes\Chrome_cm.dds</Parameter>
+		<Parameter Name="NormalGlossTexture">Textures\Models\Cubes\Chrome_ng.dds</Parameter>
+	</Material>
+	<Material Name="Construction.006">
+		<Parameter Name="Technique">MESH</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Cubes\Chrome_cm.dds</Parameter>
+		<Parameter Name="NormalGlossTexture">Textures\Models\Cubes\Chrome_ng.dds</Parameter>
+	</Material>
+	<Material Name="Construction.012">
+		<Parameter Name="Technique">MESH</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Cubes\Chrome_cm.dds</Parameter>
+		<Parameter Name="NormalGlossTexture">Textures\Models\Cubes\Chrome_ng.dds</Parameter>
+	</Material>
+	<Material Name="HAC_Logo">
+		<Parameter Name="Technique">DECAL_NOPREMULT</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\HAC_Logo_CM.dds</Parameter>
+		<Parameter Name="NormalGlossTexture">Textures\HAC_Logo_NG.dds</Parameter>
+		<Parameter Name="AlphamaskTexture">Textures\HAC_Logo_Alphamask.dds</Parameter>
+	</Material>
+	<Material Name="Metal_Shiny">
+		<Parameter Name="Technique">MESH</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Cubes\Aluminium_cm.dds</Parameter>
+		<Parameter Name="NormalGlossTexture">Textures\Models\Cubes\AluminiumGlossy_ng.dds</Parameter>
+	</Material>
+	<Material Name="PaintedMetal_Colorable">
+		<Parameter Name="Technique">MESH</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Cubes\PaintedMetalColorable_cm.dds</Parameter>
+		<Parameter Name="NormalGlossTexture">Textures\Models\Cubes\PaintedMetalColorable_ng.dds</Parameter>
+		<Parameter Name="AddMapsTexture">Textures\Models\Cubes\PaintedMetalColorable_add.dds</Parameter>
+	</Material>
+	<Material Name="PaintedMetal_Colorable.001">
+		<Parameter Name="Technique">MESH</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Cubes\PaintedMetalColorable_cm.dds</Parameter>
+		<Parameter Name="NormalGlossTexture">Textures\Models\Cubes\PaintedMetalColorable_ng.dds</Parameter>
+		<Parameter Name="AddMapsTexture">Textures\Models\Cubes\PaintedMetalColorable_add.dds</Parameter>
+	</Material>
+	<Material Name="PlasticWhite">
+		<Parameter Name="Technique">MESH</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Cubes\PlasticWhite_cm.dds</Parameter>
+		<Parameter Name="NormalGlossTexture">Textures\Models\Cubes\PlasticWhite_ng.dds</Parameter>
+	</Material>
+	<Material Name="TGS_Logo">
+		<Parameter Name="Technique">DECAL_NOPREMULT</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\TGS_Logo_CM.dds</Parameter>
+		<Parameter Name="NormalGlossTexture">Textures\TGS_Logo_NG.dds</Parameter>
+		<Parameter Name="AddMapsTexture">Textures\TGS_Logo_ADD.dds</Parameter>
+		<Parameter Name="AlphamaskTexture">Textures\TGS_Logo_Alphamask.dds</Parameter>
+	</Material>
+	<MaterialRef Name="SquarePlate"/>
+	<MaterialRef Name="BlackMattePlastic"/>
+	<MaterialRef Name="Construction"/>
+	<MaterialRef Name="Emissive"/>
+	<MaterialRef Name="Metal_Shiny"/>
+	<MaterialRef Name="PaintedMetal_Colorable"/>
+	<MaterialRef Name="PlasticWhite"/>
+</Model>

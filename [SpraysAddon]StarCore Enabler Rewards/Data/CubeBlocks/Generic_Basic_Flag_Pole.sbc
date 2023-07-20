@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition>
+			<Id>
+				<TypeId>CubeBlock</TypeId>
+				<SubtypeId>Generic_Basic_Flag_Pole</SubtypeId>
+			</Id>
+			<DisplayName>Generic Basic Flag Pole</DisplayName>
+			<Description>Generic Basic Flag Pole</Description>
+			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="2" z="2"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Generic_Basic_Flag_Pole.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="10"/>
+			</Components>
+			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="1.00" File="Models\Generic_Basic_Flag_Pole_BS1.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>Generic_Basic_Flag_Pole</BlockPairName>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

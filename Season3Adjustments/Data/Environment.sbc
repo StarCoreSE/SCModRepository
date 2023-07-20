@@ -1,0 +1,498 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Definition xsi:type="EnvironmentDefinition">
+    <Id>
+      <TypeId>EnvironmentDefinition</TypeId>
+      <SubtypeId>Default</SubtypeId>
+    </Id>
+    <LargeShipMaxAngularSpeed>1360</LargeShipMaxAngularSpeed>
+
+	<PlanetProperties>
+        <AtmosphereIntensityMultiplier>17</AtmosphereIntensityMultiplier>
+        <AtmosphereIntensityAmbientMultiplier>10</AtmosphereIntensityAmbientMultiplier>
+        <CloudsIntensityMultiplier>23</CloudsIntensityMultiplier>
+    </PlanetProperties>
+	
+    <FogProperties>
+      <FogMultiplier>0</FogMultiplier>
+      <FogDensity>0</FogDensity>
+      <FogColor>
+        <X>0</X>
+        <Y>0</Y>
+        <Z>0</Z>
+      </FogColor>
+    </FogProperties>
+
+	<SunProperties>
+	  <SunIntensity>150</SunIntensity>
+      <EnvironmentProbe>
+        <TimeOut>0.03</TimeOut>
+        <DrawDistance>1E-07</DrawDistance>
+        <AmbientScale>1</AmbientScale>
+        <AmbientMinClamp>0.92</AmbientMinClamp>
+        <AmbientMaxClamp>1</AmbientMaxClamp>
+      </EnvironmentProbe>
+      <EnvironmentLight>
+	  <SunColor>
+	  <X>1</X>
+	  <Y>1</Y>
+	  <Z>1</Z>
+	  </SunColor>
+	  <SunDiffuseFactor>1.1</SunDiffuseFactor>
+	  <SunGlossFactor>1.1</SunGlossFactor>
+        <SunDiscInnerDot>1.0</SunDiscInnerDot>
+        <SunDiscOuterDot>1.0</SunDiscOuterDot>
+		
+        <AmbientDiffuseFactor>0.15</AmbientDiffuseFactor>
+        <AmbientSpecularFactor>2</AmbientSpecularFactor>
+		 <GlassAmbient>0</GlassAmbient>
+        <AmbientForwardPass>0</AmbientForwardPass>
+        <AmbientGlobalMinimum>0</AmbientGlobalMinimum>
+        <AmbientGlobalDensity>0</AmbientGlobalDensity>
+        <AmbientGlobalMultiplier>0</AmbientGlobalMultiplier>
+      
+        <AODirLight>0.95</AODirLight>
+        <AOIndirectLight>0.5</AOIndirectLight>
+        <AOPointLight>0.7</AOPointLight>
+        <AOSpotLight>0.7</AOSpotLight>
+
+        <SkyboxBrightness>1.0</SkyboxBrightness>
+        <EnvSkyboxBrightness>5.0</EnvSkyboxBrightness>
+        <ShadowFadeoutMultiplier>0.1</ShadowFadeoutMultiplier>
+        <EnvShadowFadeoutMultiplier>1</EnvShadowFadeoutMultiplier>
+        <EnvAtmosphereBrightness>1.0</EnvAtmosphereBrightness>
+
+          <AmbientRadius>50.0</AmbientRadius>
+          <AmbientLightsGatherRadius>15</AmbientLightsGatherRadius>
+      </EnvironmentLight>
+	  	
+    </SunProperties>
+    <!-- Disables vignette effect -->
+    <PostProcessSettings>
+        <EnableTonemapping>true</EnableTonemapping>
+        <EnableEyeAdaptation>true</EnableEyeAdaptation>
+        <HighQualityBloom>true</HighQualityBloom>
+        <BloomAntiFlickerFilter>true</BloomAntiFlickerFilter>
+        
+      
+      <HistogramLogMin>-3</HistogramLogMin>
+      <HistogramLogMax>4</HistogramLogMax>
+      <HistogramFilterMin>65</HistogramFilterMin>
+      <HistogramFilterMax>98</HistogramFilterMax>
+      <HistogramSkyboxFactor>0.25</HistogramSkyboxFactor>
+      <MinEyeAdaptationLogBrightness>-6.0</MinEyeAdaptationLogBrightness>
+      <MaxEyeAdaptationLogBrightness>0.95</MaxEyeAdaptationLogBrightness>
+      <DirtTexture>Textures\SunGlare\Dirt.dds</DirtTexture>
+      <ChromaticIterations>1</ChromaticIterations>
+      <EyeAdaptationPrioritizeScreenCenter>false</EyeAdaptationPrioritizeScreenCenter>
+      <Data>
+        <Contrast>1.0</Contrast>
+        <Brightness>1.25</Brightness>
+        <Saturation>1.025</Saturation>
+        <BrightnessFactorR>1</BrightnessFactorR>
+        <BrightnessFactorG>1</BrightnessFactorG>
+        <BrightnessFactorB>1</BrightnessFactorB>
+                <LightColor>
+                    <X>1</X>
+                    <Y>0.9</Y>
+                    <Z>0.5</Z>
+                </LightColor>
+                <DarkColor>
+                    <X>0.2</X>
+                    <Y>0.05</Y>
+                    <Z>0</Z>
+                </DarkColor>
+        <ConstantLuminance>0.1</ConstantLuminance>
+        <LuminanceExposure>0.0</LuminanceExposure>
+        <EyeAdaptationTau>0.4</EyeAdaptationTau>
+        <BloomExposure>5.05</BloomExposure>
+        <BloomLumaThreshold>5.0</BloomLumaThreshold>
+        <BloomMult>0.02</BloomMult>
+        <BloomEmissiveness>100</BloomEmissiveness>
+		<BloomSize>1</BloomSize>
+        <BloomDepthStrength>2.0</BloomDepthStrength>
+        <BloomDepthSlope>0.3</BloomDepthSlope>
+        <!--<LogLumThreshold>-4</LogLumThreshold>-->
+        <EyeAdaptationSpeedUp>2</EyeAdaptationSpeedUp>
+        <EyeAdaptationSpeedDown>2</EyeAdaptationSpeedDown>
+        <WhitePoint>11.2</WhitePoint>
+        <BloomDirtRatio>0.75</BloomDirtRatio>
+      <GrainSize>0</GrainSize>
+      <GrainAmount>0.5</GrainAmount>
+      <GrainStrength>0.0</GrainStrength>
+      <ChromaticFactor>0.003</ChromaticFactor>
+      <Vibrance>0.2</Vibrance>
+          <VignetteStart>0.84</VignetteStart>
+          <VignetteLength>2.5</VignetteLength>
+    </Data>
+    </PostProcessSettings>
+	 <SSAOSettings>
+            <Data>
+                <MinRadius>0.115</MinRadius>
+                <MaxRadius>25</MaxRadius>
+                <RadiusGrowZScale>1.007</RadiusGrowZScale>
+                <Falloff>3.08</Falloff>
+                <RadiusBias>0.25</RadiusBias>
+                <Contrast>2.617</Contrast>
+                <Normalization>0.075</Normalization>
+                <ColorScale>0.6</ColorScale>
+            </Data>
+        </SSAOSettings>
+
+    <HBAOSettings>
+      <Enabled>true</Enabled>
+
+      <Radius>2.75</Radius>
+      <Bias>0.2</Bias>
+        
+      <UseGBufferNormals>true</UseGBufferNormals>
+
+      <SmallScaleAO>1</SmallScaleAO>
+      <LargeScaleAO>1.5</LargeScaleAO>
+
+      <PowerExponent>4</PowerExponent>
+
+      <ForegroundAOEnable>true</ForegroundAOEnable>
+      <ForegroundViewDepth>66.0</ForegroundViewDepth>
+
+      <BackgroundAOEnable>true</BackgroundAOEnable>
+      <BackgroundViewDepth>200</BackgroundViewDepth>
+
+      <DepthClampToEdge>false</DepthClampToEdge>
+      <DepthThresholdEnable>true</DepthThresholdEnable>
+      <DepthThreshold>50</DepthThreshold>
+      <DepthThresholdSharpness>100</DepthThresholdSharpness>
+
+      <BlurEnable>true</BlurEnable>
+      <BlurRadius4>true</BlurRadius4>
+      <BlurSharpness>50.0</BlurSharpness>
+
+      <BlurSharpnessFunctionEnable>true</BlurSharpnessFunctionEnable>
+      <BlurSharpnessFunctionForegroundScale>4.0</BlurSharpnessFunctionForegroundScale>
+      <BlurSharpnessFunctionForegroundViewDepth>0</BlurSharpnessFunctionForegroundViewDepth>
+      <BlurSharpnessFunctionBackgroundViewDepth>1.0</BlurSharpnessFunctionBackgroundViewDepth>
+    </HBAOSettings>
+	    <ShadowSettings>
+      <Data>
+        <ShowShadowCascadeSplits>false</ShowShadowCascadeSplits>
+        <UpdateCascadesEveryFrame>false</UpdateCascadesEveryFrame>
+        <EnableShadowBlur>true</EnableShadowBlur>
+        <ShadowCascadeMaxDistance>3000</ShadowCascadeMaxDistance>
+        <ShadowCascadeMaxDistanceMultiplierMedium>5</ShadowCascadeMaxDistanceMultiplierMedium>
+        <ShadowCascadeMaxDistanceMultiplierHigh>9</ShadowCascadeMaxDistanceMultiplierHigh>
+        <ShadowCascadeMaxDistanceMultiplierExtreme>10</ShadowCascadeMaxDistanceMultiplierExtreme>
+        <ShadowCascadeSpreadFactor>0</ShadowCascadeSpreadFactor>
+        <ShadowCascadeZOffset>40000</ShadowCascadeZOffset>
+        <LightDirectionChangeDelayMultiplier>25</LightDirectionChangeDelayMultiplier>
+        <DisplayFrozenShadowCascade>false</DisplayFrozenShadowCascade>
+        <ReflectorShadowDistanceLow>0</ReflectorShadowDistanceLow>
+        <ReflectorShadowDistanceMedium>0.4</ReflectorShadowDistanceMedium>
+        <ReflectorShadowDistanceHigh>1.0</ReflectorShadowDistanceHigh>
+        <ReflectorShadowDistanceExtreme>1.0</ReflectorShadowDistanceExtreme>
+        <LightDirectionDifferenceThreshold>0.0175</LightDirectionDifferenceThreshold>
+        <ZBias>0.01</ZBias>
+        <CascadesCount>6</CascadesCount>
+      </Data>
+    </ShadowSettings>
+	
+    <LowLoddingSettings>
+      <!-- lodding selection is set here -->
+      <GBuffer>
+        <LodShift>0</LodShift>
+        <MinLod>1</MinLod>
+      </GBuffer>
+      <CascadeDepths>
+        <CascadeDepth> <!-- shadow cascade num. 0 -->
+          <LodShiftVisible>1</LodShiftVisible>
+          <LodShift>3</LodShift>
+          <MinLod>1</MinLod>
+        </CascadeDepth>
+        <CascadeDepth> <!-- shadow cascade num. 1 -->
+          <LodShiftVisible>1</LodShiftVisible>
+          <LodShift>3</LodShift>
+          <MinLod>1</MinLod>
+        </CascadeDepth>
+        <CascadeDepth> <!-- shadow cascade num. 2 -->
+          <LodShiftVisible>1</LodShiftVisible>
+          <LodShift>3</LodShift>
+          <MinLod>1</MinLod>
+        </CascadeDepth>
+        <CascadeDepth> <!-- shadow cascade num. 3 -->
+          <LodShiftVisible>3</LodShiftVisible>
+          <LodShift>3</LodShift>
+          <MinLod>1</MinLod>
+        </CascadeDepth>
+        <CascadeDepth> <!-- shadow cascade num. 4 -->
+          <LodShiftVisible>3</LodShiftVisible>
+          <LodShift>3</LodShift>
+          <MinLod>1</MinLod>
+        </CascadeDepth>
+        <CascadeDepth> <!-- shadow cascade num. 5 -->
+          <LodShiftVisible>3</LodShiftVisible>
+          <LodShift>3</LodShift>
+          <MinLod>1</MinLod>
+        </CascadeDepth>
+      </CascadeDepths>
+      <SingleDepth>
+        <LodShiftVisible>1</LodShiftVisible>
+        <LodShift>3</LodShift>
+        <MinLod>1</MinLod>
+      </SingleDepth>
+      <Forward>
+        <LodShiftVisible>10</LodShiftVisible>
+        <LodShift>10</LodShift>
+        <MinLod>10</MinLod>
+      </Forward>
+      <Global>
+        <ObjectDistanceAdd>0</ObjectDistanceAdd>
+        <ObjectDistanceMult>4</ObjectDistanceMult>
+        <MinTransitionInSeconds>0.2</MinTransitionInSeconds>
+        <MaxTransitionInSeconds>0.4</MaxTransitionInSeconds>
+        <TransitionDeadZoneConst>2.0</TransitionDeadZoneConst>
+        <TransitionDeadZoneDistanceMult>0.5</TransitionDeadZoneDistanceMult>
+        <IsUpdateEnabled>true</IsUpdateEnabled>
+        <MaxDistanceForSmoothCameraMovement>11</MaxDistanceForSmoothCameraMovement> <!--- if this value of units per frame is reached, the lods are skipped (no transition) -->
+        <HisteresisRatio>0.1</HisteresisRatio>
+      </Global>
+    </LowLoddingSettings>
+
+    <MediumLoddingSettings>
+      <!-- lodding selection is set here -->
+      <GBuffer>
+        <LodShift>0</LodShift>
+        <MinLod>1</MinLod>
+      </GBuffer>
+      <CascadeDepths>
+        <CascadeDepth>
+          <!-- shadow cascade num. 0 -->
+          <LodShift>2</LodShift>
+          <MinLod>1</MinLod>
+        </CascadeDepth>
+        <CascadeDepth>
+          <!-- shadow cascade num. 1 -->
+          <LodShift>2</LodShift>
+          <MinLod>1</MinLod>
+        </CascadeDepth>
+        <CascadeDepth>
+          <!-- shadow cascade num. 2 -->
+          <LodShift>2</LodShift>
+          <MinLod>1</MinLod>
+        </CascadeDepth>
+        <CascadeDepth>
+          <!-- shadow cascade num. 3 -->
+          <LodShift>2</LodShift>
+          <MinLod>1</MinLod>
+        </CascadeDepth>
+        <CascadeDepth>
+          <!-- shadow cascade num. 4 -->
+          <LodShift>2</LodShift>
+          <MinLod>1</MinLod>
+        </CascadeDepth>
+        <CascadeDepth>
+          <!-- shadow cascade num. 5 -->
+          <LodShift>2</LodShift>
+          <MinLod>1</MinLod>
+        </CascadeDepth>
+      </CascadeDepths>
+      <SingleDepth>
+        <LodShift>2</LodShift>
+        <MinLod>1</MinLod>
+      </SingleDepth>
+      <Global>
+        <ObjectDistanceAdd>-5</ObjectDistanceAdd>
+        <ObjectDistanceMult>2</ObjectDistanceMult>
+        <MinTransitionInSeconds>0.2</MinTransitionInSeconds>
+        <MaxTransitionInSeconds>0.4</MaxTransitionInSeconds>
+        <TransitionDeadZoneConst>2.0</TransitionDeadZoneConst>
+        <TransitionDeadZoneDistanceMult>0.5</TransitionDeadZoneDistanceMult>
+        <IsUpdateEnabled>true</IsUpdateEnabled>
+        <MaxDistanceForSmoothCameraMovement>11</MaxDistanceForSmoothCameraMovement><!--- if this value of units per frame is reached, the lods are skipped (no transition) -->
+        <HisteresisRatio>0.1</HisteresisRatio>
+      </Global>
+    </MediumLoddingSettings>
+
+    <HighLoddingSettings>
+      <!-- lodding selection is set here -->
+      <GBuffer>
+        <LodShift>0</LodShift>
+        <MinLod>0</MinLod>
+      </GBuffer>
+      <CascadeDepths>
+        <CascadeDepth>
+          <!-- shadow cascade num. 0 -->
+          <LodShift>2</LodShift>
+          <MinLod>0</MinLod>
+        </CascadeDepth>
+        <CascadeDepth>
+          <!-- shadow cascade num. 1 -->
+          <LodShift>2</LodShift>
+          <MinLod>0</MinLod>
+        </CascadeDepth>
+        <CascadeDepth>
+          <!-- shadow cascade num. 2 -->
+          <LodShift>2</LodShift>
+          <MinLod>0</MinLod>
+        </CascadeDepth>
+        <CascadeDepth>
+          <!-- shadow cascade num. 3 -->
+          <LodShift>2</LodShift>
+          <MinLod>0</MinLod>
+        </CascadeDepth>
+        <CascadeDepth>
+          <!-- shadow cascade num. 4 -->
+          <LodShift>2</LodShift>
+          <MinLod>0</MinLod>
+        </CascadeDepth>
+        <CascadeDepth>
+          <!-- shadow cascade num. 5 -->
+          <LodShift>2</LodShift>
+          <MinLod>0</MinLod>
+        </CascadeDepth>
+      </CascadeDepths>
+      <SingleDepth>
+        <LodShift>2</LodShift>
+        <MinLod>0</MinLod>
+      </SingleDepth>
+      <Global>
+        <ObjectDistanceAdd>0</ObjectDistanceAdd>
+        <ObjectDistanceMult>1</ObjectDistanceMult>
+        <MinTransitionInSeconds>0.25</MinTransitionInSeconds>
+        <MaxTransitionInSeconds>1</MaxTransitionInSeconds>
+        <TransitionDeadZoneConst>2.0</TransitionDeadZoneConst>
+        <TransitionDeadZoneDistanceMult>0.5</TransitionDeadZoneDistanceMult>
+        <IsUpdateEnabled>true</IsUpdateEnabled>
+        <MaxDistanceForSmoothCameraMovement>11</MaxDistanceForSmoothCameraMovement> <!--- if this value of units per frame is reached, the lods are skipped (no transition) -->
+        <HisteresisRatio>0.1</HisteresisRatio>
+      </Global>
+    </HighLoddingSettings>
+      
+      <ExtremeLoddingSettings>
+          <!-- lodding selection is set here -->
+          <GBuffer>
+              <LodShift>0</LodShift>
+              <MinLod>0</MinLod>
+          </GBuffer>
+          <CascadeDepths>
+              <CascadeDepth>
+                  <!-- shadow cascade num. 0 -->
+                  <LodShift>0</LodShift>
+                  <MinLod>0</MinLod>
+              </CascadeDepth>
+              <CascadeDepth>
+                  <!-- shadow cascade num. 1 -->
+                  <LodShift>0</LodShift>
+                  <MinLod>0</MinLod>
+              </CascadeDepth>
+              <CascadeDepth>
+                  <!-- shadow cascade num. 2 -->
+                  <LodShift>0</LodShift>
+                  <MinLod>0</MinLod>
+              </CascadeDepth>
+              <CascadeDepth>
+                  <!-- shadow cascade num. 3 -->
+                  <LodShift>0</LodShift>
+                  <MinLod>0</MinLod>
+              </CascadeDepth>
+              <CascadeDepth>
+                  <!-- shadow cascade num. 4 -->
+                  <LodShift>0</LodShift>
+                  <MinLod>0</MinLod>
+              </CascadeDepth>
+              <CascadeDepth>
+                  <!-- shadow cascade num. 5 -->
+                  <LodShift>0</LodShift>
+                  <MinLod>0</MinLod>
+              </CascadeDepth>
+          </CascadeDepths>
+          <SingleDepth>
+              <LodShift>0</LodShift>
+              <MinLod>0</MinLod>
+          </SingleDepth>
+          <Global>
+              <ObjectDistanceAdd>0</ObjectDistanceAdd>
+              <ObjectDistanceMult>0</ObjectDistanceMult>
+              <MinTransitionInSeconds>0.25</MinTransitionInSeconds>
+              <MaxTransitionInSeconds>1</MaxTransitionInSeconds>
+              <TransitionDeadZoneConst>2.0</TransitionDeadZoneConst>
+              <TransitionDeadZoneDistanceMult>0.5</TransitionDeadZoneDistanceMult>
+              <IsUpdateEnabled>true</IsUpdateEnabled>
+              <MaxDistanceForSmoothCameraMovement>11</MaxDistanceForSmoothCameraMovement> <!--- if this value of units per frame is reached, the lods are skipped (no transition) -->
+              <HisteresisRatio>0.1</HisteresisRatio>
+          </Global>
+      </ExtremeLoddingSettings>
+
+	    <ContourHighlightColor>
+      <X>0.85</X>
+      <Y>0.95</Y>
+      <Z>1</Z>
+      <W>0.05</W>
+    </ContourHighlightColor>
+    <ContourHighlightThickness>4.5</ContourHighlightThickness>
+    <HighlightPulseInSeconds>5</HighlightPulseInSeconds>
+	
+	         <EnvironmentalParticles>
+    <ParticleType>
+      <Id>
+        <TypeId>MyObjectBuilder_EnvironmentalParticleLogicSpace</TypeId>
+        <SubtypeId>SpaceParticles</SubtypeId>
+      </Id>
+      <Material>Stardust</Material>
+      <Color>
+        <X>0.375</X>
+        <Y>0.375</Y>
+        <Z>0.375</Z>
+        <W>0.375</W>
+      </Color>
+      <MaterialPlanet>Stardust</MaterialPlanet>
+      <ColorPlanet>
+        <X>1.0</X>
+        <Y>1.0</Y>
+        <Z>1.0</Z>
+        <W>0.5</W>
+      </ColorPlanet>
+      <MaxSpawnDistance>10</MaxSpawnDistance>
+      <DespawnDistance>15</DespawnDistance>
+      <Density>0.0000235</Density>
+      <MaxLifeTime>1500</MaxLifeTime>
+      <MaxParticles>128</MaxParticles>
+    </ParticleType>
+    <ParticleType>
+      <Id>
+        <TypeId>MyObjectBuilder_EnvironmentalParticleLogicFireFly</TypeId>
+        <SubtypeId>Firefly</SubtypeId>
+      </Id>
+      <Material>Firefly</Material>
+      <Color>
+        <X>0.75</X>
+        <Y>0.75</Y>
+        <Z>0.15</Z>
+        <W>0.75</W>
+      </Color>
+      <MaxSpawnDistance>75</MaxSpawnDistance>
+      <DespawnDistance>125</DespawnDistance>
+      <Density>0.15</Density>
+      <MaxLifeTime>15000</MaxLifeTime>
+      <MaxParticles>48</MaxParticles>
+    </ParticleType>
+    <!--<ParticleType>
+      <Id>
+        <TypeId>MyObjectBuilder_EnvironmentalParticleLogicGrassland</TypeId>
+        <SubtypeId>Grassland</SubtypeId>
+      </Id>
+      <Material>Dandelion01</Material>
+      <Color>
+        <X>1.0</X>
+        <Y>1.0</Y>
+        <Z>1.0</Z>
+        <W>1.0</W>
+      </Color>
+      <MaxSpawnDistance>50</MaxSpawnDistance>
+      <DespawnDistance>90</DespawnDistance>
+      <Density>1.0</Density>
+      <MaxLifeTime>20000</MaxLifeTime>
+      <MaxParticles>48</MaxParticles>
+    </ParticleType>-->
+  </EnvironmentalParticles>
+  </Definition>
+</Definitions>
