@@ -16,16 +16,25 @@ using VRageMath;
 
 namespace klime.EntityCover
 {
-    public class BlockerEnt: MyEntity, IMyDestroyableObject
+    public class BlockerEnt : MyEntity, IMyDestroyableObject
     {
         public float Integrity => float.MaxValue;
         public bool UseDamageSystem => true;
         public long attachedEntityId;
-        public string modelName;
+        public string modelName; // Add the modelName field
 
-        public BlockerEnt(long attachedEntityId, string modelName)
+        public BlockerEnt(long attachedEntityId, string modelName) // Modify the constructor
         {
             this.attachedEntityId = attachedEntityId;
+            this.modelName = modelName;
+        }
+
+        public long BatteryBlockId { get; private set; }
+
+        public BlockerEnt(long attachedEntityId, long batteryBlockId, string modelName) // Modify the constructor
+        {
+            this.attachedEntityId = attachedEntityId;
+            this.BatteryBlockId = batteryBlockId; // Store the battery ID
             this.modelName = modelName;
         }
 
@@ -56,7 +65,7 @@ namespace klime.EntityCover
             Instance = this;
         }
 
-        public void AddCover(IMyTerminalBlock block)
+        public void AddCover(IMyTerminalBlock block, string modelName) // Add the modelName parameter
         {
             var cGrid = block.CubeGrid as MyCubeGrid;
             cGrid.ConvertToStatic();
@@ -69,10 +78,9 @@ namespace klime.EntityCover
             //MyAPIGateway.Utilities.ShowMessage("", $"Added cover: {block.EntityId}");
         }
 
-        public void RemoveCover(IMyTerminalBlock block)
+        public void RemoveCover(IMyTerminalBlock block, string modelName)
         {
-            var blockEnt = allCoverEnts.Find(x => x.attachedEntityId == block.EntityId);
-            if (blockEnt == null) return;
+            var blockEnt = CreateBlocker(block.EntityId, block.WorldMatrix, modelName); // Use the modelName parameter            if (blockEnt == null) return;
 
             blockEnt.Close();
             allCoverEnts.Remove(blockEnt);
@@ -82,9 +90,11 @@ namespace klime.EntityCover
 
 
 
-        private BlockerEnt CreateBlocker(long attachedEntityId, MatrixD initialMatrix, string modelName)
+        private BlockerEnt CreateBlocker(long attachedEntityId, MatrixD initialMatrix, string modelName) // Modify the method signature
         {
-            var ent = new BlockerEnt(attachedEntityId, modelName);
+            var ent = new BlockerEnt(attachedEntityId, modelName); // Use the modelName parameter
+
+            // Update the model path based on the modelName parameter
             string modelPath = ModContext.ModPath + "\\Models\\" + modelName;
 
             ent.Init(null, modelPath, null, null, null);

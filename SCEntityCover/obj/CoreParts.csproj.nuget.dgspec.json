@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Muzzled\\AppData\\Roaming\\SpaceEngineers\\Mods\\SCEntityCover\\CoreParts.csproj": {}
+    "C:\\Users\\User\\AppData\\Roaming\\SpaceEngineers\\Mods\\SCEntityCover\\CoreParts.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Muzzled\\AppData\\Roaming\\SpaceEngineers\\Mods\\SCEntityCover\\CoreParts.csproj": {
+    "C:\\Users\\User\\AppData\\Roaming\\SpaceEngineers\\Mods\\SCEntityCover\\CoreParts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Muzzled\\AppData\\Roaming\\SpaceEngineers\\Mods\\SCEntityCover\\CoreParts.csproj",
+        "projectUniqueName": "C:\\Users\\User\\AppData\\Roaming\\SpaceEngineers\\Mods\\SCEntityCover\\CoreParts.csproj",
         "projectName": "CoreParts",
-        "projectPath": "C:\\Users\\Muzzled\\AppData\\Roaming\\SpaceEngineers\\Mods\\SCEntityCover\\CoreParts.csproj",
-        "packagesPath": "C:\\Users\\Muzzled\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Muzzled\\AppData\\Roaming\\SpaceEngineers\\Mods\\SCEntityCover\\obj\\",
+        "projectPath": "C:\\Users\\User\\AppData\\Roaming\\SpaceEngineers\\Mods\\SCEntityCover\\CoreParts.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\AppData\\Roaming\\SpaceEngineers\\Mods\\SCEntityCover\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Muzzled\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -58,7 +58,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
