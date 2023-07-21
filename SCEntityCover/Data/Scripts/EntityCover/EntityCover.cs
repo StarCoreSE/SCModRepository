@@ -22,6 +22,13 @@ namespace klime.EntityCover
         public bool UseDamageSystem => true;
         public long attachedEntityId;
         public string modelName; // Add the modelName field
+        private Vector3 modelDimensions;
+
+        public Vector3 ModelDimensions // Add the property to get/set the model dimensions
+        {
+            get { return modelDimensions; }
+            set { modelDimensions = value; }
+        }
 
         public BlockerEnt(long attachedEntityId, string modelName) // Modify the constructor
         {
@@ -57,7 +64,6 @@ namespace klime.EntityCover
         public static EntityCover Instance;
         public List<BlockerEnt> allCoverEnts = new List<BlockerEnt>();
 
-        public Vector3 modelDimensions = new Vector3(275, 275, 275); //250, 400, 80
 
         public override void Init(MyObjectBuilder_SessionComponent sessionComponent)
         {
@@ -93,35 +99,50 @@ namespace klime.EntityCover
 
 
 
-        private BlockerEnt CreateBlocker(long attachedEntityId, MatrixD initialMatrix, string modelName) // Modify the method signature
+        private BlockerEnt CreateBlocker(long attachedEntityId, MatrixD initialMatrix, string modelName)
         {
-            var ent = new BlockerEnt(attachedEntityId, modelName); // Use the modelName parameter
+            var ent = new BlockerEnt(attachedEntityId, modelName);
 
-            // Update the model path based on the modelName parameter
             string modelPath = ModContext.ModPath + "\\Models\\" + modelName;
 
             ent.Init(null, modelPath, null, null, null);
             ent.DefinitionId = new MyDefinitionId(MyObjectBuilderType.Invalid, "CustomEntity");
             ent.Save = false;
-            //ent.Render.EnableColorMaskHsv = true;
-            //ent.Render.ColorMaskHsv = new Vector3(277, 87, 95);
-            //ent.Render.MetalnessColorable = false;
             ent.WorldMatrix = initialMatrix;
             MyEntities.Add(ent, true);
 
-            CreateBlockerPhysics(ent);
+            // Retrieve the model dimensions based on the modelName
+            Vector3 modelDimensions = GetModelDimensions(modelName);
+
+            CreateBlockerPhysics(ent, modelDimensions); // Pass the modelDimensions parameter
             return ent;
         }
 
-        private void CreateBlockerPhysics(BlockerEnt ent)
+        private void CreateBlockerPhysics(BlockerEnt ent, Vector3 modelDimensions)
         {
             PhysicsSettings settings = new PhysicsSettings();
             settings.RigidBodyFlags |= RigidBodyFlag.RBF_STATIC;
             settings.DetectorColliderCallback = HitCallback;
             settings.Entity = ent;
             settings.WorldMatrix = ent.WorldMatrix;
-            //ent.Render.ColorMaskHsv = new Vector3(0, 0, 0);
             MyAPIGateway.Physics.CreateBoxPhysics(settings, modelDimensions, 0f);
+        }
+
+        private Vector3 GetModelDimensions(string modelName)
+        {
+            // Add cases for each modelName and set their respective model dimensions
+            switch (modelName)
+            {
+                case "REMlikeblocker2x_purple.mwm":
+                    return new Vector3(275, 275, 275);
+                case "REMlikeblocker2x.mwm":
+                    return new Vector3(275, 275, 275);
+                case "eveobstacle3.mwm":
+                    return new Vector3(180, 60, 500);
+                // Add more cases for additional modelNames and their respective model dimensions
+                default:
+                    return new Vector3(100, 100, 100); // Default model dimensions
+            }
         }
 
         private bool isBouncing = false;
