@@ -139,6 +139,8 @@ namespace klime.EntityCover
                     return new Vector3(275, 275, 275);
                 case "eveobstacle3.mwm":
                     return new Vector3(180, 60, 500);
+                case "eveobstacle2.mwm":
+                    return new Vector3(300, 150, 700);
                 // Add more cases for additional modelNames and their respective model dimensions
                 default:
                     return new Vector3(100, 100, 100); // Default model dimensions
