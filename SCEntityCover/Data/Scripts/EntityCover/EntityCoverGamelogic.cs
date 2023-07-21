@@ -25,6 +25,7 @@ namespace klime.EntityCover
             // if (!MyAPIGateway.Session.IsServer) return;
 
             entityBattery = Entity as IMyBatteryBlock;
+            entityBattery.OnClose += EntityBattery_OnClose;
             NeedsUpdate = MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
 
             // Set the modelName based on the subtype of the battery block
@@ -37,6 +38,11 @@ namespace klime.EntityCover
                 modelName = "REMlikeblocker2x.mwm"; // Set the model name for the second variant
             }
             // Add more else-if blocks for additional variants...
+        }
+
+        private void EntityBattery_OnClose(IMyEntity obj)
+        {
+            Close();
         }
 
         public override void UpdateOnceBeforeFrame()
@@ -57,9 +63,10 @@ namespace klime.EntityCover
 
         public override void Close()
         {
-            if (EntityCover.Instance == null) return;
+            // Get entityId from block
+            long entityId = entityBattery.EntityId;
 
-            EntityCover.Instance.RemoveCover((IMyTerminalBlock)entityBattery, modelName);
+            EntityCover.Instance.RemoveCover(entityId, modelName);
         }
     }
 }

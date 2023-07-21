@@ -78,14 +78,18 @@ namespace klime.EntityCover
             //MyAPIGateway.Utilities.ShowMessage("", $"Added cover: {block.EntityId}");
         }
 
-        public void RemoveCover(IMyTerminalBlock block, string modelName)
+        public void RemoveCover(long entityId, string modelName)
         {
-            var blockEnt = CreateBlocker(block.EntityId, block.WorldMatrix, modelName); // Use the modelName parameter            if (blockEnt == null) return;
+            // Find by entityId
+            var blockEnt = allCoverEnts.Find(x => x.attachedEntityId == entityId);
 
-            blockEnt.Close();
-            allCoverEnts.Remove(blockEnt);
+            if (blockEnt != null)
+            {
+                allCoverEnts.Remove(blockEnt);
 
-            //MyAPIGateway.Utilities.ShowMessage("", $"Removed cover: {block.EntityId}");
+                // Close the entity
+                blockEnt.Close();
+            }
         }
 
 
