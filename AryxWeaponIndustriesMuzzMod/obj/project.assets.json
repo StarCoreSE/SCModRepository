@@ -185,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\AppData\\Roaming\\SpaceEngineers\\Mods\\AryxWeaponIndustriesMuzzMod\\CoreParts.csproj",
+      "projectUniqueName": "Y:\\Modding Assets\\SCModRepository\\AryxWeaponIndustriesMuzzMod\\CoreParts.csproj",
       "projectName": "CoreParts",
-      "projectPath": "C:\\Users\\User\\AppData\\Roaming\\SpaceEngineers\\Mods\\AryxWeaponIndustriesMuzzMod\\CoreParts.csproj",
+      "projectPath": "Y:\\Modding Assets\\SCModRepository\\AryxWeaponIndustriesMuzzMod\\CoreParts.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\AppData\\Roaming\\SpaceEngineers\\Mods\\AryxWeaponIndustriesMuzzMod\\obj\\",
+      "outputPath": "Y:\\Modding Assets\\SCModRepository\\AryxWeaponIndustriesMuzzMod\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
