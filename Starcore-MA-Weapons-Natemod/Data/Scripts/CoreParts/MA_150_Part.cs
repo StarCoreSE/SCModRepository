@@ -289,7 +289,7 @@ namespace Scripts {
             HardPoint = new HardPointDef
             {
                 PartName = "Tiger 150mm", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
-                DeviateShotAngle = 0.2f, // Projectile inaccuracy in degrees.
+                DeviateShotAngle = 1.2f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 4f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
                 DelayCeaseFire = 20, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released.
@@ -352,7 +352,7 @@ namespace Scripts {
                 {
                     RateOfFire = 800, // Set this to 3600 for beam weapons.
                     BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
-                    TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
+                    TrajectilesPerBarrel = 2, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
                     ReloadTime = 340, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
@@ -360,7 +360,7 @@ namespace Scripts {
                     HeatPerShot = 14, // Heat generated per shot.
                     MaxHeat = 300, // Max heat before weapon enters cooldown (70% of max heat).
                     Cooldown = .6f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
-                    HeatSinkRate = 20, // Amount of heat lost per second.
+                    HeatSinkRate = 18, // Amount of heat lost per second.
                     DegradeRof = false, // Progressively lower rate of fire when over 80% heat threshold (80% of max heat).
                     ShotsInBurst = 4, // Use this if you don't want the weapon to fire an entire physical magazine before stopping to reload. Should not be more than your magazine capacity.
                     DelayAfterBurst = 25, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
@@ -478,7 +478,7 @@ namespace Scripts {
             HardPoint = new HardPointDef
             {
                 PartName = "Crouching Tiger 150mm", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
-                DeviateShotAngle = 0.2f, // Projectile inaccuracy in degrees.
+                DeviateShotAngle = 1.2f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 4f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
                 DelayCeaseFire = 20, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released.
@@ -541,7 +541,7 @@ namespace Scripts {
                 {
                     RateOfFire = 800, // Set this to 3600 for beam weapons.
                     BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
-                    TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
+                    TrajectilesPerBarrel = 2, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
                     ReloadTime = 340, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
@@ -549,7 +549,7 @@ namespace Scripts {
                     HeatPerShot = 14, // Heat generated per shot.
                     MaxHeat = 300, // Max heat before weapon enters cooldown (70% of max heat).
                     Cooldown = .6f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
-                    HeatSinkRate = 20, // Amount of heat lost per second.
+                    HeatSinkRate = 18, // Amount of heat lost per second.
                     DegradeRof = false, // Progressively lower rate of fire when over 80% heat threshold (80% of max heat).
                     ShotsInBurst = 4, // Use this if you don't want the weapon to fire an entire physical magazine before stopping to reload. Should not be more than your magazine capacity.
                     DelayAfterBurst = 25, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).

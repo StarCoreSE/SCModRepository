@@ -86,13 +86,13 @@ namespace Scripts
                     Interval = 0, // Time between spawning fragments, in ticks, 0 means every tick, 1 means every other
                     StartTime = 0, // Time delay to start spawning fragments, in ticks, of total projectile life
                     MaxSpawns = 1, // Max number of fragment children to spawn
-                    Proximity = 1000, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
+                    Proximity = 0, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
                     ParentDies = true, // Parent dies once after it spawns its last child.
                     PointAtTarget = true, // Start fragment direction pointing at Target
                     PointType = Predict, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
                     DirectAimCone = 0f, //Aim cone used for Direct fire, in degrees
-                    GroupSize = 5, // Number of spawns in each group
-                    GroupDelay = 120, // Delay between each group.
+                    GroupSize = 0, // Number of spawns in each group
+                    GroupDelay = 0, // Delay between each group.
                 },
             },
             Pattern = new PatternDef
@@ -114,7 +114,7 @@ namespace Scripts
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
-                HealthHitModifier = 0.001, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
+                HealthHitModifier = 10, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = 1, // Voxel damage multiplier; defaults to 1 if zero or less.
                 Characters = 1f, // Character damage multiplier; defaults to 1 if zero or less.
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
@@ -137,7 +137,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 1.5f, // Multiplier for damage against shields.
+                    Modifier = 1f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -176,8 +176,8 @@ namespace Scripts
                 ByBlockHit = new ByBlockHitDef
                 {
                     Enable = false,
-                    Radius = 4f, // Meters
-                    Damage = 2500f,
+                    Radius = 0f, // Meters
+                    Damage = 0f,
                     Depth = 0f, // Meters
                     MaxAbsorb = 0f,
                     Falloff = Linear, //.NoFalloff applies the same damage to all blocks in radius
@@ -216,9 +216,9 @@ namespace Scripts
                 Enable = false, // Enables the EWAR , Electronic-Warfare System
                 Type = EnergySink, // EnergySink, Emp, Offense, Nav, Dot, AntiSmart, JumpNull, Anchor, Tractor, Pull, Push, 
                 Mode = Effect, // Effect , Field
-                Strength = 100f,
-                Radius = 5f, // Meters
-                Duration = 100, // In Ticks
+                Strength = 0f,
+                Radius = 0f, // Meters
+                Duration = 0, // In Ticks
                 StackDuration = true, // Combined Durations
                 Depletable = true,
                 MaxStacks = 10, // Max Debuffs at once
@@ -326,7 +326,7 @@ namespace Scripts
                         Extras = new ParticleOptionDef
                         {
                             Restart = false,
-                            MaxDistance = 5000,
+                            MaxDistance = 0,
                             MaxDuration = 0,
                             Scale = 1,
                         },
@@ -341,7 +341,7 @@ namespace Scripts
                         Extras = new ParticleOptionDef
                         {
                             Restart = false,
-                            MaxDistance = 1000,
+                            MaxDistance = 0,
                             MaxDuration = 0,
                             Scale = 1,
                             HitPlayChance = 1f,
@@ -357,7 +357,7 @@ namespace Scripts
                         Extras = new ParticleOptionDef
                         {
                             Restart = false,
-                            MaxDistance = 5000,
+                            MaxDistance = 0,
                             MaxDuration = 30,
                             Scale = 1,
                             HitPlayChance = 1f,
@@ -386,10 +386,10 @@ namespace Scripts
                             Textures = new[] {
                                 "WeaponLaser",
                             },
-                            SegmentLength = 20f, // Uses the values below.
-                            SegmentGap = 15f, // Uses Tracer textures and values
-                            Speed = 40f, // meters per second
-                            Color = Color(red: 20, green: 0, blue: 0, alpha: .8f),
+                            SegmentLength = 0f, // Uses the values below.
+                            SegmentGap = 0f, // Uses Tracer textures and values
+                            Speed = 0f, // meters per second
+                            Color = Color(red: 0, green: 0, blue: 0, alpha: .8f),
                             WidthMultiplier = .9f,
                             Reverse = false,
                             UseLineVariance = true,
@@ -451,9 +451,9 @@ namespace Scripts
             AmmoRound = "MA_Missile_Stage2", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 500f, //500 Direct damage; one steel plate is worth 100.
-            Mass = 77f, // In kilograms; how much force the impact will apply to the target.
-            Health = 1, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            BaseDamage = 16500f, //500 Direct damage; one steel plate is worth 100.
+            Mass = 100f, // In kilograms; how much force the impact will apply to the target.
+            Health = 2, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = false, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
@@ -540,7 +540,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 4f, // Multiplier for damage against shields.
+                    Modifier = 2f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -578,12 +578,12 @@ namespace Scripts
             {
                 ByBlockHit = new ByBlockHitDef
                 {
-                    Enable = false,
-                    Radius = 0, // Meters
-                    Damage = 0,
-                    Depth = 0f, // Meters
-                    MaxAbsorb = 0f,
-                    Falloff = Curve, //.NoFalloff applies the same damage to all blocks in radius
+                    Enable = true,
+                    Radius = 4, // Meters
+                    Damage = 6000,
+                    Depth = 3f, // Meters
+                    MaxAbsorb = 1000f,
+                    Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
                     //.Curve drops off damage sharply as it approaches the max radius
                     //.InvCurve drops off sharply from the middle and tapers to max radius
@@ -593,10 +593,10 @@ namespace Scripts
                 },
                 EndOfLife = new EndOfLifeDef
                 {
-                    Enable = true,
-                    Radius = 5f, // Meters
+                    Enable = false,
+                    Radius = 0f, // Meters
                     Damage = 40000f,
-                    Depth = 2f,
+                    Depth = 0f,
                     MaxAbsorb = 2500f,
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
