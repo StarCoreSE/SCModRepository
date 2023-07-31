@@ -145,11 +145,11 @@ namespace ShipyardMod.ProcessHandlers
                 {
                     if (_corners[0].BlockDefinition.SubtypeId == "ShipyardCorner_Large" && !ShipyardCore.Debug)
                     {
-                        if (!grid.IsStatic || !grid.IsInVoxels())
+                        if (!grid.IsStatic)
                         {
                             Logging.Instance.WriteDebug($"Yard {grid.EntityId} failed: Static check");
                             foreach (var tool in _corners)
-                                Communication.SendCustomInfo(tool.EntityId, "Invalid Shipyard: Shipyard must be anchored to voxels!");
+                                Communication.SendCustomInfo(tool.EntityId, "Invalid Shipyard: Shipyard must be static!");
                             continue;
                         }
                     }
