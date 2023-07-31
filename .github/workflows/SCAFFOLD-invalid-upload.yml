@@ -1,0 +1,21 @@
+name: "Upload SCAFFOLD-invalid-test"
+
+on:
+  push:
+    paths:
+      - "SCAFFOLD-invalid-test/**"
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: AnarkisGaming/workshop@v1
+        with:
+          appID: 244850
+          publishedFileID: 3013053286
+          path: "SCAFFOLD-invalid-test"
+          changelog: ${{ github.event.head_commit.message }}  
+        env:
+          STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}
+          STEAM_PASSWORD: ${{ secrets.password }}
