@@ -185,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\AppData\\Roaming\\SpaceEngineers\\Mods\\SCEntityCover\\CoreParts.csproj",
+      "projectUniqueName": "Y:\\Modding Assets\\SCModRepository\\SCEntityCover\\CoreParts.csproj",
       "projectName": "CoreParts",
-      "projectPath": "C:\\Users\\User\\AppData\\Roaming\\SpaceEngineers\\Mods\\SCEntityCover\\CoreParts.csproj",
+      "projectPath": "Y:\\Modding Assets\\SCModRepository\\SCEntityCover\\CoreParts.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\AppData\\Roaming\\SpaceEngineers\\Mods\\SCEntityCover\\obj\\",
+      "outputPath": "Y:\\Modding Assets\\SCModRepository\\SCEntityCover\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",

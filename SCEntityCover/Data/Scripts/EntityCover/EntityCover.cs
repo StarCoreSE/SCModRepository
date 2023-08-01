@@ -237,7 +237,17 @@ namespace klime.EntityCover
 
         protected override void UnloadData()
         {
+            // Close any open file streams or release other resources here
+            // For example, if you have any open file streams, close them as follows:
+            // MyAPIGateway.Utilities.CloseLogFile();
+
+            // Clear the list of cover entities and set them to null to release references
+            allCoverEnts.Clear();
+            allCoverEnts = null;
+
+            // Set the instance to null to release the reference
             Instance = null;
         }
+
     }
 }
