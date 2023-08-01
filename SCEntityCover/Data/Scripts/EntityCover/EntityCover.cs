@@ -192,6 +192,7 @@ namespace klime.EntityCover
                 // Reduce the linear velocity to account for fuckery in the above steps
                 cGrid.Physics.LinearVelocity *= 0.65f;
 
+                // Move the grid back 2m to limit brute-forcing through
                 cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() + Vector3D.Normalize(reflection) * 2);
 
                 // Optionally, you can also adjust the angular velocity to simulate spinning after the collision
