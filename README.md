@@ -27,7 +27,7 @@ In StarCore, teams build their own ships and battle for the spot of champion in 
 - To test your changes ingame, Copy the mod you want to edit to your ``%Appdata%/SpaceEngineers/Mods`` folder.
  
 ### Step 4:
-- Make your edits and throw it back in the repository folder.
+- Make your edits and throw it back in the repository folder. you can use the ``.bat file`` included in the repository to link your local Space Engineers mods with the ones in the repository.
 
 ### Step 5:
 - Submit a pull request so that the branch can be merged into the SCModRepository/master one.
