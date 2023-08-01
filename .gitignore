@@ -3,10 +3,11 @@
 bin/**
 .vs/**
 obj/**
-
-
-
-
+*.csproj.nuget.dgspec.json
+*.assets.json
+*.nuget.cache
+*.editorconfig
+*.user
 
 
 *.vsidx
