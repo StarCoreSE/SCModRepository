@@ -45,7 +45,7 @@ namespace klime.EntityCover
             this.modelName = modelName;
         }
 
-        public bool DoDamage(float damage, MyStringHash damageSource, bool sync, MyHitInfo? hitInfo = null, 
+        public bool DoDamage(float damage, MyStringHash damageSource, bool sync, MyHitInfo? hitInfo = null,
             long attackerId = 0, long realHitEntityId = 0, bool shouldDetonateAmmo = true)
         {
             return true;
@@ -62,7 +62,7 @@ namespace klime.EntityCover
     public class EntityCover : MySessionComponentBase
     {
         public static EntityCover Instance;
-        public List<BlockerEnt> allCoverEnts = new List<BlockerEnt>();
+        public static List<BlockerEnt> allCoverEnts = new List<BlockerEnt>();
 
 
         public override void Init(MyObjectBuilder_SessionComponent sessionComponent)
@@ -170,24 +170,70 @@ namespace klime.EntityCover
             if (!isBouncing)
             {
                 isBouncing = true;
-                var forceDir = -1 * Vector3D.Normalize(cGrid.LinearVelocity + cGrid.Physics.AngularVelocity);
-                var forceMag = cGrid.Mass * ((cGrid.Speed + (float)cGrid.Physics.AngularVelocity.Length()) * 1.65f);
-                var force = forceDir * forceMag;
-                
-                // Reflect the force direction
-                //problematic and untrustworthy
-               // var reflection = Vector3D.Reflect(forceDir, cGrid.WorldMatrix.Up);
-               // var reflectedForce = (reflection / forceDir) * forceMag;
 
-                cGrid.Physics.ApplyImpulse(force, cGrid.Physics.CenterOfMassWorld);
-                //cGrid.Physics.AddForce(MyPhysicsForceType.APPLY_WORLD_FORCE, reflectedForce, cGrid.Physics.CenterOfMassWorld, null);
-                //MyAPIGateway.Utilities.ShowMessage("", $"Hit: {cGrid.EntityId}, Force: {forceMag}");
+                // The BlockerEnt currently being collided with
+                BlockerEnt thisEnt = GetClosestBlocker(entity.PositionComp.GetPosition());
+
+                // Get impact location in thisEnt's relative coordiates
+                Vector3D relImpact = Vector3D.Rotate(cGrid.PositionComp.GetPosition() - thisEnt.PositionComp.GetPosition(), thisEnt.WorldMatrix);
+
+                // Get the normal of the collision box on the impacted side
+                Vector3D boxNormal = Vector3D.Rotate(GenIntNormal(relImpact.Normalized()), -thisEnt.WorldMatrix);
+
+                // Get the incident velocity direction
+                Vector3D incidentVelocity = cGrid.LinearVelocity + cGrid.Physics.AngularVelocity;
+
+                // Calculate the reflection direction using the law of reflection
+                Vector3D reflection = Vector3D.Reflect(incidentVelocity, boxNormal);
+
+                // Apply the reflection as the outgoing velocity
+                cGrid.Physics.LinearVelocity = (Vector3)reflection;
+
+                // Reduce the linear velocity to account for fuckery in the above steps
+                cGrid.Physics.LinearVelocity *= 0.65f;
+
+                // Optionally, you can also adjust the angular velocity to simulate spinning after the collision
+                //cGrid.Physics.AngularVelocity= 0.5f;
             }
         }
 
+        private BlockerEnt GetClosestBlocker(Vector3D pos)
+        {
+            // warranty void if used at all -aristeas
 
+            if (allCoverEnts.Count == 0)
+                return null;
 
+            BlockerEnt closest = allCoverEnts[0];
 
+            foreach (var blockerEnt in allCoverEnts)
+                if (Vector3D.DistanceSquared(blockerEnt.PositionComp.GetPosition(), pos) < Vector3D.DistanceSquared(closest.PositionComp.GetPosition(), pos))
+                    closest = blockerEnt;
+
+            return closest;
+        }
+
+        private Vector3D GenIntNormal(Vector3D reference)
+        {
+            // Returns a Vector3D with the longest component of reference Vector3D. Hate. Why isn't this a built-in method.
+
+            Vector3D toReturn = Vector3D.Zero;
+
+            double x = Math.Abs(reference.X);
+            double y = Math.Abs(reference.Y);
+            double z = Math.Abs(reference.Z);
+
+            if (x > y && x > z)
+                toReturn.X = reference.X;
+
+            else if (y > x && y > z)
+                toReturn.Y = reference.Y;
+
+            else
+                toReturn.Z = reference.Z;
+
+            return toReturn;
+        }
 
         protected override void UnloadData()
         {
