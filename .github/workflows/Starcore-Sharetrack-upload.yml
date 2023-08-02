@@ -1,9 +1,9 @@
-name: "Upload PickmeRevengeance"
+name: "Upload Starcore_Sharetrack"
 
 on:
   push:
     paths:
-      - "PickmeRevengeance/**"
+      - "Starcore_Sharetrack/**"
 
 jobs:
   upload:
@@ -13,9 +13,9 @@ jobs:
       - uses: AnarkisGaming/workshop@v1
         with:
           appID: 244850
-          publishedFileID: 2986589130
-          path: "PickmeRevengeance"
-          changelog: ${{ github.event.head_commit.message }}             
+          publishedFileID: 2756825813
+          path: "Starcore_Sharetrack"
+          changelog: ${{ github.event.head_commit.message }}  
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}
           STEAM_PASSWORD: ${{ secrets.password }}

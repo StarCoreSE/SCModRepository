@@ -251,5 +251,6 @@ namespace klime.EntityCover
             // Set the instance to null to release the reference
             Instance = null;
         }
+
     }
 }
