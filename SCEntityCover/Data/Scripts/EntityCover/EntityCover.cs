@@ -178,19 +178,22 @@ namespace klime.EntityCover
                 Vector3D relImpact = Vector3D.Rotate(cGrid.PositionComp.GetPosition() - thisEnt.PositionComp.GetPosition(), thisEnt.WorldMatrix);
 
                 // Get the normal of the collision box on the impacted side
-                Vector3D boxNormal = Vector3D.Rotate(GenIntNormal(relImpact.Normalized()), -thisEnt.WorldMatrix);
+                Vector3D boxNormal = Vector3D.Rotate(GenIntNormal(relImpact / (Vector3D)GetModelDimensions(thisEnt.modelName)), -thisEnt.WorldMatrix);
 
                 // Get the incident velocity direction
                 Vector3D incidentVelocity = cGrid.LinearVelocity + cGrid.Physics.AngularVelocity;
-
+                
                 // Calculate the reflection direction using the law of reflection
                 Vector3D reflection = Vector3D.Reflect(incidentVelocity, boxNormal);
 
                 // Apply the reflection as the outgoing velocity
                 cGrid.Physics.LinearVelocity = (Vector3)reflection;
-
+                
                 // Reduce the linear velocity to account for fuckery in the above steps
                 cGrid.Physics.LinearVelocity *= 0.65f;
+
+                // Move the grid back 2m to limit brute-forcing through
+                cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() + Vector3D.Normalize(reflection) * 2);
 
                 // Optionally, you can also adjust the angular velocity to simulate spinning after the collision
                 //cGrid.Physics.AngularVelocity= 0.5f;
@@ -215,7 +218,7 @@ namespace klime.EntityCover
 
         private Vector3D GenIntNormal(Vector3D reference)
         {
-            // Returns a Vector3D with the longest component of reference Vector3D. Hate. Why isn't this a built-in method.
+            // Returns a unit Vector3D with the longest component of reference Vector3D. Hate. Why isn't this a built-in method.
 
             Vector3D toReturn = Vector3D.Zero;
 
@@ -224,14 +227,14 @@ namespace klime.EntityCover
             double z = Math.Abs(reference.Z);
 
             if (x > y && x > z)
-                toReturn.X = reference.X;
+                toReturn.X = reference.X/x;
 
             else if (y > x && y > z)
-                toReturn.Y = reference.Y;
+                toReturn.Y = reference.Y/y;
 
             else
-                toReturn.Z = reference.Z;
-
+                toReturn.Z = reference.Z/z;
+            
             return toReturn;
         }
 
