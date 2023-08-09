@@ -29,8 +29,9 @@ namespace Klime.spawnmytheprefab
         {
             List<string> prefabList = new List<string>()
     {
-        "#EntityCover1", // Add your prefab names here
+        //"#EntityCover1", // Add your prefab names here
         //"#EntityCover3", // Add your prefab names here
+        "#EntityCoverEveFreighter", // Add your prefab names here
 
         // Add more prefab names here
     };
@@ -40,7 +41,7 @@ namespace Klime.spawnmytheprefab
 
             Vector3D origin = new Vector3D(0, 0, 1);
             double spawnRadius = 5000; // Maximum spawn radius in meters
-            double minSpawnDistance = 500; // Minimum spawn distance from the origin in meters
+            double minSpawnDistance = 1; // Minimum spawn distance from the origin in meters
 
             int existingEntityCoverGridCount = 0;
 
