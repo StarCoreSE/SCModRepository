@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <BlockVariantGroups>
+    <BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="DarthBiomechAICore" />
+		<Icon>textures\Darth_Biomech\gui\AICoreMini.dds</Icon>
+        <DisplayName>AI Core Blocks</DisplayName>
+        <Description>AI Core Blocks</Description>
+        <Blocks>
+            <Block Type="MyProgrammableBlock" Subtype="AICore" />
+            <Block Type="MyProgrammableBlock" Subtype="AICoreMini" />
+            <Block Type="RemoteControl" Subtype="AICoreMiniRemote" />
+        </Blocks>
+    </BlockVariantGroup>	
+    </BlockVariantGroups>
+</Definitions>
