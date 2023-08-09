@@ -29,9 +29,9 @@ namespace Klime.spawnmytheprefab
         {
             List<string> prefabList = new List<string>()
     {
-        //"#EntityCover1", // Add your prefab names here
+        "#EntityCover1", // Add your prefab names here
         //"#EntityCover3", // Add your prefab names here
-        "#EntityCoverEveFreighter", // Add your prefab names here
+        //"#EntityCoverEveFreighter", // Add your prefab names here
 
         // Add more prefab names here
     };
