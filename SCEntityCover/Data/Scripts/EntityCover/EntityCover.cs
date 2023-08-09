@@ -261,6 +261,12 @@ namespace klime.EntityCover
 
                 // The BlockerEnt currently being collided with
                 BlockerEnt thisEnt = GetClosestBlocker(entity.PositionComp.GetPosition());
+               
+                if (thisEnt == null)
+                {
+                    isBouncing = false; // If thisEnt is null, exit the method
+                    return;
+                }
 
                 // Get impact location in thisEnt's relative coordiates
                 Vector3D relImpact = Vector3D.Rotate(cGrid.PositionComp.GetPosition() - thisEnt.PositionComp.GetPosition(), thisEnt.WorldMatrix);
