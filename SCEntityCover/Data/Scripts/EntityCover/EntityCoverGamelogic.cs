@@ -14,7 +14,7 @@ using VRageMath;
 
 namespace klime.EntityCover
 {
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_BatteryBlock), false, "EntityCover", "EntityCover2", "EntityCoverEveFreighter", "REMlikeblockerLong25kX")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_BatteryBlock), false, "EntityCover", "EntityCover2", "EntityCoverEveFreighter", "EntityCover3")]
     public class EntityCoverGamelogic : MyGameLogicComponent
     {
         // Core
