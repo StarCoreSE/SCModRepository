@@ -43,6 +43,10 @@ namespace klime.EntityCover
             {
                 modelName = "eveobstacle3.mwm"; // Set the model name for the second variant
             }
+            else if (entityBattery.BlockDefinition.SubtypeId == "EntityCover3")
+            {
+                modelName = "REMlikeblockerLong2.5kX.mwm"; // Set the model name for the second variant
+            }
             // Add more else-if blocks for additional variants...
             else
             {
