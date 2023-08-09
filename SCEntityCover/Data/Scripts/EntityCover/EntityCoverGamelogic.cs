@@ -14,7 +14,7 @@ using VRageMath;
 
 namespace klime.EntityCover
 {
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_BatteryBlock), false, "EntityCover", "EntityCover2", "EntityCoverEveFreighter")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_BatteryBlock), false, "EntityCover", "EntityCover2", "EntityCoverEveFreighter", "REMlikeblockerLong25kX")]
     public class EntityCoverGamelogic : MyGameLogicComponent
     {
         // Core
@@ -45,7 +45,7 @@ namespace klime.EntityCover
             }
             else if (entityBattery.BlockDefinition.SubtypeId == "EntityCover3")
             {
-                modelName = "REMlikeblockerLong2.5kX.mwm"; // Set the model name for the second variant
+                modelName = "REMlikeblockerLong25kX.mwm"; // Set the model name for the second variant
             }
             // Add more else-if blocks for additional variants...
             else
@@ -75,6 +75,10 @@ namespace klime.EntityCover
                 EntityCover.Instance.AddCover((IMyTerminalBlock)entityBattery, modelName); // Pass the modelName for the second variant
             }
             else if (entityBattery.BlockDefinition.SubtypeId == "EntityCoverEveFreighter")
+            {
+                EntityCover.Instance.AddCover((IMyTerminalBlock)entityBattery, modelName); // Pass the modelName for the second variant
+            }
+                        else if (entityBattery.BlockDefinition.SubtypeId == "EntityCover3")
             {
                 EntityCover.Instance.AddCover((IMyTerminalBlock)entityBattery, modelName); // Pass the modelName for the second variant
             }
