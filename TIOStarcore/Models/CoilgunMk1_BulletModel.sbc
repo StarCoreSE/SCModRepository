@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition>
+			<Id>
+				<TypeId>CubeBlock</TypeId>
+				<SubtypeId>CoilgunMk1_BulletModel</SubtypeId>
+			</Id>
+			<DisplayName>DisplayName_CoilgunMk1_BulletModel</DisplayName>
+			<Description>Description_CoilgunMk1_BulletModel</Description>
+			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\CoilgunMk1_BulletModel.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="10"/>
+			</Components>
+			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<BlockPairName>CoilgunMk1_BulletModel</BlockPairName>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

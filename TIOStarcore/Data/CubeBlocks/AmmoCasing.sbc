@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition>
+			<Id>
+				<TypeId>CubeBlock</TypeId>
+				<SubtypeId>BigAmmoCasing</SubtypeId>
+			</Id>
+			<DisplayName>{LOC:DisplayName_AmmoCasing}</DisplayName>
+			<Description>{LOC:Description_AmmoCasing}</Description>
+			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\BigAmmoCasing.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="10"/>
+			</Components>
+			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<BlockPairName>AmmoCasing</BlockPairName>
+		</Definition>
+	</CubeBlocks>
+	
+	<Components>
+	<Component>
+		<Id>
+			<TypeId>Component</TypeId>
+			<SubtypeId>BigAmmoCasing</SubtypeId>
+		</Id>
+		<DisplayName>AmmoCasing</DisplayName>
+		<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+		<Size>
+			<X>0.5</X>
+			<Y>0.5</Y>
+			<Z>0.1</Z>
+		</Size>
+		<Mass>1</Mass>
+		<Volume>0.5</Volume>
+		<Model>Models\BigAmmoCasing.mwm</Model>
+		<PhysicalMaterial>Metal</PhysicalMaterial>
+		<MaxIntegrity>10</MaxIntegrity>
+		<DropProbability>1</DropProbability>
+		<Health>25</Health>
+		<MinimumOfferAmount>1000</MinimumOfferAmount>
+		<MaximumOfferAmount>5000</MaximumOfferAmount>
+		<MinimumOrderAmount>10</MinimumOrderAmount>
+		<MaximumOrderAmount>100</MaximumOrderAmount>
+		<CanPlayerOrder>true</CanPlayerOrder>
+
+		<MinimumAcquisitionAmount>100000</MinimumAcquisitionAmount>
+		<MaximumAcquisitionAmount>20000000</MaximumAcquisitionAmount>
+	</Component>
+	</Components>
+</Definitions>
