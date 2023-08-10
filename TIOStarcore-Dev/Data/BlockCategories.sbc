@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CategoryClasses>
+		<Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+            <Id>
+                <TypeId>GuiBlockCategoryDefinition</TypeId>
+                <SubtypeId/>
+            </Id>
+            <DisplayName>DisplayName_Category_ShipWeapons</DisplayName>
+            <Name>Weapons</Name>
+			    <StrictSearch>true</StrictSearch>
+            <ItemIds>
+				<string>ConveyorSorter/Heavy_Repeater</string>
+				<string>ConveyorSorter/Laser_Block</string>
+				<string>ConveyorSorter/Type18_Artillery</string>
+				<string>ConveyorSorter/Type21_Artillery</string>
+				<string>ConveyorSorter/Torp_Block</string>
+				<string>ConveyorSorter/Assault_Coil_Turret</string>
+				<string>ConveyorSorter/Light_Coil_Turret</string>
+				<string>ConveyorSorter/K_HS_Damnation</string>
+
+				<string>ConveyorSorter/Fixed_Rockets</string>
+				<string>K_HS_9x9_HSRB_Dreadnight</string>
+
+				<string>K_HS_9x9_K3_King</string>
+				<string>ConveyorSorter/K_HSR_Utilities_Reactor_Gel_LG</string>
+            </ItemIds>
+        </Category>
+		
+			
+		<Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+			<Id>
+				<TypeId>GuiBlockCategoryDefinition</TypeId>
+				<SubtypeId/>
+			</Id>
+			<DisplayName>DisplayName_Category_LargeBlocks</DisplayName>
+			<Name>LargeBlocks</Name>
+			<StrictSearch>true</StrictSearch>
+			<ItemIds>
+				<string>ConveyorSorter/Heavy_Repeater</string>
+				<string>ConveyorSorter/Laser_Block</string>
+				<string>ConveyorSorter/Type18_Artillery</string>
+				<string>ConveyorSorter/Type21_Artillery</string>
+				<string>ConveyorSorter/Torp_Block</string>
+				<string>ConveyorSorter/Assault_Coil_Turret</string>
+				<string>ConveyorSorter/Light_Coil_Turret</string>
+			    <string>ConveyorSorter/RailgunTurret_Block</string>
+				<string>K_HS_Damnation</string>
+				<string>ConveyorSorter/Fixed_Rockets</string>
+				<string>ConveyorSorter/Null_Point_Jump_Disruptor_Large</string>
+
+				<string>K_HS_9x9_K3_King</string>
+				<string>K_HS_9x9_HSRB_Dreadnight</string>
+				<string>ConveyorSorter/K_HSR_Utilities_Reactor_Gel_LG</string>				
+			</ItemIds>
+		</Category>
+	
+
+	</CategoryClasses>
+</Definitions>

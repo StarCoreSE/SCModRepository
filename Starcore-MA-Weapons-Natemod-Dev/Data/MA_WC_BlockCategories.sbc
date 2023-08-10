@@ -1,0 +1,111 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CategoryClasses>
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+        <SubtypeId/>
+      </Id>
+      <DisplayName>MA Weapons</DisplayName>
+      <Name>MA_WC_Weapons</Name>
+      <ItemIds>
+		<string>ConveyorSorter/MA_PDX</string>
+        <string>ConveyorSorter/MA_Gimbal_Laser</string>
+		<string>ConveyorSorter/MA_Gimbal_Laser_Armored</string>
+		<string>ConveyorSorter/MA_Gimbal_Laser_Armored_Slope</string>
+		<string>ConveyorSorter/MA_Gimbal_Laser_Armored_Slope2</string>
+		<string>ConveyorSorter/MA_Gimbal_Laser_Armored_Slope45</string>
+		
+		<string>ConveyorSorter/MA_T2PDX</string>
+		<string>ConveyorSorter/MA_T2PDX_Slope</string>		
+		<string>ConveyorSorter/MA_T2PDX_Slope2</string>
+        <string>ConveyorSorter/MA_Gimbal_Laser_T2</string>
+		<string>ConveyorSorter/MA_Gimbal_Laser_T2_Armored</string>
+		<string>ConveyorSorter/MA_Gimbal_Laser_T2_Armored_Slope</string>
+		<string>ConveyorSorter/MA_Gimbal_Laser_T2_Armored_Slope2</string>
+		<string>ConveyorSorter/MA_Gimbal_Laser_T2_Armored_Slope45</string>
+		
+		
+		<string>ConveyorSorter/MA_Fixed_T2</string>
+		<string>ConveyorSorter/MA_Fixed_T2_Naked</string>
+		<string>ConveyorSorter/MA_Fixed_T3</string>		
+		<string>Passage/MA_Laser_Armor01</string>
+		<string>Passage/MA_Laser_Armor02</string>
+		<string>Passage/MA_Laser_Armor03</string>
+		<string>Passage/MA_Laser_Armor04</string>
+		<string>Passage/MA_Laser_Armor05</string>
+		<string>Passage/MA_Laser_Armor06</string>
+		<string>Passage/MA_Laser_Armor07</string>
+		<string>Passage/MA_Laser_Armor08</string>
+		<string>Passage/MA_Laser_Armor09</string>
+		<string>Passage/MA_Laser_Armor10</string>
+		<string>Passage/MA_Laser_Armor11</string>
+		<string>Passage/MA_Laser_Armor12</string>
+		<string>Passage/MA_Laser_Armor13</string>
+		<string>Passage/MA_Laser_Armor14</string>
+		<string>Passage/MA_Laser_Armor15</string>
+		<string>Passage/MA_Laser_Armor16</string>
+		
+		<string>ConveyorSorter/MA_PDT</string>
+		<string>ConveyorSorter/MA_Gladius</string>		
+		<string>ConveyorSorter/MA_Meatball</string>
+		<string>ConveyorSorter/MA_Blister</string>
+		<string>ConveyorSorter/MA_Blister45</string>	
+		<string>ConveyorSorter/MA_Blister30</string>
+		<string>ConveyorSorter/MA_Blister32</string>		
+		<string>ConveyorSorter/MA_Tiger</string>
+		<string>ConveyorSorter/MA_Crouching_Tiger</string>
+		<string>ConveyorSorter/MA_Tiger_30_sm</string>		
+		
+		<string>ConveyorSorter/MA_AC150</string>
+		<string>ConveyorSorter/MA_AC150_Gantry</string>		
+		<string>ConveyorSorter/MA_AC150_30</string>
+		<string>ConveyorSorter/MA_AC150_45</string>			
+		<string>ConveyorSorter/MA_AC150_45_Gantry</string>			
+			
+		<string>ConveyorSorter/MA_Derecho</string>
+		<string>ConveyorSorter/MA_Derecho_sm</string>		
+		
+		<string>LargeGatlingTurret/MA_EMP</string>
+		
+		<string>ConveyorSorter/MA_Interior_Laser</string>
+		<string>InteriorLight/MA_Interior_Light</string>		
+
+		<string>ConveyorSorter/MA_Guardian</string>		
+		
+		
+      </ItemIds>
+    </Category>
+<!--	
+	<Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+        <SubtypeId/>
+      </Id>
+      <DisplayName>MA Weapons</DisplayName>
+      <Name>MA_WC_Weapon_Tools</Name>
+	  
+	  <IsShipCategory>true</IsShipCategory>
+	  <IsBockCategory>false</IsBockCategory>
+	  <IsToolCategory>false</IsToolCategory>
+      <ItemIds>
+        <string>SmallMissileLauncher/MA_Fixed_000</string>
+		<string>SmallMissileLauncher/MA_Fixed_001</string>
+		<string>SmallMissileLauncher/MA_Fixed_002</string>
+		<string>SmallMissileLauncher/MA_Fixed_003</string>
+		<string>SmallMissileLauncher/MA_Fixed_004</string>
+		<string>SmallMissileLauncher/MA_Fixed_005</string>
+        <string>SmallMissileLauncher/MA_Fixed_sb_000</string>
+		<string>SmallMissileLauncher/MA_Fixed_sb_001</string>
+		<string>SmallMissileLauncher/MA_Fixed_sb_002</string>
+		<string>SmallMissileLauncher/MA_Fixed_sb_003</string>
+		<string>SmallMissileLauncher/MA_Fixed_sb_004</string>
+		<string>SmallMissileLauncher/MA_Fixed_sb_005</string>		
+		
+		
+      </ItemIds>
+    </Category>
+-->
+  </CategoryClasses>
+</Definitions>
+

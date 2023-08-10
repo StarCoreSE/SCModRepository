@@ -1,0 +1,6 @@
+*.sln
+*.csproj
+.vs/*
+obj/*
+Release/*
+*.json

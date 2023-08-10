@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <CubeBlocks>
+
+
+
+<!-- MA_Derecho -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>MA_Derecho</SubtypeId>
+      </Id>
+      <DisplayName>MA Derecho Missile Storm</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\MA_Derecho.png</Icon>
+      <Description>A fast fired swarm of guided missiles.
+Role: Assault
+Ammo: MA_Missile (kinetic)
+Range: 4500m
+By AutoMcD Astronautical
+Particle effects by Northwind Industries
+</Description>
+	<CubeSize>Large</CubeSize>
+	<BlockTopology>TriangleMesh</BlockTopology>
+	<Size x="3" y="3" z="3" />
+	<!-- Center x="0" y="0" z="0" / -->
+	<ModelOffset x="0" y="0" z="0" />
+	<Model>Models\MA_Missile\MA_Missile_Base.mwm</Model>
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0.35" StartY="0.35" EndX="2.65" EndY="2.65"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\MA_Missile\MA_Missile_Base_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\MA_Missile\MA_Missile_Base_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\MA_Missile\MA_Missile_Base_BS3.mwm"/>
+			</BuildProgressModels>
+	<BlockPairName>MA_Derecho</BlockPairName>
+
+
+	
+      <Components>
+        <Component Subtype="SteelPlate" Count="120" />
+        <Component Subtype="Construction" Count="80" />
+         <Component Subtype="LargeTube" Count="25" />
+        <Component Subtype="Motor" Count="36" />
+		<Component Subtype="SmallTube" Count="80" />
+        <Component Subtype="Computer" Count="25" />
+       <Component Subtype="MetalGrid" Count="180" />
+        <Component Subtype="SteelPlate" Count="200" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+
+	<UseModelIntersection>true</UseModelIntersection>
+  
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+ 
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>50</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+      <!--WeaponDefinitionId Subtype="LargeMissileTurret" /-->
+	  
+      <InventoryMaxVolume>.385</InventoryMaxVolume>
+      <InventorySize>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>.5</Z>
+      </InventorySize>
+	  
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+  <MinElevationDegrees>0</MinElevationDegrees>
+      <MaxElevationDegrees>0</MaxElevationDegrees>
+      <MinAzimuthDegrees>0</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>0</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>2800</MaxRangeMeters>
+      <RotationSpeed>0.002</RotationSpeed>
+      <ElevationSpeed>0.002 </ElevationSpeed>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>50</PCU>
+      <!--IsAirTight>false</IsAirTight-->  
+	  
+      <MaxRangeMeters>4500</MaxRangeMeters>	
+	  <AiEnabled>false</AiEnabled>
+
+		   
+    </Definition>	
+	
+<!-- MA_Derecho_sm -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>MA_Derecho_sm</SubtypeId>
+      </Id>
+      <DisplayName>MA Derecho Missile Storm</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\MA_Derecho.png</Icon>
+      <Description>A fast fired swarm of guided missiles.
+Role: Assault
+Ammo: MA_Missile (kinetic)
+Range: 4500m
+By AutoMcD Astronautical
+Particle effects by Northwind Industries
+</Description>
+	<CubeSize>Small</CubeSize>
+	<BlockTopology>TriangleMesh</BlockTopology>
+	<Size x="15" y="15" z="15" />
+	<!-- Center x="0" y="0" z="0" / -->
+	<ModelOffset x="0" y="0" z="0" />
+	<Model>Models\MA_Missile\MA_Missile_Base.mwm</Model>
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="1.75" StartY="1.75" EndX="13" EndY="13"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\MA_Missile\MA_Missile_Base_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\MA_Missile\MA_Missile_Base_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\MA_Missile\MA_Missile_Base_BS3.mwm"/>
+			</BuildProgressModels>
+	<BlockPairName>MA_Derecho</BlockPairName>
+
+
+	
+      <Components>
+        <Component Subtype="SteelPlate" Count="120" />
+        <Component Subtype="Construction" Count="80" />
+         <Component Subtype="LargeTube" Count="25" />
+        <Component Subtype="Motor" Count="36" />
+		<Component Subtype="SmallTube" Count="80" />
+        <Component Subtype="Computer" Count="25" />
+       <Component Subtype="MetalGrid" Count="180" />
+        <Component Subtype="SteelPlate" Count="200" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+
+	<UseModelIntersection>true</UseModelIntersection>
+  
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+ 
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>50</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+      <!--WeaponDefinitionId Subtype="LargeMissileTurret" /-->
+	  
+      <InventoryMaxVolume>.385</InventoryMaxVolume>
+      <InventorySize>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>.5</Z>
+      </InventorySize>
+	  
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+  <MinElevationDegrees>0</MinElevationDegrees>
+      <MaxElevationDegrees>0</MaxElevationDegrees>
+      <MinAzimuthDegrees>0</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>0</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>2800</MaxRangeMeters>
+      <RotationSpeed>0.002</RotationSpeed>
+      <ElevationSpeed>0.002 </ElevationSpeed>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>50</PCU>
+      <!--IsAirTight>false</IsAirTight-->  
+	  
+      <MaxRangeMeters>4500</MaxRangeMeters>	
+	  <AiEnabled>false</AiEnabled>
+
+		   
+    </Definition>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	</CubeBlocks>
+
+
+	
+</Definitions>
