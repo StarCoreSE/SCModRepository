@@ -1,9 +1,9 @@
-name: "Upload Starcore-MA-Weapons-Natemod-Dev"
+name: "Upload Starcore-MA-Weapons-Natemod"
 
 on:
   push:
     paths:
-      - 'Starcore-MA-Weapons-Natemod-Dev/**'
+      - 'Starcore-MA-Weapons-Natemod/**'
 
 jobs:
   upload:
@@ -13,8 +13,8 @@ jobs:
       - uses: AnarkisGaming/workshop@v1
         with:
           appID: 244850
-          publishedFileID: 3017832153
-          path: 'Starcore-MA-Weapons-Natemod-Dev'
+          publishedFileID: 2953252400
+          path: 'Starcore-MA-Weapons-Natemod'
           changelog: ${{ github.event.head_commit.message }}             
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}
