@@ -13,7 +13,7 @@ jobs:
       - uses: AnarkisGaming/workshop@v1
         with:
           appID: 244850
-          publishedFileID: 3017853482
+          publishedFileID: 3017853784
           path: REEECore-Dev
           changelog: ${{ github.event.head_commit.message }}
         env:
