@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <CubeBlocks>
+ 
+ <!-- Modular LRM -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>ModularLRM5</SubtypeId>
+     </Id>
+     <DisplayName>LRM-5 Modular Launcher</DisplayName>
+	  <Description>[10km Targeting Range]
+    [650 m/s]
+    [Energy Damage]
+    [Does not reload]
+    [5 Missiles]
+    Effective armor, shield and module damage.
+	 </Description>
+     <Icon>Textures\Icons\lrm5icon.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="3" z="2" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Starcore\LRM_5_Modular_Mk2.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="200" />
+       <Component Subtype="Computer" Count="200" />
+       <Component Subtype="Construction" Count="115" />
+       <Component Subtype="MetalGrid" Count="65" />
+       <Component Subtype="LargeTube" Count="45" />
+       <Component Subtype="Motor" Count="125" />
+       <Component Subtype="Construction" Count="125" />
+       <Component Subtype="SteelPlate" Count="300" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <BlockPairName>ModularLRM5</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>60</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>10000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+     <DestroySound>Betty_Weapon_Destroyed</DestroySound>
+   </Definition>
+   <!-- Modular LRM Middle -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>ModularMiddleLRM5</SubtypeId>
+     </Id>
+     <DisplayName>LRM-5 Modular Launcher Middle</DisplayName>
+	  <Description>[10km Targeting Range]
+    [650 m/s]
+    [Energy Damage]
+    [Does not reload]
+    [5 Missiles]
+    Effective armor, shield and module damage.
+	 </Description>
+     <Icon>Textures\Icons\lrm5icon.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="3" z="2" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Starcore\LRM_5_Modular_Middle_Mk2.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="200" />
+       <Component Subtype="Computer" Count="200" />
+       <Component Subtype="Construction" Count="115" />
+       <Component Subtype="MetalGrid" Count="65" />
+       <Component Subtype="LargeTube" Count="45" />
+       <Component Subtype="Motor" Count="125" />
+       <Component Subtype="Construction" Count="125" />
+       <Component Subtype="SteelPlate" Count="300" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <BlockPairName>ModularMiddleLRM5</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>60</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <DestroySound>Betty_Weapon_Destroyed</DestroySound>
+   </Definition>
+      <!-- Modular LRM Angled -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>ModularLRM5Angled</SubtypeId>
+     </Id>
+     <DisplayName>LRM-5 Modular Launcher 45</DisplayName>
+	  <Description>[10km Targeting Range]
+    [650 m/s]
+    [Energy Damage]
+    [Does not reload]
+    [5 Missiles]
+    Effective armor, shield and module damage.
+	 </Description>
+     <Icon>Textures\Icons\lrm5icon.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="3" z="2" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Starcore\LRM_5_Modular_Mk2_45d.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="200" />
+       <Component Subtype="Computer" Count="200" />
+       <Component Subtype="Construction" Count="115" />
+       <Component Subtype="MetalGrid" Count="65" />
+       <Component Subtype="LargeTube" Count="45" />
+       <Component Subtype="Motor" Count="125" />
+       <Component Subtype="Construction" Count="125" />
+       <Component Subtype="SteelPlate" Count="300" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <BlockPairName>ModularLRM5Angled</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <MirroringBlock>ModularLRM5AngledReversed</MirroringBlock>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>60</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <DestroySound>Betty_Weapon_Destroyed</DestroySound>
+   </Definition>
+     <!-- Modular LRM Angled Reversed -->
+  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>ModularLRM5AngledReversed</SubtypeId>
+     </Id>
+     <DisplayName>LRM-5 Modular Launcher 45 Reversed</DisplayName>
+      <Description>[10km Targeting Range]
+    [650 m/s]
+    [Energy Damage]
+    [Does not reload]
+    [5 Missiles]
+    Effective armor, shield and module damage.
+     </Description>
+     <Icon>Textures\Icons\lrm5icon.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="3" z="2" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Starcore\LRM_5_Modular_Mk2_45d_Reversed.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="200" />
+       <Component Subtype="Computer" Count="200" />
+       <Component Subtype="Construction" Count="115" />
+       <Component Subtype="MetalGrid" Count="65" />
+       <Component Subtype="LargeTube" Count="45" />
+       <Component Subtype="Motor" Count="125" />
+       <Component Subtype="Construction" Count="125" />
+       <Component Subtype="SteelPlate" Count="300" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <BlockPairName>ModularLRM5AngledReversed</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+    <MirroringBlock>ModularLRM5Angled</MirroringBlock>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>60</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+   </Definition>
+
+   <!-- Modular MRM -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>ModularMRM10</SubtypeId>
+     </Id>
+     <DisplayName>MRM-10 Modular Launcher</DisplayName>
+	  <Description>
+    [5km Max Range, 3.5km Optimal Range]
+    [350~ m/s]
+    [Kinetic Damage]
+    [Does not reload]
+    [10 Missiles]
+      Medium-Ranged-Missile. Optimal range is 2-4 km. Max range 5km.
+	 </Description>
+     <Icon>Textures\Icons\mrm10icon.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="3" z="2" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Starcore\Modular_MRM_1x2.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="200" />
+       <Component Subtype="Computer" Count="200" />
+       <Component Subtype="Construction" Count="115" />
+       <Component Subtype="MetalGrid" Count="65" />
+       <Component Subtype="LargeTube" Count="45" />
+       <Component Subtype="Motor" Count="125" />
+       <Component Subtype="Construction" Count="125" />
+       <Component Subtype="SteelPlate" Count="300" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <BlockPairName>ModularMRM10</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>60</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>10000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+     <DestroySound>Betty_Weapon_Destroyed</DestroySound>
+   </Definition>
+
+   <!-- Modular MRM Middle -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>ModularMiddleMRM10</SubtypeId>
+     </Id>
+     <DisplayName>MRM-10 Modular Launcher Middle</DisplayName>
+	  <Description>
+    [5km Max Range, 3.5km Optimal Range]
+    [350~ m/s]
+    [Kinetic Damage]
+    [Does not reload]
+    [10 Missiles]
+      Medium-Ranged-Missile. Optimal range is 2-4 km. Max range 5km.
+	 </Description>
+     <Icon>Textures\Icons\mrm10icon.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="3" z="2" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Starcore\Modular_MRM_Middle_1x2.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="200" />
+       <Component Subtype="Computer" Count="200" />
+       <Component Subtype="Construction" Count="115" />
+       <Component Subtype="MetalGrid" Count="65" />
+       <Component Subtype="LargeTube" Count="45" />
+       <Component Subtype="Motor" Count="125" />
+       <Component Subtype="Construction" Count="125" />
+       <Component Subtype="SteelPlate" Count="300" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <BlockPairName>ModularMiddleMRM10</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>60</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>10000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+     <DestroySound>Betty_Weapon_Destroyed</DestroySound>
+   </Definition>
+
+   <!-- Modular MRM Angled -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>ModularMRM10Angled</SubtypeId>
+     </Id>
+     <DisplayName>MRM-10 Modular Launcher 45</DisplayName>
+      <Description>
+    [5km Max Range, 3.5km Optimal Range]
+    [350~ m/s]
+    [Kinetic Damage]
+    [Does not reload]
+    [10 Missiles]
+      Medium-Ranged-Missile. Optimal range is 2-4 km. Max range 5km.
+     </Description>
+     <Icon>Textures\Icons\mrm10icon.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="3" z="2" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Starcore\Modular_MRM_1x2_45.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="200" />
+       <Component Subtype="Computer" Count="200" />
+       <Component Subtype="Construction" Count="115" />
+       <Component Subtype="MetalGrid" Count="65" />
+       <Component Subtype="LargeTube" Count="45" />
+       <Component Subtype="Motor" Count="125" />
+       <Component Subtype="Construction" Count="125" />
+       <Component Subtype="SteelPlate" Count="300" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <BlockPairName>ModularMRM10Angled</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <MirroringBlock>ModularMRM10AngledReversed</MirroringBlock>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>60</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+   </Definition>
+   
+<!-- Modular MRM Angled Reversed -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>ModularMRM10AngledReversed</SubtypeId>
+     </Id>
+     <DisplayName>MRM-10 Modular Launcher 45 Reversed</DisplayName>
+      <Description>
+    [5km Max Range, 3.5km Optimal Range]
+    [350~ m/s]
+    [Kinetic Damage]
+    [Does not reload]
+    [10 Missiles]
+      Medium-Ranged-Missile. Optimal range is 2-4 km. Max range 5km.
+     </Description>
+     <Icon>Textures\Icons\mrm10icon.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>false</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="3" z="2" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Starcore\Modular_MRM_1x2_45_Reversed.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="200" />
+       <Component Subtype="Computer" Count="200" />
+       <Component Subtype="Construction" Count="115" />
+       <Component Subtype="MetalGrid" Count="65" />
+       <Component Subtype="LargeTube" Count="45" />
+       <Component Subtype="Motor" Count="125" />
+       <Component Subtype="Construction" Count="125" />
+       <Component Subtype="SteelPlate" Count="300" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <BlockPairName>ModularMRM10AngledReversed</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <MirroringBlock>ModularMRM10Angled</MirroringBlock>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>60</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+   </Definition>
+    <!-- Modular SRM -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>ModularSRM8</SubtypeId>
+     </Id>
+     <DisplayName>SRM-8</DisplayName>
+	  <Description>[3.5km Range]
+    [700~ m/s]
+    [Energy Damage]
+    [Does not reload]
+    Effective against armor, shields and modules.
+	 </Description>
+     <Icon>Textures\Icons\srm8l.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="2" y="2" z="1" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Starcore\Modular_SRM.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="200" />
+       <Component Subtype="Computer" Count="200" />
+       <Component Subtype="Construction" Count="115" />
+       <Component Subtype="MetalGrid" Count="65" />
+       <Component Subtype="LargeTube" Count="45" />
+       <Component Subtype="Motor" Count="125" />
+       <Component Subtype="Construction" Count="125" />
+       <Component Subtype="SteelPlate" Count="300" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <BlockPairName>ModularSRM8_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>60</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <DestroySound>Betty_Weapon_Destroyed</DestroySound>
+   </Definition>
+
+   <!--<DestroyEffect>Imperial_Explosion_Core</DestroyEffect>
+  <DamageEffectName>Imperial_Electrical_Damage</DamageEffectName>-->
+      <!--Damage effect is when the block is non functional-->
+   <!--Destroy effect is when the block dies-->
+  </CubeBlocks>
+</Definitions>

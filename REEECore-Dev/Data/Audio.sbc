@@ -1,0 +1,655 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Sounds>
+    <!--IHarpo, a glorious man. Damnable Keen file structure.-->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>TorpLaunch</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>300</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <Loopable>false</Loopable>
+      <PitchVariation>100</PitchVariation>
+      <SoundLimit>3</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Missiles\TorpLaunch.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>TorpHit</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>250</MaxDistance>
+      <PreventSynchronization>15</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <PitchVariation>100</PitchVariation>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Missiles\TorpMissileImpact.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>TorpFlyby</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>200</MaxDistance>
+      <PreventSynchronization>25</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <PitchVariation>100</PitchVariation>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Missiles\SonicBoom.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>PPCFire</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>400</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>3</DynamicMusicAmount>
+		  <Volume>1</Volume>
+		  <Loopable>false</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\PPC\PPC_Fire.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+     <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>MedLaserFire</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>1200</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>3</DynamicMusicAmount>
+		  <Volume>1</Volume>
+       <PitchVariation>25</PitchVariation>
+       <SoundLimit>50</SoundLimit>
+		  <Loopable>true</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\MW4 Laser Medium.wav</Start>
+          <Loop>Audio\MW4 Laser MediumLoop.wav</Loop>
+          <End>Audio\MW4 Laser MediumEND.wav</End>
+			  </Wave>
+		  </Waves>
+	  </Sound>   
+     <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>LrgLaserFire</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>1200</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>3</DynamicMusicAmount>
+		  <Volume>1</Volume>
+       <PitchVariation>15</PitchVariation>
+       <SoundLimit>50</SoundLimit>
+		  <Loopable>true</Loopable>
+		  <Waves>
+        <Wave Type="D3">
+          <Start>Audio\MW4 Laser Large.wav</Start>
+          <Loop>Audio\MW4 Laser LargeLoop.wav</Loop>
+          <End>Audio\MW4 Laser LargeLoopEnd.wav</End>
+        </Wave>
+		  </Waves>
+	  </Sound>  
+    
+        <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>FFC_Reload</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>500</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.65</Volume>
+          <PitchVariation>15</PitchVariation>
+      <Loopable>false</Loopable>
+      <PreventSynchronization>2</PreventSynchronization>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\HGaussReload2.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>FCCFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>2</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>0.8</Volume>
+      <PitchVariation>30</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="10" Distance="1000" Sound="FCCFire_Dist" />
+      </DistantSounds>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\SC_HeavyGauss.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+        <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>FCCFire_Dist</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>5000</MaxDistance>
+		  <PreventSynchronization>2</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>3</DynamicMusicAmount>
+		  <Volume>0.8</Volume>
+          <PitchVariation>30</PitchVariation>
+		  <Loopable>false</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\SC_HeavyGauss_Dist.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>PPCImpact</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>200</MaxDistance>
+      <PreventSynchronization>10</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.1</Volume>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\PPC\PPC_Impact.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>PPCRecharge</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>200</MaxDistance>
+		  <PreventSynchronization>4</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>3</DynamicMusicAmount>
+		  <Volume>1.25</Volume>
+		  <Loopable>false</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\PPC\PPC_Recharge.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+  
+    <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>PPCFlyby</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>400</MaxDistance>
+		  <PreventSynchronization>25</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>3</DynamicMusicAmount>
+		  <Volume>1</Volume>
+		  <Loopable>true</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\PPC\PPC_Flyby.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ObviousFlyby</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>500</MaxDistance>
+      <PreventSynchronization>20</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <PitchVariation>30</PitchVariation>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Missiles\engine_rocket_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Missiles\engine_rocket_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Missiles\engine_rocket_03.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>MissileThoompLaunch</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>300</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.8</Volume>
+      <Loopable>false</Loopable>
+      <VolumeVariation>0.2</VolumeVariation>
+      <PitchVariation>100</PitchVariation>
+      <PreventSynchronization>10</PreventSynchronization>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Missiles\MW4_NARC_Fire.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>MissileFshooLaunch</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>300</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.8</Volume>
+      <Loopable>false</Loopable>
+      <VolumeVariation>0.2</VolumeVariation>
+      <PitchVariation>100</PitchVariation>
+      <PreventSynchronization>10</PreventSynchronization>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Missiles\craft_launch_01.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>MissileHitRandom</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <VolumeVariation>0.15</VolumeVariation>
+      <PitchVariation>75</PitchVariation>
+      <!--<SoundLimit>20</SoundLimit>-->
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="100" Distance="500" Sound="MissileHitRandom_Distant" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Generic\MW4Explosion_1.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Generic\MW4Explosion_2.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Generic\MW4Explosion_3.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Generic\MW4Explosion_4.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Generic\MW4Explosion_5.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Generic\MW4Explosion_6.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <!--<DistantSounds>
+        <DistantSound DistanceCrossfade="10" Distance="460" Sound="MissileHitRandom_Distant" />
+      </DistantSounds>-->
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>MissileHitRandom_Distant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.8</Volume>
+      <VolumeVariation>0.15</VolumeVariation>
+      <Loopable>false</Loopable>
+      <Pitch>-2</Pitch>
+      <PitchVariation>75</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Generic\Dist\MW4Explosion_1_Dist.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Generic\Dist\MW4Explosion_2_Dist.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Generic\Dist\MW4Explosion_3_Dist.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Generic\Dist\MW4Explosion_4_Dist.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Generic\Dist\MW4Explosion_5_Dist.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Generic\Dist\MW4Explosion_6_Dist.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Betty_Weapon_Destroyed</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>175</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Betty\MW4_M_Betty_Weapon_Destroyed.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>AI_Voice_Missile_Launch_Detected</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>200</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <SoundLimit>5</SoundLimit>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Betty\AI_Voice_Missile_Launch_Detected.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Missile_Beep</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>450</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <SoundLimit>8</SoundLimit>
+      <VolumeVariation>0.1</VolumeVariation>
+      <PitchVariation>0.1</PitchVariation>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Generic\ACZ Missile Beep.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Missile_BeepBeepBeep</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>450</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <SoundLimit>8</SoundLimit>
+      <VolumeVariation>0.1</VolumeVariation>
+      <PitchVariation>0.1</PitchVariation>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Generic\ACZ Missile BeepBeepBeep.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+        <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>RWR_Beeps</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>500</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <!--<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>-->
+      <!-- <DynamicMusicAmount>3</DynamicMusicAmount>-->
+      <Volume>1</Volume>
+      <!-- <SoundLimit>8</SoundLimit>-->
+      <VolumeVariation>0.1</VolumeVariation>
+      <PitchVariation>0.1</PitchVariation>
+      <Loopable>false</Loopable>
+            <UpdateDistance>510</UpdateDistance>
+            <Waves>
+                <Wave Type="D3">
+                    <Start>Audio\Generic\RWR Beep.wav</Start>
+                </Wave>
+            </Waves>
+    </Sound>
+                
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>MissileSwooshLaunch</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>100</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.75</Volume>
+      <Loopable>false</Loopable>
+      <PreventSynchronization>0</PreventSynchronization>
+      <VolumeVariation>0.2</VolumeVariation>
+      <PitchVariation>100</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="20" Distance="110" Sound="MissileSwooshLaunch_Distant" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Missiles\MW3_WEAPON_LRM5.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>MissileSwooshLaunch_Distant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>475</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.25</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>75</PitchVariation>
+      <Pitch>-2</Pitch>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Missiles\MW3_WEAPON_LRM5.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>CloseNuked</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2000</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1.5</Volume>
+      <Loopable>false</Loopable>
+      <!--<PitchVariation>50</PitchVariation>-->
+      <PreventSynchronization>0</PreventSynchronization>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="50" Distance="215" Sound="FarNuked" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Nuke\CloseNuked.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>FarNuked</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2000</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Loopable>false</Loopable>
+      <PreventSynchronization>0</PreventSynchronization>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Nuke\FarNuked.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    
+    	<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcMK1CoilCannonFCC</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>6000</MaxDistance>
+        <VolumeVariation>0.25</VolumeVariation>
+	  <!-- <Pitch>0</Pitch> -->
+      <PitchVariation>1</PitchVariation>
+      <PreventSynchronization>0</PreventSynchronization>
+      <!--<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>-->
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="100" Distance="1150" Sound="MK1CoilCannonDistant1FCC" />
+      </DistantSounds>
+      <Volume>0.25</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\MK1CoilCannon3.wav</Start>
+        </Wave> 
+      </Waves>
+    </Sound>
+	
+	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcMK1CoilCannonDistant1FCC</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>6000</MaxDistance>
+	  <!-- <Pitch>0</Pitch> -->
+      <Volume>0.25</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\MK1CoilCannon_far2.wav</Start>
+        </Wave>       
+      </Waves>
+    </Sound>
+    
+     <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>FCC_Whistle</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>3750</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>35</DynamicMusicAmount>
+		  <Volume>1</Volume>
+		  <Loopable>true</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\DistantTravel.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+    
+    
+  </Sounds>
+</Definitions>
