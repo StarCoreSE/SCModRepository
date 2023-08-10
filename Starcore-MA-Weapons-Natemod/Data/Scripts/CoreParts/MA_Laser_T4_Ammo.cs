@@ -97,10 +97,7 @@ namespace Scripts
             Pattern = new PatternDef
             {
                 Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
-                    "MA_Laser_T4_Particles", "MA_Laser_T4", "MA_Laser_T4", "MA_Laser_T4", "MA_Laser_T4",
-                    "MA_Laser_T4", "MA_Laser_T4", "MA_Laser_T4", "MA_Laser_T4", "MA_Laser_T4",
-                    "MA_Laser_T4", "MA_Laser_T4", "MA_Laser_T4", "MA_Laser_T4", "MA_Laser_T4",
-                    "MA_Laser_T4", "MA_Laser_T4", "MA_Laser_T4", "MA_Laser_T4", "MA_Laser_T4",
+                    "",
                 },
                 Enable = true,
                 TriggerChance = 1f,

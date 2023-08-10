@@ -88,11 +88,7 @@ namespace Scripts
             Pattern = new PatternDef
             {
                 Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
-                    "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1",
-                   "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1",
-                   "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1",
-                   "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1", "MA_Laser_1",
-                   "MA_Laser_1_PD",
+                    "",
                 },
 
                 Enable = true,
