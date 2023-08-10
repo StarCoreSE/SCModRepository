@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <CubeBlocks>
+
+
+
+<!-- MA_AC150 -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>MA_AC150</SubtypeId>
+      </Id>
+      <DisplayName>Slinger AC 150mm</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\MA_AC150.png</Icon>
+      <Description>A heavy duty 150mm cannon turret.
+Role: Battle
+Ammo: 150mm HE (kinetic)
+Range: 2500m
+By AutoMcD Astronautical
+Particle effects by Northwind Industries
+Sounds by Mike_dude</Description>
+	<CubeSize>Large</CubeSize>
+	<BlockTopology>TriangleMesh</BlockTopology>
+	<Size x="3" y="3" z="3" />
+	<!-- Center x="0" y="0" z="0" / -->
+	<ModelOffset x="0" y="0" z="0" />
+	<Model>Models\MA_AC150\MA_AC150.mwm</Model>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="1.01" EndX="3.00" EndY="1.99"/>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="0.20" EndY="1.00"/>
+				<MountPoint Side="Front" StartX="2.80" StartY="0.00" EndX="3.00" EndY="1.00"/>
+				<MountPoint Side="Back" StartX="2.80" StartY="0.00" EndX="3.00" EndY="1.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="1.01" EndX="3.00" EndY="1.99"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="0.20" EndY="1.00"/>
+				<MountPoint Side="Left" StartX="1.33" StartY="0.00" EndX="1.67" EndY="1.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="0.20" EndY="1.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="1.01" EndX="3.00" EndY="1.99"/>
+				<MountPoint Side="Left" StartX="2.80" StartY="0.00" EndX="3.00" EndY="1.00"/>
+				<MountPoint Side="Right" StartX="2.80" StartY="0.00" EndX="3.00" EndY="1.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="0.20" EndY="1.00"/>
+				<MountPoint Side="Right" StartX="1.33" StartY="0.00" EndX="1.67" EndY="1.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="1.01" EndX="3.00" EndY="1.99"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				
+				
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00" Enabled="false"/>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.92" EndX="3.00" EndY="3.00" Enabled="false"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.92" EndX="3.00" EndY="3.00" Enabled="false"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.92" EndX="3.00" EndY="3.00" Enabled="false"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.92" EndX="3.00" EndY="3.00" Enabled="false"/>
+			</MountPoints>
+	<BlockPairName>MA_AC150</BlockPairName>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\MA_AC150\MA_AC150_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\MA_AC150\MA_AC150_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\MA_AC150\MA_AC150_BS3.mwm"/>
+			</BuildProgressModels>
+
+	
+      <Components>
+        <Component Subtype="SteelPlate" Count="220" />
+        <Component Subtype="Construction" Count="80" />
+         <Component Subtype="LargeTube" Count="25" />
+        <Component Subtype="Motor" Count="18" />
+		<Component Subtype="SmallTube" Count="80" />
+        <Component Subtype="Computer" Count="6" />
+       <Component Subtype="MetalGrid" Count="450" />
+        <Component Subtype="SteelPlate" Count="900" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+
+	<UseModelIntersection>true</UseModelIntersection>
+  
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+ 
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+      <!--WeaponDefinitionId Subtype="LargeMissileTurret" /-->
+	  
+      <InventoryMaxVolume>.385</InventoryMaxVolume>
+      <InventorySize>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>.5</Z>
+      </InventorySize>
+	  
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+  <MinElevationDegrees>0</MinElevationDegrees>
+      <MaxElevationDegrees>0</MaxElevationDegrees>
+      <MinAzimuthDegrees>0</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>0</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>2800</MaxRangeMeters>
+      <RotationSpeed>0.002</RotationSpeed>
+      <ElevationSpeed>0.002 </ElevationSpeed>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>50</PCU>
+      <!--IsAirTight>false</IsAirTight-->  
+	  
+      <MaxRangeMeters>3000</MaxRangeMeters>	
+	  <AiEnabled>false</AiEnabled>
+<MirroringBlock>MA_AC150_Gantry</MirroringBlock>
+
+	<BlockVariants>
+
+		<BlockVariant>
+          <TypeId>ConveyorSorter</TypeId>
+          <SubtypeId>MA_AC150_30</SubtypeId>
+        </BlockVariant>
+		<BlockVariant>
+          <TypeId>ConveyorSorter</TypeId>
+          <SubtypeId>MA_AC150_45_Gantry</SubtypeId>
+        </BlockVariant>
+		<BlockVariant>
+          <TypeId>ConveyorSorter</TypeId>
+          <SubtypeId>MA_AC150_45</SubtypeId>
+        </BlockVariant>
+		<BlockVariant>
+          <TypeId>ConveyorSorter</TypeId>
+          <SubtypeId>MA_AC150_Gantry</SubtypeId>
+        </BlockVariant>
+
+      </BlockVariants>
+		   
+    </Definition>	
+	
+<!-- MA_AC150_30 -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>MA_AC150_30</SubtypeId>
+      </Id>
+      <DisplayName>Slinger AC 150mm Sloped 30</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\MA_AC150_30.png</Icon>
+      <Description>A heavy duty 150mm cannon turret.
+Role: Battle
+Ammo: 150mm HE (kinetic)
+Range: 2500m
+By AutoMcD Astronautical
+Particle effects by Northwind Industries
+Sounds by Mike_dude</Description>
+	<CubeSize>Large</CubeSize>
+	<BlockTopology>TriangleMesh</BlockTopology>
+	<Size x="3" y="3" z="3" />
+	<!-- Center x="0" y="0" z="0" / -->
+	<ModelOffset x="0" y="0" z="0" />
+	<Model>Models\MA_AC150\MA_AC150_30.mwm</Model>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.01" EndX="3.00" EndY="0.99"/>
+				<MountPoint Side="Front" StartX="0.00" StartY="1.00" EndX="3.00" EndY="3.00" Enabled="false"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="1.00" EndX="3.00" EndY="2.50"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="1.00" EndX="3.00" EndY="3.00" Enabled="false"/>
+				<MountPoint Side="Left" StartX="1.50" StartY="0.99" EndX="3.00" EndY="2.51"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="1.00" EndX="1.50" EndY="1.75"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="2.03" EndY="1.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="1.00" EndX="3.00" EndY="3.00" Enabled="false"/>
+				<MountPoint Side="Right" StartX="1.50" StartY="1.00" EndX="3.00" EndY="1.75"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.99" EndX="1.50" EndY="2.51"/>
+				<MountPoint Side="Right" StartX="0.97" StartY="0.00" EndX="3.00" EndY="1.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="1.00" EndX="3.00" EndY="3.00" Enabled="false"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00" Enabled="false"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\MA_AC150\MA_AC150_30_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\MA_AC150\MA_AC150_30_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\MA_AC150\MA_AC150_30_BS3.mwm"/>
+			</BuildProgressModels>
+<BlockPairName>MA_AC150_30</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+	
+      <Components>
+        <Component Subtype="SteelPlate" Count="220" />
+        <Component Subtype="Construction" Count="80" />
+         <Component Subtype="LargeTube" Count="25" />
+        <Component Subtype="Motor" Count="18" />
+		<Component Subtype="SmallTube" Count="80" />
+        <Component Subtype="Computer" Count="6" />
+       <Component Subtype="MetalGrid" Count="450" />
+        <Component Subtype="SteelPlate" Count="900" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+
+	<UseModelIntersection>true</UseModelIntersection>
+  
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+ 
+
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+      <!--WeaponDefinitionId Subtype="LargeMissileTurret" /-->
+	  
+      <InventoryMaxVolume>.385</InventoryMaxVolume>
+      <InventorySize>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>.5</Z>
+      </InventorySize>
+	  
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+  <MinElevationDegrees>0</MinElevationDegrees>
+      <MaxElevationDegrees>0</MaxElevationDegrees>
+      <MinAzimuthDegrees>0</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>0</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>2800</MaxRangeMeters>
+      <RotationSpeed>0.002</RotationSpeed>
+      <ElevationSpeed>0.002 </ElevationSpeed>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>50</PCU>
+      <!--IsAirTight>false</IsAirTight-->  
+	  
+      <MaxRangeMeters>3000</MaxRangeMeters>	
+	  <AiEnabled>false</AiEnabled>
+
+		   
+    </Definition>	
+
+
+<!-- MA_AC150_45 -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>MA_AC150_45</SubtypeId>
+      </Id>
+      <DisplayName>Slinger AC 150mm Sloped 45</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\MA_AC150_45.png</Icon>
+      <Description>A heavy duty 150mm cannon turret.
+Role: Battle
+Ammo: 150mm HE (kinetic)
+Range: 2500m
+By AutoMcD Astronautical
+Particle effects by Northwind Industries
+Sounds by Mike_dude</Description>
+	<CubeSize>Large</CubeSize>
+	<BlockTopology>TriangleMesh</BlockTopology>
+	<Size x="3" y="4" z="3" />
+	<!-- Center x="0" y="0" z="0" / -->
+	<ModelOffset x="0" y="0" z="0" />
+	<Model>Models\MA_AC150\MA_AC150_45.mwm</Model>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.01" EndX="3.00" EndY="0.99"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="2.00" EndX="3.00" EndY="4.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="1.02" EndX="3.00" EndY="1.99"/>
+				<MountPoint Side="Left" StartX="1.00" StartY="2.00" EndX="2.00" EndY="3.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="2.03" EndY="1.00"/>
+				<MountPoint Side="Left" StartX="2.00" StartY="2.00" EndX="3.00" EndY="4.00"/>
+				<MountPoint Side="Right" StartX="1.00" StartY="2.00" EndX="2.00" EndY="3.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="1.02" EndX="3.00" EndY="1.99"/>
+				<MountPoint Side="Right" StartX="0.97" StartY="0.00" EndX="3.00" EndY="1.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="2.00" EndX="1.00" EndY="4.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="2.04"/>
+
+<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00" Enabled="false"/>
+<MountPoint Side="Front" StartX="0.00" StartY="1.00" EndX="3.00" EndY="4.00" Enabled="false"/>
+<MountPoint Side="Left" StartX="0.00" StartY="1.00" EndX="3.00" EndY="4.00" Enabled="false"/>
+<MountPoint Side="Right" StartX="0.00" StartY="1.00" EndX="3.00" EndY="4.00" Enabled="false"/>
+				
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\MA_AC150\MA_AC150_45_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\MA_AC150\MA_AC150_45_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\MA_AC150\MA_AC150_45_BS3.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>MA_AC150_45</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+	
+      <Components>
+        <Component Subtype="SteelPlate" Count="220" />
+        <Component Subtype="Construction" Count="80" />
+         <Component Subtype="LargeTube" Count="25" />
+        <Component Subtype="Motor" Count="18" />
+		<Component Subtype="SmallTube" Count="80" />
+        <Component Subtype="Computer" Count="6" />
+       <Component Subtype="MetalGrid" Count="450" />
+        <Component Subtype="SteelPlate" Count="900" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+
+	<UseModelIntersection>true</UseModelIntersection>
+  
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+ 
+
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+      <!--WeaponDefinitionId Subtype="LargeMissileTurret" /-->
+	  
+      <InventoryMaxVolume>.385</InventoryMaxVolume>
+      <InventorySize>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>.5</Z>
+      </InventorySize>
+	  
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+  <MinElevationDegrees>0</MinElevationDegrees>
+      <MaxElevationDegrees>0</MaxElevationDegrees>
+      <MinAzimuthDegrees>0</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>0</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>2800</MaxRangeMeters>
+      <RotationSpeed>0.002</RotationSpeed>
+      <ElevationSpeed>0.002 </ElevationSpeed>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>50</PCU>
+      <!--IsAirTight>false</IsAirTight-->  
+	  
+      <MaxRangeMeters>3000</MaxRangeMeters>	
+	  <AiEnabled>false</AiEnabled>
+
+		   
+    </Definition>	
+
+
+<!-- MA_AC150_Gantry -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>MA_AC150_Gantry</SubtypeId>
+      </Id>
+      <DisplayName>Slinger AC 150mm Gantry Style</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\MA_AC150_Gantry.png</Icon>
+      <Description>A heavy duty 150mm cannon turret.
+Role: Battle
+Ammo: 150mm HE (kinetic)
+Range: 2500m
+By AutoMcD Astronautical
+Particle effects by Northwind Industries
+Sounds by Mike_dude</Description>
+	<CubeSize>Large</CubeSize>
+	<BlockTopology>TriangleMesh</BlockTopology>
+	<Size x="3" y="3" z="3" />
+	<!-- Center x="0" y="0" z="0" / -->
+	<ModelOffset x="0" y="0" z="0" />
+	<Model>Models\MA_AC150\MA_AC150_Gantry.mwm</Model>
+
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="1.05" EndX="3.00" EndY="3.00" Enabled="false"/>
+				<MountPoint Side="Front" StartX="0.00" StartY="1.01" EndX="3.00" EndY="1.99"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="1.01" EndX="3.00" EndY="3.00" Enabled="false"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="1.01" EndX="3.00" EndY="1.99"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="1.01" EndX="3.00" EndY="3.00" Enabled="false"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="1.01" EndX="3.00" EndY="1.99"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="1.01" EndX="3.00" EndY="3.00" Enabled="false"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="1.01" EndX="3.00" EndY="1.99"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00" Enabled="false"/>
+				<MountPoint Side="Bottom" StartX="1.02" StartY="1.02" EndX="1.98" EndY="1.98"/>
+			</MountPoints>
+
+
+
+
+
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\MA_AC150\MA_AC150_Gantry_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\MA_AC150\MA_AC150_Gantry_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\MA_AC150\MA_AC150_Gantry_BS3.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>MA_AC150_Gantry</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+
+	
+      <Components>
+        <Component Subtype="SteelPlate" Count="220" />
+        <Component Subtype="Construction" Count="80" />
+         <Component Subtype="LargeTube" Count="25" />
+        <Component Subtype="Motor" Count="18" />
+		<Component Subtype="SmallTube" Count="80" />
+        <Component Subtype="Computer" Count="6" />
+       <Component Subtype="MetalGrid" Count="450" />
+        <Component Subtype="SteelPlate" Count="900" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+
+	<UseModelIntersection>true</UseModelIntersection>
+  
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+ 
+
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+      <!--WeaponDefinitionId Subtype="LargeMissileTurret" /-->
+	  
+      <InventoryMaxVolume>.385</InventoryMaxVolume>
+      <InventorySize>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>.5</Z>
+      </InventorySize>
+	  
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+  <MinElevationDegrees>0</MinElevationDegrees>
+      <MaxElevationDegrees>0</MaxElevationDegrees>
+      <MinAzimuthDegrees>0</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>0</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>2800</MaxRangeMeters>
+      <RotationSpeed>0.002</RotationSpeed>
+      <ElevationSpeed>0.002 </ElevationSpeed>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>50</PCU>
+      <!--IsAirTight>false</IsAirTight-->  
+	  
+      <MaxRangeMeters>3000</MaxRangeMeters>	
+	  <AiEnabled>false</AiEnabled>
+
+
+
+		   
+    </Definition>	
+
+
+<!-- MA_AC150_45_Gantry -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>MA_AC150_45_Gantry</SubtypeId>
+      </Id>
+      <DisplayName>Slinger AC 150mm Sloped 45 Gantry</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\MA_AC150_45_Gantry.png</Icon>
+      <Description>A heavy duty 150mm cannon turret.
+Role: Battle
+Ammo: 150mm HE (kinetic)
+Range: 2500m
+By AutoMcD Astronautical
+Particle effects by Northwind Industries
+Sounds by Mike_dude</Description>
+	<CubeSize>Large</CubeSize>
+	<BlockTopology>TriangleMesh</BlockTopology>
+	<Size x="3" y="4" z="3" />
+	<!-- Center x="0" y="0" z="0" / -->
+	<ModelOffset x="0" y="0" z="0" />
+	<Model>Models\MA_AC150\MA_AC150_45_Gantry.mwm</Model>
+
+
+			<MountPoints>
+
+
+
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="3.00" EndY="4.00" Enabled="false"/>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.01" EndX="3.00" EndY="0.99"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="2.00" EndX="3.00" EndY="4.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="1.02" EndX="3.00" EndY="1.99"/>
+				<MountPoint Side="Left" StartX="1.00" StartY="2.00" EndX="2.00" EndY="3.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="2.03" EndY="1.00"/>
+				<MountPoint Side="Left" StartX="2.00" StartY="2.00" EndX="3.00" EndY="4.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="3.00" EndY="4.00" Enabled="false"/>
+				<MountPoint Side="Right" StartX="1.00" StartY="2.00" EndX="2.00" EndY="3.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="1.02" EndX="3.00" EndY="1.99"/>
+				<MountPoint Side="Right" StartX="0.97" StartY="0.00" EndX="3.00" EndY="1.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="2.00" EndX="1.00" EndY="4.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="3.00" EndY="4.00" Enabled="false"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00" Enabled="false"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="2.04"/>
+
+			</MountPoints>
+
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\MA_AC150\MA_AC150_45_Gantry_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\MA_AC150\MA_AC150_45_Gantry_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\MA_AC150\MA_AC150_45_Gantry_BS3.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>MA_AC150_45_Gantry</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+	
+      <Components>
+        <Component Subtype="SteelPlate" Count="220" />
+        <Component Subtype="Construction" Count="80" />
+         <Component Subtype="LargeTube" Count="25" />
+        <Component Subtype="Motor" Count="18" />
+		<Component Subtype="SmallTube" Count="80" />
+        <Component Subtype="Computer" Count="6" />
+       <Component Subtype="MetalGrid" Count="450" />
+        <Component Subtype="SteelPlate" Count="900" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+
+	<UseModelIntersection>true</UseModelIntersection>
+  
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+ 
+
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+      <!--WeaponDefinitionId Subtype="LargeMissileTurret" /-->
+	  
+      <InventoryMaxVolume>.385</InventoryMaxVolume>
+      <InventorySize>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>.5</Z>
+      </InventorySize>
+	  
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+  <MinElevationDegrees>0</MinElevationDegrees>
+      <MaxElevationDegrees>0</MaxElevationDegrees>
+      <MinAzimuthDegrees>0</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>0</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>2800</MaxRangeMeters>
+      <RotationSpeed>0.002</RotationSpeed>
+      <ElevationSpeed>0.002 </ElevationSpeed>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>50</PCU>
+      <!--IsAirTight>false</IsAirTight-->  
+	  
+      <MaxRangeMeters>3000</MaxRangeMeters>	
+	  <AiEnabled>false</AiEnabled>
+
+		   
+    </Definition>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	</CubeBlocks>
+
+
+	
+</Definitions>

@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Weapons>
+    <Weapon>
+      <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>MA_Laser</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="1" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+      <ReleaseTimeAfterFire>0</ReleaseTimeAfterFire>
+      <DeviateShotAngle>0</DeviateShotAngle>
+      <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+      <AmmoMagazines>
+        <AmmoMagazine Subtype="Energy" />
+      </AmmoMagazines>
+      <ReloadTime>0</ReloadTime>
+    </Weapon>
+
+   <Weapon>
+      <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>MA_Gatling</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="1" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+      <ReleaseTimeAfterFire>0</ReleaseTimeAfterFire>
+      <DeviateShotAngle>0</DeviateShotAngle>
+      <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+      <AmmoMagazines>
+        <AmmoMagazine Subtype="NATO_25x184mm" />
+      </AmmoMagazines>
+      <ReloadTime>30</ReloadTime>
+    </Weapon>
+  
+  
+     <Weapon>
+      <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>MA_Tiger150</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="1" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+      <ReleaseTimeAfterFire>0</ReleaseTimeAfterFire>
+      <DeviateShotAngle>0</DeviateShotAngle>
+      <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+      <AmmoMagazines>
+        <AmmoMagazine Subtype="MA_150mm" />
+      </AmmoMagazines>
+ 
+      <ReloadTime>30</ReloadTime>
+    </Weapon>
+	 <Weapon>
+      <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>MA_Tiger30</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="1" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+      <ReleaseTimeAfterFire>0</ReleaseTimeAfterFire>
+      <DeviateShotAngle>0</DeviateShotAngle>
+      <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+      <AmmoMagazines>
+        <AmmoMagazine Subtype="MA_30mm" />
+      </AmmoMagazines>
+ 
+      <ReloadTime>30</ReloadTime>
+    </Weapon>
+	
+    <Weapon>
+      <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>MA_EMP_Weapon</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="1" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+      <ReleaseTimeAfterFire>0</ReleaseTimeAfterFire>
+      <DeviateShotAngle>0</DeviateShotAngle>
+      <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+      <AmmoMagazines>
+        <AmmoMagazine Subtype="Energy" />
+      </AmmoMagazines>
+      <ReloadTime>0</ReloadTime>
+    </Weapon>		
+  </Weapons>
+ 
+   <Weapon>
+      <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>MA_Missile_Weapon</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="1" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+      <ReleaseTimeAfterFire>0</ReleaseTimeAfterFire>
+      <DeviateShotAngle>0</DeviateShotAngle>
+      <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+      <AmmoMagazines>
+        <AmmoMagazine Subtype="MA_Missile" />
+      </AmmoMagazines>
+      <ReloadTime>30</ReloadTime>
+    </Weapon>
+
+ 
+  
+</Definitions>

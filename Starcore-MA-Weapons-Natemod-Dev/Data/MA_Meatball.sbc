@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <CubeBlocks>
+
+
+
+<!-- MA_Meatball -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> <!--LargeGatlingTurret  Done-->
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>MA_Meatball</SubtypeId>
+      </Id>
+      <DisplayName>The Spicy Meatball Turret</DisplayName>
+      <Icon>Textures\Icons\spicy.dds</Icon>
+      <Description>The meal was almost perfect, but you added too much spice. Your family suffered through this one. It was so spicy, so painful to eat. But secretly you are proud, for you know it's not enough until it's too much.
+	  Ammo: 30mm (Kinetic)
+	  Range: 1250m
+	  By AutoMcD Astronautical, Criegwarfare, Mike_Dude.</Description>
+	<CubeSize>Large</CubeSize>
+	<BlockTopology>TriangleMesh</BlockTopology>
+	<Size x="1" y="2" z="1" />
+	<ModelOffset x="0" y="0" z="0" />
+	<Model>Models\MA_Meatball\MA_Meatball_Base.mwm</Model>
+	<BuildProgressModels>
+		<Model BuildPercentUpperBound="0.33" File="Models\MA_Meatball\MA_Meatball_Base_BS1.mwm" />
+		<Model BuildPercentUpperBound="0.67" File="Models\MA_Meatball\MA_Meatball_Base_BS2.mwm" />
+		<Model BuildPercentUpperBound="1.00" File="Models\MA_Meatball\MA_Meatball_Base_BS3.mwm" />
+	</BuildProgressModels>
+	<MountPoints>
+		<MountPoint Side="Bottom" StartX="0.08" StartY="0.08" EndX="0.92" EndY="0.92" />
+	</MountPoints>
+	<BlockPairName>MA_Meatball_Base</BlockPairName>
+	
+      <Components>
+        <Component Subtype="SteelPlate" Count="20" />
+        <Component Subtype="Construction" Count="8" />
+        <Component Subtype="MetalGrid" Count="30" />
+        <Component Subtype="LargeTube" Count="25" />
+        <Component Subtype="Motor" Count="6" />
+        <Component Subtype="Computer" Count="4" />
+        <Component Subtype="SteelPlate" Count="300" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+
+	<UseModelIntersection>true</UseModelIntersection>
+  
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>MA_Meatball</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+      <!--WeaponDefinitionId Subtype="LargeMissileTurret" /-->
+
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+  <MinElevationDegrees>0</MinElevationDegrees>
+      <MaxElevationDegrees>0</MaxElevationDegrees>
+      <MinAzimuthDegrees>0</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>0</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>750</MaxRangeMeters>
+      <RotationSpeed>0.002</RotationSpeed>
+      <ElevationSpeed>0.002 </ElevationSpeed>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>1200</PCU>
+      <IsAirTight>false</IsAirTight>   
+	<InventoryMaxVolume>0.385</InventoryMaxVolume>
+      <InventorySize>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>.5</Z>
+      </InventorySize>	  
+    </Definition>	
+	
+	
+<!-- MA_Blister -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> <!--LargeGatlingTurret  Done-->
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>MA_Blister</SubtypeId>
+      </Id>
+      <DisplayName>MA Blister Turret</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\blister.png</Icon>
+      <Description>A compact twin gatling turret.
+	  Role: Anti-Fighter
+	  Ammo: 30mm (kinetic)
+	  Range: 1250m
+	  By AutoMcD Astronautical, Criegwarfare, Mike_Dude.</Description>
+	<CubeSize>Large</CubeSize>
+	<BlockTopology>TriangleMesh</BlockTopology>
+	<Size x="1" y="1" z="1" />
+	<ModelOffset x="0" y="0" z="0" />
+<Model>Models\MA_Meatball\MA_Blister_Base.mwm</Model>
+	<BuildProgressModels>
+		<Model BuildPercentUpperBound="0.50" File="Models\MA_Meatball\MA_Blister_Base_BS1.mwm" />
+		<Model BuildPercentUpperBound="1.00" File="Models\MA_Meatball\MA_Blister_Base_BS2.mwm" />
+	</BuildProgressModels>
+	<MountPoints>
+		<MountPoint Side="Bottom" StartX="0.08" StartY="0.08" EndX="0.92" EndY="0.92" />
+	</MountPoints>
+	<BlockPairName>MA_Blister</BlockPairName>
+	
+      <Components>
+        <Component Subtype="SteelPlate" Count="20" />
+        <Component Subtype="Construction" Count="8" />
+        <Component Subtype="MetalGrid" Count="30" />
+        <Component Subtype="LargeTube" Count="25" />
+        <Component Subtype="Motor" Count="6" />
+        <Component Subtype="Computer" Count="4" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+
+	<UseModelIntersection>true</UseModelIntersection>
+  
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      
+			<MirroringY>X</MirroringY>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+      <!--WeaponDefinitionId Subtype="LargeMissileTurret" /-->
+
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+  <MinElevationDegrees>0</MinElevationDegrees>
+      <MaxElevationDegrees>0</MaxElevationDegrees>
+      <MinAzimuthDegrees>0</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>0</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>750</MaxRangeMeters>
+      <RotationSpeed>0.002</RotationSpeed>
+      <ElevationSpeed>0.002 </ElevationSpeed>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>400</PCU>
+      <IsAirTight>false</IsAirTight>     
+
+	<BlockVariants>
+        <BlockVariant>
+          <TypeId>ConveyorSorter</TypeId>
+          <SubtypeId>MA_Blister45</SubtypeId>
+        </BlockVariant>
+		<BlockVariant>
+          <TypeId>ConveyorSorter</TypeId>
+          <SubtypeId>MA_Blister30</SubtypeId>
+        </BlockVariant>
+		<BlockVariant>
+          <TypeId>ConveyorSorter</TypeId>
+          <SubtypeId>MA_Blister32</SubtypeId>
+        </BlockVariant>
+		<BlockVariant>
+          <TypeId>ConveyorSorter</TypeId>
+          <SubtypeId>MA_Meatball</SubtypeId>
+        </BlockVariant>
+
+      </BlockVariants>
+	<InventoryMaxVolume>0.385</InventoryMaxVolume>
+      <InventorySize>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>.5</Z>
+      </InventorySize>	  
+    </Definition>		
+	
+<!-- MA_Blister_sm -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> <!--LargeGatlingTurret  Done-->
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>MA_Blister_sm</SubtypeId>
+      </Id>
+      <DisplayName>MA Blister Turret</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\blister.png</Icon>
+      <Description>A compact twin gatling turret.
+	  Role: Anti-Fighter
+	  Ammo: 30mm (kinetic)
+	  Range: 1250m
+	  By AutoMcD Astronautical, Criegwarfare, Mike_Dude.</Description>
+	<CubeSize>Small</CubeSize>
+	<BlockTopology>TriangleMesh</BlockTopology>
+	<Size x="5" y="5" z="5" />
+	<ModelOffset x="0" y="0" z="0" />
+<Model>Models\MA_Meatball\MA_Blister_Base.mwm</Model>
+	<BuildProgressModels>
+		<Model BuildPercentUpperBound="0.50" File="Models\MA_Meatball\MA_Blister_Base_BS1.mwm" />
+		<Model BuildPercentUpperBound="1.00" File="Models\MA_Meatball\MA_Blister_Base_BS2.mwm" />
+	</BuildProgressModels>
+	<MountPoints>
+		<MountPoint Side="Bottom" StartX="0.38" StartY="0.38" EndX="4.62" EndY="4.62" />
+	</MountPoints>
+	<BlockPairName>MA_Blister</BlockPairName>
+	
+      <Components>
+        <Component Subtype="SteelPlate" Count="20" />
+        <Component Subtype="Construction" Count="8" />
+        <Component Subtype="MetalGrid" Count="30" />
+        <Component Subtype="LargeTube" Count="25" />
+        <Component Subtype="Motor" Count="6" />
+        <Component Subtype="Computer" Count="4" />
+        <Component Subtype="SteelPlate" Count="150" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+
+	<UseModelIntersection>true</UseModelIntersection>
+  
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+     
+			<MirroringY>X</MirroringY>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+      <!--WeaponDefinitionId Subtype="LargeMissileTurret" /-->
+
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+  <MinElevationDegrees>0</MinElevationDegrees>
+      <MaxElevationDegrees>0</MaxElevationDegrees>
+      <MinAzimuthDegrees>0</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>0</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>750</MaxRangeMeters>
+      <RotationSpeed>0.002</RotationSpeed>
+      <ElevationSpeed>0.002 </ElevationSpeed>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>400</PCU>
+      <IsAirTight>false</IsAirTight>      
+	<InventoryMaxVolume>0.385</InventoryMaxVolume>
+      <InventorySize>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>.5</Z>
+      </InventorySize>
+    </Definition>			
+	
+
+
+<!-- MA_Blister45 -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> <!--LargeGatlingTurret  Done-->
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>MA_Blister45</SubtypeId>
+      </Id>
+      <DisplayName>MA Blister Turret On Slope</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\MA_Blister45_Base.png</Icon>
+      <Description>A compact twin gatling turret.
+	  Role: Anti-Fighter
+	  Ammo: 30mm (kinetic)
+	  Range: 1250m
+	  By AutoMcD Astronautical, Criegwarfare, Mike_Dude.</Description>
+	<CubeSize>Large</CubeSize>
+	<BlockTopology>TriangleMesh</BlockTopology>
+	<Size x="1" y="1" z="1" />
+	<ModelOffset x="0" y="0" z="0" />
+<Model>Models\MA_Meatball\MA_Blister45_Base.mwm</Model>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+				<MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.5" File="Models\MA_Meatball\MA_Blister45_Base_BS1.mwm"/>
+				<Model BuildPercentUpperBound="1.0" File="Models\MA_Meatball\MA_Blister45_Base_BS2.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>MA_Blister45_Base</BlockPairName>
+	
+      <Components>
+        <Component Subtype="SteelPlate" Count="80" />
+        <Component Subtype="Construction" Count="8" />
+        <Component Subtype="MetalGrid" Count="80" />
+        <Component Subtype="LargeTube" Count="25" />
+        <Component Subtype="Motor" Count="6" />
+        <Component Subtype="Computer" Count="4" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+
+	<UseModelIntersection>true</UseModelIntersection>
+  
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+ 
+			<MirroringX>Y</MirroringX>
+			<MirroringY>X</MirroringY>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+      <!--WeaponDefinitionId Subtype="LargeMissileTurret" /-->
+
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+  <MinElevationDegrees>0</MinElevationDegrees>
+      <MaxElevationDegrees>0</MaxElevationDegrees>
+      <MinAzimuthDegrees>0</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>0</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>750</MaxRangeMeters>
+      <RotationSpeed>0.002</RotationSpeed>
+      <ElevationSpeed>0.002 </ElevationSpeed>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>400</PCU>
+      <IsAirTight>false</IsAirTight>   
+	<InventoryMaxVolume>0.385</InventoryMaxVolume>
+      <InventorySize>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>.5</Z>
+      </InventorySize>	  
+    </Definition>			
+
+<!-- MA_Blister45_sm -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> <!--LargeGatlingTurret  Done-->
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>MA_Blister45_sm</SubtypeId>
+      </Id>
+      <DisplayName>MA Blister Turret On Slope</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\MA_Blister45_Base.png</Icon>
+      <Description>A compact twin gatling turret.
+	  Role: Anti-Fighter
+	  Ammo: 30mm (kinetic)
+	  Range: 1250m
+	  By AutoMcD Astronautical, Criegwarfare, Mike_Dude.</Description>
+	<CubeSize>Small</CubeSize>
+	<BlockTopology>TriangleMesh</BlockTopology>
+	<Size x="5" y="5" z="5" />
+	<ModelOffset x="0" y="0" z="0" />
+<Model>Models\MA_Meatball\MA_Blister45_Base.mwm</Model>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="5.0" EndY="5.0"/>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="5.0" EndY="5.0"/>
+				<MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="5.0" EndY="5.0"/>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="5.0" EndY="5.0"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.5" File="Models\MA_Meatball\MA_Blister45_Base_BS1.mwm"/>
+				<Model BuildPercentUpperBound="1.0" File="Models\MA_Meatball\MA_Blister45_Base_BS2.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>MA_Blister45_Base</BlockPairName>
+	
+      <Components>
+        <Component Subtype="SteelPlate" Count="80" />
+        <Component Subtype="Construction" Count="8" />
+        <Component Subtype="MetalGrid" Count="80" />
+        <Component Subtype="LargeTube" Count="25" />
+        <Component Subtype="Motor" Count="6" />
+        <Component Subtype="Computer" Count="4" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+
+	<UseModelIntersection>true</UseModelIntersection>
+  
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+ 
+			<MirroringX>Y</MirroringX>
+			<MirroringY>X</MirroringY>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+      <!--WeaponDefinitionId Subtype="LargeMissileTurret" /-->
+      	<InventoryMaxVolume>0.385</InventoryMaxVolume>
+      <InventorySize>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>.5</Z>
+      </InventorySize>
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+  <MinElevationDegrees>0</MinElevationDegrees>
+      <MaxElevationDegrees>0</MaxElevationDegrees>
+      <MinAzimuthDegrees>0</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>0</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>750</MaxRangeMeters>
+      <RotationSpeed>0.002</RotationSpeed>
+      <ElevationSpeed>0.002 </ElevationSpeed>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>400</PCU>
+      <IsAirTight>false</IsAirTight>      
+    </Definition>			
+
+<!-- MA_Blister30 -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> <!--LargeGatlingTurret  Done-->
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>MA_Blister30</SubtypeId>
+      </Id>
+      <DisplayName>MA Blister Turret On 2x Slope</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\MA_Blister30_Base.png</Icon>
+      <Description>A compact twin gatling turret.
+	  Role: Anti-Fighter
+	  Ammo: 30mm (kinetic)
+	  Range: 1250m
+	  By AutoMcD Astronautical, Criegwarfare, Mike_Dude.</Description>
+	<CubeSize>Large</CubeSize>
+	<BlockTopology>TriangleMesh</BlockTopology>
+	<Size x="1" y="1" z="1" />
+	<ModelOffset x="0" y="0" z="0" />
+<Model>Models\MA_Meatball\MA_Blister30_Base.mwm</Model>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+				<MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+				<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.5" File="Models\MA_Meatball\MA_Blister30_Base_BS1.mwm"/>
+				<Model BuildPercentUpperBound="1.0" File="Models\MA_Meatball\MA_Blister30_Base_BS2.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>MA_Blister30_Base</BlockPairName>
+	
+      <Components>
+        <Component Subtype="SteelPlate" Count="40" />
+        <Component Subtype="Construction" Count="8" />
+        <Component Subtype="MetalGrid" Count="60" />
+        <Component Subtype="LargeTube" Count="25" />
+        <Component Subtype="Motor" Count="6" />
+        <Component Subtype="Computer" Count="4" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+
+	<UseModelIntersection>true</UseModelIntersection>
+  
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+ 
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+      <!--WeaponDefinitionId Subtype="LargeMissileTurret" /-->
+      	<InventoryMaxVolume>0.385</InventoryMaxVolume>
+      <InventorySize>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>.5</Z>
+      </InventorySize>
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+  <MinElevationDegrees>0</MinElevationDegrees>
+      <MaxElevationDegrees>0</MaxElevationDegrees>
+      <MinAzimuthDegrees>0</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>0</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>750</MaxRangeMeters>
+      <RotationSpeed>0.002</RotationSpeed>
+      <ElevationSpeed>0.002 </ElevationSpeed>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>400</PCU>
+      <IsAirTight>false</IsAirTight>      
+    </Definition>			
+
+<!-- MA_Blister32 -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> <!--LargeGatlingTurret  Done-->
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>MA_Blister32</SubtypeId>
+      </Id>
+      <DisplayName>MA Blister Turret On 2x Slope Tip</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\MA_Blister30_Base2.png</Icon>
+      <Description>A compact twin gatling turret.
+	  Role: Anti-Fighter
+	  Ammo: 30mm (kinetic)
+	  Range: 1250m
+	  By AutoMcD Astronautical, Criegwarfare, Mike_Dude.</Description>
+	<CubeSize>Large</CubeSize>
+	<BlockTopology>TriangleMesh</BlockTopology>
+	<Size x="1" y="1" z="1" />
+	<ModelOffset x="0" y="0" z="0" />
+<Model>Models\MA_Meatball\MA_Blister30_Base2.mwm</Model>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.49"/>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.49"/>
+				<MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.49"/>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.5" File="Models\MA_Meatball\MA_Blister30_Base2_BS1.mwm"/>
+				<Model BuildPercentUpperBound="1.0" File="Models\MA_Meatball\MA_Blister30_Base2_BS2.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>MA_Blister30_Base2</BlockPairName>
+	
+      <Components>
+        <Component Subtype="SteelPlate" Count="40" />
+        <Component Subtype="Construction" Count="8" />
+        <Component Subtype="MetalGrid" Count="20" />
+        <Component Subtype="LargeTube" Count="25" />
+        <Component Subtype="Motor" Count="6" />
+        <Component Subtype="Computer" Count="4" />
+        <Component Subtype="SteelPlate" Count="50" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+
+	<UseModelIntersection>true</UseModelIntersection>
+  
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+ 
+			<MirroringX>Y</MirroringX>
+			<MirroringY>X</MirroringY>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+      <!--WeaponDefinitionId Subtype="LargeMissileTurret" /-->
+      	<InventoryMaxVolume>0.385</InventoryMaxVolume>
+      <InventorySize>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>.5</Z>
+      </InventorySize>
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+  <MinElevationDegrees>0</MinElevationDegrees>
+      <MaxElevationDegrees>0</MaxElevationDegrees>
+      <MinAzimuthDegrees>0</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>0</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>750</MaxRangeMeters>
+      <RotationSpeed>0.002</RotationSpeed>
+      <ElevationSpeed>0.002 </ElevationSpeed>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>400</PCU>
+      <IsAirTight>false</IsAirTight>      
+    </Definition>			
+
+<!-- MA_Blister32_sm -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> <!--LargeGatlingTurret  Done-->
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>MA_Blister32_sm</SubtypeId>
+      </Id>
+      <DisplayName>MA Blister Turret On 2x Slope Tip</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\MA_Blister30_Base2.png</Icon>
+      <Description>A compact twin gatling turret.
+	  Role: Anti-Fighter
+	  Ammo: 30mm (kinetic)
+	  Range: 1250m
+	  By AutoMcD Astronautical, Criegwarfare, Mike_Dude.</Description>
+	<CubeSize>Small</CubeSize>
+	<BlockTopology>TriangleMesh</BlockTopology>
+	<Size x="5" y="5" z="5" />
+	<ModelOffset x="0" y="0" z="0" />
+<Model>Models\MA_Meatball\MA_Blister30_Base2.mwm</Model>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="5.0" EndY="2.5"/>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="5.0" EndY="2.5"/>
+				<MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="5.0" EndY="2.5"/>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="5.0" EndY="5.0"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.5" File="Models\MA_Meatball\MA_Blister30_Base2_BS1.mwm"/>
+				<Model BuildPercentUpperBound="1.0" File="Models\MA_Meatball\MA_Blister30_Base2_BS2.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>MA_Blister30_Base2</BlockPairName>
+	
+      <Components>
+        <Component Subtype="SteelPlate" Count="40" />
+        <Component Subtype="Construction" Count="8" />
+        <Component Subtype="MetalGrid" Count="20" />
+        <Component Subtype="LargeTube" Count="25" />
+        <Component Subtype="Motor" Count="6" />
+        <Component Subtype="Computer" Count="4" />
+        <Component Subtype="SteelPlate" Count="50" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+
+	<UseModelIntersection>true</UseModelIntersection>
+  
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+ 
+			<MirroringX>Y</MirroringX>
+			<MirroringY>X</MirroringY>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+      <!--WeaponDefinitionId Subtype="LargeMissileTurret" /-->
+      	<InventoryMaxVolume>0.385</InventoryMaxVolume>
+      <InventorySize>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>.5</Z>
+      </InventorySize>
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+  <MinElevationDegrees>0</MinElevationDegrees>
+      <MaxElevationDegrees>0</MaxElevationDegrees>
+      <MinAzimuthDegrees>0</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>0</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>750</MaxRangeMeters>
+      <RotationSpeed>0.002</RotationSpeed>
+      <ElevationSpeed>0.002 </ElevationSpeed>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>400</PCU>
+      <IsAirTight>false</IsAirTight>      
+    </Definition>			
+
+
+
+
+
+    </CubeBlocks>
+
+
+
+
+	
+</Definitions>
