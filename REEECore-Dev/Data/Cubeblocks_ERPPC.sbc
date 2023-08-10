@@ -1,0 +1,95 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<CubeBlocks>
+	    	
+		<!-- MetalStorm -->
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>ERPPC</SubtypeId>
+			</Id>
+			<DisplayName>ER PPC</DisplayName>
+
+      <Description>
+        Magazine Capacity: [1]
+        Rate of Fire: [120]
+        Reload Speed: [15 seconds]
+        Ammunition: [1100m/s,] [Kinetic]
+        APHE 600mm:
+        [Penetration fuse]
+        HE 600mm:
+        [Contact fuse, more damage]
+        [100mw passive draw]
+
+      </Description>
+			
+			<Icon>Textures\Icons\ERPPC_icon.png</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="2" z="8"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\75mmHyperP.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="480" />
+                <Component Subtype="Construction" Count="126" />
+								<Component Subtype="SmallTube" Count="24" />
+                <Component Subtype="Motor" Count="45" />
+                <Component Subtype="LargeTube" Count="24" />
+                <Component Subtype="Computer" Count="18" />
+                <Component Subtype="InteriorPlate" Count="36" />
+                <Component Subtype="Construction" Count="42" />
+                <Component Subtype="SteelPlate" Count="2100" />
+			</Components>
+			<CriticalComponent Index="0" Subtype="Computer"/>
+			<MountPoints>
+				<MountPoint Side="Top" StartX="0" StartY="0" EndX="1" EndY="4" />
+				<MountPoint Side="Right" StartX="0" StartY="0" EndX="3" EndY="2" />
+				<MountPoint Side="Left" StartX="5" StartY="0" EndX="8" EndY="2" />
+				<MountPoint Side="Bottom" StartX="0" StartY="5" EndX="1" EndY="6" />
+				<MountPoint Side="Back" StartX="0" StartY="1" EndX="1" EndY="2" />
+			</MountPoints>
+			<BuildProgressModels>
+			</BuildProgressModels>
+			<VoxelPlacement>
+			  <StaticMode>
+				<PlacementMode>OutsideVoxel</PlacementMode>
+				<MaxAllowed>0.2</MaxAllowed>
+				<MinAllowed>0</MinAllowed>
+			  </StaticMode>
+			  <DynamicMode>
+				<PlacementMode>OutsideVoxel</PlacementMode>
+				<MaxAllowed>0.2</MaxAllowed>
+				<MinAllowed>0.01</MinAllowed>
+			  </DynamicMode>
+			</VoxelPlacement>
+			<BlockPairName>ERPPC</BlockPairName>
+			<MirroringY>Z</MirroringY>
+            <MirroringZ>Y</MirroringZ>
+            <EdgeType>Light</EdgeType>
+            <BuildTimeSeconds>85</BuildTimeSeconds>
+            <OverlayTexture>Textures\GUI\Screens\AWP_TurretOverlay_Universal.dds</OverlayTexture>
+            <WeaponDefinitionId Subtype="ERPPC" />
+            <InventoryMaxVolume>1.056</InventoryMaxVolume>
+            <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+            <DamagedSound>ParticleWeapExpl</DamagedSound>
+            <ResourceSinkGroup>Defense</ResourceSinkGroup>
+            <MinElevationDegrees>-9</MinElevationDegrees>
+            <MaxElevationDegrees>85</MaxElevationDegrees>
+            <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+            <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+            <IdleRotation>false</IdleRotation>
+            <MaxRangeMeters>800</MaxRangeMeters>
+            <RotationSpeed>0.002</RotationSpeed>
+            <ElevationSpeed>0.003 </ElevationSpeed>
+            <EmissiveColorPreset>Default</EmissiveColorPreset>
+            <MinFov>0.1</MinFov>
+            <MaxFov>1.0</MaxFov>
+            <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+            <DestroySound>WepSmallWarheadExpl</DestroySound>
+            <PCU>280</PCU>
+            <IsAirTight>false</IsAirTight>
+			<InventoryFillFactorMin>1</InventoryFillFactorMin>
+		</Definition>
+			
+	</CubeBlocks>
+</Definitions>

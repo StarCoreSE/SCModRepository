@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Sounds>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>FireworkRESound</SubtypeId>
+      </Id>
+      <Volume>0.3</Volume>
+      <Category>IMP_SHIP</Category>
+      <MaxDistance>3000</MaxDistance>
+
+
+      <PreventSynchronization>1</PreventSynchronization>
+      <SoundLimit>10</SoundLimit>
+
+	  <Loopable>false</Loopable>
+            <DistantSounds>
+        <DistantSound DistanceCrossfade="20" Distance="500" Sound="FireworkRESound_Dist" />
+      </DistantSounds>
+       
+	      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\fireworkNear1.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\fireworkNear2.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\fireworkNear3.wav</Start>
+        </Wave>		
+        <Wave Type="D3">
+          <Start>Audio\fireworkNear4.wav</Start>
+        </Wave>	  
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>FireworkRESound_Dist</SubtypeId>
+      </Id>
+      <Volume>0.3</Volume>
+      <Category>IMP_SHIP</Category>
+      <MaxDistance>3000</MaxDistance>
+
+
+      <PreventSynchronization>1</PreventSynchronization>
+      <SoundLimit>10</SoundLimit>
+
+	  <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\fireworkDistant1.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\fireworkDistant2.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\fireworkDistant3.wav</Start>
+        </Wave>		
+        <Wave Type="D3">
+          <Start>Audio\fireworkDistant4.wav</Start>
+        </Wave>	         
+	
+      </Waves>
+    </Sound>
+
+
+	
+  </Sounds>
+</Definitions>

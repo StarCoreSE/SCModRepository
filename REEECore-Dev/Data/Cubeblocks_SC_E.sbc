@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <CubeBlocks>
+ 
+
+
+<!-- MCRN_Heavy -->
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>MCRN_Heavy_Torpedo</SubtypeId>
+     </Id>
+     <DisplayName>MCRN Torpedo Launcher</DisplayName>
+     <Description>
+      [20km max range]
+      [Energy damage]
+      [800~ m/s] 
+      [Reloads 6 times]
+      Effective against most targets, more vulnerable to point defense than other launchers.
+     </Description>
+     <Icon>Textures\GUI\Icons\MCRN-Logo.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="2" y="2" z="4" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Starcore_E\MCRN_Heavy_Launcher.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="120" />
+       <Component Subtype="Construction" Count="160" />
+       <Component Subtype="MetalGrid" Count="45" />
+       <Component Subtype="SmallTube" Count="50" />
+       <Component Subtype="LargeTube" Count="25" />
+       <Component Subtype="Motor" Count="50" />
+       <Component Subtype="Computer" Count="60" />
+       <Component Subtype="Construction" Count="120" />
+       <Component Subtype="SteelPlate" Count="400" />
+     </Components>
+     <CriticalComponent Subtype="Motor" Index="0" />
+     <BlockPairName>MCRN_Heavy_Torpedo</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>65</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>10000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+  <DestroySound>Betty_Weapon_Destroyed</DestroySound>
+   </Definition>
+
+<!-- UNN Heavy -->
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>UNN_Heavy_Torpedo</SubtypeId>
+     </Id>
+     <DisplayName>UNN Heavy Torpedo Launcher</DisplayName>
+     <Description>
+      [12km max range]
+      [Energy damage]
+      [800~ m/s] 
+      [Reloads 4 times]
+      Effective against most targets, more vulnerable to point defense than other launchers.
+     </Description>
+     <Icon>Textures\GUI\Icons\UNN-Logo.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="3" y="1" z="5" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Starcore_E\UNN_Heavy_Launcher.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="120" />
+       <Component Subtype="Construction" Count="160" />
+       <Component Subtype="MetalGrid" Count="45" />
+       <Component Subtype="SmallTube" Count="50" />
+       <Component Subtype="LargeTube" Count="25" />
+       <Component Subtype="Motor" Count="50" />
+       <Component Subtype="Computer" Count="60" />
+       <Component Subtype="Construction" Count="120" />
+       <Component Subtype="SteelPlate" Count="300" />
+     </Components>
+     <CriticalComponent Subtype="Motor" Index="0" />
+     <BlockPairName>UNN_Heavy_Torpedo</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>65</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>10000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+  <DestroySound>Betty_Weapon_Destroyed</DestroySound>
+   </Definition>
+
+<!-- OPA Heavy -->
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>OPA_Heavy_Torpedo</SubtypeId>
+     </Id>
+     <DisplayName>OPA Heavy Torpedo Launcher</DisplayName>
+     <Description>Does not reload.
+	 </Description>
+     <Icon>Textures\GUI\Icons\OPA-Logo.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="2" y="2" z="4" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Starcore_E\OPA-Launcher.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="120" />
+       <Component Subtype="Construction" Count="160" />
+       <Component Subtype="MetalGrid" Count="45" />
+       <Component Subtype="SmallTube" Count="50" />
+       <Component Subtype="LargeTube" Count="25" />
+       <Component Subtype="Motor" Count="50" />
+       <Component Subtype="Computer" Count="60" />
+       <Component Subtype="Construction" Count="120" />
+       <Component Subtype="SteelPlate" Count="250" />
+     </Components>
+     <CriticalComponent Subtype="Motor" Index="0" />
+     <BlockPairName>OPA_Heavy_Torpedo</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+	   <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>65</BuildTimeSeconds>
+      <DisassembleRatio>5</DisassembleRatio>
+      <NavigationDefinition>Default</NavigationDefinition>
+	   <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <MinElevationDegrees>-15</MinElevationDegrees>
+      <MaxElevationDegrees>75</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+	  <AiEnabled>false</AiEnabled>
+      <MaxRangeMeters>7000</MaxRangeMeters>
+      <RotationSpeed>0.0005</RotationSpeed>
+      <ElevationSpeed>0.0002 </ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+  <DestroySound>Betty_Weapon_Destroyed</DestroySound>
+    </Definition>	
+
+<!-- UNN Light -->
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>UNN_Light_Torpedo</SubtypeId>
+     </Id>
+     <DisplayName>UNN Light Torpedo Launcher</DisplayName>
+     <Description>
+      Does not reload.
+     </Description>
+     <Icon>Textures\GUI\Icons\UNN-Logo.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="1" z="3" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Starcore_E\UNN_Light_Launcher.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="120" />
+       <Component Subtype="Construction" Count="160" />
+       <Component Subtype="MetalGrid" Count="45" />
+       <Component Subtype="SmallTube" Count="50" />
+       <Component Subtype="LargeTube" Count="25" />
+       <Component Subtype="Motor" Count="50" />
+       <Component Subtype="Computer" Count="60" />
+       <Component Subtype="Construction" Count="120" />
+       <Component Subtype="SteelPlate" Count="120" />
+     </Components>
+     <CriticalComponent Subtype="Motor" Index="0" />
+     <BlockPairName>UNN_Light_Torpedo</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>65</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>10000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+  <DestroySound>Betty_Weapon_Destroyed</DestroySound>
+   </Definition>
+
+<!-- OPA Light -->
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>OPA_Light_Missile</SubtypeId>
+     </Id>
+     <DisplayName>OPA Light Missile Launcher</DisplayName>
+     <Description>Does not reload.
+
+     </Description>
+     <Icon>Textures\GUI\Icons\OPA-Logo.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="1" z="3" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Starcore_E\OPA_Light_Launcher.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="120" />
+       <Component Subtype="Construction" Count="160" />
+       <Component Subtype="MetalGrid" Count="45" />
+       <Component Subtype="SmallTube" Count="50" />
+       <Component Subtype="LargeTube" Count="25" />
+       <Component Subtype="Motor" Count="50" />
+       <Component Subtype="Computer" Count="60" />
+       <Component Subtype="Construction" Count="120" />
+       <Component Subtype="SteelPlate" Count="100" />
+     </Components>
+     <CriticalComponent Subtype="Motor" Index="0" />
+     <BlockPairName>OPA_Light_Missile</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>65</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>10000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+  <DestroySound>Betty_Weapon_Destroyed</DestroySound>
+   </Definition>
+
+ </CubeBlocks>
+</Definitions>

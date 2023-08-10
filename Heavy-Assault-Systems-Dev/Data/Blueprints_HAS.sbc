@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Blueprints>
+	
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>NyxComponent</SubtypeId>
+            </Id>
+            <DisplayName>NyxComponent</DisplayName>
+            <Icon>Textures\GUI\Icons\component\construction_components_component.dds</Icon>
+            <Prerequisites>
+                <Item Amount="8" TypeId="Ingot" SubtypeId="Iron" />
+            </Prerequisites>
+            <Result Amount="1" TypeId="Component" SubtypeId="NyxComponent" />
+            <BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>
+            <IsPrimary>true</IsPrimary>
+        </Blueprint>
+
+      <Blueprint>
+        <Id>
+          <TypeId>BlueprintDefinition</TypeId>
+          <SubtypeId>ThanatosComponent</SubtypeId>
+        </Id>
+        <DisplayName>ThanatosComponent</DisplayName>
+        <Icon>Textures\GUI\Icons\component\construction_components_component.dds</Icon>
+        <Prerequisites>
+          <Item Amount="8" TypeId="Ingot" SubtypeId="Iron" />
+        </Prerequisites>
+        <Result Amount="1" TypeId="Component" SubtypeId="ThanatosComponent" />
+        <BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>
+        <IsPrimary>true</IsPrimary>
+      </Blueprint>   
+      
+      <Blueprint>
+        <Id>
+          <TypeId>BlueprintDefinition</TypeId>
+          <SubtypeId>AlectoComponent</SubtypeId>
+        </Id>
+        <DisplayName>AlectoComponent</DisplayName>
+        <Icon>Textures\GUI\Icons\component\construction_components_component.dds</Icon>
+        <Prerequisites>
+          <Item Amount="8" TypeId="Ingot" SubtypeId="Iron" />
+        </Prerequisites>
+        <Result Amount="1" TypeId="Component" SubtypeId="AlectoComponent" />
+        <BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>
+        <IsPrimary>true</IsPrimary>
+      </Blueprint>      
+      
+      <Blueprint>
+        <Id>
+          <TypeId>BlueprintDefinition</TypeId>
+          <SubtypeId>MammonComponent</SubtypeId>
+        </Id>
+        <DisplayName>MammonComponent</DisplayName>
+        <Icon>Textures\GUI\Icons\component\construction_components_component.dds</Icon>
+        <Prerequisites>
+          <Item Amount="8" TypeId="Ingot" SubtypeId="Iron" />
+        </Prerequisites>
+        <Result Amount="1" TypeId="Component" SubtypeId="MammonComponent" />
+        <BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>
+        <IsPrimary>true</IsPrimary>
+      </Blueprint>      
+      
+      <Blueprint>
+        <Id>
+          <TypeId>BlueprintDefinition</TypeId>
+          <SubtypeId>TigtoneComponent</SubtypeId>
+        </Id>
+        <DisplayName>TigtoneComponent</DisplayName>
+        <Icon>Textures\GUI\Icons\component\construction_components_component.dds</Icon>
+        <Prerequisites>
+          <Item Amount="8" TypeId="Ingot" SubtypeId="Iron" />
+        </Prerequisites>
+        <Result Amount="1" TypeId="Component" SubtypeId="TigtoneComponent" />
+        <BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>
+        <IsPrimary>true</IsPrimary>
+      </Blueprint>      
+       
+      <Blueprint>
+        <Id>
+          <TypeId>BlueprintDefinition</TypeId>
+          <SubtypeId>VulcanComponent</SubtypeId>
+        </Id>
+        <DisplayName>VulcanComponent</DisplayName>
+        <Icon>Textures\GUI\Icons\component\construction_components_component.dds</Icon>
+        <Prerequisites>
+          <Item Amount="8" TypeId="Ingot" SubtypeId="Iron" />
+        </Prerequisites>
+        <Result Amount="1" TypeId="Component" SubtypeId="VulcanComponent" />
+        <BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>
+        <IsPrimary>true</IsPrimary>
+      </Blueprint>      
+      
+    </Blueprints>
+</Definitions>

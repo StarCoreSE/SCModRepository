@@ -1,0 +1,42 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CategoryClasses>
+  
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+        <SubtypeId>SC_REEECore_UI</SubtypeId>
+      </Id>
+      <DisplayName>REEECore</DisplayName>
+      <Name>REEECore</Name>
+      <ItemIds>
+        <!--<string>Starcore_SSRM_Block</string>
+        <string>Starcore_MRM_Block</string>
+        <string>Starcore_LRM_Block</string>-->
+        <string>Starcore_RWR_Projectiles</string>
+        <string>Starcore_RWR_Asteroids</string>
+        
+        <string>ModularSRM8</string>
+        
+        <string>ModularMRM10</string>
+        <!--<string>ModularMiddleMRM10</string>
+        <string>ModularMRM10Angled</string>
+        <string>ModularMRM10AngledReversed</string>
+        
+        <string>ModularMiddleLRM5</string>
+        <string>ModularLRM5Angled</string>-->
+        <string>ModularLRM5</string>
+        
+        <string>Starcore_PPC_Block</string>
+        <string>Starcore_Arrow_Block</string>
+        <string>Starcore_Fixed_Coil_Cannon</string>
+        <string>Starcore_Drone_Block</string>
+        <string>Starcore_M_Laser_Block</string>
+        <string>Starcore_L_Laser_Block</string>
+      </ItemIds>
+    </Category>
+	
+
+	
+  </CategoryClasses>
+</Definitions>

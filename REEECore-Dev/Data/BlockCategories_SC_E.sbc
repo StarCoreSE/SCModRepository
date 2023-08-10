@@ -1,0 +1,24 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CategoryClasses>
+  
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+        <SubtypeId>SC_REEECore_UI_E</SubtypeId>
+      </Id>
+      <DisplayName>REEECore Expanse</DisplayName>
+      <Name>REEECore Expanse</Name>
+      <ItemIds>
+        <string>MCRN_Heavy_Torpedo</string>
+        <string>UNN_Heavy_Torpedo</string>
+        <!--<string>UNN_Light_Torpedo</string>
+        <string>OPA_Light_Missile</string>
+        <string>OPA_Heavy_Torpedo</string>-->
+      </ItemIds>
+    </Category>
+	
+	
+	
+  </CategoryClasses>
+</Definitions>

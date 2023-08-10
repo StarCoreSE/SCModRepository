@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <BlockVariantGroups>
+<!-- Great for Examples on how this shit works -->	
+
+      <!--<BlockVariantGroup>
+            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Starcore_45degreeBlockVariants_LRM" />
+            <Icon>Textures\Icons\lrm20_icon.dds</Icon>
+            <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
+            <Description>Description_BlockGroup_TurretGroup</Description>
+            <Blocks>
+<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Starcore_LRM_Block" />
+<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Starcore_LRM45_Block" />
+Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Starcore_MissileTube_LRM" /
+
+            </Blocks>
+        </BlockVariantGroup>-->
+		
+		<!--<BlockVariantGroup>
+            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Starcore_45degreeBlockVariants_MRM" />
+            <Icon>Textures\Icons\mrm30_icon.dds</Icon>
+            <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
+            <Description>Description_BlockGroup_TurretGroup</Description>
+            <Blocks>
+<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Starcore_MRM_Block" />
+<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Starcore_MRM45_Block" />
+Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Starcore_MissileTube_MRM" /
+
+            </Blocks>
+        </BlockVariantGroup>-->
+		
+		<!--<BlockVariantGroup>
+            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Starcore_45degreeBlockVariants_SRM" />
+            <Icon>Textures\Icons\srm8l.dds</Icon>
+            <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
+            <Description>Description_BlockGroup_TurretGroup</Description>
+            <Blocks>
+<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="ModularSRM8_Block" />
+Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Starcore_MissileTube_SRM" /
+            </Blocks>
+        </BlockVariantGroup>-->
+      
+		<!--<BlockVariantGroup>
+            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Starcore_BlockVariants_AMS" />
+            <Icon>Textures\GUI\Icons\Cubes\gatling_turret.dds</Icon>
+            <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
+            <Description>Description_BlockGroup_TurretGroup</Description>
+            <Blocks>
+<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Starcore_AMS_I_Block" />
+Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Starcore_AMS_II_Block" /
+
+
+            </Blocks>
+        </BlockVariantGroup>-->
+      
+        <BlockVariantGroup>
+            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Starcore_Expanse_TorpedoBlockVariants" />
+            <Icon>Textures\GUI\Icons\MCRN-Logo.dds</Icon>
+            <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
+            <Description>Description_BlockGroup_TurretGroup</Description>
+            <Blocks>
+              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="MCRN_Heavy_Torpedo" />
+              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="UNN_Heavy_Torpedo" />
+              <!--<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="UNN_Heavy_Torpedo" />
+              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="OPA_Heavy_Torpedo" />
+              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="UNN_Light_Torpedo" />
+              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="OPA_Light_Missile" />-->
+            </Blocks>
+        </BlockVariantGroup>
+ 
+              <BlockVariantGroup>
+            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Starcore_Modular_LRM_BlockVariants" />
+            <Icon>Textures\Icons\lrm5icon.dds</Icon>
+            <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
+            <Description>Description_BlockGroup_TurretGroup</Description>
+            <Blocks>
+              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="ModularLRM5" />
+              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="ModularMiddleLRM5" />
+              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="ModularLRM5Angled" />
+              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="ModularLRM5AngledReversed" />
+            </Blocks>
+        </BlockVariantGroup>
+      
+                    <BlockVariantGroup>
+            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Starcore_Modular_MRM_BlockVariants" />
+            <Icon>Textures\Icons\mrm10icon.dds</Icon>
+            <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
+            <Description>Description_BlockGroup_TurretGroup</Description>
+            <Blocks>
+              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="ModularMRM10" />
+              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="ModularMiddleMRM10" />
+              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="ModularMRM10Angled" />
+              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="ModularMRM10AngledReversed" />
+            </Blocks>
+        </BlockVariantGroup>
+      
+    </BlockVariantGroups>
+</Definitions>

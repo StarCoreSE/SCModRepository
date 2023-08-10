@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Sounds>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>BainlessFire</SubtypeId>
+      </Id>
+      <Volume>0.2</Volume>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Loopable>false</Loopable>
+
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Bainless\chaingun_fire_h3_1.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Bainless\chaingun_fire_h3_2.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Bainless\chaingun_fire_h3_3.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Bainless\chaingun_fire_h3_4.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Bainless\chaingun_fire_h3_5.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>BainlessReload</SubtypeId>
+      </Id>
+      <Volume>0.2</Volume>
+      <Category>SHOT</Category>
+      <MaxDistance>500</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Loopable>true</Loopable>
+
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Bainless\thebigreload.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+
+  </Sounds>
+</Definitions>

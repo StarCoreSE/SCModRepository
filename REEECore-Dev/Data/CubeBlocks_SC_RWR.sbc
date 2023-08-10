@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <CubeBlocks>
+
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>Starcore_RWR_Projectiles</SubtypeId>
+      </Id>
+      <DisplayName>RWR - Radar Warning Reciever</DisplayName>
+	  <Description>
+      Detects missiles out to [4km]
+      Beeps if missile detected
+      No beeps if no missile
+      Must have LOS to the missile
+	 </Description>
+     <Icon>Textures\Icons\RWR icon.dds</Icon>
+      <CubeSize>Large</CubeSize>
+	  <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1"/>
+      <ModelOffset x="0" y="0" z="0" />
+	   <Model>Models\Starcore_RWR\RWR_Reciever.mwm</Model>
+       <Components>
+        <Component Subtype="SteelPlate" Count="10" />
+        <Component Subtype="Computer" Count="3" />
+        <Component Subtype="SteelPlate" Count="10" />
+       <Component Subtype="MetalGrid" Count="50" />
+        <Component Subtype="SteelPlate" Count="125" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+     <!--<BuildProgressModels>-->
+				<!--<Model BuildPercentUpperBound="1.0" File="Models\Starcore_RWR\RWR_Reciever.mwm"/>-->
+			<!--</BuildProgressModels>-->
+      <BlockPairName>Starcore_RWR_Projectiles</BlockPairName>
+       <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+	   <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>30</BuildTimeSeconds>
+      <DisassembleRatio>5</DisassembleRatio>
+      <NavigationDefinition>Default</NavigationDefinition>
+	   <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <MinElevationDegrees>-15</MinElevationDegrees>
+      <MaxElevationDegrees>75</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+	  <AiEnabled>false</AiEnabled>
+      <MaxRangeMeters>7000</MaxRangeMeters>
+      <RotationSpeed>0.0005</RotationSpeed>
+      <ElevationSpeed>0.0002 </ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+  <DestroySound>Betty_Weapon_Destroyed</DestroySound>
+    </Definition>
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>Starcore_RWR_Asteroids</SubtypeId>
+      </Id>
+      <DisplayName>AWR - Asteroid Warning Reciever</DisplayName>
+	  <Description>
+      Detects asteroids out to [4km]
+      No beeps, for PB API only
+      Must have LOS to the asteroid.
+	 </Description>
+     <Icon>Textures\Icons\RWR icon.dds</Icon>
+      <CubeSize>Large</CubeSize>
+	  <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1"/>
+      <ModelOffset x="0" y="0" z="0" />
+	   <Model>Models\Starcore_RWR\RWR_Reciever.mwm</Model>
+       <Components>
+        <Component Subtype="SteelPlate" Count="10" />
+        <Component Subtype="Computer" Count="3" />
+        <Component Subtype="SteelPlate" Count="10" />
+       <Component Subtype="MetalGrid" Count="50" />
+        <Component Subtype="SteelPlate" Count="125" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+     <!--<BuildProgressModels>-->
+				<!--<Model BuildPercentUpperBound="1.0" File="Models\Starcore_RWR\RWR_Reciever.mwm"/>-->
+			<!--</BuildProgressModels>-->
+      <BlockPairName>Starcore_RWR_Asteroids</BlockPairName>
+       <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+	   <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>30</BuildTimeSeconds>
+      <DisassembleRatio>5</DisassembleRatio>
+      <NavigationDefinition>Default</NavigationDefinition>
+	   <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <MinElevationDegrees>-15</MinElevationDegrees>
+      <MaxElevationDegrees>75</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+	  <AiEnabled>false</AiEnabled>
+      <MaxRangeMeters>7000</MaxRangeMeters>
+      <RotationSpeed>0.0005</RotationSpeed>
+      <ElevationSpeed>0.0002 </ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+  <DestroySound>Betty_Weapon_Destroyed</DestroySound>
+    </Definition>
+
+  </CubeBlocks>
+</Definitions>

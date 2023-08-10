@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Sounds>
+    
+        <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>20mmRotaryLoopS</SubtypeId>
+      </Id>
+      <Volume>0.5</Volume>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Loopable>true</Loopable>
+      
+      <PitchVariation>25</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="20" Distance="800" Sound="20mmRotaryLoopDistS" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Loop>Audio\20mmRotaryLoop.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>20mmRotaryLoopDistS</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <Volume>0.6</Volume>
+      <Loopable>true</Loopable>	  
+      
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+
+          <Loop>Audio\20mmRotaryLoopDist.wav</Loop>
+
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>RE30mmRotaryLoop</SubtypeId>
+      </Id>
+      <Volume>1</Volume>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Loopable>true</Loopable>
+      
+      <PitchVariation>25</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="20" Distance="800" Sound="RE30mmRotaryLoopDist" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Loop>Audio\30mm_CannonLoop2.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>RE30mmRotaryLoopDist</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <Volume>1.1</Volume>
+      <Loopable>true</Loopable>	  
+      
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+
+          <Loop>Audio\30mmDistLoop2.wav</Loop>
+
+        </Wave>
+      </Waves>
+    </Sound>
+	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>RE30mmMotorLoop</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>160</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>true</Loopable>	  
+      <Waves>
+        <Wave Type="D3">
+		  <Start>Audio\MotorLoopStart.wav</Start>
+          <Loop>Audio\MotorLoop.wav</Loop>
+          <End>Audio\MotorLoopEnd.wav</End>
+        </Wave>
+      </Waves>
+    </Sound>
+	
+  </Sounds>
+</Definitions>
