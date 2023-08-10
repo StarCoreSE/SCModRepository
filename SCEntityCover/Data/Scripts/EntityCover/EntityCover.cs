@@ -98,7 +98,7 @@ namespace klime.EntityCover
             // Get entityId from block
             long entityId = entityBattery.EntityId;
 
-            EntityCover.Instance.RemoveCover(entityId, modelName);
+            EntityCover.RemoveCover(entityId, modelName);
         }
     }
 
@@ -169,7 +169,7 @@ namespace klime.EntityCover
             //MyAPIGateway.Utilities.ShowMessage("", $"Added cover: {block.EntityId}");
         }
 
-        public void RemoveCover(long entityId, string modelName)
+        public static void RemoveCover(long entityId, string modelName)
         {
             // Find by entityId
             var blockEnt = allCoverEnts.Find(x => x.attachedEntityId == entityId);
@@ -214,7 +214,7 @@ namespace klime.EntityCover
             MyAPIGateway.Physics.CreateBoxPhysics(settings, modelDimensions, 0f);
         }
 
-        private Vector3 GetModelDimensions(string modelName)
+        private static Vector3 GetModelDimensions(string modelName)
         {
             // Add cases for each modelName and set their respective model dimensions
             switch (modelName)
@@ -261,7 +261,7 @@ namespace klime.EntityCover
 
                 // The BlockerEnt currently being collided with
                 BlockerEnt thisEnt = GetClosestBlocker(entity.PositionComp.GetPosition());
-               
+
                 if (thisEnt == null)
                 {
                     isBouncing = false; // If thisEnt is null, exit the method
@@ -276,25 +276,63 @@ namespace klime.EntityCover
 
                 // Get the incident velocity direction
                 Vector3D incidentVelocity = cGrid.LinearVelocity + cGrid.Physics.AngularVelocity;
-                
+                Vector3D incidentAngularVelocity = cGrid.Physics.AngularVelocity;
+
+
                 // Calculate the reflection direction using the law of reflection
                 Vector3D reflection = Vector3D.Reflect(incidentVelocity, boxNormal);
 
                 // Apply the reflection as the outgoing velocity
                 cGrid.Physics.LinearVelocity = (Vector3)reflection;
-                
-                // Reduce the linear velocity to account for fuckery in the above steps
-                cGrid.Physics.LinearVelocity *= 0.65f;
 
-                // Move the grid back 2m to limit brute-forcing through
-                cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() + Vector3D.Normalize(reflection) * 2);
 
-                // Optionally, you can also adjust the angular velocity to simulate spinning after the collision
-                //cGrid.Physics.AngularVelocity= 0.5f;
+                // Reverse the angular velocity of the grid to simulate a bounce
+                cGrid.Physics.AngularVelocity = -incidentAngularVelocity;
+
+
+                //    // Move the grid back half of its max extent, clamped between 5 and 50
+                //    cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() - Vector3D.Normalize(boxNormal) * cGrid.GridSize);
+                //
+                //    // Increase the linear velocity by 80% because its too low to care about
+                //    if (incidentVelocity.AbsMax() < 1)
+                //    {
+                //        cGrid.Physics.LinearVelocity *= 1.8f;
+                //
+                //    }
+                //    else
+                //    {
+                //        cGrid.Physics.LinearVelocity *= 0.65f;
+                //    }
+
+
+                Vector3 deez = (cGrid.Max + Vector3.Abs(cGrid.Min));
+
+
+                 if (incidentVelocity.AbsMax() < 1)
+                 {
+                     // Move the grid back half of its max extent, clamped between 5 and 50
+                     cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() - Vector3D.Normalize(boxNormal) * MathHelper.Clamp((int)deez.AbsMax(), 5, (int)deez.AbsMax() * 0.5));
+                     
+                     // Increase the linear velocity by 80% because its too low to care about
+                     cGrid.Physics.LinearVelocity *= 1.8f;
+               
+                     MyAPIGateway.Utilities.ShowMessage("", $"Low Incident Velocity: {incidentVelocity}");
+                 }
+                 else
+                 {
+                     // Move the grid back half of its max extent, clamped between 5 and 50
+                     cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() - Vector3D.Normalize(boxNormal) * MathHelper.Clamp((int)deez.AbsMax(), 5, (int)deez.AbsMax() * 0.25));
+
+                    //Decrease the linear velocity by 20% because its too high probably
+                    cGrid.Physics.LinearVelocity *= 0.8f;
+                     MyAPIGateway.Utilities.ShowMessage("", $"Normal Incident Velocity: {incidentVelocity}");
+                 }
+
             }
         }
 
-        private BlockerEnt GetClosestBlocker(Vector3D pos)
+
+        private static BlockerEnt GetClosestBlocker(Vector3D pos)
         {
             // warranty void if used at all -aristeas
 
@@ -310,7 +348,7 @@ namespace klime.EntityCover
             return closest;
         }
 
-        private Vector3D GenIntNormal(Vector3D reference)
+        private static Vector3D GenIntNormal(Vector3D reference)
         {
             // Returns a unit Vector3D with the longest component of reference Vector3D. Hate. Why isn't this a built-in method.
 
