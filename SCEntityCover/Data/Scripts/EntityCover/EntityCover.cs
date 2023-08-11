@@ -13,7 +13,7 @@ using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRage.Utils;
 using VRageMath;
-
+using VRageRender;
 
 namespace klime.EntityCover
 {
@@ -262,11 +262,11 @@ namespace klime.EntityCover
                 // The BlockerEnt currently being collided with
                 BlockerEnt thisEnt = GetClosestBlocker(entity.PositionComp.GetPosition());
 
-                if (thisEnt == null)
-                {
-                    isBouncing = false; // If thisEnt is null, exit the method
-                    return;
-                }
+            //   if (thisEnt == null)
+            //   {
+            //       isBouncing = false; // If thisEnt is null, exit the method
+            //       return;
+            //   }
 
                 // Get impact location in thisEnt's relative coordiates
                 Vector3D relImpact = Vector3D.Rotate(cGrid.PositionComp.GetPosition() - thisEnt.PositionComp.GetPosition(), thisEnt.WorldMatrix);
@@ -308,25 +308,21 @@ namespace klime.EntityCover
                 Vector3 deez = (cGrid.Max + Vector3.Abs(cGrid.Min));
 
 
-                 if (incidentVelocity.AbsMax() < 1)
-                 {
-                     // Move the grid back half of its max extent, clamped between 5 and 50
-                     cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() - Vector3D.Normalize(boxNormal) * MathHelper.Clamp((int)deez.AbsMax(), 5, (int)deez.AbsMax() * 0.5));
-                     
-                     // Increase the linear velocity by 80% because its too low to care about
-                     cGrid.Physics.LinearVelocity *= 1.8f;
-               
-                     MyAPIGateway.Utilities.ShowMessage("", $"Low Incident Velocity: {incidentVelocity}");
-                 }
-                 else
-                 {
-                     // Move the grid back half of its max extent, clamped between 5 and 50
-                     cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() - Vector3D.Normalize(boxNormal) * MathHelper.Clamp((int)deez.AbsMax(), 5, (int)deez.AbsMax() * 0.25));
-
-                    //Decrease the linear velocity by 20% because its too high probably
+                if (incidentVelocity.AbsMax() < 1)
+                {
+                    cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() - Vector3D.Normalize(boxNormal) * 20);
+                    // Reduce the linear velocity to account for adjustments
+                    cGrid.Physics.LinearVelocity *= 1.8f;
+                    MyAPIGateway.Utilities.ShowMessage("", $"Low Incident Velocity: {incidentVelocity}");
+                }
+                else
+                {
+                    // Move the grid back 2m to limit brute-forcing through
+                    cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() - Vector3D.Normalize(reflection) * 2);
                     cGrid.Physics.LinearVelocity *= 0.8f;
-                     MyAPIGateway.Utilities.ShowMessage("", $"Normal Incident Velocity: {incidentVelocity}");
-                 }
+                    MyAPIGateway.Utilities.ShowMessage("", $"Normal Incident Velocity: {incidentVelocity}");
+                }
+
 
             }
         }
