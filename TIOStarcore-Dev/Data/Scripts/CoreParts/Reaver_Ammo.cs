@@ -40,7 +40,7 @@ namespace Scripts
     {
 
 
-        private AmmoDef Magnetic_Slugs_Ammo => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef Reaver_Ammo => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "UNSC_Coilgun_MagazineLarge", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Magnetic Slugs Ammo", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.

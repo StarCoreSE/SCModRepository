@@ -14,7 +14,7 @@ using static Scripts.Structure.WeaponDefinition.HardPointDef.HardwareDef.Hardwar
 namespace Scripts {   
     partial class Parts {
         // Don't edit above this line
-        WeaponDefinition MK1BattleshipGun_Block => new WeaponDefinition
+        WeaponDefinition Type18_Artillery => new WeaponDefinition
         {
             Assignments = new ModelAssignmentsDef
             {

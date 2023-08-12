@@ -17,7 +17,7 @@ namespace Scripts {
 
      //Smaller Turrets
             //Point Defense
-        WeaponDefinition IronMaiden_Block => new WeaponDefinition
+        WeaponDefinition Priest_Block => new WeaponDefinition
         {
             Assignments = new ModelAssignmentsDef
             {
@@ -224,7 +224,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                F3Ammo, FakeF3Ammo,
+                F3Ammo,
 
                  // Must list all primary, shrapnel, and pattern ammos.
             },
@@ -438,7 +438,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                F3Ammo, FakeF3Ammo,
+                F3Ammo,
                  // Must list all primary, shrapnel, and pattern ammos.
             },
            // Animations = PriestReskin_AdvancedAnimation,
