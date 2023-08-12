@@ -13,7 +13,7 @@ using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRage.Utils;
 using VRageMath;
-
+using VRageRender;
 
 namespace klime.EntityCover
 {
@@ -261,13 +261,8 @@ namespace klime.EntityCover
 
                 // The BlockerEnt currently being collided with
                 BlockerEnt thisEnt = GetClosestBlocker(entity.PositionComp.GetPosition());
-
-                if (thisEnt == null)
-                {
-                    isBouncing = false; // If thisEnt is null, exit the method
-                    return;
-                }
-
+                Vector3D blockerCenter = thisEnt.PositionComp.GetPosition();
+                
                 // Get impact location in thisEnt's relative coordiates
                 Vector3D relImpact = Vector3D.Rotate(cGrid.PositionComp.GetPosition() - thisEnt.PositionComp.GetPosition(), thisEnt.WorldMatrix);
 
@@ -275,64 +270,104 @@ namespace klime.EntityCover
                 Vector3D boxNormal = Vector3D.Rotate(GenIntNormal(relImpact / (Vector3D)GetModelDimensions(thisEnt.modelName)), -thisEnt.WorldMatrix);
 
                 // Get the incident velocity direction
-                Vector3D incidentVelocity = cGrid.LinearVelocity + cGrid.Physics.AngularVelocity;
+                Vector3D incidentVelocity = cGrid.LinearVelocity;
+                Vector3D incidentVelocityB = cGrid.LinearVelocity;
+                Vector3D incidentVelocityC = cGrid.LinearVelocity + cGrid.Physics.AngularVelocity;
                 Vector3D incidentAngularVelocity = cGrid.Physics.AngularVelocity;
 
 
                 // Calculate the reflection direction using the law of reflection
                 Vector3D reflection = Vector3D.Reflect(incidentVelocity, boxNormal);
 
-                // Apply the reflection as the outgoing velocity
-                cGrid.Physics.LinearVelocity = (Vector3)reflection;
+
+                if (incidentVelocityC.AbsMax() < 10)
+                {
+                    // Determine the size of the grid's bounding box
+                    BoundingBoxD boundingBox = cGrid.PositionComp.WorldAABB;
+                    Vector3D size = boundingBox.Max - boundingBox.Min;
+
+                    // Determine the maximum side length and calculate the warp distance as half of it
+                    double maxSideLength = Math.Max(size.X, Math.Max(size.Y, size.Z));
+                    double warpDistance = maxSideLength / 2.0; // Dividing by 2 to warp by half the distance
+
+                    // Get the blocker's center position
+                    //BlockerEnt thisEnt = GetClosestBlocker(entity.PositionComp.GetPosition());
 
 
-                // Reverse the angular velocity of the grid to simulate a bounce
-                cGrid.Physics.AngularVelocity = -incidentAngularVelocity;
+                    // Determine the direction from the blocker's center to the grid's position
+                    Vector3D directionFromBlocker = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - blockerCenter);
+
+                    // Determine if the grid is inside or outside the blocker based on the dot product with boxNormal
+                    double dotProduct = Vector3D.Dot(directionFromBlocker, boxNormal);
+
+                    // Determine the push direction based on whether the grid is inside or outside the blocker
+                    Vector3D pushDirection = dotProduct < 0 ? -Vector3D.Normalize(boxNormal) : Vector3D.Normalize(boxNormal); // Reversed logic here
+
+                    // Apply the push effect by moving the grid in the correct direction
+                    cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() + pushDirection * warpDistance);
 
 
-                //    // Move the grid back half of its max extent, clamped between 5 and 50
-                //    cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() - Vector3D.Normalize(boxNormal) * cGrid.GridSize);
-                //
-                //    // Increase the linear velocity by 80% because its too low to care about
-                //    if (incidentVelocity.AbsMax() < 1)
-                //    {
-                //        cGrid.Physics.LinearVelocity *= 1.8f;
-                //
-                //    }
-                //    else
-                //    {
-                //        cGrid.Physics.LinearVelocity *= 0.65f;
-                //    }
+                    MyAPIGateway.Utilities.ShowMessage("", $"Low Incident Velocity: {incidentVelocity}");
+
+                }
+                else
+                {
+                    
+
+                    // Determine the direction from the grid's current position to the blocker's center
+                    Vector3D directionToBlocker = Vector3D.Normalize(blockerCenter - cGrid.PositionComp.GetPosition());
+
+                    // Calculate the dot product of the reflection and the direction to the blocker
+                    double dotProductWithReflection = Vector3D.Dot(reflection, directionToBlocker);
+
+                    // If the dot product is positive, the reflection is pointing towards the blocker
+                    if (dotProductWithReflection > 0)
+                    {
+                        MyAPIGateway.Utilities.ShowMessage("", $"AbNormal Incident Velocity: {incidentVelocity}");
+                        // Determine the size of the grid's bounding box
+                        BoundingBoxD boundingBox = cGrid.PositionComp.WorldAABB;
+                        Vector3D size = boundingBox.Max - boundingBox.Min;
+
+                        // Determine the maximum side length and calculate the warp distance as half of it
+                        double maxSideLength = Math.Max(size.X, Math.Max(size.Y, size.Z));
+                        double warpDistance = maxSideLength / 10.0; // 1:50 of the ship's size
+
+                        // Get the blocker's center position
+                        //BlockerEnt thisEnt = GetClosestBlocker(entity.PositionComp.GetPosition());
 
 
-                Vector3 deez = (cGrid.Max + Vector3.Abs(cGrid.Min));
+                        // Determine the direction from the blocker's center to the grid's position
+                        Vector3D directionFromBlocker = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - blockerCenter);
+
+                        // Determine if the grid is inside or outside the blocker based on the dot product with boxNormal
+                        double dotProduct = Vector3D.Dot(directionFromBlocker, boxNormal);
+
+                        // Determine the push direction based on whether the grid is inside or outside the blocker
+                        Vector3D pushDirection = dotProduct < 0 ? -Vector3D.Normalize(boxNormal) : Vector3D.Normalize(boxNormal); // Reversed logic here
+
+                        // Apply the push effect by moving the grid in the correct direction
+                        cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() + pushDirection * warpDistance);
+
+                        cGrid.Physics.LinearVelocity = -Vector3D.Multiply(incidentVelocityB, 0.95); //Vector3D.Multiply(pushDirection, firstSpeed);
+
+                        cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 0.95);
+                    }
+                    else
+                    {
+                        MyAPIGateway.Utilities.ShowMessage("", $"Normal Incident Velocity: {incidentVelocity}");
+
+                        cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 0.95);
+                        cGrid.Physics.LinearVelocity = Vector3D.Multiply(reflection, 0.95);
+
+                    }
 
 
-                 if (incidentVelocity.AbsMax() < 1)
-                 {
-                     // Move the grid back half of its max extent, clamped between 5 and 50
-                     cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() - Vector3D.Normalize(boxNormal) * MathHelper.Clamp((int)deez.AbsMax(), 5, (int)deez.AbsMax() * 0.5));
-                     
-                     // Increase the linear velocity by 80% because its too low to care about
-                     cGrid.Physics.LinearVelocity *= 1.8f;
-               
-                     MyAPIGateway.Utilities.ShowMessage("", $"Low Incident Velocity: {incidentVelocity}");
-                 }
-                 else
-                 {
-                     // Move the grid back half of its max extent, clamped between 5 and 50
-                     cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() - Vector3D.Normalize(boxNormal) * MathHelper.Clamp((int)deez.AbsMax(), 5, (int)deez.AbsMax() * 0.25));
-
-                    //Decrease the linear velocity by 20% because its too high probably
-                    cGrid.Physics.LinearVelocity *= 0.8f;
-                     MyAPIGateway.Utilities.ShowMessage("", $"Normal Incident Velocity: {incidentVelocity}");
-                 }
-
+                }
             }
         }
 
 
-        private static BlockerEnt GetClosestBlocker(Vector3D pos)
+            private static BlockerEnt GetClosestBlocker(Vector3D pos)
         {
             // warranty void if used at all -aristeas
 
