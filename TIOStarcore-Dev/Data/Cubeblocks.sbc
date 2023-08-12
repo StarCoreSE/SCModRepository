@@ -693,65 +693,6 @@
 			<PCU>800</PCU>
 		</Definition>
 
-		<!-- Shield Heal -->
-		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
-			<Id>
-				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>K_HSR_Utilities_Reactor_Gel_LG</SubtypeId>
-			</Id>
-			<DisplayName>WIP Shield Heal</DisplayName>
-			<Icon>Textures\GUI\Icons\HSR\HSR_FluidReactor.dds</Icon>
-			<Description>can i convince WC that a reactor is a gun?
-
-			</Description>
-			<CubeSize>Large</CubeSize>
-			<BlockTopology>TriangleMesh</BlockTopology>
-			<Size x="3" y="2" z="3" />
-			<ModelOffset x="0" y="0" z="0" />
-			<Model>Models\KreegBioReactor.mwm</Model>
-			<Components>
-
-
-				<Component Subtype="SteelPlate" Count="150" />
-				<Component Subtype="Construction" Count="200" />
-				<Component Subtype="GravityGenerator" Count="500" />
-				<Component Count="4000" Subtype="Superconductor" />
-				<Component Subtype="Computer" Count="100" />
-				<Component Subtype="SmallTube" Count="200" />
-				<Component Subtype="Motor" Count="100" />
-				<Component Subtype="LargeTube" Count="200" />
-				<Component Subtype="MetalGrid" Count="300" />
-				<Component Subtype="Construction" Count="500" />
-				<Component Subtype="SteelPlate" Count="100" />
-
-			</Components>
-			<CriticalComponent Subtype="Computer" Index="0" />
-			<MountPoints>
-				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
-			</MountPoints>
-			<BlockPairName>K_HSR_Utilities_Reactor_Gel_LG</BlockPairName>
-			<MirroringY>Z</MirroringY>
-			<MirroringZ>Y</MirroringZ>
-			<EdgeType>Light</EdgeType>
-			<BuildTimeSeconds>140</BuildTimeSeconds>
-			<OverlayTexture>Textures\GUI\Screens\K_camera_overlay_3.dds</OverlayTexture>
-			<WeaponDefinitionId Subtype="K_HSR_Gun"/>
-			<InventoryMaxVolume>10</InventoryMaxVolume>
-			<DamageEffectId>213</DamageEffectId>
-			<DamagedSound>ParticleWeapExpl</DamagedSound>
-			<ResourceSinkGroup>Defense</ResourceSinkGroup>
-			<MinElevationDegrees>0</MinElevationDegrees>
-			<MaxElevationDegrees>180</MaxElevationDegrees>
-			<MinAzimuthDegrees>-180</MinAzimuthDegrees>
-			<MaxAzimuthDegrees>180</MaxAzimuthDegrees>
-			<RotationSpeed>0.0002</RotationSpeed>
-			<ElevationSpeed>0.0002</ElevationSpeed>
-			<IdleRotation>false</IdleRotation>
-			<MaxRangeMeters>6000</MaxRangeMeters>
-			<MinFov>0.001</MinFov>
-			<MaxFov>2</MaxFov>
-			<EmissiveColorPreset>Default</EmissiveColorPreset>
-		</Definition>
 
 	</CubeBlocks>
 		
