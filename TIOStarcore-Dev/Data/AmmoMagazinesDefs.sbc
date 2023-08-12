@@ -4,9 +4,9 @@
         <AmmoMagazine>
             <Id>
                 <TypeId>AmmoMagazine</TypeId>
-                <SubtypeId>MK1BattleshipGun_MagazineLarge</SubtypeId>
+                <SubtypeId>Type18_Ammo_MagazineLarge</SubtypeId>
             </Id>
-            <DisplayName>Avalanche Cannon Shell</DisplayName>
+            <DisplayName>Type18 ammo</DisplayName>
             <Icon>Textures\GUI\Icons\ammo\LargeCalibreShell.dds</Icon>
             <Size>
                 <X>0.7</X>
@@ -24,9 +24,9 @@
 		<AmmoMagazine>
 			<Id>
 				<TypeId>AmmoMagazine</TypeId>
-				<SubtypeId>MK2_Battleship_MagazineLarge</SubtypeId>
+				<SubtypeId>Type21_Ammo_MagazineLarge</SubtypeId>
 			</Id>
-			<DisplayName>M42 Tank Round</DisplayName>
+			<DisplayName>Type21 Ammo</DisplayName>
 			<Icon>Textures\GUI\Icons\ammo\SG_Tank_Cannon_Ammo.png</Icon>
 			<Size>
 				<X>0.2</X>
@@ -249,142 +249,32 @@
 			<Capacity>6</Capacity>
 			<AmmoDefinitionId Subtype="VMLS_Ammo" />
 		</AmmoMagazine>
-		<AmmoMagazine>
-			<Id>
-				<TypeId>AmmoMagazine</TypeId>
-				<SubtypeId>SwarmVMLS_MagazineLarge</SubtypeId>
-			</Id>
-			<DisplayName>Decoy VXM-08 Missile</DisplayName>
-			<Icon>Textures\GUI\Icons\MLS_MissileAmmo.png</Icon>
-			<Size>
-				<X>1</X>
-				<Y>1</Y>
-				<Z>1</Z>
-			</Size>
-			<Mass>70</Mass>
-			<Volume>1000</Volume>
-			<Model>Models\Ammo\MLS_MissileAmmo.mwm</Model>
-			<PhysicalMaterial>Ammo</PhysicalMaterial>
-			<Capacity>6</Capacity>
-			<AmmoDefinitionId Subtype="SwarmVMLS_Ammo" />
-		</AmmoMagazine>
+
+
+      <AmmoMagazine>
+        <Id>
+          <TypeId>AmmoMagazine</TypeId>
+          <SubtypeId>SwarmVMLS_MagazineLarge</SubtypeId>
+        </Id>
+        <DisplayName>Decoy VXM-08 Missile</DisplayName>
+        <Icon>Textures\GUI\Icons\MLS_MissileAmmo.png</Icon>
+        <Size>
+          <X>1</X>
+          <Y>1</Y>
+          <Z>1</Z>
+        </Size>
+        <Mass>70</Mass>
+        <Volume>1000</Volume>
+        <Model>Models\Ammo\MLS_MissileAmmo.mwm</Model>
+        <PhysicalMaterial>Ammo</PhysicalMaterial>
+        <Capacity>6</Capacity>
+        <AmmoDefinitionId Subtype="SwarmVMLS_Ammo" />
+      </AmmoMagazine>
 
 
 
-		<AmmoMagazine>
-			<Id>
-				<TypeId>AmmoMagazine</TypeId>
-				<SubtypeId>JDD_EnergyCharge_MagazineLarge</SubtypeId>
-			</Id>
-			<DisplayName>JDD - Universial Energy Charge Large</DisplayName>
-			<Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
-			<!-- <Icon>Textures\GUI\Icons\EnergyCharge_Icon.dds</Icon>-->
-			<Size>
-				<X>0.2</X>
-				<Y>0.2</Y>
-				<Z>0.2</Z>
-			</Size>
-			<Mass>35</Mass>
-			<Volume>8</Volume>
-			<Model>Models\misc\mwi_EnergyCharge.mwm</Model>
-			<PhysicalMaterial>Ammo</PhysicalMaterial>
-			<Capacity>1</Capacity>
-			<AmmoDefinitionId Subtype="JDD_EnergyChargeAmmoLarge" />
-		</AmmoMagazine>
 
-		<AmmoMagazine>
-			<Id>
-				<TypeId>AmmoMagazine</TypeId>
-				<SubtypeId>PlasAmmo</SubtypeId>
-			</Id>
-			<DisplayName>Original AmmoDef Do Not Steal</DisplayName>
-			<Icon></Icon>
-			<ExtraInventoryTooltipLine>why</ExtraInventoryTooltipLine>
-			<Size>
-				<X>0.1</X>
-				<Y>0.1</Y>
-				<Z>0.1</Z>
-			</Size>
-			<Mass>150</Mass>
-			<Volume>1</Volume>
-			<Model></Model>
-			<PhysicalMaterial>Ammo</PhysicalMaterial>
-			<Capacity>1</Capacity>
-			<AmmoDefinitionId Subtype="red projectile go really fast" />
-		</AmmoMagazine>
 
-		<AmmoMagazine>
-			<Id>
-				<TypeId>AmmoMagazine</TypeId>
-				<SubtypeId>APESAmmo</SubtypeId>
-			</Id>
-			<DisplayName>APES</DisplayName>
-			<Icon></Icon>
-			<ExtraInventoryTooltipLine>why</ExtraInventoryTooltipLine>
-			<Size>
-				<X>0.1</X>
-				<Y>0.1</Y>
-				<Z>0.1</Z>
-			</Size>
-			<Mass>1</Mass>
-			<Volume>1</Volume>
-			<Model></Model>
-			<PhysicalMaterial>Ammo</PhysicalMaterial>
-			<Capacity>36</Capacity>
-			<AmmoDefinitionId Subtype="red projectile go really fast" />
-		</AmmoMagazine>
-		
-		<AmmoMagazine>
-			<Id>
-				<TypeId>AmmoMagazine</TypeId>
-				<SubtypeId>KreegMagnetarAmmoMag</SubtypeId>
-			</Id>
-			<DisplayName>ManetarMag</DisplayName>
-			<Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
-			<!-- <Icon>Textures\GUI\Icons\EnergyCharge_Icon.dds</Icon>-->
-			<Size>
-				<X>1</X>
-				<Y>0.6</Y>
-				<Z>0.6</Z>
-			</Size>
-			<Mass>180</Mass>
-			<Volume>1</Volume>
-			<Model>Models\Ammo\MLS_MissileAmmo.mwm</Model>
-			<PhysicalMaterial>Ammo</PhysicalMaterial>
-			<Capacity>3</Capacity>
-			<AmmoDefinitionId Subtype="red projectile go really fast" />
 
-			<MinimumOfferAmount>10</MinimumOfferAmount>
-			<MaximumOfferAmount>100</MaximumOfferAmount>
-			<MinimumOrderAmount>10</MinimumOrderAmount>
-			<MaximumOrderAmount>100</MaximumOrderAmount>
-			<CanPlayerOrder>true</CanPlayerOrder>
-		</AmmoMagazine>
-
-		<AmmoMagazine>
-			<Id>
-				<TypeId>AmmoMagazine</TypeId>
-				<SubtypeId>KreegBadMagnetarAmmoMag</SubtypeId>
-			</Id>
-			<DisplayName>FireFullManetarMag</DisplayName>
-			<Icon>Textures\GUI\Icons\ammo\EnergyCharge_Icon.dds</Icon>
-			<Size>
-				<X>1</X>
-				<Y>0.6</Y>
-				<Z>0.6</Z>
-			</Size>
-			<Mass>180</Mass>
-			<Volume>1</Volume>
-			<Model>Models\Ammo\MLS_MissileAmmo.mwm</Model>
-			<PhysicalMaterial>Ammo</PhysicalMaterial>
-			<Capacity>24</Capacity>
-			<AmmoDefinitionId Subtype="red projectile go really fast" />
-
-			<MinimumOfferAmount>10000</MinimumOfferAmount>
-			<MaximumOfferAmount>100000</MaximumOfferAmount>
-			<MinimumOrderAmount>10000</MinimumOrderAmount>
-			<MaximumOrderAmount>100000</MaximumOrderAmount>
-			<CanPlayerOrder>true</CanPlayerOrder>
-		</AmmoMagazine>
 	</AmmoMagazines>
 </Definitions>
