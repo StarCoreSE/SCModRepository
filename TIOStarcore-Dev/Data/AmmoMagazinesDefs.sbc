@@ -4,9 +4,9 @@
         <AmmoMagazine>
             <Id>
                 <TypeId>AmmoMagazine</TypeId>
-                <SubtypeId>MK1BattleshipGun_MagazineLarge</SubtypeId>
+                <SubtypeId>Type18_Ammo_MagazineLarge</SubtypeId>
             </Id>
-            <DisplayName>Avalanche Cannon Shell</DisplayName>
+            <DisplayName>Type18 ammo</DisplayName>
             <Icon>Textures\GUI\Icons\ammo\LargeCalibreShell.dds</Icon>
             <Size>
                 <X>0.7</X>
@@ -24,9 +24,9 @@
 		<AmmoMagazine>
 			<Id>
 				<TypeId>AmmoMagazine</TypeId>
-				<SubtypeId>MK2_Battleship_MagazineLarge</SubtypeId>
+				<SubtypeId>Type21_Ammo_MagazineLarge</SubtypeId>
 			</Id>
-			<DisplayName>M42 Tank Round</DisplayName>
+			<DisplayName>Type21 Ammo</DisplayName>
 			<Icon>Textures\GUI\Icons\ammo\SG_Tank_Cannon_Ammo.png</Icon>
 			<Size>
 				<X>0.2</X>

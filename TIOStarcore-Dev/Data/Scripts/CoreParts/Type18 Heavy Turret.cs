@@ -186,7 +186,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                MK1BattleshipGun_Ammo, 
+                Type18_Ammo, 
                  // Must list all primary, shrapnel, and pattern ammos.
             },
             Animations = MK1BattleshipGun_AdvancedAnimation,

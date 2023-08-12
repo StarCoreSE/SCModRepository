@@ -14,7 +14,7 @@ using static Scripts.Structure.WeaponDefinition.HardPointDef.HardwareDef.Hardwar
 namespace Scripts {   
     partial class Parts {
         // Don't edit above this line
-        WeaponDefinition MK2_Battleship_Block => new WeaponDefinition
+        WeaponDefinition Type21_Artillery => new WeaponDefinition
         {
             Assignments = new ModelAssignmentsDef
             {
@@ -186,7 +186,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                MK1BattleshipGun_Ammo, 
+                Type21_Ammo, 
                  // Must list all primary, shrapnel, and pattern ammos.
             },
             //      Animations = MK2_Battleship_Animation,
