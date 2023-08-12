@@ -37,7 +37,7 @@ namespace Klime.spawnmytheprefab
             };
 
 			int prefabCount = prefabList.Count;
-			int spawnCount = 50; // Number of prefabs to spawn
+			int spawnCount = 250; // Number of prefabs to spawn
 
 			Vector3D origin = new Vector3D(0, 0, 1);
 			double spawnRadius = 10000; // Maximum spawn radius in meters
@@ -62,7 +62,7 @@ namespace Klime.spawnmytheprefab
 			for (int i = 0; i < spawnCount; i++)
 			{
 				// Check if the maximum EntityCover grids limit has been reached
-				if (existingEntityCoverGridCount >= 50)
+				if (existingEntityCoverGridCount >= 250)
 				{
 					break; // Stop spawning if the limit has been reached
 				}
