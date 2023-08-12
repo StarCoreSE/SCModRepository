@@ -261,7 +261,7 @@ namespace klime.EntityCover
 
                 // The BlockerEnt currently being collided with
                 BlockerEnt thisEnt = GetClosestBlocker(entity.PositionComp.GetPosition());
-
+                Vector3D blockerCenter = thisEnt.PositionComp.GetPosition();
                 // Get impact location in thisEnt's relative coordiates
                 Vector3D relImpact = Vector3D.Rotate(cGrid.PositionComp.GetPosition() - thisEnt.PositionComp.GetPosition(), thisEnt.WorldMatrix);
 
@@ -271,39 +271,91 @@ namespace klime.EntityCover
                 // Get the incident velocity direction
                 Vector3D incidentVelocity = cGrid.LinearVelocity + cGrid.Physics.AngularVelocity;
                 Vector3D incidentAngularVelocity = cGrid.Physics.AngularVelocity;
-                
+
 
                 // Calculate the reflection direction using the law of reflection
                 Vector3D reflection = Vector3D.Reflect(incidentVelocity, boxNormal);
 
-                // Apply the reflection as the outgoing velocity
-                cGrid.Physics.LinearVelocity = (reflection *= 0.5f);
-
-
-                // Reverse the angular velocity of the grid to simulate a bounce
-                cGrid.Physics.AngularVelocity = -(incidentAngularVelocity * 0.9);
 
                 if (incidentVelocity.AbsMax() < 10)
                 {
-                    cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() - Vector3D.Normalize(boxNormal) * 20);
-                    // Reduce the linear velocity to account for adjustments
-                    //cGrid.Physics.LinearVelocity *= 1.8f;
+                    // Determine the size of the grid's bounding box
+                    BoundingBoxD boundingBox = cGrid.PositionComp.WorldAABB;
+                    Vector3D size = boundingBox.Max - boundingBox.Min;
+
+                    // Determine the maximum side length and calculate the warp distance as half of it
+                    double maxSideLength = Math.Max(size.X, Math.Max(size.Y, size.Z));
+                    double warpDistance = maxSideLength / 2.0; // Dividing by 2 to warp by half the distance
+
+                    // Get the blocker's center position
+                    //BlockerEnt thisEnt = GetClosestBlocker(entity.PositionComp.GetPosition());
+
+
+                    // Determine the direction from the blocker's center to the grid's position
+                    Vector3D directionFromBlocker = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - blockerCenter);
+
+                    // Determine if the grid is inside or outside the blocker based on the dot product with boxNormal
+                    double dotProduct = Vector3D.Dot(directionFromBlocker, boxNormal);
+
+                    // Determine the push direction based on whether the grid is inside or outside the blocker
+                    Vector3D pushDirection = dotProduct < 0 ? -Vector3D.Normalize(boxNormal) : Vector3D.Normalize(boxNormal); // Reversed logic here
+
+                    // Apply the push effect by moving the grid in the correct direction
+                    cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() + pushDirection * warpDistance);
+
+
                     MyAPIGateway.Utilities.ShowMessage("", $"Low Incident Velocity: {incidentVelocity}");
+
                 }
                 else
                 {
-                    // Move the grid back 2m to limit brute-forcing through
-                    cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() - Vector3D.Normalize(reflection));
-                    //cGrid.Physics.LinearVelocity *= 1f;
                     MyAPIGateway.Utilities.ShowMessage("", $"Normal Incident Velocity: {incidentVelocity}");
+
+                    // Determine the direction from the grid's current position to the blocker's center
+                    Vector3D directionToBlocker = Vector3D.Normalize(blockerCenter - cGrid.PositionComp.GetPosition());
+
+                    // Calculate the dot product of the reflection and the direction to the blocker
+                    double dotProductWithReflection = Vector3D.Dot(reflection, directionToBlocker);
+
+                    // If the dot product is positive, the reflection is pointing towards the blocker
+                    if (dotProductWithReflection > 0)
+                    {
+                        // Determine the size of the grid's bounding box
+                        BoundingBoxD boundingBox = cGrid.PositionComp.WorldAABB;
+                        Vector3D size = boundingBox.Max - boundingBox.Min;
+
+                        // Determine the maximum side length and calculate the warp distance as half of it
+                        double maxSideLength = Math.Max(size.X, Math.Max(size.Y, size.Z));
+                        double warpDistance = maxSideLength / 2.0;
+
+                        // Use the negated reflection as the push direction to push the grid away from the blocker
+                        Vector3D pushDirection = -Vector3D.Normalize(reflection);
+
+                        // Apply the push effect by moving the grid in the correct direction
+                        cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() + pushDirection * warpDistance);
+                    }
+                    else
+                    {
+                        cGrid.Physics.LinearVelocity = Vector3D.Multiply(reflection, 1);
+                        // Reverse the angular velocity of the grid to simulate a bounce
+                       if (incidentVelocity.AbsMax() > 50)
+                        {
+                            cGrid.Physics.AngularVelocity = -incidentAngularVelocity;
+                        }
+                       else
+                        {
+                            cGrid.Physics.AngularVelocity = Vector3D.Multiply(incidentAngularVelocity, 1.1);
+                        }
+
+                    }
+
+
                 }
-
-
             }
         }
 
 
-        private static BlockerEnt GetClosestBlocker(Vector3D pos)
+            private static BlockerEnt GetClosestBlocker(Vector3D pos)
         {
             // warranty void if used at all -aristeas
 
