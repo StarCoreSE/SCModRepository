@@ -23,7 +23,7 @@ namespace Scripts
         //StopFiring,
         //StopTracking
 
-        private AnimationDef CoilgunMk1_AdvancedAnimation => new AnimationDef
+        private AnimationDef CoilgunMk2_AdvancedAnimation => new AnimationDef
         {
             /*
             Emissives = new[]
@@ -68,7 +68,7 @@ namespace Scripts
 
                 new PartAnimationSetDef()
                 {
-                    SubpartId = Names("CoilgunMk1LeftBarrel"),
+                    SubpartId = Names("CoilgunMk2LeftBarrel"),
                     BarrelId = "muzzle_projectile_1", //only used for firing events, use "Any" for all muzzles, muzzle triggers only this animation if not Any
                     AnimationDelays = Delays(FiringDelay : 0, ReloadingDelay: 0, OverheatedDelay: 0, TrackingDelay: 0, LockedDelay: 0, OnDelay: 180, OffDelay: 0, BurstReloadDelay: 0, OutOfAmmoDelay: 0, PreFireDelay: 0),//Delay before animation starts
                     Reverse = Events(),
@@ -82,7 +82,7 @@ namespace Scripts
                                 {
                                     CenterEmpty = "",
                                     EmissiveName = "", //EmissiveName: from above Emissives definitions, TurnOn TurnOff
-                                    TicksToMove = 5, //number of ticks to complete motion, 60 = 1 second
+                                    TicksToMove = 13, //number of ticks to complete motion, 60 = 1 second
                                     MovementType = ExpoDecay,
                                     LinearPoints = new[]
                                 {
@@ -96,7 +96,7 @@ namespace Scripts
                                 {
                                     CenterEmpty = "",
                                     EmissiveName = "", //EmissiveName: from above Emissives definitions, TurnOn TurnOff
-                                    TicksToMove = 10, //number of ticks to complete motion, 60 = 1 second
+                                    TicksToMove = 30, //number of ticks to complete motion, 60 = 1 second
                                     MovementType = ExpoGrowth,
                                     LinearPoints = new[]
                                 {
@@ -109,96 +109,9 @@ namespace Scripts
 
                     }
                 },
-                                new PartAnimationSetDef()
-                {
-                    SubpartId = Names("CoilgunMk1LeftBarrel"),
-                    BarrelId = "muzzle_projectile_2", //only used for firing events, use "Any" for all muzzles, muzzle triggers only this animation if not Any
-                    AnimationDelays = Delays(FiringDelay : 0, ReloadingDelay: 0, OverheatedDelay: 0, TrackingDelay: 0, LockedDelay: 0, OnDelay: 180, OffDelay: 0, BurstReloadDelay: 0, OutOfAmmoDelay: 0, PreFireDelay: 0),//Delay before animation starts
-                    Reverse = Events(),
-                    Loop = Events(),
-                    EventMoveSets = new Dictionary<PartAnimationSetDef.EventTriggers, RelMove[]>
-                    {
-
-                        [Firing] = new[] //Firing, Reloading, etc, see Possible Events,  define a new[] for each
-                            {
-                                 new RelMove
-                                {
-                                    CenterEmpty = "",
-                                    EmissiveName = "", //EmissiveName: from above Emissives definitions, TurnOn TurnOff
-                                    TicksToMove = 5, //number of ticks to complete motion, 60 = 1 second
-                                    MovementType = ExpoDecay,
-                                    LinearPoints = new[]
-                                {
-                                    Transformation(0, 0, 0.9f), //linear movement
-                                },
-                                    Rotation = Transformation(0, 0, 0), //degrees
-                                    RotAroundCenter = Transformation(0, 0, 0), //degrees, rotation is around CenterEmpty
-                                },
-
-                                 new RelMove
-                                {
-                                    CenterEmpty = "",
-                                    EmissiveName = "", //EmissiveName: from above Emissives definitions, TurnOn TurnOff
-                                    TicksToMove = 10, //number of ticks to complete motion, 60 = 1 second
-                                    MovementType = ExpoGrowth,
-                                    LinearPoints = new[]
-                                {
-                                    Transformation(0, 0, -0.9f), //linear movement
-                                },
-                                    Rotation = Transformation(0, 0, 0), //degrees
-                                    RotAroundCenter = Transformation(0, 0, 0), //degrees, rotation is around CenterEmpty
-                                },
-                            },
-
-                    }
-                },
-
                 new PartAnimationSetDef()
                 {
-                    SubpartId = Names("CoilgunMk1RightBarrel"),
-                    BarrelId = "muzzle_projectile_4", //only used for firing events, use "Any" for all muzzles, muzzle triggers only this animation if not Any
-                    AnimationDelays = Delays(FiringDelay : 0, ReloadingDelay: 0, OverheatedDelay: 0, TrackingDelay: 0, LockedDelay: 0, OnDelay: 180, OffDelay: 0, BurstReloadDelay: 0, OutOfAmmoDelay: 0, PreFireDelay: 0),//Delay before animation starts
-                    Reverse = Events(),
-                    Loop = Events(),
-                    EventMoveSets = new Dictionary<PartAnimationSetDef.EventTriggers, RelMove[]>
-                    {
-
-                        [Firing] = new[] //Firing, Reloading, etc, see Possible Events,  define a new[] for each
-                            {
-                                 new RelMove
-                                {
-                                    CenterEmpty = "",
-                                    EmissiveName = "", //EmissiveName: from above Emissives definitions, TurnOn TurnOff
-                                    TicksToMove = 5, //number of ticks to complete motion, 60 = 1 second
-                                    MovementType = ExpoDecay,
-                                    LinearPoints = new[]
-                                {
-                                    Transformation(0, 0, 0.9f), //linear movement
-                                },
-                                    Rotation = Transformation(0, 0, 0), //degrees
-                                    RotAroundCenter = Transformation(0, 0, 0), //degrees, rotation is around CenterEmpty
-                                },
-
-                                 new RelMove
-                                {
-                                    CenterEmpty = "",
-                                    EmissiveName = "", //EmissiveName: from above Emissives definitions, TurnOn TurnOff
-                                    TicksToMove = 10, //number of ticks to complete motion, 60 = 1 second
-                                    MovementType = ExpoGrowth,
-                                    LinearPoints = new[]
-                                {
-                                    Transformation(0, 0, -0.9f), //linear movement
-                                },
-                                    Rotation = Transformation(0, 0, 0), //degrees
-                                    RotAroundCenter = Transformation(0, 0, 0), //degrees, rotation is around CenterEmpty
-                                },
-                            },
-            }
-
-        },
-                new PartAnimationSetDef()
-                {
-                    SubpartId = Names("CoilgunMk1RightBarrel"),
+                    SubpartId = Names("CoilgunMk2RightBarrel"),
                     BarrelId = "muzzle_projectile_3", //only used for firing events, use "Any" for all muzzles, muzzle triggers only this animation if not Any
                     AnimationDelays = Delays(FiringDelay : 0, ReloadingDelay: 0, OverheatedDelay: 0, TrackingDelay: 0, LockedDelay: 0, OnDelay: 180, OffDelay: 0, BurstReloadDelay: 0, OutOfAmmoDelay: 0, PreFireDelay: 0),//Delay before animation starts
                     Reverse = Events(),
@@ -212,7 +125,7 @@ namespace Scripts
                                 {
                                     CenterEmpty = "",
                                     EmissiveName = "", //EmissiveName: from above Emissives definitions, TurnOn TurnOff
-                                    TicksToMove = 5, //number of ticks to complete motion, 60 = 1 second
+                                    TicksToMove = 13, //number of ticks to complete motion, 60 = 1 second
                                     MovementType = ExpoDecay,
                                     LinearPoints = new[]
                                 {
@@ -226,7 +139,7 @@ namespace Scripts
                                 {
                                     CenterEmpty = "",
                                     EmissiveName = "", //EmissiveName: from above Emissives definitions, TurnOn TurnOff
-                                    TicksToMove = 10, //number of ticks to complete motion, 60 = 1 second
+                                    TicksToMove = 30, //number of ticks to complete motion, 60 = 1 second
                                     MovementType = ExpoGrowth,
                                     LinearPoints = new[]
                                 {
@@ -239,12 +152,6 @@ namespace Scripts
             }
 
         }
-
-
-    #endregion
-
-            }
-
-        };
+                #endregion
     }
-}
+        };   }     }   
