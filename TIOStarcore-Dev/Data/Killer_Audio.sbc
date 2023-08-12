@@ -14,7 +14,7 @@
 			<DistantSounds>
 				<DistantSound DistanceCrossfade="200" Distance="800" Sound="TorpBoom-2" />
 			</DistantSounds>
-			<SoundLimit>2</SoundLimit>
+			<SoundLimit>100</SoundLimit>
 			<PitchVariation>100</PitchVariation>
 			<Pitch>2</Pitch>
 			<Loopable>false</Loopable>
