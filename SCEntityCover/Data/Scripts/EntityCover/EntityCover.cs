@@ -307,7 +307,7 @@ namespace klime.EntityCover
                     cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() + pushDirection * warpDistance);
 
 
-                    MyAPIGateway.Utilities.ShowMessage("", $"Low Incident Velocity: {incidentVelocity}");
+                    //MyAPIGateway.Utilities.ShowMessage("", $"Low Incident Velocity: {incidentVelocity}");
 
                 }
                 else
@@ -323,7 +323,7 @@ namespace klime.EntityCover
                     // If the dot product is positive, the reflection is pointing towards the blocker
                     if (dotProductWithReflection > 0)
                     {
-                        MyAPIGateway.Utilities.ShowMessage("", $"AbNormal Incident Velocity: {incidentVelocity}");
+                        //MyAPIGateway.Utilities.ShowMessage("", $"AbNormal Incident Velocity: {incidentVelocity}");
                         // Determine the size of the grid's bounding box
                         BoundingBoxD boundingBox = cGrid.PositionComp.WorldAABB;
                         Vector3D size = boundingBox.Max - boundingBox.Min;
@@ -354,7 +354,7 @@ namespace klime.EntityCover
                     }
                     else
                     {
-                        MyAPIGateway.Utilities.ShowMessage("", $"Normal Incident Velocity: {incidentVelocity}");
+                        //MyAPIGateway.Utilities.ShowMessage("", $"Normal Incident Velocity: {incidentVelocity}");
 
                         cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 0.95);
                         cGrid.Physics.LinearVelocity = Vector3D.Multiply(reflection, 0.95);
