@@ -14,7 +14,7 @@
 			<DistantSounds>
 				<DistantSound DistanceCrossfade="200" Distance="800" Sound="TorpBoom-2" />
 			</DistantSounds>
-			<SoundLimit>2</SoundLimit>
+			<SoundLimit>100</SoundLimit>
 			<PitchVariation>100</PitchVariation>
 			<Pitch>2</Pitch>
 			<Loopable>false</Loopable>
@@ -262,126 +262,6 @@
 			</Waves>
 		</Sound>
 
-		<Sound>
-			<Id>
-				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-				<SubtypeId>JDD_Fire_3_Extended-2</SubtypeId>
-			</Id>
-			<Category>SHOT</Category>
-			<MaxDistance>5000</MaxDistance>
-			<PreventSynchronization>0</PreventSynchronization>
-			<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-			<DynamicMusicAmount>5</DynamicMusicAmount>
-			<Volume>1</Volume>
-			<Loopable>false</Loopable>
-			<Waves>
-				<Wave Type="D3">
-					<Start>Audio\JDD_Fire_3_Extended-2.wav</Start>
-				</Wave>
-			</Waves>
-		</Sound>
-		<Sound>
-			<Id>
-				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-				<SubtypeId>JDD_Fire_3_Extended</SubtypeId>
-			</Id>
-			<Category>SHOT</Category>
-			<MaxDistance>5000</MaxDistance>
-			<PreventSynchronization>0</PreventSynchronization>
-			<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-			<DynamicMusicAmount>5</DynamicMusicAmount>
-			<DynamicMusicAmount>5</DynamicMusicAmount>
-			<DistantSounds>
-              <DistantSound DistanceCrossfade="200" Distance="800" Sound="JDD_Fire_3_Extended-2" />
-          </DistantSounds>
-			<Volume>1</Volume>
-			<Loopable>false</Loopable>
-			<Waves>
-				<Wave Type="D3">
-					<Start>Audio\JDD_Fire_3_Extended.wav</Start>
-				</Wave>
-			</Waves>
-		</Sound>
-		<Sound>
-			<Id>
-				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-				<SubtypeId>jdd_explode</SubtypeId>
-			</Id>
-			<Category>SHOT</Category>
-			<MaxDistance>5000</MaxDistance>
-			<PreventSynchronization>0</PreventSynchronization>
-			<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-			<DynamicMusicAmount>5</DynamicMusicAmount>
-			<Volume>.5</Volume>
-			<DistantSounds>
-              <DistantSound DistanceCrossfade="200" Distance="800" Sound="JDD_Fire_2_Explode-2" />
-          </DistantSounds>
-			<Loopable>false</Loopable>
-			<Waves>
-				<Wave Type="D3">
-					<Start>Audio\JDD_Fire_2_Explode.wav</Start>
-				</Wave>
-			</Waves>
-		</Sound>
-		<Sound>
-		  <Id>
-			<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-			<SubtypeId>JDD_Fire_2_Explode-2</SubtypeId>
-		  </Id>
-		  <Category>SHOT</Category>
-		  <MaxDistance>5000</MaxDistance>
-		  <PreventSynchronization>0</PreventSynchronization>
-		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-		  <DynamicMusicAmount>5</DynamicMusicAmount>
-		  
-		  <Volume>0.3</Volume>
-		  <Loopable>false</Loopable>
-		  <Waves>
-			<Wave Type="D3">
-			  <Start>Audio\JDD_Fire_2_Explode-2.wav</Start>
-			</Wave>
-		  </Waves>
-		</Sound>
-		<Sound>
-			<Id>
-				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-				<SubtypeId>JDD_Charging_Winding_Mono_v2.0</SubtypeId>
-			</Id>
-			<Category>SHOT</Category>
-			<MaxDistance>5000</MaxDistance>
-			<PreventSynchronization>0</PreventSynchronization>
-			<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-			<DynamicMusicAmount>5</DynamicMusicAmount>
-			<Volume>2</Volume>
-			<DistantSounds>
-              <DistantSound DistanceCrossfade="200" Distance="800" Sound="JDD_Charging_Winding_Mono_v2.0-2" />
-          </DistantSounds>
-			<Loopable>false</Loopable>
-			<Waves>
-				<Wave Type="D3">
-					<Start>Audio\JDD_Charging_Winding_Mono_v2.0.wav</Start>
-				</Wave>
-			</Waves>
-		</Sound>
-		<Sound>
-			<Id>
-				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-				<SubtypeId>JDD_Charging_Winding_Mono_v2.0-2</SubtypeId>
-			</Id>
-			<Category>SHOT</Category>
-			<MaxDistance>5000</MaxDistance>
-			<PreventSynchronization>0</PreventSynchronization>
-			<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-			<DynamicMusicAmount>5</DynamicMusicAmount>
-			<Volume>0.5</Volume>
-			<Loopable>false</Loopable>
-			<Waves>
-				<Wave Type="D3">
-					<Start>Audio\JDD_Charging_Winding_Mono_v2.0-2.wav</Start>
-				</Wave>
-			</Waves>
-		</Sound>
-		
 			<Sound>
 		  <Id>
 			<TypeId>MyObjectBuilder_AudioDefinition</TypeId>

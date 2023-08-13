@@ -278,49 +278,6 @@
 		</Ammo>
 		
 
-		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
-			<Id>
-				<TypeId>AmmoDefinition</TypeId>
-				<SubtypeId>JDD_EnergyChargeAmmoLarge</SubtypeId>
-			</Id>
-			<BasicProperties>
-				<DesiredSpeed>20000</DesiredSpeed>
-				<SpeedVariance>0</SpeedVariance>
-				<MaxTrajectory>5</MaxTrajectory>
-				<BackkickForce>0</BackkickForce>
-				<PhysicalMaterial>GunBullet</PhysicalMaterial>
-			</BasicProperties>
-			<ProjectileProperties>
-				<ProjectileTrailScale>0</ProjectileTrailScale>
-				<ProjectileHitImpulse>0</ProjectileHitImpulse>
-				<ProjectileMassDamage>0</ProjectileMassDamage>
-				<ProjectileHealthDamage>0</ProjectileHealthDamage>
-				<HeadShot>true</HeadShot>
-			</ProjectileProperties>
-		</Ammo>
-
-		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
-			<Id>
-				<TypeId>AmmoDefinition</TypeId>
-				<SubtypeId>JDD_EnergyChargeAmmoSmall</SubtypeId>
-			</Id>
-			<BasicProperties>
-				<DesiredSpeed>20000</DesiredSpeed>
-				<SpeedVariance>0</SpeedVariance>
-				<MaxTrajectory>5</MaxTrajectory>
-				<BackkickForce>0</BackkickForce>
-				<PhysicalMaterial>GunBullet</PhysicalMaterial>
-			</BasicProperties>
-			<ProjectileProperties>
-				<ProjectileTrailScale>0</ProjectileTrailScale>
-				<ProjectileHitImpulse>0</ProjectileHitImpulse>
-				<ProjectileMassDamage>0</ProjectileMassDamage>
-				<ProjectileHealthDamage>0</ProjectileHealthDamage>
-				<HeadShot>true</HeadShot>
-			</ProjectileProperties>
-		</Ammo>
-
-
 
 	</Ammos>
 </Definitions>
