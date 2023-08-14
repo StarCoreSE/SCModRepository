@@ -18,12 +18,12 @@ namespace Klime.spawnmytheprefab
         private Dictionary<string, string> prefabMap; // Map prefab name to blueprint file
         private int defaultSpawnCount = 250; // Default number of prefabs to spawn
 
-        public override void BeforeStart()
+        public override void LoadData()
         {
-            if (MyAPIGateway.Multiplayer.IsServer)
+            if (MyAPIGateway.Session.IsServer && !MyAPIGateway.Utilities.IsDedicated)
             {
                 random = new Random();
-                MyAPIGateway.Utilities.MessageEntered += OnMessageEntered; // Listen for chat messages
+                MyAPIGateway.Utilities.MessageEntered += OnMessageEntered;
 
                 // Initialize the prefab map
                 prefabMap = new Dictionary<string, string>
@@ -63,7 +63,15 @@ namespace Klime.spawnmytheprefab
 
                     if (prefabMap.ContainsKey(prefabName))
                     {
-                        SpawnRandomPrefabs(prefabMap[prefabName], spawnCount);
+                        // Check if the script is running on a dedicated server
+                        if (MyAPIGateway.Utilities.IsDedicated)
+                        {
+                            MyAPIGateway.Utilities.ShowMessage("SpawnCover", "Cannot spawn prefabs on a dedicated server.");
+                        }
+                        else
+                        {
+                            SpawnRandomPrefabs(prefabMap[prefabName], spawnCount);
+                        }
                     }
                     else
                     {
@@ -72,6 +80,7 @@ namespace Klime.spawnmytheprefab
                 }
             }
         }
+
 
         private void ShowPrefabList()
         {
