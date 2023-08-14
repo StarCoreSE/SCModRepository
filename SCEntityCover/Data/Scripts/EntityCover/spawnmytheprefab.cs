@@ -63,7 +63,15 @@ namespace Klime.spawnmytheprefab
 
                     if (prefabMap.ContainsKey(prefabName))
                     {
-                        SpawnRandomPrefabs(prefabMap[prefabName], spawnCount);
+                        // Check if the script is running on a dedicated server
+                        if (MyAPIGateway.Utilities.IsDedicated)
+                        {
+                            MyAPIGateway.Utilities.ShowMessage("SpawnCover", "Cannot spawn prefabs on a dedicated server.");
+                        }
+                        else
+                        {
+                            SpawnRandomPrefabs(prefabMap[prefabName], spawnCount);
+                        }
                     }
                     else
                     {
@@ -72,6 +80,7 @@ namespace Klime.spawnmytheprefab
                 }
             }
         }
+
 
         private void ShowPrefabList()
         {
