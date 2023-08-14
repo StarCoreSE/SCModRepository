@@ -15,6 +15,8 @@ namespace Klime.spawnmytheprefab
     public class spawnmytheprefab : MySessionComponentBase
     {
         private Random random;
+        private Dictionary<string, string> prefabMap; // Map prefab name to blueprint file
+        private int defaultSpawnCount = 250; // Default number of prefabs to spawn
 
         public override void BeforeStart()
         {
@@ -22,30 +24,72 @@ namespace Klime.spawnmytheprefab
             {
                 random = new Random();
                 MyAPIGateway.Utilities.MessageEntered += OnMessageEntered; // Listen for chat messages
+
+                // Initialize the prefab map
+                prefabMap = new Dictionary<string, string>
+                {
+                    { "EntityCover1", "#EntityCover1" },
+                    { "EntityCover3", "#EntityCover3" },
+                    { "EntityCoverEveFreighter", "#EntityCoverEveFreighter" },
+                    // Add more entries for other prefabs
+                };
             }
         }
 
         private void OnMessageEntered(string messageText, ref bool sendToOthers)
         {
-            if (messageText.Equals("/spawncover", StringComparison.OrdinalIgnoreCase))
+            if (messageText.StartsWith("/spawncover", StringComparison.OrdinalIgnoreCase))
             {
-                SpawnRandomPrefabs();
+                string[] parts = messageText.Split(' ');
+
+                if (parts.Length == 1)
+                {
+                    // Show list of available prefabs and usage instructions
+                    ShowPrefabList();
+                }
+                else if (parts.Length >= 2)
+                {
+                    string prefabName = parts[1];
+                    int spawnCount = defaultSpawnCount;
+
+                    if (parts.Length >= 3)
+                    {
+                        int parsedCount;
+                        if (int.TryParse(parts[2], out parsedCount))
+                        {
+                            spawnCount = parsedCount;
+                        }
+                    }
+
+                    if (prefabMap.ContainsKey(prefabName))
+                    {
+                        SpawnRandomPrefabs(prefabMap[prefabName], spawnCount);
+                    }
+                    else
+                    {
+                        MyAPIGateway.Utilities.ShowMessage("SpawnCover", $"Prefab '{prefabName}' not found.");
+                    }
+                }
             }
         }
 
-        private void SpawnRandomPrefabs()
+        private void ShowPrefabList()
         {
-            List<string> prefabList = new List<string>()
+            string prefabListMessage = "Available prefabs:";
+            foreach (string prefabName in prefabMap.Keys)
             {
-                "#EntityCover1", // Add your prefab names here
-                //"#EntityCover3", // Add your prefab names here
-                //"#EntityCoverEveFreighter", // Add your prefab names here
+                prefabListMessage += "\n" + prefabName;
+            }
 
-                // Add more prefab names here
-            };
+            prefabListMessage += "\n\nTo spawn a prefab, type '/spawncover [prefabName] [amount]' (e.g., /spawncover EntityCover1 100). Default 250.";
+            MyAPIGateway.Utilities.ShowMessage("SpawnCover", prefabListMessage);
+        }
+
+        private void SpawnRandomPrefabs(string targetPrefab, int spawnCount)
+        {
+            List<string> prefabList = new List<string> { targetPrefab };
 
             int prefabCount = prefabList.Count;
-            int spawnCount = 250; // Number of prefabs to spawn
 
             Vector3D origin = new Vector3D(0, 0, 1);
             double spawnRadius = 10000; // Maximum spawn radius in meters
@@ -57,11 +101,11 @@ namespace Klime.spawnmytheprefab
             HashSet<IMyEntity> entities = new HashSet<IMyEntity>();
             MyAPIGateway.Entities.GetEntities(entities);
 
-            // Count the number of grids containing the word "EntityCover"
+            // Count the number of grids containing the specified prefab
             foreach (IMyEntity entity in entities)
             {
                 IMyCubeGrid grid = entity as IMyCubeGrid;
-                if (grid != null && grid.DisplayName.Contains("EntityCover"))
+                if (grid != null && grid.DisplayName.Contains(targetPrefab))
                 {
                     existingEntityCoverGridCount++;
                 }
@@ -69,8 +113,8 @@ namespace Klime.spawnmytheprefab
 
             for (int i = 0; i < spawnCount; i++)
             {
-                // Check if the maximum EntityCover grids limit has been reached
-                if (existingEntityCoverGridCount >= 250)
+                // Check if the maximum prefab grids limit has been reached
+                if (existingEntityCoverGridCount >= spawnCount)
                 {
                     break; // Stop spawning if the limit has been reached
                 }
@@ -116,14 +160,15 @@ namespace Klime.spawnmytheprefab
 
                     MyVisualScriptLogicProvider.SpawnPrefab(randomPrefab, spawnPosition, direction, up);
 
-                    // Increment the EntityCover grid count if a new EntityCover is spawned
-                    if (randomPrefab.Contains("EntityCover"))
+                    // Increment the prefab grid count if a new prefab is spawned
+                    if (randomPrefab.Contains(targetPrefab))
                     {
                         existingEntityCoverGridCount++;
                     }
                 }
             }
         }
+
 
         private bool CheckGridDistance(Vector3D spawnPosition, double minDistance)
         {
