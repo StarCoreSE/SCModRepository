@@ -58,6 +58,10 @@ namespace Klime.spawnmytheprefab
 
         private ushort netID = 29394;
 
+        private double minSpawnRadiusFromCenter = 1000; // Minimum spawn distance from the center in meters
+        private double minSpawnRadiusFromGrids = 1000;  // Minimum spawn distance from other grids in meters
+
+
         public override void BeforeStart()
         {
             MyAPIGateway.Utilities.MessageEntered += OnMessageEntered; // Listen for chat messages
@@ -135,7 +139,6 @@ namespace Klime.spawnmytheprefab
         private void SpawnRandomPrefabs(string targetPrefab, int spawnCount)
         {
             double maxSpawnRadius = 10000; // Maximum spawn radius in meters
-            double minSpawnRadius = 1000; // Minimum spawn distance from the origin in meters
 
             List<Vector3D> spawnPositions = new List<Vector3D>();
 
@@ -145,11 +148,11 @@ namespace Klime.spawnmytheprefab
                 Vector3D tangent = Vector3D.Forward;
                 Vector3D bitangent = Vector3D.Right;
 
-                Vector3D spawnPosition = origin + (Vector3D.Normalize(MyUtils.GetRandomVector3D()) * MyUtils.GetRandomDouble(minSpawnRadius, maxSpawnRadius));
+                Vector3D spawnPosition = origin + (Vector3D.Normalize(MyUtils.GetRandomVector3D()) * MyUtils.GetRandomDouble(minSpawnRadiusFromCenter, maxSpawnRadius));
                 Vector3D direction = Vector3D.Normalize(origin - spawnPosition);
                 Vector3D up = Vector3D.Normalize(Vector3D.Cross(direction, Vector3D.Up)); // Calculate an appropriate up vector
 
-                bool isValidPosition = CheckAsteroidDistance(spawnPosition, minSpawnRadius) && CheckGridDistance(spawnPosition, minSpawnRadius);
+                bool isValidPosition = CheckAsteroidDistance(spawnPosition, minSpawnRadiusFromGrids) && CheckGridDistance(spawnPosition, minSpawnRadiusFromGrids);
 
                 if (isValidPosition)
                 {
@@ -157,7 +160,7 @@ namespace Klime.spawnmytheprefab
                     bool tooCloseToOtherPosition = false;
                     foreach (Vector3D existingPosition in spawnPositions)
                     {
-                        if (Vector3D.Distance(existingPosition, spawnPosition) < minSpawnRadius)
+                        if (Vector3D.Distance(existingPosition, spawnPosition) < minSpawnRadiusFromGrids)
                         {
                             tooCloseToOtherPosition = true;
                             break;
@@ -172,7 +175,6 @@ namespace Klime.spawnmytheprefab
                 }
             }
         }
-
 
 
 
