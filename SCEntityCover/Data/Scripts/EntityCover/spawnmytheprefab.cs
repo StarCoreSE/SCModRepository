@@ -134,75 +134,99 @@ namespace Klime.spawnmytheprefab
 
         private void SpawnRandomPrefabs(string targetPrefab, int spawnCount)
         {
-            Vector3D origin = new Vector3D(0, 0, 1);
-            Vector3D tangent = Vector3D.Forward;
-            Vector3D bitanget = Vector3D.Right;
-
             double maxSpawnRadius = 10000; // Maximum spawn radius in meters
             double minSpawnRadius = 1000; // Minimum spawn distance from the origin in meters
 
+            List<Vector3D> spawnPositions = new List<Vector3D>();
+
             for (int i = 0; i < spawnCount; i++)
             {
+                Vector3D origin = new Vector3D(0, 0, 0);
+                Vector3D tangent = Vector3D.Forward;
+                Vector3D bitangent = Vector3D.Right;
+
                 Vector3D spawnPosition = origin + (Vector3D.Normalize(MyUtils.GetRandomVector3D()) * MyUtils.GetRandomDouble(minSpawnRadius, maxSpawnRadius));
                 Vector3D direction = Vector3D.Normalize(origin - spawnPosition);
                 Vector3D up = Vector3D.Normalize(Vector3D.Cross(direction, Vector3D.Up)); // Calculate an appropriate up vector
 
-                MyVisualScriptLogicProvider.SpawnPrefab(targetPrefab, spawnPosition, direction, up);
+                bool isValidPosition = CheckAsteroidDistance(spawnPosition, minSpawnRadius) && CheckGridDistance(spawnPosition, minSpawnRadius);
+
+                if (isValidPosition)
+                {
+                    // Avoid overcrowding by checking against other spawn positions
+                    bool tooCloseToOtherPosition = false;
+                    foreach (Vector3D existingPosition in spawnPositions)
+                    {
+                        if (Vector3D.Distance(existingPosition, spawnPosition) < minSpawnRadius)
+                        {
+                            tooCloseToOtherPosition = true;
+                            break;
+                        }
+                    }
+
+                    if (!tooCloseToOtherPosition)
+                    {
+                        MyVisualScriptLogicProvider.SpawnPrefab(targetPrefab, spawnPosition, direction, up);
+                        spawnPositions.Add(spawnPosition);
+                    }
+                }
             }
         }
 
 
-        //private bool CheckGridDistance(Vector3D spawnPosition, double minDistance)
-        //{
-        //    // Get all entities in the game world
-        //    HashSet<IMyEntity> entities = new HashSet<IMyEntity>();
-        //    MyAPIGateway.Entities.GetEntities(entities);
 
-        //    foreach (IMyEntity entity in entities)
-        //    {
-        //        IMyCubeGrid grid = entity as IMyCubeGrid;
-        //        if (grid != null)
-        //        {
-        //            double distance = Vector3D.Distance(spawnPosition, grid.GetPosition());
 
-        //            if (distance < minDistance)
-        //            {
-        //                return false; // Distance is too close, not a valid spawn position
-        //            }
-        //        }
-        //    }
+        private bool CheckGridDistance(Vector3D spawnPosition, double minDistance)
+        {
+            // Get all entities in the game world
+            HashSet<IMyEntity> entities = new HashSet<IMyEntity>();
+            MyAPIGateway.Entities.GetEntities(entities);
 
-        //    // Check distance from origin
-        //    double distanceFromOrigin = Vector3D.Distance(spawnPosition, Vector3D.Zero);
-        //    if (distanceFromOrigin < minDistance)
-        //    {
-        //        return false; // Distance from origin is too close, not a valid spawn position
-        //    }
+            foreach (IMyEntity entity in entities)
+            {
+                IMyCubeGrid grid = entity as IMyCubeGrid;
+                if (grid != null)
+                {
+                    double distance = Vector3D.Distance(spawnPosition, grid.GetPosition());
 
-        //    return true; // Valid spawn position
-        //}
+                    if (distance < minDistance)
+                    {
+                        return false; // Distance is too close, not a valid spawn position
+                    }
+                }
+            }
 
-        //private bool CheckAsteroidDistance(Vector3D spawnPosition, double minDistance)
-        //{
-        //    // Get all asteroid entities in the game world
-        //    List<IMyVoxelBase> voxels = new List<IMyVoxelBase>();
-        //    MyAPIGateway.Session.VoxelMaps.GetInstances(voxels);
+            // Check distance from origin
+            double distanceFromOrigin = Vector3D.Distance(spawnPosition, Vector3D.Zero);
+            if (distanceFromOrigin < minDistance)
+            {
+                return false; // Distance from origin is too close, not a valid spawn position
+            }
 
-        //    foreach (IMyVoxelBase voxel in voxels)
-        //    {
-        //        if (voxel is IMyVoxelMap)
-        //        {
-        //            BoundingBoxD voxelBox = voxel.PositionComp.WorldAABB;
+            return true; // Valid spawn position
+        }
 
-        //            if (voxelBox.Contains(spawnPosition) != ContainmentType.Disjoint)
-        //            {
-        //                return false; // Spawn position is inside an asteroid, not a valid spawn position
-        //            }
-        //        }
-        //    }
+        private bool CheckAsteroidDistance(Vector3D spawnPosition, double minDistance)
+        {
+            // Get all asteroid entities in the game world
+            List<IMyVoxelBase> voxels = new List<IMyVoxelBase>();
+            MyAPIGateway.Session.VoxelMaps.GetInstances(voxels);
 
-        //    return true; // Valid spawn position
-        //}
+            foreach (IMyVoxelBase voxel in voxels)
+            {
+                if (voxel is IMyVoxelMap)
+                {
+                    BoundingBoxD voxelBox = voxel.PositionComp.WorldAABB;
+
+                    if (voxelBox.Contains(spawnPosition) != ContainmentType.Disjoint)
+                    {
+                        return false; // Spawn position is inside an asteroid, not a valid spawn position
+                    }
+                }
+            }
+
+            return true; // Valid spawn position
+        }
 
         protected override void UnloadData()
         {
