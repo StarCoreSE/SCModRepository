@@ -8,9 +8,42 @@ using VRage.Game.ModAPI;
 using VRage.ModAPI;
 using VRage.Utils;
 using VRageMath;
+using ProtoBuf;
 
 namespace Klime.spawnmytheprefab
 {
+    [ProtoInclude(1000, typeof(PrefabSpawnPacket))]
+    [ProtoContract]
+    public class Packet
+    {
+        public Packet()
+        {
+
+        }
+    }
+
+    [ProtoContract]
+    public class PrefabSpawnPacket : Packet
+    {
+        [ProtoMember(1)]
+        public string prefabName;
+
+        [ProtoMember(2)]
+        public int prefabAmount;
+
+        public PrefabSpawnPacket()
+        {
+
+        }
+
+        public PrefabSpawnPacket(string prefabName, int prefabAmount)
+        {
+            this.prefabName = prefabName;
+            this.prefabAmount = prefabAmount;
+        }
+    }
+
+
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     public class spawnmytheprefab : MySessionComponentBase
     {
@@ -18,13 +51,15 @@ namespace Klime.spawnmytheprefab
         private Dictionary<string, string> prefabMap; // Map prefab name to blueprint file
         private int defaultSpawnCount = 250; // Default number of prefabs to spawn
 
+        private ushort netID = 29394;
+
         public override void BeforeStart()
         {
             if (MyAPIGateway.Multiplayer.IsServer)
             {
                 random = new Random();
                 MyAPIGateway.Utilities.MessageEntered += OnMessageEntered; // Listen for chat messages
-
+                
                 // Initialize the prefab map
                 prefabMap = new Dictionary<string, string>
                 {
@@ -34,43 +69,64 @@ namespace Klime.spawnmytheprefab
                     // Add more entries for other prefabs
                 };
             }
+
+            MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(netID, NetworkHandler);
+        }
+
+        private void NetworkHandler(ushort arg1, byte[] arg2, ulong arg3, bool arg4)
+        {
+            if (!MyAPIGateway.Session.IsServer) return;
+
+            Packet packet = MyAPIGateway.Utilities.SerializeFromBinary<Packet>(arg2);
+            if (packet == null) return;
+
+            PrefabSpawnPacket prefabPacket = packet as PrefabSpawnPacket;
+            if (prefabPacket == null) return;
+
+
+            if (prefabMap.ContainsKey(prefabPacket.prefabName))
+            {
+                SpawnRandomPrefabs(prefabMap[prefabPacket.prefabName], prefabPacket.prefabAmount);
+            }
+            else
+            {
+                MyVisualScriptLogicProvider.SendChatMessage($"Prefab {prefabPacket.prefabName} not found", "SpawnCover");
+            }
         }
 
         private void OnMessageEntered(string messageText, ref bool sendToOthers)
         {
-            if (messageText.StartsWith("/spawncover", StringComparison.OrdinalIgnoreCase))
+            if (!messageText.StartsWith("/spawncover", StringComparison.OrdinalIgnoreCase)) return;
+            string[] parts = messageText.Split(' ');
+
+            if (parts.Length == 1)
             {
-                string[] parts = messageText.Split(' ');
-
-                if (parts.Length == 1)
-                {
-                    // Show list of available prefabs and usage instructions
-                    ShowPrefabList();
-                }
-                else if (parts.Length >= 2)
-                {
-                    string prefabName = parts[1];
-                    int spawnCount = defaultSpawnCount;
-
-                    if (parts.Length >= 3)
-                    {
-                        int parsedCount;
-                        if (int.TryParse(parts[2], out parsedCount))
-                        {
-                            spawnCount = parsedCount;
-                        }
-                    }
-
-                    if (prefabMap.ContainsKey(prefabName))
-                    {
-                        SpawnRandomPrefabs(prefabMap[prefabName], spawnCount);
-                    }
-                    else
-                    {
-                        MyAPIGateway.Utilities.ShowMessage("SpawnCover", $"Prefab '{prefabName}' not found.");
-                    }
-                }
+                // Show list of available prefabs and usage instructions
+                ShowPrefabList();
             }
+            else if (parts.Length >= 2)
+            {
+                string prefabName = parts[1];
+                int spawnCount = defaultSpawnCount;
+
+                if (parts.Length >= 3)
+                {
+                    int parsedCount;
+                    if (int.TryParse(parts[2], out parsedCount))
+                    {
+                        spawnCount = parsedCount;
+                    }
+                }
+
+                PrefabSpawnPacket prefabSpawnPacket = new PrefabSpawnPacket(prefabName, spawnCount);
+                byte[] data = MyAPIGateway.Utilities.SerializeToBinary(prefabSpawnPacket);
+
+                MyAPIGateway.Multiplayer.SendMessageTo(netID, data, MyAPIGateway.Multiplayer.ServerId);
+
+                MyAPIGateway.Utilities.ShowMessage("SpawnCover", $"Requesting: {prefabName} x {spawnCount}");
+            }
+
+            sendToOthers = false;
         }
 
         private void ShowPrefabList()
@@ -225,6 +281,7 @@ namespace Klime.spawnmytheprefab
         protected override void UnloadData()
         {
             MyAPIGateway.Utilities.MessageEntered -= OnMessageEntered; // Unsubscribe from chat message events
+            MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(netID, NetworkHandler);
         }
     }
 }
