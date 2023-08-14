@@ -57,9 +57,7 @@ namespace Klime.spawnmytheprefab
         {
             if (MyAPIGateway.Multiplayer.IsServer)
             {
-                random = new Random();
-                MyAPIGateway.Utilities.MessageEntered += OnMessageEntered; // Listen for chat messages
-                
+                random = new Random();                
                 // Initialize the prefab map
                 prefabMap = new Dictionary<string, string>
                 {
@@ -70,6 +68,7 @@ namespace Klime.spawnmytheprefab
                 };
             }
 
+            MyAPIGateway.Utilities.MessageEntered += OnMessageEntered; // Listen for chat messages
             MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(netID, NetworkHandler);
         }
 
