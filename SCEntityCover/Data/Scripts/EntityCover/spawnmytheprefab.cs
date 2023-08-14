@@ -47,27 +47,23 @@ namespace Klime.spawnmytheprefab
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     public class spawnmytheprefab : MySessionComponentBase
     {
-        private Random random;
-        private Dictionary<string, string> prefabMap; // Map prefab name to blueprint file
+        private Dictionary<string, string> prefabMap = new Dictionary<string, string>
+        {
+            { "EntityCover1", "#EntityCover1" },
+            { "EntityCover3", "#EntityCover3" },
+            { "EntityCoverEveFreighter", "#EntityCoverEveFreighter" },
+        };
+
         private int defaultSpawnCount = 250; // Default number of prefabs to spawn
 
         private ushort netID = 29394;
 
+        private double minSpawnRadiusFromCenter = 1000; // Minimum spawn distance from the center in meters
+        private double minSpawnRadiusFromGrids = 1000;  // Minimum spawn distance from other grids in meters
+
+
         public override void BeforeStart()
         {
-            if (MyAPIGateway.Multiplayer.IsServer)
-            {
-                random = new Random();                
-                // Initialize the prefab map
-                prefabMap = new Dictionary<string, string>
-                {
-                    { "EntityCover1", "#EntityCover1" },
-                    { "EntityCover3", "#EntityCover3" },
-                    { "EntityCoverEveFreighter", "#EntityCoverEveFreighter" },
-                    // Add more entries for other prefabs
-                };
-            }
-
             MyAPIGateway.Utilities.MessageEntered += OnMessageEntered; // Listen for chat messages
             MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(netID, NetworkHandler);
         }
@@ -142,87 +138,44 @@ namespace Klime.spawnmytheprefab
 
         private void SpawnRandomPrefabs(string targetPrefab, int spawnCount)
         {
-            List<string> prefabList = new List<string> { targetPrefab };
+            double maxSpawnRadius = 10000; // Maximum spawn radius in meters
 
-            int prefabCount = prefabList.Count;
-
-            Vector3D origin = new Vector3D(0, 0, 1);
-            double spawnRadius = 10000; // Maximum spawn radius in meters
-            double minSpawnDistance = 1000; // Minimum spawn distance from the origin in meters
-
-            int existingEntityCoverGridCount = 0;
-
-            // Get all entities in the game world
-            HashSet<IMyEntity> entities = new HashSet<IMyEntity>();
-            MyAPIGateway.Entities.GetEntities(entities);
-
-            // Count the number of grids containing the specified prefab
-            foreach (IMyEntity entity in entities)
-            {
-                IMyCubeGrid grid = entity as IMyCubeGrid;
-                if (grid != null && grid.DisplayName.Contains(targetPrefab))
-                {
-                    existingEntityCoverGridCount++;
-                }
-            }
+            List<Vector3D> spawnPositions = new List<Vector3D>();
 
             for (int i = 0; i < spawnCount; i++)
             {
-                // Check if the maximum prefab grids limit has been reached
-                if (existingEntityCoverGridCount >= spawnCount)
+                Vector3D origin = new Vector3D(0, 0, 0);
+                Vector3D tangent = Vector3D.Forward;
+                Vector3D bitangent = Vector3D.Right;
+
+                Vector3D spawnPosition = origin + (Vector3D.Normalize(MyUtils.GetRandomVector3D()) * MyUtils.GetRandomDouble(minSpawnRadiusFromCenter, maxSpawnRadius));
+                Vector3D direction = Vector3D.Normalize(origin - spawnPosition);
+                Vector3D up = Vector3D.Normalize(Vector3D.Cross(direction, Vector3D.Up)); // Calculate an appropriate up vector
+
+                bool isValidPosition = CheckAsteroidDistance(spawnPosition, minSpawnRadiusFromGrids) && CheckGridDistance(spawnPosition, minSpawnRadiusFromGrids);
+
+                if (isValidPosition)
                 {
-                    break; // Stop spawning if the limit has been reached
-                }
-
-                int randomIndex = random.Next(prefabCount);
-                string randomPrefab = prefabList[randomIndex];
-
-                Vector3D spawnPosition = Vector3D.Zero; // Initialize spawnPosition with a default value
-                bool isValidSpawn = false;
-
-                int maxAttempts = 10; // Maximum number of attempts to find a valid spawn position
-                int currentAttempt = 0;
-
-                do
-                {
-                    currentAttempt++;
-
-                    if (currentAttempt > maxAttempts)
+                    // Avoid overcrowding by checking against other spawn positions
+                    bool tooCloseToOtherPosition = false;
+                    foreach (Vector3D existingPosition in spawnPositions)
                     {
-                        break; // Break the loop if unable to find a valid spawn position
+                        if (Vector3D.Distance(existingPosition, spawnPosition) < minSpawnRadiusFromGrids)
+                        {
+                            tooCloseToOtherPosition = true;
+                            break;
+                        }
                     }
 
-                    // Generate a random position within the spawnRadius
-                    Vector3D randomPosition = new Vector3D(
-                        random.NextDouble() * spawnRadius * 2 - spawnRadius,
-                        random.NextDouble() * spawnRadius * 2 - spawnRadius,
-                        random.NextDouble() * spawnRadius * 2 - spawnRadius
-                    );
-
-                    spawnPosition = origin + randomPosition;
-
-                    // Check distance to existing grids, origin, and asteroids
-                    isValidSpawn = CheckGridDistance(spawnPosition, minSpawnDistance) &&
-                                   Vector3D.Distance(origin, spawnPosition) >= minSpawnDistance &&
-                                   CheckAsteroidDistance(spawnPosition, minSpawnDistance);
-                }
-                while (!isValidSpawn);
-
-                if (isValidSpawn)
-                {
-                    Vector3D direction = Vector3D.Normalize(origin - spawnPosition);
-                    Vector3D up = Vector3D.Normalize(Vector3D.Cross(direction, Vector3D.Up)); // Calculate an appropriate up vector
-
-                    MyVisualScriptLogicProvider.SpawnPrefab(randomPrefab, spawnPosition, direction, up);
-
-                    // Increment the prefab grid count if a new prefab is spawned
-                    if (randomPrefab.Contains(targetPrefab))
+                    if (!tooCloseToOtherPosition)
                     {
-                        existingEntityCoverGridCount++;
+                        MyVisualScriptLogicProvider.SpawnPrefab(targetPrefab, spawnPosition, direction, up);
+                        spawnPositions.Add(spawnPosition);
                     }
                 }
             }
         }
+
 
 
         private bool CheckGridDistance(Vector3D spawnPosition, double minDistance)
