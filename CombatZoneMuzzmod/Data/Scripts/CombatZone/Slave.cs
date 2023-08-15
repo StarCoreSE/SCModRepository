@@ -14,7 +14,7 @@ namespace Scripts
     [MySessionComponentDescriptor(MyUpdateOrder.BeforeSimulation, 999999)]
     public class Session : MySessionComponentBase
     {
-        private const double CombatRadius = 12500;
+        private const double CombatRadius = 10000;
         private const double CombatNearEdge = CombatRadius - 1;
         private const string SphereModel = "\\Models\\Cubes\\OuterShield.mwm";
         private readonly BoundingSphereD _combatNearSphere = new BoundingSphereD(Vector3D.Zero, CombatNearEdge);
