@@ -17,7 +17,7 @@ namespace ShipPoints
                 LargeEnhancer@50;
                 LargeBlockSmallGenerator@17;
                 LargeBlockLargeGenerator@300;
-		LargeLargeBlockUpgrade@100
+		        LargeLargeBlockUpgrade@100
                 LargeWarhead@101;
                 LargeDecoy@4;
                 LargeStator@5;
@@ -193,6 +193,11 @@ namespace ShipPoints
 				MA_Gimbal_Laser_Armored_Slope2_sb@70;
 				MA_Gimbal_Laser_Armored_Slope45_sb@70;
 				MA_Gimbal_Laser_sb@70;
+				MA_Blister@100;
+				MA_Blister45@100;
+				MA_Blister30@100;
+				MA_Blister32@100;
+				MA_Meatball@200;
 				VirtualMassSmall@50;
 				SmallHydrogenEngine@1;
 				SmallBlockBatteryBlock@4;
@@ -215,10 +220,7 @@ namespace ShipPoints
 				EmitterS@50;
 				EmitterSA@50;
 				SmallEnhancer@50;
-				MA_Blister_sm@50;
-				MA_Blister45_sm@50;
-				MA_Blister30_sm@50;
-				MA_Blister32_sm@50;
+
 				SpaceBallSmall@50;
 				MA_Fixed_T2_sb@100;
 				MA_Fixed_T2_Naked_sb@100;
