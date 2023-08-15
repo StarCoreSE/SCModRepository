@@ -15,7 +15,7 @@
       <Icon>Textures\GUI\Icons\priest.dds</Icon>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
-      <Size x="3" y="3" z="3"/>
+      <Size x="3" y="4" z="3"/>
       <ModelOffset x="0" y="1.235" z="0"/>
       <Model>Models\Iron_Maiden_Main_Scene.mwm</Model>
       <Components>
