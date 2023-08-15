@@ -14,7 +14,7 @@ using VRage.Utils;
 
 namespace ReactorUpgrade
 {
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Reactor))]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Reactor),false)]
     public class MyReactorUpgradeLogic : MyGameLogicComponent
     {
         private IMyReactor m_reactor;
