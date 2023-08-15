@@ -1,5 +1,7 @@
 using VRage.Game;
 using VRage.Game.Components;
+using VRage.Game.ObjectBuilders;
+using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRage.ObjectBuilders;
 
@@ -18,31 +20,34 @@ namespace ReactorUpgrade
     public class MyReactorUpgradeLogic : MyGameLogicComponent
     {
         private IMyReactor m_reactor;
-        private IMyCubeBlock m_parent;
-        private MyObjectBuilder_EntityBase m_objectBuilder = null;
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             base.Init(objectBuilder);
 
             m_reactor = Entity as IMyReactor;
-            m_parent = Entity as IMyCubeBlock;
 
-            m_parent.AddUpgradeValue("ReactorOutput", 1f);
-
-            m_objectBuilder = objectBuilder;
-
-            m_parent.OnUpgradeValuesChanged += OnUpgradeValuesChanged;
+            if (m_reactor.BlockDefinition.SubtypeName == "LargeBlockLargeGenerator")
+            {
+                m_reactor.AddUpgradeValue("ReactorOutputLarge", 1f);
+                m_reactor.OnUpgradeValuesChanged += OnUpgradeValuesChangedLarge;
+            }
+            else
+            {
+                m_reactor.AddUpgradeValue("ReactorOutputSmall", 1f);
+                m_reactor.OnUpgradeValuesChanged += OnUpgradeValuesChangedSmall;
+            }
+                
         }
 
-        public override MyObjectBuilder_EntityBase GetObjectBuilder(bool copy = false)
+        private void OnUpgradeValuesChangedLarge()
         {
-            return m_objectBuilder;
+            m_reactor.PowerOutputMultiplier = m_reactor.UpgradeValues["ReactorOutputLarge"];
         }
 
-        private void OnUpgradeValuesChanged()
+        private void OnUpgradeValuesChangedSmall()
         {
-            m_reactor.PowerOutputMultiplier = m_parent.UpgradeValues["ReactorOutput"];
+            m_reactor.PowerOutputMultiplier = m_reactor.UpgradeValues["ReactorOutputSmall"];
         }
     }
 }
