@@ -8,13 +8,13 @@
           <SubtypeId>SmallLargeBlockUpgrade</SubtypeId>
         </Id>
         <DisplayName>Small Reactor Upgrade Module</DisplayName>
-        <Icon>Textures\GUI\Icons\Cubes\UpgradeEnergy.dds</Icon>
+        <Icon>Textures\GUI\Icons\Cubes\SmallReactorUpgrade.dds</Icon>
         <Description>Module to Upgrade the Large Reactor</Description>
         <CubeSize>Large</CubeSize>
         <BlockTopology>TriangleMesh</BlockTopology>
         <Size x="1" y="1" z="2" />
         <ModelOffset x="0" y="0" z="0" />
-        <Model>Models\Cubes\Large\UpgradeEnergy.mwm</Model>
+        <Model>Models\Cubes\Large\SmallReactorUpgrade.mwm</Model>
         <Components>
           <Component Subtype="SteelPlate" Count="80" />
           <Component Subtype="Construction" Count="40" />
@@ -65,7 +65,7 @@
 				<SubtypeId>LargeLargeBlockUpgrade</SubtypeId>
 			</Id>
 			<DisplayName>Large Reactor Upgrade Module</DisplayName>
-			<Icon>Textures\GUI\Icons\Cubes\UpgradeEnergy.dds</Icon>
+			<Icon>Textures\GUI\Icons\Cubes\LargeReactorUpgrade.dds</Icon>
 			<Description>Module to Upgrade the Large Reactor</Description>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
