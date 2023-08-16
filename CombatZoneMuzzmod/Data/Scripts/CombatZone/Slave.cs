@@ -19,7 +19,7 @@ namespace Scripts
         private const string SphereModel = "\\Models\\Cubes\\OuterShield.mwm";
         private readonly BoundingSphereD _combatNearSphere = new BoundingSphereD(Vector3D.Zero, CombatNearEdge);
         private BoundingSphereD _combatMinSphere = new BoundingSphereD(Vector3D.Zero, CombatRadius);
-        private BoundingSphereD _combatMaxSphere = new BoundingSphereD(Vector3D.Zero, CombatRadius + 20000);
+        private BoundingSphereD _combatMaxSphere = new BoundingSphereD(Vector3D.Zero, CombatRadius + 22500);
         private int _count;
         private int _fastStart;
         private readonly List
@@ -118,7 +118,7 @@ namespace Scripts
                     if (distFromCenterSqr < 138062500)
                     {
                         var dist = Vector3D.Distance(cameraPos, Vector3D.Zero);
-                        var range = 9500f - dist;
+                        var range = 11250f - dist;
                         var p = (float)Math.Round(range / 1500f, 2);
                         if (!MyUtils.IsEqual(p, _sphereEntity.Render.Transparency))
                         {
