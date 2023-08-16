@@ -45,7 +45,7 @@
         <Upgrades>
           <MyUpgradeModuleInfo>
             <UpgradeType>ReactorOutputSmall</UpgradeType>
-            <Modifier>1.4</Modifier>
+            <Modifier>0.41667</Modifier>
             <ModifierType>Additive</ModifierType>
           </MyUpgradeModuleInfo>
         </Upgrades>
