@@ -439,69 +439,7 @@ namespace klime.PointCheck
                 _sphereEntity3.Render.RemoveRenderObjects();
             }
         }
-        internal MyEntity GetSphereEntity()
-        {
-            capdistScale = new Vector3(capdistCenter, capdistCenter, capdistCenter);
-            var ent = new MyEntity();
-            var model = $"{ModContext.ModPath}{Capsphere1}";
-            ent.Name = "controlzone1";
-            ent.Init(null, model, null, (float)capdistCenter, null);
-            ent.Render.CastShadows = false;
-            ent.IsPreview = true;
-            ent.Save = false;
-            ent.SyncFlag = false;
-            ent.NeedsWorldMatrix = false;
-            ent.Flags |= EntityFlags.IsNotGamePrunningStructureObject;
-            MyEntities.Add(ent);
-            var matrix = MatrixD.CreateFromTransformScale(Quaternion.Zero, ctrpoint, capdistScale);
-            ent.PositionComp.SetWorldMatrix(ref matrix, null, false, false, false);
-            ent.InScene = SphereVisual;
-            ent.Render.UpdateRenderObject(SphereVisual, true);
-            //_sphereEntity = GetSphereEntity();
-            return ent;
-        }
-        internal MyEntity GetSphereEntity2()
-        {
-            capdistScale = new Vector3(capdist, capdist, capdist);
-            var ent = new MyEntity();
-            var model = $"{ModContext.ModPath}{Capsphere2}";
-            ent.Name = "controlzone2";
-            ent.Init(null, model, null, (float)capdist, null);
-            ent.Render.CastShadows = false;
-            ent.IsPreview = true;
-            ent.Save = false;
-            ent.SyncFlag = false;
-            ent.NeedsWorldMatrix = false;
-            ent.Flags |= EntityFlags.IsNotGamePrunningStructureObject;
-            MyEntities.Add(ent);
-            var matrix = MatrixD.CreateFromTransformScale(Quaternion.Zero, ctrpoint2, capdistScale);
-            ent.PositionComp.SetWorldMatrix(ref matrix, null, false, false, false);
-            ent.InScene = SphereVisual;
-            ent.Render.UpdateRenderObject(SphereVisual, true);
-            //_sphereEntity2 = GetSphereEntity2();
-            return ent;
-        }
-        internal MyEntity GetSphereEntity3()
-        {
-            capdistScale = new Vector3(capdist, capdist, capdist);
-            var ent = new MyEntity();
-            var model = $"{ModContext.ModPath}{Capsphere3}";
-            ent.Name = "controlzone3";
-            ent.Init(null, model, null, (float)capdist, null);
-            ent.Render.CastShadows = false;
-            ent.IsPreview = true;
-            ent.Save = false;
-            ent.SyncFlag = false;
-            ent.NeedsWorldMatrix = false;
-            ent.Flags |= EntityFlags.IsNotGamePrunningStructureObject;
-            MyEntities.Add(ent);
-            var matrix = MatrixD.CreateFromTransformScale(Quaternion.Zero, ctrpoint3, capdistScale);
-            ent.PositionComp.SetWorldMatrix(ref matrix, null, false, false, false);
-            ent.InScene = SphereVisual;
-            ent.Render.UpdateRenderObject(SphereVisual, true);
-            //_sphereEntity3 = GetSphereEntity3();
-            return ent;
-        }
+
 
 
         //end visual
@@ -562,16 +500,7 @@ namespace klime.PointCheck
 
         private void MessageEntered(string messageText, ref bool sendToOthers)
         {
-            if (messageText.Contains("/setgps"))
-            {
-                try
-                {
-                    string[] tempgps = messageText.Split(':'); ctrpoint = new Vector3(float.Parse(tempgps[2]), float.Parse(tempgps[3]), float.Parse(tempgps[4])); MyAPIGateway.Utilities.ShowNotification("Centerpoint changed to " + tempgps[2]);
-                    sendToOthers = true; GetSphereEntity();
-                }
-                catch (Exception)
-                { MyAPIGateway.Utilities.ShowNotification("Centerpoint not changed, try pasting a gps coordinate after /setgps"); }
-            }
+
 
             if (messageText.ToLower() == "/shields")
             {
@@ -591,22 +520,6 @@ namespace klime.PointCheck
                 { MyAPIGateway.Utilities.ShowNotification("Win time not changed, try /setmatchtime xxx (in minutes)"); }
             }
 
-            if (messageText.Contains("/setdist"))
-            {
-                try
-                {
-                    string[] tempdist = messageText.Split(' ');
-                    capdist = double.Parse(tempdist[1]);
-                    MyAPIGateway.Utilities.ShowNotification("Capture distance changed to " + tempdist[1]);
-                    if (!MyAPIGateway.Utilities.IsDedicated) //sendToOthers = true;
-                        SphereVisual = false;
-                    GetSphereEntity();
-                    SphereVisual = true;
-                    GetSphereEntity();
-                }
-                catch (Exception) { MyAPIGateway.Utilities.ShowNotification("Capture distance not changed, try /setdist ####"); }
-
-            }
 
             if (messageText.Contains("/setteams"))
             {
@@ -980,9 +893,7 @@ namespace klime.PointCheck
             if (!MyAPIGateway.Utilities.IsDedicated)
             {
                 // Initialize the sphere entities
-                _sphereEntity = GetSphereEntity();
-                _sphereEntity2 = GetSphereEntity2();
-                _sphereEntity3 = GetSphereEntity3();
+
 
                 // Initialize the text_api with the HUDRegistered callback
                 text_api = new HudAPIv2(HUDRegistered);
@@ -1169,23 +1080,6 @@ namespace klime.PointCheck
 
 
 
-            newGameModeSwitch = GameModeSwitch.Value;
-            if (oldGameModeSwitch != newGameModeSwitch && joinInit == true)
-            {
-                //MyAPIGateway.Utilities.ShowMessage("GM" , "Capture zones set to" + newGameModeSwitch);
-                if (_sphereEntity == null || _sphereEntity2 == null || _sphereEntity3 == null)
-                {
-                    _sphereEntity = GetSphereEntity();
-                    _sphereEntity2 = GetSphereEntity2();
-                    _sphereEntity3 = GetSphereEntity3();
-                }
-                _sphereEntity.Close(); _sphereEntity2.Close(); _sphereEntity3.Close();
-                GameMode_Set();
-                _sphereEntity = GetSphereEntity();
-                _sphereEntity2 = GetSphereEntity2();
-                _sphereEntity3 = GetSphereEntity3();
-            }
-            oldGameModeSwitch = newGameModeSwitch;
 
             if (joinInit == true)
             {
@@ -1208,58 +1102,6 @@ namespace klime.PointCheck
                 temp_LocalTimer = 0;
             }
 
-
-            if (timer % 60 == 0 && !MyAPIGateway.Utilities.IsDedicated)
-            {
-                try
-                {
-                    BoundingSphereD sph = new BoundingSphereD(Vector3D.Zero, 30000);
-                    var entities = new List<MyEntity>();
-                    MyGamePruningStructure.GetAllTopMostEntitiesInSphere(ref sph, entities);
-
-                    foreach (var entity in entities)
-                    {
-                        MyCubeGrid grid = entity as MyCubeGrid;
-                        if (grid != null && (grid.DisplayName.Contains("blocker")))
-                        {
-                            grid.Physics.Enabled = false;
-                            grid.RemoveFromGamePruningStructure();
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    // Handle the exception appropriately, e.g., logging or displaying an error message.
-                }
-            }
-
-            if (MyAPIGateway.Utilities.IsDedicated)
-            {
-                temp_ServerTimer++;
-                if (temp_ServerTimer % 60 == 0)
-                {
-                    try
-                    {
-                        BoundingSphereD sphere = new BoundingSphereD(Vector3D.Zero, 30000);
-                        var entities = new List<MyEntity>();
-                        MyGamePruningStructure.GetAllTopMostEntitiesInSphere(ref sphere, entities);
-
-                        foreach (var entity in entities)
-                        {
-                            MyCubeGrid grid = entity as MyCubeGrid;
-                            if (grid != null && grid.DisplayName.Contains("blocker"))
-                            {
-                                grid.Physics.Enabled = false;
-                                grid.RemoveFromGamePruningStructure();
-                            }
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        // Handle the exception appropriately, e.g., logging or displaying an error message.
-                    }
-                }
-            }
 
 
 
@@ -2646,25 +2488,25 @@ namespace klime.PointCheck
 
                                 if (IAmTheCaptainNow && capSwitch)
                                 {
-                                    if (_sphereEntity == null) { _sphereEntity = GetSphereEntity(); }
+                                    if (_sphereEntity == null) 
                                     _sphereEntity.Close();
                                     ctrpoint = CrazyKing();
                                     ClientRandVector3D = ctrpoint;
                                     CaptainRandVector3D.Value = ClientRandVector3D;
                                     CaptainRandVector3D.Push();
                                     GameMode_Set();
-                                    _sphereEntity = GetSphereEntity();
+
                                     capSwitch = false;
                                 }
                                 else if (!IAmTheCaptainNow && capSwitch)
                                 {
                                     CaptainRandVector3D.Fetch();
                                     ClientRandVector3D = CaptainRandVector3D.Value;
-                                    if (_sphereEntity == null) { _sphereEntity = GetSphereEntity(); }
+                                    if (_sphereEntity == null) 
                                     _sphereEntity.Close();
                                     ctrpoint = ClientRandVector3D;
                                     GameMode_Set();
-                                    _sphereEntity = GetSphereEntity();
+
                                     capSwitch = false;
                                 }
 
