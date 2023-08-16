@@ -211,7 +211,8 @@ namespace klime.EntityCover
             settings.DetectorColliderCallback = HitCallback;
             settings.Entity = ent;
             settings.WorldMatrix = ent.WorldMatrix;
-            MyAPIGateway.Physics.CreateBoxPhysics(settings, modelDimensions, 0f);
+            settings.WorldMatrix.GetOrientation();
+            MyAPIGateway.Physics.CreateBoxPhysics(settings, modelDimensions, 2f);
         }
 
         private static Vector3 GetModelDimensions(string modelName)
@@ -265,9 +266,22 @@ namespace klime.EntityCover
                 isBouncing = true;
 
                 // The BlockerEnt currently being collided with
+                // The BlockerEnt currently being collided with
                 BlockerEnt thisEnt = GetClosestBlocker(entity.PositionComp.GetPosition());
                 Vector3D blockerCenter = thisEnt.PositionComp.GetPosition();
+                MatrixD blockerOrientation = thisEnt.PositionComp.GetOrientation();
 
+                // Determine the direction from the blocker's center to the grid's position
+                Vector3D directionFromBlockerToGrid = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - blockerCenter);
+
+                // Half-extents of the blocker (275 in this case)
+                double halfExtents = 275;
+
+                // Calculate the simulated "boxCenter" that places the "center" beneath the grid
+                Vector3D simulatedBoxCenter = blockerCenter + directionFromBlockerToGrid * halfExtents;
+
+                // Continue with the rest of the code, using "simulatedBoxCenter" instead of "blockerCenter"
+                
 
                 // Get the incident velocity direction
                 double incidentSpeed = cGrid.Physics.Speed;
@@ -287,13 +301,12 @@ namespace klime.EntityCover
 
                 // Determine the maximum side length and calculate the warp distance as half of it
                 double maxSideLength = Math.Max(size.X, Math.Max(size.Y, size.Z));
-                double warpDistance = maxSideLength / 2.0; // Dividing by 2 to warp by half the distance
 
 
 
 
                 // Move the relative impact point 50 meters closer to the local center
-                relImpact += directionToCenter * warpDistance;
+                relImpact += directionToCenter * maxSideLength;
                 // Determine the closest face normal in local coordinates
                 Vector3D localNormal = DetermineClosestFaceNormal(relImpact, thisEnt);
 
@@ -351,7 +364,7 @@ namespace klime.EntityCover
                         Vector3D pushDirection = dotProduct < 0 ? -Vector3D.Normalize(boxNormal) : Vector3D.Normalize(boxNormal); // Reversed logic here
 
                         // Apply the push effect by moving the grid in the correct direction
-                        cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() + pushDirection * warpDistance);
+                        cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() + pushDirection * maxSideLength);
 
 
                         MyAPIGateway.Utilities.ShowMessage("", $"Low Incident Velocity: {incidentVelocity}");
@@ -409,16 +422,16 @@ namespace klime.EntityCover
             else
                 {
                     // Determine the direction from the blocker's center to the grid's position
-                    Vector3D directionFromBlocker = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - blockerCenter);
+                    Vector3D directionFromBlocker = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - simulatedBoxCenter);
 
                     // Project the grid's velocity onto the direction from the blocker
-                    double velocityTowardsBlocker = Vector3D.Dot(cGrid.Physics.LinearVelocity, directionFromBlocker);
+                    double velocityTowardsBlocker = Vector3D.Dot(incidentVelocity, directionFromBlocker);
 
                     // Calculate the velocity component to subtract
                     Vector3D velocityComponentToSubtract = directionFromBlocker * velocityTowardsBlocker;
 
                     // Subtract the velocity component from the grid's velocity
-                    cGrid.Physics.LinearVelocity -= (velocityComponentToSubtract - 1);
+                    cGrid.Physics.LinearVelocity -= (velocityComponentToSubtract);
 
                     // Optionally, add additional push away from the blocker's center
                     cGrid.Physics.LinearVelocity += directionFromBlocker * (incidentSpeed + 1);     
@@ -467,20 +480,19 @@ namespace klime.EntityCover
 
             return distance;
         }
-        private static Vector3D DetermineClosestFaceNormal(Vector3D relImpact, BlockerEnt thisEnt)
+        private Vector3D DetermineClosestFaceNormal(Vector3D relImpact, BlockerEnt thisEnt)
         {
             BoundingBoxD localBoundingBox = GetLocalBoundingBox(thisEnt);
             Vector3D closestNormal = Vector3D.Zero;
-            double closestDistance = double.MaxValue;
+            double minDistance = double.MaxValue;
 
-            // Iterate through each face of the bounding box, checking the distance to relImpact
-            foreach (Vector3D faceNormal in GetFaceNormals())
+            foreach (var localNormal in GetFaceNormals())
             {
-                double distance = CalculateDistanceToFace(relImpact, faceNormal, localBoundingBox);
-                if (distance < closestDistance)
+                double distance = CalculateDistanceToFace(relImpact, localNormal, localBoundingBox);
+                if (distance < minDistance)
                 {
-                    closestDistance = distance;
-                    closestNormal = faceNormal;
+                    minDistance = distance;
+                    closestNormal = localNormal;
                 }
             }
 
