@@ -270,6 +270,7 @@ namespace klime.EntityCover
 
 
                 // Get the incident velocity direction
+                double incidentSpeed = cGrid.Physics.Speed;
                 Vector3D incidentVelocity = cGrid.LinearVelocity;
                 Vector3D incidentVelocityB = cGrid.LinearVelocity;
                 Vector3D incidentVelocityC = cGrid.LinearVelocity + cGrid.Physics.AngularVelocity;
@@ -281,8 +282,18 @@ namespace klime.EntityCover
                 // Calculate the direction from the relative impact point to the local center
                 Vector3D directionToCenter = Vector3D.Normalize(thisEnt.PositionComp.GetPosition() - relImpact);
 
+                BoundingBoxD boundingBox = cGrid.PositionComp.WorldAABB;
+                Vector3D size = boundingBox.Max - boundingBox.Min;
+
+                // Determine the maximum side length and calculate the warp distance as half of it
+                double maxSideLength = Math.Max(size.X, Math.Max(size.Y, size.Z));
+                double warpDistance = maxSideLength / 2.0; // Dividing by 2 to warp by half the distance
+
+
+
+
                 // Move the relative impact point 50 meters closer to the local center
-                relImpact += directionToCenter * 50;
+                relImpact += directionToCenter * warpDistance;
                 // Determine the closest face normal in local coordinates
                 Vector3D localNormal = DetermineClosestFaceNormal(relImpact, thisEnt);
 
@@ -292,104 +303,131 @@ namespace klime.EntityCover
                 // Reflect the incident velocity based on the world normal
                 Vector3D reflection = Vector3D.Reflect(incidentVelocity, worldNormal);
 
-                AddLine(relImpact, incidentVelocity, Color.Red);
-                AddLine(relImpact, reflection, Color.Green);
-                AddLine(relImpact, worldNormal, Color.Blue);
-                //cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 0.95);
-                cGrid.Physics.LinearVelocity = reflection;
+                AddLine(cGrid.PositionComp.GetPosition(), incidentVelocity, Color.Red);
+                AddLine(cGrid.PositionComp.GetPosition(), reflection, Color.Green);
+                AddLine(cGrid.PositionComp.GetPosition(), worldNormal, Color.Blue);
 
+                bool basic = true;
 
-
-
-                // Determine the direction from the blocker's center to the grid's position
-                Vector3D directionFromBlocker = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - blockerCenter);
-                // Check if the grid is inside or outside the blocker
-                Vector3D boxNormal = CalculateHitFaceNormal(relImpact, blockerCenter, cGrid.PositionComp.GetPosition(), thisEnt.WorldMatrix);
-                double dotProduct = Vector3D.Dot(directionFromBlocker, worldNormal);
-
-
-                bool deez = true;
-
-
-
-
-
-
-
-                if (incidentVelocityC.AbsMax() < 10)
+                if (!basic)
                 {
-                    // Determine the size of the grid's bounding box
-                    BoundingBoxD boundingBox = cGrid.PositionComp.WorldAABB;
-                    Vector3D size = boundingBox.Max - boundingBox.Min;
 
-                    // Determine the maximum side length and calculate the warp distance as half of it
-                    double maxSideLength = Math.Max(size.X, Math.Max(size.Y, size.Z));
-                    double warpDistance = maxSideLength / 2.0; // Dividing by 2 to warp by half the distance
+
+
+
+                    //cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 0.95);
+                    cGrid.Physics.LinearVelocity = reflection;
+
+
+
 
                     // Determine the direction from the blocker's center to the grid's position
-                   // Vector3D directionFromBlocker = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - blockerCenter);
-
-                    // Determine if the grid is inside or outside the blocker based on the dot product with boxNormal
-                  //  double dotProduct = Vector3D.Dot(directionFromBlocker, boxNormal);
-
-                    // Determine the push direction based on whether the grid is inside or outside the blocker
-                    Vector3D pushDirection = dotProduct < 0 ? -Vector3D.Normalize(boxNormal) : Vector3D.Normalize(boxNormal); // Reversed logic here
-
-                    // Apply the push effect by moving the grid in the correct direction
-                    cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() + pushDirection * warpDistance);
+                    Vector3D directionFromBlocker = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - blockerCenter);
+                    // Check if the grid is inside or outside the blocker
+                    Vector3D boxNormal = CalculateHitFaceNormal(relImpact, blockerCenter, cGrid.PositionComp.GetPosition(), thisEnt.WorldMatrix);
+                    double dotProduct = Vector3D.Dot(directionFromBlocker, worldNormal);
 
 
-                    MyAPIGateway.Utilities.ShowMessage("", $"Low Incident Velocity: {incidentVelocity}");
-                    AddLine(cGrid.PositionComp.GetPosition(), incidentVelocityC, Color.Red);
-                    AddLine(cGrid.PositionComp.GetPosition(), reflection, Color.Green);
-                    AddLine(cGrid.PositionComp.GetPosition(), boxNormal, Color.Blue);
+                    bool deez = true;
+
+
+
+
+
+
+
+                    if (incidentVelocityC.AbsMax() < 10)
+                    {
+                        // Determine the size of the grid's bounding box
+
+
+                        // Determine the direction from the blocker's center to the grid's position
+                        // Vector3D directionFromBlocker = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - blockerCenter);
+
+                        // Determine if the grid is inside or outside the blocker based on the dot product with boxNormal
+                        //  double dotProduct = Vector3D.Dot(directionFromBlocker, boxNormal);
+
+                        // Determine the push direction based on whether the grid is inside or outside the blocker
+                        Vector3D pushDirection = dotProduct < 0 ? -Vector3D.Normalize(boxNormal) : Vector3D.Normalize(boxNormal); // Reversed logic here
+
+                        // Apply the push effect by moving the grid in the correct direction
+                        cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() + pushDirection * warpDistance);
+
+
+                        MyAPIGateway.Utilities.ShowMessage("", $"Low Incident Velocity: {incidentVelocity}");
+                        AddLine(cGrid.PositionComp.GetPosition(), incidentVelocityC, Color.Red);
+                        AddLine(cGrid.PositionComp.GetPosition(), reflection, Color.Green);
+                        AddLine(cGrid.PositionComp.GetPosition(), boxNormal, Color.Blue);
+                    }
+                    else if (deez)
+                    {
+                        // Determine the direction from the grid's current position to the blocker's center
+                        Vector3D directionToBlocker = Vector3D.Normalize(blockerCenter - cGrid.PositionComp.GetPosition());
+
+                        // Calculate the dot product of the reflection and the direction to the blocker
+                        double dotProductWithReflection = Vector3D.Dot(reflection, directionToBlocker);
+
+                        // If the dot product is positive, the reflection is pointing towards the blocker
+                        if (dotProductWithReflection > 0)
+                        {
+                            AddLine(cGrid.PositionComp.GetPosition(), boxNormal, Color.Blue);
+                            // Find the axis to rotate around by taking the cross product of the box normal and the direction from the blocker
+                            Vector3D rotationAxis = Vector3D.Cross(boxNormal, directionFromBlocker);
+                            Vector3D boxNormalFixed;
+                            // Rotate the normal by 90 degrees around the chosen axis
+                            boxNormalFixed = Vector3D.Transform(boxNormal, MatrixD.CreateFromAxisAngle(rotationAxis, MathHelper.ToRadians(-90)));
+                            MyAPIGateway.Utilities.ShowMessage("", $"Fixed ;)");
+                            AddLine(cGrid.PositionComp.GetPosition(), boxNormalFixed, Color.HotPink);
+                            AddLine(cGrid.PositionComp.GetPosition(), directionFromBlocker, Color.LightYellow);
+                            // Get the normal of the collision box on the impacted side
+
+                            MyAPIGateway.Utilities.ShowMessage("", $"ABNormal Incident Product");
+                            AddLine(cGrid.PositionComp.GetPosition(), incidentVelocityC, Color.Red);
+                            AddLine(cGrid.PositionComp.GetPosition(), reflection, Color.Green);
+                            //AddLine(cGrid.PositionComp.GetPosition(), -reflection, Color.Purple);
+
+                            Vector3D reflectionFixed = Vector3D.Reflect(incidentVelocity, directionFromBlocker);
+                            AddLine(cGrid.PositionComp.GetPosition(), reflectionFixed, Color.Purple);
+                            //cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 0.95);
+                            cGrid.Physics.LinearVelocity = reflectionFixed;
+
+                        }
+                        else
+                        {
+                            MyAPIGateway.Utilities.ShowMessage("", $"Normal Incident Product: {dotProductWithReflection}");
+                            AddLine(cGrid.PositionComp.GetPosition(), incidentVelocityC, Color.Red);
+                            AddLine(cGrid.PositionComp.GetPosition(), reflection, Color.Green);
+                            AddLine(cGrid.PositionComp.GetPosition(), boxNormal, Color.Blue);
+                            //cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 0.95);
+                            cGrid.Physics.LinearVelocity = reflection;
+
+                        }
+
+
+                    }
                 }
-                else if (deez)
+            else
                 {
-                    // Determine the direction from the grid's current position to the blocker's center
-                    Vector3D directionToBlocker = Vector3D.Normalize(blockerCenter - cGrid.PositionComp.GetPosition());
+                    // Determine the direction from the blocker's center to the grid's position
+                    Vector3D directionFromBlocker = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - blockerCenter);
 
-                    // Calculate the dot product of the reflection and the direction to the blocker
-                    double dotProductWithReflection = Vector3D.Dot(reflection, directionToBlocker);
+                    // Project the grid's velocity onto the direction from the blocker
+                    double velocityTowardsBlocker = Vector3D.Dot(cGrid.Physics.LinearVelocity, directionFromBlocker);
 
-                    // If the dot product is positive, the reflection is pointing towards the blocker
-                    if (dotProductWithReflection > 0)
-                    {
-                        AddLine(cGrid.PositionComp.GetPosition(), boxNormal, Color.Blue);
-                        // Find the axis to rotate around by taking the cross product of the box normal and the direction from the blocker
-                        Vector3D rotationAxis = Vector3D.Cross(boxNormal, directionFromBlocker);
-                        Vector3D boxNormalFixed;
-                        // Rotate the normal by 90 degrees around the chosen axis
-                        boxNormalFixed = Vector3D.Transform(boxNormal, MatrixD.CreateFromAxisAngle(rotationAxis, MathHelper.ToRadians(-90)));
-                        MyAPIGateway.Utilities.ShowMessage("", $"Fixed ;)");
-                        AddLine(cGrid.PositionComp.GetPosition(), boxNormalFixed, Color.HotPink);
-                        AddLine(cGrid.PositionComp.GetPosition(), directionFromBlocker, Color.LightYellow);
-                        // Get the normal of the collision box on the impacted side
+                    // Calculate the velocity component to subtract
+                    Vector3D velocityComponentToSubtract = directionFromBlocker * velocityTowardsBlocker;
 
-                        MyAPIGateway.Utilities.ShowMessage("", $"ABNormal Incident Product");
-                        AddLine(cGrid.PositionComp.GetPosition(), incidentVelocityC, Color.Red);
-                        AddLine(cGrid.PositionComp.GetPosition(), reflection, Color.Green);
-                        //AddLine(cGrid.PositionComp.GetPosition(), -reflection, Color.Purple);
+                    // Subtract the velocity component from the grid's velocity
+                    cGrid.Physics.LinearVelocity -= (velocityComponentToSubtract - 1);
 
-                        Vector3D reflectionFixed = Vector3D.Reflect(incidentVelocity, directionFromBlocker);
-                        AddLine(cGrid.PositionComp.GetPosition(), reflectionFixed, Color.Purple);
-                        //cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 0.95);
-                        cGrid.Physics.LinearVelocity = reflectionFixed;
-
-                    }
-                    else
-                    {
-                        MyAPIGateway.Utilities.ShowMessage("", $"Normal Incident Product: {dotProductWithReflection}");
-                        AddLine(cGrid.PositionComp.GetPosition(), incidentVelocityC, Color.Red);
-                        AddLine(cGrid.PositionComp.GetPosition(), reflection, Color.Green);
-                        AddLine(cGrid.PositionComp.GetPosition(), boxNormal, Color.Blue);
-                        //cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 0.95);
-                        cGrid.Physics.LinearVelocity = reflection;
-
-                    }
-
-
+                    // Optionally, add additional push away from the blocker's center
+                    cGrid.Physics.LinearVelocity += directionFromBlocker * (incidentSpeed + 1);     
+                
+                
                 }
+                AddLine(cGrid.PositionComp.GetPosition(), blockerCenter, Color.MediumPurple);
+                AddLine(cGrid.PositionComp.GetPosition(), relImpact, Color.Teal);
+
             }
         }
 
