@@ -4,7 +4,7 @@ using VRage.Game.Components;
 
 namespace ShipPoints
 {
-	[MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
+    [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     class PointAdditions : MySessionComponentBase
     {
         public override void Init(MyObjectBuilder_SessionComponent sessionComponent)
@@ -501,6 +501,28 @@ namespace ShipPoints
 				Thagomizer_Angled_Flipped@750; 
 				K_HS_9x9_K3_King@900; 
 				K_HS_9x9_HSRB_Dreadnight@750;
+
+				MA_Laser_Armor01@1;
+				MA_Laser_Armor02@1;
+				MA_Laser_Armor03@1;
+				MA_Laser_Armor04@1;
+				MA_Laser_Armor05@1;
+				MA_Laser_Armor06@1;
+				MA_Laser_Armor07@1;
+				MA_Laser_Armor08@1;
+				MA_Laser_Armor09@1;
+				MA_Laser_Armor10@1;
+				MA_Laser_Armor11@1;
+				MA_Laser_Armor12@1;
+				MA_Laser_Armor13@1;
+				MA_Laser_Armor14@1;
+				MA_Laser_Armor15@1;
+				MA_Laser_Armor16@1;
+
+
+
+
+
             "));
         }
     }
