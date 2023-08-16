@@ -433,10 +433,24 @@ namespace klime.EntityCover
                     // Subtract the velocity component from the grid's velocity
                     cGrid.Physics.LinearVelocity -= (velocityComponentToSubtract);
 
+                    // Project the grid's angular velocity onto the direction from the blocker
+                    double angularVelocityTowardsBlocker = Vector3D.Dot(incidentAngularVelocity, directionFromBlocker);
+
+                    // Determine whether the rotation is towards or away from the blocker
+                    if (angularVelocityTowardsBlocker > 0)
+                    {
+                        // Rotation is towards the blocker; invert the angular velocity
+                        cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 1.5) - 1;
+                    }
+                    else
+                    {
+                        // Rotation is away from the blocker; add 50% to the angular velocity
+                        cGrid.Physics.AngularVelocity = Vector3D.Multiply(incidentAngularVelocity, 1.5) + 1;
+                    }
+
                     // Optionally, add additional push away from the blocker's center
-                    cGrid.Physics.LinearVelocity += directionFromBlocker * (incidentSpeed + 1);     
-                
-                
+                    cGrid.Physics.LinearVelocity += directionFromBlocker * (incidentSpeed + 1);
+
                 }
                 AddLine(cGrid.PositionComp.GetPosition(), blockerCenter, Color.MediumPurple);
                 AddLine(cGrid.PositionComp.GetPosition(), relImpact, Color.Teal);
