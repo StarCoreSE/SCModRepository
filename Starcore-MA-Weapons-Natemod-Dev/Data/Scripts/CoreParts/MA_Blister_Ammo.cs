@@ -40,10 +40,10 @@ namespace Scripts
     partial class Parts
     {
 
-        private AmmoDef MA_Meatball_Ammo => new AmmoDef  //30mm rounds.
+        private AmmoDef MA_Blister_Ammo => new AmmoDef  //30mm rounds.
         {
-            AmmoMagazine = "MA_Meatball_Ammo", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "MA_Meatball_Ammo", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
+            AmmoMagazine = "MA_Blister_Ammo", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
+            AmmoRound = "MA_Blister_Ammo", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.00000000001f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 800f, // Direct damage; one steel plate is worth 100.
