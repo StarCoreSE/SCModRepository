@@ -16,8 +16,9 @@ namespace ShipPoints
                 LargeShieldModulator@50;
                 LargeEnhancer@50;
                 LargeBlockSmallGenerator@17;
+		SmallLargeBlockUpgrade@20;
                 LargeBlockLargeGenerator@300;
-		LargeLargeBlockUpgrade@100
+		LargeLargeBlockUpgrade@100;
                 LargeWarhead@101;
                 LargeDecoy@4;
                 LargeStator@5;
