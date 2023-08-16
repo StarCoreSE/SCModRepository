@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <BlockVariantGroups>
+
+             <BlockVariantGroup>
+            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="DampenerModuleGroup" />
+            <Icon>Textures\GUI\Icons\Cubes\DampenerModule.dds</Icon>
+            <DisplayName>Dampening Enhancers</DisplayName>
+            <Description>Dampening Enhancers</Description>
+            <Blocks>
+                <Block Type="MyObjectBuilder_Thrust" Subtype="DampeningEnhancer_x2_Large" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="DampeningEnhancer_x2_Small" />
+            </Blocks>
+        </BlockVariantGroup>
+
+    </BlockVariantGroups>
+</Definitions>
