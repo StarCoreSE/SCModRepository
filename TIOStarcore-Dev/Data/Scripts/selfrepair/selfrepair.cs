@@ -1,11 +1,14 @@
 ﻿using Sandbox.Common.ObjectBuilders;
 using Sandbox.Game;
 using Sandbox.ModAPI;
+using VRage.Game;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
+using VRage.Game.ModAPI.Ingame;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRageMath;
+using IMySlimBlock = VRage.Game.ModAPI.IMySlimBlock;
 
 namespace ArtilleryBlockExplosion
 {
@@ -14,7 +17,7 @@ namespace ArtilleryBlockExplosion
 	{
 		private IMyConveyorSorter artilleryBlock;
 		private int triggerTick = 0;
-		private const int COUNTDOWN_SECONDS = 10 * 60; // 10 minutes in game time
+		private const int COUNTDOWN_TICKS = 10 * 60; // (60 ticks per second)
 
 		public override void Init(MyObjectBuilder_EntityBase objectBuilder)
 		{
@@ -34,23 +37,31 @@ namespace ArtilleryBlockExplosion
 		{
 			if (artilleryBlock == null || artilleryBlock.CubeGrid.Physics == null) return;
 
+			IMySlimBlock slimBlock = artilleryBlock.SlimBlock;
+			if (slimBlock == null) return;
+
 			if (!artilleryBlock.Enabled)
 			{
-				triggerTick += 1;
-				if (triggerTick >= COUNTDOWN_SECONDS)
+				if (slimBlock.Integrity < slimBlock.MaxIntegrity)
 				{
-					DoExplosion();
-					triggerTick = 0; // Restart the timer after explosion
-				}
-				else if (triggerTick % 60 == 0) // Show notification every second
-				{
-					int remainingSeconds = COUNTDOWN_SECONDS - triggerTick;
-					int minutes = remainingSeconds / 60;
-					int seconds = remainingSeconds % 60;
-					string name = artilleryBlock.CustomName;
-					string message = string.Format("Artillery Block repairs in {0} seconds", seconds);
+					triggerTick += 1;
+					if (triggerTick >= COUNTDOWN_TICKS)
+					{
+						DoRepair();
+						triggerTick = 0; // Restart the timer after repair
+					}
+					else if (triggerTick % 60 == 0) // Show notification every second
+					{
+						int remainingSeconds = (COUNTDOWN_TICKS - triggerTick) / 60;
+						string name = artilleryBlock.CustomName;
+						string message = string.Format("Artillery Block ({0}) repairs in {1} seconds", name, remainingSeconds);
 
-					MyVisualScriptLogicProvider.ShowNotificationLocal(message, 1000, "Red");
+						MyVisualScriptLogicProvider.ShowNotificationLocal(message, 1000, "Red");
+					}
+				}
+				else
+				{
+					triggerTick = 0; // Reset countdown if at full integrity
 				}
 			}
 			else
@@ -59,15 +70,33 @@ namespace ArtilleryBlockExplosion
 			}
 		}
 
-		private void DoExplosion()
+		private void DoRepair()
 		{
 			if (artilleryBlock == null || artilleryBlock.CubeGrid.Physics == null) return;
-			double radius = 30;
-			BoundingSphereD sphere = new BoundingSphereD(artilleryBlock.WorldMatrix.Translation, radius);
-			MyExplosionInfo explosion = new MyExplosionInfo(0f, -10000f, sphere, MyExplosionTypeEnum.CUSTOM, true);
 
-			MyExplosions.AddExplosion(ref explosion);
+			IMySlimBlock slimBlock = artilleryBlock.SlimBlock;
+			if (slimBlock == null) return;
+
+			float maxIntegrity = slimBlock.MaxIntegrity;
+			float currentIntegrity = slimBlock.Integrity;
+
+			float repairAmount = maxIntegrity * 0.1f; // 10% of the block's total integrity
+
+			float newIntegrity = currentIntegrity + repairAmount;
+
+			if (newIntegrity > maxIntegrity)
+			{
+				newIntegrity = maxIntegrity;
+			}
+
+			slimBlock.IncreaseMountLevel(repairAmount, 0L, null, 0f, false, MyOwnershipShareModeEnum.Faction);
+
+			string name = artilleryBlock.CustomName;
+			string message = string.Format("Artillery Block ({0}) repaired by {1} integrity points", name, repairAmount);
+
+			MyVisualScriptLogicProvider.ShowNotificationLocal(message, 1000, "Green");
 		}
+
 
 		private void ArtilleryBlockEnabledChanged(IMyTerminalBlock obj)
 		{
