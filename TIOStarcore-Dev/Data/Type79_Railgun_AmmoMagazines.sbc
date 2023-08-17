@@ -4,10 +4,10 @@
         <AmmoMagazine>
             <Id>
                 <TypeId>AmmoMagazine</TypeId>
-                <SubtypeId>Type24_Artillery_MagazineLarge</SubtypeId>
+                <SubtypeId>Type79_Railgun_MagazineLarge</SubtypeId>
             </Id>
-            <DisplayName>MK3 Battleship Round</DisplayName>
-            <Icon>Textures\GUI\Icons\CannonRound3.png</Icon>
+            <DisplayName>Type79 Railgun Projectile</DisplayName>
+            <Icon>Textures\GUI\Icons\RailgunPorjectile3.png</Icon>
             <Size>
                 <X>0.2</X>
                 <Y>0.2</Y>
@@ -15,10 +15,10 @@
             </Size>
             <Mass>150</Mass>
             <Volume>800</Volume>
-            <Model>Models\CannonRound3.mwm</Model>
+            <Model>Models\RailgunPorjectile3.mwm</Model>
             <PhysicalMaterial>Ammo</PhysicalMaterial>
             <Capacity>1</Capacity>
-            <AmmoDefinitionId Subtype="Type24_Artillery_Ammo" />
+            <AmmoDefinitionId Subtype="Type79_Railgun_Ammo" />
         </AmmoMagazine>
     </AmmoMagazines>
 </Definitions>

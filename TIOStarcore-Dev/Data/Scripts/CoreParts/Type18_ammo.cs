@@ -38,7 +38,7 @@ namespace Scripts
 { // Don't edit above this line
     partial class Parts
     {
-        private AmmoDef Type18_Ammo => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef Type18_Artillery_Ammo => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "Type18_MagazineLarge", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Type18 HE Round", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.

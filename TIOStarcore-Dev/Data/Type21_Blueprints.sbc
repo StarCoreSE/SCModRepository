@@ -6,7 +6,7 @@
         <TypeId>BlueprintDefinition</TypeId>
         <SubtypeId>Type21_Artillery_MagazineLarge</SubtypeId>
       </Id>
-      <DisplayName>MK2 Battleship Round</DisplayName>
+      <DisplayName>Type21 Artillery Round</DisplayName>
       <Icon>Textures\GUI\Icons\CannonRound2.png</Icon>
       <Prerequisites>
         <Item Amount="750" TypeId="Ingot" SubtypeId="Iron" />

@@ -6,7 +6,7 @@
         <TypeId>BlueprintDefinition</TypeId>
         <SubtypeId>Type24_Artillery_MagazineLarge</SubtypeId>
       </Id>
-      <DisplayName>MK3 Battleship Round</DisplayName>
+      <DisplayName>Type24 Artillery Round</DisplayName>
       <Icon>Textures\GUI\Icons\CannonRound3.png</Icon>
       <Prerequisites>
         <Item Amount="1000" TypeId="Ingot" SubtypeId="Iron" />

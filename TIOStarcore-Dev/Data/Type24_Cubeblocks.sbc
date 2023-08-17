@@ -8,7 +8,7 @@
                 <TypeId>ConveyorSorter</TypeId>
                 <SubtypeId>Type24_Artillery_Block</SubtypeId>
             </Id>
-            <DisplayName>MK3 Battleship Cannon</DisplayName>
+            <DisplayName>Type 24 Artillery</DisplayName>
             <Description>Improved range and speed over the MK3. Leaves massive holes in anything it hits</Description>
 			<GuiVisible>true</GuiVisible>
             <Icon>Textures\GUI\Icons\MK3_Main.png</Icon>

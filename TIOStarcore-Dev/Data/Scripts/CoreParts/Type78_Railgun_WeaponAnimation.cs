@@ -23,7 +23,7 @@ namespace Scripts
         //StopFiring,
         //StopTracking
 
-        private AnimationDef MK2Railgun_AdvancedAnimation => new AnimationDef
+        private AnimationDef Type78Railgun_AdvancedAnimation => new AnimationDef
         {
             EventParticles = new Dictionary<PartAnimationSetDef.EventTriggers, EventParticle[]>
             {

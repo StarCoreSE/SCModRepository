@@ -222,7 +222,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                Type18_Ammo, 
+                Type18_Artillery_Ammo, 
                  // Must list all primary, shrapnel, and pattern ammos.
             },
             Animations = Type18_AdvancedAnimation,

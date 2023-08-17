@@ -225,7 +225,7 @@ namespace Scripts {
                 Type78_Railgun_Ammo, 
                  // Must list all primary, shrapnel, and pattern ammos.
             },
-            Animations = MK2Railgun_AdvancedAnimation,
+            Animations = Type78Railgun_AdvancedAnimation,
             //Upgrades = UpgradeModules,
         };
         // Don't edit below this line.

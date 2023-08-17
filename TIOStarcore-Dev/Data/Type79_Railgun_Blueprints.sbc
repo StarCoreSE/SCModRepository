@@ -6,7 +6,7 @@
         <TypeId>BlueprintDefinition</TypeId>
         <SubtypeId>Type79_Railgun_MagazineLarge</SubtypeId>
       </Id>
-      <DisplayName>MK3 Railgun Projectile</DisplayName>
+      <DisplayName>Type79 Railgun Projectile</DisplayName>
       <Icon>Textures\GUI\Icons\RailgunPorjectile3.png</Icon>
       <Prerequisites>
         <Item Amount="1750" TypeId="Ingot" SubtypeId="Iron" />

@@ -6,7 +6,7 @@
                 <TypeId>AmmoMagazine</TypeId>
                 <SubtypeId>Type21_Artillery_MagazineLarge</SubtypeId>
             </Id>
-            <DisplayName>MK2 Battleship Round</DisplayName>
+            <DisplayName>Type21 Artillery Round</DisplayName>
             <Icon>Textures\GUI\Icons\CannonRound2.png</Icon>
             <Size>
                 <X>0.2</X>
