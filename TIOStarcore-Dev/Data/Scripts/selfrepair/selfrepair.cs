@@ -77,22 +77,15 @@ namespace ArtilleryBlockExplosion
 			IMySlimBlock slimBlock = artilleryBlock.SlimBlock;
 			if (slimBlock == null) return;
 
-			float maxIntegrity = slimBlock.MaxIntegrity;
-			float currentIntegrity = slimBlock.Integrity;
 
-			float repairAmount = maxIntegrity * 0.1f; // 10% of the block's total integrity
+			float repairAmount = 20; // what the fuck is this number keen??
 
-			float newIntegrity = currentIntegrity + repairAmount;
 
-			if (newIntegrity > maxIntegrity)
-			{
-				newIntegrity = maxIntegrity;
-			}
 
 			slimBlock.IncreaseMountLevel(repairAmount, 0L, null, 0f, false, MyOwnershipShareModeEnum.Faction);
 
 			string name = artilleryBlock.CustomName;
-			string message = string.Format("Artillery Block ({0}) repaired by {1} integrity points", name, repairAmount);
+			string message = string.Format("Artillery Block ({0}) repaired", name, repairAmount);
 
 			MyVisualScriptLogicProvider.ShowNotificationLocal(message, 1000, "Green");
 		}
