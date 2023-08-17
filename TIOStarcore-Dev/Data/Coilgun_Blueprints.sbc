@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Blueprints>
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>CoilgunMk2_MagazineLarge</SubtypeId>
+      </Id>
+      <DisplayName>Depleted Uranium Slugs</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\CoilgunMk2_BulletModel.png</Icon>
+      <Prerequisites>
+        <Item Amount="2000" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="250" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="7" TypeId="Ingot" SubtypeId="Magnesium" />
+        <Item Amount="2" TypeId="Ingot" SubtypeId="Uranium" />
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Platinum" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="CoilgunMk2_MagazineLarge" />
+      <BaseProductionTimeInSeconds>25</BaseProductionTimeInSeconds>
+    </Blueprint>
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>UNSC_Coilgun_MagazineLarge</SubtypeId>
+      </Id>
+      <DisplayName>Magnetic Slugs</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\CoilgunSlug.png</Icon>
+      <Prerequisites>
+        <Item Amount="2000" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="250" TypeId="Ingot" SubtypeId="Nickel" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="UNSC_Coilgun_MagazineLarge" />
+      <BaseProductionTimeInSeconds>12</BaseProductionTimeInSeconds>
+    </Blueprint>
+  </Blueprints>
+</Definitions>

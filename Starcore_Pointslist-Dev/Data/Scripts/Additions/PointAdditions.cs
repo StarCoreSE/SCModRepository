@@ -457,8 +457,7 @@ namespace ShipPoints
 				Type77_Railgun_Block@300;
 				Type78_Railgun_Block@400;
 				Type79_Railgun_Block@500;
-				Assault_Coil_Turret@160; 
-				Light_Coil_Turret@115; 
+				Reaver_Coilgun_Block@200; 
 				RailgunTurret_Block@450; 
                 Null_Point_Jump_Disruptor_Large@99999;
 				LargeGatlingTurret_SC@175;
