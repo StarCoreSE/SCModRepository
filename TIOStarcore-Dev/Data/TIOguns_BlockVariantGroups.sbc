@@ -4,7 +4,7 @@
 
     <BlockVariantGroup>
       <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Type18_Artillery_Block" />
-      <Icon>Textures\GUI\Icons\Mk1CannonMainScene.dds</Icon>
+      <Icon>Textures\GUI\Icons\Mk1CannonMainScene.png</Icon>
       <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
       <Description>Description_BlockGroup_TurretGroup</Description>
       <Blocks>
@@ -16,7 +16,7 @@
 
     <BlockVariantGroup>
       <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Type77_Railgun_Block" />
-      <Icon>Textures\GUI\Icons\Mk1Railgun_Main.dds</Icon>
+      <Icon>Textures\GUI\Icons\Mk1Railgun_Main.png</Icon>
       <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
       <Description>Description_BlockGroup_TurretGroup</Description>
       <Blocks>
