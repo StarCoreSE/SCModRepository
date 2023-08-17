@@ -4,7 +4,7 @@
         <Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
             <Id>
                 <TypeId>AmmoDefinition</TypeId>
-                <SubtypeId>MK2_Railgun_Ammo</SubtypeId>
+                <SubtypeId>Type78_Railgun_Ammo</SubtypeId>
             </Id>
             <BasicProperties>
                 <DesiredSpeed>20000</DesiredSpeed>

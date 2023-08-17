@@ -4,7 +4,7 @@
         <AmmoMagazine>
             <Id>
                 <TypeId>AmmoMagazine</TypeId>
-                <SubtypeId>MK2_Railgun_MagazineLarge</SubtypeId>
+                <SubtypeId>Type78_Railgun_MagazineLarge</SubtypeId>
             </Id>
             <DisplayName>MK2 Railgun Projectile</DisplayName>
             <Icon>Textures\GUI\Icons\RailgunPorjectile2.png</Icon>
@@ -18,7 +18,7 @@
             <Model>Models\RailgunPorjectile2.mwm</Model>
             <PhysicalMaterial>Ammo</PhysicalMaterial>
             <Capacity>1</Capacity>
-            <AmmoDefinitionId Subtype="MK2_Railgun_Ammo" />
+            <AmmoDefinitionId Subtype="Type78_Railgun_Ammo" />
         </AmmoMagazine>
     </AmmoMagazines>
 </Definitions>

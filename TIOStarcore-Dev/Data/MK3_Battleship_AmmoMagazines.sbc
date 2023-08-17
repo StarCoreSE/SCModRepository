@@ -4,7 +4,7 @@
         <AmmoMagazine>
             <Id>
                 <TypeId>AmmoMagazine</TypeId>
-                <SubtypeId>MK3_Battleship_MagazineLarge</SubtypeId>
+                <SubtypeId>Type24_Artillery_MagazineLarge</SubtypeId>
             </Id>
             <DisplayName>MK3 Battleship Round</DisplayName>
             <Icon>Textures\GUI\Icons\CannonRound3.png</Icon>
@@ -18,7 +18,7 @@
             <Model>Models\CannonRound3.mwm</Model>
             <PhysicalMaterial>Ammo</PhysicalMaterial>
             <Capacity>1</Capacity>
-            <AmmoDefinitionId Subtype="MK3_Battleship_Ammo" />
+            <AmmoDefinitionId Subtype="Type24_Artillery_Ammo" />
         </AmmoMagazine>
     </AmmoMagazines>
 </Definitions>

@@ -23,7 +23,7 @@ namespace Scripts
         //StopFiring,
         //StopTracking
 
-        private AnimationDef MK3BattleshipGun_AdvancedAnimation => new AnimationDef
+        private AnimationDef Type24_Artillery_AdvancedAnimation => new AnimationDef
         {
             /*
             Emissives = new[]

@@ -4,7 +4,7 @@
     <Blueprint>
       <Id>
         <TypeId>BlueprintDefinition</TypeId>
-        <SubtypeId>MK2_Railgun_MagazineLarge</SubtypeId>
+        <SubtypeId>Type78_Railgun_MagazineLarge</SubtypeId>
       </Id>
       <DisplayName>MK2 Railgun Projectile</DisplayName>
       <Icon>Textures\GUI\Icons\RailgunPorjectile2.png</Icon>
@@ -13,7 +13,7 @@
         <Item Amount="65" TypeId="Ingot" SubtypeId="Nickel" />
         <Item Amount="65" TypeId="Ingot" SubtypeId="Cobalt" />
       </Prerequisites>
-      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="MK2_Railgun_MagazineLarge" />
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="Type78_Railgun_MagazineLarge" />
       <BaseProductionTimeInSeconds>35</BaseProductionTimeInSeconds>
     </Blueprint>
   </Blueprints>

@@ -8,7 +8,7 @@
                 <TypeId>ConveyorSorter</TypeId>
                 <SubtypeId>Type77_Railgun_Block</SubtypeId>
             </Id>
-            <DisplayName>Type77 Railgun</DisplayName>
+            <DisplayName>Type 77 Railgun</DisplayName>
             <Description>Long range weapon delivering high speed accurate fire with devastating penetration against armor.</Description>
 			<GuiVisible>true</GuiVisible>
             <Icon>Textures\GUI\Icons\Mk1Railgun_Main.png</Icon>
