@@ -1,0 +1,80 @@
+﻿<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Sounds>
+		<Sound>
+		  <Id>
+			<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			<SubtypeId>ArcWepPlayRifleImpGrassAlien3d02</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>350</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>5</DynamicMusicAmount>
+		  <Volume>0.5</Volume>
+		  <Loopable>false</Loopable>
+		  <Waves>
+			<Wave Type="D3">
+			  <Start>Audio\ArcWepPlayRifleImpGrassAlien3d02.wav</Start>
+			</Wave>
+		  </Waves>
+		</Sound>
+		<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>CoilGunFiring</SubtypeId>
+			</Id>
+			<Category>SHOT</Category>
+			<MaxDistance>3000</MaxDistance>
+			<PreventSynchronization>0</PreventSynchronization>
+			<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+			<DynamicMusicAmount>5</DynamicMusicAmount>
+			<DistantSounds>
+              <DistantSound DistanceCrossfade="200" Distance="800" Sound="CoilGunFiringDis" />
+          </DistantSounds>
+			<Volume>0.5</Volume>
+			<Loopable>false</Loopable>
+			<Waves>
+				<Wave Type="D3">
+					<Start>Audio\CoilGunFiring.wav</Start>
+				</Wave>
+			</Waves>
+		</Sound>
+		<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>CoilGunFiringDis</SubtypeId>
+			</Id>
+			<Category>SHOT</Category>
+			<MaxDistance>3000</MaxDistance>
+			<PreventSynchronization>0</PreventSynchronization>
+			<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+			<DynamicMusicAmount>5</DynamicMusicAmount>
+			<Volume>0.2</Volume>
+			<Loopable>false</Loopable>
+			<Waves>
+				<Wave Type="D3">
+					<Start>Audio\CoilGunFiringDis.wav</Start>
+				</Wave>
+			</Waves>
+		</Sound>
+		<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>ArcSmShipSmJetHydrogenEnd3d</SubtypeId>
+			</Id>
+			<Category>SHOT</Category>
+			<MaxDistance>350</MaxDistance>
+			<PreventSynchronization>0</PreventSynchronization>
+			<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+			<DynamicMusicAmount>5</DynamicMusicAmount>
+			<Volume>0.5</Volume>
+			<Loopable>false</Loopable>
+			<Waves>
+				<Wave Type="D3">
+					<Start>Audio\ArcSmShipSmJetHydrogenEnd3d.wav</Start>
+				</Wave>
+			</Waves>
+		</Sound>
+	</Sounds>
+</Definitions>

@@ -36,8 +36,8 @@ namespace Scripts
             AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "MA_Laser_T4_Ammo", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
-            EnergyCost = 0.23125f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 640f, // Direct damage; one steel plate is worth 100.
+            EnergyCost = 5f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
+            BaseDamage = 110f, // Direct damage; one steel plate is worth 100.
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
@@ -118,8 +118,8 @@ namespace Scripts
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
                 FallOff = new FallOffDef
                 {
-                    Distance = 4000f, // Distance at which damage begins falling off.
-                    MinMultipler = .5f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
+                    Distance = 1500f, // Distance at which damage begins falling off.
+                    MinMultipler = 0.01f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
                 },
                 Grids = new GridSizeDef
                 {
@@ -129,8 +129,8 @@ namespace Scripts
                 Armor = new ArmorDef
                 {
                     Armor = -1f,
-                    Light = 0.8f,
-                    Heavy = 0.4f,
+                    Light = -1f,
+                    Heavy = -1f,
                     NonArmor = -1f,
                 },
                 Shields = new ShieldDef

@@ -4,7 +4,7 @@ using VRage.Game.Components;
 
 namespace ShipPoints
 {
-	[MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
+    [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     class PointAdditions : MySessionComponentBase
     {
         public override void Init(MyObjectBuilder_SessionComponent sessionComponent)
@@ -451,10 +451,13 @@ namespace ShipPoints
 				Heavy_Repeater@85; 
 				PriestReskin_Block@85; 
 				Fixed_Rockets@225; 
-				Type18_Artillery@200;
-				Type21_Artillery@400;
-				Assault_Coil_Turret@160; 
-				Light_Coil_Turret@115; 
+				Type18_Artillery_Block@300;
+				Type21_Artillery_Block@400;
+				Type24_Artillery_Block@500;
+				Type77_Railgun_Block@300;
+				Type78_Railgun_Block@400;
+				Type79_Railgun_Block@500;
+				Reaver_Coilgun_Block@200; 
 				RailgunTurret_Block@450; 
                 Null_Point_Jump_Disruptor_Large@99999;
 				LargeGatlingTurret_SC@175;
@@ -501,6 +504,28 @@ namespace ShipPoints
 				Thagomizer_Angled_Flipped@750; 
 				K_HS_9x9_K3_King@900; 
 				K_HS_9x9_HSRB_Dreadnight@750;
+
+				MA_Laser_Armor01@1;
+				MA_Laser_Armor02@1;
+				MA_Laser_Armor03@1;
+				MA_Laser_Armor04@1;
+				MA_Laser_Armor05@1;
+				MA_Laser_Armor06@1;
+				MA_Laser_Armor07@1;
+				MA_Laser_Armor08@1;
+				MA_Laser_Armor09@1;
+				MA_Laser_Armor10@1;
+				MA_Laser_Armor11@1;
+				MA_Laser_Armor12@1;
+				MA_Laser_Armor13@1;
+				MA_Laser_Armor14@1;
+				MA_Laser_Armor15@1;
+				MA_Laser_Armor16@1;
+
+
+
+
+
             "));
         }
     }

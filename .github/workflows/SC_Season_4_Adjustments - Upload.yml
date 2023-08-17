@@ -1,0 +1,21 @@
+name: "Upload SC_Season_4_Adjustments"
+
+on:
+  push:
+    paths:
+      - "SC_Season_4_Adjustments/**"
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: AnarkisGaming/workshop@v1
+        with:
+          appID: 244850
+          publishedFileID: 3021448970
+          path: SC_Season_4_Adjustments
+          changelog: ${{ github.event.head_commit.message }}              
+        env:
+          STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}
+          STEAM_PASSWORD: ${{ secrets.password }}
