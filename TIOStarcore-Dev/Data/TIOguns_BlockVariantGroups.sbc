@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <BlockVariantGroups>
-  
-		<BlockVariantGroup>
-            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Heavy_Repeater" />
-            <Icon>Textures\GUI\Icons\priest.dds</Icon>
-            <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
-            <Description>Description_BlockGroup_TurretGroup</Description>
-            <Blocks>
-              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Heavy_Repeater" />
-              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="PriestReskin_Block" />
-            </Blocks>
-        </BlockVariantGroup>
-      
-    </BlockVariantGroups>
+  <BlockVariantGroups>
+
+    <BlockVariantGroup>
+      <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Type18_Artillery_Block" />
+      <Icon>Textures\GUI\Icons\Mk1CannonMainScene.dds</Icon>
+      <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
+      <Description>Description_BlockGroup_TurretGroup</Description>
+      <Blocks>
+        <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type18_Artillery_Block" />
+        <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type21_Artillery_Block" />
+        <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type24_Artillery_Block" />
+      </Blocks>
+    </BlockVariantGroup>
+
+    <BlockVariantGroup>
+      <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Type77_Railgun_Block" />
+      <Icon>Textures\GUI\Icons\Mk1Railgun_Main.dds</Icon>
+      <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
+      <Description>Description_BlockGroup_TurretGroup</Description>
+      <Blocks>
+        <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type77_Railgun_Block" />
+        <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type78_Railgun_Block" />
+        <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type79_Railgun_Block" />
+      </Blocks>
+    </BlockVariantGroup>
+
+  </BlockVariantGroups>
 </Definitions>

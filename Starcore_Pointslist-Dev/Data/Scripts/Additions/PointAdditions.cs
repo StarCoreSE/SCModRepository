@@ -451,8 +451,12 @@ namespace ShipPoints
 				Heavy_Repeater@85; 
 				PriestReskin_Block@85; 
 				Fixed_Rockets@225; 
-				Type18_Artillery@200;
-				Type21_Artillery@400;
+				Type18_Artillery_Block@300;
+				Type21_Artillery_Block@400;
+				Type24_Artillery_Block@500;
+				Type77_Railgun_Block@300;
+				Type78_Railgun_Block@400;
+				Type79_Railgun_Block@500;
 				Assault_Coil_Turret@160; 
 				Light_Coil_Turret@115; 
 				RailgunTurret_Block@450; 
