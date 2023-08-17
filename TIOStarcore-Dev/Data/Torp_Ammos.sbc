@@ -1,0 +1,45 @@
+﻿<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Ammos>
+        <Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+            <Id>
+                <TypeId>AmmoDefinition</TypeId>
+                <SubtypeId>Torp_Ammo</SubtypeId>
+            </Id>
+            <BasicProperties>
+                <DesiredSpeed>20000</DesiredSpeed>
+                <SpeedVariance>0</SpeedVariance>
+                <MaxTrajectory>5</MaxTrajectory>
+                <BackkickForce>0</BackkickForce>
+                <PhysicalMaterial>GunBullet</PhysicalMaterial>
+            </BasicProperties>
+            <ProjectileProperties>
+                <ProjectileTrailScale>10</ProjectileTrailScale>
+                <ProjectileHitImpulse>10</ProjectileHitImpulse>
+                <ProjectileMassDamage>10</ProjectileMassDamage>
+                <ProjectileHealthDamage>10</ProjectileHealthDamage>
+                <HeadShot>true</HeadShot>
+            </ProjectileProperties>
+        </Ammo>
+        <Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+            <Id>
+                <TypeId>AmmoDefinition</TypeId>
+                <SubtypeId>EMPTorp_Ammo</SubtypeId>
+            </Id>
+            <BasicProperties>
+                <DesiredSpeed>20000</DesiredSpeed>
+                <SpeedVariance>0</SpeedVariance>
+                <MaxTrajectory>5</MaxTrajectory>
+                <BackkickForce>0</BackkickForce>
+                <PhysicalMaterial>GunBullet</PhysicalMaterial>
+            </BasicProperties>
+            <ProjectileProperties>
+                <ProjectileTrailScale>10</ProjectileTrailScale>
+                <ProjectileHitImpulse>10</ProjectileHitImpulse>
+                <ProjectileMassDamage>10</ProjectileMassDamage>
+                <ProjectileHealthDamage>10</ProjectileHealthDamage>
+                <HeadShot>true</HeadShot>
+            </ProjectileProperties>
+        </Ammo>
+    </Ammos>
+</Definitions>

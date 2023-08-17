@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Blueprints>
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>Torp_MagazineLarge</SubtypeId>
+      </Id>
+      <DisplayName>HE Trident Torpedoes</DisplayName>
+      <Icon>Textures\GUI\Icons\TorpReaper_Torp.png</Icon>
+      <Prerequisites>
+        <Item Amount="2000" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="100" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="300" TypeId="Ingot" SubtypeId="Silicon" />
+        <Item Amount="100" TypeId="Ingot" SubtypeId="Cobalt" />
+        <Item Amount="10" TypeId="Ingot" SubtypeId="Gold" />
+        <Item Amount="20" TypeId="Ingot" SubtypeId="Magnesium" />
+        <Item Amount="3" TypeId="Ingot" SubtypeId="Uranium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="Torp_MagazineLarge" />
+      <BaseProductionTimeInSeconds>60</BaseProductionTimeInSeconds>
+    </Blueprint>
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>EMPTorp_MagazineLarge</SubtypeId>
+      </Id>
+      <DisplayName>Shield Breaker Trident Torpedo</DisplayName>
+      <Icon>Textures\GUI\Icons\TorpReaper_Torp.png</Icon>
+      <Prerequisites>
+        <Item Amount="1500" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="100" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="300" TypeId="Ingot" SubtypeId="Silicon" />
+        <Item Amount="100" TypeId="Ingot" SubtypeId="Cobalt" />
+        <Item Amount="10" TypeId="Ingot" SubtypeId="Gold" />
+        <Item Amount="7" TypeId="Ingot" SubtypeId="Uranium" />
+        <Item Amount="2" TypeId="Ingot" SubtypeId="Platinum" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="EMPTorp_MagazineLarge" />
+      <BaseProductionTimeInSeconds>60</BaseProductionTimeInSeconds>
+    </Blueprint>
+  </Blueprints>
+</Definitions>
