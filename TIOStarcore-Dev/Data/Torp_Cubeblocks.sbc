@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <CubeBlocks>
+
+		<!-- Large JDD -->
+        <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+            <Id>
+                <TypeId>ConveyorSorter</TypeId>
+                <SubtypeId>Torp_Block</SubtypeId>
+            </Id>
+            <DisplayName>[Trident] Torpedo Turret</DisplayName>
+            <Description>Fires HE and EMP torpedos. Slow but deadly.</Description>
+			<GuiVisible>true</GuiVisible>
+        
+            <Icon>Textures\GUI\Icons\Trident.png</Icon>
+            
+            <CubeSize>Large</CubeSize>
+            <BlockTopology>TriangleMesh</BlockTopology>
+           <Size x="7" y="7" z="5"/>
+            <ModelOffset x="0" y="0" z="0"/>
+          <Model>Models\TorpReaper_Torp_Main_Scene.mwm</Model>
+            <Components>
+				<Component Count="1000" Subtype="SteelPlate"/>
+				<Component Count="500" Subtype="Construction"/>
+				<Component Count="50" Subtype="LargeTube" />
+				<Component Count="200" Subtype="MetalGrid" />
+                <Component Count="50" Subtype="Superconductor" />
+                <Component Count="500" Subtype="Computer"/>
+                <Component Count="100" Subtype="Motor"/>
+				<Component Count="500" Subtype="Construction"/>
+				<Component Count="3500" Subtype="SteelPlate"/>
+            </Components>
+            <CriticalComponent Index="0" Subtype="Computer"/>
+            <BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\TorpReaper_Torp_Main_Scene_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\TorpReaper_Torp_Main_Scene_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\TorpReaper_Torp_Main_Scene_BS3.mwm"/>
+			</BuildProgressModels>
+            <MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="7.00" EndY="7.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="7.00" EndY="7.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="5.00" EndY="7.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="5.00" EndY="7.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="7.00" EndY="5.00"/>
+			</MountPoints>
+            <BuildTimeSeconds>500</BuildTimeSeconds>
+            <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+            <DamagedSound>ParticleElectrical</DamagedSound>
+            <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+            <DestroySound>WepSmallWarheadExpl</DestroySound>
+			<MirroringZ>Y</MirroringZ>
+            <MirroringY>Z</MirroringY>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<RequiredPowerInput>0.00002</RequiredPowerInput>
+            <PCU>800</PCU>
+            <IsAirTight>true</IsAirTight>
+        </Definition>
+    </CubeBlocks>
+</Definitions>

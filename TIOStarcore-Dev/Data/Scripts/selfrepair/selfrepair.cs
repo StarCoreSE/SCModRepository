@@ -12,7 +12,7 @@ using IMySlimBlock = VRage.Game.ModAPI.IMySlimBlock;
 
 namespace ArtilleryBlockExplosion
 {
-	[MyEntityComponentDescriptor(typeof(MyObjectBuilder_ConveyorSorter), false, "Type18_Artillery_Block", "Type21_Artillery_Block", "Type24_Artillery_Block", "Type77_Artillery_Block", "Type78_Artillery_Block", "Type79_Artillery_Block", "Reaver_Coilgun_Block", "Torp_Block")]
+	[MyEntityComponentDescriptor(typeof(MyObjectBuilder_ConveyorSorter), false, "Type18_Artillery_Block", "Type21_Artillery_Block", "Type24_Artillery_Block", "Type77_Railgun_Block", "Type78_Railgun_Block", "Type79_Railgun_Block", "Reaver_Coilgun_Block", "Torp_Block")]
 	public class ArtilleryBlockExplosion : MyGameLogicComponent
 	{
 		private IMyConveyorSorter artilleryBlock;

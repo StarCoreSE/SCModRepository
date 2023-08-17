@@ -1,0 +1,43 @@
+﻿<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <AmmoMagazines>    
+        <AmmoMagazine>
+            <Id>
+                <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>Torp_MagazineLarge</SubtypeId>
+            </Id>
+            <DisplayName>HE Trident Torpedo</DisplayName>
+            <Icon>Textures\GUI\Icons\TorpReaper_Torp.png</Icon>
+            <Size>
+                <X>1</X>
+                <Y>1</Y>
+                <Z>1</Z>
+            </Size>
+            <Mass>300</Mass>
+            <Volume>1300</Volume>
+            <Model>Models\Ammo\TorpReaper_Torp.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>6</Capacity>
+            <AmmoDefinitionId Subtype="Torp_Ammo" />
+        </AmmoMagazine>
+        <AmmoMagazine>
+            <Id>
+                <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>EMPTorp_MagazineLarge</SubtypeId>
+            </Id>
+            <DisplayName>Shield Breaker Trident Torpedo</DisplayName>
+            <Icon>Textures\GUI\Icons\TorpReaper_Torp.png</Icon>
+            <Size>
+                <X>1</X>
+                <Y>1</Y>
+                <Z>1</Z>
+            </Size>
+            <Mass>300</Mass>
+            <Volume>1300</Volume>
+            <Model>Models\Ammo\TorpReaper_Torp.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>6</Capacity>
+            <AmmoDefinitionId Subtype="EMPTorp_Ammo" />
+        </AmmoMagazine>
+    </AmmoMagazines>
+</Definitions>
