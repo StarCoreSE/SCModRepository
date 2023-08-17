@@ -17,7 +17,7 @@
             <Volume>800</Volume>
             <Model>Models\CannonRound3.mwm</Model>
             <PhysicalMaterial>Ammo</PhysicalMaterial>
-            <Capacity>1</Capacity>
+            <Capacity>3</Capacity>
             <AmmoDefinitionId Subtype="Type24_Artillery_Ammo" />
         </AmmoMagazine>
     </AmmoMagazines>

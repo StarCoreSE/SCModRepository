@@ -17,7 +17,7 @@
             <Volume>550</Volume>
             <Model>Models\CannonRound2.mwm</Model>
             <PhysicalMaterial>Ammo</PhysicalMaterial>
-            <Capacity>1</Capacity>
+            <Capacity>2</Capacity>
             <AmmoDefinitionId Subtype="Type21_Artillery_Ammo" />
         </AmmoMagazine>
     </AmmoMagazines>

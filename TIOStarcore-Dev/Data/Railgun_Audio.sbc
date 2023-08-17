@@ -11,7 +11,7 @@
 			<PreventSynchronization>0</PreventSynchronization>
 			<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 			<DynamicMusicAmount>5</DynamicMusicAmount>
-			<Volume>2</Volume>
+			<Volume>1</Volume>
 			<Loopable>false</Loopable>
 			<Waves>
 				<Wave Type="D3">
@@ -29,7 +29,7 @@
 			<PreventSynchronization>0</PreventSynchronization>
 			<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 			<DynamicMusicAmount>5</DynamicMusicAmount>
-			<Volume>2</Volume>
+			<Volume>1</Volume>
 			<Loopable>false</Loopable>
 			<Waves>
 				<Wave Type="D3">
@@ -47,7 +47,7 @@
 			<PreventSynchronization>0</PreventSynchronization>
 			<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 			<DynamicMusicAmount>5</DynamicMusicAmount>
-			<Volume>2</Volume>
+			<Volume>1</Volume>
 			<Loopable>false</Loopable>
 			<Waves>
 				<Wave Type="D3">
@@ -65,7 +65,7 @@
 			<PreventSynchronization>0</PreventSynchronization>
 			<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 			<DynamicMusicAmount>5</DynamicMusicAmount>
-			<Volume>2</Volume>
+			<Volume>1</Volume>
 			<Loopable>false</Loopable>
 			<Waves>
 				<Wave Type="D3">

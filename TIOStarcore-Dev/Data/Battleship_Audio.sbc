@@ -55,7 +55,7 @@
 			<PreventSynchronization>0</PreventSynchronization>
 			<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 			<DynamicMusicAmount>5</DynamicMusicAmount>
-			<Volume>1</Volume>
+			<Volume>0.6</Volume>
 			<Loopable>false</Loopable>
 			<VolumeVariation>0.1</VolumeVariation>
             <PitchVariation>100</PitchVariation>
@@ -75,7 +75,7 @@
 			<PreventSynchronization>0</PreventSynchronization>
 			<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 			<DynamicMusicAmount>5</DynamicMusicAmount>
-			<Volume>1</Volume>
+			<Volume>0.6</Volume>
 			<Loopable>false</Loopable>
 			<Waves>
 				<Wave Type="D3">
@@ -98,7 +98,7 @@
 			<DistantSounds>
 				<DistantSound DistanceCrossfade="100" Distance="700" Sound="MyLargeCalibreReloadDist" />
 			</DistantSounds>
-			<Volume>1.2</Volume>
+			<Volume>0.6</Volume>
 			<VolumeVariation>0.2</VolumeVariation>
 			<PitchVariation>50</PitchVariation>
 			<Waves>
@@ -114,7 +114,7 @@
 			</Id>
 			<Category>SHOT</Category>
 			<MaxDistance>1800</MaxDistance>
-			<Volume>1.2</Volume>
+			<Volume>0.6</Volume>
 			<VolumeVariation>0.2</VolumeVariation>
 			<PitchVariation>50</PitchVariation>
 			<Waves>
@@ -158,7 +158,7 @@
 			  <DistantSound DistanceCrossfade="100" Distance="800" Sound="MyLargeCalibreTravelDistA" />
 		  </DistantSounds>
 
-		  <Volume>1</Volume>
+		  <Volume>0.6</Volume>
 		  <Waves>
 			  <Wave Type="D3">
 				  <Start>Audio\ShellFlight\AvalancheShellTravel.wav</Start>
@@ -174,7 +174,7 @@
 		  <Category>SHOT</Category>
 		  <MaxDistance>2000</MaxDistance>
 
-		  <Volume>1</Volume>
+		  <Volume>0.6</Volume>
 		  <Waves>
 			  <Wave Type="D3">
 				  <Start>Audio\ShellFlight\AvalancheShellTravelDistant.wav</Start>
@@ -204,7 +204,7 @@
 			  <DistantSound DistanceCrossfade="300" Distance="6000" Sound="MyLargeCalibreShotDistI" />
 			  <DistantSound DistanceCrossfade="300" Distance="7500" Sound="MyLargeCalibreShotDistJ" />
 		  </DistantSounds>
-		  <Volume>3</Volume>
+		  <Volume>1.5</Volume>
 		  <PitchVariation>130</PitchVariation>
 		  <Waves>
 			  <Wave Type="D3">
@@ -226,7 +226,7 @@
 		  <Category>SHOT</Category>
 		  <MaxDistance>10000</MaxDistance>
 
-		  <Volume>3</Volume>
+		  <Volume>1.5</Volume>
 		  <PitchVariation>130</PitchVariation>
 		  <Waves>
 			  <Wave Type="D3">
@@ -248,7 +248,7 @@
 		  <Category>SHOT</Category>
 		  <MaxDistance>10000</MaxDistance>
 
-		  <Volume>3</Volume>
+		  <Volume>1.5</Volume>
 		  <PitchVariation>140</PitchVariation>
 		  <Waves>
 			  <Wave Type="D3">
@@ -270,7 +270,7 @@
 		  <Category>SHOT</Category>
 		  <MaxDistance>10000</MaxDistance>
 
-		  <Volume>3</Volume>
+		  <Volume>1.5</Volume>
 		  <PitchVariation>150</PitchVariation>
 
 		  <Waves>
@@ -292,7 +292,7 @@
 		  </Id>
 		  <Category>SHOT</Category>
 		  <MaxDistance>10000</MaxDistance>
-		  <Volume>3</Volume>
+		  <Volume>1.5</Volume>
 
 		  <PitchVariation>40</PitchVariation>
 		  <Waves>
@@ -424,7 +424,7 @@
 		  </Id>
 		  <Category>SHOT</Category>
 		  <MaxDistance>10000</MaxDistance>
-		  <Volume>3</Volume>
+		  <Volume>1.5</Volume>
 
 
 		  <Waves>
