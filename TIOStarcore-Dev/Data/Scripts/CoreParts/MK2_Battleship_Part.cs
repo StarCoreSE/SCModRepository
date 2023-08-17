@@ -222,7 +222,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                MK2_Battleship_Ammo, 
+                Type21_Artillery_Ammo, 
                  // Must list all primary, shrapnel, and pattern ammos.
             },
             Animations = MK2BattleshipGun_AdvancedAnimation,

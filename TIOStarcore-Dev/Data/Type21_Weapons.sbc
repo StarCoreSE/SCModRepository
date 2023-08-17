@@ -4,14 +4,14 @@
 	<Weapon>
 		<Id>
 			<TypeId>WeaponDefinition</TypeId>
-			<SubtypeId>MK2_Battleship_Weapon</SubtypeId>
+			<SubtypeId>Type21_Artillery_Weapon</SubtypeId>
 		</Id>
 		<ProjectileAmmoData RateOfFire="30" ShootSoundName="" ShotsInBurst="1" />
 		<ReleaseTimeAfterFire>204</ReleaseTimeAfterFire>
 		<DeviateShotAngle>10</DeviateShotAngle>
 		<MuzzleFlashLifeSpan>40</MuzzleFlashLifeSpan>
 		<AmmoMagazines>
-			<AmmoMagazine Subtype="MK2_Battleship_MagazineLarge" />
+			<AmmoMagazine Subtype="Type21_Artillery_MagazineLarge" />
 		</AmmoMagazines>
 		<ReloadTime>1500</ReloadTime>
 	</Weapon>  

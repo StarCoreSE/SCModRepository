@@ -38,7 +38,7 @@
 			<Model>Models\Ammo\SG_Tank_Cannon_Ammo.mwm</Model>
 			<PhysicalMaterial>Ammo</PhysicalMaterial>
 			<Capacity>1</Capacity>
-			<AmmoDefinitionId Subtype="MK2_Battleship_Ammo" />
+			<AmmoDefinitionId Subtype="Type21_Artillery_Ammo" />
 		</AmmoMagazine>
 		
 		<AmmoMagazine>

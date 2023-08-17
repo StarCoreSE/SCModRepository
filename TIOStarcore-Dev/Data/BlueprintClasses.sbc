@@ -4,8 +4,8 @@
       <Entry Class="EliteConsumables" BlueprintSubtypeId="Type18_MagazineLarge" />
       <Entry Class="Ammo" BlueprintSubtypeId="Type18_MagazineLarge" />
 	  <Entry Class="Components" BlueprintSubtypeId="AvalancheComponentBP" />
-	  <Entry Class="EliteConsumables" BlueprintSubtypeId="MK2_Battleship_MagazineLarge" />
-	  <Entry Class="Ammo" BlueprintSubtypeId="MK2_Battleship_MagazineLarge" />	  
+	  <Entry Class="EliteConsumables" BlueprintSubtypeId="Type21_Artillery_MagazineLarge" />
+	  <Entry Class="Ammo" BlueprintSubtypeId="Type21_Artillery_MagazineLarge" />	  
 	  
 	  <Entry Class="Ammo" BlueprintSubtypeId="25x184mm" />
 	  <Entry Class="Components" BlueprintSubtypeId="25x184mm" />
