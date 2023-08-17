@@ -1,6 +1,6 @@
-Animation MK1BattleshipGun_Block
-Animation MK2_Battleship_Block
-Animation MK3_Battleship_Block
-Animation MK2_Railgun_Block
-Animation MK1Railgun_Block
-Animation MK3_Railgun_Block
+Animation Type18_Artillery_Block
+Animation Type21_Artillery_Block
+Animation Type24_Artillery_Block
+Animation Type78_Railgun_Block
+Animation Type77_Railgun_Block
+Animation Type79_Railgun_Block

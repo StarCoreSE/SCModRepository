@@ -6,7 +6,7 @@
         <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
             <Id>
                 <TypeId>ConveyorSorter</TypeId>
-                <SubtypeId>MK3_Railgun_Block</SubtypeId>
+                <SubtypeId>Type79_Railgun_Block</SubtypeId>
             </Id>
             <DisplayName>MK3 Railgun</DisplayName>
             <Description>Improved range and speed over the MK2. Will penetrate past the heaviest armor like its paper</Description>

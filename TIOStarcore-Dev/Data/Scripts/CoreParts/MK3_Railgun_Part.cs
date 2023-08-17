@@ -14,13 +14,13 @@ using static Scripts.Structure.WeaponDefinition.HardPointDef.HardwareDef.Hardwar
 namespace Scripts {   
     partial class Parts {
         // Don't edit above this line
-        WeaponDefinition MK3_Railgun_Block => new WeaponDefinition
+        WeaponDefinition Type79_Railgun_Block => new WeaponDefinition
         {
             Assignments = new ModelAssignmentsDef
             {
                 MountPoints = new[] {
                     new MountPointDef {
-                        SubtypeId = "MK3_Railgun_Block", // Block Subtypeid. Your Cubeblocks contain this information
+                        SubtypeId = "Type79_Railgun_Block", // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "None", // For weapons with a spinning barrel such as Gatling Guns. Subpart_Boomsticks must be written as Boomsticks.
                         MuzzlePartId = "Mk3_RailgunBarrels", // The subpart where your muzzle empties are located. This is often the elevation subpart. Subpart_Boomsticks must be written as Boomsticks.
                         AzimuthPartId = "Mk3_RailgunAZ", // Your Rotating Subpart, the bit that moves sideways.

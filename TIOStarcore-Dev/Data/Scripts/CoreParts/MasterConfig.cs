@@ -10,8 +10,8 @@
             // PartDefinitions(Your1stDefinition, Your2ndDefinition, Your3rdDefinition);
             // PartDefinitions includes both Parts and phantoms
 
-            PartDefinitions(Reaver_Block, VMLS_Block,
-                 Priest_Block, Torp_Block, PriestReskin_Block, MK1BattleshipGun_Block, MK2_Battleship_Block, MK3_Battleship_Block, MK2_Railgun_Block, MK1Railgun_Block, MK3_Railgun_Block);
+            PartDefinitions(VMLS_Block,
+                 Priest_Block, Torp_Block, PriestReskin_Block, Type18_Artillery_Block, Type21_Artillery_Block, Type24_Artillery_Block, Type78_Railgun_Block, Type77_Railgun_Block, Type79_Railgun_Block);
 
         }
     }

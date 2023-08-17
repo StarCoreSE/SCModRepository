@@ -18,7 +18,7 @@
             <Model>Models\Components\PowerCellComponent.mwm</Model>
             <PhysicalMaterial>Ammo</PhysicalMaterial>
             <Capacity>1</Capacity>
-            <AmmoDefinitionId Subtype="MK1BattleshipGun_Ammo" />
+            <AmmoDefinitionId Subtype="Type18_Ammo" />
         </AmmoMagazine>
 		
 		<AmmoMagazine>

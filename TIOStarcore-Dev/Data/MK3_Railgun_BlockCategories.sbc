@@ -4,12 +4,12 @@
 		<Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
 			<Id>
 				<TypeId>GuiBlockCategoryDefinition</TypeId>
-				<SubtypeId>MK3_Railgun_BlockCategory</SubtypeId>
+				<SubtypeId>Type79_Railgun_BlockCategory</SubtypeId>
 			</Id>
 			<DisplayName>Killer's Blocks</DisplayName>
 			<Name>KillersBlocks</Name>
 			<ItemIds>
-				<string>MK3_Railgun_Block</string>
+				<string>Type79_Railgun_Block</string>
 			</ItemIds>
 		</Category>
 		<Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
@@ -20,7 +20,7 @@
             <DisplayName>DisplayName_Category_ShipWeapons</DisplayName>
             <Name>Weapons</Name>
             <ItemIds>
-				<string>MK3_Railgun_Block</string>
+				<string>Type79_Railgun_Block</string>
             </ItemIds>
         </Category>
 	</CategoryClasses>
