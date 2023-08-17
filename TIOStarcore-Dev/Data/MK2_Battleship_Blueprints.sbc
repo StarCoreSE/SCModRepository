@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Blueprints>
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>MK2_Battleship_MagazineLarge</SubtypeId>
+      </Id>
+      <DisplayName>MK2 Battleship Round</DisplayName>
+      <Icon>Textures\GUI\Icons\CannonRound2.png</Icon>
+      <Prerequisites>
+        <Item Amount="750" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="45" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="45" TypeId="Ingot" SubtypeId="Cobalt" />
+        <Item Amount="10" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="MK2_Battleship_MagazineLarge" />
+      <BaseProductionTimeInSeconds>35</BaseProductionTimeInSeconds>
+    </Blueprint>
+  </Blueprints>
+</Definitions>

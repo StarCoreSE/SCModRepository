@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <CubeBlocks>
+
+		<!-- Large JDD -->
+        <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+            <Id>
+                <TypeId>ConveyorSorter</TypeId>
+                <SubtypeId>MK3_Battleship_Block</SubtypeId>
+            </Id>
+            <DisplayName>MK3 Battleship Cannon</DisplayName>
+            <Description>Improved range and speed over the MK3. Leaves massive holes in anything it hits</Description>
+			<GuiVisible>true</GuiVisible>
+            <Icon>Textures\GUI\Icons\MK3_Main.png</Icon>
+            <CubeSize>Large</CubeSize>
+            <BlockTopology>TriangleMesh</BlockTopology>
+            <Size x="7" y="8" z="9"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\MK3_Main.mwm</Model>
+            <Components>
+				<Component Count="2500" Subtype="SteelPlate"/>
+				<Component Count="1000" Subtype="Construction"/>
+				<Component Count="200" Subtype="LargeTube" />
+				<Component Count="300" Subtype="MetalGrid" />
+                <Component Count="500" Subtype="Computer"/>
+                <Component Count="200" Subtype="Motor"/>
+				<Component Count="1000" Subtype="Construction"/>
+				<Component Count="5000" Subtype="SteelPlate"/>
+            </Components>
+            <CriticalComponent Index="0" Subtype="Computer"/>
+            <BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\MK3_Main_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\MK3_Main_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\MK3_Main_BS3.mwm"/>
+			</BuildProgressModels>
+            <MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="7.00" EndY="5.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="7.00" EndY="5.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="9.00" EndY="5.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="9.00" EndY="5.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="7.00" EndY="9.00"/>
+			</MountPoints>
+            <BuildTimeSeconds>600</BuildTimeSeconds>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+            <DamagedSound>ParticleElectrical</DamagedSound>
+            <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+            <DestroySound>WepSmallWarheadExpl</DestroySound>
+			<MirroringZ>Y</MirroringZ>
+            <MirroringY>Z</MirroringY>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<RequiredPowerInput>0.00002</RequiredPowerInput>
+            <PCU>800</PCU>
+            <IsAirTight>true</IsAirTight>
+        </Definition>
+    </CubeBlocks>
+</Definitions>

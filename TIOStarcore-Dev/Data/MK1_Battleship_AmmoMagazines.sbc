@@ -1,0 +1,24 @@
+﻿<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <AmmoMagazines>    
+        <AmmoMagazine>
+            <Id>
+                <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>MK1BattleshipGun_MagazineLarge</SubtypeId>
+            </Id>
+            <DisplayName>MK1 Battleship Round</DisplayName>
+            <Icon>Textures\GUI\Icons\CannonRound.png</Icon>
+            <Size>
+                <X>0.7</X>
+                <Y>0.7</Y>
+                <Z>0.7</Z>
+            </Size>
+            <Mass>75</Mass>
+            <Volume>350</Volume>
+            <Model>Models\CannonRound.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>1</Capacity>
+            <AmmoDefinitionId Subtype="MK1BattleshipGun_Ammo" />
+        </AmmoMagazine>
+    </AmmoMagazines>
+</Definitions>

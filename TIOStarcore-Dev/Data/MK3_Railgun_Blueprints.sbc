@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Blueprints>
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>MK3_Railgun_MagazineLarge</SubtypeId>
+      </Id>
+      <DisplayName>MK3 Railgun Projectile</DisplayName>
+      <Icon>Textures\GUI\Icons\RailgunPorjectile3.png</Icon>
+      <Prerequisites>
+        <Item Amount="1750" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="75" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="75" TypeId="Ingot" SubtypeId="Cobalt" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="MK3_Railgun_MagazineLarge" />
+      <BaseProductionTimeInSeconds>50</BaseProductionTimeInSeconds>
+    </Blueprint>
+  </Blueprints>
+</Definitions>

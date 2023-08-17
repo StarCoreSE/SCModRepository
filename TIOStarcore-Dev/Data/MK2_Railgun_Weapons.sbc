@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Weapons>
+	<Weapon>
+		<Id>
+			<TypeId>WeaponDefinition</TypeId>
+			<SubtypeId>MK2_Railgun_Weapon</SubtypeId>
+		</Id>
+		<ProjectileAmmoData RateOfFire="30" ShootSoundName="" ShotsInBurst="1" />
+		<ReleaseTimeAfterFire>204</ReleaseTimeAfterFire>
+		<DeviateShotAngle>10</DeviateShotAngle>
+		<MuzzleFlashLifeSpan>40</MuzzleFlashLifeSpan>
+		<AmmoMagazines>
+			<AmmoMagazine Subtype="MK2_Railgun_MagazineLarge" />
+		</AmmoMagazines>
+		<ReloadTime>1500</ReloadTime>
+	</Weapon>  
+  </Weapons>
+</Definitions>
