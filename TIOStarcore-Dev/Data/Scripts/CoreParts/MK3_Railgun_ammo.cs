@@ -38,10 +38,10 @@ namespace Scripts
 { // Don't edit above this line
     partial class Parts
     {
-        private AmmoDef MK3_Railgun_Ammo => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef Type79_Railgun_Ammo => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
-            AmmoMagazine = "MK3_Railgun_MagazineLarge", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "Tungsten Round", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoMagazine = "Type79_Railgun_MagazineLarge", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
+            AmmoRound = "Type79 Round", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.135f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 45000f, // Direct damage; one steel plate is worth 100.

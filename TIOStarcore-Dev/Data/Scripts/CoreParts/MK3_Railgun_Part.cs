@@ -224,7 +224,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                MK3_Railgun_Ammo, 
+                Type79_Railgun_Ammo, 
                  // Must list all primary, shrapnel, and pattern ammos.
             },
             Animations = MK3Railgun_AdvancedAnimation,

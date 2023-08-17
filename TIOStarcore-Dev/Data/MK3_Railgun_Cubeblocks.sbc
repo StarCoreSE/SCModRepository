@@ -8,7 +8,7 @@
                 <TypeId>ConveyorSorter</TypeId>
                 <SubtypeId>Type79_Railgun_Block</SubtypeId>
             </Id>
-            <DisplayName>MK3 Railgun</DisplayName>
+            <DisplayName>Type 79 Railgun</DisplayName>
             <Description>Improved range and speed over the MK2. Will penetrate past the heaviest armor like its paper</Description>
 			<GuiVisible>true</GuiVisible>
             <Icon>Textures\GUI\Icons\Mk3_Railgun_Main.png</Icon>
