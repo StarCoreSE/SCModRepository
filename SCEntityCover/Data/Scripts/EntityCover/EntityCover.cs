@@ -1,4 +1,5 @@
 using Sandbox.Common.ObjectBuilders;
+using Sandbox.Engine.Physics;
 using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
 using System;
@@ -14,6 +15,7 @@ using VRage.ObjectBuilders;
 using VRage.Utils;
 using VRageMath;
 using VRageRender;
+using CollisionLayers = Sandbox.Engine.Physics.MyPhysics.CollisionLayers;
 
 namespace klime.EntityCover
 {
@@ -195,8 +197,10 @@ namespace klime.EntityCover
             ent.DefinitionId = new MyDefinitionId(MyObjectBuilderType.Invalid, "CustomEntity");
             ent.Save = false;
             ent.WorldMatrix = initialMatrix;
+            
             MyEntities.Add(ent, true);
-
+            //ent.AddToGamePruningStructure();
+            //ent.StaticForPruningStructure = true;
             // Retrieve the model dimensions based on the modelName
             Vector3 modelDimensions = GetModelDimensions(modelName);
 
@@ -208,11 +212,16 @@ namespace klime.EntityCover
         {
             PhysicsSettings settings = new PhysicsSettings();
             settings.RigidBodyFlags |= RigidBodyFlag.RBF_STATIC;
+            settings.CollisionLayer |= CollisionLayers.NoVoxelCollisionLayer;
+            settings.IsPhantom = true;
+            //settings.RigidBodyFlags |= RigidBodyFlag.RBF_DOUBLED_KINEMATIC;
             settings.DetectorColliderCallback = HitCallback;
             settings.Entity = ent;
             settings.WorldMatrix = ent.WorldMatrix;
             settings.WorldMatrix.GetOrientation();
-            MyAPIGateway.Physics.CreateBoxPhysics(settings, modelDimensions, 2f);
+            //settings.Entity.Flags |= EntityFlags.IsGamePrunningStructureObject;
+            MyAPIGateway.Physics.CreateBoxPhysics(settings, modelDimensions, 1f);
+            
         }
 
         private static Vector3 GetModelDimensions(string modelName)
@@ -240,7 +249,7 @@ namespace klime.EntityCover
 
         public override void UpdateAfterSimulation()
         {
-            DrawLines();
+           // DrawLines(); //this is for debugging, remove the // in front of it to enable it
             if (isBouncing)
             {
                 delayTicks++;
@@ -266,7 +275,6 @@ namespace klime.EntityCover
                 isBouncing = true;
 
                 // The BlockerEnt currently being collided with
-                // The BlockerEnt currently being collided with
                 BlockerEnt thisEnt = GetClosestBlocker(entity.PositionComp.GetPosition());
                 Vector3D blockerCenter = thisEnt.PositionComp.GetPosition();
                 MatrixD blockerOrientation = thisEnt.PositionComp.GetOrientation();
@@ -274,15 +282,13 @@ namespace klime.EntityCover
                 // Determine the direction from the blocker's center to the grid's position
                 Vector3D directionFromBlockerToGrid = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - blockerCenter);
 
-                // Half-extents of the blocker (275 in this case)
+                // Half-extents of the blocker (275 in this case), this will need to somehow sample what the blocker is, and then get the half-extents from that.
                 double halfExtents = 275;
 
                 // Calculate the simulated "boxCenter" that places the "center" beneath the grid
                 Vector3D simulatedBoxCenter = blockerCenter + directionFromBlockerToGrid * halfExtents;
 
                 // Continue with the rest of the code, using "simulatedBoxCenter" instead of "blockerCenter"
-                
-
                 // Get the incident velocity direction
                 double incidentSpeed = cGrid.Physics.Speed;
                 Vector3D incidentVelocity = cGrid.LinearVelocity;
@@ -302,9 +308,6 @@ namespace klime.EntityCover
                 // Determine the maximum side length and calculate the warp distance as half of it
                 double maxSideLength = Math.Max(size.X, Math.Max(size.Y, size.Z));
 
-
-
-
                 // Move the relative impact point 50 meters closer to the local center
                 relImpact += directionToCenter * maxSideLength;
                 // Determine the closest face normal in local coordinates
@@ -320,45 +323,25 @@ namespace klime.EntityCover
                 AddLine(cGrid.PositionComp.GetPosition(), reflection, Color.Green);
                 AddLine(cGrid.PositionComp.GetPosition(), worldNormal, Color.Blue);
 
-                bool basic = true;
+                bool basic = false; //this just uses the basic reflection, no fancy stuff
 
-                if (!basic)
+                if (!basic) // if not using basic then use the fancy stuff
                 {
 
-
-
-
-                    //cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 0.95);
-                    cGrid.Physics.LinearVelocity = reflection;
-
-
-
-
-                    // Determine the direction from the blocker's center to the grid's position
+                    // Determine the direction from the blocker's center to the grid's position.
+                    // This is the only reliable information we have about the blocker's orientation.
                     Vector3D directionFromBlocker = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - blockerCenter);
                     // Check if the grid is inside or outside the blocker
                     Vector3D boxNormal = CalculateHitFaceNormal(relImpact, blockerCenter, cGrid.PositionComp.GetPosition(), thisEnt.WorldMatrix);
                     double dotProduct = Vector3D.Dot(directionFromBlocker, worldNormal);
+                    // Determine the direction from the blocker's center to the grid's position
+                    Vector3D directionFromBlockerComplex = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - simulatedBoxCenter);
 
+                    bool MoreCalcs = true;
 
-                    bool deez = true;
-
-
-
-
-
-
-
-                    if (incidentVelocityC.AbsMax() < 10)
+                    if (incidentVelocityC.AbsMax() < 10) // TODO: get rid of this, this shouldn't be nessasary if the rest of the code works.
                     {
-                        // Determine the size of the grid's bounding box
 
-
-                        // Determine the direction from the blocker's center to the grid's position
-                        // Vector3D directionFromBlocker = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - blockerCenter);
-
-                        // Determine if the grid is inside or outside the blocker based on the dot product with boxNormal
-                        //  double dotProduct = Vector3D.Dot(directionFromBlocker, boxNormal);
 
                         // Determine the push direction based on whether the grid is inside or outside the blocker
                         Vector3D pushDirection = dotProduct < 0 ? -Vector3D.Normalize(boxNormal) : Vector3D.Normalize(boxNormal); // Reversed logic here
@@ -367,12 +350,12 @@ namespace klime.EntityCover
                         cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() + pushDirection * maxSideLength);
 
 
-                        MyAPIGateway.Utilities.ShowMessage("", $"Low Incident Velocity: {incidentVelocity}");
+                        //MyAPIGateway.Utilities.ShowMessage("", $"Low Incident Velocity: {incidentVelocity}");
                         AddLine(cGrid.PositionComp.GetPosition(), incidentVelocityC, Color.Red);
                         AddLine(cGrid.PositionComp.GetPosition(), reflection, Color.Green);
                         AddLine(cGrid.PositionComp.GetPosition(), boxNormal, Color.Blue);
                     }
-                    else if (deez)
+                    else if (MoreCalcs)
                     {
                         // Determine the direction from the grid's current position to the blocker's center
                         Vector3D directionToBlocker = Vector3D.Normalize(blockerCenter - cGrid.PositionComp.GetPosition());
@@ -383,36 +366,52 @@ namespace klime.EntityCover
                         // If the dot product is positive, the reflection is pointing towards the blocker
                         if (dotProductWithReflection > 0)
                         {
-                            AddLine(cGrid.PositionComp.GetPosition(), boxNormal, Color.Blue);
-                            // Find the axis to rotate around by taking the cross product of the box normal and the direction from the blocker
-                            Vector3D rotationAxis = Vector3D.Cross(boxNormal, directionFromBlocker);
-                            Vector3D boxNormalFixed;
-                            // Rotate the normal by 90 degrees around the chosen axis
-                            boxNormalFixed = Vector3D.Transform(boxNormal, MatrixD.CreateFromAxisAngle(rotationAxis, MathHelper.ToRadians(-90)));
-                            MyAPIGateway.Utilities.ShowMessage("", $"Fixed ;)");
-                            AddLine(cGrid.PositionComp.GetPosition(), boxNormalFixed, Color.HotPink);
-                            AddLine(cGrid.PositionComp.GetPosition(), directionFromBlocker, Color.LightYellow);
-                            // Get the normal of the collision box on the impacted side
+                           
+                            directionFromBlocker = directionFromBlockerComplex;
+                            // Project the grid's velocity onto the direction from the blocker
+                            double velocityTowardsBlocker = Vector3D.Dot(incidentVelocity, directionFromBlocker);
 
-                            MyAPIGateway.Utilities.ShowMessage("", $"ABNormal Incident Product");
-                            AddLine(cGrid.PositionComp.GetPosition(), incidentVelocityC, Color.Red);
-                            AddLine(cGrid.PositionComp.GetPosition(), reflection, Color.Green);
-                            //AddLine(cGrid.PositionComp.GetPosition(), -reflection, Color.Purple);
+                            // Calculate the velocity component to subtract
+                            Vector3D velocityComponentToSubtract = directionFromBlocker * velocityTowardsBlocker;
 
-                            Vector3D reflectionFixed = Vector3D.Reflect(incidentVelocity, directionFromBlocker);
-                            AddLine(cGrid.PositionComp.GetPosition(), reflectionFixed, Color.Purple);
-                            //cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 0.95);
-                            cGrid.Physics.LinearVelocity = reflectionFixed;
+                            // Subtract the velocity component from the grid's velocity
+                            cGrid.Physics.LinearVelocity -= (velocityComponentToSubtract);
+
+                            // Project the grid's angular velocity onto the direction from the blocker
+                            double angularVelocityTowardsBlocker = Vector3D.Dot(incidentAngularVelocity, directionFromBlocker);
+
+                            // Determine whether the rotation is towards or away from the blocker
+                            if (angularVelocityTowardsBlocker > 0)
+                            {
+                                // Rotation is towards the blocker; invert the angular velocity
+                                cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 0.65);
+                            }
+                            else
+                            {
+                                // Rotation is away from the blocker; add 50% to the angular velocity
+                                cGrid.Physics.AngularVelocity = Vector3D.Multiply(incidentAngularVelocity, 0.65);
+                            }
+
+                            // Optionally, add additional push away from the blocker's centerspace 
+
+                            var tempVel = cGrid.Physics.LinearVelocity;
+
+                            tempVel += directionFromBlocker * (incidentSpeed + 1);
+                            
+                            cGrid.Physics.LinearVelocity = Vector3D.Multiply(tempVel, 0.75) * 1.1;
+
 
                         }
                         else
                         {
-                            MyAPIGateway.Utilities.ShowMessage("", $"Normal Incident Product: {dotProductWithReflection}");
+                            //MyAPIGateway.Utilities.ShowMessage("", $"Normal Incident Product: {dotProductWithReflection}");
                             AddLine(cGrid.PositionComp.GetPosition(), incidentVelocityC, Color.Red);
                             AddLine(cGrid.PositionComp.GetPosition(), reflection, Color.Green);
                             AddLine(cGrid.PositionComp.GetPosition(), boxNormal, Color.Blue);
                             //cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 0.95);
-                            cGrid.Physics.LinearVelocity = reflection;
+
+
+                            cGrid.Physics.LinearVelocity = Vector3D.Multiply(reflection, 0.75) * 1.1;
 
                         }
 
@@ -431,7 +430,7 @@ namespace klime.EntityCover
                     Vector3D velocityComponentToSubtract = directionFromBlocker * velocityTowardsBlocker;
 
                     // Subtract the velocity component from the grid's velocity
-                    cGrid.Physics.LinearVelocity -= (velocityComponentToSubtract);
+                    cGrid.Physics.LinearVelocity -= (velocityComponentToSubtract + 1);
 
                     // Project the grid's angular velocity onto the direction from the blocker
                     double angularVelocityTowardsBlocker = Vector3D.Dot(incidentAngularVelocity, directionFromBlocker);
@@ -440,12 +439,12 @@ namespace klime.EntityCover
                     if (angularVelocityTowardsBlocker > 0)
                     {
                         // Rotation is towards the blocker; invert the angular velocity
-                        cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 1.5) - 1;
+                        cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 0.65);
                     }
                     else
                     {
                         // Rotation is away from the blocker; add 50% to the angular velocity
-                        cGrid.Physics.AngularVelocity = Vector3D.Multiply(incidentAngularVelocity, 1.5) + 1;
+                        cGrid.Physics.AngularVelocity = Vector3D.Multiply(incidentAngularVelocity, 0.65);
                     }
 
                     // Optionally, add additional push away from the blocker's center
@@ -494,7 +493,7 @@ namespace klime.EntityCover
 
             return distance;
         }
-        private Vector3D DetermineClosestFaceNormal(Vector3D relImpact, BlockerEnt thisEnt)
+        private static Vector3D DetermineClosestFaceNormal(Vector3D relImpact, BlockerEnt thisEnt)
         {
             BoundingBoxD localBoundingBox = GetLocalBoundingBox(thisEnt);
             Vector3D closestNormal = Vector3D.Zero;
@@ -569,7 +568,7 @@ namespace klime.EntityCover
         }
 
         private void DrawLines()
-        {
+        { //debuging kino
             float length = 10f;
             float thickness = 0.5f;
 
