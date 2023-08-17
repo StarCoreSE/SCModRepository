@@ -8,7 +8,7 @@
         <TypeId>GuiBlockCategoryDefinition</TypeId>
 
       </Id>
-      <DisplayName>.STARCORE TOURNAMENT WEAPONS</DisplayName>
+      <DisplayName>.STARCORE WEAPONS</DisplayName>
       <Name>.SC Tournament Weapons</Name>
       <StrictSearch>true</StrictSearch>
       <ItemIds>
@@ -142,62 +142,6 @@
         <string>AMP_ArcMelee</string>
         <!--<string>AMP_CryoShotgun</string>
 		<string>AMP_FlameThrowerSmall</string>-->
-
-
-      </ItemIds>
-    </Category>
-
-    <!-->tfw pointless-->
-    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
-      <Id>
-        <TypeId>GuiBlockCategoryDefinition</TypeId>
-
-      </Id>
-      <DisplayName>.STARCORE WIP WEAPONS</DisplayName>
-      <Name>.SC WIP Weapons</Name>
-      <StrictSearch>true</StrictSearch>
-      <ItemIds>
-
-
-        <!--INVALID-->
-
-        <!--REEE-->
-
-
-
-        <!--Tait Fletcher -->
-        <string>LargeMissileTurret/16InchTriple</string>
-        <string>LargeMissileTurret/6InchTriple</string>
-        <string>LargeMissileTurret/127mmMk32</string>
-        <string>LargeMissileTurret/127mmMk12</string>
-        <string>LargeMissileTurret/127mmMk24</string>
-        <string>LargeMissileTurret/127mmMk56</string>
-        <string>LargeMissileTurret/381mmDualR</string>
-        <string>LargeMissileTurret/15cmTbtsKC36</string>
-        <string>LargeMissileTurret/15cmTbtsKC36T</string>
-        <string>LargeMissileTurret/128mmSKC34</string>
-        <string>LargeMissileTurret/128mmL45</string>
-        <string>ConveyorSorter/105mmTwin</string>
-        <string>LargeMissileTurret/380mmMLE1935</string>
-        <string>LargeMissileTurret/203mm50MLE1931_R</string>
-        <string>LargeMissileTurret/152mmMLE1930R</string>
-        <string>LargeMissileTurret/152mmMLE1930NR</string>
-        <string>LargeMissileTurret/152mmMLE1936HA</string>
-        <string>LargeMissileTurret/15cmSKC28R</string>
-        <string>LargeMissileTurret/15cmSKC28NR</string>
-        <string>ConveyorSorter/PomPomMain</string>
-        <string>ConveyorSorter/150mmCasemate</string>
-        <string>ConveyorSorter/BoforTwinRemodel</string>
-        <string>ConveyorSorter/BoforSingleRemodel</string>
-        <string>ConveyorSorter/QuadBofor</string>
-        <string>ConveyorSorter/TorpTestBuidl</string>
-        <string>ConveyorSorter/203mmQuad</string>
-        <string>ConveyorSorter/203mmTwin</string>
-        <string>ConveyorSorter/quintupleTorpedoLauncher</string>
-
-        <!-- Anomaly Testing -->
-        <string>ConveyorSorter/AMP_HealGenerator</string>
-        <string>CapacitorLarge</string>
 
 
       </ItemIds>
