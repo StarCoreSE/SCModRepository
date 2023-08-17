@@ -1,9 +1,10 @@
+@@ -0,0 +1,97 @@
 @BlockID "Type78_Railgun_Block"
 @Version 2
 @Author Krynoc
 @Weaponcore 0
 
-#Valid subpart ID's of Type78_Railgun_Block
+#Valid subpart ID's of MK2_Railgun_Block
 #|  MK2Railgun_Elevator
 #|  |  MK2_Railgun_AZ
 #|  |  |  MK2_Railgun_EL
@@ -94,4 +95,3 @@ Action Block() {
 		GunTurnOff()
 	}
 }
-

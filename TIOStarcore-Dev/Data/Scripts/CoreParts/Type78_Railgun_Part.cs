@@ -22,9 +22,9 @@ namespace Scripts {
                     new MountPointDef {
                         SubtypeId = "Type78_Railgun_Block", // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "None", // For weapons with a spinning barrel such as Gatling Guns. Subpart_Boomsticks must be written as Boomsticks.
-                        MuzzlePartId = "Type78_Railgun_EL", // The subpart where your muzzle empties are located. This is often the elevation subpart. Subpart_Boomsticks must be written as Boomsticks.
-                        AzimuthPartId = "Type78_Railgun_AZ", // Your Rotating Subpart, the bit that moves sideways.
-                        ElevationPartId = "Type78_Railgun_EL",// Your Elevating Subpart, that bit that moves up.
+                        MuzzlePartId = "MK2_Railgun_EL", // The subpart where your muzzle empties are located. This is often the elevation subpart. Subpart_Boomsticks must be written as Boomsticks.
+                        AzimuthPartId = "MK2_Railgun_AZ", // Your Rotating Subpart, the bit that moves sideways.
+                        ElevationPartId = "MK2_Railgun_EL",// Your Elevating Subpart, that bit that moves up.
                         DurabilityMod = 0.19f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
@@ -81,7 +81,7 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "Type 78 Heavy Railgun", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "Type 78 Railgun Turret", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0.08f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 1f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
