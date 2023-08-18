@@ -10,10 +10,10 @@ using VRage.ObjectBuilders;
 using VRageMath;
 using IMySlimBlock = VRage.Game.ModAPI.IMySlimBlock;
 
-namespace ArtilleryBlockExplosion
+namespace TIOSelfRepair
 {
 	[MyEntityComponentDescriptor(typeof(MyObjectBuilder_ConveyorSorter), false, "Type18_Artillery_Block", "Type21_Artillery_Block", "Type24_Artillery_Block", "Type77_Railgun_Block", "Type78_Railgun_Block", "Type79_Railgun_Block", "Reaver_Coilgun_Block", "Torp_Block")]
-	public class ArtilleryBlockExplosion : MyGameLogicComponent
+	public class TIOSelfRepair : MyGameLogicComponent
 	{
 		private IMyConveyorSorter artilleryBlock;
 		private int triggerTick = 0;
