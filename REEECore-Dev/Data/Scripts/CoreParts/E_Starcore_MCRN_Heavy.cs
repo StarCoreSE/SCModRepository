@@ -191,8 +191,6 @@ namespace Scripts {
                 E_Starcore_MCRN_Torpedo_Acceleration,
                 E_Starcore_MCRN_Torpedo_Detonation,
                 E_Starcore_MCRN_Torpedo_Detonation_Frag,
-                E_Starcore_OPA_Torpedo_Lock_Tone,
-                E_Starcore_OPA_Torpedo_Lock_Tone_Terminal
 
             },
             //Animations = E_Starcore_MCRN_Animation,
