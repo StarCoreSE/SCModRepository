@@ -12,7 +12,7 @@
 		 <Description>
 			 6km Range. Minigun.
 		 </Description>
-		 <Icon>Textures\Models\VulcanCannon.png</Icon>
+		 <Icon>Textures\GUI\Icons\Vulcan.png</Icon>
 		 <CubeSize>Large</CubeSize>
 		 <GuiVisible>true</GuiVisible>
 		 <BlockTopology>TriangleMesh</BlockTopology>
@@ -79,13 +79,7 @@
 		 </Id>
 		 <DisplayName>Crossfield</DisplayName>
 		 <Description>
-			 Heavy Gimbaled Cannon
-			 Heavy Anti Armor
-			 Medium-Low Shield Damage
-			 Medium Component Damage
-			 4km Targeting Range
-			 15km Manual/Painter Targeting Range
-			 Kinetic Damage
+			 4-way PD
 		 </Description>
 		 <Icon>Textures\Models\Crossfield Base.dds</Icon>
 		 <CubeSize>Large</CubeSize>
