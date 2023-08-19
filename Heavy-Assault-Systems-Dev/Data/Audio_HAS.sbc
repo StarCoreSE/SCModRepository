@@ -264,7 +264,7 @@
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>0.25</Volume>
+      <Volume>0.50</Volume>
       <PitchVariation>100</PitchVariation>
       <Loopable>true</Loopable>
       <Waves>
@@ -317,19 +317,19 @@
     <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>HAS_HecateShieldHit</SubtypeId>
+        <SubtypeId>HAS_HecateSpin</SubtypeId>
       </Id>
       <Category>SHOT</Category>
       <MaxDistance>1000</MaxDistance>
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>1</Volume>
+      <Volume>0.5</Volume>
       <PitchVariation>300</PitchVariation>
       <Loopable>true</Loopable>
       <Waves>
         <Wave Type="D3">
-          <Start>Audio\Gauss\HecateShieldHit.wav</Start>
+          <Start>Audio\Gauss\HecateSpin.wav</Start>
         </Wave>
       </Waves>
     </Sound>

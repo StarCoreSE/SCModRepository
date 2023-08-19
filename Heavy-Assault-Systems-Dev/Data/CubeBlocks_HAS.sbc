@@ -12,7 +12,7 @@
 		 <Description>
 			 6km Range. Minigun.
 		 </Description>
-		 <Icon>Textures\Models\VulcanCannon.png</Icon>
+		 <Icon>Textures\GUI\Icons\Vulcan.png</Icon>
 		 <CubeSize>Large</CubeSize>
 		 <GuiVisible>true</GuiVisible>
 		 <BlockTopology>TriangleMesh</BlockTopology>
