@@ -7,14 +7,14 @@
             <SubtypeId>Default</SubtypeId>
         </Id>
         <DecalQueueSize>
-            <MaxDecals>50000</MaxDecals>
-            <MaxDecals>100000</MaxDecals>
-            <MaxDecals>200000</MaxDecals>
+            <MaxDecals>5000</MaxDecals>
+            <MaxDecals>10000</MaxDecals>
+            <MaxDecals>20000</MaxDecals>
         </DecalQueueSize>
         <DecalTrailsQueueSize>
-            <MaxDecals>50000</MaxDecals>
-            <MaxDecals>100000</MaxDecals>
-            <MaxDecals>800000</MaxDecals>
+            <MaxDecals>5000</MaxDecals>
+            <MaxDecals>10000</MaxDecals>
+            <MaxDecals>80000</MaxDecals>
         </DecalTrailsQueueSize>
     </DecalGlobals>
 
