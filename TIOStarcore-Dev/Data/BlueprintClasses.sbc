@@ -15,8 +15,8 @@
       <Entry Class="EliteConsumables" BlueprintSubtypeId="UNSC_Coilgun_MagazineLarge" />
       <Entry Class="Ammo" BlueprintSubtypeId="UNSC_Coilgun_MagazineLarge" />
   
-      <Entry Class="EliteConsumables" BlueprintSubtypeId="IronMaiden_MagazineLarge" />
-      <Entry Class="Ammo" BlueprintSubtypeId="IronMaiden_MagazineLarge" />
+      <Entry Class="EliteConsumables" BlueprintSubtypeId="Priest_MagazineLarge" />
+      <Entry Class="Ammo" BlueprintSubtypeId="Priest_MagazineLarge" />
   
       <Entry Class="EliteConsumables" BlueprintSubtypeId="RailgunTurret_MagazineLarge" />
       <Entry Class="Ammo" BlueprintSubtypeId="RailgunTurret_MagazineLarge" />

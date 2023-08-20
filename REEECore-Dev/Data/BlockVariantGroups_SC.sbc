@@ -55,7 +55,7 @@ Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Starcore_AMS_II_Block" /
       
         <BlockVariantGroup>
             <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Starcore_Expanse_TorpedoBlockVariants" />
-            <Icon>Textures\GUI\Icons\MCRN-Logo.dds</Icon>
+            <Icon>Textures\Icons\UNNHeavy.png</Icon>
             <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
             <Description>Description_BlockGroup_TurretGroup</Description>
             <Blocks>
