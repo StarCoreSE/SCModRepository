@@ -1,0 +1,22 @@
+﻿<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <!-- Documentation: https://sites.google.com/a/keenswh.com/art/home/decals -->
+    <DecalGlobals>
+        <Id>
+            <TypeId>DecalGlobalsDefinition</TypeId>
+            <SubtypeId>Default</SubtypeId>
+        </Id>
+        <DecalQueueSize>
+            <MaxDecals>50000</MaxDecals>
+            <MaxDecals>100000</MaxDecals>
+            <MaxDecals>200000</MaxDecals>
+        </DecalQueueSize>
+        <DecalTrailsQueueSize>
+            <MaxDecals>50000</MaxDecals>
+            <MaxDecals>100000</MaxDecals>
+            <MaxDecals>800000</MaxDecals>
+        </DecalTrailsQueueSize>
+    </DecalGlobals>
+
+
+</Definitions>
