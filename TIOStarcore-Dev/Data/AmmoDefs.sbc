@@ -5,7 +5,7 @@
 		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
 			<Id>
 				<TypeId>AmmoDefinition</TypeId>
-				<SubtypeId>IronMaiden_Ammo</SubtypeId>
+				<SubtypeId>Priest_Ammo</SubtypeId>
 			</Id>
 			<BasicProperties>
 				<DesiredSpeed>20000</DesiredSpeed>

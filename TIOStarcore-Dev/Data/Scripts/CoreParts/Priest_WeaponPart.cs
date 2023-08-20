@@ -14,16 +14,13 @@ using static Scripts.Structure.WeaponDefinition.HardPointDef.HardwareDef.Hardwar
 namespace Scripts {   
     partial class Parts {
         // Don't edit above this line
-
-     //Smaller Turrets
-            //Point Defense
         WeaponDefinition Priest_Block => new WeaponDefinition
         {
             Assignments = new ModelAssignmentsDef
             {
                 MountPoints = new[] {
                     new MountPointDef {
-                        SubtypeId = "Heavy_Repeater", // Block Subtypeid. Your Cubeblocks contain this information
+                        SubtypeId = "Priest_Block", // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "None", // For weapons with a spinning barrel such as Gatling Guns.
                         MuzzlePartId = "Muzzles", // The subpart where your muzzle empties are located. This is often the elevation subpart.
                         AzimuthPartId = "AZ", // Your Rotating Subpart, the bit that moves sideways
@@ -44,22 +41,22 @@ namespace Scripts {
             Targeting = new TargetingDef
             {
                 Threats = new[] {
-                    Projectiles, Characters, Grids, Neutrals, Meteors, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
+                    Projectiles, Grids, Characters, Meteors, Neutrals, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
                 },
                 SubSystems = new[] {
                     Offense, Thrust, Utility, Power, Production, Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
                 },
-                ClosestFirst = true, // Tries to pick closest targets first (blocks on grids, projectiles, etc...).
+                ClosestFirst = false, // Tries to pick closest targets first (blocks on grids, projectiles, etc...).
                 IgnoreDumbProjectiles = false, // Don't fire at non-smart projectiles.
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 2250, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
-                MinTargetDistance = 50, // Minimum distance at which targets will be automatically shot at.
-                TopTargets = 0, // Maximum number of targets to randomize between; 0 = unlimited.
-                CycleTargets = 3, // Number of targets to "cycle" per acquire attempt.
-                TopBlocks = 8, // Maximum number of blocks to randomize between; 0 = unlimited.
-                CycleBlocks = 2, // Number of blocks to "cycle" per acquire attempt.
+                MaxTargetDistance = 0, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
+                TopTargets = 10, // Maximum number of targets to randomize between; 0 = unlimited.
+                CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
+                TopBlocks = 12, // Maximum number of blocks to randomize between; 0 = unlimited.
+                CycleBlocks = 0, // Number of blocks to "cycle" per acquire attempt.
                 StopTrackingSpeed = 0, // Do not track threats traveling faster than this speed; 0 = unlimited.
                 UniqueTargetPerWeapon = false, // only applies to multi-weapon blocks 
                 MaxTrackingTime = 0, // After this time has been reached the weapon will stop tracking existing target and scan for a new one, only applies to turreted weapons
@@ -85,9 +82,9 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "F-3 Heavy Repeater", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
-                DeviateShotAngle = 0.4f, // Projectile inaccuracy in degrees.
-                AimingTolerance = 24f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
+                PartName = "FEM-300 Heavy Repeater (Iron Maiden)", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                DeviateShotAngle = 0.2f, // Projectile inaccuracy in degrees.
+                AimingTolerance = 2f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
                 DelayCeaseFire = 0, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released.
                 AddToleranceToTracking = false, // Allows turret to track to the edge of the AimingTolerance cone instead of dead centre.
@@ -117,11 +114,11 @@ namespace Scripts {
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0.06f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
-                    ElevateRate = 0.06f, // Max traversal speed of elevation subpart in radians per tick.
+                    RotateRate = 0.04f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
+                    ElevateRate = 0.02f, // Max traversal speed of elevation subpart in radians per tick.
                     MinAzimuth = -180,
                     MaxAzimuth = 180,
-                    MinElevation = -26,
+                    MinElevation = -20,
                     MaxElevation = 180,
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 0, // Default resting elevation
@@ -154,25 +151,25 @@ namespace Scripts {
                 },
                 Loading = new LoadingDef
                 {
-                    RateOfFire = 440, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
-                    BarrelsPerShot = 2, // How many muzzles will fire a projectile per fire event.
+                    RateOfFire = 400, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
+                    BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
-                    ReloadTime = 120, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    ReloadTime = 20, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     HeatPerShot = 1, // Heat generated per shot.
-                    MaxHeat = 200, // Max heat before weapon enters cooldown (70% of max heat).
-                    Cooldown = 0.6f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
+                    MaxHeat = 70000, // Max heat before weapon enters cooldown (70% of max heat).
+                    Cooldown = .95f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
                     HeatSinkRate = 9, // Amount of heat lost per second.
                     DegradeRof = false, // Progressively lower rate of fire when over 80% heat threshold (80% of max heat).
-                    ShotsInBurst = 30, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
+                    ShotsInBurst = 0, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
                     DelayAfterBurst = 0, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     FireFull = false, // Whether the weapon should fire the full magazine (or the full burst instead if ShotsInBurst > 0), even if the target is lost or the player stops firing prematurely.
                     GiveUpAfter = false, // Whether the weapon should drop its current target and reacquire a new target after finishing its magazine or burst.
                     BarrelSpinRate = 0, // Visual only, 0 disables and uses RateOfFire.
                     DeterministicSpin = false, // Spin barrel position will always be relative to initial / starting positions (spin will not be as smooth).
-                    SpinFree = false, // Spin barrel while not firing.
+                    SpinFree = true, // Spin barrel while not firing.
                     StayCharged = false, // Will start recharging whenever power cap is not full.
                     MaxActiveProjectiles = 0, // Maximum number of drones in flight (only works for drone launchers)
                     MaxReloads = 0, // Maximum number of reloads in the LIFETIME of a weapon
@@ -182,10 +179,10 @@ namespace Scripts {
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "", // Audio for warmup effect.
-                    FiringSound = "RepeaterCannonShot", // Audio for firing.
+                    FiringSound = "rep6", // Audio for firing.
                     FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "", // Sound SubtypeID, for when your Weapon is in a reloading state
-                    NoAmmoSound = "ShipGatlingNoAmmo",
+                    NoAmmoSound = "",
                     HardPointRotationSound = "WepTurretGatlingRotate", // Audio played when turret is moving.
                     BarrelRotationSound = "WepShipGatlingRotation",
                     FireSoundEndDelay = 120, // How long the firing audio should keep playing after firing stops. Measured in game ticks(6 = 100ms, 60 = 1 seconds, etc..).
@@ -195,16 +192,16 @@ namespace Scripts {
                 {
                     Effect1 = new ParticleDef
                     {
-                        Name = "Muzzle_Flash_Large", // SubtypeId of muzzle particle effect.
+                        Name = "Iron_Maiden_Muzzle_Flash_Autocannon", // SubtypeId of muzzle particle effect.
                         Color = Color(red: 0, green: 0, blue: 0, alpha: 1), // Deprecated, set color in particle sbc.
                         Offset = Vector(x: 0, y: 0, z: 0), // Offsets the effect from the muzzle empty.
                         Extras = new ParticleOptionDef
                         {
-                            Loop = true,
-                            Restart = true,
-                            MaxDistance = 1100,
-                            MaxDuration = 3,
-                            Scale = 3f,
+                            Loop = false,
+                            Restart = false,
+                            MaxDistance = 500,
+                            MaxDuration = 1,
+                            Scale = 1.5f,
                         },
                     },
                     Effect2 = new ParticleDef
@@ -224,11 +221,10 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                F3Ammo,
-
+                Priest_Ammo, 
                  // Must list all primary, shrapnel, and pattern ammos.
             },
-            Animations = IronMaiden_AdvancedAnimation,
+            Animations = Priest_AdvancedAnimation,
             //Upgrades = UpgradeModules,
         };
 
@@ -246,11 +242,11 @@ namespace Scripts {
                         DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
-                    
+
                  },
                 Muzzles = new[] {
                     "muzzle_projectile_1",
-                    
+
                 },
                 Ejector = "", // Optional; empty from which to eject "shells" if specified.
                 Scope = "camera", // Where line of sight checks are performed from. Must be clear of block collision.
@@ -368,25 +364,25 @@ namespace Scripts {
                 },
                 Loading = new LoadingDef
                 {
-                    RateOfFire = 440, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
+                    RateOfFire = 400, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
                     BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
-                    TrajectilesPerBarrel = 2, // Number of projectiles per muzzle per fire event.
+                    TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
-                    ReloadTime = 120, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    ReloadTime = 20, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    HeatPerShot = 2, // Heat generated per shot.
-                    MaxHeat = 200, // Max heat before weapon enters cooldown (70% of max heat).
-                    Cooldown = 0.6f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
+                    HeatPerShot = 1, // Heat generated per shot.
+                    MaxHeat = 70000, // Max heat before weapon enters cooldown (70% of max heat).
+                    Cooldown = .95f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
                     HeatSinkRate = 9, // Amount of heat lost per second.
                     DegradeRof = false, // Progressively lower rate of fire when over 80% heat threshold (80% of max heat).
-                    ShotsInBurst = 30, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
+                    ShotsInBurst = 0, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
                     DelayAfterBurst = 0, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     FireFull = false, // Whether the weapon should fire the full magazine (or the full burst instead if ShotsInBurst > 0), even if the target is lost or the player stops firing prematurely.
                     GiveUpAfter = false, // Whether the weapon should drop its current target and reacquire a new target after finishing its magazine or burst.
                     BarrelSpinRate = 0, // Visual only, 0 disables and uses RateOfFire.
                     DeterministicSpin = false, // Spin barrel position will always be relative to initial / starting positions (spin will not be as smooth).
-                    SpinFree = false, // Spin barrel while not firing.
+                    SpinFree = true, // Spin barrel while not firing.
                     StayCharged = false, // Will start recharging whenever power cap is not full.
                     MaxActiveProjectiles = 0, // Maximum number of drones in flight (only works for drone launchers)
                     MaxReloads = 0, // Maximum number of reloads in the LIFETIME of a weapon
@@ -396,14 +392,14 @@ namespace Scripts {
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "", // Audio for warmup effect.
-                    FiringSound = "RepeaterCannonShot", // Audio for firing.
+                    FiringSound = "rep6", // Audio for firing.
                     FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "", // Sound SubtypeID, for when your Weapon is in a reloading state
-                    NoAmmoSound = "ShipGatlingNoAmmo",
+                    NoAmmoSound = "",
                     HardPointRotationSound = "WepTurretGatlingRotate", // Audio played when turret is moving.
                     BarrelRotationSound = "WepShipGatlingRotation",
                     FireSoundEndDelay = 120, // How long the firing audio should keep playing after firing stops. Measured in game ticks(6 = 100ms, 60 = 1 seconds, etc..).
-                    FireSoundNoBurst = false, // Don't stop firing sound from looping when delaying after burst.
+                    FireSoundNoBurst = true, // Don't stop firing sound from looping when delaying after burst.
                 },
                 Graphics = new HardPointParticleDef
                 {
@@ -438,14 +434,13 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                F3Ammo,
+                Priest_Ammo,
                  // Must list all primary, shrapnel, and pattern ammos.
             },
-           // Animations = PriestReskin_AdvancedAnimation,
+            // Animations = PriestReskin_AdvancedAnimation,
             //Upgrades = UpgradeModules,
         };
 
-
-
+        // Don't edit below this line.
     }
 }

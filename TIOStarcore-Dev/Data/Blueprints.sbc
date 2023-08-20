@@ -161,7 +161,7 @@
 	  <Blueprint>
 		  <Id>
 			  <TypeId>BlueprintDefinition</TypeId>
-			  <SubtypeId>IronMaiden_MagazineLarge</SubtypeId>
+			  <SubtypeId>Priest_MagazineLarge</SubtypeId>
 		  </Id>
 		  <DisplayName>Tungsten Rounds</DisplayName>
 		  <Icon>Textures\GUI\Icons\ammo\Iron_Maiden_Ammo.png</Icon>
@@ -171,7 +171,7 @@
 			  <Item Amount="2" TypeId="Ingot" SubtypeId="Cobalt" />
 			  <Item Amount="1" TypeId="Ingot" SubtypeId="Magnesium" />
 		  </Prerequisites>
-		  <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="IronMaiden_MagazineLarge" />
+		  <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="Priest_MagazineLarge" />
 		  <BaseProductionTimeInSeconds>5</BaseProductionTimeInSeconds>
 	  </Blueprint>
 	  <Blueprint>

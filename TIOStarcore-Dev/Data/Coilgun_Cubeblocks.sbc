@@ -2,7 +2,6 @@
 <Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <CubeBlocks>
 
-		<!-- Large JDD -->
         <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
             <Id>
                 <TypeId>ConveyorSorter</TypeId>
@@ -54,5 +53,6 @@
             <PCU>800</PCU>
             <IsAirTight>true</IsAirTight>
         </Definition>
+  
     </CubeBlocks>
 </Definitions>
