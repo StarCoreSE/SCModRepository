@@ -24,6 +24,8 @@ using static Scripts.Structure.WeaponDefinition.AmmoDef.GraphicDef.LineDef.Trace
 using static Scripts.Structure.WeaponDefinition.AmmoDef.GraphicDef.LineDef.Texture;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.GraphicDef.DecalDef;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.DamageScaleDef.DamageTypes.Damage;
+using static Scripts.Structure.WeaponDefinition.AmmoDef.PatternDef;
+using static Scripts.Structure.WeaponDefinition.AmmoDef.PatternDef.PatternModes;
 
 namespace Scripts
 { // Don't edit above this line
@@ -90,15 +92,16 @@ namespace Scripts
             Pattern = new PatternDef
             {
                 Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
-                    "",
+                    "MA_Laser_T2_Ammo",
+                    "MA_Laser_T2_Ammo_Decal",
                 },
-                Enable = false,
+                Mode = Weapon,
                 TriggerChance = 1f,
                 Random = false,
                 RandomMin = 1,
                 RandomMax = 1,
                 SkipParent = false,
-                PatternSteps = 1, // Number of Ammos activated per round, will progress in order and loop.  Ignored if Random = true.				
+                PatternSteps = 2, // Number of Ammos activated per round, will progress in order and loop.  Ignored if Random = true.				
             },
             DamageScales = new DamageScaleDef
             {
@@ -300,18 +303,6 @@ namespace Scripts
                 ModelName = "",
                 VisualProbability = 1f,
                 ShieldHitDraw = false,
-                Decals = new DecalDef
-                {
-                    MaxAge = 3600,
-                    Map = new[]
-                    {
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Metal",
-                            DecalMaterial = "MA_Laser_T2_Decal",
-                        },
-                    },
-                },
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef

@@ -222,6 +222,7 @@ namespace Scripts {
             },
             Ammos = new[] {
                 MA_Laser_T4_Ammo,// Must list all primary, shrapnel, and pattern ammos.
+                MA_Laser_T4_Ammo_Decal,// Must list all primary, shrapnel, and pattern ammos.
             },
             Animations = T4_Guardian_Animations,
             //Upgrades = UpgradeModules,
