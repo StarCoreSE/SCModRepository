@@ -22,23 +22,16 @@ namespace klime.Visual
     public class GridR
     {
         public MyCubeGrid grid;
-        public EntRender entRender;
+        public EntRender entRender = new EntRender();
         public MatrixD controlMatrix;
-        public double scale;
-        public double tempscale = 0.8;
-        Vector3D relTrans;
-        Vector3D relForward;
-        Vector3D relUp;
+        public double scale, tempscale = 0.8;
         internal Task GridTask = new Task();
+        Vector3D relTrans, relForward, relUp;
 
         public GridR(MyCubeGrid grid, EntRender entRender = null)
         {
             this.grid = grid;
-            this.entRender = entRender;
-            if (this.entRender == null)
-            {
-                entRender = new EntRender();
-            }
+            this.entRender = entRender ?? this.entRender;
         }
 
         public void UpdateMatrix(MatrixD renderMatrix)
@@ -50,71 +43,34 @@ namespace klime.Visual
         public void DoRescale()
         {
             var volume = grid.PositionComp.WorldVolume;
-            scale = 0.028 / volume.Radius;
-            if (grid.GridSizeEnum == MyCubeSize.Small) scale *= 0.8;
-
-            relTrans = Vector3D.TransformNormal(grid.WorldMatrix.Translation - grid.PositionComp.WorldAABB.Center, MatrixD.Transpose(grid.WorldMatrix));
-            relTrans *= scale;
+            scale = 0.028 / volume.Radius * (grid.GridSizeEnum == MyCubeSize.Small ? 0.8 : 1);
+            relTrans = Vector3D.TransformNormal(grid.WorldMatrix.Translation - grid.PositionComp.WorldAABB.Center, MatrixD.Transpose(grid.WorldMatrix)) * scale;
             grid.PositionComp.Scale = (float)scale;
         }
 
         public void DoCleanup()
         {
-
-            HashSet<IMyEntity> subparts = new HashSet<IMyEntity>();
             foreach (var fatblock in grid.GetFatBlocks())
             {
-                IMyFunctionalBlock fBlock = fatblock as IMyFunctionalBlock;
-                if (fBlock != null)
-                {
-                    fBlock.Enabled = false;
-                    //fBlock.Render.eff
-                }
-
-                IMyExhaustBlock exhaust = fatblock as IMyExhaustBlock;
-                if (exhaust != null)
-                {
-                    exhaust.StopEffects();
-                }
-                IMyLightingBlock light = fatblock as IMyLightingBlock;
-                if (light != null)
-                {
-                    light.Enabled = false;
-                }
-
+                DisableBlock(fatblock as IMyFunctionalBlock);
+                StopEffects(fatblock as IMyExhaustBlock);
+                DisableBlock(fatblock as IMyLightingBlock);
             }
 
-            if (grid.IsPowered)
-            {
-                grid.SwitchPower();
-            }
-//
-//   grid.ChangeGridOwnership(MyAPIGateway.Session.Player.IdentityId, MyOwnershipShareModeEnum.Faction);
-// 
-         
-       //   string whiteHex = "#FFFFFF";
-       //   Vector3 whiteHSVOffset = MyColorPickerConstants.HSVToHSVOffset(ColorExtensions.ColorToHSV(ColorExtensions.HexToColor(whiteHex)));
-       //   whiteHSVOffset = new Vector3((float)Math.Round(whiteHSVOffset.X, 2), (float)Math.Round(whiteHSVOffset.Y, 2), (float)Math.Round(whiteHSVOffset.Z, 2));
-       // 
-       //   List<IMySlimBlock> allBlocks = new List<IMySlimBlock>();
-       //   IMyCubeGrid iGrid = grid as IMyCubeGrid;
-       //   iGrid.GetBlocks(allBlocks);
-       //
-       //    //grid.ColorBlocks(grid.Min, grid.Max, whiteHSVOffset, false, false);
-       //    ////iGrid.ColorBlocks(iGrid.Min, iGrid.Max, whiteHSVOffset);
-       //    ////grid.ColorGrid(whiteHSVOffset, false, false);
-       //
-       //  foreach (var block in allBlocks)
-       //  {
-       //      block.Dithering = 0.1f;
-       //      //grid.ChangeColorAndSkin(grid.GetCubeBlock(block.Position), whiteHSVOffset);
-       //  }
-       //  //grid.Render.Transparency = -0.01f;
-
-
+            if (grid.IsPowered) grid.SwitchPower();
         }
-    
-}
+
+        private void DisableBlock(IMyFunctionalBlock block)
+        {
+            if (block != null) block.Enabled = false;
+        }
+
+        private void StopEffects(IMyExhaustBlock exhaust)
+        {
+            exhaust?.StopEffects();
+        }
+    }
+
 
     public class EntRender
     {
@@ -129,124 +85,75 @@ namespace klime.Visual
     public class GridG
     {
         public List<GridR> gridGroup;
-        public bool doneInitialCleanup = false;
-        public bool doneRescale = false;
-        public double rotationForward;
-        public double rotationUp;
-        public double rotationForwardBase;
+        public bool doneInitialCleanup, doneRescale;
+        public double rotationForward, rotationUp, rotationForwardBase;
         public int timer;
         public List<IMyCubeBlock> DelList = new List<IMyCubeBlock>();
         public List<Vector3I> SlimList = new List<Vector3I>();
+        public List<Vector3I> SlimDelList = new List<Vector3I>();
         public Dictionary<IMyCubeBlock, int> DelDict = new Dictionary<IMyCubeBlock, int>();
+        public Dictionary<Vector3I, int> SlimDelDict = new Dictionary<Vector3I, int>();
+        public GridG(List<GridR> gridGroup, double rotationForwardBase) { Init(gridGroup, rotationForwardBase); }
+        public GridG(GridR gridR, double rotationForwardBase) { Init(new List<GridR> { gridR }, rotationForwardBase); }
+        private void Init(List<GridR> group, double rotationForwardBase) { gridGroup = group; this.rotationForwardBase = rotationForwardBase; }
 
-        public GridG(List<GridR> gridGroup, double rotationForwardBase)
-        {
-            this.gridGroup = new List<GridR>(gridGroup); // Allocation?
-            this.rotationForwardBase = rotationForwardBase;
-        }
-
-        public GridG(GridR gridR, double rotationForwardBase)
-        {
-            gridGroup = new List<GridR>();
-            gridGroup.Add(gridR);
-            this.rotationForwardBase = rotationForwardBase;
-        }
-
-        public void DoCleanup()
-        {
-            foreach (var sg in gridGroup)
-            {
-                if (sg.grid != null)
-                {
-                    sg.DoCleanup();
-                    doneInitialCleanup = true;
-                }
-            }
-        }
-
-        public void DoRescale()
-        {
-            foreach (var sg in gridGroup)
-            {
-                if (sg.grid != null)
-                {
-                    sg.DoRescale();
-                    doneRescale = true;
-                }
-            }
-        }
+        public void DoCleanup() { ExecuteActionOnGrid(g => g.DoCleanup(), ref doneInitialCleanup); }
+        public void DoRescale() { ExecuteActionOnGrid(g => g.DoRescale(), ref doneRescale); }
+        private void ExecuteActionOnGrid(Action<GridR> action, ref bool flag) { foreach (var sg in gridGroup) { if (sg.grid != null) { action(sg); flag = true; } } }
 
         public void DoBlockRemove(Vector3I position)
         {
-            SlimList.Clear();
-            SlimList.Add(position);
+            SlimList.Clear(); SlimList.Add(position);
             foreach (var subgrid in gridGroup)
             {
-                if (subgrid.grid != null)
+                if (subgrid.grid == null) continue;
+                var slim = subgrid.grid.GetCubeBlock(position) as IMySlimBlock;
+                if (slim == null) continue;
+                if (slim.FatBlock == null && (!SlimDelDict.ContainsKey(slim.Position))) { int time = slim.Mass > 1500 ? timer + 200 : timer + 10; SlimDelDict.Add(slim.Position, time);}
+                else
                 {
-                    var slim = subgrid.grid.GetCubeBlock(position) as IMySlimBlock;
-                    if (slim != null)
-                    {
-                        if (slim.FatBlock == null)
-                        {
-                            subgrid.grid.RazeGeneratedBlocks(SlimList);
-                        }
-                        else
-                        {
-                            slim.Dithering = 2.5f;
-                            if (slim.FatBlock.Mass > 1500 && !DelDict.ContainsKey(slim.FatBlock))
-                            {
-                                MyVisualScriptLogicProvider.SetHighlightLocal(slim.FatBlock.Name, 10, 10, Color.Red);
-                                DelDict.Add(slim.FatBlock, timer + 200);
-                            }
-                            else if (!DelDict.ContainsKey(slim.FatBlock))
-                            {
-                                DelDict.Add(slim.FatBlock, (timer + 10));
-                            }
-                        }
-                    }
+                    slim.Dithering = 2.5f;
+                    MyVisualScriptLogicProvider.SetHighlightLocal(slim.FatBlock.Name, 10, 10, Color.Red);
+                    int time = slim.FatBlock.Mass > 1500 ? timer + 200 : timer + 10;
+                    if (!DelDict.ContainsKey(slim.FatBlock)) DelDict.Add(slim.FatBlock, time);
                 }
             }
         }
 
         public void UpdateMatrix(MatrixD renderMatrix, MatrixD rotMatrix)
         {
-            if (!doneRescale || !doneInitialCleanup)
-            {
-                return;
-            }
+            if (!doneRescale || !doneInitialCleanup) return;
             timer++;
             DelList.Clear();
-            foreach (var fatblock in DelDict.Keys)
+            SlimDelList.Clear();
+            foreach (var fatblock in DelDict.Keys) { if (DelDict[fatblock] == timer) { fatblock.Close(); DelList.Add(fatblock); } }
+            foreach (var item in DelList) DelDict.Remove(item);
+
+            foreach (var slim in SlimDelDict.Keys) { if (SlimDelDict[slim] == timer) {SlimDelList.Add(slim); /* add visuals for slimblock here*/ } }
+
+
+            foreach (var subgrid in gridGroup)
             {
-                if (DelDict[fatblock] == timer)
-                {
-                    fatblock.Close();
-                    DelList.Add(fatblock);
-                }
+                if (subgrid.grid == null) continue;
+
+                foreach (var item in SlimDelList) { subgrid.grid.RazeGeneratedBlocks(SlimDelList); }
+
             }
-            foreach (var item in DelList)
-            {
-                DelDict.Remove(item);
-            }
-            this.rotationForward = rotationForwardBase + rotationForward;
+
+
+
+
+            rotationForward = rotationForwardBase + rotationForward;
             var rotateMatrix = MatrixD.CreateRotationY(rotationForwardBase);
             renderMatrix = rotateMatrix * renderMatrix;
             var origTranslation = renderMatrix.Translation;
-            var origRotation = renderMatrix.Rotation;
             renderMatrix = rotMatrix * renderMatrix;
             renderMatrix.Translation = origTranslation;
-            foreach (var subgrid in gridGroup)
-            {
-                if (subgrid.grid != null)
-                {
-                    subgrid.UpdateMatrix(renderMatrix);
-                }
-            }
+            foreach (var subgrid in gridGroup) { if (subgrid.grid != null) subgrid.UpdateMatrix(renderMatrix); }
         }
     }
+    //subgrid.grid.RazeGeneratedBlocks(SlimList)
 
-    // Overall visualization
     public class EntVis
     {
         public MyCubeGrid realGrid;
@@ -254,11 +161,8 @@ namespace klime.Visual
         public GridG visGrid;
         public int lifetime;
         public ushort netID = 39302;
-        public bool isClosed = false;
-        public double xOffset;
-        public double yOffset;
-        public double rotOffset;
-        int timerRot = 0;
+        public bool isClosed;
+        public double xOffset, yOffset, rotOffset;
 
         public EntVis(MyCubeGrid realGrid, double xOffset, double yOffset, double rotOffset)
         {
@@ -267,117 +171,88 @@ namespace klime.Visual
             this.xOffset = xOffset;
             this.yOffset = yOffset;
             this.rotOffset = rotOffset;
-            lifetime = 0;
             RegisterEvents();
             GenerateClientGrids();
         }
 
-        private void RegisterEvents()
-        {
-            UpdateGridPacket regGridPacket = new UpdateGridPacket(realGrid.EntityId, RegUpdateType.Add);
-            var byteArray = MyAPIGateway.Utilities.SerializeToBinary(regGridPacket);
-            MyAPIGateway.Multiplayer.SendMessageTo(netID, byteArray, MyAPIGateway.Multiplayer.ServerId);
-        }
+        private void RegisterEvents() => SendMessage(new UpdateGridPacket(realGrid.EntityId, RegUpdateType.Add));
+
+        private void SendMessage(object packet) => MyAPIGateway.Multiplayer.SendMessageTo(netID, MyAPIGateway.Utilities.SerializeToBinary(packet), MyAPIGateway.Multiplayer.ServerId);
 
         public void BlockRemoved(Vector3I pos) => visGrid?.DoBlockRemove(pos);
 
         public void GenerateClientGrids()
         {
-            try
+            HandleException(() =>
             {
-                var realOB = realGrid.GetObjectBuilder() as MyObjectBuilder_CubeGrid;
-                MyEntities.RemapObjectBuilder(realOB);
+                var realOB = (MyObjectBuilder_CubeGrid)realGrid.GetObjectBuilder();
                 realOB.CreatePhysics = false;
+                MyEntities.RemapObjectBuilder(realOB);
                 MyAPIGateway.Entities.CreateFromObjectBuilderParallel(realOB, false, CompleteCall);
-            }
-            catch (Exception e)
-            {
-                // Log the error message for debugging purposes
-                MyLog.Default.WriteLine($"Error generating client grids: {e.Message}");
-                // Show an on-screen message to the player
-                MyAPIGateway.Utilities.ShowNotification("An error occurred while generating client grids. Please check the log for more details.", 5000, MyFontEnum.Red);
-            }
+            }, "generating client grids");
         }
-
 
         private void CompleteCall(IMyEntity obj)
         {
-            try
+            HandleException(() =>
             {
                 if (isClosed) return;
                 var grid = (MyCubeGrid)obj;
-                grid.SyncFlag = false;
-                grid.Save = false;
-                grid.Render.NearFlag = false;
-                grid.RemoveFromGamePruningStructure();
+                grid.SyncFlag = grid.Save = grid.Render.NearFlag = grid.Render.FadeIn = false;
                 grid.Render.CastShadows = false;
-                grid.Render.FadeIn = false;
                 grid.DisplayName = "";
+                grid.RemoveFromGamePruningStructure();
                 MyAPIGateway.Entities.AddEntity(grid);
                 visGrid = new GridG(new GridR(grid), rotOffset);
-            }
-            catch (Exception e)
-            {
-                // Log the error message for debugging purposes
-                MyLog.Default.WriteLine($"Error in CompleteCall: {e.Message}");
-                // Show an on-screen message to the player
-                MyAPIGateway.Utilities.ShowNotification("An error occurred while completing the call. Please check the log for more details.", 5000, MyFontEnum.Red);
-            }
+            }, "completing the call");
         }
-
 
         public void Update()
         {
             UpdateVisLogic();
             UpdateVisPosition();
             UpdateRealLogic();
-            lifetime += 1;
+            lifetime++;
         }
 
         private void UpdateVisPosition()
         {
-            var playerCamera = MyAPIGateway.Session.Camera;
             if (visGrid != null && realGrid != null && !realGrid.MarkedForClose)
             {
+                var playerCamera = MyAPIGateway.Session.Camera;
                 var renderMatrix = playerCamera.WorldMatrix;
-                var moveFactor = 0.6 * playerCamera.FovWithZoom;
-                renderMatrix.Translation += renderMatrix.Forward * (0.1 / moveFactor) + renderMatrix.Right * xOffset + renderMatrix.Down * yOffset;
-
-                // Calculate the rotation matrix to match the visual apparent rotation
-                var rotationMatrix = MatrixD.Invert(renderMatrix);
-
-                var rotMatrix = realGrid.WorldMatrix * rotationMatrix;
-                visGrid.UpdateMatrix(renderMatrix, rotMatrix);
+                renderMatrix.Translation += renderMatrix.Forward * (0.1 / (0.6 * playerCamera.FovWithZoom)) + renderMatrix.Right * xOffset + renderMatrix.Down * yOffset;
+                visGrid.UpdateMatrix(renderMatrix, realGrid.WorldMatrix * MatrixD.Invert(renderMatrix));
             }
         }
 
         private void UpdateVisLogic()
         {
-            if (visGrid != null)
-            {
-                if (!visGrid.doneInitialCleanup) visGrid.DoCleanup();
-                if (!visGrid.doneRescale) visGrid.DoRescale();
-            }
+            if (visGrid == null) return;
+            if (!visGrid.doneInitialCleanup) visGrid.DoCleanup();
+            if (!visGrid.doneRescale) visGrid.DoRescale();
         }
 
         private void UpdateRealLogic()
         {
-            if (realGrid == null || realGrid.MarkedForClose || realGrid.Physics == null || !realGrid.IsPowered) Close();
+            if (realGrid?.MarkedForClose == true || realGrid?.Physics == null || !realGrid.IsPowered) Close();
         }
 
         public void Close()
         {
-            if (visGrid != null)
-            {
-                foreach (var sub in visGrid.gridGroup)
-                {
-                    sub.grid.Close();
-                }
-            }
-            UpdateGridPacket packet = new UpdateGridPacket(realGrid.EntityId, RegUpdateType.Remove);
-            var array = MyAPIGateway.Utilities.SerializeToBinary(packet);
-            MyAPIGateway.Multiplayer.SendMessageTo(netID, array, MyAPIGateway.Multiplayer.ServerId);
+            visGrid?.gridGroup.ForEach(sub => sub.grid.Close());
+            SendMessage(new UpdateGridPacket(realGrid.EntityId, RegUpdateType.Remove));
             isClosed = true;
+        }
+
+        private void HandleException(Action action, string errorContext)
+        {
+            try { action(); }
+            catch (Exception e)
+            {
+                MyLog.Default.WriteLine($"Error {errorContext}: {e.Message}");
+                MyAPIGateway.Utilities.ShowNotification($"An error occurred while {errorContext}. Please check the log for more details.", 5000, MyFontEnum.Red);
+            }
         }
     }
 
@@ -498,80 +373,61 @@ namespace klime.Visual
 
         public override void UpdateAfterSimulation()
         {
-            if (MyAPIGateway.Utilities.IsDedicated || MyAPIGateway.Session.Player?.Character == null || MyAPIGateway.Session.Camera == null)
-            {
-                return;
-            }
-            if (ValidInput())
-            {
-                validInputThisTick = true;
-            }
-            else
-            {
-                validInputThisTick = false;
-            }
+            if (MyAPIGateway.Utilities.IsDedicated || MyAPIGateway.Session.Player?.Character == null || MyAPIGateway.Session.Camera == null) return;
+
+            validInputThisTick = ValidInput();
+
             if (validInputThisTick && IsAdmin(MyAPIGateway.Session.Player) && MyAPIGateway.Input.IsNewKeyPressed(MyKeys.T))
             {
-                if (viewState == ViewState.GoToIdleWC)
-                {
-                    viewState = ViewState.SearchingWC;
-                }
-                else
-                {
-                    viewState = ViewState.GoToIdleWC;
-                }
-                if (requestPaperDoll == RequestPaperDoll.On)
-                {
-                    requestPaperDoll = RequestPaperDoll.Off;
-                    MyAPIGateway.Utilities.ShowNotification("PAPER DOLL DISABLED", 1000, "Red");
-                }
-                else
-                {
-                    requestPaperDoll = RequestPaperDoll.On;
-                    MyAPIGateway.Utilities.ShowNotification("PAPER DOLL ENABLED", 1000, "Green");
-                }
+                viewState = viewState == ViewState.GoToIdleWC ? ViewState.SearchingWC : ViewState.GoToIdleWC;
+                ToggleRequestPaperDoll();
             }
+
             if (viewState == ViewState.SearchingWC)
             {
                 MyEntity controlEnt = (MyEntity)(MyAPIGateway.Session.Player.Controller?.ControlledEntity?.Entity as IMyCockpit);
-                if (controlEnt != null && wcAPI != null)
-                {
-                    var ent = wcAPI.GetAiFocus(controlEnt, 0);
-                    if (ent != null)
-                    {
-                        MyCubeGrid cGrid = ent as MyCubeGrid;
-                        if (cGrid != null && cGrid.Physics != null)
-                        {
-                            EntVis entVis = new EntVis(cGrid, 0.12, 0.03, 0);
-                            allVis.Add(entVis);
-                            viewState = ViewState.Locked;
-                        }
-                        else
-                        {
-                            viewState = ViewState.GoToIdleWC;
-                        }
-                    }
-                    else
-                    {
-                        viewState = ViewState.GoToIdleWC;
-                    }
-                }
-                else
-                {
-                    viewState = ViewState.GoToIdleWC;
-                }
+                ExecuteViewStateSearchingWC(controlEnt);
             }
+
             if (viewState == ViewState.GoToIdle || viewState == ViewState.GoToIdleWC)
             {
-                foreach (var entVis in allVis)
-                {
-                    entVis.Close();
-                }
-                allVis.Clear();
+                ClearAllVis();
                 viewState = viewState == ViewState.GoToIdleWC && requestPaperDoll == RequestPaperDoll.On ? ViewState.SearchingWC : ViewState.Idle;
             }
         }
 
+        private void ToggleRequestPaperDoll()
+        {
+            requestPaperDoll = requestPaperDoll == RequestPaperDoll.On ? RequestPaperDoll.Off : RequestPaperDoll.On;
+            string status = requestPaperDoll == RequestPaperDoll.On ? "ENABLED" : "DISABLED";
+            MyAPIGateway.Utilities.ShowNotification($"PAPER DOLL {status}", 1000, requestPaperDoll == RequestPaperDoll.On ? "Green" : "Red");
+        }
+
+        private void ExecuteViewStateSearchingWC(MyEntity controlEnt)
+        {
+            if (controlEnt != null && wcAPI != null)
+            {
+                var ent = wcAPI.GetAiFocus(controlEnt, 0);
+                if (ent != null)
+                {
+                    MyCubeGrid cGrid = ent as MyCubeGrid;
+                    if (cGrid != null && cGrid.Physics != null)
+                    {
+                        allVis.Add(new EntVis(cGrid, 0.12, 0.03, 0));
+                        viewState = ViewState.Locked;
+                    }
+                    else viewState = ViewState.GoToIdleWC;
+                }
+                else viewState = ViewState.GoToIdleWC;
+            }
+            else viewState = ViewState.GoToIdleWC;
+        }
+
+        private void ClearAllVis()
+        {
+            foreach (var entVis in allVis) entVis.Close();
+            allVis.Clear();
+        }
         public override void Draw()
         {
             if (MyAPIGateway.Utilities.IsDedicated)
