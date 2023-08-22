@@ -78,7 +78,7 @@ namespace TIOSelfRepair
 			if (slimBlock == null) return;
 
 
-			float repairAmount = 5; // what the fuck is this number keen??
+			float repairAmount = 10; // what the fuck is this number keen??
 
 
 
