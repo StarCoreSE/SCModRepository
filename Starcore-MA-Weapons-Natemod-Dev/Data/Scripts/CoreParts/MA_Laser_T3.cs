@@ -199,6 +199,7 @@ namespace Scripts {
             },
             Ammos = new[] {
                 MA_Laser_T3, // Must list all primary, shrapnel, and pattern ammos.
+                MA_Laser_T3_Ammo_Decal, // Must list all primary, shrapnel, and pattern ammos.
             },
             Animations = Fixed_T3_Animations,
             //Upgrades = UpgradeModules,
@@ -377,6 +378,7 @@ namespace Scripts {
             },
             Ammos = new[] {
                 MA_Laser_Gladius_Ammo, // Must list all primary, shrapnel, and pattern ammos.
+                MA_Laser_T3_Ammo_Decal, // Must list all primary, shrapnel, and pattern ammos.
             },
             Animations = MA_Gladius_Laser_Animations,
             //Upgrades = UpgradeModules,
