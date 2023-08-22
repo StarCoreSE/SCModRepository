@@ -15,6 +15,10 @@ using VRage.Utils;
 using VRageMath;
 using CoreSystems.Api;
 using ParallelTasks;
+using VRageRender;
+using VRage.ObjectBuilders;
+using Sandbox.Game.Entities.Cube;
+using VRage.GameServices;
 
 namespace klime.Visual
 {
@@ -43,26 +47,106 @@ namespace klime.Visual
         public void DoRescale()
         {
             var volume = grid.PositionComp.WorldVolume;
-            scale = 0.028 / volume.Radius * (grid.GridSizeEnum == MyCubeSize.Small ? 0.8 : 1);
+            scale = 0.029 / volume.Radius * (grid.GridSizeEnum == MyCubeSize.Small ? 0.8 : 1);
             relTrans = Vector3D.TransformNormal(grid.WorldMatrix.Translation - grid.PositionComp.WorldAABB.Center, MatrixD.Transpose(grid.WorldMatrix)) * scale;
             grid.PositionComp.Scale = (float)scale;
         }
 
         public void DoCleanup()
         {
+            grid.ChangeGridOwnership(MyAPIGateway.Session.Player.IdentityId, MyOwnershipShareModeEnum.Faction);
+            if (grid.IsPowered) grid.SwitchPower();
+            
+            
+            
+            List<IMySlimBlock> allBlocks = new List<IMySlimBlock>();
+
+            IMyCubeGrid iGrid = grid as IMyCubeGrid;
+            iGrid.GetBlocks(allBlocks);
+            iGrid.Render.DrawInAllCascades = true;
+            iGrid.Render.FastCastShadowResolve = true;
+            iGrid.Render.MetalnessColorable = true;
+            string OrangeHex = "#F5F5DC";
+            Vector3 orangeHSVOffset = MyColorPickerConstants.HSVToHSVOffset(ColorExtensions.ColorToHSV(ColorExtensions.HexToColor(OrangeHex)));
+            orangeHSVOffset = new Vector3((float)Math.Round(orangeHSVOffset.X, 2), (float)Math.Round(orangeHSVOffset.Y, 2), (float)Math.Round(orangeHSVOffset.Z, 2));
+            iGrid.ColorBlocks(iGrid.Min, iGrid.Max, orangeHSVOffset);
+
+            //iGrid.Render.Transparency = 0.05f;
+            foreach (var block in allBlocks)
+            {
+                block.Dithering = 2.7f;
+                block.CubeGrid.Render.ShadowBoxLod = false;
+                block.CubeGrid.Render.EnableColorMaskHsv = true;
+                block.CubeGrid.Render.OffsetInVertexShader = true;
+               block.CubeGrid.Transparent = true;
+               block.CubeGrid.Render.Transparency = 0.01f;
+               block.CubeGrid.FastCastShadowResolve = false;
+              // block.CubeGrid.Render.UpdateTransparency();
+              // block.CubeGrid.Render.UpdateRenderObject(true, false);
+                block.UpdateVisual();
+                // block.FatBlock?.Render.UpdateTransparency();
+                // grid.ChangeColorAndSkin(grid.GetCubeBlock(block.Position), orangeHSVOffset);
+            }
+
             foreach (var fatblock in grid.GetFatBlocks())
             {
                 DisableBlock(fatblock as IMyFunctionalBlock);
                 StopEffects(fatblock as IMyExhaustBlock);
                 DisableBlock(fatblock as IMyLightingBlock);
-            }
 
-            if (grid.IsPowered) grid.SwitchPower();
+            }
+                
+            //MyVisualScriptLogicProvider.SetAlphaHighlight(iGrid.Name, true, 10, 1, Color.Fuchsia, -1, null, 2f);
+            
+
+            // grid.Render.Transparency = -0.01f;
+
+
+            // string OrangeHex = "#FF0000";
+            //    Vector3 orangeHSVOffset = MyColorPickerConstants.HSVToHSVOffset(ColorExtensions.ColorToHSV(ColorExtensions.HexToColor(OrangeHex)));
+            //    orangeHSVOffset = new Vector3((float)Math.Round(orangeHSVOffset.X, 2), (float)Math.Round(orangeHSVOffset.Y, 2), (float)Math.Round(orangeHSVOffset.Z, 2));
+            // grid.ChangeColorAndSkin(grid.GetCubeBlock(block.Position), orangeHSVOffset);
+            // List<IMySlimBlock> allBlocks = new List<IMySlimBlock>();
+            //    IMyCubeGrid iGrid = grid as IMyCubeGrid;
+            //    iGrid.GetBlocks(allBlocks);
+            // 
+            //     //grid.ColorBlocks(grid.Min, grid.Max, orangeHSVOffset, false, false);
+            //     ////iGrid.ColorBlocks(iGrid.Min, iGrid.Max, orangeHSVOffset);
+            //     ////grid.ColorGrid(orangeHSVOffset, false, false);
+            // 
+
+            //   //grid.Render.Transparency = -0.01f;
         }
 
         private void DisableBlock(IMyFunctionalBlock block)
         {
-            if (block != null) block.Enabled = false;
+            if (block != null)
+            {
+                block.Enabled = false;
+                block.Render.ShadowBoxLod = false;
+                block.SlimBlock.Dithering = 1.95f; // this works!
+                block.Visible = true;
+                block.SlimBlock.UpdateVisual();
+                block.Render.UpdateTransparency();
+
+            
+            }
+
+        }
+
+        private void MakeTransparent(IMyCubeBlock block)
+        {
+            if (block != null)
+            {
+                block.SlimBlock.Dithering = 2.5f; // this works!
+                                       //slim.CubeGrid.ColorBlocks(slim.Position, slim.Position, new Vector3(0, 0, 0));
+                string OrangeHex = "#FFA500";
+                Vector3 orangeHSVOffset = MyColorPickerConstants.HSVToHSVOffset(ColorExtensions.ColorToHSV(ColorExtensions.HexToColor(OrangeHex)));
+                orangeHSVOffset = new Vector3((float)Math.Round(orangeHSVOffset.X, 2), (float)Math.Round(orangeHSVOffset.Y, 2), (float)Math.Round(orangeHSVOffset.Z, 2));
+                grid.ChangeColorAndSkin(grid.GetCubeBlock(block.Position), orangeHSVOffset);
+                block.SlimBlock.UpdateVisual();
+            }
+
         }
 
         private void StopEffects(IMyExhaustBlock exhaust)
@@ -91,8 +175,16 @@ namespace klime.Visual
         public List<IMyCubeBlock> DelList = new List<IMyCubeBlock>();
         public List<Vector3I> SlimList = new List<Vector3I>();
         public List<Vector3I> SlimDelList = new List<Vector3I>();
+        public List<Vector3I> FatDelList = new List<Vector3I>();
         public Dictionary<IMyCubeBlock, int> DelDict = new Dictionary<IMyCubeBlock, int>();
         public Dictionary<Vector3I, int> SlimDelDict = new Dictionary<Vector3I, int>();
+
+        public Dictionary<Vector3I, float> BlockIntegrityDict = new Dictionary<Vector3I, float>();
+        public Dictionary<Vector3I, float> FatBlockIntegrityDict = new Dictionary<Vector3I, float>();
+        public List<DamageEntry> DamageEntries = new List<DamageEntry>();
+        public static float TotalDamageSum = 0;
+        public int SlimBlocksDestroyed = 0;
+        public int FatBlocksDestroyed = 0;
         public GridG(List<GridR> gridGroup, double rotationForwardBase) { Init(gridGroup, rotationForwardBase); }
         public GridG(GridR gridR, double rotationForwardBase) { Init(new List<GridR> { gridR }, rotationForwardBase); }
         private void Init(List<GridR> group, double rotationForwardBase) { gridGroup = group; this.rotationForwardBase = rotationForwardBase; }
@@ -100,7 +192,7 @@ namespace klime.Visual
         public void DoCleanup() { ExecuteActionOnGrid(g => g.DoCleanup(), ref doneInitialCleanup); }
         public void DoRescale() { ExecuteActionOnGrid(g => g.DoRescale(), ref doneRescale); }
         private void ExecuteActionOnGrid(Action<GridR> action, ref bool flag) { foreach (var sg in gridGroup) { if (sg.grid != null) { action(sg); flag = true; } } }
-
+        
         public void DoBlockRemove(Vector3I position)
         {
             SlimList.Clear(); SlimList.Add(position);
@@ -109,38 +201,133 @@ namespace klime.Visual
                 if (subgrid.grid == null) continue;
                 var slim = subgrid.grid.GetCubeBlock(position) as IMySlimBlock;
                 if (slim == null) continue;
-                if (slim.FatBlock == null && (!SlimDelDict.ContainsKey(slim.Position))) { int time = slim.Mass > 1500 ? timer + 200 : timer + 10; SlimDelDict.Add(slim.Position, time);}
+                float integrity = slim.MaxIntegrity;
+                //MyVisualScriptLogicProvider.SetAlphaHighlight(slim.CubeGrid.Name, true, 2, 1, Color.Red, -1, null, 0.9f);
+                if (slim.FatBlock == null && (!SlimDelDict.ContainsKey(slim.Position))) 
+                {
+                    slim.Dithering = 1.1f; // this works!
+                    //slim.CubeGrid.ColorBlocks(slim.Position, slim.Position, new Vector3(0, 0, 0));
+                    string redHex = "#FF0000";
+                    Vector3 redHSVOffset = MyColorPickerConstants.HSVToHSVOffset(ColorExtensions.ColorToHSV(ColorExtensions.HexToColor(redHex)));
+                    redHSVOffset = new Vector3((float)Math.Round(redHSVOffset.X, 2), (float)Math.Round(redHSVOffset.Y, 2), (float)Math.Round(redHSVOffset.Z, 2));
+                    subgrid.grid.ChangeColorAndSkin(subgrid.grid.GetCubeBlock(slim.Position), redHSVOffset);
+                    
+                 
+                    slim.UpdateVisual();
+                    int time = timer + 200; 
+                    SlimDelDict.Add(slim.Position, time);
+                    BlockIntegrityDict[slim.Position] = integrity;
+                }
                 else
                 {
+                    
                     slim.Dithering = 2.5f;
                     MyVisualScriptLogicProvider.SetHighlightLocal(slim.FatBlock.Name, 10, 10, Color.Red);
-                    int time = slim.FatBlock.Mass > 1500 ? timer + 200 : timer + 10;
+                    int time = slim.FatBlock.Mass > 500 ? timer + 200 : timer + 10;
                     if (!DelDict.ContainsKey(slim.FatBlock)) DelDict.Add(slim.FatBlock, time);
+                    FatBlockIntegrityDict[slim.Position] = integrity;
                 }
             }
         }
+        public class DamageEntry
+        {
+            public float SlimDamage { get; set; }
+            public float FatBlockDamage { get; set; }
+            public int Timestamp { get; set; }
+            public DamageEntry(float slimDamage, float fatBlockDamage, int timestamp)
+            {
+                SlimDamage = slimDamage;
+                FatBlockDamage = fatBlockDamage;
+                Timestamp = timestamp;
+            }
+        }
+        public string FormatDamage(double damage)
+        {
+            string[] sizes = { "", "K", "M", "B", "T" }; // Add more if needed
+            int order = 0;
+            while (damage >= 1000 && order < sizes.Length - 1)
+            {
+                order++;
+                damage /= 1000;
+            }
 
+            return damage.ToString("F1") + sizes[order];
+        }
+        public void DisplayTotalDamage(float slimDamageLast10Seconds, float fatBlockDamageLast10Seconds)
+        {
+            string damageMessage = "Total Damage: " + FormatDamage(TotalDamageSum) +
+                                  "\nSlim Damage Last 10 Seconds: " + FormatDamage(slimDamageLast10Seconds) +
+                                  "\nFatBlock Damage Last 10 Seconds: " + FormatDamage(fatBlockDamageLast10Seconds) +
+                                  "\nSlim Blocks Destroyed: " + SlimBlocksDestroyed +
+                                  "\nFat Blocks Destroyed: " + FatBlocksDestroyed;
+            //MyAPIGateway.Utilities.ShowNotification(damageMessage, 16, MyFontEnum.Red); // this is the notification that displays the debug message, use texthudAPI instead
+        }
         public void UpdateMatrix(MatrixD renderMatrix, MatrixD rotMatrix)
         {
             if (!doneRescale || !doneInitialCleanup) return;
             timer++;
             DelList.Clear();
             SlimDelList.Clear();
-            foreach (var fatblock in DelDict.Keys) { if (DelDict[fatblock] == timer) { fatblock.Close(); DelList.Add(fatblock); } }
+            FatDelList.Clear();
+
+            float slimDamageLast10Seconds = 0;
+            float fatBlockDamageLast10Seconds = 0;
+            float slimDamageThisFrame = 0;
+            float fatBlockDamageThisFrame = 0;
+
+
+            foreach (var fatblock in DelDict.Keys) { if (DelDict[fatblock] == timer) { fatblock.Close(); DelList.Add(fatblock); FatDelList.Add(fatblock.Position); } }
+            
             foreach (var item in DelList) DelDict.Remove(item);
 
-            foreach (var slim in SlimDelDict.Keys) { if (SlimDelDict[slim] == timer) {SlimDelList.Add(slim); /* add visuals for slimblock here*/ } }
+            foreach (var slim in SlimDelDict.Keys) { if (SlimDelDict[slim] == timer) {SlimDelList.Add(slim); /* add vis here*/ } }
 
 
             foreach (var subgrid in gridGroup)
             {
                 if (subgrid.grid == null) continue;
 
-                foreach (var item in SlimDelList) { subgrid.grid.RazeGeneratedBlocks(SlimDelList); }
+                foreach (var item in SlimDelList)
+                {
+                    slimDamageThisFrame += BlockIntegrityDict[item];
+                    BlockIntegrityDict.Remove(item);
+                    subgrid.grid.RazeGeneratedBlocks(SlimDelList);
+                    
+                }
 
+                foreach (var item in FatDelList)
+                {
+                    fatBlockDamageThisFrame += FatBlockIntegrityDict[item];
+                    FatBlockIntegrityDict.Remove(item);
+
+                }
+                FatBlocksDestroyed += DelList.Count; // Assuming DelList contains FatBlocks
+                SlimBlocksDestroyed += SlimDelList.Count;
             }
 
 
+
+            DamageEntries.Add(new DamageEntry(slimDamageThisFrame, fatBlockDamageThisFrame, timer));
+
+            List<DamageEntry> oldEntries = new List<DamageEntry>();
+            foreach (var entry in DamageEntries)
+            {
+                if (timer - entry.Timestamp <= 600)
+                {
+                    slimDamageLast10Seconds += entry.SlimDamage;
+                    fatBlockDamageLast10Seconds += entry.FatBlockDamage;
+                }
+                else
+                    oldEntries.Add(entry);
+            }
+
+            TotalDamageSum += slimDamageLast10Seconds;
+            TotalDamageSum += fatBlockDamageLast10Seconds;
+            foreach (var oldEntry in oldEntries)
+                DamageEntries.Remove(oldEntry);
+
+            // Display both damages
+            DisplayTotalDamage(slimDamageLast10Seconds, fatBlockDamageLast10Seconds);
 
 
             rotationForward = rotationForwardBase + rotationForward;
@@ -152,7 +339,6 @@ namespace klime.Visual
             foreach (var subgrid in gridGroup) { if (subgrid.grid != null) subgrid.UpdateMatrix(renderMatrix); }
         }
     }
-    //subgrid.grid.RazeGeneratedBlocks(SlimList)
 
     public class EntVis
     {
