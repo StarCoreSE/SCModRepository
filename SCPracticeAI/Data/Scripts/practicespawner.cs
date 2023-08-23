@@ -10,7 +10,7 @@ using VRage.Utils;
 using VRageMath;
 using ProtoBuf;
 
-namespace Invalid.practicespawner
+namespace Invalid.PracticeSpawner
 {
     [ProtoInclude(1000, typeof(PrefabSpawnPacket))]
     [ProtoContract]
@@ -26,10 +26,10 @@ namespace Invalid.practicespawner
     public class PrefabSpawnPacket : Packet
     {
         [ProtoMember(1)]
-        public string prefabName;
+        public string PrefabName;
 
         [ProtoMember(2)]
-        public int prefabAmount;
+        public int PrefabAmount;
 
         public PrefabSpawnPacket()
         {
@@ -38,20 +38,20 @@ namespace Invalid.practicespawner
 
         public PrefabSpawnPacket(string prefabName, int prefabAmount)
         {
-            this.prefabName = prefabName;
-            this.prefabAmount = prefabAmount;
+            PrefabName = prefabName;
+            PrefabAmount = prefabAmount;
         }
     }
 
 
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
-    public class spawnmytheprefab : MySessionComponentBase
+    public class spawntargetComponent : MySessionComponentBase
     {
         private Dictionary<string, string> prefabMap = new Dictionary<string, string>
         {
-            { "EntityCover1", "#EntityCover1" },
-            { "EntityCover3", "#EntityCover3" },
-            { "EntityCoverEveFreighter", "#EntityCoverEveFreighter" },
+            { "Test1", "#Test1" },
+
+            // Add more prefab mappings here.
         };
 
         private int defaultSpawnCount = 250; // Default number of prefabs to spawn
@@ -79,19 +79,19 @@ namespace Invalid.practicespawner
             if (prefabPacket == null) return;
 
 
-            if (prefabMap.ContainsKey(prefabPacket.prefabName))
+            if (prefabMap.ContainsKey(prefabPacket.PrefabName))
             {
-                SpawnRandomPrefabs(prefabMap[prefabPacket.prefabName], prefabPacket.prefabAmount);
+                SpawnRandomPrefabs(prefabMap[prefabPacket.PrefabName], prefabPacket.PrefabAmount);
             }
             else
             {
-                MyVisualScriptLogicProvider.SendChatMessage($"Prefab {prefabPacket.prefabName} not found", "SpawnCover");
+                MyVisualScriptLogicProvider.SendChatMessage($"Prefab {prefabPacket.PrefabName} not found", "spawntarget");
             }
         }
 
         private void OnMessageEntered(string messageText, ref bool sendToOthers)
         {
-            if (!messageText.StartsWith("/spawncover", StringComparison.OrdinalIgnoreCase)) return;
+            if (!messageText.StartsWith("/spawntarget", StringComparison.OrdinalIgnoreCase)) return;
             string[] parts = messageText.Split(' ');
 
             if (parts.Length == 1)
@@ -118,7 +118,7 @@ namespace Invalid.practicespawner
 
                 MyAPIGateway.Multiplayer.SendMessageTo(netID, data, MyAPIGateway.Multiplayer.ServerId);
 
-                MyAPIGateway.Utilities.ShowMessage("SpawnCover", $"Requesting: {prefabName} x {spawnCount}");
+                MyAPIGateway.Utilities.ShowMessage("spawntarget", $"Requesting: {prefabName} x {spawnCount}");
             }
 
             sendToOthers = false;
@@ -132,8 +132,8 @@ namespace Invalid.practicespawner
                 prefabListMessage += "\n" + prefabName;
             }
 
-            prefabListMessage += "\n\nTo spawn a prefab, type '/spawncover [prefabName] [amount]' (e.g., /spawncover EntityCover1 100). Default 250.";
-            MyAPIGateway.Utilities.ShowMessage("SpawnCover", prefabListMessage);
+            prefabListMessage += "\n\nTo spawn a prefab, type '/spawntarget [prefabName] [amount]' (e.g., /spawntarget EntityCover1 100). Default 250.";
+            MyAPIGateway.Utilities.ShowMessage("spawntarget", prefabListMessage);
         }
 
         private void SpawnRandomPrefabs(string targetPrefab, int spawnCount)
@@ -175,8 +175,6 @@ namespace Invalid.practicespawner
                 }
             }
         }
-
-
 
         private bool CheckGridDistance(Vector3D spawnPosition, double minDistance)
         {
