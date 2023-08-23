@@ -60,12 +60,14 @@ namespace Invalid.PracticeSpawner
 
         private double minSpawnRadiusFromCenter = 1000; // Minimum spawn distance from the center in meters
         private double minSpawnRadiusFromGrids = 1000;  // Minimum spawn distance from other grids in meters
-
+        private IMyFaction PirateFaction = null;
 
         public override void BeforeStart()
         {
             MyAPIGateway.Utilities.MessageEntered += OnMessageEntered; // Listen for chat messages
             MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(netID, NetworkHandler);
+
+            PirateFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag("SPRT");
         }
 
         private void NetworkHandler(ushort arg1, byte[] arg2, ulong arg3, bool arg4)
@@ -169,12 +171,21 @@ namespace Invalid.PracticeSpawner
 
                     if (!tooCloseToOtherPosition)
                     {
-                        MyVisualScriptLogicProvider.SpawnPrefab(targetPrefab, spawnPosition, direction, up);
+
+                        // don't use setneutralowner tbh half the grids are unowned
+                        // MyVisualScriptLogicProvider.SpawnPrefab(targetPrefab, spawnPosition, direction, up, spawningOptions: SpawningOptions.SetNeutralOwner);
+
+                        IMyPrefabManager prefabManager = MyAPIGateway.PrefabManager;
+
+                        List<IMyCubeGrid> resultList = new List<IMyCubeGrid>();
+                        prefabManager.SpawnPrefab(resultList, targetPrefab, spawnPosition, direction, up, ownerId: PirateFaction.FounderId, spawningOptions: SpawningOptions.None);
+
                         spawnPositions.Add(spawnPosition);
                     }
                 }
             }
         }
+
 
         private bool CheckGridDistance(Vector3D spawnPosition, double minDistance)
         {
