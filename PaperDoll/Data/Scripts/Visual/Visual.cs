@@ -25,6 +25,7 @@ using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
 using VRage.Render.Scene;
 using System.Drawing;
 using Color = VRageMath.Color;
+using System.Linq.Expressions;
 
 namespace klime.Visual
 {
@@ -71,11 +72,11 @@ namespace klime.Visual
             Vector3D backgroundvector =
                 cameraTranslation +
                 (cameraForward * 1f) 
-              + (cameraRight * 0.75f) 
-              + (cameraDown * 0.35f); ;
+              + (cameraRight * 0.85f) 
+              + (cameraDown * 0.475f); ;
 
-            Vector4 color = (Color.Lime * 0.05f).ToVector4();
-            MyTransparentGeometry.AddBillboardOriented(Material, color, backgroundvector, leftCameraVector, upCameraVector, 0.25f, 0.25f, null);
+            Vector4 color = (Color.Lime * 0.15f).ToVector4();
+            MyTransparentGeometry.AddBillboardOriented(Material, color, backgroundvector, leftCameraVector, upCameraVector, 0.4f, 0.4f, null);
 
             //MyTransparentGeometry.AddLineBillboard(MyStringId.GetOrCompute("WeaponLaser"), Color.White.ToVector4(), backgroundvector + leftCameraVector, cameraRight, 0.5f, 0.5f, BlendTypeEnum.SDR);
             //MySimpleObjectDraw.DrawAttachedTransparentBox(ref gridMatrix, ref gridBox, ref BillboardRED, uint.MaxValue ,ref cameramatrixD, MySimpleObjectRasterizer.SolidAndWireframe, wiredivratio, 0.04f, MyStringId.GetOrCompute("Square"), MyStringId.GetOrCompute("WeaponLaser"), false, MyBillboard.BlendTypeEnum.SDR);
@@ -86,7 +87,7 @@ namespace klime.Visual
         public void DoRescale()
         {
             var volume = grid.PositionComp.WorldVolume;
-            scale = 0.039 / volume.Radius * (grid.GridSizeEnum == MyCubeSize.Small ? 0.8 : 1);
+            scale = 0.042 / volume.Radius * (grid.GridSizeEnum == MyCubeSize.Small ? 0.8 : 1);
             relTrans = Vector3D.TransformNormal(grid.WorldMatrix.Translation - grid.PositionComp.WorldAABB.Center, MatrixD.Transpose(grid.WorldMatrix)) * scale;
             grid.PositionComp.Scale = (float)scale;
         }
@@ -115,7 +116,7 @@ namespace klime.Visual
             //iGrid.Render.Transparency = 0.05f;
             foreach (var block in allBlocks)
             {
-                block.Dithering = 2.7f;
+                block.Dithering = 2.45f;
                 //block.CubeGrid
 
              //   gridMatrix = block.CubeGrid.WorldMatrix;
@@ -175,10 +176,10 @@ namespace klime.Visual
 
                 block.Enabled = false;
                 block.Render.ShadowBoxLod = false;
-                block.SlimBlock.Dithering = 1.95f; // this works!
-                block.Visible = false;
+                block.SlimBlock.Dithering = 2.5f; // this works!
+                block.Visible = true;
                 block.SlimBlock.UpdateVisual();
-                block.Render.UpdateTransparency();
+              // block.Render.UpdateTransparency();
 
             
             }
@@ -229,7 +230,7 @@ namespace klime.Visual
         public List<Vector3I> FatDelList = new List<Vector3I>();
         public Dictionary<IMyCubeBlock, int> DelDict = new Dictionary<IMyCubeBlock, int>();
         public Dictionary<Vector3I, int> SlimDelDict = new Dictionary<Vector3I, int>();
-        public MyStringHash stringHash = MyStringHash.GetOrCompute("Hazard_Armor");
+        public MyStringHash stringHash = MyStringHash.GetOrCompute("Neon_Colorable_Lights");
         public Dictionary<Vector3I, float> BlockIntegrityDict = new Dictionary<Vector3I, float>();
         public Dictionary<Vector3I, float> FatBlockIntegrityDict = new Dictionary<Vector3I, float>();
         public List<DamageEntry> DamageEntries = new List<DamageEntry>();
@@ -256,14 +257,14 @@ namespace klime.Visual
                 //MyVisualScriptLogicProvider.SetAlphaHighlight(slim.CubeGrid.Name, true, 2, 1, Color.Red, -1, null, 0.9f);
                 if (slim.FatBlock == null && (!SlimDelDict.ContainsKey(slim.Position))) 
                 {
-                    slim.Dithering = 1.1f; // this works!
+                    slim.Dithering = 1.5f; // this works!
                     //slim.CubeGrid.ColorBlocks(slim.Position, slim.Position, new Vector3(0, 0, 0));
                     string redHex = "#FF0000";
-                    Vector3 redHSVOffset = MyColorPickerConstants.HSVToHSVOffset(ColorExtensions.ColorToHSV(ColorExtensions.HexToColor(redHex)));
+                    Vector3 redHSVOffset = MyColorPickerConstants.HSVToHSVOffset(ColorExtensions.ColorToHSVDX11(ColorExtensions.HexToColor(redHex)));
                     redHSVOffset = new Vector3((float)Math.Round(redHSVOffset.X, 2), (float)Math.Round(redHSVOffset.Y, 2), (float)Math.Round(redHSVOffset.Z, 2));
+                    subgrid.grid.Render.MetalnessColorable = true;
                     subgrid.grid.ChangeColorAndSkin(subgrid.grid.GetCubeBlock(slim.Position), redHSVOffset, stringHash);
-                    
-                 
+                    subgrid.grid.Render.MetalnessColorable = true;
                     slim.UpdateVisual();
                     int time = timer + 200; 
                     SlimDelDict.Add(slim.Position, time);
@@ -273,10 +274,39 @@ namespace klime.Visual
                 {
                     
                     slim.Dithering = 2.5f;
-                    MyVisualScriptLogicProvider.SetHighlightLocal(slim.FatBlock.Name, 10, 10, Color.Red);
+                    
                     int time = slim.FatBlock.Mass > 500 ? timer + 200 : timer + 10;
                     if (!DelDict.ContainsKey(slim.FatBlock)) DelDict.Add(slim.FatBlock, time);
                     FatBlockIntegrityDict[slim.Position] = integrity;
+
+                    var color = ColorExtensions.HexToColor("#8B0000");
+                    string bruh = slim.FatBlock.BlockDefinition.TypeId.ToString();
+                    switch (bruh) { 
+                    default:
+                        break;
+                            case "MyObjectBuilder_Gyro":
+                            color = Color.SteelBlue;
+                            break;
+                            case "MyObjectBuilder_ConveyorSorter":
+                            color = Color.Red;
+                            break;
+                        case "MyObjectBuilder_Thrust":
+                            color = Color.CadetBlue;
+                            break;
+                            case "MyObjectBuilder_BatteryBlock":
+                            case "MyObjectBuilder_Reactor":
+                            case "MyObjectBuilder_SolarPanel":
+                            case "MyObjectBuilder_WindTurbine":
+                            color = Color.Green;
+                            break;
+                            case "MyObjectBuilder_Cockpit":
+                            color = Color.Purple;
+                            break;
+
+                    };
+
+
+                        MyVisualScriptLogicProvider.SetHighlightLocal(slim.FatBlock.Name, 3, 1, color);
                 }
             }
         }
@@ -389,7 +419,9 @@ namespace klime.Visual
             renderMatrix.Translation = origTranslation;
             foreach (var subgrid in gridGroup) { if (subgrid.grid != null) subgrid.UpdateMatrix(renderMatrix); }
 
-            // I don't know why this works but it does. Don't touch it.
+            // Please don't attempt to read into the above code
+            // its best for the both of us if you don't
+            // Yes, muzzled, I'm speaking to you from the past
         }
     }
 
@@ -689,7 +721,7 @@ namespace klime.Visual
                     MyCubeGrid cGrid = ent as MyCubeGrid;
                     if (cGrid != null && cGrid.Physics != null)
                     {
-                        allVis.Add(new EntVis(cGrid, 0.10, 0.05, 0));
+                        allVis.Add(new EntVis(cGrid, 0.11, 0.05, 0));
                         viewState = ViewState.Locked;
                     }
                     else viewState = ViewState.GoToIdleWC;
