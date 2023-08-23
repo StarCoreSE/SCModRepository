@@ -49,14 +49,14 @@ namespace Invalid.PracticeSpawner
     {
         private Dictionary<string, string> prefabMap = new Dictionary<string, string>
         {
-            { "Test1", "#Test1" },
+            { "LamiaAI", "LamiaAI" },
 
             // Add more prefab mappings here.
         };
 
-        private int defaultSpawnCount = 250; // Default number of prefabs to spawn
+        private int defaultSpawnCount = 1; // Default number of prefabs to spawn
 
-        private ushort netID = 29394;
+        private ushort netID = 29395;
 
         private double minSpawnRadiusFromCenter = 1000; // Minimum spawn distance from the center in meters
         private double minSpawnRadiusFromGrids = 1000;  // Minimum spawn distance from other grids in meters
@@ -132,7 +132,7 @@ namespace Invalid.PracticeSpawner
                 prefabListMessage += "\n" + prefabName;
             }
 
-            prefabListMessage += "\n\nTo spawn a prefab, type '/spawntarget [prefabName] [amount]' (e.g., /spawntarget EntityCover1 100). Default 250.";
+            prefabListMessage += "\n\nTo spawn a prefab, type '/spawntarget [prefabName] [amount]' (e.g., /spawntarget LamiaAI 1). Default 1.";
             MyAPIGateway.Utilities.ShowMessage("spawntarget", prefabListMessage);
         }
 
