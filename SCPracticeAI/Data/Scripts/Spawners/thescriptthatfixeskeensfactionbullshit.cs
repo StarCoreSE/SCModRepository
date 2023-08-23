@@ -53,9 +53,9 @@ namespace Thesccriptthatfixeskeensfactionbullshit_Relations
         {
             loadNeut();
             saveNeut();
+            loadAlly();
             saveAlly();
             loadHost();
-            loadAlly();
             saveHost();
             var factionList = MyAPIGateway.Session.Factions.Factions;
             foreach (var faction in factionList)
