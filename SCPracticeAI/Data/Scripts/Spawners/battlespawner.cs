@@ -10,7 +10,7 @@ using VRage.Utils;
 using VRageMath;
 using ProtoBuf;
 
-namespace Invalid.BattleSpawner
+namespace Invalid.spawnbattle
 {
     [ProtoInclude(1000, typeof(PrefabSpawnPacket))]
     [ProtoContract]
@@ -31,21 +31,27 @@ namespace Invalid.BattleSpawner
         [ProtoMember(2)]
         public int PrefabAmount;
 
+        [ProtoMember(3)]  // New member for faction name
+        public string FactionName;
+
+        // Add a parameterless constructor required by ProtoBuf
         public PrefabSpawnPacket()
         {
 
         }
 
-        public PrefabSpawnPacket(string prefabName, int prefabAmount)
+        public PrefabSpawnPacket(string prefabName, int prefabAmount, string factionName)
         {
             PrefabName = prefabName;
             PrefabAmount = prefabAmount;
+            FactionName = factionName; // Set the faction name
         }
     }
 
 
+
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
-    public class battlespawnerComponent : MySessionComponentBase
+    public class spawnbattleComponent : MySessionComponentBase
     {
         private Dictionary<string, string> prefabMap = new Dictionary<string, string>
         {
@@ -60,14 +66,16 @@ namespace Invalid.BattleSpawner
 
         private double minSpawnRadiusFromCenter = 1000; // Minimum spawn distance from the center in meters
         private double minSpawnRadiusFromGrids = 1000;  // Minimum spawn distance from other grids in meters
-        private IMyFaction PirateFaction = null;
+        private IMyFaction RedFaction = null;
+        private IMyFaction BluFaction = null;
 
         public override void BeforeStart()
         {
             MyAPIGateway.Utilities.MessageEntered += OnMessageEntered; // Listen for chat messages
             MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(netID, NetworkHandler);
 
-            PirateFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag("SPRT");
+            RedFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag("RED");
+            BluFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag("BLU");
         }
 
         private void NetworkHandler(ushort arg1, byte[] arg2, ulong arg3, bool arg4)
@@ -80,20 +88,23 @@ namespace Invalid.BattleSpawner
             PrefabSpawnPacket prefabPacket = packet as PrefabSpawnPacket;
             if (prefabPacket == null) return;
 
-
             if (prefabMap.ContainsKey(prefabPacket.PrefabName))
             {
-                SpawnRandomPrefabs(prefabMap[prefabPacket.PrefabName], prefabPacket.PrefabAmount);
+                // Randomly choose the faction
+                string factionName = MyUtils.GetRandomInt(0, 2) == 0 ? "RED" : "BLU";
+
+                SpawnRandomPrefabs(prefabMap[prefabPacket.PrefabName], prefabPacket.PrefabAmount, factionName);
             }
             else
             {
-                MyVisualScriptLogicProvider.SendChatMessage($"Prefab {prefabPacket.PrefabName} not found", "battlespawner");
+                MyVisualScriptLogicProvider.SendChatMessage($"Prefab {prefabPacket.PrefabName} not found", "spawnbattle");
             }
         }
 
+
         private void OnMessageEntered(string messageText, ref bool sendToOthers)
         {
-            if (!messageText.StartsWith("/battlespawner", StringComparison.OrdinalIgnoreCase)) return;
+            if (!messageText.StartsWith("/spawnbattle", StringComparison.OrdinalIgnoreCase)) return;
             string[] parts = messageText.Split(' ');
 
             if (parts.Length == 1)
@@ -115,16 +126,22 @@ namespace Invalid.BattleSpawner
                     }
                 }
 
-                PrefabSpawnPacket prefabSpawnPacket = new PrefabSpawnPacket(prefabName, spawnCount);
-                byte[] data = MyAPIGateway.Utilities.SerializeToBinary(prefabSpawnPacket);
+                // Randomly choose the faction
+                string factionName = MyUtils.GetRandomInt(0, 2) == 0 ? "RED" : "BLU";
 
+                // Create PrefabSpawnPacket instance with the factionName parameter
+                PrefabSpawnPacket prefabSpawnPacket = new PrefabSpawnPacket(prefabName, spawnCount, factionName);
+
+                // Serialize and send the packet
+                byte[] data = MyAPIGateway.Utilities.SerializeToBinary(prefabSpawnPacket);
                 MyAPIGateway.Multiplayer.SendMessageTo(netID, data, MyAPIGateway.Multiplayer.ServerId);
 
-                MyAPIGateway.Utilities.ShowMessage("battlespawner", $"Requesting: {prefabName} x {spawnCount}");
+                MyAPIGateway.Utilities.ShowMessage("spawnbattle", $"Requesting: {prefabName} x {spawnCount}");
             }
 
             sendToOthers = false;
         }
+
 
         private void ShowPrefabList()
         {
@@ -134,26 +151,34 @@ namespace Invalid.BattleSpawner
                 prefabListMessage += "\n" + prefabName;
             }
 
-            prefabListMessage += "\n\nTo spawn a prefab, type '/battlespawner [prefabName] [amount]' (e.g., /battlespawner LamiaAI 1). Default 1.";
-            MyAPIGateway.Utilities.ShowMessage("battlespawner", prefabListMessage);
+            prefabListMessage += "\n\nTo spawn a prefab, type '/spawnbattle [prefabName] [amount]' (e.g., /spawnbattle LamiaAI 1). Default 1.";
+            MyAPIGateway.Utilities.ShowMessage("spawnbattle", prefabListMessage);
         }
 
-        private void SpawnRandomPrefabs(string targetPrefab, int spawnCount)
+        private void SpawnRandomPrefabs(string targetPrefab, int spawnCount, string factionName)
         {
             double maxSpawnRadius = 10000; // Maximum spawn radius in meters
 
             List<Vector3D> spawnPositions = new List<Vector3D>();
 
+            // Determine the factions to use
+            IMyFaction redFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag("RED");
+            IMyFaction bluFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag("BLU");
+
+            IMyFaction currentFaction = factionName == "RED" ? redFaction : bluFaction;
+
             for (int i = 0; i < spawnCount; i++)
             {
                 Vector3D origin = new Vector3D(0, 0, 0);
-                Vector3D tangent = Vector3D.Forward;
-                Vector3D bitangent = Vector3D.Right;
 
+                // Calculate a random spawn position
                 Vector3D spawnPosition = origin + (Vector3D.Normalize(MyUtils.GetRandomVector3D()) * MyUtils.GetRandomDouble(minSpawnRadiusFromCenter, maxSpawnRadius));
-                Vector3D direction = Vector3D.Normalize(origin - spawnPosition);
-                Vector3D up = Vector3D.Normalize(Vector3D.Cross(direction, Vector3D.Up)); // Calculate an appropriate up vector
 
+                // Calculate orientation vectors
+                Vector3D direction = Vector3D.Normalize(origin - spawnPosition);
+                Vector3D up = Vector3D.Normalize(Vector3D.Cross(direction, Vector3D.Up));
+
+                // Check if the spawn position is valid
                 bool isValidPosition = CheckAsteroidDistance(spawnPosition, minSpawnRadiusFromGrids) && CheckGridDistance(spawnPosition, minSpawnRadiusFromGrids);
 
                 if (isValidPosition)
@@ -171,20 +196,30 @@ namespace Invalid.BattleSpawner
 
                     if (!tooCloseToOtherPosition)
                     {
-
-                        // don't use setneutralowner tbh half the grids are unowned
-                        // MyVisualScriptLogicProvider.SpawnPrefab(targetPrefab, spawnPosition, direction, up, spawningOptions: SpawningOptions.SetNeutralOwner);
-
+                        // Spawn the prefab
                         IMyPrefabManager prefabManager = MyAPIGateway.PrefabManager;
-
                         List<IMyCubeGrid> resultList = new List<IMyCubeGrid>();
-                        prefabManager.SpawnPrefab(resultList, targetPrefab, spawnPosition, direction, up, ownerId: PirateFaction.FounderId, spawningOptions: SpawningOptions.None);
 
+                        // Spawn the prefab with the current faction as the owner
+                        prefabManager.SpawnPrefab(resultList, targetPrefab, spawnPosition, direction, up, ownerId: currentFaction.FounderId, spawningOptions: SpawningOptions.None);
+
+                        // Change ownership of the spawned grids
+                        foreach (IMyCubeGrid spawnedGrid in resultList)
+                        {
+                            spawnedGrid.ChangeGridOwnership(currentFaction.FounderId, MyOwnershipShareModeEnum.All);
+                        }
+
+                        // Add the spawn position to the list
                         spawnPositions.Add(spawnPosition);
+
+                        // Switch to the other faction for the next spawn
+                        currentFaction = currentFaction == redFaction ? bluFaction : redFaction;
                     }
                 }
             }
         }
+
+
 
 
         private bool CheckGridDistance(Vector3D spawnPosition, double minDistance)
