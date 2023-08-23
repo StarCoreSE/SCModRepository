@@ -42,11 +42,11 @@ namespace klime.Visual
         public MatrixD gridMatrix;
         private BoundingBoxD aabb;
         public Color BillboardRED;
-        public Vector4 color;
+        public Vector4 Billboardcolor;
        
         public bool runonce = false;
-        private MyStringId Material = MyStringId.GetOrCompute("Square");
-        public MyStringHash MaterialHash = MyStringHash.GetOrCompute("SciFi");
+        private MyStringId Material = MyStringId.TryGet("paperdollBG");
+        //public MyStringHash MaterialHash = MyStringHash.GetOrCompute("SciFi");
 
         public GridR(MyCubeGrid grid, EntRender entRender = null)
         {
@@ -59,7 +59,7 @@ namespace klime.Visual
             renderMatrix.Translation += Vector3D.TransformNormal(relTrans, renderMatrix);
             grid.WorldMatrix = renderMatrix;
             gridMatrix = renderMatrix;
-            gridBox = grid.PositionComp.LocalAABB;
+            //gridBox = grid.PositionComp.LocalAABB;
 
             // renderMatrix.Translation += renderMatrix.Forward;
             MatrixD cameramatrixD = MyAPIGateway.Session.Camera.WorldMatrix;
@@ -75,8 +75,10 @@ namespace klime.Visual
               + (cameraRight * 0.85f) 
               + (cameraDown * 0.475f); ;
 
-            Vector4 color = (Color.Lime * 0.15f).ToVector4();
-            MyTransparentGeometry.AddBillboardOriented(Material, color, backgroundvector, leftCameraVector, upCameraVector, 0.4f, 0.4f, null);
+
+            Billboardcolor = Color.Lime.ToVector4();
+            Billboardcolor.W *= 0.5f;
+            MyTransparentGeometry.AddBillboardOriented(Material, Billboardcolor, backgroundvector, leftCameraVector, upCameraVector, 0.4f, 0.4f, null);
 
             //MyTransparentGeometry.AddLineBillboard(MyStringId.GetOrCompute("WeaponLaser"), Color.White.ToVector4(), backgroundvector + leftCameraVector, cameraRight, 0.5f, 0.5f, BlendTypeEnum.SDR);
             //MySimpleObjectDraw.DrawAttachedTransparentBox(ref gridMatrix, ref gridBox, ref BillboardRED, uint.MaxValue ,ref cameramatrixD, MySimpleObjectRasterizer.SolidAndWireframe, wiredivratio, 0.04f, MyStringId.GetOrCompute("Square"), MyStringId.GetOrCompute("WeaponLaser"), false, MyBillboard.BlendTypeEnum.SDR);
@@ -230,7 +232,7 @@ namespace klime.Visual
         public List<Vector3I> FatDelList = new List<Vector3I>();
         public Dictionary<IMyCubeBlock, int> DelDict = new Dictionary<IMyCubeBlock, int>();
         public Dictionary<Vector3I, int> SlimDelDict = new Dictionary<Vector3I, int>();
-        public MyStringHash stringHash = MyStringHash.GetOrCompute("Neon_Colorable_Lights");
+        public MyStringHash stringHash;
         public Dictionary<Vector3I, float> BlockIntegrityDict = new Dictionary<Vector3I, float>();
         public Dictionary<Vector3I, float> FatBlockIntegrityDict = new Dictionary<Vector3I, float>();
         public List<DamageEntry> DamageEntries = new List<DamageEntry>();
@@ -257,30 +259,47 @@ namespace klime.Visual
                 //MyVisualScriptLogicProvider.SetAlphaHighlight(slim.CubeGrid.Name, true, 2, 1, Color.Red, -1, null, 0.9f);
                 if (slim.FatBlock == null && (!SlimDelDict.ContainsKey(slim.Position))) 
                 {
-                    slim.Dithering = 1.5f; // this works!
+                    slim.Dithering = 1.5f;
+                    var blockKind = 0; //defaults to 0
+                    if (slim.Mass <= 500) { blockKind = 1; } else { blockKind = 2; }
+                    string colorHex = "#FF0000";
+                    switch (blockKind) 
+                    {
+                        case 1:
+                            //Lighter than 500kg
+                            stringHash = MyStringHash.GetOrCompute("Neon_Colorable_Lights");
+                            colorHex = "#FF0000";
+                            break;
+                        case 2:
+                            //Heavier than 500kg
+                            stringHash = MyStringHash.GetOrCompute("Neon_Colorable_Lights");
+                            colorHex = "#FFA500";
+                            break;
+                    }
+
+                    // this works!
                     //slim.CubeGrid.ColorBlocks(slim.Position, slim.Position, new Vector3(0, 0, 0));
-                    string redHex = "#FF0000";
-                    Vector3 redHSVOffset = MyColorPickerConstants.HSVToHSVOffset(ColorExtensions.ColorToHSVDX11(ColorExtensions.HexToColor(redHex)));
-                    redHSVOffset = new Vector3((float)Math.Round(redHSVOffset.X, 2), (float)Math.Round(redHSVOffset.Y, 2), (float)Math.Round(redHSVOffset.Z, 2));
+                   
+                    Vector3 colorHSVOffset = MyColorPickerConstants.HSVToHSVOffset(ColorExtensions.ColorToHSVDX11(ColorExtensions.HexToColor(colorHex)));
+                    colorHSVOffset = new Vector3((float)Math.Round(colorHSVOffset.X, 2), (float)Math.Round(colorHSVOffset.Y, 2), (float)Math.Round(colorHSVOffset.Z, 2));
                     subgrid.grid.Render.MetalnessColorable = true;
-                    subgrid.grid.ChangeColorAndSkin(subgrid.grid.GetCubeBlock(slim.Position), redHSVOffset, stringHash);
+                    subgrid.grid.ChangeColorAndSkin(subgrid.grid.GetCubeBlock(slim.Position), colorHSVOffset, stringHash);
                     subgrid.grid.Render.MetalnessColorable = true;
                     slim.UpdateVisual();
-                    int time = timer + 200; 
+                    int time = timer + 150; 
                     SlimDelDict.Add(slim.Position, time);
                     BlockIntegrityDict[slim.Position] = integrity;
                 }
                 else
                 {
                     
-                    slim.Dithering = 2.5f;
-                    
-                    int time = slim.FatBlock.Mass > 500 ? timer + 200 : timer + 10;
-                    if (!DelDict.ContainsKey(slim.FatBlock)) DelDict.Add(slim.FatBlock, time);
-                    FatBlockIntegrityDict[slim.Position] = integrity;
+                    slim.Dithering = 1.5f;
+                    var customtimer = timer + 200;
+
 
                     var color = ColorExtensions.HexToColor("#8B0000");
                     string bruh = slim.FatBlock.BlockDefinition.TypeId.ToString();
+                    //add a fucking color legend on sceen you autist
                     switch (bruh) { 
                     default:
                         break;
@@ -289,24 +308,30 @@ namespace klime.Visual
                             break;
                             case "MyObjectBuilder_ConveyorSorter":
                             color = Color.Red;
+                            customtimer = timer + 400;
                             break;
                         case "MyObjectBuilder_Thrust":
+                        case "MyObjectBuilder_GasTankDefinition":
                             color = Color.CadetBlue;
                             break;
-                            case "MyObjectBuilder_BatteryBlock":
-                            case "MyObjectBuilder_Reactor":
-                            case "MyObjectBuilder_SolarPanel":
-                            case "MyObjectBuilder_WindTurbine":
+                        case "MyObjectBuilder_BatteryBlock":
+                        case "MyObjectBuilder_Reactor":
+                        case "MyObjectBuilder_SolarPanel":
+                        case "MyObjectBuilder_WindTurbine":
                             color = Color.Green;
                             break;
-                            case "MyObjectBuilder_Cockpit":
+                        case "MyObjectBuilder_Cockpit":
                             color = Color.Purple;
+                            customtimer = timer + 400;
                             break;
 
                     };
 
+                    int time = slim.FatBlock.Mass > 500 ? customtimer : timer + 10;
+                    if (!DelDict.ContainsKey(slim.FatBlock)) DelDict.Add(slim.FatBlock, time);
+                    FatBlockIntegrityDict[slim.Position] = integrity;
 
-                        MyVisualScriptLogicProvider.SetHighlightLocal(slim.FatBlock.Name, 3, 1, color);
+                    MyVisualScriptLogicProvider.SetHighlightLocal(slim.FatBlock.Name, 3, 1, color);
                 }
             }
         }
