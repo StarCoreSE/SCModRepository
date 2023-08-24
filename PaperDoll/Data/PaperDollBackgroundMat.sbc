@@ -11,7 +11,7 @@
             <CanBeAffectedByOtherLights>false</CanBeAffectedByOtherLights>
             <IgnoreDepth>false</IgnoreDepth>
             <SoftParticleDistanceScale>1</SoftParticleDistanceScale>
-            <Texture>Textures\ContainerBorderInverted.dds</Texture>
+            <Texture>Textures\Particles\ContainerBorderInverted.dds</Texture>
             <UseAtlas>false</UseAtlas>
             <UVOffset>
                 <X>0</X>
