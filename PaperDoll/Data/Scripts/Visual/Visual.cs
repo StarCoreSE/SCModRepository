@@ -73,12 +73,10 @@ namespace klime.Visual
                 cameraTranslation +
                 (cameraForward * 1f) 
               + (cameraRight * 0.85f) 
-              + (cameraDown * 0.475f); ;
+              + (cameraDown * 0.35f); ;
 
-
-            Billboardcolor = Color.Lime.ToVector4();
-            Billboardcolor.W *= 0.5f;
-            MyTransparentGeometry.AddBillboardOriented(Material, Billboardcolor, backgroundvector, leftCameraVector, upCameraVector, 0.4f, 0.4f, null);
+            Billboardcolor = (Color.Lime * 0.55f).ToVector4();    
+            MyTransparentGeometry.AddBillboardOriented(Material, Billboardcolor, backgroundvector, leftCameraVector, upCameraVector, 0.39f, 0.35f, null);
 
             //MyTransparentGeometry.AddLineBillboard(MyStringId.GetOrCompute("WeaponLaser"), Color.White.ToVector4(), backgroundvector + leftCameraVector, cameraRight, 0.5f, 0.5f, BlendTypeEnum.SDR);
             //MySimpleObjectDraw.DrawAttachedTransparentBox(ref gridMatrix, ref gridBox, ref BillboardRED, uint.MaxValue ,ref cameramatrixD, MySimpleObjectRasterizer.SolidAndWireframe, wiredivratio, 0.04f, MyStringId.GetOrCompute("Square"), MyStringId.GetOrCompute("WeaponLaser"), false, MyBillboard.BlendTypeEnum.SDR);
@@ -261,7 +259,7 @@ namespace klime.Visual
                 {
                     slim.Dithering = 1.5f;
                     var blockKind = 0; //defaults to 0
-                    if (slim.Mass <= 500) { blockKind = 1; } else { blockKind = 2; }
+                    if (slim.Mass >= 500) { blockKind = 1; } else { blockKind = 2; }
                     string colorHex = "#FF0000";
                     switch (blockKind) 
                     {
