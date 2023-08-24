@@ -75,7 +75,7 @@ namespace klime.Visual
               + (cameraRight * 0.85f) 
               + (cameraDown * 0.35f); ;
 
-            Billboardcolor = (Color.Lime * 0.55f).ToVector4();    
+            Billboardcolor = (Color.Lime * 0.75f).ToVector4();    
             MyTransparentGeometry.AddBillboardOriented(Material, Billboardcolor, backgroundvector, leftCameraVector, upCameraVector, 0.39f, 0.35f, null);
 
             //MyTransparentGeometry.AddLineBillboard(MyStringId.GetOrCompute("WeaponLaser"), Color.White.ToVector4(), backgroundvector + leftCameraVector, cameraRight, 0.5f, 0.5f, BlendTypeEnum.SDR);
@@ -257,19 +257,19 @@ namespace klime.Visual
                 //MyVisualScriptLogicProvider.SetAlphaHighlight(slim.CubeGrid.Name, true, 2, 1, Color.Red, -1, null, 0.9f);
                 if (slim.FatBlock == null && (!SlimDelDict.ContainsKey(slim.Position))) 
                 {
-                    slim.Dithering = 1.5f;
+                    slim.Dithering = 1.25f;
                     var blockKind = 0; //defaults to 0
                     if (slim.Mass >= 500) { blockKind = 1; } else { blockKind = 2; }
                     string colorHex = "#FF0000";
                     switch (blockKind) 
                     {
                         case 1:
-                            //Lighter than 500kg
+                            //Heavier than 500kg
                             stringHash = MyStringHash.GetOrCompute("Neon_Colorable_Lights");
                             colorHex = "#FF0000";
                             break;
                         case 2:
-                            //Heavier than 500kg
+                            //Lighter than 500kg
                             stringHash = MyStringHash.GetOrCompute("Neon_Colorable_Lights");
                             colorHex = "#FFA500";
                             break;
