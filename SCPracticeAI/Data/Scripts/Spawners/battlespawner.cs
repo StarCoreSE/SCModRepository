@@ -56,6 +56,10 @@ namespace Invalid.spawnbattle
         private Dictionary<string, string> prefabMap = new Dictionary<string, string>
         {
             { "LamiaAI", "LamiaAI" },
+            { "ValiAI", "ValiAI" },
+            { "RegAI", "RegAI" },
+            { "TessAI", "TessAI" },
+            { "ZenithAI", "ZenithAI" },
 
             // Add more prefab mappings here.
         };
@@ -93,7 +97,7 @@ namespace Invalid.spawnbattle
                 // Randomly choose the faction
                 string factionName = MyUtils.GetRandomInt(0, 2) == 0 ? "RED" : "BLU";
 
-                SpawnRandomPrefabs(prefabMap[prefabPacket.PrefabName], prefabPacket.PrefabAmount, factionName);
+                SpawnRandomPrefabs(new List<string>(prefabMap.Keys), prefabPacket.PrefabAmount, factionName);
             }
             else
             {
@@ -112,31 +116,47 @@ namespace Invalid.spawnbattle
                 // Show list of available prefabs and usage instructions
                 ShowPrefabList();
             }
-            else if (parts.Length >= 2)
+            if (parts.Length >= 2)
             {
-                string prefabName = parts[1];
-                int spawnCount = defaultSpawnCount;
-
-                if (parts.Length >= 3)
+                int spawnCount;
+                if (int.TryParse(parts[1], out spawnCount))
                 {
-                    int parsedCount;
-                    if (int.TryParse(parts[2], out parsedCount))
+                    if (spawnCount > 0)
                     {
-                        spawnCount = parsedCount;
+                        // Randomly choose the starting faction
+                        string factionName = MyUtils.GetRandomInt(0, 2) == 0 ? "RED" : "BLU";
+
+                        // Select a random prefab from the prefabMap
+                        List<string> prefabNames = new List<string>(prefabMap.Keys);
+
+                        // Spawn prefabs alternately using the selected faction
+                        for (int i = 0; i < spawnCount; i++)
+                        {
+                            string randomPrefabName = prefabNames[MyUtils.GetRandomInt(0, prefabNames.Count)];
+
+                            // Create PrefabSpawnPacket instance with the factionName parameter
+                            PrefabSpawnPacket prefabSpawnPacket = new PrefabSpawnPacket(randomPrefabName, 1, factionName);
+
+                            // Serialize and send the packet
+                            byte[] data = MyAPIGateway.Utilities.SerializeToBinary(prefabSpawnPacket);
+                            MyAPIGateway.Multiplayer.SendMessageTo(netID, data, MyAPIGateway.Multiplayer.ServerId);
+
+                            // Alternate the faction for the next spawn
+                            factionName = factionName == "RED" ? "BLU" : "RED";
+                        }
+
+                        // Show a confirmation message
+                        MyAPIGateway.Utilities.ShowMessage("spawnbattle", $"Spawned: {spawnCount} prefabs alternately.");
+                    }
+                    else
+                    {
+                        MyAPIGateway.Utilities.ShowMessage("spawnbattle", "Invalid spawn count. Please specify a positive number.");
                     }
                 }
-
-                // Randomly choose the faction
-                string factionName = MyUtils.GetRandomInt(0, 2) == 0 ? "RED" : "BLU";
-
-                // Create PrefabSpawnPacket instance with the factionName parameter
-                PrefabSpawnPacket prefabSpawnPacket = new PrefabSpawnPacket(prefabName, spawnCount, factionName);
-
-                // Serialize and send the packet
-                byte[] data = MyAPIGateway.Utilities.SerializeToBinary(prefabSpawnPacket);
-                MyAPIGateway.Multiplayer.SendMessageTo(netID, data, MyAPIGateway.Multiplayer.ServerId);
-
-                MyAPIGateway.Utilities.ShowMessage("spawnbattle", $"Requesting: {prefabName} x {spawnCount}");
+                else
+                {
+                    MyAPIGateway.Utilities.ShowMessage("spawnbattle", "Invalid spawn count. Please specify a valid number.");
+                }
             }
 
             sendToOthers = false;
@@ -151,15 +171,25 @@ namespace Invalid.spawnbattle
                 prefabListMessage += "\n" + prefabName;
             }
 
-            prefabListMessage += "\n\nTo spawn a prefab, type '/spawnbattle [prefabName] [amount]' (e.g., /spawnbattle LamiaAI 1). Default 1.";
+            if (prefabMap.Count > 0)
+            {
+                prefabListMessage += "\n\nTo start a battle, type '/spawnbattle [amount]' (e.g., /spawnbattle  10. Default 10.";
+            }
+            else
+            {
+                prefabListMessage += "\nNo prefabs available.";
+            }
+
             MyAPIGateway.Utilities.ShowMessage("spawnbattle", prefabListMessage);
         }
 
-        private void SpawnRandomPrefabs(string targetPrefab, int spawnCount, string factionName)
+
+        private void SpawnRandomPrefabs(List<string> prefabNames, int spawnCount, string factionName)
         {
             double maxSpawnRadius = 10000; // Maximum spawn radius in meters
 
             List<Vector3D> spawnPositions = new List<Vector3D>();
+            Dictionary<string, int> spawnedCounts = new Dictionary<string, int>(); // To store the counts of each spawned prefab
 
             // Determine the factions to use
             IMyFaction redFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag("RED");
@@ -196,12 +226,15 @@ namespace Invalid.spawnbattle
 
                     if (!tooCloseToOtherPosition)
                     {
+                        // Randomly select a prefab name from the provided list
+                        string randomPrefabName = prefabNames[MyUtils.GetRandomInt(0, prefabNames.Count)];
+
                         // Spawn the prefab
                         IMyPrefabManager prefabManager = MyAPIGateway.PrefabManager;
                         List<IMyCubeGrid> resultList = new List<IMyCubeGrid>();
 
                         // Spawn the prefab with the current faction as the owner
-                        prefabManager.SpawnPrefab(resultList, targetPrefab, spawnPosition, direction, up, ownerId: currentFaction.FounderId, spawningOptions: SpawningOptions.None);
+                        prefabManager.SpawnPrefab(resultList, randomPrefabName, spawnPosition, direction, up, ownerId: currentFaction.FounderId, spawningOptions: SpawningOptions.None);
 
                         // Change ownership of the spawned grids
                         foreach (IMyCubeGrid spawnedGrid in resultList)
@@ -212,14 +245,28 @@ namespace Invalid.spawnbattle
                         // Add the spawn position to the list
                         spawnPositions.Add(spawnPosition);
 
+                        // Add to the spawned counts dictionary
+                        if (spawnedCounts.ContainsKey(randomPrefabName))
+                        {
+                            spawnedCounts[randomPrefabName]++;
+                        }
+                        else
+                        {
+                            spawnedCounts[randomPrefabName] = 1;
+                        }
+
                         // Switch to the other faction for the next spawn
                         currentFaction = currentFaction == redFaction ? bluFaction : redFaction;
                     }
                 }
             }
+
+            // Report the spawned counts
+            foreach (var kvp in spawnedCounts)
+            {
+                MyAPIGateway.Utilities.ShowMessage("spawnbattle", $"Spawned: {kvp.Key} x {kvp.Value}");
+            }
         }
-
-
 
 
         private bool CheckGridDistance(Vector3D spawnPosition, double minDistance)
