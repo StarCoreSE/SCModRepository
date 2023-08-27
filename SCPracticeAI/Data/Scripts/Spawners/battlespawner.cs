@@ -56,6 +56,7 @@ namespace Invalid.spawnbattle
         private Dictionary<string, string> prefabMap = new Dictionary<string, string>
         {
             { "LamiaAI", "LamiaAI" },
+            { "ValiAI", "ValiAI" },
 
             // Add more prefab mappings here.
         };
