@@ -94,7 +94,7 @@ namespace Invalid.spawnbattle
                 // Randomly choose the faction
                 string factionName = MyUtils.GetRandomInt(0, 2) == 0 ? "RED" : "BLU";
 
-                SpawnRandomPrefabs(prefabMap[prefabPacket.PrefabName], prefabPacket.PrefabAmount, factionName);
+                SpawnRandomPrefabs(new List<string>(prefabMap.Keys), prefabPacket.PrefabAmount, factionName);
             }
             else
             {
@@ -163,7 +163,7 @@ namespace Invalid.spawnbattle
             MyAPIGateway.Utilities.ShowMessage("spawnbattle", prefabListMessage);
         }
 
-        private void SpawnRandomPrefabs(string targetPrefab, int spawnCount, string factionName)
+        private void SpawnRandomPrefabs(List<string> prefabNames, int spawnCount, string factionName)
         {
             double maxSpawnRadius = 10000; // Maximum spawn radius in meters
 
@@ -204,12 +204,15 @@ namespace Invalid.spawnbattle
 
                     if (!tooCloseToOtherPosition)
                     {
+                        // Randomly select a prefab name from the provided list
+                        string randomPrefabName = prefabNames[MyUtils.GetRandomInt(0, prefabNames.Count)];
+
                         // Spawn the prefab
                         IMyPrefabManager prefabManager = MyAPIGateway.PrefabManager;
                         List<IMyCubeGrid> resultList = new List<IMyCubeGrid>();
 
                         // Spawn the prefab with the current faction as the owner
-                        prefabManager.SpawnPrefab(resultList, targetPrefab, spawnPosition, direction, up, ownerId: currentFaction.FounderId, spawningOptions: SpawningOptions.None);
+                        prefabManager.SpawnPrefab(resultList, randomPrefabName, spawnPosition, direction, up, ownerId: currentFaction.FounderId, spawningOptions: SpawningOptions.None);
 
                         // Change ownership of the spawned grids
                         foreach (IMyCubeGrid spawnedGrid in resultList)
