@@ -114,29 +114,36 @@ namespace Invalid.spawnbattle
             }
             else if (parts.Length >= 2)
             {
-                string prefabName = parts[1];
-                int spawnCount = defaultSpawnCount;
-
-                if (parts.Length >= 3)
+                int spawnCount;
+                if (int.TryParse(parts[1], out spawnCount))
                 {
-                    int parsedCount;
-                    if (int.TryParse(parts[2], out parsedCount))
+                    if (spawnCount > 0)
                     {
-                        spawnCount = parsedCount;
+                        // Randomly choose the faction
+                        string factionName = MyUtils.GetRandomInt(0, 2) == 0 ? "RED" : "BLU";
+
+                        // Select a random prefab from the prefabMap
+                        List<string> prefabNames = new List<string>(prefabMap.Keys);
+                        string randomPrefabName = prefabNames[MyUtils.GetRandomInt(0, prefabNames.Count)];
+
+                        // Create PrefabSpawnPacket instance with the factionName parameter
+                        PrefabSpawnPacket prefabSpawnPacket = new PrefabSpawnPacket(randomPrefabName, spawnCount, factionName);
+
+                        // Serialize and send the packet
+                        byte[] data = MyAPIGateway.Utilities.SerializeToBinary(prefabSpawnPacket);
+                        MyAPIGateway.Multiplayer.SendMessageTo(netID, data, MyAPIGateway.Multiplayer.ServerId);
+
+                        MyAPIGateway.Utilities.ShowMessage("spawnbattle", $"Requesting: {randomPrefabName} x {spawnCount}");
+                    }
+                    else
+                    {
+                        MyAPIGateway.Utilities.ShowMessage("spawnbattle", "Invalid spawn count. Please specify a positive number.");
                     }
                 }
-
-                // Randomly choose the faction
-                string factionName = MyUtils.GetRandomInt(0, 2) == 0 ? "RED" : "BLU";
-
-                // Create PrefabSpawnPacket instance with the factionName parameter
-                PrefabSpawnPacket prefabSpawnPacket = new PrefabSpawnPacket(prefabName, spawnCount, factionName);
-
-                // Serialize and send the packet
-                byte[] data = MyAPIGateway.Utilities.SerializeToBinary(prefabSpawnPacket);
-                MyAPIGateway.Multiplayer.SendMessageTo(netID, data, MyAPIGateway.Multiplayer.ServerId);
-
-                MyAPIGateway.Utilities.ShowMessage("spawnbattle", $"Requesting: {prefabName} x {spawnCount}");
+                else
+                {
+                    MyAPIGateway.Utilities.ShowMessage("spawnbattle", "Invalid spawn count. Please specify a valid number.");
+                }
             }
 
             sendToOthers = false;
@@ -218,8 +225,6 @@ namespace Invalid.spawnbattle
                 }
             }
         }
-
-
 
 
         private bool CheckGridDistance(Vector3D spawnPosition, double minDistance)
