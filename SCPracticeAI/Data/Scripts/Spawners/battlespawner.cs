@@ -57,6 +57,9 @@ namespace Invalid.spawnbattle
         {
             { "LamiaAI", "LamiaAI" },
             { "ValiAI", "ValiAI" },
+            { "RegAI", "RegAI" },
+            { "TessAI", "TessAI" },
+            { "ZenithAI", "ZenithAI" },
 
             // Add more prefab mappings here.
         };
