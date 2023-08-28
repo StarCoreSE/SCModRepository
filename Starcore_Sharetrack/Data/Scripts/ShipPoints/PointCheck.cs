@@ -1270,7 +1270,7 @@ namespace klime.PointCheck
                             var grid = entity as MyCubeGrid;
 
                             // If the entity is a valid grid and has the specified block subtype ID, perform the following actions
-                            if (grid != null && GridExtensions.HasBlockWithSubtypeId(grid, "RivalAIRemoteControlLarge"))
+                            if (grid != null && GridExtensions.HasBlockWithSubtypeId(grid, "LargeFlightMovement"))
                             {
                                 // Get the entity ID of the grid
                                 long entityId = grid.EntityId;
