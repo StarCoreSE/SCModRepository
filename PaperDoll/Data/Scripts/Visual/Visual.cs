@@ -73,7 +73,7 @@ namespace klime.Visual
             // If the FOV has increased, adjust the renderMatrix's translation
          if (needsRescale)
          {
-             var backOffset = (scale - 0.001) * 1;  // Adjust as needed
+             var backOffset = (scale - 0.001) * 0.1;  // Adjust as needed
              if (backOffset > 0)
              {
                  var moveVector = Vector3D.TransformNormal(-camera.WorldMatrix.Forward, MatrixD.Transpose(renderMatrix));
@@ -117,7 +117,7 @@ namespace klime.Visual
             var hudscale = 0.04f;
             // Dynamically calculate the upper limit for scale, maybe?
           //  var scaleUpperLimit = 0.001f;  // Or any other logic
-            var scale = MathHelper.Clamp((float)(scaleFov * (hudscale * 0.23f)), 0.0004f, 0.0018f);
+            var scale = MathHelper.Clamp((float)(scaleFov * (hudscale * 0.23f)), 0.0004f, 0.0008f);
 
             //scale = (0.042 / volume.Radius) * scaleFov2;
 
