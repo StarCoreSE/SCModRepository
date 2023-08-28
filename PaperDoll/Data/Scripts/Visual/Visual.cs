@@ -99,7 +99,6 @@ namespace klime.Visual
         {
 
             var volume = grid.PositionComp.WorldVolume;
-            
 
             var camera = MyAPIGateway.Session.Camera;
             var newFov = camera.FovWithZoom;
@@ -108,47 +107,10 @@ namespace klime.Visual
             var fov = Math.Tan(newFov * 0.5);
             var scaleFov = 0.1 * fov;
             var scaleFov2 = 0.2 * fov;
-            // 0.10, 0.05
-            
-
-
-
 
             var hudscale = 0.04f;
-            // Dynamically calculate the upper limit for scale, maybe?
-          //  var scaleUpperLimit = 0.001f;  // Or any other logic
             var scale = MathHelper.Clamp((float)(scaleFov * (hudscale * 0.23f)), 0.0004f, 0.0008f);
 
-            //scale = (0.042 / volume.Radius) * scaleFov2;
-
-        //   var offset = new Vector2D(1.6, 1.5);
-        //   offset.X *= scaleFov * aspectRatio;
-        //   offset.Y *= scaleFov * aspectRatio;
-        //   var tempMatrix = MyAPIGateway.Session.Camera.WorldMatrix;
-        //   var position = Vector3D.Transform(new Vector3D(offset.X, offset.Y, -50), tempMatrix);
-        //
-
-            //fucking god please 
-            // var hudscale = 0.25f;
-            //  var volume = grid.PositionComp.LocalVolume;
-            // var scale = (float)((scaleFov *= volume.Radius) * (hudscale / 0.13f));
-
-            //scale = MathHelper.Clamp(scale, 0.0000001f, 0.000005f);
-
-            //scale *= ((float)volume.Radius);
-
-
-
-            
-            if (scale > 990.0008)
-            {
-                var backOffset = (scale - 0.0008) * 9990000;  // Adjust this multiplier as needed
-                var moveVector = Vector3D.TransformNormal(-camera.WorldMatrix.Forward, MatrixD.Transpose(grid.WorldMatrix));  // Notice the '-' to reverse the direction
-
-                relTrans = (Vector3D.TransformNormal(grid.WorldMatrix.Translation - grid.PositionComp.WorldAABB.Center, MatrixD.Transpose(grid.WorldMatrix))  * scale) * (moveVector * backOffset);
-                //relTrans -= moveVector * backOffset;  // Using += to move away from the camera
-            }
-            //  MyAPIGateway.Utilities.ShowNotification($"T3 {relTrans}", 16, "Red");
             relTrans = Vector3D.TransformNormal(grid.WorldMatrix.Translation - grid.PositionComp.WorldAABB.Center, MatrixD.Transpose(grid.WorldMatrix)) * scale;
             grid.PositionComp.Scale = scale;
 
@@ -158,12 +120,6 @@ namespace klime.Visual
         public void DoCleanup()
         {
             grid.ChangeGridOwnership(MyAPIGateway.Session.Player.IdentityId, MyOwnershipShareModeEnum.Faction);
-
-
-            //if (grid.IsPowered) grid.SwitchPower();
-
-
-
             List<IMySlimBlock> allBlocks = new List<IMySlimBlock>();
 
             IMyCubeGrid iGrid = grid as IMyCubeGrid;
@@ -175,31 +131,9 @@ namespace klime.Visual
             Vector3 orangeHSVOffset = MyColorPickerConstants.HSVToHSVOffset(ColorExtensions.ColorToHSV(ColorExtensions.HexToColor(OrangeHex)));
             orangeHSVOffset = new Vector3((float)Math.Round(orangeHSVOffset.X, 2), (float)Math.Round(orangeHSVOffset.Y, 2), (float)Math.Round(orangeHSVOffset.Z, 2));
             iGrid.ColorBlocks(iGrid.Min, iGrid.Max, orangeHSVOffset);
-
-            //iGrid.Render.Transparency = 0.05f;
             foreach (var block in allBlocks)
             {
                 block.Dithering = 2.45f;
-                //block.CubeGrid
-
-             //   gridMatrix = block.CubeGrid.WorldMatrix;
-
-              //  gridBox = new BoundingBoxD();
-            //    gridBox = block.CubeGrid.PositionComp.LocalAABB;
-
-               // block.GetWorldBoundingBox(out gridBox);
-               // MySimpleObjectDraw.DrawTransparentBox(ref gridMatrix, ref gridBox, ref BillboardRED, MySimpleObjectRasterizer.Solid, 1, 0.04f, MyStringId.GetOrCompute("Square"), MyStringId.GetOrCompute("Square"), false, -1, MyBillboard.BlendTypeEnum.PostPP,1, null);
-           //   block.CubeGrid.Render.ShadowBoxLod = false;
-           //   block.CubeGrid.Render.EnableColorMaskHsv = true;
-           //   block.CubeGrid.Render.OffsetInVertexShader = true;
-           //  block.CubeGrid.Transparent = true;
-           //  block.CubeGrid.Render.Transparency = 0.01f;
-           //  block.CubeGrid.FastCastShadowResolve = false;
-           // // block.CubeGrid.Render.UpdateTransparency();
-           //   block.CubeGrid.Render.UpdateRenderObject(true, false);
-           //   block.UpdateVisual();
-                // block.FatBlock?.Render.UpdateTransparency();
-                // grid.ChangeColorAndSkin(grid.GetCubeBlock(block.Position), purpleHSVoffset);
             }
 
             foreach (var fatblock in grid.GetFatBlocks())
@@ -209,27 +143,6 @@ namespace klime.Visual
                 DisableBlock(fatblock as IMyLightingBlock);
 
             }
-                
-            //MyVisualScriptLogicProvider.SetAlphaHighlight(iGrid.Name, true, 10, 1, Color.Fuchsia, -1, null, 2f);
-            
-
-            // grid.Render.Transparency = -0.01f;
-
-
-            // string purpleHEx = "#FF0000";
-            //    Vector3 purpleHSVoffset = MyColorPickerConstants.HSVToHSVOffset(ColorExtensions.ColorToHSV(ColorExtensions.HexToColor(purpleHEx)));
-            //    purpleHSVoffset = new Vector3((float)Math.Round(purpleHSVoffset.X, 2), (float)Math.Round(purpleHSVoffset.Y, 2), (float)Math.Round(purpleHSVoffset.Z, 2));
-            // grid.ChangeColorAndSkin(grid.GetCubeBlock(block.Position), purpleHSVoffset);
-            // List<IMySlimBlock> allBlocks = new List<IMySlimBlock>();
-            //    IMyCubeGrid iGrid = grid as IMyCubeGrid;
-            //    iGrid.GetBlocks(allBlocks);
-            // 
-            //     //grid.ColorBlocks(grid.Min, grid.Max, purpleHSVoffset, false, false);
-            //     ////iGrid.ColorBlocks(iGrid.Min, iGrid.Max, purpleHSVoffset);
-            //     ////grid.ColorGrid(purpleHSVoffset, false, false);
-            // 
-
-            //   //grid.Render.Transparency = -0.01f;
         }
 
         private void DisableBlock(IMyFunctionalBlock block)
@@ -308,92 +221,110 @@ namespace klime.Visual
         public void DoRescale() { ExecuteActionOnGrid(g => g.DoRescale(), ref doneRescale); }
         private void ExecuteActionOnGrid(Action<GridR> action, ref bool flag) { foreach (var sg in gridGroup) { if (sg.grid != null) { action(sg); flag = true; } } }
         
+
+
         public void DoBlockRemove(Vector3I position)
         {
-            SlimList.Clear(); SlimList.Add(position); 
+            HandleException(() => {
+                SlimList.Clear(); SlimList.Add(position);
+            }, "Clearing and Adding to SlimList");
+
             foreach (var subgrid in gridGroup)
             {
-                if (subgrid.grid == null) continue;
-                var slim = subgrid.grid.GetCubeBlock(position) as IMySlimBlock;
-                if (slim == null) continue;
-                float integrity = slim.MaxIntegrity;
-                //MyVisualScriptLogicProvider.SetAlphaHighlight(slim.CubeGrid.Name, true, 2, 1, Color.Red, -1, null, 0.9f);
-                if (slim.FatBlock == null && (!SlimDelDict.ContainsKey(slim.Position))) 
-                {
-                    slim.Dithering = 1.25f;
-                    int blockKind;
-                    if (slim.Mass >= 500) { blockKind = 1; } else { blockKind = 2; }
-                    string colorHex = "#FF0000";
-                    switch (blockKind) 
+                HandleException(() => {
+                    if (subgrid.grid == null) return;
+                    var slim = subgrid.grid.GetCubeBlock(position) as IMySlimBlock;
+                    if (slim == null) return;
+                    float integrity = slim.MaxIntegrity;
+                    //MyVisualScriptLogicProvider.SetAlphaHighlight(slim.CubeGrid.Name, true, 2, 1, Color.Red, -1, null, 0.9f);
+                    if (slim.FatBlock == null && (!SlimDelDict.ContainsKey(slim.Position)))
                     {
-                        case 1:
-                            //Heavier than 500kg
-                            stringHash = MyStringHash.GetOrCompute("Neon_Colorable_Lights");
-                            colorHex = "#FF0000";
-                            break;
-                        case 2:
-                            //Lighter than 500kg
-                            stringHash = MyStringHash.GetOrCompute("Neon_Colorable_Lights");
-                            colorHex = "#FFA500";
-                            break;
+                        slim.Dithering = 1.25f;
+                        int blockKind;
+                        if (slim.Mass >= 500) { blockKind = 1; } else { blockKind = 2; }
+                        string colorHex = "#FF0000";
+                        switch (blockKind)
+                        {
+                            case 1:
+                                //Heavier than 500kg
+                                stringHash = MyStringHash.GetOrCompute("Neon_Colorable_Lights");
+                                colorHex = "#FF0000";
+                                break;
+                            case 2:
+                                //Lighter than 500kg
+                                stringHash = MyStringHash.GetOrCompute("Neon_Colorable_Lights");
+                                colorHex = "#FFA500";
+                                break;
+                        }
+
+                        // this works!
+                        //slim.CubeGrid.ColorBlocks(slim.Position, slim.Position, new Vector3(0, 0, 0));
+
+                        Vector3 colorHSVOffset = MyColorPickerConstants.HSVToHSVOffset(ColorExtensions.ColorToHSVDX11(ColorExtensions.HexToColor(colorHex)));
+                        colorHSVOffset = new Vector3((float)Math.Round(colorHSVOffset.X, 2), (float)Math.Round(colorHSVOffset.Y, 2), (float)Math.Round(colorHSVOffset.Z, 2));
+                        subgrid.grid.Render.MetalnessColorable = true;
+                        subgrid.grid.ChangeColorAndSkin(subgrid.grid.GetCubeBlock(slim.Position), colorHSVOffset, stringHash);
+                        subgrid.grid.Render.MetalnessColorable = true;
+                        slim.UpdateVisual();
+                        int time = timer + 150;
+                        SlimDelDict.Add(slim.Position, time);
+                        BlockIntegrityDict[slim.Position] = integrity;
                     }
+                    else
+                    {
 
-                    // this works!
-                    //slim.CubeGrid.ColorBlocks(slim.Position, slim.Position, new Vector3(0, 0, 0));
-                   
-                    Vector3 colorHSVOffset = MyColorPickerConstants.HSVToHSVOffset(ColorExtensions.ColorToHSVDX11(ColorExtensions.HexToColor(colorHex)));
-                    colorHSVOffset = new Vector3((float)Math.Round(colorHSVOffset.X, 2), (float)Math.Round(colorHSVOffset.Y, 2), (float)Math.Round(colorHSVOffset.Z, 2));
-                    subgrid.grid.Render.MetalnessColorable = true;
-                    subgrid.grid.ChangeColorAndSkin(subgrid.grid.GetCubeBlock(slim.Position), colorHSVOffset, stringHash);
-                    subgrid.grid.Render.MetalnessColorable = true;
-                    slim.UpdateVisual();
-                    int time = timer + 150; 
-                    SlimDelDict.Add(slim.Position, time);
-                    BlockIntegrityDict[slim.Position] = integrity;
-                }
-                else
-                {
-                    
-                    slim.Dithering = 1.5f;
-                    var customtimer = timer + 200;
+                        slim.Dithering = 1.5f;
+                        var customtimer = timer + 200;
 
 
-                    var color = ColorExtensions.HexToColor("#8B0000");
-                    string bruh = slim.FatBlock.BlockDefinition.TypeId.ToString();
-                    //add a fucking color legend on sceen you autist
-                    switch (bruh) { 
-                    default:
-                        break;
+                        var color = ColorExtensions.HexToColor("#8B0000");
+                        string bruh = slim.FatBlock.BlockDefinition.TypeId.ToString();
+                        //add a fucking color legend on sceen you autist
+                        switch (bruh)
+                        {
+                            default:
+                                break;
                             case "MyObjectBuilder_Gyro":
-                            color = Color.SteelBlue;
-                            break;
+                                color = Color.SteelBlue;
+                                break;
                             case "MyObjectBuilder_ConveyorSorter":
-                            color = Color.Red;
-                            customtimer = timer + 400;
-                            break;
-                        case "MyObjectBuilder_Thrust":
-                        case "MyObjectBuilder_GasTankDefinition":
-                            color = Color.CadetBlue;
-                            break;
-                        case "MyObjectBuilder_BatteryBlock":
-                        case "MyObjectBuilder_Reactor":
-                        case "MyObjectBuilder_SolarPanel":
-                        case "MyObjectBuilder_WindTurbine":
-                            color = Color.Green;
-                            break;
-                        case "MyObjectBuilder_Cockpit":
-                            color = Color.Purple;
-                            customtimer = timer + 400;
-                            break;
+                                color = Color.Red;
+                                customtimer = timer + 400;
+                                break;
+                            case "MyObjectBuilder_Thrust":
+                            case "MyObjectBuilder_GasTankDefinition":
+                                color = Color.CadetBlue;
+                                break;
+                            case "MyObjectBuilder_BatteryBlock":
+                            case "MyObjectBuilder_Reactor":
+                            case "MyObjectBuilder_SolarPanel":
+                            case "MyObjectBuilder_WindTurbine":
+                                color = Color.Green;
+                                break;
+                            case "MyObjectBuilder_Cockpit":
+                                color = Color.Purple;
+                                customtimer = timer + 400;
+                                break;
 
-                    };
+                        };
 
-                    int time = slim.FatBlock.Mass > 500 ? customtimer : timer + 10;
-                    if (!DelDict.ContainsKey(slim.FatBlock)) DelDict.Add(slim.FatBlock, time);
-                    FatBlockIntegrityDict[slim.Position] = integrity;
+                        int time = slim.FatBlock.Mass > 500 ? customtimer : timer + 10;
+                        if (!DelDict.ContainsKey(slim.FatBlock)) DelDict.Add(slim.FatBlock, time);
+                        FatBlockIntegrityDict[slim.Position] = integrity;
 
-                    MyVisualScriptLogicProvider.SetHighlightLocal(slim.FatBlock.Name, 3, 1, color);
-                }
+                        MyVisualScriptLogicProvider.SetHighlightLocal(slim.FatBlock.Name, 3, 1, color);
+                    }
+                }, "Iterating through gridGroup");
+            }
+        }
+
+        private void HandleException(Action action, string errorContext)
+        {
+            try { action(); }
+            catch (Exception e)
+            {
+                MyLog.Default.WriteLine($"Error {errorContext}: {e.Message}");
+                MyAPIGateway.Utilities.ShowNotification($"An error occurred while {errorContext}. Please check the log for more details.", 5000, MyFontEnum.Red);
             }
         }
         public class DamageEntry
@@ -550,7 +481,6 @@ namespace klime.Visual
             {
                 var realOB = (MyObjectBuilder_CubeGrid)realGrid.GetObjectBuilder();
                 realOB.CreatePhysics = false;
-                
                 MyEntities.RemapObjectBuilder(realOB);
                 MyAPIGateway.Entities.CreateFromObjectBuilderParallel(realOB, false, CompleteCall);
             }, "generating client grids");
@@ -564,41 +494,6 @@ namespace klime.Visual
                 var grid = (MyCubeGrid)obj;
                 grid.SyncFlag = grid.Save = grid.Render.NearFlag = grid.Render.FadeIn = grid.Render.FadeOut = grid.Render.CastShadows = grid.Render.NeedsResolveCastShadow = false;
                 grid.GridPresenceTier = MyUpdateTiersGridPresence.Tier1;
-                
-
-                //      grid.Render.PersistentFlags -= MyPersistentEntityFlags2.CastShadows;
-                //      grid.DisplayName = "";
-                //      //grid.IsPreview = true;
-                //      grid.GridPresenceTier = MyUpdateTiersGridPresence.Tier1;
-                //      grid.RemoveFromGamePruningStructure();
-                //       string purpleHEx = "#7851A9";
-                //          Vector3 purpleHSVoffset = MyColorPickerConstants.HSVToHSVOffset(ColorExtensions.ColorToHSV(ColorExtensions.HexToColor(purpleHEx)));
-                //          purpleHSVoffset = new Vector3((float)Math.Round(purpleHSVoffset.X, 2), (float)Math.Round(purpleHSVoffset.Y, 2), (float)Math.Round(purpleHSVoffset.Z, 2));
-                //      grid.ColorGrid(purpleHSVoffset, false);
-                //    grid.GetCubeBlock(BlocksForBillboards);
-
-                // var bruh = new Vector3I(0, 0, 0);
-                //    var igrid = (IMyCubeGrid)grid;
-
-                // igrid.GetBlocks(BlocksForBillboards);
-                //    BuildBlocksClient
-                //  grid.ChangeColorAndSkin(grid.BuildBlocksClient)
-                //     var igrid = (IMyCubeGrid)grid;
-
-                //     igrid.GetBlocks(BlocksForBillboards);
-
-          //       foreach (var block in BlocksForBillboards)
-          //       {
-          //         var squaremat =  MyStringId.GetOrCompute("Square");
-          //           var color = Color.Red;
-          //           BoundingBoxD box;
-          //           box = new BoundingBoxD(block.Min, block.Max);
-          //           MatrixD MatrixD = block.CubeGrid.WorldMatrix;
-          //           BillboardRED = Color.Red;
-          //        uint renderObjectID = block.CubeGrid.Render.GetRenderObjectID();
-          //           MySimpleObjectDraw.DrawTransparentBox(ref MatrixD, ref box, ref color, MySimpleObjectRasterizer.Solid, 1, 0.04f, squaremat, squaremat, false, -1 , BlendTypeEnum.AdditiveTop, 1, persistantbillboards);
-          //           //MySimpleObjectDraw.DrawAttachedTransparentBox(ref realGridBaseMatrix,ref box,ref BillboardRED, renderObjectID,ref MatrixD,MySimpleObjectRasterizer.SolidAndWireframe, 4,0.001f,squaremat,squaremat,false);
-          //    }
                 MyAPIGateway.Entities.AddEntity(grid); //right hewre
                 visGrid = new GridG(new GridR(grid), rotOffset);
             }, "completing the call");
@@ -663,7 +558,7 @@ namespace klime.Visual
             offset.Y *= scaleFov;
             var tempMatrix = MyAPIGateway.Session.Camera.WorldMatrix;
             var position = Vector3D.Transform(new Vector3D(offset.X, offset.Y, -.9), tempMatrix);
-
+            //fix billboard rendering on top of paper doll when at maximum zoom by changing that position value from -.9 to something like -1.1 I guess
             var origin = position;
             var left = tempMatrix.Left;
             var up = tempMatrix.Up;
@@ -671,9 +566,6 @@ namespace klime.Visual
             var scale = (float)(scaleFov * (hudscale * 0.23f));
 
             Billboardcolor = (Color.Lime * 0.75f).ToVector4();
-
-            //Vector4 color;
-
             MyTransparentGeometry.AddBillboardOriented(PaperDollBGSprite, Billboardcolor, origin, left, up, scale, BlendTypeEnum.SDR);
 
         }
@@ -885,14 +777,19 @@ namespace klime.Visual
         {
 
 
-
-
-            if (MyAPIGateway.Utilities.IsDedicated) return;
-            IMyCharacter charac = MyAPIGateway.Session.Player?.Character;
-            if (charac == null) return;
-            IMyCamera currentCamera = MyAPIGateway.Session.Camera;
-            if (currentCamera == null) return;
-            if (viewState == ViewState.Locked)
+            HandleException(() =>
+            {
+                if (MyAPIGateway.Utilities.IsDedicated) return;
+                IMyCharacter charac = MyAPIGateway.Session.Player?.Character;
+                if (charac == null) return;
+                IMyCamera currentCamera = MyAPIGateway.Session.Camera;
+                if (currentCamera == null) return;
+                if (allVis == null)
+                {
+                    MyLog.Default.WriteLine("allVis is null. Aborting Draw like it's a bad sketch.");
+                    return;
+                }
+                if (viewState == ViewState.Locked)
             {
                 for (int i = allVis.Count - 1; i >= 0; i--)
                 {
@@ -945,125 +842,203 @@ namespace klime.Visual
                 }
                 if (allVis.Count == 0 || requestPaperDoll == RequestPaperDoll.Off) viewState = ViewState.GoToIdleWC;
             }
+            }, "Drawing On-Screen Elements");
         }
 
         private void NetworkHandler(ushort arg1, byte[] arg2, ulong incomingSteamID, bool arg4)
         {
-            var packet = MyAPIGateway.Utilities.SerializeFromBinary<Packet>(arg2);
-            if (packet != null && MyAPIGateway.Session.IsServer)
+            HandleException(() =>
             {
-                var updateGridPacket = packet as UpdateGridPacket;
-                if (updateGridPacket != null)
+                // Null checks for life's unexpected surprises
+                if (arg2 == null)
                 {
-                    UpdateServerTracker(incomingSteamID, updateGridPacket);
+                    MyLog.Default.WriteLine("Null argument 'arg2' in NetworkHandler. Abandoning ship!");
+                    return;
                 }
-            }
+
+                var packet = MyAPIGateway.Utilities.SerializeFromBinary<Packet>(arg2);
+                if (packet == null || !MyAPIGateway.Session.IsServer) return;
+
+                var updateGridPacket = packet as UpdateGridPacket;
+                if (updateGridPacket == null) return;
+
+                UpdateServerTracker(incomingSteamID, updateGridPacket);
+            }, "Handling Network Packet");
         }
 
         private void FeedbackHandler(ushort arg1, byte[] arg2, ulong arg3, bool arg4)
         {
-            var packet = MyAPIGateway.Utilities.SerializeFromBinary<Packet>(arg2);
-            if (packet != null)
+            HandleException(() =>
             {
-                var feedbackDamagePacket = packet as FeedbackDamagePacket;
-                if (feedbackDamagePacket != null)
+                if (arg2 == null || allVis == null)
                 {
-                    foreach (var entVis in allVis)
+                    MyLog.Default.WriteLine("Null arguments provided to FeedbackHandler.");
+                    return;
+                }
+
+                var packet = MyAPIGateway.Utilities.SerializeFromBinary<Packet>(arg2);
+                if (packet == null) return;
+
+                var feedbackDamagePacket = packet as FeedbackDamagePacket;
+                if (feedbackDamagePacket == null) return;
+
+                foreach (var entVis in allVis)
+                {
+                    if (entVis?.realGrid?.EntityId == feedbackDamagePacket.entityId)
                     {
-                        if (entVis.realGrid?.EntityId == feedbackDamagePacket.entityId)
-                        {
-                            entVis.BlockRemoved(feedbackDamagePacket.position);
-                        }
+                        entVis.BlockRemoved(feedbackDamagePacket.position);
                     }
                 }
-            }
+            }, "Handling Feedback Packet");
         }
 
         private void UpdateServerTracker(ulong steamID, UpdateGridPacket updateGridPacket)
         {
-            if (updateGridPacket.regUpdateType == RegUpdateType.Add)
+            HandleException(() =>
             {
-                if (serverTracker.ContainsKey(steamID))
+                if (updateGridPacket == null || serverTracker == null)
                 {
-                    AddGridToTracker(steamID, updateGridPacket.entityIds);
+                    MyLog.Default.WriteLine("Null arguments in UpdateServerTracker. No action taken, no harm done.");
+                    return;
                 }
-                else
+
+                if (updateGridPacket.regUpdateType == RegUpdateType.Add)
                 {
-                    List<IMyCubeGrid> gridTracker = CreateGridTracker(updateGridPacket.entityIds);
-                    serverTracker.Add(steamID, gridTracker);
+                    if (serverTracker.ContainsKey(steamID))
+                    {
+                        AddGridToTracker(steamID, updateGridPacket.entityIds);
+                    }
+                    else
+                    {
+                        List<IMyCubeGrid> gridTracker = CreateGridTracker(updateGridPacket.entityIds);
+                        serverTracker.Add(steamID, gridTracker);
+                    }
                 }
-            }
-            else if (updateGridPacket.regUpdateType == RegUpdateType.Remove)
-            {
-                if (serverTracker.ContainsKey(steamID))
+                else if (updateGridPacket.regUpdateType == RegUpdateType.Remove)
                 {
-                    RemoveGridFromTracker(steamID, updateGridPacket.entityIds);
+                    if (serverTracker.ContainsKey(steamID))
+                    {
+                        RemoveGridFromTracker(steamID, updateGridPacket.entityIds);
+                    }
                 }
-            }
+            }, "Updating Server Tracker");
         }
 
         private void AddGridToTracker(ulong steamID, List<long> entityIds)
         {
-            foreach (var entId in entityIds)
+            HandleException(() =>
             {
-                IMyCubeGrid cubeGrid = MyAPIGateway.Entities.GetEntityById(entId) as IMyCubeGrid;
-                if (cubeGrid != null)
+                if (entityIds == null || serverTracker == null)
                 {
-                    cubeGrid.OnBlockRemoved += ServerBlockRemoved;
-                    serverTracker[steamID].Add(cubeGrid);
+                    MyLog.Default.WriteLine("Null arguments provided to AddGridToTracker. Exiting before things get real bad.");
+                    return;
                 }
-            }
+
+                foreach (var entId in entityIds)
+                {
+                    IMyCubeGrid cubeGrid = MyAPIGateway.Entities.GetEntityById(entId) as IMyCubeGrid;
+                    if (cubeGrid != null)
+                    {
+                        cubeGrid.OnBlockRemoved += ServerBlockRemoved;
+
+                        if (serverTracker.ContainsKey(steamID))
+                        {
+                            serverTracker[steamID].Add(cubeGrid);
+                        }
+                        else
+                        {
+                            MyLog.Default.WriteLine($"SteamID {steamID} not found in serverTracker. Abandon ship!");
+                        }
+                    }
+                }
+            }, "Adding Grids to Tracker");
         }
 
         private List<IMyCubeGrid> CreateGridTracker(List<long> entityIds)
         {
             List<IMyCubeGrid> gridTracker = new List<IMyCubeGrid>();
-            foreach (var entId in entityIds)
+            HandleException(() =>
             {
-                IMyCubeGrid cubeGrid = MyAPIGateway.Entities.GetEntityById(entId) as IMyCubeGrid;
-                if (cubeGrid != null)
+                if (entityIds == null)
                 {
+                    MyLog.Default.WriteLine("Null entityIds provided to CreateGridTracker. Exiting like a gentleman who realizes he's in the wrong meeting.");
+                    return;
+                }
+
+                foreach (var entId in entityIds)
+                {
+                    IMyCubeGrid cubeGrid = MyAPIGateway.Entities.GetEntityById(entId) as IMyCubeGrid;
+                    if (cubeGrid == null) continue;
+
                     cubeGrid.OnBlockRemoved += ServerBlockRemoved;
                     gridTracker.Add(cubeGrid);
                 }
-            }
+            }, "Creating Grid Tracker");
             return gridTracker;
         }
 
         private void RemoveGridFromTracker(ulong steamID, List<long> entityIds)
         {
-            foreach (var entId in entityIds)
+            HandleException(() =>
             {
-                IMyCubeGrid cubeGrid = MyAPIGateway.Entities.GetEntityById(entId) as IMyCubeGrid;
-                if (cubeGrid != null)
+                if (entityIds == null || serverTracker == null || !serverTracker.ContainsKey(steamID))
                 {
-                    cubeGrid.OnBlockRemoved -= ServerBlockRemoved;
-                    serverTracker[steamID].Remove(cubeGrid);
+                    MyLog.Default.WriteLine("Null arguments or missing keys in RemoveGridFromTracker. It's like throwing a dart and missing the board.");
+                    return;
                 }
-            }
+
+                foreach (var entId in entityIds)
+                {
+                    IMyCubeGrid cubeGrid = MyAPIGateway.Entities.GetEntityById(entId) as IMyCubeGrid;
+                    if (cubeGrid != null)
+                    {
+                        cubeGrid.OnBlockRemoved -= ServerBlockRemoved;
+                        serverTracker[steamID]?.Remove(cubeGrid);
+                    }
+                }
+            }, "Removing Grids from Tracker");
         }
 
         private void ServerBlockRemoved(IMySlimBlock obj)
         {
-            var dmgGrid = obj.CubeGrid;
-            foreach (var steamID in serverTracker.Keys)
+            HandleException(() =>
             {
-                if (serverTracker[steamID]?.Count > 0)
+                if (obj == null || serverTracker == null)
                 {
-                    foreach (var checkGrid in serverTracker[steamID])
+                    MyLog.Default.WriteLine("Null arguments encountered in ServerBlockRemoved.");
+                    return;
+                }
+
+                var dmgGrid = obj.CubeGrid;
+                if (dmgGrid == null) return;
+
+                foreach (var steamID in serverTracker.Keys)
+                {
+                    if (serverTracker[steamID]?.Count > 0)
                     {
-                        if (checkGrid.EntityId == dmgGrid.EntityId)
+                        foreach (var checkGrid in serverTracker[steamID])
                         {
-                            var feedbackDamagePacket = new FeedbackDamagePacket(dmgGrid.EntityId, obj.Position);
-                            var byteArray = MyAPIGateway.Utilities.SerializeToBinary(feedbackDamagePacket);
-                            MyAPIGateway.Multiplayer.SendMessageTo(feedbackNetID, byteArray, steamID);
-                            break;
+                            if (checkGrid?.EntityId == dmgGrid.EntityId)
+                            {
+                                var feedbackDamagePacket = new FeedbackDamagePacket(dmgGrid.EntityId, obj.Position);
+                                var byteArray = MyAPIGateway.Utilities.SerializeToBinary(feedbackDamagePacket);
+                                MyAPIGateway.Multiplayer.SendMessageTo(feedbackNetID, byteArray, steamID);
+                                break;
+                            }
                         }
                     }
                 }
+            }, "Removing Server Block");
+        }
+        private static void HandleException(Action action, string errorContext)
+        {
+            try { action(); }
+            catch (Exception e)
+            {
+                MyLog.Default.WriteLine($"Error {errorContext}: {e.Message}");
+                MyAPIGateway.Utilities.ShowNotification($"An error occurred while {errorContext}. Please check the log for more details.", 5000, MyFontEnum.Red);
             }
         }
-
         private bool ValidInput()
         {
             return MyAPIGateway.Session.CameraController != null && !MyAPIGateway.Gui.ChatEntryVisible && !MyAPIGateway.Gui.IsCursorVisible && MyAPIGateway.Gui.GetCurrentScreen == MyTerminalPageEnum.None;
