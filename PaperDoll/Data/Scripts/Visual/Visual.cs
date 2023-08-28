@@ -16,16 +16,8 @@ using VRageMath;
 using CoreSystems.Api;
 using ParallelTasks;
 using VRageRender;
-using VRage.ObjectBuilders;
-using Sandbox.Game.Entities.Cube;
-using VRage.GameServices;
-using System.Linq;
-using Sandbox;
 using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
-using VRage.Render.Scene;
-using System.Drawing;
 using Color = VRageMath.Color;
-using System.Linq.Expressions;
 
 namespace klime.Visual
 {
@@ -43,9 +35,10 @@ namespace klime.Visual
         private BoundingBoxD aabb;
         public Color BillboardRED;
         public Vector4 Billboardcolor;
-       
-        public bool runonce = false;
         private MyStringId Material = MyStringId.TryGet("paperdollBG");
+        public bool runonce = false;
+        public float oldFOV;
+        public bool needsRescale = false;
         //public MyStringHash MaterialHash = MyStringHash.GetOrCompute("SciFi");
 
         public GridR(MyCubeGrid grid, EntRender entRender = null)
@@ -56,40 +49,122 @@ namespace klime.Visual
 
         public void UpdateMatrix(MatrixD renderMatrix)
         {
+            var newFOV= MyAPIGateway.Session.Camera.FovWithZoom;
+            if (oldFOV != newFOV)
+            {
+                oldFOV = newFOV;
+                needsRescale = true;
+            }
+     //       var camera = MyAPIGateway.Session.Camera;
+     //       var newFov = camera.FovWithZoom;
+     //       var aspectRatio = camera.ViewportSize.X / camera.ViewportSize.Y;
+     //       //MyAPIGateway.Utilities.ShowNotification($"T1 {aspectRatio}", 16, "Red");
+     //       var fov = Math.Tan(newFov * 0.5);
+     //       var scaleFov = 0.2 * fov;
+     //       var offset = new Vector2D(0.10 + 0.52, 0.05 - 0.5);
+     //       offset.X *= scaleFov * aspectRatio;
+     //       offset.Y *= scaleFov;
+     //       var tempMatrix = MyAPIGateway.Session.Camera.WorldMatrix;
+     //       var position = Vector3D.Transform(new Vector3D(offset.X, offset.Y, -.1), renderMatrix);
+     //    //
+     //    //  var origin = position;
+     //    //  var left = tempMatrix.Left;
+     //    //  var up = tempMatrix.Up;
+     //       var hudscale = 2.55f;
+     //       var scale = (float)(scaleFov * (hudscale * 130f));
+     //
+     //      var relTransTemp = Vector3D.Clamp(relTrans, relTrans * 0.5, relTrans * 0.9);
+     //      // MatrixD.Clamp
+     //
             renderMatrix.Translation += Vector3D.TransformNormal(relTrans, renderMatrix);
+           // MyAPIGateway.Utilities.ShowNotification($"T2 {renderMatrix.Translation}", 16, "Red");
             grid.WorldMatrix = renderMatrix;
             gridMatrix = renderMatrix;
+
+            if (needsRescale)
+            {
+                DoRescale();
+                needsRescale = false;
+            }
             //gridBox = grid.PositionComp.LocalAABB;
 
-            // renderMatrix.Translation += renderMatrix.Forward;
-            MatrixD cameramatrixD = MyAPIGateway.Session.Camera.WorldMatrix;
-            Vector3D cameraTranslation = MyAPIGateway.Session.Camera.WorldMatrix.Translation;
-            Vector3D cameraForward = MyAPIGateway.Session.Camera.WorldMatrix.Forward;
-            Vector3D cameraDown = MyAPIGateway.Session.Camera.WorldMatrix.Down;
-            Vector3D cameraRight = MyAPIGateway.Session.Camera.WorldMatrix.Right;
-            Vector3D leftCameraVector = MyAPIGateway.Session.Camera.WorldMatrix.Left;
-            Vector3D upCameraVector = MyAPIGateway.Session.Camera.WorldMatrix.Up;
-            Vector3D backgroundvector =
-                cameraTranslation +
-                (cameraForward * 1f) 
-              + (cameraRight * 0.85f) 
-              + (cameraDown * 0.35f); ;
-
-            Billboardcolor = (Color.Lime * 0.75f).ToVector4();    
-            MyTransparentGeometry.AddBillboardOriented(Material, Billboardcolor, backgroundvector, leftCameraVector, upCameraVector, 0.39f, 0.35f, null);
-
-            //MyTransparentGeometry.AddLineBillboard(MyStringId.GetOrCompute("WeaponLaser"), Color.White.ToVector4(), backgroundvector + leftCameraVector, cameraRight, 0.5f, 0.5f, BlendTypeEnum.SDR);
-            //MySimpleObjectDraw.DrawAttachedTransparentBox(ref gridMatrix, ref gridBox, ref BillboardRED, uint.MaxValue ,ref cameramatrixD, MySimpleObjectRasterizer.SolidAndWireframe, wiredivratio, 0.04f, MyStringId.GetOrCompute("Square"), MyStringId.GetOrCompute("WeaponLaser"), false, MyBillboard.BlendTypeEnum.SDR);
-
+        //  // renderMatrix.Translation += renderMatrix.Forward;
+        //  MatrixD cameramatrixD = MyAPIGateway.Session.Camera.WorldMatrix;
+        //  Vector3D cameraTranslation = MyAPIGateway.Session.Camera.WorldMatrix.Translation;
+        //  Vector3D cameraForward = MyAPIGateway.Session.Camera.WorldMatrix.Forward;
+        //  Vector3D cameraDown = MyAPIGateway.Session.Camera.WorldMatrix.Down;
+        //  Vector3D cameraRight = MyAPIGateway.Session.Camera.WorldMatrix.Right;
+        //  Vector3D leftCameraVector = MyAPIGateway.Session.Camera.WorldMatrix.Left;
+        //  Vector3D upCameraVector = MyAPIGateway.Session.Camera.WorldMatrix.Up;
+        //  Vector3D backgroundvector =
+        //      cameraTranslation +
+        //      (cameraForward * 1f) 
+        //    + (cameraRight * 0.85f) 
+        //    + (cameraDown * 0.35f); ;
+        //
+        //  Billboardcolor = (Color.Lime * 0.75f).ToVector4();    
+        //  MyTransparentGeometry.AddBillboardOriented(PaperDollBGSprite, Billboardcolor, backgroundvector, leftCameraVector, upCameraVector, 0.39f, 0.35f, null);
+        //
+        //  //MyTransparentGeometry.AddLineBillboard(MyStringId.GetOrCompute("WeaponLaser"), Color.White.ToVector4(), backgroundvector + leftCameraVector, cameraRight, 0.5f, 0.5f, BlendTypeEnum.SDR);
+        //  //MySimpleObjectDraw.DrawAttachedTransparentBox(ref gridMatrix, ref gridBox, ref BillboardRED, uint.MaxValue ,ref cameramatrixD, MySimpleObjectRasterizer.SolidAndWireframe, wiredivratio, 0.04f, MyStringId.GetOrCompute("Square"), MyStringId.GetOrCompute("WeaponLaser"), false, MyBillboard.BlendTypeEnum.SDR);
+        //
 
         }
 
         public void DoRescale()
         {
+
             var volume = grid.PositionComp.WorldVolume;
-            scale = 0.042 / volume.Radius * (grid.GridSizeEnum == MyCubeSize.Small ? 0.8 : 1);
+            
+
+            var camera = MyAPIGateway.Session.Camera;
+            var newFov = camera.FovWithZoom;
+            var aspectRatio = camera.ViewportSize.X / camera.ViewportSize.Y;
+
+            var fov = Math.Tan(newFov * 0.5);
+            var scaleFov = 0.1 * fov;
+            var scaleFov2 = 0.2 * fov;
+            // 0.10, 0.05
+            
+
+
+
+
+            var hudscale = 0.08f;
+            // Dynamically calculate the upper limit for scale, maybe?
+          //  var scaleUpperLimit = 0.001f;  // Or any other logic
+            var scale = MathHelper.Clamp((float)(scaleFov * (hudscale * 0.23f)), 0.0008f, 0.00099f);
+
+            //scale = (0.042 / volume.Radius) * scaleFov2;
+
+            var offset = new Vector2D(1.6, 1.5);
+            offset.X *= scaleFov * aspectRatio;
+            offset.Y *= scaleFov * aspectRatio;
+            var tempMatrix = MyAPIGateway.Session.Camera.WorldMatrix;
+            var position = Vector3D.Transform(new Vector3D(offset.X, offset.Y, -50), tempMatrix);
+
+
+            //fucking god please 
+            // var hudscale = 0.25f;
+            //  var volume = grid.PositionComp.LocalVolume;
+            // var scale = (float)((scaleFov *= volume.Radius) * (hudscale / 0.13f));
+
+            //scale = MathHelper.Clamp(scale, 0.0000001f, 0.000005f);
+
+            //scale *= ((float)volume.Radius);
+
+
+
             relTrans = Vector3D.TransformNormal(grid.WorldMatrix.Translation - grid.PositionComp.WorldAABB.Center, MatrixD.Transpose(grid.WorldMatrix)) * scale;
-            grid.PositionComp.Scale = (float)scale;
+            if (scale > 0.0008)
+            {
+                var backOffset = (scale - 0.0008) * 10000;  // Adjust this multiplier as needed
+                var moveVector = Vector3D.TransformNormal(-camera.WorldMatrix.Forward, MatrixD.Transpose(grid.WorldMatrix));  // Notice the '-' to reverse the direction
+                relTrans += moveVector * backOffset;  // Using += to move away from the camera
+            }
+            //  MyAPIGateway.Utilities.ShowNotification($"T3 {relTrans}", 16, "Red");
+            grid.PositionComp.Scale = scale;
+            MyAPIGateway.Utilities.ShowNotification($"Scale {scale}", 16, "Red");
         }
 
         public void DoCleanup()
@@ -247,7 +322,7 @@ namespace klime.Visual
         
         public void DoBlockRemove(Vector3I position)
         {
-            SlimList.Clear(); SlimList.Add(position);
+            SlimList.Clear(); SlimList.Add(position); 
             foreach (var subgrid in gridGroup)
             {
                 if (subgrid.grid == null) continue;
@@ -258,7 +333,7 @@ namespace klime.Visual
                 if (slim.FatBlock == null && (!SlimDelDict.ContainsKey(slim.Position))) 
                 {
                     slim.Dithering = 1.25f;
-                    var blockKind = 0; //defaults to 0
+                    int blockKind;
                     if (slim.Mass >= 500) { blockKind = 1; } else { blockKind = 2; }
                     string colorHex = "#FF0000";
                     switch (blockKind) 
@@ -373,7 +448,6 @@ namespace klime.Visual
             DelList.Clear();
             SlimDelList.Clear();
             FatDelList.Clear();
-
             float slimDamageLast10Seconds = 0;
             float fatBlockDamageLast10Seconds = 0;
             float slimDamageThisFrame = 0;
@@ -431,7 +505,7 @@ namespace klime.Visual
                 DamageEntries.Remove(oldEntry);
 
             // Display both damages
-            DisplayTotalDamage(slimDamageLast10Seconds, fatBlockDamageLast10Seconds);
+           // DisplayTotalDamage(slimDamageLast10Seconds, fatBlockDamageLast10Seconds);
 
 
             rotationForward = rotationForwardBase + rotationForward;
@@ -440,6 +514,8 @@ namespace klime.Visual
             var origTranslation = renderMatrix.Translation;
             renderMatrix = rotMatrix * renderMatrix;
             renderMatrix.Translation = origTranslation;
+          
+
             foreach (var subgrid in gridGroup) { if (subgrid.grid != null) subgrid.UpdateMatrix(renderMatrix); }
 
             // Please don't attempt to read into the above code
@@ -453,6 +529,7 @@ namespace klime.Visual
         public MyCubeGrid realGrid;
         public MatrixD realGridBaseMatrix;
         public GridG visGrid;
+        
         public int lifetime;
         public ushort netID = 39302;
         public bool isClosed;
@@ -460,7 +537,8 @@ namespace klime.Visual
         public List<IMySlimBlock> BlocksForBillboards = new List<IMySlimBlock>();
         public List<MyBillboard> persistantbillboards = new List<MyBillboard>();
         public Color BillboardRED;
-
+        public Vector4 Billboardcolor;
+        private MyStringId PaperDollBGSprite = MyStringId.TryGet("paperdollBG");
         public EntVis(MyCubeGrid realGrid, double xOffset, double yOffset, double rotOffset)
         {
             this.realGrid = realGrid;
@@ -552,10 +630,66 @@ namespace klime.Visual
             {
                 var playerCamera = MyAPIGateway.Session.Camera;
                 var renderMatrix = playerCamera.WorldMatrix;
+
+                var camera = MyAPIGateway.Session.Camera;
+                var newFov = camera.FovWithZoom;
+                var aspectRatio = camera.ViewportSize.X / camera.ViewportSize.Y;
+
+                var fov = Math.Tan(newFov * 0.5);
+                var scaleFov = 0.1 * fov;
+                var offset = new Vector2D(xOffset + 2.52, yOffset + 1.5);
+                offset.X *= scaleFov * aspectRatio;
+                offset.Y *= scaleFov;
+                var tempMatrix = MyAPIGateway.Session.Camera.WorldMatrix;
+                var position = Vector3D.Transform(new Vector3D(offset.X, offset.Y, -10 * scaleFov), tempMatrix);
+
+                var origin = position;
+                var left = tempMatrix.Left;
+                var up = tempMatrix.Up;
+                var hudscale = 2.55f;
+                var scale = (float)(scaleFov * (hudscale * 0.23f));
+
+
+                //renderMatrix.Translation += ((renderMatrix.Forward * scaleFov) + (renderMatrix.Right * offset.X * scaleFov) + (renderMatrix.Down * offset.Y * scaleFov));
+
                 renderMatrix.Translation += renderMatrix.Forward * (0.1 / (0.6 * playerCamera.FovWithZoom)) + renderMatrix.Right * xOffset + renderMatrix.Down * yOffset;
+
                 visGrid.UpdateMatrix(renderMatrix, realGrid.WorldMatrix * MatrixD.Invert(renderMatrix));
+
+                UpdateBackground();
+
             }
         }
+        //DS reference code:
+        public void UpdateBackground()
+        {
+
+            var camera = MyAPIGateway.Session.Camera;
+            var newFov = camera.FovWithZoom;
+            var aspectRatio = camera.ViewportSize.X / camera.ViewportSize.Y;
+
+            var fov = Math.Tan(newFov * 0.5);
+            var scaleFov = 0.1 * fov;
+            var offset = new Vector2D(xOffset + 6.5 , yOffset - 4.85);
+            offset.X *= scaleFov * aspectRatio;
+            offset.Y *= scaleFov;
+            var tempMatrix = MyAPIGateway.Session.Camera.WorldMatrix;
+            var position = Vector3D.Transform(new Vector3D(offset.X, offset.Y, -.9), tempMatrix);
+
+            var origin = position;
+            var left = tempMatrix.Left;
+            var up = tempMatrix.Up;
+            var hudscale = 18f;
+            var scale = (float)(scaleFov * (hudscale * 0.23f));
+
+            Billboardcolor = (Color.Lime * 0.75f).ToVector4();
+
+            //Vector4 color;
+
+            MyTransparentGeometry.AddBillboardOriented(PaperDollBGSprite, Billboardcolor, origin, left, up, scale, BlendTypeEnum.SDR);
+
+        }
+
 
         private void UpdateVisLogic()
         {
