@@ -1049,7 +1049,7 @@
             <DestroyEffect>BlockDestroyedExplosion_Tiny</DestroyEffect>
             <DestroySound>WepSmallWarheadExpl</DestroySound>
             <ResourceSinkGroup>Battery</ResourceSinkGroup>
-            <RequiredPowerInput>0.01</RequiredPowerInput>
+            <RequiredPowerInput>0.0001</RequiredPowerInput>
             <PCU>25</PCU>
             <EmissiveColorPreset>Extended</EmissiveColorPreset>
         </Definition>
@@ -1100,7 +1100,7 @@
             <DestroyEffect>BlockDestroyedExplosion_Tiny</DestroyEffect>
             <DestroySound>WepSmallWarheadExpl</DestroySound>
             <ResourceSinkGroup>Battery</ResourceSinkGroup>
-            <RequiredPowerInput>0.01</RequiredPowerInput>
+            <RequiredPowerInput>0.0001</RequiredPowerInput>
             <PCU>25</PCU>
             <IsAirTight>true</IsAirTight>
             <EmissiveColorPreset>Extended</EmissiveColorPreset>
@@ -1153,7 +1153,7 @@
             <MirroringZ>Y</MirroringZ>
             <MirroringY>Z</MirroringY>
             <ResourceSinkGroup>Battery</ResourceSinkGroup>
-            <RequiredPowerInput>0.01</RequiredPowerInput>
+            <RequiredPowerInput>0.0001</RequiredPowerInput>
             <EdgeType>Light</EdgeType>
             <BuildTimeSeconds>24</BuildTimeSeconds>
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
@@ -1201,7 +1201,7 @@
             <MirroringZ>Y</MirroringZ>
             <MirroringY>Z</MirroringY>
             <ResourceSinkGroup>Battery</ResourceSinkGroup>
-            <RequiredPowerInput>0.01</RequiredPowerInput>
+            <RequiredPowerInput>0.0001</RequiredPowerInput>
             <EdgeType>Light</EdgeType>
             <BuildTimeSeconds>10</BuildTimeSeconds>
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
@@ -1263,7 +1263,7 @@
             <DamagedSound>ParticleElectrical</DamagedSound>
             <PCU>25</PCU>
             <ResourceSinkGroup>Battery</ResourceSinkGroup>
-            <RequiredPowerInput>0.01</RequiredPowerInput>
+            <RequiredPowerInput>0.0001</RequiredPowerInput>
             <EmissiveColorPreset>Extended</EmissiveColorPreset>
         </Definition>
 
@@ -1310,7 +1310,7 @@
             <DamagedSound>ParticleElectrical</DamagedSound>
             <PCU>25</PCU>
             <ResourceSinkGroup>Battery</ResourceSinkGroup>
-            <RequiredPowerInput>0.01</RequiredPowerInput>
+            <RequiredPowerInput>0.0001</RequiredPowerInput>
             <EmissiveColorPreset>Extended</EmissiveColorPreset>
         </Definition>
 
@@ -1368,7 +1368,7 @@
             <WaypointReachedZoneSizeMin>0</WaypointReachedZoneSizeMin>
             <WaypointReachedZoneSizeMax>500</WaypointReachedZoneSizeMax>
             <ResourceSinkGroup>Battery</ResourceSinkGroup>
-            <RequiredPowerInput>0.01</RequiredPowerInput>
+            <RequiredPowerInput>0.0001</RequiredPowerInput>
             <EmissiveColorPreset>Extended</EmissiveColorPreset>
         </Definition>
 
@@ -1417,7 +1417,7 @@
             <WaypointReachedZoneSizeMin>0</WaypointReachedZoneSizeMin>
             <WaypointReachedZoneSizeMax>500</WaypointReachedZoneSizeMax>
             <ResourceSinkGroup>Battery</ResourceSinkGroup>
-            <RequiredPowerInput>0.01</RequiredPowerInput>
+            <RequiredPowerInput>0.0001</RequiredPowerInput>
             <EmissiveColorPreset>Extended</EmissiveColorPreset>
         </Definition>
 
@@ -1468,7 +1468,7 @@
             <MirroringZ>Y</MirroringZ>
             <MirroringY>Z</MirroringY>
             <ResourceSinkGroup>Battery</ResourceSinkGroup>
-            <RequiredPowerInput>0.01</RequiredPowerInput>
+            <RequiredPowerInput>0.0001</RequiredPowerInput>
             <EdgeType>Light</EdgeType>
             <BuildTimeSeconds>24</BuildTimeSeconds>
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
@@ -1515,7 +1515,7 @@
             <MirroringZ>Y</MirroringZ>
             <MirroringY>Z</MirroringY>
             <ResourceSinkGroup>Battery</ResourceSinkGroup>
-            <RequiredPowerInput>0.01</RequiredPowerInput>
+            <RequiredPowerInput>0.0001</RequiredPowerInput>
             <EdgeType>Light</EdgeType>
             <BuildTimeSeconds>10</BuildTimeSeconds>
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
