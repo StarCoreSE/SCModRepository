@@ -184,18 +184,14 @@ namespace Invalid.spawnbattle
         }
 
 
-        private void SpawnRandomPrefabs(List<string> prefabNames, int spawnCount, string factionName)
+        private void SpawnRandomPrefabs(List<string> prefabNames, int spawnCount, string startingFactionName)
         {
             double maxSpawnRadius = 10000; // Maximum spawn radius in meters
 
             List<Vector3D> spawnPositions = new List<Vector3D>();
             Dictionary<string, int> spawnedCounts = new Dictionary<string, int>(); // To store the counts of each spawned prefab
 
-            // Determine the factions to use
-            IMyFaction redFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag("RED");
-            IMyFaction bluFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag("BLU");
-
-            IMyFaction currentFaction = factionName == "RED" ? redFaction : bluFaction;
+            string currentFactionName = startingFactionName; // Set the starting faction name
 
             for (int i = 0; i < spawnCount; i++)
             {
@@ -207,6 +203,9 @@ namespace Invalid.spawnbattle
                 // Calculate orientation vectors
                 Vector3D direction = Vector3D.Normalize(origin - spawnPosition);
                 Vector3D up = Vector3D.Normalize(Vector3D.Cross(direction, Vector3D.Up));
+
+                // Determine the current faction based on the iteration
+                string factionName = currentFactionName;
 
                 // Check if the spawn position is valid
                 bool isValidPosition = CheckAsteroidDistance(spawnPosition, minSpawnRadiusFromGrids) && CheckGridDistance(spawnPosition, minSpawnRadiusFromGrids);
@@ -233,13 +232,16 @@ namespace Invalid.spawnbattle
                         IMyPrefabManager prefabManager = MyAPIGateway.PrefabManager;
                         List<IMyCubeGrid> resultList = new List<IMyCubeGrid>();
 
+                        // Determine the faction to use for the spawned prefab
+                        IMyFaction faction = MyAPIGateway.Session.Factions.TryGetFactionByTag(factionName);
+
                         // Spawn the prefab with the current faction as the owner
-                        prefabManager.SpawnPrefab(resultList, randomPrefabName, spawnPosition, direction, up, ownerId: currentFaction.FounderId, spawningOptions: SpawningOptions.None);
+                        prefabManager.SpawnPrefab(resultList, randomPrefabName, spawnPosition, direction, up, ownerId: faction?.FounderId ?? 0, spawningOptions: SpawningOptions.None);
 
                         // Change ownership of the spawned grids
                         foreach (IMyCubeGrid spawnedGrid in resultList)
                         {
-                            spawnedGrid.ChangeGridOwnership(currentFaction.FounderId, MyOwnershipShareModeEnum.All);
+                            spawnedGrid.ChangeGridOwnership(faction?.FounderId ?? 0, MyOwnershipShareModeEnum.All);
                         }
 
                         // Add the spawn position to the list
@@ -256,7 +258,7 @@ namespace Invalid.spawnbattle
                         }
 
                         // Switch to the other faction for the next spawn
-                        currentFaction = currentFaction == redFaction ? bluFaction : redFaction;
+                        currentFactionName = (currentFactionName == "RED") ? "BLU" : "RED";
                     }
                 }
             }
