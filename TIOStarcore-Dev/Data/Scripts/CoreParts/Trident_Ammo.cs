@@ -582,7 +582,7 @@ namespace Scripts
                 {
                     Enable = true,
                     Radius = 8f, // Meters
-                    Damage = 60000,
+                    Damage = 10000,
                     Depth = 4f,
                     MaxAbsorb = 0f,
                     Falloff = Linear, //.NoFalloff applies the same damage to all blocks in radius
@@ -705,6 +705,18 @@ namespace Scripts
                 ModelName = "\\Models\\Ammo\\TorpReaper_Torp.mwm", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
+                Decals = new DecalDef
+                {
+                    MaxAge = 3600,
+                    Map = new[]
+                    {
+                        new TextureMapDef
+                        {
+                            HitMaterial = "Metal",
+                            DecalMaterial = "TIO_Explosive_Decal",
+                        },
+                    },
+                },
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
