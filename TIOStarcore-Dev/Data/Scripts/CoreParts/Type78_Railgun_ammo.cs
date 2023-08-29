@@ -344,13 +344,9 @@ namespace Scripts
                         new TextureMapDef
                         {
                             HitMaterial = "Metal",
-                            DecalMaterial = "GunBullet",
+                            DecalMaterial = "TIO_Shatter_Decal",
                         },
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Glass",
-                            DecalMaterial = "GunBullet",
-                        },
+
                     },
                 },
                 Particles = new AmmoParticleDef

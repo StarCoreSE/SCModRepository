@@ -455,7 +455,7 @@ namespace Scripts
                 ModelName = "", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
-          /*      Decals = new DecalDef
+                Decals = new DecalDef
                 {
                     MaxAge = 3600,
                     Map = new[]
@@ -463,16 +463,10 @@ namespace Scripts
                         new TextureMapDef
                         {
                             HitMaterial = "Metal",
-                            DecalMaterial = "GunBullet",
-                        },
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Glass",
-                            DecalMaterial = "GunBullet",
+                            DecalMaterial = "TIO_Bullet_Decal",
                         },
                     },
                 },
-                */
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
