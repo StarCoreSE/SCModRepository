@@ -18,7 +18,8 @@ namespace Scripts
             ModularSRM8,
             ERPPC,
             Starcore_RWR_Projectiles,
-            Starcore_RWR_Asteroids
+            Starcore_RWR_Asteroids,
+            SC_Radome
             );
 
         }
