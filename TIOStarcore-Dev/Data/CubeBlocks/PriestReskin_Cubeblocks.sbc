@@ -9,7 +9,13 @@
                 <SubtypeId>PriestReskin_Block</SubtypeId>
             </Id>
             <DisplayName>F-2 "Spartan" Rotary Gun</DisplayName>
-            <Description>I'm Commander Shepard and this is Spartan's favorite gun on his citadel. 2.25km Range Anti Missile Turret. Kinetic Damage, 2000m/s bullet speed.</Description>
+            <Description>
+              [2km Targeting Range]
+              [Kinetic damage]
+              [Targets Missiles]
+              [3500 m/s]
+              This weapon slowly repairs itself while offline.
+            </Description>
 			<GuiVisible>true</GuiVisible>
             <Icon>Textures\GUI\Icons\TestScene.png</Icon>
             <CubeSize>Large</CubeSize>

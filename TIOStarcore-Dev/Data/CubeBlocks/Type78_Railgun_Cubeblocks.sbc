@@ -9,7 +9,13 @@
                 <SubtypeId>Type78_Railgun_Block</SubtypeId>
             </Id>
             <DisplayName>Type 78 Railgun</DisplayName>
-            <Description>Improved range and speed over the MK1. Will penetrate all but the strongest of hulls.</Description>
+            <Description>
+              [5km Targeting Range]
+              [Kinetic damage]
+              [Draws Power]
+              [4000 m/s]
+              This weapon slowly repairs itself while offline.
+            </Description>
 			<GuiVisible>true</GuiVisible>
             <Icon>Textures\GUI\Icons\MK2RailgunMain.png</Icon>
             <CubeSize>Large</CubeSize>

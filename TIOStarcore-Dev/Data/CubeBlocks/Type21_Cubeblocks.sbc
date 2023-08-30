@@ -9,7 +9,12 @@
                 <SubtypeId>Type21_Artillery_Block</SubtypeId>
             </Id>
             <DisplayName>Type 21 Artillery</DisplayName>
-            <Description>Improved range and speed over the MK1. Fires 2(4 in total)rounds before needing to reload. Will leave small craters in your enemies hulls.</Description>
+            <Description>
+              [4km Targeting Range]
+              [Energy damage]
+              [2500 m/s]
+              This weapon slowly repairs itself while offline.
+            </Description>
 			<GuiVisible>true</GuiVisible>
             <Icon>Textures\GUI\Icons\Mk2_MainScene.png</Icon>
             <CubeSize>Large</CubeSize>

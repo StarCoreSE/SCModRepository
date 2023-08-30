@@ -13,7 +13,7 @@ using IMySlimBlock = VRage.Game.ModAPI.IMySlimBlock;
 
 namespace TIOSelfRepair
 {
-	[MyEntityComponentDescriptor(typeof(MyObjectBuilder_ConveyorSorter), false, "Type18_Artillery_Block", "Type21_Artillery_Block", "Type24_Artillery_Block", "Type77_Railgun_Block", "Type78_Railgun_Block", "Type79_Railgun_Block", "Reaver_Coilgun_Block", "Torp_Block")]
+	[MyEntityComponentDescriptor(typeof(MyObjectBuilder_ConveyorSorter), false, "Type18_Artillery_Block", "Type21_Artillery_Block", "Type24_Artillery_Block", "Type77_Railgun_Block", "Type78_Railgun_Block", "Type79_Railgun_Block", "Reaver_Coilgun_Block", "Torp_Block", "Priest_Block", "PriestReskin_Block")]
 	public class TIOSelfRepair : MyGameLogicComponent
 	{
 		private IMyConveyorSorter artilleryBlock;
