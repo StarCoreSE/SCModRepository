@@ -18,7 +18,7 @@
         [Reloads 6 times]
         Effective against most targets, more vulnerable to point defense than other launchers.
       </Description>
-      <Icon>Textures\Icons\UNNHeavy.png</Icon>
+      <Icon>Textures\Icons\MCRNHeavy.png</Icon>
       <CubeSize>Large</CubeSize>
       <GuiVisible>true</GuiVisible>
       <BlockTopology>TriangleMesh</BlockTopology>
@@ -75,13 +75,13 @@
         [Reloads 4 times]
         Effective against most targets, more vulnerable to point defense than other launchers.
       </Description>
-      <Icon>Textures\Icons\MCRNHeavy.png</Icon>
+      <Icon>Textures\Icons\UNNHeavy.png</Icon>
       <CubeSize>Large</CubeSize>
       <GuiVisible>true</GuiVisible>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="3" y="1" z="5" />
       <ModelOffset x="0" y="0" z="0" />
-      <Model>Models\Starcore_E\UNN_Heavy_Launcher.mwm</Model>
+      <Model>Models\Starcore_E\UNN_Heavy_V2.mwm</Model>
       <Components>
         <Component Subtype="SteelPlate" Count="120" />
         <Component Subtype="Construction" Count="160" />
