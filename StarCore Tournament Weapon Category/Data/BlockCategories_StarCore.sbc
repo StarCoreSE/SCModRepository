@@ -187,11 +187,14 @@
          <!--MORE UTILITY STUFF-->
         <string>SC_RCS_Computer</string>
         <string>DampeningEnhancer_x2_Large</string>
+        <string>SC_PowerControlSystem_L</string>
+        <string>LargeLargeBlockUpgrade</string>
+        
 
       </ItemIds>
     </Category>
 
-    <!--drone whitelisted weps-->
+    <!--drone whitelisted weps
     <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
       <Id>
         <TypeId>GuiBlockCategoryDefinition</TypeId>
@@ -224,7 +227,7 @@
 
       </ItemIds>
     </Category>
-
+-->
 
 
   </CategoryClasses>

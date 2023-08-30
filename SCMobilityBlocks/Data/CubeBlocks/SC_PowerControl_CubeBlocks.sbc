@@ -8,9 +8,9 @@
         <SubtypeId>SC_PowerControlSystem_L</SubtypeId>
       </Id>
       <Public>true</Public>
-      <DisplayName>DisplayName_Block_SC_PowerControlSystem</DisplayName>
+      <DisplayName>Power Controller</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\SC_PowerControlSystem_L.dds</Icon>
-      <Description>Description_SC_PowerControlSystem</Description>
+      <Description>Intel® Extreme Tuning Utility (Intel® XTU) is a simple Windows* performance tuning application for novice and experienced enthusiasts to overclock, monitor, and stress a system. The software interface has a set of strong capabilities, common in most enthusiast platforms. This interface also has special features available on new Intel® processors and motherboards.</Description>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="1" y="1" z="1" />
@@ -58,9 +58,9 @@
         <SubtypeId>SC_PowerControlSystem_S</SubtypeId>
       </Id>
       <Public>true</Public>
-      <DisplayName>DisplayName_Block_SC_PowerControlSystem</DisplayName>
+      <DisplayName>Power Controller</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\SC_PowerControlSystem_L.dds</Icon>
-      <Description>Description_SC_PowerControlSystem</Description>
+      <Description>Intel® Extreme Tuning Utility (Intel® XTU) is a simple Windows* performance tuning application for novice and experienced enthusiasts to overclock, monitor, and stress a system. The software interface has a set of strong capabilities, common in most enthusiast platforms. This interface also has special features available on new Intel® processors and motherboards.</Description>
       <CubeSize>Small</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="1" y="1" z="2" />

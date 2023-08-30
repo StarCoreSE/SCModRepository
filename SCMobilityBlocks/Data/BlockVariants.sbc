@@ -12,6 +12,8 @@
                 <Block Type="MyObjectBuilder_Thrust" Subtype="DampeningEnhancer_x2_Small" />
             </Blocks>
         </BlockVariantGroup>
+      
+      
 
     </BlockVariantGroups>
 </Definitions>
