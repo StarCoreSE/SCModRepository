@@ -29,13 +29,14 @@ namespace klime.Visual
         public MatrixD controlMatrix;
         public double scale, tempscale = 0.8;
         internal Task GridTask = new Task();
-        Vector3D relTrans, relForward, relUp;
+        Vector3D relTrans;
         public BoundingBoxD gridBox;
         public MatrixD gridMatrix;
-        private BoundingBoxD aabb;
         public Color BillboardRED;
         public Vector4 Billboardcolor;
-        private MyStringId Material = MyStringId.TryGet("paperdollBG");
+        private MyStringId PaperDollBGSprite = MyStringId.TryGet("paperdollBG");
+        private String ArmorMat = "Hazard_Armor";
+        string ArmorRecolorHex = "#02f726";
         public bool runonce = false;
         public float oldFOV;
         public bool needsRescale = false;
@@ -50,18 +51,17 @@ namespace klime.Visual
         public void UpdateMatrix(MatrixD renderMatrix)
         {
             var camera = MyAPIGateway.Session.Camera;
-            var newFov = camera.FovWithZoom;
+            float newFov = camera.FovWithZoom;
             if (oldFOV != newFov)
             {
                 oldFOV = newFov;
                 needsRescale = true;
             }
 
-            MatrixD tempmatrix = renderMatrix;
 
             var aspectRatio = camera.ViewportSize.X / camera.ViewportSize.Y;
-            var fov = Math.Tan(newFov * 0.5);
-            var scaleFov = 0.1 * fov;
+            var fov = (float)Math.Tan(newFov * 0.5f);
+            var scaleFov = (0.1f * fov);
             var offset = new Vector2D(.1, .1);
             offset.X *= scaleFov * aspectRatio;
             offset.Y *= scaleFov * aspectRatio;
@@ -87,6 +87,76 @@ namespace klime.Visual
             grid.WorldMatrix = renderMatrix;
             gridMatrix = renderMatrix;
 
+            var bruhmatrix = renderMatrix;
+            float lowerlimit;
+
+            if (newFov < 1.2)
+            {
+                 lowerlimit = 0.03f;
+            }
+            else
+            {
+                 lowerlimit = 0.04f;
+            }
+
+            var backOffsetQuarter = (scale - 0.001) * 0.25;
+            var backOffsetHalf = (scale - 0.001) * 0.2;
+            var backOffsetEighth = (scale - 0.001) * 0.125;
+
+            var moveVectorBackwards = Vector3D.TransformNormal(-camera.WorldMatrix.Forward, MatrixD.Transpose(bruhmatrix));
+            var moveVectorLeft = Vector3D.TransformNormal(-camera.WorldMatrix.Right, MatrixD.Transpose(bruhmatrix));
+
+            var moveVectorForwards = Vector3D.TransformNormal(camera.WorldMatrix.Forward, MatrixD.Transpose(bruhmatrix));
+            var moveVectorRight = Vector3D.TransformNormal(camera.WorldMatrix.Right, MatrixD.Transpose(bruhmatrix));
+
+            bruhmatrix.Translation += moveVectorBackwards * backOffsetQuarter;
+            bruhmatrix.Translation += moveVectorLeft * backOffsetHalf;
+
+            var painmatrix = bruhmatrix;
+            var greaterpainmatrix = bruhmatrix;
+            greaterpainmatrix.Translation += moveVectorBackwards * backOffsetEighth;
+            greaterpainmatrix.Translation += moveVectorLeft * backOffsetEighth;
+
+
+            painmatrix.Translation += moveVectorForwards * backOffsetEighth;
+            painmatrix.Translation += moveVectorRight * backOffsetEighth;
+
+            var left = MyAPIGateway.Session.Camera.WorldMatrix.Left;
+            var up = MyAPIGateway.Session.Camera.WorldMatrix.Up;
+
+
+
+
+            
+
+            Billboardcolor = (Color.Lime * 0.75f).ToVector4();
+            MyTransparentGeometry.AddBillboardOriented(
+                PaperDollBGSprite, 
+                Billboardcolor,
+                bruhmatrix.Translation,
+               left, up, 
+                MathHelper.Clamp((float)grid.PositionComp.Scale * 0.9f, lowerlimit, 0.09f) , 
+                BlendTypeEnum.SDR);
+
+            Billboardcolor = (Color.Red * 0.5f).ToVector4();
+            MyTransparentGeometry.AddBillboardOriented(
+               PaperDollBGSprite,
+               Billboardcolor, painmatrix.Translation,
+               left, 
+               up,
+               MathHelper.Clamp((float)grid.PositionComp.Scale * 0.9f, lowerlimit, 0.09f),
+               BlendTypeEnum.AdditiveTop);
+
+            Billboardcolor = (Color.DodgerBlue * 0.5f).ToVector4();
+            MyTransparentGeometry.AddBillboardOriented(
+               PaperDollBGSprite,
+               Billboardcolor, greaterpainmatrix.Translation,
+               left,
+               up,
+               MathHelper.Clamp((float)grid.PositionComp.Scale * 0.9f, lowerlimit, 0.09f),
+               BlendTypeEnum.AdditiveTop);
+
+            //  MyTransparentGeometry.AddBillboardOriented(PaperDollBGSprite,   Billboardcolor,   bruhmatrix.Translation,  fugmatrix.Left, fugmatrix.Up,   MathHelper.Clamp((float)grid.PositionComp.Scale * 0.9f, lowerlimit, 0.09f) ,  BlendTypeEnum.SDR);
 
             if (needsRescale)
             {
@@ -94,6 +164,7 @@ namespace klime.Visual
                 needsRescale = false;
             }
         }
+
 
         public void DoRescale()
         {
@@ -121,16 +192,19 @@ namespace klime.Visual
         {
             grid.ChangeGridOwnership(MyAPIGateway.Session.Player.IdentityId, MyOwnershipShareModeEnum.Faction);
             List<IMySlimBlock> allBlocks = new List<IMySlimBlock>();
-
             IMyCubeGrid iGrid = grid as IMyCubeGrid;
             iGrid.GetBlocks(allBlocks);
             iGrid.Render.DrawInAllCascades = true;
             iGrid.Render.FastCastShadowResolve = true;
             iGrid.Render.MetalnessColorable = true;
-            string OrangeHex = "#F5F5DC";
-            Vector3 orangeHSVOffset = MyColorPickerConstants.HSVToHSVOffset(ColorExtensions.ColorToHSV(ColorExtensions.HexToColor(OrangeHex)));
-            orangeHSVOffset = new Vector3((float)Math.Round(orangeHSVOffset.X, 2), (float)Math.Round(orangeHSVOffset.Y, 2), (float)Math.Round(orangeHSVOffset.Z, 2));
-            iGrid.ColorBlocks(iGrid.Min, iGrid.Max, orangeHSVOffset);
+            
+            Vector3 ArmorHSVOffset = MyColorPickerConstants.HSVToHSVOffset(ColorExtensions.ColorToHSV(ColorExtensions.HexToColor(ArmorRecolorHex)));
+            ArmorHSVOffset = new Vector3((float)Math.Round(ArmorHSVOffset.X, 2), (float)Math.Round(ArmorHSVOffset.Y, 2), (float)Math.Round(ArmorHSVOffset.Z, 2));
+           
+            
+          //  iGrid.ColorBlocks(grid.Min, grid.Max, ArmorHSVOffset);
+            iGrid.SkinBlocks(grid.Min, grid.Max, ArmorHSVOffset , ArmorMat);
+
             foreach (var block in allBlocks)
             {
                 block.Dithering = 2.45f;
@@ -143,6 +217,7 @@ namespace klime.Visual
                 DisableBlock(fatblock as IMyLightingBlock);
 
             }
+            iGrid.Render.InvalidateRenderObjects();
         }
 
         private void DisableBlock(IMyFunctionalBlock block)
@@ -152,8 +227,9 @@ namespace klime.Visual
 
                 block.Enabled = false;
                 block.Render.ShadowBoxLod = false;
-                block.SlimBlock.Dithering = 2.5f; // this works!
+                block.SlimBlock.Dithering = 2.45f; // this works!
                 block.Visible = true;
+                block.CastShadows = false;
                 block.SlimBlock.UpdateVisual();
               // block.Render.UpdateTransparency();
 
@@ -162,20 +238,6 @@ namespace klime.Visual
 
         }
 
-        private void MakeTransparent(IMyCubeBlock block)
-        {
-            if (block != null)
-            {
-                block.SlimBlock.Dithering = 2.5f; // this works!
-                                       //slim.CubeGrid.ColorBlocks(slim.Position, slim.Position, new Vector3(0, 0, 0));
-                string OrangeHex = "#FFA500";
-                Vector3 orangeHSVOffset = MyColorPickerConstants.HSVToHSVOffset(ColorExtensions.ColorToHSV(ColorExtensions.HexToColor(OrangeHex)));
-                orangeHSVOffset = new Vector3((float)Math.Round(orangeHSVOffset.X, 2), (float)Math.Round(orangeHSVOffset.Y, 2), (float)Math.Round(orangeHSVOffset.Z, 2));
-                grid.ChangeColorAndSkin(grid.GetCubeBlock(block.Position), orangeHSVOffset);
-                block.SlimBlock.UpdateVisual();
-            }
-
-        }
 
         private void StopEffects(IMyExhaustBlock exhaust)
         {
@@ -311,7 +373,6 @@ namespace klime.Visual
                         int time = slim.FatBlock.Mass > 500 ? customtimer : timer + 10;
                         if (!DelDict.ContainsKey(slim.FatBlock)) DelDict.Add(slim.FatBlock, time);
                         FatBlockIntegrityDict[slim.Position] = integrity;
-
                         MyVisualScriptLogicProvider.SetHighlightLocal(slim.FatBlock.Name, 3, 1, color);
                     }
                 }, "Iterating through gridGroup");
@@ -565,8 +626,8 @@ namespace klime.Visual
             var hudscale = 18f;
             var scale = (float)(scaleFov * (hudscale * 0.23f));
 
-            Billboardcolor = (Color.Lime * 0.75f).ToVector4();
-            MyTransparentGeometry.AddBillboardOriented(PaperDollBGSprite, Billboardcolor, origin, left, up, scale, BlendTypeEnum.SDR);
+          // Billboardcolor = (Color.Lime * 0.75f).ToVector4();
+          // MyTransparentGeometry.AddBillboardOriented(PaperDollBGSprite, Billboardcolor, origin, left, up, scale, BlendTypeEnum.SDR);
 
         }
 
