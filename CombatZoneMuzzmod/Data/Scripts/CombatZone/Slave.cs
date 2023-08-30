@@ -28,7 +28,7 @@ namespace Scripts
         <MyEntity>
         (1000);
         private MyEntity _sphereEntity;
-        private const double ViewDistSqr = 100000000;
+        private const double ViewDistSqr = 81000000;
         public override void LoadData()
         {
         }
@@ -115,10 +115,10 @@ namespace Scripts
                         _sphereEntity.Render.RemoveRenderObjects();
                         return;
                     }
-                    if (distFromCenterSqr < 138062500)
+                    if (distFromCenterSqr < 81000000)
                     {
                         var dist = Vector3D.Distance(cameraPos, Vector3D.Zero);
-                        var range = 11250f - dist;
+                        var range = 9000f - dist;
                         var p = (float)Math.Round(range / 1500f, 2);
                         if (!MyUtils.IsEqual(p, _sphereEntity.Render.Transparency))
                         {
