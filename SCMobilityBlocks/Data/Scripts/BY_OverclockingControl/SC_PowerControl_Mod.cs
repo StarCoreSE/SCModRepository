@@ -318,34 +318,21 @@ namespace StarCore.PowerControl
             //    TerminalRevise.SliderStyle.Log
             //);
             //
-            TerminalRevise.CreateSlider<IMyProgrammableBlock>(
-                "BY-",
-                "Slider-Thrust",
-                "Thrust Downclock",
-                BlockConfirm,
-                (Me) => true, // Set visibility to false
-                (Me) => {
-                    var logic = GetTerminal(Me);
-                    if (logic.Item1) return logic.Item2.Thrust;
-                    return 1;
-                },
-                (Me, value) => {
-                    var logic = GetTerminal(Me);
-                    if (!logic.Item1) return;
-                    logic.Item2.Thrust = value;
-                    if (logic.Item2.Block.Enabled) Overclock.Thrust(Me, value, true);
-                    logic.Item2.SaveConfig();
-                    Synchronize(Me, true);
-                },
-                (Me, value) => {
-                    var logic = GetTerminal(Me);
-                    value.Append(logic.Item2.Thrust + " " + "times");
-                },
-                0.2f,
-                1,
-                0.2f,
-                TerminalRevise.SliderStyle.Log
-            );
+            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-Thrust", "Thrust Downclock", BlockConfirm, BlockConfirm, (Me) => {
+                var logic = GetTerminal(Me);
+                if (logic.Item1) return logic.Item2.Thrust;
+                return 1;
+            }, (Me, value) => {
+                var logic = GetTerminal(Me);
+                if (!logic.Item1) return;
+                logic.Item2.Thrust = value;
+                if (logic.Item2.Block.Enabled) Overclock.Thrust(Me, value, true);
+                logic.Item2.SaveConfig();
+                Synchronize(Me, true);
+            }, (Me, value) => {
+                var logic = GetTerminal(Me);
+                value.Append(logic.Item2.Thrust + " " + "times");
+            }, 0.2f, 1, 0.2f, TerminalRevise.SliderStyle.Log);
             //
             //TerminalRevise.CreateSlider<IMyProgrammableBlock>(
             //    "BY-",

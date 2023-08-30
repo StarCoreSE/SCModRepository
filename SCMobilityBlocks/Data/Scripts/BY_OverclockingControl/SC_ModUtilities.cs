@@ -325,7 +325,10 @@ namespace BuYanMod.Utils
                 }
             }
 
-            public static void CreateSlider<TBlock>(string IDPrefix, string controlID, string Title, Func<IMyTerminalBlock, bool> Enabled, Func<IMyTerminalBlock, bool> Visible, Func<IMyTerminalBlock, float> Getter, Action<IMyTerminalBlock, float> Setter, Action<IMyTerminalBlock, StringBuilder> Writer, float Mini, float Max, float Median = 0, SliderStyle Modle = SliderStyle.Lin)
+            // Create a slider control for terminal block UI
+            public static void CreateSlider<TBlock>(string IDPrefix, string controlID, string Title, Func<IMyTerminalBlock, bool> Enabled, Func<IMyTerminalBlock, bool> Visible,
+                Func<IMyTerminalBlock, float> Getter, Action<IMyTerminalBlock, float> Setter, Action<IMyTerminalBlock, StringBuilder> Writer, float Mini, float Max,
+                float Median = 0, SliderStyle Modle = SliderStyle.Lin)
             {
                 IMyTerminalControlSlider control = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, TBlock>($"{IDPrefix}{controlID}");
                 control.Title = MyStringId.GetOrCompute(Title);
@@ -334,6 +337,7 @@ namespace BuYanMod.Utils
                 control.Getter = Getter;
                 control.Setter = Setter;
                 control.Writer = Writer;
+
                 switch (Modle)
                 {
                     case SliderStyle.Log:
@@ -346,6 +350,7 @@ namespace BuYanMod.Utils
                         control.SetLimits(Mini, Max);
                         break;
                 }
+
                 MyAPIGateway.TerminalControls.AddControl<TBlock>(control);
             }
 
