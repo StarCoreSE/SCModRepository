@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition>
+			<Id>
+				<TypeId>CubeBlock</TypeId>
+				<SubtypeId>XL_Brace</SubtypeId>
+			</Id>
+			<DisplayName>XL Brace</DisplayName>
+			<Description>A 5x2x2 large grid block that does not deform.</Description>
+			<Icon>Textures\XL_Brace_Thumb.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="5" y="2" z="2"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\large\XL_Brace.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="1500"/>
+				<Component Subtype="Girder" Count="32"/>
+				<Component Subtype="SteelPlate" Count="375"/>
+			</Components>
+			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="5.00" EndY="1.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="1.50" EndX="5.00" EndY="2.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
+				<MountPoint Side="Left" StartX="1.00" StartY="1.00" EndX="2.00" EndY="2.00"/>
+				<MountPoint Side="Right" StartX="1.00" StartY="0.00" EndX="2.00" EndY="1.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="1.00" EndX="1.00" EndY="2.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="5.00" EndY="0.50"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="5.00" EndY="1.00"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.25" File="Models\Cubes\large\XL_Brace_BS1.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\XL_Brace_BS2.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>XL_Brace</BlockPairName>
+			<MirroringY>MinusHalfX</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+			<EdgeType>Light</EdgeType>
+			<UsesDeformation>false</UsesDeformation>			
+		</Definition>
+	</CubeBlocks>
+</Definitions>
