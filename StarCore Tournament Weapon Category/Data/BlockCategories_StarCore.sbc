@@ -194,7 +194,7 @@
       </ItemIds>
     </Category>
 
-    <!--drone whitelisted weps-->
+    <!--drone whitelisted weps
     <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
       <Id>
         <TypeId>GuiBlockCategoryDefinition</TypeId>
@@ -227,7 +227,7 @@
 
       </ItemIds>
     </Category>
-
+-->
 
 
   </CategoryClasses>
