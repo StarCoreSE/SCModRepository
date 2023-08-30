@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<EntityComponents>
+
+		<EntityComponent xsi:type="MyObjectBuilder_ModStorageComponentDefinition">
+			<Id>
+				<TypeId>ModStorageComponent</TypeId>
+				<SubtypeId>BY_OverclockingControl</SubtypeId>
+			</Id>
+			<RegisteredStorageGuids>
+				<guid>f297034e-c68e-4af0-948f-3a70f108339c</guid>
+				
+			</RegisteredStorageGuids>
+		</EntityComponent>
+
+
+	</EntityComponents>
+
+</Definitions>
