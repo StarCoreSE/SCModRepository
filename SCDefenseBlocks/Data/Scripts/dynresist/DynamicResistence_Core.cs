@@ -128,8 +128,6 @@ namespace StarCore.DynamicResistence
             {
                 SetupTerminalControls<IMyCollector>();
 
-                SetupControls();
-
                 dynResistBlock = (IMyCollector)Entity;
 
                 if (dynResistBlock.CubeGrid?.Physics == null)
