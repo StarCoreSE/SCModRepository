@@ -195,7 +195,7 @@ namespace StarCore.DynamicResistence
                 float quarterOfMax = dynResistBlockDef.RequiredPowerInput = MaxAvailibleGridPower / 4f;
                 float maxPowerUsage = dynResistBlockDef.RequiredPowerInput = MaxAvailibleGridPower - quarterOfMax;
 
-                return baseUsage + maxPowerUsage;
+                return maxPowerUsage;
             }
             else    
             {
@@ -269,13 +269,13 @@ namespace StarCore.DynamicResistence
             {
                 return;
             }
-            else if (dynResistBlock != null && SiegeModeActivated && MaxAvailibleGridPower < 50f)
+            else if (dynResistBlock != null && SiegeModeActivated && MaxAvailibleGridPower <= 150f)
             {
                 SetCountdownStatus($"Insufficient Power", 1500, MyFontEnum.Red);
                 SiegeModeActivated = false;
                 return;
             }
-            else if (dynResistBlock != null && SiegeModeActivated && dynResistBlock.IsWorking && MaxAvailibleGridPower > 50f)
+            else if (dynResistBlock != null && SiegeModeActivated && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
                 var CurrentlyHighlighted = dynResistBlock.CubeGrid;
                 MyVisualScriptLogicProvider.SetHighlight(CurrentlyHighlighted.Name, thickness: 2, pulseTimeInFrames: 12, color: Color.DarkOrange);
@@ -323,6 +323,8 @@ namespace StarCore.DynamicResistence
 
                     SiegeModeActivated = false;
                     SiegeCooldownTimerActive = true;
+
+                    Sink.Update();
                 }
             }
             else
@@ -850,7 +852,7 @@ namespace StarCore.DynamicResistence
         }
         #endregion
 
-        private static void SetupControls()
+        /*private static void SetupControls()
         {
             List<IMyTerminalControl> controls;
             MyAPIGateway.TerminalControls.GetControls<IMyCollector>(out controls);
@@ -869,7 +871,7 @@ namespace StarCore.DynamicResistence
                         break;
                 }
             }
-        }
+        }*/
 
         private static bool Visible(IMyTerminalBlock block)
         {
