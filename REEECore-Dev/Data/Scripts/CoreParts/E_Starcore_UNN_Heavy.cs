@@ -27,7 +27,7 @@ namespace Scripts {
                     },
                    },
                 Muzzles = new[] {
-                    "muzzle_torpedo_01",    
+                    "muzzle_01",    
 
                 },
                 Ejector = "", // Optional; empty from which to eject "shells" if specified.
@@ -190,7 +190,7 @@ namespace Scripts {
                 E_Starcore_UNN_Torpedo_Detonation_Frag,
 
             },
-            //Animations = Starcore_Arrow_Animation,
+            Animations = UNN_Heavy_Anim,
             //Upgrades = UpgradeModules,
         };
         // Don't edit below this line.
