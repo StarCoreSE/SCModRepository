@@ -2,7 +2,7 @@
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <BlueprintClassEntries>
-    <Entry Class="LargeBlocks" BlueprintSubtypeId="MyProgrammableBlock/BY_OverclockingControlSystem_L" />
-    <Entry Class="SmallBlocks" BlueprintSubtypeId="MyProgrammableBlock/BY_OverclockingControlSystem_S" />
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="MyProgrammableBlock/SC_PowerControlSystem_L" />
+    <Entry Class="SmallBlocks" BlueprintSubtypeId="MyProgrammableBlock/SC_PowerControlSystem_S" />
   </BlueprintClassEntries>
 </Definitions>

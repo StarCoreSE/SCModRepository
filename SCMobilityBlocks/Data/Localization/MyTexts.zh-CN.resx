@@ -117,10 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Description_BY_OverclockingControlSystem" xml:space="preserve">
+  <data name="Description_SC_PowerControlSystem" xml:space="preserve">
     <value>一种用于控制船上设备超频的设备.</value>
   </data>
-  <data name="DisplayName_Block_BY_OverclockingControlSystem" xml:space="preserve">
+  <data name="DisplayName_Block_SC_PowerControlSystem" xml:space="preserve">
     <value>超频控制系统</value>
   </data>
 </root>

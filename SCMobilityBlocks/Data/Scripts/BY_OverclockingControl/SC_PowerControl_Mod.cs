@@ -15,8 +15,9 @@ namespace StarCore.PowerControl
     using VRage.ModAPI;
     using VRage.ObjectBuilders;
     using static BuYanMod.Utils.Utils;
+    using System.Runtime.InteropServices;
 
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_MyProgrammableBlock), false, "BY_OverclockingControlSystem_L", "BY_OverclockingControlSystem_S")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_MyProgrammableBlock), false, "SC_PowerControlSystem_L", "SC_PowerControlSystem_S")]
     public class OverclockingControlBlock : MyGameLogicComponent
     {
         [ProtoContract]
@@ -30,7 +31,7 @@ namespace StarCore.PowerControl
         }
 
         private readonly Guid GUID = new Guid("f297034ec68e4af0948f3a70f108339c");
-        private const string sID = "BY_OverclockingControlSystem";
+        private const string sID = "SC_PowerControlSystem";
         private static List<IMySlimBlock> GridBlocks = new List<IMySlimBlock>();
         protected IMyProgrammableBlock Block => Entity as IMyProgrammableBlock;
         private static bool controlIsCreated = false;
@@ -121,7 +122,7 @@ namespace StarCore.PowerControl
         public override void UpdateOnceBeforeFrame()
         {
             base.UpdateOnceBeforeFrame();
-            if (Block.BlockDefinition.SubtypeId == "BY_OverclockingControlSystem")
+            if (Block.BlockDefinition.SubtypeId == "SC_PowerControlSystem")
             {
                 Reactor = 1;
             }
@@ -228,89 +229,155 @@ namespace StarCore.PowerControl
             if (controlIsCreated) return;
 
             TerminalRevise.CreateSeparator<IMyProgrammableBlock>("A-", "Test", BlockConfirm, BlockConfirm);
-            TerminalRevise.CreateLabel<IMyProgrammableBlock>("BY-", "Label-Overclock Device", "Overclock Settings", BlockConfirm, BlockConfirm);
+            TerminalRevise.CreateLabel<IMyProgrammableBlock>("BY-", "Label-Overclock Device", "Downclock Settings", BlockConfirm, BlockConfirm);
 
-            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-Reactor", "Reactor Overclock", BlockConfirm, BlockConfirm, (Me) => {
-                var logic = GetTerminal(Me);
-                if (logic.Item1) return logic.Item2.Reactor;
-                return 1;
-            }, (Me, value) => {
-                var logic = GetTerminal(Me);
-                if (!logic.Item1) return;
-                logic.Item2.Reactor = value;
-                if (logic.Item2.Block.Enabled) Overclock.Reactor(Me, value, true);
-                logic.Item2.SaveConfig();
-                Synchronize(Me, true);
-            }, (Me, value) => {
-                var logic = GetTerminal(Me);
-                value.Append(logic.Item2.Reactor + " " + "times");
-            }, 1, 10, 1, TerminalRevise.SliderStyle.Log);
+            TerminalRevise.CreateSlider<IMyProgrammableBlock>(
+                "BY-",
+                "Slider-Reactor",
+                "Reactor Downclock",
+                BlockConfirm,
+                (Me) => false, // Set visibility to false
+                (Me) => {
+                    var logic = GetTerminal(Me);
+                    if (logic.Item1) return logic.Item2.Reactor;
+                    return 1;
+                },
+                (Me, value) => {
+                    var logic = GetTerminal(Me);
+                    if (!logic.Item1) return;
+                    logic.Item2.Reactor = value;
+                    if (logic.Item2.Block.Enabled) Overclock.Reactor(Me, value, true);
+                    logic.Item2.SaveConfig();
+                    Synchronize(Me, true);
+                },
+                (Me, value) => {
+                    var logic = GetTerminal(Me);
+                    value.Append(logic.Item2.Reactor + " " + "times");
+                },
+                0.1f,
+                1,
+                0.1f,
+                TerminalRevise.SliderStyle.Log
+            );
 
-            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-GasGenerator", "Gas Generator Overclock", BlockConfirm, BlockConfirm, (Me) => {
-                var logic = GetTerminal(Me);
-                if (logic.Item1) return logic.Item2.GasGenerator;
-                return 1;
-            }, (Me, value) => {
-                var logic = GetTerminal(Me);
-                if (!logic.Item1) return;
-                logic.Item2.GasGenerator = value;
-                if (logic.Item2.Block.Enabled) Overclock.GasGenerator(Me, value, true);
-                logic.Item2.SaveConfig();
-                Synchronize(Me, true);
-            }, (Me, value) => {
-                var logic = GetTerminal(Me);
-                value.Append(logic.Item2.GasGenerator + " " + "times");
-            }, 1, 10, 1, TerminalRevise.SliderStyle.Log);
+            TerminalRevise.CreateSlider<IMyProgrammableBlock>(
+                "BY-",
+                "Slider-GasGenerator",
+                "Gas Generator Downclock",
+                BlockConfirm,
+                (Me) => false, // Set visibility to false
+                (Me) => {
+                    var logic = GetTerminal(Me);
+                    if (logic.Item1) return logic.Item2.GasGenerator;
+                    return 1;
+                },
+                (Me, value) => {
+                    var logic = GetTerminal(Me);
+                    if (!logic.Item1) return;
+                    logic.Item2.GasGenerator = value;
+                    if (logic.Item2.Block.Enabled) Overclock.GasGenerator(Me, value, true);
+                    logic.Item2.SaveConfig();
+                    Synchronize(Me, true);
+                },
+                (Me, value) => {
+                    var logic = GetTerminal(Me);
+                    value.Append(logic.Item2.GasGenerator + " " + "times");
+                },
+                0.1f,
+                1,
+                0.1f,
+                TerminalRevise.SliderStyle.Log
+            );
 
-            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-Gyro", "Gyro Overclock", BlockConfirm, BlockConfirm, (Me) => {
-                var logic = GetTerminal(Me);
-                if (logic.Item1) return logic.Item2.Gyro;
-                return 1;
-            }, (Me, value) => {
-                var logic = GetTerminal(Me);
-                if (!logic.Item1) return;
-                logic.Item2.Gyro = value;
-                if (logic.Item2.Block.Enabled) Overclock.Gyro(Me, value, true);
-                logic.Item2.SaveConfig();
-                Synchronize(Me, true);
-            }, (Me, value) => {
-                var logic = GetTerminal(Me);
-                value.Append(logic.Item2.Gyro + " " + "times");
-            }, 1, 10, 1, TerminalRevise.SliderStyle.Log);
+            TerminalRevise.CreateSlider<IMyProgrammableBlock>(
+                "BY-",
+                "Slider-Gyro",
+                "Gyro Downclock",
+                BlockConfirm,
+                (Me) => false, // Set visibility to false
+                (Me) => {
+                    var logic = GetTerminal(Me);
+                    if (logic.Item1) return logic.Item2.Gyro;
+                    return 1;
+                },
+                (Me, value) => {
+                    var logic = GetTerminal(Me);
+                    if (!logic.Item1) return;
+                    logic.Item2.Gyro = value;
+                    if (logic.Item2.Block.Enabled) Overclock.Gyro(Me, value, true);
+                    logic.Item2.SaveConfig();
+                    Synchronize(Me, true);
+                },
+                (Me, value) => {
+                    var logic = GetTerminal(Me);
+                    value.Append(logic.Item2.Gyro + " " + "times");
+                },
+                0.1f,
+                1,
+                0.1f,
+                TerminalRevise.SliderStyle.Log
+            );
 
-            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-Thrust", "Thrust Overclock", BlockConfirm, BlockConfirm, (Me) => {
-                var logic = GetTerminal(Me);
-                if (logic.Item1) return logic.Item2.Thrust;
-                return 1;
-            }, (Me, value) => {
-                var logic = GetTerminal(Me);
-                if (!logic.Item1) return;
-                logic.Item2.Thrust = value;
-                if (logic.Item2.Block.Enabled) Overclock.Thrust(Me, value, true);
-                logic.Item2.SaveConfig();
-                Synchronize(Me, true);
-            }, (Me, value) => {
-                var logic = GetTerminal(Me);
-                value.Append(logic.Item2.Thrust + " " + "times");
-            }, 1, 10, 1, TerminalRevise.SliderStyle.Log);
+            TerminalRevise.CreateSlider<IMyProgrammableBlock>(
+                "BY-",
+                "Slider-Thrust",
+                "Thrust Downclock",
+                BlockConfirm,
+                (Me) => true, // Set visibility to false
+                (Me) => {
+                    var logic = GetTerminal(Me);
+                    if (logic.Item1) return logic.Item2.Thrust;
+                    return 1;
+                },
+                (Me, value) => {
+                    var logic = GetTerminal(Me);
+                    if (!logic.Item1) return;
+                    logic.Item2.Thrust = value;
+                    if (logic.Item2.Block.Enabled) Overclock.Thrust(Me, value, true);
+                    logic.Item2.SaveConfig();
+                    Synchronize(Me, true);
+                },
+                (Me, value) => {
+                    var logic = GetTerminal(Me);
+                    value.Append(logic.Item2.Thrust + " " + "times");
+                },
+                0.1f,
+                1,
+                0.1f,
+                TerminalRevise.SliderStyle.Log
+            );
 
-            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-Drill", "Drill Overclock", BlockConfirm, BlockConfirm, (Me) => {
-                var logic = GetTerminal(Me);
-                if (logic.Item1) return logic.Item2.Drill;
-                return 1;
-            }, (Me, value) => {
-                var logic = GetTerminal(Me);
-                if (!logic.Item1) return;
-                logic.Item2.Drill = value;
-                if (logic.Item2.Block.Enabled) Overclock.Drill(Me, value, true);
-                logic.Item2.SaveConfig();
-                Synchronize(Me, true);
-            }, (Me, value) => {
-                var logic = GetTerminal(Me);
-                value.Append(logic.Item2.Drill + " " + "times");
-            }, 1, 10, 1, TerminalRevise.SliderStyle.Log);
+            TerminalRevise.CreateSlider<IMyProgrammableBlock>(
+                "BY-",
+                "Slider-Drill",
+                "Drill Downclock",
+                BlockConfirm,
+                (Me) => false, // Set visibility to false
+                (Me) => {
+                    var logic = GetTerminal(Me);
+                    if (logic.Item1) return logic.Item2.Drill;
+                    return 1;
+                },
+                (Me, value) => {
+                    var logic = GetTerminal(Me);
+                    if (!logic.Item1) return;
+                    logic.Item2.Drill = value;
+                    if (logic.Item2.Block.Enabled) Overclock.Drill(Me, value, true);
+                    logic.Item2.SaveConfig();
+                    Synchronize(Me, true);
+                },
+                (Me, value) => {
+                    var logic = GetTerminal(Me);
+                    value.Append(logic.Item2.Drill + " " + "times");
+                },
+                0.1f,
+                1,
+                0.1f,
+                TerminalRevise.SliderStyle.Log
+            );
 
             controlIsCreated = true;
+
         }
 
         private void UpdateData()
@@ -326,7 +393,7 @@ namespace StarCore.PowerControl
         {
             List<IMySlimBlock> Blocks = new List<IMySlimBlock>();
             block.CubeGrid.GetBlocks(Blocks, (b) => {
-                if (b.BlockDefinition.Id.SubtypeName.Contains("BY_OverclockingControlSystem")) return true;
+                if (b.BlockDefinition.Id.SubtypeName.Contains("SC_PowerControlSystem")) return true;
                 return false;
             });
 
