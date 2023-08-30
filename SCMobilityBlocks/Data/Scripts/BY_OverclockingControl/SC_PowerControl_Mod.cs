@@ -15,32 +15,33 @@ namespace StarCore.PowerControl
     using VRage.ModAPI;
     using VRage.ObjectBuilders;
     using static BuYanMod.Utils.Utils;
+    using System.Runtime.InteropServices;
 
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_MyProgrammableBlock), false, "BY_OverclockingControlSystem_L", "BY_OverclockingControlSystem_S")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_MyProgrammableBlock), false, "SC_PowerControlSystem_L", "SC_PowerControlSystem_S")]
     public class OverclockingControlBlock : MyGameLogicComponent
     {
         [ProtoContract]
         public class OverclockingControl
         {
-            [ProtoMember(1)] public float Reactor = 1;
-            [ProtoMember(2)] public float GasGenerator = 1;
-            [ProtoMember(3)] public float Gyro = 1;
+            //[ProtoMember(1)] public float Reactor = 1;
+            //[ProtoMember(2)] public float GasGenerator = 1;
+            //[ProtoMember(3)] public float Gyro = 1;
             [ProtoMember(4)] public float Thrust = 1;
-            [ProtoMember(5)] public float Drill = 1;
+            //[ProtoMember(5)] public float Drill = 1;
         }
 
         private readonly Guid GUID = new Guid("f297034ec68e4af0948f3a70f108339c");
-        private const string sID = "BY_OverclockingControlSystem";
+        private const string sID = "SC_PowerControlSystem";
         private static List<IMySlimBlock> GridBlocks = new List<IMySlimBlock>();
         protected IMyProgrammableBlock Block => Entity as IMyProgrammableBlock;
         private static bool controlIsCreated = false;
         private static bool ThreadLock = false;
 
-        public float Reactor { get; protected set; } = 1;
-        public float GasGenerator { get; protected set; } = 1;
-        public float Gyro { get; protected set; } = 1;
+        //public float Reactor { get; protected set; } = 1;
+        //public float GasGenerator { get; protected set; } = 1;
+        //public float Gyro { get; protected set; } = 1;
         public float Thrust { get; protected set; } = 1;
-        public float Drill { get; protected set; } = 1;
+        //public float Drill { get; protected set; } = 1;
 
         public sealed override bool IsSerialized()
         {
@@ -66,22 +67,22 @@ namespace StarCore.PowerControl
         {
             return new OverclockingControl()
             {
-                Reactor = Reactor,
-                GasGenerator = GasGenerator,
-                Gyro = Gyro,
+                //Reactor = Reactor,
+                //GasGenerator = GasGenerator,
+                //Gyro = Gyro,
                 Thrust = Thrust,
-                Drill = Drill,
+                //Drill = Drill,
             };
         }
 
         public void WriteValue(OverclockingControl value)
         {
             if (value == null) return;
-            Reactor = value.Reactor;
-            GasGenerator = value.GasGenerator;
-            Gyro = value.Gyro;
+            //Reactor = value.Reactor;
+            //GasGenerator = value.GasGenerator;
+            //Gyro = value.Gyro;
             Thrust = value.Thrust;
-            Drill = value.Drill;
+            //Drill = value.Drill;
         }
 
         public sealed override void Init(MyObjectBuilder_EntityBase objectBuilder)
@@ -121,9 +122,9 @@ namespace StarCore.PowerControl
         public override void UpdateOnceBeforeFrame()
         {
             base.UpdateOnceBeforeFrame();
-            if (Block.BlockDefinition.SubtypeId == "BY_OverclockingControlSystem")
+            if (Block.BlockDefinition.SubtypeId == "SC_PowerControlSystem")
             {
-                Reactor = 1;
+                //Reactor = 1;
             }
             BuildControl();
             LoadConfig();
@@ -186,11 +187,11 @@ namespace StarCore.PowerControl
         {
             if (Block.Enabled)
             {
-                if (obj.FatBlock is IMyReactor) Overclock.Reactor((IMyTerminalBlock)obj.FatBlock, Reactor, false);
-                if (obj.FatBlock is IMyGasGenerator) Overclock.GasGenerator((IMyTerminalBlock)obj.FatBlock, GasGenerator, false);
-                if (obj.FatBlock is IMyGyro) Overclock.Gyro((IMyTerminalBlock)obj.FatBlock, Gyro, false);
+                //if (obj.FatBlock is IMyReactor) Overclock.Reactor((IMyTerminalBlock)obj.FatBlock, Reactor, false);
+                //if (obj.FatBlock is IMyGasGenerator) Overclock.GasGenerator((IMyTerminalBlock)obj.FatBlock, GasGenerator, false);
+                //if (obj.FatBlock is IMyGyro) Overclock.Gyro((IMyTerminalBlock)obj.FatBlock, Gyro, false);
                 if (obj.FatBlock is IMyThrust) Overclock.Thrust((IMyTerminalBlock)obj.FatBlock, Thrust, false);
-                if (obj.FatBlock is IMyShipDrill) Overclock.Drill((IMyTerminalBlock)obj.FatBlock, Drill, false);
+                //if (obj.FatBlock is IMyShipDrill) Overclock.Drill((IMyTerminalBlock)obj.FatBlock, Drill, false);
             }
 
             if (obj.BlockDefinition.Id.SubtypeName.Contains(sID))
@@ -228,105 +229,172 @@ namespace StarCore.PowerControl
             if (controlIsCreated) return;
 
             TerminalRevise.CreateSeparator<IMyProgrammableBlock>("A-", "Test", BlockConfirm, BlockConfirm);
-            TerminalRevise.CreateLabel<IMyProgrammableBlock>("BY-", "Label-Overclock Device", "Overclock Settings", BlockConfirm, BlockConfirm);
+            TerminalRevise.CreateLabel<IMyProgrammableBlock>("BY-", "Label-Overclock Device", "Downclock Settings", BlockConfirm, BlockConfirm);
 
-            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-Reactor", "Reactor Overclock", BlockConfirm, BlockConfirm, (Me) => {
-                var logic = GetTerminal(Me);
-                if (logic.Item1) return logic.Item2.Reactor;
-                return 1;
-            }, (Me, value) => {
-                var logic = GetTerminal(Me);
-                if (!logic.Item1) return;
-                logic.Item2.Reactor = value;
-                if (logic.Item2.Block.Enabled) Overclock.Reactor(Me, value, true);
-                logic.Item2.SaveConfig();
-                Synchronize(Me, true);
-            }, (Me, value) => {
-                var logic = GetTerminal(Me);
-                value.Append(logic.Item2.Reactor + " " + "times");
-            }, 1, 10, 1, TerminalRevise.SliderStyle.Log);
-
-            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-GasGenerator", "Gas Generator Overclock", BlockConfirm, BlockConfirm, (Me) => {
-                var logic = GetTerminal(Me);
-                if (logic.Item1) return logic.Item2.GasGenerator;
-                return 1;
-            }, (Me, value) => {
-                var logic = GetTerminal(Me);
-                if (!logic.Item1) return;
-                logic.Item2.GasGenerator = value;
-                if (logic.Item2.Block.Enabled) Overclock.GasGenerator(Me, value, true);
-                logic.Item2.SaveConfig();
-                Synchronize(Me, true);
-            }, (Me, value) => {
-                var logic = GetTerminal(Me);
-                value.Append(logic.Item2.GasGenerator + " " + "times");
-            }, 1, 10, 1, TerminalRevise.SliderStyle.Log);
-
-            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-Gyro", "Gyro Overclock", BlockConfirm, BlockConfirm, (Me) => {
-                var logic = GetTerminal(Me);
-                if (logic.Item1) return logic.Item2.Gyro;
-                return 1;
-            }, (Me, value) => {
-                var logic = GetTerminal(Me);
-                if (!logic.Item1) return;
-                logic.Item2.Gyro = value;
-                if (logic.Item2.Block.Enabled) Overclock.Gyro(Me, value, true);
-                logic.Item2.SaveConfig();
-                Synchronize(Me, true);
-            }, (Me, value) => {
-                var logic = GetTerminal(Me);
-                value.Append(logic.Item2.Gyro + " " + "times");
-            }, 1, 10, 1, TerminalRevise.SliderStyle.Log);
-
-            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-Thrust", "Thrust Overclock", BlockConfirm, BlockConfirm, (Me) => {
-                var logic = GetTerminal(Me);
-                if (logic.Item1) return logic.Item2.Thrust;
-                return 1;
-            }, (Me, value) => {
-                var logic = GetTerminal(Me);
-                if (!logic.Item1) return;
-                logic.Item2.Thrust = value;
-                if (logic.Item2.Block.Enabled) Overclock.Thrust(Me, value, true);
-                logic.Item2.SaveConfig();
-                Synchronize(Me, true);
-            }, (Me, value) => {
-                var logic = GetTerminal(Me);
-                value.Append(logic.Item2.Thrust + " " + "times");
-            }, 1, 10, 1, TerminalRevise.SliderStyle.Log);
-
-            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-Drill", "Drill Overclock", BlockConfirm, BlockConfirm, (Me) => {
-                var logic = GetTerminal(Me);
-                if (logic.Item1) return logic.Item2.Drill;
-                return 1;
-            }, (Me, value) => {
-                var logic = GetTerminal(Me);
-                if (!logic.Item1) return;
-                logic.Item2.Drill = value;
-                if (logic.Item2.Block.Enabled) Overclock.Drill(Me, value, true);
-                logic.Item2.SaveConfig();
-                Synchronize(Me, true);
-            }, (Me, value) => {
-                var logic = GetTerminal(Me);
-                value.Append(logic.Item2.Drill + " " + "times");
-            }, 1, 10, 1, TerminalRevise.SliderStyle.Log);
+            //TerminalRevise.CreateSlider<IMyProgrammableBlock>(
+            //    "BY-",
+            //    "Slider-Reactor",
+            //    "Reactor Downclock",
+            //    BlockConfirm,
+            //    (Me) => false, // Set visibility to false
+            //    (Me) => {
+            //        var logic = GetTerminal(Me);
+            //        if (logic.Item1) return logic.Item2.Reactor;
+            //        return 1;
+            //    },
+            //    (Me, value) => {
+            //        var logic = GetTerminal(Me);
+            //        if (!logic.Item1) return;
+            //        logic.Item2.Reactor = value;
+            //        if (logic.Item2.Block.Enabled) Overclock.Reactor(Me, value, true);
+            //        logic.Item2.SaveConfig();
+            //        Synchronize(Me, true);
+            //    },
+            //    (Me, value) => {
+            //        var logic = GetTerminal(Me);
+            //        value.Append(logic.Item2.Reactor + " " + "times");
+            //    },
+            //    0.1f,
+            //    1,
+            //    0.1f,
+            //    TerminalRevise.SliderStyle.Log
+            //);
+            //
+            //TerminalRevise.CreateSlider<IMyProgrammableBlock>(
+            //    "BY-",
+            //    "Slider-GasGenerator",
+            //    "Gas Generator Downclock",
+            //    BlockConfirm,
+            //    (Me) => false, // Set visibility to false
+            //    (Me) => {
+            //        var logic = GetTerminal(Me);
+            //        if (logic.Item1) return logic.Item2.GasGenerator;
+            //        return 1;
+            //    },
+            //    (Me, value) => {
+            //        var logic = GetTerminal(Me);
+            //        if (!logic.Item1) return;
+            //        logic.Item2.GasGenerator = value;
+            //        if (logic.Item2.Block.Enabled) Overclock.GasGenerator(Me, value, true);
+            //        logic.Item2.SaveConfig();
+            //        Synchronize(Me, true);
+            //    },
+            //    (Me, value) => {
+            //        var logic = GetTerminal(Me);
+            //        value.Append(logic.Item2.GasGenerator + " " + "times");
+            //    },
+            //    0.1f,
+            //    1,
+            //    0.1f,
+            //    TerminalRevise.SliderStyle.Log
+            //);
+            //
+            //TerminalRevise.CreateSlider<IMyProgrammableBlock>(
+            //    "BY-",
+            //    "Slider-Gyro",
+            //    "Gyro Downclock",
+            //    BlockConfirm,
+            //    (Me) => false, // Set visibility to false
+            //    (Me) => {
+            //        var logic = GetTerminal(Me);
+            //        if (logic.Item1) return logic.Item2.Gyro;
+            //        return 1;
+            //    },
+            //    (Me, value) => {
+            //        var logic = GetTerminal(Me);
+            //        if (!logic.Item1) return;
+            //        logic.Item2.Gyro = value;
+            //        if (logic.Item2.Block.Enabled) Overclock.Gyro(Me, value, true);
+            //        logic.Item2.SaveConfig();
+            //        Synchronize(Me, true);
+            //    },
+            //    (Me, value) => {
+            //        var logic = GetTerminal(Me);
+            //        value.Append(logic.Item2.Gyro + " " + "times");
+            //    },
+            //    0.1f,
+            //    1,
+            //    0.1f,
+            //    TerminalRevise.SliderStyle.Log
+            //);
+            //
+            TerminalRevise.CreateSlider<IMyProgrammableBlock>(
+                "BY-",
+                "Slider-Thrust",
+                "Thrust Downclock",
+                BlockConfirm,
+                (Me) => true, // Set visibility to false
+                (Me) => {
+                    var logic = GetTerminal(Me);
+                    if (logic.Item1) return logic.Item2.Thrust;
+                    return 1;
+                },
+                (Me, value) => {
+                    var logic = GetTerminal(Me);
+                    if (!logic.Item1) return;
+                    logic.Item2.Thrust = value;
+                    if (logic.Item2.Block.Enabled) Overclock.Thrust(Me, value, true);
+                    logic.Item2.SaveConfig();
+                    Synchronize(Me, true);
+                },
+                (Me, value) => {
+                    var logic = GetTerminal(Me);
+                    value.Append(logic.Item2.Thrust + " " + "times");
+                },
+                0.2f,
+                1,
+                0.2f,
+                TerminalRevise.SliderStyle.Log
+            );
+            //
+            //TerminalRevise.CreateSlider<IMyProgrammableBlock>(
+            //    "BY-",
+            //    "Slider-Drill",
+            //    "Drill Downclock",
+            //    BlockConfirm,
+            //    (Me) => false, // Set visibility to false
+            //    (Me) => {
+            //        var logic = GetTerminal(Me);
+            //        if (logic.Item1) return logic.Item2.Drill;
+            //        return 1;
+            //    },
+            //    (Me, value) => {
+            //        var logic = GetTerminal(Me);
+            //        if (!logic.Item1) return;
+            //        logic.Item2.Drill = value;
+            //        if (logic.Item2.Block.Enabled) Overclock.Drill(Me, value, true);
+            //        logic.Item2.SaveConfig();
+            //        Synchronize(Me, true);
+            //    },
+            //    (Me, value) => {
+            //        var logic = GetTerminal(Me);
+            //        value.Append(logic.Item2.Drill + " " + "times");
+            //    },
+            //    0.1f,
+            //    1,
+            //    0.1f,
+            //    TerminalRevise.SliderStyle.Log
+            //);
 
             controlIsCreated = true;
+
+
         }
 
         private void UpdateData()
         {
-            Overclock.Reactor(Block, Reactor, true);
-            Overclock.GasGenerator(Block, GasGenerator, true);
-            Overclock.Gyro(Block, Gyro, true);
+            //Overclock.Reactor(Block, Reactor, true);
+            //Overclock.GasGenerator(Block, GasGenerator, true);
+            //Overclock.Gyro(Block, Gyro, true);
             Overclock.Thrust(Block, Thrust, true);
-            Overclock.Drill(Block, Drill, true);
+            //Overclock.Drill(Block, Drill, true);
         }
 
         public static void Synchronize(IMyTerminalBlock block, bool IsSet)
         {
             List<IMySlimBlock> Blocks = new List<IMySlimBlock>();
             block.CubeGrid.GetBlocks(Blocks, (b) => {
-                if (b.BlockDefinition.Id.SubtypeName.Contains("BY_OverclockingControlSystem")) return true;
+                if (b.BlockDefinition.Id.SubtypeName.Contains("SC_PowerControlSystem")) return true;
                 return false;
             });
 
@@ -340,11 +408,11 @@ namespace StarCore.PowerControl
                         var Logic2 = GetTerminal((IMyTerminalBlock)b.FatBlock);
                         if (Logic2.Item1)
                         {
-                            Logic2.Item2.Reactor = Logic1.Item2.Reactor;
-                            Logic2.Item2.GasGenerator = Logic1.Item2.GasGenerator;
-                            Logic2.Item2.Gyro = Logic1.Item2.Gyro;
+                            //Logic2.Item2.Reactor = Logic1.Item2.Reactor;
+                            //Logic2.Item2.GasGenerator = Logic1.Item2.GasGenerator;
+                            //Logic2.Item2.Gyro = Logic1.Item2.Gyro;
                             Logic2.Item2.Thrust = Logic1.Item2.Thrust;
-                            Logic2.Item2.Drill = Logic1.Item2.Drill;
+                            //Logic2.Item2.Drill = Logic1.Item2.Drill;
                             Logic2.Item2.SaveConfig();
                         }
                     }
@@ -360,11 +428,11 @@ namespace StarCore.PowerControl
                         var Logic = GetTerminal((IMyTerminalBlock)b.FatBlock);
                         if (Logic.Item1)
                         {
-                            if (Logic.Item2.Reactor > Re) Re = Logic.Item2.Reactor;
-                            if (Logic.Item2.GasGenerator > GG) GG = Logic.Item2.GasGenerator;
-                            if (Logic.Item2.Gyro > Gy) Gy = Logic.Item2.Gyro;
-                            if (Logic.Item2.Thrust > Th) Th = Logic.Item2.Thrust;
-                            if (Logic.Item2.Drill > Dr) Dr = Logic.Item2.Drill;
+                            //if (Logic.Item2.Reactor > Re) Re = Logic.Item2.Reactor;
+                           //if (Logic.Item2.GasGenerator > GG) GG = Logic.Item2.GasGenerator;
+                           //if (Logic.Item2.Gyro > Gy) Gy = Logic.Item2.Gyro;
+                           if (Logic.Item2.Thrust > Th) Th = Logic.Item2.Thrust;
+                           //if (Logic.Item2.Drill > Dr) Dr = Logic.Item2.Drill;
                         }
                     }
                     foreach (IMySlimBlock b in Blocks)
@@ -372,11 +440,11 @@ namespace StarCore.PowerControl
                         var Logic = GetTerminal((IMyTerminalBlock)b.FatBlock);
                         if (Logic.Item1)
                         {
-                            Logic.Item2.Reactor = Re;
-                            Logic.Item2.GasGenerator = GG;
-                            Logic.Item2.Gyro = Gy;
+                            //Logic.Item2.Reactor = Re;
+                            //Logic.Item2.GasGenerator = GG;
+                            //Logic.Item2.Gyro = Gy;
                             Logic.Item2.Thrust = Th;
-                            Logic.Item2.Drill = Dr;
+                            //Logic.Item2.Drill = Dr;
                             Logic.Item2.SaveConfig();
                         }
                     }
@@ -388,11 +456,11 @@ namespace StarCore.PowerControl
         {
             arg2.Append("\n" + "Info");
             arg2.Append("\n");
-            arg2.Append("\n" + "Reactor" + " :   " + Math.Round(Reactor, 2) + "  " + "times");
-            arg2.Append("\n" + "Gas Generator" + " :   " + Math.Round(GasGenerator, 2) + "  " + "times");
-            arg2.Append("\n" + "Gyro" + " :   " + Math.Round(Gyro, 2) + "  " + "times");
-            arg2.Append("\n" + "Thrust" + " :   " + Math.Round(Thrust, 2) + "  " + "times");
-            arg2.Append("\n" + "Drill" + " :   " + Math.Round(Drill, 2) + "  " + "times");
+           //arg2.Append("\n" + "Reactor" + " :   " + Math.Round(Reactor, 2) + "  " + "times");
+           //arg2.Append("\n" + "Gas Generator" + " :   " + Math.Round(GasGenerator, 2) + "  " + "times");
+           //arg2.Append("\n" + "Gyro" + " :   " + Math.Round(Gyro, 2) + "  " + "times");
+           arg2.Append("\n" + "Thrust" + " :   " + Math.Round(Thrust, 2) + "  " + "times");
+           //arg2.Append("\n" + "Drill" + " :   " + Math.Round(Drill, 2) + "  " + "times");
             TerminalRevise.RefreshBlockTerminal(block);
         }
 

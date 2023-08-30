@@ -5,17 +5,17 @@
     <Definition xsi:type="MyObjectBuilder_ProgrammableBlockDefinition">
       <Id>
         <TypeId>MyProgrammableBlock</TypeId>
-        <SubtypeId>BY_OverclockingControlSystem_L</SubtypeId>
+        <SubtypeId>SC_PowerControlSystem_L</SubtypeId>
       </Id>
       <Public>true</Public>
-      <DisplayName>DisplayName_Block_BY_OverclockingControlSystem</DisplayName>
-      <Icon>Textures\GUI\Icons\Cubes\BY_OverclockingControlSystem_L.dds</Icon>
-      <Description>Description_BY_OverclockingControlSystem</Description>
+      <DisplayName>DisplayName_Block_SC_PowerControlSystem</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\SC_PowerControlSystem_L.dds</Icon>
+      <Description>Description_SC_PowerControlSystem</Description>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="1" y="1" z="1" />
       <ModelOffset x="0" y="0" z="0" />
-      <Model>Models\Cubes\Large\BY_OverclockingControlSystem_L.mwm</Model>
+      <Model>Models\Cubes\Large\SC_PowerControlSystem_L.mwm</Model>
       <Components>
         <Component Subtype="SteelPlate" Count="15" />
         <Component Subtype="Construction" Count="4" />
@@ -35,7 +35,7 @@
         <ScreenArea Name="CockpitScreen_02" DisplayName="DisplayName_Screen_Large" TextureResolution="512" ScreenWidth="16" ScreenHeight="10" />
         <ScreenArea Name="CockpitScreen_01" DisplayName="DisplayName_Screen_Keyboard" TextureResolution="256" ScreenWidth="5" ScreenHeight="2" />
       </ScreenAreas>
-      <BlockPairName>BY_OverclockingControlSystem</BlockPairName>
+      <BlockPairName>SC_PowerControlSystem</BlockPairName>
       <MirroringY>Z</MirroringY>
       <MirroringZ>Y</MirroringZ>
       <EdgeType>Light</EdgeType>
@@ -55,17 +55,17 @@
     <Definition xsi:type="MyObjectBuilder_ProgrammableBlockDefinition">
       <Id>
         <TypeId>MyProgrammableBlock</TypeId>
-        <SubtypeId>BY_OverclockingControlSystem_S</SubtypeId>
+        <SubtypeId>SC_PowerControlSystem_S</SubtypeId>
       </Id>
       <Public>true</Public>
-      <DisplayName>DisplayName_Block_BY_OverclockingControlSystem</DisplayName>
-      <Icon>Textures\GUI\Icons\Cubes\BY_OverclockingControlSystem_L.dds</Icon>
-      <Description>Description_BY_OverclockingControlSystem</Description>
+      <DisplayName>DisplayName_Block_SC_PowerControlSystem</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\SC_PowerControlSystem_L.dds</Icon>
+      <Description>Description_SC_PowerControlSystem</Description>
       <CubeSize>Small</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="1" y="1" z="2" />
       <ModelOffset x="0" y="0" z="0" />
-      <Model>Models\Cubes\Small\BY_OverclockingControlSystem_S.mwm</Model>
+      <Model>Models\Cubes\Small\SC_PowerControlSystem_S.mwm</Model>
       <Components>
         <Component Subtype="SteelPlate" Count="2" />
         <Component Subtype="Construction" Count="2" />
@@ -79,7 +79,7 @@
         <Model BuildPercentUpperBound="0.50" File="Models\Cubes\Small\TurretControlBlockConstruction_1.mwm" />
         <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Small\TurretControlBlockConstruction_2.mwm" />
       </BuildProgressModels>
-      <BlockPairName>BY_OverclockingControlSystem</BlockPairName>
+      <BlockPairName>SC_PowerControlSystem</BlockPairName>
       <Center x="0" y="0" z="1" />
       <MirroringY>Z</MirroringY>
       <MirroringZ>Y</MirroringZ>

@@ -11,7 +11,7 @@
       <Name>BY_MOD</Name>
       <StrictSearch>true</StrictSearch>
       <ItemIds>
-        <string>MyProgrammableBlock/BY_OverclockingControlSystem_L</string>
+        <string>MyProgrammableBlock/SC_PowerControlSystem_L</string>
       </ItemIds>
     </Category>
   </CategoryClasses>
