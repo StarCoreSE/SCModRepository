@@ -3,13 +3,13 @@
     <BlockVariantGroups>
 
              <BlockVariantGroup>
-            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="DampenerModuleGroup" />
-            <Icon>Textures\GUI\Icons\Cubes\DampenerModule.dds</Icon>
+            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="ReactorUpgradeModuleGroup" />
+            <Icon>Textures\GUI\Icons\Cubes\LargeReactorUpgrade.dds</Icon>
             <DisplayName>Dampening Enhancers</DisplayName>
             <Description>Dampening Enhancers</Description>
             <Blocks>
-                <Block Type="MyObjectBuilder_Thrust" Subtype="DampeningEnhancer_x2_Large" />
-                <Block Type="MyObjectBuilder_Thrust" Subtype="DampeningEnhancer_x2_Small" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="LargeLargeBlockUpgrade" />
+                <Block Type="MyObjectBuilder_Thrust" Subtype="SmallLargeBlockUpgrade" />
             </Blocks>
         </BlockVariantGroup>
       
