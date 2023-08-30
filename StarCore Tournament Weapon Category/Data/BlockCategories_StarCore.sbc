@@ -185,6 +185,8 @@
         <string>DampeningEnhancer_x2_Large</string>
         <string>SC_PowerControlSystem_L</string>
         <string>LargeLargeBlockUpgrade</string>
+        <string>SC_Radome</string>
+		
         
 
       </ItemIds>

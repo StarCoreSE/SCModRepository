@@ -1,0 +1,40 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <CategoryClasses>
+        <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+            <Id>
+                <TypeId>GuiBlockCategoryDefinition</TypeId>
+                <SubtypeId/>
+            </Id>
+            <DisplayName>P.O.M - XL Blocks</DisplayName>
+            <Name>XLBlocks</Name>
+            <StrictSearch>true</StrictSearch>
+            <ItemIds>
+                <string>XL_BlockDetail</string>
+				<string>XL_BlockHazard</string>
+				<string>XL_BlockFrame</string>
+				<string>XL_BlockInvCorner</string>
+				<string>XL_BlockSlope</string>
+				<string>XL_BlockCorner</string>
+				<string>XL_1xPlatform</string>
+				<string>XL_1xMount</string>
+				<string>XL_1xFrame</string>
+				<string>XL_PassageCorner</string>
+				<string>XL_Passage</string>
+				<string>XL_Block</string>
+				<string>XL_Hip</string>
+				<string>XL_1x</string>
+				<string>XL_Brace</string>
+				<string>XL_HalfBlock</string>
+				<string>XL_HalfBlockCorner</string>
+				<string>XL_HalfCornerBase</string>
+				<string>XL_HalfCornerTip</string>
+				<string>XL_HalfCornerBaseInv</string>
+				<string>XL_HalfCornerTipInv</string>
+				<string>XL_HalfSlopeBase</string>
+				<string>XL_HalfSlopeTip</string>
+            </ItemIds>
+        </Category>
+
+    </CategoryClasses>
+</Definitions>
