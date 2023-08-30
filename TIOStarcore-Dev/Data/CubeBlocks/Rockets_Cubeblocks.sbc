@@ -15,7 +15,10 @@
       </Id>
       <DisplayName>"Peacemaker" Heavy Rockets</DisplayName>
       <Description>
-        6 tube fast loading rocket packs that fire heavy unguided rockets.  Deals Energy damage in a large AOE, 5km range.  Rockets have a 1000m/s velocity.
+        [Rockets]
+        [5km Range]
+        [Energy damage]
+        [1000 m/s]
       </Description>
       <GuiVisible>true</GuiVisible>
       <Icon>Textures\GUI\Icons\Peacemaker.dds</Icon>

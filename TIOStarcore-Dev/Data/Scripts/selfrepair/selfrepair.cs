@@ -1,5 +1,6 @@
 ﻿using Sandbox.Common.ObjectBuilders;
 using Sandbox.Game;
+using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
 using VRage.Game;
 using VRage.Game.Components;
@@ -12,14 +13,17 @@ using IMySlimBlock = VRage.Game.ModAPI.IMySlimBlock;
 
 namespace TIOSelfRepair
 {
-	[MyEntityComponentDescriptor(typeof(MyObjectBuilder_ConveyorSorter), false, "Type18_Artillery_Block", "Type21_Artillery_Block", "Type24_Artillery_Block", "Type77_Railgun_Block", "Type78_Railgun_Block", "Type79_Railgun_Block", "Reaver_Coilgun_Block", "Torp_Block")]
+	[MyEntityComponentDescriptor(typeof(MyObjectBuilder_ConveyorSorter), false, "Type18_Artillery_Block", "Type21_Artillery_Block", "Type24_Artillery_Block", "Type77_Railgun_Block", "Type78_Railgun_Block", "Type79_Railgun_Block", "Reaver_Coilgun_Block", "Torp_Block", "Priest_Block", "PriestReskin_Block")]
 	public class TIOSelfRepair : MyGameLogicComponent
 	{
 		private IMyConveyorSorter artilleryBlock;
 		private int triggerTick = 0;
 		private const int COUNTDOWN_TICKS = 10 * 60; // (60 ticks per second)
+        private long repairParticleEntityId = 0;
 
-		public override void Init(MyObjectBuilder_EntityBase objectBuilder)
+
+
+        public override void Init(MyObjectBuilder_EntityBase objectBuilder)
 		{
 			if (!MyAPIGateway.Session.IsServer) return; // Only do explosions serverside
 			artilleryBlock = Entity as IMyConveyorSorter;
@@ -48,7 +52,9 @@ namespace TIOSelfRepair
 					if (triggerTick >= COUNTDOWN_TICKS)
 					{
 						DoRepair();
-						triggerTick = 0; // Restart the timer after repair
+                        MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("RepairParticle", artilleryBlock.GetPosition());
+						MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("RepairSound", artilleryBlock.GetPosition());
+                        triggerTick = 0; // Restart the timer after repair
 					}
 					else if (triggerTick % 60 == 0) // Show notification every second
 					{
@@ -56,7 +62,8 @@ namespace TIOSelfRepair
 						string name = artilleryBlock.CustomName;
 						string message = string.Format("Artillery Block ({0}) repairs in {1} seconds", name, remainingSeconds);
 
-						MyVisualScriptLogicProvider.ShowNotificationLocal(message, 1000, "Red");
+						//MyVisualScriptLogicProvider.ShowNotificationLocal(message, 1000, "Red");
+						
 					}
 				}
 				else
@@ -78,7 +85,7 @@ namespace TIOSelfRepair
 			if (slimBlock == null) return;
 
 
-			float repairAmount = 10; // what the fuck is this number keen??
+			float repairAmount = 20; // what the fuck is this number keen??
 
 
 
@@ -87,7 +94,7 @@ namespace TIOSelfRepair
 			string name = artilleryBlock.CustomName;
 			string message = string.Format("Artillery Block ({0}) repaired", name, repairAmount);
 
-			MyVisualScriptLogicProvider.ShowNotificationLocal(message, 1000, "Green");
+			//MyVisualScriptLogicProvider.ShowNotificationLocal(message, 1000, "Green");
 		}
 
 

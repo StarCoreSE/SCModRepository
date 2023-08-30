@@ -20,8 +20,7 @@
         <!--TIO but good-->
         <string>Type18_Artillery_Block</string>
         <string>Type77_Railgun_Block</string>
-        <string>Assault_Coil_Turret</string>
-        <string>Light_Coil_Turret</string>
+        <string>Reaver_Coilgun_Block</string>
         <string>Fixed_Rockets</string>
         <string>Heavy_Repeater</string>
 
@@ -168,10 +167,7 @@
         <!--<string>MADAR</string>-->
 
         <!--INVALID-->
-        <string>MA_Afterburner_Large</string>
-        <string>MA_Afterburner_Large_small</string>
         <string>MA_Afterburner_Large_5x</string>
-        <string>Afterburner_LG_Ion_Large</string>
         <string>SC_SRB</string>
         <string>DETPAK</string>
 

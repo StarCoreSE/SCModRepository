@@ -9,7 +9,12 @@
                 <SubtypeId>Torp_Block</SubtypeId>
             </Id>
             <DisplayName>[Trident] Torpedo Turret</DisplayName>
-            <Description>Fires HE and EMP torpedos. Slow but deadly.</Description>
+            <Description>
+              [10km Targeting Range]
+              [Kinetic damage]
+              [~300 m/s]
+              This weapon slowly repairs itself while offline.
+            </Description>
 			<GuiVisible>true</GuiVisible>
         
             <Icon>Textures\GUI\Icons\Trident.png</Icon>

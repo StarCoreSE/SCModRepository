@@ -9,7 +9,13 @@
                 <SubtypeId>Priest_Block</SubtypeId>
             </Id>
             <DisplayName>Priest Heavy Repeater</DisplayName>
-            <Description>Reliable weapon with good tracking and wide range of movement. Fires Tungsten Rounds at incredible speed.</Description>
+            <Description>
+              [2km Targeting Range]
+              [Kinetic damage]
+              [Targets Missiles]
+              [3500 m/s]
+              This weapon slowly repairs itself while offline.
+            </Description>
 			<GuiVisible>true</GuiVisible>
             <Icon>Textures\GUI\Icons\priest.dds</Icon>
             <CubeSize>Large</CubeSize>

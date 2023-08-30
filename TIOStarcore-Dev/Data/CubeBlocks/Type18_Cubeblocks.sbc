@@ -9,7 +9,12 @@
                 <SubtypeId>Type18_Artillery_Block</SubtypeId>
             </Id>
             <DisplayName>Type 18 Artillery</DisplayName>
-            <Description>While worse then the railgun in range and accuracy it makes up for it in raw cheap damage. Fires 3 rounds before needing a reload</Description>
+            <Description>
+              [3km Targeting Range]
+              [Energy damage]
+              [2000 m/s]
+              This weapon slowly repairs itself while offline.
+            </Description>
 			<GuiVisible>true</GuiVisible>
             <Icon>Textures\GUI\Icons\Mk1CannonMainScene.png</Icon>
             <CubeSize>Large</CubeSize>
