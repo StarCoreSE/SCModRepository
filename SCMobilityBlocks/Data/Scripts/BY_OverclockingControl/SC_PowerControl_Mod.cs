@@ -1,6 +1,7 @@
-namespace BuYanMod.OverclockingControl
+namespace StarCore.PowerControl
 {
-    using BuYanMod.OverclockingControl.ModSystem;
+    using StarCore.PowerControl.ModSystem;
+    using ProtoBuf;
     using Sandbox.Common.ObjectBuilders;
     using Sandbox.Game;
     using Sandbox.ModAPI;
@@ -18,13 +19,14 @@ namespace BuYanMod.OverclockingControl
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_MyProgrammableBlock), false, "BY_OverclockingControlSystem_L", "BY_OverclockingControlSystem_S")]
     public class OverclockingControlBlock : MyGameLogicComponent
     {
+        [ProtoContract]
         public class OverclockingControl
         {
-            public float Reactor = 1;
-            public float GasGenerator = 1;
-            public float Gyro = 1;
-            public float Thrust = 1;
-            public float Drill = 1;
+            [ProtoMember(1)] public float Reactor = 1;
+            [ProtoMember(2)] public float GasGenerator = 1;
+            [ProtoMember(3)] public float Gyro = 1;
+            [ProtoMember(4)] public float Thrust = 1;
+            [ProtoMember(5)] public float Drill = 1;
         }
 
         private readonly Guid GUID = new Guid("f297034ec68e4af0948f3a70f108339c");

@@ -3,7 +3,7 @@ using Sandbox.ModAPI;
 using System.Collections.Generic;
 using VRage.Game.ModAPI;
 
-namespace BuYanMod.OverclockingControl.ModSystem
+namespace StarCore.PowerControl.ModSystem
 {
     public static class Overclock
     {
