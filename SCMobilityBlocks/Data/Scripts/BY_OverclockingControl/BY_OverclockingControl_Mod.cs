@@ -1,79 +1,57 @@
 namespace BuYanMod.OverclockingControl
 {
-    using BuYanMod.OverclockingControl.Licalization;
-    using BuYanMod.OverclockingControl.Localization;
     using BuYanMod.OverclockingControl.ModSystem;
-    using ProtoBuf;
     using Sandbox.Common.ObjectBuilders;
     using Sandbox.Game;
-    using Sandbox.Game.World;
     using Sandbox.ModAPI;
     using Sandbox.ModAPI.Interfaces.Terminal;
     using System;
     using System.Collections.Generic;
     using System.Text;
     using VRage;
-    using VRage.Game;
     using VRage.Game.Components;
     using VRage.Game.ModAPI;
     using VRage.ModAPI;
     using VRage.ObjectBuilders;
     using static BuYanMod.Utils.Utils;
+
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_MyProgrammableBlock), false, "BY_OverclockingControlSystem_L", "BY_OverclockingControlSystem_S")]
     public class OverclockingControlBlock : MyGameLogicComponent
     {
-        [ProtoContract]
         public class OverclockingControl
         {
-            [ProtoMember(1)] public float Reactor = 1;
-            [ProtoMember(2)] public float GasGenerator = 1;
-            [ProtoMember(3)] public float Gyro = 1;
-            [ProtoMember(4)] public float Thrust = 1;
-            [ProtoMember(5)] public float Drill = 1;
+            public float Reactor = 1;
+            public float GasGenerator = 1;
+            public float Gyro = 1;
+            public float Thrust = 1;
+            public float Drill = 1;
         }
+
         private readonly Guid GUID = new Guid("f297034ec68e4af0948f3a70f108339c");
-        private static readonly ModLicalizationText mt = new ModLicalizationText();
-        private
-        const string sID = "BY_OverclockingControlSystem";
+        private const string sID = "BY_OverclockingControlSystem";
         private static List<IMySlimBlock> GridBlocks = new List<IMySlimBlock>();
         protected IMyProgrammableBlock Block => Entity as IMyProgrammableBlock;
-        static bool controlIsCreated = false;
-        static bool ThreadLock = false;
-        public float Reactor
-        {
-            get;
-            protected set;
-        } = 1;
-        public float GasGenerator
-        {
-            get;
-            protected set;
-        } = 1;
-        public float Gyro
-        {
-            get;
-            protected set;
-        } = 1;
-        public float Thrust
-        {
-            get;
-            protected set;
-        } = 1;
-        public float Drill
-        {
-            get;
-            protected set;
-        } = 1;
+        private static bool controlIsCreated = false;
+        private static bool ThreadLock = false;
+
+        public float Reactor { get; protected set; } = 1;
+        public float GasGenerator { get; protected set; } = 1;
+        public float Gyro { get; protected set; } = 1;
+        public float Thrust { get; protected set; } = 1;
+        public float Drill { get; protected set; } = 1;
+
         public sealed override bool IsSerialized()
         {
             SaveConfig();
             return base.IsSerialized();
         }
+
         protected void SaveConfig()
         {
             LoadSaveDatas.Init(Block, GUID);
             LoadSaveDatas.Save(Block, LoadSaveDatas.ByteToString(MyAPIGateway.Utilities.SerializeToBinary(ReadValue())), GUID);
         }
+
         protected void LoadConfig()
         {
             LoadSaveDatas.Init(Block, GUID);
@@ -81,6 +59,7 @@ namespace BuYanMod.OverclockingControl
             if (bytes == null || bytes.Length < 1) return;
             WriteValue(MyAPIGateway.Utilities.SerializeFromBinary<OverclockingControl>(bytes));
         }
+
         public OverclockingControl ReadValue()
         {
             return new OverclockingControl()
@@ -92,6 +71,7 @@ namespace BuYanMod.OverclockingControl
                 Drill = Drill,
             };
         }
+
         public void WriteValue(OverclockingControl value)
         {
             if (value == null) return;
@@ -101,11 +81,13 @@ namespace BuYanMod.OverclockingControl
             Thrust = value.Thrust;
             Drill = value.Drill;
         }
+
         public sealed override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             base.Init(objectBuilder);
             NeedsUpdate = MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
         }
+
         public void AdjustTerminalControls_controls(IMyTerminalBlock block, List<IMyTerminalControl> controls)
         {
             if (block.BlockDefinition.SubtypeName == Block.BlockDefinition.SubtypeName)
@@ -119,6 +101,7 @@ namespace BuYanMod.OverclockingControl
                 }
             }
         }
+
         public void AdjustTerminalControls_Action(IMyTerminalBlock block, List<IMyTerminalAction> controls)
         {
             if (block.BlockDefinition.SubtypeName == Block.BlockDefinition.SubtypeName)
@@ -132,6 +115,7 @@ namespace BuYanMod.OverclockingControl
                 }
             }
         }
+
         public override void UpdateOnceBeforeFrame()
         {
             base.UpdateOnceBeforeFrame();
@@ -150,6 +134,7 @@ namespace BuYanMod.OverclockingControl
             Block.CubeGrid.OnGridSplit += CubeGrid_OnGridSplit;
             NeedsUpdate = MyEntityUpdateEnum.EACH_10TH_FRAME;
         }
+
         public sealed override void UpdateBeforeSimulation10()
         {
             base.UpdateBeforeSimulation10();
@@ -160,6 +145,7 @@ namespace BuYanMod.OverclockingControl
             }
             Block.RefreshCustomInfo();
         }
+
         private void IsEnable()
         {
             List<IMySlimBlock> blocks = new List<IMySlimBlock>();
@@ -168,6 +154,7 @@ namespace BuYanMod.OverclockingControl
                 if (b.BlockDefinition.Id.SubtypeName.Contains(sID)) return true;
                 return false;
             });
+
             if (blocks.Count > 1)
             {
                 int on = 0;
@@ -189,8 +176,10 @@ namespace BuYanMod.OverclockingControl
                 if (Block.Enabled) UpdateData();
                 if (!Block.Enabled) Overclock.Clear(Block.CubeGrid);
             }
+
             ThreadLock = false;
         }
+
         private void CubeGrid_OnBlockAdded(IMySlimBlock obj)
         {
             if (Block.Enabled)
@@ -201,15 +190,18 @@ namespace BuYanMod.OverclockingControl
                 if (obj.FatBlock is IMyThrust) Overclock.Thrust((IMyTerminalBlock)obj.FatBlock, Thrust, false);
                 if (obj.FatBlock is IMyShipDrill) Overclock.Drill((IMyTerminalBlock)obj.FatBlock, Drill, false);
             }
+
             if (obj.BlockDefinition.Id.SubtypeName.Contains(sID))
             {
-                Sunchronize((IMyTerminalBlock)obj.FatBlock, false);
+                Synchronize((IMyTerminalBlock)obj.FatBlock, false);
             }
         }
+
         private void CubeGrid_OnGridMerge(IMyCubeGrid arg1, IMyCubeGrid arg2)
         {
             IsEnable();
         }
+
         private void CubeGrid_OnGridSplit(IMyCubeGrid arg1, IMyCubeGrid arg2)
         {
             GridBlocks.Clear();
@@ -217,20 +209,26 @@ namespace BuYanMod.OverclockingControl
                 if (b.BlockDefinition.Id.SubtypeName.Contains(sID)) return true;
                 return false;
             });
+
             if (GridBlocks.Count == 0) Overclock.Clear(arg1);
+
             GridBlocks.Clear();
             arg2.GetBlocks(GridBlocks, (b) => {
                 if (b.BlockDefinition.Id.SubtypeName.Contains(sID)) return true;
                 return false;
             });
+
             if (GridBlocks.Count == 0) Overclock.Clear(arg2);
         }
+
         static void BuildControl()
         {
             if (controlIsCreated) return;
+
             TerminalRevise.CreateSeparator<IMyProgrammableBlock>("A-", "Test", BlockConfirm, BlockConfirm);
-            TerminalRevise.CreateLabel<IMyProgrammableBlock>("BY-", "Lablel-超频设备", mt.Overclock, BlockConfirm, BlockConfirm);
-            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-反应堆", mt.Reactor, BlockConfirm, BlockConfirm, (Me) => {
+            TerminalRevise.CreateLabel<IMyProgrammableBlock>("BY-", "Label-Overclock Device", "Overclock Settings", BlockConfirm, BlockConfirm);
+
+            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-Reactor", "Reactor Overclock", BlockConfirm, BlockConfirm, (Me) => {
                 var logic = GetTerminal(Me);
                 if (logic.Item1) return logic.Item2.Reactor;
                 return 1;
@@ -240,12 +238,13 @@ namespace BuYanMod.OverclockingControl
                 logic.Item2.Reactor = value;
                 if (logic.Item2.Block.Enabled) Overclock.Reactor(Me, value, true);
                 logic.Item2.SaveConfig();
-                Sunchronize(Me, true);
+                Synchronize(Me, true);
             }, (Me, value) => {
                 var logic = GetTerminal(Me);
-                value.Append(logic.Item2.Reactor + " " + mt.Times);
+                value.Append(logic.Item2.Reactor + " " + "times");
             }, 1, 10, 1, TerminalRevise.SliderStyle.Log);
-            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-气体发生器", mt.GasGenerator, BlockConfirm, BlockConfirm, (Me) => {
+
+            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-GasGenerator", "Gas Generator Overclock", BlockConfirm, BlockConfirm, (Me) => {
                 var logic = GetTerminal(Me);
                 if (logic.Item1) return logic.Item2.GasGenerator;
                 return 1;
@@ -255,12 +254,13 @@ namespace BuYanMod.OverclockingControl
                 logic.Item2.GasGenerator = value;
                 if (logic.Item2.Block.Enabled) Overclock.GasGenerator(Me, value, true);
                 logic.Item2.SaveConfig();
-                Sunchronize(Me, true);
+                Synchronize(Me, true);
             }, (Me, value) => {
                 var logic = GetTerminal(Me);
-                value.Append(logic.Item2.GasGenerator + " " + mt.Times);
+                value.Append(logic.Item2.GasGenerator + " " + "times");
             }, 1, 10, 1, TerminalRevise.SliderStyle.Log);
-            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-陀螺仪", mt.Gyro, BlockConfirm, BlockConfirm, (Me) => {
+
+            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-Gyro", "Gyro Overclock", BlockConfirm, BlockConfirm, (Me) => {
                 var logic = GetTerminal(Me);
                 if (logic.Item1) return logic.Item2.Gyro;
                 return 1;
@@ -270,12 +270,13 @@ namespace BuYanMod.OverclockingControl
                 logic.Item2.Gyro = value;
                 if (logic.Item2.Block.Enabled) Overclock.Gyro(Me, value, true);
                 logic.Item2.SaveConfig();
-                Sunchronize(Me, true);
+                Synchronize(Me, true);
             }, (Me, value) => {
                 var logic = GetTerminal(Me);
-                value.Append(logic.Item2.Gyro + " " + mt.Times);
+                value.Append(logic.Item2.Gyro + " " + "times");
             }, 1, 10, 1, TerminalRevise.SliderStyle.Log);
-            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-推进器", mt.Thrust, BlockConfirm, BlockConfirm, (Me) => {
+
+            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-Thrust", "Thrust Overclock", BlockConfirm, BlockConfirm, (Me) => {
                 var logic = GetTerminal(Me);
                 if (logic.Item1) return logic.Item2.Thrust;
                 return 1;
@@ -285,12 +286,13 @@ namespace BuYanMod.OverclockingControl
                 logic.Item2.Thrust = value;
                 if (logic.Item2.Block.Enabled) Overclock.Thrust(Me, value, true);
                 logic.Item2.SaveConfig();
-                Sunchronize(Me, true);
+                Synchronize(Me, true);
             }, (Me, value) => {
                 var logic = GetTerminal(Me);
-                value.Append(logic.Item2.Thrust + " " + mt.Times);
+                value.Append(logic.Item2.Thrust + " " + "times");
             }, 1, 10, 1, TerminalRevise.SliderStyle.Log);
-            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-钻头", mt.Drill, BlockConfirm, BlockConfirm, (Me) => {
+
+            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-Drill", "Drill Overclock", BlockConfirm, BlockConfirm, (Me) => {
                 var logic = GetTerminal(Me);
                 if (logic.Item1) return logic.Item2.Drill;
                 return 1;
@@ -300,13 +302,15 @@ namespace BuYanMod.OverclockingControl
                 logic.Item2.Drill = value;
                 if (logic.Item2.Block.Enabled) Overclock.Drill(Me, value, true);
                 logic.Item2.SaveConfig();
-                Sunchronize(Me, true);
+                Synchronize(Me, true);
             }, (Me, value) => {
                 var logic = GetTerminal(Me);
-                value.Append(logic.Item2.Drill + " " + mt.Times);
+                value.Append(logic.Item2.Drill + " " + "times");
             }, 1, 10, 1, TerminalRevise.SliderStyle.Log);
+
             controlIsCreated = true;
         }
+
         private void UpdateData()
         {
             Overclock.Reactor(Block, Reactor, true);
@@ -315,13 +319,15 @@ namespace BuYanMod.OverclockingControl
             Overclock.Thrust(Block, Thrust, true);
             Overclock.Drill(Block, Drill, true);
         }
-        public static void Sunchronize(IMyTerminalBlock block, bool IsSet)
+
+        public static void Synchronize(IMyTerminalBlock block, bool IsSet)
         {
             List<IMySlimBlock> Blocks = new List<IMySlimBlock>();
             block.CubeGrid.GetBlocks(Blocks, (b) => {
                 if (b.BlockDefinition.Id.SubtypeName.Contains("BY_OverclockingControlSystem")) return true;
                 return false;
             });
+
             if (IsSet)
             {
                 if (Blocks.Count > 1)
@@ -375,17 +381,19 @@ namespace BuYanMod.OverclockingControl
                 }
             }
         }
-        private void Block_AppendingCustomInfo(IMyTerminalBlock block, System.Text.StringBuilder arg2)
+
+        private void Block_AppendingCustomInfo(IMyTerminalBlock block, StringBuilder arg2)
         {
-            arg2.Append("\n" + mt.Info);
+            arg2.Append("\n" + "Info");
             arg2.Append("\n");
-            arg2.Append("\n" + mt.Reactor + " :   " + Math.Round(Reactor, 2) + "  " + mt.Times);
-            arg2.Append("\n" + mt.GasGenerator + " :   " + Math.Round(GasGenerator, 2) + "  " + mt.Times);
-            arg2.Append("\n" + mt.Gyro + " :   " + Math.Round(Gyro, 2) + "  " + mt.Times);
-            arg2.Append("\n" + mt.Thrust + " :   " + Math.Round(Thrust, 2) + "  " + mt.Times);
-            arg2.Append("\n" + mt.Drill + " :   " + Math.Round(Drill, 2) + "  " + mt.Times);
+            arg2.Append("\n" + "Reactor" + " :   " + Math.Round(Reactor, 2) + "  " + "times");
+            arg2.Append("\n" + "Gas Generator" + " :   " + Math.Round(GasGenerator, 2) + "  " + "times");
+            arg2.Append("\n" + "Gyro" + " :   " + Math.Round(Gyro, 2) + "  " + "times");
+            arg2.Append("\n" + "Thrust" + " :   " + Math.Round(Thrust, 2) + "  " + "times");
+            arg2.Append("\n" + "Drill" + " :   " + Math.Round(Drill, 2) + "  " + "times");
             TerminalRevise.RefreshBlockTerminal(block);
         }
+
         public static MyTuple<bool, OverclockingControlBlock> GetTerminal(IMyTerminalBlock Me)
         {
             if (NullCheck.IsNull(Me)) return new MyTuple<bool, OverclockingControlBlock>(false, null);
@@ -394,12 +402,14 @@ namespace BuYanMod.OverclockingControl
             if (Logic == null) return new MyTuple<bool, OverclockingControlBlock>(false, null);
             return new MyTuple<bool, OverclockingControlBlock>(true, Logic);
         }
+
         public static bool BlockConfirm(IMyTerminalBlock Me)
         {
             if (NullCheck.IsNull(Me)) return false;
             if (!Me.BlockDefinition.SubtypeId.Contains(sID)) return false;
             return Me?.GameLogic?.GetAs<OverclockingControlBlock>() != null;
         }
+
         public sealed override void Close()
         {
             base.Close();
