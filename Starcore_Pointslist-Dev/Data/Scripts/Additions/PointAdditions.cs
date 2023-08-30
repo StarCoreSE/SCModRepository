@@ -19,7 +19,8 @@ namespace ShipPoints
                 LargeBlockLargeGenerator@300;
 		        LargeLargeBlockUpgrade@100;
 				SmallLargeBlockUpgrade@20;
-                LargeWarhead@101;
+				DampeningEnhancer_x2_Large@100;
+                LargeWarhead@100;
                 LargeDecoy@4;
                 LargeStator@5;
                 LargeAdvancedStator@5;
