@@ -1,4 +1,4 @@
-﻿using ProtoBuf;
+using ProtoBuf;
 
 namespace StarCore.DynamicResistence
 {
@@ -10,5 +10,8 @@ namespace StarCore.DynamicResistence
 
         [ProtoMember(2)]
         public float Modifier;
+
+        [ProtoMember(3)]
+        public bool SiegeModeActivated;
     }
 }
