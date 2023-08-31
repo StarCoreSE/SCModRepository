@@ -287,7 +287,7 @@ namespace StarCore.DynamicResistence
 
             else if (dynResistBlock != null && SiegeModeActivated && SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
-                MyVisualScriptLogicProvider.SetHighlight(CurrentlyHighlighted.Name, thickness: 2, pulseTimeInFrames: 12, color: Color.DarkOrange);
+                MyVisualScriptLogicProvider.SetHighlightLocal(CurrentlyHighlighted.Name, thickness: 2, pulseTimeInFrames: 12, color: Color.DarkOrange);
 
                 Sink.Update();
 
@@ -322,7 +322,7 @@ namespace StarCore.DynamicResistence
 
                     SiegeModeTurnOn(allTerminalBlocks);
 
-                    MyVisualScriptLogicProvider.SetHighlight(CurrentlyHighlighted.Name, thickness: -1);
+                    MyVisualScriptLogicProvider.SetHighlightLocal(CurrentlyHighlighted.Name, thickness: -1);
 
                     SetCountdownStatus($"Siege Mode Deactivated", 1500, MyFontEnum.Red);
 
@@ -342,7 +342,7 @@ namespace StarCore.DynamicResistence
 
                 SiegeModeTurnOn(allTerminalBlocks);
 
-                MyVisualScriptLogicProvider.SetHighlight(CurrentlyHighlighted.Name, thickness: -1);
+                MyVisualScriptLogicProvider.SetHighlightLocal(CurrentlyHighlighted.Name, thickness: -1);
 
                 SetCountdownStatus($"Block Damaged! Siege Mode Deactivated", 1500, MyFontEnum.Red);
 
@@ -898,10 +898,10 @@ namespace StarCore.DynamicResistence
             }
         }*/
 
-        private static bool Visible(IMyTerminalBlock block)
+        /*private static bool Visible(IMyTerminalBlock block)
         {
             return block != null && !(block.GameLogic is DynamicResistLogic);
-        }
+        }*/
 
         /*private List<IMyCharacter> FindPlayerNearObject()
         {
