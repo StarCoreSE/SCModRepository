@@ -20,6 +20,8 @@ using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
 using Color = VRageMath.Color;
 using Draygo.API;
 using System.Text;
+using Sandbox.Definitions;
+using static Draygo.API.HudAPIv2;
 
 namespace klime.Visual
 {
@@ -33,7 +35,9 @@ namespace klime.Visual
         internal Task GridTask = new Task();
         Vector3D relTrans;
         public BoundingBoxD gridBox;
-        public MatrixD gridMatrix;
+        public static MatrixD gridMatrix;
+        public static MatrixD gridMatrixBackground;
+        public static float billboardscaling;
         public Color BillboardRED;
         public Vector4 Billboardcolor;
         private MyStringId PaperDollBGSprite = MyStringId.TryGet("paperdollBG");
@@ -127,18 +131,21 @@ namespace klime.Visual
             var up = MyAPIGateway.Session.Camera.WorldMatrix.Up;
 
 
+            var tempbillboardscaling = MathHelper.Clamp((float)grid.PositionComp.Scale * 0.9f, lowerlimit, 0.09f);
 
+            billboardscaling = tempbillboardscaling;
 
-            
 
             Billboardcolor = (Color.Lime * 0.75f).ToVector4();
             MyTransparentGeometry.AddBillboardOriented(
                 PaperDollBGSprite, 
                 Billboardcolor,
                 bruhmatrix.Translation,
-               left, up, 
-                MathHelper.Clamp((float)grid.PositionComp.Scale * 0.9f, lowerlimit, 0.09f) , 
+               left, up,
+                tempbillboardscaling, 
                 BlendTypeEnum.SDR);
+
+            gridMatrixBackground = bruhmatrix;
 
             Billboardcolor = (Color.Red * 0.5f).ToVector4();
             MyTransparentGeometry.AddBillboardOriented(
@@ -146,7 +153,7 @@ namespace klime.Visual
                Billboardcolor, painmatrix.Translation,
                left, 
                up,
-               MathHelper.Clamp((float)grid.PositionComp.Scale * 0.9f, lowerlimit, 0.09f),
+               tempbillboardscaling,
                BlendTypeEnum.AdditiveTop);
 
             Billboardcolor = (Color.DodgerBlue * 0.5f).ToVector4();
@@ -155,7 +162,7 @@ namespace klime.Visual
                Billboardcolor, greaterpainmatrix.Translation,
                left,
                up,
-               MathHelper.Clamp((float)grid.PositionComp.Scale * 0.9f, lowerlimit, 0.09f),
+               tempbillboardscaling,
                BlendTypeEnum.AdditiveTop);
 
             //  MyTransparentGeometry.AddBillboardOriented(PaperDollBGSprite,   Billboardcolor,   bruhmatrix.Translation,  fugmatrix.Left, fugmatrix.Up,   MathHelper.Clamp((float)grid.PositionComp.Scale * 0.9f, lowerlimit, 0.09f) ,  BlendTypeEnum.SDR);
@@ -274,9 +281,11 @@ namespace klime.Visual
         public Dictionary<Vector3I, float> BlockIntegrityDict = new Dictionary<Vector3I, float>();
         public Dictionary<Vector3I, float> FatBlockIntegrityDict = new Dictionary<Vector3I, float>();
         public List<DamageEntry> DamageEntries = new List<DamageEntry>();
+        public static string DamageEntriesString = ""; 
         public static float TotalDamageSum = 0;
         public int SlimBlocksDestroyed = 0;
         public int FatBlocksDestroyed = 0;
+        public Vector3D Position;
         public GridG(List<GridR> gridGroup, double rotationForwardBase) { Init(gridGroup, rotationForwardBase); }
         public GridG(GridR gridR, double rotationForwardBase) { Init(new List<GridR> { gridR }, rotationForwardBase); }
         private void Init(List<GridR> group, double rotationForwardBase) { gridGroup = group; this.rotationForwardBase = rotationForwardBase; }
@@ -414,16 +423,18 @@ namespace klime.Visual
 
             return damage.ToString("F1") + sizes[order];
         }
+
         public void DisplayTotalDamage(float slimDamageLast10Seconds, float fatBlockDamageLast10Seconds)
         {
+
+            DamageEntriesString = "";
             string damageMessage = "Total Damage: " + FormatDamage(TotalDamageSum) +
                                   "\nSlim Damage Last 10 Seconds: " + FormatDamage(slimDamageLast10Seconds) +
                                   "\nFatBlock Damage Last 10 Seconds: " + FormatDamage(fatBlockDamageLast10Seconds) +
                                   "\nSlim Blocks Destroyed: " + SlimBlocksDestroyed +
                                   "\nFat Blocks Destroyed: " + FatBlocksDestroyed;
-            MyAPIGateway.Utilities.ShowNotification(damageMessage, 16, MyFontEnum.Red); // this is the notification that displays the debug message, use texthudAPI instead
 
-            
+            DamageEntriesString = damageMessage;
         }
         public void UpdateMatrix(MatrixD renderMatrix, MatrixD rotMatrix)
         {
@@ -513,7 +524,7 @@ namespace klime.Visual
         public MyCubeGrid realGrid;
         public MatrixD realGridBaseMatrix;
         public GridG visGrid;
-        
+        public GridG visGridString;
         public int lifetime;
         public ushort netID = 39302;
         public bool isClosed;
@@ -603,6 +614,8 @@ namespace klime.Visual
                 renderMatrix.Translation += renderMatrix.Forward * (0.1 / (0.6 * playerCamera.FovWithZoom)) + renderMatrix.Right * xOffset + renderMatrix.Down * yOffset;
 
                 visGrid.UpdateMatrix(renderMatrix, realGrid.WorldMatrix * MatrixD.Invert(renderMatrix));
+
+
 
                 UpdateBackground();
 
@@ -757,13 +770,20 @@ namespace klime.Visual
         bool validInputThisTick = false;
         public ViewState viewState = ViewState.Idle;
         public RequestPaperDoll requestPaperDoll = RequestPaperDoll.Off;
-        List<EntVis> allVis = new List<EntVis>();
+        private MyStringId PaperDollBGSprite = MyStringId.TryGet("paperdollBG");
+        public List<EntVis> allVis = new List<EntVis>();
         WcApi wcAPI;
-        HudAPIv2 hudAPI;
+        public string Otherdeez { get; set; }
+
+
+        public HudAPIv2 hudAPI;
         public override void Init(MyObjectBuilder_SessionComponent sessionComponent)
         {
-            
+
         }
+     
+        
+
 
         public override void LoadData()
         {
@@ -786,6 +806,12 @@ namespace klime.Visual
         public override void UpdateAfterSimulation()
         {
             if (MyAPIGateway.Utilities.IsDedicated || MyAPIGateway.Session.Player?.Character == null || MyAPIGateway.Session.Camera == null) return;
+
+
+            if (hudAPI.Heartbeat)
+            {
+                UpdateHud();
+            }
 
             validInputThisTick = ValidInput();
 
@@ -842,28 +868,69 @@ namespace klime.Visual
         }
 
         // public string deez = "deez nuts";
-        public string deez { get; set; }
+        public string deez = "deez1";
 
-        public static HudAPIv2.HUDMessage deezTest;
+        public HudAPIv2.BillBoardHUDMessage billmessage;
+        public HudAPIv2.HUDMessage deezTest;
         public void CreateHud()
         {
-            deezTest = new HudAPIv2.HUDMessage(Scale: 10f, Font: "BI_SEOutlined", Message: new StringBuilder("deez"), Origin: new Vector2D(-.99, .99), HideHud: false, Blend: BlendTypeEnum.PostPP)
+            deezTest = new HudAPIv2.HUDMessage(Scale: 2f, Font: "BI_SEOutlined", Message: new StringBuilder("deez"), Origin: new Vector2D(-.99, .99), HideHud: false, Blend: BlendTypeEnum.PostPP)
             {
                 //Blend = BlendTypeEnum.PostPP,
-                Visible = true, //defaulted off?
-                InitialColor = Color.Orange,
+                Visible = false, //defaulted off?
+                InitialColor = Color.GreenYellow * 0.75f,
                 //ShadowColor = Color.Black,
             };
+
+
+
+            billmessage = new HudAPIv2.BillBoardHUDMessage(PaperDollBGSprite, new Vector2D(0, 0), Color.Lime * 0.75f, new Vector2(0, 0),-1, 1,1, 1, 0, false, true, BlendTypeEnum.PostPP)
+            {
+                Visible = false,
+            };
+
         }
 
         public void UpdateHud()
         {
-            if (deezTest == null)  { CreateHud();}
-            deezTest.Message.Clear();
+            HandleException(() =>
+            {
+                if (deezTest == null || billmessage == null) { CreateHud(); }
+                deezTest.Message.Clear();
+            }, "initializing HUD");
 
-            deez = "deez nuts";
-            deezTest.Message.Append(deez);
+            foreach (var entVis in allVis)
+            {
+                HandleException(() =>
+                {
+                    float tempscaling = GridR.billboardscaling * 25;
+                    Vector3D Position = GridR.gridMatrixBackground.Translation;
+
+                    Vector3D targetHudPos = MyAPIGateway.Session.Camera.WorldToScreen(ref Position);
+                    Vector2D newOrigin = new Vector2D(targetHudPos.X, targetHudPos.Y);
+                    Vector3D cameraForward = MyAPIGateway.Session.Camera.WorldMatrix.Forward;
+                    Vector3D toTarget = Position - MyAPIGateway.Session.Camera.WorldMatrix.Translation;
+                    float fov = MyAPIGateway.Session.Camera.FieldOfViewAngle;
+                    var angle = GetAngleBetweenDegree(toTarget, cameraForward);
+                    string bruh = GridG.DamageEntriesString;
+                    var distance = Vector3D.Distance(MyAPIGateway.Session.Camera.WorldMatrix.Translation, Position);
+
+                    deezTest.Visible = true;
+                    deezTest.Scale = tempscaling - MathHelper.Clamp(distance / 20000, 0, 0.9) + (30 / Math.Max(60, angle * angle * angle));
+                    deezTest.Message.Append(bruh);
+                    deezTest.Origin = new Vector2D(targetHudPos.X, targetHudPos.Y);
+                    deezTest.Offset = -deezTest.GetTextLength() / 2 + new Vector2(0, 0.3f);
+
+                }, "updating HUD element for " + entVis);
+            }
         }
+
+        private double GetAngleBetweenDegree(Vector3D vectorA, Vector3D vectorB)
+        {
+            vectorA.Normalize(); vectorB.Normalize();
+            return Math.Acos(MathHelper.Clamp(vectorA.Dot(vectorB), -1, 1)) * (180.0 / Math.PI);
+        }
+
 
         public override void Draw()
         {
@@ -876,15 +943,6 @@ namespace klime.Visual
                 if (charac == null) return;
                 IMyCamera currentCamera = MyAPIGateway.Session.Camera;
                 if (currentCamera == null) return;
-
-
-                if (hudAPI.Heartbeat)
-                {
-                    UpdateHud();
-                }
-
-
-
 
 
 
