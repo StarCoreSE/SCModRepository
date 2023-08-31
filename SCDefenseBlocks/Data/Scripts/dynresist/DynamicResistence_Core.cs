@@ -118,7 +118,6 @@ namespace StarCore.DynamicResistence
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
-            if (!MyAPIGateway.Session.IsServer) return; // Only do calculations serverside
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
         }
 
@@ -192,7 +191,7 @@ namespace StarCore.DynamicResistence
             }
             else if (SiegeModeActivated)
             {
-                CalculateMaxGridPower();
+                CalculateMaxGridPower();    
 
                 float baseUsage = 50.000f;
                 float quarterOfMax = dynResistBlockDef.RequiredPowerInput = MaxAvailibleGridPower / 4f;
@@ -259,9 +258,6 @@ namespace StarCore.DynamicResistence
 
         private void SiegeMode()
         {
-
-            CalculateMaxGridPower();
-
             var allSlimBlocks = new List<IMySlimBlock>();
             dynResistBlock.CubeGrid.GetBlocks(allSlimBlocks);
 
@@ -301,7 +297,11 @@ namespace StarCore.DynamicResistence
 
                     SiegeModeShutdown(allTerminalBlocks);
 
-                    dynResistBlock.CubeGrid.Physics.LinearVelocity = Vector3D.Zero;
+                    if (dynResistBlock.CubeGrid.Physics.LinearVelocity != Vector3D.Zero)
+                    {
+                        dynResistBlock.CubeGrid.Physics.LinearVelocity = Vector3D.Zero;
+                    }
+                    
                     /*dynResistBlock.CubeGrid.Physics.AngularVelocity = Vector3D.Zero;*/
 
                     SiegeTimer = SiegeTimer - 1;
@@ -422,6 +422,7 @@ namespace StarCore.DynamicResistence
             try
             {
                 SiegeMode();
+                CalculateMaxGridPower();
                 ChangeResistanceValue(dynResistBlock);
             }
             catch (Exception e)
