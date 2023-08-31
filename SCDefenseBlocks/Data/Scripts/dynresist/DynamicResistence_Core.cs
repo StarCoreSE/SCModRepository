@@ -46,7 +46,7 @@ namespace StarCore.DynamicResistence
         public bool SiegeCooldownTimerActive = false;
 
         public float MaxAvailibleGridPower = 0f;
-        public bool SiegeModeActivated = false;
+        public bool SiegeModeActivatedClient = false;
         public bool SiegeBlockShutdown = false;
         public bool SiegeModeResistence = false;
 
@@ -103,6 +103,29 @@ namespace StarCore.DynamicResistence
             }
         }
 
+        public bool SiegeModeActivated
+        {
+            get 
+            { 
+                return Settings.SiegeModeActivated;
+            }
+            set
+            {
+                SettingsChanged();
+
+                if (Settings.SiegeModeActivated == false)
+                {
+                    NeedsUpdate = MyEntityUpdateEnum.NONE;
+                }
+                else
+                {
+                    if ((NeedsUpdate & MyEntityUpdateEnum.EACH_10TH_FRAME) == 0)
+                        NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
+                }
+
+                dynResistBlock?.Components?.Get<MyResourceSinkComponent>()?.Update();
+            }
+        }
 
         public IMyCollector dynResistBlock;
         public MyPoweredCargoContainerDefinition dynResistBlockDef;
@@ -145,10 +168,10 @@ namespace StarCore.DynamicResistence
                 Settings.Polarization = MinPolarization;
 
 
-                if (!LoadSettings())
+                /*if (!LoadSettings())
                 {
                     ParseLegacyNameStorage();
-                }
+                }*/
 
                 SaveSettings(); // required for IsSerialized()
             }
@@ -165,7 +188,7 @@ namespace StarCore.DynamicResistence
                 if (dynResistBlock == null)
                     return;
 
-                if (SiegeModeActivated)
+                if (SiegeModeActivatedClient)
                 {
                     SetCountdownStatus($"Block Removed! Siege Mode Deactivated", 1500, MyFontEnum.Red);
                 }
@@ -185,11 +208,11 @@ namespace StarCore.DynamicResistence
             if (!dynResistBlock.IsWorking)
                 return 0f;
             
-            else if (HullPolarization == 0f && !SiegeModeActivated)
+            else if (HullPolarization == 0f && !SiegeModeActivatedClient)
             {
                 return 50.000f;
             }
-            else if (SiegeModeActivated)
+            else if (SiegeModeActivatedClient)
             {
                 CalculateMaxGridPower();    
 
@@ -266,17 +289,20 @@ namespace StarCore.DynamicResistence
 
             var CurrentlyHighlighted = dynResistBlock.CubeGrid;
 
-            if (!SiegeModeActivated)
+            Settings.SiegeModeActivated = SiegeModeActivatedClient;
+
+            if (!SiegeModeActivatedClient)
             {
                 return;
             }
-            else if (dynResistBlock != null && SiegeModeActivated && MaxAvailibleGridPower <= 150f)
+            else if (dynResistBlock != null && SiegeModeActivatedClient && MaxAvailibleGridPower <= 150f)
             {
                 SetCountdownStatus($"Insufficient Power", 1500, MyFontEnum.Red);
-                SiegeModeActivated = false;
+                SiegeModeActivatedClient = false;
+                Settings.SiegeModeActivated = SiegeModeActivatedClient;
                 return;
             }
-            else if (dynResistBlock != null && SiegeModeActivated && !SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
+            else if (dynResistBlock != null && SiegeModeActivatedClient && !SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
                 foreach (var block in allSlimBlocks)
                 {
@@ -285,7 +311,7 @@ namespace StarCore.DynamicResistence
                 SiegeModeResistence = true;
             }
 
-            else if (dynResistBlock != null && SiegeModeActivated && SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
+            else if (dynResistBlock != null && SiegeModeActivatedClient && SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
                 MyVisualScriptLogicProvider.SetHighlightLocal(CurrentlyHighlighted.Name, thickness: 2, pulseTimeInFrames: 12, color: Color.DarkOrange);
 
@@ -326,14 +352,15 @@ namespace StarCore.DynamicResistence
 
                     SetCountdownStatus($"Siege Mode Deactivated", 1500, MyFontEnum.Red);
 
-                    SiegeModeActivated = false;
+                    SiegeModeActivatedClient = false;
+                    Settings.SiegeModeActivated = SiegeModeActivatedClient;
                     SiegeModeResistence = false;
                     SiegeCooldownTimerActive = true;
 
                     Sink.Update();
                 }
             }
-            else if (dynResistBlock != null && dynResistBlock.IsWorking == false & SiegeModeActivated)
+            else if (dynResistBlock != null && dynResistBlock.IsWorking == false & SiegeModeActivatedClient)
             {
                 ResetBlockResist(dynResistBlock);
 
@@ -344,9 +371,10 @@ namespace StarCore.DynamicResistence
 
                 MyVisualScriptLogicProvider.SetHighlightLocal(CurrentlyHighlighted.Name, thickness: -1);
 
-                SetCountdownStatus($"Block Damaged! Siege Mode Deactivated", 1500, MyFontEnum.Red);
+                SetCountdownStatus($"Block Inoperative! Siege Mode Deactivated", 1500, MyFontEnum.Red);
 
-                SiegeModeActivated = false;
+                SiegeModeActivatedClient = false;
+                Settings.SiegeModeActivated = SiegeModeActivatedClient;
                 SiegeModeResistence = false;
                 SiegeCooldownTimerActive = true;
             }
@@ -459,7 +487,7 @@ namespace StarCore.DynamicResistence
             return false;
         }
 
-        bool ParseLegacyNameStorage()
+        /*bool ParseLegacyNameStorage()
         {
             string name = dynResistBlock.CustomName.TrimEnd(' ');
 
@@ -508,7 +536,7 @@ namespace StarCore.DynamicResistence
 
             dynResistBlock.CustomName = name.Substring(0, startIndex).Trim();
             return true;
-        }
+        }*/
 
         void SaveSettings()
         {
@@ -589,7 +617,7 @@ namespace StarCore.DynamicResistence
         {
             if (obj.EntityId != dynResistBlock.EntityId) return;
 
-            if (dynResistBlock.IsWorking && !SiegeModeActivated)
+            if (dynResistBlock.IsWorking && !SiegeModeActivatedClient)
             {
                 var dynamicResistLogic = dynResistBlock.GameLogic?.GetAs<DynamicResistLogic>();
 
@@ -624,7 +652,7 @@ namespace StarCore.DynamicResistence
                     }
                 }
             }
-            else if (!dynResistBlock.IsWorking || !SiegeModeActivated)
+            else if (!dynResistBlock.IsWorking || !SiegeModeActivatedClient)
             {
                 if (HullPolarization > 0f)
                 {
@@ -665,18 +693,6 @@ namespace StarCore.DynamicResistence
 
             mod.ControlsCreated = true;
 
-            var polarizationValueSlider = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, IMyCollector>(Control_Prefix + "HullPolarization");
-            polarizationValueSlider.Title = MyStringId.GetOrCompute("Hull Polarization");
-            polarizationValueSlider.Tooltip = MyStringId.GetOrCompute("Adjusts the mount of Damage Absorbed by the Block");
-            polarizationValueSlider.SetLimits(MinPolarization, MaxPolarization);
-            polarizationValueSlider.Writer = Control_Polarization_Writer;
-            polarizationValueSlider.Visible = Control_Visible;
-            polarizationValueSlider.Getter = Control_Polarization_Getter;
-            polarizationValueSlider.Setter = Control_Polarization_Setter;
-            polarizationValueSlider.Enabled = Siege_Enabler;
-            polarizationValueSlider.SupportsMultipleBlocks = true;
-            MyAPIGateway.TerminalControls.AddControl<T>(polarizationValueSlider);
-
             var siegeModeToggle = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlOnOffSwitch, IMyCollector>(Control_Prefix + "SiegeMode");
             siegeModeToggle.Title = MyStringId.GetOrCompute("Siege Mode");
             siegeModeToggle.Tooltip = MyStringId.GetOrCompute("Toggle Siege Mode"); 
@@ -688,6 +704,18 @@ namespace StarCore.DynamicResistence
             siegeModeToggle.Enabled = Siege_Cooldown_Enabler;
             siegeModeToggle.SupportsMultipleBlocks = true;
             MyAPIGateway.TerminalControls.AddControl<T>(siegeModeToggle);
+
+            var polarizationValueSlider = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, IMyCollector>(Control_Prefix + "HullPolarization");
+            polarizationValueSlider.Title = MyStringId.GetOrCompute("Hull Polarization");
+            polarizationValueSlider.Tooltip = MyStringId.GetOrCompute("Adjusts the mount of Damage Absorbed by the Block");
+            polarizationValueSlider.SetLimits(MinPolarization, MaxPolarization);
+            polarizationValueSlider.Writer = Control_Polarization_Writer;
+            polarizationValueSlider.Visible = Control_Visible;
+            polarizationValueSlider.Getter = Control_Polarization_Getter;
+            polarizationValueSlider.Setter = Control_Polarization_Setter;
+            polarizationValueSlider.Enabled = Siege_Enabler;
+            polarizationValueSlider.SupportsMultipleBlocks = true;
+            MyAPIGateway.TerminalControls.AddControl<T>(polarizationValueSlider);
 
             var increasePolarization = MyAPIGateway.TerminalControls.CreateAction<IMyCollector>(Control_Prefix + "PolarizationIncrease");
             increasePolarization.Name = new StringBuilder("Increase Polarization");
@@ -717,9 +745,7 @@ namespace StarCore.DynamicResistence
                     MyToolbarType.Character,
                 };
             increasePolarization.Enabled = Siege_Enabler;
-
             MyAPIGateway.TerminalControls.AddAction<T>(increasePolarization);
-
 
             var decreasePolarization = MyAPIGateway.TerminalControls.CreateAction<IMyCollector>(Control_Prefix + "PolarizationDecrease");
             decreasePolarization.Name = new StringBuilder("Decrease Polarization");
@@ -749,7 +775,6 @@ namespace StarCore.DynamicResistence
                     MyToolbarType.Character,
                 };
             decreasePolarization.Enabled = Siege_Enabler;
-
             MyAPIGateway.TerminalControls.AddAction<T>(decreasePolarization);
 
             var siegeModeToggleAction = MyAPIGateway.TerminalControls.CreateAction<IMyCollector>(Control_Prefix + "siegeToggleAction");
@@ -761,9 +786,9 @@ namespace StarCore.DynamicResistence
                 var logic = b?.GameLogic?.GetAs<DynamicResistLogic>();
                 if (logic != null)
                 {
-                    if (logic.SiegeModeActivated == false)
+                    if (logic.SiegeModeActivatedClient == false)
                     {
-                        logic.SiegeModeActivated = true;
+                        logic.SiegeModeActivatedClient = true;
                     }
                     else
                         return;
@@ -782,8 +807,7 @@ namespace StarCore.DynamicResistence
                     MyToolbarType.ButtonPanel,
                     MyToolbarType.Character,
                 };
-            siegeModeToggleAction.Enabled = Siege_Enabler;
-
+            siegeModeToggleAction.Enabled = Siege_Cooldown_Enabler;
             MyAPIGateway.TerminalControls.AddAction<T>(siegeModeToggleAction);
         }
 
@@ -801,7 +825,7 @@ namespace StarCore.DynamicResistence
                 // Assuming DynamicResistLogic is the class containing SiegeModeActivated
                 DynamicResistLogic dynamicResistLogic = GetLogic(block);
 
-                if (dynamicResistLogic.SiegeModeActivated == true)
+                if (dynamicResistLogic.SiegeModeActivatedClient == true)
                 {
                     return false;
                 }
@@ -822,7 +846,7 @@ namespace StarCore.DynamicResistence
                 // Assuming DynamicResistLogic is the class containing SiegeModeActivated
                 DynamicResistLogic dynamicResistLogic = GetLogic(block);
 
-                if (dynamicResistLogic.SiegeCooldownTimerActive == true || dynamicResistLogic.SiegeModeActivated == true)
+                if (dynamicResistLogic.SiegeCooldownTimerActive == true || dynamicResistLogic.SiegeModeActivatedClient == true)
                 {
                     return false;
                 }
@@ -864,7 +888,7 @@ namespace StarCore.DynamicResistence
         static bool Control_Siege_Getter(IMyTerminalBlock block)
         {
             var logic = GetLogic(block);
-            return logic != null ? logic.SiegeModeActivated : false;
+            return logic != null ? logic.SiegeModeActivatedClient : false;
         }
 
         static void Control_Siege_Setter(IMyTerminalBlock block, bool value)
@@ -872,7 +896,7 @@ namespace StarCore.DynamicResistence
             var logic = GetLogic(block);
             if (logic != null)
             {
-                logic.SiegeModeActivated = value;
+                logic.SiegeModeActivatedClient = value;
             }
         }
         #endregion
