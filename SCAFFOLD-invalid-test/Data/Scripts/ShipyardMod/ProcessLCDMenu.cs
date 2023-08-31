@@ -7,6 +7,7 @@ using Sandbox.ModAPI;
 using ShipyardMod.ItemClasses;
 using ShipyardMod.Utility;
 using SpaceEngineers.Game.ModAPI;
+using VRage.Game.GUI.TextPanel;
 using VRage.Game.ModAPI;
 using VRageMath;
 
@@ -73,18 +74,53 @@ namespace ShipyardMod.ProcessHandlers
 
                         var bound = new BoundingSphereD(panel.GetPosition(), 5);
                         List<IMySlimBlock> nearblocks = yardGrid.GetBlocksInsideSphere(ref bound);
-                        bool found = false;
+                        bool found = true;
 
-                        foreach (IMySlimBlock block in nearblocks)
-                        {
-                            var buttons = block.FatBlock as IMyButtonPanel;
+                          foreach (IMySlimBlock block in nearblocks)
+                          {
+                           var buttons = block.FatBlock as IMyButtonPanel;
 
-                            if (buttons == null)
-                                continue;
+                           if (buttons == null)
+                               continue;
 
                             superFound = true;
                             found = true;
                             Logging.Instance.WriteDebug("Found LCD pair for grid: " + item.EntityId);
+                            //Utilities.Invoke(() =>
+                            //{
+                            //    long id = item.EntityId;
+                            //    //item.Menu = new LCDMenu();
+                            //    ShipyardControlReader reader = new ShipyardControlReader();
+                            //    reader.ReadLCDContent(panel);
+
+                            //    panel.Enabled = true;
+
+                            //    if (panel.ContentType != ContentType.SCRIPT)
+                            //    {
+                            //        panel.ContentType = ContentType.SCRIPT;
+                            //    }
+
+                            //    if (panel.Script != "ShipyardControl")
+                            //    {
+                            //        panel.Script = "ShipyardControl";
+                            //    }
+
+                            //    var shipyardControlScript = panel.GetScript();
+                            //    var targetsVariable = shipyardControlScript.GetVariable("shipyardTargetList");
+
+                            //    if (targetsVariable != null)
+                            //    {
+                            //        // Get the value of the 'shipyardTargetList' variable
+                            //        string targetsValue = targetsVariable.GetValue().ToString();
+
+                            //        // Update the menu or perform any other actions based on the variable value
+                            //        // For example, update the shipyardTargetList label in the LCDMenu:
+                            //        reader.shipyardTargetList.Text = $"Targets: {targetsValue}";
+                            //    }
+
+                            //    // Rest of the code...
+                            //});
+
                             Utilities.Invoke(() =>
                                              {
                                                  long id = item.EntityId;
@@ -92,7 +128,7 @@ namespace ShipyardMod.ProcessHandlers
                                                  panel.Enabled = true;
                                                  //panel.RequestEnable(false);
                                                  //panel.RequestEnable(true);
-                                                 item.Menu.BindButtonPanel(buttons);
+                                                 //item.Menu.BindButtonPanel(buttons);
                                                  item.Menu.BindLCD(panel);
                                                  var mainMenu = new MenuItem("", "", null, MenuDel(id));
                                                  var statusMenu = new MenuItem("", "", null, StatusDel(id));

@@ -4,6 +4,7 @@ using System.Text;
 using Sandbox.Definitions;
 using Sandbox.ModAPI;
 using SpaceEngineers.Game.ModAPI;
+using VRage.Game.GUI.TextPanel;
 
 //Jimmacle provided the original LCD classes. These are heavily modified :P
 
@@ -42,11 +43,12 @@ namespace ShipyardMod.ItemClasses
 
         public void BindLCD(IMyTextPanel txtpnl)
         {
-            if (Panel != null)
+            if (Panel is IMyTextSurfaceProvider && Panel != null)
             {
-                Panel.WritePublicText("MENU UNBOUND");
+                Panel.WriteText("MENU UNBOUND");
             }
             Panel = txtpnl;
+            Panel.ContentType = ContentType.TEXT_AND_IMAGE;
             UpdateLCD();
         }
 
@@ -106,23 +108,22 @@ namespace ShipyardMod.ItemClasses
                 }
                 string result = sb.ToString();
                 //saves bandwidth and render time
-                if (Panel.GetPublicText() == result)
+                if (Panel.GetText() == result)
                     return;
-                Panel.WritePublicText(result);
+                Panel.WriteText(result);
                 //Panel.ShowPrivateTextOnScreen();
-                Panel.ShowPublicTextOnScreen();
             }
         }
 
         public void WriteHugeString(string message)
         {
-            Panel.WritePublicText("");
+            Panel.WriteText("");
             int charcount = 4200; //KEEN
 
             for (int i = 0; i < message.Length * charcount; i++)
             {
                 string substring = message.Substring(i * charcount, Math.Min(charcount, message.Length - i * charcount));
-                Panel.WritePublicText(substring, true);
+                Panel.WriteText(substring, true);
             }
         }
     }
