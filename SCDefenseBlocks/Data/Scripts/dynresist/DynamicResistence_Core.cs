@@ -280,16 +280,20 @@ namespace StarCore.DynamicResistence
                 SiegeModeActivated = false;
                 return;
             }
-            else if (dynResistBlock != null && SiegeModeActivated && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
+            else if (dynResistBlock != null && SiegeModeActivated && !SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
-                MyVisualScriptLogicProvider.SetHighlight(CurrentlyHighlighted.Name, thickness: 2, pulseTimeInFrames: 12, color: Color.DarkOrange);
-
-                Sink.Update();
-
                 foreach (var block in allSlimBlocks)
                 {
                     block.BlockGeneralDamageModifier = 0.1f;
                 }
+                SiegeModeResistence = true;
+            }
+
+            else if (dynResistBlock != null && SiegeModeActivated && SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
+            {
+                MyVisualScriptLogicProvider.SetHighlight(CurrentlyHighlighted.Name, thickness: 2, pulseTimeInFrames: 12, color: Color.DarkOrange);
+
+                Sink.Update();
 
                 if (SiegeTimer > 0)
                 {
@@ -323,6 +327,7 @@ namespace StarCore.DynamicResistence
                     SetCountdownStatus($"Siege Mode Deactivated", 1500, MyFontEnum.Red);
 
                     SiegeModeActivated = false;
+                    SiegeModeResistence = false;
                     SiegeCooldownTimerActive = true;
 
                     Sink.Update();
@@ -342,6 +347,7 @@ namespace StarCore.DynamicResistence
                 SetCountdownStatus($"Block Damaged! Siege Mode Deactivated", 1500, MyFontEnum.Red);
 
                 SiegeModeActivated = false;
+                SiegeModeResistence = false;
                 SiegeCooldownTimerActive = true;
             }
 
