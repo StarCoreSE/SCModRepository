@@ -18,6 +18,8 @@ using ParallelTasks;
 using VRageRender;
 using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
 using Color = VRageMath.Color;
+using Draygo.API;
+using System.Text;
 
 namespace klime.Visual
 {
@@ -420,6 +422,8 @@ namespace klime.Visual
                                   "\nSlim Blocks Destroyed: " + SlimBlocksDestroyed +
                                   "\nFat Blocks Destroyed: " + FatBlocksDestroyed;
             MyAPIGateway.Utilities.ShowNotification(damageMessage, 16, MyFontEnum.Red); // this is the notification that displays the debug message, use texthudAPI instead
+
+            
         }
         public void UpdateMatrix(MatrixD renderMatrix, MatrixD rotMatrix)
         {
@@ -485,7 +489,7 @@ namespace klime.Visual
                 DamageEntries.Remove(oldEntry);
 
             // Display both damages
-           // DisplayTotalDamage(slimDamageLast10Seconds, fatBlockDamageLast10Seconds);
+            DisplayTotalDamage(slimDamageLast10Seconds, fatBlockDamageLast10Seconds);
 
 
             rotationForward = rotationForwardBase + rotationForward;
@@ -755,9 +759,10 @@ namespace klime.Visual
         public RequestPaperDoll requestPaperDoll = RequestPaperDoll.Off;
         List<EntVis> allVis = new List<EntVis>();
         WcApi wcAPI;
-
+        HudAPIv2 hudAPI;
         public override void Init(MyObjectBuilder_SessionComponent sessionComponent)
         {
+            
         }
 
         public override void LoadData()
@@ -769,6 +774,7 @@ namespace klime.Visual
             {
                 wcAPI = new WcApi();
                 wcAPI.Load(WCRegistered, true);
+                hudAPI = new HudAPIv2(CreateHud);
             }
         }
 
@@ -834,6 +840,31 @@ namespace klime.Visual
             foreach (var entVis in allVis) entVis.Close();
             allVis.Clear();
         }
+
+        // public string deez = "deez nuts";
+        public string deez { get; set; }
+
+        public static HudAPIv2.HUDMessage deezTest;
+        public void CreateHud()
+        {
+            deezTest = new HudAPIv2.HUDMessage(Scale: 10f, Font: "BI_SEOutlined", Message: new StringBuilder("deez"), Origin: new Vector2D(-.99, .99), HideHud: false, Blend: BlendTypeEnum.PostPP)
+            {
+                //Blend = BlendTypeEnum.PostPP,
+                Visible = true, //defaulted off?
+                InitialColor = Color.Orange,
+                //ShadowColor = Color.Black,
+            };
+        }
+
+        public void UpdateHud()
+        {
+            if (deezTest == null)  { CreateHud();}
+            deezTest.Message.Clear();
+
+            deez = "deez nuts";
+            deezTest.Message.Append(deez);
+        }
+
         public override void Draw()
         {
 
@@ -845,6 +876,19 @@ namespace klime.Visual
                 if (charac == null) return;
                 IMyCamera currentCamera = MyAPIGateway.Session.Camera;
                 if (currentCamera == null) return;
+
+
+                if (hudAPI.Heartbeat)
+                {
+                    UpdateHud();
+                }
+
+
+
+
+
+
+
                 if (allVis == null)
                 {
                     MyLog.Default.WriteLine("allVis is null. Aborting Draw like it's a bad sketch.");
@@ -902,9 +946,11 @@ namespace klime.Visual
                     }
                 }
                 if (allVis.Count == 0 || requestPaperDoll == RequestPaperDoll.Off) viewState = ViewState.GoToIdleWC;
-            }
+                }
             }, "Drawing On-Screen Elements");
         }
+
+
 
         private void NetworkHandler(ushort arg1, byte[] arg2, ulong incomingSteamID, bool arg4)
         {
