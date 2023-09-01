@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <CubeBlocks>
+        <Definition xsi:type="MyObjectBuilder_PoweredCargoContainerDefinition">
+            <Id>
+                <TypeId>Collector</TypeId>
+                <SubtypeId>SI_Field_Gen</SubtypeId>
+            </Id>
+            <DisplayName>Structural Integrity Field Generator</DisplayName>
+            <Icon>Textures\GUI\Icons\Cubes\SI_Field_Gen.dds</Icon>
+            <Description>Structural Field Generator</Description>
+            <CubeSize>Large</CubeSize>
+            <BlockTopology>TriangleMesh</BlockTopology>
+            <Size x="3" y="3" z="2" />
+            <ModelOffset x="0" y="0" z="0" />
+            <Model>Models\Cubes\Large\SI_Field_Gen.mwm</Model>
+            <Components>
+                <Component Subtype="SteelPlate" Count="30" />
+                <Component Subtype="Construction" Count="50" />
+                <Component Subtype="SmallTube" Count="12" />
+                <Component Subtype="Motor" Count="8" />
+                <Component Subtype="Display" Count="4" />
+                <Component Subtype="Computer" Count="10" />
+                <Component Subtype="SteelPlate" Count="15" />
+            </Components>
+            <CriticalComponent Subtype="Computer" Index="0" />
+            <BuildProgressModels>
+            </BuildProgressModels>
+            <BlockPairName>SI_Field_Gen_Block</BlockPairName>
+            <EdgeType>Light</EdgeType>
+            <BuildTimeSeconds>25</BuildTimeSeconds>
+            <ResourceSinkGroup>Conveyors</ResourceSinkGroup>
+            <RequiredPowerInput>0.002</RequiredPowerInput>
+            <InventorySize>
+                <X>2.5</X>
+                <Y>2.5</Y>
+                <Z>1</Z>
+            </InventorySize>
+            <MountPoints>
+                <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="1" EndY="1" />
+                <MountPoint Side="Top" StartX="0" StartY="0" EndX="1" EndY="1" />
+                <MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="1" />
+                <MountPoint Side="Left" StartX="0" StartY="0" EndX="1" EndY="1" />
+                <MountPoint Side="Right" StartX="0" StartY="0" EndX="1" EndY="1" />
+            </MountPoints>
+            <MirroringY>Z</MirroringY>
+            <MirroringZ>Y</MirroringZ>
+            <DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
+            <DamagedSound>ParticleHeavyMech</DamagedSound>
+            <ActionSound>BlockCollect</ActionSound>
+            <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+            <DestroySound>WepSmallWarheadExpl</DestroySound>
+            <PCU>25</PCU>
+            <IsAirTight>true</IsAirTight>
+        </Definition>
+		
+        <!-- End Region Conveyor system -->
+    </CubeBlocks>
+</Definitions>
