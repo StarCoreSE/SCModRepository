@@ -22,6 +22,7 @@ using Draygo.API;
 using System.Text;
 using Sandbox.Definitions;
 using static Draygo.API.HudAPIv2;
+using System.Linq;
 
 namespace klime.Visual
 {
@@ -45,7 +46,8 @@ namespace klime.Visual
         string ArmorRecolorHex = "#02f726";
         public bool runonce = false;
         public float oldFOV;
-        public bool needsRescale = false;
+        public bool needsRescale;
+        public static Vector3D GridBoxCenter;
         //public MyStringHash MaterialHash = MyStringHash.GetOrCompute("SciFi");
 
         public GridR(MyCubeGrid grid, EntRender entRender = null)
@@ -76,22 +78,14 @@ namespace klime.Visual
 
 
 
-            // If the FOV has increased, adjust the renderMatrix's translation
-         if (needsRescale)
-         {
-             var backOffset = (scale - 0.001) * 0.1;  // Adjust as needed
-             if (backOffset > 0)
-             {
-                 var moveVector = Vector3D.TransformNormal(-camera.WorldMatrix.Forward, MatrixD.Transpose(renderMatrix));
-                    renderMatrix.Translation += moveVector * backOffset;
-             }
-             needsRescale = false;
-         }
-
             // Existing translation update
             renderMatrix.Translation += Vector3D.TransformNormal(relTrans, renderMatrix);
             grid.WorldMatrix = renderMatrix;
+
+            var rotateRenderMatrix = MatrixD.CreateTranslation(grid.PositionComp.LocalAABB.Center) * renderMatrix;
             gridMatrix = renderMatrix;
+            //  MyAPIGateway.Utilities.ShowNotification($"rMT {renderMatrix.Translation}", 60, "Green");
+
 
             var bruhmatrix = renderMatrix;
             float lowerlimit;
@@ -134,7 +128,7 @@ namespace klime.Visual
             var tempbillboardscaling = MathHelper.Clamp((float)grid.PositionComp.Scale * 0.9f, lowerlimit, 0.09f);
 
             billboardscaling = tempbillboardscaling;
-
+            gridMatrixBackground = bruhmatrix;
 
             Billboardcolor = (Color.Lime * 0.75f).ToVector4();
             MyTransparentGeometry.AddBillboardOriented(
@@ -145,7 +139,7 @@ namespace klime.Visual
                 tempbillboardscaling, 
                 BlendTypeEnum.SDR);
 
-            gridMatrixBackground = bruhmatrix;
+            
 
             Billboardcolor = (Color.Red * 0.5f).ToVector4();
             MyTransparentGeometry.AddBillboardOriented(
@@ -167,19 +161,43 @@ namespace klime.Visual
 
             //  MyTransparentGeometry.AddBillboardOriented(PaperDollBGSprite,   Billboardcolor,   bruhmatrix.Translation,  fugmatrix.Left, fugmatrix.Up,   MathHelper.Clamp((float)grid.PositionComp.Scale * 0.9f, lowerlimit, 0.09f) ,  BlendTypeEnum.SDR);
 
+            // If the FOV has increased, adjust the renderMatrix's translation
+
             if (needsRescale)
             {
+                var backOffset = (scale - 0.001) * 0.1;  // Adjust as needed
+                if (backOffset > 0)
+                {
+                    var moveVector = Vector3D.TransformNormal(-camera.WorldMatrix.Forward, MatrixD.Transpose(renderMatrix));
+                    renderMatrix.Translation += moveVector * backOffset;
+                }
+                // needsRescale = false;
                 DoRescale();
-                needsRescale = false;
+                
             }
         }
+        public List<IMyCubeBlock> Blocks { get; private set; }
 
-
+     //  Vector3D CalculateApproximateCenterWithSampling(IMyCubeGrid grid, int sampleSize)
+     //  {
+     //      
+     //      Vector3D sum = Vector3D.Zero;
+     //      int count = Math.Min(sampleSize, sampleSize);
+     //      Random rand = new Random();
+     //
+     //      for (int i = 0; i < count; i++)
+     //      {
+     //          int index = rand.Next(count);
+     //          var block = grid.CubeBlocks[index];
+     //          sum += block.Position;
+     //      }
+     //
+     //      return sum / count;
+     //  }
         public void DoRescale()
         {
 
             var volume = grid.PositionComp.WorldVolume;
-
             var camera = MyAPIGateway.Session.Camera;
             var newFov = camera.FovWithZoom;
             var aspectRatio = camera.ViewportSize.X / camera.ViewportSize.Y;
@@ -191,10 +209,25 @@ namespace klime.Visual
             var hudscale = 0.04f;
             var scale = MathHelper.Clamp((float)(scaleFov * (hudscale * 0.23f)), 0.0004f, 0.0008f);
 
-            relTrans = Vector3D.TransformNormal(grid.WorldMatrix.Translation - grid.PositionComp.WorldAABB.Center, MatrixD.Transpose(grid.WorldMatrix)) * scale;
+            BoundingBoxD aabb = grid.PositionComp.WorldAABB;
+            var size = aabb.Size;
+
+
+            var maxSize = Math.Max(size.X, Math.Max(size.Y, size.Z));
+
+
+            var center = grid.PositionComp.WorldAABB.Center;
+
+            var transpose = MatrixD.Transpose(grid.WorldMatrix);
+
+            relTrans = Vector3D.TransformNormal(center, grid.WorldMatrix) * scale;
+            
             grid.PositionComp.Scale = scale;
 
-            MyAPIGateway.Utilities.ShowNotification($"Scale {scale}", 60, "Red");
+            MyAPIGateway.Utilities.ShowNotification($"MaxSize {maxSize}", 60, "Red");
+
+            // MyAPIGateway.Utilities.ShowNotification($"DoRescale {localtowhat}", 60, "Red");
+            needsRescale = false;
         }
 
         public void DoCleanup()
@@ -209,10 +242,10 @@ namespace klime.Visual
             
             Vector3 ArmorHSVOffset = MyColorPickerConstants.HSVToHSVOffset(ColorExtensions.ColorToHSV(ColorExtensions.HexToColor(ArmorRecolorHex)));
             ArmorHSVOffset = new Vector3((float)Math.Round(ArmorHSVOffset.X, 2), (float)Math.Round(ArmorHSVOffset.Y, 2), (float)Math.Round(ArmorHSVOffset.Z, 2));
-           
             
           //  iGrid.ColorBlocks(grid.Min, grid.Max, ArmorHSVOffset);
             iGrid.SkinBlocks(grid.Min, grid.Max, ArmorHSVOffset , ArmorMat);
+
 
             foreach (var block in allBlocks)
             {
@@ -503,19 +536,37 @@ namespace klime.Visual
             DisplayTotalDamage(slimDamageLast10Seconds, fatBlockDamageLast10Seconds);
 
 
-            rotationForward = rotationForwardBase + rotationForward;
-            var rotateMatrix = MatrixD.CreateRotationY(rotationForwardBase);
-            renderMatrix = rotateMatrix * renderMatrix;
-            var origTranslation = renderMatrix.Translation;
-            renderMatrix = rotMatrix * renderMatrix;
-            renderMatrix.Translation = origTranslation;
-          
 
-            foreach (var subgrid in gridGroup) { if (subgrid.grid != null) subgrid.UpdateMatrix(renderMatrix); }
+
+
+            foreach (var subgrid in gridGroup) { if (subgrid.grid != null)
+                    
+                rotationForward = rotationForwardBase + rotationForward;
+                var rotateMatrix = MatrixD.CreateRotationZ(rotationForwardBase);
+                renderMatrix =  renderMatrix * rotateMatrix;
+
+                
+
+
+                var origTranslation = renderMatrix.Translation;
+                renderMatrix = rotMatrix * renderMatrix;
+                renderMatrix.Translation = origTranslation;
+
+                subgrid.UpdateMatrix(renderMatrix); 
+                    
+            
+            }
+
 
             // Please don't attempt to read into the above code
             // its best for the both of us if you don't
             // Yes, muzzled, I'm speaking to you from the past
+            // Times I've ignored this warning: 1
+            // add another one to the counter when you're done next time, n o b a l l s 
+
+            //lock me up
+
+            // I deserved that, to be completely honest
         }
     }
 
@@ -536,8 +587,12 @@ namespace klime.Visual
         private MyStringId PaperDollBGSprite = MyStringId.TryGet("paperdollBG");
         public EntVis(MyCubeGrid realGrid, double xOffset, double yOffset, double rotOffset)
         {
+            var offsetcenteramount = realGrid.PositionComp.LocalAABB.Center;
+            var center = realGrid.PositionComp.WorldMatrixRef.Translation;
+            var offsetcenter = center - offsetcenteramount;
+            var tempMatrix = MatrixD.CreateWorld(offsetcenter, realGrid.PositionComp.WorldMatrixRef.Forward, realGrid.PositionComp.WorldMatrixRef.Up);
             this.realGrid = realGrid;
-            this.realGridBaseMatrix = realGrid.WorldMatrix;
+            this.realGridBaseMatrix = tempMatrix;
             this.xOffset = xOffset;
             this.yOffset = yOffset;
             this.rotOffset = rotOffset;
@@ -587,6 +642,7 @@ namespace klime.Visual
         {
             if (visGrid != null && realGrid != null && !realGrid.MarkedForClose)
             {
+                GridR.GridBoxCenter = visGrid.gridGroup[0].grid.PositionComp.WorldVolume.Center;
                 var playerCamera = MyAPIGateway.Session.Camera;
                 var renderMatrix = playerCamera.WorldMatrix;
 
@@ -613,6 +669,7 @@ namespace klime.Visual
 
                 renderMatrix.Translation += renderMatrix.Forward * (0.1 / (0.6 * playerCamera.FovWithZoom)) + renderMatrix.Right * xOffset + renderMatrix.Down * yOffset;
 
+
                 visGrid.UpdateMatrix(renderMatrix, realGrid.WorldMatrix * MatrixD.Invert(renderMatrix));
 
 
@@ -624,7 +681,7 @@ namespace klime.Visual
         //DS reference code:
         public void UpdateBackground()
         {
-
+            
             var camera = MyAPIGateway.Session.Camera;
             var newFov = camera.FovWithZoom;
             var aspectRatio = camera.ViewportSize.X / camera.ViewportSize.Y;
