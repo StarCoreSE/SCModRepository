@@ -227,12 +227,12 @@ namespace StarCore.DynamicResistence
                 CalculateMaxGridPower();
 
                 float baseUsage = 50.000f;
-                float maxPowerUsage = dynResistBlockDef.RequiredPowerInput = MaxAvailibleGridPower * 0.3f;
+                float powerPrecentage = dynResistBlockDef.RequiredPowerInput = MaxAvailibleGridPower * 0.3f;
                 float sliderValue = HullPolarization;
 
                 float ratio = sliderValue / MaxPolarization;
 
-                return baseUsage + (baseUsage + (maxPowerUsage - baseUsage) * ratio);
+                return baseUsage + ((baseUsage + (powerPrecentage - baseUsage)) * ratio);
             }                      
         }
 
@@ -665,7 +665,6 @@ namespace StarCore.DynamicResistence
             {
                 if (HullPolarization > 0f)
                 {
-                    MyAPIGateway.Utilities.ShowNotification("Block is disabled", 300, MyFontEnum.Red);
                     HullPolarization = 0f;
                     Settings.Polarization = 0f;
                     finalResistanceModifier = 1.0f;
