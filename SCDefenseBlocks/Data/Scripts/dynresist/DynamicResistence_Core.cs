@@ -25,7 +25,7 @@ using Sandbox.Game.Localization;
 
 namespace StarCore.DynamicResistence
 {
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "Collector")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "SI_Field_Gen")]
     public class DynamicResistLogic : MyGameLogicComponent
     {
 
@@ -216,9 +216,7 @@ namespace StarCore.DynamicResistence
             {
                 CalculateMaxGridPower();    
 
-                float baseUsage = 50.000f;
-                float quarterOfMax = dynResistBlockDef.RequiredPowerInput = MaxAvailibleGridPower / 4f;
-                float maxPowerUsage = dynResistBlockDef.RequiredPowerInput = MaxAvailibleGridPower - quarterOfMax;
+                float maxPowerUsage = dynResistBlockDef.RequiredPowerInput = MaxAvailibleGridPower * 0.9f;
 
                 return maxPowerUsage;
             }
@@ -229,7 +227,7 @@ namespace StarCore.DynamicResistence
                 CalculateMaxGridPower();
 
                 float baseUsage = 50.000f;
-                float maxPowerUsage = dynResistBlockDef.RequiredPowerInput = MaxAvailibleGridPower / 4f;
+                float maxPowerUsage = dynResistBlockDef.RequiredPowerInput = MaxAvailibleGridPower * 0.3f;
                 float sliderValue = HullPolarization;
 
                 float ratio = sliderValue / MaxPolarization;
@@ -273,7 +271,6 @@ namespace StarCore.DynamicResistence
                     else
                     {
                         MaxAvailibleGridPower = totalPower;
-                        MyAPIGateway.Utilities.ShowNotification("Current Total Power:" + totalPower, 5000, MyFontEnum.Green);
                     }
                 }
             }
@@ -302,6 +299,15 @@ namespace StarCore.DynamicResistence
                 Settings.SiegeModeActivated = SiegeModeActivatedClient;
                 return;
             }
+
+            else if (dynResistBlock != null && SiegeModeActivatedClient && !SiegeModeResistence && !dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
+            {
+                SetCountdownStatus($"Block Disabled", 1500, MyFontEnum.Red);
+                SiegeModeActivatedClient = false;
+                Settings.SiegeModeActivated = SiegeModeActivatedClient;
+                return;
+            }
+
             else if (dynResistBlock != null && SiegeModeActivatedClient && !SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
                 foreach (var block in allSlimBlocks)
@@ -336,7 +342,8 @@ namespace StarCore.DynamicResistence
                     {
                         SiegeDisplayTimer = 60;
                         SiegeVisibleTimer = SiegeVisibleTimer - 1;
-                        SetCountdownStatus($"Siege Mode: " + SiegeVisibleTimer + " Seconds", 1500, MyFontEnum.Green);
+                        DisplayCountdownMessageToNearPlayers();
+                        /*SetCountdownStatus($"Siege Mode: " + SiegeVisibleTimer + " Seconds", 1500, MyFontEnum.Green);*/
                     }
                 }
                 else if (SiegeTimer == 0)
@@ -350,7 +357,8 @@ namespace StarCore.DynamicResistence
 
                     MyVisualScriptLogicProvider.SetHighlightLocal(CurrentlyHighlighted.Name, thickness: -1);
 
-                    SetCountdownStatus($"Siege Mode Deactivated", 1500, MyFontEnum.Red);
+                    DisplayEndMessageToNearPlayers();
+                    /*SetCountdownStatus($"Siege Mode Deactivated", 1500, MyFontEnum.Red);*/
 
                     SiegeModeActivatedClient = false;
                     Settings.SiegeModeActivated = SiegeModeActivatedClient;
@@ -371,7 +379,8 @@ namespace StarCore.DynamicResistence
 
                 MyVisualScriptLogicProvider.SetHighlightLocal(CurrentlyHighlighted.Name, thickness: -1);
 
-                SetCountdownStatus($"Block Inoperative! Siege Mode Deactivated", 1500, MyFontEnum.Red);
+                DisplayInoperativeMessageToNearPlayers();
+                /*SetCountdownStatus($"Block Inoperative! Siege Mode Deactivated", 1500, MyFontEnum.Red);*/
 
                 SiegeModeActivatedClient = false;
                 Settings.SiegeModeActivated = SiegeModeActivatedClient;
@@ -726,6 +735,16 @@ namespace StarCore.DynamicResistence
                 var logic = b?.GameLogic?.GetAs<DynamicResistLogic>();
                 if (logic != null)
                 {
+                    if (logic.SiegeModeActivatedClient)
+                    {
+                        logic.SetPolarizationStatus($"Cant Change Polarization in Siege Mode", 1500, MyFontEnum.Red);
+                        return;
+                    }
+                    if (logic.dynResistBlock.IsWorking == false)
+                    {
+                        logic.SetPolarizationStatus($"Block Disabled", 1500, MyFontEnum.Red);
+                        return;
+                    }
                     logic.HullPolarization = logic.HullPolarization + 1;
                     logic.HullPolarization = MathHelper.Clamp(logic.HullPolarization, 0f, 30f);
                     logic.Settings.Polarization = logic.HullPolarization;
@@ -744,7 +763,7 @@ namespace StarCore.DynamicResistence
                     MyToolbarType.ButtonPanel,
                     MyToolbarType.Character,
                 };
-            increasePolarization.Enabled = Siege_Enabler;
+            /*increasePolarization.Enabled = Siege_Enabler;*/
             MyAPIGateway.TerminalControls.AddAction<T>(increasePolarization);
 
             var decreasePolarization = MyAPIGateway.TerminalControls.CreateAction<IMyCollector>(Control_Prefix + "PolarizationDecrease");
@@ -756,6 +775,16 @@ namespace StarCore.DynamicResistence
                 var logic = b?.GameLogic?.GetAs<DynamicResistLogic>();
                 if (logic != null)
                 {
+                    if (logic.SiegeModeActivatedClient)
+                    {
+                        logic.SetPolarizationStatus($"Cant Change Polarization in Siege Mode", 1500, MyFontEnum.Red);
+                        return;
+                    }
+                    if (logic.dynResistBlock.IsWorking == false)
+                    {
+                        logic.SetPolarizationStatus($"Block Disabled", 1500, MyFontEnum.Red);
+                        return;
+                    }
                     logic.HullPolarization = logic.HullPolarization - 1;
                     logic.HullPolarization = MathHelper.Clamp(logic.HullPolarization, 0f, 30f);
                     logic.Settings.Polarization = logic.HullPolarization;
@@ -774,7 +803,7 @@ namespace StarCore.DynamicResistence
                     MyToolbarType.ButtonPanel,
                     MyToolbarType.Character,
                 };
-            decreasePolarization.Enabled = Siege_Enabler;
+            /*decreasePolarization.Enabled = Siege_Enabler;*/
             MyAPIGateway.TerminalControls.AddAction<T>(decreasePolarization);
 
             var siegeModeToggleAction = MyAPIGateway.TerminalControls.CreateAction<IMyCollector>(Control_Prefix + "siegeToggleAction");
@@ -786,6 +815,16 @@ namespace StarCore.DynamicResistence
                 var logic = b?.GameLogic?.GetAs<DynamicResistLogic>();
                 if (logic != null)
                 {
+                    if (logic.SiegeModeActivatedClient == true)
+                    {
+                        logic.SetPolarizationStatus($"Cant Deactivate Siege Mode", 1500, MyFontEnum.Red);
+                        return;
+                    }
+                    else if (logic.SiegeCooldownTimerActive == true)
+                    {
+                        logic.SetCountdownStatus($"Siege Mode On Cooldown: " + (logic.SiegeCooldownTimer / 60) + " Seconds", 1500, MyFontEnum.Red);
+                        return;
+                    }
                     if (logic.SiegeModeActivatedClient == false)
                     {
                         logic.SiegeModeActivatedClient = true;
@@ -807,7 +846,7 @@ namespace StarCore.DynamicResistence
                     MyToolbarType.ButtonPanel,
                     MyToolbarType.Character,
                 };
-            siegeModeToggleAction.Enabled = Siege_Cooldown_Enabler;
+            /*siegeModeToggleAction.Enabled = Siege_Cooldown_Enabler;*/
             MyAPIGateway.TerminalControls.AddAction<T>(siegeModeToggleAction);
         }
 
@@ -900,6 +939,72 @@ namespace StarCore.DynamicResistence
             }
         }
         #endregion
+
+        private void DisplayCountdownMessageToNearPlayers()
+        {
+            List<IMyCharacter> playerCharacters = new List<IMyCharacter>();
+
+            if (dynResistBlock != null)
+            {
+                // Define the bounding sphere
+                var bound = new BoundingSphereD(dynResistBlock.GetPosition(), 50);
+                List<IMyEntity> nearEntities = MyAPIGateway.Entities.GetEntitiesInSphere(ref bound);
+
+                // Iterate through entities and find player characters
+                foreach (var entity in nearEntities)
+                {
+                    IMyCharacter character = entity as IMyCharacter;
+                    if (character != null && character.IsPlayer && bound.Contains(character.GetPosition()) != ContainmentType.Disjoint)
+                    {
+                        SetCountdownStatus($"Siege Mode: " + SiegeVisibleTimer + " Seconds", 1500, MyFontEnum.Green);
+                    }
+                }
+            }
+        }
+
+        private void DisplayEndMessageToNearPlayers()
+        {
+            List<IMyCharacter> playerCharacters = new List<IMyCharacter>();
+
+            if (dynResistBlock != null)
+            {
+                // Define the bounding sphere
+                var bound = new BoundingSphereD(dynResistBlock.GetPosition(), 50);
+                List<IMyEntity> nearEntities = MyAPIGateway.Entities.GetEntitiesInSphere(ref bound);
+
+                // Iterate through entities and find player characters
+                foreach (var entity in nearEntities)
+                {
+                    IMyCharacter character = entity as IMyCharacter;
+                    if (character != null && character.IsPlayer && bound.Contains(character.GetPosition()) != ContainmentType.Disjoint)
+                    {
+                        SetCountdownStatus($"Siege Mode Deactivated", 1500, MyFontEnum.Red);
+                    }
+                }
+            }
+        }
+
+        private void DisplayInoperativeMessageToNearPlayers()
+        {
+            List<IMyCharacter> playerCharacters = new List<IMyCharacter>();
+
+            if (dynResistBlock != null)
+            {
+                // Define the bounding sphere
+                var bound = new BoundingSphereD(dynResistBlock.GetPosition(), 50);
+                List<IMyEntity> nearEntities = MyAPIGateway.Entities.GetEntitiesInSphere(ref bound);
+
+                // Iterate through entities and find player characters
+                foreach (var entity in nearEntities)
+                {
+                    IMyCharacter character = entity as IMyCharacter;
+                    if (character != null && character.IsPlayer && bound.Contains(character.GetPosition()) != ContainmentType.Disjoint)
+                    {
+                        SetCountdownStatus($"Block Inoperative! Siege Mode Deactivated", 1500, MyFontEnum.Red);
+                    }
+                }
+            }
+        }
 
         /*private static void SetupControls()
         {
