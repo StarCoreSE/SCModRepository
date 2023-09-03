@@ -67,11 +67,14 @@ namespace klime.Visual
             offset.X *= aspect; offset.Y *= aspect;
 
             float scale = scaleFov * 0.23f;
-            renderMatrix.Translation += Vector3D.TransformNormal(relTrans, renderMatrix);
-            grid.WorldMatrix = renderMatrix;
+           
 
-            MatrixD rotRenderMatrix = MatrixD.CreateTranslation(grid.PositionComp.LocalAABB.Center) * renderMatrix;
-            gridMatrix = renderMatrix;
+            MatrixD clonedWorldMatrix = grid.WorldMatrix;
+            clonedWorldMatrix.Translation += Vector3D.Transform(grid.PositionComp.LocalAABB.Center, grid.PositionComp.WorldMatrixRef);
+
+            renderMatrix.Translation += Vector3D.TransformNormal(relTrans, clonedWorldMatrix);
+
+            MatrixD rotRenderMatrix = MatrixD.CreateTranslation(grid.PositionComp.WorldAABB.Center) * renderMatrix;
             MatrixD bruhMatrix = renderMatrix;
 
             float lowerLimit = newFov < 1.2 ? 0.03f : 0.04f;
@@ -99,13 +102,17 @@ namespace klime.Visual
             if (needsRescale)
             {
                 float backOffset = (scale - 0.001f) * 0.1f;
-                if (backOffset > 0)
-                {
-                    Vector3D moveVec = Vector3D.TransformNormal(-camera.WorldMatrix.Forward, transpBruhMatrix);
-                    renderMatrix.Translation += moveVec * backOffset;
-                }
+             // if (backOffset > 0)
+             // {
+             //     Vector3D moveVec = Vector3D.TransformNormal(-camera.WorldMatrix.Forward, transpBruhMatrix);
+             //     renderMatrix.Translation += moveVec * backOffset;
+             // }
                 DoRescale();
             }
+
+
+            grid.WorldMatrix = renderMatrix;
+
         }
 
         private void AddBillboard(Color color, Vector3D pos, Vector3D left, Vector3D up, float scale, BlendTypeEnum blendType)
@@ -127,15 +134,17 @@ namespace klime.Visual
             var hudscale = 0.04f;
             var scale = MathHelper.Clamp((float)(scaleFov * (hudscale * 0.23f)), 0.0004f, 0.0008f);
 
-            GridBoxCenter = grid.PositionComp.LocalVolume.Center;
+            GridBoxCenter = grid.PositionComp.WorldVolume.Center;
 
-            var modifiedCenter = Vector3D.Transform(GridBoxCenter, grid.WorldMatrix);
-            controlMatrix += MatrixD.CreateTranslation(-modifiedCenter) * grid.WorldMatrix;
+            var modifiedCenter = Vector3D.Transform(GridBoxCenter, grid.PositionComp.WorldMatrixRef);
+            controlMatrix *= MatrixD.CreateTranslation(-modifiedCenter) * grid.PositionComp.WorldMatrixRef;
             var localCenter = new Vector3D(grid.PositionComp.WorldVolume.Center);
             var trueCenter = Vector3D.Transform(localCenter, grid.WorldMatrix);
             grid.PositionComp.Scale = scale;
-            relTrans = Vector3D.TransformNormal(trueCenter, MatrixD.Transpose(controlMatrix)) * scale;
-            
+            relTrans = Vector3D.TransformNormal(GridBoxCenter, MatrixD.Transpose(grid.WorldMatrix)) * scale;
+
+            GridBoxCenter = grid.PositionComp.LocalVolume.Center;
+            relTrans = -GridBoxCenter;
 
             needsRescale = false;
         }
