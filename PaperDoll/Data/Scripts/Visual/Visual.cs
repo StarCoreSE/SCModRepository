@@ -68,7 +68,7 @@ namespace klime.Visual
             Vector2D offset = new Vector2D(0.1, 0.1) * scaleFov;
             offset.X *= aspect; offset.Y *= aspect;
 
-            float scale = scaleFov * 0.23f;
+            float scale = scaleFov * 0.15f;
 
 
             MatrixD clonedWorldMatrix = grid.WorldMatrix;
@@ -102,11 +102,11 @@ namespace klime.Visual
             if (needsRescale)
             {
                 float backOffset = (scale - 0.001f) * 0.1f;
-                 if (backOffset > 0)
-                 {
-                     Vector3D moveVec = Vector3D.TransformNormal(-camera.WorldMatrix.Forward, transpMatrix);
-                     renderMatrix.Translation += moveVec * backOffset;
-                 }
+                if (backOffset > 0)
+                {
+                    Vector3D moveVec = Vector3D.TransformNormal(-camera.WorldMatrix.Forward, transpMatrix);
+                    renderMatrix.Translation += moveVec * backOffset;
+                }
                 DoRescale();
             }
 
@@ -138,10 +138,18 @@ namespace klime.Visual
             var scaleFov = 0.1 * fov;
             var scaleFov2 = 0.2 * fov;
 
-            var hudscale = 0.04f;
-            var scale = MathHelper.Clamp((float)(scaleFov * (hudscale * 0.23f)), 0.0004f, 0.0008f);
+            double gridRadius = grid.PositionComp.WorldVolume.Radius;
+            float K = 1.35f;
+            float hudscale = (float)(K / gridRadius);
 
-           // GridBoxCenter = grid.PositionComp.LocalVolume.Center;
+            hudscale = MathHelper.Clamp(hudscale, 0.0001f, 0.05f);
+
+            var scale = MathHelper.Clamp((float)(scaleFov * (hudscale * 0.23f)), gridRadius > 150? 0.0001f:0.0005f, 0.0008f);
+
+
+            MyAPIGateway.Utilities.ShowNotification($"Scalar:{hudscale}", 60, MyFontEnum.Red);
+            MyAPIGateway.Utilities.ShowNotification($"Scale:{scale}", 60, MyFontEnum.Red);
+            // GridBoxCenter = grid.PositionComp.LocalVolume.Center;
 
             var modifiedCenter = Vector3D.Transform(GridBoxCenter, grid.PositionComp.WorldMatrixRef);
             controlMatrix *= MatrixD.CreateTranslation(-modifiedCenter) * grid.PositionComp.WorldMatrixRef;
@@ -634,7 +642,7 @@ namespace klime.Visual
                 visGrid.UpdateMatrix(renderMatrix, newWorldMatrix * MatrixD.Invert(renderMatrix));
 
 
-                UpdateBackground();
+               // UpdateBackground();
 
             }
         }
@@ -850,7 +858,7 @@ namespace klime.Visual
 
         private bool IsInvalidSession()
         {
-            return MyAPIGateway.Utilities.IsDedicated || MyAPIGateway.Session.Player?.Character == null || MyAPIGateway.Session.Camera == null;
+            return MyAPIGateway.Utilities.IsDedicated || MyAPIGateway.Session.Camera == null;
         }
 
         private void HandleHUDUpdates()
@@ -1078,7 +1086,7 @@ namespace klime.Visual
             }
             else
             {
-                ClearAVis();
+                //ClearAVis();
             }
 
             if (allVis.Count == 0 || reqPDoll == ReqPDoll.Off)
@@ -1092,7 +1100,7 @@ namespace klime.Visual
             var ent = wcAPI.GetAiFocus(cEnt, 0);
             if (ent == null)
             {
-                ClearAVis();
+                //ClearAVis();
                 return;
             }
 
@@ -1103,7 +1111,7 @@ namespace klime.Visual
                 if (!isTrack)
                 {
                     ClearAVis();
-                    EntVis vis = new EntVis(cGrid, 0, 0, 0);
+                    EntVis vis = new EntVis(cGrid, 0.11, 0.05, 0);
                     allVis.Add(vis);
                 }
             }
