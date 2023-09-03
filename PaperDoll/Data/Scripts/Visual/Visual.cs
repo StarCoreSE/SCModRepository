@@ -48,6 +48,8 @@ namespace klime.Visual
         public float oldFOV;
         public bool needsRescale;
         public static Vector3D GridBoxCenter;
+        public static Vector3D GridBoxCenterGlobal;
+        public static Vector3D hateVector;
         //public MyStringHash MaterialHash = MyStringHash.GetOrCompute("SciFi");
 
         public GridR(MyCubeGrid grid, EntRender entRender = null)
@@ -67,7 +69,7 @@ namespace klime.Visual
             offset.X *= aspect; offset.Y *= aspect;
 
             float scale = scaleFov * 0.23f;
-           
+
 
             MatrixD clonedWorldMatrix = grid.WorldMatrix;
             clonedWorldMatrix.Translation += Vector3D.Transform(grid.PositionComp.LocalAABB.Center, grid.PositionComp.WorldMatrixRef);
@@ -75,43 +77,48 @@ namespace klime.Visual
             renderMatrix.Translation += Vector3D.TransformNormal(relTrans, clonedWorldMatrix);
 
             MatrixD rotRenderMatrix = MatrixD.CreateTranslation(grid.PositionComp.WorldAABB.Center) * renderMatrix;
-            MatrixD bruhMatrix = renderMatrix;
+            hateVector = renderMatrix.Translation;
+            hateVector -= Vector3D.TransformNormal(relTrans, clonedWorldMatrix);
 
             float lowerLimit = newFov < 1.2 ? 0.03f : 0.04f;
             float backOffsetQtr = (scale - 0.001f) * 0.25f, backOffsetHalf = (scale - 0.001f) * 0.2f, backOffsetEighth = (scale - 0.001f) * 0.125f;
 
-            MatrixD transpBruhMatrix = MatrixD.Transpose(bruhMatrix);
-            Vector3D moveVecBack = Vector3D.TransformNormal(-camera.WorldMatrix.Forward, transpBruhMatrix);
-            Vector3D moveVecLeft = Vector3D.TransformNormal(-camera.WorldMatrix.Right, transpBruhMatrix);
-
+            MatrixD transpMatrix = MatrixD.Transpose(renderMatrix);
+            Vector3D moveVecBack = Vector3D.TransformNormal(-camera.WorldMatrix.Forward, renderMatrix);
+            Vector3D moveVecLeft = Vector3D.TransformNormal(-camera.WorldMatrix.Right, renderMatrix);
+            MatrixD bruhMatrix = renderMatrix;
             bruhMatrix.Translation += moveVecBack * backOffsetQtr + moveVecLeft * backOffsetHalf;
 
             MatrixD painMatrix = bruhMatrix, greaterPainMatrix = bruhMatrix;
             greaterPainMatrix.Translation += moveVecBack * backOffsetEighth + moveVecLeft * backOffsetEighth;
-            painMatrix.Translation += Vector3D.TransformNormal(camera.WorldMatrix.Forward, transpBruhMatrix) * backOffsetEighth + Vector3D.TransformNormal(camera.WorldMatrix.Right, transpBruhMatrix) * backOffsetEighth;
+            painMatrix.Translation += Vector3D.TransformNormal(camera.WorldMatrix.Forward, renderMatrix) * backOffsetEighth + Vector3D.TransformNormal(camera.WorldMatrix.Right, renderMatrix) * backOffsetEighth;
 
             Vector3D left = camera.WorldMatrix.Left, up = camera.WorldMatrix.Up;
             float tempBillboardScaling = MathHelper.Clamp((float)grid.PositionComp.Scale * 0.9f, lowerLimit, 0.09f);
             billboardScaling = tempBillboardScaling;
-            gridMatrixBackground = bruhMatrix;
 
-            AddBillboard(Color.Lime * 0.75f, bruhMatrix.Translation, left, up, tempBillboardScaling, BlendTypeEnum.SDR);
-            AddBillboard(Color.Red * 0.5f, painMatrix.Translation, left, up, tempBillboardScaling, BlendTypeEnum.AdditiveTop);
-            AddBillboard(Color.DodgerBlue * 0.5f, greaterPainMatrix.Translation, left, up, tempBillboardScaling, BlendTypeEnum.AdditiveTop);
+
 
             if (needsRescale)
             {
                 float backOffset = (scale - 0.001f) * 0.1f;
-             // if (backOffset > 0)
-             // {
-             //     Vector3D moveVec = Vector3D.TransformNormal(-camera.WorldMatrix.Forward, transpBruhMatrix);
-             //     renderMatrix.Translation += moveVec * backOffset;
-             // }
+                 if (backOffset > 0)
+                 {
+                     Vector3D moveVec = Vector3D.TransformNormal(-camera.WorldMatrix.Forward, transpMatrix);
+                     renderMatrix.Translation += moveVec * backOffset;
+                 }
                 DoRescale();
             }
 
 
             grid.WorldMatrix = renderMatrix;
+            gridMatrixBackground = renderMatrix;
+
+
+
+            AddBillboard(Color.Lime * 0.75f, hateVector, left, up, tempBillboardScaling, BlendTypeEnum.SDR);
+            AddBillboard(Color.Red * 0.5f, greaterPainMatrix.Translation -= Vector3D.TransformNormal(relTrans, clonedWorldMatrix), left, up, tempBillboardScaling, BlendTypeEnum.AdditiveTop);
+            AddBillboard(Color.DodgerBlue * 0.5f, painMatrix.Translation -= Vector3D.TransformNormal(relTrans, clonedWorldMatrix), left, up, tempBillboardScaling, BlendTypeEnum.AdditiveTop);
 
         }
 
@@ -134,7 +141,7 @@ namespace klime.Visual
             var hudscale = 0.04f;
             var scale = MathHelper.Clamp((float)(scaleFov * (hudscale * 0.23f)), 0.0004f, 0.0008f);
 
-            GridBoxCenter = grid.PositionComp.WorldVolume.Center;
+           // GridBoxCenter = grid.PositionComp.LocalVolume.Center;
 
             var modifiedCenter = Vector3D.Transform(GridBoxCenter, grid.PositionComp.WorldMatrixRef);
             controlMatrix *= MatrixD.CreateTranslation(-modifiedCenter) * grid.PositionComp.WorldMatrixRef;
@@ -587,7 +594,10 @@ namespace klime.Visual
         {
             if (visGrid != null && realGrid != null && !realGrid.MarkedForClose)
             {
-                GridR.GridBoxCenter = visGrid.gridGroup[0].grid.PositionComp.WorldVolume.Center;
+                // GridR.GridBoxCenter = visGrid.gridGroup[0].grid.PositionComp.WorldVolume.Center;
+                // GridR.GridBoxCenterGlobal = visGrid.gridGroup[0].grid.PositionComp.WorldVolume.Center;
+                // Get the origin from the UpdateBackground method
+              
                 var playerCamera = MyAPIGateway.Session.Camera;
                 var renderMatrix = playerCamera.WorldMatrix;
 
@@ -603,7 +613,7 @@ namespace klime.Visual
                 var tempMatrix = MyAPIGateway.Session.Camera.WorldMatrix;
                 var position = Vector3D.Transform(new Vector3D(offset.X, offset.Y, 10 * scaleFov), tempMatrix);
 
-                var origin = position;
+                var origin = GetBillboardOrigin(playerCamera);
                 var left = tempMatrix.Left;
                 var up = tempMatrix.Up;
                 var hudscale = 2.55f;
@@ -612,6 +622,7 @@ namespace klime.Visual
 
                 var localCenterRealGrid = new Vector3D(realGrid.PositionComp.LocalAABB.Center);
                 var trueCenterRealGrid = Vector3D.Transform(localCenterRealGrid, realGrid.WorldMatrix);
+                trueCenterRealGrid = localCenterRealGrid;
 
                 var offsetMatrix = MatrixD.CreateTranslation(trueCenterRealGrid - realGrid.PositionComp.WorldAABB.Center);
                 var newWorldMatrix = offsetMatrix * realGrid.WorldMatrix;
@@ -627,6 +638,21 @@ namespace klime.Visual
 
             }
         }
+
+        // Function to get the origin from UpdateBackground
+        private Vector3D GetBillboardOrigin(IMyCamera camera)
+        {
+            var cameraMatrix = camera.WorldMatrix;
+            var fov = Math.Tan(camera.FovWithZoom * 0.5);
+            var scaleFov = 0.1 * fov;
+            var offset = new Vector2D(xOffset + 13, yOffset - 10);
+            offset.X *= scaleFov * (camera.ViewportSize.X / camera.ViewportSize.Y);
+            offset.Y *= scaleFov;
+            var position = Vector3D.Transform(new Vector3D(offset.X, offset.Y, -0.9), cameraMatrix);
+            return position;
+        }
+
+
         //DS reference code:
         public void UpdateBackground()
         {
@@ -649,8 +675,8 @@ namespace klime.Visual
             var hudscale = 18f;
             var scale = (float)(scaleFov * (hudscale * 0.23f));
 
-            // Billboardcolor = (Color.Lime * 0.75f).ToVector4();
-            // MyTransparentGeometry.AddBillboardOriented(PDollBGSprite, Billboardcolor, origin, left, up, scale, BlendTypeEnum.SDR);
+            Billboardcolor = (Color.Lime * 0.75f).ToVector4();
+           // MyTransparentGeometry.AddBillboardOriented(PaperDollBGSprite, Billboardcolor, origin, left, up, scale, BlendTypeEnum.SDR);
 
         }
 
@@ -898,7 +924,7 @@ namespace klime.Visual
 
             if (cGrid != null && cGrid.Physics != null)
             {
-                allVis.Add(new EntVis(cGrid, 0, 0, 0));
+                allVis.Add(new EntVis(cGrid, 0.11, 0.05, 0));
                 viewState = ViewState.Locked;
             }
             else
@@ -976,7 +1002,7 @@ namespace klime.Visual
             HandEx(() =>
             {
                 float tempScaling = GridR.billboardScaling * 25;
-                Vector3D position = GridR.gridMatrixBackground.Translation;
+                Vector3D position = GridR.hateVector;
                 Vector3D targetHudPos = MyAPIGateway.Session.Camera.WorldToScreen(ref position);
                 Vector2D newOrigin = new Vector2D(targetHudPos.X, targetHudPos.Y);
                 Vector3D cameraForward = MyAPIGateway.Session.Camera.WorldMatrix.Forward;
