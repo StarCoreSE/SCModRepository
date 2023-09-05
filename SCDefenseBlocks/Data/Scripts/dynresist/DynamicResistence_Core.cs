@@ -29,8 +29,8 @@ namespace StarCore.DynamicResistence
     public class DynamicResistLogic : MyGameLogicComponent
     {
 
-        public const float MinPolarization = 0f;
-        public const float MaxPolarization = 30f;
+        public const float MinDivertedPower = 0f;
+        public const float MaxDivertedPower = 30f;
 
         public const float MinResistModifier = 1.0f;
         public const float MaxResistModifier = 0.7f;
@@ -52,20 +52,20 @@ namespace StarCore.DynamicResistence
 
         private MyResourceSinkComponent Sink = null;
 
-        private IMyHudNotification notifPolarization = null;
+        private IMyHudNotification notifPowerDiversion = null;
         private IMyHudNotification notifCountdown = null;
 
-        public float Polarization
+        public float FieldPower
         {
             get
-            { return Settings.Polarization; }
+            { return Settings.FieldPower; }
             set
             {
-                Settings.Polarization = MathHelper.Clamp((float)Math.Floor(value), MinPolarization, MaxPolarization);
+                Settings.FieldPower = MathHelper.Clamp((float)Math.Floor(value), MinDivertedPower, MaxDivertedPower);
 
                 SettingsChanged();
 
-                if (Settings.Polarization == 0)
+                if (Settings.FieldPower == 0)
                 {
                     NeedsUpdate = MyEntityUpdateEnum.NONE;
                 }
@@ -135,7 +135,7 @@ namespace StarCore.DynamicResistence
 
         public float finalResistanceModifier = 0f;
 
-        public float HullPolarization { get; set; }
+        public float DivertedPower { get; set; }
 
         DynamicResistenceMod Mod => DynamicResistenceMod.Instance;
 
@@ -165,7 +165,7 @@ namespace StarCore.DynamicResistence
                 NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_10TH_FRAME;
 
                 Settings.Modifier = 1.0f;
-                Settings.Polarization = MinPolarization;
+                Settings.FieldPower = MinDivertedPower;
 
 
                 /*if (!LoadSettings())
@@ -208,7 +208,7 @@ namespace StarCore.DynamicResistence
             if (!dynResistBlock.IsWorking)
                 return 0f;
             
-            else if (HullPolarization == 0f && !SiegeModeActivatedClient)
+            else if (DivertedPower == 0f && !SiegeModeActivatedClient)
             {
                 return 50.000f;
             }
@@ -228,9 +228,9 @@ namespace StarCore.DynamicResistence
 
                 float baseUsage = 50.000f;
                 float powerPrecentage = dynResistBlockDef.RequiredPowerInput = MaxAvailibleGridPower * 0.3f;
-                float sliderValue = HullPolarization;
+                float sliderValue = DivertedPower;
 
-                float ratio = sliderValue / MaxPolarization;
+                float ratio = sliderValue / MaxDivertedPower;
 
                 return baseUsage + ((baseUsage + (powerPrecentage - baseUsage)) * ratio);
             }                      
@@ -257,11 +257,6 @@ namespace StarCore.DynamicResistence
                             var powerProducer = fatBlock as IMyPowerProducer;
                             totalPower += powerProducer.MaxOutput;
                         }
-                        /*else if (fatBlock is )
-                        {
-                            var powerProducer = fatBlock as IMyBatteryBlock;
-                            totalPower += powerProducer.MaxOutput;
-                        }*/
                     }
 
                     Log.Info("totalPower Evaluation: " + totalPower);
@@ -325,7 +320,7 @@ namespace StarCore.DynamicResistence
 
                 if (SiegeTimer > 0)
                 {
-                    HullPolarization = 0f;
+                    DivertedPower = 0f;
 
                     SiegeModeShutdown(allTerminalBlocks);
 
@@ -483,7 +478,7 @@ namespace StarCore.DynamicResistence
 
                 if (loadedSettings != null)
                 {
-                    Settings.Polarization = loadedSettings.Polarization;
+                    Settings.FieldPower = loadedSettings.FieldPower;
                     Settings.Modifier = loadedSettings.Modifier;
                     return true;
                 }
@@ -495,57 +490,6 @@ namespace StarCore.DynamicResistence
 
             return false;
         }
-
-        /*bool ParseLegacyNameStorage()
-        {
-            string name = dynResistBlock.CustomName.TrimEnd(' ');
-
-            if (!name.EndsWith("]", StringComparison.Ordinal))
-                return false;
-
-            int startIndex = name.IndexOf('[');
-
-            if (startIndex == -1)
-                return false;
-
-            var settingsStr = name.Substring(startIndex + 1, name.Length - startIndex - 2);
-
-            if (settingsStr.Length == 0)
-                return false;
-
-            string[] args = settingsStr.Split(';');
-
-            if (args.Length == 0)
-                return false;
-
-            string[] data;
-
-            foreach (string arg in args)
-            {
-                data = arg.Split('=');
-
-                float f;
-                int i;
-
-                if (data.Length == 2)
-                {
-                    switch (data[0])
-                    {
-                        case "range":
-                            if (int.TryParse(data[1], out i))
-                                Polarization = i;
-                            break;
-                        case "str":
-                            if (float.TryParse(data[1], out f))
-                                Modifier = f;
-                            break;
-                    }
-                }
-            }
-
-            dynResistBlock.CustomName = name.Substring(0, startIndex).Trim();
-            return true;
-        }*/
 
         void SaveSettings()
         {
@@ -598,16 +542,16 @@ namespace StarCore.DynamicResistence
             return base.IsSerialized();
         }
 
-        private void SetPolarizationStatus(string text, int aliveTime = 300, string font = MyFontEnum.Green)
+        private void SetPowerStatus(string text, int aliveTime = 300, string font = MyFontEnum.Green)
         {
-            if (notifPolarization == null)
-                notifPolarization = MyAPIGateway.Utilities.CreateNotification("", aliveTime, font);
+            if (notifPowerDiversion == null)
+                notifPowerDiversion = MyAPIGateway.Utilities.CreateNotification("", aliveTime, font);
 
-            notifPolarization.Hide();
-            notifPolarization.Font = font;
-            notifPolarization.Text = text;
-            notifPolarization.AliveTime = aliveTime;
-            notifPolarization.Show();
+            notifPowerDiversion.Hide();
+            notifPowerDiversion.Font = font;
+            notifPowerDiversion.Text = text;
+            notifPowerDiversion.AliveTime = aliveTime;
+            notifPowerDiversion.Show();
         }
 
         public void SetCountdownStatus(string text, int aliveTime = 300, string font = MyFontEnum.Green)
@@ -632,9 +576,9 @@ namespace StarCore.DynamicResistence
 
                 if (dynamicResistLogic != null)
                 {
-                    float hullPolarization = dynamicResistLogic.HullPolarization;
+                    float divertedPower = dynamicResistLogic.DivertedPower;
 
-                    float t = (hullPolarization - MinPolarization) / (float)(MaxPolarization - MinPolarization);
+                    float t = (divertedPower - MinDivertedPower) / (float)(MaxDivertedPower - MinDivertedPower);
                     float resistanceModifier = MinResistModifier + t * (MaxResistModifier - MinResistModifier);
 
                     resistanceModifier = (float)Math.Round(resistanceModifier, 2);
@@ -657,16 +601,16 @@ namespace StarCore.DynamicResistence
 
                         finalResistanceModifier = resistanceModifier;
 
-                        SetPolarizationStatus($"Current Polarization: " + HullPolarization + "%", 1500, MyFontEnum.Green);
+                        SetPowerStatus($"Integrity Field Power: " + DivertedPower + "%", 1500, MyFontEnum.Green);
                     }
                 }
             }
             else if (!dynResistBlock.IsWorking || !SiegeModeActivatedClient)
             {
-                if (HullPolarization > 0f)
+                if (DivertedPower > 0f)
                 {
-                    HullPolarization = 0f;
-                    Settings.Polarization = 0f;
+                    DivertedPower = 0f;
+                    Settings.FieldPower = 0f;
                     finalResistanceModifier = 1.0f;
                     Settings.Modifier = 1.0f;
                     ResetBlockResist(dynResistBlock);
@@ -713,43 +657,43 @@ namespace StarCore.DynamicResistence
             siegeModeToggle.SupportsMultipleBlocks = true;
             MyAPIGateway.TerminalControls.AddControl<T>(siegeModeToggle);
 
-            var polarizationValueSlider = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, IMyCollector>(Control_Prefix + "HullPolarization");
-            polarizationValueSlider.Title = MyStringId.GetOrCompute("Hull Polarization");
-            polarizationValueSlider.Tooltip = MyStringId.GetOrCompute("Adjusts the mount of Damage Absorbed by the Block");
-            polarizationValueSlider.SetLimits(MinPolarization, MaxPolarization);
-            polarizationValueSlider.Writer = Control_Polarization_Writer;
-            polarizationValueSlider.Visible = Control_Visible;
-            polarizationValueSlider.Getter = Control_Polarization_Getter;
-            polarizationValueSlider.Setter = Control_Polarization_Setter;
-            polarizationValueSlider.Enabled = Siege_Enabler;
-            polarizationValueSlider.SupportsMultipleBlocks = true;
-            MyAPIGateway.TerminalControls.AddControl<T>(polarizationValueSlider);
+            var integrityFieldPowerValueSlider = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, IMyCollector>(Control_Prefix + "IntegrityFieldPower");
+            integrityFieldPowerValueSlider.Title = MyStringId.GetOrCompute("Integrity Field Power");
+            integrityFieldPowerValueSlider.Tooltip = MyStringId.GetOrCompute("Adjusts the amount of Damage Absorbed by the Block");
+            integrityFieldPowerValueSlider.SetLimits(MinDivertedPower, MaxDivertedPower);
+            integrityFieldPowerValueSlider.Writer = Control_Power_Writer;
+            integrityFieldPowerValueSlider.Visible = Control_Visible;
+            integrityFieldPowerValueSlider.Getter = Control_Power_Getter;
+            integrityFieldPowerValueSlider.Setter = Control_Power_Setter;
+            integrityFieldPowerValueSlider.Enabled = Siege_Enabler;
+            integrityFieldPowerValueSlider.SupportsMultipleBlocks = true;
+            MyAPIGateway.TerminalControls.AddControl<T>(integrityFieldPowerValueSlider);
 
-            var increasePolarization = MyAPIGateway.TerminalControls.CreateAction<IMyCollector>(Control_Prefix + "PolarizationIncrease");
-            increasePolarization.Name = new StringBuilder("Increase Polarization");
-            increasePolarization.ValidForGroups = true;
-            increasePolarization.Icon = @"Textures\GUI\Icons\Actions\Increase.dds";
-            increasePolarization.Action = (b) =>
+            var increaseFieldPower = MyAPIGateway.TerminalControls.CreateAction<IMyCollector>(Control_Prefix + "FieldPowerIncrease");
+            increaseFieldPower.Name = new StringBuilder("Increase Field Power");
+            increaseFieldPower.ValidForGroups = true;
+            increaseFieldPower.Icon = @"Textures\GUI\Icons\Actions\Increase.dds";
+            increaseFieldPower.Action = (b) =>
             {
                 var logic = b?.GameLogic?.GetAs<DynamicResistLogic>();
                 if (logic != null)
                 {
                     if (logic.SiegeModeActivatedClient)
                     {
-                        logic.SetPolarizationStatus($"Cant Change Polarization in Siege Mode", 1500, MyFontEnum.Red);
+                        logic.SetPowerStatus($"Cant Change Field Power in Siege Mode", 1500, MyFontEnum.Red);
                         return;
                     }
                     if (logic.dynResistBlock.IsWorking == false)
                     {
-                        logic.SetPolarizationStatus($"Block Disabled", 1500, MyFontEnum.Red);
+                        logic.SetPowerStatus($"Block Disabled", 1500, MyFontEnum.Red);
                         return;
                     }
-                    logic.HullPolarization = logic.HullPolarization + 1;
-                    logic.HullPolarization = MathHelper.Clamp(logic.HullPolarization, 0f, 30f);
-                    logic.Settings.Polarization = logic.HullPolarization;
+                    logic.DivertedPower = logic.DivertedPower + 1;
+                    logic.DivertedPower = MathHelper.Clamp(logic.DivertedPower, 0f, 30f);
+                    logic.Settings.FieldPower = logic.DivertedPower;
                 }
             };
-            increasePolarization.Writer = (b, sb) =>
+            increaseFieldPower.Writer = (b, sb) =>
             {
                 var logic = b?.GameLogic?.GetAs<DynamicResistLogic>();
                 if (logic != null)
@@ -757,39 +701,39 @@ namespace StarCore.DynamicResistence
                     sb.Append("Increase");
                 }
             };
-            increasePolarization.InvalidToolbarTypes = new List<MyToolbarType>()
+            increaseFieldPower.InvalidToolbarTypes = new List<MyToolbarType>()
                 {
                     MyToolbarType.ButtonPanel,
                     MyToolbarType.Character,
                 };
             /*increasePolarization.Enabled = Siege_Enabler;*/
-            MyAPIGateway.TerminalControls.AddAction<T>(increasePolarization);
+            MyAPIGateway.TerminalControls.AddAction<T>(increaseFieldPower);
 
-            var decreasePolarization = MyAPIGateway.TerminalControls.CreateAction<IMyCollector>(Control_Prefix + "PolarizationDecrease");
-            decreasePolarization.Name = new StringBuilder("Decrease Polarization");
-            decreasePolarization.ValidForGroups = true;
-            decreasePolarization.Icon = @"Textures\GUI\Icons\Actions\Decrease.dds";
-            decreasePolarization.Action = (b) =>
+            var decreaseFieldPower = MyAPIGateway.TerminalControls.CreateAction<IMyCollector>(Control_Prefix + "FieldPowerDecrease");
+            decreaseFieldPower.Name = new StringBuilder("Decrease Field Power");
+            decreaseFieldPower.ValidForGroups = true;
+            decreaseFieldPower.Icon = @"Textures\GUI\Icons\Actions\Decrease.dds";
+            decreaseFieldPower.Action = (b) =>
             {
                 var logic = b?.GameLogic?.GetAs<DynamicResistLogic>();
                 if (logic != null)
                 {
                     if (logic.SiegeModeActivatedClient)
                     {
-                        logic.SetPolarizationStatus($"Cant Change Polarization in Siege Mode", 1500, MyFontEnum.Red);
+                        logic.SetPowerStatus($"Cant Change Field Power in Siege Mode", 1500, MyFontEnum.Red);
                         return;
                     }
                     if (logic.dynResistBlock.IsWorking == false)
                     {
-                        logic.SetPolarizationStatus($"Block Disabled", 1500, MyFontEnum.Red);
+                        logic.SetPowerStatus($"Block Disabled", 1500, MyFontEnum.Red);
                         return;
                     }
-                    logic.HullPolarization = logic.HullPolarization - 1;
-                    logic.HullPolarization = MathHelper.Clamp(logic.HullPolarization, 0f, 30f);
-                    logic.Settings.Polarization = logic.HullPolarization;
+                    logic.DivertedPower = logic.DivertedPower - 1;
+                    logic.DivertedPower = MathHelper.Clamp(logic.DivertedPower, 0f, 30f);
+                    logic.Settings.FieldPower = logic.DivertedPower;
                 }
             };
-            decreasePolarization.Writer = (b, sb) =>
+            decreaseFieldPower.Writer = (b, sb) =>
             {
                 var logic = b?.GameLogic?.GetAs<DynamicResistLogic>();
                 if (logic != null)
@@ -797,13 +741,13 @@ namespace StarCore.DynamicResistence
                     sb.Append("Decrease");
                 }
             };
-            decreasePolarization.InvalidToolbarTypes = new List<MyToolbarType>()
+            decreaseFieldPower.InvalidToolbarTypes = new List<MyToolbarType>()
                 {
                     MyToolbarType.ButtonPanel,
                     MyToolbarType.Character,
                 };
             /*decreasePolarization.Enabled = Siege_Enabler;*/
-            MyAPIGateway.TerminalControls.AddAction<T>(decreasePolarization);
+            MyAPIGateway.TerminalControls.AddAction<T>(decreaseFieldPower);
 
             var siegeModeToggleAction = MyAPIGateway.TerminalControls.CreateAction<IMyCollector>(Control_Prefix + "siegeToggleAction");
             siegeModeToggleAction.Name = new StringBuilder("Toggle Siege");
@@ -816,7 +760,7 @@ namespace StarCore.DynamicResistence
                 {
                     if (logic.SiegeModeActivatedClient == true)
                     {
-                        logic.SetPolarizationStatus($"Cant Deactivate Siege Mode", 1500, MyFontEnum.Red);
+                        logic.SetPowerStatus($"Cant Deactivate Siege Mode", 1500, MyFontEnum.Red);
                         return;
                     }
                     else if (logic.SiegeCooldownTimerActive == true)
@@ -898,27 +842,27 @@ namespace StarCore.DynamicResistence
             return false;
         }
 
-        static float Control_Polarization_Getter(IMyTerminalBlock block)
+        static float Control_Power_Getter(IMyTerminalBlock block)
         {
             var logic = GetLogic(block);
-            return logic != null ? logic.HullPolarization : 0f;
+            return logic != null ? logic.DivertedPower : 0f;
         }
 
-        static void Control_Polarization_Setter(IMyTerminalBlock block, float value)
+        static void Control_Power_Setter(IMyTerminalBlock block, float value)
         {
             var logic = GetLogic(block);
             if (logic != null)
-                logic.HullPolarization = MathHelper.Clamp(value, 0f, 30f);
-                logic.HullPolarization = (float)Math.Round(logic.HullPolarization, 0);
-                logic.Settings.Polarization = logic.HullPolarization;
+                logic.DivertedPower = MathHelper.Clamp(value, 0f, 30f);
+                logic.DivertedPower = (float)Math.Round(logic.DivertedPower, 0);
+                logic.Settings.FieldPower = logic.DivertedPower;
         }
 
-        static void Control_Polarization_Writer(IMyTerminalBlock block, StringBuilder writer)
+        static void Control_Power_Writer(IMyTerminalBlock block, StringBuilder writer)
         {
             var logic = GetLogic(block);
             if (logic != null)
             {
-                float value = logic.HullPolarization;
+                float value = logic.DivertedPower;
                 writer.Append(Math.Round(value, 0, MidpointRounding.ToEven)).Append("%");
             }
         }
@@ -1004,74 +948,6 @@ namespace StarCore.DynamicResistence
                 }
             }
         }
-
-        /*private static void SetupControls()
-        {
-            List<IMyTerminalControl> controls;
-            MyAPIGateway.TerminalControls.GetControls<IMyCollector>(out controls);
-
-            foreach (var c in controls)
-            {
-                switch (c.Id)
-                {
-                    case "DrainAll":
-                    case "blacklistWhitelist":
-                    case "CurrentList":
-                    case "removeFromSelectionButton":
-                    case "candidatesList":
-                    case "addToSelectionButton":
-                        c.Visible = CombineFunc.Create(c.Visible, Visible);
-                        break;
-                }
-            }
-        }*/
-
-        /*private static bool Visible(IMyTerminalBlock block)
-        {
-            return block != null && !(block.GameLogic is DynamicResistLogic);
-        }*/
-
-        /*private List<IMyCharacter> FindPlayerNearObject()
-        {
-            List<IMyCharacter> playerCharacters = new List<IMyCharacter>();
-
-            if (dynResistBlock != null)
-            {
-                // Define the bounding sphere
-                var bound = new BoundingSphereD(dynResistBlock.GetPosition(), 50);
-                List<IMyEntity> nearEntities = MyAPIGateway.Entities.GetEntitiesInSphere(ref bound);
-
-                // Iterate through entities and find player characters
-                foreach (var entity in nearEntities)
-                {
-                    IMyCharacter character = entity as IMyCharacter;
-                    if (character != null && character.IsPlayer && bound.Contains(character.GetPosition()) != ContainmentType.Disjoint)
-                    {
-                        playerCharacters.Add(character);
-                    }
-                }
-            }
-            return playerCharacters;
-        }*/
-
-        /*private List<IMyCharacter> FindPlayers()
-        {
-            List<IMyCharacter> playerCharacters = new List<IMyCharacter>();
-
-            var entities = new HashSet<IMyEntity>();
-            MyAPIGateway.Entities.GetEntities(entities);
-
-            foreach (var entity in entities)
-            {
-                IMyCharacter character = entity as IMyCharacter;
-                if (character != null && character.IsPlayer)
-                {
-                    playerCharacters.Add(character);
-                }
-            }
-
-            return playerCharacters;
-        }*/
 
     }
 }

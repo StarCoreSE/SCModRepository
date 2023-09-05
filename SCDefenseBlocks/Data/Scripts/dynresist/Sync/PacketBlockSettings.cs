@@ -37,7 +37,7 @@ namespace StarCore.DynamicResistence.Sync
             if(logic == null)
                 return;
 
-            logic.Settings.Polarization = this.Settings.Polarization;
+            logic.Settings.FieldPower = this.Settings.FieldPower;
             logic.Settings.Modifier = this.Settings.Modifier;
 
             relay = true;
