@@ -5,11 +5,11 @@
     <Definition xsi:type="MyObjectBuilder_BatteryBlockDefinition">
       <Id>
         <TypeId>BatteryBlock</TypeId>
-        <SubtypeId>EntityCover1</SubtypeId>
+        <SubtypeId>EntityCover</SubtypeId>
       </Id>
-      <DisplayName>Entity Cover Battery 1</DisplayName>
+      <DisplayName>Entity Cover Battery</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\Battery.dds</Icon>
-      <Description>Entity Cover Battery 1</Description>
+      <Description>Entity Cover Battery</Description>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="1" y="1" z="1" />
