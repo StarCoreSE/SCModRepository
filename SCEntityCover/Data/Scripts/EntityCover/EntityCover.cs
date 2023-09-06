@@ -20,7 +20,7 @@ using CollisionLayers = Sandbox.Engine.Physics.MyPhysics.CollisionLayers;
 namespace klime.EntityCover
 {
 
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_BatteryBlock), false, "EntityCover", "EntityCover2", "EntityCoverEveFreighter", "EntityCover3")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_BatteryBlock), false, "EntityCover1", "EntityCover2", "EntityCoverEveFreighter", "EntityCover3")]
     public class EntityCoverGamelogic : MyGameLogicComponent
     {
         // Core
@@ -37,13 +37,13 @@ namespace klime.EntityCover
             NeedsUpdate = MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
 
             // Set the modelName and modelDimensions based on the subtype of the battery block
-            if (entityBattery.BlockDefinition.SubtypeId == "EntityCover")
+            if (entityBattery.BlockDefinition.SubtypeId == "EntityCover1")
             {
                 modelName = "REMlikeblocker2x_purple.mwm"; // Set the model name for the first variant
             }
             else if (entityBattery.BlockDefinition.SubtypeId == "EntityCover2")
             {
-                modelName = "REMlikeblocker2x.mwm"; // Set the model name for the second variant
+                modelName = "REMlikeblocker2_5km_purple.mwm"; // Set the model name for the second variant
             }
             else if (entityBattery.BlockDefinition.SubtypeId == "EntityCoverEveFreighter")
             {
@@ -229,10 +229,10 @@ namespace klime.EntityCover
             // Add cases for each modelName and set their respective model dimensions
             switch (modelName)
             {
-                case "REMlikeblocker2x_purple.mwm":
-                    return new Vector3(275, 275, 275);
+                case "REMlikeblocker2_5km_purple.mwm":
+                    return new Vector3(1250, 1250, 1250);
                 case "REMlikeblocker2x.mwm":
-                    return new Vector3(275, 275, 275);
+                    return new Vector3(250, 250, 250);
                 case "eveobstacle3.mwm":
                     return new Vector3(180, 60, 500);
                 case "REMlikeblockerLong25kX.mwm":
