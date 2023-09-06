@@ -72,7 +72,7 @@ namespace klime.EntityCover
             if (entityBattery.CubeGrid.Physics == null || EntityCover.Instance == null) return;
 
             // Separate the logic based on the subtype ID
-            if (entityBattery.BlockDefinition.SubtypeId == "EntityCover")
+            if (entityBattery.BlockDefinition.SubtypeId == "EntityCover1")
             {
                 EntityCover.Instance.AddCover((IMyTerminalBlock)entityBattery, modelName); // Pass the modelName for the first variant
             }
