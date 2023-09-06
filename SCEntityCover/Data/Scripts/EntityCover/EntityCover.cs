@@ -28,38 +28,38 @@ namespace klime.EntityCover
         public string modelName; // New property to store the model name
         public Vector3 modelDimensions; // New property to store the model dimensions
 
+        // Define a dictionary to map subtype IDs to model names
+        private static Dictionary<string, string> subtypeToModelMap = new Dictionary<string, string>()
+        {
+            { "EntityCover", "REMlikeblocker2x_purple.mwm" },
+            { "EntityCover2", "REMlikeblocker2x.mwm" },
+            { "EntityCoverEveFreighter", "eveobstacle3.mwm" },
+            { "EntityCover3", "REMlikeblockerLong25kX.mwm" },
+            // Add more entries for additional variants...
+        };
+
+        // Create a method to get the model name based on subtype ID
+        private string GetModelNameForSubtype(string subtypeId)
+        {
+            if (subtypeToModelMap.ContainsKey(subtypeId))
+            {
+                return subtypeToModelMap[subtypeId];
+            }
+            else
+            {
+                // Set default model name if the subtype doesn't match any predefined cases.
+                return "DefaultModel.mwm";
+            }
+        }
+
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
-            // if (!MyAPIGateway.Session.IsServer) return;
-
             entityBattery = Entity as IMyBatteryBlock;
             entityBattery.OnClose += EntityBattery_OnClose;
             NeedsUpdate = MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
 
             // Set the modelName and modelDimensions based on the subtype of the battery block
-            if (entityBattery.BlockDefinition.SubtypeId == "EntityCover")
-            {
-                modelName = "REMlikeblocker2x_purple.mwm"; // Set the model name for the first variant
-            }
-            else if (entityBattery.BlockDefinition.SubtypeId == "EntityCover2")
-            {
-                modelName = "REMlikeblocker2x.mwm"; // Set the model name for the second variant
-            }
-            else if (entityBattery.BlockDefinition.SubtypeId == "EntityCoverEveFreighter")
-            {
-                modelName = "eveobstacle3.mwm"; // Set the model name for the second variant
-            }
-            else if (entityBattery.BlockDefinition.SubtypeId == "EntityCover3")
-            {
-                modelName = "REMlikeblockerLong25kX.mwm"; // Set the model name for the second variant
-            }
-            // Add more else-if blocks for additional variants...
-            else
-            {
-                // Set default values if the subtype does not match any of the predefined cases.
-                modelName = "DefaultModel.mwm";
-                modelDimensions = new Vector3(100, 100, 100);
-            }
+            modelName = GetModelNameForSubtype(entityBattery.BlockDefinition.SubtypeId);
         }
 
         private void EntityBattery_OnClose(IMyEntity obj)
