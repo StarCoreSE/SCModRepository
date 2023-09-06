@@ -71,29 +71,24 @@ namespace klime.EntityCover
         {
             if (entityBattery.CubeGrid.Physics == null || EntityCover.Instance == null) return;
 
-            // Separate the logic based on the subtype ID
-            if (entityBattery.BlockDefinition.SubtypeId == "EntityCover")
+            // Get the subtype ID of the battery block
+            string subtypeId = entityBattery.BlockDefinition.SubtypeId;
+
+            string modelName; // Declare modelName here
+
+            // Check if the subtype ID exists in the dictionary
+            if (subtypeToModelMap.TryGetValue(subtypeId, out modelName))
             {
-                EntityCover.Instance.AddCover((IMyTerminalBlock)entityBattery, modelName); // Pass the modelName for the first variant
+                EntityCover.Instance.AddCover((IMyTerminalBlock)entityBattery, modelName);
             }
-            else if (entityBattery.BlockDefinition.SubtypeId == "EntityCover2")
-            {
-                EntityCover.Instance.AddCover((IMyTerminalBlock)entityBattery, modelName); // Pass the modelName for the second variant
-            }
-            else if (entityBattery.BlockDefinition.SubtypeId == "EntityCoverEveFreighter")
-            {
-                EntityCover.Instance.AddCover((IMyTerminalBlock)entityBattery, modelName); // Pass the modelName for the second variant
-            }
-            else if (entityBattery.BlockDefinition.SubtypeId == "EntityCover3")
-            {
-                EntityCover.Instance.AddCover((IMyTerminalBlock)entityBattery, modelName); // Pass the modelName for the second variant
-            }
-            // Add more else-if blocks for additional variants...
             else
             {
-                // Handle the logic for other subtypes, if needed.
+                // Set a default model name if the subtype doesn't match any predefined cases.
+                modelName = "DefaultModel.mwm";
+                EntityCover.Instance.AddCover((IMyTerminalBlock)entityBattery, modelName);
             }
         }
+
 
         public override void Close()
         {
