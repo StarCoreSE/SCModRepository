@@ -32,8 +32,7 @@ namespace playerHUD
             {
                 MyVisualScriptLogicProvider.SetQuestlog(true, "Keybinds");
                 MyVisualScriptLogicProvider.AddQuestlogObjective("ALT+P = Starcore Pointsheet", false, true);
-                MyVisualScriptLogicProvider.AddQuestlogObjective("SHIFT+F2 = Report Bug", false, true);
-                MyVisualScriptLogicProvider.AddQuestlogObjective("/harmdist NUMBER to change the visibility distance of the harmsphere hexes.", false, true);
+                MyVisualScriptLogicProvider.AddQuestlogObjective("ALT+O = Starcore Wiki", false, true);
                 waiting = true;
                 startTime = DateTime.Now;
             }
