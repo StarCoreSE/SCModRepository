@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<TransparentMaterials>
+
+<TransparentMaterial>
+        <Id>
+            <TypeId>TransparentMaterialDefinition</TypeId>
+            <SubtypeId>KothTransparency</SubtypeId>
+        </Id>      
+        <AlphaMistingEnable>false</AlphaMistingEnable>
+        <AlphaSaturation>1</AlphaSaturation>
+        <CanBeAffectedByOtherLights>false</CanBeAffectedByOtherLights>
+        <IgnoreDepth>false</IgnoreDepth>
+        <SoftParticleDistanceScale>1</SoftParticleDistanceScale>
+        <Texture>Textures\Particles\Square.dds</Texture>
+        <GlossTexture>Textures\Models\Cubes\Chrome_ng.dds</GlossTexture>
+        <UseAtlas>false</UseAtlas>
+        <NeedSort>true</NeedSort>
+        <UVOffset>
+            <X>0</X>
+            <Y>0</Y>
+        </UVOffset>
+        <UVSize>
+            <X>1</X>
+            <Y>1</Y>
+        </UVSize>
+        <Color>
+            <X>1</X>
+            <Y>1</Y>
+            <Z>1</Z>
+            <W>1</W>
+        </Color>
+        <ColorAdd>
+          <X>0.0</X>
+          <Y>0.0</Y>
+          <Z>0.0</Z>
+          <W>0.0</W>
+        </ColorAdd>
+        <ShadowMultiplier>
+          <X>0</X>
+          <Y>0</Y>
+          <Z>0</Z>
+          <W>0</W>
+        </ShadowMultiplier>
+        <LightMultiplier>
+          <X>0</X>
+          <Y>0</Y>
+          <Z>0</Z>
+          <W>0</W>
+        </LightMultiplier>
+        <Reflectivity>0</Reflectivity>
+        <Fresnel>0</Fresnel>
+        <ReflectionShadow>0</ReflectionShadow>
+        <Gloss>30</Gloss>
+        <GlossTextureAdd>50</GlossTextureAdd>
+        <SpecularColorFactor>0</SpecularColorFactor>
+      </TransparentMaterial>
+
+</TransparentMaterials>
+</Definitions>

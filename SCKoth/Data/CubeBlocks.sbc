@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CubeBlocks>
+    <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
+      <Id>
+        <TypeId>Beacon</TypeId>
+        <SubtypeId>ZoneBlock</SubtypeId>
+      </Id>
+      <DisplayName>King Of The Hill - KotH</DisplayName>
+      <Icon>Textures\GUI\KotHBeacon.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="2" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Large\KotHBeacon.mwm</Model>
+      <Components>
+        <Component Subtype="AdminKit" Count="1" />
+        <Component Subtype="GravityGenerator" Count="999" />
+        <Component Subtype="GravityGenerator" Count="999" />
+        <Component Subtype="Computer" Count="1" />
+        <Component Subtype="GravityGenerator" Count="999" />
+        <Component Subtype="GravityGenerator" Count="999" />
+        <Component Subtype="GravityGenerator" Count="999" />
+        <Component Subtype="GravityGenerator" Count="999" />
+        <Component Subtype="AdminKit" Count="1" />
+      </Components>
+		<CriticalComponent Subtype="AdminKit" Index="1" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.1" StartY="0.1" EndX="0.9" EndY="0.9" Default="true" />
+        <MountPoint Side="Top" StartX="0.1" StartY="0.1" EndX="0.9" EndY="0.9" />
+        <MountPoint Side="Left" StartX="0.175" StartY="0.1" EndX="0.825" EndY="0.9" />
+        <MountPoint Side="Right" StartX="0.175" StartY="0.1" EndX="0.825" EndY="0.9" />
+        <MountPoint Side="Front" StartX="0.175" StartY="0.1" EndX="0.825" EndY="0.9" />
+        <MountPoint Side="Back" StartX="0.175" StartY="0.1" EndX="0.825" EndY="0.9" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="0.50" File="Models\Cubes\Large\KotHBeacon_BS1.mwm" />
+        <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\KotHBeacon_BS2.mwm" />
+      </BuildProgressModels>
+      <EdgeType>Light</EdgeType>      
+      <ResourceSinkGroup>Utility</ResourceSinkGroup>
+      <DisassembleRatio>3.402823E+38</DisassembleRatio>
+      <BuildTimeSeconds>3.402823E+38</BuildTimeSeconds>
+      <GeneralDamageMultiplier>0</GeneralDamageMultiplier>      
+      <GuiVisible>true</GuiVisible>
+    </Definition>
+    <Definition xsi:type="MyObjectBuilder_CargoContainerDefinition">
+      <Id>
+        <TypeId>CargoContainer</TypeId>
+        <SubtypeId>Prizebox</SubtypeId>
+      </Id>
+      <DisplayName>KotH Golden Cargo Container</DisplayName>
+      <Icon>Textures\GUI\Icons\GoldenBlock_icon.dds</Icon>
+      <Description>Description_SpecialCargoContainerOnlyRarelyFound</Description>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="2" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Large\GoldenBlock_Large.mwm</Model>
+      <Components>
+        <Component Subtype="AdminKit" Count="1" />
+        <Component Subtype="GravityGenerator" Count="999" />
+        <Component Subtype="GravityGenerator" Count="999" />
+        <Component Subtype="GravityGenerator" Count="999" />
+        <Component Subtype="GravityGenerator" Count="999" />
+        <Component Subtype="GravityGenerator" Count="999" />
+        <Component Subtype="GravityGenerator" Count="999" />
+        <Component Subtype="AdminKit" Count="1" />
+      </Components>
+		<CriticalComponent Subtype="AdminKit" Index="1" />
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\GoldenBlock_Large_Constr1.mwm" />
+        <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\GoldenBlock_Large_Constr2.mwm" />
+        <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\GoldenBlock_Large_Constr3.mwm" />
+      </BuildProgressModels>
+      <MountPoints>
+        <MountPoint Side="Front" StartX="0.14" StartY="0.12" EndX="1.86" EndY="0.88" />
+        <MountPoint Side="Back" StartX="0.14" StartY="0.12" EndX="1.86" EndY="0.88" />
+        <MountPoint Side="Left" StartX="0.12" StartY="0.12" EndX="0.88" EndY="0.88" />
+        <MountPoint Side="Right" StartX="0.12" StartY="0.12" EndX="0.88" EndY="0.88" />
+        <MountPoint Side="Bottom" StartX="0.14" StartY="0.12" EndX="1.86" EndY="0.88" />
+        <MountPoint Side="Top" StartX="0.14" StartY="0.12" EndX="1.86" EndY="0.88" />
+      </MountPoints>
+      <MirroringX>None</MirroringX>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <BlockPairName>GoldenBlock_Large</BlockPairName>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildTimeSeconds>3.402823E+38</BuildTimeSeconds>
+      <DisassembleRatio>3.402823E+38</DisassembleRatio>
+      <EdgeType>Light</EdgeType>
+      <DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
+      <DamagedSound>ParticleHeavyMech</DamagedSound>
+      <DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>10</PCU>
+      <IsAirTight>false</IsAirTight>
+    </Definition>
+  </CubeBlocks>
+</Definitions>

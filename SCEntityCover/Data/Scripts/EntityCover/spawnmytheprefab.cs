@@ -49,8 +49,10 @@ namespace Klime.spawnmytheprefab
     {
         private Dictionary<string, string> prefabMap = new Dictionary<string, string>
         {
-            { "EntityCover1", "#EntityCover1" },
+            { "EntityCover1", "#EntityCover1" },        //prefab subtype, prefab name
+            { "EntityCover2", "#EntityCover2" },
             { "EntityCover3", "#EntityCover3" },
+            { "EntityCover4", "#EntityCover4" },
             { "EntityCoverEveFreighter", "#EntityCoverEveFreighter" },
         };
 

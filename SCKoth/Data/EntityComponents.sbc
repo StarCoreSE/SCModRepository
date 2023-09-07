@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EntityContainers>
+    <Container>
+      <Id>
+        <TypeId>Beacon</TypeId>
+        <SubtypeId>ZoneBlock</SubtypeId>
+      </Id>
+      <DefaultComponents>
+        <Component BuilderType="MyObjectBuilder_Inventory"/>
+      </DefaultComponents>
+    </Container>
+  </EntityContainers>
+
+  <EntityComponents>
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>ZoneBlock</SubtypeId>
+      </Id>
+      <Size x="50" y="50" z="50" />
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_ModStorageComponentDefinition">
+      <Id>
+        <TypeId>ModStorageComponent</TypeId>
+        <SubtypeId>ZoneBlock</SubtypeId>
+      </Id>
+      <RegisteredStorageGuids>
+        <guid>B7AF750E-68E3-4826-BD0E-A75BF36BA3E5</guid>
+      </RegisteredStorageGuids>
+    </EntityComponent>
+  </EntityComponents>
+</Definitions>

@@ -8,7 +8,8 @@
             </Id>
             <DisplayName>Structural Integrity Field Generator</DisplayName>
             <Icon>Textures\GUI\Icons\Cubes\SI_Field_Gen.dds</Icon>
-            <Description>Structural Field Generator</Description>
+            <Description>Divert Power to this block for a Damage Reduction. Damage Reduction is equivlent to Power Diverted [Ex. 30% Power Diverted, 30% Damage Reduction]
+			Also has a time limited Siege Mode that provides a 90% Reduction in exchange for immobilizing your grid and shutting off all non-essential systems</Description>
             <CubeSize>Large</CubeSize>
             <BlockTopology>TriangleMesh</BlockTopology>
             <Size x="3" y="3" z="2" />

@@ -6,7 +6,7 @@ namespace StarCore.DynamicResistence
     public class DynaResistBlockSettings
     {
         [ProtoMember(1)]
-        public float Polarization;
+        public float FieldPower;
 
         [ProtoMember(2)]
         public float Modifier;
