@@ -1,4 +1,4 @@
-name: "Upload RelativeTopSpeed"
+name: "Upload SCRelativeTopSpeed"
 
 on:
   push:
@@ -13,8 +13,8 @@ jobs:
       - uses: AnarkisGaming/workshop@v1
         with:
           appID: 244850
-          publishedFileID: 3031680659
-          path: RelativeTopSpeed
+          publishedFileID: 3032031200
+          path: SCRelativeTopSpeed
           changelog: ${{ github.event.head_commit.message }}              
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}
