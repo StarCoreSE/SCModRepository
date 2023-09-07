@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Blueprints>    
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintClassDefinition</TypeId>
+        <SubtypeId>AdminKit</SubtypeId>
+      </Id>
+      <DisplayName>AdminKit</DisplayName>
+      <Icon>Textures\gui\construction_components_component.dds</Icon>
+      <Prerequisites>
+        <Item Amount="9999999" TypeId="Ingot" SubtypeId="Uranium" />
+        <Item Amount="9999999" TypeId="Ingot" SubtypeId="Gold" />
+        <Item Amount="9999999" TypeId="Ingot" SubtypeId="Platinum" />
+        <Item Amount="9999999" TypeId="Ingot" SubtypeId="Cobalt" />
+        <Item Amount="9999999" TypeId="Ingot" SubtypeId="Silver" />
+        <Item Amount="9999999" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="9999999" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="Component" SubtypeId="AdminKit" />
+      <BaseProductionTimeInSeconds>99999999</BaseProductionTimeInSeconds>
+    </Blueprint>
+  </Blueprints>
+</Definitions>

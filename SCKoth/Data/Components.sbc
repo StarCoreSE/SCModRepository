@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<Components>       
+  <Component>
+    <Id>
+      <TypeId>Component</TypeId>
+      <SubtypeId>AdminKit</SubtypeId>
+    </Id>
+    <DisplayName>AdminKit</DisplayName>
+    <Icon>Textures\gui\construction_components_component.dds</Icon>
+    <Size>
+      <X>0.1</X>
+      <Y>0.1</Y>
+      <Z>0.1</Z>
+    </Size>
+    <Mass>1</Mass>
+    <Volume>10</Volume>
+    <Model>Models\Components\construction_components_component.mwm</Model>
+    <PhysicalMaterial>Metal</PhysicalMaterial>
+    <MaxIntegrity>999999999</MaxIntegrity>
+    <!-- This is set the the maximum integrity -->
+    <DropProbability>0</DropProbability>
+    <Health>10</Health>
+  </Component>	
+</Components>
+</Definitions>
