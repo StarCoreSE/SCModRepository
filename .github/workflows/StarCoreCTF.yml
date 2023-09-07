@@ -1,9 +1,9 @@
-name: "Upload StarCoreCTF"
+name: "Upload RelativeTopSpeed"
 
 on:
   push:
     paths:
-      - "StarCoreCTF/**"
+      - "SCRelativeTopSpeed/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 3031680659
-          path: StarCoreCTF
+          path: RelativeTopSpeed
           changelog: ${{ github.event.head_commit.message }}              
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}
