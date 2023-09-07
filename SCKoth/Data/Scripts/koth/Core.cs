@@ -385,7 +385,7 @@ namespace KingOfTheHill
 					if (zone.SpawnIntoPrizeBox.Value)
 					{
 						CrashingThisPlaneTheMessageIHaveToSendToTheClientSpecificallyFuckingKeen();
-                        CrashingThisPlane();
+                        //CrashingThisPlane();
                         if (prizebox == null)
 						{
 							Tools.Log(MyLogSeverity.Error, $"Could not find prize box on grid: {kothGrid.DisplayName} - {kothGrid.EntityId}");
