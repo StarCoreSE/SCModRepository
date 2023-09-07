@@ -1,3 +1,4 @@
+using ProtoBuf.Meta;
 using Sandbox.Common.ObjectBuilders;
 using Sandbox.Engine.Physics;
 using Sandbox.Game.Entities;
@@ -28,8 +29,6 @@ namespace klime.EntityCover
         public string modelName; // New property to store the model name
         public Vector3 modelDimensions; // New property to store the model dimensions
 
-<<<<<<< Updated upstream
-=======
         private static Dictionary<string, ModelInfo> subtypeToModelMap = new Dictionary<string, ModelInfo>()
         {
             { "EntityCover", new ModelInfo("REMlikeblocker2x_purple.mwm", new Vector3(275, 275, 275)) },    //block subtype, block model filename, hitbox dimensions //in Large Blocks (???)
@@ -69,39 +68,16 @@ namespace klime.EntityCover
         }
 
 
->>>>>>> Stashed changes
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
-            // if (!MyAPIGateway.Session.IsServer) return;
-
             entityBattery = Entity as IMyBatteryBlock;
             entityBattery.OnClose += EntityBattery_OnClose;
             NeedsUpdate = MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
 
             // Set the modelName and modelDimensions based on the subtype of the battery block
-            if (entityBattery.BlockDefinition.SubtypeId == "EntityCover")
-            {
-                modelName = "REMlikeblocker2x_purple.mwm"; // Set the model name for the first variant
-            }
-            else if (entityBattery.BlockDefinition.SubtypeId == "EntityCover2")
-            {
-                modelName = "REMlikeblocker2x.mwm"; // Set the model name for the second variant
-            }
-            else if (entityBattery.BlockDefinition.SubtypeId == "EntityCoverEveFreighter")
-            {
-                modelName = "eveobstacle3.mwm"; // Set the model name for the second variant
-            }
-            else if (entityBattery.BlockDefinition.SubtypeId == "EntityCover3")
-            {
-                modelName = "REMlikeblockerLong25kX.mwm"; // Set the model name for the second variant
-            }
-            // Add more else-if blocks for additional variants...
-            else
-            {
-                // Set default values if the subtype does not match any of the predefined cases.
-                modelName = "DefaultModel.mwm";
-                modelDimensions = new Vector3(100, 100, 100);
-            }
+            var modelInfo = GetModelInfoForSubtype(entityBattery.BlockDefinition.SubtypeId);
+            modelName = modelInfo.ModelName;
+            modelDimensions = modelInfo.ModelDimensions;
         }
 
         private void EntityBattery_OnClose(IMyEntity obj)
@@ -113,29 +89,17 @@ namespace klime.EntityCover
         {
             if (entityBattery.CubeGrid.Physics == null || EntityCover.Instance == null) return;
 
-            // Separate the logic based on the subtype ID
-            if (entityBattery.BlockDefinition.SubtypeId == "EntityCover")
-            {
-                EntityCover.Instance.AddCover((IMyTerminalBlock)entityBattery, modelName); // Pass the modelName for the first variant
-            }
-            else if (entityBattery.BlockDefinition.SubtypeId == "EntityCover2")
-            {
-                EntityCover.Instance.AddCover((IMyTerminalBlock)entityBattery, modelName); // Pass the modelName for the second variant
-            }
-            else if (entityBattery.BlockDefinition.SubtypeId == "EntityCoverEveFreighter")
-            {
-                EntityCover.Instance.AddCover((IMyTerminalBlock)entityBattery, modelName); // Pass the modelName for the second variant
-            }
-            else if (entityBattery.BlockDefinition.SubtypeId == "EntityCover3")
-            {
-                EntityCover.Instance.AddCover((IMyTerminalBlock)entityBattery, modelName); // Pass the modelName for the second variant
-            }
-            // Add more else-if blocks for additional variants...
-            else
-            {
-                // Handle the logic for other subtypes, if needed.
-            }
+            // Get the subtype ID of the battery block
+            string subtypeId = entityBattery.BlockDefinition.SubtypeId;
+
+            // Get the model dimensions based on the subtype ID
+            Vector3 modelDimensions = GetModelInfoForSubtype(subtypeId).ModelDimensions; // Use the modelDimensions property
+
+            EntityCover.Instance.AddCover((IMyTerminalBlock)entityBattery, modelName, modelDimensions); // Pass the modelDimensions parameter
         }
+
+
+
 
         public override void Close()
         {
@@ -200,18 +164,19 @@ namespace klime.EntityCover
             Instance = this;
         }
 
-        public void AddCover(IMyTerminalBlock block, string modelName) // Add the modelName parameter
+        public void AddCover(IMyTerminalBlock block, string modelName, Vector3 modelDimensions) // Add the modelName and modelDimensions parameters
         {
             var cGrid = block.CubeGrid as MyCubeGrid;
             cGrid.ConvertToStatic();
             cGrid.DisplayName = "#EntityCover";
             cGrid.DestructibleBlocks = false;
 
-            var blockEnt = CreateBlocker(block.EntityId, block.WorldMatrix, modelName);
+            var blockEnt = CreateBlocker(block.EntityId, block.WorldMatrix, modelName, modelDimensions); // Pass the modelDimensions parameter
             allCoverEnts.Add(blockEnt);
 
             //MyAPIGateway.Utilities.ShowMessage("", $"Added cover: {block.EntityId}");
         }
+
 
         public static void RemoveCover(long entityId, string modelName)
         {
@@ -229,7 +194,7 @@ namespace klime.EntityCover
 
 
 
-        private BlockerEnt CreateBlocker(long attachedEntityId, MatrixD initialMatrix, string modelName)
+        private BlockerEnt CreateBlocker(long attachedEntityId, MatrixD initialMatrix, string modelName, Vector3 modelDimensions) // Modify the constructor
         {
             var ent = new BlockerEnt(attachedEntityId, modelName);
 
@@ -239,16 +204,13 @@ namespace klime.EntityCover
             ent.DefinitionId = new MyDefinitionId(MyObjectBuilderType.Invalid, "CustomEntity");
             ent.Save = false;
             ent.WorldMatrix = initialMatrix;
-            
+
             MyEntities.Add(ent, true);
-            //ent.AddToGamePruningStructure();
-            //ent.StaticForPruningStructure = true;
-            // Retrieve the model dimensions based on the modelName
-            Vector3 modelDimensions = GetModelDimensions(modelName);
 
             CreateBlockerPhysics(ent, modelDimensions); // Pass the modelDimensions parameter
             return ent;
         }
+
 
         private void CreateBlockerPhysics(BlockerEnt ent, Vector3 modelDimensions)
         {
@@ -266,24 +228,6 @@ namespace klime.EntityCover
             
         }
 
-        private static Vector3 GetModelDimensions(string modelName)
-        {
-            // Add cases for each modelName and set their respective model dimensions
-            switch (modelName)
-            {
-                case "REMlikeblocker2x_purple.mwm":
-                    return new Vector3(275, 275, 275);
-                case "REMlikeblocker2x.mwm":
-                    return new Vector3(275, 275, 275);
-                case "eveobstacle3.mwm":
-                    return new Vector3(180, 60, 500);
-                case "REMlikeblockerLong25kX.mwm":
-                    return new Vector3(1250, 275, 275);
-                // Add more cases for additional modelNames and their respective model dimensions
-                default:
-                    return new Vector3(100, 100, 100); // Default model dimensions
-            }
-        }
 
         private bool isBouncing = false;
         private int delayTicks = 0;
