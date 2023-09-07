@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <BlockVariantGroups>
+  
+		<BlockVariantGroup>
+            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="DetpakBlockVariantGroup" />
+            <Icon>Textures\Icons\Emergency_Thruster.dds</Icon>
+            <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
+            <Description>Description_BlockGroup_TurretGroup</Description>
+            <Blocks>
+              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="DETPAK" />
+              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="DETPAK_1x1" />
+              <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="DETPAK_3x1" />
+            </Blocks>
+        </BlockVariantGroup>
+
+      <BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="MA_AfterburnerBlockVariantGroup" />
+        <Icon>Textures\Icons\MA_Afterburner_Large.png</Icon>
+        <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
+        <Description>Description_BlockGroup_TurretGroup</Description>
+        <Blocks>
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="MA_Afterburner_Large_5x" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="MA_Afterburner_Large" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="MA_Afterburner_Large_small" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Afterburner_LG_Ion_Large" />
+        </Blocks>
+      </BlockVariantGroup>
+
+
+    </BlockVariantGroups>
+</Definitions>

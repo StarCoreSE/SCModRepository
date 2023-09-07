@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CubeBlocks>
+
+    <!-- MA_Afterburner_Large_small (1x1) -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>MA_Afterburner_Large_small</SubtypeId>
+      </Id>
+      <DisplayName>MA Afterburner</DisplayName>
+      <Description>
+        Gives temporary boosts of speed Using it too much will cause a cooldown.
+        Set up click to fire in cockpit toolbar.
+        You can also use the timer hotkey mod to bind it.
+        USE KEYFIRE!
+
+
+        By AutoMcD and Invalid.
+      </Description>
+      <Icon>Textures\Icons\Afterburner_LG_Small.png</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="2" />
+      <ModelOffset x="0" y="0" z="1" />
+      <Model>Models\MA_Afterburner\Afterburner_LG_Small.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="Computer" Count="10" />
+        <Component Subtype="Construction" Count="100" />
+        <Component Subtype="MetalGrid" Count="20" />
+        <Component Subtype="LargeTube" Count="10" />
+        <Component Subtype="Reactor" Count="30" />
+        <Component Subtype="Motor" Count="100" />
+        <Component Subtype="SteelPlate" Count="500" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="1" />
+        <MountPoint Side="Top" StartX="0" StartY="0" EndX="1" EndY="1" />
+        <MountPoint Side="Bottom" StartX="0" StartY="1" EndX="1" EndY="2" />
+        <MountPoint Side="Left" StartX="1" StartY="0" EndX="2" EndY="1" />
+        <MountPoint Side="Right" StartX="0" StartY="0" EndX="1" EndY="1" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="0.33" File="Models\MA_Afterburner\Afterburner_LG_Small_BS1.mwm"/>
+        <Model BuildPercentUpperBound="0.67" File="Models\MA_Afterburner\Afterburner_LG_Small_BS2.mwm"/>
+        <Model BuildPercentUpperBound="1.00" File="Models\MA_Afterburner\Afterburner_LG_Small_BS3.mwm"/>
+      </BuildProgressModels>
+      <BlockPairName>MA_Afterburner_Large_small</BlockPairName>
+      <MirroringZ>Y</MirroringZ>
+
+      <BuildTimeSeconds>15</BuildTimeSeconds>
+      <EdgeType>Light</EdgeType>
+      <WeaponDefinitionId Subtype="MA_Afterburner" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1.14</InventoryMaxVolume>
+      <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+      <DamagedSound>ParticleElectrical</DamagedSound>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <GuiVisible>false</GuiVisible>
+      <PCU>100</PCU>
+    </Definition>
+
+
+
+
+    <!-- MA_Afterburner_Large (3x3) -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>MA_Afterburner_Large</SubtypeId>
+      </Id>
+      <DisplayName>MA Afterburner, Large</DisplayName>
+      <Description>
+        Gives temporary boost of speed.
+        Set up click to fire in cockpit toolbar.
+        You can also use the timer hotkey mod to bind it.
+
+
+        By AutoMcD and Invalid.
+      </Description>
+      <Icon>Textures\Icons\MA_Afterburner_Large.png</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="3" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\MA_Afterburner\Afterburner_LG_Large_animated.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="Computer" Count="10" />
+        <Component Subtype="Construction" Count="100" />
+        <Component Subtype="MetalGrid" Count="20" />
+        <Component Subtype="LargeTube" Count="10" />
+        <Component Subtype="Reactor" Count="30" />
+        <Component Subtype="Motor" Count="100" />
+        <Component Subtype="SteelPlate" Count="1000" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0" StartY="0" EndX="3" EndY="3" />
+        <MountPoint Side="Top" StartX="0" StartY="0" EndX="3" EndY="2" />
+        <MountPoint Side="Bottom" StartX="0" StartY="1" EndX="3" EndY="3" />
+        <MountPoint Side="Left" StartX="1" StartY="0" EndX="3" EndY="3" />
+        <MountPoint Side="Right" StartX="0" StartY="0" EndX="2" EndY="3" />
+
+      </MountPoints>
+      <BuildProgressModels>
+
+      </BuildProgressModels>
+      <BlockPairName>MA_Afterburner_Large</BlockPairName>
+      <MirroringZ>Y</MirroringZ>
+      <Center x="1" y="1" z="1" />
+      <BuildTimeSeconds>15</BuildTimeSeconds>
+      <EdgeType>Light</EdgeType>
+      <WeaponDefinitionId Subtype="MA_Afterburner" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1.14</InventoryMaxVolume>
+      <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+      <DamagedSound>ParticleElectrical</DamagedSound>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <GuiVisible>false</GuiVisible>
+      <PCU>100</PCU>
+    </Definition>
+
+
+
+    <!-- MA_Afterburner_Large_5x -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>MA_Afterburner_Large_5x</SubtypeId>
+      </Id>
+      <DisplayName>MA Afterburner, Extra Large</DisplayName>
+      <Description>
+        Gives temporary boost of speed.
+        Set up click to fire in cockpit toolbar.
+        You can also use the timer hotkey mod to bind it.
+
+        By AutoMcD and Invalid.
+      </Description>
+      <Icon>Textures\Icons\MA_Afterburner_Large.png</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="5" y="5" z="5" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\MA_Afterburner\Afterburner_LG_Large_animated_5x.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="Computer" Count="10" />
+        <Component Subtype="Construction" Count="100" />
+        <Component Subtype="MetalGrid" Count="20" />
+        <Component Subtype="LargeTube" Count="10" />
+        <Component Subtype="Reactor" Count="30" />
+        <Component Subtype="Motor" Count="100" />
+        <Component Subtype="SteelPlate" Count="2000" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0" StartY="0" EndX="5" EndY="5" />
+        <MountPoint Side="Top" StartX="0" StartY="0" EndX="5" EndY="2" />
+        <MountPoint Side="Bottom" StartX="0" StartY="3" EndX="5" EndY="5" />
+        <MountPoint Side="Left" StartX="3" StartY="0" EndX="5" EndY="5" />
+        <MountPoint Side="Right" StartX="0" StartY="0" EndX="2" EndY="5" />
+      </MountPoints>
+      <BuildProgressModels>
+
+      </BuildProgressModels>
+      <BlockPairName>MA_Afterburner_Large_5x</BlockPairName>
+      <MirroringZ>Y</MirroringZ>
+      <Center x="1" y="1" z="1" />
+      <BuildTimeSeconds>15</BuildTimeSeconds>
+      <EdgeType>Light</EdgeType>
+      <WeaponDefinitionId Subtype="MA_Afterburner" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1.14</InventoryMaxVolume>
+      <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+      <DamagedSound>ParticleElectrical</DamagedSound>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <GuiVisible>false</GuiVisible>
+      <PCU>100</PCU>
+    </Definition>
+
+
+
+    <!-- Afterburner_LG_Ion_Large -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>Afterburner_LG_Ion_Large</SubtypeId>
+      </Id>
+      <DisplayName>MA Ion Afterburner</DisplayName>
+      <Description>
+        A join effort between Allied Astronautical and Aryx has produced an ion thruster modification of questionable theory, safety, and legality. But it does seem to work.
+      </Description>
+      <Icon>Textures\Icons\Afterburner_LG_Ion_Large.png</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="2" z="3" />
+      <ModelOffset x="0" y="0" z="-2" />
+      <Model>Models\MA_Afterburner\Afterburner_LG_Ion_Large.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="Computer" Count="10" />
+        <Component Subtype="Construction" Count="100" />
+        <Component Subtype="MetalGrid" Count="20" />
+        <Component Subtype="LargeTube" Count="10" />
+        <Component Subtype="Reactor" Count="30" />
+        <Component Subtype="Motor" Count="100" />
+        <Component Subtype="SteelPlate" Count="1000" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0" StartY="0" EndX="3" EndY="2" />
+        <MountPoint Side="Top" StartX="0" StartY="0" EndX="3" EndY="1" />
+        <MountPoint Side="Bottom" StartX="0" StartY="2" EndX="3" EndY="3" />
+        <MountPoint Side="Left" StartX="2" StartY="0" EndX="3" EndY="2" />
+        <MountPoint Side="Right" StartX="0" StartY="0" EndX="1" EndY="2" />
+      </MountPoints>
+      <BuildProgressModels>
+
+      </BuildProgressModels>
+      <BlockPairName>Afterburner_LG_Ion_Large</BlockPairName>
+      <MirroringZ>Y</MirroringZ>
+      <Center x="1" y="1" z="1" />
+      <BuildTimeSeconds>15</BuildTimeSeconds>
+      <EdgeType>Light</EdgeType>
+      <WeaponDefinitionId Subtype="MA_Afterburner" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1.14</InventoryMaxVolume>
+      <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+      <DamagedSound>ParticleElectrical</DamagedSound>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepLrgWarheadExpl</DestroySound>
+      <GuiVisible>false</GuiVisible>
+      <PCU>100</PCU>
+    </Definition>
+
+    <!-- SRB -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>SC_SRB</SubtypeId>
+      </Id>
+      <DisplayName>Faulty Solid Rocket Booster</DisplayName>
+      <Description>
+        A skyscraper filled with explosives, but it detonates slowly, and in one direction. [Depowering it will cause spontaneous detonation.]
+      </Description>
+      <Icon>Textures\Icons\srb.png</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="18" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\MA_Afterburner\SRB.mwm</Model>
+      <Components>
+        <Component Subtype="Computer" Count="1" />
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="Construction" Count="100" />
+        <Component Subtype="MetalGrid" Count="20" />
+        <Component Subtype="LargeTube" Count="10" />
+        <Component Subtype="Reactor" Count="30" />
+        <Component Subtype="Motor" Count="100" />
+        <Component Subtype="SteelPlate" Count="28800" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Front" StartX="0" StartY="0" EndX="1" EndY="18" />
+        <MountPoint Side="Right" StartX="0" StartY="0" EndX="1" EndY="18" />
+        <MountPoint Side="Left" StartX="0" StartY="0" EndX="1" EndY="18" />
+        <MountPoint Side="Top" StartX="0" StartY="0" EndX="1" EndY="1" />
+        <MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="18" />
+      </MountPoints>
+      <BuildProgressModels>
+
+      </BuildProgressModels>
+      <BlockPairName>SRB</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <Center x="0" y="0" z="0" />
+      <BuildTimeSeconds>150</BuildTimeSeconds>
+      <EdgeType>Light</EdgeType>
+      <WeaponDefinitionId Subtype="MA_Afterburner" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1.14</InventoryMaxVolume>
+      <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+      <DamagedSound>ParticleElectrical</DamagedSound>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <GuiVisible>false</GuiVisible>
+      <PCU>100</PCU>
+    </Definition>
+
+    <!-- DETPAK -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>DETPAK</SubtypeId>
+      </Id>
+      <DisplayName>DETPAK</DisplayName>
+      <Description>
+        Explodes, then propels you. Mount it to something sturdy.
+        Model by Chet.
+      </Description>
+      <Icon>Textures\Icons\Emergency_Thruster.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="2" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\MA_Afterburner\Emergency_Thruster.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="200" />
+        <Component Subtype="Construction" Count="115" />
+        <Component Subtype="MetalGrid" Count="65" />
+        <Component Subtype="LargeTube" Count="45" />
+        <Component Subtype="Motor" Count="125" />
+        <Component Subtype="Computer" Count="200" />
+        <Component Subtype="Construction" Count="125" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BlockPairName>DETPAK_BLOCK</BlockPairName>
+      <MountPoints>
+        <MountPoint Side="Left" StartX="0" StartY="0" EndX="2" EndY="1" />
+      </MountPoints>
+      <MirroringX>Z</MirroringX>
+      <MirroringZ>X</MirroringZ>
+
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>25</BuildTimeSeconds>
+      <DisassembleRatio>5</DisassembleRatio>
+      <NavigationDefinition>Default</NavigationDefinition>
+      <WeaponDefinitionId Subtype="DETPAK" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <AiEnabled>false</AiEnabled>
+    </Definition>
+
+    <!-- DETPAK 1x1 -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>DETPAK_1x1</SubtypeId>
+      </Id>
+      <DisplayName>DETPAK 1x1</DisplayName>
+      <Description>
+        Explodes, then propels you. Mount it to something sturdy.
+        Model by Chet.
+      </Description>
+      <Icon>Textures\Icons\Emergency_Thruster.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\MA_Afterburner\Det_Pak_1x1.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="Construction" Count="115" />
+        <Component Subtype="MetalGrid" Count="65" />
+        <Component Subtype="LargeTube" Count="45" />
+        <Component Subtype="Motor" Count="125" />
+        <Component Subtype="Computer" Count="200" />
+        <Component Subtype="Construction" Count="125" />
+        <Component Subtype="SteelPlate" Count="50" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BlockPairName>DETPAK_BLOCK_1x1</BlockPairName>
+      <MountPoints>
+        <MountPoint Side="Left" StartX="0" StartY="0" EndX="1" EndY="1" />
+      </MountPoints>
+      <MirroringX>Z</MirroringX>
+      <MirroringZ>X</MirroringZ>
+
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>25</BuildTimeSeconds>
+      <DisassembleRatio>5</DisassembleRatio>
+      <NavigationDefinition>Default</NavigationDefinition>
+      <WeaponDefinitionId Subtype="DETPAK_1x1" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <AiEnabled>false</AiEnabled>
+    </Definition>
+
+    <!-- DETPAK 3x1 -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>DETPAK_3x1</SubtypeId>
+      </Id>
+      <DisplayName>DETPAK 3x1</DisplayName>
+      <Description>
+        Explodes, then propels you. Mount it to something sturdy.
+        Model by Chet.
+      </Description>
+      <Icon>Textures\Icons\Emergency_Thruster.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\MA_Afterburner\Det_Pak_3x1.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="600" />
+        <Component Subtype="Construction" Count="115" />
+        <Component Subtype="MetalGrid" Count="65" />
+        <Component Subtype="LargeTube" Count="45" />
+        <Component Subtype="Motor" Count="125" />
+        <Component Subtype="Computer" Count="200" />
+        <Component Subtype="Construction" Count="125" />
+        <Component Subtype="SteelPlate" Count="300" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BlockPairName>DETPAK_BLOCK_3x1</BlockPairName>
+      <MountPoints>
+        <MountPoint Side="Left" StartX="0" StartY="0" EndX="3" EndY="1" />
+      </MountPoints>
+      <MirroringX>Z</MirroringX>
+      <MirroringZ>X</MirroringZ>
+
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>25</BuildTimeSeconds>
+      <DisassembleRatio>5</DisassembleRatio>
+      <NavigationDefinition>Default</NavigationDefinition>
+      <WeaponDefinitionId Subtype="DETPAK_3x1" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <AiEnabled>false</AiEnabled>
+    </Definition>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- MA_Afterburner_Small (side booster) -->
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>MA_SideBooster_Small</SubtypeId>
+      </Id>
+      <DisplayName>MA Side Booster</DisplayName>
+      <Description> Quickly accelerates your ship with a low cooldown. Max 4 per grid. </Description>
+      <Icon>Textures\Icons\sidebooster.dds</Icon>
+      <CubeSize>Small</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="2" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Small\ThrustSmall.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="10" />
+        <Component Subtype="Computer" Count="1" />
+        <Component Subtype="Construction" Count="10" />
+        <Component Subtype="MetalGrid" Count="2" />
+        <Component Subtype="LargeTube" Count="1" />
+        <Component Subtype="Reactor" Count="3" />
+        <Component Subtype="Motor" Count="10" />
+        <Component Subtype="SteelPlate" Count="200" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+
+      </BuildProgressModels>
+      <BlockPairName>MA_SideBooster_Small</BlockPairName>
+      <MirroringZ>Y</MirroringZ>
+      <Center x="0" y="0" z="0" />
+      <BuildTimeSeconds>15</BuildTimeSeconds>
+      <EdgeType>Light</EdgeType>
+      <WeaponDefinitionId Subtype="MA_Afterburner" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1.14</InventoryMaxVolume>
+      <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+      <DamagedSound>ParticleElectrical</DamagedSound>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <GuiVisible>false</GuiVisible>
+      <PCU>100</PCU>
+    </Definition>
+
+  </CubeBlocks>
+</Definitions>
