@@ -1,4 +1,5 @@
 using Sandbox.Common.ObjectBuilders;
+using Sandbox.Engine.Utils;
 using Sandbox.Game;
 using Sandbox.Game.Entities;
 using Sandbox.Game.Entities.Blocks;
@@ -23,7 +24,10 @@ namespace SRBanticringe
         {
             if (!MyAPIGateway.Session.IsServer) return;
             SRB = Entity as IMyConveyorSorter;
-            (SRB.CubeGrid as MyCubeGrid).ForceDisablePrediction = true;  // Corrected Line
+            (SRB.CubeGrid as MyCubeGrid).ForceDisablePrediction = true;
+            //(SRB.CubeGrid as MyCubeGrid).AllowPrediction = false;
+            MyFakes.MULTIPLAYER_SKIP_PREDICTION = true;
+            MyFakes.MULTIPLAYER_SKIP_PREDICTION_SUBGRIDS = true;
 
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
             MyVisualScriptLogicProvider.ShowNotification("client prediction disabled???", 10000, "Red");
@@ -64,6 +68,7 @@ namespace SRBanticringe
 
             // Check if the grid is client-predicted and show a notification
             bool isPredicted = (SRB.CubeGrid as MyCubeGrid).IsClientPredicted;
+
             MyVisualScriptLogicProvider.ShowNotification($"Grid is client-predicted: {isPredicted}", 2000, "Red");
         }
 
