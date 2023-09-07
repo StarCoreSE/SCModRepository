@@ -1,9 +1,9 @@
-name: "Upload RelativeTopSpeed"
+name: "Upload StarCoreCTF"
 
 on:
   push:
     paths:
-      - "SCRelativeTopSpeed/**"
+      - "StarCoreCTF/**"
 
 jobs:
   upload:
@@ -13,8 +13,8 @@ jobs:
       - uses: AnarkisGaming/workshop@v1
         with:
           appID: 244850
-          publishedFileID: 3031680659
-          path: RelativeTopSpeed
+          publishedFileID: 3018817811
+          path: StarCoreCTF
           changelog: ${{ github.event.head_commit.message }}              
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}
