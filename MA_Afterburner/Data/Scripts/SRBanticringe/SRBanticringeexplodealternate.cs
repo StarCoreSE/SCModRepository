@@ -26,7 +26,7 @@ namespace SRBanticringe
             SRB = Entity as IMyConveyorSorter;
             (SRB.CubeGrid as MyCubeGrid).ForceDisablePrediction = true;
             //(SRB.CubeGrid as MyCubeGrid).AllowPrediction = false;
-            MyFakes.MULTIPLAYER_SKIP_PREDICTION = true;
+            //MyFakes.MULTIPLAYER_SKIP_PREDICTION = true;
             MyFakes.MULTIPLAYER_SKIP_PREDICTION_SUBGRIDS = true;
 
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
