@@ -16,21 +16,18 @@ namespace Scripts
     [MySessionComponentDescriptor(MyUpdateOrder.BeforeSimulation, 999999)]
     public class Session : MySessionComponentBase
     {
-        private const double CombatRadius = 12500;
+        private const double CombatRadius = 7500;
         private const double CombatNearEdge = CombatRadius - 1;
         private const string SphereModel = "\\Models\\Cubes\\OuterShield.mwm";
         private readonly BoundingSphereD _combatNearSphere = new BoundingSphereD(Vector3D.Zero, CombatNearEdge);
         private BoundingSphereD _combatMinSphere = new BoundingSphereD(Vector3D.Zero, CombatRadius);
-        private BoundingSphereD _combatMaxSphere = new BoundingSphereD(Vector3D.Zero, CombatRadius + 22500);
+        private BoundingSphereD _combatMaxSphere = new BoundingSphereD(Vector3D.Zero, CombatRadius + 17500);
+
         private int _count;
         private int _fastStart;
-        private readonly List
-        <MyEntity>
-        _managedEntities = new List
-        <MyEntity>
-        (1000);
+        private readonly List <MyEntity> _managedEntities = new List<MyEntity>(1000);
         private MyEntity _sphereEntity;
-        private const double ViewDistSqr = 100000000;
+        
         public override void LoadData()
         {
         }
@@ -70,22 +67,27 @@ namespace Scripts
                 });
             }
         }
+        private readonly HashSet<Type> _skipEntityTypes = new HashSet<Type> { /* Add pre-ignored Types Here */ };
+
         private bool ShouldProcessEntity(MyEntity ent)
         {
-            if (ent.Physics == null ||
-            ent.Physics.IsPhantom ||
-            ent.IsPreview ||
-            ent.MarkedForClose ||
-            !ent.InScene)
+            Type entType = ent.GetType();
+
+            // Fast check against cache
+            if (_skipEntityTypes.Contains(entType) || ent.MarkedForClose || ent.IsPreview || ent.Physics == null || ent.Physics.IsPhantom || !ent.InScene)
             {
                 return false;
             }
+
             var grid = ent as MyCubeGrid;
             var player = ent as IMyCharacter;
             if (grid == null && player == null)
             {
+                // Cache this type for future fast checks
+                _skipEntityTypes.Add(entType);
                 return false;
             }
+
             var entVolume = ent.PositionComp.WorldVolume;
             return entVolume.Contains(_combatNearSphere) != ContainmentType.Contains;
         }
@@ -101,48 +103,64 @@ namespace Scripts
             ent.Physics.AddForce(MyPhysicsForceType.APPLY_WORLD_FORCE, force, pos, Vector3.Zero);
             _fastStart = _count;
         }
+        private int frameCounter = 0;
+        private float lastCalculatedP = -1.0f;  // Cache the last calculated transparency
+
         private void RefreshVisualState()
         {
+            frameCounter++;
+            if (frameCounter % 10 != 0)  // Update only every 10 frames
+            {
+                return;
+            }
+
             if (!MyAPIGateway.Utilities.IsDedicated)
             {
                 var cameraPos = MyAPIGateway.Session.Camera.WorldMatrix.Translation;
-                double distToCenter = 0;
-                Vector3D.DistanceSquared(ref cameraPos, ref Vector3D.Zero, out distToCenter);
-                double distFromCenterSqr = distToCenter;
-                if (distFromCenterSqr >= ViewDistSqr)
+                double distToCenter;
+                Vector3D.Distance(ref cameraPos, ref Vector3D.Zero, out distToCenter);
+
+                if (distToCenter > 20000)
                 {
-                    if (distFromCenterSqr >= 175562500)
+                    if (_sphereEntity.InScene)
                     {
                         _sphereEntity.InScene = false;
                         _sphereEntity.Render.RemoveRenderObjects();
-                        MyAPIGateway.Utilities.ShowNotification($"Outside render range", 5000, MyFontEnum.Red);
-                        return;
                     }
-                    if (distFromCenterSqr < 138062500)
+                    return;  // Early exit
+                }
+
+                if (distToCenter <= 4000)
+                {
+                    if (_sphereEntity.InScene)
                     {
-                        
-                        var dist = Vector3D.Distance(cameraPos, Vector3D.Zero);
-                        var range = 12000f - dist;
-                        var p = (float)Math.Round(range / 2500f, 4);
+                        _sphereEntity.InScene = false;
+                        _sphereEntity.Render.RemoveRenderObjects();
+                    }
+                    return;  // Early exit
+                }
+
+                if (distToCenter >= 4000 && distToCenter <= CombatRadius + 1000)
+                {
+                    // Calculate inverted transparency based on camera distance
+                    var p = 1.0f - (float)((distToCenter - 4000) / (CombatRadius - 4000));
+
+                    // Only update if the transparency value has changed significantly
+                    if (Math.Abs(lastCalculatedP - p) > 0.01)
+                    {
                         MyAPIGateway.Utilities.ShowNotification($"Transparency: {p}", 16, MyFontEnum.Red);
-                        MyAPIGateway.Utilities.ShowNotification($"Inside render range: {range}", 16, MyFontEnum.Red);
-                        if (!MyUtils.IsEqual(p, _sphereEntity.Render.Transparency))
-                        {
-                            _sphereEntity.Render.UpdateRenderObject(false);
-                            _sphereEntity.Render.Transparency = p;
-                            _sphereEntity.Render.UpdateRenderObject(true);
-                        }
-                    }
-                    if (!_sphereEntity.InScene)
-                    {
-                        _sphereEntity.InScene = true;
-                        _sphereEntity.Render.UpdateRenderObject(true, false);
+                        _sphereEntity.Render.UpdateRenderObject(false);
+                        _sphereEntity.Render.Transparency = p;
+                        _sphereEntity.Render.UpdateRenderObject(true);
+
+                        lastCalculatedP = p;  // Cache the last calculated transparency
                     }
                 }
-                else if (_sphereEntity.InScene)
+
+                if (!_sphereEntity.InScene)
                 {
-                    _sphereEntity.InScene = false;
-                    _sphereEntity.Render.RemoveRenderObjects();
+                    _sphereEntity.InScene = true;
+                    _sphereEntity.Render.UpdateRenderObject(true, false);
                 }
             }
         }
