@@ -148,7 +148,7 @@ namespace Scripts
                     // Only update if the transparency value has changed significantly
                     if (Math.Abs(lastCalculatedP - p) > 0.01)
                     {
-                        MyAPIGateway.Utilities.ShowNotification($"Transparency: {p}", 16, MyFontEnum.Red);
+                       // MyAPIGateway.Utilities.ShowNotification($"Transparency: {p}", 16, MyFontEnum.Red);
                         _sphereEntity.Render.UpdateRenderObject(false);
                         _sphereEntity.Render.Transparency = p;
                         _sphereEntity.Render.UpdateRenderObject(true);
