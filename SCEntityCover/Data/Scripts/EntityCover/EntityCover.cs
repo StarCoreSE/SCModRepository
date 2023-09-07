@@ -28,6 +28,48 @@ namespace klime.EntityCover
         public string modelName; // New property to store the model name
         public Vector3 modelDimensions; // New property to store the model dimensions
 
+<<<<<<< Updated upstream
+=======
+        private static Dictionary<string, ModelInfo> subtypeToModelMap = new Dictionary<string, ModelInfo>()
+        {
+            { "EntityCover", new ModelInfo("REMlikeblocker2x_purple.mwm", new Vector3(275, 275, 275)) },    //block subtype, block model filename, hitbox dimensions //in Large Blocks (???)
+            { "EntityCover2", new ModelInfo("REMlikeblocker2_5km_purple.mwm", new Vector3(1250, 1250, 1250)) },    
+            { "EntityCoverEveFreighter", new ModelInfo("eveobstacle3.mwm", new Vector3(180, 60, 500)) },
+            { "EntityCover3", new ModelInfo("REMlikeblockerLong25kX.mwm", new Vector3(1250, 275, 275)) },
+            { "EntityCover4", new ModelInfo("REMlikeblocker1kmplate_purple.mwm", new Vector3(400, 40, 400)) },
+            // Add more entries for additional variants...
+        };
+
+
+        // Create a method to get the model name based on subtype ID
+        private ModelInfo GetModelInfoForSubtype(string subtypeId)
+        {
+            if (subtypeToModelMap.ContainsKey(subtypeId))
+            {
+                return subtypeToModelMap[subtypeId];
+            }
+            else
+            {
+                // Set default model info if the subtype doesn't match any predefined cases.
+                return new ModelInfo("DefaultModel.mwm", new Vector3(100, 100, 100));
+            }
+        }
+
+
+        private class ModelInfo
+        {
+            public string ModelName { get; }
+            public Vector3 ModelDimensions { get; }
+
+            public ModelInfo(string modelName, Vector3 modelDimensions)
+            {
+                ModelName = modelName;
+                ModelDimensions = modelDimensions;
+            }
+        }
+
+
+>>>>>>> Stashed changes
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             // if (!MyAPIGateway.Session.IsServer) return;
