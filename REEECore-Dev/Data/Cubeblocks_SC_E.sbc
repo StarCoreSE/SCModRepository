@@ -16,7 +16,6 @@
         [Energy damage]
         [800~ m/s]
         [Reloads 6 times]
-        Effective against most targets, more vulnerable to point defense than other launchers.
       </Description>
       <Icon>Textures\Icons\MCRNHeavy.png</Icon>
       <CubeSize>Large</CubeSize>
