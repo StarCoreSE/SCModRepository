@@ -67,28 +67,21 @@ namespace Klime.spawncolorcodedprefab
             MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(netID, NetworkHandler);
         }
 
-        private void NetworkHandler(ushort arg1, byte[] arg2, ulong arg3, bool arg4)
-        {
-            if (!MyAPIGateway.Session.IsServer) return;
+		private void NetworkHandler(ushort arg1, byte[] arg2, ulong arg3, bool arg4)
+		{
+			if (!MyAPIGateway.Session.IsServer) return;
 
-            Packet packet = MyAPIGateway.Utilities.SerializeFromBinary<Packet>(arg2);
-            if (packet == null) return;
+			Packet packet = MyAPIGateway.Utilities.SerializeFromBinary<Packet>(arg2);
+			if (packet == null) return;
 
-            PrefabSpawnPacket prefabPacket = packet as PrefabSpawnPacket;
-            if (prefabPacket == null) return;
+			PrefabSpawnPacket prefabPacket = packet as PrefabSpawnPacket;
+			if (prefabPacket == null) return;
 
+			// Skip the check for prefabMap as prefab is determined by spawn position
+			SpawnRandomPrefabs(prefabPacket.prefabAmount);
+		}
 
-            if (prefabMap.ContainsKey(prefabPacket.prefabName))
-            {
-                SpawnRandomPrefabs(prefabMap[prefabPacket.prefabName], prefabPacket.prefabAmount);
-            }
-            else
-            {
-                MyVisualScriptLogicProvider.SendChatMessage($"Prefab {prefabPacket.prefabName} not found", "SpawnCover");
-            }
-        }
-
-        private void OnMessageEntered(string messageText, ref bool sendToOthers)
+		private void OnMessageEntered(string messageText, ref bool sendToOthers)
         {
             if (!messageText.StartsWith("/spawncolorcover", StringComparison.OrdinalIgnoreCase)) return;
             string[] parts = messageText.Split(' ');
@@ -135,49 +128,60 @@ namespace Klime.spawncolorcodedprefab
             MyAPIGateway.Utilities.ShowMessage("SpawnCover", prefabListMessage);
         }
 
-        private void SpawnRandomPrefabs(string targetPrefab, int spawnCount)
-        {
-            double maxSpawnRadius = 10000; // Maximum spawn radius in meters
+		private void SpawnRandomPrefabs(int spawnCount)
+		{
+			double maxSpawnRadius = 10000; // Maximum spawn radius in meters
 
-            List<Vector3D> spawnPositions = new List<Vector3D>();
+			List<Vector3D> spawnPositions = new List<Vector3D>();
 
-            for (int i = 0; i < spawnCount; i++)
-            {
-                Vector3D origin = new Vector3D(0, 0, 0);
-                Vector3D tangent = Vector3D.Forward;
-                Vector3D bitangent = Vector3D.Right;
+			for (int i = 0; i < spawnCount; i++)
+			{
+				Vector3D origin = new Vector3D(0, 0, 0);
+				Vector3D tangent = Vector3D.Forward;
+				Vector3D bitangent = Vector3D.Right;
 
-                Vector3D spawnPosition = origin + (Vector3D.Normalize(MyUtils.GetRandomVector3D()) * MyUtils.GetRandomDouble(minSpawnRadiusFromCenter, maxSpawnRadius));
-                Vector3D direction = Vector3D.Normalize(origin - spawnPosition);
-                Vector3D up = Vector3D.Normalize(Vector3D.Cross(direction, Vector3D.Up)); // Calculate an appropriate up vector
+				Vector3D spawnPosition = origin + (Vector3D.Normalize(MyUtils.GetRandomVector3D()) * MyUtils.GetRandomDouble(minSpawnRadiusFromCenter, maxSpawnRadius));
+				Vector3D direction = Vector3D.Normalize(origin - spawnPosition);
+				Vector3D up = Vector3D.Normalize(Vector3D.Cross(direction, Vector3D.Up)); // Calculate an appropriate up vector
 
-                bool isValidPosition = CheckAsteroidDistance(spawnPosition, minSpawnRadiusFromGrids) && CheckGridDistance(spawnPosition, minSpawnRadiusFromGrids);
+				bool isValidPosition = CheckAsteroidDistance(spawnPosition, minSpawnRadiusFromGrids) && CheckGridDistance(spawnPosition, minSpawnRadiusFromGrids);
 
-                if (isValidPosition)
-                {
-                    // Avoid overcrowding by checking against other spawn positions
-                    bool tooCloseToOtherPosition = false;
-                    foreach (Vector3D existingPosition in spawnPositions)
-                    {
-                        if (Vector3D.Distance(existingPosition, spawnPosition) < minSpawnRadiusFromGrids)
-                        {
-                            tooCloseToOtherPosition = true;
-                            break;
-                        }
-                    }
+				if (isValidPosition)
+				{
+					// Avoid overcrowding by checking against other spawn positions
+					bool tooCloseToOtherPosition = false;
+					foreach (Vector3D existingPosition in spawnPositions)
+					{
+						if (Vector3D.Distance(existingPosition, spawnPosition) < minSpawnRadiusFromGrids)
+						{
+							tooCloseToOtherPosition = true;
+							break;
+						}
+					}
 
-                    if (!tooCloseToOtherPosition)
-                    {
-                        MyVisualScriptLogicProvider.SpawnPrefab(targetPrefab, spawnPosition, direction, up);
-                        spawnPositions.Add(spawnPosition);
-                    }
-                }
-            }
-        }
+					if (!tooCloseToOtherPosition)
+					{
+						string targetPrefab = spawnPosition.X > 0 ? "EntityCover4RED" : "EntityCover4BLU";
+
+						if (prefabMap.ContainsKey(targetPrefab))
+						{
+							MyVisualScriptLogicProvider.SpawnPrefab(prefabMap[targetPrefab], spawnPosition, direction, up);
+						}
+						else
+						{
+							MyVisualScriptLogicProvider.SendChatMessage($"Prefab {targetPrefab} not found", "SpawnCover");
+						}
+
+						spawnPositions.Add(spawnPosition);
+					}
+				}
+			}
+		}
 
 
 
-        private bool CheckGridDistance(Vector3D spawnPosition, double minDistance)
+
+		private bool CheckGridDistance(Vector3D spawnPosition, double minDistance)
         {
             // Get all entities in the game world
             HashSet<IMyEntity> entities = new HashSet<IMyEntity>();

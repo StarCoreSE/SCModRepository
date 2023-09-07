@@ -6,17 +6,17 @@
       <CubeGrids>
         <CubeGrid>
           <SubtypeName />
-          <EntityId>128384520447672076</EntityId>
+          <EntityId>94436303478438101</EntityId>
           <PersistentFlags>CastShadows InScene</PersistentFlags>
           <PositionAndOrientation>
-            <Position x="-5818.095703125" y="-1867.020751953125" z="3422.54345703125" />
-            <Forward x="-1" y="-0" z="-0" />
-            <Up x="0" y="0" z="-1" />
+            <Position x="125.81381225585938" y="461.31961059570313" z="-196.82904052734375" />
+            <Forward x="-0" y="-0" z="-1" />
+            <Up x="0" y="1" z="0" />
             <Orientation>
-              <X>0.5</X>
-              <Y>-0.5</Y>
-              <Z>0.5</Z>
-              <W>-0.5</W>
+              <X>0</X>
+              <Y>0</Y>
+              <Z>0</Z>
+              <W>1</W>
             </Orientation>
           </PositionAndOrientation>
           <LocalPositionAndOrientation xsi:nil="true" />
@@ -24,9 +24,8 @@
           <CubeBlocks>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_BatteryBlock">
               <SubtypeName>EntityCover4BLU</SubtypeName>
-              <EntityId>128384520447672077</EntityId>
-              <ColorMaskHSV x="0" y="0.15" z="0.25" />
-              <SkinSubtypeId>Weldless</SkinSubtypeId>
+              <EntityId>94436303478438102</EntityId>
+              <ColorMaskHSV x="0" y="-0.8" z="0" />
               <ShowOnHUD>false</ShowOnHUD>
               <ShowInTerminal>true</ShowInTerminal>
               <ShowInToolbarConfig>true</ShowInToolbarConfig>
