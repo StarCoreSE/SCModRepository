@@ -56,6 +56,58 @@
       <SpecularColorFactor>255</SpecularColorFactor>
       <IsFlareOccluder>true</IsFlareOccluder>
     </TransparentMaterial>
-
+        <TransparentMaterial>
+            <Id>
+                <TypeId>TransparentMaterialDefinition</TypeId>
+                <SubtypeId>SafeZoneShieldGlass</SubtypeId>
+            </Id>
+            <AlphaMistingEnable>false</AlphaMistingEnable>
+            <AlphaSaturation>1</AlphaSaturation>
+            <CanBeAffectedByOtherLights>true</CanBeAffectedByOtherLights>
+            <IgnoreDepth>false</IgnoreDepth>
+            <SoftParticleDistanceScale>1</SoftParticleDistanceScale>
+            <Texture>Textures\Models\Environment\SafeZone\SafeZoneShieldGlass_ca.DDS</Texture>
+            <GlossTexture>Textures\Models\Cubes\Chrome_ng.dds</GlossTexture>
+            <UseAtlas>false</UseAtlas>
+            <NeedSort>true</NeedSort>
+            <UVOffset>
+                <X>0</X>
+                <Y>0</Y>
+            </UVOffset>
+            <UVSize>
+                <X>10</X>
+                <Y>10</Y>
+            </UVSize>
+            <Color>
+                <X>0.73</X>
+                <Y>0.73</Y>
+                <Z>0.73</Z>
+                <W>0.8</W>
+            </Color>
+            <ColorAdd>
+                <X>0.0</X>
+                <Y>0.0</Y>
+                <Z>0.0</Z>
+                <W>0.0</W>
+            </ColorAdd>
+            <ShadowMultiplier>
+                <X>0</X>
+                <Y>0</Y>
+                <Z>0</Z>
+                <W>4.0</W>
+            </ShadowMultiplier>
+            <LightMultiplier>
+                <X>0.055</X>
+                <Y>0.055</Y>
+                <Z>0.055</Z>
+                <W>0.055</W>
+            </LightMultiplier>
+            <Reflectivity>0.06</Reflectivity>
+            <Fresnel>0.25</Fresnel>
+            <ReflectionShadow>0.4</ReflectionShadow>
+            <Gloss>0.4</Gloss>
+            <GlossTextureAdd>0.55</GlossTextureAdd>
+            <SpecularColorFactor>3</SpecularColorFactor>
+        </TransparentMaterial>
   </TransparentMaterials>
 </Definitions>
