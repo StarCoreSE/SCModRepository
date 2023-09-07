@@ -55,7 +55,7 @@ namespace Klime.spawncolorcodedprefab
 
         private int defaultSpawnCount = 250; // Default number of prefabs to spawn
 
-        private ushort netID = 29394;
+        private ushort netID = 29399;
 
         private double minSpawnRadiusFromCenter = 1000; // Minimum spawn distance from the center in meters
         private double minSpawnRadiusFromGrids = 1000;  // Minimum spawn distance from other grids in meters
@@ -90,7 +90,7 @@ namespace Klime.spawncolorcodedprefab
 
         private void OnMessageEntered(string messageText, ref bool sendToOthers)
         {
-            if (!messageText.StartsWith("/spawncover", StringComparison.OrdinalIgnoreCase)) return;
+            if (!messageText.StartsWith("/spawncolorcover", StringComparison.OrdinalIgnoreCase)) return;
             string[] parts = messageText.Split(' ');
 
             if (parts.Length == 1)
@@ -131,7 +131,7 @@ namespace Klime.spawncolorcodedprefab
                 prefabListMessage += "\n" + prefabName;
             }
 
-            prefabListMessage += "\n\nTo spawn a prefab, type '/spawncover [prefabName] [amount]' (e.g., /spawncover EntityCover1 100). Default 250.";
+            prefabListMessage += "\n\nTo spawn a prefab, type '/spawncolorcover [prefabName] [amount]' (e.g., /spawncover EntityCover1 100). Default 250.";
             MyAPIGateway.Utilities.ShowMessage("SpawnCover", prefabListMessage);
         }
 

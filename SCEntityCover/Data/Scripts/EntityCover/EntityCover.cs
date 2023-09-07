@@ -21,7 +21,7 @@ using CollisionLayers = Sandbox.Engine.Physics.MyPhysics.CollisionLayers;
 namespace klime.EntityCover
 {
 
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_BatteryBlock), false, "EntityCover", "EntityCover2", "EntityCoverEveFreighter", "EntityCover3", "EntityCover4")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_BatteryBlock), false, "EntityCover", "EntityCover2", "EntityCoverEveFreighter", "EntityCover3", "EntityCover4", "EntityCover4RED", "EntityCover4BLU")]
     public class EntityCoverGamelogic : MyGameLogicComponent
     {
         // Core
@@ -36,6 +36,8 @@ namespace klime.EntityCover
             { "EntityCoverEveFreighter", new ModelInfo("eveobstacle3.mwm", new Vector3(180, 60, 500)) },
             { "EntityCover3", new ModelInfo("REMlikeblockerLong25kX.mwm", new Vector3(1250, 275, 275)) },
             { "EntityCover4", new ModelInfo("REMlikeblocker1kmplate_purple.mwm", new Vector3(500, 500, 50)) },    //don't forget the entitycomponentdescriptor too dumbass
+            { "EntityCover4BLU", new ModelInfo("REMlikeblocker1kmplate_blue.mwm", new Vector3(500, 500, 50)) },    //don't forget the entitycomponentdescriptor too dumbass
+            { "EntityCover4RED", new ModelInfo("REMlikeblocker1kmplate_red.mwm", new Vector3(500, 500, 50)) },    //don't forget the entitycomponentdescriptor too dumbass
             // Add more entries for additional variants...
         };
 
