@@ -7,7 +7,7 @@
         <TypeId>TransparentMaterialDefinition</TypeId>
         <SubtypeId>Outer</SubtypeId>
       </Id>
-      <AlphaMistingEnable>true</AlphaMistingEnable>
+      <AlphaMistingEnable>false</AlphaMistingEnable>
       <AlphaSaturation>1</AlphaSaturation>
       <CanBeAffectedByOtherLights>false</CanBeAffectedByOtherLights>
       <IgnoreDepth>false</IgnoreDepth>
@@ -28,7 +28,7 @@
         <X>10.1</X>
         <Y>10.5</Y>
         <Z>10.15</Z>
-        <W>100</W>
+        <W>50</W>
       </Color>
       <ColorAdd>
         <X>0</X>
@@ -56,6 +56,5 @@
       <SpecularColorFactor>255</SpecularColorFactor>
       <IsFlareOccluder>true</IsFlareOccluder>
     </TransparentMaterial>
-
-  </TransparentMaterials>
+</TransparentMaterials>
 </Definitions>
