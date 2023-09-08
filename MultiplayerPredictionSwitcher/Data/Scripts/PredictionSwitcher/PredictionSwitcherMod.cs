@@ -7,7 +7,7 @@ using VRage.Game;
 [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
 public class SessionComp : MySessionComponentBase
 {
-    private bool isPredictionDisabled = true;
+    private bool isPredictionDisabled = false;
 
     public override void LoadData()
     {
@@ -51,4 +51,5 @@ public class SessionComp : MySessionComponentBase
             MyAPIGateway.Utilities.MessageEntered -= OnMessageEntered;
         }
     }
+
 }
