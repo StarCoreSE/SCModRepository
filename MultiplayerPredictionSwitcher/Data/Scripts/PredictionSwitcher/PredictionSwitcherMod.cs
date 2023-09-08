@@ -13,6 +13,7 @@ using VRage.Utils;
 public class SessionComp : MySessionComponentBase
 {
     private bool isPredictionDisabled = true;
+    private MyEntity lastControlledEntity = null;
 
     public override void LoadData()
     {
@@ -22,33 +23,29 @@ public class SessionComp : MySessionComponentBase
         }
     }
 
-    private MyEntity lastControlledEntity = null;
-
     public override void UpdateAfterSimulation()
     {
         if (!MyAPIGateway.Utilities.IsDedicated)
         {
             MyEntity controlledEntity = GetControlledGrid();
 
-            if (controlledEntity != null && !controlledEntity.Equals(lastControlledEntity))
+            if (controlledEntity != null)
             {
-                lastControlledEntity = controlledEntity; // Update the last controlled entity
+                lastControlledEntity = controlledEntity;
                 MyCubeGrid controlled = controlledEntity as MyCubeGrid;
 
                 if (controlled != null)
                 {
-                    controlled.ForceDisablePrediction = true;  // Disable prediction here
-                    MyAPIGateway.Utilities.ShowNotification($"You are controlling: {controlledEntity.DisplayName}, IsClientPredicted {controlled.IsClientPredicted}", 2000, MyFontEnum.Red);
+                    controlled.ForceDisablePrediction = isPredictionDisabled;
+                    MyAPIGateway.Utilities.ShowNotification($"You are controlling: {controlledEntity.DisplayName}, ForceDisablePrediction: {isPredictionDisabled}", 2000, MyFontEnum.Red);
                 }
             }
-            else if (controlledEntity == null)
+            else
             {
-                lastControlledEntity = null; // Reset if no entity is being controlled
+                lastControlledEntity = null;
             }
         }
     }
-
-
 
     private MyEntity GetControlledGrid()
     {
@@ -56,14 +53,13 @@ public class SessionComp : MySessionComponentBase
         {
             if (MyAPIGateway.Session == null || MyAPIGateway.Session.Player == null)
             {
-                return null; // Session or player is not initialized, can't proceed.
+                return null;
             }
 
             var controlledEntity = MyAPIGateway.Session.Player.Controller?.ControlledEntity?.Entity;
-
             if (controlledEntity == null)
             {
-                return null; // Controlled entity is not initialized, can't proceed.
+                return null;
             }
 
             if (controlledEntity is IMyCockpit || controlledEntity is IMyRemoteControl)
@@ -73,14 +69,11 @@ public class SessionComp : MySessionComponentBase
         }
         catch (Exception e)
         {
-            // Log the exception, replace with your logging mechanism if different.
             MyLog.Default.WriteLine($"Error in GetControlledGrid: {e}");
         }
 
         return null;
     }
-
-
 
     private void OnMessageEntered(string messageText, ref bool sendToOthers)
     {
