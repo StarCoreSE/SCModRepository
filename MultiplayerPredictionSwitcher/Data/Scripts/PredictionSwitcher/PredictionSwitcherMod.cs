@@ -6,6 +6,8 @@ using VRage.Game;
 using VRage.ModAPI;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
+using System;
+using VRage.Utils;
 
 [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
 public class SessionComp : MySessionComponentBase
@@ -50,15 +52,34 @@ public class SessionComp : MySessionComponentBase
 
     private MyEntity GetControlledGrid()
     {
-        var controlledEntity = MyAPIGateway.Session.Player.Controller?.ControlledEntity?.Entity;
-
-        if (controlledEntity is IMyCockpit || controlledEntity is IMyRemoteControl)
+        try
         {
-            return (controlledEntity as IMyCubeBlock).CubeGrid as MyEntity;
+            if (MyAPIGateway.Session == null || MyAPIGateway.Session.Player == null)
+            {
+                return null; // Session or player is not initialized, can't proceed.
+            }
+
+            var controlledEntity = MyAPIGateway.Session.Player.Controller?.ControlledEntity?.Entity;
+
+            if (controlledEntity == null)
+            {
+                return null; // Controlled entity is not initialized, can't proceed.
+            }
+
+            if (controlledEntity is IMyCockpit || controlledEntity is IMyRemoteControl)
+            {
+                return (controlledEntity as IMyCubeBlock).CubeGrid as MyEntity;
+            }
+        }
+        catch (Exception e)
+        {
+            // Log the exception, replace with your logging mechanism if different.
+            MyLog.Default.WriteLine($"Error in GetControlledGrid: {e}");
         }
 
         return null;
     }
+
 
 
     private void OnMessageEntered(string messageText, ref bool sendToOthers)
