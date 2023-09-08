@@ -38,35 +38,35 @@ namespace PickMe
             {
                 factions.CreateNPCFaction("ADM", "ADMIN", "", "");
                 adminFactionID = factions.TryGetFactionByTag("ADM").FactionId;
-                factions.AddNewNPCToFaction(adminFactionID, "Admin Mascot");
+                //factions.AddNewNPCToFaction(adminFactionID, "Admin Mascot");
                 factions.ChangeAutoAccept(adminFactionID, MyAPIGateway.Session.Factions.TryGetFactionById(adminFactionID).FounderId, true, true);
             }
             if (!factions.FactionNameExists("Out"))
             {
                 factions.CreateNPCFaction("OUT", "Out", "", "");
                 outFactionID = factions.TryGetFactionByTag("OUT").FactionId;
-                factions.AddNewNPCToFaction(outFactionID, "Out Mascot");
+                //factions.AddNewNPCToFaction(outFactionID, "Out Mascot");
                 factions.ChangeAutoAccept(outFactionID, MyAPIGateway.Session.Factions.TryGetFactionById(outFactionID).FounderId, true, true);
             }
             if (!factions.FactionNameExists("Neutral"))
             {
                 factions.CreateNPCFaction("NEU", "Neutral", "", "");
                 neutralFactionID = factions.TryGetFactionByTag("NEU").FactionId;
-                factions.AddNewNPCToFaction(neutralFactionID, "Neutral Mascot");
+                //factions.AddNewNPCToFaction(neutralFactionID, "Neutral Mascot");
                 factions.ChangeAutoAccept(neutralFactionID, MyAPIGateway.Session.Factions.TryGetFactionById(neutralFactionID).FounderId, true, true);
             }
             if (!factions.FactionNameExists("BLUE"))
             {
                 factions.CreateNPCFaction("BLU", "BLUE", "", "");
                 blueFactionID = factions.TryGetFactionByTag("BLU").FactionId;
-                factions.AddNewNPCToFaction(blueFactionID, "Blue Mascot");
+                //factions.AddNewNPCToFaction(blueFactionID, "Blue Mascot");
                 factions.ChangeAutoAccept(blueFactionID, MyAPIGateway.Session.Factions.TryGetFactionById(blueFactionID).FounderId, true, true);
             }
             if (!factions.FactionNameExists("RED_"))
             {
                 factions.CreateNPCFaction("RED", "RED_", "", "");
                 redFactionID = factions.TryGetFactionByTag("RED").FactionId;
-                factions.AddNewNPCToFaction(redFactionID, "Red Mascot");
+                //factions.AddNewNPCToFaction(redFactionID, "Red Mascot");
                 factions.ChangeAutoAccept(redFactionID, MyAPIGateway.Session.Factions.TryGetFactionById(redFactionID).FounderId, true, true);
             }
             foreach(var faction in factions.Factions)
@@ -118,7 +118,7 @@ namespace PickMe
                     }
                 }
             }
-            beligerentIds?.Clear();
+            beligerentIds?.Clear();                      
             if(MyAPIGateway.Session.Factions.GetRelationBetweenFactions(adminFactionID, outFactionID) == MyRelationsBetweenFactions.Enemies)
                 MyAPIGateway.Session.Factions.SendPeaceRequest(outFactionID, adminFactionID);
             if (MyAPIGateway.Session.Factions.GetRelationBetweenFactions(adminFactionID, neutralFactionID) == MyRelationsBetweenFactions.Enemies)
