@@ -5,11 +5,12 @@ using VRage.Game.Components;
 using VRage.Game;
 using VRage.ModAPI;
 using VRage.Game.Entity;
+using VRage.Game.ModAPI;
 
 [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
 public class SessionComp : MySessionComponentBase
 {
-    private bool isPredictionDisabled = false;
+    private bool isPredictionDisabled = true;
 
     public override void LoadData()
     {
@@ -50,20 +51,23 @@ public class SessionComp : MySessionComponentBase
 
     private MyEntity GetControlledGrid()
     {
-        if (MyAPIGateway.Session.Player.Controller?.ControlledEntity?.Entity is IMyCockpit)
+        var controlledEntity = MyAPIGateway.Session.Player.Controller?.ControlledEntity?.Entity;
+
+        if (controlledEntity is IMyCockpit || controlledEntity is IMyRemoteControl)
         {
-            IMyCockpit cockpit = MyAPIGateway.Session.Player.Controller.ControlledEntity.Entity as IMyCockpit;
-            return cockpit.CubeGrid as MyEntity;
+            return (controlledEntity as IMyCubeBlock).CubeGrid as MyEntity;
         }
+
         return null;
     }
+
 
     private void OnMessageEntered(string messageText, ref bool sendToOthers)
     {
         if (messageText.Equals("/toggleprediction"))
         {
             isPredictionDisabled = !isPredictionDisabled;
-            MyAPIGateway.Utilities.ShowNotification($"Prediction disabled: {isPredictionDisabled}", 2000, MyFontEnum.Red);
+            MyAPIGateway.Utilities.ShowNotification($"ForceDisablePrediction: {isPredictionDisabled}", 2000, MyFontEnum.Red);
             sendToOthers = false;
         }
     }
