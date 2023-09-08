@@ -17,7 +17,6 @@ public class SessionComp : MySessionComponentBase
         if (!MyAPIGateway.Utilities.IsDedicated)
         {
             MyAPIGateway.Utilities.MessageEntered += OnMessageEntered;
-            MyAPIGateway.Utilities.ShowNotification("Mod Loaded", 2000, MyFontEnum.Red);
         }
     }
 
@@ -77,7 +76,6 @@ public class SessionComp : MySessionComponentBase
         if (!MyAPIGateway.Utilities.IsDedicated)
         {
             MyAPIGateway.Utilities.MessageEntered -= OnMessageEntered;
-            MyAPIGateway.Utilities.ShowNotification("Mod Unloaded", 2000, MyFontEnum.Red);
         }
     }
 }
