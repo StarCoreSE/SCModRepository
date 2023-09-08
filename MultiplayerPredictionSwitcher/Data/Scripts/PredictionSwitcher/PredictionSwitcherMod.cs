@@ -91,10 +91,17 @@ public class SessionComp : MySessionComponentBase
 
                 if (shouldDrawServerLine && cockpitEntity != null)
                 {
+                    // Calculate the center of the grid
+                    Vector3D gridCenter = (controlledEntity as MyCubeGrid)?.PositionComp.WorldAABB.Center ?? Vector3D.Zero;
+
+                    // Use cockpit's forward direction
                     Vector3D direction = cockpitEntity.WorldMatrix.Forward;
-                    linesToDraw.Add(new LineToDraw(cockpitEntity.WorldMatrix.Translation, direction, DateTime.Now, Color.Red));
+
+                    // Add the line to draw
+                    linesToDraw.Add(new LineToDraw(gridCenter, direction, DateTime.Now, Color.Red));
                 }
             }
+
 
             // Call DrawLines every update
             DrawLines();
@@ -168,8 +175,8 @@ public class SessionComp : MySessionComponentBase
 
     private void DrawLines()
     {
-        float length = 50f;
-        float thickness = 0.5f;
+        float length = 100f;
+        float thickness = 0.25f;
 
         DateTime now = DateTime.Now;
 
