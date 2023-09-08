@@ -1,0 +1,21 @@
+name: "Upload MultiplayerPredictionSwitcher"
+
+on:
+  push:
+    paths:
+      - "MultiplayerPredictionSwitcher/**"
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: AnarkisGaming/workshop@v1
+        with:
+          appID: 244850
+          publishedFileID: 3032417765
+          path: MultiplayerPredictionSwitcher
+          changelog: ${{ github.event.head_commit.message }}              
+        env:
+          STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}
+          STEAM_PASSWORD: ${{ secrets.password }}
