@@ -29,8 +29,9 @@ public class SessionComp : MySessionComponentBase
         {
             MyEntity controlledEntity = GetControlledGrid();
 
-            if (controlledEntity != null)
+            if (controlledEntity != null && !controlledEntity.Equals(lastControlledEntity))
             {
+                // Update the last controlled entity and show notification here to avoid spam.
                 lastControlledEntity = controlledEntity;
                 MyCubeGrid controlled = controlledEntity as MyCubeGrid;
 
@@ -40,12 +41,22 @@ public class SessionComp : MySessionComponentBase
                     MyAPIGateway.Utilities.ShowNotification($"You are controlling: {controlledEntity.DisplayName}, ForceDisablePrediction: {isPredictionDisabled}", 2000, MyFontEnum.Red);
                 }
             }
-            else
+            else if (controlledEntity == null)
             {
                 lastControlledEntity = null;
             }
+            else if (controlledEntity.Equals(lastControlledEntity))
+            {
+                // You're still controlling the same entity; just update the ForceDisablePrediction value.
+                MyCubeGrid controlled = controlledEntity as MyCubeGrid;
+                if (controlled != null)
+                {
+                    controlled.ForceDisablePrediction = isPredictionDisabled;
+                }
+            }
         }
     }
+
 
     private MyEntity GetControlledGrid()
     {
