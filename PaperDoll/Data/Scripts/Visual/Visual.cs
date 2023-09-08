@@ -514,7 +514,7 @@ namespace klime.Visual
                 var fatblock = DelList.Dequeue();
                 fatblock.Close();
                 fatblocksToClose -= 500;
-                DebugShowblockstoRemove();
+                //DebugShowblockstoRemove();
             }
         }
 
@@ -571,7 +571,7 @@ namespace klime.Visual
             {
                 subgrid.grid.RazeBlock(SlimDelQueue.Dequeue());
                 slimblocksToClose -= 500;
-                DebugShowblockstoRemove();
+                //DebugShowblockstoRemove();
             }
         }
 
@@ -991,7 +991,7 @@ namespace klime.Visual
         {
             if (IsInvalidSession()) return;
 
-            HandleHUDUpdates();
+            //HandleHUDUpdates(); //current doesn't display anything but its hooked up
             HandleUserInput();
 
             switch (viewState)
@@ -1167,12 +1167,12 @@ namespace klime.Visual
                 Vector3D toTarget = position - MyAPIGateway.Session.Camera.WorldMatrix.Translation;
                 float fov = MyAPIGateway.Session.Camera.FieldOfViewAngle;
                 var angle = GetAngBetwDeg(toTarget, cameraForward);
-                string bruh = GridG.slimblocksToClose.ToString();
+              //  string bruh = GridG.slimblocksToClose.ToString();
                 var distance = Vector3D.Distance(MyAPIGateway.Session.Camera.WorldMatrix.Translation, position);
 
                 gHud.Visible = true;
                 gHud.Scale = tempScaling - MathHelper.Clamp(distance / 20000, 0, 0.9) + (30 / Math.Max(60, angle * angle * angle));
-                gHud.Message.Append(bruh);
+              //  gHud.Message.Append(bruh);
                 gHud.Origin = new Vector2D(targetHudPos.X, targetHudPos.Y);
                 gHud.Offset = -gHud.GetTextLength() / 2 + new Vector2(0, 0.3f);
             }, "updating HUD element for " + entVis);
