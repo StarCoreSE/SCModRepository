@@ -75,7 +75,8 @@ namespace PickMe
                     faction.Value.Tag != "OUT" &&
                     faction.Value.Tag != "NEU" &&
                     faction.Value.Tag != "BLU" &&
-                    faction.Value.Tag != "RED")
+                    faction.Value.Tag != "RED" &&
+                    faction.Value.Tag != "SPRT") 
                     factions.RemoveFaction(faction.Key);
             }
             adminFactionID = factions.TryGetFactionByTag("ADM").FactionId;
