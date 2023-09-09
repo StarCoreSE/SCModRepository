@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using VRage.Game.Entity;
 using VRage.Utils;
 
-namespace MWI.Thruster
+namespace SC.Framework
 {
     // An example packet extending another packet.
     // Note that it must be ProtoIncluded in PacketBase for it to work.

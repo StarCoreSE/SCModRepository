@@ -13,13 +13,13 @@ using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRage.Utils;
 using VRageMath;
-using MWI.Thruster;
+using SC.Framework;
 
 using System.Linq;
 using Draygo.BlockExtensionsAPI;
 using static VRageRender.MyBillboard;
 
-namespace MWI.Thruster
+namespace SC.Framework
 {
     // This object is always present, from the world load to world unload.
     // NOTE: all clients and server run mod scripts, keep that in mind.
@@ -73,7 +73,7 @@ namespace MWI.Thruster
         public Dictionary<long, float> ThrusterForce = new Dictionary<long, float>(); // block | distance
         public Dictionary<IMyCubeGrid, float> AutoPilotGrids = new Dictionary<IMyCubeGrid, float>(); // block | distance
 
-        public List<MWI_Thruster.MexEmitterHandler_v2> emittersToRemove = new List<MWI_Thruster.MexEmitterHandler_v2>();
+        public List<SC_Thruster.MexEmitterHandler_v2> emittersToRemove = new List<SC_Thruster.MexEmitterHandler_v2>();
         //public Dictionary<string, ParticleSettings> ExistingSetups = new Dictionary<string, ParticleSettings>();
 
         //public Dictionary<string, List<ParticleSettings>> settingCache = new Dictionary<string, List<ParticleSettings>>();
@@ -88,7 +88,7 @@ namespace MWI.Thruster
 
 
         public event Action RemoveEmitter;
-        public void EmitterRemoval(MWI_Thruster.MexEmitterHandler_v2 emitter)
+        public void EmitterRemoval(SC_Thruster.MexEmitterHandler_v2 emitter)
         {
             //MyLog.Default.WriteLineAndConsole("RemoveTrigger");
             emittersToRemove.Remove(emitter);
@@ -142,7 +142,7 @@ namespace MWI.Thruster
 
         private static void InitDefinitions()
         {
-            Instance.DefExtensions.RegisterGameLogic<MWI_Thruster>(MwiThrusterComp, Instance.ModContext);
+            Instance.DefExtensions.RegisterGameLogic<SC_Thruster>(MwiThrusterComp, Instance.ModContext);
         }
         public ThrusterSession()
         {
@@ -371,7 +371,7 @@ namespace MWI.Thruster
             RunEmitterCleanup();
 
             //remmoveEmitter();
-            //var templist = new List<MWI_Thruster.MexEmitterHandler_v2>();
+            //var templist = new List<SC_Thruster.MexEmitterHandler_v2>();
             for (int i = 0; i < emittersToRemove.Count; i++)
             {
                 emittersToRemove[i].RemoveThis();

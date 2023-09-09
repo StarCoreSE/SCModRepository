@@ -5,7 +5,7 @@ using VRage.Game;
 using VRage.Game.ModAPI;
 using VRage.Utils;
 
-namespace MWI.Thruster
+namespace SC.Framework
 {
     /// <summary>
     /// Simple network communication example.

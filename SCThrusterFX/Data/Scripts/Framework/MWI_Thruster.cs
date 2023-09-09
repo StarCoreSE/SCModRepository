@@ -56,12 +56,12 @@ using static VRageRender.MyBillboard;
 
 
 
-namespace MWI.Thruster
+namespace SC.Framework
 {
 
     
 
-    public class MWI_Thruster : MyGameLogicComponent
+    public class SC_Thruster : MyGameLogicComponent
     {
 
         //Add in separate script

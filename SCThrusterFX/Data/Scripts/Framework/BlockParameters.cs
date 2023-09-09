@@ -12,7 +12,7 @@ using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRage.Utils;
 using VRageMath;
-namespace MWI.Thruster
+namespace SC.Framework
 {
     
     public class BlockParameters

@@ -1,7 +1,7 @@
 ﻿using ProtoBuf;
 using Sandbox.ModAPI;
 
-namespace MWI.Thruster 
+namespace SC.Framework 
 {
     // tag numbers in ProtoInclude collide with numbers from ProtoMember in the same class, therefore they must be unique.
     [ProtoInclude(5145, typeof(PacketSimpleExample))]

@@ -11,8 +11,8 @@ using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRage.Utils;
 using VRageMath;
-using MWI.Thruster;
-namespace MWI.Thruster
+using SC.Framework;
+namespace SC.Framework
 {
 
     public class ParticleSettings
@@ -35,7 +35,7 @@ namespace MWI.Thruster
         public string particleName = "Missing Input";
 
         public string particleType = "PARTICLE";
-        public MWI_Thruster.MexEmitterHandler_v2.EmitterType emitterType = MWI_Thruster.MexEmitterHandler_v2.EmitterType.Particle;
+        public SC_Thruster.MexEmitterHandler_v2.EmitterType emitterType = SC_Thruster.MexEmitterHandler_v2.EmitterType.Particle;
         public float cullTimer = 90;
 
         public float ThrustMin=0;
