@@ -18,7 +18,7 @@ namespace Scripts
     {
         private const double CombatRadius = 7500;
         private const double CombatNearEdge = CombatRadius - 1;
-        private const string SphereModel = "\\Models\\Cubes\\OuterShield.mwm";
+        private const string SphereModel = "\\Models\\Cubes\\BounceZoneAlt.mwm";
         private readonly BoundingSphereD _combatNearSphere = new BoundingSphereD(Vector3D.Zero, CombatNearEdge);
         private BoundingSphereD _combatMinSphere = new BoundingSphereD(Vector3D.Zero, CombatRadius);
         private BoundingSphereD _combatMaxSphere = new BoundingSphereD(Vector3D.Zero, CombatRadius + 17500);
