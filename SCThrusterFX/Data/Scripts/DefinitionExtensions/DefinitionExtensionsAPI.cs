@@ -23,7 +23,7 @@ namespace Draygo.BlockExtensionsAPI
 	public class DefinitionExtensionsAPI
 	{
 		//create this class object asap in your mod before loaddata executes. 
-		public const long MODID = 2756894170;
+		public const long MODID = 3033050686;
 		IReadOnlyDictionary<Type, Delegate> _methods;
 		Action m_callback = null;
 		bool m_init = false;

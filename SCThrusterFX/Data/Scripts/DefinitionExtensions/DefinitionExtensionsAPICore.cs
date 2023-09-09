@@ -31,7 +31,7 @@ namespace Draygo.BlockExtensionsAPI
 	[MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
 	public class DefinitionExtensionsAPICore : MySessionComponentBase
 	{
-		public const long MODID = 2756894170;
+		public const long MODID = 3033050686;
 		public const ushort MODMESSAGEID = (ushort)(MODID % ushort.MaxValue);
 		public DataRoot ModProperties = new DataRoot();
 
