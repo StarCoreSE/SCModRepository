@@ -55,11 +55,10 @@ namespace Invalid.spawnbattle
     {
         private Dictionary<string, string> prefabMap = new Dictionary<string, string>
         {
-            { "LamiaAI", "LamiaAI" },
-            { "ValiAI", "ValiAI" },
-            { "RegAI", "RegAI" },
-            { "TessAI", "TessAI" },
-            { "ZenithAI", "ZenithAI" },
+            { "CharyAI", "CharyAI" },
+            { "HermesAI", "HermesAI" },
+            { "LamAI", "LamAI" },
+            { "ZerkAI", "ZerkAI" },
 
             // Add more prefab mappings here.
         };
