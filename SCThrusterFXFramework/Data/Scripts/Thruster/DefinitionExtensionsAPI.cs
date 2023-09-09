@@ -24,7 +24,7 @@ namespace Draygo.BlockExtensionsAPI
 	{
 
 		//create this class object asap in your mod before loaddata executes. 
-		public long MODID = 3033050686;
+		public long MODID = 2756894170;
 
 
 		IReadOnlyDictionary<Type, Delegate> _methods;
@@ -111,7 +111,7 @@ namespace Draygo.BlockExtensionsAPI
 			}
 			catch (Exception ex)
 			{
-				MyLog.Default.WriteLine(@"Error - Below crash is caused by the API mod being the incorrect version. Delete steamapps\workshop\content\244850\3033050686 to force a redownload");
+				MyLog.Default.WriteLine(@"Error - Below crash is caused by the API mod being the incorrect version. Delete steamapps\workshop\content\244850\2756894170 to force a redownload");
 				throw ex;
 			}
 

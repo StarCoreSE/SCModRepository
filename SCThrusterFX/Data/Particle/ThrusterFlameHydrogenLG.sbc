@@ -264,7 +264,7 @@
               <Keys>
                 <Key>
                   <Time>0</Time>
-                  <ValueFloat>20</ValueFloat>
+                  <ValueFloat>10</ValueFloat>
                   <Value2D />
                 </Key>
               </Keys>
@@ -370,7 +370,7 @@
               <Keys>
                 <Key>
                   <Time>0</Time>
-                  <ValueFloat>10</ValueFloat>
+                  <ValueFloat>0</ValueFloat>
                   <Value2D />
                 </Key>
                 <Key>
@@ -697,7 +697,7 @@
               <ValueFloat>0.02</ValueFloat>
             </Property>
             <Property AnimationType="Const" Name="Enabled" Type="Bool">
-              <ValueBool>true</ValueBool>
+              <ValueBool>false</ValueBool>
             </Property>
             <Property AnimationType="Animated" Name="Particles per second" Type="Float">
               <Keys>
