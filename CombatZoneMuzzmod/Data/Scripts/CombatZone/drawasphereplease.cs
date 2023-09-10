@@ -13,81 +13,114 @@ namespace YourModNamespace
     [MySessionComponentDescriptor(MyUpdateOrder.BeforeSimulation | MyUpdateOrder.AfterSimulation)]
     public class BoxDrawing : MySessionComponentBase
     {
-        private const int numberOfBoxes = 10; // Number of boxes in the line
+        private const int NumberOfBoxes = 10;
+        private static readonly Color BoxColor = new Color(255, 0, 0, 128);
+        private static readonly Color BlueBoxColor = new Color(0, 0, 255, 128);
+        private static readonly Color LineColor = Color.Green;
+        private static readonly int[] DistanceMultipliers = { 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7500 };
 
         public override void UpdateAfterSimulation()
         {
-            // Get player's position
-            Vector3D playerPosition = MyAPIGateway.Session.Player.Controller.ControlledEntity.Entity.GetPosition();
-
-            // Define the color of the boxes as red (ARGB format)
-            Color boxColor = new Color(255, 0, 0, 128);
-
-            // Calculate directional vector from player to origin (0,0,0)
-            Vector3D directionToOrigin = Vector3D.Normalize(Vector3D.Zero - playerPosition);
-
-            // Calculate the distance from the player to the origin
+            Vector3D playerPosition = GetPlayerPosition();
+            Vector3D directionToOrigin = CalculateDirectionToOrigin(playerPosition);
             double distanceToOrigin = playerPosition.Length();
+            float boxSpacing = CalculateBoxSpacing(distanceToOrigin);
+            MatrixD rotationMatrix = CalculateRotationMatrix(directionToOrigin);
 
-            // Calculate the spacing between boxes based on distance (adjust this as needed)
-            float boxSpacing = Math.Max((float)(distanceToOrigin / numberOfBoxes), 10f); // Minimum spacing of 10 meters
+            DrawBlueBoxes(distanceToOrigin, directionToOrigin, rotationMatrix);
+            //DrawRedBoxes(playerPosition, directionToOrigin, rotationMatrix, boxSpacing);
+            DrawGreenLine(distanceToOrigin, playerPosition, directionToOrigin);
+        }
 
-            // Calculate the position for the first box to be 10m away in the direction of (0,0,0) from the player
-            Vector3D boxPosition = playerPosition + (directionToOrigin * 10);
+        private Vector3D GetPlayerPosition() => MyAPIGateway.Session.Player.Controller.ControlledEntity.Entity.GetPosition();
 
-            // Define the half-extents of the box (assuming a 5m x 5m x 5m box)
+        private Vector3D CalculateDirectionToOrigin(Vector3D playerPosition) => Vector3D.Normalize(Vector3D.Zero - playerPosition);
+
+        private float CalculateBoxSpacing(double distanceToOrigin) => Math.Max((float)(distanceToOrigin / NumberOfBoxes), 10f);
+
+        private MatrixD CalculateRotationMatrix(Vector3D directionToOrigin) => MatrixD.CreateWorld(Vector3D.Zero, directionToOrigin, Vector3D.Up);
+
+        // Modify this existing method
+        private void DrawBlueBoxes(double distanceToOrigin, Vector3D directionToOrigin, MatrixD rotationMatrix)
+        {
             Vector3 halfExtents = new Vector3(2.5f, 2.5f, 2.5f);
-
-            // Calculate the rotation matrix to align the boxes with the direction to the origin
-            MatrixD rotationMatrix = MatrixD.CreateWorld(Vector3D.Zero, directionToOrigin, Vector3D.Up);
-
-            // Define the color of the blue box
-            Color blueBoxColor = new Color(0, 0, 255, 128);
-
-            // Create BoundingBoxD for the blue box
             BoundingBoxD blueBox = new BoundingBoxD(-halfExtents, halfExtents);
+            Color specialLineColor = new Color(255, 0, 0, 128); // Red color for the special perpendicular line
 
-            // Array to hold the multipliers for distances at which blue walls should appear
-            int[] distanceMultipliers = { 1000, 2000, 3000, 4000, 5000, 6000, 7000, 7500 };
-
-            // Loop to place blue boxes at specific distances
-            foreach (int multiplier in distanceMultipliers)
+            // Separate distance check for the special 7500 unit line
+            if (distanceToOrigin >= 6000 && distanceToOrigin < 7500)
             {
-                // Calculate the position for each blue wall
-                Vector3D blueWallPosition = Vector3D.Zero + (-directionToOrigin * multiplier);
+                Vector3D specialWallPosition = Vector3D.Zero - (directionToOrigin * 7500);
+                DrawBox(blueBox, specialWallPosition, BlueBoxColor, rotationMatrix);
+                DrawPerpendicularLine(specialWallPosition, rotationMatrix, 500, specialLineColor);
+            }
 
-                // Check if the player is more than the specified distance away from the origin
-                if (distanceToOrigin > multiplier)
+            // General distance check for other boxes
+            if (distanceToOrigin <= 7000) return;
+
+            foreach (int multiplier in DistanceMultipliers)
+            {
+                if (distanceToOrigin <= multiplier) continue;
+
+                Vector3D blueWallPosition = Vector3D.Zero - (directionToOrigin * multiplier);
+                DrawBox(blueBox, blueWallPosition, BlueBoxColor, rotationMatrix);
+
+                if (multiplier == 7500)
                 {
-                    // Transform the blue wall box by the player's position and rotation
-                    BoundingBoxD transformedBlueBox = blueBox.TransformFast(rotationMatrix);
-                    transformedBlueBox.Translate(blueWallPosition);
-
-                    // Draw the blue box using MySimpleObjectDraw.DrawTransparentBox
-                    MySimpleObjectDraw.DrawTransparentBox(ref MatrixD.Identity, ref transformedBlueBox, ref blueBoxColor, MySimpleObjectRasterizer.Solid, 1, 0.1f, MyStringId.GetOrCompute("Square"));
+                    continue; // Already drawn above
+                }
+                else
+                {
+                    DrawPerpendicularLine(blueWallPosition, rotationMatrix, 50);
                 }
             }
-            // Loop to draw multiple red boxes in a line
-            for (int i = 0; i < numberOfBoxes; i++)
+        }
+
+
+
+        private void DrawRedBoxes(Vector3D playerPosition, Vector3D directionToOrigin, MatrixD rotationMatrix, float boxSpacing)
+        {
+            Vector3 halfExtents = new Vector3(2.5f, 2.5f, 2.5f);
+            BoundingBoxD redBox = new BoundingBoxD(-halfExtents, halfExtents);
+            Vector3D boxPosition = playerPosition + (directionToOrigin * 10);
+
+            for (int i = 0; i < NumberOfBoxes; i++)
             {
-                // Create BoundingBoxD for the red box
-                BoundingBoxD boundingBox = new BoundingBoxD(-halfExtents, halfExtents);
-
-                // Transform the red box by the player's position and rotation
-                boundingBox = boundingBox.TransformFast(rotationMatrix);
-                boundingBox.Translate(boxPosition);
-
-                // Draw the red box using MySimpleObjectDraw.DrawTransparentBox
-                MySimpleObjectDraw.DrawTransparentBox(ref MatrixD.Identity, ref boundingBox, ref boxColor, MySimpleObjectRasterizer.Solid, 1, 0.1f, MyStringId.GetOrCompute("Square"));
-
-                // Move the red box position along the line
+                DrawBox(redBox, boxPosition, BoxColor, rotationMatrix);
                 boxPosition += directionToOrigin * boxSpacing;
             }
         }
 
-        protected override void UnloadData()
+        private void DrawBox(BoundingBoxD box, Vector3D position, Color color, MatrixD rotationMatrix)
         {
+            BoundingBoxD transformedBox = box.TransformFast(rotationMatrix);
+            transformedBox.Translate(position);
+            MySimpleObjectDraw.DrawTransparentBox(ref MatrixD.Identity, ref transformedBox, ref color, MySimpleObjectRasterizer.Solid, 1, 0.1f, MyStringId.GetOrCompute("Square"));
+        }
+
+        private void DrawGreenLine(double distanceToOrigin, Vector3D playerPosition, Vector3D directionToOrigin)
+        {
+            
+            if (distanceToOrigin <= 7000) return;
+
+            Vector4 lineColorVector4 = LineColor.ToVector4();
+            Vector3D lineEndPoint = playerPosition + (directionToOrigin * 200);
+            MySimpleObjectDraw.DrawLine(playerPosition, lineEndPoint, MyStringId.GetOrCompute("Square"), ref lineColorVector4, 1f);
+
 
         }
+
+
+        private void DrawPerpendicularLine(Vector3D boxPosition, MatrixD rotationMatrix, double lineLength = 50, Color? color = null)
+        {
+
+            Vector3D perpendicularDir = Vector3D.CalculatePerpendicularVector(rotationMatrix.Forward);
+            Vector3D lineStart = boxPosition - (perpendicularDir * (lineLength / 2));
+            Vector3D lineEnd = boxPosition + (perpendicularDir * (lineLength / 2));
+            Vector4 lineColorVector4 = (color ?? LineColor).ToVector4();
+            MySimpleObjectDraw.DrawLine(lineStart, lineEnd, MyStringId.GetOrCompute("Square"), ref lineColorVector4, 1f);
+        }
+
+        protected override void UnloadData() { }
     }
 }
