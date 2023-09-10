@@ -21,16 +21,27 @@ namespace YourModNamespace
 
         public override void UpdateAfterSimulation()
         {
-            Vector3D playerPosition = GetPlayerPosition();
-            Vector3D directionToOrigin = CalculateDirectionToOrigin(playerPosition);
-            double distanceToOrigin = playerPosition.Length();
+            Vector3D? playerPosition = GetPlayerPosition();
+            if (!playerPosition.HasValue)
+            {
+                return;  // If playerPosition is null, exit the method
+            }
+
+            Vector3D directionToOrigin = CalculateDirectionToOrigin(playerPosition.Value);
+            double distanceToOrigin = playerPosition.Value.Length();
             float boxSpacing = CalculateBoxSpacing(distanceToOrigin);
             MatrixD rotationMatrix = CalculateRotationMatrix(directionToOrigin);
 
+            if (rotationMatrix == null)
+            {
+                return; // If rotationMatrix is null, exit the method
+            }
+
             DrawBlueBoxes(distanceToOrigin, directionToOrigin, rotationMatrix);
-            //DrawRedBoxes(playerPosition, directionToOrigin, rotationMatrix, boxSpacing);
-            DrawGreenLine(distanceToOrigin, playerPosition, directionToOrigin);
+            // DrawRedBoxes(playerPosition.Value, directionToOrigin, rotationMatrix.Value, boxSpacing);
+            DrawGreenLine(distanceToOrigin, playerPosition.Value, directionToOrigin);
         }
+
 
         private Vector3D GetPlayerPosition() => MyAPIGateway.Session.Player.Controller.ControlledEntity.Entity.GetPosition();
 
