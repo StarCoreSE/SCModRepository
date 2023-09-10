@@ -43,7 +43,17 @@ namespace YourModNamespace
         }
 
 
-        private Vector3D GetPlayerPosition() => MyAPIGateway.Session.Player.Controller.ControlledEntity.Entity.GetPosition();
+        private Vector3D? GetPlayerPosition()
+        {
+            var session = MyAPIGateway.Session?.Player?.Controller?.ControlledEntity?.Entity;
+            if (session == null)
+            {
+                MyLog.Default.WriteLine("Null object encountered in GetPlayerPosition");
+                return null;
+            }
+            return session.GetPosition();
+        }
+
 
         private Vector3D CalculateDirectionToOrigin(Vector3D playerPosition) => Vector3D.Normalize(Vector3D.Zero - playerPosition);
 
@@ -54,6 +64,7 @@ namespace YourModNamespace
         // Modify this existing method
         private void DrawBlueBoxes(double distanceToOrigin, Vector3D directionToOrigin, MatrixD rotationMatrix)
         {
+
             Vector3 halfExtents = new Vector3(2.5f, 2.5f, 2.5f);
             BoundingBoxD blueBox = new BoundingBoxD(-halfExtents, halfExtents);
             Color specialLineColor = new Color(255, 0, 0, 128); // Red color for the special perpendicular line
