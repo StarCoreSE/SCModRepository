@@ -157,8 +157,8 @@
       <StrictSearch>true</StrictSearch>
       <ItemIds>
 
-        <!--FUCK-->
-        <string>SubgridBase</string>
+        <!--FUCK
+        <string>SubgridBase</string>-->
 
         <!--BAR-->
         <string>SELtdLargeNanobotBuildAndRepairSystem</string>
