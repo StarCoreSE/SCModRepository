@@ -41,6 +41,9 @@ namespace YourModNamespace
             // Calculate the rotation matrix to align the boxes with the direction to the origin
             MatrixD rotationMatrix = MatrixD.CreateWorld(Vector3D.Zero, directionToOrigin, Vector3D.Up);
 
+            // Calculate the position for the blue wall
+            Vector3D blueWallPosition = Vector3D.Zero + (directionToOrigin * 1000);
+
             // Check if the player is more than 1000m away from the origin
             if (distanceToOrigin > 1000)
             {
@@ -50,13 +53,12 @@ namespace YourModNamespace
                 // Create BoundingBoxD for the blue wall
                 BoundingBoxD wallBox = new BoundingBoxD(-halfExtents, halfExtents);
 
-                // Calculate the size and position of the blue wall
+                // Calculate the size of the blue wall
                 float wallSize = numberOfBoxes * boxSpacing;
-                Vector3D wallCenter = boxPosition - (directionToOrigin * wallSize * 0.5);
 
                 // Transform the blue wall by the player's position and rotation
                 wallBox = wallBox.TransformFast(rotationMatrix);
-                wallBox.Translate(wallCenter);
+                wallBox.Translate(blueWallPosition);
 
                 // Draw the blue wall using MySimpleObjectDraw.DrawTransparentBox
                 MySimpleObjectDraw.DrawTransparentBox(ref MatrixD.Identity, ref wallBox, ref wallColor, MySimpleObjectRasterizer.Solid, 1, 0.1f, MyStringId.GetOrCompute("Square"));
