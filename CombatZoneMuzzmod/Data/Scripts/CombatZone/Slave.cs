@@ -168,7 +168,7 @@ namespace Scripts
         {
             var ent = new MyEntity();
             var model = $"{ModContext.ModPath}{SphereModel}";
-            ent.Init(null, model, null, null);
+            //ent.Init(null, model, null, null);
             ent.Render.CastShadows = false;
             ent.IsPreview = true;
             ent.Save = false;
