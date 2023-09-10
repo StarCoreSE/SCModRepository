@@ -70,7 +70,7 @@ namespace YourModNamespace
             Color specialLineColor = new Color(255, 0, 0, 128); // Red color for the special perpendicular line
 
             // Separate distance check for the special 7500 unit line
-            if (distanceToOrigin >= 6000 && distanceToOrigin < 7500)
+            if (distanceToOrigin >= 6000 && distanceToOrigin < 10000)
             {
                 Vector3D specialWallPosition = Vector3D.Zero - (directionToOrigin * 7500);
                 DrawBox(blueBox, specialWallPosition, BlueBoxColor, rotationMatrix);
@@ -87,7 +87,7 @@ namespace YourModNamespace
                 Vector3D blueWallPosition = Vector3D.Zero - (directionToOrigin * multiplier);
                 DrawBox(blueBox, blueWallPosition, BlueBoxColor, rotationMatrix);
 
-                if (multiplier == 7500)
+                if (multiplier == 10000)
                 {
                     continue; // Already drawn above
                 }
@@ -122,15 +122,19 @@ namespace YourModNamespace
 
         private void DrawGreenLine(double distanceToOrigin, Vector3D playerPosition, Vector3D directionToOrigin)
         {
-            
             if (distanceToOrigin <= 7000) return;
 
-            Vector4 lineColorVector4 = LineColor.ToVector4();
+            Color lineColor = LineColor; // Default to Green
+            if (distanceToOrigin > 7500)
+            {
+                lineColor = Color.Red;  // Change color to Red if the distance is greater than 7500
+            }
+            Vector4 lineColorVector4 = lineColor.ToVector4();
+
             Vector3D lineEndPoint = playerPosition + (directionToOrigin * 200);
             MySimpleObjectDraw.DrawLine(playerPosition, lineEndPoint, MyStringId.GetOrCompute("Square"), ref lineColorVector4, 1f);
-
-
         }
+
 
 
         private void DrawPerpendicularLine(Vector3D boxPosition, MatrixD rotationMatrix, double lineLength = 50, Color? color = null)
