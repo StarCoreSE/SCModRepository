@@ -6,39 +6,78 @@ using VRage.ModAPI;
 using VRage.Game;
 using Sandbox.ModAPI.Ingame;
 using VRage.Game.Components;
-using VRage.Render.Scene;
 using VRage.Utils;
 
-namespace invalid.drawthefuckingsphereplease
+namespace YourModNamespace
 {
     [MySessionComponentDescriptor(MyUpdateOrder.BeforeSimulation | MyUpdateOrder.AfterSimulation)]
-    public class SphereDrawing : MySessionComponentBase
+    public class BoxDrawing : MySessionComponentBase
     {
+        private const int numberOfBoxes = 10; // Number of boxes in the line
+
         public override void UpdateAfterSimulation()
         {
             // Get player's position
-            Vector3D playerPosition = MyAPIGateway.Session.Player.GetPosition();
+            Vector3D playerPosition = MyAPIGateway.Session.Player.Controller.ControlledEntity.Entity.GetPosition();
 
-            // Define the color of the box as red (ARGB format)
+            // Define the color of the boxes as red (ARGB format)
             Color boxColor = new Color(255, 0, 0, 128);
 
             // Calculate directional vector from player to origin (0,0,0)
             Vector3D directionToOrigin = Vector3D.Normalize(Vector3D.Zero - playerPosition);
 
-            // Calculate the position for the box at 100m distance *toward* (0,0,0) from the player
-            Vector3D boxCenter = playerPosition + (directionToOrigin * -100);
+            // Calculate the distance from the player to the origin
+            double distanceToOrigin = playerPosition.Length();
 
-            // Define the half-extents of the box
-            Vector3 halfExtents = new Vector3(2.5f);
+            // Calculate the spacing between boxes based on distance (adjust this as needed)
+            float boxSpacing = Math.Max((float)(distanceToOrigin / numberOfBoxes), 10f); // Minimum spacing of 10 meters
 
-            // Create BoundingBoxD for the box
-            BoundingBoxD boundingBox = new BoundingBoxD(boxCenter - halfExtents, boxCenter + halfExtents);
+            // Calculate the position for the first box to be 10m away in the direction of (0,0,0) from the player
+            Vector3D boxPosition = playerPosition + (directionToOrigin * 10);
 
-            // Create transformation matrix for the box
-            MatrixD boxWorldMatrix = MatrixD.CreateWorld(boxCenter);
+            // Define the half-extents of the box (assuming a 5m x 5m x 5m box)
+            Vector3 halfExtents = new Vector3(2.5f, 2.5f, 2.5f);
 
-            // Draw the box
-            MySimpleObjectDraw.DrawTransparentBox(ref boxWorldMatrix, ref boundingBox, ref boxColor, MySimpleObjectRasterizer.Solid, 1, 0.1f, MyStringId.GetOrCompute("Square"));
+            // Calculate the rotation matrix to align the boxes with the direction to the origin
+            MatrixD rotationMatrix = MatrixD.CreateWorld(Vector3D.Zero, directionToOrigin, Vector3D.Up);
+
+            // Check if the player is more than 1000m away from the origin
+            if (distanceToOrigin > 1000)
+            {
+                // Create a "wall" of blue boxes behind the player
+                Color wallColor = new Color(0, 0, 255, 128);
+
+                // Create BoundingBoxD for the blue wall
+                BoundingBoxD wallBox = new BoundingBoxD(-halfExtents, halfExtents);
+
+                // Calculate the size and position of the blue wall
+                float wallSize = numberOfBoxes * boxSpacing;
+                Vector3D wallCenter = boxPosition - (directionToOrigin * wallSize * 0.5);
+
+                // Transform the blue wall by the player's position and rotation
+                wallBox = wallBox.TransformFast(rotationMatrix);
+                wallBox.Translate(wallCenter);
+
+                // Draw the blue wall using MySimpleObjectDraw.DrawTransparentBox
+                MySimpleObjectDraw.DrawTransparentBox(ref MatrixD.Identity, ref wallBox, ref wallColor, MySimpleObjectRasterizer.Solid, 1, 0.1f, MyStringId.GetOrCompute("Square"));
+            }
+
+            // Loop to draw multiple red boxes in a line
+            for (int i = 0; i < numberOfBoxes; i++)
+            {
+                // Create BoundingBoxD for the red box
+                BoundingBoxD boundingBox = new BoundingBoxD(-halfExtents, halfExtents);
+
+                // Transform the red box by the player's position and rotation
+                boundingBox = boundingBox.TransformFast(rotationMatrix);
+                boundingBox.Translate(boxPosition);
+
+                // Draw the red box using MySimpleObjectDraw.DrawTransparentBox
+                MySimpleObjectDraw.DrawTransparentBox(ref MatrixD.Identity, ref boundingBox, ref boxColor, MySimpleObjectRasterizer.Solid, 1, 0.1f, MyStringId.GetOrCompute("Square"));
+
+                // Move the red box position along the line
+                boxPosition += directionToOrigin * boxSpacing;
+            }
         }
 
         protected override void UnloadData()
