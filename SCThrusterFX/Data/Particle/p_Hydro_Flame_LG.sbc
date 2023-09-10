@@ -264,7 +264,7 @@
               <Keys>
                 <Key>
                   <Time>0</Time>
-                  <ValueFloat>20</ValueFloat>
+                  <ValueFloat>10</ValueFloat>
                   <Value2D />
                 </Key>
               </Keys>
@@ -367,18 +367,7 @@
               </Keys>
             </Property>
             <Property AnimationType="Animated" Name="Particles per frame" Type="Float">
-              <Keys>
-                <Key>
-                  <Time>0</Time>
-                  <ValueFloat>10</ValueFloat>
-                  <Value2D />
-                </Key>
-                <Key>
-                  <Time>0.01</Time>
-                  <ValueFloat>0</ValueFloat>
-                  <Value2D />
-                </Key>
-              </Keys>
+              <Keys />
             </Property>
             <Property AnimationType="Const" Name="Camera bias" Type="Float">
               <ValueFloat>0</ValueFloat>
