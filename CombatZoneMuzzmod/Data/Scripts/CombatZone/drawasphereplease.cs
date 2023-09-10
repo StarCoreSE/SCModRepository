@@ -6,33 +6,39 @@ using VRage.ModAPI;
 using VRage.Game;
 using Sandbox.ModAPI.Ingame;
 using VRage.Game.Components;
+using VRage.Render.Scene;
+using VRage.Utils;
 
 namespace invalid.drawthefuckingsphereplease
 {
-
     [MySessionComponentDescriptor(MyUpdateOrder.BeforeSimulation | MyUpdateOrder.AfterSimulation)]
     public class SphereDrawing : MySessionComponentBase
     {
         public override void UpdateAfterSimulation()
         {
-            // executed every tick, 60 times a second, after physics simulation and only if game is not paused.
+            // Get player's position
+            Vector3D playerPosition = MyAPIGateway.Session.Player.GetPosition();
 
-            // Define the sphere center
-            Vector3D sphereCenter = new Vector3D(0, 0, 0);
+            // Define the color of the box as red (ARGB format)
+            Color boxColor = new Color(255, 0, 0, 128);
 
-            // Define the sphere color as red (ARGB format)
-            Color sphereColor = new Color(255, 0, 0, 128); // A=255, R=0, G=0, B=128
+            // Calculate directional vector from player to origin (0,0,0)
+            Vector3D directionToOrigin = Vector3D.Normalize(Vector3D.Zero - playerPosition);
 
-            // Define the sphere radius as 10m
-            float sphereRadius = 10.0f;
+            // Calculate the position for the box at 100m distance *toward* (0,0,0) from the player
+            Vector3D boxCenter = playerPosition + (directionToOrigin * -100);
 
-            // Define the sphere transformation matrix
-            MatrixD worldMatrix = MatrixD.CreateWorld(sphereCenter);
+            // Define the half-extents of the box
+            Vector3 halfExtents = new Vector3(2.5f);
 
-            // Draw the transparent sphere
-            MySimpleObjectDraw.DrawTransparentSphere(ref worldMatrix, sphereRadius, ref sphereColor, MySimpleObjectRasterizer.SolidAndWireframe, 16);
+            // Create BoundingBoxD for the box
+            BoundingBoxD boundingBox = new BoundingBoxD(boxCenter - halfExtents, boxCenter + halfExtents);
 
-            //MyAPIGateway.Utilities.ShowNotification("HELLO???");
+            // Create transformation matrix for the box
+            MatrixD boxWorldMatrix = MatrixD.CreateWorld(boxCenter);
+
+            // Draw the box
+            MySimpleObjectDraw.DrawTransparentBox(ref boxWorldMatrix, ref boundingBox, ref boxColor, MySimpleObjectRasterizer.Solid, 1, 0.1f, MyStringId.GetOrCompute("Square"));
         }
 
         protected override void UnloadData()
