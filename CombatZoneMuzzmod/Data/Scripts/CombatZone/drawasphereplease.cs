@@ -41,29 +41,32 @@ namespace YourModNamespace
             // Calculate the rotation matrix to align the boxes with the direction to the origin
             MatrixD rotationMatrix = MatrixD.CreateWorld(Vector3D.Zero, directionToOrigin, Vector3D.Up);
 
-            // Calculate the position for the blue wall
-            Vector3D blueWallPosition = Vector3D.Zero + (directionToOrigin * 1000);
+            // Define the color of the blue box
+            Color blueBoxColor = new Color(0, 0, 255, 128);
 
-            // Check if the player is more than 1000m away from the origin
-            if (distanceToOrigin > 1000)
+            // Create BoundingBoxD for the blue box
+            BoundingBoxD blueBox = new BoundingBoxD(-halfExtents, halfExtents);
+
+            // Array to hold the multipliers for distances at which blue walls should appear
+            int[] distanceMultipliers = { 1000, 2000, 3000, 4000, 5000, 6000, 7000, 7500 };
+
+            // Loop to place blue boxes at specific distances
+            foreach (int multiplier in distanceMultipliers)
             {
-                // Create a "wall" of blue boxes behind the player
-                Color wallColor = new Color(0, 0, 255, 128);
+                // Calculate the position for each blue wall
+                Vector3D blueWallPosition = Vector3D.Zero + (-directionToOrigin * multiplier);
 
-                // Create BoundingBoxD for the blue wall
-                BoundingBoxD wallBox = new BoundingBoxD(-halfExtents, halfExtents);
+                // Check if the player is more than the specified distance away from the origin
+                if (distanceToOrigin > multiplier)
+                {
+                    // Transform the blue wall box by the player's position and rotation
+                    BoundingBoxD transformedBlueBox = blueBox.TransformFast(rotationMatrix);
+                    transformedBlueBox.Translate(blueWallPosition);
 
-                // Calculate the size of the blue wall
-                float wallSize = numberOfBoxes * boxSpacing;
-
-                // Transform the blue wall by the player's position and rotation
-                wallBox = wallBox.TransformFast(rotationMatrix);
-                wallBox.Translate(blueWallPosition);
-
-                // Draw the blue wall using MySimpleObjectDraw.DrawTransparentBox
-                MySimpleObjectDraw.DrawTransparentBox(ref MatrixD.Identity, ref wallBox, ref wallColor, MySimpleObjectRasterizer.Solid, 1, 0.1f, MyStringId.GetOrCompute("Square"));
+                    // Draw the blue box using MySimpleObjectDraw.DrawTransparentBox
+                    MySimpleObjectDraw.DrawTransparentBox(ref MatrixD.Identity, ref transformedBlueBox, ref blueBoxColor, MySimpleObjectRasterizer.Solid, 1, 0.1f, MyStringId.GetOrCompute("Square"));
+                }
             }
-
             // Loop to draw multiple red boxes in a line
             for (int i = 0; i < numberOfBoxes; i++)
             {
