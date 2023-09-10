@@ -1466,7 +1466,85 @@
             </ModExtensions>
   </Definition>
 
-<Definition xsi:type="MyObjectBuilder_ThrustDefinition"><!-- AQD_SG_HydroThrusterS_Armored -->
+  <Definition xsi:type="MyObjectBuilder_ThrustDefinition">
+    <!-- 5x5hydro -->
+    <Id>
+      <TypeId>Thrust</TypeId>
+      <SubtypeId>HugeHydrogenThruster</SubtypeId>
+    </Id>
+    <!-- Normal Keen Properties 
+    ...
+    -->
+    <ModExtensions>
+      <ModComponents>
+        <GameLogicComponent Name="MwiComponent" />
+      </ModComponents>
+      <Group Name="ThrusterCompData">
+
+        <Text Name="ID" Value= "HugeHydrogenThruster"/>
+        <!--REQUIRED! No specific value required Debugging  -->
+        <Boolean Name="hideVanillaFlame" Value="true" />
+        <!-- Hide Vanilla Flame-->
+        <Decimal Name="ThrustRateGain" Value="0.12" />
+        <Decimal Name="ThrustRateLoss" Value="0.3" />
+        <Boolean Name="UseEmissive" Value="false" />
+        <!-- Enable heatup/emissive material effect, off = more performant -->
+
+        <Text Name="EmissiveMaterial" Value="heatup" />
+        <!-- custom material for emissive that react to thrust -->
+        <Decimal Name="EmissiveRateGain" Value="0.005" />
+        <Decimal Name="EmissiveRateLoss" Value="0.01" />
+        <Decimal Name="CullDist" Value="1500" />
+        <!-- not implemented|Script Culling Distance. At this distance the effects will be culled/disabled -->
+
+        <Text Name="EmitterSetup" Value="
+                    You can add comments like this and that it ends with -> ;
+                    
+                    Particle : p_Hydro_Flame_LG;
+                    Type: SPRITE;
+                    AtmoOnly: FALSE ;
+                    ThrustMin : 0.01;
+                    ThrustMax : 1;
+                    Size: 1.2;
+                    Offset: 5;
+                    OffsetScaling: 5;
+                    VelocityScalingFrom: -1;
+                    VelocityScalingTo: 2;
+                    Dummies : none;
+                    
+                    =
+                    Particle : p_Hydro_Smoke_LG_slow_v2;
+                    Type: PARTICLE;
+                    AtmoOnly: TRUE ;
+                    ThrustMin : 0.05;
+                    ThrustMax : 0.35;
+                    Size : 1;
+                    Offset : 0.5;                    
+                    VelocityScalingFrom: -1;
+                    VelocityScalingTo: 2;
+                    Dummies : none;
+                    =
+                    Particle : p_Hydro_Smoke_SG_v2;
+                    Type: PARTICLE;
+                    AtmoOnly: TRUE ;
+                    ThrustMin : 0.35;
+                    ThrustMax : 1.0;
+                    Size : 1;
+                    Offset : 0;                     
+                    VelocityScalingFrom: 0.5;
+                    VelocityScalingTo: 1;
+                    Dummies : none;
+                    
+                                       
+                    "/>
+
+
+      </Group>
+    </ModExtensions>
+  </Definition>
+
+
+  <Definition xsi:type="MyObjectBuilder_ThrustDefinition"><!-- AQD_SG_HydroThrusterS_Armored -->
     <Id>
       <TypeId>Thrust</TypeId>
       <SubtypeId>AQD_SG_HydroThrusterS_Armored</SubtypeId>
