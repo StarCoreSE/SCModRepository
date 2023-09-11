@@ -1,2 +1,0 @@
-Name,X,Y,Z,Radius
-Fred,0,0,0,50000
