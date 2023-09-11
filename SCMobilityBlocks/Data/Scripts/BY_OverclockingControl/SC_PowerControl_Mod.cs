@@ -17,7 +17,7 @@ namespace StarCore.PowerControl
     using static BuYanMod.Utils.Utils;
     using System.Runtime.InteropServices;
 
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_MyProgrammableBlock), false, "SC_PowerControlSystem_L", "SC_PowerControlSystem_S")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "SC_PowerControlSystem_L", "SC_PowerControlSystem_S")]
     public class OverclockingControlBlock : MyGameLogicComponent
     {
         [ProtoContract]
@@ -33,7 +33,7 @@ namespace StarCore.PowerControl
         private readonly Guid GUID = new Guid("f297034ec68e4af0948f3a70f108339c");
         private const string sID = "SC_PowerControlSystem";
         private static List<IMySlimBlock> GridBlocks = new List<IMySlimBlock>();
-        protected IMyProgrammableBlock Block => Entity as IMyProgrammableBlock;
+        protected IMyCollector Block => Entity as IMyCollector;
         private static bool controlIsCreated = false;
         private static bool ThreadLock = false;
 
@@ -152,7 +152,7 @@ namespace StarCore.PowerControl
         private void IsEnable()
         {
             List<IMySlimBlock> blocks = new List<IMySlimBlock>();
-            List<IMyProgrammableBlock> Pbs = new List<IMyProgrammableBlock>();
+            List<IMyCollector> Pbs = new List<IMyCollector>();
             Block.CubeGrid.GetBlocks(blocks, (b) => {
                 if (b.BlockDefinition.Id.SubtypeName.Contains(sID)) return true;
                 return false;
@@ -164,7 +164,7 @@ namespace StarCore.PowerControl
                 int a = 0;
                 foreach (IMySlimBlock block in blocks)
                 {
-                    IMyProgrammableBlock b = (IMyProgrammableBlock)block.FatBlock;
+                    IMyCollector b = (IMyCollector)block.FatBlock;
                     if (b.Enabled)
                     {
                         UpdateData();
@@ -228,11 +228,11 @@ namespace StarCore.PowerControl
         {
             if (controlIsCreated) return;
 
-            TerminalRevise.CreateSeparator<IMyProgrammableBlock>("A-", "Test", BlockConfirm, BlockConfirm);
-            TerminalRevise.CreateLabel<IMyProgrammableBlock>("BY-", "Label-Overclock Device", "Downclock Settings", BlockConfirm, BlockConfirm);
+            TerminalRevise.CreateSeparator<IMyCollector>("A-", "Test", BlockConfirm, BlockConfirm);
+            TerminalRevise.CreateLabel<IMyCollector>("BY-", "Label-Overclock Device", "Downclock Settings", BlockConfirm, BlockConfirm);
 
 
-            TerminalRevise.CreateSlider<IMyProgrammableBlock>("BY-", "Slider-Thrust", "Thrust Downclock", BlockConfirm, BlockConfirm, (Me) => {
+            TerminalRevise.CreateSlider<IMyCollector>("BY-", "Slider-Thrust", "Thrust Downclock", BlockConfirm, BlockConfirm, (Me) => {
                 var logic = GetTerminal(Me);
                 if (logic.Item1) return logic.Item2.Thrust;
                 return 1;
