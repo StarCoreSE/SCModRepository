@@ -57,7 +57,7 @@ namespace Invalid.spawngencover
 
             // Place EntityCover block at the end of each completed "length"
             //AddEntityCoverBlock("EntityCoverFractal", origin + length * direction);     DO NOT DO THIS
-            AddEntityCoverBlock("EntityCover", origin + length * direction);
+            AddEntityCoverBlock("EntityCoverColor", origin + length * direction);
 
 
             Vector3I[] newDirections =

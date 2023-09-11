@@ -2,9 +2,9 @@
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <CubeBlocks>
-    <Definition xsi:type="MyObjectBuilder_ProgrammableBlockDefinition">
+    <Definition xsi:type="MyObjectBuilder_PoweredCargoContainerDefinition">
       <Id>
-        <TypeId>MyProgrammableBlock</TypeId>
+        <TypeId>Collector</TypeId>
         <SubtypeId>SC_PowerControlSystem_L</SubtypeId>
       </Id>
       <Public>true</Public>
@@ -51,9 +51,9 @@
       <PCU>200</PCU>
       <IsAirTight>false</IsAirTight>
     </Definition>
-    <Definition xsi:type="MyObjectBuilder_ProgrammableBlockDefinition">
+    <Definition xsi:type="MyObjectBuilder_PoweredCargoContainerDefinition">
       <Id>
-        <TypeId>MyProgrammableBlock</TypeId>
+        <TypeId>Collector</TypeId>
         <SubtypeId>SC_PowerControlSystem_S</SubtypeId>
       </Id>
       <Public>true</Public>

@@ -116,7 +116,6 @@ namespace klime.Visual
             gridMatrixBackground = renderMatrix;
 
 
-
             AddBillboard(Color.Lime * 0.75f, hateVector, left, up, tempBillboardScaling, BlendTypeEnum.SDR);
             AddBillboard(Color.Red * 0.5f, greaterPainMatrix.Translation -= Vector3D.TransformNormal(relTrans, clonedWorldMatrix), left, up, tempBillboardScaling, BlendTypeEnum.AdditiveTop);
             AddBillboard(Color.DodgerBlue * 0.5f, painMatrix.Translation -= Vector3D.TransformNormal(relTrans, clonedWorldMatrix), left, up, tempBillboardScaling, BlendTypeEnum.AdditiveTop);
@@ -130,74 +129,97 @@ namespace klime.Visual
 
         public void DoRescale()
         {
-            var volume = grid.PositionComp.WorldVolume;
+            // Pre-calculate values that are used multiple times
+            var worldVolume = grid.PositionComp.WorldVolume;
+            var worldMatrixRef = grid.PositionComp.WorldMatrixRef;
+            var worldRadius = worldVolume.Radius;
+
+            // Camera-related calculations
             var camera = MyAPIGateway.Session.Camera;
             var newFov = camera.FovWithZoom;
-            var aspectRatio = camera.ViewportSize.X / camera.ViewportSize.Y;
-
             var fov = Math.Tan(newFov * 0.5);
             var scaleFov = 0.1 * fov;
-            var scaleFov2 = 0.2 * fov;
 
-            double gridRadius = grid.PositionComp.WorldVolume.Radius;
-            float K = 1.35f;
-            float hudscale = (float)(K / gridRadius);
+            // HUD Scale
+            const float K = 1.35f;
+            float hudScale = (float)(K / worldRadius);
+            hudScale = MathHelper.Clamp(hudScale, 0.0001f, 0.05f);
 
-            hudscale = MathHelper.Clamp(hudscale, 0.0001f, 0.05f);
+            // Scale calculation
+            var minScale = worldRadius > 150 ? 0.0001f : 0.0005f;
+            var scale = MathHelper.Clamp((float)(scaleFov * (hudScale * 0.23f)), minScale, 0.0008f);
 
-            var scale = MathHelper.Clamp((float)(scaleFov * (hudscale * 0.23f)), gridRadius > 150? 0.0001f:0.0005f, 0.0008f);
+            // Position and Matrix Operations
+            var modifiedCenter = Vector3D.Transform(GridBoxCenter, worldMatrixRef);
+            controlMatrix *= MatrixD.CreateTranslation(-modifiedCenter) * worldMatrixRef;
 
+            var localCenter = new Vector3D(worldVolume.Center);
+            var trueCenter = Vector3D.Transform(localCenter, grid.WorldMatrix); // not used?
 
-           // MyAPIGateway.Utilities.ShowNotification($"Scalar:{hudscale}", 60, MyFontEnum.Red);
-           // MyAPIGateway.Utilities.ShowNotification($"Scale:{scale}", 60, MyFontEnum.Red);
-            // GridBoxCenter = grid.PositionComp.LocalVolume.Center;
-
-            var modifiedCenter = Vector3D.Transform(GridBoxCenter, grid.PositionComp.WorldMatrixRef);
-            controlMatrix *= MatrixD.CreateTranslation(-modifiedCenter) * grid.PositionComp.WorldMatrixRef;
-            var localCenter = new Vector3D(grid.PositionComp.WorldVolume.Center);
-            var trueCenter = Vector3D.Transform(localCenter, grid.WorldMatrix);
+            // Scaling and Translation
             grid.PositionComp.Scale = scale;
             relTrans = Vector3D.TransformNormal(GridBoxCenter, MatrixD.Transpose(grid.WorldMatrix)) * scale;
-
             GridBoxCenter = grid.PositionComp.LocalVolume.Center;
             relTrans = -GridBoxCenter;
 
+            // State management
             needsRescale = false;
         }
 
+
         public void DoCleanup()
         {
+            // Ownership Change
+            ChangeOwnership();
+
+            // Rendering Setup
+            SetupRendering();
+
+            // Recolor Armor
+            RecolorArmor();
+
+            // Fetch and Process Blocks
+            ProcessBlocks();
+        }
+
+        private void ChangeOwnership()
+        {
             grid.ChangeGridOwnership(MyAPIGateway.Session.Player.IdentityId, MyOwnershipShareModeEnum.Faction);
-            IMyCubeGrid iGrid = grid as IMyCubeGrid;
+        }
+
+        private void SetupRendering()
+        {
+            IMyCubeGrid iGrid = (IMyCubeGrid)grid;
             iGrid.Render.DrawInAllCascades = iGrid.Render.FastCastShadowResolve = iGrid.Render.MetalnessColorable = true;
+        }
 
+        private void RecolorArmor()
+        {
             Vector3 armorHSV = MyColorPickerConstants.HSVToHSVOffset(ColorExtensions.ColorToHSV(ColorExtensions.HexToColor(ArmorRecolorHex)));
-            armorHSV = new Vector3((float)Math.Round(armorHSV.X, 2), (float)Math.Round(armorHSV.Y, 2), (float)Math.Round(armorHSV.Z, 2));
+            armorHSV = RoundVector(armorHSV, 2);
+            IMyCubeGrid iGrid = (IMyCubeGrid)grid;
             iGrid.SkinBlocks(grid.Min, grid.Max, armorHSV, ArmorMat);
+        }
 
+        private static Vector3 RoundVector(Vector3 vec, int decimals)
+        {
+            return new Vector3((float)Math.Round(vec.X, decimals), (float)Math.Round(vec.Y, decimals), (float)Math.Round(vec.Z, decimals));
+        }
 
+        private void ProcessBlocks()
+        {
             List<IMySlimBlock> allBlocks = new List<IMySlimBlock>();
+            IMyCubeGrid iGrid = (IMyCubeGrid)grid;
             iGrid.GetBlocks(allBlocks);
+            int count = allBlocks.Count;
+            int stride = MathHelper.Clamp(count / 16, 1, 64);
 
-            Queue<IMySlimBlock> allblocksQ = new Queue<IMySlimBlock>(allBlocks);
-            //foreach (var block in allblocksQ) { block.Dithering = 2.45f; }
-
-
-            for (int i = 0; i < allBlocks.Count; i++)
-            {
-                var block = allblocksQ.Dequeue();
-                // peek is for looking and thinking about it, not for touching
-              // block.Dithering = 0.25f;
-              // block.FatBlock.Render.Transparency -= 0.25f;
-              // block.FatBlock?.Render.UpdateTransparency();
-              // block.UpdateVisual();
+            MyAPIGateway.Parallel.For(0, count, i => {
+                var block = allBlocks[i];
                 DisableBlock(block.FatBlock as IMyFunctionalBlock);
                 StopEffects(block.FatBlock as IMyExhaustBlock);
-                SetTransparency(block, 0.35f);
-            }
-
-            allblocksQ.Clear();
-
+                SetTransparency(block, 0.36f);
+            }, stride);
         }
         private static void SetTransparency(IMySlimBlock cubeBlock, float transparency)
         {
@@ -236,7 +258,7 @@ namespace klime.Visual
                 subpart.Value.Render.Transparency = transparency;
                 subpart.Value.Render.CastShadows = false;
                 subpart.Value.Render.RemoveRenderObjects();
-                subpart.Value.Render.AddRenderObjects();
+               // subpart.Value.Render.AddRenderObjects();
                 SetTransparencyForSubparts(subpart.Value, transparency);
             }
         }
@@ -532,19 +554,6 @@ namespace klime.Visual
 
         private void UpdateBlockDestructionStats()
         {
-          //  float slimDamageThisFrame = 0;
-         //   float fatBlockDamageThisFrame = 0;
-
-
-        //   foreach (var subgrid in gridGroup)
-        //   {
-        //       if (subgrid.grid == null) continue;
-        //       UpdateSlimBlockDestruction(subgrid);
-        //      // UpdateFatBlockDestruction(ref fatBlockDamageThisFrame);
-        //
-        //    //   FatBlocksDestroyed += DelList.Count;
-        //    //   SlimBlocksDestroyed += SlimDelList.Count;
-        //   }
 
 
             for (int i = 0; i < gridGroup.Count; i++)
@@ -557,14 +566,7 @@ namespace klime.Visual
 
         private void UpdateSlimBlockDestruction(GridR subgrid)
         {
-            //  foreach (var item in SlimDelList)
-            //  {
-            //      slimDamageThisFrame += BlockIntegrityDict[item];
-            //      BlockIntegrityDict.Remove(item);
-            //      subgrid.grid.RazeGeneratedBlocks(SlimDelList);
-            //  }
-            //subgrid.grid.RazeGeneratedBlocks(SlimDelList);
-            //subgrid.grid.RazeBlock(SlimDelQueue.Dequeue());
+
             if (slimblocksToClose % 240 > 0) return;
 
             for (int i = 0; i < SlimDelQueue.Count; i++)
@@ -573,6 +575,26 @@ namespace klime.Visual
                 slimblocksToClose -= 500;
                 //DebugShowblockstoRemove();
             }
+
+            var stride = MathHelper.Clamp(SlimDelQueue.Count / 16, 1, 48);
+
+            MyAPIGateway.Parallel.For(0, subgrid.grid.CubeBlocks.Count, i =>
+            {
+                var slim = subgrid.grid.CubeBlocks as IMySlimBlock;
+                if (slim != null)
+                {
+                    if (slim.FatBlock == null)
+                    {
+                        if (slim.Integrity <= 0)
+                        {
+                            //SlimDelList.Add(slim.Position);
+                            SlimDelQueue.Enqueue(slim.Position);
+                            SlimBlocksDestroyed++;
+                        }
+                    }
+                }
+            }, stride);
+
         }
 
         private void UpdateFatBlockDestruction(ref float fatBlockDamageThisFrame)
@@ -748,54 +770,43 @@ namespace klime.Visual
             UpdateVisLogic();
         }
 
+        // Declare these as class-level variables to reuse and minimize memory allocation.
+        private Vector2D offset = new Vector2D();
+        private Vector3D localCenterRealGrid = new Vector3D();
+        private Vector3D position = new Vector3D();
+        private MatrixD offsetMatrix = new MatrixD();
+
         private void UpdateVisPosition()
         {
-            if (visGrid != null && realGrid != null && !realGrid.MarkedForClose)
-            {
-                // GridR.GridBoxCenter = visGrid.gridGroup[0].grid.PositionComp.WorldVolume.Center;
-                // GridR.GridBoxCenterGlobal = visGrid.gridGroup[0].grid.PositionComp.WorldVolume.Center;
-                // Get the origin from the UpdateBackground method
-              
-                var playerCamera = MyAPIGateway.Session.Camera;
-                var renderMatrix = playerCamera.WorldMatrix;
+            if (visGrid == null || realGrid == null || realGrid.MarkedForClose)
+                return;
 
-                var camera = MyAPIGateway.Session.Camera;
-                var newFov = camera.FovWithZoom;
-                var aspectRatio = camera.ViewportSize.X / camera.ViewportSize.Y;
+            var camera = MyAPIGateway.Session.Camera;
+            double newFov = camera.FovWithZoom;
+            double fov = Math.Tan(newFov * 0.5);
+            double aspectRatio = camera.ViewportSize.X / camera.ViewportSize.Y;
+            double scaleFov = 0.1 * fov;
 
-                var fov = Math.Tan(newFov * 0.5);
-                var scaleFov = 0.1 * fov;
-                var offset = new Vector2D(xOffset + 2.52, yOffset + 1.5);
-                offset.X *= scaleFov * aspectRatio;
-                offset.Y *= scaleFov;
-                var tempMatrix = MyAPIGateway.Session.Camera.WorldMatrix;
-                var position = Vector3D.Transform(new Vector3D(offset.X, offset.Y, 10 * scaleFov), tempMatrix);
+            offset.X = xOffset + 2.52;
+            offset.Y = yOffset + 1.5;
+            offset.X *= scaleFov * aspectRatio;
+            offset.Y *= scaleFov;
 
-                var origin = GetBillboardOrigin(playerCamera);
-                var left = tempMatrix.Left;
-                var up = tempMatrix.Up;
-                var hudscale = 2.55f;
-                var scale = (float)(scaleFov * (hudscale * 0.23f));
+            var tempMatrix = camera.WorldMatrix;
+            position = Vector3D.Transform(new Vector3D(offset.X, offset.Y, 10 * scaleFov), tempMatrix);
 
+            float scale = (float)(scaleFov * (2.55f * 0.23f));
 
-                var localCenterRealGrid = new Vector3D(realGrid.PositionComp.LocalAABB.Center);
-                var trueCenterRealGrid = Vector3D.Transform(localCenterRealGrid, realGrid.WorldMatrix);
-                trueCenterRealGrid = localCenterRealGrid;
+            localCenterRealGrid = realGrid.PositionComp.LocalAABB.Center;
+            offsetMatrix = MatrixD.CreateTranslation(localCenterRealGrid - realGrid.PositionComp.WorldAABB.Center);
+            var newWorldMatrix = offsetMatrix * realGrid.WorldMatrix;
 
-                var offsetMatrix = MatrixD.CreateTranslation(trueCenterRealGrid - realGrid.PositionComp.WorldAABB.Center);
-                var newWorldMatrix = offsetMatrix * realGrid.WorldMatrix;
+            tempMatrix.Translation += tempMatrix.Forward * (0.1 / (0.6 * newFov)) + tempMatrix.Right * xOffset + tempMatrix.Down * yOffset;
 
-                var sanitizedRenderMatrix = renderMatrix.Translation;
-                renderMatrix.Translation += renderMatrix.Forward * (0.1 / (0.6 * playerCamera.FovWithZoom)) + renderMatrix.Right * xOffset + renderMatrix.Down * yOffset;
-
-
-                visGrid.UpdateMatrix(renderMatrix, newWorldMatrix * MatrixD.Invert(renderMatrix));
-
-
-               // UpdateBackground();
-
-            }
+            visGrid.UpdateMatrix(tempMatrix, newWorldMatrix * MatrixD.Invert(tempMatrix));
         }
+
+
 
         // Function to get the origin from UpdateBackground
         private Vector3D GetBillboardOrigin(IMyCamera camera)

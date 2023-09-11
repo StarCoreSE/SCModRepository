@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <CubeBlocks>
+ 
+ <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>SC_Flare</SubtypeId>
+      </Id>
+      <DisplayName>Flares</DisplayName>
+	  <Description>Anti-Missile Chaff. 2km AMS Attraction, will attract all missiles inside its range.
+	  8 Flare charges per launcher.
+	 </Description>
+     <Icon>Textures\Icons\flares_Icon.dds</Icon>
+      <CubeSize>Large</CubeSize>
+	  <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+	   <Model>Models\Starcore\Starcore_Flare_Launcher.mwm</Model>
+   <Components>
+     <Component Subtype="SteelPlate" Count="165" />
+     <Component Subtype="Construction" Count="115" />
+     <Component Subtype="MetalGrid" Count="45" />
+     <Component Subtype="LargeTube" Count="35" />
+     <Component Subtype="Motor" Count="250" />
+     <Component Subtype="Computer" Count="100" />
+     <Component Subtype="Construction" Count="90" />
+     <Component Subtype="SteelPlate" Count="200" />
+   </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BlockPairName>Starcore_Flare</BlockPairName>
+	   <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>25</BuildTimeSeconds>
+      <DisassembleRatio>5</DisassembleRatio>
+      <NavigationDefinition>Default</NavigationDefinition>
+	   <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <MinElevationDegrees>-15</MinElevationDegrees>
+      <MaxElevationDegrees>75</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+	  <MirroringY>Z</MirroringY>
+	  <MirroringZ>Y</MirroringZ>
+      <IdleRotation>false</IdleRotation>
+	  <AiEnabled>false</AiEnabled>
+      <MaxRangeMeters>7000</MaxRangeMeters>
+      <RotationSpeed>0.0005</RotationSpeed>
+      <ElevationSpeed>0.0002 </ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+    </Definition>
+	
+  </CubeBlocks>
+</Definitions>
