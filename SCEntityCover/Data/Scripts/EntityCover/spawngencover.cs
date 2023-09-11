@@ -17,7 +17,6 @@ namespace Invalid.spawngencover
     public class spawngencover : MyGameLogicComponent
     {
         private IMyCubeBlock block;
-        private bool addGeneratorNext = false;
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
@@ -29,28 +28,22 @@ namespace Invalid.spawngencover
         public override void UpdateAfterSimulation100()
         {
             MyAPIGateway.Utilities.ShowNotification("Update triggered", 1000);
-            AddNextBlockInChain();
+            CreateArmorLine(10);
         }
 
-        private void AddNextBlockInChain()
+        private void CreateArmorLine(int length)
         {
-            if (addGeneratorNext)
+            for (int i = 1; i <= length; i++)
             {
-                AddBlock("LargeBlockSmallGenerator");
+                AddBlock("LargeBlockArmorBlock", new Vector3I(0, i, 0));
             }
-            else
-            {
-                AddBlock("LargeBlockArmorBlock");
-            }
-
-            addGeneratorNext = !addGeneratorNext;
         }
 
-        private void AddBlock(string subtypeName)
+        private void AddBlock(string subtypeName, Vector3I offset)
         {
             var grid = block.CubeGrid;
             var blockPos = block.Position;
-            var nextBlockPos = blockPos + new Vector3I(0, 1, 0); // Assuming "up" is along the Y-axis
+            var nextBlockPos = blockPos + offset;
 
             var nextBlockBuilder = new MyObjectBuilder_CubeBlock
             {
@@ -71,7 +64,10 @@ namespace Invalid.spawngencover
                 return;
             }
 
-            MyAPIGateway.Utilities.ShowNotification($"{subtypeName} added", 1000);
+            MyAPIGateway.Utilities.ShowNotification($"{subtypeName} added at {nextBlockPos}", 1000);
         }
     }
 }
+
+
+
