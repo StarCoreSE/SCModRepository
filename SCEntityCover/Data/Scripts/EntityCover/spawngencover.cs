@@ -1,7 +1,7 @@
 using Sandbox.Common.ObjectBuilders;
-using Sandbox.Common.ObjectBuilders.Definitions;
 using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
+using System;
 using VRage;
 using VRage.Game;
 using VRage.Game.Components;
@@ -17,38 +17,70 @@ namespace Invalid.spawngencover
     public class spawngencover : MyGameLogicComponent
     {
         private IMyCubeBlock block;
+        private const int branchFactor = 4;
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             base.Init(objectBuilder);
             block = (IMyCubeBlock)Entity;
-            NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME;
+            CreateFractal(block.Position, 10, 10, new Vector3I(0, 1, 0)); // Starting with depth 5, and length 5
         }
 
-        public override void UpdateAfterSimulation100()
-        {
-            MyAPIGateway.Utilities.ShowNotification("Update triggered", 1000);
-            CreateArmorLine(10);
-        }
+        private int currentBranchCount = 0;
+        private const int MaxBranches = 100;
 
-        private void CreateArmorLine(int length)
+        private Random rand = new Random();
+
+        private void CreateFractal(Vector3I origin, int depth, int length, Vector3I direction)
         {
+            if (depth == 0 || currentBranchCount >= MaxBranches)
+            {
+                return;
+            }
+
             for (int i = 1; i <= length; i++)
             {
-                AddBlock("LargeBlockArmorBlock", new Vector3I(0, i, 0));
+                AddBlock("LargeBlockArmorBlock", origin + i * direction);
+            }
+
+            Vector3I[] newDirections =
+            {
+        new Vector3I(1, 0, 0),
+        new Vector3I(-1, 0, 0),
+        new Vector3I(0, 1, 0),
+        new Vector3I(0, -1, 0),
+        new Vector3I(0, 0, 1),
+        new Vector3I(0, 0, -1)
+    };
+
+            Vector3I newOrigin = origin + length * direction;
+
+            // Calculate an adaptive branch factor based on the current depth and branches left.
+            int adaptiveBranchFactor = Math.Min(branchFactor, (MaxBranches - currentBranchCount) / depth);
+
+            for (int i = 0; i < adaptiveBranchFactor; i++)
+            {
+                if (currentBranchCount >= MaxBranches)
+                {
+                    break;
+                }
+                int randomIndex = rand.Next(newDirections.Length);
+                Vector3I selectedDirection = newDirections[randomIndex];
+                currentBranchCount++;
+                CreateFractal(newOrigin, depth - 1, length, selectedDirection);
             }
         }
 
-        private void AddBlock(string subtypeName, Vector3I offset)
+
+
+        private void AddBlock(string subtypeName, Vector3I position)
         {
             var grid = block.CubeGrid;
-            var blockPos = block.Position;
-            var nextBlockPos = blockPos + offset;
 
             var nextBlockBuilder = new MyObjectBuilder_CubeBlock
             {
                 SubtypeName = subtypeName,
-                Min = nextBlockPos,
+                Min = position,
                 BlockOrientation = new MyBlockOrientation(Base6Directions.Direction.Forward, Base6Directions.Direction.Up),
                 ColorMaskHSV = new SerializableVector3(0, -1, 0),
                 Owner = block.OwnerId,
@@ -63,11 +95,7 @@ namespace Invalid.spawngencover
                 MyAPIGateway.Utilities.ShowNotification($"Failed to add {subtypeName}", 1000);
                 return;
             }
-
-            MyAPIGateway.Utilities.ShowNotification($"{subtypeName} added at {nextBlockPos}", 1000);
+            MyAPIGateway.Utilities.ShowNotification($"{subtypeName} added at {position}", 1000);
         }
     }
 }
-
-
-
