@@ -1,110 +1,70 @@
 using Sandbox.Common.ObjectBuilders;
+using Sandbox.Game;
 using Sandbox.Game.Entities;
+using Sandbox.Game.Entities.Blocks;
 using Sandbox.ModAPI;
 using System;
-using VRage;
-using VRage.Game;
 using VRage.Game.Components;
-using VRage.Game.ModAPI;
-using VRage.Game.ObjectBuilders.ComponentSystem;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRageMath;
 
-namespace Invalid.spawngencover
+namespace SRBanticringe
 {
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Reactor), false, "LargeBlockSmallGenerator")]
-    public class spawngencover : MyGameLogicComponent
-    {
-        private IMyCubeBlock block;
-        private const int branchFactor = 4;
+	[MyEntityComponentDescriptor(typeof(MyObjectBuilder_ConveyorSorter), false, "SC_SRB")]
+	public class SRBexplodealternate : MyGameLogicComponent
+	{
+		private IMyConveyorSorter SRB;
+		private int triggerTick = 0;
+		private const double OFFSET_DISTANCE = 3;
 
-        // New Variables to store adjustable settings
-        private int initialDepth = 10;
-        private int initialLength = 10;
+		public override void Init(MyObjectBuilder_EntityBase objectBuilder)
+		{
+			if (!MyAPIGateway.Session.IsServer) return; // Only do explosions serverside
+			SRB = Entity as IMyConveyorSorter;
+			NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
+		}
 
-        public override void Init(MyObjectBuilder_EntityBase objectBuilder)
+		public override void UpdateOnceBeforeFrame()
+		{
+			if (SRB == null || SRB.CubeGrid.Physics == null) return;
+			SRB.EnabledChanged += SRBEnabledChanged;
+			NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
+		}
+
+		public override void UpdateAfterSimulation()
+		{
+			if (triggerTick == 1)
+			{
+				DoExplosion();
+			}
+
+			triggerTick = 0;
+		}
+
+		private void DoExplosion()
+		{
+			if (SRB == null || SRB.CubeGrid.Physics == null || SRB.Enabled) return;
+			double radius = 30;
+			BoundingSphereD sphere = new BoundingSphereD(SRB.WorldMatrix.Translation + (SRB.WorldMatrix.Forward * OFFSET_DISTANCE), radius); // Apply offset, 10);
+			MyExplosionInfo explosion = new MyExplosionInfo(0f, 10000f, sphere, MyExplosionTypeEnum.CUSTOM, true);
+
+			MyExplosions.AddExplosion(ref explosion);
+		}
+
+		private void SRBEnabledChanged(IMyTerminalBlock obj)
+		{
+			if (obj.EntityId != SRB.EntityId) return;
+			triggerTick += 1;
+		}
+
+        public override void Close()
         {
-            base.Init(objectBuilder);
-            block = (IMyCubeBlock)Entity;
-            CreateFractal(block.Position, initialDepth, initialLength, new Vector3I(0, 1, 0));
-        }
-
-        // Public method to change settings dynamically
-        public void SetFractalAttributes(int depth, int length)
-        {
-            initialDepth = depth;
-            initialLength = length;
-        }
-
-        private int currentBranchCount = 0;
-        private const int MaxBranches = 100;
-
-        private Random rand = new Random();
-
-        private void CreateFractal(Vector3I origin, int depth, int length, Vector3I direction)
-        {
-            if (depth == 0 || currentBranchCount >= MaxBranches)
+            if (SRB != null)
             {
-                return;
-            }
-
-            for (int i = 1; i <= length; i++)
-            {
-                AddBlock("LargeBlockArmorBlock", origin + i * direction);
-            }
-
-            Vector3I[] newDirections =
-            {
-                new Vector3I(1, 0, 0),
-                new Vector3I(-1, 0, 0),
-                new Vector3I(0, 1, 0),
-                new Vector3I(0, -1, 0),
-                new Vector3I(0, 0, 1),
-                new Vector3I(0, 0, -1)
-            };
-
-            Vector3I newOrigin = origin + length * direction;
-
-            // Calculate an adaptive branch factor based on the current depth and branches left.
-            int adaptiveBranchFactor = Math.Min(branchFactor, (MaxBranches - currentBranchCount) / depth);
-
-            for (int i = 0; i < adaptiveBranchFactor; i++)
-            {
-                if (currentBranchCount >= MaxBranches)
-                {
-                    break;
-                }
-                int randomIndex = rand.Next(newDirections.Length);
-                Vector3I selectedDirection = newDirections[randomIndex];
-                currentBranchCount++;
-                CreateFractal(newOrigin, depth - 1, length, selectedDirection);
+                SRB.EnabledChanged -= SRBEnabledChanged;
             }
         }
 
-        private void AddBlock(string subtypeName, Vector3I position)
-        {
-            var grid = block.CubeGrid;
-
-            var nextBlockBuilder = new MyObjectBuilder_CubeBlock
-            {
-                SubtypeName = subtypeName,
-                Min = position,
-                BlockOrientation = new MyBlockOrientation(Base6Directions.Direction.Forward, Base6Directions.Direction.Up),
-                ColorMaskHSV = new SerializableVector3(0, -1, 0),
-                Owner = block.OwnerId,
-                EntityId = 0,
-                ShareMode = MyOwnershipShareModeEnum.None
-            };
-
-            IMySlimBlock newBlock = grid.AddBlock(nextBlockBuilder, false);
-
-            if (newBlock == null)
-            {
-                MyAPIGateway.Utilities.ShowNotification($"Failed to add {subtypeName}", 1000);
-                return;
-            }
-            MyAPIGateway.Utilities.ShowNotification($"{subtypeName} added at {position}", 1000);
-        }
     }
 }

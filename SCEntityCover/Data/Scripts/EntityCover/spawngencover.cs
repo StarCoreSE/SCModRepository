@@ -19,11 +19,22 @@ namespace Invalid.spawngencover
         private IMyCubeBlock block;
         private const int branchFactor = 4;
 
+        // New Variables to store adjustable settings
+        private int initialDepth = 10;
+        private int initialLength = 10;
+
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             base.Init(objectBuilder);
             block = (IMyCubeBlock)Entity;
-            CreateFractal(block.Position, 10, 10, new Vector3I(0, 1, 0)); // Starting with depth 5, and length 5
+            CreateFractal(block.Position, initialDepth, initialLength, new Vector3I(0, 1, 0));
+        }
+
+        // Public method to change settings dynamically
+        public void SetFractalAttributes(int depth, int length)
+        {
+            initialDepth = depth;
+            initialLength = length;
         }
 
         private int currentBranchCount = 0;
@@ -45,13 +56,13 @@ namespace Invalid.spawngencover
 
             Vector3I[] newDirections =
             {
-        new Vector3I(1, 0, 0),
-        new Vector3I(-1, 0, 0),
-        new Vector3I(0, 1, 0),
-        new Vector3I(0, -1, 0),
-        new Vector3I(0, 0, 1),
-        new Vector3I(0, 0, -1)
-    };
+                new Vector3I(1, 0, 0),
+                new Vector3I(-1, 0, 0),
+                new Vector3I(0, 1, 0),
+                new Vector3I(0, -1, 0),
+                new Vector3I(0, 0, 1),
+                new Vector3I(0, 0, -1)
+            };
 
             Vector3I newOrigin = origin + length * direction;
 
@@ -70,8 +81,6 @@ namespace Invalid.spawngencover
                 CreateFractal(newOrigin, depth - 1, length, selectedDirection);
             }
         }
-
-
 
         private void AddBlock(string subtypeName, Vector3I position)
         {
