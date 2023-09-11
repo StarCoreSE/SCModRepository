@@ -35,6 +35,8 @@ namespace StarCore.DynamicResistence
         public const float MinResistModifier = 1.0f;
         public const float MaxResistModifier = 0.7f;
 
+        public float finalResistanceModifier = 0f;
+
         public const string Control_Prefix = "DynaResist.";
         public readonly Guid Settings_GUID = new Guid("9EFDABA1-E705-4F62-BD37-A4B046B60BC0");
         public const int Settings_Change_Countdown = (60 * 1) / 10;
@@ -43,9 +45,10 @@ namespace StarCore.DynamicResistence
         public int SiegeCooldownTimer = 18000;
         public int SiegeDisplayTimer = 60;
         public int SiegeVisibleTimer = 150;
-        public bool SiegeCooldownTimerActive = false;
 
         public float MaxAvailibleGridPower = 0f;
+
+        public bool SiegeCooldownTimerActive = false;
         public bool SiegeModeActivatedClient = false;
         public bool SiegeBlockShutdown = false;
         public bool SiegeModeResistence = false;
@@ -54,6 +57,8 @@ namespace StarCore.DynamicResistence
 
         private IMyHudNotification notifPowerDiversion = null;
         private IMyHudNotification notifCountdown = null;
+
+        public float DivertedPower { get; set; }
 
         public float FieldPower
         {
@@ -133,10 +138,6 @@ namespace StarCore.DynamicResistence
         public readonly DynaResistBlockSettings Settings = new DynaResistBlockSettings();
         int syncCountdown;
 
-        public float finalResistanceModifier = 0f;
-
-        public float DivertedPower { get; set; }
-
         DynamicResistenceMod Mod => DynamicResistenceMod.Instance;
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
@@ -166,12 +167,6 @@ namespace StarCore.DynamicResistence
 
                 Settings.Modifier = 1.0f;
                 Settings.FieldPower = MinDivertedPower;
-
-
-                /*if (!LoadSettings())
-                {
-                    ParseLegacyNameStorage();
-                }*/
 
                 SaveSettings(); // required for IsSerialized()
             }
@@ -204,7 +199,6 @@ namespace StarCore.DynamicResistence
 
         private float RequiredInput()
         {
-            Log.Info("Reached Compute");
             if (!dynResistBlock.IsWorking)
                 return 0f;
             
@@ -222,8 +216,6 @@ namespace StarCore.DynamicResistence
             }
             else    
             {
-                Log.Info("Reached Enabled");
-
                 CalculateMaxGridPower();
 
                 float baseUsage = 50.000f;
@@ -307,7 +299,7 @@ namespace StarCore.DynamicResistence
 
             else if (dynResistBlock != null && SiegeModeActivatedClient && SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
-                MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: 2, pulseTimeInFrames: 12, color: Color.DarkOrange);
+                /*MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: 2, pulseTimeInFrames: 12, color: Color.DarkOrange);*/
 
                 Sink.Update();
 
@@ -321,8 +313,10 @@ namespace StarCore.DynamicResistence
                     {
                         dynResistBlock.CubeGrid.Physics.LinearVelocity = Vector3D.Zero;
                     }
-                    
-                    /*dynResistBlock.CubeGrid.Physics.AngularVelocity = Vector3D.Zero;*/
+                    /*else if (dynResistBlock.CubeGrid.Physics.AngularVelocity != Vector3D.Zero)
+                    {
+                        dynResistBlock.CubeGrid.Physics.AngularVelocity = Vector3D.Zero;
+                    }*/
 
                     SiegeTimer = SiegeTimer - 1;
                     SiegeDisplayTimer = SiegeDisplayTimer - 1;
@@ -338,12 +332,13 @@ namespace StarCore.DynamicResistence
                 {
                     SiegeTimer = 6000;
                     SiegeDisplayTimer = 60;
+                    SiegeVisibleTimer = 150;
 
                     ResetBlockResist(dynResistBlock);
 
                     SiegeModeTurnOn(allTerminalBlocks);
 
-                    MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: -1);
+                    /*MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: -1);*/
 
                     DisplayMessageToNearPlayers(1);
                     /*SetCountdownStatus($"Siege Mode Deactivated", 1500, MyFontEnum.Red);*/
@@ -366,7 +361,7 @@ namespace StarCore.DynamicResistence
 
                 SiegeModeTurnOn(allTerminalBlocks);
 
-                MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: -1);
+                /*MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: -1);*/
 
                 DisplayMessageToNearPlayers(2);
                 /*SetCountdownStatus($"Block Inoperative! Siege Mode Deactivated", 1500, MyFontEnum.Red);*/
