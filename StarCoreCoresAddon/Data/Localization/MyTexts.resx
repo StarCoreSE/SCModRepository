@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+<data name="SpecCores_BlockActivationError_NONE" xml:space="preserve"><value>Nominal</value></data>        
+<data name="SpecCores_BlockActivationError_NOT_ENABLED" xml:space="preserve"><value>SpecCore not enabled!</value></data>        
+<data name="SpecCores_BlockActivationError_HAS_LARGE_BLOCKS" xml:space="preserve"><value>Too many large blocks!</value></data>        
+<data name="SpecCores_BlockActivationError_HAS_SMALL_BLOCKS" xml:space="preserve"><value>Too many small blocks!</value></data>        
+<data name="SpecCores_BlockActivationError_HAS_PCU_LIMIT" xml:space="preserve"><value>At max PCU!</value></data>        
+<data name="SpecCores_BlockActivationError_HAS_BLOCKS_LIMIT" xml:space="preserve"><value>Too many blocks!</value></data>        
+<data name="SpecCores_BlockActivationError_HAS_OVERLIMITED_GRIDS" xml:space="preserve"><value>Too many grids!</value></data>        
+<data name="SpecCores_BlockActivationError_ANOTHER_CORE" xml:space="preserve"><value>Another SpecCore is active!</value></data>     
+
+<data name="SpecCores_BlockInfo_StatusRow" xml:space="preserve"><value>STATUS: {0}
+==============
+</value></data>        
+<data name="SpecCores_BlockInfo_WarningSign" xml:space="preserve"><value>!!!</value></data>        
+<data name="SpecCores_BlockInfo_FullInfoFormat" xml:space="preserve"><value>Admin Blocks</value></data>        
+<data name="SpecCores_BlockInfo_NoSpecializations" xml:space="preserve"><value>Block hasn't picked specializations</value></data>        
+<data name="SpecCores_BlockInfo_UpgradesHeader" xml:space="preserve"><value>
+==============
+Upgrades:</value></data>        
+      
+<data name="SpecCores_BlockInfo_UpgradesRow" xml:space="preserve"><value>{0}: {1}</value></data>        
+<data name="SpecCores_BlockInfo_StaticOnly" xml:space="preserve"><value>Static:</value></data>        
+<data name="SpecCores_BlockInfo_DynamicOnly" xml:space="preserve"><value>Dynamic:</value></data>        
+<data name="SpecCores_BlockInfo_StaticOrDynamic" xml:space="preserve"><value>Static/Dynamic:</value></data>        
+<data name="SpecCores_BlockInfo_CantWorkOnSubGrids" xml:space="preserve"><value>   Can't work on sub grids!</value></data>        
+<data name="SpecCores_BlockInfo_Header" xml:space="preserve"><value>&gt;&gt;&gt; Limits: &lt;&lt;&lt;</value></data>   
+     
+<data name="SpecCores_UpgradesList_RowText" xml:space="preserve"><value>{0} {1}/{3}</value></data>  
+
+<!-- 
+For next Translations:
+SpecCores_UpgradesList_UpgradeText
+SpecCores_UpgradesList_UpgradeTextNotEnoughPoints
+SpecCores_UpgradesList_UpgradeTextMaxUpgrades
+
+{0} is CurrentCost
+{1} is NextLevelCost
+{2} is NextLevelCost + CurrentCost
+{3} is UsedPoints
+{4} is TotalPoints
+{5} is LeftPoints
+{6} is LeftPoints - NextLevelCost
+{7} is Level
+{8} is NextLevel
+{9} is MaxLevel
+-->
+<data name="SpecCores_UpgradesList_UpgradeText" xml:space="preserve"><value>Current points {0}: 
+Next lvl cost: {1} / {5}
+Total:{3}
+
+</value></data>    
+<data name="SpecCores_UpgradesList_UpgradeTextNotEnoughPoints" xml:space="preserve"><value>Not enough upgrade points {1} / {5}
+
+</value></data>
+ 
+<data name="SpecCores_UpgradesList_UpgradeTooltipStatic/Dynamic" xml:space="preserve"><value>Static/Dynamic grid unlocks:
+</value></data>
+
+<data name="SpecCores_UpgradesList_UpgradeTooltipStatic" xml:space="preserve"><value>Static grid unlocks:
+</value></data>
+
+<data name="SpecCores_UpgradesList_UpgradeTooltipDynamic" xml:space="preserve"><value>Dynamic grid points:
+</value></data>
+
+<data name="SpecCores_UpgradesList_UpgradeTextMaxUpgrades" xml:space="preserve"><value>Max Upgrades {7} / {9}
+Drains {0} points</value></data>  
+      
+<data name="SpecCores_Button_ApplyRandomUpgrade" xml:space="preserve"><value>Apply Random (DoubleClick)</value></data>        
+<data name="SpecCores_Button_ApplyRandomUpgrade_Tooltip" xml:space="preserve"><value>Applies random upgrades to block. Can't be undone</value></data>        
+<data name="SpecCores_Button_ApplyUpgrade" xml:space="preserve"><value>Apply (DoubleClick)</value></data>        
+<data name="SpecCores_Button_ApplyUpgrade_Tooltip" xml:space="preserve"><value>Applies upgrades to block. Can't be undone</value></data>        
+<data name="SpecCores_Button_AddUpgrade" xml:space="preserve"><value>Add Upgrade</value></data>        
+<data name="SpecCores_Button_AddUpgrade_Tooltip" xml:space="preserve"><value>Add upgrade to block. It is not applied till you double click `Apply (DoubleClick)`</value></data>        
+<data name="SpecCores_Button_RemoveUpgrade" xml:space="preserve"><value>Remove upgrade</value></data>        
+<data name="SpecCores_Button_RemoveUpgrade_Tooltip" xml:space="preserve"><value>Remove upgrade from block</value></data>
+<data name="SpecCores_GUI_AutoEnable" xml:space="preserve"><value>Auto Enable</value></data>        
+<data name="SpecCores_GUI_AutoEnableToolTip" xml:space="preserve"><value>Auto Enable</value></data>
+<data name="SpecCores_GUI_SmartAutoEnable" xml:space="preserve"><value>Smart Auto Enable</value></data>        
+<data name="SpecCores_GUI_SmartAutoEnableToolTip" xml:space="preserve"><value>Smart Auto Enable</value></data>
+
+
+<data name="SpecCores_Points_PRIORITY" xml:space="preserve"><value>PRIORITY</value></data>
+
+<data name="SpecCores_Points_MAX_SMALLGRIDS" xml:space="preserve"><value>SMALL GRIDS</value></data>
+<data name="SpecCores_Points_MAX_LARGEGRIDS" xml:space="preserve"><value>LARGEGRIDS</value></data>
+<data name="SpecCores_Points_MAX_GRIDS" xml:space="preserve"><value>TOTAL GRIDS</value></data>
+<data name="SpecCores_Points_MAX_PCU" xml:space="preserve"><value>PCU</value></data>
+<data name="SpecCores_Points_MAX_BLOCKS" xml:space="preserve"><value>MAX BLOCKS</value></data>
+<data name="SpecCores_Points_MIN_BLOCKS" xml:space="preserve"><value>MIN BLOCKS</value></data>
+
+<data name="SpecCores_ActivationStatus_CurrentCore" xml:space="preserve"><value>Ok</value></data>
+
+<data name="SpecCores_ActivationStatus_NotWorking" xml:space="preserve"><value>Not working</value></data>
+<data name="SpecCores_ActivationStatus_NotEnabled" xml:space="preserve"><value>Not enabled</value></data>
+<data name="SpecCores_ActivationStatus_NotFunctional" xml:space="preserve"><value>Not functional</value></data>
+<data name="SpecCores_ActivationStatus_OtherCore" xml:space="preserve"><value>Other core</value></data>
+<data name="SpecCores_ActivationStatus_ErrorUsingGridGroupDefault" xml:space="preserve"><value>Core ignored. 
+Using grid-group default settings
+</value></data>
+<data name="SpecCores_ActivationStatus_ErrorEvenGridGroupFail" xml:space="preserve"><value>Core ignored. 
+Grid-group default settings ingored too
+</value></data>
+<data name="SpecCores_ActivationStatus_ErrorMaxBlocks" xml:space="preserve"><value>Exceeding max blocks</value></data>
+<data name="SpecCores_ActivationStatus_ErrorMinBlocks" xml:space="preserve"><value>Not enough blocks</value></data>
+
+
+<!-- CUSTOM TRANSLATIONS HERE:-->
+<data name="SpecCores_Infinity" xml:space="preserve"><value>Inf</value></data>
+
+<data name="SpecCores_Points_CP" xml:space="preserve"><value>Civilian points</value></data>
+<data name="SpecCores_Points_AirFrictionExtraStart" xml:space="preserve"><value>Friction start</value></data>
+<data name="SpecCores_Points_AirFrictionExtraEnd" xml:space="preserve"><value>Friction end</value></data>
+<data name="SpecCores_Points_AirFrictionExtraElevation" xml:space="preserve"><value>Friction elevation</value></data>
+<data name="SpecCores_Points_BroadcastRadius" xml:space="preserve"><value>Broadcast</value></data>
+<data name="SpecCores_Points_DamageReduction" xml:space="preserve"><value>Armor</value></data>
+</root>
