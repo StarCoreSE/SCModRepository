@@ -19,8 +19,7 @@ namespace Scripts
             ERPPC,
             Starcore_RWR_Projectiles,
             Starcore_RWR_Asteroids,
-            SC_Radome,
-			SC_Flare
+            SC_Radome
             );
 
         }
