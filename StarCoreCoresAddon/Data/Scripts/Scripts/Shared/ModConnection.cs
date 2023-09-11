@@ -2,7 +2,7 @@ using Sandbox.ModAPI;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using VRage.Game;
+using ServerMod;
 using VRage.Utils;
 
 namespace MIG.Shared.SE
@@ -14,7 +14,7 @@ namespace MIG.Shared.SE
         private static int PORT2 = 6666667;
         private static Dictionary<string, object> Data;
         private static Dictionary<string, List<Action<string, object>>> Subscriptions = new Dictionary<string, List<Action<string, object>>>();
-        private const bool DEBUGLOG = false;
+        private const bool DEBUGLOG = true;
         private static List<KeyValuePair<string, object>> RegisterQueue = new List<KeyValuePair<string, object>>();
 
         private static bool IsMain = false;
@@ -29,7 +29,10 @@ namespace MIG.Shared.SE
 
         public static void Init()
         {
-            if (IsInited) throw new Exception("ModConnection already inited!");
+            if (IsInited)
+            {
+                return;
+            }
             Log("ModConnectionComponent:MOD Init");
             MyAPIGateway.Utilities.RegisterMessageHandler(PORT1, ConnectionPortHandler);
             MyAPIGateway.Utilities.RegisterMessageHandler(PORT2, NotifyChannelHandler);
@@ -99,7 +102,7 @@ namespace MIG.Shared.SE
                 MyLog.Default.Error($"MCon {TAG}: {data}");
             }
         }
-
+        
         public static void LogError (string data)
         {
             if (DEBUGLOG)
@@ -113,31 +116,31 @@ namespace MIG.Shared.SE
             var pair = data as KeyValuePair<string, object>?;
             if (!pair.HasValue)
             {
-                Log("Something wrong  [Cores]");
+                Log("Something wrong");
                 return;
             }
             var d = pair.Value;
 
             if (!Data.ContainsKey(d.Key))
             {
-                Log($"Desynchronization [Cores] [{d.Key}]/[{d.Value}] -> [{d.Key}]/[null]");
+                Log($"Desynchronization [{d.Key}]/[{d.Value}] -> [{d.Key}]/[null]");
             }
             else
             {
                 if (Data[d.Key] != d.Value)
                 {
-                    Log($"Desynchronization [Cores] [{d.Key}]/[{d.Value}] -> [{d.Key}]/[{Data[d.Key]}]");
+                    Log($"Desynchronization [{d.Key}]/[{d.Value}] -> [{d.Key}]/[{Data[d.Key]}]");
                 }
             }
 
-            Log($"Registered [Cores] [{d.Key}]->[{d.Value}]");
+            Log($"Registered [{d.Key}]->[{d.Value}]");
             Handle(d.Key, d.Value);
         }
 
         private static string ALL = "";
         private static void Handle(string Name, object O)
         {
-            Log("Handle [Cores]: " + Name);
+            Log("Handle: " + Name);
             if (Name != ALL)
             {
                 if (Subscriptions.ContainsKey(Name))
@@ -150,7 +153,7 @@ namespace MIG.Shared.SE
                         }
                         catch (Exception e)
                         {
-                            Log($"ModConnection [Cores]: Exception for [{Name}] : {e.ToString()}");
+                            Log($"ModConnection: Exception for [{Name}] : {e.ToString()}");
                         }
                     }
                 }
@@ -166,7 +169,7 @@ namespace MIG.Shared.SE
                     }
                     catch (Exception e)
                     {
-                        Log($"ModConnection [Cores]: Exception for [{Name}] : {e.ToString()}");
+                        Log($"ModConnection: Exception for [{Name}] : {e.ToString()}");
                     }
                 }
             }
@@ -222,7 +225,7 @@ namespace MIG.Shared.SE
                     Log($"{Name}:" + e.ToString());
                 }
             };
-
+            
             Subscriptions.GetOrNew(Name).Add(catched);
             if (Data.ContainsKey(Name))
             {
@@ -232,7 +235,7 @@ namespace MIG.Shared.SE
                 }
                 catch (Exception e)
                 {
-                    LogError($"ModConnection [Cores]:OnDataArrivedOrChanged {Name} {Data[Name]} error: {e}");
+                    LogError($"ModConnection:OnDataArrivedOrChanged {Name} {Data[Name]} error: {e}");
                 }
                 
             }
@@ -247,7 +250,7 @@ namespace MIG.Shared.SE
         {
             Subscribe(Name, (name, data) => OnDataArrivedOrChanged((T) data));
         }
-
+        
         public static void SetValueAndSubscribe<T>(string Name, T Data, Action<T> OnDataArrivedOrChanged, bool crashOnDuplicate = true)
         {
             SetValue(Name, Data, crashOnDuplicate);
@@ -261,7 +264,7 @@ namespace MIG.Shared.SE
 
         public static void PrintAllData()
         {
-            var sb = new StringBuilder("ModConnection [Cores]:\n");
+            var sb = new StringBuilder("ModConnection:\n");
             foreach (var x in Data)
             {
                 sb.AppendLine($"{x.Key} -> {x.Value}");

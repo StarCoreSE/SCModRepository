@@ -4,7 +4,7 @@
     <EntityComponent xsi:type="MyObjectBuilder_ModStorageComponentDefinition">
       <Id>
         <TypeId>ModStorageComponent</TypeId>
-        <SubtypeId>StarCore-SpecCores</SubtypeId>
+        <SubtypeId>MIG-SpecCores</SubtypeId>
       </Id>
       <RegisteredStorageGuids>
         <guid>82f6e121-550f-4042-a2b8-185ed2a52abc</guid><!-- CockpitUpgrade -->

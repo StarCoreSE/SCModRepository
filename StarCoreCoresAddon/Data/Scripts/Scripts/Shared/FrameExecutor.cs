@@ -34,10 +34,12 @@ namespace MIG.Shared.SE {
         } 
         
         public static void addFrameLogic(Action1<long> action) {
+            Log.ChatError("TotalFrameLogics:" + addOnEachFrameLogic.Count + " " + onEachFrameLogic.Count);
             addOnEachFrameLogic.Add(action);
         }
         
         public static ActionWrapper addFrameLogic(Action<long> action) {
+            Log.ChatError("TotalFrameLogics:" + addOnEachFrameLogic.Count + " " + onEachFrameLogic.Count);
             ActionWrapper wrapper = new ActionWrapper(action);
             addOnEachFrameLogic.Add(wrapper);
             return wrapper;
@@ -70,6 +72,7 @@ namespace MIG.Shared.SE {
 
         public static DelayerAction addDelayedLogic(long frames, Action<long> action)
         {
+            Log.ChatError("TotalFrameLogics:" + addOnEachFrameLogic.Count + " " + onEachFrameLogic.Count);
             var da = new DelayerAction(frames, new ActionWrapper(action));
             addOnEachFrameLogic.Add(da);
             return da;
