@@ -362,6 +362,7 @@ namespace StarCore.DynamicResistence
 
                 SiegeTimer = 6000;
                 SiegeDisplayTimer = 60;
+                SiegeVisibleTimer = 150;
 
                 SiegeModeTurnOn(allTerminalBlocks);
 
@@ -882,11 +883,11 @@ namespace StarCore.DynamicResistence
                         {
                             SetCountdownStatus($"Siege Mode: " + SiegeVisibleTimer + " Seconds", 1500, MyFontEnum.Green);
                         }
-                        if (msgId == 1)
+                        else if (msgId == 1)
                         {
                             SetCountdownStatus($"Siege Mode Deactivated", 1500, MyFontEnum.Red);
                         }
-                        if (msgId == 2)
+                        else if (msgId == 2)
                         {
                             SetCountdownStatus($"Block Inoperative! Siege Mode Deactivated", 1500, MyFontEnum.Red);
                         }
