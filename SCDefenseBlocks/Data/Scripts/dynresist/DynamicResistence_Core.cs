@@ -273,13 +273,8 @@ namespace StarCore.DynamicResistence
 
         private void SiegeMode()
         {
-            var allSlimBlocks = new List<IMySlimBlock>();
-            dynResistBlock.CubeGrid.GetBlocks(allSlimBlocks);
-
             var allTerminalBlocks = new List<IMySlimBlock>();
             dynResistBlock.CubeGrid.GetBlocks(allTerminalBlocks);
-
-            var CurrentlyHighlighted = dynResistBlock.CubeGrid;
 
             Settings.SiegeModeActivated = SiegeModeActivatedClient;
 
@@ -312,7 +307,7 @@ namespace StarCore.DynamicResistence
 
             else if (dynResistBlock != null && SiegeModeActivatedClient && SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
-                MyVisualScriptLogicProvider.SetHighlightLocal(CurrentlyHighlighted.Name, thickness: 2, pulseTimeInFrames: 12, color: Color.DarkOrange);
+                MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: 2, pulseTimeInFrames: 12, color: Color.DarkOrange);
 
                 Sink.Update();
 
@@ -335,7 +330,7 @@ namespace StarCore.DynamicResistence
                     {
                         SiegeDisplayTimer = 60;
                         SiegeVisibleTimer = SiegeVisibleTimer - 1;
-                        DisplayCountdownMessageToNearPlayers();
+                        DisplayMessageToNearPlayers(0);
                         /*SetCountdownStatus($"Siege Mode: " + SiegeVisibleTimer + " Seconds", 1500, MyFontEnum.Green);*/
                     }
                 }
@@ -348,9 +343,9 @@ namespace StarCore.DynamicResistence
 
                     SiegeModeTurnOn(allTerminalBlocks);
 
-                    MyVisualScriptLogicProvider.SetHighlightLocal(CurrentlyHighlighted.Name, thickness: -1);
+                    MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: -1);
 
-                    DisplayEndMessageToNearPlayers();
+                    DisplayMessageToNearPlayers(1);
                     /*SetCountdownStatus($"Siege Mode Deactivated", 1500, MyFontEnum.Red);*/
 
                     SiegeModeActivatedClient = false;
@@ -370,9 +365,9 @@ namespace StarCore.DynamicResistence
 
                 SiegeModeTurnOn(allTerminalBlocks);
 
-                MyVisualScriptLogicProvider.SetHighlightLocal(CurrentlyHighlighted.Name, thickness: -1);
+                MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: -1);
 
-                DisplayInoperativeMessageToNearPlayers();
+                DisplayMessageToNearPlayers(2);
                 /*SetCountdownStatus($"Block Inoperative! Siege Mode Deactivated", 1500, MyFontEnum.Red);*/
 
                 SiegeModeActivatedClient = false;
@@ -869,71 +864,41 @@ namespace StarCore.DynamicResistence
         }
         #endregion
 
-        private void DisplayCountdownMessageToNearPlayers()
+        private void DisplayMessageToNearPlayers(int msgId)
         {
             List<IMyCharacter> playerCharacters = new List<IMyCharacter>();
 
             if (dynResistBlock != null)
             {
-                // Define the bounding sphere
                 var bound = new BoundingSphereD(dynResistBlock.GetPosition(), 50);
                 List<IMyEntity> nearEntities = MyAPIGateway.Entities.GetEntitiesInSphere(ref bound);
 
-                // Iterate through entities and find player characters
                 foreach (var entity in nearEntities)
                 {
                     IMyCharacter character = entity as IMyCharacter;
                     if (character != null && character.IsPlayer && bound.Contains(character.GetPosition()) != ContainmentType.Disjoint)
                     {
-                        SetCountdownStatus($"Siege Mode: " + SiegeVisibleTimer + " Seconds", 1500, MyFontEnum.Green);
+                        if (msgId == 0)
+                        {
+                            SetCountdownStatus($"Siege Mode: " + SiegeVisibleTimer + " Seconds", 1500, MyFontEnum.Green);
+                        }
+                        if (msgId == 1)
+                        {
+                            SetCountdownStatus($"Siege Mode Deactivated", 1500, MyFontEnum.Red);
+                        }
+                        if (msgId == 2)
+                        {
+                            SetCountdownStatus($"Block Inoperative! Siege Mode Deactivated", 1500, MyFontEnum.Red);
+                        }
+                        else
+                        {
+                            SetCountdownStatus($"Error! Unknown State!", 1500, MyFontEnum.Red);
+                            return;
+                        }
+                            
                     }
                 }
             }
         }
-
-        private void DisplayEndMessageToNearPlayers()
-        {
-            List<IMyCharacter> playerCharacters = new List<IMyCharacter>();
-
-            if (dynResistBlock != null)
-            {
-                // Define the bounding sphere
-                var bound = new BoundingSphereD(dynResistBlock.GetPosition(), 50);
-                List<IMyEntity> nearEntities = MyAPIGateway.Entities.GetEntitiesInSphere(ref bound);
-
-                // Iterate through entities and find player characters
-                foreach (var entity in nearEntities)
-                {
-                    IMyCharacter character = entity as IMyCharacter;
-                    if (character != null && character.IsPlayer && bound.Contains(character.GetPosition()) != ContainmentType.Disjoint)
-                    {
-                        SetCountdownStatus($"Siege Mode Deactivated", 1500, MyFontEnum.Red);
-                    }
-                }
-            }
-        }
-
-        private void DisplayInoperativeMessageToNearPlayers()
-        {
-            List<IMyCharacter> playerCharacters = new List<IMyCharacter>();
-
-            if (dynResistBlock != null)
-            {
-                // Define the bounding sphere
-                var bound = new BoundingSphereD(dynResistBlock.GetPosition(), 50);
-                List<IMyEntity> nearEntities = MyAPIGateway.Entities.GetEntitiesInSphere(ref bound);
-
-                // Iterate through entities and find player characters
-                foreach (var entity in nearEntities)
-                {
-                    IMyCharacter character = entity as IMyCharacter;
-                    if (character != null && character.IsPlayer && bound.Contains(character.GetPosition()) != ContainmentType.Disjoint)
-                    {
-                        SetCountdownStatus($"Block Inoperative! Siege Mode Deactivated", 1500, MyFontEnum.Red);
-                    }
-                }
-            }
-        }
-
     }
 }
