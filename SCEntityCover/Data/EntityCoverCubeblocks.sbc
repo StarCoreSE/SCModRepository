@@ -489,6 +489,8 @@
       <MaxStoredPower>3</MaxStoredPower>
       <InitialStoredPowerRatio>0.3</InitialStoredPowerRatio>
       <RechargeMultiplier>0.8</RechargeMultiplier>
+      <HasPhysics>false</HasPhysics>
+      <IsStandAlone>true</IsStandAlone>
 
       <InventorySize>
         <X>1</X>
