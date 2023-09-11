@@ -45,7 +45,7 @@ namespace Klime.spawncolorcodedprefab
 
 
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
-    public class spawnmytheprefab : MySessionComponentBase
+    public class spawncolorprefab : MySessionComponentBase
     {
         private Dictionary<string, string> prefabMap = new Dictionary<string, string>
         {
