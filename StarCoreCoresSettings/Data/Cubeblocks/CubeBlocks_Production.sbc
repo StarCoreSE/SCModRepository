@@ -1,0 +1,670 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<!-- reduced speed, adjusted categories -->
+		<Definition xsi:type="MyObjectBuilder_AssemblerDefinition">
+			<Id>
+				<TypeId>Assembler</TypeId>
+				<SubtypeId>BasicAssembler</SubtypeId>
+			</Id>
+			<DisplayName>DisplayName_Block_BasicAssembler</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\basicAssembler.dds</Icon>
+			<Description>Description_AssemblerBasic</Description>
+			<CubeSize>Large</CubeSize>
+			<GuiVisible>false</GuiVisible>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\Large\BasicAssembler.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="60"/>
+				<Component Subtype="Construction" Count="40"/>
+				<Component Subtype="Motor" Count="10"/>
+				<Component Subtype="Display" Count="4"/>
+				<Component Subtype="Computer" Count="80"/>
+				<Component Subtype="SteelPlate" Count="20"/>
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="1" EndY="1" Default="true"/>
+				<MountPoint Side="Top" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Left" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Right" StartX="0" StartY="0" EndX="1" EndY="1"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\BasicAssembler_Construction1.mwm"/>
+				<Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BasicAssembler_Construction2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BasicAssembler_Construction3.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>BasicAssembler</BlockPairName>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>40</BuildTimeSeconds>
+			<ResourceSinkGroup>Factory</ResourceSinkGroup>
+			<InventoryMaxVolume>2</InventoryMaxVolume>
+			<InventorySize>
+				<X>1</X>
+				<Y>1</Y>
+				<Z>1</Z>
+			</InventorySize>
+			<StandbyPowerConsumption>0.001</StandbyPowerConsumption>
+			<OperationalPowerConsumption>0.28</OperationalPowerConsumption>
+			<BlueprintClasses>
+				<Class>SimpleComponents</Class>
+				<Class>SimpleEquipment</Class>
+				<Class>Tools</Class>
+				<Class>GVKBasicWeapons</Class>
+				<Class>GVKBasicHandheldAmmo</Class>
+				<Class>GVKBasicShipAmmo</Class>
+			</BlueprintClasses>
+			<AssemblySpeed>0.25</AssemblySpeed>
+			<DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
+			<DamagedSound>ParticleHeavyMech</DamagedSound>
+			<PrimarySound>BlockAssembler</PrimarySound>
+			<ActionSound>BlockAssemblerProcess</ActionSound>
+			<DestroyEffect>Explosion_Missile</DestroyEffect>
+			<DestroySound>WepSmallMissileExpl</DestroySound>
+			<PCU>40</PCU>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+			<IsAirTight>true</IsAirTight>
+			<TieredUpdateTimes>
+				<unsignedInt>60</unsignedInt>
+				<unsignedInt>120</unsignedInt>
+				<unsignedInt>240</unsignedInt>
+			</TieredUpdateTimes>
+		</Definition>
+		<!-- reduced speed -->
+		<Definition xsi:type="MyObjectBuilder_RefineryDefinition">
+			<Id>
+				<TypeId>Refinery</TypeId>
+				<SubtypeId>Blast Furnace</SubtypeId>
+			</Id>
+			<DisplayName>DisplayName_Block_Arc_Furnace</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\Blastfurnace.dds</Icon>
+			<Description>Description_RefineryBasic</Description>
+			<CubeSize>Large</CubeSize>
+			<GuiVisible>false</GuiVisible>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="2" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\Large\BasicRefinery.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="100"/>
+				<Component Subtype="Construction" Count="20"/>
+				<Component Subtype="Motor" Count="10"/>
+				<Component Subtype="Computer" Count="10"/>
+				<Component Subtype="SteelPlate" Count="20"/>
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+			<MirroringZ>Y</MirroringZ>
+			<MirroringY>Z</MirroringY>
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="1" EndY="1" Default="true"/>
+				<MountPoint Side="Left" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Right" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Front" StartX="0" StartY="0" EndX="1" EndY="2"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\BasicRefineryConstruction_1.mwm"/>
+				<Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BasicRefineryConstruction_2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BasicRefineryConstruction_3.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>Blast Furnace</BlockPairName>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>40</BuildTimeSeconds>
+			<ResourceSinkGroup>Factory</ResourceSinkGroup>
+			<InventoryMaxVolume>4</InventoryMaxVolume>
+			<InventorySize>
+				<X>2</X>
+				<Y>2</Y>
+				<Z>2</Z>
+			</InventorySize>
+			<InventoryFillFactorMin>0.3</InventoryFillFactorMin>
+			<InventoryFillFactorMax>0.6</InventoryFillFactorMax>
+			<StandbyPowerConsumption>0.001</StandbyPowerConsumption>
+			<OperationalPowerConsumption>0.33</OperationalPowerConsumption>
+			<BlueprintClasses>
+				<Class>CommonMetals</Class>
+			</BlueprintClasses>
+			<RefineSpeed>0.25</RefineSpeed>
+			<MaterialEfficiency>0.5</MaterialEfficiency>
+			<DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
+			<DamagedSound>ParticleHeavyMech</DamagedSound>
+			<PrimarySound>BlockRafinery</PrimarySound>
+			<ActionSound>BlockRafineryProcess</ActionSound>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+			<OreAmountPerPullRequest>2000</OreAmountPerPullRequest>
+			<PCU>75</PCU>
+			<TieredUpdateTimes>
+				<unsignedInt>60</unsignedInt>
+				<unsignedInt>120</unsignedInt>
+				<unsignedInt>240</unsignedInt>
+			</TieredUpdateTimes>
+		</Definition>
+		<!-- added for custom blueprint classes -->
+		<Definition xsi:type="MyObjectBuilder_AssemblerDefinition">
+			<Id>
+				<TypeId>Assembler</TypeId>
+				<SubtypeId>LargeAssembler</SubtypeId>
+			</Id>
+			<DisplayName>DisplayName_Block_Assembler</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\assembler.dds</Icon>
+			<Description>Description_Assembler</Description>
+			<CubeSize>Large</CubeSize>
+			<GuiVisible>false</GuiVisible>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="2"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\Large\Assembler.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="120"/>
+				<Component Subtype="Construction" Count="80"/>
+				<Component Subtype="Motor" Count="20"/>
+				<Component Subtype="Display" Count="10"/>
+				<Component Subtype="MetalGrid" Count="10"/>
+				<Component Subtype="Computer" Count="160"/>
+				<Component Subtype="SteelPlate" Count="20"/>
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="1" EndY="2" Default="true"/>
+				<MountPoint Side="Top" StartX="0" StartY="0" EndX="1" EndY="2"/>
+				<MountPoint Side="Left" StartX="0" StartY="0" EndX="2" EndY="1"/>
+				<MountPoint Side="Right" StartX="0" StartY="0" EndX="2" EndY="1"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.16" File="Models\Cubes\Large\AssemblerConstruction_1.mwm"/>
+				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\AssemblerConstruction_2.mwm"/>
+				<Model BuildPercentUpperBound="0.50" File="Models\Cubes\Large\AssemblerConstruction_3.mwm"/>
+				<Model BuildPercentUpperBound="0.83" File="Models\Cubes\Large\AssemblerConstruction_4.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\AssemblerConstruction_5.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>Assembler</BlockPairName>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>80</BuildTimeSeconds>
+			<ResourceSinkGroup>Factory</ResourceSinkGroup>
+			<InventoryMaxVolume>10</InventoryMaxVolume>
+			<InventorySize>
+				<X>1</X>
+				<Y>1</Y>
+				<Z>1</Z>
+			</InventorySize>
+			<StandbyPowerConsumption>0.001</StandbyPowerConsumption>
+			<OperationalPowerConsumption>0.56</OperationalPowerConsumption>
+			<BlueprintClasses>
+				<Class>LargeBlocks</Class>
+				<Class>SmallBlocks</Class>
+				<Class>Components</Class>
+				<Class>EliteEquipment</Class>
+				<Class>EliteTools</Class>
+				<Class>GVKEliteWeapons</Class>
+				<Class>GVKEliteHandheldAmmo</Class>
+				<Class>GVKEliteShipAmmo</Class>
+				<Class>BuildPlanner</Class>
+			</BlueprintClasses>
+			<DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
+			<DamagedSound>ParticleHeavyMech</DamagedSound>
+			<PrimarySound>BlockAssembler</PrimarySound>
+			<ActionSound>BlockAssemblerProcess</ActionSound>
+			<DestroyEffect>Explosion_Missile</DestroyEffect>
+			<DestroySound>WepSmallMissileExpl</DestroySound>
+			<PCU>40</PCU>
+			<IsAirTight>true</IsAirTight>
+			<TieredUpdateTimes>
+				<unsignedInt>60</unsignedInt>
+				<unsignedInt>120</unsignedInt>
+				<unsignedInt>240</unsignedInt>
+			</TieredUpdateTimes>
+		</Definition>
+		<!-- added for custom blueprint classes -->
+		<Definition xsi:type="MyObjectBuilder_SurvivalKitDefinition">
+			<Id>
+				<TypeId>SurvivalKit</TypeId>
+				<SubtypeId>SurvivalKitLarge</SubtypeId>
+			</Id>
+			<DisplayName>DisplayName_Block_SurvivalKit</DisplayName>
+			<Description>Description_SurvivalKit</Description>
+			<Icon>Textures\GUI\Icons\Cubes\SurvivalKitLarge.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<ResearchGroup>Tier00Basics</ResearchGroup>
+			<ResearchCost>5</ResearchCost>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\Large\SurvivalKit.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="20"/>
+				<Component Subtype="Construction" Count="2"/>
+				<Component Subtype="Medical" Count="5"/>
+				<Component Subtype="Motor" Count="4"/>
+				<Component Subtype="Display" Count="1"/>
+				<Component Subtype="Computer" Count="5"/>
+				<Component Subtype="SteelPlate" Count="10"/>
+			</Components>
+			<MountPoints>
+				<MountPoint Side="Left" StartX="0.1" StartY="0" EndX="0.9" EndY="0.9"/>
+				<MountPoint Side="Right" StartX="0.1" StartY="0" EndX="0.9" EndY="0.9"/>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="1" EndY="1" Default="true"/>
+			</MountPoints>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+			<MirroringZ>Y</MirroringZ>
+			<MirroringY>Z</MirroringY>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\SurvivalKit_Construction1.mwm"/>
+				<Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\SurvivalKit_Construction2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\SurvivalKit_Construction3.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>SurvivalKit</BlockPairName>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>30</BuildTimeSeconds>
+			<ResourceSinkGroup>Factory</ResourceSinkGroup>
+			<ScreenAreas>
+				<ScreenArea Name="CockpitScreen_01" DisplayName="Top panel"/>
+				<ScreenArea Name="CockpitScreen_02" DisplayName="Bottom panel"/>
+			</ScreenAreas>
+			<BlueprintClasses>
+				<Class>SurvivalKitIngots</Class>
+				<Class>BasicTools</Class>
+				<Class>BasicComponents</Class>
+			</BlueprintClasses>
+			<AssemblySpeed>0.4</AssemblySpeed>
+			<StandbyPowerConsumption>0.015</StandbyPowerConsumption>
+			<OperationalPowerConsumption>0.2</OperationalPowerConsumption>
+			<InventoryMaxVolume>2</InventoryMaxVolume>
+			<InventorySize>
+				<X>2</X>
+				<Y>2</Y>
+				<Z>2</Z>
+			</InventorySize>
+			<!-- 
+      <OtherInventoryMaxVolume>2</OtherInventoryMaxVolume>
+      <RefinerySound>BlockRafineryProcess</RefinerySound>
+      <SoundVolumeModifierRefinery>0.6</SoundVolumeModifierRefinery>
+      <SoundVolumeModifierAssembler>0.6</SoundVolumeModifierAssembler> -->
+			<DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+			<DamagedSound>ParticleWeapExpl</DamagedSound>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+			<PrimarySound>BlockAssembler</PrimarySound>
+			<ActionSound>BlockAssemblerProcess</ActionSound>
+			<ProgressSound>BlockMedicalProgress</ProgressSound>
+			<!-- <RefineMaterialAmountModifier>0.15</RefineMaterialAmountModifier>
+      <RefineDuration>6</RefineDuration>
+      <MaterialEfficiency>0.35</MaterialEfficiency>
+      <OreAmountPerPullRequest>500</OreAmountPerPullRequest>
+      <AssemblerPriority>0</AssemblerPriority> -->
+			<PCU>140</PCU>
+		</Definition>
+		<!-- added for custom blueprint classes -->
+		<Definition xsi:type="MyObjectBuilder_SurvivalKitDefinition">
+			<Id>
+				<TypeId>SurvivalKit</TypeId>
+				<SubtypeId>SurvivalKit</SubtypeId>
+			</Id>
+			<DisplayName>DisplayName_Block_SurvivalKit</DisplayName>
+			<Description>Description_SurvivalKit</Description>
+			<Icon>Textures\GUI\Icons\Cubes\SurvivalKitSmall.dds</Icon>
+			<CubeSize>Small</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="4" y="3" z="3"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\Small\SurvivalKit.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="1"/>
+				<Component Subtype="Construction" Count="2"/>
+				<Component Subtype="Medical" Count="5"/>
+				<Component Subtype="Motor" Count="4"/>
+				<Component Subtype="Display" Count="1"/>
+				<Component Subtype="Computer" Count="5"/>
+				<Component Subtype="SteelPlate" Count="5"/>
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="3"/>
+				<MountPoint Side="Back" StartX="1" StartY="0" EndX="2" EndY="1"/>
+				<MountPoint Side="Back" StartX="2" StartY="0" EndX="4" EndY="3"/>
+				<MountPoint Side="Front" StartX="0" StartY="0" EndX="4" EndY="3"/>
+				<MountPoint Side="Left" StartX="0" StartY="0" EndX="3" EndY="3"/>
+				<MountPoint Side="Right" StartX="0" StartY="0" EndX="3" EndY="3"/>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="4" EndY="3" Default="true"/>
+				<MountPoint Side="Top" StartX="0" StartY="0" EndX="4" EndY="3"/>
+			</MountPoints>
+			<MirroringZ>Y</MirroringZ>
+			<MirroringY>Z</MirroringY>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.50" File="Models\Cubes\Small\SurvivalKitConstruction_1.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\Small\SurvivalKitConstruction_2.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>SurvivalKit</BlockPairName>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>20</BuildTimeSeconds>
+			<ResourceSinkGroup>Factory</ResourceSinkGroup>
+			<BlueprintClasses>
+				<Class>SurvivalKitIngots</Class>
+				<Class>BasicTools</Class>
+				<Class>BasicComponents</Class>
+			</BlueprintClasses>
+			<AssemblySpeed>0.4</AssemblySpeed>
+			<ScreenAreas>
+				<ScreenArea Name="CockpitScreen_01" DisplayName="Top panel"/>
+				<ScreenArea Name="CockpitScreen_02" DisplayName="Bottom panel"/>
+			</ScreenAreas>
+			<StandbyPowerConsumption>0.015</StandbyPowerConsumption>
+			<OperationalPowerConsumption>0.2</OperationalPowerConsumption>
+			<InventoryMaxVolume>1</InventoryMaxVolume>
+			<InventorySize>
+				<X>2</X>
+				<Y>2</Y>
+				<Z>2</Z>
+			</InventorySize>
+			<!-- 
+      <OtherInventoryMaxVolume>2</OtherInventoryMaxVolume>
+      <RefinerySound>BlockRafineryProcess</RefinerySound> -->
+			<!-- <HealingAllowed>true</HealingAllowed>
+      <RefuelingAllowed>true</RefuelingAllowed>
+      <HealingSound>BlockMedicalProgress</HealingSound>
+      <SoundVolumeModifierRefinery>0.6</SoundVolumeModifierRefinery>
+      <SoundVolumeModifierAssembler>0.6</SoundVolumeModifierAssembler> -->
+			<DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+			<DamagedSound>ParticleWeapExpl</DamagedSound>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+			<PrimarySound>BlockAssembler</PrimarySound>
+			<ActionSound>BlockAssemblerProcess</ActionSound>
+			<ProgressSound>BlockMedicalProgress</ProgressSound>
+			<!-- <RefineMaterialAmountModifier>0.15</RefineMaterialAmountModifier>
+      <RefineDuration>6</RefineDuration>
+      <MaterialEfficiency>0.35</MaterialEfficiency>
+      <OreAmountPerPullRequest>500</OreAmountPerPullRequest>
+      <AssemblerPriority>0</AssemblerPriority> -->
+			<PCU>140</PCU>
+		</Definition>
+		<!-- added for custom blueprint classes -->
+        <Definition xsi:type="MyObjectBuilder_AssemblerDefinition">
+            <Id>
+                <TypeId>Assembler</TypeId>
+                <SubtypeId>LargeAssemblerIndustrial</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_Block_AssemblerIndustrial</DisplayName>
+            <Icon>Textures\GUI\Icons\Cubes\AdvancedAssemblerIndustrial.dds</Icon>
+            <Description>Description_Assembler</Description>
+            <CubeSize>Large</CubeSize>
+            <GuiVisible>false</GuiVisible>
+            <BlockTopology>TriangleMesh</BlockTopology>
+            <Size x="1" y="2" z="2" />
+            <ModelOffset x="0" y="0" z="0" />
+            <Model>Models\Cubes\Large\AdvancedAssemblerIndustrial.mwm</Model>
+            <Components>
+                <Component Subtype="SteelPlate" Count="120" />
+                <Component Subtype="Construction" Count="80" />
+                <Component Subtype="Motor" Count="20" />
+                <Component Subtype="Display" Count="10" />
+                <Component Subtype="MetalGrid" Count="10" />
+                <Component Subtype="Computer" Count="160" />
+                <Component Subtype="SteelPlate" Count="20" />
+            </Components>
+            <CriticalComponent Subtype="Computer" Index="0" />
+            <MountPoints>
+                <MountPoint Side="Front" StartX="0" StartY="0" EndX="1" EndY="1.1" />
+                <MountPoint Side="Front" StartX="0" StartY="1.1" EndX="1" EndY="2" />
+                <MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="1.1" />
+                <MountPoint Side="Back" StartX="0" StartY="1.1" EndX="0.1" EndY="2" />
+                <MountPoint Side="Back" StartX="0.9" StartY="1.1" EndX="1" EndY="2" />
+                <MountPoint Side="Back" StartX="0.1" StartY="1.9" EndX="0.9" EndY="2" />
+                <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="1" EndY="2" Default="true" />
+                <MountPoint Side="Top" StartX="0" StartY="0" EndX="1" EndY="2" />
+                <MountPoint Side="Left" StartX="0" StartY="0" EndX="2" EndY="1" />
+                <MountPoint Side="Left" StartX="0" StartY="1" EndX="0.1" EndY="2" />
+                <MountPoint Side="Left" StartX="1.9" StartY="1" EndX="2" EndY="2" />
+                <MountPoint Side="Left" StartX="0.1" StartY="1.9" EndX="1.9" EndY="2" />
+                <MountPoint Side="Right" StartX="0" StartY="0" EndX="2" EndY="2" />
+            </MountPoints>
+            <BuildProgressModels>
+                <Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\AdvancedAssemblerIndustrialConstruction_1.mwm" />
+                <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\AdvancedAssemblerIndustrialConstruction_2.mwm" />
+                <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\AdvancedAssemblerIndustrialConstruction_3.mwm" />
+            </BuildProgressModels>
+            <BlockPairName>AssemblerIndustrial</BlockPairName>
+            <EdgeType>Light</EdgeType>
+            <BuildTimeSeconds>80</BuildTimeSeconds>
+            <ResourceSinkGroup>Factory</ResourceSinkGroup>
+            <InventoryMaxVolume>4</InventoryMaxVolume>
+            <InventorySize>
+                <X>1</X>
+                <Y>1</Y>
+                <Z>1</Z>
+            </InventorySize>
+            <StandbyPowerConsumption>0.001</StandbyPowerConsumption>
+            <OperationalPowerConsumption>0.56</OperationalPowerConsumption>
+			<BlueprintClasses>
+				<Class>LargeBlocks</Class>
+				<Class>SmallBlocks</Class>
+				<Class>Components</Class>
+				<Class>EliteEquipment</Class>
+				<Class>EliteTools</Class>
+				<Class>GVKEliteWeapons</Class>
+				<Class>GVKEliteHandheldAmmo</Class>
+				<Class>GVKEliteShipAmmo</Class>
+				<Class>BuildPlanner</Class>
+			</BlueprintClasses>
+            <DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
+            <DamagedSound>ParticleHeavyMech</DamagedSound>
+            <PrimarySound>BlockAssembler</PrimarySound>
+            <ActionSound>BlockAssemblerProcess</ActionSound>
+            <DestroyEffect>Explosion_Missile</DestroyEffect>
+            <DestroySound>WepSmallMissileExpl</DestroySound>
+            <PCU>40</PCU>
+            <MirroringZ>Y</MirroringZ>
+            <MirroringY>Z</MirroringY>
+            <TieredUpdateTimes>
+                <unsignedInt>60</unsignedInt>
+                <unsignedInt>120</unsignedInt>
+                <unsignedInt>240</unsignedInt>
+            </TieredUpdateTimes>
+            <DLC>HeavyIndustry</DLC>
+        </Definition>
+		<!-- increase speed -->
+        <Definition xsi:type="MyObjectBuilder_OxygenGeneratorDefinition">
+            <Id>
+                <TypeId>OxygenGenerator</TypeId>
+                <SubtypeId></SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_Block_OxygenGenerator</DisplayName>
+            <Icon>Textures\GUI\Icons\Cubes\OxygenGenerator.dds</Icon>
+            <Description>Description_OxygenGenerator</Description>
+            <CubeSize>Large</CubeSize>
+            <BlockTopology>TriangleMesh</BlockTopology>
+            <Size x="1" y="2" z="1" />
+            <ModelOffset x="0" y="0" z="0" />
+            <Model>Models\Cubes\Large\OxygenGenerator.mwm</Model>
+            <Components>
+                <Component Subtype="SteelPlate" Count="110" />
+                <Component Subtype="Construction" Count="5" />
+                <Component Subtype="LargeTube" Count="2" />
+                <Component Subtype="Motor" Count="4" />
+                <Component Subtype="Computer" Count="5" />
+                <Component Subtype="SteelPlate" Count="10" />
+            </Components>
+            <CriticalComponent Subtype="Computer" Index="0" />
+            <MountPoints>
+                <MountPoint Side="Back" StartX="0.1" StartY="0.1" EndX="0.9" EndY="0.9" />
+                <MountPoint Side="Front" StartX="0.1" StartY="0.1" EndX="0.9" EndY="0.9" />
+                <MountPoint Side="Bottom" StartX="0.1" StartY="0.1" EndX="0.9" EndY="0.9" Default="true" />
+                <MountPoint Side="Top" StartX="0.1" StartY="0.1" EndX="0.9" EndY="0.9" />
+                <MountPoint Side="Left" StartX="0.1" StartY="0.1" EndX="0.9" EndY="0.9" />
+                <MountPoint Side="Right" StartX="0.1" StartY="0.1" EndX="0.9" EndY="0.9" />
+            </MountPoints>
+            <IsAirTight>true</IsAirTight>
+            <BuildProgressModels>
+                <Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\OxygenGeneratorConstruction_1.mwm" />
+                <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\OxygenGeneratorConstruction_2.mwm" />
+                <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\OxygenGeneratorConstruction_3.mwm" />
+            </BuildProgressModels>
+            <BlockPairName>OxygenGenerator</BlockPairName>
+            <EdgeType>Light</EdgeType>
+            <BuildTimeSeconds>22</BuildTimeSeconds>
+            <ResourceSourceGroup>Reactors</ResourceSourceGroup>
+            <ResourceSinkGroup>Factory</ResourceSinkGroup>
+            <IceConsumptionPerSecond>75</IceConsumptionPerSecond> <!-- vanilla = 25 -->
+            <InventoryMaxVolume>4</InventoryMaxVolume>
+            <InventorySize>
+                <X>2</X>
+                <Y>2</Y>
+                <Z>2</Z>
+            </InventorySize>
+            <InventoryFillFactorMin>0.3</InventoryFillFactorMin>
+            <InventoryFillFactorMax>0.6</InventoryFillFactorMax>
+            <FuelPullAmountFromConveyorInMinutes>2.2</FuelPullAmountFromConveyorInMinutes>
+            <StandbyPowerConsumption>0.001</StandbyPowerConsumption>
+            <OperationalPowerConsumption>0.5</OperationalPowerConsumption>
+            <ProducedGases>
+                <GasInfo>
+                    <Id>
+                        <TypeId>GasProperties</TypeId>
+                        <SubtypeId>Oxygen</SubtypeId>
+                    </Id>
+                    <IceToGasRatio>10</IceToGasRatio>
+                </GasInfo>
+                <GasInfo>
+                    <Id>
+                        <TypeId>GasProperties</TypeId>
+                        <SubtypeId>Hydrogen</SubtypeId>
+                    </Id>
+                    <IceToGasRatio>20</IceToGasRatio>
+                </GasInfo>
+            </ProducedGases>
+            <BlueprintClasses>
+                <Class>Ice</Class>
+                <Class>OxygenBottles</Class>
+                <Class>HydrogenBottles</Class>
+            </BlueprintClasses>
+            <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+            <DamagedSound>ParticleWeapExpl</DamagedSound>
+            <GenerateSound>BlockOxyGenProcess</GenerateSound>
+            <IdleSound>BlockOxyGenIdle</IdleSound>
+            <EmissiveColorPreset>Extended</EmissiveColorPreset>
+            <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+            <DestroySound>WepSmallWarheadExpl</DestroySound>
+            <MirroringX>Y</MirroringX>
+            <MirroringY>Z</MirroringY>
+            <MirroringZ>Y</MirroringZ>
+            <PCU>50</PCU>
+            <TieredUpdateTimes>
+                <unsignedInt>300</unsignedInt>
+                <unsignedInt>600</unsignedInt>
+                <unsignedInt>1200</unsignedInt>
+            </TieredUpdateTimes>
+        </Definition>
+		<!-- increase speed -->
+        <Definition xsi:type="MyObjectBuilder_OxygenGeneratorDefinition">
+            <Id>
+                <TypeId>OxygenGenerator</TypeId>
+                <SubtypeId>OxygenGeneratorSmall</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_Block_OxygenGenerator</DisplayName>
+            <Icon>Textures\GUI\Icons\Cubes\OxygenGeneratorSmall.dds</Icon>
+            <Description>Description_OxygenGenerator</Description>
+            <CubeSize>Small</CubeSize>
+            <BlockTopology>TriangleMesh</BlockTopology>
+            <Size x="3" y="3" z="2" />
+            <ModelOffset x="0" y="0" z="0" />
+            <Model>Models\Cubes\Small\OxygenGenerator.mwm</Model>
+            <SilenceableByShipSoundSystem>true</SilenceableByShipSoundSystem>
+            <Components>
+                <Component Subtype="SteelPlate" Count="6" />
+                <Component Subtype="Construction" Count="8" />
+                <Component Subtype="LargeTube" Count="2" />
+                <Component Subtype="Motor" Count="1" />
+                <Component Subtype="Computer" Count="3" />
+                <Component Subtype="SteelPlate" Count="2" />
+            </Components>
+            <CriticalComponent Subtype="Computer" Index="0" />
+            <MountPoints>
+                <MountPoint Side="Front" StartX="0" StartY="0" EndX="3" EndY="3" />
+                <MountPoint Side="Right" StartX="1" StartY="0" EndX="2" EndY="3" />
+                <MountPoint Side="Right" StartX="0" StartY="1" EndX="1" EndY="2" />
+                <MountPoint Side="Left" StartX="0" StartY="0" EndX="1" EndY="3" />
+                <MountPoint Side="Left" StartX="1" StartY="1" EndX="2" EndY="2" />
+                <MountPoint Side="Top" StartX="0" StartY="1" EndX="3" EndY="2" />
+                <MountPoint Side="Top" StartX="0" StartY="0" EndX="1" EndY="1" />
+                <MountPoint Side="Top" StartX="2" StartY="0" EndX="3" EndY="1" />
+                <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="1" />
+                <MountPoint Side="Bottom" StartX="0" StartY="1" EndX="1" EndY="2" />
+                <MountPoint Side="Bottom" StartX="2" StartY="1" EndX="3" EndY="2" />
+                <MountPoint Side="Back" StartX="0" StartY="1" EndX="3" EndY="2" />
+            </MountPoints>
+            <BuildProgressModels>
+                <Model BuildPercentUpperBound="0.50" File="Models\Cubes\Small\OxygenGeneratorConstruction_1.mwm" />
+                <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Small\OxygenGeneratorConstruction_2.mwm" />
+            </BuildProgressModels>
+            <Center x="1" y="1" z="0" />
+            <BuildTimeSeconds>14</BuildTimeSeconds>
+            <EdgeType>Light</EdgeType>
+            <ResourceSourceGroup>Reactors</ResourceSourceGroup>
+            <ResourceSinkGroup>Factory</ResourceSinkGroup>
+            <IceConsumptionPerSecond>15</IceConsumptionPerSecond>
+            <InventoryMaxVolume>1</InventoryMaxVolume>
+            <SilenceableByShipSoundSystem>true</SilenceableByShipSoundSystem>
+            <InventorySize>
+                <X>2</X>
+                <Y>2</Y>
+                <Z>2</Z>
+            </InventorySize>
+
+            <InventoryFillFactorMin>0.3</InventoryFillFactorMin>
+            <InventoryFillFactorMax>0.6</InventoryFillFactorMax>
+
+            <FuelPullAmountFromConveyorInMinutes>2.75</FuelPullAmountFromConveyorInMinutes>
+
+            <StandbyPowerConsumption>0.001</StandbyPowerConsumption>
+            <OperationalPowerConsumption>0.1</OperationalPowerConsumption>
+            <ProducedGases>
+                <GasInfo>
+                    <Id>
+                        <TypeId>GasProperties</TypeId>
+                        <SubtypeId>Oxygen</SubtypeId>
+                    </Id>
+                    <IceToGasRatio>10</IceToGasRatio>
+                </GasInfo>
+                <GasInfo>
+                    <Id>
+                        <TypeId>GasProperties</TypeId>
+                        <SubtypeId>Hydrogen</SubtypeId>
+                    </Id>
+                    <IceToGasRatio>20</IceToGasRatio>
+                </GasInfo>
+            </ProducedGases>
+            <BlueprintClasses>
+                <Class>Ice</Class>
+                <Class>OxygenBottles</Class>
+                <Class>HydrogenBottles</Class>
+            </BlueprintClasses>
+            <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+            <DamagedSound>ParticleWeapExpl</DamagedSound>
+            <BlockPairName>OxygenGenerator</BlockPairName>
+            <GenerateSound>BlockOxyGenProcess</GenerateSound>
+            <IdleSound>BlockOxyGenIdle</IdleSound>
+            <DestroyEffect>Explosion_Missile</DestroyEffect>
+            <DestroySound>WepSmallMissileExpl</DestroySound>
+            <EmissiveColorPreset>Extended</EmissiveColorPreset>
+            <DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
+            <DestroySound>WepSmallWarheadExpl</DestroySound>
+            <PCU>50</PCU>
+            <MirroringX>Z</MirroringX>
+            <MirroringY>Z</MirroringY>
+            <MirroringZ>Y</MirroringZ>
+            <TieredUpdateTimes>
+                <unsignedInt>300</unsignedInt>
+                <unsignedInt>600</unsignedInt>
+                <unsignedInt>1200</unsignedInt>
+            </TieredUpdateTimes>
+        </Definition>
+	</CubeBlocks>
+</Definitions>

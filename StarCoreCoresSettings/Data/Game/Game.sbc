@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Definition xsi:type="VR.GameDefinition">
+        <Id>
+            <TypeId>MyObjectBuilder_GameDefinition</TypeId>
+            <SubtypeId>VRageDefault</SubtypeId>
+        </Id>
+        <SessionComponents>
+            <Component>MyAIComponent</Component>
+            <Component>MyAiTargetManager</Component>
+            <Component>MyAudioComponent</Component>
+            <Component>MyChatSystem</Component>
+            <Component>MyDamageSystem</Component>
+            <Component>MyDebris</Component>
+            <Component>MyFloatingObjects</Component>
+            <Component>MyGamePruningStructure</Component>
+            <Component>MyGlobalEvents</Component>
+            <Component>MyHud</Component>
+            <Component>MyHudWarnings</Component>
+            <Component>MyLights</Component>
+            <Component>MyMaterialPropertiesHelper</Component>
+            <Component>MyParticlesManager</Component>
+            <Component>MyPhysics</Component>
+            <Component>MyPhysicsComponentSystem</Component>
+            <Component>MyPrecalcComponent</Component>
+            <Component>MyScriptManager</Component>
+            <Component>MySector</Component>
+            <Component>MySessionComponentAnimationSystem</Component>
+            <Component Type="MyObjectBuilder_CoordinateSystemDefinition" Subtype="CoordinateSystem">MyCoordinateSystem</Component>
+            <Component Type="MyObjectBuilder_ClipboardDefinition" Subtype="ClipboardBase">MyClipboardComponent</Component>
+            <Component>MySessionComponentEntityTrigger</Component>
+            <Component>MySessionComponentMissionTriggers</Component>
+            <Component>MySessionComponentVoxelHand</Component>
+            <Component>MySessionComponentTriggerSystem</Component>
+            <Component>MySessionComponentCutscenes</Component>
+            <Component>MyVisualScriptManagerSessionComponent</Component>
+            <Component>MyThirdPersonSpectator</Component>
+            <Component>MyTimerComponentSystem</Component>
+            <Component>MyToolbarComponent</Component>
+            <Component>MyRadialMenuComponent</Component>
+            <Component>MyVoxelOperationsSessionComponent</Component>
+            <Component>MySessionComponentExtDebug</Component>
+            <Component>MyCubeGrids</Component>
+            <Component>MyHighlightSystem</Component>
+            <Component>MyPrecalcComponent</Component>
+            <Component>MyLocalizationSessionComponent</Component>
+            <Component>MySessionComponentAssetModifiers</Component>
+            <Component Type="MyObjectBuilder_ContainerDropSystemDefinition" Subtype="Default">MySessionComponentContainerDropSystem</Component>
+            <Component Type="MyObjectbuilder_SessionComponentEconomyDefinition" Subtype="Default">MySessionComponentEconomy</Component>
+            <Component Type="MyObjectBuilder_SessionComponentContractSystemDefinition" Subtype="Default">MySessionComponentContractSystem</Component>
+            <Component>MySessionComponentReplay</Component>
+            <Component>MySessionComponentIngameHelp</Component>
+        </SessionComponents>
+    </Definition>
+
+    <Definition xsi:type="VR.GameDefinition">
+        <Id>
+            <TypeId>MyObjectBuilder_GameDefinition</TypeId>
+            <SubtypeId>Space</SubtypeId>
+        </Id>
+
+        <Default>true</Default>
+
+        <InheritFrom>VRageDefault</InheritFrom>
+
+        <SessionComponents Combine="Union">
+            <Component>MyTerminalControls</Component>
+            <Component>MySpaceFaunaComponent</Component>
+            <Component>MySpaceBuildComponent</Component>
+            <Component>MySpacePlanetTrackComponent</Component>
+            <Component>MySpaceRespawnComponent</Component>
+            <Component>MyAntennaSystem</Component>
+            <Component>MyEnvironmentalParticles</Component>
+            <Component>MyEncounterGenerator</Component>
+            <Component>MyGravityProviderSystem</Component>
+            <Component>MyProceduralWorldGenerator</Component>
+            <Component>MyPirateAntennas</Component>
+            <Component>MyMeteorShower</Component>
+            <Component>MyWarheads</Component>
+            <Component>MyExplosions</Component>
+            <Component>MyMissiles</Component>
+            <Component>MyProjectiles</Component>
+            <Component>MyOreDetectorSessionComponent</Component>
+            <Component>MyNeutralShipSpawner</Component>
+            <Component Type="MyObjectBuilder_CubeBuilderDefinition" Subtype="CubeBuilderBase">MyCubeBuilder</Component>
+            <Component Type="MyObjectBuilder_DemoComponentDefinition" Subtype="Default">DemoComponent</Component>
+            <Component>MyPlanets</Component>
+            <Component>MyHeightMapLoadingSystem</Component>
+            <Component>MySessionComponentPlanetAmbientSounds</Component>
+            <Component>MyPlanetTrackComponent</Component>
+            <Component>MySessionComponentScriptSharedStorage</Component>
+            <Component>MyEnvironmentBotSpawningSystem</Component>
+            <Component>MySectorWeatherComponent</Component>
+            <Component>MyPlanets</Component>
+            <Component>MyHeightMapLoadingSystem</Component>
+            <Component>MySessionComponentPlanetAmbientSounds</Component>
+            <Component>MyPlanetTrackComponent</Component>
+            <Component>MyPlanetEnvironmentSessionComponent</Component>
+            <Component>MyEnvironmentBotSpawningSystem</Component>
+            <Component>MySectorWeatherComponent</Component>
+            <Component>MyCampaignSessionComponent</Component>
+            <Component>MyEntityTransformationSystem</Component>
+            <Component>MySessionComponentResearch</Component>
+            <Component>MySteamAchievements</Component>
+            <Component>MySessionComponentTrash</Component>
+            <Component>MySteamAchievements</Component>
+            <Component>MyAnselSessionComponent</Component>
+            <Component>MySessionComponentSmartUpdater</Component>
+            <Component>MySessionComponentTeamBalancer</Component>
+            <Component>MySessionComponentDLC</Component>
+            <Component>MySessionComponentGameInventory</Component>
+            <Component>MyToolSwitcher</Component>
+            <Component>MyEmoteSwitcher</Component>
+            <Component Type="MyObjectBuilder_BankingSystemDefinition" Subtype="BankingSystem">MyBankingSystem</Component>
+            <Component>MySessionComponentPanels</Component>
+            <Component>MySessionComponentMatch</Component>
+        </SessionComponents>
+
+        <ExplosionAmmoVolumeMin>1</ExplosionAmmoVolumeMin>
+        <ExplosionAmmoVolumeMax>421875</ExplosionAmmoVolumeMax> <!-- 15000 or just under a small cargo, new value makes it require more cargo before reaching max explosion -->
+        <ExplosionRadiusMin>0.3</ExplosionRadiusMin>
+        <ExplosionRadiusMax>20</ExplosionRadiusMax> <!-- 30 -->
+        <ExplosionDamagePerLiter>0.1</ExplosionDamagePerLiter> <!-- 1 -->
+        <ExplosionDamageMax>2000</ExplosionDamageMax>  <!-- 5000 or one rocket explosion (pre explosion modifier) -->
+
+    </Definition>
+</Definitions>

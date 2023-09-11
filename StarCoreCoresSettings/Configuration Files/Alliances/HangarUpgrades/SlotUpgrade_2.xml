@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HangarUpgrade xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<UpgradeId>2</UpgradeId>
+	<Enabled>true</Enabled>
+	<NewSlots>15</NewSlots>
+	<MoneyRequired>1000000</MoneyRequired>
+	<MetaPointsRequired>0</MetaPointsRequired>
+	<items>
+		<ItemRequirement>
+			<Enabled>false</Enabled>
+			<RequiredAmount>50</RequiredAmount>
+			<TypeId>Ingot</TypeId>
+			<SubTypeId>Uranium</SubTypeId>
+		</ItemRequirement>
+	</items>
+	<AddsToUpkeep>10000000</AddsToUpkeep>
+</HangarUpgrade>

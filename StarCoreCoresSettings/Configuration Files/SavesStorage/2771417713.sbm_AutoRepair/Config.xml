@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Config xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Boost_Consumption_Item>MyObjectBuilder_Ingot/Uranium</Boost_Consumption_Item>
+  <Boost_Time_Increase_Amount_Seconds>1200</Boost_Time_Increase_Amount_Seconds>
+  <Boost_Multiplier>3</Boost_Multiplier>
+  <Base_Time_Multiplier>0.30</Base_Time_Multiplier>
+  <Built_Percentage>0</Built_Percentage>
+  <ContainerTag>[mnm]</ContainerTag>
+</Config>

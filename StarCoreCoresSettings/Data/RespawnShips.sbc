@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<RespawnShips>
+		<!-- <Ship Enabled="false">
+			<Id>
+				<TypeId>RespawnShipDefinition</TypeId>
+				<SubtypeId>RespawnPlanetPod</SubtypeId>
+			</Id>
+			<DisplayName>CHADPOD</DisplayName>
+			<Icon>Textures\GUI\Icons\RespawnShips\CHADPOD.png</Icon>
+			<CooldownSeconds>200</CooldownSeconds>
+			<Prefab>CHADPOD</Prefab>
+			<MinimalAirDensity>0.8</MinimalAirDensity>
+			<PlanetDeployAltitude>50</PlanetDeployAltitude>
+			<UseForPlanetsWithAtmosphere>true</UseForPlanetsWithAtmosphere>
+			<InitialLinearVelocity x="0" y="0" z="0"/>
+			<InitialAngularVelocity x="0" y="0" z="0"/>
+			<HelpTextLocalizationId>RespawnScreeenHelpTextSpawn</HelpTextLocalizationId>
+		</Ship> -->
+		<Ship Enabled="true">
+			<Id>
+				<TypeId>RespawnShipDefinition</TypeId>
+				<SubtypeId>RespawnPlanetPod</SubtypeId>
+			</Id>
+			<DisplayName>DO NOT USE.</DisplayName>
+			<Icon>Textures\GUI\Icons\RespawnShips\Trueno.png</Icon>
+			<CooldownSeconds>200</CooldownSeconds>
+			<Prefab>Do better next time</Prefab>
+			<MinimalAirDensity>0.5</MinimalAirDensity>
+			<PlanetDeployAltitude>10</PlanetDeployAltitude>
+			<UseForPlanetsWithAtmosphere>true</UseForPlanetsWithAtmosphere>
+			<InitialLinearVelocity x="0" y="0" z="0"/>
+			<InitialAngularVelocity x="0" y="0" z="0"/>
+			<HelpTextLocalizationId>RespawnScreeenHelpTextSpawn</HelpTextLocalizationId>
+		</Ship>
+		<Ship Enabled="false">
+			<Id>
+				<TypeId>RespawnShipDefinition</TypeId>
+				<SubtypeId>RespawnMoonPod</SubtypeId>
+			</Id>
+			<DisplayName>DisplayName_PlanetaryLander</DisplayName>
+			<Icon>Textures\GUI\Icons\RespawnShips\RespawnMoonPod.png</Icon>
+			<CooldownSeconds>900</CooldownSeconds>
+			<Prefab>RespawnMoonPod</Prefab>
+			<PlanetDeployAltitude>8</PlanetDeployAltitude>
+			<UseForPlanetsWithoutAtmosphere>true</UseForPlanetsWithoutAtmosphere>
+			<HelpTextLocalizationId>RespawnScreeenHelpTextSpawn</HelpTextLocalizationId>
+		</Ship>
+		<Ship Enabled="false">
+			<Id>
+				<TypeId>RespawnShipDefinition</TypeId>
+				<SubtypeId>RespawnSpacePod</SubtypeId>
+			</Id>
+			<DisplayName>DisplayName_RespawnPodSpace</DisplayName>
+			<Icon>Textures\GUI\Icons\RespawnShips\RespawnSpacePod.png</Icon>
+			<CooldownSeconds>900</CooldownSeconds>
+			<Prefab>RespawnSpacePod</Prefab>
+			<UseForSpace>true</UseForSpace>
+			<HelpTextLocalizationId>RespawnScreeenHelpTextSpaceSpawn</HelpTextLocalizationId>
+		</Ship>
+	</RespawnShips>
+</Definitions>

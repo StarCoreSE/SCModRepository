@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridRepairUpgrades xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <UpgradeId>1</UpgradeId>
+  <Enabled>true</Enabled>
+  <MoneyRequired>5000000</MoneyRequired>
+  <MetaPointsRequired>500000</MetaPointsRequired>
+  <items>
+    <ItemRequirement>
+      <Enabled>false</Enabled>
+      <RequiredAmount>50</RequiredAmount>
+      <TypeId>Ingot</TypeId>
+      <SubTypeId>Uranium</SubTypeId>
+    </ItemRequirement>
+  </items>
+  <SecondsPerCycle>20</SecondsPerCycle>
+  <ProjectedBuildPerCycle>20</ProjectedBuildPerCycle>
+  <RepairBlocksPerCycle>20</RepairBlocksPerCycle>
+  <PriceIfNotDefined>50000</PriceIfNotDefined>
+  <repairCost>
+    <ComponentCostForRepair>
+      <SubTypeId>SteelPlate</SubTypeId>
+      <Cost>200</Cost>
+    </ComponentCostForRepair>
+  </repairCost>
+  <BannedComponents>
+    <string>AdminKit</string>
+    <string>ShitminKit</string>
+  </BannedComponents>
+</GridRepairUpgrades>

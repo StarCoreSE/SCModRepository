@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition>
+			<Id>
+				<TypeId>CubeBlock</TypeId>
+				<SubtypeId>RunwayMiddleWide</SubtypeId>
+			</Id>
+			<DisplayName>Runway Middle Wide</DisplayName>
+			<Icon>Textures\Icons\RunwayStraight.dds</Icon>
+            <Description>Large Runway made by Ntech Co.</Description>
+			<Public>true</Public>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="22" y="1" z="20"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Center x="0" y="0" z="19"/>
+			<GuiVisible>false</GuiVisible>
+			<Model>Models\Cubes\RunwayMiddleWide.mwm</Model>
+			<Components>
+				<Component Subtype="Girder" Count="100"/>
+				<Component Subtype="Construction" Count="1000"/>
+			</Components>
+			<CriticalComponent Subtype="Construction" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="22" EndY="1" Default="true"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="22" EndY="1"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="20" EndY="1"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="20" EndY="1"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="22" EndY="20"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="22" EndY="20"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\RunwayMiddleWide_Constr1.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>RunwayMiddleSectionWide</BlockPairName>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>60</BuildTimeSeconds>
+			<PCU>1</PCU>
+			<UsesDeformation>false</UsesDeformation>
+			<DeformationRatio>0.0</DeformationRatio>
+            <IsAirTight>true</IsAirTight>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

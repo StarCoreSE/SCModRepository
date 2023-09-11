@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ProgrammableBlockDefinition">
+			<Id>
+				<TypeId>MyProgrammableBlock</TypeId>
+				<SubtypeId>SmallProgrammableBlock</SubtypeId>
+			</Id>
+			<Public>true</Public>
+			<DisplayName>DisplayName_Programmable_Block</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\ProgrammingBlock.dds</Icon>
+			<Description>Description_ProgrammableBlock</Description>
+			<CubeSize>Small</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\Small\ProgrammingBlock.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="1"/>
+				<Component Subtype="GVK_Data_Core" Count="1"/>
+				<Component Subtype="SteelPlate" Count="1"/>
+				<Component Subtype="Construction" Count="2"/>
+				<Component Subtype="LargeTube" Count="2"/>
+				<Component Subtype="Computer" Count="2"/>
+				<Component Subtype="Motor" Count="1"/>
+				<Component Subtype="Display" Count="1"/>
+				<Component Subtype="SteelPlate" Count="10"/>
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.50" File="Models\Cubes\Small\ProgrammingBlockConstruction_1.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\Small\ProgrammingBlockConstruction_2.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>ProgrammableBlock</BlockPairName>
+			<MirroringZ>Y</MirroringZ>
+			<MirroringY>Z</MirroringY>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>8</BuildTimeSeconds>
+			<MountPoints>
+				<MountPoint Side="Front" ExclusionMask="3" PropertiesMask="3" StartX="0" StartY="0" EndX="1" EndY="1"/>
+			</MountPoints>
+			<ScreenAreas>
+				<ScreenArea Name="CockpitScreen_01" DisplayName="DisplayName_Screen_Large" TextureResolution="256" ScreenWidth="1" ScreenHeight="1"/>
+				<ScreenArea Name="CockpitScreen_02" DisplayName="DisplayName_Screen_Keyboard" TextureResolution="128" ScreenWidth="11" ScreenHeight="4"/>
+			</ScreenAreas>
+			<ResourceSinkGroup>Utility</ResourceSinkGroup>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DestroyEffect>BlockDestroyedExplosion_Tiny</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+			<PCU>100</PCU>
+			<IsAirTight>false</IsAirTight>
+		</Definition>
+		<Definition xsi:type="MyObjectBuilder_ProgrammableBlockDefinition">
+			<Id>
+				<TypeId>MyProgrammableBlock</TypeId>
+				<SubtypeId>LargeProgrammableBlock</SubtypeId>
+			</Id>
+			<Public>true</Public>
+			<DisplayName>DisplayName_Programmable_Block</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\ProgrammingBlock.dds</Icon>
+			<Description>Description_ProgrammableBlock</Description>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\Large\ProgrammingBlock.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="1"/>
+				<Component Subtype="GVK_Data_Core" Count="1"/>
+				<Component Subtype="SteelPlate" Count="11"/>
+				<Component Subtype="Construction" Count="4"/>
+				<Component Subtype="LargeTube" Count="2"/>
+				<Component Subtype="Computer" Count="2"/>
+				<Component Subtype="Motor" Count="1"/>
+				<Component Subtype="Display" Count="1"/>
+				<Component Subtype="SteelPlate" Count="30"/>
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\ProgrammingBlockConstruction_1.mwm"/>
+				<Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\ProgrammingBlockConstruction_2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\ProgrammingBlockConstruction_3.mwm"/>
+			</BuildProgressModels>
+			<ScreenAreas>
+				<ScreenArea Name="CockpitScreen_02" DisplayName="DisplayName_Screen_Large" TextureResolution="512" ScreenWidth="16" ScreenHeight="10"/>
+				<ScreenArea Name="CockpitScreen_01" DisplayName="DisplayName_Screen_Keyboard" TextureResolution="256" ScreenWidth="5" ScreenHeight="2"/>
+			</ScreenAreas>
+			<BlockPairName>ProgrammableBlock</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>20</BuildTimeSeconds>
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="0" EndX="1.0" EndY="1.0"/>
+			</MountPoints>
+			<ResourceSinkGroup>Utility</ResourceSinkGroup>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+			<PCU>100</PCU>
+			<IsAirTight>false</IsAirTight>
+		</Definition>
+		<Definition xsi:type="MyObjectBuilder_ProgrammableBlockDefinition">
+			<Id>
+				<TypeId>MyProgrammableBlock</TypeId>
+				<SubtypeId>LargeProgrammableBlockReskin</SubtypeId>
+			</Id>
+			<Public>true</Public>
+			<DisplayName>DisplayName_Programmable_BlockReskin</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\ProgrammableBlock.dds</Icon>
+			<Description>Description_ProgrammableBlock</Description>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\Large\ProgrammableBlock.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="1"/>
+				<Component Subtype="GVK_Data_Core" Count="1"/>
+				<Component Subtype="SteelPlate" Count="11"/>
+				<Component Subtype="Construction" Count="4"/>
+				<Component Subtype="LargeTube" Count="2"/>
+				<Component Subtype="Computer" Count="2"/>
+				<Component Subtype="Motor" Count="1"/>
+				<Component Subtype="Display" Count="1"/>
+				<Component Subtype="SteelPlate" Count="30"/>
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\ProgrammableBlockConstruction_1.mwm"/>
+				<Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\ProgrammableBlockConstruction_2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\ProgrammableBlockConstruction_3.mwm"/>
+			</BuildProgressModels>
+			<ScreenAreas>
+				<ScreenArea Name="CockpitScreen_01" DisplayName="DisplayName_Screen_Large" TextureResolution="512" ScreenWidth="4" ScreenHeight="5"/>
+				<ScreenArea Name="CockpitScreen_02" DisplayName="DisplayName_Screen_Keyboard" TextureResolution="256" ScreenWidth="5" ScreenHeight="3"/>
+			</ScreenAreas>
+			<BlockPairName>ProgrammableBlockReskin</BlockPairName>
+			<MirroringX>MinusHalfY</MirroringX>
+			<MirroringY>ZHalfY</MirroringY>
+			<MirroringZ>HalfY</MirroringZ>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>20</BuildTimeSeconds>
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="0" EndX="1.0" EndY="0.2" Default="true"/>
+				<MountPoint Side="Bottom" StartX="0.8" StartY="0.2" EndX="1.0" EndY="1"/>
+				<MountPoint Side="Left" StartX="0.0" StartY="0" EndX="0.2" EndY="1.0"/>
+				<MountPoint Side="Back" StartX="0.8" StartY="0" EndX="1.0" EndY="1.0"/>
+				<MountPoint Side="Front" StartX="0" StartY="0" EndX="1.0" EndY="1.0"/>
+				<MountPoint Side="Right" StartX="0" StartY="0" EndX="1.0" EndY="1.0"/>
+				<MountPoint Side="Top" StartX="0.8" StartY="0" EndX="1.0" EndY="1"/>
+				<MountPoint Side="Top" StartX="0.0" StartY="0.8" EndX="0.8" EndY="1"/>
+			</MountPoints>
+			<ResourceSinkGroup>Utility</ResourceSinkGroup>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+			<PCU>100</PCU>
+			<DLC>Automatons</DLC>
+		</Definition>
+		<Definition xsi:type="MyObjectBuilder_ProgrammableBlockDefinition">
+			<Id>
+				<TypeId>MyProgrammableBlock</TypeId>
+				<SubtypeId>SmallProgrammableBlockReskin</SubtypeId>
+			</Id>
+			<Public>true</Public>
+			<DisplayName>DisplayName_Programmable_BlockReskin</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\ProgrammableBlockReskin.dds</Icon>
+			<Description>Description_ProgrammableBlock</Description>
+			<CubeSize>Small</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\Small\ProgrammableBlockReskin.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="1"/>
+				<Component Subtype="GVK_Data_Core" Count="1"/>
+				<Component Subtype="SteelPlate" Count="1"/>
+				<Component Subtype="Construction" Count="2"/>
+				<Component Subtype="LargeTube" Count="2"/>
+				<Component Subtype="Computer" Count="2"/>
+				<Component Subtype="Motor" Count="1"/>
+				<Component Subtype="Display" Count="1"/>
+				<Component Subtype="SteelPlate" Count="10"/>
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.50" File="Models\Cubes\Small\ProgrammableBlockReskinConstruction_1.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\Small\ProgrammableBlockReskinConstruction_2.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>ProgrammableBlockReskin</BlockPairName>
+			<MirroringZ>Y</MirroringZ>
+			<MirroringY>Z</MirroringY>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>8</BuildTimeSeconds>
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0.1" StartY="0.1" EndX="0.9" EndY="0.9" Default="true"/>
+				<MountPoint Side="Left" StartX="0.1" StartY="0" EndX="0.7" EndY="0.9"/>
+				<MountPoint Side="Front" StartX="0.1" StartY="0.1" EndX="0.9" EndY="0.9"/>
+				<MountPoint Side="Back" StartX="0.2" StartY="0" EndX="0.8" EndY="0.1"/>
+				<MountPoint Side="Right" StartX="0.3" StartY="0" EndX="0.9" EndY="0.9"/>
+				<MountPoint Side="Top" StartX="0.1" StartY="0.3" EndX="0.9" EndY="1"/>
+			</MountPoints>
+			<ScreenAreas>
+				<ScreenArea Name="CockpitScreen_01" DisplayName="DisplayName_Screen_Large" TextureResolution="256" ScreenWidth="10" ScreenHeight="7"/>
+				<ScreenArea Name="CockpitScreen_02" DisplayName="DisplayName_Screen_Keyboard" TextureResolution="128" ScreenWidth="11" ScreenHeight="4"/>
+			</ScreenAreas>
+			<ResourceSinkGroup>Utility</ResourceSinkGroup>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DestroyEffect>BlockDestroyedExplosion_Tiny</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+			<PCU>100</PCU>
+			<IsAirTight>false</IsAirTight>
+			<DLC>Automatons</DLC>
+		</Definition>
+		<Definition xsi:type="MyObjectBuilder_DefensiveCombatBlockDefinition">
+			<Id>
+				<TypeId>DefensiveCombatBlock</TypeId>
+				<SubtypeId>LargeDefensiveCombat</SubtypeId>
+			</Id>
+			<DisplayName>DisplayName_Block_DefensiveCombatBlock</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\DefensiveBlock_Combat.dds</Icon>
+			<Description>Description_DefensiveCombatBlock</Description>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<Model>Models\Cubes\Large\DefensiveBlock.mwm</Model>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Components>
+				<Component Subtype="InteriorPlate" Count="20"/>
+				<Component Subtype="GVK_Data_Core" Count="1"/>
+				<Component Subtype="Construction" Count="30"/>
+				<Component Subtype="Detector" Count="20"/>
+				<Component Subtype="Motor" Count="4"/>
+				<Component Subtype="Computer" Count="20"/>
+				<Component Subtype="SteelPlate" Count="30"/>
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="0.3" EndY="1" Default="true"/>
+				<MountPoint Side="Bottom" StartX="0.7" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Bottom" StartX="0.3" StartY="0.15" EndX="0.7" EndY="0.85"/>
+				<MountPoint Side="Left" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Right" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Back" StartX="0" StartY="0" EndX="0.3" EndY="1"/>
+				<MountPoint Side="Back" StartX="0.7" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Back" StartX="0.3" StartY="0.15" EndX="0.7" EndY="0.85"/>
+				<MountPoint Side="Front" StartX="0" StartY="0" EndX="0.3" EndY="1"/>
+				<MountPoint Side="Front" StartX="0.7" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Front" StartX="0.3" StartY="0.15" EndX="0.7" EndY="0.85"/>
+				<MountPoint Side="Top" StartX="0" StartY="0" EndX="0.3" EndY="1"/>
+				<MountPoint Side="Top" StartX="0.7" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Top" StartX="0.3" StartY="0.15" EndX="0.7" EndY="0.85"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\DroneFeatureBlockConstruction_1.mwm"/>
+				<Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\DroneFeatureBlockConstruction_2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\DroneFeatureBlockConstruction_3.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>DefensiveCombatBlock</BlockPairName>
+			<MirroringZ>Y</MirroringZ>
+			<MirroringY>Z</MirroringY>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>24</BuildTimeSeconds>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<PCU>25</PCU>
+			<WaypointReachedZoneSizeMin>0</WaypointReachedZoneSizeMin>
+			<WaypointReachedZoneSizeMax>500</WaypointReachedZoneSizeMax>
+			<ResourceSinkGroup>Utility</ResourceSinkGroup>
+			<RequiredPowerInput>0.01</RequiredPowerInput>
+			<EmissiveColorPreset>Extended</EmissiveColorPreset>
+		</Definition>
+		<Definition xsi:type="MyObjectBuilder_DefensiveCombatBlockDefinition">
+			<Id>
+				<TypeId>DefensiveCombatBlock</TypeId>
+				<SubtypeId>SmallDefensiveCombat</SubtypeId>
+			</Id>
+			<DisplayName>DisplayName_Block_DefensiveCombatBlock</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\DefensiveBlock_Combat.dds</Icon>
+			<Description>Description_DefensiveCombatBlock</Description>
+			<CubeSize>Small</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<Model>Models\Cubes\Small\DefensiveBlock.mwm</Model>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Components>
+				<Component Subtype="InteriorPlate" Count="2"/>
+				<Component Subtype="GVK_Data_Core" Count="1"/>
+				<Component Subtype="Construction" Count="5"/>
+				<Component Subtype="Detector" Count="4"/>
+				<Component Subtype="Motor" Count="2"/>
+				<Component Subtype="Computer" Count="10"/>
+				<Component Subtype="SteelPlate" Count="10"/>
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="1" EndY="1" Default="true"/>
+				<MountPoint Side="Front" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Right" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Left" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Top" StartX="0" StartY="0" EndX="1" EndY="1"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.50" File="Models\Cubes\Small\DroneFeatureBlockConstruction_1.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\Small\DroneFeatureBlockConstruction_2.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>DefensiveCombatBlock</BlockPairName>
+			<MirroringZ>Y</MirroringZ>
+			<MirroringY>Z</MirroringY>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>10</BuildTimeSeconds>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<PCU>25</PCU>
+			<WaypointReachedZoneSizeMin>0</WaypointReachedZoneSizeMin>
+			<WaypointReachedZoneSizeMax>500</WaypointReachedZoneSizeMax>
+			<ResourceSinkGroup>Utility</ResourceSinkGroup>
+			<RequiredPowerInput>0.01</RequiredPowerInput>
+			<EmissiveColorPreset>Extended</EmissiveColorPreset>
+			<IsAirTight>true</IsAirTight>
+		</Definition>
+		<Definition xsi:type="MyObjectBuilder_OffensiveCombatBlockDefinition">
+			<Id>
+				<TypeId>OffensiveCombatBlock</TypeId>
+				<SubtypeId>LargeOffensiveCombat</SubtypeId>
+			</Id>
+			<DisplayName>DisplayName_Block_OffensiveCombatBlock</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\AggressiveBlock_Combat.dds</Icon>
+			<Description>Description_OffensiveCombatBlock</Description>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<Model>Models\Cubes\Large\AggressiveBlock.mwm</Model>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Components>
+				<Component Subtype="InteriorPlate" Count="20"/>
+				<Component Subtype="GVK_Data_Core" Count="1"/>
+				<Component Subtype="Construction" Count="30"/>
+				<Component Subtype="Detector" Count="20"/>
+				<Component Subtype="Motor" Count="4"/>
+				<Component Subtype="Computer" Count="20"/>
+				<Component Subtype="SteelPlate" Count="30"/>
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="0.3" EndY="1" Default="true"/>
+				<MountPoint Side="Bottom" StartX="0.7" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Bottom" StartX="0.3" StartY="0.15" EndX="0.7" EndY="0.85"/>
+				<MountPoint Side="Left" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Right" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Back" StartX="0" StartY="0" EndX="0.3" EndY="1"/>
+				<MountPoint Side="Back" StartX="0.7" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Back" StartX="0.3" StartY="0.15" EndX="0.7" EndY="0.85"/>
+				<MountPoint Side="Front" StartX="0" StartY="0" EndX="0.3" EndY="1"/>
+				<MountPoint Side="Front" StartX="0.7" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Front" StartX="0.3" StartY="0.15" EndX="0.7" EndY="0.85"/>
+				<MountPoint Side="Top" StartX="0" StartY="0" EndX="0.3" EndY="1"/>
+				<MountPoint Side="Top" StartX="0.7" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Top" StartX="0.3" StartY="0.15" EndX="0.7" EndY="0.85"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\DroneFeatureBlockConstruction_1.mwm"/>
+				<Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\DroneFeatureBlockConstruction_2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\DroneFeatureBlockConstruction_3.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>OffensiveCombatBlock</BlockPairName>
+			<MirroringZ>Y</MirroringZ>
+			<MirroringY>Z</MirroringY>
+			<ResourceSinkGroup>Utility</ResourceSinkGroup>
+			<RequiredPowerInput>0.01</RequiredPowerInput>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>24</BuildTimeSeconds>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<PCU>25</PCU>
+			<EmissiveColorPreset>Extended</EmissiveColorPreset>
+		</Definition>
+		<Definition xsi:type="MyObjectBuilder_OffensiveCombatBlockDefinition">
+			<Id>
+				<TypeId>OffensiveCombatBlock</TypeId>
+				<SubtypeId>SmallOffensiveCombat</SubtypeId>
+			</Id>
+			<DisplayName>DisplayName_Block_OffensiveCombatBlock</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\AggressiveBlock_Combat.dds</Icon>
+			<Description>Description_OffensiveCombatBlock</Description>
+			<CubeSize>Small</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<Model>Models\Cubes\Small\AggressiveBlock.mwm</Model>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Components>
+				<Component Subtype="InteriorPlate" Count="2"/>
+				<Component Subtype="GVK_Data_Core" Count="1"/>
+				<Component Subtype="Construction" Count="5"/>
+				<Component Subtype="Detector" Count="4"/>
+				<Component Subtype="Motor" Count="2"/>
+				<Component Subtype="Computer" Count="10"/>
+				<Component Subtype="SteelPlate" Count="10"/>
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="1" EndY="1" Default="true"/>
+				<MountPoint Side="Front" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Right" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Left" StartX="0" StartY="0" EndX="1" EndY="1"/>
+				<MountPoint Side="Top" StartX="0" StartY="0" EndX="1" EndY="1"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.50" File="Models\Cubes\Small\DroneFeatureBlockConstruction_1.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\Small\DroneFeatureBlockConstruction_2.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>OffensiveCombatBlock</BlockPairName>
+			<MirroringZ>Y</MirroringZ>
+			<MirroringY>Z</MirroringY>
+			<ResourceSinkGroup>Utility</ResourceSinkGroup>
+			<RequiredPowerInput>0.01</RequiredPowerInput>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>10</BuildTimeSeconds>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<PCU>25</PCU>
+			<EmissiveColorPreset>Extended</EmissiveColorPreset>
+			<IsAirTight>true</IsAirTight>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

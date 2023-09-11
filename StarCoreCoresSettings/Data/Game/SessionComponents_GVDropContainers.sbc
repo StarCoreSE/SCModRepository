@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!--Definition for container drop system-->
+  <Definition xsi:type="MyObjectBuilder_ContainerDropSystemDefinition">
+    <Id>
+      <TypeId>MyObjectBuilder_ContainerDropSystemDefinition</TypeId>
+      <SubtypeId>Default</SubtypeId>
+    </Id>
+    <!--Personal cache minimum distance in kilometers-->
+    <PersonalContainerDistMin>1.5</PersonalContainerDistMin>
+    
+    <!--Personal cache maximum distance in kilometers-->
+    <PersonalContainerDistMax>4.5</PersonalContainerDistMax>
+    
+    <!--Competetive cache minimum distance in kilometers-->
+    <CompetetiveContainerDistMin>20</CompetetiveContainerDistMin>
+    
+    <!--Competetive cache maximum distance in kilometers-->
+    <CompetetiveContainerDistMax>60</CompetetiveContainerDistMax>
+    
+    <!--Time in minutes how long will GPS stay after discovery for other players in competetive caches-->
+    <CompetetiveContainerGPSTimeOut>3</CompetetiveContainerGPSTimeOut>
+    
+    <!--Time in minutes how long will competetive cache exist in the world-->
+    <CompetetiveContainerGridTimeOut>15</CompetetiveContainerGridTimeOut>
+    
+    <!--Time in minutes how long will Personal cache exist in the world-->
+    <PersonalContainerGridTimeOut>15</PersonalContainerGridTimeOut>
+    
+    <!--GPS color for competive containers before they are claimed-->
+    <CompetetiveContainerGPSColorFree>
+      <R>255</R>
+      <G>255</G>
+      <B>0</B>
+    </CompetetiveContainerGPSColorFree>
+    
+    <!--GPS color for competive containers after they are claimed-->
+    <CompetetiveContainerGPSColorClaimed>
+      <R>255</R>
+      <G>165</G>
+      <B>0</B>
+    </CompetetiveContainerGPSColorClaimed>
+    
+    <!--GPS color for personal containers--> 
+    <PersonalContainerGPSColor>
+      <R>173</R>
+      <G>255</G>
+      <B>47</B>
+    </PersonalContainerGPSColor>
+    
+    <!--Audio cue that will be looped until claimed-->
+    <ContainerAudioCue>BlockContainer</ContainerAudioCue>
+  </Definition>
+</Definitions>

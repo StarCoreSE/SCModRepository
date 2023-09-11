@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <PhysicalItems>
+        <!-- changed name to note it can't hack -->
+		<PhysicalItem>
+            <Id>
+                <TypeId>PhysicalGunObject</TypeId>
+                <SubtypeId>AngleGrinderItem</SubtypeId>
+            </Id>
+            <DisplayName>Basic Grinder (Cannot hack)</DisplayName>
+            <Icon>Textures\GUI\Icons\WeaponGrinder.dds</Icon>
+            <Description>Description_AngleGrinder</Description>
+            <Size>
+                <X>0.5</X>
+                <Y>0.3</Y>
+                <Z>0.2</Z>
+            </Size>
+            <Mass>3</Mass>
+            <Volume>20</Volume>
+            <Model>Models\Weapons\AngleGrinder.mwm</Model>
+            <PhysicalMaterial>Metal</PhysicalMaterial>
+            <MinimumOfferAmount>10</MinimumOfferAmount>
+            <MaximumOfferAmount>20</MaximumOfferAmount>
+            <MinimumOrderAmount>10</MinimumOrderAmount>
+            <MaximumOrderAmount>100</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+        </PhysicalItem>
+    </PhysicalItems>
+</Definitions>

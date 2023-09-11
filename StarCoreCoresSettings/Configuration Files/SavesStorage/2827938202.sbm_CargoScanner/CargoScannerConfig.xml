@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ScannerConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <BroadcastFactor>2</BroadcastFactor>
+  <CooldownDuration>120</CooldownDuration>
+  <HighlightDuration>120</HighlightDuration>
+  <Range>0.5</Range>
+  <ScanPowerUsage>15</ScanPowerUsage>
+  <WorkDuration>30</WorkDuration>
+</ScannerConfiguration>

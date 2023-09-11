@@ -1,0 +1,45 @@
+{
+  "log": [
+    {
+      "SteamId": 76561197964607808,
+      "Amount": 500,
+      "TimeClaimed": "2023-07-26T17:35:04.3594344-04:00",
+      "Claimed": false,
+      "BankAmount": 501,
+      "Action": "deposited",
+      "PlayerPaid": 0,
+      "FactionPaid": 0
+    },
+    {
+      "SteamId": 76561197964607808,
+      "Amount": 10000000,
+      "TimeClaimed": "2023-07-27T14:28:47.1443598-04:00",
+      "Claimed": false,
+      "BankAmount": 10000501,
+      "Action": "deposited",
+      "PlayerPaid": 0,
+      "FactionPaid": 0
+    },
+    {
+      "SteamId": 76561197964607808,
+      "Amount": 10000000,
+      "TimeClaimed": "2023-07-27T14:30:23.3412739-04:00",
+      "Claimed": false,
+      "BankAmount": 501,
+      "Action": "paid fac",
+      "PlayerPaid": 0,
+      "FactionPaid": 266986924617334900
+    },
+    {
+      "SteamId": 76561197964607808,
+      "Amount": 1000,
+      "TimeClaimed": "2023-07-27T15:01:55.9011486-04:00",
+      "Claimed": false,
+      "BankAmount": 1501,
+      "Action": "deposited",
+      "PlayerPaid": 0,
+      "FactionPaid": 0
+    }
+  ],
+  "allianceId": "186ef5d6-95ca-44d0-ac11-18352741ce50"
+}

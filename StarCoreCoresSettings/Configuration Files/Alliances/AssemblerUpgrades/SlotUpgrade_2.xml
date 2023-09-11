@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AssemblerUpgrade xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <UpgradeId>2</UpgradeId>
+  <Enabled>true</Enabled>
+  <MoneyRequired>10000000</MoneyRequired>
+  <MetaPointsRequired>0</MetaPointsRequired>
+  <items>
+    <ItemRequirement>
+      <Enabled>false</Enabled>
+      <RequiredAmount>50</RequiredAmount>
+      <TypeId>Ingot</TypeId>
+      <SubTypeId>Uranium</SubTypeId>
+    </ItemRequirement>
+  </items>
+  <buffedRefineries>
+    <AssemblerBuffList>
+      <UpgradeGivesSpeedBuuf>0.5</UpgradeGivesSpeedBuuf>
+      <UpgradeGivesBuffInTerritory>0</UpgradeGivesBuffInTerritory>
+      <buffs>
+        <AssemblerBuff>
+          <Enabled>true</Enabled>
+          <SubtypeId>BasicAssembler</SubtypeId>
+        </AssemblerBuff>
+        <AssemblerBuff>
+          <Enabled>true</Enabled>
+          <SubtypeId>LargeAssembler</SubtypeId>
+        </AssemblerBuff>
+        <AssemblerBuff>
+          <Enabled>true</Enabled>
+          <SubtypeId>LargeAssemblerIndustrial</SubtypeId>
+        </AssemblerBuff>
+      </buffs>
+    </AssemblerBuffList>
+  </buffedRefineries>
+  <AddsToUpkeep>10000000</AddsToUpkeep>
+</AssemblerUpgrade>

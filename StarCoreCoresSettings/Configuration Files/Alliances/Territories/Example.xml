@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Territory xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WorldName>default</WorldName>
+  <Id>d7141e42-52f1-45cb-894c-059d691d0b0e</Id>
+  <Name>Example</Name>
+  <Radius>50000</Radius>
+  <Enabled>false</Enabled>
+  <Alliance>00000000-0000-0000-0000-000000000000</Alliance>
+  <IsUnderSiege>false</IsUnderSiege>
+  <NextSiegeCheck>0001-01-01T00:00:00</NextSiegeCheck>
+  <SiegeEndTime>0001-01-01T00:00:00</SiegeEndTime>
+  <HoursSiegeLasts>72</HoursSiegeLasts>
+  <ForcesPvP>true</ForcesPvP>
+  <DisablesPvP>false</DisablesPvP>
+  <EntryMessage>You are in {name} Territory</EntryMessage>
+  <ControlledMessage>Controlled by {alliance}</ControlledMessage>
+  <ExitMessage>You have left {name} Territory</ExitMessage>
+  <OreTaxMessage>You were taxed {amount} {oreName} by {alliance}</OreTaxMessage>
+  <x>0</x>
+  <y>0</y>
+  <z>0</z>
+  <CapX>0</CapX>
+  <CapY>0</CapY>
+  <CapZ>0</CapZ>
+  <DoOreTax>true</DoOreTax>
+  <TaxPercent>0.2</TaxPercent>
+  <FindGridOnSetup>true</FindGridOnSetup>
+  <LootBoxTerminalName>LOOT BOX</LootBoxTerminalName>
+  <TransferOwnershipOnCap>true</TransferOwnershipOnCap>
+  <BlocksToTransferToNewOwner />
+  <DoSafeZone>false</DoSafeZone>
+  <SafeZoneUpdateIntervalMinutes>10</SafeZoneUpdateIntervalMinutes>
+  <StationGridId>0</StationGridId>
+</Territory>

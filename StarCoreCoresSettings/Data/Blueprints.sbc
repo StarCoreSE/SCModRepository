@@ -1,0 +1,282 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Blueprints>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>GVK_Thrust_Tech</SubtypeId>
+			</Id>
+			<DisplayName>Thruster Tech</DisplayName>
+			<Icon>Textures\GUI\Icons\Items\ZoneChip_Item.dds</Icon>
+            <Icon>Textures\GUI\Icons\Items\GVK_TechAtmoThruster.dds</Icon>
+            <Icon>Textures\GUI\Icons\Items\Atmo_Icon_Overlay.dds</Icon>
+			<Prerequisites>
+				<Item Amount="1" TypeId="Component" SubtypeId="ZoneChip"/>
+			</Prerequisites>
+			<Result Amount="1" TypeId="Component" SubtypeId="GVK_Thrust_Tech"/>
+			<BaseProductionTimeInSeconds>99999</BaseProductionTimeInSeconds>
+		</Blueprint>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>GVK_Atmo_Tech</SubtypeId>
+			</Id>
+			<DisplayName>Atmo Thruster Tech</DisplayName>
+			<Icon>Textures\GUI\Icons\Items\ZoneChip_Item.dds</Icon>
+            <Icon>Textures\GUI\Icons\Items\GVK_TechAtmoThruster.dds</Icon>
+            <Icon>Textures\GUI\Icons\Items\Atmo_Icon_Overlay.dds</Icon>
+			<Prerequisites>
+				<Item Amount="1" TypeId="Component" SubtypeId="ZoneChip"/>
+			</Prerequisites>
+			<Result Amount="1" TypeId="Component" SubtypeId="GVK_Atmo_Tech"/>
+			<BaseProductionTimeInSeconds>99999</BaseProductionTimeInSeconds>
+		</Blueprint>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>GVK_Hydro_Tech</SubtypeId>
+			</Id>
+			<DisplayName>Hydrogen Thruster Tech</DisplayName>
+			<Icon>Textures\GUI\Icons\Items\ZoneChip_Item.dds</Icon>
+            <Icon>Textures\GUI\Icons\Items\GVK_TechThruster.dds</Icon>
+            <Icon>Textures\GUI\Icons\Items\Hydro_Icon_Overlay.dds</Icon>
+			<Prerequisites>
+				<Item Amount="1" TypeId="Component" SubtypeId="ZoneChip"/>
+			</Prerequisites>
+			<Result Amount="1" TypeId="Component" SubtypeId="GVK_Hydro_Tech"/>
+			<BaseProductionTimeInSeconds>99999</BaseProductionTimeInSeconds>
+		</Blueprint>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>GVK_Ion_Tech</SubtypeId>
+			</Id>
+			<DisplayName>Ion Thruster Tech</DisplayName>
+			<Icon>Textures\GUI\Icons\Items\ZoneChip_Item.dds</Icon>
+            <Icon>Textures\GUI\Icons\Items\GVK_TechHover.dds</Icon>
+            <Icon>Textures\GUI\Icons\Items\Ion_Icon_Overlay.dds</Icon>
+			<Prerequisites>
+				<Item Amount="1" TypeId="Component" SubtypeId="ZoneChip"/>
+			</Prerequisites>
+			<Result Amount="1" TypeId="Component" SubtypeId="GVK_Ion_Tech"/>
+			<BaseProductionTimeInSeconds>99999</BaseProductionTimeInSeconds>
+		</Blueprint>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>GVK_Hover_Tech</SubtypeId>
+			</Id>
+			<DisplayName>Hover Engine Tech</DisplayName>
+			<Icon>Textures\GUI\Icons\Items\ZoneChip_Item.dds</Icon>
+            <Icon>Textures\GUI\Icons\Items\GVK_TechThruster.dds</Icon>
+            <Icon>Textures\GUI\Icons\Items\Hover_Icon_Overlay.dds</Icon>
+			<Prerequisites>
+				<Item Amount="1" TypeId="Component" SubtypeId="ZoneChip"/>
+			</Prerequisites>
+			<Result Amount="1" TypeId="Component" SubtypeId="GVK_Hover_Tech"/>
+			<BaseProductionTimeInSeconds>99999</BaseProductionTimeInSeconds>
+		</Blueprint>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>GVK_SmallCaliber_Tech</SubtypeId>
+			</Id>
+			<DisplayName>Ballistic Weapons Tech</DisplayName>
+			<Icon>Textures\GUI\Icons\Items\ZoneChip_Item.dds</Icon>
+            <Icon>Textures\GUI\Icons\Items\GVK_TechWeapon.dds</Icon>
+            <Icon>Textures\GUI\Icons\Items\SmallCaliber_Icon_Overlay.dds</Icon>
+			<Prerequisites>
+				<Item Amount="70" TypeId="Ingot" SubtypeId="Nickel"/>
+				<Item Amount="600" TypeId="Ingot" SubtypeId="Silver" />
+				<Item Amount="80" TypeId="Ingot" SubtypeId="Iron" />
+			</Prerequisites>
+			<Result Amount="1" TypeId="Component" SubtypeId="GVK_SmallCaliber_Tech"/>
+			<BaseProductionTimeInSeconds>300</BaseProductionTimeInSeconds>
+		</Blueprint>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>GVK_LargeCaliber_Tech</SubtypeId>
+			</Id>
+			<DisplayName>Ballistic Weapons Tech</DisplayName>
+			<Icon>Textures\GUI\Icons\Items\ZoneChip_Item.dds</Icon>
+            <Icon>Textures\GUI\Icons\Items\GVK_TechLargeCalWeapon.dds</Icon>
+            <Icon>Textures\GUI\Icons\Items\LargeCaliber_Icon_Overlay.dds</Icon>
+			<Prerequisites>
+				<Item Amount="1" TypeId="Component" SubtypeId="ZoneChip"/>
+			</Prerequisites>
+			<Result Amount="1" TypeId="Component" SubtypeId="GVK_LargeCaliber_Tech"/>
+			<BaseProductionTimeInSeconds>99999</BaseProductionTimeInSeconds>
+		</Blueprint>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>GVK_Missile_Tech</SubtypeId>
+			</Id>
+			<DisplayName>Missile Weapons Tech</DisplayName>
+			<Icon>Textures\GUI\Icons\Items\ZoneChip_Item.dds</Icon>
+            <Icon>Textures\GUI\Icons\Items\GVK_TechMissile.dds</Icon>
+            <Icon>Textures\GUI\Icons\Items\Missile_Icon_Overlay.dds</Icon>
+			<Prerequisites>
+				<Item Amount="1" TypeId="Component" SubtypeId="ZoneChip"/>
+			</Prerequisites>
+			<Result Amount="1" TypeId="Component" SubtypeId="GVK_Missile_Tech"/>
+			<BaseProductionTimeInSeconds>99999</BaseProductionTimeInSeconds>
+		</Blueprint>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>GVK_Laser_Tech</SubtypeId>
+			</Id>
+			<DisplayName>Laser Weapons Tech</DisplayName>
+			<Icon>Textures\GUI\Icons\Items\ZoneChip_Item.dds</Icon>
+            <Icon>Textures\GUI\Icons\Items\GVK_TechWeapon.dds</Icon>
+            <Icon>Textures\GUI\Icons\Items\Laser_Icon_Overlay.dds</Icon>
+			<Prerequisites>
+				<Item Amount="1" TypeId="Component" SubtypeId="ZoneChip"/>
+			</Prerequisites>
+			<Result Amount="1" TypeId="Component" SubtypeId="GVK_Laser_Tech"/>
+			<BaseProductionTimeInSeconds>99999</BaseProductionTimeInSeconds>
+		</Blueprint>
+		<!-- <Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>GVK_Defense_Tech</SubtypeId>
+			</Id>
+			<DisplayName>Defensive Weapons Tech</DisplayName>
+			<Icon>Textures\GUI\Icons\Items\ZoneChip_Item.dds</Icon>
+			<Prerequisites>
+				<Item Amount="1" TypeId="Component" SubtypeId="ZoneChip"/>
+			</Prerequisites>
+			<Result Amount="1" TypeId="Component" SubtypeId="GVK_Defense_Tech"/>
+			<BaseProductionTimeInSeconds>99999</BaseProductionTimeInSeconds>
+		</Blueprint>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>GVK_Oxygen_Tech</SubtypeId>
+			</Id>
+			<DisplayName>Oxygen Tech</DisplayName>
+			<Icon>Textures\GUI\Icons\Items\ZoneChip_Item.dds</Icon>
+            <Icon>Textures\GUI\Icons\Items\GVK_TechOxygen.dds</Icon>
+			<Prerequisites>
+				<Item Amount="1" TypeId="Component" SubtypeId="ZoneChip"/>
+			</Prerequisites>
+			<Result Amount="1" TypeId="Component" SubtypeId="GVK_Oxygen_Tech"/>
+			<BaseProductionTimeInSeconds>99999</BaseProductionTimeInSeconds>
+		</Blueprint> -->
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>GVK_Data_Core</SubtypeId>
+			</Id>
+			<DisplayName>Data Core</DisplayName>
+			<Icon>Textures\GUI\Icons\Items\ZoneChip_Item.dds</Icon>
+            <Icon>Textures\GUI\Icons\Items\GVK_TechDataCore.dds</Icon>
+			<Prerequisites>
+				<Item Amount="1" TypeId="Component" SubtypeId="ZoneChip"/>
+			</Prerequisites>
+			<Result Amount="1" TypeId="Component" SubtypeId="GVK_Data_Core"/>
+			<BaseProductionTimeInSeconds>99999</BaseProductionTimeInSeconds>
+		</Blueprint>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>GVK_TurboEncabulator</SubtypeId>
+			</Id>
+			<DisplayName>Turbo Encabulator</DisplayName>
+			<Icon>Textures\GUI\Icons\Items\ZoneChip_Item.dds</Icon>
+			<Prerequisites>
+				<Item Amount="1" TypeId="Component" SubtypeId="ZoneChip"/>
+			</Prerequisites>
+			<Result Amount="1" TypeId="Component" SubtypeId="GVK_TurboEncabulator"/>
+			<BaseProductionTimeInSeconds>99999</BaseProductionTimeInSeconds>
+		</Blueprint>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>GVK_Unobtanium</SubtypeId>
+			</Id>
+			<DisplayName>Unobtainium</DisplayName>
+			<Icon>Textures\GUI\Icons\Items\ZoneChip_Item.dds</Icon>
+			<Prerequisites>
+				<Item Amount="1" TypeId="Component" SubtypeId="ZoneChip"/>
+			</Prerequisites>
+			<Result Amount="1" TypeId="Component" SubtypeId="GVK_Unobtanium"/>
+			<BaseProductionTimeInSeconds>99999</BaseProductionTimeInSeconds>
+		</Blueprint>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>Medkit</SubtypeId>
+			</Id>
+			<DisplayName>DisplayName_Item_Medkit</DisplayName>
+			<Icon>Textures\GUI\Icons\Items\MedKit.dds</Icon>
+			<Prerequisites>
+				<Item Amount="0.05" TypeId="Ingot" SubtypeId="Gold"/>
+				<Item Amount="0.05" TypeId="Ingot" SubtypeId="Iron"/>
+				<Item Amount="0.05" TypeId="Ingot" SubtypeId="Nickel"/>
+			</Prerequisites>
+			<Results>
+				<Item Amount="1" TypeId="ConsumableItem" SubtypeId="Medkit"/>
+			</Results>
+			<BaseProductionTimeInSeconds>15</BaseProductionTimeInSeconds>
+			<IsPrimary>true</IsPrimary>
+		</Blueprint>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>Powerkit</SubtypeId>
+			</Id>
+			<DisplayName>DisplayName_Item_Powerkit</DisplayName>
+			<Icon>Textures\GUI\Icons\Items\PowerKit.dds</Icon>
+			<Prerequisites>
+				<Item Amount="0.05" TypeId="Ingot" SubtypeId="Silver"/>
+				<Item Amount="0.05" TypeId="Ingot" SubtypeId="Iron"/>
+				<Item Amount="0.05" TypeId="Ingot" SubtypeId="Nickel"/>
+			</Prerequisites>
+			<Results>
+				<Item Amount="1" TypeId="ConsumableItem" SubtypeId="Powerkit"/>
+			</Results>
+			<BaseProductionTimeInSeconds>15</BaseProductionTimeInSeconds>
+			<IsPrimary>true</IsPrimary>
+		</Blueprint>
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>StoneOreToIngot</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_BlueprintClass_Ingots</DisplayName>
+            <Icon>Textures\GUI\Icons\ingot\ingot_class.dds</Icon>
+            <Prerequisites>
+                <Item Amount="1000" TypeId="Ore" SubtypeId="Stone" />
+            </Prerequisites>
+            <Results>
+                <Item Amount="14" TypeId="Ingot" SubtypeId="Stone" />
+                <Item Amount="0.3" TypeId="Ingot" SubtypeId="Iron" />
+                <Item Amount="0.2" TypeId="Ingot" SubtypeId="Nickel" />
+                <Item Amount="0.1" TypeId="Ingot" SubtypeId="Silicon" />
+            </Results>
+            <BaseProductionTimeInSeconds>10</BaseProductionTimeInSeconds>
+        </Blueprint>
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>StoneOreToIngotBasic</SubtypeId>
+            </Id>
+            <DisplayName>DisplayName_BlueprintClass_Ingots</DisplayName>
+            <Icon>Textures\GUI\Icons\ingot\ingot_class.dds</Icon>
+            <Prerequisites>
+                <Item Amount="100" TypeId="Ore" SubtypeId="Stone" />
+            </Prerequisites>
+            <Results>
+                <Item Amount="1.4" TypeId="Ingot" SubtypeId="Stone" />
+                <Item Amount="0.03" TypeId="Ingot" SubtypeId="Iron" />
+                <Item Amount="0.02" TypeId="Ingot" SubtypeId="Nickel" />
+                <Item Amount="0.01" TypeId="Ingot" SubtypeId="Silicon" />
+            </Results>
+            <Priority>1000</Priority>
+            <BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>
+        </Blueprint>
+	</Blueprints>
+</Definitions>

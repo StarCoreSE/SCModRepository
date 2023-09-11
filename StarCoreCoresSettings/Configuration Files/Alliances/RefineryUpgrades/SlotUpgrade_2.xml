@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RefineryUpgrade xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<UpgradeId>2</UpgradeId>
+	<Enabled>true</Enabled>
+	<MoneyRequired>10000000</MoneyRequired>
+	<MetaPointsRequired>0</MetaPointsRequired>
+	<items>
+		<ItemRequirement>
+			<Enabled>false</Enabled>
+			<RequiredAmount>50</RequiredAmount>
+			<TypeId>Ingot</TypeId>
+			<SubTypeId>Uranium</SubTypeId>
+		</ItemRequirement>
+	</items>
+	<buffedRefineries>
+		<RefineryBuffList>
+			<UpgradeAddsYield>0.5</UpgradeAddsYield>
+			<UpgradeGivesBuffInTerritory>0</UpgradeGivesBuffInTerritory>
+			<buffs>
+				<RefineryBuff>
+					<Enabled>true</Enabled>
+					<SubtypeId>Blast Furnace</SubtypeId>
+				</RefineryBuff>
+				<RefineryBuff>
+					<Enabled>true</Enabled>
+					<SubtypeId>LargeRefinery</SubtypeId>
+				</RefineryBuff>
+				<RefineryBuff>
+					<Enabled>true</Enabled>
+					<SubtypeId>LargeRefineryIndustrial</SubtypeId>
+				</RefineryBuff>
+			</buffs>
+		</RefineryBuffList>
+	</buffedRefineries>
+	<AddsToUpkeep>10000000</AddsToUpkeep>
+</RefineryUpgrade>

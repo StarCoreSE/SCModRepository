@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ShipyardSlotUpgrade xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <UpgradeId>0</UpgradeId>
+  <Enabled>false</Enabled>
+  <NewSlots>0</NewSlots>
+  <MoneyRequired>5000000</MoneyRequired>
+  <MetaPointsRequired>500000</MetaPointsRequired>
+  <items>
+    <ItemRequirement>
+      <Enabled>false</Enabled>
+      <RequiredAmount>50</RequiredAmount>
+      <TypeId>Ingot</TypeId>
+      <SubTypeId>Uranium</SubTypeId>
+    </ItemRequirement>
+  </items>
+</ShipyardSlotUpgrade>

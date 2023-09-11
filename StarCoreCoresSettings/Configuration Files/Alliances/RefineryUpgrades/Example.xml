@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RefineryUpgrade xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <UpgradeId>1</UpgradeId>
+  <Enabled>false</Enabled>
+  <MoneyRequired>5000000</MoneyRequired>
+  <MetaPointsRequired>500000</MetaPointsRequired>
+  <items>
+    <ItemRequirement>
+      <Enabled>false</Enabled>
+      <RequiredAmount>50</RequiredAmount>
+      <TypeId>Ingot</TypeId>
+      <SubTypeId>Uranium</SubTypeId>
+    </ItemRequirement>
+  </items>
+  <buffedRefineries>
+    <RefineryBuffList>
+      <UpgradeAddsYield>0.025</UpgradeAddsYield>
+      <UpgradeGivesBuffInTerritory>0.03</UpgradeGivesBuffInTerritory>
+      <buffs>
+        <RefineryBuff>
+          <Enabled>false</Enabled>
+          <SubtypeId>LargeRefinery</SubtypeId>
+        </RefineryBuff>
+      </buffs>
+    </RefineryBuffList>
+  </buffedRefineries>
+  <AddsToUpkeep>50</AddsToUpkeep>
+</RefineryUpgrade>

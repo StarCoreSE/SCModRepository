@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<JumpZone xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <x>0</x>
+  <y>0</y>
+  <z>0</z>
+  <Radius>25000</Radius>
+  <AllowEntry>false</AllowEntry>
+  <AllowExit>false</AllowExit>
+  <AllowExcludedExit>false</AllowExcludedExit>
+  <AllowExcludedEntry>false</AllowExcludedEntry>
+  <ExcludedEntryDrives>exampleDrive1PairName,ExampleDrive2PairName</ExcludedEntryDrives>
+  <ExcludedExitDrives>exampleDrive1PairName,ExampleDrive2PairName</ExcludedExitDrives>
+  <Name>Fred</Name>
+</JumpZone>

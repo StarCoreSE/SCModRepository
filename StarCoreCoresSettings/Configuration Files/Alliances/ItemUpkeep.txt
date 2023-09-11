@@ -1,0 +1,2 @@
+TypeId,SubtypeId,Amount
+MyObjectBuilder_Ingot,Uranium,1

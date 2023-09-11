@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <DoItemUpkeep>false</DoItemUpkeep>
+  <PriceNewAlliance>5000000</PriceNewAlliance>
+  <StoragePath>default</StoragePath>
+  <AllowDiscord>true</AllowDiscord>
+  <ShipyardEnabled>true</ShipyardEnabled>
+  <HangarEnabled>true</HangarEnabled>
+  <KothEnabled>false</KothEnabled>
+  <JumpGatesEnabled>false</JumpGatesEnabled>
+  <MaxHangarSlotPCU>9999999</MaxHangarSlotPCU>
+  <JumpGateMinimumOffset>200</JumpGateMinimumOffset>
+  <JumPGateMaximumOffset>500</JumPGateMaximumOffset>
+  <MaximumGateFee>10000000</MaximumGateFee>
+  <DiscordBotToken>bob</DiscordBotToken>
+  <DiscordChannelId>1</DiscordChannelId>
+  <BaseUpkeepFee>0</BaseUpkeepFee>
+  <PercentPerFac>0</PercentPerFac>
+  <FeePerMember>0</FeePerMember>
+  <HangarUpkeep>0</HangarUpkeep>
+  <RepLogging>true</RepLogging>
+  <ReputationPatch>true</ReputationPatch>
+  <UpkeepFailBeforeDelete>100</UpkeepFailBeforeDelete>
+  <RepairEnabled>false</RepairEnabled>
+  <DisablePvP>false</DisablePvP>
+  <EnableOptionalWar>false</EnableOptionalWar>
+  <ConvertedFromOldWarFile>true</ConvertedFromOldWarFile>
+  <RefineryYieldMultiplierIfEnabled>1.25</RefineryYieldMultiplierIfEnabled>
+  <AssemblerSpeedMultiplierIfEnabled>1.25</AssemblerSpeedMultiplierIfEnabled>
+  <RefineryYieldMultiplierIfDisabled>1</RefineryYieldMultiplierIfDisabled>
+  <AssemblerSpeedMultiplierIfDisabled>1</AssemblerSpeedMultiplierIfDisabled>
+  <EnablePvPAreaHud>false</EnablePvPAreaHud>
+  <TerritoryTaxes>false</TerritoryTaxes>
+  <EditorUrl>https://crunchplugins.co.uk</EditorUrl>
+  <UsingNexusChat>false</UsingNexusChat>
+</Config>
