@@ -19,10 +19,16 @@
       <Size x="1" y="1" z="1" />
       <ModelOffset x="0" y="0" z="0" />
 	   <Model>Models\Starcore\Starcore_Flare_Launcher.mwm</Model>
-       <Components>
-        <Component Subtype="Computer" Count="1" />
-		<Component Subtype="FlareComponent" Count="2" />
-      </Components>
+   <Components>
+     <Component Subtype="SteelPlate" Count="165" />
+     <Component Subtype="Construction" Count="115" />
+     <Component Subtype="MetalGrid" Count="45" />
+     <Component Subtype="LargeTube" Count="35" />
+     <Component Subtype="Motor" Count="250" />
+     <Component Subtype="Computer" Count="100" />
+     <Component Subtype="Construction" Count="90" />
+     <Component Subtype="SteelPlate" Count="200" />
+   </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
       <BlockPairName>Starcore_Flare</BlockPairName>
 	   <EdgeType>Light</EdgeType>
