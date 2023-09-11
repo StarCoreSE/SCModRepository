@@ -20,8 +20,8 @@ namespace Invalid.spawngencover
         private const int branchFactor = 4;
 
         // New Variables to store adjustable settings
-        private int initialDepth = 10;
-        private int initialLength = 10;
+        private int initialDepth = 100;
+        private int initialLength = 100;
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
