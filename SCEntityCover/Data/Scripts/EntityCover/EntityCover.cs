@@ -21,7 +21,7 @@ using CollisionLayers = Sandbox.Engine.Physics.MyPhysics.CollisionLayers;
 namespace klime.EntityCover
 {
 
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_BatteryBlock), false, "EntityCover", "EntityCover2", "EntityCoverEveFreighter", "EntityCover3", "EntityCover4", "EntityCover4RED", "EntityCover4BLU")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_BatteryBlock), false, "EntityCover", "EntityCover2", "EntityCoverEveFreighter", "EntityCover3", "EntityCover4", "EntityCover4RED", "EntityCover4BLU", "EntityCoverFractal")]
     public class EntityCoverGamelogic : MyGameLogicComponent
     {
         // Core
@@ -32,6 +32,7 @@ namespace klime.EntityCover
         private static Dictionary<string, ModelInfo> subtypeToModelMap = new Dictionary<string, ModelInfo>()
         {
             { "EntityCover", new ModelInfo("REMlikeblocker2x_purple.mwm", new Vector3(275, 275, 275)) },    //block subtype, block model filename, hitbox dimensions //in Large Blocks (???)
+            { "EntityCoverFractal", new ModelInfo("REMlikeblocker2x_purple.mwm", new Vector3(275, 275, 275)) },    //block subtype, block model filename, hitbox dimensions //in Large Blocks (???)
             { "EntityCover2", new ModelInfo("REMlikeblocker2_5km_purple.mwm", new Vector3(1250, 1250, 1250)) },    
             { "EntityCoverEveFreighter", new ModelInfo("eveobstacle3.mwm", new Vector3(180, 60, 500)) },
             { "EntityCover3", new ModelInfo("REMlikeblockerLong25kX.mwm", new Vector3(1250, 275, 275)) },
