@@ -305,10 +305,8 @@ namespace StarCore.DynamicResistence
 
             else if (dynResistBlock != null && SiegeModeActivatedClient && !SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
-                foreach (var block in allSlimBlocks)
-                {
-                    block.BlockGeneralDamageModifier = 0.1f;
-                }
+                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(dynResistBlock.CubeGrid.Name, 0.1f);
+
                 SiegeModeResistence = true;
             }
 
@@ -591,13 +589,7 @@ namespace StarCore.DynamicResistence
                     {
                         Sink.Update();
 
-                        var allBlocks = new List<IMySlimBlock>();
-                        dynResistBlock.CubeGrid.GetBlocks(allBlocks);
-
-                        foreach (var block in allBlocks)
-                        {
-                            block.BlockGeneralDamageModifier = resistanceModifier;
-                        }
+                        MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(dynResistBlock.CubeGrid.Name, resistanceModifier);
 
                         finalResistanceModifier = resistanceModifier;
 
@@ -625,13 +617,7 @@ namespace StarCore.DynamicResistence
         {
             if (obj.EntityId != dynResistBlock.EntityId) return;
 
-            var allBlocks = new List<IMySlimBlock>();
-            dynResistBlock.CubeGrid.GetBlocks(allBlocks);
-
-            foreach (var block in allBlocks)
-            {
-                block.BlockGeneralDamageModifier = 1.0f;
-            }
+            MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(obj.CubeGrid.Name, 1f);
 
         }
 
