@@ -13,7 +13,7 @@ using VRageMath;
 
 namespace Invalid.spawngencover
 {
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Reactor), false, "LargeBlockSmallGenerator")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_BatteryBlock), false, "EntityCoverFractal")]
     public class spawngencover : MyGameLogicComponent
     {
         private IMyCubeBlock block;
@@ -21,7 +21,7 @@ namespace Invalid.spawngencover
 
         // New Variables to store adjustable settings
         private int initialDepth = 100;
-        private int initialLength = 100;
+        private int initialLength = 225;
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
@@ -51,8 +51,14 @@ namespace Invalid.spawngencover
 
             for (int i = 1; i <= length; i++)
             {
-                AddBlock("LargeBlockArmorBlock", origin + i * direction);
+                // AddBlock("LargeBlockArmorBlock", origin + i * direction);
+                MyAPIGateway.Utilities.ShowNotification("AAAH I'M FRACTOOOOOLING I'M GONNA FRACTOOOOOOL");
             }
+
+            // Place EntityCover block at the end of each completed "length"
+            //AddEntityCoverBlock("EntityCoverFractal", origin + length * direction);     DO NOT DO THIS
+            AddEntityCoverBlock("EntityCover", origin + length * direction);
+
 
             Vector3I[] newDirections =
             {
@@ -86,7 +92,7 @@ namespace Invalid.spawngencover
         {
             var grid = block.CubeGrid;
 
-            var nextBlockBuilder = new MyObjectBuilder_CubeBlock
+            var nextBlockBuilder = new MyObjectBuilder_BatteryBlock
             {
                 SubtypeName = subtypeName,
                 Min = position,
@@ -106,5 +112,29 @@ namespace Invalid.spawngencover
             }
             MyAPIGateway.Utilities.ShowNotification($"{subtypeName} added at {position}", 1000);
         }
+
+        private void AddEntityCoverBlock(string subtypeName, Vector3I position)
+        {
+            var grid = block.CubeGrid;
+            var nextBlockBuilder = new MyObjectBuilder_BatteryBlock
+            {
+                SubtypeName = subtypeName,
+                Min = position,
+                BlockOrientation = new MyBlockOrientation(Base6Directions.Direction.Forward, Base6Directions.Direction.Up),
+                ColorMaskHSV = new SerializableVector3(0, -1, 0),
+                Owner = block.OwnerId,
+                EntityId = 0,
+                ShareMode = MyOwnershipShareModeEnum.None
+            };
+
+            IMySlimBlock newBlock = grid.AddBlock(nextBlockBuilder, false);
+            if (newBlock == null)
+            {
+                MyAPIGateway.Utilities.ShowNotification($"Failed to add {subtypeName}", 1000);
+                return;
+            }
+            MyAPIGateway.Utilities.ShowNotification($"{subtypeName} added at {position}", 1000);
+        }
+
     }
 }
