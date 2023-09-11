@@ -37,39 +37,39 @@
                       <Key>
                         <Time>0</Time>
                         <ValueVector4>
-                          <X>1</X>
-                          <Y>1</Y>
-                          <Z>1</Z>
+                          <X>0.1</X>
+                          <Y>0.1</Y>
+                          <Z>0.1</Z>
                           <W>1</W>
                         </ValueVector4>
                         <Value2D />
                       </Key>
                       <Key>
-                        <Time>0.2955017</Time>
+                        <Time>0.333333343</Time>
                         <ValueVector4>
-                          <X>1</X>
-                          <Y>1</Y>
-                          <Z>1</Z>
+                          <X>0.1</X>
+                          <Y>0.1</Y>
+                          <Z>0.1</Z>
                           <W>1</W>
                         </ValueVector4>
                         <Value2D />
                       </Key>
                       <Key>
-                        <Time>0.6456748</Time>
+                        <Time>0.6666667</Time>
                         <ValueVector4>
-                          <X>1</X>
-                          <Y>1</Y>
-                          <Z>1</Z>
+                          <X>0.1</X>
+                          <Y>0.1</Y>
+                          <Z>0.1</Z>
                           <W>1</W>
                         </ValueVector4>
                         <Value2D />
                       </Key>
                       <Key>
-                        <Time>0.9972318</Time>
+                        <Time>1</Time>
                         <ValueVector4>
-                          <X>1</X>
-                          <Y>1</Y>
-                          <Z>1</Z>
+                          <X>0.1</X>
+                          <Y>0.1</Y>
+                          <Z>0.1</Z>
                           <W>1</W>
                         </ValueVector4>
                         <Value2D />
@@ -460,9 +460,9 @@
                       <Key>
                         <Time>0</Time>
                         <ValueVector4>
-                          <X>18.93</X>
-                          <Y>3.27</Y>
-                          <Z>0.9</Z>
+                          <X>1.893</X>
+                          <Y>0.327</Y>
+                          <Z>0.09</Z>
                           <W>1</W>
                         </ValueVector4>
                         <Value2D />
@@ -470,9 +470,9 @@
                       <Key>
                         <Time>0.333333343</Time>
                         <ValueVector4>
-                          <X>18.93</X>
-                          <Y>3.27</Y>
-                          <Z>0.9</Z>
+                          <X>1.893</X>
+                          <Y>0.327</Y>
+                          <Z>0.09</Z>
                           <W>1</W>
                         </ValueVector4>
                         <Value2D />
@@ -480,9 +480,9 @@
                       <Key>
                         <Time>0.6666667</Time>
                         <ValueVector4>
-                          <X>18.93</X>
-                          <Y>3.27</Y>
-                          <Z>0.9</Z>
+                          <X>1.893</X>
+                          <Y>0.327</Y>
+                          <Z>0.09</Z>
                           <W>1</W>
                         </ValueVector4>
                         <Value2D />
@@ -490,9 +490,9 @@
                       <Key>
                         <Time>1</Time>
                         <ValueVector4>
-                          <X>18.93</X>
-                          <Y>3.27</Y>
-                          <Z>0.9</Z>
+                          <X>1.893</X>
+                          <Y>0.327</Y>
+                          <Z>0.09</Z>
                           <W>1</W>
                         </ValueVector4>
                         <Value2D />
