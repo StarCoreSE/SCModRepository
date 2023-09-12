@@ -46,6 +46,8 @@ namespace StarCore.DynamicResistence
         public int SiegeDisplayTimer = 60;
         public int SiegeVisibleTimer = 150;
 
+        public const float SiegePowerRequirement = 150f;
+
         public float MaxAvailibleGridPower = 0f;
 
         public bool SiegeCooldownTimerActive = false;
@@ -161,8 +163,6 @@ namespace StarCore.DynamicResistence
                 Sink = dynResistBlock.Components.Get<MyResourceSinkComponent>();
                 Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, RequiredInput);
 
-                Sink.Update();
-
                 NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_10TH_FRAME;
 
                 Settings.Modifier = 1.0f;
@@ -274,29 +274,25 @@ namespace StarCore.DynamicResistence
             {
                 return;
             }
-            else if (dynResistBlock != null && SiegeModeActivatedClient && MaxAvailibleGridPower <= 150f)
+            else if (dynResistBlock != null && SiegeModeActivatedClient && MaxAvailibleGridPower <= SiegePowerRequirement)
             {
                 SetCountdownStatus($"Insufficient Power", 1500, MyFontEnum.Red);
                 SiegeModeActivatedClient = false;
                 Settings.SiegeModeActivated = SiegeModeActivatedClient;
                 return;
             }
-
-            else if (dynResistBlock != null && SiegeModeActivatedClient && !SiegeModeResistence && !dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
+            else if (dynResistBlock != null && SiegeModeActivatedClient && !SiegeModeResistence && !dynResistBlock.IsWorking && MaxAvailibleGridPower > SiegePowerRequirement)
             {
                 SetCountdownStatus($"Block Disabled", 1500, MyFontEnum.Red);
                 SiegeModeActivatedClient = false;
                 Settings.SiegeModeActivated = SiegeModeActivatedClient;
                 return;
             }
-
             else if (dynResistBlock != null && SiegeModeActivatedClient && !SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
                 MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(dynResistBlock.CubeGrid.Name, 0.1f);
-
                 SiegeModeResistence = true;
             }
-
             else if (dynResistBlock != null && SiegeModeActivatedClient && SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
                 /*MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: 2, pulseTimeInFrames: 12, color: Color.DarkOrange);*/
@@ -325,7 +321,6 @@ namespace StarCore.DynamicResistence
                         SiegeDisplayTimer = 60;
                         SiegeVisibleTimer = SiegeVisibleTimer - 1;
                         DisplayMessageToNearPlayers(0);
-                        /*SetCountdownStatus($"Siege Mode: " + SiegeVisibleTimer + " Seconds", 1500, MyFontEnum.Green);*/
                     }
                 }
                 else if (SiegeTimer == 0)
@@ -334,14 +329,11 @@ namespace StarCore.DynamicResistence
                     SiegeDisplayTimer = 60;
                     SiegeVisibleTimer = 150;
 
-                    ResetBlockResist(dynResistBlock);
-
-                    SiegeModeTurnOn(allTerminalBlocks);
-
                     /*MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: -1);*/
 
+                    ResetBlockResist(dynResistBlock);
+                    SiegeModeTurnOn(allTerminalBlocks);
                     DisplayMessageToNearPlayers(1);
-                    /*SetCountdownStatus($"Siege Mode Deactivated", 1500, MyFontEnum.Red);*/
 
                     SiegeModeActivatedClient = false;
                     Settings.SiegeModeActivated = SiegeModeActivatedClient;
@@ -352,26 +344,22 @@ namespace StarCore.DynamicResistence
                 }
             }
             else if (dynResistBlock != null && dynResistBlock.IsWorking == false & SiegeModeActivatedClient)
-            {
-                ResetBlockResist(dynResistBlock);
-
+            {                
                 SiegeTimer = 6000;
                 SiegeDisplayTimer = 60;
                 SiegeVisibleTimer = 150;
 
-                SiegeModeTurnOn(allTerminalBlocks);
-
                 /*MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: -1);*/
 
+                ResetBlockResist(dynResistBlock);
+                SiegeModeTurnOn(allTerminalBlocks);
                 DisplayMessageToNearPlayers(2);
-                /*SetCountdownStatus($"Block Inoperative! Siege Mode Deactivated", 1500, MyFontEnum.Red);*/
 
                 SiegeModeActivatedClient = false;
                 Settings.SiegeModeActivated = SiegeModeActivatedClient;
                 SiegeModeResistence = false;
                 SiegeCooldownTimerActive = true;
             }
-
             else
                 return;
         }
@@ -384,7 +372,6 @@ namespace StarCore.DynamicResistence
                     block.FatBlock is IMySolarPanel || block.FatBlock is IMyWindTurbine ||
                     block.FatBlock is IMyCollector || block.FatBlock is IMyCockpit)
                 {
-                    // Skip certain block types
                     continue;
                 }
 
@@ -405,7 +392,6 @@ namespace StarCore.DynamicResistence
                     block.FatBlock is IMySolarPanel || block.FatBlock is IMyWindTurbine ||
                     block.FatBlock is IMyCollector || block.FatBlock is IMyCockpit)
                 {
-                    // Skip certain block types
                     continue;
                 }
 
