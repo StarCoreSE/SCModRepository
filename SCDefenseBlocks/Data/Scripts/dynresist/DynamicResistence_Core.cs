@@ -160,8 +160,6 @@ namespace StarCore.DynamicResistence
 
                 dynResistBlockDef = (MyPoweredCargoContainerDefinition)dynResistBlock.SlimBlock.BlockDefinition;
 
-
-
                 Sink = dynResistBlock.Components.Get<MyResourceSinkComponent>();
                 Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, RequiredInput);
 
