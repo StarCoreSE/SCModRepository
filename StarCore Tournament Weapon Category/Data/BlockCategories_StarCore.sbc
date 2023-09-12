@@ -14,9 +14,6 @@
       <ItemIds>
 
 
-        <!--VANILLA? moved to its own thing-->
-
-
         <!--TIO but good-->
         <string>Type18_Artillery_Block</string>
         <string>Type77_Railgun_Block</string>
@@ -192,41 +189,7 @@
       </ItemIds>
     </Category>
 
-    <!--drone whitelisted weps
-    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
-      <Id>
-        <TypeId>GuiBlockCategoryDefinition</TypeId>
 
-      </Id>
-      <DisplayName>.STARCORE DRONE WHITELIST</DisplayName>
-      <Name>.SC zDrone Whitelist</Name>
-      <StrictSearch>true</StrictSearch>
-      <ItemIds>
-
-
-        <string>AMP_ArcMelee</string>
-        <string>Starcore_M_Laser_Block</string>
-        <string>Starcore_L_Laser_Block</string>
-        <string>MA_Fixed_T3</string>
-        <string>MA_Tiger</string>
-        <string>Fixed_Rockets</string>
-        <string>NHI_Fixed_Autocannon</string>
-        <string>NHI_Fixed_Gatling_Laser</string>
-        <string>ARYXPlasmaPulser</string>
-        <string>ARYXTempestCannon</string>
-        <string>HAS_Thanatos</string>
-        <string>HAS_Esper</string>
-        <string>HAS_Cyclops</string>
-        <string>CLB2X</string>
-        <string>Hexcannon</string>
-		<string>K_SA_HeavyMetal_Spinal_Rotary_Reskin</string>
-
-
-
-      </ItemIds>
-    </Category>
--->
-
-
+    
   </CategoryClasses>
 </Definitions>
