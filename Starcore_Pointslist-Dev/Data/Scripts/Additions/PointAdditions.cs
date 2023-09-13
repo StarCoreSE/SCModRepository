@@ -13,6 +13,7 @@ namespace ShipPoints
 				LargeBlockBatteryBlock@14;
                 EmitterL@50;
                 EmitterLA@50;
+				SI_Field_Gen@450;
                 LargeShieldModulator@50;
                 LargeEnhancer@50;
                 LargeBlockSmallGenerator@17;
