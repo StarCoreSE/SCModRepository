@@ -4,7 +4,7 @@ using VRage.Game.Components;
 
 namespace ShipPoints
 {
-	[MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
+    [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     class PointAdditions : MySessionComponentBase
     {
         public override void Init(MyObjectBuilder_SessionComponent sessionComponent)
@@ -17,7 +17,10 @@ namespace ShipPoints
                 LargeEnhancer@50;
                 LargeBlockSmallGenerator@17;
                 LargeBlockLargeGenerator@300;
-                LargeWarhead@101;
+		        LargeLargeBlockUpgrade@100;
+				SmallLargeBlockUpgrade@20;
+				DampeningEnhancer_x2_Large@100;
+                LargeWarhead@100;
                 LargeDecoy@4;
                 LargeStator@5;
                 LargeAdvancedStator@5;
@@ -90,7 +93,7 @@ namespace ShipPoints
 				MXA_M2MAC@800;
 				ARYXGaussCannon@1250;
 				K_SA_Launcher_FixedMount@275;
-				AWGGG@250;
+				AWGGG@150;
 				GravityGenerator@0;
 				MA_Afterburner_Large@200;
 				MA_Afterburner_Large_small@50;
@@ -114,6 +117,7 @@ namespace ShipPoints
 				LargeBlockSmallHydrogenThrust@5;
 				LargeBlockLargeHydrogenThrustIndustrial@30;
 				LargeBlockSmallHydrogenThrustIndustrial@5;
+				HugeHydrogenThruster@200;
 				LargeBlockLargeThrustSciFi@5;
 				LargeBlockSmallThrustScifi@2;
 				ARYXMagnetarCannon@450;
@@ -192,6 +196,11 @@ namespace ShipPoints
 				MA_Gimbal_Laser_Armored_Slope2_sb@70;
 				MA_Gimbal_Laser_Armored_Slope45_sb@70;
 				MA_Gimbal_Laser_sb@70;
+				MA_Blister@100;
+				MA_Blister45@100;
+				MA_Blister30@100;
+				MA_Blister32@100;
+				MA_Meatball@200;
 				VirtualMassSmall@50;
 				SmallHydrogenEngine@1;
 				SmallBlockBatteryBlock@4;
@@ -214,10 +223,7 @@ namespace ShipPoints
 				EmitterS@50;
 				EmitterSA@50;
 				SmallEnhancer@50;
-				MA_Blister_sm@50;
-				MA_Blister45_sm@50;
-				MA_Blister30_sm@50;
-				MA_Blister32_sm@50;
+
 				SpaceBallSmall@50;
 				MA_Fixed_T2_sb@100;
 				MA_Fixed_T2_Naked_sb@100;
@@ -266,8 +272,8 @@ namespace ShipPoints
 				Wheel1x1@35000;
 				K_SA_Gauss_AMSIIC@350;
 				SA_HMI_Erebos@250;
-				LargeBlockSmallThrustSciFi@2;
-				SmallThrustSciFi@3;
+				LargeBlockSmallThrustSciFi@20;
+				SmallThrustSciFi@30;
 				HAS_Thanatos@350;
                			HAS_Alecto@400;
            			HAS_Assault@250;
@@ -282,8 +288,8 @@ namespace ShipPoints
 				LargeBlockSmallGeneratorWarfare2@17;
 				LargeBlockBatteryBlockWarfare2@14;
 				LargeBlockLargeGeneratorWarfare2@300;
-				LargeBlockLargeModularThruster@5;
-				LargeBlockSmallModularThruster@2;
+				LargeBlockLargeModularThruster@50;
+				LargeBlockSmallModularThruster@20;
 				LargeTurretControlBlock@200;
 				AQD_LG_AtmoThrusterS_ArmoredSlopeRev@3;
 				AQD_LG_AtmoThrusterS_ArmoredSlope@3;
@@ -448,10 +454,13 @@ namespace ShipPoints
 				Heavy_Repeater@85; 
 				PriestReskin_Block@85; 
 				Fixed_Rockets@225; 
-				Type18_Artillery@200;
-				Type21_Artillery@400;
-				Assault_Coil_Turret@160; 
-				Light_Coil_Turret@115; 
+				Type18_Artillery_Block@300;
+				Type21_Artillery_Block@400;
+				Type24_Artillery_Block@500;
+				Type77_Railgun_Block@300;
+				Type78_Railgun_Block@400;
+				Type79_Railgun_Block@500;
+				Reaver_Coilgun_Block@200; 
 				RailgunTurret_Block@450; 
                 Null_Point_Jump_Disruptor_Large@99999;
 				LargeGatlingTurret_SC@175;
@@ -496,8 +505,31 @@ namespace ShipPoints
 				Thagomizer_Flipped@750; 
 				Thagomizer_Angled@750; 
 				Thagomizer_Angled_Flipped@750; 
+				SC_Radome@10;
 				K_HS_9x9_K3_King@900; 
 				K_HS_9x9_HSRB_Dreadnight@750;
+
+				MA_Laser_Armor01@1;
+				MA_Laser_Armor02@1;
+				MA_Laser_Armor03@1;
+				MA_Laser_Armor04@1;
+				MA_Laser_Armor05@1;
+				MA_Laser_Armor06@1;
+				MA_Laser_Armor07@1;
+				MA_Laser_Armor08@1;
+				MA_Laser_Armor09@1;
+				MA_Laser_Armor10@1;
+				MA_Laser_Armor11@1;
+				MA_Laser_Armor12@1;
+				MA_Laser_Armor13@1;
+				MA_Laser_Armor14@1;
+				MA_Laser_Armor15@1;
+				MA_Laser_Armor16@1;
+
+
+
+
+
             "));
         }
     }
