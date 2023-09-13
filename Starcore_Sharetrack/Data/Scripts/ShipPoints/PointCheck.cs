@@ -1186,12 +1186,7 @@ namespace klime.PointCheck
 <color=Green>Max Speed<color=White>: {speed} | <color=Green>TWR<color=White>: {TWRs}
 
 <color=Orange>----Battle Stats----
-<color=Green>Battle Points<color=White>: {tracked.Bpts} 
-<color=Orange>[<color=Red> {tracked.offensivePercentage} <color=White>% <color=Orange>| <color=Green>
-{tracked.powerPercentage} <color=White>% <color=Orange>| <color=DeepSkyBlue>
-{tracked.movementPercentage} <color=White>% <color=Orange>| <color=LightGray>
-{tracked.miscPercentage} <color=White>% <color=Orange>]
-
+<color=Green>Battle Points<color=White>: {tracked.Bpts} <color=Orange>[<color=Red> {tracked.offensivePercentage} <color=White>% <color=Orange>| <color=Green> {tracked.powerPercentage} <color=White>% <color=Orange>| <color=DeepSkyBlue>{tracked.movementPercentage} <color=White>% <color=Orange>| <color=LightGray>{tracked.miscPercentage} <color=White>% <color=Orange>]
 <color=Green>PD Investment<color=White>: <color=Orange>( <color=White>{pdInvestmentNum} <color=Orange>|<color=Crimson> {pdInvestment} <color=White>%<color=Orange> )
 <color=Green>Shield Max HP<color=White>: {total_shield_string} ({(int)tracked.CurrentShieldStrength}%)
 <color=Green>Thrust<color=White>: {thrustString}N
