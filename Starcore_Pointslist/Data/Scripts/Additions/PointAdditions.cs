@@ -93,7 +93,7 @@ namespace ShipPoints
 				MXA_M2MAC@800;
 				ARYXGaussCannon@1250;
 				K_SA_Launcher_FixedMount@275;
-				AWGGG@250;
+				AWGGG@150;
 				GravityGenerator@0;
 				MA_Afterburner_Large@200;
 				MA_Afterburner_Large_small@50;
@@ -117,6 +117,7 @@ namespace ShipPoints
 				LargeBlockSmallHydrogenThrust@5;
 				LargeBlockLargeHydrogenThrustIndustrial@30;
 				LargeBlockSmallHydrogenThrustIndustrial@5;
+				HugeHydrogenThruster@200;
 				LargeBlockLargeThrustSciFi@5;
 				LargeBlockSmallThrustScifi@2;
 				ARYXMagnetarCannon@450;
