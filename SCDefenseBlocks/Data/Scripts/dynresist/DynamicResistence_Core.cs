@@ -22,38 +22,48 @@ using SpaceEngineers.Game.Entities.Blocks;
 using SpaceEngineers.Game.ModAPI;
 using Sandbox.Game.WorldEnvironment.Modules;
 using Sandbox.Game.Localization;
+using VRage.Game.Entity;
 
 namespace StarCore.DynamicResistence
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "SI_Field_Gen")]
     public class DynamicResistLogic : MyGameLogicComponent
     {
+        public float MinDivertedPower;
+        public float MaxDivertedPower;
+        public float MinResistModifier;
+        public float MaxResistModifier;
 
-        public const float MinDivertedPower = 0f;
-        public const float MaxDivertedPower = 30f;
-
-        public const float MinResistModifier = 1.0f;
-        public const float MaxResistModifier = 0.7f;
+        public float finalResistanceModifier = 0f;
 
         public const string Control_Prefix = "DynaResist.";
         public readonly Guid Settings_GUID = new Guid("9EFDABA1-E705-4F62-BD37-A4B046B60BC0");
         public const int Settings_Change_Countdown = (60 * 1) / 10;
 
-        public int SiegeTimer = 9000;
-        public int SiegeCooldownTimer = 18000;
-        public int SiegeDisplayTimer = 60;
-        public int SiegeVisibleTimer = 150;
-        public bool SiegeCooldownTimerActive = false;
+        public float SiegePowerMinimumRequirement;
+
+        public int SiegeTimer;
+        public int SiegeCooldownTimer;
+        public const int SiegeDisplayTimer = 60;
+        public int SiegeVisibleTimer;
+
+        public int CountSiegeTimer;
+        public int CountSiegeCooldownTimer;
+        public int CountSiegeDisplayTimer;
+        public int CountSiegeVisibleTimer;  
 
         public float MaxAvailibleGridPower = 0f;
+
+        public bool SiegeCooldownTimerActive = false;
         public bool SiegeModeActivatedClient = false;
-        public bool SiegeBlockShutdown = false;
         public bool SiegeModeResistence = false;
 
         private MyResourceSinkComponent Sink = null;
 
         private IMyHudNotification notifPowerDiversion = null;
         private IMyHudNotification notifCountdown = null;
+
+        public float DivertedPower { get; set; }
 
         public float FieldPower
         {
@@ -130,15 +140,13 @@ namespace StarCore.DynamicResistence
         public IMyCollector dynResistBlock;
         public MyPoweredCargoContainerDefinition dynResistBlockDef;
 
+        public readonly Config_Settings Config = new Config_Settings();
         public readonly DynaResistBlockSettings Settings = new DynaResistBlockSettings();
         int syncCountdown;
 
-        public float finalResistanceModifier = 0f;
-
-        public float DivertedPower { get; set; }
-
         DynamicResistenceMod Mod => DynamicResistenceMod.Instance;
 
+        #region Overrides
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
@@ -148,7 +156,29 @@ namespace StarCore.DynamicResistence
         {
             try
             {
-                SetupTerminalControls<IMyCollector>();
+                MinDivertedPower = Config.MinDivertedPower;
+                MaxDivertedPower = Config.MaxDivertedPower;
+                MinResistModifier = Config.MinResistModifier;
+                MaxResistModifier = Config.MaxResistModifier;
+
+                Settings.Modifier = 1.0f;
+                Settings.FieldPower = MinDivertedPower;
+
+                SiegePowerMinimumRequirement = Config.SiegePowerMinimumRequirement;
+                SiegeTimer = Config.SiegeTimer;
+                SiegeCooldownTimer = Config.SiegeCooldownTimer;
+
+                SiegeVisibleTimer = SiegeTimer / SiegeDisplayTimer;
+
+                CountSiegeTimer = SiegeTimer;
+                CountSiegeCooldownTimer = SiegeCooldownTimer;
+                CountSiegeDisplayTimer = SiegeDisplayTimer;
+                CountSiegeVisibleTimer = SiegeVisibleTimer;
+
+                float minDivertedPower = MinDivertedPower; // Get this value from your config
+                float maxDivertedPower = MaxDivertedPower; // Get this value from your config
+
+                SetupTerminalControls<IMyCollector>(minDivertedPower, maxDivertedPower);
 
                 dynResistBlock = (IMyCollector)Entity;
 
@@ -160,20 +190,44 @@ namespace StarCore.DynamicResistence
                 Sink = dynResistBlock.Components.Get<MyResourceSinkComponent>();
                 Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, RequiredInput);
 
-                Sink.Update();
-
                 NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_10TH_FRAME;
 
-                Settings.Modifier = 1.0f;
-                Settings.FieldPower = MinDivertedPower;
-
-
-                /*if (!LoadSettings())
-                {
-                    ParseLegacyNameStorage();
-                }*/
-
                 SaveSettings(); // required for IsSerialized()
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+        }
+
+        public override void UpdateBeforeSimulation10()
+        {
+            try
+            {
+                SyncSettings();
+                if (SiegeCooldownTimerActive == true && CountSiegeCooldownTimer > 0)
+                {
+                    CountSiegeCooldownTimer = CountSiegeCooldownTimer - 10;
+                }
+                else if (SiegeCooldownTimerActive == true && CountSiegeCooldownTimer <= 0)
+                {
+                    CountSiegeCooldownTimer = SiegeCooldownTimer;
+                    SiegeCooldownTimerActive = false;
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+        }
+
+        public override void UpdateAfterSimulation()
+        {
+            try
+            {
+                SiegeMode();
+                CalculateMaxGridPower();
+                ChangeResistanceValue(dynResistBlock);
             }
             catch (Exception e)
             {
@@ -201,10 +255,10 @@ namespace StarCore.DynamicResistence
                 Log.Error(e);
             }
         }
+        #endregion
 
         private float RequiredInput()
         {
-            Log.Info("Reached Compute");
             if (!dynResistBlock.IsWorking)
                 return 0f;
             
@@ -222,8 +276,6 @@ namespace StarCore.DynamicResistence
             }
             else    
             {
-                Log.Info("Reached Enabled");
-
                 CalculateMaxGridPower();
 
                 float baseUsage = 50.000f;
@@ -259,8 +311,6 @@ namespace StarCore.DynamicResistence
                         }
                     }
 
-                    Log.Info("totalPower Evaluation: " + totalPower);
-
                     if (MaxAvailibleGridPower == totalPower)
                         return;
                     else
@@ -282,36 +332,32 @@ namespace StarCore.DynamicResistence
             {
                 return;
             }
-            else if (dynResistBlock != null && SiegeModeActivatedClient && MaxAvailibleGridPower <= 150f)
+            else if (dynResistBlock != null && SiegeModeActivatedClient && MaxAvailibleGridPower <= SiegePowerMinimumRequirement)
             {
                 SetCountdownStatus($"Insufficient Power", 1500, MyFontEnum.Red);
                 SiegeModeActivatedClient = false;
                 Settings.SiegeModeActivated = SiegeModeActivatedClient;
                 return;
             }
-
-            else if (dynResistBlock != null && SiegeModeActivatedClient && !SiegeModeResistence && !dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
+            else if (dynResistBlock != null && SiegeModeActivatedClient && !SiegeModeResistence && !dynResistBlock.IsWorking && MaxAvailibleGridPower > SiegePowerMinimumRequirement)
             {
                 SetCountdownStatus($"Block Disabled", 1500, MyFontEnum.Red);
                 SiegeModeActivatedClient = false;
                 Settings.SiegeModeActivated = SiegeModeActivatedClient;
                 return;
             }
-
             else if (dynResistBlock != null && SiegeModeActivatedClient && !SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
                 MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(dynResistBlock.CubeGrid.Name, 0.1f);
-
                 SiegeModeResistence = true;
             }
-
             else if (dynResistBlock != null && SiegeModeActivatedClient && SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
-                MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: 2, pulseTimeInFrames: 12, color: Color.DarkOrange);
+                /*MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: 2, pulseTimeInFrames: 12, color: Color.DarkOrange);*/
 
                 Sink.Update();
 
-                if (SiegeTimer > 0)
+                if (CountSiegeTimer > 0)
                 {
                     DivertedPower = 0f;
 
@@ -321,32 +367,31 @@ namespace StarCore.DynamicResistence
                     {
                         dynResistBlock.CubeGrid.Physics.LinearVelocity = Vector3D.Zero;
                     }
-                    
-                    /*dynResistBlock.CubeGrid.Physics.AngularVelocity = Vector3D.Zero;*/
-
-                    SiegeTimer = SiegeTimer - 1;
-                    SiegeDisplayTimer = SiegeDisplayTimer - 1;
-                    if (SiegeDisplayTimer <= 0)
+                    /*else if (dynResistBlock.CubeGrid.Physics.AngularVelocity != Vector3D.Zero)
                     {
-                        SiegeDisplayTimer = 60;
-                        SiegeVisibleTimer = SiegeVisibleTimer - 1;
+                        dynResistBlock.CubeGrid.Physics.AngularVelocity = Vector3D.Zero;
+                    }*/
+
+                    CountSiegeTimer = CountSiegeTimer - 1;
+                    CountSiegeDisplayTimer = CountSiegeDisplayTimer - 1;
+                    if (CountSiegeDisplayTimer <= 0)
+                    {
+                        CountSiegeDisplayTimer = SiegeDisplayTimer;
+                        CountSiegeVisibleTimer = CountSiegeVisibleTimer - 1;
                         DisplayMessageToNearPlayers(0);
-                        /*SetCountdownStatus($"Siege Mode: " + SiegeVisibleTimer + " Seconds", 1500, MyFontEnum.Green);*/
                     }
                 }
-                else if (SiegeTimer == 0)
+                else if (CountSiegeTimer == 0)
                 {
-                    SiegeTimer = 6000;
-                    SiegeDisplayTimer = 60;
+                    CountSiegeTimer = SiegeTimer;
+                    CountSiegeDisplayTimer = SiegeDisplayTimer;
+                    CountSiegeVisibleTimer = SiegeVisibleTimer;
+
+                    /*MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: -1);*/
 
                     ResetBlockResist(dynResistBlock);
-
                     SiegeModeTurnOn(allTerminalBlocks);
-
-                    MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: -1);
-
                     DisplayMessageToNearPlayers(1);
-                    /*SetCountdownStatus($"Siege Mode Deactivated", 1500, MyFontEnum.Red);*/
 
                     SiegeModeActivatedClient = false;
                     Settings.SiegeModeActivated = SiegeModeActivatedClient;
@@ -357,26 +402,22 @@ namespace StarCore.DynamicResistence
                 }
             }
             else if (dynResistBlock != null && dynResistBlock.IsWorking == false & SiegeModeActivatedClient)
-            {
+            {                
+                CountSiegeTimer = SiegeTimer;
+                CountSiegeDisplayTimer = SiegeDisplayTimer;
+                CountSiegeVisibleTimer = SiegeVisibleTimer;
+
+                /*MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: -1);*/
+
                 ResetBlockResist(dynResistBlock);
-
-                SiegeTimer = 6000;
-                SiegeDisplayTimer = 60;
-                SiegeVisibleTimer = 150;
-
                 SiegeModeTurnOn(allTerminalBlocks);
-
-                MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: -1);
-
                 DisplayMessageToNearPlayers(2);
-                /*SetCountdownStatus($"Block Inoperative! Siege Mode Deactivated", 1500, MyFontEnum.Red);*/
 
                 SiegeModeActivatedClient = false;
                 Settings.SiegeModeActivated = SiegeModeActivatedClient;
                 SiegeModeResistence = false;
                 SiegeCooldownTimerActive = true;
             }
-
             else
                 return;
         }
@@ -389,7 +430,6 @@ namespace StarCore.DynamicResistence
                     block.FatBlock is IMySolarPanel || block.FatBlock is IMyWindTurbine ||
                     block.FatBlock is IMyCollector || block.FatBlock is IMyCockpit)
                 {
-                    // Skip certain block types
                     continue;
                 }
 
@@ -399,7 +439,6 @@ namespace StarCore.DynamicResistence
                     functionalBlock.Enabled = false;
                 }
             }
-            SiegeBlockShutdown = true;
         }
 
         private void SiegeModeTurnOn(List<IMySlimBlock> allTerminalBlocks)
@@ -410,7 +449,6 @@ namespace StarCore.DynamicResistence
                     block.FatBlock is IMySolarPanel || block.FatBlock is IMyWindTurbine ||
                     block.FatBlock is IMyCollector || block.FatBlock is IMyCockpit)
                 {
-                    // Skip certain block types
                     continue;
                 }
 
@@ -420,120 +458,6 @@ namespace StarCore.DynamicResistence
                     functionalBlock.Enabled = true;
                 }
             }
-        }
-
-        public override void UpdateBeforeSimulation10()
-        {
-            try
-            {
-                SyncSettings();
-                if (SiegeCooldownTimerActive == true && SiegeCooldownTimer > 0)
-                {
-                    SiegeCooldownTimer = SiegeCooldownTimer - 10;
-                }
-                else if (SiegeCooldownTimerActive == true && SiegeCooldownTimer <= 0)
-                {
-                    SiegeCooldownTimer = 18000;
-                    SiegeCooldownTimerActive = false;
-                }
-            }
-            catch (Exception e)
-            {
-                Log.Error(e);
-            }
-        }
-
-        public override void UpdateAfterSimulation()
-        {
-            try
-            {
-                SiegeMode();
-                CalculateMaxGridPower();
-                ChangeResistanceValue(dynResistBlock);
-            }
-            catch (Exception e)
-            {
-                Log.Error(e);
-            }
-        }
-
-        bool LoadSettings()
-        {
-            if (dynResistBlock.Storage == null)
-                return false;
-
-            string rawData;
-            if (!dynResistBlock.Storage.TryGetValue(Settings_GUID, out rawData))
-                return false;
-
-            try
-            {
-                var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<DynaResistBlockSettings>(Convert.FromBase64String(rawData));
-
-                if (loadedSettings != null)
-                {
-                    Settings.FieldPower = loadedSettings.FieldPower;
-                    Settings.Modifier = loadedSettings.Modifier;
-                    return true;
-                }
-            }
-            catch (Exception e)
-            {
-                Log.Error($"Error loading settings!\n{e}");
-            }
-
-            return false;
-        }
-
-        void SaveSettings()
-        {
-            if (dynResistBlock == null)
-                return; // called too soon or after it was already closed, ignore
-
-            if (Settings == null)
-                throw new NullReferenceException($"Settings == null on entId={Entity?.EntityId}; modInstance={DynamicResistenceMod.Instance != null}");
-
-            if (MyAPIGateway.Utilities == null)
-                throw new NullReferenceException($"MyAPIGateway.Utilities == null; entId={Entity?.EntityId}; modInstance={DynamicResistenceMod.Instance != null}");
-
-            if (dynResistBlock.Storage == null)
-                dynResistBlock.Storage = new MyModStorageComponent();
-
-            dynResistBlock.Storage.SetValue(Settings_GUID, Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(Settings)));
-        }
-
-        void SettingsChanged()
-        {
-            if (syncCountdown == 0)
-                syncCountdown = Settings_Change_Countdown;
-        }
-
-        void SyncSettings()
-        {
-            if (syncCountdown > 0 && --syncCountdown <= 0)
-            {
-                SaveSettings();
-
-                Mod.CachedPacketSettings.Send(dynResistBlock.EntityId, Settings);
-            }
-        }
-
-        public override bool IsSerialized()
-        {
-            // called when the game iterates components to check if they should be serialized, before they're actually serialized.
-            // this does not only include saving but also streaming and blueprinting.
-            // NOTE for this to work reliably the MyModStorageComponent needs to already exist in this block with at least one element.
-
-            try
-            {
-                SaveSettings();
-            }
-            catch (Exception e)
-            {
-                Log.Error(e);
-            }
-
-            return base.IsSerialized();
         }
 
         private void SetPowerStatus(string text, int aliveTime = 300, string font = MyFontEnum.Green)
@@ -617,8 +541,126 @@ namespace StarCore.DynamicResistence
 
         }
 
+        private void DisplayMessageToNearPlayers(int msgId)
+        {
+            List<IMyCharacter> playerCharacters = new List<IMyCharacter>();
+
+            if (dynResistBlock != null)
+            {
+                var bound = new BoundingSphereD(dynResistBlock.GetPosition(), 50);
+                List<IMyEntity> nearEntities = MyAPIGateway.Entities.GetEntitiesInSphere(ref bound);
+
+                foreach (var entity in nearEntities)
+                {
+                    IMyCharacter character = entity as IMyCharacter;
+                    if (character != null && character.IsPlayer && bound.Contains(character.GetPosition()) != ContainmentType.Disjoint)
+                    {
+                        if (msgId == 0)
+                        {
+                            SetCountdownStatus($"Siege Mode: " + CountSiegeVisibleTimer + " Seconds", 1500, MyFontEnum.Green);
+                        }
+                        else if (msgId == 1)
+                        {
+                            SetCountdownStatus($"Siege Mode Deactivated", 1500, MyFontEnum.Red);
+                        }
+                        else if (msgId == 2)
+                        {
+                            SetCountdownStatus($"Block Inoperative! Siege Mode Deactivated", 1500, MyFontEnum.Red);
+                        }
+                        else
+                        {
+                            SetCountdownStatus($"Error! Unknown State!", 1500, MyFontEnum.Red);
+                            return;
+                        }
+                            
+                    }
+                }
+            }
+        }
+
+        #region Settings
+        bool LoadSettings()
+        {
+            if (dynResistBlock.Storage == null)
+                return false;
+
+            string rawData;
+            if (!dynResistBlock.Storage.TryGetValue(Settings_GUID, out rawData))
+                return false;
+
+            try
+            {
+                var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<DynaResistBlockSettings>(Convert.FromBase64String(rawData));
+
+                if (loadedSettings != null)
+                {
+                    Settings.FieldPower = loadedSettings.FieldPower;
+                    Settings.Modifier = loadedSettings.Modifier;
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error loading settings!\n{e}");
+            }
+
+            return false;
+        }
+
+        void SaveSettings()
+        {
+            if (dynResistBlock == null)
+                return; // called too soon or after it was already closed, ignore
+
+            if (Settings == null)
+                throw new NullReferenceException($"Settings == null on entId={Entity?.EntityId}; modInstance={DynamicResistenceMod.Instance != null}");
+
+            if (MyAPIGateway.Utilities == null)
+                throw new NullReferenceException($"MyAPIGateway.Utilities == null; entId={Entity?.EntityId}; modInstance={DynamicResistenceMod.Instance != null}");
+
+            if (dynResistBlock.Storage == null)
+                dynResistBlock.Storage = new MyModStorageComponent();
+
+            dynResistBlock.Storage.SetValue(Settings_GUID, Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(Settings)));
+        }
+
+        void SettingsChanged()
+        {
+            if (syncCountdown == 0)
+                syncCountdown = Settings_Change_Countdown;
+        }
+
+        void SyncSettings()
+        {
+            if (syncCountdown > 0 && --syncCountdown <= 0)
+            {
+                SaveSettings();
+
+                Mod.CachedPacketSettings.Send(dynResistBlock.EntityId, Settings);
+            }
+        }
+        
+        public override bool IsSerialized()
+        {
+            // called when the game iterates components to check if they should be serialized, before they're actually serialized.
+            // this does not only include saving but also streaming and blueprinting.
+            // NOTE for this to work reliably the MyModStorageComponent needs to already exist in this block with at least one element.
+
+            try
+            {
+                SaveSettings();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+
+            return base.IsSerialized();
+        }
+        #endregion
+
         #region Terminal Controls
-        static void SetupTerminalControls<T>()
+        static void SetupTerminalControls<T>(float minDivertedPower, float maxDivertedPower)
         {
             var mod = DynamicResistenceMod.Instance;
 
@@ -642,7 +684,7 @@ namespace StarCore.DynamicResistence
             var integrityFieldPowerValueSlider = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, IMyCollector>(Control_Prefix + "IntegrityFieldPower");
             integrityFieldPowerValueSlider.Title = MyStringId.GetOrCompute("Integrity Field Power");
             integrityFieldPowerValueSlider.Tooltip = MyStringId.GetOrCompute("Adjusts the amount of Damage Absorbed by the Block");
-            integrityFieldPowerValueSlider.SetLimits(MinDivertedPower, MaxDivertedPower);
+            integrityFieldPowerValueSlider.SetLimits(minDivertedPower, maxDivertedPower);
             integrityFieldPowerValueSlider.Writer = Control_Power_Writer;
             integrityFieldPowerValueSlider.Visible = Control_Visible;
             integrityFieldPowerValueSlider.Getter = Control_Power_Getter;
@@ -747,7 +789,7 @@ namespace StarCore.DynamicResistence
                     }
                     else if (logic.SiegeCooldownTimerActive == true)
                     {
-                        logic.SetCountdownStatus($"Siege Mode On Cooldown: " + (logic.SiegeCooldownTimer / 60) + " Seconds", 1500, MyFontEnum.Red);
+                        logic.SetCountdownStatus($"Siege Mode On Cooldown: " + (logic.CountSiegeCooldownTimer / 60) + " Seconds", 1500, MyFontEnum.Red);
                         return;
                     }
                     if (logic.SiegeModeActivatedClient == false)
@@ -863,43 +905,6 @@ namespace StarCore.DynamicResistence
                 logic.SiegeModeActivatedClient = value;
             }
         }
-        #endregion
-
-        private void DisplayMessageToNearPlayers(int msgId)
-        {
-            List<IMyCharacter> playerCharacters = new List<IMyCharacter>();
-
-            if (dynResistBlock != null)
-            {
-                var bound = new BoundingSphereD(dynResistBlock.GetPosition(), 50);
-                List<IMyEntity> nearEntities = MyAPIGateway.Entities.GetEntitiesInSphere(ref bound);
-
-                foreach (var entity in nearEntities)
-                {
-                    IMyCharacter character = entity as IMyCharacter;
-                    if (character != null && character.IsPlayer && bound.Contains(character.GetPosition()) != ContainmentType.Disjoint)
-                    {
-                        if (msgId == 0)
-                        {
-                            SetCountdownStatus($"Siege Mode: " + SiegeVisibleTimer + " Seconds", 1500, MyFontEnum.Green);
-                        }
-                        else if (msgId == 1)
-                        {
-                            SetCountdownStatus($"Siege Mode Deactivated", 1500, MyFontEnum.Red);
-                        }
-                        else if (msgId == 2)
-                        {
-                            SetCountdownStatus($"Block Inoperative! Siege Mode Deactivated", 1500, MyFontEnum.Red);
-                        }
-                        else
-                        {
-                            SetCountdownStatus($"Error! Unknown State!", 1500, MyFontEnum.Red);
-                            return;
-                        }
-                            
-                    }
-                }
-            }
-        }
+        #endregion    
     }
 }
