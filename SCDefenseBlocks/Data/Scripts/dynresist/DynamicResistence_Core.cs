@@ -22,17 +22,17 @@ using SpaceEngineers.Game.Entities.Blocks;
 using SpaceEngineers.Game.ModAPI;
 using Sandbox.Game.WorldEnvironment.Modules;
 using Sandbox.Game.Localization;
+using VRage.Game.Entity;
 
 namespace StarCore.DynamicResistence
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "SI_Field_Gen")]
     public class DynamicResistLogic : MyGameLogicComponent
     {
-        public const float MinDivertedPower = 0f;
-        public const float MaxDivertedPower = 30f;
-
-        public const float MinResistModifier = 1.0f;
-        public const float MaxResistModifier = 0.7f;
+        public float MinDivertedPower;
+        public float MaxDivertedPower;
+        public float MinResistModifier;
+        public float MaxResistModifier;
 
         public float finalResistanceModifier = 0f;
 
@@ -40,18 +40,22 @@ namespace StarCore.DynamicResistence
         public readonly Guid Settings_GUID = new Guid("9EFDABA1-E705-4F62-BD37-A4B046B60BC0");
         public const int Settings_Change_Countdown = (60 * 1) / 10;
 
-        public int SiegeTimer = 9000;
-        public int SiegeCooldownTimer = 18000;
-        public int SiegeDisplayTimer = 60;
-        public int SiegeVisibleTimer = 150;
+        public float SiegePowerMinimumRequirement;
 
-        public const float SiegePowerRequirement = 150f;
+        public int SiegeTimer;
+        public int SiegeCooldownTimer;
+        public const int SiegeDisplayTimer = 60;
+        public int SiegeVisibleTimer;
+
+        public int CountSiegeTimer;
+        public int CountSiegeCooldownTimer;
+        public int CountSiegeDisplayTimer;
+        public int CountSiegeVisibleTimer;  
 
         public float MaxAvailibleGridPower = 0f;
 
         public bool SiegeCooldownTimerActive = false;
         public bool SiegeModeActivatedClient = false;
-        public bool SiegeBlockShutdown = false;
         public bool SiegeModeResistence = false;
 
         private MyResourceSinkComponent Sink = null;
@@ -136,6 +140,7 @@ namespace StarCore.DynamicResistence
         public IMyCollector dynResistBlock;
         public MyPoweredCargoContainerDefinition dynResistBlockDef;
 
+        public readonly Config_Settings Config = new Config_Settings();
         public readonly DynaResistBlockSettings Settings = new DynaResistBlockSettings();
         int syncCountdown;
 
@@ -151,7 +156,29 @@ namespace StarCore.DynamicResistence
         {
             try
             {
-                SetupTerminalControls<IMyCollector>();
+                MinDivertedPower = Config.MinDivertedPower;
+                MaxDivertedPower = Config.MaxDivertedPower;
+                MinResistModifier = Config.MinResistModifier;
+                MaxResistModifier = Config.MaxResistModifier;
+
+                Settings.Modifier = 1.0f;
+                Settings.FieldPower = MinDivertedPower;
+
+                SiegePowerMinimumRequirement = Config.SiegePowerMinimumRequirement;
+                SiegeTimer = Config.SiegeTimer;
+                SiegeCooldownTimer = Config.SiegeCooldownTimer;
+
+                SiegeVisibleTimer = SiegeTimer / SiegeDisplayTimer;
+
+                CountSiegeTimer = SiegeTimer;
+                CountSiegeCooldownTimer = SiegeCooldownTimer;
+                CountSiegeDisplayTimer = SiegeDisplayTimer;
+                CountSiegeVisibleTimer = SiegeVisibleTimer;
+
+                float minDivertedPower = MinDivertedPower; // Get this value from your config
+                float maxDivertedPower = MaxDivertedPower; // Get this value from your config
+
+                SetupTerminalControls<IMyCollector>(minDivertedPower, maxDivertedPower);
 
                 dynResistBlock = (IMyCollector)Entity;
 
@@ -164,9 +191,6 @@ namespace StarCore.DynamicResistence
                 Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, RequiredInput);
 
                 NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_10TH_FRAME;
-
-                Settings.Modifier = 1.0f;
-                Settings.FieldPower = MinDivertedPower;
 
                 SaveSettings(); // required for IsSerialized()
             }
@@ -181,13 +205,13 @@ namespace StarCore.DynamicResistence
             try
             {
                 SyncSettings();
-                if (SiegeCooldownTimerActive == true && SiegeCooldownTimer > 0)
+                if (SiegeCooldownTimerActive == true && CountSiegeCooldownTimer > 0)
                 {
-                    SiegeCooldownTimer = SiegeCooldownTimer - 10;
+                    CountSiegeCooldownTimer = CountSiegeCooldownTimer - 10;
                 }
-                else if (SiegeCooldownTimerActive == true && SiegeCooldownTimer <= 0)
+                else if (SiegeCooldownTimerActive == true && CountSiegeCooldownTimer <= 0)
                 {
-                    SiegeCooldownTimer = 18000;
+                    CountSiegeCooldownTimer = SiegeCooldownTimer;
                     SiegeCooldownTimerActive = false;
                 }
             }
@@ -287,8 +311,6 @@ namespace StarCore.DynamicResistence
                         }
                     }
 
-                    Log.Info("totalPower Evaluation: " + totalPower);
-
                     if (MaxAvailibleGridPower == totalPower)
                         return;
                     else
@@ -310,14 +332,14 @@ namespace StarCore.DynamicResistence
             {
                 return;
             }
-            else if (dynResistBlock != null && SiegeModeActivatedClient && MaxAvailibleGridPower <= SiegePowerRequirement)
+            else if (dynResistBlock != null && SiegeModeActivatedClient && MaxAvailibleGridPower <= SiegePowerMinimumRequirement)
             {
                 SetCountdownStatus($"Insufficient Power", 1500, MyFontEnum.Red);
                 SiegeModeActivatedClient = false;
                 Settings.SiegeModeActivated = SiegeModeActivatedClient;
                 return;
             }
-            else if (dynResistBlock != null && SiegeModeActivatedClient && !SiegeModeResistence && !dynResistBlock.IsWorking && MaxAvailibleGridPower > SiegePowerRequirement)
+            else if (dynResistBlock != null && SiegeModeActivatedClient && !SiegeModeResistence && !dynResistBlock.IsWorking && MaxAvailibleGridPower > SiegePowerMinimumRequirement)
             {
                 SetCountdownStatus($"Block Disabled", 1500, MyFontEnum.Red);
                 SiegeModeActivatedClient = false;
@@ -335,7 +357,7 @@ namespace StarCore.DynamicResistence
 
                 Sink.Update();
 
-                if (SiegeTimer > 0)
+                if (CountSiegeTimer > 0)
                 {
                     DivertedPower = 0f;
 
@@ -350,20 +372,20 @@ namespace StarCore.DynamicResistence
                         dynResistBlock.CubeGrid.Physics.AngularVelocity = Vector3D.Zero;
                     }*/
 
-                    SiegeTimer = SiegeTimer - 1;
-                    SiegeDisplayTimer = SiegeDisplayTimer - 1;
-                    if (SiegeDisplayTimer <= 0)
+                    CountSiegeTimer = CountSiegeTimer - 1;
+                    CountSiegeDisplayTimer = CountSiegeDisplayTimer - 1;
+                    if (CountSiegeDisplayTimer <= 0)
                     {
-                        SiegeDisplayTimer = 60;
-                        SiegeVisibleTimer = SiegeVisibleTimer - 1;
+                        CountSiegeDisplayTimer = SiegeDisplayTimer;
+                        CountSiegeVisibleTimer = CountSiegeVisibleTimer - 1;
                         DisplayMessageToNearPlayers(0);
                     }
                 }
-                else if (SiegeTimer == 0)
+                else if (CountSiegeTimer == 0)
                 {
-                    SiegeTimer = 6000;
-                    SiegeDisplayTimer = 60;
-                    SiegeVisibleTimer = 150;
+                    CountSiegeTimer = SiegeTimer;
+                    CountSiegeDisplayTimer = SiegeDisplayTimer;
+                    CountSiegeVisibleTimer = SiegeVisibleTimer;
 
                     /*MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: -1);*/
 
@@ -381,9 +403,9 @@ namespace StarCore.DynamicResistence
             }
             else if (dynResistBlock != null && dynResistBlock.IsWorking == false & SiegeModeActivatedClient)
             {                
-                SiegeTimer = 6000;
-                SiegeDisplayTimer = 60;
-                SiegeVisibleTimer = 150;
+                CountSiegeTimer = SiegeTimer;
+                CountSiegeDisplayTimer = SiegeDisplayTimer;
+                CountSiegeVisibleTimer = SiegeVisibleTimer;
 
                 /*MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: -1);*/
 
@@ -417,7 +439,6 @@ namespace StarCore.DynamicResistence
                     functionalBlock.Enabled = false;
                 }
             }
-            SiegeBlockShutdown = true;
         }
 
         private void SiegeModeTurnOn(List<IMySlimBlock> allTerminalBlocks)
@@ -536,7 +557,7 @@ namespace StarCore.DynamicResistence
                     {
                         if (msgId == 0)
                         {
-                            SetCountdownStatus($"Siege Mode: " + SiegeVisibleTimer + " Seconds", 1500, MyFontEnum.Green);
+                            SetCountdownStatus($"Siege Mode: " + CountSiegeVisibleTimer + " Seconds", 1500, MyFontEnum.Green);
                         }
                         else if (msgId == 1)
                         {
@@ -637,9 +658,9 @@ namespace StarCore.DynamicResistence
             return base.IsSerialized();
         }
         #endregion
-        
+
         #region Terminal Controls
-        static void SetupTerminalControls<T>()
+        static void SetupTerminalControls<T>(float minDivertedPower, float maxDivertedPower)
         {
             var mod = DynamicResistenceMod.Instance;
 
@@ -663,7 +684,7 @@ namespace StarCore.DynamicResistence
             var integrityFieldPowerValueSlider = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, IMyCollector>(Control_Prefix + "IntegrityFieldPower");
             integrityFieldPowerValueSlider.Title = MyStringId.GetOrCompute("Integrity Field Power");
             integrityFieldPowerValueSlider.Tooltip = MyStringId.GetOrCompute("Adjusts the amount of Damage Absorbed by the Block");
-            integrityFieldPowerValueSlider.SetLimits(MinDivertedPower, MaxDivertedPower);
+            integrityFieldPowerValueSlider.SetLimits(minDivertedPower, maxDivertedPower);
             integrityFieldPowerValueSlider.Writer = Control_Power_Writer;
             integrityFieldPowerValueSlider.Visible = Control_Visible;
             integrityFieldPowerValueSlider.Getter = Control_Power_Getter;
@@ -768,7 +789,7 @@ namespace StarCore.DynamicResistence
                     }
                     else if (logic.SiegeCooldownTimerActive == true)
                     {
-                        logic.SetCountdownStatus($"Siege Mode On Cooldown: " + (logic.SiegeCooldownTimer / 60) + " Seconds", 1500, MyFontEnum.Red);
+                        logic.SetCountdownStatus($"Siege Mode On Cooldown: " + (logic.CountSiegeCooldownTimer / 60) + " Seconds", 1500, MyFontEnum.Red);
                         return;
                     }
                     if (logic.SiegeModeActivatedClient == false)
