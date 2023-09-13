@@ -576,33 +576,35 @@ namespace klime.Visual
 
             for (int i = 0; i < SlimDelQueue.Count; i++)
             {
-                subgrid.grid.RazeBlock(SlimDelQueue.Dequeue());
-                
-               // SlimDelListMP.Clear();
+                // subgrid.grid.RazeBlock(SlimDelQueue.Dequeue());
+                //subgrid.grid.RazeGeneratedBlocks(SlimDelListMP);
+                SlimDelListMP.Add(SlimDelQueue.Dequeue());
                 slimblocksToClose -= 500;
                 //DebugShowblockstoRemove();
             }
+            subgrid.grid.RazeGeneratedBlocks(SlimDelListMP);
+            SlimDelListMP.Clear();  
 
             var stride = MathHelper.Clamp(SlimDelQueue.Count / 16, 1, 48);
 
-            MyAPIGateway.Parallel.For(0, subgrid.grid.CubeBlocks.Count, i =>
-            {
-                var slim = subgrid.grid.CubeBlocks as IMySlimBlock;
-                if (slim != null)
-                {
-                    if (slim.FatBlock == null)
-                    {
-                        if (slim.Integrity <= 0)
-                        {
-                            //SlimDelList.Add(slim.Position);
-                            SlimDelQueue.Enqueue(slim.Position);
-                            SlimDelListMP.Add(slim.Position);
-                            SlimBlocksDestroyed++;
-                        }
-                    }
-                }
-            }, stride);
-            subgrid.grid.RazeGeneratedBlocks(SlimDelListMP);
+           MyAPIGateway.Parallel.For(0, subgrid.grid.CubeBlocks.Count, i =>
+           {
+               var slim = subgrid.grid.CubeBlocks as IMySlimBlock;
+               if (slim != null)
+               {
+                   if (slim.FatBlock == null)
+                   {
+                       if (slim.Integrity <= 0)
+                       {
+                           //SlimDelList.Add(slim.Position);
+                           SlimDelQueue.Enqueue(slim.Position);
+                           SlimDelListMP.Add(slim.Position);
+                           SlimBlocksDestroyed++;
+                       }
+                   }
+               }
+           }, stride);
+            
         }
 
         private void UpdateFatBlockDestruction(ref float fatBlockDamageThisFrame)
