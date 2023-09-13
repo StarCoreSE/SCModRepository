@@ -24,6 +24,7 @@ using Sandbox.Definitions;
 using static Draygo.API.HudAPIv2;
 using System.Linq;
 using System.Diagnostics;
+using Sandbox.Game.Entities.Cube;
 
 namespace klime.Visual
 {
@@ -175,9 +176,6 @@ namespace klime.Visual
             // Rendering Setup
             SetupRendering();
 
-            // Recolor Armor
-            RecolorArmor();
-
             // Fetch and Process Blocks
             ProcessBlocks();
         }
@@ -193,18 +191,22 @@ namespace klime.Visual
             iGrid.Render.DrawInAllCascades = iGrid.Render.FastCastShadowResolve = iGrid.Render.MetalnessColorable = true;
         }
 
-        private void RecolorArmor()
+        private void RecolorArmor(Vector3I pos)
         {
             Vector3 armorHSV = MyColorPickerConstants.HSVToHSVOffset(ColorExtensions.ColorToHSV(ColorExtensions.HexToColor(ArmorRecolorHex)));
             armorHSV = RoundVector(armorHSV, 2);
-            IMyCubeGrid iGrid = (IMyCubeGrid)grid;
-            iGrid.SkinBlocks(grid.Min, grid.Max, armorHSV, ArmorMat);
+            MyCubeGrid iGrid = (MyCubeGrid)grid;
+            //iGrid.SkinBlocks(grid.Min, grid.Max, armorHSV, ArmorMat);
+            var stringHash = MyStringHash.GetOrCompute(ArmorMat);
+            iGrid.ChangeColorAndSkin(iGrid.GetCubeBlock(pos), armorHSV, stringHash);
         }
 
         private static Vector3 RoundVector(Vector3 vec, int decimals)
         {
             return new Vector3((float)Math.Round(vec.X, decimals), (float)Math.Round(vec.Y, decimals), (float)Math.Round(vec.Z, decimals));
         }
+
+
 
         private void ProcessBlocks()
         {
@@ -216,6 +218,8 @@ namespace klime.Visual
 
             MyAPIGateway.Parallel.For(0, count, i => {
                 var block = allBlocks[i];
+                var pos = block.Position;
+                RecolorArmor(pos);
                 DisableBlock(block.FatBlock as IMyFunctionalBlock);
                 StopEffects(block.FatBlock as IMyExhaustBlock);
                 SetTransparency(block, 0.36f);
@@ -300,6 +304,7 @@ namespace klime.Visual
         public Queue<Vector3I> SlimList = new Queue<Vector3I>();
         public Queue<Vector3I> SlimDelList = new Queue<Vector3I>();
         public Queue<Vector3I> SlimDelQueue = new Queue<Vector3I>();
+        public List<Vector3I> SlimDelListMP = new List<Vector3I>();
         public static int slimblocksToClose;
         public static int fatblocksToClose;
 
@@ -572,6 +577,8 @@ namespace klime.Visual
             for (int i = 0; i < SlimDelQueue.Count; i++)
             {
                 subgrid.grid.RazeBlock(SlimDelQueue.Dequeue());
+                
+               // SlimDelListMP.Clear();
                 slimblocksToClose -= 500;
                 //DebugShowblockstoRemove();
             }
@@ -589,12 +596,13 @@ namespace klime.Visual
                         {
                             //SlimDelList.Add(slim.Position);
                             SlimDelQueue.Enqueue(slim.Position);
+                            SlimDelListMP.Add(slim.Position);
                             SlimBlocksDestroyed++;
                         }
                     }
                 }
             }, stride);
-
+            subgrid.grid.RazeGeneratedBlocks(SlimDelListMP);
         }
 
         private void UpdateFatBlockDestruction(ref float fatBlockDamageThisFrame)
