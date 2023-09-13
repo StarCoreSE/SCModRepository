@@ -23,12 +23,12 @@ namespace Klime.BoostedThrustAndFlame
                 
                 if (thruster != null)
                 {
-                    thruster.ForceMagnitude *= 5f; //S3 was 3.5
-                    thruster.MaxPowerConsumption *= 5f; //S3 was 3.5
+                    thruster.ForceMagnitude *= 3.5f; //S3 was 3.5
+                    thruster.MaxPowerConsumption *= 3.5f; //S3 was 3.5
 					thruster.FlameDamage *= 5f;
-					//thruster.FlameDamageLengthScale *= 1f;
-					//thruster.FlameLengthScale *= 2.0f;
-					thruster.FlameVisibilityDistance *= 1f;
+					//thruster.FlameDamageLengthScale *= 1.5f;
+					thruster.FlameLengthScale *= 2.0f;
+					//thruster.FlameVisibilityDistance = 100f;
                 }
             }
         }
