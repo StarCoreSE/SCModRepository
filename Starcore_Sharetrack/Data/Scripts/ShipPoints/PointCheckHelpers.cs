@@ -73,10 +73,12 @@ internal static class PointCheckHelpers
 {"NHI_PD_Turret_Half",true},
 {"NHI_PD_Turret_Half_Slope_Top",true},
 {"NHI_PD_Turret_Half_Slope_Tip",true},
-{"NHI_PD_Turret_45_Slope",true}
+{"NHI_PD_Turret_45_Slope",true},
+        {"Starcore_AMS_II_Block",true }
+
         };
 
-        public static Dictionary<string, bool> weaponsDictionary = new Dictionary<string, bool>
+    public static Dictionary<string, bool> weaponsDictionary = new Dictionary<string, bool>
 {
 {"MA_T2PDX",true},
 {"MA_T2PDX_Slope",true},
@@ -288,7 +290,19 @@ internal static class PointCheckHelpers
 {"Hellfire_Laser_Block",true},
 {"HAS_Cyclops",true},
 {"HAS_Crossfield", true},
-{"PriestReskin_Block", true}
+{"PriestReskin_Block", true},
+{"Reaver_Coilgun_Block",true },
+            { "Type18_Artillery_Block", true },
+            { "Type21_Artillery_Block", true },
+            { "Type24_Artillery_Block", true },
+            { "Type77_Railgun_Block", true },
+            { "Type78_Railgun_Block", true },
+            { "Type79_Railgun_Block", true },
+            {"MA_Blister",true },
+            {"MA_Blister45",true },
+            {"MA_Blister30",true },
+            {"MA_Blister32",true },
+            {"MA_Meatball",true },
 };
-        public static bool NameplateVisible = true;         public static int timer = 0;
+    public static bool NameplateVisible = true; public static int timer = 0;
 }
