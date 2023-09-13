@@ -182,10 +182,12 @@ namespace Invalid.spawnoneteam
 
             string currentFactionName = "BLU";  // Set to BLU team
 
+            // Change the origin to x = -10000, y = 0, z = 0
+            Vector3D origin = new Vector3D(-10000, 0, 0);
+
             for (int i = 0; i < spawnCount; i++)
             {
-                Vector3D origin = new Vector3D(0, 0, 0);
-
+                // Modify this line to calculate the spawnPosition based on the new origin
                 Vector3D spawnPosition = origin + (Vector3D.Normalize(MyUtils.GetRandomVector3D()) * MyUtils.GetRandomDouble(minSpawnRadiusFromCenter, maxSpawnRadius));
 
                 Vector3D direction = Vector3D.Normalize(origin - spawnPosition);
@@ -242,6 +244,7 @@ namespace Invalid.spawnoneteam
                 MyAPIGateway.Utilities.ShowMessage("spawnblueteam", $"Spawned: {kvp.Key} x {kvp.Value}");
             }
         }
+
 
 
 
