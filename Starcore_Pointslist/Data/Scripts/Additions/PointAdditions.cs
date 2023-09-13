@@ -105,7 +105,7 @@ namespace ShipPoints
 				AQD_LG_HydroThrusterL_Armored@30;
 				AQD_LG_HydroThrusterS_ArmoredSlope@5;
 				AQD_LG_HydroThrusterS_Armored@5;
-				AWGFocusDrive@15;
+				AWGFocusDrive@150;
 				IonHeavyCovered@15;
 				LargeBlockLargeThrust@5;
 				AQD_LG_IonThrusterL_ArmoredSlope@5;
