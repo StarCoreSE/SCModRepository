@@ -510,6 +510,7 @@ namespace ShipPoints
 				SC_Radome@10;
 				K_HS_9x9_K3_King@900; 
 				K_HS_9x9_HSRB_Dreadnight@750;
+				SI_Field_Gen@450;
 
 				MA_Laser_Armor01@1;
 				MA_Laser_Armor02@1;
