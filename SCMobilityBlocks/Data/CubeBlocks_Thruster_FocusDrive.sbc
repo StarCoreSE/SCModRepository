@@ -17,18 +17,18 @@
       <ThrusterType>Ion</ThrusterType>
       <SilenceableByShipSoundSystem>true</SilenceableByShipSoundSystem>
       <Components>
-        <Component Subtype="SteelPlate" Count="480" />
+        <Component Subtype="SteelPlate" Count="2000" />
         <Component Subtype="Construction" Count="240" />
         <Component Subtype="Superconductor" Count="320" />
         <Component Subtype="Computer" Count="100" />
         <Component Subtype="LargeTube" Count="220" />
         <Component Subtype="Thrust" Count="2000" />
         <Component Subtype="Motor" Count="80" />
-        <Component Subtype="SteelPlate" Count="340" />
+        <Component Subtype="SteelPlate" Count="1400" />
       </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
 
-      <Center x="2" y="2" z="3" />
+      <Center x="3" y="3" z="3" />
       <MirroringY>Z</MirroringY>
       <MirroringZ>Y</MirroringZ>
       <EdgeType>Light</EdgeType>
