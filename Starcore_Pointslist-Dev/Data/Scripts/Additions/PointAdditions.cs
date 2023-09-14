@@ -453,7 +453,7 @@ namespace ShipPoints
 				MA_Guardian@700; 
 				Laser_Block@150; 
 				Torp_Block@725; 
-				Heavy_Repeater@85; 
+				Priest_Block@85; 
 				PriestReskin_Block@85; 
 				Fixed_Rockets@225; 
 				Type18_Artillery_Block@300;
