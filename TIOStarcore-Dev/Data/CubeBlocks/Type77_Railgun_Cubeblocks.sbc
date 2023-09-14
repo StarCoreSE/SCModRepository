@@ -14,7 +14,7 @@
               [Kinetic damage]
               [Draws Power]
               [3500 m/s]
-              This weapon slowly repairs itself while offline.
+              This weapon slowly repairs itself while offline, and when below functional.
             </Description>
 			<GuiVisible>true</GuiVisible>
             <Icon>Textures\GUI\Icons\Mk1Railgun_Main.png</Icon>
