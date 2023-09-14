@@ -350,7 +350,7 @@ namespace ShipPoints
 				UNN_Heavy_Torpedo@125;
 				UNN_Light_Torpedo@200;
 				Starcore_Fixed_Coil_Cannon@400;
-				Starcore_AMS_I_Block@175;
+				Starcore_AMS_I_Block@125;
 				Odin_Torpedo@220;
 				Odin_Missile_Battery@200;
 				K_SA_Launcher_VIV@350;
