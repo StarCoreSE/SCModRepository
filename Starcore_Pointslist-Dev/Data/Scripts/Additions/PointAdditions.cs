@@ -203,6 +203,8 @@ namespace ShipPoints
 				MA_Meatball@200;
 				VirtualMassSmall@50;
 				SmallHydrogenEngine@1;
+				LargeHydrogenTank@30;
+				LargeHydrogenTankSmall@30;	
 				SmallBlockBatteryBlock@4;
 				SmallBlockSmallBatteryBlock@1;
 				SmallProgrammableBlock@50;

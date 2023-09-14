@@ -106,7 +106,7 @@ namespace ShipPoints
 				AQD_LG_HydroThrusterS_ArmoredSlope@5;
 				AQD_LG_HydroThrusterS_Armored@5;
 				AWGFocusDrive@150;
-				IonHeavyCovered@15;
+				IonHeavyCovered@150;
 				LargeBlockLargeThrust@5;
 				AQD_LG_IonThrusterL_ArmoredSlope@5;
 				AQD_LG_IonThrusterL_Armored@5;
@@ -203,6 +203,8 @@ namespace ShipPoints
 				MA_Meatball@200;
 				VirtualMassSmall@50;
 				SmallHydrogenEngine@1;
+				LargeHydrogenTank@30;
+				LargeHydrogenTankSmall@30;	
 				SmallBlockBatteryBlock@4;
 				SmallBlockSmallBatteryBlock@1;
 				SmallProgrammableBlock@50;
