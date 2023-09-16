@@ -40,8 +40,10 @@ namespace StarCoreCoreRepair
             if (!shipCore.IsFunctional)
             {
                 MyAPIGateway.Utilities.ShowNotification("Core is no longer functional", 2000, MyFontEnum.Red);
+                MyVisualScriptLogicProvider.SetBlockGeneralDamageModifier(shipCore.EntityId.ToString(), 0.1f);
             }
         }
+
 
         private void ShipCoreEnabledChanged(IMyTerminalBlock obj)
         {
