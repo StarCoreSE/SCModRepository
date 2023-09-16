@@ -365,7 +365,9 @@ namespace StarCore.DynamicResistence
 
                     if (dynResistBlock.CubeGrid.Physics.LinearVelocity != Vector3D.Zero)
                     {
-                        dynResistBlock.CubeGrid.Physics.LinearVelocity = Vector3D.Zero;
+                        Vector3D linearVelocity = dynResistBlock.CubeGrid.Physics.LinearVelocity;
+                        Vector3D oppositeVector = new Vector3D(-linearVelocity.X, -linearVelocity.Y, -linearVelocity.Z);
+                        dynResistBlock.CubeGrid.Physics.LinearVelocity = oppositeVector;
                     }
                     /*else if (dynResistBlock.CubeGrid.Physics.AngularVelocity != Vector3D.Zero)
                     {
@@ -488,7 +490,13 @@ namespace StarCore.DynamicResistence
         {
             if (obj.EntityId != dynResistBlock.EntityId) return;
 
-            if (dynResistBlock.IsWorking && !SiegeModeActivatedClient)
+            if (dynResistBlock != null && dynResistBlock.IsWorking && !SiegeModeActivatedClient && MaxAvailibleGridPower <= SiegePowerMinimumRequirement)
+            {
+                SetCountdownStatus($"Insufficient Power", 1500, MyFontEnum.Red);
+                Settings.Modifier = 1.0f;
+                return;
+            }
+            else if (dynResistBlock.IsWorking && !SiegeModeActivatedClient && MaxAvailibleGridPower > SiegePowerMinimumRequirement)
             {
                 var dynamicResistLogic = dynResistBlock.GameLogic?.GetAs<DynamicResistLogic>();
 
