@@ -23,7 +23,6 @@ using SpaceEngineers.Game.ModAPI;
 using Sandbox.Game.WorldEnvironment.Modules;
 using Sandbox.Game.Localization;
 using VRage.Game.Entity;
-using static Sandbox.Game.AI.Pathfinding.Obsolete.MyGridPathfinding;
 
 namespace StarCore.DynamicResistence
 {
