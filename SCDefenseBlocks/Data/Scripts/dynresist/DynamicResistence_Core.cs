@@ -192,6 +192,8 @@ namespace StarCore.DynamicResistence
 
                 NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_10TH_FRAME;
 
+                LoadSettings();
+
                 SaveSettings(); // required for IsSerialized()
             }
             catch (Exception e)
@@ -635,7 +637,10 @@ namespace StarCore.DynamicResistence
         void SettingsChanged()
         {
             if (syncCountdown == 0)
+            {
                 syncCountdown = Settings_Change_Countdown;
+                LoadSettings();
+            }          
         }
 
         void SyncSettings()
