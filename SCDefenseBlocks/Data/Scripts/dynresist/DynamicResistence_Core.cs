@@ -639,7 +639,6 @@ namespace StarCore.DynamicResistence
             if (syncCountdown == 0)
             {
                 syncCountdown = Settings_Change_Countdown;
-                LoadSettings();
             }          
         }
 
