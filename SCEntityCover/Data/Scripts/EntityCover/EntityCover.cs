@@ -29,7 +29,7 @@ namespace klime.EntityCover
         public string modelName; // New property to store the model name
         public Vector3 modelDimensions; // New property to store the model dimensions
 
-        private static Dictionary<string, ModelInfo> subtypeToModelMap = new Dictionary<string, ModelInfo>()
+        public static Dictionary<string, ModelInfo> subtypeToModelMap = new Dictionary<string, ModelInfo>()
         {
             { "EntityCover", new ModelInfo("REMlikeblocker_purple.mwm", new Vector3(275, 275, 275)) },    //block subtype, block model filename, hitbox dimensions //in Large Blocks (???)
             { "EntityCoverFractal", new ModelInfo("REMlikeblocker_purple.mwm", new Vector3(275, 275, 275)) },    //block subtype, block model filename, hitbox dimensions //in Large Blocks (???)
@@ -42,6 +42,11 @@ namespace klime.EntityCover
             { "EntityCover4RED", new ModelInfo("REMlikeblocker1kmplate_red.mwm", new Vector3(500, 500, 50)) },    //don't forget the entitycomponentdescriptor too dumbass
             // Add more entries for additional variants...
         };
+
+        public static Vector3 GetModelDimensionsBySubtype(string subtype)
+        {
+            return subtypeToModelMap.ContainsKey(subtype) ? subtypeToModelMap[subtype].ModelDimensions : new Vector3(100, 100, 100);
+        }
 
 
         // Create a method to get the model name based on subtype ID
@@ -59,7 +64,7 @@ namespace klime.EntityCover
         }
 
 
-        private class ModelInfo
+        public class ModelInfo
         {
             public string ModelName { get; }
             public Vector3 ModelDimensions { get; }
@@ -286,188 +291,112 @@ namespace klime.EntityCover
                 // The BlockerEnt currently being collided with
                 BlockerEnt thisEnt = GetClosestBlocker(entity.PositionComp.GetPosition());
                 Vector3D blockerCenter = thisEnt.PositionComp.GetPosition();
-                MatrixD blockerOrientation = thisEnt.PositionComp.GetOrientation();
 
-                // Determine the direction from the blocker's center to the grid's position
-                Vector3D directionFromBlockerToGrid = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - blockerCenter);
+                // Get impact location in thisEnt's relative coordiates
+                Vector3D relImpact = Vector3D.Rotate(cGrid.PositionComp.GetPosition() - thisEnt.PositionComp.GetPosition(), thisEnt.WorldMatrix);
 
-                // Half-extents of the blocker (275 in this case), this will need to somehow sample what the blocker is, and then get the half-extents from that.
-                double halfExtents = 275;
 
-                // Calculate the simulated "boxCenter" that places the "center" beneath the grid
-                Vector3D simulatedBoxCenter = blockerCenter + directionFromBlockerToGrid * halfExtents;
-
-                // Continue with the rest of the code, using "simulatedBoxCenter" instead of "blockerCenter"
+                Vector3D boxNormal = Vector3D.Rotate(GenIntNormal(relImpact), -thisEnt.WorldMatrix);
+      
                 // Get the incident velocity direction
-                double incidentSpeed = cGrid.Physics.Speed;
                 Vector3D incidentVelocity = cGrid.LinearVelocity;
                 Vector3D incidentVelocityB = cGrid.LinearVelocity;
                 Vector3D incidentVelocityC = cGrid.LinearVelocity + cGrid.Physics.AngularVelocity;
                 Vector3D incidentAngularVelocity = cGrid.Physics.AngularVelocity;
 
-                // Calculate the relative impact point
-                Vector3D relImpact = Vector3D.TransformNormal(cGrid.PositionComp.GetPosition() - thisEnt.PositionComp.GetPosition(), MatrixD.Invert(thisEnt.WorldMatrix));
 
-                // Calculate the direction from the relative impact point to the local center
-                Vector3D directionToCenter = Vector3D.Normalize(thisEnt.PositionComp.GetPosition() - relImpact);
+                // Calculate the reflection direction using the law of reflection
+                Vector3D reflection = Vector3D.Reflect(incidentVelocity, boxNormal);
 
-                BoundingBoxD boundingBox = cGrid.PositionComp.WorldAABB;
-                Vector3D size = boundingBox.Max - boundingBox.Min;
 
-                // Determine the maximum side length and calculate the warp distance as half of it
-                double maxSideLength = Math.Max(size.X, Math.Max(size.Y, size.Z));
+                if (incidentVelocityC.AbsMax() < 10)
+                {
+                    // Determine the size of the grid's bounding box
+                    BoundingBoxD boundingBox = cGrid.PositionComp.WorldAABB;
+                    Vector3D size = boundingBox.Max - boundingBox.Min;
 
-                // Move the relative impact point 50 meters closer to the local center
-                relImpact += directionToCenter * maxSideLength;
-                // Determine the closest face normal in local coordinates
-                Vector3D localNormal = DetermineClosestFaceNormal(relImpact, thisEnt);
+                    // Determine the maximum side length and calculate the warp distance as half of it
+                    double maxSideLength = Math.Max(size.X, Math.Max(size.Y, size.Z));
+                    double warpDistance = maxSideLength / 2.0; // Dividing by 2 to warp by half the distance
 
-                // Transform the local normal into world coordinates
-                Vector3D worldNormal = Vector3D.TransformNormal(localNormal, thisEnt.WorldMatrix);
+                    // Get the blocker's center position
+                    //BlockerEnt thisEnt = GetClosestBlocker(entity.PositionComp.GetPosition());
 
-                // Reflect the incident velocity based on the world normal
-                Vector3D reflection = Vector3D.Reflect(incidentVelocity, worldNormal);
 
-                AddLine(cGrid.PositionComp.GetPosition(), incidentVelocity, Color.Red);
-                AddLine(cGrid.PositionComp.GetPosition(), reflection, Color.Green);
-                AddLine(cGrid.PositionComp.GetPosition(), worldNormal, Color.Blue);
+                    // Determine the direction from the blocker's center to the grid's position
+                    Vector3D directionFromBlocker = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - blockerCenter);
 
-                bool basic = false; //this just uses the basic reflection, no fancy stuff
+                    // Determine if the grid is inside or outside the blocker based on the dot product with boxNormal
+                    double dotProduct = Vector3D.Dot(directionFromBlocker, boxNormal);
 
-                if (!basic) // if not using basic then use the fancy stuff
+                    // Determine the push direction based on whether the grid is inside or outside the blocker
+                    Vector3D pushDirection = dotProduct < 0 ? -Vector3D.Normalize(boxNormal) : Vector3D.Normalize(boxNormal); // Reversed logic here
+
+                    // Apply the push effect by moving the grid in the correct direction
+                    cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() + pushDirection * warpDistance);
+
+
+                    //MyAPIGateway.Utilities.ShowMessage("", $"Low Incident Velocity: {incidentVelocity}");
+
+                }
+                else
                 {
 
-                    // Determine the direction from the blocker's center to the grid's position.
-                    // This is the only reliable information we have about the blocker's orientation.
-                    Vector3D directionFromBlocker = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - blockerCenter);
-                    // Check if the grid is inside or outside the blocker
-                    Vector3D boxNormal = CalculateHitFaceNormal(relImpact, blockerCenter, cGrid.PositionComp.GetPosition(), thisEnt.WorldMatrix);
-                    double dotProduct = Vector3D.Dot(directionFromBlocker, worldNormal);
-                    // Determine the direction from the blocker's center to the grid's position
-                    Vector3D directionFromBlockerComplex = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - simulatedBoxCenter);
 
-                    bool MoreCalcs = true;
+                    // Determine the direction from the grid's current position to the blocker's center
+                    Vector3D directionToBlocker = Vector3D.Normalize(blockerCenter - cGrid.PositionComp.GetPosition());
 
-                    if (incidentVelocityC.AbsMax() < 10) // TODO: get rid of this, this shouldn't be nessasary if the rest of the code works.
+                    // Calculate the dot product of the reflection and the direction to the blocker
+                    double dotProductWithReflection = Vector3D.Dot(reflection, directionToBlocker);
+
+                    // If the dot product is positive, the reflection is pointing towards the blocker
+                    if (dotProductWithReflection > 0)
                     {
+                        //MyAPIGateway.Utilities.ShowMessage("", $"AbNormal Incident Velocity: {incidentVelocity}");
+                        // Determine the size of the grid's bounding box
+                        BoundingBoxD boundingBox = cGrid.PositionComp.WorldAABB;
+                        Vector3D size = boundingBox.Max - boundingBox.Min;
 
+                        // Determine the maximum side length and calculate the warp distance as half of it
+                        double maxSideLength = Math.Max(size.X, Math.Max(size.Y, size.Z));
+                        double warpDistance = maxSideLength / 10.0; // 1:50 of the ship's size
+
+                        // Get the blocker's center position
+                        //BlockerEnt thisEnt = GetClosestBlocker(entity.PositionComp.GetPosition());
+
+
+                        // Determine the direction from the blocker's center to the grid's position
+                        Vector3D directionFromBlocker = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - blockerCenter);
+
+                        // Determine if the grid is inside or outside the blocker based on the dot product with boxNormal
+                        double dotProduct = Vector3D.Dot(directionFromBlocker, boxNormal);
 
                         // Determine the push direction based on whether the grid is inside or outside the blocker
                         Vector3D pushDirection = dotProduct < 0 ? -Vector3D.Normalize(boxNormal) : Vector3D.Normalize(boxNormal); // Reversed logic here
 
                         // Apply the push effect by moving the grid in the correct direction
-                        cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() + pushDirection * maxSideLength);
+                        cGrid.PositionComp.SetPosition(cGrid.PositionComp.GetPosition() + pushDirection * warpDistance);
 
+                        cGrid.Physics.LinearVelocity = -Vector3D.Multiply(incidentVelocityB, 0.95); //Vector3D.Multiply(pushDirection, firstSpeed);
 
-                        //MyAPIGateway.Utilities.ShowMessage("", $"Low Incident Velocity: {incidentVelocity}");
-                        AddLine(cGrid.PositionComp.GetPosition(), incidentVelocityC, Color.Red);
-                        AddLine(cGrid.PositionComp.GetPosition(), reflection, Color.Green);
-                        AddLine(cGrid.PositionComp.GetPosition(), boxNormal, Color.Blue);
-                    }
-                    else if (MoreCalcs)
-                    {
-                        // Determine the direction from the grid's current position to the blocker's center
-                        Vector3D directionToBlocker = Vector3D.Normalize(blockerCenter - cGrid.PositionComp.GetPosition());
-
-                        // Calculate the dot product of the reflection and the direction to the blocker
-                        double dotProductWithReflection = Vector3D.Dot(reflection, directionToBlocker);
-
-                        // If the dot product is positive, the reflection is pointing towards the blocker
-                        if (dotProductWithReflection > 0)
-                        {
-                           
-                            directionFromBlocker = directionFromBlockerComplex;
-                            // Project the grid's velocity onto the direction from the blocker
-                            double velocityTowardsBlocker = Vector3D.Dot(incidentVelocity, directionFromBlocker);
-
-                            // Calculate the velocity component to subtract
-                            Vector3D velocityComponentToSubtract = directionFromBlocker * velocityTowardsBlocker;
-
-                            // Subtract the velocity component from the grid's velocity
-                            cGrid.Physics.LinearVelocity -= (velocityComponentToSubtract);
-
-                            // Project the grid's angular velocity onto the direction from the blocker
-                            double angularVelocityTowardsBlocker = Vector3D.Dot(incidentAngularVelocity, directionFromBlocker);
-
-                            // Determine whether the rotation is towards or away from the blocker
-                            if (angularVelocityTowardsBlocker > 0)
-                            {
-                                // Rotation is towards the blocker; invert the angular velocity
-                                cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 0.65);
-                            }
-                            else
-                            {
-                                // Rotation is away from the blocker; add 50% to the angular velocity
-                                cGrid.Physics.AngularVelocity = Vector3D.Multiply(incidentAngularVelocity, 0.65);
-                            }
-
-                            // Optionally, add additional push away from the blocker's centerspace 
-
-                            var tempVel = cGrid.Physics.LinearVelocity;
-
-                            tempVel += directionFromBlocker * (incidentSpeed + 1);
-                            
-                            cGrid.Physics.LinearVelocity = Vector3D.Multiply(tempVel, 0.75) * 1.1;
-
-
-                        }
-                        else
-                        {
-                            //MyAPIGateway.Utilities.ShowMessage("", $"Normal Incident Product: {dotProductWithReflection}");
-                            AddLine(cGrid.PositionComp.GetPosition(), incidentVelocityC, Color.Red);
-                            AddLine(cGrid.PositionComp.GetPosition(), reflection, Color.Green);
-                            AddLine(cGrid.PositionComp.GetPosition(), boxNormal, Color.Blue);
-                            //cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 0.95);
-
-
-                            cGrid.Physics.LinearVelocity = Vector3D.Multiply(reflection, 0.75) * 1.1;
-
-                        }
-
-
-                    }
-                }
-            else
-                {
-                    // Determine the direction from the blocker's center to the grid's position
-                    Vector3D directionFromBlocker = Vector3D.Normalize(cGrid.PositionComp.GetPosition() - simulatedBoxCenter);
-
-                    // Project the grid's velocity onto the direction from the blocker
-                    double velocityTowardsBlocker = Vector3D.Dot(incidentVelocity, directionFromBlocker);
-
-                    // Calculate the velocity component to subtract
-                    Vector3D velocityComponentToSubtract = directionFromBlocker * velocityTowardsBlocker;
-
-                    // Subtract the velocity component from the grid's velocity
-                    cGrid.Physics.LinearVelocity -= (velocityComponentToSubtract + 1);
-
-                    // Project the grid's angular velocity onto the direction from the blocker
-                    double angularVelocityTowardsBlocker = Vector3D.Dot(incidentAngularVelocity, directionFromBlocker);
-
-                    // Determine whether the rotation is towards or away from the blocker
-                    if (angularVelocityTowardsBlocker > 0)
-                    {
-                        // Rotation is towards the blocker; invert the angular velocity
-                        cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 0.65);
+                        cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 0.95);
                     }
                     else
                     {
-                        // Rotation is away from the blocker; add 50% to the angular velocity
-                        cGrid.Physics.AngularVelocity = Vector3D.Multiply(incidentAngularVelocity, 0.65);
+                        //MyAPIGateway.Utilities.ShowMessage("", $"Normal Incident Velocity: {incidentVelocity}");
+
+                        cGrid.Physics.AngularVelocity = -Vector3D.Multiply(incidentAngularVelocity, 0.95);
+                        cGrid.Physics.LinearVelocity = Vector3D.Multiply(reflection, 0.95);
+
                     }
 
-                    // Optionally, add additional push away from the blocker's center
-                    cGrid.Physics.LinearVelocity += directionFromBlocker * (incidentSpeed + 1);
 
                 }
-                AddLine(cGrid.PositionComp.GetPosition(), blockerCenter, Color.MediumPurple);
-                AddLine(cGrid.PositionComp.GetPosition(), relImpact, Color.Teal);
-
             }
         }
 
 
-            private static BlockerEnt GetClosestBlocker(Vector3D pos)
+        private static BlockerEnt GetClosestBlocker(Vector3D pos)
         {
             // warranty void if used at all -aristeas
 
@@ -481,6 +410,28 @@ namespace klime.EntityCover
                     closest = blockerEnt;
 
             return closest;
+        }
+
+        private static Vector3D GenIntNormal(Vector3D reference)
+        {
+            // Returns a unit Vector3D with the longest component of reference Vector3D. Hate. Why isn't this a built-in method.
+
+            Vector3D toReturn = Vector3D.Zero;
+
+            double x = Math.Abs(reference.X);
+            double y = Math.Abs(reference.Y);
+            double z = Math.Abs(reference.Z);
+
+            if (x > y && x > z)
+                toReturn.X = reference.X / x;
+
+            else if (y > x && y > z)
+                toReturn.Y = reference.Y / y;
+
+            else
+                toReturn.Z = reference.Z / z;
+
+            return toReturn;
         }
 
         private static IEnumerable<Vector3D> GetFaceNormals()
