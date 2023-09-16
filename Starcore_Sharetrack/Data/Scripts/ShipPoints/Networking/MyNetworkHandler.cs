@@ -180,39 +180,7 @@ namespace Math0424.Networking
                 PointCheck.EndMatch();
             }
             
-            if (e.PacketId == 9)
-            {
-                PointCheck.Team1Wins();
-            }
-            if (e.PacketId == 10)
-            {
-                PointCheck.Team2Wins();
-            }
-            if (e.PacketId == 11)
-            {
-                PointCheck.Team3Wins();
-            }
-
-            if (e.PacketId == 12)
-            {
-                PointCheck.GameMode_1Cap();
-            }
-            if (e.PacketId == 13)
-            {
-                PointCheck.GameMode_2Cap();
-            }
-            if (e.PacketId == 14)
-            {
-                PointCheck.GameMode_3Cap();
-            }
-            if (e.PacketId == 15)
-            {
-                PointCheck.GameMode_NoCap();
-            }
-            if (e.PacketId == 16)
-            {
-                PointCheck.GameMode_CrazyCap();
-            }
+            
             if (e.PacketId == 17)
             {
                 PointCheck.There_Is_A_Problem();

@@ -13,7 +13,7 @@
               [5km Targeting Range]
               [Energy damage]
               [3000 m/s]
-              This weapon slowly repairs itself while offline.
+              This weapon slowly repairs itself while offline, and when below functional.
             </Description>
 			<GuiVisible>true</GuiVisible>
             <Icon>Textures\GUI\Icons\MK3_Main.png</Icon>

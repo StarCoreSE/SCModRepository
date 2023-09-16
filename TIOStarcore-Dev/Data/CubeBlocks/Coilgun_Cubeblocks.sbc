@@ -12,7 +12,7 @@
               [3km Targeting Range]
               [Kinetic damage]
               [1000 m/s]
-              This weapon slowly repairs itself while offline.
+              This weapon slowly repairs itself while offline, and when below functional.
             </Description>
 			<GuiVisible>true</GuiVisible>
         

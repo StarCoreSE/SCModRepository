@@ -73,14 +73,15 @@ namespace klime.PointCheck
         public double capdist = 1000;
         public double capdistCenter = 1000;
         public Vector3 capdistScale;
-        public static Dictionary<long, List<ulong>> Sending = new Dictionary<long, List<ulong>>();
-        public static Dictionary<long, ShipTracker> Data = new Dictionary<long, ShipTracker>();
-        public static List<long> Tracking = new List<long>();
+        private static readonly Dictionary<long, List<ulong>> SendingDictionary = new Dictionary<long, List<ulong>>();
+        public static Dictionary<long, List<ulong>> Sending = SendingDictionary;
+        private static readonly Dictionary<long, ShipTracker> DataDictionary = new Dictionary<long, ShipTracker>();
+        public static Dictionary<long, ShipTracker> Data = DataDictionary;
+        public static HashSet<long> Tracking = new HashSet<long>();
         public string capstat = "";
         public string ZoneControl1 = ""; public string ZoneControl2 = ""; public string ZoneControl3 = ""; public string ZoneControl = "";
         private static Dictionary<long, IMyPlayer> all_players = new Dictionary<long, IMyPlayer>();
         private static List<IMyPlayer> listPlayers = new List<IMyPlayer>();
-        public static int timer = 0;
         private int _fastStart;
         public NetSync<int> Team1Tickets; public NetSync<int> Team2Tickets; public NetSync<int> Team3Tickets;
         static int captimerZ1T1; static int captimerZ1T2; static int captimerZ1T3;
@@ -93,25 +94,21 @@ namespace klime.PointCheck
         static int Capcolor1 = 0; static int Capcolor2 = 0; static int Capcolor3 = 0;
         int? NewCountT1 = 0; int? OldCountT1 = 0; int? NewCountT2 = 0; int? OldCountT2 = 0; int? NewCountT3 = 0; int? OldCountT3 = 0; int CapOut = 20;
 
-        private readonly List<MyEntity> _managedBntities = new List<MyEntity>(1000);
-
-
 
         private readonly List<MyEntity> _managedEntities = new List<MyEntity>(1000);
         private int _count;
         private const double CombatRadius = 12500;
-        private BoundingSphereD _combatMinSphere = new BoundingSphereD(Vector3D.Zero, CombatRadius);
         private BoundingSphereD _combatMaxSphere = new BoundingSphereD(Vector3D.Zero, CombatRadius + 22500);
 
         public enum ViewState { None, InView, InView2, GridSwitch, ExitView };
         ViewState vState = ViewState.None;
 
-        public enum ViewStateP { ThisIsFine, ItsOver}
+        public enum ViewStateP { ThisIsFine, ItsOver }
         ViewStateP vStateP = ViewStateP.ThisIsFine;
 
         HudAPIv2 text_api;
         public static HudAPIv2.HUDMessage statMessage, integretyMessage, timerMessage, ticketmessage, statMessage_Battle, statMessage_Battle_Gunlist, problemmessage;
-        public static bool NameplateVisible = true; public static bool broadcaststat = false;
+        public static bool broadcaststat = false;
         public static String[] viewmode = new string[] { "Player", "Grid", "Grid & Player", "False" };
         public static int viewstat = 0;
         public static int wintime = 120;
@@ -142,271 +139,6 @@ namespace klime.PointCheck
         public bool SphereVisual = true;
         bool joinInit = false;
         private const double ViewDistSqr = 306250000;
-
-        public static Dictionary<string, bool> weaponsDictionary = new Dictionary<string, bool>
-{
-{"MA_T2PDX",true},
-{"MA_T2PDX_Slope",true},
-{"MA_T2PDX_Slope2",true},
-{"MA_Gimbal_Laser_T2",true},
-{"MA_Gimbal_Laser_T2_Armored",true},
-{"MA_Gimbal_Laser_T2_Armored_Slope",true},
-{"MA_Gimbal_Laser_T2_Armored_Slope2",true},
-{"MA_Gimbal_Laser_T2_Armored_Slope45",true},
-{"MA_PDX",true},
-{"MA_Gimbal_Laser",true},
-{"MA_Gimbal_Laser_Armored",true},
-{"MA_Gimbal_Laser_Armored_Slope",true},
-{"MA_Gimbal_Laser_Armored_Slope2",true},
-{"MA_Gimbal_Laser_Armored_Slope45",true},
-{"MA_PDT",true},
-{"MA_Fixed_000",true},
-{"MA_Fixed_001",true},
-{"MA_Fixed_002",true},
-{"MA_Fixed_007",true},
-{"MA_Fixed_003",true},
-{"MA_Fixed_004",true},
-{"MA_Fixed_005",true},
-{"MA_Fixed_006",true},
-{"MA_Fixed_T2",true},
-{"MA_Fixed_T2_Naked",true},
-{"MA_AC150",true},
-{"MA_AC150_30",true},
-{"MA_AC150_45",true},
-{"MA_AC150_45_Gantry",true},
-{"MA_AC150_Gantry",true},
-{"MA_Gladius",true},
-{"MA_Fixed_T3",true},
-{"MA_Tiger",true},
-{"MA_Crouching_Tiger",true},
-{"K_SA_Gauss_APC",true},
-{"K_SA_Gauss_AMS",true},
-{"K_SA_Gauss_ERC",true},
-{"AMSlaser",true},
-{"ARYXGaussCannon",true},
-{"AWGGG",true},
-{"ARYXMagnetarCannon",true},
-{"ARYXPlasmaPulser",true},
-{"ARYXLargeRadar",true},
-{"ARYXBurstTurret",true},
-{"ARYXBurstTurretSlanted",true},
-{"BFG_M",true},
-{"BFTriCannon",true},
-{"K_SA_HeavyMetal_Gauss_ERII",true},
-{"K_SA_HeavyMetal_Gauss_ERIIRF",true},
-{"K_SA_Launcher_FixedMountv2",true},
-{"K_SA_Launcher_FixedMount",true},
-{"K_SA_LoW_CapitalSpinalA",true},
-{"K_SA_HeavyMetal_Gauss_ERFM",true},
-{"K_SA_HeavyMetal_Gauss_A",true},
-{"K_SA_HeavyMetal_Gauss_PGBC",true},
-{"ARYXTempestCannon",true},
-{"ARYXLightCoilgun",true},
-{"ARYXFocusLance",true},
-{"ARYXRailgun",true},
-{"Static150mm",true},
-{"MediumFocusLance",true},
-{"MA_PDX_sm",true},
-{"MA_PDT_sm",true},
-{"RotaryCannon",true},
-{"Starcore_PPC_Block",true},
-{"Starcore_AMS_II_Block",true},
-{"MA_Derecho",true},
-{"K_SA_Gauss_AMSIIC",true},
-{"SA_HMI_Erebos",true},
-{"HAS_Thanatos",true},
-{"HAS_Alecto",true},
-{"HAS_Assault",true},
-{"HAS_Mammon",true},
-{"ARYXRailgunTurret",true},
-{"MCRNRailgunLB",true},
-{"K_SA_HeavyMetal_Spinal_Rotary",true},
-{"K_SA_HeavyMetal_Spinal_Rotary_Reskin",true},
-{"MetalStorm",true},
-{"Odin_Rail_2",true},
-{"Odin_Rail_1",true},
-{"MCRN_Heavy_Torpedo",true},
-{"OPA_Heavy_Torpedo",true},
-{"OPA_Light_Missile",true},
-{"UNN_Heavy_Torpedo",true},
-{"UNN_Light_Torpedo",true},
-{"Starcore_Fixed_Coil_Cannon",true},
-{"Starcore_AMS_I_Block",true},
-{"Odin_Torpedo",true},
-{"Odin_Missile_Battery",true},
-{"K_SA_Launcher_VIV",true},
-{"K_SA_Launcher_VI",true},
-{"Starcore_SSRM_Block",true},
-{"ModularSRM8",true},
-{"Starcore_MRM_Block",true},
-{"Starcore_MRM45_Block",true},
-{"ModularMRM10",true},
-{"ModularMiddleMRM10",true},
-{"ModularMRM10Angled",true},
-{"ModularMRM10AngledReversed",true},
-{"ModularLRM5",true},
-{"ModularLRM5Angled",true},
-{"ModularMiddleLRM5",true},
-{"ModularLRM5AngledReversed",true},
-{"Starcore_Arrow_Block",true},
-{"SC_Flare",true},
-{"Odin_Laser_Fixed",true},
-{"Odin_Autocannon_Fixed",true},
-{"Odin_PDC",true},
-{"Odin_PDC_45_Slope",true},
-{"Odin_PDC_Half_Slope_Tip",true},
-{"Odin_PDC_Half",true},
-{"Odin_PDC_Half_Slope_Top",true},
-{"Odin_Defense_1x2",true},
-{"Odin_Gatling_Laser",true},
-{"Odin_5x5_Cannon",true},
-{"BlinkDriveLarge",true},
-{"Chet_Flak_Cannon",true},
-{"Odin_CoilCannon",true},
-{"Odin_Autocannon_2",true},
-{"Starcore_M_Laser_Block",true},
-{"Starcore_L_Laser_Block",true},
-{"Starcore_Basic_Warhead",true},
-{"Odin_7x7_Battleshipcannon",true},
-{"Odin_7x7_Battleshipcannon_Surface",true},
-{"Odin_5x5_Battleshipcannon",true},
-{"Odin_5x5_Battleshipcannon_Surface",true},
-{"Odin_3x3_Battleshipcannon",true},
-{"Odin_3x3_Battleshipcannon_Surface",true},
-{"JN_175Fixed",true},
-{"AMP_ArcMelee",true},
-{"AMP_ArcMeleeReskin",true},
-{"AMP_FlameThrower",true},
-{"AMP_CryoShotgun",true},
-{"Hexcannon",true},
-{"HakkeroBeam",true},
-{"HakkeroProjectile",true},
-{"HAS_Esper",true},
-{"HAS_Vulcan",true},
-{"SC_Coil_Cannon",true},
-{"NHI_PD_Turret",true},
-{"NHI_PD_Turret_Half",true},
-{"NHI_PD_Turret_Half_Slope_Top",true},
-{"NHI_PD_Turret_Half_Slope_Tip",true},
-{"NHI_PD_Turret_45_Slope",true},
-{"NHI_Light_Autocannon_Turret",true},
-{"NHI_Autocannon_Turret",true},
-{"NHI_Gatling_Laser_Turret",true},
-{"NHI_Light_Railgun_Turret",true},
-{"NHI_Heavy_Gun_Turret",true},
-{"NHI_Mk3_Cannon_Turret",true},
-{"NHI_Mk3_Cannon_Surface_Turret",true},
-{"NHI_Mk2_Cannon_Turret",true},
-{"NHI_Mk2_Cannon_Surface_Turret",true},
-{"NHI_Mk1_Cannon_Turret",true},
-{"NHI_Mk1_Cannon_Surface_Turret",true},
-{"NHI_Fixed_Autocannon",true},
-{"NHI_Fixed_Gatling_Laser",true},
-{"NHI_Kinetic_Cannon_Turret",true},
-{"CLB2X",true},
-{"ERPPC",true},
-{"SC_COV_Plasma_Turret",true},
-{"banshee",true},
-{"TaiidanHangarHuge",true},
-{"TaiidanHangar",true},
-{"TaiidanHangarCompact",true},
-{"NHI_Fixed_Missile_Battery",true},
-{"HakkeroProjectileMini",true},
-{"HakkeroBeamMini",true},
-{"SLAM",true},
-{"TaiidanHangarFighter",true},
-{"TaiidanRailFighter",true},
-{"TaiidanRailBomber",true},
-{"TaiidanHangarBomber",true},
-{"TaiidanHangarBomberMedium",true},
-{"TaiidanSingleHangar",true},
-{"MA_Guardian",true},
-{"Laser_Block",true},
-{"Torp_Block",true},
-{"Heavy_Repeater",true},
-{"Fixed_Rockets",true},
-{"Type18_Artillery",true},
-{"Type21_Artillery",true},
-{"Assault_Coil_Turret",true},
-{"Light_Coil_Turret",true},
-{"RailgunTurret_Block",true},
-{"K_HS_9x9_K3_King",true},
-{"K_HS_9x9_HSRB_Dreadnight",true},
-{"Null_Point_Jump_Disruptor_Large",true},
-{"LargeGatlingTurret_SC",true},
-{"LargeMissileTurret_SC",true},
-{"LargeBlockMediumCalibreTurret_SC",true},
-{"LargeCalibreTurret_SC",true},
-{"LargeRailgun_SC",true},
-{"LargeBlockLargeCalibreGun_SC",true},
-{"LargeMissileLauncher_SC",true},
-{"Starcore_RWR_Projectiles",true},
-{"NID_Pyroacid",true},
-{"NID_HeavyPyroacid",true},
-{"NID_Bioplasma",true},
-{"NID_Hivedrone",true},
-{"NID_BioplasmaHivedrone",true},
-{"NID_Leap",true},
-{"LightParticleWhip",true},
-{"ParticleWhip",true},
-{"NovaCannon",true},
-{"longsword",true},
-{"65_Launcher_FixedMount",true},
-{"Hellfire_Laser_Block",true},
-{"HAS_Cyclops",true},
-{"HAS_Crossfield", true},
-{"PriestReskin_Block", true}
-};
-
-        public static Dictionary<string, bool> pdDictionary = new Dictionary<string, bool>
-        {
-            {"MA_T2PDX",true},
-{"MA_T2PDX_Slope",true},
-{"MA_T2PDX_Slope2",true},
-{"MA_Gimbal_Laser_T2",true},
-{"MA_Gimbal_Laser_T2_Armored",true},
-{"MA_Gimbal_Laser_T2_Armored_Slope",true},
-{"MA_Gimbal_Laser_T2_Armored_Slope2",true},
-{"MA_Gimbal_Laser_T2_Armored_Slope45",true},
-{"MA_PDX",true},
-{"MA_Gimbal_Laser",true},
-{"MA_Gimbal_Laser_Armored",true},
-{"MA_Gimbal_Laser_Armored_Slope",true},
-{"MA_Gimbal_Laser_Armored_Slope2",true},
-{"MA_Gimbal_Laser_Armored_Slope45",true},
-{"MA_PDT",true},
-{"MA_Fixed_000",true},
-{"MA_Fixed_001",true},
-{"MA_Fixed_002",true},
-{"MA_Fixed_007",true},
-{"MA_Fixed_003",true},
-{"MA_Fixed_004",true},
-{"MA_Fixed_005",true},
-{"MA_Fixed_006",true},
-{"MA_Fixed_T2",true},
-{"MA_Fixed_T2_Naked",true},
-{"SC_Flare",true},
-{"Starcore_RWR_Projectiles",true},
-{"SA_HMI_Erebos",true},
-{"Laser_Block",true},
-{"HAS_Crossfield", true},
-{"TaiidanHangarFighter",true},
-{"TaiidanRailFighter",true},
-{"Starcore_AMS_I_Block",true},
-{"LargeGatlingTurret_SC",true},
-{"PriestReskin_Block", true},
-            {"Heavy_Repeater",true},
-            {"NHI_PD_Turret",true},
-{"NHI_PD_Turret_Half",true},
-{"NHI_PD_Turret_Half_Slope_Top",true},
-{"NHI_PD_Turret_Half_Slope_Tip",true},
-{"NHI_PD_Turret_45_Slope",true}
-        };
-
-
-
-
-
 
         private void RefreshVisualState()
         {
@@ -447,7 +179,7 @@ namespace klime.PointCheck
         {
             MyAPIGateway.Utilities.MessageEntered += MessageEntered;
             MyNetworkHandler.Init();
-            MyAPIGateway.Utilities.ShowMessage("ShipPoints v3.2 - Control Zone", 
+            MyAPIGateway.Utilities.ShowMessage("ShipPoints v3.2 - Control Zone",
                 "Aim at a grid and press Shift+T to show stats, " +
                 "Shift+M to track a grid, Shift+J to cycle nametag style. " +
                 "Type '/sphere' to turn off/on the sphere visuals.");
@@ -537,7 +269,7 @@ namespace klime.PointCheck
             if (messageText.Contains("/sphere"))
             {
                 try
-                { SphereVisual = !SphereVisual; UpdateCapZone1(); UpdateCapZone2(); UpdateCapZone3(); }
+                { SphereVisual = !SphereVisual; }
                 catch (Exception w) { { MyLog.Default.WriteLineAndConsole($"Visual update failed: " + w); }; }
             }
 
@@ -710,7 +442,7 @@ namespace klime.PointCheck
                 Local_GameModeSwitch = 3;
                 Static.MyNetwork.TransmitToServer(new BasicPacket(14), true, true);
             }
-            
+
             if (messageText.Contains("/problem"))
             {
                 MyAPIGateway.Utilities.ShowNotification("A problem has been reported.", 10000);
@@ -734,7 +466,7 @@ namespace klime.PointCheck
         public static void Begin()
         {
             temp_ServerTimer = 0;
-            timer = 0;
+            PointCheckHelpers.timer = 0;
             broadcaststat = true;
             timerMessage.Visible = true;
             ticketmessage.Visible = true;
@@ -754,7 +486,7 @@ namespace klime.PointCheck
         public static void EndMatch()
         {
             temp_ServerTimer = 0;
-            timer = 0;
+            PointCheckHelpers.timer = 0;
             broadcaststat = false;
             timerMessage.Visible = false;
             ticketmessage.Visible = false;
@@ -836,7 +568,7 @@ namespace klime.PointCheck
             catch { }
         }
 
-        public void AddPointValues(object obj)
+        public static void AddPointValues(object obj)
         {
             // Deserialize the byte array (obj) into a string (var)
             string var = MyAPIGateway.Utilities.SerializeFromBinary<string>((byte[])obj);
@@ -864,17 +596,17 @@ namespace klime.PointCheck
                         // Check if the name contains "{LS}"
                         if (lsIndex != -1)
                         {
-                            // Replace "{LS}" with "Large" and update the PointValues dictionary
+                            // Replace "{LS}" with "Large" and update the PointValues SendingDictionary
                             string largeName = name.Substring(0, lsIndex) + "Large" + name.Substring(lsIndex + "{LS}".Length);
                             PointValues[largeName] = value;
 
-                            // Replace "{LS}" with "Small" and update the PointValues dictionary
+                            // Replace "{LS}" with "Small" and update the PointValues SendingDictionary
                             string smallName = name.Substring(0, lsIndex) + "Small" + name.Substring(lsIndex + "{LS}".Length);
                             PointValues[smallName] = value;
                         }
                         else
                         {
-                            // Update the PointValues dictionary directly
+                            // Update the PointValues SendingDictionary directly
                             PointValues[name] = value;
                         }
                     }
@@ -922,7 +654,7 @@ namespace klime.PointCheck
             }
         }
 
-        private void HUDRegistered()    
+        private void HUDRegistered()
         {
             statMessage = new HudAPIv2.HUDMessage(Scale: 1f, Font: "BI_SEOutlined", Message: new StringBuilder(""), Origin: new Vector2D(-.99, .99), HideHud: false, Blend: BlendTypeEnum.PostPP)
             {
@@ -969,271 +701,78 @@ namespace klime.PointCheck
             };
         }
         // Get the sphere model based on the given cap color
-        private string GetCapZoneColorModel(int capColor)
-        {
-            switch (capColor)
-            {
-                case 1:
-                    return SphereModelRed;
-                case 2:
-                    return SphereModelBlue;
-                case 3:
-                    return SphereModelOrange;
-                default:
-                    return SphereModel;
-            }
-        }
 
-        internal void CapZoneColor1()
-        {
-            try
-            {
-                // Update Capsphere1 based on Capcolor1
-                Capsphere1 = GetCapZoneColorModel(Capcolor1);
-            }
-            catch (Exception B1)
-            {
-                MyLog.Default.WriteLineAndConsole($"Visual update failed: " + B1);
-            }
-        }
-
-        internal void CapZoneColor2()
-        {
-            try
-            {
-                // Update Capsphere2 based on Capcolor2
-                Capsphere2 = GetCapZoneColorModel(Capcolor2);
-            }
-            catch (Exception B2)
-            {
-                MyLog.Default.WriteLineAndConsole($"Visual update failed: " + B2);
-            }
-        }
-
-        internal void CapZoneColor3()
-        {
-            try
-            {
-                // Update Capsphere3 based on Capcolor3
-                Capsphere3 = GetCapZoneColorModel(Capcolor3);
-            }
-            catch (Exception B3)
-            {
-                MyLog.Default.WriteLineAndConsole($"Visual update failed: " + B3);
-            }
-        }
-
-
-        // Update the given sphere entity with the given Capsphere
-        private void UpdateCapZone(MyEntity sphereEntity, string Capsphere)
-        {
-            if (sphereEntity == null) return;
-
-            try
-            {
-                // Set the visibility of the sphere entity
-                sphereEntity.Render.Visible = SphereVisual;
-
-                // Refresh the model of the sphere entity
-                sphereEntity.RefreshModels($"{ModContext.ModPath}{Capsphere}", null);
-
-                // Remove and update the render object
-                sphereEntity.Render.RemoveRenderObjects();
-                sphereEntity.Render.UpdateRenderObject(true);
-            }
-            catch (Exception ex)
-            {
-                MyLog.Default.WriteLineAndConsole($"Updating Capzone failed: {ex}");
-            }
-        }
-
-        internal void UpdateCapZone1()
-        {
-            // Update the first cap zone
-            UpdateCapZone(_sphereEntity, Capsphere1);
-        }
-
-        internal void UpdateCapZone2()
-        {
-            // Update the second cap zone
-            UpdateCapZone(_sphereEntity2, Capsphere2);
-        }
-
-        internal void UpdateCapZone3()
-        {
-            // Update the third cap zone
-            UpdateCapZone(_sphereEntity3, Capsphere3);
-        }
 
         public override void UpdateAfterSimulation()
         {
-
-            temp_LocalTimer++;
-            timer++;
-
-            if (timer >= 144000)
-            {
-                timer = 0;
-                temp_LocalTimer = 0;
-                temp_ServerTimer = 0;
-            }
-
-
-
-
+            temp_LocalTimer++; PointCheckHelpers.timer++; if (PointCheckHelpers.timer >= 144000) { PointCheckHelpers.timer = 0; temp_LocalTimer = 0; temp_ServerTimer = 0; }
             if (joinInit == true)
             {
-
             }
-
-
-            if (MyAPIGateway.Utilities.IsDedicated && temp_ServerTimer % 60 == 0) //server update of ServerSyncTimer
+            if (MyAPIGateway.Utilities.IsDedicated && temp_ServerTimer % 60 == 0)
             {
-                ServerSyncTimer.Value = temp_ServerTimer;
-                ServerSyncTimer.Push();
-
+                ServerSyncTimer.Value = temp_ServerTimer; ServerSyncTimer.Push();
             }
-
             if (broadcaststat && !IAmTheCaptainNow && temp_LocalTimer % 60 == 0)
-            //if you are not the captain or the server and your local timer 1 second, set your local time to server time
             {
-                ServerSyncTimer.Fetch();
-                timer = ServerSyncTimer.Value;
-                temp_LocalTimer = 0;
+                ServerSyncTimer.Fetch(); PointCheckHelpers.timer = ServerSyncTimer.Value; temp_LocalTimer = 0;
             }
-
-
-
-
             try
             {
-                if (!MyAPIGateway.Utilities.IsDedicated) //visual update of the spheres and loading hitch fix
+                if (!MyAPIGateway.Utilities.IsDedicated)
                 {
-                    try
+                    bool tick100 = PointCheckHelpers.timer % 100 == 0; if (PointCheckHelpers.timer - _fastStart < 300 || tick100)
                     {
-                        var tick100 = timer % 100 == 0;
-                        if (timer - _fastStart < 300 || tick100)
-                        {
-                            RefreshVisualState();
-                            _fastStart = timer;
-                            if (joinInit == false)
-                            {
-                                Static.MyNetwork.TransmitToServer(new BasicPacket(7), true, true);
-
-                                ServerMatchState.Fetch();
-                                team1.Fetch();
-                                team2.Fetch();
-                                team3.Fetch();
-                                ServerMatchState.Fetch(); ServerSyncTimer.Fetch();
-                                Team1Tickets.Fetch();
-                                Team2Tickets.Fetch();
-                                Team3Tickets.Fetch();
-                                ThreeTeams.Fetch();
-                                GameModeSwitch.Fetch();
-                                Local_GameModeSwitch = GameModeSwitch.Value;
-                                joinInit = true;
-
-                            }
-
-                        }
-                    }
-                    catch { }
-                }
-
-
-
-                if (!MyAPIGateway.Utilities.IsDedicated && timer % 60 == 0)
-                {
-                    try
-                    {
-                        if (ServerMatchState.Value == 1 && broadcaststat == false) //force broadcaststat to match servermatch state
-                        {
-                            broadcaststat = true;
-                        }
-
-                        if (!MyAPIGateway.Utilities.IsDedicated && IAmTheCaptainNow) //force ServerMatchState to match LocalMatchState
-                        {
-                            ServerMatchState.Value = LocalMatchState;
-                            //ServerMatchState.Push();
-                        }
-                        else if (!MyAPIGateway.Utilities.IsDedicated && !IAmTheCaptainNow) //force LocalMatchState to match ServerMatchState
-
-                        {
-                            LocalMatchState = ServerMatchState.Value;
-                        }
-
-                    }
-                    catch
-                    {
+                        RefreshVisualState(); _fastStart = PointCheckHelpers.timer; if (joinInit == false) { Static.MyNetwork.TransmitToServer(new BasicPacket(7), true, true); ServerMatchState.Fetch(); team1.Fetch(); team2.Fetch(); team3.Fetch(); ServerMatchState.Fetch(); ServerSyncTimer.Fetch(); Team1Tickets.Fetch(); Team2Tickets.Fetch(); Team3Tickets.Fetch(); ThreeTeams.Fetch(); GameModeSwitch.Fetch(); Local_GameModeSwitch = GameModeSwitch.Value; joinInit = true; }
                     }
                 }
-
-                if (broadcaststat && timer % 60 == 0)
+                if (!MyAPIGateway.Utilities.IsDedicated && temp_LocalTimer % 60 == 0)
                 {
-                    if (IAmTheCaptainNow && ServerMatchState.Value != 1)
+                    if (ServerMatchState.Value == 1 && broadcaststat == false) { broadcaststat = true; }
+                    if (!MyAPIGateway.Utilities.IsDedicated && IAmTheCaptainNow)
                     {
-                        ServerMatchState.Value = 1;
-
+                        ServerMatchState.Value = LocalMatchState;
+                    }
+                    else if (!MyAPIGateway.Utilities.IsDedicated && !IAmTheCaptainNow)
+                    {
+                        LocalMatchState = ServerMatchState.Value;
                     }
                 }
-
+                if (broadcaststat && PointCheckHelpers.timer % 60 == 0)
+                {
+                    if (IAmTheCaptainNow && ServerMatchState.Value != 1) { ServerMatchState.Value = 1; }
+                }
             }
-            catch { }
+            catch
+            {
+            }
             try
             {
-                // Execute this block of code only if the timer is a multiple of 60
-                if (timer % 60 == 0)
+                if (PointCheckHelpers.timer % 60 == 0)
                 {
-                    // Clear the players lists and populate the all_players dictionary in one loop
-                    all_players.Clear();
-                    MyAPIGateway.Multiplayer.Players.GetPlayers(listPlayers, p =>
-                    {
-                        all_players.Add(p.IdentityId, p);
-                        return false;
-                    });
-
-                    // Execute this block of code only if it's a server
+                    all_players.Clear(); MyAPIGateway.Multiplayer.Players.GetPlayers(listPlayers, delegate (IMyPlayer p) { all_players.Add(p.IdentityId, p); return false; }
+                );
                     if (MyAPIGateway.Session.IsServer)
                     {
-                        // Iterate through each entity ID (x) in the Sending dictionary
                         foreach (var x in Sending.Keys)
                         {
-                            ShipTracker shipTracker;
-                            if (!Data.TryGetValue(x, out shipTracker))
+                            ShipTracker shipTracker; if (!Data.TryGetValue(x, out shipTracker))
                             {
-                                // Get the entity with the entity ID (x) and check if it's a valid grid with physics
-                                var e = MyEntities.GetEntityById(x) as IMyCubeGrid;
-                                if (e != null && e.Physics != null)
+                                var entity = MyEntities.GetEntityById(x) as IMyCubeGrid; if (entity != null && entity.Physics != null)
                                 {
-                                    shipTracker = new ShipTracker(e);
-                                    Data.Add(x, shipTracker);
-
-                                    // If it's not a dedicated server, create a HUD for the grid
-                                    if (!MyAPIGateway.Utilities.IsDedicated)
-                                    {
-                                        shipTracker.CreateHud();
-                                    }
+                                    shipTracker = new ShipTracker(entity); Data.Add(x, shipTracker); if (!MyAPIGateway.Utilities.IsDedicated) { shipTracker.CreateHud(); }
                                 }
                             }
                             else
                             {
-                                // Update the ShipTracker for the entity ID (x)
                                 shipTracker.Update();
                             }
-
                             if (shipTracker != null)
                             {
-                                // Iterate through each player ID (p) in the Sending dictionary for the entity ID (x)
                                 foreach (var p in Sending[x])
                                 {
-                                    // Create a new packet with the entity ID and its ShipTracker
-                                    PacketGridData packet = new PacketGridData
-                                    {
-                                        id = x,
-                                        tracked = shipTracker
-                                    };
-
-                                    // Transmit the packet to the player with player ID (p)
+                                    PacketGridData packet = new PacketGridData { id = x, tracked = shipTracker }
+                                ;
                                     Static.MyNetwork.TransmitToPlayer(packet, p);
                                 }
                             }
@@ -1246,88 +785,45 @@ namespace klime.PointCheck
             }
             try
             {
-                // Run this block of code only if the timer is a multiple of 60 and it's not a dedicated server
-                if (timer % 60 == 0)
+                if (PointCheckHelpers.timer % 60 == 0)
                 {
-                    // Check if _count is a multiple of 100
-                    bool tick100 = _count % 100 == 0;
-                    _count++;
-
-                    // Run this block of code if (_count - _fastStart) is less than 300 or _count is a multiple of 100
-                    if (_count - _fastStart < 300 || tick100)
+                    bool tick100 = _count % 100 == 0; _count++; if (_count - _fastStart < 300 || tick100)
                     {
-                        // Clear the managed entities list
-                        _managedEntities.Clear();
-
-                        // Get all top-most entities in a sphere (_combatMaxSphere) and store them in _managedEntities
-                        MyGamePruningStructure.GetAllTopMostEntitiesInSphere(ref _combatMaxSphere, _managedEntities, MyEntityQueryType.Dynamic);
-                        var posZero = Vector3D.Zero;
-
-                        // Iterate through each entity in the _managedEntities list
-                        foreach (var entity in _managedEntities)
+                        _managedEntities.Clear(); MyGamePruningStructure.GetAllTopMostEntitiesInSphere(ref _combatMaxSphere, _managedEntities, MyEntityQueryType.Dynamic); var posZero = Vector3D.Zero; foreach (var entity in _managedEntities)
                         {
-                            // Check if the entity is a grid
-                            var grid = entity as MyCubeGrid;
-
-                            // If the entity is a valid grid and has the specified block subtype ID, perform the following actions
-                            if (grid != null && GridExtensions.HasBlockWithSubtypeId(grid, "LargeFlightMovement"))
+                            var grid = entity as MyCubeGrid; if (grid != null && GridExtensions.HasBlockWithSubtypeId(grid, "LargeFlightMovement"))
                             {
-                                // Get the entity ID of the grid
-                                long entityId = grid.EntityId;
-
-                                // If the entity ID is not present in the Tracking list, perform the following actions
-                                if (!Tracking.Contains(entityId))
+                                long entityId = grid.EntityId; if (!Tracking.Contains(entityId))
                                 {
-                                    // Create a new packet with the entity ID and a value indicating whether the entity is in the Tracking list
-                                    PacketGridData packet = new PacketGridData
-                                    {
-                                        id = entityId,
-                                        value = (byte)(Tracking.Contains(entityId) ? 2 : 1),
-                                    };
-
-                                    // Transmit the packet to the server
+                                    PacketGridData packet = new PacketGridData { id = entityId, value = (byte)(Tracking.Contains(entityId) ? 2 : 1), }
+                ;
                                     Static.MyNetwork.TransmitToServer(packet, true);
-
-
-                                    // If the packet value is 1 (indicating the entity is not in the Tracking list), perform the following actions
                                     if (packet.value == 1)
                                     {
-                                        // Show a notification that the grid was added to the tracker
-                                        MyAPIGateway.Utilities.ShowNotification("ShipTracker: Added grid to tracker");
-
-                                        // Add the entity ID to the Tracking list
-                                        Tracking.Add(entityId);
-
-                                        // Make the integrity message visible if it's not already visible
-                                        if (!integretyMessage.Visible)
-                                        {
-                                            integretyMessage.Visible = true;
-                                        }
-
-                                        // Create the HUD for the grid
+                                        MyAPIGateway.Utilities.ShowNotification("ShipTracker: Added grid to tracker"); Tracking.Add(entityId); if (!integretyMessage.Visible) { integretyMessage.Visible = true; }
                                         Data[entityId].CreateHud();
                                     }
                                     else
                                     {
-                                        // Show a notification that the grid was removed from the tracker
-                                        MyAPIGateway.Utilities.ShowNotification("ShipTracker: Removed grid from tracker");
-
-                                        // Remove the entity ID from the Tracking list
-                                        Tracking.Remove(entityId);
-
-                                        // Dispose the HUD for the grid
-                                        Data[entityId].DisposeHud();
+                                        MyAPIGateway.Utilities.ShowNotification("ShipTracker: Removed grid from tracker"); Tracking.Remove(entityId); Data[entityId].DisposeHud();
                                     }
                                 }
-                                // Update _fastStart to the current value of _count
                                 _fastStart = _count;
                             }
                         }
                     }
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
+
+
+
+
+
+
         public override void Draw()
         { //if you are the server do nothing here
             if (MyAPIGateway.Utilities.IsDedicated)
@@ -1336,114 +832,89 @@ namespace klime.PointCheck
             }
             try
             {
-                if (
-                    MyAPIGateway.Session?.Camera != null 
-                    && MyAPIGateway.Session.CameraController != null 
-                    && !MyAPIGateway.Gui.ChatEntryVisible 
-                    && !MyAPIGateway.Gui.IsCursorVisible 
-                    && MyAPIGateway.Gui.GetCurrentScreen == MyTerminalPageEnum.None)
+                var session = MyAPIGateway.Session;
+                var input = MyAPIGateway.Input;
+                var gui = MyAPIGateway.Gui;
+                var promoLevel = session.PromoteLevel;
+
+                if (session?.Camera != null && session.CameraController != null && !gui.ChatEntryVisible && !gui.IsCursorVisible && gui.GetCurrentScreen == MyTerminalPageEnum.None)
                 {
-                    /*
-                    if (vState == ViewState.InView) { vState = ViewState.ExitView; }*/ //this disables shift T when match is go
-
-                    if (MyAPIGateway.Input.IsKeyPress(MyKeys.LeftShift) && MyAPIGateway.Input.IsNewKeyPressed(MyKeys.T))
+                    bool isShiftPressed = input.IsKeyPress(MyKeys.LeftShift) || input.IsKeyPress(MyKeys.Shift);
+                    if (isShiftPressed)
                     {
-                        if (vState == ViewState.None)
+                        if (input.IsNewKeyPressed(MyKeys.T))
                         {
-                            vState = ViewState.InView;
+                            vState = vState == ViewState.None ? ViewState.InView : (vState == ViewState.InView ? ViewState.InView2 : ViewState.ExitView);
                         }
-                        else if (vState == ViewState.InView)
-                        {
-                            vState = ViewState.InView2;
-                        }
-                        else if (vState == ViewState.InView2)
-                        {
-                            vState = ViewState.ExitView;
-                        }
-                    }
 
-                    if (MyAPIGateway.Input.IsKeyPress(MyKeys.Shift) && MyAPIGateway.Input.IsNewKeyPressed(MyKeys.M))
-                    {
-                        if (MyAPIGateway.Session.PromoteLevel >= MyPromoteLevel.Moderator)
+                        if (promoLevel >= MyPromoteLevel.Moderator)
                         {
-                            var camMat = MyAPIGateway.Session.Camera.WorldMatrix;
-                            IHitInfo hits = null; MyAPIGateway.Physics.CastRay(camMat.Translation + camMat.Forward * 0.5, camMat.Translation + camMat.Forward * 500, out hits);
-                            if (hits != null && hits.HitEntity is IMyCubeGrid)
+                            var camMat = session.Camera.WorldMatrix;
+                            IHitInfo hits = null;
+                            var keyAndActionPairs = new Dictionary<MyKeys, Action>
+            {
+                {
+                    MyKeys.M, () =>
+                    {
+                        MyAPIGateway.Physics.CastRay(camMat.Translation + camMat.Forward * 0.5, camMat.Translation + camMat.Forward * 500, out hits);
+                        if(hits != null && hits.HitEntity is IMyCubeGrid)
+                        {
+                            PacketGridData packet = new PacketGridData { id = hits.HitEntity.EntityId, value = (byte)(Tracking.Contains(hits.HitEntity.EntityId) ? 2 : 1) };
+                            Static.MyNetwork.TransmitToServer(packet, true);
+
+                            if(packet.value == 1)
                             {
-                                PacketGridData packet = new PacketGridData
-                                {
-                                    id = hits.HitEntity.EntityId,
-                                    value = (byte)(Tracking.Contains(hits.HitEntity.EntityId) ? 2 : 1),
-                                };
-                                Static.MyNetwork.TransmitToServer(packet, true);
-                                if (packet.value == 1)
-                                {
-                                    MyAPIGateway.Utilities.ShowNotification("ShipTracker: Added grid to tracker"); Tracking.Add(hits.HitEntity.EntityId);
-                                    if (integretyMessage.Visible == false) { integretyMessage.Visible = true; }
-                                    //fix for disappearing nameplates?
-                                    Data[hits.HitEntity.EntityId].CreateHud();
-                                    //end fix
-                                }
-                                else
-                                {
-                                    MyAPIGateway.Utilities.ShowNotification("ShipTracker: Removed grid from tracker");
-                                    Tracking.Remove(hits.HitEntity.EntityId); Data[hits.HitEntity.EntityId].DisposeHud();
-                                }
-                            }
-                        }
-                    }
-                    
-                    if (MyAPIGateway.Input.IsKeyPress(MyKeys.Shift) && MyAPIGateway.Input.IsNewKeyPressed(MyKeys.N))
-                    {
-                        if (MyAPIGateway.Session.PromoteLevel >= MyPromoteLevel.Moderator)
-                        {
-                            integretyMessage.Visible = !integretyMessage.Visible;
-                            MyAPIGateway.Utilities.ShowNotification("ShipTracker: Hud visibility set to " + integretyMessage.Visible);
-                        }
-                    }
-
-                    if (MyAPIGateway.Input.IsKeyPress(MyKeys.Shift) && MyAPIGateway.Input.IsNewKeyPressed(MyKeys.B))
-                    {
-                        if (MyAPIGateway.Session.PromoteLevel >= MyPromoteLevel.Moderator)
-                        { //integretyMessage.Visible = !integretyMessage.Visible;
-                            timerMessage.Visible = !timerMessage.Visible; ticketmessage.Visible = !ticketmessage.Visible;
-                            MyAPIGateway.Utilities.ShowNotification("ShipTracker: Timer visibility set to " + timerMessage.Visible);
-                        }
-                    }
-
-                    if (MyAPIGateway.Input.IsKeyPress(MyKeys.Shift) && MyAPIGateway.Input.IsNewKeyPressed(MyKeys.J))
-                    {
-                        if (MyAPIGateway.Session.PromoteLevel >= MyPromoteLevel.Moderator)
-                        {
-                            viewstat++;
-                            if (viewstat == 4)
-                            {
-                                viewstat = 0;
-                            }
-                            if (viewstat == 3)
-                            {
-                                NameplateVisible = false;
+                                MyAPIGateway.Utilities.ShowNotification("ShipTracker: Added grid to tracker");
+                                Tracking.Add(hits.HitEntity.EntityId);
+                                if (!integretyMessage.Visible) integretyMessage.Visible = true;
+                                Data[hits.HitEntity.EntityId].CreateHud();
                             }
                             else
                             {
-                                NameplateVisible = true;
+                                MyAPIGateway.Utilities.ShowNotification("ShipTracker: Removed grid from tracker");
+                                Tracking.Remove(hits.HitEntity.EntityId);
+                                Data[hits.HitEntity.EntityId].DisposeHud();
                             }
-                            MyAPIGateway.Utilities.ShowNotification("ShipTracker: Nameplate visibility set to " + viewmode[viewstat]);
                         }
                     }
-                
-                    if (Local_ProblemSwitch == 1)
+                },
+                {
+                    MyKeys.N, () =>
                     {
-                        if (vStateP == ViewStateP.ThisIsFine) { vStateP = ViewStateP.ItsOver; }
-                        
+                        integretyMessage.Visible = !integretyMessage.Visible;
+                        MyAPIGateway.Utilities.ShowNotification("ShipTracker: Hud visibility set to " + integretyMessage.Visible);
                     }
-                    if (Local_ProblemSwitch == 0)
+                },
+                {
+                    MyKeys.B, () =>
                     {
-                        if (vStateP == ViewStateP.ItsOver) { vStateP = ViewStateP.ThisIsFine; }
-
+                        timerMessage.Visible = !timerMessage.Visible;
+                        ticketmessage.Visible = !ticketmessage.Visible;
+                        MyAPIGateway.Utilities.ShowNotification("ShipTracker: Timer visibility set to " + timerMessage.Visible);
                     }
-
+                },
+                {
+                    MyKeys.J, () =>
+                    {
+                        viewstat++;
+                        if (viewstat == 4) viewstat = 0; PointCheckHelpers.NameplateVisible = viewstat != 3;
+                        MyAPIGateway.Utilities.ShowNotification("ShipTracker: Nameplate visibility set to " + viewmode[viewstat]);
+                    }
                 }
+            };
+
+                            foreach (var pair in keyAndActionPairs)
+                            {
+                                if (input.IsNewKeyPressed(pair.Key))
+                                {
+                                    pair.Value.Invoke();
+                                }
+                            }
+                        }
+                    }
+                }
+
+                vStateP = Local_ProblemSwitch == 1 ? ViewStateP.ItsOver : (Local_ProblemSwitch == 0 ? ViewStateP.ThisIsFine : vStateP);
 
                 if (text_api.Heartbeat)
                 {
@@ -1486,126 +957,127 @@ namespace klime.PointCheck
                             IMyCubeGrid icubeG = hits.HitEntity as IMyCubeGrid;
                             if (icubeG != null && icubeG.Physics != null)
                             {
-                                if (timer % 60 == 0)
+                                if (PointCheckHelpers.timer % 60 == 0)
                                 {
-
                                     ShipTracker tracked = new ShipTracker(icubeG);
-
                                     string pdInvestment = tracked.pdPercentage.ToString();
                                     string pdInvestmentNum = tracked.pdInvest.ToString();
+                                    string totalShieldString = "None";
 
-                                    string total_shield_string = "None";
                                     if (tracked.TotalShieldStrength > 100)
-                                    { total_shield_string = Math.Round((tracked.TotalShieldStrength / 100f), 2).ToString() + " M"; }
-                                    if (tracked.TotalShieldStrength > 1 && tracked.TotalShieldStrength < 100)
                                     {
-                                        total_shield_string = Math.Round((tracked.TotalShieldStrength), 0).ToString() + "0 K";
+                                        totalShieldString = Math.Round((tracked.TotalShieldStrength / 100f), 2).ToString() + " M";
                                     }
+                                    else if (tracked.TotalShieldStrength > 1 && tracked.TotalShieldStrength < 100)
+                                    {
+                                        totalShieldString = Math.Round((tracked.TotalShieldStrength), 0).ToString() + "0 K";
+                                    }
+
                                     string gunText = "";
                                     foreach (var x in tracked.GunL.Keys)
                                     {
-                                        gunText += "<color=Green>" + tracked.GunL[x] + "<color=White> x " + x + "\n";
+                                        gunText += $"<color=Green>{tracked.GunL[x]}<color=White> x {x}\n";
                                     }
+
                                     string specialBlockText = "";
                                     foreach (var x in tracked.SBL.Keys)
                                     {
-                                        specialBlockText += "<color=Green>" + tracked.SBL[x] + "<color=White> x " + x + "\n";
+                                        specialBlockText += $"<color=Green>{tracked.SBL[x]}<color=White> x {x}\n";
                                     }
 
                                     string massString = tracked.Mass.ToString();
-                                    //float thrust = icubeG.GetMaxThrustInDirection(Base6Directions.Direction.Forward);
-                                    float thrustInKilograms = icubeG.GetMaxThrustInDirection(Base6Directions.Direction.Backward) / 9.81f; // Convert thrust from N to kg
+                                    float thrustInKilograms = icubeG.GetMaxThrustInDirection(Base6Directions.Direction.Backward) / 9.81f;
                                     float weight = tracked.Mass;
-
                                     float mass = tracked.Mass;
                                     float TWR = thrustInKilograms / weight;
 
                                     if (tracked.Mass > 1000000)
                                     {
                                         massString = Math.Round((tracked.Mass / 1000000f), 2).ToString() + "m";
-                                        mass = tracked.Mass / 1000f; // Convert mass to metric tons
+                                        mass = tracked.Mass / 1000f;
                                     }
 
-
-                                    string TWRs = Math.Round((TWR),3).ToString();
-
+                                    string TWRs = Math.Round((TWR), 3).ToString();
                                     string thrustString = tracked.InstalledThrust.ToString();
+
                                     if (tracked.InstalledThrust > 1000000)
                                     {
                                         thrustString = Math.Round((tracked.InstalledThrust / 1000000f), 2).ToString() + "M";
                                     }
 
                                     string playerName = tracked.Owner == null ? tracked.GridName : tracked.Owner.DisplayName;
-
-                                    //if (!string.IsNullOrEmpty(playerName) && playerName != tracked.GridName)
-                                    // {
-                                    //    playerName = playerName.Substring(1);
-                                    // }
-
                                     string factionName = tracked.Owner == null ? "" : MyAPIGateway.Session?.Factions?.TryGetPlayerFaction(tracked.OwnerID)?.Name;
                                     float speed = icubeG.GridSizeEnum == MyCubeSize.Large ? MyDefinitionManager.Static.EnvironmentDefinition.LargeShipMaxSpeed : MyDefinitionManager.Static.EnvironmentDefinition.SmallShipMaxSpeed;
+
                                     if (RTS_api != null && RTS_api.IsReady)
                                     {
                                         speed = (float)Math.Round(RTS_api.GetMaxSpeed(icubeG), 2);
-
                                     }
 
-
-
                                     string PWRNotation;
-
                                     PWRNotation = tracked.CurrentPower > 1000 ? "GW" : "MW";
                                     string tempPWR;
-                                    if (tracked.CurrentPower > 1000)
-                                    { tempPWR = (Math.Round(tracked.CurrentPower / 1000, 1)).ToString(); }
-                                    else { tempPWR = tracked.CurrentPower.ToString(); }
-                                    string PWR = tempPWR + PWRNotation;
 
+                                    if (tracked.CurrentPower > 1000)
+                                    {
+                                        tempPWR = (Math.Round(tracked.CurrentPower / 1000, 1)).ToString();
+                                    }
+                                    else
+                                    {
+                                        tempPWR = tracked.CurrentPower.ToString();
+                                    }
+
+                                    string PWR = tempPWR + PWRNotation;
                                     string GyroString = tracked.CurrentGyro.ToString();
                                     double tempGyro2;
+
                                     if (tracked.CurrentGyro >= 1000000)
                                     {
                                         tempGyro2 = Math.Round((tracked.CurrentGyro / 1000000f), 1);
-                                        if (tempGyro2 > 1000) { GyroString = Math.Round((tempGyro2 / 1000), 1).ToString() + "G"; }
-                                        else { GyroString = tempGyro2.ToString() + "M"; }
+
+                                        if (tempGyro2 > 1000)
+                                        {
+                                            GyroString = Math.Round((tempGyro2 / 1000), 1).ToString() + "G";
+                                        }
+                                        else
+                                        {
+                                            GyroString = tempGyro2.ToString() + "M";
+                                        }
                                     }
 
+                                    var basicInfo = $"----Basic Info----\n" +
+                                        $"<color=Green>Name<color=White>: {icubeG.DisplayName}\n" +
+                                        $"<color=Green>Owner<color=White>: {playerName}\n" +
+                                        $"<color=Green>Faction<color=White>: {factionName}\n" +
+                                        $"<color=Green>Mass<color=White>: {massString} kg\n" +
+                                        $"<color=Green>Heavy blocks<color=White>: {tracked.Heavyblocks}\n" +
+                                        $"<color=Green>Total blocks<color=White>: {tracked.BlockCount}\n" +
+                                        $"<color=Green>PCU<color=White>: {tracked.PCU}\n" +
+                                        $"<color=Green>Size<color=White>: {(icubeG.Max + Vector3.Abs(icubeG.Min)).ToString()}\n" +
+                                        $"<color=Green>Max Speed<color=White>: {speed} | <color=Green>TWR<color=White>: {TWRs}\n\n";
 
-                                    var temp_text =
-                                            "----Basic Info----"
-                                            + "\n" + "<color=Green>Name<color=White>: " + icubeG.DisplayName
-                                            + "\n" + "<color=Green>Owner<color=White>: " + playerName
-                                            + "\n" + "<color=Green>Faction<color=White>: " + factionName
-                                            + "\n" + "<color=Green>Mass<color=White>: " + massString + " kg"
-                                            + "\n" + "<color=Green>Heavy blocks<color=White>: " + tracked.Heavyblocks.ToString()
-                                            + "\n" + "<color=Green>Total blocks<color=White>: " + tracked.BlockCount.ToString()
-                                            + "\n" + "<color=Green>PCU<color=White>: " + tracked.PCU
-                                            + "\n" + "<color=Green>Size<color=White>: " + (icubeG.Max + Vector3.Abs(icubeG.Min)).ToString()
-                                            + "\n" + "<color=Green>Max Speed<color=White>: " + speed + " | <color=Green>TWR<color=White>: " + TWRs
-                                            + "\n"
-                                            + "\n" + "<color=Orange>----Battle Stats----"
+                                    var battleStats = $"<color=Orange>----Battle Stats----<color=White>\n" +
+                                        $"<color=Green>Battle Points<color=White>: {tracked.Bpts} " +
+                                        $"<color=Orange>[<color=Red> {tracked.offensivePercentage}% " +
+                                        $"<color=White>| <color=Green>{tracked.powerPercentage}% " +
+                                        $"<color=White>| <color=DeepSkyBlue>{tracked.movementPercentage}% " +
+                                        $"<color=White>| <color=LightGray>{tracked.miscPercentage}% <color=Orange>]\n" +
+                                        $"<color=Green>PD Investment<color=White>: <color=Orange>( <color=white>{pdInvestmentNum} " +
+                                        $"<color=Orange>|<color=Crimson> {pdInvestment}<color=White>%<color=Orange> )\n" +
+                                        $"<color=Green>Shield Max HP<color=White>: {totalShieldString} ({(int)tracked.CurrentShieldStrength}%)\n" +
+                                        $"<color=Green>Thrust<color=White>: {thrustString}N\n" +
+                                        $"<color=Green>Gyro<color=White>: {GyroString}N\n" +
+                                        $"<color=Green>Power<color=White>: {PWR}\n\n";
 
-                                            + "\n" + "<color=Green>Battle Points<color=White>: " + tracked.Bpts.ToString()
-                                            + " <color=Orange>[<color=Red> " + tracked.offensivePercentage.ToString()
-                                            + "<color=White>% <color=Orange>| <color=Green>"
-                                            + tracked.powerPercentage.ToString()
-                                            + "<color=White>% <color=Orange>| <color=DeepSkyBlue>"
-                                            + tracked.movementPercentage.ToString()
-                                            + "<color=White>% <color=Orange>| <color=LightGray>"
-                                            + tracked.miscPercentage.ToString()
-                                            + "<color=White>% <color=Orange>]"
-                                            + "\n" + "<color=Green>PD Investment<color=White>: " + "<color=Orange>( <color=white>" + pdInvestmentNum + " <color=Orange>|<color=Crimson> " + pdInvestment + "<color=White>%<color=Orange> )"
-                                            + "\n" + "<color=Green>Shield Max HP<color=White>: " + total_shield_string + " (" + (int)tracked.CurrentShieldStrength + "%)"
-                                            + "\n" + "<color=Green>Thrust<color=White>: " + thrustString + "N"
-                                            + "\n" + "<color=Green>Gyro<color=White>: " + GyroString + "N"
-                                            + "\n" + "<color=Green>Power<color=White>: " + PWR
-                                            + "\n"
-                                            + "\n" + "<color=Orange>----Blocks----"
-                                            + "\n" + specialBlockText
-                                            + "\n"
-                                            + "\n" + "<color=Orange>----Armament----"
-                                            + "\n" + gunText;
-                                    statMessage.Message.Clear(); statMessage.Message.Append(temp_text); statMessage.Visible = true;
+                                    var blocksInfo = $"<color=Orange>----Blocks----<color=White>\n{specialBlockText}\n\n";
+                                    var armamentInfo = $"<color=Orange>----Armament----<color=White>\n{gunText}";
+
+                                    var tempText = basicInfo + battleStats + blocksInfo + armamentInfo;
+
+
+                                    statMessage.Message.Clear();
+                                    statMessage.Message.Append(tempText);
+                                    statMessage.Visible = true;
                                 }
                             }
                         }
@@ -1625,7 +1097,7 @@ namespace klime.PointCheck
                         IMyCubeGrid icubeG = cockpit.CubeGrid as IMyCubeGrid;
                         if (icubeG != null && icubeG.Physics != null)
                         {
-                            if (timer % 60 == 0)
+                            if (PointCheckHelpers.timer % 60 == 0)
                             {
 
                                 ShipTracker tracked = new ShipTracker(icubeG);
@@ -1633,112 +1105,100 @@ namespace klime.PointCheck
                                 string pdInvestmentNum = tracked.pdInvest.ToString();
 
                                 string total_shield_string = "None";
-                                if (tracked.TotalShieldStrength > 100)
-                                { total_shield_string = Math.Round((tracked.TotalShieldStrength / 100f), 2).ToString() + " M"; }
-                                if (tracked.TotalShieldStrength > 1 && tracked.TotalShieldStrength < 100)
-                                {
-                                    total_shield_string = Math.Round((tracked.TotalShieldStrength), 0).ToString() + "0 K";
-                                }
-                                string gunText = "";
-                                foreach (var x in tracked.GunL.Keys)
-                                {
-                                    gunText += "<color=Green>" + tracked.GunL[x] + "<color=White> x " + x + "\n";
-                                }
-                                string specialBlockText = "";
-                                foreach (var x in tracked.SBL.Keys)
-                                {
-                                    specialBlockText += "<color=Green>" + tracked.SBL[x] + "<color=White> x " + x + "\n";
-                                }
-                                string massString = tracked.Mass.ToString();
-                                //float thrust = icubeG.GetMaxThrustInDirection(Base6Directions.Direction.Forward);
-                                float thrustInKilograms = icubeG.GetMaxThrustInDirection(Base6Directions.Direction.Backward) / 9.81f; // Convert thrust from N to kg
-                                float weight = tracked.Mass; 
 
+                                if (tracked.TotalShieldStrength > 100)
+                                {
+                                    total_shield_string = (tracked.TotalShieldStrength / 100f).ToString("0.00") + " M";
+                                }
+                                else if (tracked.TotalShieldStrength > 1)
+                                {
+                                    total_shield_string = tracked.TotalShieldStrength.ToString("0.00") + "0 K";
+                                }
+
+                                string gunText = string.Join("\n", tracked.GunL.Keys.Select(x => $"<color=Green>{tracked.GunL[x]}<color=White> x {x}"));
+
+                                string specialBlockText = string.Join("\n", tracked.SBL.Keys.Select(x => $"<color=Green>{tracked.SBL[x]}<color=White> x {x}"));
+
+                                string massString = tracked.Mass.ToString("0.00");
+
+                                float thrustInKilograms = icubeG.GetMaxThrustInDirection(Base6Directions.Direction.Backward) / 9.81f; // Convert thrust from N to kg
+                                float weight = tracked.Mass;
                                 float mass = tracked.Mass;
                                 float TWR = thrustInKilograms / weight;
 
                                 if (tracked.Mass > 1000000)
                                 {
-                                    massString = Math.Round((tracked.Mass / 1000000f), 2).ToString() + "m";
+                                    massString = (tracked.Mass / 1000000f).ToString("0.00") + "m";
                                     mass = tracked.Mass / 1000f; // Convert mass to metric tons
                                 }
 
-
-                                string TWRs = Math.Round((TWR), 3).ToString();
+                                string TWRs = TWR.ToString("0.000");
 
                                 string thrustString = tracked.InstalledThrust.ToString();
+
                                 if (tracked.InstalledThrust > 1000000)
                                 {
-                                    thrustString = Math.Round((tracked.InstalledThrust / 1000000f), 2).ToString() + "M";
+                                    thrustString = (tracked.InstalledThrust / 1000000f).ToString("0.00") + "M";
                                 }
+
                                 string playerName = tracked.Owner == null ? tracked.GridName : tracked.Owner.DisplayName;
 
-                                //  if (!string.IsNullOrEmpty(playerName) && playerName != tracked.GridName)
-                                //  {
-                                //     playerName = playerName.Substring(1);
-                                // }
                                 string factionName = tracked.Owner == null ? "" : MyAPIGateway.Session?.Factions?.TryGetPlayerFaction(tracked.OwnerID)?.Name;
-                                float speed = icubeG.GridSizeEnum == MyCubeSize.Large ? MyDefinitionManager.Static.EnvironmentDefinition.LargeShipMaxSpeed : MyDefinitionManager.Static.EnvironmentDefinition.SmallShipMaxSpeed;
+
+                                float speed = icubeG.GridSizeEnum == MyCubeSize.Large
+                                    ? MyDefinitionManager.Static.EnvironmentDefinition.LargeShipMaxSpeed
+                                    : MyDefinitionManager.Static.EnvironmentDefinition.SmallShipMaxSpeed;
+
                                 if (RTS_api != null && RTS_api.IsReady)
                                 {
                                     speed = (float)Math.Round(RTS_api.GetMaxSpeed(icubeG), 2);
-
                                 }
-                                string PWRNotation;
 
-
-                                PWRNotation = tracked.CurrentPower > 1000 ? "GW" : "MW";
-                                string tempPWR;
-                                if (tracked.CurrentPower > 1000)
-                                { tempPWR = (Math.Round(tracked.CurrentPower / 1000, 1)).ToString(); }
-                                else { tempPWR = tracked.CurrentPower.ToString(); }
+                                string PWRNotation = tracked.CurrentPower > 1000 ? "GW" : "MW";
+                                string tempPWR = tracked.CurrentPower > 1000 ? (tracked.CurrentPower / 1000f).ToString("0.0") : tracked.CurrentPower.ToString();
                                 string PWR = tempPWR + PWRNotation;
 
                                 string GyroString = tracked.CurrentGyro.ToString();
-                                double tempGyro2;
+
                                 if (tracked.CurrentGyro >= 1000000)
                                 {
-                                    tempGyro2 = Math.Round((tracked.CurrentGyro / 1000000f), 1);
-                                    if (tempGyro2 > 1000) { GyroString = Math.Round((tempGyro2 / 1000), 1).ToString() + "G"; }
-                                    else { GyroString = tempGyro2.ToString() + "M"; }
+                                    double tempGyro2 = tracked.CurrentGyro / 1000000f;
+                                    if (tempGyro2 > 1000)
+                                    {
+                                        GyroString = (tempGyro2 / 1000).ToString("0.0") + "G";
+                                    }
+                                    else
+                                    {
+                                        GyroString = tempGyro2.ToString("0.0") + "M";
+                                    }
                                 }
 
 
-                                var temp_text =
-                                        "----Basic Info----"
-                                        + "\n" + "<color=Green>Name<color=White>: " + icubeG.DisplayName
-                                        + "\n" + "<color=Green>Owner<color=White>: " + playerName
-                                        + "\n" + "<color=Green>Faction<color=White>: " + factionName
-                                        + "\n" + "<color=Green>Mass<color=White>: " + massString + " kg"
-                                        + "\n" + "<color=Green>Heavy blocks<color=White>: " + tracked.Heavyblocks.ToString()
-                                        + "\n" + "<color=Green>Total blocks<color=White>: " + tracked.BlockCount.ToString()
-                                        + "\n" + "<color=Green>PCU<color=White>: " + tracked.PCU
-                                        + "\n" + "<color=Green>Size<color=White>: " + (icubeG.Max + Vector3.Abs(icubeG.Min)).ToString()
-                                        + "\n" + "<color=Green>Max Speed<color=White>: " + speed + " | <color=Green>TWR<color=White>: " + TWRs
-                                        + "\n"
-                                        + "\n" + "<color=Orange>----Battle Stats----"
-                                            + "\n" + "<color=Green>Battle Points<color=White>: " + tracked.Bpts.ToString()
-                                            + " <color=Orange>[<color=Red> " + tracked.offensivePercentage.ToString()
-                                            + "<color=White>% <color=Orange>| <color=Green>"
-                                            + tracked.powerPercentage.ToString()
-                                            + "<color=White>% <color=Orange>| <color=DeepSkyBlue>"
-                                            + tracked.movementPercentage.ToString()
-                                            + "<color=White>% <color=Orange>| <color=LightGray>"
-                                            + tracked.miscPercentage.ToString()
-                                            + "<color=White>% <color=Orange>]"
+                                var temp_text = $@"----Basic Info----
+<color=Green>Name<color=White>: {icubeG.DisplayName}
+<color=Green>Owner<color=White>: {playerName}
+<color=Green>Faction<color=White>: {factionName}
+<color=Green>Mass<color=White>: {massString} kg
+<color=Green>Heavy blocks<color=White>: {tracked.Heavyblocks}
+<color=Green>Total blocks<color=White>: {tracked.BlockCount}
+<color=Green>PCU<color=White>: {tracked.PCU}
+<color=Green>Size<color=White>: {(icubeG.Max + Vector3.Abs(icubeG.Min))}
+<color=Green>Max Speed<color=White>: {speed} | <color=Green>TWR<color=White>: {TWRs}
 
-                                        + "\n" + "<color=Green>PD Investment<color=White>: " + "<color=Orange>( <color=white>" + pdInvestmentNum + " <color=Orange>|<color=Crimson> " + pdInvestment + "<color=White>%<color=Orange> )"
-                                        + "\n" + "<color=Green>Shield Max HP<color=White>: " + total_shield_string + " (" + (int)tracked.CurrentShieldStrength + "%)"
-                                        + "\n" + "<color=Green>Thrust<color=White>: " + thrustString + "N"
-                                        + "\n" + "<color=Green>Gyro<color=White>: " + GyroString + "N"
-                                        + "\n" + "<color=Green>Power<color=White>: " + PWR
+<color=Orange>----Battle Stats----
+<color=Green>Battle Points<color=White>: {tracked.Bpts} <color=Orange>[<color=Red> {tracked.offensivePercentage} <color=White>% <color=Orange>| <color=Green> {tracked.powerPercentage} <color=White>% <color=Orange>| <color=DeepSkyBlue>{tracked.movementPercentage} <color=White>% <color=Orange>| <color=LightGray>{tracked.miscPercentage} <color=White>% <color=Orange>]
+<color=Green>PD Investment<color=White>: <color=Orange>( <color=White>{pdInvestmentNum} <color=Orange>|<color=Crimson> {pdInvestment} <color=White>%<color=Orange> )
+<color=Green>Shield Max HP<color=White>: {total_shield_string} ({(int)tracked.CurrentShieldStrength}%)
+<color=Green>Thrust<color=White>: {thrustString}N
+<color=Green>Gyro<color=White>: {GyroString}N
+<color=Green>Power<color=White>: {PWR}
 
-                                        + "\n"
-                                        + "\n" + "<color=Orange>----Blocks----"
-                                        + "\n" + specialBlockText
-                                        + "\n"
-                                        + "\n" + "<color=Orange>----Armament----"
-                                        + "\n" + gunText;
+<color=Orange>----Blocks----
+{specialBlockText}
+
+<color=Orange>----Armament----
+{gunText}";
+
                                 statMessage.Message.Clear(); statMessage.Message.Append(temp_text); statMessage.Visible = true;
                             }
                         }
@@ -1777,53 +1237,58 @@ namespace klime.PointCheck
                             IMyCubeGrid icubeG = hits.HitEntity as IMyCubeGrid;
                             if (icubeG != null && icubeG.Physics != null)
                             {
-                                if (timer % 60 == 0)
+                                if (PointCheckHelpers.timer % 60 == 0)
                                 {
                                     ShipTracker tracked = new ShipTracker(icubeG);
-                                    string total_shield_string = "None";
-                                    if (tracked.TotalShieldStrength > 100)
-                                    { total_shield_string = Math.Round((tracked.TotalShieldStrength / 100f), 2).ToString() + " M"; }
-                                    if (tracked.TotalShieldStrength > 1 && tracked.TotalShieldStrength < 100)
-                                    { total_shield_string = Math.Round((tracked.TotalShieldStrength), 0).ToString() + "0 K"; }
-                                    var temp_text = "<color=White>" + total_shield_string + " (" + (int)tracked.CurrentShieldStrength + "%)";
 
-                                    string GyroString = tracked.CurrentGyro.ToString();
-                                    double tempGyro2;
-                                    if (tracked.CurrentGyro >= 1000000)
-                                    {
-                                        tempGyro2 = Math.Round((tracked.CurrentGyro / 1000000f), 1);
-                                        if (tempGyro2 > 1000) { GyroString = Math.Round((tempGyro2 / 1000), 1).ToString() + "G"; }
-                                        else { GyroString = tempGyro2.ToString() + "M"; }
-                                    }
+                                    // Shield String
+                                    float totalShield = tracked.TotalShieldStrength;
+                                    string total_shield_string = totalShield > 100
+                                        ? (Math.Round(totalShield / 100f, 2) + " M")
+                                        : (totalShield > 1
+                                            ? (Math.Round(totalShield, 0) + "0 K")
+                                            : "None");
 
-                                    string thrustString = tracked.InstalledThrust.ToString();
-                                    if (tracked.InstalledThrust > 1000000)
-                                    {
-                                        thrustString = Math.Round((tracked.InstalledThrust / 1000000f), 2).ToString() + "M";
-                                    }
-                                    string PWRNotation;
+                                    // Gyro String
+                                    double currentGyro = tracked.CurrentGyro;
+                                    string GyroString = currentGyro >= 1000000
+                                        ? ((Math.Round(currentGyro / 1000000f, 1) > 1000)
+                                            ? (Math.Round(currentGyro / 1000000000f, 1) + "G")
+                                            : (Math.Round(currentGyro / 1000000f, 1) + "M"))
+                                        : currentGyro.ToString();
 
-                                    PWRNotation = tracked.CurrentPower > 1000 ? "GW" : "MW";
-                                    string tempPWR;
-                                    if (tracked.CurrentPower > 1000)
-                                    { tempPWR = (Math.Round(tracked.CurrentPower / 1000, 1)).ToString(); }
-                                    else { tempPWR = tracked.CurrentPower.ToString(); }
-                                    string PWR = tempPWR + PWRNotation;
-                                    string gunText = "";
+                                    // Thrust String
+                                    double installedThrust = tracked.InstalledThrust;
+                                    string thrustString = installedThrust > 1000000
+                                        ? (Math.Round(installedThrust / 1000000f, 2) + "M")
+                                        : installedThrust.ToString();
+
+                                    // Power String
+                                    double currentPower = tracked.CurrentPower;
+                                    string PWR = currentPower > 1000
+                                        ? (Math.Round(currentPower / 1000, 1) + "GW")
+                                        : (currentPower + "MW");
+
+                                    // Gun Text
+                                    StringBuilder gunText = new StringBuilder();
                                     foreach (var x in tracked.GunL.Keys)
                                     {
-                                        gunText += "<color=Green>" + tracked.GunL[x] + "<color=White> x " + x + "\n";
-
+                                        gunText.Append("<color=Green>").Append(tracked.GunL[x]).Append("<color=White> x ").Append(x).Append("\n");
                                     }
-                                    gunText += "\n" + "<color=Green>Thrust<color=White>: " + thrustString + "N"
-                                             + "\n" + "<color=Green>Gyro<color=White>: " + GyroString + "N"
-                                             + "\n" + "<color=Green>Power<color=White>: " + PWR;
 
+                                    gunText.Append("\n<color=Green>Thrust<color=White>: ").Append(thrustString).Append("N")
+                                           .Append("\n<color=Green>Gyro<color=White>: ").Append(GyroString).Append("N")
+                                           .Append("\n<color=Green>Power<color=White>: ").Append(PWR);
 
-                                    statMessage_Battle_Gunlist.Message.Clear(); statMessage_Battle_Gunlist.Message.Append(gunText);
-                                    statMessage_Battle.Message.Clear(); statMessage_Battle.Message.Append(temp_text);
+                                    statMessage_Battle_Gunlist.Message.Length = 0;
+                                    statMessage_Battle_Gunlist.Message.Append(gunText);
 
-                                    statMessage_Battle.Visible = true; statMessage_Battle_Gunlist.Visible = true;
+                                    statMessage_Battle.Message.Length = 0;
+                                    statMessage_Battle.Message.Append("<color=White>").Append(total_shield_string).Append(" (").Append((int)tracked.CurrentShieldStrength).Append("%)");
+
+                                    statMessage_Battle.Visible = true;
+                                    statMessage_Battle_Gunlist.Visible = true;
+
                                 }
                             }
                         }
@@ -1845,53 +1310,52 @@ namespace klime.PointCheck
                         IMyCubeGrid icubeG = cockpit.CubeGrid as IMyCubeGrid;
                         if (icubeG != null && icubeG.Physics != null)
                         {
-                            if (timer % 60 == 0)
+                            if (PointCheckHelpers.timer % 60 == 0)
                             {
                                 ShipTracker tracked = new ShipTracker(icubeG);
+
+                                // Optimize Shield Strength String
+                                double totalShield = tracked.TotalShieldStrength;
                                 string total_shield_string = "None";
-                                if (tracked.TotalShieldStrength > 100)
-                                { total_shield_string = Math.Round((tracked.TotalShieldStrength / 100f), 2).ToString() + " M"; }
-                                if (tracked.TotalShieldStrength > 1 && tracked.TotalShieldStrength < 100)
-                                { total_shield_string = Math.Round((tracked.TotalShieldStrength), 0).ToString() + "0 K"; }
-                                var temp_text = "<color=White>" + total_shield_string + " (" + (int)tracked.CurrentShieldStrength + "%)";
+                                if (totalShield > 100) { total_shield_string = (Math.Round(totalShield / 100f, 2) + " M"); }
+                                else if (totalShield > 1) { total_shield_string = (Math.Round(totalShield, 0) + "0 K"); }
+                                string temp_text = "<color=White>" + total_shield_string + " (" + (int)tracked.CurrentShieldStrength + "%)";
 
-                                string GyroString = tracked.CurrentGyro.ToString();
-                                double tempGyro2;
-                                if (tracked.CurrentGyro >= 1000000)
+                                // Optimize Gyro String
+                                double currentGyro = tracked.CurrentGyro;
+                                string GyroString = currentGyro.ToString();
+                                if (currentGyro >= 1000000)
                                 {
-                                    tempGyro2 = Math.Round((tracked.CurrentGyro / 1000000f), 1);
-                                    if (tempGyro2 > 1000) { GyroString = Math.Round((tempGyro2 / 1000), 1).ToString() + "G"; }
-                                    else { GyroString = tempGyro2.ToString() + "M"; }
+                                    double tempGyro2 = Math.Round(currentGyro / 1000000f, 1);
+                                    GyroString = tempGyro2 > 1000 ? (Math.Round(tempGyro2 / 1000, 1) + "G") : (tempGyro2 + "M");
                                 }
 
-                                string thrustString = tracked.InstalledThrust.ToString();
-                                if (tracked.InstalledThrust > 1000000)
-                                {
-                                    thrustString = Math.Round((tracked.InstalledThrust / 1000000f), 2).ToString() + "M";
-                                }
-                                string PWRNotation;
+                                // Optimize Thrust String
+                                double installedThrust = tracked.InstalledThrust;
+                                string thrustString = installedThrust > 1000000 ? (Math.Round(installedThrust / 1000000f, 2) + "M") : installedThrust.ToString();
 
-                                PWRNotation = tracked.CurrentPower > 1000 ? "GW" : "MW";
-                                string tempPWR;
-                                if (tracked.CurrentPower > 1000)
-                                { tempPWR = (Math.Round(tracked.CurrentPower / 1000, 1)).ToString(); }
-                                else { tempPWR = tracked.CurrentPower.ToString(); }
+                                // Optimize Power String
+                                double currentPower = tracked.CurrentPower;
+                                string PWRNotation = currentPower > 1000 ? "GW" : "MW";
+                                string tempPWR = currentPower > 1000 ? Math.Round(currentPower / 1000, 1).ToString() : currentPower.ToString();
                                 string PWR = tempPWR + PWRNotation;
-                                string gunText = "";
+
+                                // Optimize Gun Text
+                                StringBuilder gunText = new StringBuilder();
                                 foreach (var x in tracked.GunL.Keys)
                                 {
-                                    gunText += "<color=Green>" + tracked.GunL[x] + "<color=White> x " + x + "\n";
-
+                                    gunText.AppendLine("<color=Green>" + tracked.GunL[x] + "<color=White> x " + x);
                                 }
-                                gunText += "\n" + "<color=Green>Thrust<color=White>: " + thrustString + "N"
-                                         + "\n" + "<color=Green>Gyro<color=White>: " + GyroString + "N"
-                                         + "\n" + "<color=Green>Power<color=White>: " + PWR;
+                                gunText.AppendLine("<color=Green>Thrust<color=White>: " + thrustString + "N")
+                                       .AppendLine("<color=Green>Gyro<color=White>: " + GyroString + "N")
+                                       .Append("<color=Green>Power<color=White>: " + PWR);
 
+                                // Update Messages
+                                statMessage_Battle_Gunlist.Message.Clear().Append(gunText);
+                                statMessage_Battle.Message.Clear().Append(temp_text);
 
-                                statMessage_Battle_Gunlist.Message.Clear(); statMessage_Battle_Gunlist.Message.Append(gunText);
-                                statMessage_Battle.Message.Clear(); statMessage_Battle.Message.Append(temp_text);
-
-                                statMessage_Battle.Visible = true; statMessage_Battle_Gunlist.Visible = true;
+                                // Set Visibility
+                                statMessage_Battle.Visible = statMessage_Battle_Gunlist.Visible = true;
                             }
                         }
 
@@ -1908,909 +1372,58 @@ namespace klime.PointCheck
 
                 }
 
-                if (timer % 60 == 0 && integretyMessage != null && text_api.Heartbeat)
+                if (PointCheckHelpers.timer % 60 == 0 && integretyMessage != null && text_api.Heartbeat)
                 {
-
-                    StringBuilder temp_text = new StringBuilder();
-                    Dictionary<string, List<string>> trackedShips = new Dictionary<string, List<string>>();
-                    Dictionary<string, double> totalMass = new Dictionary<string, double>();
-                    Dictionary<string, int> totalBattlePoints = new Dictionary<string, int>();
-
-                    Dictionary<string, int> totalMiscBps = new Dictionary<string, int>();
-                    Dictionary<string, int> totalPowerBps = new Dictionary<string, int>();
-                    Dictionary<string, int> totalOffensiveBps = new Dictionary<string, int>();
-                    Dictionary<string, int> totalMovementBps = new Dictionary<string, int>();
-
-
-
+                    var tt = new StringBuilder();
+                    var ts = new Dictionary<string, List<string>>();
+                    var m = new Dictionary<string, double>();
+                    var bp = new Dictionary<string, int>();
+                    var mbp = new Dictionary<string, int>();
+                    var pbp = new Dictionary<string, int>();
+                    var obp = new Dictionary<string, int>();
+                    var mobp = new Dictionary<string, int>();
                     foreach (var z in Tracking)
                     {
-                        if (!Data.ContainsKey(z))
-                        {
-                            continue;
-
-                        }
-
-                        var data = Data[z];
-                        data.LastUpdate--;
-                        if (data.LastUpdate <= 0)
-                        {
-                            Data[z].DisposeHud();
-                            Data.Remove(z);
-                            continue;
-                        }
-
-                        string factionName = data.FactionName; bool notDead = data.IsFunctional;
-                        string Ownername = data.OwnerName;
-
-                        if (!trackedShips.ContainsKey(factionName))
-                        {
-                            trackedShips.Add(factionName, new List<string>());
-                            totalMass.Add(factionName, 0);
-                            totalBattlePoints.Add(factionName, 0);
-                            totalMiscBps.Add(factionName, 0);
-                            totalPowerBps.Add(factionName, 0);
-                            totalOffensiveBps.Add(factionName, 0);
-                            totalMovementBps.Add(factionName, 0);
-                        }
-
-                        if(notDead) { 
-                        totalMass[factionName] += data.Mass;
-                        totalBattlePoints[factionName] += data.Bpts;
-                        }
-
-                        totalMiscBps[factionName] += data.MiscBps;
-                        totalPowerBps[factionName] += data.PowerBps;
-                        totalOffensiveBps[factionName] += data.OffensiveBps;
-                        totalMovementBps[factionName] += data.MovementBps;
-
-
-                        int guns = 0; foreach (int s in data.GunL.Values)
-                        {
-
-                            guns += s;
-
-                        } //center distance info
-                        if (notDead)
-                        {
-                            if (Vector3.DistanceSquared(ctrpoint, data.Position) < capdistCenter * capdistCenter)
-                            {
-                                capstat = "C1";
-
-                                if (!ZoneControl1.Contains(factionName))
-
-                                {
-                                    ZoneControl1 += factionName.ToUpper();
-
-                                }
-                            }
-                            else if (Vector3.DistanceSquared(ctrpoint2, data.Position) < capdist * capdist)
-                            {
-                                capstat = "C2";
-
-                                if (!ZoneControl2.Contains(factionName))
-
-                                {
-                                    ZoneControl2 += factionName.ToUpper();
-
-                                }
-                            }
-
-                            else if (Vector3.DistanceSquared(ctrpoint3, data.Position) < capdist * capdist)
-                            {
-                                capstat = "C3";
-
-                                if (!ZoneControl3.Contains(factionName))
-                                {
-                                    ZoneControl3 += factionName.ToUpper();
-
-                                }
-                            }
-                            else
-                            {
-                                capstat = "";
-                            }
-                        }
-
-                        else
-
-                        {
-                            capstat = "DED";
-                        }
-
-                        string PWRNotation;
-                        PWRNotation = data.CurrentPower > 1000 ? "GW" : "MW";
-                        string tempPWR;
-                        if (data.CurrentPower > 1000)
-                        { tempPWR = (Math.Round(data.CurrentPower / 1000, 1)).ToString(); }
-                        else { tempPWR = data.CurrentPower.ToString(); }
-
-                        string PWR = tempPWR + PWRNotation;
-                        string thrustString = data.InstalledThrust.ToString();
-                        double tempThrust2;
-
-                        if (data.InstalledThrust >= 1000000)
-                        {
-                            tempThrust2 = Math.Round((data.InstalledThrust / 1000000f), 1);
-                            if (tempThrust2 > 1000) { thrustString = Math.Round((tempThrust2 / 1000), 1).ToString() + "G"; }
-                            else { thrustString = tempThrust2.ToString() + "M"; }
-                        }
-
-                        if (data.FactionName == team1.Value && !data.IsFunctional)
-                        {
-                            NewCountT1++;
-                        }
-
-                        if (data.FactionName == team2.Value && !data.IsFunctional)
-                        {
-                            NewCountT2++;
-                        }
-
-                        if (data.FactionName == team3.Value && !data.IsFunctional)
-                        {
-                            NewCountT3++;
-                        }
-                        string tempThrust = thrustString + "N";
-                        trackedShips[factionName].Add(string.Format("<color={4}>{0,-8}{1,3}%<color={4}> P:<color=orange>{8,3}<color={4}> T:<color=orange>{9,3}<color={4}> W:<color={6}>{2,3}<color={4}> S:<color={5}>{3,3}%<color=white> {7,3}",
-                            data.OwnerName?.Substring(0, Math.Min(data.OwnerName.Length, 7)) ?? data.GridName,
-                            (int)(data.CurrentIntegrity / data.OriginalIntegrity * 100),
-                            guns,
-                            (int)data.CurrentShieldStrength,
-                            data.IsFunctional ? "white" : "red",
-                            (int)data.CurrentShieldStrength <= 0 ? "red" : $"{255},{255 - (data.ShieldHeat * 20)},{255 - (data.ShieldHeat * 20)}",
-                            guns == 0 ? "red" : "orange",
-                            capstat,
-                            PWR,
-                            tempThrust));
+                        if (!Data.ContainsKey(z)) continue;
+                        var d = Data[z];
+                        d.LastUpdate--;
+                        if (d.LastUpdate <= 0) { Data[z].DisposeHud(); Data.Remove(z); continue; }
+                        var fn = d.FactionName;
+                        var o = d.OwnerName;
+                        var nd = d.IsFunctional;
+                        if (!d.IsFunctional) continue; //disables readout when ship is dead
+                        if (!ts.ContainsKey(fn)) { ts.Add(fn, new List<string>()); m[fn] = 0; bp[fn] = 0; mbp[fn] = 0; pbp[fn] = 0; obp[fn] = 0; mobp[fn] = 0; }
+                        if (nd) { m[fn] += d.Mass; bp[fn] += d.Bpts; }
+                        mbp[fn] += d.MiscBps; pbp[fn] += d.PowerBps; obp[fn] += d.OffensiveBps; mobp[fn] += d.MovementBps;
+                        int g = 0; foreach (var s in d.GunL.Values) g += s;
+                        var pwr = d.CurrentPower > 1000 ? Math.Round(d.CurrentPower / 1000, 1) + "GW" : d.CurrentPower + "MW";
+                        var ts2 = d.InstalledThrust >= 1e6 ? (Math.Round(d.InstalledThrust / 1e6, 1) > 1e3 ? Math.Round(Math.Round(d.InstalledThrust / 1e6, 1) / 1e3, 1) + "G" : Math.Round(d.InstalledThrust / 1e6, 1) + "M") : d.InstalledThrust.ToString();
+                        ts[fn].Add(string.Format("<color={9}>{0,-8}{1,3}%<color={9}> P:<color=orange>{7,3}<color={9}> T:<color=orange>{8,3}<color={9}> W:<color={6}>{2,3}<color={9}> S:<color={5}>{3,3}%<color=white> {4,3}", o?.Substring(0, Math.Min(o.Length, 7)) ?? d.GridName, (int)(d.CurrentIntegrity / d.OriginalIntegrity * 100), g, (int)d.CurrentShieldStrength, capstat, (int)d.CurrentShieldStrength <= 0 ? "red" : $"{255},{255 - (d.ShieldHeat * 20)},{255 - (d.ShieldHeat * 20)}", g == 0 ? "red" : "orange", pwr, ts2, nd ? "white" : "red"));
                     }
-
-
-
-                    foreach (var x in trackedShips.Keys)
+                    foreach (var x in ts.Keys)
                     {
-                        string massStr = Math.Round((totalMass[x] / 1000000f), 2).ToString() + "M";
-                        float totalBps = totalOffensiveBps[x] + totalMovementBps[x] + totalPowerBps[x] + totalMiscBps[x];
-                        float totalBpsInv = 100f / totalBattlePoints[x];
-                        string MovementPercentage = ((int)(totalMovementBps[x] * totalBpsInv + 0.5f)).ToString();
-                        string OffensivePercentage = ((int)(totalOffensiveBps[x] * totalBpsInv + 0.5f)).ToString();
-                        string PowerPercentage = ((int)(totalPowerBps[x] * totalBpsInv + 0.5f)).ToString();
-                        string MiscPercentage = ((int)(totalMiscBps[x] * totalBpsInv + 0.5f)).ToString();
-
-                        temp_text.Append("<color=white>---- <color=orange>"
-                            + x + " : " + massStr + " : "
-                            + totalBattlePoints[x] + "bp <color=orange>[<color=Red>" + OffensivePercentage
-                            + "<color=white>%<color=orange>|<color=Green>" + PowerPercentage + "<color=white>%<color=orange>|<color=DeepSkyBlue>"
-                            + MovementPercentage + "<color=white>%<color=orange>|<color=LightGray>"
-                            + MiscPercentage + "<color=white>%<color=orange>]"
-                            + "<color=white> ---------\n");
-                        foreach (var y in trackedShips[x])
-
-                        {
-
-                            temp_text.Append(y + "\n");
-
-                        }
+                        var ms = Math.Round(m[x] / 1e6, 2) + "M";
+                        float tbp = obp[x] + mobp[x] + pbp[x] + mbp[x], tbi = 100f / bp[x];
+                        tt.Append($"<color=white>---- <color=orange>{x} : {ms} : {bp[x]}bp <color=orange>[<color=Red>{(int)(obp[x] * tbi + 0.5f)}<color=white>%<color=orange>|<color=Green>{(int)(pbp[x] * tbi + 0.5f)}<color=white>%<color=orange>|<color=DeepSkyBlue>{(int)(mobp[x] * tbi + 0.5f)}<color=white>%<color=orange>|<color=LightGray>{(int)(mbp[x] * tbi + 0.5f)}<color=white>%<color=orange>]<color=white> ---------\n");
+                        foreach (var y in ts[x]) tt.Append(y + "\n");
                     }
-
-                    //winstates
-                    if (IAmTheCaptainNow && timer >= matchtime && broadcaststat == true && ServerMatchState.Value != 0)
+                    try
                     {
-                        if ((Team1Tickets.Value > Team2Tickets.Value) && (Team1Tickets.Value > Team3Tickets.Value))
+                        var ce = MyAPIGateway.Session.Player?.Controller?.ControlledEntity?.Entity;
+                        var ck = ce as IMyCockpit;
+                        var eid = ck.CubeGrid.EntityId;
+                        if (ck != null && !Tracking.Contains(eid))
                         {
-                            //MyAPIGateway.Utilities.ShowNotification(t_tempteam1 + "Wins");
-                            Static.MyNetwork.TransmitToServer(new BasicPacket(9), true, true);
-                            CaptainCapTimerZ1T1.Value = 0; CaptainCapTimerZ2T1.Value = 0; CaptainCapTimerZ3T1.Value = 0;
-                            CaptainCapTimerZ1T2.Value = 0; CaptainCapTimerZ2T2.Value = 0; CaptainCapTimerZ3T2.Value = 0;
-                            CaptainCapTimerZ1T3.Value = 0; CaptainCapTimerZ2T3.Value = 0; CaptainCapTimerZ3T3.Value = 0;
-                            EndMatch();
+                            bool hg = false, hbr = false;
+                            var gb = new List<IMySlimBlock>();
+                            ck.CubeGrid.GetBlocks(gb);
+                            foreach (var b in gb) { if (b.FatBlock is IMyGyro) hg = true; else if (b.FatBlock is IMyBatteryBlock || b.FatBlock is IMyReactor) hbr = true; if (hg && hbr) break; }
+                            if (hg && hbr) { var p = new PacketGridData { id = eid, value = 1, }; Static.MyNetwork.TransmitToServer(p, true); MyAPIGateway.Utilities.ShowNotification("ShipTracker: Added grid to tracker"); Tracking.Add(eid); if (!integretyMessage.Visible) integretyMessage.Visible = true; Data[eid].CreateHud(); }
                         }
-                        else if ((Team2Tickets.Value > Team1Tickets.Value) && (Team2Tickets.Value > Team3Tickets.Value))
-                        {
-                            //MyAPIGateway.Utilities.ShowNotification(t_tempteam2 + "Wins");
-                            Static.MyNetwork.TransmitToServer(new BasicPacket(10), true, true);
-                            CaptainCapTimerZ1T1.Value = 0; CaptainCapTimerZ2T1.Value = 0; CaptainCapTimerZ3T1.Value = 0;
-                            CaptainCapTimerZ1T2.Value = 0; CaptainCapTimerZ2T2.Value = 0; CaptainCapTimerZ3T2.Value = 0;
-                            CaptainCapTimerZ1T3.Value = 0; CaptainCapTimerZ2T3.Value = 0; CaptainCapTimerZ3T3.Value = 0;
-                            EndMatch();
-                        }
-                        else if ((Team3Tickets.Value > Team1Tickets.Value) && (Team3Tickets.Value > Team1Tickets.Value))
-                        {
-                            //MyAPIGateway.Utilities.ShowNotification(t_tempteam3 + "Wins");
-                            Static.MyNetwork.TransmitToServer(new BasicPacket(11), true, true);
-                            CaptainCapTimerZ1T1.Value = 0; CaptainCapTimerZ2T1.Value = 0; CaptainCapTimerZ3T1.Value = 0;
-                            CaptainCapTimerZ1T2.Value = 0; CaptainCapTimerZ2T2.Value = 0; CaptainCapTimerZ3T2.Value = 0;
-                            CaptainCapTimerZ1T3.Value = 0; CaptainCapTimerZ2T3.Value = 0; CaptainCapTimerZ3T3.Value = 0;
-                            EndMatch();
-                        }
-                        else
-                        {
-                            MyAPIGateway.Utilities.ShowMessage("GM", "Match time ended");
-                            Static.MyNetwork.TransmitToServer(new BasicPacket(8), true, true);
-                        }
-                        //MyAPIGateway.Utilities.ShowMessage("GM", "Match time ended"); 
-                        //Static.MyNetwork.TransmitToServer(new BasicPacket(8), true, true); 
-
                     }
-
-                    if (broadcaststat)
-                    {
-                        long myid = Session.Player.IdentityId; string factionName_L = myid == null ? "None" : MyAPIGateway.Session?.Factions?.TryGetPlayerFaction(myid)?.Tag;
-                        try
-                        {
-                            if (NewCountT1 > OldCountT1)
-                            {
-                                if (factionName_L.Contains(team1.Value))
-                                { _alertAudio.Cleanup(); BroadcastSound((MyAPIGateway.Session.Player.Character), PlayerNotice.TeamDestroyed); }
-                                else if (factionName_L.Contains(team2.Value) || factionName_L.Contains(team3.Value))
-                                { _alertAudio.Cleanup(); BroadcastSound((MyAPIGateway.Session.Player.Character), PlayerNotice.EnemyDestroyed); }
-                            }
-                            if (NewCountT2 > OldCountT2)
-                            {
-                                if (factionName_L.Contains(team2.Value))
-                                { _alertAudio.Cleanup(); BroadcastSound((MyAPIGateway.Session.Player.Character), PlayerNotice.TeamDestroyed); }
-                                else if (factionName_L.Contains(team1.Value) || factionName_L.Contains(team3.Value))
-                                { _alertAudio.Cleanup(); BroadcastSound((MyAPIGateway.Session.Player.Character), PlayerNotice.EnemyDestroyed); }
-                            }
-                            if (NewCountT3 > OldCountT3)
-                            {
-                                if (factionName_L.Contains(team3.Value))
-                                { _alertAudio.Cleanup(); BroadcastSound((MyAPIGateway.Session.Player.Character), PlayerNotice.TeamDestroyed); }
-                                else if (factionName_L.Contains(team1.Value) || factionName_L.Contains(team3.Value))
-                                { _alertAudio.Cleanup(); BroadcastSound((MyAPIGateway.Session.Player.Character), PlayerNotice.EnemyDestroyed); }
-                            }
-                        }
-                        catch
-                        { }
-
-                        if (IAmTheCaptainNow)
-                        {
-                            if (NewCountT1 > OldCountT1)
-                            {
-                                Team1Tickets.Value -= 200;
-                            }
-
-                            if (NewCountT2 > OldCountT2)
-                            {
-                                Team2Tickets.Value -= 200;
-                            }
-
-                            if (NewCountT3 > OldCountT3)
-                            {
-                                Team3Tickets.Value -= 200;
-                            }
-                        }
-
-                        OldCountT1 = NewCountT1;
-                        OldCountT2 = NewCountT2;
-                        OldCountT3 = NewCountT3;
-                        NewCountT1 = 0;
-                        NewCountT2 = 0;
-                        NewCountT3 = 0;
-                        //Timer stuff //win via match duration
-
-                        t_tempteam1 = team1.Value;
-                        t_tempteam2 = team2.Value;
-                        t_tempteam3 = team3.Value;
-                        ServerMatchState.Value = LocalMatchState;
-
-                        try
-                        {
-                            bool autotrack = true;
-                            if (autotrack && timer % 60 == 0)
-                            {
-                                var controlledEntity = MyAPIGateway.Session.Player?.Controller?.ControlledEntity?.Entity;
-                                IMyCockpit cockpit = controlledEntity as IMyCockpit;
-                                long entityId = cockpit.CubeGrid.EntityId;
-
-
-                                if (cockpit != null && (!Tracking.Contains(entityId)))
-                                {
-
-                                    bool hasGyroscope = false;
-                                    bool hasBatteryOrReactor = false;
-                                    var gridBlocks = new List<IMySlimBlock>();
-                                    cockpit.CubeGrid.GetBlocks(gridBlocks);
-
-
-                                    foreach (var block in gridBlocks)
-                                    {
-                                        if (block.FatBlock is IMyGyro)
-                                        {
-                                            hasGyroscope = true;
-                                        }
-                                        else if (block.FatBlock is IMyBatteryBlock || block.FatBlock is IMyReactor)
-                                        {
-                                            hasBatteryOrReactor = true;
-                                        }
-
-                                        if (hasGyroscope && hasBatteryOrReactor)
-                                        {
-                                            break;  // Exit the loop as we've found both.
-                                        }
-                                    }
-
-                                    if (hasGyroscope && hasBatteryOrReactor)
-                                    {
-                                        // Create a packet with the grid data
-                                        PacketGridData packet = new PacketGridData
-                                        {
-                                            id = entityId,
-                                            value = 1,
-                                        };
-
-                                        // Transmit the packet to the server
-                                        Static.MyNetwork.TransmitToServer(packet, true);
-
-                                        // Add the grid to the tracker
-                                        MyAPIGateway.Utilities.ShowNotification("ShipTracker: Added grid to tracker");
-                                        Tracking.Add(entityId);
-
-                                        // Show the integrity message if it's not visible
-                                        if (!integretyMessage.Visible)
-                                        {
-                                            integretyMessage.Visible = true;
-                                        }
-
-                                        // Create the HUD for the grid
-                                        Data[entityId].CreateHud();
-                                    }
-                                }
-                            }
-                        }
-                        catch (Exception AT)
-                        {
-                            // Consider logging the exception or handling it in some way.
-                        }
-
-
-                        if (IAmTheCaptainNow)
-                        {
-                            if (ZoneControl1.Contains(team1.Value) || ZoneControl1.Contains(team2.Value) || ZoneControl1.Contains(team3.Value))
-                            {
-                                if (ZoneControl1.Contains(team1.Value) && !ZoneControl1.Contains(team2.Value) && !ZoneControl1.Contains(team3.Value))
-                                { captimerZ1T2 = 0; captimerZ1T3 = 0; if (captimerZ1T1 < CapOut) { captimerZ1T1++; } } //Team1 Capping, if team 2 or 3 has any progress, reset it
-                                else if (ZoneControl1.Contains(team2.Value) && !ZoneControl1.Contains(team1.Value) && !ZoneControl1.Contains(team3.Value))
-                                { captimerZ1T1 = 0; captimerZ1T3 = 0; if (captimerZ1T2 < CapOut) { captimerZ1T2++; } }//Team2 Capping, if team 3 or 1 has any progress, reset it
-                                else if (ZoneControl1.Contains(team3.Value) && !ZoneControl1.Contains(team2.Value) && !ZoneControl1.Contains(team1.Value))
-                                { captimerZ1T1 = 0; captimerZ1T2 = 0; if (captimerZ1T3 < CapOut) { captimerZ1T3++; } }//Team3 Capping, if team 1 or 2 has any progress, reset it
-                            }
-                            else if (!ZoneControl1.Contains(team1.Value) && !ZoneControl1.Contains(team2.Value) && !ZoneControl1.Contains(team3.Value))
-                            {
-                                if (captimerZ1T1 < CapOut) { captimerZ1T1 = 0; }
-                                if (captimerZ1T2 < CapOut) { captimerZ1T2 = 0; }
-                                if (captimerZ1T3 < CapOut) { captimerZ1T3 = 0; } //Zone 1 unoccupied, if nobody has captured it then set it to 0 if it is not already zero
-                            }
-                            CaptainCapTimerZ1T1.Value = captimerZ1T1; CaptainCapTimerZ1T2.Value = captimerZ1T2; CaptainCapTimerZ1T3.Value = captimerZ1T3;
-                            if (ZoneControl2.Contains(team1.Value) || ZoneControl2.Contains(team2.Value) || ZoneControl2.Contains(team3.Value))
-                            {
-                                if (ZoneControl2.Contains(team1.Value) && !ZoneControl2.Contains(team2.Value) && !ZoneControl2.Contains(team3.Value))
-                                { captimerZ2T2 = 0; captimerZ2T3 = 0; if (captimerZ2T1 < CapOut) { captimerZ2T1++; } } //Team1 Capping, if team 2 or 3 has any progress, reset it
-                                else if (ZoneControl2.Contains(team2.Value) && !ZoneControl2.Contains(team1.Value) && !ZoneControl2.Contains(team3.Value))
-                                { captimerZ2T1 = 0; captimerZ2T3 = 0; if (captimerZ2T2 < CapOut) { captimerZ2T2++; } }//Team2 Capping, if team1 has any progress, reset it
-                                else if (ZoneControl2.Contains(team3.Value) && !ZoneControl2.Contains(team2.Value) && !ZoneControl2.Contains(team1.Value))
-                                { captimerZ2T1 = 0; captimerZ2T2 = 0; if (captimerZ2T3 < CapOut) { captimerZ2T3++; } }
-                            }//Team2 Capping, if team1 has any progress, reset it
-                            else if (!ZoneControl2.Contains(team1.Value) && !ZoneControl2.Contains(team2.Value) && !ZoneControl2.Contains(team3.Value))
-                            { if (captimerZ2T1 < CapOut) { captimerZ2T1 = 0; } if (captimerZ2T2 < CapOut) { captimerZ2T2 = 0; } if (captimerZ2T3 < CapOut) { captimerZ2T3 = 0; } } //Zone 1 unoccupied, if nobody has captured it then set it to 0 if it is not already zero
-                            CaptainCapTimerZ2T1.Value = captimerZ2T1; CaptainCapTimerZ2T2.Value = captimerZ2T2; CaptainCapTimerZ2T3.Value = captimerZ2T3;
-                            if (ZoneControl3.Contains(team1.Value) || ZoneControl3.Contains(team2.Value) || ZoneControl3.Contains(team3.Value))
-                            {
-                                if (ZoneControl3.Contains(team1.Value) && !ZoneControl3.Contains(team2.Value) && !ZoneControl3.Contains(team3.Value))
-                                { captimerZ3T2 = 0; captimerZ3T3 = 0; if (captimerZ3T1 < CapOut) { captimerZ3T1++; } } //Team1 Capping, if team 2 or 3 has any progress, reset it
-                                else if (ZoneControl3.Contains(team2.Value) && !ZoneControl3.Contains(team1.Value) && !ZoneControl3.Contains(team3.Value))
-                                { captimerZ3T1 = 0; captimerZ3T3 = 0; if (captimerZ3T2 < CapOut) { captimerZ3T2++; } }//Team2 Capping, if team1 has any progress, reset it
-                                else if (ZoneControl3.Contains(team3.Value) && !ZoneControl3.Contains(team2.Value) && !ZoneControl3.Contains(team1.Value))
-                                { captimerZ3T1 = 0; captimerZ3T2 = 0; if (captimerZ3T3 < CapOut) { captimerZ3T3++; } }
-                            }//Team2 Capping, if team1 has any progress, reset it
-                            else if (!ZoneControl3.Contains(team1.Value) && !ZoneControl3.Contains(team2.Value) && !ZoneControl3.Contains(team3.Value))
-                            { if (captimerZ3T1 < CapOut) { captimerZ3T1 = 0; } if (captimerZ3T2 < CapOut) { captimerZ3T2 = 0; } if (captimerZ3T3 < CapOut) { captimerZ3T3 = 0; } } //Zone 1 unoccupied, if nobody has captured it then set it to 0 if it is not already zero
-                            CaptainCapTimerZ3T1.Value = captimerZ3T1; CaptainCapTimerZ3T2.Value = captimerZ3T2; CaptainCapTimerZ3T3.Value = captimerZ3T3;
-                        }
-                        else
-                        {
-                            //Non-captain players sync all timers to captain's timer
-                            captimerZ3T1 = CaptainCapTimerZ3T1.Value;
-                            captimerZ3T2 = CaptainCapTimerZ3T2.Value;
-                            captimerZ3T3 = CaptainCapTimerZ3T3.Value;
-                            captimerZ2T1 = CaptainCapTimerZ2T1.Value;
-                            captimerZ2T2 = CaptainCapTimerZ2T2.Value;
-                            captimerZ2T3 = CaptainCapTimerZ2T3.Value;
-                            captimerZ1T1 = CaptainCapTimerZ1T1.Value;
-                            captimerZ1T2 = CaptainCapTimerZ1T2.Value;
-                            captimerZ1T3 = CaptainCapTimerZ1T3.Value;
-                        }
-
-                        string hudCap1 = "<color=white>C1";
-                        string hudCap2 = "<color=white>C2";
-                        string hudCap3 = "<color=white>C3";
-
-
-                        //crazy king switch
-                        if (GameModeSwitch.Value != 5)
-                        {
-                            if (IAmTheCaptainNow)
-                            {
-                                if (CaptainCapTimerZ1T1.Value == CapOut) { Team2Tickets.Value--; Team3Tickets.Value--; hudCap1 = "<color=tomato>" + "C1 "; }
-
-                                if (CaptainCapTimerZ2T1.Value == CapOut) { Team2Tickets.Value--; Team3Tickets.Value--; hudCap2 = "<color=tomato>" + "C2 "; }
-
-                                if (CaptainCapTimerZ3T1.Value == CapOut) { Team2Tickets.Value--; Team3Tickets.Value--; hudCap3 = "<color=tomato>" + "C3 "; }
-
-                                if (CaptainCapTimerZ1T2.Value == CapOut) { Team1Tickets.Value--; Team3Tickets.Value--; hudCap1 = "<color=dodgerblue>" + "C1 "; }
-
-                                if (CaptainCapTimerZ2T2.Value == CapOut) { Team1Tickets.Value--; Team3Tickets.Value--; hudCap2 = "<color=dodgerblue>" + "C2 "; }
-
-                                if (CaptainCapTimerZ3T2.Value == CapOut) { Team1Tickets.Value--; Team3Tickets.Value--; hudCap3 = "<color=dodgerblue>" + "C3 "; }
-
-                                if (CaptainCapTimerZ1T3.Value == CapOut) { Team2Tickets.Value--; Team1Tickets.Value--; hudCap1 = "<color=green>" + "C1 "; }
-
-                                if (CaptainCapTimerZ2T3.Value == CapOut) { Team2Tickets.Value--; Team1Tickets.Value--; hudCap2 = "<color=green>" + "C2 "; }
-
-                                if (CaptainCapTimerZ3T3.Value == CapOut) { Team2Tickets.Value--; Team1Tickets.Value--; hudCap3 = "<color=green>" + "C3 "; }
-
-                                if (Team1Tickets.Value < 0)
-                                {
-                                    Team1Tickets.Value = 0;
-                                }
-                                if (Team2Tickets.Value < 0)
-                                {
-                                    Team2Tickets.Value = 0;
-                                }
-                                if (Team3Tickets.Value < 0)
-                                {
-                                    Team3Tickets.Value = 0;
-                                }
-                            }
-                            else if (IAmTheCaptainNow && Team1Tickets.Value <= 0 && Team3Tickets.Value <= 0)
-                            {
-                                ServerMatchState.Value = 0;
-                                //Team 2 victory
-                                Team1Tickets.Value = 0; Team3Tickets.Value = 0;
-                                //MyAPIGateway.Utilities.ShowNotification(t_tempteam2 + "Wins");
-                                //Static.MyNetwork.TransmitToServer(new BasicPacket(8), true, true); 
-                                Static.MyNetwork.TransmitToServer(new BasicPacket(10), true, true);
-                            }
-                            else if (IAmTheCaptainNow && Team2Tickets.Value <= 0 && Team1Tickets.Value <= 0)
-                            {
-                                ServerMatchState.Value = 0;
-                                //Team 3 victory
-                                Team1Tickets.Value = 0; Team2Tickets.Value = 0;
-                                //MyAPIGateway.Utilities.ShowNotification(t_tempteam3 + "Wins");
-                                //Static.MyNetwork.TransmitToServer(new BasicPacket(8), true, true); 
-                                Static.MyNetwork.TransmitToServer(new BasicPacket(11), true, true);
-                            }
-                            else if (IAmTheCaptainNow && Team3Tickets.Value <= 0 && Team2Tickets.Value <= 0)
-                            {
-                                ServerMatchState.Value = 0;
-                                //Team 1 victory
-                                Team3Tickets.Value = 0; Team2Tickets.Value = 0;
-                                //MyAPIGateway.Utilities.ShowNotification(t_tempteam1 + "Wins");
-                                //Static.MyNetwork.TransmitToServer(new BasicPacket(8), true, true); 
-                                Static.MyNetwork.TransmitToServer(new BasicPacket(9), true, true);
-
-                            }
-
-                            else if (!IAmTheCaptainNow)
-                            {
-                                //team1 Hud cap colors
-                                if (captimerZ1T1 == CapOut) { hudCap1 = "<color=tomato>" + "C1"; }
-                                if (captimerZ2T1 == CapOut) { hudCap2 = "<color=tomato>" + "C2"; }
-                                if (captimerZ3T1 == CapOut) { hudCap3 = "<color=tomato>" + "C3"; }
-                                //team2 Hud cap colors   
-                                if (captimerZ1T2 == CapOut) { hudCap1 = "<color=dodgerblue>" + "C1"; }
-                                if (captimerZ2T2 == CapOut) { hudCap2 = "<color=dodgerblue>" + "C2"; }
-                                if (captimerZ3T2 == CapOut) { hudCap3 = "<color=dodgerblue>" + "C3"; }
-                                //team3 Hud cap colors
-                                if (captimerZ1T3 == CapOut) { hudCap1 = "<color=green>" + "C1"; }
-                                if (captimerZ2T3 == CapOut) { hudCap2 = "<color=green>" + "C2"; }
-                                if (captimerZ3T3 == CapOut) { hudCap3 = "<color=green>" + "C3"; }
-                            }
-
-
-
-                        }
-
-                        else
-                        {
-
-                            if (GameModeSwitch.Value == 5)
-
-                            {
-                                // captimerZ1T1 = CaptainCapTimerZ1T1.Value;
-                                // captimerZ1T2 = CaptainCapTimerZ1T2.Value;
-                                // captimerZ1T3 = CaptainCapTimerZ1T3.Value;
-
-                                //todo: Make capping faster with more friends
-
-                                if (captimerZ1T1 > 0)
-                                {
-                                    capProgress1 = "<color=tomato>" + ((float)captimerZ1T1 / (float)CapOut).ToString("0.00%");
-                                    //MyAPIGateway.Utilities.ShowMessage("GM", capProgress1); 
-                                }
-
-                                if (captimerZ1T2 > 0)
-                                {
-                                    capProgress2 = "<color=dodgerblue>" + ((float)captimerZ1T2 / (float)CapOut).ToString("0.00%");
-                                    //MyAPIGateway.Utilities.ShowMessage("GM", capProgress2); 
-                                }
-
-                                if (captimerZ1T3 > 0 && ThreeTeams.Value == 1)
-                                {
-                                    capProgress3 = "<color=green>" + ((float)captimerZ1T3 / (float)CapOut).ToString("0.00%");
-                                    //MyAPIGateway.Utilities.ShowMessage("GM", capProgress3); 
-                                }
-
-                                if (captimerZ1T1 >= CapOut) captimerZ1T1 = 0;
-                                if (captimerZ1T2 >= CapOut) captimerZ1T2 = 0;
-                                if (captimerZ1T3 >= CapOut) captimerZ1T3 = 0;
-
-                                bool capSwitch = false;
-                                int deduction = 200;
-
-                                if (IAmTheCaptainNow && CaptainCapTimerZ1T1.Value == CapOut)
-                                {
-                                    capSwitch = true;
-                                    Team2Tickets.Value -= deduction; Team3Tickets.Value -= deduction;
-                                    captimerZ1T1 = 1; CaptainCapTimerZ1T1.Value = captimerZ1T1;
-                                }
-                                else if (!IAmTheCaptainNow && CaptainCapTimerZ1T1.Value == CapOut)
-                                {
-                                    captimerZ1T1 = CaptainCapTimerZ1T1.Value;
-                                    capSwitch = true;
-                                }
-
-                                if (IAmTheCaptainNow && CaptainCapTimerZ1T2.Value == CapOut)
-                                {
-                                    capSwitch = true;
-                                    Team1Tickets.Value -= deduction; Team3Tickets.Value -= deduction;
-                                    captimerZ1T2 = 1;
-                                    CaptainCapTimerZ1T2.Value = captimerZ1T2;
-                                }
-                                else if (!IAmTheCaptainNow && CaptainCapTimerZ1T2.Value == CapOut)
-                                {
-                                    captimerZ1T2 = CaptainCapTimerZ1T2.Value;
-                                    capSwitch = true;
-                                }
-
-
-                                if (IAmTheCaptainNow && CaptainCapTimerZ1T3.Value == CapOut)
-                                {
-                                    capSwitch = true;
-                                    Team2Tickets.Value -= deduction; Team1Tickets.Value -= deduction;
-                                    captimerZ1T3 = 1;
-                                    CaptainCapTimerZ1T3.Value = captimerZ1T3;
-                                }
-                                else if (!IAmTheCaptainNow && CaptainCapTimerZ1T3.Value == CapOut)
-                                {
-                                    captimerZ1T3 = CaptainCapTimerZ1T3.Value;
-                                    capSwitch = true;
-                                }
-
-                                if (IAmTheCaptainNow && capSwitch)
-                                {
-                                    if (_sphereEntity == null) 
-                                    _sphereEntity.Close();
-                                    ctrpoint = CrazyKing();
-                                    ClientRandVector3D = ctrpoint;
-                                    CaptainRandVector3D.Value = ClientRandVector3D;
-                                    CaptainRandVector3D.Push();
-                                    GameMode_Set();
-
-                                    capSwitch = false;
-                                }
-                                else if (!IAmTheCaptainNow && capSwitch)
-                                {
-                                    CaptainRandVector3D.Fetch();
-                                    ClientRandVector3D = CaptainRandVector3D.Value;
-                                    if (_sphereEntity == null) 
-                                    _sphereEntity.Close();
-                                    ctrpoint = ClientRandVector3D;
-                                    GameMode_Set();
-
-                                    capSwitch = false;
-                                }
-
-
-                                if (Team1Tickets.Value < 0)
-                                {
-                                    Team1Tickets.Value = 0;
-                                }
-                                if (Team2Tickets.Value < 0)
-                                {
-                                    Team2Tickets.Value = 0;
-                                }
-                                if (Team3Tickets.Value < 0)
-                                {
-                                    Team3Tickets.Value = 0;
-                                }
-                            }
-                            else if (IAmTheCaptainNow && Team1Tickets.Value <= 0 && Team3Tickets.Value <= 0)
-                            {
-                                ServerMatchState.Value = 0;
-                                //Team 2 victory
-                                Team1Tickets.Value = 0; Team3Tickets.Value = 0;
-                                //MyAPIGateway.Utilities.ShowNotification(t_tempteam2 + "Wins");
-                                //Static.MyNetwork.TransmitToServer(new BasicPacket(8), true, true); 
-                                Static.MyNetwork.TransmitToServer(new BasicPacket(10), true, true);
-                            }
-                            else if (IAmTheCaptainNow && Team2Tickets.Value <= 0 && Team1Tickets.Value <= 0)
-                            {
-                                ServerMatchState.Value = 0;
-                                //Team 3 victory
-                                Team1Tickets.Value = 0; Team2Tickets.Value = 0;
-                                //MyAPIGateway.Utilities.ShowNotification(t_tempteam3 + "Wins");
-                                //Static.MyNetwork.TransmitToServer(new BasicPacket(8), true, true); 
-                                Static.MyNetwork.TransmitToServer(new BasicPacket(11), true, true);
-                            }
-                            else if (IAmTheCaptainNow && Team3Tickets.Value <= 0 && Team2Tickets.Value <= 0)
-                            {
-                                ServerMatchState.Value = 0;
-                                //Team 1 victory
-                                Team3Tickets.Value = 0; Team2Tickets.Value = 0;
-                                //MyAPIGateway.Utilities.ShowNotification(t_tempteam1 + "Wins");
-                                //Static.MyNetwork.TransmitToServer(new BasicPacket(8), true, true); 
-                                Static.MyNetwork.TransmitToServer(new BasicPacket(9), true, true);
-
-                            }
-
-                            else if (!IAmTheCaptainNow)
-                            {
-                                //team1 Hud cap colors
-                                if (captimerZ1T1 == CapOut) { hudCap1 = "<color=tomato>" + "C1"; }
-                                if (captimerZ2T1 == CapOut) { hudCap2 = "<color=tomato>" + "C2"; }
-                                if (captimerZ3T1 == CapOut) { hudCap3 = "<color=tomato>" + "C3"; }
-                                //team2 Hud cap colors   
-                                if (captimerZ1T2 == CapOut) { hudCap1 = "<color=dodgerblue>" + "C1"; }
-                                if (captimerZ2T2 == CapOut) { hudCap2 = "<color=dodgerblue>" + "C2"; }
-                                if (captimerZ3T2 == CapOut) { hudCap3 = "<color=dodgerblue>" + "C3"; }
-                                //team3 Hud cap colors
-                                if (captimerZ1T3 == CapOut) { hudCap1 = "<color=green>" + "C1"; }
-                                if (captimerZ2T3 == CapOut) { hudCap2 = "<color=green>" + "C2"; }
-                                if (captimerZ3T3 == CapOut) { hudCap3 = "<color=green>" + "C3"; }
-                            }
-                        }
-
-                        //Zone color reset and sound reset
-                        if (captimerZ1T1 == 0 && Capcolor1 != 0 && captimerZ1T2 == 0 && captimerZ1T3 == 0)
-                        { Capcolor1 = 0; CapZoneColor1(); LostCapsoundPlayed = false; }
-                        if (captimerZ2T1 == 0 && Capcolor2 != 0 && captimerZ2T2 == 0 && captimerZ2T3 == 0)
-                        { Capcolor2 = 0; CapZoneColor2(); LostCapsoundPlayed = false; }
-                        if (captimerZ3T1 == 0 && Capcolor3 != 0 && captimerZ3T2 == 0 && captimerZ3T3 == 0)
-                        { Capcolor3 = 0; CapZoneColor3(); LostCapsoundPlayed = false; }
-
-                        if (captimerZ1T2 == 0 && Capcolor1 != 0 && captimerZ1T1 == 0 && captimerZ1T3 == 0)
-                        { Capcolor1 = 0; CapZoneColor1(); LostCapsoundPlayed = false; }
-                        if (captimerZ2T2 == 0 && Capcolor2 != 0 && captimerZ2T1 == 0 && captimerZ2T3 == 0)
-                        { Capcolor2 = 0; CapZoneColor2(); LostCapsoundPlayed = false; }
-                        if (captimerZ3T2 == 0 && Capcolor3 != 0 && captimerZ3T1 == 0 && captimerZ3T3 == 0)
-                        { Capcolor3 = 0; CapZoneColor3(); LostCapsoundPlayed = false; }
-
-                        if (captimerZ1T3 == 0 && Capcolor1 != 0 && captimerZ1T1 == 0 && captimerZ1T2 == 0)
-                        { Capcolor1 = 0; CapZoneColor1(); LostCapsoundPlayed = false; }
-                        if (captimerZ2T3 == 0 && Capcolor2 != 0 && captimerZ2T1 == 0 && captimerZ2T2 == 0)
-                        { Capcolor2 = 0; CapZoneColor2(); LostCapsoundPlayed = false; }
-                        if (captimerZ3T3 == 0 && Capcolor3 != 0 && captimerZ3T1 == 0 && captimerZ3T2 == 0)
-                        { Capcolor3 = 0; CapZoneColor3(); LostCapsoundPlayed = false; }
-                        //Zone color set and sound trigger
-                        if (captimerZ1T1 >= CapOut && Capcolor1 != 1 && captimerZ1T2 == 0 && captimerZ1T3 == 0)
-                        { Capcolor1 = 1; CapZoneColor1(); CapsoundPlayed = false; }
-                        if (captimerZ2T1 >= CapOut && Capcolor2 != 1 && captimerZ2T2 == 0 && captimerZ2T3 == 0)
-                        { Capcolor2 = 1; CapZoneColor2(); CapsoundPlayed = false; }
-                        if (captimerZ3T1 >= CapOut && Capcolor3 != 1 && captimerZ3T2 == 0 && captimerZ3T3 == 0)
-                        { Capcolor3 = 1; CapZoneColor3(); CapsoundPlayed = false; }
-
-                        if (captimerZ1T2 >= CapOut && Capcolor1 != 2 && captimerZ1T1 == 0 && captimerZ1T3 == 0)
-                        {
-                            Capcolor1 = 2; CapZoneColor1(); CapsoundPlayed = false;
-                        }
-                        if (captimerZ2T2 >= CapOut && Capcolor2 != 2 && captimerZ2T1 == 0 && captimerZ2T3 == 0)
-                        {
-                            Capcolor2 = 2; CapZoneColor2(); CapsoundPlayed = false;
-                        }
-                        if (captimerZ3T2 >= CapOut && Capcolor3 != 2 && captimerZ3T1 == 0 && captimerZ3T3 == 0)
-                        {
-                            Capcolor3 = 2; CapZoneColor3(); CapsoundPlayed = false;
-                        }
-
-
-
-                        if (captimerZ1T3 >= CapOut && Capcolor1 != 3 && captimerZ1T1 == 0 && captimerZ1T2 == 0)
-                        {
-                            Capcolor1 = 3; CapZoneColor1(); CapsoundPlayed = false;
-                        }
-                        if (captimerZ2T3 >= CapOut && Capcolor2 != 3 && captimerZ2T1 == 0 && captimerZ2T2 == 0)
-                        {
-                            Capcolor2 = 3; CapZoneColor2(); CapsoundPlayed = false;
-                        }
-                        if (captimerZ3T3 >= CapOut && Capcolor3 != 3 && captimerZ3T1 == 0 && captimerZ3T2 == 0)
-                        {
-                            Capcolor3 = 3; CapZoneColor3(); CapsoundPlayed = false;
-                        }
-
-
-                        //  CapZoneColor1();  CapZoneColor2();  CapZoneColor3();
-
-                        long myid2 = Session.Player.IdentityId; string factionName_L2 = myid2 == null ? "None" : MyAPIGateway.Session?.Factions?.TryGetPlayerFaction(myid2)?.Tag;
-                        //Friendly/Enemy destroyed sound triggers
-                        if (factionName_L2.Contains(team1.Value))
-                        {
-                            if ((Capcolor1 == 1 || Capcolor2 == 1 || Capcolor3 == 1) && !CapsoundPlayed) { _alertAudio.Cleanup(); CapsoundPlayed = true; BroadcastSound((MyAPIGateway.Session.Player.Character), PlayerNotice.ZoneCaptured); }
-                        }
-                        if (factionName_L2.Contains(team2.Value))
-                        {
-                            if ((Capcolor1 == 2 || Capcolor2 == 2 || Capcolor3 == 2) && !CapsoundPlayed) { _alertAudio.Cleanup(); CapsoundPlayed = true; BroadcastSound((MyAPIGateway.Session.Player.Character), PlayerNotice.ZoneCaptured); }
-                        }
-                        if (factionName_L2.Contains(team3.Value))
-                        {
-                            if ((Capcolor1 == 3 || Capcolor2 == 3 || Capcolor3 == 3) && !CapsoundPlayed) { _alertAudio.Cleanup(); CapsoundPlayed = true; BroadcastSound((MyAPIGateway.Session.Player.Character), PlayerNotice.ZoneCaptured); }
-                        }
-                        //Lost cap sound trigger
-                        if ((Capcolor1 == 0 || Capcolor2 == 0 || Capcolor3 == 0) && !LostCapsoundPlayed) { _alertAudio.Cleanup(); LostCapsoundPlayed = true; BroadcastSound((MyAPIGateway.Session.Player.Character), PlayerNotice.ZoneLost); }
-
-                        int team1tickets = Team1Tickets.Value; int team2tickets = Team2Tickets.Value; int team3tickets = Team3Tickets.Value;
-                        int tempVicCountT1 = 0; int tempVicCountT2 = 0; int tempVicCountT3 = 0;
-                        if (captimerZ1T1 >= CapOut) { tempVicCountT1++; }
-                        if (captimerZ2T1 >= CapOut) { tempVicCountT1++; }
-                        if (captimerZ3T1 >= CapOut) { tempVicCountT1++; }
-                        if (captimerZ1T2 >= CapOut) { tempVicCountT2++; }
-                        if (captimerZ2T2 >= CapOut) { tempVicCountT2++; }
-                        if (captimerZ3T2 >= CapOut) { tempVicCountT2++; }
-                        if (captimerZ1T3 >= CapOut) { tempVicCountT3++; }
-                        if (captimerZ2T3 >= CapOut) { tempVicCountT3++; }
-                        if (captimerZ3T3 >= CapOut) { tempVicCountT3++; }
-                        string VictoryTimerT1; string VictoryTimerT2; string VictoryTimerT3;
-                        string VictoryTimerSecondsT1; string VictoryTimerSecondsT2; string VictoryTimerSecondsT3;
-                        string VictoryTimerMinutesT1; string VictoryTimerMinutesT2; string VictoryTimerMinutesT3;
-                        if (tempVicCountT1 == 0)
-
-                        {
-                            VictoryTimerT1 = " [INF]";
-                        }
-                        else
-                        {
-                            VictoryTimerMinutesT1 = (((team2tickets) / 60) / tempVicCountT1).ToString();
-                            VictoryTimerSecondsT1 = ((team2tickets / tempVicCountT1) % 60).ToString();
-                            if (VictoryTimerSecondsT1.Length == 1) { VictoryTimerSecondsT1 = "0" + VictoryTimerSecondsT1; }
-                            if (VictoryTimerSecondsT1.Length == 0) { VictoryTimerSecondsT1 = "00"; }
-                            if (VictoryTimerMinutesT1.Length == 1) { VictoryTimerMinutesT1 = "0" + VictoryTimerMinutesT1; }
-                            if (VictoryTimerMinutesT1.Length == 0) { VictoryTimerMinutesT1 = "00"; }
-                            VictoryTimerT1 = " [" + VictoryTimerMinutesT1 + ":" + VictoryTimerSecondsT1 + "] ";
-                        }
-
-                        if (tempVicCountT2 == 0)
-                        {
-                            VictoryTimerT2 = " [INF]";
-                        }
-                        else
-                        {
-                            VictoryTimerMinutesT2 = (((team1tickets) / 60) / tempVicCountT2).ToString();
-                            VictoryTimerSecondsT2 = ((team1tickets / tempVicCountT2) % 60).ToString();
-
-                            if (VictoryTimerSecondsT2.Length == 1)
-                                VictoryTimerSecondsT2 = "0" + VictoryTimerSecondsT2;
-
-                            if (VictoryTimerSecondsT2.Length == 0)
-                                VictoryTimerSecondsT2 = "00";
-
-                            if (VictoryTimerMinutesT2.Length == 1)
-                                VictoryTimerMinutesT2 = "0" + VictoryTimerMinutesT2;
-
-                            if (VictoryTimerMinutesT2.Length == 0)
-                                VictoryTimerMinutesT2 = "00";
-
-                            VictoryTimerT2 = " [" + VictoryTimerMinutesT2 + ":" + VictoryTimerSecondsT2 + "] ";
-
-                        }
-
-                        if (tempVicCountT3 == 0)
-                        {
-                            VictoryTimerT3 = " [INF]";
-                        }
-                        else
-                        {
-                            VictoryTimerMinutesT3 = (((team2tickets) / 60) / tempVicCountT3).ToString();
-                            VictoryTimerSecondsT3 = ((team2tickets / tempVicCountT3) % 60).ToString();
-
-                            if (VictoryTimerSecondsT3.Length == 1)
-                                VictoryTimerSecondsT3 = "0" + VictoryTimerSecondsT3;
-
-                            if (VictoryTimerSecondsT3.Length == 0)
-                                VictoryTimerSecondsT3 = "00";
-
-                            if (VictoryTimerMinutesT3.Length == 1)
-                                VictoryTimerMinutesT3 = "0" + VictoryTimerMinutesT3;
-
-                            if (VictoryTimerMinutesT3.Length == 0)
-                                VictoryTimerMinutesT3 = "00";
-
-                            VictoryTimerT3 = " [" + VictoryTimerMinutesT3 + ":" + VictoryTimerSecondsT3 + "] ";
-
-                        }
-
-                        string adjustedTicketsT1 = team1tickets.ToString();
-
-                        if (adjustedTicketsT1.Length == 1)
-                            adjustedTicketsT1 = "000" + adjustedTicketsT1;
-                        if (adjustedTicketsT1.Length == 2)
-                            adjustedTicketsT1 = "00" + adjustedTicketsT1;
-                        if (adjustedTicketsT1.Length == 3)
-                            adjustedTicketsT1 = "0" + adjustedTicketsT1;
-
-                        string adjustedTicketsT2 = team2tickets.ToString();
-
-                        if (adjustedTicketsT2.Length == 1)
-                            adjustedTicketsT2 = "000" + adjustedTicketsT2;
-                        if (adjustedTicketsT2.Length == 2)
-                            adjustedTicketsT2 = "00" + adjustedTicketsT2;
-                        if (adjustedTicketsT2.Length == 3)
-                            adjustedTicketsT2 = "0" + adjustedTicketsT2;
-
-                        string adjustedTicketsT3 = team3tickets.ToString();
-
-                        if (adjustedTicketsT3.Length == 1)
-                            adjustedTicketsT3 = "000" + adjustedTicketsT3;
-                        if (adjustedTicketsT3.Length == 2)
-                            adjustedTicketsT3 = "00" + adjustedTicketsT3;
-                        if (adjustedTicketsT3.Length == 3)
-                            adjustedTicketsT3 = "0" + adjustedTicketsT3;
-
-                        ticketmessage.Message.Clear();
-
-                        if (ThreeTeams.Value == 0)
-                        {
-                            ticketmessage.Message.Append(
-                                "<color=tomato>" + t_tempteam1 + "<color=white> :" + adjustedTicketsT1 + VictoryTimerT1 + " vs " +
-                                "<color=dodgerblue>" + t_tempteam2 + "<color=white> :" + adjustedTicketsT2 + VictoryTimerT2);
-                        }
-                        else
-                        {
-                            ticketmessage.Message.Append(
-                                "<color=tomato>" + t_tempteam1 + "<color=white> :" + adjustedTicketsT1 + VictoryTimerT1 +
-                                " <color=dodgerblue>" + t_tempteam2 + "<color=white> :" + adjustedTicketsT2 + VictoryTimerT2 +
-                                " <color=green>" + t_tempteam3 + "<color=white> :" + adjustedTicketsT3 + VictoryTimerT3);
-                        }
-
-                        ZoneControl1 = ""; ZoneControl2 = ""; ZoneControl3 = "";
-                        UpdateCapZone1(); UpdateCapZone2(); UpdateCapZone3();
-
-                        string minutes = (((matchtime - timer) / 60) / 60).ToString();
-                        if (minutes.Length == 1)
-                        {
-                            minutes = "0" + minutes;
-                        }
-                        if (minutes.Length == 0)
-                        {
-                            minutes = "00";
-                        }
-
-                        string seconds = ((matchtime - timer) / 60 - int.Parse(minutes) * 60).ToString();
-                        if (seconds.Length == 1)
-                        {
-                            seconds = "0" + seconds;
-                        }
-                        if (seconds.Length == 0)
-                        {
-                            seconds = "00";
-                        }
-                        //this is where the timer is shown
-                        if (GameModeSwitch.Value == 5)
-                        {
-                            string tempteam1 = team1.Value; string tempteam2 = team2.Value; string tempteam3 = team3.Value;
-                            timerMessage.Message.Clear();
-                            timerMessage.Message.Append(" Time: " + minutes + ":" + seconds
-                                + "\n" + " " + capProgress1 + "\n" + capProgress2 + "\n" + capProgress3);
-                        }
-                        if (GameModeSwitch.Value != 5)
-                        {
-                            string tempteam1 = team1.Value; string tempteam2 = team2.Value; string tempteam3 = team3.Value;
-                            timerMessage.Message.Clear();
-                            timerMessage.Message.Append(" Time: " + minutes + ":" + seconds
-                                + "\n" + " " + hudCap1 + " | " + hudCap2 + " | " + hudCap3);
-                        }
-
-
-                    }
-                    integretyMessage.Message.Clear(); integretyMessage.Message.Append(temp_text);
+                    catch (Exception) { }
+                    integretyMessage.Message.Clear();
+                    integretyMessage.Message.Append(tt);
                 }
 
                 if (vState == ViewState.ExitView)
@@ -2833,138 +1446,17 @@ namespace klime.PointCheck
             }
 
         }
-        public static void Team1Wins()
-        {
-            LocalMatchState = 0;
-            Static.MyNetwork.TransmitToServer(new BasicPacket(8), true, true);
-            MyAPIGateway.Utilities.ShowMessage("GM", t_tempteam1 + "Wins");
-        }
-        public static void Team2Wins()
-        {
-            LocalMatchState = 0;
-            Static.MyNetwork.TransmitToServer(new BasicPacket(8), true, true);
-            MyAPIGateway.Utilities.ShowMessage("GM", t_tempteam2 + "Wins");
-        }
-        public static void Team3Wins()
-        {
-            LocalMatchState = 0;
-            Static.MyNetwork.TransmitToServer(new BasicPacket(8), true, true);
-            MyAPIGateway.Utilities.ShowMessage("GM", t_tempteam3 + "Wins");
-        }
-
-
-        public static void GameMode_1Cap()
-        {
-            //MyAPIGateway.Utilities.ShowMessage("GM" , "One Capture Zone Active");
-            Local_GameModeSwitch = 1;
-        }
-
-        public static void GameMode_2Cap()
-        {
-            //MyAPIGateway.Utilities.ShowMessage("GM" , "Two Capture Zones Active");
-            Local_GameModeSwitch = 2;
-        }
-
-        public static void GameMode_3Cap()
-        {
-            //MyAPIGateway.Utilities.ShowMessage("GM" , "Three Capture Zones Active");
-            Local_GameModeSwitch = 3;
-        }
-        public static void GameMode_NoCap()
-        {
-            //MyAPIGateway.Utilities.ShowMessage("GM" , "Three Capture Zones Active");
-            Local_GameModeSwitch = 4;
-        }
-        public static void GameMode_CrazyCap()
-        {
-            //MyAPIGateway.Utilities.ShowMessage("GM" , "Three Capture Zones Active");
-            Local_GameModeSwitch = 5;
-        }
 
         public static void There_Is_A_Problem()
         {
             Local_ProblemSwitch = 1;
         }
-
+       
         public static void There_Is_A_Solution()
         {
             Local_ProblemSwitch = 0;
         }
 
-        
-
-        public void GameMode_Set()
-        {
-            GameModeSwitch.Value = Local_GameModeSwitch;
-
-            switch (GameModeSwitch.Value)
-            {
-                case 1:
-                    CapOut = 20;
-                    ctrpoint = new Vector3(0, 0, 0);
-                    ctrpoint2 = new Vector3(50000, 0, 0);
-                    ctrpoint3 = new Vector3(0, 50000, 0);
-                    capdist = 2500;
-                    capdistCenter = 2500;
-                    //MyAPIGateway.Utilities.ShowMessage("GM" , "capdist set to " + capdist);
-
-                    break;
-                case 2:
-                    CapOut = 20;
-                    ctrpoint = new Vector3(0, 3500, 0);
-                    ctrpoint2 = new Vector3(0, -3500, 0);
-                    ctrpoint3 = new Vector3(0, 50000, 0);
-                    capdist = 1500;
-                    capdistCenter = 1500;
-                    //MyAPIGateway.Utilities.ShowMessage("GM" , "capdist set to " + capdist);
-                    break;
-                case 3:
-                    CapOut = 20;
-                    ctrpoint = new Vector3(0, 0, 0);
-                    ctrpoint2 = new Vector3(4500, 1500, 9000);
-                    ctrpoint3 = new Vector3(-4500, -1500, -9000);
-                    capdist = 1000;
-                    capdistCenter = 1000;
-                    //MyAPIGateway.Utilities.ShowMessage("GM" , "capdist set to " + capdist);
-                    break;
-                case 4:
-                    CapOut = 20;
-                    ctrpoint = new Vector3(150000, 150000, 150000);
-                    ctrpoint2 = new Vector3(150000, 150000, 150000);
-                    ctrpoint3 = new Vector3(150000, 150000, 150000);
-                    capdist = 1000;
-                    capdistCenter = 1000;
-                    //MyAPIGateway.Utilities.ShowMessage("GM" , "capdist set to " + capdist);
-                    break;
-                case 5:
-
-                    if (IAmTheCaptainNow)
-                    {
-                        CapOut = 10;
-                        ctrpoint = CrazyKing();
-                        ClientRandVector3D = ctrpoint;
-                        CaptainRandVector3D.Value = ClientRandVector3D;
-                        CaptainRandVector3D.Push();
-                        MyAPIGateway.Utilities.ShowMessage("GM", "RandomVector3d:" + ctrpoint.ToString());
-                    }
-                    else if (!IAmTheCaptainNow)
-                    {
-                        CapOut = 10;
-                        CaptainRandVector3D.Fetch();
-                        ClientRandVector3D = CaptainRandVector3D.Value;
-                        ctrpoint = CaptainRandVector3D.Value;
-                        MyAPIGateway.Utilities.ShowMessage("GM", "ClientRandomVector3d:" + ctrpoint.ToString());
-                    }
-                    ctrpoint2 = new Vector3(150000, 150000, 150000);
-                    ctrpoint3 = new Vector3(150000, 150000, 150000);
-                    capdist = 1000;
-                    capdistCenter = 1000;
-                    //MyAPIGateway.Utilities.ShowMessage("GM" , "capdist set to " + capdist);
-                    break;
-            }
-
-
-        }
         public enum PlayerNotice
         {
             ZoneCaptured,
@@ -2972,38 +1464,7 @@ namespace klime.PointCheck
             EnemyDestroyed,
             TeamDestroyed,
         }
-        private void BroadcastSound(IMyCharacter character, PlayerNotice notice)
-        {
-            try
-            {
-                if (character == null || _alertAudio == null || _alertAudio.IsPlaying) return;
 
-                _alertAudio.CustomVolume = MyAPIGateway.Session.Config.GameVolume * 3f;
-
-                //_alertAudio.Entity = null;
-                _alertAudio.Entity = (MyEntity)character;
-                MySoundPair pair = null;
-                switch (notice)
-                {
-                    case PlayerNotice.ZoneCaptured:
-                        pair = _ZoneCaptured;
-                        break;
-                    case PlayerNotice.ZoneLost:
-                        pair = _ZoneLost;
-                        break;
-                    case PlayerNotice.EnemyDestroyed:
-                        pair = _EnemyDestroyed;
-                        break;
-                    case PlayerNotice.TeamDestroyed:
-                        pair = _TeamDestroyed;
-                        break;
-                }
-                if (_alertAudio.Entity != null && pair != null) _alertAudio.PlaySound(pair, false, false, false, true, false, null, true);
-            }
-            catch
-            {
-            }
-        }
         public static IMyPlayer GetOwner(long v)
         {
             if (all_players != null && all_players.ContainsKey(v))
@@ -3057,18 +1518,6 @@ namespace klime.PointCheck
 
 
 
-        public static Vector3 CrazyKing()
-        {
-            int randombracketlow = -3000, randombrackethigh = 3000;
-
-            int RandomInt1 = MyUtils.GetRandomInt(randombracketlow, randombrackethigh);
-            int RandomInt2 = MyUtils.GetRandomInt(-6000, 6000);
-            int RandomInt3 = MyUtils.GetRandomInt(randombracketlow, randombrackethigh);
-            Vector3 CrazyOutputVector = new Vector3(RandomInt1, RandomInt2, RandomInt3);
-
-            //MyAPIGateway.Utilities.ShowMessage("GM", "RandomVector3d:" + CrazyOutputVector.ToString());
-            return CrazyOutputVector;
-        }
     }
 
 

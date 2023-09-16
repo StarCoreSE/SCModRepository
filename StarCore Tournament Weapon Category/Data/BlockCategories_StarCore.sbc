@@ -182,6 +182,8 @@
         <string>DampeningEnhancer_x2_Large</string>
         <string>SC_PowerControlSystem_L</string>
         <string>LargeLargeBlockUpgrade</string>
+        <string>AQD_LG_GyroBooster</string>
+        <string>AQD_LG_GyroUpgrade</string>
         <string>SC_Radome</string>
 		
         

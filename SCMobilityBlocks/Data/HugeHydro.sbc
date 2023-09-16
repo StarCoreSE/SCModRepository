@@ -18,12 +18,12 @@
             <ThrusterType>Hydrogen</ThrusterType>
             <SilenceableByShipSoundSystem>true</SilenceableByShipSoundSystem>
             <Components>
-                <Component Subtype="SteelPlate" Count="100" />
+                <Component Subtype="SteelPlate" Count="1000" />
                 <Component Subtype="Construction" Count="150" />
                 <Component Subtype="MetalGrid" Count="250" />
                 <Component Subtype="LargeTube" Count="40" />
                 <Component Subtype="Construction" Count="30" />
-                <Component Subtype="SteelPlate" Count="50" />
+                <Component Subtype="SteelPlate" Count="500" />
             </Components>
             <CriticalComponent Subtype="LargeTube" Index="0" />
             <Center x="1" y="1" z="2" />
