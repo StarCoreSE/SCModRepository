@@ -21,7 +21,6 @@
 				<Component Subtype="SteelPlate" Count="300"/>
 			</Components>
 			<CriticalComponent Subtype="Computer" Index="0"/>
-			<GeneralDamageMultiplier>0.1</GeneralDamageMultiplier>
 			<MountPoints>
 				<MountPoint Side="Bottom" StartX="0.1" StartY="0.1" EndX="0.9" EndY="0.9" Default="true"/>
 				<MountPoint Side="Top" StartX="0.1" StartY="0.1" EndX="0.9" EndY="0.9"/>
@@ -72,7 +71,6 @@
 				<Component Subtype="SteelPlate" Count="300"/>
 			</Components>
 			<CriticalComponent Subtype="Computer" Index="0"/>
-			<GeneralDamageMultiplier>0.1</GeneralDamageMultiplier>
 			<MountPoints>
 				<MountPoint Side="Bottom" StartX="0.1" StartY="0.1" EndX="0.9" EndY="0.9" Default="true"/>
 				<MountPoint Side="Top" StartX="0.1" StartY="0.1" EndX="0.9" EndY="0.9"/>
@@ -124,7 +122,6 @@
 				<Component Subtype="SteelPlate" Count="300"/>
 			</Components>
 			<CriticalComponent Subtype="Computer" Index="0"/>
-			<GeneralDamageMultiplier>0.1</GeneralDamageMultiplier>
 			<MountPoints>
 				<MountPoint Side="Bottom" StartX="0.1" StartY="0.1" EndX="0.9" EndY="0.9" Default="true"/>
 				<MountPoint Side="Top" StartX="0.1" StartY="0.1" EndX="0.9" EndY="0.9"/>

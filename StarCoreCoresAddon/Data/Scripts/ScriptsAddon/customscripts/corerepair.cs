@@ -17,10 +17,6 @@ namespace StarCoreCoreRepair
     public class StarCoreCoreRepair : MyGameLogicComponent
     {
         private IMyBeacon shipCore;
-        private int triggerTick = 0;
-        private int repairCountdown = 0;
-        private const int COUNTDOWN_TICKS = 10 * 60;
-        private const int REPAIR_DELAY = 30 * 60;
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
@@ -41,47 +37,10 @@ namespace StarCoreCoreRepair
         {
             if (shipCore == null || shipCore.CubeGrid.Physics == null) return;
 
-            string gridName = shipCore.CubeGrid.DisplayName;  // Obtain grid name
-
             if (!shipCore.IsFunctional)
             {
-                triggerTick += 1;
-                if (triggerTick >= COUNTDOWN_TICKS)
-                {
-                    MyAPIGateway.Utilities.ShowNotification("Resistance set to 100%", 2000);
-                    MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(gridName, 0f); // 0f for 100% resistance
-                    repairCountdown = REPAIR_DELAY;
-                    triggerTick = 0;
-                }
+                MyAPIGateway.Utilities.ShowNotification("Core is no longer functional", 2000, MyFontEnum.Red);
             }
-            else
-            {
-                triggerTick = 0;
-                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(gridName, 1f); // Reset to normal resistance
-            }
-
-            if (repairCountdown > 0)
-            {
-                repairCountdown -= 1;
-                if (repairCountdown <= 0)
-                {
-                    DoRepair();
-                    MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("RepairParticle", shipCore.GetPosition());
-                    MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("RepairSound", shipCore.GetPosition());
-                    MyAPIGateway.Utilities.ShowNotification("Block Repaired", 2000);
-                }
-            }
-        }
-
-        private void DoRepair()
-        {
-            if (shipCore == null || shipCore.CubeGrid.Physics == null) return;
-
-            IMySlimBlock slimBlock = shipCore.SlimBlock;
-            if (slimBlock == null) return;
-
-            float repairAmount = 20;
-            slimBlock.IncreaseMountLevel(repairAmount, 0L, null, 0f, false, MyOwnershipShareModeEnum.Faction);
         }
 
         private void ShipCoreEnabledChanged(IMyTerminalBlock obj)
@@ -90,7 +49,6 @@ namespace StarCoreCoreRepair
             if (shipCore.IsFunctional)
             {
                 MyAPIGateway.Utilities.ShowNotification("Block is functional. Resetting countdown.", 2000);
-                triggerTick = 0;
             }
         }
 
