@@ -7,6 +7,7 @@ using VRage.Game;
 using Sandbox.ModAPI.Ingame;
 using VRage.Game.Components;
 using VRage.Utils;
+using IMyCockpit = Sandbox.ModAPI.Ingame.IMyCockpit;
 
 namespace YourModNamespace
 {
@@ -21,7 +22,8 @@ namespace YourModNamespace
 
         public override void UpdateAfterSimulation()
         {
-            Vector3D? playerPosition = GetPlayerPosition();
+
+            Vector3D? playerPosition = PlayerPosition;
             if (!playerPosition.HasValue)
             {
                 return;  // If playerPosition is null, exit the method
@@ -43,26 +45,30 @@ namespace YourModNamespace
         }
 
 
-        private Vector3D? GetPlayerPosition()
+        private static Vector3D? PlayerPosition
         {
-            var session = MyAPIGateway.Session?.Player?.Controller?.ControlledEntity?.Entity;
-            if (session == null)
+            get
             {
-                MyLog.Default.WriteLine("Null object encountered in GetPlayerPosition");
-                return null;
+                var spectator = MyAPIGateway.Session.IsCameraUserControlledSpectator;
+                var session = MyAPIGateway.Session?.Player?.Controller?.ControlledEntity?.Entity;
+                var cockpit = MyAPIGateway.Session.ControlledObject?.Entity as IMyCockpit;
+                if (session == null || cockpit == null && !spectator)
+                {
+                    // MyLog.Default.WriteLine("Null object encountered in GetPlayerPosition, or not in cockpit");
+                    return null;
+                }
+                return session.GetPosition();
             }
-            return session.GetPosition();
         }
 
+        private static Vector3D CalculateDirectionToOrigin(Vector3D playerPosition) => Vector3D.Normalize(Vector3D.Zero - playerPosition);
 
-        private Vector3D CalculateDirectionToOrigin(Vector3D playerPosition) => Vector3D.Normalize(Vector3D.Zero - playerPosition);
+        private static float CalculateBoxSpacing(double distanceToOrigin) => Math.Max((float)(distanceToOrigin / NumberOfBoxes), 10f);
 
-        private float CalculateBoxSpacing(double distanceToOrigin) => Math.Max((float)(distanceToOrigin / NumberOfBoxes), 10f);
+        private static MatrixD CalculateRotationMatrix(Vector3D directionToOrigin) => MatrixD.CreateWorld(Vector3D.Zero, directionToOrigin, Vector3D.Up);
 
-        private MatrixD CalculateRotationMatrix(Vector3D directionToOrigin) => MatrixD.CreateWorld(Vector3D.Zero, directionToOrigin, Vector3D.Up);
-
-        // Modify this existing method
-        private void DrawBlueBoxes(double distanceToOrigin, Vector3D directionToOrigin, MatrixD rotationMatrix)
+ 
+        private static void DrawBlueBoxes(double distanceToOrigin, Vector3D directionToOrigin, MatrixD rotationMatrix)
         {
 
             Vector3 halfExtents = new Vector3(2.5f, 2.5f, 2.5f);
@@ -100,7 +106,7 @@ namespace YourModNamespace
 
 
 
-        private void DrawRedBoxes(Vector3D playerPosition, Vector3D directionToOrigin, MatrixD rotationMatrix, float boxSpacing)
+        private static void DrawRedBoxes(Vector3D playerPosition, Vector3D directionToOrigin, MatrixD rotationMatrix, float boxSpacing)
         {
             Vector3 halfExtents = new Vector3(2.5f, 2.5f, 2.5f);
             BoundingBoxD redBox = new BoundingBoxD(-halfExtents, halfExtents);
@@ -113,14 +119,14 @@ namespace YourModNamespace
             }
         }
 
-        private void DrawBox(BoundingBoxD box, Vector3D position, Color color, MatrixD rotationMatrix)
+        private static void DrawBox(BoundingBoxD box, Vector3D position, Color color, MatrixD rotationMatrix)
         {
             BoundingBoxD transformedBox = box.TransformFast(rotationMatrix);
             transformedBox.Translate(position);
             MySimpleObjectDraw.DrawTransparentBox(ref MatrixD.Identity, ref transformedBox, ref color, MySimpleObjectRasterizer.Solid, 1, 0.1f, MyStringId.GetOrCompute("Square"));
         }
 
-        private void DrawGreenLine(double distanceToOrigin, Vector3D playerPosition, Vector3D directionToOrigin)
+        private static void DrawGreenLine(double distanceToOrigin, Vector3D playerPosition, Vector3D directionToOrigin)
         {
             if (distanceToOrigin <= 7000) return;
 
@@ -137,7 +143,7 @@ namespace YourModNamespace
 
 
 
-        private void DrawPerpendicularLine(Vector3D boxPosition, MatrixD rotationMatrix, double lineLength = 50, Color? color = null)
+        private static void DrawPerpendicularLine(Vector3D boxPosition, MatrixD rotationMatrix, double lineLength = 50, Color? color = null)
         {
 
             Vector3D perpendicularDir = Vector3D.CalculatePerpendicularVector(rotationMatrix.Forward);

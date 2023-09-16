@@ -1742,7 +1742,7 @@
       <DestroySound>WepLrgWarheadExpl</DestroySound>
       <PCU>25</PCU>
             <LeakPercent>0</LeakPercent>
-            <GasExplosionMaxRadius>20</GasExplosionMaxRadius>
+            <GasExplosionMaxRadius>50</GasExplosionMaxRadius>
             <GasExplosionNeededVolumeToReachMaxRadius>1</GasExplosionNeededVolumeToReachMaxRadius>
             <GasExplosionDamageMultiplier>0.00015</GasExplosionDamageMultiplier>
       <GasExplosionSound>ArcHydrogenExplosion</GasExplosionSound>
@@ -1827,7 +1827,7 @@
       <EmissiveColorPreset>Extended</EmissiveColorPreset>
       <PCU>25</PCU>
             <LeakPercent>0</LeakPercent>
-            <GasExplosionMaxRadius>20</GasExplosionMaxRadius>
+            <GasExplosionMaxRadius>50</GasExplosionMaxRadius>
             <GasExplosionNeededVolumeToReachMaxRadius>1</GasExplosionNeededVolumeToReachMaxRadius>
             <GasExplosionDamageMultiplier>0.00015</GasExplosionDamageMultiplier>
       <GasExplosionSound>HydrogenExplosion</GasExplosionSound>
@@ -1846,7 +1846,7 @@
             </Id>
             <DisplayName>DisplayName_Block_HydrogenTankSmall</DisplayName>
             <Icon>Textures\GUI\Icons\Cubes\largeHydrogenTankSmall.dds</Icon>
-            <Description>Description_HydrogenTank</Description>
+            <Description>WARNING: EXTREMELY VOLITILE</Description>
             <Public>true</Public>
             <CubeSize>Large</CubeSize>
             <GuiVisible>false</GuiVisible>
@@ -1903,9 +1903,9 @@
             <EmissiveColorPreset>Extended</EmissiveColorPreset>
             <PCU>25</PCU>
             <LeakPercent>0</LeakPercent>
-            <GasExplosionMaxRadius>10</GasExplosionMaxRadius>
+            <GasExplosionMaxRadius>60</GasExplosionMaxRadius>
             <GasExplosionNeededVolumeToReachMaxRadius>1</GasExplosionNeededVolumeToReachMaxRadius>
-            <GasExplosionDamageMultiplier>0.00015</GasExplosionDamageMultiplier>
+            <GasExplosionDamageMultiplier>0.0015</GasExplosionDamageMultiplier>
             <GasExplosionSound>HydrogenExplosion</GasExplosionSound>
             <GasExplosionEffect>Hydrogen_Explosion_Particle</GasExplosionEffect>
             <TieredUpdateTimes>
