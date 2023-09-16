@@ -93,12 +93,12 @@ namespace Invalid.spawnoneteam
 
             if (prefabMap.ContainsKey(prefabPacket.PrefabName))
             {
-                string factionName = "BLU";  // Set to BLU team
+                string factionName = prefabPacket.FactionName; // Set to faction name from packet
                 SpawnRandomPrefabs(new List<string>(prefabMap.Keys), prefabPacket.PrefabAmount, factionName);
             }
             else
             {
-                MyVisualScriptLogicProvider.SendChatMessage($"Prefab {prefabPacket.PrefabName} not found", "spawnblueteam");
+                MyVisualScriptLogicProvider.SendChatMessage($"Prefab {prefabPacket.PrefabName} not found", "spawnteam");
             }
         }
 
@@ -106,46 +106,101 @@ namespace Invalid.spawnoneteam
 
         private void OnMessageEntered(string messageText, ref bool sendToOthers)
         {
-            if (!messageText.StartsWith("/spawnblueteam", StringComparison.OrdinalIgnoreCase)) return;
+            // Check if the message is a command we are interested in
+            // TODO: change the logic so everything is under the first check ree
             string[] parts = messageText.Split(' ');
 
-            if (parts.Length == 1)
+            if (messageText.StartsWith("/spawnblueteam", StringComparison.OrdinalIgnoreCase))
             {
-                ShowPrefabList();
-            }
-            if (parts.Length >= 2)
-            {
-                int spawnCount;
-                if (int.TryParse(parts[1], out spawnCount))
+
+
+
+                if (parts.Length == 1)
                 {
-                    if (spawnCount > 0)
+                    ShowPrefabList();
+                }
+                if (parts.Length >= 2)
+                {
+                    int spawnCount;
+                    if (int.TryParse(parts[1], out spawnCount))
                     {
-                        string factionName = "BLU";  // Set to BLU team
-
-                        List<string> prefabNames = new List<string>(prefabMap.Keys);
-
-                        for (int i = 0; i < spawnCount; i++)
+                        if (spawnCount > 0)
                         {
-                            string randomPrefabName = prefabNames[MyUtils.GetRandomInt(0, prefabNames.Count)];
+                            string factionName = "BLU";  // Set to BLU team
 
-                            PrefabSpawnPacket prefabSpawnPacket = new PrefabSpawnPacket(randomPrefabName, 1, factionName);
+                            List<string> prefabNames = new List<string>(prefabMap.Keys);
 
-                            byte[] data = MyAPIGateway.Utilities.SerializeToBinary(prefabSpawnPacket);
-                            MyAPIGateway.Multiplayer.SendMessageTo(netID, data, MyAPIGateway.Multiplayer.ServerId);
+                            for (int i = 0; i < spawnCount; i++)
+                            {
+                                string randomPrefabName = prefabNames[MyUtils.GetRandomInt(0, prefabNames.Count)];
+
+                                PrefabSpawnPacket prefabSpawnPacket = new PrefabSpawnPacket(randomPrefabName, 1, factionName);
+
+                                byte[] data = MyAPIGateway.Utilities.SerializeToBinary(prefabSpawnPacket);
+                                MyAPIGateway.Multiplayer.SendMessageTo(netID, data, MyAPIGateway.Multiplayer.ServerId);
+                            }
+
+                            MyAPIGateway.Utilities.ShowMessage("spawnblueteam", $"Spawned: {spawnCount} prefabs on BLU team.");
                         }
-
-                        MyAPIGateway.Utilities.ShowMessage("spawnblueteam", $"Spawned: {spawnCount} prefabs on BLU team.");
+                        else
+                        {
+                            MyAPIGateway.Utilities.ShowMessage("spawnblueteam", "Invalid spawn count. Please specify a positive number.");
+                        }
                     }
                     else
                     {
-                        MyAPIGateway.Utilities.ShowMessage("spawnblueteam", "Invalid spawn count. Please specify a positive number.");
+                        MyAPIGateway.Utilities.ShowMessage("spawnblueteam", "Invalid spawn count. Please specify a valid number.");
                     }
                 }
-                else
-                {
-                    MyAPIGateway.Utilities.ShowMessage("spawnblueteam", "Invalid spawn count. Please specify a valid number.");
-                }
+
+
             }
+            else if (messageText.StartsWith("/spawnredteam", StringComparison.OrdinalIgnoreCase))
+            {
+
+
+
+                if (parts.Length == 1)
+                {
+                    ShowPrefabList();
+                }
+                if (parts.Length >= 2)
+                {
+                    int spawnCount;
+                    if (int.TryParse(parts[1], out spawnCount))
+                    {
+                        if (spawnCount > 0)
+                        {
+                            string factionName = "RED";  // Set to BLU team
+
+                            List<string> prefabNames = new List<string>(prefabMap.Keys);
+
+                            for (int i = 0; i < spawnCount; i++)
+                            {
+                                string randomPrefabName = prefabNames[MyUtils.GetRandomInt(0, prefabNames.Count)];
+
+                                PrefabSpawnPacket prefabSpawnPacket = new PrefabSpawnPacket(randomPrefabName, 1, factionName);
+
+                                byte[] data = MyAPIGateway.Utilities.SerializeToBinary(prefabSpawnPacket);
+                                MyAPIGateway.Multiplayer.SendMessageTo(netID, data, MyAPIGateway.Multiplayer.ServerId);
+                            }
+
+                            MyAPIGateway.Utilities.ShowMessage("spawnredteam", $"Spawned: {spawnCount} prefabs on RED team.");
+                        }
+                        else
+                        {
+                            MyAPIGateway.Utilities.ShowMessage("spawnredteam", "Invalid spawn count. Please specify a positive number.");
+                        }
+                    }
+                    else
+                    {
+                        MyAPIGateway.Utilities.ShowMessage("spawnredteam", "Invalid spawn count. Please specify a valid number.");
+                    }
+                }
+
+
+            }
+            else { return; }
 
             sendToOthers = false;
         }
@@ -175,15 +230,29 @@ namespace Invalid.spawnoneteam
 
         private void SpawnRandomPrefabs(List<string> prefabNames, int spawnCount, string startingFactionName)
         {
-            double maxSpawnRadius = 10000;
+            double maxSpawnRadius = 3000;
 
             List<Vector3D> spawnPositions = new List<Vector3D>();
             Dictionary<string, int> spawnedCounts = new Dictionary<string, int>();
 
-            string currentFactionName = "BLU";  // Set to BLU team
+            string currentFactionName = startingFactionName;  // Set to packet team
+            Vector3D origin = new Vector3D(0, 0, 0);
 
-            // Change the origin to x = -10000, y = 0, z = 0
-            Vector3D origin = new Vector3D(-10000, 0, 0);
+            if (startingFactionName == "BLU")
+
+            {
+                // Change the origin to x = -10000, y = 0, z = 0
+                 origin = (new Vector3D(-6000, 0, 0));
+            }
+
+
+            if (startingFactionName == "RED")
+
+            {
+                // Change the origin to x = -10000, y = 0, z = 0
+                origin = (new Vector3D(6000, 0, 0));
+            }
+
 
             for (int i = 0; i < spawnCount; i++)
             {
