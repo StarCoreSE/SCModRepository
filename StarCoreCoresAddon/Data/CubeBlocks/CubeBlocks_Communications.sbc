@@ -119,6 +119,7 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\Large\beacon.mwm</Model>
 			<Components>
+        <Component Subtype="SteelPlate" Count="300"/>
 				<Component Subtype="Computer" Count="1"/>
 				<Component Subtype="SteelPlate" Count="300"/>
 			</Components>
