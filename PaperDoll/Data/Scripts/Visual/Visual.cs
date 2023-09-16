@@ -1044,7 +1044,7 @@ namespace klime.Visual
         {
             validInputThisTick = ValidInput();
 
-            if (validInputThisTick && IsAdmin(MyAPIGateway.Session.Player) && MyAPIGateway.Input.IsNewKeyPressed(MyKeys.T))
+            if (validInputThisTick && MyAPIGateway.Input.IsNewKeyPressed(MyKeys.T))
             {
                 ToggleViewState();
                 ToggleRequestPaperDoll();
@@ -1579,7 +1579,7 @@ namespace klime.Visual
             return MyAPIGateway.Session.CameraController != null && !gui.ChatEntryVisible && !gui.IsCursorVisible && gui.GetCurrentScreen == MyTerminalPageEnum.None;
         }
 
-        private bool IsAdmin(IMyPlayer s) => s != null && (s.PromoteLevel == MyPromoteLevel.Admin || s.PromoteLevel == MyPromoteLevel.Owner);
+        //private bool IsAdmin(IMyPlayer s) => s != null && (s.PromoteLevel == MyPromoteLevel.Admin || s.PromoteLevel == MyPromoteLevel.Owner);
 
         protected override void UnloadData()
         {
