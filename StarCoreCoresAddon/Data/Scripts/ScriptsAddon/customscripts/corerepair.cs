@@ -17,13 +17,14 @@ namespace StarCoreCoreRepair
     public class StarCoreCoreRepair : MyGameLogicComponent
     {
         private IMyBeacon shipCore;
+        private IMyHudNotification notifStatus = null;
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             if (!MyAPIGateway.Session.IsServer) return;
             shipCore = Entity as IMyBeacon;
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
-            MyAPIGateway.Utilities.ShowNotification("StarCoreCoreRepair Initialized", 2000);
+            SetStatus($"StarCoreCoreRepair Initialized", 5000, MyFontEnum.Green);
         }
 
         public override void UpdateOnceBeforeFrame()
@@ -39,19 +40,31 @@ namespace StarCoreCoreRepair
 
             if (!shipCore.IsFunctional)
             {
-                MyAPIGateway.Utilities.ShowNotification("Core is no longer functional", 2000, MyFontEnum.Red);
-                MyVisualScriptLogicProvider.SetBlockGeneralDamageModifier(shipCore.EntityId.ToString(), 0.1f);
+                SetStatus($"Core is no longer functional. Resetting countdownd", 2000, MyFontEnum.Red);
+                shipCore.BlockGeneralDamageModifier = 0.1f;
             }
         }
-
 
         private void ShipCoreEnabledChanged(IMyTerminalBlock obj)
         {
             if (obj.EntityId != shipCore.EntityId) return;
             if (shipCore.IsFunctional)
             {
-                MyAPIGateway.Utilities.ShowNotification("Block is functional. Resetting countdown.", 2000);
+                SetStatus($"Block is functional. Resetting countdown", 2000, MyFontEnum.Green);
+                shipCore.BlockGeneralDamageModifier = 1.0f;
             }
+        }
+
+        private void SetStatus(string text, int aliveTime = 300, string font = MyFontEnum.Green)
+        {
+            if (notifStatus == null)
+                notifStatus = MyAPIGateway.Utilities.CreateNotification("", aliveTime, font);
+
+            notifStatus.Hide();
+            notifStatus.Font = font;
+            notifStatus.Text = text;
+            notifStatus.AliveTime = aliveTime;
+            notifStatus.Show();
         }
 
         public override void Close()
