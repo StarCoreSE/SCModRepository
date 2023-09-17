@@ -300,11 +300,14 @@ namespace KingOfTheHill
 			if (!MyAPIGateway.Multiplayer.IsServer)
 				return;
 
-			string planetName = zone.GetClosestPlanet();
-			if (!Planets.Any(description => description.Name == planetName))
+			string name = zone.LocationName.Value;
+			if (string.IsNullOrEmpty(name)) {
+				name = zone.GetClosestPlanet();
+			}
+			if (!Planets.Any(description => description.Name == name))
 			{
 				PlanetDescription p = new PlanetDescription() {
-					Name = planetName,
+					Name = name,
 					Scores = new List<ScoreDescription>()
 				};
 
@@ -312,7 +315,7 @@ namespace KingOfTheHill
 			}
 
 			long facId = faction.FactionId;
-			PlanetDescription planet = Planets.Find(w => w.Name == planetName);
+			PlanetDescription planet = Planets.Find(w => w.Name == name);
 			IMyCubeGrid kothGrid = (zone.Entity as IMyCubeBlock).CubeGrid;
 
 			if (!planet.Scores.Any(s => s.FactionId == facId))
@@ -322,7 +325,7 @@ namespace KingOfTheHill
 					FactionName = faction.Name,
 					FactionTag = faction.Tag,
 					Points = 1,
-					PlanetId = planetName,
+					PlanetId = name,
 					GridName = kothGrid.DisplayName
 				});
 			}
@@ -463,11 +466,11 @@ namespace KingOfTheHill
 				if (zone.EncampmentMode.Value)
 				{
 
-					message.Append($"{kothGrid.DisplayName} on {planetName} Encampment Payout");
+					message.Append($"{kothGrid.DisplayName} at {name} Encampment Payout");
 				}
 				else
 				{
-					message.Append($"{kothGrid.DisplayName} on {planetName} under attack");
+					message.Append($"{kothGrid.DisplayName} at {name} under attack");
 
 				}
 			}
@@ -513,18 +516,21 @@ namespace KingOfTheHill
 				return;
 
 			long facId = faction.FactionId;
-			string planetName = zone.GetClosestPlanet();
+			string name = zone.LocationName.Value;
+			if (string.IsNullOrEmpty(name)) {
+				name = zone.GetClosestPlanet();
+			}
 
-			if (!Planets.Any(description => description.Name == planetName))
+			if (!Planets.Any(description => description.Name == name))
 			{
 				var world = new PlanetDescription() {
-					Name = planetName,
+					Name = name,
 					Scores = new List<ScoreDescription>()
 				};
 				Planets.Add(world);
 			}
 
-			PlanetDescription planet = Planets.Find(p => p.Name == planetName);
+			PlanetDescription planet = Planets.Find(p => p.Name == name);
 			if (!planet.Scores.Any(s => s.FactionId == facId))
 			{
 				planet.Scores.Add(new ScoreDescription() {
@@ -532,7 +538,7 @@ namespace KingOfTheHill
 					FactionName = faction.Name,
 					FactionTag = faction.Tag,
 					Points = 1,
-					PlanetId = planetName,
+					PlanetId = name,
 					GridName = (zone.Entity as IMyCubeBlock).CubeGrid.DisplayName,
 				});
 			}
