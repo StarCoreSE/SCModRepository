@@ -10,7 +10,7 @@ namespace KingOfTheHill
         public static void Log(MyLogSeverity level, string message)
         {
             MyLog.Default.Log(level, $"[KingOfTheHill] {message}");
-            MyLog.Default.Flush();
+            //MyLog.Default.Flush();
         }
 
         public static bool IsAllowedSpecialOperations(ulong steamId)

@@ -150,6 +150,9 @@ namespace KingOfTheHill.Descriptions
 
         [ProtoMember(50)]
         public int PointsEarnedSincePrize { get; set; }
+		
+        [ProtoMember(51)]
+        public string LocationName { get; set; }
 
         public void Save(IMyEntity ent)
         {
@@ -220,6 +223,7 @@ namespace KingOfTheHill.Descriptions
                 Opacity = 150,
 
                 IsLocationNamed = false,
+				LocationName = "",
 
                 UseComponentReward = true,
                 UseOreReward = false,
