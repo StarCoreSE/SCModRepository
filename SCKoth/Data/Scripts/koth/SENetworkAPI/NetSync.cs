@@ -386,21 +386,24 @@ namespace SENetworkAPI
 			}
 		}
 
-		/// <summary>
-		/// Receives and redirects all property traffic
-		/// </summary>
-		/// <param name="pack">this hold the path to the property and the data to sync</param>
-		internal static void RouteMessage(SyncData pack, ulong sender, long timestamp)
-		{
+        /// <summary>
+        /// Receives and redirects all property traffic
+        /// </summary>
+        /// <param name="pack">this hold the path to the property and the data to sync</param>
+        internal static void RouteMessage(SyncData pack, ulong sender, long timestamp)
+        {
+            // Type-Safety Check: Check if the pack is null
             if (pack == null)
             {
                 MyLog.Default.Error("[NetworkAPI] Property data is null");
                 return;
             }
 
+            // Type-Safety Check: Check if the ID exists in PropertyById
             if (!PropertyById.ContainsKey(pack.Id))
             {
-                MyLog.Default.Error($"[NetworkAPI] ID {pack.Id} not registered in dictionary 'PropertyById'");
+                // Debug Logging: Capture the state of PropertyById
+                MyLog.Default.Error($"[NetworkAPI] ID {pack.Id} not registered in dictionary 'PropertyById'. Current keys: {string.Join(",", PropertyById.Keys)}");
                 return;
             }
 
