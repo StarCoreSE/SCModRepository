@@ -13,7 +13,6 @@ using System;
 using VRage.ModAPI;
 using Sandbox.Game.Entities;
 using VRage.ObjectBuilders;
-using Sandbox.Game;
 
 namespace KingOfTheHill
 {
@@ -99,10 +98,7 @@ namespace KingOfTheHill
 		{
 			Tools.Log(MyLogSeverity.Info, "Initializing");
 
-			ClearScore(); //i want the score to clear every time it restarts. or maybe this happens when the block is placed? eh
-
-
-            MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(8008, PluginHandleIncomingPacket);
+			MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(8008, PluginHandleIncomingPacket);
 			if (!NetworkAPI.IsInitialized)
 			{
 				NetworkAPI.Init(ComId, DisplayName, Keyword);
@@ -304,11 +300,14 @@ namespace KingOfTheHill
 			if (!MyAPIGateway.Multiplayer.IsServer)
 				return;
 
-			string planetName = zone.GetClosestPlanet();
-			if (!Planets.Any(description => description.Name == planetName))
+			string name = zone.LocationName.Value;
+			if (string.IsNullOrEmpty(name)) {
+				name = zone.GetClosestPlanet();
+			}
+			if (!Planets.Any(description => description.Name == name))
 			{
 				PlanetDescription p = new PlanetDescription() {
-					Name = planetName,
+					Name = name,
 					Scores = new List<ScoreDescription>()
 				};
 
@@ -316,7 +315,7 @@ namespace KingOfTheHill
 			}
 
 			long facId = faction.FactionId;
-			PlanetDescription planet = Planets.Find(w => w.Name == planetName);
+			PlanetDescription planet = Planets.Find(w => w.Name == name);
 			IMyCubeGrid kothGrid = (zone.Entity as IMyCubeBlock).CubeGrid;
 
 			if (!planet.Scores.Any(s => s.FactionId == facId))
@@ -326,7 +325,7 @@ namespace KingOfTheHill
 					FactionName = faction.Name,
 					FactionTag = faction.Tag,
 					Points = 1,
-					PlanetId = planetName,
+					PlanetId = name,
 					GridName = kothGrid.DisplayName
 				});
 			}
@@ -384,24 +383,21 @@ namespace KingOfTheHill
 
 					if (zone.SpawnIntoPrizeBox.Value)
 					{
-						CrashingThisPlaneTheMessageIHaveToSendToTheClientSpecificallyFuckingKeen();
-                        //CrashingThisPlane();
-                        if (prizebox == null)
+						if (prizebox == null)
 						{
 							Tools.Log(MyLogSeverity.Error, $"Could not find prize box on grid: {kothGrid.DisplayName} - {kothGrid.EntityId}");
 						}
 						else if (prizebox.GetInventory().CanItemsBeAdded(amount, definitionId))
 						{
 							prizebox.GetInventory().AddItems(amount, inventoryItem.Content);
-                         
-                        }
+						}
 					}
 					else
 					{
 						if (zone.Entity.GetInventory().CanItemsBeAdded(amount, definitionId))
 						{
-							zone.Entity.GetInventory().AddItems(amount, inventoryItem.Content);                           
-                        }
+							zone.Entity.GetInventory().AddItems(amount, inventoryItem.Content);
+						}
 					}
 				}
 
@@ -470,11 +466,11 @@ namespace KingOfTheHill
 				if (zone.EncampmentMode.Value)
 				{
 
-					message.Append($"{kothGrid.DisplayName} on {planetName} Encampment Payout");
+					message.Append($"{kothGrid.DisplayName} at {name} Encampment Payout");
 				}
 				else
 				{
-					message.Append($"{kothGrid.DisplayName} on {planetName} under attack");
+					message.Append($"{kothGrid.DisplayName} at {name} under attack");
 
 				}
 			}
@@ -514,55 +510,27 @@ namespace KingOfTheHill
 			Network.Say(message.ToString());
 		}
 
-        public void CrashingThisPlane()
-        {
-
-            if (MyAPIGateway.Session.IsServer)
-            {
-                if (MyAPIGateway.Utilities.IsDedicated)
-                {
-                    throw new System.Exception("Fucking die."); // Dedicated server-only code
-                }
-                else
-                {
-                    MyVisualScriptLogicProvider.ShowNotificationToAll("A team has won! Now restarting the server.", 5000, "Red"); // Offline singleplayer code works...
-                    return;
-                }
-            }
-            else
-            {
-                MyVisualScriptLogicProvider.ShowNotificationToAll("A team has won! Now restarting the server.", 5000, "Red");//why doesn't this show on the client?
-                return;
-            }
-        }
-
-        public void CrashingThisPlaneTheMessageIHaveToSendToTheClientSpecificallyFuckingKeen()
-        {
-
-            MyVisualScriptLogicProvider.ShowNotificationToAll("A team has won! Now restarting the server.", 5000, "Red");//why doesn't this show on the client?
-          MyAPIGateway.Utilities.ShowMessage("Server", "A team has won! Now restarting the server.");
-
-        }
-
-
-        private void PlayerDied(ZoneBlock zone, IMyPlayer player, IMyFaction faction)
+		private void PlayerDied(ZoneBlock zone, IMyPlayer player, IMyFaction faction)
 		{
 			if (zone.PointsRemovedOnDeath.Value == 0 || !MyAPIGateway.Multiplayer.IsServer)
 				return;
 
 			long facId = faction.FactionId;
-			string planetName = zone.GetClosestPlanet();
+			string name = zone.LocationName.Value;
+			if (string.IsNullOrEmpty(name)) {
+				name = zone.GetClosestPlanet();
+			}
 
-			if (!Planets.Any(description => description.Name == planetName))
+			if (!Planets.Any(description => description.Name == name))
 			{
 				var world = new PlanetDescription() {
-					Name = planetName,
+					Name = name,
 					Scores = new List<ScoreDescription>()
 				};
 				Planets.Add(world);
 			}
 
-			PlanetDescription planet = Planets.Find(p => p.Name == planetName);
+			PlanetDescription planet = Planets.Find(p => p.Name == name);
 			if (!planet.Scores.Any(s => s.FactionId == facId))
 			{
 				planet.Scores.Add(new ScoreDescription() {
@@ -570,7 +538,7 @@ namespace KingOfTheHill
 					FactionName = faction.Name,
 					FactionTag = faction.Tag,
 					Points = 1,
-					PlanetId = planetName,
+					PlanetId = name,
 					GridName = (zone.Entity as IMyCubeBlock).CubeGrid.DisplayName,
 				});
 			}

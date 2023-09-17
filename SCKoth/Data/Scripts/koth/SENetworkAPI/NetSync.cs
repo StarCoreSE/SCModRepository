@@ -407,7 +407,7 @@ namespace SENetworkAPI
                 return;
             }
 
-            NetSync property;
+			NetSync property;
 			if (pack.EntityId == 0)
 			{
 				if (!PropertyById.ContainsKey(pack.Id))

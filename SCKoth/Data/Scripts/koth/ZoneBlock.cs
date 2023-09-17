@@ -82,6 +82,7 @@ namespace KingOfTheHill
 		public NetSync<float> Opacity;
 
 		public NetSync<bool> IsLocationNamed;
+		public NetSync<string> LocationName;
 		public NetSync<int> PointsForPrize;
 
 		public NetSync<bool> UseComponentReward;
@@ -162,6 +163,7 @@ namespace KingOfTheHill
 			ActivationEndTime = new NetSync<int>(this, TransferType.Both, desc.ActivationEndTime);
 			Opacity = new NetSync<float>(this, TransferType.Both, desc.ActiveProgressRate);
 			IsLocationNamed = new NetSync<bool>(this, TransferType.Both, desc.IsLocationNamed);
+			LocationName = new NetSync<string>(this, TransferType.Both, desc.LocationName);
 			PointsForPrize = new NetSync<int>(this, TransferType.Both, desc.PointsForPrize);
 			UseComponentReward = new NetSync<bool>(this, TransferType.Both, desc.UseComponentReward);
 			UseOreReward = new NetSync<bool>(this, TransferType.Both, desc.UseOreReward);
@@ -230,6 +232,7 @@ namespace KingOfTheHill
 			desc.ActivationEndTime = ActivationEndTime.Value;
 			desc.Opacity = Opacity.Value;
 			desc.IsLocationNamed = IsLocationNamed.Value;
+			desc.LocationName = LocationName.Value;
 			desc.PointsForPrize = PointsForPrize.Value;
 			desc.UseComponentReward = UseComponentReward.Value;
 			desc.UseOreReward = UseOreReward.Value;
@@ -487,6 +490,16 @@ namespace KingOfTheHill
 		/// </summary>
 		private void StandardMode_Update()
 		{
+			//TODO: Causing sim speed drops?
+/* 			//No static grids allowed in standard zone, convert them back to ships
+			List<IMyCubeGrid> gridsToConvert = new List<IMyCubeGrid>();
+			foreach (IMyCubeGrid staticGrid in Core.StaticGrids) {
+				gridsToConvert.Add(staticGrid);
+			}
+			foreach (IMyCubeGrid staticGrid in gridsToConvert) {
+				staticGrid.IsStatic = false;
+			} */
+			
 			bool isContested = false;
 			IMyFaction nominatedFaction = null;
 			List<IMyFaction> factionsInZone = new List<IMyFaction>();
@@ -904,15 +917,24 @@ namespace KingOfTheHill
 				Checkbox.Tooltip = MyStringId.GetOrCompute("Will count a copiloted grid as a single person");
 				MyAPIGateway.TerminalControls.AddControl<Sandbox.ModAPI.Ingame.IMyBeacon>(Checkbox);
 
-				Checkbox = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlCheckbox, IMyBeacon>("Zone_LocationName");
+				Checkbox = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlCheckbox, IMyBeacon>("Zone_LocationNamed");
 				Checkbox.Enabled = (block) => { return block.EntityId == ModBlock.EntityId; };
 				Checkbox.Visible = (block) => { return block.EntityId == ModBlock.EntityId; };
 
 				Checkbox.Setter = (block, value) => { IsLocationNamed.Value = value; };
 				Checkbox.Getter = (block) => IsLocationNamed.Value;
-				Checkbox.Title = MyStringId.GetOrCompute("Give Location & Name");
-				Checkbox.Tooltip = MyStringId.GetOrCompute("gives location and name of koth when point is scored");
+				Checkbox.Title = MyStringId.GetOrCompute("Show Location Name");
+				Checkbox.Tooltip = MyStringId.GetOrCompute("Displays location and name of koth when point is scored");
 				MyAPIGateway.TerminalControls.AddControl<Sandbox.ModAPI.Ingame.IMyBeacon>(Checkbox);
+				
+				textbox = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlTextbox, IMyBeacon>("zone_LocationName");
+				textbox.Enabled = (block) => { return block.EntityId == ModBlock.EntityId; };
+				textbox.Visible = (block) => { return block.EntityId == ModBlock.EntityId; };
+				textbox.Setter = (block, value) => { LocationName.Value = (value.ToString()); };
+				textbox.Getter = (block) => new StringBuilder(LocationName.Value);
+				textbox.Title = MyStringId.GetOrCompute("Location Name (defaults to closest planet)");
+				textbox.Tooltip = MyStringId.GetOrCompute("Explicitly sets the name of the location");
+				MyAPIGateway.TerminalControls.AddControl<Sandbox.ModAPI.Ingame.IMyBeacon>(textbox);
 
 				Slider = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, IMyBeacon>("Zone_Radius");
 				Slider.Enabled = (block) => { return block.EntityId == ModBlock.EntityId; };
