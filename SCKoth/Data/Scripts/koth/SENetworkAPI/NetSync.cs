@@ -392,18 +392,19 @@ namespace SENetworkAPI
 		/// <param name="pack">this hold the path to the property and the data to sync</param>
 		internal static void RouteMessage(SyncData pack, ulong sender, long timestamp)
 		{
-			if (pack == null)
-			{
-				MyLog.Default.Error($"[NetworkAPI] Property data is null");
-				return;
-			}
+            if (pack == null)
+            {
+                MyLog.Default.Error("[NetworkAPI] Property data is null");
+                return;
+            }
 
-			if (NetworkAPI.LogNetworkTraffic)
-			{
-				MyLog.Default.Info($"[NetworkAPI] Id:{pack.Id}, EId:{pack.EntityId}, {pack.SyncType}");
-			}
+            if (!PropertyById.ContainsKey(pack.Id))
+            {
+                MyLog.Default.Error($"[NetworkAPI] ID {pack.Id} not registered in dictionary 'PropertyById'");
+                return;
+            }
 
-			NetSync property;
+            NetSync property;
 			if (pack.EntityId == 0)
 			{
 				if (!PropertyById.ContainsKey(pack.Id))
