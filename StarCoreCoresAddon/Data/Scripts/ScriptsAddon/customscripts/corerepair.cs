@@ -41,7 +41,7 @@ namespace StarCoreCoreRepair
             if (!shipCore.IsFunctional)
             {
                 SetStatus($"Core is no longer functional. Resetting countdownd", 2000, MyFontEnum.Red);
-                shipCore.BlockGeneralDamageModifier = 0.1f;
+                shipCore.SlimBlock.BlockGeneralDamageModifier = 0.1f;
             }
         }
 
@@ -51,7 +51,7 @@ namespace StarCoreCoreRepair
             if (shipCore.IsFunctional)
             {
                 SetStatus($"Block is functional. Resetting countdown", 2000, MyFontEnum.Green);
-                shipCore.BlockGeneralDamageModifier = 1.0f;
+                shipCore.SlimBlock.BlockGeneralDamageModifier = 1.0f;
             }
         }
 
