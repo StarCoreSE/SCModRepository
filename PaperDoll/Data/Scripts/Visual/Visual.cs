@@ -216,6 +216,7 @@ namespace klime.Visual
             int count = allBlocks.Count;
             int stride = MathHelper.Clamp(count / 16, 1, 64);
 
+
             MyAPIGateway.Parallel.For(0, count, i => {
                 var block = allBlocks[i];
                 var pos = block.Position;
@@ -269,7 +270,7 @@ namespace klime.Visual
 
         private void DisableBlock(IMyFunctionalBlock block)
         {
-            if (block != null)
+            if (block != null && block.Enabled != true)
             {
                 block.Enabled = false;
             }
@@ -869,7 +870,7 @@ namespace klime.Visual
 
         private void UpdateRealLogic()
         {
-            if (realGrid?.MarkedForClose == true || realGrid?.Physics == null || !realGrid.IsPowered) Close();
+            if (realGrid?.MarkedForClose == true || realGrid?.Physics == null) Close();
         }
 
         public void Close()
