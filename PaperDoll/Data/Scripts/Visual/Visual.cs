@@ -1577,8 +1577,15 @@ namespace klime.Visual
         private bool ValidInput()
         {
             var gui = MyAPIGateway.Gui;
-            return MyAPIGateway.Session.CameraController != null && !gui.ChatEntryVisible && !gui.IsCursorVisible && gui.GetCurrentScreen == MyTerminalPageEnum.None;
+            var controlledEntity = MyAPIGateway.Session.Player.Controller.ControlledEntity;
+
+            return MyAPIGateway.Session.CameraController != null &&
+                   !gui.ChatEntryVisible &&
+                   !gui.IsCursorVisible &&
+                   gui.GetCurrentScreen == MyTerminalPageEnum.None &&
+                   controlledEntity is IMyCockpit;
         }
+
 
         //private bool IsAdmin(IMyPlayer s) => s != null && (s.PromoteLevel == MyPromoteLevel.Admin || s.PromoteLevel == MyPromoteLevel.Owner);
 
