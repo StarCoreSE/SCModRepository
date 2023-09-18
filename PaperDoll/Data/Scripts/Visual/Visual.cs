@@ -1043,14 +1043,13 @@ namespace klime.Visual
 
         private void HandleUserInput()
         {
-            validInputThisTick = ValidInput();
-
-            if (validInputThisTick && MyAPIGateway.Input.IsNewKeyPressed(MyKeys.T))
+            if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.T))
             {
                 ToggleViewState();
                 ToggleRequestPaperDoll();
             }
         }
+
 
         private void ToggleViewState()
         {
