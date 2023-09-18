@@ -26,7 +26,7 @@ using System.Linq;
 using System.Diagnostics;
 using Sandbox.Game.Entities.Cube;
 
-namespace klime.Visual2
+namespace klime.VisualSelf
 {
     //Render grid
     public class GridR
@@ -966,10 +966,10 @@ namespace klime.Visual2
         Idle,
         Searching,
         SearchingAll,
-        SearchingWC,
+        SearchingSelfGrid,
         Locked,
         GoIdle,
-        GoIdleWC,
+        GoIdleSelfGrid,
         DoubleSearching
     }
 
@@ -1018,11 +1018,11 @@ namespace klime.Visual2
 
             switch (viewState)
             {
-                case ViewState.SearchingWC:
+                case ViewState.SearchingSelfGrid:
                     HanVSearchWC();
                     break;
                 case ViewState.GoIdle:
-                case ViewState.GoIdleWC:
+                case ViewState.GoIdleSelfGrid:
                     HandleViewStateIdle();
                     break;
             }
@@ -1055,7 +1055,7 @@ namespace klime.Visual2
 
         private void ToggleViewState()
         {
-            viewState = viewState == ViewState.GoIdleWC ? ViewState.SearchingWC : ViewState.GoIdleWC;
+            viewState = viewState == ViewState.GoIdleSelfGrid ? ViewState.SearchingSelfGrid : ViewState.GoIdleSelfGrid;
         }
 
         private void HanVSearchWC()
@@ -1067,9 +1067,9 @@ namespace klime.Visual2
         private void HandleViewStateIdle()
         {
             ClearAVis();
-            if (viewState == ViewState.GoIdleWC && reqPDoll == ReqPDoll.On)
+            if (viewState == ViewState.GoIdleSelfGrid && reqPDoll == ReqPDoll.On)
             {
-                viewState = ViewState.SearchingWC;
+                viewState = ViewState.SearchingSelfGrid;
             }
             else
             {
@@ -1089,15 +1089,15 @@ namespace klime.Visual2
         {
             if (controlEnt == null || wcAPI == null)
             {
-                viewState = ViewState.GoIdleWC;
+                viewState = ViewState.GoIdleSelfGrid;
                 return;
             }
 
-            var ent = wcAPI.GetAiFocus(controlEnt, 0);
+            var ent = MyAPIGateway.Session.ControlledObject;
 
             if (ent == null)
             {
-                viewState = ViewState.GoIdleWC;
+                viewState = ViewState.GoIdleSelfGrid;
                 return;
             }
 
@@ -1110,7 +1110,7 @@ namespace klime.Visual2
             }
             else
             {
-                viewState = ViewState.GoIdleWC;
+                viewState = ViewState.GoIdleSelfGrid;
             }
         }
 
@@ -1264,7 +1264,7 @@ namespace klime.Visual2
 
             if (allVis.Count == 0 || reqPDoll == ReqPDoll.Off)
             {
-                viewState = ViewState.GoIdleWC;
+                viewState = ViewState.GoIdleSelfGrid;
             }
         }
 
