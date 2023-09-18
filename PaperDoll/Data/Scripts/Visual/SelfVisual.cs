@@ -1245,55 +1245,6 @@ namespace klime.VisualSelf
             }
         }
 
-        private void HandleControlEntity()
-        {
-            MyEntity cEnt = null;
-            if (MyAPIGateway.Session.Player.Controller?.ControlledEntity?.Entity is IMyCockpit)
-            {
-                IMyCockpit cock = MyAPIGateway.Session.Player.Controller?.ControlledEntity?.Entity as IMyCockpit;
-                cEnt = cock.CubeGrid as MyEntity;
-            }
-
-            if (cEnt != null && wcAPI != null)
-            {
-                ManEntFoc(cEnt);
-            }
-            else
-            {
-                //ClearAVis(); //this would clear your paper doll whenever out of cockpit
-            }
-
-            if (allVis.Count == 0 || reqPDoll == ReqPDoll.Off)
-            {
-                viewState = ViewState.GoIdleSelfGrid;
-            }
-        }
-
-       private void ManEntFoc(MyEntity cEnt)
-       {
-           var ent = wcAPI.GetAiFocus(cEnt, 0);
-           if (ent == null)
-           {
-               //ClearAVis();
-               return;
-           }
-       
-           MyCubeGrid cGrid = ent as MyCubeGrid;
-           if (cGrid != null && cGrid.Physics != null)
-           {
-               bool isTrack = IsEntityTracked(cGrid);
-               if (!isTrack)
-               {
-                  // ClearAVis();
-                   EntVis vis = new EntVis(cGrid, 0.11, 0.05, 0);
-                   allVis.Add(vis);
-               }
-           }
-           else
-           {
-               ClearAVis();
-           }
-       }
 
         private bool IsEntityTracked(MyCubeGrid cGrid)
         {
