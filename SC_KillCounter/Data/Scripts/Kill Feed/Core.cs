@@ -278,7 +278,8 @@ namespace KillFeed
                     // check on attacks
                     if (!attack.didFirstCheck && DateTime.Now >= attack.firstCheck)
                     {
-                        MyAPIGateway.Utilities.ShowNotification($"UpdateBeforeSimulation: Timer check due for Grid {attack.grid?.EntityId ?? 0}.", 2000);
+                        MyAPIGateway.Utilities.ShowNotification($"Timer check due for Grid {attack.grid?.EntityId ?? 0}.", 2000);
+                        attack.didFirstCheck = true;  // This ensures that the check won't be performed again
                         // do initial kill check
                         if (CheckKill(attack))
                         {
