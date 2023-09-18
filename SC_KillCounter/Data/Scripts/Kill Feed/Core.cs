@@ -272,6 +272,14 @@ namespace KillFeed
                 {
                     var attack = attacked[cockpit];
 
+                    // New: Check if the grid is null or closed, and if so, mark for removal
+                    if (attack.grid == null || attack.grid.Closed)
+                    {
+                        MyAPIGateway.Utilities.ShowNotification($"UpdateBeforeSimulation: Grid {attack.gridName ?? "Unknown"} no longer exists. Timer cancelled.", 2000);
+                        finishedCockpits.Add(cockpit);
+                        continue;
+                    }
+
                     // skip attacks we've already counted
                     if (finishedGrids.Contains(attack))
                     {
