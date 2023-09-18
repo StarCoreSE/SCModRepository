@@ -9,13 +9,13 @@ namespace KillFeed
     static class Config
     {
         // How long it will ignore subsequent kills on a victim
-        public static TimeSpan ignoreVictimTimespan = new TimeSpan(0, 10, 0);
+        public static TimeSpan ignoreVictimTimespan = new TimeSpan(0, 0, 10);
 
         // How long until it checks for the lack of a cockpit for the first time
-        public static TimeSpan firstCheckTimespan = new TimeSpan(0, 1, 0);
+        public static TimeSpan firstCheckTimespan = new TimeSpan(0, 0, 5);
 
         // How long until it checks for the lack of a cockpit for the last time
-        public static TimeSpan finalCheckTimespan = new TimeSpan(0, 3, 0);
+        public static TimeSpan finalCheckTimespan = new TimeSpan(0, 0, 5);
 
         // Should a xml file be used to describe kills
         public static bool useXmlFile = true;
