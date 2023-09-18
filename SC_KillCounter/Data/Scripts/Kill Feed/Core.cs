@@ -150,43 +150,23 @@ namespace KillFeed
             try
             {
                 // Only track cockpits in multiplayer
-                if (!MyAPIGateway.Multiplayer.IsServer) { return; }
+                //  if (!MyAPIGateway.Multiplayer.IsServer) { return; }
+                //only track if the damage is a cockpit
                 if (!Utilities.IsCockpit(target)) { return; }
 
-                // Track cockpit
+                // debug logging
+                //Utilities.Loggy("Before", ref info);
+
+                // track cockpit
                 var cockpit = Utilities.GetCockpit(target);
                 var attacker = MyAPIGateway.Entities.GetEntityById(info.AttackerId);
                 TrackCockpit(cockpit, attacker);
-
-                // Immediate cockpit status check
-                ImmediateCockpitStatusCheck(cockpit, attacker);
             }
             catch (Exception ex)
             {
                 Logging.Instance.WriteLine(string.Format("BeforeDamageHandler(): {0}", ex));
             }
         }
-
-        private void ImmediateCockpitStatusCheck(IMyCockpit cockpit, IMyEntity attacker)
-        {
-            // Check if the cockpit is already destroyed or non-functional
-            if (cockpit == null || !cockpit.IsFunctional || cockpit.Closed)
-            {
-                // If cockpit is destroyed or non-functional, log a kill immediately
-                MyAPIGateway.Utilities.ShowNotification("ImmediateCockpitStatusCheck: Cockpit destroyed or non-functional. Logging kill.", 2000);
-
-                var attack = new GridAttack
-                {
-                    cockpit = cockpit,  // Can be null or non-functional
-                    attacker = Utilities.EntityToIdentity(attacker),
-                };
-
-                // Log the kill
-                CheckKill(attack);
-            }
-        }
-
-
 
         private IMyIdentity GetVictim(GridAttack attack)
         {
@@ -211,7 +191,7 @@ namespace KillFeed
 
             // validate attacker and victim
             if (attacker == null || victim == null || attacker == victim) { return false; }
-            
+
             // make sure there is no other cockpit
             if (attack.grid != null && !attack.grid.Closed)
             {
@@ -243,7 +223,7 @@ namespace KillFeed
             ignoreVictims.Add(victim, DateTime.Now + Config.ignoreVictimTimespan);
             return true;
         }
-        
+
         // Overrides
         public override void UpdateBeforeSimulation()
         {
