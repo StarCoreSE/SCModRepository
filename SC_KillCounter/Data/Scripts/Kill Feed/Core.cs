@@ -180,7 +180,7 @@ namespace KillFeed
         private bool CheckKill(GridAttack attack)
         {
 
-            MyAPIGateway.Utilities.ShowNotification($"CheckKill: Starting kill check for Grid {attack.grid?.EntityId ?? 0}.", 2000);
+            MyAPIGateway.Utilities.ShowNotification($"CheckKill: Starting kill check for Grid {attack.gridName ?? "Unknown"}.", 2000);
 
 
             // grab attacker
@@ -271,7 +271,7 @@ namespace KillFeed
                     // skip attacks we've already counted
                     if (finishedGrids.Contains(attack))
                     {
-                        MyAPIGateway.Utilities.ShowNotification($"UpdateBeforeSimulation: Timer check skipped for Grid {attack.grid?.EntityId ?? 0}, already counted.", 2000);
+                        MyAPIGateway.Utilities.ShowNotification($"UpdateBeforeSimulation: Timer check skipped for Grid {attack.gridName ?? "Unknown"}, already counted.", 2000);
                         finishedCockpits.Add(cockpit);
                         continue;
                     }
@@ -279,7 +279,7 @@ namespace KillFeed
                     // check on attacks
                     if (!attack.didFirstCheck && DateTime.Now >= attack.firstCheck)
                     {
-                        MyAPIGateway.Utilities.ShowNotification($"UpdateBeforeSimulation: Timer check due for Grid {attack.grid?.EntityId ?? 0}.", 2000);
+                        MyAPIGateway.Utilities.ShowNotification($"UpdateBeforeSimulation: Timer check due for Grid {attack.gridName ?? "Unknown"}.", 2000);
                         // do initial kill check
                         if (CheckKill(attack))
                         {
