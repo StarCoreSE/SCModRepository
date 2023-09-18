@@ -1082,7 +1082,7 @@ namespace klime.VisualSelf
             reqPDoll = reqPDoll == ReqPDoll.On ? ReqPDoll.Off : ReqPDoll.On;
             string status = reqPDoll == ReqPDoll.On ? "ENABLED" : "DISABLED";
             string color = reqPDoll == ReqPDoll.On ? "Green" : "Red";
-            MyAPIGateway.Utilities.ShowNotification($"PAPER DOLL {status}", 1000, color);
+            MyAPIGateway.Utilities.ShowNotification($"SELF PAPER DOLL {status}", 1000, color);
         }
 
         private void ExecuteVSearchUpdate(MyEntity controlEnt)
