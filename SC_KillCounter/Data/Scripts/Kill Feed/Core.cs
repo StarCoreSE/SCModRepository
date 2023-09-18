@@ -50,12 +50,12 @@ namespace KillFeed
         private void Initialize()
         {
 
-            MyAPIGateway.Utilities.ShowNotification("Initialize: Called.", 2000);
+            //MyAPIGateway.Utilities.ShowNotification("Initialize: Called.", 2000);
             if (MyAPIGateway.Multiplayer.IsServer)
             {
                 // track damage events on the server
                 MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0, BeforeDamageHandler);
-                MyAPIGateway.Utilities.ShowNotification("Initialize: Server-side Initialization Complete.", 2000);
+               // MyAPIGateway.Utilities.ShowNotification("Initialize: Server-side Initialization Complete.", 2000);
             }
             else
             {
@@ -92,7 +92,11 @@ namespace KillFeed
         private void TrackCockpit(IMyCockpit victim, IMyEntity attacker)
         {
 
-            MyAPIGateway.Utilities.ShowNotification($"TrackCockpit: Tracked Victim {victim.EntityId} and Attacker {attacker.EntityId}.", 2000);
+            // Check if CubeGrid or CustomName is null, and use "Unknown" as a fallback
+            string gridName = victim.CubeGrid?.CustomName ?? "Unknown";
+
+
+          //  MyAPIGateway.Utilities.ShowNotification($"TrackCockpit: Tracked Victim Grid {gridName} and Attacker {attacker.EntityId}.", 2000);
             // null checking
             if (attacker == null || victim == null || victim.CubeGrid == null) { return; }
 
@@ -107,7 +111,7 @@ namespace KillFeed
             var relation = victim.GetUserRelationToOwner(attackerId.IdentityId);
             if (relation != MyRelationsBetweenPlayerAndBlock.Enemies)
             {
-                MyAPIGateway.Utilities.ShowNotification("TrackCockpit: Friendly fire detected, timer cancelled.", 2000);
+           //     MyAPIGateway.Utilities.ShowNotification("TrackCockpit: Friendly fire detected, timer cancelled.", 2000);
                 return;
             }
 
@@ -115,11 +119,11 @@ namespace KillFeed
             if (!attacked.ContainsKey(victim))
             {
                 attacked.Add(victim, new GridAttack());
-                MyAPIGateway.Utilities.ShowNotification($"TrackCockpit: Timer started for Victim {victim.EntityId}.", 2000);
+          //      MyAPIGateway.Utilities.ShowNotification($"TrackCockpit: Timer started for Victim {victim.CubeGrid.CustomName}.", 2000);
             }
             else
             {
-                MyAPIGateway.Utilities.ShowNotification($"TrackCockpit: Timer reset for Victim {victim.EntityId}.", 2000);
+           //     MyAPIGateway.Utilities.ShowNotification($"TrackCockpit: Timer reset for Victim {victim.CubeGrid.CustomName}.", 2000);
             }
             var attack = attacked[victim];
 
@@ -180,7 +184,7 @@ namespace KillFeed
         private bool CheckKill(GridAttack attack)
         {
 
-            MyAPIGateway.Utilities.ShowNotification($"CheckKill: Starting kill check for Grid {attack.grid?.EntityId ?? 0}.", 2000);
+        //    MyAPIGateway.Utilities.ShowNotification($"CheckKill: Starting kill check for Grid {attack.gridName ?? "Unknown"}.", 2000);
 
 
             // grab attacker
@@ -217,7 +221,7 @@ namespace KillFeed
                 Utilities.SendMessageToAllPlayers(new MessageData(attacker.IdentityId, victim.IdentityId));
 
                 // Add this debug message to indicate that the timer ended and the kill got reported.
-                MyAPIGateway.Utilities.ShowNotification($"CheckKill: Timer ended, kill reported for Grid {attack.grid?.EntityId ?? 0}.", 2000);
+            //    MyAPIGateway.Utilities.ShowNotification($"CheckKill: Timer ended, kill reported for Grid {attack.grid?.EntityId ?? 0}.", 2000);
             }
 
             ignoreVictims.Add(victim, DateTime.Now + Config.ignoreVictimTimespan);
@@ -268,10 +272,18 @@ namespace KillFeed
                 {
                     var attack = attacked[cockpit];
 
+                    // New: Check if the grid is null or closed, and if so, mark for removal
+                    if (attack.grid == null || attack.grid.Closed)
+                    {
+                   //     MyAPIGateway.Utilities.ShowNotification($"UpdateBeforeSimulation: Grid {attack.gridName ?? "Unknown"} no longer exists. Timer cancelled.", 2000);
+                        finishedCockpits.Add(cockpit);
+                        continue;
+                    }
+
                     // skip attacks we've already counted
                     if (finishedGrids.Contains(attack))
                     {
-                        MyAPIGateway.Utilities.ShowNotification($"UpdateBeforeSimulation: Timer check skipped for Grid {attack.grid?.EntityId ?? 0}, already counted.", 2000);
+                    //    MyAPIGateway.Utilities.ShowNotification($"UpdateBeforeSimulation: Timer check skipped for Grid {attack.gridName ?? "Unknown"}, already counted.", 2000);
                         finishedCockpits.Add(cockpit);
                         continue;
                     }
@@ -279,7 +291,7 @@ namespace KillFeed
                     // check on attacks
                     if (!attack.didFirstCheck && DateTime.Now >= attack.firstCheck)
                     {
-                        MyAPIGateway.Utilities.ShowNotification($"UpdateBeforeSimulation: Timer check due for Grid {attack.grid?.EntityId ?? 0}.", 2000);
+                  //      MyAPIGateway.Utilities.ShowNotification($"UpdateBeforeSimulation: Timer check due for Grid {attack.gridName ?? "Unknown"}.", 2000);
                         // do initial kill check
                         if (CheckKill(attack))
                         {
