@@ -169,21 +169,23 @@ namespace KillFeed
 
         private void ImmediateCockpitStatusCheck(IMyCockpit cockpit, IMyEntity attacker)
         {
-            // Check if the cockpit is already destroyed
+            // Check if the cockpit is already destroyed or non-functional
             if (cockpit == null || !cockpit.IsFunctional || cockpit.Closed)
             {
-                // If cockpit is destroyed, log a kill immediately
-                MyAPIGateway.Utilities.ShowNotification("ImmediateCockpitStatusCheck: Cockpit already destroyed. Logging kill.", 2000);
+                // If cockpit is destroyed or non-functional, log a kill immediately
+                MyAPIGateway.Utilities.ShowNotification("ImmediateCockpitStatusCheck: Cockpit destroyed or non-functional. Logging kill.", 2000);
 
                 var attack = new GridAttack
                 {
-                    cockpit = cockpit,
+                    cockpit = cockpit,  // Can be null or non-functional
                     attacker = Utilities.EntityToIdentity(attacker),
                 };
 
-                CheckKill(attack);  // Assuming CheckKill can handle null or non-functional cockpits
+                // Log the kill
+                CheckKill(attack);
             }
         }
+
 
 
         private IMyIdentity GetVictim(GridAttack attack)
