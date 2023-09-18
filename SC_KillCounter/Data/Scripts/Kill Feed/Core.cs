@@ -92,7 +92,11 @@ namespace KillFeed
         private void TrackCockpit(IMyCockpit victim, IMyEntity attacker)
         {
 
-            MyAPIGateway.Utilities.ShowNotification($"TrackCockpit: Tracked Victim {victim.EntityId} and Attacker {attacker.EntityId}.", 2000);
+            // Check if CubeGrid or CustomName is null, and use "Unknown" as a fallback
+            string gridName = victim.CubeGrid?.CustomName ?? "Unknown";
+
+
+            MyAPIGateway.Utilities.ShowNotification($"TrackCockpit: Tracked Victim Grid {gridName} and Attacker {attacker.EntityId}.", 2000);
             // null checking
             if (attacker == null || victim == null || victim.CubeGrid == null) { return; }
 
@@ -115,11 +119,11 @@ namespace KillFeed
             if (!attacked.ContainsKey(victim))
             {
                 attacked.Add(victim, new GridAttack());
-                MyAPIGateway.Utilities.ShowNotification($"TrackCockpit: Timer started for Victim {victim.EntityId}.", 2000);
+                MyAPIGateway.Utilities.ShowNotification($"TrackCockpit: Timer started for Victim {victim.CubeGrid.CustomName}.", 2000);
             }
             else
             {
-                MyAPIGateway.Utilities.ShowNotification($"TrackCockpit: Timer reset for Victim {victim.EntityId}.", 2000);
+                MyAPIGateway.Utilities.ShowNotification($"TrackCockpit: Timer reset for Victim {victim.CubeGrid.CustomName}.", 2000);
             }
             var attack = attacked[victim];
 
