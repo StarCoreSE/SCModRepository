@@ -1093,7 +1093,7 @@ namespace klime.VisualSelf
                 return;
             }
 
-            var ent = MyAPIGateway.Session.ControlledObject;
+            var ent = wcAPI.GetAiFocus(controlEnt, 0);
 
             if (ent == null)
             {
