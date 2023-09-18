@@ -1087,13 +1087,14 @@ namespace klime.VisualSelf
 
         private void ExecuteVSearchUpdate(MyEntity controlEnt)
         {
-            if (controlEnt == null || wcAPI == null)
+            if (controlEnt == null)
             {
                 viewState = ViewState.GoIdleSelfGrid;
                 return;
             }
 
-            var ent = wcAPI.GetAiFocus(controlEnt, 0);
+            var thefuckingcockpitiamcurrentlysittingin = MyAPIGateway.Session.Player.Controller.ControlledEntity.Entity as IMyCockpit;
+            var ent = thefuckingcockpitiamcurrentlysittingin.CubeGrid;
 
             if (ent == null)
             {
@@ -1222,7 +1223,7 @@ namespace klime.VisualSelf
                 if (viewState == ViewState.Locked)
                 {
                     UpdateAllVis();
-                    HandleControlEntity();
+                    //HandleControlEntity();
                 }
 
             }, "Drawing On-Screen Elements");
@@ -1268,31 +1269,31 @@ namespace klime.VisualSelf
             }
         }
 
-        private void ManEntFoc(MyEntity cEnt)
-        {
-            var ent = wcAPI.GetAiFocus(cEnt, 0);
-            if (ent == null)
-            {
-                //ClearAVis();
-                return;
-            }
-
-            MyCubeGrid cGrid = ent as MyCubeGrid;
-            if (cGrid != null && cGrid.Physics != null)
-            {
-                bool isTrack = IsEntityTracked(cGrid);
-                if (!isTrack)
-                {
-                    ClearAVis();
-                    EntVis vis = new EntVis(cGrid, 0.11, 0.05, 0);
-                    allVis.Add(vis);
-                }
-            }
-            else
-            {
-                ClearAVis();
-            }
-        }
+       private void ManEntFoc(MyEntity cEnt)
+       {
+           var ent = wcAPI.GetAiFocus(cEnt, 0);
+           if (ent == null)
+           {
+               //ClearAVis();
+               return;
+           }
+       
+           MyCubeGrid cGrid = ent as MyCubeGrid;
+           if (cGrid != null && cGrid.Physics != null)
+           {
+               bool isTrack = IsEntityTracked(cGrid);
+               if (!isTrack)
+               {
+                  // ClearAVis();
+                   EntVis vis = new EntVis(cGrid, 0.11, 0.05, 0);
+                   allVis.Add(vis);
+               }
+           }
+           else
+           {
+               ClearAVis();
+           }
+       }
 
         private bool IsEntityTracked(MyCubeGrid cGrid)
         {
