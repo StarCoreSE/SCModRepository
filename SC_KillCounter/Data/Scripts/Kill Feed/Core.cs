@@ -153,19 +153,38 @@ namespace KillFeed
                 if (!MyAPIGateway.Multiplayer.IsServer) { return; }
                 if (!Utilities.IsCockpit(target)) { return; }
 
-                // debug logging
-                //Utilities.Loggy("Before", ref info);
-
-                // track cockpit
+                // Track cockpit
                 var cockpit = Utilities.GetCockpit(target);
                 var attacker = MyAPIGateway.Entities.GetEntityById(info.AttackerId);
                 TrackCockpit(cockpit, attacker);
+
+                // Immediate cockpit status check
+                ImmediateCockpitStatusCheck(cockpit, attacker);
             }
             catch (Exception ex)
             {
                 Logging.Instance.WriteLine(string.Format("BeforeDamageHandler(): {0}", ex));
             }
         }
+
+        private void ImmediateCockpitStatusCheck(IMyCockpit cockpit, IMyEntity attacker)
+        {
+            // Check if the cockpit is already destroyed
+            if (cockpit == null || !cockpit.IsFunctional || cockpit.Closed)
+            {
+                // If cockpit is destroyed, log a kill immediately
+                MyAPIGateway.Utilities.ShowNotification("ImmediateCockpitStatusCheck: Cockpit already destroyed. Logging kill.", 2000);
+
+                var attack = new GridAttack
+                {
+                    cockpit = cockpit,
+                    attacker = Utilities.EntityToIdentity(attacker),
+                };
+
+                CheckKill(attack);  // Assuming CheckKill can handle null or non-functional cockpits
+            }
+        }
+
 
         private IMyIdentity GetVictim(GridAttack attack)
         {
