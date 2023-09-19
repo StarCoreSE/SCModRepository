@@ -971,6 +971,7 @@ namespace klime.Visual
         Locked,
         GoIdle,
         GoIdleWC,
+        GoIdleSelf,
         DoubleSearching,
         SelfRender  // New State
     }
@@ -986,6 +987,7 @@ namespace klime.Visual
         public ReqPDoll reqPDoll = ReqPDoll.Off;
         private MyStringId PDollBGSprite = MyStringId.TryGet("paperdollBG");
         public List<EntVis> allVis = new List<EntVis>();
+        public List<EntVis> allVisSelf = new List<EntVis>();
         WcApi wcAPI;
         public HudAPIv2 hudAPI;
         public BillBoardHUDMessage billmessage;
@@ -1028,7 +1030,7 @@ namespace klime.Visual
                     HandleViewStateIdle();
                     break;
                 case ViewState.SelfRender:
-                    HandleSelfRender(); // Create this method to handle SelfRender logic
+                    HanVSearchSelf(); // Create this method to handle SelfRender logic
                     break;
             }
         }
@@ -1109,6 +1111,11 @@ namespace klime.Visual
             MyAPIGateway.Utilities.ShowNotification($"PAPER DOLL {status}", 1000, color);
         }
 
+        private void HanVSearchSelf()
+        {
+            MyEntity controlEntSelf = (MyEntity)(MyAPIGateway.Session.Player.Controller?.ControlledEntity?.Entity as IMyCockpit);
+            ExecuteVSearchUpdateSelf(controlEntSelf);
+        }
 
         private void HanVSearchWC()
         {
@@ -1133,34 +1140,6 @@ namespace klime.Visual
             }
         }
 
-        private void HandleSelfRender()
-        {
-            if (controlEnt == null || wcAPI == null)
-            {
-                viewState = ViewState.GoIdleWC;
-                return;
-            }
-
-            var ent = wcAPI.GetAiFocus(controlEnt, 0);
-
-            if (ent == null)
-            {
-                viewState = ViewState.GoIdleWC;
-                return;
-            }
-
-            MyCubeGrid cGrid = ent as MyCubeGrid;
-
-            if (cGrid != null && cGrid.Physics != null)
-            {
-                allVis.Add(new EntVis(cGrid, 0.11, 0.05, 0));
-                viewState = ViewState.Locked;
-            }
-            else
-            {
-                viewState = ViewState.GoIdleWC;
-            }
-        }
 
         private void ToggleRequestPaperDoll()
         {
@@ -1207,6 +1186,37 @@ namespace klime.Visual
             else
             {
                 viewState = ViewState.GoIdleWC;
+            }
+        }
+
+
+        private void ExecuteVSearchUpdateSelf(MyEntity controlEnt)
+        {
+            if (controlEnt == null)
+            {
+                viewState = ViewState.SelfRender;
+                return;
+            }
+
+            var thefuckingcockpitiamcurrentlysittingin = MyAPIGateway.Session.Player.Controller.ControlledEntity.Entity as IMyCockpit;
+            var ent = thefuckingcockpitiamcurrentlysittingin.CubeGrid;
+
+            if (ent == null)
+            {
+                viewState = ViewState.GoIdleSelf;
+                return;
+            }
+
+            MyCubeGrid cGrid = ent as MyCubeGrid;
+
+            if (cGrid != null && cGrid.Physics != null)
+            {
+                allVisSelf.Add(new EntVis(cGrid, -0.11, 0.05, 0));
+                viewState = ViewState.Locked;
+            }
+            else
+            {
+                viewState = ViewState.GoIdleSelf;
             }
         }
 
