@@ -958,7 +958,8 @@ namespace klime.Visual
     public enum ReqPDoll
     {
         On,
-        Off
+        Off,
+        Self
     }
 
     public enum ViewState
@@ -1058,7 +1059,19 @@ namespace klime.Visual
 
         private void ToggleViewState()
         {
-            viewState = viewState == ViewState.GoIdleWC ? ViewState.SearchingWC : ViewState.GoIdleWC;
+            // Updated to handle SelfRender state
+            if (viewState == ViewState.GoIdleWC)
+            {
+                viewState = ViewState.SearchingWC;
+            }
+            else if (viewState == ViewState.SelfRender)
+            {
+                viewState = ViewState.Idle;
+            }
+            else
+            {
+                viewState = ViewState.GoIdleWC;
+            }
         }
 
         private void HanVSearchWC()
@@ -1074,18 +1087,39 @@ namespace klime.Visual
             {
                 viewState = ViewState.SearchingWC;
             }
+            else if (viewState == ViewState.GoIdleWC && reqPDoll == ReqPDoll.Self)
+            {
+                viewState = ViewState.SelfRender;
+            }
             else
             {
                 viewState = ViewState.Idle;
             }
         }
 
+        private void HandleSelfRender()
+        {
+            // Implement logic for SelfRender state here
+        }
+
         private void ToggleRequestPaperDoll()
         {
-            reqPDoll = reqPDoll == ReqPDoll.On ? ReqPDoll.Off : ReqPDoll.On;
-            string status = reqPDoll == ReqPDoll.On ? "ENABLED" : "DISABLED";
-            string color = reqPDoll == ReqPDoll.On ? "Green" : "Red";
-            MyAPIGateway.Utilities.ShowNotification($"PAPER DOLL {status}", 1000, color);
+            // Updated to handle Self state
+            if (reqPDoll == ReqPDoll.On)
+            {
+                reqPDoll = ReqPDoll.Off;
+            }
+            else if (reqPDoll == ReqPDoll.Off)
+            {
+                reqPDoll = ReqPDoll.Self;
+            }
+            else
+            {
+                reqPDoll = ReqPDoll.On;
+            }
+
+            string status = reqPDoll.ToString().ToUpper();
+            MyAPIGateway.Utilities.ShowNotification($"PAPER DOLL {status}", 1000, "Green");
         }
 
         private void ExecuteVSearchUpdate(MyEntity controlEnt)
