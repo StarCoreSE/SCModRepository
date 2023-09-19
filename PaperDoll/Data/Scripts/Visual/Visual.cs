@@ -118,8 +118,8 @@ namespace klime.Visual
 
 
             AddBillboard(Color.Lime * 0.75f, hateVector, left, up, tempBillboardScaling, BlendTypeEnum.SDR);
-            AddBillboard(Color.Red * 0.5f, greaterPainMatrix.Translation -= Vector3D.TransformNormal(relTrans, clonedWorldMatrix), left, up, tempBillboardScaling, BlendTypeEnum.AdditiveTop);
-            AddBillboard(Color.DodgerBlue * 0.5f, painMatrix.Translation -= Vector3D.TransformNormal(relTrans, clonedWorldMatrix), left, up, tempBillboardScaling, BlendTypeEnum.AdditiveTop);
+           // AddBillboard(Color.Red * 0.5f, greaterPainMatrix.Translation -= Vector3D.TransformNormal(relTrans, clonedWorldMatrix), left, up, tempBillboardScaling, BlendTypeEnum.AdditiveTop);
+           // AddBillboard(Color.DodgerBlue * 0.5f, painMatrix.Translation -= Vector3D.TransformNormal(relTrans, clonedWorldMatrix), left, up, tempBillboardScaling, BlendTypeEnum.AdditiveTop);
 
         }
 
@@ -1050,12 +1050,20 @@ namespace klime.Visual
         {
             validInputThisTick = ValidInput();
 
-            if (validInputThisTick && MyAPIGateway.Input.IsNewKeyPressed(MyKeys.T))
+            if (validInputThisTick)
             {
-                ToggleViewState();
-                ToggleRequestPaperDoll();
+                if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.T))
+                {
+                    ToggleViewState();
+                    ToggleRequestPaperDoll();
+                }
+                else if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.R))  // Trigger SelfRender with R key
+                {
+                   // viewState = ViewState.SelfRender;
+                }
             }
         }
+
 
         private void ToggleViewState()
         {
