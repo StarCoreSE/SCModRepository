@@ -1135,7 +1135,31 @@ namespace klime.Visual
 
         private void HandleSelfRender()
         {
-            // Implement logic for SelfRender state here
+            if (controlEnt == null || wcAPI == null)
+            {
+                viewState = ViewState.GoIdleWC;
+                return;
+            }
+
+            var ent = wcAPI.GetAiFocus(controlEnt, 0);
+
+            if (ent == null)
+            {
+                viewState = ViewState.GoIdleWC;
+                return;
+            }
+
+            MyCubeGrid cGrid = ent as MyCubeGrid;
+
+            if (cGrid != null && cGrid.Physics != null)
+            {
+                allVis.Add(new EntVis(cGrid, 0.11, 0.05, 0));
+                viewState = ViewState.Locked;
+            }
+            else
+            {
+                viewState = ViewState.GoIdleWC;
+            }
         }
 
         private void ToggleRequestPaperDoll()
