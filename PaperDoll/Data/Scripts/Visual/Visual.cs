@@ -970,7 +970,8 @@ namespace klime.Visual
         Locked,
         GoIdle,
         GoIdleWC,
-        DoubleSearching
+        DoubleSearching,
+        SelfRender  // New State
     }
 
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
@@ -1024,6 +1025,9 @@ namespace klime.Visual
                 case ViewState.GoIdle:
                 case ViewState.GoIdleWC:
                     HandleViewStateIdle();
+                    break;
+                case ViewState.SelfRender:
+                    HandleSelfRender(); // Create this method to handle SelfRender logic
                     break;
             }
         }
