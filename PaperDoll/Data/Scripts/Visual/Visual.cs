@@ -1059,7 +1059,9 @@ namespace klime.Visual
                 }
                 else if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.R))  // Trigger SelfRender with R key
                 {
-                   // viewState = ViewState.SelfRender;
+                    viewState = ViewState.SelfRender;
+                    ToggleViewStateSelf();
+                    ToggleRequestPaperDollSelf();
                 }
             }
         }
@@ -1072,15 +1074,41 @@ namespace klime.Visual
             {
                 viewState = ViewState.SearchingWC;
             }
-            else if (viewState == ViewState.SelfRender)
-            {
-                viewState = ViewState.Idle;
-            }
             else
             {
                 viewState = ViewState.GoIdleWC;
             }
         }
+
+        private void ToggleViewStateSelf()
+        {
+            if (viewState == ViewState.SelfRender)
+            {
+                viewState = ViewState.Idle;
+            }
+            else
+            {
+                viewState = ViewState.SelfRender;
+            }
+        }
+
+        private void ToggleRequestPaperDollSelf()
+        {
+            if (reqPDoll == ReqPDoll.Self)
+            {
+                reqPDoll = ReqPDoll.Off;
+            }
+            else
+            {
+                reqPDoll = ReqPDoll.Self;
+            }
+
+            string status = reqPDoll.ToString().ToUpper();
+            string color = "Orange";  // Different color for Self, for example
+
+            MyAPIGateway.Utilities.ShowNotification($"PAPER DOLL {status}", 1000, color);
+        }
+
 
         private void HanVSearchWC()
         {
@@ -1117,18 +1145,17 @@ namespace klime.Visual
             {
                 reqPDoll = ReqPDoll.Off;
             }
-            else if (reqPDoll == ReqPDoll.Off)
-            {
-                reqPDoll = ReqPDoll.Self;
-            }
             else
             {
                 reqPDoll = ReqPDoll.On;
             }
 
             string status = reqPDoll.ToString().ToUpper();
-            MyAPIGateway.Utilities.ShowNotification($"PAPER DOLL {status}", 1000, "Green");
+            string color = "Green";
+
+            MyAPIGateway.Utilities.ShowNotification($"PAPER DOLL {status}", 1000, color);
         }
+
 
         private void ExecuteVSearchUpdate(MyEntity controlEnt)
         {
