@@ -12,6 +12,7 @@ using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.Input;
 using VRage.ModAPI;
+using VRage.Utils;
 using VRageMath;
 
 namespace StarCore.SystemHighlight
@@ -46,13 +47,13 @@ namespace StarCore.SystemHighlight
 
         public override void UpdateAfterSimulation()
         {
-            if(!SeenMessage && MyAPIGateway.Session?.Player?.Character != null)
+            if (!SeenMessage && MyAPIGateway.Session?.Player?.Character != null)
             {
                 SeenMessage = true;
                 MyAPIGateway.Utilities.ShowMessage(From, Message);
 
                 MyAPIGateway.Utilities.InvokeOnGameThread(() => SetUpdateOrder(MyUpdateOrder.NoUpdate));
-            }
+            }       
         }
 
         private void SetStatus(string text, int aliveTime = 300, string font = MyFontEnum.Green)
@@ -69,16 +70,30 @@ namespace StarCore.SystemHighlight
 
         public void HandleMessage(String message, ref bool sendToOthers)
         {
-            IMyCharacter chr = MyAPIGateway.Session?.Player?.Character;
-            IMySlimBlock aimed = chr?.EquippedTool?.Components?.Get<MyCasterComponent>()?.HitBlock as IMySlimBlock;
+            var player_camera = MyAPIGateway.Session.Camera;
+            var camera_matrix = player_camera.WorldMatrix;
+            IHitInfo strike = null;
+            IMyCubeGrid cubeGrid = null;
+            IMySlimBlock final_block = null;
+            MyAPIGateway.Physics.CastRay(camera_matrix.Translation, camera_matrix.Translation + camera_matrix.Forward * 150, out strike);
 
             var gridBlocks = new List<IMySlimBlock>();
             if (message.Contains("/hl"))
             {
-                if (aimed != null)
+                if (strike != null)
                 {
-                    IMyCubeGrid cubeGrid = aimed.CubeGrid;
-                    aimed.CubeGrid.GetBlocks(gridBlocks);
+                    if (strike.HitEntity is IMyCubeGrid)
+                    {
+                        cubeGrid = strike.HitEntity as IMyCubeGrid;
+
+                        if (cubeGrid.Physics != null)
+                        {
+                            var pos = cubeGrid.WorldToGridInteger(strike.Position + camera_matrix.Forward * 0.1);
+                            final_block = cubeGrid.GetCubeBlock(pos);
+                        }
+                    }
+
+                    final_block.CubeGrid.GetBlocks(gridBlocks);
                     if (message.Contains("/hlconv"))
                     {
                         HandleHighlight(gridBlocks, 1, null, cubeGrid, null);
