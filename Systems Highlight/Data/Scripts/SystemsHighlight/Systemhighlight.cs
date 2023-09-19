@@ -30,7 +30,7 @@ namespace StarCore.SystemHighlight
 
         public override void BeforeStart()
         {
-            MyAPIGateway.Utilities.MessageEntered += MessageHandler;
+            MyAPIGateway.Utilities.MessageEntered += HandleMessage;
         }
 
         public override void LoadData()
@@ -41,7 +41,18 @@ namespace StarCore.SystemHighlight
 
         protected override void UnloadData()
         {
-            MyAPIGateway.Utilities.MessageEntered -= MessageHandler;
+            MyAPIGateway.Utilities.MessageEntered -= HandleMessage;
+        }
+
+        public override void UpdateAfterSimulation()
+        {
+            if(!SeenMessage && MyAPIGateway.Session?.Player?.Character != null)
+            {
+                SeenMessage = true;
+                MyAPIGateway.Utilities.ShowMessage(From, Message);
+
+                MyAPIGateway.Utilities.InvokeOnGameThread(() => SetUpdateOrder(MyUpdateOrder.NoUpdate));
+            }
         }
 
         private void SetStatus(string text, int aliveTime = 300, string font = MyFontEnum.Green)
@@ -56,7 +67,7 @@ namespace StarCore.SystemHighlight
             notifStatus.Show();
         }
 
-        public void MessageHandler(String message, ref bool sendToOthers)
+        public void HandleMessage(String message, ref bool sendToOthers)
         {
             IMyCharacter chr = MyAPIGateway.Session?.Player?.Character;
             IMySlimBlock aimed = chr?.EquippedTool?.Components?.Get<MyCasterComponent>()?.HitBlock as IMySlimBlock;
@@ -70,19 +81,19 @@ namespace StarCore.SystemHighlight
                     aimed.CubeGrid.GetBlocks(gridBlocks);
                     if (message.Contains("/hlconv"))
                     {
-                        HandleHighlightCommand(gridBlocks, 1, null, cubeGrid, null);
+                        HandleHighlight(gridBlocks, 1, null, cubeGrid, null);
                     }
                     else if (message.Contains("/hlthrust"))
                     {
-                        HandleHighlightCommand(gridBlocks, 2, null, cubeGrid, null);
+                        HandleHighlight(gridBlocks, 2, null, cubeGrid, null);
                     }
                     else if (message.Contains("/hlpower"))
                     {
-                        HandleHighlightCommand(gridBlocks, 3, null, cubeGrid, null);
+                        HandleHighlight(gridBlocks, 3, null, cubeGrid, null);
                     }
                     else if (message.Contains("/hlweapon"))
                     {
-                        HandleHighlightCommand(gridBlocks, 4, null, cubeGrid, null);
+                        HandleHighlight(gridBlocks, 4, null, cubeGrid, null);
                     }
                     else if (message.Contains("/hlcustomadd"))
                     {
@@ -115,20 +126,20 @@ namespace StarCore.SystemHighlight
 
                         if (customType != null && color != null)
                         {
-                            HandleHighlightCommand(gridBlocks, 5, customType, cubeGrid, color);
+                            HandleHighlight(gridBlocks, 5, customType, cubeGrid, color);
                         }
 
                     }
                     else if (message.Contains("/hldamage"))
                     {
-                        HandleHighlightCommand(gridBlocks, 6, null, cubeGrid, null);
+                        HandleHighlight(gridBlocks, 6, null, cubeGrid, null);
                     }
                     else if (message.Contains("/hlhelp"))
                     {
                         MyAPIGateway.Utilities.ShowMessage(From, "/hlconv : Highlights Conveyors");
                         MyAPIGateway.Utilities.ShowMessage(From, "/hlthrust : Highlights Thrusters");
                         MyAPIGateway.Utilities.ShowMessage(From, "/hlpower : Highlights Power");
-                        MyAPIGateway.Utilities.ShowMessage(From, "/hlcustomadd : Adds Blocks to Current Highlight | Accepts SubtypeIDs Ex: /hlcustom MySubtypeID Green");
+                        MyAPIGateway.Utilities.ShowMessage(From, "/hlcustomadd : Adds Blocks to Current Highlight | Accepts SubtypeIDs Ex: /hlcustomadd MySubtypeID Green");
                         MyAPIGateway.Utilities.ShowMessage(From, "/hlhelp : This Command");
                         MyAPIGateway.Utilities.ShowMessage(From, "/hlcolorhelp : List of Colors Supported by /hlcustomadd");
                         MyAPIGateway.Utilities.ShowMessage(From, "/hlclear : Removes Active Highlight");
@@ -145,7 +156,7 @@ namespace StarCore.SystemHighlight
                     else if (message.Contains("/hlclear"))
                     {
                         SetStatus("All Highlights Cleared", 3000, "Green");
-                        UndoHighlights(gridBlocks, cubeGrid);
+                        ClearHighlight(gridBlocks, cubeGrid);
                     }
                 }
                 else
@@ -154,20 +165,9 @@ namespace StarCore.SystemHighlight
                     return;
                 }
             }
-        }
+        }       
 
-        public override void UpdateAfterSimulation()
-        {
-            if(!SeenMessage && MyAPIGateway.Session?.Player?.Character != null)
-            {
-                SeenMessage = true;
-                MyAPIGateway.Utilities.ShowMessage(From, Message);
-
-                MyAPIGateway.Utilities.InvokeOnGameThread(() => SetUpdateOrder(MyUpdateOrder.NoUpdate));
-            }
-        }
-
-        public void HandleHighlightCommand(List<IMySlimBlock> blockList, int type, string customType, IMyCubeGrid cubeGrid, string color)
+        public void HandleHighlight(List<IMySlimBlock> blockList, int type, string customType, IMyCubeGrid cubeGrid, string color)
         {
             if (cubeGrid == null)
                 return;
@@ -176,7 +176,7 @@ namespace StarCore.SystemHighlight
 
             if (type != 5)
             {
-                UndoHighlights(blockList, cubeGrid);
+                ClearHighlight(blockList, cubeGrid);
             }          
 
             Dictionary<IMyEntity, int> gridHighlightedEntities;
@@ -196,10 +196,7 @@ namespace StarCore.SystemHighlight
                         {
                             SetStatus($"Highlighting Conveyors. Type /hlclear to Clear.", 3000, "Green");
 
-                            if (!gridHighlightedEntities.ContainsKey(block.FatBlock))
-                            {
-                                gridHighlightedEntities.Add(block.FatBlock, type);
-                            }
+                            HandleDictionary(gridHighlightedEntities, block, type);
 
                             if (block.FatBlock.IsFunctional)
                             {
@@ -216,10 +213,7 @@ namespace StarCore.SystemHighlight
                         {
                             SetStatus($"Highlighting Thrusters. Type /hlclear to Clear.", 3000, "Green");
 
-                            if (!gridHighlightedEntities.ContainsKey(block.FatBlock))
-                            {
-                                gridHighlightedEntities.Add(block.FatBlock, type);
-                            }
+                            HandleDictionary(gridHighlightedEntities, block, type);
 
                             if (block.FatBlock.IsFunctional)
                             {
@@ -236,10 +230,7 @@ namespace StarCore.SystemHighlight
                         {
                             SetStatus($"Highlighting Power. Type /hlclear to Clear.", 3000, "Green");
 
-                            if (!gridHighlightedEntities.ContainsKey(block.FatBlock))
-                            {
-                                gridHighlightedEntities.Add(block.FatBlock, type);
-                            }
+                            HandleDictionary(gridHighlightedEntities, block, type);
 
                             if (block.FatBlock.IsFunctional)
                             {
@@ -256,10 +247,7 @@ namespace StarCore.SystemHighlight
                         {
                             SetStatus($"Highlighting Weapons. Type /hlclear to Clear.", 3000, "Green");
 
-                            if (!gridHighlightedEntities.ContainsKey(block.FatBlock))
-                            {
-                                gridHighlightedEntities.Add(block.FatBlock, type);
-                            }
+                            HandleDictionary(gridHighlightedEntities, block, type);
 
                             if (block.FatBlock.IsFunctional)
                             {
@@ -280,14 +268,11 @@ namespace StarCore.SystemHighlight
 
                                 foundCount++;
 
-                                if (!gridHighlightedEntities.ContainsKey(block.FatBlock))
-                                {
-                                    gridHighlightedEntities.Add(block.FatBlock, type);
-                                }
+                                HandleDictionary(gridHighlightedEntities, block, type);
 
                                 if (block.FatBlock.IsFunctional)
                                 {
-                                    var colorString = GetColorFromName(color);
+                                    var colorString = HandleColor(color);
                                     MyVisualScriptLogicProvider.SetHighlightLocal(block.FatBlock.Name, thickness: 3, pulseTimeInFrames: -1, color: colorString);
                                 }
                                 else if (block.FatBlock.IsFunctional == false)
@@ -299,28 +284,14 @@ namespace StarCore.SystemHighlight
                             }                               
                         }
                         else if (type == 6 && !block.FatBlock.IsFunctional)
-                        {                        
-                            if (!gridHighlightedEntities.ContainsKey(block.FatBlock))
-                            {
-                                gridHighlightedEntities.Add(block.FatBlock, type);
-                            }
-                    
+                        {
+                            HandleDictionary(gridHighlightedEntities, block, type);
+
                             MyVisualScriptLogicProvider.SetHighlightLocal(block.FatBlock.Name, thickness: 6, pulseTimeInFrames: 3, color: Color.Red);
                         }
                     }
 
-                    if (block.FatBlock != null && !gridHighlightedEntities.ContainsKey(block.FatBlock))
-                    {
-                        block.Dithering = -0.5f;
-                    }
-                    else if (block.FatBlock != null && gridHighlightedEntities.ContainsKey(block.FatBlock))
-                    {
-                        block.Dithering = 0f;
-                    }
-                    else if (block.FatBlock == null)
-                    {
-                        block.Dithering = -0.5f;
-                    }
+                    HandleDithering(gridHighlightedEntities, block);
                 }
             }
 
@@ -331,7 +302,31 @@ namespace StarCore.SystemHighlight
             }
         }
 
-        public static Color GetColorFromName(string colorName)
+        public static void HandleDictionary(Dictionary<IMyEntity, int> gridHighlightedEntities, IMySlimBlock block, int type)
+        {
+            if (!gridHighlightedEntities.ContainsKey(block.FatBlock))
+            {
+                gridHighlightedEntities.Add(block.FatBlock, type);
+            }
+        }
+
+        public static void HandleDithering(Dictionary<IMyEntity, int> gridHighlightedEntities, IMySlimBlock block)
+        {
+            if (block.FatBlock != null && !gridHighlightedEntities.ContainsKey(block.FatBlock))
+            {
+                block.Dithering = -0.5f;
+            }
+            else if (block.FatBlock != null && gridHighlightedEntities.ContainsKey(block.FatBlock))
+            {
+                block.Dithering = 0f;
+            }
+            else if (block.FatBlock == null)
+            {
+                block.Dithering = -0.5f;
+            }
+        }
+
+        public static Color HandleColor(string colorName)
         {
             switch (colorName.ToLower())
             {
@@ -362,7 +357,7 @@ namespace StarCore.SystemHighlight
             }
         }
 
-        public void UndoHighlights(List<IMySlimBlock> blockList, IMyCubeGrid cubeGrid)
+        public void ClearHighlight(List<IMySlimBlock> blockList, IMyCubeGrid cubeGrid)
         {
             Dictionary<IMyEntity, int> gridHighlightedEntities;
             if (highlightedEntitiesPerGrid.TryGetValue(cubeGrid, out gridHighlightedEntities))
