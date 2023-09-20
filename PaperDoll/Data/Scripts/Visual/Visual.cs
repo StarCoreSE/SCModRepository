@@ -1366,6 +1366,12 @@ namespace klime.Visual
                     return;
                 }
 
+                if (allVisSelf == null)
+                {
+                    MyLog.Default.WriteLine("allVisSelf is null");
+                    return;
+                }
+
                 if (viewState == ViewState.Locked)
                 {
                     UpdateAllVis();
