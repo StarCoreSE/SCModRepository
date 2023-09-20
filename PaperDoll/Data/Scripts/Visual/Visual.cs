@@ -977,12 +977,19 @@ namespace klime.Visual
         SearchingAll,
         SearchingWC,
         Locked,
+        GoIdle,
+        GoIdleWC,
+        DoubleSearching,
+    }
+
+    public enum ViewStateSelf
+    {
+        IdleSelf,
         LockedSelf,
         GoIdle,
         GoIdleWC,
         GoIdleSelf,
-        DoubleSearching,
-        SearchingSelf  // New State
+        SearchingSelf
     }
 
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
@@ -993,6 +1000,7 @@ namespace klime.Visual
         Dictionary<ulong, List<IMyCubeGrid>> sTrkr = new Dictionary<ulong, List<IMyCubeGrid>>();
         bool validInputThisTick = false; 
         public ViewState viewState = ViewState.Idle;
+        public ViewStateSelf viewStateSelf = ViewStateSelf.IdleSelf;
         public ReqPDoll reqPDoll = ReqPDoll.Off;
         public ReqPDollSelf reqPDollSelf = ReqPDollSelf.SelfOff;
         private MyStringId PDollBGSprite = MyStringId.TryGet("paperdollBG");
@@ -1039,10 +1047,15 @@ namespace klime.Visual
                 case ViewState.GoIdleWC:
                     HandleViewStateIdle();
                     break;
-                case ViewState.GoIdleSelf:
+
+            }
+
+            switch (viewStateSelf)
+            {
+                case ViewStateSelf.GoIdleSelf:
                     HandleViewStateIdleSelf();
                     break;
-                case ViewState.SearchingSelf:
+                case ViewStateSelf.SearchingSelf:
                     HanVSearchSelf(); // Create this method to handle SelfRender logic
                     break;
             }
@@ -1096,13 +1109,13 @@ namespace klime.Visual
 
         private void ToggleViewStateSelf()
         {
-            if (viewState == ViewState.SearchingSelf)
+            if (viewStateSelf == ViewStateSelf.SearchingSelf)
             {
-                viewState = ViewState.GoIdleSelf;
+                viewStateSelf = ViewStateSelf.GoIdleSelf;
             }
             else
             {
-                viewState = ViewState.SearchingSelf;
+                viewStateSelf = ViewStateSelf.SearchingSelf;
             }
         }
 
@@ -1151,13 +1164,13 @@ namespace klime.Visual
         private void HandleViewStateIdleSelf()
         {
             ClearAVisSelf();
-            if (viewState == ViewState.GoIdleSelf && reqPDollSelf == ReqPDollSelf.SelfOn)
+            if (viewStateSelf == ViewStateSelf.GoIdleSelf && reqPDollSelf == ReqPDollSelf.SelfOn)
             {
-                viewState = ViewState.SearchingSelf;
+                viewStateSelf = ViewStateSelf.SearchingSelf;
             }
             else
             {
-                viewState = ViewState.GoIdleSelf;
+                viewStateSelf = ViewStateSelf.GoIdleSelf;
             }
         }
 
@@ -1214,7 +1227,7 @@ namespace klime.Visual
         {
             if (controlEntSelf == null)
             {
-                viewState = ViewState.SearchingSelf;
+                viewStateSelf = ViewStateSelf.SearchingSelf;
                 return;
             }
 
@@ -1223,7 +1236,7 @@ namespace klime.Visual
 
             if (ent == null)
             {
-                viewState = ViewState.GoIdleSelf;
+                viewStateSelf = ViewStateSelf.GoIdleSelf;
                 return;
             }
 
@@ -1232,11 +1245,11 @@ namespace klime.Visual
             if (sGrid != null && sGrid.Physics != null)
             {
                 allVisSelf.Add(new EntVis(sGrid, -0.11, 0.05, 0));
-                viewState = ViewState.LockedSelf;
+                viewStateSelf = ViewStateSelf.LockedSelf;
             }
             else
             {
-                viewState = ViewState.GoIdleSelf;
+                viewStateSelf = ViewStateSelf.GoIdleSelf;
             }
         }
 
@@ -1359,7 +1372,7 @@ namespace klime.Visual
                     HandleControlEntity();
                 }
 
-                if (viewState == ViewState.LockedSelf)
+                if (viewStateSelf == ViewStateSelf.LockedSelf)
                 {
                     UpdateAllVisSelf();
                     HandleControlEntitySelf();
@@ -1432,7 +1445,7 @@ namespace klime.Visual
 
             if (allVisSelf.Count == 0 || reqPDollSelf == ReqPDollSelf.SelfOff)
             {
-                viewState = ViewState.GoIdleSelf;
+                viewStateSelf = ViewStateSelf.GoIdleSelf;
             }
         }
 
