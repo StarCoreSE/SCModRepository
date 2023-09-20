@@ -1106,7 +1106,7 @@ namespace klime.Visual
                     ToggleViewState();
                     ToggleRequestPaperDoll();
                 }
-                else if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.R))  // Trigger SelfRender with R key
+                if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.R))  // Trigger SelfRender with R key
                 {
                     ToggleViewStateSelf();
                     ToggleRequestPaperDollSelf();
@@ -1114,6 +1114,24 @@ namespace klime.Visual
             }
         }
 
+        private bool ValidInput()
+        {
+            var gui = MyAPIGateway.Gui;
+            var session = MyAPIGateway.Session;
+            var controlledEntity = session?.Player?.Controller?.ControlledEntity;
+
+            // Perform null checks to prevent NullReferenceException
+            if (gui == null || session == null || controlledEntity == null)
+            {
+                return false;
+            }
+
+            return session.CameraController != null &&
+                   !gui.ChatEntryVisible &&
+                   !gui.IsCursorVisible &&
+                   gui.GetCurrentScreen == MyTerminalPageEnum.None &&
+                   controlledEntity is IMyCockpit;
+        }
 
         private void ToggleViewState()
         {
@@ -1798,17 +1816,6 @@ namespace klime.Visual
             }
         }
 
-        private bool ValidInput()
-        {
-            var gui = MyAPIGateway.Gui;
-            var controlledEntity = MyAPIGateway.Session.Player.Controller.ControlledEntity;
-
-            return MyAPIGateway.Session.CameraController != null &&
-                   !gui.ChatEntryVisible &&
-                   !gui.IsCursorVisible &&
-                   gui.GetCurrentScreen == MyTerminalPageEnum.None &&
-                   controlledEntity is IMyCockpit;
-        }
 
 
         //private bool IsAdmin(IMyPlayer s) => s != null && (s.PromoteLevel == MyPromoteLevel.Admin || s.PromoteLevel == MyPromoteLevel.Owner);
