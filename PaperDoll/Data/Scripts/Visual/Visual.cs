@@ -118,8 +118,8 @@ namespace klime.Visual
 
 
             AddBillboard(Color.Lime * 0.75f, hateVector, left, up, tempBillboardScaling, BlendTypeEnum.SDR);
-            AddBillboard(Color.Red * 0.5f, greaterPainMatrix.Translation -= Vector3D.TransformNormal(relTrans, clonedWorldMatrix), left, up, tempBillboardScaling, BlendTypeEnum.AdditiveTop);
-            AddBillboard(Color.DodgerBlue * 0.5f, painMatrix.Translation -= Vector3D.TransformNormal(relTrans, clonedWorldMatrix), left, up, tempBillboardScaling, BlendTypeEnum.AdditiveTop);
+           // AddBillboard(Color.Red * 0.5f, greaterPainMatrix.Translation -= Vector3D.TransformNormal(relTrans, clonedWorldMatrix), left, up, tempBillboardScaling, BlendTypeEnum.AdditiveTop);
+           // AddBillboard(Color.DodgerBlue * 0.5f, painMatrix.Translation -= Vector3D.TransformNormal(relTrans, clonedWorldMatrix), left, up, tempBillboardScaling, BlendTypeEnum.AdditiveTop);
 
         }
 
@@ -705,6 +705,7 @@ namespace klime.Visual
         public MyCubeGrid realGrid;
         public MatrixD realGridBaseMatrix;
         public GridG visGrid;
+        public GridG visGridSelf;
         public GridG visGridString;
         public int lifetime;
         public ushort netID = 39302;
@@ -739,6 +740,12 @@ namespace klime.Visual
         private void SendMessage(object packet) => MyAPIGateway.Multiplayer.SendMessageTo(netID, MyAPIGateway.Utilities.SerializeToBinary(packet), MyAPIGateway.Multiplayer.ServerId);
 
         public void BlockRemoved(Vector3I pos)
+        {
+            visGrid?.DoBlockRemove(pos);
+            //add hitmarker sound here
+        }
+
+        public void BlockRemovedSelf(Vector3I pos)
         {
             visGrid?.DoBlockRemove(pos);
             //add hitmarker sound here
@@ -780,6 +787,20 @@ namespace klime.Visual
             UpdateRealLogic();
             UpdateVisLogic();
         }
+
+        public void UpdateSelf()
+        {
+            long currentTime = stopwatch.ElapsedTicks;
+
+            if (currentTime - lastUpdateTime >= interval)
+            {
+                UpdateVisPosition();
+                lastUpdateTime = currentTime;
+            }
+            UpdateRealLogic();
+            UpdateVisLogic();
+        }
+
 
         // Declare these as class-level variables to reuse and minimize memory allocation.
         private Vector2D offset = new Vector2D();
@@ -959,6 +980,15 @@ namespace klime.Visual
     {
         On,
         Off
+
+    }
+
+    public enum ReqPDollSelf
+    {
+
+        SelfOn,
+        SelfOff
+
     }
 
     public enum ViewState
@@ -970,7 +1000,17 @@ namespace klime.Visual
         Locked,
         GoIdle,
         GoIdleWC,
-        DoubleSearching
+        DoubleSearching,
+    }
+
+    public enum ViewStateSelf
+    {
+        IdleSelf,
+        LockedSelf,
+        GoIdle,
+        GoIdleWC,
+        GoIdleSelf,
+        SearchingSelf
     }
 
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
@@ -981,9 +1021,12 @@ namespace klime.Visual
         Dictionary<ulong, List<IMyCubeGrid>> sTrkr = new Dictionary<ulong, List<IMyCubeGrid>>();
         bool validInputThisTick = false; 
         public ViewState viewState = ViewState.Idle;
+        public ViewStateSelf viewStateSelf = ViewStateSelf.IdleSelf;
         public ReqPDoll reqPDoll = ReqPDoll.Off;
+        public ReqPDollSelf reqPDollSelf = ReqPDollSelf.SelfOff;
         private MyStringId PDollBGSprite = MyStringId.TryGet("paperdollBG");
         public List<EntVis> allVis = new List<EntVis>();
+        public List<EntVis> allVisSelf = new List<EntVis>();
         WcApi wcAPI;
         public HudAPIv2 hudAPI;
         public BillBoardHUDMessage billmessage;
@@ -1025,6 +1068,17 @@ namespace klime.Visual
                 case ViewState.GoIdleWC:
                     HandleViewStateIdle();
                     break;
+
+            }
+
+            switch (viewStateSelf)
+            {
+                case ViewStateSelf.GoIdleSelf:
+                    HandleViewStateIdleSelf();
+                    break;
+                case ViewStateSelf.SearchingSelf:
+                    HanVSearchSelf(); // Create this method to handle SelfRender logic
+                    break;
             }
         }
 
@@ -1045,16 +1099,86 @@ namespace klime.Visual
         {
             validInputThisTick = ValidInput();
 
-            if (validInputThisTick && MyAPIGateway.Input.IsNewKeyPressed(MyKeys.T))
+            if (validInputThisTick)
             {
-                ToggleViewState();
-                ToggleRequestPaperDoll();
+                if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.T))
+                {
+                    ToggleViewState();
+                    ToggleRequestPaperDoll();
+                }
+                if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.R))  // Trigger SelfRender with R key
+                {
+                    ToggleViewStateSelf();
+                    ToggleRequestPaperDollSelf();
+                }
             }
+        }
+
+        private bool ValidInput()
+        {
+            var gui = MyAPIGateway.Gui;
+            var session = MyAPIGateway.Session;
+            var controlledEntity = session?.Player?.Controller?.ControlledEntity;
+
+            // Perform null checks to prevent NullReferenceException
+            if (gui == null || session == null || controlledEntity == null)
+            {
+                return false;
+            }
+
+            return session.CameraController != null &&
+                   !gui.ChatEntryVisible &&
+                   !gui.IsCursorVisible &&
+                   gui.GetCurrentScreen == MyTerminalPageEnum.None &&
+                   controlledEntity is IMyCockpit;
         }
 
         private void ToggleViewState()
         {
-            viewState = viewState == ViewState.GoIdleWC ? ViewState.SearchingWC : ViewState.GoIdleWC;
+            // Updated to handle SelfRender state
+            if (viewState == ViewState.GoIdleWC)
+            {
+                viewState = ViewState.SearchingWC;
+            }
+            else
+            {
+                viewState = ViewState.GoIdleWC;
+            }
+        }
+
+        private void ToggleViewStateSelf()
+        {
+            if (viewStateSelf == ViewStateSelf.SearchingSelf)
+            {
+                viewStateSelf = ViewStateSelf.GoIdleSelf;
+            }
+            else
+            {
+                viewStateSelf = ViewStateSelf.SearchingSelf;
+            }
+        }
+
+        private void ToggleRequestPaperDollSelf()
+        {
+            if (reqPDollSelf == ReqPDollSelf.SelfOn)
+            {
+                reqPDollSelf = ReqPDollSelf.SelfOff;
+            }
+            else
+            {
+                reqPDollSelf = ReqPDollSelf.SelfOn;
+            }
+
+            string status = reqPDollSelf.ToString().ToUpper();
+            string color = "Orange";  // Different color for Self, for example
+
+            MyAPIGateway.Utilities.ShowNotification($"PAPER DOLL {status}", 1000, color);
+        }
+
+        private void HanVSearchSelf()
+        {
+            MyEntity controlEntSelf = (MyEntity)(MyAPIGateway.Session.Player.Controller?.ControlledEntity?.Entity as IMyCockpit);
+            ExecuteVSearchUpdateSelf(controlEntSelf);
         }
 
         private void HanVSearchWC()
@@ -1076,11 +1200,34 @@ namespace klime.Visual
             }
         }
 
+        private void HandleViewStateIdleSelf()
+        {
+            ClearAVisSelf();
+            if (viewStateSelf == ViewStateSelf.GoIdleSelf && reqPDollSelf == ReqPDollSelf.SelfOn)
+            {
+                viewStateSelf = ViewStateSelf.SearchingSelf;
+            }
+            else
+            {
+                viewStateSelf = ViewStateSelf.GoIdleSelf;
+            }
+        }
+
         private void ToggleRequestPaperDoll()
         {
-            reqPDoll = reqPDoll == ReqPDoll.On ? ReqPDoll.Off : ReqPDoll.On;
-            string status = reqPDoll == ReqPDoll.On ? "ENABLED" : "DISABLED";
-            string color = reqPDoll == ReqPDoll.On ? "Green" : "Red";
+            // Updated to handle Self state
+            if (reqPDoll == ReqPDoll.On)
+            {
+                reqPDoll = ReqPDoll.Off;
+            }
+            else
+            {
+                reqPDoll = ReqPDoll.On;
+            }
+
+            string status = reqPDoll.ToString().ToUpper();
+            string color = "Green";
+
             MyAPIGateway.Utilities.ShowNotification($"PAPER DOLL {status}", 1000, color);
         }
 
@@ -1113,6 +1260,37 @@ namespace klime.Visual
             }
         }
 
+
+        private void ExecuteVSearchUpdateSelf(MyEntity controlEntSelf)
+        {
+            if (controlEntSelf == null)
+            {
+                viewStateSelf = ViewStateSelf.SearchingSelf;
+                return;
+            }
+
+            var thefuckingcockpitiamcurrentlysittingin = MyAPIGateway.Session.Player.Controller.ControlledEntity.Entity as IMyCockpit;
+            var ent = thefuckingcockpitiamcurrentlysittingin.CubeGrid;
+
+            if (ent == null)
+            {
+                viewStateSelf = ViewStateSelf.GoIdleSelf;
+                return;
+            }
+
+            MyCubeGrid sGrid = ent as MyCubeGrid;
+
+            if (sGrid != null && sGrid.Physics != null)
+            {
+                allVisSelf.Add(new EntVis(sGrid, -0.11, 0.05, 0));
+                viewStateSelf = ViewStateSelf.LockedSelf;
+            }
+            else
+            {
+                viewStateSelf = ViewStateSelf.GoIdleSelf;
+            }
+        }
+
         private void ClearAVis()
         {
             foreach (var entVis in allVis)
@@ -1122,6 +1300,14 @@ namespace klime.Visual
             allVis.Clear();
         }
 
+        private void ClearAVisSelf()
+        {
+            foreach (var entVisSelf in allVisSelf)
+            {
+                entVisSelf.Close();
+            }
+            allVisSelf.Clear();
+        }
 
 
         public void CreateHud()
@@ -1206,6 +1392,7 @@ namespace klime.Visual
             vectorB.Normalize();
             return Math.Acos(MathHelper.Clamp(vectorA.Dot(vectorB), -1, 1)) * (180.0 / Math.PI);
         }
+
         public override void Draw()
         {
             HandEx(() =>
@@ -1218,10 +1405,22 @@ namespace klime.Visual
                     return;
                 }
 
+                if (allVisSelf == null)
+                {
+                    MyLog.Default.WriteLine("allVisSelf is null");
+                    return;
+                }
+
                 if (viewState == ViewState.Locked)
                 {
                     UpdateAllVis();
                     HandleControlEntity();
+                }
+
+                if (viewStateSelf == ViewStateSelf.LockedSelf)
+                {
+                    UpdateAllVisSelf();
+                    HandleControlEntitySelf();
                 }
 
             }, "Drawing On-Screen Elements");
@@ -1240,6 +1439,15 @@ namespace klime.Visual
             {
                 allVis[i].Update();
                 if (allVis[i].isClosed) allVis.RemoveAtFast(i);
+            }
+        }
+
+        private void UpdateAllVisSelf()
+        {
+            for (int i = allVisSelf.Count - 1; i >= 0; i--)
+            {
+                allVisSelf[i].Update();
+                if (allVisSelf[i].isClosed) allVisSelf.RemoveAtFast(i);
             }
         }
 
@@ -1267,6 +1475,26 @@ namespace klime.Visual
             }
         }
 
+        private void HandleControlEntitySelf()
+        {
+            MyEntity sEnt = null;
+            if (MyAPIGateway.Session.Player.Controller?.ControlledEntity?.Entity is IMyCockpit)
+            {
+                IMyCockpit cock = MyAPIGateway.Session.Player.Controller?.ControlledEntity?.Entity as IMyCockpit;
+                sEnt = cock.CubeGrid as MyEntity;
+            }
+            else
+            {
+                //ClearAVisSelf(); //this would clear your paper doll whenever out of cockpit
+            }
+
+            if (allVisSelf.Count == 0 || reqPDollSelf == ReqPDollSelf.SelfOff)
+            {
+                viewStateSelf = ViewStateSelf.GoIdleSelf;
+            }
+        }
+
+
         private void ManEntFoc(MyEntity cEnt)
         {
             var ent = wcAPI.GetAiFocus(cEnt, 0);
@@ -1292,6 +1520,8 @@ namespace klime.Visual
                 ClearAVis();
             }
         }
+
+
 
         private bool IsEntityTracked(MyCubeGrid cGrid)
         {
@@ -1350,6 +1580,7 @@ namespace klime.Visual
                 if (fDP == null) return;
 
                 UpEnFd(fDP);
+                UpEnFdSelf(fDP);
 
             }, "Handling Feedback Packet");
         }
@@ -1371,6 +1602,17 @@ namespace klime.Visual
                 if (eVis?.realGrid?.EntityId == fDP.entityId)
                 {
                     eVis.BlockRemoved(fDP.position);
+                }
+            }
+        }
+
+        private void UpEnFdSelf(FeedbackDamagePacket fDP)
+        {
+            foreach (var sVis in allVisSelf)
+            {
+                if (sVis?.realGrid?.EntityId == fDP.entityId)
+                {
+                    sVis.BlockRemoved(fDP.position);
                 }
             }
         }
@@ -1574,17 +1816,6 @@ namespace klime.Visual
             }
         }
 
-        private bool ValidInput()
-        {
-            var gui = MyAPIGateway.Gui;
-            var controlledEntity = MyAPIGateway.Session.Player.Controller.ControlledEntity;
-
-            return MyAPIGateway.Session.CameraController != null &&
-                   !gui.ChatEntryVisible &&
-                   !gui.IsCursorVisible &&
-                   gui.GetCurrentScreen == MyTerminalPageEnum.None &&
-                   controlledEntity is IMyCockpit;
-        }
 
 
         //private bool IsAdmin(IMyPlayer s) => s != null && (s.PromoteLevel == MyPromoteLevel.Admin || s.PromoteLevel == MyPromoteLevel.Owner);
@@ -1592,6 +1823,7 @@ namespace klime.Visual
         protected override void UnloadData()
         {
             foreach (var e in allVis) e.Close();
+            foreach (var e in allVisSelf) e.Close();
             var mp = MyAPIGateway.Multiplayer;
             if (MyAPIGateway.Session.IsServer) mp.UnregisterSecureMessageHandler(netID, NetworkHandler);
             mp.UnregisterSecureMessageHandler(feedbackNetID, FeedbackHandler);
