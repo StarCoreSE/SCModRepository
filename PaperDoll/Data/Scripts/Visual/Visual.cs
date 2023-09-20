@@ -1816,6 +1816,7 @@ namespace klime.Visual
         protected override void UnloadData()
         {
             foreach (var e in allVis) e.Close();
+            foreach (var e in allVisSelf) e.Close();
             var mp = MyAPIGateway.Multiplayer;
             if (MyAPIGateway.Session.IsServer) mp.UnregisterSecureMessageHandler(netID, NetworkHandler);
             mp.UnregisterSecureMessageHandler(feedbackNetID, FeedbackHandler);
