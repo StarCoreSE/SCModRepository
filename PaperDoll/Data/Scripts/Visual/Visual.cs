@@ -705,6 +705,7 @@ namespace klime.Visual
         public MyCubeGrid realGrid;
         public MatrixD realGridBaseMatrix;
         public GridG visGrid;
+        public GridG visGridSelf;
         public GridG visGridString;
         public int lifetime;
         public ushort netID = 39302;
@@ -739,6 +740,12 @@ namespace klime.Visual
         private void SendMessage(object packet) => MyAPIGateway.Multiplayer.SendMessageTo(netID, MyAPIGateway.Utilities.SerializeToBinary(packet), MyAPIGateway.Multiplayer.ServerId);
 
         public void BlockRemoved(Vector3I pos)
+        {
+            visGrid?.DoBlockRemove(pos);
+            //add hitmarker sound here
+        }
+
+        public void BlockRemovedSelf(Vector3I pos)
         {
             visGrid?.DoBlockRemove(pos);
             //add hitmarker sound here
@@ -780,6 +787,20 @@ namespace klime.Visual
             UpdateRealLogic();
             UpdateVisLogic();
         }
+
+        public void UpdateSelf()
+        {
+            long currentTime = stopwatch.ElapsedTicks;
+
+            if (currentTime - lastUpdateTime >= interval)
+            {
+                UpdateVisPosition();
+                lastUpdateTime = currentTime;
+            }
+            UpdateRealLogic();
+            UpdateVisLogic();
+        }
+
 
         // Declare these as class-level variables to reuse and minimize memory allocation.
         private Vector2D offset = new Vector2D();
@@ -1192,7 +1213,6 @@ namespace klime.Visual
             MyAPIGateway.Utilities.ShowNotification($"PAPER DOLL {status}", 1000, color);
         }
 
-
         private void ExecuteVSearchUpdate(MyEntity controlEnt)
         {
             if (controlEnt == null || wcAPI == null)
@@ -1354,6 +1374,7 @@ namespace klime.Visual
             vectorB.Normalize();
             return Math.Acos(MathHelper.Clamp(vectorA.Dot(vectorB), -1, 1)) * (180.0 / Math.PI);
         }
+
         public override void Draw()
         {
             HandEx(() =>
@@ -1541,6 +1562,7 @@ namespace klime.Visual
                 if (fDP == null) return;
 
                 UpEnFd(fDP);
+                UpEnFdSelf(fDP);
 
             }, "Handling Feedback Packet");
         }
@@ -1562,6 +1584,17 @@ namespace klime.Visual
                 if (eVis?.realGrid?.EntityId == fDP.entityId)
                 {
                     eVis.BlockRemoved(fDP.position);
+                }
+            }
+        }
+
+        private void UpEnFdSelf(FeedbackDamagePacket fDP)
+        {
+            foreach (var sVis in allVisSelf)
+            {
+                if (sVis?.realGrid?.EntityId == fDP.entityId)
+                {
+                    sVis.BlockRemoved(fDP.position);
                 }
             }
         }
