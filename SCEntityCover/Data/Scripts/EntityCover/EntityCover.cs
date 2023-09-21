@@ -131,10 +131,17 @@ namespace klime.EntityCover
 
         public override void Close()
         {
-            // Get entityId from block
-            long entityId = entityBattery.EntityId;
+            try 
+            {
+                // Get entityId from block
+                long entityId = entityBattery.EntityId;
 
-            EntityCover.RemoveCover(entityId, modelName);
+                EntityCover.RemoveCover(entityId, modelName);
+            }
+            catch (Exception ex)
+            {
+                MyLog.Default.WriteLine($"EntityCover {ex}");
+            }
         }
     }
 
