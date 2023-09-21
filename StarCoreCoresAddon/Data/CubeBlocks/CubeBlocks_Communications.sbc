@@ -101,7 +101,59 @@
 			<PCU>20000</PCU>
 			<IsAirTight>false</IsAirTight>
 		</Definition>
-		<!-- Large Heavy -->
+    <!-- Large Medium 2x2 -->
+    <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
+      <Id>
+        <TypeId>Beacon</TypeId>
+        <SubtypeId>LargeBlockBeacon_MediumCore_2x2</SubtypeId>
+      </Id>
+      <DisplayName>Medium Ship Core 2x2</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\beacon.dds</Icon>
+      <Description>The Ship Core block is required for all Medium grids.</Description>
+      <CubeSize>Large</CubeSize>
+      <GuiVisible>false</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="2" y="2" z="2"/>
+      <ModelOffset x="0" y="0" z="0"/>
+      <Model>Models\Ship_Core_2x2.mwm</Model>
+      <Components>
+        <Component Subtype="Computer" Count="1"/>
+        <Component Subtype="SteelPlate" Count="300"/>
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0"/>
+      <MountPoints>
+        <MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+        <MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+        <MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+        <MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+        <MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+        <MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+      </MountPoints>
+      <!-- Build stages must be removed so beacon is always functional -->
+      <!--<BuildProgressModels>
+                <Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\BeaconConstruction_1.mwm" />
+                <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
+                <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
+            </BuildProgressModels>-->
+      <BlockPairName>Beacon_MediumCore_2x2</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <MirroringY>Z</MirroringY>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+      <DamagedSound>ParticleElectrical</DamagedSound>
+      <ResourceSinkGroup>Utility</ResourceSinkGroup>
+      <MaxBroadcastRadius>200000</MaxBroadcastRadius>
+      <Flare>BeaconLarge</Flare>
+      <MaxBroadcastPowerDrainkW>20</MaxBroadcastPowerDrainkW>
+      <EmissiveColorPreset>Beacon</EmissiveColorPreset>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>20000</PCU>
+      <IsAirTight>false</IsAirTight>
+    </Definition>
+
+
+    <!-- Large Heavy -->
 		<Definition xsi:type="MyObjectBuilder_BeaconDefinition">
 			<Id>
 				<TypeId>Beacon</TypeId>
