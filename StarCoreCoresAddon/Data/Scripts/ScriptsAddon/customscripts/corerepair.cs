@@ -42,8 +42,17 @@ namespace StarCoreCoreRepair
         private bool? lastFunctionalState = null;
         private bool allowPowerGeneration = true;
 
+        private int tickCounter = 0;  // Add this line to your class fields
+        private const int TICKS_PER_SECOND = 60;  // Assuming 60 ticks per second
+
         public override void UpdateAfterSimulation()
         {
+            tickCounter++; //may have to go back to every tick if timer block fuckery arises
+            if (tickCounter % TICKS_PER_SECOND != 0)  // Skip if it's not the tick to update
+            {
+                return;
+            }
+
             if (shipCore == null || shipCore.CubeGrid.Physics == null) return;
 
             bool isFunctionalNow = shipCore.IsFunctional;
@@ -87,6 +96,7 @@ namespace StarCoreCoreRepair
 
             ForceEnabledState(isFunctionalNow);
         }
+
 
         private void ForceEnabledState(bool isFunctional)
         {
