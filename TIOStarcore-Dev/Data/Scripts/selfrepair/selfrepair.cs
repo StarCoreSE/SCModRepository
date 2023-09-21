@@ -75,7 +75,7 @@ namespace TIOSelfRepair
             MyCubeBlock cubeBlock = artilleryBlock as MyCubeBlock;
             if (cubeBlock != null)
             {
-                cubeBlock.ChangeOwner(gridOwnerId, MyOwnershipShareModeEnum.Faction);
+                cubeBlock.ChangeBlockOwnerRequest(gridOwnerId, MyOwnershipShareModeEnum.Faction);
             }
 
         }

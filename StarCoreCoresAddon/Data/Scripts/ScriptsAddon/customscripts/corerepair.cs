@@ -169,7 +169,7 @@ namespace StarCoreCoreRepair
                 MyCubeBlock cubeBlock = shipCore as MyCubeBlock;
                 if (cubeBlock != null)
                 {
-                    cubeBlock.ChangeOwner(gridOwnerId, MyOwnershipShareModeEnum.Faction);
+                    cubeBlock.ChangeBlockOwnerRequest(gridOwnerId, MyOwnershipShareModeEnum.Faction);
                 }
 
                 SetStatus($"Core repaired.", 2000, MyFontEnum.Green);
