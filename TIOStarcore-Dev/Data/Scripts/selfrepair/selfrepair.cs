@@ -1,5 +1,6 @@
 ﻿using Sandbox.Common.ObjectBuilders;
 using Sandbox.Game;
+using Sandbox.Game.Entities;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
 using VRage.Game;
@@ -62,9 +63,23 @@ namespace TIOSelfRepair
             IMySlimBlock slimBlock = artilleryBlock.SlimBlock;
             if (slimBlock == null) return;
 
+            // Fetch the original owner ID of the grid.
+            long gridOwnerId = artilleryBlock.CubeGrid.BigOwners.Count > 0 ? artilleryBlock.CubeGrid.BigOwners[0] : 0;
+
+            // If the grid has an owner, proceed with repair and ownership change.
+
             float repairAmount = 20;
             slimBlock.IncreaseMountLevel(repairAmount, 0L, null, 0f, false, MyOwnershipShareModeEnum.Faction);
+
+            // Try casting to MyCubeBlock and change the owner.
+            MyCubeBlock cubeBlock = artilleryBlock as MyCubeBlock;
+            if (cubeBlock != null)
+            {
+                cubeBlock.ChangeOwner(gridOwnerId, MyOwnershipShareModeEnum.Faction);
+            }
+
         }
+
 
         private void ArtilleryBlockEnabledChanged(IMyTerminalBlock obj)
         {
