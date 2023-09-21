@@ -32,13 +32,24 @@ namespace StarCoreCoreRepair
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
+            // Other existing code
             //if (!MyAPIGateway.Session.IsServer) return;
             shipCore = Entity as IMyBeacon;
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
             SetStatus($"StarCoreCoreRepair Initialized", 5000, MyFontEnum.Green);
-            blockDamageModifierSync = new MySync<float, SyncDirection.BothWays>(this);
-            blockDamageModifierSync.ValueChanged += BlockDamageModifierSync_ValueChanged;
+
+            // Attach event handler after API has initialized blockDamageModifierSync
+            if (blockDamageModifierSync != null)
+            {
+                blockDamageModifierSync.ValueChanged += BlockDamageModifierSync_ValueChanged;
+            }
+            else
+            {
+                // Handle or log that blockDamageModifierSync is null.
+            }
         }
+
+
 
         private void BlockDamageModifierSync_ValueChanged(MySync<float, SyncDirection.BothWays> obj)
         {
