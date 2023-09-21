@@ -257,8 +257,60 @@
       <IsAirTight>false</IsAirTight>
     </Definition>
 
- 
-    
+    <!-- Admin Core -->
+    <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
+      <Id>
+        <TypeId>Beacon</TypeId>
+        <SubtypeId>LargeBlockBeacon_AdminCore</SubtypeId>
+      </Id>
+      <DisplayName>[Don't Use] Admin Core</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\beacon.dds</Icon>
+      <Description>for npcs and stuff</Description>
+      <CubeSize>Large</CubeSize>
+      <GuiVisible>false</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1"/>
+      <ModelOffset x="0" y="0" z="0"/>
+      <Model>Models\Ship_Core_Admin.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="300"/>
+        <Component Subtype="Computer" Count="1"/>
+        <Component Subtype="SteelPlate" Count="300"/>
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0"/>
+      <MountPoints>
+        <MountPoint Side="Front" StartX="0.00" StartY="1.00" EndX="3.00" EndY="2.00"/>
+        <MountPoint Side="Back" StartX="0.00" StartY="1.00" EndX="3.00" EndY="2.00"/>
+        <MountPoint Side="Left" StartX="0.00" StartY="1.00" EndX="3.00" EndY="2.00"/>
+        <MountPoint Side="Right" StartX="0.00" StartY="1.00" EndX="3.00" EndY="2.00"/>
+        <MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+        <MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+      </MountPoints>
+      <!-- Build stages must be removed so beacon is always functional -->
+      <!--<BuildProgressModels>
+                <Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\BeaconConstruction_1.mwm" />
+                <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
+                <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
+            </BuildProgressModels>-->
+      <BlockPairName>Beacon_HeavyCore_3x3x3</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <MirroringY>Z</MirroringY>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+      <DamagedSound>ParticleElectrical</DamagedSound>
+      <ResourceSinkGroup>Utility</ResourceSinkGroup>
+      <MaxBroadcastRadius>200000</MaxBroadcastRadius>
+      <Flare>BeaconLarge</Flare>
+      <MaxBroadcastPowerDrainkW>20</MaxBroadcastPowerDrainkW>
+      <EmissiveColorPreset>Beacon</EmissiveColorPreset>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>40000</PCU>
+      <IsAirTight>false</IsAirTight>
+    </Definition>
+
+
+
     <!-- Drone Small Grid 1x1 -->
     <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
       <Id>
