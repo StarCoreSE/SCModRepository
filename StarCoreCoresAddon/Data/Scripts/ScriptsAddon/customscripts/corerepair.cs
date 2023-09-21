@@ -32,10 +32,11 @@ namespace StarCoreCoreRepair
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
-            if (!MyAPIGateway.Session.IsServer) return;
+            //if (!MyAPIGateway.Session.IsServer) return;
             shipCore = Entity as IMyBeacon;
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
             SetStatus($"StarCoreCoreRepair Initialized", 5000, MyFontEnum.Green);
+            blockDamageModifierSync = new MySync<float, SyncDirection.BothWays>(this);
             blockDamageModifierSync.ValueChanged += BlockDamageModifierSync_ValueChanged;
         }
 
