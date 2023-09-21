@@ -1,3 +1,4 @@
+using System;
 using Sandbox.Common.ObjectBuilders;
 using Sandbox.Game;
 using Sandbox.Game.EntityComponents;
@@ -18,6 +19,9 @@ namespace StarCoreCoreRepair
     {
         private IMyBeacon shipCore;
         private IMyHudNotification notifStatus = null;
+        private DateTime repairStartTime;
+        private TimeSpan repairDelay = TimeSpan.FromSeconds(30);
+        private bool repairTimerActive = false;
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
@@ -30,29 +34,76 @@ namespace StarCoreCoreRepair
         public override void UpdateOnceBeforeFrame()
         {
             if (shipCore == null || shipCore.CubeGrid.Physics == null) return;
-            shipCore.EnabledChanged += ShipCoreEnabledChanged;
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
         }
+
+        private bool? lastFunctionalState = null;
 
         public override void UpdateAfterSimulation()
         {
             if (shipCore == null || shipCore.CubeGrid.Physics == null) return;
 
-            if (!shipCore.IsFunctional)
+            bool isFunctionalNow = shipCore.IsFunctional;
+
+            if (lastFunctionalState != isFunctionalNow)
             {
-                SetStatus($"Core is no longer functional. Resetting countdown", 2000, MyFontEnum.Red);
-                shipCore.SlimBlock.BlockGeneralDamageModifier = 0.01f;
+                lastFunctionalState = isFunctionalNow;
+
+                if (isFunctionalNow)
+                {
+                    shipCore.SlimBlock.BlockGeneralDamageModifier = 1.0f;
+                    SetStatus($"Core is functional.", 2000, MyFontEnum.Green);
+                    repairTimerActive = false;
+                }
+                else
+                {
+                    shipCore.SlimBlock.BlockGeneralDamageModifier = 0.01f;
+                    SetStatus($"Core is non-functional. Repair timer started.", 2000, MyFontEnum.Red);
+                    repairStartTime = DateTime.UtcNow;
+                    repairTimerActive = true;
+                }
+            }
+
+            if (repairTimerActive)
+            {
+                TimeSpan timeRemaining = repairDelay - (DateTime.UtcNow - repairStartTime);
+                SetStatus($"Time until core repair: {timeRemaining.TotalSeconds:F0} seconds.", 1000, MyFontEnum.Red);
+
+                if (timeRemaining <= TimeSpan.Zero)
+                {
+                    DoRepair();
+                    repairTimerActive = false;
+                }
+            }
+
+            ForceEnabledState(isFunctionalNow);
+        }
+
+
+        private void ForceEnabledState(bool isFunctional)
+        {
+            if (isFunctional && !shipCore.Enabled)
+            {
+                shipCore.Enabled = true;
+                SetStatus($"Core forced ON due to functionality.", 2000, MyFontEnum.Green);
+            }
+            else if (!isFunctional && shipCore.Enabled)
+            {
+                shipCore.Enabled = false;
+                SetStatus($"Core forced OFF due to non-functionality.", 2000, MyFontEnum.Red);
             }
         }
 
-        private void ShipCoreEnabledChanged(IMyTerminalBlock obj)
+        private void DoRepair()
         {
-            if (obj.EntityId != shipCore.EntityId) return;
-            if (shipCore.IsFunctional)
-            {
-                SetStatus($"Block is functional. Resetting countdown", 2000, MyFontEnum.Green);
-                shipCore.SlimBlock.BlockGeneralDamageModifier = 1.0f;
-            }
+            if (shipCore == null || shipCore.CubeGrid.Physics == null) return;
+
+            IMySlimBlock slimBlock = shipCore.SlimBlock;
+            if (slimBlock == null) return;
+
+            float repairAmount = 9999;
+            slimBlock.IncreaseMountLevel(repairAmount, 0L, null, 0f, false, MyOwnershipShareModeEnum.Faction);
+            SetStatus($"Core repaired.", 2000, MyFontEnum.Green);
         }
 
         private void SetStatus(string text, int aliveTime = 300, string font = MyFontEnum.Green)
@@ -69,10 +120,7 @@ namespace StarCoreCoreRepair
 
         public override void Close()
         {
-            if (shipCore != null)
-            {
-                shipCore.EnabledChanged -= ShipCoreEnabledChanged;
-            }
+            // Cleanup logic here, if necessary
         }
     }
 }

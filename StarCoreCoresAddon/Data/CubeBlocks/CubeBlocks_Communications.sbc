@@ -16,10 +16,11 @@
 			<Size x="1" y="1" z="1"/>
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Ship_Core_1x1.mwm</Model>
-			<Components>
-				<Component Subtype="Computer" Count="1"/>
-				<Component Subtype="SteelPlate" Count="300"/>
-			</Components>
+      <Components>
+        <Component Subtype="SteelPlate" Count="300"/>
+        <Component Subtype="Computer" Count="1"/>
+        <Component Subtype="SteelPlate" Count="300"/>
+      </Components>
 			<CriticalComponent Subtype="Computer" Index="0"/>
 			<MountPoints>
 				<MountPoint Side="Bottom" StartX="0.1" StartY="0.1" EndX="0.9" EndY="0.9" Default="true"/>
@@ -66,10 +67,11 @@
 			<Size x="1" y="1" z="3"/>
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Ship_Core_1x3.mwm</Model>
-			<Components>
-				<Component Subtype="Computer" Count="1"/>
-				<Component Subtype="SteelPlate" Count="300"/>
-			</Components>
+      <Components>
+        <Component Subtype="SteelPlate" Count="300"/>
+        <Component Subtype="Computer" Count="1"/>
+        <Component Subtype="SteelPlate" Count="300"/>
+      </Components>
 			<CriticalComponent Subtype="Computer" Index="0"/>
       <MountPoints>
         <MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
@@ -117,6 +119,7 @@
       <ModelOffset x="0" y="0" z="0"/>
       <Model>Models\Ship_Core_2x2.mwm</Model>
       <Components>
+        <Component Subtype="SteelPlate" Count="300"/>
         <Component Subtype="Computer" Count="1"/>
         <Component Subtype="SteelPlate" Count="300"/>
       </Components>
@@ -166,11 +169,11 @@
 			<Size x="3" y="1" z="3"/>
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Ship_Core_3x3x1.mwm</Model>
-			<Components>
+      <Components>
         <Component Subtype="SteelPlate" Count="300"/>
-				<Component Subtype="Computer" Count="1"/>
-				<Component Subtype="SteelPlate" Count="300"/>
-			</Components>
+        <Component Subtype="Computer" Count="1"/>
+        <Component Subtype="SteelPlate" Count="300"/>
+      </Components>
 			<CriticalComponent Subtype="Computer" Index="0"/>
       <MountPoints>
         <MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="3.00" EndY="1.00"/>
