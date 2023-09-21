@@ -36,7 +36,7 @@
                 <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
                 <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
             </BuildProgressModels>-->
-			<BlockPairName>Beacon</BlockPairName>
+			<BlockPairName>Beacon_LightCore</BlockPairName>
 			<EdgeType>Light</EdgeType>
 			<MirroringY>Z</MirroringY>
 			<BuildTimeSeconds>40</BuildTimeSeconds>
@@ -257,6 +257,52 @@
       <IsAirTight>false</IsAirTight>
     </Definition>
 
+ 
+    
+    <!-- Drone Small Grid 1x1 -->
+    <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
+      <Id>
+        <TypeId>Beacon</TypeId>
+        <SubtypeId>Ship_Core_1x1_SG</SubtypeId>
+      </Id>
+      <DisplayName>Drone Core</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\beacon.dds</Icon>
+      <Description>The Ship Core block is required for Light grids.</Description>
+      <CubeSize>Small</CubeSize>
+      <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1"/>
+      <ModelOffset x="0" y="0" z="0"/>
+      <Model>Models\Ship_Core_1x1_SG.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="300"/>
+        <Component Subtype="Computer" Count="1"/>
+        <Component Subtype="SteelPlate" Count="300"/>
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0"/>
 
+      <!-- Build stages must be removed so beacon is always functional -->
+      <!--<BuildProgressModels>
+                <Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\BeaconConstruction_1.mwm" />
+                <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
+                <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
+            </BuildProgressModels>-->
+      <BlockPairName>DroneCore</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <MirroringY>Z</MirroringY>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+      <DamagedSound>ParticleElectrical</DamagedSound>
+      <ResourceSinkGroup>Utility</ResourceSinkGroup>
+      <MaxBroadcastRadius>200000</MaxBroadcastRadius>
+      <Flare>BeaconLarge</Flare>
+      <MaxBroadcastPowerDrainkW>20</MaxBroadcastPowerDrainkW>
+      <EmissiveColorPreset>Beacon</EmissiveColorPreset>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>7500</PCU>
+      <IsAirTight>false</IsAirTight>
+    </Definition>
+    
   </CubeBlocks>
 </Definitions>
