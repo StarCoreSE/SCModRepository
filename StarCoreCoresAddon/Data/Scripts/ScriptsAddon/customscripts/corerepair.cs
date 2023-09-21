@@ -9,16 +9,20 @@ using VRage.Game;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.Game.ModAPI.Ingame;
+using VRage.Game.ModAPI.Network;
 using VRage.ModAPI;
+using VRage.Network;
 using VRage.ObjectBuilders;
+using VRage.Sync;
 using VRageMath;
 using IMySlimBlock = VRage.Game.ModAPI.IMySlimBlock;
 
 namespace StarCoreCoreRepair
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Beacon), false, "LargeBlockBeacon_LightCore", "LargeBlockBeacon_MediumCore", "LargeBlockBeacon_MediumCore_2x2", "LargeBlockBeacon_HeavyCore", "LargeBlockBeacon_HeavyCore_3x3x3")]
-    public class StarCoreCoreRepair : MyGameLogicComponent
+    public class StarCoreCoreRepair : MyGameLogicComponent, IMyEventProxy
     {
+        MySync<float, SyncDirection.BothWays> blockDamageModifierSync = null;
         private IMyBeacon shipCore;
         private IMyHudNotification notifStatus = null;
         private DateTime repairStartTime;
@@ -32,7 +36,14 @@ namespace StarCoreCoreRepair
             shipCore = Entity as IMyBeacon;
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
             SetStatus($"StarCoreCoreRepair Initialized", 5000, MyFontEnum.Green);
+            blockDamageModifierSync.ValueChanged += BlockDamageModifierSync_ValueChanged;
         }
+
+        private void BlockDamageModifierSync_ValueChanged(MySync<float, SyncDirection.BothWays> obj)
+        {
+            shipCore.SlimBlock.BlockGeneralDamageModifier = obj.Value;
+        }
+
 
         public override void UpdateOnceBeforeFrame()
         {
@@ -48,8 +59,8 @@ namespace StarCoreCoreRepair
 
         public override void UpdateAfterSimulation()
         {
-            tickCounter++; //may have to go back to every tick if timer block fuckery arises
-            if (tickCounter % TICKS_PER_SECOND != 0)  // Skip if it's not the tick to update
+            tickCounter++;
+            if (tickCounter % TICKS_PER_SECOND != 0)
             {
                 return;
             }
@@ -64,20 +75,26 @@ namespace StarCoreCoreRepair
 
                 if (isFunctionalNow)
                 {
-                    shipCore.SlimBlock.BlockGeneralDamageModifier = 1.0f;
+                    float newModifier = 1.0f; // New value for BlockGeneralDamageModifier
+                    shipCore.SlimBlock.BlockGeneralDamageModifier = newModifier;
+                    blockDamageModifierSync.Value = newModifier;  // Update MySync variable
+
                     SetStatus($"Core is functional.", 2000, MyFontEnum.Green);
                     repairTimerActive = false;
                     allowPowerGeneration = true;
-                    userHasControl = true;  // Give control back to the user
+                    userHasControl = true;
                 }
                 else
                 {
-                    shipCore.SlimBlock.BlockGeneralDamageModifier = 0.01f;
+                    float newModifier = 0.01f; // New value for BlockGeneralDamageModifier
+                    shipCore.SlimBlock.BlockGeneralDamageModifier = newModifier;
+                    blockDamageModifierSync.Value = newModifier;  // Update MySync variable
+
                     SetStatus($"Core is non-functional. Repair timer started.", 2000, MyFontEnum.Red);
                     repairStartTime = DateTime.UtcNow;
                     repairTimerActive = true;
                     allowPowerGeneration = false;
-                    userHasControl = false;  // Take control away from the user
+                    userHasControl = false;
                 }
             }
 
@@ -91,12 +108,13 @@ namespace StarCoreCoreRepair
                     DoRepair();
                     repairTimerActive = false;
                     allowPowerGeneration = true;
-                    userHasControl = true;  // Give control back to the user when repaired
+                    userHasControl = true;
                 }
             }
 
             ForceEnabledState(isFunctionalNow);
         }
+
 
 
         private void ForceEnabledState(bool isFunctional)
