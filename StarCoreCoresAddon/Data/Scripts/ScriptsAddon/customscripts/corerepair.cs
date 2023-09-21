@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Sandbox.Common.ObjectBuilders;
 using Sandbox.Game;
+using Sandbox.Game.Entities;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
 using VRage.Game;
@@ -103,13 +104,13 @@ namespace StarCoreCoreRepair
             if (isFunctional)
             {
                 shipCore.Enabled = true;
-                SetStatus($"Core forced ON due to functionality.", 2000, MyFontEnum.Green);
+                //SetStatus($"Core forced ON due to functionality.", 2000, MyFontEnum.Green);
                 TogglePowerGenerationBlocks(true);
             }
             else
             {
                 shipCore.Enabled = false;
-                SetStatus($"Core forced OFF due to non-functionality.", 2000, MyFontEnum.Red);
+                //SetStatus($"Core forced OFF due to non-functionality.", 2000, MyFontEnum.Red);
                 TogglePowerGenerationBlocks(false);
             }
         }
@@ -139,12 +140,14 @@ namespace StarCoreCoreRepair
                     }
                 }
             }
-            string statusMessage = enable ? "enabled" : "forced off";
-            SetStatus($"All power generation blocks on grid {statusMessage}.", 2000, enable ? MyFontEnum.Green : MyFontEnum.Red);
+            //string statusMessage = enable ? "enabled" : "forced off";
+            //SetStatus($"All power generation blocks on grid {statusMessage}.", 2000, enable ? MyFontEnum.Green : MyFontEnum.Red);
         }
 
 
 
+
+        // Add this field to your class to store the original owner ID.
 
         private void DoRepair()
         {
@@ -153,10 +156,32 @@ namespace StarCoreCoreRepair
             IMySlimBlock slimBlock = shipCore.SlimBlock;
             if (slimBlock == null) return;
 
-            float repairAmount = 9999;
-            slimBlock.IncreaseMountLevel(repairAmount, 0L, null, 0f, false, MyOwnershipShareModeEnum.Faction);
-            SetStatus($"Core repaired.", 2000, MyFontEnum.Green);
+            // Fetch the original owner ID of the grid.
+            long gridOwnerId = shipCore.CubeGrid.BigOwners.Count > 0 ? shipCore.CubeGrid.BigOwners[0] : 0;
+
+            // If the grid has an owner, proceed with repair and ownership change.
+            if (gridOwnerId != 0)
+            {
+                float repairAmount = 9999;
+                slimBlock.IncreaseMountLevel(repairAmount, 0L, null, 0f, false, MyOwnershipShareModeEnum.Faction);
+
+                // Try casting to MyCubeBlock and change the owner.
+                MyCubeBlock cubeBlock = shipCore as MyCubeBlock;
+                if (cubeBlock != null)
+                {
+                    cubeBlock.ChangeOwner(gridOwnerId, MyOwnershipShareModeEnum.Faction);
+                }
+
+                SetStatus($"Core repaired.", 2000, MyFontEnum.Green);
+            }
+            else
+            {
+                // Handle the case where the grid has no owner.
+                SetStatus($"Core could not be repaired: Grid has no owner.", 2000, MyFontEnum.Red);
+            }
         }
+
+
 
         private void SetStatus(string text, int aliveTime = 300, string font = MyFontEnum.Green)
         {
