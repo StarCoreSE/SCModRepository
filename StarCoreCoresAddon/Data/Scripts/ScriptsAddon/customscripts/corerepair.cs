@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Sandbox.Common.ObjectBuilders;
 using Sandbox.Game;
 using Sandbox.Game.EntityComponents;
@@ -14,7 +15,7 @@ using IMySlimBlock = VRage.Game.ModAPI.IMySlimBlock;
 
 namespace StarCoreCoreRepair
 {
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Beacon), false, "LargeBlockBeacon_HeavyCore")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Beacon), false, "LargeBlockBeacon_LightCore", "LargeBlockBeacon_MediumCore", "LargeBlockBeacon_MediumCore_2x2", "LargeBlockBeacon_HeavyCore", "LargeBlockBeacon_HeavyCore_3x3x3")]
     public class StarCoreCoreRepair : MyGameLogicComponent
     {
         private IMyBeacon shipCore;
@@ -22,6 +23,7 @@ namespace StarCoreCoreRepair
         private DateTime repairStartTime;
         private TimeSpan repairDelay = TimeSpan.FromSeconds(30);
         private bool repairTimerActive = false;
+        private bool userHasControl = true;  // New flag to track if the user has control
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
@@ -38,6 +40,7 @@ namespace StarCoreCoreRepair
         }
 
         private bool? lastFunctionalState = null;
+        private bool allowPowerGeneration = true;
 
         public override void UpdateAfterSimulation()
         {
@@ -54,6 +57,8 @@ namespace StarCoreCoreRepair
                     shipCore.SlimBlock.BlockGeneralDamageModifier = 1.0f;
                     SetStatus($"Core is functional.", 2000, MyFontEnum.Green);
                     repairTimerActive = false;
+                    allowPowerGeneration = true;
+                    userHasControl = true;  // Give control back to the user
                 }
                 else
                 {
@@ -61,6 +66,8 @@ namespace StarCoreCoreRepair
                     SetStatus($"Core is non-functional. Repair timer started.", 2000, MyFontEnum.Red);
                     repairStartTime = DateTime.UtcNow;
                     repairTimerActive = true;
+                    allowPowerGeneration = false;
+                    userHasControl = false;  // Take control away from the user
                 }
             }
 
@@ -73,26 +80,61 @@ namespace StarCoreCoreRepair
                 {
                     DoRepair();
                     repairTimerActive = false;
+                    allowPowerGeneration = true;
+                    userHasControl = true;  // Give control back to the user when repaired
                 }
             }
 
             ForceEnabledState(isFunctionalNow);
         }
 
-
         private void ForceEnabledState(bool isFunctional)
         {
-            if (isFunctional && !shipCore.Enabled)
+            if (isFunctional)
             {
                 shipCore.Enabled = true;
                 SetStatus($"Core forced ON due to functionality.", 2000, MyFontEnum.Green);
+                TogglePowerGenerationBlocks(true);
             }
-            else if (!isFunctional && shipCore.Enabled)
+            else
             {
                 shipCore.Enabled = false;
                 SetStatus($"Core forced OFF due to non-functionality.", 2000, MyFontEnum.Red);
+                TogglePowerGenerationBlocks(false);
             }
         }
+
+        private void TogglePowerGenerationBlocks(bool enable)
+        {
+            var blocks = new List<IMySlimBlock>();
+            shipCore.CubeGrid.GetBlocks(blocks);
+
+            foreach (var block in blocks)
+            {
+                var functionalBlock = block.FatBlock as IMyFunctionalBlock;
+
+                if (functionalBlock != null && functionalBlock != shipCore)
+                {
+                    // Check if the block is a battery or reactor
+                    if (functionalBlock is IMyBatteryBlock || functionalBlock is IMyReactor)
+                    {
+                        if (userHasControl)  // Check if the user has control over the power blocks
+                        {
+                            functionalBlock.Enabled = enable;
+                        }
+                        else  // If not, forcibly turn off the power blocks
+                        {
+                            functionalBlock.Enabled = false;
+                        }
+                    }
+                }
+            }
+            string statusMessage = enable ? "enabled" : "forced off";
+            SetStatus($"All power generation blocks on grid {statusMessage}.", 2000, enable ? MyFontEnum.Green : MyFontEnum.Red);
+        }
+
+
+
 
         private void DoRepair()
         {
