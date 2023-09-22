@@ -709,7 +709,7 @@ namespace klime.PointCheck
             if (joinInit == true)
             {
             }
-            if (MyAPIGateway.Utilities.IsDedicated && temp_ServerTimer % 60 == 0)
+            if (MyAPIGateway.Utilities.IsDedicated && temp_ServerTimer % 60 == 0 && broadcaststat)
             {
                 ServerSyncTimer.Value = temp_ServerTimer; ServerSyncTimer.Push();
             }
@@ -719,7 +719,7 @@ namespace klime.PointCheck
             }
             try
             {
-                if (!MyAPIGateway.Utilities.IsDedicated)
+                if (!MyAPIGateway.Utilities.IsDedicated && broadcaststat)
                 {
                     bool tick100 = PointCheckHelpers.timer % 100 == 0; if (PointCheckHelpers.timer - _fastStart < 300 || tick100)
                     {
@@ -748,7 +748,7 @@ namespace klime.PointCheck
             }
             try
             {
-                if (PointCheckHelpers.timer % 60 == 0)
+                if (PointCheckHelpers.timer % 60 == 0 && broadcaststat)
                 {
                     all_players.Clear(); MyAPIGateway.Multiplayer.Players.GetPlayers(listPlayers, delegate (IMyPlayer p) { all_players.Add(p.IdentityId, p); return false; }
                 );
@@ -785,7 +785,7 @@ namespace klime.PointCheck
             }
             try
             {
-                if (PointCheckHelpers.timer % 60 == 0)
+                if (PointCheckHelpers.timer % 60 == 0 && broadcaststat)
                 {
                     bool tick100 = _count % 100 == 0; _count++; if (_count - _fastStart < 300 || tick100)
                     {
