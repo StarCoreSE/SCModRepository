@@ -284,12 +284,12 @@
       </Components>
       <CriticalComponent Subtype="Computer" Index="0"/>
       <MountPoints>
-        <MountPoint Side="Front" StartX="0.00" StartY="1.00" EndX="3.00" EndY="2.00"/>
-        <MountPoint Side="Back" StartX="0.00" StartY="1.00" EndX="3.00" EndY="2.00"/>
-        <MountPoint Side="Left" StartX="0.00" StartY="1.00" EndX="3.00" EndY="2.00"/>
-        <MountPoint Side="Right" StartX="0.00" StartY="1.00" EndX="3.00" EndY="2.00"/>
-        <MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
-        <MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+        <MountPoint Side="Front" StartX="0.00" StartY="1.00" EndX="1.00" EndY="1.00"/>
+        <MountPoint Side="Back" StartX="0.00" StartY="1.00" EndX="1.00" EndY="1.00"/>
+        <MountPoint Side="Left" StartX="0.00" StartY="1.00" EndX="1.00" EndY="1.00"/>
+        <MountPoint Side="Right" StartX="0.00" StartY="1.00" EndX="3.00" EndY="1.00"/>
+        <MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
+        <MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
       </MountPoints>
       <!-- Build stages must be removed so beacon is always functional -->
       <!--<BuildProgressModels>
@@ -297,7 +297,7 @@
                 <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
                 <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
             </BuildProgressModels>-->
-      <BlockPairName>SC_HeavyCore_3x3x3</BlockPairName>
+      <BlockPairName>SC_AdminCore</BlockPairName>
       <EdgeType>Light</EdgeType>
       <MirroringY>Z</MirroringY>
       <BuildTimeSeconds>40</BuildTimeSeconds>
