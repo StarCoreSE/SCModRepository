@@ -19,7 +19,7 @@ using IMySlimBlock = VRage.Game.ModAPI.IMySlimBlock;
 
 namespace StarCoreCoreRepair
 {
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Beacon), false, "LargeBlockBeacon_LightCore", "LargeBlockBeacon_MediumCore", "LargeBlockBeacon_MediumCore_2x2", "LargeBlockBeacon_HeavyCore", "LargeBlockBeacon_HeavyCore_3x3x3")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Beacon), false, "LargeBlockBeacon_LightCore", "LargeBlockBeacon_MediumCore", "LargeBlockBeacon_MediumCore_2x2", "LargeBlockBeacon_HeavyCore", "LargeBlockBeacon_HeavyCore_3x3x3", "LargeBlockBeacon_Admin")]
     public class StarCoreCoreRepair : MyGameLogicComponent, IMyEventProxy
     {
         MySync<float, SyncDirection.BothWays> blockDamageModifierSync = null;
