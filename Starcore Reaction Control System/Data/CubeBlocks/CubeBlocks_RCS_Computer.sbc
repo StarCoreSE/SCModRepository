@@ -20,13 +20,15 @@
       <Size x="1" y="1" z="1"/>
       <ModelOffset x="0" y="0" z="0" />
       <Model>Models\RWR_Processing_Unit.mwm</Model>
-      <Components>
-        <Component Subtype="SteelPlate" Count="10" />
-        <Component Subtype="Computer" Count="3" />
-        <Component Subtype="SteelPlate" Count="10" />
-        <Component Subtype="MetalGrid" Count="50" />
-        <Component Subtype="SteelPlate" Count="125" />
-      </Components>
+            <Components>
+                <Component Subtype="SteelPlate" Count="25" />
+                <Component Subtype="Construction" Count="35" />
+                <Component Subtype="SmallTube" Count="12" />
+                <Component Subtype="Motor" Count="8" />
+                <Component Subtype="Display" Count="2" />
+                <Component Subtype="Computer" Count="8" />
+                <Component Subtype="SteelPlate" Count="10" />
+            </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
       <!--<BuildProgressModels>-->
       <!--<Model BuildPercentUpperBound="1.0" File="Models\Starcore_RWR\RWR_Reciever.mwm"/>-->
@@ -73,13 +75,15 @@
       <Size x="1" y="1" z="1"/>
       <ModelOffset x="0" y="0" z="0" />
       <Model>Models\SmallRCS.mwm</Model>
-      <Components>
-        <Component Subtype="SteelPlate" Count="1" />
-        <Component Subtype="Computer" Count="3" />
-        <Component Subtype="SteelPlate" Count="1" />
-        <Component Subtype="MetalGrid" Count="5" />
-        <Component Subtype="SteelPlate" Count="12" />
-      </Components>
+            <Components>
+                <Component Subtype="SteelPlate" Count="25" />
+                <Component Subtype="Construction" Count="35" />
+                <Component Subtype="SmallTube" Count="12" />
+                <Component Subtype="Motor" Count="8" />
+                <Component Subtype="Display" Count="2" />
+                <Component Subtype="Computer" Count="8" />
+                <Component Subtype="SteelPlate" Count="10" />
+            </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
       <!--<BuildProgressModels>-->
       <!--<Model BuildPercentUpperBound="1.0" File="Models\Starcore_RWR\RWR_Reciever.mwm"/>-->
