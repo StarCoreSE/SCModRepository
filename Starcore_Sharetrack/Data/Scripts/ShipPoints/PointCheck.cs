@@ -1372,7 +1372,7 @@ namespace klime.PointCheck
 
                 }
 
-                if (PointCheckHelpers.timer % 60 == 0 && integretyMessage != null && text_api.Heartbeat)
+                if (PointCheckHelpers.timer % 60 == 0 && integretyMessage != null && text_api.Heartbeat && broadcaststat)
                 {
                     var tt = new StringBuilder();
                     var ts = new Dictionary<string, List<string>>();
