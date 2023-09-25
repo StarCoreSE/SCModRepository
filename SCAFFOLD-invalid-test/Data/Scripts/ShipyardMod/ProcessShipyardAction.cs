@@ -4,6 +4,7 @@ using System.Linq;
 using Sandbox.Definitions;
 using Sandbox.Game;
 using Sandbox.Game.Entities;
+using Sandbox.Game.Weapons;
 using Sandbox.ModAPI;
 using ShipyardMod.ItemClasses;
 using ShipyardMod.Utility;
@@ -344,9 +345,12 @@ namespace ShipyardMod.ProcessHandlers
                                                   *    inf => 0.1000
                                                   * We impose a minimum efficiency of 0.1 (10%), which happens at distances > ~450m
                                                   */
-                                                 double efficiency = 1 - (target.ToolDist[tool.EntityId] / 200000);
-                                                 if (!shipyardItem.StaticYard)
-                                                     efficiency /= 2;
+
+                                                 // edited, same thing as welders
+                                                 double efficiency = 1;
+                                                 //double efficiency = 1 - (target.ToolDist[tool.EntityId] / 200000);
+                                                 //if (!shipyardItem.StaticYard)
+                                                 //    efficiency /= 2;
                                                  if (efficiency < 0.1)
                                                      efficiency = 0.1;
                                                  //Logging.Instance.WriteDebug(String.Format("Grinder[{0}]block[{1}] distance=[{2:F2}m] efficiency=[{3:F5}]", tool.DisplayNameText, b, Math.Sqrt(target.ToolDist[tool.EntityId]), efficiency));
@@ -668,20 +672,23 @@ namespace ShipyardMod.ProcessHandlers
                                                      continue;
                                                  }
 
-                                           //      if (MyAPIGateway.Session.CreativeMode)
-                                            //     {
-                                                     /*
-                                                      * Welding laser "efficiency" is a float between 0-1 where:
-                                                      *   0.0 =>   0% of component stock used for construction (100% loss)
-                                                      *   1.0 => 100% of component stock used for construction (0% loss)
-                                                      * 
-                                                      * Efficiency decay/distance formula is the same as above for grinder
-                                                      */
-                                                     double efficiency = 1 - (target.ToolDist[tool.EntityId] / 200000);
-                                                     if (!shipyardItem.StaticYard)
-                                                         efficiency /= 2;
-                                                     if (efficiency < 0.1)
-                                                         efficiency = 0.1;
+                                                 //      if (MyAPIGateway.Session.CreativeMode)
+                                                 //     {
+                                                 /*
+                                                  * Welding laser "efficiency" is a float between 0-1 where:
+                                                  *   0.0 =>   0% of component stock used for construction (100% loss)
+                                                  *   1.0 => 100% of component stock used for construction (0% loss)
+                                                  * 
+                                                  * Efficiency decay/distance formula is the same as above for grinder
+                                                  */
+
+                                                 // Set efficiency to 1 because wtf ew no, good ideas aren't allowed
+                                                 //double efficiency = 1 - (target.ToolDist[tool.EntityId] / 200000);
+                                                 double efficiency = 1;
+                                                 //if (!shipyardItem.StaticYard)
+                                                 //        efficiency /= 2;
+                                                 if (efficiency < 0.1)
+                                                     efficiency = 0.1;
                                                      //Logging.Instance.WriteDebug(String.Format("Welder[{0}]block[{1}] distance=[{2:F2}m] efficiency=[{3:F5}]", tool.DisplayNameText, i, Math.Sqrt(target.ToolDist[tool.EntityId]), efficiency));
                                                      /*
                                                       * We have to factor in our efficiency ratio before transferring to the block "construction stockpile",
@@ -833,16 +840,18 @@ namespace ShipyardMod.ProcessHandlers
 
             if (MyAPIGateway.Session.CreativeMode)
             {
-                projector.Build(block, 0, tool.EntityId, false);
+                projector.Build(block, projector.OwnerId, projector.EntityId, false, projector.OwnerId);
                 return projector.CanBuild(block, true) != BuildCheckResult.OK;
             }
 
             //try to remove the first component from inventory
             string name = ((MyCubeBlockDefinition)block.BlockDefinition).Components[0].Definition.Id.SubtypeName;
-            if (_tmpInventory.PullAny(item.ConnectedCargo, name, 2))
+            if (_tmpInventory.PullAny(item.ConnectedCargo, name, 1))
             {
                 _tmpInventory.Clear();
-                projector.Build(block, 0, tool.EntityId, false);
+
+                projector.Build(block, projector.OwnerId, projector.EntityId, false, projector.OwnerId);
+
                 return projector.CanBuild(block, true) != BuildCheckResult.OK;
             }
 
