@@ -172,7 +172,7 @@ namespace Math0424.Networking
 
             if (e.PacketId == 7)
             {
-                PointCheck.TrackYourselfMyMan();
+               // PointCheck.TrackYourselfMyMan();
             }
             
             if (e.PacketId == 8)
