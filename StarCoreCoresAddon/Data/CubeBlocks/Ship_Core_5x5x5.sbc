@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition>
+			<Id>
+				<TypeId>CubeBlock</TypeId>
+				<SubtypeId>Ship_Core_5x5x5</SubtypeId>
+			</Id>
+			<DisplayName>{LOC:DisplayName_Ship_Core_5x5x5}</DisplayName>
+			<Description>{LOC:Description_Ship_Core_5x5x5}</Description>
+			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="5" y="5" z="5"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Ship_Core_5x5x5.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="10"/>
+			</Components>
+			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="1.00" StartY="2.00" EndX="4.00" EndY="3.00"/>
+				<MountPoint Side="Back" StartX="1.00" StartY="2.00" EndX="4.00" EndY="3.00"/>
+				<MountPoint Side="Left" StartX="1.00" StartY="2.00" EndX="4.00" EndY="3.00"/>
+				<MountPoint Side="Right" StartX="1.00" StartY="2.00" EndX="4.00" EndY="3.00"/>
+				<MountPoint Side="Top" StartX="1.00" StartY="1.00" EndX="4.00" EndY="4.00"/>
+				<MountPoint Side="Bottom" StartX="1.00" StartY="1.00" EndX="4.00" EndY="4.00"/>
+			</MountPoints>
+			<BlockPairName>Ship_Core_5x5x5</BlockPairName>
+		</Definition>
+	</CubeBlocks>
+</Definitions>
