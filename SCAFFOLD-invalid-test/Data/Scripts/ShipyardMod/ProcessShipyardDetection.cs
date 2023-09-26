@@ -75,13 +75,13 @@ namespace ShipyardMod.ProcessHandlers
                 using (Profiler.Start(FullName, nameof(Handle), "Physics Check"))
                 {
                     if (item.YardEntity.Physics == null 
-                        || item.StaticYard && (!item.YardEntity.Physics.IsStatic || !((IMyCubeGrid)item.YardEntity).IsInVoxels()))
+                        || item.StaticYard && (!item.YardEntity.Physics.IsStatic)  )
                     {
                         Logging.Instance.WriteLine("remove item physics");
                         itemsToRemove.Add(item);
                         item.Disable();
                         foreach (var tool in item.Tools)
-                            Communication.SendCustomInfo(tool.EntityId, "Invalid Shipyard: Shipyard must be anchored to voxels!");
+                            Communication.SendCustomInfo(tool.EntityId, "Invalid Shipyard: Shipyard must be Static!");
                         continue;
                     }
                 }
