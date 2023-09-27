@@ -1075,87 +1075,15 @@ namespace ttrcwm
 
         #endregion
 
+        int counter = 0;  // Define this as a class-level variable
+        const int checkFrequency = 1;  // Check every 10 calls, i.e., at 6Hz
+        List<IMyConveyorSorter> cachedBlocks = new List<IMyConveyorSorter>();  // Class-level variable to cache blocks
+
         public void handle_60Hz()
         {
-            /*
-            bool disabler = false;
-            IMyGridTerminalSystem grid_terminal = MyAPIGateway.TerminalActionsHelper?.GetTerminalSystemForGrid(_grid);
-            if (grid_terminal == null)
+            counter++;
+            if (counter % checkFrequency != 0)
                 return;
-            _all_groups.Clear();
-            grid_terminal.GetBlockGroups(_all_groups);
-            foreach (var cur_group in _all_groups)
-            {
-                if (cur_group.Name.ToUpper().Contains("[FUCKOFF]"))
-                {
-                    disabler = true;
-                }
-                else disabler = false;
-            }*/
-
-            /*
-            bool disabler = true;
-            IMyGridTerminalSystem grid_terminal = MyAPIGateway.TerminalActionsHelper?.GetTerminalSystemForGrid(_grid);
-            if (grid_terminal == null)
-                return;
-
-            List<IMyConveyorSorter> block_list = new List<IMyConveyorSorter>();
-            grid_terminal.GetBlocksOfType(block_list);
-
-            foreach (IMyConveyorSorter block in block_list)
-            {
-                if (block != null && block.Enabled && block.BlockDefinition.SubtypeId == "ARYXTempestCannon")
-                {
-                    disabler = false;
-                    check_thruster_control_changed();
-                    _force_override_refresh = true;
-                    
-                    break;
-
-                }
-                else
-                {
-                    bool changesMade = false;
-                    
-                    foreach (var curDirection in _thrusters)
-                    {
-                        thruster_info curThrusterInfo;
-
-                        foreach (var curThruster in curDirection)
-                        {
-                            curThrusterInfo = curThruster.Value;
-                            if (!curThrusterInfo.override_cleared)
-                            {
-                                curThruster.Key.SetValueFloat("Override", 0.0f);
-                                curThrusterInfo.override_cleared = changesMade = true;
-                            }
-                        }
-                    }
-                    if (changesMade)
-                    {
-                        for (int dirIndex = 0; dirIndex < 6; ++dirIndex)
-                        {
-                            _max_force[dirIndex] = 0.0f;
-                            foreach (var curThrusterInfo in _thrusters[dirIndex].Values)
-                            {
-                                if (curThrusterInfo.is_RCS)
-                                    _max_force[dirIndex] += curThrusterInfo.max_force;
-                            }
-                        }
-                    }
-                    if (changesMade || _thruster_added_or_removed)
-                    {
-                        refresh_thruster_info();
-                        update_reference_vectors();
-                        refresh_control_sets();
-                        _thruster_added_or_removed = false;
-                    }
-                    disabler = true;
-                    break;
-
-                }
-            }*/
-
 
             bool disabler = true;
 
@@ -1164,10 +1092,10 @@ namespace ttrcwm
                 IMyGridTerminalSystem grid_terminal = MyAPIGateway.TerminalActionsHelper?.GetTerminalSystemForGrid(_grid);
                 if (grid_terminal == null) return;
 
-                List<IMyConveyorSorter> block_list = new List<IMyConveyorSorter>();
-                grid_terminal.GetBlocksOfType(block_list, b => b.Enabled && b.BlockDefinition.SubtypeId == "SC_RCS_Computer");
+                cachedBlocks.Clear();
+                grid_terminal.GetBlocksOfType(cachedBlocks, b => b.Enabled && b.BlockDefinition.SubtypeId == "SC_RCS_Computer");
 
-                if (block_list.Count > 0)
+                if (cachedBlocks.Count > 0)
                 {
                     disabler = false;
                     check_thruster_control_changed();
@@ -1191,8 +1119,6 @@ namespace ttrcwm
                         }
                         catch (Exception ex)
                         {
-                            // Log the error or notify the user about the exception
-                            // For example: 
                             MyAPIGateway.Utilities.ShowNotification($"Error: {ex.Message}", 5000, MyFontEnum.Red);
                         }
                     }
@@ -1221,12 +1147,8 @@ namespace ttrcwm
             }
             catch (Exception ex)
             {
-                // Log the error or notify the user about the exception
-                // For example: 
                 MyAPIGateway.Utilities.ShowNotification($"Error: {ex.Message}", 5000, MyFontEnum.Red);
             }
-
-
 
             try
             {
@@ -1273,7 +1195,6 @@ namespace ttrcwm
             }
             catch (Exception e)
             {
-                // handle exception gracefully, log error message
                 MyLog.Default.WriteLineAndConsole($"Error occurred in handle_60Hz(): {e.Message}\n{e.StackTrace}");
             }
         }
