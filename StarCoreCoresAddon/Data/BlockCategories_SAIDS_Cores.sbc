@@ -11,15 +11,11 @@
       <Name>.Ship Cores</Name>
       <StrictSearch>true</StrictSearch>
       <ItemIds>
-        <string>SC_FrigateCore</string>
-        <string>SC_DestroyerCore</string>
-        <string>SC_CruiserCore</string>
-        <string>SC_BattlecruiserCore</string>
-        <string>SC_BattleshipCore</string>
-        <string>SC_CapitalCore</string>
-        <string>SC_FighterCore</string>
-        <string>SC_DroneCore</string>
-        <string>SC_StationCore</string>
+        <string>SC_LightCore_1x1x1</string>
+        <string>SC_LightCore_1x1x3</string>
+        <string>SC_MediumCore_2x2x2</string>
+        <string>SC_MediumCore_3x1x3</string>
+        <string>SC_HeavyCore_3x3x3</string>
 
 
 

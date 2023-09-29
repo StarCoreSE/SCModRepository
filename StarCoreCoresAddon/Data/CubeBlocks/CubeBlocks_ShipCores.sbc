@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <CubeBlocks>
-    <!-- Large frigate -->
+    <!-- Large Light 1x1x1-->
     <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
       <Id>
         <TypeId>Beacon</TypeId>
-        <SubtypeId>SC_FrigateCore</SubtypeId>
+        <SubtypeId>SC_LightCore_1x1x1</SubtypeId>
       </Id>
-      <DisplayName>Frigate Core</DisplayName>
+      <DisplayName>Light Core</DisplayName>
       <Icon>Textures\admincore.png</Icon>
       <Description>This Ship Core block is required for all Frigate grids.</Description>
       <CubeSize>Large</CubeSize>
@@ -36,7 +36,7 @@
                 <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
                 <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
             </BuildProgressModels>-->
-      <BlockPairName>SC_FrigateCore</BlockPairName>
+      <BlockPairName>SC_LightCore_1x1x1</BlockPairName>
       <EdgeType>Light</EdgeType>
       <MirroringY>Z</MirroringY>
       <BuildTimeSeconds>40</BuildTimeSeconds>
@@ -52,13 +52,13 @@
       <PCU>1</PCU>
       <IsAirTight>false</IsAirTight>
     </Definition>
-    <!-- Large destroyer -->
+    <!-- Large Light 1x1x3 -->
     <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
       <Id>
         <TypeId>Beacon</TypeId>
-        <SubtypeId>SC_DestroyerCore</SubtypeId>
+        <SubtypeId>SC_LightCore_1x1x3</SubtypeId>
       </Id>
-      <DisplayName>Destroyer Core</DisplayName>
+      <DisplayName>Light Core 2</DisplayName>
       <Icon>Textures\admincore.png</Icon>
       <Description>This Ship Core block is required for all Destroyer grids.</Description>
       <CubeSize>Large</CubeSize>
@@ -87,7 +87,7 @@
                 <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
                 <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
             </BuildProgressModels>-->
-      <BlockPairName>SC_DestroyerCore</BlockPairName>
+      <BlockPairName>SC_LightCore_1x1x3</BlockPairName>
       <EdgeType>Light</EdgeType>
       <MirroringY>Z</MirroringY>
       <BuildTimeSeconds>40</BuildTimeSeconds>
@@ -103,13 +103,13 @@
       <PCU>1</PCU>
       <IsAirTight>false</IsAirTight>
     </Definition>
-    <!-- Large cruiser -->
+    <!-- Large Medium 2x2x2 -->
     <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
       <Id>
         <TypeId>Beacon</TypeId>
-        <SubtypeId>SC_CruiserCore</SubtypeId>
+        <SubtypeId>SC_MediumCore_2x2x2</SubtypeId>
       </Id>
-      <DisplayName>Cruiser Core</DisplayName>
+      <DisplayName>Medium Core</DisplayName>
       <Icon>Textures\admincore.png</Icon>
       <Description>This Ship Core block is required for all Cruiser grids.</Description>
       <CubeSize>Large</CubeSize>
@@ -138,7 +138,7 @@
                 <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
                 <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
             </BuildProgressModels>-->
-      <BlockPairName>SC_CruiserCore</BlockPairName>
+      <BlockPairName>SC_MediumCore_2x2x2</BlockPairName>
       <EdgeType>Light</EdgeType>
       <MirroringY>Z</MirroringY>
       <BuildTimeSeconds>40</BuildTimeSeconds>
@@ -154,13 +154,13 @@
       <PCU>1</PCU>
       <IsAirTight>false</IsAirTight>
     </Definition>
-    <!-- Large battlecruiser -->
+    <!-- Large Medium 3x1x3 -->
     <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
       <Id>
         <TypeId>Beacon</TypeId>
-        <SubtypeId>SC_BattlecruiserCore</SubtypeId>
+        <SubtypeId>SC_MediumCore_3x1x3</SubtypeId>
       </Id>
-      <DisplayName>Battlecruiser Core</DisplayName>
+      <DisplayName>Medium Core 3</DisplayName>
       <Icon>Textures\admincore.png</Icon>
       <Description>This Ship Core block is required for all Battlecruiser grids.</Description>
       <CubeSize>Large</CubeSize>
@@ -189,7 +189,7 @@
                 <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
                 <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
             </BuildProgressModels>-->
-      <BlockPairName>SC_BattlecruiserCore</BlockPairName>
+      <BlockPairName>SC_MediumCore_3x1x3</BlockPairName>
       <EdgeType>Light</EdgeType>
       <MirroringY>Z</MirroringY>
       <BuildTimeSeconds>40</BuildTimeSeconds>
@@ -205,13 +205,13 @@
       <PCU>1</PCU>
       <IsAirTight>false</IsAirTight>
     </Definition>
-    <!-- Large battleship -->
+    <!-- Large Heavy 3x3x3 -->
     <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
       <Id>
         <TypeId>Beacon</TypeId>
-        <SubtypeId>SC_BattleshipCore</SubtypeId>
+        <SubtypeId>SC_HeavyCore_3x3x3</SubtypeId>
       </Id>
-      <DisplayName>Battleship Core</DisplayName>
+      <DisplayName>Heavy Core</DisplayName>
       <Icon>Textures\admincore.png</Icon>
       <Description>This Ship Core block is required for all Battleship grids.</Description>
       <CubeSize>Large</CubeSize>
@@ -240,110 +240,7 @@
                 <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
                 <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
             </BuildProgressModels>-->
-      <BlockPairName>SC_BattleshipCore</BlockPairName>
-      <EdgeType>Light</EdgeType>
-      <MirroringY>Z</MirroringY>
-      <BuildTimeSeconds>40</BuildTimeSeconds>
-      <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
-      <DamagedSound>ParticleElectrical</DamagedSound>
-      <ResourceSinkGroup>Utility</ResourceSinkGroup>
-      <MaxBroadcastRadius>200000</MaxBroadcastRadius>
-      <Flare>BeaconLarge</Flare>
-      <MaxBroadcastPowerDrainkW>20</MaxBroadcastPowerDrainkW>
-      <EmissiveColorPreset>Beacon</EmissiveColorPreset>
-      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
-      <DestroySound>WepSmallWarheadExpl</DestroySound>
-      <PCU>1</PCU>
-      <IsAirTight>false</IsAirTight>
-    </Definition>
-    <!-- Large capital -->
-    <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
-      <Id>
-        <TypeId>Beacon</TypeId>
-        <SubtypeId>SC_CapitalCore</SubtypeId>
-      </Id>
-      <DisplayName>Capital Core</DisplayName>
-      <Icon>Textures\admincore.png</Icon>
-      <Description>This Ship Core block is required for all Capital grids.</Description>
-      <CubeSize>Large</CubeSize>
-      <GuiVisible>true</GuiVisible>
-      <BlockTopology>TriangleMesh</BlockTopology>
-      <Size x="5" y="5" z="5"/>
-      <ModelOffset x="0" y="0" z="0"/>
-      <Model>Models\Ship_Core_5x5x5.mwm</Model>
-      <Components>
-        <Component Subtype="SteelPlate" Count="10000"/>
-        <Component Subtype="Computer" Count="1"/>
-        <Component Subtype="SteelPlate" Count="10000"/>
-      </Components>
-      <CriticalComponent Subtype="Computer" Index="0"/>
-      <MountPoints>
-        <MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
-        <MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
-        <MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
-        <MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
-        <MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
-        <MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
-      </MountPoints>
-      <!-- Build stages must be removed so beacon is always functional -->
-      <!--<BuildProgressModels>
-                <Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\BeaconConstruction_1.mwm" />
-                <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
-                <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
-            </BuildProgressModels>-->
-      <BlockPairName>SC_CapitalCore</BlockPairName>
-      <EdgeType>Light</EdgeType>
-      <MirroringY>Z</MirroringY>
-      <BuildTimeSeconds>40</BuildTimeSeconds>
-      <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
-      <DamagedSound>ParticleElectrical</DamagedSound>
-      <ResourceSinkGroup>Utility</ResourceSinkGroup>
-      <MaxBroadcastRadius>200000</MaxBroadcastRadius>
-      <Flare>BeaconLarge</Flare>
-      <MaxBroadcastPowerDrainkW>20</MaxBroadcastPowerDrainkW>
-      <EmissiveColorPreset>Beacon</EmissiveColorPreset>
-      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
-      <DestroySound>WepSmallWarheadExpl</DestroySound>
-      <PCU>1</PCU>
-      <IsAirTight>false</IsAirTight>
-    </Definition>
-
-    <!-- Station Core -->
-    <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
-      <Id>
-        <TypeId>Beacon</TypeId>
-        <SubtypeId>SC_StationCore</SubtypeId>
-      </Id>
-      <DisplayName>Station Core</DisplayName>
-      <Icon>Textures\admincore.png</Icon>
-      <Description></Description>
-      <CubeSize>Large</CubeSize>
-      <GuiVisible>true</GuiVisible>
-      <BlockTopology>TriangleMesh</BlockTopology>
-      <Size x="3" y="3" z="3"/>
-      <ModelOffset x="0" y="0" z="0"/>
-      <Model>Models\Ship_Core_3x3x3.mwm</Model>
-      <Components>
-        <Component Subtype="SteelPlate" Count="1000"/>
-        <Component Subtype="Computer" Count="1"/>
-        <Component Subtype="SteelPlate" Count="1000"/>
-      </Components>
-      <CriticalComponent Subtype="Computer" Index="0"/>
-      <MountPoints>
-        <MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
-        <MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
-        <MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
-        <MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
-        <MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
-        <MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
-      </MountPoints>
-      <!-- Build stages must be removed so beacon is always functional -->
-      <!--<BuildProgressModels>
-                <Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\BeaconConstruction_1.mwm" />
-                <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
-                <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
-            </BuildProgressModels>-->
-      <BlockPairName>SC_StationCore</BlockPairName>
+      <BlockPairName>SC_HeavyCore_3x3x3</BlockPairName>
       <EdgeType>Light</EdgeType>
       <MirroringY>Z</MirroringY>
       <BuildTimeSeconds>40</BuildTimeSeconds>
