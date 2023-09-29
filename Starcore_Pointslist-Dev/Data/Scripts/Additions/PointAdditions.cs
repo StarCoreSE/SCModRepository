@@ -103,8 +103,8 @@ namespace ShipPoints
 				MA_Crouching_Tiger@150;
 				AQD_LG_HydroThrusterL_ArmoredSlope@50;
 				AQD_LG_HydroThrusterL_Armored@50;
-				AQD_LG_HydroThrusterS_ArmoredSlope@50;
-				AQD_LG_HydroThrusterS_Armored@50;
+				AQD_LG_HydroThrusterS_ArmoredSlope@20;
+				AQD_LG_HydroThrusterS_Armored@20;
 				AWGFocusDrive@150;
 				IonHeavyCovered@150;
 				LargeBlockLargeThrust@50;
@@ -227,8 +227,8 @@ namespace ShipPoints
 				SmallEnhancer@50;
 
 				SpaceBallSmall@50;
-				MA_Fixed_T2_sb@100;
-				MA_Fixed_T2_Naked_sb@100;
+				MA_Fixed_T2_sb@150;
+				MA_Fixed_T2_Naked_sb@150;
 				SCSmallJumpDrive@250;
 				LargeBlockConveyorSorterIndustrial@0;
 				MediumBlockConveyorSorter@0;
