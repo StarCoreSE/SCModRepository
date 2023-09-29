@@ -7,7 +7,7 @@
         <TypeId>Beacon</TypeId>
         <SubtypeId>SC_LightCore_1x1x1</SubtypeId>
       </Id>
-      <DisplayName>Light Core</DisplayName>
+      <DisplayName>Light Core I</DisplayName>
       <Icon>Textures\admincore.png</Icon>
       <Description>This Ship Core block is required for all Frigate grids.</Description>
       <CubeSize>Large</CubeSize>
@@ -58,7 +58,7 @@
         <TypeId>Beacon</TypeId>
         <SubtypeId>SC_LightCore_1x1x3</SubtypeId>
       </Id>
-      <DisplayName>Light Core 2</DisplayName>
+      <DisplayName>Light Core II</DisplayName>
       <Icon>Textures\admincore.png</Icon>
       <Description>This Ship Core block is required for all Destroyer grids.</Description>
       <CubeSize>Large</CubeSize>
@@ -109,7 +109,7 @@
         <TypeId>Beacon</TypeId>
         <SubtypeId>SC_MediumCore_2x2x2</SubtypeId>
       </Id>
-      <DisplayName>Medium Core</DisplayName>
+      <DisplayName>Medium Core I</DisplayName>
       <Icon>Textures\admincore.png</Icon>
       <Description>This Ship Core block is required for all Cruiser grids.</Description>
       <CubeSize>Large</CubeSize>
@@ -160,7 +160,7 @@
         <TypeId>Beacon</TypeId>
         <SubtypeId>SC_MediumCore_3x1x3</SubtypeId>
       </Id>
-      <DisplayName>Medium Core 3</DisplayName>
+      <DisplayName>Medium Core II</DisplayName>
       <Icon>Textures\admincore.png</Icon>
       <Description>This Ship Core block is required for all Battlecruiser grids.</Description>
       <CubeSize>Large</CubeSize>
@@ -211,7 +211,7 @@
         <TypeId>Beacon</TypeId>
         <SubtypeId>SC_HeavyCore_3x3x3</SubtypeId>
       </Id>
-      <DisplayName>Heavy Core</DisplayName>
+      <DisplayName>Heavy Core I</DisplayName>
       <Icon>Textures\admincore.png</Icon>
       <Description>This Ship Core block is required for all Battleship grids.</Description>
       <CubeSize>Large</CubeSize>
