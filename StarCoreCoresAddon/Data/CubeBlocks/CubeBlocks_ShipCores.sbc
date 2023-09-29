@@ -5,7 +5,7 @@
     <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
       <Id>
         <TypeId>Beacon</TypeId>
-        <SubtypeId>SAIDS_FrigateCore</SubtypeId>
+        <SubtypeId>SC_FrigateCore</SubtypeId>
       </Id>
       <DisplayName>Frigate Core</DisplayName>
       <Icon>Textures\admincore.png</Icon>
@@ -36,7 +36,7 @@
                 <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
                 <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
             </BuildProgressModels>-->
-      <BlockPairName>SAIDS_FrigateCore</BlockPairName>
+      <BlockPairName>SC_FrigateCore</BlockPairName>
       <EdgeType>Light</EdgeType>
       <MirroringY>Z</MirroringY>
       <BuildTimeSeconds>40</BuildTimeSeconds>
@@ -56,7 +56,7 @@
     <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
       <Id>
         <TypeId>Beacon</TypeId>
-        <SubtypeId>SAIDS_DestroyerCore</SubtypeId>
+        <SubtypeId>SC_DestroyerCore</SubtypeId>
       </Id>
       <DisplayName>Destroyer Core</DisplayName>
       <Icon>Textures\admincore.png</Icon>
@@ -87,7 +87,7 @@
                 <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
                 <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
             </BuildProgressModels>-->
-      <BlockPairName>SAIDS_DestroyerCore</BlockPairName>
+      <BlockPairName>SC_DestroyerCore</BlockPairName>
       <EdgeType>Light</EdgeType>
       <MirroringY>Z</MirroringY>
       <BuildTimeSeconds>40</BuildTimeSeconds>
@@ -107,7 +107,7 @@
     <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
       <Id>
         <TypeId>Beacon</TypeId>
-        <SubtypeId>SAIDS_CruiserCore</SubtypeId>
+        <SubtypeId>SC_CruiserCore</SubtypeId>
       </Id>
       <DisplayName>Cruiser Core</DisplayName>
       <Icon>Textures\admincore.png</Icon>
@@ -138,7 +138,7 @@
                 <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
                 <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
             </BuildProgressModels>-->
-      <BlockPairName>SAIDS_CruiserCore</BlockPairName>
+      <BlockPairName>SC_CruiserCore</BlockPairName>
       <EdgeType>Light</EdgeType>
       <MirroringY>Z</MirroringY>
       <BuildTimeSeconds>40</BuildTimeSeconds>
@@ -158,7 +158,7 @@
     <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
       <Id>
         <TypeId>Beacon</TypeId>
-        <SubtypeId>SAIDS_BattlecruiserCore</SubtypeId>
+        <SubtypeId>SC_BattlecruiserCore</SubtypeId>
       </Id>
       <DisplayName>Battlecruiser Core</DisplayName>
       <Icon>Textures\admincore.png</Icon>
@@ -189,7 +189,7 @@
                 <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
                 <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
             </BuildProgressModels>-->
-      <BlockPairName>SAIDS_BattlecruiserCore</BlockPairName>
+      <BlockPairName>SC_BattlecruiserCore</BlockPairName>
       <EdgeType>Light</EdgeType>
       <MirroringY>Z</MirroringY>
       <BuildTimeSeconds>40</BuildTimeSeconds>
@@ -209,7 +209,7 @@
     <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
       <Id>
         <TypeId>Beacon</TypeId>
-        <SubtypeId>SAIDS_BattleshipCore</SubtypeId>
+        <SubtypeId>SC_BattleshipCore</SubtypeId>
       </Id>
       <DisplayName>Battleship Core</DisplayName>
       <Icon>Textures\admincore.png</Icon>
@@ -240,7 +240,7 @@
                 <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
                 <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
             </BuildProgressModels>-->
-      <BlockPairName>SAIDS_BattleshipCore</BlockPairName>
+      <BlockPairName>SC_BattleshipCore</BlockPairName>
       <EdgeType>Light</EdgeType>
       <MirroringY>Z</MirroringY>
       <BuildTimeSeconds>40</BuildTimeSeconds>
@@ -260,7 +260,7 @@
     <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
       <Id>
         <TypeId>Beacon</TypeId>
-        <SubtypeId>SAIDS_CapitalCore</SubtypeId>
+        <SubtypeId>SC_CapitalCore</SubtypeId>
       </Id>
       <DisplayName>Capital Core</DisplayName>
       <Icon>Textures\admincore.png</Icon>
@@ -291,7 +291,7 @@
                 <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
                 <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
             </BuildProgressModels>-->
-      <BlockPairName>SAIDS_CapitalCore</BlockPairName>
+      <BlockPairName>SC_CapitalCore</BlockPairName>
       <EdgeType>Light</EdgeType>
       <MirroringY>Z</MirroringY>
       <BuildTimeSeconds>40</BuildTimeSeconds>
@@ -312,7 +312,7 @@
     <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
       <Id>
         <TypeId>Beacon</TypeId>
-        <SubtypeId>SAIDS_StationCore</SubtypeId>
+        <SubtypeId>SC_StationCore</SubtypeId>
       </Id>
       <DisplayName>Station Core</DisplayName>
       <Icon>Textures\admincore.png</Icon>
@@ -343,7 +343,7 @@
                 <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
                 <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
             </BuildProgressModels>-->
-      <BlockPairName>SAIDS_StationCore</BlockPairName>
+      <BlockPairName>SC_StationCore</BlockPairName>
       <EdgeType>Light</EdgeType>
       <MirroringY>Z</MirroringY>
       <BuildTimeSeconds>40</BuildTimeSeconds>
@@ -366,7 +366,7 @@
     <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
       <Id>
         <TypeId>Beacon</TypeId>
-        <SubtypeId>SAIDS_FighterCore</SubtypeId>
+        <SubtypeId>SC_FighterCore</SubtypeId>
       </Id>
       <DisplayName>Fighter Core</DisplayName>
       <Icon>Textures\admincore.png</Icon>
@@ -390,7 +390,7 @@
                 <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
                 <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
             </BuildProgressModels>-->
-      <BlockPairName>SAIDS_FighterCore</BlockPairName>
+      <BlockPairName>SC_FighterCore</BlockPairName>
       <EdgeType>Light</EdgeType>
       <MirroringY>Z</MirroringY>
       <BuildTimeSeconds>40</BuildTimeSeconds>
@@ -411,7 +411,7 @@
     <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
       <Id>
         <TypeId>Beacon</TypeId>
-        <SubtypeId>SAIDS_DroneCore</SubtypeId>
+        <SubtypeId>SC_DroneCore</SubtypeId>
       </Id>
       <DisplayName>Drone Core</DisplayName>
       <Icon>Textures\admincore.png</Icon>
@@ -435,7 +435,7 @@
                 <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
                 <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
             </BuildProgressModels>-->
-      <BlockPairName>SAIDS_DroneCore</BlockPairName>
+      <BlockPairName>SC_DroneCore</BlockPairName>
       <EdgeType>Light</EdgeType>
       <MirroringY>Z</MirroringY>
       <BuildTimeSeconds>40</BuildTimeSeconds>
@@ -469,9 +469,9 @@
       <ModelOffset x="0" y="0" z="0"/>
       <Model>Models\Ship_Core_Admin.mwm</Model>
       <Components>
-        <Component Subtype="SAIDS_ADMINKIT" Count="1"/>
+        <Component Subtype="SC_ADMINKIT" Count="1"/>
         <Component Subtype="Computer" Count="1"/>
-        <Component Subtype="SAIDS_ADMINKIT" Count="1"/>
+        <Component Subtype="SC_ADMINKIT" Count="1"/>
       </Components>
       <CriticalComponent Subtype="Computer" Index="0"/>
       <MountPoints>
@@ -488,7 +488,7 @@
                 <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BeaconConstruction_2.mwm" />
                 <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\BeaconConstruction_3.mwm" />
             </BuildProgressModels>-->
-      <BlockPairName>SAIDS_AdminCore</BlockPairName>
+      <BlockPairName>SC_AdminCore</BlockPairName>
       <EdgeType>Light</EdgeType>
       <MirroringY>Z</MirroringY>
       <BuildTimeSeconds>40</BuildTimeSeconds>

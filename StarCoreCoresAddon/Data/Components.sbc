@@ -4,9 +4,9 @@
     <Component>
       <Id>
         <TypeId>Component</TypeId>
-        <SubtypeId>SAIDS_ADMINKIT</SubtypeId>
+        <SubtypeId>SC_ADMINKIT</SubtypeId>
       </Id>
-      <DisplayName>SAIDS_ADMINKIT</DisplayName>
+      <DisplayName>SC_ADMINKIT</DisplayName>
       <Icon>Textures\GUI\Icons\component\construction_components_component.dds</Icon>
       <Size>
         <X>0.5</X>

@@ -5,14 +5,14 @@
         <Blueprint>
             <Id>
                 <TypeId>BlueprintDefinition</TypeId>
-                <SubtypeId>SAIDS_ADMINKIT</SubtypeId>
+                <SubtypeId>SC_ADMINKIT</SubtypeId>
             </Id>
-            <DisplayName>SAIDS_ADMINKIT</DisplayName>
+            <DisplayName>SC_ADMINKIT</DisplayName>
             <Icon>Textures\GUI\Icons\component\construction_components_component.dds</Icon>
             <Prerequisites>
                 <Item Amount="8" TypeId="Ingot" SubtypeId="Iron" />
             </Prerequisites>
-            <Result Amount="1" TypeId="Component" SubtypeId="SAIDS_ADMINKIT" />
+            <Result Amount="1" TypeId="Component" SubtypeId="SC_ADMINKIT" />
             <BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>
             <IsPrimary>true</IsPrimary>
         </Blueprint>
