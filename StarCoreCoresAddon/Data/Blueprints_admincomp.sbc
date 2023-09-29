@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Blueprints>
+	
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>SAIDS_ADMINKIT</SubtypeId>
+            </Id>
+            <DisplayName>SAIDS_ADMINKIT</DisplayName>
+            <Icon>Textures\GUI\Icons\component\construction_components_component.dds</Icon>
+            <Prerequisites>
+                <Item Amount="8" TypeId="Ingot" SubtypeId="Iron" />
+            </Prerequisites>
+            <Result Amount="1" TypeId="Component" SubtypeId="SAIDS_ADMINKIT" />
+            <BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>
+            <IsPrimary>true</IsPrimary>
+        </Blueprint>
+
+    </Blueprints>
+</Definitions>

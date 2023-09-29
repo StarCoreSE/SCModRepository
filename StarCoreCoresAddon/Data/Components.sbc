@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Components>
+    <Component>
+      <Id>
+        <TypeId>Component</TypeId>
+        <SubtypeId>SAIDS_ADMINKIT</SubtypeId>
+      </Id>
+      <DisplayName>SAIDS_ADMINKIT</DisplayName>
+      <Icon>Textures\GUI\Icons\component\construction_components_component.dds</Icon>
+      <Size>
+        <X>0.5</X>
+        <Y>0.3</Y>
+        <Z>0.3</Z>
+      </Size>
+      <Mass>1</Mass>
+      <Volume>250</Volume>
+      <Model>Models\Components\construction_components_component.mwm</Model>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <MaxIntegrity>10000</MaxIntegrity>
+      <CanPlayerOrder>true</CanPlayerOrder>
+      <DropProbability>0</DropProbability>
+      <Health>14</Health>
+    </Component>
+  </Components>
+</Definitions>

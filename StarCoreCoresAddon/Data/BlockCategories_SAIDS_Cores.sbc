@@ -1,0 +1,34 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!--MAKE SURE TO CHANGE SECLEANMODCATEGORIES TOO IF YOU'RE ADDING A NEW CATEGORY-->
+  <CategoryClasses>
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+
+      </Id>
+      <DisplayName>.Ship Cores</DisplayName>
+      <Name>.Ship Cores</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+        <string>SAIDS_FrigateCore</string>
+        <string>SAIDS_DestroyerCore</string>
+        <string>SAIDS_CruiserCore</string>
+        <string>SAIDS_BattlecruiserCore</string>
+        <string>SAIDS_BattleshipCore</string>
+        <string>SAIDS_CapitalCore</string>
+        <string>SAIDS_FighterCore</string>
+        <string>SAIDS_DroneCore</string>
+        <string>SAIDS_StationCore</string>
+
+
+
+
+
+      </ItemIds>
+    </Category>
+
+
+    
+  </CategoryClasses>
+</Definitions>
