@@ -17,9 +17,9 @@
       <ModelOffset x="0" y="0" z="0"/>
       <Model>Models\Ship_Core_1x1.mwm</Model>
       <Components>
-        <Component Subtype="SteelPlate" Count="250"/>
+        <Component Subtype="SteelPlate" Count="2500"/>
         <Component Subtype="Computer" Count="1"/>
-        <Component Subtype="SteelPlate" Count="250"/>
+        <Component Subtype="SteelPlate" Count="2500"/>
       </Components>
       <CriticalComponent Subtype="Computer" Index="0"/>
       <MountPoints>
@@ -68,9 +68,9 @@
       <ModelOffset x="0" y="0" z="0"/>
       <Model>Models\Ship_Core_1x3.mwm</Model>
       <Components>
-        <Component Subtype="SteelPlate" Count="300"/>
+        <Component Subtype="SteelPlate" Count="3000"/>
         <Component Subtype="Computer" Count="1"/>
-        <Component Subtype="SteelPlate" Count="300"/>
+        <Component Subtype="SteelPlate" Count="3000"/>
       </Components>
       <CriticalComponent Subtype="Computer" Index="0"/>
       <MountPoints>
@@ -119,9 +119,9 @@
       <ModelOffset x="0" y="0" z="0"/>
       <Model>Models\Ship_Core_2x2.mwm</Model>
       <Components>
-        <Component Subtype="SteelPlate" Count="500"/>
+        <Component Subtype="SteelPlate" Count="5000"/>
         <Component Subtype="Computer" Count="1"/>
-        <Component Subtype="SteelPlate" Count="500"/>
+        <Component Subtype="SteelPlate" Count="5000"/>
       </Components>
       <CriticalComponent Subtype="Computer" Index="0"/>
       <MountPoints>
@@ -170,9 +170,9 @@
       <ModelOffset x="0" y="0" z="0"/>
       <Model>Models\Ship_Core_3x3x1.mwm</Model>
       <Components>
-        <Component Subtype="SteelPlate" Count="2000"/>
+        <Component Subtype="SteelPlate" Count="6000"/>
         <Component Subtype="Computer" Count="1"/>
-        <Component Subtype="SteelPlate" Count="2000"/>
+        <Component Subtype="SteelPlate" Count="6000"/>
       </Components>
       <CriticalComponent Subtype="Computer" Index="0"/>
       <MountPoints>
@@ -221,9 +221,9 @@
       <ModelOffset x="0" y="0" z="0"/>
       <Model>Models\Ship_Core_3x3x3.mwm</Model>
       <Components>
-        <Component Subtype="SteelPlate" Count="4000"/>
+        <Component Subtype="SteelPlate" Count="10000"/>
         <Component Subtype="Computer" Count="1"/>
-        <Component Subtype="SteelPlate" Count="4000"/>
+        <Component Subtype="SteelPlate" Count="10000"/>
       </Components>
       <CriticalComponent Subtype="Computer" Index="0"/>
       <MountPoints>
