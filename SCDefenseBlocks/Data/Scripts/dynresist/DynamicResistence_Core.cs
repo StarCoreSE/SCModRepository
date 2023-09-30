@@ -52,7 +52,7 @@ namespace StarCore.DynamicResistence
         public int CountSiegeTimer;
         public int CountSiegeCooldownTimer;
         public int CountSiegeDisplayTimer;
-        public int CountSiegeVisibleTimer;
+        public int CountSiegeVisibleTimer;  
 
         public float MaxAvailibleGridPower = 0f;
 
@@ -115,7 +115,7 @@ namespace StarCore.DynamicResistence
 
         public bool SiegeModeActivated
         {
-            get
+            get 
             { return Settings.SiegeModeActivated; }
             set
             {
@@ -197,7 +197,7 @@ namespace StarCore.DynamicResistence
                 else
                     FieldPower = SettingsFieldPower;
 
-                SaveSettings();
+                SaveSettings(); 
             }
             catch (Exception e)
             {
@@ -266,20 +266,20 @@ namespace StarCore.DynamicResistence
         {
             if (!dynResistBlock.IsWorking)
                 return 0f;
-
+            
             else if (FieldPower == 0f && !SiegeModeActivatedClient)
             {
                 return 50.000f;
             }
             else if (SiegeModeActivatedClient)
             {
-                CalculateMaxGridPower();
+                CalculateMaxGridPower();    
 
                 float maxPowerUsage = dynResistBlockDef.RequiredPowerInput = MaxAvailibleGridPower * 0.9f;
 
                 return maxPowerUsage;
             }
-            else
+            else    
             {
                 CalculateMaxGridPower();
 
@@ -290,7 +290,7 @@ namespace StarCore.DynamicResistence
                 float ratio = sliderValue / MaxDivertedPower;
 
                 return baseUsage + ((baseUsage + (powerPrecentage - baseUsage)) * ratio);
-            }
+            }                      
         }
 
         private void CalculateMaxGridPower()
@@ -328,13 +328,10 @@ namespace StarCore.DynamicResistence
 
         private void SiegeMode()
         {
-
             var allTerminalBlocks = new List<IMySlimBlock>();
-            var tempTerminalBlocks = new List<IMySlimBlock>(allTerminalBlocks);
-
             dynResistBlock.CubeGrid.GetBlocks(allTerminalBlocks);
 
-
+            
 
             if (!SiegeModeActivatedClient)
             {
@@ -412,7 +409,7 @@ namespace StarCore.DynamicResistence
                 }
             }
             else if (dynResistBlock != null && dynResistBlock.IsWorking == false & SiegeModeActivatedClient)
-            {
+            {                
                 CountSiegeTimer = SiegeTimer;
                 CountSiegeDisplayTimer = SiegeDisplayTimer;
                 CountSiegeVisibleTimer = SiegeVisibleTimer;
@@ -588,7 +585,7 @@ namespace StarCore.DynamicResistence
                             SetCountdownStatus($"Error! Unknown State!", 1500, MyFontEnum.Red);
                             return;
                         }
-
+                            
                     }
                 }
             }
@@ -646,7 +643,7 @@ namespace StarCore.DynamicResistence
             if (syncCountdown == 0)
             {
                 syncCountdown = Settings_Change_Countdown;
-            }
+            }          
         }
 
         void SyncSettings()
@@ -658,7 +655,7 @@ namespace StarCore.DynamicResistence
                 Mod.CachedPacketSettings.Send(dynResistBlock.EntityId, Settings);
             }
         }
-
+        
         public override bool IsSerialized()
         {
             // called when the game iterates components to check if they should be serialized, before they're actually serialized.
@@ -690,10 +687,10 @@ namespace StarCore.DynamicResistence
 
             var siegeModeToggle = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlOnOffSwitch, IMyCollector>(Control_Prefix + "SiegeMode");
             siegeModeToggle.Title = MyStringId.GetOrCompute("Siege Mode");
-            siegeModeToggle.Tooltip = MyStringId.GetOrCompute("Toggle Siege Mode");
+            siegeModeToggle.Tooltip = MyStringId.GetOrCompute("Toggle Siege Mode"); 
             siegeModeToggle.OnText = MySpaceTexts.SwitchText_On;
             siegeModeToggle.OffText = MyStringId.GetOrCompute("Off");
-            siegeModeToggle.Visible = Control_Visible;
+            siegeModeToggle.Visible = Control_Visible; 
             siegeModeToggle.Getter = Control_Siege_Getter;
             siegeModeToggle.Setter = Control_Siege_Setter;
             siegeModeToggle.Enabled = Siege_Cooldown_Enabler;
@@ -896,8 +893,8 @@ namespace StarCore.DynamicResistence
             var logic = GetLogic(block);
             if (logic != null)
                 logic.FieldPower = MathHelper.Clamp(value, 0f, 30f);
-            logic.FieldPower = (float)Math.Round(logic.FieldPower, 0);
-            logic.SettingsFieldPower = logic.FieldPower;
+                logic.FieldPower = (float)Math.Round(logic.FieldPower, 0);
+                logic.SettingsFieldPower = logic.FieldPower;
         }
 
         static void Control_Power_Writer(IMyTerminalBlock block, StringBuilder writer)

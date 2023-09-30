@@ -72,12 +72,7 @@ namespace StarCore.DynamicResistence.Sync
             {
                 if (p.SteamUserId != MyAPIGateway.Multiplayer.ServerId && p.SteamUserId != packet.SenderId)
                 {
-
-                    lock (tempPlayers)
-                    {
-                        tempPlayers.Add(p);
-                    }
-
+                    tempPlayers.Add(p);
                 }
             }
 
