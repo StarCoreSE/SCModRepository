@@ -354,7 +354,7 @@
     <Definition xsi:type="MyObjectBuilder_BeaconDefinition">
       <Id>
         <TypeId>Beacon</TypeId>
-        <SubtypeId>LargeBlockBeacon_AdminCore</SubtypeId>
+        <SubtypeId>SC_AdminCore</SubtypeId>
       </Id>
       <DisplayName>[Don't Use] Admin Core</DisplayName>
       <Icon>Textures\admincore.png</Icon>
