@@ -19,11 +19,11 @@ using IMySlimBlock = VRage.Game.ModAPI.IMySlimBlock;
 
 namespace StarCoreCoreRepair
 {
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "SC_LightCore_1x1x1", "SC_LightCore_1x1x3", "SC_MediumCore_2x2", "SC_MediumCore_2x2x2", "SC_MediumCore_3x1x3", "SC_HeavyCore_3x3x3", "SC_AdminCore")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Beacon), false, "SC_LightCore_1x1x1", "SC_LightCore_1x1x3", "SC_MediumCore_2x2", "SC_MediumCore_2x2x2", "SC_MediumCore_3x1x3", "SC_HeavyCore_3x3x3", "SC_AdminCore")]
     public class StarCoreCoreRepair : MyGameLogicComponent, IMyEventProxy
     {
         MySync<float, SyncDirection.BothWays> blockDamageModifierSync = null;
-        private IMyCollector shipCore;
+        private IMyBeacon shipCore;
         private IMyHudNotification notifStatus = null;
         private DateTime repairStartTime;
         private TimeSpan repairDelay = TimeSpan.FromSeconds(30);
@@ -34,7 +34,7 @@ namespace StarCoreCoreRepair
         {
             // Other existing code
             //if (!MyAPIGateway.Session.IsServer) return;
-            shipCore = Entity as IMyCollector;
+            shipCore = Entity as IMyBeacon;
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
             SetStatus($"StarCoreCoreRepair Initialized", 5000, MyFontEnum.Green);
 
