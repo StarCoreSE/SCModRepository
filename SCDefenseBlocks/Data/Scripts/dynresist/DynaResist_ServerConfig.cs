@@ -18,7 +18,7 @@ namespace StarCore.DynamicResistence
 
         public override void LoadData()
         {
-            Settings.Load();           
+            Settings.Load();
 
             // example usage/debug
             Log.Info($"MinDivertedPower value={Settings.MinDivertedPower}");
@@ -53,7 +53,7 @@ namespace StarCore.DynamicResistence
             MaxResistModifier = iniParser.Get(IniSection, nameof(MaxResistModifier)).ToSingle(MaxResistModifier);
             SiegePowerMinimumRequirement = iniParser.Get(IniSection, nameof(SiegePowerMinimumRequirement)).ToSingle(SiegePowerMinimumRequirement);
             SiegeTimer = (int)iniParser.Get(IniSection, nameof(SiegeTimer)).ToSingle(SiegeTimer);
-            SiegeCooldownTimer = (int)iniParser.Get(IniSection, nameof(SiegeCooldownTimer)).ToSingle(SiegeCooldownTimer);                  
+            SiegeCooldownTimer = (int)iniParser.Get(IniSection, nameof(SiegeCooldownTimer)).ToSingle(SiegeCooldownTimer);
         }
 
         void SaveConfig(MyIni iniParser)
@@ -89,7 +89,7 @@ namespace StarCore.DynamicResistence
 
         public void Load()
         {
-            if(MyAPIGateway.Session.IsServer)
+            if (MyAPIGateway.Session.IsServer)
                 LoadOnHost();
             else
                 LoadOnClient();
@@ -101,21 +101,27 @@ namespace StarCore.DynamicResistence
 
             // load file if exists then save it regardless so that it can be sanitized and updated
 
-            if(MyAPIGateway.Utilities.FileExistsInWorldStorage(FileName, typeof(Config_Settings)))
+            if (MyAPIGateway.Utilities.FileExistsInWorldStorage(FileName, typeof(Config_Settings)))
             {
-                using(TextReader file = MyAPIGateway.Utilities.ReadFileInWorldStorage(FileName, typeof(Config_Settings)))
+                using (TextReader file = MyAPIGateway.Utilities.ReadFileInWorldStorage(FileName, typeof(Config_Settings)))
                 {
                     string text = file.ReadToEnd();
 
                     MyIniParseResult result;
-                    if(!iniParser.TryParse(text, out result))
+                    if (!iniParser.TryParse(text, out result))
                         throw new Exception($"Config error: {result.ToString()}");
 
                     LoadConfig(iniParser);
                 }
             }
 
-            iniParser.Clear(); // remove any existing settings that might no longer exist
+
+            // Make sure no other code is enumerating the INI settings when Clear() is called.
+            lock (iniParser)
+            {
+                iniParser.Clear();
+            }
+            // remove any existing settings that might no longer exist
 
             SaveConfig(iniParser);
 
@@ -123,7 +129,7 @@ namespace StarCore.DynamicResistence
 
             MyAPIGateway.Utilities.SetVariable<string>(VariableId, saveText);
 
-            using(TextWriter file = MyAPIGateway.Utilities.WriteFileInWorldStorage(FileName, typeof(Config_Settings)))
+            using (TextWriter file = MyAPIGateway.Utilities.WriteFileInWorldStorage(FileName, typeof(Config_Settings)))
             {
                 file.Write(saveText);
             }
@@ -132,12 +138,12 @@ namespace StarCore.DynamicResistence
         void LoadOnClient()
         {
             string text;
-            if(!MyAPIGateway.Utilities.GetVariable<string>(VariableId, out text))
+            if (!MyAPIGateway.Utilities.GetVariable<string>(VariableId, out text))
                 throw new Exception("No config found in sandbox.sbc!");
 
             MyIni iniParser = new MyIni();
             MyIniParseResult result;
-            if(!iniParser.TryParse(text, out result))
+            if (!iniParser.TryParse(text, out result))
                 throw new Exception($"Config error: {result.ToString()}");
 
             LoadConfig(iniParser);
