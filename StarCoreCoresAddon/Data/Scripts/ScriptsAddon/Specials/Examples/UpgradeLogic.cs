@@ -13,6 +13,8 @@ using ProtoBuf;
 using Sandbox.Engine.Utils;
 using VRage;
 using static VRage.Game.MyObjectBuilder_BehaviorTreeDecoratorNode;
+using System;
+using VRage.Game;
 
 namespace ServerMod
 {
@@ -348,15 +350,39 @@ namespace ServerMod
 
         private static void OnSpecBlockDestroyed(object specBlock)
         {
-            var tBlock = SpecBlockHooks.GetBlockSpecCore(specBlock);
-            if (tBlock == null)
-                return;
+            try
+            {
+                var tBlock = SpecBlockHooks.GetBlockSpecCore(specBlock);
+                if (tBlock == null)
+                {
+                    MyAPIGateway.Utilities.ShowNotification("Spec Block is null. Skipping operation.", 3000, MyFontEnum.Red);
+                    return;
+                }
 
-            IMyCubeGrid grid = tBlock.CubeGrid;
-            List<IMyCubeGrid> grids = new List<IMyCubeGrid>();
-            MyAPIGateway.GridGroups.GetGroup(grid, GridLinkTypeEnum.Mechanical, grids);
-            RunUpgrades(specBlock, grids, true);   
+                IMyCubeGrid grid = tBlock.CubeGrid;
+                if (grid == null)
+                {
+                    MyAPIGateway.Utilities.ShowNotification("Cube Grid is null. Skipping operation.", 3000, MyFontEnum.Red);
+                    return;
+                }
+
+                List<IMyCubeGrid> grids = new List<IMyCubeGrid>();
+                MyAPIGateway.GridGroups.GetGroup(grid, GridLinkTypeEnum.Mechanical, grids);
+
+                if (grids == null || grids.Count == 0)
+                {
+                    MyAPIGateway.Utilities.ShowNotification("No grids found in the mechanical group. Skipping operation.", 3000, MyFontEnum.Red);
+                    return;
+                }
+
+                RunUpgrades(specBlock, grids, true);
+            }
+            catch (Exception ex)
+            {
+                MyAPIGateway.Utilities.ShowNotification($"An exception occurred: {ex.Message}", 5000, MyFontEnum.Red);
+            }
         }
+
 
         /*public static void MessageHandler(byte[] data)
         {
@@ -439,6 +465,7 @@ namespace ServerMod
 
         protected override void UnloadData()
         {
+            SpecBlockHooks.OnReady -= HooksOnOnReady;
             //MyAPIGateway.Multiplayer.UnregisterMessageHandler(5561, MessageHandler);
 
         }
