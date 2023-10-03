@@ -13,8 +13,6 @@ using ProtoBuf;
 using Sandbox.Engine.Utils;
 using VRage;
 using static VRage.Game.MyObjectBuilder_BehaviorTreeDecoratorNode;
-using System;
-using VRage.Game;
 
 namespace ServerMod
 {
@@ -220,27 +218,21 @@ namespace ServerMod
 
             if (thrustBlock != null)
             {
-                if (stats.ContainsKey(46) && stats[46] != 0)
+                if (stats != null && stats.ContainsKey(46) && stats[46] != 0)
                 {
                     thrustBlock.ThrustMultiplier = stats[46];
-                }
-                else
-                {
-                    thrustBlock.ThrustMultiplier = 1.0f;
-                }
-                if (stats.ContainsKey(46) && stats[46] != 0)
-                {
                     thrustBlock.PowerConsumptionMultiplier = 1 / stats[46];
                 }
                 else
                 {
+                    thrustBlock.ThrustMultiplier = 1.0f;
                     thrustBlock.PowerConsumptionMultiplier = 1.0f;
                 }
             }
 
             if (reactorBlock != null)
             {
-                if (stats.ContainsKey(28) && stats[28] != 0)
+                if (stats != null && stats.ContainsKey(28) && stats[28] != 0)
                 {
                     reactorBlock.PowerOutputMultiplier = stats[28];
                 }
@@ -248,46 +240,37 @@ namespace ServerMod
                 {
                     reactorBlock.PowerOutputMultiplier = 1.0f;
                 }
-                //MyLog.Default.WriteLineAndConsole($"Reactor upgraded - {reactorBlock.PowerOutputMultiplier}");
-                //Log.ChatError($"SetMultiplier to: {reactorBlock.PowerOutputMultiplier}");
             }
 
             if (gyroBlock != null)
             {
-                if (stats.ContainsKey(28) && stats[28] != 0)
+                if (stats != null && stats.ContainsKey(28) && stats[28] != 0)
                 {
                     gyroBlock.PowerConsumptionMultiplier = 1 / MathHelper.Max(1, stats[28]);
-                    //gyroBlock.GyroStrengthMultiplier = stats[28];
                 }
                 else
                 {
                     gyroBlock.PowerConsumptionMultiplier = 1.0f;
-                    //gyroBlock.GyroStrengthMultiplier = 1.0f;
                 }
-                //Log.ChatError($"SetMultiplier to: {gyroBlock.PowerConsumptionMultiplier}");
             }
-
 
             if (generatorBlock != null)
             {
-                if (stats.ContainsKey(29) && stats[29] != 0)
+                if (stats != null && stats.ContainsKey(29) && stats[29] != 0)
                 {
-                    //This is the rate of ice consumption, NOT the rate of O2/H2 output
                     generatorBlock.ProductionCapacityMultiplier = stats[29];
                     generatorBlock.PowerConsumptionMultiplier = stats[29] / MathHelper.Max(1, stats[28]);
                 }
                 else
                 {
-                    //This is the rate of ice consumption, NOT the rate of O2/H2 output
                     generatorBlock.ProductionCapacityMultiplier = 1.0f;
                     generatorBlock.PowerConsumptionMultiplier = 1.0f;
                 }
-               //Log.ChatError($"SetMultiplier to: {generatorBlock.ProductionCapacityMultiplier}");
             }
 
             if (drillBlock != null)
             {
-                if (stats.ContainsKey(27) && stats[27] != 0)
+                if (stats != null && stats.ContainsKey(27) && stats[27] != 0)
                 {
                     drillBlock.DrillHarvestMultiplier = stats[27];
                     drillBlock.PowerConsumptionMultiplier = 1 / stats[27];
@@ -297,7 +280,6 @@ namespace ServerMod
                     drillBlock.DrillHarvestMultiplier = 1.0f;
                     drillBlock.PowerConsumptionMultiplier = 1.0f;
                 }
-                //Log.ChatError($"SetMultiplier to: {drillBlock.DrillHarvestMultiplier}");
             }
         }
         //This doesnt seem to work when expected, not sure why, is this even needed?
@@ -350,39 +332,15 @@ namespace ServerMod
 
         private static void OnSpecBlockDestroyed(object specBlock)
         {
-            try
-            {
-                var tBlock = SpecBlockHooks.GetBlockSpecCore(specBlock);
-                if (tBlock == null)
-                {
-                    MyAPIGateway.Utilities.ShowNotification("Spec Block is null. Skipping operation.", 3000, MyFontEnum.Red);
-                    return;
-                }
+            var tBlock = SpecBlockHooks.GetBlockSpecCore(specBlock);
+            if (tBlock == null)
+                return;
 
-                IMyCubeGrid grid = tBlock.CubeGrid;
-                if (grid == null)
-                {
-                    MyAPIGateway.Utilities.ShowNotification("Cube Grid is null. Skipping operation.", 3000, MyFontEnum.Red);
-                    return;
-                }
-
-                List<IMyCubeGrid> grids = new List<IMyCubeGrid>();
-                MyAPIGateway.GridGroups.GetGroup(grid, GridLinkTypeEnum.Mechanical, grids);
-
-                if (grids == null || grids.Count == 0)
-                {
-                    MyAPIGateway.Utilities.ShowNotification("No grids found in the mechanical group. Skipping operation.", 3000, MyFontEnum.Red);
-                    return;
-                }
-
-                RunUpgrades(specBlock, grids, true);
-            }
-            catch (Exception ex)
-            {
-                MyAPIGateway.Utilities.ShowNotification($"An exception occurred: {ex.Message}", 5000, MyFontEnum.Red);
-            }
+            IMyCubeGrid grid = tBlock.CubeGrid;
+            List<IMyCubeGrid> grids = new List<IMyCubeGrid>();
+            MyAPIGateway.GridGroups.GetGroup(grid, GridLinkTypeEnum.Mechanical, grids);
+            RunUpgrades(specBlock, grids, true);   
         }
-
 
         /*public static void MessageHandler(byte[] data)
         {
@@ -465,7 +423,6 @@ namespace ServerMod
 
         protected override void UnloadData()
         {
-            SpecBlockHooks.OnReady -= HooksOnOnReady;
             //MyAPIGateway.Multiplayer.UnregisterMessageHandler(5561, MessageHandler);
 
         }
