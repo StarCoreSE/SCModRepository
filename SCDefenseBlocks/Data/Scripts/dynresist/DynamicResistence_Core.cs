@@ -147,13 +147,19 @@ namespace StarCore.DynamicResistence
         #region Overrides
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
+            Log.Info("Started Init");
+
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
+
+            Log.Info("Finished Init");
         }
 
         public override void UpdateOnceBeforeFrame()
         {
             try
             {
+                Log.Info("Started UpdateOnceBefore");
+
                 MinDivertedPower = Config.MinDivertedPower;
                 MaxDivertedPower = Config.MaxDivertedPower;
                 MinResistModifier = Config.MinResistModifier;
@@ -197,11 +203,13 @@ namespace StarCore.DynamicResistence
                 else
                     FieldPower = SettingsFieldPower;
 
-                SaveSettings(); 
+                SaveSettings();
+
+                Log.Info("Finished UpdateOnceBefore");
             }
             catch (Exception e)
             {
-                Log.Error(e);
+                Log.Error($"\nException in UpdateOnceBefore:\n{e}");
             }
         }
 
@@ -209,6 +217,8 @@ namespace StarCore.DynamicResistence
         {
             try
             {
+                Log.Info("Started UpdateBeforeSimulation10");
+
                 SyncSettings();
                 if (SiegeCooldownTimerActive == true && CountSiegeCooldownTimer > 0)
                 {
@@ -219,10 +229,12 @@ namespace StarCore.DynamicResistence
                     CountSiegeCooldownTimer = SiegeCooldownTimer;
                     SiegeCooldownTimerActive = false;
                 }
+
+                Log.Info("Finished UpdateBeforeSimulation10");
             }
             catch (Exception e)
             {
-                Log.Error(e);
+                Log.Error($"\nException in UpdateBeforeSimulation10\n{e}");
             }
         }
 
@@ -230,13 +242,17 @@ namespace StarCore.DynamicResistence
         {
             try
             {
+                Log.Info("Started UpdateAfterSimulation");
+
                 SiegeMode();
                 CalculateMaxGridPower();
                 ChangeResistanceValue(dynResistBlock);
+
+                Log.Info("Finished UpdateAfterSimulation");
             }
             catch (Exception e)
             {
-                Log.Error(e);
+                Log.Error($"\nException in UpdateAfterSimulation\n{e}");
             }
         }
 
@@ -244,6 +260,8 @@ namespace StarCore.DynamicResistence
         {
             try
             {
+                Log.Info("Started Close");
+
                 if (dynResistBlock == null)
                     return;
 
@@ -254,10 +272,12 @@ namespace StarCore.DynamicResistence
 
                 ResetBlockResist(dynResistBlock);
                 dynResistBlock = null;
+
+                Log.Info("Finished Close");
             }
             catch (Exception e)
             {
-                Log.Error(e);
+                Log.Error($"\nException in Close\n{e}");
             }
         }
         #endregion
@@ -623,19 +643,26 @@ namespace StarCore.DynamicResistence
 
         void SaveSettings()
         {
-            if (dynResistBlock == null)
-                return; // called too soon or after it was already closed, ignore
+            try
+            {
+                if (dynResistBlock == null)
+                    return; // called too soon or after it was already closed, ignore
 
-            if (Settings == null)
-                throw new NullReferenceException($"Settings == null on entId={Entity?.EntityId}; modInstance={DynamicResistenceMod.Instance != null}");
+                if (Settings == null)
+                    throw new NullReferenceException($"Settings == null on entId={Entity?.EntityId}; modInstance={DynamicResistenceMod.Instance != null}");
 
-            if (MyAPIGateway.Utilities == null)
-                throw new NullReferenceException($"MyAPIGateway.Utilities == null; entId={Entity?.EntityId}; modInstance={DynamicResistenceMod.Instance != null}");
+                if (MyAPIGateway.Utilities == null)
+                    throw new NullReferenceException($"MyAPIGateway.Utilities == null; entId={Entity?.EntityId}; modInstance={DynamicResistenceMod.Instance != null}");
 
-            if (dynResistBlock.Storage == null)
-                dynResistBlock.Storage = new MyModStorageComponent();
+                if (dynResistBlock.Storage == null)
+                    dynResistBlock.Storage = new MyModStorageComponent();
 
-            dynResistBlock.Storage.SetValue(Settings_GUID, Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(Settings)));
+                dynResistBlock.Storage.SetValue(Settings_GUID, Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(Settings)));
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error saving settings!\n{e}");
+            }
         }
 
         void SettingsChanged()
@@ -648,11 +675,18 @@ namespace StarCore.DynamicResistence
 
         void SyncSettings()
         {
-            if (syncCountdown > 0 && --syncCountdown <= 0)
+            try
             {
-                SaveSettings();
+                if (syncCountdown > 0 && --syncCountdown <= 0)
+                {
+                    SaveSettings();
 
-                Mod.CachedPacketSettings.Send(dynResistBlock.EntityId, Settings);
+                    Mod.CachedPacketSettings.Send(dynResistBlock.EntityId, Settings);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error syncing settings!\n{e}");
             }
         }
         
@@ -892,9 +926,11 @@ namespace StarCore.DynamicResistence
         {
             var logic = GetLogic(block);
             if (logic != null)
+            {
                 logic.FieldPower = MathHelper.Clamp(value, 0f, 30f);
                 logic.FieldPower = (float)Math.Round(logic.FieldPower, 0);
                 logic.SettingsFieldPower = logic.FieldPower;
+            }           
         }
 
         static void Control_Power_Writer(IMyTerminalBlock block, StringBuilder writer)

@@ -23,9 +23,15 @@ namespace StarCore
         private static Handler handler;
         private static bool unloaded = false;
 
-        public const string FILE = "info.log";
+        public static readonly string FILE = GenerateTimestampedFileName();
         private const int DEFAULT_TIME_INFO = 3000;
         private const int DEFAULT_TIME_ERROR = 10000;
+
+        private static string GenerateTimestampedFileName()
+        {
+            string timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+            return $"[{timestamp}]info.log";
+        }
 
         /// <summary>
         /// Print the generic error info.
