@@ -191,8 +191,6 @@ namespace StarCore.DynamicResistence
                 Sink = dynResistBlock.Components.Get<MyResourceSinkComponent>();
                 Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, RequiredInput);
 
-                NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_10TH_FRAME;
-
                 LoadSettings();
 
                 if (SettingsFieldPower <= 0)
@@ -204,6 +202,8 @@ namespace StarCore.DynamicResistence
                     FieldPower = SettingsFieldPower;
 
                 SaveSettings();
+
+                NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_10TH_FRAME;
 
                 Log.Info("Finished UpdateOnceBefore");
             }
