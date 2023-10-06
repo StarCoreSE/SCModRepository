@@ -16,7 +16,7 @@ using VRage.Utils;
 
 namespace ReactorUpgrade
 {
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Reactor),false)]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Reactor),false, "LargeBlockLargeGenerator", "LargeBlockSmallGenerator")]
     public class MyReactorUpgradeLogic : MyGameLogicComponent
     {
         private IMyReactor m_reactor;
@@ -31,13 +31,14 @@ namespace ReactorUpgrade
             {
                 m_reactor.AddUpgradeValue("ReactorOutputLarge", 1f);
                 m_reactor.OnUpgradeValuesChanged += OnUpgradeValuesChangedLarge;
+                OnUpgradeValuesChangedLarge();
             }
             else
             {
                 m_reactor.AddUpgradeValue("ReactorOutputSmall", 1f);
                 m_reactor.OnUpgradeValuesChanged += OnUpgradeValuesChangedSmall;
-            }
-                
+                OnUpgradeValuesChangedSmall();
+            }              
         }
 
         private void OnUpgradeValuesChangedLarge()
@@ -48,6 +49,18 @@ namespace ReactorUpgrade
         private void OnUpgradeValuesChangedSmall()
         {
             m_reactor.PowerOutputMultiplier = m_reactor.UpgradeValues["ReactorOutputSmall"];
+        }
+
+        public override void UpdateAfterSimulation100()
+        {
+            if (m_reactor.BlockDefinition.SubtypeName == "LargeBlockLargeGenerator")
+            {
+                m_reactor.PowerOutputMultiplier = Block.UpgradeValues[ReactorOutputLarge];
+            }
+            else
+            {
+                m_reactor.PowerOutputMultiplier = Block.UpgradeValues[ReactorOutputSmall];
+            }
         }
     }
 }
