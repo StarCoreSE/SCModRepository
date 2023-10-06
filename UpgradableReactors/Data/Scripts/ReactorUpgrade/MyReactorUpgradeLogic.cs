@@ -38,7 +38,9 @@ namespace ReactorUpgrade
                 m_reactor.AddUpgradeValue("ReactorOutputSmall", 1f);
                 m_reactor.OnUpgradeValuesChanged += OnUpgradeValuesChangedSmall;
                 OnUpgradeValuesChangedSmall();
-            }              
+            } 
+
+            NeedsUpdate = MyEntityUpdateEnum.EACH_100TH_FRAME; // enables UpdateAfterSimulation100() to get called almost every 100 ticks, not guaranteed 100.                 
         }
 
         private void OnUpgradeValuesChangedLarge()
