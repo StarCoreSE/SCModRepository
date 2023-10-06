@@ -52,7 +52,7 @@ namespace StarCore.DynamicResistence
         public int CountSiegeTimer;
         public int CountSiegeCooldownTimer;
         public int CountSiegeDisplayTimer;
-        public int CountSiegeVisibleTimer;
+        public int CountSiegeVisibleTimer;  
 
         public float MaxAvailibleGridPower = 0f;
 
@@ -115,7 +115,7 @@ namespace StarCore.DynamicResistence
 
         public bool SiegeModeActivated
         {
-            get
+            get 
             { return Settings.SiegeModeActivated; }
             set
             {
@@ -147,13 +147,19 @@ namespace StarCore.DynamicResistence
         #region Overrides
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
+            Log.Info("Started Init");
+
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
+
+            Log.Info("Finished Init");
         }
 
         public override void UpdateOnceBeforeFrame()
         {
             try
             {
+                Log.Info("Started UpdateOnceBefore");
+
                 MinDivertedPower = Config.MinDivertedPower;
                 MaxDivertedPower = Config.MaxDivertedPower;
                 MinResistModifier = Config.MinResistModifier;
@@ -185,8 +191,6 @@ namespace StarCore.DynamicResistence
                 Sink = dynResistBlock.Components.Get<MyResourceSinkComponent>();
                 Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, RequiredInput);
 
-                NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_10TH_FRAME;
-
                 LoadSettings();
 
                 if (SettingsFieldPower <= 0)
@@ -198,10 +202,14 @@ namespace StarCore.DynamicResistence
                     FieldPower = SettingsFieldPower;
 
                 SaveSettings();
+
+                NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_10TH_FRAME;
+
+                Log.Info("Finished UpdateOnceBefore");
             }
             catch (Exception e)
             {
-                Log.Error(e);
+                Log.Error($"\nException in UpdateOnceBefore:\n{e}");
             }
         }
 
@@ -209,6 +217,8 @@ namespace StarCore.DynamicResistence
         {
             try
             {
+                Log.Info("Started UpdateBeforeSimulation10");
+
                 SyncSettings();
                 if (SiegeCooldownTimerActive == true && CountSiegeCooldownTimer > 0)
                 {
@@ -219,10 +229,12 @@ namespace StarCore.DynamicResistence
                     CountSiegeCooldownTimer = SiegeCooldownTimer;
                     SiegeCooldownTimerActive = false;
                 }
+
+                Log.Info("Finished UpdateBeforeSimulation10");
             }
             catch (Exception e)
             {
-                Log.Error(e);
+                Log.Error($"\nException in UpdateBeforeSimulation10\n{e}");
             }
         }
 
@@ -230,13 +242,17 @@ namespace StarCore.DynamicResistence
         {
             try
             {
+                Log.Info("Started UpdateAfterSimulation");
+
                 SiegeMode();
                 CalculateMaxGridPower();
                 ChangeResistanceValue(dynResistBlock);
+
+                Log.Info("Finished UpdateAfterSimulation");
             }
             catch (Exception e)
             {
-                Log.Error(e);
+                Log.Error($"\nException in UpdateAfterSimulation\n{e}");
             }
         }
 
@@ -244,6 +260,8 @@ namespace StarCore.DynamicResistence
         {
             try
             {
+                Log.Info("Started Close");
+
                 if (dynResistBlock == null)
                     return;
 
@@ -254,10 +272,12 @@ namespace StarCore.DynamicResistence
 
                 ResetBlockResist(dynResistBlock);
                 dynResistBlock = null;
+
+                Log.Info("Finished Close");
             }
             catch (Exception e)
             {
-                Log.Error(e);
+                Log.Error($"\nException in Close\n{e}");
             }
         }
         #endregion
@@ -266,20 +286,20 @@ namespace StarCore.DynamicResistence
         {
             if (!dynResistBlock.IsWorking)
                 return 0f;
-
+            
             else if (FieldPower == 0f && !SiegeModeActivatedClient)
             {
                 return 50.000f;
             }
             else if (SiegeModeActivatedClient)
             {
-                CalculateMaxGridPower();
+                CalculateMaxGridPower();    
 
                 float maxPowerUsage = dynResistBlockDef.RequiredPowerInput = MaxAvailibleGridPower * 0.9f;
 
                 return maxPowerUsage;
             }
-            else
+            else    
             {
                 CalculateMaxGridPower();
 
@@ -290,7 +310,7 @@ namespace StarCore.DynamicResistence
                 float ratio = sliderValue / MaxDivertedPower;
 
                 return baseUsage + ((baseUsage + (powerPrecentage - baseUsage)) * ratio);
-            }
+            }                      
         }
 
         private void CalculateMaxGridPower()
@@ -331,7 +351,7 @@ namespace StarCore.DynamicResistence
             var allTerminalBlocks = new List<IMySlimBlock>();
             dynResistBlock.CubeGrid.GetBlocks(allTerminalBlocks);
 
-
+            
 
             if (!SiegeModeActivatedClient)
             {
@@ -409,7 +429,7 @@ namespace StarCore.DynamicResistence
                 }
             }
             else if (dynResistBlock != null && dynResistBlock.IsWorking == false & SiegeModeActivatedClient)
-            {
+            {                
                 CountSiegeTimer = SiegeTimer;
                 CountSiegeDisplayTimer = SiegeDisplayTimer;
                 CountSiegeVisibleTimer = SiegeVisibleTimer;
@@ -585,7 +605,7 @@ namespace StarCore.DynamicResistence
                             SetCountdownStatus($"Error! Unknown State!", 1500, MyFontEnum.Red);
                             return;
                         }
-
+                            
                     }
                 }
             }
@@ -623,19 +643,26 @@ namespace StarCore.DynamicResistence
 
         void SaveSettings()
         {
-            if (dynResistBlock == null)
-                return; // called too soon or after it was already closed, ignore
+            try
+            {
+                if (dynResistBlock == null)
+                    return; // called too soon or after it was already closed, ignore
 
-            if (Settings == null)
-                throw new NullReferenceException($"Settings == null on entId={Entity?.EntityId}; modInstance={DynamicResistenceMod.Instance != null}");
+                if (Settings == null)
+                    throw new NullReferenceException($"Settings == null on entId={Entity?.EntityId}; modInstance={DynamicResistenceMod.Instance != null}");
 
-            if (MyAPIGateway.Utilities == null)
-                throw new NullReferenceException($"MyAPIGateway.Utilities == null; entId={Entity?.EntityId}; modInstance={DynamicResistenceMod.Instance != null}");
+                if (MyAPIGateway.Utilities == null)
+                    throw new NullReferenceException($"MyAPIGateway.Utilities == null; entId={Entity?.EntityId}; modInstance={DynamicResistenceMod.Instance != null}");
 
-            if (dynResistBlock.Storage == null)
-                dynResistBlock.Storage = new MyModStorageComponent();
+                if (dynResistBlock.Storage == null)
+                    dynResistBlock.Storage = new MyModStorageComponent();
 
-            dynResistBlock.Storage.SetValue(Settings_GUID, Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(Settings)));
+                dynResistBlock.Storage.SetValue(Settings_GUID, Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(Settings)));
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error saving settings!\n{e}");
+            }
         }
 
         void SettingsChanged()
@@ -643,19 +670,26 @@ namespace StarCore.DynamicResistence
             if (syncCountdown == 0)
             {
                 syncCountdown = Settings_Change_Countdown;
-            }
+            }          
         }
 
         void SyncSettings()
         {
-            if (syncCountdown > 0 && --syncCountdown <= 0)
+            try
             {
-                SaveSettings();
+                if (syncCountdown > 0 && --syncCountdown <= 0)
+                {
+                    SaveSettings();
 
-                Mod.CachedPacketSettings.Send(dynResistBlock.EntityId, Settings);
+                    Mod.CachedPacketSettings.Send(dynResistBlock.EntityId, Settings);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error syncing settings!\n{e}");
             }
         }
-
+        
         public override bool IsSerialized()
         {
             // called when the game iterates components to check if they should be serialized, before they're actually serialized.
@@ -687,10 +721,10 @@ namespace StarCore.DynamicResistence
 
             var siegeModeToggle = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlOnOffSwitch, IMyCollector>(Control_Prefix + "SiegeMode");
             siegeModeToggle.Title = MyStringId.GetOrCompute("Siege Mode");
-            siegeModeToggle.Tooltip = MyStringId.GetOrCompute("Toggle Siege Mode");
+            siegeModeToggle.Tooltip = MyStringId.GetOrCompute("Toggle Siege Mode"); 
             siegeModeToggle.OnText = MySpaceTexts.SwitchText_On;
             siegeModeToggle.OffText = MyStringId.GetOrCompute("Off");
-            siegeModeToggle.Visible = Control_Visible;
+            siegeModeToggle.Visible = Control_Visible; 
             siegeModeToggle.Getter = Control_Siege_Getter;
             siegeModeToggle.Setter = Control_Siege_Setter;
             siegeModeToggle.Enabled = Siege_Cooldown_Enabler;
@@ -892,9 +926,11 @@ namespace StarCore.DynamicResistence
         {
             var logic = GetLogic(block);
             if (logic != null)
+            {
                 logic.FieldPower = MathHelper.Clamp(value, 0f, 30f);
-            logic.FieldPower = (float)Math.Round(logic.FieldPower, 0);
-            logic.SettingsFieldPower = logic.FieldPower;
+                logic.FieldPower = (float)Math.Round(logic.FieldPower, 0);
+                logic.SettingsFieldPower = logic.FieldPower;
+            }           
         }
 
         static void Control_Power_Writer(IMyTerminalBlock block, StringBuilder writer)
