@@ -130,8 +130,8 @@ namespace Scripts.Specials.ShipClass
             Action<object, List<IMyCubeGrid>> onSpecBlockChanged = (x,y) => OnSpecBlockChanged?.Invoke(x,y);
 
             ModConnection.SetValue("MIG.SpecCores.OnSpecBlockCreated", onSpecBlockCreated);
-            ModConnection.SetValue("MIG.SpecCores.OnLimitedBlockCreated", OnLimitedBlockCreated);
-            ModConnection.SetValue("MIG.SpecCores.OnSpecBlockDestroyed", OnSpecBlockDestroyed);
+            ModConnection.SetValue("MIG.SpecCores.OnLimitedBlockCreated", onLimitedBlockCreated);
+            ModConnection.SetValue("MIG.SpecCores.OnSpecBlockDestroyed", onSpecBlockDestroyed);
             ModConnection.SetValue("MIG.SpecCores.OnLimitedBlockDestroyed", onLimitedBlockDestroyed);
 
             ModConnection.SetValue("MIG.SpecCores.OnSpecBlockChanged", onSpecBlockChanged);

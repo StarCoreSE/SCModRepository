@@ -19,7 +19,7 @@
         <string>Type77_Railgun_Block</string>
         <string>Reaver_Coilgun_Block</string>
         <string>Fixed_Rockets</string>
-        <string>Heavy_Repeater</string>
+        <string>Priest_Block</string>
 
 
 
@@ -185,6 +185,7 @@
         <string>AQD_LG_GyroBooster</string>
         <string>AQD_LG_GyroUpgrade</string>
         <string>SC_Radome</string>
+        <string>SI_Field_Gen</string>
 		
         
 
