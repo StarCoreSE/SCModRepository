@@ -197,9 +197,12 @@ namespace StarCore.DynamicResistence
                 Settings.Modifier = MinResistModifier;
                 Settings.SiegeModeActivated = false;
 
-                NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_10TH_FRAME;
+                LoadSettings();
+
+                SaveSettings();
 
                 Log.Info("Finished UpdateOnceBefore");
+                NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_10TH_FRAME;
             }
             catch (Exception e)
             {
