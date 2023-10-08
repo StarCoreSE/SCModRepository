@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition>
+			<Id>
+				<TypeId>ControlPanel</TypeId>
+				<SubtypeId>FaceSmashPanelLarge</SubtypeId>
+			</Id>
+			<DisplayName>Face Smash Large</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\Control Panel.dds</Icon>
+			<Description>Face Smash Large</Description>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1" />
+			<ModelOffset x="0" y="0" z="0" />
+			<Model>Models\Cubes\Large\ControlPanel.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="1" />
+				<Component Subtype="Construction" Count="1" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="Display" Count="1" />
+			</Components>
+			<CriticalComponent Subtype="Construction" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Back" ExclusionMask="3" PropertiesMask="3" StartY="0.4" StartX="0.44" EndY="0.6" EndX="0.55" />
+			</MountPoints>
+			<IsStandAlone>true</IsStandAlone>
+			<HasPhysics>false</HasPhysics>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\ControlPanelConstruction_1.mwm" />
+			</BuildProgressModels>
+			<BlockPairName>FaceSmash</BlockPairName>
+			<MirroringZ>Y</MirroringZ>
+			<MirroringY>Z</MirroringY>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>6</BuildTimeSeconds>
+			<DestroyEffectOffset>
+				<X>0</X>
+				<Y>0</Y>
+				<Z>1.1</Z>
+			</DestroyEffectOffset>
+			<PCU>5</PCU>
+			<IsAirTight>false</IsAirTight>      
+		</Definition>
+
+		<Definition>
+			<Id>
+				<TypeId>ControlPanel</TypeId>
+				<SubtypeId>FaceSmashPanelSmall</SubtypeId>
+			</Id>
+			<DisplayName>Face Smash Small</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\Control Panel.dds</Icon>
+			<Description>Face Smash Small</Description>
+			<CubeSize>Small</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1" />
+			<ModelOffset x="0" y="0" z="0" />
+			<Model>Models\Cubes\Small\ControlPanel.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="1" />
+				<Component Subtype="Construction" Count="1" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="Display" Count="1" />
+			</Components>
+			<CriticalComponent Subtype="Construction" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Back" ExclusionMask="3" PropertiesMask="3" StartY="0.4" StartX="0.44" EndY="0.6" EndX="0.55" />
+			</MountPoints>
+			<IsStandAlone>true</IsStandAlone>
+			<HasPhysics>false</HasPhysics>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\Small\ControlPanelConstruction_1.mwm" />
+			</BuildProgressModels>
+			<MirroringZ>Y</MirroringZ>
+			<MirroringY>Z</MirroringY>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>6</BuildTimeSeconds>
+			<BlockPairName>FaceSmash</BlockPairName>
+			<DestroyEffectOffset>
+				<X>0</X>
+				<Y>0</Y>
+				<Z>1.1</Z>
+			</DestroyEffectOffset>
+			<PCU>5</PCU>
+			<IsAirTight>false</IsAirTight>      
+		</Definition>
+	</CubeBlocks>
+</Definitions>
