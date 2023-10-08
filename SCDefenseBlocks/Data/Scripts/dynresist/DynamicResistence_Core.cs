@@ -32,7 +32,7 @@ namespace StarCore.DynamicResistence
     {
         public float MinDivertedPower;
         public float MaxDivertedPower;
-        private float FieldPower;
+
         public float MinResistModifier;
         public float MaxResistModifier;
 
@@ -191,17 +191,11 @@ namespace StarCore.DynamicResistence
                 Sink = dynResistBlock.Components.Get<MyResourceSinkComponent>();
                 Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, RequiredInput);
 
-                LoadSettings();
-
-                if (SettingsFieldPower <= 0)
-                {
-                    FieldPower = MinDivertedPower;
-                    return;
-                }
-                else
-                    FieldPower = SettingsFieldPower;
 
                 SaveSettings();
+                Settings.FieldPower = MinDivertedPower;
+                Settings.Modifier = MinResistModifier;
+                Settings.SiegeModeActivated = false;
 
                 NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_10TH_FRAME;
 
@@ -287,7 +281,7 @@ namespace StarCore.DynamicResistence
             if (!dynResistBlock.IsWorking)
                 return 0f;
             
-            else if (FieldPower == 0f && !SiegeModeActivatedClient)
+            else if (SettingsFieldPower == 0f && !SiegeModeActivatedClient)
             {
                 return 50.000f;
             }
@@ -305,7 +299,7 @@ namespace StarCore.DynamicResistence
 
                 float baseUsage = 50.000f;
                 float powerPrecentage = dynResistBlockDef.RequiredPowerInput = MaxAvailibleGridPower * 0.3f;
-                float sliderValue = FieldPower;
+                float sliderValue = SettingsFieldPower;
 
                 float ratio = sliderValue / MaxDivertedPower;
 
@@ -384,7 +378,7 @@ namespace StarCore.DynamicResistence
 
                 if (CountSiegeTimer > 0)
                 {
-                    FieldPower = 0f;
+                    SettingsFieldPower = 0f;
 
                     SiegeModeShutdown(allTerminalBlocks);
 
@@ -527,7 +521,7 @@ namespace StarCore.DynamicResistence
 
                 if (dynamicResistLogic != null)
                 {
-                    float divertedPower = dynamicResistLogic.FieldPower;
+                    float divertedPower = dynamicResistLogic.SettingsFieldPower;
 
                     float t = (divertedPower - MinDivertedPower) / (float)(MaxDivertedPower - MinDivertedPower);
                     float resistanceModifier = MinResistModifier + t * (MaxResistModifier - MinResistModifier);
@@ -546,15 +540,15 @@ namespace StarCore.DynamicResistence
 
                         finalResistanceModifier = resistanceModifier;
 
-                        SetPowerStatus($"Integrity Field Power: " + FieldPower + "%", 1500, MyFontEnum.Green);
+                        SetPowerStatus($"Integrity Field Power: " + SettingsFieldPower + "%", 1500, MyFontEnum.Green);
                     }
                 }
             }
             else if (!dynResistBlock.IsWorking || !SiegeModeActivatedClient)
             {
-                if (FieldPower > 0f)
+                if (SettingsFieldPower > 0f)
                 {
-                    FieldPower = 0f;
+                    SettingsFieldPower = 0f;
                     Settings.FieldPower = 0f;
                     finalResistanceModifier = 1.0f;
                     Settings.Modifier = 1.0f;
@@ -762,9 +756,9 @@ namespace StarCore.DynamicResistence
                         logic.SetPowerStatus($"Block Disabled", 1500, MyFontEnum.Red);
                         return;
                     }
-                    logic.FieldPower = logic.FieldPower + 1;
-                    logic.FieldPower = MathHelper.Clamp(logic.FieldPower, 0f, 30f);
-                    logic.Settings.FieldPower = logic.FieldPower;
+                    logic.SettingsFieldPower = logic.SettingsFieldPower + 1;
+                    logic.SettingsFieldPower = MathHelper.Clamp(logic.SettingsFieldPower, 0f, 30f);
+                    logic.Settings.FieldPower = logic.SettingsFieldPower;
                 }
             };
             increaseFieldPower.Writer = (b, sb) =>
@@ -802,9 +796,9 @@ namespace StarCore.DynamicResistence
                         logic.SetPowerStatus($"Block Disabled", 1500, MyFontEnum.Red);
                         return;
                     }
-                    logic.FieldPower = logic.FieldPower - 1;
-                    logic.FieldPower = MathHelper.Clamp(logic.FieldPower, 0f, 30f);
-                    logic.Settings.FieldPower = logic.FieldPower;
+                    logic.SettingsFieldPower = logic.SettingsFieldPower - 1;
+                    logic.SettingsFieldPower = MathHelper.Clamp(logic.SettingsFieldPower, 0f, 30f);
+                    logic.Settings.FieldPower = logic.SettingsFieldPower;
                 }
             };
             decreaseFieldPower.Writer = (b, sb) =>
@@ -919,7 +913,7 @@ namespace StarCore.DynamicResistence
         static float Control_Power_Getter(IMyTerminalBlock block)
         {
             var logic = GetLogic(block);
-            return logic != null ? logic.FieldPower : 0f;
+            return logic != null ? logic.SettingsFieldPower : 0f;
         }
 
         static void Control_Power_Setter(IMyTerminalBlock block, float value)
@@ -927,9 +921,8 @@ namespace StarCore.DynamicResistence
             var logic = GetLogic(block);
             if (logic != null)
             {
-                logic.FieldPower = MathHelper.Clamp(value, 0f, 30f);
-                logic.FieldPower = (float)Math.Round(logic.FieldPower, 0);
-                logic.SettingsFieldPower = logic.FieldPower;
+                logic.SettingsFieldPower = MathHelper.Clamp(value, 0f, 30f);
+                logic.SettingsFieldPower = (float)Math.Round(logic.SettingsFieldPower, 0);
             }           
         }
 
@@ -938,7 +931,7 @@ namespace StarCore.DynamicResistence
             var logic = GetLogic(block);
             if (logic != null)
             {
-                float value = logic.FieldPower;
+                float value = logic.SettingsFieldPower;
                 writer.Append(Math.Round(value, 0, MidpointRounding.ToEven)).Append("%");
             }
         }
@@ -955,7 +948,6 @@ namespace StarCore.DynamicResistence
             if (logic != null)
             {
                 logic.SiegeModeActivatedClient = value;
-                logic.SiegeModeActivated = logic.SiegeModeActivatedClient;
             }
         }
         #endregion    
