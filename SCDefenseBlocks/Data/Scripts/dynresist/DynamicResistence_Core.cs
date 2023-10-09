@@ -345,9 +345,9 @@ namespace StarCore.DynamicResistence
             }
         }
 
-        private void SiegeMode(MySync<bool, SyncDirection.BothWays> obj)
+        private void SiegeMode(MySync<bool, SyncDirection.BothWays> SiegeActivated)
         {
-            if (!SiegeModeActivated_MySync.Value || dynResistBlock == null)
+            if (!SiegeActivated || dynResistBlock == null)
                 return;
 
             var allTerminalBlocks = new List<IMySlimBlock>();
@@ -356,14 +356,14 @@ namespace StarCore.DynamicResistence
             if (MaxAvailibleGridPower <= SiegePowerMinimumRequirement)
             {
                 SetCountdownStatus($"Insufficient Power", 1500, MyFontEnum.Red);
-                SiegeModeActivated_MySync.Value = false;
+                SiegeActivated.Value = false;
                 return;
             }
 
             if (!SiegeModeResistence && !dynResistBlock.IsWorking && MaxAvailibleGridPower > SiegePowerMinimumRequirement)
             {
                 SetCountdownStatus($"Block Disabled", 1500, MyFontEnum.Red);
-                SiegeModeActivated_MySync.Value = false;
+                SiegeActivated.Value = false;
                 return;
             }
 
@@ -412,7 +412,7 @@ namespace StarCore.DynamicResistence
                     SiegeModeTurnOn(allTerminalBlocks);
                     DisplayMessageToNearPlayers(1);
 
-                    SiegeModeActivated_MySync.Value = false;
+                    SiegeActivated.Value = false;
                     SiegeModeResistence = false;
                     SiegeCooldownTimerActive = true;
 
@@ -431,7 +431,7 @@ namespace StarCore.DynamicResistence
                 SiegeModeTurnOn(allTerminalBlocks);
                 DisplayMessageToNearPlayers(2);
 
-                SiegeModeActivated_MySync.Value = false;
+                SiegeActivated.Value = false;
                 SiegeModeResistence = false;
                 SiegeCooldownTimerActive = true;
 
