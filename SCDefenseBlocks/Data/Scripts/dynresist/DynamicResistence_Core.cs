@@ -760,6 +760,7 @@ namespace StarCore.DynamicResistence
                     }
                     logic.SettingsFieldPower = logic.SettingsFieldPower + 1;
                     logic.SettingsFieldPower = MathHelper.Clamp(logic.SettingsFieldPower, 0f, 30f);
+                    logic.Settings.FieldPower = logic.SettingsFieldPower;
                 }
             };
             increaseFieldPower.Writer = (b, sb) =>
@@ -799,6 +800,7 @@ namespace StarCore.DynamicResistence
                     }
                     logic.SettingsFieldPower = logic.SettingsFieldPower - 1;
                     logic.SettingsFieldPower = MathHelper.Clamp(logic.SettingsFieldPower, 0f, 30f);
+                    logic.Settings.FieldPower = logic.SettingsFieldPower;
                 }
             };
             decreaseFieldPower.Writer = (b, sb) =>
@@ -839,6 +841,7 @@ namespace StarCore.DynamicResistence
                     if (logic.SiegeModeActivated == false)
                     {
                         logic.SiegeModeActivated = true;
+                        logic.Settings.SiegeModeActivated = logic.SiegeModeActivated;
                     }
                     else
                         return;
@@ -949,6 +952,7 @@ namespace StarCore.DynamicResistence
             if (logic != null)
             {
                 logic.SiegeModeActivated = value;
+                logic.Settings.SiegeModeActivated = logic.SiegeModeActivated;
                 Log.Info($"Siege_Setter Triggered: {value}");
                 Log.Info($"Siege_Setter Triggered - Setting: {logic.SiegeModeActivated}");
             }
