@@ -418,6 +418,8 @@ namespace StarCore.DynamicResistence
                     Log.Info($"Siege Mode: {SiegeActivated}");
                     CountSiegeTimer--;
                     CountSiegeDisplayTimer--;
+                    Log.Info($"Siege Mode: {CountSiegeTimer}");
+                    Log.Info($"Siege Mode: {CountSiegeDisplayTimer}");
 
                     Log.Info($"Siege Mode: Reached <= - eval");
                     Log.Info($"Siege Mode: {SiegeActivated}");
@@ -428,6 +430,7 @@ namespace StarCore.DynamicResistence
                         Log.Info($"Siege Mode Loop: {CountSiegeVisibleTimer}");
                         DisplayMessageToNearPlayers(0);
                     }
+                    return;
                 }
                 else
                 {
