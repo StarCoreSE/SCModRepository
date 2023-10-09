@@ -730,7 +730,7 @@ namespace StarCore.DynamicResistence
             siegeModeToggle.Tooltip = MyStringId.GetOrCompute("Toggle Siege Mode"); 
             siegeModeToggle.OnText = MySpaceTexts.SwitchText_On;
             siegeModeToggle.OffText = MyStringId.GetOrCompute("Off");
-            siegeModeToggle.Visible = Control_Visible; 
+            siegeModeToggle.Visible = IExistToDisable; 
             siegeModeToggle.Getter = Control_Siege_Getter;
             siegeModeToggle.Setter = Control_Siege_Setter;
             siegeModeToggle.Enabled = Siege_Cooldown_Enabler;
@@ -833,6 +833,7 @@ namespace StarCore.DynamicResistence
             siegeModeToggleAction.Name = new StringBuilder("Toggle Siege");
             siegeModeToggleAction.ValidForGroups = true;
             siegeModeToggleAction.Icon = @"Textures\GUI\Icons\Actions\Toggle.dds";
+            siegeModeToggleAction.Enabled = IExistToDisable;
             siegeModeToggleAction.Action = (b) =>
             {
                 var logic = b?.GameLogic?.GetAs<DynamicResistLogic>();
@@ -881,6 +882,11 @@ namespace StarCore.DynamicResistence
         static bool Control_Visible(IMyTerminalBlock block)
         {
             return GetLogic(block) != null;
+        }
+
+        static bool IExistToDisable(IMyTerminalBlock block)
+        {
+            return GetLogic(block) == null;
         }
 
         static bool Siege_Enabler(IMyTerminalBlock block)
