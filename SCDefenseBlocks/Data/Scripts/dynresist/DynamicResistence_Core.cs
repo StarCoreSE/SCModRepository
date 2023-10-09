@@ -848,8 +848,10 @@ namespace StarCore.DynamicResistence
                     }
                     if (logic.SiegeModeActivated == false)
                     {
+                        Log.Info($"Siege Action: Set to True");
                         logic.SiegeModeActivated = true;
                         logic.Settings.SiegeModeActivated = logic.SiegeModeActivated;
+                        Log.Info($"Siege Action: Current Settings Value: {logic.SiegeModeActivated}");
                     }
                     else
                         return;
@@ -960,9 +962,9 @@ namespace StarCore.DynamicResistence
             if (logic != null)
             {
                 logic.SiegeModeActivated = value;
-                logic.Settings.SiegeModeActivated = logic.SiegeModeActivated;
                 Log.Info($"Siege_Setter Triggered: {value}");
                 Log.Info($"Siege_Setter Triggered - Setting: {logic.SiegeModeActivated}");
+                logic.Settings.SiegeModeActivated = logic.SiegeModeActivated;
             }
         }
         #endregion    
