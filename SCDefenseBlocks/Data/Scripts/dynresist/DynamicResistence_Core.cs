@@ -118,6 +118,8 @@ namespace StarCore.DynamicResistence
             { return Settings.SiegeModeActivated; }
             set
             {
+                Settings.SiegeModeActivated = value;
+
                 SettingsChanged();
 
                 if (Settings.SiegeModeActivated == null)
