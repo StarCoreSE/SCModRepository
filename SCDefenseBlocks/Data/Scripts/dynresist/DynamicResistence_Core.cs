@@ -190,11 +190,14 @@ namespace StarCore.DynamicResistence
                 Sink = dynResistBlock.Components.Get<MyResourceSinkComponent>();
                 Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, RequiredInput);
 
+                SettingsFieldPower = MinDivertedPower;
+                Log.Info($"Applied Default: SettingsFieldPower {MinDivertedPower}");
 
-                SaveSettings();
-                Settings.FieldPower = MinDivertedPower;
-                Settings.Modifier = MinResistModifier;
-                Settings.SiegeModeActivated = false;
+                Modifier = MinResistModifier;
+                Log.Info($"Applied Default: Modifier {MinResistModifier}");
+
+                SiegeModeActivated = false;
+                Log.Info($"Applied Default: Siege Mode Activated False");
 
                 LoadSettings();
 
@@ -337,14 +340,11 @@ namespace StarCore.DynamicResistence
 
         private void SiegeMode()
         {
-            Log.Info($"Siege Mode Checked");
-
             var allTerminalBlocks = new List<IMySlimBlock>();
             dynResistBlock.CubeGrid.GetBlocks(allTerminalBlocks);
 
             if (!SiegeModeActivated)
             {
-                Log.Info($"Siege Mode Checked - Siege Not Active");
                 return;
             }
             else if (dynResistBlock != null && SiegeModeActivated && MaxAvailibleGridPower <= SiegePowerMinimumRequirement)
@@ -949,6 +949,7 @@ namespace StarCore.DynamicResistence
         static bool Control_Siege_Getter(IMyTerminalBlock block)
         {
             var logic = GetLogic(block);
+            Log.Info($"Siege Getter Triggered: Value: {logic.SiegeModeActivated}");
             return logic != null ? logic.SiegeModeActivated : false;
         }
 
@@ -958,6 +959,8 @@ namespace StarCore.DynamicResistence
             if (logic != null)
             {
                 logic.SiegeModeActivated = value;
+                Log.Info($"Siege_Setter Triggered: {value}");
+                Log.Info($"Siege_Setter Triggered - Setting: {logic.SiegeModeActivated}");
             }
         }
         #endregion    
