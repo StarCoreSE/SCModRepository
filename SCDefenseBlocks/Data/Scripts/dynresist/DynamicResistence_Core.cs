@@ -379,9 +379,16 @@ namespace StarCore.DynamicResistence
             }
             else if (dynResistBlock != null && SiegeModeActivated_MySync.Value && SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
+                Log.Info($"Siege Mode Loop: Start");
                 /*MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: 2, pulseTimeInFrames: 12, color: Color.DarkOrange);*/
-
-                Sink.Update();
+                try
+                {
+                    Sink.Update();
+                }
+                catch(Exception e)
+                {
+                    Log.Error($"\nException in Siege Mode Sink.Update():\n{e}");
+                }
 
                 if (CountSiegeTimer > 0)
                 {
@@ -738,7 +745,7 @@ namespace StarCore.DynamicResistence
             siegeModeToggle.Tooltip = MyStringId.GetOrCompute("Toggle Siege Mode"); 
             siegeModeToggle.OnText = MySpaceTexts.SwitchText_On;
             siegeModeToggle.OffText = MyStringId.GetOrCompute("Off");
-            siegeModeToggle.Visible = Siege_Enabler; 
+            siegeModeToggle.Visible = Control_Visible; 
             siegeModeToggle.Getter = (b) => b.GameLogic.GetAs<DynamicResistLogic>().SiegeModeActivated_MySync;
             siegeModeToggle.Setter = (b, v) => b.GameLogic.GetAs<DynamicResistLogic>().SiegeModeActivated_MySync.Value = v;
             siegeModeToggle.Enabled = Siege_Cooldown_Enabler;
