@@ -357,14 +357,12 @@ namespace StarCore.DynamicResistence
             {
                 SetCountdownStatus($"Insufficient Power", 1500, MyFontEnum.Red);
                 SiegeModeActivated = false;
-                SiegeModeActivated = SiegeModeActivated;
                 return;
             }
             else if (dynResistBlock != null && SiegeModeActivated && !SiegeModeResistence && !dynResistBlock.IsWorking && MaxAvailibleGridPower > SiegePowerMinimumRequirement)
             {
                 SetCountdownStatus($"Block Disabled", 1500, MyFontEnum.Red);
                 SiegeModeActivated = false;
-                SiegeModeActivated = SiegeModeActivated;
                 return;
             }
             else if (dynResistBlock != null && SiegeModeActivated && !SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
@@ -417,7 +415,6 @@ namespace StarCore.DynamicResistence
                     DisplayMessageToNearPlayers(1);
 
                     SiegeModeActivated = false;
-                    SiegeModeActivated = SiegeModeActivated;
                     SiegeModeResistence = false;
                     SiegeCooldownTimerActive = true;
 
@@ -437,7 +434,6 @@ namespace StarCore.DynamicResistence
                 DisplayMessageToNearPlayers(2);
 
                 SiegeModeActivated = false;
-                SiegeModeActivated = SiegeModeActivated;
                 SiegeModeResistence = false;
                 SiegeCooldownTimerActive = true;
             }
