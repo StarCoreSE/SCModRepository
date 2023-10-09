@@ -157,8 +157,6 @@ namespace StarCore.DynamicResistence
 
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
 
-            SiegeModeActivated_MySync.ValueChanged += SiegeMode;
-
             Log.Info("Finished Init");
         }
 
@@ -274,8 +272,6 @@ namespace StarCore.DynamicResistence
                 ResetBlockResist(dynResistBlock);
                 dynResistBlock = null;
 
-                SiegeModeActivated_MySync.ValueChanged -= SiegeMode;
-
                 Log.Info("Finished Close");
             }
             catch (Exception e)
@@ -362,82 +358,78 @@ namespace StarCore.DynamicResistence
             {
                 SetCountdownStatus($"Insufficient Power", 1500, MyFontEnum.Red);
                 SiegeModeActivated_MySync.Value = false;
-                Log.Info("Siege Mode Triggered - Insufficient Power");
                 return;
             }
             else if (dynResistBlock != null && SiegeModeActivated_MySync.Value && !SiegeModeResistence && !dynResistBlock.IsWorking && MaxAvailibleGridPower > SiegePowerMinimumRequirement)
             {
                 SetCountdownStatus($"Block Disabled", 1500, MyFontEnum.Red);
                 SiegeModeActivated_MySync.Value = false;
-                Log.Info("Siege Mode Triggered - Block Disabled");
                 return;
             }
             else if (dynResistBlock != null && SiegeModeActivated_MySync.Value && !SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
                 MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(dynResistBlock.CubeGrid.Name, 0.1f);
-                Log.Info("Siege Mode Triggered - Success - Set Damage Modifier");
                 SiegeModeResistence = true;
             }
             else if (dynResistBlock != null && SiegeModeActivated_MySync.Value && SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
-                Log.Info($"Siege Mode Loop: Start");
                 /*MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: 2, pulseTimeInFrames: 12, color: Color.DarkOrange);*/
                 try
                 {
                     Sink.Update();
+
+                    if (CountSiegeTimer > 0)
+                    {
+                        SettingsFieldPower = 0f;
+
+                        SiegeModeShutdown(allTerminalBlocks);
+
+                        if (dynResistBlock.CubeGrid.Physics.LinearVelocity != Vector3D.Zero)
+                        {
+                            Vector3D linearVelocity = dynResistBlock.CubeGrid.Physics.LinearVelocity;
+                            Vector3D oppositeVector = new Vector3D(-linearVelocity.X, -linearVelocity.Y, -linearVelocity.Z);
+                            dynResistBlock.CubeGrid.Physics.LinearVelocity = oppositeVector;
+                        }
+                        /*else if (dynResistBlock.CubeGrid.Physics.AngularVelocity != Vector3D.Zero)
+                        {
+                            dynResistBlock.CubeGrid.Physics.AngularVelocity = Vector3D.Zero;
+                        }*/
+
+                        CountSiegeTimer = CountSiegeTimer - 1;
+                        CountSiegeDisplayTimer = CountSiegeDisplayTimer - 1;
+                        if (CountSiegeDisplayTimer <= 0)
+                        {
+                            CountSiegeDisplayTimer = SiegeDisplayTimer;
+                            CountSiegeVisibleTimer = CountSiegeVisibleTimer - 1;
+                            Log.Info($"Siege Mode Loop: {CountSiegeVisibleTimer}");
+                            DisplayMessageToNearPlayers(0);
+                        }
+                    }
+                    else if (CountSiegeTimer == 0)
+                    {
+                        CountSiegeTimer = SiegeTimer;
+                        CountSiegeDisplayTimer = SiegeDisplayTimer;
+                        CountSiegeVisibleTimer = SiegeVisibleTimer;
+
+                        /*MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: -1);*/
+
+                        ResetBlockResist(dynResistBlock);
+                        SiegeModeTurnOn(allTerminalBlocks);
+                        DisplayMessageToNearPlayers(1);
+
+                        SiegeModeActivated_MySync.Value = false;
+                        SiegeModeResistence = false;
+                        SiegeCooldownTimerActive = true;
+
+                        Log.Info($"Siege Mode Loop: End");
+
+                        Sink.Update();
+                    }
                 }
                 catch(Exception e)
                 {
-                    Log.Error($"\nException in Siege Mode Sink.Update():\n{e}");
-                }
-
-                if (CountSiegeTimer > 0)
-                {
-                    SettingsFieldPower = 0f;
-
-                    SiegeModeShutdown(allTerminalBlocks);
-
-                    if (dynResistBlock.CubeGrid.Physics.LinearVelocity != Vector3D.Zero)
-                    {
-                        Vector3D linearVelocity = dynResistBlock.CubeGrid.Physics.LinearVelocity;
-                        Vector3D oppositeVector = new Vector3D(-linearVelocity.X, -linearVelocity.Y, -linearVelocity.Z);
-                        dynResistBlock.CubeGrid.Physics.LinearVelocity = oppositeVector;
-                    }
-                    /*else if (dynResistBlock.CubeGrid.Physics.AngularVelocity != Vector3D.Zero)
-                    {
-                        dynResistBlock.CubeGrid.Physics.AngularVelocity = Vector3D.Zero;
-                    }*/
-
-                    CountSiegeTimer = CountSiegeTimer - 1;
-                    CountSiegeDisplayTimer = CountSiegeDisplayTimer - 1;
-                    if (CountSiegeDisplayTimer <= 0)
-                    {
-                        CountSiegeDisplayTimer = SiegeDisplayTimer;
-                        CountSiegeVisibleTimer = CountSiegeVisibleTimer - 1;
-                        Log.Info($"Siege Mode Loop: {CountSiegeVisibleTimer}");
-                        DisplayMessageToNearPlayers(0);
-                    }
-                }
-                else if (CountSiegeTimer == 0)
-                {
-                    CountSiegeTimer = SiegeTimer;
-                    CountSiegeDisplayTimer = SiegeDisplayTimer;
-                    CountSiegeVisibleTimer = SiegeVisibleTimer;
-
-                    /*MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: -1);*/
-
-                    ResetBlockResist(dynResistBlock);
-                    SiegeModeTurnOn(allTerminalBlocks);
-                    DisplayMessageToNearPlayers(1);
-
-                    SiegeModeActivated_MySync.Value = false;
-                    SiegeModeResistence = false;
-                    SiegeCooldownTimerActive = true;
-
-                    Log.Info($"Siege Mode Loop: End");
-
-                    Sink.Update();
-                }
+                    Log.Error($"\nException in Siege Mode Loop:\n{e}");
+                }                
             }
             else if (dynResistBlock != null && dynResistBlock.IsWorking == false & SiegeModeActivated_MySync.Value)
             {
