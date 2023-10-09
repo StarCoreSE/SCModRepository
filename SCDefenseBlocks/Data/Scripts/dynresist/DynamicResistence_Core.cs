@@ -247,6 +247,7 @@ namespace StarCore.DynamicResistence
         {
             try
             {
+                SiegeMode(SiegeModeActivated_MySync);
                 CalculateMaxGridPower();
                 ChangeResistanceValue(dynResistBlock);
             }
