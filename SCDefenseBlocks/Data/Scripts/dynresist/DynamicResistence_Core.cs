@@ -120,8 +120,15 @@ namespace StarCore.DynamicResistence
             {
                 SettingsChanged();
 
-                if ((NeedsUpdate & MyEntityUpdateEnum.EACH_10TH_FRAME) == 0)
-                    NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
+                if (Settings.SiegeModeActivated == null)
+                {
+                    NeedsUpdate = MyEntityUpdateEnum.NONE;
+                }
+                else
+                {
+                    if ((NeedsUpdate & MyEntityUpdateEnum.EACH_10TH_FRAME) == 0)
+                        NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
+                }
 
                 dynResistBlock?.Components?.Get<MyResourceSinkComponent>()?.Update();
             }
@@ -509,7 +516,7 @@ namespace StarCore.DynamicResistence
             if (dynResistBlock != null && dynResistBlock.IsWorking && !SiegeModeActivated && MaxAvailibleGridPower <= SiegePowerMinimumRequirement)
             {
                 SetCountdownStatus($"Insufficient Power", 1500, MyFontEnum.Red);
-                Modifier = 1.0f;
+                Settings.Modifier = 1.0f;
 
                 Log.Info($"ChangeResistenceValue Insufficient Power");
                 return;
@@ -527,9 +534,9 @@ namespace StarCore.DynamicResistence
 
                     resistanceModifier = (float)Math.Round(resistanceModifier, 2);
 
-                    Modifier = resistanceModifier;
+                    Settings.Modifier = resistanceModifier;
 
-                    if (Modifier == finalResistanceModifier)
+                    if (Settings.Modifier == finalResistanceModifier)
                         return;
                     else
                     {
@@ -550,8 +557,9 @@ namespace StarCore.DynamicResistence
                 if (SettingsFieldPower > 0f)
                 {
                     SettingsFieldPower = 0f;
+                    Settings.FieldPower = 0f;
                     finalResistanceModifier = 1.0f;
-                    Modifier = 1.0f;
+                    Settings.Modifier = 1.0f;
                     ResetBlockResist(dynResistBlock);
                 }
                 else
