@@ -345,25 +345,25 @@ namespace StarCore.DynamicResistence
             var allTerminalBlocks = new List<IMySlimBlock>();
             dynResistBlock.CubeGrid.GetBlocks(allTerminalBlocks);
 
-            if (!SiegeModeActivated)
+            if (!Settings.SiegeModeActivated)
             {
                 return;
             }
-            else if (dynResistBlock != null && SiegeModeActivated && MaxAvailibleGridPower <= SiegePowerMinimumRequirement)
+            else if (dynResistBlock != null && Settings.SiegeModeActivated && MaxAvailibleGridPower <= SiegePowerMinimumRequirement)
             {
                 SetCountdownStatus($"Insufficient Power", 1500, MyFontEnum.Red);
-                SiegeModeActivated = false;
+                Settings.SiegeModeActivated = false;
                 Log.Info("Siege Mode Triggered - Insufficient Power");
                 return;
             }
-            else if (dynResistBlock != null && SiegeModeActivated && !SiegeModeResistence && !dynResistBlock.IsWorking && MaxAvailibleGridPower > SiegePowerMinimumRequirement)
+            else if (dynResistBlock != null && Settings.SiegeModeActivated && !SiegeModeResistence && !dynResistBlock.IsWorking && MaxAvailibleGridPower > SiegePowerMinimumRequirement)
             {
                 SetCountdownStatus($"Block Disabled", 1500, MyFontEnum.Red);
                 SiegeModeActivated = false;
                 Log.Info("Siege Mode Triggered - Block Disabled");
                 return;
             }
-            else if (dynResistBlock != null && SiegeModeActivated && !SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
+            else if (dynResistBlock != null && Settings.SiegeModeActivated && !SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
                 MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(dynResistBlock.CubeGrid.Name, 0.1f);
                 Log.Info("Siege Mode Triggered - Success - Set Damage Modifier");
@@ -414,7 +414,7 @@ namespace StarCore.DynamicResistence
                     SiegeModeTurnOn(allTerminalBlocks);
                     DisplayMessageToNearPlayers(1);
 
-                    SiegeModeActivated = false;
+                    Settings.SiegeModeActivated = false;
                     SiegeModeResistence = false;
                     SiegeCooldownTimerActive = true;
 
@@ -435,7 +435,7 @@ namespace StarCore.DynamicResistence
                 SiegeModeTurnOn(allTerminalBlocks);
                 DisplayMessageToNearPlayers(2);
 
-                SiegeModeActivated = false;
+                Settings.SiegeModeActivated = false;
                 SiegeModeResistence = false;
                 SiegeCooldownTimerActive = true;
 
