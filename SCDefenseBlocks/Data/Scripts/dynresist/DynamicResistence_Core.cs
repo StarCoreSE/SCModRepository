@@ -120,7 +120,7 @@ namespace StarCore.DynamicResistence
             {
                 SettingsChanged();
 
-                if (Settings.SiegeModeActivated == false)
+                if (Settings.SiegeModeActivated == null)
                 {
                     NeedsUpdate = MyEntityUpdateEnum.NONE;
                 }
