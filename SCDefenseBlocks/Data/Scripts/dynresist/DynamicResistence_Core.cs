@@ -214,6 +214,7 @@ namespace StarCore.DynamicResistence
             try
             {
                 SyncSettings();
+
                 if (SiegeCooldownTimerActive == true && CountSiegeCooldownTimer > 0)
                 {
                     CountSiegeCooldownTimer = CountSiegeCooldownTimer - 10;
@@ -336,11 +337,14 @@ namespace StarCore.DynamicResistence
 
         private void SiegeMode()
         {
+            Log.Info($"Siege Mode Checked");
+
             var allTerminalBlocks = new List<IMySlimBlock>();
             dynResistBlock.CubeGrid.GetBlocks(allTerminalBlocks);
 
             if (!SiegeModeActivated)
             {
+                Log.Info($"Siege Mode Checked - Siege Not Active");
                 return;
             }
             else if (dynResistBlock != null && SiegeModeActivated && MaxAvailibleGridPower <= SiegePowerMinimumRequirement)
