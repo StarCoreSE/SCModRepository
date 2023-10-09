@@ -213,8 +213,6 @@ namespace StarCore.DynamicResistence
         {
             try
             {
-                Log.Info("Started UpdateBeforeSimulation10");
-
                 SyncSettings();
                 if (SiegeCooldownTimerActive == true && CountSiegeCooldownTimer > 0)
                 {
@@ -225,8 +223,6 @@ namespace StarCore.DynamicResistence
                     CountSiegeCooldownTimer = SiegeCooldownTimer;
                     SiegeCooldownTimerActive = false;
                 }
-
-                Log.Info("Finished UpdateBeforeSimulation10");
             }
             catch (Exception e)
             {
@@ -238,13 +234,9 @@ namespace StarCore.DynamicResistence
         {
             try
             {
-                Log.Info("Started UpdateAfterSimulation");
-
                 SiegeMode();
                 CalculateMaxGridPower();
                 ChangeResistanceValue(dynResistBlock);
-
-                Log.Info("Finished UpdateAfterSimulation");
             }
             catch (Exception e)
             {
@@ -347,8 +339,6 @@ namespace StarCore.DynamicResistence
             var allTerminalBlocks = new List<IMySlimBlock>();
             dynResistBlock.CubeGrid.GetBlocks(allTerminalBlocks);
 
-            
-
             if (!SiegeModeActivated)
             {
                 return;
@@ -357,17 +347,20 @@ namespace StarCore.DynamicResistence
             {
                 SetCountdownStatus($"Insufficient Power", 1500, MyFontEnum.Red);
                 SiegeModeActivated = false;
+                Log.Info("Siege Mode Triggered - Insufficient Power");
                 return;
             }
             else if (dynResistBlock != null && SiegeModeActivated && !SiegeModeResistence && !dynResistBlock.IsWorking && MaxAvailibleGridPower > SiegePowerMinimumRequirement)
             {
                 SetCountdownStatus($"Block Disabled", 1500, MyFontEnum.Red);
                 SiegeModeActivated = false;
+                Log.Info("Siege Mode Triggered - Block Disabled");
                 return;
             }
             else if (dynResistBlock != null && SiegeModeActivated && !SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
                 MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(dynResistBlock.CubeGrid.Name, 0.1f);
+                Log.Info("Siege Mode Triggered - Success - Set Damage Modifier");
                 SiegeModeResistence = true;
             }
             else if (dynResistBlock != null && SiegeModeActivated && SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
@@ -399,6 +392,7 @@ namespace StarCore.DynamicResistence
                     {
                         CountSiegeDisplayTimer = SiegeDisplayTimer;
                         CountSiegeVisibleTimer = CountSiegeVisibleTimer - 1;
+                        Log.Info($"Siege Mode Loop: {CountSiegeVisibleTimer}");
                         DisplayMessageToNearPlayers(0);
                     }
                 }
@@ -418,11 +412,13 @@ namespace StarCore.DynamicResistence
                     SiegeModeResistence = false;
                     SiegeCooldownTimerActive = true;
 
+                    Log.Info($"Siege Mode Loop: End");
+
                     Sink.Update();
                 }
             }
             else if (dynResistBlock != null && dynResistBlock.IsWorking == false & SiegeModeActivated)
-            {                
+            {
                 CountSiegeTimer = SiegeTimer;
                 CountSiegeDisplayTimer = SiegeDisplayTimer;
                 CountSiegeVisibleTimer = SiegeVisibleTimer;
@@ -436,6 +432,8 @@ namespace StarCore.DynamicResistence
                 SiegeModeActivated = false;
                 SiegeModeResistence = false;
                 SiegeCooldownTimerActive = true;
+
+                Log.Info($"Siege Mode Loop: Block Inoperative");
             }
             else
                 return;
@@ -443,6 +441,8 @@ namespace StarCore.DynamicResistence
 
         private void SiegeModeShutdown(List<IMySlimBlock> allTerminalBlocks)
         {
+            Log.Info($"Triggered Siege Shutdown");
+
             foreach (var block in allTerminalBlocks)
             {
                 if (block.FatBlock is IMyReactor || block.FatBlock is IMyBatteryBlock ||
@@ -462,6 +462,8 @@ namespace StarCore.DynamicResistence
 
         private void SiegeModeTurnOn(List<IMySlimBlock> allTerminalBlocks)
         {
+            Log.Info($"Triggered Siege Reboot");
+
             foreach (var block in allTerminalBlocks)
             {
                 if (block.FatBlock is IMyReactor || block.FatBlock is IMyBatteryBlock ||
@@ -511,6 +513,8 @@ namespace StarCore.DynamicResistence
             {
                 SetCountdownStatus($"Insufficient Power", 1500, MyFontEnum.Red);
                 Settings.Modifier = 1.0f;
+
+                Log.Info($"ChangeResistenceValue Insufficient Power");
                 return;
             }
             else if (dynResistBlock.IsWorking && !SiegeModeActivated && MaxAvailibleGridPower > SiegePowerMinimumRequirement)
@@ -538,6 +542,8 @@ namespace StarCore.DynamicResistence
 
                         finalResistanceModifier = resistanceModifier;
 
+                        Log.Info($"ChangeResistenceValue: Value Updated {resistanceModifier}");
+
                         SetPowerStatus($"Integrity Field Power: " + SettingsFieldPower + "%", 1500, MyFontEnum.Green);
                     }
                 }
@@ -560,6 +566,8 @@ namespace StarCore.DynamicResistence
 
         private void ResetBlockResist(IMyTerminalBlock obj)
         {
+            Log.Info($"Triggered Resist Reset");
+
             if (obj.EntityId != dynResistBlock.EntityId) return;
 
             MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(obj.CubeGrid.Name, 1f);
