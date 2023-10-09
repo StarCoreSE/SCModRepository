@@ -24,11 +24,14 @@ using Sandbox.Game.WorldEnvironment.Modules;
 using Sandbox.Game.Localization;
 using VRage.Game.Entity;
 using System.Net;
+using VRage.Network;
+using VRage.Game.ModAPI.Network;
+using VRage.Sync;
 
 namespace StarCore.DynamicResistence
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "SI_Field_Gen")]
-    public class DynamicResistLogic : MyGameLogicComponent
+    public class DynamicResistLogic : MyGameLogicComponent, IMyEventProxy
     {
         public float MinDivertedPower;
         public float MaxDivertedPower;
@@ -112,9 +115,9 @@ namespace StarCore.DynamicResistence
             }
         }
 
-        public bool SiegeModeActivated
+        /*public bool SiegeModeActivated
         {
-            get 
+            get
             { return Settings.SiegeModeActivated; }
             set
             {
@@ -134,7 +137,9 @@ namespace StarCore.DynamicResistence
 
                 dynResistBlock?.Components?.Get<MyResourceSinkComponent>()?.Update();
             }
-        }
+        }*/
+
+        MySync<bool, SyncDirection.BothWays> SiegeModeActivated_MySync = null;
 
         public IMyCollector dynResistBlock;
         public MyPoweredCargoContainerDefinition dynResistBlockDef;
@@ -151,6 +156,8 @@ namespace StarCore.DynamicResistence
             Log.Info("Started Init");
 
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
+
+            SiegeModeActivated_MySync.ValueChanged += SiegeMode;
 
             Log.Info("Finished Init");
         }
@@ -198,7 +205,7 @@ namespace StarCore.DynamicResistence
                 Modifier = MinResistModifier;
                 Log.Info($"Applied Default: Modifier {MinResistModifier}");
 
-                SiegeModeActivated = false;
+                SiegeModeActivated_MySync.Value = false;
                 Log.Info($"Applied Default: Siege Mode Activated False");
 
                 LoadSettings();
@@ -240,7 +247,6 @@ namespace StarCore.DynamicResistence
         {
             try
             {
-                SiegeMode();
                 CalculateMaxGridPower();
                 ChangeResistanceValue(dynResistBlock);
             }
@@ -259,13 +265,15 @@ namespace StarCore.DynamicResistence
                 if (dynResistBlock == null)
                     return;
 
-                if (SiegeModeActivated)
+                if (SiegeModeActivated_MySync.Value)
                 {
                     SetCountdownStatus($"Block Removed! Siege Mode Deactivated", 1500, MyFontEnum.Red);
                 }
 
                 ResetBlockResist(dynResistBlock);
                 dynResistBlock = null;
+
+                SiegeModeActivated_MySync.ValueChanged -= SiegeMode;
 
                 Log.Info("Finished Close");
             }
@@ -281,11 +289,11 @@ namespace StarCore.DynamicResistence
             if (!dynResistBlock.IsWorking)
                 return 0f;
             
-            else if (SettingsFieldPower == 0f && !SiegeModeActivated)
+            else if (SettingsFieldPower == 0f && !SiegeModeActivated_MySync.Value)
             {
                 return 50.000f;
             }
-            else if (SiegeModeActivated)
+            else if (SiegeModeActivated_MySync.Value)
             {
                 CalculateMaxGridPower();    
 
@@ -340,36 +348,36 @@ namespace StarCore.DynamicResistence
             }
         }
 
-        private void SiegeMode()
+        private void SiegeMode(MySync<bool, SyncDirection.BothWays> obj)
         {
             var allTerminalBlocks = new List<IMySlimBlock>();
             dynResistBlock.CubeGrid.GetBlocks(allTerminalBlocks);
 
-            if (!Settings.SiegeModeActivated)
+            if (!SiegeModeActivated_MySync.Value)
             {
                 return;
             }
-            else if (dynResistBlock != null && Settings.SiegeModeActivated && MaxAvailibleGridPower <= SiegePowerMinimumRequirement)
+            else if (dynResistBlock != null && SiegeModeActivated_MySync.Value && MaxAvailibleGridPower <= SiegePowerMinimumRequirement)
             {
                 SetCountdownStatus($"Insufficient Power", 1500, MyFontEnum.Red);
-                Settings.SiegeModeActivated = false;
+                SiegeModeActivated_MySync.Value = false;
                 Log.Info("Siege Mode Triggered - Insufficient Power");
                 return;
             }
-            else if (dynResistBlock != null && Settings.SiegeModeActivated && !SiegeModeResistence && !dynResistBlock.IsWorking && MaxAvailibleGridPower > SiegePowerMinimumRequirement)
+            else if (dynResistBlock != null && SiegeModeActivated_MySync.Value && !SiegeModeResistence && !dynResistBlock.IsWorking && MaxAvailibleGridPower > SiegePowerMinimumRequirement)
             {
                 SetCountdownStatus($"Block Disabled", 1500, MyFontEnum.Red);
-                SiegeModeActivated = false;
+                SiegeModeActivated_MySync.Value = false;
                 Log.Info("Siege Mode Triggered - Block Disabled");
                 return;
             }
-            else if (dynResistBlock != null && Settings.SiegeModeActivated && !SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
+            else if (dynResistBlock != null && SiegeModeActivated_MySync.Value && !SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
                 MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(dynResistBlock.CubeGrid.Name, 0.1f);
                 Log.Info("Siege Mode Triggered - Success - Set Damage Modifier");
                 SiegeModeResistence = true;
             }
-            else if (dynResistBlock != null && SiegeModeActivated && SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
+            else if (dynResistBlock != null && SiegeModeActivated_MySync.Value && SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
                 /*MyVisualScriptLogicProvider.SetHighlightLocal(dynResistBlock.CubeGrid.Name, thickness: 2, pulseTimeInFrames: 12, color: Color.DarkOrange);*/
 
@@ -414,7 +422,7 @@ namespace StarCore.DynamicResistence
                     SiegeModeTurnOn(allTerminalBlocks);
                     DisplayMessageToNearPlayers(1);
 
-                    Settings.SiegeModeActivated = false;
+                    SiegeModeActivated_MySync.Value = false;
                     SiegeModeResistence = false;
                     SiegeCooldownTimerActive = true;
 
@@ -423,7 +431,7 @@ namespace StarCore.DynamicResistence
                     Sink.Update();
                 }
             }
-            else if (dynResistBlock != null && dynResistBlock.IsWorking == false & SiegeModeActivated)
+            else if (dynResistBlock != null && dynResistBlock.IsWorking == false & SiegeModeActivated_MySync.Value)
             {
                 CountSiegeTimer = SiegeTimer;
                 CountSiegeDisplayTimer = SiegeDisplayTimer;
@@ -435,7 +443,7 @@ namespace StarCore.DynamicResistence
                 SiegeModeTurnOn(allTerminalBlocks);
                 DisplayMessageToNearPlayers(2);
 
-                Settings.SiegeModeActivated = false;
+                SiegeModeActivated_MySync.Value = false;
                 SiegeModeResistence = false;
                 SiegeCooldownTimerActive = true;
 
@@ -515,7 +523,7 @@ namespace StarCore.DynamicResistence
         {
             if (obj.EntityId != dynResistBlock.EntityId) return;
 
-            if (dynResistBlock != null && dynResistBlock.IsWorking && !SiegeModeActivated && MaxAvailibleGridPower <= SiegePowerMinimumRequirement)
+            if (dynResistBlock != null && dynResistBlock.IsWorking && !SiegeModeActivated_MySync.Value && MaxAvailibleGridPower <= SiegePowerMinimumRequirement)
             {
                 SetCountdownStatus($"Insufficient Power", 1500, MyFontEnum.Red);
                 Settings.Modifier = 1.0f;
@@ -523,7 +531,7 @@ namespace StarCore.DynamicResistence
                 Log.Info($"ChangeResistenceValue Insufficient Power");
                 return;
             }
-            else if (dynResistBlock.IsWorking && !SiegeModeActivated && MaxAvailibleGridPower > SiegePowerMinimumRequirement)
+            else if (dynResistBlock.IsWorking && !SiegeModeActivated_MySync.Value && MaxAvailibleGridPower > SiegePowerMinimumRequirement)
             {
                 var dynamicResistLogic = dynResistBlock.GameLogic?.GetAs<DynamicResistLogic>();
 
@@ -554,7 +562,7 @@ namespace StarCore.DynamicResistence
                     }
                 }
             }
-            else if (!dynResistBlock.IsWorking || !SiegeModeActivated)
+            else if (!dynResistBlock.IsWorking || !SiegeModeActivated_MySync.Value)
             {
                 if (SettingsFieldPower > 0f)
                 {
@@ -730,9 +738,9 @@ namespace StarCore.DynamicResistence
             siegeModeToggle.Tooltip = MyStringId.GetOrCompute("Toggle Siege Mode"); 
             siegeModeToggle.OnText = MySpaceTexts.SwitchText_On;
             siegeModeToggle.OffText = MyStringId.GetOrCompute("Off");
-            siegeModeToggle.Visible = IExistToDisable; 
-            siegeModeToggle.Getter = Control_Siege_Getter;
-            siegeModeToggle.Setter = Control_Siege_Setter;
+            siegeModeToggle.Visible = Siege_Enabler; 
+            siegeModeToggle.Getter = (b) => b.GameLogic.GetAs<DynamicResistLogic>().SiegeModeActivated_MySync;
+            siegeModeToggle.Setter = (b, v) => b.GameLogic.GetAs<DynamicResistLogic>().SiegeModeActivated_MySync.Value = v;
             siegeModeToggle.Enabled = Siege_Cooldown_Enabler;
             siegeModeToggle.SupportsMultipleBlocks = true;
             MyAPIGateway.TerminalControls.AddControl<T>(siegeModeToggle);
@@ -758,7 +766,7 @@ namespace StarCore.DynamicResistence
                 var logic = b?.GameLogic?.GetAs<DynamicResistLogic>();
                 if (logic != null)
                 {
-                    if (logic.SiegeModeActivated)
+                    if (logic.SiegeModeActivated_MySync.Value)
                     {
                         logic.SetPowerStatus($"Cant Change Field Power in Siege Mode", 1500, MyFontEnum.Red);
                         return;
@@ -798,7 +806,7 @@ namespace StarCore.DynamicResistence
                 var logic = b?.GameLogic?.GetAs<DynamicResistLogic>();
                 if (logic != null)
                 {
-                    if (logic.SiegeModeActivated)
+                    if (logic.SiegeModeActivated_MySync.Value)
                     {
                         logic.SetPowerStatus($"Cant Change Field Power in Siege Mode", 1500, MyFontEnum.Red);
                         return;
@@ -833,13 +841,12 @@ namespace StarCore.DynamicResistence
             siegeModeToggleAction.Name = new StringBuilder("Toggle Siege");
             siegeModeToggleAction.ValidForGroups = true;
             siegeModeToggleAction.Icon = @"Textures\GUI\Icons\Actions\Toggle.dds";
-            siegeModeToggleAction.Enabled = IExistToDisable;
             siegeModeToggleAction.Action = (b) =>
             {
                 var logic = b?.GameLogic?.GetAs<DynamicResistLogic>();
                 if (logic != null)
                 {
-                    if (logic.SiegeModeActivated == true)
+                    if (logic.SiegeModeActivated_MySync.Value == true)
                     {
                         logic.SetPowerStatus($"Cant Deactivate Siege Mode", 1500, MyFontEnum.Red);
                         return;
@@ -849,12 +856,12 @@ namespace StarCore.DynamicResistence
                         logic.SetCountdownStatus($"Siege Mode On Cooldown: " + (logic.CountSiegeCooldownTimer / 60) + " Seconds", 1500, MyFontEnum.Red);
                         return;
                     }
-                    if (logic.SiegeModeActivated == false)
+                    if (logic.SiegeModeActivated_MySync.Value == false)
                     {
                         Log.Info($"Siege Action: Set to True");
-                        logic.SiegeModeActivated = true;
-                        logic.Settings.SiegeModeActivated = logic.SiegeModeActivated;
-                        Log.Info($"Siege Action: Current Settings Value: {logic.SiegeModeActivated}");
+                        logic.SiegeModeActivated_MySync.Value = true;
+                        /*logic.Settings.SiegeModeActivated = logic.SiegeModeActivated_MySync.Value;*/
+                        Log.Info($"Siege Action: Current Settings Value: {logic.SiegeModeActivated_MySync.Value}");
                     }
                     else
                         return;
@@ -896,7 +903,7 @@ namespace StarCore.DynamicResistence
                 // Assuming DynamicResistLogic is the class containing SiegeModeActivated
                 DynamicResistLogic dynamicResistLogic = GetLogic(block);
 
-                if (dynamicResistLogic.SiegeModeActivated == true)
+                if (dynamicResistLogic.SiegeModeActivated_MySync.Value == true)
                 {
                     return false;
                 }
@@ -917,7 +924,7 @@ namespace StarCore.DynamicResistence
                 // Assuming DynamicResistLogic is the class containing SiegeModeActivated
                 DynamicResistLogic dynamicResistLogic = GetLogic(block);
 
-                if (dynamicResistLogic.SiegeCooldownTimerActive == true || dynamicResistLogic.SiegeModeActivated == true)
+                if (dynamicResistLogic.SiegeCooldownTimerActive == true || dynamicResistLogic.SiegeModeActivated_MySync.Value == true)
                 {
                     return false;
                 }
@@ -960,8 +967,8 @@ namespace StarCore.DynamicResistence
         static bool Control_Siege_Getter(IMyTerminalBlock block)
         {
             var logic = GetLogic(block);
-            Log.Info($"Siege Getter Triggered: Value: {logic.SiegeModeActivated}");
-            return logic != null ? logic.SiegeModeActivated : false;
+            Log.Info($"Siege Getter Triggered: Value: {logic.SiegeModeActivated_MySync.Value}");
+            return logic != null ? logic.SiegeModeActivated_MySync.Value : false;
         }
 
         static void Control_Siege_Setter(IMyTerminalBlock block, bool value)
@@ -969,10 +976,10 @@ namespace StarCore.DynamicResistence
             var logic = GetLogic(block);
             if (logic != null)
             {
-                logic.SiegeModeActivated = value;
+                logic.SiegeModeActivated_MySync.Value = value;
                 Log.Info($"Siege_Setter Triggered: {value}");
-                Log.Info($"Siege_Setter Triggered - Setting: {logic.SiegeModeActivated}");
-                logic.Settings.SiegeModeActivated = logic.SiegeModeActivated;
+                Log.Info($"Siege_Setter Triggered - Setting: {logic.SiegeModeActivated_MySync.Value}");
+                logic.Settings.SiegeModeActivated = logic.SiegeModeActivated_MySync.Value;
             }
         }
         #endregion    
