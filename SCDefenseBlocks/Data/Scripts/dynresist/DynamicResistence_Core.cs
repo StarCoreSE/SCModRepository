@@ -387,26 +387,15 @@ namespace StarCore.DynamicResistence
 
             if (SiegeModeResistence && dynResistBlock.IsWorking && MaxAvailibleGridPower > 150f)
             {
-                Log.Info($"Siege Mode: Reached Beginning of Success");
-                Log.Info($"Siege Mode: {SiegeActivated}");
 
                 Sink.Update();
 
-                Log.Info($"Siege Mode: Reached > 0 Eval");
-                Log.Info($"Siege Mode: {SiegeActivated}");
                 if (CountSiegeTimer > 0)
                 {
-                    Log.Info($"Siege Mode: Reached FieldPower Reset and Shutdown");
-                    Log.Info($"Siege Mode: {SiegeActivated}");
-                    SettingsFieldPower = 0f;
                     SiegeModeShutdown(allTerminalBlocks);
 
-                    Log.Info($"Siege Mode: Reached Velocity Reset");
-                    Log.Info($"Siege Mode: {SiegeActivated}");
                     if (dynResistBlock.CubeGrid.Physics.LinearVelocity != Vector3D.Zero)
                     {
-                        Log.Info($"Siege Mode: Reset Velocity");
-                        Log.Info($"Siege Mode: {SiegeActivated}");
                         dynResistBlock.CubeGrid.Physics.LinearVelocity = Vector3D.Zero;
 
                         /* Vector3D linearVelocity = dynResistBlock.CubeGrid.Physics.LinearVelocity;
@@ -414,15 +403,9 @@ namespace StarCore.DynamicResistence
                          dynResistBlock.CubeGrid.Physics.LinearVelocity = oppositeVector;*/
                     }
 
-                    Log.Info($"Siege Mode: Reached Timer Subtract");
-                    Log.Info($"Siege Mode: {SiegeActivated}");
                     CountSiegeTimer--;
                     CountSiegeDisplayTimer--;
-                    Log.Info($"Siege Mode: {CountSiegeTimer}");
-                    Log.Info($"Siege Mode: {CountSiegeDisplayTimer}");
 
-                    Log.Info($"Siege Mode: Reached <= - eval");
-                    Log.Info($"Siege Mode: {SiegeActivated}");
                     if (CountSiegeDisplayTimer <= 0)
                     {
                         CountSiegeDisplayTimer = SiegeDisplayTimer;
@@ -430,7 +413,6 @@ namespace StarCore.DynamicResistence
                         Log.Info($"Siege Mode Loop: {CountSiegeVisibleTimer}");
                         DisplayMessageToNearPlayers(0);
                     }
-                    return;
                 }
                 else
                 {
