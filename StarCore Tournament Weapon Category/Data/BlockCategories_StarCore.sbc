@@ -36,7 +36,7 @@
         <string>MA_Guardian</string>
         <string>MA_Blister</string>
 
-        <!--SA
+        <!--SA-->
         <string>K_SA_Gauss_APC</string>
         <string>K_SA_Gauss_ERC</string>
         <string>K_SA_Launcher_FixedMount</string>
@@ -52,9 +52,9 @@
         <string>K_SA_Gauss_AMSIIC</string>
         <string>SA_HMI_Erebos</string>
         <string>K_SA_HeavyMetal_Spinal_Rotary_Reskin</string>
-		-->
+		
 
-        <!--ARYX
+        <!--ARYX-->
         <string>ARYXGaussCannon</string>
         <string>ARYXMagnetarCannon</string>
         <string>ARYXPlasmaPulser</string>
@@ -65,9 +65,9 @@
         <string>ARYXRailgunTurret</string>
         <string>ARYXFocusLance</string>
         <string>ARYXBurstCannon</string>
-		-->
+		
 
-        <!--NORSE
+        <!--NORSE-->
         <string>NHI_PD_Turret</string>
         <string>NHI_Light_Autocannon_Turret</string>
         <string>NHI_Autocannon_Turret</string>
@@ -82,7 +82,7 @@
         <string>NHI_Fixed_Gatling_Laser</string>
         <string>SC_Coil_Cannon</string>
         <string>NHI_Kinetic_Cannon_Turret</string>
-		-->
+		
 
         <!--INVALID-->
         <string>MetalStorm</string>
