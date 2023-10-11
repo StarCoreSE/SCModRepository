@@ -1,7 +1,7 @@
 ﻿using System;
 using Sandbox.ModAPI;
 
-namespace DynamicResistence
+namespace CombineFunction
 {
     public class CombineFunc
     {
