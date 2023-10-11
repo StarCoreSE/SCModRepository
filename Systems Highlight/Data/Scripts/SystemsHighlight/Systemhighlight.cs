@@ -140,9 +140,13 @@ namespace StarCore.SystemHighlight
                     HandleToggleDebug();
                 }
             }
-            else
+            else if (message.Contains("/hl") && strike == null)
             {
                 SetStatus("No Target", 3000, "Red");
+            }
+            else
+            {
+                return;
             }
 
             if (needsDoubleExecution)
