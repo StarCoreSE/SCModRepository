@@ -76,15 +76,15 @@ namespace YourModNamespace
             Color specialLineColor = new Color(255, 0, 0, 128); // Red color for the special perpendicular line
 
             // Separate distance check for the special 7500 unit line
-            if (distanceToOrigin >= 8000 && distanceToOrigin < 12500)
+            if (distanceToOrigin >= 6000 && distanceToOrigin < 10000)
             {
-                Vector3D specialWallPosition = Vector3D.Zero - (directionToOrigin * 10000);
+                Vector3D specialWallPosition = Vector3D.Zero - (directionToOrigin * 7500);
                 DrawBox(blueBox, specialWallPosition, BlueBoxColor, rotationMatrix);
                 DrawPerpendicularLine(specialWallPosition, rotationMatrix, 500, specialLineColor);
             }
 
             // General distance check for other boxes
-            if (distanceToOrigin <= 9500) return;
+            if (distanceToOrigin <= 7000) return;
 
             foreach (int multiplier in DistanceMultipliers)
             {
@@ -128,10 +128,10 @@ namespace YourModNamespace
 
         private static void DrawGreenLine(double distanceToOrigin, Vector3D playerPosition, Vector3D directionToOrigin)
         {
-            if (distanceToOrigin <= 7000) return;
+            if (distanceToOrigin <= 9000) return;
 
             Color lineColor = LineColor; // Default to Green
-            if (distanceToOrigin > 7500)
+            if (distanceToOrigin > 10000)
             {
                 lineColor = Color.Red;  // Change color to Red if the distance is greater than 7500
             }
