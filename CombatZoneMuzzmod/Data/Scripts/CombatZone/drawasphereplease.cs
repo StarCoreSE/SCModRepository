@@ -131,7 +131,7 @@ namespace YourModNamespace
             if (distanceToOrigin <= 7000) return;
 
             Color lineColor = LineColor; // Default to Green
-            if (distanceToOrigin > 7500)
+            if (distanceToOrigin > 10000)
             {
                 lineColor = Color.Red;  // Change color to Red if the distance is greater than 7500
             }
