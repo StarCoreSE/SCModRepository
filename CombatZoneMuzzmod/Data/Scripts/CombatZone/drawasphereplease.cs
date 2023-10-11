@@ -18,7 +18,7 @@ namespace YourModNamespace
         private static readonly Color BoxColor = new Color(255, 0, 0, 128);
         private static readonly Color BlueBoxColor = new Color(0, 0, 255, 128);
         private static readonly Color LineColor = Color.Green;
-        private static readonly int[] DistanceMultipliers = { 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7500 };
+        private static readonly int[] DistanceMultipliers = { 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000 };
 
         public override void UpdateAfterSimulation()
         {
@@ -76,15 +76,15 @@ namespace YourModNamespace
             Color specialLineColor = new Color(255, 0, 0, 128); // Red color for the special perpendicular line
 
             // Separate distance check for the special 7500 unit line
-            if (distanceToOrigin >= 6000 && distanceToOrigin < 10000)
+            if (distanceToOrigin >= 8000 && distanceToOrigin < 12500)
             {
-                Vector3D specialWallPosition = Vector3D.Zero - (directionToOrigin * 7500);
+                Vector3D specialWallPosition = Vector3D.Zero - (directionToOrigin * 10000);
                 DrawBox(blueBox, specialWallPosition, BlueBoxColor, rotationMatrix);
                 DrawPerpendicularLine(specialWallPosition, rotationMatrix, 500, specialLineColor);
             }
 
             // General distance check for other boxes
-            if (distanceToOrigin <= 7000) return;
+            if (distanceToOrigin <= 9500) return;
 
             foreach (int multiplier in DistanceMultipliers)
             {
