@@ -26,16 +26,9 @@ namespace invalid.BugReporter
             if (MyAPIGateway.Input.IsKeyPress(MyKeys.LeftShift) && MyAPIGateway.Input.IsNewKeyPressed(MyKeys.F2) && ValidInput()) //hey dumbass, use this before the url. fucking keen https://steamcommunity.com/linkfilter/?url={url}
             {
                
-                MyVisualScriptLogicProvider.OpenSteamOverlay("https://steamcommunity.com/linkfilter/?url=https://github.com/StarCoreSE/SCModRepository/issues/new/choose");
+                MyVisualScriptLogicProvider.OpenSteamOverlay("https://steamcommunity.com/linkfilter/?url=https://github.com/StarCoreSE/SCModRepository/wiki/Important-Commands");
 						
-            }
-			
-            if (MyAPIGateway.Input.IsKeyPress(MyKeys.LeftAlt) && MyAPIGateway.Input.IsNewKeyPressed(MyKeys.P) && ValidInput()) //hey dumbass, use this before the url. fucking keen https://steamcommunity.com/linkfilter/?url={url}
-            {
-               
-                MyVisualScriptLogicProvider.OpenSteamOverlay("https://steamcommunity.com/linkfilter/?url=https://docs.google.com/spreadsheets/d/1RmhKu3lAIhvy6xMpsmaNAmTV8Ly44NOIQJgQm5OJtlo");
-						
-            }			
+            }		
 				
         }
 
