@@ -12,15 +12,12 @@ using VRage.ModAPI;
 using Sandbox.Game.Entities;
 using VRage.Utils;
 using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
-using VRage.Game.Models;
 using System.Linq;
 using ProtoBuf;
 using VRage.ObjectBuilders;
 using VRage.Game.ModAPI.Ingame.Utilities;
 using System.Text;
-using VRageRender;
-using Sandbox.Game.Multiplayer;
-using VRage.Game.ModAPI.Network;
+
 
 namespace Klime.CTF
 {
@@ -775,7 +772,7 @@ namespace Klime.CTF
             grip_strength_message.Blend = BlendTypeEnum.PostPP;
             grip_strength_message.Message = grip_strength_sb;
             grip_strength_message.Visible = true;
-            grip_strength_message.Origin = new Vector2D(-0.18, 0.4);
+            grip_strength_message.Origin = new Vector2D(-0.18, -0.4);
             grip_strength_message.Options |= HudAPIv2.Options.HideHud;
             grip_strength_message.Scale = 2f;
             grip_strength_message.InitialColor = Color.DarkOrange;
@@ -808,7 +805,7 @@ namespace Klime.CTF
                         if (gridEntityId == freshlydamaged_gridEntityId)
                         {
                             damagedGrids.Add(gridEntityId);
-                            MyAPIGateway.Utilities.ShowNotification("damage FUCK");
+                           // MyAPIGateway.Utilities.ShowNotification("damage FUCK");
                         }
                     }
                 }
@@ -861,9 +858,17 @@ namespace Klime.CTF
 
                                 if (subflag.state == FlagState.Home)
                                 {
+
                                     subflag.flag_entity.WorldMatrix = subflag.home_matrix;
+
+
                                     foreach (var player in subflag.GetNearbyPlayers(ref allplayers, ref reuse_players, pickup_in_cockpit))
                                     {
+                                        IMyEntity controlledEntity = player.Controller != null ? player.Controller.ControlledEntity.Entity : null;
+                                        if (pickup_in_cockpit && !(controlledEntity is IMyCockpit))
+                                        {
+                                            continue;
+                                        }
                                         string faction_tag = MyVisualScriptLogicProvider.GetPlayersFactionTag(player.IdentityId);
                                         if (subflag.flag_type == FlagType.Single)
                                         {
@@ -891,7 +896,12 @@ namespace Klime.CTF
                                 if (subflag.state == FlagState.Active)
                                 {
                                     IMyEntity controlledEntity = subflag.carrying_player.Controller != null ? subflag.carrying_player.Controller.ControlledEntity.Entity : null;
-
+                                    if (pickup_in_cockpit && !(controlledEntity is IMyCockpit))
+                                    {
+                                        subflag.state = FlagState.Dropped;
+                                        SendEvent(subflag.carrying_player.DisplayName + " dropped the flag due to leaving cockpit!", InfoType.FlagDropped);
+                                        continue; // Skip the rest of the logic for this flag
+                                    }
                                     if (controlledEntity is IMyCockpit)
                                     {
                                         IMyCockpit cockpit = (IMyCockpit)controlledEntity;
@@ -914,7 +924,7 @@ namespace Klime.CTF
 
                                         var speenAcceleration = cockpit.CubeGrid.Physics.AngularAcceleration.Length();
                                         var linearAcceleration = cockpit.CubeGrid.Physics.LinearAcceleration.Length();
-
+                                        var funpolice = cockpit.CubeGrid.Physics.LinearVelocity.Length();
                                         var totalAcceleration = speenAcceleration + linearAcceleration;
 
                                         // Adjust grip strength regeneration based on acceleration
@@ -923,17 +933,32 @@ namespace Klime.CTF
 
                                         float regenModifier = 0.2f - (deltaV / 100f); // 0.2 is the base regen rate, and we subtract a value based on acceleration
 
-                                        if (deltaV >= 10) // If the deltaV is more than 1, adjust the regenModifier
+                                        if (deltaV >= 10 || funpolice >= 200) // If the deltaV is more than 1, adjust the regenModifier
                                         {
                                             subflag.regen_modifier = regenModifier;
                                            
-                                        } else {subflag.regen_modifier = 0.1f; }
+                                        } else {subflag.regen_modifier = 0.25f; }
 
 
-                                        // Regenerate grip strength
+                                        var grip_temp = subflag.grip_strength;
 
-                                            subflag.grip_strength += subflag.regen_modifier;
-                                            if (subflag.grip_strength > 100) subflag.grip_strength = 100;  // Cap grip strength to 100
+                                        var regen_temp = subflag.regen_modifier;
+
+                                        if (grip_temp >= 50)
+                                        {
+                                            MathHelper.Clamp(regen_temp, -49, 49);
+                                        }
+
+                                        subflag.grip_strength += regen_temp;
+
+
+
+
+
+                                        //    MathHelper.Smooth(regen_temp, subflag.grip_strength);
+
+                                        if (subflag.grip_strength > 100) subflag.grip_strength = 100; 
+                                            // Cap grip strength to 100
                                         if (subflag.grip_strength < 0)
                                         {
                                             subflag.grip_strength = 0; //Cap grip strength to 0
@@ -988,7 +1013,7 @@ namespace Klime.CTF
 
                                                         if (pickup_in_cockpit)
                                                         {
-                                                            if (distance <= 50)
+                                                            if (distance <= 500)
                                                             {
                                                                 valid_cap = true;
                                                             }
@@ -1079,6 +1104,7 @@ namespace Klime.CTF
 
                                 if (subflag.state == FlagState.Dropped)
                                 {
+                                    subflag.grip_strength = 100; //reset grip
                                     if (subflag.current_drop_life >= drop_reset_time)
                                     {
                                         subflag.current_drop_life = 0;
@@ -1301,6 +1327,9 @@ namespace Klime.CTF
                     //add a copy of score_message but use gripstrength message
                     if (grip_strength_message != null && gamestate != null)
                     {
+                        var red_Grip_Strength = MathHelper.RoundToInt(allflags[0].grip_strength);
+                        var blue_Grip_Strength = MathHelper.RoundToInt(allflags[1].grip_strength);
+
                         grip_strength_sb.Clear();
                         if (allflags.Count == 1)
                         {
@@ -1309,11 +1338,11 @@ namespace Klime.CTF
                                 faction1global = MyAPIGateway.Session.Factions.TryGetFactionByTag(gamestate.ordered_faction_tags[0]);
                                 faction2global = MyAPIGateway.Session.Factions.TryGetFactionByTag(gamestate.ordered_faction_tags[1]);
                             }
-                            grip_strength_sb.Append("<color=red>" + allflags[0].grip_strength + "  " + "<color=0,50,255,255>" + allflags[1].grip_strength + "\n");
+                            grip_strength_sb.Append("<color=red>" + red_Grip_Strength + "  " + "<color=0,50,255,255>" + blue_Grip_Strength + "\n");
                         }
                         else if (allflags.Count == 2)
                         {
-                            grip_strength_sb.Append("<color=red>" + allflags[0].grip_strength + "  " + "<color=0,50,255,255>" + allflags[1].grip_strength + "\n");
+                            grip_strength_sb.Append("<color=red>" + red_Grip_Strength + "  " + "<color=0,50,255,255>" + blue_Grip_Strength + "\n");
                         }
                     }
 
