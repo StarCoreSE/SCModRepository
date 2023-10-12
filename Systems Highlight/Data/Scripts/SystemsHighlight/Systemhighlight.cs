@@ -162,10 +162,13 @@ namespace StarCore.SystemHighlight
             MyAPIGateway.Utilities.ShowMessage(From, "/hlconv : Highlights Conveyors");
             MyAPIGateway.Utilities.ShowMessage(From, "/hlthrust : Highlights Thrusters");
             MyAPIGateway.Utilities.ShowMessage(From, "/hlpower : Highlights Power");
+            MyAPIGateway.Utilities.ShowMessage(From, "/hlweapon : Highlights Weapons");
             MyAPIGateway.Utilities.ShowMessage(From, "/hlcustomadd : Adds Blocks to Current Highlight | Accepts SubtypeIDs Ex: /hlcustomadd MySubtypeID Green");
             MyAPIGateway.Utilities.ShowMessage(From, "/hlhelp : This Command");
             MyAPIGateway.Utilities.ShowMessage(From, "/hlcolorhelp : List of Colors Supported by /hlcustomadd");
             MyAPIGateway.Utilities.ShowMessage(From, "/hlclear : Removes Active Highlight");
+            MyAPIGateway.Utilities.ShowMessage(From, "/hldamage : Highlights All Non-Functional Blocks");
+            MyAPIGateway.Utilities.ShowMessage(From, "/hldebug : Toggles Debug Mode");
         }
 
         private void HandleColorHelpCommand()
