@@ -256,17 +256,19 @@ namespace Klime.CTF
                     if (player.Character != null && !player.Character.IsDead)
                     {
                         double distance = Vector3D.Distance(player.Character.WorldMatrix.Translation, flag_entity.WorldMatrix.Translation);
-                        if (cockpit_allowed && distance <= 50)
+                        if (cockpit_allowed && distance <= 150 && player.Controller?.ControlledEntity?.Entity is IMyCockpit)
                         {
                             return_list.Add(player);
                         }
-                        else
-                        {
-                            if (player.Controller?.ControlledEntity?.Entity is IMyCharacter && distance <= 40)
-                            {
-                                return_list.Add(player);
-                            }
-                        }
+
+                        //disabled pickup from suit
+                      // else
+                      // {
+                      //     if (player.Controller?.ControlledEntity?.Entity is IMyCharacter && distance <= 40)
+                      //     {
+                      //         return_list.Add(player);
+                      //     }
+                      // }
                     }
                 }
                 return return_list;
@@ -909,16 +911,16 @@ namespace Klime.CTF
                                         //damage handling
                                         if (damagedGrids.Contains(gridEntityId))
                                         {
-                                            if (subflag.grip_strength >= 1) { 
+                                            if (subflag.grip_strength >= 0.5f) { 
                                             
                                                 //Grid damaged, reduce grip strength
-                                                subflag.grip_strength -= 10;
+                                                subflag.grip_strength -= 0.01f;
                                                 damagedGrids.Remove(gridEntityId);
                                             } else {
                                                 subflag.state = FlagState.Dropped;
                                             SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag due to grid damage!", InfoType.FlagDropped);
-                                            
-                                            playerDropTimes[subflag.carrying_player.IdentityId] = timer;
+                                                damagedGrids.Remove(gridEntityId);
+                                                playerDropTimes[subflag.carrying_player.IdentityId] = timer;
                                             }
                                         }
 
@@ -1047,7 +1049,7 @@ namespace Klime.CTF
 
                                                     if (pickup_in_cockpit)
                                                     {
-                                                        if (distance <= 50)
+                                                        if (distance <= 150)
                                                         {
                                                             valid_cap = true;
                                                         }
