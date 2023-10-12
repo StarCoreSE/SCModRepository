@@ -1,11 +1,8 @@
 using Sandbox.Game;
 using Sandbox.ModAPI;
 using System;
-using System.Text;
 using VRage.Game;
 using VRage.Game.Components;
-using VRageMath;
-
 
 namespace playerHUD
 {
@@ -15,7 +12,6 @@ namespace playerHUD
         bool shown = false;
         bool waiting = false;
         DateTime startTime;
-        private object playerDebugHUDMessage;
 
         public override void Init(MyObjectBuilder_SessionComponent sessionComponent)
         {
@@ -35,13 +31,13 @@ namespace playerHUD
             if (!shown && !waiting)
             {
                 MyVisualScriptLogicProvider.SetQuestlog(true, "Keybinds");
-                MyVisualScriptLogicProvider.AddQuestlogObjective("SHIFT+F2 = Wiki", false, true);
+                MyVisualScriptLogicProvider.AddQuestlogObjective("ALT+P = Starcore Pointsheet", false, true);
+                MyVisualScriptLogicProvider.AddQuestlogObjective("SHIFT+F2 = Report Bug", false, true);
+                MyVisualScriptLogicProvider.AddQuestlogObjective("/harmdist NUMBER to change the visibility distance of the harmsphere hexes.", false, true);
                 waiting = true;
                 startTime = DateTime.Now;
             }
         }
-
-
 
         public override void UpdateAfterSimulation()
         {
@@ -52,7 +48,6 @@ namespace playerHUD
                 waiting = false;
                 shown = false;
             }
-
         }
 
         protected override void UnloadData()
