@@ -18,6 +18,9 @@ using ProtoBuf;
 using VRage.ObjectBuilders;
 using VRage.Game.ModAPI.Ingame.Utilities;
 using System.Text;
+using VRageRender;
+using Sandbox.Game.Multiplayer;
+using VRage.Game.ModAPI.Network;
 
 namespace Klime.CTF
 {
@@ -36,6 +39,11 @@ namespace Klime.CTF
         PacketBase packet;
         string ModelPath = "";
         int timer = 0;
+
+        public static CTF instance;
+        public MyStringHash deformationType;
+
+
 
         Type reuse_type = typeof(MyObjectBuilder_EntityBase);
         MyIni ini = new MyIni();
@@ -104,6 +112,8 @@ namespace Klime.CTF
         StringBuilder score_sb = new StringBuilder();
         HudAPIv2.HUDMessage event_message;
         StringBuilder event_sb = new StringBuilder();
+        HudAPIv2.HUDMessage grip_strength_message;
+        StringBuilder grip_strength_sb = new StringBuilder();
         int event_clock = 0;
         MyPlanet reuse_planet;
         List<MyEntity> reuse_Entities = new List<MyEntity>();
@@ -141,6 +151,7 @@ namespace Klime.CTF
         [ProtoContract]
         public class Flag
         {
+           
             public MyEntity flag_entity;
             public IMyPlayer carrying_player;
             public IMyFaction owning_faction;
@@ -170,13 +181,22 @@ namespace Klime.CTF
             public SerializableMatrix home_matrix;
 
             [ProtoMember(9)]
-            public Dictionary<long,SerializableMatrix> capture_positions = new Dictionary<long, SerializableMatrix>();
+            public Dictionary<long, SerializableMatrix> capture_positions = new Dictionary<long, SerializableMatrix>();
 
             [ProtoMember(10)]
             public Color flag_color;
 
             [ProtoMember(11)]
             public FlagType flag_type;
+
+            [ProtoMember(12)]
+            public float grip_strength = 100;
+
+            [ProtoMember(13)]
+            public float regen_modifier = 0.2f;
+
+            [ProtoMember(14)]
+            public float lastTickAcceleration;
 
             [ProtoIgnore]
             public MyCubeGrid attachedGrid = null;
@@ -190,8 +210,8 @@ namespace Klime.CTF
             }
 
             //Single
-            public Flag(long entity_id, FlagState state, SerializableMatrix home_matrix, Dictionary<long,SerializableMatrix> capture_positions,
-                long owning_faction_id, Color flag_color, FlagType flag_type)
+            public Flag(long entity_id, FlagState state, SerializableMatrix home_matrix, Dictionary<long, SerializableMatrix> capture_positions,
+                long owning_faction_id, Color flag_color, FlagType flag_type, float grip_strength, float regen_modifier, float lastTickAcceleration)
             {
                 this.entity_id = entity_id;
                 this.state = state;
@@ -201,10 +221,14 @@ namespace Klime.CTF
                 this.flag_color = flag_color;
                 this.capture_positions = capture_positions;
                 this.flag_type = flag_type;
+                this.grip_strength = grip_strength;
+                this.regen_modifier = regen_modifier;
+                this.lastTickAcceleration = lastTickAcceleration;
             }
 
             //Double
-            public Flag(long entity_id, FlagState state, SerializableMatrix home_matrix, long owning_faction_id, Color flag_color, FlagType flag_type)
+            public Flag(long entity_id, FlagState state, SerializableMatrix home_matrix, long owning_faction_id, 
+                Color flag_color, FlagType flag_type, float grip_strength, float regen_modifier, float lastTickAcceleration)
             {
                 this.entity_id = entity_id;
                 this.state = state;
@@ -213,6 +237,9 @@ namespace Klime.CTF
                 this.owning_faction_id = owning_faction_id;
                 this.flag_color = flag_color;
                 this.flag_type = flag_type;
+                this.grip_strength = grip_strength;
+                this.regen_modifier = regen_modifier;
+                this.lastTickAcceleration = lastTickAcceleration;
             }
 
             public void Init()
@@ -264,6 +291,9 @@ namespace Klime.CTF
                 this.flag_color = incoming_flag.flag_color;
                 this.capture_positions = incoming_flag.capture_positions;
                 this.flag_type = incoming_flag.flag_type;
+                this.grip_strength = incoming_flag.grip_strength;
+                this.regen_modifier = incoming_flag.regen_modifier;
+                this.lastTickAcceleration = incoming_flag.lastTickAcceleration;
             }
         }
 
@@ -370,7 +400,7 @@ namespace Klime.CTF
 
             [ProtoMember(53)]
             public List<string> ordered_faction_tags = new List<string>();
-            
+
             public GameState()
             {
 
@@ -385,7 +415,7 @@ namespace Klime.CTF
                     {
                         foreach (var faction_id in flag.capture_positions.Keys)
                         {
-                            faction_scores.Add(faction_id,0);
+                            faction_scores.Add(faction_id, 0);
                             IMyFaction faction = MyAPIGateway.Session.Factions.TryGetFactionById(faction_id);
                             if (faction != null)
                             {
@@ -451,6 +481,12 @@ namespace Klime.CTF
         {
             MyAPIGateway.Multiplayer.RegisterMessageHandler(netid, Data_Handler);
             MyAPIGateway.Multiplayer.RegisterMessageHandler(eventnetid, Event_Handler);
+
+            if (!MyAPIGateway.Session.IsServer) return;
+            instance = this;
+
+            MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0, DamageHandler);
+
         }
 
         private void Event_Handler(byte[] obj)
@@ -481,7 +517,7 @@ namespace Klime.CTF
                             {
                                 emitter.Entity = (MyEntity)MyAPIGateway.Session.Player.Character;
                                 emitter.SetPosition(MyAPIGateway.Session.Camera.WorldMatrix.Translation);
-                                emitter.PlaySound(ctf_ping,force2D:true);
+                                emitter.PlaySound(ctf_ping, force2D: true);
                             }
                         }
                     }
@@ -524,6 +560,10 @@ namespace Klime.CTF
                 }
             }
         }
+        private void AddBillboard(Color color, Vector3D pos, Vector3D left, Vector3D up, float scale, BlendTypeEnum blendType)
+        {
+            MyTransparentGeometry.AddBillboardOriented(laser, color.ToVector4(), pos, left, up, scale, blendType);
+        }
 
         public void GetConfig()
         {
@@ -538,12 +578,12 @@ namespace Klime.CTF
                         var file = MyAPIGateway.Utilities.ReadFileInWorldStorage(save_file_name, reuse_type).ReadToEnd();
                         ini = new MyIni();
                         MyIniParseResult res;
-                        if (ini.TryParse(file,out res))
+                        if (ini.TryParse(file, out res))
                         {
-                            bool is_single_flag = ini.Get("Single Flag","bool").ToBoolean();
+                            bool is_single_flag = ini.Get("Single Flag", "bool").ToBoolean();
                             if (is_single_flag)
                             {
-                                string single_flag_data_string = ini.Get("Single Flag Data","string").ToString();
+                                string single_flag_data_string = ini.Get("Single Flag Data", "string").ToString();
                                 List<string> data = single_flag_data_string.Split('@').ToList();
                                 Vector3D single_flag_homepostemp = Vector3D.Zero;
                                 Vector3D capture_pos_reuse = Vector3D.Zero;
@@ -552,26 +592,26 @@ namespace Klime.CTF
                                 IMyFaction faction2;
                                 SerializableMatrix capture_pos_faction1;
                                 SerializableMatrix capture_pos_faction2;
-                                Dictionary<long,SerializableMatrix> capture_positions = new Dictionary<long, SerializableMatrix>();
+                                Dictionary<long, SerializableMatrix> capture_positions = new Dictionary<long, SerializableMatrix>();
                                 List<string> single_flag_color_string = new List<string>();
 
-                                ParseVector3DFromGPS(data[0],out single_flag_homepostemp);
+                                ParseVector3DFromGPS(data[0], out single_flag_homepostemp);
                                 single_flag_homepos = GetHomePosition(single_flag_homepostemp);
 
                                 faction1 = MyAPIGateway.Session.Factions.TryGetFactionByTag(data[1]);
                                 faction2 = MyAPIGateway.Session.Factions.TryGetFactionByTag(data[2]);
-                                ParseVector3DFromGPS(data[3],out capture_pos_reuse);
+                                ParseVector3DFromGPS(data[3], out capture_pos_reuse);
                                 capture_pos_faction1 = GetHomePosition(capture_pos_reuse);
-                                ParseVector3DFromGPS(data[4],out capture_pos_reuse);
+                                ParseVector3DFromGPS(data[4], out capture_pos_reuse);
                                 capture_pos_faction2 = GetHomePosition(capture_pos_reuse);
-                                capture_positions.Add(faction1.FactionId,capture_pos_faction1);
-                                capture_positions.Add(faction2.FactionId,capture_pos_faction2);
+                                capture_positions.Add(faction1.FactionId, capture_pos_faction1);
+                                capture_positions.Add(faction2.FactionId, capture_pos_faction2);
                                 single_flag_color_string = data[5].Split(',').ToList();
-                                Color single_flag_color = new Color(int.Parse(single_flag_color_string[0]),int.Parse(single_flag_color_string[1]),int.Parse(single_flag_color_string[2]),
+                                Color single_flag_color = new Color(int.Parse(single_flag_color_string[0]), int.Parse(single_flag_color_string[1]), int.Parse(single_flag_color_string[2]),
                                     int.Parse(single_flag_color_string[3]));
 
-                                Flag single_flag = new Flag(PrimeEntityActivator().EntityId,FlagState.Home,single_flag_homepos,capture_positions,0,single_flag_color,
-                                    FlagType.Single);
+                                Flag single_flag = new Flag(PrimeEntityActivator().EntityId, FlagState.Home, single_flag_homepos, capture_positions, 0, single_flag_color,
+                                    FlagType.Single, 100f, 0.2f, 0);
 
                                 single_flag.Init();
                                 allflags.Add(single_flag);
@@ -596,16 +636,16 @@ namespace Klime.CTF
                                 flag_1_temp_homepos = GetHomePosition(flag_1_temp_pos);
                                 flag_2_temp_homepos = GetHomePosition(flag_2_temp_pos);
 
-                                flag_1_color_string = ini.Get("Faction 1 Color","string").ToString().Split(',').ToList();
-                                flag_2_color_string = ini.Get("Faction 2 Color","string").ToString().Split(',').ToList();
+                                flag_1_color_string = ini.Get("Faction 1 Color", "string").ToString().Split(',').ToList();
+                                flag_2_color_string = ini.Get("Faction 2 Color", "string").ToString().Split(',').ToList();
 
-                                Color flag_1_color = new Color(int.Parse(flag_1_color_string[0]),int.Parse(flag_1_color_string[1]),int.Parse(flag_1_color_string[2]),
+                                Color flag_1_color = new Color(int.Parse(flag_1_color_string[0]), int.Parse(flag_1_color_string[1]), int.Parse(flag_1_color_string[2]),
                                     int.Parse(flag_1_color_string[3]));
-                                Color flag_2_color = new Color(int.Parse(flag_2_color_string[0]),int.Parse(flag_2_color_string[1]),int.Parse(flag_2_color_string[2]),
+                                Color flag_2_color = new Color(int.Parse(flag_2_color_string[0]), int.Parse(flag_2_color_string[1]), int.Parse(flag_2_color_string[2]),
                                     int.Parse(flag_2_color_string[3]));
 
-                                Flag flag1 = new Flag(PrimeEntityActivator().EntityId, FlagState.Home, flag_1_temp_homepos, faction1.FactionId,flag_1_color,FlagType.Double);
-                                Flag flag2 = new Flag(PrimeEntityActivator().EntityId, FlagState.Home, flag_2_temp_homepos, faction2.FactionId,flag_2_color,FlagType.Double);
+                                Flag flag1 = new Flag(PrimeEntityActivator().EntityId, FlagState.Home, flag_1_temp_homepos, faction1.FactionId, flag_1_color, FlagType.Double, 100, 0.2f, 0);
+                                Flag flag2 = new Flag(PrimeEntityActivator().EntityId, FlagState.Home, flag_2_temp_homepos, faction2.FactionId, flag_2_color, FlagType.Double, 100, 0.2f, 0);
 
                                 flag1.Init();
                                 flag2.Init();
@@ -626,14 +666,14 @@ namespace Klime.CTF
                         }
                         else
                         {
-                            MyVisualScriptLogicProvider.SendChatMessageColored("Incorrect or missing CTF config. Blank config generated",Color.Orange,"Server");
+                            MyVisualScriptLogicProvider.SendChatMessageColored("Incorrect or missing CTF config. Blank config generated", Color.Orange, "Server");
                             CreateBlankFile();
                             rdy = false;
                         }
                     }
                     else
                     {
-                        MyVisualScriptLogicProvider.SendChatMessageColored("Incorrect or missing CTF config. Blank config generated",Color.Orange,"Server");
+                        MyVisualScriptLogicProvider.SendChatMessageColored("Incorrect or missing CTF config. Blank config generated", Color.Orange, "Server");
                         CreateBlankFile();
                         rdy = false;
                     }
@@ -641,7 +681,7 @@ namespace Klime.CTF
             }
             catch (Exception e)
             {
-                MyVisualScriptLogicProvider.SendChatMessageColored("Incorrect or missing CTF config. Blank config generated\n" + e.Message ,Color.Orange,"Server");
+                MyVisualScriptLogicProvider.SendChatMessageColored("Incorrect or missing CTF config. Blank config generated\n" + e.Message, Color.Orange, "Server");
                 CreateBlankFile();
                 rdy = false;
             }
@@ -654,8 +694,8 @@ namespace Klime.CTF
             ini.Set("Flag Position Faction 2", "GPS", "GPSHERE");
             ini.Set("Faction 1 Tag", "string", "TAG1");
             ini.Set("Faction 2 Tag", "string", "TAG2");
-            ini.Set("Faction 1 Color","string","255,0,0,255");
-            ini.Set("Faction 2 Color","string","0,0,255,255");
+            ini.Set("Faction 1 Color", "string", "255,0,0,255");
+            ini.Set("Faction 2 Color", "string", "0,0,255,255");
             ini.Set("Use Game Radius", "bool", false);
             ini.Set("Game Center", "GPS", "GPSHERE");
             ini.Set("Game Radius", "double", 5000);
@@ -663,9 +703,9 @@ namespace Klime.CTF
             ini.Set("Pickup in Cockpit", "bool", false);
             ini.Set("Drop in Cockpit", "bool", false);
             ini.Set("Drop Type", "Instant/Ground/Floating", "Ground");
-            ini.Set("Drop Reset Time", "int", 300);
-            ini.Set("Single Flag","bool",false);
-            ini.Set("Single Flag Data","string","ReplaceThis");
+            ini.Set("Drop Reset Time", "int", 3000);
+            ini.Set("Single Flag", "bool", false);
+            ini.Set("Single Flag Data", "string", "ReplaceThis");
             ini.SetEndComment("DELETE THE _blank part of the filename to make it a valid config");
             var fullstring = ini.ToString();
 
@@ -701,7 +741,7 @@ namespace Klime.CTF
         private void HUDLoaded()
         {
             HudAPIv2.BillBoardHUDMessage score_billboard = new HudAPIv2.BillBoardHUDMessage();
-            score_billboard.BillBoardColor = new Color(Color.White,1);
+            score_billboard.BillBoardColor = new Color(Color.White, 1);
             score_billboard.Material = MyStringId.GetOrCompute("ctf_score_background");
             score_billboard.Origin = new Vector2D(0.02, 0.82);
             score_billboard.Scale *= 0.5f;
@@ -731,7 +771,51 @@ namespace Klime.CTF
             event_message.Scale = 2f;
             event_message.InitialColor = Color.DarkOrange;
 
+            grip_strength_message = new HudAPIv2.HUDMessage();
+            grip_strength_message.Blend = BlendTypeEnum.PostPP;
+            grip_strength_message.Message = grip_strength_sb;
+            grip_strength_message.Visible = true;
+            grip_strength_message.Origin = new Vector2D(-0.18, 0.4);
+            grip_strength_message.Options |= HudAPIv2.Options.HideHud;
+            grip_strength_message.Scale = 2f;
+            grip_strength_message.InitialColor = Color.DarkOrange;
         }
+
+        public HashSet<long> damagedGrids = new HashSet<long>();
+        Dictionary<long, int> playerDropTimes = new Dictionary<long, int>();
+
+
+        private void DamageHandler(object target, ref MyDamageInformation info)
+        {
+
+            IMySlimBlock block = target as IMySlimBlock;
+
+            if (block == null || block.CubeGrid == null || block.CubeGrid.WorldMatrix == null) return;
+
+
+            var freshlydamaged_gridEntityId = block.CubeGrid.EntityId;
+
+            foreach (var subflag in allflags)
+            {
+                if (subflag.state == FlagState.Active)
+                {
+                    IMyEntity controlledEntity = subflag.carrying_player.Controller != null ? subflag.carrying_player.Controller.ControlledEntity.Entity : null;
+                    if (controlledEntity is IMyCockpit)
+                    {
+                        IMyCockpit cockpit = (IMyCockpit)controlledEntity;
+                        long gridEntityId = cockpit.CubeGrid.EntityId;
+
+                        if (gridEntityId == freshlydamaged_gridEntityId)
+                        {
+                            damagedGrids.Add(gridEntityId);
+                            MyAPIGateway.Utilities.ShowNotification("damage FUCK");
+                        }
+                    }
+                }
+            }
+        }
+
+
 
         public override void UpdateAfterSimulation()
         {
@@ -755,7 +839,7 @@ namespace Klime.CTF
                         GetConfig();
                         if (rdy)
                         {
-                            gamestate = new GameState(CurrentGameState.Combat,allflags);
+                            gamestate = new GameState(CurrentGameState.Combat, allflags);
                         }
                     }
 
@@ -774,10 +858,11 @@ namespace Klime.CTF
 
                             foreach (var subflag in allflags)
                             {
+
                                 if (subflag.state == FlagState.Home)
                                 {
                                     subflag.flag_entity.WorldMatrix = subflag.home_matrix;
-                                    foreach (var player in subflag.GetNearbyPlayers(ref allplayers, ref reuse_players,pickup_in_cockpit))
+                                    foreach (var player in subflag.GetNearbyPlayers(ref allplayers, ref reuse_players, pickup_in_cockpit))
                                     {
                                         string faction_tag = MyVisualScriptLogicProvider.GetPlayersFactionTag(player.IdentityId);
                                         if (subflag.flag_type == FlagType.Single)
@@ -787,7 +872,7 @@ namespace Klime.CTF
                                                 subflag.state = FlagState.Active;
                                                 subflag.carrying_player_id = player.IdentityId;
                                                 subflag.carrying_player = player;
-                                                SendEvent(player.DisplayName + " grabbed the flag!",InfoType.FlagTaken);
+                                                SendEvent(player.DisplayName + " grabbed the flag!", InfoType.FlagTaken);
                                             }
                                         }
                                         else
@@ -797,7 +882,7 @@ namespace Klime.CTF
                                                 subflag.state = FlagState.Active;
                                                 subflag.carrying_player_id = player.IdentityId;
                                                 subflag.carrying_player = player;
-                                                SendEvent(player.DisplayName + " stole " + subflag.owning_faction.Tag + " flag!",InfoType.FlagTaken);
+                                                SendEvent(player.DisplayName + " stole " + subflag.owning_faction.Tag + " flag!", InfoType.FlagTaken);
                                             }
                                         }
                                     }
@@ -805,24 +890,80 @@ namespace Klime.CTF
 
                                 if (subflag.state == FlagState.Active)
                                 {
+                                    IMyEntity controlledEntity = subflag.carrying_player.Controller != null ? subflag.carrying_player.Controller.ControlledEntity.Entity : null;
+
+                                    if (controlledEntity is IMyCockpit)
+                                    {
+                                        IMyCockpit cockpit = (IMyCockpit)controlledEntity;
+                                        long gridEntityId = cockpit.CubeGrid.EntityId;
+                                        //damage handling
+                                        if (damagedGrids.Contains(gridEntityId))
+                                        {
+                                            if (subflag.grip_strength >= 1) { 
+                                            
+                                                //Grid damaged, reduce grip strength
+                                                subflag.grip_strength -= 10;
+                                                damagedGrids.Remove(gridEntityId);
+                                            } else {
+                                                subflag.state = FlagState.Dropped;
+                                            SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag due to grid damage!", InfoType.FlagDropped);
+                                            
+                                            playerDropTimes[subflag.carrying_player.IdentityId] = timer;
+                                            }
+                                        }
+
+                                        var speenAcceleration = cockpit.CubeGrid.Physics.AngularAcceleration.Length();
+                                        var linearAcceleration = cockpit.CubeGrid.Physics.LinearAcceleration.Length();
+
+                                        var totalAcceleration = speenAcceleration + linearAcceleration;
+
+                                        // Adjust grip strength regeneration based on acceleration
+                                        float deltaV = totalAcceleration; //- subflag.lastTickAcceleration;
+                                      //  subflag.lastTickAcceleration = totalAcceleration;
+
+                                        float regenModifier = 0.2f - (deltaV / 100f); // 0.2 is the base regen rate, and we subtract a value based on acceleration
+
+                                        if (deltaV >= 10) // If the deltaV is more than 1, adjust the regenModifier
+                                        {
+                                            subflag.regen_modifier = regenModifier;
+                                           
+                                        } else {subflag.regen_modifier = 0.1f; }
+
+
+                                        // Regenerate grip strength
+
+                                            subflag.grip_strength += subflag.regen_modifier;
+                                            if (subflag.grip_strength > 100) subflag.grip_strength = 100;  // Cap grip strength to 100
+                                        if (subflag.grip_strength < 0)
+                                        {
+                                            subflag.grip_strength = 0; //Cap grip strength to 0
+                                            subflag.state = FlagState.Dropped;
+                                            SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag due to acceleration!", InfoType.FlagDropped);
+
+                                            playerDropTimes[subflag.carrying_player.IdentityId] = timer;
+                                        }
+                                    }
                                     if (subflag.carrying_player != null && subflag.carrying_player.Character != null && !subflag.carrying_player.Character.IsDead)
                                     {
+                                        // Existing logic for setting flag position
                                         reuse_matrix = subflag.carrying_player.Character.WorldMatrix;
                                         reuse_matrix.Translation += reuse_matrix.Backward * 0.4f + reuse_matrix.Up * 1.5f + reuse_matrix.Left * 0.25f;
                                         subflag.flag_entity.WorldMatrix = reuse_matrix;
 
+                                        // Check for cockpit and drop flag if conditions are met
                                         if (drop_in_cockpit && !pickup_in_cockpit)
                                         {
-                                            if (subflag.carrying_player.Controller?.ControlledEntity?.Entity is IMyCockpit)
+                                            if (controlledEntity is IMyCockpit)
                                             {
                                                 subflag.state = FlagState.Dropped;
                                                 SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag!", InfoType.FlagDropped);
                                             }
                                         }
 
+
                                         if (use_game_radius)
                                         {
-                                            if (Vector3D.Distance(gamecenter,subflag.flag_entity.WorldMatrix.Translation) >= radius)
+                                            if (Vector3D.Distance(gamecenter, subflag.flag_entity.WorldMatrix.Translation) >= radius)
                                             {
                                                 subflag.carrying_player.Character.Kill();
                                                 subflag.state = FlagState.Dropped;
@@ -842,7 +983,7 @@ namespace Klime.CTF
                                                         MatrixD capture_matrix = subflag.capture_positions[faction];
                                                         Vector3D capture_pos = capture_matrix.Translation;
 
-                                                        double distance = Vector3D.Distance(subflag.flag_entity.WorldMatrix.Translation,capture_pos);
+                                                        double distance = Vector3D.Distance(subflag.flag_entity.WorldMatrix.Translation, capture_pos);
                                                         bool valid_cap = false;
 
                                                         if (pickup_in_cockpit)
@@ -911,7 +1052,7 @@ namespace Klime.CTF
                                         subflag.state = FlagState.Dropped;
                                         if (subflag.flag_type == FlagType.Single)
                                         {
-                                            SendEvent(subflag.carrying_player.DisplayName + " dropped the flag!",InfoType.FlagDropped);
+                                            SendEvent(subflag.carrying_player.DisplayName + " dropped the flag!", InfoType.FlagDropped);
                                         }
                                         else
                                         {
@@ -987,7 +1128,7 @@ namespace Klime.CTF
                                             {
                                                 //Raycast down to find grid
                                                 float interf = 0f;
-                                                var gravityDir = Vector3D.Normalize(MyAPIGateway.Physics.CalculateNaturalGravityAt(subflag.flag_entity.WorldMatrix.Translation, 
+                                                var gravityDir = Vector3D.Normalize(MyAPIGateway.Physics.CalculateNaturalGravityAt(subflag.flag_entity.WorldMatrix.Translation,
                                                     out interf));
 
                                                 var start = subflag.flag_entity.WorldMatrix.Translation;
@@ -1023,8 +1164,17 @@ namespace Klime.CTF
 
                                     subflag.current_drop_life += 1;
 
-                                    foreach (var player in subflag.GetNearbyPlayers(ref allplayers, ref reuse_players,pickup_in_cockpit))
+                                    foreach (var player in subflag.GetNearbyPlayers(ref allplayers, ref reuse_players, pickup_in_cockpit))
                                     {
+                                        int lastDropTime;
+                                        if (playerDropTimes.TryGetValue(player.IdentityId, out lastDropTime))
+                                        {
+                                            if (timer - lastDropTime < 600)
+                                            {
+                                                continue;
+                                            }
+                                        }
+
                                         string faction_tag = MyVisualScriptLogicProvider.GetPlayersFactionTag(player.IdentityId);
                                         if (subflag.flag_type == FlagType.Single)
                                         {
@@ -1034,7 +1184,7 @@ namespace Klime.CTF
                                                 subflag.carrying_player_id = player.IdentityId;
                                                 subflag.carrying_player = player;
                                                 subflag.current_drop_life = 0;
-                                                SendEvent(player.DisplayName + " grabbed the flag!",InfoType.FlagTaken);
+                                                SendEvent(player.DisplayName + " grabbed the flag!", InfoType.FlagTaken);
                                             }
                                         }
                                         else
@@ -1045,7 +1195,7 @@ namespace Klime.CTF
                                                 subflag.carrying_player_id = player.IdentityId;
                                                 subflag.carrying_player = player;
                                                 subflag.current_drop_life = 0;
-                                                SendEvent(player.DisplayName + " stole " + subflag.owning_faction.Tag + " flag!",InfoType.FlagTaken);
+                                                SendEvent(player.DisplayName + " stole " + subflag.owning_faction.Tag + " flag!", InfoType.FlagTaken);
                                             }
                                         }
                                     }
@@ -1093,7 +1243,7 @@ namespace Klime.CTF
             {
                 MyAPIGateway.Utilities.ShowMessage("", e.Message);
             }
-            
+
             timer += 1;
         }
 
@@ -1146,6 +1296,27 @@ namespace Klime.CTF
                             MySimpleObjectDraw.DrawTransparentCylinder(ref reuse_matrix, beam_radius, beam_radius, 100000f, ref beam_col, true, 25, 0.9f, laser);
                         }
                     }
+
+
+                    //add a copy of score_message but use gripstrength message
+                    if (grip_strength_message != null && gamestate != null)
+                    {
+                        grip_strength_sb.Clear();
+                        if (allflags.Count == 1)
+                        {
+                            if (faction1global == null || faction2global == null)
+                            {
+                                faction1global = MyAPIGateway.Session.Factions.TryGetFactionByTag(gamestate.ordered_faction_tags[0]);
+                                faction2global = MyAPIGateway.Session.Factions.TryGetFactionByTag(gamestate.ordered_faction_tags[1]);
+                            }
+                            grip_strength_sb.Append("<color=red>" + allflags[0].grip_strength + "  " + "<color=0,50,255,255>" + allflags[1].grip_strength + "\n");
+                        }
+                        else if (allflags.Count == 2)
+                        {
+                            grip_strength_sb.Append("<color=red>" + allflags[0].grip_strength + "  " + "<color=0,50,255,255>" + allflags[1].grip_strength + "\n");
+                        }
+                    }
+
 
                     if (score_message != null && gamestate != null)
                     {
@@ -1207,14 +1378,14 @@ namespace Klime.CTF
         private MyEntity PrimeEntityActivator()
         {
             var ent = new MyEntity();
-            ent.Init(null, ModelPath, null , null, null);
+            ent.Init(null, ModelPath, null, null, null);
             ent.Render.CastShadows = false;
             ent.IsPreview = true;
             ent.Save = false;
             ent.SyncFlag = false;
             ent.NeedsWorldMatrix = false;
             ent.Flags |= EntityFlags.IsNotGamePrunningStructureObject;
-            MyEntities.Add(ent,true);
+            MyEntities.Add(ent, true);
             return ent;
         }
 
@@ -1250,6 +1421,9 @@ namespace Klime.CTF
             {
                 HUD_Base.Unload();
             }
+
+            instance = null;
+
         }
     }
 }
