@@ -125,6 +125,7 @@ namespace Klime.CTF
         bool drop_in_cockpit = false;
         DropType drop_type = DropType.Ground;
         int drop_reset_time = 300;
+        double flagPickupRadius = 500;
 
 
         [ProtoContract]
@@ -248,7 +249,7 @@ namespace Klime.CTF
                 }
             }
 
-            public List<IMyPlayer> GetNearbyPlayers(ref List<IMyPlayer> all_players, ref List<IMyPlayer> return_list, bool cockpit_allowed)
+            public List<IMyPlayer> GetNearbyPlayers(ref List<IMyPlayer> all_players, ref List<IMyPlayer> return_list, bool cockpit_allowed, double flagPickupRadius)
             {
                 return_list.Clear();
                 foreach (var player in all_players)
@@ -256,7 +257,8 @@ namespace Klime.CTF
                     if (player.Character != null && !player.Character.IsDead)
                     {
                         double distance = Vector3D.Distance(player.Character.WorldMatrix.Translation, flag_entity.WorldMatrix.Translation);
-                        if (cockpit_allowed && distance <= 150 && player.Controller?.ControlledEntity?.Entity is IMyCockpit)
+                        
+                        if (cockpit_allowed && distance <= flagPickupRadius && player.Controller?.ControlledEntity?.Entity is IMyCockpit)              //distance <= [number] is the pickup radius
                         {
                             return_list.Add(player);
                         }
@@ -864,7 +866,7 @@ namespace Klime.CTF
                                     subflag.flag_entity.WorldMatrix = subflag.home_matrix;
 
 
-                                    foreach (var player in subflag.GetNearbyPlayers(ref allplayers, ref reuse_players, pickup_in_cockpit))
+                                    foreach (var player in subflag.GetNearbyPlayers(ref allplayers, ref reuse_players, pickup_in_cockpit, flagPickupRadius))
                                     {
                                         IMyEntity controlledEntity = player.Controller != null ? player.Controller.ControlledEntity.Entity : null;
                                         if (pickup_in_cockpit && !(controlledEntity is IMyCockpit))
@@ -1192,7 +1194,7 @@ namespace Klime.CTF
 
                                     subflag.current_drop_life += 1;
 
-                                    foreach (var player in subflag.GetNearbyPlayers(ref allplayers, ref reuse_players, pickup_in_cockpit))
+                                    foreach (var player in subflag.GetNearbyPlayers(ref allplayers, ref reuse_players, pickup_in_cockpit, flagPickupRadius))
                                     {
                                         int lastDropTime;
                                         if (playerDropTimes.TryGetValue(player.IdentityId, out lastDropTime))
