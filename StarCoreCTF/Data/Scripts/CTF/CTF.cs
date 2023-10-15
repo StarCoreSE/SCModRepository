@@ -809,13 +809,15 @@ namespace Klime.CTF
                         if (gridEntityId == freshlydamaged_gridEntityId)
                         {
                             damagedGrids.Add(gridEntityId);
-                           // MyAPIGateway.Utilities.ShowNotification("damage FUCK");
+                            disableGripRegen = true;  // Set the flag to disable regeneration
                         }
                     }
                 }
             }
         }
 
+        float damageReductionCounter = 0.0f;
+        bool disableGripRegen = false;  // Declare this member variable
 
 
         public override void UpdateAfterSimulation()
@@ -910,20 +912,27 @@ namespace Klime.CTF
                                     {
                                         IMyCockpit cockpit = (IMyCockpit)controlledEntity;
                                         long gridEntityId = cockpit.CubeGrid.EntityId;
-                                        //damage handling
+
+                                        // Damage handling
                                         if (damagedGrids.Contains(gridEntityId))
                                         {
-                                            if (subflag.grip_strength >= 0.5f) { 
-                                            
-                                                //Grid damaged, reduce grip strength
-                                                subflag.grip_strength -= 0.01f;
-                                                damagedGrids.Remove(gridEntityId);
-                                            } else {
-                                                subflag.state = FlagState.Dropped;
-                                            SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag due to grid damage!", InfoType.FlagDropped);
-                                                damagedGrids.Remove(gridEntityId);
-                                                playerDropTimes[subflag.carrying_player.IdentityId] = timer;
+                                            if (damageReductionCounter < 10.0f)
+                                            {
+                                                float gripLoss = 1.0f;  // Loss per damage instance
+                                                float newGripStrength = subflag.grip_strength - gripLoss;
+                                                subflag.grip_strength = newGripStrength;
+
+                                                damageReductionCounter += gripLoss;
                                             }
+
+                                            damagedGrids.Remove(gridEntityId);
+                                        }
+
+                                        // Reset the damageReductionCounter every second (assuming this block runs every frame and there are 60 frames per second)
+                                        if (timer % 60 == 0)
+                                        {
+                                            damageReductionCounter = 0.0f;
+                                            disableGripRegen = false;  // Reset the flag
                                         }
 
                                         var speenAcceleration = cockpit.CubeGrid.Physics.AngularAcceleration.Length();
@@ -953,7 +962,10 @@ namespace Klime.CTF
                                             MathHelper.Clamp(regen_temp, -49, 49);
                                         }
 
-                                        subflag.grip_strength += regen_temp;
+                                        if (!disableGripRegen)  // Halt grip regeneration if flag is set
+                                        {
+                                            subflag.grip_strength += regen_temp;
+                                        }
 
 
 
