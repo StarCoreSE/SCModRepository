@@ -19,6 +19,7 @@ namespace YourModNamespace
         private static readonly Color BlueBoxColor = new Color(0, 0, 255, 128);
         private static readonly Color LineColor = Color.Green;
         private static readonly int[] DistanceMultipliers = { 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000 };
+        private bool notificationFlag = false;
 
         public override void UpdateAfterSimulation()
         {
@@ -42,8 +43,17 @@ namespace YourModNamespace
             DrawBlueBoxes(distanceToOrigin, directionToOrigin, rotationMatrix);
             // DrawRedBoxes(playerPosition.Value, directionToOrigin, rotationMatrix.Value, boxSpacing);
             DrawGreenLine(distanceToOrigin, playerPosition.Value, directionToOrigin);
+
+            ShowDistanceNotification(distanceToOrigin);  // <-- New Line
+
+
         }
 
+        private void ShowDistanceNotification(double distanceToOrigin)
+        {
+            string notificationMessage = $"Distance to Origin: {distanceToOrigin.ToString("F2")} meters";  // Format distance with two decimal points
+            MyAPIGateway.Utilities.ShowNotification(notificationMessage, 10, MyFontEnum.Green);  // Display for 2 seconds
+        }
 
         private static Vector3D? PlayerPosition
         {
