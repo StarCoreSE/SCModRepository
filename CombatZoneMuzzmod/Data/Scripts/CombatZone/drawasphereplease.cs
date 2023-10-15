@@ -44,8 +44,10 @@ namespace YourModNamespace
             // DrawRedBoxes(playerPosition.Value, directionToOrigin, rotationMatrix.Value, boxSpacing);
             DrawGreenLine(distanceToOrigin, playerPosition.Value, directionToOrigin);
 
-            ShowDistanceNotification(distanceToOrigin);  // <-- New Line
-
+            if (distanceToOrigin >= 9000)
+            {
+                ShowDistanceNotification(distanceToOrigin);
+            }
 
         }
 
@@ -86,7 +88,7 @@ namespace YourModNamespace
             Color specialLineColor = new Color(255, 0, 0, 128); // Red color for the special perpendicular line
 
             // Separate distance check for the special 7500 unit line
-            if (distanceToOrigin >= 8000 && distanceToOrigin < 12500)
+            if (distanceToOrigin >= 9000 && distanceToOrigin < 12500)
             {
                 Vector3D specialWallPosition = Vector3D.Zero - (directionToOrigin * 10000);
                 DrawBox(blueBox, specialWallPosition, BlueBoxColor, rotationMatrix);
@@ -94,7 +96,7 @@ namespace YourModNamespace
             }
 
             // General distance check for other boxes
-            if (distanceToOrigin <= 9500) return;
+            if (distanceToOrigin <= 9000) return;
 
             foreach (int multiplier in DistanceMultipliers)
             {
@@ -138,7 +140,7 @@ namespace YourModNamespace
 
         private static void DrawGreenLine(double distanceToOrigin, Vector3D playerPosition, Vector3D directionToOrigin)
         {
-            if (distanceToOrigin <= 7000) return;
+            if (distanceToOrigin <= 9000) return;
 
             Color lineColor = LineColor; // Default to Green
             if (distanceToOrigin > 10000)
