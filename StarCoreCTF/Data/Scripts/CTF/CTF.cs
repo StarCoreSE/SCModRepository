@@ -809,7 +809,7 @@ namespace Klime.CTF
                         if (gridEntityId == freshlydamaged_gridEntityId)
                         {
                             damagedGrids.Add(gridEntityId);
-                           // MyAPIGateway.Utilities.ShowNotification("damage FUCK");
+                            disableGripRegen = true;  // Set the flag to disable regeneration
                         }
                     }
                 }
@@ -817,6 +817,8 @@ namespace Klime.CTF
         }
 
         float damageReductionCounter = 0.0f;
+        bool disableGripRegen = false;  // Declare this member variable
+
 
         public override void UpdateAfterSimulation()
         {
@@ -930,6 +932,7 @@ namespace Klime.CTF
                                         if (timer % 60 == 0)
                                         {
                                             damageReductionCounter = 0.0f;
+                                            disableGripRegen = false;  // Reset the flag
                                         }
 
                                         var speenAcceleration = cockpit.CubeGrid.Physics.AngularAcceleration.Length();
@@ -959,7 +962,10 @@ namespace Klime.CTF
                                             MathHelper.Clamp(regen_temp, -49, 49);
                                         }
 
-                                        subflag.grip_strength += regen_temp;
+                                        if (!disableGripRegen)  // Halt grip regeneration if flag is set
+                                        {
+                                            subflag.grip_strength += regen_temp;
+                                        }
 
 
 
