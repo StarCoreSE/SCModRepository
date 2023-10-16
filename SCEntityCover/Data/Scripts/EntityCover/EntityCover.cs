@@ -21,7 +21,7 @@ using CollisionLayers = Sandbox.Engine.Physics.MyPhysics.CollisionLayers;
 namespace klime.EntityCover
 {
 
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_BatteryBlock), false, "EntityCover", "EntityCover2", "EntityCoverEveFreighter", "EntityCover3", "EntityCover4", "EntityCover4RED", "EntityCover4BLU", "EntityCoverFractal", "EntityCoverColor")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_BatteryBlock), false, "EntityCover", "EntityCover2", "EntityCoverEveFreighter", "EntityCover3", "EntityCover4", "EntityCover4RED", "EntityCover4BLU", "EntityCoverFractal", "EntityCoverColor", "EntityCoverEVEDepot")]
     public class EntityCoverGamelogic : MyGameLogicComponent
     {
         // Core
@@ -34,12 +34,13 @@ namespace klime.EntityCover
             { "EntityCover", new ModelInfo("REMlikeblocker_purple.mwm", new Vector3(275, 275, 275)) },    //block subtype, block model filename, hitbox dimensions //in Large Blocks (???)
             { "EntityCoverFractal", new ModelInfo("REMlikeblocker_purple.mwm", new Vector3(275, 275, 275)) },    //block subtype, block model filename, hitbox dimensions //in Large Blocks (???)
             { "EntityCoverColor", new ModelInfo("null", new Vector3(275, 275, 275)) },    //block subtype, block model filename, hitbox dimensions //in Large Blocks (???)
-            { "EntityCover2", new ModelInfo("REMlikeblocker2_5km_purple.mwm", new Vector3(1250, 1250, 1250)) },    
+            { "EntityCoverEVEDepot", new ModelInfo("null", new Vector3(150, 80, 200)) },    //don't forget the entitycomponentdescriptor too dumbass
+            { "EntityCover2", new ModelInfo("REMlikeblocker2_5km_purple.mwm", new Vector3(1250, 1250, 1250)) },
             { "EntityCoverEveFreighter", new ModelInfo("eveobstacle3.mwm", new Vector3(180, 60, 500)) },
             { "EntityCover3", new ModelInfo("REMlikeblockerLong25kX.mwm", new Vector3(1250, 275, 275)) },
             { "EntityCover4", new ModelInfo("REMlikeblocker1kmplate_purple.mwm", new Vector3(500, 500, 50)) },    //don't forget the entitycomponentdescriptor too dumbass
             { "EntityCover4BLU", new ModelInfo("REMlikeblocker1kmplate_blue.mwm", new Vector3(500, 500, 50)) },    //don't forget the entitycomponentdescriptor too dumbass
-            { "EntityCover4RED", new ModelInfo("REMlikeblocker1kmplate_red.mwm", new Vector3(500, 500, 50)) },    //don't forget the entitycomponentdescriptor too dumbass
+            { "EntityCover4RED", new ModelInfo("REMlikeblocker1kmplate_red.mwm", new Vector3(500, 500, 50)) },    //don't forget the thing at the top too dumbass
             // Add more entries for additional variants...
         };
 
@@ -122,6 +123,24 @@ namespace klime.EntityCover
                     modelName = "REMlikeblocker_BLU.mwm";
                 }
             }
+            // Check for the EntityCoverColor block
+            if (subtypeId == "EntityCoverEVEDepot")
+            {
+                // Check the position of the block
+                Vector3D blockPosition = entityBattery.GetPosition(); // Assuming this gets the position of the block
+
+                // Check if the block's x position is above 0
+                if (blockPosition.X > 0)
+                {
+                    // Set the modelName to the red variant
+                    modelName = "evedepotobjectred.mwm";
+                }
+                else
+                {
+                    // Set the modelName to the blue variant
+                    modelName = "evedepotobjectblu.mwm";
+                }
+            }
 
             EntityCover.Instance.AddCover((IMyTerminalBlock)entityBattery, modelName, modelDimensions); // Pass the modelDimensions parameter
         }
@@ -131,7 +150,7 @@ namespace klime.EntityCover
 
         public override void Close()
         {
-            try 
+            try
             {
                 // Get entityId from block
                 long entityId = entityBattery.EntityId;
@@ -260,7 +279,7 @@ namespace klime.EntityCover
             settings.WorldMatrix.GetOrientation();
             //settings.Entity.Flags |= EntityFlags.IsGamePrunningStructureObject;
             MyAPIGateway.Physics.CreateBoxPhysics(settings, modelDimensions, 1f);
-            
+
         }
 
 
@@ -270,7 +289,7 @@ namespace klime.EntityCover
 
         public override void UpdateAfterSimulation()
         {
-           // DrawLines(); //this is for debugging, remove the // in front of it to enable it
+            // DrawLines(); //this is for debugging, remove the // in front of it to enable it
             if (isBouncing)
             {
                 delayTicks++;
@@ -316,10 +335,20 @@ namespace klime.EntityCover
                 Vector3D maxPoint = cGrid.PositionComp.WorldAABB.Max;
                 double radius = (maxPoint - minPoint).Length() / 2;
 
+<<<<<<< Updated upstream
                 BoundingSphereD boundingSphere = new BoundingSphereD(
                     cGrid.PositionComp.WorldAABB.Center,
                     radius
                 );
+=======
+                Vector3D boxNormal = Vector3D.Rotate(GenIntNormal(relImpact), -thisEnt.WorldMatrix);
+
+                // Get the incident velocity direction
+                Vector3D incidentVelocity = cGrid.LinearVelocity;
+                Vector3D incidentVelocityB = cGrid.LinearVelocity;
+                Vector3D incidentVelocityC = cGrid.LinearVelocity + cGrid.Physics.AngularVelocity;
+                Vector3D incidentAngularVelocity = cGrid.Physics.AngularVelocity;
+>>>>>>> Stashed changes
 
                 // Retrieve entities within bounding volumes
                 List<IMyEntity> closeEntitiesSphere = MyAPIGateway.Entities.GetTopMostEntitiesInSphere(ref boundingSphere);
