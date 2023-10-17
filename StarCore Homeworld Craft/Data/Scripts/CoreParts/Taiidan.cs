@@ -50,7 +50,7 @@ namespace Scripts {
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
                 MaxTargetDistance = 10000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
-                MinTargetDistance = 500, // Minimum distance at which targets will be automatically shot at.
+                MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 18, // Maximum number of targets to randomize between; 0 = unlimited.
                 CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
                 TopBlocks = 18, // Maximum number of blocks to randomize between; 0 = unlimited.
@@ -496,7 +496,7 @@ namespace Scripts {
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
                 MaxTargetDistance = 10000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
-                MinTargetDistance = 500, // Minimum distance at which targets will be automatically shot at.
+                MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 0, // Maximum number of targets to randomize between; 0 = unlimited.
                 CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
                 TopBlocks = 0, // Maximum number of blocks to randomize between; 0 = unlimited.
@@ -718,7 +718,7 @@ namespace Scripts {
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
                 MaxTargetDistance = 10000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
-                MinTargetDistance = 500, // Minimum distance at which targets will be automatically shot at.
+                MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 0, // Maximum number of targets to randomize between; 0 = unlimited.
                 CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
                 TopBlocks = 0, // Maximum number of blocks to randomize between; 0 = unlimited.
@@ -1386,8 +1386,8 @@ namespace Scripts {
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 10000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
-                MinTargetDistance = 500, // Minimum distance at which targets will be automatically shot at.
+                MaxTargetDistance = 5000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 0, // Maximum number of targets to randomize between; 0 = unlimited.
                 CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
                 TopBlocks = 0, // Maximum number of blocks to randomize between; 0 = unlimited.
@@ -1493,7 +1493,7 @@ namespace Scripts {
                     ReloadTime = 360, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    HeatPerShot = 100, // Heat generated per shot.
+                    HeatPerShot = 0, // Heat generated per shot.
                     MaxHeat = 8000, // Max heat before weapon enters cooldown (70% of max heat).
                     Cooldown = .20f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
                     HeatSinkRate = 0, // Amount of heat lost per second.
@@ -1598,7 +1598,7 @@ namespace Scripts {
             Targeting = new TargetingDef
             {
                 Threats = new[] {
-                    Projectiles, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals, ScanRoid, ScanPlanet, ScanFriendlyCharacter, ScanFriendlyGrid, ScanEnemyCharacter, ScanEnemyGrid, ScanNeutralCharacter, ScanNeutralGrid, ScanUnOwnedGrid, ScanOwnersGrid
+                    Projectiles, Grids, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals, ScanRoid, ScanPlanet, ScanFriendlyCharacter, ScanFriendlyGrid, ScanEnemyCharacter, ScanEnemyGrid, ScanNeutralCharacter, ScanNeutralGrid, ScanUnOwnedGrid, ScanOwnersGrid
                 },
                 SubSystems = new[] {
                     Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
@@ -1608,7 +1608,7 @@ namespace Scripts {
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 10000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MaxTargetDistance = 5000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
                 MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 24, // Maximum number of targets to randomize between; 0 = unlimited.
                 CycleTargets = 4, // Number of targets to "cycle" per acquire attempt.
@@ -1715,7 +1715,7 @@ namespace Scripts {
                     ReloadTime = 360, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    HeatPerShot = 100, // Heat generated per shot.
+                    HeatPerShot = 0, // Heat generated per shot.
                     MaxHeat = 8000, // Max heat before weapon enters cooldown (70% of max heat).
                     Cooldown = .20f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
                     HeatSinkRate = 12, // Amount of heat lost per second.
