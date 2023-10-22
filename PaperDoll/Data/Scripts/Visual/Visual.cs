@@ -757,16 +757,18 @@ namespace klime.Visual
             HandleException(() =>
             {
                 var realOB = (MyObjectBuilder_CubeGrid)realGrid.GetObjectBuilder();
-                realOB.CreatePhysics = false;
 
-                // Remove specific blocks from the object builder
+                SetupForGridPaste(realOB);
                 RemoveSpecificBlocksFromOB(realOB);
+                SetupForProjector(realOB);
+
+                realOB.CreatePhysics = false;
+                MyAPIGateway.Utilities.ShowNotification("pain");
 
                 MyEntities.RemapObjectBuilder(realOB);
                 MyAPIGateway.Entities.CreateFromObjectBuilderParallel(realOB, false, CompleteCall);
             }, "generating client grids");
         }
-
 
         private void CompleteCall(IMyEntity obj)
         {
@@ -783,19 +785,50 @@ namespace klime.Visual
 
         private void RemoveSpecificBlocksFromOB(MyObjectBuilder_CubeGrid ob)
         {
-            var blocksToRaze = new HashSet<string>
+            var blocksToDisableInOB = new HashSet<string>
     {
         "BasicMissionBlock",
         "OffensiveCombatBlock",
         "DefensiveCombatBlock",
         "PathRecorderBlock",
-        "FlightMovementBlock"
+        "FlightMovementBlock",
+        "RemoteControl"
     };
 
-            ob.CubeBlocks.RemoveAll(block => blocksToRaze.Contains(block.SubtypeName));
+            foreach (var block in ob.CubeBlocks)
+            {
+                if (blocksToDisableInOB.Contains(block.SubtypeName))
+                {
+                    MyObjectBuilder_FunctionalBlock functionalBlock = block as MyObjectBuilder_FunctionalBlock;
+                    if (functionalBlock != null)
+                    {
+                        functionalBlock.Enabled = false;
+                    }
+                }
+            }
+
+            ob.CubeBlocks.RemoveAll(block => blocksToDisableInOB.Contains(block.SubtypeName));
         }
 
 
+
+        private void SetupForGridPaste(MyObjectBuilder_CubeGrid ob)
+        {
+            foreach (var block in ob.CubeBlocks)
+            {
+                // Call the actual SetupForGridPaste() method from the API on the block
+                 block.SetupForGridPaste(); 
+            }
+        }
+
+        private void SetupForProjector(MyObjectBuilder_CubeGrid ob)
+        {
+            foreach (var block in ob.CubeBlocks)
+            {
+                // Call the actual SetupForGridPaste() method from the API on the block
+                block.SetupForProjector();
+            }
+        }
 
         public void Update()
         {
