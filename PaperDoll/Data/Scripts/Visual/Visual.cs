@@ -764,7 +764,7 @@ namespace klime.Visual
                 SetupForProjector(realOB);
 
                 realOB.CreatePhysics = false;
-                MyAPIGateway.Utilities.ShowNotification("pain");
+                
 
                 MyEntities.RemapObjectBuilder(realOB);
                 MyAPIGateway.Entities.CreateFromObjectBuilderParallel(realOB, false, CompleteCall);
@@ -786,6 +786,9 @@ namespace klime.Visual
 
         private void RemoveSpecificBlocksFromOB(MyObjectBuilder_CubeGrid ob)
         {
+            MyAPIGateway.Utilities.ShowNotification("RemoveSpecificBlocksFromOB");
+
+
             var blocksToDisableInOB = new HashSet<string>
     {
         "BasicMissionBlock",
@@ -803,12 +806,14 @@ namespace klime.Visual
 
             foreach (var block in ob.CubeBlocks)
             {
+                MyAPIGateway.Utilities.ShowNotification("Entering loop");
                 if (blocksToDisableInOB.Contains(block.SubtypeName))
                 {
                     MyObjectBuilder_FunctionalBlock functionalBlock = block as MyObjectBuilder_FunctionalBlock;
                     if (functionalBlock != null)
                     {
                         functionalBlock.Enabled = false;
+                        MyAPIGateway.Utilities.ShowNotification("functional");
                     }
 
                     MyObjectBuilder_RemoteControl remoteBlock = block as MyObjectBuilder_RemoteControl;
@@ -816,24 +821,32 @@ namespace klime.Visual
                     {
                         remoteBlock.CollisionAvoidance = false;
                         remoteBlock.AutoPilotEnabled = false;
+                        MyAPIGateway.Utilities.ShowNotification("remote");
+
                     }
 
                     MyObjectBuilder_Beacon beaconBlock = block as MyObjectBuilder_Beacon;
                     if (beaconBlock != null)
                     {
                         beaconBlock.Enabled = false;
+                        MyAPIGateway.Utilities.ShowNotification("beacon");
+
                     }
 
                     MyObjectBuilder_InteriorLight interiorLightBlock = block as MyObjectBuilder_InteriorLight;
                     if (interiorLightBlock != null)
                     {
                         interiorLightBlock.Enabled = false;
+                        MyAPIGateway.Utilities.ShowNotification("interior");
+
                     }
 
                     MyObjectBuilder_ReflectorLight reflectorLightBlock = block as MyObjectBuilder_ReflectorLight;
                     if (reflectorLightBlock != null)
                     {
                        reflectorLightBlock.Enabled = false;
+                        MyAPIGateway.Utilities.ShowNotification("reflector");
+
                     }
 
                     blocksToDelete.Add(block);
