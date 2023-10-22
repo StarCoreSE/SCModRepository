@@ -793,7 +793,10 @@ namespace klime.Visual
         "DefensiveCombatBlock",
         "PathRecorderBlock",
         "FlightMovementBlock",
-        "RemoteControl"
+        "RemoteControl",
+        "Beacon",
+        "InteriorLight", 
+        "ReflectorLight" 
     };
 
             List<MyObjectBuilder_CubeBlock> blocksToDelete = new List<MyObjectBuilder_CubeBlock>();
@@ -815,6 +818,24 @@ namespace klime.Visual
                         remoteBlock.AutoPilotEnabled = false;
                     }
 
+                    MyObjectBuilder_Beacon beaconBlock = block as MyObjectBuilder_Beacon;
+                    if (beaconBlock != null)
+                    {
+                        beaconBlock.Enabled = false;
+                    }
+
+                    MyObjectBuilder_InteriorLight interiorLightBlock = block as MyObjectBuilder_InteriorLight;
+                    if (interiorLightBlock != null)
+                    {
+                        interiorLightBlock.Enabled = false;
+                    }
+
+                    MyObjectBuilder_ReflectorLight reflectorLightBlock = block as MyObjectBuilder_ReflectorLight;
+                    if (reflectorLightBlock != null)
+                    {
+                       reflectorLightBlock.Enabled = false;
+                    }
+
                     blocksToDelete.Add(block);
                 }
             }
@@ -825,6 +846,7 @@ namespace klime.Visual
                 ob.CubeBlocks.Remove(block);
             }
         }
+
 
 
 
