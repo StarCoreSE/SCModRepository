@@ -118,8 +118,8 @@ namespace klime.Visual
 
 
             AddBillboard(Color.Lime * 0.75f, hateVector, left, up, tempBillboardScaling, BlendTypeEnum.SDR);
-           // AddBillboard(Color.Red * 0.5f, greaterPainMatrix.Translation -= Vector3D.TransformNormal(relTrans, clonedWorldMatrix), left, up, tempBillboardScaling, BlendTypeEnum.AdditiveTop);
-           // AddBillboard(Color.DodgerBlue * 0.5f, painMatrix.Translation -= Vector3D.TransformNormal(relTrans, clonedWorldMatrix), left, up, tempBillboardScaling, BlendTypeEnum.AdditiveTop);
+            // AddBillboard(Color.Red * 0.5f, greaterPainMatrix.Translation -= Vector3D.TransformNormal(relTrans, clonedWorldMatrix), left, up, tempBillboardScaling, BlendTypeEnum.AdditiveTop);
+            // AddBillboard(Color.DodgerBlue * 0.5f, painMatrix.Translation -= Vector3D.TransformNormal(relTrans, clonedWorldMatrix), left, up, tempBillboardScaling, BlendTypeEnum.AdditiveTop);
 
         }
 
@@ -217,7 +217,8 @@ namespace klime.Visual
             int stride = MathHelper.Clamp(count / 16, 1, 64);
 
 
-            MyAPIGateway.Parallel.For(0, count, i => {
+            MyAPIGateway.Parallel.For(0, count, i =>
+            {
                 var block = allBlocks[i];
                 var pos = block.Position;
                 RecolorArmor(pos);
@@ -263,7 +264,7 @@ namespace klime.Visual
                 subpart.Value.Render.Transparency = transparency;
                 subpart.Value.Render.CastShadows = false;
                 subpart.Value.Render.RemoveRenderObjects();
-               // subpart.Value.Render.AddRenderObjects();
+                // subpart.Value.Render.AddRenderObjects();
                 SetTransparencyForSubparts(subpart.Value, transparency);
             }
         }
@@ -311,15 +312,15 @@ namespace klime.Visual
 
         public Queue<Vector3I> FatDelList = new Queue<Vector3I>();
         //public Dictionary<IMyCubeBlock, int> DelDict = new Dictionary<IMyCubeBlock, int>();
-       // public Dictionary<Vector3I, int> SlimDelDict = new Dictionary<Vector3I, int>();
+        // public Dictionary<Vector3I, int> SlimDelDict = new Dictionary<Vector3I, int>();
         public MyStringHash stringHash;
         public Dictionary<Vector3I, float> BlockIntegrityDict = new Dictionary<Vector3I, float>();
         public Dictionary<Vector3I, float> FatBlockIntegrityDict = new Dictionary<Vector3I, float>();
         public HashSet<DamageEntry> DamageEntries = new HashSet<DamageEntry>();
         public static string DamageEntriesString = "";
         public static float TotalDamageSum = 0;
-        public  int SlimBlocksDestroyed = 0;
-        public  int FatBlocksDestroyed = 0;
+        public int SlimBlocksDestroyed = 0;
+        public int FatBlocksDestroyed = 0;
         public Vector3D Position;
         public GridG(List<GridR> gridGroup, double rotationForwardBase) { Init(gridGroup, rotationForwardBase); }
         public GridG(GridR gridR, double rotationForwardBase) { Init(new List<GridR> { gridR }, rotationForwardBase); }
@@ -334,7 +335,7 @@ namespace klime.Visual
         public void DoBlockRemove(Vector3I position)
         {
             // HandleException(() => SlimListClearAndAdd(position), "Clearing and Adding to SlimList");
-           // SlimListClearAndAdd(position);
+            // SlimListClearAndAdd(position);
             for (int GGC = 0; GGC < gridGroup.Count; GGC++)
             {
                 GridR subgrid = gridGroup[GGC];
@@ -345,7 +346,7 @@ namespace klime.Visual
 
         private void SlimListClearAndAdd(Vector3I position)
         {
-          //  SlimList.Clear();
+            //  SlimList.Clear();
             SlimList.Enqueue(position);
             slimblocksToClose += 500;
         }
@@ -388,9 +389,9 @@ namespace klime.Visual
         {
             var stringHash = MyStringHash.GetOrCompute("Neon_Colorable_Lights");
             var colorHSVOffset = GetRoundedHSVOffset(colorHex);
-            
+
             subgrid.ChangeColorAndSkin(subgrid.GetCubeBlock(slim.Position), colorHSVOffset, stringHash);
-       
+
             SetTransparency(slim, 0.01f);
 
             //SlimDelDict.Add(slim.Position, timer + 150);
@@ -513,8 +514,8 @@ namespace klime.Visual
         public void UpdateMatrix(MatrixD renderMatrix, MatrixD rotMatrix)
         {
             if (!doneRescale || !doneInitialCleanup) return;
-          if(slimblocksToClose > 0) slimblocksToClose--;
-          if(fatblocksToClose > 0) fatblocksToClose--;
+            if (slimblocksToClose > 0) slimblocksToClose--;
+            if (fatblocksToClose > 0) fatblocksToClose--;
 
             timer++;
             UpdateBlockDestructionStats();
@@ -524,15 +525,15 @@ namespace klime.Visual
 
         private void InitializeFrameData()
         {
-         //   DelList.Clear();
-         //   SlimDelList.Clear();
-         //   FatDelList.Clear();
+            //   DelList.Clear();
+            //   SlimDelList.Clear();
+            //   FatDelList.Clear();
         }
 
         private void ProcessFatBlocks()
         {
 
-            if (fatblocksToClose % 120 > 0) 
+            if (fatblocksToClose % 120 > 0)
             {
                 return;
             }
@@ -567,7 +568,7 @@ namespace klime.Visual
                 UpdateSlimBlockDestruction(gridGroup[i]);
             }
 
-          //  DamageEntries.Add(new DamageEntry(slimDamageThisFrame, fatBlockDamageThisFrame, timer));
+            //  DamageEntries.Add(new DamageEntry(slimDamageThisFrame, fatBlockDamageThisFrame, timer));
         }
 
         private void UpdateSlimBlockDestruction(GridR subgrid)
@@ -584,37 +585,37 @@ namespace klime.Visual
                 //DebugShowblockstoRemove();
             }
             subgrid.grid.RazeGeneratedBlocks(SlimDelListMP);
-            SlimDelListMP.Clear();  
+            SlimDelListMP.Clear();
 
             var stride = MathHelper.Clamp(SlimDelQueue.Count / 16, 1, 48);
 
-           MyAPIGateway.Parallel.For(0, subgrid.grid.CubeBlocks.Count, i =>
-           {
-               var slim = subgrid.grid.CubeBlocks as IMySlimBlock;
-               if (slim != null)
-               {
-                   if (slim.FatBlock == null)
-                   {
-                       if (slim.Integrity <= 0)
-                       {
-                           //SlimDelList.Add(slim.Position);
-                           SlimDelQueue.Enqueue(slim.Position);
-                           SlimDelListMP.Add(slim.Position);
-                           SlimBlocksDestroyed++;
-                       }
-                   }
-               }
-           }, stride);
-            
+            MyAPIGateway.Parallel.For(0, subgrid.grid.CubeBlocks.Count, i =>
+            {
+                var slim = subgrid.grid.CubeBlocks as IMySlimBlock;
+                if (slim != null)
+                {
+                    if (slim.FatBlock == null)
+                    {
+                        if (slim.Integrity <= 0)
+                        {
+                            //SlimDelList.Add(slim.Position);
+                            SlimDelQueue.Enqueue(slim.Position);
+                            SlimDelListMP.Add(slim.Position);
+                            SlimBlocksDestroyed++;
+                        }
+                    }
+                }
+            }, stride);
+
         }
 
         private void UpdateFatBlockDestruction(ref float fatBlockDamageThisFrame)
         {
-         //  foreach (var item in FatDelList)
-         //  {
-         //      fatBlockDamageThisFrame += FatBlockIntegrityDict[item];
-         //      FatBlockIntegrityDict.Remove(item);
-         //  }
+            //  foreach (var item in FatDelList)
+            //  {
+            //      fatBlockDamageThisFrame += FatBlockIntegrityDict[item];
+            //      FatBlockIntegrityDict.Remove(item);
+            //  }
         }
 
         private void AggregateDamageOverTime()
@@ -757,10 +758,15 @@ namespace klime.Visual
             {
                 var realOB = (MyObjectBuilder_CubeGrid)realGrid.GetObjectBuilder();
                 realOB.CreatePhysics = false;
+
+                // Remove specific blocks from the object builder
+                RemoveSpecificBlocksFromOB(realOB);
+
                 MyEntities.RemapObjectBuilder(realOB);
                 MyAPIGateway.Entities.CreateFromObjectBuilderParallel(realOB, false, CompleteCall);
             }, "generating client grids");
         }
+
 
         private void CompleteCall(IMyEntity obj)
         {
@@ -774,6 +780,22 @@ namespace klime.Visual
                 visGrid = new GridG(new GridR(grid), rotOffset);
             }, "completing the call");
         }
+
+        private void RemoveSpecificBlocksFromOB(MyObjectBuilder_CubeGrid ob)
+        {
+            var blocksToRaze = new HashSet<string>
+    {
+        "BasicMissionBlock",
+        "OffensiveCombatBlock",
+        "DefensiveCombatBlock",
+        "PathRecorderBlock",
+        "FlightMovementBlock"
+    };
+
+            ob.CubeBlocks.RemoveAll(block => blocksToRaze.Contains(block.SubtypeName));
+        }
+
+
 
         public void Update()
         {
@@ -877,7 +899,7 @@ namespace klime.Visual
             var scale = (float)(scaleFov * (hudscale * 0.23f));
 
             Billboardcolor = (Color.Lime * 0.75f).ToVector4();
-           // MyTransparentGeometry.AddBillboardOriented(PaperDollBGSprite, Billboardcolor, origin, left, up, scale, BlendTypeEnum.SDR);
+            // MyTransparentGeometry.AddBillboardOriented(PaperDollBGSprite, Billboardcolor, origin, left, up, scale, BlendTypeEnum.SDR);
 
         }
 
@@ -1019,7 +1041,7 @@ namespace klime.Visual
         public ushort feedbackNetID = 38492;
         public ushort netID = 39302;
         Dictionary<ulong, List<IMyCubeGrid>> sTrkr = new Dictionary<ulong, List<IMyCubeGrid>>();
-        bool validInputThisTick = false; 
+        bool validInputThisTick = false;
         public ViewState viewState = ViewState.Idle;
         public ViewStateSelf viewStateSelf = ViewStateSelf.IdleSelf;
         public ReqPDoll reqPDoll = ReqPDoll.Off;
@@ -1375,12 +1397,12 @@ namespace klime.Visual
                 Vector3D toTarget = position - MyAPIGateway.Session.Camera.WorldMatrix.Translation;
                 float fov = MyAPIGateway.Session.Camera.FieldOfViewAngle;
                 var angle = GetAngBetwDeg(toTarget, cameraForward);
-              //  string bruh = GridG.slimblocksToClose.ToString();
+                //  string bruh = GridG.slimblocksToClose.ToString();
                 var distance = Vector3D.Distance(MyAPIGateway.Session.Camera.WorldMatrix.Translation, position);
 
                 gHud.Visible = true;
                 gHud.Scale = tempScaling - MathHelper.Clamp(distance / 20000, 0, 0.9) + (30 / Math.Max(60, angle * angle * angle));
-              //  gHud.Message.Append(bruh);
+                //  gHud.Message.Append(bruh);
                 gHud.Origin = new Vector2D(targetHudPos.X, targetHudPos.Y);
                 gHud.Offset = -gHud.GetTextLength() / 2 + new Vector2(0, 0.3f);
             }, "updating HUD element for " + entVis);
