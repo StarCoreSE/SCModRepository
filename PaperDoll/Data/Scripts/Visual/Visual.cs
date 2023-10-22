@@ -25,6 +25,7 @@ using static Draygo.API.HudAPIv2;
 using System.Linq;
 using System.Diagnostics;
 using Sandbox.Game.Entities.Cube;
+using Sandbox.Common.ObjectBuilders;
 
 namespace klime.Visual
 {
@@ -795,6 +796,8 @@ namespace klime.Visual
         "RemoteControl"
     };
 
+            List<MyObjectBuilder_CubeBlock> blocksToDelete = new List<MyObjectBuilder_CubeBlock>();
+
             foreach (var block in ob.CubeBlocks)
             {
                 if (blocksToDisableInOB.Contains(block.SubtypeName))
@@ -804,11 +807,25 @@ namespace klime.Visual
                     {
                         functionalBlock.Enabled = false;
                     }
+
+                    MyObjectBuilder_RemoteControl remoteBlock = block as MyObjectBuilder_RemoteControl;
+                    if (remoteBlock != null)
+                    {
+                        remoteBlock.CollisionAvoidance = false;
+                        remoteBlock.AutoPilotEnabled = false;
+                    }
+
+                    blocksToDelete.Add(block);
                 }
             }
 
-            ob.CubeBlocks.RemoveAll(block => blocksToDisableInOB.Contains(block.SubtypeName));
+            // Removing the blocks
+            foreach (var block in blocksToDelete)
+            {
+                ob.CubeBlocks.Remove(block);
+            }
         }
+
 
 
 
