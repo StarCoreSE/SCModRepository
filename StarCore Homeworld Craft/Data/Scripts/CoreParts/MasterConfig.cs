@@ -16,7 +16,9 @@ namespace Scripts
                 TaiidanRailBomber, 
                 TaiidanHangarFighter,
                 TaiidanHangarBomber,
-                TaiidanHangarBomberMedium
+                TaiidanHangarBomberMedium,
+                ADMTaiidanHangarBomber,
+                ADMTaiidanHangarFighter
                 );
         }
     }
