@@ -1113,22 +1113,24 @@ namespace Klime.CTF
                                         }
                                     }
 
-                                    if (subflag.state == FlagState.Active)
-                                    {
-                                        if (!MySessionComponentSafeZones.IsActionAllowed(subflag.flag_entity.WorldMatrix.Translation, CastProhibit(MySessionComponentSafeZones.AllowedActions, 1)))
-                                        {
-                                            subflag.state = FlagState.Home;
-                                            ShowANotificationPleaseFuck("flag home 3");
-                                            if (subflag.flag_type == FlagType.Single)
-                                            {
-                                                SendEvent(subflag.carrying_player.DisplayName + " dropped the flag!", InfoType.FlagDropped);
-                                            }
-                                            else
-                                            {
-                                                SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag!", InfoType.FlagDropped);
-                                            }
-                                        }
-                                    }
+                                    //if you enter a safezone, this is supposed to drop, but it also happens when damage is off. also it needs a cooldown. so ill just turn it off for now
+
+                                    //if (subflag.state == FlagState.Active)
+                                    //{
+                                    //    if (!MySessionComponentSafeZones.IsActionAllowed(subflag.flag_entity.WorldMatrix.Translation, CastProhibit(MySessionComponentSafeZones.AllowedActions, 1)))
+                                    //    {
+                                    //        subflag.state = FlagState.Home;
+                                    //        ShowANotificationPleaseFuck("flag home 3");
+                                    //        if (subflag.flag_type == FlagType.Single)
+                                    //        {
+                                    //            SendEvent(subflag.carrying_player.DisplayName + " dropped the flag from entering a safezone!", InfoType.FlagDropped);
+                                    //        }
+                                    //        else
+                                    //        {
+                                    //            SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag!", InfoType.FlagDropped);
+                                    //        }
+                                    //    }
+                                    //}
                                 }
 
                                 if (subflag.state == FlagState.Dropped)
