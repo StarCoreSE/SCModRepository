@@ -912,6 +912,8 @@ namespace Klime.CTF
                                         subflag.state = FlagState.Dropped;
                                         ShowANotificationPleaseFuck("flag state set to dropped 1");
                                         SendEvent(subflag.carrying_player.DisplayName + " dropped the flag due to leaving cockpit!", InfoType.FlagDropped);
+                                        playerDropTimes[subflag.carrying_player.IdentityId] = timer;
+
                                         continue; // Skip the rest of the logic for this flag
                                     }
                                     if (controlledEntity is IMyCockpit)
