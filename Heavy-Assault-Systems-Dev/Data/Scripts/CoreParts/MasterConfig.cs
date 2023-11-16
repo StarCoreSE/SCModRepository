@@ -17,7 +17,13 @@ namespace Scripts
             HAS_Crossfield,
             HAS_CrossfieldOne,
             HAS_CrossfieldTwo,
-            HAS_CrossfieldThree
+            HAS_CrossfieldThree,
+			
+			HAS_Esper,
+			HAS_Mammon,
+			HAS_Thanatos
+			
+			
             );
             ArmorDefinitions();
             SupportDefinitions();

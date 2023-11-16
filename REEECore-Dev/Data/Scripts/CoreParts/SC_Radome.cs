@@ -53,7 +53,23 @@ namespace Scripts
                 TopBlocks = 0, // 0 = unlimited, max number of blocks to randomize between
                 StopTrackingSpeed = 0, // do not track target threats traveling faster than this speed
                 ShootBlanks = true, // Do not generate projectiles when shooting
+                Communications = new CommunicationDef
+                {
+                    StoreTargets = true, // Pushes its current target to the grid/construct so that other slaved weapons can fire on it.
+                    StorageLimit = 30, // The limit at which this weapon will no longer export targets onto the channel.
+                    MaxConnections = 0, // 0 is unlimited, this value determines the maximum number of weapons that can link up to another weapon.
+                    StoreLimitPerBlock = false, // Setting this to true will switch the StorageLimit from being per Location to per block per Location.
+                    StorageLocation = "Projectile_Target_List", // This location ID is used either by the master weapon (if ExportTargets = true) or the slave weapon (if its false).  This is shared across the conncted grids.
+                    Mode = LocalNetwork, // NoComms, BroadCast, LocalNetwork, Repeater, Relay, Jamming
+                    TargetPersists = false, // Whether or not the weapon will retain its existing target even if the source of the target releases theirs.
+                    Security = Private, // Public, Private, Secure
+                    BroadCastChannel = "", // If defined you will broadcast to all other scanners on this channel.
+                    BroadCastRange = 0, // This is the range that you will broadcast up too.  Note that this value applies to both the sender and receiver, both range requirements must be met. 
+                    JammingStrength = 0, // If Mode is set to jamming, then this value will decrease the "range" of broadcasts.  Strength falls off at sqr of the distance.
+                    RelayChannel = "", // If defined this channel will be used to relay any targets it seems on the broadcast channel.
+                    RelayRange = 0, // This defines the range that any broadcasts will be relayed.  Note that this channel id is seen as the "broadcast" channel for all receivers, broadcast range requirements apply. 
                 },
+            },
 
             HardPoint = new HardPointDef 
             {
