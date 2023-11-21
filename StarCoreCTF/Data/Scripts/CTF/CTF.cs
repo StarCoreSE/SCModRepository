@@ -747,7 +747,7 @@ namespace Klime.CTF
             HudAPIv2.BillBoardHUDMessage score_billboard = new HudAPIv2.BillBoardHUDMessage();
             score_billboard.BillBoardColor = new Color(Color.White, 1);
             score_billboard.Material = MyStringId.GetOrCompute("ctf_score_background");
-            score_billboard.Origin = new Vector2D(0.02, 0.82);
+            score_billboard.Origin = new Vector2D(0.40, 0.85);
             score_billboard.Scale *= 0.5f;
             score_billboard.Height *= 0.6f;
             score_billboard.Visible = true;
@@ -761,7 +761,7 @@ namespace Klime.CTF
             score_message.InitialColor = Color.White;
             score_message.Message = score_sb;
             score_message.Visible = true;
-            score_message.Origin = new Vector2D(-0.055, 0.8);
+            score_message.Origin = new Vector2D(0.330, 0.97);
             score_message.Options |= HudAPIv2.Options.HideHud;
             score_message.Blend = BlendTypeEnum.PostPP;
             score_message.Scale = 1.5f;
@@ -821,6 +821,23 @@ namespace Klime.CTF
 
         float damageReductionCounter = 0.0f;
         bool disableGripRegen = false;  // Declare this member variable
+
+        private string GenerateGripBar(float gripStrength, bool isActiveFlag)
+        {
+            int totalBars = 10;
+            int filledBars = (int)Math.Round(gripStrength / 10f); // Assuming gripStrength is out of 100
+            string gripBar = new string('|', filledBars).PadRight(totalBars, ' ');
+
+            // If the flag is active, add a right arrow on the right side of the grip bar
+            if (isActiveFlag)
+            {
+                gripBar += " <<";
+            }
+
+            return gripBar;
+        }
+
+
 
 
         public override void UpdateAfterSimulation()
@@ -1366,27 +1383,33 @@ namespace Klime.CTF
                     }
 
 
-                    //add a copy of score_message but use gripstrength message
                     if (grip_strength_message != null && gamestate != null)
                     {
-                        var red_Grip_Strength = MathHelper.RoundToInt(allflags[0].grip_strength);
-                        var blue_Grip_Strength = MathHelper.RoundToInt(allflags[1].grip_strength);
+                        var redFlag = allflags[0];
+                        var blueFlag = allflags[1];
 
-                        grip_strength_sb.Clear();
-                        if (allflags.Count == 1)
-                        {
-                            if (faction1global == null || faction2global == null)
-                            {
-                                faction1global = MyAPIGateway.Session.Factions.TryGetFactionByTag(gamestate.ordered_faction_tags[0]);
-                                faction2global = MyAPIGateway.Session.Factions.TryGetFactionByTag(gamestate.ordered_faction_tags[1]);
-                            }
-                            grip_strength_sb.Append("<color=red>" + red_Grip_Strength + "  " + "<color=0,50,255,255>" + blue_Grip_Strength + "\n");
-                        }
-                        else if (allflags.Count == 2)
-                        {
-                            grip_strength_sb.Append("<color=red>" + red_Grip_Strength + "  " + "<color=0,50,255,255>" + blue_Grip_Strength + "\n");
-                        }
+                        var redGripStrength = redFlag.grip_strength;
+                        var blueGripStrength = blueFlag.grip_strength;
+
+                        var redGripBar = GenerateGripBar(redGripStrength, redFlag.state == FlagState.Active);
+                        var blueGripBar = GenerateGripBar(blueGripStrength, blueFlag.state == FlagState.Active);
+
+                        StringBuilder redGripSb = new StringBuilder();
+                        redGripSb.Append(redGripBar);
+                        var redGripMessage = new HudAPIv2.HUDMessage(redGripSb, new Vector2D(0.35, 0.85), TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
+                        redGripMessage.InitialColor = Color.Red;
+
+                        StringBuilder blueGripSb = new StringBuilder();
+                        blueGripSb.Append(blueGripBar);
+                        var blueGripMessage = new HudAPIv2.HUDMessage(blueGripSb, new Vector2D(0.35, 0.80), TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
+                        blueGripMessage.InitialColor = Color.Blue;
                     }
+
+
+
+
+
+
 
 
                     if (score_message != null && gamestate != null)
