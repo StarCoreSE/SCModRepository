@@ -828,10 +828,10 @@ namespace Klime.CTF
             int filledBars = (int)Math.Round(gripStrength / 10f); // Assuming gripStrength is out of 100
             string gripBar = new string('|', filledBars).PadRight(totalBars, ' ');
 
-            // If the flag is active, add a right arrow on the right side of the grip bar
+            // If the flag is active, add brackets around the grip bar
             if (isActiveFlag)
             {
-                gripBar += " <<";
+                gripBar = "[" + gripBar + "]";
             }
 
             return gripBar;
@@ -1394,16 +1394,22 @@ namespace Klime.CTF
                         var redGripBar = GenerateGripBar(redGripStrength, redFlag.state == FlagState.Active);
                         var blueGripBar = GenerateGripBar(blueGripStrength, blueFlag.state == FlagState.Active);
 
+                        // You will need to adjust these coordinates based on where the "RED" and "BLU" text are.
+                        // For example, if "RED" is centered at X = 0.30, you might use X = 0.28 for the grip bar.
+                        Vector2D redPosition = new Vector2D(0.30, 0.85); // Position directly below the "RED" text
+                        Vector2D bluePosition = new Vector2D(0.40, 0.85); // Position directly below the "BLU" text
+
                         StringBuilder redGripSb = new StringBuilder();
                         redGripSb.Append(redGripBar);
-                        var redGripMessage = new HudAPIv2.HUDMessage(redGripSb, new Vector2D(0.35, 0.85), TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
+                        var redGripMessage = new HudAPIv2.HUDMessage(redGripSb, redPosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
                         redGripMessage.InitialColor = Color.Red;
 
                         StringBuilder blueGripSb = new StringBuilder();
                         blueGripSb.Append(blueGripBar);
-                        var blueGripMessage = new HudAPIv2.HUDMessage(blueGripSb, new Vector2D(0.35, 0.80), TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
+                        var blueGripMessage = new HudAPIv2.HUDMessage(blueGripSb, bluePosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
                         blueGripMessage.InitialColor = Color.Blue;
                     }
+
 
 
 
