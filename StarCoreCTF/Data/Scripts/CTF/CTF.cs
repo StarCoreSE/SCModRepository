@@ -1171,7 +1171,7 @@ namespace Klime.CTF
                                     //    if (!MySessionComponentSafeZones.IsActionAllowed(subflag.flag_entity.WorldMatrix.Translation, CastProhibit(MySessionComponentSafeZones.AllowedActions, 1)))
                                     //    {
                                     //        subflag.state = FlagState.Home;
-                                    //        ShowANotificationPleaseFuck("flag home 3");
+                                    //        ShowANotificationPlease("flag home 3");
                                     //        if (subflag.flag_type == FlagType.Single)
                                     //        {
                                     //            SendEvent(subflag.carrying_player.DisplayName + " dropped the flag from entering a safezone!", InfoType.FlagDropped);
