@@ -935,6 +935,7 @@ namespace Klime.CTF
                                 if (subflag.state == FlagState.Active)
                                 {
 
+                                    //put any more IsActive logic here, if you put it last it wont get detected. this took forever to figure out.
 
                                     if (!allplayerdict.ContainsKey(subflag.carrying_player_id))
                                     {
@@ -946,6 +947,10 @@ namespace Klime.CTF
 
                                         // Additional logic for dropping the flag, like sending notifications
                                         SendEvent("Flag dropped due to player disconnect!", InfoType.FlagDropped);
+
+                                        //start the flag drop cooldown
+                                        playerDropTimes[subflag.carrying_player.IdentityId] = timer;
+
                                     }
 
 
