@@ -150,7 +150,7 @@ namespace Klime.CTF
         [ProtoContract]
         public class Flag
         {
-           
+
             public MyEntity flag_entity;
             public IMyPlayer carrying_player;
             public IMyFaction owning_faction;
@@ -226,7 +226,7 @@ namespace Klime.CTF
             }
 
             //Double
-            public Flag(long entity_id, FlagState state, SerializableMatrix home_matrix, long owning_faction_id, 
+            public Flag(long entity_id, FlagState state, SerializableMatrix home_matrix, long owning_faction_id,
                 Color flag_color, FlagType flag_type, float grip_strength, float regen_modifier, float lastTickAcceleration)
             {
                 this.entity_id = entity_id;
@@ -260,20 +260,20 @@ namespace Klime.CTF
                     if (player.Character != null && !player.Character.IsDead)
                     {
                         double distance = Vector3D.Distance(player.Character.WorldMatrix.Translation, flag_entity.WorldMatrix.Translation);
-                        
+
                         if (cockpit_allowed && distance <= flagPickupRadius && player.Controller?.ControlledEntity?.Entity is IMyCockpit)              //distance <= [number] is the pickup radius
                         {
                             return_list.Add(player);
                         }
 
                         //disabled pickup from suit
-                      // else
-                      // {
-                      //     if (player.Controller?.ControlledEntity?.Entity is IMyCharacter && distance <= 40)
-                      //     {
-                      //         return_list.Add(player);
-                      //     }
-                      // }
+                        // else
+                        // {
+                        //     if (player.Controller?.ControlledEntity?.Entity is IMyCharacter && distance <= 40)
+                        //     {
+                        //         return_list.Add(player);
+                        //     }
+                        // }
                     }
                 }
                 return return_list;
@@ -534,10 +534,13 @@ namespace Klime.CTF
             if (!MyAPIGateway.Session.IsServer)
             {
                 packet = MyAPIGateway.Utilities.SerializeFromBinary<PacketBase>(obj);
+
                 if (packet != null)
                 {
+                    //MyLog.Default.WriteLine($"[CTF] Received Packet: {packet.packet_op}");
                     if (packet.packet_op == PacketOp.UpdateFlags)
                     {
+                        //LogPacketDetails("UpdateFlags", packet.all_flags_packet.Count);  // Log additional details
                         if (allflags.Count == 0)
                         {
                             foreach (var subflag in packet.all_flags_packet)
@@ -559,11 +562,19 @@ namespace Klime.CTF
                     if (packet.packet_op == PacketOp.UpdateGameState)
                     {
                         gamestate = packet.gamestate_packet;
+                        //LogPacketDetails("UpdateGameState", gamestate.ToString());  // Log additional details
                     }
 
                 }
             }
         }
+
+        private void LogPacketDetails(string operation, object details)
+        {
+            // Customize this method based on what details you want to log
+            MyLog.Default.WriteLine($"[CTF] Operation: {operation}, Details: {details}");
+        }
+
         private void AddBillboard(Color color, Vector3D pos, Vector3D left, Vector3D up, float scale, BlendTypeEnum blendType)
         {
             MyTransparentGeometry.AddBillboardOriented(laser, color.ToVector4(), pos, left, up, scale, blendType);
@@ -901,7 +912,7 @@ namespace Klime.CTF
                                             if (faction_tag != "")
                                             {
                                                 subflag.state = FlagState.Active;
-                                                ShowANotificationPleaseFuck("flag set to active 1");
+                                                ShowANotificationPlease("flag set to active 1");
                                                 subflag.carrying_player_id = player.IdentityId;
                                                 subflag.carrying_player = player;
                                                 SendEvent(player.DisplayName + " grabbed the flag!", InfoType.FlagTaken);
@@ -912,7 +923,7 @@ namespace Klime.CTF
                                             if (faction_tag != "" && faction_tag != subflag.owning_faction.Tag)
                                             {
                                                 subflag.state = FlagState.Active;
-                                                ShowANotificationPleaseFuck("flag set to active 2");
+                                                ShowANotificationPlease("flag set to active 2");
                                                 subflag.carrying_player_id = player.IdentityId;
                                                 subflag.carrying_player = player;
                                                 SendEvent(player.DisplayName + " stole " + subflag.owning_faction.Tag + " flag!", InfoType.FlagTaken);
@@ -927,7 +938,7 @@ namespace Klime.CTF
                                     if (pickup_in_cockpit && !(controlledEntity is IMyCockpit))
                                     {
                                         subflag.state = FlagState.Dropped;
-                                        ShowANotificationPleaseFuck("flag state set to dropped 1");
+                                        ShowANotificationPlease("flag state set to dropped 1");
                                         SendEvent(subflag.carrying_player.DisplayName + " dropped the flag due to leaving cockpit!", InfoType.FlagDropped);
                                         playerDropTimes[subflag.carrying_player.IdentityId] = timer;
 
@@ -967,15 +978,16 @@ namespace Klime.CTF
 
                                         // Adjust grip strength regeneration based on acceleration
                                         float deltaV = totalAcceleration; //- subflag.lastTickAcceleration;
-                                      //  subflag.lastTickAcceleration = totalAcceleration;
+                                                                          //  subflag.lastTickAcceleration = totalAcceleration;
 
                                         float regenModifier = 0.2f - (deltaV / 100f); // 0.2 is the base regen rate, and we subtract a value based on acceleration
 
                                         if (deltaV >= 10 || funpolice >= 200) // If the deltaV is more than 1, adjust the regenModifier
                                         {
                                             subflag.regen_modifier = regenModifier;
-                                           
-                                        } else {subflag.regen_modifier = 0.25f; }
+
+                                        }
+                                        else { subflag.regen_modifier = 0.25f; }
 
 
                                         var grip_temp = subflag.grip_strength;
@@ -998,13 +1010,13 @@ namespace Klime.CTF
 
                                         //    MathHelper.Smooth(regen_temp, subflag.grip_strength);
 
-                                        if (subflag.grip_strength > 100) subflag.grip_strength = 100; 
-                                            // Cap grip strength to 100
+                                        if (subflag.grip_strength > 100) subflag.grip_strength = 100;
+                                        // Cap grip strength to 100
                                         if (subflag.grip_strength < 0)
                                         {
                                             subflag.grip_strength = 0; //Cap grip strength to 0
                                             subflag.state = FlagState.Dropped;
-                                            ShowANotificationPleaseFuck("flag dropped 2");
+                                            ShowANotificationPlease("flag dropped 2");
                                             SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag due to acceleration!", InfoType.FlagDropped);
 
                                             playerDropTimes[subflag.carrying_player.IdentityId] = timer;
@@ -1023,7 +1035,7 @@ namespace Klime.CTF
                                             if (controlledEntity is IMyCockpit)
                                             {
                                                 subflag.state = FlagState.Dropped;
-                                                ShowANotificationPleaseFuck("flag dropped 3");
+                                                ShowANotificationPlease("flag dropped 3");
                                                 SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag!", InfoType.FlagDropped);
                                             }
                                         }
@@ -1035,7 +1047,7 @@ namespace Klime.CTF
                                             {
                                                 subflag.carrying_player.Character.Kill();
                                                 subflag.state = FlagState.Dropped;
-                                                ShowANotificationPleaseFuck("flag dropped 4");
+                                                ShowANotificationPlease("flag dropped 4");
                                                 SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag!", InfoType.FlagDropped);
                                             }
                                         }
@@ -1073,7 +1085,7 @@ namespace Klime.CTF
                                                         if (valid_cap)
                                                         {
                                                             subflag.state = FlagState.Home;
-                                                            ShowANotificationPleaseFuck("flag home 1");
+                                                            ShowANotificationPlease("flag home 1");
                                                             gamestate.UpdateScore(faction);
                                                             SendEvent(subflag.carrying_player.DisplayName + " captured the flag!", InfoType.FlagCaptured);
                                                         }
@@ -1108,7 +1120,7 @@ namespace Klime.CTF
                                                     if (valid_cap)
                                                     {
                                                         subflag.state = FlagState.Home;
-                                                        ShowANotificationPleaseFuck("flag home validcap");
+                                                        ShowANotificationPlease("flag home validcap");
                                                         otherflag.state = FlagState.Home;
 
                                                         gamestate.UpdateScore(otherflag.owning_faction.FactionId);
@@ -1121,7 +1133,7 @@ namespace Klime.CTF
                                     else
                                     {
                                         subflag.state = FlagState.Dropped;
-                                        ShowANotificationPleaseFuck("flag dropped 4");
+                                        ShowANotificationPlease("flag dropped 4");
                                         if (subflag.flag_type == FlagType.Single)
                                         {
                                             SendEvent(subflag.carrying_player.DisplayName + " dropped the flag!", InfoType.FlagDropped);
@@ -1150,6 +1162,24 @@ namespace Klime.CTF
                                     //        }
                                     //    }
                                     //}
+
+                                    if (subflag.state == FlagState.Active)
+                                    {
+
+                                        if (!allplayerdict.ContainsKey(subflag.carrying_player_id))
+                                        {
+                                            // Player has disconnected, drop the flag
+                                            subflag.state = FlagState.Dropped;
+                                            subflag.carrying_player_id = -1;
+                                            subflag.carrying_player = null;
+                                            subflag.grip_strength = 100; // Reset grip strength or any other necessary reset logic
+
+                                            // Additional logic for dropping the flag, like sending notifications
+                                            SendEvent("Flag dropped due to player disconnect!", InfoType.FlagDropped);
+                                        }
+
+                                    }
+
                                 }
 
                                 if (subflag.state == FlagState.Dropped)
@@ -1159,7 +1189,7 @@ namespace Klime.CTF
                                     {
                                         subflag.current_drop_life = 0;
                                         subflag.state = FlagState.Home;
-                                        ShowANotificationPleaseFuck("flag home 4");
+                                        ShowANotificationPlease("flag home 4");
                                         if (subflag.flag_type == FlagType.Single)
                                         {
                                             SendEvent("Flag reset", InfoType.FlagReset);
@@ -1174,7 +1204,7 @@ namespace Klime.CTF
                                         if (drop_type == DropType.Instant)
                                         {
                                             subflag.state = FlagState.Home;
-                                            ShowANotificationPleaseFuck("flag home 5");
+                                            ShowANotificationPlease("flag home 5");
                                             if (subflag.flag_type == FlagType.Single)
                                             {
                                                 SendEvent("Flag reset", InfoType.FlagReset);
@@ -1259,7 +1289,7 @@ namespace Klime.CTF
                                             if (faction_tag != "")
                                             {
                                                 subflag.state = FlagState.Active;
-                                                ShowANotificationPleaseFuck("flag active 1");
+                                                ShowANotificationPlease("flag active 1");
                                                 subflag.carrying_player_id = player.IdentityId;
                                                 subflag.carrying_player = player;
                                                 subflag.current_drop_life = 0;
@@ -1271,7 +1301,7 @@ namespace Klime.CTF
                                             if (faction_tag != "" && faction_tag != subflag.owning_faction.Tag)
                                             {
                                                 subflag.state = FlagState.Active;
-                                                ShowANotificationPleaseFuck("flag active 2");
+                                                ShowANotificationPlease("flag active 2");
                                                 subflag.carrying_player_id = player.IdentityId;
                                                 subflag.carrying_player = player;
                                                 subflag.current_drop_life = 0;
@@ -1327,7 +1357,7 @@ namespace Klime.CTF
             timer += 1;
         }
 
-        private void ShowANotificationPleaseFuck(string message)
+        private void ShowANotificationPlease(string message)
         {
             MyAPIGateway.Utilities.ShowNotification(message);
         }
