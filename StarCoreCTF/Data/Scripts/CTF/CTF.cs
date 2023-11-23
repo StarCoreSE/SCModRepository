@@ -934,6 +934,21 @@ namespace Klime.CTF
 
                                 if (subflag.state == FlagState.Active)
                                 {
+
+
+                                    if (!allplayerdict.ContainsKey(subflag.carrying_player_id))
+                                    {
+                                        // Player has disconnected, drop the flag
+                                        subflag.state = FlagState.Dropped;
+                                        subflag.carrying_player_id = -1;
+                                        subflag.carrying_player = null;
+                                        subflag.grip_strength = 100; // Reset grip strength or any other necessary reset logic
+
+                                        // Additional logic for dropping the flag, like sending notifications
+                                        SendEvent("Flag dropped due to player disconnect!", InfoType.FlagDropped);
+                                    }
+
+
                                     IMyEntity controlledEntity = subflag.carrying_player.Controller != null ? subflag.carrying_player.Controller.ControlledEntity.Entity : null;
                                     if (pickup_in_cockpit && !(controlledEntity is IMyCockpit))
                                     {
@@ -1163,22 +1178,7 @@ namespace Klime.CTF
                                     //    }
                                     //}
 
-                                    if (subflag.state == FlagState.Active)
-                                    {
 
-                                        if (!allplayerdict.ContainsKey(subflag.carrying_player_id))
-                                        {
-                                            // Player has disconnected, drop the flag
-                                            subflag.state = FlagState.Dropped;
-                                            subflag.carrying_player_id = -1;
-                                            subflag.carrying_player = null;
-                                            subflag.grip_strength = 100; // Reset grip strength or any other necessary reset logic
-
-                                            // Additional logic for dropping the flag, like sending notifications
-                                            SendEvent("Flag dropped due to player disconnect!", InfoType.FlagDropped);
-                                        }
-
-                                    }
 
                                 }
 
