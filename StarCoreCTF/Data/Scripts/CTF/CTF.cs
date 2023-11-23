@@ -150,7 +150,7 @@ namespace Klime.CTF
         [ProtoContract]
         public class Flag
         {
-           
+
             public MyEntity flag_entity;
             public IMyPlayer carrying_player;
             public IMyFaction owning_faction;
@@ -226,7 +226,7 @@ namespace Klime.CTF
             }
 
             //Double
-            public Flag(long entity_id, FlagState state, SerializableMatrix home_matrix, long owning_faction_id, 
+            public Flag(long entity_id, FlagState state, SerializableMatrix home_matrix, long owning_faction_id,
                 Color flag_color, FlagType flag_type, float grip_strength, float regen_modifier, float lastTickAcceleration)
             {
                 this.entity_id = entity_id;
@@ -260,20 +260,20 @@ namespace Klime.CTF
                     if (player.Character != null && !player.Character.IsDead)
                     {
                         double distance = Vector3D.Distance(player.Character.WorldMatrix.Translation, flag_entity.WorldMatrix.Translation);
-                        
+
                         if (cockpit_allowed && distance <= flagPickupRadius && player.Controller?.ControlledEntity?.Entity is IMyCockpit)              //distance <= [number] is the pickup radius
                         {
                             return_list.Add(player);
                         }
 
                         //disabled pickup from suit
-                      // else
-                      // {
-                      //     if (player.Controller?.ControlledEntity?.Entity is IMyCharacter && distance <= 40)
-                      //     {
-                      //         return_list.Add(player);
-                      //     }
-                      // }
+                        // else
+                        // {
+                        //     if (player.Controller?.ControlledEntity?.Entity is IMyCharacter && distance <= 40)
+                        //     {
+                        //         return_list.Add(player);
+                        //     }
+                        // }
                     }
                 }
                 return return_list;
@@ -978,15 +978,16 @@ namespace Klime.CTF
 
                                         // Adjust grip strength regeneration based on acceleration
                                         float deltaV = totalAcceleration; //- subflag.lastTickAcceleration;
-                                      //  subflag.lastTickAcceleration = totalAcceleration;
+                                                                          //  subflag.lastTickAcceleration = totalAcceleration;
 
                                         float regenModifier = 0.2f - (deltaV / 100f); // 0.2 is the base regen rate, and we subtract a value based on acceleration
 
                                         if (deltaV >= 10 || funpolice >= 200) // If the deltaV is more than 1, adjust the regenModifier
                                         {
                                             subflag.regen_modifier = regenModifier;
-                                           
-                                        } else {subflag.regen_modifier = 0.25f; }
+
+                                        }
+                                        else { subflag.regen_modifier = 0.25f; }
 
 
                                         var grip_temp = subflag.grip_strength;
@@ -1009,8 +1010,8 @@ namespace Klime.CTF
 
                                         //    MathHelper.Smooth(regen_temp, subflag.grip_strength);
 
-                                        if (subflag.grip_strength > 100) subflag.grip_strength = 100; 
-                                            // Cap grip strength to 100
+                                        if (subflag.grip_strength > 100) subflag.grip_strength = 100;
+                                        // Cap grip strength to 100
                                         if (subflag.grip_strength < 0)
                                         {
                                             subflag.grip_strength = 0; //Cap grip strength to 0
@@ -1162,26 +1163,23 @@ namespace Klime.CTF
                                     //    }
                                     //}
 
-                                    foreach (var flag in allflags)
+                                    if (subflag.state == FlagState.Active)
                                     {
-                                        if (flag.state == FlagState.Active)
-                                        {
-                                            // Check if the carrying player is still connected
-                                            IMyPlayer carryingPlayer;
-                                            if (!allplayerdict.TryGetValue(flag.carrying_player_id, out carryingPlayer) || carryingPlayer == null)
-                                            {
-                                                // Player has disconnected, drop the flag
-                                                flag.state = FlagState.Dropped;
-                                                flag.carrying_player_id = -1;
-                                                flag.carrying_player = null;
-                                                flag.grip_strength = 100; // Reset grip strength or any other necessary reset logic
 
-                                                // Additional logic for dropping the flag
-                                                // For example, sending a notification
-                                                SendEvent("Flag dropped due to player disconnect!", InfoType.FlagDropped);
-                                            }
+                                        if (!allplayerdict.ContainsKey(subflag.carrying_player_id))
+                                        {
+                                            // Player has disconnected, drop the flag
+                                            subflag.state = FlagState.Dropped;
+                                            subflag.carrying_player_id = -1;
+                                            subflag.carrying_player = null;
+                                            subflag.grip_strength = 100; // Reset grip strength or any other necessary reset logic
+
+                                            // Additional logic for dropping the flag, like sending notifications
+                                            SendEvent("Flag dropped due to player disconnect!", InfoType.FlagDropped);
                                         }
+
                                     }
+
                                 }
 
                                 if (subflag.state == FlagState.Dropped)
