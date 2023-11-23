@@ -534,10 +534,13 @@ namespace Klime.CTF
             if (!MyAPIGateway.Session.IsServer)
             {
                 packet = MyAPIGateway.Utilities.SerializeFromBinary<PacketBase>(obj);
+
                 if (packet != null)
                 {
+                    //MyLog.Default.WriteLine($"[CTF] Received Packet: {packet.packet_op}");
                     if (packet.packet_op == PacketOp.UpdateFlags)
                     {
+                        //LogPacketDetails("UpdateFlags", packet.all_flags_packet.Count);  // Log additional details
                         if (allflags.Count == 0)
                         {
                             foreach (var subflag in packet.all_flags_packet)
@@ -559,11 +562,19 @@ namespace Klime.CTF
                     if (packet.packet_op == PacketOp.UpdateGameState)
                     {
                         gamestate = packet.gamestate_packet;
+                        //LogPacketDetails("UpdateGameState", gamestate.ToString());  // Log additional details
                     }
 
                 }
             }
         }
+
+        private void LogPacketDetails(string operation, object details)
+        {
+            // Customize this method based on what details you want to log
+            MyLog.Default.WriteLine($"[CTF] Operation: {operation}, Details: {details}");
+        }
+
         private void AddBillboard(Color color, Vector3D pos, Vector3D left, Vector3D up, float scale, BlendTypeEnum blendType)
         {
             MyTransparentGeometry.AddBillboardOriented(laser, color.ToVector4(), pos, left, up, scale, blendType);
@@ -1150,6 +1161,27 @@ namespace Klime.CTF
                                     //        }
                                     //    }
                                     //}
+
+                                    foreach (var flag in allflags)
+                                    {
+                                        if (flag.state == FlagState.Active)
+                                        {
+                                            // Check if the carrying player is still connected
+                                            IMyPlayer carryingPlayer;
+                                            if (!allplayerdict.TryGetValue(flag.carrying_player_id, out carryingPlayer) || carryingPlayer == null)
+                                            {
+                                                // Player has disconnected, drop the flag
+                                                flag.state = FlagState.Dropped;
+                                                flag.carrying_player_id = -1;
+                                                flag.carrying_player = null;
+                                                flag.grip_strength = 100; // Reset grip strength or any other necessary reset logic
+
+                                                // Additional logic for dropping the flag
+                                                // For example, sending a notification
+                                                SendEvent("Flag dropped due to player disconnect!", InfoType.FlagDropped);
+                                            }
+                                        }
+                                    }
                                 }
 
                                 if (subflag.state == FlagState.Dropped)
