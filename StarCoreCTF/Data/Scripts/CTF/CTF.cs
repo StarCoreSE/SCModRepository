@@ -934,6 +934,26 @@ namespace Klime.CTF
 
                                 if (subflag.state == FlagState.Active)
                                 {
+
+                                    //put any more IsActive logic here, if you put it last it wont get detected. this took forever to figure out.
+
+                                    if (!allplayerdict.ContainsKey(subflag.carrying_player_id))
+                                    {
+                                        // Player has disconnected, drop the flag
+                                        subflag.state = FlagState.Dropped;
+                                        subflag.carrying_player_id = -1;
+                                        subflag.carrying_player = null;
+                                        subflag.grip_strength = 100; // Reset grip strength or any other necessary reset logic
+
+                                        // Additional logic for dropping the flag, like sending notifications
+                                        SendEvent("Flag dropped due to player disconnect!", InfoType.FlagDropped);
+
+                                        //start the flag drop cooldown
+                                        playerDropTimes[subflag.carrying_player.IdentityId] = timer;
+
+                                    }
+
+
                                     IMyEntity controlledEntity = subflag.carrying_player.Controller != null ? subflag.carrying_player.Controller.ControlledEntity.Entity : null;
                                     if (pickup_in_cockpit && !(controlledEntity is IMyCockpit))
                                     {
@@ -1151,7 +1171,7 @@ namespace Klime.CTF
                                     //    if (!MySessionComponentSafeZones.IsActionAllowed(subflag.flag_entity.WorldMatrix.Translation, CastProhibit(MySessionComponentSafeZones.AllowedActions, 1)))
                                     //    {
                                     //        subflag.state = FlagState.Home;
-                                    //        ShowANotificationPleaseFuck("flag home 3");
+                                    //        ShowANotificationPlease("flag home 3");
                                     //        if (subflag.flag_type == FlagType.Single)
                                     //        {
                                     //            SendEvent(subflag.carrying_player.DisplayName + " dropped the flag from entering a safezone!", InfoType.FlagDropped);
@@ -1163,22 +1183,7 @@ namespace Klime.CTF
                                     //    }
                                     //}
 
-                                    if (subflag.state == FlagState.Active)
-                                    {
 
-                                        if (!allplayerdict.ContainsKey(subflag.carrying_player_id))
-                                        {
-                                            // Player has disconnected, drop the flag
-                                            subflag.state = FlagState.Dropped;
-                                            subflag.carrying_player_id = -1;
-                                            subflag.carrying_player = null;
-                                            subflag.grip_strength = 100; // Reset grip strength or any other necessary reset logic
-
-                                            // Additional logic for dropping the flag, like sending notifications
-                                            SendEvent("Flag dropped due to player disconnect!", InfoType.FlagDropped);
-                                        }
-
-                                    }
 
                                 }
 
