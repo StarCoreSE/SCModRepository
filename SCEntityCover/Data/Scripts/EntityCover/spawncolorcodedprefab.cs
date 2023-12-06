@@ -54,7 +54,7 @@ namespace Klime.spawncolorcodedprefab
             { "EntityCover4RED", "#EntityCover4RED" },
         };
 
-        private int defaultSpawnCount = 1; // Default number of prefabs to spawn
+        private int defaultSpawnCount = 50; // Default number of prefabs to spawn
         private ushort netID = 29399;
 
         public override void BeforeStart()
