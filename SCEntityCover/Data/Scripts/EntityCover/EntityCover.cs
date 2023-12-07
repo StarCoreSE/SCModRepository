@@ -21,7 +21,7 @@ using CollisionLayers = Sandbox.Engine.Physics.MyPhysics.CollisionLayers;
 namespace klime.EntityCover
 {
 
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_BatteryBlock), false, "EntityCover", "EntityCover2", "EntityCoverEveFreighter", "EntityCover3", "EntityCover4", "EntityCover4RED", "EntityCover4BLU", "EntityCoverFractal", "EntityCoverColor", "EntityCoverEVEDepot")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_BatteryBlock), false, "EntityCover", "EntityCover2", "EntityCoverEveFreighter", "EntityCover3", "EntityCover4", "EntityCover4RED", "EntityCover4BLU", "EntityCoverFractal", "EntityCoverColor", "EntityCoverEVEDepot", "EntityCoverSatellite")]
     public class EntityCoverGamelogic : MyGameLogicComponent
     {
         // Core
@@ -41,6 +41,7 @@ namespace klime.EntityCover
             { "EntityCover4", new ModelInfo("REMlikeblocker1kmplate_purple.mwm", new Vector3(500, 500, 50)) },    //don't forget the entitycomponentdescriptor too dumbass
             { "EntityCover4BLU", new ModelInfo("REMlikeblocker1kmplate_blue.mwm", new Vector3(500, 500, 50)) },    //don't forget the entitycomponentdescriptor too dumbass
             { "EntityCover4RED", new ModelInfo("REMlikeblocker1kmplate_red.mwm", new Vector3(500, 500, 50)) },    //don't forget the entitycomponentdescriptor too dumbass
+            { "EntityCoverSatellite", new ModelInfo("essarray.mwm", new Vector3(200, 55, 110)) },    //don't forget the entitycomponentdescriptor too dumbass
             // Add more entries for additional variants...
         };
 
@@ -306,7 +307,7 @@ namespace klime.EntityCover
             MyCubeGrid cGrid = entity as MyCubeGrid;
             if (cGrid == null || cGrid.Physics == null)
             {
-                MyAPIGateway.Utilities.ShowNotification("HitCallback: Entity is not a cube grid or has no physics", 5000, MyFontEnum.Red);
+                //MyAPIGateway.Utilities.ShowNotification("HitCallback: Entity is not a cube grid or has no physics", 5000, MyFontEnum.Red);
                 return;
             }
 
@@ -318,7 +319,7 @@ namespace klime.EntityCover
                 BlockerEnt closestBlocker = GetClosestBlocker(cGrid.PositionComp.GetPosition());
                 if (closestBlocker == null)
                 {
-                    MyAPIGateway.Utilities.ShowNotification("HitCallback: No closest blocker found", 5000, MyFontEnum.Red);
+                    //MyAPIGateway.Utilities.ShowNotification("HitCallback: No closest blocker found", 5000, MyFontEnum.Red);
                     return;
                 }
 
@@ -331,7 +332,7 @@ namespace klime.EntityCover
                 cGrid.Physics.LinearVelocityUnsafe = impulse;
                 cGrid.Physics.AddForce(MyPhysicsForceType.APPLY_WORLD_IMPULSE_AND_WORLD_ANGULAR_IMPULSE, impulse, cGrid.WorldMatrix.Translation, null);
 
-                MyAPIGateway.Utilities.ShowNotification($"HitCallback: Applying force to {cGrid.DisplayName}", 5000, MyFontEnum.Green);
+                //MyAPIGateway.Utilities.ShowNotification($"HitCallback: Applying force to {cGrid.DisplayName}", 5000, MyFontEnum.Green);
             }
         }
 
