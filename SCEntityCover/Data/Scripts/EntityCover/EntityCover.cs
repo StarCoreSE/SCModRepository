@@ -307,7 +307,7 @@ namespace klime.EntityCover
             MyCubeGrid cGrid = entity as MyCubeGrid;
             if (cGrid == null || cGrid.Physics == null)
             {
-                MyAPIGateway.Utilities.ShowNotification("HitCallback: Entity is not a cube grid or has no physics", 5000, MyFontEnum.Red);
+                //MyAPIGateway.Utilities.ShowNotification("HitCallback: Entity is not a cube grid or has no physics", 5000, MyFontEnum.Red);
                 return;
             }
 
@@ -319,7 +319,7 @@ namespace klime.EntityCover
                 BlockerEnt closestBlocker = GetClosestBlocker(cGrid.PositionComp.GetPosition());
                 if (closestBlocker == null)
                 {
-                    MyAPIGateway.Utilities.ShowNotification("HitCallback: No closest blocker found", 5000, MyFontEnum.Red);
+                    //MyAPIGateway.Utilities.ShowNotification("HitCallback: No closest blocker found", 5000, MyFontEnum.Red);
                     return;
                 }
 
@@ -332,7 +332,7 @@ namespace klime.EntityCover
                 cGrid.Physics.LinearVelocityUnsafe = impulse;
                 cGrid.Physics.AddForce(MyPhysicsForceType.APPLY_WORLD_IMPULSE_AND_WORLD_ANGULAR_IMPULSE, impulse, cGrid.WorldMatrix.Translation, null);
 
-                MyAPIGateway.Utilities.ShowNotification($"HitCallback: Applying force to {cGrid.DisplayName}", 5000, MyFontEnum.Green);
+                //MyAPIGateway.Utilities.ShowNotification($"HitCallback: Applying force to {cGrid.DisplayName}", 5000, MyFontEnum.Green);
             }
         }
 
