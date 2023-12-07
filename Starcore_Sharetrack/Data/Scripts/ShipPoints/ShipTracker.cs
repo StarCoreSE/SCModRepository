@@ -49,7 +49,7 @@ namespace klime.PointCheck
         [ProtoMember(8)] public float Mass;
         [ProtoMember(9)] public float Heavyblocks;
         [ProtoMember(10)] public int BlockCount;
-        [ProtoMember(11)] public float TotalShieldStrength;
+        [ProtoMember(11)] public float ShieldStrength;
         [ProtoMember(12)] public float CurrentShieldStrength;
         [ProtoMember(13)] public int PCU;
         //[ProtoMember(14)] public float DPS;
@@ -105,7 +105,6 @@ namespace klime.PointCheck
 
         public void Update()
         {
-            int currentHash = CalculateHash(connectedGrids, tmpBlocks);
 
             for (int j = 0; j < tmpBlocks.Count; j++)
             {
@@ -127,343 +126,7 @@ namespace klime.PointCheck
                     int bonusBpts = 0, pdBpts = 0; // Initial value for point defense battlepoints
                     string controller = null;
 
-                    for (int i = 0; i < connectedGrids.Count; i++)
-                    {
-                        IMyCubeGrid grid = connectedGrids[i];
-                        if (grid != null && grid.Physics != null)
-                        {
-                            MyCubeGrid subgrid = grid as MyCubeGrid;
-                            BlockCount += subgrid.BlocksCount;
-                            PCU += subgrid.BlocksPCU;
-                            tmpBlocks.Clear();
-                            grid.GetBlocks(tmpBlocks);
-
-                            foreach (var block in tmpBlocks)
-                            {
-                                string subtype = block.BlockDefinition?.Id.SubtypeName;
-                                string id = "";
-
-                                if (block.FatBlock is IMyOxygenGenerator)
-                                {
-                                    id = "H2O2Generator";
-                                }
-                                else if (block.FatBlock is IMyGasTank)
-                                {
-                                    id = "HydrogenTank";
-                                }
-                                else if (block.FatBlock is IMyMotorStator && subtype == "SubgridBase")
-                                {
-                                    id = "Invincible Subgrid";
-                                }
-                                else if (block.FatBlock is IMyUpgradeModule)
-                                {
-                                    switch (subtype)
-                                    {
-                                        case "LargeEnhancer":
-                                            id = "Shield Enhancer";
-                                            break;
-                                        case "EmitterL":
-                                        case "EmitterLA":
-                                            id = "Shield Emitter";
-                                            break;
-                                        case "LargeShieldModulator":
-                                            id = "Shield Modulator";
-                                            break;
-                                        case "DSControlLarge":
-                                        case "DSControlTable":
-                                            id = "Shield Controller";
-                                            break;
-                                        case "AQD_LG_GyroBooster":
-                                            id = "Gyro Booster";
-                                            break;
-                                        case "AQD_LG_GyroUpgrade":
-                                            id = "Large Gyro Booster";
-                                            break;
-                                    }
-                                }
-                                else if (block.FatBlock is IMyReactor)
-                                {
-                                    switch (subtype)
-                                    {
-                                        case "LargeBlockLargeGenerator":
-                                        case "LargeBlockLargeGeneratorWarfare2":
-                                            id = "Large Reactor";
-                                            break;
-                                        case "LargeBlockSmallGenerator":
-                                        case "LargeBlockSmallGeneratorWarfare2":
-                                            id = "Small Reactor";
-                                            break;
-                                    }
-                                }
-                                else if (block.FatBlock is IMyGyro)
-                                {
-                                    switch (subtype)
-                                    {
-                                        case "LargeBlockGyro":
-                                            id = "Small Gyro";
-                                            break;
-                                        case "AQD_LG_LargeGyro":
-                                            id = "Large Gyro";
-                                            break;
-                                    }
-                                }
-                                else if (block.FatBlock is IMyCameraBlock)
-                                {
-                                    switch (subtype)
-                                    {
-                                        case "MA_Buster_Camera":
-                                            id = "Buster Camera";
-                                            break;
-                                        case "LargeCameraBlock":
-                                            id = "Camera";
-                                            break;
-                                    }
-                                }
-
-                                if (!string.IsNullOrEmpty(id))
-                                {
-                                    if (SBL.ContainsKey(id))
-                                    {
-                                        SBL[id] += 1;
-                                    }
-                                    else
-                                    {
-                                        SBL.Add(id, 1);
-                                    }
-                                }
-
-                                if (block.BlockDefinition != null && !string.IsNullOrEmpty(subtype))
-                                {
-                                    if (subtype.Contains("Heavy") && subtype.Contains("Armor"))
-                                    {
-                                        Heavyblocks++;
-                                    }
-
-                                    if (block.FatBlock != null && !(block.FatBlock is IMyMotorRotor) && !(block.FatBlock is IMyMotorStator) && !(subtype == "SC_SRB"))
-                                    {
-                                        CurrentIntegrity += block.Integrity;
-                                    }
-                                }
-
-                                if (block.FatBlock is IMyThrust || block.FatBlock is IMyGyro)
-                                {
-                                    movementBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
-                                }
-                                else if (block.FatBlock is IMyReactor || block.FatBlock is IMyBatteryBlock)
-                                {
-                                    powerBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
-                                }
-                                else
-                                {
-                                    offensiveBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
-                                }
-                            }
-
-                            VRage.Collections.ListReader<MyCubeBlock> blocklist = subgrid.GetFatBlocks();
-                            for (int i1 = 0; i1 < blocklist.Count; i1++)
-                            {
-                                MyCubeBlock block = blocklist[i1];
-                                string id = block?.BlockDefinition?.Id.SubtypeId.ToString();
-
-                                if (!string.IsNullOrEmpty(id))
-                                {
-                                    if (PointCheck.PointValues.ContainsKey(id))
-                                    {
-                                        Bpts += PointCheck.PointValues[id];
-                                    }
-                                }
-                                else
-                                {
-                                    if (block is IMyGravityGeneratorBase)
-                                    {
-                                        Bpts += PointCheck.PointValues.GetValueOrDefault("GravityGenerator", 0);
-                                    }
-                                    else if (block is IMySmallGatlingGun)
-                                    {
-                                        Bpts += PointCheck.PointValues.GetValueOrDefault("SmallGatlingGun", 0);
-                                    }
-                                    else if (block is IMyLargeGatlingTurret)
-                                    {
-                                        Bpts += PointCheck.PointValues.GetValueOrDefault("LargeGatlingTurret", 0);
-                                    }
-                                    else if (block is IMySmallMissileLauncher)
-                                    {
-                                        Bpts += PointCheck.PointValues.GetValueOrDefault("SmallMissileLauncher", 0);
-                                    }
-                                    else if (block is IMyLargeMissileTurret)
-                                    {
-                                        Bpts += PointCheck.PointValues.GetValueOrDefault("LargeMissileTurret", 0);
-                                    }
-                                }
-
-                                bool isTerminalBlock = block is IMyTerminalBlock;
-
-                                if ((PointCheck.PointValues.ContainsKey(id) && !isTerminalBlock) || block is IMyGyro || block is IMyReactor || block is IMyBatteryBlock || block is IMyCockpit || block is IMyDecoy || block is IMyShipDrill || block is IMyGravityGeneratorBase || block is IMyShipWelder || block is IMyShipGrinder || block is IMyRadioAntenna || (block is IMyThrust && !(block.BlockDefinition.Id.SubtypeName == "LargeCameraBlock") && !(block.BlockDefinition.Id.SubtypeName == "MA_Buster_Camera") && !(block.BlockDefinition.Id.SubtypeName == "BlinkDriveLarge")))
-                                {
-                                    var typeId = block.BlockDefinition.Id.TypeId.ToString().Replace("MyObjectBuilder_", "");
-
-                                    if (SBL.ContainsKey(typeId))
-                                    {
-                                        SBL[typeId] += 1;
-                                    }
-                                    else if (typeId != "Reactor" && typeId != "Gyro")
-                                    {
-                                        SBL.Add(typeId, 1);
-                                    }
-
-                                    bool hasShield = PointCheck.SH_api.GetShieldBlock(block) != null;
-
-                                    if (block is IMyThrust)
-                                    {
-                                        InstalledThrust += (block as IMyThrust).MaxEffectiveThrust;
-                                        hasThrust = true;
-                                    }
-
-                                    if (block is IMyCockpit && (block as IMyCockpit).CanControlShip)
-                                    {
-                                        hasCockpit = true;
-                                    }
-
-                                    if (block is IMyReactor || block is IMyBatteryBlock)
-                                    {
-                                        hasPower = true;
-                                        CurrentPower += (block as IMyPowerProducer).MaxOutput;
-                                    }
-
-                                    if (block is IMyGyro)
-                                    {
-                                        hasGyro = true;
-                                        CurrentGyro += ((MyDefinitionManager.Static.GetDefinition((block as IMyGyro).BlockDefinition) as MyGyroDefinition).ForceMagnitude * (block as IMyGyro).GyroStrengthMultiplier);
-                                    }
-
-                                    if (block is IMyCockpit)
-                                    {
-                                        var pilot = (block as IMyCockpit).ControllerInfo?.Controller?.ControlledEntity?.Entity;
-
-                                        if (pilot is IMyCockpit)
-                                        {
-                                            controller = (pilot as IMyCockpit).Pilot.DisplayName;
-                                        }
-                                    }
-                                }
-                                else if ((PointCheck.PointValues.ContainsKey(id) && isTerminalBlock) && !(block is IMyGyro) && !(block is IMyReactor) && !(block is IMyBatteryBlock) && !(block is IMyCockpit) && !(block is IMyDecoy) && !(block is IMyShipDrill) && !(block is IMyGravityGeneratorBase) && !(block is IMyShipWelder) && !(block is IMyShipGrinder) && !(block is IMyThrust) && !(block is IMyRadioAntenna) && !(block is IMyUpgradeModule && !(block.BlockDefinition.Id.SubtypeName == "BlinkDriveLarge")))
-                                {
-                                    IMyTerminalBlock tBlock = block as IMyTerminalBlock;
-                                    var t_N = tBlock.DefinitionDisplayNameText;
-                                    var mCs = 0f;
-
-                                    switch (t_N)
-                                    {
-                                        case "Blink Drive Large":
-                                            t_N = "Blink Drive";
-                                            mCs = 0.15f;
-                                            break;
-                                        case "Project Pluto (SLAM)":
-                                        case "SLAM":
-                                            t_N = "SLAM";
-                                            mCs = 0.25f;
-                                            break;
-                                        case "MRM-10 Modular Launcher 45":
-                                        case "MRM-10 Modular Launcher 45 Reversed":
-                                        case "MRM-10 Modular Launcher":
-                                        case "MRM-10 Modular Launcher Middle":
-                                        case "MRM-10 Launcher":
-                                            t_N = "MRM-10 Launcher";
-                                            mCs = 0.04f;
-                                            break;
-                                        case "LRM-5 Modular Launcher 45 Reversed":
-                                        case "LRM-5 Modular Launcher 45":
-                                        case "LRM-5 Modular Launcher Middle":
-                                        case "LRM-5 Modular Launcher":
-                                        case "LRM-5 Launcher":
-                                            t_N = "LRM-5 Launcher";
-                                            mCs = 0.0375f;
-                                            break;
-                                        case "Gimbal Laser T2 Armored":
-                                        case "Gimbal Laser T2 Armored Slope 45":
-                                        case "Gimbal Laser T2 Armored Slope 2":
-                                        case "Gimbal Laser T2 Armored Slope":
-                                        case "Gimbal Laser T2":
-                                            t_N = "Gimbal Laser T2";
-                                            mCs = 0f;
-                                            break;
-                                        case "Gimbal Laser Armored Slope 45":
-                                        case "Gimbal Laser Armored Slope 2":
-                                        case "Gimbal Laser Armored Slope":
-                                        case "Gimbal Laser Armored":
-                                        case "Gimbal Laser":
-                                            t_N = "Gimbal Laser";
-                                            mCs = 0f;
-                                            break;
-                                        case "BR-RT7 Punisher Slanted Burst Cannon":
-                                        case "BR-RT7 Punisher 70mm Burst Cannon":
-                                        case "Punisher":
-                                            t_N = "Punisher";
-                                            mCs = 0f;
-                                            break;
-                                        case "Slinger AC 150mm Sloped 30":
-                                        case "Slinger AC 150mm Sloped 45":
-                                        case "Slinger AC 150mm Gantry Style":
-                                        case "Slinger AC 150mm Sloped 45 Gantry":
-                                        case "Slinger AC 150mm":
-                                        case "Slinger":
-                                            t_N = "Slinger";
-                                            mCs = 0f;
-                                            break;
-                                        // Add more cases as needed
-                                        default:
-                                            break;
-                                    }
-
-                                    if (GunL.ContainsKey(t_N))
-                                    {
-                                        GunL[t_N] += 1;
-                                    }
-                                    else
-                                    {
-                                        GunL.Add(t_N, 1);
-                                    }
-
-                                    if ((mCs > 0) && GunL[t_N] > 1)
-                                    {
-                                        bonusBpts = (int)(PointCheck.PointValues[id] * ((GunL[t_N] - 1) * mCs));
-                                        Bpts += bonusBpts;
-                                    }
-                                }
-
-                                bool hasWeapon;
-                                bool isPointDefense;
-
-                                if (PointCheckHelpers.weaponsDictionary.TryGetValue(block.BlockDefinition.Id.SubtypeName, out hasWeapon) && hasWeapon)
-                                {
-                                    offensiveBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
-                                    offensiveBpts += bonusBpts;
-
-                                    if (PointCheckHelpers.pdDictionary.TryGetValue(block.BlockDefinition.Id.SubtypeName, out isPointDefense) && isPointDefense)
-                                    {
-                                        pdBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
-                                    }
-                                }
-                                else
-                                {
-                                    string blockType = block.BlockDefinition.Id.SubtypeName;
-
-                                    if (block is IMyThrust || block is IMyGyro || blockType == "BlinkDriveLarge" || blockType.Contains("Afterburner"))
-                                    {
-                                        movementBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
-                                    }
-                                    else if (block is IMyReactor || block is IMyBatteryBlock)
-                                    {
-                                        powerBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
-                                    }
-                                    else
-                                    {
-                                        MiscBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    TempBlockCheck(ref hasPower, ref hasCockpit, ref hasThrust, ref hasGyro, ref movementBpts, ref powerBpts, ref offensiveBpts, ref MiscBpts, ref bonusBpts, ref pdBpts, ref controller);
 
                     // pre-calculate totalBpts and totalBptsInv
                     float totalBpts = movementBpts + powerBpts + offensiveBpts + MiscBpts;
@@ -537,7 +200,7 @@ namespace klime.PointCheck
 
                     if (shield_block != null)
                     {
-                        TotalShieldStrength = PointCheck.SH_api.GetMaxHpCap(shield_block);
+                        ShieldStrength = PointCheck.SH_api.GetMaxHpCap(shield_block);
                         CurrentShieldStrength = PointCheck.SH_api.GetShieldPercent(shield_block);
                         ShieldHeat = PointCheck.SH_api.GetShieldHeat(shield_block);
                     }
@@ -550,22 +213,354 @@ namespace klime.PointCheck
             }
 
         }
-        private int CalculateHash(List<IMyCubeGrid> connectedGrids, List<IMySlimBlock> tmpBlocks)
+
+        private void TempBlockCheck(ref bool hasPower, ref bool hasCockpit, ref bool hasThrust, ref bool hasGyro, ref float movementBpts, ref float powerBpts, ref float offensiveBpts, ref float MiscBpts, ref int bonusBpts, ref int pdBpts, ref string controller)
         {
-            // Hashing logic here, could be as simple as summing block counts or more complex.
-            int hash = 0;
             for (int i = 0; i < connectedGrids.Count; i++)
             {
                 IMyCubeGrid grid = connectedGrids[i];
-                hash ^= grid.Physics.Mass.GetHashCode(); // Implement your own custom hashing logic for the grid if necessary
+                if (grid != null && grid.Physics != null)
+                {
+                    MyCubeGrid subgrid = grid as MyCubeGrid;
+                    BlockCount += subgrid.BlocksCount;
+                    PCU += subgrid.BlocksPCU;
+                    tmpBlocks.Clear();
+                    grid.GetBlocks(tmpBlocks);
+
+                    foreach (var block in tmpBlocks)
+                    {
+                        string subtype = block.BlockDefinition?.Id.SubtypeName;
+                        string id = "";
+
+                        if (block.FatBlock is IMyOxygenGenerator)
+                        {
+                            id = "H2O2Generator";
+                        }
+                        else if (block.FatBlock is IMyGasTank)
+                        {
+                            id = "HydrogenTank";
+                        }
+                        else if (block.FatBlock is IMyMotorStator && subtype == "SubgridBase")
+                        {
+                            id = "Invincible Subgrid";
+                        }
+                        else if (block.FatBlock is IMyUpgradeModule)
+                        {
+                            switch (subtype)
+                            {
+                                case "LargeEnhancer":
+                                    id = "Shield Enhancer";
+                                    break;
+                                case "EmitterL":
+                                case "EmitterLA":
+                                    id = "Shield Emitter";
+                                    break;
+                                case "LargeShieldModulator":
+                                    id = "Shield Modulator";
+                                    break;
+                                case "DSControlLarge":
+                                case "DSControlTable":
+                                    id = "Shield Controller";
+                                    break;
+                                case "AQD_LG_GyroBooster":
+                                    id = "Gyro Booster";
+                                    break;
+                                case "AQD_LG_GyroUpgrade":
+                                    id = "Large Gyro Booster";
+                                    break;
+                            }
+                        }
+                        else if (block.FatBlock is IMyReactor)
+                        {
+                            switch (subtype)
+                            {
+                                case "LargeBlockLargeGenerator":
+                                case "LargeBlockLargeGeneratorWarfare2":
+                                    id = "Large Reactor";
+                                    break;
+                                case "LargeBlockSmallGenerator":
+                                case "LargeBlockSmallGeneratorWarfare2":
+                                    id = "Small Reactor";
+                                    break;
+                            }
+                        }
+                        else if (block.FatBlock is IMyGyro)
+                        {
+                            switch (subtype)
+                            {
+                                case "LargeBlockGyro":
+                                    id = "Small Gyro";
+                                    break;
+                                case "AQD_LG_LargeGyro":
+                                    id = "Large Gyro";
+                                    break;
+                            }
+                        }
+                        else if (block.FatBlock is IMyCameraBlock)
+                        {
+                            switch (subtype)
+                            {
+                                case "MA_Buster_Camera":
+                                    id = "Buster Camera";
+                                    break;
+                                case "LargeCameraBlock":
+                                    id = "Camera";
+                                    break;
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(id))
+                        {
+                            if (SBL.ContainsKey(id))
+                            {
+                                SBL[id] += 1;
+                            }
+                            else
+                            {
+                                SBL.Add(id, 1);
+                            }
+                        }
+
+                        if (block.BlockDefinition != null && !string.IsNullOrEmpty(subtype))
+                        {
+                            if (subtype.IndexOf("Heavy", StringComparison.OrdinalIgnoreCase) >= 0 && subtype.IndexOf("Armor", StringComparison.OrdinalIgnoreCase) >= 0)
+                            {
+                                Heavyblocks++;
+                            }
+                            if (block.FatBlock != null && !(block.FatBlock is IMyMotorRotor) && !(block.FatBlock is IMyMotorStator) && subtype != "SC_SRB")
+                            {
+                                CurrentIntegrity += block.Integrity;
+                            }
+                        }
+
+                        if (block.FatBlock is IMyThrust || block.FatBlock is IMyGyro)
+                        {
+                            movementBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
+                        }
+                        else if (block.FatBlock is IMyReactor || block.FatBlock is IMyBatteryBlock)
+                        {
+                            powerBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
+                        }
+                        else
+                        {
+                            offensiveBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
+                        }
+                    }
+                    FatHandling(ref hasPower, ref hasCockpit, ref hasThrust, ref hasGyro, ref movementBpts, ref powerBpts, ref offensiveBpts, ref MiscBpts, ref bonusBpts, ref pdBpts, ref controller, subgrid);
+                }
             }
-            for (int i = 0; i < tmpBlocks.Count; i++)
-            {
-                IMySlimBlock block = tmpBlocks[i];
-                hash ^= block.GetHashCode(); // Implement your own custom hashing logic for the block if necessary
-            }
-            return hash;
         }
+
+        private void FatHandling(ref bool hasPower, ref bool hasCockpit, ref bool hasThrust, ref bool hasGyro, ref float movementBpts, ref float powerBpts, ref float offensiveBpts, ref float MiscBpts, ref int bonusBpts, ref int pdBpts, ref string controller, MyCubeGrid subgrid)
+        {
+            VRage.Collections.ListReader<MyCubeBlock> blocklist = subgrid.GetFatBlocks();
+            for (int i1 = 0; i1 < blocklist.Count; i1++)
+            {
+                MyCubeBlock block = blocklist[i1];
+                string id = block?.BlockDefinition?.Id.SubtypeId.ToString();
+
+                if (!string.IsNullOrEmpty(id))
+                {
+                    if (PointCheck.PointValues.ContainsKey(id))
+                    {
+                        Bpts += PointCheck.PointValues[id];
+                    }
+                }
+                else
+                {
+                    if (block is IMyGravityGeneratorBase)
+                    {
+                        Bpts += PointCheck.PointValues.GetValueOrDefault("GravityGenerator", 0);
+                    }
+                    else if (block is IMySmallGatlingGun)
+                    {
+                        Bpts += PointCheck.PointValues.GetValueOrDefault("SmallGatlingGun", 0);
+                    }
+                    else if (block is IMyLargeGatlingTurret)
+                    {
+                        Bpts += PointCheck.PointValues.GetValueOrDefault("LargeGatlingTurret", 0);
+                    }
+                    else if (block is IMySmallMissileLauncher)
+                    {
+                        Bpts += PointCheck.PointValues.GetValueOrDefault("SmallMissileLauncher", 0);
+                    }
+                    else if (block is IMyLargeMissileTurret)
+                    {
+                        Bpts += PointCheck.PointValues.GetValueOrDefault("LargeMissileTurret", 0);
+                    }
+                }
+
+                bool isTerminalBlock = block is IMyTerminalBlock;
+
+                if ((PointCheck.PointValues.ContainsKey(id) && !isTerminalBlock) || block is IMyGyro || block is IMyReactor || block is IMyBatteryBlock || block is IMyCockpit || block is IMyDecoy || block is IMyShipDrill || block is IMyGravityGeneratorBase || block is IMyShipWelder || block is IMyShipGrinder || block is IMyRadioAntenna || (block is IMyThrust && !(block.BlockDefinition.Id.SubtypeName == "LargeCameraBlock") && !(block.BlockDefinition.Id.SubtypeName == "MA_Buster_Camera") && !(block.BlockDefinition.Id.SubtypeName == "BlinkDriveLarge")))
+                {
+                    var typeId = block.BlockDefinition.Id.TypeId.ToString().Replace("MyObjectBuilder_", "");
+
+                    if (SBL.ContainsKey(typeId))
+                    {
+                        SBL[typeId] += 1;
+                    }
+                    else if (typeId != "Reactor" && typeId != "Gyro")
+                    {
+                        SBL.Add(typeId, 1);
+                    }
+
+                    bool hasShield = PointCheck.SH_api.GetShieldBlock(block) != null;
+
+                    if (block is IMyThrust)
+                    {
+                        InstalledThrust += (block as IMyThrust).MaxEffectiveThrust;
+                        hasThrust = true;
+                    }
+
+                    if (block is IMyCockpit && (block as IMyCockpit).CanControlShip)
+                    {
+                        hasCockpit = true;
+                    }
+
+                    if (block is IMyReactor || block is IMyBatteryBlock)
+                    {
+                        hasPower = true;
+                        CurrentPower += (block as IMyPowerProducer).MaxOutput;
+                    }
+
+                    if (block is IMyGyro)
+                    {
+                        hasGyro = true;
+                        CurrentGyro += ((MyDefinitionManager.Static.GetDefinition((block as IMyGyro).BlockDefinition) as MyGyroDefinition).ForceMagnitude * (block as IMyGyro).GyroStrengthMultiplier);
+                    }
+
+                    if (block is IMyCockpit)
+                    {
+                        var pilot = (block as IMyCockpit).ControllerInfo?.Controller?.ControlledEntity?.Entity;
+
+                        if (pilot is IMyCockpit)
+                        {
+                            controller = (pilot as IMyCockpit).Pilot.DisplayName;
+                        }
+                    }
+                }
+                else if ((PointCheck.PointValues.ContainsKey(id) && isTerminalBlock) && !(block is IMyGyro) && !(block is IMyReactor) && !(block is IMyBatteryBlock) && !(block is IMyCockpit) && !(block is IMyDecoy) && !(block is IMyShipDrill) && !(block is IMyGravityGeneratorBase) && !(block is IMyShipWelder) && !(block is IMyShipGrinder) && !(block is IMyThrust) && !(block is IMyRadioAntenna) && !(block is IMyUpgradeModule && !(block.BlockDefinition.Id.SubtypeName == "BlinkDriveLarge")))
+                {
+                    IMyTerminalBlock tBlock = block as IMyTerminalBlock;
+                    var t_N = tBlock.DefinitionDisplayNameText;
+                    var mCs = 0f;
+
+                    ClimbingCostRename(ref t_N, ref mCs);
+
+                    if (GunL.ContainsKey(t_N))
+                    {
+                        GunL[t_N] += 1;
+                    }
+                    else
+                    {
+                        GunL.Add(t_N, 1);
+                    }
+
+                    if ((mCs > 0) && GunL[t_N] > 1)
+                    {
+                        bonusBpts = (int)(PointCheck.PointValues[id] * ((GunL[t_N] - 1) * mCs));
+                        Bpts += bonusBpts;
+                    }
+                }
+
+                bool hasWeapon;
+                bool isPointDefense;
+                bool isWeapon;
+                if (PointCheckHelpers.weaponsDictionary.TryGetValue(block.BlockDefinition.Id.SubtypeName, out isWeapon) && isWeapon)
+                {
+                    offensiveBpts += PointCheck.PointValues.GetValueOrDefault(id, 0) + bonusBpts;
+
+                    // isPointDefense;
+                    if (PointCheckHelpers.pdDictionary.TryGetValue(block.BlockDefinition.Id.SubtypeName, out isPointDefense) && isPointDefense)
+                    {
+                        pdBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
+                    }
+                }
+                else
+                {
+                    string blockType = block.BlockDefinition.Id.SubtypeName;
+
+                    if (block is IMyThrust || block is IMyGyro || blockType == "BlinkDriveLarge" || blockType.Contains("Afterburner"))
+                    {
+                        movementBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
+                    }
+                    else if (block is IMyReactor || block is IMyBatteryBlock)
+                    {
+                        powerBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
+                    }
+                    else
+                    {
+                        MiscBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
+                    }
+                }
+            }
+        }
+
+        private static void ClimbingCostRename(ref string t_N, ref float mCs)
+        {
+            switch (t_N)
+            {
+                case "Blink Drive Large":
+                    t_N = "Blink Drive";
+                    mCs = 0.15f;
+                    break;
+                case "Project Pluto (SLAM)":
+                case "SLAM":
+                    t_N = "SLAM";
+                    mCs = 0.25f;
+                    break;
+                case "MRM-10 Modular Launcher 45":
+                case "MRM-10 Modular Launcher 45 Reversed":
+                case "MRM-10 Modular Launcher":
+                case "MRM-10 Modular Launcher Middle":
+                case "MRM-10 Launcher":
+                    t_N = "MRM-10 Launcher";
+                    mCs = 0.04f;
+                    break;
+                case "LRM-5 Modular Launcher 45 Reversed":
+                case "LRM-5 Modular Launcher 45":
+                case "LRM-5 Modular Launcher Middle":
+                case "LRM-5 Modular Launcher":
+                case "LRM-5 Launcher":
+                    t_N = "LRM-5 Launcher";
+                    mCs = 0.0375f;
+                    break;
+                case "Gimbal Laser T2 Armored":
+                case "Gimbal Laser T2 Armored Slope 45":
+                case "Gimbal Laser T2 Armored Slope 2":
+                case "Gimbal Laser T2 Armored Slope":
+                case "Gimbal Laser T2":
+                    t_N = "Gimbal Laser T2";
+                    mCs = 0f;
+                    break;
+                case "Gimbal Laser Armored Slope 45":
+                case "Gimbal Laser Armored Slope 2":
+                case "Gimbal Laser Armored Slope":
+                case "Gimbal Laser Armored":
+                case "Gimbal Laser":
+                    t_N = "Gimbal Laser";
+                    mCs = 0f;
+                    break;
+                case "BR-RT7 Punisher Slanted Burst Cannon":
+                case "BR-RT7 Punisher 70mm Burst Cannon":
+                case "Punisher":
+                    t_N = "Punisher";
+                    mCs = 0f;
+                    break;
+                case "Slinger AC 150mm Sloped 30":
+                case "Slinger AC 150mm Sloped 45":
+                case "Slinger AC 150mm Gantry Style":
+                case "Slinger AC 150mm Sloped 45 Gantry":
+                case "Slinger AC 150mm":
+                case "Slinger":
+                    t_N = "Slinger";
+                    mCs = 0f;
+                    break;
+            }
+        }
+
+
         private static Vector3 ColorMaskToRGB(Vector3 colorMask)
         {
             return MyColorPickerConstants.HSVOffsetToHSV(colorMask).HSVtoColor();
@@ -680,7 +675,7 @@ namespace klime.PointCheck
             Mass = 0;
             Heavyblocks = 0;
             BlockCount = 0;
-            TotalShieldStrength = 0;
+            ShieldStrength = 0;
             CurrentShieldStrength = 0;
             CurrentIntegrity = 0;
             CurrentPower = 0;

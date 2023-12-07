@@ -748,7 +748,7 @@ namespace klime.PointCheck
             }
             try
             {
-                if (PointCheckHelpers.timer % 60 == 0 && broadcaststat)
+                if (PointCheckHelpers.timer % 60 == 0)
                 {
                     all_players.Clear(); MyAPIGateway.Multiplayer.Players.GetPlayers(listPlayers, delegate (IMyPlayer p) { all_players.Add(p.IdentityId, p); return false; }
                 );
@@ -943,488 +943,11 @@ namespace klime.PointCheck
                     problemmessage.Message.Clear(); problemmessage.Visible = false;
                 }
 
-                if (vState == ViewState.InView && statMessage != null && text_api.Heartbeat) //shift T menu
-                {
-                    var cockpit = MyAPIGateway.Session.ControlledObject?.Entity as IMyCockpit;
-                    if (cockpit == null || MyAPIGateway.Session.IsCameraUserControlledSpectator)
-                    {
-                        //user is not in cockpit
-                        //MyAPIGateway.Utilities.ShowNotification("NOTCOCKPIT");
-                        var camMat = MyAPIGateway.Session.Camera.WorldMatrix; IHitInfo hits = null;
-                        MyAPIGateway.Physics.CastRay(camMat.Translation + camMat.Forward * 0.5, camMat.Translation + camMat.Forward * 500, out hits);
-                        if (hits != null && hits.HitEntity is IMyCubeGrid)
-                        {
-                            IMyCubeGrid icubeG = hits.HitEntity as IMyCubeGrid;
-                            if (icubeG != null && icubeG.Physics != null)
-                            {
-                                if (PointCheckHelpers.timer % 60 == 0)
-                                {
-                                    ShipTracker tracked = new ShipTracker(icubeG);
-                                    string pdInvestment = tracked.pdPercentage.ToString();
-                                    string pdInvestmentNum = tracked.pdInvest.ToString();
-                                    string totalShieldString = "None";
+                ShiftTHandling();
 
-                                    if (tracked.TotalShieldStrength > 100)
-                                    {
-                                        totalShieldString = Math.Round((tracked.TotalShieldStrength / 100f), 2).ToString() + " M";
-                                    }
-                                    else if (tracked.TotalShieldStrength > 1 && tracked.TotalShieldStrength < 100)
-                                    {
-                                        totalShieldString = Math.Round((tracked.TotalShieldStrength), 0).ToString() + "0 K";
-                                    }
+                BattleShiftTHandling();
 
-                                    string gunText = "";
-                                    foreach (var x in tracked.GunL.Keys)
-                                    {
-                                        gunText += $"<color=Green>{tracked.GunL[x]}<color=White> x {x}\n";
-                                    }
-
-                                    string specialBlockText = "";
-                                    foreach (var x in tracked.SBL.Keys)
-                                    {
-                                        specialBlockText += $"<color=Green>{tracked.SBL[x]}<color=White> x {x}\n";
-                                    }
-
-                                    string massString = tracked.Mass.ToString();
-                                    float thrustInKilograms = icubeG.GetMaxThrustInDirection(Base6Directions.Direction.Backward) / 9.81f;
-                                    float weight = tracked.Mass;
-                                    float mass = tracked.Mass;
-                                    float TWR = thrustInKilograms / weight;
-
-                                    if (tracked.Mass > 1000000)
-                                    {
-                                        massString = Math.Round((tracked.Mass / 1000000f), 2).ToString() + "m";
-                                        mass = tracked.Mass / 1000f;
-                                    }
-
-                                    string TWRs = Math.Round((TWR), 3).ToString();
-                                    string thrustString = tracked.InstalledThrust.ToString();
-
-                                    if (tracked.InstalledThrust > 1000000)
-                                    {
-                                        thrustString = Math.Round((tracked.InstalledThrust / 1000000f), 2).ToString() + "M";
-                                    }
-
-                                    string playerName = tracked.Owner == null ? tracked.GridName : tracked.Owner.DisplayName;
-                                    string factionName = tracked.Owner == null ? "" : MyAPIGateway.Session?.Factions?.TryGetPlayerFaction(tracked.OwnerID)?.Name;
-                                    float speed = icubeG.GridSizeEnum == MyCubeSize.Large ? MyDefinitionManager.Static.EnvironmentDefinition.LargeShipMaxSpeed : MyDefinitionManager.Static.EnvironmentDefinition.SmallShipMaxSpeed;
-
-                                    if (RTS_api != null && RTS_api.IsReady)
-                                    {
-                                        speed = (float)Math.Round(RTS_api.GetMaxSpeed(icubeG), 2);
-                                    }
-
-                                    string PWRNotation;
-                                    PWRNotation = tracked.CurrentPower > 1000 ? "GW" : "MW";
-                                    string tempPWR;
-
-                                    if (tracked.CurrentPower > 1000)
-                                    {
-                                        tempPWR = (Math.Round(tracked.CurrentPower / 1000, 1)).ToString();
-                                    }
-                                    else
-                                    {
-                                        tempPWR = tracked.CurrentPower.ToString();
-                                    }
-
-                                    string PWR = tempPWR + PWRNotation;
-                                    string GyroString = tracked.CurrentGyro.ToString();
-                                    double tempGyro2;
-
-                                    if (tracked.CurrentGyro >= 1000000)
-                                    {
-                                        tempGyro2 = Math.Round((tracked.CurrentGyro / 1000000f), 1);
-
-                                        if (tempGyro2 > 1000)
-                                        {
-                                            GyroString = Math.Round((tempGyro2 / 1000), 1).ToString() + "G";
-                                        }
-                                        else
-                                        {
-                                            GyroString = tempGyro2.ToString() + "M";
-                                        }
-                                    }
-
-                                    var basicInfo = $"----Basic Info----\n" +
-                                        $"<color=Green>Name<color=White>: {icubeG.DisplayName}\n" +
-                                        $"<color=Green>Owner<color=White>: {playerName}\n" +
-                                        $"<color=Green>Faction<color=White>: {factionName}\n" +
-                                        $"<color=Green>Mass<color=White>: {massString} kg\n" +
-                                        $"<color=Green>Heavy blocks<color=White>: {tracked.Heavyblocks}\n" +
-                                        $"<color=Green>Total blocks<color=White>: {tracked.BlockCount}\n" +
-                                        $"<color=Green>PCU<color=White>: {tracked.PCU}\n" +
-                                        $"<color=Green>Size<color=White>: {(icubeG.Max + Vector3.Abs(icubeG.Min)).ToString()}\n" +
-                                        $"<color=Green>Max Speed<color=White>: {speed} | <color=Green>TWR<color=White>: {TWRs}\n\n";
-
-                                    var battleStats = $"<color=Orange>----Battle Stats----<color=White>\n" +
-                                        $"<color=Green>Battle Points<color=White>: {tracked.Bpts} " +
-                                        $"<color=Orange>[<color=Red> {tracked.offensivePercentage}% " +
-                                        $"<color=White>| <color=Green>{tracked.powerPercentage}% " +
-                                        $"<color=White>| <color=DeepSkyBlue>{tracked.movementPercentage}% " +
-                                        $"<color=White>| <color=LightGray>{tracked.miscPercentage}% <color=Orange>]\n" +
-                                        $"<color=Green>PD Investment<color=White>: <color=Orange>( <color=white>{pdInvestmentNum} " +
-                                        $"<color=Orange>|<color=Crimson> {pdInvestment}<color=White>%<color=Orange> )\n" +
-                                        $"<color=Green>Shield Max HP<color=White>: {totalShieldString} ({(int)tracked.CurrentShieldStrength}%)\n" +
-                                        $"<color=Green>Thrust<color=White>: {thrustString}N\n" +
-                                        $"<color=Green>Gyro<color=White>: {GyroString}N\n" +
-                                        $"<color=Green>Power<color=White>: {PWR}\n\n";
-
-                                    var blocksInfo = $"<color=Orange>----Blocks----<color=White>\n{specialBlockText}\n\n";
-                                    var armamentInfo = $"<color=Orange>----Armament----<color=White>\n{gunText}";
-
-                                    var tempText = basicInfo + battleStats + blocksInfo + armamentInfo;
-
-
-                                    statMessage.Message.Clear();
-                                    statMessage.Message.Append(tempText);
-                                    statMessage.Visible = true;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (statMessage != null && text_api.Heartbeat && statMessage.Visible)
-                            {
-                                statMessage.Message.Clear(); statMessage.Visible = false;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        // user is in cockpit
-
-                        //MyAPIGateway.Utilities.ShowNotification("INCOCKPIT");
-                        IMyCubeGrid icubeG = cockpit.CubeGrid as IMyCubeGrid;
-                        if (icubeG != null && icubeG.Physics != null)
-                        {
-                            if (PointCheckHelpers.timer % 60 == 0)
-                            {
-
-                                ShipTracker tracked = new ShipTracker(icubeG);
-                                string pdInvestment = tracked.pdPercentage.ToString();
-                                string pdInvestmentNum = tracked.pdInvest.ToString();
-
-                                string total_shield_string = "None";
-
-                                if (tracked.TotalShieldStrength > 100)
-                                {
-                                    total_shield_string = (tracked.TotalShieldStrength / 100f).ToString("0.00") + " M";
-                                }
-                                else if (tracked.TotalShieldStrength > 1)
-                                {
-                                    total_shield_string = tracked.TotalShieldStrength.ToString("0.00") + "0 K";
-                                }
-
-                                string gunText = string.Join("\n", tracked.GunL.Keys.Select(x => $"<color=Green>{tracked.GunL[x]}<color=White> x {x}"));
-
-                                string specialBlockText = string.Join("\n", tracked.SBL.Keys.Select(x => $"<color=Green>{tracked.SBL[x]}<color=White> x {x}"));
-
-                                string massString = tracked.Mass.ToString("0.00");
-
-                                float thrustInKilograms = icubeG.GetMaxThrustInDirection(Base6Directions.Direction.Backward) / 9.81f; // Convert thrust from N to kg
-                                float weight = tracked.Mass;
-                                float mass = tracked.Mass;
-                                float TWR = thrustInKilograms / weight;
-
-                                if (tracked.Mass > 1000000)
-                                {
-                                    massString = (tracked.Mass / 1000000f).ToString("0.00") + "m";
-                                    mass = tracked.Mass / 1000f; // Convert mass to metric tons
-                                }
-
-                                string TWRs = TWR.ToString("0.000");
-
-                                string thrustString = tracked.InstalledThrust.ToString();
-
-                                if (tracked.InstalledThrust > 1000000)
-                                {
-                                    thrustString = (tracked.InstalledThrust / 1000000f).ToString("0.00") + "M";
-                                }
-
-                                string playerName = tracked.Owner == null ? tracked.GridName : tracked.Owner.DisplayName;
-
-                                string factionName = tracked.Owner == null ? "" : MyAPIGateway.Session?.Factions?.TryGetPlayerFaction(tracked.OwnerID)?.Name;
-
-                                float speed = icubeG.GridSizeEnum == MyCubeSize.Large
-                                    ? MyDefinitionManager.Static.EnvironmentDefinition.LargeShipMaxSpeed
-                                    : MyDefinitionManager.Static.EnvironmentDefinition.SmallShipMaxSpeed;
-
-                                if (RTS_api != null && RTS_api.IsReady)
-                                {
-                                    speed = (float)Math.Round(RTS_api.GetMaxSpeed(icubeG), 2);
-                                }
-
-                                string PWRNotation = tracked.CurrentPower > 1000 ? "GW" : "MW";
-                                string tempPWR = tracked.CurrentPower > 1000 ? (tracked.CurrentPower / 1000f).ToString("0.0") : tracked.CurrentPower.ToString();
-                                string PWR = tempPWR + PWRNotation;
-
-                                string GyroString = tracked.CurrentGyro.ToString();
-
-                                if (tracked.CurrentGyro >= 1000000)
-                                {
-                                    double tempGyro2 = tracked.CurrentGyro / 1000000f;
-                                    if (tempGyro2 > 1000)
-                                    {
-                                        GyroString = (tempGyro2 / 1000).ToString("0.0") + "G";
-                                    }
-                                    else
-                                    {
-                                        GyroString = tempGyro2.ToString("0.0") + "M";
-                                    }
-                                }
-
-
-                                var temp_text = $@"----Basic Info----
-<color=Green>Name<color=White>: {icubeG.DisplayName}
-<color=Green>Owner<color=White>: {playerName}
-<color=Green>Faction<color=White>: {factionName}
-<color=Green>Mass<color=White>: {massString} kg
-<color=Green>Heavy blocks<color=White>: {tracked.Heavyblocks}
-<color=Green>Total blocks<color=White>: {tracked.BlockCount}
-<color=Green>PCU<color=White>: {tracked.PCU}
-<color=Green>Size<color=White>: {(icubeG.Max + Vector3.Abs(icubeG.Min))}
-<color=Green>Max Speed<color=White>: {speed} | <color=Green>TWR<color=White>: {TWRs}
-
-<color=Orange>----Battle Stats----
-<color=Green>Battle Points<color=White>: {tracked.Bpts} <color=Orange>[<color=Red> {tracked.offensivePercentage} <color=White>% <color=Orange>| <color=Green> {tracked.powerPercentage} <color=White>% <color=Orange>| <color=DeepSkyBlue>{tracked.movementPercentage} <color=White>% <color=Orange>| <color=LightGray>{tracked.miscPercentage} <color=White>% <color=Orange>]
-<color=Green>PD Investment<color=White>: <color=Orange>( <color=White>{pdInvestmentNum} <color=Orange>|<color=Crimson> {pdInvestment} <color=White>%<color=Orange> )
-<color=Green>Shield Max HP<color=White>: {total_shield_string} ({(int)tracked.CurrentShieldStrength}%)
-<color=Green>Thrust<color=White>: {thrustString}N
-<color=Green>Gyro<color=White>: {GyroString}N
-<color=Green>Power<color=White>: {PWR}
-
-<color=Orange>----Blocks----
-{specialBlockText}
-
-<color=Orange>----Armament----
-{gunText}";
-
-                                statMessage.Message.Clear(); statMessage.Message.Append(temp_text); statMessage.Visible = true;
-                            }
-                        }
-
-                        else
-                        {
-                            if (statMessage != null && text_api.Heartbeat && statMessage.Visible)
-                            {
-                                statMessage.Message.Clear(); statMessage.Visible = false;
-                            }
-                        }
-                    }
-
-
-
-                }
-
-                if (vState == ViewState.InView2 && statMessage_Battle != null && text_api.Heartbeat) //shift T menu
-                {
-                    if (statMessage != null && text_api.Heartbeat)
-                    {
-                        if (statMessage.Visible)
-                        {
-                            statMessage.Message.Clear();
-                            statMessage.Visible = false;
-                        }
-                    }
-                    var cockpit = MyAPIGateway.Session.ControlledObject?.Entity as IMyCockpit;
-                    if (cockpit == null || MyAPIGateway.Session.IsCameraUserControlledSpectator)
-                    {
-                        //user not in cockpit
-                        var camMat = MyAPIGateway.Session.Camera.WorldMatrix; IHitInfo hits = null;
-                        MyAPIGateway.Physics.CastRay(camMat.Translation + camMat.Forward * 0.5, camMat.Translation + camMat.Forward * 500, out hits);
-                        if (hits != null && hits.HitEntity is IMyCubeGrid)
-                        {
-                            IMyCubeGrid icubeG = hits.HitEntity as IMyCubeGrid;
-                            if (icubeG != null && icubeG.Physics != null)
-                            {
-                                if (PointCheckHelpers.timer % 60 == 0)
-                                {
-                                    ShipTracker tracked = new ShipTracker(icubeG);
-
-                                    // Shield String
-                                    float totalShield = tracked.TotalShieldStrength;
-                                    string total_shield_string = totalShield > 100
-                                        ? (Math.Round(totalShield / 100f, 2) + " M")
-                                        : (totalShield > 1
-                                            ? (Math.Round(totalShield, 0) + "0 K")
-                                            : "None");
-
-                                    // Gyro String
-                                    double currentGyro = tracked.CurrentGyro;
-                                    string GyroString = currentGyro >= 1000000
-                                        ? ((Math.Round(currentGyro / 1000000f, 1) > 1000)
-                                            ? (Math.Round(currentGyro / 1000000000f, 1) + "G")
-                                            : (Math.Round(currentGyro / 1000000f, 1) + "M"))
-                                        : currentGyro.ToString();
-
-                                    // Thrust String
-                                    double installedThrust = tracked.InstalledThrust;
-                                    string thrustString = installedThrust > 1000000
-                                        ? (Math.Round(installedThrust / 1000000f, 2) + "M")
-                                        : installedThrust.ToString();
-
-                                    // Power String
-                                    double currentPower = tracked.CurrentPower;
-                                    string PWR = currentPower > 1000
-                                        ? (Math.Round(currentPower / 1000, 1) + "GW")
-                                        : (currentPower + "MW");
-
-                                    // Gun Text
-                                    StringBuilder gunText = new StringBuilder();
-                                    foreach (var x in tracked.GunL.Keys)
-                                    {
-                                        gunText.Append("<color=Green>").Append(tracked.GunL[x]).Append("<color=White> x ").Append(x).Append("\n");
-                                    }
-
-                                    gunText.Append("\n<color=Green>Thrust<color=White>: ").Append(thrustString).Append("N")
-                                           .Append("\n<color=Green>Gyro<color=White>: ").Append(GyroString).Append("N")
-                                           .Append("\n<color=Green>Power<color=White>: ").Append(PWR);
-
-                                    statMessage_Battle_Gunlist.Message.Length = 0;
-                                    statMessage_Battle_Gunlist.Message.Append(gunText);
-
-                                    statMessage_Battle.Message.Length = 0;
-                                    statMessage_Battle.Message.Append("<color=White>").Append(total_shield_string).Append(" (").Append((int)tracked.CurrentShieldStrength).Append("%)");
-
-                                    statMessage_Battle.Visible = true;
-                                    statMessage_Battle_Gunlist.Visible = true;
-
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (statMessage_Battle != null && text_api.Heartbeat && statMessage_Battle.Visible)
-                            {
-                                statMessage_Battle.Message.Clear(); statMessage_Battle.Visible = false;
-                                statMessage_Battle_Gunlist.Message.Clear(); statMessage_Battle_Gunlist.Visible = false;
-                            }
-                        }
-                    }
-
-                    else
-                    {
-                        //user is in cockpit
-
-                        //MyAPIGateway.Utilities.ShowNotification("INCOCKPITB");
-                        IMyCubeGrid icubeG = cockpit.CubeGrid as IMyCubeGrid;
-                        if (icubeG != null && icubeG.Physics != null)
-                        {
-                            if (PointCheckHelpers.timer % 60 == 0)
-                            {
-                                ShipTracker tracked = new ShipTracker(icubeG);
-
-                                // Optimize Shield Strength String
-                                double totalShield = tracked.TotalShieldStrength;
-                                string total_shield_string = "None";
-                                if (totalShield > 100) { total_shield_string = (Math.Round(totalShield / 100f, 2) + " M"); }
-                                else if (totalShield > 1) { total_shield_string = (Math.Round(totalShield, 0) + "0 K"); }
-                                string temp_text = "<color=White>" + total_shield_string + " (" + (int)tracked.CurrentShieldStrength + "%)";
-
-                                // Optimize Gyro String
-                                double currentGyro = tracked.CurrentGyro;
-                                string GyroString = currentGyro.ToString();
-                                if (currentGyro >= 1000000)
-                                {
-                                    double tempGyro2 = Math.Round(currentGyro / 1000000f, 1);
-                                    GyroString = tempGyro2 > 1000 ? (Math.Round(tempGyro2 / 1000, 1) + "G") : (tempGyro2 + "M");
-                                }
-
-                                // Optimize Thrust String
-                                double installedThrust = tracked.InstalledThrust;
-                                string thrustString = installedThrust > 1000000 ? (Math.Round(installedThrust / 1000000f, 2) + "M") : installedThrust.ToString();
-
-                                // Optimize Power String
-                                double currentPower = tracked.CurrentPower;
-                                string PWRNotation = currentPower > 1000 ? "GW" : "MW";
-                                string tempPWR = currentPower > 1000 ? Math.Round(currentPower / 1000, 1).ToString() : currentPower.ToString();
-                                string PWR = tempPWR + PWRNotation;
-
-                                // Optimize Gun Text
-                                StringBuilder gunText = new StringBuilder();
-                                foreach (var x in tracked.GunL.Keys)
-                                {
-                                    gunText.AppendLine("<color=Green>" + tracked.GunL[x] + "<color=White> x " + x);
-                                }
-                                gunText.AppendLine("<color=Green>Thrust<color=White>: " + thrustString + "N")
-                                       .AppendLine("<color=Green>Gyro<color=White>: " + GyroString + "N")
-                                       .Append("<color=Green>Power<color=White>: " + PWR);
-
-                                // Update Messages
-                                statMessage_Battle_Gunlist.Message.Clear().Append(gunText);
-                                statMessage_Battle.Message.Clear().Append(temp_text);
-
-                                // Set Visibility
-                                statMessage_Battle.Visible = statMessage_Battle_Gunlist.Visible = true;
-                            }
-                        }
-
-                        else
-                        {
-                            if (statMessage_Battle != null && text_api.Heartbeat && statMessage_Battle.Visible)
-                            {
-                                statMessage_Battle.Message.Clear(); statMessage_Battle.Visible = false;
-                                statMessage_Battle_Gunlist.Message.Clear(); statMessage_Battle_Gunlist.Visible = false;
-                            }
-                        }
-                    }
-
-
-                }
-
-                if (PointCheckHelpers.timer % 60 == 0 && integretyMessage != null && text_api.Heartbeat && broadcaststat)
-                {
-                    var tt = new StringBuilder();
-                    var ts = new Dictionary<string, List<string>>();
-                    var m = new Dictionary<string, double>();
-                    var bp = new Dictionary<string, int>();
-                    var mbp = new Dictionary<string, int>();
-                    var pbp = new Dictionary<string, int>();
-                    var obp = new Dictionary<string, int>();
-                    var mobp = new Dictionary<string, int>();
-                    foreach (var z in Tracking)
-                    {
-                        if (!Data.ContainsKey(z)) continue;
-                        var d = Data[z];
-                        d.LastUpdate--;
-                        if (d.LastUpdate <= 0) { Data[z].DisposeHud(); Data.Remove(z); continue; }
-                        var fn = d.FactionName;
-                        var o = d.OwnerName;
-                        var nd = d.IsFunctional;
-                        if (!d.IsFunctional) continue; //disables readout when ship is dead
-                        if (!ts.ContainsKey(fn)) { ts.Add(fn, new List<string>()); m[fn] = 0; bp[fn] = 0; mbp[fn] = 0; pbp[fn] = 0; obp[fn] = 0; mobp[fn] = 0; }
-                        if (nd) { m[fn] += d.Mass; bp[fn] += d.Bpts; }
-                        mbp[fn] += d.MiscBps; pbp[fn] += d.PowerBps; obp[fn] += d.OffensiveBps; mobp[fn] += d.MovementBps;
-                        int g = 0; foreach (var s in d.GunL.Values) g += s;
-                        var pwr = d.CurrentPower > 1000 ? Math.Round(d.CurrentPower / 1000, 1) + "GW" : d.CurrentPower + "MW";
-                        var ts2 = d.InstalledThrust >= 1e6 ? (Math.Round(d.InstalledThrust / 1e6, 1) > 1e3 ? Math.Round(Math.Round(d.InstalledThrust / 1e6, 1) / 1e3, 1) + "G" : Math.Round(d.InstalledThrust / 1e6, 1) + "M") : d.InstalledThrust.ToString();
-                        ts[fn].Add(string.Format("<color={9}>{0,-8}{1,3}%<color={9}> P:<color=orange>{7,3}<color={9}> T:<color=orange>{8,3}<color={9}> W:<color={6}>{2,3}<color={9}> S:<color={5}>{3,3}%<color=white> {4,3}", o?.Substring(0, Math.Min(o.Length, 7)) ?? d.GridName, (int)(d.CurrentIntegrity / d.OriginalIntegrity * 100), g, (int)d.CurrentShieldStrength, capstat, (int)d.CurrentShieldStrength <= 0 ? "red" : $"{255},{255 - (d.ShieldHeat * 20)},{255 - (d.ShieldHeat * 20)}", g == 0 ? "red" : "orange", pwr, ts2, nd ? "white" : "red"));
-                    }
-                    foreach (var x in ts.Keys)
-                    {
-                        var ms = Math.Round(m[x] / 1e6, 2) + "M";
-                        float tbp = obp[x] + mobp[x] + pbp[x] + mbp[x], tbi = 100f / bp[x];
-                        tt.Append($"<color=white>---- <color=orange>{x} : {ms} : {bp[x]}bp <color=orange>[<color=Red>{(int)(obp[x] * tbi + 0.5f)}<color=white>%<color=orange>|<color=Green>{(int)(pbp[x] * tbi + 0.5f)}<color=white>%<color=orange>|<color=DeepSkyBlue>{(int)(mobp[x] * tbi + 0.5f)}<color=white>%<color=orange>|<color=LightGray>{(int)(mbp[x] * tbi + 0.5f)}<color=white>%<color=orange>]<color=white> ---------\n");
-                        foreach (var y in ts[x]) tt.Append(y + "\n");
-                    }
-                    try
-                    {
-                        var ce = MyAPIGateway.Session.Player?.Controller?.ControlledEntity?.Entity;
-                        var ck = ce as IMyCockpit;
-                        var eid = ck.CubeGrid.EntityId;
-                        if (ck != null && !Tracking.Contains(eid))
-                        {
-                            bool hg = false, hbr = false;
-                            var gb = new List<IMySlimBlock>();
-                            ck.CubeGrid.GetBlocks(gb);
-                            foreach (var b in gb) { if (b.FatBlock is IMyGyro) hg = true; else if (b.FatBlock is IMyBatteryBlock || b.FatBlock is IMyReactor) hbr = true; if (hg && hbr) break; }
-                            if (hg && hbr) { var p = new PacketGridData { id = eid, value = 1, }; Static.MyNetwork.TransmitToServer(p, true); MyAPIGateway.Utilities.ShowNotification("ShipTracker: Added grid to tracker"); Tracking.Add(eid); if (!integretyMessage.Visible) integretyMessage.Visible = true; Data[eid].CreateHud(); }
-                        }
-                    }
-                    catch (Exception) { }
-                    integretyMessage.Message.Clear();
-                    integretyMessage.Message.Append(tt);
-                }
+                UpdateTrackingData();
 
                 if (vState == ViewState.ExitView)
                 {
@@ -1446,6 +969,485 @@ namespace klime.PointCheck
             }
 
         }
+
+        private void ShiftTHandling()
+        {
+            if (vState == ViewState.InView && statMessage != null && text_api.Heartbeat) //shift T menu
+            {
+                var cockpit = MyAPIGateway.Session.ControlledObject?.Entity as IMyCockpit;
+                if (cockpit == null || MyAPIGateway.Session.IsCameraUserControlledSpectator)
+                {
+                    //user is not in cockpit
+
+                    var camMat = MyAPIGateway.Session.Camera.WorldMatrix; IHitInfo hits = null;
+                    MyAPIGateway.Physics.CastRay(camMat.Translation + camMat.Forward * 0.5, camMat.Translation + camMat.Forward * 500, out hits);
+                    if (hits != null && hits.HitEntity is IMyCubeGrid)
+                    {
+                        IMyCubeGrid icubeG = hits.HitEntity as IMyCubeGrid;
+                        if (icubeG != null && icubeG.Physics != null)
+                        {
+                            ShiftTCals(icubeG);
+                        }
+                    }
+                    else
+                    {
+                        if (statMessage != null && text_api.Heartbeat && statMessage.Visible)
+                        {
+                            statMessage.Message.Clear(); statMessage.Visible = false;
+                        }
+                    }
+                }
+                else
+                {
+                    // user is in cockpit
+
+                    //MyAPIGateway.Utilities.ShowNotification("INCOCKPIT");
+                    IMyCubeGrid icubeG = cockpit.CubeGrid as IMyCubeGrid;
+                    if (icubeG != null && icubeG.Physics != null)
+                    {
+                        ShiftTCals(icubeG);
+                    }
+
+                    else
+                    {
+                        if (statMessage != null && text_api.Heartbeat && statMessage.Visible)
+                        {
+                            statMessage.Message.Clear(); statMessage.Visible = false;
+                        }
+                    }
+                }
+
+
+
+            }
+        }
+
+        private void ShiftTCals(IMyCubeGrid icubeG)
+        {
+            if (PointCheckHelpers.timer % 60 == 0)
+            {
+                ShipTracker trkd = new ShipTracker(icubeG);
+                string pdInvestment = string.Format("{0}", trkd.pdPercentage);
+                string pdInvestmentNum = string.Format("{0}", trkd.pdInvest);
+                string totalShieldString = "None";
+
+                if (trkd.ShieldStrength > 100)
+                {
+                    totalShieldString = string.Format("{0:F2} M", trkd.ShieldStrength / 100f);
+                }
+                else if (trkd.ShieldStrength > 1 && trkd.ShieldStrength < 100)
+                {
+                    totalShieldString = string.Format("{0:F0}0 K", trkd.ShieldStrength);
+                }
+
+                var gunTextBuilder = new StringBuilder();
+                foreach (var x in trkd.GunL.Keys)
+                {
+                    gunTextBuilder.AppendFormat("<color=Green>{0}<color=White> x {1}\n", trkd.GunL[x], x);
+                }
+                string gunText = gunTextBuilder.ToString();
+
+                var specialBlockTextBuilder = new StringBuilder();
+                foreach (var x in trkd.SBL.Keys)
+                {
+                    specialBlockTextBuilder.AppendFormat("<color=Green>{0}<color=White> x {1}\n", trkd.SBL[x], x);
+                }
+                string specialBlockText = specialBlockTextBuilder.ToString();
+
+                string massString = string.Format("{0}", trkd.Mass);
+
+                float thrustInKilograms = icubeG.GetMaxThrustInDirection(Base6Directions.Direction.Backward) / 9.81f;
+                //float weight = trkd.Mass;
+                float mass = trkd.Mass;
+                float TWR = thrustInKilograms / mass;
+
+                if (trkd.Mass > 1000000)
+                {
+                    massString = string.Format("{0:F2}m", trkd.Mass / 1000000f);
+                    mass = trkd.Mass / 1000f;
+                }
+
+                string TWRs = string.Format("{0:F3}", TWR);
+                string thrustString = string.Format("{0}", trkd.InstalledThrust);
+
+                if (trkd.InstalledThrust > 1000000)
+                {
+                    thrustString = string.Format("{0:F2}M", trkd.InstalledThrust / 1000000f);
+                }
+
+                string playerName = trkd.Owner == null ? trkd.GridName : trkd.Owner.DisplayName;
+                string factionName = trkd.Owner == null ? "" : MyAPIGateway.Session?.Factions?.TryGetPlayerFaction(trkd.OwnerID)?.Name;
+
+                float speed = icubeG.GridSizeEnum == MyCubeSize.Large ? MyDefinitionManager.Static.EnvironmentDefinition.LargeShipMaxSpeed : MyDefinitionManager.Static.EnvironmentDefinition.SmallShipMaxSpeed;
+
+                if (RTS_api != null && RTS_api.IsReady)
+                {
+                    speed = (float)Math.Round(RTS_api.GetMaxSpeed(icubeG), 2);
+                }
+
+                string PWRNotation = trkd.CurrentPower > 1000 ? "GW" : "MW";
+                string tempPWR = trkd.CurrentPower > 1000 ? string.Format("{0:F1}", trkd.CurrentPower / 1000) : trkd.CurrentPower.ToString();
+                string PWR = tempPWR + PWRNotation;
+
+                string GyroString = string.Format("{0}", trkd.CurrentGyro);
+
+                double tempGyro2;
+                if (trkd.CurrentGyro >= 1000000)
+                {
+                    tempGyro2 = Math.Round(trkd.CurrentGyro / 1000000f, 1);
+                    if (tempGyro2 > 1000)
+                    {
+                        GyroString = string.Format("{0:F1}G", tempGyro2 / 1000);
+                    }
+                    else
+                    {
+                        GyroString = string.Format("{0:F1}M", tempGyro2);
+                    }
+                }
+
+
+                var sb = new StringBuilder();
+
+                // Basic Info
+                sb.AppendLine("----Basic Info----");
+                sb.AppendFormat("<color=White>{0} ", icubeG.DisplayName);
+                sb.AppendFormat("<color=Green>Owner<color=White>: {0} ", playerName);
+                sb.AppendFormat("<color=Green>Faction<color=White>: {0}\n", factionName);
+                sb.AppendFormat("<color=Green>Mass<color=White>: {0} kg\n", massString);
+                sb.AppendFormat("<color=Green>Heavy blocks<color=White>: {0}\n", trkd.Heavyblocks);
+                sb.AppendFormat("<color=Green>Total blocks<color=White>: {0}\n", trkd.BlockCount);
+                sb.AppendFormat("<color=Green>PCU<color=White>: {0}\n", trkd.PCU);
+                sb.AppendFormat("<color=Green>Size<color=White>: {0}\n", (icubeG.Max + Vector3.Abs(icubeG.Min)).ToString());
+                sb.AppendFormat("<color=Green>Max Speed<color=White>: {0} | <color=Green>TWR<color=White>: {1}\n", speed, TWRs);
+                sb.AppendLine(); //blank line
+
+                // Battle Stats
+                sb.AppendLine("<color=Orange>----Battle Stats----");
+                sb.AppendFormat("<color=Green>Battle Points<color=White>: {0}\n", trkd.Bpts);
+                sb.AppendFormat("<color=Orange>[<color=Red> {0}% <color=Orange>| <color=Green>{1}% <color=Orange>| <color=DeepSkyBlue>{2}% <color=Orange>| <color=LightGray>{3}% <color=Orange>]\n", trkd.offensivePercentage, trkd.powerPercentage, trkd.movementPercentage, trkd.miscPercentage);
+                sb.AppendFormat("<color=Green>PD Investment<color=White>: <color=Orange>( <color=white>{0}% <color=Orange>|<color=Crimson> {1}%<color=Orange> )\n", pdInvestmentNum, pdInvestment);
+                sb.AppendFormat("<color=Green>Shield Max HP<color=White>: {0} <color=Orange>(<color=White>{1}%<color=Orange>)\n", totalShieldString, (int)trkd.CurrentShieldStrength);
+                sb.AppendFormat("<color=Green>Thrust<color=White>: {0}N\n", thrustString);
+                sb.AppendFormat("<color=Green>Gyro<color=White>: {0}N\n", GyroString);
+                sb.AppendFormat("<color=Green>Power<color=White>: {0}\n", PWR);
+                sb.AppendLine(); //blank line
+                // Blocks Info
+                sb.AppendLine("<color=Orange>----Blocks----");
+                sb.AppendLine(specialBlockText);
+                sb.AppendLine(); //blank line
+                // Armament Info
+                sb.AppendLine("<color=Orange>----Armament----");
+                sb.Append(gunText);
+
+                var tempText = sb.ToString();
+                statMessage.Message.Clear();
+                statMessage.Message.Append(tempText);
+                statMessage.Visible = true;
+
+            }
+        }
+
+        private void BattleShiftTHandling()
+        {
+            if (vState == ViewState.InView2 && statMessage_Battle != null && text_api.Heartbeat) //shift T menu
+            {
+                if (statMessage != null && text_api.Heartbeat)
+                {
+                    if (statMessage.Visible)
+                    {
+                        statMessage.Message.Clear();
+                        statMessage.Visible = false;
+                    }
+                }
+                var cockpit = MyAPIGateway.Session.ControlledObject?.Entity as IMyCockpit;
+                if (cockpit == null || MyAPIGateway.Session.IsCameraUserControlledSpectator)
+                {
+                    //user not in cockpit
+                    var camMat = MyAPIGateway.Session.Camera.WorldMatrix; IHitInfo hits = null;
+                    MyAPIGateway.Physics.CastRay(camMat.Translation + camMat.Forward * 0.5, camMat.Translation + camMat.Forward * 500, out hits);
+                    if (hits != null && hits.HitEntity is IMyCubeGrid)
+                    {
+                        IMyCubeGrid icubeG = hits.HitEntity as IMyCubeGrid;
+                        BattleShiftTCalcs(icubeG);
+                    }
+                    else
+                    {
+                        if (statMessage_Battle != null && text_api.Heartbeat && statMessage_Battle.Visible)
+                        {
+                            statMessage_Battle.Message.Clear(); statMessage_Battle.Visible = false;
+                            statMessage_Battle_Gunlist.Message.Clear(); statMessage_Battle_Gunlist.Visible = false;
+                        }
+                    }
+                }
+
+                else
+                {
+                    //user is in cockpit
+
+                    //MyAPIGateway.Utilities.ShowNotification("INCOCKPITB");
+                    IMyCubeGrid icubeG = cockpit.CubeGrid as IMyCubeGrid;
+                    if (icubeG != null && icubeG.Physics != null)
+                    {
+                        BattleShiftTCalcs(icubeG);
+                    }
+
+                    else
+                    {
+                        if (statMessage_Battle != null && text_api.Heartbeat && statMessage_Battle.Visible)
+                        {
+                            statMessage_Battle.Message.Clear(); statMessage_Battle.Visible = false;
+                            statMessage_Battle_Gunlist.Message.Clear(); statMessage_Battle_Gunlist.Visible = false;
+                        }
+                    }
+                }
+
+
+            }
+        }
+
+        private static void BattleShiftTCalcs(IMyCubeGrid icubeG)
+        {
+            if (icubeG != null && icubeG.Physics != null && PointCheckHelpers.timer % 60 == 0)
+            {
+                var tracked = new ShipTracker(icubeG);
+
+                var totalShield = tracked.ShieldStrength;
+                var totalShieldString = totalShield > 100
+                    ? $"{Math.Round(totalShield / 100f, 2)} M"
+                    : totalShield > 1
+                        ? $"{Math.Round(totalShield, 0)}0 K"
+                        : "None";
+
+                var currentGyro = tracked.CurrentGyro;
+                var gyroString = currentGyro >= 1000000
+                    ? (Math.Round(currentGyro / 1000000f, 1) > 1000
+                        ? $"{Math.Round(currentGyro / 1000000000f, 1)} G"
+                        : $"{Math.Round(currentGyro / 1000000f, 1)} M")
+                    : currentGyro.ToString();
+
+                var installedThrust = tracked.InstalledThrust;
+                var thrustString = installedThrust > 1000000
+                    ? $"{Math.Round(installedThrust / 1000000f, 2)} M"
+                    : installedThrust.ToString();
+
+                var currentPower = tracked.CurrentPower;
+                var pwr = currentPower > 1000
+                    ? $"{Math.Round(currentPower / 1000, 1)} GW"
+                    : $"{currentPower} MW";
+
+                var gunText = new StringBuilder();
+                foreach (var x in tracked.GunL)
+                {
+                    gunText.Append($"<color=Green>{x.Value} x {x.Key}\n");
+                }
+
+                gunText.Append($"\n<color=Green>Thrust<color=White>: {thrustString} N")
+                    .Append($"\n<color=Green>Gyro<color=White>: {gyroString} N")
+                    .Append($"\n<color=Green>Power<color=White>: {pwr}");
+
+                statMessage_Battle_Gunlist.Message.Length = 0;
+                statMessage_Battle_Gunlist.Message.Append(gunText);
+
+                statMessage_Battle.Message.Length = 0;
+                statMessage_Battle.Message.Append($"<color=White>{totalShieldString} ({(int)tracked.CurrentShieldStrength}%)");
+                    //.Append($"<color=White> ({tracked.CurrentShieldStrength}%)");
+
+                statMessage_Battle.Visible = true;
+                statMessage_Battle_Gunlist.Visible = true;
+            }
+        }// todo: remove this and replace with old solution for just combining BP and mass
+        private Dictionary<string, List<string>> ts = new Dictionary<string, List<string>>();
+        private Dictionary<string, double> m = new Dictionary<string, double>();
+        private Dictionary<string, int> bp = new Dictionary<string, int>();
+        private Dictionary<string, int> mbp = new Dictionary<string, int>();
+        private Dictionary<string, int> pbp = new Dictionary<string, int>();
+        private Dictionary<string, int> obp = new Dictionary<string, int>();
+        private Dictionary<string, int> mobp = new Dictionary<string, int>();
+
+        private void UpdateTrackingData()
+        {
+            if (PointCheckHelpers.timer % 60 == 0 && integretyMessage != null && text_api.Heartbeat)
+            {
+                var tt = new StringBuilder();
+
+                // Clear the dictionaries to remove old data
+                ts.Clear();
+                m.Clear();
+                bp.Clear();
+                mbp.Clear();
+                pbp.Clear();
+                obp.Clear();
+                mobp.Clear();
+
+                MainTrackerUpdate(ts, m, bp, mbp, pbp, obp, mobp);
+                TeamBPCalc(tt, ts, m, bp, mbp, pbp, obp, mobp);
+
+                bool autotrackenabled = false;
+                // Autotrack players when match is running, set above bool to true to enable
+                if (PointCheckHelpers.timer % 240 == 0 && autotrackenabled)
+                {
+                    var ce = MyAPIGateway.Session.Player?.Controller?.ControlledEntity?.Entity;
+                    var ck = ce as IMyCockpit;
+                    var eid = ck.CubeGrid.EntityId;
+
+                    AutoTrackPilotedShip(ck, eid);
+                }
+
+                integretyMessage.Message.Clear();
+                integretyMessage.Message.Append(tt);
+            }
+        }
+
+
+        private void MainTrackerUpdate(  Dictionary<string, List<string>> ts,  Dictionary<string, double> m, Dictionary<string, int> bp, Dictionary<string, int> mbp,  Dictionary<string, int> pbp, Dictionary<string, int> obp, Dictionary<string, int> mobp)
+        {
+            foreach (var z in Tracking)
+            {
+                if (!Data.ContainsKey(z))
+                    continue;
+
+                var d = Data[z];
+                d.LastUpdate--;
+
+                if (d.LastUpdate <= 0)
+                {
+                    Data[z].DisposeHud();
+                    Data.Remove(z);
+                    continue;
+                }
+
+                var fn = d.FactionName;
+                var o = d.OwnerName;
+                var nd = d.IsFunctional;
+
+                if (!ts.ContainsKey(fn))
+                {
+                    ts.Add(fn, new List<string>());
+                    m[fn] = 0;
+                    bp[fn] = 0;
+                    mbp[fn] = 0;
+                    pbp[fn] = 0;
+                    obp[fn] = 0;
+                    mobp[fn] = 0;
+                }
+
+                if (nd)
+                {
+                    m[fn] += d.Mass;
+                    bp[fn] += d.Bpts;
+                }
+                else
+                {
+                    continue;
+                }
+
+                mbp[fn] += d.MiscBps;
+                pbp[fn] += d.PowerBps;
+                obp[fn] += d.OffensiveBps;
+                mobp[fn] += d.MovementBps;
+
+                int g = d.GunL.Values.Sum();
+                string pwr = FormatPower(d.CurrentPower);
+                string ts2 = FormatThrust(d.InstalledThrust);
+
+                ts[fn].Add(CreateDisplayString(o, d, g, pwr, ts2));
+            }
+        }
+
+        private string FormatPower(double currentPower)
+        {
+            return currentPower > 1000 ? $"{Math.Round(currentPower / 1000, 1)}GW" : $"{currentPower}MW";
+        }
+
+        private string FormatThrust(double installedThrust)
+        {
+            double thrustInMega = Math.Round(installedThrust / 1e6, 1);
+            return thrustInMega > 1e2 ? $"{Math.Round(thrustInMega / 1e3, 2)}GN" : $"{thrustInMega}MN";
+        }
+
+        private string CreateDisplayString(string ownerName, ShipTracker d, int g, string power, string thrust)
+        {
+            string ownerDisplay = ownerName?.Substring(0, Math.Min(ownerName.Length, 7)) ?? d.GridName;
+            int integrityPercent = (int)(d.CurrentIntegrity / d.OriginalIntegrity * 100);
+            int shieldPercent = (int)d.CurrentShieldStrength;
+            string shieldColor = shieldPercent <= 0 ? "red" : $"{255},{255 - (d.ShieldHeat * 20)},{255 - (d.ShieldHeat * 20)}";
+            string weaponColor = g == 0 ? "red" : "orange";
+            string functionalColor = d.IsFunctional ? "white" : "red";
+
+            return $"<color={functionalColor}>{ownerDisplay,-8}{integrityPercent,3}%<color={functionalColor}> P:<color=orange>{power,3}<color={functionalColor}> T:<color=orange>{thrust,3}<color={functionalColor}> W:<color={weaponColor}>{g,3}<color={functionalColor}> S:<color={shieldColor}>{shieldPercent,3}%<color=white>";
+        }
+
+
+        private static void TeamBPCalc(StringBuilder tt, Dictionary<string, List<string>> trackedShip, Dictionary<string, double> m, Dictionary<string, int> bp, Dictionary<string, int> mbp, Dictionary<string, int> pbp, Dictionary<string, int> obp, Dictionary<string, int> mobp)
+        {
+            foreach (var x in trackedShip.Keys)
+            {
+                double msValue = m[x] / 1e6;
+                float totalBattlePoints = obp[x] + mobp[x] + pbp[x] + mbp[x];
+                float tbi = 100f / bp[x];
+
+                tt.Append("<color=orange>---- ")
+                  .Append(x)
+                  .Append(" : ")
+                  .AppendFormat("{0:0.00}M : {1}bp <color=orange>[", msValue, bp[x]);
+
+                tt.AppendFormat("<color=Red>{0}<color=white>%<color=orange>|", (int)(obp[x] * tbi + 0.5f))
+                  .AppendFormat("<color=Green>{0}<color=white>%<color=orange>|", (int)(pbp[x] * tbi + 0.5f))
+                  .AppendFormat("<color=DeepSkyBlue>{0}<color=white>%<color=orange>|", (int)(mobp[x] * tbi + 0.5f))
+                  .AppendFormat("<color=LightGray>{0}<color=white>%<color=orange>]", (int)(mbp[x] * tbi + 0.5f))
+                  .AppendLine(" ---------");
+
+                foreach (var y in trackedShip[x])
+                {
+                    tt.AppendLine(y);
+                }
+            }
+        }
+
+
+        private static void AutoTrackPilotedShip(IMyCockpit cockpit, long entityId)
+        {
+            if (cockpit == null || Tracking.Contains(entityId))
+            {
+                return;
+            }
+
+            bool hasGyro = false;
+            bool hasBatteryOrReactor = false;
+            var gridBlocks = new List<IMySlimBlock>();
+            cockpit.CubeGrid.GetBlocks(gridBlocks);
+
+            foreach (var block in gridBlocks)
+            {
+                if (block.FatBlock is IMyGyro)
+                {
+                    hasGyro = true;
+                }
+                else if (block.FatBlock is IMyBatteryBlock || block.FatBlock is IMyReactor)
+                {
+                    hasBatteryOrReactor = true;
+                }
+
+                if (hasGyro && hasBatteryOrReactor)
+                {
+                    break;
+                }
+            }
+
+            if (hasGyro && hasBatteryOrReactor)
+            {
+                var packetData = new PacketGridData { id = entityId, value = 1 };
+                Static.MyNetwork.TransmitToServer(packetData, true);
+                MyAPIGateway.Utilities.ShowNotification("ShipTracker: Added grid to tracker");
+                Tracking.Add(entityId);
+                if (!integretyMessage.Visible)
+                {
+                    integretyMessage.Visible = true;
+                }
+                Data[entityId].CreateHud();
+            }
+        }
+
 
         public static void There_Is_A_Problem()
         {
