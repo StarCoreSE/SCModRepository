@@ -10846,7 +10846,7 @@
 	  
 	  
 		  <ParticleEffect xsi:type="ParticleEffect">
-			  <Id Type="MyObjectBuilder_ParticleEffect" Subtype="IronMaiden_Firing_Smoke" />
+			  <Id Type="MyObjectBuilder_ParticleEffect" Subtype="Priest_Firing_Smoke" />
 			  <ParticleId>4445</ParticleId>
 			  <Length>1</Length>
 			  <Preload>0</Preload>
@@ -11294,7 +11294,7 @@
 		  <ParticleEffect xsi:type="MyObjectBuilder_ParticleEffect">
 			  <Id>
 				  <TypeId>ParticleEffect</TypeId>
-				  <SubtypeId>IronMaiden_Flash</SubtypeId>
+				  <SubtypeId>Priest_Flash</SubtypeId>
 			  </Id>
 			  <Version>0</Version>
 			  <ParticleId>2002</ParticleId>

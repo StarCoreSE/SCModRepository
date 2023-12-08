@@ -10,7 +10,7 @@
             <Name>Weapons</Name>
 			    <StrictSearch>true</StrictSearch>
             <ItemIds>
-				<string>ConveyorSorter/Heavy_Repeater</string>
+				<string>ConveyorSorter/Priest_Block</string>
 				<string>ConveyorSorter/Laser_Block</string>
 				<string>ConveyorSorter/Type18_Artillery</string>
 				<string>ConveyorSorter/Type21_Artillery</string>
@@ -37,7 +37,7 @@
 			<Name>LargeBlocks</Name>
 			<StrictSearch>true</StrictSearch>
 			<ItemIds>
-				<string>ConveyorSorter/Heavy_Repeater</string>
+				<string>ConveyorSorter/Priest_Block</string>
 				<string>ConveyorSorter/Laser_Block</string>
 				<string>ConveyorSorter/Type18_Artillery</string>
 				<string>ConveyorSorter/Type21_Artillery</string>

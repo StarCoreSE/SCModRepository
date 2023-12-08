@@ -1,0 +1,43 @@
+﻿<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <AmmoMagazines>    
+        <AmmoMagazine>
+            <Id>
+                <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>CoilgunMk2_MagazineLarge</SubtypeId>
+            </Id>
+            <DisplayName>Depleted Uranium Slugs</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\CoilgunMk2_BulletModel.png</Icon>
+            <Size>
+                <X>0.7</X>
+                <Y>0.7</Y>
+                <Z>0.7</Z>
+            </Size>
+            <Mass>100</Mass>
+            <Volume>30</Volume>
+            <Model>Models\CoilgunMk2_BulletModel.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>40</Capacity>
+            <AmmoDefinitionId Subtype="Depleted_Uranium_Slugs_Ammo" />
+        </AmmoMagazine>
+        <AmmoMagazine>
+            <Id>
+                <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>UNSC_Coilgun_MagazineLarge</SubtypeId>
+            </Id>
+            <DisplayName>Magnetic Slugs</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\CoilgunSlug.png</Icon>
+            <Size>
+                <X>0.7</X>
+                <Y>0.7</Y>
+                <Z>0.7</Z>
+            </Size>
+            <Mass>45</Mass>
+            <Volume>10</Volume>
+            <Model>Models\CoilgunMk2_BulletModel.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>40</Capacity>
+            <AmmoDefinitionId Subtype="Magnetic_Slugs_Ammo" />
+        </AmmoMagazine>
+    </AmmoMagazines>
+</Definitions>

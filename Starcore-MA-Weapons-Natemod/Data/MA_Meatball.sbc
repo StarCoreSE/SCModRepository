@@ -13,10 +13,12 @@
       </Id>
       <DisplayName>The Spicy Meatball Turret</DisplayName>
       <Icon>Textures\Icons\spicy.dds</Icon>
-      <Description>The meal was almost perfect, but you added too much spice. Your family suffered through this one. It was so spicy, so painful to eat. But secretly you are proud, for you know it's not enough until it's too much.
-	  Ammo: 30mm (Kinetic)
-	  Range: 1250m
-	  By AutoMcD Astronautical, Criegwarfare, Mike_Dude.</Description>
+      <Description>
+        [2km Targeting Range]
+        [Kinetic damage]
+        [1500 m/s]
+        [PD]
+      </Description>
 	<CubeSize>Large</CubeSize>
 	<BlockTopology>TriangleMesh</BlockTopology>
 	<Size x="1" y="2" z="1" />
@@ -101,11 +103,12 @@
       </Id>
       <DisplayName>MA Blister Turret</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\blister.png</Icon>
-      <Description>A compact twin gatling turret.
-	  Role: Anti-Fighter
-	  Ammo: 30mm (kinetic)
-	  Range: 1250m
-	  By AutoMcD Astronautical, Criegwarfare, Mike_Dude.</Description>
+      <Description>
+        [2km Targeting Range]
+        [Kinetic damage]
+        [1500 m/s]
+        [PD]
+      </Description>
 	<CubeSize>Large</CubeSize>
 	<BlockTopology>TriangleMesh</BlockTopology>
 	<Size x="1" y="1" z="1" />
@@ -207,11 +210,12 @@
       </Id>
       <DisplayName>MA Blister Turret</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\blister.png</Icon>
-      <Description>A compact twin gatling turret.
-	  Role: Anti-Fighter
-	  Ammo: 30mm (kinetic)
-	  Range: 1250m
-	  By AutoMcD Astronautical, Criegwarfare, Mike_Dude.</Description>
+      <Description>
+        [2km Targeting Range]
+        [Kinetic damage]
+        [1500 m/s]
+        [PD]
+      </Description>
 	<CubeSize>Small</CubeSize>
 	<BlockTopology>TriangleMesh</BlockTopology>
 	<Size x="5" y="5" z="5" />
@@ -295,11 +299,12 @@
       </Id>
       <DisplayName>MA Blister Turret On Slope</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\MA_Blister45_Base.png</Icon>
-      <Description>A compact twin gatling turret.
-	  Role: Anti-Fighter
-	  Ammo: 30mm (kinetic)
-	  Range: 1250m
-	  By AutoMcD Astronautical, Criegwarfare, Mike_Dude.</Description>
+      <Description>
+        [2km Targeting Range]
+        [Kinetic damage]
+        [1500 m/s]
+        [PD]
+      </Description>
 	<CubeSize>Large</CubeSize>
 	<BlockTopology>TriangleMesh</BlockTopology>
 	<Size x="1" y="1" z="1" />
@@ -385,11 +390,12 @@
       </Id>
       <DisplayName>MA Blister Turret On Slope</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\MA_Blister45_Base.png</Icon>
-      <Description>A compact twin gatling turret.
-	  Role: Anti-Fighter
-	  Ammo: 30mm (kinetic)
-	  Range: 1250m
-	  By AutoMcD Astronautical, Criegwarfare, Mike_Dude.</Description>
+      <Description>
+        [2km Targeting Range]
+        [Kinetic damage]
+        [1500 m/s]
+        [PD]
+      </Description>
 	<CubeSize>Small</CubeSize>
 	<BlockTopology>TriangleMesh</BlockTopology>
 	<Size x="5" y="5" z="5" />
@@ -474,11 +480,12 @@
       </Id>
       <DisplayName>MA Blister Turret On 2x Slope</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\MA_Blister30_Base.png</Icon>
-      <Description>A compact twin gatling turret.
-	  Role: Anti-Fighter
-	  Ammo: 30mm (kinetic)
-	  Range: 1250m
-	  By AutoMcD Astronautical, Criegwarfare, Mike_Dude.</Description>
+      <Description>
+        [2km Targeting Range]
+        [Kinetic damage]
+        [1500 m/s]
+        [PD]
+      </Description>
 	<CubeSize>Large</CubeSize>
 	<BlockTopology>TriangleMesh</BlockTopology>
 	<Size x="1" y="1" z="1" />
@@ -564,11 +571,12 @@
       </Id>
       <DisplayName>MA Blister Turret On 2x Slope Tip</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\MA_Blister30_Base2.png</Icon>
-      <Description>A compact twin gatling turret.
-	  Role: Anti-Fighter
-	  Ammo: 30mm (kinetic)
-	  Range: 1250m
-	  By AutoMcD Astronautical, Criegwarfare, Mike_Dude.</Description>
+      <Description>
+        [2km Targeting Range]
+        [Kinetic damage]
+        [1500 m/s]
+        [PD]
+      </Description>
 	<CubeSize>Large</CubeSize>
 	<BlockTopology>TriangleMesh</BlockTopology>
 	<Size x="1" y="1" z="1" />
@@ -653,11 +661,12 @@
       </Id>
       <DisplayName>MA Blister Turret On 2x Slope Tip</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\MA_Blister30_Base2.png</Icon>
-      <Description>A compact twin gatling turret.
-	  Role: Anti-Fighter
-	  Ammo: 30mm (kinetic)
-	  Range: 1250m
-	  By AutoMcD Astronautical, Criegwarfare, Mike_Dude.</Description>
+      <Description>
+        [2km Targeting Range]
+        [Kinetic damage]
+        [1500 m/s]
+        [PD]
+      </Description>
 	<CubeSize>Small</CubeSize>
 	<BlockTopology>TriangleMesh</BlockTopology>
 	<Size x="5" y="5" z="5" />

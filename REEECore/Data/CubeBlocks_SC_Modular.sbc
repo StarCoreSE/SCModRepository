@@ -9,13 +9,13 @@
        <SubtypeId>ModularLRM5</SubtypeId>
      </Id>
      <DisplayName>LRM-5 Modular Launcher</DisplayName>
-	  <Description>[10km Targeting Range]
-    [650 m/s]
-    [Energy Damage]
-    [Does not reload]
-    [5 Missiles]
-    Effective armor, shield and module damage.
-	 </Description>
+	  <Description>
+      [10km Targeting Range]
+      [850 m/s]
+      [Energy Damage]
+      [Does not reload]
+      [5 Missiles]
+    </Description>
      <Icon>Textures\Icons\lrm5icon.dds</Icon>
      <CubeSize>Large</CubeSize>
      <GuiVisible>true</GuiVisible>

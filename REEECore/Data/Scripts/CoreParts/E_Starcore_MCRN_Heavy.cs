@@ -123,7 +123,7 @@ namespace Scripts {
                     BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
-                    ReloadTime = 1440, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    ReloadTime = 420, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     HeatPerShot = 10, // Heat generated per shot.
@@ -191,8 +191,6 @@ namespace Scripts {
                 E_Starcore_MCRN_Torpedo_Acceleration,
                 E_Starcore_MCRN_Torpedo_Detonation,
                 E_Starcore_MCRN_Torpedo_Detonation_Frag,
-                E_Starcore_OPA_Torpedo_Lock_Tone,
-                E_Starcore_OPA_Torpedo_Lock_Tone_Terminal
 
             },
             //Animations = E_Starcore_MCRN_Animation,

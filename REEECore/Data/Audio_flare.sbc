@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Sounds>
+    <!--IHarpo, a glorious man. Damnable Keen file structure.-->
+    
+		<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_Launch_AA</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Missile\MissileLaunch_AA.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+	
+	<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_Launch_Light</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Missile\MissileLaunch_Light.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+	
+	
+	<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_Launch_Medium</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Missile\MissileLaunch_Medium.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+	
+	
+		<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_Launch_ATMF</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>7000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Missile\Missile Launch.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>K_SA_Hit_ATMF</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>10000</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>35</DynamicMusicAmount>
+		  <Volume>2</Volume>
+		  <Loopable>false</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Missile\Missile Hit.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>K_SA_Lock_ATMF</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>1000</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>35</DynamicMusicAmount>
+		  <VolumeVariation>0.5</VolumeVariation>
+		  <Volume>2</Volume>
+		  <SoundLimit>1</SoundLimit>
+		  <Loopable>false</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Missile\Missile Klaxon.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>K_SA_Knows_ATMF</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>1000</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>35</DynamicMusicAmount>
+		  <VolumeVariation>0.5</VolumeVariation>
+		  <Volume>2</Volume>
+		  <SoundLimit>1</SoundLimit>
+		  <Loopable>false</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Missile\Missile Knows.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>K_SA_Tartarus_ATMF</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>1000</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>35</DynamicMusicAmount>
+		  <VolumeVariation>0.5</VolumeVariation>
+		  <Volume>2</Volume>
+		  <SoundLimit>1</SoundLimit>
+		  <Loopable>false</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Missile\Tartarus Lock.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>K_SA_Tartarus_Hit_ATMF</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>1000</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>35</DynamicMusicAmount>
+		  <VolumeVariation>0.5</VolumeVariation>
+		  <Volume>2</Volume>
+		  <SoundLimit>1</SoundLimit>
+		  <Loopable>false</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Missile\Tartarus Hit.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>K_SA_Flight_ATM</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>5000</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>35</DynamicMusicAmount>
+		  <Volume>1</Volume>
+		  <Loopable>true</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Missile\Missile Flight.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	
+	
+	
+		<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_Launch_Flare</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Missile\MissileLaunch_Light.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+	
+	
+		
+  
+  </Sounds>
+</Definitions>

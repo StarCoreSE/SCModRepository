@@ -43,7 +43,7 @@ namespace Scripts
         private AmmoDef UnguidedHeavyRockets => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "VMLS_MagazineLarge", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "Heavy Rockets", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoRound = "Peacemaker Heavy Rockets", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 5000, // Direct damage; one steel plate is worth 100.
@@ -138,9 +138,9 @@ namespace Scripts
                 Armor = new ArmorDef
                 {
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
-                    Light = 0.7f, // Multiplier for damage against light armor.
+                    Light = -1f, // Multiplier for damage against light armor.
                     Heavy = -1f, // Multiplier for damage against heavy armor.
-                    NonArmor = 0.4f, // Multiplier for damage against every else.
+                    NonArmor = -1f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
@@ -196,7 +196,7 @@ namespace Scripts
                 {
                     Enable = true,
                     Radius = 9f, // Meters
-                    Damage = 16500,
+                    Damage = 12500,
                     Depth = 3.5f,
                     MaxAbsorb = 0f,
                     Falloff = Linear, //.NoFalloff applies the same damage to all blocks in radius
@@ -284,8 +284,8 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 200, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 1900, // voxel phasing if you go above 5100
-                MaxTrajectory = 6500f, // Max Distance the projectile or beam can Travel.
+                DesiredSpeed = 1000, // voxel phasing if you go above 5100
+                MaxTrajectory = 5000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.

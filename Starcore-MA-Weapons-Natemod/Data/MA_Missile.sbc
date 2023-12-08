@@ -13,13 +13,12 @@
       </Id>
       <DisplayName>MA Derecho Missile Storm</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\MA_Derecho.png</Icon>
-      <Description>A fast fired swarm of guided missiles.
-Role: Assault
-Ammo: MA_Missile (kinetic)
-Range: 4500m
-By AutoMcD Astronautical
-Particle effects by Northwind Industries
-</Description>
+      <Description>
+        [5km Targeting Range]
+        [Kinetic damage]
+        [350 m/s]
+        [Missile]
+      </Description>
 	<CubeSize>Large</CubeSize>
 	<BlockTopology>TriangleMesh</BlockTopology>
 	<Size x="3" y="3" z="3" />

@@ -183,7 +183,7 @@
 			<MaxDistance>800</MaxDistance>
 			<PitchVariation>100</PitchVariation>
 			<Volume>0.8</Volume>
-			<Loopable>true</Loopable>
+			<Loopable>false</Loopable>
 			<Waves>
 				<Wave Type="D3">
 					<Start>Audio\EMP_Fire_Start_Dist.wav</Start>
@@ -204,7 +204,7 @@
 			<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 			<DynamicMusicAmount>3</DynamicMusicAmount>
 			<Volume>1.4</Volume>
-			<Loopable>true</Loopable>
+			<Loopable>false</Loopable>
 			<Waves>
 				<Wave Type="D3">
 					<Start>Audio\Gladius_Fire_Start.wav</Start>
@@ -285,7 +285,7 @@
 				<DistantSound DistanceCrossfade="10" Distance="400" Sound="MediumLaserLoopDistant"/>
 			</DistantSounds>
 			<Volume>.5</Volume>
-			<Loopable>true</Loopable>
+			<Loopable>false</Loopable>
 			<Waves>
 				<Wave Type="D3">
 					<Start>Audio\MediumLaserStart.wav</Start>
@@ -304,7 +304,7 @@
 			<PitchVariation>50</PitchVariation>
 			<PreventSynchronization>0</PreventSynchronization>
 			<Volume>.7</Volume>
-			<Loopable>true</Loopable>
+			<Loopable>false</Loopable>
 			<Waves>
 				<Wave Type="D3">
 					<Start>Audio\MediumLaserStartDistant.wav</Start>
