@@ -138,6 +138,7 @@
         <string>AMP_ArcMelee</string>
         <!--<string>AMP_CryoShotgun</string>
 		<string>AMP_FlameThrowerSmall</string>-->
+		
 
 
       </ItemIds>
@@ -186,6 +187,7 @@
         <string>AQD_LG_GyroUpgrade</string>
         <string>SC_Radome</string>
         <string>SI_Field_Gen</string>
+		<string>AMP_HealGenerator</string>
 		
         
 
