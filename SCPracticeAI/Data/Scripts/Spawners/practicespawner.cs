@@ -49,7 +49,11 @@ namespace Invalid.PracticeSpawner
     {
         private Dictionary<string, string> prefabMap = new Dictionary<string, string>
         {
-            { "CharyAI", "CharyAI" },
+
+            { "RegenAI", "RegenAI" },
+            { "LocusAI", "LocusAI" },
+            { "EldritchAI", "EldritchAI" },
+            { "BismarckAI", "BismarckAI" },
             { "HermesAI", "HermesAI" },
             { "LamAI", "LamAI" },
             { "ZerkAI", "ZerkAI" },
