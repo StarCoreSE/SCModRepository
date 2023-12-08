@@ -13,13 +13,11 @@
       </Id>
       <DisplayName>Slinger AC 150mm</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\MA_AC150.png</Icon>
-      <Description>A heavy duty 150mm cannon turret.
-Role: Battle
-Ammo: 150mm HE (kinetic)
-Range: 2500m
-By AutoMcD Astronautical
-Particle effects by Northwind Industries
-Sounds by Mike_dude</Description>
+      <Description>
+        [3.5km Targeting Range]
+        [Kinetic damage]
+        [1100 m/s]
+      </Description>
 	<CubeSize>Large</CubeSize>
 	<BlockTopology>TriangleMesh</BlockTopology>
 	<Size x="3" y="3" z="3" />
@@ -154,13 +152,11 @@ Sounds by Mike_dude</Description>
       </Id>
       <DisplayName>Slinger AC 150mm Sloped 30</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\MA_AC150_30.png</Icon>
-      <Description>A heavy duty 150mm cannon turret.
-Role: Battle
-Ammo: 150mm HE (kinetic)
-Range: 2500m
-By AutoMcD Astronautical
-Particle effects by Northwind Industries
-Sounds by Mike_dude</Description>
+      <Description>
+        [3.5km Targeting Range]
+        [Kinetic damage]
+        [1100 m/s]
+      </Description>
 	<CubeSize>Large</CubeSize>
 	<BlockTopology>TriangleMesh</BlockTopology>
 	<Size x="3" y="3" z="3" />
@@ -267,13 +263,11 @@ Sounds by Mike_dude</Description>
       </Id>
       <DisplayName>Slinger AC 150mm Sloped 45</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\MA_AC150_45.png</Icon>
-      <Description>A heavy duty 150mm cannon turret.
-Role: Battle
-Ammo: 150mm HE (kinetic)
-Range: 2500m
-By AutoMcD Astronautical
-Particle effects by Northwind Industries
-Sounds by Mike_dude</Description>
+      <Description>
+        [3.5km Targeting Range]
+        [Kinetic damage]
+        [1100 m/s]
+      </Description>
 	<CubeSize>Large</CubeSize>
 	<BlockTopology>TriangleMesh</BlockTopology>
 	<Size x="3" y="4" z="3" />
@@ -383,13 +377,11 @@ Sounds by Mike_dude</Description>
       </Id>
       <DisplayName>Slinger AC 150mm Gantry Style</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\MA_AC150_Gantry.png</Icon>
-      <Description>A heavy duty 150mm cannon turret.
-Role: Battle
-Ammo: 150mm HE (kinetic)
-Range: 2500m
-By AutoMcD Astronautical
-Particle effects by Northwind Industries
-Sounds by Mike_dude</Description>
+      <Description>
+        [3.5km Targeting Range]
+        [Kinetic damage]
+        [1100 m/s]
+      </Description>
 	<CubeSize>Large</CubeSize>
 	<BlockTopology>TriangleMesh</BlockTopology>
 	<Size x="3" y="3" z="3" />
@@ -501,13 +493,11 @@ Sounds by Mike_dude</Description>
       </Id>
       <DisplayName>Slinger AC 150mm Sloped 45 Gantry</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\MA_AC150_45_Gantry.png</Icon>
-      <Description>A heavy duty 150mm cannon turret.
-Role: Battle
-Ammo: 150mm HE (kinetic)
-Range: 2500m
-By AutoMcD Astronautical
-Particle effects by Northwind Industries
-Sounds by Mike_dude</Description>
+      <Description>
+        [3.5km Targeting Range]
+        [Kinetic damage]
+        [1100 m/s]
+      </Description>
 	<CubeSize>Large</CubeSize>
 	<BlockTopology>TriangleMesh</BlockTopology>
 	<Size x="3" y="4" z="3" />

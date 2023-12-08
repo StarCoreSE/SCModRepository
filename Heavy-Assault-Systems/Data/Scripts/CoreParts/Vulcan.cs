@@ -106,7 +106,7 @@ namespace Scripts {
                 },
                 Other = new OtherDef
                 {
-                    ConstructPartCap = 1, // Maximum number of blocks with this weapon on a grid; 0 = unlimited.
+                    ConstructPartCap = 0, // Maximum number of blocks with this weapon on a grid; 0 = unlimited.
                     RotateBarrelAxis = 3, // For spinning barrels, which axis to spin the barrel around; 0 = none.
                     EnergyPriority = 0, // Deprecated.
                     MuzzleCheck = false, // Whether the weapon should check LOS from each individual muzzle in addition to the scope.
@@ -123,7 +123,7 @@ namespace Scripts {
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
                     ReloadTime = 1, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
-                    DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    DelayUntilFire = 60, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     HeatPerShot = 1, // Heat generated per shot.
                     MaxHeat = 1200, // Max heat before weapon enters cooldown (70% of max heat).
                     Cooldown = 0f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
@@ -140,13 +140,13 @@ namespace Scripts {
                 },
                 Audio = new HardPointAudioDef
                 {
-                    PreFiringSound = "", // Audio for warmup effect.
+                    PreFiringSound = "HAS_HecateSpin", // Audio for warmup effect.
                     FiringSound = "HAS_HecateFire", // Audio for firing.
                     FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "", // Sound SubtypeID, for when your Weapon is in a reloading state
                     NoAmmoSound = "",
                     HardPointRotationSound = "", // Audio played when turret is moving.
-                    BarrelRotationSound = "",
+                    BarrelRotationSound = "HAS_HecateSpin",
                     FireSoundEndDelay = 0, // How long the firing audio should keep playing after firing stops. Measured in game ticks(6 = 100ms, 60 = 1 seconds, etc..).
                     FireSoundNoBurst = true,
                 },
@@ -184,8 +184,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                HAS_Vulcan_Ammo,
-                HAS_Vulcan_Stage2_Ammo,// Must list all primary, shrapnel, and pattern ammos.
+                HAS_Vulcan_Ammo, // Must list all primary, shrapnel, and pattern ammos.
             },
             Animations = Vulcan_Animation,
             //Upgrades = UpgradeModules,

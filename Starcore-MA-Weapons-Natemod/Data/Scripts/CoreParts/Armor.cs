@@ -23,8 +23,8 @@ namespace Scripts {
 			 "MA_Laser_Armor15",
 			 "MA_Laser_Armor16"
             },
-            EnergeticResistance = 0.95f, //Resistance to Energy damage. 0.5f = 200% damage, 2f = 50% damage
-            KineticResistance = 0.82f, //Resistance to Kinetic damage. Leave these as 1 for no effect
+            EnergeticResistance = 1.0f, //Resistance to Energy damage. 0.5f = 200% damage, 2f = 50% damage
+            KineticResistance = 1.0f, //Resistance to Kinetic damage. Leave these as 1 for no effect
             Kind = Heavy, //Heavy, Light, NonArmor - which ammo damage multipliers to apply
         };
 /*        ArmorDefinition Armor2 => new ArmorDefinition

@@ -745,6 +745,7 @@ namespace Scripts
                         [ProtoMember(1)] internal float Modifier;
                         [ProtoMember(2)] internal ShieldType Type;
                         [ProtoMember(3)] internal float BypassModifier;
+                        [ProtoMember(4)] internal double HeatModifier;
                     }
 
                     [ProtoContract]
@@ -1284,6 +1285,7 @@ namespace Scripts
                     [ProtoMember(14)] internal uint MaxTrajectoryTime;
                     [ProtoMember(15)] internal ApproachDef[] Approaches;
                     [ProtoMember(16)] internal double TotalAcceleration;
+                    [ProtoMember(17)] internal OnHitDef OnHit;
 
                     [ProtoContract]
                     public struct SmartsDef
@@ -1505,7 +1507,7 @@ namespace Scripts
                         [ProtoMember(66)] internal bool SwapNavigationType;
                         [ProtoMember(67)] internal bool ElevationRelativeToC;
                     }
-
+                    
                     [ProtoContract]
                     public struct MinesDef
                     {
@@ -1514,6 +1516,21 @@ namespace Scripts
                         [ProtoMember(3)] internal int FieldTime;
                         [ProtoMember(4)] internal bool Cloak;
                         [ProtoMember(5)] internal bool Persist;
+                    }
+
+                    [ProtoContract]
+                    public struct OnHitDef
+                    {
+                        /*
+                        [ProtoMember(1)] internal int Duration;
+                        [ProtoMember(2)] internal int ProcInterval;
+                        [ProtoMember(3)] internal double ProcAmount;
+                        [ProtoMember(4)] internal bool ProcOnVoxels;
+                        [ProtoMember(5)] internal bool FragOnProc;
+                        [ProtoMember(6)] internal bool DieOnEnd;
+                        [ProtoMember(7)] internal bool StickOnHit;
+                        [ProtoMember(8)] internal bool AlignFragtoImpactAngle;
+                        */
                     }
                 }
 

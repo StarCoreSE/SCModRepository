@@ -5,7 +5,7 @@
 		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
 			<Id>
 				<TypeId>AmmoDefinition</TypeId>
-				<SubtypeId>IronMaiden_Ammo</SubtypeId>
+				<SubtypeId>Priest_Ammo</SubtypeId>
 			</Id>
 			<BasicProperties>
 				<DesiredSpeed>20000</DesiredSpeed>
@@ -91,7 +91,7 @@
 		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
             <Id>
                 <TypeId>AmmoDefinition</TypeId>
-                <SubtypeId>MK1BattleshipGun_Ammo</SubtypeId>
+                <SubtypeId>Type18_Ammo</SubtypeId>
             </Id>
             <BasicProperties>
                 <DesiredSpeed>20000</DesiredSpeed>
@@ -112,7 +112,7 @@
 		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
 			<Id>
 				<TypeId>AmmoDefinition</TypeId>
-				<SubtypeId>MK2_Battleship_Ammo</SubtypeId>
+				<SubtypeId>Type21_Artillery_Ammo</SubtypeId>
 			</Id>
 			<BasicProperties>
 				<DesiredSpeed>20000</DesiredSpeed>

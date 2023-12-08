@@ -2290,7 +2290,7 @@
  <ParticleEffect xsi:type="MyObjectBuilder_ParticleEffect">
       <Id>
         <TypeId>ParticleEffect</TypeId>
-        <SubtypeId>IronMaiden_Flash</SubtypeId>
+        <SubtypeId>Priest_Flash</SubtypeId>
       </Id>
       <Version>0</Version>
       <ParticleId>2002</ParticleId>
