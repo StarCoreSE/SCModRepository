@@ -55,6 +55,10 @@ namespace Invalid.spawnoneteam
     {
         private Dictionary<string, string> prefabMap = new Dictionary<string, string>
         {
+            { "RegenAI", "RegenAI" },
+            { "LocusAI", "LocusAI" },
+            { "EldritchAI", "EldritchAI" },
+            { "BismarckAI", "BismarckAI" },
             { "HermesAI", "HermesAI" },
             { "LamAI", "LamAI" },
             { "ZerkAI", "ZerkAI" },
