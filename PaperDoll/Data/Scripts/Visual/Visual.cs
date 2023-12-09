@@ -118,8 +118,6 @@ namespace klime.Visual
 
 
             AddBillboard(Color.Lime * 0.75f, hateVector, left, up, tempBillboardScaling, BlendTypeEnum.SDR);
-           // AddBillboard(Color.Red * 0.5f, greaterPainMatrix.Translation -= Vector3D.TransformNormal(relTrans, clonedWorldMatrix), left, up, tempBillboardScaling, BlendTypeEnum.AdditiveTop);
-           // AddBillboard(Color.DodgerBlue * 0.5f, painMatrix.Translation -= Vector3D.TransformNormal(relTrans, clonedWorldMatrix), left, up, tempBillboardScaling, BlendTypeEnum.AdditiveTop);
 
         }
 
@@ -130,41 +128,38 @@ namespace klime.Visual
 
         public void DoRescale()
         {
-            // Pre-calculate values that are used multiple times
-            var worldVolume = grid.PositionComp.WorldVolume;
-            var worldMatrixRef = grid.PositionComp.WorldMatrixRef;
-            var worldRadius = worldVolume.Radius;
+            HandleException(() => {
 
-            // Camera-related calculations
-            var camera = MyAPIGateway.Session.Camera;
-            var newFov = camera.FovWithZoom;
-            var fov = Math.Tan(newFov * 0.5);
-            var scaleFov = 0.1 * fov;
+                var worldVolume = grid.PositionComp.WorldVolume;
+                var worldMatrixRef = grid.PositionComp.WorldMatrixRef;
+                var worldRadius = worldVolume.Radius;
 
-            // HUD Scale
-            const float K = 1.35f;
-            float hudScale = (float)(K / worldRadius);
-            hudScale = MathHelper.Clamp(hudScale, 0.0001f, 0.05f);
+                var camera = MyAPIGateway.Session.Camera;
+                var newFov = camera.FovWithZoom;
+                var fov = Math.Tan(newFov * 0.5);
+                var scaleFov = 0.1f * fov;
 
-            // Scale calculation
-            var minScale = worldRadius > 150 ? 0.0001f : 0.0005f;
-            var scale = MathHelper.Clamp((float)(scaleFov * (hudScale * 0.23f)), minScale, 0.0008f);
+                const float K = 1.35f;
+                float hudScale = (float)(K / worldRadius);
+                hudScale = MathHelper.Clamp(hudScale, 0.0001f, 0.05f);
 
-            // Position and Matrix Operations
-            var modifiedCenter = Vector3D.Transform(GridBoxCenter, worldMatrixRef);
-            controlMatrix *= MatrixD.CreateTranslation(-modifiedCenter) * worldMatrixRef;
+                var minScale = worldRadius > 150 ? 0.0001f : 0.0005f;
+                var scale = MathHelper.Clamp((float)(scaleFov * (hudScale * 0.23f)), minScale, 0.0008f);
 
-            var localCenter = new Vector3D(worldVolume.Center);
-            var trueCenter = Vector3D.Transform(localCenter, grid.WorldMatrix); // not used?
+                var modifiedCenter = Vector3D.Transform(GridBoxCenter, worldMatrixRef);
+                controlMatrix *= MatrixD.CreateTranslation(-modifiedCenter) * worldMatrixRef;
 
-            // Scaling and Translation
-            grid.PositionComp.Scale = scale;
-            relTrans = Vector3D.TransformNormal(GridBoxCenter, MatrixD.Transpose(grid.WorldMatrix)) * scale;
-            GridBoxCenter = grid.PositionComp.LocalVolume.Center;
-            relTrans = -GridBoxCenter;
+                var localCenter = new Vector3D(worldVolume.Center);
+                var trueCenter = Vector3D.Transform(localCenter, grid.WorldMatrix);
 
-            // State management
-            needsRescale = false;
+                grid.PositionComp.Scale = scale;
+                relTrans = Vector3D.TransformNormal(GridBoxCenter, MatrixD.Transpose(grid.WorldMatrix)) * scale;
+                GridBoxCenter = grid.PositionComp.LocalVolume.Center;
+                relTrans = -GridBoxCenter;
+
+                needsRescale = false;
+
+            }, "rescaling grid");
         }
 
 
@@ -182,8 +177,15 @@ namespace klime.Visual
 
         private void ChangeOwnership()
         {
-            grid.ChangeGridOwnership(MyAPIGateway.Session.Player.IdentityId, MyOwnershipShareModeEnum.Faction);
+
+            HandleException(() => {
+
+                grid.ChangeGridOwnership(MyAPIGateway.Session.Player.IdentityId, MyOwnershipShareModeEnum.Faction);
+
+            }, "changing grid ownership");
+
         }
+
 
         private void SetupRendering()
         {
@@ -206,26 +208,27 @@ namespace klime.Visual
             return new Vector3((float)Math.Round(vec.X, decimals), (float)Math.Round(vec.Y, decimals), (float)Math.Round(vec.Z, decimals));
         }
 
-
-
         private void ProcessBlocks()
         {
             List<IMySlimBlock> allBlocks = new List<IMySlimBlock>();
             IMyCubeGrid iGrid = (IMyCubeGrid)grid;
             iGrid.GetBlocks(allBlocks);
             int count = allBlocks.Count;
-            int stride = MathHelper.Clamp(count / 16, 1, 64);
-
-
-            MyAPIGateway.Parallel.For(0, count, i => {
+            int stride = MathHelper.Clamp(count / 16, 1, 2000);
+            MyAPIGateway.Parallel.For(0,count, i =>
+            {
                 var block = allBlocks[i];
                 var pos = block.Position;
                 RecolorArmor(pos);
                 DisableBlock(block.FatBlock as IMyFunctionalBlock);
                 StopEffects(block.FatBlock as IMyExhaustBlock);
                 SetTransparency(block, 0.36f);
-            }, stride);
+            },stride);
+
         }
+
+
+
         private static void SetTransparency(IMySlimBlock cubeBlock, float transparency)
         {
             transparency = 0f - transparency;
@@ -270,7 +273,7 @@ namespace klime.Visual
 
         private void DisableBlock(IMyFunctionalBlock block)
         {
-            if (block != null && block.Enabled != true)
+            if (block != null)
             {
                 block.Enabled = false;
             }
@@ -282,6 +285,18 @@ namespace klime.Visual
         {
             exhaust?.StopEffects();
         }
+
+
+        private void HandleException(Action action, string errorContext)
+        {
+            try { action(); }
+            catch (Exception e)
+            {
+                MyLog.Default.WriteLine($"Error {errorContext}: {e.Message}");
+                MyAPIGateway.Utilities.ShowNotification($"An error occurred while {errorContext}. Please check the log for more details.", 5000, MyFontEnum.Red);
+            }
+        }
+
     }
 
 
@@ -588,23 +603,24 @@ namespace klime.Visual
 
             var stride = MathHelper.Clamp(SlimDelQueue.Count / 16, 1, 48);
 
-           MyAPIGateway.Parallel.For(0, subgrid.grid.CubeBlocks.Count, i =>
-           {
-               var slim = subgrid.grid.CubeBlocks as IMySlimBlock;
-               if (slim != null)
-               {
-                   if (slim.FatBlock == null)
-                   {
-                       if (slim.Integrity <= 0)
-                       {
-                           //SlimDelList.Add(slim.Position);
-                           SlimDelQueue.Enqueue(slim.Position);
-                           SlimDelListMP.Add(slim.Position);
-                           SlimBlocksDestroyed++;
-                       }
-                   }
-               }
-           }, stride);
+
+         MyAPIGateway.Parallel.For(0, SlimDelQueue.Count, i =>
+         {
+             var slim = subgrid.grid.CubeBlocks as IMySlimBlock;
+             if (slim != null)
+             {
+                 if (slim.FatBlock == null)
+                 {
+                     if (slim.Integrity <= 0)
+                     {
+                         //SlimDelList.Add(slim.Position);
+                         SlimDelQueue.Enqueue(slim.Position);
+                         SlimDelListMP.Add(slim.Position);
+                         SlimBlocksDestroyed++;
+                     }
+                 }
+             }
+         }, stride);
             
         }
 
@@ -697,7 +713,6 @@ namespace klime.Visual
                 SetTransparencyForSubparts(subpart.Value, transparency);
             }
         }
-
     }
 
     public class EntVis
@@ -731,6 +746,7 @@ namespace klime.Visual
             this.xOffset = xOffset;
             this.yOffset = yOffset;
             this.rotOffset = rotOffset;
+
             RegisterEvents();
             GenerateClientGrids();
         }
@@ -745,11 +761,6 @@ namespace klime.Visual
             //add hitmarker sound here
         }
 
-        public void BlockRemovedSelf(Vector3I pos)
-        {
-            visGrid?.DoBlockRemove(pos);
-            //add hitmarker sound here
-        }
 
         public void GenerateClientGrids()
         {
@@ -770,7 +781,7 @@ namespace klime.Visual
                 var grid = (MyCubeGrid)obj;
                 grid.SyncFlag = grid.Save = grid.Render.NearFlag = grid.Render.FadeIn = grid.Render.FadeOut = grid.Render.CastShadows = grid.Render.NeedsResolveCastShadow = false;
                 grid.GridPresenceTier = MyUpdateTiersGridPresence.Tier1;
-                MyAPIGateway.Entities.AddEntity(grid); //right hewre
+                MyAPIGateway.Entities.AddEntity(grid); 
                 visGrid = new GridG(new GridR(grid), rotOffset);
             }, "completing the call");
         }
@@ -778,27 +789,15 @@ namespace klime.Visual
         public void Update()
         {
             long currentTime = stopwatch.ElapsedTicks;
-
+            UpdateVisLogic();
+            UpdateRealLogic();
             if (currentTime - lastUpdateTime >= interval)
             {
                 UpdateVisPosition();
                 lastUpdateTime = currentTime;
             }
-            UpdateRealLogic();
-            UpdateVisLogic();
-        }
 
-        public void UpdateSelf()
-        {
-            long currentTime = stopwatch.ElapsedTicks;
-
-            if (currentTime - lastUpdateTime >= interval)
-            {
-                UpdateVisPosition();
-                lastUpdateTime = currentTime;
-            }
-            UpdateRealLogic();
-            UpdateVisLogic();
+            
         }
 
 
@@ -885,13 +884,13 @@ namespace klime.Visual
         private void UpdateVisLogic()
         {
             if (visGrid == null) return;
-            if (!visGrid.doneInitialCleanup) visGrid.DoCleanup();
+            if (!visGrid.doneInitialCleanup) { visGrid.DoCleanup(); return; }
             if (!visGrid.doneRescale) visGrid.DoRescale();
         }
 
         private void UpdateRealLogic()
         {
-            if (realGrid?.MarkedForClose == true || realGrid?.Physics == null) Close();
+            if (realGrid?.MarkedForClose == true || realGrid?.Physics == null || !realGrid.IsPowered ) Close();
         }
 
         public void Close()
@@ -1052,35 +1051,47 @@ namespace klime.Visual
 
         private void WCRegistered() { } // needs to be here
 
+
+        private int tickCounter = 0;
+        private const int TickThreshold = 30; 
+
         public override void UpdateAfterSimulation()
         {
             if (IsInvalidSession()) return;
 
-            //HandleHUDUpdates(); //current doesn't display anything but its hooked up
+            tickCounter++;
+
+            if (tickCounter >= TickThreshold)
+            {
+                tickCounter = 0; // Reset the counter
+
+                switch (viewState)
+                {
+                    case ViewState.SearchingWC:
+                        HanVSearchWC();
+                        break;
+                    case ViewState.GoIdle:
+                    case ViewState.GoIdleWC:
+                        HandleViewStateIdle();
+                        break;
+                }
+
+                switch (viewStateSelf)
+                {
+                    case ViewStateSelf.GoIdleSelf:
+                        HandleViewStateIdleSelf();
+                        break;
+                    case ViewStateSelf.SearchingSelf:
+                        HanVSearchSelf();
+                        break;
+                }
+            }
+
+            //HandleHUDUpdates(); // current doesn't display anything but its hooked up
             HandleUserInput();
-
-            switch (viewState)
-            {
-                case ViewState.SearchingWC:
-                    HanVSearchWC();
-                    break;
-                case ViewState.GoIdle:
-                case ViewState.GoIdleWC:
-                    HandleViewStateIdle();
-                    break;
-
-            }
-
-            switch (viewStateSelf)
-            {
-                case ViewStateSelf.GoIdleSelf:
-                    HandleViewStateIdleSelf();
-                    break;
-                case ViewStateSelf.SearchingSelf:
-                    HanVSearchSelf(); // Create this method to handle SelfRender logic
-                    break;
-            }
         }
+
+
 
         private bool IsInvalidSession()
         {
@@ -1142,6 +1153,7 @@ namespace klime.Visual
             }
             else
             {
+                
                 viewState = ViewState.GoIdleWC;
             }
         }
@@ -1177,15 +1189,28 @@ namespace klime.Visual
 
         private void HanVSearchSelf()
         {
-            MyEntity controlEntSelf = (MyEntity)(MyAPIGateway.Session.Player.Controller?.ControlledEntity?.Entity as IMyCockpit);
-            ExecuteVSearchUpdateSelf(controlEntSelf);
+            HandEx(() =>
+            {
+                MyEntity controlEntSelf = (MyEntity)(MyAPIGateway.Session.Player.Controller?.ControlledEntity?.Entity as IMyCockpit);
+                if (controlEntSelf != null)
+                {
+                    ExecuteVSearchUpdateSelf(controlEntSelf);
+                }
+            }, "HanVSearchSelf");
         }
 
         private void HanVSearchWC()
         {
-            MyEntity controlEnt = (MyEntity)(MyAPIGateway.Session.Player.Controller?.ControlledEntity?.Entity as IMyCockpit);
-            ExecuteVSearchUpdate(controlEnt);
+            HandEx(() =>
+            {
+                MyEntity controlEnt = (MyEntity)(MyAPIGateway.Session.Player.Controller?.ControlledEntity?.Entity as IMyCockpit);
+                if (controlEnt != null)
+                {
+                    ExecuteVSearchUpdate(controlEnt);
+                }
+            }, "HanVSearchWC");
         }
+
 
         private void HandleViewStateIdle()
         {
@@ -1230,34 +1255,35 @@ namespace klime.Visual
 
             MyAPIGateway.Utilities.ShowNotification($"PAPER DOLL {status}", 1000, color);
         }
-
         private void ExecuteVSearchUpdate(MyEntity controlEnt)
         {
-            if (controlEnt == null || wcAPI == null)
+            HandEx(() =>
             {
-                viewState = ViewState.GoIdleWC;
-                return;
-            }
 
-            var ent = wcAPI.GetAiFocus(controlEnt, 0);
+                if (controlEnt == null || wcAPI == null)
+                    throw new ArgumentNullException();
 
-            if (ent == null)
-            {
-                viewState = ViewState.GoIdleWC;
-                return;
-            }
+                var ent = wcAPI.GetAiFocus(controlEnt, 0);
 
-            MyCubeGrid cGrid = ent as MyCubeGrid;
+                if (ent == null)
+                {
+                    ToggleViewState();
+                    ToggleRequestPaperDoll();
+                    throw new InvalidOperationException("GetAiFocus returned null");}
 
-            if (cGrid != null && cGrid.Physics != null)
-            {
+                MyCubeGrid cGrid = ent as MyCubeGrid;
+
+                if (cGrid == null)
+                    throw new InvalidCastException("Cast to MyCubeGrid failed");
+
+                if (cGrid.Physics == null)
+                    throw new NullReferenceException("Physics is null");
+
                 allVis.Add(new EntVis(cGrid, 0.11, 0.05, 0));
+
                 viewState = ViewState.Locked;
-            }
-            else
-            {
-                viewState = ViewState.GoIdleWC;
-            }
+
+            }, "ExecuteVSearchUpdate");
         }
 
 
@@ -1269,8 +1295,8 @@ namespace klime.Visual
                 return;
             }
 
-            var thefuckingcockpitiamcurrentlysittingin = MyAPIGateway.Session.Player.Controller.ControlledEntity.Entity as IMyCockpit;
-            var ent = thefuckingcockpitiamcurrentlysittingin.CubeGrid;
+            var currentCockpit = MyAPIGateway.Session.Player.Controller.ControlledEntity.Entity as IMyCockpit;
+            var ent = currentCockpit.CubeGrid;
 
             if (ent == null)
             {
@@ -1500,8 +1526,7 @@ namespace klime.Visual
             var ent = wcAPI.GetAiFocus(cEnt, 0);
             if (ent == null)
             {
-                //ClearAVis();
-                return;
+                ClearAVis();
             }
 
             MyCubeGrid cGrid = ent as MyCubeGrid;
@@ -1812,7 +1837,7 @@ namespace klime.Visual
             catch (Exception e)
             {
                 MyLog.Default.WriteLine($"Err {ctx}: {e.Message}");
-                MyAPIGateway.Utilities.ShowNotification($"Error in {ctx}. Check Log.", 5000, MyFontEnum.Red);
+                MyAPIGateway.Utilities.ShowNotification($"Error in {ctx}. Check Log.", 6, MyFontEnum.Red);
             }
         }
 
