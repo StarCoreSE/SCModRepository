@@ -270,7 +270,7 @@ namespace klime.Visual
 
         private void DisableBlock(IMyFunctionalBlock block)
         {
-            if (block != null)
+            if (block != null && block.Enabled != true)
             {
                 block.Enabled = false;
             }
