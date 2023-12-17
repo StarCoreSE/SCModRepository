@@ -849,6 +849,10 @@ namespace Klime.CTF
         }
 
 
+        private bool victoryTriggered = false;
+        private int victoryTimer = 0;
+        private const int SpawnInterval = 600; // 10 seconds * 60 updates per second
+        private const int TotalVictoryDuration = 3600; // 60 seconds * 60 updates per second
 
 
         public override void UpdateAfterSimulation()
@@ -1327,6 +1331,61 @@ namespace Klime.CTF
                                 subflag.flag_entity.WorldMatrix = subflag.home_matrix;
                             }
                         }
+
+                        if (gamestate.currentgamestate == CurrentGameState.Victory)
+                        {
+                            if (!victoryTriggered)
+                            {
+                                victoryTriggered = true;
+                                victoryTimer = 0;
+                            }
+
+                            if (victoryTimer % SpawnInterval == 0 && victoryTimer <= TotalVictoryDuration)
+                            {
+                                string winningFactionTag = gamestate.winning_tag;
+                                IMyFaction winningFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag(winningFactionTag);
+
+                                // Determine number of prefabs to spawn (1 to 5)
+                                int spawnCount = MyUtils.GetRandomInt(1, 6);
+
+                                for (int i = 0; i < spawnCount; i++)
+                                {
+                                    // Generate a random offset
+                                    Vector3D offset = new Vector3D(
+                                        MyUtils.GetRandomDouble(-100, 100), // X-axis offset
+                                        MyUtils.GetRandomDouble(-100, 100), // Y-axis offset
+                                        MyUtils.GetRandomDouble(-100, 100)  // Z-axis offset
+                                    );
+
+                                    // Choose a prefab and calculate spawn location with offset
+                                    string prefabName = "ITSOVER"; // Replace with your desired prefab
+                                    Vector3D baseSpawnPosition = new Vector3D(0, 0, 7000); // Base spawn position
+                                    Vector3D spawnPosition = baseSpawnPosition + offset; // Apply offset to base position
+
+                                    Vector3D direction = Vector3D.Forward;
+                                    Vector3D up = Vector3D.Up;
+
+                                    // Spawn the prefab
+                                    List<IMyCubeGrid> resultList = new List<IMyCubeGrid>();
+                                    IMyPrefabManager prefabManager = MyAPIGateway.PrefabManager;
+                                    prefabManager.SpawnPrefab(resultList, prefabName, spawnPosition, direction, up, ownerId: winningFaction?.FounderId ?? 0, spawningOptions: SpawningOptions.None);
+
+                                    // Set ownership of the spawned prefab to the winning faction
+                                    foreach (IMyCubeGrid spawnedGrid in resultList)
+                                    {
+                                        spawnedGrid.ChangeGridOwnership(winningFaction?.FounderId ?? 0, MyOwnershipShareModeEnum.All);
+                                    }
+                                }
+                            }
+
+                            victoryTimer += 1;
+                        }
+                        else
+                        {
+                            victoryTriggered = false;
+                            victoryTimer = 0;
+                        }
+
                     }
 
                     if (packet == null)
