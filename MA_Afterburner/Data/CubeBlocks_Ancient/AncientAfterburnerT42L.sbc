@@ -37,6 +37,9 @@
 				<MountPoint Side="Bottom" StartX="0.12" StartY="0.00" EndX="2.44" EndY="1.00"/>
 			</MountPoints>
 			<BlockPairName>AncientAfterburnerT42L</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+
 		</Definition>
 	</CubeBlocks>
 </Definitions>
