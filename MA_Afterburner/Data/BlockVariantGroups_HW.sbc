@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <BlockVariantGroups>
-  
+
+      <BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="AncientBlockVariantGroup" />
+        <Icon>Textures\Icons\ancient\type 40 thruster icon.png</Icon>
+        <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
+        <Description>Description_BlockGroup_TurretGroup</Description>
+        <Blocks>
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="AncientAfterburnerT40" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="AncientAfterburnerT41" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="AncientAfterburnerT42" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="AncientAfterburnerT42L" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="AncientAfterburnerT43" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="AncientAfterburnerT44" />
+        </Blocks>
+      </BlockVariantGroup>      
+      
 		<BlockVariantGroup>
             <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="DetpakBlockVariantGroup" />
             <Icon>Textures\Icons\Emergency_Thruster.dds</Icon>
