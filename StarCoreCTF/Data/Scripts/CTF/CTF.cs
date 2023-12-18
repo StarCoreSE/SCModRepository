@@ -1358,8 +1358,8 @@ namespace Klime.CTF
                                     );
 
                                     // Choose a prefab and calculate spawn location with offset
-                                    string prefabName = "ITSOVER"; // Replace with your desired prefab
-                                    Vector3D baseSpawnPosition = new Vector3D(0, 0, 7000); // Base spawn position
+                                    string prefabName = "IT'S OVER"; // Replace with your desired prefab
+                                    Vector3D baseSpawnPosition = new Vector3D(0, 7000, 0); // Base spawn position
                                     Vector3D spawnPosition = baseSpawnPosition + offset; // Apply offset to base position
 
                                     Vector3D direction = Vector3D.Forward;
