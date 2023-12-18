@@ -241,7 +241,7 @@
               <CanTargetCharacters>false</CanTargetCharacters>
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Warhead">
-              <SubtypeName>LargeWarhead_NuclearLarge</SubtypeName>
+              <SubtypeName>LargeBlockArmorBlock</SubtypeName>
               <EntityId>132720570331182948</EntityId>
               <Min x="0" y="-4" z="0" />
               <BlockOrientation Forward="Forward" Up="Down" />
