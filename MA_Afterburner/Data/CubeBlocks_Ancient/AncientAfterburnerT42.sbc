@@ -7,17 +7,28 @@
 				<SubtypeId>AncientAfterburnerT42</SubtypeId>
 			</Id>
 			<DisplayName>Ancient Afterburner T42</DisplayName>
-			<Description>Propulsion of unknown composition. Found embedded in a spherical structure.</Description>
-			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+			<Description>
+        Propulsion of unknown composition. Found embedded in a spherical structure.
+      
+				Alternate version of the Ion Afterburner.      
+      </Description>
+			<Icon>Textures\Icons\ancient\type 42 thruster icon.png</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="1" y="1" z="2"/>
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\ancient\AncientAfterburnerT42.mwm</Model>
-			<Components>
-				<Component Subtype="SteelPlate" Count="10"/>
-			</Components>
-			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+      <Components>
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="Computer" Count="10" />
+        <Component Subtype="Construction" Count="100" />
+        <Component Subtype="MetalGrid" Count="20" />
+        <Component Subtype="LargeTube" Count="10" />
+        <Component Subtype="Reactor" Count="30" />
+        <Component Subtype="Motor" Count="100" />
+        <Component Subtype="SteelPlate" Count="1000" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
 			<MountPoints>
 				<MountPoint Side="Left" StartX="0.87" StartY="0.00" EndX="1.94" EndY="1.00"/>
 				<MountPoint Side="Right" StartX="0.06" StartY="0.00" EndX="1.13" EndY="1.00"/>
