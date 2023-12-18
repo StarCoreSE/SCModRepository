@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>AncientAfterburnerT44</SubtypeId>
+			</Id>
+			<DisplayName>Ancient Afterburner T44</DisplayName>
+			<Description>
+       Propulsion of unknown heat dissipation. It once needed coolant piped through it, yet it has been running without for years.
+       
+			 Alternate version of the 5x5 Afterburner. significantly less thrust in exchange for longer burn time.
+      </Description>
+			<Icon>Textures\Icons\ancient\type 44 thruster icon.png</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="3" z="8"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\ancient\AncientAfterburnerT44.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="Computer" Count="10" />
+        <Component Subtype="Construction" Count="100" />
+        <Component Subtype="MetalGrid" Count="20" />
+        <Component Subtype="LargeTube" Count="10" />
+        <Component Subtype="Reactor" Count="30" />
+        <Component Subtype="Motor" Count="100" />
+        <Component Subtype="SteelPlate" Count="2000" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Left" StartX="3.84" StartY="0.00" EndX="7.85" EndY="3.00"/>
+				<MountPoint Side="Right" StartX="0.15" StartY="0.00" EndX="4.16" EndY="3.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.15" EndX="3.00" EndY="4.16"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="3.84" EndX="3.00" EndY="7.85"/>
+			</MountPoints>
+			<BlockPairName>AncientAfterburnerT44</BlockPairName>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

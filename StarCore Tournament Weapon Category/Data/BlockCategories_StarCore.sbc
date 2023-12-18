@@ -168,6 +168,8 @@
         <string>MA_Afterburner_Large_5x</string>
         <string>SC_SRB</string>
         <string>DETPAK</string>
+        <string>AncientAfterburnerT40</string>
+        
 
         <!--ARYX-->
         <string>ARYXLargeRadar</string>

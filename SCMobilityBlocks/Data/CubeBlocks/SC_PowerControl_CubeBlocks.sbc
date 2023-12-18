@@ -10,7 +10,7 @@
       <Public>true</Public>
       <DisplayName>Power Controller</DisplayName>
       <Icon>Textures\Underclock_Panel.dds</Icon>
-      <Description>Intel® Extreme Tuning Utility (Intel® XTU) is a simple Windows* performance tuning application for novice and experienced enthusiasts to overclock, monitor, and stress a system. The software interface has a set of strong capabilities, common in most enthusiast platforms. This interface also has special features available on new Intel® processors and motherboards.</Description>
+      <Description>Allows you to underclock your thrusters to save power, at the cost of thrust output.</Description>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="1" y="1" z="1" />
