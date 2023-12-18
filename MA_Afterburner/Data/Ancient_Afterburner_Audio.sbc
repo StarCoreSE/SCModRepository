@@ -59,7 +59,7 @@
         <SubtypeId>Ancient_Afterburner_Deep</SubtypeId>
       </Id>
       <Category>WEP_SHIP</Category>
-      <MaxDistance>800</MaxDistance>
+      <MaxDistance>1600</MaxDistance>
       <Volume>2</Volume>
       <PreventSynchronization>1</PreventSynchronization>
       <Loopable>true</Loopable>
