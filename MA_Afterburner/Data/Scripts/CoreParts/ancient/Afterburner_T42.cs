@@ -27,13 +27,13 @@ namespace Scripts {
                     },
                    },
                 Muzzles = new[] {
-                    "Muzzle01",
+                    "Muzzled01",
 
 
 
                 },
                 Ejector = "", // Optional; empty from which to eject "shells" if specified.
-                Scope = "Muzzle01", // Where line of sight checks are performed from. Must be clear of block collision.
+                Scope = "Muzzled01", // Where line of sight checks are performed from. Must be clear of block collision.
             },
             Targeting = new TargetingDef
             {
