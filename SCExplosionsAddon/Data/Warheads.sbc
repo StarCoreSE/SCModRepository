@@ -4,11 +4,51 @@
     <Definition xsi:type="MyObjectBuilder_WarheadDefinition">
       <Id>
         <TypeId>Warhead</TypeId>
+        <SubtypeId>SmallWarhead_Nuclear</SubtypeId>
+      </Id>
+      <DisplayName>Mini-Nuke</DisplayName>
+      <Icon>Textures\Icons\warheadNuclearIcon.dds</Icon>
+      <Description>Description_Warhead</Description>
+      <CubeSize>Small</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Small\warhead.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="1" />
+        <Component Subtype="Girder" Count="1" />
+        <Component Subtype="Construction" Count="1" />
+        <Component Subtype="SmallTube" Count="2" />
+        <Component Subtype="Computer" Count="1" />
+		<Component Subtype="EnrichedUraniumCore" Count="1" />
+        <Component Subtype="Explosives" Count="2" />
+        <Component Subtype="SteelPlate" Count="3" />
+      </Components>
+      <CriticalComponent Subtype="Explosives" Index="0" />
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="0.50" File="Models\Cubes\Small\WarheadConstruction_1.mwm" />
+        <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Small\WarheadConstruction_2.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>MiniNuke</BlockPairName>
+      <ActionSound>WepLrgWarheadExpl</ActionSound>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>20</BuildTimeSeconds>
+      <ExplosionRadius>0.01</ExplosionRadius>
+      <WarheadExplosionDamage>1</WarheadExplosionDamage>
+      <EmissiveColorPreset>Timer</EmissiveColorPreset>
+      <DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>50</PCU>
+      <IsAirTight>false</IsAirTight>      
+    </Definition>
+    <Definition xsi:type="MyObjectBuilder_WarheadDefinition">
+      <Id>
+        <TypeId>Warhead</TypeId>
         <SubtypeId>LargeWarhead_Nuclear</SubtypeId>
       </Id>
-      <DisplayName>thebigone</DisplayName>
-       <Icon>Textures\GUI\Icons\Cubes\warhead.dds</Icon>
-      <Description>Don't use this. It's for a future idea.</Description>
+      <DisplayName>Nuclear Warhead</DisplayName>
+      <Icon>Textures\Icons\warheadNuclearIcon.dds</Icon>
+      <Description>Description_Warhead</Description>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="1" y="1" z="1" />
@@ -51,11 +91,58 @@
 	<Definition xsi:type="MyObjectBuilder_WarheadDefinition">
       <Id>
         <TypeId>Warhead</TypeId>
+        <SubtypeId>LargeWarhead_NuclearSmall</SubtypeId>
+      </Id>
+      <DisplayName>Nuclear Warhead</DisplayName>
+      <Icon>Textures\Icons\warheadNuclearIcon.dds</Icon>
+      <Description>Description_Warhead</Description>
+      <CubeSize>Small</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="5" y="5" z="5" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Large\warhead.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="10" />
+        <Component Subtype="Girder" Count="24" />
+        <Component Subtype="Construction" Count="12" />
+        <Component Subtype="SmallTube" Count="12" />
+        <Component Subtype="Computer" Count="2" />
+		<Component Subtype="EnrichedUraniumCore" Count="2" />
+        <Component Subtype="Explosives" Count="6" />
+        <Component Subtype="SteelPlate" Count="10" />
+      </Components>
+      <CriticalComponent Subtype="Explosives" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Front" StartX="0.2" StartY="0.2" EndX="4.8" EndY="4.8" />
+        <MountPoint Side="Back" StartX="0.2" StartY="0.2" EndX="4.8" EndY="4.8" />
+        <MountPoint Side="Right" StartX="0.2" StartY="0.2" EndX="4.8" EndY="4.8" />
+        <MountPoint Side="Left" StartX="0.2" StartY="0.2" EndX="4.8" EndY="4.8" />
+        <MountPoint Side="Bottom" StartX="0.2" StartY="0.2" EndX="4.8" EndY="4.8" Default="true" />
+        <MountPoint Side="Top" StartX="0.2" StartY="0.2" EndX="4.8" EndY="4.8" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\WarheadConstruction_1.mwm" />
+        <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\WarheadConstruction_2.mwm" />
+        <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\WarheadConstruction_3.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>NuclearWarhead</BlockPairName>
+      <ActionSound>WepLrgWarheadExpl</ActionSound>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>60</BuildTimeSeconds>
+      <ExplosionRadius>0.01</ExplosionRadius>
+      <WarheadExplosionDamage>1</WarheadExplosionDamage>
+      <EmissiveColorPreset>Timer</EmissiveColorPreset>
+      <PCU>100</PCU>
+      <IsAirTight>false</IsAirTight>      
+    </Definition>
+	<Definition xsi:type="MyObjectBuilder_WarheadDefinition">
+      <Id>
+        <TypeId>Warhead</TypeId>
         <SubtypeId>LargeWarhead_NuclearLarge</SubtypeId>
       </Id>
-      <DisplayName>thebiggerone</DisplayName>
-            <Icon>Textures\GUI\Icons\Cubes\warhead.dds</Icon>
-      <Description>Don't use this. It's for a future idea.</Description>
+      <DisplayName>Thermonuclear Warhead</DisplayName>
+      <Icon>Textures\Icons\warheadNuclearIcon2.dds</Icon>
+      <Description>Description_Warhead</Description>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="1" y="1" z="1" />
