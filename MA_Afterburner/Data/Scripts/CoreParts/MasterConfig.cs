@@ -23,8 +23,8 @@ namespace Scripts
 
             AncientAfterburnerT40,
             AncientAfterburnerT41,
-            AncientAfterburnerT42
-            //AncientAfterburnerT42L
+            AncientAfterburnerT42,
+            AncientAfterburnerT42L
             //AncientAfterburnerT43
             //AncientAfterburnerT44
 

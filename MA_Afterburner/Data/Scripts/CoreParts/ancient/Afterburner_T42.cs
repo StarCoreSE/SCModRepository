@@ -184,7 +184,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                Afterburner_ammo_t41,
+                Afterburner_ammo_t42,
                 // Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = Weapon75_Animation,
