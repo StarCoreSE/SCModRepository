@@ -99,6 +99,12 @@ namespace ShipPoints
 				MA_Afterburner_Large_small@50;
 				MA_Afterburner_Large_5x@250;
 				Afterburner_LG_Ion_Large@150;
+				AncientAfterburnerT40@50;
+				AncientAfterburnerT41@50;
+				AncientAfterburnerT42@150;
+				AncientAfterburnerT42L@150;
+				AncientAfterburnerT43@250;
+				AncientAfterburnerT44@250;
 				MA_Tiger@150;
 				MA_Crouching_Tiger@150;
 				AQD_LG_HydroThrusterL_ArmoredSlope@50;
