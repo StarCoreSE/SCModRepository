@@ -9,10 +9,8 @@
       <DisplayName>MA</DisplayName>
       <Name>AutoMcD_Astronautical</Name>
       <ItemIds>
-	    <string>MA_Afterburner_Large_small</string>
-	    <string>MA_Afterburner_Large</string>
 	    <string>MA_Afterburner_Large_5x</string>
-	    <string>Afterburner_LG_Ion_Large</string>		
+	    <string>AncientAfterburnerT40</string>		
 		<string>MA_SideBooster_Small</string>
 		<string>DETPAK</string>
       </ItemIds>
