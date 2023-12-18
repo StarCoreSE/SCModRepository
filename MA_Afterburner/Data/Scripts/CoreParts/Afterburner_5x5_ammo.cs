@@ -384,7 +384,7 @@ namespace Scripts
             {
                 TravelSound = "",
                 HitSound = "",
-                ShotSound = "MA_Afterburner_Large_Fug",
+                ShotSound = "",
                 ShieldHitSound = "",
                 PlayerHitSound = "",
                 VoxelHitSound = "",

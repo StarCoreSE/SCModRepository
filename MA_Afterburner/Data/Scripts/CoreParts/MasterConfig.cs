@@ -16,10 +16,17 @@ namespace Scripts
             MA_Afterburner_Large,
             MA_Afterburner_Large_5x,
             Afterburner_LG_Ion_Large,
-			SRB,
-			DETPAK,
+            SRB,
+            DETPAK,
             DETPAK_1x1,
-            DETPAK_3x1
+            DETPAK_3x1,
+
+            AncientAfterburnerT40,
+            AncientAfterburnerT41,
+            AncientAfterburnerT42
+            //AncientAfterburnerT42L
+            //AncientAfterburnerT43
+            //AncientAfterburnerT44
 
 
             );
