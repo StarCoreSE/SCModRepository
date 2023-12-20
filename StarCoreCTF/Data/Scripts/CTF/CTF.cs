@@ -5,7 +5,7 @@ using VRage.Game;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRageMath;
-using Draygo.API;
+using Draygo.API.SC;
 using VRage.Game.Entity;
 using System;
 using VRage.ModAPI;
@@ -25,6 +25,8 @@ namespace Klime.CTF
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     public class CTF : MySessionComponentBase
     {
+        private static readonly StringBuilder GripBracketConst = new StringBuilder("[       ]");
+
         List<Flag> allflags = new List<Flag>();
         GameState gamestate;
         MyStringId square;
@@ -837,13 +839,13 @@ namespace Klime.CTF
         {
             int totalBars = 10;
             int filledBars = (int)Math.Round(gripStrength / 10f); // Assuming gripStrength is out of 100
-            string gripBar = new string('|', filledBars).PadRight(totalBars, ' ');
+            string gripBar = new string('|', filledBars);
 
             // If the flag is active, add brackets around the grip bar
-            if (isActiveFlag)
-            {
-                gripBar = "[" + gripBar + "]";
-            }
+            //if (isActiveFlag)
+            //{
+            //    gripBar = "[" + gripBar + "]";
+            //}
 
             return gripBar;
         }
@@ -1502,13 +1504,21 @@ namespace Klime.CTF
                         blueGripSb.Append(blueGripBar);
                         var blueGripMessage = new HudAPIv2.HUDMessage(blueGripSb, bluePosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
                         blueGripMessage.InitialColor = Color.Blue;
+
+                        if (redFlag.state == FlagState.Active)
+                        {
+                            var redGripBracket = new HudAPIv2.HUDMessage(GripBracketConst, redPosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
+                            redGripBracket.Origin -= redGripBracket.GetTextLength() * Vector2D.UnitX / 10;
+                            redGripBracket.InitialColor = Color.Red;
+                        }
+
+                        if (blueFlag.state == FlagState.Active)
+                        {
+                            var blueGripBracket = new HudAPIv2.HUDMessage(GripBracketConst, bluePosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
+                            blueGripBracket.Origin -= blueGripBracket.GetTextLength() * Vector2D.UnitX / 10;
+                            blueGripBracket.InitialColor = Color.Blue;
+                        }
                     }
-
-
-
-
-
-
 
 
 
