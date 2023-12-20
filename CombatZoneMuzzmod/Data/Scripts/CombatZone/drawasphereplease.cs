@@ -81,20 +81,25 @@ namespace YourModNamespace
 
         private static MatrixD CalculateRotationMatrix(Vector3D directionToOrigin) => MatrixD.CreateWorld(Vector3D.Zero, directionToOrigin, Vector3D.Up);
 
- 
+
         private static void DrawBlueBoxes(double distanceToOrigin, Vector3D directionToOrigin, MatrixD rotationMatrix)
         {
-
             Vector3 halfExtents = new Vector3(2.5f, 2.5f, 2.5f);
             BoundingBoxD blueBox = new BoundingBoxD(-halfExtents, halfExtents);
             Color specialLineColor = new Color(255, 0, 0, 128); // Red color for the special perpendicular line
 
             // Separate distance check for the special 7500 unit line
-            if (distanceToOrigin >= 9000 && distanceToOrigin < 12500)
+            if (distanceToOrigin >= 9000 && distanceToOrigin < 10000)
             {
                 Vector3D specialWallPosition = Vector3D.Zero - (directionToOrigin * 10000);
                 DrawBox(blueBox, specialWallPosition, BlueBoxColor, rotationMatrix);
-                DrawPerpendicularLine(specialWallPosition, rotationMatrix, 500, specialLineColor);
+                DrawPerpendicularPlane(specialWallPosition, rotationMatrix, 500, 0.1, specialLineColor);
+            }
+            else if (distanceToOrigin >= 10000 && distanceToOrigin < 12500)
+            {
+                Vector3D specialWallPosition = Vector3D.Zero - (directionToOrigin * 10000);
+                DrawBox(blueBox, specialWallPosition, BlueBoxColor, rotationMatrix);
+                DrawPerpendicularPlane(specialWallPosition, rotationMatrix, 500, 0.1, specialLineColor);
             }
 
             // General distance check for other boxes
@@ -117,6 +122,26 @@ namespace YourModNamespace
                 }
             }
         }
+
+        private static void DrawPerpendicularPlane(Vector3D boxPosition, MatrixD rotationMatrix, double planeWidth = 500, double planeThickness = 0.1, Color? color = null)
+        {
+            Vector3D perpendicularDir = Vector3D.CalculatePerpendicularVector(rotationMatrix.Forward);
+            Vector3D planeNormal = rotationMatrix.Forward;
+            Vector3 halfExtents = new Vector3((float)planeWidth, (float)planeWidth, (float)planeThickness);
+            BoundingBoxD planeBox = new BoundingBoxD(-halfExtents, halfExtents);
+
+            // Create a variable for the plane matrix
+            MatrixD planeMatrix = MatrixD.CreateWorld(boxPosition, planeNormal, perpendicularDir);
+
+            // Create variables for other parameters
+            Color planeColor = color ?? LineColor;
+
+            // Draw the plane
+            MySimpleObjectDraw.DrawTransparentBox(ref planeMatrix, ref planeBox, ref planeColor, MySimpleObjectRasterizer.Solid, 1, 0.1f, MyStringId.GetOrCompute("Square"));
+        }
+
+
+
 
 
 
