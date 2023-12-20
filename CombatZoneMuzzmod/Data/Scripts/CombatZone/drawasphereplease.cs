@@ -19,7 +19,7 @@ namespace YourModNamespace
         private static readonly Color BlueBoxColor = new Color(0, 0, 255, 128);
         private static readonly Color LineColor = Color.Green;
         private static readonly int[] DistanceMultipliers = { 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000 };
-        private bool notificationFlag = false;
+        private const int BoundaryRadius = 10000; // Define the boundary radius
 
         public override void UpdateAfterSimulation()
         {
@@ -32,8 +32,14 @@ namespace YourModNamespace
 
             Vector3D directionToOrigin = CalculateDirectionToOrigin(playerPosition.Value);
             double distanceToOrigin = playerPosition.Value.Length();
+            double remainingDistance = BoundaryRadius - distanceToOrigin; // Calculate remaining distance
             float boxSpacing = CalculateBoxSpacing(distanceToOrigin);
             MatrixD rotationMatrix = CalculateRotationMatrix(directionToOrigin);
+
+            if (remainingDistance <= 1000) // Adjust this value as needed
+            {
+                ShowDistanceNotification(remainingDistance);
+            }
 
             if (rotationMatrix == null)
             {
@@ -44,17 +50,13 @@ namespace YourModNamespace
             // DrawRedBoxes(playerPosition.Value, directionToOrigin, rotationMatrix.Value, boxSpacing);
             DrawGreenLine(distanceToOrigin, playerPosition.Value, directionToOrigin);
 
-            if (distanceToOrigin >= 9000)
-            {
-                ShowDistanceNotification(distanceToOrigin);
-            }
 
         }
 
-        private void ShowDistanceNotification(double distanceToOrigin)
+        private void ShowDistanceNotification(double remainingDistance)
         {
-            string notificationMessage = $"Distance to Origin: {distanceToOrigin.ToString("F2")} meters";  // Format distance with two decimal points
-            MyAPIGateway.Utilities.ShowNotification(notificationMessage, 10, MyFontEnum.Green);  // Display for 2 seconds
+            string notificationMessage = $"Out of Bounds in: {remainingDistance.ToString("F2")} meters";
+            MyAPIGateway.Utilities.ShowNotification(notificationMessage, 10, MyFontEnum.Red);
         }
 
         private static Vector3D? PlayerPosition
