@@ -125,18 +125,31 @@ namespace YourModNamespace
 
         private static Color CalculateSpecialLineColor(double distanceToOrigin)
         {
-            if (distanceToOrigin < 10000)
+            byte alpha;
+
+            if (distanceToOrigin >= 9000 && distanceToOrigin < 10000)
             {
-                // Calculate the alpha component to increase visibility as you approach 10 km
-                double alpha = Math.Max(0, Math.Min(255, (10000 - distanceToOrigin) / 1000 * 255));
-                return new Color(255, 0, 0, (byte)alpha); // Red color with calculated alpha
+                // Scale alpha from 0 (100% transparent) to 179 (about 30% transparent) as distance approaches 10km
+                // This makes the plane go from invisible to slightly visible
+                alpha = (byte)((distanceToOrigin - 9000) / 1000 * 179);
+            }
+            else if (distanceToOrigin >= 10000)
+            {
+                // Set alpha to 25 (about 90% transparent) beyond 10km
+                // This makes it slightly visible from outside
+                alpha = 1;
             }
             else
             {
-                // Set a constant low alpha component for transparency beyond 10 km
-                return new Color(50, 0, 0, 25); // Red color with a constant low alpha
+                // If distance is less than 9000m, make it completely transparent
+                alpha = 0; // Completely transparent
             }
+
+            return new Color(255, 0, 0, alpha); // Red color with calculated alpha
         }
+
+
+
 
 
 
