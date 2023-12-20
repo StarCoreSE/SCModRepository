@@ -86,7 +86,7 @@ namespace YourModNamespace
         {
             Vector3 halfExtents = new Vector3(2.5f, 2.5f, 2.5f);
             BoundingBoxD blueBox = new BoundingBoxD(-halfExtents, halfExtents);
-            Color specialLineColor = new Color(255, 0, 0, 128); // Red color for the special perpendicular line
+            Color specialLineColor = CalculateSpecialLineColor(distanceToOrigin); // Calculate the special line color
 
             // Separate distance check for the special 7500 unit line
             if (distanceToOrigin >= 9000 && distanceToOrigin < 10000)
@@ -123,6 +123,24 @@ namespace YourModNamespace
             }
         }
 
+        private static Color CalculateSpecialLineColor(double distanceToOrigin)
+        {
+            if (distanceToOrigin < 10000)
+            {
+                // Calculate the alpha component to increase visibility as you approach 10 km
+                double alpha = Math.Max(0, Math.Min(255, (10000 - distanceToOrigin) / 1000 * 255));
+                return new Color(255, 0, 0, (byte)alpha); // Red color with calculated alpha
+            }
+            else
+            {
+                // Set a constant low alpha component for transparency beyond 10 km
+                return new Color(50, 0, 0, 25); // Red color with a constant low alpha
+            }
+        }
+
+
+
+
         private static void DrawPerpendicularPlane(Vector3D boxPosition, MatrixD rotationMatrix, double planeWidth = 500, double planeThickness = 0.1, Color? color = null)
         {
             Vector3D perpendicularDir = Vector3D.CalculatePerpendicularVector(rotationMatrix.Forward);
@@ -138,24 +156,6 @@ namespace YourModNamespace
 
             // Draw the plane
             MySimpleObjectDraw.DrawTransparentBox(ref planeMatrix, ref planeBox, ref planeColor, MySimpleObjectRasterizer.Solid, 1, 0.1f, MyStringId.GetOrCompute("Square"));
-        }
-
-
-
-
-
-
-        private static void DrawRedBoxes(Vector3D playerPosition, Vector3D directionToOrigin, MatrixD rotationMatrix, float boxSpacing)
-        {
-            Vector3 halfExtents = new Vector3(2.5f, 2.5f, 2.5f);
-            BoundingBoxD redBox = new BoundingBoxD(-halfExtents, halfExtents);
-            Vector3D boxPosition = playerPosition + (directionToOrigin * 10);
-
-            for (int i = 0; i < NumberOfBoxes; i++)
-            {
-                DrawBox(redBox, boxPosition, BoxColor, rotationMatrix);
-                boxPosition += directionToOrigin * boxSpacing;
-            }
         }
 
         private static void DrawBox(BoundingBoxD box, Vector3D position, Color color, MatrixD rotationMatrix)
