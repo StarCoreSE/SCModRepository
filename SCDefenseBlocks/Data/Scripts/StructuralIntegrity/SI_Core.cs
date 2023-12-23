@@ -839,9 +839,26 @@ namespace StarCore.StructuralIntegrity
 
         static bool Siege_Enabled_Enabler(IMyTerminalBlock block)
         {
+            // Validate the input block is not null
+            if (block == null)
+            {
+                // Log error or handle it as per requirement
+                return false; // or a sensible default considering the game's behavior
+            }
+
+            // Safely retrieve the SI_Core logic component
             SI_Core blockLogic = GetLogic(block);
+            if (blockLogic == null)
+            {
+                // Log error or handle it as per requirement
+                return false; // or a sensible default considering the game's behavior
+            }
+
+            // Safely return the SiegeEnabled property
+            // Assuming SiegeEnabled is a non-nullable bool; otherwise, further null-check might be necessary
             return blockLogic.SiegeEnabled;
         }
+
 
         static bool Siege_Status_Enabler(IMyTerminalBlock block)
         {
