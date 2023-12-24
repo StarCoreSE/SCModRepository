@@ -1,10 +1,12 @@
 ﻿using Sandbox.Common.ObjectBuilders;
+using Sandbox.Game;
 using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
 using System;
 using VRage;
 using VRage.Game;
 using VRage.Game.Components;
+using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRage.Game.ObjectBuilders.ComponentSystem;
 using VRage.ModAPI;
@@ -17,7 +19,7 @@ namespace Invalid.MetalFoam
     public class MetalFoamGenerator : MyGameLogicComponent
     {
         private IMyCubeBlock block;  // This is the declaration you need
-        private const int sphereRadius = 3;  // This makes sphereRadius available to the whole class
+        private const int sphereRadius = 4;  // This makes sphereRadius available to the whole class
 
 
         private int nextLayerTick = 0;
@@ -63,27 +65,22 @@ namespace Invalid.MetalFoam
         {
             if (!block.SlimBlock.IsDestroyed) // Replace with appropriate check for your scenario
             {
+
+                // Play particle and sound effects at the block's position
+                MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("MetalFoamSmoke", block.GetPosition());
+                MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("MetalFoamSound", block.GetPosition());
+
+                // Proceed with foam generation
                 center = block.Position; // Set the center for sphere generation
                 radius = sphereRadius; // Set the radius
                 currentLayer = 0; // Start from the first layer
                 nextLayerTick = MyAPIGateway.Session.GameplayFrameCounter; // Start immediately
                 NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME; // Begin updates
+
             }
         }
 
 
-
-
-        private void GenerateArmorSphere(Vector3I center, int radius)
-        {
-            this.center = center; // Store center for later
-            this.radius = radius; // Store radius for later
-
-            // Start the layering process
-            currentLayer = 0; // Reset current layer
-            nextLayerTick = MyAPIGateway.Session.GameplayFrameCounter; // Start immediately
-            NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME; // Ensure updates are called
-        }
 
         // This method will handle adding a single layer at a time
         private void AddLayer(Vector3I center, int radius, int layerIndex)
