@@ -8,7 +8,7 @@
                 <SubtypeId>LargeDecoy_MetalFoam</SubtypeId>
             </Id>
             <DisplayName>Metal Foam Decoy</DisplayName>
-            <Icon>Textures\GUI\Icons\Cubes\decoy.dds</Icon>
+            <Icon>Textures\GUI\Icons\Cubes\metalfoam.png</Icon>
             <Description>Upon destruction, tries to fill in the space around it with Metal Foam (light armor)</Description>
             <CubeSize>Large</CubeSize>
             <BlockTopology>TriangleMesh</BlockTopology>
@@ -17,11 +17,11 @@
 			<Model>Models\LargeDecoy_MetalFoam.mwm</Model>
             <Components>
                 <Component Subtype="SteelPlate" Count="10" />
+                <Component Subtype="RadioCommunication" Count="1" />
                 <Component Subtype="Construction" Count="10" />
                 <Component Subtype="Computer" Count="10" />
-                <Component Subtype="RadioCommunication" Count="1" />
                 <Component Subtype="LargeTube" Count="2" />
-                <Component Subtype="SteelPlate" Count="20" />
+                <Component Subtype="SteelPlate" Count="200" />
             </Components>
             <CriticalComponent Subtype="RadioCommunication" Index="0" />
 			<MountPoints>
