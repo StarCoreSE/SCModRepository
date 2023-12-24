@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Sounds>
+
+		<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>MetalFoamSound</SubtypeId>
+			</Id>
+			<Category>SHOT</Category>
+			<MaxDistance>200</MaxDistance>
+			<PreventSynchronization>0</PreventSynchronization>
+			<Volume>0.4</Volume>
+			<SoundLimit>100</SoundLimit>
+			<PitchVariation>100</PitchVariation>
+			<Pitch>2</Pitch>
+			<Loopable>false</Loopable>
+			<Waves>
+				<Wave Type="D3">
+					<Start>Audio\steampressurerelease.wav</Start>
+				</Wave>
+			</Waves>
+		</Sound>
+		
+		
+	
+		
+		
+	</Sounds>
+</Definitions>
