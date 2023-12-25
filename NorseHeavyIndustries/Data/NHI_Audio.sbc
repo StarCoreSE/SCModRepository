@@ -69,6 +69,38 @@
     <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Auto_Ricochet</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <Volume>0.75</Volume>
+      <VolumeVariation>0.5</VolumeVariation>
+      <Loopable>false</Loopable>
+      <PitchVariation>14</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Auto_Ricochet_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Auto_Ricochet_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Auto_Ricochet_03.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Auto_Ricochet_04.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Auto_Ricochet_05.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Auto_Ricochet_06.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
         <SubtypeId>Autocannon_Firesound</SubtypeId>
       </Id>
       <Category>SHOT</Category>
