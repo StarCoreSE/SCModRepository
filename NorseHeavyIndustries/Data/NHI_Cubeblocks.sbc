@@ -1880,7 +1880,7 @@ Lacks the Ability to Heal Shields and and Must Completely cool down after reachi
      <BlockTopology>TriangleMesh</BlockTopology>
      <Size x="3" y="2" z="4" />
      <ModelOffset x="0" y="0" z="0" />
-     <Model>Models\Large\NHI_Kinetic_Turret.mwm</Model>
+     <Model>Models\Large\NHI_Hurricane_Mk2_Base.mwm</Model>
      <Components>
 		<Component Subtype="SteelPlate" Count="150" />
 		<Component Subtype="Construction" Count="200" />
