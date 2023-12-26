@@ -1,0 +1,46 @@
+﻿<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EmissiveColorStatePresets>
+    <!--
+    Blocks use these states:
+      Working - block is functional
+      Disabled - block has no power or is not enabled
+      Damaged - block is not functional (damaged)
+      Warning - used by some blocks to when the block is not working correctly (for example used by vent when the room is not presurized)
+      Alternative - used by some blocks that it is working in different way than default one (for example used by vent when depressurizing)
+      Locked - Used by connector type blocks when they are locked with each other
+      Autolock - Used by landing gear
+      Constraint - Used by connector type block when they are close enough and are not locked
+    -->
+
+    <EmissiveColorStatePreset>
+      <Id>
+        <TypeId>MyObjectBuilder_EmissiveColorStatePresetDefinition</TypeId>
+        <SubtypeId>AryxPlasmaPreset</SubtypeId>
+      </Id>
+      <EmissiveStates>
+        <EmissiveState StateName="Damaged" EmissiveColorName="Black" DisplayColorName="Black" Emissivity="0" />
+        <EmissiveState StateName="Disabled" EmissiveColorName="Black" DisplayColorName="Black" Emissivity="0.5" />
+        <EmissiveState StateName="Working" EmissiveColorName="PlasmaBlue" DisplayColorName="White" Emissivity="10" />
+        <EmissiveState StateName="Warning" EmissiveColorName="LightYellow" DisplayColorName="White" Emissivity="1" />
+        <EmissiveState StateName="Alternative" EmissiveColorName="LightBlue" DisplayColorName="White" Emissivity="1" />
+      </EmissiveStates>
+    </EmissiveColorStatePreset>
+  </EmissiveColorStatePresets>
+  <EmissiveColors>
+
+    <EmissiveColor>
+      <Id>
+        <TypeId>MyObjectBuilder_EmissiveColorDefinition</TypeId>
+        <SubtypeId>PlasmaBlue</SubtypeId>
+      </Id>
+      <ColorDefinition>
+        <R>10</R>
+        <G>158</G>
+        <B>255</B>
+        <A>255</A>
+      </ColorDefinition>
+    </EmissiveColor>
+
+  </EmissiveColors>
+</Definitions>

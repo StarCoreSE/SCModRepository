@@ -194,7 +194,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                AryxBurstAmmoWC,// Must list all primary, shrapnel, and pattern ammos.
+                AfflictorBurstAmmoWC,// Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = Weapon75_Animation,
             //Upgrades = UpgradeModules,

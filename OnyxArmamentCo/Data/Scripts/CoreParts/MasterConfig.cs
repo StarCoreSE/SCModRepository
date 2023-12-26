@@ -12,7 +12,11 @@ namespace Scripts
             // PartDefinitions includes both weapons and phantoms
             PartDefinitions(
 
-            SC_AR_Afflictor
+            SC_AR_Aries,
+
+            SC_AR_Afflictor,
+            SC_AR_Resheph,
+            SC_AR_CataclysmicVariable
             
             );
           
