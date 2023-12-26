@@ -4,21 +4,21 @@
 		<Definition>
 			<Id>
 				<TypeId>CubeBlock</TypeId>
-				<SubtypeId>SC_AR_Nimrod</SubtypeId>
+				<SubtypeId>SC_AR_Aries</SubtypeId>
 			</Id>
-			<DisplayName>{LOC:DisplayName_SC_AR_Nimrod}</DisplayName>
-			<Description>{LOC:Description_SC_AR_Nimrod}</Description>
+			<DisplayName>{LOC:DisplayName_SC_AR_Aries}</DisplayName>
+			<Description>{LOC:Description_SC_AR_Aries}</Description>
 			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
-			<Size x="1" y="1" z="5"/>
+			<Size x="3" y="2" z="9"/>
 			<ModelOffset x="0" y="0" z="0"/>
-			<Model>Models\Cubes\large\SC_AR_Nimrod.mwm</Model>
+			<Model>Models\Cubes\large\SC_AR_Aries.mwm</Model>
 			<Components>
 				<Component Subtype="SteelPlate" Count="10"/>
 			</Components>
 			<CriticalComponent Subtype="SteelPlate" Index="0"/>
-			<BlockPairName>SC_AR_Nimrod</BlockPairName>
+			<BlockPairName>SC_AR_Aries</BlockPairName>
 		</Definition>
 	</CubeBlocks>
 </Definitions>

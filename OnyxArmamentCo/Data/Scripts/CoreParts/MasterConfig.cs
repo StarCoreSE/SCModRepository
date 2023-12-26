@@ -10,16 +10,11 @@ namespace Scripts
             // Enable your definitions using the follow syntax:
             // PartDefinitions(Your1stDefinition, Your2ndDefinition, Your3rdDefinition);
             // PartDefinitions includes both weapons and phantoms
-            PartDefinitions(AryxMagnetarTurret,
-            AryxTempestCannon, 
-            AryxLightCoilgun, 
-            AryxRadar, 
-            AryxBurstTurret,  
-            AryxGaussCannon,
-            AryxRailgun,
-            AryxFocusLance,
-            AryxPlasmaCannon,
-            AryxRailgunTurret);
+            PartDefinitions(
+
+            SC_AR_Afflictor
+            
+            );
           
         }
     }
