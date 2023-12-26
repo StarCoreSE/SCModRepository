@@ -542,10 +542,10 @@ namespace klime.PointCheck
                     t_N = "Gimbal Laser";
                     mCs = 0f;
                     break;
-                case "BR-RT7 Punisher Slanted Burst Cannon":
-                case "BR-RT7 Punisher 70mm Burst Cannon":
-                case "Punisher":
-                    t_N = "Punisher";
+                case "BR-RT7 Afflictor Slanted Burst Cannon":
+                case "BR-RT7 Afflictor 70mm Burst Cannon":
+                case "Afflictor":
+                    t_N = "Afflictor";
                     mCs = 0f;
                     break;
                 case "Slinger AC 150mm Sloped 30":

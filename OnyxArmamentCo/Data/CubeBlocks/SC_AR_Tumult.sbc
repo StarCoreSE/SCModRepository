@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>SC_AR_Tumult</SubtypeId>
+      </Id>
+      <DisplayName>600mm Tumult Heavy Cannon</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\Tumult.dds</Icon>
+      <Description>
+        Long Ranged Fixed: [15km]
+        Magazine Capacity: [1]
+        Rate of Fire: [120]
+        Reload Speed: [15 seconds]
+        Ammunition: [1100m/s,] [Kinetic]
+        APHE 600mm:
+        [Penetration fuse]
+        HE 600mm:
+        [Contact fuse, more damage]
+      </Description>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="9"/>
+      <Center x="0" y="0" z="8" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\remodels\SC_Tempest_Remodel.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="650" />
+        <Component Subtype="Construction" Count="150" />
+        <Component Subtype="MetalGrid" Count="120" />
+        <Component Subtype="LargeTube" Count="60" />
+        <Component Subtype="Motor" Count="60" />
+        <Component Subtype="Computer" Count="100" />
+        <Component Subtype="Construction" Count="150" />
+        <Component Subtype="SteelPlate" Count="350" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
+        <MountPoint Side="Left" StartX="6.00" StartY="0.00" EndX="9.00" EndY="1.00"/>
+        <MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="3.00" EndY="1.00"/>
+        <MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="1.00" EndY="3.00"/>
+        <MountPoint Side="Bottom" StartX="0.00" StartY="6.00" EndX="1.00" EndY="9.00"/>
+      </MountPoints>
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>SC_AR_Tumult</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <BuildTimeSeconds>60</BuildTimeSeconds>
+      <EdgeType>Light</EdgeType>
+      <WeaponDefinitionId Subtype="SCGenericWepDef" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>0.6</InventoryMaxVolume>
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>200</PCU>
+    </Definition>
+  </CubeBlocks>
+</Definitions>

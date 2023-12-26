@@ -66,6 +66,17 @@
         <string>ARYXFocusLance</string>
         <string>ARYXBurstCannon</string>
 		
+		<!--ARYX Replacements-->
+        <string>SC_AR_Aries</string>
+        <string>SC_AR_CataclysmicVariable</string>
+        <string>SC_AR_Phaethon</string>
+        <string>SC_AR_Afflictor</string>
+        <string>SC_AR_Tumult</string>
+        <string>SC_AR_Nimrod</string>
+        <string>SC_AR_Forager</string>
+        <string>SC_AR_Resheph</string>
+        <string>SC_AR_LocusGleam</string>
+		
 
         <!--NORSE-->
         <string>NHI_PD_Turret</string>

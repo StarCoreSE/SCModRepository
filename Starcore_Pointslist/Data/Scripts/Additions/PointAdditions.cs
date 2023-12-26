@@ -92,6 +92,7 @@ namespace ShipPoints
 				MXA_SMAC@500;
 				MXA_M2MAC@800;
 				ARYXGaussCannon@1250;
+				SC_AR_Aries@1250;
 				K_SA_Launcher_FixedMount@275;
 				AWGGG@150;
 				GravityGenerator@0;
@@ -131,6 +132,10 @@ namespace ShipPoints
 				ARYXLargeRadar@10;
 				ARYXBurstTurret@250;
 				ARYXBurstTurretSlanted@250;
+				SC_AR_CataclysmicVariable@450;
+				SC_AR_Phaethon@275;
+				SC_AR_Afflictor@250;
+				SC_AR_Afflictor_Slanted@250;
 				MA_Designator@50;
                 BattleshipCannon@100;
                 BattleshipCannonMK2@170;
@@ -148,15 +153,19 @@ namespace ShipPoints
 				K_SA_HeavyMetal_Gauss_ERIIRF@99999;
 				K_SA_Launcher_FixedMountv2@500;
 				ARYXTempestCannon@350;
+				SC_AR_Tumult@350;
 				ARYXLightCoilgun@700;
+				SC_AR_Forager@700;
 				SpaceBallLarge@42069;
 				MA_Fixed_T2@150;
 				MA_Fixed_T2_Naked@150;
 				MA_Fixed_T3@120;
 				ARYXRailgun@400;
+				SC_AR_Nimrod@400;
 				K_SA_LoW_CapitalSpinalA@650;
 				Static150mm@50;
 				ARYXFocusLance@500;
+				SC_AR_LocusGleam@500;
 				MediumFocusLance@125;
 				MA_Designator_sm@50;
 				MA_SideBooster_Small@100;
@@ -310,6 +319,7 @@ namespace ShipPoints
 				LargeBlockLargeAtmosphericThrustSciFi@3;
 				LargeBlockSmallAtmosphericThrustSciFi@3;
 				ARYXRailgunTurret@350;
+				SC_AR_Resheph@350;
 				MCRNRailgunLB@1250;
 				MAR_1x1x1_AR_DualHead_Rotor@5;
 				MAR_1x1x1_AR_DualHead_Stator@5;
