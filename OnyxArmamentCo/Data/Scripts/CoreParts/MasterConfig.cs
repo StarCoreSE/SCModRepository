@@ -13,6 +13,11 @@ namespace Scripts
             PartDefinitions(
 
             SC_AR_Aries,
+            SC_AR_Forager,
+            SC_AR_LocusGleam,
+            SC_AR_Nimrod,
+            SC_AR_Phaethon,
+            SC_AR_Tumult,
 
             SC_AR_Afflictor,
             SC_AR_Resheph,
