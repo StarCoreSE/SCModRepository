@@ -11,13 +11,13 @@ using static Scripts.Structure.WeaponDefinition.HardPointDef.HardwareDef.Hardwar
 namespace Scripts {   
     partial class Parts {
         // Don't edit above this line
-        WeaponDefinition SC_AR_Afflictor => new WeaponDefinition
+        WeaponDefinition SC_AR_Afflictor_Slanted => new WeaponDefinition
         {
             Assignments = new ModelAssignmentsDef
             {
                 MountPoints = new[] {
                     new MountPointDef {
-                        SubtypeId = "SC_AR_Afflictor", // Block Subtypeid. Your Cubeblocks contain this information
+                        SubtypeId = "SC_AR_Afflictor_Slanted", // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "", // For weapons with a spinning barrel such as Gatling Guns.
                         MuzzlePartId = "afflictorbarrels", // The subpart where your muzzle empties are located. This is often the elevation subpart.
                         AzimuthPartId = "afflictortop", // Your Rotating Subpart, the bit that moves sideways

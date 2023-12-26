@@ -1,12 +1,13 @@
 <?xml version="1.0" ?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<CubeBlocks>
+    
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>SC_AR_Afflictor</SubtypeId>
 			</Id>
-			<DisplayName>SC_AR_Afflictor</DisplayName>
+			<DisplayName>Afflictor Burst Cannon</DisplayName>
 			<Icon>Textures\GUI\Icons\Cubes\SC_AR_Afflictor.dds</Icon>
 			<Description>
 				Short Range Turret: [3km]
@@ -44,7 +45,7 @@
 			<BlockPairName>SC_AR_Afflictor</BlockPairName>
 			<BuildTimeSeconds>60</BuildTimeSeconds>
 			<EdgeType>Light</EdgeType>
-			<WeaponDefinitionId Subtype="AryxFlakTurretWepDef" />
+			<WeaponDefinitionId Subtype="SCGenericWepDef" />
 			<OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
 			<ResourceSinkGroup>Defense</ResourceSinkGroup>
 			<InventoryMaxVolume>0.144</InventoryMaxVolume>
@@ -54,5 +55,6 @@
 			<DestroySound>WepSmallWarheadExpl</DestroySound>
 			<PCU>200</PCU>
 		</Definition>
-	</CubeBlocks>
+
+  </CubeBlocks>
 </Definitions>
