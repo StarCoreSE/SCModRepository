@@ -17,7 +17,7 @@
         Low Power Hunter: [2500m/s]
         Shieldpen BONK, no damage.
       </Description>
-      <Icon>Textures\GUI\Icons\Aryx_AWE_LightCoilgun.dds</Icon>
+      <Icon>Textures\GUI\Icons\Cubes\forager.png</Icon>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="1" y="2" z="15"/>

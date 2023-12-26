@@ -7,7 +7,7 @@
         <SubtypeId>SC_AR_Tumult</SubtypeId>
       </Id>
       <DisplayName>600mm Tumult Heavy Cannon</DisplayName>
-      <Icon>Textures\GUI\Icons\Aryx_AWE_TempestCannon.dds</Icon>
+      <Icon>Textures\GUI\Icons\Cubes\Tumult.dds</Icon>
       <Description>
         Long Ranged Fixed: [15km]
         Magazine Capacity: [1]

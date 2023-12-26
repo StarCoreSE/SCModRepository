@@ -7,7 +7,7 @@
         <SubtypeId>SC_AR_Nimrod</SubtypeId>
       </Id>
       <DisplayName>Nimrod-250 Railgun</DisplayName>
-      <Icon>Textures\GUI\Icons\AWERailgun.dds</Icon>
+      <Icon>Textures\GUI\Icons\Cubes\nimrod.png</Icon>
       <Description>
         Medium Ranged Fixed: [15km || 5km]
         Magazine Capacity: [1 || 5]

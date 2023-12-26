@@ -23,7 +23,7 @@ namespace Scripts {
                         AzimuthPartId = "None", // Your Rotating Subpart, the bit that moves sideways
                         ElevationPartId = "None",// Your Elevating Subpart, that bit that moves up
                         DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
-                        IconName = "Aryx_AWE_TempestCannon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
+                        IconName = "Tumult.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
                     
                  },

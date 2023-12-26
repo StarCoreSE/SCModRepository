@@ -7,7 +7,7 @@
 				<SubtypeId>SC_AR_Afflictor</SubtypeId>
 			</Id>
 			<DisplayName>SC_AR_Afflictor</DisplayName>
-			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+			<Icon>Textures\GUI\Icons\Cubes\SC_AR_Afflictor.dds</Icon>
 			<Description>
 				Short Range Turret: [3km]
 				Magazine Capacity: [4]

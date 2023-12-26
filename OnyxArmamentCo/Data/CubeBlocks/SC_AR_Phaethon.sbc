@@ -20,7 +20,7 @@
         BAP:
         [Detonates on target]
       </Description>
-      <Icon>Textures\GUI\Icons\AryxPlasmaGun.dds</Icon>
+      <Icon>Textures\GUI\Icons\Cubes\phaethon.png</Icon>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="2" y="1" z="6"/>
