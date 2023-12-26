@@ -27,7 +27,7 @@
 				<Component Subtype="Superconductor" Count="336" />
 				<Component Subtype="SmallTube" Count="500" />
 				<Component Subtype="Motor" Count="250" />
-				<Component Subtype="ElectromagnetAWE" Count ="328" />
+				<Component Subtype="Superconductor" Count ="328" />
 				<Component Subtype="Computer" Count="820" />
 				<Component Subtype="Construction" Count="400" />
 				<Component Subtype="SteelPlate" Count="750" />

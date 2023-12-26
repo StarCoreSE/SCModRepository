@@ -33,7 +33,7 @@
         <Component Subtype="PowerCell" Count="30" />
         <Component Subtype="Superconductor" Count="60" />
         <Component Subtype="LargeTube" Count="20" />
-        <Component Subtype="ElectromagnetAWE" Count ="120" />
+        <Component Subtype="Superconductor" Count ="120" />
         <Component Subtype="Computer" Count="100" />
         <Component Subtype="Construction" Count="200" />
         <Component Subtype="SteelPlate" Count="200" />

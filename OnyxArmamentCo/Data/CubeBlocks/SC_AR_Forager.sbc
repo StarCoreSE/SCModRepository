@@ -31,7 +31,7 @@
         <Component Subtype="Superconductor" Count="300" />
         <Component Subtype="LargeTube" Count="200" />
         <Component Subtype="Motor" Count="300" />
-        <Component Subtype="ElectromagnetAWE" Count ="180" />
+        <Component Subtype="Superconductor" Count ="180" />
         <Component Subtype="Computer" Count="500" />
         <Component Subtype="MetalGrid" Count="400" />
         <Component Subtype="SteelPlate" Count="750" />

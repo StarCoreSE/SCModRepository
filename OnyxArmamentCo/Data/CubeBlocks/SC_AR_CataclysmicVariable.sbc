@@ -25,7 +25,7 @@
 				<Component Subtype="Construction" Count="300" />
 				<Component Subtype="MetalGrid" Count="200" />
 				<Component Subtype="LargeTube" Count="70" />
-				<Component Subtype="ElectromagnetAWE" Count="200" />
+				<Component Subtype="Superconductor" Count="200" />
 				<Component Subtype="Computer" Count="325" />
 				<Component Subtype="Superconductor" Count="100" />
 				<Component Subtype="GravityGenerator" Count="300" />
