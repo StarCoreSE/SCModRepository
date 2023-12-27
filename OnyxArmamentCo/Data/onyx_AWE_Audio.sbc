@@ -170,43 +170,6 @@
     <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>ArcWepShipOnyx_TacticalModuleFire</SubtypeId>
-      </Id>
-      <Category>SHOT</Category>
-      <MaxDistance>1500</MaxDistance>
-      <PreventSynchronization>0</PreventSynchronization>
-      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>5</Volume>
-	  <DistantSounds>
-		<DistantSound DistanceCrossFade="10" Distance="1000" Sound = "ArcWepShipOnyx_TacticalModuleFireDistant" />
-	  </DistantSounds>	  
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\Onyx\misc\Onyx_tactical_module_fire_01.wav</Start>
-        </Wave>
-      </Waves>
-    </Sound>
-    <Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>ArcWepShipOnyx_TacticalModuleFireDistant</SubtypeId>
-      </Id>
-      <Category>SHOT</Category>
-      <MaxDistance>3000</MaxDistance>
-      <PreventSynchronization>0</PreventSynchronization>
-      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>4</Volume>  
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\Onyx\misc\Onyx_tactical_module_fire_distant_01.wav</Start>
-        </Wave>
-      </Waves>
-    </Sound>	
-    <Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
         <SubtypeId>ArcWepShipOnyxLightCoilgunFire</SubtypeId>
       </Id>
       <Category>SHOT</Category>
@@ -645,31 +608,7 @@
           <Start>Audio\Onyx\heavy_cannons\Onyx_typhoon_fire_03.wav</Start>
         </Wave>			
       </Waves>
-    </Sound>
-	
-    <Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>ArcWepShipOnyxTridentFire</SubtypeId>
-      </Id>
-      <Category>SHOT</Category>
-      <MaxDistance>800</MaxDistance>
-      <PreventSynchronization>0</PreventSynchronization>
-      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>2</Volume>
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\Onyx\misc\Onyx_trident_fire_01.wav</Start>
-        </Wave>
-        <Wave Type="D3">
-          <Start>Audio\Onyx\misc\Onyx_trident_fire_02.wav</Start>
-        </Wave>
-        <Wave Type="D3">
-          <Start>Audio\Onyx\misc\Onyx_trident_fire_03.wav</Start>
-        </Wave>	
-      </Waves>
-    </Sound>		
+    </Sound>	
     <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
@@ -730,30 +669,6 @@
       </Waves>
     </Sound>
 
-
-    <Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>ArcWepShipOnyxHydra_Fire</SubtypeId>
-      </Id>
-      <Category>SHOT</Category>
-      <MaxDistance>600</MaxDistance>
-      <PreventSynchronization>0</PreventSynchronization>
-      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>1</Volume>
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\Onyx\missiles\Onyx_missile_fire_B_01.wav</Start>
-        </Wave>
-        <Wave Type="D3">
-          <Start>Audio\Onyx\missiles\Onyx_missile_fire_B_02.wav</Start>
-        </Wave>	
-        <Wave Type="D3">
-          <Start>Audio\Onyx\missiles\Onyx_missile_fire_B_03.wav</Start>
-        </Wave>			
-      </Waves>
-    </Sound>	
 	
     <Sound>
       <Id>
@@ -1224,29 +1139,6 @@
         </Wave>	
       </Waves>
     </Sound> 
-    <Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>ArcWepShipOnyx_FireMissilesA</SubtypeId>
-      </Id>
-      <Category>SHOT</Category>
-      <MaxDistance>400</MaxDistance>
-      <PreventSynchronization>0</PreventSynchronization>
-      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>2</Volume>
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\Onyx\missiles\Onyx_missile_fire_A_01.wav</Start>
-        </Wave>
-        <Wave Type="D3">
-          <Start>Audio\Onyx\missiles\Onyx_missile_fire_A_02.wav</Start>
-        </Wave>
-        <Wave Type="D3">
-          <Start>Audio\Onyx\missiles\Onyx_missile_fire_A_03.wav</Start>
-        </Wave>	
-      </Waves>
-    </Sound> 	
     <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
