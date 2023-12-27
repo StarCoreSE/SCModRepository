@@ -18,16 +18,16 @@
       </DistantSounds>
       <Waves>
         <Wave Type="D3">
-          <Start>Audio\aryxpunisher\fire\grifle01.wav</Start>
+          <Start>Audio\Onyxpunisher\fire\grifle01.wav</Start>
         </Wave>
         <Wave Type="D3">
-          <Start>Audio\aryxpunisher\fire\grifle02.wav</Start>
+          <Start>Audio\Onyxpunisher\fire\grifle02.wav</Start>
         </Wave>
         <Wave Type="D3">
-          <Start>Audio\aryxpunisher\fire\grifle03.wav</Start>
+          <Start>Audio\Onyxpunisher\fire\grifle03.wav</Start>
         </Wave>
         <Wave Type="D3">
-          <Start>Audio\aryxpunisher\fire\grifle04.wav</Start>
+          <Start>Audio\Onyxpunisher\fire\grifle04.wav</Start>
         </Wave>        
       </Waves>
     </Sound>
@@ -45,13 +45,13 @@
       <Volume>0.3</Volume>
       <Waves>
         <Wave Type="D3">
-          <Start>Audio\aryxpunisher\gauss_rifle_lod_far\gauss_rifle_lod_far1.wav</Start>
+          <Start>Audio\Onyxpunisher\gauss_rifle_lod_far\gauss_rifle_lod_far1.wav</Start>
         </Wave>
         <Wave Type="D3">
-          <Start>Audio\aryxpunisher\gauss_rifle_lod_far\gauss_rifle_lod_far2.wav</Start>
+          <Start>Audio\Onyxpunisher\gauss_rifle_lod_far\gauss_rifle_lod_far2.wav</Start>
         </Wave>
         <Wave Type="D3">
-          <Start>Audio\aryxpunisher\gauss_rifle_lod_far\gauss_rifle_lod_far4.wav</Start>
+          <Start>Audio\Onyxpunisher\gauss_rifle_lod_far\gauss_rifle_lod_far4.wav</Start>
         </Wave>
       </Waves>
     </Sound>
@@ -71,7 +71,7 @@
       <SoundLimit>10</SoundLimit>
       <Waves>
         <Wave Type="D3">
-          <Start>Audio\aryxpunisher\gauss_fire_animation\gauss_fire_anim1_delayed.wav</Start>
+          <Start>Audio\Onyxpunisher\gauss_fire_animation\gauss_fire_anim1_delayed.wav</Start>
         </Wave>
       </Waves>
     </Sound>

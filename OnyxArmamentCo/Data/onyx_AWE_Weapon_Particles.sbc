@@ -3,7 +3,7 @@
   <ParticleEffects>
   <!--Gauss Windup-->
     <ParticleEffect xsi:type="ParticleEffect">	
-      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="Aryx_Gauss_Windup_Effect" />
+      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="Onyx_Gauss_Windup_Effect" />
       <ParticleId>192835</ParticleId>
       <Length>7</Length>
       <Preload>0</Preload>
@@ -1873,7 +1873,7 @@
     </ParticleEffect>
 	<!--Railgun Fire-->
     <ParticleEffect xsi:type="ParticleEffect">	
-      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="Aryx_Railgun_firing_effect" />
+      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="Onyx_Railgun_firing_effect" />
       <ParticleId>192840</ParticleId>
       <Length>2</Length>
       <Preload>0</Preload>
@@ -4068,7 +4068,7 @@
     </ParticleEffect>	
   <!--Railgun Windup-->
     <ParticleEffect xsi:type="ParticleEffect">	
-      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="Aryx_Railgun_windup_effect" />
+      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="Onyx_Railgun_windup_effect" />
       <ParticleId>192839</ParticleId>
       <Length>2</Length>
       <Preload>0</Preload>
@@ -4953,7 +4953,7 @@
     </ParticleEffect>
   <!--Salvo Flash-->
     <ParticleEffect xsi:type="ParticleEffect">	
-      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="Aryx_120_muzzleflash" />
+      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="Onyx_120_muzzleflash" />
       <ParticleId>192921</ParticleId>
       <Length>1</Length>
       
@@ -8437,7 +8437,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -8892,7 +8892,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -9347,7 +9347,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -9802,7 +9802,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -10911,7 +10911,7 @@
     </ParticleEffect>
   <!--Reaper Windup-->
     <ParticleEffect xsi:type="ParticleEffect">	
-      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="Aryx_Reaper_Windup_effect" />
+      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="Onyx_Reaper_Windup_effect" />
       <ParticleId>192935</ParticleId>
       <Length>10</Length>
       <Preload>0</Preload>
@@ -12237,7 +12237,7 @@
     </ParticleEffect>
   <!--Torp Trail--> 	
     <ParticleEffect xsi:type="ParticleEffect">
-      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="AryxLargeMissileTrail" />
+      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="OnyxLargeMissileTrail" />
       <ParticleId>198160</ParticleId>
       <Length>5</Length>
       <Preload>0</Preload>
@@ -12510,7 +12510,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -13366,7 +13366,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -13538,7 +13538,7 @@
     </ParticleEffect>	
   <!--Flechette Trail--> 		
     <ParticleEffect xsi:type="ParticleEffect">
-      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="AryxSmallMissileTrail" />
+      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="OnyxSmallMissileTrail" />
       <ParticleId>198161</ParticleId>
       <Length>5</Length>
       <Preload>0</Preload>
@@ -14410,7 +14410,7 @@
     </ParticleEffect>
   <!--Disruptor Trail--> 		
     <ParticleEffect xsi:type="ParticleEffect">
-      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="AryxDisruptorRocketTrail" />
+      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="OnyxDisruptorRocketTrail" />
       <ParticleId>193260</ParticleId>
       <Length>5</Length>
       <Preload>0</Preload>
@@ -14683,7 +14683,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -15282,7 +15282,7 @@
     </ParticleEffect>	
   <!--ATLAS Flash --> 	
     <ParticleEffect xsi:type="ParticleEffect">	
-      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="Aryx_ATLAS_Muzzleflash" />
+      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="Onyx_ATLAS_Muzzleflash" />
       <ParticleId>192754</ParticleId>
       <Length>1</Length>
       <Preload>0</Preload>
@@ -16667,7 +16667,7 @@
     </ParticleEffect>
   <!--Torp Blast-->
 	<ParticleEffect xsi:type="ParticleEffect">
-		<Id Type="MyObjectBuilder_ParticleEffect" Subtype="AryxAWETorpedoBlast"/>
+		<Id Type="MyObjectBuilder_ParticleEffect" Subtype="OnyxAWETorpedoBlast"/>
 		<ParticleId>196899</ParticleId>
 		<Length>11</Length>
 		<Preload>0</Preload>
@@ -16939,7 +16939,7 @@
 							<Keys/>
 						</Property>
 						<Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-							<ValueString>Atlas_AryxAWEBlue_01</ValueString>
+							<ValueString>Atlas_OnyxAWEBlue_01</ValueString>
 						</Property>
 						<Property Name="OIT weight factor" AnimationType="Const" Type="Float">
 							<ValueFloat>1</ValueFloat>
@@ -19130,7 +19130,7 @@
 							<Keys/>
 						</Property>
 						<Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-							<ValueString>Atlas_AryxAWEBlue_01</ValueString>
+							<ValueString>Atlas_OnyxAWEBlue_01</ValueString>
 						</Property>
 						<Property Name="OIT weight factor" AnimationType="Const" Type="Float">
 							<ValueFloat>1</ValueFloat>
@@ -19583,7 +19583,7 @@
 							<Keys/>
 						</Property>
 						<Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-							<ValueString>Atlas_AryxAWEBlue_01</ValueString>
+							<ValueString>Atlas_OnyxAWEBlue_01</ValueString>
 						</Property>
 						<Property Name="OIT weight factor" AnimationType="Const" Type="Float">
 							<ValueFloat>1</ValueFloat>
@@ -20037,7 +20037,7 @@
 							</Keys>
 						</Property>
 						<Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-							<ValueString>Atlas_AryxAWEBlue_01</ValueString>
+							<ValueString>Atlas_OnyxAWEBlue_01</ValueString>
 						</Property>
 						<Property Name="OIT weight factor" AnimationType="Const" Type="Float">
 							<ValueFloat>1</ValueFloat>
@@ -20486,7 +20486,7 @@
 							</Keys>
 						</Property>
 						<Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-							<ValueString>Atlas_AryxAWEBlue_01</ValueString>
+							<ValueString>Atlas_OnyxAWEBlue_01</ValueString>
 						</Property>
 						<Property Name="OIT weight factor" AnimationType="Const" Type="Float">
 							<ValueFloat>1</ValueFloat>
@@ -21207,7 +21207,7 @@
 	</ParticleEffect>
   <!--Energy Torp Blast--> 
 	<ParticleEffect xsi:type="ParticleEffect">
-			<Id Type="MyObjectBuilder_ParticleEffect" Subtype="AryxAWEEMPTorpedoBlast"/>
+			<Id Type="MyObjectBuilder_ParticleEffect" Subtype="OnyxAWEEMPTorpedoBlast"/>
 			<ParticleId>197900</ParticleId>
 			<Length>11</Length>
 			<Preload>0</Preload>
@@ -22785,7 +22785,7 @@
 							</Keys>
 						</Property>
 						<Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-							<ValueString>Atlas_AryxAWEBlue_01</ValueString>
+							<ValueString>Atlas_OnyxAWEBlue_01</ValueString>
 						</Property>
 						<Property Name="OIT weight factor" AnimationType="Const" Type="Float">
 							<ValueFloat>1</ValueFloat>
@@ -23067,7 +23067,7 @@
 		</ParticleEffect>
   <!--Energy Torp Trail--> 	
     <ParticleEffect xsi:type="ParticleEffect">
-      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="AryxLargeEnergyMissileTrail" />
+      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="OnyxLargeEnergyMissileTrail" />
       <ParticleId>198198</ParticleId>
       <Length>5</Length>
       <Preload>0</Preload>
@@ -23340,7 +23340,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -24196,7 +24196,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -24368,7 +24368,7 @@
     </ParticleEffect>	 
   <!--Displacer shot--> 
     <ParticleEffect xsi:type="ParticleEffect">
-      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="AryxAWEDisplacerShotOrange" />
+      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="OnyxAWEDisplacerShotOrange" />
       <ParticleId>193502</ParticleId>
       <Length>11</Length>
       <Preload>0</Preload>
@@ -24635,7 +24635,7 @@
               <ValueFloat>1</ValueFloat>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -24835,7 +24835,7 @@
     </ParticleEffect> 
   <!--Green Displacer shot--> 
     <ParticleEffect xsi:type="ParticleEffect">
-      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="AryxAWEDisplacerShotGreen" />
+      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="OnyxAWEDisplacerShotGreen" />
       <ParticleId>158502</ParticleId>
       <Length>1</Length>
       <Preload>0</Preload>
@@ -25108,7 +25108,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -25281,7 +25281,7 @@
     </ParticleEffect> 
 	  <!--Blue Displacer shot--> 
     <ParticleEffect xsi:type="ParticleEffect">
-      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="AryxAWEDisplacerShotBlue" />
+      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="OnyxAWEDisplacerShotBlue" />
       <ParticleId>158502</ParticleId>
       <Length>11</Length>
       <Preload>0</Preload>
@@ -25555,7 +25555,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -25727,7 +25727,7 @@
     </ParticleEffect> 
   <!--Aurora Flash -->	
     <ParticleEffect xsi:type="ParticleEffect">	
-      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="Aryx_Aurora_Muzzleflash" />
+      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="Onyx_Aurora_Muzzleflash" />
       <ParticleId>191719</ParticleId>
       <Length>1</Length>
       <Preload>0</Preload>
@@ -25995,7 +25995,7 @@
 							</Keys>
 						</Property>
 						<Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-							<ValueString>Atlas_AryxAWEBlue_01</ValueString>
+							<ValueString>Atlas_OnyxAWEBlue_01</ValueString>
 						</Property>
 						<Property Name="OIT weight factor" AnimationType="Const" Type="Float">
 							<ValueFloat>1</ValueFloat>
@@ -26901,7 +26901,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -27356,7 +27356,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -29266,7 +29266,7 @@
 							<Keys />
 						</Property>
 						<Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-							<ValueString>Atlas_AryxAWEBlue_01</ValueString>
+							<ValueString>Atlas_OnyxAWEBlue_01</ValueString>
 						</Property>
 						<Property Name="OIT weight factor" AnimationType="Const" Type="Float">
 							<ValueFloat>1</ValueFloat>
@@ -31073,7 +31073,7 @@
 							</Keys>
 						</Property>
 						<Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-							<ValueString>Atlas_AryxAWEBlue_01</ValueString>
+							<ValueString>Atlas_OnyxAWEBlue_01</ValueString>
 						</Property>
 						<Property Name="OIT weight factor" AnimationType="Const" Type="Float">
 							<ValueFloat>1</ValueFloat>
@@ -37120,7 +37120,7 @@
 							</Keys>
 						</Property>
 						<Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-							<ValueString>Atlas_AryxAWEBlue_01</ValueString>
+							<ValueString>Atlas_OnyxAWEBlue_01</ValueString>
 						</Property>
 						<Property Name="OIT weight factor" AnimationType="Const" Type="Float">
 							<ValueFloat>1</ValueFloat>
@@ -37318,7 +37318,7 @@
     </ParticleEffect>
   <!--Sabre Trail--> 	
     <ParticleEffect xsi:type="ParticleEffect">
-      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="AryxSabreMissileTrail" />
+      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="OnyxSabreMissileTrail" />
       <ParticleId>193135</ParticleId>
       <Length>5</Length>
       <Preload>0</Preload>
@@ -37591,7 +37591,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -38448,7 +38448,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -38889,7 +38889,7 @@
               <Keys />
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -39332,7 +39332,7 @@
               <Keys />
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -39775,7 +39775,7 @@
 							<Keys/>
 						</Property>
 						<Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-							<ValueString>Atlas_AryxAWEBlue_01</ValueString>
+							<ValueString>Atlas_OnyxAWEBlue_01</ValueString>
 						</Property>
 						<Property Name="OIT weight factor" AnimationType="Const" Type="Float">
 							<ValueFloat>1</ValueFloat>
@@ -40937,7 +40937,7 @@
 		</ParticleEffect>   
   <!--Lancer Trail--> 	
     <ParticleEffect xsi:type="ParticleEffect">
-      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="AryxLancerMissileTrail" />
+      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="OnyxLancerMissileTrail" />
       <ParticleId>193148</ParticleId>
       <Length>5</Length>
       <Preload>0</Preload>
@@ -41210,7 +41210,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -42066,7 +42066,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -42507,7 +42507,7 @@
               <Keys />
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -42950,7 +42950,7 @@
               <Keys />
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -43394,7 +43394,7 @@
 							<Keys/>
 						</Property>
 						<Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-							<ValueString>Atlas_AryxAWEBlue_01</ValueString>
+							<ValueString>Atlas_OnyxAWEBlue_01</ValueString>
 						</Property>
 						<Property Name="OIT weight factor" AnimationType="Const" Type="Float">
 							<ValueFloat>1</ValueFloat>
@@ -44556,7 +44556,7 @@
 		</ParticleEffect>
   <!--Nova Flash-->
     <ParticleEffect xsi:type="ParticleEffect">	
-      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="Aryx_FW_NovaMuzzleFlash" />
+      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="Onyx_FW_NovaMuzzleFlash" />
       <ParticleId>293454</ParticleId>
       <Length>6</Length>
       <Preload>0</Preload>
@@ -44826,7 +44826,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -45276,7 +45276,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -45731,7 +45731,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -46181,7 +46181,7 @@
 							</Keys>
 						</Property>
 						<Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-							<ValueString>Atlas_AryxAWEBlue_01</ValueString>
+							<ValueString>Atlas_OnyxAWEBlue_01</ValueString>
 						</Property>
 						<Property Name="OIT weight factor" AnimationType="Const" Type="Float">
 							<ValueFloat>1</ValueFloat>
@@ -47766,7 +47766,7 @@
     </ParticleEffect>
   <!--Desolator Blast-->
 	<ParticleEffect xsi:type="ParticleEffect">
-		<Id Type="MyObjectBuilder_ParticleEffect" Subtype="AryxAWEDesolatorBlast"/>
+		<Id Type="MyObjectBuilder_ParticleEffect" Subtype="OnyxAWEDesolatorBlast"/>
 		<ParticleId>2758931</ParticleId>
 		<Length>11</Length>
 		<Preload>0</Preload>
@@ -49782,7 +49782,7 @@
 							</Keys>
 						</Property>
 						<Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-							<ValueString>Atlas_AryxAWEBlue_01</ValueString>
+							<ValueString>Atlas_OnyxAWEBlue_01</ValueString>
 						</Property>
 						<Property Name="OIT weight factor" AnimationType="Const" Type="Float">
 							<ValueFloat>1</ValueFloat>
@@ -50503,7 +50503,7 @@
 	</ParticleEffect>   
   <!--Breacher Blast-->
 	<ParticleEffect xsi:type="ParticleEffect">
-		<Id Type="MyObjectBuilder_ParticleEffect" Subtype="AryxAWEBreacherBlast"/>
+		<Id Type="MyObjectBuilder_ParticleEffect" Subtype="OnyxAWEBreacherBlast"/>
 		<ParticleId>2758932</ParticleId>
 		<Length>11</Length>
 		<Preload>0</Preload>
@@ -52519,7 +52519,7 @@
 							</Keys>
 						</Property>
 						<Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-							<ValueString>Atlas_AryxAWEBlue_01</ValueString>
+							<ValueString>Atlas_OnyxAWEBlue_01</ValueString>
 						</Property>
 						<Property Name="OIT weight factor" AnimationType="Const" Type="Float">
 							<ValueFloat>1</ValueFloat>
@@ -56182,7 +56182,7 @@
               <Keys />
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -56625,7 +56625,7 @@
               <Keys />
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -57068,7 +57068,7 @@
 							<Keys/>
 						</Property>
 						<Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-							<ValueString>Atlas_AryxAWEBlue_01</ValueString>
+							<ValueString>Atlas_OnyxAWEBlue_01</ValueString>
 						</Property>
 						<Property Name="OIT weight factor" AnimationType="Const" Type="Float">
 							<ValueFloat>1</ValueFloat>
@@ -58054,7 +58054,7 @@
               <Keys />
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -58497,7 +58497,7 @@
               <Keys />
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -60378,7 +60378,7 @@
 							<Keys />
 						</Property>
 						<Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-							<ValueString>Atlas_AryxAWEBlue_01</ValueString>
+							<ValueString>Atlas_OnyxAWEBlue_01</ValueString>
 						</Property>
 						<Property Name="OIT weight factor" AnimationType="Const" Type="Float">
 							<ValueFloat>1</ValueFloat>
@@ -60820,7 +60820,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -61275,7 +61275,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -61730,7 +61730,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -62185,7 +62185,7 @@
 							</Keys>
 						</Property>
 						<Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-							<ValueString>Atlas_AryxAWEBlue_01</ValueString>
+							<ValueString>Atlas_OnyxAWEBlue_01</ValueString>
 						</Property>
 						<Property Name="OIT weight factor" AnimationType="Const" Type="Float">
 							<ValueFloat>1</ValueFloat>
@@ -62839,7 +62839,7 @@
 
   <!--Aegis EMP Blast-->
 	<ParticleEffect xsi:type="ParticleEffect">
-		<Id Type="MyObjectBuilder_ParticleEffect" Subtype="AryxAWEAegisEMP"/>
+		<Id Type="MyObjectBuilder_ParticleEffect" Subtype="OnyxAWEAegisEMP"/>
 		<ParticleId>3572931</ParticleId>
 		<Length>11</Length>
 		<Preload>0</Preload>
@@ -65020,7 +65020,7 @@
               <Keys />
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWERed_01</ValueString>
+              <ValueString>Atlas_OnyxAWERed_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -65463,7 +65463,7 @@
               <Keys />
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWERed_01</ValueString>
+              <ValueString>Atlas_OnyxAWERed_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -65906,7 +65906,7 @@
 							<Keys/>
 						</Property>
 						<Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-							<ValueString>Atlas_AryxAWEBlue_01</ValueString>
+							<ValueString>Atlas_OnyxAWEBlue_01</ValueString>
 						</Property>
 						<Property Name="OIT weight factor" AnimationType="Const" Type="Float">
 							<ValueFloat>1</ValueFloat>
@@ -67068,7 +67068,7 @@
 		</ParticleEffect>   
  
   <ParticleEffect xsi:type="ParticleEffect">
-      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="AryxAWEDisplacerShotSUN" />
+      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="OnyxAWEDisplacerShotSUN" />
       <ParticleId>158503</ParticleId>
       <Length>11</Length>
       <Preload>10</Preload>
@@ -67342,7 +67342,7 @@
               </Keys>
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWERed_01</ValueString>
+              <ValueString>Atlas_OnyxAWERed_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -67782,7 +67782,7 @@
               <Keys />
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -68225,7 +68225,7 @@
               <Keys />
             </Property>
             <Property Name="Material" AnimationType="Const" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property Name="OIT weight factor" AnimationType="Const" Type="Float">
               <ValueFloat>1</ValueFloat>

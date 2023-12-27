@@ -699,7 +699,7 @@ namespace Scripts
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
-                            "AryxBallisticTracer", // Please always have this Line set, if this Section is enabled.
+                            "OnyxBallisticTracer", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal, // Normal, Cycle, Chaos, Wave
                         Segmentation = new SegmentDef
@@ -744,8 +744,8 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "ArcWepShipARYXCoilgun_Impact",
-                ShieldHitSound = "ArcWepShipARYXCoilgun_Impact",
+                HitSound = "ArcWepShipOnyxCoilgun_Impact",
+                ShieldHitSound = "ArcWepShipOnyxCoilgun_Impact",
                 PlayerHitSound = "",
                 VoxelHitSound = "",
                 FloatingHitSound = "",
@@ -1125,7 +1125,7 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "ArcWepShipARYXCoilgun_Impact",
+                HitSound = "ArcWepShipOnyxCoilgun_Impact",
                 ShieldHitSound = "",
                 PlayerHitSound = "",
                 VoxelHitSound = "",
@@ -1443,7 +1443,7 @@ namespace Scripts
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
-                            "AryxBallisticTracer", // Please always have this Line set, if this Section is enabled.
+                            "OnyxBallisticTracer", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal, // Normal, Cycle, Chaos, Wave
                         Segmentation = new SegmentDef

@@ -269,7 +269,7 @@
               <Keys />
             </Property>
             <Property AnimationType="Const" Name="Material" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_OnyxAWEBlue_01</ValueString>
             </Property>
             <Property AnimationType="Const" Name="OIT weight factor" Type="Float">
               <ValueFloat>1</ValueFloat>

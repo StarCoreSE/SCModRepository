@@ -8,7 +8,7 @@ namespace Scripts
 { // Don't edit above this line
     partial class Parts
     {
-        private AnimationDef AryxTempestAnims => new AnimationDef
+        private AnimationDef OnyxTempestAnims => new AnimationDef
         {
 
             //These are the animation sets the weapon uses in various states.

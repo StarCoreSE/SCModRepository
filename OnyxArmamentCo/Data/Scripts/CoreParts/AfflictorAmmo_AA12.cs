@@ -395,9 +395,9 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "ArcWepShipARYX_RocketExplosion",
+                HitSound = "ArcWepShipOnyx_RocketExplosion",
                 ShotSound = "",
-                ShieldHitSound = "ArcWepShipARYX_RocketExplosion",
+                ShieldHitSound = "ArcWepShipOnyx_RocketExplosion",
                 PlayerHitSound = "",
                 VoxelHitSound = "",
                 FloatingHitSound = "",

@@ -42,9 +42,9 @@
 				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="7" EndY="7"/>
 			</MountPoints>
 			<!-- <BuildProgressModels>
-				<Model BuildPercentUpperBound="0.33" File="Models\AWE_HeavyCannon\ARYX_CycloneCannonBase_BS1.mwm"/>
-				<Model BuildPercentUpperBound="0.66" File="Models\AWE_HeavyCannon\ARYX_CycloneCannonBase_BS2.mwm"/>
-				<Model BuildPercentUpperBound="1.0" File="Models\AWE_HeavyCannon\ARYX_CycloneCannonBase_BS3.mwm"/>
+				<Model BuildPercentUpperBound="0.33" File="Models\AWE_HeavyCannon\Onyx_CycloneCannonBase_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.66" File="Models\AWE_HeavyCannon\Onyx_CycloneCannonBase_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.0" File="Models\AWE_HeavyCannon\Onyx_CycloneCannonBase_BS3.mwm"/>
 			</BuildProgressModels>	-->
 			<BlockPairName>SC_AR_CataclysmicVariable</BlockPairName>
 			<BuildTimeSeconds>150</BuildTimeSeconds>
