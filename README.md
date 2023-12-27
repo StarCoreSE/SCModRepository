@@ -18,7 +18,7 @@ In StarCore, teams build their own ships and battle for the spot of champion in 
 - enough space to download the entire git repo (~5gb)?
 
 ### Step 1:
-- ``Fork`` this repository to a folder on your computer. Name it something like SCModRepository-Yourname. This is where your edits can be made, and is apparently how actual projects do it.
+- ``Fork`` this repository to a folder on your computer. Name it something like SCModRepository-Yourname. This is where your edits can be made, and is apparently how actual projects do it. You can do this in GitHub desktop by git cloning the url, or through the github website, with the "fork" button which you can then git clone to a folder on your computer where you can make changes.
 
 ### Step 2:
 - ``Make a branch`` for the changes you want to do on ``your local repository``. (i.e. SCModRepository-Yourname/BuffMyFavoriteGunPlease) Use your local repository's ``Main`` branch to keep in sync with starcore's ``Main`` branch, it makes edits much easier. You just click the button on github to sync it.
