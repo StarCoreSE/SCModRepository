@@ -569,23 +569,6 @@
         </Wave>
       </Waves>
     </Sound>
-    <Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>ArcWepShipOnyxRailgun_Fire_Ping</SubtypeId>
-      </Id>
-      <Category>SHOT</Category>
-      <MaxDistance>1000</MaxDistance>
-      <PreventSynchronization>0</PreventSynchronization>
-      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>2</Volume>
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\Onyx\railguns\artemisPING.wav</Start>
-        </Wave>
-      </Waves>
-    </Sound>
 
     <Sound>
       <Id>
