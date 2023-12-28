@@ -316,7 +316,7 @@ namespace Scripts
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "AWE_LowCalHit",
+                        Name = "",
                         ApplyToShield = true,
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
