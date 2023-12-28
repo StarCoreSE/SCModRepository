@@ -155,7 +155,7 @@ namespace Scripts {
                 {
                     Effect1 = new ParticleDef
                     {
-                        Name = "AWE_ShockCannon_Flash",
+                        Name = "OnyxNone",
                         Color = Color(red: 0, green: 0, blue: 0, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef

@@ -331,7 +331,7 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "OnyxAWEDisplacerShotBlue", //ShipWelderArc
+                        Name = "OnyxNone", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -732,7 +732,7 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "OnyxAWEDisplacerShotBlue", //ShipWelderArc
+                        Name = "OnyxNone", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -1127,7 +1127,7 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "OnyxAWEDisplacerShotSUN", //ShipWelderArc
+                        Name = "OnyxNone", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -1902,7 +1902,7 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "OnyxAWEDisplacerShotBlue", //ShipWelderArc
+                        Name = "OnyxNone", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -2284,7 +2284,7 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "OnyxAWEDisplacerShotBlue", //ShipWelderArc
+                        Name = "OnyxNone", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -2672,7 +2672,7 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "OnyxAWEDisplacerShotBlue", //ShipWelderArc
+                        Name = "OnyxNone", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {

@@ -193,7 +193,7 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1,
-                    CustomParticle = "AWEGaussImpact", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "OnyxNone", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 }, 
@@ -321,7 +321,7 @@ namespace Scripts
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "AWEGaussImpact",
+                        Name = "OnyxNone",
                         ApplyToShield = true,
                         //shrinkbydistance = false, obselete
                         Color = Color(red: 0f, green: 0f, blue: 0f, alpha: 0),
@@ -581,7 +581,7 @@ namespace Scripts
                     NoVisuals = true,
                     NoSound = true,
                     ParticleScale = 1,
-                    CustomParticle = "AWEGaussImpact", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "OnyxNone", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "ArcWepShipOnyxGauss_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
@@ -703,7 +703,7 @@ namespace Scripts
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "AWEGaussImpact",
+                        Name = "OnyxNone",
                         ApplyToShield = true,
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
@@ -965,7 +965,7 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1,
-                    CustomParticle = "AWEGaussImpact", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "OnyxNone", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "ArcWepShipOnyxGauss_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
@@ -1087,7 +1087,7 @@ namespace Scripts
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "AWEGaussImpact",
+                        Name = "OnyxNone",
                         ApplyToShield = true,
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
