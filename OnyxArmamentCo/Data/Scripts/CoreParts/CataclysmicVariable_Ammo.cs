@@ -202,8 +202,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1,
-                    CustomParticle = "AWE_Shockcannon_Explosion", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "ArcWepShipARYX_ShockCannonHit", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "ArcWepShipOnyx_ShockCannonHit", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 }, 
             },
@@ -599,8 +599,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1,
-                    CustomParticle = "AWE_Shockcannon_Explosion", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "ArcWepShipARYX_ShockCannonHit", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "ArcWepShipOnyx_ShockCannonHit", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 }, 
             },

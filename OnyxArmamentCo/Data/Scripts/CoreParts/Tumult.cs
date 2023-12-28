@@ -140,7 +140,7 @@ namespace Scripts {
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "", // Audio for warmup effect.
-                    FiringSound = "ArcWepShipARYXTyphoon_Fire", // Audio for firing.
+                    FiringSound = "ArcWepShipOnyxTyphoon_Fire", // Audio for firing.
                     FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "", // Sound SubtypeID, for when your Weapon is in a reloading state
                     NoAmmoSound = "",
@@ -184,7 +184,7 @@ namespace Scripts {
                 SC_AR_TumultAmmoWC_Frag,
                 SC_AR_TumultAmmoWC_Contact,// Must list all primary, shrapnel, and pattern ammos.
             },
-            Animations = AryxTempestAnims,
+            Animations = OnyxTempestAnims,
             //Upgrades = UpgradeModules,
         };
         // Don't edit below this line.

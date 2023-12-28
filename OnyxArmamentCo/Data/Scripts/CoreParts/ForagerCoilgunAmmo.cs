@@ -188,8 +188,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1,
-                    CustomParticle = "AWESabreBlast", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "ArcWepShipARYXCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "ArcWepShipOnyxCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 }, 
             },
@@ -310,7 +310,7 @@ namespace Scripts
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "AWESabreBlast",
+                        Name = "OnyxNone",
                         ApplyToShield = true,
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
@@ -344,7 +344,7 @@ namespace Scripts
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
-                            "AryxBallisticTracer", // Please always have this Line set, if this Section is enabled.
+                            "OnyxBallisticTracer", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal, // Normal, Cycle, Chaos, Wave
                         Segmentation = new SegmentDef
@@ -368,7 +368,7 @@ namespace Scripts
                     {
                         Enable = true,
                         Textures = new[] {
-                            "AryxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
+                            "OnyxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
                         DecayTime = 120, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
@@ -721,7 +721,7 @@ namespace Scripts
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
-                            "AryxBallisticTracer", // Please always have this Line set, if this Section is enabled.
+                            "OnyxBallisticTracer", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal, // Normal, Cycle, Chaos, Wave
                         Segmentation = new SegmentDef
@@ -745,7 +745,7 @@ namespace Scripts
                     {
                         Enable = true,
                         Textures = new[] {
-                            "AryxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
+                            "OnyxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
                         DecayTime = 120, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
@@ -947,8 +947,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1f,
-                    CustomParticle = "AWESabreBlast", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "ArcWepShipARYXCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "ArcWepShipOnyxCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
             },
@@ -1069,7 +1069,7 @@ namespace Scripts
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "AWESabreBlast_RED",
+                        Name = "OnyxNone",
                         ApplyToShield = true,
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
@@ -1103,7 +1103,7 @@ namespace Scripts
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
-                            "AryxBallisticTracer", // Please always have this Line set, if this Section is enabled.
+                            "OnyxBallisticTracer", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal, // Normal, Cycle, Chaos, Wave
                         Segmentation = new SegmentDef
@@ -1127,7 +1127,7 @@ namespace Scripts
                     {
                         Enable = true,
                         Textures = new[] {
-                            "AryxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
+                            "OnyxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
                         DecayTime = 120, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
@@ -1328,8 +1328,8 @@ namespace Scripts
                     NoVisuals = true,
                     NoSound = true,
                     ParticleScale = 0.5f,
-                    CustomParticle = "AWESabreBlast", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "ArcWepShipARYXCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "ArcWepShipOnyxCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
             },
@@ -1711,8 +1711,8 @@ namespace Scripts
                     NoVisuals = true,
                     NoSound = true,
                     ParticleScale = 0.5f,
-                    CustomParticle = "AWESabreBlast", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "ArcWepShipARYXCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "ArcWepShipOnyxCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
             },
@@ -2093,8 +2093,8 @@ namespace Scripts
                     NoVisuals = true,
                     NoSound = true,
                     ParticleScale = 0.5f,
-                    CustomParticle = "AWESabreBlast", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "ArcWepShipARYXCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "ArcWepShipOnyxCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
             },
@@ -2475,8 +2475,8 @@ namespace Scripts
                     NoVisuals = true,
                     NoSound = true,
                     ParticleScale = 0.5f,
-                    CustomParticle = "AWESabreBlast", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "ArcWepShipARYXCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "ArcWepShipOnyxCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
             },

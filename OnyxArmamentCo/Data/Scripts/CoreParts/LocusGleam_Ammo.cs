@@ -198,7 +198,7 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1,
-                    CustomParticle = "AWE_Shockcannon_Explosion", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "soundName", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
@@ -321,7 +321,7 @@ namespace Scripts
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "AWE_Shockcannon_Explosion",
+                        Name = "OnyxNone",
                         ApplyToShield = true,
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
@@ -355,14 +355,14 @@ namespace Scripts
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
-                            "AryxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
+                            "OnyxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal, // Normal, Cycle, Chaos, Wave
                         Segmentation = new SegmentDef
                         {
                             Enable = true, // If true Tracer TextureMode is ignored
                             Textures = new[] {
-                                "AryxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
+                                "OnyxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
                             },
                             SegmentLength = 120f, // Uses the values below.
                             SegmentGap = 0f, // Uses Tracer textures and values
@@ -379,7 +379,7 @@ namespace Scripts
                     {
                         Enable = true,
                         Textures = new[] {
-                            "AryxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
+                            "OnyxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
                         DecayTime = 30, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
@@ -584,7 +584,7 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1,
-                    CustomParticle = "AWE_Shockcannon_Explosion", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "soundName", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
@@ -706,7 +706,7 @@ namespace Scripts
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "AWE_Shockcannon_Explosion",
+                        Name = "OnyxNone",
                         ApplyToShield = true,
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
@@ -740,14 +740,14 @@ namespace Scripts
                         VisualFadeStart = 30, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 30, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
-                            "AryxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
+                            "OnyxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal, // Normal, Cycle, Chaos, Wave
                         Segmentation = new SegmentDef
                         {
                             Enable = true, // If true Tracer TextureMode is ignored
                             Textures = new[] {
-                                "AryxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
+                                "OnyxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
                             },
                             SegmentLength = 120f, // Uses the values below.
                             SegmentGap = 0f, // Uses Tracer textures and values
@@ -764,7 +764,7 @@ namespace Scripts
                     {
                         Enable = true,
                         Textures = new[] {
-                            "AryxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
+                            "OnyxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
                         DecayTime = 24, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.

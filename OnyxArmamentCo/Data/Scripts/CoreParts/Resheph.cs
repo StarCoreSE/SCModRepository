@@ -143,8 +143,8 @@ namespace Scripts {
                 },
                 Audio = new HardPointAudioDef
                 {
-                    PreFiringSound = "ArcWepShipARYXRailgun_Windup", // Audio for warmup effect.
-                    FiringSound = "ArcWepShipARYXRailgun_Fire", // Audio for firing.
+                    PreFiringSound = "ArcWepShipOnyxRailgun_Windup", // Audio for warmup effect.
+                    FiringSound = "ArcWepShipOnyxRailgun_Fire", // Audio for firing.
                     FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "",
                     NoAmmoSound = "",
@@ -156,7 +156,7 @@ namespace Scripts {
                 {
                     Effect1 = new ParticleDef
                     {
-                        Name = "Aryx_Railgun_firing_effect", // SubtypeId of muzzle particle effect.
+                        Name = "Onyx_Railgun_firing_effect", // SubtypeId of muzzle particle effect.
                         Color = Color(red: 25, green: 25, blue: 10, alpha: 1), // Deprecated, set color in particle sbc.
                         Offset = Vector(x: 0, y: 0, z: 0), // Offsets the effect from the muzzle empty.
 

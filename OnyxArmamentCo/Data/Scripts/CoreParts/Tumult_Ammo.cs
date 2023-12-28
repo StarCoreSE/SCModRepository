@@ -196,8 +196,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1f,
-                    CustomParticle = "AWE_Cyclone_Explosion", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "ArcWepShipARYX_HeavyCannonHit", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "ArcWepShipOnyx_HeavyCannonHit", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 }, 
             },
@@ -397,7 +397,7 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "ArcWepShipARYX_HeavyCannonHit",
+                HitSound = "ArcWepShipOnyx_HeavyCannonHit",
                 //FragmentSound = "",
                 ShieldHitSound = "",
                 PlayerHitSound = "",
@@ -581,8 +581,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1f,
-                    CustomParticle = "AWE_Cyclone_Explosion", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "ArcWepShipARYX_HeavyCannonHit", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "ArcWepShipOnyx_HeavyCannonHit", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
             },
@@ -972,8 +972,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1f,
-                    CustomParticle = "AWE_Cyclone_Explosion", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "ArcWepShipARYX_HeavyCannonHit", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "ArcWepShipOnyx_HeavyCannonHit", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
             },
@@ -1173,7 +1173,7 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "ArcWepShipARYX_HeavyCannonHit",
+                HitSound = "ArcWepShipOnyx_HeavyCannonHit",
                 //FragmentSound = "",
                 ShieldHitSound = "",
                 PlayerHitSound = "",

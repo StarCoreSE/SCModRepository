@@ -146,7 +146,7 @@ namespace Scripts {
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "", // Audio for warmup effect.
-                    FiringSound = "ArcWepShipARYXPlasmaHelios_Fire", // Audio for firing.
+                    FiringSound = "ArcWepShipOnyxPlasmaHelios_Fire", // Audio for firing.
                     FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "Helios_Tracking_Reload", // Sound SubtypeID, for when your Weapon is in a reloading state
                     NoAmmoSound = "",
@@ -158,7 +158,7 @@ namespace Scripts {
                 {
                     Effect1 = new ParticleDef
                     {
-                        Name = "AWE_ShockCannon_Flash", // SubtypeId of muzzle particle effect.
+                        Name = "OnyxNone", // SubtypeId of muzzle particle effect.
                         Color = Color(red: 1, green: 1, blue: 0.625f, alpha: 1), // Deprecated, set color in particle sbc.
                         Offset = Vector(x: 0, y: 0, z: 0), // Offsets the effect from the muzzle empty.
                         Extras = new ParticleOptionDef

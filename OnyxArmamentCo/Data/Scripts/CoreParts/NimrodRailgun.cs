@@ -140,7 +140,7 @@ namespace Scripts {
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "", // Audio for warmup effect.
-                    FiringSound = "ArcWepShipARYXRailgun_Fire", // Audio for firing.
+                    FiringSound = "ArcWepShipOnyxRailgun_Fire", // Audio for firing.
                     FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "", // Sound SubtypeID, for when your Weapon is in a reloading state
                     NoAmmoSound = "",
@@ -153,7 +153,7 @@ namespace Scripts {
 
                     Effect1 = new ParticleDef
                     {
-                        Name = "Aryx_Railgun_firing_effect", // Smoke_LargeGunShot
+                        Name = "Onyx_Railgun_firing_effect", // Smoke_LargeGunShot
                         Color = Color(red: 25, green: 25, blue: 10, alpha: 1), 
                         Offset = Vector(x: 0, y: 0, z: 0),
 

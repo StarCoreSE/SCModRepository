@@ -316,7 +316,7 @@ namespace Scripts
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "AWE_LowCalHit",
+                        Name = "",
                         ApplyToShield = true,
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
@@ -395,9 +395,9 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "ArcWepShipARYX_RocketExplosion",
+                HitSound = "ArcWepShipOnyx_RocketExplosion",
                 ShotSound = "",
-                ShieldHitSound = "ArcWepShipARYX_RocketExplosion",
+                ShieldHitSound = "ArcWepShipOnyx_RocketExplosion",
                 PlayerHitSound = "",
                 VoxelHitSound = "",
                 FloatingHitSound = "",

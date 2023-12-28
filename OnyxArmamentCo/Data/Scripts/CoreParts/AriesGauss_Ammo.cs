@@ -193,7 +193,7 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1,
-                    CustomParticle = "AWEGaussImpact", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 }, 
@@ -321,7 +321,7 @@ namespace Scripts
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "AWEGaussImpact",
+                        Name = "OnyxNone",
                         ApplyToShield = true,
                         //shrinkbydistance = false, obselete
                         Color = Color(red: 0f, green: 0f, blue: 0f, alpha: 0),
@@ -352,7 +352,7 @@ namespace Scripts
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         AlwaysDraw = true,
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
-                            "AryxBallisticTracer",
+                            "OnyxBallisticTracer",
                         },
                         TextureMode = Normal, // Normal, Cycle, Chaos, Wave
                         Segmentation = new SegmentDef
@@ -377,7 +377,7 @@ namespace Scripts
                         Enable = true,
                         AlwaysDraw = true,
                         Textures = new[] {
-                            "AryxPulseLaserEffectL2",
+                            "OnyxPulseLaserEffectL2",
                         },
                         TextureMode = Normal,
                         DecayTime = 48,
@@ -398,9 +398,9 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "AresMacReskin_Whistle", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "ArcWepShipARYXGauss_Impact",
+                HitSound = "ArcWepShipOnyxGauss_Impact",
                 //FragmentSound = "",
-                ShieldHitSound = "ArcWepShipARYXGauss_Impact",
+                ShieldHitSound = "ArcWepShipOnyxGauss_Impact",
                 PlayerHitSound = "",
                 VoxelHitSound = "",
                 FloatingHitSound = "",
@@ -581,8 +581,8 @@ namespace Scripts
                     NoVisuals = true,
                     NoSound = true,
                     ParticleScale = 1,
-                    CustomParticle = "AWEGaussImpact", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "ArcWepShipARYXGauss_Impact", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "ArcWepShipOnyxGauss_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
             },
@@ -703,7 +703,7 @@ namespace Scripts
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "AWEGaussImpact",
+                        Name = "OnyxNone",
                         ApplyToShield = true,
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
@@ -737,7 +737,7 @@ namespace Scripts
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
-                            "AryxBallisticTracer", // Please always have this Line set, if this Section is enabled.
+                            "OnyxBallisticTracer", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal, // Normal, Cycle, Chaos, Wave
                         Segmentation = new SegmentDef
@@ -761,7 +761,7 @@ namespace Scripts
                     {
                         Enable = true,
                         Textures = new[] {
-                            "AryxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
+                            "OnyxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
                         DecayTime = 48, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
@@ -782,7 +782,7 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "ArcWepShipARYXGauss_Impact",
+                HitSound = "ArcWepShipOnyxGauss_Impact",
                 //FragmentSound = "",
                 ShieldHitSound = "",
                 PlayerHitSound = "",
@@ -965,8 +965,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1,
-                    CustomParticle = "AWEGaussImpact", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "ArcWepShipARYXGauss_Impact", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "ArcWepShipOnyxGauss_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
             },
@@ -1087,7 +1087,7 @@ namespace Scripts
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "AWEGaussImpact",
+                        Name = "OnyxNone",
                         ApplyToShield = true,
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
@@ -1166,7 +1166,7 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "ArcWepShipARYXGauss_Impact",
+                HitSound = "ArcWepShipOnyxGauss_Impact",
                 //FragmentSound = "",
                 ShieldHitSound = "",
                 PlayerHitSound = "",

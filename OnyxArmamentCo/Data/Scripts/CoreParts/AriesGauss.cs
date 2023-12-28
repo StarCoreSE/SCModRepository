@@ -159,7 +159,7 @@ namespace Scripts {
 
                     Effect1 = new ParticleDef
                     {
-                        Name = "Aryx_Gauss_firing_effect", // Smoke_LargeGunShot
+                        Name = "Onyx_Gauss_firing_effect", // Smoke_LargeGunShot
                         Color = Color(red: 0.75f, green: 0.75f, blue: 1f, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: -7.5f),
 
@@ -194,7 +194,7 @@ namespace Scripts {
                 AriesGaussAmmoBONK,
                 AriesGaussAmmoDamage, // Must list all primary, shrapnel, and pattern ammos.
             },
-            Animations = AryxGaussAnims,
+            Animations = OnyxGaussAnims,
             //Upgrades = UpgradeModules,
         };
         // Don't edit below this line.
