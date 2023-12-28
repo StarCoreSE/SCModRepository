@@ -1000,7 +1000,7 @@ namespace Scripts
                     MinArmingTime = 0, // In ticks, before the Ammo is allowed to explode, detonate or similar; This affects shrapnel spawning.
                     NoVisuals = false,
                     NoSound = true,
-                    ParticleScale = 1,
+                    ParticleScale = 3,
                     CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "soundName", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
@@ -1395,7 +1395,7 @@ namespace Scripts
                     MinArmingTime = 0, // In ticks, before the Ammo is allowed to explode, detonate or similar; This affects shrapnel spawning.
                     NoVisuals = false,
                     NoSound = false,
-                    ParticleScale = 1f,
+                    ParticleScale = 3f,
                     CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "Helios_Zap_laser", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
@@ -2556,7 +2556,7 @@ namespace Scripts
                     MinArmingTime = 0, // In ticks, before the Ammo is allowed to explode, detonate or similar; This affects shrapnel spawning.
                     NoVisuals = true,
                     NoSound = false,
-                    ParticleScale = 1f,
+                    ParticleScale = 3f,
                     CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "ArcWepShipOnyx_RocketExplosion", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
@@ -2944,7 +2944,7 @@ namespace Scripts
                     MinArmingTime = 0, // In ticks, before the Ammo is allowed to explode, detonate or similar; This affects shrapnel spawning.
                     NoVisuals = false,
                     NoSound = false,
-                    ParticleScale = 1f,
+                    ParticleScale = 3f,
                     CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "Helios_Bap_Explosion", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
