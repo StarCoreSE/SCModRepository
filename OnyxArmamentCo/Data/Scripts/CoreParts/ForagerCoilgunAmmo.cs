@@ -188,7 +188,7 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1,
-                    CustomParticle = "OnyxNone", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "ArcWepShipOnyxCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 }, 
@@ -947,7 +947,7 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1f,
-                    CustomParticle = "OnyxNone", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "ArcWepShipOnyxCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
@@ -1328,7 +1328,7 @@ namespace Scripts
                     NoVisuals = true,
                     NoSound = true,
                     ParticleScale = 0.5f,
-                    CustomParticle = "OnyxNone", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "ArcWepShipOnyxCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
@@ -1711,7 +1711,7 @@ namespace Scripts
                     NoVisuals = true,
                     NoSound = true,
                     ParticleScale = 0.5f,
-                    CustomParticle = "OnyxNone", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "ArcWepShipOnyxCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
@@ -2093,7 +2093,7 @@ namespace Scripts
                     NoVisuals = true,
                     NoSound = true,
                     ParticleScale = 0.5f,
-                    CustomParticle = "OnyxNone", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "ArcWepShipOnyxCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
@@ -2475,7 +2475,7 @@ namespace Scripts
                     NoVisuals = true,
                     NoSound = true,
                     ParticleScale = 0.5f,
-                    CustomParticle = "OnyxNone", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "ArcWepShipOnyxCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
