@@ -1,9 +1,9 @@
-name: "Upload Anomaly-Solaris-Hypernautics"
+name: "Upload Anomaly_Solaris_Hypernautics"
 
 on:
   push:
     paths:
-      - "Anomaly-Solaris-Hypernautics/**"
+      - "Anomaly_Solaris_Hypernautics/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2983399274
-          path: "Anomaly-Solaris-Hypernautics"
+          path: "Anomaly_Solaris_Hypernautics"
           changelog: ${{ github.event.head_commit.message }}           
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}
