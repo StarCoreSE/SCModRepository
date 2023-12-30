@@ -204,7 +204,7 @@
 			<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 			<DynamicMusicAmount>3</DynamicMusicAmount>
 			<Volume>1.4</Volume>
-			<Loopable>false</Loopable>
+			<Loopable>true</Loopable>
 			<Waves>
 				<Wave Type="D3">
 					<Start>Audio\Gladius_Fire_Start.wav</Start>
@@ -285,7 +285,7 @@
 				<DistantSound DistanceCrossfade="10" Distance="400" Sound="MediumLaserLoopDistant"/>
 			</DistantSounds>
 			<Volume>.5</Volume>
-			<Loopable>false</Loopable>
+			<Loopable>true</Loopable>
 			<Waves>
 				<Wave Type="D3">
 					<Start>Audio\MediumLaserStart.wav</Start>
@@ -304,7 +304,7 @@
 			<PitchVariation>50</PitchVariation>
 			<PreventSynchronization>0</PreventSynchronization>
 			<Volume>.7</Volume>
-			<Loopable>false</Loopable>
+			<Loopable>true</Loopable>
 			<Waves>
 				<Wave Type="D3">
 					<Start>Audio\MediumLaserStartDistant.wav</Start>
@@ -352,8 +352,26 @@
 					<Start>Audio\wubb_distant.wav</Start>
 				</Wave>
 			</Waves>
-		</Sound>		
-		
+		</Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>T1LaserFiringSound</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>100</MaxDistance>
+      <PitchVariation>100</PitchVariation>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>.8</Volume>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\mw4lasersmall.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>		
 		
 		
 		
