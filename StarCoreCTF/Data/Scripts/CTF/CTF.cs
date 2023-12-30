@@ -1543,7 +1543,7 @@ namespace Klime.CTF
 
                         if (gamestate != null && gamestate.currentgamestate == CurrentGameState.Victory)
                         {
-                            score_sb.Append("\n\n" + "<color=white>" + gamestate.winning_tag + " VICTORY!");
+                            score_sb.Append("\n\n\n\n\n\n\n" + "<color=white>" + gamestate.winning_tag + " VICTORY!");
                         }
                     }
                     if (event_message != null)
