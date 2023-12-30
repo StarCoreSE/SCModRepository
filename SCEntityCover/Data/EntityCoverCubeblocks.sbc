@@ -7,7 +7,7 @@
         <TypeId>BatteryBlock</TypeId>
         <SubtypeId>EntityCover</SubtypeId>
       </Id>
-      <DisplayName>Entity Cover Battery</DisplayName>
+      <DisplayName> [ADMIN] Entity Cover Battery</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\Battery.dds</Icon>
       <Description>Entity Cover Battery</Description>
       <CubeSize>Large</CubeSize>
@@ -70,7 +70,7 @@
         <TypeId>BatteryBlock</TypeId>
         <SubtypeId>EntityCover2</SubtypeId>
       </Id>
-      <DisplayName>Entity Cover Battery 2</DisplayName>
+      <DisplayName> [ADMIN] Entity Cover Battery 2</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\Battery.dds</Icon>
       <Description>Entity Cover Battery 2</Description>
       <CubeSize>Large</CubeSize>
@@ -133,7 +133,7 @@
         <TypeId>BatteryBlock</TypeId>
         <SubtypeId>EntityCover3</SubtypeId>
       </Id>
-      <DisplayName>Entity Cover Battery 3</DisplayName>
+      <DisplayName> [ADMIN] Entity Cover Battery 3</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\Battery.dds</Icon>
       <Description>Entity Cover Battery 3</Description>
       <CubeSize>Large</CubeSize>
@@ -196,7 +196,7 @@
         <TypeId>BatteryBlock</TypeId>
         <SubtypeId>EntityCover4</SubtypeId>
       </Id>
-      <DisplayName>Entity Cover Battery 4</DisplayName>
+      <DisplayName> [ADMIN] Entity Cover Battery 4</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\Battery.dds</Icon>
       <Description>Entity Cover Battery 4</Description>
       <CubeSize>Large</CubeSize>
@@ -259,7 +259,7 @@
         <TypeId>BatteryBlock</TypeId>
         <SubtypeId>EntityCoverEveFreighter</SubtypeId>
       </Id>
-      <DisplayName>Entity Cover Eve Freighter</DisplayName>
+      <DisplayName> [ADMIN] Entity Cover Eve Freighter</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\Battery.dds</Icon>
       <Description>Entity Cover Eve Freighter</Description>
       <CubeSize>Large</CubeSize>
@@ -325,7 +325,7 @@
         <TypeId>BatteryBlock</TypeId>
         <SubtypeId>EntityCover4RED</SubtypeId>
       </Id>
-      <DisplayName>Entity Cover Battery 4 RED</DisplayName>
+      <DisplayName> [ADMIN] Entity Cover Battery 4 RED</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\Battery.dds</Icon>
       <Description>Entity Cover Battery 4</Description>
       <CubeSize>Large</CubeSize>
@@ -388,7 +388,7 @@
         <TypeId>BatteryBlock</TypeId>
         <SubtypeId>EntityCover4BLU</SubtypeId>
       </Id>
-      <DisplayName>Entity Cover Battery 4 BLU</DisplayName>
+      <DisplayName> [ADMIN] Entity Cover Battery 4 BLU</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\Battery.dds</Icon>
       <Description>Entity Cover Battery 4</Description>
       <CubeSize>Large</CubeSize>
@@ -451,7 +451,7 @@
         <TypeId>BatteryBlock</TypeId>
         <SubtypeId>EntityCoverColor</SubtypeId>
       </Id>
-      <DisplayName>EntityCoverColor</DisplayName>
+      <DisplayName> [ADMIN] EntityCoverColor</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\Battery.dds</Icon>
       <Description>EntityCoverColor</Description>
       <CubeSize>Large</CubeSize>
@@ -517,7 +517,7 @@
         <TypeId>BatteryBlock</TypeId>
         <SubtypeId>EntityCoverFractal</SubtypeId>
       </Id>
-      <DisplayName>EntityCoverFractal</DisplayName>
+      <DisplayName> [ADMIN] EntityCoverFractal</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\Battery.dds</Icon>
       <Description>EntityCoverFractal</Description>
       <CubeSize>Large</CubeSize>
@@ -584,7 +584,7 @@
         <TypeId>BatteryBlock</TypeId>
         <SubtypeId>EntityCoverEVEDepot</SubtypeId>
       </Id>
-      <DisplayName>EntityCoverEVEDepot</DisplayName>
+      <DisplayName> [ADMIN] EntityCoverEVEDepot</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\Battery.dds</Icon>
       <Description>EntityCoverEVEDepot</Description>
       <CubeSize>Large</CubeSize>
@@ -649,7 +649,7 @@
         <TypeId>BatteryBlock</TypeId>
         <SubtypeId>EntityCoverSatellite</SubtypeId>
       </Id>
-      <DisplayName>EntityCoverSatellite</DisplayName>
+      <DisplayName> [ADMIN] EntityCoverSatellite</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\Battery.dds</Icon>
       <Description>EntityCoverSatellite</Description>
       <CubeSize>Large</CubeSize>
