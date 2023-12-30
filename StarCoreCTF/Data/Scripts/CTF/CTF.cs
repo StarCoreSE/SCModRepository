@@ -760,7 +760,7 @@ namespace Klime.CTF
             HudAPIv2.BillBoardHUDMessage score_billboard = new HudAPIv2.BillBoardHUDMessage();
             score_billboard.BillBoardColor = new Color(Color.White, 1);
             score_billboard.Material = MyStringId.GetOrCompute("ctf_score_background");
-            score_billboard.Origin = new Vector2D(0.40, 0.85);
+            score_billboard.Origin = new Vector2D(-0.33, 0.85);
             score_billboard.Scale *= 0.5f;
             score_billboard.Height *= 0.6f;
             score_billboard.Visible = true;
@@ -774,7 +774,7 @@ namespace Klime.CTF
             score_message.InitialColor = Color.White;
             score_message.Message = score_sb;
             score_message.Visible = true;
-            score_message.Origin = new Vector2D(0.330, 0.97);
+            score_message.Origin = new Vector2D(-0.4, 0.97);
             score_message.Options |= HudAPIv2.Options.HideHud;
             score_message.Blend = BlendTypeEnum.PostPP;
             score_message.Scale = 1.5f;
@@ -1492,8 +1492,8 @@ namespace Klime.CTF
 
                         // You will need to adjust these coordinates based on where the "RED" and "BLU" text are.
                         // For example, if "RED" is centered at X = 0.30, you might use X = 0.28 for the grip bar.
-                        Vector2D redPosition = new Vector2D(0.30, 0.85); // Position directly below the "RED" text
-                        Vector2D bluePosition = new Vector2D(0.40, 0.85); // Position directly below the "BLU" text
+                        Vector2D redPosition = new Vector2D(-0.33, 0.85); // Position directly below the "RED" text
+                        Vector2D bluePosition = new Vector2D(-0.43, 0.85); // Position directly below the "BLU" text
 
                         StringBuilder redGripSb = new StringBuilder();
                         redGripSb.Append(redGripBar);
@@ -1543,7 +1543,7 @@ namespace Klime.CTF
 
                         if (gamestate != null && gamestate.currentgamestate == CurrentGameState.Victory)
                         {
-                            score_sb.Append("\n\n" + "<color=white>" + gamestate.winning_tag + " VICTORY!");
+                            score_sb.Append("\n\n\n\n\n\n\n" + "<color=white>" + gamestate.winning_tag + " VICTORY!");
                         }
                     }
                     if (event_message != null)
