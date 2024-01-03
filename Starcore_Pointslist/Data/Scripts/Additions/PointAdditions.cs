@@ -22,7 +22,6 @@ namespace ShipPoints
 				DampeningEnhancer_x2_Large@100;
                 LargeWarhead@100;
                 LargeDecoy@4;
-                LargeDecoy_MetalFoam@50;
                 LargeStator@5;
                 LargeAdvancedStator@5;
                 LargeHinge@5;
@@ -368,6 +367,7 @@ namespace ShipPoints
 				UNN_Light_Torpedo@200;
 				Starcore_Fixed_Coil_Cannon@400;
 				Starcore_AMS_I_Block@125;
+				Starcore_AMS_Comm_Block@100;
 				Odin_Torpedo@220;
 				Odin_Missile_Battery@200;
 				K_SA_Launcher_VIV@350;

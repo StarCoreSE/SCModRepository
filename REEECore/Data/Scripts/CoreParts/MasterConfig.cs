@@ -8,6 +8,7 @@ namespace Scripts
             PartDefinitions(
             Starcore_Arrow,
             Starcore_AMS_I,
+            Starcore_AMS_Comm,
             Starcore_AMS_II,
             Starcore_FCC,
             E_Starcore_MCRN_Heavy,
