@@ -93,6 +93,19 @@ Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Starcore_AMS_II_Block" /
               <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="ModularMRM10AngledReversed" />
             </Blocks>
         </BlockVariantGroup>
+
+      <BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="StarCore_REE_Energywep_BlockVariants" />
+        <Icon>Textures\Icons\ERPPC_icon.png</Icon>
+        <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
+        <Description>Description_BlockGroup_TurretGroup</Description>
+        <Blocks>
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="ModularMRM10" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="ModularMiddleMRM10" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="ModularMRM10Angled" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="ModularMRM10AngledReversed" />
+        </Blocks>
+      </BlockVariantGroup>      
       
     </BlockVariantGroups>
 </Definitions>
