@@ -15,6 +15,7 @@
 			Launches Taiidani bombers.
       Capacity: 20 Bombers
       MaxActive = 5
+      Slowly restocks craft.
       [MINTARGET DISTANCE OF 500]
         
       </Description>
@@ -95,8 +96,9 @@
 
         Launches Taiidani fighters.
         Capacity: 40 fighters
-        This weapon WILL NOT target grids!
+        To target projectiles, turn off all "Target Grids" in the control panel.
         MaxActive = 5
+        Slowly restocks craft.
         [MINTARGET DISTANCE OF 500]
 
       </Description>
@@ -179,6 +181,7 @@
         Both ends need to be open to space.
         Capacity: 40 Bombers
         MaxActive = 5
+        Slowly restocks craft.
         [MINTARGET DISTANCE OF 500]
 
       </Description>
@@ -269,6 +272,7 @@
         Both ends need to be open to space.
         Capacity: 20 Bombers
         MaxActive = 5
+        Slowly restocks craft.
         [MINTARGET DISTANCE OF 500]
 
       </Description>
@@ -292,10 +296,10 @@
       </Components>
       <CriticalComponent Index="0" Subtype="Computer"/>
       <MountPoints>
-        <MountPoint Side="Top" StartX="0" StartY="0" EndX="13" EndY="17" />
-        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="13" EndY="17" />
-        <MountPoint Side="Left" StartX="0" StartY="0" EndX="17" EndY="5" />
-        <MountPoint Side="Right" StartX="0" StartY="0" EndX="17" EndY="5" />
+        <MountPoint Side="Top" StartX="0" StartY="0" EndX="13" EndY="7" />
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="13" EndY="7" />
+        <MountPoint Side="Left" StartX="0" StartY="0" EndX="7" EndY="5" />
+        <MountPoint Side="Right" StartX="0" StartY="0" EndX="7" EndY="5" />
         <MountPoint Side="Front" StartX="0" StartY="0" EndX="1.5" EndY="5" />
         <MountPoint Side="Front" StartX="13" StartY="0" EndX="11.5" EndY="5" />
         <MountPoint Side="Back" StartX="0" StartY="0" EndX="1.5" EndY="5" />
@@ -357,8 +361,8 @@
 
         Launches Taiidani fighters.
         Both ends need to be open to space.
-        This weapon will NOT target grids!
-        Switch ammos with Cycle Ammo or in the K menu.
+        To target projectiles, turn off "Target Grids" in the control panel.
+        Slowly restocks craft.
         Capacity: 80 fighters (bombers x2 cost)
         MaxActive = 5
         [MINTARGET DISTANCE OF 500]
@@ -449,7 +453,8 @@
 
         Launches some defensive fighters.
         Auto-launches if something's within 3km.
-        This weapon will NOT target grids!
+        To target projectiles, turn off all "Target Grids" in the control panel.
+        Slowly restocks craft.
         Capacity: 2 fighters
         MaxActive = 2
         [MINTARGET DISTANCE OF 500]
@@ -537,7 +542,7 @@
 
         Launches Taiidani fighters.
         Both ends need to be open to space.
-        This weapon will NOT target grids!
+        To target projectiles, turn off all "Target Grids" in the control panel.
         Switch ammos with Cycle Ammo or in the K menu.
         Capacity: 80 fighters (bombers x2 cost)
         MaxActive = 5
