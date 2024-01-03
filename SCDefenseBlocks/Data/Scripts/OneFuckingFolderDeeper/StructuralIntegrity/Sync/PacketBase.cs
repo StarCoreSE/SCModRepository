@@ -1,7 +1,7 @@
 ﻿using ProtoBuf;
 using Sandbox.ModAPI;
 
-namespace StarCore.StructuralIntegrity.Sync
+namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegrity.Sync
 {
     [ProtoInclude(2, typeof(PacketBlockSettings))]
     [ProtoContract(UseProtoMembersOnly = true)]

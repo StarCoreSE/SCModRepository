@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using StarCore.StructuralIntegrity.Sync;
 using VRage.Game.Components;
 using VRage.Game.Entity;
 using VRage.Utils;
+using YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegrity.Sync;
 
-namespace StarCore.StructuralIntegrity
+namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegrity
 {
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     public class SI_Utility : MySessionComponentBase
