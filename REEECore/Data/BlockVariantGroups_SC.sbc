@@ -100,12 +100,13 @@ Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Starcore_AMS_II_Block" /
         <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
         <Description>Description_BlockGroup_TurretGroup</Description>
         <Blocks>
-          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="ModularMRM10" />
-          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="ModularMiddleMRM10" />
-          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="ModularMRM10Angled" />
-          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="ModularMRM10AngledReversed" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="ERPPC" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Starcore_PPC_Block" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Starcore_M_Laser_Block" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Starcore_L_Laser_Block" />
         </Blocks>
-      </BlockVariantGroup>      
-      
+      </BlockVariantGroup>
+
+
     </BlockVariantGroups>
 </Definitions>
