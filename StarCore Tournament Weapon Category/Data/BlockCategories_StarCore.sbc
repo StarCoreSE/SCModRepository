@@ -37,21 +37,20 @@
         <string>MA_Blister</string>
 
         <!--SA-->
-        <string>K_SA_Gauss_APC</string>
-        <string>K_SA_Gauss_ERC</string>
-        <string>K_SA_Launcher_FixedMount</string>
-        <string>K_SA_Launcher_FixedMountv2</string>
-        <string>K_SA_HeavyMetal_Gauss_ERII</string>
-        <string>K_SA_HeavyMetal_Gauss_ERIIRF</string>
-        <string>K_SA_Launcher_FixedMountv2</string>
-        <string>K_SA_LoW_CapitalSpinalA</string>
-        <string>K_SA_HeavyMetal_Spinal_Rotary</string>
+       <!-- <string>K_SA_Gauss_APC</string>-->
+       <!-- <string>K_SA_Gauss_ERC</string>-->
+       <!-- <string>K_SA_Launcher_FixedMount</string>-->
+      <!--  <string>K_SA_Launcher_FixedMountv2</string>-->
+      <!--     <string>K_SA_HeavyMetal_Gauss_ERII</string>-->
+      <!--     <string>K_SA_HeavyMetal_Gauss_ERIIRF</string>-->
+      <!--     <string>K_SA_Launcher_FixedMountv2</string>-->
+      <!--   <string>K_SA_LoW_CapitalSpinalA</string>-->
         <string>K_SA_HeavyMetal_Gauss_ERFM</string>
-        <string>K_SA_HeavyMetal_Gauss_A</string>
-        <string>K_SA_HeavyMetal_Gauss_PGBC</string>
-        <string>K_SA_Gauss_AMSIIC</string>
-        <string>SA_HMI_Erebos</string>
-        <string>K_SA_HeavyMetal_Spinal_Rotary_Reskin</string>
+      -   <string>K_SA_HeavyMetal_Gauss_A</string>
+     <!--    <string>K_SA_HeavyMetal_Gauss_PGBC</string>-->
+      <!--   <string>K_SA_Gauss_AMSIIC</string>-->
+     <!--   <string>SA_HMI_Erebos</string>-->
+       <!-- <string>K_SA_HeavyMetal_Spinal_Rotary_Reskin</string>-->
 		
 
         <!--ARYX-->
@@ -68,14 +67,14 @@
 		
 		<!--ARYX Replacements-->
         <string>SC_AR_Aries</string>
-        <string>SC_AR_CataclysmicVariable</string>
-        <string>SC_AR_Phaethon</string>
+       <!-- <string>SC_AR_CataclysmicVariable</string>-->
+      <!--  <string>SC_AR_Phaethon</string>-->
         <string>SC_AR_Afflictor</string>
-        <string>SC_AR_Tumult</string>
-        <string>SC_AR_Nimrod</string>
-        <string>SC_AR_Forager</string>
-        <string>SC_AR_Resheph</string>
-        <string>SC_AR_LocusGleam</string>
+      <!--  <string>SC_AR_Tumult</string>-->
+     <!--   <string>SC_AR_Nimrod</string>-->
+      <!--  <string>SC_AR_Forager</string>-->
+      <!--  <string>SC_AR_Resheph</string>-->
+      <!--  <string>SC_AR_LocusGleam</string>-->
 		
 
         <!--NORSE-->
@@ -83,7 +82,7 @@
         <string>NHI_Light_Autocannon_Turret</string>
         <string>NHI_Autocannon_Turret</string>
         <string>NHI_Gatling_Laser_Turret</string>
-        <string>NHI_Light_Railgun_Turret</string>
+      <!--  <string>NHI_Light_Railgun_Turret</string>-->
         <string>NHI_Heavy_Railgun_Turret</string>
         <string>NHI_Heavy_Gun_Turret</string>
         <string>NHI_Mk1_Cannon_Turret</string>
@@ -99,8 +98,8 @@
         <string>MetalStorm</string>
         <string>CLB2X</string>
         <string>SLAM</string>
-        <string>banshee</string>
-        <string>TaiidanHangarFighter</string>
+        <!-- <string>banshee</string>-->
+        <string>TaiidanRailFighter</string>
         <string>Hexcannon</string>
         <string>longsword</string>
 
@@ -108,18 +107,18 @@
 
         <!--REEECORE-->
         <string>Starcore_AMS_I_Block</string>
-        <string>Starcore_PPC_Block</string>
+       <!-- <string>Starcore_PPC_Block</string>-->
         <string>ERPPC</string>
         <string>ModularSRM8</string>
         <string>ModularLRM5</string>
         <string>ModularMRM10</string>
         <string>Starcore_Arrow_Block</string>
         <string>Starcore_Fixed_Coil_Cannon</string>
-        <string>Starcore_M_Laser_Block</string>
-        <string>Starcore_L_Laser_Block</string>
+     <!--   <string>Starcore_M_Laser_Block</string>-->
+      <!--  <string>Starcore_L_Laser_Block</string>-->
 
         <!--KILLER - is laser_block also adding the M and L lasers?-->
-        <string>Laser_Block</string>
+        <!--<string>Laser_Block</string>-->
         <string>Torp_Block</string>
 
         <!--DARTH-->

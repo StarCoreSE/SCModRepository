@@ -1,7 +1,7 @@
 ﻿using ProtoBuf;
 using Sandbox.ModAPI;
 
-namespace StarCore.StructuralIntegrity.Sync
+namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegrity.Sync
 {
     [ProtoContract(UseProtoMembersOnly = true)]
     public class PacketBlockSettings : PacketBase
@@ -19,7 +19,7 @@ namespace StarCore.StructuralIntegrity.Sync
             EntityId = entityId;
             Settings = settings;
 
-            if(MyAPIGateway.Multiplayer.IsServer)
+            if (MyAPIGateway.Multiplayer.IsServer)
                 Networking.RelayToClients(this);
             else
                 Networking.SendToServer(this);
@@ -27,18 +27,18 @@ namespace StarCore.StructuralIntegrity.Sync
 
         public override void Received(ref bool relay)
         {
-            var block = MyAPIGateway.Entities.GetEntityById(this.EntityId) as IMyCollector;
+            var block = MyAPIGateway.Entities.GetEntityById(EntityId) as IMyCollector;
 
-            if(block == null)
+            if (block == null)
                 return;
 
             var logic = block.GameLogic?.GetAs<SI_Core>();
 
-            if(logic == null)
+            if (logic == null)
                 return;
 
-            logic.Settings.FieldPower = this.Settings.FieldPower;
-            logic.Settings.GridModifier = this.Settings.GridModifier;
+            logic.Settings.FieldPower = Settings.FieldPower;
+            logic.Settings.GridModifier = Settings.GridModifier;
 
             relay = true;
         }

@@ -9,7 +9,7 @@ using VRage.Game.ModAPI.Ingame.Utilities;
 using VRage.Game.ObjectBuilders.Definitions;
 using VRage.Utils;
 
-namespace StarCore.StructuralIntegrity
+namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegrity
 {
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     public class SI_Config : MySessionComponentBase
@@ -18,7 +18,7 @@ namespace StarCore.StructuralIntegrity
 
         public override void LoadData()
         {
-            Settings.Load();           
+            Settings.Load();
 
             // example usage/debug
             Log.Info($"MinFieldPower value={Settings.MinFieldPower}");
@@ -56,7 +56,7 @@ namespace StarCore.StructuralIntegrity
             SiegeEnabled = iniParser.Get(IniSection, nameof(SiegeEnabled)).ToBoolean(SiegeEnabled);
             SiegeMinPowerReq = iniParser.Get(IniSection, nameof(SiegeMinPowerReq)).ToSingle(SiegeMinPowerReq);
             SiegeTimer = (int)iniParser.Get(IniSection, nameof(SiegeTimer)).ToSingle(SiegeTimer);
-            SiegeCooldownTimer = (int)iniParser.Get(IniSection, nameof(SiegeCooldownTimer)).ToSingle(SiegeCooldownTimer);                  
+            SiegeCooldownTimer = (int)iniParser.Get(IniSection, nameof(SiegeCooldownTimer)).ToSingle(SiegeCooldownTimer);
         }
 
         void SaveConfig(MyIni iniParser)
@@ -95,7 +95,7 @@ namespace StarCore.StructuralIntegrity
 
         public void Load()
         {
-            if(MyAPIGateway.Session.IsServer)
+            if (MyAPIGateway.Session.IsServer)
                 LoadOnHost();
             else
                 LoadOnClient();
@@ -107,14 +107,14 @@ namespace StarCore.StructuralIntegrity
 
             // load file if exists then save it regardless so that it can be sanitized and updated
 
-            if(MyAPIGateway.Utilities.FileExistsInWorldStorage(FileName, typeof(Config_Settings)))
+            if (MyAPIGateway.Utilities.FileExistsInWorldStorage(FileName, typeof(Config_Settings)))
             {
-                using(TextReader file = MyAPIGateway.Utilities.ReadFileInWorldStorage(FileName, typeof(Config_Settings)))
+                using (TextReader file = MyAPIGateway.Utilities.ReadFileInWorldStorage(FileName, typeof(Config_Settings)))
                 {
                     string text = file.ReadToEnd();
 
                     MyIniParseResult result;
-                    if(!iniParser.TryParse(text, out result))
+                    if (!iniParser.TryParse(text, out result))
                         throw new Exception($"Config error: {result.ToString()}");
 
                     LoadConfig(iniParser);
@@ -127,9 +127,9 @@ namespace StarCore.StructuralIntegrity
 
             string saveText = iniParser.ToString();
 
-            MyAPIGateway.Utilities.SetVariable<string>(VariableId, saveText);
+            MyAPIGateway.Utilities.SetVariable(VariableId, saveText);
 
-            using(TextWriter file = MyAPIGateway.Utilities.WriteFileInWorldStorage(FileName, typeof(Config_Settings)))
+            using (TextWriter file = MyAPIGateway.Utilities.WriteFileInWorldStorage(FileName, typeof(Config_Settings)))
             {
                 file.Write(saveText);
             }
@@ -138,12 +138,12 @@ namespace StarCore.StructuralIntegrity
         void LoadOnClient()
         {
             string text;
-            if(!MyAPIGateway.Utilities.GetVariable<string>(VariableId, out text))
+            if (!MyAPIGateway.Utilities.GetVariable(VariableId, out text))
                 throw new Exception("No config found in sandbox.sbc!");
 
             MyIni iniParser = new MyIni();
             MyIniParseResult result;
-            if(!iniParser.TryParse(text, out result))
+            if (!iniParser.TryParse(text, out result))
                 throw new Exception($"Config error: {result.ToString()}");
 
             LoadConfig(iniParser);

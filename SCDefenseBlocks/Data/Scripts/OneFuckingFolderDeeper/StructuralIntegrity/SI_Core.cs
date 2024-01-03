@@ -24,7 +24,7 @@ using VRage.ObjectBuilders;
 using SpaceEngineers.Game.Entities.Blocks;
 using SpaceEngineers.Game.ModAPI;
 
-namespace StarCore.StructuralIntegrity
+namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegrity
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "SI_Field_Gen")]
     public class SI_Core : MyGameLogicComponent, IMyEventProxy
@@ -41,7 +41,7 @@ namespace StarCore.StructuralIntegrity
         //Utility Declarations 
         public const string ControlPrefix = "SI_Control.";
         public readonly Guid SettingsGUID = new Guid("9EFDABA1-E705-4F62-BD37-A4B046B60BC0");
-        public const int SettingsUpdateCount = (60 * 1) / 10;
+        public const int SettingsUpdateCount = 60 * 1 / 10;
         int SyncCountdown;
 
         //Regular Structural Integrity Values Init
@@ -83,7 +83,7 @@ namespace StarCore.StructuralIntegrity
                 Settings.FieldPower = MathHelper.Clamp((float)Math.Floor(value), MinFieldPower, MaxFieldPower);
 
                 SettingsChanged();
-                
+
                 if ((NeedsUpdate & MyEntityUpdateEnum.EACH_10TH_FRAME) == 0)
                     NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
 
@@ -142,8 +142,8 @@ namespace StarCore.StructuralIntegrity
 
                 // Dont know why this exists yet
                 float minDivertedPower = MinFieldPower;
-                float maxDivertedPower = MaxFieldPower; 
-                SetupTerminalControls<IMyCollector>(minDivertedPower, maxDivertedPower);;
+                float maxDivertedPower = MaxFieldPower;
+                SetupTerminalControls<IMyCollector>(minDivertedPower, maxDivertedPower); ;
 
                 // Apply Defaults
                 CurrentFieldPower = MinFieldPower;
@@ -288,7 +288,7 @@ namespace StarCore.StructuralIntegrity
 
                 float ratio = sliderValue / MaxFieldPower;
 
-                return baseUsage + ((baseUsage + (powerPrecentage - baseUsage)) * ratio);
+                return baseUsage + (baseUsage + (powerPrecentage - baseUsage)) * ratio;
             }
         }
 
@@ -307,7 +307,7 @@ namespace StarCore.StructuralIntegrity
 
             foreach (var block in blocks)
             {
-                if(block.FatBlock != null)
+                if (block.FatBlock != null)
                 {
                     var fatBlock = block.FatBlock;
                     if (fatBlock is IMyPowerProducer)
@@ -402,7 +402,7 @@ namespace StarCore.StructuralIntegrity
                     {
                         float currentFieldPower = blockLogic.CurrentFieldPower;
 
-                        float value1 = (currentFieldPower - MinFieldPower) / (float)MaxFieldPower - MinFieldPower;
+                        float value1 = (currentFieldPower - MinFieldPower) / MaxFieldPower - MinFieldPower;
                         float newGridModifier = MinGridModifier + value1 * (MaxGridModifier - MinGridModifier);
 
                         newGridModifier = (float)Math.Round(newGridModifier, 2);
@@ -799,7 +799,7 @@ namespace StarCore.StructuralIntegrity
                     }
                     else if (logic.SiegeCooldownActive == true)
                     {
-                        logic.SetCountStatus($"Siege Mode On Cooldown: " + (logic.SiegeCooldownTimer / 60) + " Seconds", 1500, MyFontEnum.Red);
+                        logic.SetCountStatus($"Siege Mode On Cooldown: " + logic.SiegeCooldownTimer / 60 + " Seconds", 1500, MyFontEnum.Red);
                         return;
                     }
                     if (logic.SiegeActive.Value == false)

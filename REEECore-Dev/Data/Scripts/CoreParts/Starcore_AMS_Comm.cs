@@ -14,7 +14,7 @@ using static Scripts.Structure.WeaponDefinition.HardPointDef.HardwareDef.Hardwar
 namespace Scripts {   
     partial class Parts {
         // Don't edit above this line
-        WeaponDefinition Starcore_AMS_I => new WeaponDefinition
+        WeaponDefinition Starcore_AMS_Comm => new WeaponDefinition
         {
             Assignments = new ModelAssignmentsDef
             {
@@ -69,10 +69,26 @@ namespace Scripts {
                 CycleBlocks = 4, // Number of blocks to "cycle" per acquire attempt.
                 StopTrackingSpeed = 0 , // do not track target threats traveling faster than this speed
                 MaxTrackingTime = 30 , // After this time has been reached the weapon will stop tracking existing target and scan for a new one, only applies to turreted weapons
+                Communications = new CommunicationDef
+                {
+                    StoreTargets = false, // Pushes its current target to the grid/construct so that other slaved weapons can fire on it.
+                    StorageLimit = 0, // The limit at which this weapon will no longer export targets onto the channel.
+                    MaxConnections = 0, // 0 is unlimited, this value determines the maximum number of weapons that can link up to another weapon.
+                    StoreLimitPerBlock = false, // Setting this to true will switch the StorageLimit from being per Location to per block per Location.
+                    StorageLocation = "Projectile_Target_List", // This location ID is used either by the master weapon (if ExportTargets = true) or the slave weapon (if its false).  This is shared across the conncted grids.
+                    Mode = LocalNetwork, // NoComms, BroadCast, LocalNetwork, Repeater, Relay, Jamming
+                    TargetPersists = false, // Whether or not the weapon will retain its existing target even if the source of the target releases theirs.
+                    Security = Private, // Public, Private, Secure
+                    BroadCastChannel = "", // If defined you will broadcast to all other scanners on this channel.
+                    BroadCastRange = 0, // This is the range that you will broadcast up too.  Note that this value applies to both the sender and receiver, both range requirements must be met. 
+                    JammingStrength = 0, // If Mode is set to jamming, then this value will decrease the "range" of broadcasts.  Strength falls off at sqr of the distance.
+                    RelayChannel = "", // If defined this channel will be used to relay any targets it seems on the broadcast channel.
+                    RelayRange = 0, // This defines the range that any broadcasts will be relayed.  Note that this channel id is seen as the "broadcast" channel for all receivers, broadcast range requirements apply. 
+                },
             } ,
             HardPoint = new HardPointDef
             {
-                PartName = "Painless", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "Brainless", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0.15f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 20f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Advanced, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
