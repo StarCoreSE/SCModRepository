@@ -50,7 +50,7 @@
      <!--    <string>K_SA_HeavyMetal_Gauss_PGBC</string>-->
       <!--   <string>K_SA_Gauss_AMSIIC</string>-->
      <!--   <string>SA_HMI_Erebos</string>-->
-        <string>K_SA_HeavyMetal_Spinal_Rotary_Reskin</string>
+       <!-- <string>K_SA_HeavyMetal_Spinal_Rotary_Reskin</string>-->
 		
 
         <!--ARYX-->
@@ -98,7 +98,7 @@
         <string>MetalStorm</string>
         <string>CLB2X</string>
         <string>SLAM</string>
-        <string>banshee</string>
+        <!-- <string>banshee</string>-->
         <string>TaiidanRailFighter</string>
         <string>Hexcannon</string>
         <string>longsword</string>
