@@ -468,6 +468,8 @@ namespace ShipPoints
 				TaiidanHangarBomberMedium@800;				
 				TaiidanSingleHangar@100;  
 				MA_Guardian@700; 
+				PM_LG_BLASTPLATE_BLASTPLATE@100; 
+
 				Laser_Block@150; 
 				Torp_Block@725; 
 				Priest_Block@85; 
