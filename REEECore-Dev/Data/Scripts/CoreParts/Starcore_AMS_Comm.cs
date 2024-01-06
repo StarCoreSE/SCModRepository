@@ -1,4 +1,4 @@
-﻿using static Scripts.Structure;
+using static Scripts.Structure;
 using static Scripts.Structure.WeaponDefinition;
 using static Scripts.Structure.WeaponDefinition.ModelAssignmentsDef;
 using static Scripts.Structure.WeaponDefinition.HardPointDef;
@@ -20,7 +20,7 @@ namespace Scripts {
             {
                 MountPoints = new[] {
                     new MountPointDef {
-                        SubtypeId = "Starcore_AMS_I_Block", // Block Subtypeid. Your Cubeblocks contain this information
+                        SubtypeId = "Starcore_AMS_Comm_Block", // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "", // For weapons with a spinning barrel such as Gatling Guns.
                         MuzzlePartId = "SC_AMS_I_Ele", // The subpart where your muzzle empties are located. This is often the elevation subpart.
                         AzimuthPartId = "SC_AMS_I_Rot", // Your Rotating Subpart, the bit that moves sideways
