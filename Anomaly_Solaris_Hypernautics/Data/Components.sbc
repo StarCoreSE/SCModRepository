@@ -5,9 +5,9 @@
 		<Component>
 			<Id>
 				<TypeId>Component</TypeId>
-				<SubtypeId>AMP_FrameComponent</SubtypeId>
+				<SubtypeId>ASH_FrameComponent</SubtypeId>
 			</Id>
-			<DisplayName>Insulated Frame [AMP]</DisplayName>
+			<DisplayName>Insulated Frame [ASH]</DisplayName>
 			<Icon>Textures\GUI\Icons\component\construction_components_component.dds</Icon>
 			<Size>
 				<X>0.5</X>
@@ -26,9 +26,9 @@
 		<Component>
 			<Id>
 				<TypeId>Component</TypeId>
-				<SubtypeId>AMP_PlateComponent</SubtypeId>
+				<SubtypeId>ASH_PlateComponent</SubtypeId>
 			</Id>
-			<DisplayName>Armored Plating [AMP]</DisplayName>
+			<DisplayName>Armored Plating [ASH]</DisplayName>
 			<Icon>Textures\GUI\Icons\component\interior_plate_component.dds</Icon>
 			<Size>
 				<X>0.5</X>
