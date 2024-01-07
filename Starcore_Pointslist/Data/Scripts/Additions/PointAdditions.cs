@@ -22,6 +22,7 @@ namespace ShipPoints
 				DampeningEnhancer_x2_Large@100;
                 LargeWarhead@100;
                 LargeDecoy@4;
+                LargeDecoy_MetalFoam@50;
                 LargeStator@5;
                 LargeAdvancedStator@5;
                 LargeHinge@5;
