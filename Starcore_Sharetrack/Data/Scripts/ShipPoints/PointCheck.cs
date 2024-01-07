@@ -236,7 +236,8 @@ namespace klime.PointCheck
 
             if (messageText.ToLower() == "/shields")
             {
-                Static.MyNetwork.TransmitToServer(new BasicPacket(5)); sendToOthers = false;
+                Static.MyNetwork.TransmitToServer(new BasicPacket(5));
+                sendToOthers = false;
             }
 
             if (messageText.Contains("/setmatchtime"))
@@ -264,13 +265,15 @@ namespace klime.PointCheck
                 }
                 catch (Exception)
                 { MyAPIGateway.Utilities.ShowNotification("Teams not changed, try /setteams abc xyz"); }
+                sendToOthers = false;
             }
 
             if (messageText.Contains("/sphere"))
             {
                 try
-                { SphereVisual = !SphereVisual; }
+                { SphereVisual = !SphereVisual; sendToOthers = false; }
                 catch (Exception w) { { MyLog.Default.WriteLineAndConsole($"Visual update failed: " + w); }; }
+                sendToOthers = false;
             }
 
             if (messageText.Contains("/settime"))
@@ -279,10 +282,10 @@ namespace klime.PointCheck
                 {
                     string[] tempdist = messageText.Split(' '); wintime = int.Parse(tempdist[1]);
                     MyAPIGateway.Utilities.ShowNotification("Win time changed to " + wintime.ToString());
-                    sendToOthers = true;
                 }
                 catch (Exception)
                 { MyAPIGateway.Utilities.ShowNotification("Win time not changed, try /settime xxx (in seconds)"); }
+                sendToOthers = false;
             }
 
             if (messageText.Contains("/setdelay"))
@@ -295,6 +298,7 @@ namespace klime.PointCheck
                 }
                 catch (Exception)
                 { MyAPIGateway.Utilities.ShowNotification("Delay time not changed, try /setdelay x (in minutes)"); }
+                sendToOthers = false;
             }
 
             if (messageText.Contains("/setdecay"))
@@ -304,10 +308,10 @@ namespace klime.PointCheck
                     string[] tempdist = messageText.Split(' '); decaytime = int.Parse(tempdist[1]);
                     MyAPIGateway.Utilities.ShowNotification("Decay time changed to " + decaytime.ToString());
                     decaytime = decaytime * 60;
-                    sendToOthers = true;
                 }
                 catch (Exception)
                 { MyAPIGateway.Utilities.ShowNotification("Decay time not changed, try /setdecay xxx (in seconds)"); }
+                sendToOthers = false;
             }
 
             if (messageText.Contains("/start"))
@@ -319,7 +323,6 @@ namespace klime.PointCheck
                 //Team3Tickets.Value = MatchTickets;
                 LocalMatchState = 1;
                 MyAPIGateway.Utilities.ShowMessage("GM", "You are the captain now.");
-
             }
 
             if (messageText.Contains("/end"))
@@ -340,19 +343,19 @@ namespace klime.PointCheck
                 CaptainCapTimerZ1T2.Value = 0;
                 CaptainCapTimerZ1T3.Value = 0;
                 MyAPIGateway.Utilities.ShowMessage("GM", "Match Ended.");
-
             }
 
             if (messageText.Contains("/takeover"))
             {
                 IAmTheCaptainNow = true;
                 MyAPIGateway.Utilities.ShowMessage("GM", "You are the captain now.");
+                sendToOthers = false;
             }
             if (messageText.Contains("/giveup"))
             {
                 IAmTheCaptainNow = false;
                 MyAPIGateway.Utilities.ShowMessage("GM", "You are not the captain now.");
-
+                sendToOthers = false;
             }
 
             if (messageText.Contains("/t1t"))
@@ -366,6 +369,7 @@ namespace klime.PointCheck
                 }
                 catch (Exception)
                 { }
+                sendToOthers = false;
             }
             if (messageText.Contains("/t2t"))
             {
@@ -378,6 +382,7 @@ namespace klime.PointCheck
                 }
                 catch (Exception)
                 { }
+                sendToOthers = false;
             }
             if (messageText.Contains("/t3t"))
             {
@@ -392,7 +397,7 @@ namespace klime.PointCheck
                 {
                 }
 
-
+                sendToOthers = false;
             }
 
             if (messageText.Contains("/threeteams"))
@@ -400,12 +405,13 @@ namespace klime.PointCheck
                 MyAPIGateway.Utilities.ShowMessage("GM", "Teams set to three.");
                 ThreeTeams.Value = 1;
                 Team3Tickets.Value = MatchTickets;
+                sendToOthers = false;
             }
             if (messageText.Contains("/twoteams"))
             {
                 MyAPIGateway.Utilities.ShowMessage("GM", "Teams set to two.");
                 ThreeTeams.Value = 0;
-
+                sendToOthers = false;
             }
             if (messageText.Contains("/crazycap"))
             {
@@ -413,6 +419,7 @@ namespace klime.PointCheck
                 GameModeSwitch.Value = 5;
                 Local_GameModeSwitch = 5;
                 Static.MyNetwork.TransmitToServer(new BasicPacket(16), true, true);
+                sendToOthers = false;
             }
             if (messageText.Contains("/nocap"))
             {
@@ -420,6 +427,7 @@ namespace klime.PointCheck
                 GameModeSwitch.Value = 4;
                 Local_GameModeSwitch = 4;
                 Static.MyNetwork.TransmitToServer(new BasicPacket(15), true, true);
+                sendToOthers = false;
             }
             if (messageText.Contains("/onecap"))
             {
@@ -427,6 +435,7 @@ namespace klime.PointCheck
                 GameModeSwitch.Value = 1;
                 Local_GameModeSwitch = 1;
                 Static.MyNetwork.TransmitToServer(new BasicPacket(12), true, true);
+                sendToOthers = false;
             }
             if (messageText.Contains("/twocap"))
             {
@@ -434,6 +443,7 @@ namespace klime.PointCheck
                 GameModeSwitch.Value = 2;
                 Local_GameModeSwitch = 2;
                 Static.MyNetwork.TransmitToServer(new BasicPacket(13), true, true);
+                sendToOthers = false;
             }
             if (messageText.Contains("/threecap"))
             {
@@ -441,6 +451,7 @@ namespace klime.PointCheck
                 GameModeSwitch.Value = 3;
                 Local_GameModeSwitch = 3;
                 Static.MyNetwork.TransmitToServer(new BasicPacket(14), true, true);
+                sendToOthers = false;
             }
 
             if (messageText.Contains("/problem"))
@@ -450,7 +461,6 @@ namespace klime.PointCheck
 
                 Local_ProblemSwitch = 1;
                 Static.MyNetwork.TransmitToServer(new BasicPacket(17), true, true);
-
             }
             if (messageText.Contains("/fixed"))
             {
@@ -459,7 +469,6 @@ namespace klime.PointCheck
 
                 Local_ProblemSwitch = 0;
                 Static.MyNetwork.TransmitToServer(new BasicPacket(18), true, true);
-
             }
 
         }
