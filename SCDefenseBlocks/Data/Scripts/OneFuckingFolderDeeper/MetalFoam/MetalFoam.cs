@@ -2,73 +2,114 @@
 using Sandbox.Game;
 using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
+using Sandbox.ModAPI.Interfaces.Terminal;
 using System;
 using VRage;
 using VRage.Game;
 using VRage.Game.Components;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
+using VRage.Game.ModAPI.Network;
 using VRage.Game.ObjectBuilders.ComponentSystem;
 using VRage.ModAPI;
+using VRage.Network;
 using VRage.ObjectBuilders;
+using VRage.Sync;
+using VRage.Utils;
 using VRageMath;
 
 namespace Invalid.MetalFoam
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Decoy), false, "LargeDecoy_MetalFoam")]
-    public class MetalFoamGenerator : MyGameLogicComponent
+    public class MetalFoamGenerator : MyGameLogicComponent, IMyEventProxy
     {
-        private IMyFunctionalBlock block;  // This is the declaration you need
+        private IMyCubeBlock block;  // This is the declaration you need
         private const int sphereRadius = 4;  // This makes sphereRadius available to the whole class
+
 
         private int nextLayerTick = 0;
         private int currentLayer = 0;
         private Vector3I center;
-        private bool isGenerating = false; // To track whether foam is generating
         private int radius;
+
+        MySync<bool, SyncDirection.BothWays> m_clientSync = null;
+        static bool m_controlsCreated = false;
 
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             base.Init(objectBuilder);
-            block = Entity as IMyFunctionalBlock;
-            block.EnabledChanged += OnBlockEnabledChanged; // Listen for enabled changes
+            // The sync variables are already set by the time we get here.
+            // Hook the ValueChanged event, so we can do something when the data changes.
+            m_clientSync.ValueChanged += clientSync_ValueChanged;
+
+            // This is a test of SyncExtentions whitelist, however this will execute if you call m_clientSync.ValidateAndSet().
+            m_clientSync.AlwaysReject();
+
+            NeedsUpdate |= VRage.ModAPI.MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
+
+
+            block = (IMyCubeBlock)Entity;
+            block.SlimBlock.ComponentStack.IsFunctionalChanged += OnBlockDamaged;
         }
 
-        private void OnBlockEnabledChanged(IMyTerminalBlock obj)
+
+        private void clientSync_ValueChanged(MySync<bool, SyncDirection.BothWays> obj)
         {
-            // If the block is turned off, start or resume foam generation
-            if (!block.Enabled && !isGenerating)
+            if (MyAPIGateway.Session.OnlineMode != VRage.Game.MyOnlineModeEnum.OFFLINE && MyAPIGateway.Session.IsServer)
+                MyAPIGateway.Utilities.SendMessage($"Synced client value on server: {obj.Value}");
+            else
+                MyAPIGateway.Utilities.ShowMessage("Test", $"Synced client value on client: {obj.Value}");
+        }
+
+        static void CreateTerminalControls()
+        {
+            if (!m_controlsCreated)
             {
-                StartFoamGeneration();
+                m_controlsCreated = true;
+
+                var clientSyncTestOnOff = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlOnOffSwitch, IMyDecoy>("Gwindalmir.Sync.TestClient");
+                clientSyncTestOnOff.Enabled = (b) => true;
+                clientSyncTestOnOff.Visible = (b) => true;
+                clientSyncTestOnOff.Title = MyStringId.GetOrCompute("RELEASE THE FOAM");
+                clientSyncTestOnOff.Getter = (b) => b.GameLogic.GetAs<MetalFoamGenerator>().m_clientSync;
+                clientSyncTestOnOff.Setter = (b, v) => b.GameLogic.GetAs<MetalFoamGenerator>().m_clientSync.Value = v;
+                clientSyncTestOnOff.OnText = MyStringId.GetOrCompute("On");
+                clientSyncTestOnOff.OffText = MyStringId.GetOrCompute("Off");
+                MyAPIGateway.TerminalControls.AddControl<IMyDecoy>(clientSyncTestOnOff);
             }
         }
 
-        private void StartFoamGeneration()
+        public override void UpdateOnceBeforeFrame()
         {
-            isGenerating = true;
-            center = block.Position; // Set the center for sphere generation
-            NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME; // Begin updates
+            base.UpdateOnceBeforeFrame();
+            CreateTerminalControls();
+
+            (Entity as IMyDecoy).EnabledChanged += TestSyncComponent_EnabledChanged;
         }
 
+        private void TestSyncComponent_EnabledChanged(IMyCubeBlock obj)
+        {
+
+        }
 
         public override void UpdateBeforeSimulation100()
         {
             // This method is called approximately every 100 ticks (~1.66 seconds)
-            if (isGenerating && currentLayer <= sphereRadius)
+            if (MyAPIGateway.Session.GameplayFrameCounter >= nextLayerTick)
             {
-                if (MyAPIGateway.Session.GameplayFrameCounter >= nextLayerTick)
+                // Ensure currentLayer starts from 0 (center) and expands outwards
+                if (currentLayer <= sphereRadius)
                 {
                     AddLayer(center, sphereRadius, currentLayer); // Start from center and expand
                     currentLayer++; // Move to the next layer
                     nextLayerTick = MyAPIGateway.Session.GameplayFrameCounter + (180 / (sphereRadius + 1)); // Adjust timing as needed
                 }
-            }
-            else if (currentLayer > sphereRadius)
-            {
-                isGenerating = false; // Stop generating
-                NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME; // Stop updating after complete
-                RemoveBlock(); // Remove the block after foam generation is complete
+                else
+                {
+                    NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME; // Stop updating after complete
+                    RemoveBlock(); // Remove the block after foam generation is complete
+                }
             }
         }
 
@@ -162,7 +203,6 @@ namespace Invalid.MetalFoam
             {
                 // Unregister the damage handler
                 block.SlimBlock.ComponentStack.IsFunctionalChanged -= OnBlockDamaged;
-                block.EnabledChanged -= OnBlockEnabledChanged; // Unregister the enabled change handler
             }
         }
 
