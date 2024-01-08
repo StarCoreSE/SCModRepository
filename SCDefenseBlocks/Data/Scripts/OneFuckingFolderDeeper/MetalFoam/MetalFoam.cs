@@ -18,45 +18,57 @@ namespace Invalid.MetalFoam
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Decoy), false, "LargeDecoy_MetalFoam")]
     public class MetalFoamGenerator : MyGameLogicComponent
     {
-        private IMyCubeBlock block;  // This is the declaration you need
+        private IMyFunctionalBlock block;  // This is the declaration you need
         private const int sphereRadius = 4;  // This makes sphereRadius available to the whole class
-
 
         private int nextLayerTick = 0;
         private int currentLayer = 0;
         private Vector3I center;
+        private bool isGenerating = false; // To track whether foam is generating
         private int radius;
+
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             base.Init(objectBuilder);
-            block = (IMyCubeBlock)Entity;
-            block.SlimBlock.ComponentStack.IsFunctionalChanged += OnBlockDamaged;
+            block = Entity as IMyFunctionalBlock;
+            block.EnabledChanged += OnBlockEnabledChanged; // Listen for enabled changes
         }
 
-        //private void OnBlockDestroyed(IMyEntity obj)
-        //{
-        //    GenerateArmorSphere(block.Position, sphereRadius);
-        //}
+        private void OnBlockEnabledChanged(IMyTerminalBlock obj)
+        {
+            // If the block is turned off, start or resume foam generation
+            if (!block.Enabled && !isGenerating)
+            {
+                StartFoamGeneration();
+            }
+        }
+
+        private void StartFoamGeneration()
+        {
+            isGenerating = true;
+            center = block.Position; // Set the center for sphere generation
+            NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME; // Begin updates
+        }
 
 
         public override void UpdateBeforeSimulation100()
         {
             // This method is called approximately every 100 ticks (~1.66 seconds)
-            if (MyAPIGateway.Session.GameplayFrameCounter >= nextLayerTick)
+            if (isGenerating && currentLayer <= sphereRadius)
             {
-                // Ensure currentLayer starts from 0 (center) and expands outwards
-                if (currentLayer <= sphereRadius)
+                if (MyAPIGateway.Session.GameplayFrameCounter >= nextLayerTick)
                 {
                     AddLayer(center, sphereRadius, currentLayer); // Start from center and expand
                     currentLayer++; // Move to the next layer
                     nextLayerTick = MyAPIGateway.Session.GameplayFrameCounter + (180 / (sphereRadius + 1)); // Adjust timing as needed
                 }
-                else
-                {
-                    NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME; // Stop updating after complete
-                    RemoveBlock(); // Remove the block after foam generation is complete
-                }
+            }
+            else if (currentLayer > sphereRadius)
+            {
+                isGenerating = false; // Stop generating
+                NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME; // Stop updating after complete
+                RemoveBlock(); // Remove the block after foam generation is complete
             }
         }
 
@@ -150,6 +162,7 @@ namespace Invalid.MetalFoam
             {
                 // Unregister the damage handler
                 block.SlimBlock.ComponentStack.IsFunctionalChanged -= OnBlockDamaged;
+                block.EnabledChanged -= OnBlockEnabledChanged; // Unregister the enabled change handler
             }
         }
 
