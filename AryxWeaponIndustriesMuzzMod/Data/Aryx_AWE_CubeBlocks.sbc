@@ -1,0 +1,642 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<CubeBlocks>
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		<Id>
+			<TypeId>ConveyorSorter</TypeId>
+			<SubtypeId>ARYXLightCoilgun</SubtypeId>
+		</Id>
+		<DisplayName>LC-C7 Hunter-405 Coilgun</DisplayName>
+<Description>Long Ranged Fixed: [15km]
+Magazine Capacity: [1]
+Reload Speed: [15 seconds]
+Ammunition:  [Energy]
+High Power Hunter: [8000m/s]
+Damages the target.
+Low Power Hunter: [2500m/s]
+Shieldpen BONK, no damage.
+</Description>
+		<Icon>Textures\GUI\Icons\Aryx_AWE_LightCoilgun.dds</Icon>
+		<CubeSize>Large</CubeSize>
+		<BlockTopology>TriangleMesh</BlockTopology>
+		<Size x="1" y="2" z="15"/>	
+		<ModelOffset x="0" y="0" z="0"/>
+		<Model>Models\AWE_Coilgun\ARYX_LightCoilgun.mwm</Model>
+		<Components>
+			<Component Subtype="SteelPlate" Count="1250" />
+			<Component Subtype="Construction" Count="300" />
+			<Component Subtype="MetalGrid" Count="200" />
+			<Component Subtype="PowerCell" Count="180" />	
+			<Component Subtype="Superconductor" Count="300" />				
+			<Component Subtype="LargeTube" Count="200" />
+			<Component Subtype="Motor" Count="300" />		
+			<Component Subtype="ElectromagnetAWE" Count ="180" />	
+			<Component Subtype="Computer" Count="500" />
+			<Component Subtype="MetalGrid" Count="400" />
+			<Component Subtype="SteelPlate" Count="750" />
+		</Components>
+		<CriticalComponent Subtype="Superconductor" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="1.00" EndY="2.00"/>
+				<MountPoint Side="Left" StartX="1.00" StartY="0.00" EndX="4.00" EndY="1.00"/>
+				<MountPoint Side="Left" StartX="1.00" StartY="1.00" EndX="15.00" EndY="2.00"/>
+				<MountPoint Side="Left" StartX="13.00" StartY="0.00" EndX="15.00" EndY="1.00"/>
+				<MountPoint Side="Right" StartX="11.00" StartY="0.00" EndX="14.00" EndY="1.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="1.00" EndX="14.00" EndY="2.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="2.00" EndY="1.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="1.00" EndY="14.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="1.00" EndX="1.00" EndY="4.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="13.00" EndX="1.00" EndY="15.00"/>
+			</MountPoints>
+
+			<BlockPairName>AWELightCoilgun</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+		<EdgeType>Light</EdgeType>
+		<BuildTimeSeconds>140</BuildTimeSeconds>
+		<InventoryMaxVolume>1</InventoryMaxVolume>
+		<DamageEffectId>213</DamageEffectId>
+		<DamagedSound>ParticleWeapExpl</DamagedSound>
+		<ResourceSinkGroup>Defense</ResourceSinkGroup>
+		<EmissiveColorPreset>Default</EmissiveColorPreset>
+      <PCU>750</PCU>   		
+	</Definition>
+	<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>ARYXTempestCannon</SubtypeId>
+      </Id>
+      <DisplayName>600mm Tempest Heavy Cannon</DisplayName>
+      <Icon>Textures\GUI\Icons\Aryx_AWE_TempestCannon.dds</Icon>
+<Description>Long Ranged Fixed: [15km] 
+Magazine Capacity: [1] 
+Rate of Fire: [120] 
+Reload Speed: [15 seconds] 
+Ammunition: [1100m/s,] [Kinetic]  
+APHE 600mm: 
+[Penetration fuse]
+HE 600mm: 
+[Contact fuse, more damage]
+</Description>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="9"/>
+	  <Center x="0" y="0" z="8" />
+      <ModelOffset x="0" y="0" z="0" />
+	  <Model>Models\remodels\SC_Tempest_Remodel.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="650" />
+        <Component Subtype="Construction" Count="150" />
+        <Component Subtype="MetalGrid" Count="120" />
+        <Component Subtype="LargeTube" Count="60" />	
+        <Component Subtype="Motor" Count="60" />
+        <Component Subtype="Computer" Count="100" />
+        <Component Subtype="Construction" Count="150" />		
+        <Component Subtype="SteelPlate" Count="350" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
+				<MountPoint Side="Left" StartX="6.00" StartY="0.00" EndX="9.00" EndY="1.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="3.00" EndY="1.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="1.00" EndY="3.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="6.00" EndX="1.00" EndY="9.00"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\AWE_HeavyCannon\ARYX_TempestCannon_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\AWE_HeavyCannon\ARYX_TempestCannon_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\AWE_HeavyCannon\ARYX_TempestCannon_BS3.mwm"/>
+			</BuildProgressModels>
+      <BlockPairName>AryxTempestCannon</BlockPairName>
+		<MirroringY>Z</MirroringY>
+		<MirroringZ>Y</MirroringZ>
+      <BuildTimeSeconds>60</BuildTimeSeconds>
+      <EdgeType>Light</EdgeType>
+      <WeaponDefinitionId Subtype="AryxTyphoonWepDef" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>0.6</InventoryMaxVolume>
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>200</PCU>      
+    </Definition>	
+	<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>ARYXBurstTurret</SubtypeId>
+      </Id>
+      <DisplayName>BR-RT7 Punisher 70mm Burst Cannon</DisplayName>
+      <Icon>Textures\GUI\Icons\AryxJudgeCannon.dds</Icon>
+<Description>Short Range Turret: [3km] 
+Magazine Capacity: [4] 
+Rate of Fire: [250] 
+Reload Speed: [4 seconds] 
+Ammunition: [900m/s,] [Kinetic]
+</Description>
+    <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="2" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+	  <Model>Models\BurstCannon\LG_ARYX_BurstCannonTurretBase.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="500" />
+        <Component Subtype="Construction" Count="200" />
+        <Component Subtype="MetalGrid" Count="110" />
+        <Component Subtype="LargeTube" Count="48" />
+        <Component Subtype="SmallTube" Count="80" />	
+        <Component Subtype="Motor" Count="80" />
+        <Component Subtype="Computer" Count="100" />
+        <Component Subtype="MetalGrid" Count="100" />		
+        <Component Subtype="SteelPlate" Count="400" />
+      </Components>
+      <CriticalComponent Subtype="SteelPlate" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+				<MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+				<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\BurstCannon\LG_ARYX_BurstCannonTurretBase_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.66" File="Models\BurstCannon\LG_ARYX_BurstCannonTurretBase_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.0" File="Models\BurstCannon\LG_ARYX_BurstCannonTurretBase_BS3.mwm"/>
+			</BuildProgressModels>
+      <BlockPairName>AryxBurstCannon</BlockPairName>
+		<MirroringY>Z</MirroringY>
+		<MirroringZ>Y</MirroringZ>
+      <BuildTimeSeconds>60</BuildTimeSeconds>
+      <EdgeType>Light</EdgeType>
+      <WeaponDefinitionId Subtype="AryxBurstCannonWepDef" />
+	  <OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>	  	  
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>0.144</InventoryMaxVolume>
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>200</PCU>      
+    </Definition>
+	<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>ARYXBurstTurretSlanted</SubtypeId>
+      </Id>
+      <DisplayName>BR-RT7 Punisher Slanted Burst Cannon</DisplayName>
+      <Icon>Textures\GUI\Icons\Aryx_AWE_SlantedBurstCannon.dds</Icon>
+<Description>Short Range Turret: [3km] 
+Magazine Capacity: [4] 
+Rate of Fire: [250] 
+Reload Speed: [4 seconds] 
+Ammunition: [900m/s,] [Kinetic]
+</Description>
+    <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="3" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+	  <Model>Models\BurstCannon\ARYX_BurstCannonSlant.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="650" />
+        <Component Subtype="Construction" Count="200" />
+        <Component Subtype="MetalGrid" Count="130" />
+        <Component Subtype="LargeTube" Count="48" />
+        <Component Subtype="SmallTube" Count="100" />	
+        <Component Subtype="Motor" Count="90" />
+        <Component Subtype="Computer" Count="100" />
+        <Component Subtype="MetalGrid" Count="120" />		
+        <Component Subtype="SteelPlate" Count="550" />
+      </Components>
+      <CriticalComponent Subtype="SteelPlate" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="3.00" EndY="1.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="3.00" EndY="2.50"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="3.00" EndY="1.00"/>
+				<MountPoint Side="Left" StartX="1.50" StartY="1.00" EndX="3.00" EndY="2.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="3.00" EndY="1.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="1.00" EndX="1.50" EndY="2.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\BurstCannon\ARYX_BurstCannonSlant_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\BurstCannon\ARYX_BurstCannonSlant_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\BurstCannon\ARYX_BurstCannonSlant_BS3.mwm"/>
+			</BuildProgressModels>
+      <BlockPairName>AryxBurstCannonSlanted</BlockPairName>
+		<MirroringY>Z</MirroringY>
+		<MirroringZ>Y</MirroringZ>
+      <BuildTimeSeconds>65</BuildTimeSeconds>
+	  <GeneralDamageMultiplier>0.5</GeneralDamageMultiplier>
+      <EdgeType>Light</EdgeType>  
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>0.144</InventoryMaxVolume>
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>200</PCU>      
+    </Definition>	
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		<Id>
+			<TypeId>ConveyorSorter</TypeId>
+			<SubtypeId>ARYXRailgun</SubtypeId>
+		</Id>
+		<DisplayName>Artemis-250 Railgun</DisplayName>
+      <Icon>Textures\GUI\Icons\AWERailgun.dds</Icon>
+<Description>Medium Ranged Fixed: [15km || 5km] 
+Magazine Capacity: [1 || 5] 
+Rate of Fire: [60] 
+Reload Speed: [10 seconds] 
+Ammunition: [Kinetic]
+Single Shot: 
+[8000m/s, 15km] 
+Repeating Shot:
+[2000m/s, 5km]
+</Description>	
+		<CubeSize>Large</CubeSize>
+		<BlockTopology>TriangleMesh</BlockTopology>
+		<Size x="1" y="1" z="5"/>
+		<Center x="0" y="0" z="4" />	
+		<ModelOffset x="0" y="0" z="0"/>
+		<Model>Models\AWERailgun\LG_Railgun.mwm</Model>
+		<Components>
+			<Component Subtype="SteelPlate" Count="250" />
+			<Component Subtype="Construction" Count="180" />
+			<Component Subtype="MetalGrid" Count="50" />
+			<Component Subtype="PowerCell" Count="40" />	
+			<Component Subtype="Superconductor" Count="80" />				
+			<Component Subtype="SmallTube" Count="150" />
+			<Component Subtype="Motor" Count="150" />		
+			<Component Subtype="ElectromagnetAWE" Count ="60" />	
+			<Component Subtype="Computer" Count="200" />
+			<Component Subtype="Construction" Count="120" />
+			<Component Subtype="SteelPlate" Count="250" />
+		</Components>
+		<CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+				<MountPoint Side="Left" StartX="3.0" StartY="0.0" EndX="5.0" EndY="1"/>
+				<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="2.0" EndY="1"/>
+				<MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="1.0" EndY="2.0"/>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="3.0" EndX="1.0" EndY="5.0"/>
+			</MountPoints>
+
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\AWERailgun\LG_Railgun_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.66" File="Models\AWERailgun\LG_Railgun_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.0" File="Models\AWERailgun\LG_Railgun_BS3.mwm"/>
+			</BuildProgressModels>
+
+			<BlockPairName>AWERailgun</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+		<WeaponDefinitionId Subtype="AryxTyphoonWepDef" />
+		<EdgeType>Light</EdgeType>
+		<BuildTimeSeconds>80</BuildTimeSeconds>
+		<InventoryMaxVolume>1</InventoryMaxVolume>
+		<DamageEffectId>213</DamageEffectId>
+		<DamagedSound>ParticleWeapExpl</DamagedSound>
+		<ResourceSinkGroup>Defense</ResourceSinkGroup>
+		<EmissiveColorPreset>Default</EmissiveColorPreset>
+      <PCU>750</PCU>   		
+	</Definition>
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		<Id>
+			<TypeId>ConveyorSorter</TypeId>
+			<SubtypeId>ARYXFocusLance</SubtypeId>
+		</Id>
+		<DisplayName>Focus Beam</DisplayName>
+		<Icon>Textures\GUI\Icons\chungus.dds</Icon>
+<Description>Long Ranged Fixed: [10km] 
+Magazine Capacity: [3] 
+Rate of Fire: [360] 
+Reload Speed: [7.5 seconds] 
+Ammunition: [Energy]
+Pulse Laser: 
+[Falloff after 5km down to 25%]
+Tractor Beam: 
+[No damage, 5km range]
+</Description>
+		<CubeSize>Large</CubeSize>
+		<BlockTopology>TriangleMesh</BlockTopology>
+		<Size x="1" y="1" z="6"/>
+		<Center x="0" y="0" z="5" />	
+		<ModelOffset x="0" y="0" z="0"/>
+		<Model>Models\testing\ARYX_FocusBeam.mwm</Model>
+		<Components>
+			<Component Subtype="SteelPlate" Count="300" />
+			<Component Subtype="Construction" Count="200" />
+			<Component Subtype="MetalGrid" Count="50" />
+			<Component Subtype="PowerCell" Count="40" />	
+			<Component Subtype="Superconductor" Count="120" />				
+			<Component Subtype="LargeTube" Count="150" />	
+			<Component Subtype="BulletproofGlass" Count ="120" />	
+			<Component Subtype="Computer" Count="300" />
+			<Component Subtype="Construction" Count="150" />
+			<Component Subtype="SteelPlate" Count="200" />
+		</Components>
+		<CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
+				<MountPoint Side="Left" StartX="1.00" StartY="0.00" EndX="6.00" EndY="1.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="5.00" EndY="1.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="1.00" EndY="5.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="1.00" EndX="1.00" EndY="6.00"/>
+			</MountPoints>
+			<BlockPairName>AWEFocusLanceLG</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+
+		<EdgeType>Light</EdgeType>
+		<BuildTimeSeconds>80</BuildTimeSeconds>
+		<InventoryMaxVolume>1</InventoryMaxVolume>
+		<DamageEffectId>213</DamageEffectId>
+		<DamagedSound>ParticleWeapExpl</DamagedSound>
+		<ResourceSinkGroup>Defense</ResourceSinkGroup>
+		<EmissiveColorPreset>Default</EmissiveColorPreset>
+		<PCU>750</PCU>
+	</Definition>
+	
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>ARYXPlasmaPulser</SubtypeId>
+			</Id>
+			<!--Highly Energised Lance Integrated Offensive System-->	
+			<DisplayName>M5D-2E HELIOS Plasma Pulser</DisplayName>
+			<Description>[MUST HAVE TARGET LOCK]
+Long Ranged Fixed: [6km] 
+Magazine Capacity: [4] 
+Rate of Fire: [260] 
+Reload Speed: [6 seconds] 
+Ammunition: [600m/s,] [Energy]
+ZAP: 
+[Repeatedly zaps target]
+BAP: 
+[Detonates on target]
+</Description>
+      <Icon>Textures\GUI\Icons\AryxPlasmaGun.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="2" y="1" z="6"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\PlasmaGun\LG_ARYX_StaticPlasmaPulser.mwm</Model>
+			
+			<Components>
+				<Component Subtype="SteelPlate" Count="500" />
+				<Component Subtype="Construction" Count="200" />
+				<Component Subtype="PowerCell" Count="30" />	
+				<Component Subtype="Superconductor" Count="60" />				
+				<Component Subtype="LargeTube" Count="20" />	
+				<Component Subtype="ElectromagnetAWE" Count ="120" />	
+				<Component Subtype="Computer" Count="100" />
+				<Component Subtype="Construction" Count="200" />
+				<Component Subtype="SteelPlate" Count="200" />
+			</Components>
+			
+			
+			<CriticalComponent Index="0" Subtype="Computer"/>
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="2.0" EndY="1.0"/>
+				<MountPoint Side="Left" StartX="4.0" StartY="0.0" EndX="6" EndY="1"/>
+				<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="2.0" EndY="1"/>
+				<MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="2.0" EndY="3.0"/>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="3.0" EndX="2.0" EndY="6.0"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\PlasmaGun\LG_ARYX_StaticPlasmaPulser_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.66" File="Models\PlasmaGun\LG_ARYX_StaticPlasmaPulser_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.0" File="Models\PlasmaGun\LG_ARYX_StaticPlasmaPulser_BS3.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>ARYX_PlasmaPulser</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+			<EmissiveColorPreset>AryxPlasmaPreset</EmissiveColorPreset>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>90</BuildTimeSeconds>
+			<InventoryMaxVolume>1</InventoryMaxVolume>
+			<DamageEffectId>213</DamageEffectId>
+			<DamagedSound>ParticleWeapExpl</DamagedSound>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>			
+			<PCU>100</PCU>   			
+	</Definition>
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		<Id>
+			<TypeId>ConveyorSorter</TypeId>
+			<SubtypeId>ARYXGaussCannon</SubtypeId>
+		</Id>
+		<DisplayName>S11A-5PX Ares Superheavy Gauss Cannon</DisplayName>
+		<Icon>Textures\GUI\Icons\AryxGaussCannon.dds</Icon>
+<Description>Long Ranged Fixed: [100km]
+Reload Speed: [25 seconds] 
+Ammunition: [8000m/s,] [Kinetic]
+</Description>	
+		<CubeSize>Large</CubeSize>
+		<BlockTopology>TriangleMesh</BlockTopology>
+		<Size x="3" y="2" z="9"/>
+		<ModelOffset x="0" y="0" z="0" />
+		<Center x="1" y="0" z="7" />
+		<Model>Models\Gauss\LG_AryxGaussCannon.mwm</Model>
+		<Components>
+			<Component Subtype="SteelPlate" Count="1250" />
+			<Component Subtype="Construction" Count="600" />
+			<Component Subtype="MetalGrid" Count="250" />
+			<Component Subtype="PowerCell" Count="168" />	
+			<Component Subtype="Superconductor" Count="336" />				
+			<Component Subtype="SmallTube" Count="500" />
+			<Component Subtype="Motor" Count="250" />		
+			<Component Subtype="ElectromagnetAWE" Count ="328" />	
+			<Component Subtype="Computer" Count="820" />
+			<Component Subtype="Construction" Count="400" />
+			<Component Subtype="SteelPlate" Count="750" />
+		</Components>
+		<CriticalComponent Subtype="SteelPlate" Index="0" />
+		<!--lmao this is how you comment in xml-->		
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="2.0"/>
+				<MountPoint Side="Left" StartX="6.0" StartY="0.0" EndX="9.0" EndY="2"/>
+				<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="3.0" EndY="2"/>
+				<MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0"/>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="6.0" EndX="3.0" EndY="9.0"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Gauss\LG_AryxGaussCannon_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.66" File="Models\Gauss\LG_AryxGaussCannon_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.0" File="Models\Gauss\LG_AryxGaussCannon_BS3.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>LG_GaussCannon</BlockPairName>
+			<MirroringZ>Y</MirroringZ>
+
+		<EdgeType>Light</EdgeType>
+		<BuildTimeSeconds>240</BuildTimeSeconds>
+		<InventoryMaxVolume>6</InventoryMaxVolume>
+		<DamageEffectId>213</DamageEffectId>
+		<DamagedSound>ParticleWeapExpl</DamagedSound>
+		<ResourceSinkGroup>Defense</ResourceSinkGroup>
+		<EmissiveColorPreset>Default</EmissiveColorPreset>
+      <PCU>1500</PCU>   		
+	</Definition>
+
+	<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>ARYXLargeRadar</SubtypeId>
+      </Id>
+      <DisplayName>"Doppler" Radar Unit</DisplayName>
+      <Icon>Textures\GUI\Icons\Aryx_AWE_LargeRadar.dds</Icon>
+      <Description>Extends scroll targeting range.[17.5KM RANGE]</Description>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1"/>
+      <ModelOffset x="0" y="0" z="0" />
+	  <Model>Models\AWE_Radars\ARYX_LargeRadar.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="25" />
+        <Component Subtype="Construction" Count="20" />
+        <Component Subtype="Detector" Count="10" />
+        <Component Subtype="LargeTube" Count="5" />
+        <Component Subtype="Computer" Count="40" />
+        <Component Subtype="SteelPlate" Count="25" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+		<MountPoints>
+			<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
+		</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\AWE_Radars\ARYX_LargeRadar_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.66" File="Models\AWE_Radars\ARYX_LargeRadar_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\AWE_Radars\ARYX_LargeRadar_BS3.mwm"/>				
+			</BuildProgressModels>			
+      <BlockPairName>AryxRadar</BlockPairName>
+		<MirroringY>Z</MirroringY>
+		<MirroringZ>Y</MirroringZ>	
+      <BuildTimeSeconds>25</BuildTimeSeconds>
+      <EdgeType>Light</EdgeType>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>50</PCU>      
+    </Definition>
+
+	<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>ARYXMagnetarCannon</SubtypeId>
+      </Id>
+      <DisplayName>K8A-3SC Magnetar Shock Cannon</DisplayName>
+      <Icon>Textures\GUI\Icons\AryxMagnetarCannon.dds</Icon>
+<Description>Long Range Turret: [6km] 
+Magazine Capacity: [3] 
+Rate of Fire: [360] 
+Reload Speed: [10 seconds] 
+Ammunition: [1200m/s,] [Energy] 
+</Description>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="7" y="4" z="7"/>
+      <ModelOffset x="0" y="0" z="0" />
+	  <Model>Models\AWE_ShockCannon\ARYX_MagnetarCannonBase.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="125" />
+        <Component Subtype="Construction" Count="300" />
+        <Component Subtype="MetalGrid" Count="200" />
+        <Component Subtype="LargeTube" Count="70" />
+        <Component Subtype="ElectromagnetAWE" Count="200" />
+        <Component Subtype="Computer" Count="325" />
+        <Component Subtype="Superconductor" Count="100" />
+        <Component Subtype="GravityGenerator" Count="300" />			
+        <Component Subtype="Motor" Count="200" />
+        <Component Subtype="Construction" Count="150" />		
+        <Component Subtype="SteelPlate" Count="750" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="7.0" EndY="1.0"/>
+				<MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="7.0" EndY="1"/>
+				<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="7.0" EndY="1"/>
+				<MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="7.0" EndY="1"/>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="7" EndY="7"/>
+			</MountPoints>
+			<!-- <BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\AWE_HeavyCannon\ARYX_CycloneCannonBase_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.66" File="Models\AWE_HeavyCannon\ARYX_CycloneCannonBase_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.0" File="Models\AWE_HeavyCannon\ARYX_CycloneCannonBase_BS3.mwm"/>
+			</BuildProgressModels>	-->		
+      <BlockPairName>AryxMagnetarCannon</BlockPairName>
+		<MirroringY>Z</MirroringY>
+		<MirroringZ>Y</MirroringZ>
+      <BuildTimeSeconds>150</BuildTimeSeconds>
+      <EdgeType>Light</EdgeType>
+      <WeaponDefinitionId Subtype="AryxTyphoonWepDef" />
+	  <OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>	  	  
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>0.9</InventoryMaxVolume>
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>500</PCU>      
+    </Definition>
+    
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>ARYXRailgunTurret</SubtypeId>
+      </Id>
+      <DisplayName>Apollo-250 Railgun Turret</DisplayName>
+      <Icon>Textures\GUI\Icons\AWERailgunTurret.dds</Icon>
+      <Description>A turreted version of the Artemis railgun</Description>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="2" z="5"/>
+      <ModelOffset x="0" y="0" z="0" />
+	  <Model>Models\AWERailTurret\LG_ARYXRailgunTurret_Base.mwm</Model>
+      <Components>
+			<Component Subtype="SteelPlate" Count="400" />
+			<Component Subtype="Construction" Count="270" />
+			<Component Subtype="MetalGrid" Count="120" />
+			<Component Subtype="PowerCell" Count="40" />	
+			<Component Subtype="Superconductor" Count="80" />				
+			<Component Subtype="SmallTube" Count="250" />
+			<Component Subtype="Motor" Count="400" />		
+			<Component Subtype="Computer" Count="300" />
+			<Component Subtype="Construction" Count="220" />
+			<Component Subtype="SteelPlate" Count="600" />		
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+	  <MountPoints>
+		<MountPoint Side="Bottom" StartX="1.0" StartY="1.0" EndX="2.0" EndY="4.0"/>
+		<MountPoint Side="Bottom" StartX="2.0" StartY="1.6" EndX="2.5" EndY="4.0"/>
+		<MountPoint Side="Bottom" StartX="0.5" StartY="1.6" EndX="1.0" EndY="4.0"/>
+	  </MountPoints>
+	  <BuildProgressModels>
+		  <Model BuildPercentUpperBound="0.33" File="Models\AWERailTurret\LG_ARYXRailgunTurret_Base_BS1.mwm"/>
+		  <Model BuildPercentUpperBound="0.67" File="Models\AWERailTurret\LG_ARYXRailgunTurret_Base_BS2.mwm"/>
+		  <Model BuildPercentUpperBound="1.00" File="Models\AWERailTurret\LG_ARYXRailgunTurret_Base_BS3.mwm"/>
+	  </BuildProgressModels>
+	  <OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+      <BlockPairName>AryxRailgunTurret</BlockPairName>
+		<MirroringY>Z</MirroringY>
+		<MirroringZ>Y</MirroringZ>
+      <BuildTimeSeconds>120</BuildTimeSeconds>
+      <EdgeType>Light</EdgeType>
+      <WeaponDefinitionId Subtype="AryxFlakTurretWepDef" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+	  <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>1000</PCU>      
+      <TargetingGroups>
+		<string>Weapons</string>
+      </TargetingGroups>      
+    </Definition>
+
+	</CubeBlocks>
+</Definitions>

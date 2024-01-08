@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+ <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"> 
+   <BlueprintClassEntries> 
+		<!--AMMUNITION-->	
+	<Entry Class="Consumables" BlueprintSubtypeId="54mmAutocannonBP" />
+	<Entry Class="Consumables" BlueprintSubtypeId="60mmFlakBP" />
+	<Entry Class="Consumables" BlueprintSubtypeId="70mmBurstBP" />
+	<Entry Class="Consumables" BlueprintSubtypeId="84FlechetteMissileBP" />
+	<Entry Class="Consumables" BlueprintSubtypeId="84DisruptorMissileBP" />
+	<Entry Class="Consumables" BlueprintSubtypeId="40mmATLASBP" />
+	<Entry Class="Consumables" BlueprintSubtypeId="25mmCODEXBP" />	
+	<Entry Class="Consumables" BlueprintSubtypeId="aryx150mmBuckshotBP" />
+	<Entry Class="Consumables" BlueprintSubtypeId="AWEWhirlwind120AmmoBP" />		
+	<Entry Class="Consumables" BlueprintSubtypeId="AWESabreMissileBP" />	
+	<Entry Class="Consumables" BlueprintSubtypeId="AWELancerMissileBP" />
+
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="54mmAutocannonBP" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="60mmFlakBP" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="GaussAmmoBP" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="AryxRailgunAmmoBP" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="50mmSmartBP" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="50mmSmartEnergyBP" />	
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="70mmBurstBP" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="84FlechetteMissileBP" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="900mmTorpedoBP" />	
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="AWEWhirlwind120AmmoBP" />		
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="AWECyclone240AmmoBP" />	
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="AWECyclone480AmmoBP" />		
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="84DisruptorMissileBP" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="900mmEnergyTorpedoBP" />	
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="40mmATLASBP" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="AryxEnergyPulseCell" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="aryx150mmBuckshotBP" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="25mmCODEXBP" />	
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="AWESabreMissileBP" />	
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="AWELancerMissileBP" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="AWECyclone600AmmoBP" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="AryxSmallRailgunAmmoBP" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="AWE135mmFlakBP" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="AWE100mmWarrorBP" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="AWE100mmWarrorBP" />	
+
+	
+		<!--BLOCKS-->
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="SmallMissileLauncher/ARYXFlechetteLauncher" />		
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="LargeMissileTurret/ARYX_ChordAutocannon" />
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="ConveyorSorter/ARYXBurstTurret" />
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="LargeMissileTurret/ARYXFlakTurret" />
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="LargeMissileTurret/ARYXPulseTurret" />
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="LargeMissileTurret/ARYXCompactPulseTurret" />
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="LargeMissileTurret/ARYXSentinel" />
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="LargeMissileTurret/ARYXRailgunTurret" />
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="LargeMissileTurret/ARYXReaperPulseCannon" />	
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="LargeMissileTurret/ARYXJuryCannon" />		
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="LargeMissileTurret/ARYXNucleonShotgun" />	
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="LargeMissileTurret/ARYXCycloneCannon" />	
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="LargeMissileTurret/ARYXHurricaneCannon" />
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="LargeMissileTurret/ARYXTyphoonCannon" />		
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="LargeGatlingTurret/ARYXAuroraLaser" />	
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="LargeGatlingTurret/ARYXAtlasPDC" />		
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="LargeGatlingTurret/ARYXCodexPDC" />	
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="ConveyorSorter/ARYXGaussCannon" />		
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="ConveyorSorter/ARYXRailgun" />		
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="ConveyorSorter/ARYXTorpLauncher" />	
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="ConveyorSorter/ARYXFenrirLauncher" />		
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="ConveyorSorter/ARYXPlasmaPulser" />
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="ConveyorSorter/ARYXSlantedCodexPDC" />	
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="ConveyorSorter/ARYXMace" />		
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="ConveyorSorter/ARYXHydraTurret" />	
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="ConveyorSorter/ARYXMissileBattery" />		
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="ConveyorSorter/AWE_WL_SuperLaser_Large_CB" />
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="ConveyorSorter/AWE_MarkV_SuperLaser_Large_CB" />	
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="ConveyorSorter/ARYXOculusLaserBase" />	
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="LargeMissileTurret/ARYX_FW_NovaBlaster" />
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="LargeMissileTurret/ARYXPicketRailgun" />	
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="ConveyorSorter/ARYXScorpionLauncher" />
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="ConveyorSorter/ARYXLargeRadar" />
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="LargeMissileTurret/ARYXMagnetarCannon" />			
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="LargeMissileTurret/ARYXPlasmaBeamCannon" />	
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="LargeMissileTurret/ARYXHeavyFlakTurret" />
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="LargeMissileTurret/ARYXWarriorGatling" />	
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="ConveyorSorter/ARYXLightCoilgun" />
+    <Entry Class="SmallBlocks" BlueprintSubtypeId="SmallMissileLauncher/ARYXTempestCannon" />		
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="ConveyorSorter/ARYXTacticalModule" />
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="ConveyorSorter/ARYXBurstTurretSlanted" />	
+	
+
+    <Entry Class="SmallBlocks" BlueprintSubtypeId="SmallMissileLauncher/ARYX_Fixed_Chord_auto" />			
+    <Entry Class="SmallBlocks" BlueprintSubtypeId="ConveyorSorter/ARYXSmallRadar" />	
+    <Entry Class="SmallBlocks" BlueprintSubtypeId="LargeGatlingTurret/ARYXCodexPDC_SG" />
+	<Entry Class="SmallBlocks" BlueprintSubtypeId="ConveyorSorter/ARYXSmallFlechetteLauncher" />
+	<Entry Class="SmallBlocks" BlueprintSubtypeId="SmallGatlingGun/ARYX_FixedAtlasGatling" />
+	<Entry Class="SmallBlocks" BlueprintSubtypeId="SmallGatlingGun/ARYX_SmallChaingun" />	
+		<!--COMPONENTS-->			
+	<Entry Class="Components" BlueprintSubtypeId="AWE_ElectromagnetBP" />
+   </BlueprintClassEntries>
+</Definitions>

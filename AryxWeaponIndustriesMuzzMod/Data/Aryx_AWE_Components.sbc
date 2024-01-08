@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Components>
+        <Component>
+            <Id>
+                <TypeId>Component</TypeId>
+                <SubtypeId>ElectromagnetAWE</SubtypeId>
+            </Id>
+            <DisplayName>Electromagnet</DisplayName>
+            <Icon>Textures\GUI\Icons\component\Electromagnet.dds</Icon>
+            <Size>
+                <X>0.1</X>
+                <Y>0.1</Y>
+                <Z>0.05</Z>
+            </Size>
+            <Mass>12</Mass>
+            <Volume>5</Volume>
+            <Model>Models\Components\AryxElectromagnet.mwm</Model>
+            <PhysicalMaterial>Metal</PhysicalMaterial>
+            <MaxIntegrity>25</MaxIntegrity>
+            <DropProbability>0.45</DropProbability>
+            <Health>25</Health>
+            <MinimumOfferAmount>10</MinimumOfferAmount>
+            <MaximumOfferAmount>500</MaximumOfferAmount>
+            <MinimumOrderAmount>10</MinimumOrderAmount>
+            <MaximumOrderAmount>100</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+
+            <MinimumAcquisitionAmount>10</MinimumAcquisitionAmount>
+            <MaximumAcquisitionAmount>200</MaximumAcquisitionAmount>
+        </Component> 
+    </Components>
+</Definitions>
