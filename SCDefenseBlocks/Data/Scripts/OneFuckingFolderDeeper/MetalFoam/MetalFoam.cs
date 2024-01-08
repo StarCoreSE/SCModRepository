@@ -2,21 +2,28 @@
 using Sandbox.Game;
 using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
+using Sandbox.ModAPI.Interfaces.Terminal;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using VRage;
 using VRage.Game;
 using VRage.Game.Components;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
+using VRage.Game.ModAPI.Network;
 using VRage.Game.ObjectBuilders.ComponentSystem;
 using VRage.ModAPI;
+using VRage.Network;
 using VRage.ObjectBuilders;
+using VRage.Sync;
+using VRage.Utils;
 using VRageMath;
 
 namespace Invalid.MetalFoam
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Decoy), false, "LargeDecoy_MetalFoam")]
-    public class MetalFoamGenerator : MyGameLogicComponent
+    public class MetalFoamGenerator : MyGameLogicComponent, IMyEventProxy
     {
         private IMyCubeBlock block;  // This is the declaration you need
         private const int sphereRadius = 4;  // This makes sphereRadius available to the whole class
@@ -27,18 +34,134 @@ namespace Invalid.MetalFoam
         private Vector3I center;
         private int radius;
 
+        MySync<bool, SyncDirection.BothWays> foam_clientSync = null;
+        static bool m_controlsCreated = false;
+
+
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             base.Init(objectBuilder);
+            // The sync variables are already set by the time we get here.
+            // Hook the ValueChanged event, so we can do something when the data changes.
+            foam_clientSync.ValueChanged += foaming_ValueChanged;
+
+            // This is a test of SyncExtentions whitelist, however this will execute if you call m_clientSync.ValidateAndSet().
+            foam_clientSync.AlwaysReject();
+
+            NeedsUpdate |= VRage.ModAPI.MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
+
+
             block = (IMyCubeBlock)Entity;
             block.SlimBlock.ComponentStack.IsFunctionalChanged += OnBlockDamaged;
         }
 
-        //private void OnBlockDestroyed(IMyEntity obj)
-        //{
-        //    GenerateArmorSphere(block.Position, sphereRadius);
-        //}
 
+        private void foaming_ValueChanged(MySync<bool, SyncDirection.BothWays> obj)
+        {
+            // This is where you handle the switch's value change.
+            if (obj.Value)
+            {
+                // Start generating foam
+                center = block.Position;
+                radius = sphereRadius;
+                currentLayer = 0;
+                nextLayerTick = MyAPIGateway.Session.GameplayFrameCounter;
+                NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME;
+
+                string notificationText = "Manual Foam generation started!";
+                NotifyPlayersInRange(notificationText, block.GetPosition(), 100, MyFontEnum.Green); // Adjust the radius as needed
+                MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("MetalFoamSmoke", block.GetPosition());
+                MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("MetalFoamSound", block.GetPosition());
+            }
+            else
+            {
+                // Stop generating foam
+                NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME;
+                string notificationText = "Manual Foam generation stopped!";
+                NotifyPlayersInRange(notificationText, block.GetPosition(), 100, MyFontEnum.Red); // Adjust the radius as needed
+            }
+        }
+
+        static void CreateTerminalControls()
+        {
+            if (!m_controlsCreated)
+            {
+                m_controlsCreated = true;
+
+                var startgenerationOnOff = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlOnOffSwitch, IMyDecoy>("MetalFoam_Terminal_StartGeneration");
+                startgenerationOnOff.Enabled = (b) => b.GameLogic is MetalFoamGenerator;
+                startgenerationOnOff.Visible = (b) => b.GameLogic is MetalFoamGenerator;
+                startgenerationOnOff.Title = MyStringId.GetOrCompute("RELEASE THE FOAM");
+                startgenerationOnOff.Getter = (b) => (b.GameLogic.GetAs<MetalFoamGenerator>()?.foam_clientSync.Value) ?? false;
+                startgenerationOnOff.Setter = (b, v) =>
+                {
+                    var generator = b.GameLogic.GetAs<MetalFoamGenerator>();
+                    if (generator != null)
+                    {
+                        generator.foam_clientSync.Value = v;
+                    }
+                };
+                startgenerationOnOff.OnText = MyStringId.GetOrCompute("On");
+                startgenerationOnOff.OffText = MyStringId.GetOrCompute("Off");
+                MyAPIGateway.TerminalControls.AddControl<IMyDecoy>(startgenerationOnOff);
+
+                // Add an action for cockpits/control stations
+                var action = MyAPIGateway.TerminalControls.CreateAction<IMyDecoy>("MetalFoam_Action_StartGeneration");
+                action.Icon = @"Textures\GUI\Icons\Actions\Toggle.dds"; // Path to your icon or a default icon
+                action.Name = new StringBuilder("RELEASE THE FOAM");
+                action.Writer = (block, stringBuilder) =>
+                {
+                    var generator = block.GameLogic.GetAs<MetalFoamGenerator>();
+                    if (generator != null)
+                    {
+                        stringBuilder.Append("Foam: ").Append(generator.foam_clientSync.Value ? "On" : "Off");
+                    }
+                };
+                action.Action = (block) =>
+                {
+                    var generator = block.GameLogic.GetAs<MetalFoamGenerator>();
+                    if (generator != null)
+                    {
+                        generator.foam_clientSync.Value = !generator.foam_clientSync.Value; // Toggle the foam generation
+                    }
+                };
+                action.Enabled = (block) => block.GameLogic is MetalFoamGenerator;
+                action.ValidForGroups = false; // Set true if you want this action to be available when selecting a group of blocks
+
+                MyAPIGateway.TerminalControls.AddAction<IMyDecoy>(action);
+            }
+        }
+
+        public void NotifyPlayersInRange(string text, Vector3D position, double radius, string font)
+        {
+            BoundingSphereD bound = new BoundingSphereD(position, radius);
+            List<IMyEntity> nearEntities = MyAPIGateway.Entities.GetEntitiesInSphere(ref bound);
+
+            foreach (var entity in nearEntities)
+            {
+                IMyCharacter character = entity as IMyCharacter;
+                if (character != null && character.IsPlayer && bound.Contains(character.GetPosition()) != ContainmentType.Disjoint)
+                {
+                    var notification = MyAPIGateway.Utilities.CreateNotification(text, 1600, font);
+                    notification.Show();
+                }
+            }
+        }
+
+
+        public override void UpdateOnceBeforeFrame()
+        {
+            base.UpdateOnceBeforeFrame();
+            CreateTerminalControls();
+
+            (Entity as IMyDecoy).EnabledChanged += MetalFoam_EnabledChanged;
+        }
+
+        private void MetalFoam_EnabledChanged(IMyCubeBlock obj)
+        {
+
+
+        }
 
         public override void UpdateBeforeSimulation100()
         {

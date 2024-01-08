@@ -1043,7 +1043,7 @@ namespace Klime.CTF
                                             subflag.grip_strength = 0; //Cap grip strength to 0
                                             subflag.state = FlagState.Dropped;
                                             ShowANotificationPlease("flag dropped 2");
-                                            SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag due to acceleration!", InfoType.FlagDropped);
+                                            SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " the flag!", InfoType.FlagDropped);
 
                                             playerDropTimes[subflag.carrying_player.IdentityId] = timer;
                                         }
@@ -1102,7 +1102,7 @@ namespace Klime.CTF
                                                         }
                                                         else
                                                         {
-                                                            if (distance <= 40)
+                                                            if (distance <= 400)
                                                             {
                                                                 valid_cap = true;
                                                             }
