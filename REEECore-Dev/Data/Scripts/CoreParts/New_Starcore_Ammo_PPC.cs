@@ -302,6 +302,18 @@ namespace Scripts
                 ModelName = "\\Models\\Ammo\\Starcore_PPC_Projectile_Large", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = true,
+                Decals = new DecalDef
+                {
+                    MaxAge = 3600,
+                    Map = new[]
+                    {
+                        new TextureMapDef
+                        {
+                            HitMaterial = "Metal",
+                            DecalMaterial = "REE_Explosive_Decal",
+                        },
+                    },
+                },
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
@@ -580,7 +592,7 @@ namespace Scripts
              },
             Ewar = new EwarDef
             {
-                Enable = true, // Enables the EWAR , Electronic-Warfare System
+                Enable = false, // Enables the EWAR , Electronic-Warfare System
                 Type = Offense, // EnergySink, Emp, Offense, Nav, Dot, AntiSmart, JumpNull, Anchor, Tractor, Pull, Push, 
                 Mode = Effect, // Effect , Field
                 Strength = 100000,
