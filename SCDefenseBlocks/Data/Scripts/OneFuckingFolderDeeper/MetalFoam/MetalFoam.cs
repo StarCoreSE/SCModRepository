@@ -4,6 +4,7 @@ using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
 using Sandbox.ModAPI.Interfaces.Terminal;
 using System;
+using System.Text;
 using VRage;
 using VRage.Game;
 using VRage.Game.Components;
@@ -32,7 +33,7 @@ namespace Invalid.MetalFoam
         private Vector3I center;
         private int radius;
 
-        MySync<bool, SyncDirection.BothWays> m_clientSync = null;
+        MySync<bool, SyncDirection.BothWays> foam_clientSync = null;
         static bool m_controlsCreated = false;
 
 
@@ -41,10 +42,10 @@ namespace Invalid.MetalFoam
             base.Init(objectBuilder);
             // The sync variables are already set by the time we get here.
             // Hook the ValueChanged event, so we can do something when the data changes.
-            m_clientSync.ValueChanged += clientSync_ValueChanged;
+            foam_clientSync.ValueChanged += foaming_ValueChanged;
 
             // This is a test of SyncExtentions whitelist, however this will execute if you call m_clientSync.ValidateAndSet().
-            m_clientSync.AlwaysReject();
+            foam_clientSync.AlwaysReject();
 
             NeedsUpdate |= VRage.ModAPI.MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
 
@@ -54,12 +55,33 @@ namespace Invalid.MetalFoam
         }
 
 
-        private void clientSync_ValueChanged(MySync<bool, SyncDirection.BothWays> obj)
+        private void foaming_ValueChanged(MySync<bool, SyncDirection.BothWays> obj)
         {
-            if (MyAPIGateway.Session.OnlineMode != VRage.Game.MyOnlineModeEnum.OFFLINE && MyAPIGateway.Session.IsServer)
-                MyAPIGateway.Utilities.SendMessage($"Synced client value on server: {obj.Value}");
+            // This is where you handle the switch's value change.
+            // If it's on, start generating foam; if it's off, stop generating foam.
+            if (obj.Value)
+            {
+                // Assuming obj.Value = true means the switch is turned ON
+
+                // Initiate foam generation by setting up the next tick and layer
+                center = block.Position;  // Set the center for sphere generation
+                radius = sphereRadius;  // Set the radius
+                currentLayer = 0;  // Start from the first layer
+                nextLayerTick = MyAPIGateway.Session.GameplayFrameCounter;  // Start immediately
+                NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME;  // Begin updates
+
+                MyAPIGateway.Utilities.ShowNotification("Foam generation started!", 2000, MyFontEnum.Green);
+
+                MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("MetalFoamSmoke", block.GetPosition());
+                MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("MetalFoamSound", block.GetPosition());
+            }
             else
-                MyAPIGateway.Utilities.ShowMessage("Test", $"Synced client value on client: {obj.Value}");
+            {
+                // Stop foam generation
+                NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME;  // Stop updating
+                MyAPIGateway.Utilities.ShowNotification("Foam generation stopped!", 2000, MyFontEnum.Red);
+            }
+
         }
 
         static void CreateTerminalControls()
@@ -72,11 +94,26 @@ namespace Invalid.MetalFoam
                 clientSyncTestOnOff.Enabled = (b) => true;
                 clientSyncTestOnOff.Visible = (b) => true;
                 clientSyncTestOnOff.Title = MyStringId.GetOrCompute("RELEASE THE FOAM");
-                clientSyncTestOnOff.Getter = (b) => b.GameLogic.GetAs<MetalFoamGenerator>().m_clientSync;
-                clientSyncTestOnOff.Setter = (b, v) => b.GameLogic.GetAs<MetalFoamGenerator>().m_clientSync.Value = v;
+                clientSyncTestOnOff.Getter = (b) => b.GameLogic.GetAs<MetalFoamGenerator>().foam_clientSync;
+                clientSyncTestOnOff.Setter = (b, v) => b.GameLogic.GetAs<MetalFoamGenerator>().foam_clientSync.Value = v;
                 clientSyncTestOnOff.OnText = MyStringId.GetOrCompute("On");
                 clientSyncTestOnOff.OffText = MyStringId.GetOrCompute("Off");
                 MyAPIGateway.TerminalControls.AddControl<IMyDecoy>(clientSyncTestOnOff);
+
+                // Add an action for cockpits/control stations
+                var action = MyAPIGateway.TerminalControls.CreateAction<IMyDecoy>("ToggleFoamGeneration");
+                action.Icon = @"Textures\GUI\Icons\Actions\Toggle.dds"; // Path to your icon or a default icon
+                action.Name = new StringBuilder("Toggle Foam Generation");
+                action.Writer = (block, stringBuilder) => stringBuilder.Append("Foam: ").Append(block.GameLogic.GetAs<MetalFoamGenerator>().foam_clientSync.Value ? "On" : "Off");
+                action.Action = (block) =>
+                {
+                    var metalFoamGenerator = block.GameLogic.GetAs<MetalFoamGenerator>();
+                    metalFoamGenerator.foam_clientSync.Value = !metalFoamGenerator.foam_clientSync.Value; // Toggle the foam generation
+                };
+                action.Enabled = (block) => true; // You can put conditions here if some blocks shouldn't have this action
+                action.ValidForGroups = false; // Set true if you want this action to be available when selecting a group of blocks
+
+                MyAPIGateway.TerminalControls.AddAction<IMyDecoy>(action);
             }
         }
 
@@ -85,11 +122,12 @@ namespace Invalid.MetalFoam
             base.UpdateOnceBeforeFrame();
             CreateTerminalControls();
 
-            (Entity as IMyDecoy).EnabledChanged += TestSyncComponent_EnabledChanged;
+            (Entity as IMyDecoy).EnabledChanged += MetalFoam_EnabledChanged;
         }
 
-        private void TestSyncComponent_EnabledChanged(IMyCubeBlock obj)
+        private void MetalFoam_EnabledChanged(IMyCubeBlock obj)
         {
+
 
         }
 
