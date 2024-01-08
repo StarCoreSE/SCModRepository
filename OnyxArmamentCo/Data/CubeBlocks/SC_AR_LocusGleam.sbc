@@ -9,13 +9,13 @@
 			<DisplayName>Locus Gleam</DisplayName>
 			<Icon>Textures\GUI\Icons\Cubes\locusgleam.png</Icon>
 			<Description>
-				Long Ranged Fixed: [10km]
+				Long Ranged Fixed: [7km]
 				Magazine Capacity: [3]
 				Rate of Fire: [360]
 				Reload Speed: [7.5 seconds]
 				Ammunition: [Energy]
 				Pulse Laser:
-				[Falloff after 5km down to 25%]
+				[Falloff after 3.5km down to 25%]
 				Tractor Beam:
 				[No damage, 5km range]
 			</Description>

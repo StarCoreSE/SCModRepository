@@ -186,7 +186,8 @@ namespace Scripts
             },
             Ammos = new[] {
                 Starcore_M_Laser_Ammo,
-                Starcore_M_Laser_Ammo_Fake
+                Starcore_M_Laser_Ammo_Fake,
+                REEE_Laser_Ammo_Decal
                 // Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = Weapon75_Animation,

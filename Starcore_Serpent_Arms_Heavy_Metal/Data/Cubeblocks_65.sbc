@@ -79,8 +79,9 @@
 			</Id>
 			<DisplayName>Hellfire Laser</DisplayName>
 			<Description>
-				[10km range]
+				[6.666km range]
 				[Energy damage]
+        [Reaches MaxRange in 120 ticks]
 				[Hitscan]
 			</Description>
 			<Icon>Textures\GUI\Icons\Hellfire.dds</Icon>

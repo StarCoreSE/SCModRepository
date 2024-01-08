@@ -8,7 +8,7 @@
         <SubtypeId>K_SA_LoW_CapitalSpinalA</SubtypeId>
       </Id>
       <DisplayName>SA  Hydra 12-G Mount Spinal</DisplayName>
-<Description>Long Ranged Fixed: [10km] 
+<Description>Long Ranged Fixed: [7km] 
 Magazine Capacity: [5 to overheat]
 Reload Speed: [27 second cooldown]
 Ammunition: [5000m/s,] [Kinetic, 95% Shieldpen] </Description>
@@ -306,7 +306,7 @@ Ammunition: [2500m/s,] [Kinetic] </Description>
         <SubtypeId>K_SA_HeavyMetal_Gauss_ERFM</SubtypeId>
       </Id>
       <DisplayName>Somnus Fixed Gauss</DisplayName>
-<Description>Medium Ranged Fixed: [4.5km] 
+<Description>Medium Ranged Fixed: [7km] 
 Magazine Capacity: [1] 
 Rate of Fire: [15] 
 Reload Speed: [8 seconds] 
