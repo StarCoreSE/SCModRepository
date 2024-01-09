@@ -50,20 +50,16 @@ namespace Invalid.NidSpawner
         private Dictionary<string, string> prefabMap = new Dictionary<string, string>
         {
 
-            { "RegenAI", "RegenAI" },
-            { "LocusAI", "LocusAI" },
-            { "EldritchAI", "EldritchAI" },
-            { "BismarckAI", "BismarckAI" },
-            { "HermesAI", "HermesAI" },
-            { "LamAI", "LamAI" },
-            { "ZerkAI", "ZerkAI" },
+            { "LeachdroneAI", "LeachdroneAI" },
+            { "CorrosiveAI", "CorrosiveAI" },
+            { "BioclutchAI", "BioclutchAI" },
 
             // Add more prefab mappings here.
         };
 
         private int defaultSpawnCount = 1; // Default number of prefabs to spawn
 
-        private ushort netID = 29395;
+        private ushort netID = 24116;
 
         private double minSpawnRadiusFromCenter = 1000; // Minimum spawn distance from the center in meters
         private double minSpawnRadiusFromGrids = 1000;  // Minimum spawn distance from other grids in meters
@@ -100,7 +96,7 @@ namespace Invalid.NidSpawner
 
         private void OnMessageEntered(string messageText, ref bool sendToOthers)
         {
-            if (!messageText.StartsWith("/spawntarget", StringComparison.OrdinalIgnoreCase)) return;
+            if (!messageText.StartsWith("/spawnnids", StringComparison.OrdinalIgnoreCase)) return;
             string[] parts = messageText.Split(' ');
 
             if (parts.Length == 1)
@@ -147,7 +143,7 @@ namespace Invalid.NidSpawner
 
         private void SpawnRandomPrefabs(string targetPrefab, int spawnCount)
         {
-            double maxSpawnRadius = 10000; // Maximum spawn radius in meters
+            double maxSpawnRadius = 3000; // Maximum spawn radius in meters
 
             List<Vector3D> spawnPositions = new List<Vector3D>();
 

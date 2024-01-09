@@ -29,6 +29,7 @@ namespace Scripts {
                  },
                 Muzzles = new[] {
                     "muzzle_tyranid_01", // Where your Projectiles spawn. Use numbers not Letters. IE Muzzle_01 not Muzzle_A
+
                 },
                 Ejector = "", // Optional; empty from which to eject "shells" if specified.
                 Scope = "muzzle_tyranid_01", // Where line of sight checks are performed from. Must be clear of block collision.
@@ -56,7 +57,7 @@ namespace Scripts {
             {
                 PartName = "Strangler Hivedrone Launcher", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 15f, // Projectile inaccuracy in degrees.
-                AimingTolerance = 180f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
+                AimingTolerance = 0f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Off, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
                 DelayCeaseFire = 0, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released - while a target is available.
                 AddToleranceToTracking = false, // Allows turret to track to the edge of the AimingTolerance cone instead of dead centre.
@@ -77,7 +78,7 @@ namespace Scripts {
                     PrimaryTracking = false, // For multiweapons: whether this weapon should designate targets for other weapons on the platform without their own tracking.
                     LockOnFocus = false, // If enabled, weapon will only fire at targets that have been HUD selected AND locked onto by pressing Numpad 0.
                     SuppressFire = false, // If enabled, weapon can only be fired manually.
-                    OverrideLeads = true, // Disable target leading on fixed weapons, or allow it for turrets.
+                    OverrideLeads = false, // Disable target leading on fixed weapons, or allow it for turrets.
                 },
                 HardWare = new HardwareDef
                 {

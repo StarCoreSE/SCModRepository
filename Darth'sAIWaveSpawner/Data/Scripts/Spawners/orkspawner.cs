@@ -57,13 +57,14 @@ namespace Invalid.OrkSpawner
             { "HermesAI", "HermesAI" },
             { "LamAI", "LamAI" },
             { "ZerkAI", "ZerkAI" },
+            { "LeachdroneAI", "LeachdroneAI" },
 
             // Add more prefab mappings here.
         };
 
         private int defaultSpawnCount = 1; // Default number of prefabs to spawn
 
-        private ushort netID = 29395;
+        private ushort netID = 24117;
 
         private double minSpawnRadiusFromCenter = 1000; // Minimum spawn distance from the center in meters
         private double minSpawnRadiusFromGrids = 1000;  // Minimum spawn distance from other grids in meters
@@ -147,7 +148,7 @@ namespace Invalid.OrkSpawner
 
         private void SpawnRandomPrefabs(string targetPrefab, int spawnCount)
         {
-            double maxSpawnRadius = 10000; // Maximum spawn radius in meters
+            double maxSpawnRadius = 3000; // Maximum spawn radius in meters
 
             List<Vector3D> spawnPositions = new List<Vector3D>();
 
