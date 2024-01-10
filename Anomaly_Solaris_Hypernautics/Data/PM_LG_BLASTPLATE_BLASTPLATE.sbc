@@ -31,7 +31,7 @@
 			<BlockPairName>PM_LG_BLASTPLATE_BLASTPLATE</BlockPairName>
 			
       		<EdgeType>Heavy</EdgeType>
-      		<BuildTimeSeconds>120</BuildTimeSeconds>
+      		<BuildTimeSeconds>1800</BuildTimeSeconds>
       		<DisassembleRatio>0.5</DisassembleRatio>
       		<GeneralDamageMultiplier>0.2</GeneralDamageMultiplier>
       		<PCU>1</PCU>
