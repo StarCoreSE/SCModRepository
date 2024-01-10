@@ -37,7 +37,7 @@ namespace Scripts
             Targeting = new TargetingDef  
             {
                 Threats = new[] {
-                    Grids, Projectiles
+                    Grids, Projectiles,
                 },
                 SubSystems = new[] {
                     Thrust, Utility, Offense, Power, Production, Any,
