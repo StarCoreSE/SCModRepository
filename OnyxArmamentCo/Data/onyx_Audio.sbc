@@ -604,7 +604,7 @@
     <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>Resheph_Fire</SubtypeId>
+        <SubtypeId>Nimrod_Fire</SubtypeId>
       </Id>
       <Category>SHOT</Category>
       <MaxDistance>1000</MaxDistance>
