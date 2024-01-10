@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<Model Name="SC_AR_Afflictor_Turret">
+	<Parameter Name="RescaleFactor">1.0</Parameter>
+	<Parameter Name="Centered">false</Parameter>
+	<Parameter Name="RescaleToLengthInMeters">false</Parameter>
+	<Material Name="EmissiveColorable">
+		<Parameter Name="Technique">MESH</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Cubes\EmissiveAtlas_cm.dds</Parameter>
+		<Parameter Name="NormalGlossTexture">Textures\Models\Cubes\EmissiveAtlas_ng.dds</Parameter>
+		<Parameter Name="AddMapsTexture">Textures\Models\Cubes\EmissiveColorable_add.dds</Parameter>
+	</Material>
+	<Material Name="HeavySquarePlate">
+		<Parameter Name="Technique">MESH</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Cubes\PaintedMetalColorable_cm.dds</Parameter>
+		<Parameter Name="NormalGlossTexture">Textures\Models\Cubes\PaintedMetalColorable_ng.dds</Parameter>
+		<Parameter Name="AddMapsTexture">Textures\Models\Cubes\PaintedMetalColorable_add.dds</Parameter>
+	</Material>
+	<MaterialRef Name="Atlas3_Chrome"/>
+	<MaterialRef Name="Atlas3_Colorable"/>
+	<MaterialRef Name="Atlas3_Darker"/>
+	<MaterialRef Name="ButtonsAtlas_Colorable"/>
+	<MaterialRef Name="GenericGlass"/>
+	<MaterialRef Name="Metal_Dull"/>
+	<MaterialRef Name="MetalMilitary"/>
+	<MaterialRef Name="PaintedMetal_Colorable"/>
+	<MaterialRef Name="PaintedMetal_Darker"/>
+	<MaterialRef Name="PaintedMetal_Yellow"/>
+	<MaterialRef Name="Rubber"/>
+</Model>
