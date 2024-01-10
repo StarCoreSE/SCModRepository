@@ -6,7 +6,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>SC_AR_LocusGleam</SubtypeId>
 			</Id>
-			<DisplayName>Heavy Pulse Laser</DisplayName>
+			<DisplayName>Focused Gleam</DisplayName>
 			<Icon>Textures\GUI\Icons\Cubes\locusgleam.png</Icon>
 			<Description>
 				Long Ranged Fixed: [7km]
