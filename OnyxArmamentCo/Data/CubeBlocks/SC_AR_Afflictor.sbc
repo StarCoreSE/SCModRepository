@@ -1,7 +1,6 @@
 <?xml version="1.0" ?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<CubeBlocks>
-    
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
@@ -55,6 +54,5 @@
 			<DestroySound>WepSmallWarheadExpl</DestroySound>
 			<PCU>200</PCU>
 		</Definition>
-
-  </CubeBlocks>
+	</CubeBlocks>
 </Definitions>
