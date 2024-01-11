@@ -234,7 +234,7 @@
       <Volume>0.7</Volume>
       <Waves>
         <Wave Type="D3">
-          <Start>Audio\Onyx\lasers\Onyx_focus_beam_high_fire_01.wav</Start>
+          <Start>Audio\Onyx\lasers\Pulse_Laser_Shot.wav</Start>
         </Wave>
       </Waves>
     </Sound>
