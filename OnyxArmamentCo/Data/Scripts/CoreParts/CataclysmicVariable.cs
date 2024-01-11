@@ -33,7 +33,7 @@ namespace Scripts {
                     "muzzle_projectile_3",
                 },
                 Ejector = "", // Optional; empty from which to eject "shells" if specified.
-                Scope = "camera", // Where line of sight checks are performed from. Must be clear of block collision.
+                Scope = "muzzle_projectile_1", // Where line of sight checks are performed from. Must be clear of block collision.
             },
             Targeting = new TargetingDef
             {
@@ -142,7 +142,7 @@ namespace Scripts {
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "", // Audio for warmup effect.
-                    FiringSound = "ArcWepShipOnyxMagnetar_Fire", // Audio for firing.
+                    FiringSound = "Cataclysmic_Fire", // Audio for firing.
                     FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "", // Sound SubtypeID, for when your Weapon is in a reloading state
                     NoAmmoSound = "",
