@@ -69,6 +69,39 @@
     <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Auto_Ricochet</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <Volume>0.75</Volume>
+      <VolumeVariation>0.5</VolumeVariation>
+      <Loopable>false</Loopable>
+      <PitchVariation>14</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Auto_Ricochet_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Auto_Ricochet_02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Auto_Ricochet_03.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Auto_Ricochet_04.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Auto_Ricochet_05.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Auto_Ricochet_06.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
         <SubtypeId>Autocannon_Firesound</SubtypeId>
       </Id>
       <Category>SHOT</Category>
@@ -285,7 +318,7 @@
     </Sound>
  
     <!-- Vanir Sounds -->
-  <Sound>
+    <Sound>
     <Id>
       <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
       <SubtypeId>DefenseFiresound</SubtypeId>
@@ -327,6 +360,7 @@
         </Wave>
       </Waves>
     </Sound>
+    
     <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
@@ -344,7 +378,9 @@
           <End></End>
         </Wave>
       </Waves>
-    </Sound>    <Sound>
+    </Sound>    
+    
+    <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
         <SubtypeId>TravelPop3</SubtypeId>
@@ -362,7 +398,6 @@
         </Wave>
       </Waves>
     </Sound>
-
 
     <Sound>
       <Id>
@@ -489,7 +524,7 @@
   
 
     <!-- Gugnir Sounds-->
-     <Sound>
+    <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
         <SubtypeId>Gugnir_Firesound</SubtypeId>
@@ -593,6 +628,7 @@
         </Wave>
       </Waves>
     </Sound>
+    
     <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
@@ -612,6 +648,7 @@
         </Wave>
       </Waves>
     </Sound>
+    
     <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
@@ -631,7 +668,8 @@
         </Wave>
       </Waves>
     </Sound>
-        <Sound>
+    
+    <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
         <SubtypeId>Battleship_Cannon_Firesound_Dist2</SubtypeId>
@@ -649,25 +687,46 @@
           <End></End>
         </Wave>
       </Waves>
-    </Sound>    <Sound>
+    </Sound>   
+    
+    <!-- Hurricane Sounds-->
+    <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>Battleship_Cannon_Firesound_Dist3</SubtypeId>
+        <SubtypeId>Hurricane_Firesound</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>8000</MaxDistance>
-      <Volume>1</Volume>
-      <Loopable>false</Loopable>
-
-      <PitchVariation>25</PitchVariation>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <PitchVariation>5</PitchVariation>
+      <Volume>0.8</Volume>
+      <DistantSounds>
+        <DistantSound DistanceCrossFade="40" Distance="800" Sound = "Hurricane_Firesound_Dist" />
+      </DistantSounds>
       <Waves>
         <Wave Type="D3">
-          <Start>Audio\BC_Firesound_Far.wav</Start>
-          <Loop></Loop>
-          <End></End>
+          <Start>Audio\Hurricane_Firesound_01.wav</Start>
         </Wave>
       </Waves>
     </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Hurricane_Firesound_Dist</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <Volume>0.9</Volume>
+      <PitchVariation>80</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Hurricane_Firesound_01_Distant.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
   </Sounds>
 </Definitions>
 
