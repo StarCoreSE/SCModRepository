@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Sounds>
+   
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>PunisherNewFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1200</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.6</Volume>
+      <DistantSounds>
+        <DistantSound DistanceCrossFade="10" Distance="800" Sound = "PunisherNewFireDistant" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Onyxpunisher\fire\grifle01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Onyxpunisher\fire\grifle02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Onyxpunisher\fire\grifle03.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Onyxpunisher\fire\grifle04.wav</Start>
+        </Wave>        
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>PunisherNewFireDistant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.3</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Onyxpunisher\gauss_rifle_lod_far\gauss_rifle_lod_far1.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Onyxpunisher\gauss_rifle_lod_far\gauss_rifle_lod_far2.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Onyxpunisher\gauss_rifle_lod_far\gauss_rifle_lod_far4.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>PunisherNewReload</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>800</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.2</Volume>
+      <SoundLimit>10</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Onyxpunisher\gauss_fire_animation\gauss_fire_anim1_delayed.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </Sounds> 
+</Definitions>

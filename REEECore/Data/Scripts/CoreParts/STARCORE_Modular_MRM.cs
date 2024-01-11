@@ -236,6 +236,9 @@ namespace Scripts
             Ammos = new[] {
               Starcore_MRM_Launch_Mod,
               Starcore_MRM_Acceleration_Mod,
+              Starcore_MRM_Terminal_Mod,
+               Starcore_MRM_Terminal_Sabot_Mod,
+               Starcore_MRM_Terminal_Sabot_Fragment_Mod,
             },
             Animations = Starcore_Modular_MRM_Animation,
         };

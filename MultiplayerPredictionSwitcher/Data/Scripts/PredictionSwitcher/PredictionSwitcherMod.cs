@@ -169,6 +169,7 @@ public class SessionComp : MySessionComponentBase
         else if (messageText.Equals("/toggleserverline"))
         {
             shouldDrawServerLine = !shouldDrawServerLine;  // Toggle flag
+            sendToOthers = false;
         }
     }
 

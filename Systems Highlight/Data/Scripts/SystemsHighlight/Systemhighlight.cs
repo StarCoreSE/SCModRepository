@@ -73,6 +73,7 @@ namespace StarCore.SystemHighlight
 
             if (message.Contains("/hl") && strike != null && cubeGrid != null && gridBlocks != null)
             {
+                sendToOthers = false;
                 if (message.Contains("/hlconv"))
                 {
                     if (DebugToggle)
@@ -142,10 +143,12 @@ namespace StarCore.SystemHighlight
             }
             else if (message.Contains("/hlhelp"))
             {
+                sendToOthers = false;
                 HandleHelpCommand();
             }            
             else if (message.Contains("/hl") && strike == null)
             {
+                sendToOthers = false;
                 SetStatus("No Target", 3000, "Red");
             }
             else

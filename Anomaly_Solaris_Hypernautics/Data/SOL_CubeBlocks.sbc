@@ -24,9 +24,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\ElectroShield3x3.mwm</Model>
 			<Components>
-				<Component Subtype="AMP_FrameComponent" Count="2"/>
+				<Component Subtype="ASH_FrameComponent" Count="2"/>
 				<Component Subtype="Computer" Count="1"/>
-				<Component Subtype="AMP_PlateComponent" Count="6"/>
+				<Component Subtype="ASH_PlateComponent" Count="6"/>
 			</Components>
       <BuildTimeSeconds>60</BuildTimeSeconds>
 			<CriticalComponent Subtype="Computer" Index="0"/>
@@ -63,9 +63,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\FlakShotgun.mwm</Model>
 			<Components>
-				<Component Subtype="AMP_FrameComponent" Count="1"/>
+				<Component Subtype="ASH_FrameComponent" Count="1"/>
 				<Component Subtype="Computer" Count="1"/>
-				<Component Subtype="AMP_PlateComponent" Count="1"/>
+				<Component Subtype="ASH_PlateComponent" Count="1"/>
 			</Components>
 			<CriticalComponent Subtype="Computer" Index="0"/>
 
@@ -100,10 +100,10 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\ImpulseTorchBase.mwm</Model>
 			<Components>
-				<Component Subtype="AMP_FrameComponent" Count="1"/>
+				<Component Subtype="ASH_FrameComponent" Count="1"/>
 				<Component Subtype="Computer" Count="1"/>
-				<Component Subtype="AMP_FrameComponent" Count="2"/>
-				<Component Subtype="AMP_PlateComponent" Count="1"/>
+				<Component Subtype="ASH_FrameComponent" Count="2"/>
+				<Component Subtype="ASH_PlateComponent" Count="1"/>
 			</Components>
 			<CriticalComponent Subtype="Computer" Index="0"/>
 			<BlockPairName>ImpulseTorchBase</BlockPairName>

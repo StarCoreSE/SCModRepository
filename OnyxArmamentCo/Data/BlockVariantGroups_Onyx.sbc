@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <BlockVariantGroups>
+
+
+
+
+      <BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="StarCore_Onyx_Fixed_BlockVariants" />
+        <Icon>Textures\GUI\Icons\Cubes\aries.png</Icon>
+        <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
+        <Description>Description_BlockGroup_TurretGroup</Description>
+        <Blocks>
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Aries" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Nimrod" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Forager" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Phaethon" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_LocusGleam" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Tumult" />
+        </Blocks>
+      </BlockVariantGroup>
+
+      <BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="StarCore_Onyx_Turret_BlockVariants" />
+        <Icon>Textures\GUI\Icons\Cubes\ineedapngforthefuckingblockvariantgroup.png</Icon>
+        <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
+        <Description>Description_BlockGroup_TurretGroup</Description>
+        <Blocks>
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Afflictor" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Afflictor_Slanted" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Resheph" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_CataclysmicVariable" />
+        </Blocks>
+      </BlockVariantGroup>      
+
+    </BlockVariantGroups>
+</Definitions>

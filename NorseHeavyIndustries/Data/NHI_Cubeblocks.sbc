@@ -1208,9 +1208,9 @@ Fixed Rotary Autocannon, Fires either HE or AP Rounds, which prioritise either C
      <MirroringZ>Y</MirroringZ>
      <MountPoints>
        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1" EndY="2"/>
-       <MountPoint Side="Left" StartX="3" StartY="0.0" EndX="8" EndY="2"/>
+       <MountPoint Side="Left" StartX="0" StartY="0.0" EndX="5" EndY="2"/>
        <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="5" EndY="2"/>
-       <MountPoint Side="Bottom" StartX="0.0" StartY="3" EndX="1" EndY="8"/>
+       <MountPoint Side="Bottom" StartX="0.0" StartY="1" EndX="1" EndY="5"/>
        <MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="1" EndY="5"/>
      </MountPoints>     
      <EdgeType>Light</EdgeType>
@@ -1312,6 +1312,13 @@ Fixed Gatling Laser. Can fire either a Laser Pulse, or a Shield Healing Pulse
      <BlockPairName>NHI_Fixed_Gatling_Laser_Block</BlockPairName>
      <MirroringY>Z</MirroringY>
      <MirroringZ>Y</MirroringZ>
+     <MountPoints>
+       <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1" EndY="2"/>
+       <MountPoint Side="Left" StartX="0" StartY="0.0" EndX="5" EndY="2"/>
+       <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="5" EndY="2"/>
+       <MountPoint Side="Bottom" StartX="0.0" StartY="1" EndX="1" EndY="5"/>
+       <MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="1" EndY="5"/>
+     </MountPoints>
      <EdgeType>Light</EdgeType>
      <BuildTimeSeconds>25</BuildTimeSeconds>
      <DisassembleRatio>5</DisassembleRatio>

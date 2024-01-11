@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<CubeBlocks>
-
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<!-- Grimlock Launcher -->
 			<Id>
@@ -35,7 +34,6 @@
 				<Model BuildPercentUpperBound="0.10" File="Models\SerpentArms\SA_GaussAP_Large.mwm" />
 				<Model BuildPercentUpperBound="0.5" File="Models\SerpentArms\SA_GaussAP_Large.mwm" />
 				<Model BuildPercentUpperBound="0.90" File="Models\SerpentArms\SA_GaussAP_Large.mwm" />
-
 			</BuildProgressModels>
 			<VoxelPlacement>
 				<!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
@@ -74,25 +72,25 @@
 			<MaxFov>2</MaxFov>
 			<EmissiveColorPreset>Default</EmissiveColorPreset>
 		</Definition>
-
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>Hellfire_Laser_Block</SubtypeId>
 			</Id>
-				<DisplayName>Hellfire Laser</DisplayName>
-				<Description>
-					[10km range]
-					[Energy damage]
-					[Hitscan]
+			<DisplayName>Hellfire Laser</DisplayName>
+			<Description>
+				[6.666km range]
+				[Energy damage]
+        [Reaches MaxRange in 120 ticks]
+				[Hitscan]
 			</Description>
 			<Icon>Textures\GUI\Icons\Hellfire.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<GuiVisible>true</GuiVisible>
 			<BlockTopology>TriangleMesh</BlockTopology>
-			<Size x="2" y="2" z="10" />
+			<Size x="3" y="3" z="23" />
 			<ModelOffset x="0" y="0" z= "0" />
-			<Model>Models\TheLaserYouDeserve.mwm</Model>
+			<Model>Models\Hellfire_Laser_Block.mwm</Model>
 			<Components>
 				<Component Subtype="SteelPlate" Count="165" />
 				<Component Subtype="Construction" Count="115" />
@@ -105,8 +103,6 @@
 			</Components>
 			<CriticalComponent Subtype="LargeTube" Index="0" />
 			<BlockPairName>Hellfire_Laser_Block</BlockPairName>
-			<MirroringY>Z</MirroringY>
-			<MirroringZ>Y</MirroringZ>
 			<EdgeType>Light</EdgeType>
 			<BuildTimeSeconds>65</BuildTimeSeconds>
 			<DisassembleRatio>5</DisassembleRatio>
@@ -127,7 +123,5 @@
 			<MaxFov>1.04719755</MaxFov>
 			<DestroySound>Betty_Weapon_Destroyed</DestroySound>
 		</Definition>
-		
-
 	</CubeBlocks>
 </Definitions>

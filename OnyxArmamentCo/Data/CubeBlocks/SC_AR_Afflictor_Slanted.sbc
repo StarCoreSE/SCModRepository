@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>SC_AR_Afflictor_Slanted</SubtypeId>
+			</Id>
+			<DisplayName>Afflictor Burst Cannon Slanted</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\SC_AR_Afflictor_Slanted.dds</Icon>
+			<Description>
+				Short Range Turret: [3km]
+				Magazine Capacity: [4]
+				Rate of Fire: [250]
+				Reload Speed: [4 seconds]
+				Ammunition: [900m/s,] [Kinetic]
+			</Description>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="3" z="3" />
+			<ModelOffset x="0" y="0" z="0" />
+			<Model>Models\Cubes\large\SC_AR_Afflictor_Slanted.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="500" />
+				<Component Subtype="Construction" Count="200" />
+				<Component Subtype="MetalGrid" Count="110" />
+				<Component Subtype="LargeTube" Count="48" />
+				<Component Subtype="SmallTube" Count="80" />
+				<Component Subtype="Motor" Count="80" />
+				<Component Subtype="Computer" Count="100" />
+				<Component Subtype="MetalGrid" Count="100" />
+				<Component Subtype="SteelPlate" Count="400" />
+			</Components>
+			<CriticalComponent Subtype="SteelPlate" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+				<MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+				<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0"/>
+			</MountPoints>
+			<BuildProgressModels>
+			</BuildProgressModels>
+			<BlockPairName>SC_AR_Afflictor_Slanted</BlockPairName>
+			<BuildTimeSeconds>60</BuildTimeSeconds>
+			<EdgeType>Light</EdgeType>
+			<WeaponDefinitionId Subtype="SCGenericWepDef" />
+			<OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<InventoryMaxVolume>0.144</InventoryMaxVolume>
+			<DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+			<DamagedSound>ParticleWeapExpl</DamagedSound>
+			<DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+			<PCU>200</PCU>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

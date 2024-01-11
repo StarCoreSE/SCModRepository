@@ -455,40 +455,27 @@ namespace Scripts
                 ModelName = "", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
-                Decals = new DecalDef
-                {
-                    MaxAge = 3600,
-                    Map = new[]
-                    {
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Metal",
-                            DecalMaterial = "TIO_Bullet_Decal",
-                        },
-                    },
-                },
+
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
                     {
                         Name = "", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
-                        DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                         Extras = new ParticleOptionDef
                         {
-                            Scale = 1,
+                            Scale = 2,
                         },
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "",
+                        Name = "MaterialHit_Metal_GatlingGun",
                         ApplyToShield = true,
                         Offset = Vector(x: 0, y: 0, z: 0),
-                        DisableCameraCulling = true, // If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                         Extras = new ParticleOptionDef
                         {
                             Scale = 1,
-                            HitPlayChance = 1f,
+                            HitPlayChance = 0.5f,
                         },
                     },
                     Eject = new ParticleDef
@@ -505,18 +492,16 @@ namespace Scripts
                 },
                 Lines = new LineDef
                 {
-                    ColorVariance = Random(start: 0.75f, end: 2f), // multiply the color by random values within range.
-                    WidthVariance = Random(start: 0f, end: 0f), // adds random value to default width (negatives shrinks width)
+                    ColorVariance = Random(start: 0.5f, end: 5f), // multiply the color by random values within range.
+                    WidthVariance = Random(start: -0.2f, end: 0.3f), // adds random value to default width (negatives shrinks width)
                     Tracer = new TracerBaseDef
                     {
                         Enable = true,
-                        Length = 5f, //
-                        Width = 0.3f, //
-                        Color = Color(red: 100, green: 40, blue: 32, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
-                        FactionColor = DontUse, // DontUse, Foreground, Background.
+                        Length = 30f, //
+                        Width = 0.25f, //
+                        Color = Color(red: 0.5f, green: 0.4f, blue: 0.4f, alpha: 1f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
-                        VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
-                        AlwaysDraw = false, // Prevents this tracer from being culled.  Only use if you have a reason too (very long tracers/trails).
+                        VisualFadeEnd = 30, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
                             "ProjectileTrailLine", // Please always have this Line set, if this Section is enabled.
                         },
@@ -531,9 +516,8 @@ namespace Scripts
                             SegmentGap = 0f, // Uses Tracer textures and values
                             Speed = 1f, // meters per second
                             Color = Color(red: 1, green: 2, blue: 2.5f, alpha: 1),
-                            FactionColor = DontUse, // DontUse, Foreground, Background.
                             WidthMultiplier = 1f,
-                            Reverse = false, 
+                            Reverse = false,
                             UseLineVariance = true,
                             WidthVariance = Random(start: 0f, end: 0f),
                             ColorVariance = Random(start: 0f, end: 0f)
@@ -542,15 +526,13 @@ namespace Scripts
                     Trail = new TrailDef
                     {
                         Enable = true,
-                        AlwaysDraw = false, // Prevents this tracer from being culled.  Only use if you have a reason too (very long tracers/trails).
                         Textures = new[] {
                             "ProjectileTrailLine", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
                         DecayTime = 1, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 30, green: 4, blue: 10, alpha: 1),
-                        FactionColor = DontUse, // DontUse, Foreground, Background.
-                        Back = false,
+                        Color = Color(red: 0.5f, green: 0.4f, blue: 0.4f, alpha: 1f),
+                        Back = true,
                         CustomWidth = 0,
                         UseWidthVariance = false,
                         UseColorFade = true,
@@ -558,8 +540,8 @@ namespace Scripts
                     OffsetEffect = new OffsetEffectDef
                     {
                         MaxOffset = 0,// 0 offset value disables this effect
-                        MinLength = 0f,
-                        MaxLength = 0f,
+                        MinLength = 0.2f,
+                        MaxLength = 3,
                     },
                 },
             },
