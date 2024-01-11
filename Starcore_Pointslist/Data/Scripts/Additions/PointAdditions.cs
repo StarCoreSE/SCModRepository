@@ -127,7 +127,7 @@ namespace ShipPoints
 				LargeBlockSmallHydrogenThrustIndustrial@15;
 				HugeHydrogenThruster@200;
 				LargeBlockLargeThrustSciFi@50;
-				LargeBlockSmallThrustScifi@15;
+				LargeBlockSmallThrustScifi@10;
 				ARYXMagnetarCannon@450;
 				ARYXPlasmaPulser@275;
 				ARYXLargeRadar@10;
