@@ -96,11 +96,16 @@ namespace Invalid.NidSpawner
 
         public override void UpdateBeforeSimulation()
         {
-            if (WavesToSpawn > 0 && DateTime.Now.Second >= NextSpawnTime)
+            if (WavesToSpawn > 0 && DateTime.Now.Ticks >= NextSpawnTime)
             {
                 WaveSpawn waveSpawn = waveSpawns[waveSpawns.Count - WavesToSpawn];
                 SpawnRandomPrefabs(waveSpawn.PrefabName, waveSpawn.PrefabAmount);
-                NextSpawnTime = DateTime.Now.Second + SpawnInterval;
+
+                // Show debug notification with the time when the wave is spawned
+                string debugMessage = $"Spawning wave {waveSpawns.Count - WavesToSpawn + 1} at {DateTime.Now.ToLongTimeString()}";
+                MyAPIGateway.Utilities.ShowNotification(debugMessage, 5000, "Green");
+
+                NextSpawnTime = DateTime.Now.Ticks + waveSpawn.WaitTimeSeconds * TimeSpan.TicksPerSecond;
                 WavesToSpawn--;
 
                 if (WavesToSpawn == 0)
@@ -139,6 +144,9 @@ namespace Invalid.NidSpawner
 
         private void OnMessageEntered(string messageText, ref bool sendToOthers)
         {
+            // Debug notification to check if the message is received
+            MyAPIGateway.Utilities.ShowNotification("OnMessageEntered called with message: " + messageText, 5000, "Yellow");
+
             if (messageText.StartsWith("/wavestart", StringComparison.OrdinalIgnoreCase))
             {
                 // Use the predefined list of waves
@@ -148,6 +156,9 @@ namespace Invalid.NidSpawner
 
                 // Start spawning the first wave immediately
                 NextSpawnTime = DateTime.Now.Ticks;
+
+                // Show debug notification when the wave spawning is triggered
+                MyAPIGateway.Utilities.ShowNotification("Wave spawning started", 2000, "Green");
             }
             else if (messageText.StartsWith("/spawnnids", StringComparison.OrdinalIgnoreCase))
             {
