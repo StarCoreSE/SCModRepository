@@ -26,7 +26,7 @@
         <Component Subtype="LargeTube" Count="10" />
         <Component Subtype="Reactor" Count="30" />
         <Component Subtype="Motor" Count="100" />
-        <Component Subtype="SteelPlate" Count="1000" />
+        <Component Subtype="SteelPlate" Count="600" />
       </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
 			<MountPoints>
