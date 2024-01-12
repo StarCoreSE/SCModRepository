@@ -1,6 +1,7 @@
 ﻿using Sandbox.Common.ObjectBuilders;
 using Sandbox.Game;
 using Sandbox.Game.Entities;
+using ProtoBuf;
 using Sandbox.ModAPI;
 using Sandbox.ModAPI.Interfaces.Terminal;
 using System;
@@ -22,6 +23,15 @@ using VRageMath;
 
 namespace Invalid.MetalFoam
 {
+
+     public class Foam_Settings
+    {
+        [ProtoMember(1)]
+        public bool FoamState;   //wait do I even need this? it's not being set anywhere!! but it works so whatever
+    }
+
+
+
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Decoy), false, "LargeDecoy_MetalFoam")]
     public class MetalFoamGenerator : MyGameLogicComponent, IMyEventProxy
     {
@@ -34,52 +44,69 @@ namespace Invalid.MetalFoam
         private Vector3I center;
         private int radius;
 
-        MySync<bool, SyncDirection.BothWays> foam_clientSync = null;
+        MySync<bool, SyncDirection.BothWays> foammeup;
         static bool m_controlsCreated = false;
 
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             base.Init(objectBuilder);
+            NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
+
             // The sync variables are already set by the time we get here.
             // Hook the ValueChanged event, so we can do something when the data changes.
-            foam_clientSync.ValueChanged += foaming_ValueChanged;
+            foammeup.ValueChanged += foammeup_ValueChanged;
 
             // This is a test of SyncExtentions whitelist, however this will execute if you call m_clientSync.ValidateAndSet().
-            foam_clientSync.AlwaysReject();
-
-            NeedsUpdate |= VRage.ModAPI.MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
-
+           // foam_clientSync.AlwaysReject();
 
             block = (IMyCubeBlock)Entity;
             block.SlimBlock.ComponentStack.IsFunctionalChanged += OnBlockDamaged;
         }
 
 
-        private void foaming_ValueChanged(MySync<bool, SyncDirection.BothWays> obj)
+
+        private void foammeup_ValueChanged(MySync<bool, SyncDirection.BothWays> obj)
         {
-            // This is where you handle the switch's value change.
             if (obj.Value)
             {
-                // Start generating foam
-                center = block.Position;
-                radius = sphereRadius;
-                currentLayer = 0;
-                nextLayerTick = MyAPIGateway.Session.GameplayFrameCounter;
-                NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME;
-
-                string notificationText = "Manual Foam generation started!";
-                NotifyPlayersInRange(notificationText, block.GetPosition(), 100, MyFontEnum.Green); // Adjust the radius as needed
-                MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("MetalFoamSmoke", block.GetPosition());
-                MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("MetalFoamSound", block.GetPosition());
+                StartFoamGeneration();
             }
             else
             {
-                // Stop generating foam
-                NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME;
-                string notificationText = "Manual Foam generation stopped!";
-                NotifyPlayersInRange(notificationText, block.GetPosition(), 100, MyFontEnum.Red); // Adjust the radius as needed
+                StopFoamGeneration();
             }
+        }
+
+        private void StartFoamGeneration()
+        {
+            center = block.Position;
+            radius = sphereRadius;
+            currentLayer = 0;
+            nextLayerTick = MyAPIGateway.Session.GameplayFrameCounter;
+            NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME;
+
+            NotifyPlayers("Manual Foam generation started!", MyFontEnum.Green);
+            CreateEffects();
+        }
+
+        private void StopFoamGeneration()
+        {
+            NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME;
+            NotifyPlayers("Manual Foam generation stopped!", MyFontEnum.Red);
+        }
+
+        private void NotifyPlayers(string message, string font)
+        {
+            Vector3D position = block.GetPosition();
+            NotifyPlayersInRange(message, position, 100, font);
+        }
+
+        private void CreateEffects()
+        {
+            Vector3D position = block.GetPosition();
+            MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("MetalFoamSmoke", position);
+            MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("MetalFoamSound", position);
         }
 
         static void CreateTerminalControls()
@@ -92,13 +119,13 @@ namespace Invalid.MetalFoam
                 startgenerationOnOff.Enabled = (b) => b.GameLogic is MetalFoamGenerator;
                 startgenerationOnOff.Visible = (b) => b.GameLogic is MetalFoamGenerator;
                 startgenerationOnOff.Title = MyStringId.GetOrCompute("RELEASE THE FOAM");
-                startgenerationOnOff.Getter = (b) => (b.GameLogic.GetAs<MetalFoamGenerator>()?.foam_clientSync.Value) ?? false;
+                startgenerationOnOff.Getter = (b) => (b.GameLogic.GetAs<MetalFoamGenerator>()?.foammeup.Value) ?? false;
                 startgenerationOnOff.Setter = (b, v) =>
                 {
                     var generator = b.GameLogic.GetAs<MetalFoamGenerator>();
                     if (generator != null)
                     {
-                        generator.foam_clientSync.Value = v;
+                        generator.foammeup.Value = v; // Syncs the value
                     }
                 };
                 startgenerationOnOff.OnText = MyStringId.GetOrCompute("On");
@@ -114,7 +141,7 @@ namespace Invalid.MetalFoam
                     var generator = block.GameLogic.GetAs<MetalFoamGenerator>();
                     if (generator != null)
                     {
-                        stringBuilder.Append("Foam: ").Append(generator.foam_clientSync.Value ? "On" : "Off");
+                        stringBuilder.Append("Foam: ").Append(generator.foammeup.Value ? "On" : "Off");
                     }
                 };
                 action.Action = (block) =>
@@ -122,7 +149,7 @@ namespace Invalid.MetalFoam
                     var generator = block.GameLogic.GetAs<MetalFoamGenerator>();
                     if (generator != null)
                     {
-                        generator.foam_clientSync.Value = !generator.foam_clientSync.Value; // Toggle the foam generation
+                        generator.foammeup.Value = !generator.foammeup.Value; // Syncs the value
                     }
                 };
                 action.Enabled = (block) => block.GameLogic is MetalFoamGenerator;
@@ -153,15 +180,8 @@ namespace Invalid.MetalFoam
         {
             base.UpdateOnceBeforeFrame();
             CreateTerminalControls();
-
-            (Entity as IMyDecoy).EnabledChanged += MetalFoam_EnabledChanged;
         }
 
-        private void MetalFoam_EnabledChanged(IMyCubeBlock obj)
-        {
-
-
-        }
 
         public override void UpdateBeforeSimulation100()
         {
