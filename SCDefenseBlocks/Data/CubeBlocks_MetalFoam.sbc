@@ -9,19 +9,19 @@
             </Id>
             <DisplayName>Metal Foam Decoy</DisplayName>
             <Icon>Textures\GUI\Icons\Cubes\metalfoam.png</Icon>
-            <Description>When damaged, tries to fill in the space around it with Metal Foam (light armor)</Description>
+            <Description>Extremely densely stored material. When activated, spills out fill in the space around it with Metal Foam (light armor). Activates when damaged below functional.</Description>
             <CubeSize>Large</CubeSize>
             <BlockTopology>TriangleMesh</BlockTopology>
             <Size x="1" y="1" z="1" />
             <ModelOffset x="0" y="0" z="0" />
 			<Model>Models\LargeDecoy_MetalFoam.mwm</Model>
             <Components>
-                <Component Subtype="SteelPlate" Count="200" />
+                <Component Subtype="SteelPlate" Count="5700" />
                 <Component Subtype="Construction" Count="10" />
                 <Component Subtype="Computer" Count="10" />
                 <Component Subtype="LargeTube" Count="2" />
               <Component Subtype="RadioCommunication" Count="1" />
-                <Component Subtype="SteelPlate" Count="20" />
+                <Component Subtype="SteelPlate" Count="75" />
             </Components>
             <CriticalComponent Subtype="RadioCommunication" Index="0" />
 			<MountPoints>
