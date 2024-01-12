@@ -99,9 +99,9 @@ namespace PickMe
                         if (faction.Value.Tag != "NEU")
                         {
                             long thisFaction = faction.Value.FactionId;
-                            MyAPIGateway.Session.Factions.SendPeaceRequest(thisFaction, outFactionID);
-                            MyAPIGateway.Session.Factions.SendPeaceRequest(thisFaction, adminFactionID);
-                            MyAPIGateway.Session.Factions.SendPeaceRequest(thisFaction, neutralFactionID);
+                            //MyAPIGateway.Session.Factions.SendPeaceRequest(thisFaction, outFactionID);
+                            //MyAPIGateway.Session.Factions.SendPeaceRequest(thisFaction, adminFactionID);
+                            //MyAPIGateway.Session.Factions.SendPeaceRequest(thisFaction, neutralFactionID);
                             beligerentIds.Add(thisFaction);
                         }
                     }
@@ -119,12 +119,12 @@ namespace PickMe
                 }
             }
             beligerentIds?.Clear();                      
-            if(MyAPIGateway.Session.Factions.GetRelationBetweenFactions(adminFactionID, outFactionID) == MyRelationsBetweenFactions.Enemies)
-                MyAPIGateway.Session.Factions.SendPeaceRequest(outFactionID, adminFactionID);
-            if (MyAPIGateway.Session.Factions.GetRelationBetweenFactions(adminFactionID, neutralFactionID) == MyRelationsBetweenFactions.Enemies)
-                MyAPIGateway.Session.Factions.SendPeaceRequest(neutralFactionID, adminFactionID);
-            if (MyAPIGateway.Session.Factions.GetRelationBetweenFactions(outFactionID, neutralFactionID) == MyRelationsBetweenFactions.Enemies)
-                MyAPIGateway.Session.Factions.SendPeaceRequest(neutralFactionID, outFactionID);
+            //if(MyAPIGateway.Session.Factions.GetRelationBetweenFactions(adminFactionID, outFactionID) == MyRelationsBetweenFactions.Enemies)
+            //    MyAPIGateway.Session.Factions.SendPeaceRequest(outFactionID, adminFactionID);
+            //if (MyAPIGateway.Session.Factions.GetRelationBetweenFactions(adminFactionID, neutralFactionID) == MyRelationsBetweenFactions.Enemies)
+            //    MyAPIGateway.Session.Factions.SendPeaceRequest(neutralFactionID, adminFactionID);
+            //if (MyAPIGateway.Session.Factions.GetRelationBetweenFactions(outFactionID, neutralFactionID) == MyRelationsBetweenFactions.Enemies)
+            //    MyAPIGateway.Session.Factions.SendPeaceRequest(neutralFactionID, outFactionID);
         }
 
         public void SetForMatchEnd()
@@ -133,8 +133,8 @@ namespace PickMe
             {
                 foreach(var cofaction in MyAPIGateway.Session.Factions.Factions)
                 {
-                    if (MyAPIGateway.Session.Factions.GetRelationBetweenFactions(faction.Value.FactionId, cofaction.Value.FactionId) == MyRelationsBetweenFactions.Enemies)
-                        MyAPIGateway.Session.Factions.SendPeaceRequest(faction.Value.FactionId, cofaction.Value.FactionId);
+                    //if (MyAPIGateway.Session.Factions.GetRelationBetweenFactions(faction.Value.FactionId, cofaction.Value.FactionId) == MyRelationsBetweenFactions.Enemies)
+                    //    MyAPIGateway.Session.Factions.SendPeaceRequest(faction.Value.FactionId, cofaction.Value.FactionId);
                 }
             }
         }
