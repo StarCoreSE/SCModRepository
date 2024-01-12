@@ -4,7 +4,7 @@ using System.Collections.Concurrent;
 using Sandbox.ModAPI;
 using VRage.Game.ModAPI;
 
-namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegrity.Sync
+namespace StarCore.StructuralIntegrity.Sync
 {
     public class Networking
     {

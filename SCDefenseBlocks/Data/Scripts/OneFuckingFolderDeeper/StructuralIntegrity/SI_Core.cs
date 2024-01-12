@@ -24,7 +24,7 @@ using VRage.ObjectBuilders;
 using SpaceEngineers.Game.Entities.Blocks;
 using SpaceEngineers.Game.ModAPI;
 
-namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegrity
+namespace StarCore.StructuralIntegrity
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "SI_Field_Gen")]
     public class SI_Core : MyGameLogicComponent, IMyEventProxy
@@ -36,13 +36,13 @@ namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegri
         public readonly Config_Settings Config = new Config_Settings();
         public readonly SI_Settings Settings = new SI_Settings();
 
-        SI_Utility Mod => SI_Utility.Instance;
+        /*SI_Utility Mod => SI_Utility.Instance;*/
 
         //Utility Declarations 
         public const string ControlPrefix = "SI_Control.";
         public readonly Guid SettingsGUID = new Guid("9EFDABA1-E705-4F62-BD37-A4B046B60BC0");
         public const int SettingsUpdateCount = 60 * 1 / 10;
-        int SyncCountdown;
+        /*int SyncCountdown;*/
 
         //Regular Structural Integrity Values Init
         public float MinFieldPower;
@@ -50,6 +50,9 @@ namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegri
         public float MinGridModifier;
         public float MaxGridModifier;
         public float ReferenceGridModifier = 0f;
+
+        MySync<float, SyncDirection.BothWays> FieldPowerSync;
+        MySync<float, SyncDirection.BothWays> GridModifierSync;
 
         //Siege Mode Values Init
         public bool SiegeEnabled;
@@ -82,7 +85,8 @@ namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegri
             {
                 Settings.FieldPower = MathHelper.Clamp((float)Math.Floor(value), MinFieldPower, MaxFieldPower);
 
-                SettingsChanged();
+                FieldPowerSync.Value = value;
+                SaveSettings();
 
                 if ((NeedsUpdate & MyEntityUpdateEnum.EACH_10TH_FRAME) == 0)
                     NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
@@ -99,7 +103,8 @@ namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegri
             {
                 Settings.GridModifier = MathHelper.Clamp((float)Math.Round(value, 2), MaxGridModifier, MinGridModifier);
 
-                SettingsChanged();
+                GridModifierSync.Value = value;
+                SaveSettings();
 
                 if ((NeedsUpdate & MyEntityUpdateEnum.EACH_10TH_FRAME) == 0)
                     NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
@@ -166,8 +171,6 @@ namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegri
         {
             try
             {
-                SyncSettings();
-
                 if (SiegeCooldownActive == true)
                 {
                     if (SiegeCooldownTimer > 0)
@@ -491,12 +494,12 @@ namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegri
                         SIGenBlock.CubeGrid.Physics.LinearVelocity = oppositeVector;
                     }
 
-                    SiegeTimer = SiegeTimer - 1;
-                    CountSiegeDisplayTimer = CountSiegeDisplayTimer - 1;
+                    SiegeTimer = SiegeTimer--;
+                    CountSiegeDisplayTimer = CountSiegeDisplayTimer--;
                     if (CountSiegeDisplayTimer <= 0)
                     {
                         CountSiegeDisplayTimer = SiegeDisplayTimer;
-                        SiegeVisibleTimer = SiegeVisibleTimer - 1;
+                        SiegeVisibleTimer = SiegeVisibleTimer--;
                         DisplayMessageToNearPlayers(0);
                     }
                 }
@@ -623,7 +626,7 @@ namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegri
             }
         }
 
-        void SettingsChanged()
+       /* void SettingsChanged()
         {
             if (SyncCountdown == 0)
             {
@@ -646,7 +649,7 @@ namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegri
             {
                 Log.Error($"Error syncing settings!\n{e}");
             }
-        }
+        }*/
 
         public override bool IsSerialized()
         {
@@ -721,7 +724,7 @@ namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegri
                         logic.SetPowerStatus($"Block Disabled", 1500, MyFontEnum.Red);
                         return;
                     }
-                    logic.CurrentFieldPower = logic.CurrentFieldPower + 1;
+                    logic.CurrentFieldPower = logic.CurrentFieldPower++;
                     logic.CurrentFieldPower = MathHelper.Clamp(logic.CurrentFieldPower, 0f, 30f);
                 }
             };
@@ -761,7 +764,7 @@ namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegri
                         logic.SetPowerStatus($"Block Disabled", 1500, MyFontEnum.Red);
                         return;
                     }
-                    logic.CurrentFieldPower = logic.CurrentFieldPower - 1;
+                    logic.CurrentFieldPower = logic.CurrentFieldPower--;
                     logic.CurrentFieldPower = MathHelper.Clamp(logic.CurrentFieldPower, 0f, 30f);
                 }
             };
