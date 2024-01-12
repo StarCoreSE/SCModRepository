@@ -16,12 +16,12 @@
             <ModelOffset x="0" y="0" z="0" />
 			<Model>Models\LargeDecoy_MetalFoam.mwm</Model>
             <Components>
-                <Component Subtype="SteelPlate" Count="200" />
+                <Component Subtype="SteelPlate" Count="5700" />
                 <Component Subtype="Construction" Count="10" />
                 <Component Subtype="Computer" Count="10" />
                 <Component Subtype="LargeTube" Count="2" />
               <Component Subtype="RadioCommunication" Count="1" />
-                <Component Subtype="SteelPlate" Count="20" />
+                <Component Subtype="SteelPlate" Count="75" />
             </Components>
             <CriticalComponent Subtype="RadioCommunication" Index="0" />
 			<MountPoints>
