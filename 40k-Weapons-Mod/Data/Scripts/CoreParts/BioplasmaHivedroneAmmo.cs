@@ -86,14 +86,14 @@ namespace Scripts
                     Enable = false, // Enables TimedSpawns mechanism
                     Interval = 0, // Time between spawning fragments, in ticks, 0 means every tick, 1 means every other
                     StartTime = 0, // Time delay to start spawning fragments, in ticks, of total projectile life
-                    MaxSpawns = 0, // Max number of fragment children to spawn
-                    Proximity = 0, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
-                    ParentDies = false, // Parent dies once after it spawns its last child.
-                    PointAtTarget = false, // Start fragment direction pointing at Target
+                    MaxSpawns = 1, // Max number of fragment children to spawn
+                    Proximity = 1000, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
+                    ParentDies = true, // Parent dies once after it spawns its last child.
+                    PointAtTarget = true, // Start fragment direction pointing at Target
                     PointType = Predict, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
                     DirectAimCone = 0f, //Aim cone used for Direct fire, in degrees
-                    GroupSize = 0, // Number of spawns in each group
-                    GroupDelay = 0, // Delay between each group.
+                    GroupSize = 5, // Number of spawns in each group
+                    GroupDelay = 120, // Delay between each group.
                 },
             },
             Pattern = new PatternDef
@@ -102,12 +102,12 @@ namespace Scripts
                     "",
                 },
                 Mode = Fragment, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
-                TriggerChance = 0f, // This is %
+                TriggerChance = 1f, // This is %
                 Random = false, // This randomizes the number spawned at once, NOT the list order.
-                RandomMin = 0, 
-                RandomMax = 0,
+                RandomMin = 1, 
+                RandomMax = 1,
                 SkipParent = false, // Skip the Ammo itself, in the list
-                PatternSteps = 0, // Number of Ammos activated per round, will progress in order and loop. Ignored if Random = true.
+                PatternSteps = 1, // Number of Ammos activated per round, will progress in order and loop. Ignored if Random = true.
             },
             DamageScales = new DamageScaleDef
             {
@@ -291,7 +291,7 @@ namespace Scripts
                     MaxLateralThrust = 1, // controls how sharp the trajectile may turn
                     TrackingDelay = 28, // Measured in Shape diameter units traveled.
                     MaxChaseTime = 7200, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
+                    OverideTarget = true, // when set to true ammo picks its own target, does not use hardpoint's.
                     CheckFutureIntersection = false, // Utilize obstacle avoidance for drones
                     MaxTargets = 0, // Number of targets allowed before ending, 0 = unlimited
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
@@ -299,7 +299,7 @@ namespace Scripts
                     KeepAliveAfterTargetLoss = false, // Whether to stop early death of projectile on target loss
                     OffsetRatio = 1f, // The ratio to offset the random direction (0 to 1) 
                     OffsetTime = 300, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
-                    FocusOnly = true, // only target the constructs Ai's focus target
+                    FocusOnly = false, // only target the constructs Ai's focus target
                     FocusEviction = false, // If FocusOnly and this to true will force smarts to lose target when there is no focus target
                 },
                 Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
@@ -688,7 +688,7 @@ namespace Scripts
                     NavAcceleration = 0.5, // helps influence how the projectile steers.
                     TrackingDelay = 50, // Measured in Shape diameter units traveled.
                     MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
+                    OverideTarget = true, // when set to true ammo picks its own target, does not use hardpoint's.
                     CheckFutureIntersection = false, // Utilize obstacle avoidance for drones
                     MaxTargets = 0, // Number of targets allowed before ending, 0 = unlimited
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
@@ -696,7 +696,7 @@ namespace Scripts
                     KeepAliveAfterTargetLoss = true, // Whether to stop early death of projectile on target loss
                     OffsetRatio = 1f, // The ratio to offset the random direction (0 to 1) 
                     OffsetTime = 50, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
-                    FocusOnly = true, // only target the constructs Ai's focus target
+                    FocusOnly = false, // only target the constructs Ai's focus target
                     FocusEviction = false, // If FocusOnly and this to true will force smarts to lose target when there is no focus target
                 },
                 Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
@@ -1079,7 +1079,7 @@ namespace Scripts
                     MaxLateralThrust = 100f, // controls how sharp the trajectile may turn
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
                     MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
+                    OverideTarget = true, // when set to true ammo picks its own target, does not use hardpoint's.
                     CheckFutureIntersection = false, // Utilize obstacle avoidance for drones
                     MaxTargets = 0, // Number of targets allowed before ending, 0 = unlimited
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
@@ -1087,7 +1087,7 @@ namespace Scripts
                     KeepAliveAfterTargetLoss = false, // Whether to stop early death of projectile on target loss
                     OffsetRatio = 0f, // The ratio to offset the random direction (0 to 1) 
                     OffsetTime = 0, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
-                    FocusOnly = true, // only target the constructs Ai's focus target
+                    FocusOnly = false, // only target the constructs Ai's focus target
                     FocusEviction = false, // If FocusOnly and this to true will force smarts to lose target when there is no focus target
                 },
                 Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
@@ -1470,7 +1470,7 @@ namespace Scripts
                     MaxLateralThrust = 1f, // controls how sharp the trajectile may turn
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
                     MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
+                    OverideTarget = true, // when set to true ammo picks its own target, does not use hardpoint's.
                     CheckFutureIntersection = false, // Utilize obstacle avoidance for drones
                     MaxTargets = 0, // Number of targets allowed before ending, 0 = unlimited
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
@@ -1478,7 +1478,7 @@ namespace Scripts
                     KeepAliveAfterTargetLoss = false, // Whether to stop early death of projectile on target loss
                     OffsetRatio = 0f, // The ratio to offset the random direction (0 to 1) 
                     OffsetTime = 0, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
-                    FocusOnly = true, // only target the constructs Ai's focus target
+                    FocusOnly = false, // only target the constructs Ai's focus target
                     FocusEviction = false, // If FocusOnly and this to true will force smarts to lose target when there is no focus target
                 },
                 Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.

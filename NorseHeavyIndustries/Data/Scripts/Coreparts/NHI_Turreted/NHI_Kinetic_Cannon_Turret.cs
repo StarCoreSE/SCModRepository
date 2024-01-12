@@ -147,7 +147,7 @@ namespace Scripts
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "", // Audio for warmup effect.
-                    FiringSound = "ArcWepShipARYXTyphoon_Fire2", // Audio for firing.
+                    FiringSound = "Hurricane_Firesound", // Audio for firing.
                     FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "", // Sound SubtypeID, for when your Weapon is in a reloading state
                     NoAmmoSound = "",
@@ -160,7 +160,7 @@ namespace Scripts
                 {
                     Effect1 = new ParticleDef
                     {
-                        Name = "AWE_Cyclone_Muzzleblast", // SubtypeId of muzzle particle effect.
+                        Name = "Hurricane_Muzzleflash", // SubtypeId of muzzle particle effect.
                         Color = Color(red: 0, green: 0, blue: 0, alpha: 1), // Deprecated, set color in particle sbc.
                         Offset = Vector(x: 0, y: 0, z: 0), // Offsets the effect from the muzzle empty.
                         Extras = new ParticleOptionDef

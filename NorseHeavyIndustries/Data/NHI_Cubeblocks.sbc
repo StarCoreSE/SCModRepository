@@ -1782,44 +1782,6 @@ Lacks the Ability to Heal Shields and and Must Completely cool down after reachi
      <MaxFov>1.04719755</MaxFov>
    </Definition>
 
-<!-- Horizon Mine Launcher -->
-   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
-     <Id>
-       <TypeId>ConveyorSorter</TypeId>
-       <SubtypeId>Support_Module_Test</SubtypeId>
-     </Id>
-     <DisplayName>Armor Support Test</DisplayName>
-     <Description>
-       Armor Test
-     </Description>
-     <Icon>Textures\GUI\Icons\Emergency_Thruster.dds</Icon>
-     <CubeSize>Large</CubeSize>
-     <GuiVisible>true</GuiVisible>
-     <BlockTopology>TriangleMesh</BlockTopology>
-     <Size x="2" y="1" z="3" />
-     <ModelOffset x="0" y="0" z="0" />
-     <Model>Models\Large\Horizon_Mine_Launcher.mwm</Model>
-     <Components>
-       <Component Subtype="SteelPlate" Count="200" />
-       <Component Subtype="Construction" Count="115" />
-       <Component Subtype="MetalGrid" Count="65" />
-       <Component Subtype="LargeTube" Count="45" />
-       <Component Subtype="Motor" Count="125" />
-       <Component Subtype="Computer" Count="200" />
-       <Component Subtype="Construction" Count="125" />
-       <Component Subtype="SteelPlate" Count="100" />
-     </Components>
-     <CriticalComponent Subtype="Computer" Index="0" />
-     <BlockPairName>Support_Module_Test_Block</BlockPairName>
-     <MirroringY>Z</MirroringY>
-     <MirroringZ>Y</MirroringZ>
-     <EdgeType>Light</EdgeType>
-     <BuildTimeSeconds>25</BuildTimeSeconds>
-     <DisassembleRatio>5</DisassembleRatio>
-     <NavigationDefinition>Default</NavigationDefinition>
-   </Definition>
-
-
 <!-- Fixed Autocannon -->
    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
    <Id>
