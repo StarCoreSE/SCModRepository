@@ -18,6 +18,8 @@ using VRage.Utils;
 using VRageMath;
 using System.Collections.Generic;
 using System.Text;
+using Sandbox.Definitions;
+using System.Linq;
 
 namespace Invalid.MetalFoam
 {
@@ -25,12 +27,16 @@ namespace Invalid.MetalFoam
     public class MetalFoamGenerator : MyGameLogicComponent, IMyEventProxy
     {
         private IMyCubeBlock block;
-        private const int sphereRadius = 5;
+        //private const int sphereRadius = 7;
         private int nextLayerTick = 0;
         private HashSet<Vector3I> currentFoamPositions = new HashSet<Vector3I>();
         private Vector3I center;  // Added this line
         private MySync<bool, SyncDirection.BothWays> foammeup;
         static bool m_controlsCreated = false;
+
+        private int totalFoamBlocksAdded = 0;  // Counter for the number of foam blocks added
+        private int maxFoamBlocks;  // Maximum number of foam blocks allowed based on Steel Plates in its block, pretty neat. is that bad for performance? uhhhhhh
+
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
@@ -41,6 +47,23 @@ namespace Invalid.MetalFoam
 
             block = (IMyCubeBlock)Entity;
             block.SlimBlock.ComponentStack.IsFunctionalChanged += OnBlockDamaged;
+
+            maxFoamBlocks = CalculateMaxFoamBlocks(block);
+        }
+
+        private int CalculateMaxFoamBlocks(IMyCubeBlock block)                           // its not quite exact sometimes it cuts off 1 or 2 blocks but maybe it got converted into waste heat or something
+        {                                                                                // no wait its only reading the first entry of steel plates. We'll just call the second entry (after computers) its casing or something
+            var definition = block.SlimBlock.BlockDefinition as MyCubeBlockDefinition;   // lmao it generates one extra plate on the outside of the formation because of the space at the center being taken up by the decoy
+            if (definition != null)
+            {
+                // Assuming 'SteelPlate' is the subtypeId for steel plates
+                var steelPlateComponent = definition.Components.FirstOrDefault(c => c.Definition.Id.SubtypeName == "SteelPlate");
+                if (steelPlateComponent != null)
+                {
+                    return steelPlateComponent.Count / 25;    //hmm i bet i could make a selectable dropdown that lets you choose if you want to fill in with heavy armor or light armor
+                }
+            }
+            return 100; // Default value if steel plates are not found or block definition is null
         }
 
         private void foammeup_ValueChanged(MySync<bool, SyncDirection.BothWays> obj)
@@ -63,13 +86,13 @@ namespace Invalid.MetalFoam
             currentFoamPositions.Add(block.Position);
             NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME;
 
-            NotifyPlayers("Manual Foam generation started!", MyFontEnum.Green);
+            NotifyPlayers("Foam generation started!", MyFontEnum.Green);
             CreateEffects();
         }
         private void StopFoamGeneration()
         {
             NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME;
-            NotifyPlayers("Manual Foam generation stopped!", MyFontEnum.Red);
+            NotifyPlayers("Foam generation stopped!", MyFontEnum.Red);
         }
 
         private void NotifyPlayers(string message, string font)
@@ -120,37 +143,53 @@ namespace Invalid.MetalFoam
         {
             var grid = block.CubeGrid;
             HashSet<Vector3I> newFoamPositions = new HashSet<Vector3I>();
-            bool blockAdded = false;  // Flag to track if any foam block was added
+            bool blockAdded = false; // Flag to track if any foam block was added
 
             foreach (var foamBlock in currentFoamPositions)
             {
+                if (totalFoamBlocksAdded >= maxFoamBlocks)
+                {
+                    break; // Exit if max blocks already added
+                }
+
                 foreach (var neighbor in GetNeighboringBlocks(foamBlock))
                 {
-                    if (CanPlaceFoam(neighbor) && !currentFoamPositions.Contains(neighbor))
+                    if (CanPlaceFoam(neighbor) && !currentFoamPositions.Contains(neighbor) && !newFoamPositions.Contains(neighbor))
                     {
-                        // Check if the new position is within the maximum allowed distance
-                        if (Vector3I.DistanceManhattan(center, neighbor) <= sphereRadius)
+                        newFoamPositions.Add(neighbor);
+                        blockAdded = true;
+                        totalFoamBlocksAdded++;
+
+                        if (totalFoamBlocksAdded >= maxFoamBlocks)
                         {
-                            newFoamPositions.Add(neighbor);
-                            blockAdded = true;  // Set flag to true if a block is added
+                            break; // Exit if max blocks reached during this iteration
                         }
                     }
                 }
+
+                // Early exit if max blocks reached to prevent further iterations
+                if (totalFoamBlocksAdded >= maxFoamBlocks)
+                {
+                    break;
+                }
             }
 
+            // Add foam blocks at new positions
             foreach (var newPos in newFoamPositions)
             {
                 AddFoamBlock("LargeBlockArmorBlock", newPos);
             }
 
+            // Update current foam positions
             currentFoamPositions.UnionWith(newFoamPositions);
 
-            // Play the sound effect once if any block was added in this tick
+            // Play sound effect once if a block was added this tick
             if (blockAdded)
             {
                 MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("MetalFoamSound", block.GetPosition());
             }
         }
+
 
 
 
