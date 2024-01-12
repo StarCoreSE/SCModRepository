@@ -1,12 +1,8 @@
 ﻿using Sandbox.Common.ObjectBuilders;
 using Sandbox.Game;
 using Sandbox.Game.Entities;
-using ProtoBuf;
 using Sandbox.ModAPI;
 using Sandbox.ModAPI.Interfaces.Terminal;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using VRage;
 using VRage.Game;
 using VRage.Game.Components;
@@ -20,51 +16,32 @@ using VRage.ObjectBuilders;
 using VRage.Sync;
 using VRage.Utils;
 using VRageMath;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Invalid.MetalFoam
 {
-
-     public class Foam_Settings
-    {
-        [ProtoMember(1)]
-        public bool FoamState;   //wait do I even need this? it's not being set anywhere!! but it works so whatever
-    }
-
-
-
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Decoy), false, "LargeDecoy_MetalFoam")]
     public class MetalFoamGenerator : MyGameLogicComponent, IMyEventProxy
     {
-        private IMyCubeBlock block;  // This is the declaration you need
-        private const int sphereRadius = 4;  // This makes sphereRadius available to the whole class
-
-
+        private IMyCubeBlock block;
+        private const int sphereRadius = 4;
         private int nextLayerTick = 0;
-        private int currentLayer = 0;
-        private Vector3I center;
-        private int radius;
-
-        MySync<bool, SyncDirection.BothWays> foammeup;
+        private HashSet<Vector3I> currentFoamPositions = new HashSet<Vector3I>();
+        private Vector3I center;  // Added this line
+        private MySync<bool, SyncDirection.BothWays> foammeup;
         static bool m_controlsCreated = false;
-
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             base.Init(objectBuilder);
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
 
-            // The sync variables are already set by the time we get here.
-            // Hook the ValueChanged event, so we can do something when the data changes.
             foammeup.ValueChanged += foammeup_ValueChanged;
-
-            // This is a test of SyncExtentions whitelist, however this will execute if you call m_clientSync.ValidateAndSet().
-           // foam_clientSync.AlwaysReject();
 
             block = (IMyCubeBlock)Entity;
             block.SlimBlock.ComponentStack.IsFunctionalChanged += OnBlockDamaged;
         }
-
-
 
         private void foammeup_ValueChanged(MySync<bool, SyncDirection.BothWays> obj)
         {
@@ -81,15 +58,14 @@ namespace Invalid.MetalFoam
         private void StartFoamGeneration()
         {
             center = block.Position;
-            radius = sphereRadius;
-            currentLayer = 0;
-            nextLayerTick = MyAPIGateway.Session.GameplayFrameCounter;
+            currentFoamPositions.Clear();
+            AddFoamBlock("LargeBlockArmorBlock", block.Position); // Start foam at the block's position
+            currentFoamPositions.Add(block.Position);
             NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME;
 
             NotifyPlayers("Manual Foam generation started!", MyFontEnum.Green);
             CreateEffects();
         }
-
         private void StopFoamGeneration()
         {
             NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME;
@@ -108,6 +84,123 @@ namespace Invalid.MetalFoam
             MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("MetalFoamSmoke", position);
             MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("MetalFoamSound", position);
         }
+
+        private void NotifyPlayersInRange(string text, Vector3D position, double radius, string font)
+        {
+            BoundingSphereD bound = new BoundingSphereD(position, radius);
+            List<IMyEntity> nearEntities = MyAPIGateway.Entities.GetEntitiesInSphere(ref bound);
+
+            foreach (var entity in nearEntities)
+            {
+                IMyCharacter character = entity as IMyCharacter;
+                if (character != null && character.IsPlayer && bound.Contains(character.GetPosition()) != ContainmentType.Disjoint)
+                {
+                    var notification = MyAPIGateway.Utilities.CreateNotification(text, 1600, font);
+                    notification.Show();
+                }
+            }
+        }
+
+        public override void UpdateOnceBeforeFrame()
+        {
+            base.UpdateOnceBeforeFrame();
+            CreateTerminalControls();
+        }
+
+        public override void UpdateBeforeSimulation100()
+        {
+            if (MyAPIGateway.Session.GameplayFrameCounter >= nextLayerTick && foammeup.Value)
+            {
+                SpreadFoam();
+                nextLayerTick = MyAPIGateway.Session.GameplayFrameCounter + 180; // Adjust timing as needed
+            }
+        }
+
+        private void SpreadFoam()
+        {
+            var grid = block.CubeGrid;
+            HashSet<Vector3I> newFoamPositions = new HashSet<Vector3I>();
+
+            foreach (var foamBlock in currentFoamPositions)
+            {
+                foreach (var neighbor in GetNeighboringBlocks(foamBlock))
+                {
+                    if (CanPlaceFoam(neighbor) && !currentFoamPositions.Contains(neighbor))
+                    {
+                        // Check if the new position is within the maximum allowed distance
+                        if (Vector3I.DistanceManhattan(center, neighbor) <= sphereRadius)
+                        {
+                            newFoamPositions.Add(neighbor);
+                        }
+                    }
+                }
+            }
+
+            foreach (var newPos in newFoamPositions)
+            {
+                AddFoamBlock("LargeBlockArmorBlock", newPos);
+            }
+
+            currentFoamPositions.UnionWith(newFoamPositions);
+        }
+
+
+        private IEnumerable<Vector3I> GetNeighboringBlocks(Vector3I position)
+        {
+            return new List<Vector3I>
+            {
+                position + new Vector3I(1, 0, 0),
+                position + new Vector3I(-1, 0, 0),
+                position + new Vector3I(0, 1, 0),
+                position + new Vector3I(0, -1, 0),
+                position + new Vector3I(0, 0, 1),
+                position + new Vector3I(0, 0, -1)
+            };
+        }
+
+        private bool CanPlaceFoam(Vector3I position)
+        {
+            var grid = block.CubeGrid;
+            var blockAtPosition = grid.GetCubeBlock(position);
+
+            // Foam can be placed if the position is an empty block space (no block present)
+            return blockAtPosition == null;
+        }
+
+        private void AddFoamBlock(string subtypeName, Vector3I position)
+        {
+            var grid = block.CubeGrid; // Get the grid the block is part of
+
+            var armorBlockBuilder = new MyObjectBuilder_CubeBlock
+            {
+                SubtypeName = subtypeName, // Foam block subtype
+                Min = position, // Position where the block will be placed
+                ColorMaskHSV = new SerializableVector3(0, -1, 0) // Foam color
+            };
+
+            armorBlockBuilder.BlockOrientation = new MyBlockOrientation(
+                Base6Directions.Direction.Forward,
+                Base6Directions.Direction.Up);
+
+            grid.AddBlock(armorBlockBuilder, false);
+        }
+
+
+        private void OnBlockDamaged()
+        {
+            // Check if the block has become non-functional
+            if (!block.IsFunctional)
+            {
+                // Play particle and sound effects at the block's position
+                MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("MetalFoamSmoke", block.GetPosition());
+                MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("MetalFoamSound", block.GetPosition());
+
+                // Automatically set the foammeup sync variable to true
+                foammeup.Value = true;
+            }
+        }
+
+
 
         static void CreateTerminalControls()
         {
@@ -159,142 +252,16 @@ namespace Invalid.MetalFoam
             }
         }
 
-        public void NotifyPlayersInRange(string text, Vector3D position, double radius, string font)
-        {
-            BoundingSphereD bound = new BoundingSphereD(position, radius);
-            List<IMyEntity> nearEntities = MyAPIGateway.Entities.GetEntitiesInSphere(ref bound);
-
-            foreach (var entity in nearEntities)
-            {
-                IMyCharacter character = entity as IMyCharacter;
-                if (character != null && character.IsPlayer && bound.Contains(character.GetPosition()) != ContainmentType.Disjoint)
-                {
-                    var notification = MyAPIGateway.Utilities.CreateNotification(text, 1600, font);
-                    notification.Show();
-                }
-            }
-        }
-
-
-        public override void UpdateOnceBeforeFrame()
-        {
-            base.UpdateOnceBeforeFrame();
-            CreateTerminalControls();
-        }
-
-
-        public override void UpdateBeforeSimulation100()
-        {
-            // This method is called approximately every 100 ticks (~1.66 seconds)
-            if (MyAPIGateway.Session.GameplayFrameCounter >= nextLayerTick)
-            {
-                // Ensure currentLayer starts from 0 (center) and expands outwards
-                if (currentLayer <= sphereRadius)
-                {
-                    AddLayer(center, sphereRadius, currentLayer); // Start from center and expand
-                    currentLayer++; // Move to the next layer
-                    nextLayerTick = MyAPIGateway.Session.GameplayFrameCounter + (180 / (sphereRadius + 1)); // Adjust timing as needed
-                }
-                else
-                {
-                    NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME; // Stop updating after complete
-                    RemoveBlock(); // Remove the block after foam generation is complete
-                }
-            }
-        }
-
-        // Handle damage event
-        private void OnBlockDamaged()
-        {
-            if (!block.SlimBlock.IsDestroyed) // Replace with appropriate check for your scenario
-            {
-
-                // Play particle and sound effects at the block's position
-                MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("MetalFoamSmoke", block.GetPosition());
-                MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("MetalFoamSound", block.GetPosition());
-
-                // Proceed with foam generation
-                center = block.Position; // Set the center for sphere generation
-                radius = sphereRadius; // Set the radius
-                currentLayer = 0; // Start from the first layer
-                nextLayerTick = MyAPIGateway.Session.GameplayFrameCounter; // Start immediately
-                NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME; // Begin updates
-
-            }
-        }
-
-
-
-        // This method will handle adding a single layer at a time
-        private void AddLayer(Vector3I center, int radius, int layerIndex)
-        {
-            var grid = block.CubeGrid;
-            Vector3I pos;
-
-            // Calculate the bounds for this layer
-            int layerRadius = layerIndex;  // Directly use layerIndex as radius
-
-            for (int x = -layerRadius; x <= layerRadius; x++)
-            {
-                for (int y = -layerRadius; y <= layerRadius; y++)
-                {
-                    for (int z = -layerRadius; z <= layerRadius; z++)
-                    {
-                        pos = new Vector3I(x, y, z) + center;
-                        double distance = Vector3D.Distance(new Vector3D(pos), new Vector3D(center));
-                        // Adjust the distance check to only include the outer shell of the sphere for each layer
-                        if (distance <= layerRadius && distance > layerRadius - 1)
-                        {
-                            AddArmorBlock("LargeBlockArmorBlock", pos);
-                        }
-                    }
-                }
-            }
-        }
-
-
-        private void AddArmorBlock(string subtypeName, Vector3I position)
-        {
-            var grid = block.CubeGrid; // Get the grid the block is part of
-
-            // Define the block to be added
-            var armorBlockBuilder = new MyObjectBuilder_CubeBlock
-            {
-                SubtypeName = subtypeName, // "LargeBlockArmorBlock" for large grid light armor block
-                Min = position, // Position where the block will be placed
-                ColorMaskHSV = new SerializableVector3(0, -1, 0), // Default color, change as needed
-            };
-
-            // Set the block orientation (facing up by default here)
-            armorBlockBuilder.BlockOrientation = new MyBlockOrientation(
-                Base6Directions.Direction.Forward,
-                Base6Directions.Direction.Up);
-
-            // Create the block on the grid
-            grid.AddBlock(armorBlockBuilder, false);
-
-            // Optionally, check for success and perform actions or notifications
-        }
-
-        private void RemoveBlock()
-        {
-            var grid = block.CubeGrid; // Get the grid the block is part of
-            var slimBlock = block.SlimBlock; // Get the slim version of the block
-
-            // Remove the block from the grid
-            grid.RemoveBlock(slimBlock, true);
-        }
-
-
         public override void Close()
         {
             base.Close();
             if (block != null)
             {
-                // Unregister the damage handler
                 block.SlimBlock.ComponentStack.IsFunctionalChanged -= OnBlockDamaged;
             }
+
         }
 
+      
     }
 }
