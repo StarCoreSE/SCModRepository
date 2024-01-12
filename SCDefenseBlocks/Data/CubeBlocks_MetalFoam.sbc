@@ -9,7 +9,7 @@
             </Id>
             <DisplayName>Metal Foam Decoy</DisplayName>
             <Icon>Textures\GUI\Icons\Cubes\metalfoam.png</Icon>
-            <Description>When damaged, tries to fill in the space around it with Metal Foam (light armor)</Description>
+            <Description>Extremely densely stored material. When activated, spills out fill in the space around it with Metal Foam (light armor). Activates when damaged below functional.</Description>
             <CubeSize>Large</CubeSize>
             <BlockTopology>TriangleMesh</BlockTopology>
             <Size x="1" y="1" z="1" />

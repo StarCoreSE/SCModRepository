@@ -120,6 +120,7 @@ namespace Invalid.MetalFoam
         {
             var grid = block.CubeGrid;
             HashSet<Vector3I> newFoamPositions = new HashSet<Vector3I>();
+            bool blockAdded = false;  // Flag to track if any foam block was added
 
             foreach (var foamBlock in currentFoamPositions)
             {
@@ -131,6 +132,7 @@ namespace Invalid.MetalFoam
                         if (Vector3I.DistanceManhattan(center, neighbor) <= sphereRadius)
                         {
                             newFoamPositions.Add(neighbor);
+                            blockAdded = true;  // Set flag to true if a block is added
                         }
                     }
                 }
@@ -142,7 +144,14 @@ namespace Invalid.MetalFoam
             }
 
             currentFoamPositions.UnionWith(newFoamPositions);
+
+            // Play the sound effect once if any block was added in this tick
+            if (blockAdded)
+            {
+                MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("MetalFoamSound", block.GetPosition());
+            }
         }
+
 
 
         private IEnumerable<Vector3I> GetNeighboringBlocks(Vector3I position)
