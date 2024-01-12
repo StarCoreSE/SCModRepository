@@ -25,12 +25,16 @@ namespace Invalid.MetalFoam
     public class MetalFoamGenerator : MyGameLogicComponent, IMyEventProxy
     {
         private IMyCubeBlock block;
-        private const int sphereRadius = 5;
+        //private const int sphereRadius = 7;
         private int nextLayerTick = 0;
         private HashSet<Vector3I> currentFoamPositions = new HashSet<Vector3I>();
         private Vector3I center;  // Added this line
         private MySync<bool, SyncDirection.BothWays> foammeup;
         static bool m_controlsCreated = false;
+
+        private int totalFoamBlocksAdded = 0;  // Counter for the number of foam blocks added
+        private const int maxFoamBlocks = 1000;  // Maximum number of foam blocks allowed
+
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
@@ -63,13 +67,13 @@ namespace Invalid.MetalFoam
             currentFoamPositions.Add(block.Position);
             NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME;
 
-            NotifyPlayers("Manual Foam generation started!", MyFontEnum.Green);
+            NotifyPlayers("Foam generation started!", MyFontEnum.Green);
             CreateEffects();
         }
         private void StopFoamGeneration()
         {
             NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME;
-            NotifyPlayers("Manual Foam generation stopped!", MyFontEnum.Red);
+            NotifyPlayers("Foam generation stopped!", MyFontEnum.Red);
         }
 
         private void NotifyPlayers(string message, string font)
@@ -124,17 +128,32 @@ namespace Invalid.MetalFoam
 
             foreach (var foamBlock in currentFoamPositions)
             {
+                if (totalFoamBlocksAdded >= maxFoamBlocks)
+                {
+                    // If the maximum number of foam blocks has been reached, stop adding more
+                    break;
+                }
+
                 foreach (var neighbor in GetNeighboringBlocks(foamBlock))
                 {
                     if (CanPlaceFoam(neighbor) && !currentFoamPositions.Contains(neighbor))
                     {
-                        // Check if the new position is within the maximum allowed distance
-                        if (Vector3I.DistanceManhattan(center, neighbor) <= sphereRadius)
+                        newFoamPositions.Add(neighbor);
+                        blockAdded = true;  // Set flag to true if a block is added
+                        totalFoamBlocksAdded++;  // Increment the counter for each block added
+
+                        if (totalFoamBlocksAdded >= maxFoamBlocks)
                         {
-                            newFoamPositions.Add(neighbor);
-                            blockAdded = true;  // Set flag to true if a block is added
+                            // If the maximum number of foam blocks has been reached, stop adding more
+                            break;
                         }
                     }
+                }
+
+                // Early exit if max blocks have been added to prevent further unnecessary iterations
+                if (totalFoamBlocksAdded >= maxFoamBlocks)
+                {
+                    break;
                 }
             }
 
@@ -151,6 +170,7 @@ namespace Invalid.MetalFoam
                 MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("MetalFoamSound", block.GetPosition());
             }
         }
+
 
 
 
