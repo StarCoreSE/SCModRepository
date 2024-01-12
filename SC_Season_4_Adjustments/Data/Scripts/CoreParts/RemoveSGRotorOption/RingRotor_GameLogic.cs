@@ -16,7 +16,7 @@ namespace StarCore.RemoveRingSGOptions
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_MotorAdvancedStator), false, "TRR_LG_5x5x1_TR_Stator", "TRR_LG_7x7x1_TR_Stator", "TRR_LG_9x9x1_TR_Stator", "TRR_LG_11x11x1_TR_Stator")]
     public class OptionRemoval_SGRingHead : MyGameLogicComponent
     {
-        private IMyCubeBlock? block;
+        private IMyCubeBlock block;
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
