@@ -639,16 +639,43 @@
 
 
 
+<!-- Tempest Sounds-->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>TempestFiresound_01</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <PitchVariation>5</PitchVariation>
+      <Volume>0.8</Volume>
+      <DistantSounds>
+        <DistantSound DistanceCrossFade="40" Distance="800" Sound = "TempestFiresound_01_Dist" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Hurricane_Firesound_01.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
 
-
-
-
-
-
-
-
-
-
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>TempestFiresound_01_Dist</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <Volume>0.9</Volume>
+      <PitchVariation>80</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Hurricane_Firesound_01_Distant.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
 
   </Sounds>
 </Definitions>
