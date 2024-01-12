@@ -686,7 +686,7 @@ namespace klime.PointCheck
             };
             integretyMessage = new HudAPIv2.HUDMessage(Scale: 1.15f, Font: "BI_SEOutlined", Message: new StringBuilder(""), Origin: new Vector2D(.51, .95), HideHud: false, Blend: BlendTypeEnum.PostPP)
             {
-                Visible = false,
+                Visible = true,
                 //InitialColor = Color.Orange
             };
             timerMessage = new HudAPIv2.HUDMessage(Scale: 1.2f, Font: "BI_SEOutlined", Message: new StringBuilder(""), Origin: new Vector2D(0.35, .99), HideHud: false, Shadowing: true, Blend: BlendTypeEnum.PostPP)
@@ -711,9 +711,17 @@ namespace klime.PointCheck
         }
         // Get the sphere model based on the given cap color
 
-
+        bool doClientRequest = true;
         public override void UpdateAfterSimulation()
         {
+            // Send request to server for tracked grids. Why is it in here? so that integretymessage is exist.
+            if (doClientRequest && !MyAPIGateway.Session.IsServer)
+            {
+                Static.MyNetwork.TransmitToServer(new SyncRequestPacket(), false);
+                MyAPIGateway.Utilities.ShowNotification("ShipTracker: Hud visibility set to " + integretyMessage.Visible);
+                doClientRequest = false;
+            }
+
             temp_LocalTimer++; PointCheckHelpers.timer++; if (PointCheckHelpers.timer >= 144000) { PointCheckHelpers.timer = 0; temp_LocalTimer = 0; temp_ServerTimer = 0; }
             if (joinInit == true)
             {
