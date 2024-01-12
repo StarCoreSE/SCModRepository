@@ -84,7 +84,7 @@
 				[Reaches MaxRange in 120 ticks]
 				[Hitscan]
 			</Description>
-			<Icon>Textures\GUI\Icons\Cubes\Hellfire.dds</Icon>
+			<Icon>Textures\GUI\Icons\Hellfire.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<GuiVisible>true</GuiVisible>
 			<BlockTopology>TriangleMesh</BlockTopology>
