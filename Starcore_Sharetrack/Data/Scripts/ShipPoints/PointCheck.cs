@@ -718,7 +718,6 @@ namespace klime.PointCheck
             if (doClientRequest && !MyAPIGateway.Session.IsServer)
             {
                 Static.MyNetwork.TransmitToServer(new SyncRequestPacket(), false);
-                MyAPIGateway.Utilities.ShowNotification("ShipTracker: Hud visibility set to " + integretyMessage.Visible);
                 doClientRequest = false;
             }
 
