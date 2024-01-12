@@ -494,12 +494,12 @@ namespace StarCore.StructuralIntegrity
                         SIGenBlock.CubeGrid.Physics.LinearVelocity = oppositeVector;
                     }
 
-                    SiegeTimer = SiegeTimer--;
-                    CountSiegeDisplayTimer = CountSiegeDisplayTimer--;
+                    SiegeTimer = SiegeTimer - 1;
+                    CountSiegeDisplayTimer = CountSiegeDisplayTimer - 1;
                     if (CountSiegeDisplayTimer <= 0)
                     {
                         CountSiegeDisplayTimer = SiegeDisplayTimer;
-                        SiegeVisibleTimer = SiegeVisibleTimer--;
+                        SiegeVisibleTimer = SiegeVisibleTimer - 1;
                         DisplayMessageToNearPlayers(0);
                     }
                 }
@@ -590,7 +590,10 @@ namespace StarCore.StructuralIntegrity
                 if (loadedSettings != null)
                 {
                     Settings.FieldPower = loadedSettings.FieldPower;
+                    FieldPowerSync.Value = loadedSettings.FieldPower;
+
                     Settings.GridModifier = loadedSettings.GridModifier;
+                    GridModifierSync.Value = loadedSettings.GridModifier;
                     return true;
                 }
             }
@@ -724,7 +727,7 @@ namespace StarCore.StructuralIntegrity
                         logic.SetPowerStatus($"Block Disabled", 1500, MyFontEnum.Red);
                         return;
                     }
-                    logic.CurrentFieldPower = logic.CurrentFieldPower++;
+                    logic.CurrentFieldPower = logic.CurrentFieldPower + 1;
                     logic.CurrentFieldPower = MathHelper.Clamp(logic.CurrentFieldPower, 0f, 30f);
                 }
             };
@@ -764,7 +767,7 @@ namespace StarCore.StructuralIntegrity
                         logic.SetPowerStatus($"Block Disabled", 1500, MyFontEnum.Red);
                         return;
                     }
-                    logic.CurrentFieldPower = logic.CurrentFieldPower--;
+                    logic.CurrentFieldPower = logic.CurrentFieldPower - 1;
                     logic.CurrentFieldPower = MathHelper.Clamp(logic.CurrentFieldPower, 0f, 30f);
                 }
             };
