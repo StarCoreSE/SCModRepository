@@ -109,7 +109,6 @@ namespace Invalid.MetalFoam
                 var action = MyAPIGateway.TerminalControls.CreateAction<IMyDecoy>("MetalFoam_Action_StartGeneration");
                 action.Icon = @"Textures\GUI\Icons\Actions\Toggle.dds"; // Path to your icon or a default icon
                 action.Name = new StringBuilder("RELEASE THE FOAM");
-                action.ValidForGroups = true;
                 action.Writer = (block, stringBuilder) =>
                 {
                     var generator = block.GameLogic.GetAs<MetalFoamGenerator>();
@@ -127,7 +126,7 @@ namespace Invalid.MetalFoam
                     }
                 };
                 action.Enabled = (block) => block.GameLogic is MetalFoamGenerator;
-                action.ValidForGroups = false; // Set true if you want this action to be available when selecting a group of blocks
+                action.ValidForGroups = true; // Set true if you want this action to be available when selecting a group of blocks
 
                 MyAPIGateway.TerminalControls.AddAction<IMyDecoy>(action);
             }
