@@ -25,7 +25,7 @@ namespace Invalid.MetalFoam
     public class MetalFoamGenerator : MyGameLogicComponent, IMyEventProxy
     {
         private IMyCubeBlock block;
-        private const int sphereRadius = 4;
+        private const int sphereRadius = 5;
         private int nextLayerTick = 0;
         private HashSet<Vector3I> currentFoamPositions = new HashSet<Vector3I>();
         private Vector3I center;  // Added this line
@@ -255,13 +255,21 @@ namespace Invalid.MetalFoam
         public override void Close()
         {
             base.Close();
+
+            // Unsubscribe from the foammeup ValueChanged event
+            if (foammeup != null)
+            {
+                foammeup.ValueChanged -= foammeup_ValueChanged;
+            }
+
+            // Unsubscribe from the IsFunctionalChanged event
             if (block != null)
             {
                 block.SlimBlock.ComponentStack.IsFunctionalChanged -= OnBlockDamaged;
             }
-
         }
 
-      
+
+
     }
 }
