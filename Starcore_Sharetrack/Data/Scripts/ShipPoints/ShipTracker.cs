@@ -598,6 +598,10 @@ namespace klime.PointCheck
                     t_N = "Flares";
                     mCs = 0.25f;
                     break;
+                case "Chiasim Arc Emitter":
+                    t_N = "Chiasim Arc Emitter";
+                    mCs = 0.15f;
+                    break;
             }
         }
 
