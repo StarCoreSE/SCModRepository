@@ -557,15 +557,6 @@ namespace klime.PointCheck
                     t_N = "Slinger";
                     mCs = 0f;
                     break;
-                case "Slinger AC 150mm Sloped 30":
-                case "Slinger AC 150mm Sloped 45":
-                case "Slinger AC 150mm Gantry Style":
-                case "Slinger AC 150mm Sloped 45 Gantry":
-                case "Slinger AC 150mm":
-                case "Slinger":
-                    t_N = "Slinger";
-                    mCs = 0f;
-                    break;
                 case "Phaethon Plasma Pulser":
                     t_N = "Phaethon Plasma Pulser";
                     mCs = 0.15f;
