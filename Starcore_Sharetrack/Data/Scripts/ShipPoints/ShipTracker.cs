@@ -557,6 +557,47 @@ namespace klime.PointCheck
                     t_N = "Slinger";
                     mCs = 0f;
                     break;
+                case "Slinger AC 150mm Sloped 30":
+                case "Slinger AC 150mm Sloped 45":
+                case "Slinger AC 150mm Gantry Style":
+                case "Slinger AC 150mm Sloped 45 Gantry":
+                case "Slinger AC 150mm":
+                case "Slinger":
+                    t_N = "Slinger";
+                    mCs = 0f;
+                    break;
+                case "Phaethon Plasma Pulser":
+                    t_N = "Phaethon Plasma Pulser";
+                    mCs = 0.15f;
+                    break;
+                 case "UNN Heavy Torpedo Launcher":
+                    t_N = "UNN Heavy Torpedo Launcher";
+                    mCs = 0.15f;
+                    break;
+                 case "Short Range Missile 8":
+                    t_N = "Short Range Missile 8";
+                    mCs = 0.15f;
+                    break;
+                 case "Arrow IV Strategic Missile 5":
+                    t_N = "Arrow IV Strategic Missile 5";
+                    mCs = 0.15f;
+                    break;
+                case "Tartarus VIII":
+                    t_N = "Tartarus VIII";
+                    mCs = 0.15f;
+                    break;
+                case "Cocytis IX":
+                    t_N = "Cocytis IX";
+                    mCs = 0.15f;
+                    break;
+                case "MCRN Torpedo Launcher":
+                    t_N = "MCRN Torpedo Launcher";
+                    mCs = 0.15f;
+                    break;
+                case "Flares":
+                    t_N = "Flares";
+                    mCs = 0.25f;
+                    break;
             }
         }
 
