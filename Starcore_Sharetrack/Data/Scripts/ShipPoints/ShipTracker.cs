@@ -601,10 +601,6 @@ namespace klime.PointCheck
                     t_N = "Large Laser";
                     mCs = 0.15f;
                     break;
-                case "Reinforced Blastplate":
-                    t_N = "Reinforced Blastplate";
-                    mCs = 0.25f;
-                    break;
             }
         }
 
