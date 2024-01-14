@@ -569,16 +569,16 @@ namespace klime.PointCheck
                     t_N = "Short Range Missile 8";
                     mCs = 0.15f;
                     break;
-                 case "Arrow IV Strategic Missile 5":
-                    t_N = "Arrow IV Strategic Missile 5";
+                 case "Arrow IV":
+                    t_N = "Arrow IV";
                     mCs = 0.15f;
                     break;
-                case "Tartarus VIII":
-                    t_N = "Tartarus VIII";
+                case "Tartarus":
+                    t_N = "Tartarus";
                     mCs = 0.15f;
                     break;
-                case "Cocytis IX":
-                    t_N = "Cocytis IX";
+                case "Cocytis":
+                    t_N = "Cocytis";
                     mCs = 0.15f;
                     break;
                 case "MCRN Torpedo Launcher":
