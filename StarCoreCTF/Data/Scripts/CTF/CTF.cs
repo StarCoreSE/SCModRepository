@@ -26,6 +26,8 @@ namespace Klime.CTF
     public class CTF : MySessionComponentBase
     {
         private static readonly StringBuilder GripBracketConst = new StringBuilder("[       ]");
+        private static readonly StringBuilder DMGResistConst = new StringBuilder("DMG Resist!");
+
 
         List<Flag> allflags = new List<Flag>();
         GameState gamestate;
@@ -917,22 +919,31 @@ namespace Klime.CTF
                                         {
                                             if (faction_tag != "")
                                             {
+                                                IMyCockpit cockpit = (IMyCockpit)controlledEntity;
+                                                long gridEntityId = cockpit.CubeGrid.EntityId;
                                                 subflag.state = FlagState.Active;
                                                 ShowANotificationPlease("flag set to active 1");
                                                 subflag.carrying_player_id = player.IdentityId;
                                                 subflag.carrying_player = player;
                                                 SendEvent(player.DisplayName + " grabbed the flag!", InfoType.FlagTaken);
+                                                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 0.5f);
+
                                             }
                                         }
                                         else
                                         {
                                             if (faction_tag != "" && faction_tag != subflag.owning_faction.Tag)
                                             {
+
+                                                IMyCockpit cockpit = (IMyCockpit)controlledEntity;
+                                                long gridEntityId = cockpit.CubeGrid.EntityId;
                                                 subflag.state = FlagState.Active;
                                                 ShowANotificationPlease("flag set to active 2");
                                                 subflag.carrying_player_id = player.IdentityId;
                                                 subflag.carrying_player = player;
                                                 SendEvent(player.DisplayName + " stole " + subflag.owning_faction.Tag + " flag!", InfoType.FlagTaken);
+                                                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 0.5f);
+
                                             }
                                         }
                                     }
@@ -1031,7 +1042,12 @@ namespace Klime.CTF
                                         }
 
 
-
+                                        //give the flagbearer damage resistance to their grid!
+                                        if (controlledEntity is IMyCockpit)
+                                        {
+                                            
+                                            MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 0.5f); // Applying 0.5x damage modifier
+                                        }
 
 
                                         //    MathHelper.Smooth(regen_temp, subflag.grip_strength);
@@ -1044,6 +1060,7 @@ namespace Klime.CTF
                                             subflag.state = FlagState.Dropped;
                                             ShowANotificationPlease("flag dropped 2");
                                             SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " the flag!", InfoType.FlagDropped);
+                                            MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 1.0f); // Applying 0.5x damage modifier
 
                                             playerDropTimes[subflag.carrying_player.IdentityId] = timer;
                                         }
@@ -1055,6 +1072,9 @@ namespace Klime.CTF
                                         reuse_matrix.Translation += reuse_matrix.Backward * 0.4f + reuse_matrix.Up * 1.5f + reuse_matrix.Left * 0.25f;
                                         subflag.flag_entity.WorldMatrix = reuse_matrix;
 
+                                        IMyCockpit cockpit = (IMyCockpit)controlledEntity;
+                                        long gridEntityId = cockpit.CubeGrid.EntityId;
+
                                         // Check for cockpit and drop flag if conditions are met
                                         if (drop_in_cockpit && !pickup_in_cockpit)
                                         {
@@ -1063,6 +1083,8 @@ namespace Klime.CTF
                                                 subflag.state = FlagState.Dropped;
                                                 ShowANotificationPlease("flag dropped 3");
                                                 SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag!", InfoType.FlagDropped);
+                                                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 1.0f); 
+
                                             }
                                         }
 
@@ -1075,6 +1097,8 @@ namespace Klime.CTF
                                                 subflag.state = FlagState.Dropped;
                                                 ShowANotificationPlease("flag dropped 4");
                                                 SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag!", InfoType.FlagDropped);
+                                                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 1.0f);
+
                                             }
                                         }
 
@@ -1158,15 +1182,22 @@ namespace Klime.CTF
                                     }
                                     else
                                     {
+                                        IMyCockpit cockpit = (IMyCockpit)controlledEntity;
+                                        long gridEntityId = cockpit.CubeGrid.EntityId;
+
                                         subflag.state = FlagState.Dropped;
                                         ShowANotificationPlease("flag dropped 4");
                                         if (subflag.flag_type == FlagType.Single)
                                         {
                                             SendEvent(subflag.carrying_player.DisplayName + " dropped the flag!", InfoType.FlagDropped);
+                                            MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 1.0f);
+
                                         }
                                         else
                                         {
                                             SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag!", InfoType.FlagDropped);
+                                            MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 1.0f);
+
                                         }
                                     }
 
@@ -1305,6 +1336,7 @@ namespace Klime.CTF
                                                 subflag.carrying_player = player;
                                                 subflag.current_drop_life = 0;
                                                 SendEvent(player.DisplayName + " grabbed the flag!", InfoType.FlagTaken);
+                                               // MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 0.5f);
                                             }
                                         }
                                         else
@@ -1317,6 +1349,8 @@ namespace Klime.CTF
                                                 subflag.carrying_player = player;
                                                 subflag.current_drop_life = 0;
                                                 SendEvent(player.DisplayName + " stole " + subflag.owning_faction.Tag + " flag!", InfoType.FlagTaken);
+                                                //MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 0.5f);
+
                                             }
                                         }
                                     }
@@ -1492,8 +1526,8 @@ namespace Klime.CTF
 
                         // You will need to adjust these coordinates based on where the "RED" and "BLU" text are.
                         // For example, if "RED" is centered at X = 0.30, you might use X = 0.28 for the grip bar.
-                        Vector2D redPosition = new Vector2D(-0.33, 0.85); // Position directly below the "RED" text
-                        Vector2D bluePosition = new Vector2D(-0.43, 0.85); // Position directly below the "BLU" text
+                        Vector2D bluePosition = new Vector2D(-0.33, 0.85); // Position directly below the "RED" text
+                        Vector2D redPosition = new Vector2D(-0.43, 0.85); // Position directly below the "BLU" text
 
                         StringBuilder redGripSb = new StringBuilder();
                         redGripSb.Append(redGripBar);
@@ -1510,6 +1544,11 @@ namespace Klime.CTF
                             var redGripBracket = new HudAPIv2.HUDMessage(GripBracketConst, redPosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
                             redGripBracket.Origin -= redGripBracket.GetTextLength() * Vector2D.UnitX / 10;
                             redGripBracket.InitialColor = Color.Red;
+
+                            var redGripDmgResistWarning = new HudAPIv2.HUDMessage(DMGResistConst, redPosition, TimeToLive: 2, Scale: 1f, Blend: BlendTypeEnum.PostPP);
+                            redGripDmgResistWarning.InitialColor = Color.Red;
+                            redGripDmgResistWarning.Origin -= redGripBracket.GetTextLength() * (Vector2D.UnitX / 10);
+
                         }
 
                         if (blueFlag.state == FlagState.Active)
@@ -1517,6 +1556,11 @@ namespace Klime.CTF
                             var blueGripBracket = new HudAPIv2.HUDMessage(GripBracketConst, bluePosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
                             blueGripBracket.Origin -= blueGripBracket.GetTextLength() * Vector2D.UnitX / 10;
                             blueGripBracket.InitialColor = Color.Blue;
+
+                            var bluGripDmgResistWarning = new HudAPIv2.HUDMessage(DMGResistConst, bluePosition, TimeToLive: 2, Scale: 1f, Blend: BlendTypeEnum.PostPP);
+                            bluGripDmgResistWarning.Origin -= bluGripDmgResistWarning.GetTextLength() * (Vector2D.UnitX / 10);
+                            bluGripDmgResistWarning.InitialColor = Color.Blue;
+
                         }
                     }
 
