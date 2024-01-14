@@ -15,9 +15,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\PM_LG_BLASTPLATE_BLASTPLATE.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="750" />
-       		 	<Component Subtype="MetalGrid" Count="2500" />
-        		<Component Subtype="SteelPlate" Count="6750" />
+				<Component Subtype="SteelPlate" Count="1500" />
+       		 	<Component Subtype="MetalGrid" Count="5000" />
+        		<Component Subtype="SteelPlate" Count="13500" />
 			</Components>
 			<CriticalComponent Subtype="SteelPlate" Index="0"/>
 			<MountPoints>
@@ -33,7 +33,7 @@
       		<EdgeType>Heavy</EdgeType>
       		<BuildTimeSeconds>1800</BuildTimeSeconds>
       		<DisassembleRatio>0.5</DisassembleRatio>
-      		<GeneralDamageMultiplier>0.2</GeneralDamageMultiplier>
+      		<GeneralDamageMultiplier>0.4</GeneralDamageMultiplier>
       		<PCU>1</PCU>
       		<PCUConsole>2</PCUConsole>
       		<IsAirTight>true</IsAirTight>

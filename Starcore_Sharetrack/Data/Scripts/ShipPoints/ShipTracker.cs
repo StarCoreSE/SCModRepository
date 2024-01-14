@@ -565,20 +565,20 @@ namespace klime.PointCheck
                     t_N = "UNN Heavy Torpedo Launcher";
                     mCs = 0.15f;
                     break;
-                 case "Short Range Missile 8":
-                    t_N = "Short Range Missile 8";
+                 case "SRM-8":
+                    t_N = "SRM-8";
                     mCs = 0.15f;
                     break;
-                 case "Arrow IV":
-                    t_N = "Arrow IV";
+                 case "Starcore Arrow-IV Launcher":
+                    t_N = "Starcore Arrow-IV Launcher";
                     mCs = 0.15f;
                     break;
-                case "Tartarus":
-                    t_N = "Tartarus";
+                case "Tartarus VIII":
+                    t_N = "Tartarus VIII";
                     mCs = 0.15f;
                     break;
-                case "Cocytis":
-                    t_N = "Cocytis";
+                case "Cocytus IX":
+                    t_N = "Cocytus IX";
                     mCs = 0.15f;
                     break;
                 case "MCRN Torpedo Launcher":
@@ -589,8 +589,16 @@ namespace klime.PointCheck
                     t_N = "Flares";
                     mCs = 0.25f;
                     break;
-                case "Chiasim Arc Emitter":
-                    t_N = "Chiasim Arc Emitter";
+                case "Chiasim [Arc Emitter]":
+                    t_N = "Chiasim [Arc Emitter]";
+                    mCs = 0.15f;
+                    break;
+                case "Medium Laser":
+                    t_N = "Medium Laser";
+                    mCs = 0.15f;
+                    break;
+                case "Large Laser":
+                    t_N = "Large Laser";
                     mCs = 0.15f;
                     break;
             }
