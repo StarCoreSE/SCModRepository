@@ -91,8 +91,8 @@ namespace PickMe.Structure
                     x.Close();
                     x.Close();
 
-                    teamR = new Team(Session.Instance.factionControl.redFactionID, new Vector3D(0, 9500, 0));
-                    teamB = new Team(Session.Instance.factionControl.blueFactionID, new Vector3D(0, -9500, 0));
+                    teamR = new Team(Session.Instance.factionControl.redFactionID, new Vector3D(9500, 0, 0));
+                    teamB = new Team(Session.Instance.factionControl.blueFactionID, new Vector3D(-9500, 0, 0));
                 }
 
                 foreach(var grid in field.GridValuePairs.OrderByDescending(x => x.Key.Value))
@@ -140,10 +140,10 @@ namespace PickMe.Structure
                 }
 
                 if (teamB == null)
-                    teamB = new Team(Session.Instance.factionControl.blueFactionID, new Vector3D(0, 9500, 0));
+                    teamB = new Team(Session.Instance.factionControl.blueFactionID, new Vector3D(9500, 0, 0));
 
                 if (teamR == null)
-                    teamR = new Team(Session.Instance.factionControl.redFactionID, new Vector3D(0, -9500, 0));
+                    teamR = new Team(Session.Instance.factionControl.redFactionID, new Vector3D(-9500, 0, 0));
 
                 teamB.Recount(tempBlue);
                 teamR.Recount(tempRed);
