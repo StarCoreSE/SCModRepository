@@ -26,7 +26,7 @@ namespace Klime.CTF
     public class CTF : MySessionComponentBase
     {
         private static readonly StringBuilder GripBracketConst = new StringBuilder("[       ]");
-        private static readonly StringBuilder DMGResistConst = new StringBuilder("DMG Resist!");
+        private static readonly StringBuilder DMGResistConst = new StringBuilder("RESIST+");
 
 
         List<Flag> allflags = new List<Flag>();
@@ -1539,15 +1539,17 @@ namespace Klime.CTF
                         var blueGripMessage = new HudAPIv2.HUDMessage(blueGripSb, bluePosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
                         blueGripMessage.InitialColor = Color.Blue;
 
+                        const double VerticalOffsetForDamageResistText = +0.03; // Adjust this value as needed
+
                         if (redFlag.state == FlagState.Active)
                         {
                             var redGripBracket = new HudAPIv2.HUDMessage(GripBracketConst, redPosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
                             redGripBracket.Origin -= redGripBracket.GetTextLength() * Vector2D.UnitX / 10;
                             redGripBracket.InitialColor = Color.Red;
 
-                            var redGripDmgResistWarning = new HudAPIv2.HUDMessage(DMGResistConst, redPosition, TimeToLive: 2, Scale: 1f, Blend: BlendTypeEnum.PostPP);
+                            Vector2D redDmgResistPosition = new Vector2D(redPosition.X, redPosition.Y + VerticalOffsetForDamageResistText);
+                            var redGripDmgResistWarning = new HudAPIv2.HUDMessage(DMGResistConst, redDmgResistPosition, TimeToLive: 2, Scale: 1f, Blend: BlendTypeEnum.PostPP);
                             redGripDmgResistWarning.InitialColor = Color.Red;
-                            redGripDmgResistWarning.Origin -= redGripBracket.GetTextLength() * (Vector2D.UnitX / 10);
 
                         }
 
@@ -1557,8 +1559,8 @@ namespace Klime.CTF
                             blueGripBracket.Origin -= blueGripBracket.GetTextLength() * Vector2D.UnitX / 10;
                             blueGripBracket.InitialColor = Color.Blue;
 
-                            var bluGripDmgResistWarning = new HudAPIv2.HUDMessage(DMGResistConst, bluePosition, TimeToLive: 2, Scale: 1f, Blend: BlendTypeEnum.PostPP);
-                            bluGripDmgResistWarning.Origin -= bluGripDmgResistWarning.GetTextLength() * (Vector2D.UnitX / 10);
+                            Vector2D blueDmgResistPosition = new Vector2D(bluePosition.X, bluePosition.Y + VerticalOffsetForDamageResistText);
+                            var bluGripDmgResistWarning = new HudAPIv2.HUDMessage(DMGResistConst, blueDmgResistPosition, TimeToLive: 2, Scale: 1f, Blend: BlendTypeEnum.PostPP);
                             bluGripDmgResistWarning.InitialColor = Color.Blue;
 
                         }
