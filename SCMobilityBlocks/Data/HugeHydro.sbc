@@ -33,6 +33,8 @@
                 <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="5" />
                 <MountPoint Side="Left" StartX="0" StartY="0" EndX="5" EndY="5" />
                 <MountPoint Side="Top" StartX="0" StartY="0" EndX="5" EndY="5" />
+				<MountPoint Side="Front" StartX="0" StartY="0" EndX="5" EndY="5" />
+
             </MountPoints>
             <VoxelPlacement>
                 <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
