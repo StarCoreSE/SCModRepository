@@ -88,14 +88,14 @@ namespace YourModNamespace
             BoundingBoxD blueBox = new BoundingBoxD(-halfExtents, halfExtents);
             Color specialLineColor = CalculateSpecialLineColor(distanceToOrigin); // Calculate the special line color
 
-            // Separate distance check for the special 7500 unit line
-            if (distanceToOrigin >= 9000 && distanceToOrigin < 10000)
+            // Check if the player is within 10km. If so, skip drawing the special line.
+            if (distanceToOrigin < 10000)
             {
-                Vector3D specialWallPosition = Vector3D.Zero - (directionToOrigin * 10000);
-                DrawBox(blueBox, specialWallPosition, BlueBoxColor, rotationMatrix);
-                DrawPerpendicularPlane(specialWallPosition, rotationMatrix, 500, 0.1, specialLineColor);
+                return;
             }
-            else if (distanceToOrigin >= 10000 && distanceToOrigin < 12500)
+
+            // Draw the less transparent panel if the player is beyond 10km but within 12.5km.
+            if (distanceToOrigin >= 10000 && distanceToOrigin < 12500)
             {
                 Vector3D specialWallPosition = Vector3D.Zero - (directionToOrigin * 10000);
                 DrawBox(blueBox, specialWallPosition, BlueBoxColor, rotationMatrix);
@@ -122,6 +122,7 @@ namespace YourModNamespace
                 }
             }
         }
+
 
         private static Color CalculateSpecialLineColor(double distanceToOrigin)
         {
