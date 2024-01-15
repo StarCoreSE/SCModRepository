@@ -63,51 +63,56 @@ namespace PickMe.Structure
 
         public void Teleport()
         {
-            if(Ships != null)
+            if (Ships != null && Ships.Count > 0)
             {
-                if(Ships.Count > 0)
+                Vector3D arenaCenter = new Vector3D(/* center coordinates */); // Define the center of the arena
+
+                int count = 0;
+                foreach (var grid in Ships)
                 {
-                    int count = 0;
-                    foreach(var grid in Ships)
+                    Vector3D directionToCenter = Vector3D.Normalize(Spawn - arenaCenter);
+                    Vector3D shipTangent = Vector3D.Cross(directionToCenter, Vector3D.Up); // Calculate the tangent vector
+                    Vector3D shipSpawn = Spawn + shipTangent * 200 * count; // Adjust spawn position
+
+                    MatrixD shipWorldMat = new MatrixD
                     {
-                        Vector3D shipSpawn = Spawn + new Vector3D(200 * count, 0, 0);
-                        Vector3D shipNormal = new Vector3D(100, 0, 0);
-                        Vector3D shipTangent = new Vector3D(0, 100, 0);
-                        MatrixD shipWorldMat = new MatrixD();
-                        shipWorldMat.Translation = shipSpawn;
-                        shipWorldMat.Forward = shipTangent;
-                        shipWorldMat.Up = shipNormal;
-                        grid.construct.First().Teleport(shipWorldMat);
-                        count++;
-                        MyAPIGateway.Session.Factions.KickMember(Session.Instance.factionControl.neutralFactionID, grid.Owner);
-                        MyAPIGateway.Session.Factions.SendJoinRequest(Faction.FactionId, grid.Owner);
-                        tempPlayers = new List<IMyPlayer>();
-                        MyAPIGateway.Players.GetPlayers(tempPlayers);
-                        foreach(var player in tempPlayers)
+                        Translation = shipSpawn,
+                        Forward = shipTangent,
+                        Up = Vector3D.Up
+                    };
+
+                    grid.construct.First().Teleport(shipWorldMat);
+
+                    // Kick from neutral faction and join team faction
+                    MyAPIGateway.Session.Factions.KickMember(Session.Instance.factionControl.neutralFactionID, grid.Owner);
+                    MyAPIGateway.Session.Factions.SendJoinRequest(Faction.FactionId, grid.Owner);
+
+                    tempPlayers = new List<IMyPlayer>();
+                    MyAPIGateway.Players.GetPlayers(tempPlayers);
+                    foreach (var player in tempPlayers)
+                    {
+                        if (player.IdentityId == grid.Owner)
                         {
-                            if(player.IdentityId == grid.Owner)
+                            Vector3D playerSpawn = shipSpawn + new Vector3D(0, 0, 200); // Adjust player spawn position
+                            MatrixD playerWorldMat = new MatrixD
                             {
-                                Vector3D playerSpawn = Spawn + new Vector3D(200 * count, 0, 200);
-                                Vector3D playerNormal = new Vector3D(100, 0, 0);
-                                Vector3D playerTangent = new Vector3D(0, 100, 0);
-                                MatrixD playerWorldMat = new MatrixD();
-                                playerWorldMat.Translation = playerSpawn;
-                                playerWorldMat.Forward = playerTangent;
-                                playerWorldMat.Up = playerNormal;
-                                player.Character.SetPosition(playerSpawn);
-                                player.Character.Teleport(playerWorldMat);
-                            }
-                            grid.construct.First().Teleport(shipWorldMat);
+                                Translation = playerSpawn,
+                                Forward = shipTangent,
+                                Up = Vector3D.Up
+                            };
+
+                            player.Character.SetPosition(playerSpawn);
+                            player.Character.Teleport(playerWorldMat);
                         }
-                        tempPlayers.Clear();
                     }
+
+                    tempPlayers.Clear();
+                    count++;
                 }
-                else
-                {
-                    MyAPIGateway.Utilities.ShowNotification("No ships found");
-                    return;
-                }
-                
+            }
+            else
+            {
+                MyAPIGateway.Utilities.ShowNotification("No ships found");
             }
         }
 
