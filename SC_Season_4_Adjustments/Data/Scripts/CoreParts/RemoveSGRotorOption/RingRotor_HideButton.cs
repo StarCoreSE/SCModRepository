@@ -34,7 +34,7 @@ namespace StarCore.RemoveRingSGOptions
             {
                 switch(c.Id)
                 {
-                    case "AddSmallRotorTopPart":
+                    case "AddSmallHingeTopPart":
                     {
                         c.Visible = RingRotor_TerminalChainedDelegate.Create(c.Visible, AppendedCondition); // hides
                         break;
@@ -52,7 +52,7 @@ namespace StarCore.RemoveRingSGOptions
             {
                 switch(a.Id)
                 {
-                    case "AddSmallRotorTopPart":
+                    case "AddSmallHingeTopPart":
                     {
                         a.Enabled = RingRotor_TerminalChainedDelegate.Create(a.Enabled, AppendedCondition);
                         break;
