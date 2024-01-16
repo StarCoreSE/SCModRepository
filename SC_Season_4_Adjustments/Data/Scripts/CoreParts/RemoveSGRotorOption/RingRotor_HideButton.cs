@@ -31,13 +31,11 @@ namespace StarCore.RemoveRingSGOptions
             List<IMyTerminalControl> controls;
             MyAPIGateway.TerminalControls.GetControls<IMyMotorAdvancedStator>(out controls);
 
-            MyLog.Default.WriteLine($"Remove Option Availible Controls: {controls.ToString}");
-
             foreach (IMyTerminalControl c in controls)
             {
-                switch(c.Id)
+                switch (c.Id)
                 {
-                    case "Add Small Top Part":
+                    case "AddSmallRotorTopPart":
                     {
                         c.Visible = RingRotor_TerminalChainedDelegate.Create(c.Visible, AppendedCondition); // hides
                         break;
@@ -55,7 +53,7 @@ namespace StarCore.RemoveRingSGOptions
             {
                 switch(a.Id)
                 {
-                    case "Add Small Top Part":
+                    case "AddSmallRotorTopPart":
                     {
                         a.Enabled = RingRotor_TerminalChainedDelegate.Create(a.Enabled, AppendedCondition);
                         break;
