@@ -30,7 +30,9 @@ namespace StarCore.RemoveRingSGOptions
             List<IMyTerminalControl> controls;
             MyAPIGateway.TerminalControls.GetControls<IMyMotorAdvancedStator>(out controls);
 
-            foreach(IMyTerminalControl c in controls)
+            MyLog.Default.WriteLine($"Remove Option Availible Controls: {controls}");
+
+            foreach (IMyTerminalControl c in controls)
             {
                 switch(c.Id)
                 {
