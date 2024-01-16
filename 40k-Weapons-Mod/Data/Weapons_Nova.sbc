@@ -26,7 +26,7 @@
         <SubtypeId>Blank</SubtypeId>
       </Id>
       <DisplayName>25x184mm Depleted Uranium</DisplayName>
-      <Icon>Textures\GUI\Icons\ammo\DeURounds.dds</Icon>
+      <Icon>Textures\GUI\Icons\ammo\Ammo_Box.dds</Icon>
       <Prerequisites>
         <Item Amount="8" TypeId="Ingot" SubtypeId="Magnesium" />
 		<Item Amount="2" TypeId="Ingot" SubtypeId="Nickel" />
