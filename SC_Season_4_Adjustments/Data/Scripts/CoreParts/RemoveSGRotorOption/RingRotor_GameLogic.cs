@@ -30,9 +30,6 @@ namespace StarCore.RemoveRingSGOptions
             if (block?.CubeGrid?.Physics == null)
                 return;
 
-            if (!MyAPIGateway.Multiplayer.IsServer)
-                return;
-
             RingRotor_HideButton.DoOnce();
         }
 
