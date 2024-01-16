@@ -655,7 +655,7 @@
       </DistantSounds>
       <Waves>
         <Wave Type="D3">
-          <Start>Audio\Hurricane_Firesound_01.wav</Start>
+          <Start>Audio\Onyx\heavy_cannons\Hurricane_Firesound_01.wav</Start>
         </Wave>
       </Waves>
     </Sound>
@@ -672,7 +672,7 @@
       <PitchVariation>80</PitchVariation>
       <Waves>
         <Wave Type="D3">
-          <Start>Audio\Hurricane_Firesound_01_Distant.wav</Start>
+          <Start>Audio\Onyx\heavy_cannons\Hurricane_Firesound_01_Distant.wav</Start>
         </Wave>
       </Waves>
     </Sound>
