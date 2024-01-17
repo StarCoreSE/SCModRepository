@@ -541,32 +541,26 @@ namespace Klime.CTF
 
                 if (packet != null)
                 {
-
-                    if (timer % 300 == 0) // Send network updates less frequently
+                    //MyLog.Default.WriteLine($"[CTF] Received Packet: {packet.packet_op}");
+                    if (packet.packet_op == PacketOp.UpdateFlags)
                     {
-
-                        //MyLog.Default.WriteLine($"[CTF] Received Packet: {packet.packet_op}");
-                        if (packet.packet_op == PacketOp.UpdateFlags)
+                        //LogPacketDetails("UpdateFlags", packet.all_flags_packet.Count);  // Log additional details
+                        if (allflags.Count == 0)
                         {
-                            //LogPacketDetails("UpdateFlags", packet.all_flags_packet.Count);  // Log additional details
-                            if (allflags.Count == 0)
+                            foreach (var subflag in packet.all_flags_packet)
                             {
-                                foreach (var subflag in packet.all_flags_packet)
-                                {
-                                    subflag.flag_entity = PrimeEntityActivator();
-                                    subflag.flag_entity.EntityId = subflag.entity_id;
+                                subflag.flag_entity = PrimeEntityActivator();
+                                subflag.flag_entity.EntityId = subflag.entity_id;
 
-                                    subflag.owning_faction = MyAPIGateway.Session.Factions.TryGetFactionById(subflag.owning_faction_id);
-                                    allflags.Add(subflag);
-                                }
-                            }
-
-                            for (int i = 0; i < packet.all_flags_packet.Count; i++)
-                            {
-                                allflags[i].UpdateFromNetwork(packet.all_flags_packet[i]);
+                                subflag.owning_faction = MyAPIGateway.Session.Factions.TryGetFactionById(subflag.owning_faction_id);
+                                allflags.Add(subflag);
                             }
                         }
 
+                        for (int i = 0; i < packet.all_flags_packet.Count; i++)
+                        {
+                            allflags[i].UpdateFromNetwork(packet.all_flags_packet[i]);
+                        }
                     }
 
                     if (packet.packet_op == PacketOp.UpdateGameState)
@@ -869,7 +863,7 @@ namespace Klime.CTF
         {
             try
             {
-                if (timer % 120 == 0)
+                if (timer % 60 == 0)
                 {
                     allplayers.Clear();
                     allplayerdict.Clear();
@@ -904,273 +898,235 @@ namespace Klime.CTF
                                 }
                             }
 
-                            if (timer % 5 == 0) // Update flags every 5 ticks instead of every tick
+                            foreach (var subflag in allflags)
                             {
 
-                                foreach (var subflag in allflags)
+                                if (subflag.state == FlagState.Home)
                                 {
 
-                                    if (subflag.state == FlagState.Home)
+                                    subflag.flag_entity.WorldMatrix = subflag.home_matrix;
+
+
+                                    foreach (var player in subflag.GetNearbyPlayers(ref allplayers, ref reuse_players, pickup_in_cockpit, flagPickupRadius))
                                     {
-
-                                        subflag.flag_entity.WorldMatrix = subflag.home_matrix;
-
-
-                                        foreach (var player in subflag.GetNearbyPlayers(ref allplayers, ref reuse_players, pickup_in_cockpit, flagPickupRadius))
+                                        IMyEntity controlledEntity = player.Controller != null ? player.Controller.ControlledEntity.Entity : null;
+                                        if (pickup_in_cockpit && !(controlledEntity is IMyCockpit))
                                         {
-                                            IMyEntity controlledEntity = player.Controller != null ? player.Controller.ControlledEntity.Entity : null;
-                                            if (pickup_in_cockpit && !(controlledEntity is IMyCockpit))
+                                            continue;
+                                        }
+                                        string faction_tag = MyVisualScriptLogicProvider.GetPlayersFactionTag(player.IdentityId);
+                                        if (subflag.flag_type == FlagType.Single)
+                                        {
+                                            if (faction_tag != "")
                                             {
-                                                continue;
+                                                IMyCockpit cockpit = (IMyCockpit)controlledEntity;
+                                                long gridEntityId = cockpit.CubeGrid.EntityId;
+                                                subflag.state = FlagState.Active;
+                                                ShowANotificationPlease("flag set to active 1");
+                                                subflag.carrying_player_id = player.IdentityId;
+                                                subflag.carrying_player = player;
+                                                SendEvent(player.DisplayName + " grabbed the flag!", InfoType.FlagTaken);
+                                                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 0.5f);
+
                                             }
-                                            string faction_tag = MyVisualScriptLogicProvider.GetPlayersFactionTag(player.IdentityId);
-                                            if (subflag.flag_type == FlagType.Single)
+                                        }
+                                        else
+                                        {
+                                            if (faction_tag != "" && faction_tag != subflag.owning_faction.Tag)
                                             {
-                                                if (faction_tag != "")
-                                                {
-                                                    IMyCockpit cockpit = (IMyCockpit)controlledEntity;
-                                                    long gridEntityId = cockpit.CubeGrid.EntityId;
-                                                    subflag.state = FlagState.Active;
-                                                    ShowANotificationPlease("flag set to active 1");
-                                                    subflag.carrying_player_id = player.IdentityId;
-                                                    subflag.carrying_player = player;
-                                                    SendEvent(player.DisplayName + " grabbed the flag!", InfoType.FlagTaken);
-                                                    MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 0.5f);
 
-                                                }
-                                            }
-                                            else
-                                            {
-                                                if (faction_tag != "" && faction_tag != subflag.owning_faction.Tag)
-                                                {
+                                                IMyCockpit cockpit = (IMyCockpit)controlledEntity;
+                                                long gridEntityId = cockpit.CubeGrid.EntityId;
+                                                subflag.state = FlagState.Active;
+                                                ShowANotificationPlease("flag set to active 2");
+                                                subflag.carrying_player_id = player.IdentityId;
+                                                subflag.carrying_player = player;
+                                                SendEvent(player.DisplayName + " stole " + subflag.owning_faction.Tag + " flag!", InfoType.FlagTaken);
+                                                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 0.5f);
 
-                                                    IMyCockpit cockpit = (IMyCockpit)controlledEntity;
-                                                    long gridEntityId = cockpit.CubeGrid.EntityId;
-                                                    subflag.state = FlagState.Active;
-                                                    ShowANotificationPlease("flag set to active 2");
-                                                    subflag.carrying_player_id = player.IdentityId;
-                                                    subflag.carrying_player = player;
-                                                    SendEvent(player.DisplayName + " stole " + subflag.owning_faction.Tag + " flag!", InfoType.FlagTaken);
-                                                    MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 0.5f);
-
-                                                }
                                             }
                                         }
                                     }
+                                }
 
-                                    if (subflag.state == FlagState.Active)
+                                if (subflag.state == FlagState.Active)
+                                {
+
+                                    //put any more IsActive logic here, if you put it last it wont get detected. this took forever to figure out.
+
+                                    if (!allplayerdict.ContainsKey(subflag.carrying_player_id))
                                     {
+                                        // Player has disconnected, drop the flag
+                                        subflag.state = FlagState.Dropped;
+                                        subflag.carrying_player_id = -1;
+                                        subflag.carrying_player = null;
+                                        subflag.grip_strength = 100; // Reset grip strength or any other necessary reset logic
 
-                                        //put any more IsActive logic here, if you put it last it wont get detected. this took forever to figure out.
+                                        // Additional logic for dropping the flag, like sending notifications
+                                        SendEvent("Flag dropped due to player disconnect!", InfoType.FlagDropped);
 
-                                        if (!allplayerdict.ContainsKey(subflag.carrying_player_id))
+                                        //start the flag drop cooldown
+                                        playerDropTimes[subflag.carrying_player.IdentityId] = timer;
+
+                                    }
+
+
+                                    IMyEntity controlledEntity = subflag.carrying_player.Controller != null ? subflag.carrying_player.Controller.ControlledEntity.Entity : null;
+                                    if (pickup_in_cockpit && !(controlledEntity is IMyCockpit))
+                                    {
+                                        subflag.state = FlagState.Dropped;
+                                        ShowANotificationPlease("flag state set to dropped 1");
+                                        SendEvent(subflag.carrying_player.DisplayName + " dropped the flag due to leaving cockpit!", InfoType.FlagDropped);
+                                        playerDropTimes[subflag.carrying_player.IdentityId] = timer;
+
+                                        continue; // Skip the rest of the logic for this flag
+                                    }
+                                    if (controlledEntity is IMyCockpit)
+                                    {
+                                        IMyCockpit cockpit = (IMyCockpit)controlledEntity;
+                                        long gridEntityId = cockpit.CubeGrid.EntityId;
+
+                                        // Damage handling
+                                        if (damagedGrids.Contains(gridEntityId))
                                         {
-                                            // Player has disconnected, drop the flag
-                                            subflag.state = FlagState.Dropped;
-                                            subflag.carrying_player_id = -1;
-                                            subflag.carrying_player = null;
-                                            subflag.grip_strength = 100; // Reset grip strength or any other necessary reset logic
+                                            if (damageReductionCounter < 10.0f)
+                                            {
+                                                float gripLoss = 1.0f;  // Loss per damage instance
+                                                float newGripStrength = subflag.grip_strength - gripLoss;
+                                                subflag.grip_strength = newGripStrength;
 
-                                            // Additional logic for dropping the flag, like sending notifications
-                                            SendEvent("Flag dropped due to player disconnect!", InfoType.FlagDropped);
+                                                damageReductionCounter += gripLoss;
+                                            }
 
-                                            //start the flag drop cooldown
-                                            playerDropTimes[subflag.carrying_player.IdentityId] = timer;
+                                            damagedGrids.Remove(gridEntityId);
+                                        }
 
+                                        // Reset the damageReductionCounter every second (assuming this block runs every frame and there are 60 frames per second)
+                                        if (timer % 60 == 0)
+                                        {
+                                            damageReductionCounter = 0.0f;
+                                            disableGripRegen = false;  // Reset the flag
+                                        }
+
+                                        var speenAcceleration = cockpit.CubeGrid.Physics.AngularAcceleration.Length();
+                                        var linearAcceleration = cockpit.CubeGrid.Physics.LinearAcceleration.Length();
+                                        var funpolice = cockpit.CubeGrid.Physics.LinearVelocity.Length();
+                                        var totalAcceleration = speenAcceleration + linearAcceleration;
+
+                                        // Adjust grip strength regeneration based on acceleration
+                                        float deltaV = totalAcceleration; //- subflag.lastTickAcceleration;
+                                                                          //  subflag.lastTickAcceleration = totalAcceleration;
+
+                                        float regenModifier = 0.2f - (deltaV / 100f); // 0.2 is the base regen rate, and we subtract a value based on acceleration
+
+                                        if (deltaV >= 10 || funpolice >= 200) // If the deltaV is more than 1, adjust the regenModifier
+                                        {
+                                            subflag.regen_modifier = regenModifier;
+
+                                        }
+                                        else { subflag.regen_modifier = 0.25f; }
+
+
+                                        var grip_temp = subflag.grip_strength;
+
+                                        var regen_temp = subflag.regen_modifier;
+
+                                        if (grip_temp >= 50)
+                                        {
+                                            MathHelper.Clamp(regen_temp, -49, 49);
+                                        }
+
+                                        if (!disableGripRegen)  // Halt grip regeneration if flag is set
+                                        {
+                                            subflag.grip_strength += regen_temp;
                                         }
 
 
-                                        IMyEntity controlledEntity = subflag.carrying_player.Controller != null ? subflag.carrying_player.Controller.ControlledEntity.Entity : null;
-                                        if (pickup_in_cockpit && !(controlledEntity is IMyCockpit))
-                                        {
-                                            subflag.state = FlagState.Dropped;
-                                            ShowANotificationPlease("flag state set to dropped 1");
-                                            SendEvent(subflag.carrying_player.DisplayName + " dropped the flag due to leaving cockpit!", InfoType.FlagDropped);
-                                            playerDropTimes[subflag.carrying_player.IdentityId] = timer;
-
-                                            continue; // Skip the rest of the logic for this flag
-                                        }
+                                        //give the flagbearer damage resistance to their grid!
                                         if (controlledEntity is IMyCockpit)
                                         {
-                                            IMyCockpit cockpit = (IMyCockpit)controlledEntity;
-                                            long gridEntityId = cockpit.CubeGrid.EntityId;
-
-                                            // Damage handling
-                                            if (damagedGrids.Contains(gridEntityId))
-                                            {
-                                                if (damageReductionCounter < 10.0f)
-                                                {
-                                                    float gripLoss = 1.0f;  // Loss per damage instance
-                                                    float newGripStrength = subflag.grip_strength - gripLoss;
-                                                    subflag.grip_strength = newGripStrength;
-
-                                                    damageReductionCounter += gripLoss;
-                                                }
-
-                                                damagedGrids.Remove(gridEntityId);
-                                            }
-
-                                            // Reset the damageReductionCounter every second (assuming this block runs every frame and there are 60 frames per second)
-                                            if (timer % 60 == 0)
-                                            {
-                                                damageReductionCounter = 0.0f;
-                                                disableGripRegen = false;  // Reset the flag
-                                            }
-
-                                            var speenAcceleration = cockpit.CubeGrid.Physics.AngularAcceleration.Length();
-                                            var linearAcceleration = cockpit.CubeGrid.Physics.LinearAcceleration.Length();
-                                            var funpolice = cockpit.CubeGrid.Physics.LinearVelocity.Length();
-                                            var totalAcceleration = speenAcceleration + linearAcceleration;
-
-                                            // Adjust grip strength regeneration based on acceleration
-                                            float deltaV = totalAcceleration; //- subflag.lastTickAcceleration;
-                                                                              //  subflag.lastTickAcceleration = totalAcceleration;
-
-                                            float regenModifier = 0.2f - (deltaV / 100f); // 0.2 is the base regen rate, and we subtract a value based on acceleration
-
-                                            if (deltaV >= 10 || funpolice >= 200) // If the deltaV is more than 1, adjust the regenModifier
-                                            {
-                                                subflag.regen_modifier = regenModifier;
-
-                                            }
-                                            else { subflag.regen_modifier = 0.25f; }
+                                            
+                                            MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 0.5f); // Applying 0.5x damage modifier
+                                        }
 
 
-                                            var grip_temp = subflag.grip_strength;
+                                        //    MathHelper.Smooth(regen_temp, subflag.grip_strength);
 
-                                            var regen_temp = subflag.regen_modifier;
+                                        if (subflag.grip_strength > 100) subflag.grip_strength = 100;
+                                        // Cap grip strength to 100
+                                        if (subflag.grip_strength < 0)
+                                        {
+                                            subflag.grip_strength = 0; //Cap grip strength to 0
+                                            subflag.state = FlagState.Dropped;
+                                            ShowANotificationPlease("flag dropped 2");
+                                            SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " the flag!", InfoType.FlagDropped);
+                                            MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 1.0f); // Applying 0.5x damage modifier
 
-                                            if (grip_temp >= 50)
-                                            {
-                                                MathHelper.Clamp(regen_temp, -49, 49);
-                                            }
+                                            playerDropTimes[subflag.carrying_player.IdentityId] = timer;
+                                        }
+                                    }
+                                    if (subflag.carrying_player != null && subflag.carrying_player.Character != null && !subflag.carrying_player.Character.IsDead)
+                                    {
+                                        // Existing logic for setting flag position
+                                        reuse_matrix = subflag.carrying_player.Character.WorldMatrix;
+                                        reuse_matrix.Translation += reuse_matrix.Backward * 0.4f + reuse_matrix.Up * 1.5f + reuse_matrix.Left * 0.25f;
+                                        subflag.flag_entity.WorldMatrix = reuse_matrix;
 
-                                            if (!disableGripRegen)  // Halt grip regeneration if flag is set
-                                            {
-                                                subflag.grip_strength += regen_temp;
-                                            }
+                                        IMyCockpit cockpit = (IMyCockpit)controlledEntity;
+                                        long gridEntityId = cockpit.CubeGrid.EntityId;
 
-
-                                            //give the flagbearer damage resistance to their grid!
+                                        // Check for cockpit and drop flag if conditions are met
+                                        if (drop_in_cockpit && !pickup_in_cockpit)
+                                        {
                                             if (controlledEntity is IMyCockpit)
                                             {
-
-                                                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 0.5f); // Applying 0.5x damage modifier
-                                            }
-
-
-                                            //    MathHelper.Smooth(regen_temp, subflag.grip_strength);
-
-                                            if (subflag.grip_strength > 100) subflag.grip_strength = 100;
-                                            // Cap grip strength to 100
-                                            if (subflag.grip_strength < 0)
-                                            {
-                                                subflag.grip_strength = 0; //Cap grip strength to 0
                                                 subflag.state = FlagState.Dropped;
-                                                ShowANotificationPlease("flag dropped 2");
-                                                SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " the flag!", InfoType.FlagDropped);
-                                                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 1.0f); // Applying 0.5x damage modifier
+                                                ShowANotificationPlease("flag dropped 3");
+                                                SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag!", InfoType.FlagDropped);
+                                                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 1.0f); 
 
-                                                playerDropTimes[subflag.carrying_player.IdentityId] = timer;
                                             }
                                         }
-                                        if (subflag.carrying_player != null && subflag.carrying_player.Character != null && !subflag.carrying_player.Character.IsDead)
+
+
+                                        if (use_game_radius)
                                         {
-                                            // Existing logic for setting flag position
-                                            reuse_matrix = subflag.carrying_player.Character.WorldMatrix;
-                                            reuse_matrix.Translation += reuse_matrix.Backward * 0.4f + reuse_matrix.Up * 1.5f + reuse_matrix.Left * 0.25f;
-                                            subflag.flag_entity.WorldMatrix = reuse_matrix;
-
-                                            IMyCockpit cockpit = (IMyCockpit)controlledEntity;
-                                            long gridEntityId = cockpit.CubeGrid.EntityId;
-
-                                            // Check for cockpit and drop flag if conditions are met
-                                            if (drop_in_cockpit && !pickup_in_cockpit)
+                                            if (Vector3D.Distance(gamecenter, subflag.flag_entity.WorldMatrix.Translation) >= radius)
                                             {
-                                                if (controlledEntity is IMyCockpit)
-                                                {
-                                                    subflag.state = FlagState.Dropped;
-                                                    ShowANotificationPlease("flag dropped 3");
-                                                    SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag!", InfoType.FlagDropped);
-                                                    MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 1.0f);
+                                                subflag.carrying_player.Character.Kill();
+                                                subflag.state = FlagState.Dropped;
+                                                ShowANotificationPlease("flag dropped 4");
+                                                SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag!", InfoType.FlagDropped);
+                                                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 1.0f);
 
-                                                }
                                             }
+                                        }
 
-
-                                            if (use_game_radius)
+                                        if (subflag.flag_type == FlagType.Single)
+                                        {
+                                            IMyFaction carrying_faction = MyAPIGateway.Session.Factions.TryGetPlayerFaction(subflag.carrying_player.IdentityId);
+                                            if (carrying_faction != null)
                                             {
-                                                if (Vector3D.Distance(gamecenter, subflag.flag_entity.WorldMatrix.Translation) >= radius)
+                                                foreach (var faction in subflag.capture_positions.Keys)
                                                 {
-                                                    subflag.carrying_player.Character.Kill();
-                                                    subflag.state = FlagState.Dropped;
-                                                    ShowANotificationPlease("flag dropped 4");
-                                                    SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag!", InfoType.FlagDropped);
-                                                    MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 1.0f);
-
-                                                }
-                                            }
-
-                                            if (subflag.flag_type == FlagType.Single)
-                                            {
-                                                IMyFaction carrying_faction = MyAPIGateway.Session.Factions.TryGetPlayerFaction(subflag.carrying_player.IdentityId);
-                                                if (carrying_faction != null)
-                                                {
-                                                    foreach (var faction in subflag.capture_positions.Keys)
+                                                    if (faction == carrying_faction.FactionId)
                                                     {
-                                                        if (faction == carrying_faction.FactionId)
-                                                        {
-                                                            MatrixD capture_matrix = subflag.capture_positions[faction];
-                                                            Vector3D capture_pos = capture_matrix.Translation;
+                                                        MatrixD capture_matrix = subflag.capture_positions[faction];
+                                                        Vector3D capture_pos = capture_matrix.Translation;
 
-                                                            double distance = Vector3D.Distance(subflag.flag_entity.WorldMatrix.Translation, capture_pos);
-                                                            bool valid_cap = false;
-
-                                                            if (pickup_in_cockpit)
-                                                            {
-                                                                if (distance <= 500)
-                                                                {
-                                                                    valid_cap = true;
-                                                                }
-                                                            }
-                                                            else
-                                                            {
-                                                                if (distance <= 400)
-                                                                {
-                                                                    valid_cap = true;
-                                                                }
-                                                            }
-
-                                                            if (valid_cap)
-                                                            {
-                                                                subflag.state = FlagState.Home;
-                                                                ShowANotificationPlease("flag home 1");
-                                                                gamestate.UpdateScore(faction);
-                                                                SendEvent(subflag.carrying_player.DisplayName + " captured the flag!", InfoType.FlagCaptured);
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            else
-                                            {
-                                                foreach (var otherflag in allflags)
-                                                {
-                                                    if ((otherflag.flag_entity.EntityId != subflag.entity_id) && otherflag.state == FlagState.Home)
-                                                    {
-                                                        double distance = Vector3D.Distance(subflag.flag_entity.WorldMatrix.Translation, otherflag.flag_entity.WorldMatrix.Translation);
+                                                        double distance = Vector3D.Distance(subflag.flag_entity.WorldMatrix.Translation, capture_pos);
                                                         bool valid_cap = false;
 
                                                         if (pickup_in_cockpit)
                                                         {
-                                                            if (distance <= 150)
+                                                            if (distance <= 500)
                                                             {
                                                                 valid_cap = true;
                                                             }
                                                         }
                                                         else
                                                         {
-                                                            if (distance <= 40)
+                                                            if (distance <= 400)
                                                             {
                                                                 valid_cap = true;
                                                             }
@@ -1179,11 +1135,9 @@ namespace Klime.CTF
                                                         if (valid_cap)
                                                         {
                                                             subflag.state = FlagState.Home;
-                                                            ShowANotificationPlease("flag home validcap");
-                                                            otherflag.state = FlagState.Home;
-
-                                                            gamestate.UpdateScore(otherflag.owning_faction.FactionId);
-                                                            SendEvent(subflag.carrying_player.DisplayName + " captured " + subflag.owning_faction.Tag + " flag!", InfoType.FlagCaptured);
+                                                            ShowANotificationPlease("flag home 1");
+                                                            gamestate.UpdateScore(faction);
+                                                            SendEvent(subflag.carrying_player.DisplayName + " captured the flag!", InfoType.FlagCaptured);
                                                         }
                                                     }
                                                 }
@@ -1191,56 +1145,108 @@ namespace Klime.CTF
                                         }
                                         else
                                         {
-                                            IMyCockpit cockpit = (IMyCockpit)controlledEntity;
-                                            long gridEntityId = cockpit.CubeGrid.EntityId;
-
-                                            subflag.state = FlagState.Dropped;
-                                            ShowANotificationPlease("flag dropped 4");
-                                            if (subflag.flag_type == FlagType.Single)
+                                            foreach (var otherflag in allflags)
                                             {
-                                                SendEvent(subflag.carrying_player.DisplayName + " dropped the flag!", InfoType.FlagDropped);
-                                                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 1.0f);
+                                                if ((otherflag.flag_entity.EntityId != subflag.entity_id) && otherflag.state == FlagState.Home)
+                                                {
+                                                    double distance = Vector3D.Distance(subflag.flag_entity.WorldMatrix.Translation, otherflag.flag_entity.WorldMatrix.Translation);
+                                                    bool valid_cap = false;
 
-                                            }
-                                            else
-                                            {
-                                                SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag!", InfoType.FlagDropped);
-                                                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 1.0f);
+                                                    if (pickup_in_cockpit)
+                                                    {
+                                                        if (distance <= 150)
+                                                        {
+                                                            valid_cap = true;
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        if (distance <= 40)
+                                                        {
+                                                            valid_cap = true;
+                                                        }
+                                                    }
 
+                                                    if (valid_cap)
+                                                    {
+                                                        subflag.state = FlagState.Home;
+                                                        ShowANotificationPlease("flag home validcap");
+                                                        otherflag.state = FlagState.Home;
+
+                                                        gamestate.UpdateScore(otherflag.owning_faction.FactionId);
+                                                        SendEvent(subflag.carrying_player.DisplayName + " captured " + subflag.owning_faction.Tag + " flag!", InfoType.FlagCaptured);
+                                                    }
+                                                }
                                             }
                                         }
+                                    }
+                                    else
+                                    {
+                                        IMyCockpit cockpit = (IMyCockpit)controlledEntity;
+                                        long gridEntityId = cockpit.CubeGrid.EntityId;
 
-                                        //if you enter a safezone, this is supposed to drop, but it also happens when damage is off. also it needs a cooldown. so ill just turn it off for now
+                                        subflag.state = FlagState.Dropped;
+                                        ShowANotificationPlease("flag dropped 4");
+                                        if (subflag.flag_type == FlagType.Single)
+                                        {
+                                            SendEvent(subflag.carrying_player.DisplayName + " dropped the flag!", InfoType.FlagDropped);
+                                            MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 1.0f);
 
-                                        //if (subflag.state == FlagState.Active)
-                                        //{
-                                        //    if (!MySessionComponentSafeZones.IsActionAllowed(subflag.flag_entity.WorldMatrix.Translation, CastProhibit(MySessionComponentSafeZones.AllowedActions, 1)))
-                                        //    {
-                                        //        subflag.state = FlagState.Home;
-                                        //        ShowANotificationPlease("flag home 3");
-                                        //        if (subflag.flag_type == FlagType.Single)
-                                        //        {
-                                        //            SendEvent(subflag.carrying_player.DisplayName + " dropped the flag from entering a safezone!", InfoType.FlagDropped);
-                                        //        }
-                                        //        else
-                                        //        {
-                                        //            SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag!", InfoType.FlagDropped);
-                                        //        }
-                                        //    }
-                                        //}
+                                        }
+                                        else
+                                        {
+                                            SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag!", InfoType.FlagDropped);
+                                            MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 1.0f);
 
-
-
+                                        }
                                     }
 
-                                    if (subflag.state == FlagState.Dropped)
+                                    //if you enter a safezone, this is supposed to drop, but it also happens when damage is off. also it needs a cooldown. so ill just turn it off for now
+
+                                    //if (subflag.state == FlagState.Active)
+                                    //{
+                                    //    if (!MySessionComponentSafeZones.IsActionAllowed(subflag.flag_entity.WorldMatrix.Translation, CastProhibit(MySessionComponentSafeZones.AllowedActions, 1)))
+                                    //    {
+                                    //        subflag.state = FlagState.Home;
+                                    //        ShowANotificationPlease("flag home 3");
+                                    //        if (subflag.flag_type == FlagType.Single)
+                                    //        {
+                                    //            SendEvent(subflag.carrying_player.DisplayName + " dropped the flag from entering a safezone!", InfoType.FlagDropped);
+                                    //        }
+                                    //        else
+                                    //        {
+                                    //            SendEvent(subflag.carrying_player.DisplayName + " dropped " + subflag.owning_faction.Tag + " flag!", InfoType.FlagDropped);
+                                    //        }
+                                    //    }
+                                    //}
+
+
+
+                                }
+
+                                if (subflag.state == FlagState.Dropped)
+                                {
+                                    subflag.grip_strength = 100; //reset grip
+                                    if (subflag.current_drop_life >= drop_reset_time)
                                     {
-                                        subflag.grip_strength = 100; //reset grip
-                                        if (subflag.current_drop_life >= drop_reset_time)
+                                        subflag.current_drop_life = 0;
+                                        subflag.state = FlagState.Home;
+                                        ShowANotificationPlease("flag home 4");
+                                        if (subflag.flag_type == FlagType.Single)
                                         {
-                                            subflag.current_drop_life = 0;
+                                            SendEvent("Flag reset", InfoType.FlagReset);
+                                        }
+                                        else
+                                        {
+                                            SendEvent(subflag.owning_faction.Tag + " flag reset", InfoType.FlagReset);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (drop_type == DropType.Instant)
+                                        {
                                             subflag.state = FlagState.Home;
-                                            ShowANotificationPlease("flag home 4");
+                                            ShowANotificationPlease("flag home 5");
                                             if (subflag.flag_type == FlagType.Single)
                                             {
                                                 SendEvent("Flag reset", InfoType.FlagReset);
@@ -1250,214 +1256,198 @@ namespace Klime.CTF
                                                 SendEvent(subflag.owning_faction.Tag + " flag reset", InfoType.FlagReset);
                                             }
                                         }
-                                        else
+
+                                        if (drop_type == DropType.Ground)
                                         {
-                                            if (drop_type == DropType.Instant)
+                                            reuse_planet = MyGamePruningStructure.GetClosestPlanet(subflag.flag_entity.WorldMatrix.Translation);
+                                            if (reuse_planet != null)
                                             {
-                                                subflag.state = FlagState.Home;
-                                                ShowANotificationPlease("flag home 5");
-                                                if (subflag.flag_type == FlagType.Single)
-                                                {
-                                                    SendEvent("Flag reset", InfoType.FlagReset);
-                                                }
-                                                else
-                                                {
-                                                    SendEvent(subflag.owning_faction.Tag + " flag reset", InfoType.FlagReset);
-                                                }
-                                            }
-
-                                            if (drop_type == DropType.Ground)
-                                            {
-                                                reuse_planet = MyGamePruningStructure.GetClosestPlanet(subflag.flag_entity.WorldMatrix.Translation);
-                                                if (reuse_planet != null)
-                                                {
-                                                    reuse_matrix = subflag.flag_entity.WorldMatrix;
-                                                    reuse_matrix.Translation = reuse_planet.GetClosestSurfacePointGlobal(subflag.flag_entity.WorldMatrix.Translation);
-                                                    subflag.flag_entity.WorldMatrix = reuse_matrix;
-                                                }
-                                                else
-                                                {
-                                                    drop_type = DropType.Floating;
-                                                }
-                                            }
-
-                                            if (drop_type == DropType.Attached)
-                                            {
-                                                if (subflag.attachedGrid == null && subflag.current_drop_life == 0)
-                                                {
-                                                    //Raycast down to find grid
-                                                    float interf = 0f;
-                                                    var gravityDir = Vector3D.Normalize(MyAPIGateway.Physics.CalculateNaturalGravityAt(subflag.flag_entity.WorldMatrix.Translation,
-                                                        out interf));
-
-                                                    var start = subflag.flag_entity.WorldMatrix.Translation;
-                                                    var end = start + gravityDir * 5;
-
-                                                    List<IHitInfo> hits = new List<IHitInfo>();
-                                                    MyAPIGateway.Physics.CastRay(start, end, hits);
-
-                                                    foreach (var hit in hits)
-                                                    {
-                                                        if (hit == null || hit.HitEntity == null) continue;
-
-                                                        var testGrid = hit.HitEntity as MyCubeGrid;
-                                                        if (testGrid != null && testGrid.Physics != null)
-                                                        {
-                                                            subflag.attachedGrid = testGrid;
-                                                            break;
-                                                        }
-                                                    }
-
-                                                    if (subflag.attachedGrid != null)
-                                                    {
-                                                        subflag.attachedLocalMatrix = subflag.flag_entity.WorldMatrix * subflag.attachedGrid.PositionComp.WorldMatrixInvScaled;
-                                                    }
-                                                }
-
-                                                if (subflag.attachedGrid != null && !subflag.attachedGrid.MarkedForClose)
-                                                {
-                                                    subflag.flag_entity.WorldMatrix = subflag.attachedLocalMatrix * subflag.attachedGrid.WorldMatrix;
-                                                }
-                                            }
-                                        }
-
-                                        subflag.current_drop_life += 1;
-
-                                        foreach (var player in subflag.GetNearbyPlayers(ref allplayers, ref reuse_players, pickup_in_cockpit, flagPickupRadius))
-                                        {
-                                            int lastDropTime;
-                                            if (playerDropTimes.TryGetValue(player.IdentityId, out lastDropTime))
-                                            {
-                                                if (timer - lastDropTime < 600)
-                                                {
-                                                    continue;
-                                                }
-                                            }
-
-                                            string faction_tag = MyVisualScriptLogicProvider.GetPlayersFactionTag(player.IdentityId);
-                                            if (subflag.flag_type == FlagType.Single)
-                                            {
-                                                if (faction_tag != "")
-                                                {
-                                                    subflag.state = FlagState.Active;
-                                                    ShowANotificationPlease("flag active 1");
-                                                    subflag.carrying_player_id = player.IdentityId;
-                                                    subflag.carrying_player = player;
-                                                    subflag.current_drop_life = 0;
-                                                    SendEvent(player.DisplayName + " grabbed the flag!", InfoType.FlagTaken);
-                                                    // MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 0.5f);
-                                                }
+                                                reuse_matrix = subflag.flag_entity.WorldMatrix;
+                                                reuse_matrix.Translation = reuse_planet.GetClosestSurfacePointGlobal(subflag.flag_entity.WorldMatrix.Translation);
+                                                subflag.flag_entity.WorldMatrix = reuse_matrix;
                                             }
                                             else
                                             {
-                                                if (faction_tag != "" && faction_tag != subflag.owning_faction.Tag)
-                                                {
-                                                    subflag.state = FlagState.Active;
-                                                    ShowANotificationPlease("flag active 2");
-                                                    subflag.carrying_player_id = player.IdentityId;
-                                                    subflag.carrying_player = player;
-                                                    subflag.current_drop_life = 0;
-                                                    SendEvent(player.DisplayName + " stole " + subflag.owning_faction.Tag + " flag!", InfoType.FlagTaken);
-                                                    //MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 0.5f);
+                                                drop_type = DropType.Floating;
+                                            }
+                                        }
 
+                                        if (drop_type == DropType.Attached)
+                                        {
+                                            if (subflag.attachedGrid == null && subflag.current_drop_life == 0)
+                                            {
+                                                //Raycast down to find grid
+                                                float interf = 0f;
+                                                var gravityDir = Vector3D.Normalize(MyAPIGateway.Physics.CalculateNaturalGravityAt(subflag.flag_entity.WorldMatrix.Translation,
+                                                    out interf));
+
+                                                var start = subflag.flag_entity.WorldMatrix.Translation;
+                                                var end = start + gravityDir * 5;
+
+                                                List<IHitInfo> hits = new List<IHitInfo>();
+                                                MyAPIGateway.Physics.CastRay(start, end, hits);
+
+                                                foreach (var hit in hits)
+                                                {
+                                                    if (hit == null || hit.HitEntity == null) continue;
+
+                                                    var testGrid = hit.HitEntity as MyCubeGrid;
+                                                    if (testGrid != null && testGrid.Physics != null)
+                                                    {
+                                                        subflag.attachedGrid = testGrid;
+                                                        break;
+                                                    }
                                                 }
+
+                                                if (subflag.attachedGrid != null)
+                                                {
+                                                    subflag.attachedLocalMatrix = subflag.flag_entity.WorldMatrix * subflag.attachedGrid.PositionComp.WorldMatrixInvScaled;
+                                                }
+                                            }
+
+                                            if (subflag.attachedGrid != null && !subflag.attachedGrid.MarkedForClose)
+                                            {
+                                                subflag.flag_entity.WorldMatrix = subflag.attachedLocalMatrix * subflag.attachedGrid.WorldMatrix;
                                             }
                                         }
                                     }
-                                    subflag.current_matrix = subflag.flag_entity.WorldMatrix;
-                                    subflag.lifetime += 1;
-                                }
-                            }
 
-                            if (gamestate.currentgamestate == CurrentGameState.Victory)
-                            {
-                                foreach (var subflag in allflags)
-                                {
-                                    subflag.flag_entity.WorldMatrix = subflag.home_matrix;
-                                }
-                            }
+                                    subflag.current_drop_life += 1;
 
-                            if (gamestate.currentgamestate == CurrentGameState.Victory)
-                            {
-                                if (!victoryTriggered)
-                                {
-                                    victoryTriggered = true;
-                                    victoryTimer = 0;
-                                }
-
-                                if (victoryTimer % SpawnInterval == 0 && victoryTimer <= TotalVictoryDuration)
-                                {
-                                    string winningFactionTag = gamestate.winning_tag;
-                                    IMyFaction winningFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag(winningFactionTag);
-
-                                    // Determine number of prefabs to spawn (1 to 5)
-                                    int spawnCount = MyUtils.GetRandomInt(1, 6);
-
-                                    for (int i = 0; i < spawnCount; i++)
+                                    foreach (var player in subflag.GetNearbyPlayers(ref allplayers, ref reuse_players, pickup_in_cockpit, flagPickupRadius))
                                     {
-                                        // Generate a random offset
-                                        Vector3D offset = new Vector3D(
-                                            MyUtils.GetRandomDouble(-100, 100), // X-axis offset
-                                            MyUtils.GetRandomDouble(-100, 100), // Y-axis offset
-                                            MyUtils.GetRandomDouble(-100, 100)  // Z-axis offset
-                                        );
-
-                                        // Choose a prefab and calculate spawn location with offset
-                                        string prefabName = "IT'S OVER"; // Replace with your desired prefab
-                                        Vector3D baseSpawnPosition = new Vector3D(0, 7000, 0); // Base spawn position
-                                        Vector3D spawnPosition = baseSpawnPosition + offset; // Apply offset to base position
-
-                                        Vector3D direction = Vector3D.Forward;
-                                        Vector3D up = Vector3D.Up;
-
-                                        // Spawn the prefab
-                                        List<IMyCubeGrid> resultList = new List<IMyCubeGrid>();
-                                        IMyPrefabManager prefabManager = MyAPIGateway.PrefabManager;
-                                        prefabManager.SpawnPrefab(resultList, prefabName, spawnPosition, direction, up, ownerId: winningFaction?.FounderId ?? 0, spawningOptions: SpawningOptions.None);
-
-                                        // Set ownership of the spawned prefab to the winning faction
-                                        foreach (IMyCubeGrid spawnedGrid in resultList)
+                                        int lastDropTime;
+                                        if (playerDropTimes.TryGetValue(player.IdentityId, out lastDropTime))
                                         {
-                                            spawnedGrid.ChangeGridOwnership(winningFaction?.FounderId ?? 0, MyOwnershipShareModeEnum.All);
+                                            if (timer - lastDropTime < 600)
+                                            {
+                                                continue;
+                                            }
+                                        }
+
+                                        string faction_tag = MyVisualScriptLogicProvider.GetPlayersFactionTag(player.IdentityId);
+                                        if (subflag.flag_type == FlagType.Single)
+                                        {
+                                            if (faction_tag != "")
+                                            {
+                                                subflag.state = FlagState.Active;
+                                                ShowANotificationPlease("flag active 1");
+                                                subflag.carrying_player_id = player.IdentityId;
+                                                subflag.carrying_player = player;
+                                                subflag.current_drop_life = 0;
+                                                SendEvent(player.DisplayName + " grabbed the flag!", InfoType.FlagTaken);
+                                               // MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 0.5f);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (faction_tag != "" && faction_tag != subflag.owning_faction.Tag)
+                                            {
+                                                subflag.state = FlagState.Active;
+                                                ShowANotificationPlease("flag active 2");
+                                                subflag.carrying_player_id = player.IdentityId;
+                                                subflag.carrying_player = player;
+                                                subflag.current_drop_life = 0;
+                                                SendEvent(player.DisplayName + " stole " + subflag.owning_faction.Tag + " flag!", InfoType.FlagTaken);
+                                                //MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 0.5f);
+
+                                            }
                                         }
                                     }
                                 }
-
-                                victoryTimer += 1;
+                                subflag.current_matrix = subflag.flag_entity.WorldMatrix;
+                                subflag.lifetime += 1;
                             }
-                            else
+                        }
+
+                        if (gamestate.currentgamestate == CurrentGameState.Victory)
+                        {
+                            foreach (var subflag in allflags)
                             {
-                                victoryTriggered = false;
+                                subflag.flag_entity.WorldMatrix = subflag.home_matrix;
+                            }
+                        }
+
+                        if (gamestate.currentgamestate == CurrentGameState.Victory)
+                        {
+                            if (!victoryTriggered)
+                            {
+                                victoryTriggered = true;
                                 victoryTimer = 0;
                             }
 
-                        }
+                            if (victoryTimer % SpawnInterval == 0 && victoryTimer <= TotalVictoryDuration)
+                            {
+                                string winningFactionTag = gamestate.winning_tag;
+                                IMyFaction winningFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag(winningFactionTag);
 
-                        if (packet == null)
+                                // Determine number of prefabs to spawn (1 to 5)
+                                int spawnCount = MyUtils.GetRandomInt(1, 6);
+
+                                for (int i = 0; i < spawnCount; i++)
+                                {
+                                    // Generate a random offset
+                                    Vector3D offset = new Vector3D(
+                                        MyUtils.GetRandomDouble(-100, 100), // X-axis offset
+                                        MyUtils.GetRandomDouble(-100, 100), // Y-axis offset
+                                        MyUtils.GetRandomDouble(-100, 100)  // Z-axis offset
+                                    );
+
+                                    // Choose a prefab and calculate spawn location with offset
+                                    string prefabName = "IT'S OVER"; // Replace with your desired prefab
+                                    Vector3D baseSpawnPosition = new Vector3D(0, 7000, 0); // Base spawn position
+                                    Vector3D spawnPosition = baseSpawnPosition + offset; // Apply offset to base position
+
+                                    Vector3D direction = Vector3D.Forward;
+                                    Vector3D up = Vector3D.Up;
+
+                                    // Spawn the prefab
+                                    List<IMyCubeGrid> resultList = new List<IMyCubeGrid>();
+                                    IMyPrefabManager prefabManager = MyAPIGateway.PrefabManager;
+                                    prefabManager.SpawnPrefab(resultList, prefabName, spawnPosition, direction, up, ownerId: winningFaction?.FounderId ?? 0, spawningOptions: SpawningOptions.None);
+
+                                    // Set ownership of the spawned prefab to the winning faction
+                                    foreach (IMyCubeGrid spawnedGrid in resultList)
+                                    {
+                                        spawnedGrid.ChangeGridOwnership(winningFaction?.FounderId ?? 0, MyOwnershipShareModeEnum.All);
+                                    }
+                                }
+                            }
+
+                            victoryTimer += 1;
+                        }
+                        else
                         {
-                            packet = new PacketBase();
+                            victoryTriggered = false;
+                            victoryTimer = 0;
                         }
 
-                        packet.gamestate_packet = null;
-                        packet.all_flags_packet = allflags;
-                        packet.packet_op = PacketOp.UpdateFlags;
-
-                        foreach (var player in allplayers)
-                        {
-                            MyAPIGateway.Multiplayer.SendMessageTo(netid, MyAPIGateway.Utilities.SerializeToBinary(packet), player.SteamUserId);
-                        }
-
-                        packet.all_flags_packet = null;
-                        packet.gamestate_packet = gamestate;
-                        packet.packet_op = PacketOp.UpdateGameState;
-
-                        foreach (var player in allplayers)
-                        {
-                            MyAPIGateway.Multiplayer.SendMessageTo(netid, MyAPIGateway.Utilities.SerializeToBinary(packet), player.SteamUserId);
-                        }
                     }
 
+                    if (packet == null)
+                    {
+                        packet = new PacketBase();
+                    }
+
+                    packet.gamestate_packet = null;
+                    packet.all_flags_packet = allflags;
+                    packet.packet_op = PacketOp.UpdateFlags;
+
+                    foreach (var player in allplayers)
+                    {
+                        MyAPIGateway.Multiplayer.SendMessageTo(netid, MyAPIGateway.Utilities.SerializeToBinary(packet), player.SteamUserId);
+                    }
+
+                    packet.all_flags_packet = null;
+                    packet.gamestate_packet = gamestate;
+                    packet.packet_op = PacketOp.UpdateGameState;
+
+                    foreach (var player in allplayers)
+                    {
+                        MyAPIGateway.Multiplayer.SendMessageTo(netid, MyAPIGateway.Utilities.SerializeToBinary(packet), player.SteamUserId);
+                    }
                 }
+
             }
             catch (Exception e)
             {
