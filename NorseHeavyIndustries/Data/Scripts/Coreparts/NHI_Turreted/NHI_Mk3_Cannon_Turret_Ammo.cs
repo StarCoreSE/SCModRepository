@@ -36,7 +36,7 @@ namespace Scripts
             AmmoRound = "High-Explosive Shell BC7", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.0001f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 74250f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 47500f, // Direct damage; one steel plate is worth 100.
             Mass = 100f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 10000f, // Recoil. This is applied to the Parent Grid.
@@ -176,7 +176,7 @@ namespace Scripts
                 {
                     Enable = true,
                     Radius = 7f, // Radius of AOE effect, in meters.
-                    Damage = 54000f,
+                    Damage = 74000f,
                     Depth = 5f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
@@ -422,7 +422,7 @@ namespace Scripts
             AmmoRound = "BC7_HE_Fragment", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.0001f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 22500f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 25000f, // Direct damage; one steel plate is worth 100.
             Mass = 75f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 200f, // Recoil. This is applied to the Parent Grid.
