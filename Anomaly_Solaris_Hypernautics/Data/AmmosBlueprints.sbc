@@ -37,28 +37,28 @@
 		 <Blueprint>
 			 <Id>
 				 <TypeId>BlueprintDefinition</TypeId>
-				 <SubtypeId>AMP_FrameComponent</SubtypeId>
+				 <SubtypeId>ASH_FrameComponent</SubtypeId>
 			 </Id>
-			 <DisplayName>Insulated Frame [AMP]</DisplayName>
+			 <DisplayName>Insulated Frame [ASH]</DisplayName>
 			 <Icon>Textures\GUI\Icons\component\construction_components_component.dds</Icon>
 			 <Prerequisites>
 				 <Item Amount="240" TypeId="Component" SubtypeId="SteelPlate" />
 			 </Prerequisites>
-			 <Result Amount="1" TypeId="Component" SubtypeId="AMP_FrameComponent" />
+			 <Result Amount="1" TypeId="Component" SubtypeId="ASH_FrameComponent" />
 			 <BaseProductionTimeInSeconds>10</BaseProductionTimeInSeconds>
 		 </Blueprint>
 
 		 <Blueprint>
 			 <Id>
 				 <TypeId>BlueprintDefinition</TypeId>
-				 <SubtypeId>AMP_PlateComponent</SubtypeId>
+				 <SubtypeId>ASH_PlateComponent</SubtypeId>
 			 </Id>
-			 <DisplayName>Armored Plating [AMP]</DisplayName>
+			 <DisplayName>Armored Plating [ASH]</DisplayName>
 			 <Icon>Textures\GUI\Icons\component\interior_plate_component.dds</Icon>
 			 <Prerequisites>
 				 <Item Amount="900" TypeId="Component" SubtypeId="SteelPlate" />
 			 </Prerequisites>
-			 <Result Amount="1" TypeId="Component" SubtypeId="AMP_PlateComponent" />
+			 <Result Amount="1" TypeId="Component" SubtypeId="ASH_PlateComponent" />
 			 <BaseProductionTimeInSeconds>10</BaseProductionTimeInSeconds>
 		 </Blueprint>
 	 </Blueprints>
@@ -69,8 +69,8 @@
 		<Entry Class="EliteConsumables" BlueprintSubtypeId="ImpulseTorch_Magazine"/>
 		<Entry Class="EliteConsumables" BlueprintSubtypeId="FlakShotgun_Magazine"/>
 
-		<Entry Class="Components" BlueprintSubtypeId="AMP_PlateComponent" />
-		<Entry Class="Components" BlueprintSubtypeId="AMP_FrameComponent" />
+		<Entry Class="Components" BlueprintSubtypeId="ASH_PlateComponent" />
+		<Entry Class="Components" BlueprintSubtypeId="ASH_FrameComponent" />
 	 
 		<Entry Class="EliteConsumables" BlueprintSubtypeId="FlakShotgun_Magazine"/>
 		<Entry Class="EliteConsumables" BlueprintSubtypeId="FlakShotgun_Magazine"/>
