@@ -58,7 +58,7 @@ namespace Scripts
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
-                AmmoRound = "Hunter Shrapnel", // AmmoRound field of the ammo to spawn.
+                AmmoRound = "Forager Shrapnel", // AmmoRound field of the ammo to spawn.
                 Fragments = 75, // Number of projectiles to spawn.
                 Degrees = 80, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
