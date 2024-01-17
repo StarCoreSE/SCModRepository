@@ -8,7 +8,7 @@
 			</Id>
 			<Category>AMB</Category>
 			<MaxDistance>1000</MaxDistance>
-			<Volume>1</Volume>
+			<Volume>0.3</Volume>
 			<Loopable>false</Loopable>
 			<Waves>
 				<Wave Type="D3">
@@ -23,7 +23,7 @@
 			</Id>
 			<Category>AMB</Category>
 			<MaxDistance>1000</MaxDistance>
-			<Volume>1</Volume>
+			<Volume>0.3</Volume>
 			<Loopable>false</Loopable>
 			<Waves>
 				<Wave Type="D3">
@@ -38,7 +38,7 @@
 			</Id>
 			<Category>AMB</Category>
 			<MaxDistance>1000</MaxDistance>
-			<Volume>1</Volume>
+			<Volume>0.3</Volume>
 			<Loopable>false</Loopable>
 			<Waves>
 				<Wave Type="D3">
@@ -53,7 +53,7 @@
 			</Id>
 			<Category>AMB</Category>
 			<MaxDistance>1000</MaxDistance>
-			<Volume>1</Volume>
+			<Volume>0.3</Volume>
 			<Loopable>false</Loopable>
 			<Waves>
 				<Wave Type="D3">
@@ -68,7 +68,7 @@
 			</Id>
 			<Category>AMB</Category>
 			<MaxDistance>1000</MaxDistance>
-			<Volume>1</Volume>
+			<Volume>0.3</Volume>
 			<Loopable>false</Loopable>
 			<Waves>
 				<Wave Type="D3">
