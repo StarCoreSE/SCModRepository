@@ -236,7 +236,7 @@
         <Description>Description_AtmosphericThrust</Description>
         <CubeSize>Large</CubeSize>
         <BlockTopology>TriangleMesh</BlockTopology>
-        <Size x="1" y="1" z="1" />
+        <Size x="3" y="3" z="1" />
         <ModelOffset x="0" y="0" z="-1.25" />
         <HasPhysics>false</HasPhysics>
         <Model>Models\Cubes\Large\LargeFlatAtmosphericThrusterLarge.mwm</Model>
@@ -296,7 +296,7 @@
         <EffectivenessAtMaxInfluence>1</EffectivenessAtMaxInfluence>
         <NeedsAtmosphereForInfluence>true</NeedsAtmosphereForInfluence>
 
-        <FlameDamageLengthScale>0.6</FlameDamageLengthScale>
+        <FlameDamageLengthScale>0.0000000000001</FlameDamageLengthScale>
         <FlameLengthScale>1.15</FlameLengthScale>
         <FlameIdleColor>
           <X>0.3</X>
@@ -348,7 +348,7 @@
         <Description>Description_AtmosphericThrust</Description>
         <CubeSize>Large</CubeSize>
         <BlockTopology>TriangleMesh</BlockTopology>
-        <Size x="1" y="1" z="1" />
+        <Size x="3" y="3" z="1" />
         <ModelOffset x="0" y="0" z="-1.25" />
         <HasPhysics>false</HasPhysics>
         <Model>Models\Cubes\Large\LargeFlatAtmosphericThrusterDShapeLarge.mwm</Model>
@@ -408,7 +408,7 @@
         <EffectivenessAtMaxInfluence>1</EffectivenessAtMaxInfluence>
         <NeedsAtmosphereForInfluence>true</NeedsAtmosphereForInfluence>
 
-        <FlameDamageLengthScale>0.6</FlameDamageLengthScale>
+        <FlameDamageLengthScale>0.0000000000001</FlameDamageLengthScale>
         <FlameLengthScale>1.15</FlameLengthScale>
         <FlameIdleColor>
           <X>0.3</X>
