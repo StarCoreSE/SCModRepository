@@ -17,12 +17,12 @@
         Low Power Hunter: [2500m/s]
         Shieldpen BONK, no damage.
       </Description>
-      <Icon>Textures\GUI\Icons\Cubes\forager.png</Icon>
+      <Icon>Textures\GUI\Icons\Cubes\SC_Forager_remodel.dds</Icon>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="1" y="2" z="15"/>
       <ModelOffset x="0" y="0" z="0"/>
-      <Model>Models\Cubes\large\SC_AR_Forager.mwm</Model>
+      <Model>Models\remodels\SC_Forager_remodel.mwm</Model>
       <Components>
         <Component Subtype="SteelPlate" Count="1250" />
         <Component Subtype="Construction" Count="300" />
