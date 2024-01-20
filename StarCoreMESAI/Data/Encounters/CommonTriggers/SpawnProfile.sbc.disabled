@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EntityComponents>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+          <TypeId>Inventory</TypeId>
+          <SubtypeId>GreatFilterSpawnProfile</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Spawn]
+
+        [UseSpawn:true]
+
+        [StartsReady:true]
+        [SpawnMinCooldown:30]
+        [SpawnMaxCooldown:60]
+        [MaxSpawns:1]
+
+        [SpawnGroups:SpawnGreatFilter]
+
+        [UseRelativeSpawnPosition:false]
+        [MinDistance:1000]
+        [MaxDistance:1500]
+        [MinAltitude:500]
+        [MaxAltitude:1000]
+        [IgnoreSafetyChecks:false]
+
+      </Description>
+      
+    </EntityComponent>
+
+  </EntityComponents>
+</Definitions>

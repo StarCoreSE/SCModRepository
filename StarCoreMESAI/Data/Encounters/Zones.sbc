@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EntityComponents>
+
+    <!--There are spawn conditions. Zone conditions are linked to spawn conditions. 
+    
+    ALL OF THIS IS FUCKING CURSED. YOU HAVE TO NUKE THE WORLD TO NUKE ZONES. THERE'S PROBABLY A COMMAND
+    BUT I CAN'T FIND IT
+    
+    For Zone to work you need to give the spawngroup a [SpawnConditionsProfiles:]  
+    Then within the Spawn Condition profile you need to have a Zone Condition which
+    then points to a Zone.-->
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>SCZoneCondition1</SubtypeId>
+      </Id>
+      <Description>
+
+        [MES Zone Conditions]
+
+        [ZoneName:THELIGHTNINGSPHERE]
+        [MinDistanceFromZoneCenter:0]
+        [MaxDistanceFromZoneCenter:5000]
+
+      </Description>
+
+    </EntityComponent>
+
+    <!--what is my purpose?
+    you spawn a 10km radius sphere at 0,0-->
+    
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>SCZone1</SubtypeId>
+      </Id>
+      <Description>
+
+        [MES Zone]
+
+        [PublicName:THELIGHTNINGSPHERE]
+
+        [Active:true]
+        [Persistent:true]
+        [Strict:true]
+        [UseLimitedFactions:true]
+        [Factions:AI]
+        [Factions:AI2]
+
+        [UseZoneAnnounce:true]
+
+        [ZoneEnterAnnounce:You've entered THE LIGHTNING SPHERE]
+        [ZoneLeaveAnnounce:You've left THE LIGHTNING SPHERE]
+
+        [Coordinates:{X:0 Y:0 Z:0}]
+        [Radius:10000]
+
+      </Description>
+
+    </EntityComponent>    
+    
+    
+  </EntityComponents>
+</Definitions>

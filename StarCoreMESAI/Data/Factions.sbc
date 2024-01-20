@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Factions>
+  
+    <Faction Tag="AI" Founder="I HATE THE ANTICHRIST">
+      <Id>
+        <TypeId>MyObjectBuilder_FactionDefinition</TypeId>
+        <SubtypeId>StarCoreAI</SubtypeId>
+      </Id>
+      <DisplayName>StarCoreAIShip</DisplayName>
+      <IsDefault>true</IsDefault>
+      <Type>Miner</Type>
+	  <DefaultRelation>Enemies</DefaultRelation>
+	  <AcceptHumans>false</AcceptHumans>
+      <AutoAcceptMember>false</AutoAcceptMember>
+    </Faction>
+	
+    <Faction Tag="AI2" Founder="WHAT IS MY PURPOSE">
+      <Id>
+        <TypeId>MyObjectBuilder_FactionDefinition</TypeId>
+        <SubtypeId>StarCoreAITWO</SubtypeId>
+      </Id>
+      <DisplayName>StarCoreAIShipTWO</DisplayName>
+      <IsDefault>true</IsDefault>
+      <Type>Miner</Type>
+	  <DefaultRelation>Enemies</DefaultRelation>
+	  <AcceptHumans>false</AcceptHumans>
+      <AutoAcceptMember>false</AutoAcceptMember>
+    </Faction>	
+	
+	
+  </Factions>
+</Definitions>

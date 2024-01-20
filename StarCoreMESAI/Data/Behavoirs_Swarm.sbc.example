@@ -1,0 +1,482 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<SpawnGroups>
+		<!--Copy From This Line-->
+		<SpawnGroup>
+			<Id>
+				<TypeId>SpawnGroupDefinition</TypeId> <!--Do Not Edit-->
+				<SubtypeId>Empire_Small_Fighter</SubtypeId>
+			</Id>
+			<Description>
+			[Modular Encounters SpawnGroup]
+			[SpaceCargoShip:true]
+			[LunarCargoShip:true]
+			[SpaceRandomEncounter:true]
+			[AtmosphericCargoShip:true]
+			[PlanetaryInstallation:false]
+			[SkipAirDensityCheck:true]
+
+			[RivalAiSpawn:true]
+			[UseRivalAi:true]
+			[RivalAiReplaceRemoteControl:true]		
+			[ReplenishSystems:true]
+				
+			[RandomizeWeapons:true]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_ArmorRandom]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_PowerRandom]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_Thrusters]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_Jumpdrives]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_Tools]		
+			[ManipulationGroups:MES_ManipulationGroupsProfile_SmallGridCockpit]	
+
+			[ManipulationGroups:MES_ManipulationGroupsProfile_Skins]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_Paint_Empire]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_Hue]
+			[UseLootProfiles:true]
+			[LootProfiles:MES_SW_Lp_General]
+			[LootProfiles:MES_SW_Lp_Cabin_Empire]
+
+			[FactionOwner:ImpN]			
+
+        	[PrefabSpawningMode:Random]
+			</Description>
+			<IsPirate>true</IsPirate> <!--Do not edit-->
+			<Frequency>2.0</Frequency>
+			<Prefabs>
+				<Prefab SubtypeId="TIE Fighter">
+				    <Position>
+				        <X>0.0</X>
+				        <Y>0.0</Y>
+				        <Z>0.0</Z>
+				    </Position>
+				    <Speed>25</Speed>
+				    <Behaviour>SW_Behavior_Fighter_Swarm_Follow_Empire</Behaviour>
+				</Prefab>	
+			</Prefabs>
+		</SpawnGroup>
+		<!--Copy To This Line And Paste Directly Below-->	
+
+		<!--Copy From This Line-->
+		<SpawnGroup>
+			<Id>
+				<TypeId>SpawnGroupDefinition</TypeId> <!--Do Not Edit-->
+				<SubtypeId>Empire_Small_Fighter_Squad</SubtypeId>
+			</Id>
+			<Description>
+			[Modular Encounters SpawnGroup]
+			[SpaceCargoShip:true]
+			[LunarCargoShip:true]
+			[SpaceRandomEncounter:true]
+			[AtmosphericCargoShip:true]
+			[PlanetaryInstallation:false]
+			[SkipAirDensityCheck:true]
+
+			[RivalAiSpawn:true]
+			[UseRivalAi:true]
+			[RivalAiReplaceRemoteControl:true]		
+			[ReplenishSystems:true]
+				
+			[RandomizeWeapons:true]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_ArmorRandom]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_PowerRandom]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_Thrusters]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_Jumpdrives]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_Tools]		
+			[ManipulationGroups:MES_ManipulationGroupsProfile_SmallGridCockpit]	
+
+			[ManipulationGroups:MES_ManipulationGroupsProfile_Skins]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_Paint_Empire]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_Hue]
+			[UseLootProfiles:true]
+			[LootProfiles:MES_SW_Lp_General]
+			[LootProfiles:MES_SW_Lp_Cabin_Empire]
+
+			[FactionOwner:ImpN]			
+
+        	[PrefabSpawningMode:Random]
+			[SpawnConditionsProfiles:SW_SpawnProfile_Two_Player]
+			</Description>
+			<IsPirate>true</IsPirate> <!--Do not edit-->
+			<Frequency>2.0</Frequency>
+			<Prefabs>
+				<Prefab SubtypeId="TIE Fighter">
+				    <Position>
+				        <X>0.0</X>
+				        <Y>0.0</Y>
+				        <Z>0.0</Z>
+				    </Position>
+				    <Speed>25</Speed>
+				    <Behaviour>SW_Behavior_Fighter_Squad_Empire</Behaviour>
+				</Prefab>	
+			</Prefabs>
+		</SpawnGroup>
+		<!--Copy To This Line And Paste Directly Below-->	
+
+		<!--Copy From This Line-->
+		<SpawnGroup>
+			<Id>
+				<TypeId>SpawnGroupDefinition</TypeId> <!--Do Not Edit-->
+				<SubtypeId>Empire_Small_Fighter_Swarm</SubtypeId>
+			</Id>
+			<Description>
+			[Modular Encounters SpawnGroup]
+			[SpaceCargoShip:true]
+			[LunarCargoShip:true]
+			[SpaceRandomEncounter:true]
+			[AtmosphericCargoShip:true]
+			[PlanetaryInstallation:false]
+			[SkipAirDensityCheck:true]
+
+			[RivalAiSpawn:true]
+			[UseRivalAi:true]
+			[RivalAiReplaceRemoteControl:true]		
+			[ReplenishSystems:true]
+				
+			[RandomizeWeapons:true]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_ArmorRandom]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_PowerRandom]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_Thrusters]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_Jumpdrives]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_Tools]		
+			[ManipulationGroups:MES_ManipulationGroupsProfile_SmallGridCockpit]	
+
+			[ManipulationGroups:MES_ManipulationGroupsProfile_Skins]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_Paint_Empire]
+			[ManipulationGroups:MES_ManipulationGroupsProfile_Hue]
+			[UseLootProfiles:true]
+			[LootProfiles:MES_SW_Lp_General]
+			[LootProfiles:MES_SW_Lp_Cabin_Empire]
+
+			[FactionOwner:ImpN]			
+
+        	[PrefabSpawningMode:Random]
+			[SpawnConditionsProfiles:SW_SpawnProfile_Three_Player]
+			</Description>
+			<IsPirate>true</IsPirate> <!--Do not edit-->
+			<Frequency>2.0</Frequency>
+			<Prefabs>
+				<Prefab SubtypeId="TIE Fighter">
+				    <Position>
+				        <X>0.0</X>
+				        <Y>0.0</Y>
+				        <Z>0.0</Z>
+				    </Position>
+				    <Speed>25</Speed>
+				    <Behaviour>SW_Behavior_Fighter_Swarm_Empire</Behaviour>
+				</Prefab>	
+			</Prefabs>
+		</SpawnGroup>
+		<!--Copy To This Line And Paste Directly Below-->	
+
+		<!--Do Not Edit Below Here-->
+	</SpawnGroups>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <EntityComponents>
+
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+          <TypeId>Inventory</TypeId>
+          <SubtypeId>SW_Behavior_Fighter_Swarm_Follow_Empire</SubtypeId>
+      </Id>
+      <Description>
+
+      [RivalAI Behavior]
+      [BehaviorName:Fighter]
+
+
+    	[DisableInertiaDampeners:false]
+        [SlowDownOnWaypointApproach:true]
+        [ExtraSlowDownDistance:100]
+        [FlyLevelWithGravity:true]
+
+        [IdealMinSpeed:333]
+        [IdealMaxSpeed:400]
+
+        [EngageDistanceSpace:500]
+        [EngageDistancePlanet:600]
+        [DisengageDistanceSpace:800]
+        [DisengageDistancePlanet:800]
+
+        [AllowStrafing:true]
+        [StrafeMinDurationMs:10000]
+        [StrafeMaxDurationMs:15000]
+
+
+
+      </Description>
+      
+    </EntityComponent>
+
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+          <TypeId>Inventory</TypeId>
+          <SubtypeId>SW_Behavior_Fighter_Swarm_Empire</SubtypeId>
+      </Id>
+      <Description>
+
+      [RivalAI Behavior]
+      [BehaviorName:Fighter]
+
+
+    	[DisableInertiaDampeners:false]
+        [SlowDownOnWaypointApproach:true]
+        [ExtraSlowDownDistance:200]
+        [FlyLevelWithGravity:true]
+
+        [IdealMinSpeed:333]
+        [IdealMaxSpeed:400]
+
+        [EngageDistanceSpace:500]
+        [EngageDistancePlanet:600]
+        [DisengageDistanceSpace:800]
+        [DisengageDistancePlanet:800]
+
+        [AllowStrafing:true]
+        [StrafeMinDurationMs:10000]
+        [StrafeMaxDurationMs:15000]
+
+
+      	[Triggers:Trigger_Swarm_Empire]
+
+
+      </Description>
+      
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+          <TypeId>Inventory</TypeId>
+          <SubtypeId>SW_Behavior_Fighter_Squad_Empire</SubtypeId>
+      </Id>
+      <Description>
+
+      [RivalAI Behavior]
+      [BehaviorName:Fighter]
+
+
+    	[DisableInertiaDampeners:false]
+        [SlowDownOnWaypointApproach:true]
+        [ExtraSlowDownDistance:200]
+        [FlyLevelWithGravity:true]
+
+        [IdealMinSpeed:333]
+        [IdealMaxSpeed:400]
+
+        [EngageDistanceSpace:500]
+        [EngageDistancePlanet:600]
+        [DisengageDistanceSpace:800]
+        [DisengageDistancePlanet:800]
+
+        [AllowStrafing:true]
+        [StrafeMinDurationMs:10000]
+        [StrafeMaxDurationMs:15000]
+
+
+      	[Triggers:Trigger_Squad_Empire]
+
+
+      </Description>
+      
+    </EntityComponent>
+
+
+
+
+
+
+
+
+
+
+
+
+		<EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+			<Id>
+				<TypeId>Inventory</TypeId>
+				<SubtypeId>Trigger_Swarm_Empire</SubtypeId>
+			</Id>
+			<Description>
+
+				[RivalAI Trigger]
+
+			[UseTrigger:true]
+        	[Type:Timer]
+	
+        	[MinCooldownMs:0]
+        	[MaxCooldownMs:1]
+			[StartsReady:true]
+			
+			[MaxActions:-1]
+				[Actions:Action_Swarm_Empire]
+
+			</Description>
+
+		</EntityComponent>
+
+		<EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+			<Id>
+				<TypeId>Inventory</TypeId>
+				<SubtypeId>Action_Swarm_Empire</SubtypeId>
+			</Id>
+			<Description>
+
+				[RivalAI Action]
+
+				[SpawnEncounter:true]
+				[Spawner:SpawnGroup_Swarm_Empire]
+
+				[UseChatBroadcast:true]
+				[ChatData:Chat_Swarm_Empire]
+
+			</Description>
+
+		</EntityComponent>
+
+		<EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+			<Id>
+				<TypeId>Inventory</TypeId>
+				<SubtypeId>SpawnGroup_Swarm_Empire</SubtypeId>
+			</Id>
+			<Description>
+
+				[RivalAI Spawn]
+
+				[UseSpawn:true]
+
+				[SpawningType:CustomSpawn]
+				[StartsReady:true]
+				[MaxSpawns:12]
+
+				[SpawnGroups:Empire_Small_Fighter]
+
+   				[UseRelativeSpawnPosition:false]
+   				[MinDistance:30]
+   				[MaxDistance:300]
+   				[MinAltitude:0]
+   				[MaxAltitude:50]
+   				[IgnoreSafetyChecks:false]
+   				[ProcessAsAdminSpawn:true]
+				</Description>
+
+		</EntityComponent>
+
+		<EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+			<Id>
+				<TypeId>Inventory</TypeId>
+				<SubtypeId>Trigger_Squad_Empire</SubtypeId>
+			</Id>
+			<Description>
+
+				[RivalAI Trigger]
+
+			[UseTrigger:true]
+        	[Type:Timer]
+	
+        	[MinCooldownMs:0]
+        	[MaxCooldownMs:1]
+			[StartsReady:true]
+			
+			[MaxActions:-1]
+				[Actions:Action_Squad_Empire]
+
+			</Description>
+
+		</EntityComponent>
+
+		<EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+			<Id>
+				<TypeId>Inventory</TypeId>
+				<SubtypeId>Action_Squad_Empire</SubtypeId>
+			</Id>
+			<Description>
+
+				[RivalAI Action]
+
+				[SpawnEncounter:true]
+				[Spawner:SpawnGroup_Squad_Empire]
+
+				[UseChatBroadcast:true]
+				[ChatData:Chat_Swarm_Empire]
+
+			</Description>
+
+		</EntityComponent>
+
+		<EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+			<Id>
+				<TypeId>Inventory</TypeId>
+				<SubtypeId>SpawnGroup_Squad_Empire</SubtypeId>
+			</Id>
+			<Description>
+
+				[RivalAI Spawn]
+
+				[UseSpawn:true]
+
+				[SpawningType:CustomSpawn]
+				[StartsReady:true]
+				[MaxSpawns:3]
+
+				[SpawnGroups:Empire_Small_Fighter]
+
+   				[UseRelativeSpawnPosition:false]
+   				[MinDistance:30]
+   				[MaxDistance:300]
+   				[MinAltitude:0]
+   				[MaxAltitude:50]
+   				[IgnoreSafetyChecks:false]
+   				[ProcessAsAdminSpawn:true]
+				</Description>
+
+		</EntityComponent>
+
+		<EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+			<Id>
+				<TypeId>Inventory</TypeId>
+				<SubtypeId>Chat_Swarm_Empire</SubtypeId>
+			</Id>
+			<Description>
+
+				[RivalAI Chat]
+
+				[UseChat:true]
+				[StartsReady:true]
+				[MaxChats:1]
+				[BroadcastRandomly:true]
+				[IgnoreAntennaRequirement:true]
+				[IgnoredAntennaRangeOverride:50000]
+				[Author:Passive scan systems]
+				[Color:Red]
+
+				[ChatMessages:{PlayerName} look alive! {Faction} fighters are inbound to your position!]
+				[GPSLabel:V... Empire Fighters]
+				[BroadcastChatType:Both]
+				[ChatAudio:AQD_SB_Arc_040]
+
+
+			</Description>
+		</EntityComponent>
+
+
+  </EntityComponents>
+</Definitions>
