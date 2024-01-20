@@ -39,7 +39,7 @@
             <BuildTimeSeconds>40</BuildTimeSeconds>
 
             <ResourceSourceGroup>Battery</ResourceSourceGroup>
-            <MaxPowerOutput>12</MaxPowerOutput>
+            <MaxPowerOutput>12.01</MaxPowerOutput>
 
             <ResourceSinkGroup>BatteryBlock</ResourceSinkGroup>
             <RequiredPowerInput>11</RequiredPowerInput>
@@ -114,7 +114,7 @@
             <BuildTimeSeconds>40</BuildTimeSeconds>
 
             <ResourceSourceGroup>Reactors</ResourceSourceGroup>
-            <MaxPowerOutput>15</MaxPowerOutput>
+            <MaxPowerOutput>15.01</MaxPowerOutput>
 
             <InventorySize>
                 <X>1</X>
@@ -211,7 +211,7 @@
             <EdgeType>Light</EdgeType>
             <BuildTimeSeconds>100</BuildTimeSeconds>
             <ResourceSourceGroup>Reactors</ResourceSourceGroup>
-            <MaxPowerOutput>300</MaxPowerOutput>
+            <MaxPowerOutput>300.01</MaxPowerOutput>
             <InventorySize>
                 <X>2</X>
                 <Y>2</Y>
@@ -303,7 +303,7 @@
             <EdgeType>Light</EdgeType>
             <BuildTimeSeconds>40</BuildTimeSeconds>
             <ResourceSourceGroup>Reactors</ResourceSourceGroup>
-            <MaxPowerOutput>15</MaxPowerOutput>
+            <MaxPowerOutput>15.01</MaxPowerOutput>
             <InventorySize>
                 <X>1</X>
                 <Y>1</Y>
@@ -397,7 +397,7 @@
             <EdgeType>Light</EdgeType>
             <BuildTimeSeconds>100</BuildTimeSeconds>
             <ResourceSourceGroup>Reactors</ResourceSourceGroup>
-            <MaxPowerOutput>300</MaxPowerOutput>
+            <MaxPowerOutput>300.01</MaxPowerOutput>
             <InventorySize>
                 <X>2</X>
                 <Y>2</Y>
@@ -480,7 +480,7 @@
             <EdgeType>Light</EdgeType>
             <BuildTimeSeconds>40</BuildTimeSeconds>
             <ResourceSourceGroup>Battery</ResourceSourceGroup>
-            <MaxPowerOutput>12</MaxPowerOutput>
+            <MaxPowerOutput>12.01</MaxPowerOutput>
             <ResourceSinkGroup>BatteryBlock</ResourceSinkGroup>
             <RequiredPowerInput>11</RequiredPowerInput>
             <AdaptibleInput>true</AdaptibleInput>
