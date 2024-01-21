@@ -85,7 +85,7 @@
       <Id>
         <TypeId>SpawnGroupDefinition</TypeId>
         <!--Do Not Edit-->
-        <SubtypeId>SpawnTidewater</SubtypeId>
+        <SubtypeId>SpawnLongbow</SubtypeId>
       </Id>
       <Description>
 

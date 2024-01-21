@@ -9,6 +9,10 @@ using VRage.Utils;
 using VRageMath;
 using ProtoBuf;
 using Invalid.ModularEncountersSystems.API;
+using System.Text;
+using VRage.Game.GUI.TextPanel; // Ensure this is added for TextHUD API
+using Draygo.API;
+using static VRageRender.MyBillboard;
 
 namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 {
@@ -66,13 +70,34 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
         private const double EventResetIntervalSeconds = 1; // Time in seconds to reset the event trigger
         private DateTime lastBroadcastTime;
 
+        // TextHUD API fields
+        private HudAPIv2.HUDMessage aiShipsDestroyedHUD;
+        private HudAPIv2 HudAPI;
+        private bool hudInitialized = false;
+
         public override void LoadData()
         {
             if (MyAPIGateway.Multiplayer.IsServer)
             {
                 SpawnerAPI = new MESApi();
             }
+
+            // Initialize HudAPIv2 with a callback
+            new HudAPIv2(OnHudApiReady);
         }
+
+        private void OnHudApiReady()
+        {
+            // Initialize your HUD elements here
+            aiShipsDestroyedHUD = new HudAPIv2.HUDMessage(
+                new StringBuilder("AI Ships Destroyed: 0"),
+                new Vector2D(0.5, 0.5), // Position on the screen
+                Scale: 1.0,
+                Blend: BlendTypeEnum.PostPP);
+
+            hudInitialized = true;
+        }
+
 
         public override void BeforeStart()
         {
@@ -121,7 +146,13 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             aiShipsDestroyed++;
 
             // Show notification with the updated count
-            MyAPIGateway.Utilities.ShowNotification($"Compromised Remote Control Detected. AI Ships Destroyed: {aiShipsDestroyed}", 10000, "Red");
+            //MyAPIGateway.Utilities.ShowNotification($"Compromised Remote Control Detected. AI Ships Destroyed: {aiShipsDestroyed}", 10000, "Red");
+
+            // Update the HUD element
+            if (hudInitialized)
+            {
+                aiShipsDestroyedHUD.Message.Clear().Append($"AI Ships Destroyed: {aiShipsDestroyed}");
+            }
 
             // Add debug logging
             MyLog.Default.WriteLine($"compromisedevent triggered. Count: {aiShipsDestroyed}");
@@ -148,7 +179,6 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             }
         }
 
-
         private void OnMessageEntered(string messageText, ref bool sendToOthers)
         {
             string[] parts = messageText.Split(' ');
@@ -170,6 +200,13 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             MyAPIGateway.Utilities.MessageEntered -= OnMessageEntered; // Unsubscribe from chat message events
             MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(netID, NetworkHandler);
             SpawnerAPI.UnregisterListener();
+            HudAPI.Unload();
+
+            // Clean-up the HUD element
+            if (hudInitialized)
+            {
+                aiShipsDestroyedHUD.DeleteMessage();
+            }
         }
     }
 }
