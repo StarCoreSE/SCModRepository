@@ -47,12 +47,11 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
     public class SCMESWaveSpawnerComponent : MySessionComponentBase 
     {
 
-
         private ushort netID = 23489;
-
-
         private MESApi SpawnerAPI;
         bool registered = false;
+        private static int aiShipsDestroyed = 0;
+        private bool isEventTriggered = false;
 
         public override void LoadData()
         {
@@ -71,12 +70,6 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 
         }
 
-        private void compromisedevent(IMyRemoteControl arg1, IMyCubeGrid arg2)
-        {
-
-            MyAPIGateway.Utilities.ShowNotification("Compromised Remote Control Detected", 10000, "Red");
-        }
-
         public override void UpdateAfterSimulation()
         {
 
@@ -84,10 +77,32 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             {
 
                 SpawnerAPI.RegisterCompromisedRemoteWatcher(true, compromisedevent);
-
+                isEventTriggered = false; //oh god. this is an awful workaround. at least it works. otherwise it seems to trigger like 30 times on compromise otherwise.
             }
 
         }
+
+        private void compromisedevent(IMyRemoteControl arg1, IMyCubeGrid arg2)
+        {
+            if (isEventTriggered)
+            {
+                // Skip if the event has already been processed
+                return;
+            }
+
+            isEventTriggered = true; // Set the flag to true to indicate processing
+
+            // Increment the counter
+            aiShipsDestroyed++;
+
+            // Show notification with the updated count
+            MyAPIGateway.Utilities.ShowNotification($"Compromised Remote Control Detected. AI Ships Destroyed: {aiShipsDestroyed}", 10000, "Red");
+
+            // Add debug logging
+            MyLog.Default.WriteLine($"compromisedevent triggered. Count: {aiShipsDestroyed}");
+        }
+
+
 
         private void NetworkHandler(ushort arg1, byte[] arg2, ulong arg3, bool arg4)
         {
@@ -105,7 +120,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             // Check if the message is a command we are interested in
             string[] parts = messageText.Split(' ');
 
-            if (messageText.StartsWith("/mesmesspawnredteam", StringComparison.OrdinalIgnoreCase))
+            if (messageText.StartsWith("/SCStartGauntlet", StringComparison.OrdinalIgnoreCase))
             {
 
             }
