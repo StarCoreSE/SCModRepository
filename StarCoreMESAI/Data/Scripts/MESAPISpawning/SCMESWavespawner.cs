@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Sandbox.Game;
 using Sandbox.ModAPI;
 using VRage.Game;
@@ -9,6 +10,10 @@ using VRage.Utils;
 using VRageMath;
 using ProtoBuf;
 using Invalid.ModularEncountersSystems.API;
+using System.Text;
+using VRage.Game.GUI.TextPanel;
+using InvalidWave.Draygo.API;
+using static VRageRender.MyBillboard;
 
 namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 {
@@ -54,6 +59,18 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
         }
     }
 
+    public class SpawnGroupInfo
+    {
+        public int Quantity { get; set; }
+        public int SpawnTime { get; set; }
+
+        public SpawnGroupInfo(int quantity, int spawnTime)
+        {
+            Quantity = quantity;
+            SpawnTime = spawnTime;
+        }
+    }
+
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     public class SCMESWaveSpawnerComponent : MySessionComponentBase
     {
@@ -66,12 +83,50 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
         private const double EventResetIntervalSeconds = 1; // Time in seconds to reset the event trigger
         private DateTime lastBroadcastTime;
 
+        // TextHUD API fields
+        private HudAPIv2.HUDMessage aiShipsDestroyedHUD;
+        private HudAPIv2 HudAPI;
+        private bool hudInitialized = false;
+        private HudAPIv2.HUDMessage waveTimerHUD;
+
+        // Dictionary for spawn groups and their spawn times
+        private Dictionary<string, SpawnGroupInfo> spawnGroupTimings = new Dictionary<string, SpawnGroupInfo>(); private DateTime lastWaveCheckTime;
+        private bool wavesStarted = false; // Flag to control wave spawning
+
         public override void LoadData()
         {
             if (MyAPIGateway.Multiplayer.IsServer)
             {
                 SpawnerAPI = new MESApi();
             }
+
+            // Initialize HudAPIv2 with a callback
+            new HudAPIv2(OnHudApiReady);
+
+            // Populate the dictionary with spawn groups and their info
+            spawnGroupTimings.Add("SpawnSCDM", new SpawnGroupInfo(1, 6));      // 3 units, spawn after 6 seconds
+            spawnGroupTimings.Add("SpawnRIAN", new SpawnGroupInfo(2, 12));     // 2 units, spawn after 12 seconds
+            spawnGroupTimings.Add("SpawnTidewater", new SpawnGroupInfo(3, 18)); // 1 unit, spawn after 18 seconds
+            spawnGroupTimings.Add("SpawnLongbow", new SpawnGroupInfo(4, 24)); 
+                                                                                // Add other spawn groups and info as needed
+        }
+
+        private void OnHudApiReady()
+        {
+            // Initialize your HUD elements here
+            aiShipsDestroyedHUD = new HudAPIv2.HUDMessage(
+                new StringBuilder("AI Ships Destroyed: 0"),
+                new Vector2D(0.5, 0.5), // Position on the screen
+                Scale: 1.0,
+                Blend: BlendTypeEnum.PostPP);
+
+            waveTimerHUD = new HudAPIv2.HUDMessage(
+                new StringBuilder("Next Wave: --:--"),
+                new Vector2D(0.5, 0.55), // Adjust the position as needed
+                Scale: 1.0,
+                Blend: BlendTypeEnum.PostPP);
+
+            hudInitialized = true;
         }
 
         public override void BeforeStart()
@@ -82,50 +137,84 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 
         public override void UpdateAfterSimulation()
         {
-            if (MyAPIGateway.Multiplayer.IsServer)
+            if (MyAPIGateway.Multiplayer.IsServer && wavesStarted)
             {
+                // Registering the event watcher only once
                 if (SpawnerAPI.MESApiReady && !registered)
                 {
                     SpawnerAPI.RegisterCompromisedRemoteWatcher(true, compromisedevent);
-                    isEventTriggered = false;
                     registered = true;
                 }
 
-                // Check if 5 seconds have passed since the last broadcast
+                // Broadcasting counter update at regular intervals
                 if ((DateTime.UtcNow - lastBroadcastTime).TotalSeconds >= 5)
                 {
                     BroadcastCounter();
                     lastBroadcastTime = DateTime.UtcNow;
                 }
 
-                // Reset the isEventTriggered flag after the interval has passed
+                if (hudInitialized && spawnGroupTimings.Count > 0)
+                {
+                    var firstGroupInfo = new List<SpawnGroupInfo>(spawnGroupTimings.Values)[0];
+                    var nextWaveSpawnTime = firstGroupInfo.SpawnTime;
+                    var timeSinceStart = (int)(DateTime.UtcNow - lastWaveCheckTime).TotalSeconds;
+                    var timeUntilNextWave = nextWaveSpawnTime - timeSinceStart;
+                    if (timeUntilNextWave < 0) timeUntilNextWave = 0;
+                    waveTimerHUD.Message.Clear().Append("Next Wave: " + (timeUntilNextWave / 60).ToString("D2") + ":" + (timeUntilNextWave % 60).ToString("D2"));
+                }
+
                 if ((DateTime.UtcNow - lastEventTriggerTime).TotalSeconds >= EventResetIntervalSeconds)
                 {
+                    if (isEventTriggered)
+                    {
+                        MyLog.Default.WriteLine("SCMESWaveSpawner: Resetting isEventTriggered flag.");
+                    }
                     isEventTriggered = false;
+                }
+
+                foreach (var spawnGroup in spawnGroupTimings)
+                {
+                    var groupKey = spawnGroup.Key;
+                    var groupValue = spawnGroup.Value;
+                    var quantity = groupValue.Quantity;
+                    var spawnTime = groupValue.SpawnTime;
+
+                    if ((DateTime.UtcNow - lastWaveCheckTime).TotalSeconds >= spawnTime)
+                    {
+                        Vector3D spawnCoords = new Vector3D(-10000, 0, 0);
+
+                        for (int i = 0; i < quantity; i++)
+                        {
+                            // Spawn each unit separately
+                            SpawnerAPI.SpawnSpaceCargoShip(spawnCoords, new List<string> { groupKey });
+                        }
+
+                        // Remove the spawned group from the dictionary to avoid respawning
+                        spawnGroupTimings.Remove(groupKey);
+                        break;
+                    }
+                }
+
+                if (spawnGroupTimings.Count == 0)
+                {
+                    wavesStarted = false;
                 }
             }
         }
 
         private void compromisedevent(IMyRemoteControl arg1, IMyCubeGrid arg2)
         {
-            if (isEventTriggered)
-            {
-                // Skip if the event has already been processed
-                return;
-            }
-
-            isEventTriggered = true; // Set the flag to true to indicate processing
-            lastEventTriggerTime = DateTime.UtcNow; // Update the time when event was last triggered
-
-            // Increment the counter
+            // Incrementing the counter each time an AI ship is destroyed
             aiShipsDestroyed++;
+            MyLog.Default.WriteLine($"SCMESWaveSpawner: Compromised event triggered. AI Ships Destroyed: {aiShipsDestroyed}");
 
-            // Show notification with the updated count
-            MyAPIGateway.Utilities.ShowNotification($"Compromised Remote Control Detected. AI Ships Destroyed: {aiShipsDestroyed}", 10000, "Red");
-
-            // Add debug logging
-            MyLog.Default.WriteLine($"compromisedevent triggered. Count: {aiShipsDestroyed}");
+            // Updating the HUD element
+            if (hudInitialized)
+            {
+                aiShipsDestroyedHUD.Message.Clear().Append($"AI Ships Destroyed: {aiShipsDestroyed}");
+            }
         }
+
 
         private void BroadcastCounter()
         {
@@ -139,7 +228,6 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             if (MyAPIGateway.Session.IsServer) return;
 
             var packet = MyAPIGateway.Utilities.SerializeFromBinary<Packet>(arg2);
-            // Use a type check followed by an explicit cast
             if (packet is CounterUpdatePacket)
             {
                 var counterPacket = (CounterUpdatePacket)packet;
@@ -148,21 +236,15 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             }
         }
 
-
         private void OnMessageEntered(string messageText, ref bool sendToOthers)
         {
-            string[] parts = messageText.Split(' ');
-
             if (messageText.StartsWith("/SCStartGauntlet", StringComparison.OrdinalIgnoreCase))
             {
-                // Handle command logic here
+                wavesStarted = true; // Start spawning waves
+                lastWaveCheckTime = DateTime.UtcNow; // Initialize the wave check time
+                sendToOthers = false;
+                MyAPIGateway.Utilities.ShowMessage("SCMESWaveSpawner", "Started spawning waves");
             }
-            else
-            {
-                return;
-            }
-
-            sendToOthers = false;
         }
 
         protected override void UnloadData()
@@ -170,6 +252,10 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             MyAPIGateway.Utilities.MessageEntered -= OnMessageEntered; // Unsubscribe from chat message events
             MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(netID, NetworkHandler);
             SpawnerAPI.UnregisterListener();
+            if (hudInitialized)
+            {
+                aiShipsDestroyedHUD.DeleteMessage();
+            }
         }
     }
 }
