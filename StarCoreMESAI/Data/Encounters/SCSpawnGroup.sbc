@@ -18,8 +18,8 @@
         [RivalAiReplaceRemoteControl:true]
         [ReplenishSystems:true]
         [UseRandomNameGenerator:true]
-        [RandomGridNamePattern: NeutralAdjective BaddieNoun]
-        [RandomGridNamePrefix:FL/BRW]
+        [RandomGridNamePattern:NeutralAdjective BaddieNoun]
+        [RandomGridNamePrefix:FL/BRW ]
 
         [SpawnConditionsProfiles:SCSpawnCondition1]
 
@@ -47,7 +47,7 @@
       <Id>
         <TypeId>SpawnGroupDefinition</TypeId>
         <!--Do Not Edit-->
-        <SubtypeId>SpawnSCDM</SubtypeId>
+        <SubtypeId>SpawnRIAN</SubtypeId>
       </Id>
       <Description>
 
@@ -56,8 +56,8 @@
         [RivalAiReplaceRemoteControl:true]
         [ReplenishSystems:true]
         [UseRandomNameGenerator:true]
-        [RandomGridNamePattern: NeutralAdjective InsectNoun]
-        [RandomGridNamePrefix:FS/SPR]
+        [RandomGridNamePattern:NeutralAdjective BirdNoun]
+        [RandomGridNamePrefix:FS/SPR ]
 
         [SpawnConditionsProfiles:SCSpawnCondition1]
 
@@ -79,6 +79,81 @@
       </Prefabs>
     </SpawnGroup>
 
+    <!--FASTMOVERS -->
+
+    <SpawnGroup>
+      <Id>
+        <TypeId>SpawnGroupDefinition</TypeId>
+        <!--Do Not Edit-->
+        <SubtypeId>SpawnTidewater</SubtypeId>
+      </Id>
+      <Description>
+
+        [Modular Encounters SpawnGroup]
+        [UseRivalAi:true]
+        [RivalAiReplaceRemoteControl:true]
+        [ReplenishSystems:true]
+        [UseRandomNameGenerator:true]
+        [RandomGridNamePattern:GoodAdjective InsectNoun]
+        [RandomGridNamePrefix:FS/MVR ]
+
+        [SpawnConditionsProfiles:SCSpawnCondition1]
+
+
+      </Description>
+      <IsPirate>true</IsPirate>
+      <!--Do not edit-->
+      <Frequency>5.0</Frequency>
+      <Prefabs>
+        <Prefab SubtypeId="Longbow-MESAI">
+          <Position>
+            <X>0.0</X>
+            <Y>0.0</Y>
+            <Z>0.0</Z>
+          </Position>
+          <Speed>1</Speed>
+          <Behaviour>SCFighter</Behaviour>
+        </Prefab>
+      </Prefabs>
+    </SpawnGroup>
+
+
+    <!-- HEAVY -->
+    <SpawnGroup>
+      <Id>
+        <TypeId>SpawnGroupDefinition</TypeId>
+        <!--Do Not Edit-->
+        <SubtypeId>SpawnTidewater</SubtypeId>
+      </Id>
+      <Description>
+
+        [Modular Encounters SpawnGroup]
+        [UseRivalAi:true]
+        [RivalAiReplaceRemoteControl:true]
+        [ReplenishSystems:true]
+        [UseRandomNameGenerator:true]
+        [RandomGridNamePattern:ColorAdjective JobNoun]
+        [RandomGridNamePrefix:FL/HVY ]
+
+        [SpawnConditionsProfiles:SCSpawnCondition1]
+
+
+      </Description>
+      <IsPirate>true</IsPirate>
+      <!--Do not edit-->
+      <Frequency>5.0</Frequency>
+      <Prefabs>
+        <Prefab SubtypeId="Tidewater-MESAI">
+          <Position>
+            <X>0.0</X>
+            <Y>0.0</Y>
+            <Z>0.0</Z>
+          </Position>
+          <Speed>1</Speed>
+          <Behaviour>SCFighter</Behaviour>
+        </Prefab>
+      </Prefabs>
+    </SpawnGroup>
 
     <!--Do Not Edit Below Here-->
 	</SpawnGroups>

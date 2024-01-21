@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Sandbox.Game;
 using Sandbox.ModAPI;
 using VRage.Game;
@@ -14,12 +13,12 @@ using Invalid.ModularEncountersSystems.API;
 namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 {
     [ProtoInclude(1000, typeof(ChatCommandPacket))]
+    [ProtoInclude(1001, typeof(CounterUpdatePacket))]
     [ProtoContract]
     public class Packet
     {
         public Packet()
         {
-
         }
     }
 
@@ -29,57 +28,82 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
         [ProtoMember(1)]
         public string CommandString;
 
-
-        // Add a parameterless constructor required by ProtoBuf
         public ChatCommandPacket()
         {
-
         }
 
         public ChatCommandPacket(string CommandString)
         {
             this.CommandString = CommandString;
+        }
+    }
 
+    [ProtoContract]
+    public class CounterUpdatePacket : Packet
+    {
+        [ProtoMember(1)]
+        public int CounterValue;
+
+        public CounterUpdatePacket()
+        {
+        }
+
+        public CounterUpdatePacket(int counterValue)
+        {
+            this.CounterValue = counterValue;
         }
     }
 
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
-    public class SCMESWaveSpawnerComponent : MySessionComponentBase 
+    public class SCMESWaveSpawnerComponent : MySessionComponentBase
     {
-
         private ushort netID = 23489;
         private MESApi SpawnerAPI;
-        bool registered = false;
+        private bool registered = false;
         private static int aiShipsDestroyed = 0;
         private bool isEventTriggered = false;
+        private DateTime lastEventTriggerTime;
+        private const double EventResetIntervalSeconds = 1; // Time in seconds to reset the event trigger
+        private DateTime lastBroadcastTime;
 
         public override void LoadData()
         {
-             if (MyAPIGateway.Multiplayer.IsServer)
+            if (MyAPIGateway.Multiplayer.IsServer)
             {
                 SpawnerAPI = new MESApi();
             }
-
         }
 
         public override void BeforeStart()
         {
             MyAPIGateway.Utilities.MessageEntered += OnMessageEntered; // Listen for chat messages
             MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(netID, NetworkHandler);
-
-
         }
 
         public override void UpdateAfterSimulation()
         {
-
-            if (MyAPIGateway.Multiplayer.IsServer && SpawnerAPI.MESApiReady && !registered)
+            if (MyAPIGateway.Multiplayer.IsServer)
             {
+                if (SpawnerAPI.MESApiReady && !registered)
+                {
+                    SpawnerAPI.RegisterCompromisedRemoteWatcher(true, compromisedevent);
+                    isEventTriggered = false;
+                    registered = true;
+                }
 
-                SpawnerAPI.RegisterCompromisedRemoteWatcher(true, compromisedevent);
-                isEventTriggered = false; //oh god. this is an awful workaround. at least it works. otherwise it seems to trigger like 30 times on compromise otherwise.
+                // Check if 5 seconds have passed since the last broadcast
+                if ((DateTime.UtcNow - lastBroadcastTime).TotalSeconds >= 5)
+                {
+                    BroadcastCounter();
+                    lastBroadcastTime = DateTime.UtcNow;
+                }
+
+                // Reset the isEventTriggered flag after the interval has passed
+                if ((DateTime.UtcNow - lastEventTriggerTime).TotalSeconds >= EventResetIntervalSeconds)
+                {
+                    isEventTriggered = false;
+                }
             }
-
         }
 
         private void compromisedevent(IMyRemoteControl arg1, IMyCubeGrid arg2)
@@ -91,6 +115,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             }
 
             isEventTriggered = true; // Set the flag to true to indicate processing
+            lastEventTriggerTime = DateTime.UtcNow; // Update the time when event was last triggered
 
             // Increment the counter
             aiShipsDestroyed++;
@@ -102,33 +127,43 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             MyLog.Default.WriteLine($"compromisedevent triggered. Count: {aiShipsDestroyed}");
         }
 
-
+        private void BroadcastCounter()
+        {
+            var packet = new CounterUpdatePacket(aiShipsDestroyed);
+            var serializedPacket = MyAPIGateway.Utilities.SerializeToBinary(packet);
+            MyAPIGateway.Multiplayer.SendMessageToOthers(netID, serializedPacket);
+        }
 
         private void NetworkHandler(ushort arg1, byte[] arg2, ulong arg3, bool arg4)
         {
-            if (!MyAPIGateway.Session.IsServer) return;
+            if (MyAPIGateway.Session.IsServer) return;
 
-            Packet packet = MyAPIGateway.Utilities.SerializeFromBinary<Packet>(arg2);
-            if (packet == null) return;
-
-
-
+            var packet = MyAPIGateway.Utilities.SerializeFromBinary<Packet>(arg2);
+            // Use a type check followed by an explicit cast
+            if (packet is CounterUpdatePacket)
+            {
+                var counterPacket = (CounterUpdatePacket)packet;
+                // Update the local counter with the value from the server
+                aiShipsDestroyed = counterPacket.CounterValue;
+            }
         }
+
 
         private void OnMessageEntered(string messageText, ref bool sendToOthers)
         {
-            // Check if the message is a command we are interested in
             string[] parts = messageText.Split(' ');
 
             if (messageText.StartsWith("/SCStartGauntlet", StringComparison.OrdinalIgnoreCase))
             {
-
+                // Handle command logic here
             }
-            else { return; }
+            else
+            {
+                return;
+            }
 
             sendToOthers = false;
         }
-
 
         protected override void UnloadData()
         {
