@@ -104,10 +104,10 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             new HudAPIv2(OnHudApiReady);
 
             // Populate the dictionary with spawn groups and their info
-            spawnGroupTimings.Add("SpawnSCDM", new SpawnGroupInfo(3, 6));      // 3 units, spawn after 6 seconds
+            spawnGroupTimings.Add("SpawnSCDM", new SpawnGroupInfo(1, 6));      // 3 units, spawn after 6 seconds
             spawnGroupTimings.Add("SpawnRIAN", new SpawnGroupInfo(2, 12));     // 2 units, spawn after 12 seconds
-            spawnGroupTimings.Add("SpawnTidewater", new SpawnGroupInfo(1, 18)); // 1 unit, spawn after 18 seconds
-            spawnGroupTimings.Add("SpawnLongbow", new SpawnGroupInfo(1, 24)); 
+            spawnGroupTimings.Add("SpawnTidewater", new SpawnGroupInfo(3, 18)); // 1 unit, spawn after 18 seconds
+            spawnGroupTimings.Add("SpawnLongbow", new SpawnGroupInfo(4, 24)); 
                                                                                 // Add other spawn groups and info as needed
         }
 
@@ -182,14 +182,14 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                     if ((DateTime.UtcNow - lastWaveCheckTime).TotalSeconds >= spawnTime)
                     {
                         Vector3D spawnCoords = new Vector3D(-10000, 0, 0);
-                        List<string> spawnGroups = new List<string>();
 
                         for (int i = 0; i < quantity; i++)
                         {
-                            spawnGroups.Add(groupKey);
+                            // Spawn each unit separately
+                            SpawnerAPI.SpawnSpaceCargoShip(spawnCoords, new List<string> { groupKey });
                         }
 
-                        SpawnerAPI.SpawnSpaceCargoShip(spawnCoords, spawnGroups);
+                        // Remove the spawned group from the dictionary to avoid respawning
                         spawnGroupTimings.Remove(groupKey);
                         break;
                     }
