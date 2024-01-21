@@ -17,7 +17,9 @@
         [UseRivalAi:true]
         [RivalAiReplaceRemoteControl:true]
         [ReplenishSystems:true]
-
+        [UseRandomNameGenerator:true]
+        [RandomGridNamePattern:Goblin BadAdjective BadNoun]
+        [RandomGridNamePrefix:FastMoverAI ]
 
         [SpawnConditionsProfiles:SCSpawnCondition1]
 
