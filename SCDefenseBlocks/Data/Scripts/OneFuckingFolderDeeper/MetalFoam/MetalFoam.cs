@@ -86,13 +86,13 @@ namespace Invalid.MetalFoam
             currentFoamPositions.Add(block.Position);
             NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME;
 
-            NotifyPlayers("Foam generation started!", MyFontEnum.Green);
+            //NotifyPlayers("Foam generation started!", MyFontEnum.Green);
             CreateEffects();
         }
         private void StopFoamGeneration()
         {
             NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME;
-            NotifyPlayers("Foam generation stopped!", MyFontEnum.Red);
+            //NotifyPlayers("Foam generation stopped!", MyFontEnum.Red);
         }
 
         private void NotifyPlayers(string message, string font)
