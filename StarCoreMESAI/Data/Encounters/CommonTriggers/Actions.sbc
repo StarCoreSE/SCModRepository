@@ -1,0 +1,753 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EntityComponents>
+
+    <!--ACTIONS-->
+    
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+          <TypeId>Inventory</TypeId>
+          <SubtypeId>SCZoneOutAction</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Action]
+
+        [ChangeBehaviorSubclass:true]
+        [NewBehaviorSubclass:CargoShip]
+        [ChangeAutopilotProfile:true]
+        [AutopilotProfile:Tertiary]
+        [AddWaypoints:true]
+        [WaypointsToAdd:SCCenterWaypoint]
+        [SwitchToNextWaypoint:true]
+
+
+        [UseChatBroadcast:true]
+        [ChatData:OutOfZoneMessage]
+
+
+      </Description>
+      
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>SCInsideZoneAction</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Action]
+
+        [ChangeBehaviorSubclass:true]
+        [NewBehaviorSubclass:Fighter]
+        [ChangeAutopilotProfile:true]
+        [AutopilotProfile:Primary]
+
+
+        [UseChatBroadcast:true]
+        [ChatData:InsideZoneMessage]
+
+
+      </Description>
+
+    </EntityComponent>
+
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>TakingDamageAction</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Action]
+
+        [UseChatBroadcast:true]
+        [ChatData:TakingDamageMessage]
+
+
+      </Description>
+
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>SCHealthCheckAction1</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Action]
+
+        [Retreat:false]
+
+        [UseChatBroadcast:true]
+        [ChatData:SCHealthCheckAction1Chat]
+
+      </Description>
+
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>AcquiredTargetAction</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Action]
+
+
+        [UseChatBroadcast:true]
+        [ChatData:AcquiredTargetMessage]
+
+
+      </Description>
+
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>RefreshingTargetAction</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Action]
+
+        [RefreshTarget:true]
+
+        [UseChatBroadcast:true]
+        [ChatData:RefreshingTargetMessage]
+
+
+      </Description>
+
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>CompromisedAction</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Action]
+
+        [RandomGyroRotation:true]
+        [ForceDespawn:true]
+        [UseChatBroadcast:true]
+        [ChatData:CompromisedMessage]
+
+
+      </Description>
+
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>WeaponsBelow50Action</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Action]
+
+        [DisableTriggers:true]
+        [DisableTriggerNames:CowardAIHealthCheckTrigger]
+        [DisableTriggerNames:CloseRangePanicTrigger]
+        [TriggerTimerBlocks:true]
+        [TimerBlockNames:TimerAB]
+
+        [UseChatBroadcast:true]
+        [ChatData:WeaponsBelow50Message]
+
+
+      </Description>
+
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>RamConstantlyAction</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Action]
+
+
+        [UseChatBroadcast:true]
+        [TriggerTimerBlocks:true]
+        [TimerBlockNames:TimerAB]
+        [ChatData:RamConstantlyMessage]
+        [Ramming:true]
+
+
+      </Description>
+
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>CowardAIHealthCheckAction</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Action]
+
+        [Retreat:false]
+        [ChangeAutopilotProfile:true]
+        [AutopilotProfile:Secondary]
+
+
+        [UseChatBroadcast:true]
+        [ChatData:CowardAIHealthCheckMessage]
+
+      </Description>
+
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>CloseRangeAttackAction</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Action]
+
+        [Retreat:false]
+        [TriggerTimerBlocks:true]
+        [TimerBlockNames:CloseRangeTimer]
+
+
+        [UseChatBroadcast:true]
+        [ChatData:CloseRangeAttackMessage]
+
+      </Description>
+
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>CloseRangePanicAction</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Action]
+
+        [Retreat:false]
+        [TriggerTimerBlocks:true]
+        [TimerBlockNames:CloseRangeTimer]
+
+
+        [UseChatBroadcast:true]
+        [ChatData:CloseRangePanicMessage]
+
+      </Description>
+
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>ForceFireAction</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Action]
+
+        [Retreat:false]
+        [TriggerTimerBlocks:true]
+        [TimerBlockNames:GunTimer]
+
+
+        [UseChatBroadcast:false]
+        [ChatData:ForceFireMessage]
+
+      </Description>
+
+    </EntityComponent>
+
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>GreatDyingDeadAction</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Action]
+
+        [SpawnEncounter:true]
+        [Spawner:GreatFilterSpawnProfile]
+
+        [UseChatBroadcast:true]
+        [ChatData:GreatDyingDeadMessage]
+
+
+      </Description>
+
+    </EntityComponent>
+
+
+
+    <!--CHATS To broadcast to chat, the thing needs a fucking antenna! I spent like three fucking hours on this
+FUCK. You can ignore the requirement with [IgnoreAntennaRequirement:true]. the message will be from the rc, range with 
+[IgnoredAntennaRangeOverride:69420]-->
+    
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>TakingDamageMessage</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Chat]
+
+        [UseChat:true]
+        [StartsReady:true]
+        [MaxChats:-1]
+        [BroadcastRandomly:true]
+        [Author:{GridName}]
+        [Color:Red]
+
+        [IgnoreAntennaRequirement:true]
+        [IgnoredAntennaRangeOverride:20000]
+
+        [ChatMessages:I'm taking hull damage!]
+        [BroadcastChatType:Chat]
+        
+
+        [ChatMessages:BLUE. HURT.]
+        [BroadcastChatType:Chat]
+        
+
+        [ChatMessages:They got through the shields!]
+        [BroadcastChatType:Chat]
+        
+
+        [ChatMessages:Armor integrity is decreasing.]
+        [BroadcastChatType:Chat]
+        
+
+      </Description>
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>OutOfZoneMessage</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Chat]
+
+        [UseChat:true]
+        [StartsReady:true]
+        [MaxChats:-1]
+        [BroadcastRandomly:true]
+        [Author:{GridName}]
+        [Color:Red]
+
+        [IgnoreAntennaRequirement:true]
+        [IgnoredAntennaRangeOverride:20000]
+
+        [ChatMessages:I'm outside of the combat area!]
+        [BroadcastChatType:Chat]
+        
+
+        [ChatMessages:We're taking HarmZone™ damage!]
+        [BroadcastChatType:Chat]
+        
+
+
+      </Description>
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>InsideZoneMessage</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Chat]
+
+        [UseChat:true]
+        [StartsReady:true]
+        [MaxChats:1]
+        [BroadcastRandomly:true]
+        [Author:{GridName}]
+        [Color:Red]
+
+        [IgnoreAntennaRequirement:true]
+        [IgnoredAntennaRangeOverride:20000]
+
+        [ChatMessages:I'm inside of the zone.]
+        [BroadcastChatType:Chat]
+        
+
+        [ChatMessages:My legs are OK.]
+        [BroadcastChatType:Chat]
+        
+
+
+      </Description>
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>SCHealthCheckAction1Chat</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Chat]
+
+        [UseChat:true]
+        [StartsReady:true]
+        [MaxChats:1]
+        [BroadcastRandomly:true]
+        [Author:{GridName}]
+        [Color:Red]
+
+        [IgnoreAntennaRequirement:true]
+        [IgnoredAntennaRangeOverride:20000]
+
+        [ChatMessages:Where's the other half of the ship?!]
+        
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:It's okay, we're still flying half of a ship.]
+        
+        [BroadcastChatType:Chat]
+
+      </Description>
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>AcquiredTargetMessage</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Chat]
+
+        [UseChat:true]
+        [StartsReady:true]
+        [MaxChats:1]
+        [BroadcastRandomly:true]
+        [Author:{GridName}]
+        [Color:Red]
+
+        [IgnoreAntennaRequirement:true]
+        [IgnoredAntennaRangeOverride:20000]
+
+        [ChatMessages:I see the enemy!]
+        
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:Engaging a target.]
+        
+        [BroadcastChatType:Chat]
+
+      </Description>
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>RefreshingTargetMessage</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Chat]
+
+        [UseChat:true]
+        [StartsReady:true]
+        [BroadcastRandomly:true]
+        [Author:{GridName}]
+        [Color:Red]
+
+        [IgnoreAntennaRequirement:true]
+        [IgnoredAntennaRangeOverride:20000]
+
+        [ChatMessages:Reacquiring target.]
+        
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:Refreshing target.]
+        
+        [BroadcastChatType:Chat]
+
+      </Description>
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>CompromisedMessage</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Chat]
+
+        [UseChat:true]
+        [StartsReady:true]
+        [BroadcastRandomly:true]
+        [Author:{GridName}]
+        [Color:Red]
+
+        [IgnoreAntennaRequirement:true]
+        [IgnoredAntennaRangeOverride:20000]
+
+        [ChatMessages:We've lost control. [DED]]
+        
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:We're dead in the water. [DED]]
+        
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:Control is offline. [DED]]
+        
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:OMNISSIAH GUIDE MY SHIP [DED]]
+        
+        [BroadcastChatType:Chat]
+
+      </Description>
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>WeaponsBelow50Message</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Chat]
+
+        [UseChat:true]
+        [StartsReady:true]
+        [BroadcastRandomly:true]
+        [Author:{GridName}]
+        [Color:Red]
+        [MaxChats:1]
+
+        [IgnoreAntennaRequirement:true]
+        [IgnoredAntennaRangeOverride:20000]
+
+        [ChatMessages:Most weapons are down.]
+        
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:Stop targeting weapons, asshole!]
+        
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:Guns are going offline.]
+        
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:Offensive systems compromised.]
+        
+        [BroadcastChatType:Chat]
+
+      </Description>
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>RamConstantlyMessage</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Chat]
+
+        [UseChat:true]
+        [StartsReady:true]
+        [BroadcastRandomly:true]
+        [Author:{GridName}]
+        [Color:Red]
+        [MaxChats:1]
+
+        [IgnoreAntennaRequirement:true]
+        [IgnoredAntennaRangeOverride:20000]
+
+        [ChatMessages:IT'S TIME]
+        
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:AAAAAAAAAAAAAAAAAAAAAAAAAAAAA]
+        
+        [BroadcastChatType:Chat]
+
+
+      </Description>
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>CowardAIHealthCheckMessage</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Chat]
+
+        [UseChat:true]
+        [StartsReady:true]
+        [BroadcastRandomly:true]
+        [Author:{GridName}]
+        [Color:Red]
+        [MaxChats:1]
+
+        [IgnoreAntennaRequirement:true]
+        [IgnoredAntennaRangeOverride:20000]
+
+        [ChatMessages:Trying to gain range.]
+        
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:I'm going to back off a bit.]
+        
+        [BroadcastChatType:Chat]
+
+
+      </Description>
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>CloseRangeAttackMessage</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Chat]
+
+        [UseChat:true]
+        [StartsReady:true]
+        [BroadcastRandomly:true]
+        [Author:{GridName}]
+        [Color:Red]
+        [MaxChats:1]
+
+        [IgnoreAntennaRequirement:true]
+        [IgnoredAntennaRangeOverride:20000]
+
+        [ChatMessages:It's as shrimple as that]
+        
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:Get rotated idiot]
+        
+        [BroadcastChatType:Chat]
+
+
+
+      </Description>
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>CloseRangePanicMessage</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Chat]
+
+        [UseChat:true]
+        [StartsReady:true]
+        [BroadcastRandomly:true]
+        [Author:{GridName}]
+        [Color:Red]
+        [MaxChats:1]
+
+        [IgnoreAntennaRequirement:true]
+        [IgnoredAntennaRangeOverride:20000]
+
+        [ChatMessages:Too close for comfort!]
+        
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:Stop trying to ram me!]
+        
+        [BroadcastChatType:Chat]
+
+
+
+      </Description>
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>GreatDyingDeadMessage</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Chat]
+
+        [UseChat:true]
+        [StartsReady:true]
+        [BroadcastRandomly:true]
+        [Author:{GridName}]
+        [Color:Red]
+        [MaxChats:-1]
+
+        [IgnoreAntennaRequirement:true]
+        [IgnoredAntennaRangeOverride:20000]
+
+        [ChatMessages:Avenge me, O Crustacean!]
+        
+        [BroadcastChatType:Chat]
+
+
+
+
+      </Description>
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>ForceFireMessage</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Chat]
+
+        [UseChat:true]
+        [StartsReady:true]
+        [BroadcastRandomly:true]
+        [Author:{GridName}]
+        [Color:Red]
+        [MaxChats:-1]
+
+        [IgnoreAntennaRequirement:true]
+        [IgnoredAntennaRangeOverride:20000]
+
+        [ChatMessages:Firing on/off (10s)]
+        
+        [BroadcastChatType:Chat]
+
+
+
+
+      </Description>
+    </EntityComponent>
+
+
+  </EntityComponents>
+</Definitions>

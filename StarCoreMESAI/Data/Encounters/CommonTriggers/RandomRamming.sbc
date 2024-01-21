@@ -1,0 +1,84 @@
+﻿<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EntityComponents>
+
+    <!--RandomRamming-->
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>RandomRamming</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Trigger]
+
+        [UseTrigger:true]
+        [Type:TargetNear]
+        [TargetDistance:20000]
+        [MinCooldownMs:30000]
+        [MaxCooldownMs:60000]
+        [StartsReady:true]
+        [BarrelRoll:true]
+
+        [MaxActions:-1]
+        [Actions:ActionRandomRamming]
+
+      </Description>
+
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>ActionRandomRamming</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Action]
+
+        [Chance:25]
+        [Ramming:true]
+        [UseChatBroadcast:true]
+        [ChatData:ChatRandomRamming]
+
+      </Description>
+
+    </EntityComponent>
+    
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>ChatRandomRamming</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Chat]
+
+        [UseChat:true]
+        [StartsReady:true]
+        [BroadcastRandomly:true]
+        [Author:[{GridName}]
+        [Color:Red]
+
+        [ChatMessages:Shiny and chrome!]
+        [BroadcastChatType:Chat]
+        [ChatAudio:ArcHudQuestlogDetail]
+
+        [ChatMessages:[autistic screeching]]
+        [BroadcastChatType:Chat]
+        [ChatAudio:ArcHudQuestlogDetail]
+        
+        [ChatMessages:AAAAAAAAAAAAAAAAAAAAAAAAAAAA]
+        [BroadcastChatType:Chat]
+        [ChatAudio:ArcHudQuestlogDetail]
+        
+        [ChatMessages:[screaming]]
+        [BroadcastChatType:Chat]
+        [ChatAudio:ArcHudQuestlogDetail]        
+
+      </Description>
+    </EntityComponent>
+    
+  </EntityComponents>
+</Definitions>

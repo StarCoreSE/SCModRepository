@@ -1,0 +1,78 @@
+﻿<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EntityComponents>
+
+    <!--I am looking in a 20km radius for a target. MatchAllfilters means I am looking for...
+    A target, outside of a safezone, with an owner that is a player, who is in a faction that is an enemy of the AI faction WITH THE TAG"AI", that is powered, whichever is closest! It must meet all of these values to be a target.-->
+    
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+          <TypeId>Inventory</TypeId>
+          <SubtypeId>Base20kTarget</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Target]
+
+        [UseCustomTargeting:true]
+        [Target:Grid]
+
+        [MaxDistance:20000]
+
+        [MatchAllFilters:OutsideOfSafezone]
+        [MatchAllFilters:Owner]
+        [MatchAllFilters:Powered]
+        [MatchAllFilters:Faction]
+        [MatchAllFilters:PlayerControlled]
+        [PrioritizePlayerControlled:true]
+        [MatchAllFilters:Static]
+        [IsStatic:No]
+        [GetTargetBy:ClosestDistance]
+
+        [Owners:Player]
+        [Owners:NPC]
+        [FactionTargets:AI2]
+        [FactionTargets:NEU]
+
+
+      </Description>
+      
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+          <TypeId>Inventory</TypeId>
+          <SubtypeId>Base20kTargetTwo</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Target]
+
+        [UseCustomTargeting:true]
+        [Target:Grid]
+
+        [MaxDistance:20000]
+
+        [MatchAllFilters:OutsideOfSafezone]
+        [MatchAllFilters:Owner]
+        [MatchAllFilters:Powered]
+        [MatchAllFilters:PlayerControlled]
+        [MatchAllFilters:Faction]
+        [PrioritizePlayerControlled:true]
+        [MatchAllFilters:Static]
+        [IsStatic:No]
+        [GetTargetBy:ClosestDistance]
+
+        [Owners:Player]
+        [Owners:NPC]
+        [FactionTargets:AI]
+        [FactionTargets:NEU]
+
+
+      </Description>
+      
+    </EntityComponent>
+  
+
+  </EntityComponents>
+</Definitions>
