@@ -139,13 +139,14 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
         {
             if (MyAPIGateway.Multiplayer.IsServer && wavesStarted)
             {
+                // Registering the event watcher only once
                 if (SpawnerAPI.MESApiReady && !registered)
                 {
                     SpawnerAPI.RegisterCompromisedRemoteWatcher(true, compromisedevent);
-                    isEventTriggered = false;
                     registered = true;
                 }
 
+                // Broadcasting counter update at regular intervals
                 if ((DateTime.UtcNow - lastBroadcastTime).TotalSeconds >= 5)
                 {
                     BroadcastCounter();
@@ -203,17 +204,11 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 
         private void compromisedevent(IMyRemoteControl arg1, IMyCubeGrid arg2)
         {
-            if (isEventTriggered)
-            {
-                return;
-            }
-
-            MyLog.Default.WriteLine("SCMESWaveSpawner: Compromised event triggered.");
-            isEventTriggered = true;
-            lastEventTriggerTime = DateTime.UtcNow;
-
+            // Incrementing the counter each time an AI ship is destroyed
             aiShipsDestroyed++;
+            MyLog.Default.WriteLine($"SCMESWaveSpawner: Compromised event triggered. AI Ships Destroyed: {aiShipsDestroyed}");
 
+            // Updating the HUD element
             if (hudInitialized)
             {
                 aiShipsDestroyedHUD.Message.Clear().Append($"AI Ships Destroyed: {aiShipsDestroyed}");
