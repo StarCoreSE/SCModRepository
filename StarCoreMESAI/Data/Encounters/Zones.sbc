@@ -22,7 +22,7 @@
 
         [ZoneName:THELIGHTNINGSPHERE]
         [MinDistanceFromZoneCenter:0]
-        [MaxDistanceFromZoneCenter:5000]
+        [MaxDistanceFromZoneCenter:10000]
 
       </Description>
 
@@ -55,7 +55,7 @@
         [ZoneLeaveAnnounce:You've left THE LIGHTNING SPHERE]
 
         [Coordinates:{X:0 Y:0 Z:0}]
-        [Radius:10000]
+        [Radius:100000]
 
       </Description>
 
