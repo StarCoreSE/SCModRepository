@@ -13,7 +13,7 @@ using Invalid.ModularEncountersSystems.API;
 
 namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 {
-    [ProtoInclude(1000, typeof(PrefabSpawnPacket))]
+    [ProtoInclude(1000, typeof(ChatCommandPacket))]
     [ProtoContract]
     public class Packet
     {
@@ -24,49 +24,33 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
     }
 
     [ProtoContract]
-    public class PrefabSpawnPacket : Packet
+    public class ChatCommandPacket : Packet
     {
         [ProtoMember(1)]
-        public string PrefabName;
+        public string CommandString;
 
-        [ProtoMember(2)]
-        public int PrefabAmount;
-
-        [ProtoMember(3)]  // New member for faction name
-        public string FactionName;
 
         // Add a parameterless constructor required by ProtoBuf
-        public PrefabSpawnPacket()
+        public ChatCommandPacket()
         {
 
         }
 
-        public PrefabSpawnPacket(string prefabName, int prefabAmount, string factionName)
+        public ChatCommandPacket(string CommandString)
         {
-            PrefabName = prefabName;
-            PrefabAmount = prefabAmount;
-            FactionName = factionName; // Set the faction name
+            this.CommandString = CommandString;
+
         }
     }
 
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
-    public class messpawnredteamComponent : MySessionComponentBase // Rename class to messpawnredteamComponent
+    public class SCMESWaveSpawnerComponent : MySessionComponentBase 
     {
-        private Dictionary<string, string> prefabMap = new Dictionary<string, string>
-        {
-            { "SCDM-MESAI", "SCDM-MESAI" },
 
-
-            // Add more prefab mappings here.
-        };
-
-        private int defaultSpawnCount = 1; // Default number of prefabs to spawn
 
         private ushort netID = 23489;
 
-        private double minSpawnRadiusFromCenter = 1000; // Minimum spawn distance from the center in meters
-        private double minSpawnRadiusFromGrids = 1000;  // Minimum spawn distance from other grids in meters
-        private IMyFaction RedFaction = null;
+
         private MESApi SpawnerAPI;
         bool registered = false;
 
@@ -83,11 +67,6 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
         {
             MyAPIGateway.Utilities.MessageEntered += OnMessageEntered; // Listen for chat messages
             MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(netID, NetworkHandler);
-
-            RedFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag("RED");
-
-
-
 
 
         }
