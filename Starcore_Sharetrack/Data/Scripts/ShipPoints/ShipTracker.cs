@@ -524,7 +524,7 @@ namespace klime.PointCheck
                 case "LRM-5 Modular Launcher":
                 case "LRM-5 Launcher":
                     t_N = "LRM-5 Launcher";
-                    mCs = 0.0375f;
+                    mCs = 0.10f;
                     break;
                 case "Gimbal Laser T2 Armored":
                 case "Gimbal Laser T2 Armored Slope 45":
@@ -589,18 +589,20 @@ namespace klime.PointCheck
                     t_N = "Flares";
                     mCs = 0.25f;
                     break;
-                case "Chiasim [Arc Emitter]":
-                    t_N = "Chiasim [Arc Emitter]";
+                case "Chiasm [Arc Emitter]":
+                    t_N = "Chiasm [Arc Emitter]";
                     mCs = 0.15f;
                     break;
                 case "Medium Laser":
-                    t_N = "Medium Laser";
-                    mCs = 0.15f;
-                    break;
                 case "Large Laser":
-                    t_N = "Large Laser";
+                    t_N = " Laser";
                     mCs = 0.15f;
                     break;
+                case "Reinforced Blastplate":
+                    t_N = "Reinforced Blastplate";
+                    mCs = 1.00f;
+                    break;
+
             }
         }
 

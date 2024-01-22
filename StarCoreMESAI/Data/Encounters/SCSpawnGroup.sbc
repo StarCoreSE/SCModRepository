@@ -98,6 +98,7 @@
         [RandomGridNamePrefix:FS/MVR ]
 
         [SpawnConditionsProfiles:SCSpawnCondition1]
+        [ManipulationProfiles:MES-Manipulation-CargoShipExample]
 
 
       </Description>

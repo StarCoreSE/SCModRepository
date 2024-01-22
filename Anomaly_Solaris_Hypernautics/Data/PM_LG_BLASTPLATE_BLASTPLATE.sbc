@@ -3,7 +3,7 @@
 	<CubeBlocks>
 		<Definition>
 			<Id>
-				<TypeId>CubeBlock</TypeId>
+				<TypeId>TerminalBlock</TypeId>
 				<SubtypeId>PM_LG_BLASTPLATE_BLASTPLATE</SubtypeId>
 			</Id>
 			<DisplayName>Reinforced Blastplate</DisplayName>
