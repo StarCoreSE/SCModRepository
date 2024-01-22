@@ -171,15 +171,14 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             try
             {
                 string fileName = "WaveData.cfg"; // Configuration file name
-                string filePath = Path.Combine(MyAPIGateway.Session.CurrentPath, "Saves", "YourWorldName", "Storage", fileName);
 
                 if (!MyAPIGateway.Utilities.FileExistsInWorldStorage(fileName, GetType()))
                 {
-                    // Create a blank configuration file with default values
+                    // Create a blank configuration file with default values in the new format
                     string defaultConfig =
-                        "Wave1, 10, Prefab1,Prefab2,Prefab3\n" +
-                        "Wave2, 20, Prefab4,Prefab5\n" +
-                        "Wave3, 30, Prefab6,Prefab7,Prefab8,Prefab9";
+                        "Wave1;10;Prefab1, Prefab2, Prefab3\n" +
+                        "Wave2;20;Prefab4, Prefab5\n" +
+                        "Wave3;30;Prefab6, Prefab7, Prefab8, Prefab9";
 
                     // Write the default configuration to the file
                     var writer = MyAPIGateway.Utilities.WriteFileInWorldStorage(fileName, GetType());
@@ -194,6 +193,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                 MyAPIGateway.Utilities.ShowMessage("Wave Data", "Error creating configuration file: " + e.Message);
             }
         }
+
 
 
 
