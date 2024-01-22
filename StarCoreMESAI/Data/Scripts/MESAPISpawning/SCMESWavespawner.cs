@@ -347,40 +347,67 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 
         private void NetworkHandler(ushort arg1, byte[] arg2, ulong arg3, bool arg4)
         {
-            if (MyAPIGateway.Session.IsServer) return;
-
             var packet = MyAPIGateway.Utilities.SerializeFromBinary<Packet>(arg2);
-            if (packet is CounterUpdatePacket)
+            if (packet != null)
             {
-                var counterPacket = (CounterUpdatePacket)packet;
-                // Update the local counter with the value from the server
-                aiShipsDestroyed = counterPacket.CounterValue;
+                if (packet is ChatCommandPacket)
+                {
+                    var commandPacket = (ChatCommandPacket)packet;
+                    if (MyAPIGateway.Session.IsServer)
+                    {
+                        // Process the command on the server
+                        ProcessCommand(commandPacket.CommandString);
+                    }
+                }
+                else if (packet is CounterUpdatePacket)
+                {
+                    var counterPacket = (CounterUpdatePacket)packet;
+                    aiShipsDestroyed = counterPacket.CounterValue;
+                }
             }
         }
+
 
         private void OnMessageEntered(string messageText, ref bool sendToOthers)
         {
             if (messageText.StartsWith("/SCStartGauntlet", StringComparison.OrdinalIgnoreCase))
             {
-                // Extract the additional ship count from the command
-                string[] commandParts = messageText.Split(' ');
-                int parsedAdditionalShips; // Declare a separate variable
-                if (commandParts.Length > 1 && int.TryParse(commandParts[1], out parsedAdditionalShips))
-                {
-                    // Cap the additional ships per wave to a maximum of 10
-                    additionalShipsPerWave = Math.Min(parsedAdditionalShips, 10);
+                // Prevent the message from being broadcasted to other players
+                sendToOthers = false;
 
-                    wavesStarted = true; // Start spawning waves
-                    lastWaveCheckTime = DateTime.UtcNow; // Initialize the wave check time
-                    sendToOthers = false;
-                    MyAPIGateway.Utilities.ShowMessage("SCMESWaveSpawner", "Started spawning waves with additional ships per wave: " + additionalShipsPerWave);
+                if (!MyAPIGateway.Multiplayer.IsServer)
+                {
+                    // Send a network message to the server with the command
+                    var packet = new ChatCommandPacket(messageText);
+                    var serializedPacket = MyAPIGateway.Utilities.SerializeToBinary(packet);
+                    MyAPIGateway.Multiplayer.SendMessageToServer(netID, serializedPacket);
                 }
                 else
                 {
-                    MyAPIGateway.Utilities.ShowMessage("SCMESWaveSpawner", "Invalid command format. Use /SCStartGauntlet X to specify additional ships per wave (max 10).");
+                    // Process the command on the server
+                    ProcessCommand(messageText);
                 }
             }
         }
+
+        private void ProcessCommand(string messageText)
+        {
+            string[] commandParts = messageText.Split(' ');
+            int parsedAdditionalShips;
+            if (commandParts.Length > 1 && int.TryParse(commandParts[1], out parsedAdditionalShips))
+            {
+                additionalShipsPerWave = Math.Min(parsedAdditionalShips, 10);
+                wavesStarted = true;
+                lastWaveCheckTime = DateTime.UtcNow;
+                MyAPIGateway.Utilities.ShowMessage("SCMESWaveSpawner", "Started spawning waves with additional ships per wave: " + additionalShipsPerWave);
+            }
+            else
+            {
+                MyAPIGateway.Utilities.ShowMessage("SCMESWaveSpawner", "Invalid command format. Use /SCStartGauntlet X to specify additional ships per wave (max 10).");
+            }
+        }
+
+
 
         protected override void UnloadData()
         {
