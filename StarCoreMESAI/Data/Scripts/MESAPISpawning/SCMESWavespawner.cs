@@ -80,7 +80,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     public class SCMESWaveSpawnerComponent : MySessionComponentBase
     {
-        private ushort netID = 23489;
+        private ushort netID = 32178;
         private MESApi SpawnerAPI;
         private bool registered = false;
         private static int aiShipsDestroyed = 0;
@@ -102,6 +102,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 
         public override void LoadData()
         {
+            MyAPIGateway.Utilities.ShowMessage("Debug", "LoadData called");
             if (MyAPIGateway.Multiplayer.IsServer)
             {
                 SpawnerAPI = new MESApi();
@@ -116,6 +117,8 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 
         private void LoadWaveData()
         {
+            if (!MyAPIGateway.Multiplayer.IsServer) return; // Ensure this only runs on the server
+
             try
             {
                 string fileName = "WaveData.cfg"; // Configuration file name
@@ -181,6 +184,8 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 
         private void CreateBlankConfig()
         {
+            if (!MyAPIGateway.Multiplayer.IsServer) return; // Ensure this only runs on the server
+
             try
             {
                 string fileName = "WaveData.cfg"; // Configuration file name
@@ -230,9 +235,10 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 
         public override void BeforeStart()
         {
-            MyAPIGateway.Utilities.MessageEntered += OnMessageEntered; // Listen for chat messages
+            MyAPIGateway.Utilities.MessageEntered += OnMessageEntered;
             MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(netID, NetworkHandler);
         }
+
 
         public override void UpdateAfterSimulation()
         {
@@ -347,77 +353,130 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 
         private void NetworkHandler(ushort arg1, byte[] arg2, ulong arg3, bool arg4)
         {
+            MyAPIGateway.Utilities.ShowMessage("Debug", "NetworkHandler called on Server");
+            if (!MyAPIGateway.Session.IsServer) return;
+
             var packet = MyAPIGateway.Utilities.SerializeFromBinary<Packet>(arg2);
-            if (packet != null)
+            if (packet != null && packet is ChatCommandPacket)
             {
-                if (packet is ChatCommandPacket)
-                {
-                    var commandPacket = (ChatCommandPacket)packet;
-                    if (MyAPIGateway.Session.IsServer)
-                    {
-                        // Process the command on the server
-                        ProcessCommand(commandPacket.CommandString);
-                    }
-                }
-                else if (packet is CounterUpdatePacket)
-                {
-                    var counterPacket = (CounterUpdatePacket)packet;
-                    aiShipsDestroyed = counterPacket.CounterValue;
-                }
+                var commandPacket = packet as ChatCommandPacket;
+                MyAPIGateway.Utilities.ShowMessage("Debug", "Received ChatCommandPacket: " + commandPacket.CommandString);
+                ProcessCommand(commandPacket.CommandString);
+            }
+            else
+            {
+                MyAPIGateway.Utilities.ShowMessage("Debug", "Received unknown or null packet");
             }
         }
+
+
 
 
         private void OnMessageEntered(string messageText, ref bool sendToOthers)
         {
             if (messageText.StartsWith("/SCStartGauntlet", StringComparison.OrdinalIgnoreCase))
             {
-                // Prevent the message from being broadcasted to other players
-                sendToOthers = false;
+                sendToOthers = false; // Prevent the message from being sent to other players
 
-                if (!MyAPIGateway.Multiplayer.IsServer)
+                if (MyAPIGateway.Multiplayer.IsServer)
                 {
-                    // Send a network message to the server with the command
-                    var packet = new ChatCommandPacket(messageText);
-                    var serializedPacket = MyAPIGateway.Utilities.SerializeToBinary(packet);
-                    MyAPIGateway.Multiplayer.SendMessageToServer(netID, serializedPacket);
+                    HandleCommandOnServer(messageText);
                 }
                 else
                 {
-                    // Process the command on the server
-                    ProcessCommand(messageText);
+                    SendCommandToServer(messageText);
                 }
             }
         }
 
+        private void SendCommandToServer(string messageText)
+        {
+            MyAPIGateway.Utilities.ShowMessage("Debug", "Client: Sending command packet to server");
+            var packet = new ChatCommandPacket(messageText);
+            var serializedPacket = MyAPIGateway.Utilities.SerializeToBinary(packet);
+            MyAPIGateway.Multiplayer.SendMessageToServer(netID, serializedPacket);
+        }
+
+        private void HandleCommandOnServer(string messageText)
+        {
+            MyAPIGateway.Utilities.ShowMessage("Debug", "Server: Processing command directly");
+            ProcessCommand(messageText);
+        }
+
+
+
         private void ProcessCommand(string messageText)
         {
+            MyAPIGateway.Utilities.ShowMessage("Debug", "Processing command: " + messageText);
             string[] commandParts = messageText.Split(' ');
-            int parsedAdditionalShips;
-            if (commandParts.Length > 1 && int.TryParse(commandParts[1], out parsedAdditionalShips))
+
+            // Check if the command is correctly formatted and contains an additional ship count
+            if (commandParts.Length > 1)
             {
-                additionalShipsPerWave = Math.Min(parsedAdditionalShips, 10);
-                wavesStarted = true;
-                lastWaveCheckTime = DateTime.UtcNow;
-                MyAPIGateway.Utilities.ShowMessage("SCMESWaveSpawner", "Started spawning waves with additional ships per wave: " + additionalShipsPerWave);
+                int parsedAdditionalShips;
+                if (int.TryParse(commandParts[1], out parsedAdditionalShips))
+                {
+                    // Cap the additional ships per wave to a maximum of 10
+                    additionalShipsPerWave = Math.Min(parsedAdditionalShips, 10);
+
+                    // Set the flag to start spawning waves
+                    wavesStarted = true;
+
+                    // Record the current time as the last wave check time
+                    lastWaveCheckTime = DateTime.UtcNow;
+
+                    // Notify that the wave spawning process has started
+                    MyAPIGateway.Utilities.ShowMessage("SCMESWaveSpawner", "Started spawning waves with additional ships per wave: " + additionalShipsPerWave);
+                }
+                else
+                {
+                    // Notify about incorrect format if parsing fails
+                    MyAPIGateway.Utilities.ShowMessage("SCMESWaveSpawner", "Invalid command format. Use /SCStartGauntlet X to specify additional ships per wave (max 10).");
+                }
             }
             else
             {
+                // Notify about incorrect format if command does not contain additional ship count
                 MyAPIGateway.Utilities.ShowMessage("SCMESWaveSpawner", "Invalid command format. Use /SCStartGauntlet X to specify additional ships per wave (max 10).");
             }
         }
 
 
-
         protected override void UnloadData()
         {
-            MyAPIGateway.Utilities.MessageEntered -= OnMessageEntered; // Unsubscribe from chat message events
-            MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(netID, NetworkHandler);
-            SpawnerAPI.UnregisterListener();
-            if (hudInitialized)
+            try
             {
-                aiShipsDestroyedHUD.DeleteMessage();
+                // Unsubscribe from the MessageEntered event
+                MyAPIGateway.Utilities.MessageEntered -= OnMessageEntered;
+
+                // Unregister the network message handler
+                if (MyAPIGateway.Multiplayer != null)
+                {
+                    MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(netID, NetworkHandler);
+                }
+
+                // Unregister any other listeners or cleanup resources
+                if (SpawnerAPI != null)
+                {
+                    SpawnerAPI.UnregisterListener();
+                }
+
+                if (hudInitialized)
+                {
+                    if (aiShipsDestroyedHUD != null)
+                    {
+                        aiShipsDestroyedHUD.DeleteMessage();
+                    }
+                    // Delete other HUD messages if needed
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception for debugging
+                MyLog.Default.WriteLineAndConsole($"SCMESWaveSpawnerComponent UnloadData Exception: {ex.Message}\n{ex.StackTrace}");
             }
         }
+
+
     }
 }
