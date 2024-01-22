@@ -141,6 +141,9 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
         {
             if (MyAPIGateway.Multiplayer.IsServer && wavesStarted)
             {
+                // Create a copy of the spawn group timings dictionary to avoid modification issues
+                var spawnGroupTimingsCopy = new Dictionary<string, SpawnGroupInfo>(spawnGroupTimings);
+
                 // Registering the event watcher only once
                 if (SpawnerAPI.MESApiReady && !registered)
                 {
@@ -155,9 +158,9 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                     lastBroadcastTime = DateTime.UtcNow;
                 }
 
-                if (hudInitialized && spawnGroupTimings.Count > 0)
+                if (hudInitialized && spawnGroupTimingsCopy.Count > 0)
                 {
-                    var firstGroupInfo = new List<SpawnGroupInfo>(spawnGroupTimings.Values)[0];
+                    var firstGroupInfo = new List<SpawnGroupInfo>(spawnGroupTimingsCopy.Values)[0];
                     var nextWaveSpawnTime = firstGroupInfo.SpawnTime;
                     var timeSinceStart = (int)(DateTime.UtcNow - lastWaveCheckTime).TotalSeconds;
                     var timeUntilNextWave = nextWaveSpawnTime - timeSinceStart;
@@ -174,7 +177,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                     isEventTriggered = false;
                 }
 
-                foreach (var spawnGroup in spawnGroupTimings)
+                foreach (var spawnGroup in spawnGroupTimingsCopy)
                 {
                     var groupKey = spawnGroup.Key;
                     var groupValue = spawnGroup.Value;
