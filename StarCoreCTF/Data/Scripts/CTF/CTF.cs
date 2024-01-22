@@ -273,7 +273,6 @@ namespace Klime.CTF
                                 List<string> data = single_flag_data_string.Split('@').ToList();
                                 Vector3D single_flag_homepostemp = Vector3D.Zero;
                                 Vector3D capture_pos_reuse = Vector3D.Zero;
-                                SerializableMatrix single_flag_homepos = MatrixD.Identity;
                                 IMyFaction faction1;
                                 IMyFaction faction2;
                                 SerializableMatrix capture_pos_faction1;
@@ -282,7 +281,6 @@ namespace Klime.CTF
                                 List<string> single_flag_color_string = new List<string>();
 
                                 ParseVector3DFromGPS(data[0], out single_flag_homepostemp);
-                                single_flag_homepos = GetHomePosition(single_flag_homepostemp);
 
                                 faction1 = MyAPIGateway.Session.Factions.TryGetFactionByTag(data[1]);
                                 faction2 = MyAPIGateway.Session.Factions.TryGetFactionByTag(data[2]);
@@ -296,7 +294,7 @@ namespace Klime.CTF
                                 Color single_flag_color = new Color(int.Parse(single_flag_color_string[0]), int.Parse(single_flag_color_string[1]), int.Parse(single_flag_color_string[2]),
                                     int.Parse(single_flag_color_string[3]));
 
-                                Flag single_flag = new Flag(PrimeEntityActivator().EntityId, FlagState.Home, single_flag_homepos, capture_positions, 0, single_flag_color,
+                                Flag single_flag = new Flag(PrimeEntityActivator().EntityId, FlagState.Home, single_flag_homepostemp, capture_positions, 0, single_flag_color,
                                     FlagType.Single, 100f, 0.2f, 0);
 
                                 single_flag.Init();
@@ -306,8 +304,6 @@ namespace Klime.CTF
                             {
                                 Vector3D flag_1_temp_pos = Vector3D.Zero;
                                 Vector3D flag_2_temp_pos = Vector3D.Zero;
-                                SerializableMatrix flag_1_temp_homepos = MatrixD.Identity;
-                                SerializableMatrix flag_2_temp_homepos = MatrixD.Identity;
                                 IMyFaction faction1;
                                 IMyFaction faction2;
                                 List<string> flag_1_color_string = new List<string>();
@@ -319,9 +315,6 @@ namespace Klime.CTF
                                 faction1 = MyAPIGateway.Session.Factions.TryGetFactionByTag(ini.Get("Faction 1 Tag", "string").ToString());
                                 faction2 = MyAPIGateway.Session.Factions.TryGetFactionByTag(ini.Get("Faction 2 Tag", "string").ToString());
 
-                                flag_1_temp_homepos = GetHomePosition(flag_1_temp_pos);
-                                flag_2_temp_homepos = GetHomePosition(flag_2_temp_pos);
-
                                 flag_1_color_string = ini.Get("Faction 1 Color", "string").ToString().Split(',').ToList();
                                 flag_2_color_string = ini.Get("Faction 2 Color", "string").ToString().Split(',').ToList();
 
@@ -330,8 +323,8 @@ namespace Klime.CTF
                                 Color flag_2_color = new Color(int.Parse(flag_2_color_string[0]), int.Parse(flag_2_color_string[1]), int.Parse(flag_2_color_string[2]),
                                     int.Parse(flag_2_color_string[3]));
 
-                                Flag flag1 = new Flag(PrimeEntityActivator().EntityId, FlagState.Home, flag_1_temp_homepos, faction1.FactionId, flag_1_color, FlagType.Double, 100, 0.2f, 0);
-                                Flag flag2 = new Flag(PrimeEntityActivator().EntityId, FlagState.Home, flag_2_temp_homepos, faction2.FactionId, flag_2_color, FlagType.Double, 100, 0.2f, 0);
+                                Flag flag1 = new Flag(PrimeEntityActivator().EntityId, FlagState.Home, flag_1_temp_pos, faction1.FactionId, flag_1_color, FlagType.Double, 100, 0.2f, 0);
+                                Flag flag2 = new Flag(PrimeEntityActivator().EntityId, FlagState.Home, flag_2_temp_pos, faction2.FactionId, flag_2_color, FlagType.Double, 100, 0.2f, 0);
 
                                 flag1.Init();
                                 flag2.Init();
@@ -572,7 +565,7 @@ namespace Klime.CTF
                                 if (subflag.state == FlagState.Home)
                                 {
 
-                                    subflag.flag_entity.WorldMatrix = subflag.home_matrix;
+                                    subflag.flag_entity.WorldMatrix = MatrixD.CreateWorld(subflag.homePos);
 
 
                                     foreach (var player in subflag.GetNearbyPlayers(ref allplayers, ref reuse_players, pickup_in_cockpit, flagPickupRadius))
@@ -1032,7 +1025,7 @@ namespace Klime.CTF
                         {
                             foreach (var subflag in allflags)
                             {
-                                subflag.flag_entity.WorldMatrix = subflag.home_matrix;
+                                subflag.flag_entity.WorldMatrix = MatrixD.CreateWorld(subflag.homePos);
                             }
                         }
 

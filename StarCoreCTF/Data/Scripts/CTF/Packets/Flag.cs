@@ -42,7 +42,7 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
         public int current_drop_life = 0;
 
         [ProtoMember(8)]
-        public SerializableMatrix home_matrix;
+        public Vector3D homePos;
 
         [ProtoMember(9)]
         public Dictionary<long, SerializableMatrix> capture_positions = new Dictionary<long, SerializableMatrix>();
@@ -74,13 +74,13 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
         }
 
         //Single
-        public Flag(long entity_id, FlagState state, SerializableMatrix home_matrix, Dictionary<long, SerializableMatrix> capture_positions,
+        public Flag(long entity_id, FlagState state, Vector3D homePos, Dictionary<long, SerializableMatrix> capture_positions,
             long owning_faction_id, Color flag_color, FlagType flag_type, float grip_strength, float regen_modifier, float lastTickAcceleration)
         {
             this.entity_id = entity_id;
             this.state = state;
-            this.home_matrix = home_matrix;
-            this.current_matrix = home_matrix;
+            this.homePos = homePos;
+            this.current_matrix = MatrixD.CreateWorld(homePos);
             this.owning_faction_id = owning_faction_id;
             this.flag_color = flag_color;
             this.capture_positions = capture_positions;
@@ -91,13 +91,13 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
         }
 
         //Double
-        public Flag(long entity_id, FlagState state, SerializableMatrix home_matrix, long owning_faction_id,
+        public Flag(long entity_id, FlagState state, Vector3D homePos, long owning_faction_id,
             Color flag_color, FlagType flag_type, float grip_strength, float regen_modifier, float lastTickAcceleration)
         {
             this.entity_id = entity_id;
             this.state = state;
-            this.home_matrix = home_matrix;
-            this.current_matrix = home_matrix;
+            this.homePos = homePos;
+            this.current_matrix = MatrixD.CreateWorld(homePos);
             this.owning_faction_id = owning_faction_id;
             this.flag_color = flag_color;
             this.flag_type = flag_type;
@@ -156,7 +156,7 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
             this.current_matrix = incoming_flag.current_matrix;
             this.owning_faction_id = incoming_flag.owning_faction_id;
             this.current_drop_life = incoming_flag.current_drop_life;
-            this.home_matrix = incoming_flag.home_matrix;
+            this.homePos = incoming_flag.homePos;
             this.flag_color = incoming_flag.flag_color;
             this.capture_positions = incoming_flag.capture_positions;
             this.flag_type = incoming_flag.flag_type;
