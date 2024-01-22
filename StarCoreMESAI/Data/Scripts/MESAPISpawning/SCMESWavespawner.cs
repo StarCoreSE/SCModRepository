@@ -408,6 +408,11 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                 additionalShipsPerWave = Math.Min(parsedAdditionalShips, 10);
                 wavesStarted = true;
                 lastWaveCheckTime = DateTime.UtcNow;
+
+
+                MyAPIGateway.Utilities.ShowMessage("SCMESWaveSpawner", "Spawning waves has started with" + additionalShipsPerWave + "additional ships per wave!");
+
+
                 MyLog.Default.WriteLineAndConsole("Started spawning waves with additional ships per wave: " + additionalShipsPerWave + " (Server)");
             }
             else
@@ -417,17 +422,34 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             MyLog.Default.WriteLineAndConsole($"ProcessCommand ended");
         }
 
-
-
         protected override void UnloadData()
         {
-            MyAPIGateway.Utilities.MessageEntered -= OnMessageEntered; // Unsubscribe from chat message events
-            MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(netID, NetworkHandler);
-            SpawnerAPI.UnregisterListener();
-            if (hudInitialized)
+            try
             {
-                aiShipsDestroyedHUD.DeleteMessage();
+                MyAPIGateway.Utilities.MessageEntered -= OnMessageEntered; // Unsubscribe from chat message events
+                MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(netID, NetworkHandler);
+
+                if (hudInitialized)
+                {
+                    aiShipsDestroyedHUD.DeleteMessage();
+                }
+
+                // Unregister any other event handlers or cleanup as needed
+
+            }
+            catch (Exception e)
+            {
+                // Log the exception and any relevant information
+                MyLog.Default.WriteLineAndConsole($"Error in UnloadData: {e.Message}");
+                if (e.InnerException != null)
+                {
+                    MyLog.Default.WriteLineAndConsole($"Inner Exception: {e.InnerException.Message}");
+                }
+
+                // Handle the exception or rethrow it if necessary
+                throw;
             }
         }
+
     }
 }
