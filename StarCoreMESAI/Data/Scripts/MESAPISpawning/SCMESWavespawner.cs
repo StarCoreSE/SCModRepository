@@ -14,6 +14,9 @@ using System.Text;
 using VRage.Game.GUI.TextPanel;
 using InvalidWave.Draygo.API;
 using static VRageRender.MyBillboard;
+using System.Xml;
+using VRage.Game.ModAPI.Ingame.Utilities;
+using System.Linq;
 
 namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 {
@@ -104,32 +107,55 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             // Initialize HudAPIv2 with a callback
             new HudAPIv2(OnHudApiReady);
 
-            // X units, spawn after X seconds. Make sure there are no exact dupes. 
-            spawnGroupTimings.Add("SpawnLongbow", new SpawnGroupInfo(1, 10));            
-                      
-            spawnGroupTimings.Add("SpawnTidewater", new SpawnGroupInfo(1, 300));
-            spawnGroupTimings.Add("SpawnSCDM", new SpawnGroupInfo(1, 300));
-
-            spawnGroupTimings.Add("SpawnRIAN", new SpawnGroupInfo(1, 10));
-            spawnGroupTimings.Add("SpawnLongbow", new SpawnGroupInfo(1, 600));
-            spawnGroupTimings.Add("SpawnBattlecruiser", new SpawnGroupInfo(1, 600));
-
-            spawnGroupTimings.Add("SpawnRIAN", new SpawnGroupInfo(1, 900));
-            spawnGroupTimings.Add("SpawnLongbow", new SpawnGroupInfo(2, 900));
-            spawnGroupTimings.Add("SpawnTidewater", new SpawnGroupInfo(1, 900));
-
-            spawnGroupTimings.Add("SpawnRIAN", new SpawnGroupInfo(2, 1200));
-            spawnGroupTimings.Add("SpawnLongbow", new SpawnGroupInfo(1, 1200));
-            spawnGroupTimings.Add("SpawnTidewater", new SpawnGroupInfo(1, 1200));
-            spawnGroupTimings.Add("SpawnBattlecruiser", new SpawnGroupInfo(1, 1200));
-
-            spawnGroupTimings.Add("SpawnRIAN", new SpawnGroupInfo(1, 1500));
-            spawnGroupTimings.Add("SpawnLongbow", new SpawnGroupInfo(1, 1500));
-            spawnGroupTimings.Add("SpawnTidewater", new SpawnGroupInfo(1, 1500));
-            spawnGroupTimings.Add("SpawnBattlecruiser", new SpawnGroupInfo(3, 1500));
-
+            LoadWaveData();
             // Add other spawn groups and info as needed
         }
+
+        private void LoadWaveData()
+        {
+            try
+            {
+                string fileName = "WaveData.cfg"; // Configuration file name
+
+                if (MyAPIGateway.Utilities.FileExistsInLocalStorage(fileName, GetType()))
+                {
+                    using (var reader = MyAPIGateway.Utilities.ReadFileInLocalStorage(fileName, GetType()))
+                    {
+                        string line;
+                        while ((line = reader.ReadLine()) != null)
+                        {
+                            // Trim whitespace from the line and split it by commas
+                            string[] sections = line.Trim().Split(',');
+
+                            if (sections.Length >= 3)
+                            {
+                                string name = sections[0].Trim();
+                                int startTime;
+
+                                if (int.TryParse(sections[1].Trim(), out startTime))
+                                {
+                                    List<string> prefabs = sections[2].Trim().Split(',').ToList();
+
+                                    // Add the wave data to your dictionary or data structure
+                                    spawnGroupTimings.Add(name, new SpawnGroupInfo(prefabs.Count, startTime));
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    // Handle the case where the configuration file doesn't exist
+                    MyAPIGateway.Utilities.ShowMessage("Wave Data", "Configuration file not found.");
+                }
+            }
+            catch (Exception e)
+            {
+                // Handle any exceptions that may occur during file reading or parsing
+                MyAPIGateway.Utilities.ShowMessage("Wave Data", "Error loading configuration file: " + e.Message);
+            }
+        }
+
 
 
         private void OnHudApiReady()
