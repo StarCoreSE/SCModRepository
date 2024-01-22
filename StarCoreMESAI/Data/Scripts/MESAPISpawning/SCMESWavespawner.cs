@@ -17,6 +17,7 @@ using static VRageRender.MyBillboard;
 using System.Xml;
 using VRage.Game.ModAPI.Ingame.Utilities;
 using System.Linq;
+using System.IO;
 
 namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 {
@@ -117,9 +118,9 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             {
                 string fileName = "WaveData.cfg"; // Configuration file name
 
-                if (MyAPIGateway.Utilities.FileExistsInLocalStorage(fileName, GetType()))
+                if (MyAPIGateway.Utilities.FileExistsInWorldStorage(fileName, GetType()))
                 {
-                    using (var reader = MyAPIGateway.Utilities.ReadFileInLocalStorage(fileName, GetType()))
+                    using (var reader = MyAPIGateway.Utilities.ReadFileInWorldStorage(fileName, GetType()))
                     {
                         string line;
                         while ((line = reader.ReadLine()) != null)
@@ -146,13 +147,43 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                 else
                 {
                     // Handle the case where the configuration file doesn't exist
-                    MyAPIGateway.Utilities.ShowMessage("Wave Data", "Configuration file not found.");
+                    MyAPIGateway.Utilities.ShowMessage("Wave Data", "Configuration file not found. Generating a new one.");
+                    CreateBlankConfig();
                 }
             }
             catch (Exception e)
             {
                 // Handle any exceptions that may occur during file reading or parsing
                 MyAPIGateway.Utilities.ShowMessage("Wave Data", "Error loading configuration file: " + e.Message);
+            }
+        }
+
+        private void CreateBlankConfig()
+        {
+            try
+            {
+                string fileName = "WaveData.cfg"; // Configuration file name
+                string filePath = Path.Combine(MyAPIGateway.Session.CurrentPath, "Saves", "YourWorldName", "Storage", fileName);
+
+                if (!MyAPIGateway.Utilities.FileExistsInWorldStorage(fileName, GetType()))
+                {
+                    // Create a blank configuration file with default values
+                    string defaultConfig =
+                        "Wave1, 10, Prefab1,Prefab2,Prefab3\n" +
+                        "Wave2, 20, Prefab4,Prefab5\n" +
+                        "Wave3, 30, Prefab6,Prefab7,Prefab8,Prefab9";
+
+                    // Write the default configuration to the file
+                    var writer = MyAPIGateway.Utilities.WriteFileInWorldStorage(fileName, GetType());
+                    writer.Write(defaultConfig);
+                    writer.Flush();
+                    writer.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                // Handle any exceptions that may occur during file creation
+                MyAPIGateway.Utilities.ShowMessage("Wave Data", "Error creating configuration file: " + e.Message);
             }
         }
 
@@ -222,6 +253,9 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                     isEventTriggered = false;
                 }
 
+                // Create a list to store the keys of SpawnGroups to remove
+                var keysToRemove = new List<string>();
+
                 foreach (var spawnGroup in spawnGroupTimingsCopy)
                 {
                     var groupKey = spawnGroup.Key;
@@ -239,10 +273,15 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                             SpawnerAPI.SpawnSpaceCargoShip(spawnCoords, new List<string> { groupKey });
                         }
 
-                        // Remove the spawned group from the dictionary to avoid respawning
-                        spawnGroupTimings.Remove(groupKey);
-                        break;
+                        // Add the key to the list of keys to remove
+                        keysToRemove.Add(groupKey);
                     }
+                }
+
+                // Remove the spawned groups from the dictionary to avoid respawning
+                foreach (var keyToRemove in keysToRemove)
+                {
+                    spawnGroupTimings.Remove(keyToRemove);
                 }
 
                 if (spawnGroupTimings.Count == 0)
@@ -251,6 +290,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                 }
             }
         }
+
 
         private void compromisedevent(IMyRemoteControl arg1, IMyCubeGrid arg2)
         {
