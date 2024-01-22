@@ -70,6 +70,9 @@
         [OldBlock:ConveyorSorter/MA_Crouching_Tiger]
         [NewBlock:ConveyorSorter/MA_Gimbal_Laser_T2]
 
+        [OldBlock:ConveyorSorter/K_SA_HeavyMetal_Gauss_PGBC]
+        [NewBlock:ConveyorSorter/MA_Gladius]
+
 
       </Description>
 
