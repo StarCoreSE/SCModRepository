@@ -186,7 +186,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 
                     if ((DateTime.UtcNow - lastWaveCheckTime).TotalSeconds >= spawnTime)
                     {
-                        Vector3D spawnCoords = new Vector3D(-10000, 0, 0);
+                        Vector3D spawnCoords = new Vector3D(-20000, 0, 0);
 
                         for (int i = 0; i < quantity; i++)
                         {
