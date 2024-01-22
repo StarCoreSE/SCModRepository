@@ -45,7 +45,7 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
         public Vector3D homePos;
 
         [ProtoMember(9)]
-        public Dictionary<long, SerializableMatrix> capture_positions = new Dictionary<long, SerializableMatrix>();
+        public Dictionary<long, SerializableMatrix> capture_positions = new Dictionary<long, SerializableMatrix>(); // This seems to be the majority of network load - fix?
 
         [ProtoMember(10)]
         public Color flag_color;
