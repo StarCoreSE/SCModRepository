@@ -67,13 +67,17 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
     {
         public int Quantity { get; set; }
         public int SpawnTime { get; set; }
+        public List<string> Prefabs { get; private set; }
 
-        public SpawnGroupInfo(int quantity, int spawnTime)
+        // Updated constructor to accept a list of prefabs
+        public SpawnGroupInfo(int quantity, int spawnTime, List<string> prefabs)
         {
             Quantity = quantity;
             SpawnTime = spawnTime;
+            Prefabs = prefabs; // Set the prefabs list
         }
     }
+
 
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     public class SCMESWaveSpawnerComponent : MySessionComponentBase
@@ -125,8 +129,8 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                         string line;
                         while ((line = reader.ReadLine()) != null)
                         {
-                            // Trim whitespace from the line and split it by commas
-                            string[] sections = line.Trim().Split(',');
+                            // Split the line by semicolons and trim whitespace
+                            string[] sections = line.Trim().Split(';');
 
                             if (sections.Length >= 3)
                             {
@@ -135,10 +139,11 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 
                                 if (int.TryParse(sections[1].Trim(), out startTime))
                                 {
-                                    List<string> prefabs = sections[2].Trim().Split(',').ToList();
+                                    // Splitting the third section by commas to get the prefab names
+                                    List<string> prefabs = sections[2].Trim().Split(',').Select(p => p.Trim()).ToList();
 
                                     // Add the wave data to your dictionary or data structure
-                                    spawnGroupTimings.Add(name, new SpawnGroupInfo(prefabs.Count, startTime));
+                                    spawnGroupTimings.Add(name, new SpawnGroupInfo(prefabs.Count, startTime, prefabs));
 
                                     // Print the loaded data to chat for debugging
                                     MyAPIGateway.Utilities.ShowMessage("Wave Data Loaded", $"Name: {name}, StartTime: {startTime}, Prefabs: {string.Join(", ", prefabs)}");
@@ -267,18 +272,18 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                     {
                         Vector3D spawnCoords = new Vector3D(-20000, 0, 0);
 
-                        for (int i = 0; i < quantity; i++)
+                        foreach (var prefabName in groupValue.Prefabs) // Use the list of prefabs for spawning
                         {
                             // Spawn each unit separately
-                            bool spawnResult = SpawnerAPI.SpawnSpaceCargoShip(spawnCoords, new List<string> { groupKey });
+                            bool spawnResult = SpawnerAPI.SpawnSpaceCargoShip(spawnCoords, new List<string> { prefabName });
 
                             if (spawnResult)
                             {
-                                MyAPIGateway.Utilities.ShowMessage("Spawn Debug", $"Spawned group: {groupKey}");
+                                MyAPIGateway.Utilities.ShowMessage("Spawn Debug", $"Spawned prefab: {prefabName}");
                             }
                             else
                             {
-                                MyAPIGateway.Utilities.ShowMessage("Spawn Debug", $"Failed to spawn group: {groupKey}");
+                                MyAPIGateway.Utilities.ShowMessage("Spawn Debug", $"Failed to spawn prefab: {prefabName}");
                             }
                         }
 
