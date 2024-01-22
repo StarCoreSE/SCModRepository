@@ -92,6 +92,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
         // Dictionary for spawn groups and their spawn times
         private Dictionary<string, SpawnGroupInfo> spawnGroupTimings = new Dictionary<string, SpawnGroupInfo>(); private DateTime lastWaveCheckTime;
         private bool wavesStarted = false; // Flag to control wave spawning
+        private int additionalShipsPerWave = 0;
 
         public override void LoadData()
         {
@@ -107,9 +108,10 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             spawnGroupTimings.Add("SpawnSCDM", new SpawnGroupInfo(1, 6));      // 3 units, spawn after 6 seconds
             spawnGroupTimings.Add("SpawnRIAN", new SpawnGroupInfo(2, 12));     // 2 units, spawn after 12 seconds
             spawnGroupTimings.Add("SpawnTidewater", new SpawnGroupInfo(3, 18)); // 1 unit, spawn after 18 seconds
-            spawnGroupTimings.Add("SpawnLongbow", new SpawnGroupInfo(4, 24)); 
-                                                                                // Add other spawn groups and info as needed
+            spawnGroupTimings.Add("SpawnLongbow", new SpawnGroupInfo(4, 24));
+            // Add other spawn groups and info as needed
         }
+
 
         private void OnHudApiReady()
         {
@@ -176,7 +178,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                 {
                     var groupKey = spawnGroup.Key;
                     var groupValue = spawnGroup.Value;
-                    var quantity = groupValue.Quantity;
+                    var quantity = groupValue.Quantity + additionalShipsPerWave; // Add additional ships per wave
                     var spawnTime = groupValue.SpawnTime;
 
                     if ((DateTime.UtcNow - lastWaveCheckTime).TotalSeconds >= spawnTime)
@@ -240,10 +242,19 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
         {
             if (messageText.StartsWith("/SCStartGauntlet", StringComparison.OrdinalIgnoreCase))
             {
-                wavesStarted = true; // Start spawning waves
-                lastWaveCheckTime = DateTime.UtcNow; // Initialize the wave check time
-                sendToOthers = false;
-                MyAPIGateway.Utilities.ShowMessage("SCMESWaveSpawner", "Started spawning waves");
+                // Extract the additional ship count from the command
+                string[] commandParts = messageText.Split(' ');
+                if (commandParts.Length > 1 && int.TryParse(commandParts[1], out additionalShipsPerWave))
+                {
+                    wavesStarted = true; // Start spawning waves
+                    lastWaveCheckTime = DateTime.UtcNow; // Initialize the wave check time
+                    sendToOthers = false;
+                    MyAPIGateway.Utilities.ShowMessage("SCMESWaveSpawner", "Started spawning waves with additional ships per wave: " + additionalShipsPerWave);
+                }
+                else
+                {
+                    MyAPIGateway.Utilities.ShowMessage("SCMESWaveSpawner", "Invalid command format. Use /SCStartGauntlet X to specify additional ships per wave.");
+                }
             }
         }
 
