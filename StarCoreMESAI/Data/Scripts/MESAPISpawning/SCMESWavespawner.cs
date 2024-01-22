@@ -104,12 +104,30 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             // Initialize HudAPIv2 with a callback
             new HudAPIv2(OnHudApiReady);
 
-            // Populate the dictionary with spawn groups and their info
-            spawnGroupTimings.Add("SpawnSCDM", new SpawnGroupInfo(1, 6));      // 3 units, spawn after 6 seconds
-            spawnGroupTimings.Add("SpawnRIAN", new SpawnGroupInfo(2, 12));     // 2 units, spawn after 12 seconds
-            spawnGroupTimings.Add("SpawnTidewater", new SpawnGroupInfo(3, 18)); // 1 unit, spawn after 18 seconds
-            spawnGroupTimings.Add("SpawnBattlecruiser", new SpawnGroupInfo(1, 18));
-            spawnGroupTimings.Add("SpawnLongbow", new SpawnGroupInfo(4, 24));
+            // X units, spawn after X seconds. Make sure there are no exact dupes. 
+            spawnGroupTimings.Add("SpawnLongbow", new SpawnGroupInfo(1, 10));            
+                      
+            spawnGroupTimings.Add("SpawnTidewater", new SpawnGroupInfo(1, 300));
+            spawnGroupTimings.Add("SpawnSCDM", new SpawnGroupInfo(1, 300));
+
+            spawnGroupTimings.Add("SpawnRIAN", new SpawnGroupInfo(1, 10));
+            spawnGroupTimings.Add("SpawnLongbow", new SpawnGroupInfo(1, 600));
+            spawnGroupTimings.Add("SpawnBattlecruiser", new SpawnGroupInfo(1, 600));
+
+            spawnGroupTimings.Add("SpawnRIAN", new SpawnGroupInfo(1, 900));
+            spawnGroupTimings.Add("SpawnLongbow", new SpawnGroupInfo(2, 900));
+            spawnGroupTimings.Add("SpawnTidewater", new SpawnGroupInfo(1, 900));
+
+            spawnGroupTimings.Add("SpawnRIAN", new SpawnGroupInfo(2, 1200));
+            spawnGroupTimings.Add("SpawnLongbow", new SpawnGroupInfo(1, 1200));
+            spawnGroupTimings.Add("SpawnTidewater", new SpawnGroupInfo(1, 1200));
+            spawnGroupTimings.Add("SpawnBattlecruiser", new SpawnGroupInfo(1, 1200));
+
+            spawnGroupTimings.Add("SpawnRIAN", new SpawnGroupInfo(1, 1500));
+            spawnGroupTimings.Add("SpawnLongbow", new SpawnGroupInfo(1, 1500));
+            spawnGroupTimings.Add("SpawnTidewater", new SpawnGroupInfo(1, 1500));
+            spawnGroupTimings.Add("SpawnBattlecruiser", new SpawnGroupInfo(3, 1500));
+
             // Add other spawn groups and info as needed
         }
 
