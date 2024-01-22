@@ -65,18 +65,16 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 
     public class SpawnGroupInfo
     {
-        public int Quantity { get; set; }
         public int SpawnTime { get; set; }
-        public List<string> Prefabs { get; private set; }
+        public Dictionary<string, int> Prefabs { get; private set; }
 
-        // Updated constructor to accept a list of prefabs
-        public SpawnGroupInfo(int quantity, int spawnTime, List<string> prefabs)
+        public SpawnGroupInfo(int spawnTime, Dictionary<string, int> prefabs)
         {
-            Quantity = quantity;
             SpawnTime = spawnTime;
-            Prefabs = prefabs; // Set the prefabs list
+            Prefabs = prefabs;
         }
     }
+
 
 
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
@@ -139,14 +137,29 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 
                                 if (int.TryParse(sections[1].Trim(), out startTime))
                                 {
-                                    // Splitting the third section by commas to get the prefab names
-                                    List<string> prefabs = sections[2].Trim().Split(',').Select(p => p.Trim()).ToList();
+                                    // Parse the prefab section
+                                    string[] prefabParts = sections[2].Trim().Split(',');
+                                    Dictionary<string, int> prefabs = new Dictionary<string, int>();
 
-                                    // Add the wave data to your dictionary or data structure
-                                    spawnGroupTimings.Add(name, new SpawnGroupInfo(prefabs.Count, startTime, prefabs));
+                                    foreach (var part in prefabParts)
+                                    {
+                                        var prefabInfo = part.Trim().Split(':');
+                                        if (prefabInfo.Length == 2)
+                                        {
+                                            int quantity;
+                                            if (int.TryParse(prefabInfo[1], out quantity))
+                                            {
+                                                prefabs.Add(prefabInfo[0].Trim(), quantity);
+                                            }
+                                        }
+                                    }
+
+
+                                    // Add the wave data to your dictionary
+                                    spawnGroupTimings.Add(name, new SpawnGroupInfo(startTime, prefabs));
 
                                     // Print the loaded data to chat for debugging
-                                    MyAPIGateway.Utilities.ShowMessage("Wave Data Loaded", $"Name: {name}, StartTime: {startTime}, Prefabs: {string.Join(", ", prefabs)}");
+                                    MyAPIGateway.Utilities.ShowMessage("Wave Data Loaded", $"Name: {name}, StartTime: {startTime}, Prefabs: {string.Join(", ", prefabs.Keys)}");
                                 }
                             }
                         }
@@ -265,25 +278,30 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                 {
                     var groupKey = spawnGroup.Key;
                     var groupValue = spawnGroup.Value;
-                    var quantity = groupValue.Quantity + additionalShipsPerWave; // Add additional ships per wave, capped at 10
                     var spawnTime = groupValue.SpawnTime;
 
                     if ((DateTime.UtcNow - lastWaveCheckTime).TotalSeconds >= spawnTime)
                     {
                         Vector3D spawnCoords = new Vector3D(-20000, 0, 0);
 
-                        foreach (var prefabName in groupValue.Prefabs) // Use the list of prefabs for spawning
+                        foreach (var prefabEntry in groupValue.Prefabs)
                         {
-                            // Spawn each unit separately
-                            bool spawnResult = SpawnerAPI.SpawnSpaceCargoShip(spawnCoords, new List<string> { prefabName });
+                            string prefabName = prefabEntry.Key;
+                            int quantity = prefabEntry.Value + additionalShipsPerWave; // Add additional ships per wave, capped at 10
 
-                            if (spawnResult)
+                            for (int i = 0; i < quantity; i++)
                             {
-                                MyAPIGateway.Utilities.ShowMessage("Spawn Debug", $"Spawned prefab: {prefabName}");
-                            }
-                            else
-                            {
-                                MyAPIGateway.Utilities.ShowMessage("Spawn Debug", $"Failed to spawn prefab: {prefabName}");
+                                // Spawn each unit separately
+                                bool spawnResult = SpawnerAPI.SpawnSpaceCargoShip(spawnCoords, new List<string> { prefabName });
+
+                                if (spawnResult)
+                                {
+                                    MyAPIGateway.Utilities.ShowMessage("Spawn Debug", $"Spawned prefab: {prefabName}");
+                                }
+                                else
+                                {
+                                    MyAPIGateway.Utilities.ShowMessage("Spawn Debug", $"Failed to spawn prefab: {prefabName}");
+                                }
                             }
                         }
 
