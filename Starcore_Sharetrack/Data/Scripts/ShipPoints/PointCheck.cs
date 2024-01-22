@@ -807,7 +807,7 @@ namespace klime.PointCheck
                     {
                         _managedEntities.Clear(); MyGamePruningStructure.GetAllTopMostEntitiesInSphere(ref _combatMaxSphere, _managedEntities, MyEntityQueryType.Dynamic); var posZero = Vector3D.Zero; foreach (var entity in _managedEntities)
                         {
-                            var grid = entity as MyCubeGrid; if (grid != null && GridExtensions.HasBlockWithSubtypeId(grid, "LargeFlightMovement"))
+                            var grid = entity as MyCubeGrid; if (grid != null && GridExtensions.HasBlockWithSubtypeId(grid, "LargeFlightMovement") || GridExtensions.HasBlockWithSubtypeId(grid, "RivalAIRemoteControlLarge"))
                             {
                                 long entityId = grid.EntityId; if (!Tracking.Contains(entityId))
                                 {

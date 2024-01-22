@@ -206,53 +206,45 @@ namespace Klime.ProximityEntry
         {
             try
             {
-                reuse_gridgroup.Clear();
                 cockpits.Clear();
-                reuse_gridgroup = MyAPIGateway.GridGroups.GetGroup(reuse_cubegrid, GridLinkTypeEnum.Logical);
-
-                foreach (var grid in reuse_gridgroup)
+                MyCubeGrid cubeG = reuse_cubegrid as MyCubeGrid;
+                if (cubeG.Physics != null && !cubeG.IsStatic)
                 {
-                    MyCubeGrid cubeG = grid as MyCubeGrid;
-                    if (cubeG.Physics != null && !grid.IsStatic)
+                    foreach (var fatblock in cubeG.GetFatBlocks())
                     {
-                        foreach (var fatblock in cubeG.GetFatBlocks())
+                        IMyCockpit cockpit = fatblock as IMyCockpit;
+                        if (cockpit != null && cockpit.Pilot == null)
                         {
-                            IMyCockpit cockpit = fatblock as IMyCockpit;
-                            if (cockpit != null)
+                            // If it's the main cockpit or the closest one, send the entry request
+                            if (cockpit.IsMainCockpit || IsClosestCockpit(cockpit, cubeG))
                             {
-                                if (cockpit.IsMainCockpit && cockpit.Pilot == null)
-                                {
-                                    EntryRequest request = new EntryRequest(cockpit.EntityId, MyAPIGateway.Session.Player.IdentityId, MyAPIGateway.Session.Player.Character.EntityId);
-                                    MyAPIGateway.Multiplayer.SendMessageToServer(net_id, MyAPIGateway.Utilities.SerializeToBinary<EntryRequest>(request));
-                                    return;
-                                }
-                                else
-                                {
-                                    cockpits.Add(cockpit);
-                                }
+                                SendEntryRequest(cockpit);
+                                return;
                             }
                         }
                     }
                 }
-
-                var player_pos = MyAPIGateway.Session.Player.Character.WorldMatrix.Translation;
-                cockpits = cockpits.OrderBy(o => Vector3D.Distance(o.WorldMatrix.Translation, player_pos)).ToList();
-
-                foreach (var seat in cockpits)
-                {
-                    if (seat.Pilot == null)
-                    {
-                        EntryRequest request = new EntryRequest(seat.EntityId, MyAPIGateway.Session.Player.IdentityId, MyAPIGateway.Session.Player.Character.EntityId);
-                        MyAPIGateway.Multiplayer.SendMessageToServer(net_id, MyAPIGateway.Utilities.SerializeToBinary<EntryRequest>(request));
-                        return;
-                    }
-                }
-
             }
             catch (Exception e)
             {
                 MyAPIGateway.Utilities.ShowMessage("", e.Message);
             }
+        }
+
+        private bool IsClosestCockpit(IMyCockpit cockpit, MyCubeGrid cubeG)
+        {
+            var player_pos = MyAPIGateway.Session.Player.Character.WorldMatrix.Translation;
+            var closestCockpit = cubeG.GetFatBlocks().OfType<IMyCockpit>()
+                                   .OrderBy(o => Vector3D.Distance(o.WorldMatrix.Translation, player_pos))
+                                   .FirstOrDefault();
+
+            return cockpit == closestCockpit;
+        }
+
+        private void SendEntryRequest(IMyCockpit cockpit)
+        {
+            EntryRequest request = new EntryRequest(cockpit.EntityId, MyAPIGateway.Session.Player.IdentityId, MyAPIGateway.Session.Player.Character.EntityId);
+            MyAPIGateway.Multiplayer.SendMessageToServer(net_id, MyAPIGateway.Utilities.SerializeToBinary<EntryRequest>(request));
         }
 
         private bool ValidInput()

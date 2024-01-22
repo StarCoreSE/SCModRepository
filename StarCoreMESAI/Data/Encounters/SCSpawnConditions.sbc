@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EntityComponents>
+
+    <!--okay. this took fucking forever. But if I want to define a zone of shit that can only spawn
+    IN THAT ZONE, i have to remove [SpaceCargoShip:true] from SpawnGroup, and put it here. Why? 
+    also i needed to do this to set faction?? is spawngroups a depreciated system??? whatever
+    
+    anyways this chain of spawn group bullshit means I will create a zone (radius defined in zones.sbc. of starcore
+    only ships. if i go outside of this zone, the other vanilla crap will have its spawn table, i need to disable that somehow-->
+    
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>SCSpawnCondition1</SubtypeId>
+      </Id>
+      <Description>
+
+        [MES Spawn Conditions]
+
+        [SpaceCargoShip:true]
+        [FactionOwner:AI]
+        [SkipGridSpawnChecks:true]
+        [SkipVoxelSpawnChecks:true]
+
+
+        [ZoneConditions:SCZoneCondition1]
+
+      </Description>
+
+    </EntityComponent>
+ 
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>SCSpawnCondition2</SubtypeId>
+      </Id>
+      <Description>
+
+        [MES Spawn Conditions]
+
+        [SpaceCargoShip:true]
+        [FactionOwner:AI2]
+        [SkipGridSpawnChecks:true]
+        [SkipVoxelSpawnChecks:true]
+
+        [ZoneConditions:SCZoneCondition1]
+
+      </Description>
+
+    </EntityComponent> 
+ 
+    
+    
+    
+  </EntityComponents>
+</Definitions>

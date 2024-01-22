@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EntityComponents>
+ 
+	<!--Fighter behavior.  inputting weapon ranges might not even be needed i think it just pulls off the block-->
+ 
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>SCFighter</SubtypeId>
+      </Id>
+      <Description>
+        [RivalAI Behavior]
+        [BehaviorName:Fighter]
+
+
+
+
+        [TargetData:Base20kTarget]
+        [AutopilotData:BasicAutopilot]
+        [SecondaryAutopilotData:CowardBasicAutopilot]
+        [TertiaryAutopilotData:GETTHEFUCKBACKAutopilot]
+
+        [Triggers:TakingDamage]
+        [Triggers:OutOfZone]
+        [Triggers:InsideZone]
+        [Triggers:SCHealthCheck]
+        [Triggers:AcquiredTargetTrigger]
+        [Triggers:RefreshingTargetTrigger]
+        [Triggers:RCCompromisedTrigger]
+        [Triggers:CowardAIHealthCheckTrigger]
+        [Triggers:CloseRangePanicTrigger]
+        [Triggers:ForceFireTrigger]
+
+        [WeaponSystem:Weapon1]
+
+
+      </Description>
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>SCFighterFac2</SubtypeId>
+      </Id>
+      <Description>
+        [RivalAI Behavior]
+        [BehaviorName:Fighter]
+
+
+
+        [TargetData:Base20kTargetTwo]
+        [AutopilotData:BasicAutopilot]
+        [SecondaryAutopilotData:CowardBasicAutopilot]
+        [TertiaryAutopilotData:GETTHEFUCKBACKAutopilot]
+
+        [Triggers:TakingDamage]
+        [Triggers:OutOfZone]
+        [Triggers:InsideZone]
+        [Triggers:SCHealthCheck]
+        [Triggers:AcquiredTargetTrigger]
+        [Triggers:RefreshingTargetTrigger]
+        [Triggers:RCCompromisedTrigger]
+        [Triggers:WeaponsBelow50]
+        [Triggers:CowardAIHealthCheckTrigger]
+        [Triggers:CloseRangePanicTrigger]
+        [Triggers:ForceFireTrigger]
+
+        [WeaponSystem:Weapon1]
+
+
+      </Description>
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>SCFighterRammer</SubtypeId>
+      </Id>
+      <Description>
+        [RivalAI Behavior]
+        [BehaviorName:Fighter]
+
+
+
+        [TargetData:Base20kTarget]
+        [AutopilotData:BasicAutopilot]
+
+        [TertiaryAutopilotData:GETTHEFUCKBACKAutopilot]
+
+        [Triggers:TakingDamage]
+        [Triggers:OutOfZone]
+        [Triggers:InsideZone]
+        [Triggers:SCHealthCheck]
+        [Triggers:AcquiredTargetTrigger]
+        [Triggers:RCCompromisedTrigger]
+        [Triggers:RamConstantlyTrigger]
+        [Triggers:CloseRangeAttackTrigger]
+        [Triggers:ForceFireTrigger]
+
+        [WeaponSystem:Weapon1]
+
+
+      </Description>
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>SCFighterRammerGD</SubtypeId>
+      </Id>
+      <Description>
+        [RivalAI Behavior]
+        [BehaviorName:Fighter]
+
+
+
+        [TargetData:Base20kTarget]
+        [AutopilotData:BasicAutopilot]
+
+        [TertiaryAutopilotData:GETTHEFUCKBACKAutopilot]
+
+        [Triggers:TakingDamage]
+        [Triggers:OutOfZone]
+        [Triggers:InsideZone]
+        [Triggers:SCHealthCheck]
+        [Triggers:AcquiredTargetTrigger]
+        [Triggers:GreatDyingDeadTrigger]
+        [Triggers:ForceFireTrigger]
+        [Triggers:RamConstantlyTrigger]
+        [Triggers:CloseRangeAttackTrigger]
+
+        [WeaponSystem:Weapon1]
+
+
+      </Description>
+    </EntityComponent>
+    
+
+    <!--HorseFighter behavior. If X is true, will become a fighter and strafe. X can be done with triggers, but i got it working on a timer. 
+	 for 10 seconds it will "approach" i.e. make waypoints around the target. The waypoint distance is done with the offsets.
+	 Then for 30 seconds it will be a fighter and strafe. -->
+
+	<!--BELOW HERE ARE AUTOPILOTS. WHAT IS AN AUTOPILOT? IT'S
+	"Behavior can best be summed up as what the NPC should be doing, while autopilot
+	defines how it moves while carrying out the behavior instructions"-->
+
+	
+	<!--basic autopilot that will try to strafe at 800-1000, and will try to get in range if at 1001-->
+	<!--offsets are used for non-strafe movement, so but fighter doesn't care. horsefighter will use it in waypoint mode. -->
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+          <TypeId>Inventory</TypeId>
+          <SubtypeId>BasicAutopilot</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Autopilot]
+
+        [SlowDownOnWaypointApproach:false]
+        [ExtraSlowDownDistance:150]
+
+
+        [AllowStrafing:true]
+        [StrafeMinDurationMs:10000]
+        [StrafeMaxDurationMs:15000]
+        [StrafeMinCooldownMs:1000]
+        [StrafeMaxCooldownMs:1000]
+        [StrafeMinimumTargetDistance:1500]
+
+		[UseProjectileLeadPrediction:true]
+
+        [IdealMaxSpeed:300]
+        [MaxSpeedTolerance:10]
+
+        [WaypointTolerance:100]
+        [WaypointWaitTimeTrigger:1]
+        [WaypointAbandonTimeTrigger:30]
+
+        [UseVelocityCollisionEvasion:true]
+
+        [DisengageDistanceSpace:2001]
+        [EngageDistanceSpace:2000]
+
+        [OffsetSpaceMinDistFromTarget:1000]
+        [OffsetSpaceMaxDistFromTarget:1000]
+
+
+      </Description>
+      
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>CowardBasicAutopilot</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Autopilot]
+
+        [SlowDownOnWaypointApproach:false]
+        [ExtraSlowDownDistance:150]
+
+
+        [AllowStrafing:true]
+        [StrafeMinDurationMs:10000]
+        [StrafeMaxDurationMs:15000]
+        [StrafeMinCooldownMs:1000]
+        [StrafeMaxCooldownMs:1000]
+        [StrafeMinimumTargetDistance:3500]
+
+		[UseProjectileLeadPrediction:true]
+
+        [IdealMaxSpeed:300]
+        [MaxSpeedTolerance:10]
+
+        [WaypointTolerance:100]
+        [WaypointWaitTimeTrigger:1]
+        [WaypointAbandonTimeTrigger:30]
+
+        [UseVelocityCollisionEvasion:true]
+
+        [DisengageDistanceSpace:4001]
+        [EngageDistanceSpace:4000]
+
+        [OffsetSpaceMinDistFromTarget:1000]
+        [OffsetSpaceMaxDistFromTarget:1000]
+
+
+      </Description>
+
+    </EntityComponent>
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>GETTHEFUCKBACKAutopilot</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Autopilot]
+
+        [SlowDownOnWaypointApproach:false]
+        [ExtraSlowDownDistance:150]
+
+
+        [AllowStrafing:false]
+
+
+        [IdealMaxSpeed:300]
+        [MaxSpeedTolerance:10]
+
+        [WaypointTolerance:100]
+        [WaypointWaitTimeTrigger:1]
+
+        [UseVelocityCollisionEvasion:true]
+
+
+
+      </Description>
+
+    </EntityComponent>
+
+
+
+  </EntityComponents>
+</Definitions>
