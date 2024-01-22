@@ -43,7 +43,7 @@
             <Z>0.0</Z>
           </Position>
           <Speed>1</Speed>
-          <Behaviour>SCFighter</Behaviour>
+          <Behaviour>SCBrawler</Behaviour>
         </Prefab>
       </Prefabs>
     </SpawnGroup>
