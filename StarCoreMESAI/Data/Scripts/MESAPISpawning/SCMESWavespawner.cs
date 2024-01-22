@@ -178,7 +178,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                 {
                     var groupKey = spawnGroup.Key;
                     var groupValue = spawnGroup.Value;
-                    var quantity = groupValue.Quantity + additionalShipsPerWave; // Add additional ships per wave
+                    var quantity = groupValue.Quantity + additionalShipsPerWave; // Add additional ships per wave, capped at 10
                     var spawnTime = groupValue.SpawnTime;
 
                     if ((DateTime.UtcNow - lastWaveCheckTime).TotalSeconds >= spawnTime)
@@ -244,8 +244,12 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             {
                 // Extract the additional ship count from the command
                 string[] commandParts = messageText.Split(' ');
-                if (commandParts.Length > 1 && int.TryParse(commandParts[1], out additionalShipsPerWave))
+                int parsedAdditionalShips; // Declare a separate variable
+                if (commandParts.Length > 1 && int.TryParse(commandParts[1], out parsedAdditionalShips))
                 {
+                    // Cap the additional ships per wave to a maximum of 10
+                    additionalShipsPerWave = Math.Min(parsedAdditionalShips, 10);
+
                     wavesStarted = true; // Start spawning waves
                     lastWaveCheckTime = DateTime.UtcNow; // Initialize the wave check time
                     sendToOthers = false;
@@ -253,7 +257,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                 }
                 else
                 {
-                    MyAPIGateway.Utilities.ShowMessage("SCMESWaveSpawner", "Invalid command format. Use /SCStartGauntlet X to specify additional ships per wave.");
+                    MyAPIGateway.Utilities.ShowMessage("SCMESWaveSpawner", "Invalid command format. Use /SCStartGauntlet X to specify additional ships per wave (max 10).");
                 }
             }
         }
