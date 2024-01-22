@@ -23,6 +23,8 @@
 
         [SpawnConditionsProfiles:SCSpawnCondition1]
 
+        [ManipulationProfiles:Manipulation-BallisticToLaser]
+
 
       </Description>
       <IsPirate>true</IsPirate>
@@ -98,7 +100,8 @@
         [RandomGridNamePrefix:FS/MVR ]
 
         [SpawnConditionsProfiles:SCSpawnCondition1]
-        [ManipulationProfiles:MES-Manipulation-CargoShipExample]
+
+        [ManipulationProfiles:Manipulation-UpArmored]
 
 
       </Description>
@@ -145,6 +148,43 @@
       <Frequency>5.0</Frequency>
       <Prefabs>
         <Prefab SubtypeId="Tidewater-MESAI">
+          <Position>
+            <X>0.0</X>
+            <Y>0.0</Y>
+            <Z>0.0</Z>
+          </Position>
+          <Speed>1</Speed>
+          <Behaviour>SCFighter</Behaviour>
+        </Prefab>
+      </Prefabs>
+    </SpawnGroup>
+
+    <!-- SIEGE -->
+    <SpawnGroup>
+      <Id>
+        <TypeId>SpawnGroupDefinition</TypeId>
+        <!--Do Not Edit-->
+        <SubtypeId>SpawnBattlecruiser</SubtypeId>
+      </Id>
+      <Description>
+
+        [Modular Encounters SpawnGroup]
+        [UseRivalAi:true]
+        [RivalAiReplaceRemoteControl:true]
+        [ReplenishSystems:true]
+        [UseRandomNameGenerator:true]
+        [RandomGridNamePattern:MilitaryNoun SurnamesNoun]
+        [RandomGridNamePrefix:SG/HVY ]
+
+        [SpawnConditionsProfiles:SCSpawnCondition1]
+
+
+      </Description>
+      <IsPirate>true</IsPirate>
+      <!--Do not edit-->
+      <Frequency>5.0</Frequency>
+      <Prefabs>
+        <Prefab SubtypeId="Battlecruiser-MESAI">
           <Position>
             <X>0.0</X>
             <Y>0.0</Y>
