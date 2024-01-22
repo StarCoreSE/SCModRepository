@@ -139,6 +139,9 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 
                                     // Add the wave data to your dictionary or data structure
                                     spawnGroupTimings.Add(name, new SpawnGroupInfo(prefabs.Count, startTime));
+
+                                    // Print the loaded data to chat for debugging
+                                    MyAPIGateway.Utilities.ShowMessage("Wave Data Loaded", $"Name: {name}, StartTime: {startTime}, Prefabs: {string.Join(", ", prefabs)}");
                                 }
                             }
                         }
@@ -217,9 +220,6 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
         {
             if (MyAPIGateway.Multiplayer.IsServer && wavesStarted)
             {
-                // Create a copy of the spawn group timings dictionary to avoid modification issues
-                var spawnGroupTimingsCopy = new Dictionary<string, SpawnGroupInfo>(spawnGroupTimings);
-
                 // Registering the event watcher only once
                 if (SpawnerAPI.MESApiReady && !registered)
                 {
@@ -234,9 +234,9 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                     lastBroadcastTime = DateTime.UtcNow;
                 }
 
-                if (hudInitialized && spawnGroupTimingsCopy.Count > 0)
+                if (hudInitialized && spawnGroupTimings.Count > 0)
                 {
-                    var firstGroupInfo = new List<SpawnGroupInfo>(spawnGroupTimingsCopy.Values)[0];
+                    var firstGroupInfo = spawnGroupTimings.First().Value;
                     var nextWaveSpawnTime = firstGroupInfo.SpawnTime;
                     var timeSinceStart = (int)(DateTime.UtcNow - lastWaveCheckTime).TotalSeconds;
                     var timeUntilNextWave = nextWaveSpawnTime - timeSinceStart;
@@ -256,7 +256,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                 // Create a list to store the keys of SpawnGroups to remove
                 var keysToRemove = new List<string>();
 
-                foreach (var spawnGroup in spawnGroupTimingsCopy)
+                foreach (var spawnGroup in spawnGroupTimings)
                 {
                     var groupKey = spawnGroup.Key;
                     var groupValue = spawnGroup.Value;
@@ -270,7 +270,16 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                         for (int i = 0; i < quantity; i++)
                         {
                             // Spawn each unit separately
-                            SpawnerAPI.SpawnSpaceCargoShip(spawnCoords, new List<string> { groupKey });
+                            bool spawnResult = SpawnerAPI.SpawnSpaceCargoShip(spawnCoords, new List<string> { groupKey });
+
+                            if (spawnResult)
+                            {
+                                MyAPIGateway.Utilities.ShowMessage("Spawn Debug", $"Spawned group: {groupKey}");
+                            }
+                            else
+                            {
+                                MyAPIGateway.Utilities.ShowMessage("Spawn Debug", $"Failed to spawn group: {groupKey}");
+                            }
                         }
 
                         // Add the key to the list of keys to remove
