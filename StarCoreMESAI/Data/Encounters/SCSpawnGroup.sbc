@@ -23,6 +23,13 @@
 
         [SpawnConditionsProfiles:SCSpawnCondition1]
 
+        [ManipulationProfiles:Manipulation-UpArmored]
+        [ManipulationProfiles:Manipulation-DownArmored]
+        [ManipulationProfiles:Manipulation-BallisticToLaser]
+        [ManipulationProfiles:Manipulation-LaserToBallistic]
+        [ManipulationProfiles:Manipulation-MundaneToExotic]
+
+
 
       </Description>
       <IsPirate>true</IsPirate>
@@ -36,7 +43,7 @@
             <Z>0.0</Z>
           </Position>
           <Speed>1</Speed>
-          <Behaviour>SCFighter</Behaviour>
+          <Behaviour>SCBrawler</Behaviour>
         </Prefab>
       </Prefabs>
     </SpawnGroup>
@@ -60,6 +67,12 @@
         [RandomGridNamePrefix:FS/SPR ]
 
         [SpawnConditionsProfiles:SCSpawnCondition1]
+
+        [ManipulationProfiles:Manipulation-UpArmored]
+        [ManipulationProfiles:Manipulation-DownArmored]
+        [ManipulationProfiles:Manipulation-BallisticToLaser]
+        [ManipulationProfiles:Manipulation-LaserToBallistic]
+        [ManipulationProfiles:Manipulation-MundaneToExotic]
 
 
       </Description>
@@ -99,6 +112,13 @@
 
         [SpawnConditionsProfiles:SCSpawnCondition1]
 
+        [ManipulationProfiles:Manipulation-UpArmored]
+        [ManipulationProfiles:Manipulation-DownArmored]
+        [ManipulationProfiles:Manipulation-BallisticToLaser]
+        [ManipulationProfiles:Manipulation-LaserToBallistic]
+        [ManipulationProfiles:Manipulation-MundaneToExotic]
+
+
 
       </Description>
       <IsPirate>true</IsPirate>
@@ -137,6 +157,12 @@
 
         [SpawnConditionsProfiles:SCSpawnCondition1]
 
+        [ManipulationProfiles:Manipulation-UpArmored]
+        [ManipulationProfiles:Manipulation-DownArmored]
+        [ManipulationProfiles:Manipulation-BallisticToLaser]
+        [ManipulationProfiles:Manipulation-LaserToBallistic]
+        [ManipulationProfiles:Manipulation-MundaneToExotic]
+
 
       </Description>
       <IsPirate>true</IsPirate>
@@ -144,6 +170,49 @@
       <Frequency>5.0</Frequency>
       <Prefabs>
         <Prefab SubtypeId="Tidewater-MESAI">
+          <Position>
+            <X>0.0</X>
+            <Y>0.0</Y>
+            <Z>0.0</Z>
+          </Position>
+          <Speed>1</Speed>
+          <Behaviour>SCFighter</Behaviour>
+        </Prefab>
+      </Prefabs>
+    </SpawnGroup>
+
+    <!-- SIEGE -->
+    <SpawnGroup>
+      <Id>
+        <TypeId>SpawnGroupDefinition</TypeId>
+        <!--Do Not Edit-->
+        <SubtypeId>SpawnBattlecruiser</SubtypeId>
+      </Id>
+      <Description>
+
+        [Modular Encounters SpawnGroup]
+        [UseRivalAi:true]
+        [RivalAiReplaceRemoteControl:true]
+        [ReplenishSystems:true]
+        [UseRandomNameGenerator:true]
+        [RandomGridNamePattern:MilitaryNoun SurnamesNoun]
+        [RandomGridNamePrefix:SG/HVY ]
+
+        [SpawnConditionsProfiles:SCSpawnCondition1]
+
+        [ManipulationProfiles:Manipulation-UpArmored]
+        [ManipulationProfiles:Manipulation-DownArmored]
+        [ManipulationProfiles:Manipulation-BallisticToLaser]
+        [ManipulationProfiles:Manipulation-LaserToBallistic]
+        [ManipulationProfiles:Manipulation-MundaneToExotic]
+
+
+      </Description>
+      <IsPirate>true</IsPirate>
+      <!--Do not edit-->
+      <Frequency>5.0</Frequency>
+      <Prefabs>
+        <Prefab SubtypeId="Battlecruiser-MESAI">
           <Position>
             <X>0.0</X>
             <Y>0.0</Y>

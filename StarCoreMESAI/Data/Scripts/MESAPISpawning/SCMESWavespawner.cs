@@ -14,6 +14,10 @@ using System.Text;
 using VRage.Game.GUI.TextPanel;
 using InvalidWave.Draygo.API;
 using static VRageRender.MyBillboard;
+using System.Xml;
+using VRage.Game.ModAPI.Ingame.Utilities;
+using System.Linq;
+using System.IO;
 
 namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 {
@@ -61,15 +65,17 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 
     public class SpawnGroupInfo
     {
-        public int Quantity { get; set; }
         public int SpawnTime { get; set; }
+        public Dictionary<string, int> Prefabs { get; private set; }
 
-        public SpawnGroupInfo(int quantity, int spawnTime)
+        public SpawnGroupInfo(int spawnTime, Dictionary<string, int> prefabs)
         {
-            Quantity = quantity;
             SpawnTime = spawnTime;
+            Prefabs = prefabs;
         }
     }
+
+
 
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     public class SCMESWaveSpawnerComponent : MySessionComponentBase
@@ -92,6 +98,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
         // Dictionary for spawn groups and their spawn times
         private Dictionary<string, SpawnGroupInfo> spawnGroupTimings = new Dictionary<string, SpawnGroupInfo>(); private DateTime lastWaveCheckTime;
         private bool wavesStarted = false; // Flag to control wave spawning
+        private int additionalShipsPerWave = 0;
 
         public override void LoadData()
         {
@@ -103,13 +110,105 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             // Initialize HudAPIv2 with a callback
             new HudAPIv2(OnHudApiReady);
 
-            // Populate the dictionary with spawn groups and their info
-            spawnGroupTimings.Add("SpawnSCDM", new SpawnGroupInfo(1, 6));      // 3 units, spawn after 6 seconds
-            spawnGroupTimings.Add("SpawnRIAN", new SpawnGroupInfo(2, 12));     // 2 units, spawn after 12 seconds
-            spawnGroupTimings.Add("SpawnTidewater", new SpawnGroupInfo(3, 18)); // 1 unit, spawn after 18 seconds
-            spawnGroupTimings.Add("SpawnLongbow", new SpawnGroupInfo(4, 24)); 
-                                                                                // Add other spawn groups and info as needed
+            LoadWaveData();
+            // Add other spawn groups and info as needed
         }
+
+        private void LoadWaveData()
+        {
+            try
+            {
+                string fileName = "WaveData.cfg"; // Configuration file name
+
+                if (MyAPIGateway.Utilities.FileExistsInWorldStorage(fileName, GetType()))
+                {
+                    using (var reader = MyAPIGateway.Utilities.ReadFileInWorldStorage(fileName, GetType()))
+                    {
+                        string line;
+                        while ((line = reader.ReadLine()) != null)
+                        {
+                            // Split the line by semicolons and trim whitespace
+                            string[] sections = line.Trim().Split(';');
+
+                            if (sections.Length >= 3)
+                            {
+                                string name = sections[0].Trim();
+                                int startTime;
+
+                                if (int.TryParse(sections[1].Trim(), out startTime))
+                                {
+                                    // Parse the prefab section
+                                    string[] prefabParts = sections[2].Trim().Split(',');
+                                    Dictionary<string, int> prefabs = new Dictionary<string, int>();
+
+                                    foreach (var part in prefabParts)
+                                    {
+                                        var prefabInfo = part.Trim().Split(':');
+                                        if (prefabInfo.Length == 2)
+                                        {
+                                            int quantity;
+                                            if (int.TryParse(prefabInfo[1], out quantity))
+                                            {
+                                                prefabs.Add(prefabInfo[0].Trim(), quantity);
+                                            }
+                                        }
+                                    }
+
+
+                                    // Add the wave data to your dictionary
+                                    spawnGroupTimings.Add(name, new SpawnGroupInfo(startTime, prefabs));
+
+                                    // Print the loaded data to chat for debugging
+                                    MyAPIGateway.Utilities.ShowMessage("Wave Data Loaded", $"Name: {name}, StartTime: {startTime}, Prefabs: {string.Join(", ", prefabs.Keys)}");
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    // Handle the case where the configuration file doesn't exist
+                    MyAPIGateway.Utilities.ShowMessage("Wave Data", "Configuration file not found. Generating a new one.");
+                    CreateBlankConfig();
+                }
+            }
+            catch (Exception e)
+            {
+                // Handle any exceptions that may occur during file reading or parsing
+                MyAPIGateway.Utilities.ShowMessage("Wave Data", "Error loading configuration file: " + e.Message);
+            }
+        }
+
+        private void CreateBlankConfig()
+        {
+            try
+            {
+                string fileName = "WaveData.cfg"; // Configuration file name
+
+                if (!MyAPIGateway.Utilities.FileExistsInWorldStorage(fileName, GetType()))
+                {
+                    // Create a blank configuration file with default values in the new format
+                    string defaultConfig =
+                        "Wave1;10;Prefab1, Prefab2, Prefab3\n" +
+                        "Wave2;20;Prefab4, Prefab5\n" +
+                        "Wave3;30;Prefab6, Prefab7, Prefab8, Prefab9";
+
+                    // Write the default configuration to the file
+                    var writer = MyAPIGateway.Utilities.WriteFileInWorldStorage(fileName, GetType());
+                    writer.Write(defaultConfig);
+                    writer.Flush();
+                    writer.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                // Handle any exceptions that may occur during file creation
+                MyAPIGateway.Utilities.ShowMessage("Wave Data", "Error creating configuration file: " + e.Message);
+            }
+        }
+
+
+
 
         private void OnHudApiReady()
         {
@@ -155,7 +254,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 
                 if (hudInitialized && spawnGroupTimings.Count > 0)
                 {
-                    var firstGroupInfo = new List<SpawnGroupInfo>(spawnGroupTimings.Values)[0];
+                    var firstGroupInfo = spawnGroupTimings.First().Value;
                     var nextWaveSpawnTime = firstGroupInfo.SpawnTime;
                     var timeSinceStart = (int)(DateTime.UtcNow - lastWaveCheckTime).TotalSeconds;
                     var timeUntilNextWave = nextWaveSpawnTime - timeSinceStart;
@@ -172,27 +271,49 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                     isEventTriggered = false;
                 }
 
+                // Create a list to store the keys of SpawnGroups to remove
+                var keysToRemove = new List<string>();
+
                 foreach (var spawnGroup in spawnGroupTimings)
                 {
                     var groupKey = spawnGroup.Key;
                     var groupValue = spawnGroup.Value;
-                    var quantity = groupValue.Quantity;
                     var spawnTime = groupValue.SpawnTime;
 
                     if ((DateTime.UtcNow - lastWaveCheckTime).TotalSeconds >= spawnTime)
                     {
-                        Vector3D spawnCoords = new Vector3D(-10000, 0, 0);
+                        Vector3D spawnCoords = new Vector3D(-20000, 0, 0);
 
-                        for (int i = 0; i < quantity; i++)
+                        foreach (var prefabEntry in groupValue.Prefabs)
                         {
-                            // Spawn each unit separately
-                            SpawnerAPI.SpawnSpaceCargoShip(spawnCoords, new List<string> { groupKey });
+                            string prefabName = prefabEntry.Key;
+                            int quantity = prefabEntry.Value + additionalShipsPerWave; // Add additional ships per wave, capped at 10
+
+                            for (int i = 0; i < quantity; i++)
+                            {
+                                // Spawn each unit separately
+                                bool spawnResult = SpawnerAPI.SpawnSpaceCargoShip(spawnCoords, new List<string> { prefabName });
+
+                                if (spawnResult)
+                                {
+                                    MyAPIGateway.Utilities.ShowMessage("Spawn Debug", $"Spawned prefab: {prefabName}");
+                                }
+                                else
+                                {
+                                    MyAPIGateway.Utilities.ShowMessage("Spawn Debug", $"Failed to spawn prefab: {prefabName}");
+                                }
+                            }
                         }
 
-                        // Remove the spawned group from the dictionary to avoid respawning
-                        spawnGroupTimings.Remove(groupKey);
-                        break;
+                        // Add the key to the list of keys to remove
+                        keysToRemove.Add(groupKey);
                     }
+                }
+
+                // Remove the spawned groups from the dictionary to avoid respawning
+                foreach (var keyToRemove in keysToRemove)
+                {
+                    spawnGroupTimings.Remove(keyToRemove);
                 }
 
                 if (spawnGroupTimings.Count == 0)
@@ -201,6 +322,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                 }
             }
         }
+
 
         private void compromisedevent(IMyRemoteControl arg1, IMyCubeGrid arg2)
         {
@@ -240,10 +362,23 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
         {
             if (messageText.StartsWith("/SCStartGauntlet", StringComparison.OrdinalIgnoreCase))
             {
-                wavesStarted = true; // Start spawning waves
-                lastWaveCheckTime = DateTime.UtcNow; // Initialize the wave check time
-                sendToOthers = false;
-                MyAPIGateway.Utilities.ShowMessage("SCMESWaveSpawner", "Started spawning waves");
+                // Extract the additional ship count from the command
+                string[] commandParts = messageText.Split(' ');
+                int parsedAdditionalShips; // Declare a separate variable
+                if (commandParts.Length > 1 && int.TryParse(commandParts[1], out parsedAdditionalShips))
+                {
+                    // Cap the additional ships per wave to a maximum of 10
+                    additionalShipsPerWave = Math.Min(parsedAdditionalShips, 10);
+
+                    wavesStarted = true; // Start spawning waves
+                    lastWaveCheckTime = DateTime.UtcNow; // Initialize the wave check time
+                    sendToOthers = false;
+                    MyAPIGateway.Utilities.ShowMessage("SCMESWaveSpawner", "Started spawning waves with additional ships per wave: " + additionalShipsPerWave);
+                }
+                else
+                {
+                    MyAPIGateway.Utilities.ShowMessage("SCMESWaveSpawner", "Invalid command format. Use /SCStartGauntlet X to specify additional ships per wave (max 10).");
+                }
             }
         }
 

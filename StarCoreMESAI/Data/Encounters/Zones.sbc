@@ -22,7 +22,7 @@
 
         [ZoneName:THELIGHTNINGSPHERE]
         [MinDistanceFromZoneCenter:0]
-        [MaxDistanceFromZoneCenter:10000]
+        [MaxDistanceFromZoneCenter:50000]
 
       </Description>
 

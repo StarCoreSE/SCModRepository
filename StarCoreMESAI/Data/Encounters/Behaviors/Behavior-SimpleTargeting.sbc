@@ -17,7 +17,7 @@
         [UseCustomTargeting:true]
         [Target:Grid]
 
-        [MaxDistance:20000]
+        [MaxDistance:50000]
 
         [MatchAllFilters:OutsideOfSafezone]
         [MatchAllFilters:Owner]
@@ -51,7 +51,7 @@
         [UseCustomTargeting:true]
         [Target:Grid]
 
-        [MaxDistance:20000]
+        [MaxDistance:50000]
 
         [MatchAllFilters:OutsideOfSafezone]
         [MatchAllFilters:Owner]
