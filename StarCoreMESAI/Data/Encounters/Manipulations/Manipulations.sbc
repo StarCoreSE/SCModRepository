@@ -13,7 +13,7 @@
 
         [ManipulationChance:25]
 
-        [AssignGridSkin:DigitalCamouflage_Armor]
+        [AssignGridSkin:Battered_Armor]
 
         [UseBlockReplacerProfile:true]
         [ConvertToHeavyArmor:true]

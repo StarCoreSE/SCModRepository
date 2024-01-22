@@ -108,6 +108,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             spawnGroupTimings.Add("SpawnSCDM", new SpawnGroupInfo(1, 6));      // 3 units, spawn after 6 seconds
             spawnGroupTimings.Add("SpawnRIAN", new SpawnGroupInfo(2, 12));     // 2 units, spawn after 12 seconds
             spawnGroupTimings.Add("SpawnTidewater", new SpawnGroupInfo(3, 18)); // 1 unit, spawn after 18 seconds
+            spawnGroupTimings.Add("SpawnBattlecruiser", new SpawnGroupInfo(1, 18));
             spawnGroupTimings.Add("SpawnLongbow", new SpawnGroupInfo(4, 24));
             // Add other spawn groups and info as needed
         }

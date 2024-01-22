@@ -23,7 +23,12 @@
 
         [SpawnConditionsProfiles:SCSpawnCondition1]
 
+        [ManipulationProfiles:Manipulation-UpArmored]
+        [ManipulationProfiles:Manipulation-DownArmored]
         [ManipulationProfiles:Manipulation-BallisticToLaser]
+        [ManipulationProfiles:Manipulation-LaserToBallistic]
+        [ManipulationProfiles:Manipulation-MundaneToExotic]
+
 
 
       </Description>
@@ -62,6 +67,12 @@
         [RandomGridNamePrefix:FS/SPR ]
 
         [SpawnConditionsProfiles:SCSpawnCondition1]
+
+        [ManipulationProfiles:Manipulation-UpArmored]
+        [ManipulationProfiles:Manipulation-DownArmored]
+        [ManipulationProfiles:Manipulation-BallisticToLaser]
+        [ManipulationProfiles:Manipulation-LaserToBallistic]
+        [ManipulationProfiles:Manipulation-MundaneToExotic]
 
 
       </Description>
@@ -102,6 +113,11 @@
         [SpawnConditionsProfiles:SCSpawnCondition1]
 
         [ManipulationProfiles:Manipulation-UpArmored]
+        [ManipulationProfiles:Manipulation-DownArmored]
+        [ManipulationProfiles:Manipulation-BallisticToLaser]
+        [ManipulationProfiles:Manipulation-LaserToBallistic]
+        [ManipulationProfiles:Manipulation-MundaneToExotic]
+
 
 
       </Description>
@@ -141,6 +157,12 @@
 
         [SpawnConditionsProfiles:SCSpawnCondition1]
 
+        [ManipulationProfiles:Manipulation-UpArmored]
+        [ManipulationProfiles:Manipulation-DownArmored]
+        [ManipulationProfiles:Manipulation-BallisticToLaser]
+        [ManipulationProfiles:Manipulation-LaserToBallistic]
+        [ManipulationProfiles:Manipulation-MundaneToExotic]
+
 
       </Description>
       <IsPirate>true</IsPirate>
@@ -177,6 +199,12 @@
         [RandomGridNamePrefix:SG/HVY ]
 
         [SpawnConditionsProfiles:SCSpawnCondition1]
+
+        [ManipulationProfiles:Manipulation-UpArmored]
+        [ManipulationProfiles:Manipulation-DownArmored]
+        [ManipulationProfiles:Manipulation-BallisticToLaser]
+        [ManipulationProfiles:Manipulation-LaserToBallistic]
+        [ManipulationProfiles:Manipulation-MundaneToExotic]
 
 
       </Description>
