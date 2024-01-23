@@ -99,9 +99,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
         private bool wavesStarted = false; // Flag to control wave spawning
         private int additionalShipsPerWave = 0;
 
-        private DateTime lastMessageTime;
-        private const double MessageIntervalSeconds = 10; // Time in seconds to limit messages
-
+        private DateTime lastWaveNotificationTime;
 
         public override void LoadData()
         {
@@ -254,16 +252,26 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                     var nextWaveSpawnTime = firstGroupInfo.SpawnTime;
                     var timeSinceStart = (int)(DateTime.UtcNow - lastWaveCheckTime).TotalSeconds;
                     var timeUntilNextWave = nextWaveSpawnTime - timeSinceStart;
-                    if (timeUntilNextWave < 0) timeUntilNextWave = 0;
-                    if ((DateTime.UtcNow - lastMessageTime).TotalSeconds >= MessageIntervalSeconds)
-                    {
-                        // Now, messages will only be sent once every MessageIntervalSeconds
-                        MyAPIGateway.Utilities.SendMessage($"Next Wave: {(timeUntilNextWave / 60).ToString("D2")}:{(timeUntilNextWave % 60).ToString("D2")}");
 
-                        // Update the last message time
-                        lastMessageTime = DateTime.UtcNow;
+                    // Define your desired message interval in seconds
+                    const int messageInterval = 60; // Example: 60 seconds
+
+                    // Check if it's time for a message
+                    if ((DateTime.UtcNow - lastWaveNotificationTime).TotalSeconds >= messageInterval ||
+                        (timeUntilNextWave <= 10 && timeUntilNextWave >= 0 && (DateTime.UtcNow - lastWaveNotificationTime).TotalSeconds >= 10))
+                    {
+                        string message;
+
+                        if (timeUntilNextWave > 10)
+                            message = $"Next Wave: {(timeUntilNextWave / 60).ToString("D2")}:{(timeUntilNextWave % 60).ToString("D2")}";
+                        else
+                            message = $"Next Wave in: {timeUntilNextWave}s";
+
+                        MyAPIGateway.Utilities.SendMessage(message);
+                        lastWaveNotificationTime = DateTime.UtcNow;
                     }
                 }
+
 
                 if ((DateTime.UtcNow - lastEventTriggerTime).TotalSeconds >= EventResetIntervalSeconds)
                 {
