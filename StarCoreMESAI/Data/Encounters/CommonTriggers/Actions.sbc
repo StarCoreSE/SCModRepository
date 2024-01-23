@@ -321,19 +321,17 @@ FUCK. You can ignore the requirement with [IgnoreAntennaRequirement:true]. the m
 
         [ChatMessages:I'm taking hull damage!]
         [BroadcastChatType:Chat]
-        
 
         [ChatMessages:BLUE. HURT.]
         [BroadcastChatType:Chat]
-        
 
         [ChatMessages:They got through the shields!]
         [BroadcastChatType:Chat]
-        
 
         [ChatMessages:Armor integrity is decreasing.]
         [BroadcastChatType:Chat]
-        
+
+
 
       </Description>
     </EntityComponent>
@@ -388,13 +386,21 @@ FUCK. You can ignore the requirement with [IgnoreAntennaRequirement:true]. the m
         [IgnoreAntennaRequirement:true]
         [IgnoredAntennaRangeOverride:20000]
 
-        [ChatMessages:I'm inside of the zone.]
+        [ChatMessages:Entered the combat area.]
         [BroadcastChatType:Chat]
-        
 
         [ChatMessages:My legs are OK.]
         [BroadcastChatType:Chat]
-        
+
+        [ChatMessages:Now in the combat area.]
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:Entering range.]
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:Entering range.]
+        [BroadcastChatType:Chat]
+
 
 
       </Description>
@@ -450,12 +456,23 @@ FUCK. You can ignore the requirement with [IgnoreAntennaRequirement:true]. the m
         [IgnoredAntennaRangeOverride:20000]
 
         [ChatMessages:I see the enemy!]
-        
         [BroadcastChatType:Chat]
 
         [ChatMessages:Engaging a target.]
-        
         [BroadcastChatType:Chat]
+
+        [ChatMessages:There they are!]
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:Something entered scanner range.]
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:Target locked.]
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:A grid is in range.]
+        [BroadcastChatType:Chat]
+
 
       </Description>
     </EntityComponent>
@@ -476,14 +493,12 @@ FUCK. You can ignore the requirement with [IgnoreAntennaRequirement:true]. the m
         [Color:Red]
 
         [IgnoreAntennaRequirement:true]
-        [IgnoredAntennaRangeOverride:20000]
+        [IgnoredAntennaRangeOverride:1000]
 
-        [ChatMessages:Reacquiring target.]
-        
+        [ChatMessages:Reacquiring target.]     
         [BroadcastChatType:Chat]
 
-        [ChatMessages:Refreshing target.]
-        
+        [ChatMessages:Refreshing target.]        
         [BroadcastChatType:Chat]
 
       </Description>
@@ -508,19 +523,31 @@ FUCK. You can ignore the requirement with [IgnoreAntennaRequirement:true]. the m
         [IgnoredAntennaRangeOverride:20000]
 
         [ChatMessages:We've lost control. [DED]]
-        
+        [ChatAudio:GreetingSoundId-A]
         [BroadcastChatType:Chat]
 
         [ChatMessages:We're dead in the water. [DED]]
-        
+        [ChatAudio:GreetingSoundId-A]
         [BroadcastChatType:Chat]
 
         [ChatMessages:Control is offline. [DED]]
-        
+        [ChatAudio:GreetingSoundId-A]
         [BroadcastChatType:Chat]
 
-        [ChatMessages:OMNISSIAH GUIDE MY SHIP [DED]]
-        
+        [ChatMessages:FUCK [DED]]
+        [ChatAudio:GreetingSoundId-A]
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:They took out our controls. [DED]]
+        [ChatAudio:GreetingSoundId-A]
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:It's OVER [DED]]
+        [ChatAudio:GreetingSoundId-A]
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:Oh god oh fuck [DED]]
+        [ChatAudio:GreetingSoundId-A]
         [BroadcastChatType:Chat]
 
       </Description>
@@ -584,11 +611,11 @@ FUCK. You can ignore the requirement with [IgnoreAntennaRequirement:true]. the m
         [IgnoredAntennaRangeOverride:20000]
 
         [ChatMessages:IT'S TIME]
-        
+        [ChatAudio:GreetingSoundId-B]
         [BroadcastChatType:Chat]
 
         [ChatMessages:AAAAAAAAAAAAAAAAAAAAAAAAAAAAA]
-        
+        [ChatAudio:GreetingSoundId-B]
         [BroadcastChatType:Chat]
 
 
@@ -615,12 +642,11 @@ FUCK. You can ignore the requirement with [IgnoreAntennaRequirement:true]. the m
         [IgnoredAntennaRangeOverride:20000]
 
         [ChatMessages:Trying to gain range.]
-        
         [BroadcastChatType:Chat]
 
         [ChatMessages:I'm going to back off a bit.]
-        
         [BroadcastChatType:Chat]
+
 
 
       </Description>
@@ -678,11 +704,15 @@ FUCK. You can ignore the requirement with [IgnoreAntennaRequirement:true]. the m
         [IgnoredAntennaRangeOverride:20000]
 
         [ChatMessages:Too close for comfort!]
-        
+
         [BroadcastChatType:Chat]
 
         [ChatMessages:Stop trying to ram me!]
-        
+
+        [BroadcastChatType:Chat]
+
+        [ChatMessages:Go away!]
+
         [BroadcastChatType:Chat]
 
 
