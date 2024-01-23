@@ -99,6 +99,10 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
         private bool wavesStarted = false; // Flag to control wave spawning
         private int additionalShipsPerWave = 0;
 
+        private DateTime lastMessageTime;
+        private const double MessageIntervalSeconds = 10; // Time in seconds to limit messages
+
+
         public override void LoadData()
         {
             if (MyAPIGateway.Multiplayer.IsServer)
@@ -251,14 +255,21 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                     var timeSinceStart = (int)(DateTime.UtcNow - lastWaveCheckTime).TotalSeconds;
                     var timeUntilNextWave = nextWaveSpawnTime - timeSinceStart;
                     if (timeUntilNextWave < 0) timeUntilNextWave = 0;
-                    MyAPIGateway.Utilities.SendMessage($"Next Wave: {(timeUntilNextWave / 60).ToString("D2")}:{(timeUntilNextWave % 60).ToString("D2")}");
+                    if ((DateTime.UtcNow - lastMessageTime).TotalSeconds >= MessageIntervalSeconds)
+                    {
+                        // Now, messages will only be sent once every MessageIntervalSeconds
+                        MyAPIGateway.Utilities.SendMessage($"Next Wave: {(timeUntilNextWave / 60).ToString("D2")}:{(timeUntilNextWave % 60).ToString("D2")}");
+
+                        // Update the last message time
+                        lastMessageTime = DateTime.UtcNow;
+                    }
                 }
 
                 if ((DateTime.UtcNow - lastEventTriggerTime).TotalSeconds >= EventResetIntervalSeconds)
                 {
                     if (isEventTriggered)
                     {
-                        MyAPIGateway.Utilities.SendMessage("SCMESWaveSpawner: Resetting isEventTriggered flag.");
+                        //MyAPIGateway.Utilities.SendMessage("SCMESWaveSpawner: Resetting isEventTriggered flag.");
                     }
                     isEventTriggered = false;
                 }
