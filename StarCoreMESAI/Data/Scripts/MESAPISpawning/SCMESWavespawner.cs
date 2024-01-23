@@ -156,7 +156,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                                     spawnGroupTimings.Add(name, new SpawnGroupInfo(startTime, prefabs));
 
                                     // Print the loaded data to chat for debugging
-                                    MyAPIGateway.Utilities.SendMessage($"Name: {name}, StartTime: {startTime}, Prefabs: {string.Join(", ", prefabs.Keys)}");
+                                    MyLog.Default.WriteLineAndConsole($"Name: {name}, StartTime: {startTime}, Prefabs: {string.Join(", ", prefabs.Keys)}");
                                 }
                             }
                         }
