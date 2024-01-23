@@ -75,8 +75,6 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
         }
     }
 
-
-
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     public class SCMESWaveSpawnerComponent : MySessionComponentBase
     {
@@ -96,7 +94,8 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
         private HudAPIv2.HUDMessage waveTimerHUD;
 
         // Dictionary for spawn groups and their spawn times
-        private Dictionary<string, SpawnGroupInfo> spawnGroupTimings = new Dictionary<string, SpawnGroupInfo>(); private DateTime lastWaveCheckTime;
+        private Dictionary<string, SpawnGroupInfo> spawnGroupTimings = new Dictionary<string, SpawnGroupInfo>();
+        private DateTime lastWaveCheckTime;
         private bool wavesStarted = false; // Flag to control wave spawning
         private int additionalShipsPerWave = 0;
 
@@ -106,9 +105,6 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             {
                 SpawnerAPI = new MESApi();
             }
-
-            // Initialize HudAPIv2 with a callback
-            new HudAPIv2(OnHudApiReady);
 
             LoadWaveData();
             // Add other spawn groups and info as needed
@@ -154,12 +150,11 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                                         }
                                     }
 
-
                                     // Add the wave data to your dictionary
                                     spawnGroupTimings.Add(name, new SpawnGroupInfo(startTime, prefabs));
 
                                     // Print the loaded data to chat for debugging
-                                    MyLog.Default.WriteLineAndConsole($"Name: {name}, StartTime: {startTime}, Prefabs: {string.Join(", ", prefabs.Keys)}");
+                                    MyAPIGateway.Utilities.SendMessage($"Name: {name}, StartTime: {startTime}, Prefabs: {string.Join(", ", prefabs.Keys)}");
                                 }
                             }
                         }
@@ -168,14 +163,14 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                 else
                 {
                     // Handle the case where the configuration file doesn't exist
-                    MyLog.Default.WriteLineAndConsole("Configuration file not found. Generating a new one.");
+                    MyAPIGateway.Utilities.SendMessage("Configuration file not found. Generating a new one.");
                     CreateBlankConfig();
                 }
             }
             catch (Exception e)
             {
                 // Handle any exceptions that may occur during file reading or parsing
-                MyLog.Default.WriteLineAndConsole("Error loading configuration file: " + e.Message);
+                MyAPIGateway.Utilities.SendMessage("Error loading configuration file: " + e.Message);
             }
         }
 
@@ -203,12 +198,9 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             catch (Exception e)
             {
                 // Handle any exceptions that may occur during file creation
-                MyLog.Default.WriteLineAndConsole("Error creating configuration file: " + e.Message);
+                MyAPIGateway.Utilities.SendMessage("Error creating configuration file: " + e.Message);
             }
         }
-
-
-
 
         private void OnHudApiReady()
         {
@@ -252,21 +244,21 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                     lastBroadcastTime = DateTime.UtcNow;
                 }
 
-                if (hudInitialized && spawnGroupTimings.Count > 0)
+                if (spawnGroupTimings.Count > 0)
                 {
                     var firstGroupInfo = spawnGroupTimings.First().Value;
                     var nextWaveSpawnTime = firstGroupInfo.SpawnTime;
                     var timeSinceStart = (int)(DateTime.UtcNow - lastWaveCheckTime).TotalSeconds;
                     var timeUntilNextWave = nextWaveSpawnTime - timeSinceStart;
                     if (timeUntilNextWave < 0) timeUntilNextWave = 0;
-                    waveTimerHUD.Message.Clear().Append("Next Wave: " + (timeUntilNextWave / 60).ToString("D2") + ":" + (timeUntilNextWave % 60).ToString("D2"));
+                    MyAPIGateway.Utilities.SendMessage($"Next Wave: {(timeUntilNextWave / 60).ToString("D2")}:{(timeUntilNextWave % 60).ToString("D2")}");
                 }
 
                 if ((DateTime.UtcNow - lastEventTriggerTime).TotalSeconds >= EventResetIntervalSeconds)
                 {
                     if (isEventTriggered)
                     {
-                        MyLog.Default.WriteLineAndConsole("SCMESWaveSpawner: Resetting isEventTriggered flag.");
+                        MyAPIGateway.Utilities.SendMessage("SCMESWaveSpawner: Resetting isEventTriggered flag.");
                     }
                     isEventTriggered = false;
                 }
@@ -296,11 +288,11 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 
                                 if (spawnResult)
                                 {
-                                    MyLog.Default.WriteLineAndConsole($"Spawned prefab: {prefabName}");
+                                    MyAPIGateway.Utilities.SendMessage($"Spawned prefab: {prefabName}");
                                 }
                                 else
                                 {
-                                    MyLog.Default.WriteLineAndConsole($"Failed to spawn prefab: {prefabName}");
+                                    MyAPIGateway.Utilities.SendMessage($"Failed to spawn prefab: {prefabName}");
                                 }
                             }
                         }
@@ -323,20 +315,17 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             }
         }
 
-
         private void compromisedevent(IMyRemoteControl arg1, IMyCubeGrid arg2)
         {
             // Incrementing the counter each time an AI ship is destroyed
             aiShipsDestroyed++;
-            MyLog.Default.WriteLineAndConsole($"SCMESWaveSpawner: Compromised event triggered. AI Ships Destroyed: {aiShipsDestroyed}");
-
+            MyAPIGateway.Utilities.SendMessage($"SCMESWaveSpawner: Compromised event triggered. AI Ships Destroyed: {aiShipsDestroyed}");
             // Updating the HUD element
             if (hudInitialized)
             {
                 aiShipsDestroyedHUD.Message.Clear().Append($"AI Ships Destroyed: {aiShipsDestroyed}");
             }
         }
-
 
         private void BroadcastCounter()
         {
@@ -348,7 +337,6 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
         // Inside the NetworkHandler method
         private void NetworkHandler(ushort arg1, byte[] arg2, ulong arg3, bool arg4)
         {
-            MyLog.Default.WriteLineAndConsole($"NetworkHandler started");
 
             var packet = MyAPIGateway.Utilities.SerializeFromBinary<Packet>(arg2);
             if (packet != null)
@@ -368,13 +356,11 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                     aiShipsDestroyed = counterPacket.CounterValue;
                 }
             }
-            MyLog.Default.WriteLineAndConsole($"NetworkHandler ended");
         }
 
         // Inside the OnMessageEntered method
         private void OnMessageEntered(string messageText, ref bool sendToOthers)
         {
-            MyLog.Default.WriteLineAndConsole($"OnMessageEntered started");
             if (messageText.StartsWith("/SCStartGauntlet", StringComparison.OrdinalIgnoreCase))
             {
                 // Prevent the message from being broadcasted to other players
@@ -393,13 +379,11 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                     ProcessCommand(messageText);
                 }
             }
-            MyLog.Default.WriteLineAndConsole($"OnMessageEntered ended");
         }
 
         // Inside the ProcessCommand method
         private void ProcessCommand(string messageText)
         {
-            MyLog.Default.WriteLineAndConsole($"ProcessCommand started: {messageText}");
 
             string[] commandParts = messageText.Split(' ');
             int parsedAdditionalShips;
@@ -409,18 +393,14 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                 wavesStarted = true;
                 lastWaveCheckTime = DateTime.UtcNow;
 
-
-                MyAPIGateway.Utilities.ShowMessage("SCMESWaveSpawner", "Spawning waves has started with" + additionalShipsPerWave + "additional ships per wave!");
-
-
-                MyLog.Default.WriteLineAndConsole("Started spawning waves with additional ships per wave: " + additionalShipsPerWave + " (Server)");
+                MyAPIGateway.Utilities.SendMessage($"Started spawning waves with additional ships per wave: {additionalShipsPerWave} (Server)");
             }
             else
             {
-                MyLog.Default.WriteLineAndConsole("Invalid command format. Use /SCStartGauntlet X to specify additional ships per wave (max 10). (Server)");
+                MyAPIGateway.Utilities.SendMessage("Invalid command format. Use /SCStartGauntlet X to specify additional ships per wave (max 10). (Server)");
             }
-            MyLog.Default.WriteLineAndConsole($"ProcessCommand ended");
         }
+
 
         protected override void UnloadData()
         {
@@ -428,14 +408,6 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             {
                 MyAPIGateway.Utilities.MessageEntered -= OnMessageEntered; // Unsubscribe from chat message events
                 MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(netID, NetworkHandler);
-
-                if (hudInitialized)
-                {
-                    aiShipsDestroyedHUD.DeleteMessage();
-                }
-
-                // Unregister any other event handlers or cleanup as needed
-
             }
             catch (Exception e)
             {
