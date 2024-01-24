@@ -114,93 +114,99 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 
         private void LoadWaveData()
         {
-            try
+            if (MyAPIGateway.Multiplayer.IsServer)
             {
-                string fileName = "WaveData.cfg"; // Configuration file name
-
-                if (MyAPIGateway.Utilities.FileExistsInWorldStorage(fileName, GetType()))
+                try
                 {
-                    using (var reader = MyAPIGateway.Utilities.ReadFileInWorldStorage(fileName, GetType()))
+                    string fileName = "WaveData.cfg"; // Configuration file name
+
+                    if (MyAPIGateway.Utilities.FileExistsInWorldStorage(fileName, GetType()))
                     {
-                        string line;
-                        while ((line = reader.ReadLine()) != null)
+                        using (var reader = MyAPIGateway.Utilities.ReadFileInWorldStorage(fileName, GetType()))
                         {
-                            // Split the line by semicolons and trim whitespace
-                            string[] sections = line.Trim().Split(';');
-
-                            if (sections.Length >= 3)
+                            string line;
+                            while ((line = reader.ReadLine()) != null)
                             {
-                                string name = sections[0].Trim();
-                                int startTime;
+                                // Split the line by semicolons and trim whitespace
+                                string[] sections = line.Trim().Split(';');
 
-                                if (int.TryParse(sections[1].Trim(), out startTime))
+                                if (sections.Length >= 3)
                                 {
-                                    // Parse the prefab section
-                                    string[] prefabParts = sections[2].Trim().Split(',');
-                                    Dictionary<string, int> prefabs = new Dictionary<string, int>();
+                                    string name = sections[0].Trim();
+                                    int startTime;
 
-                                    foreach (var part in prefabParts)
+                                    if (int.TryParse(sections[1].Trim(), out startTime))
                                     {
-                                        var prefabInfo = part.Trim().Split(':');
-                                        if (prefabInfo.Length == 2)
+                                        // Parse the prefab section
+                                        string[] prefabParts = sections[2].Trim().Split(',');
+                                        Dictionary<string, int> prefabs = new Dictionary<string, int>();
+
+                                        foreach (var part in prefabParts)
                                         {
-                                            int quantity;
-                                            if (int.TryParse(prefabInfo[1], out quantity))
+                                            var prefabInfo = part.Trim().Split(':');
+                                            if (prefabInfo.Length == 2)
                                             {
-                                                prefabs.Add(prefabInfo[0].Trim(), quantity);
+                                                int quantity;
+                                                if (int.TryParse(prefabInfo[1], out quantity))
+                                                {
+                                                    prefabs.Add(prefabInfo[0].Trim(), quantity);
+                                                }
                                             }
                                         }
+
+                                        // Add the wave data to your dictionary
+                                        spawnGroupTimings.Add(name, new SpawnGroupInfo(startTime, prefabs));
+
+                                        // Print the loaded data to chat for debugging
+                                        MyLog.Default.WriteLineAndConsole($"Name: {name}, StartTime: {startTime}, Prefabs: {string.Join(", ", prefabs.Keys)}");
                                     }
-
-                                    // Add the wave data to your dictionary
-                                    spawnGroupTimings.Add(name, new SpawnGroupInfo(startTime, prefabs));
-
-                                    // Print the loaded data to chat for debugging
-                                    MyLog.Default.WriteLineAndConsole($"Name: {name}, StartTime: {startTime}, Prefabs: {string.Join(", ", prefabs.Keys)}");
                                 }
                             }
                         }
                     }
+                    else
+                    {
+                        // Handle the case where the configuration file doesn't exist
+                        MyAPIGateway.Utilities.SendMessage("Configuration file not found. Generating a new one.");
+                        CreateBlankConfig();
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    // Handle the case where the configuration file doesn't exist
-                    MyAPIGateway.Utilities.SendMessage("Configuration file not found. Generating a new one.");
-                    CreateBlankConfig();
+                    // Handle any exceptions that may occur during file reading or parsing
+                    MyAPIGateway.Utilities.SendMessage("Error loading configuration file: " + e.Message);
                 }
-            }
-            catch (Exception e)
-            {
-                // Handle any exceptions that may occur during file reading or parsing
-                MyAPIGateway.Utilities.SendMessage("Error loading configuration file: " + e.Message);
             }
         }
 
         private void CreateBlankConfig()
         {
-            try
+            if (MyAPIGateway.Multiplayer.IsServer)
             {
-                string fileName = "WaveData.cfg"; // Configuration file name
-
-                if (!MyAPIGateway.Utilities.FileExistsInWorldStorage(fileName, GetType()))
+                try
                 {
-                    // Create a blank configuration file with default values in the new format
-                    string defaultConfig =
-                        "Wave1;10;Prefab1, Prefab2, Prefab3\n" +
-                        "Wave2;20;Prefab4, Prefab5\n" +
-                        "Wave3;30;Prefab6, Prefab7, Prefab8, Prefab9";
+                    string fileName = "WaveData.cfg"; // Configuration file name
 
-                    // Write the default configuration to the file
-                    var writer = MyAPIGateway.Utilities.WriteFileInWorldStorage(fileName, GetType());
-                    writer.Write(defaultConfig);
-                    writer.Flush();
-                    writer.Close();
+                    if (!MyAPIGateway.Utilities.FileExistsInWorldStorage(fileName, GetType()))
+                    {
+                        // Create a blank configuration file with default values in the new format
+                        string defaultConfig =
+                            "Wave1;10;Prefab1, Prefab2, Prefab3\n" +
+                            "Wave2;20;Prefab4, Prefab5\n" +
+                            "Wave3;30;Prefab6, Prefab7, Prefab8, Prefab9";
+
+                        // Write the default configuration to the file
+                        var writer = MyAPIGateway.Utilities.WriteFileInWorldStorage(fileName, GetType());
+                        writer.Write(defaultConfig);
+                        writer.Flush();
+                        writer.Close();
+                    }
                 }
-            }
-            catch (Exception e)
-            {
-                // Handle any exceptions that may occur during file creation
-                MyAPIGateway.Utilities.SendMessage("Error creating configuration file: " + e.Message);
+                catch (Exception e)
+                {
+                    // Handle any exceptions that may occur during file creation
+                    MyAPIGateway.Utilities.SendMessage("Error creating configuration file: " + e.Message);
+                }
             }
         }
 
