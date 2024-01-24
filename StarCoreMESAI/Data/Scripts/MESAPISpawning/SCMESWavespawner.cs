@@ -167,14 +167,14 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                     else
                     {
                         // Handle the case where the configuration file doesn't exist
-                        MyAPIGateway.Utilities.SendMessage("Configuration file not found. Generating a new one.");
+                        MyLog.Default.WriteLineAndConsole("Configuration file not found. Generating a new one.");
                         CreateBlankConfig();
                     }
                 }
                 catch (Exception e)
                 {
                     // Handle any exceptions that may occur during file reading or parsing
-                    MyAPIGateway.Utilities.SendMessage("Error loading configuration file: " + e.Message);
+                    MyLog.Default.WriteLineAndConsole("Error loading configuration file: " + e.Message);
                 }
             }
         }
@@ -205,7 +205,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                 catch (Exception e)
                 {
                     // Handle any exceptions that may occur during file creation
-                    MyAPIGateway.Utilities.SendMessage("Error creating configuration file: " + e.Message);
+                    MyLog.Default.WriteLineAndConsole("Error creating configuration file: " + e.Message);
                 }
             }
         }
