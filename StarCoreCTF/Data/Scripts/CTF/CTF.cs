@@ -13,12 +13,11 @@ using Sandbox.Game.Entities;
 using VRage.Utils;
 using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
 using System.Linq;
-using ProtoBuf;
 using VRage.ObjectBuilders;
 using VRage.Game.ModAPI.Ingame.Utilities;
 using System.Text;
-using Sandbox.Game.Gui;
-using VRage.Scripting;
+using Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF;
+using Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF.Packets;
 
 namespace Klime.CTF
 {
@@ -132,338 +131,6 @@ namespace Klime.CTF
         int drop_reset_time = 300;
         double flagPickupRadius = 500;
 
-
-        [ProtoContract]
-        public class PacketBase
-        {
-            [ProtoMember(200)]
-            public PacketOp packet_op;
-
-            [ProtoMember(201)]
-            public List<Flag> all_flags_packet = new List<Flag>();
-
-            [ProtoMember(202)]
-            public GameState gamestate_packet;
-
-            public PacketBase()
-            {
-
-            }
-        }
-
-        [ProtoContract]
-        public class Flag
-        {
-
-            public MyEntity flag_entity;
-            public IMyPlayer carrying_player;
-            public IMyFaction owning_faction;
-
-            [ProtoMember(1)]
-            public long entity_id;
-
-            [ProtoMember(2)]
-            public FlagState state;
-
-            [ProtoMember(3)]
-            public int lifetime;
-
-            [ProtoMember(4)]
-            public long carrying_player_id = -1;
-
-            [ProtoMember(5)]
-            public SerializableMatrix current_matrix;
-
-            [ProtoMember(6)]
-            public long owning_faction_id;
-
-            [ProtoMember(7)]
-            public int current_drop_life = 0;
-
-            [ProtoMember(8)]
-            public SerializableMatrix home_matrix;
-
-            [ProtoMember(9)]
-            public Dictionary<long, SerializableMatrix> capture_positions = new Dictionary<long, SerializableMatrix>();
-
-            [ProtoMember(10)]
-            public Color flag_color;
-
-            [ProtoMember(11)]
-            public FlagType flag_type;
-
-            [ProtoMember(12)]
-            public float grip_strength = 100;
-
-            [ProtoMember(13)]
-            public float regen_modifier = 0.2f;
-
-            [ProtoMember(14)]
-            public float lastTickAcceleration;
-
-            [ProtoIgnore]
-            public MyCubeGrid attachedGrid = null;
-
-            [ProtoIgnore]
-            public MatrixD attachedLocalMatrix = MatrixD.Identity;
-
-            public Flag()
-            {
-
-            }
-
-            //Single
-            public Flag(long entity_id, FlagState state, SerializableMatrix home_matrix, Dictionary<long, SerializableMatrix> capture_positions,
-                long owning_faction_id, Color flag_color, FlagType flag_type, float grip_strength, float regen_modifier, float lastTickAcceleration)
-            {
-                this.entity_id = entity_id;
-                this.state = state;
-                this.home_matrix = home_matrix;
-                this.current_matrix = home_matrix;
-                this.owning_faction_id = owning_faction_id;
-                this.flag_color = flag_color;
-                this.capture_positions = capture_positions;
-                this.flag_type = flag_type;
-                this.grip_strength = grip_strength;
-                this.regen_modifier = regen_modifier;
-                this.lastTickAcceleration = lastTickAcceleration;
-            }
-
-            //Double
-            public Flag(long entity_id, FlagState state, SerializableMatrix home_matrix, long owning_faction_id,
-                Color flag_color, FlagType flag_type, float grip_strength, float regen_modifier, float lastTickAcceleration)
-            {
-                this.entity_id = entity_id;
-                this.state = state;
-                this.home_matrix = home_matrix;
-                this.current_matrix = home_matrix;
-                this.owning_faction_id = owning_faction_id;
-                this.flag_color = flag_color;
-                this.flag_type = flag_type;
-                this.grip_strength = grip_strength;
-                this.regen_modifier = regen_modifier;
-                this.lastTickAcceleration = lastTickAcceleration;
-            }
-
-            public void Init()
-            {
-                flag_entity = MyAPIGateway.Entities.GetEntityById(entity_id) as MyEntity;
-                if (owning_faction_id != 0)
-                {
-                    owning_faction = MyAPIGateway.Session.Factions.TryGetFactionById(owning_faction_id);
-                }
-            }
-
-
-
-            public List<IMyPlayer> GetNearbyPlayers(ref List<IMyPlayer> all_players, ref List<IMyPlayer> return_list, bool cockpit_allowed, double flagPickupRadius)
-            {
-                return_list.Clear();
-                foreach (var player in all_players)
-                {
-                    if (player.Character != null && !player.Character.IsDead)
-                    {
-                        double distance = Vector3D.Distance(player.Character.WorldMatrix.Translation, flag_entity.WorldMatrix.Translation);
-
-                        if (cockpit_allowed && distance <= flagPickupRadius && player.Controller?.ControlledEntity?.Entity is IMyCockpit)              //distance <= [number] is the pickup radius
-                        {
-                            return_list.Add(player);
-                        }
-
-                        //disabled pickup from suit
-                        // else
-                        // {
-                        //     if (player.Controller?.ControlledEntity?.Entity is IMyCharacter && distance <= 40)
-                        //     {
-                        //         return_list.Add(player);
-                        //     }
-                        // }
-                    }
-                }
-                return return_list;
-            }
-
-            public void UpdateFromNetwork(Flag incoming_flag)
-            {
-                if (this.flag_entity != null)
-                {
-                    this.flag_entity.WorldMatrix = incoming_flag.current_matrix;
-                }
-                this.state = incoming_flag.state;
-                this.lifetime = incoming_flag.lifetime;
-                this.carrying_player_id = incoming_flag.carrying_player_id;
-                this.current_matrix = incoming_flag.current_matrix;
-                this.owning_faction_id = incoming_flag.owning_faction_id;
-                this.current_drop_life = incoming_flag.current_drop_life;
-                this.home_matrix = incoming_flag.home_matrix;
-                this.flag_color = incoming_flag.flag_color;
-                this.capture_positions = incoming_flag.capture_positions;
-                this.flag_type = incoming_flag.flag_type;
-                this.grip_strength = incoming_flag.grip_strength;
-                this.regen_modifier = incoming_flag.regen_modifier;
-                this.lastTickAcceleration = incoming_flag.lastTickAcceleration;
-            }
-        }
-
-        [ProtoContract]
-        public class SerializableMatrix
-        {
-            [ProtoMember(100)]
-            public double M11;
-
-            [ProtoMember(102)]
-            public double M12;
-
-            [ProtoMember(103)]
-            public double M13;
-
-            [ProtoMember(104)]
-            public double M14;
-
-            [ProtoMember(105)]
-            public double M21;
-
-            [ProtoMember(106)]
-            public double M22;
-
-            [ProtoMember(107)]
-            public double M23;
-
-            [ProtoMember(108)]
-            public double M24;
-
-            [ProtoMember(109)]
-            public double M31;
-
-            [ProtoMember(110)]
-            public double M32;
-
-            [ProtoMember(111)]
-            public double M33;
-
-            [ProtoMember(112)]
-            public double M34;
-
-            [ProtoMember(113)]
-            public double M41;
-
-            [ProtoMember(114)]
-            public double M42;
-
-            [ProtoMember(115)]
-            public double M43;
-
-            [ProtoMember(116)]
-            public double M44;
-
-            public SerializableMatrix()
-            {
-
-            }
-
-            public SerializableMatrix(MatrixD matrix)
-            {
-                M11 = matrix.M11;
-                M12 = matrix.M12;
-                M13 = matrix.M13;
-                M14 = matrix.M14;
-                M21 = matrix.M21;
-                M22 = matrix.M22;
-                M23 = matrix.M23;
-                M24 = matrix.M24;
-                M31 = matrix.M31;
-                M32 = matrix.M32;
-                M33 = matrix.M33;
-                M34 = matrix.M34;
-                M41 = matrix.M41;
-                M42 = matrix.M42;
-                M43 = matrix.M43;
-                M44 = matrix.M44;
-            }
-
-            public static implicit operator SerializableMatrix(MatrixD matrix)
-            {
-                return new SerializableMatrix(matrix);
-            }
-
-            public static implicit operator MatrixD(SerializableMatrix v)
-            {
-                if (v == null)
-                    return new MatrixD();
-                return new MatrixD(v.M11, v.M12, v.M13, v.M14, v.M21, v.M22, v.M23, v.M24, v.M31, v.M32, v.M33, v.M34, v.M41, v.M42, v.M43, v.M44);
-            }
-        }
-
-        [ProtoContract]
-        public class GameState
-        {
-            [ProtoMember(50)]
-            public CurrentGameState currentgamestate;
-
-            [ProtoMember(51)]
-            public Dictionary<long, int> faction_scores = new Dictionary<long, int>();
-
-            [ProtoMember(52)]
-            public string winning_tag = "";
-
-            [ProtoMember(53)]
-            public List<string> ordered_faction_tags = new List<string>();
-
-            public GameState()
-            {
-
-            }
-
-            public GameState(CurrentGameState currentgamestate, List<Flag> currentflags)
-            {
-                this.currentgamestate = currentgamestate;
-                foreach (var flag in currentflags)
-                {
-                    if (flag.flag_type == FlagType.Single)
-                    {
-                        foreach (var faction_id in flag.capture_positions.Keys)
-                        {
-                            faction_scores.Add(faction_id, 0);
-                            IMyFaction faction = MyAPIGateway.Session.Factions.TryGetFactionById(faction_id);
-                            if (faction != null)
-                            {
-                                ordered_faction_tags.Add(faction.Tag);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (!faction_scores.ContainsKey(flag.owning_faction.FactionId))
-                        {
-                            faction_scores.Add(flag.owning_faction.FactionId, 0);
-                        }
-                    }
-                }
-            }
-
-            public void UpdateScore(long incoming_faction)
-            {
-                if (faction_scores.ContainsKey(incoming_faction))
-                {
-                    faction_scores[incoming_faction] += 1;
-                }
-            }
-        }
-
-        [ProtoContract]
-        public class EventInfo
-        {
-            [ProtoMember(600)]
-            public string info;
-            [ProtoMember(601)]
-            public InfoType infotype;
-
-            public EventInfo()
-            {
-
-            }
-        }
-
         public class BackgroundUIElement
         {
             public HudAPIv2.BillBoardHUDMessage billboard;
@@ -501,7 +168,7 @@ namespace Klime.CTF
         {
             if (!MyAPIGateway.Utilities.IsDedicated)
             {
-                reuse_event = MyAPIGateway.Utilities.SerializeFromBinary<EventInfo>(obj);
+                reuse_event = NetworkDebug.DeserializeLogged<EventInfo>("EventInfo", obj);
                 if (reuse_event != null)
                 {
                     if (HUD_Base != null && HUD_Base.Heartbeat)
@@ -537,7 +204,7 @@ namespace Klime.CTF
         {
             if (!MyAPIGateway.Session.IsServer)
             {
-                packet = MyAPIGateway.Utilities.SerializeFromBinary<PacketBase>(obj);
+                packet = NetworkDebug.DeserializeLogged<PacketBase>("GenericUpdate", obj);
 
                 if (packet != null)
                 {
@@ -606,7 +273,6 @@ namespace Klime.CTF
                                 List<string> data = single_flag_data_string.Split('@').ToList();
                                 Vector3D single_flag_homepostemp = Vector3D.Zero;
                                 Vector3D capture_pos_reuse = Vector3D.Zero;
-                                SerializableMatrix single_flag_homepos = MatrixD.Identity;
                                 IMyFaction faction1;
                                 IMyFaction faction2;
                                 SerializableMatrix capture_pos_faction1;
@@ -615,7 +281,6 @@ namespace Klime.CTF
                                 List<string> single_flag_color_string = new List<string>();
 
                                 ParseVector3DFromGPS(data[0], out single_flag_homepostemp);
-                                single_flag_homepos = GetHomePosition(single_flag_homepostemp);
 
                                 faction1 = MyAPIGateway.Session.Factions.TryGetFactionByTag(data[1]);
                                 faction2 = MyAPIGateway.Session.Factions.TryGetFactionByTag(data[2]);
@@ -629,7 +294,7 @@ namespace Klime.CTF
                                 Color single_flag_color = new Color(int.Parse(single_flag_color_string[0]), int.Parse(single_flag_color_string[1]), int.Parse(single_flag_color_string[2]),
                                     int.Parse(single_flag_color_string[3]));
 
-                                Flag single_flag = new Flag(PrimeEntityActivator().EntityId, FlagState.Home, single_flag_homepos, capture_positions, 0, single_flag_color,
+                                Flag single_flag = new Flag(PrimeEntityActivator().EntityId, FlagState.Home, single_flag_homepostemp, capture_positions, 0, single_flag_color,
                                     FlagType.Single, 100f, 0.2f, 0);
 
                                 single_flag.Init();
@@ -639,8 +304,6 @@ namespace Klime.CTF
                             {
                                 Vector3D flag_1_temp_pos = Vector3D.Zero;
                                 Vector3D flag_2_temp_pos = Vector3D.Zero;
-                                SerializableMatrix flag_1_temp_homepos = MatrixD.Identity;
-                                SerializableMatrix flag_2_temp_homepos = MatrixD.Identity;
                                 IMyFaction faction1;
                                 IMyFaction faction2;
                                 List<string> flag_1_color_string = new List<string>();
@@ -652,9 +315,6 @@ namespace Klime.CTF
                                 faction1 = MyAPIGateway.Session.Factions.TryGetFactionByTag(ini.Get("Faction 1 Tag", "string").ToString());
                                 faction2 = MyAPIGateway.Session.Factions.TryGetFactionByTag(ini.Get("Faction 2 Tag", "string").ToString());
 
-                                flag_1_temp_homepos = GetHomePosition(flag_1_temp_pos);
-                                flag_2_temp_homepos = GetHomePosition(flag_2_temp_pos);
-
                                 flag_1_color_string = ini.Get("Faction 1 Color", "string").ToString().Split(',').ToList();
                                 flag_2_color_string = ini.Get("Faction 2 Color", "string").ToString().Split(',').ToList();
 
@@ -663,8 +323,8 @@ namespace Klime.CTF
                                 Color flag_2_color = new Color(int.Parse(flag_2_color_string[0]), int.Parse(flag_2_color_string[1]), int.Parse(flag_2_color_string[2]),
                                     int.Parse(flag_2_color_string[3]));
 
-                                Flag flag1 = new Flag(PrimeEntityActivator().EntityId, FlagState.Home, flag_1_temp_homepos, faction1.FactionId, flag_1_color, FlagType.Double, 100, 0.2f, 0);
-                                Flag flag2 = new Flag(PrimeEntityActivator().EntityId, FlagState.Home, flag_2_temp_homepos, faction2.FactionId, flag_2_color, FlagType.Double, 100, 0.2f, 0);
+                                Flag flag1 = new Flag(PrimeEntityActivator().EntityId, FlagState.Home, flag_1_temp_pos, faction1.FactionId, flag_1_color, FlagType.Double, 100, 0.2f, 0);
+                                Flag flag2 = new Flag(PrimeEntityActivator().EntityId, FlagState.Home, flag_2_temp_pos, faction2.FactionId, flag_2_color, FlagType.Double, 100, 0.2f, 0);
 
                                 flag1.Init();
                                 flag2.Init();
@@ -870,9 +530,10 @@ namespace Klime.CTF
                     MyAPIGateway.Multiplayer.Players.GetPlayers(allplayers);
 
                     foreach (var player in allplayers)
-                    {
                         allplayerdict.Add(player.IdentityId, player);
-                    }
+
+                    if (MyAPIGateway.Session.IsServer)
+                        SendGameState();
                 }
                 if (MyAPIGateway.Session.IsServer)
                 {
@@ -904,7 +565,7 @@ namespace Klime.CTF
                                 if (subflag.state == FlagState.Home)
                                 {
 
-                                    subflag.flag_entity.WorldMatrix = subflag.home_matrix;
+                                    subflag.flag_entity.WorldMatrix = MatrixD.CreateWorld(subflag.homePos);
 
 
                                     foreach (var player in subflag.GetNearbyPlayers(ref allplayers, ref reuse_players, pickup_in_cockpit, flagPickupRadius))
@@ -1364,7 +1025,7 @@ namespace Klime.CTF
                         {
                             foreach (var subflag in allflags)
                             {
-                                subflag.flag_entity.WorldMatrix = subflag.home_matrix;
+                                subflag.flag_entity.WorldMatrix = MatrixD.CreateWorld(subflag.homePos);
                             }
                         }
 
@@ -1429,23 +1090,7 @@ namespace Klime.CTF
                         packet = new PacketBase();
                     }
 
-                    packet.gamestate_packet = null;
-                    packet.all_flags_packet = allflags;
-                    packet.packet_op = PacketOp.UpdateFlags;
-
-                    foreach (var player in allplayers)
-                    {
-                        MyAPIGateway.Multiplayer.SendMessageTo(netid, MyAPIGateway.Utilities.SerializeToBinary(packet), player.SteamUserId);
-                    }
-
-                    packet.all_flags_packet = null;
-                    packet.gamestate_packet = gamestate;
-                    packet.packet_op = PacketOp.UpdateGameState;
-
-                    foreach (var player in allplayers)
-                    {
-                        MyAPIGateway.Multiplayer.SendMessageTo(netid, MyAPIGateway.Utilities.SerializeToBinary(packet), player.SteamUserId);
-                    }
+                    SendFlagState();
                 }
 
             }
@@ -1455,6 +1100,30 @@ namespace Klime.CTF
             }
 
             timer += 1;
+        }
+
+        private void SendFlagState()
+        {
+            packet.gamestate_packet = null;
+            packet.all_flags_packet = allflags;
+            packet.packet_op = PacketOp.UpdateFlags;
+
+            foreach (var player in allplayers)
+            {
+                MyAPIGateway.Multiplayer.SendMessageTo(netid, NetworkDebug.SerializeLogged(packet.packet_op.ToString(), packet), player.SteamUserId);
+            }
+        }
+
+        private void SendGameState()
+        {
+            packet.all_flags_packet = null;
+            packet.gamestate_packet = gamestate;
+            packet.packet_op = PacketOp.UpdateGameState;
+
+            foreach (var player in allplayers)
+            {
+                MyAPIGateway.Multiplayer.SendMessageTo(netid, NetworkDebug.SerializeLogged(packet.packet_op.ToString(), packet), player.SteamUserId);
+            }
         }
 
         private void ShowANotificationPlease(string message)
@@ -1620,7 +1289,7 @@ namespace Klime.CTF
             {
                 if (player.Character != null)
                 {
-                    MyAPIGateway.Multiplayer.SendMessageTo(eventnetid, MyAPIGateway.Utilities.SerializeToBinary(reuse_event), player.SteamUserId);
+                    MyAPIGateway.Multiplayer.SendMessageTo(eventnetid, NetworkDebug.SerializeLogged(infotype.ToString(), reuse_event), player.SteamUserId);
                 }
             }
         }
