@@ -18,63 +18,10 @@ using System.Xml;
 using VRage.Game.ModAPI.Ingame.Utilities;
 using System.Linq;
 using System.IO;
+using static StarCoreMESAI.Data.Scripts.MESAPISpawning.SCMESWave_Packets;
 
 namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 {
-    [ProtoInclude(1000, typeof(ChatCommandPacket))]
-    [ProtoInclude(1001, typeof(CounterUpdatePacket))]
-    [ProtoContract]
-    public class Packet
-    {
-        public Packet()
-        {
-        }
-    }
-
-    [ProtoContract]
-    public class ChatCommandPacket : Packet
-    {
-        [ProtoMember(1)]
-        public string CommandString;
-
-        public ChatCommandPacket()
-        {
-        }
-
-        public ChatCommandPacket(string CommandString)
-        {
-            this.CommandString = CommandString;
-        }
-    }
-
-    [ProtoContract]
-    public class CounterUpdatePacket : Packet
-    {
-        [ProtoMember(1)]
-        public int CounterValue;
-
-        public CounterUpdatePacket()
-        {
-        }
-
-        public CounterUpdatePacket(int counterValue)
-        {
-            this.CounterValue = counterValue;
-        }
-    }
-
-    public class SpawnGroupInfo
-    {
-        public int SpawnTime { get; set; }
-        public Dictionary<string, int> Prefabs { get; private set; }
-
-        public SpawnGroupInfo(int spawnTime, Dictionary<string, int> prefabs)
-        {
-            SpawnTime = spawnTime;
-            Prefabs = prefabs;
-        }
-    }
-
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     public class SCMESWaveSpawnerComponent : MySessionComponentBase
     {
@@ -111,7 +58,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
             LoadWaveData();
             // Add other spawn groups and info as needed
         }
-
+        #region config
         private void LoadWaveData()
         {
             if (MyAPIGateway.Multiplayer.IsServer)
@@ -209,7 +156,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                 }
             }
         }
-
+        #endregion
         private void OnHudApiReady()
         {
             // Initialize your HUD elements here
@@ -238,105 +185,117 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
         {
             if (MyAPIGateway.Multiplayer.IsServer && wavesStarted)
             {
-                // Registering the event watcher only once
-                if (SpawnerAPI.MESApiReady && !registered)
+                HandleEventWatcherRegistration();
+                BroadcastCounterUpdate();
+                HandleWaveNotifications();
+                ResetEventTrigger();
+                ProcessSpawnGroups();
+            }
+        }
+
+        private void HandleEventWatcherRegistration()
+        {
+            if (SpawnerAPI.MESApiReady && !registered)
+            {
+                SpawnerAPI.RegisterCompromisedRemoteWatcher(true, compromisedevent);
+                registered = true;
+            }
+        }
+
+        private void BroadcastCounterUpdate()
+        {
+            if ((DateTime.UtcNow - lastBroadcastTime).TotalSeconds >= 5)
+            {
+                BroadcastCounter();
+                lastBroadcastTime = DateTime.UtcNow;
+            }
+        }
+
+        private void HandleWaveNotifications()
+        {
+            if (spawnGroupTimings.Count > 0)
+            {
+                var firstGroupInfo = spawnGroupTimings.First().Value;
+                var nextWaveSpawnTime = firstGroupInfo.SpawnTime;
+                var timeSinceStart = (int)(DateTime.UtcNow - lastWaveCheckTime).TotalSeconds;
+                var timeUntilNextWave = nextWaveSpawnTime - timeSinceStart;
+
+                const int messageInterval = 60; // 60 seconds
+
+                if ((DateTime.UtcNow - lastWaveNotificationTime).TotalSeconds >= messageInterval ||
+                    (timeUntilNextWave <= 10 && timeUntilNextWave >= 0 && (DateTime.UtcNow - lastWaveNotificationTime).TotalSeconds >= 10))
                 {
-                    SpawnerAPI.RegisterCompromisedRemoteWatcher(true, compromisedevent);
-                    registered = true;
+                    string message;
+
+                    if (timeUntilNextWave > 10)
+                        message = $"Next Wave: {(timeUntilNextWave / 60).ToString("D2")}:{(timeUntilNextWave % 60).ToString("D2")}";
+                    else
+                        message = $"Next Wave in: {timeUntilNextWave}s";
+
+                    MyAPIGateway.Utilities.SendMessage(message);
+                    lastWaveNotificationTime = DateTime.UtcNow;
                 }
+            }
+        }
 
-                // Broadcasting counter update at regular intervals
-                if ((DateTime.UtcNow - lastBroadcastTime).TotalSeconds >= 5)
+        private void ResetEventTrigger()
+        {
+            if ((DateTime.UtcNow - lastEventTriggerTime).TotalSeconds >= EventResetIntervalSeconds)
+            {
+                if (isEventTriggered)
                 {
-                    BroadcastCounter();
-                    lastBroadcastTime = DateTime.UtcNow;
+                    // Optional: Log or message statement here
+                    // Example: MyAPIGateway.Utilities.SendMessage("Event trigger reset.");
                 }
+                isEventTriggered = false;
+            }
+        }
 
-                if (spawnGroupTimings.Count > 0)
+        private void ProcessSpawnGroups()
+        {
+            var keysToRemove = new List<string>();
+            foreach (var spawnGroup in spawnGroupTimings)
+            {
+                var groupKey = spawnGroup.Key;
+                var groupValue = spawnGroup.Value;
+                var spawnTime = groupValue.SpawnTime;
+
+                if ((DateTime.UtcNow - lastWaveCheckTime).TotalSeconds >= spawnTime)
                 {
-                    var firstGroupInfo = spawnGroupTimings.First().Value;
-                    var nextWaveSpawnTime = firstGroupInfo.SpawnTime;
-                    var timeSinceStart = (int)(DateTime.UtcNow - lastWaveCheckTime).TotalSeconds;
-                    var timeUntilNextWave = nextWaveSpawnTime - timeSinceStart;
+                    Vector3D spawnCoords = new Vector3D(-20000, 0, 0);
 
-                    // Define your desired message interval in seconds
-                    const int messageInterval = 60; // Example: 60 seconds
-
-                    // Check if it's time for a message
-                    if ((DateTime.UtcNow - lastWaveNotificationTime).TotalSeconds >= messageInterval ||
-                        (timeUntilNextWave <= 10 && timeUntilNextWave >= 0 && (DateTime.UtcNow - lastWaveNotificationTime).TotalSeconds >= 10))
+                    foreach (var prefabEntry in groupValue.Prefabs)
                     {
-                        string message;
+                        string prefabName = prefabEntry.Key;
+                        int quantity = prefabEntry.Value + additionalShipsPerWave; // Add additional ships per wave, capped at 10
 
-                        if (timeUntilNextWave > 10)
-                            message = $"Next Wave: {(timeUntilNextWave / 60).ToString("D2")}:{(timeUntilNextWave % 60).ToString("D2")}";
-                        else
-                            message = $"Next Wave in: {timeUntilNextWave}s";
-
-                        MyAPIGateway.Utilities.SendMessage(message);
-                        lastWaveNotificationTime = DateTime.UtcNow;
-                    }
-                }
-
-
-                if ((DateTime.UtcNow - lastEventTriggerTime).TotalSeconds >= EventResetIntervalSeconds)
-                {
-                    if (isEventTriggered)
-                    {
-                        //MyAPIGateway.Utilities.SendMessage("SCMESWaveSpawner: Resetting isEventTriggered flag.");
-                    }
-                    isEventTriggered = false;
-                }
-
-                // Create a list to store the keys of SpawnGroups to remove
-                var keysToRemove = new List<string>();
-
-                foreach (var spawnGroup in spawnGroupTimings)
-                {
-                    var groupKey = spawnGroup.Key;
-                    var groupValue = spawnGroup.Value;
-                    var spawnTime = groupValue.SpawnTime;
-
-                    if ((DateTime.UtcNow - lastWaveCheckTime).TotalSeconds >= spawnTime)
-                    {
-                        Vector3D spawnCoords = new Vector3D(-20000, 0, 0);
-
-                        foreach (var prefabEntry in groupValue.Prefabs)
+                        for (int i = 0; i < quantity; i++)
                         {
-                            string prefabName = prefabEntry.Key;
-                            int quantity = prefabEntry.Value + additionalShipsPerWave; // Add additional ships per wave, capped at 10
+                            bool spawnResult = SpawnerAPI.SpawnSpaceCargoShip(spawnCoords, new List<string> { prefabName });
 
-                            for (int i = 0; i < quantity; i++)
+                            if (spawnResult)
                             {
-                                // Spawn each unit separately
-                                bool spawnResult = SpawnerAPI.SpawnSpaceCargoShip(spawnCoords, new List<string> { prefabName });
-
-                                if (spawnResult)
-                                {
-                                    MyAPIGateway.Utilities.SendMessage($"Spawned prefab: {prefabName}");
-                                }
-                                else
-                                {
-                                    MyAPIGateway.Utilities.SendMessage($"Failed to spawn prefab: {prefabName}");
-                                }
+                                MyAPIGateway.Utilities.SendMessage($"Spawned prefab: {prefabName}");
+                            }
+                            else
+                            {
+                                MyAPIGateway.Utilities.SendMessage($"Failed to spawn prefab: {prefabName}");
                             }
                         }
-
-                        // Add the key to the list of keys to remove
-                        keysToRemove.Add(groupKey);
                     }
-                }
 
-                // Remove the spawned groups from the dictionary to avoid respawning
-                foreach (var keyToRemove in keysToRemove)
-                {
-                    spawnGroupTimings.Remove(keyToRemove);
+                    keysToRemove.Add(groupKey);
                 }
+            }
 
-                if (spawnGroupTimings.Count == 0)
-                {
-                    wavesStarted = false;
-                }
+            foreach (var keyToRemove in keysToRemove)
+            {
+                spawnGroupTimings.Remove(keyToRemove);
+            }
+
+            if (spawnGroupTimings.Count == 0)
+            {
+                wavesStarted = false;
             }
         }
 
