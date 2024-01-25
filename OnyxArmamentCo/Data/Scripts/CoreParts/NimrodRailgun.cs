@@ -184,7 +184,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                ReshephNimrodAmmo, ReshephNimrodAmmoFrag,
+                ReshephNimrodAmmo,
                 ReshephNimrodAmmo_Mag,
                 ReshephNimrodAmmoFrag_Mag,
                 ReshephNimrodAmmo_Mag_Ping,// Must list all primary, shrapnel, and pattern ammos.
