@@ -794,8 +794,8 @@ namespace Scripts
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
-                AmmoRound = "ReshephNimrodAmmoFrag_Mag", // AmmoRound field of the ammo to spawn.
-                Fragments = 8, // Number of projectiles to spawn.
+                AmmoRound = "", // AmmoRound field of the ammo to spawn.
+                Fragments = 0, // Number of projectiles to spawn.
                 Degrees = 90, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = true, // fragments will not inherit velocity from parent.
@@ -910,10 +910,10 @@ namespace Scripts
                 {
                     Enable = true,
                     Radius = 5f, // Meters
-                    Damage = 24500f,
+                    Damage = 80000f,
                     Depth = 1f,
                     MaxAbsorb = 0f,
-                    Falloff = Exponential, //.NoFalloff applies the same damage to all blocks in radius
+                    Falloff = Curve, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
                     //.Curve drops off damage sharply as it approaches the max radius
                     //.InvCurve drops off sharply from the middle and tapers to max radius
