@@ -19,8 +19,8 @@ namespace coordoutput
     public class coordoutput : MyGameLogicComponent
     {
         private Sandbox.ModAPI.IMyCockpit Cockpit;
-        private int triggerTick = 0;
         private string fileExtension = ".txt";
+        private int tickCounter = 0;
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
@@ -47,14 +47,16 @@ namespace coordoutput
             {
                 if (Cockpit.IsUnderControl) // Only execute when cockpit is manned
                 {
-                    if (triggerTick % 60 == 0) // Show notification every second
+                    tickCounter++;
+                    if (tickCounter % 60 == 0) // Output once per second
                     {
                         // Get current position of cockpit
                         Vector3D currentPosition = Cockpit.GetPosition();
                         // Get grid name
                         string gridName = Cockpit.CubeGrid.CustomName;
-                        // Create debug message with current position and grid name
-                        string message = string.Format("{0} position: X={1}, Y={2}, Z={3}", gridName, currentPosition.X, currentPosition.Y, currentPosition.Z);
+
+                        // Create debug message with current position, tick counter, and grid name
+                        string message = string.Format("Tick {0}: {1} position: X={2}, Y={3}, Z={4}", tickCounter, gridName, currentPosition.X, currentPosition.Y, currentPosition.Z);
                         // Show the debug message
                         //MyVisualScriptLogicProvider.ShowNotificationLocal(message, 1000, "Debug");
 
@@ -71,7 +73,7 @@ namespace coordoutput
                         }
 
                         // Append new data to the existing contents
-                        string newData = string.Format("{0} position: X={1}, Y={2}, Z={3}\n", gridName, currentPosition.X, currentPosition.Y, currentPosition.Z);
+                        string newData = string.Format("Tick {0}: {1} position: X={2}, Y={3}, Z={4}\n", tickCounter, gridName, currentPosition.X, currentPosition.Y, currentPosition.Z);
                         string updatedContents = existingContents + newData;
 
                         // Write the updated contents back to the file
@@ -80,12 +82,10 @@ namespace coordoutput
                         writer.Flush();
                         writer.Close();
                     }
-
-                    triggerTick += 1;
                 }
                 else
                 {
-                    triggerTick = 0; // Reset triggerTick if cockpit is unmanned
+                    tickCounter = 0; // Reset tick counter if cockpit is unmanned
                 }
             }
         }
