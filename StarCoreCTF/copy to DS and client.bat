@@ -19,7 +19,7 @@ rem	Now you can run it every time you want to update the mod on DS and client.
 rem 	Don't edit the below unless you really need different paths.
 rem	NOTE: don't add quotes and don't end with a backslash!
 
-set CLIENT_PATH=O:\SteamLibrary\steamapps\workshop\content\244850\%WORKSHOP_ID%
+set CLIENT_PATH=C:\Program Files (x86)\Steam\steamapps\workshop\content\244850\%WORKSHOP_ID%
 set DS_PATH=%APPDATA%\SpaceEngineersDedicated\content\244850\%WORKSHOP_ID%
 
 rmdir "%CLIENT_PATH%" /S /Q
