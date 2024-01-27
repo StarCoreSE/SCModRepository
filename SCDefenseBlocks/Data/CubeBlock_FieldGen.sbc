@@ -16,13 +16,13 @@
             <ModelOffset x="0" y="0" z="0" />
             <Model>Models\Cubes\Large\SI_Field_Gen.mwm</Model>
             <Components>
-                <Component Subtype="SteelPlate" Count="30" />
-                <Component Subtype="Construction" Count="50" />
-                <Component Subtype="SmallTube" Count="12" />
-                <Component Subtype="Motor" Count="8" />
-                <Component Subtype="Display" Count="4" />
-                <Component Subtype="Computer" Count="10" />
-                <Component Subtype="SteelPlate" Count="15" />
+                <Component Subtype="SteelPlate" Count="1500" />
+                <Component Subtype="Construction" Count="500" />
+                <Component Subtype="SmallTube" Count="120" />
+                <Component Subtype="Motor" Count="80" />
+                <Component Subtype="Display" Count="40" />
+                <Component Subtype="Computer" Count="100" />
+                <Component Subtype="SteelPlate" Count="1500" />
             </Components>
             <CriticalComponent Subtype="Computer" Index="0" />
             <BuildProgressModels>
