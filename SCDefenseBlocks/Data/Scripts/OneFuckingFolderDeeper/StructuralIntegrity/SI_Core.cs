@@ -22,9 +22,11 @@ using VRageMath;
 using VRage.Utils;
 using VRage.ObjectBuilders;
 using SpaceEngineers.Game.Entities.Blocks;
+using StarCore.StructuralIntegrity;
 using SpaceEngineers.Game.ModAPI;
+using StarCore.StructuralIntegrity;
 
-namespace StarCore.StructuralIntegrity
+namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegrity.Sync
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "SI_Field_Gen")]
     public class SI_Core : MyGameLogicComponent, IMyEventProxy
@@ -34,15 +36,15 @@ namespace StarCore.StructuralIntegrity
         public MyPoweredCargoContainerDefinition SIGenBlockDef;
 
         public readonly Config_Settings Config = new Config_Settings();
-        /*public readonly SI_Settings Settings = new SI_Settings();*/
+        public readonly SI_Settings Settings = new SI_Settings();
 
-        /*SI_Utility Mod => SI_Utility.Instance;*/
+        //SI_Utility Mod => SI_Utility.Instance;
 
         //Utility Declarations 
         public const string ControlPrefix = "SI_Control.";
         public readonly Guid SettingsGUID = new Guid("9EFDABA1-E705-4F62-BD37-A4B046B60BC0");
         public const int SettingsUpdateCount = 60 * 1 / 10;
-        /*int SyncCountdown;*/
+        int SyncCountdown;
 
         //Regular Structural Integrity Values Init
         public float MinFieldPower;
@@ -629,30 +631,30 @@ namespace StarCore.StructuralIntegrity
             }
         }*/
 
-       /* void SettingsChanged()
-        {
-            if (SyncCountdown == 0)
-            {
-                SyncCountdown = SettingsUpdateCount;
-            }
-        }
+        /* void SettingsChanged()
+         {
+             if (SyncCountdown == 0)
+             {
+                 SyncCountdown = SettingsUpdateCount;
+             }
+         }
 
-        void SyncSettings()
-        {
-            try
-            {
-                if (SyncCountdown > 0 && --SyncCountdown <= 0)
-                {
-                    SaveSettings();
+         void SyncSettings()
+         {
+             try
+             {
+                 if (SyncCountdown > 0 && --SyncCountdown <= 0)
+                 {
+                     SaveSettings();
 
-                    Mod.CachedPacketSettings.Send(SIGenBlock.EntityId, Settings);
-                }
-            }
-            catch (Exception e)
-            {
-                Log.Error($"Error syncing settings!\n{e}");
-            }
-        }*/
+                     Mod.CachedPacketSettings.Send(SIGenBlock.EntityId, Settings);
+                 }
+             }
+             catch (Exception e)
+             {
+                 Log.Error($"Error syncing settings!\n{e}");
+             }
+         }*/
 
         /*public override bool IsSerialized()
         {
@@ -672,12 +674,12 @@ namespace StarCore.StructuralIntegrity
         #region Terminal Controls
         static void SetupTerminalControls<T>(float minDivertedPower, float maxDivertedPower)
         {
-            var mod = SI_Utility.Instance;
+            //var mod = SI_Utility.Instance;
 
-            if (mod.ControlsCreated)
-                return;
-
-            mod.ControlsCreated = true;
+           //if (mod.ControlsCreated)
+           //    return;
+           //
+           //mod.ControlsCreated = true;
 
             #region SiegeToggle
             var siegeModeToggle = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlOnOffSwitch, IMyCollector>(ControlPrefix + "SiegeMode");
