@@ -674,12 +674,12 @@ namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegri
         #region Terminal Controls
         static void SetupTerminalControls<T>(float minDivertedPower, float maxDivertedPower)
         {
-            //var mod = SI_Utility.Instance;
+            var mod = SI_Utility.Instance;
 
-           //if (mod.ControlsCreated)
-           //    return;
-           //
-           //mod.ControlsCreated = true;
+            if (mod.ControlsCreated)
+                return;
+            
+            mod.ControlsCreated = true;
 
             #region SiegeToggle
             var siegeModeToggle = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlOnOffSwitch, IMyCollector>(ControlPrefix + "SiegeMode");
