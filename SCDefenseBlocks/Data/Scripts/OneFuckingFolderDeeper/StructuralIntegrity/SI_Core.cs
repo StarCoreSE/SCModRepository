@@ -487,7 +487,7 @@ namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegri
 
                 if (SiegeTimer > 0)
                 {
-                    SiegeBlockShutdown(allTerminalBlocks);
+                    //SiegeBlockShutdown(allTerminalBlocks);
 
                     if (SIGenBlock.CubeGrid.Physics.LinearVelocity != Vector3D.Zero)
                     {
