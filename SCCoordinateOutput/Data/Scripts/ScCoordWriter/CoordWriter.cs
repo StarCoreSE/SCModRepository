@@ -2,66 +2,65 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VRage.Game.ModAPI;
+using VRage.Utils;
 using VRageMath;
 
 namespace YourName.ModName.Data.Scripts.ScCoordWriter
 {
     internal class CoordWriter
     {
-        /*Per-ship:
-         * File name is $"{DateTime}|{ShipName}.json"
-         * Format:
-         *   CSV table:
-         *     StartTime,FactionName,ShipName,OwnerName
-         *     GridSizeValue,Size.X,Size.Y,Size.Z
-         *     Tick,IsAlive,CurrentHealth%,Position.X,Position.Y,Position.Z,Rotation.X,Rotation.Y,Rotation.Z,Rotation.W
-         *     (continued above single row)
-         */
-
-
         IMyCubeGrid grid;
         TextWriter writer;
         Vector3 oldPos;
         Quaternion oldRot;
 
-        public CoordWriter(IMyCubeGrid grid, string fileExtension = ".scc")
+        public CoordWriter(IMyCubeGrid grid, string fileExtension = ".scc", string factionName = "Unowned")
         {
             this.grid = grid;
-            writer = MyAPIGateway.Utilities.WriteFileInWorldStorage($"{DateTime.Now:dd-mm-yyyy HHmm} , {grid.EntityId}{fileExtension}", typeof(CoordWriter));
+            string fileName = $"{DateTime.Now:dd-MM-yyyy HHmm} , {grid.EntityId}{fileExtension}";
+
+            try
+            {
+                // Use the Space Engineers modding API to open the file for writing
+                writer = MyAPIGateway.Utilities.WriteFileInWorldStorage(fileName, typeof(CoordWriter));
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception (e.g., log an error message)
+                MyLog.Default.WriteLine($"Error creating file for grid {grid.CustomName}: {ex.Message}");
+                writer = null; // Set writer to null to prevent further writing attempts
+            }
         }
 
         public void WriteStartingData(string factionName)
         {
+            if (writer == null) return; // Check if writer is null
+
             string owner = "";
 
             if (grid.BigOwners.Count > 0)
             {
-                List<IMyIdentity> identities = new List<IMyIdentity>();
-                MyAPIGateway.Players.GetAllIdentites(identities);
-                foreach (IMyIdentity ident in identities)
+                var identities = new List<IMyIdentity>();
+                MyAPIGateway.Players.GetAllIdentites(identities, id => id.IdentityId == grid.BigOwners[0]);
+                if (identities.Count > 0)
                 {
-                    if (ident.IdentityId == grid.BigOwners[0])
-                    {
-                        owner = ident.DisplayName;
-                        break;
-                    }
+                    owner = identities[0].DisplayName;
                 }
             }
 
             writer.WriteLine($"{DateTime.Now},{factionName},{grid.CustomName},{owner}");
-            Vector3I size = Vector3I.Abs(grid.Min) + Vector3I.Abs(grid.Max);
+            var size = Vector3I.Abs(grid.Min) + Vector3I.Abs(grid.Max);
             writer.WriteLine($"{grid.GridSize},{size.X},{size.Y},{size.Z}");
             writer.Flush();
         }
 
         public void WriteNextTick(int currentTick, bool isAlive, float healthPercent)
         {
-            Vector3 position = grid.GetPosition();
-            Quaternion rotation = Quaternion.CreateFromForwardUp(grid.WorldMatrix.Forward, grid.WorldMatrix.Up);
+            if (writer == null) return; // Check if writer is null
+
+            var position = grid.GetPosition();
+            var rotation = Quaternion.CreateFromForwardUp(grid.WorldMatrix.Forward, grid.WorldMatrix.Up);
 
             if (position == oldPos && rotation == oldRot)
                 return;
@@ -75,7 +74,11 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
 
         public void Close()
         {
-            writer.Close();
+            if (writer != null)
+            {
+                writer.Flush();
+                writer.Close();
+            }
         }
     }
 }
