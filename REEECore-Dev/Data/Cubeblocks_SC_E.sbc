@@ -14,7 +14,7 @@
       <Description>
         [20km max range]
         [Energy damage]
-        [800~ m/s]
+        [480~ m/s]
         [Reloads 6 times]
       </Description>
       <Icon>Textures\Icons\MCRNHeavy.png</Icon>
@@ -70,7 +70,7 @@
       <Description>
         [12km max range]
         [Energy damage]
-        [800~ m/s]
+        [480~ m/s]
         [Reloads 4 times]
         Effective against most targets, more vulnerable to point defense than other launchers.
       </Description>
