@@ -418,7 +418,22 @@ namespace StarCore.StructuralIntegrity
                         {
                             Sink.Update();
 
-                            MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(obj.CubeGrid.Name, newGridModifier);
+                            var gridGroup = obj.CubeGrid.GetGridGroup(GridLinkTypeEnum.Mechanical);
+
+                            if (gridGroup != null)
+                            {
+                                List<IMyCubeGrid> allGridsInGroup = new List<IMyCubeGrid>();
+                                gridGroup.GetGrids(allGridsInGroup);
+
+                                foreach (var grid in allGridsInGroup)
+                                {
+                                    MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(grid.Name, newGridModifier);
+                                }
+                            }
+                            else
+                            {
+                                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(obj.CubeGrid.Name, newGridModifier);
+                            }
 
                             ReferenceGridModifier = newGridModifier;
 
@@ -445,7 +460,22 @@ namespace StarCore.StructuralIntegrity
         {
             if (obj.EntityId != SIGenBlock.EntityId) return;
 
-            MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(obj.CubeGrid.Name, 1f);
+            var gridGroup = obj.CubeGrid.GetGridGroup(GridLinkTypeEnum.Mechanical);
+
+            if (gridGroup != null)
+            {
+                List<IMyCubeGrid> allGridsInGroup = new List<IMyCubeGrid>();
+                gridGroup.GetGrids(allGridsInGroup);
+
+                foreach (var grid in allGridsInGroup)
+                {
+                    MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(grid.Name, 1f);
+                }
+            }
+            else
+            {
+                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(obj.CubeGrid.Name, 1f);
+            }
         }
         #endregion
 
@@ -456,7 +486,48 @@ namespace StarCore.StructuralIntegrity
                 return;
 
             var allTerminalBlocks = new List<IMySlimBlock>();
-            SIGenBlock.CubeGrid.GetBlocks(allTerminalBlocks);
+
+            var gridGroup = SIGenBlock.CubeGrid.GetGridGroup(GridLinkTypeEnum.Mechanical);
+
+            if (gridGroup != null)
+            {
+                List<IMyCubeGrid> allGridsInGroup = new List<IMyCubeGrid>();
+                gridGroup.GetGrids(allGridsInGroup);
+
+                var gridTerminalBlocks = new List<IMySlimBlock>();
+
+                foreach (var grid in allGridsInGroup)
+                {
+                    grid.GetBlocks(gridTerminalBlocks);
+
+                    foreach (var block in gridTerminalBlocks)
+                    {
+                        if (block.FatBlock != null && block.FatBlock is IMyConveyorSorter)
+                        {
+                            allTerminalBlocks.Add(block);
+                        }
+                        else
+                            continue;
+                    }
+                }
+            }
+            else
+            {
+                var gridTerminalBlocks = new List<IMySlimBlock>();
+
+                SIGenBlock.CubeGrid.GetBlocks(gridTerminalBlocks);
+
+                foreach (var block in gridTerminalBlocks)
+                {
+                    
+                    if (block.FatBlock != null && block.FatBlock is IMyConveyorSorter)
+                    {
+                        allTerminalBlocks.Add(block);
+                    }
+                    else
+                        continue;
+                }
+            }
 
             if (MaxAvailableGridPower <= SiegeMinPowerReq)
             {
@@ -474,7 +545,21 @@ namespace StarCore.StructuralIntegrity
 
             if (!SiegeModeModifier && SIGenBlock.IsWorking && MaxAvailableGridPower > 150f)
             {
-                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(SIGenBlock.CubeGrid.Name, 0.1f);
+                if (gridGroup != null)
+                {
+                    List<IMyCubeGrid> allGridsInGroup = new List<IMyCubeGrid>();
+                    gridGroup.GetGrids(allGridsInGroup);
+
+                    foreach (var grid in allGridsInGroup)
+                    {
+                        MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(grid.Name, 0.1f);
+                    }
+                }
+                else
+                {
+                    MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(SIGenBlock.CubeGrid.Name, 0.1f);
+                }
+               
                 SiegeModeModifier = true;
             }
 
@@ -538,13 +623,6 @@ namespace StarCore.StructuralIntegrity
         {
             foreach (var block in allTerminalBlocks)
             {
-                if (block.FatBlock is IMyReactor || block.FatBlock is IMyBatteryBlock ||
-                    block.FatBlock is IMySolarPanel || block.FatBlock is IMyWindTurbine ||
-                    block.FatBlock is IMyCollector || block.FatBlock is IMyCockpit)
-                {
-                    continue;
-                }
-
                 var functionalBlock = block.FatBlock as IMyFunctionalBlock;
                 if (functionalBlock != null)
                 {
@@ -557,13 +635,6 @@ namespace StarCore.StructuralIntegrity
         {
             foreach (var block in allTerminalBlocks)
             {
-                if (block.FatBlock is IMyReactor || block.FatBlock is IMyBatteryBlock ||
-                    block.FatBlock is IMySolarPanel || block.FatBlock is IMyWindTurbine ||
-                    block.FatBlock is IMyCollector || block.FatBlock is IMyCockpit)
-                {
-                    continue;
-                }
-
                 var functionalBlock = block.FatBlock as IMyFunctionalBlock;
                 if (functionalBlock != null)
                 {
