@@ -853,7 +853,7 @@ namespace Scripts
                             new WeightedIdListDef
                             {// If all valid entries (below MaxRuns) role a 0 (i.e. weights are disabled), then the entry with the lowest current "Runs" will be selected, if two or more share lowest runs then the winner is decided by the order below.
                                 ApproachId = 2,
-                                MaxRuns = 10, // 0 means unlimited, defines how many times this entry can return true. 
+                                MaxRuns = 5, // 0 means unlimited, defines how many times this entry can return true. 
                                 Weight = Random(3, 10),
                                 End1WeightMod = 1,
                                 End2WeightMod = 1,
@@ -1565,7 +1565,7 @@ namespace Scripts
             AmmoRound = "Taiidan Interceptor Attack", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.001f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 2500f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 1000f, // Direct damage; one steel plate is worth 100.
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.

@@ -618,7 +618,7 @@
         <DistantSound DistanceCrossfade="20" Distance="500" Sound="Battleship_Cannon_Firesound_close2" />
         <DistantSound DistanceCrossfade="20" Distance="1000" Sound="Battleship_Cannon_Firesound_Dist1" />
                 <DistantSound DistanceCrossfade="20" Distance="2000" Sound="Battleship_Cannon_Firesound_Dist2" />
-                        <DistantSound DistanceCrossfade="20" Distance="4000" Sound="Battleship_Cannon_Firesound_Dist3" />
+                        <!--<DistantSound DistanceCrossfade="20" Distance="4000" Sound="Battleship_Cannon_Firesound_Dist3" />-->
       </DistantSounds>
       <Waves>
         <Wave Type="D3">

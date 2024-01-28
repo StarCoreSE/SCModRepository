@@ -37,8 +37,8 @@ namespace StarCore.StructuralIntegrity.Sync
             if (logic == null)
                 return;
 
-            logic.Settings.FieldPower = Settings.FieldPower;
-            logic.Settings.GridModifier = Settings.GridModifier;
+            /*logic.Settings.FieldPower = Settings.FieldPower;
+            logic.Settings.GridModifier = Settings.GridModifier;*/
 
             relay = true;
         }

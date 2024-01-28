@@ -43,6 +43,8 @@
 			</BuildProgressModels>
 			<BlockPairName>SC_AR_Afflictor_Slanted</BlockPairName>
 			<BuildTimeSeconds>60</BuildTimeSeconds>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
 			<EdgeType>Light</EdgeType>
 			<WeaponDefinitionId Subtype="SCGenericWepDef" />
 			<OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
