@@ -119,7 +119,7 @@ namespace Scripts {
                     ElevateRate = 0.0015f, // Max traversal speed of elevation subpart in radians per tick.
                     MinAzimuth = -180,
                     MaxAzimuth = 180,
-                    MinElevation = 0,
+                    MinElevation = -7,
                     MaxElevation = 25,
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 0, // Default resting elevation
