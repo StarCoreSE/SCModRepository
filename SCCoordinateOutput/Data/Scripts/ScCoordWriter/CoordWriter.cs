@@ -1,4 +1,5 @@
-﻿using Sandbox.ModAPI;
+﻿using Sandbox.Game;
+using Sandbox.ModAPI;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,11 +25,13 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             {
                 // Use the Space Engineers modding API to open the file for writing
                 writer = MyAPIGateway.Utilities.WriteFileInWorldStorage(fileName, typeof(CoordWriter));
+                MyVisualScriptLogicProvider.SendChatMessage($"File created for grid {grid.CustomName}");
             }
             catch (Exception ex)
             {
                 // Handle the exception (e.g., log an error message)
                 MyLog.Default.WriteLine($"Error creating file for grid {grid.CustomName}: {ex.Message}");
+                MyVisualScriptLogicProvider.SendChatMessage($"Error creating file for grid {grid.CustomName}: {ex.Message}");
                 writer = null; // Set writer to null to prevent further writing attempts
             }
         }
@@ -57,7 +60,12 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
 
         public void WriteNextTick(int currentTick, bool isAlive, float healthPercent)
         {
-            if (writer == null) return; // Check if writer is null
+            // Check if writer is null or if the grid no longer exists
+            if (writer == null || grid == null || grid.MarkedForClose || !grid.InScene)
+            {
+                Close(); // Close the writer if the grid is no longer valid
+                return;
+            }
 
             var position = grid.GetPosition();
             var rotation = Quaternion.CreateFromForwardUp(grid.WorldMatrix.Forward, grid.WorldMatrix.Up);

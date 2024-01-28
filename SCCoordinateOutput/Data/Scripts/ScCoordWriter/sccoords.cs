@@ -1,5 +1,6 @@
 using Sandbox.Common.ObjectBuilders;
 using Sandbox.ModAPI;
+using System.Collections.Generic;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.ModAPI;
@@ -14,6 +15,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         private const string fileExtension = ".scc";
         private int tickCounter = 0;
         CoordWriter writer;
+        private static HashSet<long> gridsWithWriters = new HashSet<long>();
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
@@ -25,6 +27,13 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         public override void UpdateOnceBeforeFrame()
         {
             if (Cockpit == null || Cockpit.CubeGrid.Physics == null) return;
+
+            // Check if this grid already has a writer
+            if (gridsWithWriters.Contains(Cockpit.CubeGrid.EntityId))
+                return;
+
+            // If not, add it to the set and proceed with creating a writer
+            gridsWithWriters.Add(Cockpit.CubeGrid.EntityId);
 
             string factionName = GetFactionName(Cockpit.OwnerId);
             writer = new CoordWriter(Cockpit.CubeGrid, fileExtension, factionName);
