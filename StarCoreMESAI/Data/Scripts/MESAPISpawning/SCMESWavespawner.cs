@@ -77,7 +77,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                                 // Split the line by semicolons and trim whitespace
                                 string[] sections = line.Trim().Split(';');
 
-                                if (sections.Length >= 3)
+                                if (sections.Length >= 4)
                                 {
                                     string name = sections[0].Trim();
                                     int startTime;
@@ -101,11 +101,23 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                                             }
                                         }
 
-                                        // Add the wave data to your dictionary
-                                        spawnGroupTimings.Add(name, new SpawnGroupInfo(startTime, prefabs));
+                                        // Parse the spawn coordinates
+                                        string[] spawnCoordsParts = sections[3].Trim().Split(',');
+                                        double spawnX, spawnY, spawnZ;
 
-                                        // Print the loaded data to chat for debugging
-                                        MyLog.Default.WriteLineAndConsole($"Name: {name}, StartTime: {startTime}, Prefabs: {string.Join(", ", prefabs.Keys)}");
+                                        if (spawnCoordsParts.Length == 3 &&
+                                            double.TryParse(spawnCoordsParts[0].Trim(), out spawnX) &&
+                                            double.TryParse(spawnCoordsParts[1].Trim(), out spawnY) &&
+                                            double.TryParse(spawnCoordsParts[2].Trim(), out spawnZ))
+                                        {
+                                            Vector3D spawnCoordinates = new Vector3D(spawnX, spawnY, spawnZ);
+
+                                            // Add the wave data to your dictionary
+                                            spawnGroupTimings.Add(name, new SpawnGroupInfo(startTime, prefabs, spawnCoordinates));
+
+                                            // Print the loaded data to chat for debugging
+                                            MyLog.Default.WriteLineAndConsole($"Name: {name}, StartTime: {startTime}, Prefabs: {string.Join(", ", prefabs.Keys)}, SpawnCoordinates: {spawnCoordinates}");
+                                        }
                                     }
                                 }
                             }
@@ -138,9 +150,9 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                     {
                         // Create a blank configuration file with default values in the new format
                         string defaultConfig =
-                            "Wave1;10;Prefab1, Prefab2, Prefab3\n" +
-                            "Wave2;20;Prefab4, Prefab5\n" +
-                            "Wave3;30;Prefab6, Prefab7, Prefab8, Prefab9";
+                            "Wave1;10;Prefab1, Prefab2, Prefab3;0,0,0\n" +  // Example spawn coordinates: 0,0,0
+                            "Wave2;20;Prefab4, Prefab5;1000,2000,3000\n" +   // Example spawn coordinates: 1000,2000,3000
+                            "Wave3;30;Prefab6, Prefab7, Prefab8, Prefab9;500,500,500";  // Example spawn coordinates: 500,500,500
 
                         // Write the default configuration to the file
                         var writer = MyAPIGateway.Utilities.WriteFileInWorldStorage(fileName, GetType());
@@ -259,11 +271,10 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                 var groupKey = spawnGroup.Key;
                 var groupValue = spawnGroup.Value;
                 var spawnTime = groupValue.SpawnTime;
+                var spawnCoordinates = groupValue.SpawnCoordinates; // Get the spawn coordinates from the configuration
 
                 if ((DateTime.UtcNow - lastWaveCheckTime).TotalSeconds >= spawnTime)
                 {
-                    Vector3D spawnCoords = new Vector3D(-20000, 0, 0);
-
                     foreach (var prefabEntry in groupValue.Prefabs)
                     {
                         string prefabName = prefabEntry.Key;
@@ -271,7 +282,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 
                         for (int i = 0; i < quantity; i++)
                         {
-                            bool spawnResult = SpawnerAPI.SpawnSpaceCargoShip(spawnCoords, new List<string> { prefabName });
+                            bool spawnResult = SpawnerAPI.SpawnSpaceCargoShip(spawnCoordinates, new List<string> { prefabName });
 
                             if (spawnResult)
                             {
