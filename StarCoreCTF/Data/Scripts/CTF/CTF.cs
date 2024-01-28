@@ -168,7 +168,8 @@ namespace Klime.CTF
         {
             if (!MyAPIGateway.Utilities.IsDedicated)
             {
-                reuse_event = NetworkDebug.DeserializeLogged<EventInfo>("EventInfo", obj);
+                //reuse_event = NetworkDebug.DeserializeLogged<EventInfo>("EventInfo", obj);
+                reuse_event = MyAPIGateway.Utilities.SerializeFromBinary<EventInfo>(obj);
                 if (reuse_event != null)
                 {
                     if (HUD_Base != null && HUD_Base.Heartbeat)
@@ -204,7 +205,8 @@ namespace Klime.CTF
         {
             if (!MyAPIGateway.Session.IsServer)
             {
-                packet = NetworkDebug.DeserializeLogged<PacketBase>("GenericUpdate", obj);
+                //packet = NetworkDebug.DeserializeLogged<PacketBase>("GenericUpdate", obj);
+                packet = MyAPIGateway.Utilities.SerializeFromBinary<PacketBase>(obj);
 
                 if (packet != null)
                 {
@@ -1110,7 +1112,8 @@ namespace Klime.CTF
 
             foreach (var player in allplayers)
             {
-                MyAPIGateway.Multiplayer.SendMessageTo(netid, NetworkDebug.SerializeLogged(packet.packet_op.ToString(), packet), player.SteamUserId);
+                //MyAPIGateway.Multiplayer.SendMessageTo(netid, NetworkDebug.SerializeLogged(packet.packet_op.ToString(), packet), player.SteamUserId);
+                MyAPIGateway.Multiplayer.SendMessageTo(netid, MyAPIGateway.Utilities.SerializeToBinary(packet), player.SteamUserId);
             }
         }
 
@@ -1122,7 +1125,8 @@ namespace Klime.CTF
 
             foreach (var player in allplayers)
             {
-                MyAPIGateway.Multiplayer.SendMessageTo(netid, NetworkDebug.SerializeLogged(packet.packet_op.ToString(), packet), player.SteamUserId);
+                //MyAPIGateway.Multiplayer.SendMessageTo(netid, NetworkDebug.SerializeLogged(packet.packet_op.ToString(), packet), player.SteamUserId);
+                MyAPIGateway.Multiplayer.SendMessageTo(netid, MyAPIGateway.Utilities.SerializeToBinary(packet), player.SteamUserId);
             }
         }
 
@@ -1289,7 +1293,8 @@ namespace Klime.CTF
             {
                 if (player.Character != null)
                 {
-                    MyAPIGateway.Multiplayer.SendMessageTo(eventnetid, NetworkDebug.SerializeLogged(infotype.ToString(), reuse_event), player.SteamUserId);
+                    //MyAPIGateway.Multiplayer.SendMessageTo(eventnetid, NetworkDebug.SerializeLogged(infotype.ToString(), reuse_event), player.SteamUserId);
+                    MyAPIGateway.Multiplayer.SendMessageTo(eventnetid, MyAPIGateway.Utilities.SerializeToBinary(reuse_event), player.SteamUserId);
                 }
             }
         }
