@@ -30,7 +30,7 @@
             <BlockPairName>SI_Field_Gen_Block</BlockPairName>
             <EdgeType>Light</EdgeType>
             <BuildTimeSeconds>25</BuildTimeSeconds>
-            <ResourceSinkGroup>Conveyors</ResourceSinkGroup>
+            <ResourceSinkGroup>Defense</ResourceSinkGroup>
             <RequiredPowerInput>0.002</RequiredPowerInput>
             <InventorySize>
                 <X>2.5</X>
