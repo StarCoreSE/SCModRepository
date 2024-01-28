@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using VRageMath;
 
 namespace StarCoreMESAI.Data.Scripts.MESAPISpawning
 {
@@ -54,14 +55,15 @@ namespace StarCoreMESAI.Data.Scripts.MESAPISpawning
         {
             public int SpawnTime { get; set; }
             public Dictionary<string, int> Prefabs { get; private set; }
+            public Vector3D SpawnCoordinates { get; private set; } // Add this property
 
-            public SpawnGroupInfo(int spawnTime, Dictionary<string, int> prefabs)
+            public SpawnGroupInfo(int spawnTime, Dictionary<string, int> prefabs, Vector3D spawnCoordinates)
             {
                 SpawnTime = spawnTime;
                 Prefabs = prefabs;
+                SpawnCoordinates = spawnCoordinates; // Initialize the spawn coordinates
             }
         }
-
 
     }
 }
