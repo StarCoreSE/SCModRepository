@@ -50,18 +50,15 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             if (Cockpit == null || Cockpit.CubeGrid.Physics == null) return;
             if (Cockpit.IsFunctional) // Only execute when cockpit is functional
             {
-                if (Cockpit.IsUnderControl) // Only execute when cockpit is manned
+                tickCounter++;
+                if (tickCounter % 30 == 0) // Output once per quarter second
                 {
-                    tickCounter++;
-                    if (tickCounter % 30 == 0) // Output once per quarter second
-                    {
-                        writer.WriteNextTick(MyAPIGateway.Session.GameplayFrameCounter, true, 1.0f);
-                    }
+                    writer.WriteNextTick(MyAPIGateway.Session.GameplayFrameCounter, true, 1.0f);
                 }
-                else
-                {
-                    tickCounter = 0; // Reset tick counter if cockpit is unmanned
-                }
+            }
+            else
+            {
+                tickCounter = 0; // Reset tick counter if cockpit is unmanned
             }
         }
 
