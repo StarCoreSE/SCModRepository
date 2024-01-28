@@ -232,7 +232,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                     else
                         message = $"Next Wave in: {timeUntilNextWave}s";
 
-                    MyAPIGateway.Utilities.SendMessage(message);
+                    MyVisualScriptLogicProvider.SendChatMessage(message, "Wave Spawner", 0, MyFontEnum.White);
                     lastWaveNotificationTime = DateTime.UtcNow;
                 }
             }
@@ -275,11 +275,11 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
 
                             if (spawnResult)
                             {
-                                MyAPIGateway.Utilities.SendMessage($"Spawned prefab: {prefabName}");
+                                MyVisualScriptLogicProvider.SendChatMessage($"Spawned prefab: {prefabName}", "Wave Spawner", 0, MyFontEnum.White);
                             }
                             else
                             {
-                                MyAPIGateway.Utilities.SendMessage($"Failed to spawn prefab: {prefabName}");
+                                MyVisualScriptLogicProvider.SendChatMessage($"Failed to spawn prefab: {prefabName}", "Wave Spawner", 0, MyFontEnum.Red);
                             }
                         }
                     }
@@ -303,7 +303,7 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
         {
             // Incrementing the counter each time an AI ship is destroyed
             aiShipsDestroyed++;
-            MyAPIGateway.Utilities.SendMessage($"SCMESWaveSpawner: Compromised event triggered. AI Ships Destroyed: {aiShipsDestroyed}");
+            MyVisualScriptLogicProvider.SendChatMessage($"SCMESWaveSpawner: Compromised event triggered. AI Ships Destroyed: {aiShipsDestroyed}", "Wave Spawner", 0, MyFontEnum.White);
             // Updating the HUD element
             if (hudInitialized)
             {
@@ -377,11 +377,11 @@ namespace Invalid.StarCoreMESAI.Data.Scripts.MESAPISpawning
                 wavesStarted = true;
                 lastWaveCheckTime = DateTime.UtcNow;
 
-                MyAPIGateway.Utilities.SendMessage($"Started spawning waves with additional ships per wave: {additionalShipsPerWave} (Server)");
+                MyVisualScriptLogicProvider.SendChatMessage($"Started spawning waves with additional ships per wave: {additionalShipsPerWave} (Server)", "Wave Spawner", 0, MyFontEnum.White);
             }
             else
             {
-                MyAPIGateway.Utilities.SendMessage("Invalid command format. Use /SCStartGauntlet X to specify additional ships per wave (max 10). (Server)");
+                MyVisualScriptLogicProvider.SendChatMessage("Invalid command format. Use /SCStartGauntlet X to specify additional ships per wave (max 10). (Server)", "Wave Spawner", 0, MyFontEnum.White);
             }
         }
 
