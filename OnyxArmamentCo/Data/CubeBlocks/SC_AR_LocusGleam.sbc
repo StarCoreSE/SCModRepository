@@ -7,7 +7,7 @@
 				<SubtypeId>SC_AR_LocusGleam</SubtypeId>
 			</Id>
 			<DisplayName>Focused Gleam</DisplayName>
-			<Icon>Textures\GUI\Icons\Cubes\locusgleam.png</Icon>
+			<Icon>Textures\GUI\Icons\Cubes\SC_AR_LocusGleam.dds</Icon>
 			<Description>
 				Long Ranged Fixed: [7km]
 				Magazine Capacity: [3]
