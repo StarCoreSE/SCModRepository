@@ -2,12 +2,12 @@
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
    <CubeBlocks>
       <!--NanobotBuildAndRepairSystem-->
-      <Definition xsi:type="MyObjectBuilder_ShipWelderDefinition">
+      <Definition xsi:type="MyObjectBuilder_PoweredCargoContainerDefinition">
          <Id>
-            <TypeId>ShipWelder</TypeId>
+            <TypeId>Collector</TypeId>
             <SubtypeId>SELtdLargeNanobotBuildAndRepairSystem</SubtypeId>
          </Id>
-         <DisplayName>BuildAndRepairSystem</DisplayName>
+         <DisplayName>[SC] Auto Repair Module</DisplayName>
          <Icon>Textures\Icons\SELtdNanobotBuildAndRepairSystem.dds</Icon>
          <CubeSize>Large</CubeSize>
          <BlockTopology>TriangleMesh</BlockTopology>
@@ -43,6 +43,7 @@
 				<Model BuildPercentUpperBound="0.67" File="Models\NanobotBuildAndRepairSystem\SELtdLargeNanobotBuildAndRepairSystem_Constr2.mwm" />
 				<Model BuildPercentUpperBound="1.00" File="Models\NanobotBuildAndRepairSystem\SELtdLargeNanobotBuildAndRepairSystem_Constr3.mwm" />
          </BuildProgressModels>
+         <RequiredPowerInput>1</RequiredPowerInput>
          <BuildTimeSeconds>40</BuildTimeSeconds>
          <BlockPairName>SELtdNanobotBuildAndRepairSystem</BlockPairName>
          <MirroringX>None</MirroringX>
@@ -52,17 +53,15 @@
          <PrimarySound>BlockModuleEfficiency</PrimarySound>
          <DamageEffectId>212</DamageEffectId>
          <DamagedSound>ParticleHeavyMech</DamagedSound>
-         <SensorRadius>0.00001</SensorRadius>
-         <SensorOffset>0.0</SensorOffset>
          <PCU>200</PCU>
       </Definition>
 
-      <Definition xsi:type="MyObjectBuilder_ShipWelderDefinition">
+      <Definition xsi:type="MyObjectBuilder_PoweredCargoContainerDefinition">
          <Id>
-            <TypeId>ShipWelder</TypeId>
+            <TypeId>Collector</TypeId>
             <SubtypeId>SELtdSmallNanobotBuildAndRepairSystem</SubtypeId>
          </Id>
-         <DisplayName>BuildAndRepairSystem</DisplayName>
+         <DisplayName>[SC] Auto Repair Module</DisplayName>
          <Icon>Textures\Icons\SELtdNanobotBuildAndRepairSystem.dds</Icon>
          <CubeSize>Small</CubeSize>
          <BlockTopology>TriangleMesh</BlockTopology>
@@ -94,6 +93,7 @@
 				<Model BuildPercentUpperBound="0.67" File="Models\NanobotBuildAndRepairSystem\SELtdSmallNanobotBuildAndRepairSystem_Constr2.mwm" />
 				<Model BuildPercentUpperBound="1.00" File="Models\NanobotBuildAndRepairSystem\SELtdSmallNanobotBuildAndRepairSystem_Constr3.mwm" />
          </BuildProgressModels>
+         <RequiredPowerInput>1</RequiredPowerInput>
          <BuildTimeSeconds>30</BuildTimeSeconds>
          <BlockPairName>SELtdNanobotBuildAndRepairSystem</BlockPairName>
          <MirroringX>None</MirroringX>
@@ -103,8 +103,6 @@
          <PrimarySound>BlockModuleEfficiency</PrimarySound>
          <DamageEffectId>212</DamageEffectId>
          <DamagedSound>ParticleHeavyMech</DamagedSound>
-         <SensorRadius>0.00001</SensorRadius>
-         <SensorOffset>0.0</SensorOffset>
          <PCU>200</PCU>
       </Definition>
    </CubeBlocks>
