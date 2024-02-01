@@ -87,7 +87,7 @@ namespace StarCore.AutoRepairModule
                     NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
             }
         }
-        
+
         public bool SettingsIgnoreArmor
         {
             get { return Settings.IgnoreArmor; }
@@ -133,7 +133,7 @@ namespace StarCore.AutoRepairModule
             {
                 ExclusiveMode = SettingsExclusiveMode;
             }
-            
+
             if (SettingsIgnoreArmor != IgnoreArmor)
             {
                 IgnoreArmor = SettingsIgnoreArmor;
@@ -162,8 +162,8 @@ namespace StarCore.AutoRepairModule
                         ActiveWeldingParticle?.SetTranslation(ref Vector3D.Zero);
                         ActiveWeldSoundEmitter?.StopSound(true);
                         WeldNextTargetDelay = WeldNextTargetDelay - 1;
-                    }                 
-                }                 
+                    }
+                }
 
                 if (MyAPIGateway.Gui.GetCurrentScreen == MyTerminalPageEnum.ControlPanel)
                 {
@@ -268,9 +268,19 @@ namespace StarCore.AutoRepairModule
 
         private void UpdateLists(ref List<IMySlimBlock> mainList, HashSet<IMySlimBlock> tempList)
         {
-            mainList.RemoveAll(block => block.IsFullIntegrity && !block.HasDeformation || !tempList.Contains(block));
+            List<IMySlimBlock> convertHashToList = tempList.ToList();
+            convertHashToList.Sort((block1, block2) => block1.Integrity.CompareTo(block2.Integrity));
 
-            foreach (var block in tempList)
+            if (mainList.Count > 10)
+            {
+                mainList = mainList.Take(10).ToList();
+            }
+
+            var limitedTempList = convertHashToList.Take(10).ToList();
+
+            mainList.RemoveAll(block => block.IsFullIntegrity && !block.HasDeformation || !limitedTempList.Contains(block));
+
+            foreach (var block in limitedTempList)
             {
                 if (!mainList.Contains(block))
                 {
@@ -278,6 +288,7 @@ namespace StarCore.AutoRepairModule
                 }
             }
         }
+
 
         private void TimeoutSortAndReset(IMySlimBlock block)
         {
@@ -507,7 +518,7 @@ namespace StarCore.AutoRepairModule
 
                 ActiveWeldSoundEmitter?.SetPosition(firstBlockPosition);
                 ActiveWeldSoundEmitter?.PlaySingleSound(ActiveWeldSoundPair, true);
-                
+
                 if (firstBlock != null && firstBlock.IsFullIntegrity)
                 {
                     TimeoutSortAndReset(firstBlock);
@@ -707,8 +718,10 @@ namespace StarCore.AutoRepairModule
                         logic.Settings.ExclusiveMode = logic.ExclusiveMode;
                     }
                     else
+                    {
                         logic.ExclusiveMode = true;
                         logic.Settings.ExclusiveMode = logic.ExclusiveMode;
+                    }                      
                 }
             };
             ARMExclusiveToggleAction.Writer = (b, sb) =>
@@ -797,7 +810,7 @@ namespace StarCore.AutoRepairModule
         {
             var logic = GetLogic(block);
             if (logic != null)
-                if (logic.SubsystemPriority < 5) 
+                if (logic.SubsystemPriority < 5)
                 {
                     logic.SubsystemPriority = logic.SubsystemPriority + 1;
                 }
