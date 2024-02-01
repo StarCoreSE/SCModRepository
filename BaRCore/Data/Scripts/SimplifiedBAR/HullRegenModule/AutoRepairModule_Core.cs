@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using System.Linq;
 using System.Collections.Generic;
@@ -271,12 +271,12 @@ namespace StarCore.AutoRepairModule
             List<IMySlimBlock> convertHashToList = tempList.ToList();
             convertHashToList.Sort((block1, block2) => block1.Integrity.CompareTo(block2.Integrity));
 
-            if (mainList.Count > 10)
+            if (mainList.Count > 30)
             {
-                mainList = mainList.Take(10).ToList();
+                mainList = mainList.Take(30).ToList();
             }
 
-            var limitedTempList = convertHashToList.Take(10).ToList();
+            var limitedTempList = convertHashToList.Take(30).ToList();
 
             mainList.RemoveAll(block => block.IsFullIntegrity && !block.HasDeformation || !limitedTempList.Contains(block));
 
