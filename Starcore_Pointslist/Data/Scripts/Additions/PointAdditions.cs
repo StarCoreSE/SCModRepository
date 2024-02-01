@@ -291,7 +291,7 @@ namespace ShipPoints
 				Wheel1x1@35000;
 				K_SA_Gauss_AMSIIC@350;
 				SA_HMI_Erebos@250;
-				LargeBlockSmallThrustSciFi@20;
+				LargeBlockSmallThrustSciFi@10;
 				SmallThrustSciFi@30;
 				HAS_Thanatos@350;
                			HAS_Alecto@400;
@@ -308,7 +308,7 @@ namespace ShipPoints
 				LargeBlockBatteryBlockWarfare2@14;
 				LargeBlockLargeGeneratorWarfare2@300;
 				LargeBlockLargeModularThruster@50;
-				LargeBlockSmallModularThruster@20;
+				LargeBlockSmallModularThruster@10;
 				LargeTurretControlBlock@200;
 				AQD_LG_AtmoThrusterS_ArmoredSlopeRev@3;
 				AQD_LG_AtmoThrusterS_ArmoredSlope@3;
