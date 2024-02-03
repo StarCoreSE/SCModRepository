@@ -27,6 +27,9 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
         }
 
+        // Add a flag to track if WriteStartingData has been called
+        private bool writeStartingDataCalled = false;
+
         public override void UpdateOnceBeforeFrame()
         {
             if (Cockpit == null || Cockpit.CubeGrid.Physics == null) return;
@@ -42,32 +45,17 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             gridsWithWriters.Add(Cockpit.CubeGrid.EntityId);
 
             string factionName = GetFactionName(Cockpit.OwnerId);
-            writer = new CoordWriter(Cockpit.CubeGrid, fileExtension, factionName, isStatic); // Pass isStatic to the constructor
-            writer.WriteStartingData(factionName);
+            writer = new CoordWriter(Cockpit.CubeGrid, fileExtension, factionName, isStatic);
+
+            // Call WriteStartingData only once if it hasn't been called already
+            if (!writeStartingDataCalled)
+            {
+                writer.WriteStartingData(factionName);
+                writeStartingDataCalled = true; // Set the flag to indicate it has been called
+            }
 
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
         }
-
-       // public void ClearWorldStorageFiles()
-       // {
-       //     try
-       //     {
-       //         var files = MyAPIGateway.Utilities.GetFilesInWorldStorage(typeof(CoordWriter));
-       //
-       //         foreach (var file in files)
-       //         {
-       //             MyAPIGateway.Utilities.DeleteFileInWorldStorage(file, typeof(CoordWriter));
-       //         }
-       //
-       //         MyVisualScriptLogicProvider.SendChatMessage("Cleared all files in mod's world storage folder.", "Mod Debug");
-       //     }
-       //     catch (Exception ex)
-       //     {
-       //         MyLog.Default.WriteLine($"Error clearing world storage files: {ex.Message}");
-       //         MyVisualScriptLogicProvider.SendChatMessage("Error clearing world storage files. See log for details.", "Mod Debug");
-       //     }
-       // }
-
 
         public override void UpdateAfterSimulation()
         {

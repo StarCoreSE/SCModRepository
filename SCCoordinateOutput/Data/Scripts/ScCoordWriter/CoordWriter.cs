@@ -38,8 +38,6 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 writer = null; // Set writer to null to prevent further writing attempts
             }
 
-            // Now include the 'isStatic' information in the data being written
-            writer.WriteLine($"{DateTime.Now},{factionName},{grid.CustomName},{isStatic}");
         }
 
 
