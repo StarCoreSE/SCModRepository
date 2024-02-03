@@ -15,10 +15,15 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         TextWriter writer;
         Vector3 oldPos;
         Quaternion oldRot;
+        bool isStatic; // Add isStatic as a class-level field
 
-        public CoordWriter(IMyCubeGrid grid, string fileExtension = ".scc", string factionName = "Unowned")
+        // Add this property with a public setter
+        public bool HasStartedData { get; set; }
+
+        public CoordWriter(IMyCubeGrid grid, string fileExtension = ".scc", string factionName = "Unowned", bool isStatic = false)
         {
             this.grid = grid;
+            this.isStatic = isStatic; // Initialize the class-level field
             string fileName = $"{DateTime.Now:dd-MM-yyyy HHmm} , {grid.EntityId}{fileExtension}";
 
             try
@@ -34,7 +39,13 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 MyVisualScriptLogicProvider.SendChatMessage($"Error creating file for grid {grid.CustomName}: {ex.Message}");
                 writer = null; // Set writer to null to prevent further writing attempts
             }
+
+            // Now include the 'isStatic' information in the data being written
+           // writer.WriteLine($"{DateTime.Now},{factionName},{grid.CustomName},{isStatic}");
+            HasStartedData = false; // Initialize the flag to indicate that starting data has not been written yet
         }
+
+
 
         public void WriteStartingData(string factionName)
         {
@@ -52,7 +63,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 }
             }
 
-            writer.WriteLine($"{DateTime.Now},{factionName},{grid.CustomName},{owner}");
+            writer.WriteLine($"{DateTime.Now},{factionName},{grid.CustomName},{owner},{isStatic}");
             var size = Vector3I.Abs(grid.Min) + Vector3I.Abs(grid.Max);
             writer.WriteLine($"{grid.GridSize},{size.X},{size.Y},{size.Z}");
             writer.Flush();

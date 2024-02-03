@@ -1,10 +1,13 @@
 using Sandbox.Common.ObjectBuilders;
+using Sandbox.Game;
 using Sandbox.ModAPI;
+using System;
 using System.Collections.Generic;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
+using VRage.Utils;
 
 namespace YourName.ModName.Data.Scripts.ScCoordWriter
 {
@@ -24,9 +27,15 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
         }
 
+        // Add a flag to track if WriteStartingData has been called
+        private bool writeStartingDataCalled = false;
+
         public override void UpdateOnceBeforeFrame()
         {
             if (Cockpit == null || Cockpit.CubeGrid.Physics == null) return;
+
+            // Determine if the grid is static or not
+            bool isStatic = Cockpit.CubeGrid.IsStatic;
 
             // Check if this grid already has a writer
             if (gridsWithWriters.Contains(Cockpit.CubeGrid.EntityId))
@@ -36,8 +45,14 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             gridsWithWriters.Add(Cockpit.CubeGrid.EntityId);
 
             string factionName = GetFactionName(Cockpit.OwnerId);
-            writer = new CoordWriter(Cockpit.CubeGrid, fileExtension, factionName);
-            writer.WriteStartingData(factionName);
+            writer = new CoordWriter(Cockpit.CubeGrid, fileExtension, factionName, isStatic);
+
+            // Call WriteStartingData only once if it hasn't been called already
+            if (!writer.HasStartedData)
+            {
+                writer.WriteStartingData(factionName);
+                writer.HasStartedData = true; // Set the flag to indicate it has been called
+            }
 
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
         }
