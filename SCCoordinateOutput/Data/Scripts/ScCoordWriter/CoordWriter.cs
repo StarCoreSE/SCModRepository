@@ -17,6 +17,8 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         Quaternion oldRot;
         bool isStatic; // Add isStatic as a class-level field
 
+        // Add this property with a public setter
+        public bool HasStartedData { get; set; }
 
         public CoordWriter(IMyCubeGrid grid, string fileExtension = ".scc", string factionName = "Unowned", bool isStatic = false)
         {
@@ -38,6 +40,9 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 writer = null; // Set writer to null to prevent further writing attempts
             }
 
+            // Now include the 'isStatic' information in the data being written
+            writer.WriteLine($"{DateTime.Now},{factionName},{grid.CustomName},{isStatic}");
+            HasStartedData = false; // Initialize the flag to indicate that starting data has not been written yet
         }
 
 

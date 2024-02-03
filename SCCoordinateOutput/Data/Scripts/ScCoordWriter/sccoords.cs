@@ -48,10 +48,10 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             writer = new CoordWriter(Cockpit.CubeGrid, fileExtension, factionName, isStatic);
 
             // Call WriteStartingData only once if it hasn't been called already
-            if (!writeStartingDataCalled)
+            if (!writer.HasStartedData)
             {
                 writer.WriteStartingData(factionName);
-                writeStartingDataCalled = true; // Set the flag to indicate it has been called
+                writer.HasStartedData = true; // Set the flag to indicate it has been called
             }
 
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
