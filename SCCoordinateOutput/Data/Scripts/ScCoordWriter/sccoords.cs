@@ -1,10 +1,13 @@
 using Sandbox.Common.ObjectBuilders;
+using Sandbox.Game;
 using Sandbox.ModAPI;
+using System;
 using System.Collections.Generic;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
+using VRage.Utils;
 
 namespace YourName.ModName.Data.Scripts.ScCoordWriter
 {
@@ -28,6 +31,9 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         {
             if (Cockpit == null || Cockpit.CubeGrid.Physics == null) return;
 
+            // Determine if the grid is static or not
+            bool isStatic = Cockpit.CubeGrid.IsStatic;
+
             // Check if this grid already has a writer
             if (gridsWithWriters.Contains(Cockpit.CubeGrid.EntityId))
                 return;
@@ -36,11 +42,32 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             gridsWithWriters.Add(Cockpit.CubeGrid.EntityId);
 
             string factionName = GetFactionName(Cockpit.OwnerId);
-            writer = new CoordWriter(Cockpit.CubeGrid, fileExtension, factionName);
+            writer = new CoordWriter(Cockpit.CubeGrid, fileExtension, factionName, isStatic); // Pass isStatic to the constructor
             writer.WriteStartingData(factionName);
 
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
         }
+
+       // public void ClearWorldStorageFiles()
+       // {
+       //     try
+       //     {
+       //         var files = MyAPIGateway.Utilities.GetFilesInWorldStorage(typeof(CoordWriter));
+       //
+       //         foreach (var file in files)
+       //         {
+       //             MyAPIGateway.Utilities.DeleteFileInWorldStorage(file, typeof(CoordWriter));
+       //         }
+       //
+       //         MyVisualScriptLogicProvider.SendChatMessage("Cleared all files in mod's world storage folder.", "Mod Debug");
+       //     }
+       //     catch (Exception ex)
+       //     {
+       //         MyLog.Default.WriteLine($"Error clearing world storage files: {ex.Message}");
+       //         MyVisualScriptLogicProvider.SendChatMessage("Error clearing world storage files. See log for details.", "Mod Debug");
+       //     }
+       // }
+
 
         public override void UpdateAfterSimulation()
         {
