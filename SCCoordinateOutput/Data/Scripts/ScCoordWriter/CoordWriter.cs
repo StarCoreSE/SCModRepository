@@ -41,7 +41,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             }
 
             // Now include the 'isStatic' information in the data being written
-            writer.WriteLine($"{DateTime.Now},{factionName},{grid.CustomName},{isStatic}");
+           // writer.WriteLine($"{DateTime.Now},{factionName},{grid.CustomName},{isStatic}");
             HasStartedData = false; // Initialize the flag to indicate that starting data has not been written yet
         }
 
