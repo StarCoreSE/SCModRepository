@@ -3840,7 +3840,7 @@ namespace Scripts
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
                 AmmoRound = "", // AmmoRound field of the ammo to spawn.
-                Fragments = 1, // Number of projectiles to spawn.
+                Fragments = 5, // Number of projectiles to spawn.
                 Degrees = 0, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = false, // fragments will not inherit velocity from parent.
@@ -3858,7 +3858,7 @@ namespace Scripts
                     Proximity = 4000, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
                     ParentDies = true, // Parent dies once after it spawns its last child.
                     PointAtTarget = true, // Start fragment direction pointing at Target
-                    PointType = Direct, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
+                    PointType = Lead, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
                     DirectAimCone = 10f, //Aim cone used for Direct fire, in degrees
                     GroupSize = 0, // Number of spawns in each group
                     GroupDelay = 0, // Delay between each group.
@@ -4029,37 +4029,40 @@ namespace Scripts
             Trajectory = new TrajectoryDef
             {
                 Guidance = Smart, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
-                TargetLossDegree = 0,
-                TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                MaxLifeTime = 900, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                AccelPerSec = 500,
+                TargetLossDegree = 180,
+                TargetLossTime = 1, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                MaxLifeTime = 1900, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                AccelPerSec = 1500,
                 DesiredSpeed = 1000, // voxel phasing if you go above 5100
-                MaxTrajectory = 4000f,
+                MaxTrajectory = 5000f,
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed
                 RangeVariance = Random(start: 0, end: 0), // subtracts value from MaxTrajectory
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
-                TotalAcceleration = 250, // 0 means no limit, something to do due with a thing called delta and something called v.
+                TotalAcceleration = 4500, // 0 means no limit, something to do due with a thing called delta and something called v.
                 Smarts = new SmartsDef
                 {
                     SteeringLimit = 0, // 0 means no limit, value is in degrees, good starting is 150.  This enable advanced smart "control", cost of 3 on a scale of 1-5, 0 being basic smart.
-                    Inaccuracy = 5f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
-                    Aggressiveness = 1f, // controls how responsive tracking is.
+                    Inaccuracy = 20f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
+                    Aggressiveness = 7f, // controls how responsive tracking is.
                     MaxLateralThrust = 1f, // controls how sharp the trajectile may turn. Cap is 1, and this is % of your Accel.
                     NavAcceleration = 0, // helps influence how the projectile steers. 
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
                     AccelClearance = false, // Setting this to true will prevent smart acceleration until it is clear of the grid and tracking delay has been met (free fall).
                     CheckFutureIntersection = false, // Utilize obstacle avoidance for drones
-                    MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    MaxChaseTime = 30, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
-                    MaxTargets = 0, // Number of targets allowed before ending, 0 = unlimited
+                    MaxTargets = 1, // Number of targets allowed before ending, 0 = unlimited
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
                     Roam = false, // Roam current area after target loss
                     KeepAliveAfterTargetLoss = true, // Whether to stop early death of projectile on target loss
+                    OffsetMinRange = 0,
                     OffsetRatio = 0f, // The ratio to offset the random direction (0 to 1) 
                     OffsetTime = 0, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
                     FocusOnly = false, // only target the constructs Ai's focus
+                    MinTurnSpeed = 10,
+                    AltNavigation = true,
                 },
                 Mines = new MinesDef
                 {
