@@ -1170,6 +1170,8 @@ namespace klime.Visual
             }
         }
 
+        private IMyHudNotification statusNotification = null;
+
         private void ToggleRequestPaperDollSelf()
         {
             if (reqPDollSelf == ReqPDollSelf.SelfOn)
@@ -1184,7 +1186,14 @@ namespace klime.Visual
             string status = reqPDollSelf.ToString().ToUpper();
             string color = "Orange";  // Different color for Self, for example
 
-            MyAPIGateway.Utilities.ShowNotification($"PAPER DOLL {status}", 1000, color);
+            if (statusNotification == null)
+                statusNotification = MyAPIGateway.Utilities.CreateNotification($"PAPER DOLL {status}", 1000);
+            statusNotification.Hide();
+            statusNotification.Text = $"PAPER DOLL {status}";
+            statusNotification.Font = color;
+            statusNotification.Show();
+
+            //MyAPIGateway.Utilities.ShowNotification($"PAPER DOLL {status}", 1000, color);
         }
 
         private void HanVSearchSelf()
@@ -1238,6 +1247,8 @@ namespace klime.Visual
             }
         }
 
+        
+
         private void ToggleRequestPaperDoll()
         {
             // Updated to handle Self state
@@ -1253,7 +1264,14 @@ namespace klime.Visual
             string status = reqPDoll.ToString().ToUpper();
             string color = "Green";
 
-            MyAPIGateway.Utilities.ShowNotification($"PAPER DOLL {status}", 1000, color);
+            if (statusNotification == null)
+                statusNotification = MyAPIGateway.Utilities.CreateNotification($"PAPER DOLL {status}", 1000);
+            statusNotification.Hide();
+            statusNotification.Text = $"PAPER DOLL {status}";
+            statusNotification.Font = color;
+            statusNotification.Show();
+
+            //MyAPIGateway.Utilities.ShowNotification($"PAPER DOLL {status}", 1000, color);
         }
         private void ExecuteVSearchUpdate(MyEntity controlEnt)
         {
