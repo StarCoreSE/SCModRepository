@@ -61,11 +61,11 @@ namespace Scripts
             {
                 AmmoRound = "BC7_HE_Fragment", // AmmoRound field of the ammo to spawn.
                 Fragments = 12, // Number of projectiles to spawn.
-                Degrees = 180, // Cone in which to randomize direction of spawned projectiles.
+                Degrees = 45f, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
-                DropVelocity = false, // fragments will not inherit velocity from parent.
-                Offset = -2.5f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards), value is read from parent ammo type.
-                Radial = 90f, // Determines starting angle for Degrees of spread above.  IE, 0 degrees and 90 radial goes perpendicular to travel path
+                DropVelocity = true, // fragments will not inherit velocity from parent.
+                Offset = -8f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards), value is read from parent ammo type.
+                Radial = 3f, // Determines starting angle for Degrees of spread above.  IE, 0 degrees and 90 radial goes perpendicular to travel path
                 MaxChildren = 0, // number of maximum branches for fragments from the roots point of view, 0 is unlimited
                 IgnoreArming = true, // If true, ignore ArmOnHit or MinArmingTime in EndOfLife definitions
                 AdvOffset = Vector(x: 0, y: 0, z: 0), // advanced offsets the fragment by xyz coordinates relative to parent, value is read from fragment ammo type.
@@ -177,7 +177,7 @@ namespace Scripts
                     Enable = true,
                     Radius = 7f, // Radius of AOE effect, in meters.
                     Damage = 90000f,
-                    Depth = 5f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
+                    Depth = 4.5f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
@@ -650,7 +650,7 @@ namespace Scripts
                 MaxLifeTime = 600, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 400, // voxel phasing if you go above 5100
-                MaxTrajectory = 30f, // Max Distance the projectile or beam can Travel.
+                MaxTrajectory = 10f, // Max Distance the projectile or beam can Travel.
                 //FieldTime = 0, // 0 is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
@@ -756,11 +756,11 @@ namespace Scripts
                     {
                         Enable = false,
                         Textures = new[] {
-                            "", // Please always have this Line set, if this Section is enabled.
+                            "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
-                        DecayTime = 3, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 0, green: 0, blue: 1, alpha: 1),
+                        DecayTime = 6000, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
+                        Color = Color(red: 0, green: 180, blue: 0, alpha: 0.1f),
                         Back = false,
                         CustomWidth = 0,
                         UseWidthVariance = false,
@@ -769,7 +769,7 @@ namespace Scripts
                     OffsetEffect = new OffsetEffectDef
                     {
                         MaxOffset = 0,// 0 offset value disables this effect
-                        MinLength = 0.2f,
+                        MinLength = 3f,
                         MaxLength = 3,
                     },
                 },
