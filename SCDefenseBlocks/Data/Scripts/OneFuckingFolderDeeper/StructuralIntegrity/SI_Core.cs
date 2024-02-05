@@ -145,10 +145,13 @@ namespace StarCore.StructuralIntegrity
                 Sink = SIGenBlock.Components.Get<MyResourceSinkComponent>();
                 Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, RequiredInput);
 
-                // Dont know why this exists yet
+                // i know why this exists
                 float minDivertedPower = MinFieldPower;
                 float maxDivertedPower = MaxFieldPower;
                 SetupTerminalControls<IMyCollector>(minDivertedPower, maxDivertedPower); ;
+
+                if (!MyAPIGateway.Session.IsServer)
+                    return;
 
                 // Apply Defaults
                 FieldPowerSync.Value = MinFieldPower;
@@ -502,7 +505,7 @@ namespace StarCore.StructuralIntegrity
 
                     foreach (var block in gridTerminalBlocks)
                     {
-                        if (block.FatBlock != null && block.FatBlock is IMyConveyorSorter)
+                        if (block.FatBlock != null && (block.FatBlock is IMyConveyorSorter && block.BlockDefinition.Id.SubtypeName.ToString() != "SC_SRB"))
                         {
                             allTerminalBlocks.Add(block);
                         }
