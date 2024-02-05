@@ -602,6 +602,11 @@ namespace klime.PointCheck
                     t_N = "Reinforced Blastplate";
                     mCs = 1.00f;
                     break;
+                case "Taiidan":
+                case "Taiidan":
+                    t_N = "Taiidan";
+                    mCs = 1.00f;
+                    break;
 
             }
         }
