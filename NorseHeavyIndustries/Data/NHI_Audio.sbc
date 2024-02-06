@@ -243,7 +243,7 @@
       </Id>
       <Category>SHOT</Category>
       <MaxDistance>4000</MaxDistance>
-      <Volume>4</Volume>
+      <Volume>1</Volume>
       <Loopable>false</Loopable>
      <PitchVariation>25</PitchVariation>
       <DistantSounds>
@@ -265,7 +265,7 @@
       </Id>
       <Category>SHOT</Category>
       <MaxDistance>4000</MaxDistance>
-      <Volume>4</Volume>
+      <Volume>1</Volume>
       <Loopable>false</Loopable>
 
       <PitchVariation>25</PitchVariation>
