@@ -37,7 +37,7 @@
       </DistantSounds>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>1.75</Volume>
+      <Volume>0.5</Volume>
       <Waves>
         <Wave Type="D3">
           <Start>Audio\Onyx\railguns\Onyx_light_coilgun_hit_01.wav</Start>
@@ -350,7 +350,7 @@
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>1</Volume>
+      <Volume>0.2</Volume>
       <Waves>
         <Wave Type="D3">
           <Start>Audio\Onyx\railguns\Onyx_railgun_windup_02.wav</Start>

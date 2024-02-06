@@ -602,6 +602,16 @@ namespace klime.PointCheck
                     t_N = "Reinforced Blastplate";
                     mCs = 1.00f;
                     break;
+                case "Taiidan":
+                case "Taiidan Fighter Launch Rail":
+                case "Taiidan Bomber Launch Rail":
+                case "Taiidan Fighter Hangar Bay":
+                case "Taiidan Bomber Hangar Bay":
+                case "Taiidan Bomber Hangar Bay Medium":
+                case "Taiidan Fighter Small Bay":
+                    t_N = "Taiidan";
+                    mCs = 0.25f;
+                    break;
 
             }
         }
