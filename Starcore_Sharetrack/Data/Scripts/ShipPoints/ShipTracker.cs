@@ -603,9 +603,14 @@ namespace klime.PointCheck
                     mCs = 1.00f;
                     break;
                 case "Taiidan":
-                case "Taiidan":
+                case "Taiidan Fighter Launch Rail":
+                case "Taiidan Bomber Launch Rail":
+                case "Taiidan Fighter Hangar Bay":
+                case "Taiidan Bomber Hangar Bay":
+                case "Taiidan Bomber Hangar Bay Medium":
+                case "Taiidan Fighter Small Bay":
                     t_N = "Taiidan";
-                    mCs = 1.00f;
+                    mCs = 0.25f;
                     break;
 
             }
