@@ -48,10 +48,12 @@ namespace StarCore.AutoRepairModule
 
         private bool SortedOnce = false;
         private int WeldingSortTimeout = 15;
-        private int WeldNextTargetDelay = 2;
+        private int WeldNextTargetDelay = 1;
 
         private List<IMySlimBlock> repairList = new List<IMySlimBlock>();
         private List<IMySlimBlock> priorityRepairList = new List<IMySlimBlock>();
+
+        private IMySlimBlock firstBlock = null;
 
         private int MinSubsystemPriority = 0;
         private int MaxSubsystemPriority = 5;
@@ -183,6 +185,21 @@ namespace StarCore.AutoRepairModule
                     block.SetDetailedInfoDirty();
                 }
             }
+
+            if (firstBlock != null && !firstBlock.IsFullIntegrity)
+            {
+                Vector3D firstBlockPosition = Vector3D.Zero;
+                firstBlock.ComputeWorldCenter(out firstBlockPosition);
+
+                ActiveWeldingParticle?.SetTranslation(ref firstBlockPosition);
+                ActiveWeldSoundEmitter?.SetPosition(firstBlockPosition);
+            }
+            else
+            {
+                ActiveWeldingParticle?.SetTranslation(ref Vector3D.Zero);
+                ActiveWeldSoundEmitter?.SetPosition(Vector3D.Zero);
+                ActiveWeldSoundEmitter?.StopSound(true);
+            }            
         }
 
         public override void UpdateBeforeSimulation10()
@@ -292,6 +309,8 @@ namespace StarCore.AutoRepairModule
 
         private void TimeoutSortAndReset(IMySlimBlock block)
         {
+            ActiveWeldingParticle?.SetTranslation(ref Vector3D.Zero);
+
             block.UpdateVisual();
 
             if (priorityRepairList.Contains(block))
@@ -302,7 +321,7 @@ namespace StarCore.AutoRepairModule
             {
                 repairList.Sort((block1, block2) => block1.Integrity.CompareTo(block2.Integrity));
             }
-            WeldNextTargetDelay = 2;
+            WeldNextTargetDelay = 1;
             WeldingSortTimeout = 15;
             return;
         }
@@ -493,7 +512,7 @@ namespace StarCore.AutoRepairModule
                 SortedOnce = true;
             }
 
-            IMySlimBlock firstBlock = null;
+            firstBlock = null;
 
             if (priorityRepairList.Any())
             {

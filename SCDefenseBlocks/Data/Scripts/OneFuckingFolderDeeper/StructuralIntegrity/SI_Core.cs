@@ -12,6 +12,7 @@ using Sandbox.ModAPI.Interfaces.Terminal;
 using Sandbox.Definitions;
 using Sandbox.Common.ObjectBuilders;
 using VRage.Game;
+using VRage.Game.Entity;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.Game.ModAPI.Network;
@@ -23,6 +24,7 @@ using VRage.Utils;
 using VRage.ObjectBuilders;
 using SpaceEngineers.Game.Entities.Blocks;
 using SpaceEngineers.Game.ModAPI;
+using StarCore.StructuralIntegrity.APISession;
 
 namespace StarCore.StructuralIntegrity
 {
@@ -145,7 +147,7 @@ namespace StarCore.StructuralIntegrity
                 Sink = SIGenBlock.Components.Get<MyResourceSinkComponent>();
                 Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, RequiredInput);
 
-                // Dont know why this exists yet
+                // i know why this exists
                 float minDivertedPower = MinFieldPower;
                 float maxDivertedPower = MaxFieldPower;
                 SetupTerminalControls<IMyCollector>(minDivertedPower, maxDivertedPower); ;
@@ -502,7 +504,7 @@ namespace StarCore.StructuralIntegrity
 
                     foreach (var block in gridTerminalBlocks)
                     {
-                        if (block.FatBlock != null && block.FatBlock is IMyConveyorSorter)
+                        if (block.FatBlock != null && (block.FatBlock is IMyConveyorSorter && block.BlockDefinition.Id.SubtypeName.ToString() != "SC_SRB"))
                         {
                             allTerminalBlocks.Add(block);
                         }
@@ -623,10 +625,17 @@ namespace StarCore.StructuralIntegrity
         {
             foreach (var block in allTerminalBlocks)
             {
+                var entBlock = block as MyEntity;
+                if (entBlock != null && weaponcoreapi._wcApi.HasCoreWeapon(entBlock))
+                {
+                    weaponcoreapi._wcApi.SetFiringAllowed(entBlock, false);
+                }
+
                 var functionalBlock = block.FatBlock as IMyFunctionalBlock;
                 if (functionalBlock != null)
                 {
                     functionalBlock.Enabled = false;
+                    
                 }
             }
         }
@@ -635,6 +644,12 @@ namespace StarCore.StructuralIntegrity
         {
             foreach (var block in allTerminalBlocks)
             {
+                var entBlock = block as MyEntity;
+                if (entBlock != null && weaponcoreapi._wcApi.HasCoreWeapon(entBlock))
+                {
+                    weaponcoreapi._wcApi.SetFiringAllowed(entBlock, true);
+                }
+
                 var functionalBlock = block.FatBlock as IMyFunctionalBlock;
                 if (functionalBlock != null)
                 {

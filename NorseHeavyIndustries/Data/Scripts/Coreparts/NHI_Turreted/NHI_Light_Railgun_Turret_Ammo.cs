@@ -375,18 +375,18 @@ namespace Scripts
                             "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
-                        DecayTime = 120, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 15, green: 5, blue: 25, alpha: .35f),
+                        DecayTime = 60, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
+                        Color = Color(red: 15, green: 5, blue: 25, alpha: .25f),
                         Back = false,
-                        CustomWidth = .5f,
+                        CustomWidth = 0.35f,
                         UseWidthVariance = false,
                         UseColorFade = true,
                     },
                     OffsetEffect = new OffsetEffectDef
                     {
-                        MaxOffset = 0,// 0 offset value disables this effect
-                        MinLength = 1f,
-                        MaxLength = 1,
+                        MaxOffset = 5,// 0 offset value disables this effect
+                        MinLength = 0.1f,
+                        MaxLength = 0.15f,
                     },
                 },
             },

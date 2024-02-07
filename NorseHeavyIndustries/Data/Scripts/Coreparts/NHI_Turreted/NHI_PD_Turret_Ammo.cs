@@ -342,9 +342,9 @@ namespace Scripts
                     Tracer = new TracerBaseDef
                     {
                         Enable = false,
-                        Length = 15f, //
-                        Width = 0.5f, //
-                        Color = Color(red: 0f, green: 0f, blue: 24f, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Length = 10f, //
+                        Width = 0.2f, //
+                        Color = Color(red: 22f, green: 11f, blue: 0f, alpha: 0.9f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
@@ -393,7 +393,7 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "FireworkRESound",
+                HitSound = "",
                 ShotSound = "",
                 ShieldHitSound = "",
                 PlayerHitSound = "",
@@ -708,8 +708,8 @@ namespace Scripts
                     {
                         Enable = true,
                         Length = 3f, //
-                        Width = 0.2f, //
-                        Color = Color(red: 26f, green: 11f, blue: 0f, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Width = 0.5f, //
+                        Color = Color(red: 40f, green: 22f, blue: 0f, alpha: 1f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
@@ -741,9 +741,9 @@ namespace Scripts
                         },
                         TextureMode = Normal,
                         DecayTime = 1, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 4f, green: 1f, blue: 0f, alpha: 0.4f),
+                        Color = Color(red: 4f, green: 1f, blue: 0f, alpha: 0.7f),
                         Back = false,
-                        CustomWidth = 0.25f,
+                        CustomWidth = 0.35f,
                         UseWidthVariance = false,
                         UseColorFade = true,
                     },
@@ -758,7 +758,7 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "FireworkRESound",
+                HitSound = "",
                 ShieldHitSound = "",
                 PlayerHitSound = "",
                 VoxelHitSound = "",
