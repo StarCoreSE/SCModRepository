@@ -98,6 +98,11 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             {
                 writer.Flush();
                 writer.Close();
+
+                // Dispose of the writer to release its resources
+                ((IDisposable)writer).Dispose();
+
+                writer = null; // Set the writer to null to prevent further writing attempts
             }
         }
     }
