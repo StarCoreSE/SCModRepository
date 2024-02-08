@@ -113,7 +113,7 @@
                   <Boolean Name="hideVanillaFlame" Value="true" /><!-- Hide Vanilla Flame-->
                   <Decimal Name="ThrustRateGain" Value="0.12" />
                     <Decimal Name="ThrustRateLoss" Value="0.3" />
-                  <Boolean Name="UseEmissive" Value="true" /> <!-- Enable heatup/emissive material effect, off = more performant -->
+                  <Boolean Name="UseEmissive" Value="false" /> <!-- Enable heatup/emissive material effect, off = more performant -->
                   
                   <Text Name="EmissiveMaterial" Value="heatup" /><!-- not implemented|custom material for heatup effect -->
                     
@@ -272,7 +272,7 @@
                    <Boolean Name="hideVanillaFlame" Value="true" /><!-- Hide Vanilla Flame-->
                     <Decimal Name="ThrustRateGain" Value="0.12" />
                     <Decimal Name="ThrustRateLoss" Value="0.3" />
-                    <Boolean Name="UseEmissive" Value="true" /> <!-- Enable heatup/emissive material effect, off = more performant -->
+                    <Boolean Name="UseEmissive" Value="false" /> <!-- Enable heatup/emissive material effect, off = more performant -->
                     
                     <Text Name="EmissiveMaterial" Value="heatup" /><!-- not implemented|custom material for heatup effect -->
                     <Decimal Name="EmissiveRateGain" Value="0.005" />
@@ -434,7 +434,7 @@
                   <Boolean Name="hideVanillaFlame" Value="true" /><!-- Hide Vanilla Flame-->
                   <Decimal Name="ThrustRateGain" Value="0.12" />
                     <Decimal Name="ThrustRateLoss" Value="0.3" />
-                  <Boolean Name="UseEmissive" Value="true" /> <!-- Enable heatup/emissive material effect, off = more performant -->
+                  <Boolean Name="UseEmissive" Value="false" /> <!-- Enable heatup/emissive material effect, off = more performant -->
                   
                   <Text Name="EmissiveMaterial" Value="heatup" /><!-- not implemented|custom material for heatup effect -->
                     
@@ -593,7 +593,7 @@
                    <Boolean Name="hideVanillaFlame" Value="true" /><!-- Hide Vanilla Flame-->
                     <Decimal Name="ThrustRateGain" Value="0.12" />
                     <Decimal Name="ThrustRateLoss" Value="0.3" />
-                    <Boolean Name="UseEmissive" Value="true" /> <!-- Enable heatup/emissive material effect, off = more performant -->
+                    <Boolean Name="UseEmissive" Value="false" /> <!-- Enable heatup/emissive material effect, off = more performant -->
                     
                     <Text Name="EmissiveMaterial" Value="heatup" /><!-- not implemented|custom material for heatup effect -->
                     <Decimal Name="EmissiveRateGain" Value="0.005" />
@@ -758,7 +758,7 @@
                   <Boolean Name="hideVanillaFlame" Value="true" /><!-- Hide Vanilla Flame-->
                   <Decimal Name="ThrustRateGain" Value="0.12" />
                     <Decimal Name="ThrustRateLoss" Value="0.3" />
-                  <Boolean Name="UseEmissive" Value="true" /> <!-- Enable heatup/emissive material effect, off = more performant -->
+                  <Boolean Name="UseEmissive" Value="false" /> <!-- Enable heatup/emissive material effect, off = more performant -->
                   
                   <Text Name="EmissiveMaterial" Value="heatup" /><!-- not implemented|custom material for heatup effect -->
                     
@@ -917,7 +917,7 @@
                    <Boolean Name="hideVanillaFlame" Value="true" /><!-- Hide Vanilla Flame-->
                     <Decimal Name="ThrustRateGain" Value="0.12" />
                     <Decimal Name="ThrustRateLoss" Value="0.3" />
-                    <Boolean Name="UseEmissive" Value="true" /> <!-- Enable heatup/emissive material effect, off = more performant -->
+                    <Boolean Name="UseEmissive" Value="false" /> <!-- Enable heatup/emissive material effect, off = more performant -->
                     
                     <Text Name="EmissiveMaterial" Value="heatup" /><!-- not implemented|custom material for heatup effect -->
                     <Decimal Name="EmissiveRateGain" Value="0.005" />
@@ -1170,7 +1170,7 @@
                   <Boolean Name="hideVanillaFlame" Value="true" /><!-- Hide Vanilla Flame-->
                   <Decimal Name="ThrustRateGain" Value="0.12" />
                     <Decimal Name="ThrustRateLoss" Value="0.3" />
-                  <Boolean Name="UseEmissive" Value="true" /> <!-- Enable heatup/emissive material effect, off = more performant -->
+                  <Boolean Name="UseEmissive" Value="false" /> <!-- Enable heatup/emissive material effect, off = more performant -->
                   
                   <Text Name="EmissiveMaterial" Value="heatup" /><!-- not implemented|custom material for heatup effect -->
                     
@@ -1239,7 +1239,7 @@
                   <Boolean Name="hideVanillaFlame" Value="true" /><!-- Hide Vanilla Flame-->
                   <Decimal Name="ThrustRateGain" Value="0.12" />
                     <Decimal Name="ThrustRateLoss" Value="0.3" />
-                  <Boolean Name="UseEmissive" Value="true" /> <!-- Enable heatup/emissive material effect, off = more performant -->
+                  <Boolean Name="UseEmissive" Value="false" /> <!-- Enable heatup/emissive material effect, off = more performant -->
                   
                   <Text Name="EmissiveMaterial" Value="heatup" /><!-- not implemented|custom material for heatup effect -->
                     
@@ -1562,7 +1562,7 @@
                    <Boolean Name="hideVanillaFlame" Value="true" /><!-- Hide Vanilla Flame-->
                     <Decimal Name="ThrustRateGain" Value="0.12" />
                     <Decimal Name="ThrustRateLoss" Value="0.3" />
-                    <Boolean Name="UseEmissive" Value="true" /> <!-- Enable heatup/emissive material effect, off = more performant -->
+                    <Boolean Name="UseEmissive" Value="false" /> <!-- Enable heatup/emissive material effect, off = more performant -->
                     
                     <Text Name="EmissiveMaterial" Value="heatup" /><!-- not implemented|custom material for heatup effect -->
                     <Decimal Name="EmissiveRateGain" Value="0.005" />
@@ -1629,7 +1629,7 @@
                    <Boolean Name="hideVanillaFlame" Value="true" /><!-- Hide Vanilla Flame-->
                     <Decimal Name="ThrustRateGain" Value="0.12" />
                     <Decimal Name="ThrustRateLoss" Value="0.3" />
-                    <Boolean Name="UseEmissive" Value="true" /> <!-- Enable heatup/emissive material effect, off = more performant -->
+                    <Boolean Name="UseEmissive" Value="false" /> <!-- Enable heatup/emissive material effect, off = more performant -->
                     
                     <Text Name="EmissiveMaterial" Value="heatup" /><!-- not implemented|custom material for heatup effect -->
                     <Decimal Name="EmissiveRateGain" Value="0.005" />
