@@ -69,7 +69,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             writer.Flush();
         }
 
-        public void WriteNextTick(int currentTick, bool isAlive, float healthPercent)
+        public void WriteNextTick(int currentTick, bool isAlive, float healthPercent, Vector3D forwardDirection)
         {
             // Check if writer is null or if the grid no longer exists
             if (writer == null || grid == null || grid.MarkedForClose || !grid.InScene)
@@ -79,7 +79,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             }
 
             var position = grid.GetPosition();
-            var rotation = Quaternion.CreateFromForwardUp(grid.WorldMatrix.Forward, grid.WorldMatrix.Up);
+            var rotation = Quaternion.CreateFromForwardUp(forwardDirection, grid.WorldMatrix.Up);
 
             if (position == oldPos && rotation == oldRot)
                 return;
@@ -91,12 +91,18 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             writer.Flush();
         }
 
+
         public void Close()
         {
             if (writer != null)
             {
                 writer.Flush();
                 writer.Close();
+
+                // Dispose of the writer to release its resources
+                ((IDisposable)writer).Dispose();
+
+                writer = null; // Set the writer to null to prevent further writing attempts
             }
         }
     }
