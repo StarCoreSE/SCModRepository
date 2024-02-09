@@ -24,7 +24,7 @@
 			<Size x="1" y="1" z="6"/>
 			<Center x="0" y="0" z="5" />
 			<ModelOffset x="0" y="0" z="0"/>
-			<Model>Models\Cubes\large\Pulse_Laser_1x6.mwm</Model>
+			<Model>Models\Cubes\large\SC_AR_LocusGleam.mwm</Model>
 			<Components>
 				<Component Subtype="SteelPlate" Count="300" />
 				<Component Subtype="Construction" Count="200" />
