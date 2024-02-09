@@ -8,6 +8,7 @@ using VRage.Game.ModAPI;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRage.Utils;
+using VRageMath;
 
 namespace YourName.ModName.Data.Scripts.ScCoordWriter
 {
@@ -68,7 +69,11 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 tickCounter++;
                 if (tickCounter % 30 == 0) // Output once per quarter second
                 {
-                    writer.WriteNextTick(MyAPIGateway.Session.GameplayFrameCounter, true, 1.0f);
+                    // Get the forward direction of the cockpit
+                    Matrix cockpitWorldMatrix = Cockpit.WorldMatrix;
+                    Vector3D forwardDirection = cockpitWorldMatrix.Forward;
+
+                    writer.WriteNextTick(MyAPIGateway.Session.GameplayFrameCounter, true, 1.0f, forwardDirection);
                 }
             }
             else
