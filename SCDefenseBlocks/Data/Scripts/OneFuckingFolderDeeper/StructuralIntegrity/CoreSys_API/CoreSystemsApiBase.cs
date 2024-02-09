@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Sandbox.ModAPI;
 using VRage;
+using VRage.Utils;
 using VRage.Collections;
 using VRage.Game;
 using VRage.Game.Entity;
@@ -627,20 +628,26 @@ namespace CoreSystems.Api
         {
             _apiInit = (delegates != null);
             /// base methods
+            try
+            {
+                AssignMethod(delegates, "SetRofMultiplier", ref _setRofMultiplier);
+                AssignMethod(delegates, "SetBaseDmgMultiplier", ref _setBaseDmgMultiplier);
+                AssignMethod(delegates, "SetAreaDmgMultiplier", ref _setAreaDmgMultiplier);
+                AssignMethod(delegates, "SetAreaRadiusMultiplier", ref _setAreaRadiusMultiplier);
+                AssignMethod(delegates, "SetVelocityMultiplier", ref _setVelocityMultiplier);
+                AssignMethod(delegates, "SetFiringAllowed", ref _setFiringAllowed);
 
-            AssignMethod(delegates, "SetRofMultiplier", ref _setRofMultiplier);
-            AssignMethod(delegates, "SetBaseDmgMultiplier", ref _setBaseDmgMultiplier);
-            AssignMethod(delegates, "SetAreaDmgMultiplier", ref _setAreaDmgMultiplier);
-            AssignMethod(delegates, "SetAreaRadiusMultiplier", ref _setAreaRadiusMultiplier);
-            AssignMethod(delegates, "SetVelocityMultiplier", ref _setVelocityMultiplier);
-            AssignMethod(delegates, "SetFiringAllowed", ref _setFiringAllowed);
-
-            AssignMethod(delegates, "GetRofMultiplier", ref _getRofMultiplier);
-            AssignMethod(delegates, "GetBaseDmgMultiplier", ref _getBaseDmgMultiplier);
-            AssignMethod(delegates, "GetAreaDmgMultiplier", ref _getAreaDmgMultiplier);
-            AssignMethod(delegates, "GetAreaRadiusMultiplier", ref _getAreaRadiusMultiplier);
-            AssignMethod(delegates, "GetVelocityMultiplier", ref _getVelocityMultiplier);
-            AssignMethod(delegates, "GetFiringAllowed", ref _getFiringAllowed);
+                AssignMethod(delegates, "GetRofMultiplier", ref _getRofMultiplier);
+                AssignMethod(delegates, "GetBaseDmgMultiplier", ref _getBaseDmgMultiplier);
+                AssignMethod(delegates, "GetAreaDmgMultiplier", ref _getAreaDmgMultiplier);
+                AssignMethod(delegates, "GetAreaRadiusMultiplier", ref _getAreaRadiusMultiplier);
+                AssignMethod(delegates, "GetVelocityMultiplier", ref _getVelocityMultiplier);
+                AssignMethod(delegates, "GetFiringAllowed", ref _getFiringAllowed);
+            }
+            catch (Exception e)
+            {
+                MyLog.Default.WriteLineAndConsole($"{e}"); // write to game's log
+            }
 
             AssignMethod(delegates, "GetAllWeaponDefinitions", ref _getAllWeaponDefinitions);
             AssignMethod(delegates, "GetCoreWeapons", ref _getCoreWeapons);
