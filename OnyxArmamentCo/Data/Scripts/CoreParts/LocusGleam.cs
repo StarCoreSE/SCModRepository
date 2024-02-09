@@ -31,7 +31,7 @@ namespace Scripts {
                     
                  },
                 Muzzles = new[] {
-                    "muzzle_beam_01",// Where your Projectiles spawn. Use numbers not Letters. IE Muzzle_01 not Muzzle_A
+                    "muzzle_projectile_1",// Where your Projectiles spawn. Use numbers not Letters. IE Muzzle_01 not Muzzle_A
                 },
                 Ejector = "", // Optional; empty from which to eject "shells" if specified.
                 Scope = "", // Where line of sight checks are performed from. Must be clear of block collision.
