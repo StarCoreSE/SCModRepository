@@ -580,7 +580,7 @@
 
         <Definition xsi:type="MyObjectBuilder_CryoChamberDefinition">
             <Id>
-                <TypeId>CryoChamber</TypeId>
+                <TypeId>CubeBlock</TypeId>
                 <SubtypeId>LargeBlockCryoRoom</SubtypeId>
             </Id>
             <DisplayName>DisplayName_Block_CryoRoom</DisplayName>
@@ -656,73 +656,6 @@
             <DLC>DecorativeBlocks3</DLC>
         </Definition>
     
-            <Definition xsi:type="MyObjectBuilder_CockpitDefinition">
-            <Id>
-                <TypeId>Cockpit</TypeId>
-                <SubtypeId>SmallBlockCapCockpit</SubtypeId>
-            </Id>
-            <DisplayName>DisplayName_Block_CapCockpit</DisplayName>
-            <Icon>Textures\GUI\Icons\Cubes\CapCockpit.dds</Icon>
-            <Description>Description_CockpitIndustrial</Description>
-            <CubeSize>Small</CubeSize>
-            <GuiVisible>false</GuiVisible>
-            <BlockTopology>TriangleMesh</BlockTopology>
-            <Size x="3" y="3" z="3" />
-            <Model>Models\Cubes\small\CapCockpit.mwm</Model>
-            <InteriorModel>Models\Cubes\small\CapCockpitInterior.mwm</InteriorModel>
-            <CharacterAnimation>CapCockpitPose</CharacterAnimation>
-            <ModelOffset x="0" y="0" z="0" />
-            <Components>
-                <Component Subtype="SteelPlate" Count="5" />
-                <Component Subtype="Construction" Count="10" />
-                <Component Subtype="Motor" Count="1" />
-                <Component Subtype="Display" Count="4" />
-                <Component Subtype="Computer" Count="15" />
-                <Component Subtype="BulletproofGlass" Count="10" />
-                <Component Subtype="SteelPlate" Count="15" />
-            </Components>
-            <CriticalComponent Subtype="Computer" Index="0" />
-            <MountPoints>
-                <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" Default="true" />
-                <MountPoint Side="Left" StartX="0" StartY="0" EndX="3" EndY="2" />
-                <MountPoint Side="Left" StartX="0.5" StartY="2" EndX="3" EndY="3" />
-                <MountPoint Side="Right" StartX="0" StartY="0" EndX="3" EndY="2" />
-                <MountPoint Side="Right" StartX="0" StartY="2" EndX="2.5" EndY="3" />
-                <MountPoint Side="Top" StartX="0" StartY="0" EndX="3" EndY="2.5" />
-                <MountPoint Side="Front" StartX="0" StartY="0" EndX="3" EndY="2" />
-                <MountPoint Side="Back" StartX="0" StartY="0" EndX="3" EndY="3" />
-            </MountPoints>
-            <BuildProgressModels>
-                <Model BuildPercentUpperBound="0.50" File="Models\Cubes\Small\CapCockpit_Construction_1.mwm" />
-                <Model BuildPercentUpperBound="1.00" File="Models\Cubes\Small\CapCockpit_Construction_2.mwm" />
-            </BuildProgressModels>
-            <ScreenAreas>
-                <ScreenArea Name="CockpitScreen_01" DisplayName="DisplayName_Screen_TopLeft" TextureResolution="128" ScreenWidth="3" ScreenHeight="1" Script="TSS_Velocity" />
-                <ScreenArea Name="CockpitScreen_02" DisplayName="DisplayName_Screen_Left" TextureResolution="256" ScreenWidth="6" ScreenHeight="5" Script="TSS_EnergyHydrogen" />
-                <ScreenArea Name="CockpitScreen_03" DisplayName="DisplayName_Screen_Center" TextureResolution="256" ScreenWidth="2" ScreenHeight="1" Script="TSS_ArtificialHorizon" />
-                <ScreenArea Name="CockpitScreen_04" DisplayName="DisplayName_Screen_Right" TextureResolution="256" ScreenWidth="6" ScreenHeight="5" Script="TSS_Gravity" />
-            </ScreenAreas>
-            <BlockPairName>CapCockpit</BlockPairName>
-            <MirroringZ>Y</MirroringZ>
-            <MirroringY>Z</MirroringY>
-            <EdgeType>Light</EdgeType>
-            <DeformationRatio>0.2</DeformationRatio>
-            <EnableFirstPerson>true</EnableFirstPerson>
-            <EnableShipControl>true</EnableShipControl>
-            <EnableBuilderCockpit>true</EnableBuilderCockpit>
-            <TargetLockingEnabled>true</TargetLockingEnabled>
-            <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
-            <DamagedSound>ParticleElectrical</DamagedSound>
-            <PrimarySound>BlockCockpitSm</PrimarySound>
-            <OxygenCapacity>60</OxygenCapacity>
-            <IsPressurized>true</IsPressurized>
-            <GetInSound>ShipSmCockpitIn</GetInSound>
-            <GetOutSound>ShipSmCockpitOut</GetOutSound>
-            <BuildTimeSeconds>20</BuildTimeSeconds>
-            <PCU>150</PCU>
-                <DLC>DecorativeBlocks3</DLC>
-        </Definition>
-
         <Definition xsi:type="MyObjectBuilder_TextPanelDefinition">
             <Id>
                 <TypeId>TextPanel</TypeId>
@@ -974,7 +907,7 @@
 
         <Definition xsi:type="MyObjectBuilder_CryoChamberDefinition">
             <Id>
-                <TypeId>CryoChamber</TypeId>
+                <TypeId>CubeBlock</TypeId>
                 <SubtypeId>LargeBlockHalfBed</SubtypeId>
             </Id>
             <DisplayName>DisplayName_Block_HalfBed</DisplayName>
@@ -1041,7 +974,7 @@
 		
         <Definition xsi:type="MyObjectBuilder_CryoChamberDefinition">
             <Id>
-                <TypeId>CryoChamber</TypeId>
+                <TypeId>CubeBlock</TypeId>
                 <SubtypeId>LargeBlockHalfBedOffset</SubtypeId>
             </Id>
             <DisplayName>DisplayName_Block_HalfBedOffset</DisplayName>
@@ -2430,7 +2363,7 @@
 	
         <Definition xsi:type="MyObjectBuilder_CockpitDefinition">
             <Id>
-                <TypeId>Cockpit</TypeId>
+                <TypeId>CubeBlock</TypeId>
                 <SubtypeId>LargeBlockInsetPlantCouch</SubtypeId>
             </Id>
             <DisplayName>DisplayName_Block_InsetPlantCouch</DisplayName>
@@ -2497,7 +2430,7 @@
         
             <Definition xsi:type="MyObjectBuilder_CryoChamberDefinition">
             <Id>
-                <TypeId>CryoChamber</TypeId>
+                <TypeId>CubeBlock</TypeId>
                 <SubtypeId>LargeBlockInsetBed</SubtypeId>
             </Id>
             <DisplayName>DisplayName_Block_InsetBed</DisplayName>
