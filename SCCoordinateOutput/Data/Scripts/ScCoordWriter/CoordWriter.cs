@@ -18,18 +18,21 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         bool isStatic; // Add isStatic as a class-level field
 
         // Add this property with a public setter
+        public string FileName { get; private set; }
+
+        // Add this property with a public setter
         public bool HasStartedData { get; set; }
 
         public CoordWriter(IMyCubeGrid grid, string fileExtension = ".scc", string factionName = "Unowned", bool isStatic = false)
         {
             this.grid = grid;
             this.isStatic = isStatic; // Initialize the class-level field
-            string fileName = $"{DateTime.Now:dd-MM-yyyy HHmm} , {grid.EntityId}{fileExtension}";
+            FileName = $"{DateTime.Now:dd-MM-yyyy HHmm} , {grid.EntityId}{fileExtension}";
 
             try
             {
                 // Use the Space Engineers modding API to open the file for writing
-                writer = MyAPIGateway.Utilities.WriteFileInWorldStorage(fileName, typeof(CoordWriter));
+                writer = MyAPIGateway.Utilities.WriteFileInWorldStorage(FileName, typeof(CoordWriter));
                 MyVisualScriptLogicProvider.SendChatMessage($"File created for grid {grid.CustomName}");
             }
             catch (Exception ex)
@@ -41,10 +44,9 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             }
 
             // Now include the 'isStatic' information in the data being written
-           // writer.WriteLine($"{DateTime.Now},{factionName},{grid.CustomName},{isStatic}");
+            // writer.WriteLine($"{DateTime.Now},{factionName},{grid.CustomName},{isStatic}");
             HasStartedData = false; // Initialize the flag to indicate that starting data has not been written yet
         }
-
 
 
         public void WriteStartingData(string factionName)

@@ -9,6 +9,7 @@ using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRage.Utils;
 using VRageMath;
+using System.IO;
 
 namespace YourName.ModName.Data.Scripts.ScCoordWriter
 {
@@ -19,7 +20,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         private const string fileExtension = ".scc";
         private int tickCounter = 0;
         CoordWriter writer;
-        private static HashSet<long> gridsWithWriters = new HashSet<long>();
+        private List<string> createdFiles = new List<string>(); // Maintain a list of created filenames
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
@@ -43,6 +44,10 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 {
                     StopGlobalWriter();
                 }
+                else if (messageText.StartsWith("/coordwriterclear", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    ClearGlobalWriter();
+                }
             }
         }
 
@@ -50,7 +55,6 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         {
             if (writer == null && Cockpit != null && Cockpit.CubeGrid.Physics != null)
             {
-                MyVisualScriptLogicProvider.SendChatMessage("Coordinate Writer Started!");
                 // Determine if the grid is static or not
                 bool isStatic = Cockpit.CubeGrid.IsStatic;
 
@@ -65,6 +69,9 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 }
 
                 NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
+
+                // Debug output
+                MyAPIGateway.Utilities.ShowMessage("Coord Writer", "Global writer started.");
             }
         }
 
@@ -72,12 +79,38 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         {
             if (writer != null)
             {
-                MyVisualScriptLogicProvider.SendChatMessage("Coordinate Writer Stopped!");
-
                 writer.Close();
                 writer = null;
+
+                // Debug output
+                MyAPIGateway.Utilities.ShowMessage("Coord Writer", "Global writer stopped.");
             }
         }
+
+        private void ClearGlobalWriter()
+        {
+            StopGlobalWriter(); // Stop the writer first
+
+            // Delete files associated with the writer
+            foreach (string fileName in createdFiles)
+            {
+                try
+                {
+                    MyAPIGateway.Utilities.DeleteFileInWorldStorage(fileName, typeof(CoordWriter));
+                    MyAPIGateway.Utilities.ShowMessage("Coord Writer", $"File '{fileName}' deleted.");
+                }
+                catch (Exception ex)
+                {
+                    MyAPIGateway.Utilities.ShowMessage("Coord Writer", $"Error deleting file '{fileName}': {ex.Message}");
+                }
+            }
+
+            createdFiles.Clear(); // Clear the list of created filenames
+
+            // Debug output
+            MyAPIGateway.Utilities.ShowMessage("Coord Writer", "Files cleared for global writer.");
+        }
+
 
         public override void UpdateAfterSimulation()
         {
@@ -102,6 +135,15 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         {
             IMyFaction playerFaction = MyAPIGateway.Session.Factions.TryGetPlayerFaction(playerId);
             return playerFaction != null ? playerFaction.Name : "Unowned";
+        }
+
+        public override void UpdateOnceBeforeFrame()
+        {
+            // Add the filename to the list of created files when it's created
+            if (writer != null && !createdFiles.Contains(writer.FileName))
+            {
+                createdFiles.Add(writer.FileName);
+            }
         }
 
         public override void Close()
