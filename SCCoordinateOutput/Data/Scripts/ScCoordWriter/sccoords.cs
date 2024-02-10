@@ -10,9 +10,21 @@ using VRage.ObjectBuilders;
 using VRage.Utils;
 using VRageMath;
 using System.IO;
+using ProtoBuf;
 
 namespace YourName.ModName.Data.Scripts.ScCoordWriter
 {
+    // Define packet structure for command handling
+    [ProtoContract]
+    public class CommandPacket
+    {
+        [ProtoMember(1)]
+        public bool StartCommand;
+
+        [ProtoMember(2)]
+        public bool StopCommand;
+    }
+
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Cockpit), false)]
     public class coordoutput : MyGameLogicComponent
     {
@@ -22,28 +34,43 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         CoordWriter writer;
         private List<string> createdFiles = new List<string>(); // Maintain a list of created filenames
 
+        private ushort netID = 29400; // Define a unique network ID for message communication
+
+        private bool isCommandHandlerRegistered = false; // Flag to track if command handler is registered
+
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             if (!MyAPIGateway.Session.IsServer) return; // Only do stuff serverside
             Cockpit = Entity as Sandbox.ModAPI.IMyCockpit;
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
 
-            // Listen for chat commands
-            MyAPIGateway.Utilities.MessageEntered += CommandHandler;
+            // Register message handler for command handling on the main thread
+            MyAPIGateway.Utilities.InvokeOnGameThread(() =>
+            {
+                // Register the command handler and set the flag accordingly
+                MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(netID, CommandHandler);
+                isCommandHandlerRegistered = true;
+            });
+
+            // Register chat command handler
+            MyAPIGateway.Utilities.MessageEntered += OnMessageEntered;
         }
 
-        private void CommandHandler(string messageText, ref bool sendToOthers)
+        // Define message handler for command handling
+        private void CommandHandler(ushort arg1, byte[] arg2, ulong arg3, bool arg4)
         {
-            if (!string.IsNullOrEmpty(messageText))
+            if (!MyAPIGateway.Session.IsServer) return; // Only handle commands on the server
+
+            CommandPacket packet = MyAPIGateway.Utilities.SerializeFromBinary<CommandPacket>(arg2);
+            if (packet == null) return;
+
+            if (packet.StartCommand)
             {
-                if (messageText.StartsWith("/coordwriterstart", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    StartGlobalWriter();
-                }
-                else if (messageText.StartsWith("/coordwriterstop", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    StopGlobalWriter();
-                }
+                StartGlobalWriter();
+            }
+            else if (packet.StopCommand)
+            {
+                StopGlobalWriter();
             }
         }
 
@@ -66,8 +93,8 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
 
                 NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
 
-                // Debug output
-                MyAPIGateway.Utilities.ShowMessage("Coord Writer", "Global writer started.");
+                // Send chat message to all players
+                MyVisualScriptLogicProvider.SendChatMessage("Coord Writer", "Global writer started");
             }
         }
 
@@ -78,8 +105,8 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 writer.Close();
                 writer = null;
 
-                // Debug output
-                MyAPIGateway.Utilities.ShowMessage("Coord Writer", "Global writer stopped.");
+                // Send chat message to all players
+                MyVisualScriptLogicProvider.SendChatMessage("Coord Writer", "Global writer stopped");
             }
         }
 
@@ -117,19 +144,87 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             }
         }
 
+        private void OnMessageEntered(string messageText, ref bool sendToOthers)
+        {
+            if (!messageText.StartsWith("/coordwriter", StringComparison.OrdinalIgnoreCase)) return;
+            string[] parts = messageText.Split(' ');
+
+            if (parts.Length == 1)
+            {
+                // Show list of available commands and usage instructions
+                ShowCommandList();
+            }
+            else if (parts.Length >= 2)
+            {
+                if (string.Equals(parts[1], "start", StringComparison.OrdinalIgnoreCase))
+                {
+                    // Start the global writer
+                    StartGlobalWriter();
+                }
+                else if (string.Equals(parts[1], "stop", StringComparison.OrdinalIgnoreCase))
+                {
+                    // Stop the global writer
+                    StopGlobalWriter();
+                }
+                else
+                {
+                    // Invalid command
+                    MyVisualScriptLogicProvider.SendChatMessage("Coord Writer", "Invalid command. Use '/coordwriter start' or '/coordwriter stop'.");
+                }
+            }
+        }
+
+        private void ShowCommandList()
+        {
+            MyVisualScriptLogicProvider.SendChatMessage("Coord Writer", "Available commands:");
+            MyVisualScriptLogicProvider.SendChatMessage("Coord Writer", "/coordwriter start - Start the global writer.");
+            MyVisualScriptLogicProvider.SendChatMessage("Coord Writer", "/coordwriter stop - Stop the global writer.");
+        }
+
         public override void Close()
         {
-            // Clean up event handler
-            MyAPIGateway.Utilities.MessageEntered -= CommandHandler;
-
-            // Dispose of writer
-            if (writer != null)
+            // Safely unregister message handler on the main thread
+            if (isCommandHandlerRegistered && netID != 0)
             {
-                writer.Close();
-                writer = null;
+                if (MyAPIGateway.Utilities != null && MyAPIGateway.Multiplayer != null)
+                {
+                    MyAPIGateway.Utilities.InvokeOnGameThread(() =>
+                    {
+                        // Further check to ensure that MyAPIGateway.Multiplayer is still not null when this lambda executes
+                        if (MyAPIGateway.Multiplayer != null)
+                        {
+                            MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(netID, CommandHandler);
+                            isCommandHandlerRegistered = false; // Ensure to set the flag to false after unregistering
+                        }
+                    });
+                }
             }
+
+            // Dispose of writer safely
+            DisposeWriterSafely();
 
             base.Close();
         }
+
+        private void DisposeWriterSafely()
+        {
+            if (writer != null)
+            {
+                try
+                {
+                    writer.Close();
+                }
+                catch (Exception ex)
+                {
+                    // Log or handle the exception as necessary
+                    MyLog.Default.WriteLine($"Error closing writer: {ex.Message}");
+                }
+                finally
+                {
+                    writer = null;
+                }
+            }
+        }
+
     }
 }
