@@ -44,10 +44,6 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 {
                     StopGlobalWriter();
                 }
-                else if (messageText.StartsWith("/coordwriterclear", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    ClearGlobalWriter();
-                }
             }
         }
 
@@ -86,31 +82,6 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 MyAPIGateway.Utilities.ShowMessage("Coord Writer", "Global writer stopped.");
             }
         }
-
-        private void ClearGlobalWriter()
-        {
-            StopGlobalWriter(); // Stop the writer first
-
-            // Delete files associated with the writer
-            foreach (string fileName in createdFiles)
-            {
-                try
-                {
-                    MyAPIGateway.Utilities.DeleteFileInWorldStorage(fileName, typeof(CoordWriter));
-                    MyAPIGateway.Utilities.ShowMessage("Coord Writer", $"File '{fileName}' deleted.");
-                }
-                catch (Exception ex)
-                {
-                    MyAPIGateway.Utilities.ShowMessage("Coord Writer", $"Error deleting file '{fileName}': {ex.Message}");
-                }
-            }
-
-            createdFiles.Clear(); // Clear the list of created filenames
-
-            // Debug output
-            MyAPIGateway.Utilities.ShowMessage("Coord Writer", "Files cleared for global writer.");
-        }
-
 
         public override void UpdateAfterSimulation()
         {
