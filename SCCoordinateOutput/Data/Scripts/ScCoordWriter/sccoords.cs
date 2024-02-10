@@ -40,20 +40,21 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
-            if (!MyAPIGateway.Session.IsServer) return; // Only do stuff serverside
             Cockpit = Entity as Sandbox.ModAPI.IMyCockpit;
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
 
-            // Register message handler for command handling on the main thread
-            MyAPIGateway.Utilities.InvokeOnGameThread(() =>
-            {
-                // Register the command handler and set the flag accordingly
-                MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(netID, CommandHandler);
-                isCommandHandlerRegistered = true;
-            });
-
-            // Register chat command handler
+            // Always register for chat commands, on both server and clients
             MyAPIGateway.Utilities.MessageEntered += OnMessageEntered;
+
+            // Only register the message handler on the server
+            if (MyAPIGateway.Session.IsServer)
+            {
+                MyAPIGateway.Utilities.InvokeOnGameThread(() =>
+                {
+                    MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(netID, CommandHandler);
+                    isCommandHandlerRegistered = true;
+                });
+            }
         }
 
         // Define message handler for command handling
@@ -147,31 +148,30 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         private void OnMessageEntered(string messageText, ref bool sendToOthers)
         {
             if (!messageText.StartsWith("/coordwriter", StringComparison.OrdinalIgnoreCase)) return;
-            string[] parts = messageText.Split(' ');
+            sendToOthers = false; // Prevent command from being sent to other players' chat
 
-            if (parts.Length == 1)
+            string[] parts = messageText.Split(' ');
+            if (parts.Length < 2) return;
+
+            CommandPacket packet = new CommandPacket();
+            if (string.Equals(parts[1], "start", StringComparison.OrdinalIgnoreCase))
             {
-                // Show list of available commands and usage instructions
-                ShowCommandList();
+                packet.StartCommand = true;
             }
-            else if (parts.Length >= 2)
+            else if (string.Equals(parts[1], "stop", StringComparison.OrdinalIgnoreCase))
             {
-                if (string.Equals(parts[1], "start", StringComparison.OrdinalIgnoreCase))
-                {
-                    // Start the global writer
-                    StartGlobalWriter();
-                }
-                else if (string.Equals(parts[1], "stop", StringComparison.OrdinalIgnoreCase))
-                {
-                    // Stop the global writer
-                    StopGlobalWriter();
-                }
-                else
-                {
-                    // Invalid command
-                    MyVisualScriptLogicProvider.SendChatMessage("Coord Writer", "Invalid command. Use '/coordwriter start' or '/coordwriter stop'.");
-                }
+                packet.StopCommand = true;
             }
+            else
+            {
+                // Invalid command feedback
+                MyAPIGateway.Utilities.ShowMessage("Coord Writer", "Invalid command. Use '/coordwriter start' or '/coordwriter stop'.");
+                return;
+            }
+
+            // Serialize and send the command packet to the server
+            var serializedPacket = MyAPIGateway.Utilities.SerializeToBinary(packet);
+            MyAPIGateway.Multiplayer.SendMessageToServer(netID, serializedPacket);
         }
 
         private void ShowCommandList()
