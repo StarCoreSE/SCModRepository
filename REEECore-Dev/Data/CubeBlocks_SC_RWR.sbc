@@ -7,11 +7,11 @@
 				<SubtypeId>SC_Radome</SubtypeId>
 			</Id>
 			<DisplayName>Sauron Radome Unit</DisplayName>
-			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+			<Icon>Textures\GUI\Icons\SC_Radome.dds</Icon>
 			<Description>Extends scroll targeting range.[17.5KM RANGE]</Description>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
-			<Size x="3" y="2" z="5"/>
+			<Size x="1" y="1" z="1"/>
 			<ModelOffset x="0" y="0" z="0" />
 			<Model>Models\Starcore\SC_Radome.mwm</Model>
 			<Components>
@@ -57,7 +57,7 @@
 			<CubeSize>Large</CubeSize>
 			<GuiVisible>true</GuiVisible>
 			<BlockTopology>TriangleMesh</BlockTopology>
-			<Size x="3" y="2" z="5"/>
+			<Size x="1" y="1" z="1"/>
 			<ModelOffset x="0" y="0" z="0" />
 			<Model>Models\Starcore_RWR\RWR_Reciever.mwm</Model>
 			<Components>
@@ -107,7 +107,7 @@
 			<CubeSize>Large</CubeSize>
 			<GuiVisible>true</GuiVisible>
 			<BlockTopology>TriangleMesh</BlockTopology>
-			<Size x="3" y="2" z="5"/>
+			<Size x="1" y="1" z="1"/>
 			<ModelOffset x="0" y="0" z="0" />
 			<Model>Models\Starcore_RWR\RWR_Reciever.mwm</Model>
 			<Components>

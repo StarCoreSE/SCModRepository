@@ -55,6 +55,7 @@ namespace Scripts {
                 TopBlocks = 10, // Maximum number of blocks to randomize between; 0 = unlimited.
                 CycleBlocks = 5, 
                 StopTrackingSpeed = 0, // Do not track threats traveling faster than this speed; 0 = unlimited.
+                ShootBlanks = true, // Do not generate projectiles when shooting
                 Communications = new CommunicationDef
                 {
                     StoreTargets = true, // Pushes its current target to the grid/construct so that other slaved weapons can fire on it.
@@ -101,12 +102,12 @@ namespace Scripts {
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0.015f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
-                    ElevateRate = 0.010f, // Max traversal speed of elevation subpart in radians per tick.
+                    RotateRate = 1f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
+                    ElevateRate = 1f, // Max traversal speed of elevation subpart in radians per tick.
                     MinAzimuth = -180,
                     MaxAzimuth = 180,
-                    MinElevation = -24,
-                    MaxElevation = 70,
+                    MinElevation = -90,
+                    MaxElevation = 90,
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 0, // Default resting elevation
                     InventorySize = 1f, // Inventory capacity in kL.
