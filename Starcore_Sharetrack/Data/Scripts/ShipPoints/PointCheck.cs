@@ -26,6 +26,7 @@ using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
 using VRage.Noise.Patterns;
 using VRage;
 using System.Linq;
+using Sandbox.Game;
 
 namespace klime.PointCheck
 {
@@ -323,6 +324,7 @@ namespace klime.PointCheck
                 //Team3Tickets.Value = MatchTickets;
                 LocalMatchState = 1;
                 MyAPIGateway.Utilities.ShowMessage("GM", "You are the captain now.");
+                MyVisualScriptLogicProvider.SendChatMessage("HEY DUMBASS, IS DAMAGE ON?", "Muzzled", font: "Red");
             }
 
             if (messageText.Contains("/end"))
