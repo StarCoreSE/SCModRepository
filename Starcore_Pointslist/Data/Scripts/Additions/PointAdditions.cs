@@ -105,7 +105,7 @@ namespace ShipPoints
 				AncientAfterburnerT41@50;
 				AncientAfterburnerT42@150;
 				AncientAfterburnerT42L@150;
-				AncientAfterburnerT43@250;
+				AncientAfterburnerT43@200;
 				AncientAfterburnerT44@250;
 				MA_Tiger@150;
 				MA_Crouching_Tiger@150;
