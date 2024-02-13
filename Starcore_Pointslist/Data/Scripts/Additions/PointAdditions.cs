@@ -486,7 +486,7 @@ namespace ShipPoints
 				Reaver_Coilgun_Block@200; 
 				RailgunTurret_Block@450; 
                 Null_Point_Jump_Disruptor_Large@99999;
-				LargeGatlingTurret_SC@175;
+				LargeGatlingTurret_SC@125;
 				LargeMissileTurret_SC@155;
 				LargeBlockMediumCalibreTurret_SC@250;
 				LargeCalibreTurret_SC@250;
