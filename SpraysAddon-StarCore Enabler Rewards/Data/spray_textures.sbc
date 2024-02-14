@@ -16,7 +16,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -34,7 +34,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -52,7 +52,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -70,7 +70,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -88,7 +88,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -106,7 +106,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -124,7 +124,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -142,7 +142,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -160,7 +160,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -178,7 +178,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -196,7 +196,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -214,7 +214,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -232,7 +232,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -250,7 +250,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -268,7 +268,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -286,7 +286,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -304,7 +304,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -322,7 +322,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -340,7 +340,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -358,7 +358,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -376,7 +376,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -394,7 +394,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -412,7 +412,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -430,7 +430,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -448,7 +448,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -466,7 +466,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -484,7 +484,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -502,7 +502,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -520,7 +520,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -538,7 +538,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -556,7 +556,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -574,7 +574,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -592,7 +592,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -610,7 +610,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -628,7 +628,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -646,7 +646,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -664,7 +664,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -682,7 +682,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -700,7 +700,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -718,7 +718,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -736,7 +736,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -754,7 +754,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -772,7 +772,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -790,7 +790,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -808,7 +808,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -826,7 +826,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -844,7 +844,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -862,7 +862,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -880,7 +880,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -898,7 +898,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -916,7 +916,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -934,7 +934,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -952,7 +952,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -970,7 +970,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -988,7 +988,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1006,7 +1006,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1024,7 +1024,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1042,7 +1042,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1060,7 +1060,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1078,7 +1078,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1096,7 +1096,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1114,7 +1114,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1132,7 +1132,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1150,7 +1150,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1168,7 +1168,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1186,7 +1186,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1204,7 +1204,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1222,7 +1222,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1240,7 +1240,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1258,7 +1258,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1276,7 +1276,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1294,7 +1294,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1312,7 +1312,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1330,7 +1330,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1348,7 +1348,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1366,7 +1366,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1384,7 +1384,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1402,7 +1402,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1420,7 +1420,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1438,7 +1438,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1456,7 +1456,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1474,7 +1474,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1492,7 +1492,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1510,7 +1510,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1528,7 +1528,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1546,7 +1546,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1564,7 +1564,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1582,7 +1582,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1600,7 +1600,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1618,7 +1618,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1636,7 +1636,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1654,7 +1654,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1672,7 +1672,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1690,7 +1690,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1708,7 +1708,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1726,7 +1726,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1744,7 +1744,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1762,7 +1762,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1780,7 +1780,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1798,7 +1798,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1816,7 +1816,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1834,7 +1834,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1852,7 +1852,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1870,7 +1870,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1888,7 +1888,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1906,7 +1906,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1924,7 +1924,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1942,7 +1942,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1960,7 +1960,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1978,7 +1978,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -1996,7 +1996,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2014,7 +2014,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2032,7 +2032,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2050,7 +2050,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2068,7 +2068,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2086,7 +2086,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2104,7 +2104,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2122,7 +2122,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2140,7 +2140,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2158,7 +2158,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2176,7 +2176,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2194,7 +2194,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2212,7 +2212,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2230,7 +2230,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2248,7 +2248,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2266,7 +2266,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2284,7 +2284,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2302,7 +2302,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2320,7 +2320,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2338,7 +2338,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2356,7 +2356,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
     <Decal>
@@ -2374,7 +2374,7 @@
       <MinSize>1</MinSize>
       <MaxSize>1</MaxSize>
       <Rotation>0</Rotation>
-      <RenderDistance>5000.0</RenderDistance>
+      <RenderDistance>50000.0</RenderDistance>
       <Depth>0.3</Depth>
     </Decal>
   </Decals>
