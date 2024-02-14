@@ -93,7 +93,6 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             writer.Flush();
         }
 
-
         public void Close()
         {
             if (writer != null)
