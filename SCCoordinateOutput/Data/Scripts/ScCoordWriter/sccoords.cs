@@ -11,20 +11,10 @@ using VRage.Utils;
 using VRageMath;
 using System.IO;
 using ProtoBuf;
+using Jnick_SCModRepository.SCCoordinateOutput.Data.Scripts.ScCoordWriter;
 
 namespace YourName.ModName.Data.Scripts.ScCoordWriter
 {
-    // Define packet structure for command handling
-    [ProtoContract]
-    public class CommandPacket
-    {
-        [ProtoMember(1)]
-        public bool StartCommand;
-
-        [ProtoMember(2)]
-        public bool StopCommand;
-    }
-
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Cockpit), false)]
     public class coordoutput : MyGameLogicComponent
     {
@@ -32,11 +22,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         private const string fileExtension = ".scc";
         private int tickCounter = 0;
         CoordWriter writer;
-        private List<string> createdFiles = new List<string>(); // Maintain a list of created filenames
-
-        private ushort netID = 29400; // Define a unique network ID for message communication
-
-        private bool isCommandHandlerRegistered = false; // Flag to track if command handler is registered
+        //private List<string> createdFiles = new List<string>(); // Maintain a list of created filenames
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
@@ -46,33 +32,8 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             // Always register for chat commands, on both server and clients
             MyAPIGateway.Utilities.MessageEntered += OnMessageEntered;
 
-            // Only register the message handler on the server
-            if (MyAPIGateway.Session.IsServer)
-            {
-                MyAPIGateway.Utilities.InvokeOnGameThread(() =>
-                {
-                    MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(netID, CommandHandler);
-                    isCommandHandlerRegistered = true;
-                });
-            }
-        }
-
-        // Define message handler for command handling
-        private void CommandHandler(ushort arg1, byte[] arg2, ulong arg3, bool arg4)
-        {
-            if (!MyAPIGateway.Session.IsServer) return; // Only handle commands on the server
-
-            CommandPacket packet = MyAPIGateway.Utilities.SerializeFromBinary<CommandPacket>(arg2);
-            if (packet == null) return;
-
-            if (packet.StartCommand)
-            {
-                StartGlobalWriter();
-            }
-            else if (packet.StopCommand)
-            {
-                StopGlobalWriter();
-            }
+            CoordsNetworking.I.StartGlobalWriter += StartGlobalWriter;
+            CoordsNetworking.I.StopGlobalWriter += StopGlobalWriter;
         }
 
         private void StartGlobalWriter()
@@ -136,42 +97,36 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             return playerFaction != null ? playerFaction.Name : "Unowned";
         }
 
-        public override void UpdateOnceBeforeFrame()
-        {
-            // Add the filename to the list of created files when it's created
-            if (writer != null && !createdFiles.Contains(writer.FileName))
-            {
-                createdFiles.Add(writer.FileName);
-            }
-        }
+        //public override void UpdateOnceBeforeFrame()
+        //{
+        //    // Add the filename to the list of created files when it's created
+        //    if (writer != null && !createdFiles.Contains(writer.FileName))
+        //    {
+        //        createdFiles.Add(writer.FileName);
+        //    }
+        //}
 
         private void OnMessageEntered(string messageText, ref bool sendToOthers)
         {
+            // invalid, might I suggest .ToLower()
             if (!messageText.StartsWith("/coordwriter", StringComparison.OrdinalIgnoreCase)) return;
             sendToOthers = false; // Prevent command from being sent to other players' chat
 
             string[] parts = messageText.Split(' ');
             if (parts.Length < 2) return;
 
-            CommandPacket packet = new CommandPacket();
-            if (string.Equals(parts[1], "start", StringComparison.OrdinalIgnoreCase))
-            {
-                packet.StartCommand = true;
-            }
-            else if (string.Equals(parts[1], "stop", StringComparison.OrdinalIgnoreCase))
-            {
-                packet.StopCommand = true;
-            }
+            // little bit silly but It Just Works???
+            if (parts[1].ToLower().Contains("start"))
+                CoordsNetworking.I?.SendMessage(true);
+            else if (parts[1].ToLower().Contains("stop"))
+                CoordsNetworking.I?.SendMessage(false);
             else
-            {
-                // Invalid command feedback
-                MyAPIGateway.Utilities.ShowMessage("Coord Writer", "Invalid command. Use '/coordwriter start' or '/coordwriter stop'.");
-                return;
-            }
+                ShowCommandList();
 
-            // Serialize and send the command packet to the server
-            var serializedPacket = MyAPIGateway.Utilities.SerializeToBinary(packet);
-            MyAPIGateway.Multiplayer.SendMessageToServer(netID, serializedPacket);
+            if (CoordsNetworking.I == null)
+            {
+                MyLog.Default.WriteLineAndConsole("YOU'RE A FUCKING IDIOT, ARISTEAS!");
+            }
         }
 
         private void ShowCommandList()
@@ -183,23 +138,6 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
 
         public override void Close()
         {
-            // Safely unregister message handler on the main thread
-            if (isCommandHandlerRegistered && netID != 0)
-            {
-                if (MyAPIGateway.Utilities != null && MyAPIGateway.Multiplayer != null)
-                {
-                    MyAPIGateway.Utilities.InvokeOnGameThread(() =>
-                    {
-                        // Further check to ensure that MyAPIGateway.Multiplayer is still not null when this lambda executes
-                        if (MyAPIGateway.Multiplayer != null)
-                        {
-                            MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(netID, CommandHandler);
-                            isCommandHandlerRegistered = false; // Ensure to set the flag to false after unregistering
-                        }
-                    });
-                }
-            }
-
             // Dispose of writer safely
             DisposeWriterSafely();
 
