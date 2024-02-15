@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CubeBlocks>
+    <Definition xsi:type="MyObjectBuilder_UpgradeModuleDefinition">
+      <Id>
+        <TypeId>UpgradeModule</TypeId>
+        <SubtypeId>BlinkDriveCustomLarge</SubtypeId>
+      </Id>
+      <DisplayName>cUSTOM Blink Drive Large</DisplayName>
+      <Icon>Textures\GUI\Icons\BlinkDriveIcon.dds</Icon>
+      <Description>XD</Description>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="3" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Large\BlinkDrive_Base_Large.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="20" />
+        <Component Subtype="LargeTube" Count="10" />
+        <Component Subtype="GravityGenerator" Count="20" />
+        <Component Subtype="Detector" Count="20" />
+        <Component Subtype="PowerCell" Count="50" />
+        <Component Subtype="Superconductor" Count="500" />
+        <Component Subtype="Motor" Count="8" />
+        <Component Subtype="Computer" Count="100" />
+        <Component Subtype="Construction" Count="40" />
+        <Component Subtype="SteelPlate" Count="80" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Right" StartX="1" StartY="1" EndX="2" EndY="2" />
+        <MountPoint Side="Left" StartX="1" StartY="1" EndX="2" EndY="2" />
+        <MountPoint Side="Top" StartX="1" StartY="1" EndX="2" EndY="2" />
+        <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="2" EndY="2" Default="true" />
+        <MountPoint Side="Front" StartX="1" StartY="1" EndX="2" EndY="2" />
+        <MountPoint Side="Back" StartX="1" StartY="1" EndX="2" EndY="2" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\BlinkDrive_Base_Large_Constr1.mwm" />
+        <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BlinkDrive_Base_Large_Constr2.mwm" />
+        <Model BuildPercentUpperBound="1.0" File="Models\Cubes\Large\BlinkDrive_Base_Large_Constr3.mwm" />
+      </BuildProgressModels>
+      <BuildTimeSeconds>120</BuildTimeSeconds>
+      <BlockPairName>BlinkDriveCustomLarge</BlockPairName>
+      <MirroringX>Z</MirroringX>
+      <MirroringZ>X</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <Upgrades>
+      </Upgrades>
+      <PrimarySound>BlockModuleProductivity</PrimarySound>
+      <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+      <DamagedSound>ParticleElectrical</DamagedSound>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <IsAirTight>false</IsAirTight>
+    </Definition>
+
+    <Definition xsi:type="MyObjectBuilder_UpgradeModuleDefinition">
+      <Id>
+        <TypeId>UpgradeModule</TypeId>
+        <SubtypeId>BlinkDriveSmall</SubtypeId>
+      </Id>
+      <DisplayName>Blink Drive Small</DisplayName>
+      <Icon>Textures\GUI\Icons\BlinkDriveIcon.dds</Icon>
+      <Description>Military grade jump drive. Provides instant, short range jumps, in and out of gravity wells.</Description>
+      <CubeSize>Small</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="3" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Small\BlinkDrive_Base_Small.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="2" />
+        <Component Subtype="LargeTube" Count="1" />
+        <Component Subtype="GravityGenerator" Count="2" />
+        <Component Subtype="Detector" Count="2" />
+        <Component Subtype="PowerCell" Count="5" />
+        <Component Subtype="Superconductor" Count="50" />
+        <Component Subtype="Motor" Count="2" />
+        <Component Subtype="Computer" Count="10" />
+        <Component Subtype="Construction" Count="4" />
+        <Component Subtype="SteelPlate" Count="10" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Right" StartX="1" StartY="1" EndX="2" EndY="2" />
+        <MountPoint Side="Left" StartX="1" StartY="1" EndX="2" EndY="2" />
+        <MountPoint Side="Top" StartX="1" StartY="1" EndX="2" EndY="2" />
+        <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="2" EndY="2" Default="true" />
+        <MountPoint Side="Front" StartX="1" StartY="1" EndX="2" EndY="2" />
+        <MountPoint Side="Back" StartX="1" StartY="1" EndX="2" EndY="2" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="0.33" File="Models\Cubes\Small\BlinkDrive_Base_Small_Constr1.mwm" />
+        <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Small\BlinkDrive_Base_Small_Constr2.mwm" />
+        <Model BuildPercentUpperBound="1.0" File="Models\Cubes\Small\BlinkDrive_Base_Small_Constr3.mwm" />
+      </BuildProgressModels>
+      <BuildTimeSeconds>30</BuildTimeSeconds>
+      <BlockPairName>BlinkDrivePair</BlockPairName>
+      <MirroringX>Z</MirroringX>
+      <MirroringZ>X</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <Upgrades>
+      </Upgrades>
+      <PrimarySound>BlockModuleProductivity</PrimarySound>
+      <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+      <DamagedSound>ParticleElectrical</DamagedSound>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <IsAirTight>false</IsAirTight>
+    </Definition>
+  </CubeBlocks>
+</Definitions>
