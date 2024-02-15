@@ -71,7 +71,8 @@ namespace Invalid.BlinkDrive
             newWorldMatrix.Translation = teleportPosition;
 
             // Perform the teleportation
-            MyVisualScriptLogicProvider.SetEntityPosition(block.CubeGrid.Name, teleportPosition);
+            (block.CubeGrid as MyEntity).Teleport(newWorldMatrix);
+            ///MyVisualScriptLogicProvider.SetEntityPosition(block.CubeGrid.Name, teleportPosition);
             MyLog.Default.WriteLineAndConsole("Teleporting to " + teleportPosition.ToString());
 
             // Notify the player that the blink drive has been activated
