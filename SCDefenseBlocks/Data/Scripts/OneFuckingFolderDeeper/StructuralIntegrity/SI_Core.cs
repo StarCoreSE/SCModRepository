@@ -822,7 +822,7 @@ namespace StarCore.StructuralIntegrity
                 var logic = b?.GameLogic?.GetAs<SI_Core>();
                 if (logic != null)
                 {
-                    sb.Append("Increase");
+                    sb.Append($"{logic.FieldPowerSync.Value}%");
                 }
             };
             increaseFieldPower.InvalidToolbarTypes = new List<MyToolbarType>()
@@ -862,7 +862,7 @@ namespace StarCore.StructuralIntegrity
                 var logic = b?.GameLogic?.GetAs<SI_Core>();
                 if (logic != null)
                 {
-                    sb.Append("Decrease");
+                    sb.Append($"{ logic.FieldPowerSync.Value}% ");
                 }
             };
             decreaseFieldPower.InvalidToolbarTypes = new List<MyToolbarType>()
