@@ -1,6 +1,7 @@
 ﻿using Sandbox.Common.ObjectBuilders;
 using Sandbox.Game;
 using Sandbox.Game.Entities;
+using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
 using Sandbox.ModAPI.Interfaces.Terminal;
 using System;
@@ -17,10 +18,10 @@ using VRageMath;
 
 namespace Invalid.BlinkDrive
 {
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_UpgradeModule), false, "BlinkDriveCustomLarge")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "BlinkDriveCustomLarge")]
     public class BlinkDrive : MyGameLogicComponent
     {
-        private IMyCubeBlock block;
+        private IMyCollector block;
         private MySync<bool, SyncDirection.BothWays> requestJumpSync;
         private int jumpCooldownTimer;
         private const int cooldownDuration = 10 * 60; // 10 seconds * 60 frames per second
@@ -32,8 +33,8 @@ namespace Invalid.BlinkDrive
             base.Init(objectBuilder);
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME | MyEntityUpdateEnum.EACH_FRAME;
 
-            block = (IMyCubeBlock)Entity;
-           // requestJumpSync = new MySync<bool, SyncDirection.BothWays>(this, nameof(requestJumpSync));
+            block = (IMyCollector)Entity;
+            // requestJumpSync = new MySync<bool, SyncDirection.BothWays>(this, nameof(requestJumpSync));
             requestJumpSync.ValueChanged += RequestJumpSync_ValueChanged;
         }
 
@@ -82,11 +83,39 @@ namespace Invalid.BlinkDrive
 
         public override void UpdateOnceBeforeFrame()
         {
-            base.UpdateOnceBeforeFrame();
+            // Check if the block and its cube grid are valid
+            if (block == null || block.CubeGrid == null)
+                return;
+
+            // Check if the block's cube grid physics are valid
+            if (block.CubeGrid.Physics == null)
+                return;
+
+            var sink = Entity.Components.Get<MyResourceSinkComponent>();
+
+            // Initialize controls if not already created
             if (!controlsCreated)
             {
                 CreateTerminalControls();
+                controlsCreated = true;
             }
+
+            if (sink != null)
+            {
+                sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, ComputePowerRequired);
+                sink.Update();
+            }
+        }
+
+        private float ComputePowerRequired()
+        {
+            if (!block.IsWorking || !block.IsFunctional)
+                return 0f;
+
+            // You can add your power calculation logic here.
+            // For example, you can return a constant value or calculate it based on some conditions.
+
+            return 300.0f; // Return a constant value for demonstration purposes.
         }
 
         private static void CreateTerminalControls()
@@ -94,7 +123,7 @@ namespace Invalid.BlinkDrive
             MyLog.Default.WriteLineAndConsole("CreateTerminalControls method called");
             controlsCreated = true;
 
-            var blinkDriveButton = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlButton, IMyUpgradeModule>("BlinkDrive_ActivateButton");
+            var blinkDriveButton = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlButton, IMyCollector>("BlinkDrive_ActivateButton");
             blinkDriveButton.Enabled = (b) => b.GameLogic is BlinkDrive;
             blinkDriveButton.Visible = (b) => b.GameLogic is BlinkDrive;
             blinkDriveButton.Title = MyStringId.GetOrCompute("Activate Blink Drive");
@@ -108,9 +137,9 @@ namespace Invalid.BlinkDrive
                     drive.requestJumpSync.Value = true;
                 }
             };
-            MyAPIGateway.TerminalControls.AddControl<IMyUpgradeModule>(blinkDriveButton);
+            MyAPIGateway.TerminalControls.AddControl<IMyCollector>(blinkDriveButton);
 
-            var blinkDriveCockpitAction = MyAPIGateway.TerminalControls.CreateAction<IMyUpgradeModule>("BlinkDriveActivate");
+            var blinkDriveCockpitAction = MyAPIGateway.TerminalControls.CreateAction<IMyCollector>("BlinkDriveActivate");
             blinkDriveCockpitAction.Name = new StringBuilder("Activate Blink Drive");
             blinkDriveCockpitAction.Icon = @"Textures\GUI\Icons\Actions\Start.dds";
             blinkDriveCockpitAction.Action = (b) =>
@@ -137,7 +166,7 @@ namespace Invalid.BlinkDrive
             };
             blinkDriveCockpitAction.Enabled = (b) => b.GameLogic is BlinkDrive;
 
-            MyAPIGateway.TerminalControls.AddAction<IMyUpgradeModule>(blinkDriveCockpitAction);
+            MyAPIGateway.TerminalControls.AddAction<IMyCollector>(blinkDriveCockpitAction);
         }
 
         private void ResetJumpRequest()
