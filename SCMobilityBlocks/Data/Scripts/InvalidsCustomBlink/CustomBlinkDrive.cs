@@ -84,12 +84,6 @@ namespace Invalid.BlinkDrive
             return false;
         }
 
-        private const int lineDrawDuration = 180; // 2 seconds * 60 frames per second
-
-        private int lineDrawTimer = 0;
-        private bool isDrawingLine = false;
-
-
         private Vector3D originalPosition;
         private Vector3D teleportPosition;
 
@@ -109,24 +103,9 @@ namespace Invalid.BlinkDrive
             MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("InvalidCustomBlinkParticleEnter", originalPosition);
             MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("InvalidCustomBlinkParticleLeave", teleportPosition);
 
-            // Set flags for drawing line
-            isDrawingLine = true;
-            lineDrawTimer = lineDrawDuration;
-
             // Reset jump request and start cooldown
             ResetJumpRequest();
             StartRechargeTimer();
-        }
-
-        private void DrawLine(Vector3D start, Vector3D end, MyStringId? material, Vector4 color, float thickness)
-        {
-            Vector3D vec = end - start;
-            float num = (float)vec.Length();
-            if (num > 0.1f)
-            {
-                vec.Normalize();
-                MyTransparentGeometry.AddLineBillboard(material ?? MyStringId.GetOrCompute("LineMaterial"), color, start, vec, num, thickness, MyBillboard.BlendTypeEnum.Standard);
-            }
         }
 
         private void StartRechargeTimer()
@@ -195,27 +174,12 @@ namespace Invalid.BlinkDrive
                 sink.Update();
             }
 
-            // Decrease cooldown timers if they're greater than 0 and only draw line if a charge is being recharged
+            // Decrease cooldown timers if they're greater than 0
             for (int i = 0; i < jumpCooldownTimers.Length; i++)
             {
                 if (jumpCooldownTimers[i] > 0)
                 {
                     jumpCooldownTimers[i]--;
-                    if (isDrawingLine)
-                    {
-                        if (lineDrawTimer > 0)
-                        {
-                            // Draw the line
-                            DrawLine(originalPosition, teleportPosition, null, new Vector4(100, 100, 100, 1), 10f);
-                            lineDrawTimer--;
-                        }
-                        else
-                        {
-                            // Reset drawing flags
-                            isDrawingLine = false;
-                            lineDrawTimer = 0;
-                        }
-                    }
                 }
             }
         }
@@ -240,7 +204,6 @@ namespace Invalid.BlinkDrive
         private static void CreateTerminalControls()
         {
             MyLog.Default.WriteLineAndConsole("CreateTerminalControls method called");
-            controlsCreated = true;
 
             var blinkDriveButton = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlButton, IMyCollector>("BlinkDrive_ActivateButton");
             blinkDriveButton.Enabled = (b) => b.GameLogic is BlinkDrive;
