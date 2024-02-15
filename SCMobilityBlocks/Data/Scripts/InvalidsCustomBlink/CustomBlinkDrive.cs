@@ -25,8 +25,9 @@ namespace Invalid.BlinkDrive
     {
         private IMyCollector block;
         private MySync<bool, SyncDirection.BothWays> requestJumpSync;
-        private int jumpCooldownTimer;
+        private int[] jumpCooldownTimers = new int[3];
         private const int cooldownDuration = 10 * 60; // 10 seconds * 60 frames per second
+        private const int rechargeTime = 10 * 60; // 10 seconds * 60 frames per second
 
         static bool controlsCreated = false;
 
@@ -62,8 +63,14 @@ namespace Invalid.BlinkDrive
             if (!block.IsWorking || !block.IsFunctional)
                 return false;
 
-            // Check if the grid has at least 300 MW of available power
-            return HasEnoughPower() && jumpCooldownTimer <= 0;
+            // Check if any charge is available
+            foreach (int timer in jumpCooldownTimers)
+            {
+                if (timer <= 0)
+                    return true;
+            }
+
+            return false;
         }
 
         private bool HasEnoughPower()
@@ -103,16 +110,13 @@ namespace Invalid.BlinkDrive
             MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("InvalidCustomBlinkParticleEnter", originalPosition);
             MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("InvalidCustomBlinkParticleLeave", teleportPosition);
 
-            // Draw a line between original and teleported positions
-            DrawLine(originalPosition, teleportPosition, null, new Vector4(255, 255, 255, 1), 100f);
-
             // Set flags for drawing line
             isDrawingLine = true;
             lineDrawTimer = lineDrawDuration;
 
             // Reset jump request and start cooldown
             ResetJumpRequest();
-            jumpCooldownTimer = cooldownDuration;
+            StartRechargeTimer();
         }
 
         private void DrawLine(Vector3D start, Vector3D end, MyStringId? material, Vector4 color, float thickness)
@@ -126,6 +130,17 @@ namespace Invalid.BlinkDrive
             }
         }
 
+        private void StartRechargeTimer()
+        {
+            for (int i = 0; i < jumpCooldownTimers.Length; i++)
+            {
+                if (jumpCooldownTimers[i] <= 0)
+                {
+                    jumpCooldownTimers[i] = rechargeTime;
+                    break;
+                }
+            }
+        }
 
         public override void UpdateOnceBeforeFrame()
         {
@@ -181,10 +196,11 @@ namespace Invalid.BlinkDrive
                 sink.Update();
             }
 
-            // Decrease cooldown timer if it's greater than 0
-            if (jumpCooldownTimer > 0)
+            // Decrease cooldown timers if they're greater than 0
+            for (int i = 0; i < jumpCooldownTimers.Length; i++)
             {
-                jumpCooldownTimer--;
+                if (jumpCooldownTimers[i] > 0)
+                    jumpCooldownTimers[i]--;
             }
 
             if (isDrawingLine)
@@ -206,7 +222,7 @@ namespace Invalid.BlinkDrive
 
         private float ComputePowerRequired()
         {
-            if (!block.IsWorking || !block.IsFunctional || jumpCooldownTimer <= 0)
+            if (!block.IsWorking || !block.IsFunctional)
                 return 0f;
 
             // You can add your power calculation logic here.
@@ -253,19 +269,17 @@ namespace Invalid.BlinkDrive
                 var drive = b.GameLogic.GetAs<BlinkDrive>();
                 if (drive != null)
                 {
-                    if (!drive.CanJump() && drive.jumpCooldownTimer <= 0) // Check if cooldown is not in progress
+                    int chargesRemaining = 0;
+                    foreach (int timer in drive.jumpCooldownTimers)
                     {
-                        sb.Append("NO POWER");
+                        if (timer <= 0)
+                            chargesRemaining++;
                     }
-                    else
-                    {
-                        int secondsRemaining = Math.Max(drive.jumpCooldownTimer / 60, 0); // Convert frames to seconds
-                        sb.Append($"CD {secondsRemaining}s");
-                    }
+                    sb.Append($"Chrg: {chargesRemaining}");
                 }
                 else
                 {
-                    sb.Append("Unable to retrieve cooldown information.");
+                    sb.Append("Unable to retrieve charge information.");
                 }
             };
             blinkDriveCockpitAction.Enabled = (b) => b.GameLogic is BlinkDrive;
