@@ -72,14 +72,6 @@ namespace Invalid.BlinkDrive
             jumpCooldownTimer = cooldownDuration;
         }
 
-        public override void UpdateAfterSimulation()
-        {
-            base.UpdateAfterSimulation();
-            if (jumpCooldownTimer > 0)
-            {
-                jumpCooldownTimer--;
-            }
-        }
 
         public override void UpdateOnceBeforeFrame()
         {
@@ -107,9 +99,44 @@ namespace Invalid.BlinkDrive
             }
         }
 
+        public override void UpdateAfterSimulation()
+        {
+            base.UpdateAfterSimulation();
+
+            // Check if the block and its cube grid are valid
+            if (block == null || block.CubeGrid == null)
+                return;
+
+            // Check if the block's cube grid physics are valid
+            if (block.CubeGrid.Physics == null)
+                return;
+
+            // Check if the block is still working and functional
+            if (!block.IsWorking || !block.IsFunctional)
+            {
+                // If not, reset the jump request and do not update the cooldown timer
+                ResetJumpRequest();
+                return;
+            }
+
+            // Perform power calculation
+            var sink = Entity.Components.Get<MyResourceSinkComponent>();
+            if (sink != null)
+            {
+                sink.SetRequiredInputByType(MyResourceDistributorComponent.ElectricityId, ComputePowerRequired());
+                sink.Update();
+            }
+
+            // Decrease cooldown timer if it's greater than 0
+            if (jumpCooldownTimer > 0)
+            {
+                jumpCooldownTimer--;
+            }
+        }
+
         private float ComputePowerRequired()
         {
-            if (!block.IsWorking || !block.IsFunctional)
+            if (!block.IsWorking || !block.IsFunctional || jumpCooldownTimer <= 0)
                 return 0f;
 
             // You can add your power calculation logic here.
