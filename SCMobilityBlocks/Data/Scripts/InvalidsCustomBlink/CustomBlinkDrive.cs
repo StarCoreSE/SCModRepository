@@ -84,6 +84,8 @@ namespace Invalid.BlinkDrive
             newWorldMatrix.Translation = teleportPosition;
             (block.CubeGrid as MyEntity).Teleport(newWorldMatrix);
 
+            MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("HESFAST", block.CubeGrid.PositionComp.GetPosition());
+
             // Reset jump request and start cooldown
             ResetJumpRequest();
             jumpCooldownTimer = cooldownDuration;
