@@ -105,7 +105,7 @@ namespace ShipPoints
 				AncientAfterburnerT41@50;
 				AncientAfterburnerT42@150;
 				AncientAfterburnerT42L@150;
-				AncientAfterburnerT43@250;
+				AncientAfterburnerT43@200;
 				AncientAfterburnerT44@250;
 				MA_Tiger@150;
 				MA_Crouching_Tiger@150;
@@ -486,7 +486,7 @@ namespace ShipPoints
 				Reaver_Coilgun_Block@200; 
 				RailgunTurret_Block@450; 
                 Null_Point_Jump_Disruptor_Large@99999;
-				LargeGatlingTurret_SC@175;
+				LargeGatlingTurret_SC@125;
 				LargeMissileTurret_SC@155;
 				LargeBlockMediumCalibreTurret_SC@250;
 				LargeCalibreTurret_SC@250;

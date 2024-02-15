@@ -11,7 +11,7 @@
     <Sound>
       <Id>
         <TypeId>AudioDefinition</TypeId>
-        <SubtypeId>BlinkDrive</SubtypeId>
+        <SubtypeId>HESFAST</SubtypeId>
       </Id>
       <MaxDistance>2000</MaxDistance>
       <!--<UpdateDistance>1000</UpdateDistance>-->

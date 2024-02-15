@@ -89,16 +89,16 @@ namespace Scripts {
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0.06f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
+                    RotateRate = 0.05f,
                     ElevateRate = 0.06f, // Max traversal speed of elevation subpart in radians per tick.
                     MinAzimuth = -180,
                     MaxAzimuth = 180,
-                    MinElevation = -50,
-                    MaxElevation = 180,
+                    MinElevation = -6,
+                    MaxElevation = 95,
                     HomeAzimuth = 0, // Default resting rotation angle
-                    HomeElevation = -9, // Default resting elevation
-                    InventorySize = 0.658f, // Inventory capacity in kL.
-                    IdlePower = 12f, // Constant base power draw in MW.
+                    HomeElevation = 25, // Default resting elevation
+                    InventorySize = 1f, // Inventory capacity in kL.
+                    IdlePower = 0.02f, // Constant base power draw in MW.
                     FixedOffset = false, // Deprecated.
                     Offset = Vector(x: 0, y: 0, z: 0), // Offsets the aiming/firing line of the weapon, in metres.
                     Type = BlockWeapon, // What type of weapon this is; BlockWeapon, HandWeapon, Phantom 
@@ -108,7 +108,7 @@ namespace Scripts {
                         DefaultArmedTimer = 120, // Sets default countdown duration.
                         PreArmed = false, // Whether the warhead is armed by default when placed. Best left as false.
                         TerminalControls = true, // Whether the warhead should have terminal controls for arming and detonation.
-                        AmmoRound = "", // Optional. If specified, the warhead will always use this ammo on detonation rather than the currently selected ammo.
+                        AmmoRound = "Starcore_AMS_I_BulletBase", // Optional. If specified, the warhead will always use this ammo on detonation rather than the currently selected ammo.
                     },
                 },
                 Other = new OtherDef
