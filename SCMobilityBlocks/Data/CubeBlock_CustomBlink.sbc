@@ -4,9 +4,9 @@
     <Definition xsi:type="MyObjectBuilder_PoweredCargoContainerDefinition">
       <Id>
         <TypeId>Collector</TypeId>
-        <SubtypeId>BlinkDriveCustomLarge</SubtypeId>
+        <SubtypeId>BlinkDriveLarge</SubtypeId>
       </Id>
-      <DisplayName>cUSTOM Blink Drive Large</DisplayName>
+      <DisplayName>Standard Blink Drive</DisplayName>
       <Icon>Textures\GUI\Icons\BlinkDriveIcon.dds</Icon>
       <Description>XD</Description>
       <CubeSize>Large</CubeSize>

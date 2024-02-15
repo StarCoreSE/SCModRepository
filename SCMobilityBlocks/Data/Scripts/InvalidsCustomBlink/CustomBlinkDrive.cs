@@ -20,7 +20,7 @@ using VRageRender;
 
 namespace Invalid.BlinkDrive
 {
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "BlinkDriveCustomLarge")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "BlinkDriveLarge")]
     public class BlinkDrive : MyGameLogicComponent
     {
         private IMyCollector block;
