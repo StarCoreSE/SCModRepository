@@ -277,7 +277,7 @@ namespace Invalid.BlinkDrive
                 if (drive != null)
                 {
                     int chargesRemaining = 0;
-                    StringBuilder cooldownText = new StringBuilder();
+                    int nextCooldown = -1;
                     for (int i = 0; i < drive.jumpCooldownTimers.Length; i++)
                     {
                         int timer = drive.jumpCooldownTimers[i];
@@ -285,13 +285,18 @@ namespace Invalid.BlinkDrive
                         {
                             chargesRemaining++;
                         }
-                        else
+                        else if (nextCooldown == -1 || timer < nextCooldown)
                         {
-                            // Display cooldown time remaining for each charge
-                            cooldownText.Append($"CD{i + 1}: {timer / 60}s  "); // Convert frames to seconds
+                            // Find the shortest cooldown time
+                            nextCooldown = timer;
                         }
                     }
-                    sb.Append($"Chrg: {chargesRemaining}  {cooldownText}");
+                    if (nextCooldown != -1)
+                    {
+                        // Display cooldown time remaining for the next charge
+                        sb.Append($"{nextCooldown / 60}s  ");
+                    }
+                    sb.Append($"C:{chargesRemaining}");
                 }
                 else
                 {
