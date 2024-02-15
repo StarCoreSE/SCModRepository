@@ -1,4 +1,5 @@
 ﻿using Sandbox.Common.ObjectBuilders;
+using Sandbox.Game;
 using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
 using Sandbox.ModAPI.Interfaces.Terminal;
@@ -20,7 +21,7 @@ namespace Invalid.BlinkDrive
     public class BlinkDrive : MyGameLogicComponent, IMyEventProxy
     {
         private IMyCubeBlock block;
-        private MySync<bool, SyncDirection.BothWays> activateBlink;
+        private MySync<bool, SyncDirection.BothWays> requestJumpSync;
         static bool controlsCreated = false;
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
@@ -28,21 +29,39 @@ namespace Invalid.BlinkDrive
             base.Init(objectBuilder);
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
 
-            activateBlink.ValueChanged += ActivateBlink_ValueChanged;
-
             block = (IMyCubeBlock)Entity;
+
+            MyLog.Default.WriteLineAndConsole("Init method called");
+
+            //requestJumpSync.Value = false;
+            // Initialize the MySync variable with an initial value
+            requestJumpSync.ValueChanged += RequestJumpSync_ValueChanged;
         }
 
-        private void ActivateBlink_ValueChanged(MySync<bool, SyncDirection.BothWays> obj)
+        private void RequestJumpSync_ValueChanged(MySync<bool, SyncDirection.BothWays> obj)
         {
+            MyLog.Default.WriteLineAndConsole("RequestJumpSync_ValueChanged method called");
             if (obj.Value)
             {
-                PerformBlink();
+                MyLog.Default.WriteLineAndConsole("PerformBlink will be called");
+                if (MyAPIGateway.Multiplayer.IsServer)
+                {
+                    PerformBlink();
+                }
+                else
+                {
+                    MyLog.Default.WriteLineAndConsole("PerformBlink skipped because not running on server.");
+                }
+            }
+            else
+            {
+                MyLog.Default.WriteLineAndConsole("Value is false");
             }
         }
 
         private void PerformBlink()
         {
+            MyLog.Default.WriteLineAndConsole("PerformBlink method called");
             // Calculate the forward vector and the target teleportation position
             Vector3D forwardVector = block.WorldMatrix.Forward;
             Vector3D teleportPosition = block.CubeGrid.WorldMatrix.Translation + (forwardVector * 1000); // 1km forward
@@ -52,24 +71,29 @@ namespace Invalid.BlinkDrive
             newWorldMatrix.Translation = teleportPosition;
 
             // Perform the teleportation
-            (block.CubeGrid as MyEntity).Teleport(newWorldMatrix);
+            MyVisualScriptLogicProvider.SetEntityPosition(block.CubeGrid.Name, teleportPosition);
+            MyLog.Default.WriteLineAndConsole("Teleporting to " + teleportPosition.ToString());
 
             // Notify the player that the blink drive has been activated
             MyAPIGateway.Utilities.ShowNotification("Blink Drive Activated!", 2000, "Green");
-        }
 
+            // Reset the request after performing the jump
+            requestJumpSync.Value = false;
+        }
 
         public override void UpdateOnceBeforeFrame()
         {
             base.UpdateOnceBeforeFrame();
+            MyLog.Default.WriteLineAndConsole("UpdateOnceBeforeFrame method called");
             if (!controlsCreated)
             {
                 CreateTerminalControls();
             }
         }
 
-        static void CreateTerminalControls()
+        private static void CreateTerminalControls()
         {
+            MyLog.Default.WriteLineAndConsole("CreateTerminalControls method called");
             controlsCreated = true;
 
             // Create a terminal button for activating the Blink Drive
@@ -83,8 +107,9 @@ namespace Invalid.BlinkDrive
                 var drive = b.GameLogic.GetAs<BlinkDrive>();
                 if (drive != null)
                 {
-                    // Perform Blink without toggling a value, ensuring a single activation
-                    drive.PerformBlink();
+                    MyLog.Default.WriteLineAndConsole("Button action called");
+                    // Set the request to jump to true
+                    drive.requestJumpSync.Value = true;
                 }
             };
             MyAPIGateway.TerminalControls.AddControl<IMyUpgradeModule>(blinkDriveButton);
@@ -99,8 +124,9 @@ namespace Invalid.BlinkDrive
                 var drive = b.GameLogic.GetAs<BlinkDrive>();
                 if (drive != null)
                 {
-                    // Directly call PerformBlink to simulate a button press
-                    drive.PerformBlink();
+                    MyLog.Default.WriteLineAndConsole("Cockpit action called");
+                    // Set the request to jump to true
+                    drive.requestJumpSync.Value = true;
                 }
             };
             blinkDriveCockpitAction.Writer = (b, sb) =>
@@ -110,18 +136,18 @@ namespace Invalid.BlinkDrive
             blinkDriveCockpitAction.Enabled = b => b.GameLogic is BlinkDrive;
 
             MyAPIGateway.TerminalControls.AddAction<IMyUpgradeModule>(blinkDriveCockpitAction);
-
         }
-
 
         public override void Close()
         {
             base.Close();
+            MyLog.Default.WriteLineAndConsole("Close method called");
 
-            // Unsubscribe from events
-            if (activateBlink != null)
+            // Dispose the MySync variable
+            if (requestJumpSync != null)
             {
-                activateBlink.ValueChanged -= ActivateBlink_ValueChanged;
+                requestJumpSync.ValueChanged -= RequestJumpSync_ValueChanged;
+                requestJumpSync = null;
             }
         }
     }
