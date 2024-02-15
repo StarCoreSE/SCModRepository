@@ -2,6 +2,7 @@
 using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
 using Sandbox.ModAPI.Interfaces.Terminal;
+using System.Text;
 using VRage.Game.Components;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
@@ -71,23 +72,47 @@ namespace Invalid.BlinkDrive
         {
             controlsCreated = true;
 
-            var blinkDriveActivation = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlOnOffSwitch, IMyUpgradeModule>("BlinkDrive_Activate");
-            blinkDriveActivation.Enabled = (b) => b.GameLogic is BlinkDrive;
-            blinkDriveActivation.Visible = (b) => b.GameLogic is BlinkDrive;
-            blinkDriveActivation.Title = MyStringId.GetOrCompute("Activate Blink Drive");
-            blinkDriveActivation.Getter = (b) => (b.GameLogic.GetAs<BlinkDrive>()?.activateBlink.Value) ?? false;
-            blinkDriveActivation.Setter = (b, v) =>
+            // Create a terminal button for activating the Blink Drive
+            var blinkDriveButton = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlButton, IMyUpgradeModule>("BlinkDrive_ActivateButton");
+            blinkDriveButton.Enabled = (b) => b.GameLogic is BlinkDrive;
+            blinkDriveButton.Visible = (b) => b.GameLogic is BlinkDrive;
+            blinkDriveButton.Title = MyStringId.GetOrCompute("Activate Blink Drive");
+            blinkDriveButton.Tooltip = MyStringId.GetOrCompute("Activates the Blink Drive for a single jump.");
+            blinkDriveButton.Action = (b) =>
             {
                 var drive = b.GameLogic.GetAs<BlinkDrive>();
                 if (drive != null)
                 {
-                    drive.activateBlink.Value = v; // Syncs the value
+                    // Perform Blink without toggling a value, ensuring a single activation
+                    drive.PerformBlink();
                 }
             };
-            blinkDriveActivation.OnText = MyStringId.GetOrCompute("On");
-            blinkDriveActivation.OffText = MyStringId.GetOrCompute("Off");
-            MyAPIGateway.TerminalControls.AddControl<IMyUpgradeModule>(blinkDriveActivation);
+            MyAPIGateway.TerminalControls.AddControl<IMyUpgradeModule>(blinkDriveButton);
+
+            // Now, add an action for cockpit activation
+            var blinkDriveCockpitAction = MyAPIGateway.TerminalControls.CreateAction<IMyUpgradeModule>("BlinkDriveActivate");
+            blinkDriveCockpitAction.Name = new StringBuilder("Activate Blink Drive");
+            // Specify an icon for the action. Adjust the path to match an actual icon file in your mod or game assets.
+            blinkDriveCockpitAction.Icon = @"Textures\GUI\Icons\Actions\Start.dds";
+            blinkDriveCockpitAction.Action = b =>
+            {
+                var drive = b.GameLogic.GetAs<BlinkDrive>();
+                if (drive != null)
+                {
+                    // Directly call PerformBlink to simulate a button press
+                    drive.PerformBlink();
+                }
+            };
+            blinkDriveCockpitAction.Writer = (b, sb) =>
+            {
+                sb.Append("Activates the Blink Drive for a single jump.");
+            };
+            blinkDriveCockpitAction.Enabled = b => b.GameLogic is BlinkDrive;
+
+            MyAPIGateway.TerminalControls.AddAction<IMyUpgradeModule>(blinkDriveCockpitAction);
+
         }
+
 
         public override void Close()
         {
