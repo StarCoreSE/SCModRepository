@@ -31,7 +31,7 @@ namespace Invalid.BlinkDrive
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             base.Init(objectBuilder);
-            NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
+            NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME | MyEntityUpdateEnum.EACH_FRAME;
 
             block = (IMyCubeBlock)Entity;
 
@@ -81,10 +81,9 @@ namespace Invalid.BlinkDrive
             jumpCooldownTimer = 0; // Reset cooldown timer
         }
 
-        public override void UpdateBeforeSimulation()
+        public override void UpdateAfterSimulation()
         {
-            base.UpdateBeforeSimulation();
-
+              MyAPIGateway.Utilities.ShowNotification("FICL", 2000, "Green");
             if (jumpCooldownTimer > 0)
             {
                 jumpCooldownTimer--;

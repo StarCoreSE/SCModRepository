@@ -152,7 +152,7 @@ namespace BlinkDrive
 			return base.IsSerialized();
 		}
 
-		public override void UpdateBeforeSimulation()
+		public override void UpdateAfterSimulation()
 		{
 			UpdatePowerRequirements();
 			UpdateBlockEmissives();
