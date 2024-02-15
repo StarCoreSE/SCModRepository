@@ -6,6 +6,7 @@ using Sandbox.ModAPI;
 using Sandbox.ModAPI.Interfaces.Terminal;
 using System;
 using System.Text;
+using VRage.Game;
 using VRage.Game.Components;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
@@ -15,6 +16,7 @@ using VRage.ObjectBuilders;
 using VRage.Sync;
 using VRage.Utils;
 using VRageMath;
+using VRageRender;
 
 namespace Invalid.BlinkDrive
 {
@@ -76,19 +78,52 @@ namespace Invalid.BlinkDrive
             return false;
         }
 
+        private const int lineDrawDuration = 120; // 2 seconds * 60 frames per second
+
+        private int lineDrawTimer = 0;
+        private bool isDrawingLine = false;
+
+
+        private Vector3D originalPosition;
+        private Vector3D teleportPosition;
+
         private void PerformBlink()
         {
             Vector3D forwardVector = block.WorldMatrix.Forward;
-            Vector3D teleportPosition = block.CubeGrid.WorldMatrix.Translation + (forwardVector * 1000); // 1km forward
+            originalPosition = block.CubeGrid.WorldMatrix.Translation; // Original position
+            teleportPosition = originalPosition + (forwardVector * 1000); // Teleported position
+
             MatrixD newWorldMatrix = block.CubeGrid.WorldMatrix;
             newWorldMatrix.Translation = teleportPosition;
             (block.CubeGrid as MyEntity).Teleport(newWorldMatrix);
 
-            MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("HESFAST", block.CubeGrid.PositionComp.GetPosition());
+            // Play particle effects at both original and teleported positions
+            MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("HESFAST", originalPosition);
+            MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("HESFAST", teleportPosition);
+            MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("InvalidCustomBlinkParticleEnter", originalPosition);
+            MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("InvalidCustomBlinkParticleLeave", teleportPosition);
+
+            // Draw a line between original and teleported positions
+            DrawLine(originalPosition, teleportPosition, null, new Vector4(255, 255, 255, 1), 100f);
+
+            // Set flags for drawing line
+            isDrawingLine = true;
+            lineDrawTimer = lineDrawDuration;
 
             // Reset jump request and start cooldown
             ResetJumpRequest();
             jumpCooldownTimer = cooldownDuration;
+        }
+
+        private void DrawLine(Vector3D start, Vector3D end, MyStringId? material, Vector4 color, float thickness)
+        {
+            Vector3D vec = end - start;
+            float num = (float)vec.Length();
+            if (num > 0.1f)
+            {
+                vec.Normalize();
+                MyTransparentGeometry.AddLineBillboard(material ?? MyStringId.GetOrCompute("LineMaterial"), color, start, vec, num, thickness, MyBillboard.BlendTypeEnum.Standard);
+            }
         }
 
 
@@ -150,6 +185,22 @@ namespace Invalid.BlinkDrive
             if (jumpCooldownTimer > 0)
             {
                 jumpCooldownTimer--;
+            }
+
+            if (isDrawingLine)
+            {
+                if (lineDrawTimer > 0)
+                {
+                    // Draw the line
+                    DrawLine(originalPosition, teleportPosition, null, new Vector4(100, 100, 100, 1), 10f);
+                    lineDrawTimer--;
+                }
+                else
+                {
+                    // Reset drawing flags
+                    isDrawingLine = false;
+                    lineDrawTimer = 0;
+                }
             }
         }
 

@@ -28,12 +28,6 @@
       </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
       <MountPoints>
-        <MountPoint Side="Right" StartX="1" StartY="1" EndX="2" EndY="2" />
-        <MountPoint Side="Left" StartX="1" StartY="1" EndX="2" EndY="2" />
-        <MountPoint Side="Top" StartX="1" StartY="1" EndX="2" EndY="2" />
-        <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="2" EndY="2" Default="true" />
-        <MountPoint Side="Front" StartX="1" StartY="1" EndX="2" EndY="2" />
-        <MountPoint Side="Back" StartX="1" StartY="1" EndX="2" EndY="2" />
       </MountPoints>
       <BuildProgressModels>
         <Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\BlinkDrive_Base_Large_Constr1.mwm" />
