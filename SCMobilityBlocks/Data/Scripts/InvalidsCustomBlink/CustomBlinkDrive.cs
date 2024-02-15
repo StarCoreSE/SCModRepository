@@ -26,8 +26,7 @@ namespace Invalid.BlinkDrive
         private IMyCollector block;
         private MySync<bool, SyncDirection.BothWays> requestJumpSync;
         private int[] jumpCooldownTimers = new int[3];
-        private const int cooldownDuration = 10 * 60; // 10 seconds * 60 frames per second
-        private const int rechargeTime = 10 * 60; // 10 seconds * 60 frames per second
+        private const int rechargeTime = 60 * 60; // 10 seconds * 60 frames per second
 
         static bool controlsCreated = false;
 
