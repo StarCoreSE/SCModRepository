@@ -56,7 +56,24 @@ namespace Invalid.BlinkDrive
 
         private bool CanJump()
         {
-            return jumpCooldownTimer <= 0;
+            // Check if the block is working and functional
+            if (!block.IsWorking || !block.IsFunctional)
+                return false;
+
+            // Check if the grid has at least 300 MW of available power
+            return HasEnoughPower() && jumpCooldownTimer <= 0;
+        }
+
+        private bool HasEnoughPower()
+        {
+            // Get the power sink component
+            var sink = block.Components.Get<MyResourceSinkComponent>();
+            if (sink != null)
+            {
+                // Check if the available input power is at least 300 MW
+                return sink.SuppliedRatioByType(MyResourceDistributorComponent.ElectricityId) >= 0.3f;
+            }
+            return false;
         }
 
         private void PerformBlink()
@@ -183,8 +200,15 @@ namespace Invalid.BlinkDrive
                 var drive = b.GameLogic.GetAs<BlinkDrive>();
                 if (drive != null)
                 {
-                    int secondsRemaining = Math.Max(drive.jumpCooldownTimer / 60, 0); // Convert frames to seconds
-                    sb.Append($"CD {secondsRemaining} s");
+                    if (!drive.CanJump() && drive.jumpCooldownTimer <= 0) // Check if cooldown is not in progress
+                    {
+                        sb.Append("NO POWER");
+                    }
+                    else
+                    {
+                        int secondsRemaining = Math.Max(drive.jumpCooldownTimer / 60, 0); // Convert frames to seconds
+                        sb.Append($"CD {secondsRemaining}s");
+                    }
                 }
                 else
                 {
