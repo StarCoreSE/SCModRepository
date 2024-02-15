@@ -85,7 +85,7 @@ namespace Invalid.BlinkDrive
             return false;
         }
 
-        private const int lineDrawDuration = 120; // 2 seconds * 60 frames per second
+        private const int lineDrawDuration = 180; // 2 seconds * 60 frames per second
 
         private int lineDrawTimer = 0;
         private bool isDrawingLine = false;
@@ -196,39 +196,46 @@ namespace Invalid.BlinkDrive
                 sink.Update();
             }
 
-            // Decrease cooldown timers if they're greater than 0
+            // Decrease cooldown timers if they're greater than 0 and only draw line if a charge is being recharged
             for (int i = 0; i < jumpCooldownTimers.Length; i++)
             {
                 if (jumpCooldownTimers[i] > 0)
+                {
                     jumpCooldownTimers[i]--;
-            }
-
-            if (isDrawingLine)
-            {
-                if (lineDrawTimer > 0)
-                {
-                    // Draw the line
-                    DrawLine(originalPosition, teleportPosition, null, new Vector4(100, 100, 100, 1), 10f);
-                    lineDrawTimer--;
-                }
-                else
-                {
-                    // Reset drawing flags
-                    isDrawingLine = false;
-                    lineDrawTimer = 0;
+                    if (isDrawingLine)
+                    {
+                        if (lineDrawTimer > 0)
+                        {
+                            // Draw the line
+                            DrawLine(originalPosition, teleportPosition, null, new Vector4(100, 100, 100, 1), 10f);
+                            lineDrawTimer--;
+                        }
+                        else
+                        {
+                            // Reset drawing flags
+                            isDrawingLine = false;
+                            lineDrawTimer = 0;
+                        }
+                    }
                 }
             }
         }
 
         private float ComputePowerRequired()
         {
-            if (!block.IsWorking || !block.IsFunctional)
-                return 0f;
+            float powerRequired = 0f;
 
-            // You can add your power calculation logic here.
-            // For example, you can return a constant value or calculate it based on some conditions.
+            // Calculate power required for each charge being recharged
+            foreach (int timer in jumpCooldownTimers)
+            {
+                if (timer > 0 && block.IsWorking && block.IsFunctional)
+                {
+                    // Power is consumed while recharging
+                    powerRequired += 100f; // Assuming each charge consumes 100 MW
+                }
+            }
 
-            return 300.0f; // Return a constant value for demonstration purposes.
+            return powerRequired;
         }
 
         private static void CreateTerminalControls()
@@ -270,12 +277,21 @@ namespace Invalid.BlinkDrive
                 if (drive != null)
                 {
                     int chargesRemaining = 0;
-                    foreach (int timer in drive.jumpCooldownTimers)
+                    StringBuilder cooldownText = new StringBuilder();
+                    for (int i = 0; i < drive.jumpCooldownTimers.Length; i++)
                     {
+                        int timer = drive.jumpCooldownTimers[i];
                         if (timer <= 0)
+                        {
                             chargesRemaining++;
+                        }
+                        else
+                        {
+                            // Display cooldown time remaining for each charge
+                            cooldownText.Append($"CD{i + 1}: {timer / 60}s  "); // Convert frames to seconds
+                        }
                     }
-                    sb.Append($"Chrg: {chargesRemaining}");
+                    sb.Append($"Chrg: {chargesRemaining}  {cooldownText}");
                 }
                 else
                 {
