@@ -30,10 +30,10 @@ namespace Scripts
 { // Don't edit above this line
     partial class Parts
     {
-        private AmmoDef ForagerLightCoilgunAmmoWC => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef AryxLightCoilgunAmmoWC => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
-            AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "High Power Forager", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoMagazine = "AryxLightCoilgunAmmo", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
+            AmmoRound = "High Power Hunter", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.0825f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 5000f, // Direct damage; one steel plate is worth 100.
@@ -42,7 +42,7 @@ namespace Scripts
             BackKickForce = 10000000f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
-            EnergyMagazineSize = 1, // For energy weapons, how many shots to fire before reloading.
+            EnergyMagazineSize = 0, // For energy weapons, how many shots to fire before reloading.
             IgnoreWater = false, // Whether the projectile should be able to penetrate water when using WaterMod.
             IgnoreVoxels = false, // Whether the projectile should be able to penetrate voxels.
             HeatModifier = -1f, // Allows this ammo to modify the amount of heat the weapon produces per shot.
@@ -58,8 +58,8 @@ namespace Scripts
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
-                AmmoRound = "Forager Shrapnel", // AmmoRound field of the ammo to spawn.
-                Fragments = 5, // Number of projectiles to spawn.
+                AmmoRound = "Hunter Shrapnel", // AmmoRound field of the ammo to spawn.
+                Fragments = 75, // Number of projectiles to spawn.
                 Degrees = 80, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = false, // fragments will not inherit velocity from parent.
@@ -174,7 +174,7 @@ namespace Scripts
                 {
                     Enable = true,
                     Radius = 3f, // Meters
-                    Damage = 400000f,
+                    Damage = 40000f,
                     Depth = 1f,
                     MaxAbsorb = 0f,
                     Falloff = Linear, //.NoFalloff applies the same damage to all blocks in radius
@@ -188,8 +188,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1,
-                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "ArcWepShipOnyxCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "AWESabreBlast", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "ArcWepShipARYXCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 }, 
             },
@@ -310,7 +310,7 @@ namespace Scripts
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "OnyxNone",
+                        Name = "AWESabreBlast",
                         ApplyToShield = true,
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
@@ -344,7 +344,7 @@ namespace Scripts
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
-                            "OnyxBallisticTracer", // Please always have this Line set, if this Section is enabled.
+                            "AryxBallisticTracer", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal, // Normal, Cycle, Chaos, Wave
                         Segmentation = new SegmentDef
@@ -368,7 +368,7 @@ namespace Scripts
                     {
                         Enable = true,
                         Textures = new[] {
-                            "OnyxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
+                            "AryxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
                         DecayTime = 120, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
@@ -411,13 +411,13 @@ namespace Scripts
             }, // Don't edit below this line
         };
 
-        private AmmoDef ForagerLightCoilgunAmmoShrapWC => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef AryxLightCoilgunAmmoShrapWC => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "Forager Shrapnel", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoRound = "Hunter Shrapnel", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 247500f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 16500f, // Direct damage; one steel plate is worth 100.
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
@@ -721,7 +721,7 @@ namespace Scripts
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
-                            "OnyxBallisticTracer", // Please always have this Line set, if this Section is enabled.
+                            "AryxBallisticTracer", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal, // Normal, Cycle, Chaos, Wave
                         Segmentation = new SegmentDef
@@ -745,7 +745,7 @@ namespace Scripts
                     {
                         Enable = true,
                         Textures = new[] {
-                            "OnyxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
+                            "AryxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
                         DecayTime = 120, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
@@ -789,10 +789,10 @@ namespace Scripts
             }, // Don't edit below this line
         };
 
-        private AmmoDef ForagerLightCoilgunAmmoWC_L => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef AryxLightCoilgunAmmoWC_L => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
-            AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "Low Power Forager", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoMagazine = "AryxLightCoilgunAmmo", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
+            AmmoRound = "Low Power Hunter", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.0825f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 2500, // Direct damage; one steel plate is worth 100.
@@ -801,7 +801,7 @@ namespace Scripts
             BackKickForce = 14000000f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
-            EnergyMagazineSize = 1, // For energy weapons, how many shots to fire before reloading.
+            EnergyMagazineSize = 0, // For energy weapons, how many shots to fire before reloading.
             IgnoreWater = false, // Whether the projectile should be able to penetrate water when using WaterMod.
             IgnoreVoxels = false, // Whether the projectile should be able to penetrate voxels.
             HeatModifier = -1f, // Allows this ammo to modify the amount of heat the weapon produces per shot.
@@ -947,8 +947,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1f,
-                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "ArcWepShipOnyxCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "AWESabreBlast", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "ArcWepShipARYXCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
             },
@@ -1069,7 +1069,7 @@ namespace Scripts
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "OnyxNone",
+                        Name = "AWESabreBlast_RED",
                         ApplyToShield = true,
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
@@ -1103,7 +1103,7 @@ namespace Scripts
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
-                            "OnyxBallisticTracer", // Please always have this Line set, if this Section is enabled.
+                            "AryxBallisticTracer", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal, // Normal, Cycle, Chaos, Wave
                         Segmentation = new SegmentDef
@@ -1127,7 +1127,7 @@ namespace Scripts
                     {
                         Enable = true,
                         Textures = new[] {
-                            "OnyxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
+                            "AryxPulseLaserEffectL2", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
                         DecayTime = 120, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
@@ -1170,10 +1170,10 @@ namespace Scripts
             }, // Don't edit below this line
         };
 
-        private AmmoDef ForagerLightCoilgunAmmoWC_U => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef AryxLightCoilgunAmmoWC_U => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "Unlimited Power Forager", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoRound = "Unlimited Power Hunter", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.45f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 800f, // Direct damage; one steel plate is worth 100.
@@ -1328,8 +1328,8 @@ namespace Scripts
                     NoVisuals = true,
                     NoSound = true,
                     ParticleScale = 0.5f,
-                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "ArcWepShipOnyxCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "AWESabreBlast", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "ArcWepShipARYXCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
             },
@@ -1553,7 +1553,7 @@ namespace Scripts
             }, // Don't edit below this line
         };
 
-        private AmmoDef ForagerLightCoilgunAmmoWC_U_Branch => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef AryxLightCoilgunAmmoWC_U_Branch => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Unlimited Power Branch", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
@@ -1711,8 +1711,8 @@ namespace Scripts
                     NoVisuals = true,
                     NoSound = true,
                     ParticleScale = 0.5f,
-                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "ArcWepShipOnyxCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "AWESabreBlast", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "ArcWepShipARYXCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
             },
@@ -1935,7 +1935,7 @@ namespace Scripts
             }, // Don't edit below this line
         };
 
-        private AmmoDef ForagerLightCoilgunAmmoWC_U_Effect1 => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef AryxLightCoilgunAmmoWC_U_Effect1 => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Unlimited Power Branch 1", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
@@ -2093,8 +2093,8 @@ namespace Scripts
                     NoVisuals = true,
                     NoSound = true,
                     ParticleScale = 0.5f,
-                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "ArcWepShipOnyxCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "AWESabreBlast", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "ArcWepShipARYXCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
             },
@@ -2317,7 +2317,7 @@ namespace Scripts
             }, // Don't edit below this line
         };
 
-        private AmmoDef ForagerLightCoilgunAmmoWC_U_Effect2 => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef AryxLightCoilgunAmmoWC_U_Effect2 => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Unlimited Power Branch 2", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
@@ -2475,8 +2475,8 @@ namespace Scripts
                     NoVisuals = true,
                     NoSound = true,
                     ParticleScale = 0.5f,
-                    CustomParticle = "GenericOnyxExplosion", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "ArcWepShipOnyxCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "AWESabreBlast", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "ArcWepShipARYXCoilgun_Impact", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
             },
