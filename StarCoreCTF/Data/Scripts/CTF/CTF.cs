@@ -129,7 +129,8 @@ namespace Klime.CTF
         bool drop_in_cockpit = false;
         DropType drop_type = DropType.Ground;
         int drop_reset_time = 300;
-        double flagPickupRadius = 500;
+        double flagPickupRadius = 300;
+        float flagDropoffSizeMultiplier = 1.5f;
 
         public class BackgroundUIElement
         {
@@ -812,19 +813,28 @@ namespace Klime.CTF
                                             {
                                                 if ((otherflag.flag_entity.EntityId != subflag.entity_id) && otherflag.state == FlagState.Home)
                                                 {
-                                                    double distance = Vector3D.Distance(subflag.flag_entity.WorldMatrix.Translation, otherflag.flag_entity.WorldMatrix.Translation);
+                                                    // Create a bounding box slightly larger than the grid's
+                                                    BoundingBoxD captureBox = cockpit.CubeGrid.WorldAABB;
+                                                    captureBox.Centerize(Vector3D.Zero);
+                                                    captureBox.Min *= flagDropoffSizeMultiplier;
+                                                    captureBox.Max *= flagDropoffSizeMultiplier;
+                                                    captureBox.Centerize(subflag.flag_entity.WorldMatrix.Translation);
+                                                    Color c = Color.Red;
+                                                    MySimpleObjectDraw.DrawTransparentBox(ref MatrixD.Identity, ref captureBox, ref c, MySimpleObjectRasterizer.Wireframe, 100);
+
+                                                    //double distance = Vector3D.Distance(subflag.flag_entity.WorldMatrix.Translation, otherflag.flag_entity.WorldMatrix.Translation);
                                                     bool valid_cap = false;
 
-                                                    if (pickup_in_cockpit)
+                                                    if (pickup_in_cockpit) // Dropoff range
                                                     {
-                                                        if (distance <= 150)
+                                                        if (captureBox.Contains(otherflag.flag_entity.WorldMatrix.Translation) == ContainmentType.Contains)
                                                         {
                                                             valid_cap = true;
                                                         }
                                                     }
-                                                    else
+                                                    else // Dropoff range
                                                     {
-                                                        if (distance <= 40)
+                                                        if (captureBox.Contains(otherflag.flag_entity.WorldMatrix.Translation) == ContainmentType.Contains)
                                                         {
                                                             valid_cap = true;
                                                         }
