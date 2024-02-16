@@ -10,7 +10,11 @@ namespace Scripts
             // Enable your definitions using the follow syntax:
             // PartDefinitions(Your1stDefinition, Your2ndDefinition, Your3rdDefinition);
             // PartDefinitions includes both weapons and phantoms
-            PartDefinitions(NID_Pyroacid, NID_HeavyPyroacid, NID_Bioplasma, NID_Hivedrone, NID_BioplasmaHivedrone, NID_Leap, LightParticleWhip, ParticleWhip, NovaCannon);
+            PartDefinitions(NID_Pyroacid, NID_HeavyPyroacid, NID_Bioplasma, NID_Hivedrone, NID_BioplasmaHivedrone,
+                            LightParticleWhip, ParticleWhip, FluxArcSmall, FluxArcLarge, MonoWhip, MonoWhipSmall,
+                            NovaCannon, HeavyBolterSmall, HeavyBolterSmallSponson, HeavyBolterLargeSponson, Lascannon, 
+                            BattleCannon, PlasmaCannon, EarthshakerCannon);
+
         }
     }
 }
