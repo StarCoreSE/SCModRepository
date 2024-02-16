@@ -173,7 +173,7 @@
       <!--<DistantSounds>
 			  <DistantSound DistanceCrossFade="10" Distance="200" Sound = "MyAssaultDistantHit" />
 		  </DistantSounds>-->
-      <Loopable>true</Loopable>
+      <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
           <Start>Audio\Screech\Screech1.wav</Start>
@@ -214,7 +214,7 @@
       <!--<DistantSounds>
 			  <DistantSound DistanceCrossFade="10" Distance="2000" Sound = "MyAssaultDistantHit" />
 		  </DistantSounds>-->
-      <Loopable>true</Loopable>
+      <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
           <Start>Audio\Distant_Screech\Distant_Screech1.wav</Start>
@@ -287,7 +287,7 @@
       <Volume>2</Volume>
       <VolumeVariation>0</VolumeVariation>
       <PitchVariation>50</PitchVariation>
-      <Loopable>true</Loopable>
+      <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
           <Start>Audio\Nid\Pyroacid_Fire.wav</Start>
@@ -308,7 +308,7 @@
       <Volume>2</Volume>
       <VolumeVariation>0</VolumeVariation>
       <PitchVariation>50</PitchVariation>
-      <Loopable>true</Loopable>
+      <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
           <Start>Audio\Nid\Pyroacid_Fire2.wav</Start>
@@ -329,7 +329,7 @@
       <Volume>1.5</Volume>
       <VolumeVariation>0.5</VolumeVariation>
       <PitchVariation>100</PitchVariation>
-      <Loopable>true</Loopable>
+      <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
           <Start>Audio\Nid\Pyroacid_Bubble.wav</Start>

@@ -17,7 +17,7 @@
       <DistantSounds>
         <DistantSound DistanceCrossFade="10" Distance="300" Sound = "NecronChargeDist" />
       </DistantSounds>
-      <Loopable>true</Loopable>
+      <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
           <Start>Audio\WEP\NecronWindup.wav</Start>
@@ -37,7 +37,7 @@
       <DynamicMusicAmount>35</DynamicMusicAmount>
       <Volume>1</Volume>
       <PitchVariation>10</PitchVariation>
-      <Loopable>true</Loopable>
+      <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
           <Start>Audio\WEP\NecronWindupDist.wav</Start>
@@ -58,7 +58,7 @@
       <DynamicMusicAmount>35</DynamicMusicAmount>
       <Volume>1</Volume>
       <PitchVariation>10</PitchVariation>
-      <Loopable>true</Loopable>
+      <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
           <Start>Audio\WEP\NecronLightWindup.wav</Start>
@@ -81,9 +81,9 @@
       <Volume>1</Volume>
       <PitchVariation>10</PitchVariation>
       <DistantSounds>
-        <DistantSound DistanceCrossFade="10" Distance="800" Sound = "NecronFireDist" />
+        <DistantSound DistanceCrossFade="10" Distance="500" Sound = "NecronFireDist" />
       </DistantSounds>
-      <Loopable>true</Loopable>
+      <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
           <Start>Audio\WEP\NecronFire.wav</Start>
@@ -103,7 +103,7 @@
       <DynamicMusicAmount>35</DynamicMusicAmount>
       <Volume>2</Volume>
       <PitchVariation>10</PitchVariation>
-      <Loopable>true</Loopable>
+      <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
           <Start>Audio\WEP\NecronFireDist.wav</Start>
@@ -112,22 +112,68 @@
     </Sound>
 
 
+
     <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>NerconLightFire</SubtypeId>
+        <SubtypeId>NerconMonoFire</SubtypeId>
       </Id>
       <Category>SHOT</Category>
       <MaxDistance>8000</MaxDistance>
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>1</Volume>
+      <Volume>2</Volume>
       <PitchVariation>10</PitchVariation>
       <DistantSounds>
-        <DistantSound DistanceCrossFade="10" Distance="800" Sound = "NecronLightFireDist" />
+        <DistantSound DistanceCrossFade="10" Distance="600" Sound = "NecronMonoFireDist" />
       </DistantSounds>
-      <Loopable>true</Loopable>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\NecronMonoFire.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>NecronMonoFireDist</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>6000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <PitchVariation>10</PitchVariation>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\NecronMonoFireDist.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>NerconLightFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>4000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>0.5</Volume>
+      <PitchVariation>10</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossFade="10" Distance="500" Sound = "NecronLightFireDist" />
+      </DistantSounds>
+      <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
           <Start>Audio\WEP\NecronLightFire.wav</Start>
@@ -145,9 +191,9 @@
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>1</Volume>
+      <Volume>0.5</Volume>
       <PitchVariation>10</PitchVariation>
-      <Loopable>true</Loopable>
+      <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
           <Start>Audio\WEP\NecronLightFireDist.wav</Start>
@@ -168,7 +214,7 @@
       <DynamicMusicAmount>35</DynamicMusicAmount>
       <Volume>2</Volume>
       <PitchVariation>10</PitchVariation>
-      <Loopable>true</Loopable>
+      <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
           <Start>Audio\WEP\NecronTravel.wav</Start>
@@ -189,7 +235,7 @@
       <DynamicMusicAmount>35</DynamicMusicAmount>
       <Volume>4</Volume>
       <PitchVariation>10</PitchVariation>
-      <Loopable>true</Loopable>
+      <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
           <Start>Audio\WEP\NecronHit.wav</Start>
@@ -210,7 +256,7 @@
       <DynamicMusicAmount>35</DynamicMusicAmount>
       <Volume>1</Volume>
       <PitchVariation>10</PitchVariation>
-      <Loopable>true</Loopable>
+      <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
           <Start>Audio\WEP\NecronHit.wav</Start>

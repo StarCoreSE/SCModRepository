@@ -39,7 +39,7 @@ namespace Scripts {
             Targeting = new TargetingDef
             {
                 Threats = new[] {
-                    Grids, Projectiles, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals, ScanRoid, ScanPlanet, ScanFriendlyCharacter, ScanFriendlyGrid, ScanEnemyCharacter, ScanEnemyGrid, ScanNeutralCharacter, ScanNeutralGrid, ScanUnOwnedGrid, ScanOwnersGrid
+                    Grids,  // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals, ScanRoid, ScanPlanet, ScanFriendlyCharacter, ScanFriendlyGrid, ScanEnemyCharacter, ScanEnemyGrid, ScanNeutralCharacter, ScanNeutralGrid, ScanUnOwnedGrid, ScanOwnersGrid
                 },
                 SubSystems = new[] {
                     Power, Thrust, Utility, Offense, Production, Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
@@ -81,7 +81,7 @@ namespace Scripts {
             HardPoint = new HardPointDef
             {
                 PartName = "LightParticleWhip", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
-                DeviateShotAngle = 0.3f, // Projectile inaccuracy in degrees.
+                DeviateShotAngle = 0.1f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 1f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
                 DelayCeaseFire = 0, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released - while a target is available.
@@ -149,14 +149,14 @@ namespace Scripts {
                 },
                 Loading = new LoadingDef
                 {
-                    RateOfFire = 20, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
+                    RateOfFire = 600, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
                     BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
-                    ReloadTime = 300, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    ReloadTime = 480, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 85, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    HeatPerShot = 1000, // Heat generated per shot.
+                    HeatPerShot = 10, // Heat generated per shot.
                     MaxHeat = 1000, // Max heat before weapon enters cooldown (70% of max heat).
                     Cooldown = .05f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
                     HeatSinkRate = 2000, // Amount of heat lost per second.

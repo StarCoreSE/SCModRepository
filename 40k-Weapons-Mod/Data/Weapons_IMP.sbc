@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Weapons>
+    <Weapon>
+      <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>Nova</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="1" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+      <ReleaseTimeAfterFire>0</ReleaseTimeAfterFire>
+      <DeviateShotAngle>0</DeviateShotAngle>
+      <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+      <AmmoMagazines>
+        <AmmoMagazine Subtype="Energy" />
+      </AmmoMagazines>
+      <ReloadTime>0</ReloadTime>
+    </Weapon>
+
+  <Weapon>
+      <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>HeavyBolter</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="1" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+      <ReleaseTimeAfterFire>0</ReleaseTimeAfterFire>
+      <DeviateShotAngle>0</DeviateShotAngle>
+      <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+      <AmmoMagazines>
+        <AmmoMagazine Subtype="Energy" />
+      </AmmoMagazines>
+      <ReloadTime>0</ReloadTime>
+    </Weapon>
+
+    <Weapon>
+      <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>HeavyBolterSmallSponson</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="1" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+      <ReleaseTimeAfterFire>0</ReleaseTimeAfterFire>
+      <DeviateShotAngle>0</DeviateShotAngle>
+      <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+      <AmmoMagazines>
+        <AmmoMagazine Subtype="Energy" />
+      </AmmoMagazines>
+      <ReloadTime>0</ReloadTime>
+    </Weapon>
+
+    <Weapon>
+      <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>HeavyBolterLargeSponson</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="1" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+      <ReleaseTimeAfterFire>0</ReleaseTimeAfterFire>
+      <DeviateShotAngle>0</DeviateShotAngle>
+      <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+      <AmmoMagazines>
+        <AmmoMagazine Subtype="Energy" />
+      </AmmoMagazines>
+      <ReloadTime>0</ReloadTime>
+    </Weapon>
+    
+    <Weapon>
+      <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>Lascannon</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="1" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+      <ReleaseTimeAfterFire>0</ReleaseTimeAfterFire>
+      <DeviateShotAngle>0</DeviateShotAngle>
+      <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+      <AmmoMagazines>
+        <AmmoMagazine Subtype="Energy" />
+      </AmmoMagazines>
+      <ReloadTime>0</ReloadTime>
+    </Weapon>
+    
+  </Weapons>
+</Definitions>
