@@ -9,7 +9,7 @@ using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.Utils;
 
-namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegrity
+namespace StarCore.StructuralIntegrity
 {
     /// <summary>
     /// <para>Standalone logger, does not require any setup.</para>
@@ -215,7 +215,7 @@ namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegri
         /// <param name="task">The task to check for errors.</param>
         /// <param name="taskName">Used in the reports.</param>
         /// <returns>true if errors found, false otherwise.</returns>
-        public static bool TaskHasErrors(Task task, string taskName)
+        public static bool TaskHasErrors(ParallelTasks.Task task, string taskName)
         {
             EnsureHandlerCreated();
 

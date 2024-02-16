@@ -7,7 +7,7 @@
 
       <BlockVariantGroup>
         <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="StarCore_Onyx_Fixed_BlockVariants" />
-        <Icon>Textures\GUI\Icons\Cubes\aries.png</Icon>
+        <Icon>Textures\GUI\Icons\Cubes\SC_AR_Aries.png</Icon>
         <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
         <Description>Description_BlockGroup_TurretGroup</Description>
         <Blocks>
@@ -22,7 +22,7 @@
 
       <BlockVariantGroup>
         <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="StarCore_Onyx_Turret_BlockVariants" />
-        <Icon>Textures\GUI\Icons\Cubes\afflictor.png</Icon>
+        <Icon>Textures\GUI\Icons\Cubes\ineedapngforthefuckingblockvariantgroup.png</Icon>
         <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
         <Description>Description_BlockGroup_TurretGroup</Description>
         <Blocks>

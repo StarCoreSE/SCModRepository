@@ -41,7 +41,7 @@ namespace Scripts
             AmmoRound = "PPC Main", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 38500f, // Direct damage; one steel plate is worth 100. 
+            BaseDamage = 1000f, // Direct damage; one steel plate is worth 100. 
             Mass = 5f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 9500f, // Recoil.
@@ -302,6 +302,18 @@ namespace Scripts
                 ModelName = "\\Models\\Ammo\\Starcore_PPC_Projectile_Large", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = true,
+                Decals = new DecalDef
+                {
+                    MaxAge = 3600,
+                    Map = new[]
+                    {
+                        new TextureMapDef
+                        {
+                            HitMaterial = "Metal",
+                            DecalMaterial = "REE_Explosive_Decal",
+                        },
+                    },
+                },
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
@@ -558,11 +570,11 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = false,
-                    Radius = 6f, // Meters
-                    Damage = 60000f,
-                    Depth = 4f,
-                    MaxAbsorb = 0f,
-                    Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
+                    Radius = 5f, // Radius of AOE effect, in meters.
+                    Damage = 50000f,
+                    Depth = 2f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
+                    MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
+                    Falloff = Curve, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
                     //.Curve drops off damage sharply as it approaches the max radius
                     //.InvCurve drops off sharply from the middle and tapers to max radius
@@ -580,7 +592,7 @@ namespace Scripts
              },
             Ewar = new EwarDef
             {
-                Enable = true, // Enables the EWAR , Electronic-Warfare System
+                Enable = false, // Enables the EWAR , Electronic-Warfare System
                 Type = Offense, // EnergySink, Emp, Offense, Nav, Dot, AntiSmart, JumpNull, Anchor, Tractor, Pull, Push, 
                 Mode = Effect, // Effect , Field
                 Strength = 100000,

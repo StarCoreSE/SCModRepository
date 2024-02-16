@@ -13,7 +13,7 @@ jobs:
       - uses: AnarkisGaming/workshop@v1
         with:
           appID: 244850
-          publishedFileID: 2822027695
+          publishedFileID: 3149645583
           path: "Starcore-One-Shot"
           changelog: ${{ github.event.head_commit.message }}             
         env:

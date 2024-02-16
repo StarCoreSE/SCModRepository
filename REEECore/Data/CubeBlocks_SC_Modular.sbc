@@ -11,7 +11,7 @@
      <DisplayName>LRM-5 Modular Launcher</DisplayName>
 	  <Description>
       [10km Targeting Range]
-      [850 m/s]
+      [510 m/s]
       [Energy Damage]
       [Does not reload]
       [5 Missiles]
@@ -65,7 +65,7 @@
      </Id>
      <DisplayName>LRM-5 Modular Launcher Middle</DisplayName>
 	  <Description>[10km Targeting Range]
-    [650 m/s]
+    [390 m/s]
     [Energy Damage]
     [Does not reload]
     [5 Missiles]
@@ -109,7 +109,7 @@
      </Id>
      <DisplayName>LRM-5 Modular Launcher 45</DisplayName>
 	  <Description>[10km Targeting Range]
-    [650 m/s]
+    [390 m/s]
     [Energy Damage]
     [Does not reload]
     [5 Missiles]
@@ -154,7 +154,7 @@
      </Id>
      <DisplayName>LRM-5 Modular Launcher 45 Reversed</DisplayName>
       <Description>[10km Targeting Range]
-    [650 m/s]
+    [390 m/s]
     [Energy Damage]
     [Does not reload]
     [5 Missiles]
@@ -200,7 +200,7 @@
      <DisplayName>MRM-10 Modular Launcher</DisplayName>
 	  <Description>
     [5km Max Range, 3.5km Optimal Range]
-    [350~ m/s]
+    [390~ m/s]
     [Kinetic Damage]
     [Does not reload]
     [10 Missiles]
@@ -257,7 +257,7 @@
      <DisplayName>MRM-10 Modular Launcher Middle</DisplayName>
 	  <Description>
     [5km Max Range, 3.5km Optimal Range]
-    [350~ m/s]
+    [390~ m/s]
     [Kinetic Damage]
     [Does not reload]
     [10 Missiles]
@@ -314,7 +314,7 @@
      <DisplayName>MRM-10 Modular Launcher 45</DisplayName>
       <Description>
     [5km Max Range, 3.5km Optimal Range]
-    [350~ m/s]
+    [390~ m/s]
     [Kinetic Damage]
     [Does not reload]
     [10 Missiles]
@@ -360,7 +360,7 @@
      <DisplayName>MRM-10 Modular Launcher 45 Reversed</DisplayName>
       <Description>
     [5km Max Range, 3.5km Optimal Range]
-    [350~ m/s]
+    [390~ m/s]
     [Kinetic Damage]
     [Does not reload]
     [10 Missiles]
@@ -404,7 +404,7 @@
      </Id>
      <DisplayName>SRM-8</DisplayName>
 	  <Description>[3.5km Range]
-    [700~ m/s]
+    [420~ m/s]
     [Energy Damage]
     [Does not reload]
     Effective against armor, shields and modules.

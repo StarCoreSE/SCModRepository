@@ -26,6 +26,7 @@ using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
 using VRage.Noise.Patterns;
 using VRage;
 using System.Linq;
+using Sandbox.Game;
 
 namespace klime.PointCheck
 {
@@ -323,6 +324,7 @@ namespace klime.PointCheck
                 //Team3Tickets.Value = MatchTickets;
                 LocalMatchState = 1;
                 MyAPIGateway.Utilities.ShowMessage("GM", "You are the captain now.");
+                MyVisualScriptLogicProvider.SendChatMessage("HEY DUMBASS, IS DAMAGE ON?", "Muzzled", font: "Red");
             }
 
             if (messageText.Contains("/end"))
@@ -686,7 +688,7 @@ namespace klime.PointCheck
             };
             integretyMessage = new HudAPIv2.HUDMessage(Scale: 1.15f, Font: "BI_SEOutlined", Message: new StringBuilder(""), Origin: new Vector2D(.51, .95), HideHud: false, Blend: BlendTypeEnum.PostPP)
             {
-                Visible = false,
+                Visible = true,
                 //InitialColor = Color.Orange
             };
             timerMessage = new HudAPIv2.HUDMessage(Scale: 1.2f, Font: "BI_SEOutlined", Message: new StringBuilder(""), Origin: new Vector2D(0.35, .99), HideHud: false, Shadowing: true, Blend: BlendTypeEnum.PostPP)
@@ -711,9 +713,16 @@ namespace klime.PointCheck
         }
         // Get the sphere model based on the given cap color
 
-
+        bool doClientRequest = true;
         public override void UpdateAfterSimulation()
         {
+            // Send request to server for tracked grids. Why is it in here? so that integretymessage is exist.
+            if (doClientRequest && !MyAPIGateway.Session.IsServer)
+            {
+                Static.MyNetwork.TransmitToServer(new SyncRequestPacket(), false);
+                doClientRequest = false;
+            }
+
             temp_LocalTimer++; PointCheckHelpers.timer++; if (PointCheckHelpers.timer >= 144000) { PointCheckHelpers.timer = 0; temp_LocalTimer = 0; temp_ServerTimer = 0; }
             if (joinInit == true)
             {
@@ -800,7 +809,7 @@ namespace klime.PointCheck
                     {
                         _managedEntities.Clear(); MyGamePruningStructure.GetAllTopMostEntitiesInSphere(ref _combatMaxSphere, _managedEntities, MyEntityQueryType.Dynamic); var posZero = Vector3D.Zero; foreach (var entity in _managedEntities)
                         {
-                            var grid = entity as MyCubeGrid; if (grid != null && GridExtensions.HasBlockWithSubtypeId(grid, "LargeFlightMovement"))
+                            var grid = entity as MyCubeGrid; if (grid != null && GridExtensions.HasBlockWithSubtypeId(grid, "LargeFlightMovement") || GridExtensions.HasBlockWithSubtypeId(grid, "RivalAIRemoteControlLarge"))
                             {
                                 long entityId = grid.EntityId; if (!Tracking.Contains(entityId))
                                 {

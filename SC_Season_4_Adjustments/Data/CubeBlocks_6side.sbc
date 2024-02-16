@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <CubeBlocks>
-    <Definition xsi:type="MyObjectBuilder_ProgrammableBlockDefinition">
+    
+    <!--<Definition xsi:type="MyObjectBuilder_ProgrammableBlockDefinition">
       <Id>
         <TypeId>MyProgrammableBlock</TypeId>
         <SubtypeId>6SidePBSmall</SubtypeId>
@@ -57,7 +58,8 @@
       <DamageEffectId>214</DamageEffectId>
 	  <ResourceSinkGroup>Utility</ResourceSinkGroup>
 	  <DamagedSound>ParticleElectrical</DamagedSound>
-    </Definition>
+    </Definition>-->
+    
     <Definition xsi:type="MyObjectBuilder_ProgrammableBlockDefinition">
       <Id>
         <TypeId>MyProgrammableBlock</TypeId>

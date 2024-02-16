@@ -94,7 +94,7 @@ namespace PickMe
                         {
                             state = State.Run;
                             Session.Instance.currentMatch.Recount();
-                            Session.Instance.factionControl.SetForMatchBegin();
+                           // Session.Instance.factionControl.SetForMatchBegin();
                             Session.Instance.currentMatch.PreMatch();
                             return "Starting the match. Use /end when the match is complete";
                         }
@@ -102,7 +102,7 @@ namespace PickMe
                         {
                             state = State.Run;
                             Session.Instance.currentMatch.Recount();
-                            Session.Instance.factionControl.SetForMatchBegin();
+                           // Session.Instance.factionControl.SetForMatchBegin();
                             Session.Instance.currentMatch.PreMatch();
                             return "Starting the match. Use /end when the match is complete";
                         }
@@ -135,7 +135,7 @@ namespace PickMe
                         Session.Instance.currentField.Close();
                         Session.Instance.currentMatch.Close();
                         state = State.Ended;
-                        Session.Instance.factionControl.SetForMatchEnd();
+                       // Session.Instance.factionControl.SetForMatchEnd();
                         Session.Instance.debugLog.Flush();
                         Session.Instance.debugLog.Close();
                         return "Match canceled.";

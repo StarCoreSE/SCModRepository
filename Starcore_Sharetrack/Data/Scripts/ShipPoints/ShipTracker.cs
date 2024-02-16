@@ -524,7 +524,7 @@ namespace klime.PointCheck
                 case "LRM-5 Modular Launcher":
                 case "LRM-5 Launcher":
                     t_N = "LRM-5 Launcher";
-                    mCs = 0.0375f;
+                    mCs = 0.10f;
                     break;
                 case "Gimbal Laser T2 Armored":
                 case "Gimbal Laser T2 Armored Slope 45":
@@ -557,6 +557,62 @@ namespace klime.PointCheck
                     t_N = "Slinger";
                     mCs = 0f;
                     break;
+                case "Phaethon Plasma Pulser":
+                    t_N = "Phaethon Plasma Pulser";
+                    mCs = 0.15f;
+                    break;
+                 case "UNN Heavy Torpedo Launcher":
+                    t_N = "UNN Heavy Torpedo Launcher";
+                    mCs = 0.15f;
+                    break;
+                 case "SRM-8":
+                    t_N = "SRM-8";
+                    mCs = 0.15f;
+                    break;
+                 case "Starcore Arrow-IV Launcher":
+                    t_N = "Starcore Arrow-IV Launcher";
+                    mCs = 0.15f;
+                    break;
+                case "Tartarus VIII":
+                    t_N = "Tartarus VIII";
+                    mCs = 0.15f;
+                    break;
+                case "Cocytus IX":
+                    t_N = "Cocytus IX";
+                    mCs = 0.15f;
+                    break;
+                case "MCRN Torpedo Launcher":
+                    t_N = "MCRN Torpedo Launcher";
+                    mCs = 0.15f;
+                    break;
+                case "Flares":
+                    t_N = "Flares";
+                    mCs = 0.25f;
+                    break;
+                case "Chiasm [Arc Emitter]":
+                    t_N = "Chiasm [Arc Emitter]";
+                    mCs = 0.15f;
+                    break;
+                case "Medium Laser":
+                case "Large Laser":
+                    t_N = " Laser";
+                    mCs = 0.15f;
+                    break;
+                case "Reinforced Blastplate":
+                    t_N = "Reinforced Blastplate";
+                    mCs = 1.00f;
+                    break;
+                case "Taiidan":
+                case "Taiidan Fighter Launch Rail":
+                case "Taiidan Bomber Launch Rail":
+                case "Taiidan Fighter Hangar Bay":
+                case "Taiidan Bomber Hangar Bay":
+                case "Taiidan Bomber Hangar Bay Medium":
+                case "Taiidan Fighter Small Bay":
+                    t_N = "Taiidan";
+                    mCs = 0.25f;
+                    break;
+
             }
         }
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" ?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<CubeBlocks>
-    
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
@@ -43,6 +42,8 @@
 			<BuildProgressModels>
 			</BuildProgressModels>
 			<BlockPairName>SC_AR_Afflictor</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
 			<BuildTimeSeconds>60</BuildTimeSeconds>
 			<EdgeType>Light</EdgeType>
 			<WeaponDefinitionId Subtype="SCGenericWepDef" />
@@ -55,6 +56,5 @@
 			<DestroySound>WepSmallWarheadExpl</DestroySound>
 			<PCU>200</PCU>
 		</Definition>
-
-  </CubeBlocks>
+	</CubeBlocks>
 </Definitions>

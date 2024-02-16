@@ -7,7 +7,7 @@
 				<SubtypeId>SC_AR_Aries</SubtypeId>
 			</Id>
 			<DisplayName>0C-DNS Aries Superheavy Gauss Cannon</DisplayName>
-			<Icon>Textures\GUI\Icons\Cubes\aries.png</Icon>
+			<Icon>Textures\GUI\Icons\Cubes\SC_AR_Aries.dds</Icon>
 			<Description>
 				Long Ranged Fixed: [100km]
 				Reload Speed: [25 seconds]
