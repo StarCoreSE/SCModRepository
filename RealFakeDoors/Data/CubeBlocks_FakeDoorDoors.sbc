@@ -7,7 +7,7 @@
         <SubtypeId>LargeFakeBlockSlideDoor</SubtypeId>
       </Id>
       <DisplayName>Fake Door Slider</DisplayName>
-      <Icon>Textures\GUI\Icons\Fake.dds</Icon>
+      <Icon>Textures\GUI\Icons\Cubes\SlideDoor.dds</Icon>
       <Public>true</Public>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
@@ -86,7 +86,7 @@
         <SubtypeId>LargeFakeBlockRadioAntenna</SubtypeId>
       </Id>
       <DisplayName>Fake Greeble Antenna</DisplayName>
-      <Icon>Textures\GUI\Icons\Fake.dds</Icon>
+      <Icon>Textures\GUI\Icons\Cubes\antenna.dds</Icon>
       <Public>true</Public>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
