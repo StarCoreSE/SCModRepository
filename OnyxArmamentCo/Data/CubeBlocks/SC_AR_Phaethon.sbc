@@ -27,15 +27,17 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\SC_AR_Phaethon.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="500" />
-				<Component Subtype="Construction" Count="200" />
-				<Component Subtype="PowerCell" Count="30" />
-				<Component Subtype="Superconductor" Count="60" />
-				<Component Subtype="LargeTube" Count="20" />
-				<Component Subtype="Superconductor" Count ="120" />
-				<Component Subtype="Computer" Count="100" />
-				<Component Subtype="Construction" Count="200" />
-				<Component Subtype="SteelPlate" Count="200" />
+        <Component Subtype="SteelPlate" Count="1250" />
+        <Component Subtype="Construction" Count="300" />
+        <Component Subtype="MetalGrid" Count="200" />
+        <Component Subtype="PowerCell" Count="180" />
+        <Component Subtype="Superconductor" Count="300" />
+        <Component Subtype="LargeTube" Count="200" />
+        <Component Subtype="Motor" Count="300" />
+        <Component Subtype="Superconductor" Count ="180" />
+        <Component Subtype="Computer" Count="500" />
+        <Component Subtype="MetalGrid" Count="400" />
+        <Component Subtype="SteelPlate" Count="750" />
 			</Components>
 			<CriticalComponent Index="0" Subtype="Computer"/>
 			<MountPoints>
