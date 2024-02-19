@@ -296,6 +296,7 @@ namespace ShipPoints
 				HAS_Thanatos@350;
                	HAS_Alecto@400;
            		HAS_Assault@250;
+           		HAS_Nyx@250;
      			HAS_Mammon@450;
 				LargeBlockRadioAntenna@5;
 				LargeBlockRadioAntennaDish@5;
