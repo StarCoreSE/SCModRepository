@@ -26,7 +26,7 @@ namespace Scripts {
                         MuzzlePartId = "CoilgunMk2Muzzles", // The subpart where your muzzle empties are located. This is often the elevation subpart.
                         AzimuthPartId = "CoilgunMk2LeftRight", // Your Rotating Subpart, the bit that moves sideways
                         ElevationPartId = "CoilgunMk2UpDown",// Your Elevating Subpart, that bit that moves up
-                        DurabilityMod = 0.222f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
+                        DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
                     
