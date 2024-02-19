@@ -44,6 +44,27 @@
 			<AmmoDefinitionId Subtype="MammonAmmoMag" />
 		</AmmoMagazine>
 
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>NyxAmmoMag</SubtypeId>
+      </Id>
+      <DisplayName>Nyx Ammo Mag</DisplayName>
+      <Icon>Textures\GUI\Icons\Items\ContractPackage.dds</Icon>
+      <Size>
+        <X>0.20</X>
+        <Y>0.20</Y>
+        <Z>0.20</Z>
+      </Size>
+      <Mass>0</Mass>
+      <Volume>0</Volume>
+      <Model>Models\Components\ContractPackage.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>120</Capacity>
+      <IconSymbol>45</IconSymbol>
+      <AmmoDefinitionId Subtype="NyxAmmoMag" />
+    </AmmoMagazine>
+
 		<AmmoMagazine>
 			<Id>
 				<TypeId>AmmoMagazine</TypeId>
