@@ -278,7 +278,79 @@
 		 <EmissiveColorPreset>Default</EmissiveColorPreset>
 	 </Definition>
 
-	<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <!-- Nyx Beam Turret -->
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>HAS_Nyx</SubtypeId>
+      </Id>
+      <DisplayName>Nyx</DisplayName>
+      <Description>
+        Dual Barreled Beam Turret
+        Heavy Anti Armor Damage
+        Medium-Low Shield Damage
+        Low Component Damage
+        4km Range
+        Energy Damage
+      </Description>
+      <Icon>Textures\GUI\Icons\Cubes\400mmVanquisher_Icon.png</Icon>
+      <CubeSize>Large</CubeSize>
+      <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="5" y="2" z="5" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\AssaultPack\400mmVanquisher\Ace_Turret_400mmVanq.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+        <Component Subtype="NyxComponent" Count="3" />
+        <Component Subtype="Computer" Count="1" />
+        <Component Subtype="NyxComponent" Count="7" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="5" />
+      </MountPoints>
+
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>HAS_Nyx</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>150</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_HSR_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-15</MinElevationDegrees>
+      <MaxElevationDegrees>100</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>4000</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 		 <!-- Triple Barrel Shotgun -->
 		 <Id>
 			 <TypeId>ConveyorSorter</TypeId>

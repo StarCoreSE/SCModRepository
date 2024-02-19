@@ -21,7 +21,8 @@ namespace Scripts
 			
 			HAS_Esper,
 			HAS_Mammon,
-			HAS_Thanatos
+            HAS_Nyx,
+            HAS_Thanatos
 			
 			
             );
