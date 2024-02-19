@@ -138,145 +138,217 @@
       <EmissiveColorPreset>Default</EmissiveColorPreset>
     </Definition>
 
-	<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
-		 <!-- Heavy Gimbaled Cannon Emplacment -->
-		 <Id>
-			 <TypeId>ConveyorSorter</TypeId>
-			 <SubtypeId>HAS_Thanatos</SubtypeId>
-		 </Id>
-		 <DisplayName>Thanatos</DisplayName>
-		 <Description>
-			 Heavy Gimbaled Cannon
-			 Heavy Anti Armor
-			 Medium-Low Shield Damage
-			 Medium Component Damage
-			 4km Targeting Range
-			 10km MANUAL ONLY Targeting Range
-       Overheats
-			 Kinetic Damage
-		 </Description>
-		 <Icon>Textures\Models\ThanatosV2.dds</Icon>
-		 <CubeSize>Large</CubeSize>
-		 <GuiVisible>true</GuiVisible>
-		 <BlockTopology>TriangleMesh</BlockTopology>
-		 <Size x="3" y="3" z="3" />
-		 <ModelOffset x="0" y="0" z="0" />
-		 <Model>Models\ThanatosV2.mwm</Model>
-		 <UseModelIntersection>true</UseModelIntersection>
-		 <Components>
-			 <Component Subtype="ThanatosComponent" Count="3" />
-			 <Component Subtype="Computer" Count="1" />
-			 <Component Subtype="ThanatosComponent" Count="8" />
-		 </Components>
-		 <CriticalComponent Subtype="Computer" Index="0" />
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <!-- Heavy Gimbaled Cannon Emplacment -->
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>HAS_Thanatos</SubtypeId>
+      </Id>
+      <DisplayName>Thanatos</DisplayName>
+      <Description>
+        Heavy Gimbaled Cannon
+        Heavy Anti Armor
+        Medium-Low Shield Damage
+        Medium Component Damage
+        4km Targeting Range
+        10km MANUAL ONLY Targeting Range
+        Overheats
+        Kinetic Damage
+      </Description>
+      <Icon>Textures\Models\ThanatosV2.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="3" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\ThanatosV2.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+        <Component Subtype="ThanatosComponent" Count="3" />
+        <Component Subtype="Computer" Count="1" />
+        <Component Subtype="ThanatosComponent" Count="8" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
 
-		 <VoxelPlacement>
-			 <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
-			 <StaticMode>
-				 <PlacementMode>OutsideVoxel</PlacementMode>
-				 <MaxAllowed>0.2</MaxAllowed>
-				 <MinAllowed>0</MinAllowed>
-			 </StaticMode>
-			 <DynamicMode>
-				 <PlacementMode>OutsideVoxel</PlacementMode>
-				 <MaxAllowed>0.2</MaxAllowed>
-				 <MinAllowed>0.01</MinAllowed>
-			 </DynamicMode>
-		 </VoxelPlacement>
-		 <BlockPairName>HAS_Thanatos</BlockPairName>
-		 <MirroringY>Z</MirroringY>
-		 <MirroringZ>Y</MirroringZ>
-		 <EdgeType>Light</EdgeType>
-		 <BuildTimeSeconds>190</BuildTimeSeconds>
-		 <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
-		 <WeaponDefinitionId Subtype="K_HSR_Gun"/>
-		 <InventoryMaxVolume>1</InventoryMaxVolume>
-		 <DamageEffectId>213</DamageEffectId>
-		 <AiEnabled>false</AiEnabled>
-		 <DamagedSound>ParticleWeapExpl</DamagedSound>
-		 <ResourceSinkGroup>Defense</ResourceSinkGroup>
-		 <MinElevationDegrees>-3.5</MinElevationDegrees>
-		 <MaxElevationDegrees>3.5</MaxElevationDegrees>
-		 <MinAzimuthDegrees>-3.5</MinAzimuthDegrees>
-		 <MaxAzimuthDegrees>3.5</MaxAzimuthDegrees>
-		 <RotationSpeed>0.0001</RotationSpeed>
-		 <ElevationSpeed>0.0001 </ElevationSpeed>
-		 <IdleRotation>false</IdleRotation>
-		 <MaxRangeMeters>4000</MaxRangeMeters>
-		 <MinFov>0.0001</MinFov>
-		 <MaxFov>2</MaxFov>
-		 <EmissiveColorPreset>Default</EmissiveColorPreset>
-	 </Definition>
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>HAS_Thanatos</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>190</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_HSR_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-3.5</MinElevationDegrees>
+      <MaxElevationDegrees>3.5</MaxElevationDegrees>
+      <MinAzimuthDegrees>-3.5</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>3.5</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>4000</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
 
-	<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> <!-- Mammon Beam Turret -->
-		 <Id>
-			 <TypeId>ConveyorSorter</TypeId>
-			 <SubtypeId>HAS_Mammon</SubtypeId>
-		 </Id>
-		 <DisplayName>Mammon</DisplayName>
-		 <Description>
-			 Quad Barreled Beam Turret
-			 Heavy Anti Armor Damage
-			 Medium-Low Shield Damage
-			 Low Component Damage
-			 4km Range
-			 Energy Damage
-		 </Description>
-		 <Icon>Textures\GUI\Icons\Cubes\400mmVanquisher_Icon.png</Icon>
-		 <CubeSize>Large</CubeSize>
-		 <GuiVisible>true</GuiVisible>
-		 <BlockTopology>TriangleMesh</BlockTopology>
-		 <Size x="5" y="2" z="5" />
-		 <ModelOffset x="0" y="0" z="0" />
-		 <Model>Models\AssaultPack\400mmVanquisher\Ace_Turret_400mmVanq.mwm</Model>
-		 <UseModelIntersection>true</UseModelIntersection>
-		 <Components>
-			 <Component Subtype="MammonComponent" Count="3" />
-			 <Component Subtype="Computer" Count="1" />
-			 <Component Subtype="MammonComponent" Count="7" />
-		 </Components>
-		 <CriticalComponent Subtype="Computer" Index="0" />
-			 <MountPoints>
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <!-- Mammon Beam Turret -->
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>HAS_Mammon</SubtypeId>
+      </Id>
+      <DisplayName>Mammon</DisplayName>
+      <Description>
+        Quad Barreled Beam Turret
+        Heavy Anti Armor Damage
+        Medium-Low Shield Damage
+        Low Component Damage
+        4km Range
+        Energy Damage
+      </Description>
+      <Icon>Textures\GUI\Icons\Cubes\400mmVanquisher_Icon.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="5" y="2" z="5" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\400mmVanquisher\Ace_Turret_400mmVanq.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+        <Component Subtype="MammonComponent" Count="3" />
+        <Component Subtype="Computer" Count="1" />
+        <Component Subtype="MammonComponent" Count="7" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <!-- <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="5" /> -->
+      </MountPoints>
+
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>HAS_Mammon</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>150</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_HSR_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-15</MinElevationDegrees>
+      <MaxElevationDegrees>100</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>4000</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <!-- MammonMK2 Beam Turret -->
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>HAS_MammonMK2</SubtypeId>
+      </Id>
+      <DisplayName>Mammon MK2</DisplayName>
+      <Description>
+        Quad Barreled Beam Turret
+        Heavy Anti Armor Damage
+        Medium-Low Shield Damage
+        Low Component Damage
+        4km Range
+        Energy Damage
+      </Description>
+      <Icon>Textures\GUI\Icons\Cubes\400mmVanquisher_Icon.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="2" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Mammon Mk2.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+        <Component Subtype="MammonComponent" Count="3" />
+        <Component Subtype="Computer" Count="1" />
+        <Component Subtype="MammonComponent" Count="7" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
         <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="5" />
       </MountPoints>
 
-		 <VoxelPlacement>
-			 <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
-			 <StaticMode>
-				 <PlacementMode>OutsideVoxel</PlacementMode>
-				 <MaxAllowed>0.2</MaxAllowed>
-				 <MinAllowed>0</MinAllowed>
-			 </StaticMode>
-			 <DynamicMode>
-				 <PlacementMode>OutsideVoxel</PlacementMode>
-				 <MaxAllowed>0.2</MaxAllowed>
-				 <MinAllowed>0.01</MinAllowed>
-			 </DynamicMode>
-		 </VoxelPlacement>
-		 <BlockPairName>HAS_Mammon</BlockPairName>
-		 <MirroringY>Z</MirroringY>
-		 <MirroringZ>Y</MirroringZ>
-		 <EdgeType>Light</EdgeType>
-		 <BuildTimeSeconds>150</BuildTimeSeconds>
-		 <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
-		 <WeaponDefinitionId Subtype="K_HSR_Gun"/>
-		 <InventoryMaxVolume>1</InventoryMaxVolume>
-		 <DamageEffectId>213</DamageEffectId>
-		 <AiEnabled>false</AiEnabled>
-		 <DamagedSound>ParticleWeapExpl</DamagedSound>
-		 <ResourceSinkGroup>Defense</ResourceSinkGroup>
-		 <MinElevationDegrees>-15</MinElevationDegrees>
-		 <MaxElevationDegrees>100</MaxElevationDegrees>
-		 <MinAzimuthDegrees>-180</MinAzimuthDegrees>
-		 <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
-		 <RotationSpeed>0.0001</RotationSpeed>
-		 <ElevationSpeed>0.0001 </ElevationSpeed>
-		 <IdleRotation>false</IdleRotation>
-		 <MaxRangeMeters>4000</MaxRangeMeters>
-		 <MinFov>0.0001</MinFov>
-		 <MaxFov>2</MaxFov>
-		 <EmissiveColorPreset>Default</EmissiveColorPreset>
-	 </Definition>
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>HAS_MammonMK2</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>150</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_HSR_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-15</MinElevationDegrees>
+      <MaxElevationDegrees>100</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>4000</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
 
     <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
       <!-- Nyx Beam Turret -->
@@ -293,13 +365,13 @@
         4km Range
         Energy Damage
       </Description>
-      <Icon>Textures\GUI\Icons\Cubes\400mmVanquisher_Icon.png</Icon>
+      <Icon>Textures\GUI\Icons\Cubes\400mmAssault_Icon.dds</Icon>
       <CubeSize>Large</CubeSize>
       <GuiVisible>true</GuiVisible>
       <BlockTopology>TriangleMesh</BlockTopology>
-      <Size x="5" y="2" z="5" />
+      <Size x="3" y="2" z="3" />
       <ModelOffset x="0" y="0" z="0" />
-      <Model>Models\AssaultPack\400mmVanquisher\Ace_Turret_400mmVanq.mwm</Model>
+      <Model>Models\400mmAssault\Ace_Turret_400mmAssault.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
         <Component Subtype="NyxComponent" Count="3" />
@@ -308,7 +380,7 @@
       </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
       <MountPoints>
-        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="5" />
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
       </MountPoints>
 
       <VoxelPlacement>
@@ -349,69 +421,68 @@
       <EmissiveColorPreset>Default</EmissiveColorPreset>
     </Definition>
 
-
     <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
-		 <!-- Triple Barrel Shotgun -->
-		 <Id>
-			 <TypeId>ConveyorSorter</TypeId>
-			 <SubtypeId>HAS_Esper</SubtypeId>
-		 </Id>
-		 <DisplayName>Tigtone</DisplayName>
-		 <Description>
-			 6km Range. Rotary Triple-Barreled Kinetic Shotgun.
-		 </Description>
-		 <Icon>Textures\Models\Tigtone.dds</Icon>
-		 <CubeSize>Large</CubeSize>
-		 <GuiVisible>true</GuiVisible>
-		 <BlockTopology>TriangleMesh</BlockTopology>
-		 <Size x="2" y="2" z="8" />
-		 <ModelOffset x="0" y="0" z="1.25" />
-		 <Model>Models\Tigtone.mwm</Model>
-		 <UseModelIntersection>true</UseModelIntersection>
-		 <Components>
-			 <Component Subtype="TigtoneComponent" Count="3" />
-			 <Component Subtype="Computer" Count="1" />
-			 <Component Subtype="TigtoneComponent" Count="10" />
-		 </Components>
-		 <CriticalComponent Subtype="Computer" Index="0" />
+      <!-- Triple Barrel Shotgun -->
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>HAS_Esper</SubtypeId>
+      </Id>
+      <DisplayName>Tigtone</DisplayName>
+      <Description>
+        6km Range. Rotary Triple-Barreled Kinetic Shotgun.
+      </Description>
+      <Icon>Textures\Models\Tigtone.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="2" y="2" z="8" />
+      <ModelOffset x="0" y="0" z="1.25" />
+      <Model>Models\Tigtone.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+        <Component Subtype="TigtoneComponent" Count="3" />
+        <Component Subtype="Computer" Count="1" />
+        <Component Subtype="TigtoneComponent" Count="10" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
 
-		 <VoxelPlacement>
-			 <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
-			 <StaticMode>
-				 <PlacementMode>OutsideVoxel</PlacementMode>
-				 <MaxAllowed>0.2</MaxAllowed>
-				 <MinAllowed>0</MinAllowed>
-			 </StaticMode>
-			 <DynamicMode>
-				 <PlacementMode>OutsideVoxel</PlacementMode>
-				 <MaxAllowed>0.2</MaxAllowed>
-				 <MinAllowed>0.01</MinAllowed>
-			 </DynamicMode>
-		 </VoxelPlacement>
-		 <BlockPairName>HAS_Esper</BlockPairName>
-		 <MirroringY>Z</MirroringY>
-		 <MirroringZ>Y</MirroringZ>
-		 <EdgeType>Light</EdgeType>
-		 <BuildTimeSeconds>150</BuildTimeSeconds>
-		 <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
-		 <WeaponDefinitionId Subtype="K_HSR_Gun"/>
-		 <InventoryMaxVolume>1</InventoryMaxVolume>
-		 <DamageEffectId>213</DamageEffectId>
-		 <AiEnabled>false</AiEnabled>
-		 <DamagedSound>ParticleWeapExpl</DamagedSound>
-		 <ResourceSinkGroup>Defense</ResourceSinkGroup>
-		 <MinElevationDegrees>-3.5</MinElevationDegrees>
-		 <MaxElevationDegrees>3.5</MaxElevationDegrees>
-		 <MinAzimuthDegrees>-3.5</MinAzimuthDegrees>
-		 <MaxAzimuthDegrees>3.5</MaxAzimuthDegrees>
-		 <RotationSpeed>0.0001</RotationSpeed>
-		 <ElevationSpeed>0.0001 </ElevationSpeed>
-		 <IdleRotation>false</IdleRotation>
-		 <MaxRangeMeters>4000</MaxRangeMeters>
-		 <MinFov>0.0001</MinFov>
-		 <MaxFov>2</MaxFov>
-		 <EmissiveColorPreset>Default</EmissiveColorPreset>
-	 </Definition>
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>HAS_Esper</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>150</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_HSR_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-3.5</MinElevationDegrees>
+      <MaxElevationDegrees>3.5</MaxElevationDegrees>
+      <MinAzimuthDegrees>-3.5</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>3.5</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>4000</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
 
 
 

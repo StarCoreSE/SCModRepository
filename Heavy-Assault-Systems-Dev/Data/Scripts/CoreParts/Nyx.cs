@@ -31,8 +31,6 @@ namespace Scripts {
                 Muzzles = new[] {
                     "muzzle_missile_1", // Where your Projectiles spawn. Use numbers not Letters. IE Muzzle_01 not Muzzle_A
                     "muzzle_missile_2",
-                    "muzzle_missile_3",
-                    "muzzle_missile_4",
                 },
                 Ejector = "", // Optional; empty from which to eject "shells" if specified.
                 Scope = "muzzle_missile_1", // Where line of sight checks are performed from. Must be clear of block collision.
@@ -58,7 +56,7 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "Mammon", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "Nyx", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 45f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
@@ -121,7 +119,7 @@ namespace Scripts {
                 Loading = new LoadingDef
                 {
                     RateOfFire = 900, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
-                    BarrelsPerShot = 4, // How many muzzles will fire a projectile per fire event.
+                    BarrelsPerShot = 2, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
                     ReloadTime = 300, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
@@ -144,7 +142,7 @@ namespace Scripts {
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "HAS_Assault_Charge", // Audio for warmup effect.
-                    FiringSound = "HAS_Nyx_Release", // Audio for firing.
+                    FiringSound = "HAS_Assault_ReleaseHigh", // Audio for firing.
                     FiringSoundPerShot = false, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "", // Sound SubtypeID, for when your Weapon is in a reloading state
                     NoAmmoSound = "",

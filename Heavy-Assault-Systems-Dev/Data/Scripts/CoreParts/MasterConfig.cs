@@ -21,6 +21,12 @@ namespace Scripts
 			
 			HAS_Esper,
 			HAS_Mammon,
+            HAS_MammonMK2B0,
+            HAS_MammonMK2B1,
+            HAS_MammonMK2B2,
+            HAS_MammonMK2B3,
+            HAS_MammonMK2B4,
+
             HAS_Nyx,
             HAS_Thanatos
 			
