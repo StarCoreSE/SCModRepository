@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<CubeBlocks>
+		<Definition>
+			<Id>
+				<TypeId>CubeBlock</TypeId>
+				<SubtypeId>Ace_Fixed_220mmMissileLauncher</SubtypeId>
+			</Id>
+			<DisplayName>DisplayName_Ace_Fixed_220mmMissileLauncher</DisplayName>
+			<Description>Description_Ace_Fixed_220mmMissileLauncher</Description>
+			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="2"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\220mm Fixed Launcher\Ace_Fixed_220mmMissileLauncher.mwm</Model>
+			<Components>
+				<Component Count="10" Subtype="SteelPlate"/>
+			</Components>
+			<CriticalComponent Index="0" Subtype="SteelPlate"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.4" StartY="0.4" EndX="0.6" EndY="0.6"/>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+				<MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="2.0" EndY="1.0"/>
+				<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="2.0" EndY="1.0"/>
+				<MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="1.0" EndY="2.0"/>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="1.0" EndY="2.0"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.5" File="Models\220mm Fixed Launcher\Ace_Fixed_220mmMissileLauncher_BS1.mwm"/>
+				<Model BuildPercentUpperBound="1.0" File="Models\220mm Fixed Launcher\Ace_Fixed_220mmMissileLauncher_BS2.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>Ace_Fixed_220mmMissileLauncher</BlockPairName>
+		</Definition>
+	</CubeBlocks>
+</Definitions>
