@@ -55,7 +55,7 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "Mammon", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "MammonBarrel1", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 45f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
@@ -230,7 +230,7 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "Mammon", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "MammonBarrel2", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 45f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
@@ -404,7 +404,7 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "Mammon", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "MammonBarrel3", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 45f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
@@ -578,7 +578,7 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "Mammon", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "MammonBarrel4", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 45f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
@@ -752,7 +752,7 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "Mammon", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "MammonBarrel5", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 45f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
