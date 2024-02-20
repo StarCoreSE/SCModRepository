@@ -84,8 +84,8 @@ namespace Scripts {
                 {
                     RotateRate = 0.008f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
                     ElevateRate = 0.008f, // Max traversal speed of elevation subpart in radians per tick.
-                    MinAzimuth = -180,
-                    MaxAzimuth = 180,
+                    MinAzimuth = -10,
+                    MaxAzimuth = 10,
                     MinElevation = -10,
                     MaxElevation = 80,
                     HomeAzimuth = 0, // Default resting rotation angle
@@ -118,7 +118,7 @@ namespace Scripts {
                 Loading = new LoadingDef
                 {
                     RateOfFire = 900, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
-                    BarrelsPerShot = 5, // How many muzzles will fire a projectile per fire event.
+                    BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
                     ReloadTime = 300, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
@@ -259,8 +259,8 @@ namespace Scripts {
                 {
                     RotateRate = 0.008f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
                     ElevateRate = 0.008f, // Max traversal speed of elevation subpart in radians per tick.
-                    MinAzimuth = -180,
-                    MaxAzimuth = 180,
+                    MinAzimuth = -10,
+                    MaxAzimuth = 10,
                     MinElevation = -10,
                     MaxElevation = 80,
                     HomeAzimuth = 0, // Default resting rotation angle
@@ -293,7 +293,7 @@ namespace Scripts {
                 Loading = new LoadingDef
                 {
                     RateOfFire = 900, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
-                    BarrelsPerShot = 5, // How many muzzles will fire a projectile per fire event.
+                    BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
                     ReloadTime = 300, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
@@ -433,8 +433,8 @@ namespace Scripts {
                 {
                     RotateRate = 0.008f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
                     ElevateRate = 0.008f, // Max traversal speed of elevation subpart in radians per tick.
-                    MinAzimuth = -180,
-                    MaxAzimuth = 180,
+                    MinAzimuth = -10,
+                    MaxAzimuth = 10,
                     MinElevation = -10,
                     MaxElevation = 80,
                     HomeAzimuth = 0, // Default resting rotation angle
@@ -467,7 +467,7 @@ namespace Scripts {
                 Loading = new LoadingDef
                 {
                     RateOfFire = 900, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
-                    BarrelsPerShot = 5, // How many muzzles will fire a projectile per fire event.
+                    BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
                     ReloadTime = 300, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
@@ -607,8 +607,8 @@ namespace Scripts {
                 {
                     RotateRate = 0.008f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
                     ElevateRate = 0.008f, // Max traversal speed of elevation subpart in radians per tick.
-                    MinAzimuth = -180,
-                    MaxAzimuth = 180,
+                    MinAzimuth = -10,
+                    MaxAzimuth = 10,
                     MinElevation = -10,
                     MaxElevation = 80,
                     HomeAzimuth = 0, // Default resting rotation angle
@@ -641,7 +641,7 @@ namespace Scripts {
                 Loading = new LoadingDef
                 {
                     RateOfFire = 900, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
-                    BarrelsPerShot = 5, // How many muzzles will fire a projectile per fire event.
+                    BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
                     ReloadTime = 300, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
@@ -717,7 +717,7 @@ namespace Scripts {
                         SubtypeId = "HAS_MammonMK2", // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "None", // For weapons with a spinning barrel such as Gatling Guns.
                         MuzzlePartId = "MammonMK2Elevation5", // The subpart where your muzzle empties are located. This is often the elevation subpart.
-                        AzimuthPartId = "Azimuth4", // Your Rotating Subpart, the bit that moves sideways
+                        AzimuthPartId = "Azimuth5", // Your Rotating Subpart, the bit that moves sideways
                         ElevationPartId = "MammonMK2Elevation5",// Your Elevating Subpart, that bit that moves up
                         DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "" // Overlay for block inventory slots, like reactors, refineries, etc.
@@ -781,8 +781,8 @@ namespace Scripts {
                 {
                     RotateRate = 0.008f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
                     ElevateRate = 0.008f, // Max traversal speed of elevation subpart in radians per tick.
-                    MinAzimuth = -180,
-                    MaxAzimuth = 180,
+                    MinAzimuth = -10,
+                    MaxAzimuth = 10,
                     MinElevation = -10,
                     MaxElevation = 80,
                     HomeAzimuth = 0, // Default resting rotation angle
@@ -815,7 +815,7 @@ namespace Scripts {
                 Loading = new LoadingDef
                 {
                     RateOfFire = 900, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
-                    BarrelsPerShot = 5, // How many muzzles will fire a projectile per fire event.
+                    BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
                     ReloadTime = 300, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
