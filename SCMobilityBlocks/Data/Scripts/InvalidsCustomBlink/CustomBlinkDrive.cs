@@ -12,6 +12,7 @@ using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRage.Game.ModAPI.Network;
 using VRage.ModAPI;
+using VRage.Network;
 using VRage.ObjectBuilders;
 using VRage.Sync;
 using VRage.Utils;
@@ -21,14 +22,21 @@ using VRageRender;
 namespace Invalid.BlinkDrive
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "BlinkDriveLarge")]
-    public class BlinkDrive : MyGameLogicComponent
+    public class BlinkDrive : MyGameLogicComponent, IMyEventProxy
     {
         private IMyCollector block;
         private MySync<bool, SyncDirection.BothWays> requestJumpSync;
         private int[] jumpCooldownTimers = new int[3];
         private const int rechargeTime = 60 * 60; // 10 seconds * 60 frames per second
 
+        private MySync<int, SyncDirection.BothWays> blink1cooldowntimer;
+        private MySync<int, SyncDirection.BothWays> blink2cooldowntimer;
+        private MySync<int, SyncDirection.BothWays> blink3cooldowntimer;
+
         static bool controlsCreated = false;
+
+        private int ChargesRemaining = 3; // Class-level variable
+
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
@@ -213,10 +221,11 @@ namespace Invalid.BlinkDrive
             blinkDriveButton.Action = (b) =>
             {
                 var drive = b.GameLogic.GetAs<BlinkDrive>();
-                if (drive != null)
+                if (drive != null && drive.ChargesRemaining > 0) // Check charges remaining
                 {
                     MyLog.Default.WriteLineAndConsole("Button action called");
                     drive.requestJumpSync.Value = true;
+                    drive.ChargesRemaining--; // Decrement charges
                 }
             };
             MyAPIGateway.TerminalControls.AddControl<IMyCollector>(blinkDriveButton);

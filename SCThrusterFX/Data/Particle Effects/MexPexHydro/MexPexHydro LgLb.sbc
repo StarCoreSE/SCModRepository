@@ -2,7 +2,7 @@
 <Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ParticleEffects>
     <ParticleEffect xsi:type="ParticleEffect">
-      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="p_Hydro_Flame_LG" />
+      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="MexPexHydro LgLb" />
       <ParticleId>51120915</ParticleId>
       <Length>10</Length>
       <Preload>0</Preload>

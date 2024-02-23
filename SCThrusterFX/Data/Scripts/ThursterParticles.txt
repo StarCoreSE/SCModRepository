@@ -1,0 +1,179 @@
+//Sytems
+using System;
+using System.Text;
+using System.Collections.Generic;
+using System.Linq;
+using System.Globalization;
+//Sandboxs
+using Sandbox.Common.ObjectBuilders;
+using Sandbox.Game.EntityComponents;
+using Sandbox.Game.Components;
+using Sandbox.Game.Entities;
+using Sandbox.ModAPI.Interfaces.Terminal;
+using Sandbox.ModAPI;
+using Sandbox.Definitions;
+//Vrage
+using VRage.Game;
+using VRage.Game.Components;
+using VRage.Game.ModAPI;
+using VRage.Game.Entity;
+using VRage.ModAPI;
+using VRage.ObjectBuilders;
+using VRage.Utils;
+using VRageMath;
+
+namespace Blues_Thruster_Particles
+{
+	[MyEntityComponentDescriptor(typeof(MyObjectBuilder_Thrust), false, new string[] { "LargeBlockLargeHydrogenThrust","LargeBlockSmallHydrogenThrust", "SmallBlockLargeHydrogenThrust","SmallBlockSmallHydrogenThrust", "LargeBlockLargeHydrogenThrustIndustrial","LargeBlockSmallHydrogenThrustIndustrial", "SmallBlockLargeHydrogenThrustIndustrial","SmallBlockSmallHydrogenThrustIndustrial"})]
+	
+	public class Thrusters : MyGameLogicComponent
+	{
+		//Get Server Client Status
+		public static bool IsClient => !(IsServer && IsDedicated);
+		public static bool IsDedicated => MyAPIGateway.Utilities.IsDedicated;
+		public static bool IsServer => MyAPIGateway.Multiplayer.IsServer;
+		public static bool IsActive => MyAPIGateway.Multiplayer.MultiplayerActive;
+		Dictionary <string, List<string>> ParticleEffectsList = new Dictionary<string, List<string>>();
+		string particleeffect="";
+		
+		private string BlockSizeAdjuster ="";
+		private float ParticleSizeAdjuster;
+		//My Thrusters 
+		private IMyThrust CoreBlock;
+		private MyThrust MyCoreBlock;
+		private MyThrustDefinition MyCoreBlockDefinition;
+		Sandbox.ModAPI.IMyTerminalBlock terminalBlock;
+		
+		private MatrixD particle_matrix = MatrixD.Identity; //Particle position and rotation in world space. init to default
+        private Vector3D particle_position = Vector3D.Zero; //Particle position offset. init to zero.
+        private MyParticleEffect ParticleEmitter; //Particle effect. null
+
+
+		public override void Init(MyObjectBuilder_EntityBase objectBuilder)
+		{
+			 //If it is a server don't run!
+			 if(IsDedicated){return;}
+			 //Update Every Frame
+			 NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME;
+			 //Grab MyThruster
+			 CoreBlock = Entity as IMyThrust;
+			 MyCoreBlock = CoreBlock as MyThrust;
+			 MyCoreBlockDefinition= MyCoreBlock.BlockDefinition;
+			 terminalBlock = Entity as Sandbox.ModAPI.IMyTerminalBlock;
+			 //Adapt for block size
+			string SubtypeId=CoreBlock.BlockDefinition.SubtypeId;
+			if(SubtypeId.Contains("LargeBlock")&&SubtypeId.Contains("BlockLarge")){BlockSizeAdjuster=" LgLb";ParticleSizeAdjuster=2.8f;} //2.8
+			if(SubtypeId.Contains("LargeBlock")&&SubtypeId.Contains("BlockSmall")){BlockSizeAdjuster=" LgSb";ParticleSizeAdjuster=1f;}   //1
+			if(SubtypeId.Contains("SmallBlock")&&SubtypeId.Contains("BlockLarge")){BlockSizeAdjuster=" SgLb";ParticleSizeAdjuster=0.5f;} //0.5
+			if(SubtypeId.Contains("SmallBlock")&&SubtypeId.Contains("BlockSmall")){BlockSizeAdjuster=" SgSb";ParticleSizeAdjuster=0.1f;} //0.1
+			 
+			 //Particle effects
+			 ParticleEffectsList.Add("AmberBurst", 		new List<string>{"HydrogenFlames"+BlockSizeAdjuster});
+			 ParticleEffectsList.Add("Maneuvering", 	new List<string>{"ManuveringThurster"+BlockSizeAdjuster});
+			 ParticleEffectsList.Add("Rainbow", 		new List<string>{"RainbowFlames"+BlockSizeAdjuster});
+			 ParticleEffectsList.Add("Blood", 			new List<string>{"BloodFlame"+BlockSizeAdjuster});
+			 ParticleEffectsList.Add("Blueshift", 		new List<string>{"BlueShiftFlame"+BlockSizeAdjuster});
+			 ParticleEffectsList.Add("Thunder", 		new List<string>{"ThunderDomeFlame"+BlockSizeAdjuster});
+			 ParticleEffectsList.Add("Eridanus", 		new List<string>{"EridanusFlame"+BlockSizeAdjuster});
+			 ParticleEffectsList.Add("Test", 			new List<string>{"HydrogenFlamesRebrand"+BlockSizeAdjuster});
+			 ParticleEffectsList.Add("", 				new List<string>{"Fill in Reset Line"});
+			 
+		}
+		public override void UpdateAfterSimulation()
+		{
+			float particleRadius = 1f;
+			float ThrusterOutput = CoreBlock.CurrentThrust/CoreBlock.MaxThrust;
+			string ParticleEffectToGenerate = "";
+			Vector4 FlameColor = MyCoreBlockDefinition.FlameFullColor;
+			FlameColor = new Vector4(0f,0f,0f,0f);
+			if(terminalBlock.CustomData.ToLower().Contains("amber")				||terminalBlock.CustomName.ToLower().Contains("amber")			||terminalBlock.CustomName.ToUpper().Contains("AMB"))	{ParticleEffectToGenerate="AmberBurst";		FlameColor = new Vector4(0f,0f,0f,0f);}
+			if(terminalBlock.CustomData.ToLower().Contains("maneuvering")	||terminalBlock.CustomName.ToLower().Contains("maneuvering")	||terminalBlock.CustomName.ToUpper().Contains("RTS"))	{ParticleEffectToGenerate="Maneuvering";	FlameColor = new Vector4(0f,0f,0f,0f);}
+			if(terminalBlock.CustomData.ToLower().Contains("rainbow")		||terminalBlock.CustomName.ToLower().Contains("rainbow")		||terminalBlock.CustomName.ToUpper().Contains("RGB"))	{ParticleEffectToGenerate="Rainbow";		FlameColor = new Vector4(0f,0f,0f,0f);}
+			if(terminalBlock.CustomData.ToLower().Contains("blueshift")	||terminalBlock.CustomName.ToLower().Contains("blueshift")		||terminalBlock.CustomName.ToUpper().Contains("BLE"))	{ParticleEffectToGenerate="Blueshift";		FlameColor = new Vector4(0f,0f,0f,0f);}
+			//if(terminalBlock.CustomData.ToLower().Contains("blood")			||terminalBlock.CustomName.ToLower().Contains("blood")			||terminalBlock.CustomName.ToUpper().Contains("BRM"))	{ParticleEffectToGenerate="Blood";			FlameColor = new Vector4(0.1f,0f,0f,0.5f);}
+			if(terminalBlock.CustomData.ToLower().Contains("thunder")			||terminalBlock.CustomName.ToLower().Contains("thunder")		||terminalBlock.CustomName.ToUpper().Contains("TRD"))	{ParticleEffectToGenerate="Thunder";		FlameColor = new Vector4(0.1f,0.1f,0.1f,0f);} //particleRadius = ThrusterOutput*ParticleSizeAdjuster;
+			if(terminalBlock.CustomData.Contains("eridanus")				||terminalBlock.CustomName.Contains("eridanus")					||terminalBlock.CustomName.Contains("ERD"))				{ParticleEffectToGenerate="Eridanus";		FlameColor = new Vector4(0f,0f,0f,0f);}
+			else if(terminalBlock.CustomData.Contains("reset")					||terminalBlock.CustomName.ToLower().Contains("reset")			||terminalBlock.CustomName.ToUpper().Contains("RST"))	{ParticleEffectToGenerate="";			FlameColor = new Vector4(2.55f,2.17f,0.76f,1f);}
+			//else{FlameColor = new Vector4(2.55f,2.17f,0.76f,1f);}
+
+
+			//Set Thruster Color
+			MyCoreBlockDefinition.FlameFullColor = FlameColor;
+			MyCoreBlockDefinition.FlameIdleColor = FlameColor;
+			float particleSize = (CoreBlock.CurrentThrust/CoreBlock.MaxThrust)*ParticleSizeAdjuster;
+				
+			foreach(string particleToCreate in ParticleEffectsList[ParticleEffectToGenerate])
+			{			
+				//Create and Maintain
+				if (CoreBlock.Enabled && ThrusterOutput >= 0.049 && ParticleEffectToGenerate!=""){
+					if(ParticleEmitter==null){
+						particle_matrix = CoreBlock.WorldMatrix;
+						particle_position = particle_matrix.Translation;
+						MyParticlesManager.TryCreateParticleEffect(particleToCreate, ref particle_matrix, ref particle_position, uint.MaxValue, out ParticleEmitter);
+						particleeffect=ParticleEffectToGenerate;
+						ParticleEmitter.UserRadiusMultiplier = particleRadius;
+						ParticleEmitter.UserScale=particleSize;
+						//userscale=ParticleEmitter.UserScale;
+						((MyRenderComponentThrust)MyCoreBlock.Render).UpdateFlameAnimatorData();
+					}else{
+						//terminalBlock.CustomData="Particle Exists!";
+						if(particleeffect!=ParticleEffectToGenerate){
+							ParticleEmitter.StopLights();
+							ParticleEmitter.StopEmitting();
+							ParticleEmitter = null;
+						}else{
+							ParticleEmitter.WorldMatrix = CoreBlock.WorldMatrix;
+							ParticleEmitter.UserRadiusMultiplier = particleRadius;
+							//if(particleToCreate=="ThunderDomeLightning"){}
+							ParticleEmitter.UserScale=particleSize;
+							ParticleEmitter.Play();
+						}
+					}
+					
+				}else{
+					if (ParticleEmitter != null) 
+							{
+								ParticleEmitter.StopLights();
+								ParticleEmitter.StopEmitting();
+								ParticleEmitter = null;
+							}
+				}
+			}
+			
+			
+		}
+		public override void Close()
+        {
+			if (ParticleEmitter != null && CoreBlock.Enabled){ParticleEmitter.Stop(false);}
+
+        }
+
+	}
+}
+//Mod Text
+/*
+Hydrogen plus for all your hydrogen needs and wants!
+This mod creates various partical effects for vanilla thrusters! All effects scale to your thrusters output!
+To use this mod add it to the world or server in question, full multiplayer support! Then go to your thruster and add to the name of the block one of the keywords or abreviations below!
+-AmberBurst			AMB
+-Maneuvering		RTS
+-Rainbow			RGB
+-Blueshift			BLE
+-Coming Soon!		BRM
+-ThunderDomn!		TRD
+-Eridanus!			ERD
+-Reset				RST (Resets vanilla colors)
+
+This mod was created because Aryn Ruined space engineers with their drive update, and could not be bothered to make all thrusters pretty. Such pretty colors, but yet only on drives.
+After a little burnout I have created particle effects for all thrusters.
+(Jk we love you Aryn)
+
+Update Log:
+-Updateded All existing effects
+-Support for legacy grids, will continue to support customdata naming for keywords
+-Added Support for using block name
+-KeyWords no longer case sensitive
+-Added a limitation effects will not render when thrusters are below 5% thrust
+@Fez Fixed the Idle Problem!
+@Jonathan Torres Was fixed previously but all effects now do not bug out in atmo
+*/
