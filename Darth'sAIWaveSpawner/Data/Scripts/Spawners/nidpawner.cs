@@ -43,35 +43,84 @@ namespace Invalid.NidSpawner
         }
     }
 
+    public class WaveSpawn
+    {
+        public string PrefabName;
+        public int PrefabAmount;
+        public int WaitTimeSeconds;
 
-    [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
+        public WaveSpawn(string prefabName, int prefabAmount, int waitTimeSeconds)
+        {
+            PrefabName = prefabName;
+            PrefabAmount = prefabAmount;
+            WaitTimeSeconds = waitTimeSeconds;
+        }
+    }
+
+    [MySessionComponentDescriptor(MyUpdateOrder.BeforeSimulation)]
     public class spawntargetComponent : MySessionComponentBase
     {
+        private long NextSpawnTime = 0;
+        private int WavesToSpawn = 0;
+        private long SpawnInterval = TimeSpan.TicksPerSecond * 10;
+
         private Dictionary<string, string> prefabMap = new Dictionary<string, string>
         {
-
             { "LeachdroneAI", "LeachdroneAI" },
             { "CorrosiveAI", "CorrosiveAI" },
             { "BioclutchAI", "BioclutchAI" },
-
             // Add more prefab mappings here.
         };
 
+        private List<WaveSpawn> predefinedWaves = new List<WaveSpawn>
+        {
+            new WaveSpawn("LeachdroneAI", 5, 10), // (PrefabName, Quantity, Wait Time in seconds until next Wave in list)
+            new WaveSpawn("CorrosiveAI", 4, 30),
+            new WaveSpawn("BioclutchAI", 3, 120)
+            // Add more waves as needed
+        };
+
         private int defaultSpawnCount = 1; // Default number of prefabs to spawn
-
         private ushort netID = 24116;
-
         private double minSpawnRadiusFromCenter = 1000; // Minimum spawn distance from the center in meters
         private double minSpawnRadiusFromGrids = 1000;  // Minimum spawn distance from other grids in meters
         private IMyFaction PirateFaction = null;
+        private List<WaveSpawn> waveSpawns = new List<WaveSpawn>();
 
         public override void BeforeStart()
         {
             MyAPIGateway.Utilities.MessageEntered += OnMessageEntered; // Listen for chat messages
             MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(netID, NetworkHandler);
-
             PirateFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag("SPRT");
         }
+
+        public override void UpdateBeforeSimulation()
+        {
+            if (WavesToSpawn > 0 && DateTime.Now.Ticks >= NextSpawnTime)
+            {
+                WaveSpawn waveSpawn = waveSpawns[waveSpawns.Count - WavesToSpawn];
+                SpawnRandomPrefabs(waveSpawn.PrefabName, waveSpawn.PrefabAmount);
+
+                // Show debug notification with the time when the wave is spawned
+                string debugMessage = $"Spawning wave {waveSpawns.Count - WavesToSpawn + 1} at {DateTime.Now.ToLongTimeString()}";
+                MyAPIGateway.Utilities.ShowNotification(debugMessage, 5000, "Green");
+
+                NextSpawnTime = DateTime.Now.Ticks + waveSpawn.WaitTimeSeconds * TimeSpan.TicksPerSecond;
+                WavesToSpawn--;
+
+                if (WavesToSpawn == 0)
+                {
+                    // All waves spawned, reset for the next trigger
+                    NextSpawnTime = 0;
+                    MyAPIGateway.Utilities.ShowNotification("All waves spawned. Resetting for the next trigger.", 5000, "White");
+                }
+                else
+                {
+                    MyAPIGateway.Utilities.ShowNotification($"Wave {waveSpawns.Count - WavesToSpawn} spawned. {WavesToSpawn} waves left.", 5000, "White");
+                }
+            }
+        }
+
 
         private void NetworkHandler(ushort arg1, byte[] arg2, ulong arg3, bool arg4)
         {
@@ -82,7 +131,6 @@ namespace Invalid.NidSpawner
 
             PrefabSpawnPacket prefabPacket = packet as PrefabSpawnPacket;
             if (prefabPacket == null) return;
-
 
             if (prefabMap.ContainsKey(prefabPacket.PrefabName))
             {
@@ -96,37 +144,55 @@ namespace Invalid.NidSpawner
 
         private void OnMessageEntered(string messageText, ref bool sendToOthers)
         {
-            if (!messageText.StartsWith("/spawnnids", StringComparison.OrdinalIgnoreCase)) return;
-            string[] parts = messageText.Split(' ');
+            // Debug notification to check if the message is received
+            MyAPIGateway.Utilities.ShowNotification("OnMessageEntered called with message: " + messageText, 5000, "Yellow");
 
-            if (parts.Length == 1)
+            if (messageText.StartsWith("/wavestart", StringComparison.OrdinalIgnoreCase))
             {
-                // Show list of available prefabs and usage instructions
-                ShowPrefabList();
+                // Use the predefined list of waves
+                waveSpawns.Clear();
+                waveSpawns.AddRange(predefinedWaves);
+                WavesToSpawn = waveSpawns.Count;
+
+                // Start spawning the first wave immediately
+                NextSpawnTime = DateTime.Now.Ticks;
+
+                // Show debug notification when the wave spawning is triggered
+                MyAPIGateway.Utilities.ShowNotification("Wave spawning started", 2000, "Green");
             }
-            else if (parts.Length >= 2)
+            else if (messageText.StartsWith("/spawnnids", StringComparison.OrdinalIgnoreCase))
             {
-                string prefabName = parts[1];
-                int spawnCount = defaultSpawnCount;
+                string[] parts = messageText.Split(' ');
 
-                if (parts.Length >= 3)
+                if (parts.Length == 1)
                 {
-                    int parsedCount;
-                    if (int.TryParse(parts[2], out parsedCount))
+                    // Show list of available prefabs and usage instructions
+                    ShowPrefabList();
+                }
+                else if (parts.Length >= 2)
+                {
+                    string prefabName = parts[1];
+                    int spawnCount = defaultSpawnCount;
+
+                    if (parts.Length >= 3)
                     {
-                        spawnCount = parsedCount;
+                        int parsedCount;
+                        if (int.TryParse(parts[2], out parsedCount))
+                        {
+                            spawnCount = parsedCount;
+                        }
                     }
+
+                    PrefabSpawnPacket prefabSpawnPacket = new PrefabSpawnPacket(prefabName, spawnCount);
+                    byte[] data = MyAPIGateway.Utilities.SerializeToBinary(prefabSpawnPacket);
+
+                    MyAPIGateway.Multiplayer.SendMessageTo(netID, data, MyAPIGateway.Multiplayer.ServerId);
+
+                    MyAPIGateway.Utilities.ShowMessage("spawntarget", $"Requesting: {prefabName} x {spawnCount}");
                 }
 
-                PrefabSpawnPacket prefabSpawnPacket = new PrefabSpawnPacket(prefabName, spawnCount);
-                byte[] data = MyAPIGateway.Utilities.SerializeToBinary(prefabSpawnPacket);
-
-                MyAPIGateway.Multiplayer.SendMessageTo(netID, data, MyAPIGateway.Multiplayer.ServerId);
-
-                MyAPIGateway.Utilities.ShowMessage("spawntarget", $"Requesting: {prefabName} x {spawnCount}");
+                sendToOthers = false;
             }
-
-            sendToOthers = false;
         }
 
         private void ShowPrefabList()
@@ -144,7 +210,6 @@ namespace Invalid.NidSpawner
         private void SpawnRandomPrefabs(string targetPrefab, int spawnCount)
         {
             double maxSpawnRadius = 3000; // Maximum spawn radius in meters
-
             List<Vector3D> spawnPositions = new List<Vector3D>();
 
             for (int i = 0; i < spawnCount; i++)
@@ -155,13 +220,12 @@ namespace Invalid.NidSpawner
 
                 Vector3D spawnPosition = origin + (Vector3D.Normalize(MyUtils.GetRandomVector3D()) * MyUtils.GetRandomDouble(minSpawnRadiusFromCenter, maxSpawnRadius));
                 Vector3D direction = Vector3D.Normalize(origin - spawnPosition);
-                Vector3D up = Vector3D.Normalize(Vector3D.Cross(direction, Vector3D.Up)); // Calculate an appropriate up vector
+                Vector3D up = Vector3D.Normalize(Vector3D.Cross(direction, Vector3D.Up));
 
                 bool isValidPosition = CheckAsteroidDistance(spawnPosition, minSpawnRadiusFromGrids) && CheckGridDistance(spawnPosition, minSpawnRadiusFromGrids);
 
                 if (isValidPosition)
                 {
-                    // Avoid overcrowding by checking against other spawn positions
                     bool tooCloseToOtherPosition = false;
                     foreach (Vector3D existingPosition in spawnPositions)
                     {
@@ -174,25 +238,17 @@ namespace Invalid.NidSpawner
 
                     if (!tooCloseToOtherPosition)
                     {
-
-                        // don't use setneutralowner tbh half the grids are unowned
-                        // MyVisualScriptLogicProvider.SpawnPrefab(targetPrefab, spawnPosition, direction, up, spawningOptions: SpawningOptions.SetNeutralOwner);
-
                         IMyPrefabManager prefabManager = MyAPIGateway.PrefabManager;
-
                         List<IMyCubeGrid> resultList = new List<IMyCubeGrid>();
                         prefabManager.SpawnPrefab(resultList, targetPrefab, spawnPosition, direction, up, ownerId: PirateFaction.FounderId, spawningOptions: SpawningOptions.None);
-
                         spawnPositions.Add(spawnPosition);
                     }
                 }
             }
         }
 
-
         private bool CheckGridDistance(Vector3D spawnPosition, double minDistance)
         {
-            // Get all entities in the game world
             HashSet<IMyEntity> entities = new HashSet<IMyEntity>();
             MyAPIGateway.Entities.GetEntities(entities);
 
@@ -202,27 +258,24 @@ namespace Invalid.NidSpawner
                 if (grid != null)
                 {
                     double distance = Vector3D.Distance(spawnPosition, grid.GetPosition());
-
                     if (distance < minDistance)
                     {
-                        return false; // Distance is too close, not a valid spawn position
+                        return false;
                     }
                 }
             }
 
-            // Check distance from origin
             double distanceFromOrigin = Vector3D.Distance(spawnPosition, Vector3D.Zero);
             if (distanceFromOrigin < minDistance)
             {
-                return false; // Distance from origin is too close, not a valid spawn position
+                return false;
             }
 
-            return true; // Valid spawn position
+            return true;
         }
 
         private bool CheckAsteroidDistance(Vector3D spawnPosition, double minDistance)
         {
-            // Get all asteroid entities in the game world
             List<IMyVoxelBase> voxels = new List<IMyVoxelBase>();
             MyAPIGateway.Session.VoxelMaps.GetInstances(voxels);
 
@@ -234,17 +287,17 @@ namespace Invalid.NidSpawner
 
                     if (voxelBox.Contains(spawnPosition) != ContainmentType.Disjoint)
                     {
-                        return false; // Spawn position is inside an asteroid, not a valid spawn position
+                        return false;
                     }
                 }
             }
 
-            return true; // Valid spawn position
+            return true;
         }
 
         protected override void UnloadData()
         {
-            MyAPIGateway.Utilities.MessageEntered -= OnMessageEntered; // Unsubscribe from chat message events
+            MyAPIGateway.Utilities.MessageEntered -= OnMessageEntered;
             MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(netID, NetworkHandler);
         }
     }

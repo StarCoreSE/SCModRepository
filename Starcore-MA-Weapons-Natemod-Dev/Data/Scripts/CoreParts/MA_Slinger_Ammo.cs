@@ -47,7 +47,7 @@ namespace Scripts
             AmmoRound = "MA_Slinger_Ammo", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.00000000001f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 4000f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 2000f, // Direct damage; one steel plate is worth 100.
             Mass = 1f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 8000f, // Recoil.
@@ -96,10 +96,10 @@ namespace Scripts
             },
             Pattern = new PatternDef
             {
-				Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
-                    "", 
+                Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
+                    "",
                 },
-                
+
                 Enable = false,
                 TriggerChance = 1f,
                 Random = false,
@@ -107,7 +107,7 @@ namespace Scripts
                 RandomMax = 1,
                 SkipParent = false,
                 PatternSteps = 1, // Number of Ammos activated per round, will progress in order and loop.  Ignored if Random = true.				
-            },			
+            },
             DamageScales = new DamageScaleDef
             {
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
@@ -170,7 +170,7 @@ namespace Scripts
                     },
                 },
             },
-           AreaOfDamage = new AreaOfDamageDef
+            AreaOfDamage = new AreaOfDamageDef
             {
                 ByBlockHit = new ByBlockHitDef
                 {
@@ -190,16 +190,16 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = true,
-                    Radius = 1f, // Meters
-                    Damage = 1f,
+                    Radius = 3f, // Meters
+                    Damage = 40000f,
                     Depth = 1f,
-                    MaxAbsorb = 1f,
+                    MaxAbsorb = 4000f,
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
-                    //.Linear drops evenly by distance from center out to max radius
-                    //.Curve drops off damage sharply as it approaches the max radius
-                    //.InvCurve drops off sharply from the middle and tapers to max radius
-                    //.Squeeze does little damage to the middle, but rapidly increases damage toward max radius
-                    //.Pooled damage behaves in a pooled manner that once exhausted damage ceases.
+                                      //.Linear drops evenly by distance from center out to max radius
+                                      //.Curve drops off damage sharply as it approaches the max radius
+                                      //.InvCurve drops off sharply from the middle and tapers to max radius
+                                      //.Squeeze does little damage to the middle, but rapidly increases damage toward max radius
+                                      //.Pooled damage behaves in a pooled manner that once exhausted damage ceases.
                     ArmOnlyOnHit = false, // Detonation only is available, After it hits something, when this is true. IE, if shot down, it won't explode.
                     MinArmingTime = 0, // In ticks, before the Ammo is allowed to explode, detonate or similar; This affects shrapnel spawning.
                     NoVisuals = false,
@@ -208,7 +208,7 @@ namespace Scripts
                     CustomParticle = "MAsmallFlashExplosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "ArcWepSmallMissileExplShip", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
-                }, 
+                },
             },
             Ewar = new EwarDef
             {

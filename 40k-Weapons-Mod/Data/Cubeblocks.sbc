@@ -338,7 +338,7 @@
       </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
       <MountPoints>
-
+        <MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="1" />
       </MountPoints>
       <VoxelPlacement>
         <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->

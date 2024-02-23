@@ -199,7 +199,8 @@ namespace Scripts
             Ammos = new[] {
                 BC7Shell,
                 BC7Shell_Frag,
-                BC7APShell,// Must list all primary, shrapnel, and pattern ammos.
+                BC7APShell,
+                BC7APShell_Frag,// Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = Weapon75_Animation,
             //Upgrades = UpgradeModules,
