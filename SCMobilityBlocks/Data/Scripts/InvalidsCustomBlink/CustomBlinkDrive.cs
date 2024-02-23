@@ -26,12 +26,12 @@ namespace Invalid.BlinkDrive
     {
         private IMyCollector block;
         private MySync<bool, SyncDirection.BothWays> requestJumpSync;
-        private int[] jumpCooldownTimers = new int[3];
+       // private int[] jumpCooldownTimers = new int[3];
+        private MySync<int, SyncDirection.BothWays> jumpCooldownTimer1;
+        private MySync<int, SyncDirection.BothWays> jumpCooldownTimer2;
+        private MySync<int, SyncDirection.BothWays> jumpCooldownTimer3;
         private const int rechargeTime = 60 * 60; // 10 seconds * 60 frames per second
 
-        private MySync<int, SyncDirection.BothWays> blink1cooldowntimer;
-        private MySync<int, SyncDirection.BothWays> blink2cooldowntimer;
-        private MySync<int, SyncDirection.BothWays> blink3cooldowntimer;
 
         static bool controlsCreated = false;
 
@@ -71,11 +71,8 @@ namespace Invalid.BlinkDrive
                 return false;
 
             // Check if any charge is available
-            foreach (int timer in jumpCooldownTimers)
-            {
-                if (timer <= 0)
-                    return true;
-            }
+            if (jumpCooldownTimer1 <= 0 || jumpCooldownTimer2 <= 0 || jumpCooldownTimer3 <= 0)
+                return true;
 
             return false;
         }
@@ -118,15 +115,14 @@ namespace Invalid.BlinkDrive
 
         private void StartRechargeTimer()
         {
-            for (int i = 0; i < jumpCooldownTimers.Length; i++)
-            {
-                if (jumpCooldownTimers[i] <= 0)
-                {
-                    jumpCooldownTimers[i] = rechargeTime;
-                    break;
-                }
-            }
+            if (jumpCooldownTimer1.Value <= 0)
+                jumpCooldownTimer1.Value = rechargeTime;
+            else if (jumpCooldownTimer2.Value <= 0)
+                jumpCooldownTimer2.Value = rechargeTime;
+            else if (jumpCooldownTimer3.Value <= 0)
+                jumpCooldownTimer3.Value = rechargeTime;
         }
+
 
         public override void UpdateOnceBeforeFrame()
         {
@@ -183,12 +179,17 @@ namespace Invalid.BlinkDrive
             }
 
             // Decrease cooldown timers if they're greater than 0
-            for (int i = 0; i < jumpCooldownTimers.Length; i++)
+            if (jumpCooldownTimer1.Value > 0)
             {
-                if (jumpCooldownTimers[i] > 0)
-                {
-                    jumpCooldownTimers[i]--;
-                }
+                jumpCooldownTimer1.Value--;
+            }
+            if (jumpCooldownTimer2.Value > 0)
+            {
+                jumpCooldownTimer2.Value--;
+            }
+            if (jumpCooldownTimer3.Value > 0)
+            {
+                jumpCooldownTimer3.Value--;
             }
         }
 
@@ -197,13 +198,17 @@ namespace Invalid.BlinkDrive
             float powerRequired = 0f;
 
             // Calculate power required for each charge being recharged
-            foreach (int timer in jumpCooldownTimers)
+            if (jumpCooldownTimer1 > 0 && block.IsWorking && block.IsFunctional)
             {
-                if (timer > 0 && block.IsWorking && block.IsFunctional)
-                {
-                    // Power is consumed while recharging
-                    powerRequired += 100f; // Assuming each charge consumes 100 MW
-                }
+                powerRequired += 100f; // Assuming each charge consumes 100 MW
+            }
+            if (jumpCooldownTimer2 > 0 && block.IsWorking && block.IsFunctional)
+            {
+                powerRequired += 100f; // Assuming each charge consumes 100 MW
+            }
+            if (jumpCooldownTimer3 > 0 && block.IsWorking && block.IsFunctional)
+            {
+                powerRequired += 100f; // Assuming each charge consumes 100 MW
             }
 
             return powerRequired;
@@ -249,19 +254,36 @@ namespace Invalid.BlinkDrive
                 {
                     int chargesRemaining = 0;
                     int nextCooldown = -1;
-                    for (int i = 0; i < drive.jumpCooldownTimers.Length; i++)
+                    if (drive.jumpCooldownTimer1 <= 0)
                     {
-                        int timer = drive.jumpCooldownTimers[i];
-                        if (timer <= 0)
-                        {
-                            chargesRemaining++;
-                        }
-                        else if (nextCooldown == -1 || timer < nextCooldown)
-                        {
-                            // Find the shortest cooldown time
-                            nextCooldown = timer;
-                        }
+                        chargesRemaining++;
                     }
+                    else if (nextCooldown == -1 || drive.jumpCooldownTimer1 < nextCooldown)
+                    {
+                        // Find the shortest cooldown time
+                        nextCooldown = drive.jumpCooldownTimer1;
+                    }
+
+                    if (drive.jumpCooldownTimer2 <= 0)
+                    {
+                        chargesRemaining++;
+                    }
+                    else if (nextCooldown == -1 || drive.jumpCooldownTimer2 < nextCooldown)
+                    {
+                        // Find the shortest cooldown time
+                        nextCooldown = drive.jumpCooldownTimer2;
+                    }
+
+                    if (drive.jumpCooldownTimer3 <= 0)
+                    {
+                        chargesRemaining++;
+                    }
+                    else if (nextCooldown == -1 || drive.jumpCooldownTimer3 < nextCooldown)
+                    {
+                        // Find the shortest cooldown time
+                        nextCooldown = drive.jumpCooldownTimer3;
+                    }
+
                     if (nextCooldown != -1)
                     {
                         // Display cooldown time remaining for the next charge

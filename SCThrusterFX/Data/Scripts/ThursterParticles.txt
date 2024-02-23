@@ -68,14 +68,14 @@ namespace Blues_Thruster_Particles
 			if(SubtypeId.Contains("SmallBlock")&&SubtypeId.Contains("BlockSmall")){BlockSizeAdjuster=" SgSb";ParticleSizeAdjuster=0.1f;} //0.1
 			 
 			 //Particle effects
-			 ParticleEffectsList.Add("AmberBurst", 		new List<string>{"HydrogenFlames"+BlockSizeAdjuster});
+			 ParticleEffectsList.Add("AmberBurst", 		new List<string>{"AmberBurstFlames"+BlockSizeAdjuster});
 			 ParticleEffectsList.Add("Maneuvering", 	new List<string>{"ManuveringThurster"+BlockSizeAdjuster});
 			 ParticleEffectsList.Add("Rainbow", 		new List<string>{"RainbowFlames"+BlockSizeAdjuster});
 			 ParticleEffectsList.Add("Blood", 			new List<string>{"BloodFlame"+BlockSizeAdjuster});
 			 ParticleEffectsList.Add("Blueshift", 		new List<string>{"BlueShiftFlame"+BlockSizeAdjuster});
 			 ParticleEffectsList.Add("Thunder", 		new List<string>{"ThunderDomeFlame"+BlockSizeAdjuster});
 			 ParticleEffectsList.Add("Eridanus", 		new List<string>{"EridanusFlame"+BlockSizeAdjuster});
-			 ParticleEffectsList.Add("Test", 			new List<string>{"HydrogenFlamesRebrand"+BlockSizeAdjuster});
+			 ParticleEffectsList.Add("Test", 			new List<string>{"AmberBurstFlamesRebrand"+BlockSizeAdjuster});
 			 ParticleEffectsList.Add("", 				new List<string>{"Fill in Reset Line"});
 			 
 		}

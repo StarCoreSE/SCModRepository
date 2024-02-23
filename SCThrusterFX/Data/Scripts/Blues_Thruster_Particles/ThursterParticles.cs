@@ -79,7 +79,14 @@ namespace Blues_Thruster_Particles
 
 			//Adapt for block size
 			string SubtypeId = CoreBlock.BlockDefinition.SubtypeId;
-			if ((SubtypeId.Contains("LargeBlock") && SubtypeId.Contains("BlockLarge")) || SubtypeId.Contains("LG_FusionDrive") || SubtypeId.Contains("LG_HydroThrusterL"))
+
+            if ((SubtypeId.Contains("FocusDrive")) || (SubtypeId.Contains("IonHeavy") || (SubtypeId.Contains("HugeHydro"))	))
+            {
+                BlockSizeAdjuster = " LgHb";
+                ParticleSizeAdjuster = 4.5f;
+            }
+
+            if ((SubtypeId.Contains("LargeBlock") && SubtypeId.Contains("BlockLarge")) || SubtypeId.Contains("LG_FusionDrive") || SubtypeId.Contains("LG_HydroThrusterL"))
 			{
 				BlockSizeAdjuster = " LgLb";
 				ParticleSizeAdjuster = 2.8f;
