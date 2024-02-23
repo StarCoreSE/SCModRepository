@@ -6,9 +6,9 @@
         <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
             <Id>
                 <TypeId>ConveyorSorter</TypeId>
-                <SubtypeId>Torp_Block</SubtypeId>
+                <SubtypeId>Devastator_Torp</SubtypeId>
             </Id>
-            <DisplayName>[Trident] Torpedo Turret</DisplayName>
+            <DisplayName>Devastator Torpedo Turret</DisplayName>
             <Description>
               [10km Targeting Range] wait what
               [Kinetic damage] wait what

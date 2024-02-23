@@ -20,7 +20,7 @@ namespace Scripts {
             {
                 MountPoints = new[] {
                     new MountPointDef {
-                        SubtypeId = "Laser_Block", // Block Subtypeid. Your Cubeblocks contain this information
+                        SubtypeId = "APE_Strong", // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "None", // For weapons with a spinning barrel such as Gatling Guns.
                         MuzzlePartId = "APESElevationn", // The subpart where your muzzle empties are located. This is often the elevation subpart.
                         AzimuthPartId = "APESAZZ", // Your Rotating Subpart, the bit that moves sideways
@@ -191,8 +191,8 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                Laser_Ammo,
-                Laser_Ammo_High_Damage,
+                APES_BEAM_Ammo,
+                APES_BEAM_Ammo_High_Damage,
                  // Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = APES_AdvancedAnimation,

@@ -5,7 +5,7 @@
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>APES_Block</SubtypeId>
+				<SubtypeId>APE_Strong</SubtypeId>
 			</Id>
 			<DisplayName>[APES] Anti Projectile Energy System</DisplayName>
 			<Description>Area denial system capable of engaging and destroying projectiles with extreme prejudice. Overheats after sustained use and will automatically reduce its damage output when it reaches max heat capacity. Power hungry munition killer</Description>

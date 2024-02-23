@@ -180,7 +180,7 @@ namespace Scripts {
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "", // Audio for warmup effect.
-                    FiringSound = "PlasXBatteryShot", // Audio for firing.
+                    FiringSound = "ElectroGun_Shot", // Audio for firing. "ElectroGun_Shot" "PlasXBatteryShot"
                     FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "", // Sound SubtypeID, for when your Weapon is in a reloading state
                     NoAmmoSound = "",

@@ -20,7 +20,7 @@ namespace Scripts {
             {
                 MountPoints = new[] {
                     new MountPointDef {
-                        SubtypeId = "Torp_Block", // Block Subtypeid. Your Cubeblocks contain this information
+                        SubtypeId = "Devastator_Torp", // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "None", // For weapons with a spinning barrel such as Gatling Guns.
                         MuzzlePartId = "TorpReaperElevationn", // The subpart where your muzzle empties are located. This is often the elevation subpart.
                         AzimuthPartId = "TorpReaperAZZ", // Your Rotating Subpart, the bit that moves sideways
@@ -85,7 +85,7 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "[Trident] Torpedo Turret", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "Torpedo Turret", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 180f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Off, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
@@ -225,7 +225,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                Torp_Ammo, TorpShrap_Ammo, 
+                Torp_Ammo, TorpShrap_Ammo, HW_Torp_Ammo, HW_TorpShrap_Ammo,
                 // Must list all primary, shrapnel, and pattern ammos.
             },
             Animations = TorpAdvancedAnimation,

@@ -19,7 +19,7 @@
 				<string>ConveyorSorter/Type19_Driver</string>
 				<string>ConveyorSorter/Type22_Driver</string>
 				<string>ConveyorSorter/Type25_Driver</string>				
-				<string>ConveyorSorter/Torp_Block</string>
+				<string>ConveyorSorter/Devastator_Torp</string>
 				<string>ConveyorSorter/Assault_Coil_Turret</string>
 				<string>ConveyorSorter/Reaver_Coilgun</string>
 				<string>ConveyorSorter/GoalieCasemate</string>
@@ -50,14 +50,14 @@
 			<ItemIds>
 				<string>ConveyorSorter/Priest_Block</string>
 				<string>ConveyorSorter/PriestReskin_Block</string>
-				<string>ConveyorSorter/APES_Block</string>
+				<string>ConveyorSorter/APE_Strong</string>
 				<string>ConveyorSorter/Type18_Artillery</string>
 				<string>ConveyorSorter/Type21_Artillery</string>
 				<string>ConveyorSorter/Type24_Artillery</string>
 				<string>ConveyorSorter/Type19_Driver</string>
 				<string>ConveyorSorter/Type22_Driver</string>
 				<string>ConveyorSorter/Type25_Driver</string>
-				<string>ConveyorSorter/Torp_Block</string>
+				<string>ConveyorSorter/Devastator_Torp</string>
 				<string>ConveyorSorter/Assault_Coil_Turret</string>
 				<string>ConveyorSorter/Reaver_Coilgun</string>
 			    <string>ConveyorSorter/Type17_BeamLance</string>
@@ -71,7 +71,7 @@
 				<string>ConveyorSorter/DrunkRocketTurret</string>
 
 				<string>ConveyorSorter/Fixed_Rockets</string>
-				<string>ConveyorSorter/Null_Point_Jump_Disruptor_Large</string>
+
 
 
 				<string>ConveyorSorter/VindicatorKineticLance</string>
@@ -143,7 +143,7 @@
 			<Blocks>
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Priest_Block" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="PriestReskin_Block" />
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="APES_Block" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="APE_Strong" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="GoalieCasemate" />
 
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="DualSnubLaserTurret" />
@@ -163,7 +163,7 @@
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="UnguidedRocketTurret" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="DrunkRocketTurret" />
 
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Torp_Block" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Devastator_Torp" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="VindicatorKineticLance" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HadeanPlasmaBlastgun" />
 

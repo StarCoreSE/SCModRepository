@@ -1,9 +1,9 @@
-@BlockID "Torp_Block"
+@BlockID "Devastator_Torp"
 @Version 2
 @Author Krynoc
 @Weaponcore 0
 
-#Valid subpart ID's of Torp_Block
+#Valid subpart ID's of Devastator_Torp
 #|  TorpReaperRightDoor
 #|  TorpReaperLeftDoor
 #|  TorpReaperTorpLift

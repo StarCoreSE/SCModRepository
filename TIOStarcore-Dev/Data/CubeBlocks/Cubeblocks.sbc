@@ -602,7 +602,7 @@
         <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
             <Id>
                 <TypeId>ConveyorSorter</TypeId>
-                <SubtypeId>Torp_Block</SubtypeId>
+                <SubtypeId>Devastator_Torp</SubtypeId>
             </Id>
             <DisplayName>[Trident] Torpedo Turret</DisplayName>
             <Description>Fires HE and EMP torpedos. Slow but deadly.</Description>
@@ -651,7 +651,7 @@
             <MirroringY>Z</MirroringY>
 			<NavigationDefinition>Default</NavigationDefinition>
 			<WeaponDefinitionId Subtype="Torp_Weapon"/>
-			<BlockPairName>Torp_Block</BlockPairName>			
+			<BlockPairName>Devastator_Torp</BlockPairName>			
             <EdgeType>Heavy</EdgeType>
             <BuildTimeSeconds>400</BuildTimeSeconds>
             <InventoryMaxVolume>10</InventoryMaxVolume>
