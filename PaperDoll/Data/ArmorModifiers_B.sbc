@@ -4,7 +4,7 @@
 
         <AssetModifier>
             <Id Type="AssetModifierDefinition" Subtype="TestArmor" />
-          <Icon>Textures\GUI\Icons\Skins\Armor.dds</Icon>
+          <Icon>Textures\GUI\Icons\Skins\ArmorTest.dds</Icon>
             <MetalnessColorable>true</MetalnessColorable>
              <!-- <DefaultColor>
                 <R>0</R>

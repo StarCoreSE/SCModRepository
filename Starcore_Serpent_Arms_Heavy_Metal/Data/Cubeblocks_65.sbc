@@ -81,7 +81,7 @@
 			<Description>
 				[6.666km range]
 				[Energy damage]
-        [Reaches MaxRange in 120 ticks]
+				[Reaches MaxRange in 120 ticks]
 				[Hitscan]
 			</Description>
 			<Icon>Textures\GUI\Icons\Hellfire.dds</Icon>
@@ -92,15 +92,16 @@
 			<ModelOffset x="0" y="0" z= "0" />
 			<Model>Models\Hellfire_Laser_Block.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="165" />
-				<Component Subtype="Construction" Count="115" />
-				<Component Subtype="MetalGrid" Count="145" />
-				<Component Subtype="LargeTube" Count="35" />
-				<Component Subtype="Motor" Count="250" />
-				<Component Subtype="Computer" Count="100" />
-				<Component Subtype="Construction" Count="90" />
-				<Component Subtype="SteelPlate" Count="600" />
-			</Components>
+          		    <Component Subtype="Construction" Count="2000" />
+          		    <Component Subtype="GravityGenerator" Count="186" />              
+           		    <Component Subtype="Computer" Count="666" />
+           		    <Component Subtype="SmallTube" Count="1200" />
+          		    <Component Subtype="Motor" Count="1070" />
+           		    <Component Subtype="LargeTube" Count="1200" />
+           		    <Component Subtype="MetalGrid" Count="660" />
+           		    <Component Subtype="Construction" Count="2000" />
+          		    <Component Subtype="SteelPlate" Count="3500" />
+      			</Components>
 			<CriticalComponent Subtype="LargeTube" Index="0" />
 			<BlockPairName>Hellfire_Laser_Block</BlockPairName>
 			<EdgeType>Light</EdgeType>

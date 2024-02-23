@@ -42,6 +42,8 @@
 			<BuildProgressModels>
 			</BuildProgressModels>
 			<BlockPairName>SC_AR_Afflictor</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
 			<BuildTimeSeconds>60</BuildTimeSeconds>
 			<EdgeType>Light</EdgeType>
 			<WeaponDefinitionId Subtype="SCGenericWepDef" />

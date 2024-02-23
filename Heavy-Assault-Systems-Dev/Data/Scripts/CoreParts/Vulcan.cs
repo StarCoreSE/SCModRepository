@@ -184,7 +184,8 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                HAS_Vulcan_Ammo, // Must list all primary, shrapnel, and pattern ammos.
+                HAS_Vulcan_Ammo, 
+                HAS_Vulcan_Stage2_Ammo,
             },
             Animations = Vulcan_Animation,
             //Upgrades = UpgradeModules,

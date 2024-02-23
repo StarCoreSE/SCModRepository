@@ -14,6 +14,7 @@ using Sandbox.Definitions;
 using Sandbox.Common.ObjectBuilders;
 using VRage;
 using VRage.Game;
+using VRage.Game.Entity;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.Game.ModAPI.Network;
@@ -39,15 +40,15 @@ namespace StarCore.StructuralIntegrity
         public MyPoweredCargoContainerDefinition SIGenBlockDef;
 
         public readonly Config_Settings Config = new Config_Settings();
-        public readonly SI_Settings Settings = new SI_Settings();
+        /*public readonly SI_Settings Settings = new SI_Settings();*/
 
-        SI_Utility Mod => SI_Utility.Instance;
+        /*SI_Utility Mod => SI_Utility.Instance;*/
 
         //Utility Declarations 
         public const string ControlPrefix = "SI_Control.";
         public readonly Guid SettingsGUID = new Guid("9EFDABA1-E705-4F62-BD37-A4B046B60BC0");
         public const int SettingsUpdateCount = 60 * 1 / 10;
-        int SyncCountdown;
+        /*int SyncCountdown;*/
 
         //Regular Structural Integrity Values Init
         public float MinFieldPower;
@@ -55,6 +56,9 @@ namespace StarCore.StructuralIntegrity
         public float MinGridModifier;
         public float MaxGridModifier;
         public float ReferenceGridModifier = 0f;
+
+        MySync<float, SyncDirection.BothWays> FieldPowerSync;
+        MySync<float, SyncDirection.BothWays> GridModifierSync;
 
         //Siege Mode Values Init
         public bool SiegeEnabled;
@@ -83,7 +87,7 @@ namespace StarCore.StructuralIntegrity
         private IMyHudNotification notifFieldPower = null;
         private IMyHudNotification notifCountdown = null;
 
-        public float CurrentFieldPower
+        /*public float CurrentFieldPower
         {
             get
             { return Settings.FieldPower; }
@@ -91,16 +95,17 @@ namespace StarCore.StructuralIntegrity
             {
                 Settings.FieldPower = MathHelper.Clamp((float)Math.Floor(value), MinFieldPower, MaxFieldPower);
 
-                SettingsChanged();
+                FieldPowerSync.Value = value;
+                SaveSettings();
 
                 if ((NeedsUpdate & MyEntityUpdateEnum.EACH_10TH_FRAME) == 0)
                     NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
 
                 SIGenBlock?.Components?.Get<MyResourceSinkComponent>()?.Update();
             }
-        }
+        }*/
 
-        public float CurrentGridModifier
+        /*public float CurrentGridModifier
         {
             get
             { return Settings.GridModifier; }
@@ -108,14 +113,15 @@ namespace StarCore.StructuralIntegrity
             {
                 Settings.GridModifier = MathHelper.Clamp((float)Math.Round(value, 2), MaxGridModifier, MinGridModifier);
 
-                SettingsChanged();
+                GridModifierSync.Value = value;
+                SaveSettings();
 
                 if ((NeedsUpdate & MyEntityUpdateEnum.EACH_10TH_FRAME) == 0)
                     NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
 
                 SIGenBlock?.Components?.Get<MyResourceSinkComponent>()?.Update();
             }
-        }
+        }*/
 
         #region Overrides
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
@@ -149,19 +155,19 @@ namespace StarCore.StructuralIntegrity
                 Sink = SIGenBlock.Components.Get<MyResourceSinkComponent>();
                 Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, RequiredInput);
 
-                // Dont know why this exists yet
+                // i know why this exists
                 float minDivertedPower = MinFieldPower;
                 float maxDivertedPower = MaxFieldPower;
                 SetupTerminalControls<IMyCollector>(minDivertedPower, maxDivertedPower); ;
 
                 // Apply Defaults
-                CurrentFieldPower = MinFieldPower;
-                CurrentGridModifier = MinGridModifier;
+                FieldPowerSync.Value = MinFieldPower;
+                GridModifierSync.Value = MinGridModifier;
                 SiegeActive.Value = false;
 
-                LoadSettings();
+                /*LoadSettings();
 
-                SaveSettings();
+                SaveSettings();*/
 
                 MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0, HandleSiegeModeImpacts);
 
@@ -177,8 +183,6 @@ namespace StarCore.StructuralIntegrity
         {
             try
             {
-                SyncSettings();
-
                 if (SiegeCooldownActive == true)
                 {
                     if (SiegeCooldownTimer > 0)
@@ -314,7 +318,7 @@ namespace StarCore.StructuralIntegrity
             if (!SIGenBlock.IsWorking)
                 return 0f;
 
-            if (CurrentFieldPower == 0f && !SiegeActive.Value)
+            if (FieldPowerSync.Value == 0f && !SiegeActive.Value)
             {
                 return 50.000f;
             }
@@ -332,7 +336,7 @@ namespace StarCore.StructuralIntegrity
 
                 float baseUsage = 50.000f;
                 float powerPrecentage = SIGenBlockDef.RequiredPowerInput = MaxAvailableGridPower * 0.3f;
-                float sliderValue = CurrentFieldPower;
+                float sliderValue = FieldPowerSync.Value;
 
                 float ratio = sliderValue / MaxFieldPower;
 
@@ -550,7 +554,7 @@ namespace StarCore.StructuralIntegrity
                 if (!SiegeActive.Value && MaxAvailableGridPower <= SiegeMinPowerReq)
                 {
                     SetCountStatus($"Insufficient Power", 1500, MyFontEnum.Red);
-                    CurrentGridModifier = 1.0f;
+                    GridModifierSync.Value = 1.0f;
                     return;
                 }
                 else if (!SiegeActive.Value && MaxAvailableGridPower >= SiegeMinPowerReq)
@@ -558,36 +562,51 @@ namespace StarCore.StructuralIntegrity
                     var blockLogic = obj.GameLogic?.GetAs<SI_Core>();
                     if (blockLogic != null)
                     {
-                        float currentFieldPower = blockLogic.CurrentFieldPower;
+                        float currentFieldPower = blockLogic.FieldPowerSync.Value;
 
                         float value1 = (currentFieldPower - MinFieldPower) / MaxFieldPower - MinFieldPower;
                         float newGridModifier = MinGridModifier + value1 * (MaxGridModifier - MinGridModifier);
 
                         newGridModifier = (float)Math.Round(newGridModifier, 2);
 
-                        CurrentGridModifier = newGridModifier;
+                        GridModifierSync.Value = newGridModifier;
 
-                        if (CurrentGridModifier == ReferenceGridModifier)
+                        if (GridModifierSync.Value == ReferenceGridModifier)
                             return;
                         else
                         {
                             Sink.Update();
 
-                            MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(obj.CubeGrid.Name, newGridModifier);
+                            var gridGroup = obj.CubeGrid.GetGridGroup(GridLinkTypeEnum.Mechanical);
+
+                            if (gridGroup != null)
+                            {
+                                List<IMyCubeGrid> allGridsInGroup = new List<IMyCubeGrid>();
+                                gridGroup.GetGrids(allGridsInGroup);
+
+                                foreach (var grid in allGridsInGroup)
+                                {
+                                    MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(grid.Name, newGridModifier);
+                                }
+                            }
+                            else
+                            {
+                                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(obj.CubeGrid.Name, newGridModifier);
+                            }
 
                             ReferenceGridModifier = newGridModifier;
 
-                            SetPowerStatus($"Integrity Field Power: " + CurrentFieldPower + "%", 1500, MyFontEnum.Green);
+                            SetPowerStatus($"Integrity Field Power: " + FieldPowerSync.Value + "%", 1500, MyFontEnum.Green);
                         }
                     }
                 }
             }
             else if (!SIGenBlock.IsWorking && !SiegeActive.Value)
             {
-                if (CurrentFieldPower > 0f)
+                if (FieldPowerSync.Value > 0f)
                 {
-                    CurrentFieldPower = 0f;
-                    CurrentGridModifier = 1.0f;
+                    FieldPowerSync.Value = 0f;
+                    GridModifierSync.Value = 1.0f;
                     ResetGridModifier(SIGenBlock);
                 }
                 else
@@ -600,7 +619,22 @@ namespace StarCore.StructuralIntegrity
         {
             if (obj.EntityId != SIGenBlock.EntityId) return;
 
-            MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(obj.CubeGrid.Name, 1f);
+            var gridGroup = obj.CubeGrid.GetGridGroup(GridLinkTypeEnum.Mechanical);
+
+            if (gridGroup != null)
+            {
+                List<IMyCubeGrid> allGridsInGroup = new List<IMyCubeGrid>();
+                gridGroup.GetGrids(allGridsInGroup);
+
+                foreach (var grid in allGridsInGroup)
+                {
+                    MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(grid.Name, 1f);
+                }
+            }
+            else
+            {
+                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(obj.CubeGrid.Name, 1f);
+            }
         }
         #endregion
 
@@ -611,7 +645,48 @@ namespace StarCore.StructuralIntegrity
                 return;
 
             var allTerminalBlocks = new List<IMySlimBlock>();
-            SIGenBlock.CubeGrid.GetBlocks(allTerminalBlocks);
+
+            var gridGroup = SIGenBlock.CubeGrid.GetGridGroup(GridLinkTypeEnum.Mechanical);
+
+            if (gridGroup != null)
+            {
+                List<IMyCubeGrid> allGridsInGroup = new List<IMyCubeGrid>();
+                gridGroup.GetGrids(allGridsInGroup);
+
+                var gridTerminalBlocks = new List<IMySlimBlock>();
+
+                foreach (var grid in allGridsInGroup)
+                {
+                    grid.GetBlocks(gridTerminalBlocks);
+
+                    foreach (var block in gridTerminalBlocks)
+                    {
+                        if (block.FatBlock != null && (block.FatBlock is IMyConveyorSorter && block.BlockDefinition.Id.SubtypeName.ToString() != "SC_SRB"))
+                        {
+                            allTerminalBlocks.Add(block);
+                        }
+                        else
+                            continue;
+                    }
+                }
+            }
+            else
+            {
+                var gridTerminalBlocks = new List<IMySlimBlock>();
+
+                SIGenBlock.CubeGrid.GetBlocks(gridTerminalBlocks);
+
+                foreach (var block in gridTerminalBlocks)
+                {
+                    
+                    if (block.FatBlock != null && block.FatBlock is IMyConveyorSorter)
+                    {
+                        allTerminalBlocks.Add(block);
+                    }
+                    else
+                        continue;
+                }
+            }
 
             if (MaxAvailableGridPower <= SiegeMinPowerReq)
             {
@@ -629,7 +704,21 @@ namespace StarCore.StructuralIntegrity
 
             if (!SiegeModeModifier && SIGenBlock.IsWorking && MaxAvailableGridPower > 150f)
             {
-                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(SIGenBlock.CubeGrid.Name, 0.1f);
+                if (gridGroup != null)
+                {
+                    List<IMyCubeGrid> allGridsInGroup = new List<IMyCubeGrid>();
+                    gridGroup.GetGrids(allGridsInGroup);
+
+                    foreach (var grid in allGridsInGroup)
+                    {
+                        MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(grid.Name, 0.1f);
+                    }
+                }
+                else
+                {
+                    MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(SIGenBlock.CubeGrid.Name, 0.1f);
+                }
+               
                 SiegeModeModifier = true;
             }
 
@@ -693,17 +782,17 @@ namespace StarCore.StructuralIntegrity
         {
             foreach (var block in allTerminalBlocks)
             {
-                if (block.FatBlock is IMyReactor || block.FatBlock is IMyBatteryBlock ||
-                    block.FatBlock is IMySolarPanel || block.FatBlock is IMyWindTurbine ||
-                    block.FatBlock is IMyCollector || block.FatBlock is IMyCockpit)
+                var entBlock = block as MyEntity;
+                if (entBlock != null && weaponcoreapi._wcApi.HasCoreWeapon(entBlock))
                 {
-                    continue;
+                    weaponcoreapi._wcApi.SetFiringAllowed(entBlock, false);
                 }
 
                 var functionalBlock = block.FatBlock as IMyFunctionalBlock;
                 if (functionalBlock != null)
                 {
                     functionalBlock.Enabled = false;
+                    
                 }
             }
         }
@@ -712,11 +801,10 @@ namespace StarCore.StructuralIntegrity
         {
             foreach (var block in allTerminalBlocks)
             {
-                if (block.FatBlock is IMyReactor || block.FatBlock is IMyBatteryBlock ||
-                    block.FatBlock is IMySolarPanel || block.FatBlock is IMyWindTurbine ||
-                    block.FatBlock is IMyCollector || block.FatBlock is IMyCockpit)
+                var entBlock = block as MyEntity;
+                if (entBlock != null && weaponcoreapi._wcApi.HasCoreWeapon(entBlock))
                 {
-                    continue;
+                    weaponcoreapi._wcApi.SetFiringAllowed(entBlock, true);
                 }
 
                 var functionalBlock = block.FatBlock as IMyFunctionalBlock;
@@ -729,7 +817,7 @@ namespace StarCore.StructuralIntegrity
         #endregion
 
         #region Settings
-        bool LoadSettings()
+        /*bool LoadSettings()
         {
             if (SIGenBlock.Storage == null)
                 return false;
@@ -745,7 +833,10 @@ namespace StarCore.StructuralIntegrity
                 if (loadedSettings != null)
                 {
                     Settings.FieldPower = loadedSettings.FieldPower;
+                    FieldPowerSync.Value = loadedSettings.FieldPower;
+
                     Settings.GridModifier = loadedSettings.GridModifier;
+                    GridModifierSync.Value = loadedSettings.GridModifier;
                     return true;
                 }
             }
@@ -755,9 +846,9 @@ namespace StarCore.StructuralIntegrity
             }
 
             return false;
-        }
+        }*/
 
-        void SaveSettings()
+        /*void SaveSettings()
         {
             try
             {
@@ -779,9 +870,9 @@ namespace StarCore.StructuralIntegrity
             {
                 Log.Error($"Error saving settings!\n{e}");
             }
-        }
+        }*/
 
-        void SettingsChanged()
+       /* void SettingsChanged()
         {
             if (SyncCountdown == 0)
             {
@@ -804,9 +895,9 @@ namespace StarCore.StructuralIntegrity
             {
                 Log.Error($"Error syncing settings!\n{e}");
             }
-        }
+        }*/
 
-        public override bool IsSerialized()
+        /*public override bool IsSerialized()
         {
             try
             {
@@ -818,7 +909,7 @@ namespace StarCore.StructuralIntegrity
             }
 
             return base.IsSerialized();
-        }
+        }*/
         #endregion
 
         #region Terminal Controls
@@ -879,8 +970,8 @@ namespace StarCore.StructuralIntegrity
                         logic.SetPowerStatus($"Block Disabled", 1500, MyFontEnum.Red);
                         return;
                     }
-                    logic.CurrentFieldPower = logic.CurrentFieldPower + 1;
-                    logic.CurrentFieldPower = MathHelper.Clamp(logic.CurrentFieldPower, 0f, 30f);
+                    logic.FieldPowerSync.Value = logic.FieldPowerSync.Value + 1;
+                    logic.FieldPowerSync.Value = MathHelper.Clamp(logic.FieldPowerSync.Value, 0f, 30f);
                 }
             };
             increaseFieldPower.Writer = (b, sb) =>
@@ -888,7 +979,7 @@ namespace StarCore.StructuralIntegrity
                 var logic = b?.GameLogic?.GetAs<SI_Core>();
                 if (logic != null)
                 {
-                    sb.Append("Increase");
+                    sb.Append($"{logic.FieldPowerSync.Value}%");
                 }
             };
             increaseFieldPower.InvalidToolbarTypes = new List<MyToolbarType>()
@@ -919,8 +1010,8 @@ namespace StarCore.StructuralIntegrity
                         logic.SetPowerStatus($"Block Disabled", 1500, MyFontEnum.Red);
                         return;
                     }
-                    logic.CurrentFieldPower = logic.CurrentFieldPower - 1;
-                    logic.CurrentFieldPower = MathHelper.Clamp(logic.CurrentFieldPower, 0f, 30f);
+                    logic.FieldPowerSync.Value = logic.FieldPowerSync.Value - 1;
+                    logic.FieldPowerSync.Value = MathHelper.Clamp(logic.FieldPowerSync.Value, 0f, 30f);
                 }
             };
             decreaseFieldPower.Writer = (b, sb) =>
@@ -928,7 +1019,7 @@ namespace StarCore.StructuralIntegrity
                 var logic = b?.GameLogic?.GetAs<SI_Core>();
                 if (logic != null)
                 {
-                    sb.Append("Decrease");
+                    sb.Append($"{ logic.FieldPowerSync.Value}% ");
                 }
             };
             decreaseFieldPower.InvalidToolbarTypes = new List<MyToolbarType>()
@@ -1058,7 +1149,7 @@ namespace StarCore.StructuralIntegrity
         static float Control_Power_Getter(IMyTerminalBlock block)
         {
             var logic = GetLogic(block);
-            return logic != null ? logic.CurrentFieldPower : 0f;
+            return logic != null ? logic.FieldPowerSync.Value : 0f;
         }
 
         static void Control_Power_Setter(IMyTerminalBlock block, float value)
@@ -1066,8 +1157,8 @@ namespace StarCore.StructuralIntegrity
             var logic = GetLogic(block);
             if (logic != null)
             {
-                logic.CurrentFieldPower = MathHelper.Clamp(value, 0f, 30f);
-                logic.CurrentFieldPower = (float)Math.Round(logic.CurrentFieldPower, 0);
+                logic.FieldPowerSync.Value = MathHelper.Clamp(value, 0f, 30f);
+                logic.FieldPowerSync.Value = (float)Math.Round(logic.FieldPowerSync.Value, 0);
             }
         }
 
@@ -1076,7 +1167,7 @@ namespace StarCore.StructuralIntegrity
             var logic = GetLogic(block);
             if (logic != null)
             {
-                float value = logic.CurrentFieldPower;
+                float value = logic.FieldPowerSync.Value;
                 writer.Append(Math.Round(value, 0, MidpointRounding.ToEven)).Append("%");
             }
         }

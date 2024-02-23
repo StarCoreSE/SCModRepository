@@ -25,7 +25,7 @@ namespace Scripts {
                         MuzzlePartId = "MK1RailgunEL", // The subpart where your muzzle empties are located. This is often the elevation subpart. Subpart_Boomsticks must be written as Boomsticks.
                         AzimuthPartId = "MK1RailgunAZ", // Your Rotating Subpart, the bit that moves sideways.
                         ElevationPartId = "MK1RailgunEL",// Your Elevating Subpart, that bit that moves up.
-                        DurabilityMod = 0.22f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
+                        DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
                     
@@ -117,7 +117,7 @@ namespace Scripts {
                     ElevateRate = 0.005f, // Max traversal speed of elevation subpart in radians per tick.
                     MinAzimuth = -180,
                     MaxAzimuth = 180,
-                    MinElevation = 0,
+                    MinElevation = -7,
                     MaxElevation = 35,
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 0, // Default resting elevation

@@ -180,10 +180,6 @@ namespace Scripts {
                 ForagerLightCoilgunAmmoWC,
                 ForagerLightCoilgunAmmoShrapWC,
                 ForagerLightCoilgunAmmoWC_L,
-                ForagerLightCoilgunAmmoWC_U,
-                ForagerLightCoilgunAmmoWC_U_Branch,
-                ForagerLightCoilgunAmmoWC_U_Effect1,
-                ForagerLightCoilgunAmmoWC_U_Effect2,// Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = Weapon75_Animation,
             //Upgrades = UpgradeModules,

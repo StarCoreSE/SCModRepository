@@ -33,6 +33,8 @@
                 <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="5" />
                 <MountPoint Side="Left" StartX="0" StartY="0" EndX="5" EndY="5" />
                 <MountPoint Side="Top" StartX="0" StartY="0" EndX="5" EndY="5" />
+				<MountPoint Side="Front" StartX="0" StartY="0" EndX="5" EndY="5" />
+
             </MountPoints>
             <VoxelPlacement>
                 <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
@@ -62,7 +64,7 @@
             <MaxPowerConsumption>7.5</MaxPowerConsumption>
             <MinPowerConsumption>0.000000001</MinPowerConsumption>
             <ResourceSinkGroup>Thrust</ResourceSinkGroup>
-            <ForceMagnitude>21600000</ForceMagnitude>
+            <ForceMagnitude>36000000</ForceMagnitude>
             <SlowdownFactor>1</SlowdownFactor>
             <FlameDamageLengthScale>0.8</FlameDamageLengthScale>
             <FlameLengthScale>1.15</FlameLengthScale>

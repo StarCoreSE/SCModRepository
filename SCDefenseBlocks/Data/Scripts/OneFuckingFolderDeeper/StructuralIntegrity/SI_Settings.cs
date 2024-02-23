@@ -1,6 +1,6 @@
 using ProtoBuf;
 
-namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegrity
+namespace StarCore.StructuralIntegrity
 {
     [ProtoContract(UseProtoMembersOnly = true)]
     public class SI_Settings

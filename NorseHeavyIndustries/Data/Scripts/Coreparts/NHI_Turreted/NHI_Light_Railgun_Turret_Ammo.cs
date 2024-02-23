@@ -36,7 +36,7 @@ namespace Scripts
             AmmoRound = "Light_Railgun_Slug", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.5f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 8000f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 16500f, // Direct damage; one steel plate is worth 100.
             Mass = 375f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 25000f, // Recoil. This is applied to the Parent Grid.
@@ -125,7 +125,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 1f, // Multiplier for damage against shields.
+                    Modifier = 1.5f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = 0f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -375,18 +375,18 @@ namespace Scripts
                             "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
-                        DecayTime = 120, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 15, green: 5, blue: 25, alpha: .35f),
+                        DecayTime = 30, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
+                        Color = Color(red: 15, green: 5, blue: 25, alpha: .25f),
                         Back = false,
-                        CustomWidth = .5f,
+                        CustomWidth = 0.35f,
                         UseWidthVariance = false,
                         UseColorFade = true,
                     },
                     OffsetEffect = new OffsetEffectDef
                     {
-                        MaxOffset = 0,// 0 offset value disables this effect
-                        MinLength = 1f,
-                        MaxLength = 1,
+                        MaxOffset = 5,// 0 offset value disables this effect
+                        MinLength = 0.1f,
+                        MaxLength = 0.15f,
                     },
                 },
             },

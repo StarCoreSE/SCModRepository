@@ -11,7 +11,7 @@
      <DisplayName>LRM-5 Modular Launcher</DisplayName>
 	  <Description>
       [10km Targeting Range]
-      [850 m/s]
+      [510 m/s]
       [Energy Damage]
       [Does not reload]
       [5 Missiles]
@@ -65,7 +65,7 @@
      </Id>
      <DisplayName>LRM-5 Modular Launcher Middle</DisplayName>
 	  <Description>[10km Targeting Range]
-    [650 m/s]
+    [390 m/s]
     [Energy Damage]
     [Does not reload]
     [5 Missiles]
@@ -109,7 +109,7 @@
      </Id>
      <DisplayName>LRM-5 Modular Launcher 45</DisplayName>
 	  <Description>[10km Targeting Range]
-    [650 m/s]
+    [390 m/s]
     [Energy Damage]
     [Does not reload]
     [5 Missiles]
@@ -154,7 +154,7 @@
      </Id>
      <DisplayName>LRM-5 Modular Launcher 45 Reversed</DisplayName>
       <Description>[10km Targeting Range]
-    [650 m/s]
+    [390 m/s]
     [Energy Damage]
     [Does not reload]
     [5 Missiles]
@@ -199,12 +199,12 @@
      </Id>
      <DisplayName>MRM-10 Modular Launcher</DisplayName>
 	  <Description>
-    [5km Max Range, 3.5km Optimal Range]
-    [350~ m/s]
+    [7km Max Range, 3.5km Optimal Range]
+    [390~ m/s]
     [Kinetic Damage]
-    [Does not reload]
+    [3 Reloads]
     [10 Missiles]
-      Medium-Ranged-Missile. Optimal range is 2-4 km. Max range 5km.
+      Medium-Ranged-Missile. Fires a sabot at the target when within 1km. Max range 7km.
 	 </Description>
      <Icon>Textures\Icons\mrm10icon.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -256,13 +256,13 @@
      </Id>
      <DisplayName>MRM-10 Modular Launcher Middle</DisplayName>
 	  <Description>
-    [5km Max Range, 3.5km Optimal Range]
-    [350~ m/s]
-    [Kinetic Damage]
-    [Does not reload]
-    [10 Missiles]
-      Medium-Ranged-Missile. Optimal range is 2-4 km. Max range 5km.
-	 </Description>
+      [7km Max Range, 3.5km Optimal Range]
+      [390~ m/s]
+      [Kinetic Damage]
+      [3 Reloads]
+      [10 Missiles]
+      Medium-Ranged-Missile. Fires a sabot at the target when within 1km. Max range 7km.
+    </Description>
      <Icon>Textures\Icons\mrm10icon.dds</Icon>
      <CubeSize>Large</CubeSize>
      <GuiVisible>true</GuiVisible>
@@ -313,13 +313,13 @@
      </Id>
      <DisplayName>MRM-10 Modular Launcher 45</DisplayName>
       <Description>
-    [5km Max Range, 3.5km Optimal Range]
-    [350~ m/s]
-    [Kinetic Damage]
-    [Does not reload]
-    [10 Missiles]
-      Medium-Ranged-Missile. Optimal range is 2-4 km. Max range 5km.
-     </Description>
+        [7km Max Range, 3.5km Optimal Range]
+        [390~ m/s]
+        [Kinetic Damage]
+        [3 Reloads]
+        [10 Missiles]
+        Medium-Ranged-Missile. Fires a sabot at the target when within 1km. Max range 7km.
+      </Description>
      <Icon>Textures\Icons\mrm10icon.dds</Icon>
      <CubeSize>Large</CubeSize>
      <GuiVisible>true</GuiVisible>
@@ -359,13 +359,13 @@
      </Id>
      <DisplayName>MRM-10 Modular Launcher 45 Reversed</DisplayName>
       <Description>
-    [5km Max Range, 3.5km Optimal Range]
-    [350~ m/s]
-    [Kinetic Damage]
-    [Does not reload]
-    [10 Missiles]
-      Medium-Ranged-Missile. Optimal range is 2-4 km. Max range 5km.
-     </Description>
+        [7km Max Range, 3.5km Optimal Range]
+        [390~ m/s]
+        [Kinetic Damage]
+        [3 Reloads]
+        [10 Missiles]
+        Medium-Ranged-Missile. Fires a sabot at the target when within 1km. Max range 7km.
+      </Description>
      <Icon>Textures\Icons\mrm10icon.dds</Icon>
      <CubeSize>Large</CubeSize>
      <GuiVisible>false</GuiVisible>
@@ -404,7 +404,7 @@
      </Id>
      <DisplayName>SRM-8</DisplayName>
 	  <Description>[3.5km Range]
-    [700~ m/s]
+    [420~ m/s]
     [Energy Damage]
     [Does not reload]
     Effective against armor, shields and modules.

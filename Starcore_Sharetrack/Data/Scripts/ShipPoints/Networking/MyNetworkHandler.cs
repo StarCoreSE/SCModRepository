@@ -37,11 +37,24 @@ namespace Math0424.Networking
 
         private void PacketIn(PacketIn e)
         {
+            if (e.PacketId == 45) // SyncRequestPacket
+            {
+                if (MyAPIGateway.Multiplayer.IsServer)
+                {
+                    ulong playerId = e.SenderId;
+                    foreach (var ship in PointCheck.Data.Values)
+                    {
+                        MyLog.Default.WriteLineAndConsole("Auto-syncing ship ID " + ship.GridID);
+                        //PointCheck.Sending[ship.GridID].Add(e.SenderId);
+                        PacketGridData packet = new PacketGridData { id = ship.GridID, tracked = ship, value = 1 };
+                        Static.MyNetwork.TransmitToPlayer(packet, e.SenderId);
+                    }
+                }
+            }
 
             if (e.PacketId == 1)
             {
-				
-				
+			
 				
 			//inject for shared list
 

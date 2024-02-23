@@ -9,12 +9,12 @@ using VRage.Game.ModAPI.Ingame.Utilities;
 using VRage.Game.ObjectBuilders.Definitions;
 using VRage.Utils;
 
-namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegrity
+namespace StarCore.StructuralIntegrity
 {
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     public class SI_Config : MySessionComponentBase
     {
-        Config_Settings Settings = new Config_Settings();
+        readonly Config_Settings Settings = new Config_Settings();
 
         public override void LoadData()
         {

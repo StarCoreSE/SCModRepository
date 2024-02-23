@@ -169,7 +169,7 @@
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>1.5</Volume>
+      <Volume>1</Volume>
       <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
@@ -188,7 +188,7 @@
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>2</Volume>
+      <Volume>1</Volume>
       <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">

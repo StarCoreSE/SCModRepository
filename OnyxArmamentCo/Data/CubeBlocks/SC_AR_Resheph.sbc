@@ -37,6 +37,8 @@
 			<OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
 			<BlockPairName>SC_AR_Resheph</BlockPairName>
 			<BuildTimeSeconds>120</BuildTimeSeconds>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
 			<EdgeType>Light</EdgeType>
 			<WeaponDefinitionId Subtype="SCGenericWepDef" />
 			<ResourceSinkGroup>Defense</ResourceSinkGroup>

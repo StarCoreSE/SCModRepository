@@ -210,7 +210,7 @@
 
     <Definition xsi:type="MyObjectBuilder_CargoContainerDefinition">
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeBlockLargeIndustrialContainer</SubtypeId>
       </Id>
       <DisplayName>!!DECORATIVE!! LargeIndustrialCargoContainer</DisplayName>
