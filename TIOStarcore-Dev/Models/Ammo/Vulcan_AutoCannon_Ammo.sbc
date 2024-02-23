@@ -4,21 +4,21 @@
 		<Definition>
 			<Id>
 				<TypeId>CubeBlock</TypeId>
-				<SubtypeId>TorpReaper_Torp</SubtypeId>
+				<SubtypeId>Vulcan_AutoCannon_Ammo</SubtypeId>
 			</Id>
-			<DisplayName>DisplayName_TorpReaper_Torp</DisplayName>
-			<Description>Description_TorpReaper_Torp</Description>
+			<DisplayName>DisplayName_Vulcan_AutoCannon_Ammo</DisplayName>
+			<Description>Description_Vulcan_AutoCannon_Ammo</Description>
 			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="1" y="1" z="1"/>
 			<ModelOffset x="0" y="0" z="0"/>
-			<Model>Models\Ammo\TorpReaper_Torp.mwm</Model>
+			<Model>Models\Ammo\Vulcan_AutoCannon_Ammo.mwm</Model>
 			<Components>
 				<Component Subtype="SteelPlate" Count="10"/>
 			</Components>
 			<CriticalComponent Subtype="SteelPlate" Index="0"/>
-			<BlockPairName>TorpReaper_Torp</BlockPairName>
+			<BlockPairName>Vulcan_AutoCannon_Ammo</BlockPairName>
 		</Definition>
 	</CubeBlocks>
 </Definitions>

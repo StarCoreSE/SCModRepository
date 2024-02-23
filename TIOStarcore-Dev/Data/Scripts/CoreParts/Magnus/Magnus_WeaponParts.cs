@@ -146,7 +146,7 @@ namespace Scripts {
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "MagnusBlasterChargeSound", // Audio for warmup effect.
-                    FiringSound = "PlasXshot", // Audio for firing.
+                    FiringSound = "PlasXBatteryShot", // Audio for firing.
                     FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "", // Sound SubtypeID, for when your Weapon is in a reloading state
                     NoAmmoSound = "",
