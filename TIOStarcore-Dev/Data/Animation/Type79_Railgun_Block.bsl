@@ -1,4 +1,4 @@
-@BlockID "Type79_Railgun_Block"
+@BlockID "Type25_Driver"
 @Version 2
 @Author Krynoc
 @Weaponcore 0

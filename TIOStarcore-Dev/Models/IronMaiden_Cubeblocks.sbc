@@ -6,7 +6,7 @@
         <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
             <Id>
                 <TypeId>ConveyorSorter</TypeId>
-                <SubtypeId>Priest_Block</SubtypeId>
+                <SubtypeId>IronMaiden_Block</SubtypeId>
             </Id>
             <DisplayName>FEM-300 Heavy Repeater (Iron Maiden)</DisplayName>
             <Description>Reliable weapon with good tracking and wide range of movement. Fires Tungsten Rounds at incredible speed. Bypasses shield by a small percentage</Description>

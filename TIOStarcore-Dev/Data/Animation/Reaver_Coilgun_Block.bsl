@@ -1,4 +1,4 @@
-@BlockID "Reaver_Coilgun_Block"
+@BlockID "Reaver_Coilgun"
 @Version 2
 @Author Krynoc
 @Weaponcore 0

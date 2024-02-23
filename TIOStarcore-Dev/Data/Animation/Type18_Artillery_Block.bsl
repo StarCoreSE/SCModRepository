@@ -1,4 +1,4 @@
-@BlockID "Type18_Artillery_Block"
+@BlockID "Type18_Artillery"
 @Version 2
 @Author Krynoc
 @Weaponcore 0

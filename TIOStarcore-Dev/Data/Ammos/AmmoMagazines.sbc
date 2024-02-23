@@ -1,0 +1,279 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AmmoMagazines>
+     
+     <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>Coil1</SubtypeId>
+      </Id>
+      <DisplayName>Coilgun Round </DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\Sabot250.dds</Icon>
+      <Size>
+                <X>0.5</X>
+                <Y>0.5</Y>
+                <Z>2.5</Z>
+            </Size>
+            <Mass>1000</Mass>
+            <Volume>1000</Volume>
+      <Model>Models\Cubes\Sabot250.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="Blank" />
+    </AmmoMagazine>
+
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>LML1</SubtypeId>
+      </Id>
+      <DisplayName>Light Missile </DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\Sabot250.dds</Icon>
+      <Size>
+                <X>0.5</X>
+                <Y>0.5</Y>
+                <Z>2.5</Z>
+            </Size>
+            <Mass>1000</Mass>
+            <Volume>1000</Volume>
+      <Model>Models\Cubes\Sabot250.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="Blank" />
+    </AmmoMagazine>
+
+     <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>HAML1</SubtypeId>
+      </Id>
+      <DisplayName>Light Missile </DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\Sabot250.dds</Icon>
+      <Size>
+                <X>0.5</X>
+                <Y>0.5</Y>
+                <Z>2.5</Z>
+            </Size>
+            <Mass>1000</Mass>
+            <Volume>1000</Volume>
+      <Model>Models\Cubes\Sabot250.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="Blank" />
+    </AmmoMagazine>
+
+
+     <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>SiegeArty1</SubtypeId>
+      </Id>
+      <DisplayName>Siege Artillery Round </DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\Sabot250.dds</Icon>
+      <Size>
+                <X>0.5</X>
+                <Y>0.5</Y>
+                <Z>2.5</Z>
+            </Size>
+            <Mass>1000</Mass>
+            <Volume>1000</Volume>
+      <Model>Models\Cubes\Sabot250.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="Blank" />
+    </AmmoMagazine>
+
+     <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>QuadArty1</SubtypeId>
+      </Id>
+      <DisplayName>Artillery Round </DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\Sabot250.dds</Icon>
+      <Size>
+                <X>0.5</X>
+                <Y>0.5</Y>
+                <Z>2.5</Z>
+            </Size>
+            <Mass>1000</Mass>
+            <Volume>1000</Volume>
+      <Model>Models\Cubes\Sabot250.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="Blank" />
+    </AmmoMagazine>
+
+     <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>QuadAuto1</SubtypeId>
+      </Id>
+      <DisplayName>Autocannon Round </DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\Sabot250.dds</Icon>
+      <Size>
+                <X>0.5</X>
+                <Y>0.5</Y>
+                <Z>2.5</Z>
+            </Size>
+            <Mass>1000</Mass>
+            <Volume>1000</Volume>
+      <Model>Models\Cubes\Sabot250.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="Blank" />
+    </AmmoMagazine>
+
+     <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>DualArty1</SubtypeId>
+      </Id>
+      <DisplayName>Artillery Round </DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\Sabot250.dds</Icon>
+      <Size>
+                <X>0.5</X>
+                <Y>0.5</Y>
+                <Z>2.5</Z>
+            </Size>
+            <Mass>1000</Mass>
+            <Volume>1000</Volume>
+      <Model>Models\Cubes\Sabot250.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="Blank" />
+    </AmmoMagazine>
+
+
+ <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>HeavyTorpedo1</SubtypeId>
+      </Id>
+      <DisplayName>Heavy Torpedo </DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\Sabot250.dds</Icon>
+      <Size>
+                <X>0.5</X>
+                <Y>0.5</Y>
+                <Z>2.5</Z>
+            </Size>
+            <Mass>1000</Mass>
+            <Volume>1000</Volume>
+      <Model>Models\StandardShellModel.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="Blank" />
+    </AmmoMagazine>
+
+    <AmmoMagazine>
+            <Id>
+                <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>RedAmmoMagDef</SubtypeId>
+            </Id>
+            <DisplayName>Artillery Ammo "Red"</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\redammo.dds</Icon>
+            <Size>
+                <X>5</X>
+                <Y>1</Y>
+                <Z>1</Z>
+            </Size>
+            <Mass>200</Mass>
+            <Volume>20</Volume>
+            <Model>Models\StandardShellModel.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>1</Capacity>
+            <AmmoDefinitionId Subtype="SAIDS_Red_Ammo" />
+
+            <MinimumOfferAmount>10</MinimumOfferAmount>
+            <MaximumOfferAmount>100</MaximumOfferAmount>
+            <MinimumOrderAmount>10</MinimumOrderAmount>
+            <MaximumOrderAmount>100</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+        </AmmoMagazine>
+
+
+        <AmmoMagazine>
+            <Id>
+                <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>BlueAmmoMagDef</SubtypeId>
+            </Id>
+            <DisplayName>Accelerator Ammo "Blue"</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\blueammo.dds</Icon>
+            <Size>
+                <X>5</X>
+                <Y>1</Y>
+                <Z>1</Z>
+            </Size>
+            <Mass>200</Mass>
+            <Volume>20</Volume>
+            <Model>Models\StandardShellModel.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>1</Capacity>
+            <AmmoDefinitionId Subtype="SAIDS_Blue_Ammo" />
+
+            <MinimumOfferAmount>10</MinimumOfferAmount>
+            <MaximumOfferAmount>100</MaximumOfferAmount>
+            <MinimumOrderAmount>10</MinimumOrderAmount>
+            <MaximumOrderAmount>100</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+        </AmmoMagazine>
+
+          <AmmoMagazine>
+            <Id>
+                <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>PurpleAmmoMagDef</SubtypeId>
+            </Id>
+            <DisplayName>Guided Ammo "Purple"</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\purpleammo.dds</Icon>
+            <Size>
+                <X>5</X>
+                <Y>1</Y>
+                <Z>1</Z>
+            </Size>
+            <Mass>200</Mass>
+            <Volume>20</Volume>
+            <Model>Models\StandardShellModel.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>1</Capacity>
+            <AmmoDefinitionId Subtype="SAIDS_Purple_Ammo" />
+
+            <MinimumOfferAmount>10</MinimumOfferAmount>
+            <MaximumOfferAmount>100</MaximumOfferAmount>
+            <MinimumOrderAmount>10</MinimumOrderAmount>
+            <MaximumOrderAmount>100</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+        </AmmoMagazine>
+
+        <AmmoMagazine>
+            <Id>
+                <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>GreenAmmoMagDef</SubtypeId>
+            </Id>
+            <DisplayName>Autocannon Ammo "Green"</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\greenammo.dds</Icon>
+            <Size>
+                <X>5</X>
+                <Y>1</Y>
+                <Z>1</Z>
+            </Size>
+            <Mass>200</Mass>
+            <Volume>20</Volume>
+            <Model>Models\StandardShellModel.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>1</Capacity>
+            <AmmoDefinitionId Subtype="SAIDS_Green_Ammo" />
+
+            <MinimumOfferAmount>10</MinimumOfferAmount>
+            <MaximumOfferAmount>100</MaximumOfferAmount>
+            <MinimumOrderAmount>10</MinimumOrderAmount>
+            <MaximumOrderAmount>100</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+        </AmmoMagazine>
+   
+
+    
+   
+
+
+	
+  </AmmoMagazines>
+</Definitions>

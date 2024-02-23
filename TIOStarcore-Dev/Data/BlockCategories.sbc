@@ -11,19 +11,30 @@
 			    <StrictSearch>true</StrictSearch>
             <ItemIds>
 				<string>ConveyorSorter/Priest_Block</string>
-				<string>ConveyorSorter/Laser_Block</string>
+				<string>ConveyorSorter/PriestReskin_Block</string>
+				<string>ConveyorSorter/APES_Block</string>
 				<string>ConveyorSorter/Type18_Artillery</string>
 				<string>ConveyorSorter/Type21_Artillery</string>
+				<string>ConveyorSorter/Type24_Artillery</string>
+				<string>ConveyorSorter/Type19_Driver</string>
+				<string>ConveyorSorter/Type22_Driver</string>
+				<string>ConveyorSorter/Type25_Driver</string>				
 				<string>ConveyorSorter/Torp_Block</string>
 				<string>ConveyorSorter/Assault_Coil_Turret</string>
-				<string>ConveyorSorter/Light_Coil_Turret</string>
-				<string>ConveyorSorter/K_HS_Damnation</string>
-
+				<string>ConveyorSorter/Reaver_Coilgun</string>
+				<string>ConveyorSorter/GoalieCasemate</string>
+			    <string>ConveyorSorter/Type17_BeamLance</string>
 				<string>ConveyorSorter/Fixed_Rockets</string>
-				<string>K_HS_9x9_HSRB_Dreadnight</string>
-
-				<string>K_HS_9x9_K3_King</string>
+				<string>ConveyorSorter/VindicatorKineticLance</string>
+				<string>ConveyorSorter/HadeanPlasmaBlastgun</string>
 				<string>ConveyorSorter/K_HSR_Utilities_Reactor_Gel_LG</string>
+				<string>ConveyorSorter/HeavyCarronade_5x5_Turret</string>
+				<string>ConveyorSorter/X4_7x7_HeavyTurret</string>
+				<string>ConveyorSorter/UnguidedRocketTurret</string>
+				<string>ConveyorSorter/DrunkRocketTurret</string>
+				<string>ConveyorSorter/DualSnubLaserTurret</string>
+				<string>ConveyorSorter/DualPulseLaserTurret</string>
+
             </ItemIds>
         </Category>
 		
@@ -38,23 +49,179 @@
 			<StrictSearch>true</StrictSearch>
 			<ItemIds>
 				<string>ConveyorSorter/Priest_Block</string>
-				<string>ConveyorSorter/Laser_Block</string>
+				<string>ConveyorSorter/PriestReskin_Block</string>
+				<string>ConveyorSorter/APES_Block</string>
 				<string>ConveyorSorter/Type18_Artillery</string>
 				<string>ConveyorSorter/Type21_Artillery</string>
+				<string>ConveyorSorter/Type24_Artillery</string>
+				<string>ConveyorSorter/Type19_Driver</string>
+				<string>ConveyorSorter/Type22_Driver</string>
+				<string>ConveyorSorter/Type25_Driver</string>
 				<string>ConveyorSorter/Torp_Block</string>
 				<string>ConveyorSorter/Assault_Coil_Turret</string>
-				<string>ConveyorSorter/Light_Coil_Turret</string>
-			    <string>ConveyorSorter/RailgunTurret_Block</string>
-				<string>K_HS_Damnation</string>
+				<string>ConveyorSorter/Reaver_Coilgun</string>
+			    <string>ConveyorSorter/Type17_BeamLance</string>
+				<string>ConveyorSorter/GoalieCasemate</string>
+				<string>ConveyorSorter/DualSnubLaserTurret</string>
+				<string>ConveyorSorter/DualPulseLaserTurret</string>
+
+				<string>ConveyorSorter/HeavyCarronade_5x5_Turret</string>				
+				<string>ConveyorSorter/X4_7x7_HeavyTurret</string>
+				<string>ConveyorSorter/UnguidedRocketTurret</string>
+				<string>ConveyorSorter/DrunkRocketTurret</string>
+
 				<string>ConveyorSorter/Fixed_Rockets</string>
 				<string>ConveyorSorter/Null_Point_Jump_Disruptor_Large</string>
 
-				<string>K_HS_9x9_K3_King</string>
-				<string>K_HS_9x9_HSRB_Dreadnight</string>
-				<string>ConveyorSorter/K_HSR_Utilities_Reactor_Gel_LG</string>				
+
+				<string>ConveyorSorter/VindicatorKineticLance</string>
+				<string>ConveyorSorter/HadeanPlasmaBlastgun</string>
+				<string>ConveyorSorter/K_HSR_Utilities_Reactor_Gel_LG</string>
+							
 			</ItemIds>
 		</Category>
-	
+	  
+	  <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+		  <Id>
+			  <TypeId>GuiBlockCategoryDefinition</TypeId>
+			  <SubtypeId/>
+		  </Id>
+		  <DisplayName>DisplayName_Category_LargeBlocks</DisplayName>
+		  <Name>LargeBlocks</Name>
+		  <ItemIds>
+			  <string>ConveyorSorter/Thagomizer</string>
+		  </ItemIds>
+	  </Category>
+
+
+	  <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+		  <Id>
+			  <TypeId>GuiBlockCategoryDefinition</TypeId>
+			  <SubtypeId/>
+		  </Id>
+		  <DisplayName>DisplayName_Category_ShipWeapons</DisplayName>
+		  <Name>Weapons</Name>
+		  <ItemIds>
+			  <string>ConveyorSorter/Thagomizer</string>
+		  </ItemIds>
+	  </Category>
+
+	  <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+		  <Id>
+			  <TypeId>GuiBlockCategoryDefinition</TypeId>
+			  <SubtypeId/>
+		  </Id>
+		  <DisplayName>DisplayName_Category_LargeBlocks</DisplayName>
+		  <Name>LargeBlocks</Name>
+		  <ItemIds>
+			  <string>ConveyorSorter/Thagomizer_Angled</string>
+		  </ItemIds>
+	  </Category>
+
+
+	  <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+		  <Id>
+			  <TypeId>GuiBlockCategoryDefinition</TypeId>
+			  <SubtypeId/>
+		  </Id>
+		  <DisplayName>DisplayName_Category_ShipWeapons</DisplayName>
+		  <Name>Weapons</Name>
+		  <ItemIds>
+			  <string>ConveyorSorter/Thagomizer_Angled</string>
+		  </ItemIds>
+	  </Category> 
 
 	</CategoryClasses>
+
+	<BlockVariantGroups>
+	<!-- Turret Variants-->
+		<BlockVariantGroup>
+			<Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="MyWeaponPack" />
+			<Icon>Textures\GUI\Icons\Mk1CannonMainScene.dds</Icon>
+			<DisplayName>Good Fucking Guns</DisplayName>
+			<Description></Description>
+			<Blocks>
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Priest_Block" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="PriestReskin_Block" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="APES_Block" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="GoalieCasemate" />
+
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="DualSnubLaserTurret" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="DualPulseLaserTurret" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Reaver_Coilgun" />
+
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type18_Artillery" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type21_Artillery" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type24_Artillery" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type19_Driver" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type22_Driver" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type25_Driver" />
+				<!-- <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type17_BeamLance" /> -->
+
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HeavyCarronade_5x5_Turret" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="X4_7x7_HeavyTurret" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="UnguidedRocketTurret" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="DrunkRocketTurret" />
+
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Torp_Block" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="VindicatorKineticLance" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HadeanPlasmaBlastgun" />
+
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Fixed_Rockets" />
+
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HeavyFighterBay" />
+		
+			</Blocks>
+		</BlockVariantGroup>		
+		
+		
+		
+	<BlockVariantGroup>
+		<Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Type_Artillery" />
+		<Icon>Textures\GUI\Icons\Mk1CannonMainScene.dds</Icon>
+		<DisplayName>Heavy Naval Artillery</DisplayName>
+		<Description>Contains the Mercury, Mars, and Jupiter Types</Description>
+		<Blocks>
+			<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type18_Artillery" />
+			<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type21_Artillery" />
+			<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type24_Artillery" />			
+		</Blocks>
+	</BlockVariantGroup>
+
+		<BlockVariantGroup>
+			<Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Type_Driver" />
+			<Icon>Textures\GUI\Icons\Mk1Railgun_Main.dds</Icon>
+			<DisplayName>Heavy Electromagnetic Drivers</DisplayName>
+			<Description>Contains the Merlin, Medusa, and Manticore Types</Description>
+			<Blocks>
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type19_Driver" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type22_Driver" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type25_Driver" />
+			</Blocks>
+		</BlockVariantGroup>
+
+		<BlockVariantGroup>
+			<Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="F-Series" />
+			<Icon>Textures\GUI\Icons\priest.dds</Icon>
+			<DisplayName>Heavy Machineguns</DisplayName>
+			<Description>Contains the F-Series Heavy Machineguns</Description>
+			<Blocks>
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Priest_Block" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="PriestReskin_Block" />
+			</Blocks>
+		</BlockVariantGroup>
+
+		<BlockVariantGroup>
+			<Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="KREEG" />
+			<Icon>Textures\GUI\Icons\PlasmaBlastgun.dds</Icon>
+			<DisplayName>Superheavy Turrets</DisplayName>
+			<Description>Contains the Hadean and Vindicator Turrets</Description>
+			<Blocks>
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HadeanPlasmaBlastgun" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="VindicatorKineticLance" />
+			</Blocks>
+		</BlockVariantGroup>	
+		
+		
+	</BlockVariantGroups>
 </Definitions>

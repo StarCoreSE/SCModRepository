@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <CubeBlocks>
+		<!-- Type Railgun Drivers -->
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>Type19_Driver</SubtypeId>
+			</Id>
+			<DisplayName>Type 19 'Merlin' Heavy Railgun Turret</DisplayName>
+			<Description>
+            Extended Ranged Turret Magazine Capacity: 8 Reload Speed: 21.25 seconds
+            [8km Targeting Range]
+            [Kinetic damage]
+            [Draws Power]
+            [2200 m/s]
+            This weapon slowly repairs itself while offline, and when below functional.
+            </Description>
+			<GuiVisible>true</GuiVisible>
+			<Icon>Textures\GUI\Icons\Mk1Railgun_Main.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="5" z="6"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="6.00" EndY="3.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="6.00" EndY="3.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="6.00"/>
+			</MountPoints>
+			<Model>Models\Mk1Railgun_Main.mwm</Model>
+			<Components>
+
+				<Component Subtype="TurretBaseComponent" Count="10" />
+				<Component Subtype="TurretRotorComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="1" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="4" />
+
+				<!--
+				<Component Count="1000" Subtype="SteelPlate"/>
+				<Component Count="150" Subtype="Construction"/>
+				<Component Count="40" Subtype="LargeTube" />
+                <Component Count="50" Subtype="Motor" />
+				<Component Count="150" Subtype="Computer"/>
+				<Component Count="50" Subtype="MetalGrid" />
+				<Component Count="150" Subtype="Construction"/>
+				<Component Count="3000" Subtype="SteelPlate"/>-->
+			</Components>
+
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Mk1Railgun_Main_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\Mk1Railgun_Main_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Mk1Railgun_Main_BS3.mwm"/>
+			</BuildProgressModels>
+			<CriticalComponent Index="0" Subtype="Computer"/>
+
+			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 
+            <BuildTimeSeconds>400</BuildTimeSeconds>
+            <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+            <DamagedSound>ParticleElectrical</DamagedSound>
+            <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+            <DestroySound>WepSmallWarheadExpl</DestroySound>
+            <MirroringZ>Y</MirroringZ>
+            <MirroringY>Z</MirroringY>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<RequiredPowerInput>0.00002</RequiredPowerInput>
+            <PCU>800</PCU>
+            <IsAirTight>true</IsAirTight>
+        </Definition>
+    </CubeBlocks>
+</Definitions>

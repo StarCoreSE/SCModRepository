@@ -1,0 +1,345 @@
+﻿<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Ammos>
+
+		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+			<Id>
+				<TypeId>AmmoDefinition</TypeId>
+				<SubtypeId>IronMaiden_Ammo</SubtypeId>
+			</Id>
+			<BasicProperties>
+				<DesiredSpeed>20000</DesiredSpeed>
+				<SpeedVariance>0</SpeedVariance>
+				<MaxTrajectory>5</MaxTrajectory>
+				<BackkickForce>0</BackkickForce>
+				<PhysicalMaterial>GunBullet</PhysicalMaterial>
+			</BasicProperties>
+			<ProjectileProperties>
+				<ProjectileTrailScale>10</ProjectileTrailScale>
+				<ProjectileHitImpulse>10</ProjectileHitImpulse>
+				<ProjectileMassDamage>10</ProjectileMassDamage>
+				<ProjectileHealthDamage>10</ProjectileHealthDamage>
+				<HeadShot>true</HeadShot>
+			</ProjectileProperties>
+		</Ammo>
+
+		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+			<Id>
+				<TypeId>AmmoDefinition</TypeId>
+				<SubtypeId>AGunBullet</SubtypeId>
+			</Id>
+			<BasicProperties>
+				<DesiredSpeed>2000</DesiredSpeed>
+				<SpeedVariance>0</SpeedVariance>
+				<MaxTrajectory>6000</MaxTrajectory>
+				<BackkickForce>200</BackkickForce>
+				<PhysicalMaterial>GunBullet</PhysicalMaterial>
+				<ExplosiveDamageMultiplier>0.6</ExplosiveDamageMultiplier>
+			</BasicProperties>
+			<ProjectileProperties>
+				<ProjectileTrailScale>0.1</ProjectileTrailScale>
+				<ProjectileHitImpulse>2</ProjectileHitImpulse>
+				<ProjectileMassDamage>90</ProjectileMassDamage>
+				<ProjectileHealthDamage>5</ProjectileHealthDamage>
+				<HeadShot>false</HeadShot>
+			</ProjectileProperties>
+		</Ammo>
+
+		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+			<Id>
+				<TypeId>AmmoDefinition</TypeId>
+				<SubtypeId>AutoShell</SubtypeId>
+			</Id>
+			<BasicProperties>
+				<DesiredSpeed>400</DesiredSpeed>
+				<SpeedVariance>0</SpeedVariance>
+				<MaxTrajectory>800</MaxTrajectory>
+				<BackkickForce>1000</BackkickForce>
+				<PhysicalMaterial>GunAutocannonBullet</PhysicalMaterial>
+				<ExplosiveDamageMultiplier>0.8</ExplosiveDamageMultiplier>
+			</BasicProperties>
+			<ProjectileProperties>
+				<ProjectileTrailScale>0.5</ProjectileTrailScale>
+				<ProjectileHitImpulse>3</ProjectileHitImpulse>
+				<ProjectileMassDamage>500</ProjectileMassDamage>
+				<ProjectileHealthDamage>85</ProjectileHealthDamage>
+				<HeadShot>true</HeadShot>
+			</ProjectileProperties>
+		</Ammo>
+
+		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+			<Id>
+				<TypeId>AmmoDefinition</TypeId>
+				<SubtypeId>Laser_Ammo</SubtypeId>
+			</Id>
+			<BasicProperties>
+				<DesiredSpeed>20000</DesiredSpeed>
+				<SpeedVariance>0</SpeedVariance>
+				<MaxTrajectory>5</MaxTrajectory>
+				<BackkickForce>0</BackkickForce>
+				<PhysicalMaterial>GunBullet</PhysicalMaterial>
+			</BasicProperties>
+			<ProjectileProperties>
+				<ProjectileTrailScale>10</ProjectileTrailScale>
+				<ProjectileHitImpulse>10</ProjectileHitImpulse>
+				<ProjectileMassDamage>10</ProjectileMassDamage>
+				<ProjectileHealthDamage>10</ProjectileHealthDamage>
+				<HeadShot>true</HeadShot>
+			</ProjectileProperties>
+		</Ammo>
+
+		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+            <Id>
+                <TypeId>AmmoDefinition</TypeId>
+                <SubtypeId>C_Type_Ammo</SubtypeId>
+            </Id>
+            <BasicProperties>
+                <DesiredSpeed>20000</DesiredSpeed>
+                <SpeedVariance>0</SpeedVariance>
+                <MaxTrajectory>5</MaxTrajectory>
+                <BackkickForce>0</BackkickForce>
+                <PhysicalMaterial>GunBullet</PhysicalMaterial>
+            </BasicProperties>
+            <ProjectileProperties>
+                <ProjectileTrailScale>10</ProjectileTrailScale>
+                <ProjectileHitImpulse>10</ProjectileHitImpulse>
+                <ProjectileMassDamage>10</ProjectileMassDamage>
+                <ProjectileHealthDamage>10</ProjectileHealthDamage>
+                <HeadShot>true</HeadShot>
+            </ProjectileProperties>
+        </Ammo>
+		
+		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+			<Id>
+				<TypeId>AmmoDefinition</TypeId>
+				<SubtypeId>R_Type_Ammo</SubtypeId>
+			</Id>
+			<BasicProperties>
+				<DesiredSpeed>20000</DesiredSpeed>
+				<SpeedVariance>0</SpeedVariance>
+				<MaxTrajectory>5</MaxTrajectory>
+				<BackkickForce>0</BackkickForce>
+				<PhysicalMaterial>GunBullet</PhysicalMaterial>
+			</BasicProperties>
+			<ProjectileProperties>
+				<ProjectileTrailScale>10</ProjectileTrailScale>
+				<ProjectileHitImpulse>10</ProjectileHitImpulse>
+				<ProjectileMassDamage>10</ProjectileMassDamage>
+				<ProjectileHealthDamage>10</ProjectileHealthDamage>
+				<HeadShot>true</HeadShot>
+			</ProjectileProperties>
+		</Ammo>
+		
+		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+			<Id>
+				<TypeId>AmmoDefinition</TypeId>
+				<SubtypeId>Depleted_Uranium_Slugs_Ammo</SubtypeId>
+			</Id>
+			<BasicProperties>
+				<DesiredSpeed>20000</DesiredSpeed>
+				<SpeedVariance>0</SpeedVariance>
+				<MaxTrajectory>5</MaxTrajectory>
+				<BackkickForce>0</BackkickForce>
+				<PhysicalMaterial>GunBullet</PhysicalMaterial>
+			</BasicProperties>
+			<ProjectileProperties>
+				<ProjectileTrailScale>10</ProjectileTrailScale>
+				<ProjectileHitImpulse>10</ProjectileHitImpulse>
+				<ProjectileMassDamage>10</ProjectileMassDamage>
+				<ProjectileHealthDamage>10</ProjectileHealthDamage>
+				<HeadShot>true</HeadShot>
+			</ProjectileProperties>
+		</Ammo>
+		
+		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+			<Id>
+				<TypeId>AmmoDefinition</TypeId>
+				<SubtypeId>Magnetic_Slugs_Ammo</SubtypeId>
+			</Id>
+			<BasicProperties>
+				<DesiredSpeed>20000</DesiredSpeed>
+				<SpeedVariance>0</SpeedVariance>
+				<MaxTrajectory>5</MaxTrajectory>
+				<BackkickForce>0</BackkickForce>
+				<PhysicalMaterial>GunBullet</PhysicalMaterial>
+			</BasicProperties>
+			<ProjectileProperties>
+				<ProjectileTrailScale>10</ProjectileTrailScale>
+				<ProjectileHitImpulse>10</ProjectileHitImpulse>
+				<ProjectileMassDamage>10</ProjectileMassDamage>
+				<ProjectileHealthDamage>10</ProjectileHealthDamage>
+				<HeadShot>true</HeadShot>
+			</ProjectileProperties>
+		</Ammo>
+
+		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+			<Id>
+				<TypeId>AmmoDefinition</TypeId>
+				<SubtypeId>RailgunTurret_Ammo</SubtypeId>
+			</Id>
+			<BasicProperties>
+				<DesiredSpeed>20000</DesiredSpeed>
+				<SpeedVariance>0</SpeedVariance>
+				<MaxTrajectory>5</MaxTrajectory>
+				<BackkickForce>0</BackkickForce>
+				<PhysicalMaterial>GunBullet</PhysicalMaterial>
+			</BasicProperties>
+			<ProjectileProperties>
+				<ProjectileTrailScale>10</ProjectileTrailScale>
+				<ProjectileHitImpulse>10</ProjectileHitImpulse>
+				<ProjectileMassDamage>10</ProjectileMassDamage>
+				<ProjectileHealthDamage>10</ProjectileHealthDamage>
+				<HeadShot>true</HeadShot>
+			</ProjectileProperties>
+		</Ammo>
+
+		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+			<Id>
+				<TypeId>AmmoDefinition</TypeId>
+				<SubtypeId>Torp_Ammo</SubtypeId>
+			</Id>
+			<BasicProperties>
+				<DesiredSpeed>20000</DesiredSpeed>
+				<SpeedVariance>0</SpeedVariance>
+				<MaxTrajectory>5</MaxTrajectory>
+				<BackkickForce>0</BackkickForce>
+				<PhysicalMaterial>GunBullet</PhysicalMaterial>
+			</BasicProperties>
+			<ProjectileProperties>
+				<ProjectileTrailScale>10</ProjectileTrailScale>
+				<ProjectileHitImpulse>10</ProjectileHitImpulse>
+				<ProjectileMassDamage>10</ProjectileMassDamage>
+				<ProjectileHealthDamage>10</ProjectileHealthDamage>
+				<HeadShot>true</HeadShot>
+			</ProjectileProperties>
+		</Ammo>
+		
+		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+			<Id>
+				<TypeId>AmmoDefinition</TypeId>
+				<SubtypeId>EMPTorp_Ammo</SubtypeId>
+			</Id>
+			<BasicProperties>
+				<DesiredSpeed>20000</DesiredSpeed>
+				<SpeedVariance>0</SpeedVariance>
+				<MaxTrajectory>5</MaxTrajectory>
+				<BackkickForce>0</BackkickForce>
+				<PhysicalMaterial>GunBullet</PhysicalMaterial>
+			</BasicProperties>
+			<ProjectileProperties>
+				<ProjectileTrailScale>10</ProjectileTrailScale>
+				<ProjectileHitImpulse>10</ProjectileHitImpulse>
+				<ProjectileMassDamage>10</ProjectileMassDamage>
+				<ProjectileHealthDamage>10</ProjectileHealthDamage>
+				<HeadShot>true</HeadShot>
+			</ProjectileProperties>
+		</Ammo>
+
+		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+			<Id>
+				<TypeId>AmmoDefinition</TypeId>
+				<SubtypeId>VMLS_Ammo</SubtypeId>
+			</Id>
+			<BasicProperties>
+				<DesiredSpeed>20000</DesiredSpeed>
+				<SpeedVariance>0</SpeedVariance>
+				<MaxTrajectory>5</MaxTrajectory>
+				<BackkickForce>0</BackkickForce>
+				<PhysicalMaterial>GunBullet</PhysicalMaterial>
+			</BasicProperties>
+			<ProjectileProperties>
+				<ProjectileTrailScale>10</ProjectileTrailScale>
+				<ProjectileHitImpulse>10</ProjectileHitImpulse>
+				<ProjectileMassDamage>10</ProjectileMassDamage>
+				<ProjectileHealthDamage>10</ProjectileHealthDamage>
+				<HeadShot>true</HeadShot>
+			</ProjectileProperties>
+		</Ammo>
+		
+		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+			<Id>
+				<TypeId>AmmoDefinition</TypeId>
+				<SubtypeId>SwarmVMLS_Ammo</SubtypeId>
+			</Id>
+			<BasicProperties>
+				<DesiredSpeed>20000</DesiredSpeed>
+				<SpeedVariance>0</SpeedVariance>
+				<MaxTrajectory>5</MaxTrajectory>
+				<BackkickForce>0</BackkickForce>
+				<PhysicalMaterial>GunBullet</PhysicalMaterial>
+			</BasicProperties>
+			<ProjectileProperties>
+				<ProjectileTrailScale>10</ProjectileTrailScale>
+				<ProjectileHitImpulse>10</ProjectileHitImpulse>
+				<ProjectileMassDamage>10</ProjectileMassDamage>
+				<ProjectileHealthDamage>10</ProjectileHealthDamage>
+				<HeadShot>true</HeadShot>
+			</ProjectileProperties>
+		</Ammo>
+		
+		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+			<Id>
+				<TypeId>AmmoDefinition</TypeId>
+				<SubtypeId>HeavyFighter1</SubtypeId>
+			</Id>
+			<BasicProperties>
+				<DesiredSpeed>20000</DesiredSpeed>
+				<SpeedVariance>0</SpeedVariance>
+				<MaxTrajectory>5</MaxTrajectory>
+				<BackkickForce>0</BackkickForce>
+				<PhysicalMaterial>GunBullet</PhysicalMaterial>
+			</BasicProperties>
+			<ProjectileProperties>
+				<ProjectileTrailScale>10</ProjectileTrailScale>
+				<ProjectileHitImpulse>10</ProjectileHitImpulse>
+				<ProjectileMassDamage>10</ProjectileMassDamage>
+				<ProjectileHealthDamage>10</ProjectileHealthDamage>
+				<HeadShot>true</HeadShot>
+			</ProjectileProperties>
+		</Ammo>
+		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+			<Id>
+				<TypeId>AmmoDefinition</TypeId>
+				<SubtypeId>JDD_EnergyChargeAmmoLarge</SubtypeId>
+			</Id>
+			<BasicProperties>
+				<DesiredSpeed>20000</DesiredSpeed>
+				<SpeedVariance>0</SpeedVariance>
+				<MaxTrajectory>5</MaxTrajectory>
+				<BackkickForce>0</BackkickForce>
+				<PhysicalMaterial>GunBullet</PhysicalMaterial>
+			</BasicProperties>
+			<ProjectileProperties>
+				<ProjectileTrailScale>0</ProjectileTrailScale>
+				<ProjectileHitImpulse>0</ProjectileHitImpulse>
+				<ProjectileMassDamage>0</ProjectileMassDamage>
+				<ProjectileHealthDamage>0</ProjectileHealthDamage>
+				<HeadShot>true</HeadShot>
+			</ProjectileProperties>
+		</Ammo>
+
+		<Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+			<Id>
+				<TypeId>AmmoDefinition</TypeId>
+				<SubtypeId>JDD_EnergyChargeAmmoSmall</SubtypeId>
+			</Id>
+			<BasicProperties>
+				<DesiredSpeed>20000</DesiredSpeed>
+				<SpeedVariance>0</SpeedVariance>
+				<MaxTrajectory>5</MaxTrajectory>
+				<BackkickForce>0</BackkickForce>
+				<PhysicalMaterial>GunBullet</PhysicalMaterial>
+			</BasicProperties>
+			<ProjectileProperties>
+				<ProjectileTrailScale>0</ProjectileTrailScale>
+				<ProjectileHitImpulse>0</ProjectileHitImpulse>
+				<ProjectileMassDamage>0</ProjectileMassDamage>
+				<ProjectileHealthDamage>0</ProjectileHealthDamage>
+				<HeadShot>true</HeadShot>
+			</ProjectileProperties>
+		</Ammo>
+
+
+
+	</Ammos>
+</Definitions>
