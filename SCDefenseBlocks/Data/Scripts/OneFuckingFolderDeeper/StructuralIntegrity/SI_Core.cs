@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Collections.Concurrent;
 using Sandbox.Game;
 using Sandbox.Game.Entities;
 using Sandbox.Game.EntityComponents;
@@ -11,6 +12,7 @@ using Sandbox.ModAPI;
 using Sandbox.ModAPI.Interfaces.Terminal;
 using Sandbox.Definitions;
 using Sandbox.Common.ObjectBuilders;
+using VRage;
 using VRage.Game;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
@@ -23,8 +25,11 @@ using VRage.Utils;
 using VRage.ObjectBuilders;
 using SpaceEngineers.Game.Entities.Blocks;
 using SpaceEngineers.Game.ModAPI;
+using StarCore.StructuralIntegrity.APISession;
+using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
+using VRageRender;
 
-namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegrity
+namespace StarCore.StructuralIntegrity
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "SI_Field_Gen")]
     public class SI_Core : MyGameLogicComponent, IMyEventProxy
@@ -61,8 +66,12 @@ namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegri
         public const int SiegeDisplayTimer = 60;
         public int CountSiegeDisplayTimer;
 
+        // Impact Effect
+        List<MyBillboard> persistentImpactBillboards = new List<MyBillboard>();
+        public static ConcurrentDictionary<SI_Impact_Render, SI_Impact_Render> impactRenders = new ConcurrentDictionary<SI_Impact_Render, SI_Impact_Render>();
+
         // Internal
-        MySync<bool, SyncDirection.BothWays> SiegeActive = null;
+        public MySync<bool, SyncDirection.BothWays> SiegeActive = null;
         public bool SiegeCooldownActive = false;
         public bool SiegeModeModifier = false;
 
@@ -154,6 +163,8 @@ namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegri
 
                 SaveSettings();
 
+                MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0, HandleSiegeModeImpacts);
+
                 NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_10TH_FRAME;
             }
             catch (Exception e)
@@ -194,10 +205,12 @@ namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegri
                 if (SiegeEnabled)
                 {
                     SiegeMode(SiegeActive);
+                    UpdateImpactRender();
                 }
 
                 CalculateMaxGridPower();
                 UpdateGridModifier(SIGenBlock);
+
             }
             catch (Exception e)
             {
@@ -228,6 +241,41 @@ namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegri
         #endregion
 
         #region Utilities
+        private static SerializableVector3 shieldGridVelocity = new SerializableVector3(0, 0, 0);
+        private static SerializableVector3I shieldGridPosition = new SerializableVector3I(0, 0, 0);
+        private static SerializableBlockOrientation shieldOrientation = new SerializableBlockOrientation(Base6Directions.Direction.Forward, Base6Directions.Direction.Up);
+
+        public static MyObjectBuilder_CubeGrid shieldEffectLargeObjectBuilder = new MyObjectBuilder_CubeGrid()
+        {
+            EntityId = 0,
+            GridSizeEnum = MyCubeSize.Large,
+            IsStatic = true,
+            Skeleton = new List<BoneInfo>(),
+            LinearVelocity = shieldGridVelocity,
+            AngularVelocity = shieldGridVelocity,
+            ConveyorLines = new List<MyObjectBuilder_ConveyorLine>(),
+            BlockGroups = new List<MyObjectBuilder_BlockGroup>(),
+            Handbrake = false,
+            XMirroxPlane = null,
+            YMirroxPlane = null,
+            ZMirroxPlane = null,
+            PersistentFlags = MyPersistentEntityFlags2.InScene,
+            Name = "",
+            DisplayName = "",
+            CreatePhysics = false,
+            PositionAndOrientation = new MyPositionAndOrientation(Vector3D.Zero, Vector3D.Forward, Vector3D.Up),
+            CubeBlocks = new List<MyObjectBuilder_CubeBlock>() {
+                new MyObjectBuilder_CubeBlock () {
+                    EntityId = 1,
+                    SubtypeName = "",
+                    Min = shieldGridPosition,
+                    BlockOrientation = shieldOrientation,
+                    ShareMode = MyOwnershipShareModeEnum.None,
+                    DeformationRatio = 0,
+                }
+            }
+        };
+
         public void RetrieveValuesFromConfig()
         {
             // Assign General Values from Config
@@ -307,7 +355,7 @@ namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegri
 
             foreach (var block in blocks)
             {
-                if (block.FatBlock != null)
+                if (block.FatBlock != null && block.FatBlock.IsWorking)
                 {
                     var fatBlock = block.FatBlock;
                     if (fatBlock is IMyPowerProducer)
@@ -356,6 +404,116 @@ namespace YourName.ModName.Data.Scripts.OneFuckingFolderDeeper.StructuralIntegri
                 }
             }
         }
+
+        void UpdateImpactRender()
+        {
+            try
+            {
+                if (!MyAPIGateway.Utilities.IsDedicated)
+                {
+                    List<SI_Impact_Render> toRemove = new List<SI_Impact_Render>();
+
+                    foreach (var impactRender in impactRenders)
+                    {
+                        if (impactRender.Key.m_timeToLive > 0)
+                        {
+                            impactRender.Key.update();
+                        }
+                        else
+                        {
+                            toRemove.Add(impactRender.Key);
+                        }
+                    }
+
+                    foreach (var deadImpactRender in toRemove)
+                    {
+                        SI_Impact_Render outRenderer = null;
+                        impactRenders.TryRemove(deadImpactRender, out outRenderer);
+
+                        deadImpactRender.close();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
+        private void HandleSiegeModeImpacts(object target, ref MyDamageInformation info)
+        {
+            if (SiegeActive)
+            {
+                IMySlimBlock targetBlock = target as IMySlimBlock;
+
+                SI_Impact_Render renderer = new SI_Impact_Render(targetBlock);
+                impactRenders.TryAdd(renderer, renderer);
+            }
+        }
+
+        /*public MatrixD ImpactEffect(IMySlimBlock block)
+        {
+            MatrixD m_matrix;
+            Vector3D m_shieldScale;
+
+            MyCubeBlockDefinition blockDefinition = block.BlockDefinition as MyCubeBlockDefinition;
+
+            m_shieldScale.X = blockDefinition.Size.X + 0.1;
+            m_shieldScale.Y = blockDefinition.Size.Y + 0.1;
+            m_shieldScale.Z = blockDefinition.Size.Z + 0.1;
+
+            Vector3D impact_Position;
+
+            if (block.FatBlock == null)
+            {
+                impact_Position = block.CubeGrid.GridIntegerToWorld(block.Position);
+
+                m_matrix = MatrixD.CreateFromTransformScale(Quaternion.CreateFromRotationMatrix(block.CubeGrid.WorldMatrix.GetOrientation()), impact_Position, m_shieldScale);
+
+                return m_matrix;
+            }
+            else
+            {
+                impact_Position = block.FatBlock.WorldMatrix.Translation;
+
+                m_matrix = MatrixD.CreateFromTransformScale(Quaternion.CreateFromRotationMatrix(block.FatBlock.WorldMatrix.GetOrientation()), impact_Position, m_shieldScale);
+
+                return m_matrix;
+
+            }
+
+            return m_matrix;
+        }
+
+        public void update()
+        {
+            tickCounter--;
+
+            if (!SIGenBlock.CubeGrid.Closed)
+            {
+                if (SiegeActive)
+                {
+                    Color impact_Color = Color.White;
+                    MyStringId impact_Material = MyStringId.GetOrCompute("WeaponLaser");
+
+                    float ttlPercent = tickCounter / 8f;
+
+                    if ((ttlPercent < 0.4) || (ttlPercent > 0.7))
+                    {
+
+                        BoundingBoxD renderBox = new BoundingBoxD(new Vector3D(-1.25d), new Vector3D(1.25d));
+
+
+                        MySimpleObjectDraw.DrawTransparentBox(ref storedImpact_Matrix, ref renderBox, ref impact_Color, MySimpleObjectRasterizer.Solid, 0, 1f, impact_Material, null, true);
+
+                    }
+                }
+            }
+            else
+            {
+                tickCounter = 0;
+            }
+        }*/
 
         private void SetPowerStatus(string text, int aliveTime = 300, string font = MyFontEnum.Green)
         {
