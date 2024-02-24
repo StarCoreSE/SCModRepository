@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SoundCategories>
+    <SoundCategory>
+      <Id>
+        <TypeId>SoundCategoryDefinition</TypeId>
+        <SubtypeId>AirRaid_Sirens</SubtypeId>
+      </Id>
+      <Sounds>
+<!-- air raid siren test-->
+	    <SoundDesc Id="AirRaid_Siren" SoundName="AirRaid_Siren" />
+      </Sounds>
+    </SoundCategory>
+  </SoundCategories>
+</Definitions>
