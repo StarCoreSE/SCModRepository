@@ -974,9 +974,9 @@
         <Component Subtype="LargeTube" Count="200" />
         <Component Subtype="Motor" Count="100" />
         <Component Subtype="Computer" Count="100" />
-        <Component Subtype="Construction" Count="2000" />
+        <Component Subtype="Construction" Count="1000" />
 		<Component Subtype="MetalGrid" Count="200" />
-        <Component Subtype="SteelPlate" Count="1600" />
+        <Component Subtype="SteelPlate" Count="800" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
@@ -1126,7 +1126,7 @@
         <Component Subtype="Computer" Count="100" />
         <Component Subtype="Construction" Count="200" />
 		<Component Subtype="MetalGrid" Count="200" />
-        <Component Subtype="SteelPlate" Count="1400" />
+        <Component Subtype="SteelPlate" Count="700" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
@@ -1199,7 +1199,7 @@
         <Component Subtype="Computer" Count="50" />
         <Component Subtype="Construction" Count="200" />
 		<Component Subtype="MetalGrid" Count="200" />
-        <Component Subtype="SteelPlate" Count="1500" />
+        <Component Subtype="SteelPlate" Count="750" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
@@ -1582,7 +1582,7 @@
         <Component Subtype="Computer" Count="100" />
         <Component Subtype="Construction" Count="200" />
 		<Component Subtype="MetalGrid" Count="300" />
-        <Component Subtype="SteelPlate" Count="1500" />
+        <Component Subtype="SteelPlate" Count="750" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
@@ -1662,7 +1662,7 @@
         <Component Subtype="Computer" Count="100" />
         <Component Subtype="Construction" Count="200" />
 		<Component Subtype="MetalGrid" Count="300" />
-        <Component Subtype="SteelPlate" Count="1500" />
+        <Component Subtype="SteelPlate" Count="750" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>

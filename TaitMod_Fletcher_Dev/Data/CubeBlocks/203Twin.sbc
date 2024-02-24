@@ -20,14 +20,14 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\203mmTwin\203Base.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="4000" />
+				<Component Subtype="SteelPlate" Count="400" />
 				<Component Subtype="MetalGrid" Count="100" />
 				<Component Subtype="LargeTube" Count="200" />
 				<Component Subtype="Motor" Count="100" />
 				<Component Subtype="Computer" Count="100" />
 				<Component Subtype="Construction" Count="2000" />
 				<Component Subtype="MetalGrid" Count="200" />
-				<Component Subtype="SteelPlate" Count="7000" />
+				<Component Subtype="SteelPlate" Count="2000" />
 			</Components>
 			<CriticalComponent Subtype="Motor" Index="0" />
 			<MountPoints>

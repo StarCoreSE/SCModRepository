@@ -17,14 +17,14 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\25inchquin\TorpBarbette.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="15000" />
+				<Component Subtype="SteelPlate" Count="1500" />
 				<Component Subtype="MetalGrid" Count="100" />
 				<Component Subtype="LargeTube" Count="200" />
 				<Component Subtype="Motor" Count="100" />
 				<Component Subtype="Computer" Count="100" />
 				<Component Subtype="Construction" Count="2000" />
 				<Component Subtype="MetalGrid" Count="200" />
-				<Component Subtype="SteelPlate" Count="32000" />
+				<Component Subtype="SteelPlate" Count="3200" />
 			</Components>
 			<CriticalComponent Subtype="Motor" Index="0" />
 			<MountPoints>

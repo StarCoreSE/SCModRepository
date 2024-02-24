@@ -21,12 +21,12 @@
 			<Model>Models\Rangefinder\Mk25 Rangefinder.mwm</Model>
 			<UseModelIntersection>true</UseModelIntersection>
 			<Components>
-				<Component Subtype="SteelPlate" Count="4000" />
+				<Component Subtype="SteelPlate" Count="400" />
 				<Component Subtype="MetalGrid" Count="100" />
 				<Component Subtype="LargeTube" Count="200" />
 				<Component Subtype="Motor" Count="100" />
 				<Component Subtype="Computer" Count="100" />
-				<Component Subtype="Construction" Count="2000" />
+				<Component Subtype="Construction" Count="200" />
 				<Component Subtype="MetalGrid" Count="200" />
 				<Component Subtype="SteelPlate" Count="7000" />
 			</Components>
