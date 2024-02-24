@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AmmoMagazines>
+
+	  <!-- LBX5 Ammo-->
+<AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>LBX5_HE</SubtypeId>
+      </Id>
+      <DisplayName>LBX-5 High Explosive Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>1000</Mass>
+      <Volume>10</Volume>
+      <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="LBX5_HE_Mag" />
+	  </AmmoMagazine>
+
+	  <AmmoMagazine>
+		  <Id>
+			  <TypeId>AmmoMagazine</TypeId>
+			  <SubtypeId>LBX5_Cluster</SubtypeId>
+		  </Id>
+		  <DisplayName>LBX-5 Cluster Shell</DisplayName>
+		  <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+		  <Size>
+			  <X>0.25</X>
+			  <Y>0.2</Y>
+			  <Z>0.2</Z>
+		  </Size>
+		  <Mass>1000</Mass>
+		  <Volume>10</Volume>
+		  <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+		  <Capacity>1</Capacity>
+		  <AmmoDefinitionId Subtype="LBX5_Cluster_Mag" />
+	  </AmmoMagazine>
+
+	  <AmmoMagazine>
+		  <Id>
+			  <TypeId>AmmoMagazine</TypeId>
+			  <SubtypeId>LBX5_Sabot</SubtypeId>
+		  </Id>
+		  <DisplayName>LBX-5 Cluster Shell</DisplayName>
+		  <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+		  <Size>
+			  <X>0.25</X>
+			  <Y>0.2</Y>
+			  <Z>0.2</Z>
+		  </Size>
+		  <Mass>1000</Mass>
+		  <Volume>10</Volume>
+		  <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+		  <Capacity>1</Capacity>
+		  <AmmoDefinitionId Subtype="LBX5_Sabot_Mag" />
+	  </AmmoMagazine>
+
+	  <AmmoMagazine>
+		  <Id>
+			  <TypeId>AmmoMagazine</TypeId>
+			  <SubtypeId>LBX5_Slug</SubtypeId>
+		  </Id>
+		  <DisplayName>LBX-5 Cluster Shell</DisplayName>
+		  <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+		  <Size>
+			  <X>0.25</X>
+			  <Y>0.2</Y>
+			  <Z>0.2</Z>
+		  </Size>
+		  <Mass>1000</Mass>
+		  <Volume>10</Volume>
+		  <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+		  <Capacity>1</Capacity>
+		  <AmmoDefinitionId Subtype="LBX5_Slug_Mag" />
+	  </AmmoMagazine>
+
+	  <AmmoMagazine>
+		  <Id>
+			  <TypeId>AmmoMagazine</TypeId>
+			  <SubtypeId>LBX5_Casaba</SubtypeId>
+		  </Id>
+		  <DisplayName>LBX-5 Cluster Shell</DisplayName>
+		  <Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+		  <Size>
+			  <X>0.25</X>
+			  <Y>0.2</Y>
+			  <Z>0.2</Z>
+		  </Size>
+		  <Mass>1000</Mass>
+		  <Volume>10</Volume>
+		  <Model>Models\Weapons\AutocanonShellBox.mwm</Model>
+		  <Capacity>1</Capacity>
+		  <AmmoDefinitionId Subtype="LBX5_Casaba_Mag" />
+	  </AmmoMagazine>
+  </AmmoMagazines>
+</Definitions>

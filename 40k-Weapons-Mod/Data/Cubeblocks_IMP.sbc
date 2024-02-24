@@ -1,0 +1,398 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <CubeBlocks>
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>NovaCannon</SubtypeId>
+      </Id>
+      <DisplayName>Nova Cannon</DisplayName>
+      <Description>
+        The Nova Cannon is a weapon of ancient providence dating back to the Age of Technology, easily able to wreak vast destruction upon enemy vessels at great range.
+        Its projectiles vary, ranging from sophisticated plasma warheads which burn with the ferocity of a small star for a fraction of a second, to implosive devices which exert destructive gravitational forces upon all those caught within kilometres of the detonation.
+        This smaller Mars Pattern Nova Cannon has a maximum range of 10km.
+      </Description>
+      <Icon>Textures\icons\NovaCannonThumb.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="5" y="6" z="28" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Scene.mwm</Model>
+      <Components>
+        <Component Subtype="Construction" Count="5000" />
+        <Component Subtype="GravityGenerator" Count="200" />
+        <Component Subtype="Computer" Count="120" />
+        <Component Subtype="SmallTube" Count="1060" />
+        <Component Subtype="Motor" Count="1080" />
+        <Component Subtype="LargeTube" Count="1200" />
+        <Component Subtype="MetalGrid" Count="650" />
+        <Component Subtype="Construction" Count="14000" />
+        <Component Subtype="SteelPlate" Count="10000" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>Nova</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>380</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="Nova" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="1.0" StartY="13.0" EndX="4.0" EndY="27.0" PropertiesMask="2" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>HeavyBolterSmall</SubtypeId>
+      </Id>
+      <DisplayName>Heavy Bolter</DisplayName>
+      <Description>
+        The Nova Cannon is a weapon of ancient providence dating back to the Age of Technology, easily able to wreak vast destruction upon enemy vessels at great range.
+        Its projectiles vary, ranging from sophisticated plasma warheads which burn with the ferocity of a small star for a fraction of a second, to implosive devices which exert destructive gravitational forces upon all those caught within kilometres of the detonation.
+        This smaller Mars Pattern Nova Cannon has a maximum range of 10km.
+      </Description>
+      <Icon>Textures\icons\NovaCannonThumb.dds</Icon>
+      <CubeSize>Small</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="2" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Heavy Bolter Fixed.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="10" />
+        <Component Subtype="Construction" Count="5" />
+        <Component Subtype="Computer" Count="1" />
+        <Component Subtype="SmallTube" Count="50" />
+        <Component Subtype="Motor" Count="1" />
+        <Component Subtype="LargeTube" Count="12" />
+        <Component Subtype="MetalGrid" Count="10" />
+        <Component Subtype="Construction" Count="10" />
+        <Component Subtype="SteelPlate" Count="10" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>Bolter</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>80</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="Bolter" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="2.0" PropertiesMask="2" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>HeavyBolterSmallSponson</SubtypeId>
+      </Id>
+      <DisplayName>Heavy Bolter Sponson</DisplayName>
+      <Description>
+        The Nova Cannon is a weapon of ancient providence dating back to the Age of Technology, easily able to wreak vast destruction upon enemy vessels at great range.
+        Its projectiles vary, ranging from sophisticated plasma warheads which burn with the ferocity of a small star for a fraction of a second, to implosive devices which exert destructive gravitational forces upon all those caught within kilometres of the detonation.
+        This smaller Mars Pattern Nova Cannon has a maximum range of 10km.
+      </Description>
+      <Icon>Textures\icons\NovaCannonThumb.dds</Icon>
+      <CubeSize>Small</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="2" y="2" z="4" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Sponson Heavy Bolter small.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="10" />
+        <Component Subtype="Construction" Count="5" />
+        <Component Subtype="Computer" Count="1" />
+        <Component Subtype="SmallTube" Count="50" />
+        <Component Subtype="Motor" Count="1" />
+        <Component Subtype="LargeTube" Count="12" />
+        <Component Subtype="MetalGrid" Count="10" />
+        <Component Subtype="Construction" Count="10" />
+        <Component Subtype="SteelPlate" Count="30" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>BolterSponson</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>80</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="BolterSponson" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="2.0" EndY="2.0" PropertiesMask="2" />
+        <MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="2.0" EndY="2.0" PropertiesMask="2" />
+        <MountPoint Side="Bottom" StartX="0.0" StartY="2.0" EndX="2.0" EndY="4.0" PropertiesMask="2" />
+        <MountPoint Side="Left" StartX="3.0" StartY="0.0" EndX="4.0" EndY="2.0" PropertiesMask="2" />
+        <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="1.0" EndY="2.0" PropertiesMask="2" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>HeavyBolterLargeSponson</SubtypeId>
+      </Id>
+      <DisplayName>Heavy Bolter Sponson</DisplayName>
+      <Description>
+        The Nova Cannon is a weapon of ancient providence dating back to the Age of Technology, easily able to wreak vast destruction upon enemy vessels at great range.
+        Its projectiles vary, ranging from sophisticated plasma warheads which burn with the ferocity of a small star for a fraction of a second, to implosive devices which exert destructive gravitational forces upon all those caught within kilometres of the detonation.
+        This smaller Mars Pattern Nova Cannon has a maximum range of 10km.
+      </Description>
+      <Icon>Textures\icons\NovaCannonThumb.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Large Heavy Bolter Sponson Base .mwm</Model>
+      <Components>
+        <Component Subtype="Construction" Count="500" />
+        <Component Subtype="GravityGenerator" Count="20" />
+        <Component Subtype="Computer" Count="120" />
+        <Component Subtype="SmallTube" Count="160" />
+        <Component Subtype="Motor" Count="108" />
+        <Component Subtype="LargeTube" Count="12" />
+        <Component Subtype="MetalGrid" Count="5" />
+        <Component Subtype="Construction" Count="1400" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>BolterSponson</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>80</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="HeavyBolterLargeSponson" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0" PropertiesMask="2" />
+        <MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0" PropertiesMask="2" />
+        <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0" PropertiesMask="2" />
+        <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0" PropertiesMask="2" />
+        <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0" PropertiesMask="2" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+    
+    
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>Lascannon</SubtypeId>
+      </Id>
+      <DisplayName>Lascannon</DisplayName>
+      <Description>
+        The Nova Cannon is a weapon of ancient providence dating back to the Age of Technology, easily able to wreak vast destruction upon enemy vessels at great range.
+        Its projectiles vary, ranging from sophisticated plasma warheads which burn with the ferocity of a small star for a fraction of a second, to implosive devices which exert destructive gravitational forces upon all those caught within kilometres of the detonation.
+        This smaller Mars Pattern Nova Cannon has a maximum range of 10km.
+      </Description>
+      <Icon>Textures\icons\NovaCannonThumb.dds</Icon>
+      <CubeSize>Small</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="2" z="6" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Lascannon Fixed.mwm</Model>
+      <Components>
+        <Component Subtype="Construction" Count="50" />
+        <Component Subtype="GravityGenerator" Count="20" />
+        <Component Subtype="Computer" Count="12" />
+        <Component Subtype="SmallTube" Count="160" />
+        <Component Subtype="Motor" Count="108" />
+        <Component Subtype="LargeTube" Count="12" />
+        <Component Subtype="MetalGrid" Count="5" />
+        <Component Subtype="Construction" Count="140" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>Lascannon</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>80</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="Lascannon" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="2.0" PropertiesMask="2" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>BattleCannon</SubtypeId>
+      </Id>
+      <DisplayName>Leman Russ Battle Cannon</DisplayName>
+      <Description>
+        The Nova Cannon is a weapon of ancient providence dating back to the Age of Technology, easily able to wreak vast destruction upon enemy vessels at great range.
+        Its projectiles vary, ranging from sophisticated plasma warheads which burn with the ferocity of a small star for a fraction of a second, to implosive devices which exert destructive gravitational forces upon all those caught within kilometres of the detonation.
+        This smaller Mars Pattern Nova Cannon has a maximum range of 10km.
+      </Description>
+      <Icon>Textures\icons\BattleCannon.dds</Icon>
+      <CubeSize>Small</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="5" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\BattleCannon.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="Construction" Count="5" />
+        <Component Subtype="Computer" Count="1" />
+        <Component Subtype="SmallTube" Count="50" />
+        <Component Subtype="Motor" Count="1" />
+        <Component Subtype="LargeTube" Count="12" />
+        <Component Subtype="MetalGrid" Count="10" />
+        <Component Subtype="Construction" Count="10" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>BattleCannon</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>80</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="Bolter" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0" PropertiesMask="2" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>PlasmaCannon</SubtypeId>
+      </Id>
+      <DisplayName>Plasma Cannon</DisplayName>
+      <Description>
+        The Nova Cannon is a weapon of ancient providence dating back to the Age of Technology, easily able to wreak vast destruction upon enemy vessels at great range.
+        Its projectiles vary, ranging from sophisticated plasma warheads which burn with the ferocity of a small star for a fraction of a second, to implosive devices which exert destructive gravitational forces upon all those caught within kilometres of the detonation.
+        This smaller Mars Pattern Nova Cannon has a maximum range of 10km.
+      </Description>
+      <Icon>Textures\icons\Plasma Cannon.dds</Icon>
+      <CubeSize>Small</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="1" z="4" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Plasma Cannon.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="Construction" Count="5" />
+        <Component Subtype="Computer" Count="1" />
+        <Component Subtype="SmallTube" Count="50" />
+        <Component Subtype="Motor" Count="1" />
+        <Component Subtype="LargeTube" Count="12" />
+        <Component Subtype="MetalGrid" Count="10" />
+        <Component Subtype="Construction" Count="10" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>PlasmaCannon</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>80</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="Bolter" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0" PropertiesMask="2" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>EarthshakerCannon</SubtypeId>
+      </Id>
+      <DisplayName>Earthshaker Artillery Cannon</DisplayName>
+      <Description>
+        The Nova Cannon is a weapon of ancient providence dating back to the Age of Technology, easily able to wreak vast destruction upon enemy vessels at great range.
+        Its projectiles vary, ranging from sophisticated plasma warheads which burn with the ferocity of a small star for a fraction of a second, to implosive devices which exert destructive gravitational forces upon all those caught within kilometres of the detonation.
+        This smaller Mars Pattern Nova Cannon has a maximum range of 10km.
+      </Description>
+      <Icon>Textures\icons\Earthshaker Cannon.dds</Icon>
+      <CubeSize>Small</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="3" z="18" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Earthshaker Cannon.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="Construction" Count="5" />
+        <Component Subtype="Computer" Count="1" />
+        <Component Subtype="SmallTube" Count="50" />
+        <Component Subtype="Motor" Count="1" />
+        <Component Subtype="LargeTube" Count="12" />
+        <Component Subtype="MetalGrid" Count="10" />
+        <Component Subtype="Construction" Count="10" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>EarthshakerCannon</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>80</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="Bolter" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0" PropertiesMask="2" />
+        <MountPoint Side="Bottom" StartX="0.0" StartY="15.0" EndX="3.0" EndY="18.0" PropertiesMask="2" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+    
+    
+  </CubeBlocks>
+  <BlueprintClassEntries>
+   
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="LargeGatlingTurret/PDCTurretLB" />
+    <Entry Class="SmallBlocks" BlueprintSubtypeId="LargeGatlingTurret/PDCTurretSB" />
+    <Entry Class="Ammo" BlueprintSubtypeId="DeU_25x184mm" />
+  </BlueprintClassEntries>
+</Definitions>

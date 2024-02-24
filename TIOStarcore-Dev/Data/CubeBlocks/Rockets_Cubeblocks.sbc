@@ -2,11 +2,6 @@
 <Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <CubeBlocks>
 
-
-
-
-    <!-- Fixed Weapons -->
-    <!-- MLRS -->
     <!-- Bombardment Rockets -->
     <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
       <Id>
@@ -52,7 +47,7 @@
       </BuildProgressModels>
       <BlockPairName>VMLS_Block</BlockPairName>
       <NavigationDefinition>Default</NavigationDefinition>
-      <WeaponDefinitionId Subtype="VMLS_Weapon"/>
+			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 
       <BuildTimeSeconds>100</BuildTimeSeconds>
       <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
       <DamagedSound>ParticleElectrical</DamagedSound>

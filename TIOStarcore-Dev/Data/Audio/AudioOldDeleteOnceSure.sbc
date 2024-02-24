@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Sounds>
+
+	<!--missileflight-->
+      <Sound>
+          <Id>
+              <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+              <SubtypeId>MyMissileFlightSound</SubtypeId>
+          </Id>
+          <Category>SHOT</Category>
+          <MaxDistance>800</MaxDistance>
+          <PreventSynchronization>1</PreventSynchronization>
+          <UpdateDistance>250</UpdateDistance>
+          <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+          <DynamicMusicAmount>15</DynamicMusicAmount>
+          <Volume>0.6</Volume>
+          <VolumeVariation>0.2</VolumeVariation>
+          <PitchVariation>100</PitchVariation>
+          <Pitch>-4</Pitch>
+          <Waves>
+              <Wave Type="D2">
+                  <Loop>Audio\sfx\Shell_Pass_Test_1.wav</Loop>
+              </Wave>
+              <Wave Type="D3">
+                  <Loop>Audio\sfx\Shell_Pass_Test_1.wav</Loop>
+              </Wave>
+          </Waves>
+          <Loopable>true</Loopable>
+      </Sound>
+      <!--turret missile shot-->
+      <Sound>
+          <Id>
+              <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+              <SubtypeId>TurretMissileShot</SubtypeId>
+          </Id>
+          <Category>SHOT</Category>
+          <MaxDistance>5000</MaxDistance>
+          <PreventSynchronization>0</PreventSynchronization>
+          <DistantSounds>
+              <DistantSound Distance="700" Sound="TurretMissileShotDistA" />
+              <DistantSound Distance="1500" Sound="TurretMissileShotDistB" />
+          </DistantSounds>
+          <Volume>1</Volume>
+          <Waves>
+              <Wave Type="D3">
+                  <Start>Audio\sfx\TurretMissileShot3d01.wav</Start>
+              </Wave>
+              <Wave Type="D3">
+                  <Start>Audio\sfx\TurretMissileShot3d02.wav</Start>
+              </Wave>
+              <Wave Type="D3">
+                  <Start>Audio\sfx\TurretMissileShot3d03.wav</Start>
+              </Wave>
+              <Wave Type="D3">
+                  <Start>Audio\sfx\TurretMissileShot3d04.wav</Start>
+              </Wave>
+              <Wave Type="D3">
+                  <Start>Audio\sfx\TurretMissileShot3d05.wav</Start>
+              </Wave>
+          </Waves>
+      </Sound>
+      <Sound>
+          <Id>
+              <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+              <SubtypeId>TurretMissileShotDistA</SubtypeId>
+          </Id>
+          <Category>SHOT</Category>
+          <MaxDistance>5000</MaxDistance>
+          <Volume>1.2</Volume>
+          <Waves>
+              <Wave Type="D3">
+                  <Start>Audio\sfx\TurretMissileShotDistA3d01.wav</Start>
+              </Wave>
+              <!--<Wave Type="D3">
+          <Start>ARC\WEP\TurretMissileShotDistA3d02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>ARC\WEP\TurretMissileShotDistAA3d03.wav</Start>
+        </Wave>-->
+          </Waves>
+      </Sound>
+      <Sound>
+          <Id>
+              <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+              <SubtypeId>TurretMissileShotDistB</SubtypeId>
+          </Id>
+          <Category>SHOT</Category>
+          <MaxDistance>5000</MaxDistance>
+          <Volume>1.2</Volume>
+          <Waves>
+              <Wave Type="D3">
+                  <Start>Audio\sfx\TurretMissileShotDistB3d01.wav</Start>
+              </Wave>
+          </Waves>
+      </Sound>
+	  
+	  <Sound>
+	    <Id>
+	      <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+	      <SubtypeId>coilgunsound</SubtypeId>
+	    </Id>
+	    <Category>WEP_EXPL</Category>
+	    <MaxDistance>1000</MaxDistance>
+	    <Volume>2.0</Volume>
+	    <PitchVariation>100</PitchVariation>
+	    <PreventSynchronization>10</PreventSynchronization>
+	    <SoundLimit>3</SoundLimit>
+	    <Waves>
+	      <Wave Type="D3">
+	        <Start>Audio\sfx\coilgunsound.wav</Start>
+	      </Wave>
+	      <Wave Type="D3">
+	        <Start>Audio\sfx\coilgunsound.wav</Start>
+	      </Wave>
+	      <Wave Type="D3">
+	        <Start>Audio\sfx\coilgunsound.wav</Start>
+	      </Wave>
+	    </Waves>
+	  </Sound>
+
+	   <Sound>
+	    <Id>
+	      <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+	      <SubtypeId>artysound</SubtypeId>
+	    </Id>
+	    <Category>WEP_EXPL</Category>
+	    <MaxDistance>750</MaxDistance>
+	    <Volume>4.0</Volume>
+	    <PitchVariation>50</PitchVariation>
+	    <PreventSynchronization>1</PreventSynchronization>
+	    <SoundLimit>15</SoundLimit>
+	    <Waves>
+	      <Wave Type="D3">
+	        <Start>Audio\sfx\artyfiring.wav</Start>
+	      </Wave>
+	      <Wave Type="D3">
+	        <Start>Audio\sfx\artyfiring.wav</Start>
+	      </Wave>
+	      <Wave Type="D3">
+	        <Start>Audio\sfx\artyfiring.wav</Start>
+	      </Wave>
+	    </Waves>
+	  </Sound>
+
+	  <Sound>
+	    <Id>
+	      <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+	      <SubtypeId>airblast</SubtypeId>
+	    </Id>
+	    <Category>WEP_EXPL</Category>
+	    <MaxDistance>750</MaxDistance>
+	    <Volume>4.0</Volume>
+	    <PitchVariation>50</PitchVariation>
+	    <PreventSynchronization>1</PreventSynchronization>
+	    <SoundLimit>15</SoundLimit>
+	    <Waves>
+	      <Wave Type="D3">
+	        <Start>Audio\sfx\airblast.wav</Start>
+	      </Wave>
+	      <Wave Type="D3">
+	        <Start>Audio\sfx\airblast.wav</Start>
+	      </Wave>
+	      <Wave Type="D3">
+	        <Start>Audio\sfx\airblast.wav</Start>
+	      </Wave>
+	    </Waves>
+	  </Sound>
+
+	  <Sound>
+	    <Id>
+	      <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+	      <SubtypeId>coilgunsound2</SubtypeId>
+	    </Id>
+	    <Category>WEP_EXPL</Category>
+	    <MaxDistance>1000</MaxDistance>
+	    <Volume>2.0</Volume>
+	    <PitchVariation>100</PitchVariation>
+	    <PreventSynchronization>10</PreventSynchronization>
+	    <SoundLimit>3</SoundLimit>
+	    <Waves>
+	      <Wave Type="D3">
+	        <Start>Audio\sfx\coilgunsound2.wav</Start>
+	      </Wave>
+	      <Wave Type="D3">
+	        <Start>Audio\sfx\coilgunsound2.wav</Start>
+	      </Wave>
+	      <Wave Type="D3">
+	        <Start>Audio\sfx\coilgunsound2.wav</Start>
+	      </Wave>
+	    </Waves>
+	  </Sound>
+
+
+<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>lasersfx</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>300</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\sfx\lasersfx.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\sfx\lasersfx.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\sfx\lasersfx.wav</Start>
+        </Wave>		
+      </Waves>
+    </Sound>	
+	  
+		
+    </Sounds>
+</Definitions>

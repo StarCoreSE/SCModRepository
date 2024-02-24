@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Blueprints> 
+
+	
+  
+	<Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>SAIDSBlueBP</SubtypeId>
+      </Id>
+      <DisplayName>Railgun Ammunition</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\blueammo.dds</Icon>
+	  
+      <Prerequisites>
+        <Item Amount="10" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Cobalt" />
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Silver" />
+        <Item Amount="0.5" TypeId="Ingot" SubtypeId="Gold" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="BlueAmmoMagDef" />
+      <BaseProductionTimeInSeconds>3</BaseProductionTimeInSeconds>
+	  
+    </Blueprint>
+
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>SAIDSPurpleBP</SubtypeId>
+      </Id>
+      <DisplayName>Guided Ammunition</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\purpleammo.dds</Icon>
+	  
+      <Prerequisites>
+        <Item Amount="5" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="3" TypeId="Ingot" SubtypeId="Magnesium" />
+        <Item Amount="5" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Silicon" />
+
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="PurpleAmmoMagDef" />
+      <BaseProductionTimeInSeconds>3</BaseProductionTimeInSeconds>
+	  
+    </Blueprint>
+
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>SAIDSGreenBP</SubtypeId>
+      </Id>
+      <DisplayName>Autocannon Ammunition</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\greenammo.dds</Icon>
+	  
+      <Prerequisites>
+        <Item Amount="3" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="2.5" TypeId="Ingot" SubtypeId="Magnesium" />
+        <Item Amount="5" TypeId="Ingot" SubtypeId="Cobalt" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="GreenAmmoMagDef" />
+      <BaseProductionTimeInSeconds>3</BaseProductionTimeInSeconds>
+	  
+    </Blueprint>
+
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>SAIDSRedBP</SubtypeId>
+      </Id>
+      <DisplayName>Artillery Ammunition</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\redammo.dds</Icon>
+	  
+      <Prerequisites>
+        <Item Amount="5" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="3.5" TypeId="Ingot" SubtypeId="Magnesium" />
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Cobalt" />
+        <Item Amount="15" TypeId="Ingot" SubtypeId="Uranium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="RedAmmoMagDef" />
+      <BaseProductionTimeInSeconds>3</BaseProductionTimeInSeconds>
+	  
+    </Blueprint>
+
+  
+ 
+    
+
+    
+  </Blueprints>
+</Definitions>

@@ -2,35 +2,43 @@
 <Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <CubeBlocks>
 
-		<!-- Large JDD -->
+
         <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
             <Id>
                 <TypeId>ConveyorSorter</TypeId>
-                <SubtypeId>Type21_Artillery_Block</SubtypeId>
+                <SubtypeId>Type21_Artillery</SubtypeId>
             </Id>
-            <DisplayName>Type 21 Artillery</DisplayName>
+            <DisplayName>Type 21 'Mars' Heavy Turret</DisplayName>
             <Description>
-              [4km Targeting Range]
+              [6km Targeting Range]
               [Energy damage]
-              [2500 m/s]
+              [1560 m/s]
               This weapon slowly repairs itself while offline, and when below functional.
             </Description>
 			<GuiVisible>true</GuiVisible>
-            <Icon>Textures\GUI\Icons\Mk2_MainScene.png</Icon>
+            <Icon>Textures\GUI\Icons\Mk2_MainScene.dds</Icon>
             <CubeSize>Large</CubeSize>
             <BlockTopology>TriangleMesh</BlockTopology>
             <Size x="5" y="6" z="8"/>
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Mk2_MainScene.mwm</Model>
             <Components>
-				<Component Count="2000" Subtype="SteelPlate"/>
-				<Component Count="750" Subtype="Construction"/>
-				<Component Count="150" Subtype="LargeTube" />
-				<Component Count="200" Subtype="MetalGrid" />
-                <Component Count="300" Subtype="Computer"/>
-                <Component Count="150" Subtype="Motor"/>
-				<Component Count="750" Subtype="Construction"/>
-				<Component Count="4000" Subtype="SteelPlate"/>
+				<Component Subtype="TurretBaseComponent" Count="25" />
+				<Component Subtype="TurretRotorComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="4" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="6" />
+
+
+				<!--<Component Count="2000" Subtype="SteelPlate"/>
+				<Component Count="5" Subtype="Construction"/>
+
+				<Component Count="5" Subtype="LargeTube" />
+				<Component Count="10" Subtype="Motor" />
+				<Component Count="25" Subtype="Computer"/>
+				<Component Count="10" Subtype="MetalGrid" />
+				<Component Count="50" Subtype="Construction"/>
+				<Component Count="3000" Subtype="SteelPlate"/>-->
             </Components>
             <CriticalComponent Index="0" Subtype="Computer"/>
             <BuildProgressModels>
@@ -45,7 +53,8 @@
 				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="8.00" EndY="4.00"/>
 				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="5.00" EndY="8.00"/>
 			</MountPoints>
-            <BuildTimeSeconds>500</BuildTimeSeconds>
+            <BuildTimeSeconds>400</BuildTimeSeconds>
+            <WeaponDefinitionId Subtype="ShootMissileGooder" /> 
 			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>

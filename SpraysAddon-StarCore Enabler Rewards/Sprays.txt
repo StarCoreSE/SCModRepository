@@ -98,8 +98,8 @@ ID=5b9366da-391f-7318-9464-59cc1d67a51d
 Group=gifs
 Flags=168296452
 
-[KST_StarCore_Logo_Neon]
-ID=097ad56f-b7f2-7837-55ce-c715553ab838
+[KST_GT3_Logo_1]
+ID=804b8929-4764-7c61-ae6c-6523d446144b
 Group=KST
 Flags=0
 
@@ -138,21 +138,6 @@ ID=da0048f2-bbf0-dfc0-0ba2-a75e21754fe2
 Group=misc
 Flags=0
 
-[1527455191311]
-ID=fa19d74e-5c7e-f6be-64cb-9bea129b16d6
-Group=misc
-Flags=0
-
-[1552424_tilio_v1-ultrakill]
-ID=21f4b402-2ffd-9533-b839-3ac3e53eef58
-Group=misc
-Flags=0
-
-[1593704371389]
-ID=cbb75753-60ac-a0b6-41e0-a51d320697b8
-Group=misc
-Flags=0
-
 [Class_4_Laser_Safety_Sign__99900_1024x]
 ID=61f94477-3574-6c3e-a138-61301deefcee
 Group=misc
@@ -168,13 +153,8 @@ ID=4d101276-d5fc-0de5-938e-7f01b95f5886
 Group=misc
 Flags=0
 
-[firefox_2022-12-07_20-41-29]
-ID=17414c4e-a97e-4c3e-21c9-6d90e8b661e6
-Group=misc
-Flags=0
-
 [HATE]
-ID=99f9d5ac-584e-1251-e306-64553ac0f42b
+ID=40d03646-732b-9e52-d851-787bfe53d0a1
 Group=misc
 Flags=0
 
@@ -183,18 +163,8 @@ ID=f298d1c1-4c30-d5df-1af9-07ac51bd50a5
 Group=misc
 Flags=0
 
-[nomacs_2023-02-11_17-41-30]
-ID=90d29324-2cab-2e5f-5f8b-a1fae5842580
-Group=misc
-Flags=0
-
 [outofyourfriends]
 ID=7077428d-8fc8-64ce-98a5-f95dda7fe244
-Group=misc
-Flags=0
-
-[SEVIER-COUNTY-EMA_TDF_FIRE-DANGER-SCALE-FOR-MONDAY-4-APRIL-2022_040422]
-ID=79ba3edf-88aa-1a3c-1f0f-693b97ca970f
 Group=misc
 Flags=0
 
@@ -203,9 +173,129 @@ ID=28749513-d80d-acbc-13d6-cc5005117d03
 Group=misc
 Flags=0
 
-[vidthumbnail]
-ID=d3b90501-f143-bfae-4714-954b9430b149
-Group=misc
+[Crab1_Decal Full]
+ID=832ae139-722c-49da-8cc9-7039efc0be5b
+Group=MissCryptid Decals
+Flags=0
+
+[Crab1_Decal No outline]
+ID=0a6a1a13-11a6-acec-5f69-5108c59e3ef8
+Group=MissCryptid Decals
+Flags=0
+
+[Crab1_Decal No words]
+ID=e4aec820-77d6-870f-39dc-ba3c1816ec1e
+Group=MissCryptid Decals
+Flags=0
+
+[Pinup]
+ID=341530a0-1fab-746a-b77e-05cfce4f521e
+Group=MissCryptid Decals
+Flags=0
+
+[ProProliferation1]
+ID=b1bfa99a-94f5-4208-ce62-efae33390bbb
+Group=MissCryptid Decals
+Flags=0
+
+[ProProliferation2]
+ID=c9ed3fc0-e217-f46f-ea8f-d15d4d0ba936
+Group=MissCryptid Decals
+Flags=0
+
+[ProProliferation3]
+ID=1f6e7843-8cbe-040c-72d4-4efc5449c064
+Group=MissCryptid Decals
+Flags=0
+
+[Shellfire Suppressor]
+ID=12f55975-fe1d-6f40-6616-048ff70b7a30
+Group=MissCryptid Decals
+Flags=0
+
+[Shellfire Suppressor2]
+ID=45eaf9f6-6a41-bc75-f566-9b5bd79d8c86
+Group=MissCryptid Decals
+Flags=0
+
+[Shellfire Suppressor3]
+ID=7cae3db7-9b3e-2fe9-361a-5df9a65e8b4c
+Group=MissCryptid Decals
+Flags=0
+
+[Shellfire Suppressor4]
+ID=a5916ba8-2ab0-911a-a7b9-87d42af3f685
+Group=MissCryptid Decals
+Flags=0
+
+[Shellfire Suppressor5]
+ID=78c5188b-1d71-459c-e6d5-a4c19d22c01a
+Group=MissCryptid Decals
+Flags=0
+
+[Shellfire Suppressor6]
+ID=bb86ea3c-17b5-48e3-d930-dfffe2b34473
+Group=MissCryptid Decals
+Flags=0
+
+[ShrimpleAsThat1]
+ID=bda7e2c8-214a-03f3-27da-10b7adc2c2d9
+Group=MissCryptid Decals
+Flags=0
+
+[ShrimpleAsThat2]
+ID=7975783c-11eb-428d-dd89-eed3d0be0f1e
+Group=MissCryptid Decals
+Flags=0
+
+[ShrimpleAsThat3]
+ID=53ac0499-fdb2-a97b-6af4-a23e3205baa2
+Group=MissCryptid Decals
+Flags=0
+
+[ShrimpleAsThat_alt1]
+ID=35851e5a-04b2-a2b0-b5e3-5fcd323307fe
+Group=MissCryptid Decals
+Flags=0
+
+[ShrimpleAsThat_alt2]
+ID=0b615e82-a921-4dc5-479b-b6e983fd3365
+Group=MissCryptid Decals
+Flags=0
+
+[ShrimpleAsThat_alt3]
+ID=ffe2e9e6-875f-c3b6-8b7d-76e7af38e82b
+Group=MissCryptid Decals
+Flags=0
+
+[SilenceSpud1]
+ID=772753a9-0fee-3c3f-d481-939acbd7655b
+Group=MissCryptid Decals
+Flags=0
+
+[SilenceSpud2]
+ID=46b9a8e0-2de4-0e19-6ac2-1e0b8d43a331
+Group=MissCryptid Decals
+Flags=0
+
+[SilenceSpud3]
+ID=d7629c06-1922-64f0-31a2-6f0c8a8d479c
+Group=MissCryptid Decals
+Flags=0
+
+[Strategic Red Line]
+ID=46b1b91d-126c-d956-18c2-48f3eb709c3b
+Group=MissCryptid Decals
+Flags=0
+
+[Strategic Red Line2]
+ID=336a25e2-ccec-7c1e-e71a-ee5296d9e586
+Group=MissCryptid Decals
+Flags=0
+
+[Strategic Red Line3]
+ID=5048cf21-5e6b-e189-59c9-0ca137de527b
+Group=MissCryptid Decals
 Flags=0
 
 [Starcore]
@@ -241,20 +331,5 @@ Flags=0
 [UEF2]
 ID=3da22c46-b41d-c852-616a-caad635e4d1e
 Group=UEF
-Flags=0
-
-[Decal Full]
-ID=a00c93b3-9b26-5b26-0c19-c8a6a55b9c9f
-Group=MissCryptid Decals
-Flags=0
-
-[Decal No outline]
-ID=153c77fd-5da9-d7f6-6d9b-48f2c516cf28
-Group=MissCryptid Decals
-Flags=0
-
-[Decal No words]
-ID=3b0c039a-b716-1ad3-9019-cb216a472201
-Group=MissCryptid Decals
 Flags=0
 

@@ -14,13 +14,6 @@
       <ItemIds>
 
 
-        <!--TIO but good-->
-        <string>Type18_Artillery_Block</string>
-        <string>Type77_Railgun_Block</string>
-        <string>Reaver_Coilgun_Block</string>
-        <string>Fixed_Rockets</string>
-        <string>Priest_Block</string>
-
 
 
         <!--MA-->
@@ -126,14 +119,9 @@
 
 
         <!--HAS-->
-        <string>HAS_Thanatos</string>
         <!--<string>HAS_Alecto</string>-->
-        <string>HAS_Assault</string>
         <string>HAS_Mammon</string>
-        <string>HAS_Esper</string>
         <string>HAS_Vulcan</string>
-        <string>HAS_Cyclops</string>
-        <string>HAS_Crossfield</string>
 
         <!--WYSEMAN ONESHOT-->
         <string>K_SA_Launcher_VI</string>
@@ -208,6 +196,47 @@
 
       </ItemIds>
     </Category>
+
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+
+      </Id>
+      <DisplayName>.STARCORE WIP</DisplayName>
+      <Name>.SC WIP</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+	<!--nate's 2024 TIO-->
+
+        <string>Type18_Artillery</string>
+        <string>Type19_Driver</string>
+        <string>Reaver_Coilgun</string>
+        <string>Fixed_Rockets</string>
+        <string>Priest_Block</string>	
+        <string>DualSnubLaserTurret</string>	
+        <string>DualPulseLaserTurret</string>	
+        <string>Type17_BeamLance</string>	
+        <string>HeavyCarronade_5x5_Turret</string>	
+        <string>X4_7x7_HeavyTurret</string>	
+        <string>UnguidedRocketTurret</string>	
+        <string>DrunkRocketTurret</string>	
+        <string>Devastator_Torp</string>	
+        <string>VindicatorKineticLance</string>	
+        <string>HadeanPlasmaBlastgun</string>	
+        <string>Fixed_Rockets</string>	
+        <string>HeavyFighterBay</string>	
+        <string>APE_Strong</string>	
+        <string>Priest_Block</string>	
+        <string>PriestReskin_Block</string>	
+        <string>GoalieCasemate</string>	
+	
+		
+        
+
+      </ItemIds>
+    </Category>
+
 
 
     
