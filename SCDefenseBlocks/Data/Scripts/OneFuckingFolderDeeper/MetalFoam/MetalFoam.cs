@@ -104,7 +104,7 @@ namespace Invalid.MetalFoam
         private void CreateEffects()
         {
             Vector3D position = block.GetPosition();
-            MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("MetalFoamSmoke", position);
+            /*MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("MetalFoamSmoke", position);*/
             MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("MetalFoamSound", position);
         }
 
@@ -240,7 +240,7 @@ namespace Invalid.MetalFoam
             if (!block.IsFunctional)
             {
                 // Play particle and sound effects at the block's position
-                MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("MetalFoamSmoke", block.GetPosition());
+                /*MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("MetalFoamSmoke", block.GetPosition());*/
                 MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("MetalFoamSound", block.GetPosition());
 
                 // Automatically set the foammeup sync variable to true
