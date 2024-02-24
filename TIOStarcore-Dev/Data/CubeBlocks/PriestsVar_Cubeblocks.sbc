@@ -83,7 +83,7 @@
             <Icon>Textures\GUI\Icons\TestScene.png</Icon>
             <CubeSize>Large</CubeSize>
             <BlockTopology>TriangleMesh</BlockTopology>
-            <Size x="3" y="4" z="3"/>
+            <Size x="3" y="3" z="3"/>
             <ModelOffset x="0" y="0" z="0"/>
             <Model>Models\PriestReskin_MainScene.mwm</Model>
           <Components>
