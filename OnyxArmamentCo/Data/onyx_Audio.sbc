@@ -11,16 +11,10 @@
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>2</Volume>
+      <Volume>0.5</Volume>
       <Waves>
         <Wave Type="D3">
-          <Start>Audio\Onyx\railguns\Onyx_light_coilgun_fire_01.wav</Start>
-        </Wave>
-        <Wave Type="D3">
-          <Start>Audio\Onyx\railguns\Onyx_light_coilgun_fire_02.wav</Start>
-        </Wave>
-        <Wave Type="D3">
-          <Start>Audio\Onyx\railguns\Onyx_light_coilgun_fire_03.wav</Start>
+          <Start>Audio\Onyx\railguns\Onyx_plasma_fire_01.wav</Start>
         </Wave>
       </Waves>
     </Sound>
