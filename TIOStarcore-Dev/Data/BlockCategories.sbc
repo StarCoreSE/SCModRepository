@@ -132,9 +132,10 @@
 	  </Category> 
 
 	</CategoryClasses>
-
+ 
 	<BlockVariantGroups>
-	<!-- Turret Variants-->
+
+    <!-- Turret Variants
 		<BlockVariantGroup>
 			<Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="MyWeaponPack" />
 			<Icon>Textures\GUI\Icons\Mk1CannonMainScene.dds</Icon>
@@ -156,7 +157,7 @@
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type19_Driver" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type22_Driver" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type25_Driver" />
-				<!-- <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type17_BeamLance" /> -->
+				<!-- <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type17_BeamLance" />
 
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HeavyCarronade_5x5_Turret" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="X4_7x7_HeavyTurret" />
@@ -172,11 +173,11 @@
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HeavyFighterBay" />
 		
 			</Blocks>
-		</BlockVariantGroup>		
-		
-		
-		
-	<BlockVariantGroup>
+		</BlockVariantGroup>
+  -->
+
+
+  <BlockVariantGroup>
 		<Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Type_Artillery" />
 		<Icon>Textures\GUI\Icons\Mk1CannonMainScene.dds</Icon>
 		<DisplayName>Heavy Naval Artillery</DisplayName>
@@ -221,7 +222,7 @@
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="VindicatorKineticLance" />
 			</Blocks>
 		</BlockVariantGroup>	
-		
+
 		
 	</BlockVariantGroups>
 </Definitions>
