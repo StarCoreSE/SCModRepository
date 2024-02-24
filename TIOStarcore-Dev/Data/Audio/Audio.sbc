@@ -907,7 +907,7 @@
 		  <Volume>2</Volume>
 		  <Waves>
 			  <Wave Type="D3">
-				  <Start>Audio\Shot\Plasma-XShot.wav</Start>
+				  <Start>Audio\Shot\PlasXShot.wav</Start>
 			  </Wave>
 		  </Waves>
 	  </Sound>
@@ -924,7 +924,7 @@
 		  <Volume>2</Volume>
 		  <Waves>
 			  <Wave Type="D3">
-				  <Start>Audio\Shot\Plas-XShotD1.wav</Start>
+				  <Start>Audio\Shot\PlasXShotD1.wav</Start>
 			  </Wave>
 		  </Waves>
 	  </Sound>
@@ -941,7 +941,7 @@
 		  <Volume>1</Volume>
 		  <Waves>
 			  <Wave Type="D3">
-				  <Start>Audio\Shot\Plas-XShotD2.wav</Start>
+				  <Start>Audio\Shot\PlasXShotD2.wav</Start>
 			  </Wave>
 		  </Waves>
 	  </Sound>
@@ -956,7 +956,7 @@
 		  <Volume>1</Volume>
 		  <Waves>
 			  <Wave Type="D3">
-				  <Start>Audio\Shot\Plas-XShotD3.wav</Start>
+				  <Start>Audio\Shot\PlasXShotD3.wav</Start>
 			  </Wave>
 		  </Waves>
 	  </Sound>
