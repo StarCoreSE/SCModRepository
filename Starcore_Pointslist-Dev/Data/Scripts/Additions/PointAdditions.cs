@@ -363,6 +363,7 @@ namespace ShipPoints
 				MetalStorm@125;
 				Odin_Rail_2@300;
 				Odin_Rail_1@200;
+
 				MCRN_Heavy_Torpedo@350;
 				OPA_Heavy_Torpedo@200;
 				OPA_Light_Missile@150;
@@ -391,6 +392,7 @@ namespace ShipPoints
 				ModularLRM5AngledReversed@40;
 				Starcore_Arrow_Block@300;
 				SC_Flare@50;
+
 				Odin_Laser_Fixed@350;
 				Odin_Autocannon_Fixed@350;
 				Odin_PDC@100;
@@ -415,6 +417,7 @@ namespace ShipPoints
 				Odin_5x5_Battleshipcannon_Surface@225;
 				Odin_3x3_Battleshipcannon@175;
 				Odin_3x3_Battleshipcannon_Surface@175;
+
 				StealthHeatSink@50;
 				StealthDrive@500;
 				JN_175Fixed@1350;
@@ -428,6 +431,7 @@ namespace ShipPoints
 				HAS_Esper@625;
 				MADAR@0;
 				HAS_Vulcan@1000;
+
 				SC_Coil_Cannon@450;
 				NHI_PD_Turret@100;
 				NHI_PD_Turret_Half@100;
@@ -448,6 +452,7 @@ namespace ShipPoints
 				NHI_Fixed_Autocannon@225;
 				NHI_Fixed_Gatling_Laser@225;
 				NHI_Kinetic_Cannon_Turret@300;
+
 				DETPAK@1;
 				DETPAK_3x1@1;
 				DETPAK_1x1@1;
@@ -469,29 +474,40 @@ namespace ShipPoints
 				TaiidanHangarFighter@800; 
 				TaiidanHangarBomber@800;
 				TaiidanHangarBomberMedium@800;				
-				TaiidanSingleHangar@100;  
+				TaiidanSingleHangar@100;
+
 				MA_Guardian@700; 
 				PM_LG_BLASTPLATE_BLASTPLATE@100; 
 
-				APE_Strong@150; 
-				Devastator_Torp@725; 
-				Priest_Block@85; 
-				PriestReskin_Block@85; 
-				Fixed_Rockets@225; 
-				Type18_Artillery@270;
-				Type21_Artillery@550;
-				Type24_Artillery@800;
-				Type19_Driver@350;
-				Type22_Driver@700;
-				Type25_Driver@1100;
-				Reaver_Coilgun@200; 
-				Type17_BeamLance@99999; 
-				HeavyCarronade_5x5_Turret@400;
-				X4_7x7_HeavyTurret@300;
-				UnguidedRocketTurret@125;
-				DrunkRocketTurret@250;
-				DualSnubLaserTurret@250;
-				DualPulseLaserTurret@250;
+				381mmDualR@250;
+                381mmDualNR@250;
+                380mmMLE1935@400;
+                15cmSKC28R@125;
+                15cmSKC28NR@125;
+                128mmL45@200;
+                128mmSKC34@250;
+                127mmMk12@175;
+                127mmMk24@175;
+                127mmMk32@250;
+                127mmMk56@350;
+                105mmTwin@100;
+                PomPomMain@175;
+                150mmCasemate@100;
+                150mmCasemateTwin@125;
+                BoforTwinRemodel@95;
+                BoforSingleRemodel@75;
+                QuadBofor@150;
+                TorpTestBuidl@350;
+                16InchTriple@400;
+                15cmTbtsKC36T@100;
+                15cmTbtsKC36@100;
+                203mmTwin@165;
+                203mmQuad@325;
+                TorpBarbette@500;
+                406alternate@400;
+                Mk25Rangefinder@50;
+                6InchTriple@200;
+
                 Null_Point_Jump_Disruptor_Large@99999;
 				LargeGatlingTurret_SC@125;
 				LargeMissileTurret_SC@155;
@@ -500,6 +516,7 @@ namespace ShipPoints
 				LargeRailgun_SC@165;
 				LargeBlockLargeCalibreGun_SC@250;
 				LargeMissileLauncher_SC@250;
+
 				Starcore_RWR_Projectiles@5;
 				NID_Pyroacid@300;
 				NID_HeavyPyroacid@500;
@@ -528,6 +545,7 @@ namespace ShipPoints
 				HAS_Cyclops@350;
 				HAS_Crossfield@250;
 				AMP_HealGenerator@400;
+
 				CapacitorLarge@400;
 				GoalieCasemate@400; 
 				KreegMagnetarCannon@450; 
@@ -536,11 +554,30 @@ namespace ShipPoints
 				Thagomizer_Angled@750; 
 				Thagomizer_Angled_Flipped@750; 
 				SC_Radome@10;
+				APE_Strong@150; 
+				Devastator_Torp@725; 
+				Priest_Block@85; 
+				PriestReskin_Block@85; 
+				Fixed_Rockets@225; 
+				Type18_Artillery@270;
+				Type21_Artillery@550;
+				Type24_Artillery@800;
+				Type19_Driver@350;
+				Type22_Driver@700;
+				Type25_Driver@1100;
+				Reaver_Coilgun@200; 
+				Type17_BeamLance@99999; 
+				HeavyCarronade_5x5_Turret@400;
+				X4_7x7_HeavyTurret@300;
+				UnguidedRocketTurret@125;
+				DrunkRocketTurret@250;
+				DualSnubLaserTurret@250;
+				DualPulseLaserTurret@250;
 				HadeanPlasmaBlastgun@900; 
 				VindicatorKineticLance@700;
 				HeavyFighterBay@300;
-				SI_Field_Gen@450;
 
+				SI_Field_Gen@450;
 				MA_Laser_Armor01@1;
 				MA_Laser_Armor02@1;
 				MA_Laser_Armor03@1;
