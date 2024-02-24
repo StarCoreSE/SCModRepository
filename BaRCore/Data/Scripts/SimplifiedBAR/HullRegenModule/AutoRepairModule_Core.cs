@@ -126,6 +126,8 @@ namespace StarCore.AutoRepairModule
 
             LoadSettings();
 
+            Settings.IgnoreArmor = true;
+
             if (SettingsSubsystemPriority != SubsystemPriority)
             {
                 SubsystemPriority = SettingsSubsystemPriority;
