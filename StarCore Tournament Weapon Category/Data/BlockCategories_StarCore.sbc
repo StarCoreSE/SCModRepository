@@ -202,8 +202,8 @@
         <TypeId>GuiBlockCategoryDefinition</TypeId>
 
       </Id>
-      <DisplayName>.STARCORE UTILITY</DisplayName>
-      <Name>.SC Utility</Name>
+      <DisplayName>.STARCORE WIP</DisplayName>
+      <Name>.SC WIP</Name>
       <StrictSearch>true</StrictSearch>
       <ItemIds>
 
@@ -226,6 +226,10 @@
         <string>HadeanPlasmaBlastgun</string>	
         <string>Fixed_Rockets</string>	
         <string>HeavyFighterBay</string>	
+        <string>APE_Strong</string>	
+        <string>Priest_Block</string>	
+        <string>PriestReskin_Block</string>	
+        <string>GoalieCasemate</string>	
 	
 		
         
