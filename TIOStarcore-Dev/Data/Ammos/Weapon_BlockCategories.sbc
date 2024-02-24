@@ -1,0 +1,35 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CategoryClasses>
+  
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+	  <Id>
+		<TypeId>GuiBlockCategoryDefinition</TypeId>
+		<SubtypeId/>
+	  </Id>
+			  <DisplayName>KAALAKIOTA</DisplayName>
+			  <Name>KAALAKIOTA</Name>
+	  <ItemIds>
+		<!-- Turret Cannons -->
+	
+		<string>LargeMissileTurret/QuadBarrelAutocannon</string>
+		<string>LargeMissileTurret/B8T_Flare</string>
+		<string>LargeMissileTurret/DualBarrelArtillery</string>	
+		<string>LargeMissileTurret/HeavyPulse</string>
+		<string>LargeMissileTurret/HeavyTorpedoLauncher</string>
+		<string>LargeMissileTurret/LightMissileLauncher</string>	
+		<string>LargeMissileTurret/PrototypeSiegeArtillery</string>	
+		<string>LargeMissileTurret/QuadArtilleryBase</string>
+		<string>LargeMissileTurret/QuadBarrelAutocannon</string>
+		<string>LargeMissileTurret/HeavyAssaultMissileLauncher</string>
+	
+				
+		
+		
+	  </ItemIds>
+	</Category>
+
+	  
+	
+  </CategoryClasses>
+</Definitions>

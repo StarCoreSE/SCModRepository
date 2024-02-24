@@ -2,22 +2,22 @@
 <Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <CubeBlocks>
 
-		<!-- Large JDD -->
+
         <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
             <Id>
                 <TypeId>ConveyorSorter</TypeId>
-                <SubtypeId>Torp_Block</SubtypeId>
+                <SubtypeId>Devastator_Torp</SubtypeId>
             </Id>
-            <DisplayName>[Trident] Torpedo Turret</DisplayName>
+            <DisplayName>Devastator Torpedo Turret</DisplayName>
             <Description>
-              [10km Targeting Range]
-              [Kinetic damage]
-              [~300 m/s]
+              [10km Targeting Range] wait what
+              [Kinetic damage] wait what
+              [~300 m/s] sure
               This weapon slowly repairs itself while offline, and when below functional.
             </Description>
 			<GuiVisible>true</GuiVisible>
         
-            <Icon>Textures\GUI\Icons\Trident.png</Icon>
+            <Icon>Textures\GUI\Icons\Trident.dds</Icon>
             
             <CubeSize>Large</CubeSize>
             <BlockTopology>TriangleMesh</BlockTopology>
@@ -25,7 +25,14 @@
             <ModelOffset x="0" y="0" z="0"/>
           <Model>Models\TorpReaper_Torp_Main_Scene.mwm</Model>
             <Components>
-				<Component Count="1000" Subtype="SteelPlate"/>
+				<Component Subtype="TurretBaseComponent" Count="32" />
+				<Component Subtype="TurretRotorComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="5" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="5" />
+
+				<!--
+				<Component Count="2200" Subtype="SteelPlate"/>
 				<Component Count="500" Subtype="Construction"/>
 				<Component Count="50" Subtype="LargeTube" />
 				<Component Count="200" Subtype="MetalGrid" />
@@ -33,7 +40,7 @@
                 <Component Count="500" Subtype="Computer"/>
                 <Component Count="100" Subtype="Motor"/>
 				<Component Count="500" Subtype="Construction"/>
-				<Component Count="3500" Subtype="SteelPlate"/>
+				<Component Count="3500" Subtype="SteelPlate"/>-->
             </Components>
             <CriticalComponent Index="0" Subtype="Computer"/>
             <BuildProgressModels>
@@ -49,6 +56,7 @@
 				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="7.00" EndY="5.00"/>
 			</MountPoints>
             <BuildTimeSeconds>500</BuildTimeSeconds>
+            <WeaponDefinitionId Subtype="ShootMissileGooder" /> 
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
