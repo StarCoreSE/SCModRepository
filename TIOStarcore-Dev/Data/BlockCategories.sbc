@@ -157,7 +157,7 @@
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type19_Driver" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type22_Driver" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type25_Driver" />
-				<!-- <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type17_BeamLance" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Type17_BeamLance" />
 
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HeavyCarronade_5x5_Turret" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="X4_7x7_HeavyTurret" />
