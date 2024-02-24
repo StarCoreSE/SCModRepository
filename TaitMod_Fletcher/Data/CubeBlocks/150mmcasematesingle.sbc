@@ -39,6 +39,8 @@
 				<MountPoint Side="Bottom" StartX="0.0" StartY="0.5" EndX="1.0" EndY="1.0"/>
 			</MountPoints>
 			<BlockPairName>150mmCasemate</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
 		</Definition>
 	</CubeBlocks>
 </Definitions>
