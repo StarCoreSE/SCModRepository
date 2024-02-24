@@ -30,6 +30,9 @@ namespace StarCore.SystemHighlight
         const string From = "SysHL";
         const string Message = "/hlhelp for list of Commands";
 
+        private float Transparency;
+        private int HighlightIntensity;
+
         private bool DebugToggle = false;
         private bool needsDoubleExecution = false;
         private bool SeenMessage = false;      
@@ -44,6 +47,9 @@ namespace StarCore.SystemHighlight
         {
             if (MyAPIGateway.Session.IsServer && MyAPIGateway.Utilities.IsDedicated)
                 return;
+
+            Transparency = -0.5f;
+            HighlightIntensity = 3;
         }
 
         protected override void UnloadData()
@@ -72,7 +78,7 @@ namespace StarCore.SystemHighlight
             HandleRaycastAndGetGrid(out strike, out cubeGrid, out gridBlocks);
 
             if (message.Contains("/hl") && strike != null && cubeGrid != null && gridBlocks != null)
-            {
+            {               
                 sendToOthers = false;
                 if (message.Contains("/hlconv"))
                 {
@@ -136,6 +142,14 @@ namespace StarCore.SystemHighlight
                     SetStatus("All Highlights Cleared", 3000, "Green");
                     ClearHighlight(gridBlocks, cubeGrid);
                 }
+                else if (message.Contains("/hlsettransparency"))
+                {
+                    HandleSetTransparency(message);
+                }
+                else if (message.Contains("/hlsetintensity"))
+                {
+                    HandleSetIntensity(message);
+                }
                 else if (message.Contains("/hldebug"))
                 {
                     HandleToggleDebug();
@@ -175,6 +189,8 @@ namespace StarCore.SystemHighlight
             MyAPIGateway.Utilities.ShowMessage(From, "/hlcolorhelp : List of Colors Supported by /hlcustomadd");
             MyAPIGateway.Utilities.ShowMessage(From, "/hlclear : Removes Active Highlight");
             MyAPIGateway.Utilities.ShowMessage(From, "/hldamage : Highlights All Non-Functional Blocks");
+            MyAPIGateway.Utilities.ShowMessage(From, "/hlsetintensity : Sets Highlight Intensity, Takes 0 to 10");
+            MyAPIGateway.Utilities.ShowMessage(From, "/hlsettransparency : Sets Block Transparency, Takes -1 to 1");
             MyAPIGateway.Utilities.ShowMessage(From, "/hldebug : Toggles Debug Mode");
         }
 
@@ -253,7 +269,7 @@ namespace StarCore.SystemHighlight
 
                             if (block.FatBlock.IsFunctional)
                             {
-                                MyVisualScriptLogicProvider.SetHighlightLocal(block.FatBlock.Name, thickness: 3, pulseTimeInFrames: -1, color: Color.Yellow);
+                                MyVisualScriptLogicProvider.SetHighlightLocal(block.FatBlock.Name, thickness: HighlightIntensity, pulseTimeInFrames: -1, color: Color.Yellow);
                             }
                             else if (!block.FatBlock.IsFunctional)
                             {
@@ -275,7 +291,7 @@ namespace StarCore.SystemHighlight
 
                             if (block.FatBlock.IsFunctional)
                             {
-                                MyVisualScriptLogicProvider.SetHighlightLocal(block.FatBlock.Name, thickness: 3, pulseTimeInFrames: -1, color: Color.Green);
+                                MyVisualScriptLogicProvider.SetHighlightLocal(block.FatBlock.Name, thickness: HighlightIntensity, pulseTimeInFrames: -1, color: Color.Green);
                             }
                             else if (block.FatBlock.IsFunctional == false)
                             {
@@ -297,7 +313,7 @@ namespace StarCore.SystemHighlight
 
                             if (block.FatBlock.IsFunctional)
                             {
-                                MyVisualScriptLogicProvider.SetHighlightLocal(block.FatBlock.Name, thickness: 3, pulseTimeInFrames: -1, color: Color.SkyBlue);
+                                MyVisualScriptLogicProvider.SetHighlightLocal(block.FatBlock.Name, thickness: HighlightIntensity, pulseTimeInFrames: -1, color: Color.SkyBlue);
                             }
                             else if (block.FatBlock.IsFunctional == false)
                             {
@@ -319,7 +335,7 @@ namespace StarCore.SystemHighlight
 
                             if (block.FatBlock.IsFunctional)
                             {
-                                MyVisualScriptLogicProvider.SetHighlightLocal(block.FatBlock.Name, thickness: 3, pulseTimeInFrames: -1, color: Color.Orange);
+                                MyVisualScriptLogicProvider.SetHighlightLocal(block.FatBlock.Name, thickness: HighlightIntensity, pulseTimeInFrames: -1, color: Color.Orange);
                             }
                             else if (block.FatBlock.IsFunctional == false)
                             {
@@ -346,7 +362,7 @@ namespace StarCore.SystemHighlight
                                 if (block.FatBlock.IsFunctional)
                                 {
                                     var colorString = HandleColor(color);
-                                    MyVisualScriptLogicProvider.SetHighlightLocal(block.FatBlock.Name, thickness: 3, pulseTimeInFrames: -1, color: colorString);
+                                    MyVisualScriptLogicProvider.SetHighlightLocal(block.FatBlock.Name, thickness: HighlightIntensity, pulseTimeInFrames: -1, color: colorString);
                                 }
                                 else if (block.FatBlock.IsFunctional == false)
                                 {
@@ -376,7 +392,7 @@ namespace StarCore.SystemHighlight
                         }
                     }
 
-                    HandleDithering(gridHighlightedEntities, block);
+                    HandleDithering(gridHighlightedEntities, block, Transparency);
                 }
             }
 
@@ -387,11 +403,45 @@ namespace StarCore.SystemHighlight
             }
         }   
 
-        public static void HandleDithering(Dictionary<IMyEntity, int> gridHighlightedEntities, IMySlimBlock block)
+        public void HandleSetTransparency(string message)
+        {
+            string remainingMessage = message.Substring(18);
+            int spaceIndex = remainingMessage.IndexOf(' ');
+
+            if (spaceIndex >= 0)
+            {
+                if (spaceIndex + 1 < remainingMessage.Length)
+                {
+                    float tempTransparency;
+                    float.TryParse(remainingMessage.Substring(spaceIndex + 1), out tempTransparency);
+
+                    Transparency = tempTransparency;
+                }                    
+            }
+        }
+
+        public void HandleSetIntensity(string message)
+        {
+            string remainingMessage = message.Substring(15);
+            int spaceIndex = remainingMessage.IndexOf(' ');
+
+            if (spaceIndex >= 0)
+            {
+                if (spaceIndex + 1 < remainingMessage.Length)
+                {
+                    int tempIntensity;
+                    int.TryParse(remainingMessage.Substring(spaceIndex + 1), out tempIntensity);
+
+                    HighlightIntensity = tempIntensity;
+                }             
+            }
+        }
+
+        public static void HandleDithering(Dictionary<IMyEntity, int> gridHighlightedEntities, IMySlimBlock block, float Transparency)
         {
             if (block.FatBlock != null && !gridHighlightedEntities.ContainsKey(block.FatBlock))
             {
-                block.Dithering = -0.5f;
+                block.Dithering = Transparency;
             }
             else if (block.FatBlock != null && gridHighlightedEntities.ContainsKey(block.FatBlock))
             {
@@ -399,7 +449,7 @@ namespace StarCore.SystemHighlight
             }
             else if (block.FatBlock == null)
             {
-                block.Dithering = -0.5f;
+                block.Dithering = Transparency;
             }
         }      
 
