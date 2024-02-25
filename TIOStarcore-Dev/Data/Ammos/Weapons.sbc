@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Weapons>
+    <Weapon>
+      <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>Coil1</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="1" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+      <ReleaseTimeAfterFire>0</ReleaseTimeAfterFire>
+      <DeviateShotAngle>0</DeviateShotAngle>
+      <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+      <AmmoMagazines>
+        <AmmoMagazine Subtype="Coil1" />
+      </AmmoMagazines>
+      <ReloadTime>0</ReloadTime>
+    </Weapon>
+
+     <Weapon>
+      <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>HAML1</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="1" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+      <ReleaseTimeAfterFire>0</ReleaseTimeAfterFire>
+      <DeviateShotAngle>0</DeviateShotAngle>
+      <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+      <AmmoMagazines>
+        <AmmoMagazine Subtype="HAML1" />
+      </AmmoMagazines>
+      <ReloadTime>0</ReloadTime>
+    </Weapon>
+
+    <Weapon>
+      <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>LML1</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="1" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+      <ReleaseTimeAfterFire>0</ReleaseTimeAfterFire>
+      <DeviateShotAngle>0</DeviateShotAngle>
+      <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+      <AmmoMagazines>
+        <AmmoMagazine Subtype="LML1" />
+      </AmmoMagazines>
+      <ReloadTime>0</ReloadTime>
+    </Weapon>
+
+
+     <Weapon>
+      <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>SiegeArty1</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="1" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+      <ReleaseTimeAfterFire>0</ReleaseTimeAfterFire>
+      <DeviateShotAngle>0</DeviateShotAngle>
+      <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+      <AmmoMagazines>
+        <AmmoMagazine Subtype="SiegeArty1" />
+      </AmmoMagazines>
+      <ReloadTime>0</ReloadTime>
+    </Weapon>
+
+    <Weapon>
+      <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>DualArty1</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="1" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+      <ReleaseTimeAfterFire>0</ReleaseTimeAfterFire>
+      <DeviateShotAngle>0</DeviateShotAngle>
+      <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+      <AmmoMagazines>
+        <AmmoMagazine Subtype="DualArty1" />
+      </AmmoMagazines>
+      <ReloadTime>0</ReloadTime>
+    </Weapon>
+
+    <Weapon>
+      <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>QuadArty1</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="1" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+      <ReleaseTimeAfterFire>0</ReleaseTimeAfterFire>
+      <DeviateShotAngle>0</DeviateShotAngle>
+      <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+      <AmmoMagazines>
+        <AmmoMagazine Subtype="QuadArty1" />
+      </AmmoMagazines>
+      <ReloadTime>0</ReloadTime>
+    </Weapon>
+
+     <Weapon>
+      <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>QuadAuto1</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="1" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+      <ReleaseTimeAfterFire>0</ReleaseTimeAfterFire>
+      <DeviateShotAngle>0</DeviateShotAngle>
+      <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+      <AmmoMagazines>
+        <AmmoMagazine Subtype="QuadAuto1" />
+      </AmmoMagazines>
+      <ReloadTime>0</ReloadTime>
+    </Weapon>
+
+    <Weapon>
+      <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>Pulse1</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="1" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+      <ReleaseTimeAfterFire>0</ReleaseTimeAfterFire>
+      <DeviateShotAngle>0</DeviateShotAngle>
+      <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+      <AmmoMagazines>
+        <AmmoMagazine Subtype="Energy" />
+      </AmmoMagazines>
+      <ReloadTime>0</ReloadTime>
+    </Weapon>
+
+    <Weapon>
+      <Id>
+        <TypeId>WeaponDefinition</TypeId>
+        <SubtypeId>HeavyTorpedo1</SubtypeId>
+      </Id>
+      <ProjectileAmmoData RateOfFire="1" ShootSoundName="WepShipGatlingShot" ShotsInBurst="1" />
+      <ReleaseTimeAfterFire>0</ReleaseTimeAfterFire>
+      <DeviateShotAngle>0</DeviateShotAngle>
+      <MuzzleFlashLifeSpan>0</MuzzleFlashLifeSpan>
+      <NoAmmoSoundName>WepShipGatlingNoAmmo</NoAmmoSoundName>
+      <SecondarySoundName>WepShipGatlingRotation</SecondarySoundName>
+      <AmmoMagazines>
+        <AmmoMagazine Subtype="HeavyTorpedo1" />
+      </AmmoMagazines>
+      <ReloadTime>0</ReloadTime>
+    </Weapon>
+
+  </Weapons>
+
+
+  <Blueprints>  
+
+
+   <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>CoilBP</SubtypeId>
+      </Id>
+      <DisplayName>Coilgun Round</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\Sabot250.dds</Icon>
+      <Prerequisites>
+        <Item Amount="8" TypeId="Ingot" SubtypeId="Magnesium" />
+		<Item Amount="2" TypeId="Ingot" SubtypeId="Nickel" />
+		<Item Amount="10" TypeId="Ingot" SubtypeId="Uranium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="Coil1" />
+      <BaseProductionTimeInSeconds>60</BaseProductionTimeInSeconds>
+    </Blueprint>
+
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>ArtyBP</SubtypeId>
+      </Id>
+      <DisplayName>Artillery Round Round</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\Sabot250.dds</Icon>
+      <Prerequisites>
+        <Item Amount="8" TypeId="Ingot" SubtypeId="Magnesium" />
+		<Item Amount="2" TypeId="Ingot" SubtypeId="Nickel" />
+		<Item Amount="10" TypeId="Ingot" SubtypeId="Uranium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="QuadArty1" />
+      <BaseProductionTimeInSeconds>60</BaseProductionTimeInSeconds>
+    </Blueprint>
+
+
+
+
+  </Blueprints>
+</Definitions>

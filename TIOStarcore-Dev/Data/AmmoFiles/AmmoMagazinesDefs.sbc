@@ -1,0 +1,410 @@
+﻿<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <AmmoMagazines>    
+        <AmmoMagazine>
+            <Id>
+                <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>C_Type_Magazine</SubtypeId>
+            </Id>
+            <DisplayName>Type Cannon HE</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\CannonRound3.dds</Icon>
+            <Size>
+                <X>0.7</X>
+                <Y>0.7</Y>
+                <Z>0.7</Z>
+            </Size>
+            <Mass>322</Mass>
+            <Volume>16</Volume>
+            <Model>Models\Ammo\CannonRound3.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>1</Capacity>
+            <AmmoDefinitionId Subtype="C_Type_Ammo" />
+        </AmmoMagazine>
+		
+		<AmmoMagazine>
+			<Id>
+				<TypeId>AmmoMagazine</TypeId>
+				<SubtypeId>R_Type_Magazine</SubtypeId>
+			</Id>
+			<DisplayName>Type Sabot</DisplayName>
+			<Icon>Textures\GUI\Icons\ammo\RailgunPorjectile1.dds</Icon>
+			<Size>
+				<X>0.7</X>
+				<Y>0.7</Y>
+				<Z>0.7</Z>
+			</Size>
+			<Mass>75</Mass>
+			<Volume>30</Volume>
+			<Model>Models\Ammo\RailgunPorjectile3.mwm</Model>
+			<PhysicalMaterial>Ammo</PhysicalMaterial>
+			<Capacity>1</Capacity>
+			<AmmoDefinitionId Subtype="R_Type_Ammo" />
+		</AmmoMagazine>
+		
+		<AmmoMagazine>
+			<Id>
+				<TypeId>AmmoMagazine</TypeId>
+				<SubtypeId>UNSC_Coilgun_MagazineLarge</SubtypeId>
+			</Id>
+			<DisplayName>Magnetic Slugs</DisplayName>
+			<Icon>Textures\GUI\Icons\ammo\CoilgunSlug.png</Icon>
+			<Size>
+				<X>0.7</X>
+				<Y>0.7</Y>
+				<Z>0.7</Z>
+			</Size>
+			<Mass>45</Mass>
+			<Volume>10</Volume>
+			<Model>Models\CoilgunMk2_BulletModel.mwm</Model>
+			<PhysicalMaterial>Ammo</PhysicalMaterial>
+			<Capacity>20</Capacity>
+			<AmmoDefinitionId Subtype="Magnetic_Slugs_Ammo" />
+		</AmmoMagazine>
+		<AmmoMagazine>
+			<Id>
+				<TypeId>AmmoMagazine</TypeId>
+				<SubtypeId>Laser_MagazineLarge</SubtypeId>
+			</Id>
+			<DisplayName>Laser</DisplayName>
+			<Icon></Icon>
+			<Size>
+				<X>0.7</X>
+				<Y>0.7</Y>
+				<Z>0.7</Z>
+			</Size>
+			<Mass>35</Mass>
+			<Volume>8</Volume>
+			<Model></Model>
+			<PhysicalMaterial>Ammo</PhysicalMaterial>
+			<Capacity>1</Capacity>
+			<AmmoDefinitionId Subtype="Laser_Ammo" />
+		</AmmoMagazine>
+		<AmmoMagazine>
+			<Id>
+				<TypeId>AmmoMagazine</TypeId>
+				<SubtypeId>IronMaiden_MagazineLarge</SubtypeId>
+			</Id>
+			<DisplayName>Tungsten Rounds</DisplayName>
+			<Icon>Textures\GUI\Icons\ammo\Iron_Maiden_Ammo.png</Icon>
+			<Size>
+				<X>0.7</X>
+				<Y>0.7</Y>
+				<Z>0.7</Z>
+			</Size>
+			<Mass>35</Mass>
+			<Volume>8</Volume>
+			<Model>Models\Iron_Maiden_Ammo.mwm</Model>
+			<PhysicalMaterial>Ammo</PhysicalMaterial>
+			<Capacity>3</Capacity>
+			<AmmoDefinitionId Subtype="IronMaiden_Ammo" />
+		</AmmoMagazine>
+
+	<AmmoMagazine>
+		<Id>
+			<TypeId>AmmoMagazine</TypeId>
+			<SubtypeId>F-3 Ammo Belt</SubtypeId>
+		</Id>
+		<DisplayName>DisplayName_Item_NATO_25x184mm</DisplayName>
+		<Icon>Textures\GUI\Icons\ammo\Ammo_Box.dds</Icon>
+		<Size>
+			<X>0.25</X>
+			<Y>0.2</Y>
+			<Z>0.2</Z>
+		</Size>
+		<Mass>35</Mass>
+		<Volume>16</Volume>
+		<Model>Models\Ammo\Ammo_Box.mwm</Model>
+		<PhysicalMaterial>Ammo</PhysicalMaterial>
+		<Capacity>140</Capacity>
+		<AmmoDefinitionId Subtype="AGunBullet" />
+
+		<MinimumOfferAmount>50</MinimumOfferAmount>
+		<MaximumOfferAmount>500</MaximumOfferAmount>
+		<MinimumOrderAmount>100</MinimumOrderAmount>
+		<MaximumOrderAmount>2000</MaximumOrderAmount>
+		<CanPlayerOrder>true</CanPlayerOrder>
+	</AmmoMagazine>
+
+
+	<AmmoMagazine>
+		<Id>
+			<TypeId>AmmoMagazine</TypeId>
+			<SubtypeId>AutoShellAmmo</SubtypeId>
+		</Id>
+		<DisplayName>DisplayName_Item_MediumCalibreAmmo</DisplayName>
+		<Icon>Textures\GUI\Icons\ammo\MediumCalibreShell.dds</Icon>
+		<Size>
+			<X>0.25</X>
+			<Y>0.2</Y>
+			<Z>0.2</Z>
+		</Size>
+		<Mass>60</Mass>
+		<Volume>30</Volume>
+		<Model>Models\Weapons\MediumCalibreShell.mwm</Model>
+		<PhysicalMaterial>Ammo</PhysicalMaterial>
+		<Capacity>1</Capacity>
+		<AmmoDefinitionId Subtype="AutoShell" />
+
+		<MinimumOfferAmount>100</MinimumOfferAmount>
+		<MaximumOfferAmount>1000</MaximumOfferAmount>
+		<MinimumOrderAmount>100</MinimumOrderAmount>
+		<MaximumOrderAmount>2000</MaximumOrderAmount>
+		<CanPlayerOrder>true</CanPlayerOrder>
+	</AmmoMagazine>
+
+		<AmmoMagazine>
+			<Id>
+				<TypeId>AmmoMagazine</TypeId>
+				<SubtypeId>RailgunTurret_MagazineLarge</SubtypeId>
+			</Id>
+			<DisplayName>Tungsten Rounds</DisplayName>
+			<Icon>Textures\GUI\Icons\ammo\Iron_Maiden_Ammo.png</Icon>
+			<Size>
+				<X>0.7</X>
+				<Y>0.7</Y>
+				<Z>0.7</Z>
+			</Size>
+			<Mass>35</Mass>
+			<Volume>8</Volume>
+			<Model>Models\Iron_Maiden_Ammo.mwm</Model>
+			<PhysicalMaterial>Ammo</PhysicalMaterial>
+			<Capacity>3</Capacity>
+			<AmmoDefinitionId Subtype="RailgunTurret_Ammo" />
+		</AmmoMagazine>
+
+		<AmmoMagazine>
+			<Id>
+				<TypeId>AmmoMagazine</TypeId>
+				<SubtypeId>Torp_MagazineLarge</SubtypeId>
+			</Id>
+			<DisplayName>HE Trident Torpedo</DisplayName>
+			<Icon>Textures\GUI\Icons\TorpReaper_Torp.png</Icon>
+			<Size>
+				<X>1</X>
+				<Y>1</Y>
+				<Z>1</Z>
+			</Size>
+			<Mass>100</Mass>
+			<Volume>1300</Volume>
+			<Model>Models\Ammo\TorpReaper_Torp.mwm</Model>
+			<PhysicalMaterial>Ammo</PhysicalMaterial>
+			<Capacity>6</Capacity>
+			<AmmoDefinitionId Subtype="Torp_Ammo" />
+		</AmmoMagazine>
+
+				<AmmoMagazine>
+			<Id>
+				<TypeId>AmmoMagazine</TypeId>
+				<SubtypeId>The_Rockets_Of_All_Time</SubtypeId>
+			</Id>
+			<DisplayName>HE Rockets</DisplayName>
+			<Icon>Textures\GUI\Icons\TorpReaper_Torp.png</Icon>
+			<Size>
+				<X>1</X>
+				<Y>1</Y>
+				<Z>1</Z>
+			</Size>
+			<Mass>100</Mass>
+			<Volume>1300</Volume>
+			<Model>Models\Ammo\TorpReaper_Torp.mwm</Model>
+			<PhysicalMaterial>Ammo</PhysicalMaterial>
+			<Capacity>1</Capacity>
+			<AmmoDefinitionId Subtype="Torp_Ammo" />
+		</AmmoMagazine>
+
+		<AmmoMagazine>
+			<Id>
+				<TypeId>AmmoMagazine</TypeId>
+				<SubtypeId>EMPTorp_MagazineLarge</SubtypeId>
+			</Id>
+			<DisplayName>EMP Trident Torpedo</DisplayName>
+			<Icon>Textures\GUI\Icons\TorpReaper_Torp.png</Icon>
+			<Size>
+				<X>1</X>
+				<Y>1</Y>
+				<Z>1</Z>
+			</Size>
+			<Mass>100</Mass>
+			<Volume>1300</Volume>
+			<Model>Models\Ammo\TorpReaper_Torp.mwm</Model>
+			<PhysicalMaterial>Ammo</PhysicalMaterial>
+			<Capacity>6</Capacity>
+			<AmmoDefinitionId Subtype="EMPTorp_Ammo" />
+		</AmmoMagazine>
+
+		<AmmoMagazine>
+			<Id>
+				<TypeId>AmmoMagazine</TypeId>
+				<SubtypeId>VMLS_MagazineLarge</SubtypeId>
+			</Id>
+			<DisplayName>HE VXM-08 Missile</DisplayName>
+			<Icon>Textures\GUI\Icons\MLS_MissileAmmo.png</Icon>
+			<Size>
+				<X>1</X>
+				<Y>1</Y>
+				<Z>1</Z>
+			</Size>
+			<Mass>70</Mass>
+			<Volume>1000</Volume>
+			<Model>Models\Ammo\MLS_MissileAmmo.mwm</Model>
+			<PhysicalMaterial>Ammo</PhysicalMaterial>
+			<Capacity>6</Capacity>
+			<AmmoDefinitionId Subtype="VMLS_Ammo" />
+		</AmmoMagazine>
+		<AmmoMagazine>
+			<Id>
+				<TypeId>AmmoMagazine</TypeId>
+				<SubtypeId>SwarmVMLS_MagazineLarge</SubtypeId>
+			</Id>
+			<DisplayName>Decoy VXM-08 Missile</DisplayName>
+			<Icon>Textures\GUI\Icons\MLS_MissileAmmo.png</Icon>
+			<Size>
+				<X>1</X>
+				<Y>1</Y>
+				<Z>1</Z>
+			</Size>
+			<Mass>70</Mass>
+			<Volume>1000</Volume>
+			<Model>Models\Ammo\MLS_MissileAmmo.mwm</Model>
+			<PhysicalMaterial>Ammo</PhysicalMaterial>
+			<Capacity>6</Capacity>
+			<AmmoDefinitionId Subtype="SwarmVMLS_Ammo" />
+		</AmmoMagazine>
+		<AmmoMagazine>
+			<Id>
+				<TypeId>AmmoMagazine</TypeId>
+				<SubtypeId>HeavyFighter1</SubtypeId>
+			</Id>
+			<DisplayName>Heavy Fighter Strikecraft</DisplayName>
+			<Icon>Textures\GUI\Icons\SciFiPlaneLaunch.dds</Icon>
+			<Size>
+				<X>1</X>
+				<Y>1</Y>
+				<Z>1</Z>
+			</Size>
+			<Mass>700</Mass>
+			<Volume>1000</Volume>
+			<Model>Models\Strike_Craft\SciFiPlanePart.mwm</Model>
+			<PhysicalMaterial>Ammo</PhysicalMaterial>
+			<Capacity>1</Capacity>
+			<AmmoDefinitionId Subtype="HeavyFighter1" />
+		</AmmoMagazine>
+
+
+		<AmmoMagazine>
+			<Id>
+				<TypeId>AmmoMagazine</TypeId>
+				<SubtypeId>JDD_EnergyCharge_MagazineLarge</SubtypeId>
+			</Id>
+			<DisplayName>JDD - Universial Energy Charge Large</DisplayName>
+			<Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+			<!-- <Icon>Textures\GUI\Icons\EnergyCharge_Icon.dds</Icon>-->
+			<Size>
+				<X>0.2</X>
+				<Y>0.2</Y>
+				<Z>0.2</Z>
+			</Size>
+			<Mass>35</Mass>
+			<Volume>8</Volume>
+			<Model>Models\misc\mwi_EnergyCharge.mwm</Model>
+			<PhysicalMaterial>Ammo</PhysicalMaterial>
+			<Capacity>1</Capacity>
+			<AmmoDefinitionId Subtype="JDD_EnergyChargeAmmoLarge" />
+		</AmmoMagazine>
+
+		<AmmoMagazine>
+			<Id>
+				<TypeId>AmmoMagazine</TypeId>
+				<SubtypeId>PlasAmmo</SubtypeId>
+			</Id>
+			<DisplayName>Original AmmoDef Do Not Steal</DisplayName>
+			<Icon></Icon>
+			<ExtraInventoryTooltipLine>why</ExtraInventoryTooltipLine>
+			<Size>
+				<X>0.1</X>
+				<Y>0.1</Y>
+				<Z>0.1</Z>
+			</Size>
+			<Mass>150</Mass>
+			<Volume>1</Volume>
+			<Model></Model>
+			<PhysicalMaterial>Ammo</PhysicalMaterial>
+			<Capacity>1</Capacity>
+			<AmmoDefinitionId Subtype="red projectile go really fast" />
+		</AmmoMagazine>
+
+		<AmmoMagazine>
+			<Id>
+				<TypeId>AmmoMagazine</TypeId>
+				<SubtypeId>APESAmmo</SubtypeId>
+			</Id>
+			<DisplayName>APES</DisplayName>
+			<Icon></Icon>
+			<ExtraInventoryTooltipLine>why</ExtraInventoryTooltipLine>
+			<Size>
+				<X>0.1</X>
+				<Y>0.1</Y>
+				<Z>0.1</Z>
+			</Size>
+			<Mass>1</Mass>
+			<Volume>1</Volume>
+			<Model></Model>
+			<PhysicalMaterial>Ammo</PhysicalMaterial>
+			<Capacity>36</Capacity>
+			<AmmoDefinitionId Subtype="red projectile go really fast" />
+		</AmmoMagazine>
+		
+		<AmmoMagazine>
+			<Id>
+				<TypeId>AmmoMagazine</TypeId>
+				<SubtypeId>KreegMagnetarAmmoMag</SubtypeId>
+			</Id>
+			<DisplayName>ManetarMag</DisplayName>
+			<Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+			<!-- <Icon>Textures\GUI\Icons\EnergyCharge_Icon.dds</Icon>-->
+			<Size>
+				<X>1</X>
+				<Y>0.6</Y>
+				<Z>0.6</Z>
+			</Size>
+			<Mass>180</Mass>
+			<Volume>1</Volume>
+			<Model>Models\Ammo\MLS_MissileAmmo.mwm</Model>
+			<PhysicalMaterial>Ammo</PhysicalMaterial>
+			<Capacity>3</Capacity>
+			<AmmoDefinitionId Subtype="red projectile go really fast" />
+
+			<MinimumOfferAmount>10</MinimumOfferAmount>
+			<MaximumOfferAmount>100</MaximumOfferAmount>
+			<MinimumOrderAmount>10</MinimumOrderAmount>
+			<MaximumOrderAmount>100</MaximumOrderAmount>
+			<CanPlayerOrder>true</CanPlayerOrder>
+		</AmmoMagazine>
+
+		<AmmoMagazine>
+			<Id>
+				<TypeId>AmmoMagazine</TypeId>
+				<SubtypeId>KreegBadMagnetarAmmoMag</SubtypeId>
+			</Id>
+			<DisplayName>FireFullManetarMag</DisplayName>
+			<Icon>Textures\GUI\Icons\component\BatteryComponent.dds</Icon>
+			<Size>
+				<X>1</X>
+				<Y>0.6</Y>
+				<Z>0.6</Z>
+			</Size>
+			<Mass>180</Mass>
+			<Volume>1</Volume>
+			<Model>Models\Ammo\MLS_MissileAmmo.mwm</Model>
+			<PhysicalMaterial>Ammo</PhysicalMaterial>
+			<Capacity>24</Capacity>
+			<AmmoDefinitionId Subtype="red projectile go really fast" />
+
+			<MinimumOfferAmount>10000</MinimumOfferAmount>
+			<MaximumOfferAmount>100000</MaximumOfferAmount>
+			<MinimumOrderAmount>10000</MinimumOrderAmount>
+			<MaximumOrderAmount>100000</MaximumOrderAmount>
+			<CanPlayerOrder>true</CanPlayerOrder>
+		</AmmoMagazine>
+	</AmmoMagazines>
+</Definitions>

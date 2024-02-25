@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <CubeBlocks>
-    <Definition xsi:type="MyObjectBuilder_PoweredCargoContainerDefinition">
+    <Definition>
       <Id>
-        <TypeId>Collector</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>BlinkDriveLarge</SubtypeId>
       </Id>
       <DisplayName>Standard Blink Drive</DisplayName>

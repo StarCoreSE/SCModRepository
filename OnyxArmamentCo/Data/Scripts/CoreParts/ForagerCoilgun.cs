@@ -179,6 +179,7 @@ namespace Scripts {
             Ammos = new[] {
                 ForagerLightCoilgunAmmoWC,
                 ForagerLightCoilgunAmmoShrapWC,
+                ForagerLightCoilgunAmmoWC_L,
             },
             //Animations = Weapon75_Animation,
             //Upgrades = UpgradeModules,
