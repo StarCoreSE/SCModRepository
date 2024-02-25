@@ -168,8 +168,8 @@ namespace Klime.CTF
         {
             if (!MyAPIGateway.Utilities.IsDedicated)
             {
-                //reuse_event = NetworkDebug.DeserializeLogged<EventInfo>("EventInfo", obj);
-                reuse_event = MyAPIGateway.Utilities.SerializeFromBinary<EventInfo>(obj);
+                reuse_event = NetworkDebug.DeserializeLogged<EventInfo>("EventInfo", obj);
+                //reuse_event = MyAPIGateway.Utilities.SerializeFromBinary<EventInfo>(obj);
                 if (reuse_event != null)
                 {
                     if (HUD_Base != null && HUD_Base.Heartbeat)
@@ -205,8 +205,8 @@ namespace Klime.CTF
         {
             if (!MyAPIGateway.Session.IsServer)
             {
-                //packet = NetworkDebug.DeserializeLogged<PacketBase>("GenericUpdate", obj);
-                packet = MyAPIGateway.Utilities.SerializeFromBinary<PacketBase>(obj);
+                packet = NetworkDebug.DeserializeLogged<PacketBase>("GenericUpdate", obj);
+                //packet = MyAPIGateway.Utilities.SerializeFromBinary<PacketBase>(obj);
 
                 if (packet != null)
                 {
@@ -774,7 +774,7 @@ namespace Klime.CTF
                                                 {
                                                     if (faction == carrying_faction.FactionId)
                                                     {
-                                                        Vector3D capture_pos = subflag.capture_positions[faction];
+                                                        Vector3D capture_pos = ((MatrixD)subflag.capture_positions[faction]).Translation;
 
                                                         double distance = Vector3D.Distance(subflag.flag_entity.WorldMatrix.Translation, capture_pos);
                                                         bool valid_cap = false;
@@ -1017,7 +1017,9 @@ namespace Klime.CTF
                                         }
                                     }
                                 }
-                                subflag.current_matrix = subflag.flag_entity.WorldMatrix;
+                                subflag.current_pos = subflag.flag_entity.WorldMatrix.Translation;
+                                Matrix3x3 rotationOnlyMatrix = subflag.flag_entity.WorldMatrix.Rotation;
+                                Quaternion.CreateFromRotationMatrix(ref rotationOnlyMatrix, out subflag.current_rotation);
                                 subflag.lifetime += 1;
                             }
                         }
@@ -1111,8 +1113,8 @@ namespace Klime.CTF
 
             foreach (var player in allplayers)
             {
-                //MyAPIGateway.Multiplayer.SendMessageTo(netid, NetworkDebug.SerializeLogged(packet.packet_op.ToString(), packet), player.SteamUserId);
-                MyAPIGateway.Multiplayer.SendMessageTo(netid, MyAPIGateway.Utilities.SerializeToBinary(packet), player.SteamUserId);
+                MyAPIGateway.Multiplayer.SendMessageTo(netid, NetworkDebug.SerializeLogged(packet.packet_op.ToString(), packet), player.SteamUserId);
+                //MyAPIGateway.Multiplayer.SendMessageTo(netid, MyAPIGateway.Utilities.SerializeToBinary(packet), player.SteamUserId);
             }
         }
 
@@ -1124,8 +1126,8 @@ namespace Klime.CTF
 
             foreach (var player in allplayers)
             {
-                //MyAPIGateway.Multiplayer.SendMessageTo(netid, NetworkDebug.SerializeLogged(packet.packet_op.ToString(), packet), player.SteamUserId);
-                MyAPIGateway.Multiplayer.SendMessageTo(netid, MyAPIGateway.Utilities.SerializeToBinary(packet), player.SteamUserId);
+                MyAPIGateway.Multiplayer.SendMessageTo(netid, NetworkDebug.SerializeLogged(packet.packet_op.ToString(), packet), player.SteamUserId);
+                //MyAPIGateway.Multiplayer.SendMessageTo(netid, MyAPIGateway.Utilities.SerializeToBinary(packet), player.SteamUserId);
             }
         }
 
@@ -1292,8 +1294,8 @@ namespace Klime.CTF
             {
                 if (player.Character != null)
                 {
-                    //MyAPIGateway.Multiplayer.SendMessageTo(eventnetid, NetworkDebug.SerializeLogged(infotype.ToString(), reuse_event), player.SteamUserId);
-                    MyAPIGateway.Multiplayer.SendMessageTo(eventnetid, MyAPIGateway.Utilities.SerializeToBinary(reuse_event), player.SteamUserId);
+                    MyAPIGateway.Multiplayer.SendMessageTo(eventnetid, NetworkDebug.SerializeLogged(infotype.ToString(), reuse_event), player.SteamUserId);
+                    //MyAPIGateway.Multiplayer.SendMessageTo(eventnetid, MyAPIGateway.Utilities.SerializeToBinary(reuse_event), player.SteamUserId);
                 }
             }
         }
