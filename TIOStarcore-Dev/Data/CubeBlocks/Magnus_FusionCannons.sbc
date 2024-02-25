@@ -8,7 +8,7 @@
 				<TypeId>LargeMissileTurret</TypeId>
 				<SubtypeId>KreegMagnetarCannon</SubtypeId>
 			</Id>
-			<DisplayName>Magnus Plasma Battery</DisplayName>
+			<DisplayName>Magnus Fusion Cannons</DisplayName>
 			<Description>
 				HSR Triple Shock Cannons.
 				Range: 6km

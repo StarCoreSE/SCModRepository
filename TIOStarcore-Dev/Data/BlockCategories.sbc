@@ -38,7 +38,7 @@
             </ItemIds>
         </Category>
 		
-			
+		<!--
 		<Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
 			<Id>
 				<TypeId>GuiBlockCategoryDefinition</TypeId>
@@ -79,7 +79,7 @@
 				<string>ConveyorSorter/K_HSR_Utilities_Reactor_Gel_LG</string>
 							
 			</ItemIds>
-		</Category>
+		</Category>-->
 	  
 	  <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
 		  <Id>
@@ -135,7 +135,7 @@
  
 	<BlockVariantGroups>
 
-    <!-- Turret Variants
+    Turret Variants
 		<BlockVariantGroup>
 			<Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="MyWeaponPack" />
 			<Icon>Textures\GUI\Icons\Mk1CannonMainScene.dds</Icon>
@@ -174,9 +174,9 @@
 		
 			</Blocks>
 		</BlockVariantGroup>
-  -->
+ 
 
-
+<!--
   <BlockVariantGroup>
 		<Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Type_Artillery" />
 		<Icon>Textures\GUI\Icons\Mk1CannonMainScene.dds</Icon>
@@ -221,7 +221,7 @@
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HadeanPlasmaBlastgun" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="VindicatorKineticLance" />
 			</Blocks>
-		</BlockVariantGroup>	
+		</BlockVariantGroup>	-->
 
 		
 	</BlockVariantGroups>

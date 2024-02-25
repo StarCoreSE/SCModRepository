@@ -8,7 +8,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>Type17_BeamLance</SubtypeId>
 			</Id>
-			<DisplayName>Type 17 Kodiak Particle Lance</DisplayName>
+			<DisplayName>Type 17 'Kodiak' Particle Lance</DisplayName>
 			<Description>Proton Particle Beam</Description>
 			<GuiVisible>false</GuiVisible>
 			<Icon>Textures\GUI\Icons\RailgunTurret_MainScene.png</Icon>

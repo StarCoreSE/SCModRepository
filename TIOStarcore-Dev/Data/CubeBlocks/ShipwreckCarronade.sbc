@@ -7,7 +7,7 @@
                 <TypeId>ConveyorSorter</TypeId>
                 <SubtypeId>HeavyCarronade_5x5_Turret</SubtypeId>
             </Id>
-            <DisplayName>Heavy Quad Carronade</DisplayName>
+            <DisplayName>'Shipwreck' Heavy Carronade</DisplayName>
             <Description>
               [2km Targeting Range]
               [Energy damage]
@@ -22,11 +22,11 @@
 			<ModelOffset x="0" y="1.25" z="0"/>
 			<Model>Models\Cubes\large\QuadArtilleryBase.mwm</Model>
             <Components>
-				<Component Subtype="TurretBaseComponent" Count="9" />
+				<Component Subtype="TurretBaseComponent" Count="12" />
 				<Component Subtype="TurretRotorComponent" Count="1" />
 				<Component Subtype="HeavyTurretComponent" Count="1" />
 				<Component Subtype="Computer" Count="1" />
-				<Component Subtype="HeavyTurretComponent" Count="8" />
+				<Component Subtype="HeavyTurretComponent" Count="4" />
             </Components>
             <CriticalComponent Index="0" Subtype="Computer"/>
 			<MountPoints>

@@ -8,12 +8,12 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>HeavyFighterBay</SubtypeId>
 			</Id>
-			<DisplayName>Heavy Fighter Launch Bay</DisplayName>
+			<DisplayName>Phoenix Snubfighter Launch Bay</DisplayName>
       		<Description>
 			 Launches Powerful strikecraft. Please have target selected, then turn shoot ON, to launch fighters.
      		 Capacity: 1
      		 MaxActive = 1
-    		  [MINTARGET DISTANCE OF 500]      
+				Managed by heat. 'Hawk' and 'Argonaut' Variants to follow.
      		 </Description>		
 			<Icon>Textures\GUI\Icons\SciFiPlaneLaunch.dds</Icon>
 			<CubeSize>Large</CubeSize>
@@ -22,7 +22,7 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Strike_Craft\HeavyFighterPad.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="600" />
+				<Component Subtype="SteelPlate" Count="2000" />
                 <Component Subtype="Construction" Count="400" />
 				<Component Subtype="SmallTube" Count="80" />
                 <Component Subtype="Motor" Count="150" />
@@ -30,7 +30,7 @@
                 <Component Subtype="Computer" Count="60" />
                 <Component Subtype="InteriorPlate" Count="120" />
                 <Component Subtype="Construction" Count="140" />
-                <Component Subtype="SteelPlate" Count="2000" />
+                <Component Subtype="SteelPlate" Count="600" />
 			</Components>
 			<CriticalComponent Index="0" Subtype="Computer"/>
 			<MountPoints>
