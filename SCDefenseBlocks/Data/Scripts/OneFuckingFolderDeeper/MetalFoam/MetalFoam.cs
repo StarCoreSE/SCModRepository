@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Text;
 using Sandbox.Definitions;
 using System.Linq;
+using System;
 
 namespace Invalid.MetalFoam
 {
@@ -32,6 +33,7 @@ namespace Invalid.MetalFoam
         private HashSet<Vector3I> currentFoamPositions = new HashSet<Vector3I>();
         private Vector3I center;  // Added this line
         private MySync<bool, SyncDirection.BothWays> foammeup;
+        private MySync<float, SyncDirection.BothWays> MaxFoamRadius;
         static bool m_controlsCreated = false;
 
         private int totalFoamBlocksAdded = 0;  // Counter for the number of foam blocks added
@@ -43,7 +45,7 @@ namespace Invalid.MetalFoam
             base.Init(objectBuilder);
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
 
-            foammeup.ValueChanged += foammeup_ValueChanged;
+            foammeup.ValueChanged += Foammeup_ValueChanged;
 
             block = (IMyCubeBlock)Entity;
             block.SlimBlock.ComponentStack.IsFunctionalChanged += OnBlockDamaged;
@@ -51,7 +53,7 @@ namespace Invalid.MetalFoam
             maxFoamBlocks = CalculateMaxFoamBlocks(block);
         }
 
-        private int CalculateMaxFoamBlocks(IMyCubeBlock block)                           // its not quite exact sometimes it cuts off 1 or 2 blocks but maybe it got converted into waste heat or something
+        private static int CalculateMaxFoamBlocks(IMyCubeBlock block)                           // its not quite exact sometimes it cuts off 1 or 2 blocks but maybe it got converted into waste heat or something
         {                                                                                // no wait its only reading the first entry of steel plates. We'll just call the second entry (after computers) its casing or something
             var definition = block.SlimBlock.BlockDefinition as MyCubeBlockDefinition;   // lmao it generates one extra plate on the outside of the formation because of the space at the center being taken up by the decoy
             if (definition != null)
@@ -66,7 +68,7 @@ namespace Invalid.MetalFoam
             return 100; // Default value if steel plates are not found or block definition is null
         }
 
-        private void foammeup_ValueChanged(MySync<bool, SyncDirection.BothWays> obj)
+        private void Foammeup_ValueChanged(MySync<bool, SyncDirection.BothWays> obj)
         {
             if (obj.Value)
             {
@@ -91,7 +93,7 @@ namespace Invalid.MetalFoam
         }
         private void StopFoamGeneration()
         {
-            NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME;
+            //NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME;
             //NotifyPlayers("Foam generation stopped!", MyFontEnum.Red);
         }
 
@@ -132,7 +134,7 @@ namespace Invalid.MetalFoam
 
         public override void UpdateBeforeSimulation100()
         {
-            if (MyAPIGateway.Session.GameplayFrameCounter >= nextLayerTick && foammeup.Value)
+            if (totalFoamBlocksAdded < maxFoamBlocks && MyAPIGateway.Session.GameplayFrameCounter >= nextLayerTick && foammeup.Value)
             {
                 SpreadFoam();
                 nextLayerTick = MyAPIGateway.Session.GameplayFrameCounter + 180; // Adjust timing as needed
@@ -141,20 +143,19 @@ namespace Invalid.MetalFoam
 
         private void SpreadFoam()
         {
-            var grid = block.CubeGrid;
             HashSet<Vector3I> newFoamPositions = new HashSet<Vector3I>();
             bool blockAdded = false; // Flag to track if any foam block was added
 
+            // Added for the foam viscosity slider
+            currentFoamPositions.Add(block.Position);
+
             foreach (var foamBlock in currentFoamPositions)
             {
-                if (totalFoamBlocksAdded >= maxFoamBlocks)
-                {
-                    break; // Exit if max blocks already added
-                }
-
                 foreach (var neighbor in GetNeighboringBlocks(foamBlock))
                 {
-                    if (CanPlaceFoam(neighbor) && !currentFoamPositions.Contains(neighbor) && !newFoamPositions.Contains(neighbor))
+                    if (CanPlaceFoam(neighbor) &&
+                        !newFoamPositions.Contains(neighbor) &&
+                        (MaxFoamRadius.Value == 0 || Vector3.DistanceSquared(neighbor, block.Position)*2.5f <= MaxFoamRadius.Value*MaxFoamRadius.Value))
                     {
                         newFoamPositions.Add(neighbor);
                         blockAdded = true;
@@ -181,7 +182,7 @@ namespace Invalid.MetalFoam
             }
 
             // Update current foam positions
-            currentFoamPositions.UnionWith(newFoamPositions);
+            currentFoamPositions = newFoamPositions;
 
             // Play sound effect once if a block was added this tick
             if (blockAdded)
@@ -193,7 +194,7 @@ namespace Invalid.MetalFoam
 
 
 
-        private IEnumerable<Vector3I> GetNeighboringBlocks(Vector3I position)
+        private static IEnumerable<Vector3I> GetNeighboringBlocks(Vector3I position)
         {
             return new List<Vector3I>
             {
@@ -248,7 +249,11 @@ namespace Invalid.MetalFoam
             }
         }
 
-
+        private static float CalculateMaxRadius(IMyCubeBlock block)
+        {
+            double maxFoamVolume = CalculateMaxFoamBlocks(block) * 2.5;
+            return (float)Math.Pow((3*maxFoamVolume)/(4*Math.PI), 1/3f);
+        }
 
         static void CreateTerminalControls()
         {
@@ -272,6 +277,40 @@ namespace Invalid.MetalFoam
                 startgenerationOnOff.OnText = MyStringId.GetOrCompute("On");
                 startgenerationOnOff.OffText = MyStringId.GetOrCompute("Off");
                 MyAPIGateway.TerminalControls.AddControl<IMyDecoy>(startgenerationOnOff);
+
+
+                var viscositySlider = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, IMyDecoy>("MetalFoam_Terminal_ViscositySlider");
+                viscositySlider.Enabled = (b) => b.GameLogic is MetalFoamGenerator;
+                viscositySlider.Visible = (b) => b.GameLogic is MetalFoamGenerator;
+                viscositySlider.Title = MyStringId.GetOrCompute("Foam Viscosity");
+                viscositySlider.Tooltip = MyStringId.GetOrCompute("Max foam radius. Zero for infinite.");
+                viscositySlider.Getter = (b) =>
+                {
+                    float value = (b.GameLogic.GetAs<MetalFoamGenerator>()?.MaxFoamRadius.Value) ?? CalculateMaxRadius(b);
+                    viscositySlider.Title = MyStringId.GetOrCompute("Foam Viscosity " + Math.Round(value, 1));
+                    return (b.GameLogic.GetAs<MetalFoamGenerator>()?.MaxFoamRadius.Value) ?? CalculateMaxRadius(b);
+                };
+                viscositySlider.Writer = (block, stringBuilder) =>
+                {
+                    double value = Math.Round((block.GameLogic.GetAs<MetalFoamGenerator>()?.MaxFoamRadius.Value) ?? CalculateMaxRadius(block), 1);
+                    stringBuilder.Append(value + "m");
+                };
+                viscositySlider.SetLimits(
+                    (block) => 0,
+                    (block) => CalculateMaxRadius(block)
+                    );
+                viscositySlider.Setter = (b, v) =>
+                {
+                    var generator = b.GameLogic.GetAs<MetalFoamGenerator>();
+                    if (generator != null)
+                    {
+                        generator.MaxFoamRadius.Value = v; // Syncs the value
+                    }
+                };
+                MyAPIGateway.TerminalControls.AddControl<IMyDecoy>(viscositySlider);
+
+
+
 
                 // Add an action for cockpits/control stations
                 var action = MyAPIGateway.TerminalControls.CreateAction<IMyDecoy>("MetalFoam_Action_StartGeneration");
@@ -307,7 +346,7 @@ namespace Invalid.MetalFoam
             // Unsubscribe from the foammeup ValueChanged event
             if (foammeup != null)
             {
-                foammeup.ValueChanged -= foammeup_ValueChanged;
+                foammeup.ValueChanged -= Foammeup_ValueChanged;
             }
 
             // Unsubscribe from the IsFunctionalChanged event
