@@ -775,8 +775,7 @@ namespace Klime.CTF
                                                 {
                                                     if (faction == carrying_faction.FactionId)
                                                     {
-                                                        MatrixD capture_matrix = subflag.capture_positions[faction];
-                                                        Vector3D capture_pos = capture_matrix.Translation;
+                                                        Vector3D capture_pos = subflag.capture_positions[faction];
 
                                                         double distance = Vector3D.Distance(subflag.flag_entity.WorldMatrix.Translation, capture_pos);
                                                         bool valid_cap = false;

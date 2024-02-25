@@ -45,7 +45,7 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
         public Vector3D homePos;
 
         [ProtoMember(9)]
-        public Dictionary<long, SerializableMatrix> capture_positions = new Dictionary<long, SerializableMatrix>(); // This seems to be the majority of network load - fix?
+        public Dictionary<long, Vector3D> capture_positions = new Dictionary<long, Vector3D>(); // This seems to be the majority of network load - fix?
 
         [ProtoMember(10)]
         public Color flag_color;
@@ -83,7 +83,13 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
             this.current_matrix = MatrixD.CreateWorld(homePos);
             this.owning_faction_id = owning_faction_id;
             this.flag_color = flag_color;
-            this.capture_positions = capture_positions;
+
+            this.capture_positions = new Dictionary<long, Vector3D>();
+            foreach (var captureMatrixPair in capture_positions)
+            {
+                this.capture_positions.Add(captureMatrixPair.Key, ((MatrixD) captureMatrixPair.Value).Translation);
+            }
+
             this.flag_type = flag_type;
             this.grip_strength = grip_strength;
             this.regen_modifier = regen_modifier;
