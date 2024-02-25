@@ -48,6 +48,7 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
 
         public Dictionary<long, SerializableMatrix> capture_positions = new Dictionary<long, SerializableMatrix>(); // This seems to be the majority of network load - fix?
 
+        [ProtoMember(10)]
         public Color flag_color;
 
         [ProtoMember(11)]
@@ -161,13 +162,10 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
             this.current_rotation = incoming_flag.current_rotation;
             this.owning_faction_id = incoming_flag.owning_faction_id;
             this.current_drop_life = incoming_flag.current_drop_life;
-            this.homePos = incoming_flag.homePos;
             this.flag_color = incoming_flag.flag_color;
-            this.capture_positions = incoming_flag.capture_positions;
             this.flag_type = incoming_flag.flag_type;
             this.grip_strength = incoming_flag.grip_strength;
             this.regen_modifier = incoming_flag.regen_modifier;
-            this.lastTickAcceleration = incoming_flag.lastTickAcceleration;
         }
     }
 }
