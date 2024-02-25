@@ -774,8 +774,7 @@ namespace Klime.CTF
                                                 {
                                                     if (faction == carrying_faction.FactionId)
                                                     {
-                                                        MatrixD capture_matrix = subflag.capture_positions[faction];
-                                                        Vector3D capture_pos = capture_matrix.Translation;
+                                                        Vector3D capture_pos = ((MatrixD)subflag.capture_positions[faction]).Translation;
 
                                                         double distance = Vector3D.Distance(subflag.flag_entity.WorldMatrix.Translation, capture_pos);
                                                         bool valid_cap = false;
@@ -1018,7 +1017,9 @@ namespace Klime.CTF
                                         }
                                     }
                                 }
-                                subflag.current_matrix = subflag.flag_entity.WorldMatrix;
+                                subflag.current_pos = subflag.flag_entity.WorldMatrix.Translation;
+                                Matrix3x3 rotationOnlyMatrix = subflag.flag_entity.WorldMatrix.Rotation;
+                                Quaternion.CreateFromRotationMatrix(ref rotationOnlyMatrix, out subflag.current_rotation);
                                 subflag.lifetime += 1;
                             }
                         }
@@ -1109,11 +1110,12 @@ namespace Klime.CTF
             packet.gamestate_packet = null;
             packet.all_flags_packet = allflags;
             packet.packet_op = PacketOp.UpdateFlags;
+            //byte[] serialized = NetworkDebug.SerializeLogged(packet.packet_op.ToString(), packet);
+            byte[] serialized = MyAPIGateway.Utilities.SerializeToBinary(packet);
 
             foreach (var player in allplayers)
             {
-                //MyAPIGateway.Multiplayer.SendMessageTo(netid, NetworkDebug.SerializeLogged(packet.packet_op.ToString(), packet), player.SteamUserId);
-                MyAPIGateway.Multiplayer.SendMessageTo(netid, MyAPIGateway.Utilities.SerializeToBinary(packet), player.SteamUserId);
+                MyAPIGateway.Multiplayer.SendMessageTo(netid, serialized, player.SteamUserId);
             }
         }
 
@@ -1122,11 +1124,12 @@ namespace Klime.CTF
             packet.all_flags_packet = null;
             packet.gamestate_packet = gamestate;
             packet.packet_op = PacketOp.UpdateGameState;
+            //byte[] serialized = NetworkDebug.SerializeLogged(packet.packet_op.ToString(), packet);
+            byte[] serialized = MyAPIGateway.Utilities.SerializeToBinary(packet);
 
             foreach (var player in allplayers)
             {
-                //MyAPIGateway.Multiplayer.SendMessageTo(netid, NetworkDebug.SerializeLogged(packet.packet_op.ToString(), packet), player.SteamUserId);
-                MyAPIGateway.Multiplayer.SendMessageTo(netid, MyAPIGateway.Utilities.SerializeToBinary(packet), player.SteamUserId);
+                MyAPIGateway.Multiplayer.SendMessageTo(netid, serialized, player.SteamUserId);
             }
         }
 
@@ -1288,13 +1291,14 @@ namespace Klime.CTF
             }
             reuse_event.info = message;
             reuse_event.infotype = infotype;
+            //byte[] serialized = NetworkDebug.SerializeLogged(infotype.ToString(), reuse_event);
+            byte[] serialized = MyAPIGateway.Utilities.SerializeToBinary(reuse_event);
 
             foreach (var player in allplayers)
             {
                 if (player.Character != null)
                 {
-                    //MyAPIGateway.Multiplayer.SendMessageTo(eventnetid, NetworkDebug.SerializeLogged(infotype.ToString(), reuse_event), player.SteamUserId);
-                    MyAPIGateway.Multiplayer.SendMessageTo(eventnetid, MyAPIGateway.Utilities.SerializeToBinary(reuse_event), player.SteamUserId);
+                    MyAPIGateway.Multiplayer.SendMessageTo(eventnetid, serialized, player.SteamUserId);
                 }
             }
         }
