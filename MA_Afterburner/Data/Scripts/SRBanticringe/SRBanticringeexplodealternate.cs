@@ -17,7 +17,6 @@ namespace SRBanticringe
 		private IMyConveyorSorter SRB;
 		private int triggerTick = 0;
 		private const double OFFSET_DISTANCE = 3;
-		private bool canExplode = false;
 
 		public override void Init(MyObjectBuilder_EntityBase objectBuilder)
 		{
@@ -35,11 +34,10 @@ namespace SRBanticringe
 
 		public override void UpdateAfterSimulation()
 		{
-			if (triggerTick == 1 && canExplode)
+			if (triggerTick == 1)
 			{
 				DoExplosion();
-				canExplode = false;
-            }
+			}
 
 			triggerTick = 0;
 		}
@@ -47,9 +45,9 @@ namespace SRBanticringe
 		private void DoExplosion()
 		{
 			if (SRB == null || SRB.CubeGrid.Physics == null || SRB.Enabled) return;
-			double radius = 20;
+			double radius = 30;
 			BoundingSphereD sphere = new BoundingSphereD(SRB.WorldMatrix.Translation + (SRB.WorldMatrix.Forward * OFFSET_DISTANCE), radius); // Apply offset, 10);
-			MyExplosionInfo explosion = new MyExplosionInfo(0f, 100000f, sphere, MyExplosionTypeEnum.CUSTOM, true);
+			MyExplosionInfo explosion = new MyExplosionInfo(0f, 10000f, sphere, MyExplosionTypeEnum.CUSTOM, true);
 
 			MyExplosions.AddExplosion(ref explosion);
 		}
