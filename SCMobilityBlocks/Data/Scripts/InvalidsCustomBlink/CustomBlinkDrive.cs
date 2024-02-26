@@ -52,12 +52,12 @@ namespace Invalid.BlinkDrive
             {
                 if (MyAPIGateway.Multiplayer.IsServer)
                 {
+                    MyLog.Default.WriteLineAndConsole("Server received jump request.");
                     PerformBlink();
                 }
             }
             else
             {
-                // Reset the request on the client side to ensure it's properly synchronized
                 ResetJumpRequest();
             }
         }
@@ -100,16 +100,13 @@ namespace Invalid.BlinkDrive
             newWorldMatrix.Translation = teleportPosition;
             (block.CubeGrid as MyEntity).Teleport(newWorldMatrix);
 
-            // Log status updates
             MyLog.Default.WriteLineAndConsole($"Performing blink: Original Position - {originalPosition}, Teleport Position - {teleportPosition}");
 
-            // Play particle effects at both original and teleported positions
             MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("HESFAST", originalPosition);
             MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("HESFAST", teleportPosition);
             MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("InvalidCustomBlinkParticleEnter", originalPosition);
             MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("InvalidCustomBlinkParticleLeave", teleportPosition);
 
-            // Reset jump request and start cooldown
             ResetJumpRequest();
             StartRechargeTimer();
         }
@@ -126,17 +123,14 @@ namespace Invalid.BlinkDrive
 
         public override void UpdateOnceBeforeFrame()
         {
-            // Check if the block and its cube grid are valid
             if (block == null || block.CubeGrid == null)
                 return;
 
-            // Check if the block's cube grid physics are valid
             if (block.CubeGrid.Physics == null)
                 return;
 
             var sink = Entity.Components.Get<MyResourceSinkComponent>();
 
-            // Initialize controls if not already created
             if (!controlsCreated)
             {
                 CreateTerminalControls();
@@ -150,27 +144,25 @@ namespace Invalid.BlinkDrive
             }
         }
 
+        private int logCounter = 0;
+        private const int logInterval = 60; // Log every 60 frames, equivalent to every 1 second at 60 FPS
+
         public override void UpdateAfterSimulation()
         {
             base.UpdateAfterSimulation();
 
-            // Check if the block and its cube grid are valid
             if (block == null || block.CubeGrid == null)
                 return;
 
-            // Check if the block's cube grid physics are valid
             if (block.CubeGrid.Physics == null)
                 return;
 
-            // Check if the block is still working and functional
             if (!block.IsWorking || !block.IsFunctional)
             {
-                // If not, reset the jump request and do not update the cooldown timer
                 ResetJumpRequest();
                 return;
             }
 
-            // Perform power calculation
             var sink = Entity.Components.Get<MyResourceSinkComponent>();
             if (sink != null)
             {
@@ -178,10 +170,6 @@ namespace Invalid.BlinkDrive
                 sink.Update();
             }
 
-            // Log power usage
-            //MyLog.Default.WriteLineAndConsole($"Power Usage: {sink.CurrentInputByType(MyResourceDistributorComponent.ElectricityId)} MW");
-
-            // Decrease cooldown timers if they're greater than 0
             if (jumpCooldownTimer1.Value > 0)
             {
                 jumpCooldownTimer1.Value--;
@@ -195,15 +183,19 @@ namespace Invalid.BlinkDrive
                 jumpCooldownTimer3.Value--;
             }
 
-            // Log charge states
-            //MyLog.Default.WriteLineAndConsole($"Charge States: Timer1 - {jumpCooldownTimer1}, Timer2 - {jumpCooldownTimer2}, Timer3 - {jumpCooldownTimer3}");
+            logCounter++;
+            if (logCounter >= logInterval)
+            {
+                //MyLog.Default.WriteLineAndConsole($"Charge States: Timer1 - {jumpCooldownTimer1}, Timer2 - {jumpCooldownTimer2}, Timer3 - {jumpCooldownTimer3}");
+                logCounter = 0;
+            }
         }
+
 
         private float ComputePowerRequired()
         {
             float powerRequired = 0f;
 
-            // Calculate power required for each charge being recharged
             if (jumpCooldownTimer1 > 0 && block.IsWorking && block.IsFunctional)
             {
                 powerRequired += 100f; // Assuming each charge consumes 100 MW
@@ -222,7 +214,7 @@ namespace Invalid.BlinkDrive
 
         private static void CreateTerminalControls()
         {
-            MyLog.Default.WriteLineAndConsole("CreateTerminalControls method called");
+            MyLog.Default.WriteLineAndConsole("Blinkdrive CreateTerminalControls method called");
 
             var blinkDriveButton = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlButton, IMyCollector>("BlinkDrive_ActivateButton");
             blinkDriveButton.Enabled = (b) => b.GameLogic is BlinkDrive;
@@ -232,11 +224,12 @@ namespace Invalid.BlinkDrive
             blinkDriveButton.Action = (b) =>
             {
                 var drive = b.GameLogic.GetAs<BlinkDrive>();
-                if (drive != null && drive.ChargesRemaining > 0) // Check charges remaining
+                if (drive != null && drive.ChargesRemaining > 0)
                 {
                     MyLog.Default.WriteLineAndConsole("Button action called");
+                    MyLog.Default.WriteLineAndConsole("Sending action to server...");
                     drive.requestJumpSync.Value = true;
-                    drive.ChargesRemaining--; // Decrement charges
+                    drive.ChargesRemaining--;
                 }
             };
             MyAPIGateway.TerminalControls.AddControl<IMyCollector>(blinkDriveButton);
@@ -249,7 +242,7 @@ namespace Invalid.BlinkDrive
                 var drive = b.GameLogic.GetAs<BlinkDrive>();
                 if (drive != null)
                 {
-                    MyLog.Default.WriteLineAndConsole("Cockpit action called");
+                    MyLog.Default.WriteLineAndConsole("Blinkdrive Cockpit action called");
                     drive.requestJumpSync.Value = true;
                 }
             };
@@ -266,7 +259,6 @@ namespace Invalid.BlinkDrive
                     }
                     else if (nextCooldown == -1 || drive.jumpCooldownTimer1 < nextCooldown)
                     {
-                        // Find the shortest cooldown time
                         nextCooldown = drive.jumpCooldownTimer1;
                     }
 
@@ -276,7 +268,6 @@ namespace Invalid.BlinkDrive
                     }
                     else if (nextCooldown == -1 || drive.jumpCooldownTimer2 < nextCooldown)
                     {
-                        // Find the shortest cooldown time
                         nextCooldown = drive.jumpCooldownTimer2;
                     }
 
@@ -286,13 +277,11 @@ namespace Invalid.BlinkDrive
                     }
                     else if (nextCooldown == -1 || drive.jumpCooldownTimer3 < nextCooldown)
                     {
-                        // Find the shortest cooldown time
                         nextCooldown = drive.jumpCooldownTimer3;
                     }
 
                     if (nextCooldown != -1)
                     {
-                        // Display cooldown time remaining for the next charge
                         sb.Append($"{nextCooldown / 60}s  ");
                     }
                     sb.Append($"C:{chargesRemaining}");
