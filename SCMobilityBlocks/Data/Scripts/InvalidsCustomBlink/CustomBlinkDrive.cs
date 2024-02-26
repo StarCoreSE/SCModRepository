@@ -58,6 +58,11 @@ namespace Invalid.BlinkDrive
             }
             else
             {
+                if (!MyAPIGateway.Multiplayer.IsServer)
+                {
+                    // Log when the server denies the jump request
+                    MyLog.Default.WriteLineAndConsole("Server denied jump request.");
+                }
                 ResetJumpRequest();
             }
         }
@@ -300,6 +305,8 @@ namespace Invalid.BlinkDrive
         {
             // This ensures the jump request is reset correctly on both server and clients
             requestJumpSync.Value = false;
+            MyLog.Default.WriteLineAndConsole("Resetting jump request.");
+
         }
 
         public override void Close()
