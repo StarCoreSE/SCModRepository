@@ -7,7 +7,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>UnguidedRocketTurret</SubtypeId>
 			</Id>
-			<DisplayName>Rocket Launcher Turret</DisplayName>
+			<DisplayName>AX 'Spitfire' Light Rocket Turret</DisplayName>
 			<Description>Fire in the Hole!</Description>
 			<Icon>Textures\GUI\Icons\LightMissileLauncher.dds</Icon>
 			<CubeSize>Large</CubeSize>
@@ -24,7 +24,7 @@
         		<Component Count="150" Subtype="LargeTube" />
         		<Component Count="150" Subtype="MetalGrid" />
         		<Component Count="1000" Subtype="Construction"/>
-        		<Component Count="500" Subtype="SteelPlate"/>
+        		<Component Count="200" Subtype="SteelPlate"/>
       		</Components>		
 
 			<CriticalComponent Subtype="Computer" Index="0"/>

@@ -5,34 +5,33 @@
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>DrunkRocketTurret</SubtypeId>
+				<SubtypeId>X4_7x7_HeavyTurret</SubtypeId>
 			</Id>
-			<DisplayName>Mostly Guided Rocket Turret</DisplayName>
-			<Description>Hoping It Gets Close Enough</Description>
-			<Icon>Textures\GUI\Icons\HAML.dds</Icon>
+			<DisplayName>X4 'Demolisher' Heavy Plasma Howitzer</DisplayName>
+			<Description>hehehehehehe</Description>
+			<Icon>Textures\GUI\Icons\PrototypeSiegeArtillery.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
-			<Size x="5" y="4" z="5"/>
-			<ModelOffset x="0" y="0" z="0"/>
-			<Model>Models\Cubes\large\HAML.mwm</Model>
+			<Size x="7" y="3" z="7"/>
+			<ModelOffset x="0" y="2.5" z="0"/>
+			<Model>Models\Cubes\large\PrototypeSiegeArtillery.mwm</Model>
 			<Components>
-				<Component Subtype="TurretBaseComponent" Count="10" />
+				<Component Subtype="TurretBaseComponent" Count="25" />
 				<Component Subtype="TurretRotorComponent" Count="1" />
-				<Component Subtype="HeavyTurretComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="4" />
 				<Component Subtype="Computer" Count="1" />
-				<Component Subtype="HeavyTurretComponent" Count="7" />		
+				<Component Subtype="HeavyTurretComponent" Count="6" />
         
       </Components>
 			<CriticalComponent Subtype="Computer" Index="0"/>
-
 			<MountPoints>
-				<MountPoint Side="Front" StartX="0.00" StartY="0.26" EndX="5.00" EndY="1.77"/>
-				<MountPoint Side="Back" StartX="0.00" StartY="0.26" EndX="5.00" EndY="1.77"/>
-				<MountPoint Side="Left" StartX="0.00" StartY="0.26" EndX="5.00" EndY="1.77"/>
-				<MountPoint Side="Right" StartX="0.00" StartY="0.26" EndX="5.00" EndY="1.77"/>
-				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.22" EndX="7.00" EndY="1.84"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.22" EndX="7.00" EndY="1.84"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.22" EndX="7.00" EndY="1.84"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.22" EndX="7.00" EndY="1.84"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="7.00" EndY="7.00"/>
 			</MountPoints>
-			
+
 			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 	  	  
       <ResourceSinkGroup>Defense</ResourceSinkGroup>
       <InventoryMaxVolume>0.144</InventoryMaxVolume>
@@ -47,6 +46,5 @@
 		<string>Weapons</string>
       </TargetingGroups>      
 		</Definition>
-		
 	</CubeBlocks>
 </Definitions>

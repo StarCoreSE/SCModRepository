@@ -8,10 +8,10 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>Fixed_Rockets</SubtypeId>
       </Id>
-      <DisplayName>"Peacemaker" Heavy Rockets</DisplayName>
+      <DisplayName>Tiberiyaas Heavy Rockets</DisplayName>
       <Description>
         [Rockets]
-        [5km Range]
+        [2km Range]
         [Energy damage]
         [1000 m/s]
       </Description>

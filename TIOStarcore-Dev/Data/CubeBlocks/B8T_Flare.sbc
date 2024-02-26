@@ -6,7 +6,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>B8T_Flare</SubtypeId>
 			</Id>
-			<DisplayName>Flare/Chaff Dispenser</DisplayName>
+			<DisplayName>WIP Dispenser</DisplayName>
 			<Description>A slow-charging ECM burst, firing off one of these dispensers scrambles the guidance of all missiles within 2KM, lest they have C-ECM. </Description>
 			<Icon>Textures\GUI\Icons\B8T_Flare.dds</Icon>
 			<GuiVisible>false</GuiVisible>

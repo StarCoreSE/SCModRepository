@@ -6,8 +6,10 @@
 				<TypeId>LargeMissileTurret</TypeId>
 				<SubtypeId>HeavyLanceBattery</SubtypeId>
 			</Id>
-			<DisplayName>Superheavy Lance Battery</DisplayName>
-			<Description> </Description>
+			<DisplayName>WIP 'Granite' Superheavy Lance Battery</DisplayName>
+			<Description> Long Length Laser Lance WIP
+			
+			 </Description>
 			<Icon>Textures\GUI\Icons\HeavyTorpedoLauncher.dds</Icon>
 			<GuiVisible>false</GuiVisible>
 			<CubeSize>Large</CubeSize>
