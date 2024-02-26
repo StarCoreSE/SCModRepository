@@ -36,6 +36,12 @@ namespace Invalid.BlinkDrive
 
         private int ChargesRemaining = 3; // Class-level variable
 
+        private const int MaxRetryAttempts = 3;
+        private const int RetryDelayMilliseconds = 500;
+
+        private int retryCount = 0;
+        private bool isPerformingBlink = false;
+
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             base.Init(objectBuilder);
@@ -53,6 +59,39 @@ namespace Invalid.BlinkDrive
                 if (MyAPIGateway.Multiplayer.IsServer)
                 {
                     PerformBlink();
+                }
+                else
+                {
+                    // Client-side handling
+                    if (!isPerformingBlink)
+                    {
+                        // Start the blink process
+                        isPerformingBlink = true;
+                        PerformBlink();
+                    }
+                    else
+                    {
+                        // Retry logic
+                        if (retryCount < MaxRetryAttempts)
+                        {
+                            // Increment the retry count
+                            retryCount++;
+
+                            // Retry after a delay
+                            MyAPIGateway.Utilities.InvokeOnGameThread(() =>
+                            {
+                                PerformBlink();
+                            }, RetryDelayMilliseconds.ToString());
+                        }
+                        else
+                        {
+                            // Reset the retry count
+                            retryCount = 0;
+                            isPerformingBlink = false;
+                            ResetJumpRequest();
+                            MyLog.Default.WriteLineAndConsole("Failed to activate blink drive: Max retry attempts reached.");
+                        }
+                    }
                 }
             }
             else
