@@ -77,12 +77,12 @@ namespace Scripts
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
-                AmmoRound = "", // AmmoRound field of the ammo to spawn.
-                Fragments = 100, // Number of projectiles to spawn.
-                Degrees = 15, // Cone in which to randomize direction of spawned projectiles.
+                AmmoRound = "ParticleWhipAmmo2", // AmmoRound field of the ammo to spawn.
+                Fragments = 12, // Number of projectiles to spawn.
+                Degrees = 50, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = false, // fragments will not inherit velocity from parent.
-                Offset = 0f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards), value is read from parent ammo type.
+                Offset = -8f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards), value is read from parent ammo type.
                 Radial = 0f, // Determines starting angle for Degrees of spread above.  IE, 0 degrees and 90 radial goes perpendicular to travel path
                 MaxChildren = 0, // number of maximum branches for fragments from the roots point of view, 0 is unlimited
                 IgnoreArming = true, // If true, ignore ArmOnHit or MinArmingTime in EndOfLife definitions
@@ -200,7 +200,7 @@ namespace Scripts
                 {
                     Enable = true,
                     Radius = 8f, // Radius of AOE effect, in meters.
-                    Damage = 80000f,
+                    Damage = 100000f,
                     Depth = 8f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
@@ -662,10 +662,10 @@ namespace Scripts
  private AmmoDef ParticleWhipAmmo2 => new AmmoDef // Your ID, for slotting into the Weapon CS --- This ammo has been stripped to a minimal config as an example
         {
             AmmoMagazine = "Energy", 
-            AmmoRound = "Ammo 2", 
+            AmmoRound = "ParticleWhipAmmo2", 
             HybridRound = false, 
             EnergyCost = 0.1f, 
-            BaseDamage = 111f, 
+            BaseDamage = 30000f, 
             Health = 0,
             HardPointUsable = false, 
             EnergyMagazineSize = 1, 
@@ -690,10 +690,10 @@ namespace Scripts
             {
                 Guidance = None, 
                 TargetLossDegree = 80f, 
-                MaxLifeTime = 1200, 
+                MaxLifeTime = 600, 
                 AccelPerSec = 120f, 
                 DesiredSpeed = 600, 
-                MaxTrajectory = 1000f, 
+                MaxTrajectory = 10f, 
                 TotalAcceleration = 1234.5,
             },
             AmmoGraphics = new GraphicDef
@@ -713,7 +713,7 @@ namespace Scripts
                     WidthVariance = Random(start: 0f, end: 0f), 
                     Tracer = new TracerBaseDef
                     {
-                        Enable = true,
+                        Enable = false,
                         Length = 5f, //
                         Width = 0.1f, //
                         Color = Color(red: 3, green: 2, blue: 1f, alpha: 1), 
@@ -726,7 +726,7 @@ namespace Scripts
                     },
                     Trail = new TrailDef
                     {
-                        Enable = true,
+                        Enable = false,
                         Textures = new[] {
                             "WeaponLaser", 
                         },
