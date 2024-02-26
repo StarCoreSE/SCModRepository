@@ -179,7 +179,7 @@ namespace Invalid.BlinkDrive
             }
 
             // Log power usage
-            MyLog.Default.WriteLineAndConsole($"Power Usage: {sink.CurrentInputByType(MyResourceDistributorComponent.ElectricityId)} MW");
+            //MyLog.Default.WriteLineAndConsole($"Power Usage: {sink.CurrentInputByType(MyResourceDistributorComponent.ElectricityId)} MW");
 
             // Decrease cooldown timers if they're greater than 0
             if (jumpCooldownTimer1.Value > 0)
@@ -196,7 +196,7 @@ namespace Invalid.BlinkDrive
             }
 
             // Log charge states
-            MyLog.Default.WriteLineAndConsole($"Charge States: Timer1 - {jumpCooldownTimer1}, Timer2 - {jumpCooldownTimer2}, Timer3 - {jumpCooldownTimer3}");
+            //MyLog.Default.WriteLineAndConsole($"Charge States: Timer1 - {jumpCooldownTimer1}, Timer2 - {jumpCooldownTimer2}, Timer3 - {jumpCooldownTimer3}");
         }
 
         private float ComputePowerRequired()
