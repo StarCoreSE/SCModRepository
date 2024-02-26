@@ -21,10 +21,10 @@ using VRageRender;
 
 namespace Invalid.BlinkDrive
 {
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_TerminalBlock), false, "BlinkDriveLarge")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "BlinkDriveLarge")]
     public class BlinkDrive : MyGameLogicComponent, IMyEventProxy
     {
-        private IMyTerminalBlock block;
+        private IMyCollector block;
         private MySync<bool, SyncDirection.BothWays> requestJumpSync;
        // private int[] jumpCooldownTimers = new int[3];
         private MySync<int, SyncDirection.BothWays> jumpCooldownTimer1;
@@ -43,7 +43,7 @@ namespace Invalid.BlinkDrive
             base.Init(objectBuilder);
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME | MyEntityUpdateEnum.EACH_FRAME;
 
-            block = (IMyTerminalBlock)Entity;
+            block = (IMyCollector)Entity;
             // requestJumpSync = new MySync<bool, SyncDirection.BothWays>(this, nameof(requestJumpSync));
             requestJumpSync.ValueChanged += RequestJumpSync_ValueChanged;
         }
@@ -218,7 +218,7 @@ namespace Invalid.BlinkDrive
         {
             MyLog.Default.WriteLineAndConsole("CreateTerminalControls method called");
 
-            var blinkDriveButton = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlButton, IMyTerminalBlock>("BlinkDrive_ActivateButton");
+            var blinkDriveButton = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlButton, IMyCollector>("BlinkDrive_ActivateButton");
             blinkDriveButton.Enabled = (b) => b.GameLogic is BlinkDrive;
             blinkDriveButton.Visible = (b) => b.GameLogic is BlinkDrive;
             blinkDriveButton.Title = MyStringId.GetOrCompute("Activate Blink Drive");
@@ -233,9 +233,9 @@ namespace Invalid.BlinkDrive
                     drive.ChargesRemaining--; // Decrement charges
                 }
             };
-            MyAPIGateway.TerminalControls.AddControl<IMyTerminalBlock>(blinkDriveButton);
+            MyAPIGateway.TerminalControls.AddControl<IMyCollector>(blinkDriveButton);
 
-            var blinkDriveCockpitAction = MyAPIGateway.TerminalControls.CreateAction<IMyTerminalBlock>("BlinkDriveActivate");
+            var blinkDriveCockpitAction = MyAPIGateway.TerminalControls.CreateAction<IMyCollector>("BlinkDriveActivate");
             blinkDriveCockpitAction.Name = new StringBuilder("Activate Blink Drive");
             blinkDriveCockpitAction.Icon = @"Textures\GUI\Icons\Actions\Start.dds";
             blinkDriveCockpitAction.Action = (b) =>
@@ -298,7 +298,7 @@ namespace Invalid.BlinkDrive
             };
             blinkDriveCockpitAction.Enabled = (b) => b.GameLogic is BlinkDrive;
 
-            MyAPIGateway.TerminalControls.AddAction<IMyTerminalBlock>(blinkDriveCockpitAction);
+            MyAPIGateway.TerminalControls.AddAction<IMyCollector>(blinkDriveCockpitAction);
         }
 
         private void ResetJumpRequest()

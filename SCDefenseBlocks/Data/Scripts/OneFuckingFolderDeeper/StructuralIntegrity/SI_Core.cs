@@ -955,6 +955,7 @@ namespace StarCore.StructuralIntegrity
             increaseFieldPower.Name = new StringBuilder("Increase Field Power");
             increaseFieldPower.ValidForGroups = false;
             increaseFieldPower.Icon = @"Textures\GUI\Icons\Actions\Increase.dds";
+            increaseFieldPower.Enabled = Control_Visible;
             increaseFieldPower.Action = (b) =>
             {
                 var logic = b?.GameLogic?.GetAs<SI_Core>();
@@ -973,6 +974,7 @@ namespace StarCore.StructuralIntegrity
                     logic.FieldPowerSync.Value = logic.FieldPowerSync.Value + 1;
                     logic.FieldPowerSync.Value = MathHelper.Clamp(logic.FieldPowerSync.Value, 0f, 30f);
                 }
+
             };
             increaseFieldPower.Writer = (b, sb) =>
             {
@@ -994,6 +996,7 @@ namespace StarCore.StructuralIntegrity
             var decreaseFieldPower = MyAPIGateway.TerminalControls.CreateAction<IMyCollector>(ControlPrefix + "FieldPowerDecrease");
             decreaseFieldPower.Name = new StringBuilder("Decrease Field Power");
             decreaseFieldPower.ValidForGroups = false;
+            increaseFieldPower.Enabled = Control_Visible;
             decreaseFieldPower.Icon = @"Textures\GUI\Icons\Actions\Decrease.dds";
             decreaseFieldPower.Action = (b) =>
             {
