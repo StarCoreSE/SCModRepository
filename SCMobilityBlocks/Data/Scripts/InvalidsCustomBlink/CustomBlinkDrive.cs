@@ -26,17 +26,15 @@ namespace Invalid.BlinkDrive
     {
         private IMyCollector block;
         private MySync<bool, SyncDirection.BothWays> requestJumpSync;
-       // private int[] jumpCooldownTimers = new int[3];
+        // private int[] jumpCooldownTimers = new int[3];
         private MySync<int, SyncDirection.BothWays> jumpCooldownTimer1;
         private MySync<int, SyncDirection.BothWays> jumpCooldownTimer2;
         private MySync<int, SyncDirection.BothWays> jumpCooldownTimer3;
         private const int rechargeTime = 60 * 60; // 10 seconds * 60 frames per second
 
-
         static bool controlsCreated = false;
 
         private int ChargesRemaining = 3; // Class-level variable
-
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
@@ -102,6 +100,9 @@ namespace Invalid.BlinkDrive
             newWorldMatrix.Translation = teleportPosition;
             (block.CubeGrid as MyEntity).Teleport(newWorldMatrix);
 
+            // Log status updates
+            MyLog.Default.WriteLineAndConsole($"Performing blink: Original Position - {originalPosition}, Teleport Position - {teleportPosition}");
+
             // Play particle effects at both original and teleported positions
             MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("HESFAST", originalPosition);
             MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("HESFAST", teleportPosition);
@@ -122,7 +123,6 @@ namespace Invalid.BlinkDrive
             else if (jumpCooldownTimer3.Value <= 0)
                 jumpCooldownTimer3.Value = rechargeTime;
         }
-
 
         public override void UpdateOnceBeforeFrame()
         {
@@ -178,6 +178,9 @@ namespace Invalid.BlinkDrive
                 sink.Update();
             }
 
+            // Log power usage
+            MyLog.Default.WriteLineAndConsole($"Power Usage: {sink.CurrentInputByType(MyResourceDistributorComponent.ElectricityId)} MW");
+
             // Decrease cooldown timers if they're greater than 0
             if (jumpCooldownTimer1.Value > 0)
             {
@@ -191,6 +194,9 @@ namespace Invalid.BlinkDrive
             {
                 jumpCooldownTimer3.Value--;
             }
+
+            // Log charge states
+            MyLog.Default.WriteLineAndConsole($"Charge States: Timer1 - {jumpCooldownTimer1}, Timer2 - {jumpCooldownTimer2}, Timer3 - {jumpCooldownTimer3}");
         }
 
         private float ComputePowerRequired()
