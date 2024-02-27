@@ -37,7 +37,7 @@
       <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
-          <Start>Audio\Krankenschwester_bereit.mp3</Start>
+          <Start>Audio\Krankenschwester_bereit.wav</Start>
         </Wave>
       </Waves>
     </Sound>

@@ -14,8 +14,8 @@
 				Grid limit 1
 				Range: 1.75km technically
 				Heal: 12-20 mill shields (surface area dependent)
-				Reload Charge: 1 gigawatt
-				Relaod Time: 2 minutes
+				Reload Charge: 755 megaawatt
+				Relaod Time: 24 seconds
 			</Description>
 			<Icon>Textures\GUI\Icons\LargeArcEmitter.dds</Icon>
 			<CubeSize>Large</CubeSize>
