@@ -12,10 +12,13 @@
 			<Description>
 				Refresh your buddy's shields by manually shooting at it.
 				Grid limit 1
-				Range: 1.75km technically
-				Heal: 12-20 mill shields (surface area dependent)
-				Reload Charge: 1 gigawatt
-				Relaod Time: 2 minutes
+				Range: 1.75km (3500m/s bullet sooo almost hitscan)
+				Heal: 12-20 mill shields (lol more like 30m)
+				Reload Charge: 1 gigawatt (lies)
+				Relaod Time: 2 minutes (more lies)
+
+				alright enough joshing around,
+				12 second recharge timer, 80MW passive draw, +15 more MW when reloading.
 			</Description>
 			<Icon>Textures\GUI\Icons\LargeArcEmitter.dds</Icon>
 			<CubeSize>Large</CubeSize>

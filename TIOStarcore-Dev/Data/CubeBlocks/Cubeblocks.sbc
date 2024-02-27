@@ -904,7 +904,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>GoalieCasemate</SubtypeId>
 			</Id>
-			<DisplayName>Casemate Elite Flak Battery</DisplayName>
+			<DisplayName>Goalkeeper Casemate Flak Battery</DisplayName>
 			<Description>
 				800m Range, rapid fire FLAK barrage
 				High Explosive FLAK

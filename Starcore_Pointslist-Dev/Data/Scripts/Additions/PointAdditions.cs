@@ -556,9 +556,9 @@ namespace ShipPoints
 				SC_Radome@10;
 				APE_Strong@150; 
 				Devastator_Torp@725; 
-				Priest_Block@85; 
-				PriestReskin_Block@85; 
-				Fixed_Rockets@225; 
+				Priest_Block@180; 
+				PriestReskin_Block@180; 
+				Fixed_Rockets@250; 
 				Type18_Artillery@270;
 				Type21_Artillery@550;
 				Type24_Artillery@800;
