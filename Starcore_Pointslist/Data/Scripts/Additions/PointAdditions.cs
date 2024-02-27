@@ -50,11 +50,11 @@ namespace ShipPoints
 				PlasmaCannonLB@200;
 				MXA_CoilgunL@100;
 				RailgunxTurretM@165;
-				MA_AC150@125;
-				MA_AC150_30@125;
-				MA_AC150_45@125;
-				MA_AC150_45_Gantry@125;
-				MA_AC150_Gantry@125;
+				MA_AC150@150;
+				MA_AC150_30@150;
+				MA_AC150_45@150;
+				MA_AC150_45_Gantry@150;
+				MA_AC150_Gantry@150;
 				K_SA_Gauss_APC@150;
 				K_SA_Gauss_AMS@200;
 				K_SA_Gauss_ERC@370;
@@ -107,8 +107,8 @@ namespace ShipPoints
 				AncientAfterburnerT42L@150;
 				AncientAfterburnerT43@200;
 				AncientAfterburnerT44@250;
-				MA_Tiger@150;
-				MA_Crouching_Tiger@150;
+				MA_Tiger@125;
+				MA_Crouching_Tiger@125;
 				AQD_LG_HydroThrusterL_ArmoredSlope@50;
 				AQD_LG_HydroThrusterL_Armored@50;
 				AQD_LG_HydroThrusterS_ArmoredSlope@15;

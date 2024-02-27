@@ -33,7 +33,10 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
         public long carrying_player_id = -1;
 
         [ProtoMember(5)]
-        public SerializableMatrix current_matrix;
+        public Vector3D current_pos;
+
+        [ProtoMember(8)]
+        public Quaternion current_rotation;
 
         [ProtoMember(6)]
         public long owning_faction_id;
@@ -41,10 +44,8 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
         [ProtoMember(7)]
         public int current_drop_life = 0;
 
-        [ProtoMember(8)]
         public Vector3D homePos;
 
-        [ProtoMember(9)]
         public Dictionary<long, SerializableMatrix> capture_positions = new Dictionary<long, SerializableMatrix>(); // This seems to be the majority of network load - fix?
 
         [ProtoMember(10)]
@@ -59,7 +60,6 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
         [ProtoMember(13)]
         public float regen_modifier = 0.2f;
 
-        [ProtoMember(14)]
         public float lastTickAcceleration;
 
         [ProtoIgnore]
@@ -80,7 +80,8 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
             this.entity_id = entity_id;
             this.state = state;
             this.homePos = homePos;
-            this.current_matrix = MatrixD.CreateWorld(homePos);
+            this.current_pos = homePos;
+            this.current_rotation = Quaternion.Identity;
             this.owning_faction_id = owning_faction_id;
             this.flag_color = flag_color;
             this.capture_positions = capture_positions;
@@ -97,7 +98,8 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
             this.entity_id = entity_id;
             this.state = state;
             this.homePos = homePos;
-            this.current_matrix = MatrixD.CreateWorld(homePos);
+            this.current_pos = homePos;
+            this.current_rotation = Quaternion.Identity;
             this.owning_faction_id = owning_faction_id;
             this.flag_color = flag_color;
             this.flag_type = flag_type;
@@ -148,21 +150,22 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
         {
             if (this.flag_entity != null)
             {
-                this.flag_entity.WorldMatrix = incoming_flag.current_matrix;
+                MatrixD matrix = MatrixD.CreateFromQuaternion(incoming_flag.current_rotation);
+                matrix.Translation = incoming_flag.current_pos;
+                this.flag_entity.WorldMatrix = matrix;
             }
+
             this.state = incoming_flag.state;
             this.lifetime = incoming_flag.lifetime;
             this.carrying_player_id = incoming_flag.carrying_player_id;
-            this.current_matrix = incoming_flag.current_matrix;
+            this.current_pos = incoming_flag.current_pos;
+            this.current_rotation = incoming_flag.current_rotation;
             this.owning_faction_id = incoming_flag.owning_faction_id;
             this.current_drop_life = incoming_flag.current_drop_life;
-            this.homePos = incoming_flag.homePos;
             this.flag_color = incoming_flag.flag_color;
-            this.capture_positions = incoming_flag.capture_positions;
             this.flag_type = incoming_flag.flag_type;
             this.grip_strength = incoming_flag.grip_strength;
             this.regen_modifier = incoming_flag.regen_modifier;
-            this.lastTickAcceleration = incoming_flag.lastTickAcceleration;
         }
     }
 }

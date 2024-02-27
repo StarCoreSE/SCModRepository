@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+ <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"> 
+   <BlueprintClassEntries>
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="40mmClip" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="105mmShell" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="128mmShell" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="5InchShell" />	
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="6InchShell" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="16InchShell" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="381mmShell" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="100mmMLE1931Shell" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="152mmMLE_APShell" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="203mm501931_HEShell" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="100mmMLE1931Shell" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="380mmHEShell" />		
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="QF4PomPomMag" />		
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="40mmQuadBofors" />
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="40mmTwinBofors" />
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="40mmSingleBofors" />
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="127mmMk32" />
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="127mmMk24" />
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="6InchTriple" />
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="127mmMk12" />
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="152mm55MLE1930NR" />
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="152mm55MLE1930R" />
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="16InchTriple" />
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="USBarbette" />
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="ShipRailStraight" />
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="ShipRailStraightHalf" />
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="GunCoverDiag" />
+	<Entry Class="LargeBlocks" BlueprintSubtypeId="GunCoverCurve" />
+	<Entry Class="EliteConsumables" BlueprintSubtypeId="40mmShellEmptyCase" />
+	 
+  </BlueprintClassEntries>
+</Definitions>

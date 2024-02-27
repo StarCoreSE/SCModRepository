@@ -39,7 +39,7 @@ namespace Jakaria
                     //Locate my single modded block category
                     categoryDefinition = definition.Value;
                 }
-                else if(!definition.Value.Context.IsBaseGame && definition.Value.Name != "DLCBlocks" && definition.Value.Name != ".SC Tournament Weapons" && definition.Value.Name != ".Starcore Basic Greebles" && definition.Value.Name != ".SC WIP Weapons" && definition.Value.Name != ".SC Utility" && definition.Value.Name != ".Ship Cores" && definition.Value.Name != ".SC Vanilla 2.0 Weapons")
+                else if(!definition.Value.Context.IsBaseGame && definition.Value.Name != "DLCBlocks" && definition.Value.Name != ".SC Tournament Weapons" && definition.Value.Name != ".Starcore Basic Greebles" && definition.Value.Name != ".SC WIP" && definition.Value.Name != ".SC Utility" && definition.Value.Name != ".Ship Cores" && definition.Value.Name != ".SC Vanilla 2.0 Weapons")
                 {
                     //Disable modded block categories
                     definition.Value.Enabled = false;

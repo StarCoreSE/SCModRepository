@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <BlockVariantGroups>
+    <BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="BarbetteGroup" />
+        <Icon>Textures\GUI\Icons\Barbette5x5.dds</Icon>
+        <DisplayName>DisplayName_BlockGroup_BarbetteGroup</DisplayName>
+        <Description>Barbette</Description>
+        <Blocks>
+                <Block Type="MyObjectBuilder_Conveyor" Subtype="Barbette5x5" />
+                <Block Type="MyObjectBuilder_Conveyor" Subtype="Barbette3x3" />
+                <Block Type="MyObjectBuilder_Conveyor" Subtype="Barbette1x1" />
+        </Blocks>
+    </BlockVariantGroup>
+  </BlockVariantGroups>
+  <BlockPositions>
+   <BlockPosition>
+      <Name>BarbetteGroup</Name>  // where this is the pairname of the block you want shown.
+      <Position>
+        <X>1</X>
+        <Y>3</Y>
+      </Position>
+    </BlockPosition>
+ </BlockPositions>
+</Definitions>
