@@ -91,7 +91,7 @@ namespace Scripts
             Pattern = new PatternDef
             {
                 Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
-                    "",
+                    "MA_Laser_T3_Ammo_Decal",
                 },
                 Enable = false,
                 TriggerChance = 1f,
@@ -99,7 +99,7 @@ namespace Scripts
                 RandomMin = 1,
                 RandomMax = 1,
                 SkipParent = false,
-                PatternSteps = 0, // Number of Ammos activated per round, will progress in order and loop.  Ignored if Random = true.				
+                PatternSteps = 2, // Number of Ammos activated per round, will progress in order and loop.  Ignored if Random = true.				
             },
             DamageScales = new DamageScaleDef
             {
@@ -489,7 +489,7 @@ namespace Scripts
             Pattern = new PatternDef
             {
                 Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
-                    "",
+                    "MA_Laser_T3_Ammo_Decal",
                 },
                 Mode = Weapon,
                 TriggerChance = 1f,
