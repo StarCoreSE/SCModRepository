@@ -10,10 +10,10 @@
             </Id>
             <DisplayName>F-3 "Priest" Heavy Machinegun</DisplayName>
             <Description>
-              [2km Targeting Range]
+              [2.25km Targeting Range]
               [Kinetic damage]
               [Targets Missiles]
-              [3500 m/s]?
+              [1750 m/s]
               This weapon slowly repairs itself while offline, and when below functional.
             </Description>
 			      <GuiVisible>true</GuiVisible>
@@ -73,17 +73,17 @@
             </Id>
             <DisplayName>F-2 "Spartan" Rotary Gun</DisplayName>
             <Description>
-              [2km Targeting Range]
+              [2.25km Targeting Range]
               [Kinetic damage]
               [Targets Missiles]
-              [3500 m/s]?
+              [1750 m/s]
               This weapon slowly repairs itself while offline, and when below functional.
             </Description>
 			      <GuiVisible>true</GuiVisible>
             <Icon>Textures\GUI\Icons\TestScene.png</Icon>
             <CubeSize>Large</CubeSize>
             <BlockTopology>TriangleMesh</BlockTopology>
-            <Size x="3" y="4" z="3"/>
+            <Size x="3" y="3" z="3"/>
             <ModelOffset x="0" y="0" z="0"/>
             <Model>Models\PriestReskin_MainScene.mwm</Model>
           <Components>

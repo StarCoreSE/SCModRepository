@@ -314,7 +314,7 @@ namespace Scripts
                         Width = .4f,
                         Color = Color(red: 12, green: 8f, blue: 8, alpha: 1f),
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
-                        VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
+                        VisualFadeEnd = 10, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
                             "WeaponLaser",
                         },
@@ -325,10 +325,10 @@ namespace Scripts
                             Textures = new[] {
                                 "",
                             },
-                            SegmentLength = 65f, // Uses the values below.
+                            SegmentLength = 25f, // Uses the values below.
                             SegmentGap = 0, // Uses Tracer textures and values
                             Speed = 60f, // meters per second
-                            Color = Color(red: 25, green: 3, blue: 3, alpha: 0.75f),
+                            Color = Color(red: 10, green: 3, blue: 3, alpha: 0.5f),
                             WidthMultiplier = 1f,
                             Reverse = false,
                             UseLineVariance = true,
@@ -338,12 +338,12 @@ namespace Scripts
                     },
                     Trail = new TrailDef
                     {
-                        Enable = false,
+                        Enable = true,
                         Textures = new[] {
                             "WeaponLaser",
                         },
                         TextureMode = Normal,
-                        DecayTime = 0,
+                        DecayTime = 4,
                         Color = Color(red: 8f, green: 1f, blue: 1f, alpha: 0.4f),
                         Back = true,
                         CustomWidth = 0.6f,

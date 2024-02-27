@@ -1392,6 +1392,59 @@
 		  </Waves>
 	  </Sound>
 	  
+<!--XPulseLaser Shots-->
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>XPulseLaser_Shot</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>3200</MaxDistance>
+		  <PreventSynchronization>3</PreventSynchronization>
+		  <DistantSounds>
+			  <DistantSound DistanceCrossfade = "50" Distance = "400" Sound = "XPulseLaser_ShotD1" />
+			  <DistantSound DistanceCrossfade = "50" Distance = "1000" Sound = "XPulseLaser_ShotD2" />
+
+		  </DistantSounds>
+		  <Volume>2</Volume>
+		  <PitchVariation>60</PitchVariation>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Shot\PulseLaser1.wav</Start>
+			  </Wave>
+
+		  </Waves>
+	  </Sound>
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>XPulseLaser_ShotD1</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>3200</MaxDistance>
+		  <Volume>1</Volume>
+		  <PitchVariation>60</PitchVariation>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Shot\PulseLaser1.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>XPulseLaser_ShotD2</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>3200</MaxDistance>
+		  <Volume>0.5</Volume>
+		  <PitchVariation>60</PitchVariation>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Shot\PulseLaser1.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
 
 <!--Prefire Sounds-->	  
 	  <Sound>
