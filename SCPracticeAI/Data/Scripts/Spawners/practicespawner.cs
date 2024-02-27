@@ -50,13 +50,10 @@ namespace Invalid.PracticeSpawner
         private Dictionary<string, string> prefabMap = new Dictionary<string, string>
         {
 
-            { "RegenAI", "RegenAI" },
-            { "LocusAI", "LocusAI" },
-            { "EldritchAI", "EldritchAI" },
-            { "BismarckAI", "BismarckAI" },
-            { "HermesAI", "HermesAI" },
-            { "LamAI", "LamAI" },
-            { "ZerkAI", "ZerkAI" },
+            { "Cougar8750AI", "Cougar8750AI" },
+            { "Gales8750AI", "Gales8750AI" },
+            { "Star9400AI", "Star9400AI" },
+
 
             // Add more prefab mappings here.
         };
