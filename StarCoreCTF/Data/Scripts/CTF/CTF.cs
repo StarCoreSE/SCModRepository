@@ -781,14 +781,14 @@ namespace Klime.CTF
 
                                                         if (pickup_in_cockpit)
                                                         {
-                                                            if (distance <= 500)
+                                                            if (distance <= 250)
                                                             {
                                                                 valid_cap = true;
                                                             }
                                                         }
                                                         else
                                                         {
-                                                            if (distance <= 400)
+                                                            if (distance <= 200)
                                                             {
                                                                 valid_cap = true;
                                                             }
@@ -816,14 +816,14 @@ namespace Klime.CTF
 
                                                     if (pickup_in_cockpit)
                                                     {
-                                                        if (distance <= 150)
+                                                        if (distance <= 250)
                                                         {
                                                             valid_cap = true;
                                                         }
                                                     }
                                                     else
                                                     {
-                                                        if (distance <= 40)
+                                                        if (distance <= 200)
                                                         {
                                                             valid_cap = true;
                                                         }
