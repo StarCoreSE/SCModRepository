@@ -988,6 +988,22 @@ namespace Klime.CTF
                                         }
 
                                         string faction_tag = MyVisualScriptLogicProvider.GetPlayersFactionTag(player.IdentityId);
+                                        if (faction_tag == subflag.owning_faction.Tag) // Check if player belongs to the same faction as the flag
+                                        {
+                                            // Send the flag back home
+                                            subflag.state = FlagState.Home;
+                                            ShowANotificationPlease("flag sent back home");
+                                            if (subflag.flag_type == FlagType.Single)
+                                            {
+                                                SendEvent("Flag sent back home", InfoType.FlagReset);
+                                            }
+                                            else
+                                            {
+                                                SendEvent(subflag.owning_faction.Tag + " flag sent back home", InfoType.FlagReset);
+                                            }
+                                            continue; // Skip further processing for this player
+                                        }
+
                                         if (subflag.flag_type == FlagType.Single)
                                         {
                                             if (faction_tag != "")
@@ -998,7 +1014,7 @@ namespace Klime.CTF
                                                 subflag.carrying_player = player;
                                                 subflag.current_drop_life = 0;
                                                 SendEvent(player.DisplayName + " grabbed the flag!", InfoType.FlagTaken);
-                                               // MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 0.5f);
+                                                // MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 0.5f);
                                             }
                                         }
                                         else
@@ -1011,8 +1027,7 @@ namespace Klime.CTF
                                                 subflag.carrying_player = player;
                                                 subflag.current_drop_life = 0;
                                                 SendEvent(player.DisplayName + " stole " + subflag.owning_faction.Tag + " flag!", InfoType.FlagTaken);
-                                                //MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 0.5f);
-
+                                                // MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(cockpit.CubeGrid.Name, 0.5f);
                                             }
                                         }
                                     }
