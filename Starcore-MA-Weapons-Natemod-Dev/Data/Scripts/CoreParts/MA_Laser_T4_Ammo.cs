@@ -38,8 +38,8 @@ namespace Scripts
             AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "MA_Laser_T4_Ammo", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
-            EnergyCost = 2.5f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 110f, // Direct damage; one steel plate is worth 100.
+            EnergyCost = 0.23125f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
+            BaseDamage = 640f, // Direct damage; one steel plate is worth 100.
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
@@ -47,7 +47,7 @@ namespace Scripts
                                //float.MaxValue will drop the weapon to the first build state and destroy all components used for construction
                                //If greater than cube integrity it will remove the cube upon firing, without causing deformation (makes it look like the whole "block" flew away)
             HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
-            EnergyMagazineSize = 2900, // For energy weapons, how many shots to fire before reloading.
+            EnergyMagazineSize = 1200, // For energy weapons, how many shots to fire before reloading.
             IgnoreWater = false, // Whether the projectile should be able to penetrate water when using WaterMod.
             IgnoreVoxels = false, // Whether the projectile should be able to penetrate voxels.
             HeatModifier = -1f, // Allows this ammo to modify the amount of heat the weapon produces per shot.
@@ -99,7 +99,7 @@ namespace Scripts
             Pattern = new PatternDef
             {
                 Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
-                    "MA_Laser_T4_Ammo", "MA_Laser_T4_Ammo_Decal",
+                    "MA_Laser_T4_Ammo_Decal",	
                 },
                 Mode = Weapon,
                 TriggerChance = 1f,
@@ -120,8 +120,8 @@ namespace Scripts
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
                 FallOff = new FallOffDef
                 {
-                    Distance = 1500f, // Distance at which damage begins falling off.
-                    MinMultipler = 0.01f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
+                    Distance = 3000f, // Distance at which damage begins falling off.
+                    MinMultipler = 0.5f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
                 },
                 Grids = new GridSizeDef
                 {
@@ -131,15 +131,15 @@ namespace Scripts
                 Armor = new ArmorDef
                 {
                     Armor = -1f,
-                    Light = -1f,
-                    Heavy = -1f,
+                    Light = 0.8f,
+                    Heavy = 0.4f,
                     NonArmor = -1f,
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 4f, // Multiplier for damage against shields.
+                    Modifier = 2f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
-                    BypassModifier = -2f, // If greater than zero, the percentage of damage that will penetrate the shield.
+                    BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {
@@ -321,6 +321,23 @@ namespace Scripts
                 ModelName = "",
                 VisualProbability = 1f,
                 ShieldHitDraw = false,
+                //                Decals = new DecalDef
+//                {
+//                   MaxAge = 3600,
+//                   Map = new[]
+//                    {
+//                        new TextureMapDef
+//                        {
+//                            HitMaterial = "Metal",
+//                            DecalMaterial = "GunBullet",
+//                        },
+//                        new TextureMapDef
+//                        {
+//                            HitMaterial = "Glass",
+//                            DecalMaterial = "GunBullet",
+//                        },
+//                    },
+//                },
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
@@ -443,7 +460,6 @@ namespace Scripts
                 }
             }, // Don't edit below this line
         };
-
 
 
     }

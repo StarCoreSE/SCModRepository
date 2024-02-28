@@ -37,7 +37,7 @@ namespace Scripts
             Health = 0, // 0 = disabled, otherwise how much damage it can take from other trajectiles before dying.
             BackKickForce = 0f,
             DecayPerShot = 0,
-            EnergyMagazineSize = 48,
+            EnergyMagazineSize = 40,
             HardPointUsable = true, // set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
             Shape = new ShapeDef //defines the collision shape of projectile, defaults line and visual Line Length if set to 0
             {
@@ -80,7 +80,7 @@ namespace Scripts
                 Characters = 7f,
                 FallOff = new FallOffDef
                 {
-                    Distance = 2500, // Distance at which max damage begins falling off.
+                    Distance = 2200, // Distance at which max damage begins falling off.
                     MinMultipler = 0.1f, // value from 0.0f to 1f where 0.1f would be a min damage of 10% of max damage.
                 },
                 Grids = new GridSizeDef
@@ -314,7 +314,7 @@ namespace Scripts
                         Width = .4f,
                         Color = Color(red: 12, green: 8f, blue: 8, alpha: 1f),
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
-                        VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
+                        VisualFadeEnd = 10, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
                             "WeaponLaser",
                         },
@@ -325,10 +325,10 @@ namespace Scripts
                             Textures = new[] {
                                 "",
                             },
-                            SegmentLength = 65f, // Uses the values below.
+                            SegmentLength = 25f, // Uses the values below.
                             SegmentGap = 0, // Uses Tracer textures and values
                             Speed = 60f, // meters per second
-                            Color = Color(red: 25, green: 3, blue: 3, alpha: 0.75f),
+                            Color = Color(red: 10, green: 3, blue: 3, alpha: 0.5f),
                             WidthMultiplier = 1f,
                             Reverse = false,
                             UseLineVariance = true,
@@ -338,12 +338,12 @@ namespace Scripts
                     },
                     Trail = new TrailDef
                     {
-                        Enable = false,
+                        Enable = true,
                         Textures = new[] {
                             "WeaponLaser",
                         },
                         TextureMode = Normal,
-                        DecayTime = 0,
+                        DecayTime = 4,
                         Color = Color(red: 8f, green: 1f, blue: 1f, alpha: 0.4f),
                         Back = true,
                         CustomWidth = 0.6f,

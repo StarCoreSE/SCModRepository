@@ -28298,7 +28298,7 @@
 							</Keys>
 						</Property>
 						<Property Name="Life" AnimationType="Const" Type="Float">
-							<ValueFloat>0.5</ValueFloat>
+							<ValueFloat>0.15</ValueFloat>
 						</Property>
 						<Property Name="Soft particle distance scale" AnimationType="Const" Type="Float">
 							<ValueFloat>2</ValueFloat>
@@ -28359,7 +28359,7 @@
 							<ValueFloat>0</ValueFloat>
 						</Property>
 						<Property Name="Life var" AnimationType="Const" Type="Float">
-							<ValueFloat>1</ValueFloat>
+							<ValueFloat>0</ValueFloat>
 						</Property>
 						<Property Name="Streaks" AnimationType="Const" Type="Bool">
 							<ValueBool>true</ValueBool>

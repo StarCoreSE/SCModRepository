@@ -50,10 +50,10 @@ namespace Scripts {
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
                 MaxTargetDistance = 8000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
-                MinTargetDistance = 1000, // Minimum distance at which targets will be automatically shot at.
-                TopTargets = 10, // Maximum number of targets to randomize between; 0 = unlimited.
+                MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
+                TopTargets = 0, // Maximum number of targets to randomize between; 0 = unlimited.
                 CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
-                TopBlocks = 10, // Maximum number of blocks to randomize between; 0 = unlimited.
+                TopBlocks = 0, // Maximum number of blocks to randomize between; 0 = unlimited.
                 CycleBlocks = 0, // Number of blocks to "cycle" per acquire attempt.
                 StopTrackingSpeed = 0, // Do not track threats traveling faster than this speed; 0 = unlimited.
                 UniqueTargetPerWeapon = false, // only applies to multi-weapon blocks 
@@ -80,7 +80,7 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "Fighter Bays", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "Phoenix Refueling", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0.1f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 180, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Off, // Level of turret aim prediction; Off, Basic, Accurate, Advanced

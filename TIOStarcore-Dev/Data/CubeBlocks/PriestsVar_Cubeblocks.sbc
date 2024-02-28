@@ -10,10 +10,10 @@
             </Id>
             <DisplayName>F-3 "Priest" Heavy Machinegun</DisplayName>
             <Description>
-              [2km Targeting Range]
+              [2.25km Targeting Range]
               [Kinetic damage]
               [Targets Missiles]
-              [3500 m/s]?
+              [1750 m/s]
               This weapon slowly repairs itself while offline, and when below functional.
             </Description>
 			      <GuiVisible>true</GuiVisible>
@@ -73,10 +73,10 @@
             </Id>
             <DisplayName>F-2 "Spartan" Rotary Gun</DisplayName>
             <Description>
-              [2km Targeting Range]
+              [2.25km Targeting Range]
               [Kinetic damage]
               [Targets Missiles]
-              [3500 m/s]?
+              [1750 m/s]
               This weapon slowly repairs itself while offline, and when below functional.
             </Description>
 			      <GuiVisible>true</GuiVisible>

@@ -9,9 +9,9 @@
             </Id>
             <DisplayName>Reaver Light Coilgun Battery</DisplayName>
             <Description>
-              [3km Targeting Range]
+              [2.8km Targeting Range]
               [Kinetic damage]
-              [1000 m/s]
+              [5000 m/s]
               This weapon slowly repairs itself while offline, and when below functional.
             </Description>
 			<GuiVisible>true</GuiVisible>
