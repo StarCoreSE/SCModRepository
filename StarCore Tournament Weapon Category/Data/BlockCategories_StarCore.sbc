@@ -137,6 +137,9 @@
         <!--<string>AMP_CryoShotgun</string>
 		<string>AMP_FlameThrowerSmall</string>-->
 		
+		<string>Type18_Artillery</string>
+        <string>Type77_Railgun</string>
+		
 
 
       </ItemIds>
