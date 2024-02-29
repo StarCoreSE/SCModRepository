@@ -324,6 +324,7 @@ namespace klime.PointCheck
                 //Team3Tickets.Value = MatchTickets;
                 LocalMatchState = 1;
                 MyAPIGateway.Utilities.ShowMessage("GM", "You are the captain now.");
+                MyAPIGateway.Utilities.ShowNotification("HEY DUMBASS, IS DAMAGE ON?", 10000, font: "Red");
             }
 
             if (messageText.Contains("/end"))
@@ -490,7 +491,6 @@ namespace klime.PointCheck
             captimerZ1T1 = 0;
             captimerZ1T2 = 0;
             captimerZ1T3 = 0;
-            MyVisualScriptLogicProvider.SendChatMessage("HEY DUMBASS, IS DAMAGE ON?", "Muzzled", font: "Red");
             MyAPIGateway.Utilities.ShowNotification("Commit die. Zone activates in " + delaytime / 3600 + "m, match ends in " + matchtime / 3600 + "m.");
         }
         public static void EndMatch()

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using VRage.Game.ModAPI;
 using static Math0424.Networking.MyEasyNetworkManager;
 using VRage.Utils;
-
+using Sandbox.Game;
 
 namespace Math0424.Networking
 {
