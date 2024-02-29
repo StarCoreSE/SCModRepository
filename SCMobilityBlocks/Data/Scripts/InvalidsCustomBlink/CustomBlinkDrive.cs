@@ -5,6 +5,7 @@ using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
 using Sandbox.ModAPI.Interfaces.Terminal;
 using System;
+using System.Runtime.InteropServices;
 using System.Text;
 using VRage.Game;
 using VRage.Game.Components;
@@ -25,16 +26,20 @@ namespace Invalid.BlinkDrive
     public class BlinkDrive : MyGameLogicComponent, IMyEventProxy
     {
         private IMyCollector block;
-        private MySync<bool, SyncDirection.BothWays> requestJumpSync;
-        // private int[] jumpCooldownTimers = new int[3];
-        private MySync<int, SyncDirection.BothWays> jumpCooldownTimer1;
-        private MySync<int, SyncDirection.BothWays> jumpCooldownTimer2;
-        private MySync<int, SyncDirection.BothWays> jumpCooldownTimer3;
-        private const int rechargeTime = 60 * 60; // 10 seconds * 60 frames per second
+        private MyResourceSinkComponent sink;
+        private MySync<ushort, SyncDirection.BothWays> JumpChargesSync;
+        private ushort CachedJumpCharges = MaxCharges;
+        private MySync<float, SyncDirection.FromServer> JumpTimerSync;
+        private const int RechargeTimeSeconds = 5;
+        private const int MaxCharges = 3;
+        private float GetPowerDraw()
+        {
+            if (JumpTimerSync > 0)
+                return 100;
+            return 0.25f;
+        }
 
         static bool controlsCreated = false;
-
-        private int ChargesRemaining = 3; // Class-level variable
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
@@ -42,83 +47,12 @@ namespace Invalid.BlinkDrive
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME | MyEntityUpdateEnum.EACH_FRAME;
 
             block = (IMyCollector)Entity;
-            // requestJumpSync = new MySync<bool, SyncDirection.BothWays>(this, nameof(requestJumpSync));
-            requestJumpSync.ValueChanged += RequestJumpSync_ValueChanged;
-        }
 
-        private void RequestJumpSync_ValueChanged(MySync<bool, SyncDirection.BothWays> obj)
-        {
-            if (obj.Value && CanJump())
+            if (MyAPIGateway.Session.IsServer)
             {
-                if (MyAPIGateway.Multiplayer.IsServer)
-                {
-                    MyLog.Default.WriteLineAndConsole("Server received jump request.");
-                    PerformBlink();
-                }
+                JumpChargesSync.Value = MaxCharges;
+                JumpChargesSync.ValueChanged += JumpChargesSync_ValueChanged;
             }
-            else
-            {
-                ResetJumpRequest();
-            }
-        }
-
-        private bool CanJump()
-        {
-            // Check if the block is working and functional
-            if (!block.IsWorking || !block.IsFunctional)
-                return false;
-
-            // Check if any charge is available
-            if (jumpCooldownTimer1 <= 0 || jumpCooldownTimer2 <= 0 || jumpCooldownTimer3 <= 0)
-                return true;
-
-            return false;
-        }
-
-        private bool HasEnoughPower()
-        {
-            // Get the power sink component
-            var sink = block.Components.Get<MyResourceSinkComponent>();
-            if (sink != null)
-            {
-                // Check if the available input power is at least 300 MW
-                return sink.SuppliedRatioByType(MyResourceDistributorComponent.ElectricityId) >= 0.3f;
-            }
-            return false;
-        }
-
-        private Vector3D originalPosition;
-        private Vector3D teleportPosition;
-
-        private void PerformBlink()
-        {
-            Vector3D forwardVector = block.WorldMatrix.Forward;
-            originalPosition = block.CubeGrid.WorldMatrix.Translation; // Original position
-            teleportPosition = originalPosition + (forwardVector * 1000); // Teleported position
-
-            MatrixD newWorldMatrix = block.CubeGrid.WorldMatrix;
-            newWorldMatrix.Translation = teleportPosition;
-            (block.CubeGrid as MyEntity).Teleport(newWorldMatrix);
-
-            MyLog.Default.WriteLineAndConsole($"Performing blink: Original Position - {originalPosition}, Teleport Position - {teleportPosition}");
-
-            MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("HESFAST", originalPosition);
-            MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("HESFAST", teleportPosition);
-            MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("InvalidCustomBlinkParticleEnter", originalPosition);
-            MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("InvalidCustomBlinkParticleLeave", teleportPosition);
-
-            ResetJumpRequest();
-            StartRechargeTimer();
-        }
-
-        private void StartRechargeTimer()
-        {
-            if (jumpCooldownTimer1.Value <= 0)
-                jumpCooldownTimer1.Value = rechargeTime;
-            else if (jumpCooldownTimer2.Value <= 0)
-                jumpCooldownTimer2.Value = rechargeTime;
-            else if (jumpCooldownTimer3.Value <= 0)
-                jumpCooldownTimer3.Value = rechargeTime;
         }
 
         public override void UpdateOnceBeforeFrame()
@@ -129,87 +63,89 @@ namespace Invalid.BlinkDrive
             if (block.CubeGrid.Physics == null)
                 return;
 
-            var sink = Entity.Components.Get<MyResourceSinkComponent>();
+            sink = Entity.Components.Get<MyResourceSinkComponent>();
+            sink?.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, GetPowerDraw);
+            sink?.Update();
 
             if (!controlsCreated)
             {
                 CreateTerminalControls();
                 controlsCreated = true;
             }
+        }
 
-            if (sink != null)
+        private void JumpChargesSync_ValueChanged(MySync<ushort, SyncDirection.BothWays> obj)
+        {
+            if (MyAPIGateway.Session.IsServer)
             {
-                sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, ComputePowerRequired);
-                sink.Update();
+                if (CanJump && CachedJumpCharges - 1 == obj.Value)
+                {
+                    //MyLog.Default.WriteLineAndConsole("Server received jump request. Charges: " + obj.Value);
+                    PerformBlink();
+                }
+
+                if (JumpTimerSync.Value <= 0 && obj.Value < MaxCharges) // Start timer if isn't currently running
+                {
+                    StartRechargeTimer();
+                }
             }
         }
 
-        private int logCounter = 0;
-        private const int logInterval = 60; // Log every 60 frames, equivalent to every 1 second at 60 FPS
+        private bool CanJump => block.IsWorking && block.IsFunctional && MaxCharges > 0;
+
+        private void PerformBlink()
+        {
+            MatrixD originalMatrixDir = block.WorldMatrix;
+            originalMatrixDir.Translation = Vector3D.Zero;
+            var originalPosition = block.CubeGrid.WorldMatrix.Translation; // Original position
+            var teleportPosition = originalPosition + (originalMatrixDir.Forward * 1000); // Teleported position
+
+            MatrixD newWorldMatrix = block.CubeGrid.WorldMatrix;
+            newWorldMatrix.Translation = teleportPosition;
+
+            (block.CubeGrid as MyEntity).Teleport(newWorldMatrix);
+
+            MyParticlesManager.TryCreateParticleEffect("Blink_Test_Open", ref originalMatrixDir, ref originalPosition, Entity.Render.GetRenderObjectID(), out _);
+            MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("HESFAST", originalPosition);
+            MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("HESFAST", teleportPosition);
+            MyVisualScriptLogicProvider.CreateParticleEffectAtEntity("Blink_Test_Close", Entity.Name); // i am lazy -aristeas
+
+            CachedJumpCharges = JumpChargesSync.Value;
+        }
+
+        private void StartRechargeTimer()
+        {
+            if (JumpChargesSync.Value >= MaxCharges)
+                return;
+            if (JumpTimerSync.Value <= 0)
+                JumpTimerSync.Value = RechargeTimeSeconds;
+
+            sink?.Update();
+        }
 
         public override void UpdateAfterSimulation()
         {
             base.UpdateAfterSimulation();
 
-            if (block == null || block.CubeGrid == null)
+            if (!MyAPIGateway.Session.IsServer || block == null || block.CubeGrid == null)
                 return;
 
             if (block.CubeGrid.Physics == null)
                 return;
 
-            if (!block.IsWorking || !block.IsFunctional)
+            if (JumpTimerSync.Value > 0)
             {
-                ResetJumpRequest();
-                return;
+                JumpTimerSync.Value -= 1/60f;
             }
+            else if (JumpChargesSync.Value < MaxCharges)
+            {
+                JumpChargesSync.Value++;
+                CachedJumpCharges = JumpChargesSync.Value;
+                if (JumpTimerSync.Value <= 0 && JumpChargesSync.Value < MaxCharges)
+                    JumpTimerSync.Value = RechargeTimeSeconds;
 
-            var sink = Entity.Components.Get<MyResourceSinkComponent>();
-            if (sink != null)
-            {
-                sink.SetRequiredInputByType(MyResourceDistributorComponent.ElectricityId, ComputePowerRequired());
-                sink.Update();
+                Entity.Components.Get<MyResourceSinkComponent>()?.Update();
             }
-
-            if (jumpCooldownTimer1.Value > 0)
-            {
-                jumpCooldownTimer1.Value--;
-            }
-            if (jumpCooldownTimer2.Value > 0)
-            {
-                jumpCooldownTimer2.Value--;
-            }
-            if (jumpCooldownTimer3.Value > 0)
-            {
-                jumpCooldownTimer3.Value--;
-            }
-
-            logCounter++;
-            if (logCounter >= logInterval)
-            {
-                //MyLog.Default.WriteLineAndConsole($"Charge States: Timer1 - {jumpCooldownTimer1}, Timer2 - {jumpCooldownTimer2}, Timer3 - {jumpCooldownTimer3}");
-                logCounter = 0;
-            }
-        }
-
-
-        private float ComputePowerRequired()
-        {
-            float powerRequired = 0f;
-
-            if (jumpCooldownTimer1 > 0 && block.IsWorking && block.IsFunctional)
-            {
-                powerRequired += 100f; // Assuming each charge consumes 100 MW
-            }
-            if (jumpCooldownTimer2 > 0 && block.IsWorking && block.IsFunctional)
-            {
-                powerRequired += 100f; // Assuming each charge consumes 100 MW
-            }
-            if (jumpCooldownTimer3 > 0 && block.IsWorking && block.IsFunctional)
-            {
-                powerRequired += 100f; // Assuming each charge consumes 100 MW
-            }
-
-            return powerRequired;
         }
 
         private static void CreateTerminalControls()
@@ -224,12 +160,12 @@ namespace Invalid.BlinkDrive
             blinkDriveButton.Action = (b) =>
             {
                 var drive = b.GameLogic.GetAs<BlinkDrive>();
-                if (drive != null && drive.ChargesRemaining > 0)
+                if (drive != null && drive.JumpChargesSync.Value > 0)
                 {
                     MyLog.Default.WriteLineAndConsole("Button action called");
                     MyLog.Default.WriteLineAndConsole("Sending action to server...");
-                    drive.requestJumpSync.Value = true;
-                    drive.ChargesRemaining--;
+                    drive.JumpChargesSync.Value--;
+                    drive.CachedJumpCharges = drive.JumpChargesSync.Value;
                 }
             };
             MyAPIGateway.TerminalControls.AddControl<IMyCollector>(blinkDriveButton);
@@ -240,10 +176,11 @@ namespace Invalid.BlinkDrive
             blinkDriveCockpitAction.Action = (b) =>
             {
                 var drive = b.GameLogic.GetAs<BlinkDrive>();
-                if (drive != null)
+                if (drive != null && drive.JumpChargesSync.Value > 0)
                 {
                     MyLog.Default.WriteLineAndConsole("Blinkdrive Cockpit action called");
-                    drive.requestJumpSync.Value = true;
+                    drive.JumpChargesSync.Value--;
+                    drive.CachedJumpCharges = drive.JumpChargesSync.Value;
                 }
             };
             blinkDriveCockpitAction.Writer = (b, sb) =>
@@ -251,40 +188,14 @@ namespace Invalid.BlinkDrive
                 var drive = b.GameLogic.GetAs<BlinkDrive>();
                 if (drive != null)
                 {
-                    int chargesRemaining = 0;
-                    int nextCooldown = -1;
-                    if (drive.jumpCooldownTimer1 <= 0)
+                    if (drive.JumpTimerSync.Value > 0)
                     {
-                        chargesRemaining++;
+                        if (drive.JumpTimerSync.Value >= 10) // Avoid cutoff in the toolbar value
+                            sb.Append($"{Math.Round(drive.JumpTimerSync.Value, 0)}s ");
+                        else
+                            sb.Append($"{Math.Round(drive.JumpTimerSync.Value, 1)}s ");
                     }
-                    else if (nextCooldown == -1 || drive.jumpCooldownTimer1 < nextCooldown)
-                    {
-                        nextCooldown = drive.jumpCooldownTimer1;
-                    }
-
-                    if (drive.jumpCooldownTimer2 <= 0)
-                    {
-                        chargesRemaining++;
-                    }
-                    else if (nextCooldown == -1 || drive.jumpCooldownTimer2 < nextCooldown)
-                    {
-                        nextCooldown = drive.jumpCooldownTimer2;
-                    }
-
-                    if (drive.jumpCooldownTimer3 <= 0)
-                    {
-                        chargesRemaining++;
-                    }
-                    else if (nextCooldown == -1 || drive.jumpCooldownTimer3 < nextCooldown)
-                    {
-                        nextCooldown = drive.jumpCooldownTimer3;
-                    }
-
-                    if (nextCooldown != -1)
-                    {
-                        sb.Append($"{nextCooldown / 60}s  ");
-                    }
-                    sb.Append($"C:{chargesRemaining}");
+                    sb.Append($"C:{drive.JumpChargesSync.Value}");
                 }
                 else
                 {
@@ -296,18 +207,12 @@ namespace Invalid.BlinkDrive
             MyAPIGateway.TerminalControls.AddAction<IMyCollector>(blinkDriveCockpitAction);
         }
 
-        private void ResetJumpRequest()
-        {
-            // This ensures the jump request is reset correctly on both server and clients
-            requestJumpSync.Value = false;
-        }
-
         public override void Close()
         {
             base.Close();
-            if (requestJumpSync != null)
+            if (JumpChargesSync != null)
             {
-                requestJumpSync.ValueChanged -= RequestJumpSync_ValueChanged;
+                JumpChargesSync.ValueChanged -= JumpChargesSync_ValueChanged;
             }
         }
     }
