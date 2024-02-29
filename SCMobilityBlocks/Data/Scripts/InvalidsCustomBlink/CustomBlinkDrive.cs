@@ -26,12 +26,18 @@ namespace Invalid.BlinkDrive
     public class BlinkDrive : MyGameLogicComponent, IMyEventProxy
     {
         private IMyCollector block;
+        private MyResourceSinkComponent sink;
         private MySync<ushort, SyncDirection.BothWays> JumpChargesSync;
         private ushort CachedJumpCharges = MaxCharges;
         private MySync<float, SyncDirection.FromServer> JumpTimerSync;
         private const int RechargeTimeSeconds = 5;
         private const int MaxCharges = 3;
-        private const float ChargingPowerDraw = 100;
+        private float GetPowerDraw()
+        {
+            if (JumpTimerSync > 0)
+                return 100;
+            return 0.25f;
+        }
 
         static bool controlsCreated = false;
 
@@ -49,13 +55,32 @@ namespace Invalid.BlinkDrive
             }
         }
 
+        public override void UpdateOnceBeforeFrame()
+        {
+            if (block == null || block.CubeGrid == null)
+                return;
+
+            if (block.CubeGrid.Physics == null)
+                return;
+
+            sink = Entity.Components.Get<MyResourceSinkComponent>();
+            sink?.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, GetPowerDraw);
+            sink?.Update();
+
+            if (!controlsCreated)
+            {
+                CreateTerminalControls();
+                controlsCreated = true;
+            }
+        }
+
         private void JumpChargesSync_ValueChanged(MySync<ushort, SyncDirection.BothWays> obj)
         {
             if (MyAPIGateway.Session.IsServer)
             {
                 if (CanJump && CachedJumpCharges - 1 == obj.Value)
                 {
-                    MyLog.Default.WriteLineAndConsole("Server received jump request. Charges: " + obj.Value);
+                    //MyLog.Default.WriteLineAndConsole("Server received jump request. Charges: " + obj.Value);
                     PerformBlink();
                 }
 
@@ -68,35 +93,22 @@ namespace Invalid.BlinkDrive
 
         private bool CanJump => block.IsWorking && block.IsFunctional && MaxCharges > 0;
 
-        private Vector3D originalPosition;
-        private Vector3D teleportPosition;
-
         private void PerformBlink()
         {
             MatrixD originalMatrixDir = block.WorldMatrix;
             originalMatrixDir.Translation = Vector3D.Zero;
-            originalPosition = block.CubeGrid.WorldMatrix.Translation; // Original position
-            teleportPosition = originalPosition + (originalMatrixDir.Forward * 1000); // Teleported position
+            var originalPosition = block.CubeGrid.WorldMatrix.Translation; // Original position
+            var teleportPosition = originalPosition + (originalMatrixDir.Forward * 1000); // Teleported position
 
             MatrixD newWorldMatrix = block.CubeGrid.WorldMatrix;
             newWorldMatrix.Translation = teleportPosition;
 
-            MyParticleEffect openEffect;
-            MyParticlesManager.TryCreateParticleEffect("Blink_Test_Open", ref originalMatrixDir, ref originalPosition, Entity.Render.GetRenderObjectID(), out openEffect);
-
-
             (block.CubeGrid as MyEntity).Teleport(newWorldMatrix);
 
-            //MyLog.Default.WriteLineAndConsole($"Performing blink: Original Position - {originalPosition}, Teleport Position - {teleportPosition}");
-
+            MyParticlesManager.TryCreateParticleEffect("Blink_Test_Open", ref originalMatrixDir, ref originalPosition, Entity.Render.GetRenderObjectID(), out _);
             MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("HESFAST", originalPosition);
             MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("HESFAST", teleportPosition);
             MyVisualScriptLogicProvider.CreateParticleEffectAtEntity("Blink_Test_Close", Entity.Name); // i am lazy -aristeas
-
-            var sink = Entity.Components.Get<MyResourceSinkComponent>();
-            sink?.SetRequiredInputByType(MyResourceDistributorComponent.ElectricityId, 0);
-            sink?.Update();
-            StartRechargeTimer();
 
             CachedJumpCharges = JumpChargesSync.Value;
         }
@@ -108,24 +120,7 @@ namespace Invalid.BlinkDrive
             if (JumpTimerSync.Value <= 0)
                 JumpTimerSync.Value = RechargeTimeSeconds;
 
-            var sink = Entity.Components.Get<MyResourceSinkComponent>();
-            sink?.SetRequiredInputByType(MyResourceDistributorComponent.ElectricityId, ChargingPowerDraw);
             sink?.Update();
-        }
-
-        public override void UpdateOnceBeforeFrame()
-        {
-            if (block == null || block.CubeGrid == null)
-                return;
-
-            if (block.CubeGrid.Physics == null)
-                return;
-
-            if (!controlsCreated)
-            {
-                CreateTerminalControls();
-                controlsCreated = true;
-            }
         }
 
         public override void UpdateAfterSimulation()
@@ -148,6 +143,8 @@ namespace Invalid.BlinkDrive
                 CachedJumpCharges = JumpChargesSync.Value;
                 if (JumpTimerSync.Value <= 0 && JumpChargesSync.Value < MaxCharges)
                     JumpTimerSync.Value = RechargeTimeSeconds;
+
+                Entity.Components.Get<MyResourceSinkComponent>()?.Update();
             }
         }
 
