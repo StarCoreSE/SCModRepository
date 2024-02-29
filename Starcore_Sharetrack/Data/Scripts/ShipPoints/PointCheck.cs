@@ -324,6 +324,7 @@ namespace klime.PointCheck
                 //Team3Tickets.Value = MatchTickets;
                 LocalMatchState = 1;
                 MyAPIGateway.Utilities.ShowMessage("GM", "You are the captain now.");
+                MyAPIGateway.Utilities.ShowNotification("HEY DUMBASS, IS DAMAGE ON?", 10000, font: "Red");
             }
 
             if (messageText.Contains("/end"))

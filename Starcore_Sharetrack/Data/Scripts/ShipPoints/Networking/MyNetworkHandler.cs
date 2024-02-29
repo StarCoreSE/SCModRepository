@@ -181,7 +181,6 @@ namespace Math0424.Networking
             if (e.PacketId == 6)
             {
                 PointCheck.Begin();
-                MyVisualScriptLogicProvider.SendChatMessage("HEY DUMBASS, IS DAMAGE ON?", "Muzzled", font: "Red");
             }
 
             if (e.PacketId == 7)
