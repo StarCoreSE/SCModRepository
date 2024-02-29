@@ -351,7 +351,7 @@
               <ValueBool>false</ValueBool>
             </Property>
             <Property AnimationType="Const" Name="Rotation reference" Type="Int">
-              <ValueInt>0</ValueInt>
+              <ValueInt>1</ValueInt>
             </Property>
             <Property AnimationType="Const" Name="Angle" Type="Vector3">
               <ValueVector3>
