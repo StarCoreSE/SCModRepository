@@ -25,47 +25,50 @@ namespace Invalid.BlinkDrive
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "BlinkDriveLarge")]
     public class BlinkDrive : MyGameLogicComponent, IMyEventProxy
     {
-        private IMyCollector block;
-        private MyResourceSinkComponent sink;
+        #region Variables
+        private IMyCollector Block;
+        private MyResourceSinkComponent SinkComponent;
         private MySync<ushort, SyncDirection.BothWays> JumpChargesSync;
         private ushort CachedJumpCharges = MaxCharges;
         private MySync<float, SyncDirection.FromServer> JumpTimerSync;
         private const int RechargeTimeSeconds = 60;
         private const int MaxCharges = 3;
-        private float GetPowerDraw()
-        {
-            if (JumpTimerSync > 0)
-                return 100;
-            return 0.25f;
-        }
+
+        private float GetPowerDraw => JumpTimerSync > 0 ? 100 : 0.25f;
+        private bool CanJump => Block.IsWorking && Block.IsFunctional && MaxCharges > 0;
 
         static bool controlsCreated = false;
+        #endregion
 
+        #region Base Methods
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             base.Init(objectBuilder);
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME | MyEntityUpdateEnum.EACH_FRAME;
 
-            block = (IMyCollector)Entity;
+            Block = (IMyCollector)Entity;
 
             if (MyAPIGateway.Session.IsServer)
             {
                 JumpChargesSync.Value = MaxCharges;
                 JumpChargesSync.ValueChanged += JumpChargesSync_ValueChanged;
             }
+            else
+            {
+                JumpTimerSync.ValueChanged += JumpTimerSync_ValueChanged;
+            }
         }
 
         public override void UpdateOnceBeforeFrame()
         {
-            if (block == null || block.CubeGrid == null)
+            if (Block == null || Block.CubeGrid == null)
                 return;
 
-            if (block.CubeGrid.Physics == null)
+            if (Block.CubeGrid.Physics == null)
                 return;
 
-            sink = Entity.Components.Get<MyResourceSinkComponent>();
-            sink?.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, GetPowerDraw);
-            sink?.Update();
+            SinkComponent = Entity.Components.Get<MyResourceSinkComponent>();
+            SinkComponent?.SetRequiredInputByType(MyResourceDistributorComponent.ElectricityId, GetPowerDraw);
 
             if (!controlsCreated)
             {
@@ -74,6 +77,42 @@ namespace Invalid.BlinkDrive
             }
         }
 
+        public override void UpdateAfterSimulation()
+        {
+            base.UpdateAfterSimulation();
+
+            if (!MyAPIGateway.Session.IsServer || Block == null || Block.CubeGrid == null)
+                return;
+
+            if (Block.CubeGrid.Physics == null)
+                return;
+
+            if (JumpTimerSync.Value > 0)
+            {
+                JumpTimerSync.Value -= 1 / 60f;
+            }
+            else if (JumpChargesSync.Value < MaxCharges)
+            {
+                JumpChargesSync.Value++;
+                CachedJumpCharges = JumpChargesSync.Value;
+                if (JumpTimerSync.Value <= 0 && JumpChargesSync.Value < MaxCharges)
+                    JumpTimerSync.Value = RechargeTimeSeconds;
+
+                SinkComponent?.SetRequiredInputByType(MyResourceDistributorComponent.ElectricityId, GetPowerDraw);
+            }
+        }
+
+        public override void Close()
+        {
+            base.Close();
+            if (JumpChargesSync != null)
+            {
+                JumpChargesSync.ValueChanged -= JumpChargesSync_ValueChanged;
+            }
+        }
+        #endregion
+
+        #region Sync Actions
         private void JumpChargesSync_ValueChanged(MySync<ushort, SyncDirection.BothWays> obj)
         {
             if (MyAPIGateway.Session.IsServer)
@@ -91,18 +130,25 @@ namespace Invalid.BlinkDrive
             }
         }
 
-        private bool CanJump => block.IsWorking && block.IsFunctional && MaxCharges > 0;
+        private void JumpTimerSync_ValueChanged(MySync<float, SyncDirection.FromServer> obj)
+        {
+            if (MyAPIGateway.Session.IsServer)
+                return;
+
+            SinkComponent?.SetRequiredInputByType(MyResourceDistributorComponent.ElectricityId, GetPowerDraw); // goddamn it why doesn't keen sync this
+        }
+        #endregion
 
         private void PerformBlink()
         {
-            MatrixD originalMatrixDir = block.WorldMatrix;
+            MatrixD originalMatrixDir = Block.WorldMatrix;
             var originalPosition = originalMatrixDir.Translation; // Original position
             var teleportPosition = originalPosition + (originalMatrixDir.Forward * 1000); // Teleported position
 
-            MatrixD newWorldMatrix = block.CubeGrid.WorldMatrix;
+            MatrixD newWorldMatrix = Block.CubeGrid.WorldMatrix;
             newWorldMatrix.Translation = teleportPosition;
 
-            (block.CubeGrid as MyEntity).Teleport(newWorldMatrix);
+            (Block.CubeGrid as MyEntity).Teleport(newWorldMatrix);
 
             //MyParticleEffect hate;
             //MyParticlesManager.TryCreateParticleEffect("Blink_Test_Open", ref originalMatrixDir, ref originalPosition, 0, out hate);
@@ -121,32 +167,7 @@ namespace Invalid.BlinkDrive
             if (JumpTimerSync.Value <= 0)
                 JumpTimerSync.Value = RechargeTimeSeconds;
 
-            sink?.Update();
-        }
-
-        public override void UpdateAfterSimulation()
-        {
-            base.UpdateAfterSimulation();
-
-            if (!MyAPIGateway.Session.IsServer || block == null || block.CubeGrid == null)
-                return;
-
-            if (block.CubeGrid.Physics == null)
-                return;
-
-            if (JumpTimerSync.Value > 0)
-            {
-                JumpTimerSync.Value -= 1/60f;
-            }
-            else if (JumpChargesSync.Value < MaxCharges)
-            {
-                JumpChargesSync.Value++;
-                CachedJumpCharges = JumpChargesSync.Value;
-                if (JumpTimerSync.Value <= 0 && JumpChargesSync.Value < MaxCharges)
-                    JumpTimerSync.Value = RechargeTimeSeconds;
-
-                Entity.Components.Get<MyResourceSinkComponent>()?.Update();
-            }
+            SinkComponent?.SetRequiredInputByType(MyResourceDistributorComponent.ElectricityId, GetPowerDraw);
         }
 
         private static void CreateTerminalControls()
@@ -206,15 +227,6 @@ namespace Invalid.BlinkDrive
             blinkDriveCockpitAction.Enabled = (b) => b.GameLogic is BlinkDrive;
 
             MyAPIGateway.TerminalControls.AddAction<IMyCollector>(blinkDriveCockpitAction);
-        }
-
-        public override void Close()
-        {
-            base.Close();
-            if (JumpChargesSync != null)
-            {
-                JumpChargesSync.ValueChanged -= JumpChargesSync_ValueChanged;
-            }
         }
     }
 }
