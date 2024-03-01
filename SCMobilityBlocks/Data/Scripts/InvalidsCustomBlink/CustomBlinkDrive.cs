@@ -96,7 +96,6 @@ namespace Invalid.BlinkDrive
         private void PerformBlink()
         {
             MatrixD originalMatrixDir = block.WorldMatrix;
-            originalMatrixDir.Translation = Vector3D.Zero;
             var originalPosition = block.CubeGrid.WorldMatrix.Translation; // Original position
             var teleportPosition = originalPosition + (originalMatrixDir.Forward * 1000); // Teleported position
 
@@ -105,7 +104,8 @@ namespace Invalid.BlinkDrive
 
             (block.CubeGrid as MyEntity).Teleport(newWorldMatrix);
 
-            MyParticlesManager.TryCreateParticleEffect("Blink_Test_Open", ref originalMatrixDir, ref originalPosition, Entity.Render.GetRenderObjectID(), out _);
+            MyParticleEffect hate;
+            MyParticlesManager.TryCreateParticleEffect("Blink_Test_Open", ref originalMatrixDir, ref originalPosition, 0, out hate);
             MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("HESFAST", originalPosition);
             MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("HESFAST", teleportPosition);
             MyVisualScriptLogicProvider.CreateParticleEffectAtEntity("Blink_Test_Close", Entity.Name); // i am lazy -aristeas
