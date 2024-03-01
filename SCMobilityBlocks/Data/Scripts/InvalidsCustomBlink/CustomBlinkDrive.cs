@@ -30,7 +30,7 @@ namespace Invalid.BlinkDrive
         private MySync<ushort, SyncDirection.BothWays> JumpChargesSync;
         private ushort CachedJumpCharges = MaxCharges;
         private MySync<float, SyncDirection.FromServer> JumpTimerSync;
-        private const int RechargeTimeSeconds = 5;
+        private const int RechargeTimeSeconds = 60;
         private const int MaxCharges = 3;
         private float GetPowerDraw()
         {
@@ -96,7 +96,7 @@ namespace Invalid.BlinkDrive
         private void PerformBlink()
         {
             MatrixD originalMatrixDir = block.WorldMatrix;
-            var originalPosition = block.CubeGrid.WorldMatrix.Translation; // Original position
+            var originalPosition = originalMatrixDir.Translation; // Original position
             var teleportPosition = originalPosition + (originalMatrixDir.Forward * 1000); // Teleported position
 
             MatrixD newWorldMatrix = block.CubeGrid.WorldMatrix;
@@ -104,11 +104,12 @@ namespace Invalid.BlinkDrive
 
             (block.CubeGrid as MyEntity).Teleport(newWorldMatrix);
 
-            MyParticleEffect hate;
-            MyParticlesManager.TryCreateParticleEffect("Blink_Test_Open", ref originalMatrixDir, ref originalPosition, 0, out hate);
+            //MyParticleEffect hate;
+            //MyParticlesManager.TryCreateParticleEffect("Blink_Test_Open", ref originalMatrixDir, ref originalPosition, 0, out hate);
+            MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("Blink_Test_Open", originalPosition);
             MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("HESFAST", originalPosition);
             MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("HESFAST", teleportPosition);
-            MyVisualScriptLogicProvider.CreateParticleEffectAtEntity("Blink_Test_Close", Entity.Name); // i am lazy -aristeas
+            MyVisualScriptLogicProvider.CreateParticleEffectAtPosition("Blink_Test_Close", teleportPosition);
 
             CachedJumpCharges = JumpChargesSync.Value;
         }
