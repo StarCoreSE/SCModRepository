@@ -210,18 +210,34 @@ namespace Klime.ProximityEntry
                 MyCubeGrid cubeG = reuse_cubegrid as MyCubeGrid;
                 if (cubeG.Physics != null && !cubeG.IsStatic)
                 {
+                    IMyCockpit mainCockpit = null;
+                    IMyCockpit closestCockpit = null;
+
                     foreach (var fatblock in cubeG.GetFatBlocks())
                     {
                         IMyCockpit cockpit = fatblock as IMyCockpit;
                         if (cockpit != null && cockpit.Pilot == null)
                         {
-                            // If it's the main cockpit or the closest one, send the entry request
-                            if (cockpit.IsMainCockpit || IsClosestCockpit(cockpit, cubeG))
+                            if (cockpit.IsMainCockpit)
                             {
-                                SendEntryRequest(cockpit);
-                                return;
+                                mainCockpit = cockpit;
+                            }
+                            else if (IsClosestCockpit(cockpit, cubeG))
+                            {
+                                closestCockpit = cockpit;
                             }
                         }
+                    }
+
+                    // If there's a main cockpit, send entry request for it
+                    if (mainCockpit != null)
+                    {
+                        SendEntryRequest(mainCockpit);
+                    }
+                    // If there's no main cockpit, but there's a closest one, send entry request for it
+                    else if (closestCockpit != null)
+                    {
+                        SendEntryRequest(closestCockpit);
                     }
                 }
             }
