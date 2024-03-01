@@ -21,7 +21,8 @@
                 <Component Subtype="SteelPlate" Count="1000" />
                 <Component Subtype="Construction" Count="150" />
                 <Component Subtype="MetalGrid" Count="250" />
-                <Component Subtype="LargeTube" Count="40" />
+                <Component Subtype="Computer" Count="100" />
+                <Component Subtype="LargeTube" Count="80" />
                 <Component Subtype="Construction" Count="30" />
                 <Component Subtype="SteelPlate" Count="500" />
             </Components>
