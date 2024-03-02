@@ -76,6 +76,7 @@ namespace StarCore.StructuralIntegrity
 
         // Internal
         public MySync<bool, SyncDirection.BothWays> SiegeActive = null;
+        public MySync<bool, SyncDirection.FromServer> GridStopped = null;
         public bool SiegeCooldownActive = false;
         public bool SiegeModeModifier = false;
 
@@ -171,12 +172,21 @@ namespace StarCore.StructuralIntegrity
 
                 MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0, HandleSiegeModeImpacts);
 
+                if (!MyAPIGateway.Session.IsServer)
+                    GridStopped.ValueChanged += GridStopped_ValueChanged;
+
                 NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_10TH_FRAME;
             }
             catch (Exception e)
             {
                 Log.Error($"\nException in UpdateOnceBefore:\n{e}");
             }
+        }
+
+        private void GridStopped_ValueChanged(MySync<bool, SyncDirection.FromServer> obj)
+        {
+            if (obj?.Value ?? false)
+                SIGenBlock.CubeGrid.Physics.LinearVelocity = Vector3.Zero;
         }
 
         public override void UpdateBeforeSimulation10()
@@ -233,6 +243,9 @@ namespace StarCore.StructuralIntegrity
                 {
                     SetCountStatus($"Block Removed! Siege Mode Deactivated", 1500, MyFontEnum.Red);
                 }
+
+                if (!MyAPIGateway.Session.IsServer)
+                    GridStopped.ValueChanged -= GridStopped_ValueChanged;
 
                 ResetGridModifier(SIGenBlock);
                 SIGenBlock = null;
@@ -733,9 +746,11 @@ namespace StarCore.StructuralIntegrity
 
                     if (SIGenBlock.CubeGrid.Physics.LinearVelocity != Vector3D.Zero)
                     {
-                        Vector3D linearVelocity = SIGenBlock.CubeGrid.Physics.LinearVelocity;
-                        Vector3D oppositeVector = new Vector3D(-linearVelocity.X, -linearVelocity.Y, -linearVelocity.Z);
-                        SIGenBlock.CubeGrid.Physics.LinearVelocity = oppositeVector;
+                        //Vector3D linearVelocity = SIGenBlock.CubeGrid.Physics.LinearVelocity;
+                        //Vector3D oppositeVector = new Vector3D(-linearVelocity.X, -linearVelocity.Y, -linearVelocity.Z);
+                        SIGenBlock.CubeGrid.Physics.LinearVelocity = Vector3.Zero;
+                        if (MyAPIGateway.Session.IsServer && !GridStopped.Value)
+                            GridStopped.Value = true;
                     }
 
                     SiegeTimer = SiegeTimer - 1;
@@ -754,6 +769,9 @@ namespace StarCore.StructuralIntegrity
                     ResetGridModifier(SIGenBlock);
                     SiegeBlockReboot(allTerminalBlocks);
                     DisplayMessageToNearPlayers(1);
+
+                    if (MyAPIGateway.Session.IsServer && GridStopped.Value)
+                        GridStopped.Value = false;
 
                     SiegeActivated.Value = false;
                     SiegeModeModifier = false;
