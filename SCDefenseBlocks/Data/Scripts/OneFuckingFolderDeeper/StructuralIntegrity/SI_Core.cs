@@ -446,13 +446,20 @@ namespace StarCore.StructuralIntegrity
 
         private void HandleSiegeModeImpacts(object target, ref MyDamageInformation info)
         {
-            if (SiegeActive)
-            {
-                IMySlimBlock targetBlock = target as IMySlimBlock;
+            IMySlimBlock targetBlock = target as IMySlimBlock;
 
-                SI_Impact_Render renderer = new SI_Impact_Render(targetBlock);
-                impactRenders.TryAdd(renderer, renderer);
+            if (targetBlock.CubeGrid != null)
+            {
+                IMyCubeGrid targetGrid = target as IMyCubeGrid;
+
+                if (SiegeActive && targetGrid.EntityId == SIGenBlock.CubeGrid.EntityId)
+                {
+
+                    SI_Impact_Render renderer = new SI_Impact_Render(targetBlock);
+                    impactRenders.TryAdd(renderer, renderer);
+                }
             }
+            
         }
 
         /*public MatrixD ImpactEffect(IMySlimBlock block)
