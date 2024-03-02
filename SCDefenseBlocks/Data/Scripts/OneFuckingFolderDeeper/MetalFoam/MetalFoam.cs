@@ -370,8 +370,8 @@ namespace Invalid.MetalFoam
 
                 Settings.FoamRadius = loadedSettings.FoamRadius;
                 Settings.IsFoaming = loadedSettings.IsFoaming;
-                MyLog.Default.WriteLineAndConsole($"READ R: {loadedSettings.FoamRadius} ({FoamRadiusSync.Value})");
-                MyAPIGateway.Utilities.ShowNotification("AAAHH I'M DESERIALIZING AAAHHHHH", 2000, "Red");
+                //MyLog.Default.WriteLineAndConsole($"READ R: {loadedSettings.FoamRadius} ({FoamRadiusSync.Value})");
+                //MyAPIGateway.Utilities.ShowNotification("AAAHH I'M DESERIALIZING AAAHHHHH", 2000, "Red");
                 return true;
             }
             catch (Exception e)
@@ -395,7 +395,7 @@ namespace Invalid.MetalFoam
             block.Storage.Add(FoamSettingsGUID, rawData);
 
             var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<FoamSettings>(Convert.FromBase64String(rawData));
-            MyLog.Default.WriteLineAndConsole($"SAVED R: {loadedSettings.FoamRadius} ({FoamRadiusSync.Value})");
+            //MyLog.Default.WriteLineAndConsole($"SAVED R: {loadedSettings.FoamRadius} ({FoamRadiusSync.Value})");
         }
 
         public override bool IsSerialized()
@@ -403,8 +403,8 @@ namespace Invalid.MetalFoam
             try
             {
                 SaveSettings();
-                MyLog.Default.WriteLineAndConsole($"STOR R: {Settings?.FoamRadius} ({FoamRadiusSync?.Value})");
-                MyAPIGateway.Utilities.ShowNotification("AAAHH I'M SERIALIZING AAAHHHHH", 2000, "Red");
+                //MyLog.Default.WriteLineAndConsole($"STOR R: {Settings?.FoamRadius} ({FoamRadiusSync?.Value})");
+                //MyAPIGateway.Utilities.ShowNotification("AAAHH I'M SERIALIZING AAAHHHHH", 2000, "Red");
             }
             catch (Exception e)
             {
