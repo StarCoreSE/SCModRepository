@@ -21,6 +21,9 @@ using System.Text;
 using Sandbox.Definitions;
 using System.Linq;
 using System;
+using Sandbox.Game.EntityComponents;
+using System.Runtime.InteropServices;
+using Jnick_SCModRepository.SCDefenseBlocks.Data.Scripts.OneFuckingFolderDeeper.MetalFoam;
 
 namespace Invalid.MetalFoam
 {
@@ -32,25 +35,22 @@ namespace Invalid.MetalFoam
         private int nextLayerTick = 0;
         private HashSet<Vector3I> currentFoamPositions = new HashSet<Vector3I>();
         private Vector3I center;  // Added this line
-        private MySync<bool, SyncDirection.BothWays> foammeup;
-        private MySync<float, SyncDirection.BothWays> MaxFoamRadius;
+        private FoamSettings Settings;
+        public MySync<bool, SyncDirection.BothWays> IsFoamingSync;
+        public MySync<float, SyncDirection.BothWays> FoamRadiusSync;
+
         static bool m_controlsCreated = false;
 
         private int totalFoamBlocksAdded = 0;  // Counter for the number of foam blocks added
         private int maxFoamBlocks;  // Maximum number of foam blocks allowed based on Steel Plates in its block, pretty neat. is that bad for performance? uhhhhhh
 
+        public readonly Guid FoamSettingsGUID = new Guid("160803f9-9800-4515-9619-e5385d5208fa");
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             base.Init(objectBuilder);
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
-
-            foammeup.ValueChanged += Foammeup_ValueChanged;
-
             block = (IMyCubeBlock)Entity;
-            block.SlimBlock.ComponentStack.IsFunctionalChanged += OnBlockDamaged;
-
-            maxFoamBlocks = CalculateMaxFoamBlocks(block);
         }
 
         private static int CalculateMaxFoamBlocks(IMyCubeBlock block)                           // its not quite exact sometimes it cuts off 1 or 2 blocks but maybe it got converted into waste heat or something
@@ -130,11 +130,26 @@ namespace Invalid.MetalFoam
         {
             base.UpdateOnceBeforeFrame();
             CreateTerminalControls();
+
+            if (block == null || block.CubeGrid?.Physics == null)
+                return;
+
+            Settings = new FoamSettings(this);
+
+            IsFoamingSync.ValueChanged += Foammeup_ValueChanged;
+
+
+            block.SlimBlock.ComponentStack.IsFunctionalChanged += OnBlockDamaged;
+
+            maxFoamBlocks = CalculateMaxFoamBlocks(block);
+
+            LoadSettings();
+            SaveSettings();
         }
 
         public override void UpdateBeforeSimulation100()
         {
-            if (totalFoamBlocksAdded < maxFoamBlocks && MyAPIGateway.Session.GameplayFrameCounter >= nextLayerTick && foammeup.Value)
+            if (totalFoamBlocksAdded < maxFoamBlocks && MyAPIGateway.Session.GameplayFrameCounter >= nextLayerTick && Settings.IsFoaming)
             {
                 SpreadFoam();
                 nextLayerTick = MyAPIGateway.Session.GameplayFrameCounter + 180; // Adjust timing as needed
@@ -155,7 +170,7 @@ namespace Invalid.MetalFoam
                 {
                     if (CanPlaceFoam(neighbor) &&
                         !newFoamPositions.Contains(neighbor) &&
-                        (MaxFoamRadius.Value == 0 || Vector3.DistanceSquared(neighbor, block.Position)*2.5f <= MaxFoamRadius.Value*MaxFoamRadius.Value))
+                        (Settings.FoamRadius == 0 || Vector3.DistanceSquared(neighbor, block.Position)*2.5f <= Settings.FoamRadius * Settings.FoamRadius))
                     {
                         newFoamPositions.Add(neighbor);
                         blockAdded = true;
@@ -245,7 +260,7 @@ namespace Invalid.MetalFoam
                 MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("MetalFoamSound", block.GetPosition());
 
                 // Automatically set the foammeup sync variable to true
-                foammeup.Value = true;
+                Settings.IsFoaming = true;
             }
         }
 
@@ -265,13 +280,13 @@ namespace Invalid.MetalFoam
                 startgenerationOnOff.Enabled = (b) => b.GameLogic is MetalFoamGenerator;
                 startgenerationOnOff.Visible = (b) => b.GameLogic is MetalFoamGenerator;
                 startgenerationOnOff.Title = MyStringId.GetOrCompute("RELEASE THE FOAM");
-                startgenerationOnOff.Getter = (b) => (b.GameLogic.GetAs<MetalFoamGenerator>()?.foammeup.Value) ?? false;
+                startgenerationOnOff.Getter = (b) => (b.GameLogic.GetAs<MetalFoamGenerator>()?.Settings.IsFoaming) ?? false;
                 startgenerationOnOff.Setter = (b, v) =>
                 {
                     var generator = b.GameLogic.GetAs<MetalFoamGenerator>();
                     if (generator != null)
                     {
-                        generator.foammeup.Value = v; // Syncs the value
+                        generator.Settings.IsFoaming = v; // Syncs the value
                     }
                 };
                 startgenerationOnOff.OnText = MyStringId.GetOrCompute("On");
@@ -286,13 +301,13 @@ namespace Invalid.MetalFoam
                 viscositySlider.Tooltip = MyStringId.GetOrCompute("Max foam radius. Zero for infinite.");
                 viscositySlider.Getter = (b) =>
                 {
-                    float value = (b.GameLogic.GetAs<MetalFoamGenerator>()?.MaxFoamRadius.Value) ?? CalculateMaxRadius(b);
+                    float value = (b.GameLogic.GetAs<MetalFoamGenerator>()?.Settings.FoamRadius) ?? CalculateMaxRadius(b);
                     viscositySlider.Title = MyStringId.GetOrCompute("Foam Viscosity " + Math.Round(value, 1));
-                    return (b.GameLogic.GetAs<MetalFoamGenerator>()?.MaxFoamRadius.Value) ?? CalculateMaxRadius(b);
+                    return (b.GameLogic.GetAs<MetalFoamGenerator>()?.Settings.FoamRadius) ?? CalculateMaxRadius(b);
                 };
                 viscositySlider.Writer = (block, stringBuilder) =>
                 {
-                    double value = Math.Round((block.GameLogic.GetAs<MetalFoamGenerator>()?.MaxFoamRadius.Value) ?? CalculateMaxRadius(block), 1);
+                    double value = Math.Round((block.GameLogic.GetAs<MetalFoamGenerator>()?.Settings.FoamRadius) ?? CalculateMaxRadius(block), 1);
                     stringBuilder.Append(value + "m");
                 };
                 viscositySlider.SetLimits(
@@ -304,7 +319,7 @@ namespace Invalid.MetalFoam
                     var generator = b.GameLogic.GetAs<MetalFoamGenerator>();
                     if (generator != null)
                     {
-                        generator.MaxFoamRadius.Value = v; // Syncs the value
+                        generator.Settings.FoamRadius = v; // Syncs the value
                     }
                 };
                 MyAPIGateway.TerminalControls.AddControl<IMyDecoy>(viscositySlider);
@@ -321,7 +336,7 @@ namespace Invalid.MetalFoam
                     var generator = block.GameLogic.GetAs<MetalFoamGenerator>();
                     if (generator != null)
                     {
-                        stringBuilder.Append("Foam: ").Append(generator.foammeup.Value ? "On" : "Off");
+                        stringBuilder.Append("Foam: ").Append(generator.Settings.IsFoaming ? "On" : "Off");
                     }
                 };
                 action.Action = (block) =>
@@ -329,7 +344,7 @@ namespace Invalid.MetalFoam
                     var generator = block.GameLogic.GetAs<MetalFoamGenerator>();
                     if (generator != null)
                     {
-                        generator.foammeup.Value = !generator.foammeup.Value; // Syncs the value
+                        generator.Settings.IsFoaming = !generator.Settings.IsFoaming; // Syncs the value
                     }
                 };
                 action.Enabled = (block) => block.GameLogic is MetalFoamGenerator;
@@ -339,14 +354,74 @@ namespace Invalid.MetalFoam
             }
         }
 
+        internal bool LoadSettings()
+        {
+            string rawData;
+            if (block.Storage == null || !block.Storage.TryGetValue(FoamSettingsGUID, out rawData))
+            {
+                return false;
+            }
+
+            try
+            {
+                var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<FoamSettings>(Convert.FromBase64String(rawData));
+                if (loadedSettings == null)
+                    return false;
+
+                Settings.FoamRadius = loadedSettings.FoamRadius;
+                Settings.IsFoaming = loadedSettings.IsFoaming;
+                MyLog.Default.WriteLineAndConsole($"READ R: {loadedSettings.FoamRadius} ({FoamRadiusSync.Value})");
+                MyAPIGateway.Utilities.ShowNotification("AAAHH I'M DESERIALIZING AAAHHHHH", 2000, "Red");
+                return true;
+            }
+            catch (Exception e)
+            {
+                MyAPIGateway.Utilities.ShowNotification("Failed to load foam settings! Check the logs for more info.");
+                MyLog.Default.WriteLineAndConsole("Failed to load foam settings! Exception: " + e);
+            }
+
+            return false;
+        }
+
+        internal void SaveSettings()
+        {
+            if (block == null || Settings == null)
+                return;
+
+            if (block.Storage == null)
+                block.Storage = new MyModStorageComponent();
+
+            string rawData = Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(Settings));
+            block.Storage.Add(FoamSettingsGUID, rawData);
+
+            var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<FoamSettings>(Convert.FromBase64String(rawData));
+            MyLog.Default.WriteLineAndConsole($"SAVED R: {loadedSettings.FoamRadius} ({FoamRadiusSync.Value})");
+        }
+
+        public override bool IsSerialized()
+        {
+            try
+            {
+                SaveSettings();
+                MyLog.Default.WriteLineAndConsole($"STOR R: {Settings?.FoamRadius} ({FoamRadiusSync?.Value})");
+                MyAPIGateway.Utilities.ShowNotification("AAAHH I'M SERIALIZING AAAHHHHH", 2000, "Red");
+            }
+            catch (Exception e)
+            {
+                //should probably log this tbqh
+            }
+
+            return base.IsSerialized();
+        }
+
         public override void Close()
         {
             base.Close();
 
             // Unsubscribe from the foammeup ValueChanged event
-            if (foammeup != null)
+            if (IsFoamingSync != null)
             {
-                foammeup.ValueChanged -= Foammeup_ValueChanged;
+                IsFoamingSync.ValueChanged -= Foammeup_ValueChanged;
             }
 
             // Unsubscribe from the IsFunctionalChanged event
@@ -355,8 +430,5 @@ namespace Invalid.MetalFoam
                 block.SlimBlock.ComponentStack.IsFunctionalChanged -= OnBlockDamaged;
             }
         }
-
-
-
     }
 }
