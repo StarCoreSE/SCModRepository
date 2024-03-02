@@ -9,5 +9,14 @@
         <guid>9EFDABA1-E705-4F62-BD37-A4B046B60BC0</guid>
       </RegisteredStorageGuids>
     </EntityComponent>
+	  <EntityComponent xsi:type="MyObjectBuilder_ModStorageComponentDefinition">
+		  <Id>
+			  <TypeId>ModStorageComponent</TypeId>
+			  <SubtypeId>MetalFoam</SubtypeId>
+		  </Id>
+		  <RegisteredStorageGuids>
+			  <guid>160803f9-9800-4515-9619-e5385d5208fa</guid>
+		  </RegisteredStorageGuids>
+	  </EntityComponent>
   </EntityComponents>
 </Definitions>
