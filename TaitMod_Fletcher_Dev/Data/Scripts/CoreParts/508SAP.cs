@@ -30,16 +30,16 @@ namespace Scripts
 { // Don't edit above this line
     partial class Parts
     {
-        private AmmoDef FA16InchAPShell => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef Shell508SAP => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
-            AmmoMagazine = "16InchShell", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "16InchAPShell", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoMagazine = "508SAP", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
+            AmmoRound = "SAP20inch", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 20000f, // Direct damage; one steel plate is worth 100.
-            Mass = 100f, // In kilograms; how much force the impact will apply to the target.
+            Mass = 10000f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
-            BackKickForce = 50f, // Recoil. This is applied to the Parent Grid.
+            BackKickForce = 5000f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
            
@@ -53,8 +53,8 @@ namespace Scripts
             },
             ObjectsHit = new ObjectsHitDef
             {
-                MaxObjectsHit = 0, // Limits the number of entities (grids, players, projectiles) the projectile can penetrate; 0 = unlimited.
-                CountBlocks = false, // Counts individual blocks, not just entities hit.
+                MaxObjectsHit = 5, // Limits the number of entities (grids, players, projectiles) the projectile can penetrate; 0 = unlimited.
+                CountBlocks = true, // Counts individual blocks, not just entities hit.
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
@@ -156,7 +156,7 @@ namespace Scripts
                 {
                     Enable = true,
                     Radius = 3.5f,
-                    Damage = 4500,
+                    Damage = 10000,
                     Depth = 0f,
                     MaxAbsorb = 0f,
                     Falloff = InvCurve, //.NoFalloff applies the same damage to all blocks in radius
@@ -242,8 +242,8 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 2500, // voxel phasing if you go above 5100
-                MaxTrajectory = 10000f, // Max Distance the projectile or beam can Travel.
+                DesiredSpeed = 2900, // voxel phasing if you go above 5100
+                MaxTrajectory = 12000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 3f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
@@ -284,22 +284,22 @@ namespace Scripts
                     Ammo = new ParticleDef
                     {
                         Name = "", //ShipWelderArc
-                        Color = Color(red: 50, green: 6, blue: 1, alpha: 1),
+                        Color = Color(red: 1, green: 150, blue: 250, alpha: 5),
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
                             Loop = false,
                             Restart = false,
-                            MaxDistance = 5000,
-                            MaxDuration = 1,
-                            Scale = 0.1f,
+                            MaxDistance = 10000,
+                            MaxDuration = 5,
+                            Scale = 5f,
                         },
                     },
                     Hit = new ParticleDef
                     {
                         Name = "",
                         ApplyToShield = true,
-                      
+
 
                         Color = Color(red: 1f, green: 1f, blue: 1f, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: 0),
@@ -307,7 +307,7 @@ namespace Scripts
                         {
                             Loop = false,
                             Restart = false,
-                            MaxDistance = 5000,
+                            MaxDistance = 10000,
                             MaxDuration = 1,
                             Scale = 1f,
                             HitPlayChance = 1f,
@@ -324,7 +324,7 @@ namespace Scripts
                         {
                             Loop = false,
                             Restart = false,
-                            MaxDistance = 5000,
+                            MaxDistance = 10000,
                             MaxDuration = 300,
                             Scale = 1,
                             HitPlayChance = 1f,
@@ -334,22 +334,22 @@ namespace Scripts
                 },
                 Lines = new LineDef
                 {
-                    TracerMaterial = "ProjectileTrailLine", // WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
-                    ColorVariance = Random(start: 1.0f, end: 1.3f), // multiply the color by random values within range.
+                    TracerMaterial = "WeaponLaser", // WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
+                    ColorVariance = Random(start: 0.5f, end: 0.8f), // multiply the color by random values within range.
                     WidthVariance = Random(start: 0f, end: 0.1f), // adds random value to default width (negatives shrinks width)
                     Tracer = new TracerBaseDef
                     {
                         Enable = true,
-                        Length = 10f,
-                        Width = 1f,
-                        Color = Color(red: 25f, green: 25f, blue: 24f, alpha: 0.8f),
+                        Length = 100f,
+                        Width = 2f,
+                        Color = Color(red: 30f, green: 50f, blue: 100f, alpha: 0.8f),
                     },
                     Trail = new TrailDef
                     {
                         Enable = true,
                         Material = "WeaponLaser",
-                        DecayTime = 35,
-                        Color = Color(red: 2.585f, green: 2.062f, blue: 2.01f, alpha: 0.1f),
+                        DecayTime = 15,
+                        Color = Color(red: 2.585f, green: 2.062f, blue: 2.01f, alpha: 0.3f),
                         Back = false,
                         CustomWidth = 0.1f,
                         UseWidthVariance = false,

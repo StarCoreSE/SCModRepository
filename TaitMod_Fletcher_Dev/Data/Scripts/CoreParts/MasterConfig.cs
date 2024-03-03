@@ -42,7 +42,9 @@ namespace Scripts
             Twin203,
             QuinTorpLauncher,
             CasemateTwin,
-            alt406
+            alt406,
+            twin508
+
 
 
             );

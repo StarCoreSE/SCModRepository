@@ -30,16 +30,16 @@ namespace Scripts
 { // Don't edit above this line
     partial class Parts
     {
-        private AmmoDef FA16InchAPShell => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef Shell508AP => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
-            AmmoMagazine = "16InchShell", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "16InchAPShell", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoMagazine = "508AP", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
+            AmmoRound = "AP20Inch", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 20000f, // Direct damage; one steel plate is worth 100.
-            Mass = 100f, // In kilograms; how much force the impact will apply to the target.
+            BaseDamage = 50000f, // Direct damage; one steel plate is worth 100.
+            Mass = 1500f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
-            BackKickForce = 50f, // Recoil. This is applied to the Parent Grid.
+            BackKickForce = 5000f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
            
@@ -53,8 +53,8 @@ namespace Scripts
             },
             ObjectsHit = new ObjectsHitDef
             {
-                MaxObjectsHit = 0, // Limits the number of entities (grids, players, projectiles) the projectile can penetrate; 0 = unlimited.
-                CountBlocks = false, // Counts individual blocks, not just entities hit.
+                MaxObjectsHit = 10, // Limits the number of entities (grids, players, projectiles) the projectile can penetrate; 0 = unlimited.
+                CountBlocks = true, // Counts individual blocks, not just entities hit.
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
@@ -154,7 +154,7 @@ namespace Scripts
                 },
                 EndOfLife = new EndOfLifeDef
                 {
-                    Enable = true,
+                    Enable = false,
                     Radius = 3.5f,
                     Damage = 4500,
                     Depth = 0f,
@@ -242,8 +242,8 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 2500, // voxel phasing if you go above 5100
-                MaxTrajectory = 10000f, // Max Distance the projectile or beam can Travel.
+                DesiredSpeed = 3200, // voxel phasing if you go above 5100
+                MaxTrajectory = 12000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 3f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
@@ -251,7 +251,7 @@ namespace Scripts
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 Smarts = new SmartsDef
                 {
-                    Inaccuracy = 5f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
+                    Inaccuracy = 4f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
                     Aggressiveness = 1f, // controls how responsive tracking is.
                     MaxLateralThrust = 0.5, // controls how sharp the trajectile may turn
                     TrackingDelay = 1, // Measured in Shape diameter units traveled.
@@ -291,8 +291,8 @@ namespace Scripts
                             Loop = false,
                             Restart = false,
                             MaxDistance = 5000,
-                            MaxDuration = 1,
-                            Scale = 0.1f,
+                            MaxDuration = 2,
+                            Scale = 4f,
                         },
                     },
                     Hit = new ParticleDef
@@ -341,7 +341,7 @@ namespace Scripts
                     {
                         Enable = true,
                         Length = 10f,
-                        Width = 1f,
+                        Width = 3f,
                         Color = Color(red: 25f, green: 25f, blue: 24f, alpha: 0.8f),
                     },
                     Trail = new TrailDef
