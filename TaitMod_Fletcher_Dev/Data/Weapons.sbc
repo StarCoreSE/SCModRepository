@@ -300,6 +300,8 @@
 		  </AmmoMagazines>
 		  <ReloadTime>3300</ReloadTime>
 	  </Weapon>
+
+
 	
     </Weapons>
 </Definitions>
