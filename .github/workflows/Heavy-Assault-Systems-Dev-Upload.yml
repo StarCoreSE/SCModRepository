@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 3017853784
-          path: "Heavy-Assault-Systems-Dev"
+          path: "Weapon Mods/Development/Heavy-Assault-Systems-Dev"
           changelog: ${{ github.event.head_commit.message }}            
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}
