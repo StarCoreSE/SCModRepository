@@ -11,10 +11,10 @@ if %ERRORLEVEL% NEQ 0 (
 
 set "targetDir=%APPDATA%\SpaceEngineers\Mods"
 
-for /d %%i in ("%targetDir%\*") do (
-    if exist "%%i" (
-        rmdir /s /q "%%i"
-        echo Removed symlink in "%%i"
+for /f "delims=" %%i in ('dir /AL /b "%targetDir%" 2^>nul') do (
+    if exist "%targetDir%\%%i" (
+        rmdir /s /q "%targetDir%\%%i"
+        echo Removed symlink in "%targetDir%\%%i"
     )
 )
 
