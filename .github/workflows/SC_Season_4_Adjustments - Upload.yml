@@ -3,7 +3,7 @@ name: "Upload SC_Season_4_Adjustments"
 on:
   push:
     paths:
-      - "SC_Season_4_Adjustments/**"
+      - "Utility Mods/Stable/SC_Season_4_Adjustments/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 3021448970
-          path: SC_Season_4_Adjustments
+          path: "Utility Mods/Stable/SC_Season_4_Adjustments"
           changelog: ${{ github.event.head_commit.message }}              
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

@@ -12,10 +12,8 @@ if %ERRORLEVEL% NEQ 0 (
 set "targetDir=%APPDATA%\SpaceEngineers\Mods"
 
 for /d %%i in ("%targetDir%\*") do (
-    if exist "%%i\metadata.mod" (
-        set "symlinkPath=%%i"
-
-        rmdir /s /q "!symlinkPath!"
+    if exist "%%i" (
+        rmdir /s /q "%%i"
         echo Removed symlink in "%%i"
     )
 )

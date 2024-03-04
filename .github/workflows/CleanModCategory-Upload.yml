@@ -3,7 +3,7 @@ name: "Upload to SCCleanDLCCattegories"
 on:
   push:
     paths:
-      - "SCCleanModCategories/**"
+      - "Utility Mods/Stable/SCCleanModCategories/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2893360222
-          path: SCCleanModCategories
+          path: "Utility Mods/Stable/SCCleanModCategories"
           changelog: ${{ github.event.head_commit.message }}
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

@@ -3,7 +3,7 @@ name: "Upload SCDefenseBlocks"
 on:
   push:
     paths:
-      - "SCDefenseBlocks/**"
+      - "Utility Mods/Stable/SCDefenseBlocks/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 3023988614
-          path: SCDefenseBlocks
+          path: "Utility Mods/Stable/SCDefenseBlocks"
           changelog: ${{ github.event.head_commit.message }}              
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

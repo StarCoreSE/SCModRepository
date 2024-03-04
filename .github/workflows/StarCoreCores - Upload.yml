@@ -3,7 +3,7 @@ name: "Upload StarCoreCores"
 on:
   push:
     paths:
-      - "StarCoreCores/**"
+      - "Utility Mods/Stable/StarCoreCores/**"
 jobs:
   upload:
     runs-on: ubuntu-latest
@@ -13,7 +13,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 3034185966
-          path: StarCoreCores
+          path: "Utility Mods/Stable/StarCoreCores"
           changelog: ${{ github.event.head_commit.message }}          
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

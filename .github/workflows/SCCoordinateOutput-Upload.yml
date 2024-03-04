@@ -3,7 +3,7 @@ name: "Upload SCCoordinateOutput"
 on:
   push:
     paths:
-      - "SCCoordinateOutput/**"
+      - "Utility Mods/Stable/SCCoordinateOutput/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2975063364
-          path: "SCCoordinateOutput"
+          path: "Utility Mods/Stable/SCCoordinateOutput"
           changelog: ${{ github.event.head_commit.message }}           
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

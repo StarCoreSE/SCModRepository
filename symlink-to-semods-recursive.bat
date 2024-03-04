@@ -12,7 +12,9 @@ if %ERRORLEVEL% NEQ 0 (
 set "sourceDir=%~dp0"
 set "targetDir=%APPDATA%\SpaceEngineers\Mods"
 
-for /d %%i in ("%sourceDir%*") do (
+:: Function to recursively search for metadata.mod files and create symlinks
+:SearchAndCreateSymlink
+for /r "%sourceDir%" /d %%i in (*) do (
     if exist "%%i\metadata.mod" (
         set "folderName=%%~nxi"
         set "symlinkPath=!targetDir!\!folderName!"
@@ -21,5 +23,9 @@ for /d %%i in ("%sourceDir%*") do (
         echo Created symlink for "%%i" in "!symlinkPath!"
     )
 )
+goto :eof
+
+:: Call the function to search and create symlinks
+call :SearchAndCreateSymlink
 
 pause

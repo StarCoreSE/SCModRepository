@@ -3,7 +3,7 @@ name: "TaitMod_Fletcher_Dev"
 on:
   push:
     paths:
-      - "TaitMod_Fletcher_Dev/**"
+      - "Weapon Mods/Development/TaitMod_Fletcher_Dev/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 3167028629
-          path: TaitMod_Fletcher_Dev
+          path: "Weapon Mods/Development/TaitMod_Fletcher_Dev"
           changelog: ${{ github.event.head_commit.message }}              
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

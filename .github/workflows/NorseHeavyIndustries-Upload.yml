@@ -3,7 +3,7 @@ name: "Upload NHI"
 on:
   push:
     paths:
-      - "NorseHeavyIndustries/**"
+      - "Weapon Mods/Stable/NorseHeavyIndustries/**"
 jobs:
   upload:
     runs-on: ubuntu-latest
@@ -13,7 +13,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2791770628
-          path: NorseHeavyIndustries
+          path: "Weapon Mods/Stable/NorseHeavyIndustries"
           changelog: ${{ github.event.head_commit.message }}          
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

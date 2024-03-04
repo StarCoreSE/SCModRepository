@@ -3,7 +3,7 @@ name: "Upload to REEECore"
 on:
   push:
     paths:
-      - "REEECore/**"
+      - "Weapon Mods/Stable/REEECore/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 3149648890
-          path: REEECore
+          path: "Weapon Mods/Stable/REEECore"
           changelog: ${{ github.event.head_commit.message }}
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

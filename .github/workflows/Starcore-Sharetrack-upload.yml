@@ -3,7 +3,7 @@ name: "Upload Starcore_Sharetrack"
 on:
   push:
     paths:
-      - "Starcore_Sharetrack/**"
+      - "Gamemode Mods/Stable/Starcore_Sharetrack/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2756825813
-          path: "Starcore_Sharetrack"
+          path: "Gamemode Mods/Stable/Starcore_Sharetrack"
           changelog: ${{ github.event.head_commit.message }}  
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

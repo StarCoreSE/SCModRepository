@@ -3,7 +3,7 @@ name: "Upload SCCleanDLCCategories"
 on:
   push:
     paths:
-      - "SCCleanDLCCategories/**"
+      - "Utility Mods/Stable/SCCleanDLCCategories/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2893360271
-          path: SCCleanDLCCategories
+          path: "Utility Mods/Stable/SCCleanDLCCategories"
           changelog: ${{ github.event.head_commit.message }}
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}
