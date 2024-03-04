@@ -3,7 +3,7 @@ name: "Upload SCKoth"
 on:
   push:
     paths:
-      - "SCKoth/**"
+      - "Gamemode Mods/Stable/SCKoth/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 3032031200
-          path: SCKoth
+          path: "Gamemode Mods/Stable/SCKoth"
           changelog: ${{ github.event.head_commit.message }}              
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

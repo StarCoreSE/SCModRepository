@@ -3,7 +3,7 @@ name: "Upload PaperDoll PLEASE"
 on:
   push:
     paths:
-      - "PaperDoll/**"
+      - "Utility Mods/Stable/PaperDoll/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2846569122
-          path: PaperDoll
+          path: "Utility Mods/Stable/PaperDoll"
           changelog: ${{ github.event.head_commit.message }}          
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

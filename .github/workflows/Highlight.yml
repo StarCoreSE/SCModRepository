@@ -3,7 +3,7 @@ name: "Upload Systems Highlight"
 on:
   push:
     paths:
-      - "Systems Highlight/**"
+      - "Utility Mods/Stable/Systems Highlight/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 3037494862
-          path: "Systems Highlight"
+          path: "Utility Mods/Stable/Systems Highlight"
           changelog: ${{ github.event.head_commit.message }}              
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

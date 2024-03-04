@@ -3,7 +3,7 @@ name: "Upload BaRCore"
 on:
   push:
     paths:
-      - "BaRCore/**"
+      - "Utility Mods/Stable/BaRCore/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2896161103
-          path: "BaRCore"
+          path: "Utility Mods/Stable/BaRCore"
           changelog: ${{ github.event.head_commit.message }}              
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

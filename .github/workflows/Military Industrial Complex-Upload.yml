@@ -3,7 +3,7 @@ name: "Upload Military Industrial Complex"
 on:
   push:
     paths:
-      - "Military Industrial Complex/**"
+      - "Weapon Mods/Stable/Military Industrial Complex/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2902380862
-          path: "Military Industrial Complex"
+          path: "Weapon Mods/Stable/Military Industrial Complex"
           changelog: ${{ github.event.head_commit.message }}           
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

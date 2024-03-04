@@ -3,7 +3,7 @@ name: "Upload I NEED MORE JETPACK ACCELERATION"
 on:
   push:
     paths:
-      - "I NEED MORE JETPACK ACCELERATION/**"
+      - "Utility Mods/Stable/I NEED MORE JETPACK ACCELERATION/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2899738923
-          path: "I NEED MORE JETPACK ACCELERATION"
+          path: "Utility Mods/Stable/I NEED MORE JETPACK ACCELERATION"
           changelog: ${{ github.event.head_commit.message }}              
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

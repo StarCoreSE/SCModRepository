@@ -3,7 +3,7 @@ name: "Upload StarCore Enabler Rewards"
 on:
   push:
     paths:
-      - "SpraysAddon-StarCore Enabler Rewards/**"
+      - "Utility Mods/Stable/SpraysAddon-StarCore Enabler Rewards/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2961654766
-          path: "SpraysAddon-StarCore Enabler Rewards"
+          path: "Utility Mods/Stable/SpraysAddon-StarCore Enabler Rewards"
           changelog: ${{ github.event.head_commit.message }}              
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

@@ -3,7 +3,7 @@ name: "Upload SCPracticeAI"
 on:
   push:
     paths:
-      - "SCPracticeAI/**"
+      - "Utility Mods/Stable/SCPracticeAI/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 3024311955
-          path: SCPracticeAI
+          path: "Utility Mods/Stable/SCPracticeAI"
           changelog: ${{ github.event.head_commit.message }}              
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

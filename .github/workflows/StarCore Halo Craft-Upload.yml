@@ -3,7 +3,7 @@ name: "Upload StarCore Halo Craft"
 on:
   push:
     paths:
-      - "StarCore Halo Craft/**"
+      - "Weapon Mods/Stable/StarCore Halo Craft/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2902780249
-          path: "StarCore Halo Craft"
+          path: "Weapon Mods/Stable/StarCore Halo Craft"
           changelog: ${{ github.event.head_commit.message }}           
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

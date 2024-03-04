@@ -3,7 +3,7 @@ name: "Upload Starcore Minimalist Hud"
 on:
   push:
     paths:
-      - "Starcore Minimalist Hud/**"
+      - "Utility Mods/Stable/Starcore Minimalist Hud/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2846202563
-          path: "Starcore Minimalist Hud"
+          path: "Utility Mods/Stable/Starcore Minimalist Hud"
           changelog: ${{ github.event.head_commit.message }}              
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

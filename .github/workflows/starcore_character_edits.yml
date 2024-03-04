@@ -3,7 +3,7 @@ name: "Upload Starcore Character Edits and Proximity Entry"
 on:
   push:
     paths:
-      - "Starcore Character Edits and Proximity Entry/**"
+      - "Utility Mods/Stable/Starcore Character Edits and Proximity Entry/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2911191352
-          path: "Starcore Character Edits and Proximity Entry"
+          path: "Utility Mods/Stable/Starcore Character Edits and Proximity Entry"
           changelog: ${{ github.event.head_commit.message }}           
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

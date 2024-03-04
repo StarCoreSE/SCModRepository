@@ -3,7 +3,7 @@ name: "Upload TIOStarcore-Dev"
 on:
   push:
     paths:
-      - "TIOStarcore-Dev/**"
+      - "Weapon Mods/Development/TIOStarcore-Dev/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 3017842205
-          path: TIOStarcore-Dev
+          path: "Weapon Mods/Development/TIOStarcore-Dev"
           changelog: ${{ github.event.head_commit.message }}              
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

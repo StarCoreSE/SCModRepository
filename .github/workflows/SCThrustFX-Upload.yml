@@ -3,7 +3,7 @@ name: "Upload SCThrusterFX"
 on:
   push:
     paths:
-      - "SCThrusterFX/**"
+      - "Utility Mods/Stable/SCThrusterFX/**"
 jobs:
   upload:
     runs-on: ubuntu-latest
@@ -13,7 +13,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 3033050686
-          path: SCThrusterFX
+          path: "Utility Mods/Stable/SCThrusterFX"
           changelog: ${{ github.event.head_commit.message }}          
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

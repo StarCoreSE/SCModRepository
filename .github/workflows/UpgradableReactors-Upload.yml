@@ -3,7 +3,7 @@ name: "Upload UpgradableReactors"
 on:
   push:
     paths:
-      - "UpgradableReactors/**"
+      - "Utility Mods/Stable/UpgradableReactors/**"
 
 jobs:
   upload:
@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 2961585236
-          path: UpgradableReactors
+          path: "Utility Mods/Stable/UpgradableReactors"
           changelog: ${{ github.event.head_commit.message }}              
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}
