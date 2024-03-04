@@ -3,7 +3,7 @@ name: "Upload Heavy-Assault-Systems"
 on:
   push:
     paths:
-      - "Heavy-Assault-Systems-Dev/**"
+      - "Weapon Mods/Development/Heavy-Assault-Systems-Dev/**"
 
 jobs:
   upload:
