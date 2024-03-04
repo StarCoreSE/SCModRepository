@@ -19,20 +19,15 @@ namespace Scripts {
                     new MountPointDef {
                         SubtypeId = "127mmMk56",  // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "",   // For weapons with a spinning barrel such as Gatling Guns. Subpart_Boomsticks must be written as Boomsticks.
-                        MuzzlePartId = "elevation",  // The subpart where your muzzle empties are located. This is often the elevation subpart. Subpart_Boomsticks must be written as Boomsticks.
-                        AzimuthPartId = "azimuth",  // Your Rotating Subpart, the bit that moves sideways.
-                        ElevationPartId = "elevation",  // Your Elevating Subpart, that bit that moves up.
+                        MuzzlePartId = "MissileTurretBarrels",  // The subpart where your muzzle empties are located. This is often the elevation subpart. Subpart_Boomsticks must be written as Boomsticks.
+                        AzimuthPartId = "MissileTurretBase1",  // Your Rotating Subpart, the bit that moves sideways.
+                        ElevationPartId = "MissileTurretBarrels",  // Your Elevating Subpart, that bit that moves up.
                         DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
                     
                  },
-                Muzzles = new[] {
-                    "barrel_1",
-					"barrel_2",
-                    				
-                    
-                },
+                Muzzles = new[] {"muzzle_missile_1", "muzzle_missile_2" },
                 Ejector = "", // Optional; empty from which to eject "shells" if specified.
                 Scope = "camera", // Where line of sight checks are performed from. Must be clear of block collision.
             },

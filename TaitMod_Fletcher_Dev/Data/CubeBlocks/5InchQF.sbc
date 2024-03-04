@@ -18,7 +18,7 @@
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="3" y="2" z="3"/>
 			<ModelOffset x="0" y="0" z="0"/>
-			<Model>Models\5InchQF\Barbette.mwm</Model>
+			<Model>Models\5InchQF\5Inch41Twin.mwm</Model>
 			<Components>
 				<Component Subtype="SteelPlate" Count="100" />
 				<Component Subtype="MetalGrid" Count="100" />
