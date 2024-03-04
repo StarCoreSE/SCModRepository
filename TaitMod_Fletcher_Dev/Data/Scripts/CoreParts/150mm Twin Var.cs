@@ -28,11 +28,8 @@ namespace Scripts {
                     
                  },
                 Muzzles = new[] {
-                    "muzzle_missile_01",
-					"muzzle_missile_02",
-                    				
-                    
-                },
+                    "muzzle_missile_1", 
+                    "muzzle_missile_2" },
                 Ejector = "", // Optional; empty from which to eject "shells" if specified.
                 Scope = "camera", // Where line of sight checks are performed from. Must be clear of block collision.
             },
