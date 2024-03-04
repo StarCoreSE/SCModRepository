@@ -13,6 +13,7 @@
 	  <DefaultRelation>Enemies</DefaultRelation>
 	  <AcceptHumans>false</AcceptHumans>
       <AutoAcceptMember>false</AutoAcceptMember>
+	  <DiscoveredByDefault>true</DiscoveredByDefault>	  
     </Faction>
 	
     <Faction Tag="AI2" Founder="WHAT IS MY PURPOSE">
@@ -26,6 +27,8 @@
 	  <DefaultRelation>Enemies</DefaultRelation>
 	  <AcceptHumans>false</AcceptHumans>
       <AutoAcceptMember>false</AutoAcceptMember>
+	  <DiscoveredByDefault>true</DiscoveredByDefault>	  
+
     </Faction>	
 	
 	
