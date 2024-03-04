@@ -16,7 +16,7 @@
 			<Icon>Textures\GUI\Icons\20Inch.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
-			<Size x="9" y="3" z="9"/>
+			<Size x="9" y="4" z="9"/>
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\20 inch\Barbette.mwm</Model>
 			<Components>
@@ -31,7 +31,7 @@
 			</Components>
 			<CriticalComponent Subtype="Motor" Index="0" />
 			<MountPoints>
-				<MountPoint Side="Bottom" StartX="1" StartY="1" EndX="9" EndY="9" />
+				<MountPoint Side="Bottom" StartX="1" StartY="1" EndX="7" EndY="7" />
 			</MountPoints>
 			<BlockPairName>20InchTwin</BlockPairName>
 		</Definition>

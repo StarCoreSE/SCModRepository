@@ -28,9 +28,9 @@ namespace Scripts {
                     
                  },
                 Muzzles = new[] {
-                    "muzzle_missile_01",
-					"muzzle_missile_02",
-					"muzzle_missile_03",
+                    "muzzle_missile_1",
+					"muzzle_missile_2",
+					"muzzle_missile_3",
 					
 					
                     				
