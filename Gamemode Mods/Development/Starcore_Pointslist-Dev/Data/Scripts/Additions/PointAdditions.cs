@@ -511,6 +511,8 @@ namespace ShipPoints
                 406alternate@400;
                 Mk25Rangefinder@50;
                 6InchTriple@200;
+				20InchTwin@600;
+
 
                 Null_Point_Jump_Disruptor_Large@99999;
 				LargeGatlingTurret_SC@125;
