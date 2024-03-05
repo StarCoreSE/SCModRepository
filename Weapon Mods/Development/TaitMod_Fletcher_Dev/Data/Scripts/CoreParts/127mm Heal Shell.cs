@@ -340,17 +340,17 @@ namespace Scripts
                     {
                         Enable = true,
                         Length = 5f,
-                        Width = 0.1f,
-                        Color = Color(red: 0.80f, green: 150.20f, blue: 100.6f, alpha: 0.9f),
+                        Width = 1f,
+                        Color = Color(red: 20.55f, green: 20.55f, blue: 5.51f, alpha: 10f),
                     },
                     Trail = new TrailDef
                     {
                         Enable = true,
                         Material = "WeaponLaser",
                         DecayTime = 15,
-                        Color = Color(red: 1.585f, green: 75.062f, blue: 50.01f, alpha: 0.5f),
+                        Color = Color(red: 20.55f, green: 20.55f, blue: 5.51f, alpha: 1f),
                         Back = false,
-                        CustomWidth = 0.1f,
+                        CustomWidth = 0.4f,
                         UseWidthVariance = false,
                         UseColorFade = true,
                     },
