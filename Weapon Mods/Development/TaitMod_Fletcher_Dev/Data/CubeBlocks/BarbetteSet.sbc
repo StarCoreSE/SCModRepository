@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<CubeBlocks>
-		<Definition>
+		<!--<Definition>
 				<Id>
 						<TypeId>Conveyor</TypeId>
 				<SubtypeId>Barbette5x5</SubtypeId>
@@ -130,6 +130,6 @@
 			<DestroySound>PoofExplosionCat3</DestroySound>
 			<PCU>10</PCU>
 			<IsAirTight>true</IsAirTight>
-		</Definition>
+		</Definition> -->
 	</CubeBlocks>
 </Definitions>

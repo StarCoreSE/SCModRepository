@@ -512,9 +512,7 @@ namespace ShipPoints
                 Mk25Rangefinder@50;
                 6InchTriple@200;
 				20InchTwin@600;
-				Barbette5x5@115;
-				Barbette3x3@85;
-				Barbette1x1@55:
+
 
                 Null_Point_Jump_Disruptor_Large@99999;
 				LargeGatlingTurret_SC@125;
