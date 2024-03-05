@@ -12,19 +12,21 @@ using VRage.Game;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 
-namespace Jnick_SCModRepository.HitSounds.Data.Scripts.HitSounds
+namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
 {
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     public class HitSounds : MySessionComponentBase
     {
-        bool PlayHitSounds = false; // TODO: Save settings
-        bool PlayCritSounds = true;
-        bool PlayKillSounds = true;
-        int IntervalBetweenSounds = 4; // Ticks
-        int MinDamageToPlay = 100;
+        internal bool PlayHitSounds = true; // TODO: Save settings
+        internal bool PlayCritSounds = true;
+        internal bool PlayKillSounds = true;
+        internal int IntervalBetweenSounds = 4; // Ticks
+        internal int MinDamageToPlay = 100;
 
         public static HitSounds I = new HitSounds();
+
         WcApi wAPI;
+        HitSounds_TerminalActions terminalActions = new HitSounds_TerminalActions();
 
         MyCharacterSoundComponent SoundEmitter = null;
 
@@ -44,11 +46,9 @@ namespace Jnick_SCModRepository.HitSounds.Data.Scripts.HitSounds
                 return;
 
             wAPI = new WcApi();
-            wAPI.Load();
+            wAPI.Load(() => terminalActions.CreateTerminalActions(wAPI));
 
-            RichHudClient.Init(ModContext.ModName, InitRichHud, null);
-
-            MyAPIGateway.Utilities.ShowMessage("HITSOUNDS", "Loaded...");
+            HitSounds_Settings.InitSettings(ModContext, this);
         }
 
         protected override void UnloadData()
@@ -71,79 +71,6 @@ namespace Jnick_SCModRepository.HitSounds.Data.Scripts.HitSounds
 
             Ticks++;
         }
-        #endregion
-
-        #region RichHud Terminal
-
-        void InitRichHud()
-        {
-            RichHudTerminal.Root.Enabled = true;
-            ControlPage controlPage = new ControlPage
-            {
-                Name = "Settings"
-            };
-            RichHudTerminal.Root.Add(controlPage);
-
-            ControlCategory category = new ControlCategory();
-            category.HeaderText = "";
-            category.SubheaderText = "";
-            ControlTile tileToggles = new ControlTile();
-            ControlTile tileSliders = new ControlTile();
-
-            controlPage.Add(category);
-
-            category.Add(tileToggles);
-            category.Add(tileSliders);
-
-            TerminalOnOffButton toggleHitSounds = new TerminalOnOffButton()
-            {
-                Name = "Play HitSounds",
-                CustomValueGetter = () => PlayHitSounds,
-            };
-            toggleHitSounds.ControlChangedHandler = (sender, args) => { PlayHitSounds = toggleHitSounds.Value; };
-            tileToggles.Add(toggleHitSounds);
-
-            TerminalOnOffButton toggleCritSounds = new TerminalOnOffButton()
-            {
-                Name = "Play CritSounds",
-                CustomValueGetter = () => PlayCritSounds,
-
-            };
-            toggleCritSounds.ControlChangedHandler = (sender, args) => { PlayCritSounds = toggleCritSounds.Value; };
-            tileToggles.Add(toggleCritSounds);
-
-            TerminalOnOffButton toggleKillSounds = new TerminalOnOffButton()
-            {
-                Name = "Play KillSounds",
-                CustomValueGetter = () => PlayKillSounds,
-
-            };
-            toggleKillSounds.ControlChanged += (sender, args) => { PlayKillSounds = toggleKillSounds.Value; };
-            tileToggles.Add(toggleKillSounds);
-
-            TerminalSlider sliderIntervalSounds = new TerminalSlider()
-            {
-                Name = "Interval Between Sounds",
-                ToolTip = "Ticks (1/60s)",
-                CustomValueGetter = () => IntervalBetweenSounds,
-                Min = 0,
-                Max = 60,
-            };
-            sliderIntervalSounds.ControlChanged += (sender, args) => { IntervalBetweenSounds = (int) sliderIntervalSounds.Value; sliderIntervalSounds.ValueText = IntervalBetweenSounds.ToString(); };
-            tileSliders.Add(sliderIntervalSounds);
-
-            TerminalSlider sliderMinDamage = new TerminalSlider()
-            {
-                Name = "Minimum Hit Damage",
-                ToolTip = "Counted per-block per-hit",
-                CustomValueGetter = () => MinDamageToPlay,
-                Min = 0,
-                Max = 16501,
-            };
-            sliderMinDamage.ControlChanged += (sender, args) => { MinDamageToPlay = (int)sliderMinDamage.Value; sliderMinDamage.ValueText = MinDamageToPlay.ToString(); };
-            tileSliders.Add(sliderMinDamage);
-        }
-
         #endregion
 
         #region Custom Methods

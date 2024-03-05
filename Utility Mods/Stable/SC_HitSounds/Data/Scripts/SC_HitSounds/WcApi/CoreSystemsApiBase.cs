@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Jnick_SCModRepository.HitSounds.Data.Scripts.HitSounds;
 using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
 using VRage;
