@@ -861,8 +861,103 @@
         </Wave>
       </Waves>
     </Sound>
-	
-<!-- Sirens -->
+	  
+	  <!--20 inch gun sound-->
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>508mmshotsound</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>12000</MaxDistance>
+		  <Pitch>0</Pitch>
+		  <PreventSynchronization>10</PreventSynchronization>
+		  <DistantSounds>
+			  <DistantSound DistanceCrossfade="100" Distance="800" Sound="508mmshotsound4" />
+			  <DistantSound DistanceCrossfade="100" Distance="4000" Sound="508mmshotsound3" />
+			  <DistantSound DistanceCrossfade="100" Distance="8000" Sound="508mmshotsound2" />
+			  <DistantSound DistanceCrossfade="100" Distance="12000" Sound="508mmshotsound1" />
+		  </DistantSounds>
+		  <PitchVariation>1</PitchVariation>
+		  <Volume>3</Volume>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\20InchPollutedNoiseBase.wav</Start>
+			  </Wave>
+			  <!-- <Wave Type="D3">
+                  <Start>ARC\WEP\Medium_C_Shot_2.wav</Start>
+              </Wave>-->
+		  </Waves>
+	  </Sound>
+	  
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>508mmshotsound1</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>12000</MaxDistance>
+		  <Pitch>0</Pitch>
+		  <Volume>10</Volume>
+		  <PitchVariation>0</PitchVariation>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\20InchCleanNoise4000m.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>508mmshotsound2</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>8000</MaxDistance>
+		  <Pitch>0</Pitch>
+		  <Volume>2</Volume>
+		  <PitchVariation>1</PitchVariation>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\20InchCleanNoise2000m.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	  
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>508mmshotsound3</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>4000</MaxDistance>
+		  <Pitch>0</Pitch>
+		  <Volume>1</Volume>
+		  <PitchVariation>0</PitchVariation>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\20InchCleanNoise800m.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	  
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>508mmshotsound4</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>800</MaxDistance>
+		  <Pitch>0</Pitch>
+		  <Volume>1</Volume>
+		  <PitchVariation>0</PitchVariation>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\20InchCleanNoise400m.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+
+	  <!-- Sirens -->
     <Sound>
       <Id>
         <TypeId>AudioDefinition</TypeId>
