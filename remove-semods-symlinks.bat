@@ -20,16 +20,19 @@ if not exist "%desktopDir%" (
 :: Copying non-symbolic link folders to the desktop
 for /d %%i in ("%targetDir%\*") do (
     set "folderName=%%~nxi"
-    if not exist "%%i\metadata.mod" (
+    fsutil reparsepoint query "%%i" > nul 2>&1
+    if errorlevel 1 (
         robocopy "%%i" "%desktopDir%\!folderName!" /E /NFL /NDL /NJH /NJS /nc /ns /np
     )
 )
 
 :: Removing symbolic links from the mod folder
-for /f "delims=" %%i in ('dir /AL /b "%targetDir%" 2^>nul') do (
-    if exist "%targetDir%\%%i" (
-        rmdir /s /q "%targetDir%\%%i"
-        echo Removed symlink in "%targetDir%\%%i"
+for /d %%i in ("%targetDir%\*") do (
+    set "folderName=%%~nxi"
+    fsutil reparsepoint query "%%i" > nul 2>&1
+    if not errorlevel 1 (
+        rmdir /s /q "%%i"
+        echo Removed symlink in "%%i"
     )
 )
 
