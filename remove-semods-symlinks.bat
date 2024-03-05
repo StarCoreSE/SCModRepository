@@ -17,8 +17,13 @@ if not exist "%desktopDir%" (
     mkdir "%desktopDir%"
 )
 
-:: Copying contents of mod folder to the desktop
-robocopy "%targetDir%" "%desktopDir%" /E /MIR /NFL /NDL /NJH /NJS /nc /ns /np
+:: Copying non-symbolic link folders to the desktop
+for /d %%i in ("%targetDir%\*") do (
+    set "folderName=%%~nxi"
+    if not exist "%%i\metadata.mod" (
+        robocopy "%%i" "%desktopDir%\!folderName!" /E /NFL /NDL /NJH /NJS /nc /ns /np
+    )
+)
 
 :: Removing symbolic links from the mod folder
 for /f "delims=" %%i in ('dir /AL /b "%targetDir%" 2^>nul') do (
