@@ -70,7 +70,7 @@
                 <TypeId>ConveyorSorter</TypeId>
                 <SubtypeId>PriestReskin_Block</SubtypeId>
             </Id>
-            <DisplayName>F-2 "Spartan" Rotary Gun</DisplayName>
+            <DisplayName>F-2 "Spartan" Heavy Gatling Gun</DisplayName>
             <Description>
               [2.25km Targeting Range [1750 m/s]]
               [Kinetic damage]

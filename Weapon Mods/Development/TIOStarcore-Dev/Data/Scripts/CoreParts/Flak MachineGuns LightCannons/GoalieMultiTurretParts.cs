@@ -60,8 +60,8 @@ namespace Scripts {
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 1600, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
-                MinTargetDistance = 400, // Minimum distance at which targets will be automatically shot at.
+                MaxTargetDistance = 1800, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MinTargetDistance = 100, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 0, // Maximum number of targets to randomize between; 0 = unlimited.
                 CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
                 TopBlocks = 0, // Maximum number of blocks to randomize between; 0 = unlimited.
@@ -273,18 +273,18 @@ namespace Scripts {
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 1600, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
-                MinTargetDistance = 100, // Minimum distance at which targets will be automatically shot at.
+                MaxTargetDistance = 1800, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 0, // Maximum number of targets to randomize between; 0 = unlimited.
                 CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
                 TopBlocks = 0, // Maximum number of blocks to randomize between; 0 = unlimited.
                 CycleBlocks = 0, // Number of blocks to "cycle" per acquire attempt.
                 StopTrackingSpeed = 0, // Do not track threats traveling faster than this speed; 0 = unlimited.
-                UniqueTargetPerWeapon = true, // only applies to multi-weapon blocks 
+                UniqueTargetPerWeapon = false, // only applies to multi-weapon blocks 
                 MaxTrackingTime = 0, // After this time has been reached the weapon will stop tracking existing target and scan for a new one, only applies to turreted weapons
                 ShootBlanks = false, // Do not generate projectiles when shooting
                 FocusOnly = false, // This weapon can only track focus targets.
-                EvictUniqueTargets = true, // if this is set it will evict any weapons set to UniqueTargetPerWeapon unless they to have this set
+                EvictUniqueTargets = false, // if this is set it will evict any weapons set to UniqueTargetPerWeapon unless they to have this set
                 Communications = new CommunicationDef
                 {
                     StoreTargets = false, // Pushes its current target to the grid/construct so that other slaved weapons can fire on it.
@@ -487,18 +487,18 @@ namespace Scripts {
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 1600, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
-                MinTargetDistance = 100, // Minimum distance at which targets will be automatically shot at.
+                MaxTargetDistance = 1800, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 0, // Maximum number of targets to randomize between; 0 = unlimited.
                 CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
                 TopBlocks = 0, // Maximum number of blocks to randomize between; 0 = unlimited.
                 CycleBlocks = 0, // Number of blocks to "cycle" per acquire attempt.
                 StopTrackingSpeed = 0, // Do not track threats traveling faster than this speed; 0 = unlimited.
-                UniqueTargetPerWeapon = true, // only applies to multi-weapon blocks 
+                UniqueTargetPerWeapon = false, // only applies to multi-weapon blocks 
                 MaxTrackingTime = 0, // After this time has been reached the weapon will stop tracking existing target and scan for a new one, only applies to turreted weapons
                 ShootBlanks = false, // Do not generate projectiles when shooting
                 FocusOnly = false, // This weapon can only track focus targets.
-                EvictUniqueTargets = true, // if this is set it will evict any weapons set to UniqueTargetPerWeapon unless they to have this set
+                EvictUniqueTargets = false, // if this is set it will evict any weapons set to UniqueTargetPerWeapon unless they to have this set
                 Communications = new CommunicationDef
                 {
                     StoreTargets = false, // Pushes its current target to the grid/construct so that other slaved weapons can fire on it.

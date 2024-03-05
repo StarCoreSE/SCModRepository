@@ -11,7 +11,7 @@
 		  <Description>
 			  10 Barrels of High Explosive Rockets
 			  400m minimum range, 13500m max
-			  Energy Damage
+			  Kinetic Damage
 
 		  </Description>
 		  <Icon>Textures\GUI\Icons\Cubes\tempiconRLX.png</Icon>
@@ -73,7 +73,7 @@
 		  <Description>
 			  10 Barrels of High Explosive Rockets
 			  400m minimum range, 13500m max
-			  Energy Damage
+			  Kinetic Damage
 
 		  </Description>
 		  <Icon>Textures\GUI\Icons\Cubes\tempiconRLX.png</Icon>
@@ -136,7 +136,7 @@
 		  <Description>
 			  10 Barrels of High Explosive Rockets
 			  400m minimum range, 13500m max
-			  Energy Damage
+			  Kinetic Damage
 
 		  </Description>
 		  <Icon>Textures\GUI\Icons\Cubes\tempiconRLX.png</Icon>
@@ -202,7 +202,7 @@
 		  <Description>
 			  10 Barrels of High Explosive Rockets
 			  400m minimum range, 13500m max
-			  Energy Damage
+			  Kinetic Damage
 
 		  </Description>
 		  <Icon>Textures\GUI\Icons\Cubes\tempiconRLX.png</Icon>
@@ -291,7 +291,7 @@
 
 		<BlockVariantGroup>
 			<Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Thagomizer" />
-			<Icon>Textures\GUI\Icons\Cubes\jnick.dds</Icon>
+			<Icon>Textures\GUI\Icons\Cubes\tempiconRLX.png</Icon>
 			<DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
 			<Description>Description_BlockGroup_TurretGroup</Description>
 			<Blocks>
