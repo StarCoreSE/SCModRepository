@@ -7,14 +7,14 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>Thagomizer</SubtypeId>
 		  </Id>
-		  <DisplayName>'Marauder' Naval RL-10X</DisplayName>
+		  <DisplayName>'Bushwhacker' 120 inch RL-10X</DisplayName>
 		  <Description>
 			  10 Barrels of High Explosive Rockets
-			  500m minimum range, 9000m max
+			  400m minimum range, 13500m max
 			  Energy Damage
 
 		  </Description>
-		  <Icon>Textures\GUI\Icons\Cubes\jnick.dds</Icon>
+		  <Icon>Textures\GUI\Icons\Cubes\tempiconRLX.png</Icon>
 		  <CubeSize>Large</CubeSize>
 		  <GuiVisible>true</GuiVisible>
 		  <BlockTopology>TriangleMesh</BlockTopology>
@@ -69,14 +69,14 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>Thagomizer_Flipped</SubtypeId>
 		  </Id>
-		  <DisplayName>'Marauder' Naval RL-10X</DisplayName>
+		  <DisplayName>'Bushwhacker' 120 inch RL-10X R</DisplayName>
 		  <Description>
 			  10 Barrels of High Explosive Rockets
-			  500m minimum range, 9000m max
+			  400m minimum range, 13500m max
 			  Energy Damage
 
 		  </Description>
-		  <Icon>Textures\GUI\Icons\Cubes\jnick.dds</Icon>
+		  <Icon>Textures\GUI\Icons\Cubes\tempiconRLX.png</Icon>
 		  <CubeSize>Large</CubeSize>
 		  <GuiVisible>true</GuiVisible>
 		  <BlockTopology>TriangleMesh</BlockTopology>
@@ -132,13 +132,14 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>Thagomizer_Angled</SubtypeId>
 		  </Id>
-		  <DisplayName>Naval RL-10X</DisplayName>
+		  <DisplayName>'Bushwhacker' 120 inch RL-10X Angled</DisplayName>
 		  <Description>
-			  10 Barrels of High Explosive Content
-			  Try Armoring with 4x1s
+			  10 Barrels of High Explosive Rockets
+			  400m minimum range, 13500m max
+			  Energy Damage
 
 		  </Description>
-		  <Icon>Textures\GUI\Icons\Cubes\jnick.dds</Icon>
+		  <Icon>Textures\GUI\Icons\Cubes\tempiconRLX.png</Icon>
 		  <CubeSize>Large</CubeSize>
 		  <GuiVisible>true</GuiVisible>
 		  <BlockTopology>TriangleMesh</BlockTopology>
@@ -197,13 +198,14 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>Thagomizer_Angled_Flipped</SubtypeId>
 		  </Id>
-		  <DisplayName>Naval RL-10X</DisplayName>
+		  <DisplayName>'Bushwhacker' 120 inch RL-10X Angled R</DisplayName>
 		  <Description>
-			  10 Barrels of High Explosive Content
-			  Try Armoring with 4x1s
+			  10 Barrels of High Explosive Rockets
+			  400m minimum range, 13500m max
+			  Energy Damage
 
 		  </Description>
-		  <Icon>Textures\GUI\Icons\Cubes\jnick.dds</Icon>
+		  <Icon>Textures\GUI\Icons\Cubes\tempiconRLX.png</Icon>
 		  <CubeSize>Large</CubeSize>
 		  <GuiVisible>true</GuiVisible>
 		  <BlockTopology>TriangleMesh</BlockTopology>

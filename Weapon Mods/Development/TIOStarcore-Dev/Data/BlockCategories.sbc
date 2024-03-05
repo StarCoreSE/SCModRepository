@@ -25,7 +25,7 @@
 				<string>ConveyorSorter/GoalieCasemate</string>
 			    <string>ConveyorSorter/Type17_BeamLance</string>
 				<string>ConveyorSorter/Fixed_Rockets</string>
-				<string>ConveyorSorter/VindicatorKineticLance</string>
+				<string>VindicatorKineticLance</string>
 				<string>ConveyorSorter/HadeanPlasmaBlastgun</string>
 				<string>ConveyorSorter/K_HSR_Utilities_Reactor_Gel_LG</string>
 				<string>ConveyorSorter/HeavyCarronade_5x5_Turret</string>
@@ -212,7 +212,7 @@
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="KreegMagnetarCannon" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="X4_7x7_HeavyTurret" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HadeanPlasmaBlastgun" />
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="VindicatorKineticLance" />
+			<!--		<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="VindicatorKineticLance" /> -->
 			</Blocks>
 		</BlockVariantGroup>	
 		
