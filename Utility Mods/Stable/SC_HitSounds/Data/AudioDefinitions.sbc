@@ -8,7 +8,7 @@
             </Id>
             <Category>HUD</Category>
 			<MaxDistance>2000</MaxDistance>
-			<Volume>0.5</Volume>
+			<Volume>0.4</Volume>
             <Waves>
                 <Wave Type="D3">
                     <Start>Audio\Hitsound.wav</Start>
@@ -22,10 +22,24 @@
 			</Id>
 			<Category>HUD</Category>
 			<MaxDistance>2000</MaxDistance>
-			<Volume>0.5</Volume>
+			<Volume>0.4</Volume>
 			<Waves>
 				<Wave Type="D3">
 					<Start>Audio\Killsound.wav</Start>
+				</Wave>
+			</Waves>
+		</Sound>
+		<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>SC_CritSound_TF2</SubtypeId>
+			</Id>
+			<Category>HUD</Category>
+			<MaxDistance>2000</MaxDistance>
+			<Volume>0.4</Volume>
+			<Waves>
+				<Wave Type="D3">
+					<Start>Audio\Critsound.wav</Start>
 				</Wave>
 			</Waves>
 		</Sound>
