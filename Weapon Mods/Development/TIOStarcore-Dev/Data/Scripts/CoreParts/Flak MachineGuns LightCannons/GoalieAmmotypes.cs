@@ -59,7 +59,7 @@ namespace Scripts
             Shape = new ShapeDef // Defines the collision shape of the projectile, defaults to LineShape and uses the visual Line Length if set to 0.
             {
                 Shape = LineShape, // LineShape or SphereShape. Do not use SphereShape for fast moving projectiles if you care about precision.
-                Diameter = 5, // Diameter is minimum length of LineShape or minimum diameter of SphereShape.
+                Diameter = 6, // Diameter is minimum length of LineShape or minimum diameter of SphereShape.
             },
             ObjectsHit = new ObjectsHitDef
             {
@@ -110,7 +110,7 @@ namespace Scripts
                 MaxIntegrity = 16000f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
-                HealthHitModifier = 20, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
+                HealthHitModifier = 100, //was 25 How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = -1, // Voxel damage multiplier; defaults to 1 if zero or less.
                 Characters = -1f, // Character damage multiplier; defaults to 1 if zero or less.
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
@@ -135,7 +135,7 @@ namespace Scripts
                 {
                     Modifier = -1f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
-                    BypassModifier = -1.25f, // If greater than zero, the percentage of damage that will penetrate the shield.
+                    BypassModifier = -2f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {
@@ -273,11 +273,11 @@ namespace Scripts
                 MaxLifeTime = 60, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 99999, // voxel phasing if you go above 5100
-                MaxTrajectory = 1400f, // Max Distance the projectile or beam can Travel.
+                MaxTrajectory = 1500f, // Max Distance the projectile or beam can Travel.
 
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
-                RangeVariance = Random(start: 400, end: 600), // subtracts value from MaxTrajectory
+                RangeVariance = Random(start: 520, end: 720), // subtracts value from MaxTrajectory
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 Smarts = new SmartsDef
                 {
@@ -494,7 +494,7 @@ namespace Scripts
                 MaxIntegrity = 16000f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
-                HealthHitModifier = 10, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
+                HealthHitModifier = 60, //was 10 How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = -1, // Voxel damage multiplier; defaults to 1 if zero or less.
                 Characters = -1f, // Character damage multiplier; defaults to 1 if zero or less.
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
@@ -519,7 +519,7 @@ namespace Scripts
                 {
                     Modifier = -1f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
-                    BypassModifier = -1.25f, // If greater than zero, the percentage of damage that will penetrate the shield.
+                    BypassModifier = -2f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {
@@ -878,7 +878,7 @@ namespace Scripts
                 MaxIntegrity = 16000f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
-                HealthHitModifier = 10, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
+                HealthHitModifier = 40, //was 10 How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = -1, // Voxel damage multiplier; defaults to 1 if zero or less.
                 Characters = -1f, // Character damage multiplier; defaults to 1 if zero or less.
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
@@ -903,7 +903,7 @@ namespace Scripts
                 {
                     Modifier = -1f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
-                    BypassModifier = -1.25f, // If greater than zero, the percentage of damage that will penetrate the shield.
+                    BypassModifier = -2f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {
@@ -1211,7 +1211,7 @@ namespace Scripts
             Shape = new ShapeDef // Defines the collision shape of the projectile, defaults to LineShape and uses the visual Line Length if set to 0.
             {
                 Shape = LineShape, // LineShape or SphereShape. Do not use SphereShape for fast moving projectiles if you care about precision.
-                Diameter = 5, // Diameter is minimum length of LineShape or minimum diameter of SphereShape.
+                Diameter = 4, // Diameter is minimum length of LineShape or minimum diameter of SphereShape.
             },
             ObjectsHit = new ObjectsHitDef
             {
@@ -1262,7 +1262,7 @@ namespace Scripts
                 MaxIntegrity = 16000f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
-                HealthHitModifier = 5, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
+                HealthHitModifier = 25, //was 5, How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = -1, // Voxel damage multiplier; defaults to 1 if zero or less.
                 Characters = -1f, // Character damage multiplier; defaults to 1 if zero or less.
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
@@ -1287,7 +1287,7 @@ namespace Scripts
                 {
                     Modifier = -1f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
-                    BypassModifier = -1.25f, // If greater than zero, the percentage of damage that will penetrate the shield.
+                    BypassModifier = -2f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {
@@ -1425,11 +1425,11 @@ namespace Scripts
                 MaxLifeTime = 60, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 99999, // voxel phasing if you go above 5100
-                MaxTrajectory = 1400f, // Max Distance the projectile or beam can Travel.
+                MaxTrajectory = 1500f, // Max Distance the projectile or beam can Travel.
 
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
-                RangeVariance = Random(start: 400, end: 600), // subtracts value from MaxTrajectory
+                RangeVariance = Random(start: 450, end: 650), // subtracts value from MaxTrajectory
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 Smarts = new SmartsDef
                 {
@@ -1647,14 +1647,14 @@ namespace Scripts
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
-                HealthHitModifier = 10, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
+                HealthHitModifier = 30, //was 10 How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = -1, // Voxel damage multiplier; defaults to 1 if zero or less.
                 Characters = -1f, // Character damage multiplier; defaults to 1 if zero or less.
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
                 FallOff = new FallOffDef
                 {
-                    Distance = 0f, // Distance at which damage begins falling off.
-                    MinMultipler = 1f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
+                    Distance = 1200f, // Distance at which damage begins falling off.
+                    MinMultipler = 0.01f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
                 },
                 Grids = new GridSizeDef
                 {
@@ -1672,14 +1672,14 @@ namespace Scripts
                 {
                     Modifier = -1f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
-                    BypassModifier = -1.25f, // If greater than zero, the percentage of damage that will penetrate the shield.
+                    BypassModifier = -2f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {
-                    Base = Energy, // Base Damage uses this
-                    AreaEffect = Energy,
-                    Detonation = Energy,
-                    Shield = Energy, // Damage against shields is currently all of one type per projectile. Shield Bypass Weapons, always Deal Energy regardless of this line
+                    Base = Kinetic, // Base Damage uses this
+                    AreaEffect = Kinetic,
+                    Detonation = Kinetic,
+                    Shield = Kinetic, // Damage against shields is currently all of one type per projectile. Shield Bypass Weapons, always Deal Energy regardless of this line
                 },
                 Custom = new CustomScalesDef
                 {
@@ -1720,10 +1720,10 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = false,
-                    Radius = 6f, // Meters
-                    Damage = 25000f,
-                    Depth = 2f,
-                    MaxAbsorb = 2000f,
+                    Radius = 0f, // Meters
+                    Damage = 0f,
+                    Depth = 0f,
+                    MaxAbsorb = 0f,
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
                     //.Curve drops off damage sharply as it approaches the max radius
@@ -1810,11 +1810,11 @@ namespace Scripts
                 MaxLifeTime = 60, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 99999, // voxel phasing if you go above 5100
-                MaxTrajectory = 1600f, // Max Distance the projectile or beam can Travel.
+                MaxTrajectory = 1800f, // Max Distance the projectile or beam can Travel.
 
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
-                RangeVariance = Random(start: 500, end: 500), // subtracts value from MaxTrajectory
+                RangeVariance = Random(start: 300, end: 500), // subtracts value from MaxTrajectory
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 Smarts = new SmartsDef
                 {

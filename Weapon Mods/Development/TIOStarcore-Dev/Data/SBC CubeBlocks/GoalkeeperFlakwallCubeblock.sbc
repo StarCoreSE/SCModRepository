@@ -9,9 +9,10 @@
 			</Id>
 			<DisplayName>Goalkeeper Casemate Flak Battery</DisplayName>
 			<Description>
-              [1200-600m Targeting Range]
-              [No Grid Damage]
-              [Targets Missiles, deals 80 AMS Damage Per Second]
+              [1600 Targeting Range]
+			  [1200 Flak Range]
+              [Almost 0 Grid Damage]
+              [Targets Missiles, deals 160 AMS Damage Per Second]
 
 			</Description>
 			<Icon>Textures\GUI\Icons\HSR\HSR_Damnation.dds</Icon>

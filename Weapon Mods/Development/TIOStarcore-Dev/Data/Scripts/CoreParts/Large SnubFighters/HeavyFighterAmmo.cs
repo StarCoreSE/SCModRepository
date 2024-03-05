@@ -45,10 +45,10 @@ namespace Scripts
             AmmoMagazine = "HeavyFighter1", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Heavy Fighter", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
-            EnergyCost = 0.001f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 1000f, // Direct damage; one steel plate is worth 100. 
+            EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
+            BaseDamage = 0.5f, // Direct damage; one steel plate is worth 100. 
             Mass = 5000, // In kilograms; how much force the impact will apply to the target.
-            Health = 1000, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            Health = 1200, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 10, // Recoil.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
@@ -66,7 +66,7 @@ namespace Scripts
             Shape = new ShapeDef // Defines the collision shape of the projectile, defaults to LineShape and uses the visual Line Length if set to 0.
             {
                 Shape = LineShape, // LineShape or SphereShape. Do not use SphereShape for fast moving projectiles if you care about precision.
-                Diameter = 10, // Diameter is minimum length of LineShape or minimum diameter of SphereShape.
+                Diameter = 6, // Diameter is minimum length of LineShape or minimum diameter of SphereShape.
             },
             ObjectsHit = new ObjectsHitDef
             {
@@ -92,7 +92,7 @@ namespace Scripts
                     Interval = 0, // Time between spawning fragments, in ticks, 0 means every tick, 1 means every other
                     StartTime = 0, // Time delay to start spawning fragments, in ticks, of total projectile life
                     MaxSpawns = 600, // Max number of fragment children to spawn
-                    Proximity = 1200, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
+                    Proximity = 900, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
                     ParentDies = false, // Parent dies once after it spawns its last child.
                     PointAtTarget = true, // Start fragment direction pointing at Target
                     PointType = Direct, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
@@ -1553,7 +1553,7 @@ namespace Scripts
             AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Fighter Laser", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
-            EnergyCost = 0.001f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
+            EnergyCost = 1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 1000f, // Direct damage; one steel plate is worth 100.
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
@@ -1629,7 +1629,7 @@ namespace Scripts
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
-                HealthHitModifier = 5f, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
+                HealthHitModifier = 3f, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = 1, // Voxel damage multiplier; defaults to 1 if zero or less.
                 Characters = -1f, // Character damage multiplier; defaults to 1 if zero or less.
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
@@ -1652,7 +1652,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 2f, // Multiplier for damage against shields.
+                    Modifier = 3f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -2f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -1874,8 +1874,8 @@ namespace Scripts
                         Length = 10f,
                         Width = 0.2f,
                         Color = Color(red: 3, green: 3, blue: 3f, alpha: 0.2f),
-                        VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
-                        VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
+                        VisualFadeStart = 90, // Number of ticks the weapon has been firing before projectiles begin to fade their color
+                        VisualFadeEnd = 60, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
                             "WeaponLaser",
                         },
@@ -1901,7 +1901,7 @@ namespace Scripts
                     {
                         Enable = true,
                         Textures = new[] {
-                            "ProjectileTrailLine",
+                            "WeaponLaser",
                         },
                         TextureMode = Normal,
                         DecayTime = 1,

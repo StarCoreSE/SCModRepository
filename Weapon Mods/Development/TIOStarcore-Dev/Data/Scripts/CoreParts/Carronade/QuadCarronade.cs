@@ -52,7 +52,7 @@ namespace Scripts {
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 3000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MaxTargetDistance = 3000, //2500 Maximum distance at which targets will be automatically shot at; 0 = unlimited.
                 MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 0, // Maximum number of targets to randomize between; 0 = unlimited.
                 CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
@@ -179,7 +179,7 @@ namespace Scripts {
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "", // Audio for warmup effect.
-                    FiringSound = "NewMediumCalibreShot", //MyLargeCalibreShot Audio for firing.
+                    FiringSound = "NewMediumCalibreShotDistB", //MyLargeCalibreShot Audio for firing.
                     FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "MyLargeCalibreReload", // Sound SubtypeID, for when your Weapon is in a reloading state
                     NoAmmoSound = "",
@@ -199,7 +199,7 @@ namespace Scripts {
                         {
                             Loop = false, // Set this to the same as in the particle sbc!
                             Restart = false, // Whether to end a looping effect instantly when firing stops.
-                            MaxDistance = 5000, // Max distance at which this effect should be visible. NOTE: This will use whichever MaxDistance value is higher across Effect1 and Effect2!
+                            MaxDistance = 4000, // Max distance at which this effect should be visible. NOTE: This will use whichever MaxDistance value is higher across Effect1 and Effect2!
                             MaxDuration = 480, // How many ticks the effect should be ended after, if it's still running.
                             Scale = 1.1f, // Scale of effect.
                         },
