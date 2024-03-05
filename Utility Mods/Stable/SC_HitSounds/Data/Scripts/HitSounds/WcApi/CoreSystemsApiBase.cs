@@ -768,18 +768,18 @@ namespace CoreSystems.Api
 
             private void ProcessEvents(ListReader<MyTuple<ulong, long, int, MyEntity, MyEntity, ListReader<MyTuple<Vector3D, object, float>>>> projectiles)
             {
-                foreach (var projectile in projectiles)
-                {
-                    MyAPIGateway.Utilities.ShowMessage("HITSOUNDS", "Hits: " + projectile.Item6.Count);
-                    var hits = _hitPool.Count > 0 ? _hitPool.Pop() : new List<ProjectileDamageEvent.ProHit>();
-
-                    foreach (var hitObj in projectile.Item6)
-                    {
-                        hits.Add(new ProjectileDamageEvent.ProHit { HitPosition = hitObj.Item1, ObjectHit = hitObj.Item2, Damage = hitObj.Item3 });
-                    }
-
-                    HitSounds.I.OnDamageEvent(projectile.Item1, projectile.Item2, projectile.Item3, projectile.Item4, projectile.Item5, hits);
-                }
+                //foreach (var projectile in projectiles)
+                //{
+                //    MyAPIGateway.Utilities.ShowMessage("HITSOUNDS", "Hits: " + projectile.Item6.Count);
+                //    var hits = _hitPool.Count > 0 ? _hitPool.Pop() : new List<ProjectileDamageEvent.ProHit>();
+                //
+                //    foreach (var hitObj in projectile.Item6)
+                //    {
+                //        hits.Add(new ProjectileDamageEvent.ProHit { HitPosition = hitObj.Item1, ObjectHit = hitObj.Item2, Damage = hitObj.Item3 });
+                //    }
+                //
+                //    HitSounds.I.OnDamageEvent(projectile.Item1, projectile.Item2, projectile.Item3, projectile.Item4, projectile.Item5, hits);
+                //}
             }
 
             private void CleanUpEvents()
