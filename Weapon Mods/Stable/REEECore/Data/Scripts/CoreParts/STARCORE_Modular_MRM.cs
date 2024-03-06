@@ -89,8 +89,8 @@ namespace Scripts
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 7000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
-                MinTargetDistance = 1000, // Minimum distance at which targets will be automatically shot at.
+                MaxTargetDistance = 5000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MinTargetDistance = 2500, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 4, // Maximum number of targets to randomize between; 0 = unlimited.
                 //CycleTargets = 1, // Number of targets to "cycle" per acquire attempt.
                 TopBlocks = 18, // Maximum number of blocks to randomize between; 0 = unlimited.
@@ -187,7 +187,7 @@ namespace Scripts
                     SpinFree = false, // Spin barrel while not firing.
                     StayCharged = false, // Will start recharging whenever power cap is not full.
                     MaxActiveProjectiles = 0, // Maximum number of drones in flight (only works for drone launchers)
-                    MaxReloads = 3, // Maximum number of reloads in the LIFETIME of a weapon
+                    MaxReloads = 2, // Maximum number of reloads in the LIFETIME of a weapon
                 },
                 Audio = new HardPointAudioDef
                 {
