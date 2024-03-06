@@ -1,5 +1,7 @@
 ﻿using RichHudFramework.Client;
+using RichHudFramework.UI;
 using RichHudFramework.UI.Client;
+using Sandbox.ModAPI;
 using VRage.Game.ModAPI;
 
 namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
@@ -20,64 +22,126 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
             };
             RichHudTerminal.Root.Add(controlPage);
 
-            ControlCategory category = new ControlCategory();
-            category.HeaderText = "";
-            category.SubheaderText = "";
+            ControlCategory categoryTop = new ControlCategory
+            {
+                HeaderText = "",
+                SubheaderText = ""
+            };
+            controlPage.Add(categoryTop);
+
             ControlTile tileToggles = new ControlTile();
+            categoryTop.Add(tileToggles);
+            {
+                TerminalOnOffButton toggleHitSounds = new TerminalOnOffButton()
+                {
+                    Name = "Override HitSounds",
+                    ToolTip = "Force-enables hitsounds on all weapons.",
+                    CustomValueGetter = () => hitSounds.ForceHitSounds,
+                };
+                toggleHitSounds.ControlChangedHandler = (sender, args) => { hitSounds.ForceHitSounds = toggleHitSounds.Value; };
+                tileToggles.Add(toggleHitSounds);
+
+                TerminalOnOffButton toggleCritSounds = new TerminalOnOffButton()
+                {
+                    Name = "Play CritSounds",
+                    CustomValueGetter = () => hitSounds.PlayCritSounds,
+
+                };
+                toggleCritSounds.ControlChangedHandler = (sender, args) => { hitSounds.PlayCritSounds = toggleCritSounds.Value; };
+                tileToggles.Add(toggleCritSounds);
+
+                TerminalOnOffButton toggleKillSounds = new TerminalOnOffButton()
+                {
+                    Name = "Play KillSounds",
+                    CustomValueGetter = () => hitSounds.PlayKillSounds,
+
+                };
+                toggleKillSounds.ControlChanged += (sender, args) => { hitSounds.PlayKillSounds = toggleKillSounds.Value; };
+                tileToggles.Add(toggleKillSounds);
+            }
+
             ControlTile tileSliders = new ControlTile();
-
-            controlPage.Add(category);
-
-            category.Add(tileToggles);
-            category.Add(tileSliders);
-
-            TerminalOnOffButton toggleHitSounds = new TerminalOnOffButton()
+            categoryTop.Add(tileSliders);
             {
-                Name = "Play HitSounds",
-                CustomValueGetter = () => hitSounds.PlayHitSounds,
-            };
-            toggleHitSounds.ControlChangedHandler = (sender, args) => { hitSounds.PlayHitSounds = toggleHitSounds.Value; };
-            tileToggles.Add(toggleHitSounds);
+                TerminalSlider sliderIntervalSounds = new TerminalSlider()
+                {
+                    Name = "Interval Between Sounds",
+                    ToolTip = "Ticks (1/60s)",
+                    CustomValueGetter = () => hitSounds.IntervalBetweenSounds,
+                    Min = 0,
+                    Max = 60,
+                };
+                sliderIntervalSounds.ControlChanged += (sender, args) => { hitSounds.IntervalBetweenSounds = (int)sliderIntervalSounds.Value; sliderIntervalSounds.ValueText = hitSounds.IntervalBetweenSounds.ToString(); };
+                tileSliders.Add(sliderIntervalSounds);
 
-            TerminalOnOffButton toggleCritSounds = new TerminalOnOffButton()
+                TerminalSlider sliderMinDamage = new TerminalSlider()
+                {
+                    Name = "Minimum Hit Damage",
+                    ToolTip = "Counted per-block per-hit",
+                    CustomValueGetter = () => hitSounds.MinDamageToPlay,
+                    Min = 0,
+                    Max = 16501,
+                };
+                sliderMinDamage.ControlChanged += (sender, args) => { hitSounds.MinDamageToPlay = (int)sliderMinDamage.Value; sliderMinDamage.ValueText = hitSounds.MinDamageToPlay.ToString(); };
+                tileSliders.Add(sliderMinDamage);
+            }
+
+            ControlCategory categorySounds = new ControlCategory
             {
-                Name = "Play CritSounds",
-                CustomValueGetter = () => hitSounds.PlayCritSounds,
-
+                HeaderText = "",
+                SubheaderText = ""
             };
-            toggleCritSounds.ControlChangedHandler = (sender, args) => { hitSounds.PlayCritSounds = toggleCritSounds.Value; };
-            tileToggles.Add(toggleCritSounds);
+            controlPage.Add(categorySounds);
 
-            TerminalOnOffButton toggleKillSounds = new TerminalOnOffButton()
+            ControlTile fxListHitTile = new ControlTile();
             {
-                Name = "Play KillSounds",
-                CustomValueGetter = () => hitSounds.PlayKillSounds,
+                TerminalList<string> fxList_Hit = new TerminalList<string>
+                {
+                    Name = "Hit Sound",
+                    ToolTip = "Sound to play on hit.",
+                };
+                foreach (var value in HitSounds.I.HitSoundEffects.Keys)
+                    fxList_Hit.List.Add(value, value);
+                fxList_Hit.List.SetSelection(0);
+                fxList_Hit.ControlChanged += (sender, args) => { hitSounds.CurrentHitSound = fxList_Hit.Value.AssocObject; };
 
-            };
-            toggleKillSounds.ControlChanged += (sender, args) => { hitSounds.PlayKillSounds = toggleKillSounds.Value; };
-            tileToggles.Add(toggleKillSounds);
+                fxListHitTile.Add(fxList_Hit);
+            }
+            categorySounds.Add(fxListHitTile);
 
-            TerminalSlider sliderIntervalSounds = new TerminalSlider()
+
+            ControlTile fxListCritTile = new ControlTile();
             {
-                Name = "Interval Between Sounds",
-                ToolTip = "Ticks (1/60s)",
-                CustomValueGetter = () => hitSounds.IntervalBetweenSounds,
-                Min = 0,
-                Max = 60,
-            };
-            sliderIntervalSounds.ControlChanged += (sender, args) => { hitSounds.IntervalBetweenSounds = (int)sliderIntervalSounds.Value; sliderIntervalSounds.ValueText = hitSounds.IntervalBetweenSounds.ToString(); };
-            tileSliders.Add(sliderIntervalSounds);
+                TerminalList<string> fxList_Crit = new TerminalList<string>
+                {
+                    Name = "Crit Sound",
+                    ToolTip = "Sound to play on crit.",
+                };
+                foreach (var value in HitSounds.I.CritSoundEffects.Keys)
+                    fxList_Crit.List.Add(value, value);
+                fxList_Crit.List.SetSelection(0);
+                fxList_Crit.ControlChanged += (sender, args) => { hitSounds.CurrentCritSound = fxList_Crit.Value.AssocObject; };
 
-            TerminalSlider sliderMinDamage = new TerminalSlider()
+                fxListCritTile.Add(fxList_Crit);
+            }
+            categorySounds.Add(fxListCritTile);
+
+
+            ControlTile fxListKillTile = new ControlTile();
             {
-                Name = "Minimum Hit Damage",
-                ToolTip = "Counted per-block per-hit",
-                CustomValueGetter = () => hitSounds.MinDamageToPlay,
-                Min = 0,
-                Max = 16501,
-            };
-            sliderMinDamage.ControlChanged += (sender, args) => { hitSounds.MinDamageToPlay = (int)sliderMinDamage.Value; sliderMinDamage.ValueText = hitSounds.MinDamageToPlay.ToString(); };
-            tileSliders.Add(sliderMinDamage);
+                TerminalList<string> fxList_Kill = new TerminalList<string>
+                {
+                    Name = "Kill Sound",
+                    ToolTip = "Sound to play on kill.",
+                };
+                foreach (var value in HitSounds.I.KillSoundEffects.Keys)
+                    fxList_Kill.List.Add(value, value);
+                fxList_Kill.List.SetSelection(0);
+                fxList_Kill.ControlChanged += (sender, args) => { hitSounds.CurrentKillSound = fxList_Kill.Value.AssocObject; };
+
+                fxListKillTile.Add(fxList_Kill);
+            }
+            categorySounds.Add(fxListKillTile);
         }
     }
 }

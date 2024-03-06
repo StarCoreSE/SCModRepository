@@ -10,34 +10,39 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
 {
     internal class HitSounds_TerminalActions
     {
-        List<IMyConveyorSorter> validSorterWeapons = new List<IMyConveyorSorter>();
+        HashSet<string> validSorterWeapons = new HashSet<string>();
 
-        public void CreateTerminalActions(WcApi wcApi)
+        public bool ShouldPlayBlockSounds(IMyConveyorSorter block)
         {
-            var SoundToggle = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlOnOffSwitch, IMyConveyorSorter>("HitSounds_HitSoundEnabled");
-            SoundToggle.Title = MyStringId.GetOrCompute("HitSoundEnabled");
-            SoundToggle.Tooltip = MyStringId.GetOrCompute("Toggles whether this weapon should have hit sounds.");
+            return validSorterWeapons.Contains(block.BlockDefinition.SubtypeId);
+        }
+
+        public void CreateTerminalControls(WcApi wcApi)
+        {
+            var SoundToggle = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlOnOffSwitch, IMyConveyorSorter>("HS_HitSoundEnabled");
+            SoundToggle.Title = MyStringId.GetOrCompute("Subtype Hit Sounds");
+            SoundToggle.Tooltip = MyStringId.GetOrCompute("Toggles whether this weapon TYPE should have hit sounds.");
             SoundToggle.SupportsMultipleBlocks = true; // wether this control should be visible when multiple blocks are selected (as long as they all have this control).
                                                        // callbacks to determine if the control should be visible or not-grayed-out(Enabled) depending on whatever custom condition you want, given a block instance.
                                                        // optional, they both default to true.
 
-            //SoundToggle.Visible = (block) => wcApi.HasCoreWeapon((MyEntity) block);
+            SoundToggle.Visible = (block) => wcApi?.HasCoreWeapon(block as MyEntity) ?? false;
             SoundToggle.OnText = MySpaceTexts.SwitchText_On;
             SoundToggle.OffText = MySpaceTexts.SwitchText_Off;
-            SoundToggle.Getter = (block) => validSorterWeapons.Contains((IMyConveyorSorter) block);
+            SoundToggle.Getter = (block) => validSorterWeapons.Contains(block.BlockDefinition.SubtypeId);
             SoundToggle.Setter = (block, value) =>
             {
-                bool hasBlock = validSorterWeapons.Contains((IMyConveyorSorter) block);
+                bool hasBlock = validSorterWeapons.Contains(block.BlockDefinition.SubtypeId);
                 if (value && !hasBlock)
                 {
-                    validSorterWeapons.Add((IMyConveyorSorter) block);
+                    validSorterWeapons.Add(block.BlockDefinition.SubtypeId);
                 }
                 else if (hasBlock)
                 {
-                    validSorterWeapons.Remove((IMyConveyorSorter) block);
+                    validSorterWeapons.Remove(block.BlockDefinition.SubtypeId);
                 }
             };
-
+            
             MyAPIGateway.TerminalControls.AddControl<IMyConveyorSorter>(SoundToggle);
         }
     }
