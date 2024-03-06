@@ -3,7 +3,7 @@ name: "Upload SC_HitSounds"
 on:
   push:
     paths:
-      - "Utility Mods/Stable/Anomaly_Solaris_Hypernautics/**"
+      - "Utility Mods/Stable/SC_HitSounds/**"
 
 jobs:
   upload:
