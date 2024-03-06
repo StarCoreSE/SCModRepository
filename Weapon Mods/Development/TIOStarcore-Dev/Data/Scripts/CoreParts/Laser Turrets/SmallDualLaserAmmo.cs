@@ -208,7 +208,7 @@ namespace Scripts
                 VirtualBeams = false, // Only one hot beam, but with the effectiveness of the virtual beams combined (better performace)
                 ConvergeBeams = false, // When using virtual beams this option visually converges the beams to the location of the real beam.
                 RotateRealBeam = false, // The real (hot beam) is rotated between all virtual beams, instead of centered between them.
-                OneParticle = true, // Only spawn one particle hit per beam weapon.
+                OneParticle = false, // Only spawn one particle hit per beam weapon.
             },
             Trajectory = new TrajectoryDef
             {
@@ -270,16 +270,16 @@ namespace Scripts
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "",
+                        Name = "LoopedSmallLaserHitEffect",
                         ApplyToShield = true,
                         //shrinkbydistance = false, obselete
                         Color = Color(red: 1, green: 8f, blue: 10f, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
-                            Loop = false,
-                            Restart = false,
-                            MaxDistance = 5000,
+                            Loop = true,
+                            Restart = true,
+                            MaxDistance = 1200,
                             MaxDuration = 30,
                             Scale = 1,
                             HitPlayChance = 1f,

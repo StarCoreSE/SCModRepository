@@ -193,16 +193,16 @@ namespace Scripts {
                 {
                     Effect1 = new ParticleDef
                     {
-                        Name = "",
+                        Name = "X4_MuzzleFlash",
                         Color = Color(red: 0, green: 0, blue: 0, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
                             Loop = false, // Set this to the same as in the particle sbc!
                             Restart = false, // Whether to end a looping effect instantly when firing stops.
-                            MaxDistance = 6000, // Max distance at which this effect should be visible. NOTE: This will use whichever MaxDistance value is higher across Effect1 and Effect2!
-                            MaxDuration = 240, // How many ticks the effect should be ended after, if it's still running.
-                            Scale = 1.2f, // Scale of effect.
+                            MaxDistance = 8000, // Max distance at which this effect should be visible. NOTE: This will use whichever MaxDistance value is higher across Effect1 and Effect2!
+                            MaxDuration = 360, // How many ticks the effect should be ended after, if it's still running.
+                            Scale = 1f, // Scale of effect.
                         },
                     },
                     Effect2 = new ParticleDef

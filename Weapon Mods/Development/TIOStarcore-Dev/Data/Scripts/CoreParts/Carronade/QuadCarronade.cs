@@ -192,7 +192,7 @@ namespace Scripts {
                 {
                     Effect1 = new ParticleDef
                     {
-                        Name = "KillerB_Muzzle_Flash_LargeCalibre", // KillerB_Muzzle_Flash_LargeCalibre SubtypeId of muzzle particle effect.
+                        Name = "ShipwreckMuzzleSmoke2E", // KillerB_Muzzle_Flash_LargeCalibre SubtypeId of muzzle particle effect.
                         Color = Color(red: 0, green: 0, blue: 0, alpha: 1), // Deprecated, set color in particle sbc.
                         Offset = Vector(x: 0, y: 0, z: 0), // Offsets the effect from the muzzle empty.
                         Extras = new ParticleOptionDef
@@ -200,8 +200,8 @@ namespace Scripts {
                             Loop = false, // Set this to the same as in the particle sbc!
                             Restart = false, // Whether to end a looping effect instantly when firing stops.
                             MaxDistance = 4000, // Max distance at which this effect should be visible. NOTE: This will use whichever MaxDistance value is higher across Effect1 and Effect2!
-                            MaxDuration = 480, // How many ticks the effect should be ended after, if it's still running.
-                            Scale = 1.1f, // Scale of effect.
+                            MaxDuration = 600, // How many ticks the effect should be ended after, if it's still running.
+                            Scale = 1f, // Scale of effect.
                         },
                     },
                     Effect2 = new ParticleDef

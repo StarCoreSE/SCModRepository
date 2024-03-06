@@ -75,9 +75,9 @@ namespace Scripts
                 MaxIntegrity = 0f, // 0 = disabled, 1000 = any blocks with currently integrity above 1000 will be immune to damage.
                 DamageVoxels = false, // true = voxels are vulnerable to this weapon
                 SelfDamage = false, // true = allow self damage.
-                HealthHitModifier = 0.5f, // defaults to a value of 1, this setting modifies how much Health is subtracted from a projectile per hit (1 = per hit).
+                HealthHitModifier = 1f, // defaults to a value of 1, this setting modifies how much Health is subtracted from the projectile per hit (1 = per hit).
                 VoxelHitModifier = 1,
-                Characters = 7f,
+                Characters = 1f,
                 FallOff = new FallOffDef
                 {
                     Distance = 2200, // Distance at which max damage begins falling off.
@@ -208,7 +208,7 @@ namespace Scripts
                 VirtualBeams = false, // Only one hot beam, but with the effectiveness of the virtual beams combined (better performace)
                 ConvergeBeams = false, // When using virtual beams this option visually converges the beams to the location of the real beam.
                 RotateRealBeam = false, // The real (hot beam) is rotated between all virtual beams, instead of centered between them.
-                OneParticle = true, // Only spawn one particle hit per beam weapon.
+                OneParticle = false, // Only spawn one particle hit per beam weapon.
             },
             Trajectory = new TrajectoryDef
             {
@@ -270,7 +270,7 @@ namespace Scripts
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "",
+                        Name = "PulseSmallLaserHitEffect",
                         ApplyToShield = true,
                         //shrinkbydistance = false, obselete
                         Color = Color(red: 1, green: 8f, blue: 10f, alpha: 1),
@@ -278,9 +278,9 @@ namespace Scripts
                         Extras = new ParticleOptionDef
                         {
                             Loop = false,
-                            Restart = false,
-                            MaxDistance = 5000,
-                            MaxDuration = 30,
+                            Restart = true,
+                            MaxDistance = 2000,
+                            MaxDuration = 120,
                             Scale = 1,
                             HitPlayChance = 1f,
                         },
