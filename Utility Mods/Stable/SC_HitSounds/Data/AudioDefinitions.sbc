@@ -91,7 +91,7 @@
 			</Id>
 			<Category>HUD</Category>
 			<MaxDistance>2000</MaxDistance>
-			<Volume>0.3</Volume>
+			<Volume>0.5</Volume>
 			<Waves>
 				<Wave Type="D3">
 					<Start>Audio\Killsound_metalpipe.wav</Start>

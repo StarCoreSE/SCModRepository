@@ -14,20 +14,24 @@ using VRage.Game.ModAPI;
 
 namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
 {
-    [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
+    [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation, priority: int.MinValue)] // Attempt to load after Weaponcore because adding terminal actions is load-order dependent. :(
     public class HitSounds : MySessionComponentBase
     {
         public static HitSounds I = new HitSounds();
 
+        // If you want to add a new sound, just copy-paste a dictionary entry and fill in the values. The Script:tm: will handle the rest.
+        // - aristeas
+
         public Dictionary<string, MySoundPair> HitSoundEffects = new Dictionary<string, MySoundPair>()
         {
+         // ["VISIBLE NAME"] = new MySoundPair("SOUND_SUBTYPE_ID") //
             ["TF2 Hitsound"] = new MySoundPair("SC_HitSound_TF2"),
             ["COD Hitsound"] = new MySoundPair("SC_HitSound_COD"),
         };
 
         public Dictionary<string, MySoundPair> CritSoundEffects = new Dictionary<string, MySoundPair>()
         {
-            ["TF2 CRITICAL HIT"] = new MySoundPair("SC_CritSound_TF2"),
+            ["TF2 Crit Sound"] = new MySoundPair("SC_CritSound_TF2"),
         };
 
         public Dictionary<string, MySoundPair> KillSoundEffects = new Dictionary<string, MySoundPair>() // Maybe-Todo: Kill sound for everyone
@@ -41,20 +45,10 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
 
 
 
-        internal bool ForceHitSounds = false; // TODO: Save settings
-        internal bool PlayCritSounds = true;
-        internal bool PlayKillSounds = true;
-        internal int IntervalBetweenSounds = 4; // Ticks
-        internal int MinDamageToPlay = 100;
-
-        WcApi wAPI;
-        HitSounds_TerminalActions terminalActions = new HitSounds_TerminalActions();
+        internal WcApi wAPI;
+        internal HitSounds_Settings Settings = new HitSounds_Settings();
 
         MyCharacterSoundComponent SoundEmitter = null;
-
-        public string CurrentHitSound = "TF2 Hitsound";
-        public string CurrentCritSound = "TF2 CRITICAL HIT";
-        public string CurrentKillSound = "TF2 Killsound";
 
         int Ticks = 0;
         int LastSoundTick = 0;
@@ -69,18 +63,20 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
 
             wAPI = new WcApi();
 
-            HitSounds_Settings.InitSettings(ModContext, this);
+            Settings.InitSettings(ModContext);
         }
 
         protected override void UnloadData()
         {
+            if (!MyAPIGateway.Utilities.IsDedicated)
+                Settings.StoreSettings();
             I = null;
             //damageHandlerHelper.RegisterForDamage(modId, EventType.Unregister);
         }
 
         public override void BeforeStart()
         {
-            wAPI.Load(() => terminalActions.CreateTerminalControls(wAPI));
+            wAPI.Load(() => HitSounds_TerminalActions.CreateTerminalControls(wAPI));
             MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0, OnDamageEvent);
         }
 
@@ -99,7 +95,7 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
 
         public void OnDamageEvent(object targetObj, ref MyDamageInformation info)
         {
-            if (!(ForceHitSounds || PlayCritSounds || PlayKillSounds))
+            if (!(Settings.ForceHitSounds || Settings.PlayCritSounds || Settings.PlayKillSounds))
                 return;
 
             // I wish I could use pattern matching :(
@@ -112,22 +108,22 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
             if (!attackerWeapon.CubeGrid.IsInSameLogicalGroupAs((MyAPIGateway.Session.Player?.Controller?.ControlledEntity as IMyCubeBlock)?.CubeGrid))
                 return;
 
-            if (PlayKillSounds && target.FatBlock is IMyCockpit && (target.Integrity - info.Amount <= 0)) // Kill sound (cockpit kill)
+            if (Settings.PlayKillSounds && target.FatBlock is IMyCockpit && (target.Integrity - info.Amount <= 0)) // Kill sound (cockpit kill)
             {
-                SoundEmitter?.PlayActionSound(KillSoundEffects[CurrentKillSound]);
+                SoundEmitter?.PlayActionSound(KillSoundEffects[Settings.CurrentKillSound]);
             }
 
-            if (LastSoundTick + IntervalBetweenSounds >= Ticks)
+            if (LastSoundTick + Settings.IntervalBetweenSounds >= Ticks)
                 return;
 
-            if (PlayCritSounds && target.FatBlock is IMyReactor && (target.Integrity - info.Amount <= 0)) // Crit sound (reactor kill)
+            if (Settings.PlayCritSounds && target.FatBlock is IMyReactor && (target.Integrity - info.Amount <= 0)) // Crit sound (reactor kill)
             {
-                SoundEmitter?.PlayActionSound(CritSoundEffects[CurrentCritSound]);
+                SoundEmitter?.PlayActionSound(CritSoundEffects[Settings.CurrentCritSound]);
             }
 
-            if ((ForceHitSounds || terminalActions.ShouldPlayBlockSounds(attackerWeapon)) && info.Amount >= MinDamageToPlay) // Hit sound
+            if ((Settings.ForceHitSounds || HitSounds_TerminalActions.ShouldPlayBlockSounds(attackerWeapon)) && info.Amount >= Settings.MinDamageToPlay) // Hit sound
             {
-                SoundEmitter?.PlayActionSound(HitSoundEffects[CurrentHitSound]);
+                SoundEmitter?.PlayActionSound(HitSoundEffects[Settings.CurrentHitSound]);
             }
 
             LastSoundTick = Ticks;
