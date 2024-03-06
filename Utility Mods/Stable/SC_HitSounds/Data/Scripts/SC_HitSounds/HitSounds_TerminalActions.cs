@@ -10,14 +10,14 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
 {
     internal class HitSounds_TerminalActions
     {
-        HashSet<string> validSorterWeapons = new HashSet<string>();
+        static HashSet<string> validSorterWeapons => HitSounds.I.Settings.validSorterWeapons;
 
-        public bool ShouldPlayBlockSounds(IMyConveyorSorter block)
+        public static bool ShouldPlayBlockSounds(IMyConveyorSorter block)
         {
             return validSorterWeapons.Contains(block.BlockDefinition.SubtypeId);
         }
 
-        public void CreateTerminalControls(WcApi wcApi)
+        public static void CreateTerminalControls(WcApi wcApi)
         {
             var SoundToggle = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlOnOffSwitch, IMyConveyorSorter>("HS_HitSoundEnabled");
             SoundToggle.Title = MyStringId.GetOrCompute("Subtype Hit Sounds");
