@@ -1443,7 +1443,7 @@
 			  <DistantSound DistanceCrossfade = "50" Distance = "1000" Sound = "XPulseLaser_ShotD2" />
 
 		  </DistantSounds>
-		  <Volume>6</Volume>
+		  <Volume>10</Volume>
 		  <PitchVariation>60</PitchVariation>
 		  <Waves>
 			  <Wave Type="D3">
@@ -1459,7 +1459,7 @@
 		  </Id>
 		  <Category>SHOT</Category>
 		  <MaxDistance>3200</MaxDistance>
-		  <Volume>4</Volume>
+		  <Volume>7</Volume>
 		  <PitchVariation>60</PitchVariation>
 		  <Waves>
 			  <Wave Type="D3">
@@ -1474,7 +1474,7 @@
 		  </Id>
 		  <Category>SHOT</Category>
 		  <MaxDistance>3200</MaxDistance>
-		  <Volume>2</Volume>
+		  <Volume>4</Volume>
 		  <PitchVariation>60</PitchVariation>
 		  <Waves>
 			  <Wave Type="D3">
