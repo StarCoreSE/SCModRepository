@@ -76,12 +76,18 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
 
         public override void BeforeStart()
         {
+            if (MyAPIGateway.Utilities.IsDedicated)
+                return;
+
             wAPI.Load(() => HitSounds_TerminalActions.CreateTerminalControls(wAPI));
             MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0, OnDamageEvent);
         }
 
         public override void UpdateAfterSimulation()
         {
+            if (MyAPIGateway.Utilities.IsDedicated)
+                return;
+
             if (SoundEmitter == null && MyAPIGateway.Session.Player != null)
             {
                 SoundEmitter = MyAPIGateway.Session.Player.Character?.Components.Get<MyCharacterSoundComponent>();
