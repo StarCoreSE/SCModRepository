@@ -8,6 +8,7 @@
 bin/**
 .vs/**
 obj/**
+Properies/**
 *.csproj.nuget.dgspec.json
 *.assets.json
 *.nuget.cache
