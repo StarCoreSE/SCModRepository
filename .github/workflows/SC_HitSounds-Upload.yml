@@ -14,7 +14,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 3173935498
-          path: "Utility Mods/Stable/Anomaly_Solaris_Hypernautics"
+          path: "Utility Mods/Stable/SC_HitSounds"
           changelog: ${{ github.event.head_commit.message }}           
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}
