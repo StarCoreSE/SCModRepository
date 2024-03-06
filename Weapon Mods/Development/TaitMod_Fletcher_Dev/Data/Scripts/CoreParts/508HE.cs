@@ -59,8 +59,8 @@ namespace Scripts
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
                 AmmoRound = "Shell508HEShrap", // AmmoRound field of the ammo to spawn.
-                Fragments = 30, // Number of projectiles to spawn.
-                Degrees = 175, // Cone in which to randomise direction of spawned projectiles.
+                Fragments = 90, // Number of projectiles to spawn.
+                Degrees = 360, // Cone in which to randomise direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = true, // fragments will not inherit velocity from parent.
                 Offset = 0f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards).
@@ -448,7 +448,7 @@ namespace Scripts
                 FallOff = new FallOffDef
                 {
                     Distance = 0f, // Distance at which damage begins falling off.
-                    MinMultipler = -1f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
+                    MinMultipler = 0f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
                 },
                 Grids = new GridSizeDef
                 {
@@ -458,13 +458,13 @@ namespace Scripts
                 Armor = new ArmorDef
                 {
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
-                    Light = 0.75f, // Multiplier for damage against light armor.
+                    Light = 2f, // Multiplier for damage against light armor.
                     Heavy = -1f, // Multiplier for damage against heavy armor.
-                    NonArmor = 1.2f, // Multiplier for damage against every else.
+                    NonArmor = 2f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 3f, // Multiplier for damage against shields.
+                    Modifier = 4f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -511,10 +511,10 @@ namespace Scripts
                 },
                 EndOfLife = new EndOfLifeDef
                 {
-                    Enable = false,
-                    Radius = 20f,
-                    Damage = 0.1f,
-                    Depth = 0f,
+                    Enable = true,
+                    Radius = 4f,
+                    Damage = 10000f,
+                    Depth = 2f,
                     MaxAbsorb = 0f,
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
@@ -527,8 +527,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 0.5f,
-                    CustomParticle = "SmallArtExplosionLight",
-                    CustomSound = "ArcWepSmallMissileExpl",
+                    CustomParticle = "",
+                    CustomSound = "",
                 },
             },
             Ewar = new EwarDef
@@ -600,7 +600,7 @@ namespace Scripts
                 MaxLifeTime = 400, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 650, // voxel phasing if you go above 5100
-                MaxTrajectory = 100f, // Max Distance the projectile or beam can Travel.
+                MaxTrajectory = 250f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
@@ -633,7 +633,7 @@ namespace Scripts
             },
             AmmoGraphics = new GraphicDef
             {
-                ModelName = "\\Models\\152mmMLE1930_ShellFired_Small.mwm",
+                ModelName = "",
                 VisualProbability = 1f,
                 ShieldHitDraw = true,
                 Particles = new AmmoParticleDef
@@ -696,9 +696,9 @@ namespace Scripts
                     WidthVariance = Random(start: 0f, end: 0.1f), // adds random value to default width (negatives shrinks width)
                     Tracer = new TracerBaseDef
                     {
-                        Enable = true,
+                        Enable = false,
                         Length = 5f,
-                        Width = 0.1f,
+                        Width = 5f,
                         Color = Color(red: 40.80f, green: 8.20f, blue: 1.6f, alpha: 0.3f),
                     },
                     Trail = new TrailDef
@@ -708,7 +708,7 @@ namespace Scripts
                         DecayTime = 15,
                         Color = Color(red: 2.585f, green: 2.062f, blue: 2.01f, alpha: 0.3f),
                         Back = false,
-                        CustomWidth = 0.1f,
+                        CustomWidth =5f,
                         UseWidthVariance = false,
                         UseColorFade = true,
                     },
