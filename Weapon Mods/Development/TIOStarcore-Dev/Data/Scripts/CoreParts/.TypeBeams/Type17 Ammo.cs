@@ -37,7 +37,7 @@ namespace Scripts
             Health = 0, // 0 = disabled, otherwise how much damage it can take from other trajectiles before dying.
             BackKickForce = 0f,
             DecayPerShot = 0,
-            EnergyMagazineSize = 30,
+            EnergyMagazineSize = 45,
             HardPointUsable = true, // set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
             Shape = new ShapeDef //defines the collision shape of projectile, defaults line and visual Line Length if set to 0
             {
