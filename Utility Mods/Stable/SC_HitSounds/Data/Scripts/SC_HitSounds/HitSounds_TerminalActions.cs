@@ -19,31 +19,33 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
 
         public static void CreateTerminalControls(WcApi wcApi)
         {
-            var SoundToggle = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlOnOffSwitch, IMyConveyorSorter>("HS_HitSoundEnabled");
-            SoundToggle.Title = MyStringId.GetOrCompute("Subtype Hit Sounds");
-            SoundToggle.Tooltip = MyStringId.GetOrCompute("Toggles whether this weapon TYPE should have hit sounds.");
-            SoundToggle.SupportsMultipleBlocks = true; // wether this control should be visible when multiple blocks are selected (as long as they all have this control).
-                                                       // callbacks to determine if the control should be visible or not-grayed-out(Enabled) depending on whatever custom condition you want, given a block instance.
-                                                       // optional, they both default to true.
+            // TODO: FIX TERMINAL CONTROLS MCFUCKING DISSAPEARING
 
-            SoundToggle.Visible = (block) => wcApi?.HasCoreWeapon(block as MyEntity) ?? false;
-            SoundToggle.OnText = MySpaceTexts.SwitchText_On;
-            SoundToggle.OffText = MySpaceTexts.SwitchText_Off;
-            SoundToggle.Getter = (block) => validSorterWeapons.Contains(block.BlockDefinition.SubtypeId);
-            SoundToggle.Setter = (block, value) =>
-            {
-                bool hasBlock = validSorterWeapons.Contains(block.BlockDefinition.SubtypeId);
-                if (value && !hasBlock)
-                {
-                    validSorterWeapons.Add(block.BlockDefinition.SubtypeId);
-                }
-                else if (hasBlock)
-                {
-                    validSorterWeapons.Remove(block.BlockDefinition.SubtypeId);
-                }
-            };
-            
-            MyAPIGateway.TerminalControls.AddControl<IMyConveyorSorter>(SoundToggle);
+            //var SoundToggle = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlOnOffSwitch, IMyConveyorSorter>("HS_HitSoundEnabled");
+            //SoundToggle.Title = MyStringId.GetOrCompute("Subtype Hit Sounds");
+            //SoundToggle.Tooltip = MyStringId.GetOrCompute("Toggles whether this weapon TYPE should have hit sounds.");
+            //SoundToggle.SupportsMultipleBlocks = true; // wether this control should be visible when multiple blocks are selected (as long as they all have this control).
+            //                                           // callbacks to determine if the control should be visible or not-grayed-out(Enabled) depending on whatever custom condition you want, given a block instance.
+            //                                           // optional, they both default to true.
+            //
+            //SoundToggle.Visible = (block) => wcApi?.HasCoreWeapon(block as MyEntity) ?? false;
+            //SoundToggle.OnText = MySpaceTexts.SwitchText_On;
+            //SoundToggle.OffText = MySpaceTexts.SwitchText_Off;
+            //SoundToggle.Getter = (block) => validSorterWeapons.Contains(block.BlockDefinition.SubtypeId);
+            //SoundToggle.Setter = (block, value) =>
+            //{
+            //    bool hasBlock = validSorterWeapons.Contains(block.BlockDefinition.SubtypeId);
+            //    if (value && !hasBlock)
+            //    {
+            //        validSorterWeapons.Add(block.BlockDefinition.SubtypeId);
+            //    }
+            //    else if (hasBlock)
+            //    {
+            //        validSorterWeapons.Remove(block.BlockDefinition.SubtypeId);
+            //    }
+            //};
+            //
+            //MyAPIGateway.TerminalControls.AddControl<IMyConveyorSorter>(SoundToggle);
         }
     }
 }
