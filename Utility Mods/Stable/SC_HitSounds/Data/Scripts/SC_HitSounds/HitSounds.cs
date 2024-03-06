@@ -31,7 +31,7 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
 
         public Dictionary<string, MySoundPair> CritSoundEffects = new Dictionary<string, MySoundPair>()
         {
-            ["TF2 Crit Sound"] = new MySoundPair("SC_CritSound_TF2"),
+            ["TF2 Critsound"] = new MySoundPair("SC_CritSound_TF2"),
         };
 
         public Dictionary<string, MySoundPair> KillSoundEffects = new Dictionary<string, MySoundPair>() // Maybe-Todo: Kill sound for everyone

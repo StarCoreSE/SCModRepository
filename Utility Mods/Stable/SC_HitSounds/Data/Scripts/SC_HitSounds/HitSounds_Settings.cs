@@ -4,12 +4,14 @@ using RichHudFramework.UI;
 using RichHudFramework.UI.Client;
 using Sandbox;
 using Sandbox.ModAPI;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using VRage.Game.ModAPI;
 using VRage.Game.ModAPI.Ingame.Utilities;
+using VRage.Utils;
 
 namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
 {
@@ -24,9 +26,46 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
         public int IntervalBetweenSounds = 4; // Ticks
         public int MinDamageToPlay = 100;
 
-        public string CurrentHitSound = "TF2 Hitsound";
-        public string CurrentCritSound = "TF2 CRITICAL HIT";
-        public string CurrentKillSound = "TF2 Killsound";
+        public string CurrentHitSound
+        {
+            get
+            {
+                return currentHitSound;
+            }
+            set
+            {
+                if (HitSounds.I.HitSoundEffects.ContainsKey(value))
+                    currentHitSound = value;
+            }
+        }
+        public string CurrentCritSound
+        {
+            get
+            {
+                return currentCritSound;
+            }
+            set
+            {
+                if (HitSounds.I.CritSoundEffects.ContainsKey(value))
+                    currentCritSound = value;
+            }
+        }
+        public string CurrentKillSound
+        {
+            get
+            {
+                return currentKillSound;
+            }
+            set
+            {
+                if (HitSounds.I.KillSoundEffects.ContainsKey(value))
+                    currentKillSound = value;
+            }
+        }
+
+        private string currentHitSound = "TF2 Hitsound";
+        private string currentCritSound = "TF2 Critsound";
+        private string currentKillSound = "TF2 Killsound";
 
         public HashSet<string> validSorterWeapons = new HashSet<string>();
 
@@ -53,30 +92,43 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
                 !ini.TryParse(ReadFileSafe(filename), out result))
             {
                 // Load default settings
-                ForceHitSounds = false;
-                PlayCritSounds = true;
-                PlayKillSounds = true;
-                IntervalBetweenSounds = 4;
-                MinDamageToPlay = 100;
-
-                CurrentHitSound = "TF2 Hitsound";
-                CurrentCritSound = "TF2 CRITICAL HIT";
-                CurrentKillSound = "TF2 Killsound";
+                LoadDefaults();
                 return;
             }
 
-            ForceHitSounds = ini.Get("hitsounds", "forceHitSounds").ToBoolean();
-            PlayCritSounds = ini.Get("hitsounds", "playCritSounds").ToBoolean();
-            PlayKillSounds = ini.Get("hitsounds", "playKillSounds").ToBoolean();
+            try
+            {
+                ForceHitSounds = ini.Get("hitsounds", "forceHitSounds").ToBoolean();
+                PlayCritSounds = ini.Get("hitsounds", "playCritSounds").ToBoolean();
+                PlayKillSounds = ini.Get("hitsounds", "playKillSounds").ToBoolean();
 
-            IntervalBetweenSounds = ini.Get("hitsounds", "intervalBetweenSounds").ToInt32();
-            MinDamageToPlay = ini.Get("hitsounds", "minDamageToPlay").ToInt32();
+                IntervalBetweenSounds = ini.Get("hitsounds", "intervalBetweenSounds").ToInt32();
+                MinDamageToPlay = ini.Get("hitsounds", "minDamageToPlay").ToInt32();
 
-            CurrentHitSound = ini.Get("hitsounds", "currentHitSound").ToString();
-            CurrentCritSound = ini.Get("hitsounds", "currentCritSound").ToString();
-            CurrentKillSound = ini.Get("hitsounds", "currentKillSound").ToString();
+                CurrentHitSound = ini.Get("hitsounds", "currentHitSound").ToString();
+                CurrentCritSound = ini.Get("hitsounds", "currentCritSound").ToString();
+                CurrentKillSound = ini.Get("hitsounds", "currentKillSound").ToString();
 
-            validSorterWeapons = ini.Get("allowedWeaponSubtypes", "subtypes").ToString().Split(',').ToHashSet();
+                validSorterWeapons = ini.Get("allowedWeaponSubtypes", "subtypes").ToString().Split(',').ToHashSet();
+            }
+            catch (Exception ex)
+            {
+                MyLog.Default.WriteLineAndConsole("Error parsing HitSounds_Settings!\n" + ex);
+                LoadDefaults();
+            }
+        }
+
+        private void LoadDefaults()
+        {
+            ForceHitSounds = false;
+            PlayCritSounds = true;
+            PlayKillSounds = true;
+            IntervalBetweenSounds = 4;
+            MinDamageToPlay = 100;
+
+            CurrentHitSound = "TF2 Hitsound";
+            CurrentCritSound = "TF2 Critsound";
+            CurrentKillSound = "TF2 Killsound";
         }
 
         private static string ReadFileSafe(string fileName)
@@ -91,23 +143,38 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
         {
             MyAPIGateway.Utilities.DeleteFileInGlobalStorage(filename);
             MyIni ini = new MyIni();
+            ini.AddSection("HitSounds");
+            ini.SetSectionComment("HitSounds", "HitSounds Config\n - by Aristeas\nSettings are read on session load, and saved on session unload.\nInvalid values are set to default.\n");
 
             ini.Set("hitsounds", "forceHitSounds", ForceHitSounds);
+            ini.SetComment("hitsounds", "forceHitSounds", "If true, play hit sounds on all weapons.");
+
             ini.Set("hitsounds", "playCritSounds", PlayCritSounds);
+            ini.SetComment("hitsounds", "playCritSounds", "If false, disable crit (reactor destroy) sounds.");
+
             ini.Set("hitsounds", "playKillSounds", PlayKillSounds);
+            ini.SetComment("hitsounds", "playKillSounds", "If false, disable kill (cockpit destroy) sounds.");
 
             ini.Set("hitsounds", "intervalBetweenSounds", IntervalBetweenSounds);
+            ini.SetComment("hitsounds", "intervalBetweenSounds", "Minimum interval between sounds, in gameticks (1/60s)");
+
             ini.Set("hitsounds", "minDamageToPlay", MinDamageToPlay);
+            ini.SetComment("hitsounds", "minDamageToPlay", "Minimum single-hit damage to trigger a sound.");
 
-            ini.Set("hitsounds", "currentHitSound", CurrentHitSound);
-            ini.Set("hitsounds", "currentCritSound", CurrentCritSound);
-            ini.Set("hitsounds", "currentKillSound", CurrentKillSound);
 
-            StringBuilder builder = new StringBuilder();
-            foreach (var type in validSorterWeapons)
-                builder.Append(type).Append(',');
 
-            ini.Set("allowedWeaponSubtypes", "subtypes", builder.ToString().TrimEnd(','));
+            ini.Set("HitSoundSelection", "currentHitSound", CurrentHitSound);
+            ini.SetComment("HitSoundSelection", "currentHitSound", "Available sounds: " + string.Join(", ", HitSounds.I.HitSoundEffects.Keys));
+
+            ini.Set("HitSoundSelection", "currentCritSound", CurrentCritSound);
+            ini.SetComment("HitSoundSelection", "currentCritSound", "Available sounds: " + string.Join(", ", HitSounds.I.CritSoundEffects.Keys));
+
+            ini.Set("HitSoundSelection", "currentKillSound", CurrentKillSound);
+            ini.SetComment("HitSoundSelection", "currentKillSound", "Available sounds: " + string.Join(", ", HitSounds.I.KillSoundEffects.Keys));
+
+
+
+            ini.Set("allowedWeaponSubtypes", "subtypes", string.Join(",", validSorterWeapons));
 
             TextWriter writer = MyAPIGateway.Utilities.WriteFileInGlobalStorage(filename);
             writer.Write(ini.ToString());
