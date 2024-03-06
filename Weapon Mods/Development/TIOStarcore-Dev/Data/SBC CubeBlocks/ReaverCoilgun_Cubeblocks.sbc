@@ -5,7 +5,7 @@
         <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
             <Id>
                 <TypeId>ConveyorSorter</TypeId>
-                <SubtypeId>Reaver_Coilgun_Block</SubtypeId>
+                <SubtypeId>Reaver_Coilgun</SubtypeId>
             </Id>
             <DisplayName>Reaver Light Coilgun Battery</DisplayName>
             <Description>
