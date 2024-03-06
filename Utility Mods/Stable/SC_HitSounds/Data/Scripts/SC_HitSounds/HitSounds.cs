@@ -104,6 +104,7 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
             if (!(Settings.ForceHitSounds || Settings.PlayCritSounds || Settings.PlayKillSounds))
                 return;
 
+
             // I wish I could use pattern matching :(
             IMyConveyorSorter attackerWeapon = MyAPIGateway.Entities.GetEntityById(info.AttackerId) as IMyConveyorSorter; // info.AttackerId is an EntityId
             IMySlimBlock target = targetObj as IMySlimBlock;
@@ -111,7 +112,8 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
                 return;
 
             // Complexity is basically just subgrid checking; only trigger hits for weapons on your own grid group.
-            if (!attackerWeapon.CubeGrid.IsInSameLogicalGroupAs((MyAPIGateway.Session.Player?.Controller?.ControlledEntity as IMyCubeBlock)?.CubeGrid))
+            var myGrid = (MyAPIGateway.Session.Player?.Controller?.ControlledEntity as IMyCubeBlock)?.CubeGrid;
+            if (myGrid == null || !attackerWeapon.CubeGrid.IsInSameLogicalGroupAs(myGrid))
                 return;
 
             if (Settings.PlayKillSounds && target.FatBlock is IMyCockpit && (target.Integrity - info.Amount <= 0)) // Kill sound (cockpit kill)
