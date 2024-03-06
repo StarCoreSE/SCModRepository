@@ -879,7 +879,7 @@
 			  <DistantSound DistanceCrossfade="100" Distance="12000" Sound="508mmshotsound1" />
 		  </DistantSounds>
 		  <PitchVariation>1</PitchVariation>
-		  <Volume>3</Volume>
+		  <Volume>1</Volume>
 		  <Waves>
 			  <Wave Type="D3">
 				  <Start>Audio\20InchPollutedNoiseBase.wav</Start>
@@ -898,7 +898,7 @@
 		  <Category>SHOT</Category>
 		  <MaxDistance>12000</MaxDistance>
 		  <Pitch>0</Pitch>
-		  <Volume>10</Volume>
+		  <Volume>5</Volume>
 		  <PitchVariation>0</PitchVariation>
 		  <Waves>
 			  <Wave Type="D3">
