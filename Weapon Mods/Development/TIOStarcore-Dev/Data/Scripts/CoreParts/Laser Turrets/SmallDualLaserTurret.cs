@@ -124,7 +124,7 @@ namespace Scripts {
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
                     ReloadTime = 240, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 0, // Number of physical magazines to consume on reload.
-                    DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    DelayUntilFire = 10, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     HeatPerShot = 0, // Heat generated per shot.
                     MaxHeat = 500, // Max heat before weapon enters cooldown (70% of max heat).
                     Cooldown = .95f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
@@ -132,7 +132,7 @@ namespace Scripts {
                     DegradeRof = false, // Progressively lower rate of fire when over 80% heat threshold (80% of max heat).
                     ShotsInBurst = 0, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
                     DelayAfterBurst = 0, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    FireFull = false, // Whether the weapon should fire the full magazine (or the full burst instead if ShotsInBurst > 0), even if the target is lost or the player stops firing prematurely.
+                    FireFull = true, // Whether the weapon should fire the full magazine (or the full burst instead if ShotsInBurst > 0), even if the target is lost or the player stops firing prematurely.
                     GiveUpAfter = false, // Whether the weapon should drop its current target and reacquire a new target after finishing its magazine or burst.
                     BarrelSpinRate = 0, // Visual only, 0 disables and uses RateOfFire.
                     DeterministicSpin = false, // Spin barrel position will always be relative to initial / starting positions (spin will not be as smooth).
@@ -144,14 +144,14 @@ namespace Scripts {
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "", // Audio for warmup effect.
-                    FiringSound = "", // Audio for firing.
+                    FiringSound = "SmallTwinLaser_Unused", // Audio for firing.
                     FiringSoundPerShot = false, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "", // Sound SubtypeID, for when your Weapon is in a reloading state
                     NoAmmoSound = "",
                     HardPointRotationSound = "WepTurretGatlingRotate", // Audio played when turret is moving.
                     BarrelRotationSound = "WepShipGatlingRotation",
-                    FireSoundEndDelay = 120, // How long the firing audio should keep playing after firing stops. Measured in game ticks(6 = 100ms, 60 = 1 seconds, etc..).
-                    FireSoundNoBurst = true, // Don't stop firing sound from looping when delaying after burst.
+                    FireSoundEndDelay = 20, // How long the firing audio should keep playing after firing stops. Measured in game ticks(6 = 100ms, 60 = 1 seconds, etc..).
+                    FireSoundNoBurst = false, // Don't stop firing sound from looping when delaying after burst.
                 },
                 Graphics = new HardPointParticleDef
                 {
