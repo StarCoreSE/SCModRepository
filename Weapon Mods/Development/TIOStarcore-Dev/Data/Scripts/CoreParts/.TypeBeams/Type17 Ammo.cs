@@ -26,18 +26,18 @@ namespace Scripts
 {
     partial class Parts
     {
-        private AmmoDef SmallXPulseLaserTurretAmmo => new AmmoDef //Longest range, lowest dmg.
+        private AmmoDef ProtonTestAmmo => new AmmoDef //Longest range, lowest dmg.
         {
             AmmoMagazine = "Energy",
-            AmmoRound = "SmallXPulseLaserTurretAmmo",
+            AmmoRound = "Type17ProtonBeam",
             HybridRound = false, //AmmoMagazine based weapon with energy cost
-            EnergyCost = 0.09f, //132MW (((EnergyCost * DefaultDamage) * ShotsPerSecond) * BarrelsPerShot) * ShotsPerBarrel
-            BaseDamage = 2000f,
+            EnergyCost = 0.05f, //350MW (((EnergyCost * DefaultDamage) * ShotsPerSecond) * BarrelsPerShot) * ShotsPerBarrel
+            BaseDamage = 7000f,
             Mass = 0, // in kilograms
             Health = 0, // 0 = disabled, otherwise how much damage it can take from other trajectiles before dying.
             BackKickForce = 0f,
             DecayPerShot = 0,
-            EnergyMagazineSize = 40,
+            EnergyMagazineSize = 30,
             HardPointUsable = true, // set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
             Shape = new ShapeDef //defines the collision shape of projectile, defaults line and visual Line Length if set to 0
             {
@@ -75,13 +75,13 @@ namespace Scripts
                 MaxIntegrity = 0f, // 0 = disabled, 1000 = any blocks with currently integrity above 1000 will be immune to damage.
                 DamageVoxels = false, // true = voxels are vulnerable to this weapon
                 SelfDamage = false, // true = allow self damage.
-                HealthHitModifier = 0.5f, // defaults to a value of 1, this setting modifies how much Health is subtracted from a projectile per hit (1 = per hit).
-                VoxelHitModifier = 1,
-                Characters = 7f,
+                HealthHitModifier = 1f, // defaults to a value of 1, this setting modifies how much Health is subtracted from a projectile per hit (1 = per hit).
+                VoxelHitModifier = -1,
+                Characters = -1f,
                 FallOff = new FallOffDef
                 {
-                    Distance = 2200, // Distance at which max damage begins falling off.
-                    MinMultipler = 0.1f, // value from 0.0f to 1f where 0.1f would be a min damage of 10% of max damage.
+                    Distance = 2000, // Distance at which max damage begins falling off.
+                    MinMultipler = 0.33f, // value from 0.0f to 1f where 0.1f would be a min damage of 10% of max damage.
                 },
                 Grids = new GridSizeDef
                 {
@@ -99,7 +99,7 @@ namespace Scripts
                 {
                     Modifier = -1f, //Heavy laser type.
                     Type = Default,
-                    BypassModifier = -1f,
+                    BypassModifier = 1.05f,
                 },
                 DamageType = new DamageTypes
                 {
@@ -215,10 +215,10 @@ namespace Scripts
                 Guidance = None,
                 TargetLossDegree = 80f,
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                MaxLifeTime = 60, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                MaxLifeTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 AccelPerSec = 0f,
-                DesiredSpeed = 99999,
-                MaxTrajectory = 2200f,
+                DesiredSpeed = 0,
+                MaxTrajectory = 5000f,
                 //FieldTime was here, it's dead now is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed
@@ -310,11 +310,11 @@ namespace Scripts
                     Tracer = new TracerBaseDef
                     {
                         Enable = true,
-                        Length = 10f,
-                        Width = .4f,
-                        Color = Color(red: 12, green: 8f, blue: 8, alpha: 1f),
-                        VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
-                        VisualFadeEnd = 10, // How many ticks after fade began before it will be invisible.
+                        Length = 90f,
+                        Width = .3f,
+                        Color = Color(red: 8, green: 12f, blue: 8, alpha: 1f),
+                        VisualFadeStart = 20, // Number of ticks the weapon has been firing before projectiles begin to fade their color
+                        VisualFadeEnd = 20, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
                             "WeaponLaser",
                         },
@@ -325,10 +325,10 @@ namespace Scripts
                             Textures = new[] {
                                 "",
                             },
-                            SegmentLength = 25f, // Uses the values below.
+                            SegmentLength = 65f, // Uses the values below.
                             SegmentGap = 0, // Uses Tracer textures and values
                             Speed = 60f, // meters per second
-                            Color = Color(red: 10, green: 3, blue: 3, alpha: 0.5f),
+                            Color = Color(red: 3, green: 25, blue: 3, alpha: 0.75f),
                             WidthMultiplier = 1f,
                             Reverse = false,
                             UseLineVariance = true,
@@ -338,13 +338,13 @@ namespace Scripts
                     },
                     Trail = new TrailDef
                     {
-                        Enable = true,
+                        Enable = false,
                         Textures = new[] {
                             "WeaponLaser",
                         },
                         TextureMode = Normal,
-                        DecayTime = 4,
-                        Color = Color(red: 8f, green: 1f, blue: 1f, alpha: 0.4f),
+                        DecayTime = 15,
+                        Color = Color(red: 1f, green: 1f, blue: 8f, alpha: 0.33f),
                         Back = true,
                         CustomWidth = 0.6f,
                         UseWidthVariance = true,
@@ -382,6 +382,8 @@ namespace Scripts
                 }
             },
         };
+
+
 
 
     }

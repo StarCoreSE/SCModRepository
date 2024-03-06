@@ -12,7 +12,7 @@
             <ItemIds>
 				<string>ConveyorSorter/Priest_Block</string>
 				<string>ConveyorSorter/PriestReskin_Block</string>
-				<string>ConveyorSorter/APES_Block</string>
+				<string>ConveyorSorter/APE_Strong</string>
 				<string>ConveyorSorter/Type18_Artillery</string>
 				<string>ConveyorSorter/Type21_Artillery</string>
 				<string>ConveyorSorter/Type24_Artillery</string>
@@ -27,7 +27,7 @@
 				<string>ConveyorSorter/Fixed_Rockets</string>
 				<string>VindicatorKineticLance</string>
 				<string>ConveyorSorter/HadeanPlasmaBlastgun</string>
-				<string>ConveyorSorter/K_HSR_Utilities_Reactor_Gel_LG</string>
+				<!--<string>ConveyorSorter/K_HSR_Utilities_Reactor_Gel_LG</string>-->
 				<string>ConveyorSorter/HeavyCarronade_5x5_Turret</string>
 				<string>ConveyorSorter/X4_7x7_HeavyTurret</string>
 				<string>ConveyorSorter/UnguidedRocketTurret</string>
@@ -35,6 +35,9 @@
 				<string>ConveyorSorter/DualSnubLaserTurret</string>
 				<string>ConveyorSorter/DualPulseLaserTurret</string>
 				<string>ConveyorSorter/KreegMagnetarCannon</string>
+				<string>ConveyorSorter/Thagomizer</string>
+				<string>ConveyorSorter/Thagomizer_Angled</string>
+
 
             </ItemIds>
         </Category>
@@ -81,63 +84,13 @@
 							
 			</ItemIds>
 		</Category>-->
-	  
-	  <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
-		  <Id>
-			  <TypeId>GuiBlockCategoryDefinition</TypeId>
-			  <SubtypeId/>
-		  </Id>
-		  <DisplayName>DisplayName_Category_LargeBlocks</DisplayName>
-		  <Name>LargeBlocks</Name>
-		  <ItemIds>
-			  <string>ConveyorSorter/Thagomizer</string>
-		  </ItemIds>
-	  </Category>
-
-
-	  <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
-		  <Id>
-			  <TypeId>GuiBlockCategoryDefinition</TypeId>
-			  <SubtypeId/>
-		  </Id>
-		  <DisplayName>DisplayName_Category_ShipWeapons</DisplayName>
-		  <Name>Weapons</Name>
-		  <ItemIds>
-			  <string>ConveyorSorter/Thagomizer</string>
-		  </ItemIds>
-	  </Category>
-
-	  <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
-		  <Id>
-			  <TypeId>GuiBlockCategoryDefinition</TypeId>
-			  <SubtypeId/>
-		  </Id>
-		  <DisplayName>DisplayName_Category_LargeBlocks</DisplayName>
-		  <Name>LargeBlocks</Name>
-		  <ItemIds>
-			  <string>ConveyorSorter/Thagomizer_Angled</string>
-		  </ItemIds>
-	  </Category>
-
-
-	  <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
-		  <Id>
-			  <TypeId>GuiBlockCategoryDefinition</TypeId>
-			  <SubtypeId/>
-		  </Id>
-		  <DisplayName>DisplayName_Category_ShipWeapons</DisplayName>
-		  <Name>Weapons</Name>
-		  <ItemIds>
-			  <string>ConveyorSorter/Thagomizer_Angled</string>
-		  </ItemIds>
-	  </Category> 
 
 	</CategoryClasses>
  
 	<BlockVariantGroups>
 
-    Turret Variants
-	<!--	<BlockVariantGroup>
+    <!--Turret Variants
+		<BlockVariantGroup>
 			<Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="MyWeaponPack" />
 			<Icon>Textures\GUI\Icons\Mk1CannonMainScene.dds</Icon>
 			<DisplayName>Good Fucking Guns</DisplayName>
@@ -205,12 +158,13 @@
 
 		<BlockVariantGroup>
 			<Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="KREEG" />
-			<Icon>Textures\GUI\Icons\HSR\HSR_Magnus.dds</Icon>
+			<Icon>Textures\GUI\Icons\PrototypeSiegeArtillery.dds</Icon>
 			<DisplayName>Plasma Turrets</DisplayName>
 			<Description>Contains the Magnus, Demolisher, and Hadean Plasma Turrets</Description>
 			<Blocks>
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="KreegMagnetarCannon" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="X4_7x7_HeavyTurret" />
+				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="KreegMagnetarCannon" />
+
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HadeanPlasmaBlastgun" />
 			<!--		<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="VindicatorKineticLance" /> -->
 			</Blocks>
@@ -219,7 +173,7 @@
 
 	  <BlockVariantGroup>
 		<Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="MyRockets" />
-		<Icon>Textures\GUI\Icons\Peacemaker.dds</Icon>
+		<Icon>Textures\GUI\Icons\LightMissileLauncher.dds</Icon>
 		<DisplayName>Rockets and Torpedoes</DisplayName>
 		<Description>Contains the Spitfire, Hailfire, Devastator, Tiberias, and RLX</Description>
 		<Blocks>
@@ -234,7 +188,7 @@
 
 	  <BlockVariantGroup>
 		<Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Type_Artillery" />
-		<Icon>Textures\GUI\Icons\Mk1CannonMainScene.dds</Icon>
+		<Icon>Textures\GUI\Icons\AltType18.dds</Icon>
 		<DisplayName>Heavy Naval Artillery</DisplayName>
 		<Description>Contains the Mercury, Mars, and Jupiter Types</Description>
 		<Blocks>
