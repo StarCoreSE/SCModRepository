@@ -19,6 +19,8 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
 
         public static void CreateTerminalControls(WcApi wcApi)
         {
+            wcApi.RegisterTerminalControl("HS_HitSoundEnabled"); // CRINGE
+
             var SoundToggle = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlOnOffSwitch, IMyConveyorSorter>("HS_HitSoundEnabled");
             SoundToggle.Title = MyStringId.GetOrCompute("Subtype Hit Sounds");
             SoundToggle.Tooltip = MyStringId.GetOrCompute("Toggles whether this weapon TYPE should have hit sounds.");
