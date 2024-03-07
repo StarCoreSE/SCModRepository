@@ -7,7 +7,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>DrunkRocketTurret</SubtypeId>
 			</Id>
-			<DisplayName>LX 'Hailfire' Rocket Turret</DisplayName>
+			<DisplayName>EX 'Bonfire' Guided Rocket Turret</DisplayName>
 			<Description>[5km Targeting Range [400 m/s]]
               [Energy damage]
 			  [10 HP Guided Missiles]
@@ -38,6 +38,7 @@
 			
 			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 	  	  
       <ResourceSinkGroup>Defense</ResourceSinkGroup>
+	  <BuildTimeSeconds>160</BuildTimeSeconds>
       <InventoryMaxVolume>0.144</InventoryMaxVolume>
 	   <MirroringY>Z</MirroringY>
       <MirroringZ>Y</MirroringZ>
