@@ -671,10 +671,10 @@ namespace Klime.CTF
                                             disableGripRegen = false;  // Reset the flag
                                         }
 
-                                        var speenAcceleration = cockpit.CubeGrid.Physics.AngularAcceleration.Length();
+                                        //var speenAcceleration = cockpit.CubeGrid.Physics.AngularAcceleration.Length();
                                         var linearAcceleration = cockpit.CubeGrid.Physics.LinearAcceleration.Length();
                                         var funpolice = cockpit.CubeGrid.Physics.LinearVelocity.Length();
-                                        var totalAcceleration = speenAcceleration + linearAcceleration;
+                                        var totalAcceleration = /*speenAcceleration + */linearAcceleration;
 
                                         // Adjust grip strength regeneration based on acceleration
                                         float deltaV = totalAcceleration; //- subflag.lastTickAcceleration;
