@@ -35,6 +35,8 @@
 			</MountPoints>
 			<BuildTimeSeconds>120</BuildTimeSeconds>
 			<BlockPairName>20InchTwin</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
 		</Definition>
 	</CubeBlocks>
 </Definitions>
