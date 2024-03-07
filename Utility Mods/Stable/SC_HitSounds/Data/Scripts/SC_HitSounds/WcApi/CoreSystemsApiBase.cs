@@ -20,6 +20,10 @@ namespace CoreSystems.Api
 
         private Func<MyEntity, bool> _hasCoreWeapon;
         public bool HasCoreWeapon(MyEntity weapon) => _hasCoreWeapon?.Invoke(weapon) ?? false;
+        
+        
+        private Action<string> _registerTerminalControl;
+        public void RegisterTerminalControl(string controlId) => _registerTerminalControl?.Invoke(controlId);
 
 
         private const long Channel = 67549756549;
@@ -82,6 +86,7 @@ namespace CoreSystems.Api
             /// base methods
 
             AssignMethod(delegates, "HasCoreWeaponBase", ref _hasCoreWeapon);
+            AssignMethod(delegates, "RegisterTerminalControl", ref _registerTerminalControl);
         }
 
         private void AssignMethod<T>(IReadOnlyDictionary<string, Delegate> delegates, string name, ref T field)

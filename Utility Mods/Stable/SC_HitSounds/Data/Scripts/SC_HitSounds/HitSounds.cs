@@ -14,7 +14,7 @@ using VRage.Game.ModAPI;
 
 namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
 {
-    [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation, priority: int.MinValue)] // Attempt to load after Weaponcore because adding terminal actions is load-order dependent. :(
+    [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)] // Attempt to load after Weaponcore because adding terminal actions is load-order dependent. :(
     public class HitSounds : MySessionComponentBase
     {
         public static HitSounds I = new HitSounds();
@@ -79,7 +79,6 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
             if (MyAPIGateway.Utilities.IsDedicated)
                 return;
 
-            wAPI.Load(() => HitSounds_TerminalActions.CreateTerminalControls(wAPI));
             MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0, OnDamageEvent);
         }
 
@@ -87,6 +86,9 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
         {
             if (MyAPIGateway.Utilities.IsDedicated)
                 return;
+
+            if (!wAPI.IsReady) // Vain attempt to load terminal controls after weaponcore
+                wAPI.Load(() => HitSounds_TerminalActions.CreateTerminalControls(wAPI));
 
             if (SoundEmitter == null && MyAPIGateway.Session.Player != null)
             {
