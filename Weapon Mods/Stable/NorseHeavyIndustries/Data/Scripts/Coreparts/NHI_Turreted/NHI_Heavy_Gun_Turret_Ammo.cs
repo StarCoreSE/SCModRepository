@@ -60,7 +60,7 @@ namespace Scripts
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
                 AmmoRound = "HE_Fragment", // AmmoRound field of the ammo to spawn.
-                Fragments = 54, // Number of projectiles to spawn.
+                Fragments = 40, // Number of projectiles to spawn.
                 Degrees = 8, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = true, // fragments will not inherit velocity from parent.
@@ -505,9 +505,9 @@ namespace Scripts
                 Armor = new ArmorDef
                 {
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
-                    Light = 0.25f, // Multiplier for damage against light armor.
+                    Light = 0.35f, // Multiplier for damage against light armor.
                     Heavy = -1f, // Multiplier for damage against heavy armor.
-                    NonArmor = 0.25f, // Multiplier for damage against every else.
+                    NonArmor = 0.35f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
