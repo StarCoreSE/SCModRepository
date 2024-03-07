@@ -1,0 +1,534 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <CubeBlocks>
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <!-- Heavy Gimbaled Cannon Emplacment -->
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>NID_Pyroacid</SubtypeId>
+      </Id>
+      <DisplayName>Pyro-acid Cannon</DisplayName>
+      <Description>
+        Large Biological Gimbaled Cannon
+        Will melt armor away, while leaving components intact
+        Medium Shield Damage
+        4km Effective Range
+      </Description>
+      <Icon>Textures\GUI\Icons\Cubes\Pyroacid_Icon.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="3" z="7" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Pyroacid Cannon.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+        <Component Subtype="SteelPlate" Count="500" />
+        <Component Subtype="Superconductor" Count="300" />
+        <Component Subtype="Construction" Count="200" />
+        <Component Subtype="Motor" Count="245" />
+        <Component Subtype="Reactor" Count="210" />
+        <Component Subtype="Detector" Count="90" />
+        <Component Subtype="Computer" Count="400" />
+        <Component Subtype="MetalGrid" Count="250" />
+        <Component Subtype="SteelPlate" Count="3500" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="1" StartY="1" EndX="3" EndY="3" />
+      </MountPoints>
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>NID_Pyroacid</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>120</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_HSR_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-3.5</MinElevationDegrees>
+      <MaxElevationDegrees>3.5</MaxElevationDegrees>
+      <MinAzimuthDegrees>-3.5</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>3.5</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>4000</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <!-- Heavy Gimbaled Cannon Emplacment -->
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>NID_HeavyPyroacid</SubtypeId>
+      </Id>
+      <DisplayName>Heavy Pyro-acid Cannon</DisplayName>
+      <Description>
+        Large Biological Gimbaled Cannon
+        Will melt armor away, while leaving components intact
+        Medium Shield Damage
+        6km Effective Range
+      </Description>
+      <Icon>Textures\GUI\Icons\Cubes\Pyroacid_Icon.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="5" y="5" z="13" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Heavy Pyroacid Cannon.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+        <Component Subtype="SteelPlate" Count="500" />
+        <Component Subtype="Superconductor" Count="300" />
+        <Component Subtype="Construction" Count="200" />
+        <Component Subtype="Motor" Count="245" />
+        <Component Subtype="Reactor" Count="210" />
+        <Component Subtype="Detector" Count="90" />
+        <Component Subtype="Computer" Count="400" />
+        <Component Subtype="MetalGrid" Count="250" />
+        <Component Subtype="SteelPlate" Count="6500" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="1" StartY="1" EndX="5" EndY="5" />
+      </MountPoints>
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>NID_HeavyPyroacid</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>120</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_HSR_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-3.5</MinElevationDegrees>
+      <MaxElevationDegrees>3.5</MaxElevationDegrees>
+      <MinAzimuthDegrees>-3.5</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>3.5</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>4000</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
+    
+    
+        <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <!-- Heavy Gimbaled Cannon Emplacment -->
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>NID_Bioplasma</SubtypeId>
+      </Id>
+      <DisplayName>Bio-plasma Cannon</DisplayName>
+      <Description>
+        Large Biological Gimbaled Cannon
+        High Armor Damage
+        Medium Shield Damage
+        Low Component Damage
+        6km Targeting Range
+        4km Effective Range
+      </Description>
+      <Icon>Textures\GUI\Icons\Cubes\Bioplasma_Icon.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <GuiVisible>false</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="3" z="4" />
+      <ModelOffset x="0" y="0" z="-1.25" />
+      <Model>Models\Cubes\Bioplasma_Cannon.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+        <Component Subtype="SteelPlate" Count="500" />
+        <Component Subtype="Superconductor" Count="300" />
+        <Component Subtype="Construction" Count="200" />
+        <Component Subtype="Motor" Count="245" />
+        <Component Subtype="Reactor" Count="210" />
+        <Component Subtype="Detector" Count="90" />
+        <Component Subtype="Computer" Count="400" />
+        <Component Subtype="MetalGrid" Count="250" />
+        <Component Subtype="SteelPlate" Count="1500" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="1" StartY="1" EndX="3" EndY="3" />
+      </MountPoints>
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>NID_Bioacid</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>60</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_HSR_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-3.5</MinElevationDegrees>
+      <MaxElevationDegrees>3.5</MaxElevationDegrees>
+      <MinAzimuthDegrees>-3.5</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>3.5</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>4000</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <!-- Gimbaled Harpoon Cannon -->
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>NID_Feeder</SubtypeId>
+      </Id>
+      <DisplayName>Feeder Tentacle</DisplayName>
+      <Description>
+        Biological Gimbaled Harpoon
+        Low but Consistant Armor Damage
+        High Shield Damage
+        Low Component Damage
+        3km Range
+      </Description>
+      <Icon>Textures\GUI\Icons\Cubes\Bioplasma_Icon.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <GuiVisible>false</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="3" z="4" />
+      <ModelOffset x="0" y="0" z="-1.25" />
+      <Model>Models\Cubes\Bioplasma_Cannon.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+        <Component Subtype="SteelPlate" Count="500" />
+        <Component Subtype="Superconductor" Count="300" />
+        <Component Subtype="Construction" Count="200" />
+        <Component Subtype="Motor" Count="245" />
+        <Component Subtype="Reactor" Count="210" />
+        <Component Subtype="Detector" Count="90" />
+        <Component Subtype="Computer" Count="400" />
+        <Component Subtype="MetalGrid" Count="250" />
+        <Component Subtype="SteelPlate" Count="1500" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="1" StartY="1" EndX="3" EndY="3" />
+      </MountPoints>
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>NID_Feeder</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>60</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_HSR_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-3.5</MinElevationDegrees>
+      <MaxElevationDegrees>3.5</MaxElevationDegrees>
+      <MinAzimuthDegrees>-3.5</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>3.5</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>3000</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <!-- Gimbaled Harpoon Cannon -->
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>NID_Leap</SubtypeId>
+      </Id>
+      <DisplayName>Leap Block</DisplayName>
+      <Description>
+        Lunges the grid
+      </Description>
+      <Icon>Textures\GUI\Icons\Cubes\Bioplasma_Icon.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <GuiVisible>false</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Tentablock.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+        <Component Subtype="SteelPlate" Count="500" />
+        <Component Subtype="Superconductor" Count="300" />
+        <Component Subtype="Construction" Count="200" />
+        <Component Subtype="Motor" Count="245" />
+        <Component Subtype="Reactor" Count="210" />
+        <Component Subtype="Detector" Count="90" />
+        <Component Subtype="Computer" Count="400" />
+        <Component Subtype="MetalGrid" Count="250" />
+        <Component Subtype="SteelPlate" Count="1500" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="1" />
+      </MountPoints>
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>NID_Leap</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>60</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_HSR_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-3.5</MinElevationDegrees>
+      <MaxElevationDegrees>3.5</MaxElevationDegrees>
+      <MinAzimuthDegrees>-3.5</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>3.5</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>3000</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
+    
+    
+     <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>NID_HiveDrone</SubtypeId>
+      </Id>
+      <DisplayName>Strangler Hivedrone Launcher</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\Strangler_Hivedrone_Icon.dds</Icon>
+      <Description>Slow but deadly 
+      </Description>
+      <CubeSize>Large</CubeSize>
+      <PlaceDecals>false</PlaceDecals>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="3" z="5" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\StranglerDroneLauncher.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+        <Component Subtype="SteelPlate" Count="250" />
+        <Component Subtype="Construction" Count="300" />
+        <Component Subtype="MetalGrid" Count="20" />
+        <Component Subtype="LargeTube" Count="40" />
+        <Component Subtype="Motor" Count="80" />
+        <Component Subtype="Computer" Count="120" />
+        <Component Subtype="Superconductor" Count="50" />
+        <Component Subtype="Construction" Count="100" />
+        <Component Subtype="SteelPlate" Count="150" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0" StartY="0" EndX="3" EndY="3" />
+      </MountPoints>
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>NID_HiveDrone</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>25</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="NID_HiveDrone" />
+      <InventoryMaxVolume>0.065</InventoryMaxVolume>
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>0</MinElevationDegrees>
+      <MaxElevationDegrees>0</MaxElevationDegrees>
+      <MinAzimuthDegrees>0</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>0</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>7000</MaxRangeMeters>
+      <RotationSpeed>0.0</RotationSpeed>
+      <ElevationSpeed>0.0</ElevationSpeed>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>100</PCU>
+      <AiEnabled>false</AiEnabled>       
+    </Definition>
+  
+    
+       <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>NID_BioplasmaHivedrone</SubtypeId>
+      </Id>
+      <DisplayName>Bio-plasma Hivedrone Launcher</DisplayName>
+      <Icon>Textures\GUI\Icons\Cubes\Bioplasma_Hivedrone_Icon.dds</Icon>
+      <Description>Slow but deadly 
+      </Description>
+      <CubeSize>Large</CubeSize>
+      <PlaceDecals>false</PlaceDecals>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="3" z="5" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\BioplasmaDroneLauncher2.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+        <Component Subtype="SteelPlate" Count="250" />
+        <Component Subtype="Construction" Count="300" />
+        <Component Subtype="MetalGrid" Count="20" />
+        <Component Subtype="LargeTube" Count="40" />
+        <Component Subtype="Motor" Count="80" />
+        <Component Subtype="Computer" Count="120" />
+        <Component Subtype="Superconductor" Count="50" />
+        <Component Subtype="Construction" Count="100" />
+        <Component Subtype="SteelPlate" Count="150" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0" StartY="0" EndX="3" EndY="3" />
+      </MountPoints>
+      <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>NID_BioplasmaHiveDrone</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>25</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="NID_BioplasmaHiveDrone" />
+      <InventoryMaxVolume>0.065</InventoryMaxVolume>
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>0</MinElevationDegrees>
+      <MaxElevationDegrees>0</MaxElevationDegrees>
+      <MinAzimuthDegrees>0</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>0</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>7000</MaxRangeMeters>
+      <RotationSpeed>0.0</RotationSpeed>
+      <ElevationSpeed>0.0</ElevationSpeed>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>100</PCU>
+      <AiEnabled>false</AiEnabled>       
+    </Definition>
+  
+    
+  
+  </CubeBlocks>
+  <BlueprintClassEntries>
+   
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="LargeGatlingTurret/PDCTurretLB" />
+    <Entry Class="SmallBlocks" BlueprintSubtypeId="LargeGatlingTurret/PDCTurretSB" />
+    <Entry Class="Ammo" BlueprintSubtypeId="DeU_25x184mm" />
+  </BlueprintClassEntries>
+</Definitions>
