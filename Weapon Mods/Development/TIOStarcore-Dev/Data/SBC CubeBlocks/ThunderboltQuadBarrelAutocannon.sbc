@@ -31,7 +31,8 @@
 				<MountPoint Side="Bottom" StartX="0.08" StartY="0.08" EndX="4.92" EndY="4.92"/>
 			</MountPoints>
 			<BlockPairName>QuadBarrelAutocannon</BlockPairName>
-						<WeaponDefinitionId Subtype="ShootMissileGooder" />  	  	  
+						<WeaponDefinitionId Subtype="ShootMissileGooder" /> 
+						            <BuildTimeSeconds>175</BuildTimeSeconds> 	  	  
       <ResourceSinkGroup>Defense</ResourceSinkGroup>
       <InventoryMaxVolume>0.144</InventoryMaxVolume>
 	  <AiEnabled>false</AiEnabled>

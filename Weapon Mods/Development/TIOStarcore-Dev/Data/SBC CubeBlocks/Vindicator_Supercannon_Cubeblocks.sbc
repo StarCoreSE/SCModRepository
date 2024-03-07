@@ -16,7 +16,12 @@
 				<SubtypeId>VindicatorKineticLance</SubtypeId>
 			</Id>
 			<DisplayName>Vindicator Kinetic Battery</DisplayName>
-            <Description>Three Vanilla Rails</Description>            
+            <Description>Three Vanilla Rails
+			12KM range
+			Kinetic Damage
+			Low Tracking
+			Invalid Clapped When Sound
+			</Description>            
 			<GuiVisible>true</GuiVisible>
 			<Public>true</Public>
 			<Icon>Textures\GUI\Icons\KineticBattery.dds</Icon>
