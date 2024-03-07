@@ -22,9 +22,9 @@ namespace Scripts {
                     new MountPointDef {
                         SubtypeId = "HeavyBolterLargeSponson", // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "None", // For weapons with a spinning barrel such as Gatling Guns. Subpart_Boomsticks must be written as Boomsticks.
-                        MuzzlePartId = "muzzlepart", // The subpart where your muzzle empties are located. This is often the elevation subpart. Subpart_Boomsticks must be written as Boomsticks.
-                        AzimuthPartId = "elevpart", // Your Rotating Subpart, the bit that moves sideways.
-                        ElevationPartId = "muzzlepart",// Your Elevating Subpart, that bit that moves up.
+                        MuzzlePartId = "Heavy Bolter Sponson Barrel Large", // The subpart where your muzzle empties are located. This is often the elevation subpart. Subpart_Boomsticks must be written as Boomsticks.
+                        AzimuthPartId = "Heavy Bolter Sponson Elevation Large", // Your Rotating Subpart, the bit that moves sideways.
+                        ElevationPartId = "Heavy Bolter Sponson Barrel Large",// Your Elevating Subpart, that bit that moves up.
                         DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
