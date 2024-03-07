@@ -39,7 +39,7 @@
 			<ResourceSinkGroup>Defense</ResourceSinkGroup>
 			<RequiredPowerInput>0.00002</RequiredPowerInput>
 			<EdgeType>Heavy</EdgeType>
-			<BuildTimeSeconds>100</BuildTimeSeconds>
+			<BuildTimeSeconds>150</BuildTimeSeconds>
 			<InventoryMaxVolume>1</InventoryMaxVolume>
 			<ShowEdges>false</ShowEdges>
 			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>

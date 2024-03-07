@@ -51,7 +51,7 @@
 			</BuildProgressModels>
       			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 
       			<BlockPairName>IronMaiden_Block</BlockPairName>
-            <BuildTimeSeconds>200</BuildTimeSeconds>
+            <BuildTimeSeconds>180</BuildTimeSeconds>
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
@@ -70,7 +70,7 @@
                 <TypeId>ConveyorSorter</TypeId>
                 <SubtypeId>PriestReskin_Block</SubtypeId>
             </Id>
-            <DisplayName>F-2 "Spartan" Heavy Gatling Gun</DisplayName>
+            <DisplayName>F-2 "Spartan" Heavy Gatling Machinegun</DisplayName>
             <Description>
               [2.25km Targeting Range [1750 m/s]]
               [Kinetic damage]
@@ -111,7 +111,7 @@
 				<Model BuildPercentUpperBound="0.69" File="Models\PriestReskin_MainScene_BS2.mwm"/>
 				<Model BuildPercentUpperBound="1.00" File="Models\PriestReskin_MainScene_BS3.mwm"/>
 			</BuildProgressModels>
-            <BuildTimeSeconds>200</BuildTimeSeconds>
+            <BuildTimeSeconds>180</BuildTimeSeconds>
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>
             			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 

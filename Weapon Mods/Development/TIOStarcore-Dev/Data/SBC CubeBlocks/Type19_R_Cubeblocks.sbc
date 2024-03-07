@@ -57,7 +57,7 @@
 			<CriticalComponent Index="0" Subtype="Computer"/>
 
 			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 
-            <BuildTimeSeconds>400</BuildTimeSeconds>
+            <BuildTimeSeconds>220</BuildTimeSeconds>
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>

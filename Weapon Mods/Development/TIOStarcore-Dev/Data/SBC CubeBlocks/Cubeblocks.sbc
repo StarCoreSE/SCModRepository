@@ -837,14 +837,14 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>Assault_Coil_Turret</SubtypeId>
 			</Id>
-			<DisplayName>Salvo Light Battery</DisplayName>
+			<DisplayName>Raider Light Coilgun Tall</DisplayName>
 			<Description>
-				3km Range, rapid fire autocannons, 1600m/s velocity.
-				High Explosive rounds with a primitive contact fuse.
-				Deals Energy Damage to Opponents.
-				20 round burst, 15 second reload.
+              [2.8km Targeting Range]
+              [Kinetic damage]
+			  [Reaver Coilgun Clone]
+              [5000 m/s]
 			</Description>
-			<GuiVisible>false</GuiVisible>
+			<GuiVisible>true</GuiVisible>
 
 			<Icon>Textures\GUI\Icons\Salvo.dds</Icon>
 
@@ -854,6 +854,16 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\CoilgunMk1_TestMain.mwm</Model>
 			<Components>
+				<Component Count="400" Subtype="SteelPlate"/>
+				<Component Count="600" Subtype="Construction"/>
+				<Component Count="150" Subtype="Motor"/>
+				<Component Count="150" Subtype="Computer"/>
+				<Component Count="30" Subtype="LargeTube" />
+				<Component Count="100" Subtype="MetalGrid" />
+				<Component Count="60" Subtype="Superconductor" />
+				<Component Count="1200" Subtype="Construction"/>
+				<Component Count="500" Subtype="SteelPlate"/>
+<!-- 
 				<Component Subtype="SteelPlate" Count="400" />
 				<Component Subtype="Construction" Count="600" />
 				<Component Subtype="Computer" Count="20" />
@@ -862,7 +872,7 @@
 				<Component Subtype="LargeTube" Count="30" />
 				<Component Subtype="Motor" Count="35" />
 				<Component Subtype="Construction" Count="750" />
-				<Component Subtype="SteelPlate" Count="800" />
+				<Component Subtype="SteelPlate" Count="800" /> -->
 			</Components>
 			<CriticalComponent Index="0" Subtype="Computer"/>
 			<MountPoints>
@@ -887,7 +897,7 @@
 			<RequiredPowerInput>0.00002</RequiredPowerInput>
 
 			<EdgeType>Heavy</EdgeType>
-			<BuildTimeSeconds>80</BuildTimeSeconds>
+			<BuildTimeSeconds>125</BuildTimeSeconds>
 			<InventoryMaxVolume>1</InventoryMaxVolume>
 			<ShowEdges>false</ShowEdges>
 			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
