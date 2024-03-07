@@ -251,7 +251,7 @@ namespace Scripts
             },
             Beams = new BeamDef
             {
-                Enable = false, // Enable beam behaviour. Please have 3600 RPM, when this Setting is enabled. Please do not fire Beams into Voxels.
+                Enable = true, // Enable beam behaviour. Please have 3600 RPM, when this Setting is enabled. Please do not fire Beams into Voxels.
                 VirtualBeams = false, // Only one damaging beam, but with the effectiveness of the visual beams combined (better performance).
                 ConvergeBeams = false, // When using virtual beams, converge the visual beams to the location of the real beam.
                 RotateRealBeam = false, // The real beam is rotated between all visual beams, instead of centered between them.
@@ -422,7 +422,7 @@ namespace Scripts
             AmmoRound = "Shield H. Pulse Laser", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.2f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 12000f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 24000f, // Direct damage; one steel plate is worth 100.
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
