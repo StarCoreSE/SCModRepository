@@ -7,7 +7,7 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>Thagomizer</SubtypeId>
 		  </Id>
-		  <DisplayName>'Bushwhacker' 120 inch RL-10X</DisplayName>
+		  <DisplayName>'Thunderer' RL-10x</DisplayName>
 		  <Description>
 			  10 Barrels of High Explosive Rockets
 			  400m minimum range, 13500m max
@@ -69,7 +69,7 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>Thagomizer_Flipped</SubtypeId>
 		  </Id>
-		  <DisplayName>'Bushwhacker' 120 inch RL-10X R</DisplayName>
+		  <DisplayName>'Thunderer' RL-10x R</DisplayName>
 		  <Description>
 			  10 Barrels of High Explosive Rockets
 			  400m minimum range, 13500m max
@@ -132,7 +132,7 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>Thagomizer_Angled</SubtypeId>
 		  </Id>
-		  <DisplayName>'Bushwhacker' 120 inch RL-10X Angled</DisplayName>
+		  <DisplayName>'Thunderer' RL-10x Angled</DisplayName>
 		  <Description>
 			  10 Barrels of High Explosive Rockets
 			  400m minimum range, 13500m max
@@ -198,7 +198,7 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>Thagomizer_Angled_Flipped</SubtypeId>
 		  </Id>
-		  <DisplayName>'Bushwhacker' 120 inch RL-10X Angled R</DisplayName>
+		  <DisplayName>'Thunderer' RL-10x Angled R</DisplayName>
 		  <Description>
 			  10 Barrels of High Explosive Rockets
 			  400m minimum range, 13500m max

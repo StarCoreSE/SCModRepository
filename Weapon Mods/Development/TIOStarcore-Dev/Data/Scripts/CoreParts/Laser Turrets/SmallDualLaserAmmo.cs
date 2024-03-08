@@ -31,8 +31,8 @@ namespace Scripts
             AmmoMagazine = "Energy",
             AmmoRound = "SmallDualLaserAmmo",
             HybridRound = false, //AmmoMagazine based weapon with energy cost
-            EnergyCost = 0.2f, //120MW (((EnergyCost * DefaultDamage) * ShotsPerSecond) * BarrelsPerShot) * ShotsPerBarrel
-            BaseDamage = 300f,
+            EnergyCost = 0.12f, //120MW (((EnergyCost * DefaultDamage) * ShotsPerSecond) * BarrelsPerShot) * ShotsPerBarrel
+            BaseDamage = 500f,
             Mass = 0, // in kilograms
             Health = 0, // 0 = disabled, otherwise how much damage it can take from other trajectiles before dying.
             BackKickForce = 0f,
@@ -97,7 +97,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = -1f, //Heavy laser type.
+                    Modifier = 1.3f, //Heavy laser type.
                     Type = Default,
                     BypassModifier = -1f,
                 },
