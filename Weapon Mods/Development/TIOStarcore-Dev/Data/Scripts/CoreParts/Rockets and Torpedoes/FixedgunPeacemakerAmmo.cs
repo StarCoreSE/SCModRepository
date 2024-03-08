@@ -42,7 +42,7 @@ namespace Scripts
         private AmmoDef UnguidedHeavyRockets => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "VMLS_MagazineLarge", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "Heavy Rockets", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoRound = "TIO Heavy Rockets", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 5000, // Direct damage; one steel plate is worth 100.
@@ -143,7 +143,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 4f, //2.2 Multiplier for damage against shields.
+                    Modifier = 3f, //2.2 Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1.10f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -194,9 +194,9 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = true,
-                    Radius = 8f, // Meters
+                    Radius = 6f, //8 Meters
                     Damage = 16500,
-                    Depth = 3f,
+                    Depth = 2f,
                     MaxAbsorb = 0f,
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
