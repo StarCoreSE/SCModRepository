@@ -1,0 +1,409 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Sounds>
+        <Sound>
+            <Id>
+                <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+                <SubtypeId>ArcImpMetalMetalCat0</SubtypeId>
+            </Id>
+            <Category>R_IMP</Category>
+            <Volume>0.4</Volume>
+            <MaxDistance>25</MaxDistance>
+            <PitchVariation>100</PitchVariation>
+            <VolumeVariation>0.1</VolumeVariation>
+            <PreventSynchronization>3</PreventSynchronization>
+            <SoundLimit>10</SoundLimit>
+            <Waves>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal0Cat3d01.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal0Cat3d02.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal0Cat3d03.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal0Cat3d04.wav</Start>
+                </Wave>
+            </Waves>
+        </Sound>
+        <Sound>
+            <Id>
+                <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+                <SubtypeId>ArcImpMetalMetalCat1</SubtypeId>
+            </Id>
+            <Category>R_IMP</Category>
+            <Volume>0.4</Volume>
+            <MaxDistance>30</MaxDistance>
+            <PitchVariation>250</PitchVariation>
+            <PreventSynchronization>3</PreventSynchronization>
+            <SoundLimit>3</SoundLimit>
+            <Waves>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal1Cat3d01.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal1Cat3d02.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal1Cat3d03.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal1Cat3d04.wav</Start>
+                </Wave>
+            </Waves>
+        </Sound>
+        <Sound>
+            <Id>
+                <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+                <SubtypeId>ArcImpMetalMetalCat2</SubtypeId>
+            </Id>
+            <Category>R_IMP</Category>
+            <Volume>0.4</Volume>
+            <MaxDistance>400</MaxDistance>
+            <PitchVariation>200</PitchVariation>
+            <PreventSynchronization>12</PreventSynchronization>
+            <SoundLimit>3</SoundLimit>
+            <Waves>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal2Cat3d01.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal2Cat3d02.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal2Cat3d03.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal2Cat3d04.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal2Cat3d05.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal2Cat3d06.wav</Start>
+                </Wave>
+            </Waves>
+        </Sound>
+        <Sound>
+            <Id>
+                <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+                <SubtypeId>ArcImpMetalMetalCat3</SubtypeId>
+            </Id>
+            <Category>R_IMP</Category>
+            <Volume>0.4</Volume>
+            <MaxDistance>800</MaxDistance>
+            <PitchVariation>200</PitchVariation>
+            <PreventSynchronization>12</PreventSynchronization>
+            <SoundLimit>3</SoundLimit>
+            <Waves>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal3Cat3d01.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal3Cat3d02.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal3Cat3d03.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal3Cat3d04.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal3Cat3d05.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal3Cat3d06.wav</Start>
+                </Wave>
+            </Waves>
+        </Sound>
+        <Sound>
+            <Id>
+                <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+                <SubtypeId>ArcImpMetalMetalCat4</SubtypeId>
+            </Id>
+            <Category>R_IMP</Category>
+            <Volume>0.4</Volume>
+            <MaxDistance>950</MaxDistance>
+            <PitchVariation>200</PitchVariation>
+            <PreventSynchronization>20</PreventSynchronization>
+            <SoundLimit>4</SoundLimit>
+            <DistantSounds>
+                <DistantSound DistanceCrossfade="275" Distance="675" Sound="ImpMetalMetalCat4DistA"/>
+            </DistantSounds>
+            <Waves>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal4Cat3d01.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal4Cat3d02.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal4Cat3d03.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal4Cat3d04.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal4Cat3d05.wav</Start>
+                </Wave>
+            </Waves>
+        </Sound>
+        <Sound>
+            <Id>
+                <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+                <SubtypeId>ArcImpMetalMetalCat5</SubtypeId>
+            </Id>
+            <Category>R_IMP</Category>
+            <Volume>0.4</Volume>
+            <MaxDistance>1000</MaxDistance>
+            <PitchVariation>200</PitchVariation>
+            <PreventSynchronization>20</PreventSynchronization>
+            <SoundLimit>4</SoundLimit>
+            <DistantSounds>
+                <DistantSound DistanceCrossfade="300" Distance="700" Sound="ImpMetalMetalCat5DistA"/>
+            </DistantSounds>
+            <Waves>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal5Cat3d01.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal5Cat3d02.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal5Cat3d03.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal5Cat3d04.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\IMP\ArcImpMetalMetal5Cat3d05.wav</Start>
+                </Wave>
+            </Waves>
+        </Sound>
+        <Sound>
+            <Id>
+                <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+                <SubtypeId>ArcWepLrgWarheadExpl</SubtypeId>
+            </Id>
+            <Category>WEP_EXPL</Category>
+            <MaxDistance>200</MaxDistance>
+            <PreventSynchronization>5</PreventSynchronization>
+            <DistantSounds>
+                <DistantSound Distance="50" Sound="WepExplDistA" />
+                <DistantSound Distance="250" Sound="WepExplDistB" />
+                <DistantSound Distance="600" Sound="WepExplDistC" />
+            </DistantSounds>
+            <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+            <DynamicMusicAmount>25</DynamicMusicAmount>
+            <Volume>0.4</Volume>
+            <Waves>
+                <Wave Type="D2">
+                    <Start>ARC\EXPL\ArcWepExpl2d01.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcWepExpl3d05.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcWepExpl3d04.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcWepExpl3d03.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcWepExpl3d02.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcWepExpl3d01.wav</Start>
+                </Wave>
+                <Wave Type="D2">
+                    <Start>ARC\EXPL\ArcWepExpl2d02.wav</Start>
+                </Wave>
+                <Wave Type="D2">
+                    <Start>ARC\EXPL\ArcWepExpl2d03.wav</Start>
+                </Wave>
+                <Wave Type="D2">
+                    <Start>ARC\EXPL\ArcWepExpl2d04.wav</Start>
+                </Wave>
+                <Wave Type="D2">
+                    <Start>ARC\EXPL\ArcWepExpl2d05.wav</Start>
+                </Wave>
+            </Waves>
+        </Sound>
+        <Sound>
+            <Id>
+                <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+                <SubtypeId>ArcPoofExplosionCat1</SubtypeId>
+            </Id>
+            <Category>EXPL</Category>
+            <MaxDistance>75</MaxDistance>
+            <Volume>0.4</Volume>
+            <Pitch>3</Pitch>
+            <PitchVariation>50</PitchVariation>
+            <Waves>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcPoofExplosion1Cat3d01.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcPoofExplosion1Cat3d02.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcPoofExplosion1Cat3d03.wav</Start>
+                </Wave>
+                <!--<wave type="d3">
+          <start>arc\expl\arcpoofexplosion1cat3d04.wav</start>
+        </wave>-->
+            </Waves>
+        </Sound>
+        <Sound>
+            <Id>
+                <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+                <SubtypeId>ArcPoofExplosionCat2</SubtypeId>
+            </Id>
+            <Category>EXPL</Category>
+            <MaxDistance>75</MaxDistance>
+            <Volume>0.4</Volume>
+            <PitchVariation>50</PitchVariation>
+            <Waves>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcPoofExplosion1Cat3d01.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcPoofExplosion1Cat3d02.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcPoofExplosion1Cat3d03.wav</Start>
+                </Wave>
+                <!--<Wave Type="D3">
+          <Start>ARC\EXPL\ArcPoofExplosion1Cat3d04.wav</Start>
+        </Wave>-->
+            </Waves>
+        </Sound>
+        <Sound>
+            <Id>
+                <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+                <SubtypeId>ArcPoofExplosionCat3</SubtypeId>
+            </Id>
+            <Category>EXPL</Category>
+            <MaxDistance>75</MaxDistance>
+            <Volume>0.4</Volume>
+            <Pitch>-3</Pitch>
+            <PitchVariation>50</PitchVariation>
+            <Waves>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcPoofExplosion1Cat3d01.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcPoofExplosion1Cat3d02.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcPoofExplosion1Cat3d03.wav</Start>
+                </Wave>
+                <!--<Wave Type="D3">
+          <Start>ARC\EXPL\ArcPoofExplosion1Cat3d04.wav</Start>
+        </Wave>-->
+            </Waves>
+        </Sound>		
+        <Sound>
+            <Id>
+                <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+                <SubtypeId>ArcWepSmallMissileExpl</SubtypeId>
+            </Id>
+            <Category>WEP_EXPL</Category>
+            <PreventSynchronization>5</PreventSynchronization>
+            <MaxDistance>200</MaxDistance>
+            <DistantSounds>
+                <DistantSound Distance="50" Sound="WepExplDistA" />
+                <DistantSound Distance="250" Sound="WepExplDistB" />
+                <DistantSound Distance="600" Sound="WepExplDistC" />
+            </DistantSounds>
+            <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+            <DynamicMusicAmount>25</DynamicMusicAmount>
+            <Volume>0.4</Volume>
+            <Waves>
+                <Wave Type="D2">
+                    <Start>ARC\EXPL\ArcWepExpl2d01.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcWepExpl3d05.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcWepExpl3d04.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcWepExpl3d03.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcWepExpl3d02.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcWepExpl3d01.wav</Start>
+                </Wave>
+                <Wave Type="D2">
+                    <Start>ARC\EXPL\ArcWepExpl2d02.wav</Start>
+                </Wave>
+                <Wave Type="D2">
+                    <Start>ARC\EXPL\ArcWepExpl2d03.wav</Start>
+                </Wave>
+                <Wave Type="D2">
+                    <Start>ARC\EXPL\ArcWepExpl2d04.wav</Start>
+                </Wave>
+                <Wave Type="D2">
+                    <Start>ARC\EXPL\ArcWepExpl2d05.wav</Start>
+                </Wave>
+            </Waves>
+        </Sound>
+        <Sound>
+            <Id>
+                <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+                <SubtypeId>ArcWepSmallWarheadExpl</SubtypeId>
+            </Id>
+            <Category>WEP_EXPL</Category>
+            <MaxDistance>200</MaxDistance>
+            <PreventSynchronization>5</PreventSynchronization>
+            <DistantSounds>
+                <DistantSound Distance="50" Sound="WepExplDistA" />
+                <DistantSound Distance="250" Sound="WepExplDistB" />
+                <DistantSound Distance="600" Sound="WepExplDistC" />
+            </DistantSounds>
+            <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+            <DynamicMusicAmount>25</DynamicMusicAmount>
+            <Volume>0.4</Volume>
+            <Waves>
+                <Wave Type="D2">
+                    <Start>ARC\EXPL\ArcWepExpl2d01.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcWepExpl3d05.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcWepExpl3d04.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcWepExpl3d03.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcWepExpl3d02.wav</Start>
+                </Wave>
+                <Wave Type="D3">
+                    <Start>ARC\EXPL\ArcWepExpl3d01.wav</Start>
+                </Wave>
+                <Wave Type="D2">
+                    <Start>ARC\EXPL\ArcWepExpl2d02.wav</Start>
+                </Wave>
+                <Wave Type="D2">
+                    <Start>ARC\EXPL\ArcWepExpl2d03.wav</Start>
+                </Wave>
+                <Wave Type="D2">
+                    <Start>ARC\EXPL\ArcWepExpl2d04.wav</Start>
+                </Wave>
+                <Wave Type="D2">
+                    <Start>ARC\EXPL\ArcWepExpl2d05.wav</Start>
+                </Wave>
+            </Waves>
+        </Sound>		
+		
+		
+    </Sounds>
+</Definitions>

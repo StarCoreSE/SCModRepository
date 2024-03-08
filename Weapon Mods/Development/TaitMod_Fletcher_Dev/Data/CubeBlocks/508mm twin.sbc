@@ -33,7 +33,10 @@
 			<MountPoints>
 				<MountPoint Side="Bottom" StartX="1" StartY="1" EndX="7" EndY="7" />
 			</MountPoints>
+			<BuildTimeSeconds>120</BuildTimeSeconds>
 			<BlockPairName>20InchTwin</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
 		</Definition>
 	</CubeBlocks>
 </Definitions>
