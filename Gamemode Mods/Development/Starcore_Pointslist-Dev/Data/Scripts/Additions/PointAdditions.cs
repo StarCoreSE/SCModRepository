@@ -110,18 +110,18 @@ namespace ShipPoints
 				MA_Tiger@125;
 				MA_Crouching_Tiger@125;
 
-				LargeHydrogenTank@10;
-					LargeHydrogenTankIndustrial@10;
+				LargeHydrogenTank@30;
+					LargeHydrogenTankIndustrial@30;
 				LargeHydrogenTankSmall@50;
 
-				LargeBlockLargeHydrogenThrust@60;
-					AQD_LG_HydroThrusterL_ArmoredSlope@60;
-					AQD_LG_HydroThrusterL_Armored@60;
-					LargeBlockLargeHydrogenThrustIndustrial@60;
-				LargeBlockSmallHydrogenThrust@10;
-					AQD_LG_HydroThrusterS_ArmoredSlope@10;
-					AQD_LG_HydroThrusterS_Armored@10;
-					LargeBlockSmallHydrogenThrustIndustrial@10;
+				LargeBlockLargeHydrogenThrust@50;
+					AQD_LG_HydroThrusterL_ArmoredSlope@50;
+					AQD_LG_HydroThrusterL_Armored@50;
+					LargeBlockLargeHydrogenThrustIndustrial@50;
+				LargeBlockSmallHydrogenThrust@15;
+					AQD_LG_HydroThrusterS_ArmoredSlope@15;
+					AQD_LG_HydroThrusterS_Armored@15;
+					LargeBlockSmallHydrogenThrustIndustrial@15;
 				HugeHydrogenThruster@200;
 
 				LargeBlockLargeThrust@20;
@@ -551,7 +551,7 @@ namespace ShipPoints
 				AMP_HealGenerator@400;
 				CapacitorLarge@400;
 
-				GoalieCasemate@300; 
+				GoalieCasemate@250; 
 				KreegMagnetarCannon@450; 
 				Thagomizer@750; 
 				Thagomizer_Flipped@750; 
@@ -559,24 +559,26 @@ namespace ShipPoints
 				Thagomizer_Angled_Flipped@750; 
 				SC_Radome@10; 
 				APE_Strong@150; 
-				Devastator_Torp@725; 
-				Priest_Block@135; 
-				PriestReskin_Block@135; 
+				Devastator_Torp@700; 
+				Priest_Block@150; 
+				PriestReskin_Block@150; 
 				Fixed_Rockets@250; 
 				Type18_Artillery@270; 
 				Type21_Artillery@540; 
 				Type24_Artillery@770; 
 				Type19_Driver@350; 
-				Type22_Driver@700; 
-				Type25_Driver@1100; 
+				Type22_Driver@675; 
+				Type25_Driver@1000; 
 				Reaver_Coilgun@120; 
-				Type17_BeamLance@420; 
+				Assault_Coil_Turret@120;
+				Type17_BeamLance@6942069; 
 				HeavyCarronade_5x5_Turret@400; 
 				X4_7x7_HeavyTurret@300; 
 				UnguidedRocketTurret@100; 
 				DrunkRocketTurret@400; 
-				DualSnubLaserTurret@200; 
-				DualPulseLaserTurret@200; 
+				DualSnubLaserTurret@150; 
+				DualPulseLaserTurret@150; 
+				HeavyLanceBattery@1000;
 				HadeanPlasmaBlastgun@900; 
 				VindicatorKineticLance@700; 
 				HeavyFighterBay@300; 
