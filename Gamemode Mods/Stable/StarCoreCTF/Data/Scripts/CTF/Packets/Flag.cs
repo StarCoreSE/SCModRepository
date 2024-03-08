@@ -68,6 +68,9 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
         [ProtoIgnore]
         public MatrixD attachedLocalMatrix = MatrixD.Identity;
 
+        [ProtoIgnore]
+        public Dictionary<long, int> PlayerReturnTimes = new Dictionary<long, int>();
+
         public Flag()
         {
 
