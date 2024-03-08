@@ -42,7 +42,7 @@ namespace Scripts
         private AmmoDef Torp_Ammo => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "Torp_MagazineLarge", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "Torp_Ammo", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoRound = "Trident_Torp_Ammo", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 1, // Direct damage; one steel plate is worth 100.
@@ -73,7 +73,7 @@ namespace Scripts
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
-                AmmoRound = "TorpShrap_Ammo", // AmmoRound field of the ammo to spawn.
+                AmmoRound = "Trident_TorpShrap_Ammo", // AmmoRound field of the ammo to spawn.
                 Fragments = 1, // Number of projectiles to spawn.
                 Degrees = 0, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
@@ -438,7 +438,7 @@ namespace Scripts
         private AmmoDef TorpShrap_Ammo => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "TorpShrap_Ammo", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoRound = "Trident_TorpShrap_Ammo", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 1, // Direct damage; one steel plate is worth 100.
@@ -1548,7 +1548,7 @@ namespace Scripts
                             "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
-                        DecayTime = 240, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
+                        DecayTime = 200, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
                         Color = Color(red: 6, green: 8, blue: 20, alpha: 0.5f),
                         FactionColor = DontUse, // DontUse, Foreground, Background.
                         Back = false,
