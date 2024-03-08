@@ -9,9 +9,9 @@
                 <SubtypeId>HeavyLanceBattery</SubtypeId>
 			</Id>
 			<DisplayName>WIP 'Granite' Superheavy Lance Battery</DisplayName>
-			<Description> Long Length Laser Lance WIP
+			<Description> Long Length Laser Lance
 			
-			 </Description>
+			</Description>
 			<Icon>Textures\GUI\Icons\HeavyTorpedoLauncher.dds</Icon>
 			<GuiVisible>false</GuiVisible>
 			<CubeSize>Large</CubeSize>

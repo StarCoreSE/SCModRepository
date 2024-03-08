@@ -42,7 +42,7 @@ namespace Scripts
             AmmoMagazine = "PlasAmmo", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Plasma-X", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
-            EnergyCost = 0.7f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
+            EnergyCost = 0.4f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 5000f, // Direct damage; one steel plate is worth 100. 
             Mass = 100f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
@@ -66,7 +66,7 @@ namespace Scripts
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
                 AmmoRound = "Plasma-X-Shrap", // AmmoRound field of the ammo to spawn.
-                Fragments = 10, // Number of projectiles to spawn.
+                Fragments = 11, // Number of projectiles to spawn.
                 Degrees = 65, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = true, // fragments will not inherit velocity from parent.
@@ -1237,7 +1237,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 2f, // Multiplier for damage against shields.
+                    Modifier = 1f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1.3f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
