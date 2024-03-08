@@ -1,0 +1,311 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Blueprints>
+
+	  <Blueprint>
+		  <Id>
+			  <TypeId>BlueprintDefinition</TypeId>
+			  <SubtypeId>HeavyTurretComponentBP</SubtypeId>
+		  </Id>
+		  <DisplayName>Heavy Turret Component</DisplayName>
+		  <Icon>Textures\GUI\Icons\RailgunTurret_MainScene.png</Icon>
+		  <Prerequisites>
+			  <Item Amount="300" TypeId="Component" SubtypeId="SteelPlate" />
+			  <Item Amount="300" TypeId="Component" SubtypeId="Construction" />
+			  <Item Amount="30" TypeId="Component" SubtypeId="Computer" />
+			  <Item Amount="30" TypeId="Component" SubtypeId="Motor" />
+			  <Item Amount="15" TypeId="Component" SubtypeId="MetalGrid" />
+			  <Item Amount="15" TypeId="Component" SubtypeId="LargeTube" />
+			  <Item Amount="15" TypeId="Component" SubtypeId="SmallTube" />
+
+		  </Prerequisites>
+		  <Result Amount="1" TypeId="Component" SubtypeId="HeavyTurretComponent" />
+		  <BaseProductionTimeInSeconds>60</BaseProductionTimeInSeconds>
+	  </Blueprint>
+
+	  <Blueprint>
+		  <Id>
+			  <TypeId>BlueprintDefinition</TypeId>
+			  <SubtypeId>TurretBaseComponentBP</SubtypeId>
+		  </Id>
+		  <DisplayName>Turret Base Component</DisplayName>
+		  <Icon>Textures\GUI\Icons\TRR_LG_to_SG_Stator_7x7.dds</Icon>
+		  <Prerequisites>
+			  <Item Amount="300" TypeId="Component" SubtypeId="SteelPlate" />
+			  <Item Amount="300" TypeId="Component" SubtypeId="Construction" />
+			  <Item Amount="30" TypeId="Component" SubtypeId="Computer" />
+			  <Item Amount="30" TypeId="Component" SubtypeId="Motor" />
+			  <Item Amount="15" TypeId="Component" SubtypeId="MetalGrid" />
+			  <Item Amount="15" TypeId="Component" SubtypeId="LargeTube" />
+			  <Item Amount="15" TypeId="Component" SubtypeId="SmallTube" />
+
+		  </Prerequisites>
+		  <Result Amount="1" TypeId="Component" SubtypeId="TurretBaseComponent" />
+		  <BaseProductionTimeInSeconds>60</BaseProductionTimeInSeconds>
+	  </Blueprint>
+    
+ 	  <Blueprint>
+		  <Id>
+			  <TypeId>BlueprintDefinition</TypeId>
+			  <SubtypeId>TurretRotorComponentBP</SubtypeId>
+		  </Id>
+		  <DisplayName>Turret Rotor Component</DisplayName>
+		  <Icon>Textures\GUI\Icons\TRR_5x5x1_TR_Rotor.dds</Icon>
+		  <Prerequisites>
+			  <Item Amount="300" TypeId="Component" SubtypeId="SteelPlate" />
+			  <Item Amount="300" TypeId="Component" SubtypeId="Construction" />
+			  <Item Amount="30" TypeId="Component" SubtypeId="Computer" />
+			  <Item Amount="30" TypeId="Component" SubtypeId="Motor" />
+			  <Item Amount="15" TypeId="Component" SubtypeId="MetalGrid" />
+			  <Item Amount="15" TypeId="Component" SubtypeId="LargeTube" />
+			  <Item Amount="15" TypeId="Component" SubtypeId="SmallTube" />
+
+		  </Prerequisites>
+		  <Result Amount="1" TypeId="Component" SubtypeId="TurretRotorComponent" />
+		  <BaseProductionTimeInSeconds>60</BaseProductionTimeInSeconds>
+	  </Blueprint>
+
+	  <Blueprint>
+		  <Id>
+			  <TypeId>BlueprintDefinition</TypeId>
+			  <SubtypeId>StructuralComponentBP</SubtypeId>
+		  </Id>
+		  <DisplayName>Turret Structural Component</DisplayName>
+		  <Icon>Textures\GUI\Icons\TRR_5x5x1_TR_Rotor.dds</Icon>
+		  <Prerequisites>
+			  <Item Amount="300" TypeId="Component" SubtypeId="SteelPlate" />
+			  <Item Amount="300" TypeId="Component" SubtypeId="Construction" />
+			  <Item Amount="30" TypeId="Component" SubtypeId="Computer" />
+			  <Item Amount="30" TypeId="Component" SubtypeId="Motor" />
+			  <Item Amount="15" TypeId="Component" SubtypeId="MetalGrid" />
+			  <Item Amount="15" TypeId="Component" SubtypeId="LargeTube" />
+			  <Item Amount="15" TypeId="Component" SubtypeId="SmallTube" />
+
+		  </Prerequisites>
+		  <Result Amount="1" TypeId="Component" SubtypeId="StructuralComponent" />
+		  <BaseProductionTimeInSeconds>60</BaseProductionTimeInSeconds>
+	  </Blueprint>
+	  
+	  <!--COMPONENTS ARE ABOVE, AMMO BELOW.-->
+	  
+	  
+	  <Blueprint>
+		  <Id>
+			  <TypeId>BlueprintDefinition</TypeId>
+			  <SubtypeId>MK1BattleshipGun_MagazineLarge</SubtypeId>
+		  </Id>
+		  <DisplayName>Avalanche Cannon Shell</DisplayName>
+		  <Icon>Textures\GUI\Icons\ammo\LargeCalibreShell.dds</Icon>
+		  <Prerequisites>
+			  <Item Amount="120" TypeId="Ingot" SubtypeId="Iron" />
+			  <Item Amount="60" TypeId="Ingot" SubtypeId="Nickel" />
+			  <Item Amount="3" TypeId="Ingot" SubtypeId="Silicon" />
+			  <Item Amount="1.8" TypeId="Ingot" SubtypeId="Magnesium" />
+			  <Item Amount="9" TypeId="Ingot" SubtypeId="Cobalt" />
+		  </Prerequisites>
+		  <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="LargeCalibreAmmo" />
+		  <BaseProductionTimeInSeconds>6</BaseProductionTimeInSeconds>
+	  </Blueprint>
+	  
+	  <!--
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>MK1BattleshipGun_MagazineLarge</SubtypeId>
+      </Id>
+      <DisplayName>Avalanche HE Rounds</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\Iron_Maiden_Ammo.png</Icon>
+      <Prerequisites>
+        <Item Amount="35" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="6" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="2" TypeId="Ingot" SubtypeId="Cobalt" />
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="MK1BattleshipGun_MagazineLarge" />
+      <BaseProductionTimeInSeconds>5</BaseProductionTimeInSeconds>
+    </Blueprint>
+	  -->	  
+	  
+	  <Blueprint>
+		  <Id>
+			  <TypeId>BlueprintDefinition</TypeId>
+			  <SubtypeId>CoilgunMk2_MagazineLarge</SubtypeId>
+		  </Id>
+		  <DisplayName>Depleted Uranium Slugs</DisplayName>
+		  <Icon>Textures\GUI\Icons\ammo\CoilgunMk2_BulletModel.png</Icon>
+		  <Prerequisites>
+			  <Item Amount="2000" TypeId="Ingot" SubtypeId="Iron" />
+			  <Item Amount="250" TypeId="Ingot" SubtypeId="Nickel" />
+			  <Item Amount="7" TypeId="Ingot" SubtypeId="Magnesium" />
+			  <Item Amount="2" TypeId="Ingot" SubtypeId="Uranium" />
+			  <Item Amount="1" TypeId="Ingot" SubtypeId="Platinum" />
+		  </Prerequisites>
+		  <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="CoilgunMk2_MagazineLarge" />
+		  <BaseProductionTimeInSeconds>25</BaseProductionTimeInSeconds>
+	  </Blueprint>
+	  <Blueprint>
+		  <Id>
+			  <TypeId>BlueprintDefinition</TypeId>
+			  <SubtypeId>UNSC_Coilgun_MagazineLarge</SubtypeId>
+		  </Id>
+		  <DisplayName>Magnetic Slugs</DisplayName>
+		  <Icon>Textures\GUI\Icons\ammo\CoilgunSlug.png</Icon>
+		  <Prerequisites>
+			  <Item Amount="2000" TypeId="Ingot" SubtypeId="Iron" />
+			  <Item Amount="250" TypeId="Ingot" SubtypeId="Nickel" />
+		  </Prerequisites>
+		  <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="UNSC_Coilgun_MagazineLarge" />
+		  <BaseProductionTimeInSeconds>12</BaseProductionTimeInSeconds>
+	  </Blueprint>
+
+	  <Blueprint>
+		  <Id>
+			  <TypeId>BlueprintDefinition</TypeId>
+			  <SubtypeId>IronMaiden_MagazineLarge</SubtypeId>
+		  </Id>
+		  <DisplayName>Tungsten Rounds</DisplayName>
+		  <Icon>Textures\GUI\Icons\ammo\Iron_Maiden_Ammo.png</Icon>
+		  <Prerequisites>
+			  <Item Amount="35" TypeId="Ingot" SubtypeId="Iron" />
+			  <Item Amount="6" TypeId="Ingot" SubtypeId="Nickel" />
+			  <Item Amount="2" TypeId="Ingot" SubtypeId="Cobalt" />
+			  <Item Amount="1" TypeId="Ingot" SubtypeId="Magnesium" />
+		  </Prerequisites>
+		  <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="IronMaiden_MagazineLarge" />
+		  <BaseProductionTimeInSeconds>5</BaseProductionTimeInSeconds>
+	  </Blueprint>
+	  <Blueprint>
+		  <Id>
+			  <TypeId>BlueprintDefinition</TypeId>
+			  <SubtypeId>RailgunTurret_MagazineLarge</SubtypeId>
+		  </Id>
+		  <DisplayName>Tungsten Rounds</DisplayName>
+		  <Icon>Textures\GUI\Icons\ammo\Iron_Maiden_Ammo.png</Icon>
+		  <Prerequisites>
+			  <Item Amount="35" TypeId="Ingot" SubtypeId="Iron" />
+			  <Item Amount="6" TypeId="Ingot" SubtypeId="Nickel" />
+			  <Item Amount="2" TypeId="Ingot" SubtypeId="Cobalt" />
+			  <Item Amount="1" TypeId="Ingot" SubtypeId="Magnesium" />
+		  </Prerequisites>
+		  <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="RailgunTurret_MagazineLarge" />
+		  <BaseProductionTimeInSeconds>5</BaseProductionTimeInSeconds>
+	  </Blueprint>
+
+	  <Blueprint>
+		  <Id>
+			  <TypeId>BlueprintDefinition</TypeId>
+			  <SubtypeId>Torp_MagazineLarge</SubtypeId>
+		  </Id>
+		  <DisplayName>HE Trident Torpedoes</DisplayName>
+		  <Icon>Textures\GUI\Icons\TorpReaper_Torp.png</Icon>
+		  <Prerequisites>
+			  <Item Amount="2000" TypeId="Ingot" SubtypeId="Iron" />
+			  <Item Amount="100" TypeId="Ingot" SubtypeId="Nickel" />
+			  <Item Amount="300" TypeId="Ingot" SubtypeId="Silicon" />
+			  <Item Amount="100" TypeId="Ingot" SubtypeId="Cobalt" />
+			  <Item Amount="10" TypeId="Ingot" SubtypeId="Gold" />
+			  <Item Amount="20" TypeId="Ingot" SubtypeId="Magnesium" />
+			  <Item Amount="3" TypeId="Ingot" SubtypeId="Uranium" />
+		  </Prerequisites>
+		  <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="Torp_MagazineLarge" />
+		  <BaseProductionTimeInSeconds>60</BaseProductionTimeInSeconds>
+	  </Blueprint>
+	  <Blueprint>
+		  <Id>
+			  <TypeId>BlueprintDefinition</TypeId>
+			  <SubtypeId>EMPTorp_MagazineLarge</SubtypeId>
+		  </Id>
+		  <DisplayName>EMP Trident Torpedoes</DisplayName>
+		  <Icon>Textures\GUI\Icons\TorpReaper_Torp.png</Icon>
+		  <Prerequisites>
+			  <Item Amount="1500" TypeId="Ingot" SubtypeId="Iron" />
+			  <Item Amount="100" TypeId="Ingot" SubtypeId="Nickel" />
+			  <Item Amount="300" TypeId="Ingot" SubtypeId="Silicon" />
+			  <Item Amount="100" TypeId="Ingot" SubtypeId="Cobalt" />
+			  <Item Amount="10" TypeId="Ingot" SubtypeId="Gold" />
+			  <Item Amount="7" TypeId="Ingot" SubtypeId="Uranium" />
+			  <Item Amount="2" TypeId="Ingot" SubtypeId="Platinum" />
+		  </Prerequisites>
+		  <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="EMPTorp_MagazineLarge" />
+		  <BaseProductionTimeInSeconds>60</BaseProductionTimeInSeconds>
+	  </Blueprint>
+
+	  <Blueprint>
+		  <Id>
+			  <TypeId>BlueprintDefinition</TypeId>
+			  <SubtypeId>VMLS_MagazineLarge</SubtypeId>
+		  </Id>
+		  <DisplayName>HE VXM-08 Missile</DisplayName>
+		  <Icon>Textures\GUI\Icons\MLS_MissileAmmo.png</Icon>
+		  <Prerequisites>
+			  <Item Amount="500" TypeId="Ingot" SubtypeId="Iron" />
+			  <Item Amount="25" TypeId="Ingot" SubtypeId="Nickel" />
+			  <Item Amount="100" TypeId="Ingot" SubtypeId="Silicon" />
+			  <Item Amount="25" TypeId="Ingot" SubtypeId="Cobalt" />
+			  <Item Amount="3" TypeId="Ingot" SubtypeId="Gold" />
+			  <Item Amount="5" TypeId="Ingot" SubtypeId="Magnesium" />
+		  </Prerequisites>
+		  <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="VMLS_MagazineLarge" />
+		  <BaseProductionTimeInSeconds>35</BaseProductionTimeInSeconds>
+	  </Blueprint>
+	  <Blueprint>
+		  <Id>
+			  <TypeId>BlueprintDefinition</TypeId>
+			  <SubtypeId>SwarmVMLS_MagazineLarge</SubtypeId>
+		  </Id>
+		  <DisplayName>Decoy VXM-08 Missile</DisplayName>
+		  <Icon>Textures\GUI\Icons\MLS_MissileAmmo.png</Icon>
+		  <Prerequisites>
+			  <Item Amount="750" TypeId="Ingot" SubtypeId="Iron" />
+			  <Item Amount="50" TypeId="Ingot" SubtypeId="Nickel" />
+			  <Item Amount="100" TypeId="Ingot" SubtypeId="Silicon" />
+			  <Item Amount="50" TypeId="Ingot" SubtypeId="Cobalt" />
+			  <Item Amount="3" TypeId="Ingot" SubtypeId="Gold" />
+		  </Prerequisites>
+		  <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="SwarmVMLS_MagazineLarge" />
+		  <BaseProductionTimeInSeconds>30</BaseProductionTimeInSeconds>
+	  </Blueprint>
+
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>Large_EnergyGun_reload_1</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>350</MaxDistance>
+		  <PreventSynchronization>6</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>5</DynamicMusicAmount>
+		  <Volume>0.2</Volume>
+		  <SoundLimit>6</SoundLimit>
+		  <Loopable>false</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Large_EnergyGun_reload_1.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+
+	  <Blueprint>
+		  <Id>
+			  <TypeId>BlueprintDefinition</TypeId>
+			  <SubtypeId>MK1Railgun_MagazineLarge</SubtypeId>
+		  </Id>
+		  <DisplayName>MK1 Railgun Projectile</DisplayName>
+		  <Icon>Textures\GUI\Icons\ammo\RailgunPorjectile1.dds</Icon>
+		  <Prerequisites>
+			  <Item Amount="1000" TypeId="Ingot" SubtypeId="Iron" />
+			  <Item Amount="50" TypeId="Ingot" SubtypeId="Nickel" />
+			  <Item Amount="50" TypeId="Ingot" SubtypeId="Cobalt" />
+		  </Prerequisites>
+		  <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="MK1Railgun_MagazineLarge" />
+		  <BaseProductionTimeInSeconds>25</BaseProductionTimeInSeconds>
+	  </Blueprint>	 
+	  
+	  
+	  
+	  
+	  
+	  
+  </Blueprints>
+</Definitions>

@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<!-- Documentation: https://sites.google.com/a/keenswh.com/art/home/decals -->
+	<!-- <DecalGlobals>
+        <Id>
+            <TypeId>DecalGlobalsDefinition</TypeId>
+            <SubtypeId>Default</SubtypeId>
+        </Id>
+        <DecalQueueSize>
+            <MaxDecals>500</MaxDecals>
+            <MaxDecals>1000</MaxDecals>
+            <MaxDecals>2000</MaxDecals>
+        </DecalQueueSize>
+        <DecalTrailsQueueSize>
+            <MaxDecals>500</MaxDecals>
+            <MaxDecals>1000</MaxDecals>
+            <MaxDecals>8000</MaxDecals>
+        </DecalTrailsQueueSize>
+    </DecalGlobals-->
+	<Decals>
+
+
+		<Decal>
+			<Id>
+				<TypeId>DecalDefinition</TypeId>
+				<SubtypeId>TIO_Explosive_Decal1</SubtypeId>
+			</Id>
+			<Source>TIO_Explosive_Decal</Source>
+			<Target>Metal</Target>
+			<Material>
+				<NormalmapTexture>Textures/Decals/MissileDirt_01_ng.dds</NormalmapTexture>
+				<ColorMetalTexture>Textures/Decals/MissileDirt_01_cm.dds</ColorMetalTexture>
+				<AlphamaskTexture>Textures/Decals/MissileDirt_01_alphamask.dds</AlphamaskTexture>
+				<ExtensionsTexture>Textures/Decals/MissileDirt_01_add.dds</ExtensionsTexture>
+			</Material>
+			<MinSize>10</MinSize>
+			<MaxSize>10</MaxSize>
+			<Depth>7.5</Depth>
+			<RenderDistance>1000</RenderDistance>
+		</Decal>
+
+		<Decal>
+			<Id>
+				<TypeId>DecalDefinition</TypeId>
+				<SubtypeId>TIO_Shatter_Decal1</SubtypeId>
+			</Id>
+			<Source>TIO_Shatter_Decal</Source>
+			<Target>Metal</Target>
+			<Material>
+				<NormalmapTexture>Textures/Decals/Glass_Bullet_Hole_01_ng.dds</NormalmapTexture>
+				<ColorMetalTexture>Textures/Decals/Glass_Bullet_Hole_01_cm.dds</ColorMetalTexture>
+				<AlphamaskTexture>Textures/Decals/Glass_Bullet_Hole_01_alphamask.dds</AlphamaskTexture>
+				<ExtensionsTexture>Textures/Decals/Glass_Bullet_Hole_01_add.dds</ExtensionsTexture>
+			</Material>
+			<MinSize>5</MinSize>
+			<MaxSize>5</MaxSize>
+			<Depth>20</Depth>
+			<RenderDistance>1000</RenderDistance>
+		</Decal>
+
+		<Decal>
+			<Id>
+				<TypeId>DecalDefinition</TypeId>
+				<SubtypeId>TIO_Bullet_Decal1</SubtypeId>
+			</Id>
+			<Source>TIO_Bullet_Decal</Source>
+			<Target>Metal</Target>
+			<Material>
+				<NormalmapTexture>Textures/Decals/Bullet_Metal_Hit_01_ng.dds</NormalmapTexture>
+				<ColorMetalTexture>Textures/Decals/Bullet_Metal_Hit_01_cm.dds</ColorMetalTexture>
+				<AlphamaskTexture>Textures/Decals/Bullet_Metal_Hit_01_alphamask.dds</AlphamaskTexture>
+				<ExtensionsTexture>Textures/Decals/Bullet_Metal_Hit_01_add.dds</ExtensionsTexture>
+			</Material>
+			<MinSize>2</MinSize>
+			<MaxSize>5</MaxSize>
+			<Depth>20</Depth>
+			<RenderDistance>1000</RenderDistance>
+		</Decal>
+
+
+	</Decals>
+</Definitions>
