@@ -99,7 +99,7 @@ namespace Scripts
                 Random = false,
                 RandomMin = 1,
                 RandomMax = 1,
-                SkipParent = false,
+                SkipParent = true,
                 PatternSteps = 2, // Number of Ammos activated per round, will progress in order and loop.  Ignored if Random = true.				
             },
             DamageScales = new DamageScaleDef
@@ -498,7 +498,7 @@ namespace Scripts
                 Random = false,
                 RandomMin = 1,
                 RandomMax = 1,
-                SkipParent = false,
+                SkipParent = true,
                 PatternSteps = 2, // Number of Ammos activated per round, will progress in order and loop.  Ignored if Random = true.				
             },
             DamageScales = new DamageScaleDef
