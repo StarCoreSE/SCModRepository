@@ -1,0 +1,79 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <CubeBlocks>
+
+
+        <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+            <Id>
+                <TypeId>ConveyorSorter</TypeId>
+                <SubtypeId>Type18_Artillery</SubtypeId>
+            </Id>
+            <DisplayName>Type 18 'Mercury' Heavy Turret</DisplayName>
+            <Description>
+              [6km Targeting Range]
+              [Energy damage]
+              [1560 m/s]
+              This weapon slowly repairs itself while offline, and when below functional.
+            </Description>
+			<GuiVisible>true</GuiVisible>
+            <Icon>Textures\GUI\Icons\Mk1CannonMainScene.dds</Icon>
+            <CubeSize>Large</CubeSize>
+            <BlockTopology>TriangleMesh</BlockTopology>
+            <Size x="3" y="5" z="6"/>
+            <ModelOffset x="0" y="0" z="0"/>
+            <Model>Models\Mk1CannonMainScene.mwm</Model>
+            <Components>
+				<Component Subtype="TurretBaseComponent" Count="10" />
+				<Component Subtype="TurretRotorComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="1" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="4" />
+
+                <!-- which is basically
+				<Component Count="1000" Subtype="SteelPlate"/>
+				<Component Count="150" Subtype="Construction"/>
+				<Component Count="40" Subtype="LargeTube" />
+                <Component Count="50" Subtype="Motor" />
+				<Component Count="150" Subtype="Computer"/>
+				<Component Count="50" Subtype="MetalGrid" />
+				<Component Count="150" Subtype="Construction"/>
+				<Component Count="3000" Subtype="SteelPlate"/>-->
+				<!-- or you could
+                <Component Count="1000" Subtype="SteelPlate"/>
+				<Component Count="500" Subtype="Construction"/>
+				<Component Count="75" Subtype="LargeTube" />
+				<Component Count="100" Subtype="MetalGrid" />
+                <Component Count="150" Subtype="Computer"/>
+                <Component Count="100" Subtype="Motor"/>
+				<Component Count="500" Subtype="Construction"/>
+				<Component Count="3000" Subtype="SteelPlate"/>-->
+
+            </Components>
+            <CriticalComponent Index="0" Subtype="Computer"/>
+            <BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Mk1CannonMainScene_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\Mk1CannonMainScene_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Mk1CannonMainScene_BS3.mwm"/>
+			</BuildProgressModels>
+            <MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="6.00" EndY="3.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="6.00" EndY="3.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="6.00"/>
+			</MountPoints>
+            <WeaponDefinitionId Subtype="ShootMissileGooder" /> 
+            <BuildTimeSeconds>200</BuildTimeSeconds>
+            <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+            <DamagedSound>ParticleElectrical</DamagedSound>
+            <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+            <DestroySound>WepSmallWarheadExpl</DestroySound>
+            <MirroringZ>Y</MirroringZ>
+            <MirroringY>Z</MirroringY>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<RequiredPowerInput>0.00002</RequiredPowerInput>
+            <PCU>800</PCU>
+            <IsAirTight>true</IsAirTight>
+        </Definition>
+    </CubeBlocks>
+</Definitions>

@@ -555,8 +555,8 @@ namespace ShipPoints
 				JN_175Fixed@1350;
 				APE_Strong@150; 
 				Devastator_Torp@700; 
-				Priest_Block@150; 
-				PriestReskin_Block@150; 
+				Priest_Block@125; 
+				PriestReskin_Block@125; 
 				Fixed_Rockets@250; 
 				Type18_Artillery@270; 
 				Type21_Artillery@540; 

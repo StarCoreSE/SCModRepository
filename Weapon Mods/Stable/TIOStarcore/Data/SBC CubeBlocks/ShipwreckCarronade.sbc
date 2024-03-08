@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <CubeBlocks>
+
+        <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+            <Id>
+                <TypeId>ConveyorSorter</TypeId>
+                <SubtypeId>HeavyCarronade_5x5_Turret</SubtypeId>
+            </Id>
+            <DisplayName>'Shipwreck' Heavy Carronade</DisplayName>
+            <Description>
+              [2.5km Targeting Range]
+              [Energy damage]
+              [1250 m/s]
+                POW! HA-HA!
+            </Description>
+			<GuiVisible>true</GuiVisible>
+			<Icon>Textures\GUI\Icons\QuadArtilleryBase.dds</Icon>
+            <CubeSize>Large</CubeSize>
+            <BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="5" y="3" z="5"/>
+			<ModelOffset x="0" y="1.25" z="0"/>
+			<Model>Models\Cubes\large\QuadArtilleryBase.mwm</Model>
+            <Components>
+				<Component Subtype="TurretBaseComponent" Count="12" />
+				<Component Subtype="TurretRotorComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="1" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="4" />
+            </Components>
+            <CriticalComponent Index="0" Subtype="Computer"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.10" EndX="5.00" EndY="1.90"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.10" EndX="5.00" EndY="1.90"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.10" EndX="5.00" EndY="1.90"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.10" EndX="5.00" EndY="1.90"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
+			</MountPoints>
+            <WeaponDefinitionId Subtype="ShootMissileGooder" /> 
+            <BuildTimeSeconds>200</BuildTimeSeconds>
+            <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+            <DamagedSound>ParticleElectrical</DamagedSound>
+            <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+            <DestroySound>WepSmallWarheadExpl</DestroySound>
+            <MirroringZ>Y</MirroringZ> 
+            <MirroringY>Z</MirroringY> 
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<RequiredPowerInput>0.00002</RequiredPowerInput>
+            <PCU>600</PCU>
+            <IsAirTight>true</IsAirTight>
+        </Definition>
+    </CubeBlocks>
+</Definitions>
