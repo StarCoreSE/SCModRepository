@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Ammos>
+     <Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+      <Id>
+        <TypeId>AmmoDefinition</TypeId>
+        <SubtypeId>SAIDS_Red_Ammo</SubtypeId>
+      </Id>
+      <BasicProperties>
+        <DesiredSpeed>1500</DesiredSpeed>
+        <SpeedVariance>0</SpeedVariance>
+        <MaxTrajectory>2000</MaxTrajectory>
+        <BackkickForce>50</BackkickForce>
+        <PhysicalMaterial>GunBullet</PhysicalMaterial>
+      </BasicProperties>
+      <ProjectileProperties>
+        <ProjectileTrailScale>0.2</ProjectileTrailScale>
+        <ProjectileHitImpulse>2</ProjectileHitImpulse>
+        <ProjectileMassDamage>2500000</ProjectileMassDamage>
+        <ProjectileHealthDamage>5000</ProjectileHealthDamage>
+        <HeadShot>true</HeadShot>
+      </ProjectileProperties>
+    </Ammo> 	
+
+
+     <Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+      <Id>
+        <TypeId>AmmoDefinition</TypeId>
+        <SubtypeId>SAIDS_Blue_Ammo</SubtypeId>
+      </Id>
+      <BasicProperties>
+        <DesiredSpeed>1500</DesiredSpeed>
+        <SpeedVariance>0</SpeedVariance>
+        <MaxTrajectory>2000</MaxTrajectory>
+        <BackkickForce>50</BackkickForce>
+        <PhysicalMaterial>GunBullet</PhysicalMaterial>
+      </BasicProperties>
+      <ProjectileProperties>
+        <ProjectileTrailScale>0.2</ProjectileTrailScale>
+        <ProjectileHitImpulse>2</ProjectileHitImpulse>
+        <ProjectileMassDamage>2500000</ProjectileMassDamage>
+        <ProjectileHealthDamage>5000</ProjectileHealthDamage>
+        <HeadShot>true</HeadShot>
+      </ProjectileProperties>
+    </Ammo> 	
+
+    <Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+      <Id>
+        <TypeId>AmmoDefinition</TypeId>
+        <SubtypeId>SAIDS_Purple_Ammo</SubtypeId>
+      </Id>
+      <BasicProperties>
+        <DesiredSpeed>1500</DesiredSpeed>
+        <SpeedVariance>0</SpeedVariance>
+        <MaxTrajectory>2000</MaxTrajectory>
+        <BackkickForce>50</BackkickForce>
+        <PhysicalMaterial>GunBullet</PhysicalMaterial>
+      </BasicProperties>
+      <ProjectileProperties>
+        <ProjectileTrailScale>0.2</ProjectileTrailScale>
+        <ProjectileHitImpulse>2</ProjectileHitImpulse>
+        <ProjectileMassDamage>2500000</ProjectileMassDamage>
+        <ProjectileHealthDamage>5000</ProjectileHealthDamage>
+        <HeadShot>true</HeadShot>
+      </ProjectileProperties>
+    </Ammo> 	
+
+    <Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
+      <Id>
+        <TypeId>AmmoDefinition</TypeId>
+        <SubtypeId>SAIDS_Green_Ammo</SubtypeId>
+      </Id>
+      <BasicProperties>
+        <DesiredSpeed>1500</DesiredSpeed>
+        <SpeedVariance>0</SpeedVariance>
+        <MaxTrajectory>2000</MaxTrajectory>
+        <BackkickForce>50</BackkickForce>
+        <PhysicalMaterial>GunBullet</PhysicalMaterial>
+      </BasicProperties>
+      <ProjectileProperties>
+        <ProjectileTrailScale>0.2</ProjectileTrailScale>
+        <ProjectileHitImpulse>2</ProjectileHitImpulse>
+        <ProjectileMassDamage>2500000</ProjectileMassDamage>
+        <ProjectileHealthDamage>5000</ProjectileHealthDamage>
+        <HeadShot>true</HeadShot>
+      </ProjectileProperties>
+    </Ammo> 	
+  </Ammos>
+</Definitions>

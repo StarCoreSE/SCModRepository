@@ -489,7 +489,7 @@ namespace Scripts
             },
             Pattern = new PatternDef
             {
-                Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
+                Patterns = new[] { // If enabled, set of multiple ammos to fire in order *after the main ammo, *unless SkipParent = true
                     "MA_Laser_Gladius_Ammo",
                     "MA_Laser_T3_Ammo_Decal",
                 },
@@ -498,7 +498,7 @@ namespace Scripts
                 Random = false,
                 RandomMin = 1,
                 RandomMax = 1,
-                SkipParent = false,
+                SkipParent = true,
                 PatternSteps = 2, // Number of Ammos activated per round, will progress in order and loop.  Ignored if Random = true.				
             },
             DamageScales = new DamageScaleDef
