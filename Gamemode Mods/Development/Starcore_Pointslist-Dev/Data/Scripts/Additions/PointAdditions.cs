@@ -112,7 +112,7 @@ namespace ShipPoints
 
 				LargeHydrogenTank@30;
 					LargeHydrogenTankIndustrial@30;
-				LargeHydrogenTankSmall@50;
+				LargeHydrogenTankSmall@30;
 
 				LargeBlockLargeHydrogenThrust@50;
 					AQD_LG_HydroThrusterL_ArmoredSlope@50;
