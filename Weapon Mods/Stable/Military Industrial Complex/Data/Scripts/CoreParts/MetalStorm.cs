@@ -213,7 +213,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                MS1FUCK,  // Must list all primary, shrapnel, and pattern ammos.
+                MS1,  // Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = Weapon75_Animation,
             //Upgrades = UpgradeModules,
