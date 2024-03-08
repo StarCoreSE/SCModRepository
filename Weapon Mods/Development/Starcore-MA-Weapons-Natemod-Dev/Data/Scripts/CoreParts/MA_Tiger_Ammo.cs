@@ -136,7 +136,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 3f, // Multiplier for damage against shields.
+                    Modifier = 8f, // it needs this
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -191,7 +191,7 @@ namespace Scripts
                 {
                     Enable = true,
                     Radius = 3f, // Meters
-                    Damage = 40000f,
+                    Damage = 16000f, // it could never affect more than 4 blocks so lets not gaslight people
                     Depth = 1f,
                     MaxAbsorb = 4000f,
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
