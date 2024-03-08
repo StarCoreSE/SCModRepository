@@ -1307,7 +1307,7 @@
       <DisplayName>16"/50 Triple Gun</DisplayName>
 	<Description>
 		16 Inch Triple Gun
-		6km AI range, 8km shell range
+		8km AI range, 10km shell range
 		Fires HE amd AP Shells
 		Temp BP: 400
 	</Description>
@@ -1378,7 +1378,7 @@
       <DisplayName>15" mk24 Dual</DisplayName>
 	<Description>
 		15 Inch Twin gun
-		6km AI range, 8km shell range
+		8km AI range, 10km shell range
 		Fires HE amd AP Shells
 		Temp BP: 250
 	</Description>
@@ -1452,7 +1452,7 @@
       <DisplayName>15" mk25 Dual</DisplayName>
 	<Description>
 		15 Inch Twin gun
-		6km AI range, 8km shell range
+		8km AI range, 10km shell range
 		Fires HE amd AP Shells
 		Temp BP: 250
 	</Description>
@@ -1671,7 +1671,7 @@
       <DisplayName>15"/45 mk20 Quad gun</DisplayName>
 	<Description>
 		15 Inch Quad gun
-		6km AI range, 8km shell range
+		8km AI range, 10km shell range
 		Fires HE amd AP Shells
 		Temp BP: 400
 	</Description>
