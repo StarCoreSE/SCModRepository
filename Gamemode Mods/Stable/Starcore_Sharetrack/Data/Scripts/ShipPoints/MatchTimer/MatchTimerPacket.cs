@@ -1,4 +1,5 @@
 ﻿using ProtoBuf;
+using Sandbox.Engine.Multiplayer;
 using Sandbox.ModAPI;
 using System;
 using System.Collections.Generic;
@@ -14,14 +15,12 @@ namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.
         [ProtoMember(1)] public ulong SenderSteamId;
         [ProtoMember(2)] private long matchStartTime;
         [ProtoMember(3)] private long matchEndTime;
-        [ProtoMember(4)] public float MatchDuration;
 
         public DateTime MatchStartTime => new DateTime(matchStartTime - (long)(NetworkTimeSync.ServerTimeOffset*TimeSpan.TicksPerMillisecond));
         public DateTime MatchEndTime => new DateTime(matchEndTime - (long)(NetworkTimeSync.ServerTimeOffset * TimeSpan.TicksPerMillisecond));
 
         public MatchTimerPacket()
         {
-            MatchDuration += (float) NetworkTimeSync.ThisPlayerPing;
         }
 
         public MatchTimerPacket(MatchTimer timer)
@@ -29,7 +28,6 @@ namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.
             SenderSteamId = MyAPIGateway.Multiplayer.MyId;
             matchStartTime = (int)timer.StartTime.Ticks;
             matchEndTime = (int)timer.EndTime.Ticks;
-            MatchDuration = (float)timer.MatchDurationMinutes;
         }
 
 
@@ -59,7 +57,8 @@ namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.
         }
         public static void SendMatchUpdate(MatchTimer timer)
         {
-            SendToEveryone(new MatchTimerPacket(timer));
+            MatchTimerPacket packet = new MatchTimerPacket(timer);
+            SendToEveryone(packet);
         }
         #endregion
     }

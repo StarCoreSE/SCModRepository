@@ -35,7 +35,6 @@ namespace klime.PointCheck
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     public class PointCheck : MySessionComponentBase
     {
-
         private NetworkAPI Network => NetworkAPI.Instance;
         public const ushort ComId = 42511; public const string Keyword = "/debug"; public const string DisplayName = "Debug";
         //Old cap
@@ -1303,6 +1302,14 @@ namespace klime.PointCheck
                 mobp.Clear();
 
                 MainTrackerUpdate(ts, m, bp, mbp, pbp, obp, mobp);
+
+                // Match time
+                tt.Append("<color=orange>----                 <color=white>Match Time: ")
+                    .Append(MatchTimer.I.CurrentMatchTime.ToString(@"mm\:ss"))
+                    .Append('/')
+                    .Append(MatchTimer.I.MatchDurationString)
+                    .Append("                 <color=orange>----\n");
+
                 TeamBPCalc(tt, ts, m, bp, mbp, pbp, obp, mobp);
 
                 bool autotrackenabled = false;

@@ -1,4 +1,5 @@
-﻿using ProtoBuf;
+﻿using klime.PointCheck;
+using ProtoBuf;
 using Sandbox.ModAPI;
 using System;
 using System.Collections.Generic;
@@ -21,10 +22,12 @@ namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.
         /// </summary>
         public const int TimerUpdateInterval = 600;
         public const ushort NetworkId = 8576;
+        public const long ModMessageId = 8573643466;
 
         public DateTime StartTime { get; internal set; } = DateTime.MinValue;
         public DateTime EndTime { get; internal set; } = DateTime.MinValue;
         public TimeSpan CurrentMatchTime => (DateTime.UtcNow < EndTime ? DateTime.UtcNow : EndTime) - StartTime;
+        public bool IsMatchEnded = false;
 
         private double matchDurationMinutes = 20;
 
@@ -38,8 +41,11 @@ namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.
             {
                 matchDurationMinutes = value;
                 EndTime = StartTime.AddMinutes(matchDurationMinutes);
+                MatchDurationString = $"{(matchDurationMinutes < 10 ? "0" : "")}{(int)matchDurationMinutes}:{Math.Round((matchDurationMinutes-(int)matchDurationMinutes)*60)}";
             }
         }
+
+        public string MatchDurationString = "20:00";
 
 
         #region Overrides
@@ -59,7 +65,13 @@ namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.
         public override void UpdateAfterSimulation()
         {
             ticks++;
-            MyAPIGateway.Utilities.ShowNotification($"Match Time: {CurrentMatchTime:mm\\:ss}/{MatchDurationMinutes}", 1000/60);
+            MyAPIGateway.Utilities.SendModMessage(ModMessageId, CurrentMatchTime);
+
+            MyAPIGateway.Utilities.ShowNotification($"A: {DateTime.UtcNow > EndTime} B: {IsMatchEnded}", 1000/60);
+            if (DateTime.UtcNow > EndTime && !IsMatchEnded)
+            {
+                PointCheck.EndMatch();
+            }
 
             // Update every 10 seconds
             if (ticks % TimerUpdateInterval != 0)
@@ -81,18 +93,19 @@ namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.
             //MatchDurationMinutes = matchDurationMinutes;
             MatchDurationMinutes = 0.25;
             MatchTimerPacket.SendMatchUpdate(this);
+            IsMatchEnded = false;
         }
 
         public void Stop()
         {
             EndTime = DateTime.UtcNow;
+            IsMatchEnded = true;
         }
 
         public void UpdateFromPacket(MatchTimerPacket packet)
         {
             StartTime = packet.MatchStartTime;
             EndTime = packet.MatchEndTime;
-            MatchDurationMinutes = packet.MatchDuration;
         }
 
         #endregion
