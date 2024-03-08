@@ -98,11 +98,11 @@ namespace Scripts {
                     Type = BlockWeapon, // What type of weapon this is; BlockWeapon, HandWeapon, Phantom 
                     CriticalReaction = new CriticalDef
                     {
-                        Enable = false, // Enables Warhead behaviour.
+                        Enable = true, // Enables Warhead behaviour.
                         DefaultArmedTimer = 120, // Sets default countdown duration.
                         PreArmed = false, // Whether the warhead is armed by default when placed. Best left as false.
-                        TerminalControls = true, // Whether the warhead should have terminal controls for arming and detonation.
-                        AmmoRound = "", // Optional. If specified, the warhead will always use this ammo on detonation rather than the currently selected ammo.
+                        TerminalControls = false, // Whether the warhead should have terminal controls for arming and detonation.
+                        AmmoRound = "SRB_ammo_explosions", // Optional. If specified, the warhead will always use this ammo on detonation rather than the currently selected ammo.
                     },
                 },
                 Other = new OtherDef
@@ -184,7 +184,8 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                SRB_ammo,    
+                SRB_ammo,
+                SRB_ammo_explosions,
             },
             //Animations = Weapon75_Animation,
             //Upgrades = UpgradeModules,
