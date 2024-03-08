@@ -27,6 +27,8 @@ using VRage.Noise.Patterns;
 using VRage;
 using System.Linq;
 using Sandbox.Game;
+using SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.ShipPoints;
+using SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.ShipPoints.MatchTimer;
 
 namespace klime.PointCheck
 {
@@ -248,6 +250,7 @@ namespace klime.PointCheck
                     string[] tempdist = messageText.Split(' ');
                     MyAPIGateway.Utilities.ShowNotification("Match duration changed to " + tempdist[1].ToString() + " minutes.");
                     matchtime = int.Parse(tempdist[1]) * 60 * 60;
+                    MatchTimer.I.MatchDurationMinutes = matchtime/60d/60d;
                     sendToOthers = true;
                 }
                 catch (Exception)
@@ -323,6 +326,7 @@ namespace klime.PointCheck
                 Team2Tickets.Value = MatchTickets;
                 //Team3Tickets.Value = MatchTickets;
                 LocalMatchState = 1;
+                MatchTimer.I.Start(matchtime / 60d / 60d);
                 MyAPIGateway.Utilities.ShowMessage("GM", "You are the captain now.");
                 MyAPIGateway.Utilities.ShowNotification("HEY DUMBASS, IS DAMAGE ON?", 10000, font: "Red");
             }
@@ -344,6 +348,7 @@ namespace klime.PointCheck
                 CaptainCapTimerZ1T1.Value = 0;
                 CaptainCapTimerZ1T2.Value = 0;
                 CaptainCapTimerZ1T3.Value = 0;
+                MatchTimer.I.Stop();
                 MyAPIGateway.Utilities.ShowMessage("GM", "Match Ended.");
             }
 
@@ -511,6 +516,7 @@ namespace klime.PointCheck
             captimerZ1T1 = 0;
             captimerZ1T2 = 0;
             captimerZ1T3 = 0;
+            MatchTimer.I.Stop();
             MyAPIGateway.Utilities.ShowNotification("Match Ended.");
         }
         public static void TrackYourselfMyMan()
