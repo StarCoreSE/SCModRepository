@@ -53,7 +53,8 @@ namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.
             {
                 matchDurationMinutes = value;
                 EndTime = StartTime.AddMinutes(matchDurationMinutes);
-                MatchDurationString = $"{(matchDurationMinutes < 10 ? "0" : "")}{(int)matchDurationMinutes}:{Math.Round((matchDurationMinutes-(int)matchDurationMinutes)*60)}";
+                double seconds = Math.Round((matchDurationMinutes - (int)matchDurationMinutes) * 60);
+                MatchDurationString = $"{(matchDurationMinutes < 10 ? "0" : "")}{(int)matchDurationMinutes}:{(seconds < 10 ? "0" : "")}{seconds}";
             }
         }
 
