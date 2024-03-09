@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VRage.Game.Components;
+using VRage.Utils;
 
 namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.ShipPoints.MatchTimer
 {
@@ -22,13 +23,15 @@ namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.
 
         public override void LoadData()
         {
-            MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(NetworkId, RecieveMessage);
+            MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(NetworkId, ReceiveMessage);
+            MyLog.Default.WriteLineAndConsole("[NetworkTimeSync] Registered network message handler.");
             UpdateTimeOffset();
         }
 
         protected override void UnloadData()
         {
-            MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(NetworkId, RecieveMessage);
+            MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(NetworkId, ReceiveMessage);
+            MyLog.Default.WriteLineAndConsole("[NetworkTimeSync] De-registered network message handler.");
         }
 
         int tickCounter = 0;
@@ -50,7 +53,7 @@ namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.
             }
         }
 
-        void RecieveMessage(ushort networkId, byte[] serialized, ulong sender, bool isFromServer)
+        void ReceiveMessage(ushort networkId, byte[] serialized, ulong sender, bool isFromServer)
         {
             if (serialized == null || serialized.Length == 0)
                 return;

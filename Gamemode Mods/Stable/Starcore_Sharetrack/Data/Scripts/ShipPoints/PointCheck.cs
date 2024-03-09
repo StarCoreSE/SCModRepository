@@ -483,8 +483,10 @@ namespace klime.PointCheck
             temp_ServerTimer = 0;
             PointCheckHelpers.timer = 0;
             broadcaststat = true;
-            timerMessage.Visible = true;
-            ticketmessage.Visible = true;
+            if (timerMessage != null)
+                timerMessage.Visible = true;
+            if (ticketmessage != null)
+                ticketmessage.Visible = true;
             LocalMatchState = 1;
             captimerZ3T1 = 0;
             captimerZ3T2 = 0;
@@ -503,9 +505,11 @@ namespace klime.PointCheck
         {
             temp_ServerTimer = 0;
             PointCheckHelpers.timer = 0;
-            broadcaststat = false;
-            timerMessage.Visible = false;
-            ticketmessage.Visible = false;
+            broadcaststat = false; 
+            if (timerMessage != null)
+                timerMessage.Visible = false;
+            if (ticketmessage != null)
+                ticketmessage.Visible = false;
             LocalMatchState = 0;
             IAmTheCaptainNow = false;
             captimerZ3T1 = 0;

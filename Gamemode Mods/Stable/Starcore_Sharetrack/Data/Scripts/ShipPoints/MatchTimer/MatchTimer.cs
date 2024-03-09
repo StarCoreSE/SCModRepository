@@ -15,7 +15,7 @@ namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.
     /// Keeps track of the match timer for networking and other mods.
     /// </summary>
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
-    internal class MatchTimer : MySessionComponentBase
+    public class MatchTimer : MySessionComponentBase
     {
         public static MatchTimer I;
         /// <summary>
@@ -24,14 +24,25 @@ namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.
         public const int TimerUpdateInterval = 600;
         public const ushort NetworkId = 8576;
         public const long ModMessageId = 8573643466;
-
+        /// <summary>
+        /// The time at which the match started.
+        /// </summary>
         public DateTime StartTime { get; internal set; } = DateTime.MinValue;
+        /// <summary>
+        /// The time at which the match will end.
+        /// </summary>
         public DateTime EndTime { get; internal set; } = DateTime.MinValue;
+        /// <summary>
+        /// Current time in the match, offset from StartTime.
+        /// </summary>
         public TimeSpan CurrentMatchTime => (DateTime.UtcNow < EndTime ? DateTime.UtcNow : EndTime) - StartTime;
         public bool IsMatchEnded = true;
 
         private double matchDurationMinutes = 20;
 
+        /// <summary>
+        /// Total length of the match, in fractional minutes.
+        /// </summary>
         public double MatchDurationMinutes
         {
             get
@@ -46,6 +57,9 @@ namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.
             }
         }
 
+        /// <summary>
+        /// Match duration, in format [mm:ss].
+        /// </summary>
         public string MatchDurationString = "20:00";
 
 
@@ -66,7 +80,7 @@ namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.
         public override void UpdateAfterSimulation()
         {
             ticks++;
-            MyAPIGateway.Utilities.SendModMessage(ModMessageId, CurrentMatchTime);
+            //MyAPIGateway.Utilities.SendModMessage(ModMessageId, CurrentMatchTime);
 
             if (DateTime.UtcNow > EndTime && !IsMatchEnded && MyAPIGateway.Session.IsServer)
             {
@@ -91,8 +105,7 @@ namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.
         public void Start(double matchDurationMinutes = 20)
         {
             StartTime = DateTime.UtcNow;
-            //MatchDurationMinutes = matchDurationMinutes;
-            MatchDurationMinutes = 0.25;
+            MatchDurationMinutes = matchDurationMinutes;
             MatchTimerPacket.SendMatchUpdate(this);
             IsMatchEnded = false;
             MyLog.Default.WriteLineAndConsole("[MatchTimer] Started Match. " + CurrentMatchTime.ToString());
@@ -104,10 +117,10 @@ namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.
             IsMatchEnded = true;
         }
 
-        public void UpdateFromPacket(MatchTimerPacket packet)
+        internal void UpdateFromPacket(MatchTimerPacket packet)
         {
-            StartTime = packet.MatchStartTime;
-            EndTime = packet.MatchEndTime;
+            StartTime = packet.MatchStartTime();
+            EndTime = packet.MatchEndTime();
         }
 
         #endregion

@@ -3,6 +3,7 @@ using Sandbox.ModAPI;
 using System;
 using System.Collections.Generic;
 using VRage.Game.ModAPI;
+using VRage.Utils;
 
 namespace Math0424.Networking
 {
@@ -84,6 +85,7 @@ namespace Math0424.Networking
             }
             catch (Exception e)
             {
+                MyLog.Default.WriteLineAndConsole("Exception in SC_Sharetrack!\n" + e);
 			}
         }
 
