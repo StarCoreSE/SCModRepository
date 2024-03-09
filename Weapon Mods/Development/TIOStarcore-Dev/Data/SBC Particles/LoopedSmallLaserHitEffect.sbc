@@ -9,7 +9,7 @@
       <LowRes>false</LowRes>
       <Loop>true</Loop>
       <DurationMin>0</DurationMin>
-      <DurationMax>0.2</DurationMax>
+      <DurationMax>1</DurationMax>
       <Version>0</Version>
       <ParticleGenerations>
         <ParticleGeneration Name="Sparks" Version="0">
