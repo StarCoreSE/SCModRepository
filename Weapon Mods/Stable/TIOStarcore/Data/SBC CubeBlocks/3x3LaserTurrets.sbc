@@ -10,9 +10,9 @@
             </Id>
             <DisplayName>"Liberator" Small X-Pulse Lasers</DisplayName>
             <Description>
-              [2km Targeting Range]
+              [2km Range Laser Pulse Shotguns]
               [Energy damage]
-
+              [Draws 132MW]
             </Description>
 			      <GuiVisible>true</GuiVisible>
 			<Icon>Textures\GUI\Icons\HeavyPulseLaserBase.dds</Icon>
@@ -64,6 +64,7 @@
             <Description>
               [2.5km Targeting Range]
               [Energy damage]
+              [Draws 120MW]
             </Description>
 			      <GuiVisible>true</GuiVisible>
 			  <Icon>Textures\GUI\Icons\250CoilBase.dds</Icon>
