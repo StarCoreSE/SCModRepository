@@ -556,27 +556,26 @@ namespace ShipPoints
 				 
 				
 
-
+				 APE_Strong@150;
+				 GoalieCasemate@200;
 				Reaver_Coilgun@120; 
-					 Assault_Coil_Turret@120;
-					DualSnubLaserTurret@150; 
-						DualPulseLaserTurret@150;				 
-				 	 HeavyCarronade_5x5_Turret@400;
+					Assault_Coil_Turret@120;
+				 DualSnubLaserTurret@150; 
+				  DualPulseLaserTurret@150;				 
+				 HeavyCarronade_5x5_Turret@400;
 
-					APE_Strong@150;
-						GoalieCasemate@200;
-					Priest_Block@125; 
-						PriestReskin_Block@125; 	
+				 Priest_Block@125; 
+				  PriestReskin_Block@125; 	
 				Type18_Artillery@270; 
-					Type21_Artillery@540; 
-						Type24_Artillery@770; 
-				Type19_Driver@350; 
-					Type22_Driver@675; 
-						Type25_Driver@1000; 
+				 Type21_Artillery@540; 
+				  Type24_Artillery@770; 
+				 Type19_Driver@350; 
+				  Type22_Driver@675; 
+				   Type25_Driver@1000; 
 
 				UnguidedRocketTurret@100; 
-					DrunkRocketTurret@400; 
-						Devastator_Torp@700;
+				 DrunkRocketTurret@400; 
+				  Devastator_Torp@700;
  				X4_7x7_HeavyTurret@300;
 					KreegMagnetarCannon@450;  
 				VindicatorKineticLance@700; 
