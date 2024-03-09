@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <BlockVariantGroups>
+
+
+
+
+      <BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="StarCore_SAHM_Fixed_BlockVariants" />
+        <Icon>Textures\GUI\Icons\Somnus.dds</Icon>
+        <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
+        <Description>Description_BlockGroup_TurretGroup</Description>
+        <Blocks>
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="K_SA_HeavyMetal_Gauss_ERFM" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="K_SA_LoW_CapitalSpinalA" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="K_SA_HeavyMetal_Spinal_Rotary" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="K_SA_HeavyMetal_Spinal_Rotary_Reskin" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Hellfire_Laser_Block" />
+        </Blocks>
+      </BlockVariantGroup>
+	  
+      <BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="StarCore_SAHM_Turret_BlockVariants" />
+      <Icon>Textures\GUI\Icons\Asterius.dds</Icon>
+        <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
+        <Description>Description_BlockGroup_TurretGroup</Description>
+        <Blocks>
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="K_SA_HeavyMetal_Gauss_A" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="K_SA_HeavyMetal_Gauss_ERII" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="K_SA_Gauss_ERC" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="K_SA_HeavyMetal_Gauss_PGBC" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SA_HMI_Erebos" />
+        </Blocks>
+      </BlockVariantGroup>	  
+   
+
+    </BlockVariantGroups>
+</Definitions>

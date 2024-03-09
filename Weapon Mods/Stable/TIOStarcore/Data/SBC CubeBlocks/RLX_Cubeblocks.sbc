@@ -12,7 +12,7 @@
 			  10 Barrels of High Explosive Rockets
 			  400m minimum range, 13500m max
 			  Kinetic Damage
-
+			  Draws 100MW
 		  </Description>
 		  <Icon>Textures\GUI\Icons\Cubes\tempiconRLX.png</Icon>
 		  <CubeSize>Large</CubeSize>

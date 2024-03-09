@@ -11,6 +11,7 @@
 			<Description>[6.5km Targeting Range [750 m/s]]
               [Energy damage]
               [High Damage, Large AOE, Long Reload, Innaccurate]
+			  [Draws 60MW]
               </Description>
 			<Icon>Textures\GUI\Icons\PrototypeSiegeArtillery.dds</Icon>
 			<CubeSize>Large</CubeSize>
