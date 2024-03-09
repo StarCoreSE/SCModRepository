@@ -17,10 +17,10 @@
 			</Id>
 			<DisplayName>Vindicator Kinetic Battery</DisplayName>
             <Description>Three Vanilla Rails
-			12KM range
+			10KM range, 4000m/s velocity
 			Kinetic Damage
-			Low Tracking
-			Invalid Clapped When Sound
+			Low Tracking Speed
+			Draws 360MW
 			</Description>            
 			<GuiVisible>true</GuiVisible>
 			<Public>true</Public>
