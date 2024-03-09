@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VRage.Game.Components;
+using VRage.Utils;
 
 namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.ShipPoints.MatchTimer
 {
@@ -27,7 +28,7 @@ namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.
         public DateTime StartTime { get; internal set; } = DateTime.MinValue;
         public DateTime EndTime { get; internal set; } = DateTime.MinValue;
         public TimeSpan CurrentMatchTime => (DateTime.UtcNow < EndTime ? DateTime.UtcNow : EndTime) - StartTime;
-        public bool IsMatchEnded = false;
+        public bool IsMatchEnded = true;
 
         private double matchDurationMinutes = 20;
 
@@ -67,14 +68,14 @@ namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.
             ticks++;
             MyAPIGateway.Utilities.SendModMessage(ModMessageId, CurrentMatchTime);
 
-            MyAPIGateway.Utilities.ShowNotification($"A: {DateTime.UtcNow > EndTime} B: {IsMatchEnded}", 1000/60);
-            if (DateTime.UtcNow > EndTime && !IsMatchEnded)
+            if (DateTime.UtcNow > EndTime && !IsMatchEnded && MyAPIGateway.Session.IsServer)
             {
                 PointCheck.EndMatch();
+                MyLog.Default.WriteLineAndConsole("[MatchTimer] Auto-Stopped Match. " + CurrentMatchTime.ToString());
             }
 
-            // Update every 10 seconds
-            if (ticks % TimerUpdateInterval != 0)
+            // Update every 10 seconds if is server
+            if (!MyAPIGateway.Session.IsServer || ticks % TimerUpdateInterval != 0)
                 return;
             
             MatchTimerPacket.SendMatchUpdate(this);
@@ -94,6 +95,7 @@ namespace SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.
             MatchDurationMinutes = 0.25;
             MatchTimerPacket.SendMatchUpdate(this);
             IsMatchEnded = false;
+            MyLog.Default.WriteLineAndConsole("[MatchTimer] Started Match. " + CurrentMatchTime.ToString());
         }
 
         public void Stop()

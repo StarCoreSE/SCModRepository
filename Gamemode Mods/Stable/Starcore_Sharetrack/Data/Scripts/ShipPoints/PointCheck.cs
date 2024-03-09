@@ -495,7 +495,9 @@ namespace klime.PointCheck
             captimerZ1T1 = 0;
             captimerZ1T2 = 0;
             captimerZ1T3 = 0;
+            MatchTimer.I.Start(matchtime / 60d / 60d);
             MyAPIGateway.Utilities.ShowNotification("Commit die. Zone activates in " + delaytime / 3600 + "m, match ends in " + matchtime / 3600 + "m.");
+            MyLog.Default.WriteLineAndConsole("Match started!");
         }
         public static void EndMatch()
         {
