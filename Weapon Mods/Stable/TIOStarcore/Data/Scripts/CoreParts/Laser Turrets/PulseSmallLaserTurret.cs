@@ -99,7 +99,7 @@ namespace Scripts {
                     MaxElevation = 90,
                     FixedOffset = false,
                     InventorySize = 0f,
-                    IdlePower = 15f, // Constant base power draw in MW.
+                    IdlePower = 1f, // Constant base power draw in MW.
                     Offset = Vector(x: 0, y: 0, z: 0),
                     Type = BlockWeapon, // BlockWeapon, HandWeapon, Phantom 
                     CriticalReaction = new CriticalDef

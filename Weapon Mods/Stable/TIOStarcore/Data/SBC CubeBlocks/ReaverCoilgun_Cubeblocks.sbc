@@ -12,6 +12,7 @@
               [2.8km Targeting Range]
               [Kinetic damage]
               [5000 m/s]
+              Draws 120MW
               This weapon slowly repairs itself while offline, and when below functional.
             </Description>
 			<GuiVisible>true</GuiVisible>
