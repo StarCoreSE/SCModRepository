@@ -180,6 +180,7 @@ namespace Scripts {
                 ForagerLightCoilgunAmmoWC,
                 ForagerLightCoilgunAmmoShrapWC,
                 ForagerLightCoilgunAmmoWC_L,
+                ForagerTelegraph,
             },
             //Animations = Weapon75_Animation,
             //Upgrades = UpgradeModules,

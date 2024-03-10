@@ -193,6 +193,7 @@ namespace Scripts {
                 AriesGaussAmmoWC,
                 AriesGaussAmmoBONK,
                 AriesGaussAmmoDamage, // Must list all primary, shrapnel, and pattern ammos.
+                AriesGaussAmmoTelegraph,
             },
             Animations = OnyxGaussAnims,
             //Upgrades = UpgradeModules,
