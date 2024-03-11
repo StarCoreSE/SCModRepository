@@ -610,7 +610,7 @@
     <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>Cataclysmic_Fire</SubtypeId>
+        <SubtypeId>MagnaStar_Fire</SubtypeId>
       </Id>
       <Category>SHOT</Category>
       <MaxDistance>1000</MaxDistance>

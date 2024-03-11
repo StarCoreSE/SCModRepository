@@ -11,17 +11,17 @@ using static Scripts.Structure.WeaponDefinition.HardPointDef.HardwareDef.Hardwar
 namespace Scripts {   
     partial class Parts {
         // Don't edit above this line
-        WeaponDefinition SC_AR_CataclysmicVariable => new WeaponDefinition
+        WeaponDefinition SC_AR_MagnaStar => new WeaponDefinition
         {
             Assignments = new ModelAssignmentsDef
             {
                 MountPoints = new[] {
                     new MountPointDef {
-                        SubtypeId = "SC_AR_CataclysmicVariable", // Block Subtypeid. Your Cubeblocks contain this information
+                        SubtypeId = "SC_AR_MagnaStar", // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "None", // For weapons with a spinning barrel such as Gatling Guns.
-                        MuzzlePartId = "cataclysmicvariablebarrels", // The subpart where your muzzle empties are located. This is often the elevation subpart.
-                        AzimuthPartId = "cataclysmicvariabletop", // Your Rotating Subpart, the bit that moves sideways
-                        ElevationPartId = "cataclysmicvariablebarrels",// Your Elevating Subpart, that bit that moves up
+                        MuzzlePartId = "MagnaStarbarrels", // The subpart where your muzzle empties are located. This is often the elevation subpart.
+                        AzimuthPartId = "MagnaStartop", // Your Rotating Subpart, the bit that moves sideways
+                        ElevationPartId = "MagnaStarbarrels",// Your Elevating Subpart, that bit that moves up
                         DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
@@ -56,7 +56,7 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "Cataclysmic Variable", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "MagnaStar Variable", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 1f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
@@ -142,7 +142,7 @@ namespace Scripts {
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "", // Audio for warmup effect.
-                    FiringSound = "Cataclysmic_Fire", // Audio for firing.
+                    FiringSound = "MagnaStar_Fire", // Audio for firing.
                     FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "", // Sound SubtypeID, for when your Weapon is in a reloading state
                     NoAmmoSound = "",
@@ -184,8 +184,8 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                CataclysmicVariableAmmo,
-                CataclysmicVariableAmmoOverload,
+                MagnaStarAmmo,
+                MagnaStarAmmoOverload,
                 
                 // Must list all primary, shrapnel, and pattern ammos.
             },
