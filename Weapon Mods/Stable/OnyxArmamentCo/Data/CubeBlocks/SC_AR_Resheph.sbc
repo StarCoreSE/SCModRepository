@@ -8,7 +8,7 @@
 			</Id>
 			<DisplayName>Resheph-250 Railgun Turret</DisplayName>
 			<Icon>Textures\GUI\Icons\Cubes\SC_AR_Resheph.dds</Icon>
-			<Description>A turreted version of the Nimrod railgun</Description>
+			<Description>A turreted version of the Phobos railgun</Description>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="3" y="2" z="5"/>

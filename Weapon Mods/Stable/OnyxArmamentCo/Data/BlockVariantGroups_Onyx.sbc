@@ -12,7 +12,7 @@
         <Description>Description_BlockGroup_TurretGroup</Description>
         <Blocks>
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Eris" />
-          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Nimrod" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Phobos" />
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Forager" />
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Heliod" />
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_FocusedBeam" />

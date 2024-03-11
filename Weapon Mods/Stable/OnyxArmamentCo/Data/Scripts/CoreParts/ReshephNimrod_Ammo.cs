@@ -30,7 +30,7 @@ namespace Scripts
 { // Don't edit above this line
     partial class Parts
     {
-        private AmmoDef ReshephNimrodAmmo => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef ReshephPhobosAmmo => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Single Shot", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
@@ -403,10 +403,10 @@ namespace Scripts
             }, // Don't edit below this line
         };
 
-        private AmmoDef ReshephNimrodAmmoFrag => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef ReshephPhobosAmmoFrag => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "ReshephNimrodAmmoFrag", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoRound = "ReshephPhobosAmmoFrag", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 2f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 6000f, // Direct damage; one steel plate is worth 100.
@@ -766,7 +766,7 @@ namespace Scripts
             }, // Don't edit below this line
         };
 
-        private AmmoDef ReshephNimrodAmmo_Mag => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef ReshephPhobosAmmo_Mag => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Repeating", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
@@ -794,7 +794,7 @@ namespace Scripts
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
-                AmmoRound = "ReshephNimrodAmmoFrag_Mag", // AmmoRound field of the ammo to spawn.
+                AmmoRound = "ReshephPhobosAmmoFrag_Mag", // AmmoRound field of the ammo to spawn.
                 Fragments = 8, // Number of projectiles to spawn.
                 Degrees = 90, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
@@ -1147,10 +1147,10 @@ namespace Scripts
             }, // Don't edit below this line
         };
 
-        private AmmoDef ReshephNimrodAmmoFrag_Mag => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef ReshephPhobosAmmoFrag_Mag => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "ReshephNimrodAmmoFrag_Mag", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoRound = "ReshephPhobosAmmoFrag_Mag", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 2f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 3500f, // Direct damage; one steel plate is worth 100.
@@ -1510,10 +1510,10 @@ namespace Scripts
             }, // Don't edit below this line
         };
         
-        private AmmoDef ReshephNimrodAmmo_Mag_Ping => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef ReshephPhobosAmmo_Mag_Ping => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "Hitscan_Nimrod_Frag", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoRound = "Hitscan_Phobos_Frag", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.19992f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 100000f, // Direct damage; one steel plate is worth 100.
@@ -1538,7 +1538,7 @@ namespace Scripts
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
-                AmmoRound = "ReshephNimrodAmmoFrag", // AmmoRound field of the ammo to spawn.
+                AmmoRound = "ReshephPhobosAmmoFrag", // AmmoRound field of the ammo to spawn.
                 Fragments = 1, // Number of projectiles to spawn.
                 Degrees = 0, // Cone in which to randomise direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.

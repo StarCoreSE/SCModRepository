@@ -144,7 +144,7 @@ namespace Scripts {
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "ArcWepShipOnyxRailgun_Windup", // Audio for warmup effect.
-                    FiringSound = "Nimrod_Fire", // Audio for firing.
+                    FiringSound = "Phobos_Fire", // Audio for firing.
                     FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "",
                     NoAmmoSound = "",
@@ -189,9 +189,9 @@ namespace Scripts {
             Ammos = new[] {
 
 
-                ReshephNimrodAmmo_Mag,
-                ReshephNimrodAmmoFrag_Mag,
-                ReshephNimrodAmmo_Mag_Ping,
+                ReshephPhobosAmmo_Mag,
+                ReshephPhobosAmmoFrag_Mag,
+                ReshephPhobosAmmo_Mag_Ping,
                 
                 // Must list all primary, shrapnel, and pattern ammos.
             },

@@ -11,13 +11,13 @@ using static Scripts.Structure.WeaponDefinition.HardPointDef.HardwareDef.Hardwar
 namespace Scripts {   
     partial class Parts {
         // Don't edit above this line
-        WeaponDefinition SC_AR_Nimrod => new WeaponDefinition
+        WeaponDefinition SC_AR_Phobos => new WeaponDefinition
         {
             Assignments = new ModelAssignmentsDef
             {
                 MountPoints = new[] {
                     new MountPointDef {
-                        SubtypeId = "SC_AR_Nimrod", // Block Subtypeid. Your Cubeblocks contain this information
+                        SubtypeId = "SC_AR_Phobos", // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "None", // For weapons with a spinning barrel such as Gatling Guns.
                         MuzzlePartId = "None", // The subpart where your muzzle empties are located. This is often the elevation subpart.
                         AzimuthPartId = "None", // Your Rotating Subpart, the bit that moves sideways
@@ -54,7 +54,7 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "Nimrod Railgun", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "Phobos Railgun", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 0f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Advanced, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
@@ -140,7 +140,7 @@ namespace Scripts {
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "", // Audio for warmup effect.
-                    FiringSound = "Nimrod_Fire", // Audio for firing.
+                    FiringSound = "Phobos_Fire", // Audio for firing.
                     FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "", // Sound SubtypeID, for when your Weapon is in a reloading state
                     NoAmmoSound = "",
@@ -184,10 +184,10 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                ReshephNimrodAmmo, ReshephNimrodAmmoFrag,
-                ReshephNimrodAmmo_Mag,
-                ReshephNimrodAmmoFrag_Mag,
-                ReshephNimrodAmmo_Mag_Ping,// Must list all primary, shrapnel, and pattern ammos.
+                ReshephPhobosAmmo, ReshephPhobosAmmoFrag,
+                ReshephPhobosAmmo_Mag,
+                ReshephPhobosAmmoFrag_Mag,
+                ReshephPhobosAmmo_Mag_Ping,// Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = Weapon75_Animation,
             //Upgrades = UpgradeModules,
