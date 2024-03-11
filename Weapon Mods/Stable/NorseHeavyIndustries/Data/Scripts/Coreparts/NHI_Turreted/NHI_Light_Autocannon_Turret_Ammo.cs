@@ -101,7 +101,7 @@ namespace Scripts
             DamageScales = new DamageScaleDef
             {
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
-                DamageVoxels = true, // Whether to damage voxels.
+                DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
                 HealthHitModifier = 0, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = 0, // Voxel damage multiplier; defaults to 1 if zero or less.
