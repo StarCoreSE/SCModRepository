@@ -118,7 +118,7 @@ namespace Scripts
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
                 FallOff = new FallOffDef
                 {
-                    Distance = 2000f, // Distance at which damage begins falling off.
+                    Distance = 800f, // Distance at which damage begins falling off.
                     MinMultipler = 0.8f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
                 },
                 Grids = new GridSizeDef
@@ -135,7 +135,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 1.5f, // Multiplier for damage against shields.
+                    Modifier = 2f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -275,7 +275,7 @@ namespace Scripts
                 DesiredSpeed = 1500, // voxel phasing if you go above 5100
                 MaxTrajectory = 2000f,
                 //FieldTime = 0, // 0 is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
-                GravityMultiplier = .7f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable.
+                GravityMultiplier = 5f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed
                 RangeVariance = Random(start: 0, end: 50), // subtracts value from MaxTrajectory
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
