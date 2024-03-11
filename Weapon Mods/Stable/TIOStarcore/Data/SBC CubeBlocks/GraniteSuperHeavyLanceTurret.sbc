@@ -12,7 +12,7 @@
 			<Description> Long Length Laser Lance
 			
 			</Description>
-			<Icon>Textures\GUI\Icons\HeavyTorpedoLauncher.dds</Icon>
+			<Icon>Textures\GUI\Icons\Granite_Lance.dds</Icon>
 			<GuiVisible>false</GuiVisible>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
@@ -38,7 +38,7 @@
 			</MountPoints>
 
 			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 	  	  
-            <BuildTimeSeconds>250</BuildTimeSeconds>
+            <BuildTimeSeconds>150</BuildTimeSeconds>
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>

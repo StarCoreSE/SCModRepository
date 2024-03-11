@@ -52,7 +52,7 @@
 			<RequiredPowerInput>0.00002</RequiredPowerInput>
 			<InventoryMaxVolume>1</InventoryMaxVolume>
 			<EdgeType>Light</EdgeType>
-			<BuildTimeSeconds>60</BuildTimeSeconds>
+			<BuildTimeSeconds>90</BuildTimeSeconds>
 			<ShowEdges>false</ShowEdges>
 			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
 			<DamagedSound>ParticleElectrical</DamagedSound>

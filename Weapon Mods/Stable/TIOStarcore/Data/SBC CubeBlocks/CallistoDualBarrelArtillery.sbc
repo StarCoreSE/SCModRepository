@@ -46,7 +46,7 @@
 			<BlockPairName>DualBarrelArtillery</BlockPairName>
 			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 
 			<AiEnabled>false</AiEnabled>
-			<BuildTimeSeconds>200</BuildTimeSeconds>
+			<BuildTimeSeconds>120</BuildTimeSeconds>
       <ResourceSinkGroup>Defense</ResourceSinkGroup>
       <InventoryMaxVolume>0.144</InventoryMaxVolume>
 	   <MirroringY>Z</MirroringY>

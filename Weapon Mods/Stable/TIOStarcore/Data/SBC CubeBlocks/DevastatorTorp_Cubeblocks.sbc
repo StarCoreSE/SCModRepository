@@ -54,7 +54,7 @@
 				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="5.00" EndY="7.00"/>
 				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="7.00" EndY="5.00"/>
 			</MountPoints>
-            <BuildTimeSeconds>400</BuildTimeSeconds>
+            <BuildTimeSeconds>300</BuildTimeSeconds>
             <WeaponDefinitionId Subtype="ShootMissileGooder" /> 
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>

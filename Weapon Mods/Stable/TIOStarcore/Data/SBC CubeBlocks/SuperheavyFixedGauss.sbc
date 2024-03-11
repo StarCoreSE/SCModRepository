@@ -50,7 +50,7 @@
 		  <MirroringZ>Y</MirroringZ>
 		  <BlockPairName>YourBlockPairName</BlockPairName>
 		  <EdgeType>Light</EdgeType>
-		  <BuildTimeSeconds>180</BuildTimeSeconds>
+		  <BuildTimeSeconds>120</BuildTimeSeconds>
 		  <DisassembleRatio>5</DisassembleRatio>
 		  <NavigationDefinition>Default</NavigationDefinition>
 		  <WeaponDefinitionId Subtype="JN_175Fixed" />

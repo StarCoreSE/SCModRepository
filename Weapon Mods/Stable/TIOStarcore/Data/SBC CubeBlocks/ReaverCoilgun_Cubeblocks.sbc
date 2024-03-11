@@ -49,7 +49,7 @@
 			</BuildProgressModels>
             <MirroringZ>Y</MirroringZ>
 			<MirroringY>Z</MirroringY>
-            <BuildTimeSeconds>125</BuildTimeSeconds>
+            <BuildTimeSeconds>100</BuildTimeSeconds>
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>

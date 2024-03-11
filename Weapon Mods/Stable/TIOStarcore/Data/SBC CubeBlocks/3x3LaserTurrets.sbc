@@ -41,7 +41,7 @@
 			</MountPoints>
       			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 
 
-            <BuildTimeSeconds>60</BuildTimeSeconds>
+            <BuildTimeSeconds>40</BuildTimeSeconds>
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
@@ -90,7 +90,7 @@
 			    <MountPoints>
 				    <MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
 			    </MountPoints>
-            <BuildTimeSeconds>60</BuildTimeSeconds>
+            <BuildTimeSeconds>40</BuildTimeSeconds>
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>
             			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 
