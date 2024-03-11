@@ -15,7 +15,7 @@
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Nimrod" />
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Forager" />
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Phaethon" />
-          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_LocusGleam" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_FocusedBeam" />
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Tumult" />
         </Blocks>
       </BlockVariantGroup>

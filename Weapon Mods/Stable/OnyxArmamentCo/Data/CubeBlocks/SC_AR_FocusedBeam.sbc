@@ -4,10 +4,10 @@
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>SC_AR_LocusGleam</SubtypeId>
+				<SubtypeId>SC_AR_FocusedBeam</SubtypeId>
 			</Id>
-			<DisplayName>Focused Gleam</DisplayName>
-			<Icon>Textures\GUI\Icons\Cubes\SC_AR_LocusGleam.dds</Icon>
+			<DisplayName>Focused Beam</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\SC_AR_FocusedBeam.dds</Icon>
 			<Description>
 				Long Ranged Fixed: [7km]
 				Magazine Capacity: [3]
@@ -45,7 +45,7 @@
 				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="1.00" EndY="5.00"/>
 				<MountPoint Side="Bottom" StartX="0.00" StartY="1.00" EndX="1.00" EndY="6.00"/>
 			</MountPoints>
-			<BlockPairName>SC_AR_LocusGleam</BlockPairName>
+			<BlockPairName>SC_AR_FocusedBeam</BlockPairName>
 			<EdgeType>Light</EdgeType>
 			<BuildTimeSeconds>80</BuildTimeSeconds>
 			<InventoryMaxVolume>1</InventoryMaxVolume>

@@ -14,7 +14,7 @@ namespace Scripts
 
             SC_AR_Aries,
             SC_AR_Forager,
-            SC_AR_LocusGleam,
+            SC_AR_FocusedBeam,
             SC_AR_Nimrod,
             SC_AR_Phaethon,
             SC_AR_Tumult,
