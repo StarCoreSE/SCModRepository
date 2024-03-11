@@ -66,6 +66,8 @@
         <string>Reaver_Coilgun</string>
         <string>Fixed_Rockets</string>
         <string>Priest_Block</string>	
+        <string>longsword</string>
+		
 			
         
 
@@ -127,6 +129,8 @@
         <string>MA_Derecho</string>
         <string>MA_Guardian</string>
         <string>MA_Blister</string>
+		<string>MCRN_Heavy_Torpedo</string>
+
 			
         
 
@@ -199,6 +203,71 @@
 			
         
 
+      </ItemIds>
+    </Category>
+
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+
+      </Id>
+      <DisplayName>[HAS]</DisplayName>
+      <Name>[HAS]</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+        <!--HAS-->
+        <!--<string>HAS_Alecto</string>-->
+        <string>HAS_Mammon</string>
+        <string>HAS_Vulcan</string>     
+
+        <!--WYSEMAN ONESHOT-->
+        <string>K_SA_Launcher_VI</string>
+        <string>K_SA_Launcher_VIV</string>
+		
+      </ItemIds>
+    </Category>
+
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+
+      </Id>
+      <DisplayName>[EXO]</DisplayName>
+      <Name>[EXO]</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+        <!--EXO-->
+        <string>AMP_ArcMelee</string>
+        <string>NovaCannon</string>
+		<string>MetalStorm</string>
+        <string>TaiidanRailFighter</string>
+        <string>Hexcannon</string>
+
+		
+      </ItemIds>
+    </Category>
+	
+	    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+
+      </Id>
+      <DisplayName>[BTI]</DisplayName>
+      <Name>[BTI]</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+        <!--REEECORE-->
+        <string>Starcore_AMS_I_Block</string>
+       <!-- <string>Starcore_PPC_Block</string>-->
+        <string>ERPPC</string>
+        <string>ModularSRM8</string>
+        <string>ModularLRM5</string>
+        <string>ModularMRM10</string>
+        <string>Starcore_Arrow_Block</string>
+		
       </ItemIds>
     </Category>
 
