@@ -514,7 +514,7 @@ namespace ShipPoints
 				20InchTwin@600;
 
 
-                Null_Point_Jump_Disruptor_Large@99999;
+               
 				LargeGatlingTurret_SC@125;
 				LargeMissileTurret_SC@155;
 				LargeBlockMediumCalibreTurret_SC@250;
@@ -552,38 +552,45 @@ namespace ShipPoints
 				HAS_Crossfield@250;
 				AMP_HealGenerator@400;
 				CapacitorLarge@400;
-
-				GoalieCasemate@250; 
-				KreegMagnetarCannon@450; 
-				Thagomizer@750; 
-				Thagomizer_Flipped@750; 
-				Thagomizer_Angled@750; 
-				Thagomizer_Angled_Flipped@750; 
 				SC_Radome@10; 
-				APE_Strong@150; 
-				Devastator_Torp@700; 
-				Priest_Block@125; 
-				PriestReskin_Block@125; 
-				Fixed_Rockets@250; 
-				Type18_Artillery@270; 
-				Type21_Artillery@540; 
-				Type24_Artillery@770; 
-				Type19_Driver@350; 
-				Type22_Driver@675; 
-				Type25_Driver@1000; 
+				 
+				
+
+				 APE_Strong@150;
+				 GoalieCasemate@200;
 				Reaver_Coilgun@120; 
-				Assault_Coil_Turret@120;
-				Type17_BeamLance@6942069; 
-				HeavyCarronade_5x5_Turret@400; 
-				X4_7x7_HeavyTurret@300; 
+					Assault_Coil_Turret@120;
+				 DualSnubLaserTurret@150; 
+				  DualPulseLaserTurret@150;				 
+				 HeavyCarronade_5x5_Turret@400;
+
+				 Priest_Block@125; 
+				  PriestReskin_Block@125; 	
+				Type18_Artillery@270; 
+				 Type21_Artillery@540; 
+				  Type24_Artillery@770; 
+				 Type19_Driver@350; 
+				  Type22_Driver@675; 
+				   Type25_Driver@1000; 
+
 				UnguidedRocketTurret@100; 
-				DrunkRocketTurret@400; 
-				DualSnubLaserTurret@150; 
-				DualPulseLaserTurret@150; 
-				HeavyLanceBattery@1000;
-				HadeanPlasmaBlastgun@900; 
+				 DrunkRocketTurret@400; 
+				  Devastator_Torp@700;
+ 				X4_7x7_HeavyTurret@300;
+					KreegMagnetarCannon@450;  
 				VindicatorKineticLance@700; 
+					HadeanPlasmaBlastgun@900; 
+						HeavyLanceBattery@1000;
+
+				Fixed_Rockets@250;	
+				Thagomizer@750; 
+					Thagomizer_Flipped@750; 
+						Thagomizer_Angled@750; 
+							Thagomizer_Angled_Flipped@750; 
 				HeavyFighterBay@300; 
+						
+						
+
 
 				SI_Field_Gen@450;
 				MA_Laser_Armor01@1;

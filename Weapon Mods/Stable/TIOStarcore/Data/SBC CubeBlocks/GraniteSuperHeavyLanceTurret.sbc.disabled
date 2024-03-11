@@ -9,8 +9,10 @@
                 <SubtypeId>HeavyLanceBattery</SubtypeId>
 			</Id>
 			<DisplayName>WIP 'Granite' Superheavy Lance Battery</DisplayName>
-			<Description> Long Length Laser Lance
-			
+			<Description> 
+			Focus Beam CTC Turret
+			Long Range Laser Lance
+			Draws 420MW
 			</Description>
 			<Icon>Textures\GUI\Icons\Granite_Lance.dds</Icon>
 			<GuiVisible>false</GuiVisible>

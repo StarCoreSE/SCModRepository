@@ -9,7 +9,12 @@
 				<SubtypeId>HadeanPlasmaBlastgun</SubtypeId>
 			</Id>
 			<DisplayName>Hadean Superheavy Plasma Blastguns</DisplayName>
-            <Description>Dual ER PPC</Description>            
+            <Description>
+			9km range, 2400 m/s velocity
+			Energy damage
+			Dual ER PPC
+			Draws 550MW
+			</Description>            
 			<GuiVisible>true</GuiVisible>
 			<Public>true</Public>
 			<Icon>Textures\GUI\Icons\PlasmaBlastgun.dds</Icon>

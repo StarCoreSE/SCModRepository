@@ -11,9 +11,9 @@
 			<DisplayName>Type 22 'Medusa' Heavy Railgun Turret</DisplayName>
 			<Description>
             Extended Ranged Turret Magazine Capacity: 8 Reload Speed: 21.25 seconds
-            [8km Targeting Range]
+            [6km Targeting Range]
             [Kinetic damage]
-            [Draws Power]
+            [Draws 475MW]
             [2200 m/s]
             This weapon slowly repairs itself while offline, and when below functional.
             </Description>
