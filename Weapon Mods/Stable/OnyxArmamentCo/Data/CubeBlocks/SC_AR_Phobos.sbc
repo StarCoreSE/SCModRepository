@@ -9,13 +9,13 @@
 			<DisplayName>Phobos-250 Railgun</DisplayName>
 			<Icon>Textures\GUI\Icons\Cubes\SC_AR_Phobos.dds</Icon>
 			<Description>
-				Medium Ranged Fixed: [15km || 5km]
+				Medium Ranged Fixed: [7km || 5km]
 				Magazine Capacity: [1 || 5]
 				Rate of Fire: [60]
 				Reload Speed: [10 seconds]
 				Ammunition: [Kinetic]
 				Single Shot:
-				[8000m/s, 15km]
+				[8000m/s, 7km]
 				Repeating Shot:
 				[2000m/s, 5km]
 			</Description>

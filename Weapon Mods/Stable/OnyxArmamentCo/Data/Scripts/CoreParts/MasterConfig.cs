@@ -21,7 +21,7 @@ namespace Scripts
 
             SC_AR_Afflictor,
             SC_AR_Afflictor_Slanted,
-            SC_AR_Resheph,
+            SC_AR_Deimos,
             SC_AR_CataclysmicVariable
             
             );

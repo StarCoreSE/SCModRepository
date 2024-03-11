@@ -14,17 +14,17 @@ using static Scripts.Structure.WeaponDefinition.HardPointDef.HardwareDef.Hardwar
 namespace Scripts {   
     partial class Parts {
         // Don't edit above this line
-        WeaponDefinition SC_AR_Resheph => new WeaponDefinition
+        WeaponDefinition SC_AR_Deimos => new WeaponDefinition
         {
             Assignments = new ModelAssignmentsDef
             {
                 MountPoints = new[] {
                     new MountPointDef {
-                        SubtypeId = "SC_AR_Resheph",
+                        SubtypeId = "SC_AR_Deimos",
                         SpinPartId = "None", // For weapons with a spinning barrel such as Gatling Guns.
-                        MuzzlePartId = "reshephbarrels", // The subpart where your muzzle empties are located.
-                        AzimuthPartId = "reshephtop",
-                        ElevationPartId = "reshephbarrels",
+                        MuzzlePartId = "Deimosbarrels", // The subpart where your muzzle empties are located.
+                        AzimuthPartId = "Deimostop",
+                        ElevationPartId = "Deimosbarrels",
                         DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
@@ -58,7 +58,7 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "Resheph 250mm Railgun Turret", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "Deimos 250mm Railgun Turret", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 0.1f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
@@ -189,13 +189,13 @@ namespace Scripts {
             Ammos = new[] {
 
 
-                ReshephPhobosAmmo_Mag,
-                ReshephPhobosAmmoFrag_Mag,
-                ReshephPhobosAmmo_Mag_Ping,
+                DeimosPhobosAmmo_Mag,
+                DeimosPhobosAmmoFrag_Mag,
+                DeimosPhobosAmmo_Mag_Ping,
                 
                 // Must list all primary, shrapnel, and pattern ammos.
             },
-            //Animations = ReshephAnims,
+            //Animations = DeimosAnims,
             //Upgrades = UpgradeModules,
         };
         // Don't edit below this line.

@@ -28,7 +28,7 @@
         <Blocks>
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Afflictor" />
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Afflictor_Slanted" />
-          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Resheph" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Deimos" />
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_CataclysmicVariable" />
         </Blocks>
       </BlockVariantGroup>      

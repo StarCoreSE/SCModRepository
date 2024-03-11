@@ -4,10 +4,10 @@
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>SC_AR_Resheph</SubtypeId>
+				<SubtypeId>SC_AR_Deimos</SubtypeId>
 			</Id>
-			<DisplayName>Resheph-250 Railgun Turret</DisplayName>
-			<Icon>Textures\GUI\Icons\Cubes\SC_AR_Resheph.dds</Icon>
+			<DisplayName>Deimos-250 Railgun Turret</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\SC_AR_Deimos.dds</Icon>
 			<Description>A turreted version of the Phobos railgun</Description>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
@@ -35,7 +35,7 @@
 			<BuildProgressModels>
 			</BuildProgressModels>
 			<OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
-			<BlockPairName>SC_AR_Resheph</BlockPairName>
+			<BlockPairName>SC_AR_Deimos</BlockPairName>
 			<BuildTimeSeconds>120</BuildTimeSeconds>
       <MirroringY>Z</MirroringY>
       <MirroringZ>Y</MirroringZ>
