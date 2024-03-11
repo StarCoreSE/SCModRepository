@@ -7,7 +7,7 @@
 				<SubtypeId>SC_AR_MagnaStar</SubtypeId>
 			</Id>
 			<DisplayName>0SH-1T MagnaStar™</DisplayName>
-			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+			<Icon>Textures\GUI\Icons\SC_AR_MagnaStar.dds</Icon>
 			<Description>
 				Long Range Turret: [6km]
 				Magazine Capacity: [3]
