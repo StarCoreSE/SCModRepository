@@ -128,7 +128,7 @@ namespace Scripts {
                     BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
-                    ReloadTime = 1200, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    ReloadTime = 1800, //1200 Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 0, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 60, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     HeatPerShot = 10, // Heat generated per shot.
@@ -190,7 +190,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                GraniteLanceAmmo, 
+                GraniteLanceAmmo, GraniteLanceFakeAmmo1, GraniteLanceFakeAmmo2,
                  // Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = CoilgunAnim,
