@@ -7,14 +7,14 @@
 
       <BlockVariantGroup>
         <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="StarCore_Onyx_Fixed_BlockVariants" />
-        <Icon>Textures\GUI\Icons\Cubes\SC_AR_Aries.png</Icon>
+        <Icon>Textures\GUI\Icons\Cubes\SC_AR_Eris.png</Icon>
         <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
         <Description>Description_BlockGroup_TurretGroup</Description>
         <Blocks>
-          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Aries" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Eris" />
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Nimrod" />
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Forager" />
-          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Phaethon" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Heliod" />
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_FocusedBeam" />
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="SC_AR_Tumult" />
         </Blocks>

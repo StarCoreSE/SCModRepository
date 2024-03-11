@@ -4,10 +4,10 @@
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>SC_AR_Aries</SubtypeId>
+				<SubtypeId>SC_AR_Eris</SubtypeId>
 			</Id>
-			<DisplayName>0C-DNS Aries Superheavy Gauss Cannon</DisplayName>
-			<Icon>Textures\GUI\Icons\Cubes\SC_AR_Aries.dds</Icon>
+			<DisplayName>0C-DNS Eris Superheavy Gauss Cannon</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\SC_AR_Eris.dds</Icon>
 			<Description>
 				Long Ranged Fixed: [15km]
 				Reload Speed: [25 seconds]
@@ -19,7 +19,7 @@
 			<Size x="3" y="2" z="9"/>
 			<ModelOffset x="0" y="0" z="0" />
 			<Center x="1" y="0" z="7" />
-			<Model>Models\Cubes\large\SC_AR_Aries.mwm</Model>
+			<Model>Models\Cubes\large\SC_AR_Eris.mwm</Model>
 			<Components>
 				<Component Subtype="SteelPlate" Count="1250" />
 				<Component Subtype="Construction" Count="600" />
@@ -44,7 +44,7 @@
 			</MountPoints>
 			<BuildProgressModels>
 			</BuildProgressModels>
-			<BlockPairName>SC_AR_Aries</BlockPairName>
+			<BlockPairName>SC_AR_Eris</BlockPairName>
 			<EdgeType>Light</EdgeType>
 			<BuildTimeSeconds>240</BuildTimeSeconds>
 			<InventoryMaxVolume>6</InventoryMaxVolume>

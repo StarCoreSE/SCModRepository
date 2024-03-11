@@ -40,7 +40,7 @@ namespace Scripts
     partial class Parts
     {
 
-        private AmmoDef Phaethon_Zap_Plasma_Stage1 => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef Heliod_Zap_Plasma_Stage1 => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Zap", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
@@ -74,7 +74,7 @@ namespace Scripts
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
-                AmmoRound = "Phaethon_Zap_Stage3", // AmmoRound field of the ammo to spawn.
+                AmmoRound = "Heliod_Zap_Stage3", // AmmoRound field of the ammo to spawn.
                 Fragments = 1, // Number of projectiles to spawn.
                 Degrees = 0, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
@@ -441,10 +441,10 @@ namespace Scripts
             }, // Don't edit below this line
         };
         //stage 2 is unused
-        private AmmoDef Phaethon_Zap_Plasma_Stage2 => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef Heliod_Zap_Plasma_Stage2 => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "Phaethon_Zap_Stage2", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoRound = "Heliod_Zap_Stage2", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 1000f, // Direct damage; one steel plate is worth 100.
@@ -474,7 +474,7 @@ namespace Scripts
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
-                AmmoRound = "Phaethon_Zap_Stage3", // AmmoRound field of the ammo to spawn.
+                AmmoRound = "Heliod_Zap_Stage3", // AmmoRound field of the ammo to spawn.
                 Fragments = 1, // Number of projectiles to spawn.
                 Degrees = 0, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
@@ -842,10 +842,10 @@ namespace Scripts
             }, // Don't edit below this line
         };
         //stage 3 is the one that flies around
-        private AmmoDef Phaethon_Zap_Plasma_Stage3 => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef Heliod_Zap_Plasma_Stage3 => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "Phaethon_Zap_Stage3", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoRound = "Heliod_Zap_Stage3", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.25f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 1000f, // Direct damage; one steel plate is worth 100.
@@ -870,7 +870,7 @@ namespace Scripts
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
-                AmmoRound = "Phaethon_Zap_Stage4", // AmmoRound field of the ammo to spawn.
+                AmmoRound = "Heliod_Zap_Stage4", // AmmoRound field of the ammo to spawn.
                 Fragments = 1, // Number of projectiles to spawn.
                 Degrees = 0, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
@@ -1237,10 +1237,10 @@ namespace Scripts
             }, // Don't edit below this line
         };
         //stage 4 is the zap, it is a 1500 damage, 5000 damage, 500 max absorb pooled AOE, 1250m range
-        private AmmoDef Phaethon_Zap_Plasma_Stage4 => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef Heliod_Zap_Plasma_Stage4 => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "Phaethon_Zap_Stage4", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoRound = "Heliod_Zap_Stage4", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 1500f, // Direct damage; one steel plate is worth 100.
@@ -1621,7 +1621,7 @@ namespace Scripts
             }, // Don't edit below this line
         };
 
-        private AmmoDef PhaethonPlasmaCannonAmmoWC => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef HeliodPlasmaCannonAmmoWC => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Bap", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
@@ -1654,7 +1654,7 @@ namespace Scripts
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
-                AmmoRound = "Phaethon_Stage3", // AmmoRound field of the ammo to spawn.
+                AmmoRound = "Heliod_Stage3", // AmmoRound field of the ammo to spawn.
                 Fragments = 1, // Number of projectiles to spawn.
                 Degrees = 0, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
@@ -2012,10 +2012,10 @@ namespace Scripts
             }, // Don't edit below this line
         };
         //ditto, stage 2 is the same as zap's stage 2
-        private AmmoDef PhaethonPlasmaCannonAmmoWC_Stage2 => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef HeliodPlasmaCannonAmmoWC_Stage2 => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "Phaethon_Stage2", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoRound = "Heliod_Stage2", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.25f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 1000f, // Direct damage; one steel plate is worth 100.
@@ -2040,7 +2040,7 @@ namespace Scripts
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
-                AmmoRound = "Phaethon_Stage3", // AmmoRound field of the ammo to spawn.
+                AmmoRound = "Heliod_Stage3", // AmmoRound field of the ammo to spawn.
                 Fragments = 1, // Number of projectiles to spawn.
                 Degrees = 0, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
@@ -2394,10 +2394,10 @@ namespace Scripts
             }, // Don't edit below this line
         };
 
-        private AmmoDef PhaethonPlasmaCannonAmmoWC_Stage3 => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef HeliodPlasmaCannonAmmoWC_Stage3 => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "Phaethon_Stage3", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoRound = "Heliod_Stage3", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.25f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 1000f, // Direct damage; one steel plate is worth 100.
@@ -2427,7 +2427,7 @@ namespace Scripts
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
-                AmmoRound = "Phaethon_Stage4", // AmmoRound field of the ammo to spawn.
+                AmmoRound = "Heliod_Stage4", // AmmoRound field of the ammo to spawn.
                 Fragments = 5, // Number of projectiles to spawn.
                 Degrees = 35, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
@@ -2782,10 +2782,10 @@ namespace Scripts
             }, // Don't edit below this line
         };
 
-        private AmmoDef PhaethonPlasmaCannonAmmoWC_Stage4 => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef HeliodPlasmaCannonAmmoWC_Stage4 => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "Phaethon_Stage4", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoRound = "Heliod_Stage4", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.25f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 1000f, // Direct damage; one steel plate is worth 100.

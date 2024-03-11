@@ -369,7 +369,7 @@
       <Volume>0.3</Volume>
       <Waves>
         <Wave Type="D3">
-          <Start>Audio\Onyx\phaethonshot.wav</Start>
+          <Start>Audio\Onyx\Heliodshot.wav</Start>
         </Wave>
       </Waves>
     </Sound>

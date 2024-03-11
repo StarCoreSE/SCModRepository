@@ -12,11 +12,11 @@ namespace Scripts
             // PartDefinitions includes both weapons and phantoms
             PartDefinitions(
 
-            SC_AR_Aries,
+            SC_AR_Eris,
             SC_AR_Forager,
             SC_AR_FocusedBeam,
             SC_AR_Nimrod,
-            SC_AR_Phaethon,
+            SC_AR_Heliod,
             SC_AR_Tumult,
 
             SC_AR_Afflictor,

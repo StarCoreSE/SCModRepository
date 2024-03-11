@@ -28,7 +28,7 @@ namespace Scripts
 { // Don't edit above this line
     partial class Parts
     {
-        private AmmoDef AriesGaussAmmoWC => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef ErisGaussAmmoWC => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Classic Ares", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
@@ -421,7 +421,7 @@ namespace Scripts
             }, // Don't edit below this line
         };
 
-        private AmmoDef AriesGaussAmmoTelegraph => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef ErisGaussAmmoTelegraph => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Ares Telegraph", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
@@ -606,7 +606,7 @@ namespace Scripts
             }, // Don't edit below this line
         };
 
-        private AmmoDef AriesGaussAmmoBONK => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef ErisGaussAmmoBONK => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Debug Ares", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
@@ -990,7 +990,7 @@ namespace Scripts
             }, // Don't edit below this line
         };
 
-        private AmmoDef AriesGaussAmmoDamage => new AmmoDef // Your ID, for slotting into the Weapon CS
+        private AmmoDef ErisGaussAmmoDamage => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Fragment_Hitscan_Ares", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.

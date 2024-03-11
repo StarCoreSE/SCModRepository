@@ -14,13 +14,13 @@ using static Scripts.Structure.WeaponDefinition.HardPointDef.HardwareDef.Hardwar
 namespace Scripts {   
     partial class Parts {
         // Don't edit above this line
-        WeaponDefinition SC_AR_Aries => new WeaponDefinition
+        WeaponDefinition SC_AR_Eris => new WeaponDefinition
         {
             Assignments = new ModelAssignmentsDef
             {
                 MountPoints = new[] {
                     new MountPointDef {
-                        SubtypeId = "SC_AR_Aries", // Block Subtypeid. Your Cubeblocks contain this information
+                        SubtypeId = "SC_AR_Eris", // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "None", // For weapons with a spinning barrel such as Gatling Guns.
                         MuzzlePartId = "None", // The subpart where your muzzle empties are located. This is often the elevation subpart.
                         AzimuthPartId = "None", // Your Rotating Subpart, the bit that moves sideways
@@ -57,7 +57,7 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "Aries Superheavy Gauss Cannon", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "Eris Superheavy Gauss Cannon", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 0f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
@@ -190,10 +190,10 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                AriesGaussAmmoWC,
-                AriesGaussAmmoBONK,
-                AriesGaussAmmoDamage, // Must list all primary, shrapnel, and pattern ammos.
-                AriesGaussAmmoTelegraph,
+                ErisGaussAmmoWC,
+                ErisGaussAmmoBONK,
+                ErisGaussAmmoDamage, // Must list all primary, shrapnel, and pattern ammos.
+                ErisGaussAmmoTelegraph,
             },
             Animations = OnyxGaussAnims,
             //Upgrades = UpgradeModules,

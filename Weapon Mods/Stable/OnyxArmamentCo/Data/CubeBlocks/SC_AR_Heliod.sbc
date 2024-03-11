@@ -4,10 +4,10 @@
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>SC_AR_Phaethon</SubtypeId>
+				<SubtypeId>SC_AR_Heliod</SubtypeId>
 			</Id>
 			<!--Highly Energised Lance Integrated Offensive System-->
-			<DisplayName>Phaethon Plasma Pulser</DisplayName>
+			<DisplayName>Heliod Plasma Pulser</DisplayName>
 			<Description>
 				[MUST HAVE TARGET LOCK]
 				Long Ranged Fixed: [6km]
@@ -20,12 +20,12 @@
 				BAP:
 				[Detonates on target]
 			</Description>
-			<Icon>Textures\GUI\Icons\Cubes\SC_AR_Phaethon.dds</Icon>
+			<Icon>Textures\GUI\Icons\Cubes\SC_AR_Heliod.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="2" y="1" z="6"/>
 			<ModelOffset x="0" y="0" z="0"/>
-			<Model>Models\Cubes\large\SC_AR_Phaethon.mwm</Model>
+			<Model>Models\Cubes\large\SC_AR_Heliod.mwm</Model>
 			<Components>
         <Component Subtype="SteelPlate" Count="1250" />
         <Component Subtype="Construction" Count="300" />
@@ -49,7 +49,7 @@
 			</MountPoints>
 			<BuildProgressModels>
 			</BuildProgressModels>
-			<BlockPairName>SC_AR_Phaethon</BlockPairName>
+			<BlockPairName>SC_AR_Heliod</BlockPairName>
 			<EdgeType>Light</EdgeType>
 			<BuildTimeSeconds>90</BuildTimeSeconds>
 			<InventoryMaxVolume>1</InventoryMaxVolume>
