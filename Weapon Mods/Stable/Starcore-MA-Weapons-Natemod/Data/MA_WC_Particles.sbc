@@ -8957,7 +8957,7 @@
 			<DurationMin>30</DurationMin>
 			<DurationMax>30</DurationMax>
 			<DistanceMax>1000</DistanceMax>
-			<Loop>true</Loop>
+			<Loop>false</Loop>
 			<ParticleGenerations>
 				<ParticleGeneration Name="Lightning01Backup" Version="2">
 					<GenerationType>GPU</GenerationType>

@@ -137,16 +137,17 @@ namespace Scripts {
                     BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
-                    ReloadTime = 340, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    ReloadTime = 350, //340 // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    HeatPerShot = 14, // Heat generated per shot.
-                    MaxHeat = 300, // Max heat before weapon enters cooldown (70% of max heat).
-                    Cooldown = .6f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
-                    HeatSinkRate = 18, // Amount of heat lost per second.
+                    HeatPerShot = 14, //10 // Heat generated per shot.
+                    MaxHeat = 330, //400 // Max heat before weapon enters cooldown (70% of max heat).
+                    Cooldown = .55f, //0.6f // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
+                    HeatSinkRate = 15, //9 // Amount of heat lost per second.
+                    //40 delay, 350 reload, means it reaches exactly max heat after the 4th burst of the 3rd salvo, and not inbetween bursts, thus reloading when overheated.  0.55 heat cap means it can fire off 1 full salvo of 4 bursts before overheating again and not overheating mid salvo.
                     DegradeRof = false, // Progressively lower rate of fire when over 80% heat threshold (80% of max heat).
                     ShotsInBurst = 4, // Use this if you don't want the weapon to fire an entire physical magazine before stopping to reload. Should not be more than your magazine capacity.
-                    DelayAfterBurst = 25, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    DelayAfterBurst = 40, //25 // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     FireFull = true, // Whether the weapon should fire the full burst, even if the target is lost or player stops firing prematurely.
                     GiveUpAfter = false, // Whether the weapon should drop its current target and reacquire a new target after finishing its burst.
                     BarrelSpinRate = 0, // Visual only, 0 disables and uses RateOfFire.
@@ -327,16 +328,17 @@ namespace Scripts {
                     BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
-                    ReloadTime = 340, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    ReloadTime = 350, //340 // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    HeatPerShot = 14, // Heat generated per shot.
-                    MaxHeat = 300, // Max heat before weapon enters cooldown (70% of max heat).
-                    Cooldown = .6f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
-                    HeatSinkRate = 18, // Amount of heat lost per second.
+                    HeatPerShot = 14, //10 // Heat generated per shot.
+                    MaxHeat = 330, //400 // Max heat before weapon enters cooldown (70% of max heat).
+                    Cooldown = .55f, //0.6f // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
+                    HeatSinkRate = 15, //9 // Amount of heat lost per second.
+                    //40 delay, 350 reload, means it reaches exactly max heat after the 4th burst of the 3rd salvo, and not inbetween bursts, thus reloading when overheated.  0.55 heat cap means it can fire off 1 full salvo of 4 bursts before overheating again and not overheating mid salvo.
                     DegradeRof = false, // Progressively lower rate of fire when over 80% heat threshold (80% of max heat).
                     ShotsInBurst = 4, // Use this if you don't want the weapon to fire an entire physical magazine before stopping to reload. Should not be more than your magazine capacity.
-                    DelayAfterBurst = 25, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    DelayAfterBurst = 40, //25 // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     FireFull = true, // Whether the weapon should fire the full burst, even if the target is lost or player stops firing prematurely.
                     GiveUpAfter = false, // Whether the weapon should drop its current target and reacquire a new target after finishing its burst.
                     BarrelSpinRate = 0, // Visual only, 0 disables and uses RateOfFire.
