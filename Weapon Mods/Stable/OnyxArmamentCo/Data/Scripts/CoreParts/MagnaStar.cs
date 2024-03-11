@@ -19,9 +19,9 @@ namespace Scripts {
                     new MountPointDef {
                         SubtypeId = "SC_AR_MagnaStar", // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "None", // For weapons with a spinning barrel such as Gatling Guns.
-                        MuzzlePartId = "MagnaStarbarrels", // The subpart where your muzzle empties are located. This is often the elevation subpart.
-                        AzimuthPartId = "MagnaStartop", // Your Rotating Subpart, the bit that moves sideways
-                        ElevationPartId = "MagnaStarbarrels",// Your Elevating Subpart, that bit that moves up
+                        MuzzlePartId = "magnastarbarrels", // The subpart where your muzzle empties are located. This is often the elevation subpart.
+                        AzimuthPartId = "magnastartop", // Your Rotating Subpart, the bit that moves sideways
+                        ElevationPartId = "magnastarbarrels",// Your Elevating Subpart, that bit that moves up
                         DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },

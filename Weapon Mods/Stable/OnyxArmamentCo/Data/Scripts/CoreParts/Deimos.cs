@@ -22,9 +22,9 @@ namespace Scripts {
                     new MountPointDef {
                         SubtypeId = "SC_AR_Deimos",
                         SpinPartId = "None", // For weapons with a spinning barrel such as Gatling Guns.
-                        MuzzlePartId = "Deimosbarrels", // The subpart where your muzzle empties are located.
-                        AzimuthPartId = "Deimostop",
-                        ElevationPartId = "Deimosbarrels",
+                        MuzzlePartId = "deimosbarrels", // The subpart where your muzzle empties are located.
+                        AzimuthPartId = "deimostop",
+                        ElevationPartId = "deimosbarrels",
                         DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
