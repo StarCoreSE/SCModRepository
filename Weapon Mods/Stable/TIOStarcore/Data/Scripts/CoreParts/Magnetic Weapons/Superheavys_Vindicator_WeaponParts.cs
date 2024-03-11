@@ -55,7 +55,7 @@ namespace Scripts {
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 10000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MaxTargetDistance = 9000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
                 MinTargetDistance = 150, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 0, // Maximum number of targets to randomize between; 0 = unlimited.
                 CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
@@ -118,8 +118,8 @@ namespace Scripts {
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0.0017f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
-                    ElevateRate = 0.0011f, // Max traversal speed of elevation subpart in radians per tick.
+                    RotateRate = 0.003f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
+                    ElevateRate = 0.001f, // Max traversal speed of elevation subpart in radians per tick.
                     MinAzimuth = -180,
                     MaxAzimuth = 180,
                     MinElevation = -10,
@@ -142,7 +142,7 @@ namespace Scripts {
                 },
                 Other = new OtherDef
                 {
-                    ConstructPartCap = 0, // Maximum number of blocks with this weapon on a grid; 0 = unlimited.
+                    ConstructPartCap = 4, // Maximum number of blocks with this weapon on a grid; 0 = unlimited.
                     RotateBarrelAxis = 0, // For spinning barrels, which axis to spin the barrel around; 0 = none.
                     EnergyPriority = 0, // Deprecated.
                     MuzzleCheck = false, // Whether the weapon should check LOS from each individual muzzle in addition to the scope.
@@ -178,7 +178,7 @@ namespace Scripts {
                     MaxActiveProjectiles = 0, // Maximum number of drones in flight (only works for drone launchers)
                     MaxReloads = 0, // Maximum number of reloads in the LIFETIME of a weapon
                     GoHomeToReload = false, // Tells the weapon it must be in the home position before it can reload.
-                    DropTargetUntilLoaded = false, // If true this weapon will drop the target when its out of ammo and until its reloaded.
+                    DropTargetUntilLoaded = true, // If true this weapon will drop the target when its out of ammo and until its reloaded.
                 },
                 Audio = new HardPointAudioDef
                 {
