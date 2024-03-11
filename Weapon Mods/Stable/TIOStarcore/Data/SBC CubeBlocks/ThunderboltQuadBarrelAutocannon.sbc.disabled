@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_LargeTurretBaseDefinition">
+			<Id>
+				<TypeId>LargeMissileTurret</TypeId>
+				<SubtypeId>QuadBarrelAutocannon</SubtypeId>
+			</Id>
+			<DisplayName>WIP 'Thunderbolt' Heavy Autocannon Turret</DisplayName>
+			<Description>WIP!</Description>
+			<Icon>Textures\GUI\Icons\QuadBarrelAutocannon.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="5" y="4" z="5"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\large\QuadBarrelAutocannon.mwm</Model>
+			<Components>
+				<Component Subtype="TurretBaseComponent" Count="9" />
+				<Component Subtype="TurretRotorComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="1" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="5" />	
+        
+      </Components>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.05" StartY="0.00" EndX="4.95" EndY="2.37"/>
+				<MountPoint Side="Back" StartX="0.05" StartY="0.00" EndX="4.95" EndY="2.37"/>
+				<MountPoint Side="Left" StartX="0.08" StartY="0.00" EndX="4.92" EndY="2.37"/>
+				<MountPoint Side="Right" StartX="0.08" StartY="0.00" EndX="4.92" EndY="2.37"/>
+				<MountPoint Side="Bottom" StartX="0.08" StartY="0.08" EndX="4.92" EndY="4.92"/>
+			</MountPoints>
+			<BlockPairName>QuadBarrelAutocannon</BlockPairName>
+						<WeaponDefinitionId Subtype="ShootMissileGooder" /> 
+						            <BuildTimeSeconds>175</BuildTimeSeconds> 	  	  
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>0.144</InventoryMaxVolume>
+	  <AiEnabled>false</AiEnabled>
+	   <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>200</PCU>      
+      <TargetingGroups>
+		<string>Weapons</string>
+      </TargetingGroups>      
+		</Definition>
+	</CubeBlocks>
+</Definitions>
