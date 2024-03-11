@@ -60,7 +60,7 @@ namespace Scripts {
             HardPoint = new HardPointDef
             {
                 PartName = "Spitfire Rocket Launcher", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
-                DeviateShotAngle = 1.5f, // Projectile inaccuracy in degrees.
+                DeviateShotAngle = 1.2f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 2f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Basic, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
                 DelayCeaseFire = 0, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released - while a target is available.
