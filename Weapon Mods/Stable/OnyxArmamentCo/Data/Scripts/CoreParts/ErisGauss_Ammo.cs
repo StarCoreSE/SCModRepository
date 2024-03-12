@@ -267,7 +267,7 @@ namespace Scripts
                 MaxLifeTime = 1000, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 5000, // voxel phasing if you go above 5100
-                MaxTrajectory = 10000f, // Max Distance the projectile or beam can Travel.
+                MaxTrajectory = 15000f, // Max Distance the projectile or beam can Travel.
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
                 RangeVariance = Random(start: 0, end: 0), // subtracts value from MaxTrajectory
