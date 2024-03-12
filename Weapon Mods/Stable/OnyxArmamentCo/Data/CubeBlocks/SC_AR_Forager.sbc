@@ -15,8 +15,11 @@
         High Power Hunter: [8000m/s]
         Damages the target.
         A laser shows the projectile's flight path, which may warn the target.
-        Low Power Hunter: [2500m/s]
+        Discombombulator: [2500m/s]
         Shieldpen BONK, no damage.
+
+        Tractor: [2500m/s]
+        Tractor, no damage.
       </Description>
       <Icon>Textures\GUI\Icons\Cubes\SC_Forager_remodel.dds</Icon>
       <CubeSize>Large</CubeSize>
