@@ -67,8 +67,10 @@
         <string>Fixed_Rockets</string>
         <string>Priest_Block</string>	
         <string>longsword</string>
-		
-			
+        <string>APE_Strong</string>	
+        <string>Priest_Block</string>	
+        <string>PriestReskin_Block</string>			
+		<string>VMLS_Block</string>				
         
 
       </ItemIds>
@@ -97,9 +99,6 @@
         <string>HadeanPlasmaBlastgun</string>	
         <string>Fixed_Rockets</string>	
         <string>HeavyFighterBay</string>	
-        <string>APE_Strong</string>	
-        <string>Priest_Block</string>	
-        <string>PriestReskin_Block</string>	
         <string>GoalieCasemate</string>		
 			
         
