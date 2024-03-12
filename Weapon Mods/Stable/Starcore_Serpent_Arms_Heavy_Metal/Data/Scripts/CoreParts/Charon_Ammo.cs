@@ -95,7 +95,7 @@ namespace Scripts
             Pattern = new PatternDef
             {
                 Patterns = new[] { // If enabled, set of multiple ammos to fire after the main ammo.
-                    "Charon_Shot","Charon_Fake_Shot","Charon_Shot","Charon_Fake_Shot",
+                    "Charon_Fake_Shot",
                 },
                 Mode = Weapon, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
                 TriggerChance = 1f, // This is %

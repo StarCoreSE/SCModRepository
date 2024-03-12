@@ -42,7 +42,7 @@
 			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 	  	  
       <ResourceSinkGroup>Defense</ResourceSinkGroup>
       <InventoryMaxVolume>0.144</InventoryMaxVolume>
-	              <BuildTimeSeconds>75</BuildTimeSeconds>
+	              <BuildTimeSeconds>45</BuildTimeSeconds>
 	   <MirroringY>Z</MirroringY>
       <MirroringZ>Y</MirroringZ>
       <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>

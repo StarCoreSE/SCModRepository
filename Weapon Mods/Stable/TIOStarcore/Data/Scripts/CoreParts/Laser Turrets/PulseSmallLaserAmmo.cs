@@ -80,8 +80,8 @@ namespace Scripts
                 Characters = 1f,
                 FallOff = new FallOffDef
                 {
-                    Distance = 2200, // Distance at which max damage begins falling off.
-                    MinMultipler = 0.1f, // value from 0.0f to 1f where 0.1f would be a min damage of 10% of max damage.
+                    Distance = 0, // Distance at which max damage begins falling off.
+                    MinMultipler = 1f, // value from 0.0f to 1f where 0.1f would be a min damage of 10% of max damage.
                 },
                 Grids = new GridSizeDef
                 {
@@ -99,7 +99,7 @@ namespace Scripts
                 {
                     Modifier = -1f, //Heavy laser type.
                     Type = Default,
-                    BypassModifier = -1f,
+                    BypassModifier = -1.5f,
                 },
                 DamageType = new DamageTypes
                 {
