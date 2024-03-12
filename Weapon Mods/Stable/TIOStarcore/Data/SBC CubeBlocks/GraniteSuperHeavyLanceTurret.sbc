@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <CubeBlocks>
+
+
+        <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+            <Id>
+                <TypeId>ConveyorSorter</TypeId>
+                <SubtypeId>HeavyLanceBattery</SubtypeId>
+			</Id>
+			<DisplayName>WIP 'Granite' Superheavy Lance Battery</DisplayName>
+			<Description> 
+			Focus Beam CTC Turret
+			Long Range Laser Lance
+			Draws 420MW
+			</Description>
+			<Icon>Textures\GUI\Icons\HeavyTorpedoLauncher.dds</Icon>
+			<GuiVisible>false</GuiVisible>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="7" y="5" z="7"/>
+			<ModelOffset x="0" y="1.25" z="0"/>
+			<Model>Models\Cubes\large\HeavyTorpedoLauncherAlt.mwm</Model>
+			<Components>
+				<Component Subtype="TurretBaseComponent" Count="35" />
+				<Component Subtype="TurretRotorComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="10" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="10" />
+	
+        
+            </Components>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.56" EndX="7.00" EndY="2.91"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.56" EndX="7.00" EndY="2.91"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.56" EndX="7.00" EndY="2.91"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.56" EndX="7.00" EndY="2.91"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="7.00" EndY="7.00"/>
+			</MountPoints>
+
+			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 	  	  
+            <BuildTimeSeconds>250</BuildTimeSeconds>
+            <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+            <DamagedSound>ParticleElectrical</DamagedSound>
+            <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+            <DestroySound>WepSmallWarheadExpl</DestroySound>
+			<MirroringZ>Y</MirroringZ>
+            <MirroringY>Z</MirroringY>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<RequiredPowerInput>0.00002</RequiredPowerInput>
+            <PCU>800</PCU>
+            <IsAirTight>false</IsAirTight>
+        </Definition>
+    </CubeBlocks>
+</Definitions>
