@@ -67,8 +67,12 @@
         <string>Fixed_Rockets</string>
         <string>Priest_Block</string>	
         <string>longsword</string>
+        <string>APE_Strong</string>	
+        <string>Priest_Block</string>	
+        <string>PriestReskin_Block</string>			
+		<string>VMLS_Block</string>	
+        <string>Devastator_Torp</string>	
 		
-			
         
 
       </ItemIds>
@@ -92,14 +96,10 @@
         <string>X4_7x7_HeavyTurret</string>	
         <string>UnguidedRocketTurret</string>	
         <string>DrunkRocketTurret</string>	
-        <string>Devastator_Torp</string>	
         <string>VindicatorKineticLance</string>	
         <string>HadeanPlasmaBlastgun</string>	
         <string>Fixed_Rockets</string>	
         <string>HeavyFighterBay</string>	
-        <string>APE_Strong</string>	
-        <string>Priest_Block</string>	
-        <string>PriestReskin_Block</string>	
         <string>GoalieCasemate</string>		
 			
         
