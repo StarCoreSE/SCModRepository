@@ -38,7 +38,7 @@
 			
 			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 	  	  
       <ResourceSinkGroup>Defense</ResourceSinkGroup>
-	  <BuildTimeSeconds>120</BuildTimeSeconds>
+	  <BuildTimeSeconds>160</BuildTimeSeconds>
       <InventoryMaxVolume>0.144</InventoryMaxVolume>
 	   <MirroringY>Z</MirroringY>
       <MirroringZ>Y</MirroringZ>

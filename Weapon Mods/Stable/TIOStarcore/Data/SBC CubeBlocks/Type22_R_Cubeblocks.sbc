@@ -58,7 +58,7 @@
 				<Model BuildPercentUpperBound="1.00" File="Models\MK2RailgunMain_BS3.mwm"/>
 			</BuildProgressModels>
 			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 
-            <BuildTimeSeconds>330</BuildTimeSeconds>
+            <BuildTimeSeconds>360</BuildTimeSeconds>
 			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>

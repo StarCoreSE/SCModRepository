@@ -47,7 +47,7 @@
 			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
 			<EdgeType>Light</EdgeType>
-			<BuildTimeSeconds>200</BuildTimeSeconds>
+			<BuildTimeSeconds>400</BuildTimeSeconds>
 			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 
 			<InventoryMaxVolume>1</InventoryMaxVolume>
             <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>

@@ -63,7 +63,7 @@
 			<ResourceSinkGroup>Defense</ResourceSinkGroup>
 			<RequiredPowerInput>0.00002</RequiredPowerInput>
 			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 
-            <BuildTimeSeconds>450</BuildTimeSeconds><!--increase by 140 each time -->
+            <BuildTimeSeconds>500</BuildTimeSeconds><!--increase by 140 each time -->
 			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
