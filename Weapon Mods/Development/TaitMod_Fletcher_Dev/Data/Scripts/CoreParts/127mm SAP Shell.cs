@@ -526,8 +526,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 0.5f,
-                    CustomParticle = "SmallArtExplosionLight",
-                    CustomSound = "ArcWepSmallMissileExpl",
+                    CustomParticle = "",
+                    CustomSound = "",
                 },
             },
             Ewar = new EwarDef
@@ -632,9 +632,9 @@ namespace Scripts
             },
             AmmoGraphics = new GraphicDef
             {
-                ModelName = "\\Models\\5InchShellFired_Small.mwm",
+                ModelName = "",
                 VisualProbability = 1f,
-                ShieldHitDraw = true,
+                ShieldHitDraw = false,
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
@@ -654,7 +654,7 @@ namespace Scripts
                     Hit = new ParticleDef
                     {
                         Name = "",
-                        ApplyToShield = true,
+                        ApplyToShield = false,
 
 
                         Color = Color(red: 1f, green: 1f, blue: 1f, alpha: 1),
@@ -672,7 +672,7 @@ namespace Scripts
                     Eject = new ParticleDef
                     {
                         Name = "",
-                        ApplyToShield = true,
+                        ApplyToShield = false,
                         //ShrinkByDistance = false,
                         Color = Color(red: 1f, green: 1f, blue: 1f, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: 0),
