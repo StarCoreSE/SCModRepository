@@ -99,7 +99,7 @@ namespace Scripts
                 {
                     Modifier = 1.3f, //Heavy laser type.
                     Type = Default,
-                    BypassModifier = -1f,
+                    BypassModifier = -2f,
                 },
                 DamageType = new DamageTypes
                 {
@@ -270,7 +270,7 @@ namespace Scripts
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "LoopedSmallLaserHitEffect",
+                        Name = "PulseSmallLaserHitEffect",
                         ApplyToShield = true,
                         //shrinkbydistance = false, obselete
                         Color = Color(red: 1, green: 8f, blue: 10f, alpha: 1),

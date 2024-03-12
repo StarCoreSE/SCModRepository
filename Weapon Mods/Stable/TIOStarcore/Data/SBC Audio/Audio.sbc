@@ -1900,7 +1900,7 @@
 		  </DistantSounds>
 		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 		  <DynamicMusicAmount>35</DynamicMusicAmount>
-		  <Volume>6</Volume>
+		  <Volume>4</Volume>
 		  <Waves>
 			  <Wave Type="D3">
 				  <Start>Audio\Shot\NewKineticBatteryShot.wav</Start>
@@ -1916,7 +1916,7 @@
 		  <MaxDistance>9000</MaxDistance>
 		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 		  <DynamicMusicAmount>35</DynamicMusicAmount>
-		  <Volume>4</Volume>
+		  <Volume>3</Volume>
 		  <Waves>
 			  <Wave Type="D3">
 				  <Start>Audio\Shot\NewKineticBatteryShotD.wav</Start>
