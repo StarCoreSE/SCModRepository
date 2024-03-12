@@ -43,7 +43,7 @@
 			</MountPoints>
 			<BlockPairName>K_HS_Damnation</BlockPairName>
 			<EdgeType>Light</EdgeType>
-			<BuildTimeSeconds>75</BuildTimeSeconds>
+			<BuildTimeSeconds>120</BuildTimeSeconds>
 			<DisassembleRatio>5</DisassembleRatio>
 			<NavigationDefinition>Default</NavigationDefinition>
 			<WeaponDefinitionId Subtype="ShootMissileGooder" />

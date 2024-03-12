@@ -36,7 +36,7 @@ using static Scripts.Structure.WeaponDefinition.AmmoDef.GraphicDef.DecalDef;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.DamageScaleDef.DamageTypes.Damage;
 
 namespace Scripts
-{ // Monopole Ammo
+{ // Don't edit above this line
     partial class Parts
     {
         private AmmoDef Spinal_AutoCoil_Base_A => new AmmoDef // Your ID, for slotting into the Weapon CS
@@ -70,7 +70,7 @@ namespace Scripts
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
-                AmmoRound = "AutoCoil_Shrap", //Monopole Frag //AmmoRound field of the ammo to spawn.
+                AmmoRound = "AutoCoil_Shrap", // AmmoRound field of the ammo to spawn.
                 Fragments = 18, // Number of projectiles to spawn.
                 Degrees = 80, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
@@ -494,7 +494,19 @@ namespace Scripts
                     GroupDelay = 0, // Delay between each group.
                 },
             },
-
+            Pattern = new PatternDef
+            {
+                Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
+                    "",
+                },
+                Mode = Fragment, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
+                TriggerChance = 1f, // This is %
+                Random = false, // This randomizes the number spawned at once, NOT the list order.
+                RandomMin = 1,
+                RandomMax = 1,
+                SkipParent = false, // Skip the Ammo itself, in the list
+                PatternSteps = 1, // Number of Ammos activated per round, will progress in order and loop. Ignored if Random = true.
+            },
             DamageScales = new DamageScaleDef
             {
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
