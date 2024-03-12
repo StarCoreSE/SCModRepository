@@ -106,7 +106,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 5f, // Multiplier for damage against shields.
+                    Modifier = 3f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -464,7 +464,7 @@ namespace Scripts
         },
         Shields = new ShieldDef
         {
-            Modifier = 5f, // Multiplier for damage against shields.
+            Modifier = 3f, // Multiplier for damage against shields.
             Type = Default, // Damage vs healing against shields; Default, Heal
             BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
         },
@@ -527,8 +527,8 @@ namespace Scripts
             NoVisuals = false,
             NoSound = false,
             ParticleScale = 0.5f,
-            CustomParticle = "SmallArtExplosionLight",
-            CustomSound = "ArcWepSmallMissileExpl",
+            CustomParticle = "",
+            CustomSound = "",
         },
     },
     Ewar = new EwarDef
@@ -635,7 +635,7 @@ namespace Scripts
     {
         ModelName = "\\Models\\152mmMLE1930_ShellFired_Small.mwm",
         VisualProbability = 1f,
-        ShieldHitDraw = true,
+        ShieldHitDraw = false,
         Particles = new AmmoParticleDef
         {
             Ammo = new ParticleDef
@@ -655,7 +655,7 @@ namespace Scripts
             Hit = new ParticleDef
             {
                 Name = "",
-                ApplyToShield = true,
+                ApplyToShield = false,
 
 
                 Color = Color(red: 1f, green: 1f, blue: 1f, alpha: 1),
@@ -696,7 +696,7 @@ namespace Scripts
             WidthVariance = Random(start: 0f, end: 0.1f), // adds random value to default width (negatives shrinks width)
             Tracer = new TracerBaseDef
             {
-                Enable = true,
+                Enable = false,
                 Length = 5f,
                 Width = 0.1f,
                 Color = Color(red: 40.80f, green: 8.20f, blue: 1.6f, alpha: 0.8f),
