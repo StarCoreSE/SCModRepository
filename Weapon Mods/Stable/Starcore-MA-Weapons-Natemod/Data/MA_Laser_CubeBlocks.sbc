@@ -102,7 +102,7 @@
       <DisplayName>Gladius Heavy Laser</DisplayName>
       <Description>
         [3km Targeting Range]
-        [Draws ~550MW]
+        [Draws ~550GW]
         [Energy damage]
         [Hitscan]
       </Description>
@@ -197,7 +197,7 @@
         T1 Laser turret
         Role: Point defense, targets only guided, defends own grid
         Ammo: Energy
-        Range: 100% to 800m, 10% at 1200m.
+        Range: 100% to 2500m, 10% at 3000m.
         Made by AutoMcD Astronautical and CriegWarfare.
       </Description>
       <Icon>Textures\GUI\Icons\Cubes\MA_PDX.dds</Icon>
@@ -285,10 +285,10 @@
       </Id>
       <DisplayName>PDX Laser T2</DisplayName>
       <Description>
-        [2km Targeting Range]
-        [Draws ~125MW]
-        [Energy damage]
-        [Hitscan]
+        T2 laser turret.
+        Role: General, Point Defense, Targets only Smart, Defends Self and Allies
+        Ammo: Energy
+        Range: 100% to 3500m, 25% at 4000m.
         Made by AutoMcD Astronautical, CriegWarfare, Mike_Dude.
       </Description>
       <Icon>Textures\GUI\Icons\Cubes\MA_T2PDX.png</Icon>
@@ -572,7 +572,7 @@
       <DisplayName>T1 Gimbal Laser Armored</DisplayName>
       <Icon>Textures\Icons\MA_Gimbal_Laser_Armored.dds</Icon>
       <Description>
-        [1.2km Targeting Range]
+        [2km Targeting Range]
         [Draws ~25MW]
         [Energy damage]
         [Hitscan]
@@ -672,7 +672,7 @@
       <DisplayName>T1 Gimbal Laser Armored Slope</DisplayName>
       <Icon>Textures\Icons\MA_Gimbal_Laser_Armored_Slope.dds</Icon>
       <Description>
-        [1.2km Targeting Range]
+        [2km Targeting Range]
         [Draws ~25MW]
         [Energy damage]
         [Hitscan]
@@ -771,7 +771,7 @@
       <DisplayName>T1 Gimbal Laser Armored Slope 2</DisplayName>
       <Icon>Textures\Icons\MA_Gimbal_Laser_Armored_Slope2.dds</Icon>
       <Description>
-        [1.2km Targeting Range]
+        [2km Targeting Range]
         [Draws ~25MW]
         [Energy damage]
         [Hitscan]
@@ -869,7 +869,7 @@
       <DisplayName>T1 Gimbal Laser Armored Slope 45</DisplayName>
       <Icon>Textures\Icons\MA_Gimbal_Laser_Armored_Slope45.dds</Icon>
       <Description>
-        [1.2km Targeting Range]
+        [2km Targeting Range]
         [Draws ~25MW]
         [Energy damage]
         [Hitscan]
@@ -969,7 +969,7 @@
       <DisplayName>T1 Gimbal Laser</DisplayName>
       <Icon>Textures\Icons\MA_Gimbal_Laser.dds</Icon>
       <Description>
-        [1.2km Targeting Range]
+        [2km Targeting Range]
         [Draws ~25MW]
         [Energy damage]
         [Hitscan]
