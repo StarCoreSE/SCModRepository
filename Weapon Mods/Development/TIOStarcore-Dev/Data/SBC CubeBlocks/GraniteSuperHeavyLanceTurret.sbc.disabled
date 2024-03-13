@@ -8,13 +8,12 @@
                 <TypeId>ConveyorSorter</TypeId>
                 <SubtypeId>HeavyLanceBattery</SubtypeId>
 			</Id>
-			<DisplayName>WIP 'Granite' Superheavy Lance Battery</DisplayName>
+			<DisplayName>'Granite' Superheavy Lance Battery</DisplayName>
 			<Description> 
-			Focus Beam CTC Turret
-			Long Range Laser Lance
+			Long Range 5km Laser Lance
 			Draws 420MW
 			</Description>
-			<Icon>Textures\GUI\Icons\HeavyTorpedoLauncher.dds</Icon>
+			<Icon>Textures\GUI\Icons\Granite_Lance.dds</Icon>
 			<GuiVisible>false</GuiVisible>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
@@ -40,7 +39,7 @@
 			</MountPoints>
 
 			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 	  	  
-            <BuildTimeSeconds>250</BuildTimeSeconds>
+            <BuildTimeSeconds>150</BuildTimeSeconds>
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>

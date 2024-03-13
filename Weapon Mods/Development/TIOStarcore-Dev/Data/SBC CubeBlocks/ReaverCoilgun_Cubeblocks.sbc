@@ -26,13 +26,13 @@
             <Model>Models\CoilgunMk2.mwm</Model>
 			<Components>
 				<Component Count="400" Subtype="SteelPlate"/>
-				<Component Count="600" Subtype="Construction"/>
+				<Component Count="1200" Subtype="Construction"/>
 				<Component Count="150" Subtype="Motor"/>
-				<Component Count="150" Subtype="Computer"/>
 				<Component Count="30" Subtype="LargeTube" />
 				<Component Count="100" Subtype="MetalGrid" />
 				<Component Count="60" Subtype="Superconductor" />
-				<Component Count="1200" Subtype="Construction"/>
+				<Component Count="150" Subtype="Computer"/>
+				<Component Count="600" Subtype="Construction"/>
 				<Component Count="500" Subtype="SteelPlate"/>
 			</Components>
             <CriticalComponent Index="0" Subtype="Computer"/>
@@ -50,7 +50,7 @@
 			</BuildProgressModels>
             <MirroringZ>Y</MirroringZ>
 			<MirroringY>Z</MirroringY>
-            <BuildTimeSeconds>125</BuildTimeSeconds>
+            <BuildTimeSeconds>100</BuildTimeSeconds>
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
