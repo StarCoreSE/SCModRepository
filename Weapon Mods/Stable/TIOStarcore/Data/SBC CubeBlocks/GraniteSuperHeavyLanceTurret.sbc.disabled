@@ -8,10 +8,9 @@
                 <TypeId>ConveyorSorter</TypeId>
                 <SubtypeId>HeavyLanceBattery</SubtypeId>
 			</Id>
-			<DisplayName>WIP 'Granite' Superheavy Lance Battery</DisplayName>
+			<DisplayName>'Granite' Superheavy Lance Battery</DisplayName>
 			<Description> 
-			Focus Beam CTC Turret
-			Long Range Laser Lance
+			Long Range 5km Laser Lance
 			Draws 420MW
 			</Description>
 			<Icon>Textures\GUI\Icons\Granite_Lance.dds</Icon>

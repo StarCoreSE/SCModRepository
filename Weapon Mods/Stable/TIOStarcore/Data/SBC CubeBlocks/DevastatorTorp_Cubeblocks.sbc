@@ -12,7 +12,7 @@
             <Description>
               [6km Targeting Range] [10km Fuel]
               [Energy damage]
-              [300 m/s] sure
+              [slow (275m/s) 100hp torpedoes]
             </Description>
 			<GuiVisible>true</GuiVisible>
         

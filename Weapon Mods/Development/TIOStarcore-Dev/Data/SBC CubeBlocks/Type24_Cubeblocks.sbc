@@ -10,9 +10,10 @@
             </Id>
             <DisplayName>Type 24 'Jupiter' Heavy Turret</DisplayName>
             <Description>
-              [6km Targeting Range]
-              [Energy damage]
-              [1560 m/s]
+             A set of 3 extremely advanced artillery pieces, housed inside fully mechanized and automated weapons control system.  We pair both an extremely large bore diameter with a exceptionally high muzzle velocity, just below the preformance seen in electromagneticly assisted fire systems.  This insures that you will put High Exposive pain on your target before the enemy can do the same to you.  Sold in standardized shipping container housings that feature fully automated repair algorithms to extend useful barrel life and even repair minor combat damages.
+              [6km Targeting Range, 40ft dispersion circle at 20,000 ft]
+              [High Energy Damage in a 37ft Blast Radius/ 75ft AOE Diameter]
+              [1560 m/s| 5120 ft/s Shell Velocity]
               This weapon slowly repairs itself while offline, and when below functional.
             </Description>
 			<GuiVisible>true</GuiVisible>
@@ -52,7 +53,7 @@
 				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="9.00" EndY="5.00"/>
 				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="7.00" EndY="9.00"/>
 			</MountPoints>
-            <BuildTimeSeconds>440</BuildTimeSeconds><!--increase by 120 each time -->
+            <BuildTimeSeconds>420</BuildTimeSeconds><!--increase by 120 each time -->
             <WeaponDefinitionId Subtype="ShootMissileGooder" /> 
 			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>

@@ -40,7 +40,7 @@
 
                 //QuadBarrelAutocannon,
                 //B8T_Flare,
-                HeavyLanceBattery,
+                //HeavyLanceBattery,
                 DualBarrelArtillery,
                 LightMissileLauncher,
                 HeavyAssaultMissileLauncher,

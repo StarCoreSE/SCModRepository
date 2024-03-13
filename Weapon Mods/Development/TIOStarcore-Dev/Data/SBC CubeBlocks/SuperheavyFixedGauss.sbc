@@ -10,7 +10,7 @@
 		  </Id>
 		  <DisplayName>'Wolverine' Naval Heavy Gauss Rifle</DisplayName>
 		  <Description>
-		  10km Range. Kinetic. Short Ranged.
+		  7km Range. Kinetic. Short Ranged.
 
 		  </Description>
 		  <Icon>Textures\GUI\Icons\Cubes\LBX5.dds</Icon>
@@ -50,7 +50,7 @@
 		  <MirroringZ>Y</MirroringZ>
 		  <BlockPairName>YourBlockPairName</BlockPairName>
 		  <EdgeType>Light</EdgeType>
-		  <BuildTimeSeconds>180</BuildTimeSeconds>
+		  <BuildTimeSeconds>120</BuildTimeSeconds>
 		  <DisassembleRatio>5</DisassembleRatio>
 		  <NavigationDefinition>Default</NavigationDefinition>
 		  <WeaponDefinitionId Subtype="JN_175Fixed" />
