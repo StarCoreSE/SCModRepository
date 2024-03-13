@@ -83,6 +83,7 @@
         [Energy damage]
         [Hitscan]
         [Draws ~200MW]
+        [-5 degrees of depression and 30 degrees of elevation]
         Multitargeting Suite of turreted PD
       </Description>
       <Icon>Textures\Models\Crossfield Base.dds</Icon>
