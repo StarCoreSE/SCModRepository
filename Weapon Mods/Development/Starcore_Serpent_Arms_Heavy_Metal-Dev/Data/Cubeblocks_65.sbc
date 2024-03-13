@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<!-- Grimlock Launcher -->
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>65_Launcher_FixedMount</SubtypeId>
+			</Id>
+			<DisplayName>Grimlock Launcher</DisplayName>
+			<Description>
+			</Description>
+			<Icon>Textures\GUI\Icons\grim.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<GuiVisible>false</GuiVisible>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="3" />
+			<ModelOffset x="0" y="0" z="0" />
+			<Model>Models\SA_Launcher_Large.mwm</Model>
+			<UseModelIntersection>true</UseModelIntersection>
+			<Components>
+				<Component Subtype="SteelPlate" Count="50" />
+				<Component Subtype="Superconductor" Count="150" />
+				<Component Subtype="Construction" Count="240" />
+				<Component Subtype="Motor" Count="20" />
+				<Component Subtype="Reactor" Count="30" />
+				<Component Subtype="Detector" Count="45" />
+				<Component Subtype="Computer" Count="200" />
+				<Component Subtype="MetalGrid" Count="90" />
+				<Component Subtype="SteelPlate" Count="400" />
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0" />
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.10" File="Models\SerpentArms\SA_GaussAP_Large.mwm" />
+				<Model BuildPercentUpperBound="0.5" File="Models\SerpentArms\SA_GaussAP_Large.mwm" />
+				<Model BuildPercentUpperBound="0.90" File="Models\SerpentArms\SA_GaussAP_Large.mwm" />
+			</BuildProgressModels>
+			<VoxelPlacement>
+				<!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+				<StaticMode>
+					<PlacementMode>OutsideVoxel</PlacementMode>
+					<MaxAllowed>0.2</MaxAllowed>
+					<MinAllowed>0</MinAllowed>
+				</StaticMode>
+				<DynamicMode>
+					<PlacementMode>OutsideVoxel</PlacementMode>
+					<MaxAllowed>0.2</MaxAllowed>
+					<MinAllowed>0.01</MinAllowed>
+				</DynamicMode>
+			</VoxelPlacement>
+			<BlockPairName>65_Launcher_FixedMount</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>40</BuildTimeSeconds>
+			<OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+			<WeaponDefinitionId Subtype="K_SA_Gun"/>
+			<InventoryMaxVolume>1</InventoryMaxVolume>
+			<DamageEffectId>213</DamageEffectId>
+			<AiEnabled>false</AiEnabled>
+			<DamagedSound>ParticleWeapExpl</DamagedSound>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<MinElevationDegrees>-5</MinElevationDegrees>
+			<MaxElevationDegrees>100</MaxElevationDegrees>
+			<MinAzimuthDegrees>-180</MinAzimuthDegrees>
+			<MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+			<RotationSpeed>0.0001</RotationSpeed>
+			<ElevationSpeed>0.0001 </ElevationSpeed>
+			<IdleRotation>false</IdleRotation>
+			<MaxRangeMeters>3500</MaxRangeMeters>
+			<MinFov>0.0001</MinFov>
+			<MaxFov>2</MaxFov>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+		</Definition>
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>Hellfire_Laser_Block</SubtypeId>
+			</Id>
+			<DisplayName>Hellfire Laser</DisplayName>
+			<Description>
+				[6.666km range]
+				[Energy damage]
+				[Reaches MaxRange in 120 ticks]
+				[Hitscan]
+			</Description>
+			<Icon>Textures\GUI\Icons\Hellfire.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<GuiVisible>true</GuiVisible>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="3" z="23" />
+			<ModelOffset x="0" y="0" z= "0" />
+			<Model>Models\Hellfire_Laser_Block.mwm</Model>
+			<Components>
+          		    <Component Subtype="Construction" Count="2000" />
+          		    <Component Subtype="GravityGenerator" Count="186" />              
+           		    <Component Subtype="Computer" Count="666" />
+           		    <Component Subtype="SmallTube" Count="1200" />
+          		    <Component Subtype="Motor" Count="1070" />
+           		    <Component Subtype="LargeTube" Count="1200" />
+           		    <Component Subtype="MetalGrid" Count="660" />
+           		    <Component Subtype="Construction" Count="2000" />
+          		    <Component Subtype="SteelPlate" Count="3500" />
+      			</Components>
+			<CriticalComponent Subtype="LargeTube" Index="0" />
+			<BlockPairName>Hellfire_Laser_Block</BlockPairName>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>65</BuildTimeSeconds>
+			<DisassembleRatio>5</DisassembleRatio>
+			<NavigationDefinition>Default</NavigationDefinition>
+			<WeaponDefinitionId Subtype="K_SA_Gun" />
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<InventoryMaxVolume>1</InventoryMaxVolume>
+			<MinElevationDegrees>-15</MinElevationDegrees>
+			<MaxElevationDegrees>75</MaxElevationDegrees>
+			<MinAzimuthDegrees>-180</MinAzimuthDegrees>
+			<MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+			<IdleRotation>false</IdleRotation>
+			<AiEnabled>false</AiEnabled>
+			<MaxRangeMeters>7000</MaxRangeMeters>
+			<RotationSpeed>0.0005</RotationSpeed>
+			<ElevationSpeed>0.0002 </ElevationSpeed>
+			<MinFov>0.1</MinFov>
+			<MaxFov>1.04719755</MaxFov>
+			<DestroySound>Betty_Weapon_Destroyed</DestroySound>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

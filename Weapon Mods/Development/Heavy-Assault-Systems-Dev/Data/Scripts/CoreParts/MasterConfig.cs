@@ -18,8 +18,9 @@ namespace Scripts
             HAS_CrossfieldOne,
             HAS_CrossfieldTwo,
             HAS_CrossfieldThree,
-			
-			HAS_Esper,
+
+
+            HAS_Esper,
 			HAS_Mammon,
             HAS_MammonMK2B1,
             HAS_MammonMK2B2,
@@ -28,9 +29,10 @@ namespace Scripts
             HAS_MammonMK2B5,
 
             HAS_Nyx,
-            HAS_Thanatos
-			
-			
+            HAS_Thanatos,
+            HAS_Cyclops
+
+
             );
             ArmorDefinitions();
             SupportDefinitions();

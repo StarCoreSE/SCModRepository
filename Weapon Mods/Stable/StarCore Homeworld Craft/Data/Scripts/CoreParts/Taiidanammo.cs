@@ -2119,7 +2119,7 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 12,
-                    CustomParticle = "Grid_Destruction", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "GO AWAY KEEN", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },

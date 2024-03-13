@@ -81,7 +81,7 @@ namespace Scripts {
                 SubSystems = new[] {
                     Offense, Thrust, Utility,  Power, Production, Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
                 },
-                ClosestFirst = false, // Tries to pick closest targets first (blocks on grids, projectiles, etc...).
+                ClosestFirst = true, // Tries to pick closest targets first (blocks on grids, projectiles, etc...).
                 IgnoreDumbProjectiles = false, // Don't fire at non-smart projectiles.
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
@@ -160,7 +160,7 @@ namespace Scripts {
                 Loading = new LoadingDef
                 {
                     RateOfFire = 60, // Set this to 3600 for beam weapons.
-                    BarrelsPerShot = 2, // How many muzzles will fire a projectile per fire event.
+                    BarrelsPerShot = 1, // back to how auto intended, it doesnt need to be hand held anymore its all grown up.. How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
                     ReloadTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).

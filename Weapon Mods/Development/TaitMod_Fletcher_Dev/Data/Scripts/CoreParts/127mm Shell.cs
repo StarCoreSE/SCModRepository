@@ -83,7 +83,7 @@ namespace Scripts
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
-                HealthHitModifier = 0.5, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
+                HealthHitModifier = 50, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = 1, // Voxel damage multiplier; defaults to 1 if zero or less.
                 Characters = -1f, // Character damage multiplier; defaults to 1 if zero or less.
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
@@ -526,8 +526,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 0.5f,
-                    CustomParticle = "SmallArtExplosionLight",
-                    CustomSound = "ArcWepSmallMissileExpl",
+                    CustomParticle = "",
+                    CustomSound = "",
                 },
             },
             Ewar = new EwarDef
@@ -632,9 +632,9 @@ namespace Scripts
             },
             AmmoGraphics = new GraphicDef
             {
-                ModelName = "\\Models\\5InchShellFired_Small.mwm",
+                ModelName = "",
                 VisualProbability = 1f,
-                ShieldHitDraw = true,
+                ShieldHitDraw = false,
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
@@ -654,7 +654,7 @@ namespace Scripts
                     Hit = new ParticleDef
                     {
                         Name = "",
-                        ApplyToShield = true,
+                        ApplyToShield = false,
 
 
                         Color = Color(red: 1f, green: 1f, blue: 1f, alpha: 1),
@@ -672,7 +672,7 @@ namespace Scripts
                     Eject = new ParticleDef
                     {
                         Name = "",
-                        ApplyToShield = true,
+                        ApplyToShield = false,
                         //ShrinkByDistance = false,
                         Color = Color(red: 1f, green: 1f, blue: 1f, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: 0),
@@ -695,7 +695,7 @@ namespace Scripts
                     WidthVariance = Random(start: 0f, end: 0.1f), // adds random value to default width (negatives shrinks width)
                     Tracer = new TracerBaseDef
                     {
-                        Enable = true,
+                        Enable = false,
                         Length = 5f,
                         Width = 0.1f,
                         Color = Color(red: 40.80f, green: 8.20f, blue: 1.6f, alpha: 0.8f),
@@ -709,7 +709,7 @@ namespace Scripts
                         Back = false,
                         CustomWidth = 0.1f,
                         UseWidthVariance = false,
-                        UseColorFade = true,
+                        UseColorFade = false,
                     },
                     OffsetEffect = new OffsetEffectDef
                     {

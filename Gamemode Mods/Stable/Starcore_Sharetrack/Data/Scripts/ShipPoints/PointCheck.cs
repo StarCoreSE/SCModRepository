@@ -27,13 +27,14 @@ using VRage.Noise.Patterns;
 using VRage;
 using System.Linq;
 using Sandbox.Game;
+using SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.ShipPoints;
+using SCModRepository.Gamemode_Mods.Stable.Starcore_Sharetrack.Data.Scripts.ShipPoints.MatchTimer;
 
 namespace klime.PointCheck
 {
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     public class PointCheck : MySessionComponentBase
     {
-
         private NetworkAPI Network => NetworkAPI.Instance;
         public const ushort ComId = 42511; public const string Keyword = "/debug"; public const string DisplayName = "Debug";
         //Old cap
@@ -248,6 +249,7 @@ namespace klime.PointCheck
                     string[] tempdist = messageText.Split(' ');
                     MyAPIGateway.Utilities.ShowNotification("Match duration changed to " + tempdist[1].ToString() + " minutes.");
                     matchtime = int.Parse(tempdist[1]) * 60 * 60;
+                    MatchTimer.I.MatchDurationMinutes = matchtime/60d/60d;
                     sendToOthers = true;
                 }
                 catch (Exception)
@@ -323,6 +325,7 @@ namespace klime.PointCheck
                 Team2Tickets.Value = MatchTickets;
                 //Team3Tickets.Value = MatchTickets;
                 LocalMatchState = 1;
+                MatchTimer.I.Start(matchtime / 60d / 60d);
                 MyAPIGateway.Utilities.ShowMessage("GM", "You are the captain now.");
                 MyAPIGateway.Utilities.ShowNotification("HEY DUMBASS, IS DAMAGE ON?", 10000, font: "Red");
             }
@@ -344,6 +347,7 @@ namespace klime.PointCheck
                 CaptainCapTimerZ1T1.Value = 0;
                 CaptainCapTimerZ1T2.Value = 0;
                 CaptainCapTimerZ1T3.Value = 0;
+                MatchTimer.I.Stop();
                 MyAPIGateway.Utilities.ShowMessage("GM", "Match Ended.");
             }
 
@@ -479,8 +483,10 @@ namespace klime.PointCheck
             temp_ServerTimer = 0;
             PointCheckHelpers.timer = 0;
             broadcaststat = true;
-            timerMessage.Visible = true;
-            ticketmessage.Visible = true;
+            if (timerMessage != null)
+                timerMessage.Visible = true;
+            if (ticketmessage != null)
+                ticketmessage.Visible = true;
             LocalMatchState = 1;
             captimerZ3T1 = 0;
             captimerZ3T2 = 0;
@@ -491,15 +497,19 @@ namespace klime.PointCheck
             captimerZ1T1 = 0;
             captimerZ1T2 = 0;
             captimerZ1T3 = 0;
+            MatchTimer.I.Start(matchtime / 60d / 60d);
             MyAPIGateway.Utilities.ShowNotification("Commit die. Zone activates in " + delaytime / 3600 + "m, match ends in " + matchtime / 3600 + "m.");
+            MyLog.Default.WriteLineAndConsole("Match started!");
         }
         public static void EndMatch()
         {
             temp_ServerTimer = 0;
             PointCheckHelpers.timer = 0;
-            broadcaststat = false;
-            timerMessage.Visible = false;
-            ticketmessage.Visible = false;
+            broadcaststat = false; 
+            if (timerMessage != null)
+                timerMessage.Visible = false;
+            if (ticketmessage != null)
+                ticketmessage.Visible = false;
             LocalMatchState = 0;
             IAmTheCaptainNow = false;
             captimerZ3T1 = 0;
@@ -511,6 +521,7 @@ namespace klime.PointCheck
             captimerZ1T1 = 0;
             captimerZ1T2 = 0;
             captimerZ1T3 = 0;
+            MatchTimer.I.Stop();
             MyAPIGateway.Utilities.ShowNotification("Match Ended.");
         }
         public static void TrackYourselfMyMan()
@@ -1076,20 +1087,20 @@ namespace klime.PointCheck
                 float thrustInKilograms = icubeG.GetMaxThrustInDirection(Base6Directions.Direction.Backward) / 9.81f;
                 //float weight = trkd.Mass;
                 float mass = trkd.Mass;
-                float TWR = thrustInKilograms / mass;
+                float TWR = (float) Math.Round(thrustInKilograms / mass, 1);
 
                 if (trkd.Mass > 1000000)
                 {
-                    massString = string.Format("{0:F2}m", trkd.Mass / 1000000f);
+                    massString = string.Format("{0:F2}m", Math.Round(trkd.Mass / 1000000f, 1));
                     mass = trkd.Mass / 1000f;
                 }
 
                 string TWRs = string.Format("{0:F3}", TWR);
-                string thrustString = string.Format("{0}", trkd.InstalledThrust);
+                string thrustString = string.Format("{0}", Math.Round(trkd.InstalledThrust, 1));
 
                 if (trkd.InstalledThrust > 1000000)
                 {
-                    thrustString = string.Format("{0:F2}M", trkd.InstalledThrust / 1000000f);
+                    thrustString = string.Format("{0:F2}M", Math.Round(trkd.InstalledThrust / 1000000f, 1));
                 }
 
                 string playerName = trkd.Owner == null ? trkd.GridName : trkd.Owner.DisplayName;
@@ -1103,10 +1114,10 @@ namespace klime.PointCheck
                 }
 
                 string PWRNotation = trkd.CurrentPower > 1000 ? "GW" : "MW";
-                string tempPWR = trkd.CurrentPower > 1000 ? string.Format("{0:F1}", trkd.CurrentPower / 1000) : trkd.CurrentPower.ToString();
+                string tempPWR = trkd.CurrentPower > 1000 ? string.Format("{0:F1}", Math.Round(trkd.CurrentPower / 1000, 1)) : Math.Round(trkd.CurrentPower, 1).ToString();
                 string PWR = tempPWR + PWRNotation;
 
-                string GyroString = string.Format("{0}", trkd.CurrentGyro);
+                string GyroString = string.Format("{0}", Math.Round(trkd.CurrentGyro, 1));
 
                 double tempGyro2;
                 if (trkd.CurrentGyro >= 1000000)
@@ -1114,11 +1125,11 @@ namespace klime.PointCheck
                     tempGyro2 = Math.Round(trkd.CurrentGyro / 1000000f, 1);
                     if (tempGyro2 > 1000)
                     {
-                        GyroString = string.Format("{0:F1}G", tempGyro2 / 1000);
+                        GyroString = string.Format("{0:F1}G", Math.Round(tempGyro2 / 1000, 1));
                     }
                     else
                     {
-                        GyroString = string.Format("{0:F1}M", tempGyro2);
+                        GyroString = string.Format("{0:F1}M", Math.Round(tempGyro2, 1));
                     }
                 }
 
@@ -1297,6 +1308,14 @@ namespace klime.PointCheck
                 mobp.Clear();
 
                 MainTrackerUpdate(ts, m, bp, mbp, pbp, obp, mobp);
+
+                // Match time
+                tt.Append("<color=orange>----                 <color=white>Match Time: ")
+                    .Append(MatchTimer.I.CurrentMatchTime.ToString(@"mm\:ss"))
+                    .Append('/')
+                    .Append(MatchTimer.I.MatchDurationString)
+                    .Append("                 <color=orange>----\n");
+
                 TeamBPCalc(tt, ts, m, bp, mbp, pbp, obp, mobp);
 
                 bool autotrackenabled = false;

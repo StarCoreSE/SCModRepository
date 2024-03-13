@@ -8,14 +8,18 @@
       </Id>
       <DisplayName>Forager Coilgun</DisplayName>
       <Description>
-        Long Ranged Fixed: [15km]
+        Long Ranged Fixed: [10km]
         Magazine Capacity: [1]
         Reload Speed: [15 seconds]
         Ammunition:  [Energy]
         High Power Hunter: [8000m/s]
         Damages the target.
-        Low Power Hunter: [2500m/s]
+        A laser shows the projectile's flight path, which may warn the target.
+        Discombombulator: [2500m/s]
         Shieldpen BONK, no damage.
+
+        Tractor: [2500m/s]
+        Tractor, no damage.
       </Description>
       <Icon>Textures\GUI\Icons\Cubes\SC_Forager_remodel.dds</Icon>
       <CubeSize>Large</CubeSize>

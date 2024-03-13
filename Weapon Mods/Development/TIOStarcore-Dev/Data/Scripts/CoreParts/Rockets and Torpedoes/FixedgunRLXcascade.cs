@@ -82,7 +82,7 @@ namespace Scripts
             },
             HardPoint = new HardPointDef
             {
-                PartName = "RL-10x Super", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "RL-10x 'Avalanche'", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 1f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 180f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
@@ -118,7 +118,7 @@ namespace Scripts
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 0, // Default resting elevation
                     InventorySize = 100f, // Inventory capacity in kL.
-                    IdlePower = 10f, // Constant base power draw in MW.
+                    IdlePower = 5.5f, // Constant base power draw in MW.
                     FixedOffset = false, // Deprecated.
                     Offset = Vector(x: 0, y: 0, z: 0), // Offsets the aiming/firing line of the weapon, in metres.
                     Type = BlockWeapon, // What type of weapon this is; BlockWeapon, HandWeapon, Phantom 
@@ -133,7 +133,7 @@ namespace Scripts
                 },
                 Other = new OtherDef
                 {
-                    ConstructPartCap = 0, // Maximum number of blocks with this weapon on a grid; 0 = unlimited.
+                    ConstructPartCap = 6, //preformance Maximum number of blocks with this weapon on a grid; 0 = unlimited.
                     RotateBarrelAxis = 0, // For spinning barrels, which axis to spin the barrel around; 0 = none.
                     EnergyPriority = 0, // Deprecated.
                     MuzzleCheck = false, // Whether the weapon should check LOS from each individual muzzle in addition to the scope.

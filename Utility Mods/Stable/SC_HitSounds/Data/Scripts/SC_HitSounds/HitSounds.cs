@@ -88,7 +88,7 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
                 return;
 
             if (!wAPI.IsReady) // Vain attempt to load terminal controls after weaponcore
-                wAPI.Load(() => HitSounds_TerminalActions.CreateTerminalControls(wAPI));
+                wAPI.Load(/*() => HitSounds_TerminalActions.CreateTerminalControls(wAPI)*/); // TODO look into why only the Enabled toggle is dissapearing
 
             if (SoundEmitter == null && MyAPIGateway.Session.Player != null)
             {

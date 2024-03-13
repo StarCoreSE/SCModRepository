@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <BlueprintClassEntries>
+      <Entry Class="EliteConsumables" BlueprintSubtypeId="MK1BattleshipGun_MagazineLarge" />
+      <Entry Class="Ammo" BlueprintSubtypeId="MK1BattleshipGun_MagazineLarge" />
+	  <Entry Class="Components" BlueprintSubtypeId="AvalancheComponentBP" />
+	  <Entry Class="EliteConsumables" BlueprintSubtypeId="MK2_Battleship_MagazineLarge" />
+	  <Entry Class="Ammo" BlueprintSubtypeId="MK2_Battleship_MagazineLarge" />
+
+	  <Entry Class="EliteConsumables" BlueprintSubtypeId="MK1Railgun_MagazineLarge" />
+	  <Entry Class="Ammo" BlueprintSubtypeId="MK1Railgun_MagazineLarge" />
+
+	  <Entry Class="Ammo" BlueprintSubtypeId="25x184mm" />
+	  <Entry Class="Components" BlueprintSubtypeId="25x184mm" />
+	  
+      <Entry Class="EliteConsumables" BlueprintSubtypeId="CoilgunMk2_MagazineLarge" />
+      <Entry Class="Ammo" BlueprintSubtypeId="CoilgunMk2_MagazineLarge" />
+      <Entry Class="EliteConsumables" BlueprintSubtypeId="UNSC_Coilgun_MagazineLarge" />
+      <Entry Class="Ammo" BlueprintSubtypeId="UNSC_Coilgun_MagazineLarge" />
+  
+      <Entry Class="EliteConsumables" BlueprintSubtypeId="IronMaiden_MagazineLarge" />
+      <Entry Class="Ammo" BlueprintSubtypeId="IronMaiden_MagazineLarge" />
+  
+      <Entry Class="EliteConsumables" BlueprintSubtypeId="RailgunTurret_MagazineLarge" />
+      <Entry Class="Ammo" BlueprintSubtypeId="RailgunTurret_MagazineLarge" />
+  
+	  <Entry Class="Ammo" BlueprintSubtypeId="Torp_MagazineLarge" />
+	  <Entry Class="EliteConsumables" BlueprintSubtypeId="Torp_MagazineLarge" />
+ 	  <Entry Class="Ammo" BlueprintSubtypeId="EMPTorp_MagazineLarge" />
+	  <Entry Class="EliteConsumables" BlueprintSubtypeId="EMPTorp_MagazineLarge" />
+  
+	  <Entry Class="Ammo" BlueprintSubtypeId="VMLS_MagazineLarge" />
+	  <Entry Class="EliteConsumables" BlueprintSubtypeId="VMLS_MagazineLarge" />
+	  <Entry Class="Ammo" BlueprintSubtypeId="SwarmVMLS_MagazineLarge" />
+	  <Entry Class="EliteConsumables" BlueprintSubtypeId="SwarmVMLS_MagazineLarge" />
+
+
+  </BlueprintClassEntries>
+</Definitions>

@@ -93,7 +93,7 @@ namespace ShipPoints
 				MXA_SMAC@500;
 				MXA_M2MAC@800;
 				ARYXGaussCannon@1250;
-				SC_AR_Aries@1250;
+				SC_AR_Eris@1250;
 				K_SA_Launcher_FixedMount@275;
 				AWGGG@150;
 				GravityGenerator@0;
@@ -110,18 +110,18 @@ namespace ShipPoints
 				MA_Tiger@125;
 				MA_Crouching_Tiger@125;
 
-				LargeHydrogenTank@10;
-					LargeHydrogenTankIndustrial@10;
-				LargeHydrogenTankSmall@50;
+				LargeHydrogenTank@30;
+					LargeHydrogenTankIndustrial@30;
+				LargeHydrogenTankSmall@30;
 
-				LargeBlockLargeHydrogenThrust@60;
-					AQD_LG_HydroThrusterL_ArmoredSlope@60;
-					AQD_LG_HydroThrusterL_Armored@60;
-					LargeBlockLargeHydrogenThrustIndustrial@60;
-				LargeBlockSmallHydrogenThrust@10;
-					AQD_LG_HydroThrusterS_ArmoredSlope@10;
-					AQD_LG_HydroThrusterS_Armored@10;
-					LargeBlockSmallHydrogenThrustIndustrial@10;
+				LargeBlockLargeHydrogenThrust@50;
+					AQD_LG_HydroThrusterL_ArmoredSlope@50;
+					AQD_LG_HydroThrusterL_Armored@50;
+					LargeBlockLargeHydrogenThrustIndustrial@50;
+				LargeBlockSmallHydrogenThrust@15;
+					AQD_LG_HydroThrusterS_ArmoredSlope@15;
+					AQD_LG_HydroThrusterS_Armored@15;
+					LargeBlockSmallHydrogenThrustIndustrial@15;
 				HugeHydrogenThruster@200;
 
 				LargeBlockLargeThrust@20;
@@ -154,8 +154,8 @@ namespace ShipPoints
 				ARYXLargeRadar@10;
 				ARYXBurstTurret@250;
 				ARYXBurstTurretSlanted@250;
-				SC_AR_CataclysmicVariable@450;
-				SC_AR_Phaethon@275;
+				SC_AR_MagnaStar@450;
+				SC_AR_Heliod@275;
 				SC_AR_Afflictor@250;
 				SC_AR_Afflictor_Slanted@250;
 				MA_Designator@50;
@@ -183,11 +183,11 @@ namespace ShipPoints
 				MA_Fixed_T2_Naked@150;
 				MA_Fixed_T3@120;
 				ARYXRailgun@400;
-				SC_AR_Nimrod@400;
+				SC_AR_Phobos@400;
 				K_SA_LoW_CapitalSpinalA@650;
 				Static150mm@50;
 				ARYXFocusLance@500;
-				SC_AR_LocusGleam@500;
+				SC_AR_FocusedBeam@500;
 				MediumFocusLance@125;
 				MA_Designator_sm@50;
 				MA_SideBooster_Small@100;
@@ -326,7 +326,7 @@ namespace ShipPoints
 				LargeBlockLargeGeneratorWarfare2@300;
 				LargeTurretControlBlock@200;
 				ARYXRailgunTurret@350;
-				SC_AR_Resheph@350;
+				SC_AR_Deimos@350;
 				MCRNRailgunLB@1250;
 				MAR_1x1x1_AR_DualHead_Rotor@5;
 				MAR_1x1x1_AR_DualHead_Stator@5;
@@ -514,7 +514,7 @@ namespace ShipPoints
 				20InchTwin@600;
 
 
-                Null_Point_Jump_Disruptor_Large@99999;
+               
 				LargeGatlingTurret_SC@125;
 				LargeMissileTurret_SC@155;
 				LargeBlockMediumCalibreTurret_SC@250;
@@ -552,36 +552,45 @@ namespace ShipPoints
 				HAS_Crossfield@250;
 				AMP_HealGenerator@400;
 				CapacitorLarge@400;
-
-				GoalieCasemate@300; 
-				KreegMagnetarCannon@450; 
-				Thagomizer@750; 
-				Thagomizer_Flipped@750; 
-				Thagomizer_Angled@750; 
-				Thagomizer_Angled_Flipped@750; 
 				SC_Radome@10; 
-				APE_Strong@150; 
-				Devastator_Torp@725; 
-				Priest_Block@135; 
-				PriestReskin_Block@135; 
-				Fixed_Rockets@250; 
-				Type18_Artillery@270; 
-				Type21_Artillery@540; 
-				Type24_Artillery@770; 
-				Type19_Driver@350; 
-				Type22_Driver@700; 
-				Type25_Driver@1100; 
+				 
+				
+
+				 APE_Strong@150;
+				 GoalieCasemate@200;
 				Reaver_Coilgun@120; 
-				Type17_BeamLance@420; 
-				HeavyCarronade_5x5_Turret@400; 
-				X4_7x7_HeavyTurret@300; 
+					Assault_Coil_Turret@120;
+				 DualSnubLaserTurret@150; 
+				  DualPulseLaserTurret@150;				 
+				 HeavyCarronade_5x5_Turret@400;
+
+				 Priest_Block@125; 
+				  PriestReskin_Block@125; 	
+				Type18_Artillery@270; 
+				 Type21_Artillery@540; 
+				  Type24_Artillery@770; 
+				 Type19_Driver@350; 
+				  Type22_Driver@675; 
+				   Type25_Driver@1000; 
+
 				UnguidedRocketTurret@100; 
-				DrunkRocketTurret@400; 
-				DualSnubLaserTurret@200; 
-				DualPulseLaserTurret@200; 
-				HadeanPlasmaBlastgun@900; 
+				 DrunkRocketTurret@400; 
+				  Devastator_Torp@700;
+ 				X4_7x7_HeavyTurret@300;
+					KreegMagnetarCannon@450;  
 				VindicatorKineticLance@700; 
+					HadeanPlasmaBlastgun@900; 
+						HeavyLanceBattery@1000;
+
+				Fixed_Rockets@250;	
+				Thagomizer@750; 
+					Thagomizer_Flipped@750; 
+						Thagomizer_Angled@750; 
+							Thagomizer_Angled_Flipped@750; 
 				HeavyFighterBay@300; 
+						
+						
+
 
 				SI_Field_Gen@450;
 				MA_Laser_Armor01@1;

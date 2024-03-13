@@ -557,8 +557,8 @@ namespace klime.PointCheck
                     t_N = "Slinger";
                     mCs = 0f;
                     break;
-                case "Phaethon Plasma Pulser":
-                    t_N = "Phaethon Plasma Pulser";
+                case "Heliod Plasma Pulser":
+                    t_N = "Heliod Plasma Pulser";
                     mCs = 0.15f;
                     break;
                  case "UNN Heavy Torpedo Launcher":

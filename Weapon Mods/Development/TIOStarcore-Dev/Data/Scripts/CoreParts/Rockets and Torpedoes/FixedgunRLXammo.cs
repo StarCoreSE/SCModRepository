@@ -43,7 +43,7 @@ namespace Scripts
             AmmoMagazine = "LBX5_Slug", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Thagomizer", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
-            EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
+            EnergyCost = 0.017f, //195 Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 40000f, // Direct damage; one steel plate is worth 100.
             Mass = 500f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
@@ -439,7 +439,7 @@ namespace Scripts
             EnergyCost = 0f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 10000f, // Direct damage; one steel plate is worth 100.
             Mass = 140f, // In kilograms; how much force the impact will apply to the target.
-            Health = 92, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            Health = 86, //Watch this against Erebos 100+ damage aoe in future!// How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself. 
                                //float.MaxValue will drop the weapon to the first build state and destroy all components used for construction
@@ -704,6 +704,18 @@ namespace Scripts
                 ModelName = "\\Models\\Ammo\\LBX5_AmmoShellGeneric.mwm", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
+                Decals = new DecalDef
+                {
+                    MaxAge = 3600,
+                    Map = new[]
+                    {
+                        new TextureMapDef
+                        {
+                            HitMaterial = "Metal",
+                            DecalMaterial = "TIO_Explosive_Decal",
+                        },
+                    },
+                },
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef

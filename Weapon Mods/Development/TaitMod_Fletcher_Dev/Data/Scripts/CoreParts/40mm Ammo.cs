@@ -59,7 +59,7 @@ namespace Scripts
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
                 AmmoRound = "", // AmmoRound field of the ammo to spawn.
-                Fragments = 25, // Number of projectiles to spawn.
+                Fragments = 0, // Number of projectiles to spawn.
                 Degrees = 360, // Cone in which to randomise direction of spawned projectiles.
 				Radial = 90f, // Determines starting angle for Degrees of spread above.  IE, 0 degrees and 90 radial goes perpendicular to travel path
                 Reverse = false, // Spawn projectiles backward instead of forward.
@@ -416,7 +416,7 @@ namespace Scripts
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
                 AmmoRound = "", // AmmoRound field of the ammo to spawn.
-                Fragments = 25, // Number of projectiles to spawn.
+                Fragments = 0, // Number of projectiles to spawn.
                 Degrees = 15, // Cone in which to randomise direction of spawned projectiles.
                 Radial = 0f, // Determines starting angle for Degrees of spread above.  IE, 0 degrees and 90 radial goes perpendicular to travel path
                 Reverse = false, // Spawn projectiles backward instead of forward.
@@ -441,7 +441,7 @@ namespace Scripts
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
-                HealthHitModifier = 1, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
+                HealthHitModifier = 10, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = 1, // Voxel damage multiplier; defaults to 1 if zero or less.
                 Characters = -1f, // Character damage multiplier; defaults to 1 if zero or less.
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
@@ -774,7 +774,7 @@ namespace Scripts
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
                 AmmoRound = "", // AmmoRound field of the ammo to spawn.
-                Fragments = 25, // Number of projectiles to spawn.
+                Fragments = 0, // Number of projectiles to spawn.
                 Degrees = 360, // Cone in which to randomise direction of spawned projectiles.
                 Radial = 90f, // Determines starting angle for Degrees of spread above.  IE, 0 degrees and 90 radial goes perpendicular to travel path
                 Reverse = false, // Spawn projectiles backward instead of forward.
@@ -1132,7 +1132,7 @@ namespace Scripts
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
                 AmmoRound = "", // AmmoRound field of the ammo to spawn.
-                Fragments = 25, // Number of projectiles to spawn.
+                Fragments = 0, // Number of projectiles to spawn.
                 Degrees = 360, // Cone in which to randomise direction of spawned projectiles.
                 Radial = 90f, // Determines starting angle for Degrees of spread above.  IE, 0 degrees and 90 radial goes perpendicular to travel path
                 Reverse = false, // Spawn projectiles backward instead of forward.

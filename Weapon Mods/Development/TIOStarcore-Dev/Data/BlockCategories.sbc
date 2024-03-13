@@ -18,12 +18,12 @@
 				<string>ConveyorSorter/Type24_Artillery</string>
 				<string>ConveyorSorter/Type19_Driver</string>
 				<string>ConveyorSorter/Type22_Driver</string>
-				<string>ConveyorSorter/Type25_Driver</string>				
+				<string>ConveyorSorter/Type25_Driver</string>
 				<string>ConveyorSorter/Devastator_Torp</string>
-				<!--<string>ConveyorSorter/Assault_Coil_Turret</string>-->
+				<string>ConveyorSorter/Assault_Coil_Turret</string>
 				<string>ConveyorSorter/Reaver_Coilgun</string>
 				<string>ConveyorSorter/GoalieCasemate</string>
-			    <string>ConveyorSorter/Type17_BeamLance</string>
+			    <!--<string>ConveyorSorter/Type17_BeamLance</string>-->
 				<string>ConveyorSorter/Fixed_Rockets</string>
 				<string>VindicatorKineticLance</string>
 				<string>ConveyorSorter/HadeanPlasmaBlastgun</string>
@@ -42,6 +42,47 @@
             </ItemIds>
         </Category>
 		
+
+		<Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+            <Id>
+                <TypeId>GuiBlockCategoryDefinition</TypeId>
+                <SubtypeId/>
+            </Id>
+            <DisplayName>ModBloc Dynamics</DisplayName>
+            <Name>BadModderWC</Name>
+			    <StrictSearch>true</StrictSearch>
+            <ItemIds>
+				<string>ConveyorSorter/Priest_Block</string>
+				<string>ConveyorSorter/PriestReskin_Block</string>
+				<string>ConveyorSorter/APE_Strong</string>
+				<string>ConveyorSorter/Type18_Artillery</string>
+				<string>ConveyorSorter/Type21_Artillery</string>
+				<string>ConveyorSorter/Type24_Artillery</string>
+				<string>ConveyorSorter/Type19_Driver</string>
+				<string>ConveyorSorter/Type22_Driver</string>
+				<string>ConveyorSorter/Type25_Driver</string>
+				<string>ConveyorSorter/Devastator_Torp</string>
+				<!--<string>ConveyorSorter/Assault_Coil_Turret</string>-->
+				<string>ConveyorSorter/Reaver_Coilgun</string>
+				<string>ConveyorSorter/GoalieCasemate</string>
+			    <!--<string>ConveyorSorter/Type17_BeamLance</string>-->
+				<string>ConveyorSorter/Fixed_Rockets</string>
+				<string>VindicatorKineticLance</string>
+				<string>ConveyorSorter/HadeanPlasmaBlastgun</string>
+				<!--<string>ConveyorSorter/K_HSR_Utilities_Reactor_Gel_LG</string>-->
+				<string>ConveyorSorter/HeavyCarronade_5x5_Turret</string>
+				<string>ConveyorSorter/X4_7x7_HeavyTurret</string>
+				<string>ConveyorSorter/UnguidedRocketTurret</string>
+				<string>ConveyorSorter/DrunkRocketTurret</string>
+				<string>ConveyorSorter/DualSnubLaserTurret</string>
+				<string>ConveyorSorter/DualPulseLaserTurret</string>
+				<string>ConveyorSorter/KreegMagnetarCannon</string>
+				<string>ConveyorSorter/Thagomizer</string>
+				<string>ConveyorSorter/Thagomizer_Angled</string>
+
+
+            </ItemIds>
+        </Category>
 		<!--
 		<Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
 			<Id>
