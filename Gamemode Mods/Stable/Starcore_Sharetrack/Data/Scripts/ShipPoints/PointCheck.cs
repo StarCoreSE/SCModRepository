@@ -1087,20 +1087,20 @@ namespace klime.PointCheck
                 float thrustInKilograms = icubeG.GetMaxThrustInDirection(Base6Directions.Direction.Backward) / 9.81f;
                 //float weight = trkd.Mass;
                 float mass = trkd.Mass;
-                float TWR = thrustInKilograms / mass;
+                float TWR = (float) Math.Round(thrustInKilograms / mass, 1);
 
                 if (trkd.Mass > 1000000)
                 {
-                    massString = string.Format("{0:F2}m", trkd.Mass / 1000000f);
+                    massString = string.Format("{0:F2}m", Math.Round(trkd.Mass / 1000000f, 1));
                     mass = trkd.Mass / 1000f;
                 }
 
                 string TWRs = string.Format("{0:F3}", TWR);
-                string thrustString = string.Format("{0}", trkd.InstalledThrust);
+                string thrustString = string.Format("{0}", Math.Round(trkd.InstalledThrust, 1));
 
                 if (trkd.InstalledThrust > 1000000)
                 {
-                    thrustString = string.Format("{0:F2}M", trkd.InstalledThrust / 1000000f);
+                    thrustString = string.Format("{0:F2}M", Math.Round(trkd.InstalledThrust / 1000000f, 1));
                 }
 
                 string playerName = trkd.Owner == null ? trkd.GridName : trkd.Owner.DisplayName;
@@ -1114,10 +1114,10 @@ namespace klime.PointCheck
                 }
 
                 string PWRNotation = trkd.CurrentPower > 1000 ? "GW" : "MW";
-                string tempPWR = trkd.CurrentPower > 1000 ? string.Format("{0:F1}", trkd.CurrentPower / 1000) : trkd.CurrentPower.ToString();
+                string tempPWR = trkd.CurrentPower > 1000 ? string.Format("{0:F1}", Math.Round(trkd.CurrentPower / 1000, 1)) : Math.Round(trkd.CurrentPower, 1).ToString();
                 string PWR = tempPWR + PWRNotation;
 
-                string GyroString = string.Format("{0}", trkd.CurrentGyro);
+                string GyroString = string.Format("{0}", Math.Round(trkd.CurrentGyro, 1));
 
                 double tempGyro2;
                 if (trkd.CurrentGyro >= 1000000)
@@ -1125,11 +1125,11 @@ namespace klime.PointCheck
                     tempGyro2 = Math.Round(trkd.CurrentGyro / 1000000f, 1);
                     if (tempGyro2 > 1000)
                     {
-                        GyroString = string.Format("{0:F1}G", tempGyro2 / 1000);
+                        GyroString = string.Format("{0:F1}G", Math.Round(tempGyro2 / 1000, 1));
                     }
                     else
                     {
-                        GyroString = string.Format("{0:F1}M", tempGyro2);
+                        GyroString = string.Format("{0:F1}M", Math.Round(tempGyro2, 1));
                     }
                 }
 
