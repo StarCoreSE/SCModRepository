@@ -19,7 +19,7 @@
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="5" y="6" z="28" />
       <ModelOffset x="0" y="0" z="0" />
-      <Model>Models\Cubes\Nova.mwm</Model>
+      <Model>Models\Cubes\NovaCannon.mwm</Model>
       <Components>
         <Component Subtype="Construction" Count="5000" />
         <Component Subtype="GravityGenerator" Count="200" />
