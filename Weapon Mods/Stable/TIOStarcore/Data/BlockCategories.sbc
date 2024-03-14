@@ -221,7 +221,7 @@
 			<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="UnguidedRocketTurret" />
 			<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="DrunkRocketTurret" />	
 			<!-- <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Devastator_Torp" />	-->			
-			<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Fixed_Rockets" />	
+			<!-- <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Fixed_Rockets" />	-->
 			<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Thagomizer" />
 			<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Thagomizer_Angled" />		
 		</Blocks>
