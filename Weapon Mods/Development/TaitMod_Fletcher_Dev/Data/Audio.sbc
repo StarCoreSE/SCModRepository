@@ -965,7 +965,7 @@
       </Id>
       <Category>Sb</Category>
       <MaxDistance>3000</MaxDistance>
-      <Volume>1.50</Volume>
+      <Volume>4</Volume>
       <Loopable>true</Loopable>
       <Waves>
         <Wave Type="D2">
