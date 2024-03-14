@@ -845,7 +845,7 @@
       <Category>WEP_SHIP</Category>
       <MaxDistance>500</MaxDistance>
 	  <SoundLimit>10</SoundLimit>
-      <Volume>1.5</Volume>
+      <Volume>5</Volume>
 	  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>5</DynamicMusicAmount>
       <Loopable>false</Loopable>
@@ -963,10 +963,13 @@
         <TypeId>AudioDefinition</TypeId>
         <SubtypeId>AirRaid_Siren</SubtypeId>
       </Id>
-      <Category>Sb</Category>
-      <MaxDistance>3000</MaxDistance>
-      <Volume>4</Volume>
-      <Loopable>true</Loopable>
+      <Category>WEP_SHIP</Category>
+      <MaxDistance>500</MaxDistance>
+	  <SoundLimit>10</SoundLimit>
+      <Volume>5</Volume>
+	  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>5</DynamicMusicAmount>
+      <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D2">
 
@@ -989,6 +992,26 @@
 		  <Loop>Audio\FX\LargeTurretLoop.wav</Loop>
         </Wave>
       </Waves>
-    </Sound>	
+    </Sound>
+
+
+
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>TORPLAND</SubtypeId>
+		  </Id>
+		  <Category>WEP_SHIP</Category>
+		  <MaxDistance>500</MaxDistance>
+		  <SoundLimit>5</SoundLimit>
+		  <Volume>20</Volume>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <Loopable>false</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Explosions\TorpBonk.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
   </Sounds>
 </Definitions>
