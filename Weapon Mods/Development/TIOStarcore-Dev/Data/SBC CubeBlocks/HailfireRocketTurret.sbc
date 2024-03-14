@@ -8,9 +8,9 @@
 				<SubtypeId>DrunkRocketTurret</SubtypeId>
 			</Id>
 			<DisplayName>EX 'Bonfire' Guided Rocket Turret</DisplayName>
-			<Description>[5km Targeting Range [400 m/s]]
+			<Description>[4km Targeting Range [300 m/s]]
               [Energy damage]
-			  [10 HP Guided Missiles]
+			  [3 HP Guided Missiles]
               [High Damage, Large AOE, Semi Guided Drunk Rockets, Innaccurate]</Description>
 			<Icon>Textures\GUI\Icons\HAML.dds</Icon>
 			<CubeSize>Large</CubeSize>
@@ -38,7 +38,7 @@
 			
 			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 	  	  
       <ResourceSinkGroup>Defense</ResourceSinkGroup>
-	  <BuildTimeSeconds>160</BuildTimeSeconds>
+	  <BuildTimeSeconds>120</BuildTimeSeconds>
       <InventoryMaxVolume>0.144</InventoryMaxVolume>
 	   <MirroringY>Z</MirroringY>
       <MirroringZ>Y</MirroringZ>

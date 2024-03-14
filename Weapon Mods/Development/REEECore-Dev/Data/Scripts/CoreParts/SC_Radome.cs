@@ -18,13 +18,13 @@ namespace Scripts {
         {
             Assignments = new ModelAssignmentsDef
             {
-                MountPoints = new[] {
+                 MountPoints = new[] {
                     new MountPointDef {
                         SubtypeId = "SC_Radome",
                         SpinPartId = "None", // For weapons with a spinning barrel such as Gatling Guns.
-                        MuzzlePartId = "radomebarrels", // The subpart where your muzzle empties are located.
-                        AzimuthPartId = "radometop",
-                        ElevationPartId = "radomebarrels",
+                        MuzzlePartId = "Elevation", // The subpart where your muzzle empties are located.
+                        AzimuthPartId = "Azimuth",
+                        ElevationPartId = "Elevation",
                         DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },

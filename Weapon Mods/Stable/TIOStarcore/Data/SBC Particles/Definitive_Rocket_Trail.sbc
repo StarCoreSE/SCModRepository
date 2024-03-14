@@ -523,7 +523,7 @@
         </ParticleLight>
       </ParticleLights>
       <DistanceMax>6000</DistanceMax>
-      <Priority>1</Priority>
+      <Priority>20</Priority>
     </ParticleEffect>
   </ParticleEffects>
 </Definitions>

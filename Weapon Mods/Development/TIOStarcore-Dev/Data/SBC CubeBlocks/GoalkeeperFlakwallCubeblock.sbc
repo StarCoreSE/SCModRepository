@@ -11,7 +11,7 @@
 			<Description>
               [1600 Targeting Range]
 			  [1200 Flak Range]
-              [Can only scratch the Paint on Grids]
+              [Clouds of small pre-cast fragments are lethal to missiles, biologicals, below average sized meteors, and small grids.]
               [Targets Missiles, deals 160 AMS Damage Per Second]
 
 			</Description>
@@ -43,7 +43,7 @@
 			</MountPoints>
 			<BlockPairName>K_HS_Damnation</BlockPairName>
 			<EdgeType>Light</EdgeType>
-			<BuildTimeSeconds>120</BuildTimeSeconds>
+			<BuildTimeSeconds>75</BuildTimeSeconds>
 			<DisassembleRatio>5</DisassembleRatio>
 			<NavigationDefinition>Default</NavigationDefinition>
 			<WeaponDefinitionId Subtype="ShootMissileGooder" />

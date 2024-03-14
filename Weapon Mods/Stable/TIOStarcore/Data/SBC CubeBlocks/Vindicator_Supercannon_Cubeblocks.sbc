@@ -16,8 +16,8 @@
 				<SubtypeId>VindicatorKineticLance</SubtypeId>
 			</Id>
 			<DisplayName>Vindicator Kinetic Battery</DisplayName>
-            <Description>Three Vanilla Rails
-			10KM range, 4000m/s velocity
+            <Description>
+			7KM range, 4000m/s velocity
 			Kinetic Damage
 			Low Tracking Speed
 			Draws 360MW

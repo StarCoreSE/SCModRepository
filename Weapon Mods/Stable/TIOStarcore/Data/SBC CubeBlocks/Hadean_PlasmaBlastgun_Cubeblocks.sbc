@@ -10,9 +10,9 @@
 			</Id>
 			<DisplayName>Hadean Superheavy Plasma Blastguns</DisplayName>
             <Description>
-			9km range, 2400 m/s velocity
-			Energy damage
-			Dual ER PPC
+			7km range, 1250 m/s velocity
+			Plasma Vaporizes Hull armor with extreme Thermal Energy damage
+			Damage begins falling off past 3km.
 			Draws 550MW
 			</Description>            
 			<GuiVisible>true</GuiVisible>

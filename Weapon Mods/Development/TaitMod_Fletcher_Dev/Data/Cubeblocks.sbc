@@ -1543,7 +1543,7 @@
         <Component Subtype="Computer" Count="100" />
         <Component Subtype="Construction" Count="200" />
 		<Component Subtype="MetalGrid" Count="300" />
-        <Component Subtype="SteelPlate" Count="750" />
+        <Component Subtype="SteelPlate" Count="1250" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
@@ -1618,7 +1618,7 @@
         <Component Subtype="Computer" Count="100" />
         <Component Subtype="Construction" Count="200" />
 		<Component Subtype="MetalGrid" Count="300" />
-        <Component Subtype="SteelPlate" Count="750" />
+        <Component Subtype="SteelPlate" Count="1250" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>

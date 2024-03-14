@@ -9,7 +9,7 @@
       <LowRes>false</LowRes>
       <Loop>false</Loop>
       <DurationMin>0</DurationMin>
-      <DurationMax>4.5</DurationMax>
+      <DurationMax>5</DurationMax>
       <Version>0</Version>
       <ParticleGenerations>
         <ParticleGeneration Name="Fireball" Version="0">
@@ -293,7 +293,7 @@
               <ValueString>Atlas_E_01</ValueString>
             </Property>
             <Property AnimationType="Const" Name="OIT weight factor" Type="Float">
-              <ValueFloat>1</ValueFloat>
+              <ValueFloat>10</ValueFloat>
             </Property>
             <Property AnimationType="Const" Name="Collide" Type="Bool">
               <ValueBool>false</ValueBool>
@@ -685,7 +685,7 @@
                         <Value2D />
                       </Key>
                       <Key>
-                        <Time>0.006890612</Time>
+                        <Time>0.204876274</Time>
                         <ValueFloat>0</ValueFloat>
                         <Value2D />
                       </Key>
@@ -700,7 +700,7 @@
               </Keys>
             </Property>
             <Property AnimationType="Const" Name="Life" Type="Float">
-              <ValueFloat>10</ValueFloat>
+              <ValueFloat>12</ValueFloat>
             </Property>
             <Property AnimationType="Const" Name="Soft particle distance scale" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -919,7 +919,7 @@
               <ValueInt>0</ValueInt>
             </Property>
             <Property AnimationType="Const" Name="Array modulo" Type="Int">
-              <ValueInt>64</ValueInt>
+              <ValueInt>48</ValueInt>
             </Property>
             <Property AnimationType="Animated2D" Name="Color" Type="Vector4">
               <Keys>
@@ -1034,7 +1034,7 @@
               <Keys>
                 <Key>
                   <Time>0</Time>
-                  <ValueFloat>20</ValueFloat>
+                  <ValueFloat>35</ValueFloat>
                   <Value2D />
                 </Key>
               </Keys>
@@ -1043,7 +1043,7 @@
               <Keys>
                 <Key>
                   <Time>0</Time>
-                  <ValueFloat>0</ValueFloat>
+                  <ValueFloat>5</ValueFloat>
                   <Value2D />
                 </Key>
               </Keys>
@@ -1120,12 +1120,12 @@
                       </Key>
                       <Key>
                         <Time>0.7098944</Time>
-                        <ValueFloat>280</ValueFloat>
+                        <ValueFloat>300</ValueFloat>
                         <Value2D />
                       </Key>
                       <Key>
                         <Time>1</Time>
-                        <ValueFloat>340</ValueFloat>
+                        <ValueFloat>350</ValueFloat>
                         <Value2D />
                       </Key>
                     </Keys>
@@ -1134,7 +1134,7 @@
               </Keys>
             </Property>
             <Property AnimationType="Const" Name="Life" Type="Float">
-              <ValueFloat>4.8</ValueFloat>
+              <ValueFloat>4</ValueFloat>
             </Property>
             <Property AnimationType="Const" Name="Soft particle distance scale" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -1143,7 +1143,7 @@
               <ValueFloat>4</ValueFloat>
             </Property>
             <Property AnimationType="Const" Name="Animation frame time" Type="Float">
-              <ValueFloat>0.05</ValueFloat>
+              <ValueFloat>0.04</ValueFloat>
             </Property>
             <Property AnimationType="Const" Name="Enabled" Type="Bool">
               <ValueBool>true</ValueBool>
@@ -1201,7 +1201,7 @@
               <ValueFloat>0</ValueFloat>
             </Property>
             <Property AnimationType="Const" Name="Life var" Type="Float">
-              <ValueFloat>6.43</ValueFloat>
+              <ValueFloat>1</ValueFloat>
             </Property>
             <Property AnimationType="Const" Name="Streaks" Type="Bool">
               <ValueBool>false</ValueBool>

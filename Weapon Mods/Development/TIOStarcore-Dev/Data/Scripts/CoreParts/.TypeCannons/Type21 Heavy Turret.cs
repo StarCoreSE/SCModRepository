@@ -59,7 +59,7 @@ namespace Scripts {
             HardPoint = new HardPointDef
             {
                 PartName = "Type 21 Heavy Naval Artillery", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
-                DeviateShotAngle = 0.05f, // Projectile inaccuracy in degrees.
+                DeviateShotAngle = 0.06f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 0.2f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
                 DelayCeaseFire = 0, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released.
@@ -95,7 +95,7 @@ namespace Scripts {
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 5, // Default resting elevation
                     InventorySize = 2.4f, // Inventory capacity in kL.
-                    IdlePower = 6f, // Constant base power draw in MW.
+                    IdlePower = 0.001f, ////fix for animation??? Constant base power draw in MW.
                     FixedOffset = false, // Deprecated.
                     Offset = Vector(x: 0, y: 0, z: 0), // Offsets the aiming/firing line of the weapon, in metres.
                     Type = BlockWeapon, // What type of weapon this is; BlockWeapon, HandWeapon, Phantom 
