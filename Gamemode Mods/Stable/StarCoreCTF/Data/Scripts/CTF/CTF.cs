@@ -1004,7 +1004,7 @@ namespace Klime.CTF
 
 
                                             // Check if the same-team player has been around the flag for 10 seconds
-                                            if (subflag.PlayerReturnTimes[player.IdentityId] >= 600)
+                                            if (subflag.PlayerReturnTimes[player.IdentityId] >= 60)
                                             {
                                                 ResetFlag(subflag);
                                             }
