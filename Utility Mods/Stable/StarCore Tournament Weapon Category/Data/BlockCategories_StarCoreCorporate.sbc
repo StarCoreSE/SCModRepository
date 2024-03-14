@@ -3,11 +3,10 @@
   <!--MAKE SURE TO CHANGE SECLEANMODCATEGORIES TOO IF YOU'RE ADDING A NEW CATEGORY-->
   <CategoryClasses>
     <!--not pointless-->
-	
+    
     <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
       <Id>
         <TypeId>GuiBlockCategoryDefinition</TypeId>
-
       </Id>
       <DisplayName>[All Access]</DisplayName>
       <Name>[All Access]</Name>
@@ -17,7 +16,6 @@
 
         <!--BAR-->
         <string>SELtdLargeNanobotBuildAndRepairSystem</string>
-
 
         <!--INVALID-->
         <string>MA_Afterburner_Large_5x</string>
@@ -41,12 +39,9 @@
         <string>AQD_LG_GyroUpgrade</string>
         <string>SC_Radome</string>
         <string>SI_Field_Gen</string>
-		<string>AMP_HealGenerator</string>
-		<string>PM_LG_BLASTPLATE_BLASTPLATE</string>
-		<string>WorklightSmall</string>
-		
-        
-
+        <string>PM_LG_BLASTPLATE_BLASTPLATE</string>
+        <string>WorklightSmall</string>
+        <string>BlinkDriveLarge</string>
       </ItemIds>
     </Category>
 
@@ -70,9 +65,9 @@
         <string>APE_Strong</string>	
         <string>Priest_Block</string>	
         <string>PriestReskin_Block</string>			
-		<string>VMLS_Block</string>	
+        <string>VMLS_Block</string>	
         <string>Devastator_Torp</string>	
-		
+        
         
 
       </ItemIds>
@@ -96,12 +91,10 @@
         <string>X4_7x7_HeavyTurret</string>	
         <string>UnguidedRocketTurret</string>	
         <string>DrunkRocketTurret</string>	
-        <string>VindicatorKineticLance</string>	
-        <string>HadeanPlasmaBlastgun</string>	
         <string>Fixed_Rockets</string>	
         <string>HeavyFighterBay</string>	
         <string>GoalieCasemate</string>		
-			
+            
         
 
       </ItemIds>
@@ -129,9 +122,9 @@
         <string>MA_Derecho</string>
         <string>MA_Guardian</string>
         <string>MA_Blister</string>
-		<string>MCRN_Heavy_Torpedo</string>
+        <string>MCRN_Heavy_Torpedo</string>
 
-			
+            
         
 
       </ItemIds>
@@ -162,7 +155,8 @@
         <string>NHI_Fixed_Gatling_Laser</string>
         <string>SC_Coil_Cannon</string>
         <string>NHI_Kinetic_Cannon_Turret</string>
-			
+        <string>NHI_Light_Railgun_Turret</string>
+            
         
 
       </ItemIds>
@@ -178,10 +172,10 @@
       <StrictSearch>true</StrictSearch>
       <ItemIds>
 
-		<!--Onyx Replacements-->
+        <!--Onyx Replacements-->
         <string>SC_AR_Eris</string>
         <string>SC_AR_Afflictor</string>
-			
+            
         
 
       </ItemIds>
@@ -197,10 +191,10 @@
       <StrictSearch>true</StrictSearch>
       <ItemIds>
 
-		<!--SA-->
+        <!--SA-->
         <string>K_SA_HeavyMetal_Gauss_ERFM</string>
         <string>K_SA_HeavyMetal_Gauss_A</string>
-			
+            
         
 
       </ItemIds>
@@ -219,12 +213,17 @@
         <!--HAS-->
         <!--<string>HAS_Alecto</string>-->
         <string>HAS_Mammon</string>
-        <string>HAS_Vulcan</string>     
+        <string>HAS_Vulcan</string>
+		<string>HAS_Cyclops</string>
+		<string>HAS_Thanatos</string>
+		<string>LargeRailgun_SC</string>
+		<string>HAS_Crossfield</string>
 
-        <!--WYSEMAN ONESHOT-->
+
+		  <!--WYSEMAN ONESHOT-->
         <string>K_SA_Launcher_VI</string>
         <string>K_SA_Launcher_VIV</string>
-		
+        
       </ItemIds>
     </Category>
 
@@ -240,16 +239,19 @@
 
         <!--EXO-->
         <string>AMP_ArcMelee</string>
+        <string>AMP_HealGenerator</string>
         <string>NovaCannon</string>
-		<string>MetalStorm</string>
+        <string>MetalStorm</string>
         <string>TaiidanRailFighter</string>
         <string>Hexcannon</string>
+		<string>VindicatorKineticLance</string>
+		<string>HadeanPlasmaBlastgun</string>
 
-		
-      </ItemIds>
+
+	  </ItemIds>
     </Category>
-	
-	    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+    
+        <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
       <Id>
         <TypeId>GuiBlockCategoryDefinition</TypeId>
 
@@ -267,7 +269,7 @@
         <string>ModularLRM5</string>
         <string>ModularMRM10</string>
         <string>Starcore_Arrow_Block</string>
-		
+        
       </ItemIds>
     </Category>
 

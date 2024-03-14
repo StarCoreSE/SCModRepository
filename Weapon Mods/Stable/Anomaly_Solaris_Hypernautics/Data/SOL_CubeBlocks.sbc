@@ -28,7 +28,7 @@
 				<Component Subtype="Computer" Count="1"/>
 				<Component Subtype="ASH_PlateComponent" Count="6"/>
 			</Components>
-      <BuildTimeSeconds>60</BuildTimeSeconds>
+			<BuildTimeSeconds>60</BuildTimeSeconds>
 			<CriticalComponent Subtype="Computer" Index="0"/>
 			<MountPoints>
 				<MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
