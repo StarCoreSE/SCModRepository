@@ -153,12 +153,12 @@ namespace Invalid.BlinkDrive
             List<IHitInfo> hitInfos = new List<IHitInfo>();
             Vector3D forward = Block.CubeGrid.WorldMatrix.Forward * JumpDistance;
             IMyEntity topGridParent = Block.CubeGrid.GetTopMostParent(typeof(MyCubeGrid));
-            for (int i = 0; i <= 8; i++)
+            for (int i = 0; i < 8; i++)
             {
-                Vector3D corner = Block.CubeGrid.GetPosition() + Block.CubeGrid.WorldAABB.GetCorner(i);
+                Vector3D corner = Block.CubeGrid.WorldAABB.GetCorner(i);
                 MyAPIGateway.Physics.CastRay(corner, corner + forward, hitInfos, CollisionLayers.DefaultCollisionLayer);
 
-                if (hitInfos.Count > 0 && hitInfos[0].HitEntity.GetTopMostParent(typeof(MyCubeGrid)) != topGridParent)
+                if (hitInfos.Count > 0 && (hitInfos.Count > 1 || hitInfos[0].HitEntity.GetTopMostParent(typeof(MyCubeGrid)) != topGridParent))
                 {
                     MyAPIGateway.Utilities.ShowNotification("Obstacle Detected!", font: "Red");
                     return;
