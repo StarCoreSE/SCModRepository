@@ -1,0 +1,53 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CategoryClasses>
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+        <SubtypeId/>
+      </Id>
+      	<DisplayName>DisplayName_Category_LargeBlocks</DisplayName>
+      	<Name>LargeBlocks</Name>
+     		<ItemIds>
+			<string>ConveyorSorter/AMP_HealGenerator</string>
+			<string>ConveyorSorter/AMP_FlakShotgun</string>
+			<string>ConveyorSorter/AMP_ImpulseTorch</string>
+			<string>ConveyorSorter/K_SA_Gauss_APC</string>
+	   	</ItemIds>
+	</Category>
+
+	<Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+		<Id>
+			<TypeId>GuiBlockCategoryDefinition</TypeId>
+			<SubtypeId/>
+		</Id>
+		<DisplayName>DisplayName_Category_ShipWeapons</DisplayName>
+		<Name>Weapons</Name>
+		<ItemIds>
+			<string>ConveyorSorter/AMP_HealGenerator</string>
+			<string>ConveyorSorter/AMP_FlakShotgun</string>
+			<string>ConveyorSorter/AMP_ImpulseTorch</string>
+			<string>ConveyorSorter/K_SA_Gauss_APC</string>
+		</ItemIds>
+	</Category>
+
+	<Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+		<Id>
+			<TypeId>GuiBlockCategoryDefinition</TypeId>
+			<SubtypeId/>
+		</Id>
+		<DisplayName>[SOL] Weapons</DisplayName>
+		<Name>Aristeas Melee Pack</Name>
+		<SearchBlocks>true</SearchBlocks>
+		<IsShipCategory>false</IsShipCategory>
+		<IsBlockCategory>true</IsBlockCategory>
+		<IsToolCategory>false</IsToolCategory>
+		<ItemIds>
+			<string>ConveyorSorter/AMP_HealGenerator</string>
+			<string>ConveyorSorter/AMP_FlakShotgun</string>
+			<string>ConveyorSorter/AMP_ImpulseTorch</string>
+			<string>ConveyorSorter/K_SA_Gauss_APC</string>
+		</ItemIds>
+	 </Category>
+  </CategoryClasses>
+</Definitions>
