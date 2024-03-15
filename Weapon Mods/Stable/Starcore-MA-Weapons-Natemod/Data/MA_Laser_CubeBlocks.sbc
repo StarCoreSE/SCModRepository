@@ -13,7 +13,7 @@
       <DisplayName>Guardian T4 Beam</DisplayName>
       <Description>
         [4km Targeting Range]
-        [Draws ~1,375MW]
+        [Draws ~750 MW]
         [Energy damage]
         [Hitscan]
       </Description>
@@ -102,7 +102,7 @@
       <DisplayName>Gladius Heavy Laser</DisplayName>
       <Description>
         [3km Targeting Range]
-        [Draws ~550MW]
+        [Draws ~440 MW]
         [Energy damage]
         [Hitscan]
       </Description>
