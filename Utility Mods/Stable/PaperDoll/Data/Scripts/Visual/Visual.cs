@@ -1112,12 +1112,12 @@ namespace klime.Visual
 
             if (validInputThisTick)
             {
-                if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.T))
+                if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.LeftShift) && MyAPIGateway.Input.IsNewKeyPressed(MyKeys.T))
                 {
                     ToggleViewState();
                     ToggleRequestPaperDoll();
                 }
-                if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.R))  // Trigger SelfRender with R key
+                if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.LeftShift) && MyAPIGateway.Input.IsNewKeyPressed(MyKeys.R))
                 {
                     ToggleViewStateSelf();
                     ToggleRequestPaperDollSelf();
