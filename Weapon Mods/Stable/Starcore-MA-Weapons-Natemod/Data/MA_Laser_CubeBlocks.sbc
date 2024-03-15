@@ -102,7 +102,7 @@
       <DisplayName>Gladius Heavy Laser</DisplayName>
       <Description>
         [3km Targeting Range]
-        [Draws ~440 MW]
+        [Draws ~444 MW]
         [Energy damage]
         [Hitscan]
       </Description>
@@ -196,6 +196,7 @@
       <Description>
         T1 Laser turret
         Role: Point defense, targets only guided, defends own grid
+		[Draws ~50 MW]
         Ammo: Energy
         Range: 100% to 800m, 10% at 1200m.
         Made by AutoMcD Astronautical and CriegWarfare.
@@ -286,7 +287,7 @@
       <DisplayName>PDX Laser T2</DisplayName>
       <Description>
         [2km Targeting Range]
-        [Draws ~125MW]
+        [Draws ~100 MW]
         [Energy damage]
         [Hitscan]
         Made by AutoMcD Astronautical, CriegWarfare, Mike_Dude.
@@ -376,7 +377,7 @@
       <DisplayName>PDX Laser T2 Slope</DisplayName>
       <Description>
         [2km Targeting Range]
-        [Draws ~125MW]
+        [Draws ~100 MW]
         [Energy damage]
         [Hitscan]
       </Description>
@@ -474,7 +475,7 @@
       <DisplayName>PDX Laser T2 Slope2</DisplayName>
       <Description>
         [2km Targeting Range]
-        [Draws ~125MW]
+        [Draws ~100 MW]
         [Energy damage]
         [Hitscan]
       </Description>
@@ -573,7 +574,7 @@
       <Icon>Textures\Icons\MA_Gimbal_Laser_Armored.dds</Icon>
       <Description>
         [1.2km Targeting Range]
-        [Draws ~25MW]
+        [Draws ~50 MW]
         [Energy damage]
         [Hitscan]
         [PD Only]
@@ -673,7 +674,7 @@
       <Icon>Textures\Icons\MA_Gimbal_Laser_Armored_Slope.dds</Icon>
       <Description>
         [1.2km Targeting Range]
-        [Draws ~25MW]
+        [Draws ~50 MW]
         [Energy damage]
         [Hitscan]
         [PD Only]
@@ -772,7 +773,7 @@
       <Icon>Textures\Icons\MA_Gimbal_Laser_Armored_Slope2.dds</Icon>
       <Description>
         [1.2km Targeting Range]
-        [Draws ~25MW]
+        [Draws ~50 MW]
         [Energy damage]
         [Hitscan]
         [PD Only]
@@ -870,7 +871,7 @@
       <Icon>Textures\Icons\MA_Gimbal_Laser_Armored_Slope45.dds</Icon>
       <Description>
         [1.2km Targeting Range]
-        [Draws ~25MW]
+        [Draws ~50 MW]
         [Energy damage]
         [Hitscan]
         [PD Only]
@@ -970,7 +971,7 @@
       <Icon>Textures\Icons\MA_Gimbal_Laser.dds</Icon>
       <Description>
         [1.2km Targeting Range]
-        [Draws ~25MW]
+        [Draws ~50 MW]
         [Energy damage]
         [Hitscan]
         [PD Only]
@@ -1100,7 +1101,7 @@
       <DisplayName>Gimbal Laser T2</DisplayName>
       <Description>
         [2km Targeting Range]
-        [Draws ~125MW]
+        [Draws ~100 MW]
         [Energy damage]
         [Hitscan]
       </Description>
@@ -1243,7 +1244,7 @@
       <DisplayName>Gimbal Laser T2 Armored</DisplayName>
       <Description>
         [2km Targeting Range]
-        [Draws ~125MW]
+        [Draws ~100 MW]
         [Energy damage]
         [Hitscan]
       </Description>
@@ -1337,7 +1338,7 @@
       <DisplayName>Gimbal Laser T2 Armored Slope</DisplayName>
       <Description>
         [2km Targeting Range]
-        [Draws ~125MW]
+        [Draws ~100 MW]
         [Energy damage]
         [Hitscan]
       </Description>
@@ -1431,7 +1432,7 @@
       <DisplayName>Gimbal Laser T2 Armored Slope 2</DisplayName>
       <Description>
         [2km Targeting Range]
-        [Draws ~125MW]
+        [Draws ~100 MW]
         [Energy damage]
         [Hitscan]
       </Description>
@@ -1525,7 +1526,7 @@
       <DisplayName>Gimbal Laser T2 Armored Slope 45</DisplayName>
       <Description>
         [2km Targeting Range]
-        [Draws ~125MW]
+        [Draws ~100 MW]
         [Energy damage]
         [Hitscan]
       </Description>
@@ -1684,7 +1685,7 @@
       <DisplayName>Fixed T2 Laser</DisplayName>
       <Description>
         [2km Targeting Range]
-        [Draws ~125MW]
+        [Draws ~100 MW]
         [Energy damage]
         [Hitscan]
       </Description>
@@ -1792,7 +1793,7 @@
       <DisplayName>Fixed T2 Laser Naked</DisplayName>
       <Description>
         [2km Targeting Range]
-        [Draws ~125MW]
+        [Draws ~100 MW]
         [Energy damage]
         [Hitscan]
       </Description>
@@ -1873,7 +1874,7 @@
       <DisplayName>Fixed T3 Laser</DisplayName>
       <Description>
         [3km Targeting Range]
-        [Draws ~225MW]
+        [Draws ~222 MW]
         [Energy damage]
         [Hitscan]
       </Description>
