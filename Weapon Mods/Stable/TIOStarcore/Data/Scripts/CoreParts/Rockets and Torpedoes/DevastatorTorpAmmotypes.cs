@@ -582,7 +582,7 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 3f,
-                    CustomParticle = "New_Big_Explosion", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "Type18_21_24_HE_Shell_Explosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "TempHeavyHit", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
@@ -1369,7 +1369,7 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 3f,
-                    CustomParticle = "New_Big_Explosion", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "Type18_21_24_HE_Shell_Explosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "TempHeavyHit", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
