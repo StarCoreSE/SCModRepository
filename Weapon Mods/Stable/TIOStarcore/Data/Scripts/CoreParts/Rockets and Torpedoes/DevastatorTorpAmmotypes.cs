@@ -518,7 +518,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 2.2f, // Multiplier for damage against shields.
+                    Modifier = 2f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1.5f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -568,7 +568,7 @@ namespace Scripts
                 {
                     Enable = true,  //with 30,000 aoe on linear, expect 132,000 total aoe damage per missile.
                     Radius = 8f, // Meters
-                    Damage = 30000, //nerfed from 60,000 cause lol lmao maybe i shouldnt listen to muzzled.  Probably need to convert this into pooled damage soon.
+                    Damage = 37000, //nerfed from 60,000 cause lol lmao maybe i shouldnt listen to muzzled.  Probably need to convert this into pooled damage soon.
                     Depth = 4f,
                     MaxAbsorb = 0f,
                     Falloff = Linear, //.NoFalloff applies the same damage to all blocks in radius
@@ -582,7 +582,7 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 3f,
-                    CustomParticle = "New_Big_Explosion", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "Type18_21_24_HE_Shell_Explosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "TempHeavyHit", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
@@ -1305,7 +1305,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 2.2f, // Multiplier for damage against shields.
+                    Modifier = 2f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1.5f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -1355,7 +1355,7 @@ namespace Scripts
                 {
                     Enable = true,
                     Radius = 8f, // Meters
-                    Damage = 30000,
+                    Damage = 37000,
                     Depth = 4f,
                     MaxAbsorb = 0f,
                     Falloff = Linear, //.NoFalloff applies the same damage to all blocks in radius
@@ -1369,7 +1369,7 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 3f,
-                    CustomParticle = "New_Big_Explosion", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "Type18_21_24_HE_Shell_Explosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "TempHeavyHit", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
