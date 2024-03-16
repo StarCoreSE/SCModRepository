@@ -1112,15 +1112,21 @@ namespace klime.Visual
 
             if (validInputThisTick)
             {
-                if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.T))
+                // Check if Shift key is pressed
+                if (MyAPIGateway.Input.IsKeyPress(MyKeys.LeftShift))
                 {
-                    ToggleViewState();
-                    ToggleRequestPaperDoll();
-                }
-                if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.R))  // Trigger SelfRender with R key
-                {
-                    ToggleViewStateSelf();
-                    ToggleRequestPaperDollSelf();
+                    // Check if T key is pressed
+                    if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.T))
+                    {
+                        ToggleViewState();
+                        ToggleRequestPaperDoll();
+                    }
+                    // Check if R key is pressed
+                    else if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.R))
+                    {
+                        ToggleViewStateSelf();
+                        ToggleRequestPaperDollSelf();
+                    }
                 }
             }
         }
