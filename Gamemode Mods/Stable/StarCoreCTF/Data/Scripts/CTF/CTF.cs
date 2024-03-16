@@ -19,6 +19,7 @@ using System.Text;
 using Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF;
 using Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF.Packets;
 using System.Runtime.InteropServices;
+using VRage.Input;
 
 namespace Klime.CTF
 {
@@ -114,8 +115,6 @@ namespace Klime.CTF
         StringBuilder score_sb = new StringBuilder();
         HudAPIv2.HUDMessage event_message;
         StringBuilder event_sb = new StringBuilder();
-        HudAPIv2.HUDMessage grip_strength_message;
-        StringBuilder grip_strength_sb = new StringBuilder();
         int event_clock = 0;
         MyPlanet reuse_planet;
         List<MyEntity> reuse_Entities = new List<MyEntity>();
@@ -420,9 +419,11 @@ namespace Klime.CTF
             }
         }
 
+        HudAPIv2.BillBoardHUDMessage score_billboard;
+
         private void HUDLoaded()
         {
-            HudAPIv2.BillBoardHUDMessage score_billboard = new HudAPIv2.BillBoardHUDMessage();
+            score_billboard = new HudAPIv2.BillBoardHUDMessage();
             score_billboard.BillBoardColor = new Color(Color.White, 1);
             score_billboard.Material = MyStringId.GetOrCompute("ctf_score_background");
             score_billboard.Origin = new Vector2D(-0.33, 0.85);
@@ -453,14 +454,6 @@ namespace Klime.CTF
             event_message.Scale = 2f;
             event_message.InitialColor = Color.DarkOrange;
 
-            grip_strength_message = new HudAPIv2.HUDMessage();
-            grip_strength_message.Blend = BlendTypeEnum.PostPP;
-            grip_strength_message.Message = grip_strength_sb;
-            grip_strength_message.Visible = true;
-            grip_strength_message.Origin = new Vector2D(-0.18, -0.4);
-            grip_strength_message.Options |= HudAPIv2.Options.HideHud;
-            grip_strength_message.Scale = 2f;
-            grip_strength_message.InitialColor = Color.DarkOrange;
         }
 
         public HashSet<long> damagedGrids = new HashSet<long>();
@@ -527,6 +520,9 @@ namespace Klime.CTF
         {
             try
             {
+
+                HandleUserInput();
+
                 if (timer % 60 == 0)
                 {
                     allplayers.Clear();
@@ -990,11 +986,11 @@ namespace Klime.CTF
 
                                                 float percentDegrees = 2 * returnTime / 600f;
 
-                                                float lineSize = returnTime > 500 ? 0.5f + (returnTime - 500)/16 : 0.5f;
+                                                float lineSize = returnTime > 500 ? 0.5f + (returnTime - 500) / 16 : 0.5f;
 
                                                 // Draw [an sphere]
                                                 MatrixD flagMatrix = MatrixD.CreateTranslation(subflag.current_pos);
-                                                MySimpleObjectDraw.DrawTransparentSphere(ref flagMatrix, (float) flagPickupRadius, ref subflag.flag_color, MySimpleObjectRasterizer.Wireframe, 20, null, MyStringId.GetOrCompute("WeaponLaserIgnoreDepth"), lineSize, -1, null, BlendTypeEnum.SDR, percentDegrees*percentDegrees);
+                                                MySimpleObjectDraw.DrawTransparentSphere(ref flagMatrix, (float)flagPickupRadius, ref subflag.flag_color, MySimpleObjectRasterizer.Wireframe, 20, null, MyStringId.GetOrCompute("WeaponLaserIgnoreDepth"), lineSize, -1, null, BlendTypeEnum.SDR, percentDegrees * percentDegrees);
                                             }
                                             else
                                             {
@@ -1137,6 +1133,25 @@ namespace Klime.CTF
             timer += 1;
         }
 
+        private void HandleUserInput()
+        {
+
+            // Check if Ctrl key is pressed
+            if (MyAPIGateway.Input.IsAnyCtrlKeyPressed())
+            {
+                // Check if M key is pressed
+                if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.M))
+                {
+                    // Toggle the visibility of the scoreboard
+                    score_billboard.Visible = !score_billboard.Visible;
+                    score_message.Visible = !score_message.Visible;
+                    
+
+                }
+            }
+        }
+
+
         private void SendFlagState()
         {
             packet.gamestate_packet = null;
@@ -1221,7 +1236,7 @@ namespace Klime.CTF
                     }
 
 
-                    if (grip_strength_message != null && gamestate != null)
+                    if (score_billboard.Visible && gamestate != null)
                     {
                         var redFlag = allflags[0];
                         var blueFlag = allflags[1];
