@@ -107,112 +107,142 @@ namespace StarCore.AutoRepairModule
         #region Overrides
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
-            NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
+            if (MyAPIGateway.Utilities.IsDedicated || MyAPIGateway.Session.IsServer)
+            {
+                NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
+            }
+            else
+            {
+                return;
+            }         
         }
 
         public override void UpdateOnceBeforeFrame()
         {
-            block = (IMyCollector)Entity;
+            if (MyAPIGateway.Utilities.IsDedicated || MyAPIGateway.Session.IsServer)
+            {
+                block = (IMyCollector)Entity;
 
-            if (block?.CubeGrid?.Physics == null)
+                if (block?.CubeGrid?.Physics == null)
+                    return;
+
+                SetupTerminalControls<IMyCollector>();
+
+                MyParticlesManager.TryCreateParticleEffect(WeldingParticle, ref MatrixD.Identity, ref Vector3D.Zero, uint.MaxValue, out ActiveWeldingParticle);
+                ActiveWeldSoundEmitter = new MyEntity3DSoundEmitter(null);
+
+                NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_10TH_FRAME;
+
+                LoadSettings();
+
+                Settings.IgnoreArmor = true;
+
+                if (SettingsSubsystemPriority != SubsystemPriority)
+                {
+                    SubsystemPriority = SettingsSubsystemPriority;
+                }
+
+                if (SettingsExclusiveMode != ExclusiveMode)
+                {
+                    ExclusiveMode = SettingsExclusiveMode;
+                }
+
+                if (SettingsIgnoreArmor != IgnoreArmor)
+                {
+                    IgnoreArmor = SettingsIgnoreArmor;
+                }
+
+                SaveSettings();
+
+                block.AppendingCustomInfo += AppendingCustomInfo;
+            }
+            else
+            {
                 return;
-
-            SetupTerminalControls<IMyCollector>();
-
-            MyParticlesManager.TryCreateParticleEffect(WeldingParticle, ref MatrixD.Identity, ref Vector3D.Zero, uint.MaxValue, out ActiveWeldingParticle);
-            ActiveWeldSoundEmitter = new MyEntity3DSoundEmitter(null);
-
-            NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_10TH_FRAME;
-
-            LoadSettings();
-
-            Settings.IgnoreArmor = true;
-
-            if (SettingsSubsystemPriority != SubsystemPriority)
-            {
-                SubsystemPriority = SettingsSubsystemPriority;
             }
-
-            if (SettingsExclusiveMode != ExclusiveMode)
-            {
-                ExclusiveMode = SettingsExclusiveMode;
-            }
-
-            if (SettingsIgnoreArmor != IgnoreArmor)
-            {
-                IgnoreArmor = SettingsIgnoreArmor;
-            }
-
-            SaveSettings();
-
-            block.AppendingCustomInfo += AppendingCustomInfo;
         }
 
         public override void UpdateAfterSimulation()
         {
-            if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0 && block != null && block.IsWorking)
+            if (MyAPIGateway.Utilities.IsDedicated || MyAPIGateway.Session.IsServer)
             {
-                if (block.CubeGrid != null && block != null && WeldNextTargetDelay <= 0)
-                {
-                    GatherDamagedBlocks(block.CubeGrid, ref repairList, ref priorityRepairList);
 
-                    DoRepairAction();
-                    WeldingSortTimeout = WeldingSortTimeout - 1;
-                }
-                else if (block != null && block.CubeGrid != null)
+                if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0 && block != null && block.IsWorking)
                 {
-                    if (ActiveWeldSoundEmitter != null)
+                    if (block.CubeGrid != null && block != null && WeldNextTargetDelay <= 0)
                     {
-                        ActiveWeldingParticle?.SetTranslation(ref Vector3D.Zero);
-                        ActiveWeldSoundEmitter?.StopSound(true);
-                        WeldNextTargetDelay = WeldNextTargetDelay - 1;
+                        GatherDamagedBlocks(block.CubeGrid, ref repairList, ref priorityRepairList);
+
+                        DoRepairAction();
+                        WeldingSortTimeout = WeldingSortTimeout - 1;
+                    }
+                    else if (block != null && block.CubeGrid != null)
+                    {
+                        if (ActiveWeldSoundEmitter != null)
+                        {
+                            ActiveWeldingParticle?.SetTranslation(ref Vector3D.Zero);
+                            ActiveWeldSoundEmitter?.StopSound(true);
+                            WeldNextTargetDelay = WeldNextTargetDelay - 1;
+                        }
+                    }
+
+                    if (MyAPIGateway.Gui.GetCurrentScreen == MyTerminalPageEnum.ControlPanel)
+                    {
+                        block.RefreshCustomInfo();
+                        block.SetDetailedInfoDirty();
+                    }
+                }
+                else if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0 && block != null && !block.IsWorking)
+                {
+                    ActiveWeldingParticle?.SetTranslation(ref Vector3D.Zero);
+                    repairList?.Clear();
+                    priorityRepairList?.Clear();
+
+                    if (MyAPIGateway.Gui.GetCurrentScreen == MyTerminalPageEnum.ControlPanel)
+                    {
+                        block.RefreshCustomInfo();
+                        block.SetDetailedInfoDirty();
                     }
                 }
 
-                if (MyAPIGateway.Gui.GetCurrentScreen == MyTerminalPageEnum.ControlPanel)
+                if (firstBlock != null && !firstBlock.IsFullIntegrity)
                 {
-                    block.RefreshCustomInfo();
-                    block.SetDetailedInfoDirty();
-                }
-            }
-            else if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0 && block != null && !block.IsWorking)
-            {
-                ActiveWeldingParticle?.SetTranslation(ref Vector3D.Zero);
-                repairList?.Clear();
-                priorityRepairList?.Clear();
+                    Vector3D firstBlockPosition = Vector3D.Zero;
+                    firstBlock.ComputeWorldCenter(out firstBlockPosition);
 
-                if (MyAPIGateway.Gui.GetCurrentScreen == MyTerminalPageEnum.ControlPanel)
+                    ActiveWeldingParticle?.SetTranslation(ref firstBlockPosition);
+                    ActiveWeldSoundEmitter?.SetPosition(firstBlockPosition);
+                }
+                else
                 {
-                    block.RefreshCustomInfo();
-                    block.SetDetailedInfoDirty();
+                    ActiveWeldingParticle?.SetTranslation(ref Vector3D.Zero);
+                    ActiveWeldSoundEmitter?.SetPosition(Vector3D.Zero);
+                    ActiveWeldSoundEmitter?.StopSound(true);
                 }
-            }
 
-            if (firstBlock != null && !firstBlock.IsFullIntegrity)
-            {
-                Vector3D firstBlockPosition = Vector3D.Zero;
-                firstBlock.ComputeWorldCenter(out firstBlockPosition);
-
-                ActiveWeldingParticle?.SetTranslation(ref firstBlockPosition);
-                ActiveWeldSoundEmitter?.SetPosition(firstBlockPosition);
             }
             else
             {
-                ActiveWeldingParticle?.SetTranslation(ref Vector3D.Zero);
-                ActiveWeldSoundEmitter?.SetPosition(Vector3D.Zero);
-                ActiveWeldSoundEmitter?.StopSound(true);
-            }            
+                return;
+            }
         }
 
         public override void UpdateBeforeSimulation10()
         {
-            try
+            if (MyAPIGateway.Utilities.IsDedicated || MyAPIGateway.Session.IsServer)
             {
-                SyncSettings();
+                try
+                {
+                    SyncSettings();
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e);
+                }
             }
-            catch (Exception e)
+            else
             {
-                Log.Error(e);
+                return;
             }
         }
 
