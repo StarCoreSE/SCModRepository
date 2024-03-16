@@ -1112,8 +1112,8 @@ namespace klime.Visual
 
             if (validInputThisTick)
             {
-                // Check if Shift key is pressed
-                if (MyAPIGateway.Input.IsKeyPress(MyKeys.LeftShift))
+                // Check if Control key is pressed
+                if (MyAPIGateway.Input.IsKeyPress(MyKeys.Control))
                 {
                     // Check if T key is pressed
                     if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.T))
