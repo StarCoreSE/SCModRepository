@@ -152,6 +152,13 @@ namespace Invalid.BlinkDrive
             // Check from all corners to limit fuckery
             List<IHitInfo> hitInfos = new List<IHitInfo>();
             Vector3D forward = Block.CubeGrid.WorldMatrix.Forward * JumpDistance;
+
+            // Check for blocker plates (??)
+
+            // Theoretically this should work to collide with blocker plates But It Doesn't:tm:
+            //MyAPIGateway.Physics.CastRay(Block.CubeGrid.GetPosition(), Block.CubeGrid.GetPosition() + forward, hitInfos, CollisionLayers.NoVoxelCollisionLayer);
+            //MyAPIGateway.Utilities.ShowNotification("FUCK " + hitInfos.Count, font: "Red");
+
             IMyEntity topGridParent = Block.CubeGrid.GetTopMostParent(typeof(MyCubeGrid));
             for (int i = 0; i < 8; i++)
             {
