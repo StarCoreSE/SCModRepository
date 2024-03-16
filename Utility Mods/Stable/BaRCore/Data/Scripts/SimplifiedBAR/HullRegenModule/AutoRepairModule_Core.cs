@@ -107,59 +107,46 @@ namespace StarCore.AutoRepairModule
         #region Overrides
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
-            if (MyAPIGateway.Utilities.IsDedicated || MyAPIGateway.Session.IsServer)
-            {
-                NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
-            }
-            else
-            {
-                return;
-            }         
+            NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;   
         }
 
         public override void UpdateOnceBeforeFrame()
         {
-            if (MyAPIGateway.Utilities.IsDedicated || MyAPIGateway.Session.IsServer)
-            {
-                block = (IMyCollector)Entity;
+            block = (IMyCollector)Entity;
 
-                if (block?.CubeGrid?.Physics == null)
-                    return;
-
-                SetupTerminalControls<IMyCollector>();
-
-                MyParticlesManager.TryCreateParticleEffect(WeldingParticle, ref MatrixD.Identity, ref Vector3D.Zero, uint.MaxValue, out ActiveWeldingParticle);
-                ActiveWeldSoundEmitter = new MyEntity3DSoundEmitter(null);
-
-                NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_10TH_FRAME;
-
-                LoadSettings();
-
-                Settings.IgnoreArmor = true;
-
-                if (SettingsSubsystemPriority != SubsystemPriority)
-                {
-                    SubsystemPriority = SettingsSubsystemPriority;
-                }
-
-                if (SettingsExclusiveMode != ExclusiveMode)
-                {
-                    ExclusiveMode = SettingsExclusiveMode;
-                }
-
-                if (SettingsIgnoreArmor != IgnoreArmor)
-                {
-                    IgnoreArmor = SettingsIgnoreArmor;
-                }
-
-                SaveSettings();
-
-                block.AppendingCustomInfo += AppendingCustomInfo;
-            }
-            else
-            {
+            if (block?.CubeGrid?.Physics == null)
                 return;
+
+            SetupTerminalControls<IMyCollector>();
+
+            MyParticlesManager.TryCreateParticleEffect(WeldingParticle, ref MatrixD.Identity, ref Vector3D.Zero, uint.MaxValue, out ActiveWeldingParticle);
+            ActiveWeldSoundEmitter = new MyEntity3DSoundEmitter(null);
+
+            NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME | MyEntityUpdateEnum.EACH_10TH_FRAME;
+
+            LoadSettings();
+
+            Settings.IgnoreArmor = true;
+
+            if (SettingsSubsystemPriority != SubsystemPriority)
+            {
+                SubsystemPriority = SettingsSubsystemPriority;
             }
+
+            if (SettingsExclusiveMode != ExclusiveMode)
+            {
+                ExclusiveMode = SettingsExclusiveMode;
+            }
+
+            if (SettingsIgnoreArmor != IgnoreArmor)
+            {
+                IgnoreArmor = SettingsIgnoreArmor;
+            }
+
+            SaveSettings();
+
+            block.AppendingCustomInfo += AppendingCustomInfo;
+
         }
 
         public override void UpdateAfterSimulation()
