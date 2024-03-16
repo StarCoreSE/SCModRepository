@@ -669,7 +669,7 @@ namespace Scripts
                 {
                     Inaccuracy = 1f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
                     Aggressiveness = 100f, // controls how responsive tracking is.
-                    MaxLateralThrust = 10f, // controls how sharp the trajectile may turn
+                    MaxLateralThrust = 20f, // controls how sharp the trajectile may turn
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
                     MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
@@ -973,7 +973,7 @@ namespace Scripts
                     NoSound = false,
                     ParticleScale = 1f,
                     CustomParticle = "", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "", // SubtypeID from your Audio SBC, not a filename
+                    CustomSound = "TORPLAND", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
             },
@@ -1171,7 +1171,7 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "AirRaid_Siren",
+                HitSound = "TORPLAND",
                 //FragmentSound = "",
                 ShieldHitSound = "",
                 PlayerHitSound = "",
