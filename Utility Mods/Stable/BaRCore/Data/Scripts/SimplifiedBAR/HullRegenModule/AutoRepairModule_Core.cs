@@ -150,68 +150,69 @@ namespace StarCore.AutoRepairModule
         }
 
         public override void UpdateAfterSimulation()
-        {
-            if (MyAPIGateway.Utilities.IsDedicated || MyAPIGateway.Session.IsServer)
-            {
+        {         
 
-                if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0 && block != null && block.IsWorking)
+            if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0 && block != null && block.IsWorking)
+            {
+                if (block.CubeGrid != null && block != null && WeldNextTargetDelay <= 0)
                 {
-                    if (block.CubeGrid != null && block != null && WeldNextTargetDelay <= 0)
+                    if (MyAPIGateway.Utilities.IsDedicated || MyAPIGateway.Session.IsServer)
                     {
                         GatherDamagedBlocks(block.CubeGrid, ref repairList, ref priorityRepairList);
-
-                        DoRepairAction();
-                        WeldingSortTimeout = WeldingSortTimeout - 1;
                     }
-                    else if (block != null && block.CubeGrid != null)
+                    else
                     {
-                        if (ActiveWeldSoundEmitter != null)
-                        {
-                            ActiveWeldingParticle?.SetTranslation(ref Vector3D.Zero);
-                            ActiveWeldSoundEmitter?.StopSound(true);
-                            WeldNextTargetDelay = WeldNextTargetDelay - 1;
-                        }
+                        return;
                     }
-
-                    if (MyAPIGateway.Gui.GetCurrentScreen == MyTerminalPageEnum.ControlPanel)
+                       
+                    DoRepairAction();
+                    WeldingSortTimeout = WeldingSortTimeout - 1;
+                    
+                }
+                else if (block != null && block.CubeGrid != null)
+                {
+                    if (ActiveWeldSoundEmitter != null)
                     {
-                        block.RefreshCustomInfo();
-                        block.SetDetailedInfoDirty();
-                    }
-                }
-                else if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0 && block != null && !block.IsWorking)
-                {
-                    ActiveWeldingParticle?.SetTranslation(ref Vector3D.Zero);
-                    repairList?.Clear();
-                    priorityRepairList?.Clear();
-
-                    if (MyAPIGateway.Gui.GetCurrentScreen == MyTerminalPageEnum.ControlPanel)
-                    {
-                        block.RefreshCustomInfo();
-                        block.SetDetailedInfoDirty();
+                        ActiveWeldingParticle?.SetTranslation(ref Vector3D.Zero);
+                        ActiveWeldSoundEmitter?.StopSound(true);
+                        WeldNextTargetDelay = WeldNextTargetDelay - 1;
                     }
                 }
 
-                if (firstBlock != null && !firstBlock.IsFullIntegrity)
+                if (MyAPIGateway.Gui.GetCurrentScreen == MyTerminalPageEnum.ControlPanel)
                 {
-                    Vector3D firstBlockPosition = Vector3D.Zero;
-                    firstBlock.ComputeWorldCenter(out firstBlockPosition);
-
-                    ActiveWeldingParticle?.SetTranslation(ref firstBlockPosition);
-                    ActiveWeldSoundEmitter?.SetPosition(firstBlockPosition);
+                    block.RefreshCustomInfo();
+                    block.SetDetailedInfoDirty();
                 }
-                else
+            }
+            else if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0 && block != null && !block.IsWorking)
+            {
+                ActiveWeldingParticle?.SetTranslation(ref Vector3D.Zero);
+                repairList?.Clear();
+                priorityRepairList?.Clear();
+
+                if (MyAPIGateway.Gui.GetCurrentScreen == MyTerminalPageEnum.ControlPanel)
                 {
-                    ActiveWeldingParticle?.SetTranslation(ref Vector3D.Zero);
-                    ActiveWeldSoundEmitter?.SetPosition(Vector3D.Zero);
-                    ActiveWeldSoundEmitter?.StopSound(true);
+                    block.RefreshCustomInfo();
+                    block.SetDetailedInfoDirty();
                 }
+            }
 
+            if (firstBlock != null && !firstBlock.IsFullIntegrity)
+            {
+                Vector3D firstBlockPosition = Vector3D.Zero;
+                firstBlock.ComputeWorldCenter(out firstBlockPosition);
+
+                ActiveWeldingParticle?.SetTranslation(ref firstBlockPosition);
+                ActiveWeldSoundEmitter?.SetPosition(firstBlockPosition);
             }
             else
             {
-                return;
+                ActiveWeldingParticle?.SetTranslation(ref Vector3D.Zero);
+                ActiveWeldSoundEmitter?.SetPosition(Vector3D.Zero);
+                ActiveWeldSoundEmitter?.StopSound(true);
             }
+
         }
 
         public override void UpdateBeforeSimulation10()
