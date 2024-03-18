@@ -302,17 +302,30 @@ internal static class PointCheckHelpers
 {"HAS_Crossfield", true},
 {"PriestReskin_Block", true},
 {"Reaver_Coilgun_Block",true },
-            { "Type18_Artillery_Block", true },
-            { "Type21_Artillery_Block", true },
-            { "Type24_Artillery_Block", true },
-            { "Type77_Railgun_Block", true },
-            { "Type78_Railgun_Block", true },
-            { "Type79_Railgun_Block", true },
-            {"MA_Blister",true },
-            {"MA_Blister45",true },
-            {"MA_Blister30",true },
-            {"MA_Blister32",true },
-            {"MA_Meatball",true },
+{"Type18_Artillery", true },
+{"Type21_Artillery", true },
+{"Type24_Artillery", true },
+{"Type19_Driver", true },
+{"Type22_Driver", true },
+{"Type25_Driver", true },
+{"MA_Blister",true },
+{"MA_Blister45",true },
+{"MA_Blister30",true },
+{"MA_Blister32",true },
+{"MA_Meatball",true },
+{"X4_7x7_HeavyTurret",true}
+{"VindicatorKineticLance",true}
+{"DualSnubLaserTurret",true}
+{"DualPulseLaserTurret",true}
+{"GoalieCasemate",true}
+{"HadeanPlasmaBlastgun",true}
+{"DrunkRocketTurret",true}
+{"KreegMagnetarCannon",true}
+{"HeavyFighterBay",true}
+{"Thagomizer",true}
+{"HeavyCarronade_5x5_Turret",true}
+{"UnguidedRocketTurret",true}
+{"NavalHeavyGaussRifle",true}
 };
     public static bool NameplateVisible = true; public static int timer = 0;
 }
