@@ -2,7 +2,7 @@
 <Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Prefabs>
     <Prefab xsi:type="MyObjectBuilder_PrefabDefinition">
-      <Id Type="MyObjectBuilder_PrefabDefinition" Subtype="#EntityCoverFractal" />
+      <Id Type="MyObjectBuilder_PrefabDefinition" Subtype="#EntityCoverContainerL" />
       <CubeGrids>
         <CubeGrid>
           <SubtypeName />
@@ -23,8 +23,8 @@
           <GridSizeEnum>Large</GridSizeEnum>
           <CubeBlocks>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_BatteryBlock">
-              <SubtypeName>EntityCoverFractal</SubtypeName>
-              <EntityId>13212444450059578</EntityId>
+              <SubtypeName>EntityCoverContainerL</SubtypeName>
+              <EntityId>132124543500593747</EntityId>
               <ColorMaskHSV x="0" y="0.15" z="0.25" />
               <SkinSubtypeId>Weldless</SkinSubtypeId>
               <ShowOnHUD>false</ShowOnHUD>
@@ -43,7 +43,7 @@
           </CubeBlocks>
           <IsStatic>true</IsStatic>
           <IsUnsupportedStation>true</IsUnsupportedStation>
-          <DisplayName>#EntityCoverFractal</DisplayName>
+          <DisplayName>#EntityCoverContainerL</DisplayName>
           <DestructibleBlocks>false</DestructibleBlocks>
           <IsRespawnGrid>false</IsRespawnGrid>
           <LocalCoordSys>231</LocalCoordSys>
