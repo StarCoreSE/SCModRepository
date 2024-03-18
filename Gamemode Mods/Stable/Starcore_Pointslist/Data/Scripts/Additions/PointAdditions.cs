@@ -404,8 +404,8 @@ Cat_Battletech@15;
 				
 
 Cat_AristeasAMP@16;
-				AMP_ArcMelee@100;
-				AMP_ArcMeleeReskin@100;
+				AMP_ArcMelee@175;
+				AMP_ArcMeleeReskin@175;
 				AMP_FlameThrower@55;
 				AMP_CryoShotgun@60;
 

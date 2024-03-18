@@ -52,7 +52,10 @@ namespace Invalid.spawngencover
             for (int i = 1; i <= length; i++)
             {
                 // AddBlock("LargeBlockArmorBlock", origin + i * direction);
-                MyAPIGateway.Utilities.ShowNotification("AAAH I'M FRACTOOOOOLING I'M GONNA FRACTOOOOOOL");
+                //if (block.Physics != null)
+                //{
+                //    MyAPIGateway.Utilities.ShowNotification("AAAH I'M FRACTOOOOOLING I'M GONNA FRACTOOOOOOL");
+                //}
             }
 
             // Place EntityCover block at the end of each completed "length"
@@ -107,10 +110,10 @@ namespace Invalid.spawngencover
 
             if (newBlock == null)
             {
-                MyAPIGateway.Utilities.ShowNotification($"Failed to add {subtypeName}", 1000);
+               // MyAPIGateway.Utilities.ShowNotification($"Failed to add {subtypeName}", 1000);
                 return;
             }
-            MyAPIGateway.Utilities.ShowNotification($"{subtypeName} added at {position}", 1000);
+           // MyAPIGateway.Utilities.ShowNotification($"{subtypeName} added at {position}", 1000);
         }
 
         private void AddEntityCoverBlock(string subtypeName, Vector3I position)
@@ -130,10 +133,10 @@ namespace Invalid.spawngencover
             IMySlimBlock newBlock = grid.AddBlock(nextBlockBuilder, false);
             if (newBlock == null)
             {
-                MyAPIGateway.Utilities.ShowNotification($"Failed to add {subtypeName}", 1000);
+               // MyAPIGateway.Utilities.ShowNotification($"Failed to add {subtypeName}", 1000);
                 return;
             }
-            MyAPIGateway.Utilities.ShowNotification($"{subtypeName} added at {position}", 1000);
+            //MyAPIGateway.Utilities.ShowNotification($"{subtypeName} added at {position}", 1000);
         }
 
     }
