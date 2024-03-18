@@ -396,7 +396,7 @@ Ammunition: [2400m/s,] [Kinetic] </Description>
       <Model>Models\SerpentArms\Starcore_RotaryBastard_Large.mwm</Model>
       <UseModelIntersection>false</UseModelIntersection>
   <Components>
-        <Component Subtype="SteelPlate" Count="1200" />        
+        <Component Subtype="SteelPlate" Count="2000" />        
         <Component Subtype="Construction" Count="9000" />
         <Component Subtype="GravityGenerator" Count="550" />
         <Component Subtype="Superconductor" Count="4000" />
@@ -407,7 +407,7 @@ Ammunition: [2400m/s,] [Kinetic] </Description>
         <Component Subtype="PowerCell" Count="3600"/>
         <Component Subtype="LargeTube" Count="2700" />
         <Component Subtype="Construction" Count="2400" />                
-        <Component Subtype="SteelPlate" Count="4500" />
+        <Component Subtype="SteelPlate" Count="6000" />
             </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
 	    <MountPoints>
@@ -479,7 +479,7 @@ Ammunition: [2400m/s,] [Kinetic] </Description>
     <Model>Models\MonopoleReskin.mwm</Model>
     <UseModelIntersection>false</UseModelIntersection>
     <Components>
-     <Component Subtype="SteelPlate" Count="4500" />
+     <Component Subtype="SteelPlate" Count="2000" />
      <Component Subtype="Construction" Count="9000" />
      <Component Subtype="GravityGenerator" Count="550" />
      <Component Subtype="Superconductor" Count="4000" />
@@ -490,7 +490,7 @@ Ammunition: [2400m/s,] [Kinetic] </Description>
      <Component Subtype="PowerCell" Count="3600"/>
      <Component Subtype="LargeTube" Count="2700" />
      <Component Subtype="Construction" Count="2400" />
-     <Component Subtype="SteelPlate" Count="1200" />
+     <Component Subtype="SteelPlate" Count="6000" />
     </Components>
     <CriticalComponent Subtype="Computer" Index="0" />
     <MountPoints>
