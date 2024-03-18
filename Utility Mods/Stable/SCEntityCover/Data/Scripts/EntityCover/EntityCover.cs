@@ -21,7 +21,7 @@ using CollisionLayers = Sandbox.Engine.Physics.MyPhysics.CollisionLayers;
 namespace klime.EntityCover
 {
 
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_BatteryBlock), false, "EntityCover", "EntityCover2", "EntityCoverEveFreighter", "EntityCover3", "EntityCover4", "EntityCover4RED", "EntityCover4BLU", "EntityCoverFractal", "EntityCoverColor", "EntityCoverEVEDepot", "EntityCoverSatellite", "EntityCoverContainerL")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_BatteryBlock), false, "EntityCover", "EntityCover2", "EntityCoverEveFreighter", "EntityCover3", "EntityCover4", "EntityCover4RED", "EntityCover4BLU", "EntityCoverFractal", "EntityCoverColor", "EntityCoverEVEDepot", "EntityCoverSatellite", "EntityCoverContainerL", "EntityCoverEveDerelict")]
     public class EntityCoverGamelogic : MyGameLogicComponent
     {
         // Core
@@ -43,6 +43,7 @@ namespace klime.EntityCover
             { "EntityCover4RED", new ModelInfo("REMlikeblocker1kmplate_red.mwm", new Vector3(500, 500, 50)) },    //don't forget the entitycomponentdescriptor too dumbass
             { "EntityCoverSatellite", new ModelInfo("essarray.mwm", new Vector3(200, 55, 110)) },    //don't forget the entitycomponentdescriptor too dumbass
             { "EntityCoverContainerL", new ModelInfo("ContainerL.mwm", new Vector3(160, 70, 70)) },    //don't forget the entitycomponentdescriptor too dumbass
+            { "EntityCoverEveDerelict", new ModelInfo("EntityCoverEveDerelict.mwm", new Vector3(200, 1250, 200)) },    //don't forget the entitycomponentdescriptor too dumbass
             // Add more entries for additional variants...
         };
 
