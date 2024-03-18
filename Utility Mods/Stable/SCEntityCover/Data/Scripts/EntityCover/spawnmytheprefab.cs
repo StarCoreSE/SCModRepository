@@ -54,7 +54,8 @@ namespace Klime.spawnmytheprefab
             { "EntityCover3", "#EntityCover3" },
             { "EntityCover4", "#EntityCover4" },
             { "EntityCoverEveFreighter", "#EntityCoverEveFreighter" },
-            { "EntityCoverColor", "#EntityCoverColor" },
+            { "EntityCover4BLU", "#EntityCover4BLU" },
+            { "EntityCover4RED", "#EntityCover4RED" },
             { "EntityCoverFractal", "#EntityCoverFractal" },
         };
 
