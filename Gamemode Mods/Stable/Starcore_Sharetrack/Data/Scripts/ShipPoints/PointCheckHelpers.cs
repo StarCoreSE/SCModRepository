@@ -325,7 +325,7 @@ internal static class PointCheckHelpers
 {"Thagomizer",true},
 {"HeavyCarronade_5x5_Turret",true},
 {"UnguidedRocketTurret",true},
-{"NavalHeavyGaussRifle",true},
+{"NavalHeavyGaussRifle",true}
 };
     public static bool NameplateVisible = true; public static int timer = 0;
 }
