@@ -318,14 +318,14 @@ internal static class PointCheckHelpers
 {"DualSnubLaserTurret",true},
 {"DualPulseLaserTurret",true},
 {"GoalieCasemate",true},
-{"HadeanPlasmaBlastgun",true} ,
+{"HadeanPlasmaBlastgun",true},
 {"DrunkRocketTurret",true},
 {"KreegMagnetarCannon",true},
 {"HeavyFighterBay",true},
 {"Thagomizer",true},
 {"HeavyCarronade_5x5_Turret",true},
 {"UnguidedRocketTurret",true},
-{"NavalHeavyGaussRifle",true}
+{"NavalHeavyGaussRifle",true},
 };
     public static bool NameplateVisible = true; public static int timer = 0;
 }
