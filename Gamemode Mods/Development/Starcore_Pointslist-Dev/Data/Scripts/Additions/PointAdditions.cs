@@ -425,8 +425,8 @@ namespace ShipPoints
 				StealthHeatSink@50;
 				StealthDrive@500;
 				JN_175Fixed@1350;
-				AMP_ArcMelee@100;
-				AMP_ArcMeleeReskin@100;
+				AMP_ArcMelee@175;
+				AMP_ArcMeleeReskin@175;
 				AMP_FlameThrower@55;
 				AMP_CryoShotgun@60;
 				Hexcannon@500;
