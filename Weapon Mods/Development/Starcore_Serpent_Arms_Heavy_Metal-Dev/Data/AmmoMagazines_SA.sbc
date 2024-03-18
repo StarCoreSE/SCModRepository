@@ -130,7 +130,7 @@
       <Volume>1</Volume>
       <Model>Models\SerpentArms\SA_Ammunition_GaussCase_Stan60_Small.mwm</Model>
       <PhysicalMaterial>Ammo</PhysicalMaterial>
-      <Capacity>120</Capacity>
+      <Capacity>100</Capacity>
       <AmmoDefinitionId Subtype="K_HSR_FakeMissile" />
     </AmmoMagazine>  
     

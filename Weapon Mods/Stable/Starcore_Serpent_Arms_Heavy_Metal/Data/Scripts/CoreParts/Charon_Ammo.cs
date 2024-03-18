@@ -44,8 +44,8 @@ namespace Scripts
             AmmoMagazine = "K_GaussPrototypeBlitzCase", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Charon_Shot", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
-            EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 11250f, // Direct damage; one steel plate is worth 100.
+            EnergyCost = 0.05f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
+            BaseDamage = 33000f, // Direct damage; one steel plate is worth 100.
             Mass = 15f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 600000f, // Recoil. This is applied to the Parent Grid.
@@ -95,7 +95,7 @@ namespace Scripts
             Pattern = new PatternDef
             {
                 Patterns = new[] { // If enabled, set of multiple ammos to fire after the main ammo.
-                    "Charon_Fake_Shot",
+                    "Charon_Fake_Shot", "Charon_Fake_Shot", "Charon_Fake_Shot", "Charon_Fake_Shot",
                 },
                 Mode = Weapon, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
                 TriggerChance = 1f, // This is %
@@ -182,7 +182,7 @@ namespace Scripts
                 },
                 EndOfLife = new EndOfLifeDef
                 {
-                    Enable = true,
+                    Enable = false, //cursed cursed cursed cursed cursed cursed
                     Radius = 6f, // Radius of AOE effect, in meters.
                     Damage = 60000f,
                     Depth = 2f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
