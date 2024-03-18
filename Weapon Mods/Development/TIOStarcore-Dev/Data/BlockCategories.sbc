@@ -179,7 +179,7 @@
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Priest_Block" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="PriestReskin_Block" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="APE_Strong" />
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="GoalieCasemate" />
+				<!-- <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="GoalieCasemate" /> -->
 			</Blocks>
 		</BlockVariantGroup>
 
@@ -191,7 +191,7 @@
 			<Blocks>
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="DualSnubLaserTurret" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="DualPulseLaserTurret" />
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Reaver_Coilgun" />
+				<!--<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Reaver_Coilgun" />-->
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HeavyCarronade_5x5_Turret" />
 			</Blocks>
 		</BlockVariantGroup>
@@ -206,7 +206,7 @@
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="X4_7x7_HeavyTurret" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="KreegMagnetarCannon" />
 
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HadeanPlasmaBlastgun" />
+				<!-- <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HadeanPlasmaBlastgun" /> -->
 			<!--		<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="VindicatorKineticLance" /> -->
 			</Blocks>
 		</BlockVariantGroup>	
@@ -220,8 +220,8 @@
 		<Blocks>
 			<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="UnguidedRocketTurret" />
 			<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="DrunkRocketTurret" />	
-			<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Devastator_Torp" />				
-			<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Fixed_Rockets" />	
+			<!-- <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Devastator_Torp" />	-->			
+			<!-- <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Fixed_Rockets" />	-->
 			<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Thagomizer" />
 			<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Thagomizer_Angled" />		
 		</Blocks>
