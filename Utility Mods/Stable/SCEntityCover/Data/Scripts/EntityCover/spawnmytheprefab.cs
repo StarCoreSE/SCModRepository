@@ -54,6 +54,8 @@ namespace Klime.spawnmytheprefab
             { "EntityCover3", "#EntityCover3" },
             { "EntityCover4", "#EntityCover4" },
             { "EntityCoverEveFreighter", "#EntityCoverEveFreighter" },
+            { "EntityCoverColor", "#EntityCoverColor" },
+            { "EntityCoverFractal", "#EntityCoverFractal" },
         };
 
         private int defaultSpawnCount = 250; // Default number of prefabs to spawn
