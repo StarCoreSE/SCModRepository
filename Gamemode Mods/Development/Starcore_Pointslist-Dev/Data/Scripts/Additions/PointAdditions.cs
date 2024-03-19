@@ -110,10 +110,10 @@ namespace ShipPoints
 				MA_Tiger@125;
 				MA_Crouching_Tiger@125;
 
-                		S_Chem_Laser@120;
-				SM3_Counter_Battery@325;
-				SolHyp_ArcStrike_HTorpedo@375;
-                		SolHyp_MAC@450;
+                S_Chem_Laser_Block@120;
+				Counter_Battery@250;
+				SolHyp_ArcStrike_Torp@375;
+                SolHyp_Magnetic_Coilgun@450;
 
 
 				LargeHydrogenTank@30;
