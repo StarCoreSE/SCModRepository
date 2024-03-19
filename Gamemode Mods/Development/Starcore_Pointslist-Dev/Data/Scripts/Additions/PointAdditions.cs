@@ -110,6 +110,12 @@ namespace ShipPoints
 				MA_Tiger@125;
 				MA_Crouching_Tiger@125;
 
+                		S_Chem_Laser@120;
+				SM3_Counter_Battery@325;
+				SolHyp_ArcStrike_HTorpedo@375;
+                		SolHyp_MAC@450;
+
+
 				LargeHydrogenTank@30;
 					LargeHydrogenTankIndustrial@30;
 				LargeHydrogenTankSmall@30;
@@ -421,12 +427,6 @@ namespace ShipPoints
 				Odin_5x5_Battleshipcannon_Surface@225;
 				Odin_3x3_Battleshipcannon@175;
 				Odin_3x3_Battleshipcannon_Surface@175;
-
-                		S_Chem_Laser@120;
-				SM3_Counter_Battery@325;
-				SolHyp_ArcStrike_HTorpedo@375;
-                		SolHyp_MAC@450;
-
 
 				StealthHeatSink@50;
 				StealthDrive@500;
