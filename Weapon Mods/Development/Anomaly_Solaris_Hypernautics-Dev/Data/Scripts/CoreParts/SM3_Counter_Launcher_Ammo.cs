@@ -265,7 +265,7 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 2580, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
                 AccelPerSec = 500f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 800f, // voxel phasing if you go above 5100
+                DesiredSpeed = 1000f, // voxel phasing if you go above 5100
                 MaxTrajectory = 30000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
@@ -353,8 +353,8 @@ namespace Scripts
                     Tracer = new TracerBaseDef
                     {
                         Enable = true,
-                        Length = 8f,
-                        Width = 2f,
+                        Length = 4f,
+                        Width = 1f,
                         Color = Color(red: 20, green: 20, blue: 80f, alpha: 1),
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
@@ -372,7 +372,7 @@ namespace Scripts
                             SegmentGap = 0f, // Uses Tracer textures and values
                             Speed = 1f, // meters per second
                             Color = Color(red: 16, green: 16, blue: 16, alpha: 1),
-                            WidthMultiplier = 1f,
+                            WidthMultiplier = 0.3f,
                             Reverse = false,
                             UseLineVariance = true,
                             WidthVariance = Random(start: 0f, end: 0f),
