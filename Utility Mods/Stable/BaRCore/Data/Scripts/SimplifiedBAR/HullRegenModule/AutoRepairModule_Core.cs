@@ -148,7 +148,7 @@ namespace StarCore.AutoRepairModule
 
             SaveSettings();
 
-            block.AppendingCustomInfo += AppendingCustomInfo;
+           /* block.AppendingCustomInfo += AppendingCustomInfo;*/
 
         }
 
