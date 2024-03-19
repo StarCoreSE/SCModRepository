@@ -422,6 +422,12 @@ namespace ShipPoints
 				Odin_3x3_Battleshipcannon@175;
 				Odin_3x3_Battleshipcannon_Surface@175;
 
+                		S_Chem_Laser@120;
+				SM3_Counter_Battery@325;
+				SolHyp_ArcStrike_HTorpedo@375;
+                		SolHyp_MAC@450;
+
+
 				StealthHeatSink@50;
 				StealthDrive@500;
 				JN_175Fixed@1350;
