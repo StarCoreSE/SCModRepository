@@ -10,7 +10,7 @@
       <Blocks>
         <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Starcore_AMS_I_Block" />
         <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Starcore_AMS_II_Block" />
-        <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Starcore_AMS_Comm_Block" />
+        <!-- <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Starcore_AMS_Comm_Block" /> -->
       </Blocks>
     </BlockVariantGroup>
 
