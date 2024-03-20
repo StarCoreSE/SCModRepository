@@ -77,7 +77,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>Hellfire_Laser_Block</SubtypeId>
 			</Id>
-			<DisplayName>Hellfire Laser</DisplayName>
+			<DisplayName>[SA] Hellfire Laser</DisplayName>
 			<Description>
 				[6.666km range]
 				[Energy damage]

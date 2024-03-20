@@ -11,7 +11,7 @@
 			<TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_Derecho</SubtypeId>
       </Id>
-      <DisplayName>MA Derecho Missile Storm</DisplayName>
+      <DisplayName>[MA] Derecho Missile Storm</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\MA_Derecho.png</Icon>
       <Description>
         [5km Targeting Range]

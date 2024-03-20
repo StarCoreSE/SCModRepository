@@ -542,7 +542,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>LargeRailgun_SC</SubtypeId>
       </Id>
-      <DisplayName>Railgun 2.0</DisplayName>
+      <DisplayName>[HAS] Railgun 2.0</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\RailGun.dds</Icon>
       <Description>
         10km range Railgun. 5000m/s velocity

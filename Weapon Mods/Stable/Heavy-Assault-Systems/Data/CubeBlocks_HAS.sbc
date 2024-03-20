@@ -8,7 +8,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Vulcan</SubtypeId>
       </Id>
-      <DisplayName>Vulcan</DisplayName>
+      <DisplayName>[HAS] Vulcan</DisplayName>
       <Description>
         6km Range. Minigun.
       </Description>
@@ -77,7 +77,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Crossfield</SubtypeId>
       </Id>
-      <DisplayName>Crossfield</DisplayName>
+      <DisplayName>[HAS] Crossfield</DisplayName>
       <Description>
         [2km max range]
         [Energy damage]
@@ -145,7 +145,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Thanatos</SubtypeId>
       </Id>
-      <DisplayName>Thanatos</DisplayName>
+      <DisplayName>[HAS] Thanatos</DisplayName>
       <Description>
         Heavy Gimbaled Cannon
         Heavy Anti Armor
@@ -215,7 +215,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Mammon</SubtypeId>
       </Id>
-      <DisplayName>Mammon</DisplayName>
+      <DisplayName>[HAS] Mammon</DisplayName>
       <Description>
         Quad Barreled Beam Turret
         Heavy Anti Armor Damage
@@ -357,7 +357,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Nyx</SubtypeId>
       </Id>
-      <DisplayName>Nyx</DisplayName>
+      <DisplayName>[HAS] Nyx</DisplayName>
       <Description>
         Dual Barreled Beam Turret
         Heavy Anti Armor Damage
@@ -428,7 +428,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Esper</SubtypeId>
       </Id>
-      <DisplayName>Tigtone</DisplayName>
+      <DisplayName>[HAS] Tigtone</DisplayName>
       <Description>
         6km Range. Rotary Triple-Barreled Kinetic Shotgun.
       </Description>
@@ -491,7 +491,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Cyclops</SubtypeId>
       </Id>
-      <DisplayName>Cyclops</DisplayName>
+      <DisplayName>[HAS] Cyclops</DisplayName>
       <Description>
         Heavy Gimbaled Cannon
         Heavy Anti Armor

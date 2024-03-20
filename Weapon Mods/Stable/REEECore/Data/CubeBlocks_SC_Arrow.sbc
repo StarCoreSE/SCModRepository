@@ -9,7 +9,7 @@
 			<TypeId>ConveyorSorter</TypeId>
         <SubtypeId>Starcore_Arrow_Block</SubtypeId>
       </Id>
-      <DisplayName>Starcore Arrow-IV Launcher</DisplayName>
+      <DisplayName>[BTI] Starcore Arrow-IV Launcher</DisplayName>
 	  <Description> 
       [12km Targeting Range]
       [500m minimum range]

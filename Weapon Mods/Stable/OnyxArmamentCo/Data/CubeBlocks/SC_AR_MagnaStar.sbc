@@ -6,7 +6,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>SC_AR_MagnaStar</SubtypeId>
 			</Id>
-			<DisplayName>0SH-1T MagnaStar™</DisplayName>
+			<DisplayName>[ONYX] 0SH-1T MagnaStar™</DisplayName>
 			<Icon>Textures\GUI\Icons\Cubes\SC_AR_MagnaStar.dds</Icon>
 			<Description>
 				Long Range Turret: [6km]

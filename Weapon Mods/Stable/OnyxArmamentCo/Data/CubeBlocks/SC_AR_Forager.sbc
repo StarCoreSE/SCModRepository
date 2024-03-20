@@ -6,7 +6,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>SC_AR_Forager</SubtypeId>
       </Id>
-      <DisplayName>Forager Coilgun</DisplayName>
+      <DisplayName>[ONYX] Forager Coilgun</DisplayName>
       <Description>
         Long Ranged Fixed: [10km]
         Magazine Capacity: [1]

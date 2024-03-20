@@ -8,7 +8,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>TaiidanRailBomber</SubtypeId>
 			</Id>
-			<DisplayName>Taiidan Bomber Launch Rail</DisplayName>
+			<DisplayName>[EXO] Taiidan Bomber Launch Rail</DisplayName>
 
       <Description>
 
@@ -90,7 +90,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>TaiidanRailFighter</SubtypeId>
       </Id>
-      <DisplayName>Taiidan Fighter Launch Rail</DisplayName>
+      <DisplayName>[EXO] Taiidan Fighter Launch Rail</DisplayName>
 
       <Description>
 
@@ -173,7 +173,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>TaiidanHangarBomber</SubtypeId>
 			</Id>
-			<DisplayName>Taiidan Bomber Hangar Bay</DisplayName>
+			<DisplayName>[EXO] Taiidan Bomber Hangar Bay</DisplayName>
 
       <Description>
 
@@ -264,7 +264,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>TaiidanHangarBomberMedium</SubtypeId>
       </Id>
-      <DisplayName>Taiidan Bomber Hangar Bay Medium</DisplayName>
+      <DisplayName>[EXO] Taiidan Bomber Hangar Bay Medium</DisplayName>
 
       <Description>
 
@@ -355,7 +355,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>TaiidanHangarFighter</SubtypeId>
       </Id>
-      <DisplayName>Taiidan Fighter Hangar Bay</DisplayName>
+      <DisplayName>[EXO] Taiidan Fighter Hangar Bay</DisplayName>
 
       <Description>
 
@@ -447,7 +447,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>TaiidanSingleHangar</SubtypeId>
       </Id>
-      <DisplayName>Taiidan Fighter Small Bay</DisplayName>
+      <DisplayName>[EXO] Taiidan Fighter Small Bay</DisplayName>
 
       <Description>
 
@@ -536,7 +536,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>ADMTaiidanHangarFighter</SubtypeId>
       </Id>
-      <DisplayName>ADMTaiidan Fighter Hangar Bay</DisplayName>
+      <DisplayName>[EXO] ADMTaiidan Fighter Hangar Bay</DisplayName>
 
       <Description>
 
@@ -628,7 +628,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>ADMTaiidanHangarBomber</SubtypeId>
       </Id>
-      <DisplayName>ADMTaiidan Bomber Hangar Bay</DisplayName>
+      <DisplayName>[EXO] ADMTaiidan Bomber Hangar Bay</DisplayName>
 
       <Description>
 

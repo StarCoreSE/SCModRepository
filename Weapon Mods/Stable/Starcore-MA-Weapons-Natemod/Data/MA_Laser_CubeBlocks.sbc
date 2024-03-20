@@ -10,7 +10,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_Guardian</SubtypeId>
       </Id>
-      <DisplayName>Guardian T4 Beam</DisplayName>
+      <DisplayName>[MA] Guardian T4 Beam</DisplayName>
       <Description>
         [4km Targeting Range]
         [Draws ~750 MW]
@@ -99,7 +99,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_Gladius</SubtypeId>
       </Id>
-      <DisplayName>Gladius Heavy Laser</DisplayName>
+      <DisplayName>[MA] Gladius Heavy Laser</DisplayName>
       <Description>
         [3km Targeting Range]
         [Draws ~444 MW]
@@ -192,7 +192,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_PDX</SubtypeId>
       </Id>
-      <DisplayName>T1 PDX Laser</DisplayName>
+      <DisplayName>[MA] T1 PDX Laser</DisplayName>
       <Description>
         T1 Laser turret
         Role: Point defense, targets only guided, defends own grid
@@ -284,7 +284,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_T2PDX</SubtypeId>
       </Id>
-      <DisplayName>PDX Laser T2</DisplayName>
+      <DisplayName>[MA] T2 PDX Laser</DisplayName>
       <Description>
         [2km Targeting Range]
         [Draws ~100 MW]
@@ -374,7 +374,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_T2PDX_Slope</SubtypeId>
       </Id>
-      <DisplayName>PDX Laser T2 Slope</DisplayName>
+      <DisplayName>[MA] T2 PDX Laser Slope</DisplayName>
       <Description>
         [2km Targeting Range]
         [Draws ~100 MW]
@@ -472,7 +472,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_T2PDX_Slope2</SubtypeId>
       </Id>
-      <DisplayName>PDX Laser T2 Slope2</DisplayName>
+      <DisplayName>[MA] T2 PDX Laser Slope2</DisplayName>
       <Description>
         [2km Targeting Range]
         [Draws ~100 MW]
@@ -570,7 +570,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_Gimbal_Laser_Armored</SubtypeId>
       </Id>
-      <DisplayName>T1 Gimbal Laser Armored</DisplayName>
+      <DisplayName>[MA] T1 Gimbal Laser Armored</DisplayName>
       <Icon>Textures\Icons\MA_Gimbal_Laser_Armored.dds</Icon>
       <Description>
         [1.2km Targeting Range]
@@ -670,7 +670,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_Gimbal_Laser_Armored_Slope</SubtypeId>
       </Id>
-      <DisplayName>T1 Gimbal Laser Armored Slope</DisplayName>
+      <DisplayName>[MA] T1 Gimbal Laser Armored Slope</DisplayName>
       <Icon>Textures\Icons\MA_Gimbal_Laser_Armored_Slope.dds</Icon>
       <Description>
         [1.2km Targeting Range]
@@ -769,7 +769,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_Gimbal_Laser_Armored_Slope2</SubtypeId>
       </Id>
-      <DisplayName>T1 Gimbal Laser Armored Slope 2</DisplayName>
+      <DisplayName>[MA] T1 Gimbal Laser Armored Slope 2</DisplayName>
       <Icon>Textures\Icons\MA_Gimbal_Laser_Armored_Slope2.dds</Icon>
       <Description>
         [1.2km Targeting Range]
@@ -867,7 +867,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_Gimbal_Laser_Armored_Slope45</SubtypeId>
       </Id>
-      <DisplayName>T1 Gimbal Laser Armored Slope 45</DisplayName>
+      <DisplayName>[MA] T1 Gimbal Laser Armored Slope 45</DisplayName>
       <Icon>Textures\Icons\MA_Gimbal_Laser_Armored_Slope45.dds</Icon>
       <Description>
         [1.2km Targeting Range]
@@ -967,7 +967,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_Gimbal_Laser</SubtypeId>
       </Id>
-      <DisplayName>T1 Gimbal Laser</DisplayName>
+      <DisplayName>[MA] T1 Gimbal Laser</DisplayName>
       <Icon>Textures\Icons\MA_Gimbal_Laser.dds</Icon>
       <Description>
         [1.2km Targeting Range]
@@ -1098,7 +1098,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_Gimbal_Laser_T2</SubtypeId>
       </Id>
-      <DisplayName>Gimbal Laser T2</DisplayName>
+      <DisplayName>[MA] T2 Gimbal Laser</DisplayName>
       <Description>
         [2km Targeting Range]
         [Draws ~100 MW]
@@ -1241,7 +1241,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_Gimbal_Laser_T2_Armored</SubtypeId>
       </Id>
-      <DisplayName>Gimbal Laser T2 Armored</DisplayName>
+      <DisplayName>[MA] T2 Gimbal Laser Armored</DisplayName>
       <Description>
         [2km Targeting Range]
         [Draws ~100 MW]
@@ -1335,7 +1335,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_Gimbal_Laser_T2_Armored_Slope</SubtypeId>
       </Id>
-      <DisplayName>Gimbal Laser T2 Armored Slope</DisplayName>
+      <DisplayName>[MA] T2 Gimbal Laser Armored Slope</DisplayName>
       <Description>
         [2km Targeting Range]
         [Draws ~100 MW]
@@ -1429,7 +1429,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_Gimbal_Laser_T2_Armored_Slope2</SubtypeId>
       </Id>
-      <DisplayName>Gimbal Laser T2 Armored Slope 2</DisplayName>
+      <DisplayName>[MA] Gimbal Laser Armored Slope 2</DisplayName>
       <Description>
         [2km Targeting Range]
         [Draws ~100 MW]
@@ -1523,7 +1523,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_Gimbal_Laser_T2_Armored_Slope45</SubtypeId>
       </Id>
-      <DisplayName>Gimbal Laser T2 Armored Slope 45</DisplayName>
+      <DisplayName>[MA] T2 Gimbal Laser Armored Slope 45</DisplayName>
       <Description>
         [2km Targeting Range]
         [Draws ~100 MW]
@@ -1871,7 +1871,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_Fixed_T3</SubtypeId>
       </Id>
-      <DisplayName>Fixed T3 Laser</DisplayName>
+      <DisplayName>[MA] T3 Fixed Laser</DisplayName>
       <Description>
         [3km Targeting Range]
         [Draws ~222 MW]

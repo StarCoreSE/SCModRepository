@@ -6,7 +6,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>SC_AR_Phobos</SubtypeId>
 			</Id>
-			<DisplayName>Phobos-250 Railgun</DisplayName>
+			<DisplayName>[ONYX] Phobos-250 Railgun</DisplayName>
 			<Icon>Textures\GUI\Icons\Cubes\SC_AR_Phobos.dds</Icon>
 			<Description>
 				Medium Ranged Fixed: [7km || 5km]
