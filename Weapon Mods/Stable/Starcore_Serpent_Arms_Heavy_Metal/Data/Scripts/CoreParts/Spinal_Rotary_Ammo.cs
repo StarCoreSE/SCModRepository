@@ -70,7 +70,7 @@ namespace Scripts
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
-                AmmoRound = "AutoCoil_Shrap", //Monopole Frag //AmmoRound field of the ammo to spawn.
+                AmmoRound = "AutoCoil_Shrap", // AmmoRound field of the ammo to spawn.
                 Fragments = 18, // Number of projectiles to spawn.
                 Degrees = 80, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
@@ -94,19 +94,6 @@ namespace Scripts
                     GroupSize = 5, // Number of spawns in each group
                     GroupDelay = 120, // Delay between each group.
                 },
-            },
-            Pattern = new PatternDef
-            {
-                Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
-                    "AutoCoil_VFX1","AutoCoil_VFX2","AutoCoil_VFX3",
-                },
-                Mode = Weapon, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
-                TriggerChance = 1f, // This is %
-                Random = false, // This randomizes the number spawned at once, NOT the list order.
-                RandomMin = 1,
-                RandomMax = 1,
-                SkipParent = false, // Skip the Ammo itself, in the list
-                PatternSteps = 4, // Number of Ammos activated per round, will progress in order and loop. Ignored if Random = true.
             },
             DamageScales = new DamageScaleDef
             {
@@ -494,7 +481,6 @@ namespace Scripts
                     GroupDelay = 0, // Delay between each group.
                 },
             },
-
             DamageScales = new DamageScaleDef
             {
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
@@ -507,7 +493,7 @@ namespace Scripts
                 FallOff = new FallOffDef
                 {
                     Distance = 0f, // Distance at which damage begins falling off.
-                    MinMultipler = 1f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
+                    MinMultipler = 0.01f, //falloff on the frag from point of impact. Might be only nerf it needs. //Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
                 },
                 Grids = new GridSizeDef
                 {
