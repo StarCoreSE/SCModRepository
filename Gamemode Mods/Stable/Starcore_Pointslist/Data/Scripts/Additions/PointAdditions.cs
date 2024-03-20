@@ -162,7 +162,7 @@ namespace ShipPoints
 				LargeBlockSmallThrust@4;
 					AQD_LG_IonThrusterS_Armored@4;
 					AQD_LG_IonThrusterS_ArmoredSlope@4;				
-					LargeBlockSmallThrustScifi@4;
+					LargeBlockSmallThrustSciFi@4;
 					SmallThrustSciFi@4;
 					LargeBlockSmallModularThruster@4;
 				AWGFocusDrive@100;
