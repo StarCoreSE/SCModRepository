@@ -6,7 +6,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>SC_AR_Eris</SubtypeId>
 			</Id>
-			<DisplayName>0C-DNS Eris Superheavy Gauss Cannon</DisplayName>
+			<DisplayName>[ONYX] 0C-DNS Eris Superheavy Gauss Cannon</DisplayName>
 			<Icon>Textures\GUI\Icons\Cubes\SC_AR_Eris.dds</Icon>
 			<Description>
 				Long Ranged Fixed: [15km]

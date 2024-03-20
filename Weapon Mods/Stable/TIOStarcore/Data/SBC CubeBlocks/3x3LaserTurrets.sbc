@@ -8,7 +8,7 @@
                 <TypeId>ConveyorSorter</TypeId>
                 <SubtypeId>DualSnubLaserTurret</SubtypeId>
             </Id>
-            <DisplayName>"Liberator" Small X-Pulse Lasers</DisplayName>
+            <DisplayName>[MID] "Liberator" Small X-Pulse Lasers</DisplayName>
             <Description>
               [2km Range Laser Pulse Shotguns]
               [Energy damage]
@@ -60,7 +60,7 @@
                 <TypeId>ConveyorSorter</TypeId>
                 <SubtypeId>DualPulseLaserTurret</SubtypeId>
             </Id>
-            <DisplayName>Electron Twin-linked Small Lasers</DisplayName>
+            <DisplayName>[MID] Electron Twin-linked Small Lasers</DisplayName>
             <Description>
               [2.5km Targeting Range]
               [Energy damage]
