@@ -264,9 +264,9 @@ namespace Scripts
                 TargetLossDegree = 0f, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 2580, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
-                AccelPerSec = 500f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
+                AccelPerSec = 700f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 1000f, // voxel phasing if you go above 5100
-                MaxTrajectory = 30000f, // Max Distance the projectile or beam can Travel.
+                MaxTrajectory = 40000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
@@ -275,16 +275,16 @@ namespace Scripts
                 Smarts = new SmartsDef
                 {
                     Inaccuracy = 0f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
-                    Aggressiveness = 4f, // controls how responsive tracking is.
-                    MaxLateralThrust = 0.5f, // controls how sharp the trajectile may turn
+                    Aggressiveness = 12f, // controls how responsive tracking is.
+                    MaxLateralThrust = 1.25f, // controls how sharp the trajectile may turn
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
                     MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
-                    CheckFutureIntersection = false, // Utilize obstacle avoidance?
+                    CheckFutureIntersection = true, // Utilize obstacle avoidance?
                     MaxTargets = 0, // Number of targets allowed before ending, 0 = unlimited
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
                     Roam = true, // Roam current area after target loss
-                    KeepAliveAfterTargetLoss = false, // Whether to stop early death of projectile on target loss
+                    KeepAliveAfterTargetLoss = true, // Whether to stop early death of projectile on target loss
                     OffsetRatio = 0.25f, // The ratio to offset the random direction (0 to 1) 
                     OffsetTime = 35, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
                 },
@@ -353,8 +353,8 @@ namespace Scripts
                     Tracer = new TracerBaseDef
                     {
                         Enable = true,
-                        Length = 4f,
-                        Width = 1f,
+                        Length = 6f,
+                        Width = 2f,
                         Color = Color(red: 20, green: 20, blue: 80f, alpha: 1),
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.

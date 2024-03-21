@@ -8,7 +8,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>AMP_HealGenerator</SubtypeId>
 			</Id>
-			<DisplayName>Goncol MagnaPulse</DisplayName>
+			<DisplayName>[EXO] Goncol MagnaPulse</DisplayName>
 			<Description>
 				Refresh your buddy's shields by manually shooting at it.
 				Grid limit 1

@@ -10,7 +10,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MCRN_Heavy_Torpedo</SubtypeId>
       </Id>
-      <DisplayName>MCRN Torpedo Launcher</DisplayName>
+      <DisplayName>[MA] MCRN Torpedo Launcher</DisplayName>
       <Description>
         [20km max range]
         [Energy damage]
@@ -66,7 +66,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>UNN_Heavy_Torpedo</SubtypeId>
       </Id>
-      <DisplayName>UNN Heavy Torpedo Launcher</DisplayName>
+      <DisplayName>[MA] UNN Heavy Torpedo Launcher</DisplayName>
       <Description>
         [12km max range]
         [Energy damage]

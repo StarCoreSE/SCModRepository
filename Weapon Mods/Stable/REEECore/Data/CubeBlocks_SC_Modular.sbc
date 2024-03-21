@@ -8,7 +8,7 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>ModularLRM5</SubtypeId>
      </Id>
-     <DisplayName>LRM-5 Modular Launcher</DisplayName>
+     <DisplayName>[BTI] LRM-5 Modular Launcher</DisplayName>
 	  <Description>
       [10km Targeting Range]
       [510 m/s]
@@ -63,7 +63,7 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>ModularMiddleLRM5</SubtypeId>
      </Id>
-     <DisplayName>LRM-5 Modular Launcher Middle</DisplayName>
+     <DisplayName>[BTI] LRM-5 Modular Launcher Middle</DisplayName>
 	  <Description>[10km Targeting Range]
     [390 m/s]
     [Energy Damage]
@@ -107,7 +107,7 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>ModularLRM5Angled</SubtypeId>
      </Id>
-     <DisplayName>LRM-5 Modular Launcher 45</DisplayName>
+     <DisplayName>[BTI] LRM-5 Modular Launcher 45</DisplayName>
 	  <Description>[10km Targeting Range]
     [390 m/s]
     [Energy Damage]
@@ -152,7 +152,7 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>ModularLRM5AngledReversed</SubtypeId>
      </Id>
-     <DisplayName>LRM-5 Modular Launcher 45 Reversed</DisplayName>
+     <DisplayName>[BTI] LRM-5 Modular Launcher 45 Reversed</DisplayName>
       <Description>[10km Targeting Range]
     [390 m/s]
     [Energy Damage]
@@ -197,7 +197,7 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>ModularMRM10</SubtypeId>
      </Id>
-     <DisplayName>MRM-10 Modular Launcher</DisplayName>
+     <DisplayName>[BTI] MRM-10 Modular Launcher</DisplayName>
 	  <Description>
     [7km Max Range, 3.5km Optimal Range]
     [390~ m/s]
@@ -254,7 +254,7 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>ModularMiddleMRM10</SubtypeId>
      </Id>
-     <DisplayName>MRM-10 Modular Launcher Middle</DisplayName>
+     <DisplayName>[BTI] MRM-10 Modular Launcher Middle</DisplayName>
 	  <Description>
       [7km Max Range, 3.5km Optimal Range]
       [390~ m/s]
@@ -311,7 +311,7 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>ModularMRM10Angled</SubtypeId>
      </Id>
-     <DisplayName>MRM-10 Modular Launcher 45</DisplayName>
+     <DisplayName>[BTI] MRM-10 Modular Launcher 45</DisplayName>
       <Description>
         [7km Max Range, 3.5km Optimal Range]
         [390~ m/s]
@@ -357,7 +357,7 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>ModularMRM10AngledReversed</SubtypeId>
      </Id>
-     <DisplayName>MRM-10 Modular Launcher 45 Reversed</DisplayName>
+     <DisplayName>[BTI] MRM-10 Modular Launcher 45 Reversed</DisplayName>
       <Description>
         [7km Max Range, 3.5km Optimal Range]
         [390~ m/s]
@@ -402,7 +402,7 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>ModularSRM8</SubtypeId>
      </Id>
-     <DisplayName>SRM-8</DisplayName>
+     <DisplayName>[BTI] SRM-8</DisplayName>
 	  <Description>[3.5km Range]
     [420~ m/s]
     [Energy Damage]

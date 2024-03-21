@@ -43,14 +43,14 @@ namespace Scripts {
                 SubSystems = new[] {
                     Thrust, Utility, Offense, Power, Production, Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
                 },
-                ClosestFirst = true, // Tries to pick closest targets first (blocks on grids, projectiles, etc...).
-                IgnoreDumbProjectiles = false, // Don't fire at non-smart projectiles.
+                ClosestFirst = false, // Tries to pick closest targets first (blocks on grids, projectiles, etc...).
+                IgnoreDumbProjectiles = true, // Don't fire at non-smart projectiles.
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
                 MaxTargetDistance = 10000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
-                MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
-                TopTargets = 2, // Maximum number of targets to randomize between; 0 = unlimited.
+                MinTargetDistance = 1500, // Minimum distance at which targets will be automatically shot at.
+                TopTargets = 4, // Maximum number of targets to randomize between; 0 = unlimited.
                 TopBlocks = 16, // Maximum number of blocks to randomize between; 0 = unlimited.
                 StopTrackingSpeed = 0, // Do not track threats traveling faster than this speed; 0 = unlimited.
             },
@@ -133,7 +133,7 @@ namespace Scripts {
                     ShotsInBurst = 8, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
                     DelayAfterBurst = 180, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     FireFull = true, // Whether the weapon should fire the full magazine (or the full burst instead if ShotsInBurst > 0), even if the target is lost or the player stops firing prematurely.
-                    GiveUpAfter = false, // Whether the weapon should drop its current target and reacquire a new target after finishing its magazine or burst.
+                    GiveUpAfter = true, // Whether the weapon should drop its current target and reacquire a new target after finishing its magazine or burst.
                     BarrelSpinRate = 0, // Visual only, 0 disables and uses RateOfFire.
                     DeterministicSpin = false, // Spin barrel position will always be relative to initial / starting positions (spin will not be as smooth).
                     SpinFree = false, // Spin barrel while not firing.

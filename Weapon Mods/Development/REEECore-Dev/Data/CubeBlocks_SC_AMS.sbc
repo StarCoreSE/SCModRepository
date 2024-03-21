@@ -145,7 +145,7 @@
       </Description>
       <Icon>Textures\Icons\Painless_Comm.dds</Icon>
       <CubeSize>Large</CubeSize>
-      <GuiVisible>true</GuiVisible>
+      <GuiVisible>false</GuiVisible>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="1" y="1" z="1" />
       <ModelOffset x="0" y="0" z="0" />

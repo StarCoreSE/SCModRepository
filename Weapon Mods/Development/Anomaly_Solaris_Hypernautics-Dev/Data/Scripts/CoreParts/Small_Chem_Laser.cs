@@ -80,7 +80,7 @@ namespace Scripts
                     TurretController = false, // Whether this weapon can physically control the turret's movement.
                     PrimaryTracking = false, // For multiweapons: whether this weapon should designate targets for other weapons on the platform without their own tracking.
                     LockOnFocus = false, // If enabled, weapon will only fire at targets that have been HUD selected AND locked onto by pressing Numpad 0.
-                    SuppressFire = false, // If enabled, weapon can only be fired manually.
+                    SuppressFire = true, // If enabled, weapon can only be fired manually.
                     OverrideLeads = true, // Disable target leading on fixed weapons, or allow it for turrets.
                 },
                 HardWare = new HardwareDef
@@ -114,7 +114,7 @@ namespace Scripts
                     EnergyPriority = 0, // Deprecated.
                     MuzzleCheck = false, // Whether the weapon should check LOS from each individual muzzle in addition to the scope.
                     Debug = false, // Force enables debug mode.
-                    RestrictionRadius = 1, // Prevents other blocks of this type from being placed within this distance of the centre of the block.
+                    RestrictionRadius = 5, // Prevents other blocks of this type from being placed within this distance of the centre of the block.
                     CheckInflatedBox = false, // If true, the above distance check is performed from the edge of the block instead of the centre.
                     CheckForAnyWeapon = false, // If true, the check will fail if ANY weapon is present, not just weapons of the same subtype.
                 },

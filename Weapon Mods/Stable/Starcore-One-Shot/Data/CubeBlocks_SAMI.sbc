@@ -7,7 +7,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>K_SA_Launcher_VI</SubtypeId>
       </Id>
-      <DisplayName>Tartarus VIII</DisplayName>
+      <DisplayName>[HAS] Tartarus VIII</DisplayName>
 	  <Description>High health, Direct tracking, Very high damage.
 	  10km Range, Kinetic, Low Shield Damage. 8 Missiles per launcher.
 	  </Description>
@@ -69,7 +69,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>K_SA_Launcher_VIV</SubtypeId>
       </Id>
-      <DisplayName>Cocytus IX</DisplayName>
+      <DisplayName>[HAS] Cocytus IX</DisplayName>
 	  <Description>
 		  Very High health, Direct tracking, Extreme damage.
 		  10km Range, Kinetic, Low Shield Damage. 2 Missiles per launcher.

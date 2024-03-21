@@ -548,7 +548,7 @@
       		<EdgeType>Heavy</EdgeType>
       		<BuildTimeSeconds>900</BuildTimeSeconds>
       		<DisassembleRatio>3</DisassembleRatio>
-      		<GeneralDamageMultiplier>0.4</GeneralDamageMultiplier>
+      		<GeneralDamageMultiplier>0.2</GeneralDamageMultiplier>
       		<PCU>1</PCU>
       		<PCUConsole>2</PCUConsole>
       		<IsAirTight>true</IsAirTight>

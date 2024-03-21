@@ -7,7 +7,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>K_SA_LoW_CapitalSpinalA</SubtypeId>
       </Id>
-      <DisplayName>SA  Hydra 12-G Mount Spinal</DisplayName>
+      <DisplayName>[SA] Hydra 12-G Mount Spinal</DisplayName>
 <Description>Long Ranged Fixed: [7km] 
 Magazine Capacity: [5 to overheat]
 Reload Speed: [27 second cooldown]
@@ -76,7 +76,7 @@ Ammunition: [5000m/s,] [Kinetic, 95% Shieldpen] </Description>
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>K_SA_HeavyMetal_Gauss_A</SubtypeId>
       </Id>
-      <DisplayName>Asterius Gauss Turret</DisplayName>
+      <DisplayName>[SA] Asterius Gauss Turret</DisplayName>
 <Description>Medium Ranged Turret: [5km] 
 Magazine Capacity: [1] 
 Rate of Fire: [200] 
@@ -152,7 +152,7 @@ Ammunition: [2000m/s,] [Kinetic] </Description>
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>K_SA_HeavyMetal_Gauss_ERII</SubtypeId>
       </Id>
-      <DisplayName>Cerberus Gauss Turret</DisplayName>
+      <DisplayName>[SA] Cerberus Gauss Turret</DisplayName>
 <Description>Long Range Turret: [7km] 
 Magazine Capacity: [1] 
 Rate of Fire: [175] 
@@ -228,7 +228,7 @@ Ammunition: [5000m/s,] [Kinetic] </Description>
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>K_SA_HeavyMetal_Gauss_PGBC</SubtypeId>
       </Id>
-      <DisplayName>Charon</DisplayName>
+      <DisplayName>[SA] Charon</DisplayName>
 <Description>Short Range Turret: [2.75km] 
 Magazine Capacity: [33] 
 Rate of Fire: [347] 
@@ -305,7 +305,7 @@ Ammunition: [2500m/s,] [Kinetic] </Description>
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>K_SA_HeavyMetal_Gauss_ERFM</SubtypeId>
       </Id>
-      <DisplayName>Somnus Fixed Gauss</DisplayName>
+      <DisplayName>[SA] Somnus Fixed Gauss</DisplayName>
 <Description>Medium Ranged Fixed: [7km] 
 Magazine Capacity: [1] 
 Rate of Fire: [15] 
@@ -381,7 +381,7 @@ Ammunition: [5000m/s,] [Kinetic] </Description>
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>K_SA_HeavyMetal_Spinal_Rotary</SubtypeId>
       </Id>
-      <DisplayName>Magnetic Monopole Compression Cannon</DisplayName>
+      <DisplayName>[SA] Magnetic Monopole Compression Cannon</DisplayName>
 <Description>Long Ranged Fixed: [10km] 
 Magazine Capacity: [1] 
 Rate of Fire: [60] 
@@ -461,7 +461,7 @@ Ammunition: [2400m/s,] [Kinetic] </Description>
      <TypeId>ConveyorSorter</TypeId>
      <SubtypeId>K_SA_HeavyMetal_Spinal_Rotary_Reskin</SubtypeId>
     </Id>
-    <DisplayName>Magnetic Monopole Compression Cannon</DisplayName>
+    <DisplayName>[SA] Magnetic Monopole Compression Cannon</DisplayName>
     <Description>
 		[Skin 2]
 		Long Ranged Fixed: [55km]
@@ -610,7 +610,7 @@ Ammunition: [2400m/s,] [Kinetic] </Description>
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>SA_HMI_Erebos</SubtypeId>
      </Id>
-     <DisplayName>Erebos</DisplayName>
+     <DisplayName>[SA] Erebos</DisplayName>
 <Description>Medium Ranged Turret: [4km] 
 Magazine Capacity: [1] 
 Rate of Fire: [90] 
@@ -757,7 +757,7 @@ Ammunition: [5000m/s,] [Energy] </Description>
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>K_SA_Gauss_ERC</SubtypeId>
       </Id>
-      <DisplayName>Silvius Gauss Turret</DisplayName>
+      <DisplayName>[SA] Silvius Gauss Turret</DisplayName>
 <Description>Long Range Turret: [7km] 
 Magazine Capacity: [1] 
 Rate of Fire: [175] 
