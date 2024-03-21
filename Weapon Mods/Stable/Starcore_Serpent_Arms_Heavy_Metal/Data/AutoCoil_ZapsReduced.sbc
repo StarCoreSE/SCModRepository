@@ -7,7 +7,7 @@
       <Length>5</Length>
       <Preload>0</Preload>
       <LowRes>false</LowRes>
-      <Loop>false</Loop>
+      <Loop>true</Loop>
       <DurationMin>1</DurationMin>
       <DurationMax>0</DurationMax>
       <Version>0</Version>
@@ -2323,7 +2323,7 @@
           </Properties>
         </ParticleLight>
       </ParticleLights>
-      <DistanceMax>3500</DistanceMax>
+      <DistanceMax>7000</DistanceMax>
       <Priority>1</Priority>
     </ParticleEffect>
   </ParticleEffects>
