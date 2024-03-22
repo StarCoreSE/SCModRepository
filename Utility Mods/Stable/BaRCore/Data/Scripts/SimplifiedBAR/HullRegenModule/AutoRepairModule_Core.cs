@@ -50,11 +50,8 @@ namespace StarCore.AutoRepairModule
         private int WeldingSortTimeout = 15;
         private int WeldNextTargetDelay = 1;
 
-        /*private List<IMySlimBlock> repairList = new List<IMySlimBlock>();*/
-        /*private List<IMySlimBlock> priorityRepairList = new List<IMySlimBlock>();*/
-
-        MySync<List<IMySlimBlock>, SyncDirection.BothWays> repairList = null;
-        MySync<List<IMySlimBlock>, SyncDirection.BothWays> priorityRepairList = null;
+        private List<IMySlimBlock> repairList = new List<IMySlimBlock>();
+        private List<IMySlimBlock> priorityRepairList = new List<IMySlimBlock>();
 
         private IMySlimBlock firstBlock = null;
 
@@ -161,11 +158,7 @@ namespace StarCore.AutoRepairModule
                 {
                     if (MyAPIGateway.Utilities.IsDedicated || MyAPIGateway.Session.IsServer)
                     {
-                        List<IMySlimBlock> repairListLocal = repairList.Value;
-                        List<IMySlimBlock> priorityRepairListLocal = priorityRepairList.Value;
-                        GatherDamagedBlocks(block.CubeGrid, ref repairListLocal, ref priorityRepairListLocal);
-                        repairList.Value = repairListLocal;
-                        priorityRepairList.Value = priorityRepairListLocal;
+                        GatherDamagedBlocks(block.CubeGrid, ref repairList, ref priorityRepairList);
                     }
                     else
                     {
@@ -195,8 +188,8 @@ namespace StarCore.AutoRepairModule
             else if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0 && block != null && !block.IsWorking)
             {
                 ActiveWeldingParticle?.SetTranslation(ref Vector3D.Zero);
-                repairList.Value?.Clear();
-                priorityRepairList.Value?.Clear();
+                repairList?.Clear();
+                priorityRepairList?.Clear();
 
                 if (MyAPIGateway.Gui.GetCurrentScreen == MyTerminalPageEnum.ControlPanel)
                 {
@@ -224,16 +217,21 @@ namespace StarCore.AutoRepairModule
 
         public override void UpdateBeforeSimulation10()
         {
-            
-            try
+            if (MyAPIGateway.Utilities.IsDedicated || MyAPIGateway.Session.IsServer)
             {
-                SyncSettings();
+                try
+                {
+                    SyncSettings();
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e);
+                }
             }
-            catch (Exception e)
+            else
             {
-                Log.Error(e);
+                return;
             }
-
         }
 
         public override void Close()
@@ -328,19 +326,20 @@ namespace StarCore.AutoRepairModule
             }
         }
 
+
         private void TimeoutSortAndReset(IMySlimBlock block)
         {
             ActiveWeldingParticle?.SetTranslation(ref Vector3D.Zero);
 
             block.UpdateVisual();
 
-            if (priorityRepairList.Value.Contains(block))
+            if (priorityRepairList.Contains(block))
             {
-                priorityRepairList.Value.Sort((block1, block2) => block1.Integrity.CompareTo(block2.Integrity));
+                priorityRepairList.Sort((block1, block2) => block1.Integrity.CompareTo(block2.Integrity));
             }
             else
             {
-                repairList.Value.Sort((block1, block2) => block1.Integrity.CompareTo(block2.Integrity));
+                repairList.Sort((block1, block2) => block1.Integrity.CompareTo(block2.Integrity));
             }
             WeldNextTargetDelay = 1;
             WeldingSortTimeout = 15;
@@ -353,7 +352,7 @@ namespace StarCore.AutoRepairModule
             {
                 // NOTE: don't Clear() the StringBuilder, it's the same instance given to all mods.
 
-                string priorityListAsString = string.Join(Environment.NewLine, priorityRepairList.Value.Select(listItem =>
+                string priorityListAsString = string.Join(Environment.NewLine, priorityRepairList.Select(listItem =>
                 {
                     string listItemString = listItem.ToString();
                     int lastBraceIndex = listItemString.LastIndexOf("}");
@@ -384,7 +383,7 @@ namespace StarCore.AutoRepairModule
                     return " " + listItemString; // Default return
                 }));
 
-                string listAsString = string.Join(Environment.NewLine, repairList.Value.Select(listItem =>
+                string listAsString = string.Join(Environment.NewLine, repairList.Select(listItem =>
                 {
                     string listItemString = listItem.ToString();
                     int lastBraceIndex = listItemString.LastIndexOf("}");
@@ -528,20 +527,20 @@ namespace StarCore.AutoRepairModule
 
             if (!SortedOnce)
             {
-                priorityRepairList.Value.Sort((block1, block2) => block1.Integrity.CompareTo(block2.Integrity));
-                repairList.Value.Sort((block1, block2) => block1.Integrity.CompareTo(block2.Integrity));
+                priorityRepairList.Sort((block1, block2) => block1.Integrity.CompareTo(block2.Integrity));
+                repairList.Sort((block1, block2) => block1.Integrity.CompareTo(block2.Integrity));
                 SortedOnce = true;
             }
 
             firstBlock = null;
 
-            if (priorityRepairList.Value.Any())
+            if (priorityRepairList.Any())
             {
-                firstBlock = priorityRepairList.Value[0];
+                firstBlock = priorityRepairList[0];
             }
-            else if (!ExclusiveMode && repairList.Value.Any())
+            else if (!ExclusiveMode && repairList.Any())
             {
-                firstBlock = repairList.Value[0];
+                firstBlock = repairList[0];
             }
             else
                 return;
