@@ -74,12 +74,12 @@ internal static class PointCheckHelpers
 {"NHI_PD_Turret_Half_Slope_Top",true},
 {"NHI_PD_Turret_Half_Slope_Tip",true},
 {"NHI_PD_Turret_45_Slope",true},
-        {"Starcore_AMS_II_Block",true },
+        {"Starcore_AMS_II_Block",true }
 		
 {"BoforTwinRemodel",true},
 {"QuadBofor",true},
 {"PomPomMain",true},
-{ "BoforSingleRemodel", true },
+{ "BoforSingleRemodel", true }, 
 
         };
 
@@ -338,7 +338,7 @@ internal static class PointCheckHelpers
 { "150mmCasemate", true },
 { "150mmCasemateTwin", true },
 { "203mmQuad", true },
-{ "203mmTwin", true }
+{ "203mmTwin", true },
 
 };
     public static bool NameplateVisible = true; public static int timer = 0;
