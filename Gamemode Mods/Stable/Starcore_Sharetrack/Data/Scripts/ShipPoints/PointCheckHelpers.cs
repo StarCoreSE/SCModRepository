@@ -74,7 +74,11 @@ internal static class PointCheckHelpers
 {"NHI_PD_Turret_Half_Slope_Top",true},
 {"NHI_PD_Turret_Half_Slope_Tip",true},
 {"NHI_PD_Turret_45_Slope",true},
-        {"Starcore_AMS_II_Block",true }
+        {"Starcore_AMS_II_Block",true },
+{"BoforTwinRemodel",true},
+{"QuadBofor",true},
+{"PomPomMain",true},
+{"BoforSingleRemodel", true }
 
         };
 
@@ -312,7 +316,27 @@ internal static class PointCheckHelpers
             {"MA_Blister45",true },
             {"MA_Blister30",true },
             {"MA_Blister32",true },
-            {"MA_Meatball",true },
+            {"MA_Meatball",true }
+{ "TorpBarbette", true },
+{ "105mmTwin", true },
+{ "127mmMk12", true },
+{ "127mmMk24", true },
+{ "127mmMk32", true },
+{ "15cmSKC28NR", true },
+{ "15cmSKC28R", true },
+{ "15cmTbtsKC36", true },
+{ "6InchTriple", true },
+{ "380mmMLE1935", true },
+{ "381mmDualNR", true },
+{ "381mmDualR", true },
+{ "406alternate", true },
+{ "16InchTriple", true },
+{ "20InchTwin", true },
+{ "127mmMk56", true },
+{ "150mmCasemate", true },
+{ "150mmCasemateTwin", true },
+{ "203mmQuad", true },
+{ "203mmTwin", true }
 };
     public static bool NameplateVisible = true; public static int timer = 0;
 }
