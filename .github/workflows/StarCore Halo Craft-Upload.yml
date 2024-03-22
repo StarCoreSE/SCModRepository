@@ -2,6 +2,8 @@ name: "Upload StarCore Halo Craft"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Weapon Mods/Stable/StarCore Halo Craft/**"
 

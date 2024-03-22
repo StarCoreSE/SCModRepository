@@ -2,6 +2,8 @@ name: "Upload StarCore Enabler Rewards"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Utility Mods/Stable/SpraysAddon-StarCore Enabler Rewards/**"
 

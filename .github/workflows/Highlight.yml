@@ -2,6 +2,8 @@ name: "Upload Systems Highlight"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Utility Mods/Stable/Systems Highlight/**"
 
