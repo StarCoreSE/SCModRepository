@@ -156,18 +156,10 @@ namespace StarCore.AutoRepairModule
             {
                 if (block.CubeGrid != null && block != null && WeldNextTargetDelay <= 0)
                 {
-                    if (MyAPIGateway.Utilities.IsDedicated || MyAPIGateway.Session.IsServer)
-                    {
-                        GatherDamagedBlocks(block.CubeGrid, ref repairList, ref priorityRepairList);
-                    }
-                    else
-                    {
-                        return;
-                    }
-                       
+                    GatherDamagedBlocks(block.CubeGrid, ref repairList, ref priorityRepairList);
+     
                     DoRepairAction();
-                    WeldingSortTimeout = WeldingSortTimeout - 1;
-                    
+                    WeldingSortTimeout = WeldingSortTimeout - 1;                 
                 }
                 else if (block != null && block.CubeGrid != null)
                 {
@@ -217,22 +209,15 @@ namespace StarCore.AutoRepairModule
 
         public override void UpdateBeforeSimulation10()
         {
-            if (MyAPIGateway.Utilities.IsDedicated || MyAPIGateway.Session.IsServer)
+            try
             {
-                try
-                {
-                    SyncSettings();
-                }
-                catch (Exception e)
-                {
-                    Log.Error(e);
-                }
+                SyncSettings();
             }
-            else
+            catch (Exception e)
             {
-                return;
+                Log.Error(e);
             }
-        }
+    }
 
         public override void Close()
         {
