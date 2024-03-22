@@ -495,7 +495,7 @@ namespace ShipPoints
                 127mmMk32@250;
                 127mmMk56@350;
                 105mmTwin@100;
-                PomPomMain@175;
+                PomPomMain@100;
                 150mmCasemate@100;
                 150mmCasemateTwin@125;
                 BoforTwinRemodel@95;
@@ -509,7 +509,7 @@ namespace ShipPoints
                 203mmQuad@325;
                 TorpBarbette@500;
                 406alternate@400;
-                Mk25Rangefinder@50;
+                Mk25Rangefinder@10;
                 6InchTriple@200;
 				20InchTwin@600;
 

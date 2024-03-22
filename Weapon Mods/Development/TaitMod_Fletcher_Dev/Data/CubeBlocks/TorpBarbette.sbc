@@ -6,7 +6,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>TorpBarbette</SubtypeId>
 			</Id>
-			<DisplayName>25" Torpedo launcher</DisplayName>
+			<DisplayName>[FAS] 25" Torpedo launcher</DisplayName>
 			<Description>25 Inch Quintuple Torpedo launcher
 			10km dumb torpedo, launch stage is guided and pdable.
 			500bp	</Description>
