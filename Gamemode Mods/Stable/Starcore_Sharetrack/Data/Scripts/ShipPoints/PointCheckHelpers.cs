@@ -293,7 +293,7 @@ internal static class PointCheckHelpers
 {"65_Launcher_FixedMount",true},
 {"Hellfire_Laser_Block",true},
 {"HAS_Cyclops",true},
-{"Reaver_Coilgun_Block",true },
+{"Reaver_Coilgun",true },
 {"Type18_Artillery", true },
 {"Type21_Artillery", true },
 {"Type24_Artillery", true },
@@ -317,7 +317,8 @@ internal static class PointCheckHelpers
 {"Thagomizer",true},
 {"HeavyCarronade_5x5_Turret",true},
 {"UnguidedRocketTurret",true},
-{"NavalHeavyGaussRifle",true}
+{"NavalHeavyGaussRifle",true},
+{"Devastator_Torp",true}
 };
     public static bool NameplateVisible = true; public static int timer = 0;
 }
