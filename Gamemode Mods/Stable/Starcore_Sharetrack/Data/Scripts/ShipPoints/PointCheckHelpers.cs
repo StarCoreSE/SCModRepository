@@ -79,7 +79,7 @@ internal static class PointCheckHelpers
 {"BoforTwinRemodel",true},
 {"QuadBofor",true},
 {"PomPomMain",true},
-{ "BoforSingleRemodel", true },
+{ "BoforSingleRemodel", true }
 
         };
 
