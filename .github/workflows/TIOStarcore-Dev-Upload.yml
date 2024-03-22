@@ -2,6 +2,8 @@ name: "Upload TIOStarcore-Dev"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Weapon Mods/Development/TIOStarcore-Dev/**"
 

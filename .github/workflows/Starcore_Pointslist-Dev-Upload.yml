@@ -2,6 +2,8 @@ name: "Upload Starcore_Pointslist-Dev"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Weapon Mods/Development/Starcore_Pointslist-Dev/**"
 

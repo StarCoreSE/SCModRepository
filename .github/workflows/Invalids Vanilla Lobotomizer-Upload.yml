@@ -2,6 +2,8 @@ name: "Upload Invalids Vanilla Lobotomizer"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Weapon Mods/Stable/Invalids Vanilla Lobotomizer/**"
 

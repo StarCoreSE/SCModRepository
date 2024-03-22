@@ -2,6 +2,8 @@ name: "Upload NHI"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Weapon Mods/Stable/NorseHeavyIndustries/**"
 jobs:
