@@ -10,6 +10,7 @@ using static Klime.CTF.CTF;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRageMath;
+using VRage.Utils;
 
 namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
 {
@@ -172,6 +173,7 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
             this.flag_type = incoming_flag.flag_type;
             this.grip_strength = incoming_flag.grip_strength;
             this.regen_modifier = incoming_flag.regen_modifier;
+            this.RecaptureTime = incoming_flag.RecaptureTime;
         }
     }
 }

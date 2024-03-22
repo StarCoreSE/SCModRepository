@@ -110,7 +110,7 @@ namespace Klime.CTF
             FlagCaptured,
             FlagDropped,
             FlagReset,
-            FlagTaken
+            FlagTaken,
         }
 
         public enum BackgroundType
@@ -976,7 +976,7 @@ namespace Klime.CTF
             catch (Exception e)
             {
                 MyAPIGateway.Utilities.ShowMessage("CTFMod", e.ToString());
-                MyLog.Default.WriteLineAndConsole("Exception in CTFMod:\n" + e);
+                MyLog.Default.WriteLineAndConsole("Exception in CTFMod.UpdateAfterSimulation():\n" + e);
             }
 
             timer += 1;
@@ -1037,145 +1037,157 @@ namespace Klime.CTF
         public T CastProhibit<T>(T ptr, object val) => (T)val;
         public override void Draw()
         {
+            if (MyAPIGateway.Utilities.IsDedicated)
+                return;
+
             try
             {
-                if (!MyAPIGateway.Utilities.IsDedicated)
+                foreach (var subflag in allflags)
                 {
-                    foreach (var subflag in allflags)
+                    // Draw capture sphere
+                    if (subflag.RecaptureTime < FlagRecaptureTimeTicks && subflag.RecaptureTime > 0)
                     {
-                        if (subflag.flag_entity != null)
-                        {
-                            if (subflag.state == FlagState.Active)
-                            {
-                                if (allplayerdict.ContainsKey(subflag.carrying_player_id))
-                                {
-                                    if (allplayerdict[subflag.carrying_player_id].Character != null && !allplayerdict[subflag.carrying_player_id].Character.IsDead)
-                                    {
-                                        reuse_matrix = allplayerdict[subflag.carrying_player_id].Character.WorldMatrix;
-                                        reuse_matrix.Translation += reuse_matrix.Backward * 0.4f + reuse_matrix.Up * 1.5f + reuse_matrix.Left * 0.25f;
+                        float percentDegrees = 2 * subflag.RecaptureTime / (float)FlagRecaptureTimeTicks;
 
-                                        subflag.flag_entity.WorldMatrix = reuse_matrix;
-                                    }
+                        float lineSize = subflag.RecaptureTime > 500 ? 0.5f + (subflag.RecaptureTime - 500) / 16 : 0.5f;
+
+                        // Draw [an sphere]
+                        MatrixD flagMatrix = MatrixD.CreateTranslation(subflag.current_pos);
+                        MySimpleObjectDraw.DrawTransparentSphere(ref flagMatrix, (float)flagPickupRadius, ref subflag.flag_color, MySimpleObjectRasterizer.Wireframe, 20, null, MyStringId.GetOrCompute("WeaponLaserIgnoreDepth"), lineSize, -1, null, BlendTypeEnum.SDR, percentDegrees * percentDegrees);
+                    }
+
+                    if (subflag.flag_entity != null)
+                    {
+                        if (subflag.state == FlagState.Active)
+                        {
+                            if (allplayerdict.ContainsKey(subflag.carrying_player_id))
+                            {
+                                if (allplayerdict[subflag.carrying_player_id].Character != null && !allplayerdict[subflag.carrying_player_id].Character.IsDead)
+                                {
+                                    reuse_matrix = allplayerdict[subflag.carrying_player_id].Character.WorldMatrix;
+                                    reuse_matrix.Translation += reuse_matrix.Backward * 0.4f + reuse_matrix.Up * 1.5f + reuse_matrix.Left * 0.25f;
+
+                                    subflag.flag_entity.WorldMatrix = reuse_matrix;
                                 }
                             }
-
-                            MyTransparentGeometry.AddBillboardOriented(square, subflag.flag_color, subflag.flag_entity.WorldMatrix.Translation +
-                                subflag.flag_entity.WorldMatrix.Up * 70f + subflag.flag_entity.WorldMatrix.Backward * 50f,
-                                subflag.flag_entity.WorldMatrix.Forward, subflag.flag_entity.WorldMatrix.Up, 50f, 20f, Vector2.Zero, BlendTypeEnum.PostPP);
-
-                            Vector4 beam_col = subflag.flag_color;
-                            beam_col.W *= 0.2f;
-                            reuse_matrix = subflag.flag_entity.WorldMatrix;
-
-                            float interference = 0f;
-                            var gravP = MyAPIGateway.Physics.CalculateNaturalGravityAt(reuse_matrix.Translation, out interference);
-                            if (gravP.Length() == 0f)
-                            {
-                                gravP = MyAPIGateway.Physics.CalculateArtificialGravityAt(reuse_matrix.Translation, 0);
-                            }
-                            Vector3D beam_up = -1 * Vector3.Normalize(gravP);
-                            Vector3D beam_forward = MyUtils.GetRandomPerpendicularVector(ref beam_up);
-                            reuse_matrix = MatrixD.CreateWorld(reuse_matrix.Translation, beam_forward, beam_up);
-                            reuse_matrix.Translation += subflag.flag_entity.WorldMatrix.Backward * 0.5f;
-
-                            //float beam_radius = 0.5f + 0.1f * (float)Vector3D.Distance(MyAPIGateway.Session.Camera.WorldMatrix.Translation,reuse_matrix.Translation);
-                            float beam_radius = 0.5f;
-                            MySimpleObjectDraw.DrawTransparentCylinder(ref reuse_matrix, beam_radius, beam_radius, 100000f, ref beam_col, true, 25, 0.9f, laser);
                         }
+
+                        MyTransparentGeometry.AddBillboardOriented(square, subflag.flag_color, subflag.flag_entity.WorldMatrix.Translation +
+                            subflag.flag_entity.WorldMatrix.Up * 70f + subflag.flag_entity.WorldMatrix.Backward * 50f,
+                            subflag.flag_entity.WorldMatrix.Forward, subflag.flag_entity.WorldMatrix.Up, 50f, 20f, Vector2.Zero, BlendTypeEnum.PostPP);
+
+                        Vector4 beam_col = subflag.flag_color;
+                        beam_col.W *= 0.2f;
+                        reuse_matrix = subflag.flag_entity.WorldMatrix;
+
+                        float interference = 0f;
+                        var gravP = MyAPIGateway.Physics.CalculateNaturalGravityAt(reuse_matrix.Translation, out interference);
+                        if (gravP.Length() == 0f)
+                        {
+                            gravP = MyAPIGateway.Physics.CalculateArtificialGravityAt(reuse_matrix.Translation, 0);
+                        }
+                        Vector3D beam_up = -1 * Vector3.Normalize(gravP);
+                        Vector3D beam_forward = MyUtils.GetRandomPerpendicularVector(ref beam_up);
+                        reuse_matrix = MatrixD.CreateWorld(reuse_matrix.Translation, beam_forward, beam_up);
+                        reuse_matrix.Translation += subflag.flag_entity.WorldMatrix.Backward * 0.5f;
+
+                        //float beam_radius = 0.5f + 0.1f * (float)Vector3D.Distance(MyAPIGateway.Session.Camera.WorldMatrix.Translation,reuse_matrix.Translation);
+                        float beam_radius = 0.5f;
+                        MySimpleObjectDraw.DrawTransparentCylinder(ref reuse_matrix, beam_radius, beam_radius, 100000f, ref beam_col, true, 25, 0.9f, laser);
+                    }
+                }
+
+
+                if (score_billboard.Visible && gamestate != null)
+                {
+                    var redFlag = allflags[0];
+                    var blueFlag = allflags[1];
+
+                    var redGripStrength = redFlag.grip_strength;
+                    var blueGripStrength = blueFlag.grip_strength;
+
+                    var redGripBar = GenerateGripBar(redGripStrength, redFlag.state == FlagState.Active);
+                    var blueGripBar = GenerateGripBar(blueGripStrength, blueFlag.state == FlagState.Active);
+
+                    // You will need to adjust these coordinates based on where the "RED" and "BLU" text are.
+                    // For example, if "RED" is centered at X = 0.30, you might use X = 0.28 for the grip bar.
+                    Vector2D bluePosition = new Vector2D(-0.33, 0.85); // Position directly below the "RED" text
+                    Vector2D redPosition = new Vector2D(-0.43, 0.85); // Position directly below the "BLU" text
+
+                    StringBuilder redGripSb = new StringBuilder();
+                    redGripSb.Append(redGripBar);
+                    var redGripMessage = new HudAPIv2.HUDMessage(redGripSb, redPosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
+                    redGripMessage.InitialColor = Color.Red;
+
+                    StringBuilder blueGripSb = new StringBuilder();
+                    blueGripSb.Append(blueGripBar);
+                    var blueGripMessage = new HudAPIv2.HUDMessage(blueGripSb, bluePosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
+                    blueGripMessage.InitialColor = Color.Blue;
+
+                    const double VerticalOffsetForDamageResistText = +0.03; // Adjust this value as needed
+
+                    if (redFlag.state == FlagState.Active)
+                    {
+                        var redGripBracket = new HudAPIv2.HUDMessage(GripBracketConst, redPosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
+                        redGripBracket.Origin -= redGripBracket.GetTextLength() * Vector2D.UnitX / 10;
+                        redGripBracket.InitialColor = Color.Red;
+
+                        Vector2D redDmgResistPosition = new Vector2D(redPosition.X, redPosition.Y + VerticalOffsetForDamageResistText);
+                        var redGripDmgResistWarning = new HudAPIv2.HUDMessage(DMGResistConst, redDmgResistPosition, TimeToLive: 2, Scale: 1f, Blend: BlendTypeEnum.PostPP);
+                        redGripDmgResistWarning.InitialColor = Color.Red;
+
                     }
 
-
-                    if (score_billboard.Visible && gamestate != null)
+                    if (blueFlag.state == FlagState.Active)
                     {
-                        var redFlag = allflags[0];
-                        var blueFlag = allflags[1];
+                        var blueGripBracket = new HudAPIv2.HUDMessage(GripBracketConst, bluePosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
+                        blueGripBracket.Origin -= blueGripBracket.GetTextLength() * Vector2D.UnitX / 10;
+                        blueGripBracket.InitialColor = Color.Blue;
 
-                        var redGripStrength = redFlag.grip_strength;
-                        var blueGripStrength = blueFlag.grip_strength;
+                        Vector2D blueDmgResistPosition = new Vector2D(bluePosition.X, bluePosition.Y + VerticalOffsetForDamageResistText);
+                        var bluGripDmgResistWarning = new HudAPIv2.HUDMessage(DMGResistConst, blueDmgResistPosition, TimeToLive: 2, Scale: 1f, Blend: BlendTypeEnum.PostPP);
+                        bluGripDmgResistWarning.InitialColor = Color.Blue;
 
-                        var redGripBar = GenerateGripBar(redGripStrength, redFlag.state == FlagState.Active);
-                        var blueGripBar = GenerateGripBar(blueGripStrength, blueFlag.state == FlagState.Active);
+                    }
+                }
 
-                        // You will need to adjust these coordinates based on where the "RED" and "BLU" text are.
-                        // For example, if "RED" is centered at X = 0.30, you might use X = 0.28 for the grip bar.
-                        Vector2D bluePosition = new Vector2D(-0.33, 0.85); // Position directly below the "RED" text
-                        Vector2D redPosition = new Vector2D(-0.43, 0.85); // Position directly below the "BLU" text
 
-                        StringBuilder redGripSb = new StringBuilder();
-                        redGripSb.Append(redGripBar);
-                        var redGripMessage = new HudAPIv2.HUDMessage(redGripSb, redPosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
-                        redGripMessage.InitialColor = Color.Red;
 
-                        StringBuilder blueGripSb = new StringBuilder();
-                        blueGripSb.Append(blueGripBar);
-                        var blueGripMessage = new HudAPIv2.HUDMessage(blueGripSb, bluePosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
-                        blueGripMessage.InitialColor = Color.Blue;
-
-                        const double VerticalOffsetForDamageResistText = +0.03; // Adjust this value as needed
-
-                        if (redFlag.state == FlagState.Active)
+                if (score_message != null && gamestate != null)
+                {
+                    score_sb.Clear();
+                    if (allflags.Count == 1)
+                    {
+                        if (faction1global == null || faction2global == null)
                         {
-                            var redGripBracket = new HudAPIv2.HUDMessage(GripBracketConst, redPosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
-                            redGripBracket.Origin -= redGripBracket.GetTextLength() * Vector2D.UnitX / 10;
-                            redGripBracket.InitialColor = Color.Red;
-
-                            Vector2D redDmgResistPosition = new Vector2D(redPosition.X, redPosition.Y + VerticalOffsetForDamageResistText);
-                            var redGripDmgResistWarning = new HudAPIv2.HUDMessage(DMGResistConst, redDmgResistPosition, TimeToLive: 2, Scale: 1f, Blend: BlendTypeEnum.PostPP);
-                            redGripDmgResistWarning.InitialColor = Color.Red;
-
+                            faction1global = MyAPIGateway.Session.Factions.TryGetFactionByTag(gamestate.ordered_faction_tags[0]);
+                            faction2global = MyAPIGateway.Session.Factions.TryGetFactionByTag(gamestate.ordered_faction_tags[1]);
                         }
-
-                        if (blueFlag.state == FlagState.Active)
-                        {
-                            var blueGripBracket = new HudAPIv2.HUDMessage(GripBracketConst, bluePosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
-                            blueGripBracket.Origin -= blueGripBracket.GetTextLength() * Vector2D.UnitX / 10;
-                            blueGripBracket.InitialColor = Color.Blue;
-
-                            Vector2D blueDmgResistPosition = new Vector2D(bluePosition.X, bluePosition.Y + VerticalOffsetForDamageResistText);
-                            var bluGripDmgResistWarning = new HudAPIv2.HUDMessage(DMGResistConst, blueDmgResistPosition, TimeToLive: 2, Scale: 1f, Blend: BlendTypeEnum.PostPP);
-                            bluGripDmgResistWarning.InitialColor = Color.Blue;
-
-                        }
+                        score_sb.Append("<color=red>" + gamestate.ordered_faction_tags[0] + "  " + "<color=0,50,255,255>" + gamestate.ordered_faction_tags[1] + "\n");
+                        score_sb.Append(" " + "<color=yellow>  " + gamestate.faction_scores[faction1global.FactionId] + "       " + gamestate.faction_scores[faction2global.FactionId]);
+                    }
+                    else if (allflags.Count == 2)
+                    {
+                        score_sb.Append("<color=red>" + allflags[0].owning_faction.Tag + "  " + "<color=0,50,255,255>" + allflags[1].owning_faction.Tag + "\n");
+                        score_sb.Append(" " + "<color=yellow>  " + gamestate.faction_scores[allflags[0].owning_faction.FactionId] + "       " + gamestate.faction_scores[allflags[1].owning_faction.FactionId]);
                     }
 
-
-
-                    if (score_message != null && gamestate != null)
+                    if (gamestate != null && gamestate.currentgamestate == CurrentGameState.Victory)
                     {
-                        score_sb.Clear();
-                        if (allflags.Count == 1)
-                        {
-                            if (faction1global == null || faction2global == null)
-                            {
-                                faction1global = MyAPIGateway.Session.Factions.TryGetFactionByTag(gamestate.ordered_faction_tags[0]);
-                                faction2global = MyAPIGateway.Session.Factions.TryGetFactionByTag(gamestate.ordered_faction_tags[1]);
-                            }
-                            score_sb.Append("<color=red>" + gamestate.ordered_faction_tags[0] + "  " + "<color=0,50,255,255>" + gamestate.ordered_faction_tags[1] + "\n");
-                            score_sb.Append(" " + "<color=yellow>  " + gamestate.faction_scores[faction1global.FactionId] + "       " + gamestate.faction_scores[faction2global.FactionId]);
-                        }
-                        else if (allflags.Count == 2)
-                        {
-                            score_sb.Append("<color=red>" + allflags[0].owning_faction.Tag + "  " + "<color=0,50,255,255>" + allflags[1].owning_faction.Tag + "\n");
-                            score_sb.Append(" " + "<color=yellow>  " + gamestate.faction_scores[allflags[0].owning_faction.FactionId] + "       " + gamestate.faction_scores[allflags[1].owning_faction.FactionId]);
-                        }
-
-                        if (gamestate != null && gamestate.currentgamestate == CurrentGameState.Victory)
-                        {
-                            score_sb.Append("\n\n\n\n\n\n\n" + "<color=white>" + gamestate.winning_tag + " VICTORY!");
-                        }
+                        score_sb.Append("\n\n\n\n\n\n\n" + "<color=white>" + gamestate.winning_tag + " VICTORY!");
                     }
-                    if (event_message != null)
+                }
+                if (event_message != null)
+                {
+                    if (timer == event_clock)
                     {
-                        if (timer == event_clock)
-                        {
-                            event_sb.Clear();
-                        }
+                        event_sb.Clear();
                     }
                 }
             }
             catch (Exception e)
             {
-                MyLog.Default.WriteLineAndConsole("Exception in CTFMod:\n" + e);
+                MyLog.Default.WriteLineAndConsole("Exception in CTFMod.Draw():\n" + e);
             }
         }
 
@@ -1306,22 +1318,16 @@ namespace Klime.CTF
                     // Check if the same-team player has been around the flag for (n) seconds
                     if (subflag.RecaptureTime < FlagRecaptureTimeTicks)
                     {
-                        int returnTime = subflag.RecaptureTime++;
+                        subflag.RecaptureTime++;
 
-                        if (!MyAPIGateway.Utilities.IsDedicated)
-                        {
-                            float percentDegrees = 2 * returnTime / (float)FlagRecaptureTimeTicks;
-
-                            float lineSize = returnTime > 500 ? 0.5f + (returnTime - 500) / 16 : 0.5f;
-
-                            // Draw [an sphere]
-                            MatrixD flagMatrix = MatrixD.CreateTranslation(subflag.current_pos);
-                            MySimpleObjectDraw.DrawTransparentSphere(ref flagMatrix, (float)flagPickupRadius, ref subflag.flag_color, MySimpleObjectRasterizer.Wireframe, 20, null, MyStringId.GetOrCompute("WeaponLaserIgnoreDepth"), lineSize, -1, null, BlendTypeEnum.SDR, percentDegrees * percentDegrees);
-                        }
+                        // Update gamestate when flag recap is started.
+                        if (subflag.RecaptureTime == 1)
+                            SendFlagState();
                     }
                     else
                     {
                         ResetFlag(subflag);
+                        SendFlagState();
                     }
                 }
                 else
