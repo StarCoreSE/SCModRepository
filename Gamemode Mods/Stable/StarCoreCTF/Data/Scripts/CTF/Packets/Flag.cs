@@ -60,6 +60,12 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
         [ProtoMember(13)]
         public float regen_modifier = 0.2f;
 
+        /// <summary>
+        /// Counter (in ticks) representing time since a recapture was started.
+        /// </summary>
+        [ProtoMember(14)]
+        public ushort RecaptureTime = 0;
+
         public float lastTickAcceleration;
 
         [ProtoIgnore]
@@ -67,9 +73,6 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
 
         [ProtoIgnore]
         public MatrixD attachedLocalMatrix = MatrixD.Identity;
-
-        [ProtoIgnore]
-        public Dictionary<long, int> PlayerReturnTimes = new Dictionary<long, int>();
 
         public Flag()
         {

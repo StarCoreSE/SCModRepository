@@ -26,6 +26,23 @@ namespace Klime.CTF
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     public class CTF : MySessionComponentBase
     {
+        #region Config
+
+        const int FlagRecaptureTimeTicks = 60;
+        Vector3D gamecenter = Vector3D.Zero;
+        bool use_game_radius = false;
+        double radius = 5000;
+        int max_caps = 3;
+        bool pickup_in_cockpit = false;
+        bool drop_in_cockpit = false;
+        DropType drop_type = DropType.Ground;
+        int drop_reset_time = 300;
+        double flagPickupRadius = 500;
+
+        #endregion
+
+
+
         private static readonly StringBuilder GripBracketConst = new StringBuilder("[       ]");
         private static readonly StringBuilder DMGResistConst = new StringBuilder("RESIST+");
 
@@ -119,17 +136,6 @@ namespace Klime.CTF
         MyPlanet reuse_planet;
         List<MyEntity> reuse_Entities = new List<MyEntity>();
         EventInfo reuse_event;
-
-        //Config
-        Vector3D gamecenter = Vector3D.Zero;
-        bool use_game_radius = false;
-        double radius = 5000;
-        int max_caps = 3;
-        bool pickup_in_cockpit = false;
-        bool drop_in_cockpit = false;
-        DropType drop_type = DropType.Ground;
-        int drop_reset_time = 300;
-        double flagPickupRadius = 500;
 
         public class BackgroundUIElement
         {
@@ -362,7 +368,8 @@ namespace Klime.CTF
             }
             catch (Exception e)
             {
-                MyVisualScriptLogicProvider.SendChatMessageColored("Incorrect or missing CTF config. Blank config generated\n" + e.Message, Color.Orange, "Server");
+                MyVisualScriptLogicProvider.SendChatMessageColored("Incorrect or missing CTF config. Blank config generated\n" + e, Color.Orange, "Server");
+                MyLog.Default.WriteLineAndConsole("Incorrect or missing CTF config. Blank config generated\n" + e);
                 CreateBlankFile();
                 rdy = false;
             }
@@ -884,166 +891,7 @@ namespace Klime.CTF
 
                                 }
 
-                                if (subflag.state == FlagState.Dropped)
-                                {
-                                    subflag.grip_strength = 100;
-
-                                    ShowANotificationPlease($"Flag state: {subflag.state}");
-                                    ShowANotificationPlease($"Current drop life: {subflag.current_drop_life}");
-                                    ShowANotificationPlease($"Drop reset time: {drop_reset_time}");
-
-                                    if (subflag.current_drop_life >= drop_reset_time)
-                                    {
-                                        ShowANotificationPlease("flag home 4");
-                                        ResetFlag(subflag);
-                                    }
-                                    else
-                                    {
-                                        switch (drop_type)
-                                        {
-                                            case DropType.Instant:
-                                                ShowANotificationPlease("flag home 5");
-                                                ResetFlag(subflag);
-                                                break;
-                                            case DropType.Ground:
-                                                reuse_planet = MyGamePruningStructure.GetClosestPlanet(subflag.flag_entity.WorldMatrix.Translation);
-
-                                                if (reuse_planet != null)
-                                                {
-                                                    reuse_matrix = subflag.flag_entity.WorldMatrix;
-                                                    reuse_matrix.Translation = reuse_planet.GetClosestSurfacePointGlobal(subflag.flag_entity.WorldMatrix.Translation);
-                                                    subflag.flag_entity.WorldMatrix = reuse_matrix;
-                                                }
-                                                else
-                                                {
-                                                    drop_type = DropType.Floating;
-                                                }
-                                                break;
-                                            case DropType.Attached:
-                                                if (subflag.attachedGrid == null && subflag.current_drop_life == 0)
-                                                {
-                                                    float interf = 0f;
-                                                    var gravityDir = Vector3D.Normalize(MyAPIGateway.Physics.CalculateNaturalGravityAt(subflag.flag_entity.WorldMatrix.Translation, out interf));
-                                                    var start = subflag.flag_entity.WorldMatrix.Translation;
-                                                    var end = start + gravityDir * 5;
-                                                    List<IHitInfo> hits = new List<IHitInfo>();
-                                                    MyAPIGateway.Physics.CastRay(start, end, hits);
-
-                                                    foreach (var hit in hits)
-                                                    {
-                                                        if (hit == null || hit.HitEntity == null)
-                                                            continue;
-
-                                                        var testGrid = hit.HitEntity as MyCubeGrid;
-
-                                                        if (testGrid != null && testGrid.Physics != null)
-                                                        {
-                                                            subflag.attachedGrid = testGrid;
-                                                            break;
-                                                        }
-                                                    }
-
-                                                    if (subflag.attachedGrid != null)
-                                                    {
-                                                        subflag.attachedLocalMatrix = subflag.flag_entity.WorldMatrix * subflag.attachedGrid.PositionComp.WorldMatrixInvScaled;
-                                                    }
-                                                }
-
-                                                if (subflag.attachedGrid != null && !subflag.attachedGrid.MarkedForClose)
-                                                {
-                                                    subflag.flag_entity.WorldMatrix = subflag.attachedLocalMatrix * subflag.attachedGrid.WorldMatrix;
-                                                }
-                                                break;
-                                        }
-                                    }
-
-                                    subflag.current_drop_life += 1;
-
-                                    bool playerInRadius = false;
-
-                                    foreach (var player in subflag.GetNearbyPlayers(ref allplayers, ref reuse_players, pickup_in_cockpit, flagPickupRadius))
-                                    {
-                                        int lastDropTime;
-
-                                        if (playerDropTimes.TryGetValue(player.IdentityId, out lastDropTime))
-                                        {
-                                            if (timer - lastDropTime < 600)
-                                            {
-                                                continue;
-                                            }
-                                        }
-
-                                        playerInRadius = true;
-
-                                        string faction_tag = MyVisualScriptLogicProvider.GetPlayersFactionTag(player.IdentityId);
-
-                                        if (faction_tag == subflag.owning_faction.Tag)
-                                        {
-                                            // Track the time the same-team player has been around the flag
-                                            if (subflag.PlayerReturnTimes.ContainsKey(player.IdentityId))
-                                            {
-                                                int returnTime = subflag.PlayerReturnTimes[player.IdentityId]++;
-
-                                                float percentDegrees = 2 * returnTime / 600f;
-
-                                                float lineSize = returnTime > 500 ? 0.5f + (returnTime - 500) / 16 : 0.5f;
-
-                                                // Draw [an sphere]
-                                                MatrixD flagMatrix = MatrixD.CreateTranslation(subflag.current_pos);
-                                                MySimpleObjectDraw.DrawTransparentSphere(ref flagMatrix, (float)flagPickupRadius, ref subflag.flag_color, MySimpleObjectRasterizer.Wireframe, 20, null, MyStringId.GetOrCompute("WeaponLaserIgnoreDepth"), lineSize, -1, null, BlendTypeEnum.SDR, percentDegrees * percentDegrees);
-                                            }
-                                            else
-                                            {
-                                                subflag.PlayerReturnTimes.Add(player.IdentityId, 1);
-                                            }
-
-
-
-                                            // Check if the same-team player has been around the flag for 10 seconds
-                                            if (subflag.PlayerReturnTimes[player.IdentityId] >= 60)
-                                            {
-                                                ResetFlag(subflag);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            // Remove the player from the return times dictionary if they are not the same team
-                                            subflag.PlayerReturnTimes.Remove(player.IdentityId);
-                                        }
-
-                                        if (subflag.flag_type == FlagType.Single)
-                                        {
-                                            if (faction_tag != "")
-                                            {
-                                                subflag.state = FlagState.Active;
-                                                ShowANotificationPlease("flag active 1");
-                                                subflag.carrying_player_id = player.IdentityId;
-                                                subflag.carrying_player = player;
-                                                subflag.current_drop_life = 0;
-                                                SendEvent(player.DisplayName + " grabbed the flag!", InfoType.FlagTaken);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            if (faction_tag != "" && faction_tag != subflag.owning_faction.Tag)
-                                            {
-                                                subflag.state = FlagState.Active;
-                                                ShowANotificationPlease("flag active 2");
-                                                subflag.carrying_player_id = player.IdentityId;
-                                                subflag.carrying_player = player;
-                                                subflag.current_drop_life = 0;
-                                                SendEvent(player.DisplayName + " stole " + subflag.owning_faction.Tag + " flag!", InfoType.FlagTaken);
-                                            }
-                                        }
-                                    }
-
-                                    ShowANotificationPlease($"Player in interaction radius: {playerInRadius}");
-
-                                    foreach (var entry in subflag.PlayerReturnTimes)
-                                    {
-                                        ShowANotificationPlease($"Player ID: {entry.Key}, Return time: {entry.Value}");
-                                    }
-                                }
+                                CheckDroppedFlagState(subflag);
 
                                 subflag.current_pos = subflag.flag_entity.WorldMatrix.Translation;
                                 Matrix3x3 rotationOnlyMatrix = subflag.flag_entity.WorldMatrix.Rotation;
@@ -1127,7 +975,8 @@ namespace Klime.CTF
             }
             catch (Exception e)
             {
-                MyAPIGateway.Utilities.ShowMessage("", e.Message);
+                MyAPIGateway.Utilities.ShowMessage("CTFMod", e.ToString());
+                MyLog.Default.WriteLineAndConsole("Exception in CTFMod:\n" + e);
             }
 
             timer += 1;
@@ -1324,9 +1173,162 @@ namespace Klime.CTF
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                MyLog.Default.WriteLineAndConsole("Exception in CTFMod:\n" + e);
+            }
+        }
 
+        void CheckDroppedFlagState(Flag subflag)
+        {
+            if (subflag.state == FlagState.Dropped)
+            {
+                subflag.grip_strength = 100;
+
+                ShowANotificationPlease($"Flag state: {subflag.state}");
+                ShowANotificationPlease($"Current drop life: {subflag.current_drop_life}");
+                ShowANotificationPlease($"Drop reset time: {drop_reset_time}");
+
+                if (subflag.current_drop_life >= drop_reset_time)
+                {
+                    ShowANotificationPlease("flag home 4");
+                    ResetFlag(subflag);
+                }
+                else
+                {
+                    switch (drop_type)
+                    {
+                        case DropType.Instant:
+                            ShowANotificationPlease("flag home 5");
+                            ResetFlag(subflag);
+                            break;
+                        case DropType.Ground:
+                            reuse_planet = MyGamePruningStructure.GetClosestPlanet(subflag.flag_entity.WorldMatrix.Translation);
+
+                            if (reuse_planet != null)
+                            {
+                                reuse_matrix = subflag.flag_entity.WorldMatrix;
+                                reuse_matrix.Translation = reuse_planet.GetClosestSurfacePointGlobal(subflag.flag_entity.WorldMatrix.Translation);
+                                subflag.flag_entity.WorldMatrix = reuse_matrix;
+                            }
+                            else
+                            {
+                                drop_type = DropType.Floating;
+                            }
+                            break;
+                        case DropType.Attached:
+                            if (subflag.attachedGrid == null && subflag.current_drop_life == 0)
+                            {
+                                float interf = 0f;
+                                var gravityDir = Vector3D.Normalize(MyAPIGateway.Physics.CalculateNaturalGravityAt(subflag.flag_entity.WorldMatrix.Translation, out interf));
+                                var start = subflag.flag_entity.WorldMatrix.Translation;
+                                var end = start + gravityDir * 5;
+                                List<IHitInfo> hits = new List<IHitInfo>();
+                                MyAPIGateway.Physics.CastRay(start, end, hits);
+
+                                foreach (var hit in hits)
+                                {
+                                    if (hit == null || hit.HitEntity == null)
+                                        continue;
+
+                                    var testGrid = hit.HitEntity as MyCubeGrid;
+
+                                    if (testGrid != null && testGrid.Physics != null)
+                                    {
+                                        subflag.attachedGrid = testGrid;
+                                        break;
+                                    }
+                                }
+
+                                if (subflag.attachedGrid != null)
+                                {
+                                    subflag.attachedLocalMatrix = subflag.flag_entity.WorldMatrix * subflag.attachedGrid.PositionComp.WorldMatrixInvScaled;
+                                }
+                            }
+
+                            if (subflag.attachedGrid != null && !subflag.attachedGrid.MarkedForClose)
+                            {
+                                subflag.flag_entity.WorldMatrix = subflag.attachedLocalMatrix * subflag.attachedGrid.WorldMatrix;
+                            }
+                            break;
+                    }
+                }
+
+                subflag.current_drop_life += 1;
+
+                bool friendlyPlayerInRadius = false;
+
+                foreach (var player in subflag.GetNearbyPlayers(ref allplayers, ref reuse_players, pickup_in_cockpit, flagPickupRadius))
+                {
+                    int lastDropTime;
+
+                    if (playerDropTimes.TryGetValue(player.IdentityId, out lastDropTime))
+                    {
+                        if (timer - lastDropTime < 600)
+                        {
+                            continue;
+                        }
+                    }
+
+                    friendlyPlayerInRadius = true;
+
+                    string faction_tag = MyVisualScriptLogicProvider.GetPlayersFactionTag(player.IdentityId);
+
+                    // Handle flag stealing
+                    if (subflag.flag_type == FlagType.Single)
+                    {
+                        if (faction_tag != "")
+                        {
+                            subflag.state = FlagState.Active;
+                            subflag.carrying_player_id = player.IdentityId;
+                            subflag.carrying_player = player;
+                            subflag.current_drop_life = 0;
+                            SendEvent(player.DisplayName + " grabbed the flag!", InfoType.FlagTaken);
+                        }
+                    }
+                    else
+                    {
+                        if (faction_tag != "" && faction_tag != subflag.owning_faction.Tag)
+                        {
+                            subflag.state = FlagState.Active;
+                            subflag.carrying_player_id = player.IdentityId;
+                            subflag.carrying_player = player;
+                            subflag.current_drop_life = 0;
+                            SendEvent(player.DisplayName + " stole " + subflag.owning_faction.Tag + " flag!", InfoType.FlagTaken);
+                        }
+                    }
+                }
+
+                // Checking for recapture times.
+                if (friendlyPlayerInRadius)
+                {
+                    // Track the time the same-team player has been around the flag
+                    // Check if the same-team player has been around the flag for (n) seconds
+                    if (subflag.RecaptureTime < FlagRecaptureTimeTicks)
+                    {
+                        int returnTime = subflag.RecaptureTime++;
+
+                        if (!MyAPIGateway.Utilities.IsDedicated)
+                        {
+                            float percentDegrees = 2 * returnTime / (float)FlagRecaptureTimeTicks;
+
+                            float lineSize = returnTime > 500 ? 0.5f + (returnTime - 500) / 16 : 0.5f;
+
+                            // Draw [an sphere]
+                            MatrixD flagMatrix = MatrixD.CreateTranslation(subflag.current_pos);
+                            MySimpleObjectDraw.DrawTransparentSphere(ref flagMatrix, (float)flagPickupRadius, ref subflag.flag_color, MySimpleObjectRasterizer.Wireframe, 20, null, MyStringId.GetOrCompute("WeaponLaserIgnoreDepth"), lineSize, -1, null, BlendTypeEnum.SDR, percentDegrees * percentDegrees);
+                        }
+                    }
+                    else
+                    {
+                        ResetFlag(subflag);
+                    }
+                }
+                else
+                {
+                    // Remove the player from the return times dictionary if they are not the same team
+                    subflag.RecaptureTime = 0;
+                }
             }
         }
 
@@ -1345,7 +1347,7 @@ namespace Klime.CTF
             }
 
             // Reset the player's return time or remove the player from the dictionary
-            subflag.PlayerReturnTimes.Clear();
+            subflag.RecaptureTime = 0;
             subflag.current_drop_life = 0;
         }
 
