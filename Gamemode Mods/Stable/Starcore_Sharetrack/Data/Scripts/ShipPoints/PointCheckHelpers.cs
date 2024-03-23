@@ -32,8 +32,8 @@ internal static class PointCheckHelpers
 {
 
     public static Dictionary<string, bool> pdDictionary = new Dictionary<string, bool>
-        {
-            {"MA_T2PDX",true},
+{
+{"MA_T2PDX",true},
 {"MA_T2PDX_Slope",true},
 {"MA_T2PDX_Slope2",true},
 {"MA_Gimbal_Laser_T2",true},
@@ -68,12 +68,14 @@ internal static class PointCheckHelpers
 {"Starcore_AMS_I_Block",true},
 {"LargeGatlingTurret_SC",true},
 {"PriestReskin_Block", true},
-            {"NHI_PD_Turret",true},
+{"Priest_Block", true},
+{"APE_Strong", true},
+{"NHI_PD_Turret",true},
 {"NHI_PD_Turret_Half",true},
 {"NHI_PD_Turret_Half_Slope_Top",true},
 {"NHI_PD_Turret_Half_Slope_Tip",true},
 {"NHI_PD_Turret_45_Slope",true},
-        {"Starcore_AMS_II_Block",true }
+{"Starcore_AMS_II_Block",true }
 
         };
 
@@ -162,6 +164,7 @@ internal static class PointCheckHelpers
 {"HAS_Alecto",true},
 {"HAS_Assault",true},
 {"HAS_Mammon",true},
+{"HAS_Nyx",true},
 {"ARYXRailgunTurret",true},
 {"MCRNRailgunLB",true},
 {"K_SA_HeavyMetal_Spinal_Rotary",true},
@@ -318,7 +321,14 @@ internal static class PointCheckHelpers
 {"HeavyCarronade_5x5_Turret",true},
 {"UnguidedRocketTurret",true},
 {"NavalHeavyGaussRifle",true},
-{"Devastator_Torp",true}
+{"Devastator_Torp",true},
+{"PriestReskin_Block", true},
+{"APE_Strong", true},
+{"HAS_Crossfield", true},
+{"SC_Flare",true},
+{"Starcore_RWR_Projectiles",true},
+{"Priest_Block", true}
+
 };
     public static bool NameplateVisible = true; public static int timer = 0;
 }
