@@ -752,7 +752,11 @@ namespace StarCore.AutoRepairModule
                 {
                     return logic.SubsystemPriority;
                 }
-                return 0;
+                else
+                {
+                    return 0;
+                }
+               
             };
             ARMSubsystemPriorityDropdown.Setter = Control_Priority_Setter;
             ARMSubsystemPriorityDropdown.ComboBoxContent = (list) =>
@@ -779,7 +783,10 @@ namespace StarCore.AutoRepairModule
                 {
                     return logic.ExclusiveMode;
                 }
-                return false;
+                else
+                {
+                    return false;
+                }            
             };
             ARMExclusiveModeCheckbox.Setter = Control_Exclusive_Setter;
             MyAPIGateway.TerminalControls.AddControl<IMyCollector>(ARMExclusiveModeCheckbox);
@@ -797,7 +804,10 @@ namespace StarCore.AutoRepairModule
                 {
                     return logic.IgnoreArmor;
                 }
-                return false;
+                else
+                {
+                    return false;
+                }              
             };
             ARMIgnoreArmorCheckbox.Setter = Control_IgnoreArmor_Setter;
             MyAPIGateway.TerminalControls.AddControl<IMyCollector>(ARMIgnoreArmorCheckbox);
@@ -879,8 +889,11 @@ namespace StarCore.AutoRepairModule
                         logic.Settings.IgnoreArmor = logic.IgnoreArmor;
                     }
                     else
+                    {
                         logic.IgnoreArmor = true;
-                    logic.Settings.IgnoreArmor = logic.IgnoreArmor;
+                        logic.Settings.IgnoreArmor = logic.IgnoreArmor;
+                    }
+                        
                 }
             };
             ARMIgnoreArmorToggleAction.Writer = (b, sb) =>
