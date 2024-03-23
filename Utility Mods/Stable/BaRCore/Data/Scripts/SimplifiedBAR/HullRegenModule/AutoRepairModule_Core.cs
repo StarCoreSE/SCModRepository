@@ -372,28 +372,34 @@ namespace StarCore.AutoRepairModule
             repairList.Clear();
             priorityRepairList.Clear();
 
-            foreach (var item in positionalList)
+            if (positionalList != null)
             {
-                if (grid != null)
+                foreach (var item in positionalList)
                 {
-                    var block = grid.GetCubeBlock(item);
-
-                    if (block != null)
+                    if (grid != null)
                     {
-                        repairList.Add(block);
+                        var block = grid.GetCubeBlock(item);
+
+                        if (block != null)
+                        {
+                            repairList.Add(block);
+                        }
                     }
                 }
             }
 
-            foreach (var item in priorityPositionalList)
+            if (priorityPositionalList != null)
             {
-                if (grid != null)
+                foreach (var item in priorityPositionalList)
                 {
-                    var block = grid.GetCubeBlock(item);
-
-                    if (block != null)
+                    if (grid != null)
                     {
-                        priorityRepairList.Add(block);
+                        var block = grid.GetCubeBlock(item);
+
+                        if (block != null)
+                        {
+                            priorityRepairList.Add(block);
+                        }
                     }
                 }
             }
