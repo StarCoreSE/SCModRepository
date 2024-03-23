@@ -104,6 +104,34 @@ namespace StarCore.AutoRepairModule
             }
         }
 
+        public Vector3I[] SettingsRepairPositionalList
+        {
+            get { return Settings.RepairPositionalList; }
+            set
+            {
+                Settings.RepairPositionalList = value;
+
+                SettingsChanged();
+
+                if ((NeedsUpdate & MyEntityUpdateEnum.EACH_10TH_FRAME) == 0)
+                    NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
+            }
+        }
+
+        public Vector3I[] SettingsPriorityPositionalList
+        {
+            get { return Settings.PriorityPositionalList; }
+            set
+            {
+                Settings.PriorityPositionalList = value;
+
+                SettingsChanged();
+
+                if ((NeedsUpdate & MyEntityUpdateEnum.EACH_10TH_FRAME) == 0)
+                    NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
+            }
+        }
+
         #region Overrides
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
@@ -156,8 +184,20 @@ namespace StarCore.AutoRepairModule
             {
                 if (block.CubeGrid != null && block != null && WeldNextTargetDelay <= 0)
                 {
-                    GatherDamagedBlocks(block.CubeGrid, ref repairList, ref priorityRepairList);
-     
+                    if (MyAPIGateway.Session.IsServer)
+                    {
+                        GatherDamagedBlocks(block.CubeGrid, ref repairList, ref priorityRepairList);
+
+                        var positionalList = new Vector3I[0];
+                        var priorityPositionalList = new Vector3I[0];
+                        CreatePositionalList(ref repairList, ref priorityRepairList, out positionalList, out priorityPositionalList);
+
+                        SettingsRepairPositionalList = positionalList;
+                        SettingsPriorityPositionalList = priorityPositionalList;
+                    }
+                    
+                    FetchBlocksFromPosition(block.CubeGrid, ref repairList, ref priorityRepairList, SettingsRepairPositionalList, SettingsPriorityPositionalList);
+
                     DoRepairAction();
                     WeldingSortTimeout = WeldingSortTimeout - 1;                 
                 }
@@ -217,7 +257,7 @@ namespace StarCore.AutoRepairModule
             {
                 Log.Error(e);
             }
-    }
+        }
 
         public override void Close()
         {
@@ -311,6 +351,41 @@ namespace StarCore.AutoRepairModule
             }
         }
 
+        private void CreatePositionalList(ref List<IMySlimBlock> repairList, ref List<IMySlimBlock> priorityRepairList, out Vector3I[] positionalList, out Vector3I[] priorityPositionalList)
+        {
+            positionalList = new Vector3I[repairList.Count];
+            priorityPositionalList = new Vector3I[priorityRepairList.Count];
+
+            for (int i = 0; i < repairList.Count; i++)
+            {
+                positionalList[i] = repairList[i].Position;
+            }
+
+            for (int i = 0; i < priorityRepairList.Count; i++)
+            {
+                priorityPositionalList[i] = priorityRepairList[i].Position;
+            }
+        }
+
+        private void FetchBlocksFromPosition(IMyCubeGrid grid, ref List<IMySlimBlock> repairList, ref List<IMySlimBlock> priorityRepairList, Vector3I[] positionalList, Vector3I[] priorityPositionalList)
+        {
+            repairList.Clear();
+            priorityRepairList.Clear();
+
+            foreach (var item in positionalList)
+            {
+                var block = grid.GetCubeBlock(item);
+
+                repairList.Add(block);
+            }
+
+            foreach (var item in priorityPositionalList)
+            {
+                var block = grid.GetCubeBlock(item);
+
+                priorityRepairList.Add(block);
+            }
+        }
 
         private void TimeoutSortAndReset(IMySlimBlock block)
         {
