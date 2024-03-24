@@ -1106,16 +1106,21 @@ namespace klime.PointCheck
                 string playerName = trkd.Owner == null ? trkd.GridName : trkd.Owner.DisplayName;
                 string factionName = trkd.Owner == null ? "" : MyAPIGateway.Session?.Factions?.TryGetPlayerFaction(trkd.OwnerID)?.Name;
 
-                float speed = icubeG.GridSizeEnum == MyCubeSize.Large ? MyDefinitionManager.Static.EnvironmentDefinition.LargeShipMaxSpeed : MyDefinitionManager.Static.EnvironmentDefinition.SmallShipMaxSpeed;
+                float maxSpeed = icubeG.GridSizeEnum == MyCubeSize.Large ? MyDefinitionManager.Static.EnvironmentDefinition.LargeShipMaxSpeed : MyDefinitionManager.Static.EnvironmentDefinition.SmallShipMaxSpeed;
                 float reducedAngularSpeed = 0f;
                 float negativeInfluence = 0f;
 
                 if (RTS_api != null && RTS_api.IsReady)
                 {
-                    speed = (float)Math.Round(RTS_api.GetMaxSpeed(icubeG), 2);
+                    maxSpeed = (float)Math.Round(RTS_api.GetMaxSpeed(icubeG), 2);
                     reducedAngularSpeed = RTS_api.GetReducedAngularSpeed(icubeG);
                     negativeInfluence = RTS_api.GetNegativeInfluence(icubeG);
                 }
+
+                var speedText = new StringBuilder();
+                speedText.Append($"\n<color=Green>Max Speed<color=White>: {maxSpeed:F2} m/s");
+                speedText.Append($"\n<color=Green>Reduced Angular Speed<color=White>: {reducedAngularSpeed:F2} rad/s");
+                speedText.Append($"\n<color=Green>Negative Influence<color=White>: {negativeInfluence:F2}");
 
 
                 string PWRNotation = trkd.CurrentPower > 1000 ? "GW" : "MW";
@@ -1152,7 +1157,8 @@ namespace klime.PointCheck
                 sb.AppendFormat("<color=Green>PCU<color=White>: {0}\n", trkd.PCU);
                 sb.AppendFormat("<color=Green>Size<color=White>: {0}\n", (icubeG.Max + Vector3.Abs(icubeG.Min)).ToString());
                 // sb.AppendFormat("<color=Green>Max Speed<color=White>: {0} | <color=Green>TWR<color=White>: {1}\n", speed, TWRs);
-                sb.AppendFormat("<color=Green>Max Speed<color=White>: {0} | <color=Green>Reduced Angular Speed<color=White>: {1:F2} | <color=Green>TWR<color=White>: {2}\n", speed, reducedAngularSpeed, TWRs);
+                //sb.AppendFormat("<color=Green>Max Speed<color=White>: {0} | <color=Green>R.A.S.<color=White>: {1:F2} | <color=Green>TWR<color=White>: {2}\n", maxSpeed, reducedAngularSpeed, TWRs);
+                sb.Append(speedText);
                 sb.AppendLine(); //blank line
 
                 // Battle Stats
