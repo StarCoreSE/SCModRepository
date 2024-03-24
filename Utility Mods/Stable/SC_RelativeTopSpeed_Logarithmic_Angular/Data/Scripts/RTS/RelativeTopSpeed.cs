@@ -24,20 +24,6 @@ namespace RelativeTopSpeedGV
         private const string ModName = "Relative Top Speed";
         private const string CommandKeyword = "/rts";
 
-
-        //temporary 
-
-        // public const float MaxSpeedAngMult = 0.25f;
-        // public const float MaxMass = 5000000f;
-        // public const float MinMass = 1f;
-        // public const float MaxSpeed = 100f;
-        // public const float MinSpeed = 1f;
-        public const float MaxAng = 5f;
-        public const float MinAng = 0.01f;
-        //public const float MaxMassAngMult = 0.1f;
-
-
-
         public NetSync<Settings> cfg;
         public static event Action<Settings> SettingsChanged;
 
