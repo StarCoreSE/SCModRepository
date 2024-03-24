@@ -151,7 +151,7 @@ namespace Invalid.BlinkDrive
 
             // Check from all corners to limit fuckery
             List<IHitInfo> hitInfos = new List<IHitInfo>();
-            Vector3D forward = Block.CubeGrid.WorldMatrix.Forward * JumpDistance;
+            Vector3D forward = Block.WorldMatrix.Forward * JumpDistance;
 
             // Check for blocker plates (??)
 
