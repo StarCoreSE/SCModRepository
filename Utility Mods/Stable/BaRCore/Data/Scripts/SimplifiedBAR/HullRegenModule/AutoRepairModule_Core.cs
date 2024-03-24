@@ -196,7 +196,7 @@ namespace StarCore.AutoRepairModule
                         SettingsPriorityPositionalList = priorityPositionalList;                     
                     }
 
-                    SyncSettings();
+                    SaveSettings();
 
                     FetchBlocksFromPosition(block.CubeGrid, ref repairList, ref priorityRepairList, SettingsRepairPositionalList, SettingsPriorityPositionalList);
 
