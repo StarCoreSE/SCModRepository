@@ -193,9 +193,11 @@ namespace StarCore.AutoRepairModule
                         CreatePositionalList(ref repairList, ref priorityRepairList, out positionalList, out priorityPositionalList);
 
                         SettingsRepairPositionalList = positionalList;
-                        SettingsPriorityPositionalList = priorityPositionalList;
+                        SettingsPriorityPositionalList = priorityPositionalList;                     
                     }
-                    
+
+                    SyncSettings();
+
                     FetchBlocksFromPosition(block.CubeGrid, ref repairList, ref priorityRepairList, SettingsRepairPositionalList, SettingsPriorityPositionalList);
 
                     DoRepairAction();
@@ -251,7 +253,7 @@ namespace StarCore.AutoRepairModule
         {
             try
             {
-                SyncSettings();
+                /*SyncSettings();*/
             }
             catch (Exception e)
             {
