@@ -5,6 +5,7 @@ using SENetworkAPI;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using VRage.Game;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
@@ -156,7 +157,7 @@ namespace RelativeTopSpeedGV
             bool subHasActivationBlocks = false;
 
             List<IMyCubeGrid> subs = MyAPIGateway.GridGroups.GetGroup(grid, GridLinkTypeEnum.Mechanical);
-            foreach (MyCubeGrid sub in subs)
+            foreach (MyCubeGrid sub in subs.Cast<MyCubeGrid>())
             {
                 if (sub.BlocksCounters.ContainsKey(thrustTypeId) && sub.BlocksCounters[thrustTypeId] > 0)
                 {
@@ -531,6 +532,45 @@ namespace RelativeTopSpeedGV
         public float GetCruiseSpeed(float mass, bool isLargeGrid) => cfg.Value.GetCruiseSpeed(mass, isLargeGrid);
 
         public float GetBoostSpeed(float mass, bool isLargeGrid) => cfg.Value.GetBoostSpeed(mass, isLargeGrid);
+
+        public float GetNegativeInfluence()
+        {
+            float totalNegativeInfluence = 0f;
+
+            foreach (MyCubeGrid grid in ActiveGrids)
+            {
+                Vector3 ang = grid.Physics.AngularVelocity;
+                if (ang.LengthSquared() > (cfg.Value.MinAngularSpeed * cfg.Value.MinAngularSpeed))
+                {
+                    var angMassReduction = 1 + ((grid.Physics.Mass - cfg.Value.LargeGrid_MinMass) / (cfg.Value.LargeGrid_MaxMass - cfg.Value.LargeGrid_MinMass)) * (cfg.Value.GlobalMinAngularSpeed - 1);
+                    var angSpeedReduction = 1 + ((grid.Physics.LinearVelocity.Length() - cfg.Value.LargeGrid_MinCruise) / (cfg.Value.LargeGrid_MaxCruise - cfg.Value.LargeGrid_MinCruise) * (cfg.Value.LargeGrid_AngularCruiseMult - 1));
+                    float reducedAng = MathHelper.Clamp(cfg.Value.MaxAngularSpeed * angMassReduction * angSpeedReduction, cfg.Value.MinAngularSpeed, cfg.Value.MaxAngularSpeed);
+
+                    float negativeInfluence = ang.Length() - reducedAng;
+                    totalNegativeInfluence += negativeInfluence;
+                }
+            }
+
+            return totalNegativeInfluence;
+        }
+
+        public float GetReducedAngularSpeed()
+        {
+            var grid = MyAPIGateway.Session.LocalHumanPlayer?.Controller?.ControlledEntity?.Entity as IMyCubeGrid;
+            if (grid != null && grid.Physics != null)
+            {
+                Vector3 ang = grid.Physics.AngularVelocity;
+                if (ang.LengthSquared() > (cfg.Value.MinAngularSpeed * cfg.Value.MinAngularSpeed))
+                {
+                    var angMassReduction = 1 + ((grid.Physics.Mass - cfg.Value.LargeGrid_MinMass) / (cfg.Value.LargeGrid_MaxMass - cfg.Value.LargeGrid_MinMass)) * (cfg.Value.GlobalMinAngularSpeed - 1);
+                    var angSpeedReduction = 1 + ((grid.Physics.LinearVelocity.Length() - cfg.Value.LargeGrid_MinCruise) / (cfg.Value.LargeGrid_MaxCruise - cfg.Value.LargeGrid_MinCruise) * (cfg.Value.LargeGrid_AngularCruiseMult - 1));
+                    float reducedAng = MathHelper.Clamp(cfg.Value.MaxAngularSpeed * angMassReduction * angSpeedReduction, cfg.Value.MinAngularSpeed, cfg.Value.MaxAngularSpeed);
+                    return reducedAng;
+                }
+            }
+
+            return 0f;
+        }
 
         #region Communications
 
