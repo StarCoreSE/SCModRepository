@@ -23,8 +23,8 @@ public class RtsApiBackend
             ["GetBoost"] = new Func<IMyCubeGrid, float[]>(RTS.GetBoost),
             ["GetAcceleration"] = new Func<IMyCubeGrid, float[]>(RTS.GetAcceleration),
             ["GetAccelerationByDirection"] = new Func<IMyCubeGrid, float[]>(RTS.GetAccelerationsByDirection),
-            ["GetNegativeInfluence"] = new Func<float>(RTS.GetNegativeInfluence),
-            ["GetReducedAngularSpeed"] = new Func<float>(RTS.GetReducedAngularSpeed)
+            ["GetNegativeInfluence"] = new Func<IMyCubeGrid, float>(RTS.GetNegativeInfluence),
+            ["GetReducedAngularSpeed"] = new Func<IMyCubeGrid, float>(RTS.GetReducedAngularSpeed)
         };
 
         MyAPIGateway.Utilities.RegisterMessageHandler(ChannelId, OnMessageRecieved);

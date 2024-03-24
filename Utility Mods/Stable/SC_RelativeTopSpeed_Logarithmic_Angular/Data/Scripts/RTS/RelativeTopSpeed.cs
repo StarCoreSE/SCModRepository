@@ -533,11 +533,9 @@ namespace RelativeTopSpeedGV
 
         public float GetBoostSpeed(float mass, bool isLargeGrid) => cfg.Value.GetBoostSpeed(mass, isLargeGrid);
 
-        public float GetNegativeInfluence()
+        public float GetNegativeInfluence(IMyCubeGrid grid)
         {
-            float totalNegativeInfluence = 0f;
-
-            foreach (MyCubeGrid grid in ActiveGrids)
+            if (grid != null && grid.Physics != null)
             {
                 Vector3 ang = grid.Physics.AngularVelocity;
                 if (ang.LengthSquared() > (cfg.Value.MinAngularSpeed * cfg.Value.MinAngularSpeed))
@@ -545,18 +543,15 @@ namespace RelativeTopSpeedGV
                     var angMassReduction = 1 + ((grid.Physics.Mass - cfg.Value.LargeGrid_MinMass) / (cfg.Value.LargeGrid_MaxMass - cfg.Value.LargeGrid_MinMass)) * (cfg.Value.GlobalMinAngularSpeed - 1);
                     var angSpeedReduction = 1 + ((grid.Physics.LinearVelocity.Length() - cfg.Value.LargeGrid_MinCruise) / (cfg.Value.LargeGrid_MaxCruise - cfg.Value.LargeGrid_MinCruise) * (cfg.Value.LargeGrid_AngularCruiseMult - 1));
                     float reducedAng = MathHelper.Clamp(cfg.Value.MaxAngularSpeed * angMassReduction * angSpeedReduction, cfg.Value.MinAngularSpeed, cfg.Value.MaxAngularSpeed);
-
                     float negativeInfluence = ang.Length() - reducedAng;
-                    totalNegativeInfluence += negativeInfluence;
+                    return negativeInfluence;
                 }
             }
-
-            return totalNegativeInfluence;
+            return 0f;
         }
 
-        public float GetReducedAngularSpeed()
+        public float GetReducedAngularSpeed(IMyCubeGrid grid)
         {
-            var grid = MyAPIGateway.Session.LocalHumanPlayer?.Controller?.ControlledEntity?.Entity as IMyCubeGrid;
             if (grid != null && grid.Physics != null)
             {
                 Vector3 ang = grid.Physics.AngularVelocity;
@@ -568,7 +563,6 @@ namespace RelativeTopSpeedGV
                     return reducedAng;
                 }
             }
-
             return 0f;
         }
 
