@@ -63,8 +63,10 @@ namespace RelativeTopSpeedGV
 			SmallGrid_AngularCruiseMult = 0.25f,
 			LargeGrid_AngularMassMult = 0.01f,
 			LargeGrid_AngularCruiseMult = 0.25f,
-			GlobalMinAngularSpeed = 0.001f,
-		};
+            GlobalMinAngularSpeed = 0.001f,
+            MaxAngularSpeed = 5f,
+            MinAngularSpeed = 0.01f
+        };
 
         [ProtoMember(1)]
         public bool EnableBoosting { get; set; }
@@ -197,6 +199,12 @@ namespace RelativeTopSpeedGV
 
         [ProtoMember(44)]
         public float GlobalMinAngularSpeed { get; set; }
+
+        [ProtoMember(45)]
+        public float MaxAngularSpeed { get; set; }
+
+        [ProtoMember(46)]
+        public float MinAngularSpeed { get; set; }
 
         // flipped the min and max cruise
         public float GetCruiseSpeed(float mass, float minMass, float midMass, float maxMass, float maxCruise, float midCruise, float minCruise) 
@@ -428,6 +436,15 @@ namespace RelativeTopSpeedGV
             else if (s.LargeGrid_MidMass > s.LargeGrid_MaxMass)
             {
                 s.LargeGrid_MidMass = s.LargeGrid_MaxMass;
+            }
+            if (s.MaxAngularSpeed < s.MinAngularSpeed)
+            {
+                s.MaxAngularSpeed = s.MinAngularSpeed;
+            }
+
+            if (s.MinAngularSpeed < 0)
+            {
+                s.MinAngularSpeed = 0;
             }
 
             #endregion
