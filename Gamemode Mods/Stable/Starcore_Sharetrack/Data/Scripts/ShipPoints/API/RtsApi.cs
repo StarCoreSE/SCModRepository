@@ -75,19 +75,19 @@ namespace RelativeTopSpeed
         }
 
         /// <summary>
-        /// returns the cruising speed of the grid.
+        /// Returns the cruising speed of the grid.
         /// </summary>
         public float GetCruiseSpeed(IMyCubeGrid grid) => _GetCruiseSpeed.Invoke(grid);
         private Func<IMyCubeGrid, float> _GetCruiseSpeed;
 
         /// <summary>
-        /// gets the maximum possible speed (cruise speed + max boost)
+        /// Gets the maximum possible speed (cruise speed + max boost)
         /// </summary>
         public float GetMaxSpeed(IMyCubeGrid grid) => _GetMaxSpeed.Invoke(grid);
         private Func<IMyCubeGrid, float> _GetMaxSpeed;
 
         /// <summary>
-        /// returns 4 values: forward boost, min, average, max
+        /// Returns 4 values: forward boost, min, average, max
         /// </summary>
         public float[] GetBoost(IMyCubeGrid grid) => _GetBoost.Invoke(grid);
         private Func<IMyCubeGrid, float[]> _GetBoost;
