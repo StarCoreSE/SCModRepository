@@ -26,15 +26,15 @@ namespace RelativeTopSpeedGV
 
 
         //temporary 
-        
-       // public const float MaxSpeedAngMult = 0.25f;
-       // public const float MaxMass = 5000000f;
-       // public const float MinMass = 1f;
-       // public const float MaxSpeed = 100f;
-       // public const float MinSpeed = 1f;
+
+        // public const float MaxSpeedAngMult = 0.25f;
+        // public const float MaxMass = 5000000f;
+        // public const float MinMass = 1f;
+        // public const float MaxSpeed = 100f;
+        // public const float MinSpeed = 1f;
         public const float MaxAng = 5f;
         public const float MinAng = 0.01f;
-        public const float MaxMassAngMult = 0.1f;
+        //public const float MaxMassAngMult = 0.1f;
 
 
 
@@ -236,66 +236,95 @@ namespace RelativeTopSpeedGV
             {
                 parallelTask.Start(() =>
                 {
-                    for (int i = 0; i < PassiveGrids.Count; i++)
+                    var gridsToAdd = new ConcurrentBag<MyCubeGrid>();
+                    var gridsToRemove = new ConcurrentBag<MyCubeGrid>();
+
+                    foreach (var grid in PassiveGrids)
                     {
-                        MyCubeGrid grid = PassiveGrids[i];
                         if (!HasActivationBlock(grid))
                         {
                             continue;
                         }
                         if (IsMoving(grid))
                         {
-                            if (!ActiveGrids.Contains(grid))
-                            {
-                                ActiveGrids.Add(grid);
-                            }
-                            PassiveGrids.Remove(grid);
-                            i--;
+                            gridsToAdd.Add(grid);
+                            gridsToRemove.Add(grid);
                         }
+                    }
+
+                    foreach (var grid in gridsToAdd)
+                    {
+                        ActiveGrids.Add(grid);
+                    }
+                    foreach (var grid in gridsToRemove)
+                    {
+                        PassiveGrids.Remove(grid);
                     }
                 });
 
                 parallelTask.Start(() =>
                 {
-                    for (int i = 0; i < ActiveGrids.Count; i++)
+                    var gridsToAdd = new ConcurrentBag<MyCubeGrid>();
+                    var gridsToRemove = new ConcurrentBag<MyCubeGrid>();
+
+                    foreach (var grid in ActiveGrids)
                     {
-                        MyCubeGrid grid = ActiveGrids[i];
                         if (!IsMoving(grid) || !HasActivationBlock(grid))
                         {
-                            if (!PassiveGrids.Contains(grid))
-                            {
-                                PassiveGrids.Add(grid);
-                            }
-                            ActiveGrids.Remove(grid);
-                            i--;
+                            gridsToAdd.Add(grid);
+                            gridsToRemove.Add(grid);
                         }
+                    }
+
+                    foreach (var grid in gridsToAdd)
+                    {
+                        PassiveGrids.Add(grid);
+                    }
+                    foreach (var grid in gridsToRemove)
+                    {
+                        ActiveGrids.Remove(grid);
                     }
                 });
 
                 parallelTask.Start(() =>
                 {
-                    foreach (long key in AccelForces.Keys)
+                    var keysToRemove = new ConcurrentBag<long>();
+
+                    foreach (var key in AccelForces.Keys)
                     {
                         try
                         {
                             Vector3 value;
-                            AccelForces.TryGetValue(key, out value);
-                            if (value == Vector3.Zero)
+                            if (AccelForces.TryGetValue(key, out value) && value == Vector3.Zero)
                             {
-                                AccelForces.TryRemove(key, out value);
+                                keysToRemove.Add(key);
                             }
                         }
                         catch { }
+                    }
+
+                    foreach (var key in keysToRemove)
+                    {
+                        Vector3 value;
+                        AccelForces.TryRemove(key, out value);
                     }
                 });
 
                 waitInterval = 60;
             }
 
-            parallelTask.ForEach(ActiveGrids, (grid) =>
+            try
             {
-                UpdateGrid(ActiveGrids.IndexOf(grid));
-            });
+                parallelTask.ForEach(ActiveGrids.ToArray(), (grid) =>
+                {
+                    UpdateGrid(grid);
+                });
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it appropriately
+                MyLog.Default.WriteLineAndConsole($"Error in UpdateGrid: {ex.Message}");
+            }
 
             if (!MyAPIGateway.Utilities.IsDedicated)
             {
@@ -310,7 +339,7 @@ namespace RelativeTopSpeedGV
                         float cruiseSpeed = GetCruiseSpeed(mass, grid.GridSizeEnum == MyCubeSize.Large);
                         float boost = GetBoost(grid)[3];
                         float resistance = (grid.GridSizeEnum == MyCubeSize.Large) ? cfg.Value.LargeGrid_ResistanceMultiplier : cfg.Value.SmallGrid_ResistanceMultiplyer;
-                        MyAPIGateway.Utilities.ShowNotification($"Mass: {mass:n0}   Cruise: {cruiseSpeed.ToString("n2")}   Max Boost: {(boost).ToString("n2")}", 1);
+                        MyAPIGateway.Utilities.ShowNotification($"Mass: {mass.ToString("n0")}   Cruise: {cruiseSpeed.ToString("n2")}   Max Boost: {(boost).ToString("n2")}", 1);
                     }
                 }
 
@@ -322,9 +351,9 @@ namespace RelativeTopSpeedGV
 
             waitInterval--;
         }
-        private void UpdateGrid(int index)
+
+        private void UpdateGrid(MyCubeGrid grid)
         {
-            MyCubeGrid grid = ActiveGrids[index];
             float speed = Math.Abs(grid.Physics.Speed);
             bool isLargeGrid = grid.GridSizeEnum == MyCubeSize.Large;
             float minSpeed = (isLargeGrid) ? cfg.Value.LargeGrid_MinCruise : cfg.Value.SmallGrid_MinCruise;
@@ -380,7 +409,7 @@ namespace RelativeTopSpeedGV
 
                 if (ang.LengthSquared() > (MinAng * MinAng))
                 {
-                    var angMassReduction = 1 + ((mass - cfg.Value.LargeGrid_MinMass) / (cfg.Value.LargeGrid_MaxMass - cfg.Value.LargeGrid_MinMass)) * (MaxMassAngMult - 1);
+                    var angMassReduction = 1 + ((mass - cfg.Value.LargeGrid_MinMass) / (cfg.Value.LargeGrid_MaxMass - cfg.Value.LargeGrid_MinMass)) * (cfg.Value.GlobalMinAngularSpeed - 1);
                     var angSpeedReduction = 1 + ((speed - cfg.Value.LargeGrid_MinCruise) / (cfg.Value.LargeGrid_MaxCruise - cfg.Value.LargeGrid_MinCruise) * (cfg.Value.LargeGrid_AngularCruiseMult - 1));
                     float reducedAng = MathHelper.Clamp(MaxAng * angMassReduction * angSpeedReduction, MinAng, MaxAng);
 
