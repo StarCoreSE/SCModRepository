@@ -151,7 +151,7 @@ namespace Invalid.BlinkDrive
 
             // Check from all corners to limit fuckery
             List<IHitInfo> hitInfos = new List<IHitInfo>();
-            Vector3D forward = Block.CubeGrid.WorldMatrix.Forward * JumpDistance;
+            Vector3D forward = Block.WorldMatrix.Forward * JumpDistance;
 
             // Check for blocker plates (??)
 
@@ -160,9 +160,10 @@ namespace Invalid.BlinkDrive
             //MyAPIGateway.Utilities.ShowNotification("FUCK " + hitInfos.Count, font: "Red");
 
             IMyEntity topGridParent = Block.CubeGrid.GetTopMostParent(typeof(MyCubeGrid));
+            BoundingBoxD gridWorldAABB = Block.CubeGrid.LocalAABB;
             for (int i = 0; i < 8; i++)
             {
-                Vector3D corner = Block.CubeGrid.WorldAABB.GetCorner(i);
+                Vector3D corner = Vector3D.Transform(gridWorldAABB.GetCorner(i), Block.CubeGrid.WorldMatrix);
                 MyAPIGateway.Physics.CastRay(corner, corner + forward, hitInfos, CollisionLayers.DefaultCollisionLayer);
 
                 if (hitInfos.Count > 0 && (hitInfos.Count > 1 || hitInfos[0].HitEntity.GetTopMostParent(typeof(MyCubeGrid)) != topGridParent))
