@@ -21,6 +21,10 @@ namespace SCModRepository.Utility_Mods.Stable._Modular_Assembly_Mods_.MoA_Fusion
         public List<IMyReactor> Reactors = new List<IMyReactor>();
         public int PhysicalAssemblyId = -1;
 
+        public float PowerGeneration = 0;
+        public float PowerCapacity = 0;
+        public float StoredPower = 0;
+
         public S_FusionSystem(int physicalAssemblyId)
         {
             PhysicalAssemblyId = physicalAssemblyId;
@@ -33,9 +37,8 @@ namespace SCModRepository.Utility_Mods.Stable._Modular_Assembly_Mods_.MoA_Fusion
             {
                 case "Caster_Accelerator_0":
                 case "Caster_Accelerator_90":
-                    MyEntity basePart = ModularAPI.GetBasePart(PhysicalAssemblyId);
-                    S_FusionArm newArm = new S_FusionArm();
-                    if (newArm.PerformScan((MyEntity) newPart, null, "Caster_Feeder"))
+                    S_FusionArm newArm = new S_FusionArm((MyEntity) newPart, "Caster_Feeder");
+                    if (newArm.IsValid)
                         Arms.Add(newArm);
                     break;
             }
@@ -53,7 +56,7 @@ namespace SCModRepository.Utility_Mods.Stable._Modular_Assembly_Mods_.MoA_Fusion
 
             foreach (var arm in Arms)
             {
-                if (arm.Contains((MyEntity) part))
+                if (arm.Parts.Contains(part))
                 {
                     Arms.Remove(arm);
                     UpdatePower();
@@ -62,35 +65,40 @@ namespace SCModRepository.Utility_Mods.Stable._Modular_Assembly_Mods_.MoA_Fusion
             }
         }
 
-        private int GetTotalArmBlocks(int PhysicalAssemblyId)
+        private void UpdatePower()
         {
-            int total = 0;
+            PowerGeneration = 0;
+            PowerCapacity = 0;
 
             foreach (var arm in Arms)
             {
-                total += arm.StraightParts.Count;
-                total += arm.CornerParts.Count;
+                PowerGeneration += arm.PowerGeneration;
+                PowerCapacity += arm.PowerStorage;
             }
 
-            return total;
+            //IMyReactor basePart = (IMyReactor) ModularAPI.GetBasePart(PhysicalAssemblyId);
+            //
+            //float desiredPower = Arms.Count * GetTotalArmBlocks();
+            //
+            //float actualPower = desiredPower;
+            //
+            //foreach (var thrust in Thrusters)
+            //{
+            //    SyncMultipliers.ThrusterOutput(thrust, desiredPower * 80000);
+            //    actualPower -= desiredPower / 4;
+            //}
+            //
+            //SyncMultipliers.ReactorOutput(basePart, actualPower);
+            //
+            //MyAPIGateway.Utilities.ShowMessage("Fusion Systems", basePart.PowerOutputMultiplier + " | " + actualPower);
         }
 
-        private void UpdatePower()
+        public void UpdateTick()
         {
-            IMyReactor basePart = (IMyReactor)ModularAPI.GetBasePart(PhysicalAssemblyId);
+            StoredPower += PowerGeneration;
 
-            float desiredPower = Arms.Count * GetTotalArmBlocks(PhysicalAssemblyId);
-            float actualPower = desiredPower;
-
-            foreach (var thrust in Thrusters)
-            {
-                SyncMultipliers.ThrusterOutput(thrust, desiredPower * 80000);
-                actualPower -= desiredPower / 4;
-            }
-
-            SyncMultipliers.ReactorOutput(basePart, actualPower);
-
-            MyAPIGateway.Utilities.ShowMessage("Fusion Systems", basePart.PowerOutputMultiplier + " | " + actualPower);
+            if (StoredPower > PowerCapacity)
+                StoredPower = PowerCapacity;
         }
     }
 }

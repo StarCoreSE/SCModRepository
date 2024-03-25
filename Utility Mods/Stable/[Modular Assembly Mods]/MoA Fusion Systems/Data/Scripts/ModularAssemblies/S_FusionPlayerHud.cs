@@ -37,6 +37,8 @@ namespace Scripts.ModularAssemblies
 
         public override void UpdateAfterSimulation()
         {
+            FusionManager.UpdateTick();
+
             if (ModularAPI.IsDebug())
             {
                 MyVisualScriptLogicProvider.SetQuestlog(true, $"Fusion Systems");
@@ -48,8 +50,12 @@ namespace Scripts.ModularAssemblies
 
                     S_FusionSystem system = FusionManager.FusionSystems[assemblyId];
 
-                    MyVisualScriptLogicProvider.AddQuestlogDetail($"[{assemblyId}] Arms: {system.Arms.Count} | Thrust: {system.Thrusters.Count}", false, false);
+                    MyVisualScriptLogicProvider.AddQuestlogDetail($"[{assemblyId}] Power: {Math.Round(system.StoredPower/system.PowerCapacity * 100f)}% ({Math.Round(system.PowerCapacity)} @ {Math.Round(system.PowerGeneration*60, 1)}/s) | Arms: {system.Arms.Count}", false, false);
                 }
+            }
+            else
+            {
+                MyVisualScriptLogicProvider.SetQuestlog(false, $"Fusion Systems");
             }
         }
 

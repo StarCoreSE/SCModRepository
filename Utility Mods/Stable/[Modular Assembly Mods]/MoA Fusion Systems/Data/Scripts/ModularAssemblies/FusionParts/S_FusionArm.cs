@@ -15,54 +15,86 @@ namespace SCModRepository.Utility_Mods.Stable._Modular_Assembly_Mods_.MoA_Fusion
     /// <summary>
     /// Represents a single 'arm' (loop) of fusion accelerators.
     /// </summary>
-    internal class S_FusionArm : List<MyEntity>
+    internal struct S_FusionArm
     {
+        const float LengthEfficiencyModifier = 0.1f;
+        const float BlockPowerGeneration = 0.005f;
+        const float BlockPowerStorage = 1f;
+
         static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
 
-        public List<IMyCubeBlock> StraightParts = new List<IMyCubeBlock>();
-        public List<IMyCubeBlock> CornerParts = new List<IMyCubeBlock>();
-        IMyCubeBlock BaseBlock = null;
+        public readonly bool IsValid;
 
-        public S_FusionArm() { }
+        public float PowerGeneration { get; private set; }
+        public float PowerStorage { get; private set; }
 
-        public void AddPart(MyEntity part)
+        public IMyCubeBlock[] Parts;
+
+        public S_FusionArm(MyEntity newPart, string rootSubtype)
         {
-            switch ((part as IMyCubeBlock)?.BlockDefinition.SubtypeName)
+            List<IMyCubeBlock> parts = new List<IMyCubeBlock>();
+            int stopHits = 0;
+            IsValid = PerformScan(newPart, null, rootSubtype, ref stopHits, ref parts);
+
+            PowerGeneration = 0;
+            PowerStorage = 0;
+
+            if (!IsValid)
             {
-                case "Caster_Accelerator_0":
-                    StraightParts.Add((IMyCubeBlock) part);
-                    break;
-                case "Caster_Accelerator_90":
-                    CornerParts.Add((IMyCubeBlock) part);
-                    break;
+                parts.Clear();
+                Parts = new IMyCubeBlock[0];
+                return;
             }
 
-            if (part is IMyCubeBlock)
-                Add(part);
+            foreach (var part in parts)
+            {
+                switch ((part as IMyCubeBlock)?.BlockDefinition.SubtypeName)
+                {
+                    case "Caster_Accelerator_90":
+                        PowerGeneration += BlockPowerGeneration;
+                        break;
+                    case "Caster_Accelerator_0":
+                        PowerStorage += BlockPowerStorage;
+                        break;
+                }
+            }
+            Parts = parts.ToArray();
+            parts.Clear();
+
+            // Power capacities scale with length.
+            PowerGeneration *= Parts.Length * LengthEfficiencyModifier;
+            PowerStorage *= Parts.Length * LengthEfficiencyModifier;
         }
 
-        int StopHits = 0;
-        public bool PerformScan(MyEntity blockEntity, MyEntity prevScan, string StopAt)
+
+        /// <summary>
+        /// Performs a recursive scan for connected blocks in an arm loop.
+        /// </summary>
+        /// <param name="blockEntity">The block entity to check.</param>
+        /// <param name="prevScan">The block entity to ignore; nullable.</param>
+        /// <param name="stopAtSubtype">Exits the loop at this subtype.</param>
+        /// <returns></returns>
+        static bool PerformScan(MyEntity blockEntity, MyEntity prevScan, string stopAtSubtype, ref int stopHits, ref List<IMyCubeBlock> parts)
         {
             if (ModularAPI.IsDebug())
                 DebugDraw.AddGridPoint(((IMyCubeBlock)blockEntity).Position, ((IMyCubeBlock)blockEntity).CubeGrid, Color.Blue, 2);
-            AddPart(blockEntity);
+            parts.Add((IMyCubeBlock) blockEntity);
 
             MyEntity[] connectedBlocks = ModularAPI.GetConnectedBlocks(blockEntity, false);
 
             foreach (var connectedBlock in connectedBlocks)
             {
                 string connectedSubtype = ((IMyCubeBlock)connectedBlock).BlockDefinition.SubtypeName;
-                if (connectedSubtype == StopAt)
-                    StopHits++;
+                if (connectedSubtype == stopAtSubtype)
+                    stopHits++;
 
-                if (connectedBlock != prevScan && connectedSubtype != StopAt)
+                if (connectedBlock != prevScan && connectedSubtype != stopAtSubtype)
                 {
-                    PerformScan(connectedBlock, blockEntity, StopAt);
+                    PerformScan(connectedBlock, blockEntity, stopAtSubtype, ref stopHits, ref parts);
                 }
             }
 
-            return StopHits == 2;
+            return stopHits == 2;
         }
     }
 }

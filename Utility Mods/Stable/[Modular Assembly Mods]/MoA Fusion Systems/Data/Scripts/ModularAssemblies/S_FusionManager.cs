@@ -22,6 +22,8 @@ namespace Scripts.ModularAssemblies
 
         public static S_FusionManager I = new S_FusionManager();
         public ModularDefinition Definition;
+        public Dictionary<int, S_FusionSystem> FusionSystems = new Dictionary<int, S_FusionSystem>();
+
 
         public void Load()
         {
@@ -33,7 +35,11 @@ namespace Scripts.ModularAssemblies
             I = null;
         }
 
-        public Dictionary<int, S_FusionSystem> FusionSystems = new Dictionary<int, S_FusionSystem>();
+        public void UpdateTick()
+        {
+            foreach (S_FusionSystem fusionSystem in FusionSystems.Values)
+                fusionSystem.UpdateTick();
+        }
 
         public void OnPartAdd(int PhysicalAssemblyId, MyEntity NewBlockEntity, bool IsBaseBlock)
         {
