@@ -1,0 +1,117 @@
+﻿using Sandbox.ModAPI;
+using VRage.Game.Components;
+using VRage.Game.ModAPI;
+using VRage.Game;
+using VRageMath;
+using VRage.Input;
+using System;
+using System.Collections.Generic;
+using CoreSystems.Api;
+using VRage;
+using Modular_Assemblies.Data.Scripts.AssemblyScripts; // Make sure this namespace matches with AssemblyDefinition's namespace
+
+[MySessionComponentDescriptor(MyUpdateOrder.BeforeSimulation)]
+public class IncreaseTurretDamageScript : MySessionComponentBase
+{
+    private WcApi _wcApi;
+    private const int TimeBetweenToggles = 100; // 100 ticks between each toggle
+    private int lastToggleTry = 0;
+    private bool isDamageIncreased = false;
+    private DateTime lastDamagePrintTime;
+    private DateTime damageEndTime;
+    private List<ulong> projectileIds = new List<ulong>();
+
+    public override void LoadData()
+    {
+        _wcApi = new WcApi();
+        _wcApi.Load();
+    }
+
+    protected override void UnloadData()
+    {
+        _wcApi.Unload();
+    }
+
+    public override void UpdateBeforeSimulation()
+    {
+        base.UpdateBeforeSimulation();
+
+        if (!_wcApi.IsReady) return;
+
+        if (!MyAPIGateway.Utilities.IsDedicated && MyAPIGateway.Session?.Player?.Character != null)
+        {
+            if (MyAPIGateway.Gui.GetCurrentScreen == MyTerminalPageEnum.None &&
+                MyAPIGateway.Input.IsNewKeyPressed(MyKeys.R))
+            {
+                if (lastToggleTry > TimeBetweenToggles)
+                {
+                    if (!isDamageIncreased)
+                    {
+                        IncreaseTurretDamage();
+                    }
+                    else
+                    {
+                        RevertTurretDamage();
+                    }
+                    lastToggleTry = 0;
+                }
+            }
+
+            if (isDamageIncreased && (DateTime.UtcNow >= damageEndTime))
+            {
+                RevertTurretDamage();
+            }
+
+            if (DateTime.UtcNow >= lastDamagePrintTime.AddSeconds(1))
+            {
+                PrintCurrentDamage();
+                lastDamagePrintTime = DateTime.UtcNow;
+            }
+
+            lastToggleTry++;
+        }
+    }
+
+    private void IncreaseTurretDamage()
+    {
+        MyAPIGateway.Utilities.ShowNotification("Attempting to increase turret damage...", 2000);
+        // Fetch projectiles, increase damage, and update state
+        foreach (var projId in projectileIds)
+        {
+            // Increase damage using the ChangeProjectileData method
+            var projectileState = _wcApi.GetProjectileState(projId);
+            var newDamage = projectileState.Item4 * 2; // Example: doubling the damage
+            ModularDefinition.ChangeProjectileData(0, 0, projId, 0, projectileState.Item2);  // Assuming default values for entity and part IDs
+        }
+        MyAPIGateway.Utilities.ShowNotification($"Turret damage increased for {projectileIds.Count} projectiles", 5000, "Green");
+
+        isDamageIncreased = true;
+        damageEndTime = DateTime.UtcNow.AddSeconds(10);
+    }
+
+    private void RevertTurretDamage()
+    {
+        MyAPIGateway.Utilities.ShowNotification("Reverting turret damage...", 2000);
+        // Fetch projectiles, revert damage, and update state
+        foreach (var projId in projectileIds)
+        {
+            // Revert damage using the ChangeProjectileData method
+            var projectileState = _wcApi.GetProjectileState(projId);
+            var originalDamage = projectileState.Item4 / 2; // Example: reverting the doubled damage
+            ModularDefinition.ChangeProjectileData(0, 0, projId, 0, projectileState.Item2);  // Assuming default values for entity and part IDs
+        }
+        MyAPIGateway.Utilities.ShowNotification("Turret damage reverted", 5000);
+
+        isDamageIncreased = false;
+    }
+
+    private void PrintCurrentDamage()
+    {
+        if (isDamageIncreased && projectileIds.Count > 0)
+        {
+            var projectileState = _wcApi.GetProjectileState(projectileIds[0]);
+            var currentDamage = projectileState.Item4;
+            MyAPIGateway.Utilities.ShowNotification($"Current Damage: {currentDamage}", 1000, "White");
+        }
+    }
+}
