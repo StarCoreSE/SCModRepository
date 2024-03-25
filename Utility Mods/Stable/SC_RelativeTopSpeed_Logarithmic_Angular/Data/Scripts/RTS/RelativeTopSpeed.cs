@@ -396,7 +396,7 @@ namespace RelativeTopSpeedGV
 
                 if (ang.LengthSquared() > (cfg.Value.MinAngularSpeed * cfg.Value.MinAngularSpeed))
                 {
-                    var angMassReduction = 1 + ((mass - cfg.Value.LargeGrid_MinMass) / (cfg.Value.LargeGrid_MaxMass - cfg.Value.LargeGrid_MinMass)) * (cfg.Value.GlobalMinAngularSpeed - 1);
+                    var angMassReduction = 1 + ((mass - cfg.Value.LargeGrid_MinMass) / (cfg.Value.LargeGrid_MaxMass - cfg.Value.LargeGrid_MinMass)) * (cfg.Value.LargeGrid_AngularMassMult - 1);
                     var angSpeedReduction = 1 + ((speed - cfg.Value.LargeGrid_MinCruise) / (cfg.Value.LargeGrid_MaxCruise - cfg.Value.LargeGrid_MinCruise) * (cfg.Value.LargeGrid_AngularCruiseMult - 1));
                     float reducedAng = MathHelper.Clamp(cfg.Value.MaxAngularSpeed * angMassReduction * angSpeedReduction, cfg.Value.MinAngularSpeed, cfg.Value.MaxAngularSpeed);
 
@@ -540,7 +540,7 @@ namespace RelativeTopSpeedGV
                 Vector3 ang = grid.Physics.AngularVelocity;
                 if (ang.LengthSquared() > (cfg.Value.MinAngularSpeed * cfg.Value.MinAngularSpeed))
                 {
-                    var angMassReduction = 1 + ((grid.Physics.Mass - cfg.Value.LargeGrid_MinMass) / (cfg.Value.LargeGrid_MaxMass - cfg.Value.LargeGrid_MinMass)) * (cfg.Value.GlobalMinAngularSpeed - 1);
+                    var angMassReduction = 1 + ((grid.Physics.Mass - cfg.Value.LargeGrid_MinMass) / (cfg.Value.LargeGrid_MaxMass - cfg.Value.LargeGrid_MinMass)) * (cfg.Value.LargeGrid_AngularMassMult - 1);
                     var angSpeedReduction = 1 + ((grid.Physics.LinearVelocity.Length() - cfg.Value.LargeGrid_MinCruise) / (cfg.Value.LargeGrid_MaxCruise - cfg.Value.LargeGrid_MinCruise) * (cfg.Value.LargeGrid_AngularCruiseMult - 1));
                     float reducedAng = MathHelper.Clamp(cfg.Value.MaxAngularSpeed * angMassReduction * angSpeedReduction, cfg.Value.MinAngularSpeed, cfg.Value.MaxAngularSpeed);
                     float negativeInfluence = ang.Length() - reducedAng;
@@ -557,7 +557,7 @@ namespace RelativeTopSpeedGV
                 Vector3 ang = grid.Physics.AngularVelocity;
                 if (ang.LengthSquared() > (cfg.Value.MinAngularSpeed * cfg.Value.MinAngularSpeed))
                 {
-                    var angMassReduction = 1 + ((grid.Physics.Mass - cfg.Value.LargeGrid_MinMass) / (cfg.Value.LargeGrid_MaxMass - cfg.Value.LargeGrid_MinMass)) * (cfg.Value.GlobalMinAngularSpeed - 1);
+                    var angMassReduction = 1 + ((grid.Physics.Mass - cfg.Value.LargeGrid_MinMass) / (cfg.Value.LargeGrid_MaxMass - cfg.Value.LargeGrid_MinMass)) * (cfg.Value.LargeGrid_AngularMassMult - 1);
                     var angSpeedReduction = 1 + ((grid.Physics.LinearVelocity.Length() - cfg.Value.LargeGrid_MinCruise) / (cfg.Value.LargeGrid_MaxCruise - cfg.Value.LargeGrid_MinCruise) * (cfg.Value.LargeGrid_AngularCruiseMult - 1));
                     float reducedAng = MathHelper.Clamp(cfg.Value.MaxAngularSpeed * angMassReduction * angSpeedReduction, cfg.Value.MinAngularSpeed, cfg.Value.MaxAngularSpeed);
                     return reducedAng;
