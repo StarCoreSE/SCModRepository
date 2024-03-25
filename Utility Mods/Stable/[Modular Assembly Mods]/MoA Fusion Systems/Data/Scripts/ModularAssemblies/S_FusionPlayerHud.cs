@@ -1,4 +1,5 @@
 ﻿using Sandbox.Game;
+using SCModRepository.Utility_Mods.Stable._Modular_Assembly_Mods_.MoA_Fusion_Systems.Data.Scripts.ModularAssemblies;
 using Scripts.ModularAssemblies.Communication;
 using System;
 using System.Collections.Generic;
@@ -42,10 +43,12 @@ namespace Scripts.ModularAssemblies
 
                 foreach (var assemblyId in ModularAPI.GetAllAssemblies())
                 {
-                    if (!FusionManager.Example_ValidArms.ContainsKey(assemblyId))
+                    if (!FusionManager.FusionSystems.ContainsKey(assemblyId))
                         continue;
 
-                    MyVisualScriptLogicProvider.AddQuestlogDetail($"[{assemblyId}] Arms: {FusionManager.Example_ValidArms[assemblyId].Count}", false, false);
+                    S_FusionSystem system = FusionManager.FusionSystems[assemblyId];
+
+                    MyVisualScriptLogicProvider.AddQuestlogDetail($"[{assemblyId}] Arms: {system.Arms.Count} | Thrust: {system.Thrusters.Count}", false, false);
                 }
             }
         }
