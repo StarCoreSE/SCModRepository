@@ -1,4 +1,5 @@
-﻿using Sandbox.ModAPI;
+﻿using Modular_Assemblies.Data.Scripts.AssemblyScripts.Definitions;
+using Sandbox.ModAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
     {
         public static Assemblies_SessionInit I;
         AssemblyPartManager AssemblyPartManager = new AssemblyPartManager();
+        DefinitionHandler DefinitionHandler = new DefinitionHandler();
         public bool DebugMode = false;
 
         #region Base Methods
@@ -22,15 +24,16 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
         {
             I = this;
 
+            AssemblyPartManager.Init();
+            DefinitionHandler.Init();
+
             if (!MyAPIGateway.Multiplayer.MultiplayerActive)
             {
-                MyAPIGateway.Utilities.ShowMessage("Modular Assemblies", "Run !mwHelp for commands");
+                MyAPIGateway.Utilities.ShowMessage("Modular Assemblies", $"Run !mwHelp for commands. | {DefinitionHandler.I.ModularDefinitions.Count} definitions loaded.");
                 MyAPIGateway.Utilities.MessageEnteredSender += ChatCommandHandler;
             }
             else
-                MyAPIGateway.Utilities.ShowMessage("Modular Assemblies", "Commands disabled, load into a singleplayer world for testing.");
-
-            AssemblyPartManager.Init();
+                MyAPIGateway.Utilities.ShowMessage("Modular Assemblies", $"Commands disabled, load into a singleplayer world for testing. | {DefinitionHandler.I.ModularDefinitions.Count} definitions loaded.");
         }
 
         public override void UpdateAfterSimulation()
@@ -57,6 +60,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
             }
 
             AssemblyPartManager.Unload();
+            DefinitionHandler.Unload();
 
             I = null;
             MyLog.Default.WriteLineAndConsole("Modular Assemblies: Finished unloading.");

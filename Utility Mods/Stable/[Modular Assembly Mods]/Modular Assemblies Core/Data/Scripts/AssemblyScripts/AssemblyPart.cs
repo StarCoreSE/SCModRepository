@@ -32,17 +32,17 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
 
             //MyAPIGateway.Utilities.ShowNotification("Placed valid AssemblyPart");
 
-            if (AssemblyPartManager.Instance.AllAssemblyParts.ContainsKey(block))
+            if (AssemblyPartManager.I.AllAssemblyParts.ContainsKey(block))
                 return;
 
-            AssemblyPartManager.Instance.AllAssemblyParts.Add(block, this);
+            AssemblyPartManager.I.AllAssemblyParts.Add(block, this);
 
             if (AssemblyDefinition.BaseBlockSubtype == block.BlockDefinition.Id.SubtypeName)
             {
-                memberAssembly = new PhysicalAssembly(AssemblyPartManager.Instance.CreatedPhysicalAssemblies, this, AssemblyDefinition);
+                memberAssembly = new PhysicalAssembly(AssemblyPartManager.I.CreatedPhysicalAssemblies, this, AssemblyDefinition);
             }
             else
-                AssemblyPartManager.Instance.QueueConnectionCheck(this);
+                AssemblyPartManager.I.QueueConnectionCheck(this);
         }
 
         public int prevAssemblyId = -1;
@@ -78,7 +78,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
 
                 if (nBlockPart.memberAssembly == null)
                 {
-                    AssemblyPartManager.Instance.QueueConnectionCheck(nBlockPart);
+                    AssemblyPartManager.I.QueueConnectionCheck(nBlockPart);
                     //MyAPIGateway.Utilities.ShowNotification("Forced a assembly join");
                 }
                 //else if (nBlockPart.memberAssembly != memberAssembly)
@@ -87,7 +87,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
                     nBlockPart.connectedParts.Add(this);
             }
 
-            if (AssemblyPartManager.Instance.DebugMode)
+            if (Assemblies_SessionInit.I.DebugMode)
                 MyAPIGateway.Utilities.ShowNotification("Connected: " + connectedParts.Count + " | Failed: " + (GetValidNeighbors().Count - connectedParts.Count));
         }
 
@@ -111,7 +111,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
                 validNeighbors.RemoveAll(nBlock =>
                 {
                     AssemblyPart part;
-                    if (!AssemblyPartManager.Instance.AllAssemblyParts.TryGetValue(nBlock, out part))
+                    if (!AssemblyPartManager.I.AllAssemblyParts.TryGetValue(nBlock, out part))
                         return true;
                     return part.memberAssembly != this.memberAssembly;
                 });
@@ -129,7 +129,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
             foreach (var nBlock in GetValidNeighbors())
             {
                 AssemblyPart nBlockPart;
-                if (AssemblyPartManager.Instance.AllAssemblyParts.TryGetValue(nBlock, out nBlockPart))
+                if (AssemblyPartManager.I.AllAssemblyParts.TryGetValue(nBlock, out nBlockPart))
                 {
                     validNeighbors.Add(nBlockPart);
                 }

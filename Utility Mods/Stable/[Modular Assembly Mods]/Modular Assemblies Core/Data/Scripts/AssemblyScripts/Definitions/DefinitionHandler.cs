@@ -11,42 +11,43 @@ using static Modular_Assemblies.Data.Scripts.AssemblyScripts.Definitions.Definit
 
 namespace Modular_Assemblies.Data.Scripts.AssemblyScripts.Definitions
 {
-    [MySessionComponentDescriptor(MyUpdateOrder.BeforeSimulation | MyUpdateOrder.AfterSimulation | MyUpdateOrder.Simulation)]
-    internal class DefinitionHandler : MySessionComponentBase
+    /// <summary>
+    /// Handles all communication about definitions.
+    /// </summary>
+    internal class DefinitionHandler
     {
-        public static DefinitionHandler Instance;
+        public static DefinitionHandler I;
         const int DefinitionMessageId = 8772;
         const int InboundMessageId = 8773;
         const int OutboundMessageId = 8771;
 
         public List<ModularDefinition> ModularDefinitions = new List<ModularDefinition>();
 
-        public override void LoadData()
+        public void Init()
         {
-            Instance = this;
+            I = this;
 
             if (!MyAPIGateway.Session.IsServer)
                 return;
 
             MyLog.Default.WriteLineAndConsole("Modular Assemblies: DefinitionHandler loading...");
 
-            MyLog.Default.WriteLineAndConsole("ModularAssemblies: Init DefinitionHandler.cs");
             MyAPIGateway.Utilities.RegisterMessageHandler(DefinitionMessageId, DefMessageHandler);
             MyAPIGateway.Utilities.RegisterMessageHandler(InboundMessageId, ActionMessageHandler);
             MyAPIGateway.Utilities.SendModMessage(OutboundMessageId, true);
 
             MyAPIGateway.Session.OnSessionReady += CheckValidDefinitions;
+            MyLog.Default.WriteLineAndConsole("Modular Assemblies: Init DefinitionHandler.cs");
         }
 
-        protected override void UnloadData()
+        public void Unload()
         {
-            Instance = null;
+            I = null;
             if (!MyAPIGateway.Session.IsServer)
                 return;
 
             MyLog.Default.WriteLineAndConsole("Modular Assemblies: DefinitionHandler closing...");
 
-            base.UnloadData();
             MyAPIGateway.Utilities.UnregisterMessageHandler(DefinitionMessageId, DefMessageHandler);
             MyAPIGateway.Utilities.UnregisterMessageHandler(InboundMessageId, ActionMessageHandler);
         }
@@ -114,7 +115,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts.Definitions
                 {
                     //MyLog.Default.WriteLineAndConsole($"ModularAssemblies: Recieved action of type {functionCall.ActionId}.");
 
-                    PhysicalAssembly wep = AssemblyPartManager.Instance.AllPhysicalAssemblies[functionCall.PhysicalAssemblyId];
+                    PhysicalAssembly wep = AssemblyPartManager.I.AllPhysicalAssemblies[functionCall.PhysicalAssemblyId];
                     if (wep == null)
                     {
                         MyLog.Default.WriteLineAndConsole($"ModularAssemblies: Invalid PhysicalAssembly!");

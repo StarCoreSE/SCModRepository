@@ -1,5 +1,6 @@
 ﻿using Modular_Assemblies.Data.Scripts.AssemblyScripts.Definitions;
 using Sandbox.ModAPI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using VRage.Game.Components;
@@ -14,7 +15,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
     /// </summary>
     public class AssemblyPartManager
     {
-        public static AssemblyPartManager Instance;
+        public static AssemblyPartManager I;
 
         /// <summary>
         /// Every single AssemblyPart in the world.
@@ -47,7 +48,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
         {
             MyLog.Default.WriteLineAndConsole("Modular Assemblies: AssemblyPartManager loading...");
 
-            Instance = this;
+            I = this;
 
             // None of this should run on client.
             if (!MyAPIGateway.Multiplayer.IsServer)
@@ -59,7 +60,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
 
         public void Unload()
         {
-            Instance = null; // important for avoiding this object to remain allocated in memory
+            I = null; // important for avoiding this object to remain allocated in memory
 
             // None of this should run on client.
             if (!MyAPIGateway.Multiplayer.IsServer)
@@ -123,12 +124,21 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
 
         private void OnBlockAdd(IMySlimBlock block)
         {
-            foreach (var modularDefinition in DefinitionHandler.Instance.ModularDefinitions)
+            try
             {
-                if (!modularDefinition.IsBlockAllowed(block))
-                    return;
+                foreach (var modularDefinition in DefinitionHandler.I.ModularDefinitions)
+                {
+                    if (!modularDefinition.IsBlockAllowed(block))
+                        return;
 
-                AssemblyPart w = new AssemblyPart(block, modularDefinition);
+                    AssemblyPart w = new AssemblyPart(block, modularDefinition);
+                    // No further init work is needed.
+                    // Not returning because a part can have multiple assemblies.
+                }
+            }
+            catch (Exception e)
+            {
+                MyLog.Default.WriteLineAndConsole("Handled exception in Modular Assemblies.AssemblyPartManager.OnBlockAdd()!\n" + e.ToString());
             }
         }
 
