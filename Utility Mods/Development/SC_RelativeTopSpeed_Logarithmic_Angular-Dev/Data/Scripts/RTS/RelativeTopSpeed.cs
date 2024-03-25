@@ -398,7 +398,12 @@ namespace RelativeTopSpeedGV
                 {
                     var angMassReduction = 1 + ((mass - cfg.Value.LargeGrid_MinMass) / (cfg.Value.LargeGrid_MaxMass - cfg.Value.LargeGrid_MinMass)) * (cfg.Value.LargeGrid_AngularMassMult - 1);
                     var angSpeedReduction = 1 + ((speed - cfg.Value.LargeGrid_MinCruise) / (cfg.Value.LargeGrid_MaxCruise - cfg.Value.LargeGrid_MinCruise) * (cfg.Value.LargeGrid_AngularCruiseMult - 1));
+
+                    // Calculate the initially reduced angular speed
                     float reducedAng = MathHelper.Clamp(cfg.Value.MaxAngularSpeed * angMassReduction * angSpeedReduction, cfg.Value.MinAngularSpeed, cfg.Value.MaxAngularSpeed);
+
+                    // Ensure the reduced angular speed never falls below the GlobalMinAngularSpeed
+                    reducedAng = Math.Max(reducedAng, cfg.Value.GlobalMinAngularSpeed);
 
                     if (ang.Length() > reducedAng)
                     {
