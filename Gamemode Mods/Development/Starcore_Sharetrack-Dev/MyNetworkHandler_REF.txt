@@ -1,0 +1,178 @@
+﻿using klime.PointCheck;
+using Math0424.ShipPoints;
+using Sandbox.Game.Entities;
+using Sandbox.ModAPI;
+using System;
+using System.Collections.Generic;
+using VRage.Game.ModAPI;
+using static Math0424.Networking.MyEasyNetworkManager;
+
+namespace Math0424.Networking
+{
+    class MyNetworkHandler : IDisposable
+    {
+
+        public MyEasyNetworkManager MyNetwork;
+        public static MyNetworkHandler Static;
+		private static List<ulong> all_players = new List<ulong>();
+        private static List<IMyPlayer> listPlayers = new List<IMyPlayer>();
+
+
+        public static void Init()
+        {
+            if (Static == null)
+            {
+                Static = new MyNetworkHandler();
+            }
+        }
+
+        protected MyNetworkHandler()
+        {
+            MyNetwork = new MyEasyNetworkManager(45674);
+            MyNetwork.Register();
+
+            MyNetwork.OnRecievedPacket += PacketIn;
+        }
+
+        private void PacketIn(PacketIn e)
+        {
+			//inject for shared list
+
+                    all_players.Clear();
+                    listPlayers.Clear();
+                    MyAPIGateway.Players.GetPlayers(listPlayers);
+                    foreach (var p in listPlayers)
+                    {
+				    all_players.Add(p.SteamUserId);
+                    }
+			//end		
+
+					
+            if (e.PacketId == 1)
+            {			
+
+
+
+						
+				var packet = e.UnWrap<PacketGridData>();		
+                
+                if (MyAPIGateway.Multiplayer.IsServer)
+                {
+                    var x = MyEntities.GetEntityById(packet.id);
+                    if (x != null && x is IMyCubeGrid)
+                    {
+                        if (packet.value == 1 && MyAPIGateway.Session.IsUserAdmin(e.SenderId)) //add
+                        {
+                            if (PointCheck.Sending.ContainsKey(packet.id))
+                            {
+								
+								
+							foreach (var p in all_players)
+							{							
+                                PointCheck.Sending[packet.id].Remove(p);
+							}
+								
+								
+								
+								
+                            }
+                            else
+                            {
+                                PointCheck.Sending.Add(packet.id, new List<ulong>());
+                            }
+							
+							
+							
+							//Force HUD?
+							//PointCheck.Tracking.Add(packet.id);
+							//PointCheck.Data[packet.id].CreateHud();
+														
+							
+							foreach (var p in all_players)
+							{
+                            PointCheck.Sending[packet.id].Add(p);
+							}
+                        }
+                        else if (packet.value == 2) //remove
+                        {
+                            if (PointCheck.Sending.ContainsKey(packet.id))
+                            {
+								
+								
+							foreach (var p in all_players)
+							{
+                                PointCheck.Sending[packet.id].Remove(p);
+							}
+								
+								if (PointCheck.Sending[packet.id].Count == 0)
+                                {
+                                    PointCheck.Sending.Remove(packet.id);
+
+                                    if (PointCheck.Sending.Count == 0)
+                                    {
+                                        //PointCheck.Data[packet.id].DisposeHud();
+                                        //PointCheck.Data.Remove(packet.id);
+										//PointCheck.Tracking.Remove(packet.id);
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    
+					
+									
+                    if (packet.value == 1 && !PointCheck.Tracking.Contains(packet.id))
+					{
+					PointCheck.Tracking.Add(packet.id);	
+					}
+					else if (packet.value == 2 && PointCheck.Tracking.Contains(packet.id))
+					{
+					PointCheck.Tracking.Remove(packet.id);	
+					}
+
+					packet.tracked.CreateHud();
+                    if (PointCheck.Data.ContainsKey(packet.id))
+                    {
+                        PointCheck.Data[packet.id].DisposeHud();
+                        PointCheck.Data[packet.id] = packet.tracked;
+                    }
+                    else
+                    {
+                        PointCheck.Data.Add(packet.id, packet.tracked);    
+                    }
+                }
+            }
+
+            if (e.PacketId == 5)
+            {
+                if (MyAPIGateway.Session.IsUserAdmin(e.SenderId))
+                {
+                    foreach (var g in MyEntities.GetEntities())
+                    {
+                        if (g != null && !g.MarkedForClose && g is MyCubeGrid)
+                        {
+                            var grid = g as MyCubeGrid;
+                            var block = PointCheck.SH_api.GetShieldBlock(grid);
+                            if (block != null)
+                            {
+                                PointCheck.SH_api.SetCharge(block, 99999999999);
+                            }
+                        }
+                    }
+                    MyAPIGateway.Utilities.ShowMessage("Shields", "Charged");
+                }
+            }
+        }
+
+        public void Dispose()
+        {
+            MyNetwork.UnRegister();
+            MyNetwork = null;
+            Static = null;
+        }
+    }
+}
