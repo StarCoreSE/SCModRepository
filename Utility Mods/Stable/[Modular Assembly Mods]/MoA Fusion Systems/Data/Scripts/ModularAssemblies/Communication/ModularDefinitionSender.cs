@@ -33,6 +33,8 @@ namespace Scripts.ModularAssemblies.Communication
             ModularDefinition.ModularAPI = new ModularDefinitionAPI();
             ModularDefinition.ModularAPI.LoadData();
 
+            // Send message in case this loads after the main mod
+            MyAPIGateway.Utilities.SendModMessage(DefinitionMessageId, Storage);
             MyLog.Default.WriteLineAndConsole($"ModularAssembliesDefinition: Packaged definitions & going to sleep.");
         }
 
@@ -49,6 +51,7 @@ namespace Scripts.ModularAssemblies.Communication
 
         private void InputHandler(object o)
         {
+            MyLog.Default.WriteLineAndConsole("FUCK");
             var message = o as byte[];
 
             if (o is bool && (bool)o)

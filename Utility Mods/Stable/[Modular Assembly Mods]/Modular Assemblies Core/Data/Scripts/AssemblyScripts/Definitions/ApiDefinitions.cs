@@ -28,13 +28,13 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts.Definitions
 
         private bool IsDebug()
         {
-            return AssemblyPartManager.Instance.DebugMode;
+            return Assemblies_SessionInit.I.DebugMode;
         }
 
         private MyEntity[] GetAllParts()
         {
             List<MyEntity> parts = new List<MyEntity>();
-            foreach (var block in AssemblyPartManager.Instance.AllAssemblyParts.Keys)
+            foreach (var block in AssemblyPartManager.I.AllAssemblyParts.Keys)
                 if (block.FatBlock != null)
                     parts.Add((MyEntity)block.FatBlock);
             return parts.ToArray();
@@ -42,13 +42,13 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts.Definitions
 
         private int[] GetAllAssemblies()
         {
-            return AssemblyPartManager.Instance.AllPhysicalAssemblies.Keys.ToArray();
+            return AssemblyPartManager.I.AllPhysicalAssemblies.Keys.ToArray();
         }
 
         private MyEntity[] GetMemberParts(int assemblyId)
         {
             PhysicalAssembly wep;
-            if (!AssemblyPartManager.Instance.AllPhysicalAssemblies.TryGetValue(assemblyId, out wep))
+            if (!AssemblyPartManager.I.AllPhysicalAssemblies.TryGetValue(assemblyId, out wep))
                 return new MyEntity[0];
 
             List<MyEntity> parts = new List<MyEntity>();
@@ -65,7 +65,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts.Definitions
                 return new MyEntity[0];
 
             AssemblyPart wep;
-            if (!AssemblyPartManager.Instance.AllAssemblyParts.TryGetValue(((IMyCubeBlock)blockEntity).SlimBlock, out wep) || wep.connectedParts == null)
+            if (!AssemblyPartManager.I.AllAssemblyParts.TryGetValue(((IMyCubeBlock)blockEntity).SlimBlock, out wep) || wep.connectedParts == null)
                 return new MyEntity[0];
 
             List<MyEntity> parts = new List<MyEntity>();
@@ -88,7 +88,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts.Definitions
         private MyEntity GetBasePart(int assemblyId)
         {
             PhysicalAssembly wep;
-            if (!AssemblyPartManager.Instance.AllPhysicalAssemblies.TryGetValue(assemblyId, out wep))
+            if (!AssemblyPartManager.I.AllPhysicalAssemblies.TryGetValue(assemblyId, out wep))
                 return null;
 
             return (MyEntity) wep.basePart.block.FatBlock;

@@ -24,7 +24,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
 
         public void Update()
         {
-            if (AssemblyPartManager.Instance.DebugMode)
+            if (Assemblies_SessionInit.I.DebugMode)
             {
                 foreach (var part in componentParts)
                 {
@@ -41,17 +41,17 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
             this.basePart = basePart;
             this.AssemblyDefinition = AssemblyDefinition;
             this.id = id;
-            AssemblyPartManager.Instance.CreatedPhysicalAssemblies++;
+            AssemblyPartManager.I.CreatedPhysicalAssemblies++;
 
-            if (AssemblyPartManager.Instance.AllPhysicalAssemblies.ContainsKey(id))
+            if (AssemblyPartManager.I.AllPhysicalAssemblies.ContainsKey(id))
                 throw new Exception("Duplicate assembly ID!");
-            AssemblyPartManager.Instance.AllPhysicalAssemblies.Add(id, this);
+            AssemblyPartManager.I.AllPhysicalAssemblies.Add(id, this);
 
             Random r = new Random();
             color = new Color(r.Next(255), r.Next(255), r.Next(255));
 
             AddPart(basePart);
-            AssemblyPartManager.Instance.QueueAssemblyCheck(basePart, this);
+            AssemblyPartManager.I.QueueAssemblyCheck(basePart, this);
         }
 
         public void AddPart(AssemblyPart part)
@@ -62,7 +62,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
             componentParts.Add(part);
             part.memberAssembly = this;
             if (part.prevAssemblyId != id)
-                DefinitionHandler.Instance.SendOnPartAdd(AssemblyDefinition.Name, id, part.block.FatBlock.EntityId, part == basePart);
+                DefinitionHandler.I.SendOnPartAdd(AssemblyDefinition.Name, id, part.block.FatBlock.EntityId, part == basePart);
             part.prevAssemblyId = id;
         }
 
@@ -82,7 +82,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
             part.connectedParts.Clear();
             part.memberAssembly = null;
 
-            DefinitionHandler.Instance.SendOnPartRemove(AssemblyDefinition.Name, id, part.block.FatBlock.EntityId, part == basePart);
+            DefinitionHandler.I.SendOnPartRemove(AssemblyDefinition.Name, id, part.block.FatBlock.EntityId, part == basePart);
 
             if (componentParts.Count == 0)
                 Close();
@@ -97,9 +97,9 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
                 return;
             componentParts.Remove(part);
 
-            DefinitionHandler.Instance.SendOnPartRemove(AssemblyDefinition.Name, id, part.block.FatBlock.EntityId, part == basePart);
+            DefinitionHandler.I.SendOnPartRemove(AssemblyDefinition.Name, id, part.block.FatBlock.EntityId, part == basePart);
             if (part.block.Integrity == 0)
-                DefinitionHandler.Instance.SendOnPartDestroy(AssemblyDefinition.Name, id, part.block.FatBlock.EntityId, part == basePart);
+                DefinitionHandler.I.SendOnPartDestroy(AssemblyDefinition.Name, id, part.block.FatBlock.EntityId, part == basePart);
 
             //MyAPIGateway.Utilities.ShowNotification("Subpart parts: " + part.connectedParts.Count);
 
@@ -122,10 +122,10 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
                 basePart.memberAssembly = this;
                 componentParts.Add(basePart);
 
-                if (AssemblyPartManager.Instance.DebugMode)
+                if (Assemblies_SessionInit.I.DebugMode)
                     MyAPIGateway.Utilities.ShowNotification("Recreating connections...");
-                AssemblyPartManager.Instance.QueueConnectionCheck(basePart);
-                AssemblyPartManager.Instance.QueueAssemblyCheck(basePart, this);
+                AssemblyPartManager.I.QueueConnectionCheck(basePart);
+                AssemblyPartManager.I.QueueAssemblyCheck(basePart, this);
 
                 return;
             }
@@ -153,7 +153,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
                 return;
             part.memberAssembly = null;
             part.connectedParts.Clear();
-            AssemblyPartManager.Instance.QueueConnectionCheck(part);
+            AssemblyPartManager.I.QueueConnectionCheck(part);
         }
 
         public void Close()
@@ -163,7 +163,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
 
             componentParts = null;
             basePart = null;
-            AssemblyPartManager.Instance.AllPhysicalAssemblies.Remove(id);
+            AssemblyPartManager.I.AllPhysicalAssemblies.Remove(id);
         }
 
         public void RecursiveAssemblyChecker(AssemblyPart currentBlock)
@@ -186,7 +186,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
                 {
                     AssemblyPart neighborPart;
                     
-                    if (AssemblyPartManager.Instance.AllAssemblyParts.TryGetValue(neighbor, out neighborPart))
+                    if (AssemblyPartManager.I.AllAssemblyParts.TryGetValue(neighbor, out neighborPart))
                     {
                         // Avoid double-including blocks
                         if (componentParts.Contains(neighborPart))
@@ -198,8 +198,8 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
                         //MyLog.Default.WriteLineAndConsole("ModularAssemblies: Add part " + neighbor.BlockDefinition.Id.SubtypeName + " @ " + neighbor.Position);
 
                         componentParts.Add(neighborPart);
-                        AssemblyPartManager.Instance.QueueConnectionCheck(neighborPart);
-                        AssemblyPartManager.Instance.QueueAssemblyCheck(neighborPart, this);
+                        AssemblyPartManager.I.QueueConnectionCheck(neighborPart);
+                        AssemblyPartManager.I.QueueAssemblyCheck(neighborPart, this);
                     }
                 }
             }
