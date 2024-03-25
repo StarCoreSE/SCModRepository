@@ -627,7 +627,7 @@ namespace StarCore.AutoRepairModule
 
             if (firstBlock != null && WeldingSortTimeout > 0 && (!firstBlock.IsFullIntegrity || firstBlock.HasDeformation))
             {
-                float repairAmount = 2f;
+                float repairAmount = 20f;
                 firstBlock.IncreaseMountLevel(repairAmount * MyAPIGateway.Session.WelderSpeedMultiplier, firstBlock.OwnerId, null, 1);
 
                 Vector3D firstBlockPosition = Vector3D.Zero;
