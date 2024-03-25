@@ -54,6 +54,7 @@ namespace Scripts.ModularAssemblies.Communication
                 "Caster_CentralPipe_T",
                 "Caster_Feeder",
                 "Caster_Controller",
+                "Caster_Reactor",
             },
 
             // Allowed connection directions & whitelists, measured in blocks.
@@ -71,24 +72,55 @@ namespace Scripts.ModularAssemblies.Communication
                             "Caster_CentralPipe_90",
                             "Caster_CentralPipe_T",
                             "Caster_Feeder",
+                            "Caster_Reactor",
+                            "Caster_Controller",
                         }},
                         { new Vector3I(-1, 0, 2), new string[] {
                             "Caster_CentralPipe_0",
                             "Caster_CentralPipe_90",
                             "Caster_CentralPipe_T",
                             "Caster_Feeder",
+                            "Caster_Reactor",
+                            "Caster_Controller",
                         }},
                         { new Vector3I(0, 1, 2), new string[] {
                             "Caster_CentralPipe_0",
                             "Caster_CentralPipe_90",
                             "Caster_CentralPipe_T",
                             "Caster_Feeder",
+                            "Caster_Reactor",
+                            "Caster_Controller",
                         }},
                         { new Vector3I(0, -1, 2), new string[] {
                             "Caster_CentralPipe_0",
                             "Caster_CentralPipe_90",
                             "Caster_CentralPipe_T",
                             "Caster_Feeder",
+                            "Caster_Reactor",
+                            "Caster_Controller",
+                        }},
+                    }
+                },
+                {
+                    "Caster_Reactor", new Dictionary<Vector3I, string[]>
+                    {
+                        { new Vector3I(0, 2, 0), new string[]
+                        {
+                            "Caster_CentralPipe_0",
+                            "Caster_CentralPipe_90",
+                            "Caster_CentralPipe_T",
+                            "Caster_Feeder",
+                            "Caster_FocusLens",
+                            "Caster_Controller",
+                        } },
+                        { new Vector3I(0, -2, 0), new string[]
+                        {
+                            "Caster_CentralPipe_0",
+                            "Caster_CentralPipe_90",
+                            "Caster_CentralPipe_T",
+                            "Caster_Feeder",
+                            "Caster_FocusLens",
+                            "Caster_Controller",
                         }},
                     }
                 },
@@ -132,6 +164,7 @@ namespace Scripts.ModularAssemblies.Communication
                             "Caster_Feeder",
                             "Caster_Controller",
                             "Caster_FocusLens",
+                            "Caster_Reactor",
                         }},
                         { Vector3I.Backward, new string[] {
                             "Caster_CentralPipe_0",
@@ -140,6 +173,7 @@ namespace Scripts.ModularAssemblies.Communication
                             "Caster_Feeder",
                             "Caster_Controller",
                             "Caster_FocusLens",
+                            "Caster_Reactor",
                         }},
                     }
                 },
@@ -153,6 +187,7 @@ namespace Scripts.ModularAssemblies.Communication
                             "Caster_Feeder",
                             "Caster_Controller",
                             "Caster_FocusLens",
+                            "Caster_Reactor",
                         }},
                         { Vector3I.Right, new string[] {
                             "Caster_CentralPipe_0",
@@ -161,6 +196,7 @@ namespace Scripts.ModularAssemblies.Communication
                             "Caster_Feeder",
                             "Caster_Controller",
                             "Caster_FocusLens",
+                            "Caster_Reactor",
                         }},
                     }
                 },
@@ -174,6 +210,7 @@ namespace Scripts.ModularAssemblies.Communication
                             "Caster_Feeder",
                             "Caster_Controller",
                             "Caster_FocusLens",
+                            "Caster_Reactor",
                         }},
                         { Vector3I.Right, new string[] {
                             "Caster_CentralPipe_0",
@@ -182,6 +219,7 @@ namespace Scripts.ModularAssemblies.Communication
                             "Caster_Feeder",
                             "Caster_Controller",
                             "Caster_FocusLens",
+                            "Caster_Reactor",
                         }},
                         { Vector3I.Backward, new string[] {
                             "Caster_CentralPipe_0",
@@ -190,6 +228,7 @@ namespace Scripts.ModularAssemblies.Communication
                             "Caster_Feeder",
                             "Caster_Controller",
                             "Caster_FocusLens",
+                            "Caster_Reactor",
                         }},
                     }
                 },
@@ -203,6 +242,7 @@ namespace Scripts.ModularAssemblies.Communication
                             "Caster_Feeder",
                             "Caster_Controller",
                             "Caster_FocusLens",
+                            "Caster_Reactor",
                         }},
                         { Vector3I.Backward, new string[] {
                             "Caster_CentralPipe_0",
@@ -211,6 +251,7 @@ namespace Scripts.ModularAssemblies.Communication
                             "Caster_Feeder",
                             "Caster_Controller",
                             "Caster_FocusLens",
+                            "Caster_Reactor",
                         }},
 
                         { Vector3I.Up, new string[] {
@@ -233,6 +274,7 @@ namespace Scripts.ModularAssemblies.Communication
                             "Caster_CentralPipe_90",
                             "Caster_CentralPipe_T",
                             "Caster_Feeder",
+                            "Caster_Reactor",
                         }},
                     }
                 },

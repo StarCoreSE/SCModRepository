@@ -46,6 +46,9 @@ namespace SCModRepository.Utility_Mods.Stable._Modular_Assembly_Mods_.MoA_Fusion
             if (newPart is IMyThrust)
                 Thrusters.Add((IMyThrust) newPart);
 
+            if (newPart is IMyReactor)
+                Reactors.Add((IMyReactor)newPart);
+
             UpdatePower();
         }
 
