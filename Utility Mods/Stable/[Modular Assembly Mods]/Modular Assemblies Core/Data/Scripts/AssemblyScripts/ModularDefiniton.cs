@@ -61,18 +61,18 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
                     // If list is empty OR block is not in whitelist, continue.
                     if (allowedPosKvp.Value?.Length == 0 || !(allowedPosKvp.Value?.Contains(adajent.BlockDefinition.Id.SubtypeName) ?? true))
                     {
-                        if (AssemblyPartManager.Instance.DebugMode)
+                        if (Assemblies_SessionInit.I.DebugMode)
                             DebugDrawManager.AddGridPoint(offsetAllowedPos, block.CubeGrid, Color.Red, 3);
                         continue;
                     }
 
                     if (offsetAllowedPos.IsInsideInclusiveEnd(adajent.Min, adajent.Max))
                     {
-                        if (AssemblyPartManager.Instance.DebugMode)
+                        if (Assemblies_SessionInit.I.DebugMode)
                             DebugDrawManager.AddGridPoint(offsetAllowedPos, block.CubeGrid, Color.Green, 3);
                         return true;
                     }
-                    if (AssemblyPartManager.Instance.DebugMode)
+                    if (Assemblies_SessionInit.I.DebugMode)
                         DebugDrawManager.AddGridPoint(offsetAllowedPos, block.CubeGrid, Color.Red, 3);
                 }
                 return false;

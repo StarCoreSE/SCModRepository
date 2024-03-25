@@ -24,7 +24,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
 
         public void Update()
         {
-            if (AssemblyPartManager.Instance.DebugMode)
+            if (Assemblies_SessionInit.I.DebugMode)
             {
                 foreach (var part in componentParts)
                 {
@@ -122,7 +122,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
                 basePart.memberAssembly = this;
                 componentParts.Add(basePart);
 
-                if (AssemblyPartManager.Instance.DebugMode)
+                if (Assemblies_SessionInit.I.DebugMode)
                     MyAPIGateway.Utilities.ShowNotification("Recreating connections...");
                 AssemblyPartManager.Instance.QueueConnectionCheck(basePart);
                 AssemblyPartManager.Instance.QueueAssemblyCheck(basePart, this);

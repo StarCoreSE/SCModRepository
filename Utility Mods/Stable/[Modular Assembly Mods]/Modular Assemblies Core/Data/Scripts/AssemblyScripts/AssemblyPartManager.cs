@@ -12,11 +12,9 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
     /// <summary>
     /// Creates and manages all AssemblyParts and PhysicalAssemblies.
     /// </summary>
-    [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
-    public class AssemblyPartManager : MySessionComponentBase
+    public class AssemblyPartManager
     {
         public static AssemblyPartManager Instance;
-        public bool DebugMode = false;
 
         /// <summary>
         /// Every single AssemblyPart in the world.
@@ -45,16 +43,8 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
                 QueuedAssemblyChecks.Add(part, assembly);
         }
 
-        public override void LoadData()
+        public void Init()
         {
-            if (!MyAPIGateway.Multiplayer.MultiplayerActive)
-            {
-                MyAPIGateway.Utilities.ShowMessage("Modular Assemblies", "Run !mwHelp for commands");
-                MyAPIGateway.Utilities.MessageEnteredSender += ChatCommandHandler;
-            }
-            else
-                MyAPIGateway.Utilities.ShowMessage("Modular Assemblies", "Commands disabled, load into a singleplayer world for testing.");
-
             MyLog.Default.WriteLineAndConsole("Modular Assemblies: AssemblyPartManager loading...");
 
             Instance = this;
@@ -67,26 +57,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
             MyAPIGateway.Entities.OnEntityRemove += OnGridRemove;
         }
 
-        private void ChatCommandHandler(ulong sender, string messageText, ref bool sendToOthers)
-        {
-            if (!messageText.StartsWith("!"))
-                return;
-
-            string[] split = messageText.Split(' ');
-            switch (split[0].ToLower())
-            {
-                case "!mwhelp":
-                    MyAPIGateway.Utilities.ShowMessage("Modular Assemblies", "Commands:\n!mwHelp - Prints all commands\n!mwDebug - Toggles debug draw");
-                    sendToOthers = false;
-                    break;
-                case "!mwdebug":
-                    DebugMode = !DebugMode;
-                    sendToOthers = false;
-                    break;
-            }
-        }
-
-        protected override void UnloadData()
+        public void Unload()
         {
             Instance = null; // important for avoiding this object to remain allocated in memory
 
@@ -98,17 +69,10 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
 
             MyAPIGateway.Entities.OnEntityAdd -= OnGridAdd;
             MyAPIGateway.Entities.OnEntityRemove -= OnGridRemove;
-
-            if (!MyAPIGateway.Multiplayer.MultiplayerActive)
-            {
-                MyAPIGateway.Utilities.MessageEnteredSender -= ChatCommandHandler;
-            }
         }
 
-        public override void UpdateAfterSimulation()
+        public void UpdateAfterSimulation()
         {
-            base.UpdateAfterSimulation();
-
             // Queue gridadds to account for world load/grid pasting
             foreach (var queuedBlock in QueuedBlockAdds.ToList())
             {
@@ -133,7 +97,7 @@ namespace Modular_Assemblies.Data.Scripts.AssemblyScripts
             foreach (var assembly in AllPhysicalAssemblies.Values)
                 assembly.Update();
 
-            if (DebugMode)
+            if (Assemblies_SessionInit.I.DebugMode)
                 MyAPIGateway.Utilities.ShowNotification("Assemblies: " + AllPhysicalAssemblies.Count + " | Parts: " + AllAssemblyParts.Count, 1000 / 60);
         }
 
