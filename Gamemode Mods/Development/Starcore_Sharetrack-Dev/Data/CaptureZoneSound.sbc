@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Sounds>
+		<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>Zone_Captured</SubtypeId>
+			</Id>
+			<Category>SHOT</Category>
+		  <MaxDistance>400</MaxDistance>
+		  <PreventSynchronization>2</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>3</DynamicMusicAmount>
+		  <Volume>4</Volume>
+		  <Loopable>false</Loopable>
+			<Waves>
+				<Wave Type="D3">
+					<Start>Audio/MW4_V_Betty_MULTIPLAYER_Hill_Captured.wav</Start>
+				</Wave>
+			</Waves>
+		</Sound>
+    
+    
+    		<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>Zone_Lost</SubtypeId>
+			</Id>
+			<Category>SHOT</Category>
+		  <MaxDistance>400</MaxDistance>
+		  <PreventSynchronization>2</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>3</DynamicMusicAmount>
+		  <Volume>4</Volume>
+		  <Loopable>false</Loopable>
+			<Waves>
+				<Wave Type="D3">
+					<Start>Audio/MW4_V_Betty_MULTIPLAYER_Hill_Contested.wav</Start>
+				</Wave>
+			</Waves>
+		</Sound>
+    
+    		<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>Enemy_Destroyed</SubtypeId>
+			</Id>
+			<Category>SHOT</Category>
+		  <MaxDistance>400</MaxDistance>
+		  <PreventSynchronization>2</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>3</DynamicMusicAmount>
+		  <Volume>4</Volume>
+		  <Loopable>false</Loopable>
+			<Waves>
+				<Wave Type="D3">
+					<Start>Audio/MW4_Enemy_Target_Destroyed.wav</Start>
+				</Wave>
+			</Waves>
+		</Sound>
+    
+    		<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>Team_Destroyed</SubtypeId>
+			</Id>
+			<Category>SHOT</Category>
+		  <MaxDistance>400</MaxDistance>
+		  <PreventSynchronization>2</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>3</DynamicMusicAmount>
+		  <Volume>4</Volume>
+		  <Loopable>false</Loopable>
+			<Waves>
+				<Wave Type="D3">
+					<Start>Audio/MW4_Friendly_Unit_Destroyed.wav</Start>
+				</Wave>
+			</Waves>
+		</Sound>
+	</Sounds>
+</Definitions>
