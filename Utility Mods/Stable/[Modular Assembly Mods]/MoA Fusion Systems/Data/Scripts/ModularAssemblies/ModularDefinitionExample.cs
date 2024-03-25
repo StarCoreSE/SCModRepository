@@ -33,7 +33,7 @@ namespace Scripts.ModularAssemblies.Communication
         private bool Example_ScanArm(MyEntity blockEntity, MyEntity prevScan, string StopAt)
         {
             if (ModularAPI.IsDebug())
-                DebugDrawManager.AddGridPoint(((IMyCubeBlock)blockEntity).Position, ((IMyCubeBlock)blockEntity).CubeGrid, Color.Blue, 2);
+                DebugDraw.AddGridPoint(((IMyCubeBlock)blockEntity).Position, ((IMyCubeBlock)blockEntity).CubeGrid, Color.Blue, 2);
             Example_BufferArm.Add(blockEntity);
 
             MyEntity[] connectedBlocks = ModularAPI.GetConnectedBlocks(blockEntity, false);

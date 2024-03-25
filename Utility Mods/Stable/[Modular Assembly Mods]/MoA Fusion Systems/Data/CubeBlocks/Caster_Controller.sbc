@@ -20,7 +20,6 @@
 			</Components>
 			<CriticalComponent Subtype="SteelPlate" Index="0"/>
 			<BlockPairName>Caster_Controller</BlockPairName>
-
 			<MaxPowerOutput>0.001</MaxPowerOutput>
 		</Definition>
 	</CubeBlocks>
