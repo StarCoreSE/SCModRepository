@@ -1247,81 +1247,76 @@ namespace klime.PointCheck
 
         private void BattleShiftTCalcs(IMyCubeGrid icubeG)
         {
-            if (icubeG != null && icubeG.Physics != null && PointCheckHelpers.timer % 60 == 0)
+            if (icubeG != null && icubeG.Physics != null)
             {
-                var tracked = new ShipTracker(icubeG);
-
-                var totalShield = tracked.ShieldStrength;
-                var totalShieldString = totalShield > 100
-                    ? $"{Math.Round(totalShield / 100f, 2)} M"
-                    : totalShield > 1
-                        ? $"{Math.Round(totalShield, 0)}0 K"
-                        : "None";
-                float maxSpeed = icubeG.GridSizeEnum == MyCubeSize.Large ? MyDefinitionManager.Static.EnvironmentDefinition.LargeShipMaxSpeed : MyDefinitionManager.Static.EnvironmentDefinition.SmallShipMaxSpeed;
-                float reducedAngularSpeed = 0f;
-                float negativeInfluence = 0f;
-
-                if (RTS_api != null && RTS_api.IsReady)
+                if (PointCheckHelpers.timer % 60 == 0)
                 {
-                    maxSpeed = (float)Math.Round(RTS_api.GetMaxSpeed(icubeG), 2);
-                    reducedAngularSpeed = RTS_api.GetReducedAngularSpeed(icubeG);
-                    negativeInfluence = RTS_api.GetNegativeInfluence(icubeG);
-                }
+                    var tracked = new ShipTracker(icubeG);
+                    var totalShield = tracked.ShieldStrength;
+                    var totalShieldString = totalShield > 100 ? $"{Math.Round(totalShield / 100f, 2)} M" : totalShield > 1 ? $"{Math.Round(totalShield, 0)}0 K" : "None";
 
-                var speedText = new StringBuilder();
-                speedText.Append($"\n<color=Green>Max Speed<color=White>: {maxSpeed:F2} m/s");
-                speedText.Append($"\n<color=Green>Reduced Angular Speed<color=White>: {reducedAngularSpeed:F2} rad/s");
-                speedText.Append($"\n<color=Green>Negative Influence<color=White>: {negativeInfluence:F2}");
-
-                var gunText = new StringBuilder();
-                foreach (var x in tracked.GunL)
-                {
-                    gunText.Append($"<color=Green>{x.Value} x {x.Key}\n");
-                }
-                string thrustString = string.Format("{0}", Math.Round(tracked.InstalledThrust, 1));
-
-                if (tracked.InstalledThrust > 1000000)
-                {
-                    thrustString = string.Format("{0:F2}M", Math.Round(tracked.InstalledThrust / 1000000f, 1));
-                }
-
-                string gyroString = string.Format("{0}", Math.Round(tracked.CurrentGyro, 1));
-
-                double tempGyro2;
-                if (tracked.CurrentGyro >= 1000000)
-                {
-                    tempGyro2 = Math.Round(tracked.CurrentGyro / 1000000f, 1);
-                    if (tempGyro2 > 1000)
+                    // This block remains on a 60-frame interval.
+                    var gunText = new StringBuilder();
+                    foreach (var x in tracked.GunL)
                     {
-                        gyroString = string.Format("{0:F1}G", Math.Round(tempGyro2 / 1000, 1));
+                        gunText.Append($"<color=Green>{x.Value} x {x.Key}\n");
                     }
-                    else
+                    string thrustString = string.Format("{0}", Math.Round(tracked.InstalledThrust, 1));
+                    if (tracked.InstalledThrust > 1000000)
                     {
-                        gyroString = string.Format("{0:F1}M", Math.Round(tempGyro2, 1));
+                        thrustString = string.Format("{0:F2}M", Math.Round(tracked.InstalledThrust / 1000000f, 1));
                     }
+                    string gyroString = string.Format("{0}", Math.Round(tracked.CurrentGyro, 1));
+                    double tempGyro2;
+                    if (tracked.CurrentGyro >= 1000000)
+                    {
+                        tempGyro2 = Math.Round(tracked.CurrentGyro / 1000000f, 1);
+                        if (tempGyro2 > 1000)
+                        {
+                            gyroString = string.Format("{0:F1}G", Math.Round(tempGyro2 / 1000, 1));
+                        }
+                        else
+                        {
+                            gyroString = string.Format("{0:F1}M", Math.Round(tempGyro2, 1));
+                        }
+                    }
+                    string PWRNotation = tracked.CurrentPower > 1000 ? "GW" : "MW";
+                    string tempPWR = tracked.CurrentPower > 1000 ? string.Format("{0:F1}", Math.Round(tracked.CurrentPower / 1000, 1)) : Math.Round(tracked.CurrentPower, 1).ToString();
+                    string pwr = tempPWR + PWRNotation;
+
+                    gunText.Append($"\n<color=Green>Thrust<color=White>: {thrustString} N").Append($"\n<color=Green>Gyro<color=White>: {gyroString} N").Append($"\n<color=Green>Power<color=White>: {pwr}");
+                    statMessage_Battle_Gunlist.Message.Length = 0;
+                    statMessage_Battle_Gunlist.Message.Append(gunText);
+                    statMessage_Battle.Message.Length = 0;
+                    statMessage_Battle.Message.Append($"<color=White>{totalShieldString} ({(int)tracked.CurrentShieldStrength}%)");
+                    statMessage_Battle.Visible = true;
+                    statMessage_Battle_Gunlist.Visible = true;
                 }
 
-                string PWRNotation = tracked.CurrentPower > 1000 ? "GW" : "MW";
-                string tempPWR = tracked.CurrentPower > 1000 ? string.Format("{0:F1}", Math.Round(tracked.CurrentPower / 1000, 1)) : Math.Round(tracked.CurrentPower, 1).ToString();
-                string pwr = tempPWR + PWRNotation;
+                // Separate conditional block for speed-related updates every 30 frames.
+                if (PointCheckHelpers.timer % 30 == 0)
+                {
+                    float maxSpeed = icubeG.GridSizeEnum == MyCubeSize.Large ? MyDefinitionManager.Static.EnvironmentDefinition.LargeShipMaxSpeed : MyDefinitionManager.Static.EnvironmentDefinition.SmallShipMaxSpeed;
+                    float reducedAngularSpeed = 0f;
+                    float negativeInfluence = 0f;
 
+                    if (RTS_api != null && RTS_api.IsReady)
+                    {
+                        maxSpeed = (float)Math.Round(RTS_api.GetMaxSpeed(icubeG), 2);
+                        reducedAngularSpeed = RTS_api.GetReducedAngularSpeed(icubeG);
+                        negativeInfluence = RTS_api.GetNegativeInfluence(icubeG);
+                    }
 
-                gunText.Append($"\n<color=Green>Thrust<color=White>: {thrustString} N")
-                       .Append($"\n<color=Green>Gyro<color=White>: {gyroString} N")
-                       .Append($"\n<color=Green>Power<color=White>: {pwr}")
-                       .Append(speedText);
+                    var speedText = new StringBuilder();
+                    speedText.Append($"\n<color=Green>Max Speed<color=White>: {maxSpeed:F2} m/s");
+                    speedText.Append($"\n<color=Green>Reduced Angular Speed<color=White>: {reducedAngularSpeed:F2} rad/s");
+                    speedText.Append($"\n<color=Green>Negative Influence<color=White>: {negativeInfluence:F2}");
 
-                statMessage_Battle_Gunlist.Message.Length = 0;
-                statMessage_Battle_Gunlist.Message.Append(gunText);
-
-                statMessage_Battle.Message.Length = 0;
-                statMessage_Battle.Message.Append($"<color=White>{totalShieldString} ({(int)tracked.CurrentShieldStrength}%)");
-
-                statMessage_Battle.Visible = true;
-                statMessage_Battle_Gunlist.Visible = true;
+                    // Only update the parts of the message related to speed.
+                    statMessage_Battle_Gunlist.Message.Append(speedText);
+                }
             }
         }
-
 
         // todo: remove this and replace with old solution for just combining BP and mass
         private Dictionary<string, List<string>> ts = new Dictionary<string, List<string>>();
