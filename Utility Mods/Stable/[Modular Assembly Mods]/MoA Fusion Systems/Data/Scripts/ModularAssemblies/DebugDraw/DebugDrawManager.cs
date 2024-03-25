@@ -10,7 +10,7 @@ using VRage.Utils;
 using VRageMath;
 using static VRageRender.MyBillboard;
 
-namespace Scripts.ModularAssemblies.DebugDraw
+namespace Scripts.ModularAssemblies.Debug
 {
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     public class DebugDraw : MySessionComponentBase
@@ -121,7 +121,7 @@ namespace Scripts.ModularAssemblies.DebugDraw
         {
             //MyTransparentGeometry.AddPointBillboard(MaterialDot, color, globalPos, 1.25f, 0, blendType: BlendTypeEnum.PostPP);
             float depthScale = ToAlwaysOnTop(ref globalPos);
-            MyTransparentGeometry.AddPointBillboard(MaterialDot, color * OnTopColorMul, globalPos, 0.5f * depthScale, 0, blendType: BlendTypeEnum.PostPP);
+            MyTransparentGeometry.AddPointBillboard(MaterialDot, color * OnTopColorMul, globalPos, 0.5f * depthScale, 0, blendType: BlendTypeEnum.Standard);
         }
 
         private void DrawGridPoint0(Vector3I blockPos, IMyCubeGrid grid, Color color)
@@ -134,12 +134,12 @@ namespace Scripts.ModularAssemblies.DebugDraw
             float length = (float)(destination - origin).Length();
             Vector3D direction = (destination - origin) / length;
 
-            MyTransparentGeometry.AddLineBillboard(MaterialSquare, color, origin, direction, length, 0.5f, blendType: BlendTypeEnum.PostPP);
+            MyTransparentGeometry.AddLineBillboard(MaterialSquare, color, origin, direction, length, 0.5f, blendType: BlendTypeEnum.Standard);
 
             float depthScale = ToAlwaysOnTop(ref origin);
             direction *= depthScale;
 
-            MyTransparentGeometry.AddLineBillboard(MaterialSquare, color * OnTopColorMul, origin, direction, length, 0.5f * depthScale, blendType: BlendTypeEnum.PostPP);
+            MyTransparentGeometry.AddLineBillboard(MaterialSquare, color * OnTopColorMul, origin, direction, length, 0.5f * depthScale, blendType: BlendTypeEnum.Standard);
         }
 
         public static Vector3D GridToGlobal(Vector3I position, IMyCubeGrid grid)
