@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition>
+			<Id>
+				<TypeId>Reactor</TypeId>
+				<SubtypeId>Caster_Reactor</SubtypeId>
+			</Id>
+			<DisplayName>{LOC:DisplayName_Caster_Reactor}</DisplayName>
+			<Description>{LOC:Description_Caster_Reactor}</Description>
+			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="3" z="3"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Caster_Reactor.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="10"/>
+				<Component Subtype="Computer" Count="10"/>
+			</Components>
+			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<BlockPairName>Caster_Reactor</BlockPairName>
+			<MaxPowerOutput>0.001</MaxPowerOutput>
+		</Definition>
+	</CubeBlocks>
+</Definitions>
