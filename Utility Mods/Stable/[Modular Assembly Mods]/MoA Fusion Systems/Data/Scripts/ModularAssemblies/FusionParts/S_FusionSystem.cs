@@ -14,6 +14,8 @@ namespace SCModRepository.Utility_Mods.Stable._Modular_Assembly_Mods_.MoA_Fusion
 {
     internal class S_FusionSystem
     {
+        const float MegawattsPerFusionPower = 50;
+
         static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
 
         public List<S_FusionArm> Arms = new List<S_FusionArm>();
@@ -23,7 +25,7 @@ namespace SCModRepository.Utility_Mods.Stable._Modular_Assembly_Mods_.MoA_Fusion
 
         public float PowerGeneration = 0;
         public float PowerCapacity = 0;
-        public float StoredPower = 0;
+        public float PowerStored = 0;
 
         public S_FusionSystem(int physicalAssemblyId)
         {
@@ -56,6 +58,8 @@ namespace SCModRepository.Utility_Mods.Stable._Modular_Assembly_Mods_.MoA_Fusion
         {
             if (part is IMyThrust)
                 Thrusters.Remove((IMyThrust) part);
+            if (part is IMyReactor)
+                Reactors.Remove((IMyReactor) part);
 
             foreach (var arm in Arms)
             {
@@ -72,12 +76,38 @@ namespace SCModRepository.Utility_Mods.Stable._Modular_Assembly_Mods_.MoA_Fusion
         {
             PowerGeneration = 0;
             PowerCapacity = 0;
+            float totalPowerUsage = 0;
 
             foreach (var arm in Arms)
             {
                 PowerGeneration += arm.PowerGeneration;
                 PowerCapacity += arm.PowerStorage;
             }
+
+            // Math for slider on reactor parts to allow for a power <-> efficiency tradeoff.
+            foreach (var reactor in Reactors)
+            {
+                if (reactor.BlockDefinition.SubtypeName == "Caster_Controller")
+                    continue;
+
+                // Temporary percentage of fusion output to use. Should be slider.
+                float temp_reactorConsumptionMultiplier = 0.5f;
+                float reactorEfficiencyMultiplier = 1 / (0.5f + temp_reactorConsumptionMultiplier);
+
+                // Power generation consumed (per second)
+                float powerConsumption = PowerGeneration * 60 * temp_reactorConsumptionMultiplier;
+                // Power generated (per second)
+                float reactorOutput = reactorEfficiencyMultiplier * powerConsumption * MegawattsPerFusionPower;
+
+                MyAPIGateway.Utilities.ShowNotification($"Output: {reactorOutput}/{PowerGeneration*60*MegawattsPerFusionPower}", 1000/60);
+                MyAPIGateway.Utilities.ShowNotification($"Input: {powerConsumption}/{PowerGeneration*60}", 1000 / 60);
+                MyAPIGateway.Utilities.ShowNotification($"Efficiency: {reactorEfficiencyMultiplier*100}%", 1000 / 60);
+
+                totalPowerUsage += powerConsumption / 60;
+                //SyncMultipliers.ReactorOutput(reactor, reactorOutput);
+            }
+
+            PowerGeneration -= totalPowerUsage;
 
             //IMyReactor basePart = (IMyReactor) ModularAPI.GetBasePart(PhysicalAssemblyId);
             //
@@ -98,10 +128,13 @@ namespace SCModRepository.Utility_Mods.Stable._Modular_Assembly_Mods_.MoA_Fusion
 
         public void UpdateTick()
         {
-            StoredPower += PowerGeneration;
+            PowerStored += PowerGeneration;
 
-            if (StoredPower > PowerCapacity)
-                StoredPower = PowerCapacity;
+            if (PowerStored > PowerCapacity)
+                PowerStored = PowerCapacity;
+
+            // TEMPORARY, TO BE REMOVED. SHOULD ONLY TRIGGER ON SYSTEM EDIT.
+            UpdatePower();
         }
     }
 }
