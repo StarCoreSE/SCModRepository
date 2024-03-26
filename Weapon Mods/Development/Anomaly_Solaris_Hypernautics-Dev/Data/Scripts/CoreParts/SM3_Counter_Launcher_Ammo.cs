@@ -37,9 +37,9 @@ namespace Scripts
             AmmoRound = "SM-3 Torpedo Launch", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 1f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 50f, // Direct damage; one steel plate is worth 100.
             Mass = 10f, // In kilograms; how much force the impact will apply to the target.
-            Health = 4, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            Health = 8, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = false, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
@@ -119,16 +119,16 @@ namespace Scripts
                 },
                 Armor = new ArmorDef
                 {
-                    Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
-                    Light = -1f, // Multiplier for damage against light armor.
-                    Heavy = -1f, // Multiplier for damage against heavy armor.
-                    NonArmor = .25f, // Multiplier for damage against every else.
+                    Armor = 0.001f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
+                    Light = 0.001f, // Multiplier for damage against light armor.
+                    Heavy = 0.001f, // Multiplier for damage against heavy armor.
+                    NonArmor = 0.001f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
                     Modifier = 8f, // Multiplier for damage against shields.
-                    Type = Default, // Damage vs healing against shields; Default, Heal
-                    BypassModifier = 0f, // If greater than zero, the percentage of damage that will penetrate the shield.
+                    Type = Heal, // Damage vs healing against shields; Default, Heal
+                    BypassModifier = -2, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {
@@ -176,7 +176,7 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = true,
-                    Radius = 5f, // Radius of AOE effect, in meters.
+                    Radius = 20f, // Radius of AOE effect, in meters.
                     Damage = 3500f,
                     Depth = 0f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
@@ -202,8 +202,8 @@ namespace Scripts
                 Enable = false, // Enables EWAR effects AND DISABLES BASE DAMAGE AND AOE DAMAGE!!
                 Type = AntiSmart, // EnergySink, Emp, Offense, Nav, Dot, AntiSmart, JumpNull, Anchor, Tractor, Pull, Push, 
                 Mode = Field, // Effect , Field
-                Strength = 100f,
-                Radius = 35f, // Meters
+                Strength = 1000f,
+                Radius = 850f, // Meters
                 Duration = 2400, // In Ticks
                 StackDuration = true, // Combined Durations
                 Depletable = true,
