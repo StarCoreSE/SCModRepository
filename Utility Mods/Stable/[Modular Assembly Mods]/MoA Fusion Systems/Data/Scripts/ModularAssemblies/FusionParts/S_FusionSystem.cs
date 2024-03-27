@@ -35,6 +35,9 @@ namespace Scripts.ModularAssemblies.FusionParts
 
         public void AddPart(IMyCubeBlock newPart)
         {
+            if (newPart == null)
+                return;
+
             // Scan for 'arms' connected on both ends to the feeder block.
             switch (newPart.BlockDefinition.SubtypeName)
             {
@@ -68,6 +71,9 @@ namespace Scripts.ModularAssemblies.FusionParts
 
         public void RemovePart(IMyCubeBlock part)
         {
+            if (part == null)
+                return;
+
             if (part is IMyThrust)
                 Thrusters.Remove((IMyThrust) part);
             if (part is IMyReactor)
@@ -103,10 +109,10 @@ namespace Scripts.ModularAssemblies.FusionParts
             // Math for slider on reactor parts to allow for a power <-> efficiency tradeoff.
             foreach (var reactor in Reactors)
             {
-                totalPowerUsage += reactor.PowerConsumption;
+                totalPowerUsage += reactor?.PowerConsumption ?? 0;
 
                 if (updateReactors)
-                    reactor.UpdatePower(powerGeneration, MegawattsPerFusionPower);
+                    reactor?.UpdatePower(powerGeneration, MegawattsPerFusionPower);
             }
 
             // Subtract power usage afterwards so that all reactors have the same stats.
@@ -125,7 +131,7 @@ namespace Scripts.ModularAssemblies.FusionParts
 
                 foreach (var reactor in Reactors)
                 {
-                    reactor.UpdatePower(powerGeneration, 0);
+                    reactor?.UpdatePower(powerGeneration, 0);
                 }
             }
         }
