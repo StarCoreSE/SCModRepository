@@ -1,0 +1,5 @@
+*.sln
+*.csproj
+.vs/*
+obj/*
+/Data/Scripts/ShipPoints/API/WeaponCoreApi.txt

@@ -42,22 +42,22 @@ namespace RelativeTopSpeedGV
 			SmallGrid_MinMass = 10000,
             SmallGrid_MidMass = 300000,
 			SmallGrid_MaxMass = 400000,
-			SmallGrid_Cruise_a = -12.5f,
-			SmallGrid_Cruise_b = 5f,
-			SmallGrid_Cruise_c = 0,
-			SmallGrid_Cruise_d = 204,
-			SmallGrid_Boost_a = -16.3f,
-			SmallGrid_Boost_b = 6,
-			SmallGrid_Boost_c = 0,
-			SmallGrid_Boost_d = 233,
-			LargeGrid_Cruise_a = -4.3f,
-			LargeGrid_Cruise_b = 1.4f,
-			LargeGrid_Cruise_c = 614000,
-			LargeGrid_Cruise_d = 270,
-			LargeGrid_Boost_a = -34f,
-			LargeGrid_Boost_b = 17f,
-			LargeGrid_Boost_c = 65000,
-			LargeGrid_Boost_d = 263,
+			//SmallGrid_Cruise_a = -12.5f,
+			//SmallGrid_Cruise_b = 5f,
+			//SmallGrid_Cruise_c = 0,
+			//SmallGrid_Cruise_d = 204,
+			//SmallGrid_Boost_a = -16.3f,
+			//SmallGrid_Boost_b = 6,
+			//SmallGrid_Boost_c = 0,
+			//SmallGrid_Boost_d = 233,
+			//LargeGrid_Cruise_a = -4.3f,
+			//LargeGrid_Cruise_b = 1.4f,
+			//LargeGrid_Cruise_c = 614000,
+			//LargeGrid_Cruise_d = 270,
+			//LargeGrid_Boost_a = -34f,
+			//LargeGrid_Boost_b = 17f,
+			//LargeGrid_Boost_c = 65000,
+			//LargeGrid_Boost_d = 263,
             EnableAngularLimits = true,
 			SmallGrid_AngularMassMult = 0.01f,
 			SmallGrid_AngularCruiseMult = 0.25f,
@@ -134,53 +134,54 @@ namespace RelativeTopSpeedGV
         [ProtoMember(22)]
         public float SmallGrid_ResistanceMultiplyer { get; set; }
 
-        [ProtoMember(23)]
-        public float SmallGrid_Cruise_a { get; set; }
-
-        [ProtoMember(24)]
-        public float SmallGrid_Cruise_b { get; set; }
-
-        [ProtoMember(25)]
-        public float SmallGrid_Cruise_c { get; set; }
-
-        [ProtoMember(26)]
-        public float SmallGrid_Cruise_d { get; set; }
-
-        [ProtoMember(27)]
-        public float SmallGrid_Boost_a { get; set; }
-
-        [ProtoMember(28)]
-        public float SmallGrid_Boost_b { get; set; }
-
-        [ProtoMember(29)]
-        public float SmallGrid_Boost_c { get; set; }
-
-        [ProtoMember(30)]
-        public float SmallGrid_Boost_d { get; set; }
-
-        [ProtoMember(31)]
-        public float LargeGrid_Cruise_a { get; set; }
-
-        [ProtoMember(32)]
-        public float LargeGrid_Cruise_b { get; set; }
-
-        [ProtoMember(33)]
-        public float LargeGrid_Cruise_c { get; set; }
-
-        [ProtoMember(34)]
-        public float LargeGrid_Cruise_d { get; set; }
-
-        [ProtoMember(35)]
-        public float LargeGrid_Boost_a { get; set; }
-
-        [ProtoMember(36)]
-        public float LargeGrid_Boost_b { get; set; }
-
-        [ProtoMember(37)]
-        public float LargeGrid_Boost_c { get; set; }
-
-        [ProtoMember(38)]
-        public float LargeGrid_Boost_d { get; set; }
+        //In order to emulate the previous RTS setup with any accuracy I need to get rid of the logarithmic decay. Will explore later
+        //[ProtoMember(23)]
+        //public float SmallGrid_Cruise_a { get; set; }
+        //
+        //[ProtoMember(24)]
+        //public float SmallGrid_Cruise_b { get; set; }
+        //
+        //[ProtoMember(25)]
+        //public float SmallGrid_Cruise_c { get; set; }
+        //
+        //[ProtoMember(26)]
+        //public float SmallGrid_Cruise_d { get; set; }
+        //
+        //[ProtoMember(27)]
+        //public float SmallGrid_Boost_a { get; set; }
+        //
+        //[ProtoMember(28)]
+        //public float SmallGrid_Boost_b { get; set; }
+        //
+        //[ProtoMember(29)]
+        //public float SmallGrid_Boost_c { get; set; }
+        //
+        //[ProtoMember(30)]
+        //public float SmallGrid_Boost_d { get; set; }
+        //
+        //[ProtoMember(31)]
+        //public float LargeGrid_Cruise_a { get; set; }
+        //
+        //[ProtoMember(32)]
+        //public float LargeGrid_Cruise_b { get; set; }
+        //
+        //[ProtoMember(33)]
+        //public float LargeGrid_Cruise_c { get; set; }
+        //
+        //[ProtoMember(34)]
+        //public float LargeGrid_Cruise_d { get; set; }
+        //
+        //[ProtoMember(35)]
+        //public float LargeGrid_Boost_a { get; set; }
+        //
+        //[ProtoMember(36)]
+        //public float LargeGrid_Boost_b { get; set; }
+        //
+        //[ProtoMember(37)]
+        //public float LargeGrid_Boost_c { get; set; }
+        //
+        //[ProtoMember(38)]
+        //public float LargeGrid_Boost_d { get; set; }
 
         [ProtoMember(39)]
         public bool EnableAngularLimits { get; set; }
@@ -279,20 +280,25 @@ namespace RelativeTopSpeedGV
         {
             if (isLargeGrid)
             {
-                return (float)LogDecay(mass, LargeGrid_Cruise_a, LargeGrid_Cruise_b, LargeGrid_Cruise_c, LargeGrid_Cruise_d);
+                return GetCruiseSpeed(mass, LargeGrid_MinMass, LargeGrid_MidMass, LargeGrid_MaxMass, LargeGrid_MinCruise, LargeGrid_MidCruise, LargeGrid_MaxCruise);
             }
 
-            return (float)LogDecay(mass, SmallGrid_Cruise_a, SmallGrid_Cruise_b, SmallGrid_Cruise_c, SmallGrid_Cruise_d);
+            return GetCruiseSpeed(mass, SmallGrid_MinMass, SmallGrid_MidMass, SmallGrid_MaxMass, SmallGrid_MinCruise, SmallGrid_MidCruise, SmallGrid_MaxCruise);
         }
 
         public float GetBoostSpeed(float mass, bool isLargeGrid)
         {
-            if (isLargeGrid)
+            float cruiseSpeed = GetCruiseSpeed(mass, isLargeGrid);
+            float maxBoostSpeed = isLargeGrid ? LargeGrid_MaxBoostSpeed : SmallGrid_MaxBoostSpeed;
+
+            float boostSpeed = cruiseSpeed + maxBoostSpeed;
+
+            if (boostSpeed > SpeedLimit)
             {
-                return (float)LogDecay(mass, LargeGrid_Boost_a, LargeGrid_Boost_b, LargeGrid_Boost_c, LargeGrid_Boost_d);
+                boostSpeed = SpeedLimit;
             }
 
-            return (float)LogDecay(mass, SmallGrid_Boost_a, SmallGrid_Boost_b, SmallGrid_Boost_c, SmallGrid_Boost_d);
+            return boostSpeed;
         }
 
         public static double CubicInterpolation(double x, double y0, double m0, double y1, double m1)

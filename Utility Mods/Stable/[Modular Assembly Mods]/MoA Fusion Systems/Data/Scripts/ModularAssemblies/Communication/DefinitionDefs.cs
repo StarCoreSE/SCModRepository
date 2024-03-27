@@ -23,6 +23,11 @@ namespace Scripts.ModularAssemblies.Communication
             [ProtoMember(1)] public string Name { get; set; }
 
             /// <summary>
+            /// Triggered whenever the definition is first loaded.
+            /// </summary>
+            public Action OnInit { get; set; }
+
+            /// <summary>
             /// Called when a valid part is placed.
             /// <para>
             /// Arg1 is PhysicalAssemblyId, Arg2 is BlockEntity, Arg3 is IsBaseBlock
