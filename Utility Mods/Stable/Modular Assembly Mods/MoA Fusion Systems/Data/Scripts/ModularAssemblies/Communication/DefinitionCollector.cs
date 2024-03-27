@@ -1,11 +1,13 @@
-﻿using static Scripts.ModularAssemblies.Communication.DefinitionDefs;
+﻿using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
+using static MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication.DefinitionDefs;
 
-namespace Scripts.ModularAssemblies.Communication
+// ReSharper disable once CheckNamespace
+namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
 {
-    partial class ModularDefinition
+    internal partial class ModularDefinition
     {
-        internal DefinitionContainer Container = new DefinitionContainer();
         internal static ModularDefinitionAPI ModularAPI = null;
+        internal DefinitionContainer Container = new DefinitionContainer();
 
         internal void LoadDefinitions(params PhysicalDefinition[] defs)
         {
@@ -13,12 +15,12 @@ namespace Scripts.ModularAssemblies.Communication
         }
 
         /// <summary>
-        /// Load all definitions for DefinitionSender
+        ///     Load all definitions for DefinitionSender
         /// </summary>
         /// <param name="baseDefs"></param>
         internal static DefinitionContainer GetBaseDefinitions()
         {
-            return new ModularDefinition().Container;
+            return new ModularAssemblies.ModularDefinition().Container;
         }
     }
 }

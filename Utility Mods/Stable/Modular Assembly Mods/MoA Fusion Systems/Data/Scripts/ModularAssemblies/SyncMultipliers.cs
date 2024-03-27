@@ -1,18 +1,20 @@
-﻿using ProtoBuf;
+﻿using System.Collections.Generic;
+using ProtoBuf;
 using Sandbox.ModAPI;
-using System.Collections.Generic;
 using VRage.Game.Components;
-using VRageMath;
+using VRage.Utils;
 
-namespace Modular_Definitions.Data.Scripts.ModularAssemblies
+namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
 {
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     public class SyncMultipliers : MySessionComponentBase
     {
+        private const int Channel = 8775;
         private static SyncMultipliers Instance;
-        const int Channel = 8775;
-        Dictionary<IMyReactor, float> mReactorList = new Dictionary<IMyReactor, float>();
-        Dictionary<IMyThrust, float> mThrustList = new Dictionary<IMyThrust, float>();
+        private readonly Dictionary<IMyReactor, float> mReactorList = new Dictionary<IMyReactor, float>();
+        private readonly Dictionary<IMyThrust, float> mThrustList = new Dictionary<IMyThrust, float>();
+
+        private bool needsUpdate;
 
         public override void LoadData()
         {
@@ -26,19 +28,21 @@ namespace Modular_Definitions.Data.Scripts.ModularAssemblies
                 needsUpdate = true;
         }
 
-        bool needsUpdate = false;
         public override void UpdateAfterSimulation()
         {
-            if (needsUpdate && MyAPIGateway.Session != null)
+            if (needsUpdate && MyAPIGateway.Session != null && MyAPIGateway.Multiplayer != null &&
+                MyAPIGateway.Session.Player != null)
             {
-                MyAPIGateway.Multiplayer.SendMessageToServer(Channel, MyAPIGateway.Utilities.SerializeToBinary(new SerializableMultiplier(-1, 0, 0, MyAPIGateway.Session.Player.SteamUserId)));
+                MyAPIGateway.Multiplayer.SendMessageToServer(Channel,
+                    MyAPIGateway.Utilities.SerializeToBinary(new SerializableMultiplier(-1, 0, 0,
+                        MyAPIGateway.Session.Player.SteamUserId)));
                 needsUpdate = false;
             }
         }
 
         private void HandleMessage(ushort handlerId, byte[] package, ulong senderId, bool fromServer)
         {
-            SerializableMultiplier sm = MyAPIGateway.Utilities.SerializeFromBinary<SerializableMultiplier>(package);
+            var sm = MyAPIGateway.Utilities.SerializeFromBinary<SerializableMultiplier>(package);
             if (sm == null)
                 return;
             switch (sm.type)
@@ -46,7 +50,7 @@ namespace Modular_Definitions.Data.Scripts.ModularAssemblies
                 case 0:
                     if (MyAPIGateway.Session.IsServer)
                         break;
-                    IMyReactor react = MyAPIGateway.Entities.GetEntityById(sm.entityid) as IMyReactor;
+                    var react = MyAPIGateway.Entities.GetEntityById(sm.entityid) as IMyReactor;
                     if (react != null)
                         ReactorOutput(react, sm.value);
                     else
@@ -55,7 +59,7 @@ namespace Modular_Definitions.Data.Scripts.ModularAssemblies
                 case 1:
                     if (MyAPIGateway.Session.IsServer)
                         break;
-                    IMyThrust thrust = MyAPIGateway.Entities.GetEntityById(sm.entityid) as IMyThrust;
+                    var thrust = MyAPIGateway.Entities.GetEntityById(sm.entityid) as IMyThrust;
                     if (thrust != null)
                         ThrusterOutput(thrust, sm.value);
                     else
@@ -65,9 +69,13 @@ namespace Modular_Definitions.Data.Scripts.ModularAssemblies
                     if (!MyAPIGateway.Session.IsServer)
                         break;
                     foreach (var reactor in mReactorList)
-                        MyAPIGateway.Multiplayer.SendMessageTo(Channel, MyAPIGateway.Utilities.SerializeToBinary(new SerializableMultiplier(0, reactor.Value, reactor.Key.EntityId)), sm.playerid);
+                        MyAPIGateway.Multiplayer.SendMessageTo(Channel,
+                            MyAPIGateway.Utilities.SerializeToBinary(
+                                new SerializableMultiplier(0, reactor.Value, reactor.Key.EntityId)), sm.playerid);
                     foreach (var thruster in mThrustList)
-                        MyAPIGateway.Multiplayer.SendMessageTo(Channel, MyAPIGateway.Utilities.SerializeToBinary(new SerializableMultiplier(1, thruster.Value, thruster.Key.EntityId)), sm.playerid);
+                        MyAPIGateway.Multiplayer.SendMessageTo(Channel,
+                            MyAPIGateway.Utilities.SerializeToBinary(
+                                new SerializableMultiplier(1, thruster.Value, thruster.Key.EntityId)), sm.playerid);
                     break;
             }
         }
@@ -83,19 +91,28 @@ namespace Modular_Definitions.Data.Scripts.ModularAssemblies
         public static void ReactorOutput(IMyReactor reactor, float output)
         {
             if (reactor.MaxOutput == output)
+            {
+                MyLog.Default.WriteLineAndConsole("Reactor NoSync: " + output);
                 return;
+            }
 
             if (MyAPIGateway.Session.IsServer)
             {
-                MyAPIGateway.Multiplayer.SendMessageToOthers(Channel, MyAPIGateway.Utilities.SerializeToBinary(new SerializableMultiplier(0, output, reactor.EntityId)));
+                MyAPIGateway.Multiplayer.SendMessageToOthers(Channel,
+                    MyAPIGateway.Utilities.SerializeToBinary(new SerializableMultiplier(0, output, reactor.EntityId)));
                 if (Instance.mReactorList.ContainsKey(reactor))
+                {
                     Instance.mReactorList[reactor] = output;
+                }
                 else
                 {
                     Instance.mReactorList.Add(reactor, output);
-                    reactor.OnClose += (ent) => { Instance.mReactorList.Remove(reactor); };
+                    reactor.OnClose += ent => { Instance.mReactorList.Remove(reactor); };
                 }
+
+                MyLog.Default.WriteLineAndConsole("Reactor Sync: " + reactor.PowerOutputMultiplier);
             }
+
             reactor.PowerOutputMultiplier = output / (reactor.MaxOutput / reactor.PowerOutputMultiplier);
         }
 
@@ -103,13 +120,16 @@ namespace Modular_Definitions.Data.Scripts.ModularAssemblies
         {
             if (MyAPIGateway.Session.IsServer)
             {
-                MyAPIGateway.Multiplayer.SendMessageToOthers(Channel, MyAPIGateway.Utilities.SerializeToBinary(new SerializableMultiplier(0, output, thrust.EntityId)));
+                MyAPIGateway.Multiplayer.SendMessageToOthers(Channel,
+                    MyAPIGateway.Utilities.SerializeToBinary(new SerializableMultiplier(0, output, thrust.EntityId)));
                 if (Instance.mThrustList.ContainsKey(thrust))
+                {
                     Instance.mThrustList[thrust] = output;
+                }
                 else
                 {
                     Instance.mThrustList.Add(thrust, output);
-                    thrust.OnClose += (ent) => { Instance.mThrustList.Remove(thrust); };
+                    thrust.OnClose += ent => { Instance.mThrustList.Remove(thrust); };
                 }
             }
 
@@ -119,7 +139,10 @@ namespace Modular_Definitions.Data.Scripts.ModularAssemblies
         [ProtoContract]
         private class SerializableMultiplier
         {
-            public SerializableMultiplier() { }
+            public SerializableMultiplier()
+            {
+            }
+
             public SerializableMultiplier(int type, float value, long entityid)
             {
                 this.type = type;
@@ -135,10 +158,10 @@ namespace Modular_Definitions.Data.Scripts.ModularAssemblies
                 this.playerid = playerid;
             }
 
-            [ProtoMember(1)] public int type { get; set; }
-            [ProtoMember(2)] public float value { get; set; }
-            [ProtoMember(3)] public long entityid { get; set; }
-            [ProtoMember(4)] public ulong playerid { get; set; }
+            [ProtoMember(1)] public int type { get; }
+            [ProtoMember(2)] public float value { get; }
+            [ProtoMember(3)] public long entityid { get; }
+            [ProtoMember(4)] public ulong playerid { get; }
         }
     }
 }
