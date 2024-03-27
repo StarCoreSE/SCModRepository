@@ -82,6 +82,9 @@ namespace Scripts.ModularAssemblies.FusionParts
 
             MyEntity[] connectedBlocks = ModularAPI.GetConnectedBlocks(blockEntity, false);
 
+            if (connectedBlocks.Length < 2)
+                return false;
+
             foreach (var connectedBlock in connectedBlocks)
             {
                 string connectedSubtype = ((IMyCubeBlock)connectedBlock).BlockDefinition.SubtypeName;

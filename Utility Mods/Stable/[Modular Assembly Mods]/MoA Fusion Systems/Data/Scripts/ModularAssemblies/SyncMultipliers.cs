@@ -82,6 +82,9 @@ namespace Modular_Definitions.Data.Scripts.ModularAssemblies
 
         public static void ReactorOutput(IMyReactor reactor, float output)
         {
+            if (reactor.MaxOutput == output)
+                return;
+
             if (MyAPIGateway.Session.IsServer)
             {
                 MyAPIGateway.Multiplayer.SendMessageToOthers(Channel, MyAPIGateway.Utilities.SerializeToBinary(new SerializableMultiplier(0, output, reactor.EntityId)));
