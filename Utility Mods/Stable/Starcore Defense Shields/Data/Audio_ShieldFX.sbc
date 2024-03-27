@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+  Encoding info:
+
+  Loopable sounds must use AdpcmEncode.exe for all <Start>, <Loop> and <End>. Adpcm supports loops.
+  Use xWMAEncode.exe for everything else. Wmaudio2 has better compression but doesn't support loops.
+-->
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Sounds>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcShieldHitFX</SubtypeId>
+      </Id>
+      <Category>Particle</Category>
+      <MaxDistance>300</MaxDistance>
+      <UpdateDistance>120</UpdateDistance>
+      <Volume>3.0</Volume>
+      <PreventSynchronization>0</PreventSynchronization>
+      <SoundLimit>4</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Particle\ShieldHit_v601.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Particle\ShieldHit_v602.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Particle\ShieldHit_v603.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Particle\ShieldHit_v604.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Particle\ShieldHit_v605.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+	<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>RealShieldHitFX</SubtypeId>
+      </Id>
+      <Category>R_Particle</Category>
+      <MaxDistance>300</MaxDistance>
+	  <UpdateDistance>120</UpdateDistance>
+      <Volume>3.0</Volume>
+      <VolumeVariation>0.1</VolumeVariation>
+      <PitchVariation>25</PitchVariation>
+	<ModifiableByHelmetFilters>true</ModifiableByHelmetFilters>
+      <PreventSynchronization>0</PreventSynchronization>
+      <SoundLimit>4</SoundLimit>
+	  <RealisticFilter>realShipFilter</RealisticFilter>
+	  <RealisticVolumeChange>0.8</RealisticVolumeChange>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Particle\ShieldHit_v601.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Particle\ShieldHit_v602.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Particle\ShieldHit_v603.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Particle\ShieldHit_v604.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Particle\ShieldHit_v605.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+  </Sounds>
+</Definitions>

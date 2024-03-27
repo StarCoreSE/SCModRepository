@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Sounds>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>DefenseShieldsLS</SubtypeId>
+      </Id>
+      <Category>BLOCK</Category>
+      <MaxDistance>1000</MaxDistance>
+      <Volume>1</Volume>
+	  <Loopable>true</Loopable>
+      <SoundLimit>4</SoundLimit>
+      <Waves>
+  		<Wave Type="D3">
+          <Start>Audio\RealBlockGravityGenLoop3d.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+  <Sound>
+    <Id>
+      <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+      <SubtypeId>DefenseShieldsSS</SubtypeId>
+    </Id>
+    <Category>BLOCK</Category>
+    <MaxDistance>1000</MaxDistance>
+    <Volume>1</Volume>
+    <Loopable>true</Loopable>
+      <SoundLimit>4</SoundLimit>
+    <Waves>
+      <Wave Type="D3">
+        <Start>Audio\RealBlockGravityGenLoop3d.wav</Start>
+      </Wave>
+    </Waves>
+  </Sound>
+  <Sound>
+    <Id>
+      <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+      <SubtypeId>DefenseShieldsST</SubtypeId>
+    </Id>
+    <Category>BLOCK</Category>
+    <MaxDistance>1000</MaxDistance>
+    <Volume>1</Volume>
+    <Loopable>true</Loopable>
+      <SoundLimit>4</SoundLimit>
+    <Waves>
+      <Wave Type="D3">
+        <Start>Audio\RealBlockGravityGenLoop3d.wav</Start>
+      </Wave>
+    </Waves>
+  </Sound>
+  
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ShieldStartLoopEnd</SubtypeId>
+      </Id>
+      <Category>BLOCK</Category>
+      <MaxDistance>1000</MaxDistance>
+      <Loopable>true</Loopable>
+      <Volume>1</Volume>
+      <SoundLimit>4</SoundLimit>
+      <Waves>
+        <Wave Type="D2"> <!-- Stereo -->
+          <Start>Audio\ShieldStart_3d.wav</Start>
+          <Loop>Audio\ShieldLoop_3d.wav</Loop>
+          <End>Audio\ShieldEnd_3d.wav</End>
+        </Wave>
+		<Wave Type="D3"> <!-- Mono -->
+          <Start>Audio\ShieldStart_2d.wav</Start>
+          <Loop>Audio\ShieldLoop_2d.wav</Loop>
+          <End>Audio\ShieldEnd_2d.wav</End>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <!-- Shield is reinitializing and checking LOS, attempting startup in 30 seconds. -->
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Arc_reinitializing</SubtypeId>
+      </Id>
+      <Category>Sb</Category>
+      <MaxDistance>1000</MaxDistance>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\SB\Arc_reinitializing.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    <Sound>
+      <!-- The shield's field cannot form when in contact with a solid body. -->
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Arc_solidbody</SubtypeId>
+      </Id>
+      <Category>Sb</Category>
+      <MaxDistance>1000</MaxDistance>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\SB\Arc_solidbody.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    <Sound>
+      <!-- Shield has overloaded, restarting in 20 seconds. -->
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Arc_overloaded</SubtypeId>
+      </Id>
+      <Category>Sb</Category>
+      <MaxDistance>1000</MaxDistance>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\SB\Arc_overloaded.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    <Sound>
+      <!-- Shield was EMPed, restarting in 60 seconds. -->
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Arc_EMP</SubtypeId>
+      </Id>
+      <Category>Sb</Category>
+      <MaxDistance>1000</MaxDistance>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\SB\Arc_EMP.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    <Sound>
+      <!-- Shield remodulating, restarting in 5 seconds. -->
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Arc_remodulating</SubtypeId>
+      </Id>
+      <Category>Sb</Category>
+      <MaxDistance>1000</MaxDistance>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\SB\Arc_remodulating.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    <Sound>
+      <!-- Emitter does not have line of sight, shield offline. -->
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Arc_noLOS</SubtypeId>
+      </Id>
+      <Category>Sb</Category>
+      <MaxDistance>1000</MaxDistance>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\SB\Arc_noLOS.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    <Sound>
+      <!-- Insufficient Power, shield is failing. -->
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Arc_insufficientpower</SubtypeId>
+      </Id>
+      <Category>Sb</Category>
+      <MaxDistance>1000</MaxDistance>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\SB\Arc_insufficientpower.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+  </Sounds> 
+</Definitions>

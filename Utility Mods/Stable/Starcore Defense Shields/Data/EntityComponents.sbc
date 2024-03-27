@@ -1,0 +1,23 @@
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EntityComponents>
+    <EntityComponent xsi:type="MyObjectBuilder_ModStorageComponentDefinition">
+      <Id>
+        <TypeId>ModStorageComponent</TypeId>
+        <SubtypeId>DefenseShields</SubtypeId>
+      </Id>
+      <RegisteredStorageGuids>
+        <guid>85BBB4F5-4FB9-4230-BEEF-BB79C9811502</guid>
+        <guid>85BBB4F5-4FB9-4230-BEEF-BB79C9811503</guid>
+        <guid>85BBB4F5-4FB9-4230-BEEF-BB79C9811504</guid>
+        <guid>85BBB4F5-4FB9-4230-BEEF-BB79C9811505</guid>
+        <guid>85BBB4F5-4FB9-4230-BEEF-BB79C9811506</guid>
+        <guid>85BBB4F5-4FB9-4230-BEEF-BB79C9811508</guid>
+        <guid>85BBB4F5-4FB9-4230-BEEF-BB79C9811509</guid>
+        <guid>85BBB4F5-4FB9-4230-BEEF-BB79C9811510</guid>
+        <guid>85BBB4F5-4FB9-4230-BEEF-BB79C9811511</guid>
+        <guid>85BBB4F5-4FB9-4230-BEEF-BB79C9811512</guid>
+        <guid>85BBB4F5-4FB9-4230-BEEF-BB79C9811513</guid>
+      </RegisteredStorageGuids>
+    </EntityComponent>
+  </EntityComponents>
+</Definitions>
