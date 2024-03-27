@@ -251,7 +251,7 @@
       </Id>
       <DisplayName>Faulty Solid Rocket Booster</DisplayName>
       <Description>
-        A skyscraper filled with explosives, but it detonates slowly, and in one direction. [Depowering it will cause spontaneous detonation.]
+        A skyscraper filled with explosives, but it detonates slowly, and in one direction. [Depowering it will cause spontaneous detonation. Taking damage it may cause spontaneus detonation]
       </Description>
       <Icon>Textures\Icons\srb.png</Icon>
       <CubeSize>Large</CubeSize>
