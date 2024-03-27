@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "Utility Mods/Stable/[Modular Assembly Mods]/MoA Fusion Systems/**"
+      - "Utility Mods/Stable/Modular Assembly Mods/MoA Fusion Systems/**"
 
 jobs:
   upload:
@@ -16,7 +16,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 3130656484
-          path: "Utility Mods/Stable/[Modular Assembly Mods]/MoA Fusion Systems/"
+          path: "Utility Mods/Stable/Modular Assembly Mods/MoA Fusion Systems/"
           changelog: ${{ github.event.head_commit.message }}
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}
