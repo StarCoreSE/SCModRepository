@@ -91,10 +91,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
         public static void ReactorOutput(IMyReactor reactor, float output)
         {
             if (reactor.MaxOutput == output)
-            {
-                MyLog.Default.WriteLineAndConsole("Reactor NoSync: " + output);
                 return;
-            }
 
             if (MyAPIGateway.Session.IsServer)
             {
@@ -109,8 +106,6 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                     Instance.mReactorList.Add(reactor, output);
                     reactor.OnClose += ent => { Instance.mReactorList.Remove(reactor); };
                 }
-
-                MyLog.Default.WriteLineAndConsole("Reactor Sync: " + reactor.PowerOutputMultiplier);
             }
 
             reactor.PowerOutputMultiplier = output / (reactor.MaxOutput / reactor.PowerOutputMultiplier);

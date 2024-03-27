@@ -16,33 +16,27 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         private const int OutboundMessageId = 8773;
         internal byte[] Storage;
 
-        internal DefinitionContainer storedDef;
+        internal DefinitionContainer StoredDef;
 
         public override void LoadData()
         {
-            if (!MyAPIGateway.Session.IsServer)
-                return;
-
-            MyLog.Default.WriteLineAndConsole("ModularAssembliesDefinition: Init new ModularAssembliesDefinition");
+            MyLog.Default.WriteLineAndConsole($"{ModContext.ModName}.ModularDefinition: Init new ModularAssembliesDefinition");
             MyAPIGateway.Utilities.RegisterMessageHandler(InboundMessageId, InputHandler);
 
             // Init
-            storedDef = ModularDefinition.GetBaseDefinitions();
-            Storage = MyAPIGateway.Utilities.SerializeToBinary(storedDef);
+            StoredDef = ModularDefinition.GetBaseDefinitions();
+            Storage = MyAPIGateway.Utilities.SerializeToBinary(StoredDef);
 
             ModularDefinition.ModularAPI = new ModularDefinitionAPI();
             ModularDefinition.ModularAPI.LoadData();
 
             // Send message in case this loads after the main mod
             MyAPIGateway.Utilities.SendModMessage(DefinitionMessageId, Storage);
-            MyLog.Default.WriteLineAndConsole("ModularAssembliesDefinition: Packaged definitions & going to sleep.");
+            MyLog.Default.WriteLineAndConsole($"{ModContext.ModName}.ModularDefinition: Packaged and sent definitions, now going to sleep.");
         }
 
         protected override void UnloadData()
         {
-            if (!MyAPIGateway.Session.IsServer)
-                return;
-
             MyAPIGateway.Utilities.UnregisterMessageHandler(InboundMessageId, InputHandler);
             Array.Clear(Storage, 0, Storage.Length);
             Storage = null;
@@ -57,7 +51,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             {
                 MyAPIGateway.Utilities.SendModMessage(DefinitionMessageId, Storage);
                 MyLog.Default.WriteLineAndConsole(
-                    "ModularAssembliesDefinition: Sent definitions & returning to sleep.");
+                    $"{ModContext.ModName}.ModularDefinition: Sent definitions & returning to sleep.");
             }
             else
             {
@@ -67,17 +61,17 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
                     if (call == null)
                     {
-                        MyLog.Default.WriteLineAndConsole("ModularAssembliesDefinition: Invalid FunctionCall!");
+                        MyLog.Default.WriteLineAndConsole($"{ModContext.ModName}.ModularDefinition: Invalid FunctionCall!");
                         return;
                     }
 
                     PhysicalDefinition defToCall = null;
-                    foreach (var definition in storedDef.PhysicalDefs)
+                    foreach (var definition in StoredDef.PhysicalDefs)
                         if (call.DefinitionName == definition.Name)
                             defToCall = definition;
 
                     if (defToCall == null)
-                        //MyLog.Default.WriteLineAndConsole($"ModularAssembliesDefinition: Function call [{call.DefinitionName}] not addressed to this.");
+                        //MyLog.Default.WriteLineAndConsole($$"{ModContext.ModName}.ModularDefinition: Function call [{call.DefinitionName}] not addressed to this.");
                         return;
 
                     // TODO: Remove
@@ -115,8 +109,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 }
                 catch (Exception ex)
                 {
-                    MyLog.Default.WriteLineAndConsole(
-                        $"ModularAssembliesDefinition: Exception in InputHandler: {ex}\n{ex.StackTrace}");
+                    MyLog.Default.WriteLineAndConsole($"{ModContext.ModName}.ModularDefinition: Exception in InputHandler: {ex}\n{ex.StackTrace}");
                 }
             }
         }
@@ -124,7 +117,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         private void SendFunc(FunctionCall call)
         {
             MyAPIGateway.Utilities.SendModMessage(OutboundMessageId, MyAPIGateway.Utilities.SerializeToBinary(call));
-            //MyLog.Default.WriteLineAndConsole($"ModularAssembliesDefinition: Sending function call [id {call.ActionId}].");
+            //MyLog.Default.WriteLineAndConsole($$"{ModContext.ModName}.ModularDefinition: Sending function call [id {call.ActionId}].");
         }
     }
 }

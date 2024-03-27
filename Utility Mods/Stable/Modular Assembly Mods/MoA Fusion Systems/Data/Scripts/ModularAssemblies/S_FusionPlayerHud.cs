@@ -36,7 +36,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
             {
                 FusionManager.UpdateTick();
 
-                if (ModularAPI.IsDebug())
+                if (ModularAPI?.IsDebug() ?? false)
                 {
                     MyVisualScriptLogicProvider.SetQuestlog(true, "Fusion Systems");
 
