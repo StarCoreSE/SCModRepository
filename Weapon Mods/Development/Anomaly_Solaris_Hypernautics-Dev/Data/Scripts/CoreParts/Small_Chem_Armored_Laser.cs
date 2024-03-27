@@ -13,13 +13,13 @@ namespace Scripts
     partial class Parts
     {
         // Don't edit above this line
-        WeaponDefinition S_Chem_Laser => new WeaponDefinition
+        WeaponDefinition S_Armored_Laser => new WeaponDefinition
         {
             Assignments = new ModelAssignmentsDef
             {
                 MountPoints = new[] {
                     new MountPointDef {
-                        SubtypeId = "S_Chem_Laser_Block", // Block Subtypeid. Your Cubeblocks contain this information
+                        SubtypeId = "S_Armored_Laser_Block", // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "", // For weapons with a spinning barrel such as Gatling Guns.
                         MuzzlePartId = "None", // The subpart where your muzzle empties are located. This is often the elevation subpart.
                         AzimuthPartId = "None", // Your Rotating Subpart, the bit that moves sideways
