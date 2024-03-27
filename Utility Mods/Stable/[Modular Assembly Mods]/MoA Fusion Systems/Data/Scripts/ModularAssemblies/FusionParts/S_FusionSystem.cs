@@ -15,13 +15,13 @@ namespace Scripts.ModularAssemblies.FusionParts
 {
     internal class S_FusionSystem
     {
-        const float MegawattsPerFusionPower = 50;
+        public const float MegawattsPerFusionPower = 50;
 
         static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
 
         public List<S_FusionArm> Arms = new List<S_FusionArm>();
         public List<IMyThrust> Thrusters = new List<IMyThrust>();
-        public List<IMyReactor> Reactors = new List<IMyReactor>();
+        public List<FusionReactorLogic> Reactors = new List<FusionReactorLogic>();
         public int PhysicalAssemblyId = -1;
 
         public float PowerGeneration = 0;
@@ -35,6 +35,9 @@ namespace Scripts.ModularAssemblies.FusionParts
 
         public void AddPart(IMyCubeBlock newPart)
         {
+            if (newPart == null)
+                return;
+
             // Scan for 'arms' connected on both ends to the feeder block.
             switch (newPart.BlockDefinition.SubtypeName)
             {
@@ -42,7 +45,10 @@ namespace Scripts.ModularAssemblies.FusionParts
                 case "Caster_Accelerator_90":
                     S_FusionArm newArm = new S_FusionArm((MyEntity) newPart, "Caster_Feeder");
                     if (newArm.IsValid)
+                    {
                         Arms.Add(newArm);
+                        UpdatePower(true);
+                    }
                     break;
             }
 
@@ -50,77 +56,88 @@ namespace Scripts.ModularAssemblies.FusionParts
                 Thrusters.Add((IMyThrust) newPart);
 
             if (newPart is IMyReactor)
-                Reactors.Add((IMyReactor)newPart);
+            {
+                FusionReactorLogic logic = newPart.GameLogic.GetAs<FusionReactorLogic>();
+                if (logic != null)
+                {
+                    Reactors.Add(logic);
+                    logic.MemberSystem = this;
+                    logic.UpdatePower(PowerGeneration, MegawattsPerFusionPower);
+                }
+            }
 
             UpdatePower();
         }
 
         public void RemovePart(IMyCubeBlock part)
         {
+            if (part == null)
+                return;
+
             if (part is IMyThrust)
                 Thrusters.Remove((IMyThrust) part);
             if (part is IMyReactor)
-                Reactors.Remove((IMyReactor) part);
+            {
+                FusionReactorLogic logic = part.GameLogic.GetAs<FusionReactorLogic>();
+                logic.MemberSystem = null;
+                Reactors.Remove(logic);
+            }
 
             foreach (var arm in Arms)
             {
                 if (arm.Parts.Contains(part))
                 {
                     Arms.Remove(arm);
-                    UpdatePower();
+                    UpdatePower(true);
                     break;
                 }
             }
         }
 
-        private void UpdatePower()
+        private void UpdatePower(bool updateReactors = false)
         {
-            PowerGeneration = 0;
-            PowerCapacity = 0;
+            float powerGeneration = 0;
+            float powerCapacity = 0;
             float totalPowerUsage = 0;
 
             foreach (var arm in Arms)
             {
-                PowerGeneration += arm.PowerGeneration;
-                PowerCapacity += arm.PowerStorage;
+                powerGeneration += arm.PowerGeneration;
+                powerCapacity += arm.PowerStorage;
             }
 
             // Math for slider on reactor parts to allow for a power <-> efficiency tradeoff.
             foreach (var reactor in Reactors)
             {
-                if (reactor.BlockDefinition.SubtypeName == "Caster_Controller")
-                    continue;
+                totalPowerUsage += reactor?.PowerConsumption ?? 0;
 
-                // Temporary percentage of fusion output to use. Should be slider.
-                float temp_reactorConsumptionMultiplier = reactor.GameLogic.GetAs<FusionReactorLogic>().PowerUsageSync.Value; // This is ugly, let's make it better.
-                float reactorEfficiencyMultiplier = 1 / (0.5f + temp_reactorConsumptionMultiplier);
-
-                // Power generation consumed (per second)
-                float powerConsumption = PowerGeneration * 60 * temp_reactorConsumptionMultiplier;
-                // Power generated (per second)
-                float reactorOutput = reactorEfficiencyMultiplier * powerConsumption * MegawattsPerFusionPower;
-
-                MyAPIGateway.Utilities.ShowNotification($"Output: {Math.Round(reactorOutput, 1)}/{Math.Round(PowerGeneration*60*MegawattsPerFusionPower, 1)}", 1000/60);
-                MyAPIGateway.Utilities.ShowNotification($"Input: {Math.Round(powerConsumption, 1)}/{Math.Round(PowerGeneration*60, 1)}", 1000 / 60);
-                MyAPIGateway.Utilities.ShowNotification($"Efficiency: {Math.Round(reactorEfficiencyMultiplier*100)}%", 1000 / 60);
-
-                // Convert back into power per tick
-                totalPowerUsage += powerConsumption / 60;
-                SyncMultipliers.ReactorOutput(reactor, reactorOutput);
+                if (updateReactors)
+                    reactor?.UpdatePower(powerGeneration, MegawattsPerFusionPower);
             }
 
             // Subtract power usage afterwards so that all reactors have the same stats.
+            PowerGeneration = powerGeneration;
+            PowerCapacity = powerCapacity;
             PowerGeneration -= totalPowerUsage;
+
+            // Update PowerStored
+            PowerStored += PowerGeneration;
+            if (PowerStored > PowerCapacity)
+                PowerStored = PowerCapacity;
+
+            if (PowerStored <= 0)
+            {
+                PowerStored = 0;
+
+                foreach (var reactor in Reactors)
+                {
+                    reactor?.UpdatePower(powerGeneration, 0);
+                }
+            }
         }
 
         public void UpdateTick()
         {
-            PowerStored += PowerGeneration;
-
-            if (PowerStored > PowerCapacity)
-                PowerStored = PowerCapacity;
-
-            // TEMPORARY, TO BE REMOVED. SHOULD ONLY TRIGGER ON SYSTEM EDIT.
             UpdatePower();
         }
     }
