@@ -112,6 +112,7 @@ namespace Scripts.ModularAssemblies.Communication
                             "Caster_Feeder",
                             "Caster_FocusLens",
                             "Caster_Controller",
+                            "Caster_Reactor",
                         } },
                         { new Vector3I(0, -2, 0), new string[]
                         {
@@ -121,6 +122,7 @@ namespace Scripts.ModularAssemblies.Communication
                             "Caster_Feeder",
                             "Caster_FocusLens",
                             "Caster_Controller",
+                            "Caster_Reactor",
                         }},
                     }
                 },

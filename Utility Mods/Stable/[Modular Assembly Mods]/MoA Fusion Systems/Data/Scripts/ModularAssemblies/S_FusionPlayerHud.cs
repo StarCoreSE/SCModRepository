@@ -1,6 +1,6 @@
 ﻿using Sandbox.Game;
-using SCModRepository.Utility_Mods.Stable._Modular_Assembly_Mods_.MoA_Fusion_Systems.Data.Scripts.ModularAssemblies;
 using Scripts.ModularAssemblies.Communication;
+using Scripts.ModularAssemblies.FusionParts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,7 +50,7 @@ namespace Scripts.ModularAssemblies
 
                     S_FusionSystem system = FusionManager.FusionSystems[assemblyId];
 
-                    MyVisualScriptLogicProvider.AddQuestlogDetail($"[{assemblyId}] Power: {Math.Round(system.StoredPower/system.PowerCapacity * 100f)}% ({Math.Round(system.PowerCapacity)} @ {Math.Round(system.PowerGeneration*60, 1)}/s) | Arms: {system.Arms.Count}", false, false);
+                    MyVisualScriptLogicProvider.AddQuestlogDetail($"[{assemblyId}] Power: {Math.Round(system.PowerStored/system.PowerCapacity * 100f)}% ({Math.Round(system.PowerCapacity)} @ {Math.Round(system.PowerGeneration*60, 1)}/s) | Arms: {system.Arms.Count}", false, false);
                 }
             }
             else
