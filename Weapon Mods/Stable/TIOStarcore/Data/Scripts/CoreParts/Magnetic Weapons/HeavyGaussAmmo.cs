@@ -36,7 +36,7 @@ using static Scripts.Structure.WeaponDefinition.AmmoDef.GraphicDef.DecalDef;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.DamageScaleDef.DamageTypes.Damage;
 
 namespace Scripts
-{ // Don't edit above this line
+{ // Don't edit above this line 
     partial class Parts
     {
         //Targeting Beam then Slug Round at bottom
