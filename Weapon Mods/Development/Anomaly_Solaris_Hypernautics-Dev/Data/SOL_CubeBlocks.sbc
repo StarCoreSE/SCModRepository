@@ -202,7 +202,7 @@
 	40 second reload
 
      </Description>
-     <Icon>Textures\GUI\Icons\OPA-Logo.dds</Icon>
+     <Icon>Textures\GUI\missile_defense.png</Icon>
      <CubeSize>Large</CubeSize>
      <GuiVisible>true</GuiVisible>
      <BlockTopology>TriangleMesh</BlockTopology>
@@ -266,7 +266,7 @@
      </Id>
      <DisplayName>Saber Chemical Laser</DisplayName>
      <Description>
-       [1.5km range]
+       [1.75kmkm range]
        [Energy damage]
        [Hitscan]
        [50% climbing cost]
@@ -276,9 +276,9 @@
      <CubeSize>Large</CubeSize>
      <GuiVisible>true</GuiVisible>
      <BlockTopology>TriangleMesh</BlockTopology>
-     <Size x="1" y="1" z="5" />
-     <ModelOffset x="0" y="0" z= "0" />
-     <Model>Models\Starcore\muzzled_beam_odin.mwm</Model>
+     <Size x="1" y="1" z="4" />
+     <ModelOffset x="0" y="0" z= "1.25" />
+     <Model>Models\BT_Beam_Laser.mwm</Model>
      <Components>
        <Component Subtype="SteelPlate" Count="165" />
        <Component Subtype="Construction" Count="115" />
@@ -295,10 +295,10 @@
      <MirroringZ>Y</MirroringZ>
      <MountPoints>
        <MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="1" />
-       <MountPoint Side="Left" StartX="1" StartY="0" EndX="5" EndY="1" />
-       <MountPoint Side="Top" StartX="0" StartY="0" EndX="1" EndY="4" />
-       <MountPoint Side="Right" StartX="0" StartY="0" EndX="4" EndY="1" />
-       <MountPoint Side="Bottom" StartX="0" StartY="1" EndX="1" EndY="5" />
+       <MountPoint Side="Left" StartX="1" StartY="0" EndX="4" EndY="1" />
+       <MountPoint Side="Top" StartX="0" StartY="0" EndX="1" EndY="3" />
+       <MountPoint Side="Right" StartX="0" StartY="0" EndX="3" EndY="1" />
+       <MountPoint Side="Bottom" StartX="0" StartY="1" EndX="1" EndY="4" />
      </MountPoints>
      <EdgeType>Light</EdgeType>
      <BuildTimeSeconds>65</BuildTimeSeconds>
@@ -320,6 +320,77 @@
      <MaxFov>1.04719755</MaxFov>
      <DestroySound>Betty_Weapon_Destroyed</DestroySound>
    </Definition>   
+
+
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>S_Armored_Laser_Block</SubtypeId>
+     </Id>
+     <DisplayName>Saber Armored Chemical Laser</DisplayName>
+     <Description>
+	   Armored Laser
+       [1.75kmkm range]
+       [Energy damage]
+       [Hitscan]
+       [50% climbing cost]
+       Uses a limited fuel to power an extremely powerful laser for 5 seconds before running out.
+     </Description>
+     <Icon>Textures\Icons\laser icon.png</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="1" z="4" />
+     <ModelOffset x="0" y="0" z= "0" />
+     <Model>Models\BT_Beam_Laser_Elongated.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="165" />
+       <Component Subtype="Construction" Count="115" />
+       <Component Subtype="MetalGrid" Count="145" />
+       <Component Subtype="LargeTube" Count="35" />
+       <Component Subtype="Motor" Count="250" />
+       <Component Subtype="Computer" Count="100" />
+       <Component Subtype="Construction" Count="90" />
+       <Component Subtype="SteelPlate" Count="1200" />
+     </Components>
+     <CriticalComponent Subtype="LargeTube" Index="0" />
+     <BlockPairName>S_Armored_Laser_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <MountPoints>
+       <MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="1" />
+       <MountPoint Side="Left" StartX="0" StartY="0" EndX="4" EndY="1" />
+       <MountPoint Side="Top" StartX="0" StartY="0" EndX="1" EndY="4" />
+       <MountPoint Side="Right" StartX="0" StartY="0" EndX="4" EndY="1" />
+       <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="1" EndY="4" />
+     </MountPoints>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>65</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+	 <GeneralDamageMultiplier>0.2</GeneralDamageMultiplier>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>7000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+     <DestroySound>Betty_Weapon_Destroyed</DestroySound>
+   </Definition>   
+
+
+
+
+
 
 
 
@@ -513,7 +584,7 @@
       		<EdgeType>Heavy</EdgeType>
       		<BuildTimeSeconds>900</BuildTimeSeconds>
       		<DisassembleRatio>3</DisassembleRatio>
-      		<GeneralDamageMultiplier>0.3</GeneralDamageMultiplier>
+      		<GeneralDamageMultiplier>0.5</GeneralDamageMultiplier>
       		<PCU>1</PCU>
       		<PCUConsole>2</PCUConsole>
       		<IsAirTight>true</IsAirTight>
@@ -614,12 +685,12 @@
 			<Description>A 3x3 armored plate to protect ships from directional damage. Has four boreholes for weapon's fire to pass through uneffected.
 			
 			</Description>
-			<Icon>Textures\Icons\SH_LG_BP33P.dds</Icon>
+			<Icon>Textures\Icons\SH_LG_BP33B_3x3_Blastplate.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="3" y="3" z="1"/>
 			<ModelOffset x="0" y="0" z="0"/>
-			<Model>Models\Cubes\large\SH_LG_BP33P.mwm</Model>
+			<Model>Models\Cubes\large\SH_LG_BP33A_3x3_Blastplate.mwm</Model>
 			<Components>
 				<Component Subtype="SteelPlate" Count="750" />
        		 	<Component Subtype="MetalGrid" Count="2500" />
@@ -655,12 +726,12 @@
 			<Description>A 3x3 armored plate to protect ships from directional damage. Has a pair of boreholes for weapon's fire to pass through uneffected.
 			
 			</Description>
-			<Icon>Textures\Icons\SH_LG_BP33A_3x3_Blastplate.dds</Icon>
+			<Icon>Textures\Icons\SH_LG_BP33P.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="3" y="3" z="1"/>
 			<ModelOffset x="0" y="0" z="0"/>
-			<Model>Models\Cubes\large\SH_LG_BP33A_3x3_Blastplate.mwm</Model>
+			<Model>Models\Cubes\SH_LG_BP33A_3x3_Blastplate.mwm</Model>
 			<Components>
 				<Component Subtype="SteelPlate" Count="750" />
        		 	<Component Subtype="MetalGrid" Count="2500" />
