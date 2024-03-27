@@ -32,6 +32,7 @@ namespace Scripts.ModularAssemblies.Communication
         private Func<MyEntity, bool, MyEntity[]> _getConnectedBlocks;
         private Func<int, MyEntity> _getBasePart;
         private Func<bool> _isDebug;
+        private Func<MyEntity, int> _getContainingAssembly;
 
         /// <summary>
         /// Gets all AssemblyParts in the world. Returns an array of all AssemblyParts.
@@ -88,7 +89,12 @@ namespace Scripts.ModularAssemblies.Communication
         /// <returns></returns>
         public bool IsDebug()
         {
-            return _isDebug.Invoke();
+            return _isDebug?.Invoke() ?? false;
+        }
+
+        public int GetContainingAssembly(MyEntity blockPart)
+        {
+            return _getContainingAssembly?.Invoke(blockPart) ?? -1;
         }
 
 
@@ -108,6 +114,7 @@ namespace Scripts.ModularAssemblies.Communication
             AssignMethod(delegates, "GetConnectedBlocks", ref _getConnectedBlocks);
             AssignMethod(delegates, "GetBasePart", ref _getBasePart);
             AssignMethod(delegates, "IsDebug", ref _isDebug);
+            AssignMethod(delegates, "GetContainingAssembly", ref _getContainingAssembly);
 
             if (_apiInit)
                 MyLog.Default.WriteLineAndConsole("ModularDefinitions: ModularDefinitionsAPI loaded!");

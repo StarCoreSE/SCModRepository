@@ -1,4 +1,5 @@
-﻿using Modular_Definitions.Data.Scripts.ModularAssemblies;
+﻿using Data.Scripts.ModularAssemblies.FusionParts.FusionReactor;
+using Modular_Definitions.Data.Scripts.ModularAssemblies;
 using Sandbox.ModAPI;
 using Scripts.ModularAssemblies.Communication;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 
-namespace SCModRepository.Utility_Mods.Stable._Modular_Assembly_Mods_.MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
+namespace Scripts.ModularAssemblies.FusionParts
 {
     internal class S_FusionSystem
     {
@@ -91,7 +92,7 @@ namespace SCModRepository.Utility_Mods.Stable._Modular_Assembly_Mods_.MoA_Fusion
                     continue;
 
                 // Temporary percentage of fusion output to use. Should be slider.
-                float temp_reactorConsumptionMultiplier = 0.5f;
+                float temp_reactorConsumptionMultiplier = reactor.GameLogic.GetAs<FusionReactorLogic>().PowerUsageSync.Value; // This is ugly, let's make it better.
                 float reactorEfficiencyMultiplier = 1 / (0.5f + temp_reactorConsumptionMultiplier);
 
                 // Power generation consumed (per second)
@@ -99,31 +100,17 @@ namespace SCModRepository.Utility_Mods.Stable._Modular_Assembly_Mods_.MoA_Fusion
                 // Power generated (per second)
                 float reactorOutput = reactorEfficiencyMultiplier * powerConsumption * MegawattsPerFusionPower;
 
-                MyAPIGateway.Utilities.ShowNotification($"Output: {reactorOutput}/{PowerGeneration*60*MegawattsPerFusionPower}", 1000/60);
-                MyAPIGateway.Utilities.ShowNotification($"Input: {powerConsumption}/{PowerGeneration*60}", 1000 / 60);
-                MyAPIGateway.Utilities.ShowNotification($"Efficiency: {reactorEfficiencyMultiplier*100}%", 1000 / 60);
+                MyAPIGateway.Utilities.ShowNotification($"Output: {Math.Round(reactorOutput, 1)}/{Math.Round(PowerGeneration*60*MegawattsPerFusionPower, 1)}", 1000/60);
+                MyAPIGateway.Utilities.ShowNotification($"Input: {Math.Round(powerConsumption, 1)}/{Math.Round(PowerGeneration*60, 1)}", 1000 / 60);
+                MyAPIGateway.Utilities.ShowNotification($"Efficiency: {Math.Round(reactorEfficiencyMultiplier*100)}%", 1000 / 60);
 
+                // Convert back into power per tick
                 totalPowerUsage += powerConsumption / 60;
-                //SyncMultipliers.ReactorOutput(reactor, reactorOutput);
+                SyncMultipliers.ReactorOutput(reactor, reactorOutput);
             }
 
+            // Subtract power usage afterwards so that all reactors have the same stats.
             PowerGeneration -= totalPowerUsage;
-
-            //IMyReactor basePart = (IMyReactor) ModularAPI.GetBasePart(PhysicalAssemblyId);
-            //
-            //float desiredPower = Arms.Count * GetTotalArmBlocks();
-            //
-            //float actualPower = desiredPower;
-            //
-            //foreach (var thrust in Thrusters)
-            //{
-            //    SyncMultipliers.ThrusterOutput(thrust, desiredPower * 80000);
-            //    actualPower -= desiredPower / 4;
-            //}
-            //
-            //SyncMultipliers.ReactorOutput(basePart, actualPower);
-            //
-            //MyAPIGateway.Utilities.ShowMessage("Fusion Systems", basePart.PowerOutputMultiplier + " | " + actualPower);
         }
 
         public void UpdateTick()

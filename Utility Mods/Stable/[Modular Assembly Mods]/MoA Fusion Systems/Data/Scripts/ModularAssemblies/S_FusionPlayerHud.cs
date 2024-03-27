@@ -1,6 +1,6 @@
 ﻿using Sandbox.Game;
-using SCModRepository.Utility_Mods.Stable._Modular_Assembly_Mods_.MoA_Fusion_Systems.Data.Scripts.ModularAssemblies;
 using Scripts.ModularAssemblies.Communication;
+using Scripts.ModularAssemblies.FusionParts;
 using System;
 using System.Collections.Generic;
 using System.Linq;

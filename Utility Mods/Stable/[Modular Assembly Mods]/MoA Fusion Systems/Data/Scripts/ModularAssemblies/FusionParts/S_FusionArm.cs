@@ -10,7 +10,7 @@ using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRageMath;
 
-namespace SCModRepository.Utility_Mods.Stable._Modular_Assembly_Mods_.MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
+namespace Scripts.ModularAssemblies.FusionParts
 {
     /// <summary>
     /// Represents a single 'arm' (loop) of fusion accelerators.
