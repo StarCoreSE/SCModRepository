@@ -498,9 +498,9 @@ namespace ShipPoints
                 PomPomMain@100;
                 150mmCasemate@100;
                 150mmCasemateTwin@125;
-                BoforTwinRemodel@95;
-                BoforSingleRemodel@75;
-                QuadBofor@150;
+                BoforTwinRemodel@50;
+                BoforSingleRemodel@60;
+                QuadBofor@75;
                 TorpTestBuidl@350;
                 16InchTriple@400;
                 15cmTbtsKC36T@100;
