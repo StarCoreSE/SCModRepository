@@ -678,7 +678,7 @@ namespace Scripts
                 TargetLossDegree = 180f, // Degrees, Is pointed forward
                 TargetLossTime = 60, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 900, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
-                AccelPerSec = 20f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
+                AccelPerSec = 40f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 900, // voxel phasing if you go above 5100
                 MaxTrajectory = 13500f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
@@ -690,7 +690,7 @@ namespace Scripts
                 {
                     Inaccuracy = 10f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
                     Aggressiveness = 2f, // controls how responsive tracking is.
-                    MaxLateralThrust = 0.3f, // controls how sharp the trajectile may turn
+                    MaxLateralThrust = 0.4f, // controls how sharp the trajectile may turn
                     TrackingDelay = 300, // Measured in Shape diameter units traveled.
                     MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
