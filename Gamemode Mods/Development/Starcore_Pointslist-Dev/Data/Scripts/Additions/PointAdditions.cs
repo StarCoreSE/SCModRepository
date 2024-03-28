@@ -495,7 +495,7 @@ namespace ShipPoints
                 127mmMk32@250;
                 127mmMk56@350;
                 105mmTwin@100;
-                PomPomMain@100;
+                PomPomMain@75;
                 150mmCasemate@100;
                 150mmCasemateTwin@125;
                 BoforTwinRemodel@50;
