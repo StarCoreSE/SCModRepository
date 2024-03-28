@@ -1,7 +1,7 @@
-﻿namespace Scripts.ModularAssemblies.Communication
+﻿namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
 {
     // turns out whoever wrote the CoreSystems definition handler is REALLY SMART. hats off to you
-    partial class ModularDefinition
+    internal partial class ModularDefinition
     {
         internal ModularDefinition()
         {

@@ -1,28 +1,17 @@
-﻿using Modular_Definitions.Data.Scripts.ModularAssemblies;
-using Sandbox.ModAPI;
-using Scripts.ModularAssemblies.Communication;
-using Scripts.ModularAssemblies.Debug;
-using Scripts.ModularAssemblies.FusionParts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
+using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
-using VRage.GameServices;
-using VRageMath;
 
-namespace Scripts.ModularAssemblies
+namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
 {
-
     internal class S_FusionManager
     {
-        static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
-
         public static S_FusionManager I = new S_FusionManager();
         public ModularDefinition Definition;
         public Dictionary<int, S_FusionSystem> FusionSystems = new Dictionary<int, S_FusionSystem>();
+        private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
 
 
         public void Load()
@@ -37,7 +26,7 @@ namespace Scripts.ModularAssemblies
 
         public void UpdateTick()
         {
-            foreach (S_FusionSystem fusionSystem in FusionSystems.Values)
+            foreach (var fusionSystem in FusionSystems.Values)
                 fusionSystem.UpdateTick();
         }
 
@@ -46,20 +35,16 @@ namespace Scripts.ModularAssemblies
             if (!FusionSystems.ContainsKey(PhysicalAssemblyId))
                 FusionSystems.Add(PhysicalAssemblyId, new S_FusionSystem(PhysicalAssemblyId));
 
-            FusionSystems[PhysicalAssemblyId].AddPart((IMyCubeBlock) NewBlockEntity);
+            FusionSystems[PhysicalAssemblyId].AddPart((IMyCubeBlock)NewBlockEntity);
         }
 
         public void OnPartRemove(int PhysicalAssemblyId, MyEntity BlockEntity, bool IsBaseBlock)
         {
             // Remove if the connection is broken.
             if (!IsBaseBlock)
-            {
-                FusionSystems[PhysicalAssemblyId].RemovePart((IMyCubeBlock) BlockEntity);
-            }
+                FusionSystems[PhysicalAssemblyId].RemovePart((IMyCubeBlock)BlockEntity);
             else
-            {
                 FusionSystems.Remove(PhysicalAssemblyId);
-            }
         }
     }
 }

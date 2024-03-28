@@ -1,39 +1,34 @@
-﻿using Scripts.ModularAssemblies.Communication;
-using Scripts.ModularAssemblies.Debug;
-using System;
-using System.Collections.Generic;
-using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRageMath;
 
-namespace Scripts.ModularAssemblies.FusionParts
+namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
+    FusionParts
 {
     /// <summary>
-    /// Represents a single 'arm' (loop) of fusion accelerators.
+    ///     Represents a single 'arm' (loop) of fusion accelerators.
     /// </summary>
     internal struct S_FusionArm
     {
-        const float LengthEfficiencyModifier = 0.1f;
-        const float BlockPowerGeneration = 0.005f;
-        const float BlockPowerStorage = 1f;
+        private const float LengthEfficiencyModifier = 0.1f;
+        private const float BlockPowerGeneration = 0.005f;
+        private const float BlockPowerStorage = 1f;
 
-        static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
+        private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
 
         public readonly bool IsValid;
 
-        public float PowerGeneration { get; private set; }
-        public float PowerStorage { get; private set; }
+        public float PowerGeneration { get; }
+        public float PowerStorage { get; }
 
         public IMyCubeBlock[] Parts;
 
         public S_FusionArm(MyEntity newPart, string rootSubtype)
         {
-            List<IMyCubeBlock> parts = new List<IMyCubeBlock>();
-            int stopHits = 0;
+            var parts = new List<IMyCubeBlock>();
+            var stopHits = 0;
             IsValid = PerformScan(newPart, null, rootSubtype, ref stopHits, ref parts);
 
             PowerGeneration = 0;
@@ -47,8 +42,7 @@ namespace Scripts.ModularAssemblies.FusionParts
             }
 
             foreach (var part in parts)
-            {
-                switch ((part as IMyCubeBlock)?.BlockDefinition.SubtypeName)
+                switch (part?.BlockDefinition.SubtypeName)
                 {
                     case "Caster_Accelerator_90":
                         PowerGeneration += BlockPowerGeneration;
@@ -57,7 +51,7 @@ namespace Scripts.ModularAssemblies.FusionParts
                         PowerStorage += BlockPowerStorage;
                         break;
                 }
-            }
+
             Parts = parts.ToArray();
             parts.Clear();
 
@@ -68,33 +62,33 @@ namespace Scripts.ModularAssemblies.FusionParts
 
 
         /// <summary>
-        /// Performs a recursive scan for connected blocks in an arm loop.
+        ///     Performs a recursive scan for connected blocks in an arm loop.
         /// </summary>
         /// <param name="blockEntity">The block entity to check.</param>
         /// <param name="prevScan">The block entity to ignore; nullable.</param>
         /// <param name="stopAtSubtype">Exits the loop at this subtype.</param>
         /// <returns></returns>
-        static bool PerformScan(MyEntity blockEntity, MyEntity prevScan, string stopAtSubtype, ref int stopHits, ref List<IMyCubeBlock> parts)
+        private static bool PerformScan(MyEntity blockEntity, MyEntity prevScan, string stopAtSubtype, ref int stopHits,
+            ref List<IMyCubeBlock> parts)
         {
             if (ModularAPI.IsDebug())
-                DebugDraw.AddGridPoint(((IMyCubeBlock)blockEntity).Position, ((IMyCubeBlock)blockEntity).CubeGrid, Color.Blue, 2);
-            parts.Add((IMyCubeBlock) blockEntity);
+                DebugDraw.DebugDraw.AddGridPoint(((IMyCubeBlock)blockEntity).Position,
+                    ((IMyCubeBlock)blockEntity).CubeGrid, Color.Blue, 2);
+            parts.Add((IMyCubeBlock)blockEntity);
 
-            MyEntity[] connectedBlocks = ModularAPI.GetConnectedBlocks(blockEntity, false);
+            var connectedBlocks = ModularAPI.GetConnectedBlocks(blockEntity, false);
 
             if (connectedBlocks.Length < 2)
                 return false;
 
             foreach (var connectedBlock in connectedBlocks)
             {
-                string connectedSubtype = ((IMyCubeBlock)connectedBlock).BlockDefinition.SubtypeName;
+                var connectedSubtype = ((IMyCubeBlock)connectedBlock).BlockDefinition.SubtypeName;
                 if (connectedSubtype == stopAtSubtype)
                     stopHits++;
 
                 if (connectedBlock != prevScan && connectedSubtype != stopAtSubtype)
-                {
                     PerformScan(connectedBlock, blockEntity, stopAtSubtype, ref stopHits, ref parts);
-                }
             }
 
             return stopHits == 2;

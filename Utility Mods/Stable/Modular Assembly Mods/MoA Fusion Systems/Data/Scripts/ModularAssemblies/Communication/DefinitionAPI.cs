@@ -1,23 +1,23 @@
-﻿using Sandbox.ModAPI;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Sandbox.ModAPI;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
-using VRage.ModAPI;
 using VRage.Utils;
 
-namespace Scripts.ModularAssemblies.Communication
+namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
+    Communication
 {
     public class ModularDefinitionAPI
     {
         /// <summary>
-        /// Returns the IMyCubeGrid of a given IMyCubeBlock's EntityId.
+        ///     Returns the IMyCubeGrid of a given IMyCubeBlock's EntityId.
         /// </summary>
         /// <param name="blockId"></param>
         /// <returns></returns>
         public IMyCubeGrid GridFromBlockId(long blockId)
         {
-            IMyEntity entity = MyAPIGateway.Entities.GetEntityById(blockId);
+            var entity = MyAPIGateway.Entities.GetEntityById(blockId);
             if (entity is IMyCubeBlock)
                 return ((IMyCubeBlock)entity).CubeGrid;
             return null;
@@ -35,7 +35,7 @@ namespace Scripts.ModularAssemblies.Communication
         private Func<MyEntity, int> _getContainingAssembly;
 
         /// <summary>
-        /// Gets all AssemblyParts in the world. Returns an array of all AssemblyParts.
+        ///     Gets all AssemblyParts in the world. Returns an array of all AssemblyParts.
         /// </summary>
         public MyEntity[] GetAllParts()
         {
@@ -43,10 +43,10 @@ namespace Scripts.ModularAssemblies.Communication
         }
 
         /// <summary>
-        /// Gets all PhysicalAssembly ids in the world. Returns an empty list on fail.
-        /// <para>
-        /// Arg1 is assembly id
-        /// </para>
+        ///     Gets all PhysicalAssembly ids in the world. Returns an empty list on fail.
+        ///     <para>
+        ///         Arg1 is assembly id
+        ///     </para>
         /// </summary>
         public int[] GetAllAssemblies()
         {
@@ -54,10 +54,10 @@ namespace Scripts.ModularAssemblies.Communication
         }
 
         /// <summary>
-        /// Gets all member parts of a assembly. Returns an empty list on fail.
-        /// <para>
-        /// Arg1 is EntityId
-        /// </para>
+        ///     Gets all member parts of a assembly. Returns an empty list on fail.
+        ///     <para>
+        ///         Arg1 is EntityId
+        ///     </para>
         /// </summary>
         public MyEntity[] GetMemberParts(int assemblyId)
         {
@@ -65,10 +65,10 @@ namespace Scripts.ModularAssemblies.Communication
         }
 
         /// <summary>
-        /// Gets all connected parts to a block. Returns an empty list on fail.
-        /// <para>
-        /// <paramref name="useCached"/>: Set this to 'false' if used in OnPartAdd.
-        /// </para>
+        ///     Gets all connected parts to a block. Returns an empty list on fail.
+        ///     <para>
+        ///         <paramref name="useCached" />: Set this to 'false' if used in OnPartAdd.
+        ///     </para>
         /// </summary>
         public MyEntity[] GetConnectedBlocks(MyEntity partBlockId, bool useCached = true)
         {
@@ -76,7 +76,7 @@ namespace Scripts.ModularAssemblies.Communication
         }
 
         /// <summary>
-        /// Gets the base part of a PhysicalAssembly. Returns null if assembly does not exist.
+        ///     Gets the base part of a PhysicalAssembly. Returns null if assembly does not exist.
         /// </summary>
         public MyEntity GetBasePart(int assemblyId)
         {
@@ -84,7 +84,7 @@ namespace Scripts.ModularAssemblies.Communication
         }
 
         /// <summary>
-        /// Returns true if debug mode is enabled.
+        ///     Returns true if debug mode is enabled.
         /// </summary>
         /// <returns></returns>
         public bool IsDebug()
@@ -98,12 +98,10 @@ namespace Scripts.ModularAssemblies.Communication
         }
 
 
-
-
-        public bool IsReady = false;
-        private bool _isRegistered = false;
-        private bool _apiInit = false;
-        private long ApiChannel = 8774;
+        public bool IsReady;
+        private bool _isRegistered;
+        private bool _apiInit;
+        private readonly long ApiChannel = 8774;
 
         public void ApiAssign(IReadOnlyDictionary<string, Delegate> delegates)
         {
@@ -147,9 +145,11 @@ namespace Scripts.ModularAssemblies.Communication
 
         private void HandleMessage(object obj)
         {
-            if (_apiInit || obj is string) // the sent "ApiEndpointRequest" will also be received here, explicitly ignoring that
+            if (_apiInit ||
+                obj is string) // the sent "ApiEndpointRequest" will also be received here, explicitly ignoring that
             {
-                MyLog.Default.WriteLineAndConsole($"ModularDefinitions: ModularDefinitionsAPI ignored message {obj as string}!");
+                MyLog.Default.WriteLineAndConsole(
+                    $"ModularDefinitions: ModularDefinitionsAPI ignored message {obj as string}!");
                 return;
             }
 
@@ -157,7 +157,8 @@ namespace Scripts.ModularAssemblies.Communication
 
             if (dict == null)
             {
-                MyLog.Default.WriteLineAndConsole("ModularDefinitions: ModularDefinitionsAPI ERR: Recieved null dictionary!");
+                MyLog.Default.WriteLineAndConsole(
+                    "ModularDefinitions: ModularDefinitionsAPI ERR: Recieved null dictionary!");
                 return;
             }
 

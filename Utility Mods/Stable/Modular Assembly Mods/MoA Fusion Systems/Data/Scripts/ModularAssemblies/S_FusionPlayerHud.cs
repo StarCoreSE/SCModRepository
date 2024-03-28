@@ -1,26 +1,21 @@
-﻿using Sandbox.Game;
-using Scripts.ModularAssemblies.Communication;
-using Scripts.ModularAssemblies.FusionParts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
+using Sandbox.Game;
 using VRage.Game.Components;
+using VRage.Utils;
 
-namespace Scripts.ModularAssemblies
+namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
 {
     /// <summary>
-    /// Semi-independent script for managing the player HUD.
+    ///     Semi-independent script for managing the player HUD.
     /// </summary>
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     public class S_FusionPlayerHud : MySessionComponentBase
     {
         public static S_FusionPlayerHud I;
-        static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
-        S_FusionManager FusionManager => S_FusionManager.I;
-        
+        private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
+        private static S_FusionManager FusionManager => S_FusionManager.I;
+
         #region Base Methods
 
         public override void LoadData()
@@ -37,25 +32,34 @@ namespace Scripts.ModularAssemblies
 
         public override void UpdateAfterSimulation()
         {
-            FusionManager.UpdateTick();
-
-            if (ModularAPI.IsDebug())
+            try
             {
-                MyVisualScriptLogicProvider.SetQuestlog(true, $"Fusion Systems");
+                FusionManager.UpdateTick();
 
-                foreach (var assemblyId in ModularAPI.GetAllAssemblies())
+                if (ModularAPI.IsDebug())
                 {
-                    if (!FusionManager.FusionSystems.ContainsKey(assemblyId))
-                        continue;
+                    MyVisualScriptLogicProvider.SetQuestlogLocal(true, $"Fusion Systems ({FusionManager.FusionSystems.Count})");
 
-                    S_FusionSystem system = FusionManager.FusionSystems[assemblyId];
+                    foreach (var assemblyId in ModularAPI.GetAllAssemblies())
+                    {
+                        if (!FusionManager.FusionSystems.ContainsKey(assemblyId))
+                            continue;
 
-                    MyVisualScriptLogicProvider.AddQuestlogDetail($"[{assemblyId}] Power: {Math.Round(system.PowerStored/system.PowerCapacity * 100f)}% ({Math.Round(system.PowerCapacity)} @ {Math.Round(system.PowerGeneration*60, 1)}/s) | Arms: {system.Arms.Count}", false, false);
+                        var system = FusionManager.FusionSystems[assemblyId];
+
+                        MyVisualScriptLogicProvider.AddQuestlogDetailLocal(
+                            $"[{assemblyId}] Power: {Math.Round(system.PowerStored / system.PowerCapacity * 100f)}% ({Math.Round(system.PowerCapacity)} @ {Math.Round(system.PowerGeneration * 60, 1)}/s) | Arms: {system.Arms.Count}",
+                            false, false);
+                    }
+                }
+                else
+                {
+                    MyVisualScriptLogicProvider.SetQuestlogLocal(false, "Fusion Systems");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MyVisualScriptLogicProvider.SetQuestlog(false, $"Fusion Systems");
+                MyLog.Default.WriteLineAndConsole(ex.ToString());
             }
         }
 
