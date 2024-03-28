@@ -31,7 +31,7 @@ namespace Scripts
             AmmoMagazine = "Energy",
             AmmoRound = "SmallXPulseLaserTurretAmmo",
             HybridRound = false, //AmmoMagazine based weapon with energy cost
-            EnergyCost = 0.045f, //132MW (((EnergyCost * DefaultDamage) * ShotsPerSecond) * BarrelsPerShot) * ShotsPerBarrel
+            EnergyCost = 0.0341f, //100MW@0.0341 //90MW@0.0307  //132MW@0.045 (((EnergyCost * DefaultDamage) * ShotsPerSecond) * BarrelsPerShot) * ShotsPerBarrel = 2933.3333344
             BaseDamage = 4000f,
             Mass = 0, // in kilograms
             Health = 0, // 0 = disabled, otherwise how much damage it can take from other trajectiles before dying.
@@ -80,8 +80,8 @@ namespace Scripts
                 Characters = 1f,
                 FallOff = new FallOffDef
                 {
-                    Distance = 0, // Distance at which max damage begins falling off.
-                    MinMultipler = 1f, // value from 0.0f to 1f where 0.1f would be a min damage of 10% of max damage.
+                    Distance = 1500, // Distance at which max damage begins falling off.
+                    MinMultipler = 0.6f, // value from 0.0f to 1f where 0.1f would be a min damage of 10% of max damage.
                 },
                 Grids = new GridSizeDef
                 {
@@ -93,11 +93,11 @@ namespace Scripts
                     Armor = -1f,
                     Light = -1f,
                     Heavy = -1f,
-                    NonArmor = -1f,
+                    NonArmor = 0.8f,
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = -1f, //Heavy laser type.
+                    Modifier = 0.95f, //Heavy laser type.
                     Type = Default,
                     BypassModifier = -1.5f,
                 },
@@ -218,7 +218,7 @@ namespace Scripts
                 MaxLifeTime = 60, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 AccelPerSec = 0f,
                 DesiredSpeed = 99999,
-                MaxTrajectory = 2200f,
+                MaxTrajectory = 2700f,
                 //FieldTime was here, it's dead now is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed

@@ -5,6 +5,9 @@ using static Scripts.Structure.WeaponDefinition.HardPointDef;
 using static Scripts.Structure.WeaponDefinition.HardPointDef.Prediction;
 using static Scripts.Structure.WeaponDefinition.TargetingDef.BlockTypes;
 using static Scripts.Structure.WeaponDefinition.TargetingDef.Threat;
+using static Scripts.Structure.WeaponDefinition.TargetingDef;
+using static Scripts.Structure.WeaponDefinition.TargetingDef.CommunicationDef.Comms;
+using static Scripts.Structure.WeaponDefinition.TargetingDef.CommunicationDef.SecurityMode;
 using static Scripts.Structure.WeaponDefinition.HardPointDef.HardwareDef;
 using static Scripts.Structure.WeaponDefinition.HardPointDef.HardwareDef.HardwareType;
 
@@ -56,10 +59,12 @@ namespace Scripts {
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 2000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MaxTargetDistance = 2500, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
                 MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
-                TopTargets = 4, // Maximum number of targets to randomize between; 0 = unlimited.
-                TopBlocks = 8, // Maximum number of blocks to randomize between; 0 = unlimited.
+                TopTargets = 6, // Maximum number of targets to randomize between; 0 = unlimited.
+                CycleTargets = 2, // Number of targets to "cycle" per acquire attempt.
+                TopBlocks = 16, // Maximum number of blocks to randomize between; 0 = unlimited.
+                CycleBlocks = 4, 
                 StopTrackingSpeed = 0f, // Do not track threats traveling faster than this speed; 0 = unlimited.
             },
             HardPoint = new HardPointDef
@@ -95,8 +100,8 @@ namespace Scripts {
                     ElevateRate = 0.025f,
                     MinAzimuth = -180,
                     MaxAzimuth = 180,
-                    MinElevation = -5,
-                    MaxElevation = 90,
+                    MinElevation = -6,
+                    MaxElevation = 67,
                     FixedOffset = false,
                     InventorySize = 0f,
                     IdlePower = 1f, // Constant base power draw in MW.

@@ -39,7 +39,7 @@
 			<Volume>0</Volume>
 			<Model>Models\Components\ContractPackage.mwm</Model>
 			<PhysicalMaterial>Ammo</PhysicalMaterial>
-			<Capacity>120</Capacity>
+			<Capacity>152</Capacity>
 			<IconSymbol>45</IconSymbol>
 			<AmmoDefinitionId Subtype="MammonAmmoMag" />
 		</AmmoMagazine>
@@ -60,7 +60,7 @@
       <Volume>0</Volume>
       <Model>Models\Components\ContractPackage.mwm</Model>
       <PhysicalMaterial>Ammo</PhysicalMaterial>
-      <Capacity>120</Capacity>
+      <Capacity>76</Capacity>
       <IconSymbol>45</IconSymbol>
       <AmmoDefinitionId Subtype="NyxAmmoMag" />
     </AmmoMagazine>

@@ -559,7 +559,7 @@ namespace klime.PointCheck
                     break;
                 case "[ONYX] Heliod Plasma Pulser":
                     t_N = "Heliod Plasma Pulser";
-                    mCs = 0.15f;
+                    mCs = 0.25f;
                     break;
                  case "[MA] UNN Heavy Torpedo Launcher":
                     t_N = "UNN Heavy Torpedo Launcher";
@@ -591,12 +591,12 @@ namespace klime.PointCheck
                     break;
                 case "[EXO] Chiasm [Arc Emitter]":
                     t_N = "Chiasm [Arc Emitter]";
-                    mCs = 0.15f;
+                    mCs = 0.5f;
                     break;
                 case "[BTI] Medium Laser":
                 case "[BTI] Large Laser":
                     t_N = " Laser";
-                    mCs = 0.15f;
+                    mCs = 0.1f;
                     break;
                 case "Reinforced Blastplate":
                     t_N = "Reinforced Blastplate";
@@ -610,7 +610,7 @@ namespace klime.PointCheck
                 case "[EXO] Taiidan Bomber Hangar Bay Medium":
                 case "[EXO] Taiidan Fighter Small Bay":
                     t_N = "Taiidan";
-                    mCs = 0.25f;
+                    mCs = 0.10f;
                     break;
 
             }
