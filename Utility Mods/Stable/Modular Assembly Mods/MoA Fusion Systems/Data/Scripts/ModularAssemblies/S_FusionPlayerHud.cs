@@ -36,9 +36,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
             {
                 FusionManager.UpdateTick();
 
-                if (ModularAPI?.IsDebug() ?? false)
+                if (ModularAPI.IsDebug())
                 {
-                    MyVisualScriptLogicProvider.SetQuestlog(true, "Fusion Systems");
+                    MyVisualScriptLogicProvider.SetQuestlogLocal(true, $"Fusion Systems ({FusionManager.FusionSystems.Count})");
 
                     foreach (var assemblyId in ModularAPI.GetAllAssemblies())
                     {
@@ -47,14 +47,14 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
 
                         var system = FusionManager.FusionSystems[assemblyId];
 
-                        MyVisualScriptLogicProvider.AddQuestlogDetail(
+                        MyVisualScriptLogicProvider.AddQuestlogDetailLocal(
                             $"[{assemblyId}] Power: {Math.Round(system.PowerStored / system.PowerCapacity * 100f)}% ({Math.Round(system.PowerCapacity)} @ {Math.Round(system.PowerGeneration * 60, 1)}/s) | Arms: {system.Arms.Count}",
                             false, false);
                     }
                 }
                 else
                 {
-                    MyVisualScriptLogicProvider.SetQuestlog(false, "Fusion Systems");
+                    MyVisualScriptLogicProvider.SetQuestlogLocal(false, "Fusion Systems");
                 }
             }
             catch (Exception ex)
