@@ -516,18 +516,19 @@ namespace klime.PointCheck
                         MiscBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
                     }
                 }
-
-                // Apply extra cost to weapons if this isnt the main grid
-                if((i1-1)==blocklist.Count && !isMainGrid)
-                {
-                    foreach(KeyValuePair<string, string> weapon in tempGuns)
-                        {
-                            // Adding extra points when not on the main grid
-                            // Currently takes a global 20% extra cost wich isn´t multiplicative with clibing cost
-                            offensiveBpts =+ PointCheck.PointValues.GetValueOrDefault(weapon.Key, 0) * weapon.Value * 0.2
-                        }
-                }
             }
+            
+            // Apply extra cost to weapons if this isnt the main grid
+            if(!isMainGrid)
+            {
+                foreach(KeyValuePair<string, string> weapon in tempGuns)
+                    {
+                        // Adding extra points when not on the main grid
+                        // Currently takes a global 20% extra cost wich isn´t multiplicative with clibing cost
+                        offensiveBpts =+ PointCheck.PointValues.GetValueOrDefault(weapon.Key, 0) * weapon.Value * 0.2
+                    }
+            }
+            
         }
 
         private static void ClimbingCostRename(ref string t_N, ref float mCs)
