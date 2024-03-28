@@ -486,8 +486,8 @@ namespace ShipPoints
 				381mmDualR@250;
                 381mmDualNR@250;
                 380mmMLE1935@400;
-                15cmSKC28R@125;
-                15cmSKC28NR@125;
+                15cmSKC28R@175;
+                15cmSKC28NR@175;
                 128mmL45@200;
                 128mmSKC34@250;
                 127mmMk12@175;
@@ -503,8 +503,8 @@ namespace ShipPoints
                 QuadBofor@75;
                 TorpTestBuidl@350;
                 16InchTriple@400;
-                15cmTbtsKC36T@100;
-                15cmTbtsKC36@100;
+                15cmTbtsKC36T@150;
+                15cmTbtsKC36@150;
                 203mmTwin@165;
                 203mmQuad@325;
                 TorpBarbette@500;
