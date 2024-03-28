@@ -353,6 +353,10 @@ namespace klime.PointCheck
 
         private void FatHandling(ref bool hasPower, ref bool hasCockpit, ref bool hasThrust, ref bool hasGyro, ref float movementBpts, ref float powerBpts, ref float offensiveBpts, ref float MiscBpts, ref int bonusBpts, ref int pdBpts, ref string controller, MyCubeGrid subgrid)
         {
+            // Variables used for extra cost on subgrid weapons (rotorturrets)
+            bool isMainGrid;
+            Dictionary<string, int> tempGuns = new Dictionary<string, int>();
+
             VRage.Collections.ListReader<MyCubeBlock> blocklist = subgrid.GetFatBlocks();
             for (int i1 = 0; i1 < blocklist.Count; i1++)
             {
@@ -416,6 +420,15 @@ namespace klime.PointCheck
                     if (block is IMyCockpit && (block as IMyCockpit).CanControlShip)
                     {
                         hasCockpit = true;
+
+                        if(hasCockpit && !isMainGrid)
+                        {
+                            // TODO: Prevent ppl from placing Cockpits on subgrids to circumvent BP increase
+                            // Dunno if this works how i think it will, needs testing
+                            MyAPIGateway.Utilities.ShowNotification("Illegal Cockpit placement on subgrid", 10000, font: "Red");
+                        }
+
+                        isMainGrid = true;
                     }
 
                     if (block is IMyReactor || block is IMyBatteryBlock)
@@ -471,6 +484,15 @@ namespace klime.PointCheck
                 {
                     offensiveBpts += PointCheck.PointValues.GetValueOrDefault(id, 0) + bonusBpts;
 
+                    if (tempGuns.ContainsKey(id))
+                    {
+                        tempGuns[id] += 1;
+                    }
+                    else
+                    {
+                        tempGuns.Add(id, 1);
+                    }
+
                     // isPointDefense;
                     if (PointCheckHelpers.pdDictionary.TryGetValue(block.BlockDefinition.Id.SubtypeName, out isPointDefense) && isPointDefense)
                     {
@@ -493,6 +515,17 @@ namespace klime.PointCheck
                     {
                         MiscBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
                     }
+                }
+
+                // Apply extra cost to weapons if this isnt the main grid
+                if((i1-1)==blocklist.Count && !isMainGrid)
+                {
+                    foreach(KeyValuePair<string, string> weapon in tempGuns)
+                        {
+                            // Adding extra points when not on the main grid
+                            // Currently takes a global 20% extra cost wich isn´t multiplicative with clibing cost
+                            offensiveBpts =+ PointCheck.PointValues.GetValueOrDefault(weapon.Key, 0) * weapon.Value * 0.2
+                        }
                 }
             }
         }
