@@ -591,7 +591,7 @@ namespace klime.PointCheck
                     break;
                 case "[EXO] Chiasm [Arc Emitter]":
                     t_N = "Chiasm [Arc Emitter]";
-                    mCs = 0.5f;
+                    mCs = 0.15f;
                     break;
                 case "[BTI] Medium Laser":
                 case "[BTI] Large Laser":
@@ -610,7 +610,7 @@ namespace klime.PointCheck
                 case "[EXO] Taiidan Bomber Hangar Bay Medium":
                 case "[EXO] Taiidan Fighter Small Bay":
                     t_N = "Taiidan";
-                    mCs = 0.10f;
+                    mCs = 0.20f;
                     break;
 
             }
