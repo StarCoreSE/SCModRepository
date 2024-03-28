@@ -86,7 +86,7 @@ namespace ShipPoints
 				MA_AC150_Gantry@150;
 				K_SA_Gauss_APC@150;
 				K_SA_Gauss_AMS@200;
-				K_SA_Gauss_ERC@370;
+				K_SA_Gauss_ERC@300;
 				MXA_CoilgunH@180;
 				MXA_SoFCoilgun@250;
 				RailgunxTurret@250;
