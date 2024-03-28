@@ -126,8 +126,8 @@ namespace ShipPoints
 				SC_AR_Eris@1250;
 				K_SA_Launcher_FixedMount@275;
 					
-				MA_Tiger@150;
-				MA_Crouching_Tiger@150;
+				MA_Tiger@125;
+				MA_Crouching_Tiger@125;
 
 				MA_Afterburner_Large@200;
 				MA_Afterburner_Large_small@50;
@@ -229,13 +229,13 @@ namespace ShipPoints
 				K_SA_HeavyMetal_Gauss_ERIIRF@99999;
 				K_SA_Launcher_FixedMountv2@500;
 				ARYXTempestCannon@350;
-				SC_AR_Tumult@400;
+				SC_AR_Tumult@350;
 				ARYXLightCoilgun@700;
 				SC_AR_Forager@700;
 
 				MA_Fixed_T2@150;
 				MA_Fixed_T2_Naked@150;
-				MA_Fixed_T3@150;
+				MA_Fixed_T3@125;
 				ARYXRailgun@400;
 				SC_AR_Phobos@400;
 				K_SA_LoW_CapitalSpinalA@650;
@@ -275,11 +275,11 @@ namespace ShipPoints
 				MXA_M58ArcherPods_S@500;
 				MXA_M2MAC_S@1000;
 
-				MA_Gimbal_Laser_Armored_sb@70;
-				MA_Gimbal_Laser_Armored_Slope_sb@70;
-				MA_Gimbal_Laser_Armored_Slope2_sb@70;
-				MA_Gimbal_Laser_Armored_Slope45_sb@70;
-				MA_Gimbal_Laser_sb@70;
+				MA_Gimbal_Laser_Armored_sb@150;
+				MA_Gimbal_Laser_Armored_Slope_sb@150;
+				MA_Gimbal_Laser_Armored_Slope2_sb@150;
+				MA_Gimbal_Laser_Armored_Slope45_sb@150;
+				MA_Gimbal_Laser_sb@150;
 				MA_Blister@100;
 				MA_Blister45@100;
 				MA_Blister30@100;
@@ -370,8 +370,8 @@ Cat_Battletech@15;
 				Starcore_AMS_II_Block@125;
 				Starcore_M_Laser_Block@75;
 				Starcore_L_Laser_Block@150;
-				K_SA_HeavyMetal_Spinal_Rotary@1600;
-				K_SA_HeavyMetal_Spinal_Rotary_Reskin@1600;
+				K_SA_HeavyMetal_Spinal_Rotary@1000;
+				K_SA_HeavyMetal_Spinal_Rotary_Reskin@1000;
 				MetalStorm@125;
 				CLB2X@500;
 				ERPPC@500;
@@ -430,11 +430,11 @@ Cat_WysemanHA@17;
 
 Cat_ChetNHI@18;
 				SC_Coil_Cannon@450;
-				NHI_PD_Turret@90;
-				NHI_PD_Turret_Half@90;
-				NHI_PD_Turret_Half_Slope_Top@90;
-				NHI_PD_Turret_Half_Slope_Tip@90;
-				NHI_PD_Turret_45_Slope@90;
+				NHI_PD_Turret@100;
+				NHI_PD_Turret_Half@100;
+				NHI_PD_Turret_Half_Slope_Top@100;
+				NHI_PD_Turret_Half_Slope_Tip@100;
+				NHI_PD_Turret_45_Slope@100;
 				NHI_Light_Autocannon_Turret@125;
 				NHI_Autocannon_Turret@250;
 				NHI_Gatling_Laser_Turret@250;
