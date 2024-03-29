@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ProtoBuf;
 using Sandbox.ModAPI;
 using VRage.Game.Components;
@@ -90,7 +91,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
 
         public static void ReactorOutput(IMyReactor reactor, float output)
         {
-            if (reactor.MaxOutput == output)
+            if (Math.Abs(reactor.MaxOutput - output) < 0.1f)
                 return;
 
             if (MyAPIGateway.Session.IsServer)
@@ -113,6 +114,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
 
         public static void ThrusterOutput(IMyThrust thrust, float output)
         {
+            if (Math.Abs(thrust.MaxThrust - output) < 1.0f)
+                return;
+
             if (MyAPIGateway.Session.IsServer)
             {
                 MyAPIGateway.Multiplayer.SendMessageToOthers(Channel,

@@ -13,9 +13,10 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     internal class S_FusionSystem
     {
         public const float MegawattsPerFusionPower = 50;
+        public const float NewtonsPerFusionPower = 800000;
 
         public List<S_FusionArm> Arms = new List<S_FusionArm>();
-        public int PhysicalAssemblyId = -1;
+        public int PhysicalAssemblyId;
         public float PowerCapacity;
 
         public float PowerGeneration;
@@ -139,14 +140,6 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             PowerStored += PowerGeneration;
             if (PowerStored > PowerCapacity)
                 PowerStored = PowerCapacity;
-
-            if (PowerStored <= 0)
-            {
-                PowerStored = 0;
-
-                foreach (var reactor in Reactors) reactor?.UpdatePower(powerGeneration, 0);
-                foreach (var thruster in Thrusters) thruster?.UpdateThrust(powerGeneration, 0);
-            }
         }
 
         public void UpdateTick()
