@@ -33,13 +33,15 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
         public float PowerConsumption;
 
         public MySync<float, SyncDirection.BothWays> PowerUsageSync;
+        public MySync<float, SyncDirection.BothWays> OverridePowerUsageSync;
+        public MySync<bool, SyncDirection.BothWays> OverrideEnabled;
         private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
 
         public void UpdateThrust(float PowerGeneration, float NewtonsPerFusionPower)
         {
             BufferPowerGeneration = PowerGeneration;
 
-            var consumptionMultiplier = PowerUsageSync.Value; // This is ugly, let's make it better.
+            var consumptionMultiplier = OverrideEnabled.Value ? OverridePowerUsageSync : PowerUsageSync.Value; // This is ugly, let's make it better.
             var efficiencyMultiplier = 1 / (0.5f + consumptionMultiplier);
 
             // Power generation consumed (per second)
@@ -47,6 +49,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
             // Power generated (per second)
             var thrustOutput = efficiencyMultiplier * powerConsumption * NewtonsPerFusionPower;
             BufferThrustOutput = thrustOutput;
+            MaxPowerConsumption = powerConsumption / 60;
 
             InfoText.Clear();
             InfoText.AppendLine(
@@ -56,19 +59,39 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
 
             // Convert back into power per tick
             SyncMultipliers.ThrusterOutput(Block, BufferThrustOutput);
-            MaxPowerConsumption = powerConsumption / 60;
         }
 
         private void CreateControls()
         {
             {
+                var boostPowerToggle =
+                    MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlOnOffSwitch, IMyThrust>(
+                        "FusionSystems.ThrustBoostPowerToggle");
+                boostPowerToggle.Title = MyStringId.GetOrCompute("Override Fusion Power");
+                boostPowerToggle.Tooltip =
+                    MyStringId.GetOrCompute("Toggles Power Override - a temporary override on Fusion Power draw.");
+                boostPowerToggle.Getter = block =>
+                    block.GameLogic.GetAs<FusionThrusterLogic>()?.OverrideEnabled.Value ?? false;
+                boostPowerToggle.Setter = (block, value) =>
+                    block.GameLogic.GetAs<FusionThrusterLogic>().OverrideEnabled.Value = value;
+
+                boostPowerToggle.OnText = MyStringId.GetOrCompute("On");
+                boostPowerToggle.OffText = MyStringId.GetOrCompute("Off");
+
+                boostPowerToggle.Visible = block => block.BlockDefinition.SubtypeName == "Caster_FocusLens";
+                boostPowerToggle.SupportsMultipleBlocks = true;
+                boostPowerToggle.Enabled = block => true;
+
+                MyAPIGateway.TerminalControls.AddControl<IMyThrust>(boostPowerToggle);
+            }
+            {
                 var powerUsageSlider =
                     MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, IMyThrust>(
-                        "FusionSystems.ThrusterPowerUsage");
+                        "FusionSystems.ThrustPowerUsage");
                 powerUsageSlider.Title = MyStringId.GetOrCompute("Fusion Power Usage");
                 powerUsageSlider.Tooltip =
-                    MyStringId.GetOrCompute("Fusion Power generation this thruster should use.");
-                powerUsageSlider.SetLimits(0, 2);
+                    MyStringId.GetOrCompute("Fusion Power generation this Thruster should use.");
+                powerUsageSlider.SetLimits(0.01f, 0.99f);
                 powerUsageSlider.Getter = block =>
                     block.GameLogic.GetAs<FusionThrusterLogic>()?.PowerUsageSync.Value ?? 0;
                 powerUsageSlider.Setter = (block, value) =>
@@ -84,6 +107,29 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
 
                 MyAPIGateway.TerminalControls.AddControl<IMyThrust>(powerUsageSlider);
             }
+            {
+                var boostPowerUsageSlider =
+                    MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, IMyThrust>(
+                        "FusionSystems.ThrustBoostPowerUsage");
+                boostPowerUsageSlider.Title = MyStringId.GetOrCompute("Override Power Usage");
+                boostPowerUsageSlider.Tooltip =
+                    MyStringId.GetOrCompute("Fusion Power generation this Thruster should use when Override is enabled.");
+                boostPowerUsageSlider.SetLimits(0.01f, 4.0f);
+                boostPowerUsageSlider.Getter = block =>
+                    block.GameLogic.GetAs<FusionThrusterLogic>()?.OverridePowerUsageSync.Value ?? 0;
+                boostPowerUsageSlider.Setter = (block, value) =>
+                    block.GameLogic.GetAs<FusionThrusterLogic>().OverridePowerUsageSync.Value = value;
+
+                boostPowerUsageSlider.Writer = (block, builder) =>
+                    builder.Append(Math.Round(block.GameLogic.GetAs<FusionThrusterLogic>().OverridePowerUsageSync.Value * 100))
+                        .Append('%');
+
+                boostPowerUsageSlider.Visible = block => block.BlockDefinition.SubtypeName == "Caster_FocusLens";
+                boostPowerUsageSlider.SupportsMultipleBlocks = true;
+                boostPowerUsageSlider.Enabled = block => true;
+
+                MyAPIGateway.TerminalControls.AddControl<IMyThrust>(boostPowerUsageSlider);
+            }
 
             MyAPIGateway.TerminalControls.CustomControlGetter += AssignDetailedInfoGetter;
 
@@ -98,6 +144,15 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
             block.SetDetailedInfoDirty();
         }
 
+        public void SetPowerBoost(bool value)
+        {
+            if (OverrideEnabled.Value == value)
+                return;
+
+            OverrideEnabled.Value = value;
+            UpdateThrust(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+        }
+
         #region Base Methods
 
         public override void Init(MyObjectBuilder_EntityBase definition)
@@ -105,8 +160,24 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
             base.Init(definition);
             Block = (IMyThrust)Entity;
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
+
+            // Trigger power update is only needed when OverrideEnabled is false
             PowerUsageSync.ValueChanged += value =>
-                UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
+            {
+                if (!OverrideEnabled.Value)
+                    UpdateThrust(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+            };
+
+            // Trigger power update is only needed when OverrideEnabled is true
+            OverridePowerUsageSync.ValueChanged += value =>
+            {
+                if (OverrideEnabled.Value)
+                    UpdateThrust(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+            };
+
+            // Trigger power update if boostEnabled is changed
+            OverrideEnabled.ValueChanged += value =>
+                UpdateThrust(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
         }
 
         public override void UpdateOnceBeforeFrame()
@@ -128,8 +199,11 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
         {
             base.UpdateAfterSimulation();
 
+            // If boost is unsustainable, disable it.
+            // If power draw exceeds power available, disable self until available.
             if (MemberSystem?.PowerStored <= PowerConsumption || !Block.IsWorking)
             {
+                SetPowerBoost(false);
                 PowerConsumption = 0;
                 SyncMultipliers.ThrusterOutput(Block, 0);
             }
