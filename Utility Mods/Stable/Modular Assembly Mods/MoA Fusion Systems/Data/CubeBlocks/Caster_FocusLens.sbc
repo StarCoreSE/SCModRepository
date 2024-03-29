@@ -8,17 +8,21 @@
 			</Id>
 			<DisplayName>{LOC:DisplayName_Caster_FocusLens}</DisplayName>
 			<Description>{LOC:Description_Caster_FocusLens}</Description>
-			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+			<Icon>Textures\GUI\Icons\Cubes\Caster_FocusLens.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="3" y="3" z="3"/>
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Caster_FocusLens.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="10"/>
-				<Component Subtype="Computer" Count="10"/>
+				<Component Subtype="SteelPlate" Count="100" />
+				<Component Subtype="Construction" Count="150" />
+				<Component Subtype="MetalGrid" Count="250" />
+				<Component Subtype="LargeTube" Count="40" />
+				<Component Subtype="Construction" Count="30" />
+				<Component Subtype="SteelPlate" Count="50" />
 			</Components>
-			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<CriticalComponent Subtype="LargeTube" Index="0" />
 			<MountPoints>
 				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
 			</MountPoints>

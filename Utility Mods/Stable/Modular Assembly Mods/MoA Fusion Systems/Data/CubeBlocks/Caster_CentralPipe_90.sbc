@@ -8,16 +8,23 @@
 			</Id>
 			<DisplayName>{LOC:DisplayName_Caster_CentralPipe_90}</DisplayName>
 			<Description>{LOC:Description_Caster_CentralPipe_90}</Description>
-			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+			<Icon>Textures\GUI\Icons\Cubes\Caster_CentralPipe_90.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="1" y="1" z="1"/>
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Caster_CentralPipe_90.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="10"/>
+				<Component Subtype="SteelPlate" Count="50" />
+				<Component Subtype="Construction" Count="40" />
+				<Component Subtype="MetalGrid" Count="4" />
+				<Component Subtype="LargeTube" Count="8" />
+				<Component Subtype="Reactor" Count="100" />
+				<Component Subtype="Motor" Count="6" />
+				<Component Subtype="Computer" Count="25" />
+				<Component Subtype="SteelPlate" Count="30" />
 			</Components>
-			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<CriticalComponent Subtype="Computer" Index="0" />
 			<BlockPairName>Caster_CentralPipe_90</BlockPairName>
 		</Definition>
 	</CubeBlocks>

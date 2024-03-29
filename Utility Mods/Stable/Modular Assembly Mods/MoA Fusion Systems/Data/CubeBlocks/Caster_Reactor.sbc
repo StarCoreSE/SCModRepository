@@ -8,17 +8,24 @@
 			</Id>
 			<DisplayName>{LOC:DisplayName_Caster_Reactor}</DisplayName>
 			<Description>{LOC:Description_Caster_Reactor}</Description>
-			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+			<Icon>Textures\GUI\Icons\Cubes\Caster_Reactor.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="3" y="3" z="3"/>
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Caster_Reactor.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="10"/>
-				<Component Subtype="Computer" Count="10"/>
+				<Component Subtype="SteelPlate" Count="800" />
+				<Component Subtype="Construction" Count="70" />
+				<Component Subtype="MetalGrid" Count="40" />
+				<Component Subtype="LargeTube" Count="40" />
+				<Component Subtype="Superconductor" Count="100" />
+				<Component Subtype="Reactor" Count="2000" />
+				<Component Subtype="Motor" Count="20" />
+				<Component Subtype="Computer" Count="75" />
+				<Component Subtype="SteelPlate" Count="200" />
 			</Components>
-			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<CriticalComponent Subtype="Computer" Index="0" />
 			<BlockPairName>Caster_Reactor</BlockPairName>
 			<MaxPowerOutput>0.001</MaxPowerOutput>
 		</Definition>
