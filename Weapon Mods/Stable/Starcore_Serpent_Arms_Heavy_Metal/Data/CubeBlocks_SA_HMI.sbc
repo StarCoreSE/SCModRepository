@@ -156,7 +156,7 @@ Ammunition: [2000m/s,] [Kinetic] </Description>
 <Description>Long Range Turret: [7km] 
 Idle Power: 150 MW (50 MW per Barrel)
 Reload Power: ~600 MW (~200 MW per Barrel)
-Reload Speed: [8-9 seconds] 
+Reload Speed: [8 seconds] 
 Ammunition: [Kinetic] </Description>
       <Icon>Textures\GUI\Icons\Cerberus.dds</Icon>
       <CubeSize>Large</CubeSize>
