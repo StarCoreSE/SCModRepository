@@ -6,8 +6,12 @@
 				<TypeId>CubeBlock</TypeId>
 				<SubtypeId>Caster_Accelerator_0</SubtypeId>
 			</Id>
-			<DisplayName>{LOC:DisplayName_Caster_Accelerator_0}</DisplayName>
-			<Description>{LOC:Description_Caster_Accelerator_0}</Description>
+			<DisplayName>Fusion Accelerator Straight</DisplayName>
+			<Description>
+				Stores [Fusion Power] within a [Fusion System].
+				Connects with other [Fusion Accelerators] in a loop, terminating in a [Fusion Accelerator Feeder].
+				Longer loops produce and store extra [Fusion Power].
+			</Description>
 			<Icon>Textures\GUI\Icons\Cubes\Caster_Accelerator_0.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
@@ -21,10 +25,9 @@
 				<Component Subtype="LargeTube" Count="8" />
 				<Component Subtype="Reactor" Count="100" />
 				<Component Subtype="Motor" Count="6" />
-				<Component Subtype="Computer" Count="25" />
 				<Component Subtype="SteelPlate" Count="30" />
 			</Components>
-			<CriticalComponent Subtype="Computer" Index="0" />
+			<CriticalComponent Subtype="Construction" Index="0" />
 			<MountPoints>
 				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
 				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
@@ -34,6 +37,7 @@
 				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
 			</MountPoints>
 			<BlockPairName>Caster_Accelerator_0</BlockPairName>
+			<IsAirTight>false</IsAirTight>
 		</Definition>
 	</CubeBlocks>
 </Definitions>

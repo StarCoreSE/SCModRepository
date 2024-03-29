@@ -6,9 +6,12 @@
 				<TypeId>Reactor</TypeId>
 				<SubtypeId>Caster_Reactor</SubtypeId>
 			</Id>
-			<DisplayName>{LOC:DisplayName_Caster_Reactor}</DisplayName>
-			<Description>{LOC:Description_Caster_Reactor}</Description>
-			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+			<DisplayName>Fusion Reactor</DisplayName>
+			<Description>
+				Generates electricity from [Fusion Power].
+				Produces more electricity with a higher input ratio, but becomes less efficient.
+			</Description>
+			<Icon>Textures\GUI\Icons\Cubes\Caster_Reactor.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="3" y="3" z="3"/>
@@ -36,6 +39,7 @@
 				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
 				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
 			</MountPoints>
+			<IsAirTight>true</IsAirTight>
 		</Definition>
 	</CubeBlocks>
 </Definitions>

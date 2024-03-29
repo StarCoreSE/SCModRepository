@@ -6,8 +6,11 @@
 				<TypeId>Thrust</TypeId>
 				<SubtypeId>Caster_FocusLens</SubtypeId>
 			</Id>
-			<DisplayName>{LOC:DisplayName_Caster_FocusLens}</DisplayName>
-			<Description>{LOC:Description_Caster_FocusLens}</Description>
+			<DisplayName>Fusion Thruster</DisplayName>
+			<Description>
+				Generates thrust from [Fusion Power].
+				Produces more thrust with a higher input ratio, but becomes less efficient.
+			</Description>
 			<Icon>Textures\GUI\Icons\Cubes\Caster_FocusLens.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
@@ -33,6 +36,7 @@
 			<MinPowerConsumption>0.000002</MinPowerConsumption>
 			<FlameDamageLengthScale>0.61</FlameDamageLengthScale>
 			<FlameLengthScale>1.5</FlameLengthScale>
+			<SlowdownFactor>1</SlowdownFactor>
 			<FlameIdleColor>
 				<X>0.2745098</X>
 				<Y>0.4090196</Y>

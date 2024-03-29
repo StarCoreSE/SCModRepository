@@ -29,7 +29,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
             },
 
             // The most important block in an assembly. Connection checking starts here.
-            BaseBlock = "Caster_Controller",
+            BaseBlock = null,
 
             // All SubtypeIds that can be part of this assembly.
             AllowedBlocks = new[]

@@ -6,8 +6,12 @@
 				<TypeId>CubeBlock</TypeId>
 				<SubtypeId>Caster_Feeder</SubtypeId>
 			</Id>
-			<DisplayName>{LOC:DisplayName_Caster_Feeder}</DisplayName>
-			<Description>{LOC:Description_Caster_Feeder}</Description>
+			<DisplayName>Fusion Accelerator Feeder</DisplayName>
+			<Description>
+				Connects [Fusion Accelerator] loops to the [Fusion System].
+				Terminates [Fusion Accelerators] in a loop, and connects to [Fusion Pipes].
+				Longer loops produce and store extra [Fusion Power].
+			</Description>
 			<Icon>Textures\GUI\Icons\Cubes\Caster_Feeder.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
@@ -21,11 +25,11 @@
 				<Component Subtype="LargeTube" Count="8" />
 				<Component Subtype="Reactor" Count="100" />
 				<Component Subtype="Motor" Count="6" />
-				<Component Subtype="Computer" Count="25" />
 				<Component Subtype="SteelPlate" Count="30" />
 			</Components>
-			<CriticalComponent Subtype="Computer" Index="0" />
+			<CriticalComponent Subtype="Construction" Index="0" />
 			<BlockPairName>Caster_Feeder</BlockPairName>
+			<IsAirTight>true</IsAirTight>
 		</Definition>
 	</CubeBlocks>
 </Definitions>

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
+﻿using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
 using Sandbox.Common.ObjectBuilders;
 using Sandbox.ModAPI;
 using Sandbox.ModAPI.Interfaces.Terminal;
+using System;
+using System.Collections.Generic;
+using System.Text;
 using VRage.Game.Components;
 using VRage.Game.ModAPI.Network;
 using VRage.ModAPI;
@@ -17,28 +17,24 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     FusionParts.FusionReactor
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Reactor), false, "Caster_Reactor")]
-    public class FusionReactorLogic : MyGameLogicComponent, IMyEventProxy
+    public class FusionReactorLogic : FusionPart<IMyReactor>
     {
-        private static bool _haveControlsInited;
-
-        private readonly StringBuilder InfoText = new StringBuilder("Output: 0/0\nInput: 0/0\nEfficiency: N/A");
-
-        public IMyReactor Block;
-
         private float BufferPowerGeneration;
         private float BufferReactorOutput;
         public float MaxPowerConsumption;
+
         internal S_FusionSystem MemberSystem;
         public float PowerConsumption;
 
-        public MySync<float, SyncDirection.BothWays> PowerUsageSync;
-        private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
+        internal override string BlockSubtype => "Caster_Reactor";
+        internal override string ReadableName => "Reactor";
+
 
         public void UpdatePower(float PowerGeneration, float MegawattsPerFusionPower)
         {
             BufferPowerGeneration = PowerGeneration;
 
-            var reactorConsumptionMultiplier = PowerUsageSync.Value; // This is ugly, let's make it better.
+            var reactorConsumptionMultiplier = OverrideEnabled.Value ? OverridePowerUsageSync : PowerUsageSync.Value; // This is ugly, let's make it better.
             var reactorEfficiencyMultiplier = 1 / (0.5f + reactorConsumptionMultiplier);
 
             // Power generation consumed (per second)
@@ -46,6 +42,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             // Power generated (per second)
             var reactorOutput = reactorEfficiencyMultiplier * powerConsumption * MegawattsPerFusionPower;
             BufferReactorOutput = reactorOutput;
+            MaxPowerConsumption = powerConsumption / 60;
 
             InfoText.Clear();
             InfoText.AppendLine(
@@ -55,46 +52,15 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
             // Convert back into power per tick
             SyncMultipliers.ReactorOutput(Block, BufferReactorOutput);
-            MaxPowerConsumption = powerConsumption / 60;
         }
 
-        private void CreateControls()
+        public void SetPowerBoost(bool value)
         {
-            {
-                var reactorPowerUsageSlider =
-                    MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, IMyReactor>(
-                        "FusionSystems.ReactorPowerUsage");
-                reactorPowerUsageSlider.Title = MyStringId.GetOrCompute("Fusion Power Usage");
-                reactorPowerUsageSlider.Tooltip =
-                    MyStringId.GetOrCompute("Fusion Power generation this reactor should use.");
-                reactorPowerUsageSlider.SetLimits(0, 2);
-                reactorPowerUsageSlider.Getter = block =>
-                    block.GameLogic.GetAs<FusionReactorLogic>()?.PowerUsageSync.Value ?? 0;
-                reactorPowerUsageSlider.Setter = (block, value) =>
-                    block.GameLogic.GetAs<FusionReactorLogic>().PowerUsageSync.Value = value;
-
-                reactorPowerUsageSlider.Writer = (block, builder) =>
-                    builder.Append(Math.Round(block.GameLogic.GetAs<FusionReactorLogic>().PowerUsageSync.Value * 100))
-                        .Append('%');
-
-                reactorPowerUsageSlider.Visible = block => block.BlockDefinition.SubtypeName == "Caster_Reactor";
-                reactorPowerUsageSlider.SupportsMultipleBlocks = true;
-                reactorPowerUsageSlider.Enabled = block => true;
-
-                MyAPIGateway.TerminalControls.AddControl<IMyReactor>(reactorPowerUsageSlider);
-            }
-
-            MyAPIGateway.TerminalControls.CustomControlGetter += AssignDetailedInfoGetter;
-
-            _haveControlsInited = true;
-        }
-
-        private void AssignDetailedInfoGetter(IMyTerminalBlock block, List<IMyTerminalControl> controls)
-        {
-            if (block.BlockDefinition.SubtypeName != "Caster_Reactor")
+            if (OverrideEnabled.Value == value)
                 return;
-            block.RefreshCustomInfo();
-            block.SetDetailedInfoDirty();
+
+            OverrideEnabled.Value = value;
+            UpdatePower(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
         }
 
         #region Base Methods
@@ -104,31 +70,35 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             base.Init(definition);
             Block = (IMyReactor)Entity;
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
+
+            // Trigger power update is only needed when OverrideEnabled is false
             PowerUsageSync.ValueChanged += value =>
+            {
+                if (!OverrideEnabled.Value)
+                    UpdatePower(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+            };
+
+            // Trigger power update is only needed when OverrideEnabled is true
+            OverridePowerUsageSync.ValueChanged += value =>
+            {
+                if (OverrideEnabled.Value)
+                    UpdatePower(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+            };
+
+            // Trigger power update if boostEnabled is changed
+            OverrideEnabled.ValueChanged += value =>
                 UpdatePower(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
-        }
-
-        public override void UpdateOnceBeforeFrame()
-        {
-            base.UpdateOnceBeforeFrame();
-
-            if (Block?.CubeGrid?.Physics == null) // ignore projected and other non-physical grids
-                return;
-
-            if (!_haveControlsInited)
-                CreateControls();
-
-            ((IMyTerminalBlock)Block).AppendingCustomInfo += FusionReactorLogic_AppendingCustomInfo;
-
-            NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
         }
 
         public override void UpdateAfterSimulation()
         {
             base.UpdateAfterSimulation();
 
+            // If boost is unsustainable, disable it.
+            // If power draw exceeds power available, disable self until available.
             if (MemberSystem?.PowerStored <= PowerConsumption || !Block.IsWorking)
             {
+                SetPowerBoost(false);
                 PowerConsumption = 0;
                 SyncMultipliers.ReactorOutput(Block, 0);
             }
@@ -137,13 +107,6 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 SyncMultipliers.ReactorOutput(Block, BufferReactorOutput);
                 PowerConsumption = MaxPowerConsumption * Block.CurrentOutputRatio;
             }
-
-            MyAPIGateway.Utilities.ShowNotification("ReactorPercent: " + Block.CurrentOutputRatio, 1000/60);
-        }
-
-        private void FusionReactorLogic_AppendingCustomInfo(IMyTerminalBlock block, StringBuilder stringBuilder)
-        {
-            stringBuilder.Insert(0, InfoText.ToString());
         }
 
         #endregion
