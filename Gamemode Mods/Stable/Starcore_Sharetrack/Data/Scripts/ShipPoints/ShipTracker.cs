@@ -353,10 +353,6 @@ namespace klime.PointCheck
 
         private void FatHandling(ref bool hasPower, ref bool hasCockpit, ref bool hasThrust, ref bool hasGyro, ref float movementBpts, ref float powerBpts, ref float offensiveBpts, ref float MiscBpts, ref int bonusBpts, ref int pdBpts, ref string controller, MyCubeGrid subgrid)
         {
-            // Variables used for extra cost on subgrid weapons (rotorturrets)
-            bool isMainGrid;
-            Dictionary<string, int> tempGuns = new Dictionary<string, int>();
-
             VRage.Collections.ListReader<MyCubeBlock> blocklist = subgrid.GetFatBlocks();
             for (int i1 = 0; i1 < blocklist.Count; i1++)
             {
@@ -420,15 +416,6 @@ namespace klime.PointCheck
                     if (block is IMyCockpit && (block as IMyCockpit).CanControlShip)
                     {
                         hasCockpit = true;
-
-                        if(hasCockpit && !isMainGrid)
-                        {
-                            // TODO: Prevent ppl from placing Cockpits on subgrids to circumvent BP increase
-                            // Dunno if this works how i think it will, needs testing
-                            MyAPIGateway.Utilities.ShowNotification("Illegal Cockpit placement on subgrid", 10000, font: "Red");
-                        }
-
-                        isMainGrid = true;
                     }
 
                     if (block is IMyReactor || block is IMyBatteryBlock)
@@ -484,15 +471,6 @@ namespace klime.PointCheck
                 {
                     offensiveBpts += PointCheck.PointValues.GetValueOrDefault(id, 0) + bonusBpts;
 
-                    if (tempGuns.ContainsKey(id))
-                    {
-                        tempGuns[id] += 1;
-                    }
-                    else
-                    {
-                        tempGuns.Add(id, 1);
-                    }
-
                     // isPointDefense;
                     if (PointCheckHelpers.pdDictionary.TryGetValue(block.BlockDefinition.Id.SubtypeName, out isPointDefense) && isPointDefense)
                     {
@@ -517,18 +495,6 @@ namespace klime.PointCheck
                     }
                 }
             }
-            
-            // Apply extra cost to weapons if this isnt the main grid
-            if(!isMainGrid)
-            {
-                foreach(KeyValuePair<string, string> weapon in tempGuns)
-                    {
-                        // Adding extra points when not on the main grid
-                        // Currently takes a global 20% extra cost wich isn´t multiplicative with clibing cost
-                        offensiveBpts =+ PointCheck.PointValues.GetValueOrDefault(weapon.Key, 0) * weapon.Value * 0.2
-                    }
-            }
-            
         }
 
         private static void ClimbingCostRename(ref string t_N, ref float mCs)
@@ -593,17 +559,17 @@ namespace klime.PointCheck
                     break;
                 case "[ONYX] Heliod Plasma Pulser":
                     t_N = "Heliod Plasma Pulser";
-                    mCs = 0.15f;
+                    mCs = 0.25f;
                     break;
-                 case "[MA] UNN Heavy Torpedo Launcher":
+                case "[MA] UNN Heavy Torpedo Launcher":
                     t_N = "UNN Heavy Torpedo Launcher";
                     mCs = 0.15f;
                     break;
-                 case "[BTI] SRM-8":
+                case "[BTI] SRM-8":
                     t_N = "SRM-8";
                     mCs = 0.15f;
                     break;
-                 case "[BTI] Starcore Arrow-IV Launcher":
+                case "[BTI] Starcore Arrow-IV Launcher":
                     t_N = "Starcore Arrow-IV Launcher";
                     mCs = 0.15f;
                     break;
@@ -630,7 +596,7 @@ namespace klime.PointCheck
                 case "[BTI] Medium Laser":
                 case "[BTI] Large Laser":
                     t_N = " Laser";
-                    mCs = 0.15f;
+                    mCs = 0.1f;
                     break;
                 case "Reinforced Blastplate":
                     t_N = "Reinforced Blastplate";
@@ -644,7 +610,7 @@ namespace klime.PointCheck
                 case "[EXO] Taiidan Bomber Hangar Bay Medium":
                 case "[EXO] Taiidan Fighter Small Bay":
                     t_N = "Taiidan";
-                    mCs = 0.25f;
+                    mCs = 0.20f;
                     break;
 
             }
