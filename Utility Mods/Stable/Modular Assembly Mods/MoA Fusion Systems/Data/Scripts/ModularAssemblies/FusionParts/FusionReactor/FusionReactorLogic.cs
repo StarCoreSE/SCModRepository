@@ -19,13 +19,14 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Reactor), false, "Caster_Reactor")]
     public class FusionReactorLogic : MyGameLogicComponent, IMyEventProxy
     {
-        private static bool HaveControlsInited;
+        private static bool _haveControlsInited;
 
         private readonly StringBuilder InfoText = new StringBuilder("Output: 0/0\nInput: 0/0\nEfficiency: N/A");
 
         public IMyReactor Block;
 
         private float BufferPowerGeneration;
+        private float BufferReactorOutput;
         public float MaxPowerConsumption;
         internal S_FusionSystem MemberSystem;
         public float PowerConsumption;
@@ -44,6 +45,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             var powerConsumption = PowerGeneration * 60 * reactorConsumptionMultiplier;
             // Power generated (per second)
             var reactorOutput = reactorEfficiencyMultiplier * powerConsumption * MegawattsPerFusionPower;
+            BufferReactorOutput = reactorOutput;
 
             InfoText.Clear();
             InfoText.AppendLine(
@@ -52,7 +54,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             InfoText.AppendLine($"Efficiency: {Math.Round(reactorEfficiencyMultiplier * 100)}%");
 
             // Convert back into power per tick
-            SyncMultipliers.ReactorOutput(Block, reactorOutput);
+            SyncMultipliers.ReactorOutput(Block, BufferReactorOutput);
             MaxPowerConsumption = powerConsumption / 60;
         }
 
@@ -84,7 +86,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
             MyAPIGateway.TerminalControls.CustomControlGetter += AssignDetailedInfoGetter;
 
-            HaveControlsInited = true;
+            _haveControlsInited = true;
         }
 
         private void AssignDetailedInfoGetter(IMyTerminalBlock block, List<IMyTerminalControl> controls)
@@ -113,7 +115,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             if (Block?.CubeGrid?.Physics == null) // ignore projected and other non-physical grids
                 return;
 
-            if (!HaveControlsInited)
+            if (!_haveControlsInited)
                 CreateControls();
 
             ((IMyTerminalBlock)Block).AppendingCustomInfo += FusionReactorLogic_AppendingCustomInfo;
@@ -125,7 +127,18 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         {
             base.UpdateAfterSimulation();
 
-            PowerConsumption = MaxPowerConsumption * Block.CurrentOutputRatio;
+            if (MemberSystem?.PowerStored <= PowerConsumption || !Block.IsWorking)
+            {
+                PowerConsumption = 0;
+                SyncMultipliers.ReactorOutput(Block, 0);
+            }
+            else
+            {
+                SyncMultipliers.ReactorOutput(Block, BufferReactorOutput);
+                PowerConsumption = MaxPowerConsumption * Block.CurrentOutputRatio;
+            }
+
+            MyAPIGateway.Utilities.ShowNotification("ReactorPercent: " + Block.CurrentOutputRatio, 1000/60);
         }
 
         private void FusionReactorLogic_AppendingCustomInfo(IMyTerminalBlock block, StringBuilder stringBuilder)

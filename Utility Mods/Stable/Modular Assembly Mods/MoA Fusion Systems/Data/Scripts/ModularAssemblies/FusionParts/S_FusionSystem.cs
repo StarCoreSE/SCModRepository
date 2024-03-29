@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
 using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionReactor;
+using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionThruster;
 using Sandbox.ModAPI;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
@@ -12,15 +13,16 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     internal class S_FusionSystem
     {
         public const float MegawattsPerFusionPower = 50;
+        public const float NewtonsPerFusionPower = 800000;
 
         public List<S_FusionArm> Arms = new List<S_FusionArm>();
-        public int PhysicalAssemblyId = -1;
+        public int PhysicalAssemblyId;
         public float PowerCapacity;
 
         public float PowerGeneration;
         public float PowerStored;
         public List<FusionReactorLogic> Reactors = new List<FusionReactorLogic>();
-        public List<IMyThrust> Thrusters = new List<IMyThrust>();
+        public List<FusionThrusterLogic> Thrusters = new List<FusionThrusterLogic>();
 
         public S_FusionSystem(int physicalAssemblyId)
         {
@@ -50,7 +52,15 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             }
 
             if (newPart is IMyThrust)
-                Thrusters.Add((IMyThrust)newPart);
+            {
+                var logic = newPart.GameLogic.GetAs<FusionThrusterLogic>();
+                if (logic != null)
+                {
+                    Thrusters.Add(logic);
+                    logic.MemberSystem = this;
+                    logic.UpdateThrust(PowerGeneration, MegawattsPerFusionPower);
+                }
+            }
 
             if (newPart is IMyReactor)
             {
@@ -72,7 +82,11 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 return;
 
             if (part is IMyThrust)
-                Thrusters.Remove((IMyThrust)part);
+            {
+                var logic = part.GameLogic.GetAs<FusionThrusterLogic>();
+                logic.MemberSystem = null;
+                Thrusters.Remove(logic);
+            }
             if (part is IMyReactor)
             {
                 var logic = part.GameLogic.GetAs<FusionReactorLogic>();
@@ -109,6 +123,13 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 if (updateReactors)
                     reactor?.UpdatePower(powerGeneration, MegawattsPerFusionPower);
             }
+            foreach (var thruster in Thrusters)
+            {
+                totalPowerUsage += thruster?.PowerConsumption ?? 0;
+
+                if (updateReactors)
+                    thruster?.UpdateThrust(powerGeneration, MegawattsPerFusionPower);
+            }
 
             // Subtract power usage afterwards so that all reactors have the same stats.
             PowerGeneration = powerGeneration;
@@ -119,13 +140,6 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             PowerStored += PowerGeneration;
             if (PowerStored > PowerCapacity)
                 PowerStored = PowerCapacity;
-
-            if (PowerStored <= 0)
-            {
-                PowerStored = 0;
-
-                foreach (var reactor in Reactors) reactor?.UpdatePower(powerGeneration, 0);
-            }
         }
 
         public void UpdateTick()
