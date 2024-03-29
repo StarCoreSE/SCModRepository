@@ -2,6 +2,7 @@
 using ProtoBuf;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
+using Sandbox.ModAPI.Interfaces.Terminal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,14 +25,121 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
         where T : IMyCubeBlock
     {
         public static readonly Guid SettingsGUID = new Guid("36a45185-2e80-461c-9f1c-e2140a47a4df");
-        internal FusionPartSettings Settings = new FusionPartSettings();
+        internal static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
+        /// <summary>
+        /// List of all types that have inited controls.
+        /// </summary>
+        private static List<string> _haveControlsInited = new List<string>();
 
+        /// <summary>
+        /// Block subtypes allowed.
+        /// </summary>
+        internal abstract string BlockSubtype { get; }
+        /// <summary>
+        /// Human-readable name for this part type.
+        /// </summary>
+        internal abstract string ReadableName { get; }
+
+
+        internal FusionPartSettings Settings = new FusionPartSettings();
         internal T Block;
+        internal readonly StringBuilder InfoText = new StringBuilder("Output: 0/0\nInput: 0/0\nEfficiency: N/A");
 
         public MySync<float, SyncDirection.BothWays> PowerUsageSync;
         public MySync<float, SyncDirection.BothWays> OverridePowerUsageSync;
         public MySync<bool, SyncDirection.BothWays> OverrideEnabled;
-        private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
+
+        #region Controls
+
+        private void CreateControls()
+        {
+            {
+                var boostPowerToggle =
+                    MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlOnOffSwitch, T>(
+                        $"FusionSystems.{ReadableName}BoostPowerToggle");
+                boostPowerToggle.Title = MyStringId.GetOrCompute("Override Fusion Power");
+                boostPowerToggle.Tooltip =
+                    MyStringId.GetOrCompute("Toggles Power Override - a temporary override on Fusion Power draw.");
+                boostPowerToggle.Getter = block =>
+                    block.GameLogic.GetAs<FusionPart<T>>()?.OverrideEnabled.Value ?? false;
+                boostPowerToggle.Setter = (block, value) =>
+                    block.GameLogic.GetAs<FusionPart<T>>().OverrideEnabled.Value = value;
+
+                boostPowerToggle.OnText = MyStringId.GetOrCompute("On");
+                boostPowerToggle.OffText = MyStringId.GetOrCompute("Off");
+
+                boostPowerToggle.Visible = block => block.BlockDefinition.SubtypeName == BlockSubtype;
+                boostPowerToggle.SupportsMultipleBlocks = true;
+                boostPowerToggle.Enabled = block => true;
+
+                MyAPIGateway.TerminalControls.AddControl<T>(boostPowerToggle);
+            }
+            {
+                var powerUsageSlider =
+                    MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, T>(
+                        $"FusionSystems.{ReadableName}PowerUsage");
+                powerUsageSlider.Title = MyStringId.GetOrCompute("Fusion Power Usage");
+                powerUsageSlider.Tooltip =
+                    MyStringId.GetOrCompute($"Fusion Power generation this {ReadableName} should use.");
+                powerUsageSlider.SetLimits(0.01f, 0.99f);
+                powerUsageSlider.Getter = block =>
+                    block.GameLogic.GetAs<FusionPart<T>>()?.PowerUsageSync.Value ?? 0;
+                powerUsageSlider.Setter = (block, value) =>
+                    block.GameLogic.GetAs<FusionPart<T>>().PowerUsageSync.Value = value;
+
+                powerUsageSlider.Writer = (block, builder) =>
+                    builder.Append(Math.Round(block.GameLogic.GetAs<FusionPart<T>>().PowerUsageSync.Value * 100))
+                        .Append('%');
+
+                powerUsageSlider.Visible = block => block.BlockDefinition.SubtypeName == BlockSubtype;
+                powerUsageSlider.SupportsMultipleBlocks = true;
+                powerUsageSlider.Enabled = block => true;
+
+                MyAPIGateway.TerminalControls.AddControl<T>(powerUsageSlider);
+            }
+            {
+                var boostPowerUsageSlider =
+                    MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, T>(
+                        $"FusionSystems.{ReadableName}BoostPowerUsage");
+                boostPowerUsageSlider.Title = MyStringId.GetOrCompute("Override Power Usage");
+                boostPowerUsageSlider.Tooltip =
+                    MyStringId.GetOrCompute($"Fusion Power generation this {ReadableName} should use when Override is enabled.");
+                boostPowerUsageSlider.SetLimits(0.01f, 4.0f);
+                boostPowerUsageSlider.Getter = block =>
+                    block.GameLogic.GetAs<FusionPart<T>>()?.OverridePowerUsageSync.Value ?? 0;
+                boostPowerUsageSlider.Setter = (block, value) =>
+                    block.GameLogic.GetAs<FusionPart<T>>().OverridePowerUsageSync.Value = value;
+
+                boostPowerUsageSlider.Writer = (block, builder) =>
+                    builder.Append(Math.Round(block.GameLogic.GetAs<FusionPart<T>>().OverridePowerUsageSync.Value * 100))
+                        .Append('%');
+
+                boostPowerUsageSlider.Visible = block => block.BlockDefinition.SubtypeName == BlockSubtype;
+                boostPowerUsageSlider.SupportsMultipleBlocks = true;
+                boostPowerUsageSlider.Enabled = block => true;
+
+                MyAPIGateway.TerminalControls.AddControl<T>(boostPowerUsageSlider);
+            }
+
+            MyAPIGateway.TerminalControls.CustomControlGetter += AssignDetailedInfoGetter;
+
+            _haveControlsInited.Add(ReadableName);
+        }
+
+        private void AssignDetailedInfoGetter(IMyTerminalBlock block, List<IMyTerminalControl> controls)
+        {
+            if (block.BlockDefinition.SubtypeName != BlockSubtype)
+                return;
+            block.RefreshCustomInfo();
+            block.SetDetailedInfoDirty();
+        }
+
+        private void AppendingCustomInfo(IMyTerminalBlock block, StringBuilder stringBuilder)
+        {
+            stringBuilder.Insert(0, InfoText.ToString());
+        }
+
+        #endregion
 
         #region Base Methods
 
@@ -49,22 +157,24 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
                 return; // ignore ghost/projected grids
 
             LoadSettings();
-            // Trigger power update is only needed when OverrideEnabled is false
             PowerUsageSync.ValueChanged += value =>
                 Settings.PowerUsage = value.Value;
 
-            // Trigger power update is only needed when OverrideEnabled is true
             OverridePowerUsageSync.ValueChanged += value =>
                 Settings.OverridePowerUsage = value.Value;
-
-            // Trigger power update if boostEnabled is changed
-            OverrideEnabled.ValueChanged += value =>
-                Settings.OverrideEnabled = value.Value;
             SaveSettings();
+
+            if (!_haveControlsInited.Contains(ReadableName))
+                CreateControls();
+
+            ((IMyTerminalBlock) Block).AppendingCustomInfo += AppendingCustomInfo;
+
+            NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
         }
 
         #endregion
 
+        #region Settings
         internal void SaveSettings()
         {
             if (Block == null)
@@ -145,7 +255,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
             }
 
             return base.IsSerialized();
-        } 
+        }
+
+#endregion
     }
 
     [ProtoContract(UseProtoMembersOnly = true)]

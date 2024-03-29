@@ -19,17 +19,16 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Reactor), false, "Caster_Reactor")]
     public class FusionReactorLogic : FusionPart<IMyReactor>
     {
-        // TODO: Convert into class inheritance-based
-        private static bool _haveControlsInited;
-
-        private readonly StringBuilder InfoText = new StringBuilder("Output: 0/0\nInput: 0/0\nEfficiency: N/A");
-
         private float BufferPowerGeneration;
         private float BufferReactorOutput;
         public float MaxPowerConsumption;
 
         internal S_FusionSystem MemberSystem;
         public float PowerConsumption;
+
+        internal override string BlockSubtype => "Caster_Reactor";
+        internal override string ReadableName => "Reactor";
+
 
         public void UpdatePower(float PowerGeneration, float MegawattsPerFusionPower)
         {
@@ -53,89 +52,6 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
             // Convert back into power per tick
             SyncMultipliers.ReactorOutput(Block, BufferReactorOutput);
-        }
-
-        private void CreateControls()
-        {
-            {
-                var boostPowerToggle =
-                    MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlOnOffSwitch, IMyReactor>(
-                        "FusionSystems.ReactorBoostPowerToggle");
-                boostPowerToggle.Title = MyStringId.GetOrCompute("Override Fusion Power");
-                boostPowerToggle.Tooltip =
-                    MyStringId.GetOrCompute("Toggles Power Override - a temporary override on Fusion Power draw.");
-                boostPowerToggle.Getter = block =>
-                    block.GameLogic.GetAs<FusionReactorLogic>()?.OverrideEnabled.Value ?? false;
-                boostPowerToggle.Setter = (block, value) =>
-                    block.GameLogic.GetAs<FusionReactorLogic>().OverrideEnabled.Value = value;
-
-                boostPowerToggle.OnText = MyStringId.GetOrCompute("On");
-                boostPowerToggle.OffText = MyStringId.GetOrCompute("Off");
-
-                boostPowerToggle.Visible = block => block.BlockDefinition.SubtypeName == "Caster_Reactor";
-                boostPowerToggle.SupportsMultipleBlocks = true;
-                boostPowerToggle.Enabled = block => true;
-
-                MyAPIGateway.TerminalControls.AddControl<IMyReactor>(boostPowerToggle);
-            }
-            {
-                var powerUsageSlider =
-                    MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, IMyReactor>(
-                        "FusionSystems.ReactorPowerUsage");
-                powerUsageSlider.Title = MyStringId.GetOrCompute("Fusion Power Usage");
-                powerUsageSlider.Tooltip =
-                    MyStringId.GetOrCompute("Fusion Power generation this reactor should use.");
-                powerUsageSlider.SetLimits(0.01f, 0.99f);
-                powerUsageSlider.Getter = block =>
-                    block.GameLogic.GetAs<FusionReactorLogic>()?.PowerUsageSync.Value ?? 0;
-                powerUsageSlider.Setter = (block, value) =>
-                    block.GameLogic.GetAs<FusionReactorLogic>().PowerUsageSync.Value = value;
-
-                powerUsageSlider.Writer = (block, builder) =>
-                    builder.Append(Math.Round(block.GameLogic.GetAs<FusionReactorLogic>().PowerUsageSync.Value * 100))
-                        .Append('%');
-
-                powerUsageSlider.Visible = block => block.BlockDefinition.SubtypeName == "Caster_Reactor";
-                powerUsageSlider.SupportsMultipleBlocks = true;
-                powerUsageSlider.Enabled = block => true;
-
-                MyAPIGateway.TerminalControls.AddControl<IMyReactor>(powerUsageSlider);
-            }
-            {
-                var boostPowerUsageSlider =
-                    MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, IMyReactor>(
-                        "FusionSystems.ReactorBoostPowerUsage");
-                boostPowerUsageSlider.Title = MyStringId.GetOrCompute("Override Power Usage");
-                boostPowerUsageSlider.Tooltip =
-                    MyStringId.GetOrCompute("Fusion Power generation this reactor should use when Override is enabled.");
-                boostPowerUsageSlider.SetLimits(0.01f, 4.0f);
-                boostPowerUsageSlider.Getter = block =>
-                    block.GameLogic.GetAs<FusionReactorLogic>()?.OverridePowerUsageSync.Value ?? 0;
-                boostPowerUsageSlider.Setter = (block, value) =>
-                    block.GameLogic.GetAs<FusionReactorLogic>().OverridePowerUsageSync.Value = value;
-
-                boostPowerUsageSlider.Writer = (block, builder) =>
-                    builder.Append(Math.Round(block.GameLogic.GetAs<FusionReactorLogic>().OverridePowerUsageSync.Value * 100))
-                        .Append('%');
-
-                boostPowerUsageSlider.Visible = block => block.BlockDefinition.SubtypeName == "Caster_Reactor";
-                boostPowerUsageSlider.SupportsMultipleBlocks = true;
-                boostPowerUsageSlider.Enabled = block => true;
-
-                MyAPIGateway.TerminalControls.AddControl<IMyReactor>(boostPowerUsageSlider);
-            }
-
-            MyAPIGateway.TerminalControls.CustomControlGetter += AssignDetailedInfoGetter;
-
-            _haveControlsInited = true;
-        }
-
-        private void AssignDetailedInfoGetter(IMyTerminalBlock block, List<IMyTerminalControl> controls)
-        {
-            if (block.BlockDefinition.SubtypeName != "Caster_Reactor")
-                return;
-            block.RefreshCustomInfo();
-            block.SetDetailedInfoDirty();
         }
 
         public void SetPowerBoost(bool value)
@@ -174,21 +90,6 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 UpdatePower(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
         }
 
-        public override void UpdateOnceBeforeFrame()
-        {
-            base.UpdateOnceBeforeFrame();
-
-            if (Block?.CubeGrid?.Physics == null) // ignore projected and other non-physical grids
-                return;
-
-            if (!_haveControlsInited)
-                CreateControls();
-
-            ((IMyTerminalBlock)Block).AppendingCustomInfo += FusionReactorLogic_AppendingCustomInfo;
-
-            NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
-        }
-
         public override void UpdateAfterSimulation()
         {
             base.UpdateAfterSimulation();
@@ -206,11 +107,6 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 SyncMultipliers.ReactorOutput(Block, BufferReactorOutput);
                 PowerConsumption = MaxPowerConsumption * Block.CurrentOutputRatio;
             }
-        }
-
-        private void FusionReactorLogic_AppendingCustomInfo(IMyTerminalBlock block, StringBuilder stringBuilder)
-        {
-            stringBuilder.Insert(0, InfoText.ToString());
         }
 
         #endregion
