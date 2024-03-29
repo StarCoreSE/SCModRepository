@@ -154,10 +154,10 @@ Ammunition: [2000m/s,] [Kinetic] </Description>
       </Id>
       <DisplayName>[SA] Cerberus Gauss Turret</DisplayName>
 <Description>Long Range Turret: [7km] 
-Magazine Capacity: [1] 
-Rate of Fire: [175] 
-Reload Speed: [10 seconds] 
-Ammunition: [5000m/s,] [Kinetic] </Description>
+Idle Power: 150 MW (50 MW per Barrel)
+Reload Power: ~600 MW (~200 MW per Barrel)
+Reload Speed: [9 seconds] 
+Ammunition: [Kinetic] </Description>
       <Icon>Textures\GUI\Icons\Cerberus.dds</Icon>
       <CubeSize>Large</CubeSize>
 	  <GuiVisible>false</GuiVisible>
@@ -230,10 +230,10 @@ Ammunition: [5000m/s,] [Kinetic] </Description>
       </Id>
       <DisplayName>[SA] Charon</DisplayName>
 <Description>Short Range Turret: [2.75km] 
-Magazine Capacity: [33] 
-Rate of Fire: [347] 
-Reload Speed: [6 seconds] 
-Ammunition: [2500m/s,] [Kinetic] </Description>
+Idle Power: [150 MW]
+Reload Power: [~600 MW] 
+Reload Speed: [7 seconds] 
+Ammunition: [Kinetic] </Description>
       <Icon>Textures\GUI\Icons\Charon.dds</Icon>
       <CubeSize>Large</CubeSize>
 	  <GuiVisible>false</GuiVisible>
@@ -759,10 +759,10 @@ Ammunition: [5000m/s,] [Energy] </Description>
       </Id>
       <DisplayName>[SA] Silvius Gauss Turret</DisplayName>
 <Description>Long Range Turret: [7km] 
-Magazine Capacity: [1] 
-Rate of Fire: [175] 
-Reload Speed: [10 seconds] 
-Ammunition: [5000m/s,] [Kinetic] </Description>
+Idle Power: [50 MW]
+Reload Power: [~200 MW]
+Reload Speed: [9 seconds] 
+Ammunition: [Kinetic] </Description>
       <Icon>Textures\GUI\Icons\Silvius.dds</Icon>
       <CubeSize>Large</CubeSize>
 	  <GuiVisible>false</GuiVisible>
