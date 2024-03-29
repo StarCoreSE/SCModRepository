@@ -330,7 +330,7 @@ namespace ShipPoints
 				LargeBlockSmallGeneratorWarfare2@17;
 				LargeBlockBatteryBlockWarfare2@14;
 				LargeBlockLargeGeneratorWarfare2@300;
-				LargeTurretControlBlock@200;
+				LargeTurretControlBlock@10;
 				ARYXRailgunTurret@350;
 				SC_AR_Deimos@350;
 				MCRNRailgunLB@1250;
