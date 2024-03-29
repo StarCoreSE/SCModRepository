@@ -780,6 +780,7 @@ namespace klime.PointCheck
         {
             SBL.Clear();
             GunL.Clear();
+            SubgridGunL.Clear();
             Bpts = 0;
             InstalledThrust = 0;
             Mass = 0;
