@@ -91,7 +91,7 @@ Ammunition: [2000m/s,] [Kinetic] </Description>
       <Model>Models\SerpentArms\SA_GaussAPIIC_Large.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
-       <Component Subtype="SteelPlate" Count="50" />
+       <Component Subtype="SteelPlate" Count="800" />
         <Component Subtype="Superconductor" Count="150" />
         <Component Subtype="Construction" Count="340" />
 		<Component Subtype="Motor" Count="120" />
@@ -167,14 +167,14 @@ Ammunition: [Kinetic] </Description>
       <Model>Models\SerpentArms\SA_GaussERII_Large.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
-        <Component Subtype="SteelPlate" Count="50" />
-        <Component Subtype="Superconductor" Count="225" />
-        <Component Subtype="Construction" Count="240" />
-		    <Component Subtype="Motor" Count="120" />
-		    <Component Subtype="Reactor" Count="45" />
-		    <Component Subtype="Detector" Count="60" />
-        <Component Subtype="Computer" Count="250" />
-        <Component Subtype="MetalGrid" Count="225" />
+        <Component Subtype="SteelPlate" Count="2500" />
+        <Component Subtype="Superconductor" Count="500" />
+        <Component Subtype="Construction" Count="500" />
+		    <Component Subtype="Motor" Count="250" />
+		    <Component Subtype="Reactor" Count="100" />
+		    <Component Subtype="Detector" Count="100" />
+        <Component Subtype="Computer" Count="500" />
+        <Component Subtype="MetalGrid" Count="500" />
         <Component Subtype="SteelPlate" Count="2500" />
       </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
@@ -622,17 +622,17 @@ Ammunition: [5000m/s,] [Energy] </Description>
      <ModelOffset x="0" y="0" z="0" />
      <Model>Models\SerpentArms\SA_GaussAMSIIC_Large.mwm</Model>
      <UseModelIntersection>true</UseModelIntersection>
-     <Components>
-       <Component Subtype="SteelPlate" Count="50" />
-       <Component Subtype="Superconductor" Count="110" />
-       <Component Subtype="Construction" Count="180" />
-       <Component Subtype="Motor" Count="90" />
-       <Component Subtype="Reactor" Count="35" />
-       <Component Subtype="Detector" Count="55" />
-       <Component Subtype="Computer" Count="275" />
-       <Component Subtype="MetalGrid" Count="140" />
-       <Component Subtype="SteelPlate" Count="750" />
-     </Components>
+	<Components>
+		<Component Subtype="SteelPlate" Count="50" />
+		<Component Subtype="Superconductor" Count="110" />
+		<Component Subtype="Construction" Count="180" />
+		<Component Subtype="Motor" Count="90" />
+		<Component Subtype="Reactor" Count="35" />
+		<Component Subtype="Detector" Count="55" />
+		<Component Subtype="Computer" Count="275" />
+		<Component Subtype="MetalGrid" Count="140" />
+		<Component Subtype="SteelPlate" Count="750" />
+	</Components>
      <CriticalComponent Subtype="Computer" Index="0" />
      <MountPoints>
        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
@@ -769,17 +769,17 @@ Ammunition: [Kinetic] </Description>
       <ModelOffset x="0" y="0" z="0" />
       <Model>Models\SerpentArms\SA_GaussER_Large.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
-      <Components>
-       <Component Subtype="SteelPlate" Count="50" />
-        <Component Subtype="Superconductor" Count="150" />
-        <Component Subtype="Construction" Count="240" />
+	<Components>
+		<Component Subtype="SteelPlate" Count="800" />
+		<Component Subtype="Superconductor" Count="150" />
+		<Component Subtype="Construction" Count="340" />
 		<Component Subtype="Motor" Count="120" />
 		<Component Subtype="Reactor" Count="30" />
 		<Component Subtype="Detector" Count="45" />
-        <Component Subtype="Computer" Count="200" />
-        <Component Subtype="MetalGrid" Count="125" />
-        <Component Subtype="SteelPlate" Count="600" />
-      </Components>
+		<Component Subtype="Computer" Count="200" />
+		<Component Subtype="MetalGrid" Count="450" />
+		<Component Subtype="SteelPlate" Count="1150" />
+	</Components>
       <CriticalComponent Subtype="Computer" Index="0" />
       <MountPoints>
         <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="5" />
