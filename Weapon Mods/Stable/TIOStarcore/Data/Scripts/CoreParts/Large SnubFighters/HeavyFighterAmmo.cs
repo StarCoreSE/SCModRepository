@@ -48,7 +48,7 @@ namespace Scripts
             EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 0.5f, // Direct damage; one steel plate is worth 100. 
             Mass = 5000, // In kilograms; how much force the impact will apply to the target.
-            Health = 900, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            Health = 1200, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 10, // Recoil.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
@@ -472,7 +472,7 @@ namespace Scripts
                         Start1Value = 301,
                         Start2Value = 0,
                         End1Value = 300,
-                        End2Value = 200,
+                        End2Value = 300,
                         End3Value = 0, 
                         
                         // Special triggers when the start/end conditions are met (DoNothing, EndProjectile, EndProjectileOnRestart, StoreDestination)
@@ -608,7 +608,7 @@ namespace Scripts
                         Start2Value = 0,
                         End1Value = 120,
                         End2Value = 60,
-                        End3Value = 100, 
+                        End3Value = 150, 
                         
                         // Special triggers when the start/end conditions are met (DoNothing, EndProjectile, EndProjectileOnRestart, StoreDestination)
                         StartEvent = DoNothing,
@@ -742,7 +742,7 @@ namespace Scripts
                         Start1Value = 90,
                         Start2Value = 0,
                         End1Value = 60,
-                        End2Value = 50,
+                        End2Value = 150,
                         End3Value = 0, 
                         
                         // Special triggers when the start/end conditions are met (DoNothing, EndProjectile, EndProjectileOnRestart, StoreDestination)
@@ -879,7 +879,7 @@ namespace Scripts
                         Start2Value = 0,
                         End1Value = 120,
                         End2Value = 60,
-                        End3Value = 50, 
+                        End3Value = 150, 
                         
                         // Special triggers when the start/end conditions are met (DoNothing, EndProjectile, EndProjectileOnRestart, StoreDestination)
                         StartEvent = DoNothing,
