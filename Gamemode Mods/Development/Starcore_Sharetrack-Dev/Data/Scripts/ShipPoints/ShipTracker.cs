@@ -79,6 +79,8 @@ namespace klime.PointCheck
         [ProtoMember(37)] public int MiscBps = 0;
         [ProtoMember(38)] public Vector3 OriginalFactionColor = Vector3.One;
         [ProtoMember(39)] public bool hasShield;
+
+        [ProtoMember(40)] public Dictionary<string, int> SubgridGunL = new Dictionary<string, int>();
         public ShipTracker() { }
 
         public ShipTracker(IMyCubeGrid grid)
@@ -212,6 +214,8 @@ namespace klime.PointCheck
 
         private void TempBlockCheck(ref bool hasPower, ref bool hasCockpit, ref bool hasThrust, ref bool hasGyro, ref float movementBpts, ref float powerBpts, ref float offensiveBpts, ref float MiscBpts, ref int bonusBpts, ref int pdBpts, ref string controller)
         {
+            bool hasCTC = false;
+
             for (int i = 0; i < connectedGrids.Count; i++)
             {
                 IMyCubeGrid grid = connectedGrids[i];
@@ -342,12 +346,24 @@ namespace klime.PointCheck
                             offensiveBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
                         }
                     }
-                    FatHandling(ref hasPower, ref hasCockpit, ref hasThrust, ref hasGyro, ref movementBpts, ref powerBpts, ref offensiveBpts, ref MiscBpts, ref bonusBpts, ref pdBpts, ref controller, subgrid);
+                    FatHandling(ref hasPower, ref hasCockpit, ref hasThrust, ref hasGyro, ref hasCTC, ref movementBpts, ref powerBpts, ref offensiveBpts, ref MiscBpts, ref bonusBpts, ref pdBpts, ref controller, subgrid);
                 }
             }
+
+            if (hasCTC)
+            {
+                foreach (KeyValuePair<string, int> weapon in SubgridGunL)
+                {
+                    // Currently takes a global 20% extra cost wich is not multiplicative with clibing cost
+                    int bonusWeaponBP = (int)(PointCheck.PointValues.GetValueOrDefault(weapon.Key, 0) * weapon.Value * 0.2);
+                    offensiveBpts += bonusWeaponBP;
+                    Bpts += bonusWeaponBP;
+                }
+            }
+            
         }
 
-        private void FatHandling(ref bool hasPower, ref bool hasCockpit, ref bool hasThrust, ref bool hasGyro, ref float movementBpts, ref float powerBpts, ref float offensiveBpts, ref float MiscBpts, ref int bonusBpts, ref int pdBpts, ref string controller, MyCubeGrid subgrid)
+        private void FatHandling(ref bool hasPower, ref bool hasCockpit, ref bool hasThrust, ref bool hasGyro, ref bool hasCTC, ref float movementBpts, ref float powerBpts, ref float offensiveBpts, ref float MiscBpts, ref int bonusBpts, ref int pdBpts, ref string controller, MyCubeGrid subgrid)
         {
             // Variables used for extra cost on subgrid weapons (rotorturrets)
             bool isMainGrid = false;
@@ -510,6 +526,11 @@ namespace klime.PointCheck
                         MiscBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
                     }
                 }
+
+                if (id == "LargeTurretControlBlock")
+                { 
+                    hasCTC = true;
+                }
             }
 
             // Adding extra points to guns when they are not on the main grid
@@ -517,10 +538,14 @@ namespace klime.PointCheck
             {
                 foreach (KeyValuePair<string, int> weapon in tempGuns)
                 {
-                    // Currently takes a global 20% extra cost wich is not multiplicative with clibing cost
-                    int bonusWeaponBP = (int)(PointCheck.PointValues.GetValueOrDefault(weapon.Key, 0) * weapon.Value * 0.2);
-                    offensiveBpts += bonusWeaponBP;
-                    Bpts += bonusWeaponBP;
+                    if (SubgridGunL.ContainsKey(weapon.Key))
+                    {
+                        SubgridGunL[weapon.Key] += 1;
+                    }
+                    else
+                    {
+                        SubgridGunL.Add(weapon.Key, 1);
+                    }
                 }
             }
 
