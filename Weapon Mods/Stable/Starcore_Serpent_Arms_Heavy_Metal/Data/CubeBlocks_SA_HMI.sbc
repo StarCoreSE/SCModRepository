@@ -382,11 +382,10 @@ Ammunition: [5000m/s,] [Kinetic] </Description>
         <SubtypeId>K_SA_HeavyMetal_Spinal_Rotary</SubtypeId>
       </Id>
       <DisplayName>[SA] Magnetic Monopole Compression Cannon</DisplayName>
-<Description>Long Ranged Fixed: [10km] 
-Magazine Capacity: [1] 
-Rate of Fire: [60] 
-Reload Speed: [1 seconds] 
-Ammunition: [2400m/s,] [Kinetic] </Description>
+<Description>Long Ranged Fixed: [7km] 
+Idle Power: [100 MW]
+Firing Power: [600 MW]
+Ammunition: [Kinetic] </Description>
       <Icon>Textures\GUI\Icons\MMCC.dds</Icon>
       <CubeSize>Large</CubeSize>
 	  <GuiVisible>true</GuiVisible>
@@ -464,11 +463,10 @@ Ammunition: [2400m/s,] [Kinetic] </Description>
     <DisplayName>[SA] Magnetic Monopole Compression Cannon</DisplayName>
     <Description>
 		[Skin 2]
-		Long Ranged Fixed: [55km]
-		Magazine Capacity: [1]
-		Rate of Fire: [60]
-		Reload Speed: [1 seconds]
-		Ammunition: [2400m/s,] [Kinetic]
+		Long Ranged Fixed: [7km]
+		Idle Power: [100 MW]
+		Firing Power: [600 MW]
+		Ammunition: [Kinetic]
 	</Description>
     <Icon>Textures\GUI\Icons\Cubes\MonopoleReskin.dds</Icon>
     <CubeSize>Large</CubeSize>
