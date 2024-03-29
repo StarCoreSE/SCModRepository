@@ -1,31 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
+﻿using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
 using Sandbox.Common.ObjectBuilders;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Sandbox.ModAPI;
-using Sandbox.ModAPI.Interfaces.Terminal;
 using VRage.Game.Components;
 using VRage.Game.ModAPI.Network;
-using VRage.ModAPI;
 using VRage.Network;
-using VRage.ObjectBuilders;
 using VRage.Sync;
+using Sandbox.ModAPI.Interfaces.Terminal;
+using VRage.ModAPI;
+using VRage.ObjectBuilders;
 using VRage.Utils;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
-    FusionParts.FusionReactor
+namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionThruster
 {
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Reactor), false, "Caster_Reactor")]
-    public class FusionReactorLogic : MyGameLogicComponent, IMyEventProxy
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Thrust), false, "Caster_FocusLens")]
+    public class FusionThrusterLogic : MyGameLogicComponent, IMyEventProxy
     {
         private static bool _haveControlsInited;
 
         private readonly StringBuilder InfoText = new StringBuilder("Output: 0/0\nInput: 0/0\nEfficiency: N/A");
 
-        public IMyReactor Block;
+        public IMyThrust Block;
 
-        private float BufferPowerGeneration;
+        private float BufferThrustGeneration;
         public float MaxPowerConsumption;
         internal S_FusionSystem MemberSystem;
         public float PowerConsumption;
@@ -33,9 +34,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         public MySync<float, SyncDirection.BothWays> PowerUsageSync;
         private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
 
-        public void UpdatePower(float PowerGeneration, float MegawattsPerFusionPower)
+        public void UpdateThrust(float PowerGeneration, float NewtonsPerFusionPower)
         {
-            BufferPowerGeneration = PowerGeneration;
+            BufferThrustGeneration = PowerGeneration;
 
             var reactorConsumptionMultiplier = PowerUsageSync.Value; // This is ugly, let's make it better.
             var reactorEfficiencyMultiplier = 1 / (0.5f + reactorConsumptionMultiplier);
@@ -43,16 +44,16 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             // Power generation consumed (per second)
             var powerConsumption = PowerGeneration * 60 * reactorConsumptionMultiplier;
             // Power generated (per second)
-            var reactorOutput = reactorEfficiencyMultiplier * powerConsumption * MegawattsPerFusionPower;
+            var thrustOutput = reactorEfficiencyMultiplier * powerConsumption * NewtonsPerFusionPower;
 
             InfoText.Clear();
             InfoText.AppendLine(
-                $"\nOutput: {Math.Round(reactorOutput, 1)}/{Math.Round(PowerGeneration * 60 * MegawattsPerFusionPower, 1)}");
+                $"\nOutput: {Math.Round(thrustOutput, 1)}/{Math.Round(PowerGeneration * 60 * NewtonsPerFusionPower, 1)}");
             InfoText.AppendLine($"Input: {Math.Round(powerConsumption, 1)}/{Math.Round(PowerGeneration * 60, 1)}");
             InfoText.AppendLine($"Efficiency: {Math.Round(reactorEfficiencyMultiplier * 100)}%");
 
             // Convert back into power per tick
-            SyncMultipliers.ReactorOutput(Block, reactorOutput);
+            SyncMultipliers.ThrusterOutput(Block, thrustOutput);
             MaxPowerConsumption = powerConsumption / 60;
         }
 
@@ -61,25 +62,25 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             {
                 var reactorPowerUsageSlider =
                     MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, IMyReactor>(
-                        "FusionSystems.ReactorPowerUsage");
+                        "FusionSystems.ThrusterPowerUsage");
                 reactorPowerUsageSlider.Title = MyStringId.GetOrCompute("Fusion Power Usage");
                 reactorPowerUsageSlider.Tooltip =
-                    MyStringId.GetOrCompute("Fusion Power generation this reactor should use.");
+                    MyStringId.GetOrCompute("Fusion Power generation this thruster should use.");
                 reactorPowerUsageSlider.SetLimits(0, 2);
                 reactorPowerUsageSlider.Getter = block =>
-                    block.GameLogic.GetAs<FusionReactorLogic>()?.PowerUsageSync.Value ?? 0;
+                    block.GameLogic.GetAs<FusionThrusterLogic>()?.PowerUsageSync.Value ?? 0;
                 reactorPowerUsageSlider.Setter = (block, value) =>
-                    block.GameLogic.GetAs<FusionReactorLogic>().PowerUsageSync.Value = value;
+                    block.GameLogic.GetAs<FusionThrusterLogic>().PowerUsageSync.Value = value;
 
                 reactorPowerUsageSlider.Writer = (block, builder) =>
-                    builder.Append(Math.Round(block.GameLogic.GetAs<FusionReactorLogic>().PowerUsageSync.Value * 100))
+                    builder.Append(Math.Round(block.GameLogic.GetAs<FusionThrusterLogic>().PowerUsageSync.Value * 100))
                         .Append('%');
 
-                reactorPowerUsageSlider.Visible = block => block.BlockDefinition.SubtypeName == "Caster_Reactor";
+                reactorPowerUsageSlider.Visible = block => block.BlockDefinition.SubtypeName == "Caster_FocusLens";
                 reactorPowerUsageSlider.SupportsMultipleBlocks = true;
                 reactorPowerUsageSlider.Enabled = block => true;
 
-                MyAPIGateway.TerminalControls.AddControl<IMyReactor>(reactorPowerUsageSlider);
+                MyAPIGateway.TerminalControls.AddControl<IMyThrust>(reactorPowerUsageSlider);
             }
 
             MyAPIGateway.TerminalControls.CustomControlGetter += AssignDetailedInfoGetter;
@@ -89,7 +90,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
         private void AssignDetailedInfoGetter(IMyTerminalBlock block, List<IMyTerminalControl> controls)
         {
-            if (block.BlockDefinition.SubtypeName != "Caster_Reactor")
+            if (block.BlockDefinition.SubtypeName != "Caster_FocusLens")
                 return;
             block.RefreshCustomInfo();
             block.SetDetailedInfoDirty();
@@ -100,10 +101,10 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         public override void Init(MyObjectBuilder_EntityBase definition)
         {
             base.Init(definition);
-            Block = (IMyReactor)Entity;
+            Block = (IMyThrust)Entity;
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
             PowerUsageSync.ValueChanged += value =>
-                UpdatePower(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+                UpdateThrust(BufferThrustGeneration, S_FusionSystem.MegawattsPerFusionPower);
         }
 
         public override void UpdateOnceBeforeFrame()
@@ -116,7 +117,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             if (!_haveControlsInited)
                 CreateControls();
 
-            ((IMyTerminalBlock)Block).AppendingCustomInfo += FusionReactorLogic_AppendingCustomInfo;
+            ((IMyTerminalBlock)Block).AppendingCustomInfo += FusionThrusterLogic_AppendingCustomInfo;
 
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
         }
@@ -125,10 +126,10 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         {
             base.UpdateAfterSimulation();
 
-            PowerConsumption = MaxPowerConsumption * Block.CurrentOutputRatio;
+            PowerConsumption = MaxPowerConsumption * Block.ThrustMultiplier;
         }
 
-        private void FusionReactorLogic_AppendingCustomInfo(IMyTerminalBlock block, StringBuilder stringBuilder)
+        private void FusionThrusterLogic_AppendingCustomInfo(IMyTerminalBlock block, StringBuilder stringBuilder)
         {
             stringBuilder.Insert(0, InfoText.ToString());
         }
