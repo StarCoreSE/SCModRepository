@@ -11,7 +11,7 @@
 				Generates electricity from [Fusion Power].
 				Produces more electricity with a higher input ratio, but becomes less efficient.
 			</Description>
-			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+			<Icon>Textures\GUI\Icons\Cubes\Caster_Reactor.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="3" y="3" z="3"/>

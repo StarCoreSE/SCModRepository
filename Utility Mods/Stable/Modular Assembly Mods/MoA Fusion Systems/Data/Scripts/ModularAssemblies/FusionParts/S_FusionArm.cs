@@ -12,7 +12,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     /// </summary>
     internal struct S_FusionArm
     {
-        private const float LengthEfficiencyModifier = 0.1f;
+        private const float LengthEfficiencyModifier = 0.05f;
         private const float BlockPowerGeneration = 0.005f;
         private const float BlockPowerStorage = 2f;
 
