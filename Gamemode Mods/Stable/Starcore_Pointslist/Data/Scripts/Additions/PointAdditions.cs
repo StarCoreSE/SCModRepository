@@ -71,11 +71,11 @@ namespace ShipPoints
 				MA_T2PDX@150;
 				MA_T2PDX_Slope@150;
 				MA_T2PDX_Slope2@150;
-				MA_Gimbal_Laser_T2@70;
-				MA_Gimbal_Laser_T2_Armored@70;
-				MA_Gimbal_Laser_T2_Armored_Slope@70;
-				MA_Gimbal_Laser_T2_Armored_Slope2@70;
-				MA_Gimbal_Laser_T2_Armored_Slope45@70;
+				MA_Gimbal_Laser_T2@150;
+				MA_Gimbal_Laser_T2_Armored@150;
+				MA_Gimbal_Laser_T2_Armored_Slope@150;
+				MA_Gimbal_Laser_T2_Armored_Slope2@150;
+				MA_Gimbal_Laser_T2_Armored_Slope45@150;
 				PlasmaCannonLB@200;
 				MXA_CoilgunL@100;
 				RailgunxTurretM@165;
@@ -235,7 +235,7 @@ namespace ShipPoints
 
 				MA_Fixed_T2@150;
 				MA_Fixed_T2_Naked@150;
-				MA_Fixed_T3@125;
+				MA_Fixed_T3@150;
 				ARYXRailgun@400;
 				SC_AR_Phobos@400;
 				K_SA_LoW_CapitalSpinalA@650;
@@ -370,8 +370,8 @@ Cat_Battletech@15;
 				Starcore_AMS_II_Block@125;
 				Starcore_M_Laser_Block@75;
 				Starcore_L_Laser_Block@150;
-				K_SA_HeavyMetal_Spinal_Rotary@1000;
-				K_SA_HeavyMetal_Spinal_Rotary_Reskin@1000;
+				K_SA_HeavyMetal_Spinal_Rotary@1300;
+				K_SA_HeavyMetal_Spinal_Rotary_Reskin@1300;
 				MetalStorm@125;
 				CLB2X@500;
 				ERPPC@500;
