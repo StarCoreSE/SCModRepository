@@ -6,8 +6,10 @@
 				<TypeId>CubeBlock</TypeId>
 				<SubtypeId>Caster_CentralPipe_T</SubtypeId>
 			</Id>
-			<DisplayName>{LOC:DisplayName_Caster_CentralPipe_T}</DisplayName>
-			<Description>{LOC:Description_Caster_CentralPipe_T}</Description>
+			<DisplayName>Fusion Pipe T</DisplayName>
+			<Description>
+				Connects parts in a [Fusion System].
+			</Description>
 			<Icon>Textures\GUI\Icons\Cubes\Caster_CentralPipe_T.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>

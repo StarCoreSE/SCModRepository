@@ -7,7 +7,7 @@
 				<SubtypeId>Caster_Controller</SubtypeId>
 			</Id>
 			<DisplayName>{LOC:DisplayName_Caster_Controller}</DisplayName>
-			<Description>{LOC:Description_Caster_Controller}</Description>
+			<Description>TEMPORARY BLOCK</Description>
 			<Icon>Textures\GUI\Icons\Cubes\Caster_Controller.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>

@@ -6,8 +6,11 @@
 				<TypeId>Reactor</TypeId>
 				<SubtypeId>Caster_Reactor</SubtypeId>
 			</Id>
-			<DisplayName>{LOC:DisplayName_Caster_Reactor}</DisplayName>
-			<Description>{LOC:Description_Caster_Reactor}</Description>
+			<DisplayName>Fusion Reactor</DisplayName>
+			<Description>
+				Generates electricity from [Fusion Power].
+				Produces more electricity with a higher input ratio, but becomes less efficient.
+			</Description>
 			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>

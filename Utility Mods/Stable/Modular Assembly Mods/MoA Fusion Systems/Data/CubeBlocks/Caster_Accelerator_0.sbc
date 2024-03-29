@@ -6,8 +6,12 @@
 				<TypeId>CubeBlock</TypeId>
 				<SubtypeId>Caster_Accelerator_0</SubtypeId>
 			</Id>
-			<DisplayName>{LOC:DisplayName_Caster_Accelerator_0}</DisplayName>
-			<Description>{LOC:Description_Caster_Accelerator_0}</Description>
+			<DisplayName>Fusion Accelerator Straight</DisplayName>
+			<Description>
+				Stores [Fusion Power] within a [Fusion System].
+				Connects with other [Fusion Accelerators] in a loop, terminating in a [Fusion Accelerator Feeder].
+				Longer loops produce and store extra [Fusion Power].
+			</Description>
 			<Icon>Textures\GUI\Icons\Cubes\Caster_Accelerator_0.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>

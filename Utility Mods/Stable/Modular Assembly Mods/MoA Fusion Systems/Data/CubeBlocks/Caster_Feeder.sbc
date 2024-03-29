@@ -6,8 +6,12 @@
 				<TypeId>CubeBlock</TypeId>
 				<SubtypeId>Caster_Feeder</SubtypeId>
 			</Id>
-			<DisplayName>{LOC:DisplayName_Caster_Feeder}</DisplayName>
-			<Description>{LOC:Description_Caster_Feeder}</Description>
+			<DisplayName>Fusion Accelerator Feeder</DisplayName>
+			<Description>
+				Connects [Fusion Accelerator] loops to the [Fusion System].
+				Terminates [Fusion Accelerators] in a loop, and connects to [Fusion Pipes].
+				Longer loops produce and store extra [Fusion Power].
+			</Description>
 			<Icon>Textures\GUI\Icons\Cubes\Caster_Feeder.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
