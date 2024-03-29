@@ -855,13 +855,13 @@
 			<Model>Models\CoilgunMk1_TestMain.mwm</Model>
 			<Components>
 				<Component Count="400" Subtype="SteelPlate"/>
-				<Component Count="600" Subtype="Construction"/>
+				<Component Count="1200" Subtype="Construction"/>
 				<Component Count="150" Subtype="Motor"/>
-				<Component Count="150" Subtype="Computer"/>
 				<Component Count="30" Subtype="LargeTube" />
 				<Component Count="100" Subtype="MetalGrid" />
 				<Component Count="60" Subtype="Superconductor" />
-				<Component Count="1200" Subtype="Construction"/>
+				<Component Count="150" Subtype="Computer"/>
+				<Component Count="700" Subtype="Construction"/>
 				<Component Count="500" Subtype="SteelPlate"/>
 <!-- 
 				<Component Subtype="SteelPlate" Count="400" />

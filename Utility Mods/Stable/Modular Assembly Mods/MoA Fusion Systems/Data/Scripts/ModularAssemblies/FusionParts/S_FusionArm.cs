@@ -14,7 +14,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     {
         private const float LengthEfficiencyModifier = 0.1f;
         private const float BlockPowerGeneration = 0.005f;
-        private const float BlockPowerStorage = 1f;
+        private const float BlockPowerStorage = 2f;
 
         private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
 
