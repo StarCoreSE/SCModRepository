@@ -417,8 +417,7 @@ namespace klime.PointCheck
                     {
                         if (hasCockpit && !isMainGrid)
                         {
-                            // Prevent ppl from placing Cockpits on subgrids to circumvent BP increase of weapons
-                            // TODO: Works but is very spammy, is there a way to only have one notice on the screen at the time and remove it as soon as its fixed
+                            // Prevent players from placing Cockpits on subgrids to circumvent BP increase of weapons on subgrids
                             MyAPIGateway.Utilities.ShowNotification("Illegal Cockpit placement on subgrid", 1000, font: "Red");
                         }
 
@@ -513,13 +512,12 @@ namespace klime.PointCheck
                 }
             }
 
-            // Apply extra cost to weapons if this isnt the main grid
+            // Adding extra points to guns when they are not on the main grid
             if (!isMainGrid)
             {
                 foreach (KeyValuePair<string, int> weapon in tempGuns)
                 {
-                    // Adding extra points when not on the main grid
-                    // Currently takes a global 20% extra cost wich isn´t multiplicative with clibing cost
+                    // Currently takes a global 20% extra cost wich is not multiplicative with clibing cost
                     int bonusWeaponBP = (int)(PointCheck.PointValues.GetValueOrDefault(weapon.Key, 0) * weapon.Value * 0.2);
                     offensiveBpts += bonusWeaponBP;
                     Bpts += bonusWeaponBP;
