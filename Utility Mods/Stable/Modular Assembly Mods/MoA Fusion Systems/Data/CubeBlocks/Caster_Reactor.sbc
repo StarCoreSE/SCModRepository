@@ -15,12 +15,27 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Caster_Reactor.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="10"/>
-				<Component Subtype="Computer" Count="10"/>
+				<Component Subtype="SteelPlate" Count="800" />
+				<Component Subtype="Construction" Count="70" />
+				<Component Subtype="MetalGrid" Count="40" />
+				<Component Subtype="LargeTube" Count="40" />
+				<Component Subtype="Superconductor" Count="100" />
+				<Component Subtype="Reactor" Count="2000" />
+				<Component Subtype="Motor" Count="20" />
+				<Component Subtype="Computer" Count="75" />
+				<Component Subtype="SteelPlate" Count="200" />
 			</Components>
-			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<CriticalComponent Subtype="Computer" Index="0" />
 			<BlockPairName>Caster_Reactor</BlockPairName>
 			<MaxPowerOutput>0.001</MaxPowerOutput>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+			</MountPoints>
 		</Definition>
 	</CubeBlocks>
 </Definitions>
