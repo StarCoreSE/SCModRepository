@@ -18,24 +18,18 @@ using VRage.Utils;
 namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionThruster
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Thrust), false, "Caster_FocusLens")]
-    public class FusionThrusterLogic : MyGameLogicComponent, IMyEventProxy
+    public class FusionThrusterLogic : FusionPart<IMyThrust>
     {
+        // TODO: Convert into class inheritance-based
         private static bool _haveControlsInited;
 
         private readonly StringBuilder InfoText = new StringBuilder("Output: 0/0\nInput: 0/0\nEfficiency: N/A");
-
-        public IMyThrust Block;
 
         private float BufferPowerGeneration;
         private float BufferThrustOutput;
         public float MaxPowerConsumption;
         internal S_FusionSystem MemberSystem;
         public float PowerConsumption;
-
-        public MySync<float, SyncDirection.BothWays> PowerUsageSync;
-        public MySync<float, SyncDirection.BothWays> OverridePowerUsageSync;
-        public MySync<bool, SyncDirection.BothWays> OverrideEnabled;
-        private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
 
         public void UpdateThrust(float PowerGeneration, float NewtonsPerFusionPower)
         {

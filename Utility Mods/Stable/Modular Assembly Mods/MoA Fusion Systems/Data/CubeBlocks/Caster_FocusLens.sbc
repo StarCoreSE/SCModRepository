@@ -36,6 +36,7 @@
 			<MinPowerConsumption>0.000002</MinPowerConsumption>
 			<FlameDamageLengthScale>0.61</FlameDamageLengthScale>
 			<FlameLengthScale>1.5</FlameLengthScale>
+			<SlowdownFactor>1</SlowdownFactor>
 			<FlameIdleColor>
 				<X>0.2745098</X>
 				<Y>0.4090196</Y>
