@@ -126,8 +126,8 @@ namespace ShipPoints
 				SC_AR_Eris@1250;
 				K_SA_Launcher_FixedMount@275;
 					
-				MA_Tiger@125;
-				MA_Crouching_Tiger@125;
+				MA_Tiger@150;
+				MA_Crouching_Tiger@150;
 
 				MA_Afterburner_Large@200;
 				MA_Afterburner_Large_small@50;
