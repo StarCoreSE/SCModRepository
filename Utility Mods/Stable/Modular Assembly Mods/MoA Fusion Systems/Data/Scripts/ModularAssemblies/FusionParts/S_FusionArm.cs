@@ -29,7 +29,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         {
             var parts = new List<IMyCubeBlock>();
             var stopHits = 0;
-            IsValid = PerformScan(newPart, null, rootSubtype, ref stopHits, ref parts);
+            List<MyEntity> ignore = new List<MyEntity>();
+            IsValid = PerformScan(newPart, ref ignore, rootSubtype, ref stopHits, ref parts);
 
             PowerGeneration = 0;
             PowerStorage = 0;
@@ -68,7 +69,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         /// <param name="prevScan">The block entity to ignore; nullable.</param>
         /// <param name="stopAtSubtype">Exits the loop at this subtype.</param>
         /// <returns></returns>
-        private static bool PerformScan(MyEntity blockEntity, MyEntity prevScan, string stopAtSubtype, ref int stopHits,
+        private static bool PerformScan(MyEntity blockEntity, ref List<MyEntity> prevScan, string stopAtSubtype, ref int stopHits,
             ref List<IMyCubeBlock> parts)
         {
             if (ModularAPI.IsDebug())
@@ -87,8 +88,11 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 if (connectedSubtype == stopAtSubtype)
                     stopHits++;
 
-                if (connectedBlock != prevScan && connectedSubtype != stopAtSubtype)
-                    PerformScan(connectedBlock, blockEntity, stopAtSubtype, ref stopHits, ref parts);
+                if (!prevScan.Contains(connectedBlock) && connectedSubtype != stopAtSubtype)
+                {
+                    prevScan.Add(blockEntity);
+                    PerformScan(connectedBlock, ref prevScan, stopAtSubtype, ref stopHits, ref parts);
+                }
             }
 
             return stopHits == 2;
