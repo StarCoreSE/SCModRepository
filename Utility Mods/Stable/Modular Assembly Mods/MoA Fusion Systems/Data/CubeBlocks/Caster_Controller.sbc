@@ -21,6 +21,10 @@
 			<CriticalComponent Subtype="SteelPlate" Index="0"/>
 			<BlockPairName>Caster_Controller</BlockPairName>
 			<MaxPowerOutput>0.001</MaxPowerOutput>
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
+			</MountPoints>
+			<MirroringZ>Y</MirroringZ>
 		</Definition>
 	</CubeBlocks>
 </Definitions>

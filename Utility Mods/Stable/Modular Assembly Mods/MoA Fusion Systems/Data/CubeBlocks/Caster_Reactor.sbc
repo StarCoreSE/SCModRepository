@@ -8,7 +8,7 @@
 			</Id>
 			<DisplayName>{LOC:DisplayName_Caster_Reactor}</DisplayName>
 			<Description>{LOC:Description_Caster_Reactor}</Description>
-			<Icon>Textures\GUI\Icons\Cubes\Caster_Reactor.dds</Icon>
+			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="3" y="3" z="3"/>
@@ -28,6 +28,14 @@
 			<CriticalComponent Subtype="Computer" Index="0" />
 			<BlockPairName>Caster_Reactor</BlockPairName>
 			<MaxPowerOutput>0.001</MaxPowerOutput>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+			</MountPoints>
 		</Definition>
 	</CubeBlocks>
 </Definitions>

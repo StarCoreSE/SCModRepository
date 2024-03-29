@@ -26,6 +26,7 @@
 			</Components>
 			<CriticalComponent Subtype="Computer" Index="0" />
 			<BlockPairName>Caster_CentralPipe_T</BlockPairName>
+			<MirroringX>Z</MirroringX>
 		</Definition>
 	</CubeBlocks>
 </Definitions>
