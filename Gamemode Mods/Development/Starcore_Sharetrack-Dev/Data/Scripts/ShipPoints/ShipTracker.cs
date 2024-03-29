@@ -476,7 +476,7 @@ namespace klime.PointCheck
                 bool isWeapon;
                 if (PointCheckHelpers.weaponsDictionary.TryGetValue(block.BlockDefinition.Id.SubtypeName, out isWeapon) && isWeapon)
                 {
-                    offensiveBpts += PointCheck.PointValues.GetValueOrDefault(id, 0) + bonusBpts + 300;
+                    offensiveBpts += PointCheck.PointValues.GetValueOrDefault(id, 0) + bonusBpts;
 
                     if (tempGuns.ContainsKey(id))
                     {
