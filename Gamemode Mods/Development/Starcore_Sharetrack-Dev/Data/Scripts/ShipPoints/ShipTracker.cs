@@ -513,7 +513,7 @@ namespace klime.PointCheck
             }
 
             // Adding extra points to guns when they are not on the main grid
-            if (!isMainGrid)
+            if (!isMainGrid && connectedGrids.Count != 1)
             {
                 foreach (KeyValuePair<string, int> weapon in tempGuns)
                 {
