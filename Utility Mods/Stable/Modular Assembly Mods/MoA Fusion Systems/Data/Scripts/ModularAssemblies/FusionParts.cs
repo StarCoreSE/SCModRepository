@@ -317,21 +317,21 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                         }
                     }
                 },
-                {
-                    //"Caster_Controller", new Dictionary<Vector3I, string[]>
-                    {
-                        {
-                            Vector3I.Backward, new[]
-                            {
-                                "Caster_CentralPipe_0",
-                                "Caster_CentralPipe_90",
-                                "Caster_CentralPipe_T",
-                                "Caster_Feeder",
-                                "Caster_Reactor"
-                            }
-                        }
-                    }
-                }
+                //{
+                //    "Caster_Controller", new Dictionary<Vector3I, string[]>
+                //    {
+                //        {
+                //            Vector3I.Backward, new[]
+                //            {
+                //                "Caster_CentralPipe_0",
+                //                "Caster_CentralPipe_90",
+                //                "Caster_CentralPipe_T",
+                //                "Caster_Feeder",
+                //                "Caster_Reactor"
+                //            }
+                //        }
+                //    }
+                //}
             }
         };
     }
