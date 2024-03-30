@@ -48,7 +48,7 @@ namespace Scripts
             EnergyCost = 0.001f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 1000f, // Direct damage; one steel plate is worth 100. 
             Mass = 1000, // In kilograms; how much force the impact will apply to the target.
-            Health = 3000, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            Health = 1200, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 10, // Recoil.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
@@ -90,7 +90,7 @@ namespace Scripts
                     Interval = 20, // Time between spawning fragments, in ticks, 0 means every tick, 1 means every other
                     StartTime = 0, // Time delay to start spawning fragments, in ticks, of total projectile life
                     MaxSpawns = 6, // Max number of fragment children to spawn
-                    Proximity = 1200, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
+                    Proximity = 2000, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
                     ParentDies = false, // Parent dies once after it spawns its last child.
                     PointAtTarget = true, // Start fragment direction pointing at Target
                     PointType = Lead, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
@@ -276,8 +276,8 @@ namespace Scripts
                 TargetLossDegree = 180f, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 36000, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
-                AccelPerSec = 200f, // Acceleration in Meters Per Second. Projectile starts on tick 0 at its parents (weapon/other projectiles) travel velocity.
-                DesiredSpeed = 360f, // voxel phasing if you go above 5100
+                AccelPerSec = 240f, // Acceleration in Meters Per Second. Projectile starts on tick 0 at its parents (weapon/other projectiles) travel velocity.
+                DesiredSpeed = 375f, // voxel phasing if you go above 5100
                 MaxTrajectory = 1000000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
@@ -289,15 +289,15 @@ namespace Scripts
                 {
                     SteeringLimit = 150, // 0 means no limit, value is in degrees, good starting is 150.  This enable advanced smart "control", cost of 3 on a scale of 1-5, 0 being basic smart.
                     Inaccuracy = 0f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
-                    Aggressiveness = 1f, // controls how responsive tracking is.
-                    MaxLateralThrust = 1.5, // controls how sharp the projectile may turn, this is the cheaper but less realistic version of SteeringLimit, cost of 2 on a scale of 1-5, 0 being basic smart.
+                    Aggressiveness = 1.2f, // controls how responsive tracking is.
+                    MaxLateralThrust = 1.5f, // controls how sharp the projectile may turn, this is the cheaper but less realistic version of SteeringLimit, cost of 2 on a scale of 1-5, 0 being basic smart.
                     NavAcceleration = 0, // helps influence how the projectile steers. 
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
                     AccelClearance = false, // Setting this to true will prevent smart acceleration until it is clear of the grid and tracking delay has been met (free fall).
                     MaxChaseTime = 36000, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
                     CheckFutureIntersection = true, // Utilize obstacle avoidance for drones
-                    FutureIntersectionRange = 500,
+                    FutureIntersectionRange = 800,
                     MaxTargets = 0, // Number of targets allowed before ending, 0 = unlimited
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
                     Roam = false, // Roam current area after target loss
@@ -312,6 +312,7 @@ namespace Scripts
                 },
                 Approaches = new[] // These approaches move forward and backward in order, once the end condition of the last one is reached it will revert to default behavior. Cost level of 4+, or 5+ if used with steering.
                 {
+                    //0
                     new ApproachDef // Launch
                     {
                         // Start/End behaviors 
@@ -328,14 +329,14 @@ namespace Scripts
                                                     // NextTimedSpawn[<=], SinceTimedSpawn[>=], RelativeLifetime[>=], RelativeDeadTime[<=], RelativeSpawns[>=], EnemyTargetLoss[>=]
                                                     // *NOTE* DO NOT set start1 and start2 or end1 and end2 to same condition
                         StartCondition2 = Ignore,
-                        EndCondition1 = Lifetime,
+                        EndCondition1 = MinTravelRequired,
                         EndCondition2 = Ignore,
                         EndCondition3 = Ignore,
 
                         // Start/End thresholds -- both conditions are evaluated before activation, use Ignore to skip
                         Start1Value = 0,
                         Start2Value = 0,
-                        End1Value = 600,
+                        End1Value = 200,
                         End2Value = 0,
                         End3Value = 0, 
                         
@@ -376,10 +377,10 @@ namespace Scripts
                         PushLeadByTravelDistance = false, // the follow lead position will move in its point direction by an amount equal to the projectiles travel distance.
 
                         // Modify speed and acceleration ratios while this approach is active
-                        AccelMulti = 1, // Modify default acceleration by this factor
+                        AccelMulti = 1.0, // Modify default acceleration by this factor
                         DeAccelMulti = 0, // Modifies your default deacceleration by this factor
                         TotalAccelMulti = 0, // Modifies your default totalacceleration by this factor
-                        SpeedCapMulti = 0.01, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
+                        SpeedCapMulti = 1.0, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
 
                         // Target navigation behavior 
                         Orbit = false, // Orbit the target
@@ -390,7 +391,7 @@ namespace Scripts
                         
                         // Other
                         NoTimedSpawns = true, // When true timedSpawns will not be triggered while this approach is active.
-                        DisableAvoidance = true, // Disable futureIntersect.
+                        DisableAvoidance = false, // Disable futureIntersect.
                         IgnoreAntiSmart = true, // If set to true, antismart cannot change this approaches target.
                         HeatRefund = 0, // how much heat to refund when related EndEvent/StartEvent is met.
                         ReloadRefund = false, // Refund a reload (for max reload).
@@ -398,11 +399,11 @@ namespace Scripts
                         SelfAvoidance = false, // If this and FutureIntersect is enabled then projectiles will actively avoid the parent grids.
                         TargetAvoidance = false, // If this and FutureIntersect is enabled then projectiles will actively avoid the target.
                         SelfPhasing = true, // If enabled the projectiles can phase through the parent grids without doing damage or dying.
-                        SwapNavigationType = true, // This will swap to other navigation  (i.e. the alternate of what is set in smart, ProNav vs ZeroEffort) 
+                        SwapNavigationType = false, // This will swap to other navigation  (i.e. the alternate of what is set in smart, ProNav vs ZeroEffort) 
                         // Audio/Visual Section
                         AlternateParticle = new ParticleDef // if blank it will use default, must be a default version for this to be useable. 
                         {
-                            Name = "BSG_Viper_MK_I_Exhaust_High",
+                            Name = "",
                             Offset = Vector(x: 0, y: 0, z: 0),
                             DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                             Extras = new ParticleOptionDef
@@ -423,13 +424,34 @@ namespace Scripts
                         AlternateModel = "", // Define only if you want to switch to an alternate model in this phase
                         AlternateSound = "" // if blank it will use default, must be a default version for this to be useable. 
                     },
-
+                    //1
                     new ApproachDef // Travel
                     {
                         // Start/End behaviors 
-                        RestartCondition = MoveToNext, // Wait, MoveToPrevious, MoveToNext, ForceRestart -- A restart condition is when the end condition is reached without having met the start condition. 
-                        OnRestartRevertTo = -1, // This applies if RestartCondition is set to ForceRestart and trigger requirement was met. -1 to reset to BEFORE the for approach stage was activated.  First stage is 0, second is 1, etc...
-                        Operators = StartEnd_And, // Controls how the start and end conditions are matched:  StartEnd_And, StartEnd_Or, StartAnd_EndOr,StartOr_EndAnd,
+                        RestartCondition = ForceRestart, // Wait*, MoveToPrevious, MoveToNext, ForceRestart -- A restart condition is when the end condition is reached without having met the start condition. 
+                        RestartList = new[]
+                        { // This list is used if RestartCondition is set to ForceRestart and trigger requirement was met. -1 to reset to BEFORE the for approach stage was activated.  First stage is 0, second is 1, etc...
+                            new WeightedIdListDef
+                            {// If all valid entries (below MaxRuns) role a 0 (i.e. weights are disabled), then the entry with the lowest current "Runs" will be selected, if two or more share lowest runs then the winner is decided by the order below.
+                                ApproachId = 3,
+                                MaxRuns = 0, // 0 means unlimited, defines how many times this entry can return true. 
+                                Weight = Random(1, 1), // The approachId that rolls the highest number will be selected
+                                End1WeightMod = 11, // multiplies the weight Start and End value by this number, if both End conditions were true the highest roll between them wins, 0 means disabled
+                                End2WeightMod = 0,
+                                End3WeightMod = 0,
+                            },
+                            new WeightedIdListDef
+                            {
+                                //rtb
+                                ApproachId = 5,
+                                MaxRuns = 1,
+                                Weight = Random(1, 1),
+                                End1WeightMod = 1,
+                                End2WeightMod = 11,
+                                End3WeightMod = 0,
+                            },
+                        },
+                        Operators = StartAnd_EndOr, // Controls how the start and end conditions are matched:  StartEnd_And, StartEnd_Or, StartAnd_EndOr,StartOr_EndAnd,
                         CanExpireOnceStarted = false, // This stages values will continue to apply until the end conditions are met.
                         ForceRestart = false, // This forces the ReStartCondition when the end condition is met no matter if the start condition was met or not.
 
@@ -447,8 +469,8 @@ namespace Scripts
                         // Start/End thresholds -- both conditions are evaluated before activation, use Ignore to skip
                         Start1Value = 501,
                         Start2Value = 0,
-                        End1Value = 700,
-                        End2Value = 1000,
+                        End1Value = 500,
+                        End2Value = 400,
                         End3Value = 0, 
                         
                         // Special triggers when the start/end conditions are met (DoNothing, EndProjectile, EndProjectileOnRestart, StoreDestination)
@@ -503,7 +525,7 @@ namespace Scripts
                         OffsetTime = 0, // How often to change the offset direction.
                         
                         // Other
-                        NoTimedSpawns = true, // When true timedSpawns will not be triggered while this approach is active.
+                        NoTimedSpawns = false, // When true timedSpawns will not be triggered while this approach is active.
                         DisableAvoidance = false, // Disable futureIntersect.
                         IgnoreAntiSmart = true, // If set to true, antismart cannot change this approaches target.
                         HeatRefund = 0, // how much heat to refund when related EndEvent/StartEvent is met.
@@ -516,7 +538,7 @@ namespace Scripts
                         // Audio/Visual Section
                         AlternateParticle = new ParticleDef // if blank it will use default, must be a default version for this to be useable. 
                         {
-                            Name = "BSG_Viper_MK_I_Exhaust_High",
+                            Name = "",
                             Offset = Vector(x: 0, y: 0, z: 0),
                             DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                             Extras = new ParticleOptionDef
@@ -535,14 +557,35 @@ namespace Scripts
                             },
                         },
                         AlternateModel = "", // Define only if you want to switch to an alternate model in this phase
-                        AlternateSound = "" // if blank it will use default, must be a default version for this to be useable. 
+                        AlternateSound = "", // if blank it will use default, must be a default version for this to be useable.
+                        ModelRotateTime = 0, // If this value is greater than 0 then the projectile model will rotate to face the target, a value of 1 is instant (in ticks) 
                     },
-
+                    //2
                     new ApproachDef // Orbit
                     {
-                        // Start/End behaviors 
-                        RestartCondition = MoveToNext, // Wait, MoveToPrevious, MoveToNext, ForceRestart -- A restart condition is when the end condition is reached without having met the start condition. 
-                        OnRestartRevertTo = -1, // This applies if RestartCondition is set to ForceRestart and trigger requirement was met. -1 to reset to BEFORE the for approach stage was activated.  First stage is 0, second is 1, etc...
+                        RestartCondition = ForceRestart, // Wait*, MoveToPrevious, MoveToNext, ForceRestart -- A restart condition is when the end condition is reached without having met the start condition. 
+                        RestartList = new[]
+                        { // This list is used if RestartCondition is set to ForceRestart and trigger requirement was met. -1 to reset to BEFORE the for approach stage was activated.  First stage is 0, second is 1, etc...
+                            new WeightedIdListDef
+                            {// If all valid entries (below MaxRuns) role a 0 (i.e. weights are disabled), then the entry with the lowest current "Runs" will be selected, if two or more share lowest runs then the winner is decided by the order below.
+                                ApproachId = 4,
+                                MaxRuns = 0, // 0 means unlimited, defines how many times this entry can return true. 
+                                Weight = Random(0, 1), // The approachId that rolls the highest number will be selected
+                                End1WeightMod = 11, // multiplies the weight Start and End value by this number, if both End conditions were true the highest roll between them wins, 0 means disabled
+                                End2WeightMod = 11,
+                                End3WeightMod = 1,
+                            },
+                            new WeightedIdListDef
+                            {
+                                //rtb
+                                ApproachId = 1,
+                                MaxRuns = 0,
+                                Weight = Random(0, 1),
+                                End1WeightMod = 1,
+                                End2WeightMod = 1,
+                                End3WeightMod = 11,
+                            },
+                        },
                         Operators = StartAnd_EndOr, // Controls how the start and end conditions are matched:  StartEnd_And, StartEnd_Or, StartAnd_EndOr,StartOr_EndAnd,
                         CanExpireOnceStarted = false, // This stages values will continue to apply until the end conditions are met.
                         ForceRestart = false, // This forces the ReStartCondition when the end condition is met no matter if the start condition was met or not.
@@ -559,11 +602,11 @@ namespace Scripts
                         EndCondition3 = RelativeHealthLost,
 
                         // Start/End thresholds -- both conditions are evaluated before activation, use Ignore to skip
-                        Start1Value = 600,
+                        Start1Value = 1000,
                         Start2Value = 0,
-                        End1Value = 300,
+                        End1Value = 120,
                         End2Value = 60,
-                        End3Value = 1000, 
+                        End3Value = 300, 
                         
                         // Special triggers when the start/end conditions are met (DoNothing, EndProjectile, EndProjectileOnRestart, StoreDestination)
                         StartEvent = DoNothing,
@@ -611,13 +654,13 @@ namespace Scripts
 
                         // Target navigation behavior 
                         Orbit = true, // Orbit the target
-                        OrbitRadius = 2000, // The orbit radius to extend between the projectile and the target (target volume + this value)
-                        OffsetMinRadius = 0, // Min Radius to offset from target.  
-                        OffsetMaxRadius = 0, // Max Radius to offset from target.  
-                        OffsetTime = 0, // How often to change the offset direction.
+                        OrbitRadius = 1500, // The orbit radius to extend between the projectile and the target (target volume + this value)
+                        OffsetMinRadius = 750, // Min Radius to offset from target.  
+                        OffsetMaxRadius = 2000, // Max Radius to offset from target.  
+                        OffsetTime = 60, // How often to change the offset direction.
                         
                         // Other
-                        NoTimedSpawns = true, // When true timedSpawns will not be triggered while this approach is active.
+                        NoTimedSpawns = false, // When true timedSpawns will not be triggered while this approach is active.
                         DisableAvoidance = false, // Disable futureIntersect.
                         IgnoreAntiSmart = true, // If set to true, antismart cannot change this approaches target.
                         HeatRefund = 0, // how much heat to refund when related EndEvent/StartEvent is met.
@@ -630,7 +673,7 @@ namespace Scripts
                         // Audio/Visual Section
                         AlternateParticle = new ParticleDef // if blank it will use default, must be a default version for this to be useable. 
                         {
-                            Name = "BSG_Viper_MK_I_Exhaust_High",
+                            Name = "",
                             Offset = Vector(x: 0, y: 0, z: 0),
                             DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                             Extras = new ParticleOptionDef
@@ -649,14 +692,36 @@ namespace Scripts
                             },
                         },
                         AlternateModel = "", // Define only if you want to switch to an alternate model in this phase
-                        AlternateSound = "" // if blank it will use default, must be a default version for this to be useable. 
+                        AlternateSound = "", // if blank it will use default, must be a default version for this to be useable. 
                     },
-
+                    //3
                     new ApproachDef // Turn
                     {
                         // Start/End behaviors 
-                        RestartCondition = MoveToNext, // Wait, MoveToPrevious, MoveToNext, ForceRestart -- A restart condition is when the end condition is reached without having met the start condition. 
-                        Operators = StartEnd_And, // Controls how the start and end conditions are matched:  StartEnd_And, StartEnd_Or, StartAnd_EndOr,StartOr_EndAnd,
+                        RestartCondition = ForceRestart, // Wait*, MoveToPrevious, MoveToNext, ForceRestart -- A restart condition is when the end condition is reached without having met the start condition. 
+                        RestartList = new[]
+                        { // This list is used if RestartCondition is set to ForceRestart and trigger requirement was met. -1 to reset to BEFORE the for approach stage was activated.  First stage is 0, second is 1, etc...
+                            new WeightedIdListDef
+                            {// If all valid entries (below MaxRuns) role a 0 (i.e. weights are disabled), then the entry with the lowest current "Runs" will be selected, if two or more share lowest runs then the winner is decided by the order below.
+                                ApproachId = 4,
+                                MaxRuns = 0, // 0 means unlimited, defines how many times this entry can return true. 
+                                Weight = Random(1, 1), // The approachId that rolls the highest number will be selected
+                                End1WeightMod = 11, // multiplies the weight Start and End value by this number, if both End conditions were true the highest roll between them wins, 0 means disabled
+                                End2WeightMod = 1,
+                                End3WeightMod = 1,
+                            },
+                            new WeightedIdListDef
+                            {
+                                //rtb
+                                ApproachId = 1,
+                                MaxRuns = 0,
+                                Weight = Random(1, 1),
+                                End1WeightMod = 1,
+                                End2WeightMod = 11,
+                                End3WeightMod = 1,
+                            },
+                        },
+                        Operators = StartAnd_EndOr, // Controls how the start and end conditions are matched:  StartEnd_And, StartEnd_Or, StartAnd_EndOr,StartOr_EndAnd,
                         CanExpireOnceStarted = false, // This stages values will continue to apply until the end conditions are met.
                         ForceRestart = false, // This forces the ReStartCondition when the end condition is met no matter if the start condition was met or not.
 
@@ -668,14 +733,14 @@ namespace Scripts
                                                     // *NOTE* DO NOT set start1 and start2 or end1 and end2 to same condition
                         StartCondition2 = Ignore,
                         EndCondition1 = RelativeLifetime,
-                        EndCondition2 = Ignore,
+                        EndCondition2 = RelativeHealthLost,
                         EndCondition3 = Ignore,
 
                         // Start/End thresholds -- both conditions are evaluated before activation, use Ignore to skip
-                        Start1Value = 300,
+                        Start1Value = 90,
                         Start2Value = 0,
-                        End1Value = 90,
-                        End2Value = 0,
+                        End1Value = 60,
+                        End2Value = 200,
                         End3Value = 0, 
                         
                         // Special triggers when the start/end conditions are met (DoNothing, EndProjectile, EndProjectileOnRestart, StoreDestination)
@@ -723,14 +788,14 @@ namespace Scripts
                         SpeedCapMulti = 0.5, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
 
                         // Target navigation behavior 
-                        Orbit = false, // Orbit the target
-                        OrbitRadius = 1000, // The orbit radius to extend between the projectile and the target (target volume + this value)
-                        OffsetMinRadius = 0, // Min Radius to offset from target.  
-                        OffsetMaxRadius = 0, // Max Radius to offset from target.  
-                        OffsetTime = 0, // How often to change the offset direction.
+                        Orbit = true, // Orbit the target
+                        OrbitRadius = 1500, // The orbit radius to extend between the projectile and the target (target volume + this value)
+                        OffsetMinRadius = 750, // Min Radius to offset from target.  
+                        OffsetMaxRadius = 2000, // Max Radius to offset from target.  
+                        OffsetTime = 60, // How often to change the offset direction.
                         
                         // Other
-                        NoTimedSpawns = true, // When true timedSpawns will not be triggered while this approach is active.
+                        NoTimedSpawns = false, // When true timedSpawns will not be triggered while this approach is active.
                         DisableAvoidance = false, // Disable futureIntersect.
                         IgnoreAntiSmart = true, // If set to true, antismart cannot change this approaches target.
                         HeatRefund = 0, // how much heat to refund when related EndEvent/StartEvent is met.
@@ -743,7 +808,7 @@ namespace Scripts
                         // Audio/Visual Section
                         AlternateParticle = new ParticleDef // if blank it will use default, must be a default version for this to be useable. 
                         {
-                            Name = "BSG_Viper_MK_I_Exhaust_Low",
+                            Name = "",
                             Offset = Vector(x: 0, y: 0, z: 0),
                             DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                             Extras = new ParticleOptionDef
@@ -765,7 +830,7 @@ namespace Scripts
                         AlternateSound = "", // if blank it will use default, must be a default version for this to be useable. 
                         ModelRotateTime = 0, // If this value is greater than 0 then the projectile model will rotate to face the target, a value of 1 is instant (in ticks).
                     },
-
+                    //4
                     new ApproachDef // Strafe
                     {
                         // Start/End behaviors 
@@ -775,19 +840,26 @@ namespace Scripts
                             new WeightedIdListDef
                             {// If all valid entries (below MaxRuns) role a 0 (i.e. weights are disabled), then the entry with the lowest current "Runs" will be selected, if two or more share lowest runs then the winner is decided by the order below.
                                 ApproachId = 2,
-                                MaxRuns = 3, // 0 means unlimited, defines how many times this entry can return true. 
+                                MaxRuns = 2, // 0 means unlimited, defines how many times this entry can return true. 
                                 Weight = Random(3, 10),
+                                End1WeightMod = 1,
+                                End2WeightMod = 1,
+                                End3WeightMod = 11,
+
                             },
                             new WeightedIdListDef
                             {// If all valid entries (below MaxRuns) role a 0 (i.e. weights are disabled), then the entry with the lowest current "Runs" will be selected, if two or more share lowest runs then the winner is decided by the order below.
                                 ApproachId = 5,
                                 MaxRuns = 1, // 0 means unlimited, defines how many times this entry can return true. 
-                                Weight = Random(0, 2),
+                                Weight = Random(0, 3),
+                                End1WeightMod = 0,
+                                End2WeightMod = 0,
+                                End3WeightMod = 11,
                             },
                         },
                         Operators = StartAnd_EndOr, // Controls how the start and end conditions are matched:  StartEnd_And, StartEnd_Or, StartAnd_EndOr,StartOr_EndAnd,
                         CanExpireOnceStarted = false, // This stages values will continue to apply until the end conditions are met.
-                        ForceRestart = true, // This forces the ReStartCondition when the end condition is met no matter if the start condition was met or not.
+                        ForceRestart = false, // This forces the ReStartCondition when the end condition is met no matter if the start condition was met or not.
 
                         // Start/End conditions
                         StartCondition1 = SinceTimedSpawn, // Each condition type is either >= or <= the corresponding value defined below.
@@ -801,11 +873,11 @@ namespace Scripts
                         EndCondition3 = RelativeHealthLost,
 
                         // Start/End thresholds -- both conditions are evaluated before activation, use Ignore to skip
-                        Start1Value = 300,
+                        Start1Value = 60,
                         Start2Value = 0,
-                        End1Value = 230,
+                        End1Value = 120,
                         End2Value = 60,
-                        End3Value = 1000, 
+                        End3Value = 250, 
                         
                         // Special triggers when the start/end conditions are met (DoNothing, EndProjectile, EndProjectileOnRestart, StoreDestination)
                         StartEvent = DoNothing,
@@ -852,11 +924,11 @@ namespace Scripts
                         SpeedCapMulti = 0.5, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
 
                         // Target navigation behavior 
-                        Orbit = false, // Orbit the target
-                        OrbitRadius = 1000, // The orbit radius to extend between the projectile and the target (target volume + this value)
-                        OffsetMinRadius = 300, // Min Radius to offset from target.  
-                        OffsetMaxRadius = 600, // Max Radius to offset from target.  
-                        OffsetTime = 120, // How often to change the offset direction.
+                        Orbit = true, // Orbit the target
+                        OrbitRadius = 1500, // The orbit radius to extend between the projectile and the target (target volume + this value)
+                        OffsetMinRadius = 750, // Min Radius to offset from target.  
+                        OffsetMaxRadius = 2000, // Max Radius to offset from target.  
+                        OffsetTime = 60, // How often to change the offset direction.
                         
                         // Other
                         NoTimedSpawns = false, // When true timedSpawns will not be triggered while this approach is active.
@@ -872,7 +944,7 @@ namespace Scripts
                         // Audio/Visual Section
                         AlternateParticle = new ParticleDef // if blank it will use default, must be a default version for this to be useable. 
                         {
-                            Name = "BSG_Viper_MK_I_Exhaust_Low",
+                            Name = "",
                             Offset = Vector(x: 0, y: 0, z: 0),
                             DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                             Extras = new ParticleOptionDef
@@ -894,7 +966,7 @@ namespace Scripts
                         AlternateSound = "", // if blank it will use default, must be a default version for this to be useable. 
                         ModelRotateTime = 0, // If this value is greater than 0 then the projectile model will rotate to face the target, a value of 1 is instant (in ticks).
                     },
-
+                    //5
                     new ApproachDef // RTB
                     {
                         // Start/End behaviors 
@@ -915,9 +987,9 @@ namespace Scripts
                         EndCondition3 = Ignore,
 
                         // Start/End thresholds -- both conditions are evaluated before activation, use Ignore to skip
-                        Start1Value = 1100,
+                        Start1Value = 501,
                         Start2Value = 0,
-                        End1Value = 1000,
+                        End1Value = 500,
                         End2Value = 0,
                         End3Value = 0, 
                         
@@ -962,7 +1034,7 @@ namespace Scripts
                         AccelMulti = 1.0, // Modify default acceleration by this factor
                         DeAccelMulti = 0, // Modifies your default deacceleration by this factor
                         TotalAccelMulti = 0, // Modifies your default totalacceleration by this factor
-                        SpeedCapMulti = 1.0, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
+                        SpeedCapMulti = 2.0, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
 
                         // Target navigation behavior 
                         Orbit = false, // Orbit the target
@@ -985,7 +1057,7 @@ namespace Scripts
                         // Audio/Visual Section
                         AlternateParticle = new ParticleDef // if blank it will use default, must be a default version for this to be useable. 
                         {
-                            Name = "BSG_Viper_MK_I_Exhaust_High",
+                            Name = "",
                             Offset = Vector(x: 0, y: 0, z: 0),
                             DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                             Extras = new ParticleOptionDef
@@ -1004,9 +1076,121 @@ namespace Scripts
                             },
                         },
                         AlternateModel = "", // Define only if you want to switch to an alternate model in this phase
-                        AlternateSound = "" // if blank it will use default, must be a default version for this to be useable. 
+                        AlternateSound = "", // if blank it will use default, must be a default version for this to be useable. 
                     },
+                    //6
+                    new ApproachDef // Recover Orbit
+                    {
+                        // Start/End behaviors 
+                        RestartCondition = MoveToNext, // Wait, MoveToPrevious, MoveToNext, ForceRestart -- A restart condition is when the end condition is reached without having met the start condition. 
+                        OnRestartRevertTo = -1, // This applies if RestartCondition is set to ForceRestart and trigger requirement was met. -1 to reset to BEFORE the for approach stage was activated.  First stage is 0, second is 1, etc...
+                        Operators = StartEnd_And, // Controls how the start and end conditions are matched:  StartEnd_And, StartEnd_Or, StartAnd_EndOr,StartOr_EndAnd,
+                        CanExpireOnceStarted = false, // This stages values will continue to apply until the end conditions are met.
+                        ForceRestart = false, // This forces the ReStartCondition when the end condition is met no matter if the start condition was met or not.
 
+                        // Start/End conditions
+                        StartCondition1 = DistanceFromPositionC, // Each condition type is either >= or <= the corresponding value defined below.
+                                                    // DistanceFromDestination[<=], DistanceToDestination[>=], Lifetime[>=], DeadTime[<=], MinTravelRequired[>=], MaxTravelRequired[<=],
+                                                    // Ignore(skip this condition), Spawn(works per stage), DesiredElevation(tolerance can be set with ElevationTolerance)
+                                                    // *NOTE* DO NOT set start1 and start2 or end1 and end2 to same condition
+                        StartCondition2 = Ignore,
+                        EndCondition1 = RelativeLifetime,
+                        EndCondition2 = Ignore,
+                        EndCondition3 = Ignore,
+
+                        // Start/End thresholds -- both conditions are evaluated before activation, use Ignore to skip
+                        Start1Value = 400,
+                        Start2Value = 0,
+                        End1Value = 200,
+                        End2Value = 0,
+                        End3Value = 0, 
+                        
+                        // Special triggers when the start/end conditions are met (DoNothing, EndProjectile, EndProjectileOnRestart, StoreDestination)
+                        StartEvent = DoNothing,
+                        EndEvent = DoNothing,  
+                        
+                        // Relative positions and directions
+                        Forward = ForwardRelativeToShooter, // ForwardDestinationDirection*, ForwardRelativeToBlock, ForwardRelativeToShooter, ForwardRelativeToGravity, ForwardTargetDirection, ForwardTargetVelocity, ForwardStoredStartPosition, ForwardStoredEndPosition, ForwardStoredStartLocalPosition, ForwardStoredEndLocalPosition, ForwardOriginDirection    
+                        Up = UpRelativeToShooter, // UpRelativeToBlock*, UpRelativeToShooter, UpRelativeToGravity, UpTargetDirection, UpTargetVelocity, UpStoredStartPosition, UpStoredEndPosition, UpStoredStartLocalPosition, UpStoredEndLocalPosition, UpOriginDirection, UpDestinationDirection
+                        
+                        PositionB = PositionA, // Origin, Shooter, Target, Surface, MidPoint, Current, Nothing, StoredStartDestination, StoredEndDestination
+                        PositionC = Shooter,
+                        Elevation = Nothing, 
+                        
+                        //
+                        // Control if the vantagepoints update every frame or only at start.
+                        //
+                        AdjustForward = true, // adjust forwardDir overtime.
+                        AdjustUp = true, // adjust upDir overtime
+                        AdjustPositionB = true, // Updated the source position overtime.
+                        AdjustPositionC = true, // Update destination overtime
+                        LeadRotateElevatePositionB = false, // Add lead and rotation to Source Position
+                        LeadRotateElevatePositionC = false, // Add lead and rotation to Destination Position
+                        TrajectoryRelativeToB = false, // If true the projectiles immediate trajectory will be relative to PositionB instead of PositionC (e.g. quick response to elevation changes relative to PositionB position assuming that position is closer to PositionA)
+                        ElevationRelativeToC = false, // If true the projectiles desired elevation will be relative to PositionC instead of PositionB (e.g. quick response to elevation changes relative to PositionC position assuming that position is closer to PositionA)
+                        
+                        // Tweaks to vantagepoint behavior
+                        AngleOffset = 0, // value 0 - 1, rotates the Updir
+                        ElevationTolerance = 0, // adds additional tolerance (in meters) to meet the Elevation condition requirement.  *note* collision size is also added to the tolerance
+                        TrackingDistance = 0, // Minimum travel distance before projectile begins racing to target
+                        DesiredElevation = 0, // The desired elevation relative to source 
+                        StoredStartId = 0, // Which approach id the the start storage was saved in, if any.
+                        StoredEndId = 0, // Which approach id the the end storage was saved in, if any.
+                        StoredStartType = PositionA,
+                        StoredEndType = Target,
+                        // Controls the leading behavior
+                        LeadDistance = 0, // Add additional "lead" in meters to the trajectory (project in the future), this will be applied even before TrackingDistance is met. 
+                        PushLeadByTravelDistance = false, // the follow lead position will move in its point direction by an amount equal to the projectiles travel distance.
+
+                        // Modify speed and acceleration ratios while this approach is active
+                        AccelMulti = 1.0, // Modify default acceleration by this factor
+                        DeAccelMulti = 0, // Modifies your default deacceleration by this factor
+                        TotalAccelMulti = 0, // Modifies your default totalacceleration by this factor
+                        SpeedCapMulti = 1.0, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
+
+                        // Target navigation behavior 
+                        Orbit = true, // Orbit the target
+                        OrbitRadius = 300, // The orbit radius to extend between the projectile and the target (target volume + this value)
+                        OffsetMinRadius = 0, // Min Radius to offset from target.  
+                        OffsetMaxRadius = 0, // Max Radius to offset from target.  
+                        OffsetTime = 0, // How often to change the offset direction.
+                        
+                        // Other
+                        NoTimedSpawns = true, // When true timedSpawns will not be triggered while this approach is active.
+                        DisableAvoidance = false, // Disable futureIntersect.
+                        IgnoreAntiSmart = true, // If set to true, antismart cannot change this approaches target.
+                        HeatRefund = 0, // how much heat to refund when related EndEvent/StartEvent is met.
+                        ReloadRefund = false, // Refund a reload (for max reload).
+                        ToggleIngoreVoxels = false, // Toggles whatever the default IgnoreVoxel value to its opposite. 
+                        SelfAvoidance = true, // If this and FutureIntersect is enabled then projectiles will actively avoid the parent grids.
+                        TargetAvoidance = true, // If this and FutureIntersect is enabled then projectiles will actively avoid the target.
+                        SelfPhasing = true, // If enabled the projectiles can phase through the parent grids without doing damage or dying.
+                        SwapNavigationType = false, // This will swap to other navigation  (i.e. the alternate of what is set in smart, ProNav vs ZeroEffort) 
+                        // Audio/Visual Section
+                        AlternateParticle = new ParticleDef // if blank it will use default, must be a default version for this to be useable. 
+                        {
+                            Name = "",
+                            Offset = Vector(x: 0, y: 0, z: 0),
+                            DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
+                            Extras = new ParticleOptionDef
+                            {
+                                Scale = 1,
+                            },
+                        },
+                        StartParticle = new ParticleDef // Optional particle to play when this stage begins
+                        {
+                            Name = "",
+                            Offset = Vector(x: 0, y: 0, z: 0),
+                            DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
+                            Extras = new ParticleOptionDef
+                            {
+                                Scale = 1,
+                            },
+                        },
+                        AlternateModel = "", // Define only if you want to switch to an alternate model in this phase
+                        AlternateSound = "", // if blank it will use default, must be a default version for this to be useable. 
+                    },
+                    //7
                     new ApproachDef // Recover
                     {
                         // Start/End behaviors 
@@ -1025,11 +1209,11 @@ namespace Scripts
                         EndCondition1 = DistanceFromPositionC,
                         EndCondition2 = Ignore,
                         EndCondition3 = Ignore,
-
+ 
                         // Start/End thresholds -- both conditions are evaluated before activation, use Ignore to skip
-                        Start1Value = 20,
+                        Start1Value = 200,
                         Start2Value = 0,
-                        End1Value = 10,
+                        End1Value = 100,
                         End2Value = 0,
                         End3Value = 0, 
                         
@@ -1071,7 +1255,7 @@ namespace Scripts
                         PushLeadByTravelDistance = false, // the follow lead position will move in its point direction by an amount equal to the projectiles travel distance.
 
                         // Modify speed and acceleration ratios while this approach is active
-                        AccelMulti = 1.0, // Modify default acceleration by this factor
+                        AccelMulti = 3.0, // Modify default acceleration by this factor
                         DeAccelMulti = 0, // Modifies your default deacceleration by this factor
                         TotalAccelMulti = 0, // Modifies your default totalacceleration by this factor
                         SpeedCapMulti = 1.0, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
@@ -1087,7 +1271,7 @@ namespace Scripts
                         NoTimedSpawns = true, // When true timedSpawns will not be triggered while this approach is active.
                         DisableAvoidance = false, // Disable futureIntersect.
                         IgnoreAntiSmart = true, // If set to true, antismart cannot change this approaches target.
-                        HeatRefund = 100, // how much heat to refund when related EndEvent/StartEvent is met.
+                        HeatRefund = 200, // how much heat to refund when related EndEvent/StartEvent is met.
                         ReloadRefund = false, // Refund a reload (for max reload).
                         ToggleIngoreVoxels = false, // Toggles whatever the default IgnoreVoxel value to its opposite. 
                         SelfAvoidance = true, // If this and FutureIntersect is enabled then projectiles will actively avoid the parent grids.
@@ -1097,7 +1281,7 @@ namespace Scripts
                         // Audio/Visual Section
                         AlternateParticle = new ParticleDef // if blank it will use default, must be a default version for this to be useable. 
                         {
-                            Name = "BSG_Viper_MK_I_Exhaust_Low",
+                            Name = "",
                             Offset = Vector(x: 0, y: 0, z: 0),
                             DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                             Extras = new ParticleOptionDef
@@ -1116,9 +1300,9 @@ namespace Scripts
                             },
                         },
                         AlternateModel = "", // Define only if you want to switch to an alternate model in this phase
-                        AlternateSound = "" // if blank it will use default, must be a default version for this to be useable. 
+                        AlternateSound = "", // if blank it will use default, must be a default version for this to be useable. 
                     },
-
+                    //8
                     new ApproachDef // Dock
                     {
                         // Start/End behaviors 
@@ -1139,9 +1323,9 @@ namespace Scripts
                         EndCondition3 = Ignore,
 
                         // Start/End thresholds -- both conditions are evaluated before activation, use Ignore to skip
-                        Start1Value = 500,
+                        Start1Value = 50,
                         Start2Value = 0,
-                        End1Value = 200,
+                        End1Value = 20,
                         End2Value = 0,
                         End3Value = 0, 
                         
@@ -1153,8 +1337,8 @@ namespace Scripts
                         Forward = ForwardRelativeToShooter, // ForwardDestinationDirection*, ForwardRelativeToBlock, ForwardRelativeToShooter, ForwardRelativeToGravity, ForwardTargetDirection, ForwardTargetVelocity, ForwardStoredStartPosition, ForwardStoredEndPosition, ForwardStoredStartLocalPosition, ForwardStoredEndLocalPosition, ForwardOriginDirection    
                         Up = UpRelativeToShooter, // UpRelativeToBlock*, UpRelativeToShooter, UpRelativeToGravity, UpTargetDirection, UpTargetVelocity, UpStoredStartPosition, UpStoredEndPosition, UpStoredStartLocalPosition, UpStoredEndLocalPosition, UpOriginDirection, UpDestinationDirection
                         
-                        PositionB = Origin, // Origin, Shooter, Target, Surface, MidPoint, Current, Nothing, StoredStartDestination, StoredEndDestination
-                        PositionC = Origin,
+                        PositionB = PositionA, // Origin, Shooter, Target, Surface, MidPoint, Current, Nothing, StoredStartDestination, StoredEndDestination
+                        PositionC = Shooter, 
                         Elevation = Nothing, 
                         
                         //
@@ -1183,7 +1367,7 @@ namespace Scripts
                         PushLeadByTravelDistance = false, // the follow lead position will move in its point direction by an amount equal to the projectiles travel distance.
 
                         // Modify speed and acceleration ratios while this approach is active
-                        AccelMulti = 1.0, // Modify default acceleration by this factor
+                        AccelMulti = 3.0, // Modify default acceleration by this factor
                         DeAccelMulti = 0, // Modifies your default deacceleration by this factor
                         TotalAccelMulti = 0, // Modifies your default totalacceleration by this factor
                         SpeedCapMulti = 1.0, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
@@ -1197,7 +1381,7 @@ namespace Scripts
                         
                         // Other
                         NoTimedSpawns = true, // When true timedSpawns will not be triggered while this approach is active.
-                        DisableAvoidance = true, // Disable futureIntersect.
+                        DisableAvoidance = false, // Disable futureIntersect.
                         IgnoreAntiSmart = true, // If set to true, antismart cannot change this approaches target.
                         HeatRefund = 100, // how much heat to refund when related EndEvent/StartEvent is met.
                         ReloadRefund = false, // Refund a reload (for max reload).
@@ -1205,11 +1389,11 @@ namespace Scripts
                         SelfAvoidance = false, // If this and FutureIntersect is enabled then projectiles will actively avoid the parent grids.
                         TargetAvoidance = false, // If this and FutureIntersect is enabled then projectiles will actively avoid the target.
                         SelfPhasing = true, // If enabled the projectiles can phase through the parent grids without doing damage or dying.
-                        SwapNavigationType = true, // This will swap to other navigation  (i.e. the alternate of what is set in smart, ProNav vs ZeroEffort) 
+                        SwapNavigationType = false, // This will swap to other navigation  (i.e. the alternate of what is set in smart, ProNav vs ZeroEffort) 
                         // Audio/Visual Section
                         AlternateParticle = new ParticleDef // if blank it will use default, must be a default version for this to be useable. 
                         {
-                            Name = "BSG_Viper_MK_I_Exhaust_Low",
+                            Name = "",
                             Offset = Vector(x: 0, y: 0, z: 0),
                             DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                             Extras = new ParticleOptionDef
@@ -1228,7 +1412,7 @@ namespace Scripts
                             },
                         },
                         AlternateModel = "", // Define only if you want to switch to an alternate model in this phase
-                        AlternateSound = "" // if blank it will use default, must be a default version for this to be useable. 
+                        AlternateSound = "", // if blank it will use default, must be a default version for this to be useable. 
                     },
                 },
 
@@ -1407,7 +1591,7 @@ namespace Scripts
                     Interval = 15, // Time between spawning fragments, in ticks, 0 means every tick, 1 means every other
                     StartTime = 30, // Time delay to start spawning fragments, in ticks, of total projectile life
                     MaxSpawns = 8, // Max number of fragment children to spawn
-                    Proximity = 4000, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
+                    Proximity = 1200, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
                     ParentDies = true, // Parent dies once after it spawns its last child.
                     PointAtTarget = true, // Start fragment direction pointing at Target
                     PointType = Direct, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
@@ -1589,7 +1773,7 @@ namespace Scripts
                 TargetLossDegree = 0,
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 8000, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                AccelPerSec = 110f,
+                AccelPerSec = 400f,
                 DesiredSpeed = 2220, // voxel phasing if you go above 5100
                 MaxTrajectory = 10000f,
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
@@ -1757,7 +1941,7 @@ namespace Scripts
             EnergyCost = 0.01f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 10f, // Direct damage; one steel plate is worth 100.
             Mass = 5000f, // In kilograms; how much force the impact will apply to the target.
-            Health = 40, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            Health = 50, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself. 
                                //float.MaxValue will drop the weapon to the first build state and destroy all components used for construction
@@ -1788,12 +1972,12 @@ namespace Scripts
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
                 AmmoRound = "Longsword Nuke Frag", // AmmoRound field of the ammo to spawn.
-                Fragments = 24, // Number of projectiles to spawn.
-                Degrees = 140, // Cone in which to randomize direction of spawned projectiles.
+                Fragments = 32, // Number of projectiles to spawn.
+                Degrees = 360, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = true, // fragments will not inherit velocity from parent.
-                Offset = -5f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards), value is read from parent ammo type.
-                Radial = 45f, // Determines starting angle for Degrees of spread above.  IE, 0 degrees and 90 radial goes perpendicular to travel path
+                Offset = -2f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards), value is read from parent ammo type.
+                Radial = 0f, // Determines starting angle for Degrees of spread above.  IE, 0 degrees and 90 radial goes perpendicular to travel path
                 MaxChildren = 0, // number of maximum branches for fragments from the roots point of view, 0 is unlimited
                 IgnoreArming = false, // If true, ignore ArmOnHit or MinArmingTime in EndOfLife definitions
                 AdvOffset = Vector(x: 0, y: 0, z: 0), // advanced offsets the fragment by xyz coordinates relative to parent, value is read from fragment ammo type.
@@ -1974,10 +2158,10 @@ namespace Scripts
                 Guidance = Smart, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
                 TargetLossDegree = 0, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                MaxLifeTime = 500, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
+                MaxLifeTime = 1200, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 110f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 2220, // voxel phasing if you go above 5100
-                MaxTrajectory = 4000f, // Max Distance the projectile or beam can Travel.
+                MaxTrajectory = 8000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
@@ -1987,8 +2171,8 @@ namespace Scripts
                 Smarts = new SmartsDef
                 {
                     SteeringLimit = 200, // 0 means no limit, value is in degrees, good starting is 150.  This enable advanced smart "control", cost of 3 on a scale of 1-5, 0 being basic smart.
-                    Inaccuracy = 15f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
-                    Aggressiveness = 3f, // controls how responsive tracking is.
+                    Inaccuracy = 10f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
+                    Aggressiveness = 4f, // controls how responsive tracking is.
                     MaxLateralThrust = 1f, // controls how sharp the trajectile may turn
                     NavAcceleration = 0.1, // helps influence how the projectile steers. 
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
@@ -2361,7 +2545,7 @@ namespace Scripts
                 MaxLifeTime = 30, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 AccelPerSec = 0f,
                 DesiredSpeed = 1250, // voxel phasing if you go above 5100
-                MaxTrajectory = 12.5f,
+                MaxTrajectory = 15f,
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed
