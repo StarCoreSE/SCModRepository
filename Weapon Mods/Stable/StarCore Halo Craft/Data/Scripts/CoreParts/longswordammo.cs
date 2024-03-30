@@ -92,11 +92,11 @@ namespace Scripts
                     MaxSpawns = 6, // Max number of fragment children to spawn
                     Proximity = 2000, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
                     ParentDies = false, // Parent dies once after it spawns its last child.
-                    PointAtTarget = true, // Start fragment direction pointing at Target
-                    PointType = Lead, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
+                    PointAtTarget = false, // Start fragment direction pointing at Target
+                    PointType = Direct, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
                     DirectAimCone = 60f, //Aim cone used for Direct fire, in degrees
                     GroupSize = 2, // Number of spawns in each group
-                    GroupDelay = 600, // Delay between each group.
+                    GroupDelay = 720, // Delay between each group.
                 },
             },
             Pattern = new PatternDef
@@ -276,21 +276,21 @@ namespace Scripts
                 TargetLossDegree = 180f, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 36000, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
-                AccelPerSec = 240f, // Acceleration in Meters Per Second. Projectile starts on tick 0 at its parents (weapon/other projectiles) travel velocity.
-                DesiredSpeed = 375f, // voxel phasing if you go above 5100
+                AccelPerSec = 200f, // Acceleration in Meters Per Second. Projectile starts on tick 0 at its parents (weapon/other projectiles) travel velocity.
+                DesiredSpeed = 320f, // voxel phasing if you go above 5100
                 MaxTrajectory = 1000000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: -20, end: 20), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
-                RangeVariance = Random(start: 0, end: 0), // subtracts value from MaxTrajectory
+                RangeVariance = Random(start: 0, end: 10), // subtracts value from MaxTrajectory
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 TotalAcceleration = 0, // 0 means no limit, something to do due with a thing called delta and something called v.
                 Smarts = new SmartsDef
                 {
-                    SteeringLimit = 150, // 0 means no limit, value is in degrees, good starting is 150.  This enable advanced smart "control", cost of 3 on a scale of 1-5, 0 being basic smart.
+                    SteeringLimit = 90, // 0 means no limit, value is in degrees, good starting is 150.  This enable advanced smart "control", cost of 3 on a scale of 1-5, 0 being basic smart.
                     Inaccuracy = 0f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
-                    Aggressiveness = 1.2f, // controls how responsive tracking is.
-                    MaxLateralThrust = 1.5f, // controls how sharp the projectile may turn, this is the cheaper but less realistic version of SteeringLimit, cost of 2 on a scale of 1-5, 0 being basic smart.
+                    Aggressiveness = 1f, // controls how responsive tracking is.
+                    MaxLateralThrust = 0.7f, // controls how sharp the projectile may turn, this is the cheaper but less realistic version of SteeringLimit, cost of 2 on a scale of 1-5, 0 being basic smart.
                     NavAcceleration = 0, // helps influence how the projectile steers. 
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
                     AccelClearance = false, // Setting this to true will prevent smart acceleration until it is clear of the grid and tracking delay has been met (free fall).
@@ -377,10 +377,10 @@ namespace Scripts
                         PushLeadByTravelDistance = false, // the follow lead position will move in its point direction by an amount equal to the projectiles travel distance.
 
                         // Modify speed and acceleration ratios while this approach is active
-                        AccelMulti = 1.0, // Modify default acceleration by this factor
+                        AccelMulti = 0.2f, // Modify default acceleration by this factor
                         DeAccelMulti = 0, // Modifies your default deacceleration by this factor
                         TotalAccelMulti = 0, // Modifies your default totalacceleration by this factor
-                        SpeedCapMulti = 1.0, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
+                        SpeedCapMulti = 0.2f, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
 
                         // Target navigation behavior 
                         Orbit = false, // Orbit the target
@@ -396,8 +396,8 @@ namespace Scripts
                         HeatRefund = 0, // how much heat to refund when related EndEvent/StartEvent is met.
                         ReloadRefund = false, // Refund a reload (for max reload).
                         ToggleIngoreVoxels = false, // Toggles whatever the default IgnoreVoxel value to its opposite. 
-                        SelfAvoidance = false, // If this and FutureIntersect is enabled then projectiles will actively avoid the parent grids.
-                        TargetAvoidance = false, // If this and FutureIntersect is enabled then projectiles will actively avoid the target.
+                        SelfAvoidance = true, // If this and FutureIntersect is enabled then projectiles will actively avoid the parent grids.
+                        TargetAvoidance = true, // If this and FutureIntersect is enabled then projectiles will actively avoid the target.
                         SelfPhasing = true, // If enabled the projectiles can phase through the parent grids without doing damage or dying.
                         SwapNavigationType = false, // This will swap to other navigation  (i.e. the alternate of what is set in smart, ProNav vs ZeroEffort) 
                         // Audio/Visual Section
@@ -604,7 +604,7 @@ namespace Scripts
                         // Start/End thresholds -- both conditions are evaluated before activation, use Ignore to skip
                         Start1Value = 1000,
                         Start2Value = 0,
-                        End1Value = 120,
+                        End1Value = 180,
                         End2Value = 60,
                         End3Value = 300, 
                         
@@ -647,10 +647,10 @@ namespace Scripts
                         PushLeadByTravelDistance = false, // the follow lead position will move in its point direction by an amount equal to the projectiles travel distance.
 
                         // Modify speed and acceleration ratios while this approach is active
-                        AccelMulti = 1.0, // Modify default acceleration by this factor
+                        AccelMulti = 0.8, // Modify default acceleration by this factor
                         DeAccelMulti = 0, // Modifies your default deacceleration by this factor
                         TotalAccelMulti = 0, // Modifies your default totalacceleration by this factor
-                        SpeedCapMulti = 1.0, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
+                        SpeedCapMulti = 0.8, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
 
                         // Target navigation behavior 
                         Orbit = true, // Orbit the target
@@ -739,7 +739,7 @@ namespace Scripts
                         // Start/End thresholds -- both conditions are evaluated before activation, use Ignore to skip
                         Start1Value = 90,
                         Start2Value = 0,
-                        End1Value = 60,
+                        End1Value = 120,
                         End2Value = 200,
                         End3Value = 0, 
                         
@@ -782,7 +782,7 @@ namespace Scripts
                         PushLeadByTravelDistance = false, // the follow lead position will move in its point direction by an amount equal to the projectiles travel distance.
 
                         // Modify speed and acceleration ratios while this approach is active
-                        AccelMulti = 1.0, // Modify default acceleration by this factor
+                        AccelMulti = 0.75, // Modify default acceleration by this factor
                         DeAccelMulti = 0, // Modifies your default deacceleration by this factor
                         TotalAccelMulti = 0, // Modifies your default totalacceleration by this factor
                         SpeedCapMulti = 0.5, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
@@ -873,7 +873,7 @@ namespace Scripts
                         EndCondition3 = RelativeHealthLost,
 
                         // Start/End thresholds -- both conditions are evaluated before activation, use Ignore to skip
-                        Start1Value = 60,
+                        Start1Value = 120,
                         Start2Value = 0,
                         End1Value = 120,
                         End2Value = 60,
@@ -918,10 +918,10 @@ namespace Scripts
                         PushLeadByTravelDistance = false, // the follow lead position will move in its point direction by an amount equal to the projectiles travel distance.
 
                         // Modify speed and acceleration ratios while this approach is active
-                        AccelMulti = 1.0, // Modify default acceleration by this factor
+                        AccelMulti = 0.65, // Modify default acceleration by this factor
                         DeAccelMulti = 0, // Modifies your default deacceleration by this factor
                         TotalAccelMulti = 0, // Modifies your default totalacceleration by this factor
-                        SpeedCapMulti = 0.5, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
+                        SpeedCapMulti = 1.0, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
 
                         // Target navigation behavior 
                         Orbit = true, // Orbit the target
@@ -1034,7 +1034,7 @@ namespace Scripts
                         AccelMulti = 1.0, // Modify default acceleration by this factor
                         DeAccelMulti = 0, // Modifies your default deacceleration by this factor
                         TotalAccelMulti = 0, // Modifies your default totalacceleration by this factor
-                        SpeedCapMulti = 2.0, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
+                        SpeedCapMulti = 1.0, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
 
                         // Target navigation behavior 
                         Orbit = false, // Orbit the target
@@ -1255,10 +1255,10 @@ namespace Scripts
                         PushLeadByTravelDistance = false, // the follow lead position will move in its point direction by an amount equal to the projectiles travel distance.
 
                         // Modify speed and acceleration ratios while this approach is active
-                        AccelMulti = 3.0, // Modify default acceleration by this factor
+                        AccelMulti = 1.0, // Modify default acceleration by this factor
                         DeAccelMulti = 0, // Modifies your default deacceleration by this factor
                         TotalAccelMulti = 0, // Modifies your default totalacceleration by this factor
-                        SpeedCapMulti = 1.0, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
+                        SpeedCapMulti = 2.0, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
 
                         // Target navigation behavior 
                         Orbit = false, // Orbit the target
@@ -1367,10 +1367,10 @@ namespace Scripts
                         PushLeadByTravelDistance = false, // the follow lead position will move in its point direction by an amount equal to the projectiles travel distance.
 
                         // Modify speed and acceleration ratios while this approach is active
-                        AccelMulti = 3.0, // Modify default acceleration by this factor
+                        AccelMulti = 2.0, // Modify default acceleration by this factor
                         DeAccelMulti = 0, // Modifies your default deacceleration by this factor
                         TotalAccelMulti = 0, // Modifies your default totalacceleration by this factor
-                        SpeedCapMulti = 1.0, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
+                        SpeedCapMulti = 2.0, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
 
                         // Target navigation behavior 
                         Orbit = false, // Orbit the target
@@ -1773,26 +1773,26 @@ namespace Scripts
                 TargetLossDegree = 0,
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 8000, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                AccelPerSec = 400f,
-                DesiredSpeed = 2220, // voxel phasing if you go above 5100
+                AccelPerSec = 300f,
+                DesiredSpeed = 700, // voxel phasing if you go above 5100
                 MaxTrajectory = 10000f,
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable.
-                SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed
-                RangeVariance = Random(start: 0, end: 0), // subtracts value from MaxTrajectory
+                SpeedVariance = Random(start: 0, end: 50), // subtracts value from DesiredSpeed
+                RangeVariance = Random(start: 0, end: 100), // subtracts value from MaxTrajectory
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 TotalAcceleration = 0, // 0 means no limit, something to do due with a thing called delta and something called v.
                 Smarts = new SmartsDef
                 {
                     SteeringLimit = 0, // 0 means no limit, value is in degrees, good starting is 150.  This enable advanced smart "control", cost of 3 on a scale of 1-5, 0 being basic smart.
                     Inaccuracy = 0f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
-                    Aggressiveness = 3f, // controls how responsive tracking is.
-                    MaxLateralThrust = 0.95f, // controls how sharp the trajectile may turn. Cap is 1, and this is % of your Accel.
+                    Aggressiveness = 6f, // controls how responsive tracking is.
+                    MaxLateralThrust = 0.1f, // controls how sharp the trajectile may turn. Cap is 1, and this is % of your Accel.
                     NavAcceleration = 0, // helps influence how the projectile steers. 
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
                     AccelClearance = false, // Setting this to true will prevent smart acceleration until it is clear of the grid and tracking delay has been met (free fall).
                     CheckFutureIntersection = true, // Utilize obstacle avoidance for drones/smarts
-                    FutureIntersectionRange = 200, // Range in front of the projectile at which it will detect obstacle.  If set to zero it defaults to DesiredSpeed + Shape Diameter
+                    FutureIntersectionRange = 300, // Range in front of the projectile at which it will detect obstacle.  If set to zero it defaults to DesiredSpeed + Shape Diameter
                     MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
                     MaxTargets = 16, // Number of targets allowed before ending, 0 = unlimited
@@ -1941,7 +1941,7 @@ namespace Scripts
             EnergyCost = 0.01f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 10f, // Direct damage; one steel plate is worth 100.
             Mass = 5000f, // In kilograms; how much force the impact will apply to the target.
-            Health = 50, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            Health = 45, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself. 
                                //float.MaxValue will drop the weapon to the first build state and destroy all components used for construction
@@ -2097,7 +2097,7 @@ namespace Scripts
                     NoSound = false,
                     ParticleScale = 1,
                     CustomParticle = "LongswordSignificant Fissionable Event", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "CloseNuked", // SubtypeID from your Audio SBC, not a filename
+                    CustomSound = "LongswordCloseNuked", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
             },
@@ -2160,21 +2160,21 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 1200, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 110f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 2220, // voxel phasing if you go above 5100
+                DesiredSpeed = 500, // voxel phasing if you go above 5100
                 MaxTrajectory = 8000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
-                SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
-                RangeVariance = Random(start: 0, end: 0), // subtracts value from MaxTrajectory
+                SpeedVariance = Random(start: 0, end: 30), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
+                RangeVariance = Random(start: 0, end: 100), // subtracts value from MaxTrajectory
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 TotalAcceleration = 0, // 0 means no limit, something to do due with a thing called delta and something called v.
                 Smarts = new SmartsDef
                 {
                     SteeringLimit = 200, // 0 means no limit, value is in degrees, good starting is 150.  This enable advanced smart "control", cost of 3 on a scale of 1-5, 0 being basic smart.
                     Inaccuracy = 10f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
-                    Aggressiveness = 4f, // controls how responsive tracking is.
-                    MaxLateralThrust = 1f, // controls how sharp the trajectile may turn
-                    NavAcceleration = 0.1, // helps influence how the projectile steers. 
+                    Aggressiveness = 6f, // controls how responsive tracking is.
+                    MaxLateralThrust = 0.4f, // controls how sharp the trajectile may turn
+                    NavAcceleration = 0.1f, // helps influence how the projectile steers. 
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
                     AccelClearance = false, // Setting this to true will prevent smart acceleration until it is clear of the grid and tracking delay has been met (free fall).
                     MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
@@ -2628,7 +2628,7 @@ namespace Scripts
                     WidthVariance = Random(start: 0f, end: 0f), // adds random value to default width (negatives shrinks width)
                     Tracer = new TracerBaseDef
                     {
-                        Enable = false,
+                        Enable = true,
                         Length = 75f,
                         Width = 1f,
                         Color = Color(red: 30, green: 30, blue: 30f, alpha: 4),
@@ -2679,9 +2679,9 @@ namespace Scripts
             },
             AmmoAudio = new AmmoAudioDef
             {
-                TravelSound = "LongswordTravel", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "LongswordHit",
-                ShieldHitSound = "LongswordHit",
+                TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
+                HitSound = "",
+                ShieldHitSound = "",
                 PlayerHitSound = "",
                 VoxelHitSound = "",
                 FloatingHitSound = "",
