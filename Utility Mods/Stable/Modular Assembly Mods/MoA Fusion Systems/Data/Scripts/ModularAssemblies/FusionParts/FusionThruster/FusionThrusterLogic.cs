@@ -59,7 +59,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
                 return;
 
             OverrideEnabled.Value = value;
-            UpdateThrust(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+            UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
         }
 
         #region Base Methods
@@ -74,19 +74,19 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
             PowerUsageSync.ValueChanged += value =>
             {
                 if (!OverrideEnabled.Value)
-                    UpdateThrust(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+                    UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
             };
 
             // Trigger power update is only needed when OverrideEnabled is true
             OverridePowerUsageSync.ValueChanged += value =>
             {
                 if (OverrideEnabled.Value)
-                    UpdateThrust(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+                    UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
             };
 
             // Trigger power update if boostEnabled is changed
             OverrideEnabled.ValueChanged += value =>
-                UpdateThrust(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+                UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
         }
 
         public override void UpdateAfterSimulation()

@@ -58,7 +58,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 {
                     Thrusters.Add(logic);
                     logic.MemberSystem = this;
-                    logic.UpdateThrust(PowerGeneration, MegawattsPerFusionPower);
+                    logic.UpdateThrust(PowerGeneration, NewtonsPerFusionPower);
                 }
             }
 
@@ -128,7 +128,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 totalPowerUsage += thruster?.PowerConsumption ?? 0;
 
                 if (updateReactors)
-                    thruster?.UpdateThrust(powerGeneration, MegawattsPerFusionPower);
+                    thruster?.UpdateThrust(powerGeneration, NewtonsPerFusionPower);
             }
 
             // Subtract power usage afterwards so that all reactors have the same stats.
