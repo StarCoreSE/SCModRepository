@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using VRage.Game.ModAPI;
 using VRage.Utils;
 
-namespace RelativeTopSpeed
+namespace RelativeTopSpeedGV
 {
     public class RtsApi
     {
