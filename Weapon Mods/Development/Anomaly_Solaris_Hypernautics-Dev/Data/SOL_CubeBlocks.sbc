@@ -143,6 +143,7 @@
     14km range
     Energy damage
     no physical damage
+	2min reload
 
 	 </Description>
      <Icon>Textures\GUI\Icons\OPA-Logo.dds</Icon>
@@ -196,9 +197,9 @@
      </Id>
      <DisplayName>SM-3 Counter Battery</DisplayName>
      <Description>Anti-Missile Torpedo
-	20km range.. maybe idk
+	10km range with 1.5km minimum
 	8 mini torps target missiles
-	Will hurt you if it impacts
+	Will heal shields if it impacts
 	40 second reload
 
      </Description>
@@ -405,7 +406,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>K_SA_Gauss_APC</SubtypeId>
 			</Id>
-			<DisplayName>Ceis Hybrid Gauss Turret</DisplayName>
+			<DisplayName>Nariman Dart Turret</DisplayName>
 			<Description>
 				Dual purpose turret
 			</Description>
