@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
@@ -12,7 +13,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     /// </summary>
     internal struct S_FusionArm
     {
-        private const float LengthEfficiencyModifier = 0.05f;
+        private const float LengthEfficiencyModifier = 1/14f;
         private const float BlockPowerGeneration = 0.005f;
         private const float BlockPowerStorage = 2f;
 
@@ -57,8 +58,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             parts.Clear();
 
             // Power capacities scale with length.
-            PowerGeneration *= Parts.Length * LengthEfficiencyModifier;
-            PowerStorage *= Parts.Length * LengthEfficiencyModifier;
+            PowerGeneration *= (float) Math.Pow(Parts.Length, LengthEfficiencyModifier);
+            PowerStorage *= (float) Math.Pow(Parts.Length, LengthEfficiencyModifier);
         }
 
 

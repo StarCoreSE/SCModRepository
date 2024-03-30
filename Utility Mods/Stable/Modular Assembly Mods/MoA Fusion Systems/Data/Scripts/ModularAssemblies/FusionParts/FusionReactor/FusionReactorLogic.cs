@@ -5,6 +5,7 @@ using Sandbox.ModAPI.Interfaces.Terminal;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using VRage.Game;
 using VRage.Game.Components;
 using VRage.Game.ModAPI.Network;
 using VRage.ModAPI;
@@ -19,6 +20,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Reactor), false, "Caster_Reactor")]
     public class FusionReactorLogic : FusionPart<IMyReactor>
     {
+        private const float MaxPowerPerReactor = 1000;
+
         private float BufferPowerGeneration;
         private float BufferReactorOutput;
         public float MaxPowerConsumption;
@@ -35,12 +38,20 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             BufferPowerGeneration = PowerGeneration;
 
             var reactorConsumptionMultiplier = OverrideEnabled.Value ? OverridePowerUsageSync : PowerUsageSync.Value; // This is ugly, let's make it better.
-            var reactorEfficiencyMultiplier = 1 / (0.5f + reactorConsumptionMultiplier);
-
             // Power generation consumed (per second)
             var powerConsumption = PowerGeneration * 60 * reactorConsumptionMultiplier;
+
+
+            var reactorEfficiencyMultiplier = 1 / (0.5f + reactorConsumptionMultiplier);
             // Power generated (per second)
             var reactorOutput = reactorEfficiencyMultiplier * powerConsumption * MegawattsPerFusionPower;
+
+            if (reactorOutput > MaxPowerPerReactor)
+            {
+                reactorOutput = MaxPowerPerReactor;
+                powerConsumption = GetConsumptionFromPower(reactorOutput, MegawattsPerFusionPower);
+            }
+
             BufferReactorOutput = reactorOutput;
             MaxPowerConsumption = powerConsumption / 60;
 
@@ -53,6 +64,17 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             // Convert back into power per tick
             SyncMultipliers.ReactorOutput(Block, BufferReactorOutput);
         }
+
+        private float GetConsumptionFromPower(float reactorOutput, float MegawattsPerFusionPower)
+        {
+            return reactorOutput / MegawattsPerFusionPower;
+        }
+
+        //private float GetEfficiencyFromPower(float reactorConsumption)
+        //{
+        //    var a = (1 / (0.5f + reactorConsumptionMultiplier)) * (PowerGeneration * 60 * reactorConsumptionMultiplier);
+        //
+        //}
 
         public void SetPowerBoost(bool value)
         {
