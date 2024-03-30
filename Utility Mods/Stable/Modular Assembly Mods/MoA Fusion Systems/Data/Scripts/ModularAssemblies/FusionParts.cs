@@ -41,7 +41,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                 "Caster_CentralPipe_90",
                 "Caster_CentralPipe_T",
                 "Caster_Feeder",
-                "Caster_Controller",
+                //"Caster_Controller",
                 "Caster_Reactor"
             },
 
@@ -112,7 +112,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                                 "Caster_CentralPipe_T",
                                 "Caster_Feeder",
                                 "Caster_FocusLens",
-                                "Caster_Controller",
+                                //"Caster_Controller",
                                 "Caster_Reactor"
                             }
                         },
@@ -124,7 +124,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                                 "Caster_CentralPipe_T",
                                 "Caster_Feeder",
                                 "Caster_FocusLens",
-                                "Caster_Controller",
+                                //"Caster_Controller",
                                 "Caster_Reactor"
                             }
                         }
@@ -182,7 +182,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                                 "Caster_CentralPipe_90",
                                 "Caster_CentralPipe_T",
                                 "Caster_Feeder",
-                                "Caster_Controller",
+                                //"Caster_Controller",
                                 "Caster_FocusLens",
                                 "Caster_Reactor"
                             }
@@ -194,7 +194,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                                 "Caster_CentralPipe_90",
                                 "Caster_CentralPipe_T",
                                 "Caster_Feeder",
-                                "Caster_Controller",
+                                //"Caster_Controller",
                                 "Caster_FocusLens",
                                 "Caster_Reactor"
                             }
@@ -211,7 +211,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                                 "Caster_CentralPipe_90",
                                 "Caster_CentralPipe_T",
                                 "Caster_Feeder",
-                                "Caster_Controller",
+                                //"Caster_Controller",
                                 "Caster_FocusLens",
                                 "Caster_Reactor"
                             }
@@ -223,7 +223,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                                 "Caster_CentralPipe_90",
                                 "Caster_CentralPipe_T",
                                 "Caster_Feeder",
-                                "Caster_Controller",
+                                //"Caster_Controller",
                                 "Caster_FocusLens",
                                 "Caster_Reactor"
                             }
@@ -240,7 +240,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                                 "Caster_CentralPipe_90",
                                 "Caster_CentralPipe_T",
                                 "Caster_Feeder",
-                                "Caster_Controller",
+                                //"Caster_Controller",
                                 "Caster_FocusLens",
                                 "Caster_Reactor"
                             }
@@ -252,7 +252,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                                 "Caster_CentralPipe_90",
                                 "Caster_CentralPipe_T",
                                 "Caster_Feeder",
-                                "Caster_Controller",
+                                //"Caster_Controller",
                                 "Caster_FocusLens",
                                 "Caster_Reactor"
                             }
@@ -264,7 +264,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                                 "Caster_CentralPipe_90",
                                 "Caster_CentralPipe_T",
                                 "Caster_Feeder",
-                                "Caster_Controller",
+                                //"Caster_Controller",
                                 "Caster_FocusLens",
                                 "Caster_Reactor"
                             }
@@ -281,7 +281,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                                 "Caster_CentralPipe_90",
                                 "Caster_CentralPipe_T",
                                 "Caster_Feeder",
-                                "Caster_Controller",
+                                //"Caster_Controller",
                                 "Caster_FocusLens",
                                 "Caster_Reactor"
                             }
@@ -293,7 +293,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                                 "Caster_CentralPipe_90",
                                 "Caster_CentralPipe_T",
                                 "Caster_Feeder",
-                                "Caster_Controller",
+                                //"Caster_Controller",
                                 "Caster_FocusLens",
                                 "Caster_Reactor"
                             }
@@ -317,21 +317,21 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                         }
                     }
                 },
-                {
-                    "Caster_Controller", new Dictionary<Vector3I, string[]>
-                    {
-                        {
-                            Vector3I.Backward, new[]
-                            {
-                                "Caster_CentralPipe_0",
-                                "Caster_CentralPipe_90",
-                                "Caster_CentralPipe_T",
-                                "Caster_Feeder",
-                                "Caster_Reactor"
-                            }
-                        }
-                    }
-                }
+                //{
+                //    "Caster_Controller", new Dictionary<Vector3I, string[]>
+                //    {
+                //        {
+                //            Vector3I.Backward, new[]
+                //            {
+                //                "Caster_CentralPipe_0",
+                //                "Caster_CentralPipe_90",
+                //                "Caster_CentralPipe_T",
+                //                "Caster_Feeder",
+                //                "Caster_Reactor"
+                //            }
+                //        }
+                //    }
+                //}
             }
         };
     }
