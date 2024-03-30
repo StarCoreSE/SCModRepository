@@ -12,8 +12,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 {
     internal class S_FusionSystem
     {
-        public const float MegawattsPerFusionPower = 50;
-        public const float NewtonsPerFusionPower = 800000;
+        public const float MegawattsPerFusionPower = 85;
+        public const float NewtonsPerFusionPower = 1600000;
 
         public List<S_FusionArm> Arms = new List<S_FusionArm>();
         public int PhysicalAssemblyId;
@@ -105,9 +105,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
         private void UpdatePower(bool updateReactors = false)
         {
-            float powerGeneration = 0;
-            float powerCapacity = 0;
-            float totalPowerUsage = 0;
+            float powerGeneration = 0.01f;
+            float powerCapacity = 0.01f;
+            float totalPowerUsage = 0f;
 
             foreach (var arm in Arms)
             {
