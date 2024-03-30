@@ -1,4 +1,4 @@
-name: "Upload RTS Logarithmic Angular Dev"
+name: "Upload RTS Logarithmic Angular"
 
 on:
   push:
