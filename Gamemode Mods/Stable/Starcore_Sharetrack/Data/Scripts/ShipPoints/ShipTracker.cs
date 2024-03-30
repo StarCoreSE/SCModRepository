@@ -50,6 +50,7 @@ namespace klime.PointCheck
         [ProtoMember(9)] public float Heavyblocks;
         [ProtoMember(10)] public int BlockCount;
         [ProtoMember(11)] public float ShieldStrength;
+        [ProtoMember(40)] public float OriginalShieldStrength = -1;
         [ProtoMember(12)] public float CurrentShieldStrength;
         [ProtoMember(13)] public int PCU;
         //[ProtoMember(14)] public float DPS;
@@ -201,7 +202,9 @@ namespace klime.PointCheck
                     if (shield_block != null)
                     {
                         ShieldStrength = PointCheck.SH_api.GetMaxHpCap(shield_block);
-                        CurrentShieldStrength = PointCheck.SH_api.GetShieldPercent(shield_block);
+                        if (OriginalShieldStrength == -1 && !PointCheck.SH_api.IsFortified(shield_block))
+                            OriginalShieldStrength = PointCheck.SH_api.GetMaxHpCap(shield_block);
+                        CurrentShieldStrength = PointCheck.SH_api.GetShieldPercent(shield_block) * (OriginalShieldStrength == -1 ? 1 : PointCheck.SH_api.GetMaxHpCap(shield_block)/OriginalShieldStrength);
                         ShieldHeat = PointCheck.SH_api.GetShieldHeat(shield_block);
                     }
 
