@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "Weapon Mods/Development/Starcore_Pointslist-Dev/**"
+      - "Gamemode Mods/Development/Starcore_Pointslist-Dev/**"
 
 jobs:
   upload:
@@ -16,7 +16,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 3017849106
-          path: "Weapon Mods/Development/Starcore_Pointslist-Dev"
+          path: "Gamemode Mods/Development/Starcore_Pointslist-Dev"
           changelog: ${{ github.event.head_commit.message }}           
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}

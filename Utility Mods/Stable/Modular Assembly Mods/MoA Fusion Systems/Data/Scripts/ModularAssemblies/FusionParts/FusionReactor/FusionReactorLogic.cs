@@ -1,0 +1,114 @@
+﻿using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
+using Sandbox.Common.ObjectBuilders;
+using Sandbox.ModAPI;
+using Sandbox.ModAPI.Interfaces.Terminal;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using VRage.Game.Components;
+using VRage.Game.ModAPI.Network;
+using VRage.ModAPI;
+using VRage.Network;
+using VRage.ObjectBuilders;
+using VRage.Sync;
+using VRage.Utils;
+
+namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
+    FusionParts.FusionReactor
+{
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Reactor), false, "Caster_Reactor")]
+    public class FusionReactorLogic : FusionPart<IMyReactor>
+    {
+        private float BufferPowerGeneration;
+        private float BufferReactorOutput;
+        public float MaxPowerConsumption;
+
+        internal S_FusionSystem MemberSystem;
+        public float PowerConsumption;
+
+        internal override string BlockSubtype => "Caster_Reactor";
+        internal override string ReadableName => "Reactor";
+
+
+        public void UpdatePower(float PowerGeneration, float MegawattsPerFusionPower)
+        {
+            BufferPowerGeneration = PowerGeneration;
+
+            var reactorConsumptionMultiplier = OverrideEnabled.Value ? OverridePowerUsageSync : PowerUsageSync.Value; // This is ugly, let's make it better.
+            var reactorEfficiencyMultiplier = 1 / (0.5f + reactorConsumptionMultiplier);
+
+            // Power generation consumed (per second)
+            var powerConsumption = PowerGeneration * 60 * reactorConsumptionMultiplier;
+            // Power generated (per second)
+            var reactorOutput = reactorEfficiencyMultiplier * powerConsumption * MegawattsPerFusionPower;
+            BufferReactorOutput = reactorOutput;
+            MaxPowerConsumption = powerConsumption / 60;
+
+            InfoText.Clear();
+            InfoText.AppendLine(
+                $"\nOutput: {Math.Round(reactorOutput, 1)}/{Math.Round(PowerGeneration * 60 * MegawattsPerFusionPower, 1)}");
+            InfoText.AppendLine($"Input: {Math.Round(powerConsumption, 1)}/{Math.Round(PowerGeneration * 60, 1)}");
+            InfoText.AppendLine($"Efficiency: {Math.Round(reactorEfficiencyMultiplier * 100)}%");
+
+            // Convert back into power per tick
+            SyncMultipliers.ReactorOutput(Block, BufferReactorOutput);
+        }
+
+        public void SetPowerBoost(bool value)
+        {
+            if (OverrideEnabled.Value == value)
+                return;
+
+            OverrideEnabled.Value = value;
+            UpdatePower(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+        }
+
+        #region Base Methods
+
+        public override void Init(MyObjectBuilder_EntityBase definition)
+        {
+            base.Init(definition);
+            Block = (IMyReactor)Entity;
+            NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
+
+            // Trigger power update is only needed when OverrideEnabled is false
+            PowerUsageSync.ValueChanged += value =>
+            {
+                if (!OverrideEnabled.Value)
+                    UpdatePower(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+            };
+
+            // Trigger power update is only needed when OverrideEnabled is true
+            OverridePowerUsageSync.ValueChanged += value =>
+            {
+                if (OverrideEnabled.Value)
+                    UpdatePower(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+            };
+
+            // Trigger power update if boostEnabled is changed
+            OverrideEnabled.ValueChanged += value =>
+                UpdatePower(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+        }
+
+        public override void UpdateAfterSimulation()
+        {
+            base.UpdateAfterSimulation();
+
+            // If boost is unsustainable, disable it.
+            // If power draw exceeds power available, disable self until available.
+            if (MemberSystem?.PowerStored <= PowerConsumption || !Block.IsWorking)
+            {
+                SetPowerBoost(false);
+                PowerConsumption = 0;
+                SyncMultipliers.ReactorOutput(Block, 0);
+            }
+            else
+            {
+                SyncMultipliers.ReactorOutput(Block, BufferReactorOutput);
+                PowerConsumption = MaxPowerConsumption * Block.CurrentOutputRatio;
+            }
+        }
+
+        #endregion
+    }
+}
