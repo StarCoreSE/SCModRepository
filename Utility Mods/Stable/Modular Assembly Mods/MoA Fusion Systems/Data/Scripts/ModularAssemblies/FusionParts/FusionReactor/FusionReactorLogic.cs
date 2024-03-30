@@ -20,7 +20,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Reactor), false, "Caster_Reactor")]
     public class FusionReactorLogic : FusionPart<IMyReactor>
     {
-        private const float MaxPowerPerReactor = 1000;
+        private const float MaxPowerPerReactor = 2000;
 
         private float BufferPowerGeneration;
         private float BufferReactorOutput;
