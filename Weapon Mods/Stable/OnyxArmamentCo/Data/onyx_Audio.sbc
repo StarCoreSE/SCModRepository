@@ -319,7 +319,7 @@
         <SubtypeId>ArcWepShipOnyxRailgun_Fire</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>1000</MaxDistance>
+      <MaxDistance>1200</MaxDistance>
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>3</DynamicMusicAmount>
@@ -340,11 +340,11 @@
         <SubtypeId>ArcWepShipOnyxRailgun_Windup</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>1000</MaxDistance>
+      <MaxDistance>800</MaxDistance>
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>0.2</Volume>
+      <Volume>0.1</Volume>
       <Waves>
         <Wave Type="D3">
           <Start>Audio\Onyx\railguns\Onyx_railgun_windup_02.wav</Start>
@@ -362,7 +362,7 @@
         <SubtypeId>ArcWepShipOnyxPlasmaHelios_Fire</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>1000</MaxDistance>
+      <MaxDistance>1200</MaxDistance>
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>3</DynamicMusicAmount>
