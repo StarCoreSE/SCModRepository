@@ -13,7 +13,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     internal class S_FusionSystem
     {
         public const float MegawattsPerFusionPower = 85;
-        public const float NewtonsPerFusionPower = 1600000;
+        public const float NewtonsPerFusionPower = 3200000;
 
         public List<S_FusionArm> Arms = new List<S_FusionArm>();
         public int PhysicalAssemblyId;
