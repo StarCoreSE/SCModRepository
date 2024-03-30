@@ -6,7 +6,7 @@
 				<TypeId>CubeBlock</TypeId>
 				<SubtypeId>Caster_CentralPipe_90</SubtypeId>
 			</Id>
-			<DisplayName>Fusion Pipe Curved</DisplayName>
+			<DisplayName>Fusion Pipe Corner</DisplayName>
 			<Description>
 				Connects parts in a [Fusion System].
 			</Description>

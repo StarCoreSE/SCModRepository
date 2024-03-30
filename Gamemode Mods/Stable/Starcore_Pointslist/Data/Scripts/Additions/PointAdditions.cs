@@ -642,7 +642,11 @@ Cat_UnusedOrOutated_Subtypes@23;
 				Type17_BeamLance@100000; 
 
 
-
+				Caster_Accelerator_0@5;
+				Caster_Accelerator_90@10;
+				Caster_Feeder@10;
+				Caster_FocusLens@50;
+				Caster_Reactor@250;
             "));
         }
     }
