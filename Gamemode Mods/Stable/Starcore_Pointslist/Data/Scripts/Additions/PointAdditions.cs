@@ -520,7 +520,7 @@ Cat_StarcoreUlitity@21;
 					LargeProgrammableBlockReskin@100;
 					6SidePB@100;
 					SmallProgrammableBlock@50;
-				LargeTurretControlBlock@200;
+				LargeTurretControlBlock@10;
 				EventControllerLarge@5;
 					EventControllerSmall@5;				
 				LargeFlightMovement@5;
