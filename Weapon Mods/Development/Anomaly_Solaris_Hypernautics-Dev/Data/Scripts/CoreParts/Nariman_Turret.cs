@@ -11,13 +11,13 @@ using static Scripts.Structure.WeaponDefinition.HardPointDef.HardwareDef.Hardwar
 namespace Scripts {   
     partial class Parts {
         // Don't edit above this line
-        WeaponDefinition K_SA_GaussAntiArmor => new WeaponDefinition
+        WeaponDefinition Nariman_Smart_Turret => new WeaponDefinition
         {
             Assignments = new ModelAssignmentsDef
             {
                 MountPoints = new[] {
                     new MountPointDef {
-                        SubtypeId = "K_SA_Gauss_APC",
+                        SubtypeId = "Nariman_Dart_Turret",
                         SpinPartId = "None", // For weapons with a spinning barrel such as Gatling Guns.
                         MuzzlePartId = "K_SA_GAP_Ele", // The subpart where your muzzle empties are located.
                         AzimuthPartId = "K_SA_GAP_Rot",
@@ -53,7 +53,7 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "Ceis", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "Nariman", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0.25f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 1f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Advanced, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
@@ -139,13 +139,13 @@ namespace Scripts {
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "", // Audio for warmup effect.
-                    FiringSound = "K_SA_Gauss_Heavy", // Audio for firing.
-                    FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
-                    ReloadSound = "K_SA_Reload_Gauss",
-                    NoAmmoSound = "K_SA_AmmoEmpty",
-                    HardPointRotationSound = "WepTurretGatlingRotate", // Audio played when turret is moving.
-                    BarrelRotationSound = "WepShipGatlingRotation",
-                    FireSoundEndDelay = 120, // How long the firing audio should keep playing after firing stops. Measured in game ticks(6 = 100ms, 60 = 1 seconds, etc..).
+                    FiringSound = "", // Audio for firing.
+                    FiringSoundPerShot = false, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
+                    ReloadSound = "",
+                    NoAmmoSound = "",
+                    HardPointRotationSound = "", // Audio played when turret is moving.
+                    BarrelRotationSound = "",
+                    FireSoundEndDelay = 0, // How long the firing audio should keep playing after firing stops. Measured in game ticks(6 = 100ms, 60 = 1 seconds, etc..).
                 },
                 Graphics = new HardPointParticleDef
                 {
