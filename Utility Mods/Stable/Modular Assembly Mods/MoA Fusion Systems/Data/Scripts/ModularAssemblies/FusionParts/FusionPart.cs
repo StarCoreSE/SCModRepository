@@ -157,9 +157,11 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
                 return; // ignore ghost/projected grids
 
             LoadSettings();
+            Settings.PowerUsage = PowerUsageSync.Value;
             PowerUsageSync.ValueChanged += value =>
                 Settings.PowerUsage = value.Value;
 
+            Settings.OverridePowerUsage = OverridePowerUsageSync.Value;
             OverridePowerUsageSync.ValueChanged += value =>
                 Settings.OverridePowerUsage = value.Value;
             SaveSettings();
