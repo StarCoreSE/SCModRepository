@@ -505,6 +505,8 @@ Cat_Darth40kWeapons@20;
 				LightParticleWhip@200;
 				ParticleWhip@400;
 				NovaCannon@800;
+				MacroCannon@200;
+				LanceBattery@400;
 
 				
 				65_Launcher_FixedMount@350;
