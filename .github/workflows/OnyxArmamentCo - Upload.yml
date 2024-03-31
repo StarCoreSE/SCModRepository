@@ -2,6 +2,8 @@ name: "Upload OnyxArmamentCo"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Weapon Mods/Stable/OnyxArmamentCo/**"
 

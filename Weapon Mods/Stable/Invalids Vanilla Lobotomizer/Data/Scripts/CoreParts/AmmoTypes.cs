@@ -2062,7 +2062,7 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1,
-                    CustomParticle = "New_Big_Explosion", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "Type18_21_24_HE_Shell_Explosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "MyHeavyHit", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },

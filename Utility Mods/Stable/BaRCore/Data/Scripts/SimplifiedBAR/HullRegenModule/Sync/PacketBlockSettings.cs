@@ -38,6 +38,8 @@ namespace StarCore.AutoRepairModule.Sync
                 return;
 
             logic.Settings.SubsystemPriority = this.Settings.SubsystemPriority;
+            logic.Settings.RepairPositionalList = this.Settings.RepairPositionalList;
+            logic.Settings.PriorityPositionalList = this.Settings.PriorityPositionalList;
 
             relay = true;
         }

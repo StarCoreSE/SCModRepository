@@ -123,12 +123,12 @@ namespace Scripts {
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0.02f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
-                    ElevateRate = 0.01f, // Max traversal speed of elevation subpart in radians per tick.
-                    MinAzimuth = -20,
-                    MaxAzimuth = 20,
-                    MinElevation = -20,
-                    MaxElevation = 20,
+                    RotateRate = 0.08f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
+                    ElevateRate = 0.08f, // Max traversal speed of elevation subpart in radians per tick.
+                    MinAzimuth = -22,
+                    MaxAzimuth = 22,
+                    MinElevation = -22,
+                    MaxElevation = 22,
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 0, // Default resting elevation
                     InventorySize = 10f, // Inventory capacity in kL.
@@ -336,12 +336,12 @@ namespace Scripts {
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0.02f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
-                    ElevateRate = 0.01f, // Max traversal speed of elevation subpart in radians per tick.
-                    MinAzimuth = -20,
-                    MaxAzimuth = 20,
-                    MinElevation = -30,
-                    MaxElevation = 30,
+                    RotateRate = 0.08f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
+                    ElevateRate = 0.08f, // Max traversal speed of elevation subpart in radians per tick.
+                    MinAzimuth = -22,
+                    MaxAzimuth = 22,
+                    MinElevation = -32,
+                    MaxElevation = 32,
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 0, // Default resting elevation
                     InventorySize = 10f, // Inventory capacity in kL.
@@ -550,12 +550,12 @@ namespace Scripts {
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0.02f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
-                    ElevateRate = 0.01f, // Max traversal speed of elevation subpart in radians per tick.
-                    MinAzimuth = -20,
-                    MaxAzimuth = 20,
-                    MinElevation = -30,
-                    MaxElevation = 30,
+                    RotateRate = 0.08f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
+                    ElevateRate = 0.08f, // Max traversal speed of elevation subpart in radians per tick.
+                    MinAzimuth = -22,
+                    MaxAzimuth = 22,
+                    MinElevation = -32,
+                    MaxElevation = 32,
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 0, // Default resting elevation
                     InventorySize = 10f, // Inventory capacity in kL.

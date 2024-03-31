@@ -2,6 +2,8 @@ name: "Upload StarCoreLinkUtility"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Utility Mods/Stable/StarCoreLinkUtility/**"
 

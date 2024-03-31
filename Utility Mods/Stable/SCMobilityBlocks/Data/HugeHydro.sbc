@@ -14,7 +14,7 @@
             <BlockTopology>TriangleMesh</BlockTopology>
             <Size x="5" y="5" z="5" />
             <ModelOffset x="0" y="0" z="0" />
-            <Model>Models\HugeHydrogenThruster_Armored.mwm</Model>
+            <Model>Models\HugeHydrogenThruster.mwm</Model>
             <ThrusterType>Hydrogen</ThrusterType>
             <SilenceableByShipSoundSystem>true</SilenceableByShipSoundSystem>
             <Components>

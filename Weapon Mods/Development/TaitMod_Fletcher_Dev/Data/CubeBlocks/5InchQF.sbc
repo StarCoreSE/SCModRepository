@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<CubeBlocks>
+	<!-- <CubeBlocks>
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>127mmMk56</SubtypeId>
 			</Id>
-			<DisplayName>5"/38 Mk32 QRF</DisplayName>
+			<DisplayName>[FAS] 5"/38 Mk32 QRF</DisplayName>
 			<Description>
 				127mm Twin Rapid Fire gun
 				4km AI range
@@ -35,5 +35,5 @@
 			</MountPoints>
 			<BlockPairName>127mmMk56</BlockPairName>
 		</Definition>
-	</CubeBlocks>
+	</CubeBlocks> -->
 </Definitions>

@@ -8,7 +8,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>HeavyFighterBay</SubtypeId>
 			</Id>
-			<DisplayName>Phoenix Snubfighter Launch Bay</DisplayName>
+			<DisplayName>[MID] Phoenix Snubfighter Launch Bay</DisplayName>
       		<Description>Launches Powerful strikecraft. Please have target selected, then turn shoot ON, to launch fighters.
      		 Capacity: 1
      		 MaxActive = 1

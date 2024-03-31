@@ -2,6 +2,8 @@ name: "TaitMod_Fletcher"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Weapon Mods/Stable/TaitMod_Fletcher/**"
 

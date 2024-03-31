@@ -7,7 +7,7 @@
                 <TypeId>ConveyorSorter</TypeId>
                 <SubtypeId>Reaver_Coilgun</SubtypeId>
             </Id>
-            <DisplayName>Reaver Light Coilgun</DisplayName>
+            <DisplayName>[TIO] Reaver Light Coilgun</DisplayName>
             <Description>
               [2.8km Targeting Range]
               [Kinetic damage]
@@ -32,7 +32,7 @@
 				<Component Count="100" Subtype="MetalGrid" />
 				<Component Count="60" Subtype="Superconductor" />
 				<Component Count="150" Subtype="Computer"/>
-				<Component Count="600" Subtype="Construction"/>
+				<Component Count="700" Subtype="Construction"/>
 				<Component Count="500" Subtype="SteelPlate"/>
 			</Components>
             <CriticalComponent Index="0" Subtype="Computer"/>

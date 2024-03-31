@@ -667,10 +667,10 @@
 				  <Start>Audio\Shot\BattleCannon-FiringSound_WithShellExtraction.wav</Start>
 			  </Wave>
 			  <Wave Type="D3">
-				  <Start>Audio\Shot\BattleCannon-FiringSound_Diff1.wav</Start>
+				  <Start>Audio\Shot\BattleCannon-FiringSound_Diff21.wav</Start>
 			  </Wave>
 			  <Wave Type="D3">
-				  <Start>Audio\Shot\BattleCannon-FiringSound_Diff2.wav</Start>
+				  <Start>Audio\Shot\BattleCannon-FiringSound_Diff22.wav</Start>
 			  </Wave>
 		  </Waves>
 	  </Sound>

@@ -7,7 +7,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>APE_Strong</SubtypeId>
 			</Id>
-			<DisplayName>[APES] Anti Projectile Energy System</DisplayName>
+			<DisplayName>[TIO] [APES] Anti Projectile Energy System</DisplayName>
 			<Description>Draws 150 MW. Area denial system capable of engaging and destroying projectiles with extreme prejudice. Overheats after sustained use and will automatically reduce its damage output when it reaches max heat capacity. Power hungry munition killer</Description>
 			<GuiVisible>true</GuiVisible>
 

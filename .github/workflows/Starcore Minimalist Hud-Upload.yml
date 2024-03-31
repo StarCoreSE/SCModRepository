@@ -2,6 +2,8 @@ name: "Upload Starcore Minimalist Hud"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Utility Mods/Stable/Starcore Minimalist Hud/**"
 
