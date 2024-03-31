@@ -78,7 +78,7 @@ namespace Scripts {
             Targeting = new TargetingDef
             {
                 Threats = new[] {
-                    Projectiles, Grids, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
+                    Grids, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
                 },
                 SubSystems = new[] {
                     Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
@@ -86,8 +86,8 @@ namespace Scripts {
                 ClosestFirst = true, // Tries to pick closest targets first (blocks on grids, projectiles, etc...).
                 IgnoreDumbProjectiles = false, // Don't fire at non-smart projectiles.
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
-                MinimumDiameter = 1, // Minimum radius of threat to engage.
-                MaximumDiameter = 25, // Maximum radius of threat to engage; 0 = unlimited.
+                MinimumDiameter = 0, // Minimum radius of threat to engage.
+                MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
                 MaxTargetDistance = 2500, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
                 MinTargetDistance = 100, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 20, // Maximum number of targets to randomize between; 0 = unlimited.
