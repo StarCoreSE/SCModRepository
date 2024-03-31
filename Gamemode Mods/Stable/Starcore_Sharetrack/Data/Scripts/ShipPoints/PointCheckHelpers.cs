@@ -295,6 +295,8 @@ internal static class PointCheckHelpers
 {"LightParticleWhip",true},
 {"ParticleWhip",true},
 {"NovaCannon",true},
+{"MacroCannon",true},
+{"LanceBattery",true},
 {"longsword",true},
 {"65_Launcher_FixedMount",true},
 {"Hellfire_Laser_Block",true},
