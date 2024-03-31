@@ -2,6 +2,8 @@ name: "Upload Starcore_Serpent_Arms_Heavy_Metal"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Weapon Mods/Stable/Starcore_Serpent_Arms_Heavy_Metal/**"
 

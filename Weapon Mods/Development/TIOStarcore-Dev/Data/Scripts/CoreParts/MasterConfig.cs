@@ -33,7 +33,7 @@
                 HeavyPlas_X4, 
                 KineticLance_Vindicator_Super, 
                 WeaponThagomizer,
-
+                WeaponHGR,
                 DualPulseLaserTurret,
                 DualSnubnosedLaserTurret,
                 QuadCarronadeTurret,

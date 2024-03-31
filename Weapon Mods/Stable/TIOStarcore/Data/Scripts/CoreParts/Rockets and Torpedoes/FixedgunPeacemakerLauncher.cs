@@ -86,7 +86,7 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "ROCKET LAUNCHER", //Heavy Bombardment Rockets.
+                PartName = "DEFUNCT ROCKET LAUNCHER", //Heavy Bombardment Rockets.
                 DeviateShotAngle = 6.80f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 12f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Basic, // Level of turret aim prediction; Off, Basic, Accurate, Advanced

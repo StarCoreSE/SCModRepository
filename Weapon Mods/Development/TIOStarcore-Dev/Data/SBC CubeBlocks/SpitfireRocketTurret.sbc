@@ -11,6 +11,7 @@
 			<Description>[3km Targeting Range [500 m/s]]
               [Energy damage]
 			  [1 HP Unguided Missiles]
+			  [100m minimum range]
               [High Damage, Innacurate]</Description>
 			<Icon>Textures\GUI\Icons\LightMissileLauncher.dds</Icon>
 			<CubeSize>Large</CubeSize>

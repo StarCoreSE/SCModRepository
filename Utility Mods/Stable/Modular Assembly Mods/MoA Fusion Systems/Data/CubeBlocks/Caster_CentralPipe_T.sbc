@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition>
+			<Id>
+				<TypeId>CubeBlock</TypeId>
+				<SubtypeId>Caster_CentralPipe_T</SubtypeId>
+			</Id>
+			<DisplayName>Fusion Pipe T</DisplayName>
+			<Description>
+				Connects parts in a [Fusion System].
+			</Description>
+			<Icon>Textures\GUI\Icons\Cubes\Caster_CentralPipe_T.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Caster_CentralPipe_T.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="100" />
+				<Component Subtype="Construction" Count="40" />
+				<Component Subtype="MetalGrid" Count="4" />
+				<Component Subtype="LargeTube" Count="8" />
+				<Component Subtype="Reactor" Count="100" />
+				<Component Subtype="Motor" Count="6" />
+				<Component Subtype="SteelPlate" Count="60" />
+			</Components>
+			<CriticalComponent Subtype="Construction" Index="0" />
+			<BlockPairName>Caster_CentralPipe_T</BlockPairName>
+			<MirroringX>Z</MirroringX>
+			<IsAirTight>true</IsAirTight>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

@@ -15,8 +15,8 @@
           Fires a variety of beam attacks. Will eventually burn out.
           Ammo 1: MasterSpark [EN]
           Ammo 2: HealingSpark [HEAL]
-          Ammo 2: StardustLaser [EN]
-          Ammo 3: StardustSentry [EN]
+          Ammo 3: StardustLaser [EN]
+          Ammo 4: StardustSentry [EN]
         </Description>
         <Icon>Textures\GUI\hakkero.png</Icon>
         <CubeSize>Large</CubeSize>
@@ -72,8 +72,8 @@
           Fires a variety of beam attacks. Will quickly burn out.
           Ammo 1: MasterSpark [EN]
           Ammo 2: HealingSpark [HEAL]
-          Ammo 2: StardustLaser [EN]
-          Ammo 3: StardustSentry [EN]
+          Ammo 3: StardustLaser [EN]
+          Ammo 4: StardustSentry [EN]
         </Description>
         <Icon>Textures\GUI\hakkeromini.png</Icon>
         <CubeSize>Large</CubeSize>
@@ -240,7 +240,7 @@
           <TypeId>ConveyorSorter</TypeId>
           <SubtypeId>Hexcannon</SubtypeId>
         </Id>
-        <DisplayName>Artificial Sun Launcher</DisplayName>
+        <DisplayName>[EXO] Artificial Sun Launcher</DisplayName>
         <Description>
     ☢ CAUTION!! ☢
     Fires a singularity that

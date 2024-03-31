@@ -2,6 +2,8 @@ name: "Upload SCPracticeAI"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Utility Mods/Stable/SCPracticeAI/**"
 

@@ -2,6 +2,8 @@ name: "Upload Starcore_Sharetrack"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Gamemode Mods/Stable/Starcore_Sharetrack/**"
 

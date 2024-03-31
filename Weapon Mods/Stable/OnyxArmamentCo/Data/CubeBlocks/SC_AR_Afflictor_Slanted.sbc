@@ -6,7 +6,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>SC_AR_Afflictor_Slanted</SubtypeId>
 			</Id>
-			<DisplayName>Afflictor Burst Cannon Slanted</DisplayName>
+			<DisplayName>[ONYX] Afflictor Burst Cannon Slanted</DisplayName>
 			<Icon>Textures\GUI\Icons\Cubes\SC_AR_Afflictor_Slanted.dds</Icon>
 			<Description>
 				Short Range Turret: [3km]

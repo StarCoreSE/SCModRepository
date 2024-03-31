@@ -7,7 +7,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>Starcore_AMS_I_Block</SubtypeId>
       </Id>
-      <DisplayName>Painless AMS</DisplayName>
+      <DisplayName>[BTI] Painless AMS</DisplayName>
       <Description>
         [2.5km max range]
         [Kinetic damage]
@@ -68,7 +68,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>Starcore_AMS_II_Block</SubtypeId>
       </Id>
-      <DisplayName>Bainless AMS II</DisplayName>
+      <DisplayName>[BTI] Bainless AMS II</DisplayName>
       <Description>
         Anti-Missile System Two
         [2.5km max range]
@@ -145,7 +145,7 @@
       </Description>
       <Icon>Textures\Icons\Painless_Comm.dds</Icon>
       <CubeSize>Large</CubeSize>
-      <GuiVisible>true</GuiVisible>
+      <GuiVisible>false</GuiVisible>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="1" y="1" z="1" />
       <ModelOffset x="0" y="0" z="0" />

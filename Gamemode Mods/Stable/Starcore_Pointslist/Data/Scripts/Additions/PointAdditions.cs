@@ -86,7 +86,7 @@ namespace ShipPoints
 				MA_AC150_Gantry@150;
 				K_SA_Gauss_APC@150;
 				K_SA_Gauss_AMS@200;
-				K_SA_Gauss_ERC@370;
+				K_SA_Gauss_ERC@300;
 				MXA_CoilgunH@180;
 				MXA_SoFCoilgun@250;
 				RailgunxTurret@250;
@@ -126,8 +126,8 @@ namespace ShipPoints
 				SC_AR_Eris@1250;
 				K_SA_Launcher_FixedMount@275;
 					
-				MA_Tiger@125;
-				MA_Crouching_Tiger@125;
+				MA_Tiger@150;
+				MA_Crouching_Tiger@150;
 
 				MA_Afterburner_Large@200;
 				MA_Afterburner_Large_small@50;
@@ -162,7 +162,7 @@ namespace ShipPoints
 				LargeBlockSmallThrust@4;
 					AQD_LG_IonThrusterS_Armored@4;
 					AQD_LG_IonThrusterS_ArmoredSlope@4;				
-					LargeBlockSmallThrustScifi@4;
+					LargeBlockSmallThrustSciFi@4;
 					SmallThrustSciFi@4;
 					LargeBlockSmallModularThruster@4;
 				AWGFocusDrive@100;
@@ -235,13 +235,13 @@ namespace ShipPoints
 
 				MA_Fixed_T2@150;
 				MA_Fixed_T2_Naked@150;
-				MA_Fixed_T3@120;
+				MA_Fixed_T3@150;
 				ARYXRailgun@400;
 				SC_AR_Phobos@400;
 				K_SA_LoW_CapitalSpinalA@650;
 				Static150mm@50;
 				ARYXFocusLance@500;
-				SC_AR_FocusedBeam@500;
+				SC_AR_FocusedBeam@400;
 				MediumFocusLance@125;
 				MA_Designator_sm@50;
 				MA_SideBooster_Small@100;
@@ -275,17 +275,17 @@ namespace ShipPoints
 				MXA_M58ArcherPods_S@500;
 				MXA_M2MAC_S@1000;
 
-				MA_Gimbal_Laser_Armored_sb@70;
-				MA_Gimbal_Laser_Armored_Slope_sb@70;
-				MA_Gimbal_Laser_Armored_Slope2_sb@70;
-				MA_Gimbal_Laser_Armored_Slope45_sb@70;
-				MA_Gimbal_Laser_sb@70;
+				MA_Gimbal_Laser_Armored_sb@150;
+				MA_Gimbal_Laser_Armored_Slope_sb@150;
+				MA_Gimbal_Laser_Armored_Slope2_sb@150;
+				MA_Gimbal_Laser_Armored_Slope45_sb@150;
+				MA_Gimbal_Laser_sb@150;
 				MA_Blister@100;
 				MA_Blister45@100;
 				MA_Blister30@100;
 				MA_Blister32@100;
 				MA_Meatball@200;
-				MA_Guardian@700; 
+				MA_Guardian@770; 
 
 				MA_SideBooster_Small@100;
 				Static30mm@100;
@@ -315,7 +315,7 @@ namespace ShipPoints
 				Wheel1x1@35000;
 
 				K_SA_Gauss_AMSIIC@350;
-				SA_HMI_Erebos@250;
+				SA_HMI_Erebos@300;
 
 				LargeBlockRadioAntenna@5;
 				LargeBlockRadioAntennaDish@5;
@@ -326,7 +326,7 @@ namespace ShipPoints
 				C400mmTurret@300;
 
 				ARYXRailgunTurret@350;
-				SC_AR_Deimos@350;
+				SC_AR_Deimos@400;
 				MCRNRailgunLB@1250;
 
 Cat_BigRotorStators@16;
@@ -366,15 +366,15 @@ Cat_BigRotorStators@16;
 				TRR_LG_11x11x1_TR_Stator@80;
 
 Cat_Battletech@15;
-				Starcore_PPC_Block@350;
-				Starcore_AMS_II_Block@175;
+				Starcore_PPC_Block@200;
+				Starcore_AMS_II_Block@125;
 				Starcore_M_Laser_Block@75;
 				Starcore_L_Laser_Block@150;
-				K_SA_HeavyMetal_Spinal_Rotary@1000;
-				K_SA_HeavyMetal_Spinal_Rotary_Reskin@1000;
+				K_SA_HeavyMetal_Spinal_Rotary@1300;
+				K_SA_HeavyMetal_Spinal_Rotary_Reskin@1300;
 				MetalStorm@125;
 				CLB2X@500;
-				ERPPC@350;
+				ERPPC@500;
 				Starcore_Fixed_Coil_Cannon@400;
 
 				MCRN_Heavy_Torpedo@350;
@@ -404,8 +404,8 @@ Cat_Battletech@15;
 				
 
 Cat_AristeasAMP@16;
-				AMP_ArcMelee@100;
-				AMP_ArcMeleeReskin@100;
+				AMP_ArcMelee@175;
+				AMP_ArcMeleeReskin@175;
 				AMP_FlameThrower@55;
 				AMP_CryoShotgun@60;
 
@@ -435,7 +435,7 @@ Cat_ChetNHI@18;
 				NHI_PD_Turret_Half_Slope_Top@100;
 				NHI_PD_Turret_Half_Slope_Tip@100;
 				NHI_PD_Turret_45_Slope@100;
-				NHI_Light_Autocannon_Turret@100;
+				NHI_Light_Autocannon_Turret@125;
 				NHI_Autocannon_Turret@250;
 				NHI_Gatling_Laser_Turret@250;
 				NHI_Light_Railgun_Turret@200;
@@ -518,7 +518,7 @@ Cat_StarcoreUlitity@21;
 					LargeProgrammableBlockReskin@100;
 					6SidePB@100;
 					SmallProgrammableBlock@50;
-				
+				LargeTurretControlBlock@200;
 				EventControllerLarge@5;
 					EventControllerSmall@5;				
 				LargeFlightMovement@5;
@@ -555,15 +555,15 @@ Cat_StarcoreUlitity@21;
 					SCSmallJumpDrive@250;
 
 Cat_BadModder@22;			
-				  APE_Strong@150; 
+				  APE_Strong@200; 
 				  GoalieCasemate@200;
-				Reaver_Coilgun@120; 
-					Assault_Coil_Turret@120;
+				Reaver_Coilgun@125; 
+					Assault_Coil_Turret@125;
 				Priest_Block@125; 
 					PriestReskin_Block@125; 
 				 DualSnubLaserTurret@150; 
 				  DualPulseLaserTurret@150;
-					HeavyCarronade_5x5_Turret@400;
+					HeavyCarronade_5x5_Turret@500;
 
 				Type18_Artillery@270; 
 				 Type21_Artillery@540; 
@@ -574,12 +574,12 @@ Cat_BadModder@22;
 
 				UnguidedRocketTurret@100; 
 				 DrunkRocketTurret@400; 
- 				  Devastator_Torp@700;
+ 				  Devastator_Torp@625;
 				X4_7x7_HeavyTurret@300;
-				 KreegMagnetarCannon@450;				
+				 KreegMagnetarCannon@400;				
 				HeavyLanceBattery@1000;
 				 HadeanPlasmaBlastgun@900; 
-				  VindicatorKineticLance@700;
+				  VindicatorKineticLance@800;
 
 				 Fixed_Rockets@250;
 				JN_175Fixed@1350; 
@@ -642,7 +642,11 @@ Cat_UnusedOrOutated_Subtypes@23;
 				Type17_BeamLance@100000; 
 
 
-
+				Caster_Accelerator_0@5;
+				Caster_Accelerator_90@10;
+				Caster_Feeder@10;
+				Caster_FocusLens@50;
+				Caster_Reactor@250;
             "));
         }
     }

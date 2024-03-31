@@ -6,7 +6,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>SC_AR_FocusedBeam</SubtypeId>
 			</Id>
-			<DisplayName>Focused Beam</DisplayName>
+			<DisplayName>[ONYX] Focused Beam</DisplayName>
 			<Icon>Textures\GUI\Icons\Cubes\SC_AR_FocusedBeam.dds</Icon>
 			<Description>
 				Long Ranged Fixed: [7km]

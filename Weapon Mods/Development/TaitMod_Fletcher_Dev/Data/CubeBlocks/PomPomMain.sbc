@@ -6,7 +6,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>PomPomMain</SubtypeId>
 			</Id>
-			<DisplayName>40mm Flak Quad</DisplayName>
+			<DisplayName>[FAS] 40mm Flak Quad</DisplayName>
 			<Description>
 				40mm Quad Flak gun
 				4km Range, only effective vs smart munitions
