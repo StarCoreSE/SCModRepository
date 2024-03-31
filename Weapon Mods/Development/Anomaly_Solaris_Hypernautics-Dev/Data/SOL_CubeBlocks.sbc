@@ -401,12 +401,12 @@
 
 
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
-			<!-- Ceis Anti Armour -->
+			<!-- Nariman Anti Armour -->
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>K_SA_Gauss_APC</SubtypeId>
+				<SubtypeId>Nariman_Dart_Turret</SubtypeId>
 			</Id>
-			<DisplayName>Nariman Dart Turret</DisplayName>
+			<DisplayName>Nariman NanoDart Turret</DisplayName>
 			<Description>
 				Dual purpose turret
 			</Description>
@@ -456,8 +456,6 @@
 			<MirroringZ>Y</MirroringZ>
 			<EdgeType>Light</EdgeType>
 			<BuildTimeSeconds>30</BuildTimeSeconds>
-			<OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
-			<WeaponDefinitionId Subtype="K_SA_Gun"/>
 			<InventoryMaxVolume>1</InventoryMaxVolume>
 			<DamageEffectId>213</DamageEffectId>
 			<AiEnabled>false</AiEnabled>
@@ -475,6 +473,16 @@
 			<MaxFov>2</MaxFov>
 			<EmissiveColorPreset>Default</EmissiveColorPreset>
 		</Definition>
+
+
+
+
+
+
+
+
+
+
 
 
 
