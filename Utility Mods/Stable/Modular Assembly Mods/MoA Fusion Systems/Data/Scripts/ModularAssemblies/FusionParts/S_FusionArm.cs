@@ -13,7 +13,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     /// </summary>
     internal struct S_FusionArm
     {
-        private const float LengthEfficiencyModifier = 1/14f;
+        private const float LengthEfficiencyModifier = 1 / 40f;
         private const float BlockPowerGeneration = 0.005f;
         private const float BlockPowerStorage = 2f;
 
@@ -30,7 +30,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         {
             var parts = new List<IMyCubeBlock>();
             var stopHits = 0;
-            List<MyEntity> ignore = new List<MyEntity>();
+            var ignore = new List<MyEntity>();
             IsValid = PerformScan(newPart, ref ignore, rootSubtype, ref stopHits, ref parts);
 
             PowerGeneration = 0;
@@ -39,7 +39,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             if (!IsValid)
             {
                 parts.Clear();
-                Parts = new IMyCubeBlock[0];
+                Parts = Array.Empty<IMyCubeBlock>();
                 return;
             }
 
@@ -58,8 +58,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             parts.Clear();
 
             // Power capacities scale with length.
-            PowerGeneration *= (float) Math.Pow(Parts.Length, LengthEfficiencyModifier);
-            PowerStorage *= (float) Math.Pow(Parts.Length, LengthEfficiencyModifier);
+            PowerGeneration *= (float)Math.Pow(Parts.Length, LengthEfficiencyModifier);
+            PowerStorage *= (float)Math.Pow(Parts.Length, LengthEfficiencyModifier);
         }
 
 
@@ -70,7 +70,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         /// <param name="prevScan">The block entity to ignore; nullable.</param>
         /// <param name="stopAtSubtype">Exits the loop at this subtype.</param>
         /// <returns></returns>
-        private static bool PerformScan(MyEntity blockEntity, ref List<MyEntity> prevScan, string stopAtSubtype, ref int stopHits,
+        private static bool PerformScan(MyEntity blockEntity, ref List<MyEntity> prevScan, string stopAtSubtype,
+            ref int stopHits,
             ref List<IMyCubeBlock> parts)
         {
             if (ModularAPI.IsDebug())

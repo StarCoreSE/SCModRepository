@@ -1,18 +1,9 @@
-﻿using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
+﻿using System;
 using Sandbox.Common.ObjectBuilders;
 using Sandbox.ModAPI;
-using Sandbox.ModAPI.Interfaces.Terminal;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using VRage.Game;
 using VRage.Game.Components;
-using VRage.Game.ModAPI.Network;
 using VRage.ModAPI;
-using VRage.Network;
 using VRage.ObjectBuilders;
-using VRage.Sync;
-using VRage.Utils;
 
 namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     FusionParts.FusionReactor
@@ -22,12 +13,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     {
         private const float MaxPowerPerReactor = 2000;
 
-        private float BufferPowerGeneration;
         private float BufferReactorOutput;
-        public float MaxPowerConsumption;
 
-        internal S_FusionSystem MemberSystem;
-        public float PowerConsumption;
 
         internal override string BlockSubtype => "Caster_Reactor";
         internal override string ReadableName => "Reactor";
@@ -37,7 +24,10 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         {
             BufferPowerGeneration = PowerGeneration;
 
-            var reactorConsumptionMultiplier = OverrideEnabled.Value ? OverridePowerUsageSync : PowerUsageSync.Value; // This is ugly, let's make it better.
+            var reactorConsumptionMultiplier =
+                OverrideEnabled.Value
+                    ? OverridePowerUsageSync
+                    : PowerUsageSync.Value; // This is ugly, let's make it better.
             // Power generation consumed (per second)
             var powerConsumption = PowerGeneration * 60 * reactorConsumptionMultiplier;
 
@@ -118,7 +108,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
             // If boost is unsustainable, disable it.
             // If power draw exceeds power available, disable self until available.
-            if (MemberSystem?.PowerStored <= PowerConsumption || !Block.IsWorking)
+            if (MemberSystem?.PowerStored <= PowerConsumption * 120 || !Block.IsWorking)
             {
                 SetPowerBoost(false);
                 PowerConsumption = 0;

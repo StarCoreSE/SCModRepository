@@ -87,6 +87,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 logic.MemberSystem = null;
                 Thrusters.Remove(logic);
             }
+
             if (part is IMyReactor)
             {
                 var logic = part.GameLogic.GetAs<FusionReactorLogic>();
@@ -105,9 +106,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
         private void UpdatePower(bool updateReactors = false)
         {
-            float powerGeneration = 0.01f;
-            float powerCapacity = 0.01f;
-            float totalPowerUsage = 0f;
+            var powerGeneration = 0.01f;
+            var powerCapacity = 0.01f;
+            var totalPowerUsage = 0f;
 
             foreach (var arm in Arms)
             {
@@ -123,6 +124,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 if (updateReactors)
                     reactor?.UpdatePower(powerGeneration, MegawattsPerFusionPower);
             }
+
             foreach (var thruster in Thrusters)
             {
                 totalPowerUsage += thruster?.PowerConsumption ?? 0;

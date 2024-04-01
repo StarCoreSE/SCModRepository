@@ -38,18 +38,25 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
 
                 if (ModularAPI.IsDebug())
                 {
-                    MyVisualScriptLogicProvider.SetQuestlogLocal(true, $"Fusion Systems ({FusionManager.FusionSystems.Count})");
+                    MyVisualScriptLogicProvider.SetQuestlogLocal(true,
+                        $"Fusion Systems ({FusionManager.FusionSystems.Count})");
 
+                    // Limits the number of displayed systems to 6
+                    var displayedCount = 0;
                     foreach (var assemblyId in ModularAPI.GetAllAssemblies())
                     {
-                        if (!FusionManager.FusionSystems.ContainsKey(assemblyId))
+                        if (displayedCount > 6 || !FusionManager.FusionSystems.ContainsKey(assemblyId))
                             continue;
 
                         var system = FusionManager.FusionSystems[assemblyId];
 
+                        if (system.Arms.Count == 0)
+                            continue;
+
                         MyVisualScriptLogicProvider.AddQuestlogDetailLocal(
                             $"[{assemblyId}] Power: {Math.Round(system.PowerStored / system.PowerCapacity * 100f)}% ({Math.Round(system.PowerCapacity)} @ {Math.Round(system.PowerGeneration * 60, 1)}/s) | Arms: {system.Arms.Count}",
                             false, false);
+                        displayedCount++;
                     }
                 }
                 else
