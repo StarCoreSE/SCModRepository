@@ -60,7 +60,7 @@ namespace Scripts
             {
                 AmmoRound = "508heshrap", // AmmoRound field of the ammo to spawn.
                 Fragments = 50, // Number of projectiles to spawn.
-                Degrees = 360, // Cone in which to randomise direction of spawned projectiles.
+                Degrees = 180, // Cone in which to randomise direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = true, // fragments will not inherit velocity from parent.
                 Offset = 0f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards).
