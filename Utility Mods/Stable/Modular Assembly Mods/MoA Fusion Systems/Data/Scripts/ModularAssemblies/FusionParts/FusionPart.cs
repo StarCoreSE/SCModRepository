@@ -1,16 +1,11 @@
-﻿using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
 using ProtoBuf;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
 using Sandbox.ModAPI.Interfaces.Terminal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using BulletXNA.BulletCollision;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.Game.ModAPI.Network;
@@ -26,34 +21,37 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
         where T : IMyCubeBlock
     {
         public static readonly Guid SettingsGUID = new Guid("36a45185-2e80-461c-9f1c-e2140a47a4df");
-        internal static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
-        /// <summary>
-        /// List of all types that have inited controls.
-        /// </summary>
-        private static List<string> _haveControlsInited = new List<string>();
 
         /// <summary>
-        /// Block subtypes allowed.
+        ///     List of all types that have inited controls.
         /// </summary>
-        internal abstract string BlockSubtype { get; }
-        /// <summary>
-        /// Human-readable name for this part type.
-        /// </summary>
-        internal abstract string ReadableName { get; }
+        private static readonly List<string> _haveControlsInited = new List<string>();
 
-        internal S_FusionSystem MemberSystem;
-        internal FusionPartSettings Settings = new FusionPartSettings();
-        internal T Block;
         internal readonly StringBuilder InfoText = new StringBuilder("Output: 0/0\nInput: 0/0\nEfficiency: N/A");
-
-        public MySync<float, SyncDirection.BothWays> PowerUsageSync;
-        public MySync<float, SyncDirection.BothWays> OverridePowerUsageSync;
-        public MySync<bool, SyncDirection.BothWays> OverrideEnabled;
+        internal T Block;
 
         internal float BufferPowerGeneration;
         public float MaxPowerConsumption;
 
+        internal S_FusionSystem MemberSystem;
+        public MySync<bool, SyncDirection.BothWays> OverrideEnabled;
+        public MySync<float, SyncDirection.BothWays> OverridePowerUsageSync;
+
         public float PowerConsumption;
+
+        public MySync<float, SyncDirection.BothWays> PowerUsageSync;
+        internal FusionPartSettings Settings = new FusionPartSettings();
+        internal static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
+
+        /// <summary>
+        ///     Block subtypes allowed.
+        /// </summary>
+        internal abstract string BlockSubtype { get; }
+
+        /// <summary>
+        ///     Human-readable name for this part type.
+        /// </summary>
+        internal abstract string ReadableName { get; }
 
         #region Controls
 
@@ -114,7 +112,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
                         $"FusionSystems.{ReadableName}BoostPowerUsage");
                 boostPowerUsageSlider.Title = MyStringId.GetOrCompute("Override Power Usage");
                 boostPowerUsageSlider.Tooltip =
-                    MyStringId.GetOrCompute($"Fusion Power generation this {ReadableName} should use when Override is enabled.");
+                    MyStringId.GetOrCompute(
+                        $"Fusion Power generation this {ReadableName} should use when Override is enabled.");
                 boostPowerUsageSlider.SetLimits(0.01f, 4.0f);
                 boostPowerUsageSlider.Getter = block =>
                     block.GameLogic.GetAs<FusionPart<T>>()?.OverridePowerUsageSync.Value ?? 0;
@@ -122,7 +121,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
                     block.GameLogic.GetAs<FusionPart<T>>().OverridePowerUsageSync.Value = value;
 
                 boostPowerUsageSlider.Writer = (block, builder) =>
-                    builder.Append(Math.Round(block.GameLogic.GetAs<FusionPart<T>>().OverridePowerUsageSync.Value * 100))
+                    builder.Append(
+                            Math.Round(block.GameLogic.GetAs<FusionPart<T>>().OverridePowerUsageSync.Value * 100))
                         .Append('%');
 
                 boostPowerUsageSlider.Visible = block => block.BlockDefinition.SubtypeName == BlockSubtype;
@@ -159,6 +159,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
             base.Init(objectBuilder);
             NeedsUpdate = MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
         }
+
         public override void UpdateOnceBeforeFrame()
         {
             base.UpdateOnceBeforeFrame();
@@ -180,7 +181,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
             if (!_haveControlsInited.Contains(ReadableName))
                 CreateControls();
 
-            ((IMyTerminalBlock) Block).AppendingCustomInfo += AppendingCustomInfo;
+            ((IMyTerminalBlock)Block).AppendingCustomInfo += AppendingCustomInfo;
 
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
         }
@@ -188,6 +189,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
         #endregion
 
         #region Settings
+
         internal void SaveSettings()
         {
             if (Block == null)
@@ -197,12 +199,14 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
                 throw new NullReferenceException($"Settings == null on entId={Entity?.EntityId}; Test log 1");
 
             if (MyAPIGateway.Utilities == null)
-                throw new NullReferenceException($"MyAPIGateway.Utilities == null; entId={Entity?.EntityId}; Test log 2");
+                throw new NullReferenceException(
+                    $"MyAPIGateway.Utilities == null; entId={Entity?.EntityId}; Test log 2");
 
             if (Block.Storage == null)
                 Block.Storage = new MyModStorageComponent();
 
-            Block.Storage.SetValue(SettingsGUID, Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(Settings)));
+            Block.Storage.SetValue(SettingsGUID,
+                Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(Settings)));
         }
 
         internal virtual void LoadDefaultSettings()
@@ -234,7 +238,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
 
             try
             {
-                var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<FusionPartSettings>(Convert.FromBase64String(rawData));
+                var loadedSettings =
+                    MyAPIGateway.Utilities.SerializeFromBinary<FusionPartSettings>(Convert.FromBase64String(rawData));
 
                 if (loadedSettings != null)
                 {
@@ -249,9 +254,10 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
             }
             catch (Exception e)
             {
-                MyLog.Default.WriteLineAndConsole("Exception in loading FusionPart settings: " + e.ToString());
-                MyAPIGateway.Utilities.ShowMessage("Fusion Systems", "Exception in loading FusionPart settings: " + e.ToString());
+                MyLog.Default.WriteLineAndConsole("Exception in loading FusionPart settings: " + e);
+                MyAPIGateway.Utilities.ShowMessage("Fusion Systems", "Exception in loading FusionPart settings: " + e);
             }
+
             return false;
         }
 
@@ -263,21 +269,22 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
             }
             catch (Exception e)
             {
-                MyLog.Default.WriteLineAndConsole("Exception in loading FusionPart settings: " + e.ToString());
-                MyAPIGateway.Utilities.ShowMessage("Fusion Systems", "Exception in loading FusionPart settings: " + e.ToString());
+                MyLog.Default.WriteLineAndConsole("Exception in loading FusionPart settings: " + e);
+                MyAPIGateway.Utilities.ShowMessage("Fusion Systems", "Exception in loading FusionPart settings: " + e);
             }
 
             return base.IsSerialized();
         }
 
-#endregion
+        #endregion
     }
 
     [ProtoContract(UseProtoMembersOnly = true)]
     internal class FusionPartSettings
     {
-        [ProtoMember(1)] public float PowerUsage;
         [ProtoMember(2)] public float OverridePowerUsage;
+
+        [ProtoMember(1)] public float PowerUsage;
         // Don't need to save Override because it would be instantly reset.
     }
 }

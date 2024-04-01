@@ -1,19 +1,9 @@
-﻿using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
+﻿using System;
 using Sandbox.Common.ObjectBuilders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Sandbox.ModAPI;
 using VRage.Game.Components;
-using VRage.Game.ModAPI.Network;
-using VRage.Network;
-using VRage.Sync;
-using Sandbox.ModAPI.Interfaces.Terminal;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
-using VRage.Utils;
 
 namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionThruster
 {
@@ -30,7 +20,10 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
         {
             BufferPowerGeneration = PowerGeneration;
 
-            var consumptionMultiplier = OverrideEnabled.Value ? OverridePowerUsageSync : PowerUsageSync.Value; // This is ugly, let's make it better.
+            var consumptionMultiplier =
+                OverrideEnabled.Value
+                    ? OverridePowerUsageSync
+                    : PowerUsageSync.Value; // This is ugly, let's make it better.
             var efficiencyMultiplier = 1 / (0.5f + consumptionMultiplier);
 
             // Power generation consumed (per second)

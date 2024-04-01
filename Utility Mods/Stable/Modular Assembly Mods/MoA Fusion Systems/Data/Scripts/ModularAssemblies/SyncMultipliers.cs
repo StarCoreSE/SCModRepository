@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using ProtoBuf;
 using Sandbox.ModAPI;
 using VRage.Game.Components;
-using VRage.Utils;
 
 namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
 {

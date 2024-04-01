@@ -20,7 +20,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
         public override void LoadData()
         {
-            MyLog.Default.WriteLineAndConsole($"{ModContext.ModName}.ModularDefinition: Init new ModularAssembliesDefinition");
+            MyLog.Default.WriteLineAndConsole(
+                $"{ModContext.ModName}.ModularDefinition: Init new ModularAssembliesDefinition");
             MyAPIGateway.Utilities.RegisterMessageHandler(InboundMessageId, InputHandler);
 
             // Init
@@ -32,7 +33,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
             // Send message in case this loads after the main mod
             MyAPIGateway.Utilities.SendModMessage(DefinitionMessageId, Storage);
-            MyLog.Default.WriteLineAndConsole($"{ModContext.ModName}.ModularDefinition: Packaged and sent definitions, now going to sleep.");
+            MyLog.Default.WriteLineAndConsole(
+                $"{ModContext.ModName}.ModularDefinition: Packaged and sent definitions, now going to sleep.");
         }
 
         protected override void UnloadData()
@@ -61,7 +63,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
                     if (call == null)
                     {
-                        MyLog.Default.WriteLineAndConsole($"{ModContext.ModName}.ModularDefinition: Invalid FunctionCall!");
+                        MyLog.Default.WriteLineAndConsole(
+                            $"{ModContext.ModName}.ModularDefinition: Invalid FunctionCall!");
                         return;
                     }
 
@@ -109,7 +112,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 }
                 catch (Exception ex)
                 {
-                    MyLog.Default.WriteLineAndConsole($"{ModContext.ModName}.ModularDefinition: Exception in InputHandler: {ex}\n{ex.StackTrace}");
+                    MyLog.Default.WriteLineAndConsole(
+                        $"{ModContext.ModName}.ModularDefinition: Exception in InputHandler: {ex}\n{ex.StackTrace}");
                 }
             }
         }

@@ -38,10 +38,11 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
 
                 if (ModularAPI.IsDebug())
                 {
-                    MyVisualScriptLogicProvider.SetQuestlogLocal(true, $"Fusion Systems ({FusionManager.FusionSystems.Count})");
+                    MyVisualScriptLogicProvider.SetQuestlogLocal(true,
+                        $"Fusion Systems ({FusionManager.FusionSystems.Count})");
 
                     // Limits the number of displayed systems to 6
-                    int displayedCount = 0;
+                    var displayedCount = 0;
                     foreach (var assemblyId in ModularAPI.GetAllAssemblies())
                     {
                         if (displayedCount > 6 || !FusionManager.FusionSystems.ContainsKey(assemblyId))
