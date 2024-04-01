@@ -50,11 +50,11 @@ namespace ShipPoints
 				PlasmaCannonLB@200;
 				MXA_CoilgunL@100;
 				RailgunxTurretM@165;
-				MA_AC150@150;
-				MA_AC150_30@150;
-				MA_AC150_45@150;
-				MA_AC150_45_Gantry@150;
-				MA_AC150_Gantry@150;
+				MA_AC150@125;
+				MA_AC150_30@125;
+				MA_AC150_45@125;
+				MA_AC150_45_Gantry@125;
+				MA_AC150_Gantry@125;
 				K_SA_Gauss_APC@150;
 				K_SA_Gauss_AMS@200;
 				K_SA_Gauss_ERC@370;
@@ -109,25 +109,46 @@ namespace ShipPoints
 				AncientAfterburnerT44@250;
 				MA_Tiger@125;
 				MA_Crouching_Tiger@125;
-				AQD_LG_HydroThrusterL_ArmoredSlope@50;
-				AQD_LG_HydroThrusterL_Armored@50;
-				AQD_LG_HydroThrusterS_ArmoredSlope@15;
-				AQD_LG_HydroThrusterS_Armored@15;
-				AWGFocusDrive@150;
-				IonHeavyCovered@150;
-				LargeBlockLargeThrust@40;
-				AQD_LG_IonThrusterL_ArmoredSlope@40;
-				AQD_LG_IonThrusterL_Armored@40;
-				LargeBlockSmallThrust@5;
-				AQD_LG_IonThrusterS_Armored@5;
-				AQD_LG_IonThrusterS_ArmoredSlope@5;
-				LargeBlockLargeHydrogenThrust@50;
-				LargeBlockSmallHydrogenThrust@15;
-				LargeBlockLargeHydrogenThrustIndustrial@50;
-				LargeBlockSmallHydrogenThrustIndustrial@15;
+
+				LargeHydrogenTank@10;
+					LargeHydrogenTankIndustrial@10;
+				LargeHydrogenTankSmall@50;
+
+				LargeBlockLargeHydrogenThrust@60;
+					AQD_LG_HydroThrusterL_ArmoredSlope@60;
+					AQD_LG_HydroThrusterL_Armored@60;
+					LargeBlockLargeHydrogenThrustIndustrial@60;
+				LargeBlockSmallHydrogenThrust@10;
+					AQD_LG_HydroThrusterS_ArmoredSlope@10;
+					AQD_LG_HydroThrusterS_Armored@10;
+					LargeBlockSmallHydrogenThrustIndustrial@10;
 				HugeHydrogenThruster@200;
-				LargeBlockLargeThrustSciFi@40;
-				LargeBlockSmallThrustScifi@5;
+
+				LargeBlockLargeThrust@20;
+					AQD_LG_IonThrusterL_ArmoredSlope@20;
+					AQD_LG_IonThrusterL_Armored@20;
+					LargeBlockLargeThrustSciFi@20;
+					LargeBlockLargeModularThruster@20;
+				LargeBlockSmallThrust@4;
+					AQD_LG_IonThrusterS_Armored@4;
+					AQD_LG_IonThrusterS_ArmoredSlope@4;				
+					LargeBlockSmallThrustScifi@4;
+					SmallThrustSciFi@4;
+					LargeBlockSmallModularThruster@4;
+				AWGFocusDrive@100;
+				IonHeavyCovered@100;
+
+				AQD_LG_AtmoThrusterS_ArmoredSlopeRev@3;
+				AQD_LG_AtmoThrusterS_ArmoredSlope@3;
+				AQD_LG_AtmoThrusterS_Armored@3;
+				AQD_LG_AtmoThrusterL_ArmoredSlopeRev@3;
+				AQD_LG_AtmoThrusterL_ArmoredSlope@3;
+				AQD_LG_AtmoThrusterL_Armored@3;
+				LargeBlockLargeAtmosphericThrust@3;
+				LargeBlockSmallAtmosphericThrust@3;
+				LargeBlockLargeAtmosphericThrustSciFi@3;
+				LargeBlockSmallAtmosphericThrustSciFi@3;
+
 				ARYXMagnetarCannon@450;
 				ARYXPlasmaPulser@275;
 				ARYXLargeRadar@10;
@@ -219,9 +240,6 @@ namespace ShipPoints
 				MA_Meatball@200;
 				VirtualMassSmall@50;
 				SmallHydrogenEngine@1;
-				LargeHydrogenTank@30;
-				LargeHydrogenTankIndustrial@30;
-				LargeHydrogenTankSmall@30;	
 				SmallBlockBatteryBlock@4;
 				SmallBlockSmallBatteryBlock@1;
 				SmallProgrammableBlock@50;
@@ -291,8 +309,6 @@ namespace ShipPoints
 				Wheel1x1@35000;
 				K_SA_Gauss_AMSIIC@350;
 				SA_HMI_Erebos@250;
-				LargeBlockSmallThrustSciFi@5;
-				SmallThrustSciFi@5;
 				HAS_Thanatos@350;
                	HAS_Alecto@400;
            		HAS_Assault@250;
@@ -308,19 +324,7 @@ namespace ShipPoints
 				LargeBlockSmallGeneratorWarfare2@17;
 				LargeBlockBatteryBlockWarfare2@14;
 				LargeBlockLargeGeneratorWarfare2@300;
-				LargeBlockLargeModularThruster@40;
-				LargeBlockSmallModularThruster@5;
 				LargeTurretControlBlock@200;
-				AQD_LG_AtmoThrusterS_ArmoredSlopeRev@3;
-				AQD_LG_AtmoThrusterS_ArmoredSlope@3;
-				AQD_LG_AtmoThrusterS_Armored@3;
-				AQD_LG_AtmoThrusterL_ArmoredSlopeRev@3;
-				AQD_LG_AtmoThrusterL_ArmoredSlope@3;
-				AQD_LG_AtmoThrusterL_Armored@3;
-				LargeBlockLargeAtmosphericThrust@3;
-				LargeBlockSmallAtmosphericThrust@3;
-				LargeBlockLargeAtmosphericThrustSciFi@3;
-				LargeBlockSmallAtmosphericThrustSciFi@3;
 				ARYXRailgunTurret@350;
 				SC_AR_Resheph@350;
 				MCRNRailgunLB@1250;
@@ -363,6 +367,7 @@ namespace ShipPoints
 				MetalStorm@125;
 				Odin_Rail_2@300;
 				Odin_Rail_1@200;
+
 				MCRN_Heavy_Torpedo@350;
 				OPA_Heavy_Torpedo@200;
 				OPA_Light_Missile@150;
@@ -391,6 +396,7 @@ namespace ShipPoints
 				ModularLRM5AngledReversed@40;
 				Starcore_Arrow_Block@300;
 				SC_Flare@50;
+
 				Odin_Laser_Fixed@350;
 				Odin_Autocannon_Fixed@350;
 				Odin_PDC@100;
@@ -415,6 +421,7 @@ namespace ShipPoints
 				Odin_5x5_Battleshipcannon_Surface@225;
 				Odin_3x3_Battleshipcannon@175;
 				Odin_3x3_Battleshipcannon_Surface@175;
+
 				StealthHeatSink@50;
 				StealthDrive@500;
 				JN_175Fixed@1350;
@@ -428,6 +435,7 @@ namespace ShipPoints
 				HAS_Esper@625;
 				MADAR@0;
 				HAS_Vulcan@1000;
+
 				SC_Coil_Cannon@450;
 				NHI_PD_Turret@100;
 				NHI_PD_Turret_Half@100;
@@ -448,6 +456,7 @@ namespace ShipPoints
 				NHI_Fixed_Autocannon@225;
 				NHI_Fixed_Gatling_Laser@225;
 				NHI_Kinetic_Cannon_Turret@300;
+
 				DETPAK@1;
 				DETPAK_3x1@1;
 				DETPAK_1x1@1;
@@ -469,90 +478,11 @@ namespace ShipPoints
 				TaiidanHangarFighter@800; 
 				TaiidanHangarBomber@800;
 				TaiidanHangarBomberMedium@800;				
-				TaiidanSingleHangar@100;  
+				TaiidanSingleHangar@100;
+
 				MA_Guardian@700; 
 				PM_LG_BLASTPLATE_BLASTPLATE@100; 
 
-				Laser_Block@150; 
-				Torp_Block@725; 
-				Priest_Block@85; 
-				PriestReskin_Block@85; 
-				Fixed_Rockets@225; 
-				Type18_Artillery_Block@200;
-				Type21_Artillery_Block@300;
-				Type24_Artillery_Block@400;
-				Type77_Railgun_Block@200;
-				Type78_Railgun_Block@300;
-				Type79_Railgun_Block@400;
-				Reaver_Coilgun_Block@200; 
-				RailgunTurret_Block@450; 
-                Null_Point_Jump_Disruptor_Large@99999;
-				LargeGatlingTurret_SC@125;
-				LargeMissileTurret_SC@155;
-				LargeBlockMediumCalibreTurret_SC@250;
-				LargeCalibreTurret_SC@250;
-				LargeRailgun_SC@165;
-				LargeBlockLargeCalibreGun_SC@250;
-				LargeMissileLauncher_SC@250;
-				Starcore_RWR_Projectiles@5;
-				NID_Pyroacid@300;
-				NID_HeavyPyroacid@500;
-				NID_Bioplasma@300;
-				NID_Hivedrone@350;
-				NID_BioplasmaHivedrone@400;
-				NID_Leap@50;
-				LightParticleWhip@200;
-				ParticleWhip@400;
-				NovaCannon@800;
-				longsword@400;
-				65_Launcher_FixedMount@350;
-				Hellfire_Laser_Block@666;
-				EventControllerLarge@5;
-				EventControllerSmall@5;				
-				LargeFlightMovement@5;
-				LargeDefensiveCombat@5;
-				LargeOffensiveCombat@5;
-				LargeBasicMission@5;
-				PathRecorderBlock@5;
-				SmallFlightMovement@5;
-				SmallDefensiveCombat@5;
-				SmallOffensiveCombat@5;
-				SmallBasicMission@5;
-				SmallPathRecorderBlock@5;
-				HAS_Cyclops@350;
-				HAS_Crossfield@250;
-				AMP_HealGenerator@400;
-				CapacitorLarge@400;
-				K_HS_Damnation@200; 
-				KreegMagnetarCannon@450; 
-				Thagomizer@750; 
-				Thagomizer_Flipped@750; 
-				Thagomizer_Angled@750; 
-				Thagomizer_Angled_Flipped@750; 
-				SC_Radome@10;
-				K_HS_9x9_K3_King@900; 
-				K_HS_9x9_HSRB_Dreadnight@750;
-				SI_Field_Gen@450;
-
-				MA_Laser_Armor01@1;
-				MA_Laser_Armor02@1;
-				MA_Laser_Armor03@1;
-				MA_Laser_Armor04@1;
-				MA_Laser_Armor05@1;
-				MA_Laser_Armor06@1;
-				MA_Laser_Armor07@1;
-				MA_Laser_Armor08@1;
-				MA_Laser_Armor09@1;
-				MA_Laser_Armor10@1;
-				MA_Laser_Armor11@1;
-				MA_Laser_Armor12@1;
-				MA_Laser_Armor13@1;
-				MA_Laser_Armor14@1;
-				MA_Laser_Armor15@1;
-				MA_Laser_Armor16@1;
-				
-				
-				
 				381mmDualR@250;
                 381mmDualNR@250;
                 380mmMLE1935@400;
@@ -582,6 +512,99 @@ namespace ShipPoints
                 Mk25Rangefinder@10;
                 6InchTriple@200;
 				20InchTwin@600;
+
+
+                Null_Point_Jump_Disruptor_Large@99999;
+				LargeGatlingTurret_SC@125;
+				LargeMissileTurret_SC@155;
+				LargeBlockMediumCalibreTurret_SC@250;
+				LargeCalibreTurret_SC@250;
+				LargeRailgun_SC@165;
+				LargeBlockLargeCalibreGun_SC@250;
+				LargeMissileLauncher_SC@250;
+
+				Starcore_RWR_Projectiles@5;
+				NID_Pyroacid@300;
+				NID_HeavyPyroacid@500;
+				NID_Bioplasma@300;
+				NID_Hivedrone@350;
+				NID_BioplasmaHivedrone@400;
+				NID_Leap@50;
+				LightParticleWhip@200;
+				ParticleWhip@400;
+				NovaCannon@800;
+				longsword@400;
+				65_Launcher_FixedMount@350;
+				Hellfire_Laser_Block@666;
+				EventControllerLarge@5;
+				EventControllerSmall@5;				
+				LargeFlightMovement@5;
+				LargeDefensiveCombat@5;
+				LargeOffensiveCombat@5;
+				LargeBasicMission@5;
+				PathRecorderBlock@5;
+				SmallFlightMovement@5;
+				SmallDefensiveCombat@5;
+				SmallOffensiveCombat@5;
+				SmallBasicMission@5;
+				SmallPathRecorderBlock@5;
+				HAS_Cyclops@350;
+				HAS_Crossfield@250;
+				AMP_HealGenerator@400;
+				CapacitorLarge@400;
+
+				GoalieCasemate@300; 
+				KreegMagnetarCannon@450; 
+				Thagomizer@750; 
+				Thagomizer_Flipped@750; 
+				Thagomizer_Angled@750; 
+				Thagomizer_Angled_Flipped@750; 
+				SC_Radome@10;
+				APE_Strong@150; 
+				Devastator_Torp@725; 
+				Priest_Block@180; 
+				PriestReskin_Block@180; 
+				Fixed_Rockets@250; 
+				Type18_Artillery@270;
+				Type21_Artillery@540;
+				Type24_Artillery@770;
+				Type19_Driver@350;
+				Type22_Driver@700;
+				Type25_Driver@1100;
+				Reaver_Coilgun@120; 
+				Type17_BeamLance@99999; 
+				HeavyCarronade_5x5_Turret@400;
+				X4_7x7_HeavyTurret@300;
+				UnguidedRocketTurret@100;
+				DrunkRocketTurret@300;
+				DualSnubLaserTurret@200;
+				DualPulseLaserTurret@200;
+				HadeanPlasmaBlastgun@900; 
+				VindicatorKineticLance@700;
+				HeavyFighterBay@300;
+
+				SI_Field_Gen@450;
+				MA_Laser_Armor01@1;
+				MA_Laser_Armor02@1;
+				MA_Laser_Armor03@1;
+				MA_Laser_Armor04@1;
+				MA_Laser_Armor05@1;
+				MA_Laser_Armor06@1;
+				MA_Laser_Armor07@1;
+				MA_Laser_Armor08@1;
+				MA_Laser_Armor09@1;
+				MA_Laser_Armor10@1;
+				MA_Laser_Armor11@1;
+				MA_Laser_Armor12@1;
+				MA_Laser_Armor13@1;
+				MA_Laser_Armor14@1;
+				MA_Laser_Armor15@1;
+				MA_Laser_Armor16@1;
+
+
+
+
+
             "));
         }
     }
