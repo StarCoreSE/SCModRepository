@@ -81,7 +81,8 @@ Ammunition: [5000m/s,] [Kinetic, 95% Shieldpen] </Description>
 Magazine Capacity: [1] 
 Rate of Fire: [200] 
 Reload Speed: [0.5 seconds] 
-Ammunition: [2000m/s,] [Kinetic] </Description>
+Ammunition: [2000m/s,] [Kinetic]
+.... ;P</Description>
       <Icon>Textures\GUI\Icons\Asterius.dds</Icon>
       <CubeSize>Large</CubeSize>
 	  <GuiVisible>false</GuiVisible>
@@ -157,7 +158,8 @@ Ammunition: [2000m/s,] [Kinetic] </Description>
 Idle Power: 150 MW (50 MW per Barrel)
 Reload Power: ~600 MW (~200 MW per Barrel)
 Reload Speed: [8 seconds] 
-Ammunition: [Kinetic] </Description>
+Ammunition: [Kinetic] 
+.... ;P</Description>
       <Icon>Textures\GUI\Icons\Cerberus.dds</Icon>
       <CubeSize>Large</CubeSize>
 	  <GuiVisible>false</GuiVisible>
@@ -760,7 +762,8 @@ Ammunition: [5000m/s,] [Energy] </Description>
 Idle Power: [50 MW]
 Reload Power: [~300 MW]
 Reload Speed: [9 seconds] 
-Ammunition: [Kinetic] </Description>
+Ammunition: [Kinetic] 
+.... ;P</Description>
       <Icon>Textures\GUI\Icons\Silvius.dds</Icon>
       <CubeSize>Large</CubeSize>
 	  <GuiVisible>false</GuiVisible>
