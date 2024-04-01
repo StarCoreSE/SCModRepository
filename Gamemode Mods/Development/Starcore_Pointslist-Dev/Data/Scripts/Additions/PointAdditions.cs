@@ -472,6 +472,7 @@ namespace ShipPoints
 				TaiidanSingleHangar@100;  
 				MA_Guardian@700; 
 				PM_LG_BLASTPLATE_BLASTPLATE@100; 
+
 				Laser_Block@150; 
 				Torp_Block@725; 
 				Priest_Block@85; 
@@ -532,6 +533,7 @@ namespace ShipPoints
 				K_HS_9x9_K3_King@900; 
 				K_HS_9x9_HSRB_Dreadnight@750;
 				SI_Field_Gen@450;
+
 				MA_Laser_Armor01@1;
 				MA_Laser_Armor02@1;
 				MA_Laser_Armor03@1;
@@ -547,7 +549,9 @@ namespace ShipPoints
 				MA_Laser_Armor13@1;
 				MA_Laser_Armor14@1;
 				MA_Laser_Armor15@1;
-				MA_Laser_Armor16@1;				
+				MA_Laser_Armor16@1;
+				
+				
 				
 				381mmDualR@250;
                 381mmDualNR@250;
