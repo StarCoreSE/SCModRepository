@@ -8,7 +8,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>NovaCannon</SubtypeId>
       </Id>
-      <DisplayName>[EXO] Nova Cannon</DisplayName>
+      <DisplayName>[40K] Nova Cannon</DisplayName>
       <Description>
         The Nova Cannon is a weapon of ancient providence dating back to the Age of Technology, easily able to wreak vast destruction upon enemy vessels at great range.
         Its projectiles vary, ranging from sophisticated plasma warheads which burn with the ferocity of a small star for a fraction of a second, to implosive devices which exert destructive gravitational forces upon all those caught within kilometres of the detonation.
@@ -55,7 +55,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MacroCannon</SubtypeId>
       </Id>
-      <DisplayName>Macro Cannon</DisplayName>
+      <DisplayName>[40K] Macro Cannon</DisplayName>
       <Description>
         Macrocannons have been used as a main armament on the starships of the Imperium of Man since the time of the Great Crusade in the late 30th Millennium.
         These massive ballistic weapons are deployed in batteries, and destroy their targets through the delivery of powerful broadsides of shells fired in volley to overwhelm their enemy in a barrage of destruction.
@@ -68,7 +68,7 @@
       <ModelOffset x="0" y="0" z="0" />
       <Model>Models\Cubes\MacroCannon.mwm</Model>
       <Components>
-        <Component Subtype="SteelPlate" Count="500" />
+        <Component Subtype="SteelPlate" Count="200" />
         <Component Subtype="Construction" Count="500" />
         <Component Subtype="GravityGenerator" Count="20" />
         <Component Subtype="Computer" Count="300" />
@@ -77,7 +77,7 @@
         <Component Subtype="LargeTube" Count="120" />
         <Component Subtype="MetalGrid" Count="50" />
         <Component Subtype="Construction" Count="500" />
-        <Component Subtype="SteelPlate" Count="2000" />
+        <Component Subtype="SteelPlate" Count="1800" />
       </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
       <BuildProgressModels>
@@ -108,7 +108,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>LanceBattery</SubtypeId>
       </Id>
-      <DisplayName>Lance Battery</DisplayName>
+      <DisplayName>[40K] Lance Battery</DisplayName>
       <Description>
         A lance is a large, spaceship-mounted energy weapon, often seen on various Imperial Navy vessels. The principle of such a weapon is an extremely high-powered energy beam;
         the efficiency of a lance turret is increased by the incorporation of several smaller beam projectors into a single, focused beam. 
@@ -121,7 +121,7 @@
       <ModelOffset x="0" y="0" z="0" />
       <Model>Models\Cubes\LanceBattery.mwm</Model>
       <Components>
-        <Component Subtype="SteelPlate" Count="500" />
+        <Component Subtype="SteelPlate" Count="1000" />
         <Component Subtype="Construction" Count="500" />
         <Component Subtype="GravityGenerator" Count="20" />
         <Component Subtype="Computer" Count="300" />
