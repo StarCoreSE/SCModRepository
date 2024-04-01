@@ -525,9 +525,6 @@ namespace Klime.CTF
 
         public override void UpdateAfterSimulation()
         {
-            if (new Random().NextDouble() > 0.99999) // 0.001% chance to crash every tick :)
-                throw new Exception("4-1-2024");     // -aristeas
-        
             try
             {
 
