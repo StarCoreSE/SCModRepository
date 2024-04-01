@@ -1,5 +1,6 @@
 ﻿using System;
 using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
+using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers;
 using Sandbox.Game;
 using VRage.Game.Components;
 using VRage.Utils;
@@ -16,12 +17,15 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
         private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
         private static S_FusionManager FusionManager => S_FusionManager.I;
 
+        private ConsumptionBar ConsumptionBar = new ConsumptionBar();
+
         #region Base Methods
 
         public override void LoadData()
         {
             I = this;
             FusionManager.Load();
+            ConsumptionBar.Init();
         }
 
         protected override void UnloadData()
@@ -35,6 +39,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
             try
             {
                 FusionManager.UpdateTick();
+                ConsumptionBar.Update();
 
                 if (ModularAPI.IsDebug())
                 {

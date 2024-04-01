@@ -33,6 +33,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         private Func<int, MyEntity> _getBasePart;
         private Func<bool> _isDebug;
         private Func<MyEntity, int> _getContainingAssembly;
+        private Func<int, IMyCubeGrid> _getAssemblyGrid;
 
         /// <summary>
         ///     Gets all AssemblyParts in the world. Returns an array of all AssemblyParts.
@@ -97,6 +98,11 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             return _getContainingAssembly?.Invoke(blockPart) ?? -1;
         }
 
+        public IMyCubeGrid GetAssemblyGrid(int assemblyId)
+        {
+            return _getAssemblyGrid?.Invoke(assemblyId) ?? null;
+        }
+
 
         public bool IsReady;
         private bool _isRegistered;
@@ -113,6 +119,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             AssignMethod(delegates, "GetBasePart", ref _getBasePart);
             AssignMethod(delegates, "IsDebug", ref _isDebug);
             AssignMethod(delegates, "GetContainingAssembly", ref _getContainingAssembly);
+            AssignMethod(delegates, "GetAssemblyGrid", ref _getAssemblyGrid);
 
             if (_apiInit)
                 MyLog.Default.WriteLineAndConsole("ModularDefinitions: ModularDefinitionsAPI loaded!");

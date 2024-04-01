@@ -16,6 +16,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         public const float NewtonsPerFusionPower = 3200000;
 
         public List<S_FusionArm> Arms = new List<S_FusionArm>();
+        public int BlockCount = 0;
         public int PhysicalAssemblyId;
         public float PowerCapacity;
 
@@ -35,6 +36,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         {
             if (newPart == null)
                 return;
+
+            BlockCount++;
 
             // Scan for 'arms' connected on both ends to the feeder block.
             switch (newPart.BlockDefinition.SubtypeName)
@@ -80,6 +83,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         {
             if (part == null)
                 return;
+
+            BlockCount--;
 
             if (part is IMyThrust)
             {

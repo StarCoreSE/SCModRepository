@@ -43,8 +43,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
             // Remove if the connection is broken.
             if (!IsBaseBlock)
                 FusionSystems[PhysicalAssemblyId].RemovePart((IMyCubeBlock)BlockEntity);
-            else
-                FusionSystems.Remove(PhysicalAssemblyId);
+
+            // TODO: OnAssemblyRemoved
         }
     }
 }
