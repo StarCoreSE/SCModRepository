@@ -817,7 +817,7 @@
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="1" y="2" z="4"/>
 			<ModelOffset x="0" y="0" z="0"/>
-			<Model>Models\Cubes\large\SH_LG_BP24_2x4 Blastplate.mwm</Model>
+			<Model>Models\Cubes\large\SH_LG_BP24_2x4_Blastplate.mwm</Model>
 			<Components>
 				<Component Subtype="SteelPlate" Count="750" />
        		 	<Component Subtype="MetalGrid" Count="2500" />
