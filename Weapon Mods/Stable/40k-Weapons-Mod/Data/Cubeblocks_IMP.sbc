@@ -77,7 +77,7 @@
         <Component Subtype="LargeTube" Count="120" />
         <Component Subtype="MetalGrid" Count="50" />
         <Component Subtype="Construction" Count="500" />
-        <Component Subtype="SteelPlate" Count="1800" />
+        <Component Subtype="SteelPlate" Count="1850" />
       </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
       <BuildProgressModels>
@@ -121,13 +121,12 @@
       <ModelOffset x="0" y="0" z="0" />
       <Model>Models\Cubes\LanceBattery.mwm</Model>
       <Components>
-        <Component Subtype="SteelPlate" Count="1000" />
+        <Component Subtype="SteelPlate" Count="1500" />
         <Component Subtype="Construction" Count="500" />
-        <Component Subtype="GravityGenerator" Count="20" />
-        <Component Subtype="Computer" Count="300" />
         <Component Subtype="SmallTube" Count="1600" />
         <Component Subtype="Motor" Count="500" />
         <Component Subtype="LargeTube" Count="120" />
+        <Component Subtype="Computer" Count="300" />
         <Component Subtype="MetalGrid" Count="50" />
         <Component Subtype="Construction" Count="500" />
         <Component Subtype="SteelPlate" Count="2500" />

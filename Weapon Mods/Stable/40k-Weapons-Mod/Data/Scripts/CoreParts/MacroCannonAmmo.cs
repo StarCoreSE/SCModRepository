@@ -199,8 +199,8 @@ namespace Scripts
                     MinArmingTime = 0, // In ticks, before the Ammo is allowed to explode, detonate or similar; This affects shrapnel spawning.
                     NoVisuals = false,
                     NoSound = false,
-                    ParticleScale = 3,
-                    CustomParticle = "", // Particle SubtypeID, from your Particle SBC
+                    ParticleScale = 1,
+                    CustomParticle = "Macro_Explosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
