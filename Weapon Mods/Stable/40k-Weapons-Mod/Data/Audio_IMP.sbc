@@ -344,7 +344,7 @@
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>5</DynamicMusicAmount>
-      <Volume>1.5</Volume>
+      <Volume>2</Volume>
       <VolumeVariation>0</VolumeVariation>
       <PitchVariation>15</PitchVariation>
       <!--<DistantSounds>
