@@ -106,9 +106,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
         private void UpdatePower(bool updateReactors = false)
         {
-            var powerGeneration = 0.01f;
-            var powerCapacity = 0.01f;
-            var totalPowerUsage = 0f;
+            float powerGeneration = 0.01f;
+            float powerCapacity = 0.01f;
+            float totalPowerUsage = 0f;
 
             foreach (var arm in Arms)
             {
@@ -117,21 +117,33 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             }
 
             // Math for slider on reactor parts to allow for a power <-> efficiency tradeoff.
-            foreach (var reactor in Reactors)
+            if (updateReactors)
             {
-                totalPowerUsage += reactor?.PowerConsumption ?? 0;
-
-                if (updateReactors)
+                foreach (var reactor in Reactors)
+                {
                     reactor?.UpdatePower(powerGeneration, MegawattsPerFusionPower);
-            }
+                    totalPowerUsage += reactor?.PowerConsumption ?? 0;
+                }
 
-            foreach (var thruster in Thrusters)
-            {
-                totalPowerUsage += thruster?.PowerConsumption ?? 0;
-
-                if (updateReactors)
+                foreach (var thruster in Thrusters)
+                {
                     thruster?.UpdateThrust(powerGeneration, NewtonsPerFusionPower);
+                    totalPowerUsage += thruster?.PowerConsumption ?? 0;
+                }
             }
+            else
+            {
+                foreach (var reactor in Reactors)
+                {
+                    totalPowerUsage += reactor?.PowerConsumption ?? 0;
+                }
+
+                foreach (var thruster in Thrusters)
+                {
+                    totalPowerUsage += thruster?.PowerConsumption ?? 0;
+                }
+            }
+
 
             // Subtract power usage afterwards so that all reactors have the same stats.
             PowerGeneration = powerGeneration;
@@ -140,10 +152,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
             // Update PowerStored
             PowerStored += PowerGeneration;
-            if (PowerStored > PowerCapacity)
-                PowerStored = PowerCapacity;
+            PowerStored = Math.Min(PowerStored, PowerCapacity);
         }
-
         public void UpdateTick()
         {
             UpdatePower();
