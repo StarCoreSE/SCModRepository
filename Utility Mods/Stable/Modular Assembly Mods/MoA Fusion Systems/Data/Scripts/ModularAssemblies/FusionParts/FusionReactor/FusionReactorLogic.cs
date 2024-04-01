@@ -22,12 +22,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     {
         private const float MaxPowerPerReactor = 2000;
 
-        private float BufferPowerGeneration;
         private float BufferReactorOutput;
-        public float MaxPowerConsumption;
 
-        internal S_FusionSystem MemberSystem;
-        public float PowerConsumption;
 
         internal override string BlockSubtype => "Caster_Reactor";
         internal override string ReadableName => "Reactor";
@@ -118,7 +114,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
             // If boost is unsustainable, disable it.
             // If power draw exceeds power available, disable self until available.
-            if (MemberSystem?.PowerStored <= PowerConsumption || !Block.IsWorking)
+            if (MemberSystem?.PowerStored <= PowerConsumption * 120 || !Block.IsWorking)
             {
                 SetPowerBoost(false);
                 PowerConsumption = 0;

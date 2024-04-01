@@ -20,11 +20,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Thrust), false, "Caster_FocusLens")]
     public class FusionThrusterLogic : FusionPart<IMyThrust>
     {
-        private float BufferPowerGeneration;
         private float BufferThrustOutput;
-        public float MaxPowerConsumption;
-        internal S_FusionSystem MemberSystem;
-        public float PowerConsumption;
+
 
         internal override string BlockSubtype => "Caster_FocusLens";
         internal override string ReadableName => "Thruster";
@@ -95,7 +92,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
 
             // If boost is unsustainable, disable it.
             // If power draw exceeds power available, disable self until available.
-            if (MemberSystem?.PowerStored <= PowerConsumption || !Block.IsWorking)
+            if (MemberSystem?.PowerStored <= PowerConsumption * 120 || !Block.IsWorking)
             {
                 SetPowerBoost(false);
                 PowerConsumption = 0;

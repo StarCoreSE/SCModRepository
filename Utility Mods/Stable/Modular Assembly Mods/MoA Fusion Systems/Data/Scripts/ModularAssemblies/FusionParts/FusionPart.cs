@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using BulletXNA.BulletCollision;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.Game.ModAPI.Network;
@@ -40,7 +41,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
         /// </summary>
         internal abstract string ReadableName { get; }
 
-
+        internal S_FusionSystem MemberSystem;
         internal FusionPartSettings Settings = new FusionPartSettings();
         internal T Block;
         internal readonly StringBuilder InfoText = new StringBuilder("Output: 0/0\nInput: 0/0\nEfficiency: N/A");
@@ -48,6 +49,11 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
         public MySync<float, SyncDirection.BothWays> PowerUsageSync;
         public MySync<float, SyncDirection.BothWays> OverridePowerUsageSync;
         public MySync<bool, SyncDirection.BothWays> OverrideEnabled;
+
+        internal float BufferPowerGeneration;
+        public float MaxPowerConsumption;
+
+        public float PowerConsumption;
 
         #region Controls
 
@@ -63,7 +69,12 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
                 boostPowerToggle.Getter = block =>
                     block.GameLogic.GetAs<FusionPart<T>>()?.OverrideEnabled.Value ?? false;
                 boostPowerToggle.Setter = (block, value) =>
-                    block.GameLogic.GetAs<FusionPart<T>>().OverrideEnabled.Value = value;
+                {
+                    var logic = block.GameLogic.GetAs<FusionPart<T>>();
+                    // Only allow value to be set if 2 seconds of power is stored
+                    if (!value || logic.MemberSystem?.PowerStored <= logic.PowerConsumption * 120)
+                        logic.OverrideEnabled.Value = value;
+                };
 
                 boostPowerToggle.OnText = MyStringId.GetOrCompute("On");
                 boostPowerToggle.OffText = MyStringId.GetOrCompute("Off");
