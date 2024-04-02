@@ -416,7 +416,7 @@ Cat_WysemanHA@17;
 				HAS_Esper@625;
 				HAS_Cyclops@350;
 				HAS_Crossfield@250;
-				HAS_Vulcan@500;
+				HAS_Avenger@500;
 				HakkeroProjectileMini@400;
 				HakkeroBeamMini@400; 
 				HAS_Thanatos@350;
