@@ -67,7 +67,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             public Dictionary<string, Dictionary<Vector3I, string[]>> AllowedConnections { get; set; }
 
             /// <summary>
-            ///     The primary block of a PhysicalAssembly. Make sure this is a Assemblycore block.
+            ///     The primary block of a PhysicalAssembly. Make sure this is an AssemblyCore block OR null.
             /// </summary>
             [ProtoMember(4)]
             public string BaseBlock { get; set; }

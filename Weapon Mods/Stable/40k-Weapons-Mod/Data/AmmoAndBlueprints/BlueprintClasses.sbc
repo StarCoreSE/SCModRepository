@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <BlueprintClassEntries>
+	  <Entry Class="EliteConsumables" BlueprintSubtypeId="MacroCannonAmmoMag" />
+	  <Entry Class="Ammo" BlueprintSubtypeId="MacroCannonAmmoMag" />
+
+	  <Entry Class="Ammo" BlueprintSubtypeId="HeavyBolterMagazine" />
+	  <Entry Class="Components" BlueprintSubtypeId="HeavyBolterMagazine" />
+	  
+    <Entry Class="EliteConsumables" BlueprintSubtypeId="BattleCannonMag" />
+    <Entry Class="Ammo" BlueprintSubtypeId="BattleCannonMag" />
+    
+    <Entry Class="EliteConsumables" BlueprintSubtypeId="EarthshakerMag" />
+    <Entry Class="Ammo" BlueprintSubtypeId="EarthshakerMag" />
+  
+    <Entry Class="EliteConsumables" BlueprintSubtypeId="NovaPlas1" />
+    <Entry Class="Ammo" BlueprintSubtypeId="NovaPlas1" />
+  
+    <Entry Class="EliteConsumables" BlueprintSubtypeId="NovaGrav1" />
+    <Entry Class="Ammo" BlueprintSubtypeId="NovaGrav1" />
+  
+  </BlueprintClassEntries>
+</Definitions>

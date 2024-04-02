@@ -1,17 +1,9 @@
-﻿using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
+﻿using System;
 using Sandbox.Common.ObjectBuilders;
 using Sandbox.ModAPI;
-using Sandbox.ModAPI.Interfaces.Terminal;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using VRage.Game.Components;
-using VRage.Game.ModAPI.Network;
 using VRage.ModAPI;
-using VRage.Network;
 using VRage.ObjectBuilders;
-using VRage.Sync;
-using VRage.Utils;
 
 namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     FusionParts.FusionReactor
@@ -19,12 +11,10 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Reactor), false, "Caster_Reactor")]
     public class FusionReactorLogic : FusionPart<IMyReactor>
     {
-        private float BufferPowerGeneration;
-        private float BufferReactorOutput;
-        public float MaxPowerConsumption;
+        private const float MaxPowerPerReactor = 2000;
 
-        internal S_FusionSystem MemberSystem;
-        public float PowerConsumption;
+        private float BufferReactorOutput;
+
 
         internal override string BlockSubtype => "Caster_Reactor";
         internal override string ReadableName => "Reactor";
@@ -34,13 +24,24 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         {
             BufferPowerGeneration = PowerGeneration;
 
-            var reactorConsumptionMultiplier = OverrideEnabled.Value ? OverridePowerUsageSync : PowerUsageSync.Value; // This is ugly, let's make it better.
-            var reactorEfficiencyMultiplier = 1 / (0.5f + reactorConsumptionMultiplier);
-
+            var reactorConsumptionMultiplier =
+                OverrideEnabled.Value
+                    ? OverridePowerUsageSync
+                    : PowerUsageSync.Value; // This is ugly, let's make it better.
             // Power generation consumed (per second)
             var powerConsumption = PowerGeneration * 60 * reactorConsumptionMultiplier;
+
+
+            var reactorEfficiencyMultiplier = 1 / (0.25f + reactorConsumptionMultiplier);
             // Power generated (per second)
             var reactorOutput = reactorEfficiencyMultiplier * powerConsumption * MegawattsPerFusionPower;
+
+            if (reactorOutput > MaxPowerPerReactor)
+            {
+                reactorOutput = MaxPowerPerReactor;
+                powerConsumption = GetConsumptionFromPower(reactorOutput, MegawattsPerFusionPower);
+            }
+
             BufferReactorOutput = reactorOutput;
             MaxPowerConsumption = powerConsumption / 60;
 
@@ -53,6 +54,17 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             // Convert back into power per tick
             SyncMultipliers.ReactorOutput(Block, BufferReactorOutput);
         }
+
+        private float GetConsumptionFromPower(float reactorOutput, float MegawattsPerFusionPower)
+        {
+            return reactorOutput / MegawattsPerFusionPower;
+        }
+
+        //private float GetEfficiencyFromPower(float reactorConsumption)
+        //{
+        //    var a = (1 / (0.5f + reactorConsumptionMultiplier)) * (PowerGeneration * 60 * reactorConsumptionMultiplier);
+        //
+        //}
 
         public void SetPowerBoost(bool value)
         {
@@ -96,7 +108,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
             // If boost is unsustainable, disable it.
             // If power draw exceeds power available, disable self until available.
-            if (MemberSystem?.PowerStored <= PowerConsumption || !Block.IsWorking)
+            if ((OverrideEnabled.Value && MemberSystem?.PowerStored <= PowerConsumption * 120) || !Block.IsWorking)
             {
                 SetPowerBoost(false);
                 PowerConsumption = 0;

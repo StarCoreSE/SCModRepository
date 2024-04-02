@@ -20,7 +20,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
         /// <param name="baseDefs"></param>
         internal static DefinitionContainer GetBaseDefinitions()
         {
-            return new ModularAssemblies.ModularDefinition().Container;
+            return new ModularDefinition().Container;
         }
     }
 }

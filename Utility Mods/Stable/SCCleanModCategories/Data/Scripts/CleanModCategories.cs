@@ -40,6 +40,7 @@ namespace Jakaria
                          definition.Value.Name != "DLCBlocks" &&
                        /*definition.Value.Name != ".SC Tournament Weapons" && */
                          definition.Value.Name != ".Starcore Basic Greebles" &&
+                         definition.Value.Name != "Fusion Systems" &&
                        /*definition.Value.Name != ".SC WIP" && */
                          definition.Value.Name != "[All Access]" &&
                        /*definition.Value.Name != ".Ship Cores" && */
