@@ -440,7 +440,7 @@ namespace ShipPoints
 				HakkeroProjectile@400;
 				HAS_Esper@625;
 				MADAR@0;
-				HAS_Vulcan@1000;
+				HAS_Vulcan@500;
 
 				SC_Coil_Cannon@450;
 				NHI_PD_Turret@90;

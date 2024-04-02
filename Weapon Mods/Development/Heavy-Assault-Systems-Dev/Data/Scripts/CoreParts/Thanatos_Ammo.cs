@@ -93,32 +93,19 @@ namespace Scripts
                     GroupDelay = 0, // Delay between each group.
                 },
             },
-            Pattern = new PatternDef
-            {
-                Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
-                    "",
-                },
-                Mode = Fragment, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
-                TriggerChance = 1f, // This is %
-                Random = false, // This randomizes the number spawned at once, NOT the list order.
-                RandomMin = 1, 
-                RandomMax = 1,
-                SkipParent = false, // Skip the Ammo itself, in the list
-                PatternSteps = 1, // Number of Ammos activated per round, will progress in order and loop. Ignored if Random = true.
-            },
             DamageScales = new DamageScaleDef
             {
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
-                HealthHitModifier = 1, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
+                HealthHitModifier = 40, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = 1, // Voxel damage multiplier; defaults to 1 if zero or less.
                 Characters = -1f, // Character damage multiplier; defaults to 1 if zero or less.
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
                 FallOff = new FallOffDef
                 {
                     Distance = 5000f, // Distance at which damage begins falling off.
-                    MinMultipler = 0.5f, //10,000 max range so 0.8 falloff at 7km turret range //Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
+                    MinMultipler = 0.6f, //10,000 max range so 0.8 falloff at 7km turret range //Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
                 },
                 Grids = new GridSizeDef
                 {
@@ -136,7 +123,7 @@ namespace Scripts
                 {
                     Modifier = 3f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
-                    BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
+                    BypassModifier = -1.3f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {
@@ -308,14 +295,7 @@ namespace Scripts
                     NoTargetApproach = false, // If true approaches can begin prior to the projectile ever having had a target.
                     AltNavigation = false, // If true this will swap the default navigation algorithm from ProNav to ZeroEffort Miss.  Zero effort is more direct/precise but less cinematic 
                 },
-                Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
-                {
-                    DetectRadius = 0,
-                    DeCloakRadius = 0,
-                    FieldTime = 0,
-                    Cloak = false,
-                    Persist = false,
-                },
+
             },
             AmmoGraphics = new GraphicDef
             {
