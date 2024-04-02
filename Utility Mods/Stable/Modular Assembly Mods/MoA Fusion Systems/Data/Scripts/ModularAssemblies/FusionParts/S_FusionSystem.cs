@@ -12,8 +12,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 {
     internal class S_FusionSystem
     {
-        public const float MegawattsPerFusionPower = 50;
-        public const float NewtonsPerFusionPower = 800000;
+        public const float MegawattsPerFusionPower = 85;
+        public const float NewtonsPerFusionPower = 3200000;
 
         public List<S_FusionArm> Arms = new List<S_FusionArm>();
         public int PhysicalAssemblyId;
@@ -58,7 +58,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 {
                     Thrusters.Add(logic);
                     logic.MemberSystem = this;
-                    logic.UpdateThrust(PowerGeneration, MegawattsPerFusionPower);
+                    logic.UpdateThrust(PowerGeneration, NewtonsPerFusionPower);
                 }
             }
 
@@ -87,6 +87,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 logic.MemberSystem = null;
                 Thrusters.Remove(logic);
             }
+
             if (part is IMyReactor)
             {
                 var logic = part.GameLogic.GetAs<FusionReactorLogic>();
@@ -105,9 +106,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
         private void UpdatePower(bool updateReactors = false)
         {
-            float powerGeneration = 0;
-            float powerCapacity = 0;
-            float totalPowerUsage = 0;
+            var powerGeneration = 0.01f;
+            var powerCapacity = 0.01f;
+            var totalPowerUsage = 0f;
 
             foreach (var arm in Arms)
             {
@@ -123,12 +124,13 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 if (updateReactors)
                     reactor?.UpdatePower(powerGeneration, MegawattsPerFusionPower);
             }
+
             foreach (var thruster in Thrusters)
             {
                 totalPowerUsage += thruster?.PowerConsumption ?? 0;
 
                 if (updateReactors)
-                    thruster?.UpdateThrust(powerGeneration, MegawattsPerFusionPower);
+                    thruster?.UpdateThrust(powerGeneration, NewtonsPerFusionPower);
             }
 
             // Subtract power usage afterwards so that all reactors have the same stats.

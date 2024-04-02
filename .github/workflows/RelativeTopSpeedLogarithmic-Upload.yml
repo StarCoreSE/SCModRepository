@@ -1,0 +1,23 @@
+name: "Upload RTS Logarithmic Angular"
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "Utility Mods/Stable/SC_RelativeTopSpeed_Logarithmic_Angular/**"
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: AnarkisGaming/workshop@v1
+        with:
+          appID: 244850
+          publishedFileID: 3206802244
+          path: "Utility Mods/Stable/SC_RelativeTopSpeed_Logarithmic_Angular"
+          changelog: ${{ github.event.head_commit.message }}              
+        env:
+          STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}
+          STEAM_PASSWORD: ${{ secrets.password }}

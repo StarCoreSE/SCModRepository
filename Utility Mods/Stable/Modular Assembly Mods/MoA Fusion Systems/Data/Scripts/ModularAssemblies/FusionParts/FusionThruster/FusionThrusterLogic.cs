@@ -1,30 +1,17 @@
-﻿using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
+﻿using System;
 using Sandbox.Common.ObjectBuilders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Sandbox.ModAPI;
 using VRage.Game.Components;
-using VRage.Game.ModAPI.Network;
-using VRage.Network;
-using VRage.Sync;
-using Sandbox.ModAPI.Interfaces.Terminal;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
-using VRage.Utils;
 
 namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionThruster
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Thrust), false, "Caster_FocusLens")]
     public class FusionThrusterLogic : FusionPart<IMyThrust>
     {
-        private float BufferPowerGeneration;
         private float BufferThrustOutput;
-        public float MaxPowerConsumption;
-        internal S_FusionSystem MemberSystem;
-        public float PowerConsumption;
+
 
         internal override string BlockSubtype => "Caster_FocusLens";
         internal override string ReadableName => "Thruster";
@@ -33,7 +20,10 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
         {
             BufferPowerGeneration = PowerGeneration;
 
-            var consumptionMultiplier = OverrideEnabled.Value ? OverridePowerUsageSync : PowerUsageSync.Value; // This is ugly, let's make it better.
+            var consumptionMultiplier =
+                OverrideEnabled.Value
+                    ? OverridePowerUsageSync
+                    : PowerUsageSync.Value; // This is ugly, let's make it better.
             var efficiencyMultiplier = 1 / (0.5f + consumptionMultiplier);
 
             // Power generation consumed (per second)
@@ -59,7 +49,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
                 return;
 
             OverrideEnabled.Value = value;
-            UpdateThrust(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+            UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
         }
 
         #region Base Methods
@@ -74,19 +64,19 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
             PowerUsageSync.ValueChanged += value =>
             {
                 if (!OverrideEnabled.Value)
-                    UpdateThrust(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+                    UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
             };
 
             // Trigger power update is only needed when OverrideEnabled is true
             OverridePowerUsageSync.ValueChanged += value =>
             {
                 if (OverrideEnabled.Value)
-                    UpdateThrust(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+                    UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
             };
 
             // Trigger power update if boostEnabled is changed
             OverrideEnabled.ValueChanged += value =>
-                UpdateThrust(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+                UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
         }
 
         public override void UpdateAfterSimulation()
@@ -95,7 +85,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
 
             // If boost is unsustainable, disable it.
             // If power draw exceeds power available, disable self until available.
-            if (MemberSystem?.PowerStored <= PowerConsumption || !Block.IsWorking)
+            if ((OverrideEnabled.Value && MemberSystem?.PowerStored <= PowerConsumption * 120) || !Block.IsWorking)
             {
                 SetPowerBoost(false);
                 PowerConsumption = 0;

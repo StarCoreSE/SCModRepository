@@ -110,6 +110,7 @@ namespace ShipPoints
 				MA_Tiger@150;
 				MA_Crouching_Tiger@150;
 
+				S_Armored_Laser_Block@120;
                 S_Chem_Laser_Block@120;
 				Counter_Battery@250;
 				SolHyp_ArcStrike_Torp@375;
@@ -330,7 +331,7 @@ namespace ShipPoints
 				LargeBlockSmallGeneratorWarfare2@17;
 				LargeBlockBatteryBlockWarfare2@14;
 				LargeBlockLargeGeneratorWarfare2@300;
-				LargeTurretControlBlock@200;
+				LargeTurretControlBlock@10;
 				ARYXRailgunTurret@350;
 				SC_AR_Deimos@400;
 				MCRNRailgunLB@1250;
@@ -487,7 +488,14 @@ namespace ShipPoints
 				TaiidanSingleHangar@100;
 
 				MA_Guardian@770; 
-				PM_LG_BLASTPLATE_BLASTPLATE@100; 
+				GIGA_BLASTPLATE@1000;
+				REINFORCED_BLASTPLATE@100;
+				ACTIVE_BLASTPLATE@100;
+				3x3_Blastplate_C@25;
+				3x3_Blastplate_B@25;
+				3x3_Blastplate_A@25;
+				2x4_Blastplate@25;
+				
 
 				381mmDualR@250;
                 381mmDualNR@250;
@@ -556,7 +564,7 @@ namespace ShipPoints
 				SmallPathRecorderBlock@5;
 				HAS_Cyclops@350;
 				HAS_Crossfield@250;
-				AMP_HealGenerator@400;
+				AMP_HealGenerator@200;
 				CapacitorLarge@400;
 				SC_Radome@10; 
 				 

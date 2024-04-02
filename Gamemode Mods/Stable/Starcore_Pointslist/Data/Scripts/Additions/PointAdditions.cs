@@ -505,6 +505,8 @@ Cat_Darth40kWeapons@20;
 				LightParticleWhip@200;
 				ParticleWhip@400;
 				NovaCannon@800;
+				MacroCannon@200;
+				LanceBattery@400;
 
 				
 				65_Launcher_FixedMount@350;
@@ -518,7 +520,7 @@ Cat_StarcoreUlitity@21;
 					LargeProgrammableBlockReskin@100;
 					6SidePB@100;
 					SmallProgrammableBlock@50;
-				LargeTurretControlBlock@200;
+				LargeTurretControlBlock@10;
 				EventControllerLarge@5;
 					EventControllerSmall@5;				
 				LargeFlightMovement@5;
@@ -642,7 +644,11 @@ Cat_UnusedOrOutated_Subtypes@23;
 				Type17_BeamLance@100000; 
 
 
-
+				Caster_Accelerator_0@5;
+				Caster_Accelerator_90@10;
+				Caster_Feeder@10;
+				Caster_FocusLens@50;
+				Caster_Reactor@250;
             "));
         }
     }
