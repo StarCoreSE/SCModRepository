@@ -451,7 +451,7 @@
 					<MinAllowed>0.01</MinAllowed>
 				</DynamicMode>
 			</VoxelPlacement>
-			<BlockPairName>K_SA_Gauss_APC</BlockPairName>
+			<BlockPairName>Nariman_Dart_Turret</BlockPairName>
 			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
 			<EdgeType>Light</EdgeType>
@@ -523,7 +523,7 @@
      <BuildProgressModels>
 				<Model BuildPercentUpperBound="1.0" File="Models\Starcore\muzzled_coil_odin_BS1_LOD1.mwm"/>
 			</BuildProgressModels>
-      <BlockPairName>SolHyp_MAC_Block</BlockPairName>
+      <BlockPairName>SolHyp_Magnetic_Coilgun</BlockPairName>
        <MirroringY>Z</MirroringY>
      <MirroringZ>Y</MirroringZ>
 	   <EdgeType>Light</EdgeType>
