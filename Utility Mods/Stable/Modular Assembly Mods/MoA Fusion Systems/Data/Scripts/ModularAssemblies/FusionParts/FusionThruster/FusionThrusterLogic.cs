@@ -24,7 +24,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
                 OverrideEnabled.Value
                     ? OverridePowerUsageSync
                     : PowerUsageSync.Value; // This is ugly, let's make it better.
-            var efficiencyMultiplier = 1 / (0.5f + consumptionMultiplier);
+            var efficiencyMultiplier = 1 / (0.25f + consumptionMultiplier);
 
             // Power generation consumed (per second)
             var powerConsumption = PowerGeneration * 60 * consumptionMultiplier;
