@@ -37,7 +37,7 @@ namespace Scripts
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.5f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 16500f, // Direct damage; one steel plate is worth 100.
-            Mass = 375000f, // In kilograms; how much force the impact will apply to the target.
+            Mass = 375f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 25000f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
@@ -113,7 +113,7 @@ namespace Scripts
                 },
                 Grids = new GridSizeDef
                 {
-                    Large = 0.001f, // Multiplier for damage against large grids.
+                    Large = -1f, // Multiplier for damage against large grids.
                     Small = -1f, // Multiplier for damage against small grids.
                 },
                 Armor = new ArmorDef
