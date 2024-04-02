@@ -550,36 +550,6 @@ namespace ShipPoints
 				MA_Laser_Armor14@1;
 				MA_Laser_Armor15@1;
 				MA_Laser_Armor16@1;
-				
-				381mmDualR@250;
-                381mmDualNR@250;
-                380mmMLE1935@400;
-                15cmSKC28R@175;
-                15cmSKC28NR@175;
-                128mmL45@200;
-                128mmSKC34@250;
-                127mmMk12@175;
-                127mmMk24@175;
-                127mmMk32@250;
-                127mmMk56@350;
-                105mmTwin@100;
-                PomPomMain@75;
-                150mmCasemate@100;
-                150mmCasemateTwin@125;
-                BoforTwinRemodel@50;
-                BoforSingleRemodel@60;
-                QuadBofor@75;
-                TorpTestBuidl@350;
-                16InchTriple@400;
-                15cmTbtsKC36T@150;
-                15cmTbtsKC36@150;
-                203mmTwin@165;
-                203mmQuad@325;
-                TorpBarbette@500;
-                406alternate@400;
-                Mk25Rangefinder@10;
-                6InchTriple@200;
-				20InchTwin@600;
 
 
 
