@@ -3,14 +3,14 @@
   <CubeBlocks>
 
     <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
-      <!-- Twin Barrel Shotgun -->
+      <!-- Minigun? nah. Gigagun -->
       <Id>
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Vulcan</SubtypeId>
       </Id>
-      <DisplayName>[HAS] Vulcan</DisplayName>
+      <DisplayName>RAC-5 Avenger</DisplayName>
       <Description>
-        6km Range. Minigun.
+        GAU Style Cannon
       </Description>
       <Icon>Textures\GUI\Icons\Vulcan.png</Icon>
       <CubeSize>Large</CubeSize>
@@ -77,13 +77,12 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Crossfield</SubtypeId>
       </Id>
-      <DisplayName>[HAS] Crossfield</DisplayName>
+      <DisplayName>Crossfield</DisplayName>
       <Description>
         [2km max range]
         [Energy damage]
         [Hitscan]
         [Draws ~200MW]
-        [-5 degrees of depression and 30 degrees of elevation]
         Multitargeting Suite of turreted PD
       </Description>
       <Icon>Textures\Models\Crossfield Base.dds</Icon>
@@ -145,7 +144,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Thanatos</SubtypeId>
       </Id>
-      <DisplayName>[HAS] Thanatos</DisplayName>
+      <DisplayName>Thanatos</DisplayName>
       <Description>
         Heavy Gimbaled Cannon
         Heavy Anti Armor
@@ -215,7 +214,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Mammon</SubtypeId>
       </Id>
-      <DisplayName>[HAS] Mammon</DisplayName>
+      <DisplayName>Mammon</DisplayName>
       <Description>
         Quad Barreled Beam Turret
         Heavy Anti Armor Damage
@@ -357,7 +356,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Nyx</SubtypeId>
       </Id>
-      <DisplayName>[HAS] Nyx</DisplayName>
+      <DisplayName>Nyx</DisplayName>
       <Description>
         Dual Barreled Beam Turret
         Heavy Anti Armor Damage
@@ -428,7 +427,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Esper</SubtypeId>
       </Id>
-      <DisplayName>[HAS] Tigtone</DisplayName>
+      <DisplayName>Tigtone</DisplayName>
       <Description>
         6km Range. Rotary Triple-Barreled Kinetic Shotgun.
       </Description>
@@ -491,7 +490,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Cyclops</SubtypeId>
       </Id>
-      <DisplayName>[HAS] Cyclops</DisplayName>
+      <DisplayName>Cyclops</DisplayName>
       <Description>
         Heavy Gimbaled Cannon
         Heavy Anti Armor

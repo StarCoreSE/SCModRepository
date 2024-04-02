@@ -3,14 +3,14 @@
   <CubeBlocks>
 
     <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
-      <!-- Twin Barrel Shotgun -->
+      <!-- Minigun? nah. Gigagun -->
       <Id>
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Vulcan</SubtypeId>
       </Id>
-      <DisplayName>Vulcan</DisplayName>
+      <DisplayName>RAC-5 Avenger</DisplayName>
       <Description>
-        6km Range. Minigun.
+        GAU Style Cannon
       </Description>
       <Icon>Textures\GUI\Icons\Vulcan.png</Icon>
       <CubeSize>Large</CubeSize>

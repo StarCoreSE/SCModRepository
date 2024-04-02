@@ -35,14 +35,14 @@ namespace Scripts
             AmmoMagazine = "NyxAmmoMag", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Nyx Beam", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
-            EnergyCost = 0.175f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
+            EnergyCost = 0.125f, //100MW Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 1600f, // Direct damage; one steel plate is worth 100.
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
-            EnergyMagazineSize = 120, // For energy weapons, how many shots to fire before reloading.
+            EnergyMagazineSize = 0, // For energy weapons, how many shots to fire before reloading.
             IgnoreWater = false, // Whether the projectile should be able to penetrate water when using WaterMod.
             IgnoreVoxels = false, // Whether the projectile should be able to penetrate voxels.
             Synchronize = false, // For future use
@@ -60,8 +60,8 @@ namespace Scripts
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
                 AmmoRound = "", // AmmoRound field of the ammo to spawn.
-                Fragments = 100, // Number of projectiles to spawn.
-                Degrees = 15, // Cone in which to randomize direction of spawned projectiles.
+                Fragments = 0, // Number of projectiles to spawn.
+                Degrees = 5, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = false, // fragments will not inherit velocity from parent.
                 Offset = 0f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards), value is read from parent ammo type.
@@ -107,8 +107,8 @@ namespace Scripts
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
                 FallOff = new FallOffDef
                 {
-                    Distance = 4000f, // Distance at which damage begins falling off.
-                    MinMultipler = 1f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
+                    Distance = 3000f, // Distance at which damage begins falling off.
+                    MinMultipler = 0.5f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
                 },
                 Grids = new GridSizeDef
                 {
@@ -117,14 +117,14 @@ namespace Scripts
                 },
                 Armor = new ArmorDef
                 {
-                    Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
-                    Light = 1f, // Multiplier for damage against light armor.
-                    Heavy = 2f, // Multiplier for damage against heavy armor.
-                    NonArmor = 0.33f, // Multiplier for damage against every else.
+                    Armor = 2f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
+                    Light = -1f, // Multiplier for damage against light armor.
+                    Heavy = -1f, // Multiplier for damage against heavy armor.
+                    NonArmor = 0.25f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 5f, // Multiplier for damage against shields.
+                    Modifier = 3f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -2f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -174,8 +174,8 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = false,
-                    Radius = 5f, // Radius of AOE effect, in meters.
-                    Damage = 40000f,
+                    Radius = 1f, // Radius of AOE effect, in meters.
+                    Damage = 0f,
                     Depth = 1f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
                     Falloff = Exponential, //.NoFalloff applies the same damage to all blocks in radius
