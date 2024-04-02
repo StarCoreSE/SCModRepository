@@ -32,7 +32,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             var powerConsumption = PowerGeneration * 60 * reactorConsumptionMultiplier;
 
 
-            var reactorEfficiencyMultiplier = 1 / (0.5f + reactorConsumptionMultiplier);
+            var reactorEfficiencyMultiplier = 1 / (0.25f + reactorConsumptionMultiplier);
             // Power generated (per second)
             var reactorOutput = reactorEfficiencyMultiplier * powerConsumption * MegawattsPerFusionPower;
 
