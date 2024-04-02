@@ -48,8 +48,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
                 Material = MyStringId.GetOrCompute("ctf_score_background"),
                 Origin = new Vector2D(-0.91, 0),
                 Rotation = (float)Math.PI / 2,
-                Scale = 0.4f,
-                Height = 0.5f,
+                Height = 0.5f * 0.4f,
                 Visible = true,
                 Options = Options.HideHud,
                 Blend = MyBillboard.BlendTypeEnum.Standard,
@@ -94,8 +93,10 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
                 totalFusionStored += system.Value.PowerStored;
             }
 
-            _storageForeground.Height = totalFusionStored / totalFusionCapacity * 0.55f;
+            _storageForeground.Width = totalFusionStored / totalFusionCapacity * 0.4f;
+            _storageForeground.Origin = new Vector2D(_storageForeground.Origin.X, _storageForeground.Width * 0.75); // THIS SHOULD BE RICHHUD!
             MyAPIGateway.Utilities.ShowNotification(Math.Round(totalFusionStored/totalFusionCapacity * 100, 1) + "%", 1000/60);
+            MyAPIGateway.Utilities.ShowNotification("" + _storageForeground.Origin, 1000/60);
         }
     }
 }
