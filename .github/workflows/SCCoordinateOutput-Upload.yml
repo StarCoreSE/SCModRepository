@@ -2,6 +2,8 @@ name: "Upload SCCoordinateOutput"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Utility Mods/Stable/SCCoordinateOutput/**"
 

@@ -8,7 +8,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>ERPPC</SubtypeId>
 			</Id>
-			<DisplayName>ER PPC</DisplayName>
+			<DisplayName>[BTI] ER PPC</DisplayName>
 
       <Description>
         [5km Range]

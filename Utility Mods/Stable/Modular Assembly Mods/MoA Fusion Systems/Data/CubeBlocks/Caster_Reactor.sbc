@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ReactorDefinition">
+			<Id>
+				<TypeId>Reactor</TypeId>
+				<SubtypeId>Caster_Reactor</SubtypeId>
+			</Id>
+			<DisplayName>Fusion Reactor</DisplayName>
+			<Description>
+				Generates electricity from [Fusion Power].
+				Produces more electricity with a higher input ratio, but becomes less efficient.
+			</Description>
+			<Icon>Textures\GUI\Icons\Cubes\Caster_Reactor.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="3" z="3"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Caster_Reactor.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="800" />
+				<Component Subtype="Construction" Count="70" />
+				<Component Subtype="MetalGrid" Count="40" />
+				<Component Subtype="LargeTube" Count="40" />
+				<Component Subtype="Superconductor" Count="100" />
+				<Component Subtype="Reactor" Count="2000" />
+				<Component Subtype="Motor" Count="20" />
+				<Component Subtype="Computer" Count="75" />
+				<Component Subtype="SteelPlate" Count="200" />
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0" />
+			<BlockPairName>Caster_Reactor</BlockPairName>
+			<MaxPowerOutput>0.001</MaxPowerOutput>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+			</MountPoints>
+			<IsAirTight>true</IsAirTight>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

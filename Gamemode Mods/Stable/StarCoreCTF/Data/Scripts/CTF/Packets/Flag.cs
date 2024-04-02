@@ -10,6 +10,7 @@ using static Klime.CTF.CTF;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRageMath;
+using VRage.Utils;
 
 namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
 {
@@ -60,6 +61,12 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
         [ProtoMember(13)]
         public float regen_modifier = 0.2f;
 
+        /// <summary>
+        /// Counter (in ticks) representing time since a recapture was started.
+        /// </summary>
+        [ProtoMember(14)]
+        public ushort RecaptureTime = 0;
+
         public float lastTickAcceleration;
 
         [ProtoIgnore]
@@ -67,9 +74,6 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
 
         [ProtoIgnore]
         public MatrixD attachedLocalMatrix = MatrixD.Identity;
-
-        [ProtoIgnore]
-        public Dictionary<long, int> PlayerReturnTimes = new Dictionary<long, int>();
 
         public Flag()
         {
@@ -169,6 +173,7 @@ namespace Jnick_SCModRepository.StarCoreCTF.Data.Scripts.CTF
             this.flag_type = incoming_flag.flag_type;
             this.grip_strength = incoming_flag.grip_strength;
             this.regen_modifier = incoming_flag.regen_modifier;
+            this.RecaptureTime = incoming_flag.RecaptureTime;
         }
     }
 }

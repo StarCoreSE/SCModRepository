@@ -411,7 +411,7 @@
       </Id>
       <Category>WEP_SHIP</Category>
       <MaxDistance>900</MaxDistance>
-      <Volume>2</Volume>
+      <Volume>1</Volume>
 	  <DistantSounds>
         <DistantSound DistanceCrossfade="10" Distance="400" Sound="15CmFireDist" />
       </DistantSounds>
@@ -436,7 +436,7 @@
       </Id>
       <Category>WEP_SHIP</Category>
       <MaxDistance>900</MaxDistance>
-      <Volume>1.5</Volume>
+      <Volume>1</Volume>
 	  <SoundLimit>10</SoundLimit>
 	  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>5</DynamicMusicAmount>

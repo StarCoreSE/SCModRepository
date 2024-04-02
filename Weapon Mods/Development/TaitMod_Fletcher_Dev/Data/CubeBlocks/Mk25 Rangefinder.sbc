@@ -6,12 +6,12 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>Mk25Rangefinder</SubtypeId>
 			</Id>
-			<DisplayName>Mk25 Rangefinder</DisplayName>
+			<DisplayName>[FAS] Mk25 Rangefinder</DisplayName>
 			<Description>
 				Mark 25 Rangefinder
 				Can be used for camera targetting
 				Also extends lock range to 15km
-				50BP
+				10BP
 			</Description>
 			<Icon>Textures\GUI\Icons\Rangefinder.dds</Icon>
 			<CubeSize>Large</CubeSize>

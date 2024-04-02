@@ -2,6 +2,8 @@ name: "Upload Heavy-Assault-Systems-Dev"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Weapon Mods/Development/Heavy-Assault-Systems-Dev/**"
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ReactorDefinition">
+			<Id>
+				<TypeId>Reactor</TypeId>
+				<SubtypeId>Caster_Controller</SubtypeId>
+			</Id>
+			<DisplayName>{LOC:DisplayName_Caster_Controller}</DisplayName>
+			<Description>TEMPORARY BLOCK</Description>
+			<Icon>Textures\GUI\Icons\Cubes\Caster_Controller.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Caster_Controller.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="10"/>
+				<Component Subtype="Computer" Count="10"/>
+			</Components>
+			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<BlockPairName>Caster_Controller</BlockPairName>
+			<MaxPowerOutput>0.001</MaxPowerOutput>
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
+			</MountPoints>
+			<MirroringZ>Y</MirroringZ>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

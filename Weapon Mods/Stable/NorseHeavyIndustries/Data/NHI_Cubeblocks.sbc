@@ -11,7 +11,7 @@
 			 <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>NHI_PD_Turret</SubtypeId>
      </Id>
-     <DisplayName>'Heimdallr' Point-Defense Cannon</DisplayName>
+     <DisplayName>[NHI] 'Heimdallr' Point-Defense Cannon</DisplayName>
 	   <Description>
        The 'Heimdallr' is a 20mm Point-Defense Cannon with a Mid-Tier Range of 3000 Meters. Most Effective against Missiles, Rockets, and other Similar Guided Munitions. Also Decently Effective against Small Grids.
 	   </Description>
@@ -60,7 +60,7 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>NHI_PD_Turret_Half</SubtypeId>
      </Id>
-     <DisplayName>'Heimdallr' Point-Defense Cannon Half Block</DisplayName>
+     <DisplayName>[NHI] 'Heimdallr' Point-Defense Cannon Half Block</DisplayName>
      <Description>
        The 'Heimdallr' is a 20mm Point-Defense Cannon with a Mid-Tier Range of 3000 Meters. Most Effective against Missiles, Rockets, and other Similar Guided Munitions. Also Decently Effective against Small Grids.
      </Description>
@@ -109,7 +109,7 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>NHI_PD_Turret_Half_Slope_Top</SubtypeId>
      </Id>
-     <DisplayName>'Heimdallr' Point-Defense Cannon 1x2 Slope Top</DisplayName>
+     <DisplayName>[NHI] 'Heimdallr' Point-Defense Cannon 1x2 Slope Top</DisplayName>
      <Description>
        The 'Heimdallr' is a 20mm Point-Defense Cannon with a Mid-Tier Range of 3000 Meters. Most Effective against Missiles, Rockets, and other Similar Guided Munitions. Also Decently Effective against Small Grids.
      </Description>
@@ -158,7 +158,7 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>NHI_PD_Turret_Half_Slope_Tip</SubtypeId>
      </Id>
-     <DisplayName>'Heimdallr' Point-Defense Cannon 1x2 Slope Tip</DisplayName>
+     <DisplayName>[NHI] 'Heimdallr' Point-Defense Cannon 1x2 Slope Tip</DisplayName>
      <Description>
        The 'Heimdallr' is a 20mm Point-Defense Cannon with a Mid-Tier Range of 3000 Meters. Most Effective against Missiles, Rockets, and other Similar Guided Munitions. Also Decently Effective against Small Grids.
      </Description>
@@ -207,7 +207,7 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>NHI_PD_Turret_45_Slope</SubtypeId>
      </Id>
-     <DisplayName>'Heimdallr' Point-Defense Cannon 45 Slope</DisplayName>
+     <DisplayName>[NHI] 'Heimdallr' Point-Defense Cannon 45 Slope</DisplayName>
      <Description>
        The 'Heimdallr' is a 20mm Point-Defense Cannon with a Mid-Tier Range of 3000 Meters. Most Effective against Missiles, Rockets, and other Similar Guided Munitions. Also Decently Effective against Small Grids.
      </Description>
@@ -256,7 +256,7 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>NHI_Light_Autocannon_Turret</SubtypeId>
      </Id>
-     <DisplayName>'Vanir' Light Autocannon</DisplayName>
+     <DisplayName>[NHI] 'Vanir' Light Autocannon</DisplayName>
      <Description>
 Light Autocannon that fires an APHE Round.
 [Range: 3500]
@@ -307,7 +307,7 @@ Light Autocannon that fires an APHE Round.
 			 <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>NHI_Autocannon_Turret</SubtypeId>
      </Id>
-     <DisplayName>'Aesir' Autocannon</DisplayName>
+     <DisplayName>[NHI] 'Aesir' Autocannon</DisplayName>
 	   <Description>
 A General Purpose Autocannon. Fires an APHE Shell with Generalized Damage Capabilities.
 [Range: 5000]
@@ -360,7 +360,7 @@ A General Purpose Autocannon. Fires an APHE Shell with Generalized Damage Capabi
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>NHI_Gatling_Laser_Turret</SubtypeId>
      </Id>
-     <DisplayName>'Surtr' Rotary Laser Cannon</DisplayName>
+     <DisplayName>[NHI] 'Surtr' Rotary Laser Cannon</DisplayName>
      <Description>
 Turreted Rotary Laser Cannon. Fires a Laser Pulse that Excels at Light Armor and Component Damage.
 [Range: 3500]
@@ -425,7 +425,7 @@ Turreted Rotary Laser Cannon. Fires a Laser Pulse that Excels at Light Armor and
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>NHI_Light_Railgun_Turret</SubtypeId>
      </Id>
-     <DisplayName>'Skadi' Light Railgun</DisplayName>
+     <DisplayName>[NHI] 'Skadi' Light Railgun</DisplayName>
      <Description>
 Light Railgun Turret that fires a 3 Slug Burst
 [Range: 6000]
@@ -534,7 +534,7 @@ Heavy Railgun Turret that fires a single slug every 10 Seconds
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>NHI_Heavy_Gun_Turret</SubtypeId>
      </Id>
-     <DisplayName>27-Inch 'Gugnir' Heavy Gun Turret</DisplayName>
+     <DisplayName>[NHI] 27-Inch 'Gugnir' Heavy Gun Turret</DisplayName>
      <Description>
 27-Inch Heavy Gun Turret that fires a Canister Shot Shell
 [Range: 6000]
@@ -586,7 +586,7 @@ Heavy Railgun Turret that fires a single slug every 10 Seconds
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>NHI_Mk3_Cannon_Turret</SubtypeId>
      </Id>
-     <DisplayName>Mk3 Battleship Cannon</DisplayName>
+     <DisplayName>[NHI] Mk3 Battleship Cannon</DisplayName>
      <Description>
 A Heavy Battleship Cannon, Can fire either an HE Shell or Canister Shot
 [Range: 7000]
@@ -654,7 +654,7 @@ A Heavy Battleship Cannon, Can fire either an HE Shell or Canister Shot
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>NHI_Mk3_Cannon_Surface_Turret</SubtypeId>
      </Id>
-     <DisplayName>Mk3 Battleship Cannon</DisplayName>
+     <DisplayName>[NHI] Mk3 Battleship Cannon</DisplayName>
      <Description>
 A Heavy Battleship Cannon, Can fire either an HE Shell or Canister Shot
 [Range: 7000]
@@ -723,7 +723,7 @@ A Heavy Battleship Cannon, Can fire either an HE Shell or Canister Shot
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>NHI_Mk2_Cannon_Turret</SubtypeId>
      </Id>
-     <DisplayName>Mk2 Battleship Cannon</DisplayName>
+     <DisplayName>[NHI] Mk2 Battleship Cannon</DisplayName>
      <Description>
 A Heavy Battleship Cannon, Fires an HE Shell
 [Range: 6000]
@@ -792,7 +792,7 @@ A Heavy Battleship Cannon, Fires an HE Shell
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>NHI_Mk2_Cannon_Surface_Turret</SubtypeId>
      </Id>
-     <DisplayName>Mk2 Battleship Cannon</DisplayName>
+     <DisplayName>[NHI] Mk2 Battleship Cannon</DisplayName>
      <Description>
 A Heavy Battleship Cannon, Fires an HE Shell
 [Range: 6000]
@@ -861,7 +861,7 @@ A Heavy Battleship Cannon, Fires an HE Shell
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>NHI_Mk1_Cannon_Turret</SubtypeId>
      </Id>
-     <DisplayName>Mk1 Battleship Cannon</DisplayName>
+     <DisplayName>[NHI] Mk1 Battleship Cannon</DisplayName>
      <Description>
 A Heavy Battleship Cannon, Fires an HE Shell
 [Range: 5000]
@@ -913,7 +913,7 @@ A Heavy Battleship Cannon, Fires an HE Shell
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>NHI_Mk1_Cannon_Surface_Turret</SubtypeId>
      </Id>
-     <DisplayName>Mk1 Battleship Cannon</DisplayName>
+     <DisplayName>[NHI] Mk1 Battleship Cannon</DisplayName>
      <Description>
 A Heavy Battleship Cannon, Fires an HE Shell
 [Range: 5000]
@@ -1178,7 +1178,7 @@ A Heavy Battleship Cannon, Fires an HE Shell
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>NHI_Fixed_Autocannon</SubtypeId>
      </Id>
-     <DisplayName>'Fenrir' Fixed Autocannon</DisplayName>
+     <DisplayName>[NHI] 'Fenrir' Fixed Autocannon</DisplayName>
      <Description>
 Fixed Rotary Autocannon, Fires either HE or AP Rounds, which prioritise either Component or Armor Damage Respectively.
 [Range: 3500]
@@ -1282,7 +1282,7 @@ Cheaper and Smaller Version of the Fenrir, with a Burst Fire Pattern. Unlike the
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>NHI_Fixed_Gatling_Laser</SubtypeId>
      </Id>
-     <DisplayName>'Jotunn' Fixed Gatling Laser</DisplayName>
+     <DisplayName>[NHI] 'Jotunn' Fixed Gatling Laser</DisplayName>
   <Description>
 Fixed Gatling Laser. Can fire either a Laser Pulse, or a Shield Healing Pulse
 [Range: 3500/2000]
@@ -1829,7 +1829,7 @@ Lacks the Ability to Heal Shields and and Must Completely cool down after reachi
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>NHI_Kinetic_Cannon_Turret</SubtypeId>
      </Id>
-     <DisplayName>'Hurricane' Naval Gun</DisplayName>
+     <DisplayName>[NHI] 'Hurricane' Naval Gun</DisplayName>
      <Description>
        A Heavy Naval Cannon, Fires an APCBC Shell
        [Range: 5000]

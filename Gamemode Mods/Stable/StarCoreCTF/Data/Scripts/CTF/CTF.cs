@@ -26,6 +26,23 @@ namespace Klime.CTF
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     public class CTF : MySessionComponentBase
     {
+        #region Config
+
+        const int FlagRecaptureTimeTicks = 60;
+        Vector3D gamecenter = Vector3D.Zero;
+        bool use_game_radius = false;
+        double radius = 5000;
+        int max_caps = 3;
+        bool pickup_in_cockpit = false;
+        bool drop_in_cockpit = false;
+        DropType drop_type = DropType.Ground;
+        int drop_reset_time = 300;
+        double flagPickupRadius = 500;
+
+        #endregion
+
+
+
         private static readonly StringBuilder GripBracketConst = new StringBuilder("[       ]");
         private static readonly StringBuilder DMGResistConst = new StringBuilder("RESIST+");
 
@@ -93,7 +110,7 @@ namespace Klime.CTF
             FlagCaptured,
             FlagDropped,
             FlagReset,
-            FlagTaken
+            FlagTaken,
         }
 
         public enum BackgroundType
@@ -119,17 +136,6 @@ namespace Klime.CTF
         MyPlanet reuse_planet;
         List<MyEntity> reuse_Entities = new List<MyEntity>();
         EventInfo reuse_event;
-
-        //Config
-        Vector3D gamecenter = Vector3D.Zero;
-        bool use_game_radius = false;
-        double radius = 5000;
-        int max_caps = 3;
-        bool pickup_in_cockpit = false;
-        bool drop_in_cockpit = false;
-        DropType drop_type = DropType.Ground;
-        int drop_reset_time = 300;
-        double flagPickupRadius = 500;
 
         public class BackgroundUIElement
         {
@@ -362,7 +368,8 @@ namespace Klime.CTF
             }
             catch (Exception e)
             {
-                MyVisualScriptLogicProvider.SendChatMessageColored("Incorrect or missing CTF config. Blank config generated\n" + e.Message, Color.Orange, "Server");
+                MyVisualScriptLogicProvider.SendChatMessageColored("Incorrect or missing CTF config. Blank config generated\n" + e, Color.Orange, "Server");
+                MyLog.Default.WriteLineAndConsole("Incorrect or missing CTF config. Blank config generated\n" + e);
                 CreateBlankFile();
                 rdy = false;
             }
@@ -884,166 +891,7 @@ namespace Klime.CTF
 
                                 }
 
-                                if (subflag.state == FlagState.Dropped)
-                                {
-                                    subflag.grip_strength = 100;
-
-                                    ShowANotificationPlease($"Flag state: {subflag.state}");
-                                    ShowANotificationPlease($"Current drop life: {subflag.current_drop_life}");
-                                    ShowANotificationPlease($"Drop reset time: {drop_reset_time}");
-
-                                    if (subflag.current_drop_life >= drop_reset_time)
-                                    {
-                                        ShowANotificationPlease("flag home 4");
-                                        ResetFlag(subflag);
-                                    }
-                                    else
-                                    {
-                                        switch (drop_type)
-                                        {
-                                            case DropType.Instant:
-                                                ShowANotificationPlease("flag home 5");
-                                                ResetFlag(subflag);
-                                                break;
-                                            case DropType.Ground:
-                                                reuse_planet = MyGamePruningStructure.GetClosestPlanet(subflag.flag_entity.WorldMatrix.Translation);
-
-                                                if (reuse_planet != null)
-                                                {
-                                                    reuse_matrix = subflag.flag_entity.WorldMatrix;
-                                                    reuse_matrix.Translation = reuse_planet.GetClosestSurfacePointGlobal(subflag.flag_entity.WorldMatrix.Translation);
-                                                    subflag.flag_entity.WorldMatrix = reuse_matrix;
-                                                }
-                                                else
-                                                {
-                                                    drop_type = DropType.Floating;
-                                                }
-                                                break;
-                                            case DropType.Attached:
-                                                if (subflag.attachedGrid == null && subflag.current_drop_life == 0)
-                                                {
-                                                    float interf = 0f;
-                                                    var gravityDir = Vector3D.Normalize(MyAPIGateway.Physics.CalculateNaturalGravityAt(subflag.flag_entity.WorldMatrix.Translation, out interf));
-                                                    var start = subflag.flag_entity.WorldMatrix.Translation;
-                                                    var end = start + gravityDir * 5;
-                                                    List<IHitInfo> hits = new List<IHitInfo>();
-                                                    MyAPIGateway.Physics.CastRay(start, end, hits);
-
-                                                    foreach (var hit in hits)
-                                                    {
-                                                        if (hit == null || hit.HitEntity == null)
-                                                            continue;
-
-                                                        var testGrid = hit.HitEntity as MyCubeGrid;
-
-                                                        if (testGrid != null && testGrid.Physics != null)
-                                                        {
-                                                            subflag.attachedGrid = testGrid;
-                                                            break;
-                                                        }
-                                                    }
-
-                                                    if (subflag.attachedGrid != null)
-                                                    {
-                                                        subflag.attachedLocalMatrix = subflag.flag_entity.WorldMatrix * subflag.attachedGrid.PositionComp.WorldMatrixInvScaled;
-                                                    }
-                                                }
-
-                                                if (subflag.attachedGrid != null && !subflag.attachedGrid.MarkedForClose)
-                                                {
-                                                    subflag.flag_entity.WorldMatrix = subflag.attachedLocalMatrix * subflag.attachedGrid.WorldMatrix;
-                                                }
-                                                break;
-                                        }
-                                    }
-
-                                    subflag.current_drop_life += 1;
-
-                                    bool playerInRadius = false;
-
-                                    foreach (var player in subflag.GetNearbyPlayers(ref allplayers, ref reuse_players, pickup_in_cockpit, flagPickupRadius))
-                                    {
-                                        int lastDropTime;
-
-                                        if (playerDropTimes.TryGetValue(player.IdentityId, out lastDropTime))
-                                        {
-                                            if (timer - lastDropTime < 600)
-                                            {
-                                                continue;
-                                            }
-                                        }
-
-                                        playerInRadius = true;
-
-                                        string faction_tag = MyVisualScriptLogicProvider.GetPlayersFactionTag(player.IdentityId);
-
-                                        if (faction_tag == subflag.owning_faction.Tag)
-                                        {
-                                            // Track the time the same-team player has been around the flag
-                                            if (subflag.PlayerReturnTimes.ContainsKey(player.IdentityId))
-                                            {
-                                                int returnTime = subflag.PlayerReturnTimes[player.IdentityId]++;
-
-                                                float percentDegrees = 2 * returnTime / 600f;
-
-                                                float lineSize = returnTime > 500 ? 0.5f + (returnTime - 500) / 16 : 0.5f;
-
-                                                // Draw [an sphere]
-                                                MatrixD flagMatrix = MatrixD.CreateTranslation(subflag.current_pos);
-                                                MySimpleObjectDraw.DrawTransparentSphere(ref flagMatrix, (float)flagPickupRadius, ref subflag.flag_color, MySimpleObjectRasterizer.Wireframe, 20, null, MyStringId.GetOrCompute("WeaponLaserIgnoreDepth"), lineSize, -1, null, BlendTypeEnum.SDR, percentDegrees * percentDegrees);
-                                            }
-                                            else
-                                            {
-                                                subflag.PlayerReturnTimes.Add(player.IdentityId, 1);
-                                            }
-
-
-
-                                            // Check if the same-team player has been around the flag for 10 seconds
-                                            if (subflag.PlayerReturnTimes[player.IdentityId] >= 60)
-                                            {
-                                                ResetFlag(subflag);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            // Remove the player from the return times dictionary if they are not the same team
-                                            subflag.PlayerReturnTimes.Remove(player.IdentityId);
-                                        }
-
-                                        if (subflag.flag_type == FlagType.Single)
-                                        {
-                                            if (faction_tag != "")
-                                            {
-                                                subflag.state = FlagState.Active;
-                                                ShowANotificationPlease("flag active 1");
-                                                subflag.carrying_player_id = player.IdentityId;
-                                                subflag.carrying_player = player;
-                                                subflag.current_drop_life = 0;
-                                                SendEvent(player.DisplayName + " grabbed the flag!", InfoType.FlagTaken);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            if (faction_tag != "" && faction_tag != subflag.owning_faction.Tag)
-                                            {
-                                                subflag.state = FlagState.Active;
-                                                ShowANotificationPlease("flag active 2");
-                                                subflag.carrying_player_id = player.IdentityId;
-                                                subflag.carrying_player = player;
-                                                subflag.current_drop_life = 0;
-                                                SendEvent(player.DisplayName + " stole " + subflag.owning_faction.Tag + " flag!", InfoType.FlagTaken);
-                                            }
-                                        }
-                                    }
-
-                                    ShowANotificationPlease($"Player in interaction radius: {playerInRadius}");
-
-                                    foreach (var entry in subflag.PlayerReturnTimes)
-                                    {
-                                        ShowANotificationPlease($"Player ID: {entry.Key}, Return time: {entry.Value}");
-                                    }
-                                }
+                                CheckDroppedFlagState(subflag);
 
                                 subflag.current_pos = subflag.flag_entity.WorldMatrix.Translation;
                                 Matrix3x3 rotationOnlyMatrix = subflag.flag_entity.WorldMatrix.Rotation;
@@ -1127,7 +975,8 @@ namespace Klime.CTF
             }
             catch (Exception e)
             {
-                MyAPIGateway.Utilities.ShowMessage("", e.Message);
+                MyAPIGateway.Utilities.ShowMessage("CTFMod", e.ToString());
+                MyLog.Default.WriteLineAndConsole("Exception in CTFMod.UpdateAfterSimulation():\n" + e);
             }
 
             timer += 1;
@@ -1188,145 +1037,304 @@ namespace Klime.CTF
         public T CastProhibit<T>(T ptr, object val) => (T)val;
         public override void Draw()
         {
+            if (MyAPIGateway.Utilities.IsDedicated)
+                return;
+
             try
             {
-                if (!MyAPIGateway.Utilities.IsDedicated)
+                foreach (var subflag in allflags)
                 {
-                    foreach (var subflag in allflags)
+                    // Draw capture sphere
+                    if (subflag.RecaptureTime < FlagRecaptureTimeTicks && subflag.RecaptureTime > 0)
                     {
-                        if (subflag.flag_entity != null)
-                        {
-                            if (subflag.state == FlagState.Active)
-                            {
-                                if (allplayerdict.ContainsKey(subflag.carrying_player_id))
-                                {
-                                    if (allplayerdict[subflag.carrying_player_id].Character != null && !allplayerdict[subflag.carrying_player_id].Character.IsDead)
-                                    {
-                                        reuse_matrix = allplayerdict[subflag.carrying_player_id].Character.WorldMatrix;
-                                        reuse_matrix.Translation += reuse_matrix.Backward * 0.4f + reuse_matrix.Up * 1.5f + reuse_matrix.Left * 0.25f;
+                        float percentDegrees = 2 * subflag.RecaptureTime / (float)FlagRecaptureTimeTicks;
 
-                                        subflag.flag_entity.WorldMatrix = reuse_matrix;
-                                    }
+                        float lineSize = subflag.RecaptureTime > 500 ? 0.5f + (subflag.RecaptureTime - 500) / 16 : 0.5f;
+
+                        // Draw [an sphere]
+                        MatrixD flagMatrix = MatrixD.CreateTranslation(subflag.current_pos);
+                        MySimpleObjectDraw.DrawTransparentSphere(ref flagMatrix, (float)flagPickupRadius, ref subflag.flag_color, MySimpleObjectRasterizer.Wireframe, 20, null, MyStringId.GetOrCompute("WeaponLaserIgnoreDepth"), lineSize, -1, null, BlendTypeEnum.SDR, percentDegrees * percentDegrees);
+                    }
+
+                    if (subflag.flag_entity != null)
+                    {
+                        if (subflag.state == FlagState.Active)
+                        {
+                            if (allplayerdict.ContainsKey(subflag.carrying_player_id))
+                            {
+                                if (allplayerdict[subflag.carrying_player_id].Character != null && !allplayerdict[subflag.carrying_player_id].Character.IsDead)
+                                {
+                                    reuse_matrix = allplayerdict[subflag.carrying_player_id].Character.WorldMatrix;
+                                    reuse_matrix.Translation += reuse_matrix.Backward * 0.4f + reuse_matrix.Up * 1.5f + reuse_matrix.Left * 0.25f;
+
+                                    subflag.flag_entity.WorldMatrix = reuse_matrix;
                                 }
                             }
-
-                            MyTransparentGeometry.AddBillboardOriented(square, subflag.flag_color, subflag.flag_entity.WorldMatrix.Translation +
-                                subflag.flag_entity.WorldMatrix.Up * 70f + subflag.flag_entity.WorldMatrix.Backward * 50f,
-                                subflag.flag_entity.WorldMatrix.Forward, subflag.flag_entity.WorldMatrix.Up, 50f, 20f, Vector2.Zero, BlendTypeEnum.PostPP);
-
-                            Vector4 beam_col = subflag.flag_color;
-                            beam_col.W *= 0.2f;
-                            reuse_matrix = subflag.flag_entity.WorldMatrix;
-
-                            float interference = 0f;
-                            var gravP = MyAPIGateway.Physics.CalculateNaturalGravityAt(reuse_matrix.Translation, out interference);
-                            if (gravP.Length() == 0f)
-                            {
-                                gravP = MyAPIGateway.Physics.CalculateArtificialGravityAt(reuse_matrix.Translation, 0);
-                            }
-                            Vector3D beam_up = -1 * Vector3.Normalize(gravP);
-                            Vector3D beam_forward = MyUtils.GetRandomPerpendicularVector(ref beam_up);
-                            reuse_matrix = MatrixD.CreateWorld(reuse_matrix.Translation, beam_forward, beam_up);
-                            reuse_matrix.Translation += subflag.flag_entity.WorldMatrix.Backward * 0.5f;
-
-                            //float beam_radius = 0.5f + 0.1f * (float)Vector3D.Distance(MyAPIGateway.Session.Camera.WorldMatrix.Translation,reuse_matrix.Translation);
-                            float beam_radius = 0.5f;
-                            MySimpleObjectDraw.DrawTransparentCylinder(ref reuse_matrix, beam_radius, beam_radius, 100000f, ref beam_col, true, 25, 0.9f, laser);
                         }
+
+                        MyTransparentGeometry.AddBillboardOriented(square, subflag.flag_color, subflag.flag_entity.WorldMatrix.Translation +
+                            subflag.flag_entity.WorldMatrix.Up * 70f + subflag.flag_entity.WorldMatrix.Backward * 50f,
+                            subflag.flag_entity.WorldMatrix.Forward, subflag.flag_entity.WorldMatrix.Up, 50f, 20f, Vector2.Zero, BlendTypeEnum.PostPP);
+
+                        Vector4 beam_col = subflag.flag_color;
+                        beam_col.W *= 0.2f;
+                        reuse_matrix = subflag.flag_entity.WorldMatrix;
+
+                        float interference = 0f;
+                        var gravP = MyAPIGateway.Physics.CalculateNaturalGravityAt(reuse_matrix.Translation, out interference);
+                        if (gravP.Length() == 0f)
+                        {
+                            gravP = MyAPIGateway.Physics.CalculateArtificialGravityAt(reuse_matrix.Translation, 0);
+                        }
+                        Vector3D beam_up = -1 * Vector3.Normalize(gravP);
+                        Vector3D beam_forward = MyUtils.GetRandomPerpendicularVector(ref beam_up);
+                        reuse_matrix = MatrixD.CreateWorld(reuse_matrix.Translation, beam_forward, beam_up);
+                        reuse_matrix.Translation += subflag.flag_entity.WorldMatrix.Backward * 0.5f;
+
+                        //float beam_radius = 0.5f + 0.1f * (float)Vector3D.Distance(MyAPIGateway.Session.Camera.WorldMatrix.Translation,reuse_matrix.Translation);
+                        float beam_radius = 0.5f;
+                        MySimpleObjectDraw.DrawTransparentCylinder(ref reuse_matrix, beam_radius, beam_radius, 100000f, ref beam_col, true, 25, 0.9f, laser);
+                    }
+                }
+
+
+                if (score_billboard.Visible && gamestate != null)
+                {
+                    var redFlag = allflags[0];
+                    var blueFlag = allflags[1];
+
+                    var redGripStrength = redFlag.grip_strength;
+                    var blueGripStrength = blueFlag.grip_strength;
+
+                    var redGripBar = GenerateGripBar(redGripStrength, redFlag.state == FlagState.Active);
+                    var blueGripBar = GenerateGripBar(blueGripStrength, blueFlag.state == FlagState.Active);
+
+                    // You will need to adjust these coordinates based on where the "RED" and "BLU" text are.
+                    // For example, if "RED" is centered at X = 0.30, you might use X = 0.28 for the grip bar.
+                    Vector2D bluePosition = new Vector2D(-0.33, 0.85); // Position directly below the "RED" text
+                    Vector2D redPosition = new Vector2D(-0.43, 0.85); // Position directly below the "BLU" text
+
+                    StringBuilder redGripSb = new StringBuilder();
+                    redGripSb.Append(redGripBar);
+                    var redGripMessage = new HudAPIv2.HUDMessage(redGripSb, redPosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
+                    redGripMessage.InitialColor = Color.Red;
+
+                    StringBuilder blueGripSb = new StringBuilder();
+                    blueGripSb.Append(blueGripBar);
+                    var blueGripMessage = new HudAPIv2.HUDMessage(blueGripSb, bluePosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
+                    blueGripMessage.InitialColor = Color.Blue;
+
+                    const double VerticalOffsetForDamageResistText = +0.03; // Adjust this value as needed
+
+                    if (redFlag.state == FlagState.Active)
+                    {
+                        var redGripBracket = new HudAPIv2.HUDMessage(GripBracketConst, redPosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
+                        redGripBracket.Origin -= redGripBracket.GetTextLength() * Vector2D.UnitX / 10;
+                        redGripBracket.InitialColor = Color.Red;
+
+                        Vector2D redDmgResistPosition = new Vector2D(redPosition.X, redPosition.Y + VerticalOffsetForDamageResistText);
+                        var redGripDmgResistWarning = new HudAPIv2.HUDMessage(DMGResistConst, redDmgResistPosition, TimeToLive: 2, Scale: 1f, Blend: BlendTypeEnum.PostPP);
+                        redGripDmgResistWarning.InitialColor = Color.Red;
+
                     }
 
-
-                    if (score_billboard.Visible && gamestate != null)
+                    if (blueFlag.state == FlagState.Active)
                     {
-                        var redFlag = allflags[0];
-                        var blueFlag = allflags[1];
+                        var blueGripBracket = new HudAPIv2.HUDMessage(GripBracketConst, bluePosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
+                        blueGripBracket.Origin -= blueGripBracket.GetTextLength() * Vector2D.UnitX / 10;
+                        blueGripBracket.InitialColor = Color.Blue;
 
-                        var redGripStrength = redFlag.grip_strength;
-                        var blueGripStrength = blueFlag.grip_strength;
+                        Vector2D blueDmgResistPosition = new Vector2D(bluePosition.X, bluePosition.Y + VerticalOffsetForDamageResistText);
+                        var bluGripDmgResistWarning = new HudAPIv2.HUDMessage(DMGResistConst, blueDmgResistPosition, TimeToLive: 2, Scale: 1f, Blend: BlendTypeEnum.PostPP);
+                        bluGripDmgResistWarning.InitialColor = Color.Blue;
 
-                        var redGripBar = GenerateGripBar(redGripStrength, redFlag.state == FlagState.Active);
-                        var blueGripBar = GenerateGripBar(blueGripStrength, blueFlag.state == FlagState.Active);
+                    }
+                }
 
-                        // You will need to adjust these coordinates based on where the "RED" and "BLU" text are.
-                        // For example, if "RED" is centered at X = 0.30, you might use X = 0.28 for the grip bar.
-                        Vector2D bluePosition = new Vector2D(-0.33, 0.85); // Position directly below the "RED" text
-                        Vector2D redPosition = new Vector2D(-0.43, 0.85); // Position directly below the "BLU" text
 
-                        StringBuilder redGripSb = new StringBuilder();
-                        redGripSb.Append(redGripBar);
-                        var redGripMessage = new HudAPIv2.HUDMessage(redGripSb, redPosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
-                        redGripMessage.InitialColor = Color.Red;
 
-                        StringBuilder blueGripSb = new StringBuilder();
-                        blueGripSb.Append(blueGripBar);
-                        var blueGripMessage = new HudAPIv2.HUDMessage(blueGripSb, bluePosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
-                        blueGripMessage.InitialColor = Color.Blue;
-
-                        const double VerticalOffsetForDamageResistText = +0.03; // Adjust this value as needed
-
-                        if (redFlag.state == FlagState.Active)
+                if (score_message != null && gamestate != null)
+                {
+                    score_sb.Clear();
+                    if (allflags.Count == 1)
+                    {
+                        if (faction1global == null || faction2global == null)
                         {
-                            var redGripBracket = new HudAPIv2.HUDMessage(GripBracketConst, redPosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
-                            redGripBracket.Origin -= redGripBracket.GetTextLength() * Vector2D.UnitX / 10;
-                            redGripBracket.InitialColor = Color.Red;
-
-                            Vector2D redDmgResistPosition = new Vector2D(redPosition.X, redPosition.Y + VerticalOffsetForDamageResistText);
-                            var redGripDmgResistWarning = new HudAPIv2.HUDMessage(DMGResistConst, redDmgResistPosition, TimeToLive: 2, Scale: 1f, Blend: BlendTypeEnum.PostPP);
-                            redGripDmgResistWarning.InitialColor = Color.Red;
-
+                            faction1global = MyAPIGateway.Session.Factions.TryGetFactionByTag(gamestate.ordered_faction_tags[0]);
+                            faction2global = MyAPIGateway.Session.Factions.TryGetFactionByTag(gamestate.ordered_faction_tags[1]);
                         }
-
-                        if (blueFlag.state == FlagState.Active)
-                        {
-                            var blueGripBracket = new HudAPIv2.HUDMessage(GripBracketConst, bluePosition, TimeToLive: 2, Scale: 2f, Blend: BlendTypeEnum.PostPP);
-                            blueGripBracket.Origin -= blueGripBracket.GetTextLength() * Vector2D.UnitX / 10;
-                            blueGripBracket.InitialColor = Color.Blue;
-
-                            Vector2D blueDmgResistPosition = new Vector2D(bluePosition.X, bluePosition.Y + VerticalOffsetForDamageResistText);
-                            var bluGripDmgResistWarning = new HudAPIv2.HUDMessage(DMGResistConst, blueDmgResistPosition, TimeToLive: 2, Scale: 1f, Blend: BlendTypeEnum.PostPP);
-                            bluGripDmgResistWarning.InitialColor = Color.Blue;
-
-                        }
+                        score_sb.Append("<color=red>" + gamestate.ordered_faction_tags[0] + "  " + "<color=0,50,255,255>" + gamestate.ordered_faction_tags[1] + "\n");
+                        score_sb.Append(" " + "<color=yellow>  " + gamestate.faction_scores[faction1global.FactionId] + "       " + gamestate.faction_scores[faction2global.FactionId]);
+                    }
+                    else if (allflags.Count == 2)
+                    {
+                        score_sb.Append("<color=red>" + allflags[0].owning_faction.Tag + "  " + "<color=0,50,255,255>" + allflags[1].owning_faction.Tag + "\n");
+                        score_sb.Append(" " + "<color=yellow>  " + gamestate.faction_scores[allflags[0].owning_faction.FactionId] + "       " + gamestate.faction_scores[allflags[1].owning_faction.FactionId]);
                     }
 
-
-
-                    if (score_message != null && gamestate != null)
+                    if (gamestate != null && gamestate.currentgamestate == CurrentGameState.Victory)
                     {
-                        score_sb.Clear();
-                        if (allflags.Count == 1)
-                        {
-                            if (faction1global == null || faction2global == null)
-                            {
-                                faction1global = MyAPIGateway.Session.Factions.TryGetFactionByTag(gamestate.ordered_faction_tags[0]);
-                                faction2global = MyAPIGateway.Session.Factions.TryGetFactionByTag(gamestate.ordered_faction_tags[1]);
-                            }
-                            score_sb.Append("<color=red>" + gamestate.ordered_faction_tags[0] + "  " + "<color=0,50,255,255>" + gamestate.ordered_faction_tags[1] + "\n");
-                            score_sb.Append(" " + "<color=yellow>  " + gamestate.faction_scores[faction1global.FactionId] + "       " + gamestate.faction_scores[faction2global.FactionId]);
-                        }
-                        else if (allflags.Count == 2)
-                        {
-                            score_sb.Append("<color=red>" + allflags[0].owning_faction.Tag + "  " + "<color=0,50,255,255>" + allflags[1].owning_faction.Tag + "\n");
-                            score_sb.Append(" " + "<color=yellow>  " + gamestate.faction_scores[allflags[0].owning_faction.FactionId] + "       " + gamestate.faction_scores[allflags[1].owning_faction.FactionId]);
-                        }
-
-                        if (gamestate != null && gamestate.currentgamestate == CurrentGameState.Victory)
-                        {
-                            score_sb.Append("\n\n\n\n\n\n\n" + "<color=white>" + gamestate.winning_tag + " VICTORY!");
-                        }
+                        score_sb.Append("\n\n\n\n\n\n\n" + "<color=white>" + gamestate.winning_tag + " VICTORY!");
                     }
-                    if (event_message != null)
+                }
+                if (event_message != null)
+                {
+                    if (timer == event_clock)
                     {
-                        if (timer == event_clock)
-                        {
-                            event_sb.Clear();
-                        }
+                        event_sb.Clear();
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                MyLog.Default.WriteLineAndConsole("Exception in CTFMod.Draw():\n" + e);
+            }
+        }
 
+        void CheckDroppedFlagState(Flag subflag)
+        {
+            if (subflag.state == FlagState.Dropped)
+            {
+                subflag.grip_strength = 100;
+
+                ShowANotificationPlease($"Flag state: {subflag.state}");
+                ShowANotificationPlease($"Current drop life: {subflag.current_drop_life}");
+                ShowANotificationPlease($"Drop reset time: {drop_reset_time}");
+
+                if (subflag.current_drop_life >= drop_reset_time)
+                {
+                    ShowANotificationPlease("flag home 4");
+                    ResetFlag(subflag);
+                }
+                else
+                {
+                    switch (drop_type)
+                    {
+                        case DropType.Instant:
+                            ShowANotificationPlease("flag home 5");
+                            ResetFlag(subflag);
+                            break;
+                        case DropType.Ground:
+                            reuse_planet = MyGamePruningStructure.GetClosestPlanet(subflag.flag_entity.WorldMatrix.Translation);
+
+                            if (reuse_planet != null)
+                            {
+                                reuse_matrix = subflag.flag_entity.WorldMatrix;
+                                reuse_matrix.Translation = reuse_planet.GetClosestSurfacePointGlobal(subflag.flag_entity.WorldMatrix.Translation);
+                                subflag.flag_entity.WorldMatrix = reuse_matrix;
+                            }
+                            else
+                            {
+                                drop_type = DropType.Floating;
+                            }
+                            break;
+                        case DropType.Attached:
+                            if (subflag.attachedGrid == null && subflag.current_drop_life == 0)
+                            {
+                                float interf = 0f;
+                                var gravityDir = Vector3D.Normalize(MyAPIGateway.Physics.CalculateNaturalGravityAt(subflag.flag_entity.WorldMatrix.Translation, out interf));
+                                var start = subflag.flag_entity.WorldMatrix.Translation;
+                                var end = start + gravityDir * 5;
+                                List<IHitInfo> hits = new List<IHitInfo>();
+                                MyAPIGateway.Physics.CastRay(start, end, hits);
+
+                                foreach (var hit in hits)
+                                {
+                                    if (hit == null || hit.HitEntity == null)
+                                        continue;
+
+                                    var testGrid = hit.HitEntity as MyCubeGrid;
+
+                                    if (testGrid != null && testGrid.Physics != null)
+                                    {
+                                        subflag.attachedGrid = testGrid;
+                                        break;
+                                    }
+                                }
+
+                                if (subflag.attachedGrid != null)
+                                {
+                                    subflag.attachedLocalMatrix = subflag.flag_entity.WorldMatrix * subflag.attachedGrid.PositionComp.WorldMatrixInvScaled;
+                                }
+                            }
+
+                            if (subflag.attachedGrid != null && !subflag.attachedGrid.MarkedForClose)
+                            {
+                                subflag.flag_entity.WorldMatrix = subflag.attachedLocalMatrix * subflag.attachedGrid.WorldMatrix;
+                            }
+                            break;
+                    }
+                }
+
+                subflag.current_drop_life += 1;
+
+                bool friendlyPlayerInRadius = false;
+
+                foreach (var player in subflag.GetNearbyPlayers(ref allplayers, ref reuse_players, pickup_in_cockpit, flagPickupRadius))
+                {
+                    int lastDropTime;
+
+                    if (playerDropTimes.TryGetValue(player.IdentityId, out lastDropTime))
+                    {
+                        if (timer - lastDropTime < 600)
+                        {
+                            continue;
+                        }
+                    }
+
+                    friendlyPlayerInRadius = true;
+
+                    string faction_tag = MyVisualScriptLogicProvider.GetPlayersFactionTag(player.IdentityId);
+
+                    // Handle flag stealing
+                    if (subflag.flag_type == FlagType.Single)
+                    {
+                        if (faction_tag != "")
+                        {
+                            subflag.state = FlagState.Active;
+                            subflag.carrying_player_id = player.IdentityId;
+                            subflag.carrying_player = player;
+                            subflag.current_drop_life = 0;
+                            SendEvent(player.DisplayName + " grabbed the flag!", InfoType.FlagTaken);
+                        }
+                    }
+                    else
+                    {
+                        if (faction_tag != "" && faction_tag != subflag.owning_faction.Tag)
+                        {
+                            subflag.state = FlagState.Active;
+                            subflag.carrying_player_id = player.IdentityId;
+                            subflag.carrying_player = player;
+                            subflag.current_drop_life = 0;
+                            SendEvent(player.DisplayName + " stole " + subflag.owning_faction.Tag + " flag!", InfoType.FlagTaken);
+                        }
+                    }
+                }
+
+                // Checking for recapture times.
+                if (friendlyPlayerInRadius)
+                {
+                    // Track the time the same-team player has been around the flag
+                    // Check if the same-team player has been around the flag for (n) seconds
+                    if (subflag.RecaptureTime < FlagRecaptureTimeTicks)
+                    {
+                        subflag.RecaptureTime++;
+
+                        // Update gamestate when flag recap is started.
+                        if (subflag.RecaptureTime == 1)
+                            SendFlagState();
+                    }
+                    else
+                    {
+                        ResetFlag(subflag);
+                        SendFlagState();
+                    }
+                }
+                else
+                {
+                    // Remove the player from the return times dictionary if they are not the same team
+                    subflag.RecaptureTime = 0;
+                }
             }
         }
 
@@ -1345,7 +1353,7 @@ namespace Klime.CTF
             }
 
             // Reset the player's return time or remove the player from the dictionary
-            subflag.PlayerReturnTimes.Clear();
+            subflag.RecaptureTime = 0;
             subflag.current_drop_life = 0;
         }
 

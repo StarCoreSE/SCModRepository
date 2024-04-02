@@ -187,7 +187,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                Shell508SAP,Shell508AP,Shell508HE,Shell508HEShrap,  // Must list all primary, shrapnel, and pattern ammos.
+                Shell508AP,Shell508HE,Shell508HEShrap,  // Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = FA16InchRecoil,
             //Upgrades = UpgradeModules,

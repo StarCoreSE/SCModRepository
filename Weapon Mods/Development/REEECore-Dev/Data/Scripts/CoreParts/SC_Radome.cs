@@ -18,7 +18,7 @@ namespace Scripts {
         {
             Assignments = new ModelAssignmentsDef
             {
-                 MountPoints = new[] {
+                MountPoints = new[] {
                     new MountPointDef {
                         SubtypeId = "SC_Radome",
                         SpinPartId = "None", // For weapons with a spinning barrel such as Gatling Guns.
