@@ -6,11 +6,11 @@
       <!-- Minigun? nah. Gigagun -->
       <Id>
         <TypeId>ConveyorSorter</TypeId>
-        <SubtypeId>HAS_Vulcan</SubtypeId>
+        <SubtypeId>HAS_Avenger</SubtypeId>
       </Id>
-      <DisplayName>RAC-5 Avenger</DisplayName>
+      <DisplayName>[HA] RAC-5 Avenger</DisplayName>
       <Description>
-        GAU Style Cannon
+        GAU Style Cannon. 6 Seconds of BRRT with 20 seconds of cooldown. 4km range.
       </Description>
       <Icon>Textures\GUI\Icons\Vulcan.png</Icon>
       <CubeSize>Large</CubeSize>
@@ -46,7 +46,7 @@
           <MinAllowed>0.01</MinAllowed>
         </DynamicMode>
       </VoxelPlacement>
-      <BlockPairName>HAS_Vulcan</BlockPairName>
+      <BlockPairName>HAS_Avenger</BlockPairName>
       <MirroringY>Z</MirroringY>
       <MirroringZ>Y</MirroringZ>
       <EdgeType>Light</EdgeType>
@@ -77,7 +77,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Crossfield</SubtypeId>
       </Id>
-      <DisplayName>Crossfield</DisplayName>
+      <DisplayName>[HA] Crossfield</DisplayName>
       <Description>
         [2km max range]
         [Energy damage]
@@ -144,7 +144,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Thanatos</SubtypeId>
       </Id>
-      <DisplayName>Thanatos</DisplayName>
+      <DisplayName>[HA] Thanatos</DisplayName>
       <Description>
         Heavy Gimbaled Cannon
         Heavy Anti Armor
@@ -214,7 +214,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Mammon</SubtypeId>
       </Id>
-      <DisplayName>Mammon</DisplayName>
+      <DisplayName>[HA] Mammon</DisplayName>
       <Description>
         Quad Barreled Beam Turret
         Heavy Anti Armor Damage
@@ -285,7 +285,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_MammonMK2</SubtypeId>
       </Id>
-      <DisplayName>Mammon MK2</DisplayName>
+      <DisplayName>[HA] Mammon MK2</DisplayName>
       <Description>
         Quad Barreled Beam Turret
         Heavy Anti Armor Damage
@@ -296,7 +296,7 @@
       </Description>
       <Icon>Textures\GUI\Icons\Cubes\400mmVanquisher_Icon.dds</Icon>
       <CubeSize>Large</CubeSize>
-      <GuiVisible>true</GuiVisible>
+      <GuiVisible>false</GuiVisible>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="3" y="2" z="3" />
       <ModelOffset x="0" y="0" z="0" />
@@ -356,7 +356,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Nyx</SubtypeId>
       </Id>
-      <DisplayName>Nyx</DisplayName>
+      <DisplayName>[HA] Nyx</DisplayName>
       <Description>
         Dual Barreled Beam Turret
         Heavy Anti Armor Damage
@@ -427,7 +427,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Esper</SubtypeId>
       </Id>
-      <DisplayName>Tigtone</DisplayName>
+      <DisplayName>[HA] Tigtone</DisplayName>
       <Description>
         6km Range. Rotary Triple-Barreled Kinetic Shotgun.
       </Description>
@@ -490,7 +490,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Cyclops</SubtypeId>
       </Id>
-      <DisplayName>Cyclops</DisplayName>
+      <DisplayName>[HA] Cyclops</DisplayName>
       <Description>
         Heavy Gimbaled Cannon
         Heavy Anti Armor
