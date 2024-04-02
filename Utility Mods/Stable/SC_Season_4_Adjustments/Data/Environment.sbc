@@ -24,43 +24,50 @@
       </FogColor>
     </FogProperties>
 
-	<SunProperties>
-	  <SunIntensity>0.99</SunIntensity>
-      <EnvironmentProbe>
-        <TimeOut>0.03</TimeOut>
-        <DrawDistance>1E-07</DrawDistance>
-        <AmbientScale>0.5</AmbientScale>
-        <AmbientMinClamp>0.8</AmbientMinClamp>
-        <AmbientMaxClamp>1</AmbientMaxClamp>
-      </EnvironmentProbe>
-      <EnvironmentLight>
-        <SunDiscInnerDot>1.0</SunDiscInnerDot>
-        <SunDiscOuterDot>1.0</SunDiscOuterDot>
+	  <SunProperties>
+		  <SunIntensity>150</SunIntensity>
+		  <EnvironmentProbe>
+			  <TimeOut>0.03</TimeOut>
+			  <DrawDistance>1E-07</DrawDistance>
+			  <AmbientScale>1</AmbientScale>
+			  <AmbientMinClamp>0.92</AmbientMinClamp>
+			  <AmbientMaxClamp>1</AmbientMaxClamp>
+		  </EnvironmentProbe>
+		  <EnvironmentLight>
+			  <SunColor>
+				  <X>1</X>
+				  <Y>1</Y>
+				  <Z>1</Z>
+			  </SunColor>
+			  <SunDiffuseFactor>1.1</SunDiffuseFactor>
+			  <SunGlossFactor>1.1</SunGlossFactor>
+			  <SunDiscInnerDot>1.0</SunDiscInnerDot>
+			  <SunDiscOuterDot>1.0</SunDiscOuterDot>
 
-                <AmbientDiffuseFactor>2</AmbientDiffuseFactor>
-                <AmbientSpecularFactor>0.300</AmbientSpecularFactor>
-                <GlassAmbient>0</GlassAmbient>
-                <AmbientForwardPass>0.0</AmbientForwardPass>
-                <AmbientGlobalMinimum>0</AmbientGlobalMinimum>
-                <AmbientGlobalDensity>0</AmbientGlobalDensity>
-                <AmbientGlobalMultiplier>0</AmbientGlobalMultiplier>
+			  <AmbientDiffuseFactor>0.15</AmbientDiffuseFactor>
+			  <AmbientSpecularFactor>2</AmbientSpecularFactor>
+			  <GlassAmbient>0</GlassAmbient>
+			  <AmbientForwardPass>0</AmbientForwardPass>
+			  <AmbientGlobalMinimum>0</AmbientGlobalMinimum>
+			  <AmbientGlobalDensity>0</AmbientGlobalDensity>
+			  <AmbientGlobalMultiplier>0</AmbientGlobalMultiplier>
 
-                <AODirLight>1</AODirLight>
-                <AOIndirectLight>1.25</AOIndirectLight>
-                <AOPointLight>0.7</AOPointLight>
-                <AOSpotLight>0.7</AOSpotLight>
+			  <AODirLight>0.95</AODirLight>
+			  <AOIndirectLight>0.5</AOIndirectLight>
+			  <AOPointLight>0.7</AOPointLight>
+			  <AOSpotLight>0.7</AOSpotLight>
 
-                <SkyboxBrightness>1</SkyboxBrightness>
-                <EnvSkyboxBrightness>15.0</EnvSkyboxBrightness>
-                <ShadowFadeoutMultiplier>0.0</ShadowFadeoutMultiplier>
-                <EnvShadowFadeoutMultiplier>0</EnvShadowFadeoutMultiplier>
-                <EnvAtmosphereBrightness>2.0</EnvAtmosphereBrightness>
-                <AmbientRadius>50.0</AmbientRadius>
-                <AmbientLightsGatherRadius>15.0</AmbientLightsGatherRadius>
-                <SunDiscIntensity>3.8</SunDiscIntensity>
-      </EnvironmentLight>
-	  	
-    </SunProperties>
+			  <SkyboxBrightness>1.0</SkyboxBrightness>
+			  <EnvSkyboxBrightness>5.0</EnvSkyboxBrightness>
+			  <ShadowFadeoutMultiplier>0.1</ShadowFadeoutMultiplier>
+			  <EnvShadowFadeoutMultiplier>1</EnvShadowFadeoutMultiplier>
+			  <EnvAtmosphereBrightness>1.0</EnvAtmosphereBrightness>
+
+			  <AmbientRadius>50.0</AmbientRadius>
+			  <AmbientLightsGatherRadius>15</AmbientLightsGatherRadius>
+		  </EnvironmentLight>
+
+	  </SunProperties>
     <!-- Disables vignette effect -->
     <PostProcessSettings>
         <EnableTonemapping>true</EnableTonemapping>

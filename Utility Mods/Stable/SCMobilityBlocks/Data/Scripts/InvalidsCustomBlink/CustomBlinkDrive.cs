@@ -1,10 +1,12 @@
 ﻿using Sandbox.Common.ObjectBuilders;
+using Sandbox.Engine.Physics;
 using Sandbox.Game;
 using Sandbox.Game.Entities;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
 using Sandbox.ModAPI.Interfaces.Terminal;
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 using VRage.Game;
@@ -19,6 +21,7 @@ using VRage.Sync;
 using VRage.Utils;
 using VRageMath;
 using VRageRender;
+using CollisionLayers = Sandbox.Engine.Physics.MyPhysics.CollisionLayers;
 
 namespace Invalid.BlinkDrive
 {
@@ -26,6 +29,8 @@ namespace Invalid.BlinkDrive
     public class BlinkDrive : MyGameLogicComponent, IMyEventProxy
     {
         #region Variables
+        public const float JumpDistance = 1000;
+
         private IMyCollector Block;
         private MyResourceSinkComponent SinkComponent;
         private MySync<ushort, SyncDirection.BothWays> JumpChargesSync;
@@ -139,11 +144,44 @@ namespace Invalid.BlinkDrive
         }
         #endregion
 
+        public void RequestBlink()
+        {
+            if (JumpChargesSync.Value <= 0)
+                return;
+
+            // Check from all corners to limit fuckery
+            List<IHitInfo> hitInfos = new List<IHitInfo>();
+            Vector3D forward = Block.WorldMatrix.Forward * JumpDistance;
+
+            // Check for blocker plates (??)
+
+            // Theoretically this should work to collide with blocker plates But It Doesn't:tm:
+            //MyAPIGateway.Physics.CastRay(Block.CubeGrid.GetPosition(), Block.CubeGrid.GetPosition() + forward, hitInfos, CollisionLayers.NoVoxelCollisionLayer);
+            //MyAPIGateway.Utilities.ShowNotification("FUCK " + hitInfos.Count, font: "Red");
+
+            IMyEntity topGridParent = Block.CubeGrid.GetTopMostParent(typeof(MyCubeGrid));
+            BoundingBoxD gridWorldAABB = Block.CubeGrid.LocalAABB;
+            for (int i = 0; i < 8; i++)
+            {
+                Vector3D corner = Vector3D.Transform(gridWorldAABB.GetCorner(i), Block.CubeGrid.WorldMatrix);
+                MyAPIGateway.Physics.CastRay(corner, corner + forward, hitInfos, CollisionLayers.DefaultCollisionLayer);
+
+                if (hitInfos.Count > 0 && (hitInfos.Count > 1 || hitInfos[0].HitEntity.GetTopMostParent(typeof(MyCubeGrid)) != topGridParent))
+                {
+                    MyAPIGateway.Utilities.ShowNotification("Obstacle Detected!", font: "Red");
+                    return;
+                }
+            }
+
+            JumpChargesSync.Value--;
+            CachedJumpCharges = JumpChargesSync.Value;
+        }
+
         private void PerformBlink()
         {
             MatrixD originalMatrixDir = Block.WorldMatrix;
             var originalPosition = originalMatrixDir.Translation; // Original position
-            var teleportPosition = originalPosition + (originalMatrixDir.Forward * 1000); // Teleported position
+            var teleportPosition = originalPosition + (originalMatrixDir.Forward * JumpDistance); // Teleported position
 
             MatrixD newWorldMatrix = Block.CubeGrid.WorldMatrix;
             newWorldMatrix.Translation = teleportPosition;
@@ -181,14 +219,7 @@ namespace Invalid.BlinkDrive
             blinkDriveButton.Tooltip = MyStringId.GetOrCompute("Activates the Blink Drive for a single jump.");
             blinkDriveButton.Action = (b) =>
             {
-                var drive = b.GameLogic.GetAs<BlinkDrive>();
-                if (drive != null && drive.JumpChargesSync.Value > 0)
-                {
-                    MyLog.Default.WriteLineAndConsole("Button action called");
-                    MyLog.Default.WriteLineAndConsole("Sending action to server...");
-                    drive.JumpChargesSync.Value--;
-                    drive.CachedJumpCharges = drive.JumpChargesSync.Value;
-                }
+                b.GameLogic.GetAs<BlinkDrive>()?.RequestBlink();
             };
             MyAPIGateway.TerminalControls.AddControl<IMyCollector>(blinkDriveButton);
 
@@ -197,13 +228,7 @@ namespace Invalid.BlinkDrive
             blinkDriveCockpitAction.Icon = @"Textures\GUI\Icons\Actions\Start.dds";
             blinkDriveCockpitAction.Action = (b) =>
             {
-                var drive = b.GameLogic.GetAs<BlinkDrive>();
-                if (drive != null && drive.JumpChargesSync.Value > 0)
-                {
-                    MyLog.Default.WriteLineAndConsole("Blinkdrive Cockpit action called");
-                    drive.JumpChargesSync.Value--;
-                    drive.CachedJumpCharges = drive.JumpChargesSync.Value;
-                }
+                b.GameLogic.GetAs<BlinkDrive>()?.RequestBlink();
             };
             blinkDriveCockpitAction.Writer = (b, sb) =>
             {

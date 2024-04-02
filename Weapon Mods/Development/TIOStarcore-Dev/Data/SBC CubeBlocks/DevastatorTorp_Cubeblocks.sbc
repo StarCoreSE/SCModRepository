@@ -8,12 +8,11 @@
                 <TypeId>ConveyorSorter</TypeId>
                 <SubtypeId>Devastator_Torp</SubtypeId>
             </Id>
-            <DisplayName>Devastator Torpedo Turret</DisplayName>
+            <DisplayName>Trident Torpedo Turret</DisplayName>
             <Description>
-              [10km Targeting Range] wait what
-              [Kinetic damage] wait what
-              [~300 m/s] sure
-              This weapon slowly repairs itself while offline, and when below functional.
+              [6km Targeting Range] [10km Fuel]
+              [Energy damage]
+              [slow (275m/s) 100hp torpedoes]
             </Description>
 			<GuiVisible>true</GuiVisible>
         
@@ -55,7 +54,7 @@
 				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="5.00" EndY="7.00"/>
 				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="7.00" EndY="5.00"/>
 			</MountPoints>
-            <BuildTimeSeconds>500</BuildTimeSeconds>
+            <BuildTimeSeconds>300</BuildTimeSeconds>
             <WeaponDefinitionId Subtype="ShootMissileGooder" /> 
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>

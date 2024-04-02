@@ -85,8 +85,8 @@ namespace Scripts {
             HardPoint = new HardPointDef
             {
                 PartName = "X4 Heavy Plasma Blasters", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
-                DeviateShotAngle = 0.33f, // Projectile inaccuracy in degrees.
-                AimingTolerance = 3f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
+                DeviateShotAngle = 0.22f, // Projectile inaccuracy in degrees.
+                AimingTolerance = 1.5f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
                 DelayCeaseFire = 0, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released.
                 AddToleranceToTracking = false, // Allows turret to track to the edge of the AimingTolerance cone instead of dead centre.
@@ -115,16 +115,16 @@ namespace Scripts {
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0.0015f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
-                    ElevateRate = 0.001f, // Max traversal speed of elevation subpart in radians per tick.
+                    RotateRate = 0.0017f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
+                    ElevateRate = 0.0012f, // Max traversal speed of elevation subpart in radians per tick.
                     MinAzimuth = -180,
                     MaxAzimuth = 180,
                     MinElevation = -6,
-                    MaxElevation = 40,
+                    MaxElevation = 30,
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 0, // Default resting elevation
                     InventorySize = 1f, // Inventory capacity in kL.
-                    IdlePower = 1f, // Constant base power draw in MW.
+                    IdlePower = 2f, // Constant base power draw in MW.
                     FixedOffset = false, // Deprecated.
                     Offset = Vector(x: 0, y: 0, z: 0), // Offsets the aiming/firing line of the weapon, in metres.
                     Type = BlockWeapon, // What type of weapon this is; BlockWeapon, HandWeapon, Phantom 
@@ -193,16 +193,16 @@ namespace Scripts {
                 {
                     Effect1 = new ParticleDef
                     {
-                        Name = "",
+                        Name = "X4_MuzzleFlash",
                         Color = Color(red: 0, green: 0, blue: 0, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
                             Loop = false, // Set this to the same as in the particle sbc!
                             Restart = false, // Whether to end a looping effect instantly when firing stops.
-                            MaxDistance = 6000, // Max distance at which this effect should be visible. NOTE: This will use whichever MaxDistance value is higher across Effect1 and Effect2!
-                            MaxDuration = 240, // How many ticks the effect should be ended after, if it's still running.
-                            Scale = 1.2f, // Scale of effect.
+                            MaxDistance = 8000, // Max distance at which this effect should be visible. NOTE: This will use whichever MaxDistance value is higher across Effect1 and Effect2!
+                            MaxDuration = 360, // How many ticks the effect should be ended after, if it's still running.
+                            Scale = 1f, // Scale of effect.
                         },
                     },
                     Effect2 = new ParticleDef

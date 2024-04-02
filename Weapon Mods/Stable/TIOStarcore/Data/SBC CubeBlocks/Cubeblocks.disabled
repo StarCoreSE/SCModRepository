@@ -1,0 +1,1337 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <CubeBlocks>
+
+	<!-- Point Defense -->
+			<!-- Kinetic PD Battery
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>Heavy_Repeater</SubtypeId>
+			</Id>
+			<DisplayName>F-3 "Priest" Heavy Machinegun</DisplayName>
+			<Description>2.25km Range Anti Missile Turret. Kinetic Damage, 2000m/s bullet speed.</Description>
+			<GuiVisible>true</GuiVisible>
+			<Icon>Textures\GUI\Icons\priest.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="3" z="3"/>
+			<ModelOffset x="0" y="1.235" z="0"/>
+			<Model>Models\Iron_Maiden_Main_Scene.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="250" />
+        <Component Subtype="Construction" Count="250" />
+        <Component Subtype="InteriorPlate" Count="200" />
+        <Component Subtype="SmallTube" Count="80" />
+        <Component Subtype="LargeTube" Count="20" />
+        <Component Subtype="Motor" Count="16" />
+        <Component Subtype="Computer" Count="12" />
+        <Component Subtype="Superconductor" Count="60" />
+        <Component Subtype="BulletproofGlass" Count="25" />
+        <Component Subtype="MetalGrid" Count="500" />
+        <Component Subtype="Construction" Count="300" />
+        <Component Subtype="SteelPlate" Count="1500" />
+      </Components>
+			<CriticalComponent Index="0" Subtype="Computer"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.13" File="Models\Iron_Maiden_Main_Scene_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.25" File="Models\Iron_Maiden_Main_Scene_BS2.mwm"/>
+				<Model BuildPercentUpperBound="0.37" File="Models\Iron_Maiden_Main_Scene_BS3.mwm"/>
+			</BuildProgressModels>
+			<MirroringX>None</MirroringX>
+            <MirroringZ>Y</MirroringZ>
+			<MirroringY>Z</MirroringY>
+			<BlockPairName>IronMaiden_Block</BlockPairName>
+            <EdgeType>Light</EdgeType>
+            <BuildTimeSeconds>50</BuildTimeSeconds>
+			<WeaponDefinitionId Subtype="IronMaiden_Weapon"/>    
+            <EmissiveColorPreset>Default</EmissiveColorPreset>
+            <MinFov>0.1</MinFov>
+            <MaxFov>1.04719755</MaxFov>
+            <ShowEdges>false</ShowEdges>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+
+		</Definition>
+		
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>PriestReskin_Block</SubtypeId>
+			</Id>
+			<DisplayName>F-2 "Spartan" Rotary Gun</DisplayName>
+			<Description>I'm Commander Shepard and this is Spartan's favorite gun on his citadel. 2.25km Range Anti Missile Turret. Kinetic Damage, 2000m/s bullet speed.</Description>
+			<GuiVisible>true</GuiVisible>
+			<Icon>Textures\GUI\Icons\TestScene.png</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="4" z="3"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\PriestReskin_MainScene.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="250" />
+				<Component Subtype="Construction" Count="250" />
+				<Component Subtype="InteriorPlate" Count="200" />
+				<Component Subtype="SmallTube" Count="80" />
+				<Component Subtype="LargeTube" Count="20" />
+				<Component Subtype="Motor" Count="16" />
+				<Component Subtype="Computer" Count="12" />
+				<Component Subtype="Superconductor" Count="60" />
+				<Component Subtype="BulletproofGlass" Count="25" />
+				<Component Subtype="MetalGrid" Count="500" />
+				<Component Subtype="Construction" Count="300" />
+				<Component Subtype="SteelPlate" Count="1500" />
+			</Components>
+			<CriticalComponent Index="0" Subtype="Computer"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\PriestReskin_MainScene_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.69" File="Models\PriestReskin_MainScene_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\PriestReskin_MainScene_BS3.mwm"/>
+			</BuildProgressModels>
+			<BuildTimeSeconds>200</BuildTimeSeconds>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+			<MirroringY>Z</MirroringY>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<RequiredPowerInput>0.00002</RequiredPowerInput>
+			<PCU>800</PCU>
+		</Definition> -->
+		
+			<!-- ER Laser PD
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>Laser_Block</SubtypeId>
+			</Id>
+			<DisplayName>[APES] Anti Projectile Energy System</DisplayName>
+			<Description>Area denial system capable of engaging and destroying projectiles with extreme prejudice. Overheats after sustained use and will automatically reduce its damage output when it reaches max heat capacity. Power hungry munition killer</Description>
+			<GuiVisible>true</GuiVisible>
+
+			<Icon>Textures\GUI\Icons\LAMS.dds</Icon>
+
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="7" z="3"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\APES_Laser_Mk.1_Base.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="250" />
+				<Component Subtype="Construction" Count="250" />
+				<Component Subtype="InteriorPlate" Count="200" />
+				<Component Subtype="SmallTube" Count="80" />
+				<Component Subtype="LargeTube" Count="20" />
+				<Component Subtype="Motor" Count="16" />
+				<Component Subtype="Computer" Count="12" />
+				<Component Subtype="Superconductor" Count="60" />
+				<Component Subtype="BulletproofGlass" Count="25" />
+				<Component Subtype="MetalGrid" Count="500" />
+				<Component Subtype="Construction" Count="300" />
+				<Component Subtype="SteelPlate" Count="1500" />
+			</Components>
+			<CriticalComponent Index="0" Subtype="Computer"/>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\APES_Laser_Mk.1_Base_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\APES_Laser_Mk.1_Base_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\APES_Laser_Mk.1_Base_BS3.mwm"/>
+			</BuildProgressModels>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0" EndX="3.00" EndY="4"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0" EndX="3.00" EndY="4"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0" EndX="3.00" EndY="4"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0" EndX="3.00" EndY="4"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+			</MountPoints>
+			<MirroringZ>Y</MirroringZ>
+			<MirroringY>Z</MirroringY>
+			<WeaponDefinitionId Subtype="Laser_Weapon"/>
+			<BlockPairName>Laser_Block</BlockPairName>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<RequiredPowerInput>0.00002</RequiredPowerInput>
+			<InventoryMaxVolume>1</InventoryMaxVolume>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>60</BuildTimeSeconds>
+			<ShowEdges>false</ShowEdges>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+		</Definition> -->
+
+
+
+	<!-- Larger Turrets-->
+		<!-- Type Naval Artillery -->
+			<!-- 1 Barrel
+        <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+            <Id>
+                <TypeId>ConveyorSorter</TypeId>
+                <SubtypeId>Type18_Artillery</SubtypeId>
+            </Id>
+            <DisplayName>Type 18 'Mercury' Heavy Turret</DisplayName>
+            
+			<Description>Long Ranged Turret [6km]  Magazine Capacity: 8 Reload Speed: 21.25 seconds Projectile Speed: 1600m/s, Damage Type: Energy </Description>
+			
+			<GuiVisible>true</GuiVisible>
+            <Icon>Textures\GUI\Icons\Mk1CannonMainScene.dds</Icon>
+            <CubeSize>Large</CubeSize>
+            <BlockTopology>TriangleMesh</BlockTopology>
+            <Size x="3" y="5" z="6"/>
+            <ModelOffset x="0" y="0" z="0"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="3.00" EndY="5.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="3.00" EndY="5.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="6.00" EndY="5.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="6.00" EndY="5.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="6.00"/>
+			</MountPoints>
+            <Model>Models\Mk1CannonMainScene.mwm</Model>
+            <Components>
+
+				<Component Subtype="TurretBaseComponent" Count="10" />
+				<Component Subtype="TurretRotorComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="1" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="4" />
+
+				
+				<Component Count="1000" Subtype="SteelPlate"/>
+				<Component Count="150" Subtype="Construction"/>
+				<Component Count="40" Subtype="LargeTube" />
+                <Component Count="50" Subtype="Motor" />
+				<Component Count="150" Subtype="Computer"/>
+				<Component Count="50" Subtype="MetalGrid" />
+				<Component Count="150" Subtype="Construction"/>
+				<Component Count="3000" Subtype="SteelPlate"/>
+			</Components>
+
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Mk1CannonMainScene_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\Mk1CannonMainScene_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Mk1CannonMainScene_BS3.mwm"/>
+			</BuildProgressModels>
+			
+            <CriticalComponent Index="0" Subtype="Computer"/>
+			<BlockPairName>MK1BattleshipGun_Block</BlockPairName>
+            <MirroringY>Z</MirroringY>
+			<WeaponDefinitionId Subtype="MK1BattleshipGun_Weapon"/>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<RequiredPowerInput>0.00002</RequiredPowerInput>
+
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>160</BuildTimeSeconds>
+
+			<InventoryMaxVolume>5</InventoryMaxVolume>
+
+			<ShowEdges>false</ShowEdges>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+			<IsAirTight>true</IsAirTight>
+        </Definition> -->
+			<!-- 2 Barrels
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>Type21_Artillery</SubtypeId>
+			</Id>
+			<DisplayName>Type 21 'Mars' Heavy Turret</DisplayName>
+			<Description>
+			6km Range High Velocity HE Shell.
+			</Description>
+			<GuiVisible>true</GuiVisible>
+			<Icon>Textures\GUI\Icons\Mk2_MainScene.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="5" y="6" z="8"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Mk2_MainScene.mwm</Model>
+			<Components>
+
+				<Component Subtype="TurretBaseComponent" Count="25" />
+				<Component Subtype="TurretRotorComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="4" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="6" />
+
+
+				<Component Count="2000" Subtype="SteelPlate"/>
+				<Component Count="5" Subtype="Construction"/>
+
+				<Component Count="5" Subtype="LargeTube" />
+				<Component Count="10" Subtype="Motor" />
+				<Component Count="25" Subtype="Computer"/>
+				<Component Count="10" Subtype="MetalGrid" />
+				<Component Count="50" Subtype="Construction"/>
+				<Component Count="3000" Subtype="SteelPlate"/>
+			</Components>
+			<CriticalComponent Index="0" Subtype="Computer"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="5.00" EndY="6.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="5.00" EndY="6.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="8.00" EndY="6.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="8.00" EndY="6.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="5.00" EndY="8.00"/>
+			</MountPoints>
+
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Mk2_MainScene_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\Mk2_MainScene_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Mk2_MainScene_BS3.mwm"/>
+			</BuildProgressModels>
+			
+			<MirroringZ>Y</MirroringZ>
+			<MirroringY>Z</MirroringY>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<RequiredPowerInput>0.00002</RequiredPowerInput>
+
+			<EdgeType>Heavy</EdgeType>
+			<BuildTimeSeconds>210</BuildTimeSeconds>
+			<WeaponDefinitionId Subtype="MK2_Battleship_Weapon"/>
+			<BlockPairName>MK2_Battleship_Block</BlockPairName>
+			<InventoryMaxVolume>10</InventoryMaxVolume>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+			<IsAirTight>true</IsAirTight>
+		</Definition>-->
+			<!-- 3 Barrels 
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>Type24_Artillery</SubtypeId>
+			</Id>
+			<DisplayName>Type 24 'Jupiter' Heavy Turret</DisplayName>
+			<Description>
+				6km Range High Velocity HE Shell. Only the Type 27 'Saturn' is larger.
+			</Description>
+			<GuiVisible>true</GuiVisible>
+			<Icon>Textures\GUI\Icons\MK3_Main.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="7" y="8" z="9"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\MK3_Main.mwm</Model>
+			<Components>
+
+				<Component Subtype="TurretBaseComponent" Count="35" />
+				<Component Subtype="TurretRotorComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="10" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="10" />
+
+
+				<Component Count="2000" Subtype="SteelPlate"/>
+				<Component Count="5" Subtype="Construction"/>
+
+				<Component Count="5" Subtype="LargeTube" />
+				<Component Count="10" Subtype="Motor" />
+				<Component Count="25" Subtype="Computer"/>
+				<Component Count="10" Subtype="MetalGrid" />
+				<Component Count="50" Subtype="Construction"/>
+				<Component Count="3000" Subtype="SteelPlate"/>
+			</Components>
+			<CriticalComponent Index="0" Subtype="Computer"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="7.00" EndY="8.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="7.00" EndY="8.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="9.00" EndY="8.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="9.00" EndY="8.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="7.00" EndY="9.00"/>
+
+			</MountPoints>
+
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\MK3_Main_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\MK3_Main_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\MK3_Main_BS3.mwm"/>
+			</BuildProgressModels>
+			
+			<MirroringZ>Y</MirroringZ>
+			<MirroringY>Z</MirroringY>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<RequiredPowerInput>0.00002</RequiredPowerInput>
+
+			<EdgeType>Heavy</EdgeType>
+			<BuildTimeSeconds>270</BuildTimeSeconds>
+			<WeaponDefinitionId Subtype="MK3_Battleship_Weapon"/>
+			<BlockPairName>MK3_Battleship_Block</BlockPairName>
+			<InventoryMaxVolume>10</InventoryMaxVolume>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+			<IsAirTight>true</IsAirTight>
+		</Definition>-->
+		
+		<!-- Type Railgun Drivers -->
+			<!-- 1 Barrel
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>Type19_Driver</SubtypeId>
+			</Id>
+			<DisplayName>Type 19 'Merlin' Heavy Railgun Turret</DisplayName>
+
+			<Description>Extended Ranged Turret [8km]  Magazine Capacity: 8 Reload Speed: 21.25 seconds Projectile Speed: 2200m/s, Damage Type: Kinetic </Description>
+
+			<GuiVisible>true</GuiVisible>
+			<Icon>Textures\GUI\Icons\Mk1Railgun_Main.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="5" z="6"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="6.00" EndY="3.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="6.00" EndY="3.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="6.00"/>
+			</MountPoints>
+			<Model>Models\Mk1Railgun_Main.mwm</Model>
+			<Components>
+
+				<Component Subtype="TurretBaseComponent" Count="10" />
+				<Component Subtype="TurretRotorComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="1" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="4" />
+
+
+				<Component Count="1000" Subtype="SteelPlate"/>
+				<Component Count="150" Subtype="Construction"/>
+				<Component Count="40" Subtype="LargeTube" />
+                <Component Count="50" Subtype="Motor" />
+				<Component Count="150" Subtype="Computer"/>
+				<Component Count="50" Subtype="MetalGrid" />
+				<Component Count="150" Subtype="Construction"/>
+				<Component Count="3000" Subtype="SteelPlate"/>
+			</Components>
+
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Mk1Railgun_Main_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\Mk1Railgun_Main_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Mk1Railgun_Main_BS3.mwm"/>
+			</BuildProgressModels>
+
+			<CriticalComponent Index="0" Subtype="Computer"/>
+			<BlockPairName>MK1Railgun_Block</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<WeaponDefinitionId Subtype="MK1Railgun_Weapon"/>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<RequiredPowerInput>0.00002</RequiredPowerInput>
+
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>160</BuildTimeSeconds>
+			<InventoryMaxVolume>5</InventoryMaxVolume>
+
+			<ShowEdges>false</ShowEdges>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+			<IsAirTight>true</IsAirTight>
+		</Definition> -->
+			<!-- 2 Barrels 
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>Type22_Driver</SubtypeId>
+			</Id>
+			<DisplayName>Type 22 'Medusa' Heavy Railgun Turret</DisplayName>
+			<Description>
+				8km Range High Velocity Sabot.
+			</Description>
+			<GuiVisible>true</GuiVisible>
+			<Icon>Textures\GUI\Icons\MK2RailgunMain.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="5" y="6" z="8"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\MK2RailgunMain.mwm</Model>
+			<Components>
+
+				<Component Subtype="TurretBaseComponent" Count="25" />
+				<Component Subtype="TurretRotorComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="4" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="6" />
+
+
+				<Component Count="2000" Subtype="SteelPlate"/>
+				<Component Count="5" Subtype="Construction"/>
+
+				<Component Count="5" Subtype="LargeTube" />
+				<Component Count="10" Subtype="Motor" />
+				<Component Count="25" Subtype="Computer"/>
+				<Component Count="10" Subtype="MetalGrid" />
+				<Component Count="50" Subtype="Construction"/>
+				<Component Count="3000" Subtype="SteelPlate"/>
+			</Components>
+			<CriticalComponent Index="0" Subtype="Computer"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="5.00" EndY="4.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="5.00" EndY="4.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="8.00" EndY="4.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="8.00" EndY="4.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="5.00" EndY="8.00"/>
+			</MountPoints>
+
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\MK2RailgunMain_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\MK2RailgunMain_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\MK2RailgunMain_BS3.mwm"/>
+			</BuildProgressModels>
+
+			<MirroringZ>Y</MirroringZ>
+			<MirroringY>Z</MirroringY>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<RequiredPowerInput>0.00002</RequiredPowerInput>
+
+			<EdgeType>Heavy</EdgeType>
+			<BuildTimeSeconds>210</BuildTimeSeconds>
+			<WeaponDefinitionId Subtype="MK2_Railgun_Weapon"/>
+			<BlockPairName>MK2_Railgun_Block</BlockPairName>
+			<InventoryMaxVolume>10</InventoryMaxVolume>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+			<IsAirTight>true</IsAirTight>
+		</Definition>-->
+			<!-- 3 Barrels
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>Type25_Driver</SubtypeId>
+			</Id>
+			<DisplayName>Type 25 'Manticore' Heavy Railgun Turret</DisplayName>
+			<Description>
+				8km Range High Velocity Sabot.
+			</Description>
+			<GuiVisible>true</GuiVisible>
+			<Icon>Textures\GUI\Icons\Mk3_Railgun_Main.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="7" y="8" z="9"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Mk3_Railgun_Main.mwm</Model>
+			<Components>
+
+				<Component Subtype="TurretBaseComponent" Count="35" />
+				<Component Subtype="TurretRotorComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="10" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="10" />
+
+
+				<Component Count="2000" Subtype="SteelPlate"/>
+				<Component Count="5" Subtype="Construction"/>
+
+				<Component Count="5" Subtype="LargeTube" />
+				<Component Count="10" Subtype="Motor" />
+				<Component Count="25" Subtype="Computer"/>
+				<Component Count="10" Subtype="MetalGrid" />
+				<Component Count="50" Subtype="Construction"/>
+				<Component Count="3000" Subtype="SteelPlate"/>
+			</Components>
+			<CriticalComponent Index="0" Subtype="Computer"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="7.00" EndY="5.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="7.00" EndY="5.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="9.00" EndY="5.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="9.00" EndY="5.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="7.00" EndY="9.00"/>
+
+			</MountPoints>
+
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Mk3_Railgun_Main_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\Mk3_Railgun_Main_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Mk3_Railgun_Main_BS3.mwm"/>
+			</BuildProgressModels>
+
+			<MirroringZ>Y</MirroringZ>
+			<MirroringY>Z</MirroringY>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<RequiredPowerInput>0.00002</RequiredPowerInput>
+
+			<EdgeType>Heavy</EdgeType>
+			<BuildTimeSeconds>270</BuildTimeSeconds>
+			<WeaponDefinitionId Subtype="MK3_Railgun_Weapon"/>
+			<BlockPairName>MK3_Railgun_Block</BlockPairName>
+			<InventoryMaxVolume>10</InventoryMaxVolume>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+			<IsAirTight>true</IsAirTight>
+		</Definition>-->
+
+
+
+		<!-- Extremely Large Torpedo Turret -->
+			<!-- Trident 		
+        <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+            <Id>
+                <TypeId>ConveyorSorter</TypeId>
+                <SubtypeId>Devastator_Torp</SubtypeId>
+            </Id>
+            <DisplayName>[Trident] Torpedo Turret</DisplayName>
+            <Description>Fires HE and EMP torpedos. Slow but deadly.</Description>
+			<GuiVisible>true</GuiVisible>
+        
+            <Icon>Textures\GUI\Icons\Trident.dds</Icon>
+            
+            <CubeSize>Large</CubeSize>
+            <BlockTopology>TriangleMesh</BlockTopology>
+           <Size x="7" y="7" z="5"/>
+            <ModelOffset x="0" y="0" z="0"/>
+          <Model>Models\TorpReaper_Torp_Main_Scene.mwm</Model>
+            <Components>
+
+				<Component Subtype="TurretBaseComponent" Count="32" />
+				<Component Subtype="TurretRotorComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="5" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="5" />
+
+				or
+				<Component Count="2200" Subtype="SteelPlate"/>
+				<Component Count="500" Subtype="Construction"/>
+				<Component Count="50" Subtype="LargeTube" />
+				<Component Count="200" Subtype="MetalGrid" />
+                <Component Count="50" Subtype="Superconductor" />
+                <Component Count="500" Subtype="Computer"/>
+                <Component Count="100" Subtype="Motor"/>
+				<Component Count="500" Subtype="Construction"/>
+				<Component Count="3500" Subtype="SteelPlate"/>
+            </Components>
+            <CriticalComponent Index="0" Subtype="Computer"/>
+            <BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\TorpReaper_Torp_Main_Scene_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\TorpReaper_Torp_Main_Scene_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\TorpReaper_Torp_Main_Scene_BS3.mwm"/>
+			</BuildProgressModels>
+            <MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="7.00" EndY="7.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="7.00" EndY="7.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="5.00" EndY="7.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="5.00" EndY="7.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="7.00" EndY="5.00"/>
+			</MountPoints>
+			<MirroringZ>Y</MirroringZ>
+            <MirroringY>Z</MirroringY>
+			<NavigationDefinition>Default</NavigationDefinition>
+			<WeaponDefinitionId Subtype="Torp_Weapon"/>
+			<BlockPairName>Devastator_Torp</BlockPairName>			
+            <EdgeType>Heavy</EdgeType>
+            <BuildTimeSeconds>400</BuildTimeSeconds>
+            <InventoryMaxVolume>10</InventoryMaxVolume>
+            <ShowEdges>false</ShowEdges>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+        </Definition> -->
+
+		<!-- Superheavy Scifi -->
+			<!-- Plasma Blastgun
+		<Definition xsi:type="MyObjectBuilder_LargeTurretBaseDefinition">
+			<Id>
+				<TypeId>LargeMissileTurret</TypeId>
+				<SubtypeId>K_HS_9x9_K3_King</SubtypeId>
+			</Id>
+			<DisplayName>Hadean Superheavy Plasma-Blastguns</DisplayName>
+			<GuiVisible>true</GuiVisible>
+			<Icon>Textures\GUI\Icons\PlasmaBlastgun.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="9" y="5" z="9" />
+			<ModelOffset x="0" y="0" z="0" />
+			<Model>Models\HSR\K_HSR_KingTurret_Large.mwm</Model>
+			<UseModelIntersection>true</UseModelIntersection>
+			<Components>
+				<Component Subtype="TurretBaseComponent" Count="50" />
+				<Component Subtype="TurretRotorComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="6" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="StructuralComponent" Count="8" />				
+				<Component Subtype="HeavyTurretComponent" Count="6" />
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="9" EndY="9" />
+			</MountPoints>
+			
+			<BlockPairName>K_HS_9x9_K3_King</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>200</BuildTimeSeconds>
+			<OverlayTexture>Textures\GUI\Screens\K_camera_overlay_3.dds</OverlayTexture>
+			<WeaponDefinitionId Subtype="K_HSR_Gun"/>
+			<InventoryMaxVolume>1</InventoryMaxVolume>
+			<DamageEffectId>213</DamageEffectId>
+			<DamagedSound>ParticleWeapExpl</DamagedSound>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<MinElevationDegrees>-5</MinElevationDegrees>
+			<MaxElevationDegrees>150</MaxElevationDegrees>
+			<MinAzimuthDegrees>-180</MinAzimuthDegrees>
+			<MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+			<RotationSpeed>0.001</RotationSpeed>
+			<ElevationSpeed>0.0001 </ElevationSpeed>
+			<IdleRotation>false</IdleRotation>
+			<MaxRangeMeters>40000</MaxRangeMeters>
+			<MinFov>0.001</MinFov>
+			<MaxFov>2</MaxFov>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+		</Definition> -->
+		    <!-- Kinetic Artillery		
+		<Definition xsi:type="MyObjectBuilder_LargeTurretBaseDefinition">
+			<Id>
+				<TypeId>LargeMissileTurret</TypeId>
+				<SubtypeId>K_HS_9x9_HSRB_Dreadnight</SubtypeId>
+			</Id>
+			<DisplayName>Vindicator Kinetic Battery</DisplayName>
+			<GuiVisible>true</GuiVisible>
+			<Public>true</Public>
+			<Icon>Textures\GUI\Icons\KineticBattery.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="9" y="4" z="9" />
+			<ModelOffset x="0" y="1" z="0" />
+			<Model>Models\HSR\K_HSRB_Dreadnight_Large.mwm</Model>
+			<UseModelIntersection>true</UseModelIntersection>
+			<Components>
+				<Component Subtype="TurretBaseComponent" Count="50" />
+				<Component Subtype="TurretRotorComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="6" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="StructuralComponent" Count="8" />
+				<Component Subtype="HeavyTurretComponent" Count="6" />
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="9" EndY="9" />
+			</MountPoints>
+
+			<BlockPairName>K_HS_9x9_HSRB_Dreadnight</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>200</BuildTimeSeconds>
+			<OverlayTexture>Textures\GUI\Screens\K_camera_overlay_3.dds</OverlayTexture>
+			<WeaponDefinitionId Subtype="K_HSR_Gun"/>
+			<InventoryMaxVolume>1</InventoryMaxVolume>
+			<DamageEffectId>213</DamageEffectId>
+			<DamagedSound>ParticleWeapExpl</DamagedSound>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<MinElevationDegrees>0</MinElevationDegrees>
+			<MaxElevationDegrees>180</MaxElevationDegrees>
+			<MinAzimuthDegrees>-180</MinAzimuthDegrees>
+			<MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+			<RotationSpeed>0.0002</RotationSpeed>
+			<ElevationSpeed>0.0002</ElevationSpeed>
+			<IdleRotation>false</IdleRotation>
+			<MaxRangeMeters>6000</MaxRangeMeters>
+			<MinFov>0.001</MinFov>
+			<MaxFov>2</MaxFov>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+		</Definition> -->
+		
+
+	<!-- Smaller Turrets -->
+		<!-- 3x4's -->
+			<!-- Light Coilgun -->
+		<!-- <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>Light_Coil_Turret</SubtypeId>
+			</Id>
+			<DisplayName>Reaver Light Coilgun Battery</DisplayName>
+			<Description>2.8km Range, Kinetic Damage, 5000m/s, Wont miss by much.</Description>
+			<GuiVisible>true</GuiVisible>
+
+			<Icon>Textures\GUI\Icons\reaver.dds</Icon>
+
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="3" z="4"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\CoilgunMk2.mwm</Model>
+			<Components>
+				<Component Count="400" Subtype="SteelPlate"/>
+				<Component Count="600" Subtype="Construction"/>
+				<Component Count="150" Subtype="Motor"/>
+				<Component Count="150" Subtype="Computer"/>
+				<Component Count="30" Subtype="LargeTube" />
+				<Component Count="100" Subtype="MetalGrid" />
+				<Component Count="60" Subtype="Superconductor" />
+				<Component Count="1200" Subtype="Construction"/>
+				<Component Count="500" Subtype="SteelPlate"/>
+			</Components>
+			<CriticalComponent Index="0" Subtype="Computer"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="3.0" EndY="2.0"/>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="2.0"/>
+				<MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="4.0" EndY="2.0"/>
+				<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="4.0" EndY="2.0"/>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="3.0" EndY="4.0"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\CoilgunMk2_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.66" File="Models\CoilgunMk2_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.0" File="Models\CoilgunMk2_BS3.mwm"/>
+			</BuildProgressModels>
+
+			<MirroringZ>Y</MirroringZ>
+			<MirroringY>Z</MirroringY>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<RequiredPowerInput>0.00002</RequiredPowerInput>
+			<BlockPairName>CoilgunMk2_Block</BlockPairName>
+			<NavigationDefinition>Default</NavigationDefinition>
+			<WeaponDefinitionId Subtype="CoilgunMk2_Weapon"/>
+			<EdgeType>Heavy</EdgeType>
+			<BuildTimeSeconds>80</BuildTimeSeconds>
+			<InventoryMaxVolume>1</InventoryMaxVolume>
+			<ShowEdges>false</ShowEdges>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+
+		</Definition>-->
+			<!-- Assault Battery -->
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>Assault_Coil_Turret</SubtypeId>
+			</Id>
+			<DisplayName>Raider Light Coilgun Tall</DisplayName>
+			<Description>
+              [2.8km Targeting Range]
+              [Kinetic damage]
+			  [Reaver Coilgun Clone]
+              [5000 m/s]
+			</Description>
+			<GuiVisible>true</GuiVisible>
+
+			<Icon>Textures\GUI\Icons\Salvo.dds</Icon>
+
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="3" z="4"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\CoilgunMk1_TestMain.mwm</Model>
+			<Components>
+				<Component Count="400" Subtype="SteelPlate"/>
+				<Component Count="1200" Subtype="Construction"/>
+				<Component Count="150" Subtype="Motor"/>
+				<Component Count="30" Subtype="LargeTube" />
+				<Component Count="100" Subtype="MetalGrid" />
+				<Component Count="60" Subtype="Superconductor" />
+				<Component Count="150" Subtype="Computer"/>
+				<Component Count="700" Subtype="Construction"/>
+				<Component Count="500" Subtype="SteelPlate"/>
+<!-- 
+				<Component Subtype="SteelPlate" Count="400" />
+				<Component Subtype="Construction" Count="600" />
+				<Component Subtype="Computer" Count="20" />
+				<Component Subtype="MetalGrid" Count="30" />
+				<Component Subtype="SmallTube" Count="12" />
+				<Component Subtype="LargeTube" Count="30" />
+				<Component Subtype="Motor" Count="35" />
+				<Component Subtype="Construction" Count="750" />
+				<Component Subtype="SteelPlate" Count="800" /> -->
+			</Components>
+			<CriticalComponent Index="0" Subtype="Computer"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+				<MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="4.0" EndY="1.0"/>
+				<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="4.0" EndY="1.0"/>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="3.0" EndY="4.0"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\CoilgunMk1_TestMain_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.66" File="Models\CoilgunMk1_TestMain_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.0" File="Models\CoilgunMk1_TestMain_BS3.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>UNSC_Coilgun_Block</BlockPairName>
+			<NavigationDefinition>Default</NavigationDefinition>
+			<WeaponDefinitionId Subtype="ShootMissileGooder"/>
+
+			<MirroringZ>Y</MirroringZ>
+			<MirroringY>Z</MirroringY>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<RequiredPowerInput>0.00002</RequiredPowerInput>
+
+			<EdgeType>Heavy</EdgeType>
+			<BuildTimeSeconds>125</BuildTimeSeconds>
+			<InventoryMaxVolume>1</InventoryMaxVolume>
+			<ShowEdges>false</ShowEdges>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+
+		</Definition>
+		
+			<!-- Salvo Broadside Array
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>GoalieCasemate</SubtypeId>
+			</Id>
+			<DisplayName>Goalkeeper Casemate Flak Battery</DisplayName>
+			<Description>
+				800m Range, rapid fire FLAK barrage
+				High Explosive FLAK
+				Deals FLAK Damage to Opponents.
+				FLAK FLAK FLAK
+			</Description>
+			<Icon>Textures\GUI\Icons\HSR\HSR_Damnation.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<GuiVisible>true</GuiVisible>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="5" y="3" z="5" />
+			<ModelOffset x="0" y="0" z="0" />
+			<Model>Models\HSR\K_HSR_Damnation_Large.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="1000" />
+				<Component Subtype="Construction" Count="1000" />
+				<Component Subtype="Computer" Count="200" />
+				<Component Subtype="MetalGrid" Count="130" />
+				<Component Subtype="SmallTube" Count="45" />
+				<Component Subtype="LargeTube" Count="90" />
+				<Component Subtype="Motor" Count="135" />
+				<Component Subtype="Construction" Count="750" />
+				<Component Subtype="SteelPlate" Count="600" />
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0" StartY="0" EndX="5" EndY="5" />
+				<MountPoint Side="Top" StartX="0" StartY="0" EndX="5" EndY="5" />
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="3" />
+				<MountPoint Side="Left" StartX="0" StartY="0" EndX="5" EndY="3" />
+				<MountPoint Side="Right" StartX="0" StartY="0" EndX="5" EndY="3" />
+			</MountPoints>
+			<BlockPairName>K_HS_Damnation</BlockPairName>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>100</BuildTimeSeconds>
+			<DisassembleRatio>5</DisassembleRatio>
+			<NavigationDefinition>Default</NavigationDefinition>
+			<WeaponDefinitionId Subtype="ShootMissileGooder" />
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<InventoryMaxVolume>3</InventoryMaxVolume>
+			<MinElevationDegrees>-15</MinElevationDegrees>
+			<MaxElevationDegrees>75</MaxElevationDegrees>
+			<MinAzimuthDegrees>-180</MinAzimuthDegrees>
+			<MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+			<IdleRotation>false</IdleRotation>
+			<AiEnabled>false</AiEnabled>
+			<MaxRangeMeters>3000</MaxRangeMeters>
+			<RotationSpeed>0.0005</RotationSpeed>
+			<ElevationSpeed>0.0002 </ElevationSpeed>
+			<MinFov>0.1</MinFov>
+			<MaxFov>1.04719755</MaxFov>
+		</Definition> -->
+
+
+		<!-- Magnus Triple Medium Caliber 
+		<Definition xsi:type="MyObjectBuilder_LargeTurretBaseDefinition">
+
+			<Id>
+				<TypeId>LargeMissileTurret</TypeId>
+				<SubtypeId>KreegMagnetarCannon</SubtypeId>
+			</Id>
+			<DisplayName>Magnus Plasma Battery</DisplayName>
+			<Description>
+				HSR Triple Shock Cannons.
+				Range: 6km
+				Salvo: 
+				Ammo: 
+			</Description>
+			<Icon>Textures\GUI\Icons\HSR\HSR_Magnus.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<GuiVisible>false</GuiVisible>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="7" y="3" z="7" />
+			<ModelOffset x="0" y="0" z="0" />
+			<Model>Models\HSR\K_HS_Castigation_Large.mwm</Model>
+			<UseModelIntersection>true</UseModelIntersection>
+			<Components>
+				<Component Subtype="TurretBaseComponent" Count="5" />
+				<Component Subtype="StructuralComponent" Count="15" />
+				<Component Subtype="TurretRotorComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="2" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="4" />
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="7" EndY="7" />
+			</MountPoints>
+			<BlockPairName>KreegMagnetarCannon</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>200</BuildTimeSeconds>
+			<OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+			<WeaponDefinitionId Subtype="K_HSR_Gun"/>
+			<InventoryMaxVolume>1</InventoryMaxVolume>
+			<DamageEffectId>213</DamageEffectId>
+			<AiEnabled>false</AiEnabled>
+			<DamagedSound>ParticleWeapExpl</DamagedSound>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<MinElevationDegrees>-5</MinElevationDegrees>
+			<MaxElevationDegrees>100</MaxElevationDegrees>
+			<MinAzimuthDegrees>-180</MinAzimuthDegrees>
+			<MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+			<RotationSpeed>0.0001</RotationSpeed>
+			<ElevationSpeed>0.0001 </ElevationSpeed>
+			<IdleRotation>false</IdleRotation>
+			<MaxRangeMeters>3000</MaxRangeMeters>
+			<MinFov>0.0001</MinFov>
+			<MaxFov>2</MaxFov>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+		</Definition>-->
+		
+		 
+			<!-- Unused Railgun Block 
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>RailgunTurret_Block</SubtypeId>
+			</Id>
+			<DisplayName>Type 17 Kodiak</DisplayName>
+			<Description>RailgunTurret</Description>
+			<GuiVisible>true</GuiVisible>
+			<Icon>Textures\GUI\Icons\RailgunTurret_MainScene.png</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="5" y="3" z="7"/>
+			<ModelOffset x="0" y="1.2" z="0"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="5.0" EndY="2.0"/>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="5.0" EndY="2.0"/>
+				<MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="7.0" EndY="2.0"/>
+				<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="7.0" EndY="2.0"/>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="5.0" EndY="7.0"/>
+			</MountPoints>
+			<Model>Models\RailgunTurret_MainScene.mwm</Model>
+			<Components>
+				<Component Subtype="TurretBaseComponent" Count="10" />
+				<Component Subtype="TurretRotorComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="1" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="4" />
+			</Components>
+			<CriticalComponent Index="0" Subtype="Computer"/>
+			<BlockPairName>RailgunTurret_Block</BlockPairName>
+			<NavigationDefinition>Default</NavigationDefinition>
+			<WeaponDefinitionId Subtype="ShootMissileGooder"/>
+			<MirroringY>Z</MirroringY>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<RequiredPowerInput>0.00002</RequiredPowerInput>
+			<EdgeType>Heavy</EdgeType>
+			<BuildTimeSeconds>100</BuildTimeSeconds>
+			<InventoryMaxVolume>1</InventoryMaxVolume>
+			<ShowEdges>false</ShowEdges>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+		</Definition>-->
+
+		<!-- HeavyFighterBay
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>HeavyFighterBay</SubtypeId>
+			</Id>
+			<DisplayName>Heavy Fighter Launch Bay</DisplayName>
+
+      <Description>
+	  Launches Powerful strikecraft. Please have target selected, then turn shoot ON, to launch fighters.
+      Capacity: 1 
+      MaxActive = 1 
+      [MINTARGET DISTANCE OF 500] 
+      </Description>
+			
+			<Icon>Textures\GUI\Icons\SciFiPlaneLaunch.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="2" z="5"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Strike_Craft\HeavyFighterPad.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="600" />
+                <Component Subtype="Construction" Count="400" />
+				<Component Subtype="SmallTube" Count="80" />
+                <Component Subtype="Motor" Count="150" />
+                <Component Subtype="LargeTube" Count="80" />
+                <Component Subtype="Computer" Count="60" />
+                <Component Subtype="InteriorPlate" Count="120" />
+                <Component Subtype="Construction" Count="140" />
+                <Component Subtype="SteelPlate" Count="2000" />
+			</Components>
+			<CriticalComponent Index="0" Subtype="Computer"/>
+			<MountPoints>
+        <MountPoint Side="Bottom" StartX="0" StartY="0.00" EndX="3" EndY="5"/>  
+		<MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+		<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+		<MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="5.0" EndY="1.0"/>
+		<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="5.0" EndY="1.0"/>      
+			</MountPoints>
+			<BuildProgressModels>
+			</BuildProgressModels>
+			<VoxelPlacement>
+			  <StaticMode>
+				<PlacementMode>OutsideVoxel</PlacementMode>
+				<MaxAllowed>0.2</MaxAllowed>
+				<MinAllowed>0</MinAllowed>
+			  </StaticMode>
+			  <DynamicMode>
+				<PlacementMode>OutsideVoxel</PlacementMode>
+				<MaxAllowed>0.2</MaxAllowed>
+				<MinAllowed>0.01</MinAllowed>
+			  </DynamicMode>
+			</VoxelPlacement>
+			<BlockPairName>TaiidanRail</BlockPairName>
+			<MirroringY>Z</MirroringY>
+            <MirroringZ>Y</MirroringZ>
+            <EdgeType>Light</EdgeType>
+            <BuildTimeSeconds>220</BuildTimeSeconds>
+            <OverlayTexture>Textures\GUI\Screens\AWP_TurretOverlay_Universal.dds</OverlayTexture>
+            <WeaponDefinitionId Subtype="K_HSR_Gun" />
+            <InventoryMaxVolume>1.056</InventoryMaxVolume>
+            <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+            <DamagedSound>ParticleWeapExpl</DamagedSound>
+            <ResourceSinkGroup>Defense</ResourceSinkGroup>
+            <MinElevationDegrees>-9</MinElevationDegrees>
+            <MaxElevationDegrees>85</MaxElevationDegrees>
+            <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+            <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+            <IdleRotation>false</IdleRotation>
+            <MaxRangeMeters>800</MaxRangeMeters>
+            <RotationSpeed>0.002</RotationSpeed>
+            <ElevationSpeed>0.003 </ElevationSpeed>
+            <EmissiveColorPreset>Default</EmissiveColorPreset>
+            <MinFov>0.1</MinFov>
+            <MaxFov>1.0</MaxFov>
+            <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+            <DestroySound>WepSmallWarheadExpl</DestroySound>
+            <PCU>280</PCU>
+            <IsAirTight>false</IsAirTight>
+			<InventoryFillFactorMin>1</InventoryFillFactorMin>
+		</Definition> -->
+
+
+	<!-- Fixed Weapons -->
+		<!-- MLRS -->
+			<!-- Bombardment Rockets -->
+	    <!-- <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+            <Id>
+                <TypeId>ConveyorSorter</TypeId>
+                <SubtypeId>Fixed_Rockets</SubtypeId>
+            </Id>
+            <DisplayName>"Peacemaker" Heavy Rockets</DisplayName>
+            <Description>
+			6 tube fast loading rocket packs that fire heavy unguided rockets.  Deals Energy damage in a large AOE, 6km range.  Rockets have a 1900m/s velocity.</Description>
+			<GuiVisible>true</GuiVisible>
+            <Icon>Textures\GUI\Icons\Peacemaker.dds</Icon>
+            <CubeSize>Large</CubeSize>
+            <BlockTopology>TriangleMesh</BlockTopology>
+           <Size x="3" y="4" z="2"/>
+            <ModelOffset x="0" y="0" z="0"/>
+          <Model>Models\MissileLaunchSystem_Main_Scene.mwm</Model>
+            <Components>
+				<Component Count="395" Subtype="SteelPlate"/>
+				<Component Count="499" Subtype="Construction"/>
+                <Component Count="30" Subtype="Computer"/>
+                <Component Count="50" Subtype="Motor"/>
+				<Component Count="150" Subtype="LargeTube" />
+				<Component Count="150" Subtype="MetalGrid" />
+				<Component Count="1000" Subtype="Construction"/> 
+				<Component Count="1000" Subtype="SteelPlate"/>
+            </Components>
+            <CriticalComponent Index="0" Subtype="Computer"/>
+            <MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="3.00" EndY="4.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="3.00" EndY="4.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="2.00" EndY="4.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="2.00" EndY="4.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="2.00"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\MissileLaunchSystem_Main_Scene_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\MissileLaunchSystem_Main_Scene_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\MissileLaunchSystem_Main_Scene_BS3.mwm"/>
+			</BuildProgressModels>
+				<BlockPairName>VMLS_Block</BlockPairName>
+				<NavigationDefinition>Default</NavigationDefinition>
+				<WeaponDefinitionId Subtype="VMLS_Weapon"/>
+            <BuildTimeSeconds>100</BuildTimeSeconds>
+            <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+            <DamagedSound>ParticleElectrical</DamagedSound>
+            <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+            <DestroySound>WepSmallWarheadExpl</DestroySound>
+            <EmissiveColorPreset>Default</EmissiveColorPreset>
+			<MirroringZ>Y</MirroringZ>
+            <MirroringY>Z</MirroringY>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<RequiredPowerInput>0.00002</RequiredPowerInput>
+
+			<EdgeType>Heavy</EdgeType>
+            <ShowEdges>false</ShowEdges>
+
+        </Definition>-->
+		<!-- EWAR -->
+			<!-- Fixed Gun Blink Drive Disruptor Emitter -->
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>Null_Point_Jump_Disruptor_Large</SubtypeId>
+			</Id>
+			<DisplayName>WIP Null-Point Jump Disrupter</DisplayName>
+			<Description>WIP do not use reeeEEEDisables jump drives on contact for set time (even mid jump). Stacks up to 5 times. Projectile bypasses shields and requires a charge up before fire.</Description>
+			<GuiVisible>false</GuiVisible>
+			<Icon>Textures\GUI\Icons\mk2.png</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="2" y="3" z="6"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\JDDUpdatedtest.mwm</Model>
+			<Components>
+				<Component Count="250" Subtype="SteelPlate"/>
+				<Component Count="300" Subtype="Construction"/>
+				<Component Count="80" Subtype="LargeTube" />
+				<Component Count="160" Subtype="MetalGrid" />
+				<Component Count="50" Subtype="GravityGenerator" />
+				<Component Count="500" Subtype="Superconductor" />
+				<Component Count="300" Subtype="Computer"/>
+				<Component Count="150" Subtype="Construction"/>
+				<Component Count="500" Subtype="SteelPlate"/>
+			</Components>
+			<CriticalComponent Index="0" Subtype="Superconductor"/>
+			<MirroringZ>Y</MirroringZ>
+			<MirroringY>Z</MirroringY>
+			<MountPoints>
+				<MountPoint Side="Top" StartX="0" StartY="0" EndX="2" EndY="2"/>
+				<MountPoint Side="Bottom" StartX="0" StartY="4" EndX="2" EndY="6"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\JDDUpdatedtest_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.56" File="Models\JDDUpdatedtest_BS2.mwm"/>
+				<Model BuildPercentUpperBound="0.76" File="Models\JDDUpdatedtest_BS3.mwm"/>
+			</BuildProgressModels>
+			<BuildTimeSeconds>150</BuildTimeSeconds>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+			<BlockPairName>Null_Point_Jump_Disruptor_Large</BlockPairName>
+			<NavigationDefinition>Default</NavigationDefinition>
+			<WeaponDefinitionId Subtype="ShootMissileGooder" />
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<RequiredPowerInput>0.00002</RequiredPowerInput>
+			<PCU>800</PCU>
+		</Definition>
+
+		<!-- Shield Heal -->
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>K_HSR_Utilities_Reactor_Gel_LG</SubtypeId>
+			</Id>
+			<DisplayName>WIP Shield Heal</DisplayName>
+			<Icon>Textures\GUI\Icons\HSR\HSR_FluidReactor.dds</Icon>
+			<Description>can i convince WC that a reactor is a gun?
+
+			</Description>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="2" z="3" />
+			<ModelOffset x="0" y="0" z="0" />
+			<Model>Models\KreegBioReactor.mwm</Model>
+			<Components>
+
+
+				<Component Subtype="SteelPlate" Count="150" />
+				<Component Subtype="Construction" Count="200" />
+				<Component Subtype="GravityGenerator" Count="500" />
+				<Component Count="4000" Subtype="Superconductor" />
+				<Component Subtype="Computer" Count="100" />
+				<Component Subtype="SmallTube" Count="200" />
+				<Component Subtype="Motor" Count="100" />
+				<Component Subtype="LargeTube" Count="200" />
+				<Component Subtype="MetalGrid" Count="300" />
+				<Component Subtype="Construction" Count="500" />
+				<Component Subtype="SteelPlate" Count="100" />
+
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
+			</MountPoints>
+			<BlockPairName>K_HSR_Utilities_Reactor_Gel_LG</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>140</BuildTimeSeconds>
+			<OverlayTexture>Textures\GUI\Screens\K_camera_overlay_3.dds</OverlayTexture>
+			<WeaponDefinitionId Subtype="ShootMissileGooder"/>
+			<InventoryMaxVolume>10</InventoryMaxVolume>
+			<DamageEffectId>213</DamageEffectId>
+			<DamagedSound>ParticleWeapExpl</DamagedSound>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<MinElevationDegrees>0</MinElevationDegrees>
+			<MaxElevationDegrees>180</MaxElevationDegrees>
+			<MinAzimuthDegrees>-180</MinAzimuthDegrees>
+			<MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+			<RotationSpeed>0.0002</RotationSpeed>
+			<ElevationSpeed>0.0002</ElevationSpeed>
+			<IdleRotation>false</IdleRotation>
+			<MaxRangeMeters>6000</MaxRangeMeters>
+			<MinFov>0.001</MinFov>
+			<MaxFov>2</MaxFov>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+		</Definition>
+
+	</CubeBlocks>
+		
+
+</Definitions>

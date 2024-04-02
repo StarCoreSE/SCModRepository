@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <CubeBlocks>
+
+			<!-- Unused Railgun Block -->
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>Type17_BeamLance</SubtypeId>
+			</Id>
+			<DisplayName>Type 17 'Kodiak' Particle Lance</DisplayName>
+			<Description>Proton Particle Beam</Description>
+			<GuiVisible>false</GuiVisible>
+			<Icon>Textures\GUI\Icons\RailgunTurret_MainScene.png</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="5" y="3" z="7"/>
+			<ModelOffset x="0" y="1.2" z="0"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="5.0" EndY="2.0"/>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="5.0" EndY="2.0"/>
+				<MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="7.0" EndY="2.0"/>
+				<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="7.0" EndY="2.0"/>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="5.0" EndY="7.0"/>
+			</MountPoints>
+			<Model>Models\RailgunTurret_MainScene.mwm</Model>
+			<Components>
+				<Component Subtype="TurretBaseComponent" Count="10" />
+				<Component Subtype="TurretRotorComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="1" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="4" />
+			</Components>
+			<CriticalComponent Index="0" Subtype="Computer"/>
+			<BlockPairName>Type17_BeamLance</BlockPairName>
+			<NavigationDefinition>Default</NavigationDefinition>
+			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 
+			<MirroringY>Z</MirroringY>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<RequiredPowerInput>0.00002</RequiredPowerInput>
+			<EdgeType>Heavy</EdgeType>
+			<BuildTimeSeconds>150</BuildTimeSeconds>
+			<InventoryMaxVolume>1</InventoryMaxVolume>
+			<ShowEdges>false</ShowEdges>
+			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+			<DamagedSound>ParticleElectrical</DamagedSound>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+		</Definition>
+
+		
+    </CubeBlocks>
+</Definitions>

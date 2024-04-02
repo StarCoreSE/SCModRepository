@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>SC_AR_FocusedBeam</SubtypeId>
+			</Id>
+			<DisplayName>[ONYX] Focused Beam</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\SC_AR_FocusedBeam.dds</Icon>
+			<Description>
+				Long Ranged Fixed: [7km]
+				Magazine Capacity: [3]
+				Rate of Fire: [360]
+				Reload Speed: [7.5 seconds]
+				Ammunition: [Energy]
+				Pulse Laser:
+				[Falloff after 3.5km down to 25%]
+				Tractor Beam:
+				[No damage, 5km range]
+			</Description>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="6"/>
+			<Center x="0" y="0" z="5" />
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\large\Pulse_Laser_1x6.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="300" />
+				<Component Subtype="Construction" Count="200" />
+				<Component Subtype="MetalGrid" Count="50" />
+				<Component Subtype="PowerCell" Count="40" />
+				<Component Subtype="Superconductor" Count="120" />
+				<Component Subtype="LargeTube" Count="150" />
+				<Component Subtype="BulletproofGlass" Count ="120" />
+				<Component Subtype="Computer" Count="300" />
+				<Component Subtype="Construction" Count="150" />
+				<Component Subtype="SteelPlate" Count="200" />
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
+				<MountPoint Side="Left" StartX="1.00" StartY="0.00" EndX="6.00" EndY="1.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="5.00" EndY="1.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="1.00" EndY="5.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="1.00" EndX="1.00" EndY="6.00"/>
+			</MountPoints>
+			<BlockPairName>SC_AR_FocusedBeam</BlockPairName>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>80</BuildTimeSeconds>
+			<InventoryMaxVolume>1</InventoryMaxVolume>
+			<DamageEffectId>213</DamageEffectId>
+			<DamagedSound>ParticleWeapExpl</DamagedSound>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<PCU>750</PCU>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

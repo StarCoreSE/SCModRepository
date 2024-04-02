@@ -75,14 +75,14 @@ namespace Scripts
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
                 MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
-                MaxTargetDistance = 15000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MaxTargetDistance = 12500, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
                 TopTargets = 24, // Maximum number of targets to randomize between; 0 = unlimited.
                 TopBlocks = 48, // Maximum number of blocks to randomize between; 0 = unlimited.
                 StopTrackingSpeed = 0, // Do not track threats traveling faster than this speed; 0 = unlimited.
             },
             HardPoint = new HardPointDef
             {
-                PartName = "RL-10x Super", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "RL-10x 'Avalanche'", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 1f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 180f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
@@ -118,7 +118,7 @@ namespace Scripts
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 0, // Default resting elevation
                     InventorySize = 100f, // Inventory capacity in kL.
-                    IdlePower = 10f, // Constant base power draw in MW.
+                    IdlePower = 5.5f, // Constant base power draw in MW.
                     FixedOffset = false, // Deprecated.
                     Offset = Vector(x: 0, y: 0, z: 0), // Offsets the aiming/firing line of the weapon, in metres.
                     Type = BlockWeapon, // What type of weapon this is; BlockWeapon, HandWeapon, Phantom 
@@ -133,7 +133,7 @@ namespace Scripts
                 },
                 Other = new OtherDef
                 {
-                    ConstructPartCap = 0, // Maximum number of blocks with this weapon on a grid; 0 = unlimited.
+                    ConstructPartCap = 4, //preformance Maximum number of blocks with this weapon on a grid; 0 = unlimited.
                     RotateBarrelAxis = 0, // For spinning barrels, which axis to spin the barrel around; 0 = none.
                     EnergyPriority = 0, // Deprecated.
                     MuzzleCheck = false, // Whether the weapon should check LOS from each individual muzzle in addition to the scope.
@@ -152,9 +152,9 @@ namespace Scripts
                     MagsToLoad = 10, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     HeatPerShot = 25, // Heat generated per shot.
-                    MaxHeat = 470, // Max heat before weapon enters cooldown (70% of max heat).
+                    MaxHeat = 400, // Max heat before weapon enters cooldown (70% of max heat).
                     Cooldown = 0.95f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
-                    HeatSinkRate = 10, // cooling 172 heat per fire cycle
+                    HeatSinkRate = 9, //18.4s after firing+reloading, cooling 165 heat per fire cycle
                     DegradeRof = true, // Progressively lower rate of fire when over 80% heat threshold (80% of max heat).
                     ShotsInBurst = 5, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
                     DelayAfterBurst = 0, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).

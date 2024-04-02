@@ -10,9 +10,10 @@
             </Id>
             <DisplayName>Type 18 'Mercury' Heavy Turret</DisplayName>
             <Description>
-              [6km Targeting Range]
-              [Energy damage]
-              [1560 m/s]
+             An extremely advanced artillery piece, housed inside a fully mechanized and automated weapons control system.  We pair both an extremely large bore diameter with an exceptionally high muzzle velocity, just below the performance seen in electromagnetically assisted fire systems.  This ensures that you will put High Explosive pain on your target before the enemy can do the same to you.  Sold in standardized shipping container housings that feature fully automated repair algorithms to extend useful barrel life and even repair minor combat damages.
+              [6km Targeting Range, 64ft dispersion circle at 20,000 ft]
+              [High Energy Damage in a 37ft Blast Radius/ 75ft AOE Diameter]
+              [1560 m/s| 5120 ft/s Shell Velocity]
               This weapon slowly repairs itself while offline, and when below functional.
             </Description>
 			<GuiVisible>true</GuiVisible>
@@ -63,7 +64,7 @@
 				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="6.00"/>
 			</MountPoints>
             <WeaponDefinitionId Subtype="ShootMissileGooder" /> 
-            <BuildTimeSeconds>300</BuildTimeSeconds>
+            <BuildTimeSeconds>180</BuildTimeSeconds>
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>

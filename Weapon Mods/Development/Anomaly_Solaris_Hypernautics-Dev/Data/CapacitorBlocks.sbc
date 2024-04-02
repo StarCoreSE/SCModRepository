@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CubeBlocks>
+    <Definition xsi:type="MyObjectBuilder_BatteryBlockDefinition">
+      <Id>
+        <TypeId>BatteryBlock</TypeId>
+        <SubtypeId>CapacitorLarge</SubtypeId>
+      </Id>
+      <DisplayName>Capacitor</DisplayName>
+      <Icon>Textures\GUI\Icons\Capacitor.dds</Icon>
+      <Description>
+        Has a reserve of power that can discharge
+        It must be set to "Discharge" or "Auto" to provide power. Setting it back to "Rechage" pauses the timer.i se
+      </Description>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="4" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Capacitor.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="20" />
+        <Component Subtype="Construction" Count="10" />
+        <Component Subtype="PowerCell" Count="80">
+          <DeconstructId>
+            <TypeId>Ore</TypeId>
+            <SubtypeId>Scrap</SubtypeId>
+          </DeconstructId>
+        </Component>
+        <Component Subtype="Computer" Count="25" />
+        <Component Subtype="Construction" Count="20" />
+        <Component Subtype="SteelPlate" Count="60" />
+      </Components>
+      <CriticalComponent Subtype="PowerCell" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>Capacitor</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+
+      <ResourceSourceGroup>Battery</ResourceSourceGroup>
+      <MaxPowerOutput>1000</MaxPowerOutput>
+
+      <ResourceSinkGroup>BatteryBlock</ResourceSinkGroup>
+      <RequiredPowerInput>12</RequiredPowerInput>
+      <AdaptibleInput>true</AdaptibleInput>
+      <MaxStoredPower>3</MaxStoredPower>
+      <InitialStoredPowerRatio>0.3</InitialStoredPowerRatio>
+      <RechargeMultiplier>0.8</RechargeMultiplier>
+
+      <InventorySize>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+      </InventorySize>
+      <Public>true</Public>
+      <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+      <DamagedSound>ParticleElectrical</DamagedSound>
+      <EmissiveColorPreset>Extended</EmissiveColorPreset>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>15</PCU>
+      <IsAirTight>true</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <TargetingGroups>
+        <string>PowerSystems</string>
+      </TargetingGroups>
+    </Definition>
+
+  </CubeBlocks>
+</Definitions>

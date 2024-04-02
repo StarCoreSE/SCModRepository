@@ -1,0 +1,341 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Sounds>
+
+
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>NovaFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>15000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>7</Volume>
+      <PitchVariation>10</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossFade="10" Distance="1000" Sound = "NovaFireDist" />
+      </DistantSounds>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\NovaFire.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>NovaFireDist</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>15000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>6</Volume>
+      <PitchVariation>10</PitchVariation>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\NovaFireDist.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>NovaHit</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>8000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>7</Volume>
+      <PitchVariation>10</PitchVariation>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\NovaHit.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>NovaReload</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>300</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <PitchVariation>10</PitchVariation>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\NovaReload.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>NovaWarning</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>3</Volume>
+      <PitchVariation>1</PitchVariation>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\NovaWarning.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>BolterFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <PitchVariation>10</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossFade="10" Distance="200" Sound = "BolterFireDist" />
+      </DistantSounds>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\BolterFire.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>BolterFireDist</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <PitchVariation>10</PitchVariation>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\BolterFireDist.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>LascannonFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <PitchVariation>10</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossFade="10" Distance="400" Sound = "LascannonFireDist" />
+      </DistantSounds>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\LascannonFire.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>LascannonFireDist</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <PitchVariation>10</PitchVariation>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\LascannonFireDist.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>BattleCannonFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <PitchVariation>10</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossFade="10" Distance="200" Sound = "BattleCannonFireDist" />
+      </DistantSounds>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\BattleCannonFire.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>BattleCannonFireDist</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <PitchVariation>10</PitchVariation>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\BattleCannonFireDist.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>PlasmaCannonFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <PitchVariation>10</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossFade="10" Distance="200" Sound = "PlasmaCannonFireDist" />
+      </DistantSounds>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\PlasmaCannonFire.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>PlasmaCannonFireDist</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <PitchVariation>10</PitchVariation>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\PlasmaCannonFireDist.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>EarthshakerCannonFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <PitchVariation>10</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossFade="10" Distance="300" Sound = "EarthshakerCannonFireDist" />
+      </DistantSounds>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\EarthshakerCannonFire.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>EarthshakerCannonFireDist</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>3</Volume>
+      <PitchVariation>10</PitchVariation>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\EarthshakerCannonFireDist.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    
+    
+
+  </Sounds>
+</Definitions>

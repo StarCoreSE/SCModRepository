@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <CubeBlocks>
+
+		<!-- HeavyFighterBay -->
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>HeavyFighterBay</SubtypeId>
+			</Id>
+			<DisplayName>[MID] Phoenix Snubfighter Launch Bay</DisplayName>
+      		<Description>Launches Powerful strikecraft. Please have target selected, then turn shoot ON, to launch fighters.
+     		 Capacity: 1
+     		 MaxActive = 1
+			 500 HP Fighter, Holds 10 seconds of ammo for its onboard High Powered Laser.
+			 Deals 300 AMS damage per second.
+				Managed by heat. 'Hawk' and 'Argonaut' Variants to follow.
+     		 </Description>		
+			<Icon>Textures\GUI\Icons\SciFiPlaneLaunch.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="2" z="5"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Strike_Craft\HeavyFighterPad.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="2000" />
+                <Component Subtype="Construction" Count="400" />
+				<Component Subtype="SmallTube" Count="80" />
+                <Component Subtype="Motor" Count="150" />
+                <Component Subtype="LargeTube" Count="80" />
+                <Component Subtype="Computer" Count="60" />
+                <Component Subtype="InteriorPlate" Count="120" />
+                <Component Subtype="Construction" Count="140" />
+                <Component Subtype="SteelPlate" Count="600" />
+			</Components>
+			<CriticalComponent Index="0" Subtype="Computer"/>
+			<MountPoints>
+        <MountPoint Side="Bottom" StartX="0" StartY="0.00" EndX="3" EndY="5"/>  
+		<MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+		<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+		<MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="5.0" EndY="1.0"/>
+		<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="5.0" EndY="1.0"/>      
+			</MountPoints>
+			<BuildProgressModels>
+			</BuildProgressModels>
+			<MirroringY>Z</MirroringY>
+            <MirroringZ>Y</MirroringZ>
+            <EdgeType>Light</EdgeType>
+            <BuildTimeSeconds>150</BuildTimeSeconds>
+			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 
+            <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+            <DamagedSound>ParticleWeapExpl</DamagedSound>
+            <EmissiveColorPreset>Default</EmissiveColorPreset>
+            <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+            <DestroySound>WepSmallWarheadExpl</DestroySound>
+            <PCU>280</PCU>
+            <IsAirTight>false</IsAirTight>
+			<InventoryFillFactorMin>1</InventoryFillFactorMin>
+		</Definition>
+    </CubeBlocks>
+</Definitions>

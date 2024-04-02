@@ -2,6 +2,8 @@ name: "Upload SCKoth"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Gamemode Mods/Stable/SCKoth/**"
 

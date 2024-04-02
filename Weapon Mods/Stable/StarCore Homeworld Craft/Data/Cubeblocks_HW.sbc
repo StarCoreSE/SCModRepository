@@ -8,7 +8,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>TaiidanRailBomber</SubtypeId>
 			</Id>
-			<DisplayName>Taiidan Bomber Launch Rail</DisplayName>
+			<DisplayName>[EXO] Taiidan Bomber Launch Rail</DisplayName>
 
       <Description>
 
@@ -27,15 +27,16 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\LaunchRail.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="6000" />
+				<Component Subtype="SteelPlate" Count="7000" />
                 <Component Subtype="Construction" Count="400" />
-								<Component Subtype="SmallTube" Count="80" />
+				<Component Subtype="SmallTube" Count="80" />
                 <Component Subtype="Motor" Count="150" />
                 <Component Subtype="LargeTube" Count="80" />
                 <Component Subtype="Computer" Count="60" />
+				<Component Subtype="GravityGenerator" Count="300" />
                 <Component Subtype="InteriorPlate" Count="120" />
                 <Component Subtype="Construction" Count="140" />
-                <Component Subtype="SteelPlate" Count="2000" />
+                <Component Subtype="SteelPlate" Count="5000" />
 			</Components>
 			<CriticalComponent Index="0" Subtype="Computer"/>
 			<MountPoints>
@@ -90,7 +91,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>TaiidanRailFighter</SubtypeId>
       </Id>
-      <DisplayName>Taiidan Fighter Launch Rail</DisplayName>
+      <DisplayName>[EXO] Taiidan Fighter Launch Rail</DisplayName>
 
       <Description>
 
@@ -109,17 +110,18 @@
       <Size x="3" y="7" z="30"/>
       <ModelOffset x="0" y="0" z="0"/>
       <Model>Models\LaunchRail.mwm</Model>
-      <Components>
-        <Component Subtype="SteelPlate" Count="6000" />
-        <Component Subtype="Construction" Count="400" />
-        <Component Subtype="SmallTube" Count="80" />
-        <Component Subtype="Motor" Count="150" />
-        <Component Subtype="LargeTube" Count="80" />
-        <Component Subtype="Computer" Count="60" />
-        <Component Subtype="InteriorPlate" Count="120" />
-        <Component Subtype="Construction" Count="140" />
-        <Component Subtype="SteelPlate" Count="2000" />
-      </Components>
+		<Components>
+			<Component Subtype="SteelPlate" Count="7000" />
+			<Component Subtype="Construction" Count="400" />
+			<Component Subtype="SmallTube" Count="80" />
+			<Component Subtype="Motor" Count="150" />
+			<Component Subtype="LargeTube" Count="80" />
+			<Component Subtype="Computer" Count="60" />
+			<Component Subtype="GravityGenerator" Count="300" />
+			<Component Subtype="InteriorPlate" Count="120" />
+			<Component Subtype="Construction" Count="140" />
+			<Component Subtype="SteelPlate" Count="5000" />
+		</Components>
       <CriticalComponent Index="0" Subtype="Computer"/>
       <MountPoints>
         <MountPoint Side="Bottom" StartX="0" StartY="0.00" EndX="3" EndY="30"/>
@@ -173,7 +175,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>TaiidanHangarBomber</SubtypeId>
 			</Id>
-			<DisplayName>Taiidan Bomber Hangar Bay</DisplayName>
+			<DisplayName>[EXO] Taiidan Bomber Hangar Bay</DisplayName>
 
       <Description>
 
@@ -193,15 +195,16 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\HomeworldHangarBlock.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="2000" />
-                <Component Subtype="Construction" Count="820" />
-								<Component Subtype="SmallTube" Count="160" />
-                <Component Subtype="Motor" Count="300" />
-                <Component Subtype="LargeTube" Count="160" />
-                <Component Subtype="Computer" Count="120" />
-                <Component Subtype="InteriorPlate" Count="240" />
-                <Component Subtype="Construction" Count="280" />
-                <Component Subtype="SteelPlate" Count="4000" />
+				<Component Subtype="SteelPlate" Count="5000" />
+				<Component Subtype="Construction" Count="400" />
+				<Component Subtype="SmallTube" Count="80" />
+				<Component Subtype="Motor" Count="150" />
+				<Component Subtype="LargeTube" Count="80" />
+				<Component Subtype="Computer" Count="60" />
+				<Component Subtype="GravityGenerator" Count="300" />
+				<Component Subtype="InteriorPlate" Count="120" />
+				<Component Subtype="Construction" Count="140" />
+				<Component Subtype="SteelPlate" Count="4000" />
 			</Components>
 			<CriticalComponent Index="0" Subtype="Computer"/>
 			<MountPoints>
@@ -264,7 +267,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>TaiidanHangarBomberMedium</SubtypeId>
       </Id>
-      <DisplayName>Taiidan Bomber Hangar Bay Medium</DisplayName>
+      <DisplayName>[EXO] Taiidan Bomber Hangar Bay Medium</DisplayName>
 
       <Description>
 
@@ -283,17 +286,18 @@
       <Size x="13" y="5" z="7"/>
       <ModelOffset x="0" y="0" z="0"/>
       <Model>Models\HomeworldHangarBlockThin.mwm</Model>
-      <Components>
-        <Component Subtype="SteelPlate" Count="2000" />
-        <Component Subtype="Construction" Count="820" />
-        <Component Subtype="SmallTube" Count="160" />
-        <Component Subtype="Motor" Count="300" />
-        <Component Subtype="LargeTube" Count="160" />
-        <Component Subtype="Computer" Count="120" />
-        <Component Subtype="InteriorPlate" Count="240" />
-        <Component Subtype="Construction" Count="280" />
-        <Component Subtype="SteelPlate" Count="4000" />
-      </Components>
+		<Components>
+			<Component Subtype="SteelPlate" Count="5000" />
+			<Component Subtype="Construction" Count="400" />
+			<Component Subtype="SmallTube" Count="80" />
+			<Component Subtype="Motor" Count="150" />
+			<Component Subtype="LargeTube" Count="80" />
+			<Component Subtype="Computer" Count="60" />
+			<Component Subtype="GravityGenerator" Count="300" />
+			<Component Subtype="InteriorPlate" Count="120" />
+			<Component Subtype="Construction" Count="140" />
+			<Component Subtype="SteelPlate" Count="4000" />
+		</Components>
       <CriticalComponent Index="0" Subtype="Computer"/>
       <MountPoints>
         <MountPoint Side="Top" StartX="0" StartY="0" EndX="13" EndY="7" />
@@ -355,7 +359,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>TaiidanHangarFighter</SubtypeId>
       </Id>
-      <DisplayName>Taiidan Fighter Hangar Bay</DisplayName>
+      <DisplayName>[EXO] Taiidan Fighter Hangar Bay</DisplayName>
 
       <Description>
 
@@ -375,17 +379,18 @@
       <Size x="13" y="5" z="17"/>
       <ModelOffset x="0" y="0" z="0"/>
       <Model>Models\HomeworldHangarBlock.mwm</Model>
-      <Components>
-        <Component Subtype="SteelPlate" Count="2000" />
-        <Component Subtype="Construction" Count="820" />
-        <Component Subtype="SmallTube" Count="160" />
-        <Component Subtype="Motor" Count="300" />
-        <Component Subtype="LargeTube" Count="160" />
-        <Component Subtype="Computer" Count="120" />
-        <Component Subtype="InteriorPlate" Count="240" />
-        <Component Subtype="Construction" Count="280" />
-        <Component Subtype="SteelPlate" Count="4000" />
-      </Components>
+		<Components>
+			<Component Subtype="SteelPlate" Count="5000" />
+			<Component Subtype="Construction" Count="400" />
+			<Component Subtype="SmallTube" Count="80" />
+			<Component Subtype="Motor" Count="150" />
+			<Component Subtype="LargeTube" Count="80" />
+			<Component Subtype="Computer" Count="60" />
+			<Component Subtype="GravityGenerator" Count="300" />
+			<Component Subtype="InteriorPlate" Count="120" />
+			<Component Subtype="Construction" Count="140" />
+			<Component Subtype="SteelPlate" Count="4000" />
+		</Components>
       <CriticalComponent Index="0" Subtype="Computer"/>
       <MountPoints>
         <MountPoint Side="Top" StartX="0" StartY="0" EndX="13" EndY="17" />
@@ -447,7 +452,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>TaiidanSingleHangar</SubtypeId>
       </Id>
-      <DisplayName>Taiidan Fighter Small Bay</DisplayName>
+      <DisplayName>[EXO] Taiidan Fighter Small Bay</DisplayName>
 
       <Description>
 
@@ -467,17 +472,18 @@
       <Size x="5" y="5" z="7"/>
       <ModelOffset x="0" y="0" z="0"/>
       <Model>Models\SingleHangar.mwm</Model>
-      <Components>
-        <Component Subtype="SteelPlate" Count="500" />
-        <Component Subtype="Construction" Count="820" />
-        <Component Subtype="SmallTube" Count="160" />
-        <Component Subtype="Motor" Count="300" />
-        <Component Subtype="LargeTube" Count="160" />
-        <Component Subtype="Computer" Count="120" />
-        <Component Subtype="InteriorPlate" Count="240" />
-        <Component Subtype="Construction" Count="280" />
-        <Component Subtype="SteelPlate" Count="1000" />
-      </Components>
+		<Components>
+			<Component Subtype="SteelPlate" Count="1000" />
+			<Component Subtype="Construction" Count="400" />
+			<Component Subtype="SmallTube" Count="80" />
+			<Component Subtype="Motor" Count="150" />
+			<Component Subtype="LargeTube" Count="80" />
+			<Component Subtype="Computer" Count="60" />
+			<Component Subtype="GravityGenerator" Count="250" />
+			<Component Subtype="InteriorPlate" Count="120" />
+			<Component Subtype="Construction" Count="140" />
+			<Component Subtype="SteelPlate" Count="950" />
+		</Components>
       <CriticalComponent Index="0" Subtype="Computer"/>
       <MountPoints>
         <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="7" />
@@ -536,7 +542,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>ADMTaiidanHangarFighter</SubtypeId>
       </Id>
-      <DisplayName>ADMTaiidan Fighter Hangar Bay</DisplayName>
+      <DisplayName>[EXO] ADMTaiidan Fighter Hangar Bay</DisplayName>
 
       <Description>
 
@@ -628,7 +634,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>ADMTaiidanHangarBomber</SubtypeId>
       </Id>
-      <DisplayName>ADMTaiidan Bomber Hangar Bay</DisplayName>
+      <DisplayName>[EXO] ADMTaiidan Bomber Hangar Bay</DisplayName>
 
       <Description>
 

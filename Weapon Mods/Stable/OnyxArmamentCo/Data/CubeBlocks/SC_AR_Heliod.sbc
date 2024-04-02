@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>SC_AR_Heliod</SubtypeId>
+			</Id>
+			<!--Highly Energised Lance Integrated Offensive System-->
+			<DisplayName>[ONYX] Heliod Plasma Pulser</DisplayName>
+			<Description>
+				[MUST HAVE TARGET LOCK]
+				Long Ranged Fixed: [6km]
+				Magazine Capacity: [4]
+				Rate of Fire: [260]
+				Reload Speed: [6 seconds]
+				Ammunition: [270/s,] [Energy]
+				ZAP:
+				[Repeatedly zaps target]
+				BAP:
+				[Detonates on target]
+			</Description>
+			<Icon>Textures\GUI\Icons\Cubes\SC_AR_Heliod.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="2" y="1" z="6"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\large\SC_AR_Heliod.mwm</Model>
+			<Components>
+        <Component Subtype="SteelPlate" Count="1250" />
+        <Component Subtype="Construction" Count="300" />
+        <Component Subtype="MetalGrid" Count="200" />
+        <Component Subtype="PowerCell" Count="180" />
+        <Component Subtype="Superconductor" Count="300" />
+        <Component Subtype="LargeTube" Count="200" />
+        <Component Subtype="Motor" Count="300" />
+        <Component Subtype="Superconductor" Count ="180" />
+        <Component Subtype="Computer" Count="500" />
+        <Component Subtype="MetalGrid" Count="400" />
+        <Component Subtype="SteelPlate" Count="750" />
+			</Components>
+			<CriticalComponent Index="0" Subtype="Computer"/>
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="2.0" EndY="1.0"/>
+				<MountPoint Side="Left" StartX="4.0" StartY="0.0" EndX="6" EndY="1"/>
+				<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="2.0" EndY="1"/>
+				<MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="2.0" EndY="3.0"/>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="3.0" EndX="2.0" EndY="6.0"/>
+			</MountPoints>
+			<BuildProgressModels>
+			</BuildProgressModels>
+			<BlockPairName>SC_AR_Heliod</BlockPairName>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>90</BuildTimeSeconds>
+			<InventoryMaxVolume>1</InventoryMaxVolume>
+			<DamageEffectId>213</DamageEffectId>
+			<DamagedSound>ParticleWeapExpl</DamagedSound>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<PCU>100</PCU>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

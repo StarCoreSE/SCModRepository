@@ -10,9 +10,9 @@
 			<DisplayName>Type 19 'Merlin' Heavy Railgun Turret</DisplayName>
 			<Description>
             Extended Ranged Turret Magazine Capacity: 8 Reload Speed: 21.25 seconds
-            [8km Targeting Range]
+            [6km Targeting Range]
             [Kinetic damage]
-            [Draws Power]
+            [Draws 250MW]
             [2200 m/s]
             This weapon slowly repairs itself while offline, and when below functional.
             </Description>
@@ -57,7 +57,7 @@
 			<CriticalComponent Index="0" Subtype="Computer"/>
 
 			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 
-            <BuildTimeSeconds>400</BuildTimeSeconds>
+            <BuildTimeSeconds>200</BuildTimeSeconds>
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>

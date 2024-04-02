@@ -31,13 +31,13 @@ namespace Scripts
             AmmoMagazine = "Energy",
             AmmoRound = "SmallDualLaserAmmo",
             HybridRound = false, //AmmoMagazine based weapon with energy cost
-            EnergyCost = 0.05f, //(((EnergyCost * DefaultDamage) * ShotsPerSecond) * BarrelsPerShot) * ShotsPerBarrel
-            BaseDamage = 300f,
+            EnergyCost = 0.12f, //120MW (((EnergyCost * DefaultDamage) * ShotsPerSecond) * BarrelsPerShot) * ShotsPerBarrel
+            BaseDamage = 500f,
             Mass = 0, // in kilograms
             Health = 0, // 0 = disabled, otherwise how much damage it can take from other trajectiles before dying.
             BackKickForce = 0f,
             DecayPerShot = 0,
-            EnergyMagazineSize = 300,
+            EnergyMagazineSize = 222,
             HardPointUsable = true, // set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
             Shape = new ShapeDef //defines the collision shape of projectile, defaults line and visual Line Length if set to 0
             {
@@ -97,9 +97,9 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = -1f, //Heavy laser type.
+                    Modifier = 1.3f, //Heavy laser type.
                     Type = Default,
-                    BypassModifier = -1f,
+                    BypassModifier = -2f,
                 },
                 DamageType = new DamageTypes
                 {
@@ -208,7 +208,7 @@ namespace Scripts
                 VirtualBeams = false, // Only one hot beam, but with the effectiveness of the virtual beams combined (better performace)
                 ConvergeBeams = false, // When using virtual beams this option visually converges the beams to the location of the real beam.
                 RotateRealBeam = false, // The real (hot beam) is rotated between all virtual beams, instead of centered between them.
-                OneParticle = true, // Only spawn one particle hit per beam weapon.
+                OneParticle = false, // Only spawn one particle hit per beam weapon.
             },
             Trajectory = new TrajectoryDef
             {
@@ -261,25 +261,25 @@ namespace Scripts
                         Offset = Vector(x: 0, y: -1, z: 0),
                         Extras = new ParticleOptionDef
                         {
-                            Loop = false,
-                            Restart = false,
-                            MaxDistance = 5000,
+                            Loop = true,
+                            Restart = true,
+                            MaxDistance = 3200,
                             MaxDuration = 1,
                             Scale = 1,
                         },
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "",
+                        Name = "PulseSmallLaserHitEffect",
                         ApplyToShield = true,
                         //shrinkbydistance = false, obselete
                         Color = Color(red: 1, green: 8f, blue: 10f, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
-                            Loop = false,
-                            Restart = false,
-                            MaxDistance = 5000,
+                            Loop = true,
+                            Restart = true,
+                            MaxDistance = 1200,
                             MaxDuration = 30,
                             Scale = 1,
                             HitPlayChance = 1f,

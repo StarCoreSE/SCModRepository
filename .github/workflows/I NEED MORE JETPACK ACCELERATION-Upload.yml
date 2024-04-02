@@ -2,6 +2,8 @@ name: "Upload I NEED MORE JETPACK ACCELERATION"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Utility Mods/Stable/I NEED MORE JETPACK ACCELERATION/**"
 

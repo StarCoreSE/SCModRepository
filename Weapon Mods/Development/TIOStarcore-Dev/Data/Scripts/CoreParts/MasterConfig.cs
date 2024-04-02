@@ -17,10 +17,10 @@
                 MagDriver_Type19,
                 MagDriver_Type22,
                 MagDriver_Type25,
-                UNSC_Coilgun_Block, 
+                /*UNSC_Coilgun_Block*/ 
                 LightTurret_Reaver,
                 HeavyFixedRockets, 
-                ParticleLance_Type17,
+                //ParticleLance_Type17,
                 HeavyTorpedo_Trident,
  
                 HeavyMachinegun_Priest, 
@@ -33,22 +33,22 @@
                 HeavyPlas_X4, 
                 KineticLance_Vindicator_Super, 
                 WeaponThagomizer,
-
+                WeaponHGR,
                 DualPulseLaserTurret,
                 DualSnubnosedLaserTurret,
                 QuadCarronadeTurret,
 
-                QuadBarrelAutocannon,
-                B8T_Flare,
-                HeavyLanceBattery,
+                //QuadBarrelAutocannon,
+                //B8T_Flare,
+                //HeavyLanceBattery,
                 DualBarrelArtillery,
                 LightMissileLauncher,
                 HeavyAssaultMissileLauncher,
 
-                HeavyFighterBay,
+                HeavyFighterBay
 
-                K_HSR_Utilities_ShieldRestore,
-                Null_Point_Jump_Disruptor_Large
+                //K_HSR_Utilities_ShieldRestore,
+                //Null_Point_Jump_Disruptor_Large
                 );
 
         }

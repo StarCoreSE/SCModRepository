@@ -1,0 +1,392 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <CubeBlocks>
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>NovaCannon</SubtypeId>
+      </Id>
+      <DisplayName>Nova Cannon</DisplayName>
+      <Description>
+        The Nova Cannon is a weapon of ancient providence dating back to the Age of Technology, easily able to wreak vast destruction upon enemy vessels at great range.
+        Its projectiles vary, ranging from sophisticated plasma warheads which burn with the ferocity of a small star for a fraction of a second, to implosive devices which exert destructive gravitational forces upon all those caught within kilometres of the detonation.
+        This smaller Mars Pattern Nova Cannon has a maximum range of 10km.
+      </Description>
+      <Icon>Textures\icons\NovaCannonThumb.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="5" y="6" z="28" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\NovaCannon.mwm</Model>
+      <Components>
+        <Component Subtype="Construction" Count="5000" />
+        <Component Subtype="GravityGenerator" Count="200" />
+        <Component Subtype="Computer" Count="120" />
+        <Component Subtype="SmallTube" Count="1060" />
+        <Component Subtype="Motor" Count="1080" />
+        <Component Subtype="LargeTube" Count="1200" />
+        <Component Subtype="MetalGrid" Count="650" />
+        <Component Subtype="Construction" Count="14000" />
+        <Component Subtype="SteelPlate" Count="10000" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>Nova</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>380</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="Nova" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="1.0" StartY="1.0" EndX="4.0" EndY="14.0" PropertiesMask="2" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>HeavyBolterSmall</SubtypeId>
+      </Id>
+      <DisplayName>Heavy Bolter</DisplayName>
+      <Description>
+        Unlike the boltgun, the Heavy Bolter is relatively common in Astra Militarum armies and is also often used by the Space Marines. Heavy Bolters have a high rate of fire and are relatively cheap to field.
+        A Heavy Bolter can also be mounted on the cupola pintle-mounts of a wide variety of Imperial armoured vehicles, as well as act as an anti-personnel weapon by Imperial fixed defences, including strongholds and other fortifications.
+      </Description>
+      <Icon>Textures\icons\Heavy Bolter Fixed.dds</Icon>
+      <CubeSize>Small</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="2" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Heavy Bolter Fixed.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="10" />
+        <Component Subtype="Construction" Count="5" />
+        <Component Subtype="Computer" Count="1" />
+        <Component Subtype="SmallTube" Count="50" />
+        <Component Subtype="Motor" Count="1" />
+        <Component Subtype="LargeTube" Count="12" />
+        <Component Subtype="MetalGrid" Count="10" />
+        <Component Subtype="Construction" Count="10" />
+        <Component Subtype="SteelPlate" Count="10" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>Bolter</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>80</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="Bolter" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="2.0" PropertiesMask="2" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>HeavyBolterSmallSponson</SubtypeId>
+      </Id>
+      <DisplayName>Heavy Bolter Sponson</DisplayName>
+      <Description>
+        Unlike the boltgun, the Heavy Bolter is relatively common in Astra Militarum armies and is also often used by the Space Marines. Heavy Bolters have a high rate of fire and are relatively cheap to field.
+        A Heavy Bolter can also be mounted on the cupola pintle-mounts of a wide variety of Imperial armoured vehicles, as well as act as an anti-personnel weapon by Imperial fixed defences, including strongholds and other fortifications.
+      </Description>
+      <Icon>Textures\icons\Sponson Heavy Bolter small.dds</Icon>
+      <CubeSize>Small</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="2" y="2" z="4" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Sponson Heavy Bolter small.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="10" />
+        <Component Subtype="Construction" Count="5" />
+        <Component Subtype="Computer" Count="1" />
+        <Component Subtype="SmallTube" Count="50" />
+        <Component Subtype="Motor" Count="1" />
+        <Component Subtype="LargeTube" Count="12" />
+        <Component Subtype="MetalGrid" Count="10" />
+        <Component Subtype="Construction" Count="10" />
+        <Component Subtype="SteelPlate" Count="30" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>BolterSponson</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>80</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="BolterSponson" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="2.0" EndY="2.0" PropertiesMask="2" />
+        <MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="2.0" EndY="2.0" PropertiesMask="2" />
+        <MountPoint Side="Bottom" StartX="0.0" StartY="2.0" EndX="2.0" EndY="4.0" PropertiesMask="2" />
+        <MountPoint Side="Left" StartX="3.0" StartY="0.0" EndX="4.0" EndY="2.0" PropertiesMask="2" />
+        <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="1.0" EndY="2.0" PropertiesMask="2" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>HeavyBolterLargeSponson</SubtypeId>
+      </Id>
+      <DisplayName>Heavy Bolter Sponson</DisplayName>
+      <Description>
+        Unlike the boltgun, the Heavy Bolter is relatively common in Astra Militarum armies and is also often used by the Space Marines. Heavy Bolters have a high rate of fire and are relatively cheap to field.
+        A Heavy Bolter can also be mounted on the cupola pintle-mounts of a wide variety of Imperial armoured vehicles, as well as act as an anti-personnel weapon by Imperial fixed defences, including strongholds and other fortifications.
+      </Description>
+      <Icon>Textures\icons\Sponson Heavy Bolter small.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Heavy Bolter Sponson Base Large.mwm</Model>
+      <Components>
+        <Component Subtype="Construction" Count="500" />
+        <Component Subtype="GravityGenerator" Count="20" />
+        <Component Subtype="Computer" Count="120" />
+        <Component Subtype="SmallTube" Count="160" />
+        <Component Subtype="Motor" Count="108" />
+        <Component Subtype="LargeTube" Count="12" />
+        <Component Subtype="MetalGrid" Count="5" />
+        <Component Subtype="Construction" Count="1400" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>BolterSponson</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>80</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="HeavyBolterLargeSponson" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0" PropertiesMask="2" />
+        <MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0" PropertiesMask="2" />
+        <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0" PropertiesMask="2" />
+        <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0" PropertiesMask="2" />
+        <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0" PropertiesMask="2" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+    
+    
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>Lascannon</SubtypeId>
+      </Id>
+      <DisplayName>Lascannon</DisplayName>
+      <Description>
+        The powerful Lascannon is a formidable Laser Weapon whose energetic beam of coherent light is capable of penetrating most armoured vehicles. 
+        It is the favourite anti-tank weapon of the Astra Militarum and is also commonly used by the Space Marines.
+      </Description>
+      <Icon>Textures\icons\Lascannon Fixed.dds</Icon>
+      <CubeSize>Small</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="2" z="6" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Lascannon Fixed.mwm</Model>
+      <Components>
+        <Component Subtype="Construction" Count="50" />
+        <Component Subtype="GravityGenerator" Count="20" />
+        <Component Subtype="Computer" Count="12" />
+        <Component Subtype="SmallTube" Count="160" />
+        <Component Subtype="Motor" Count="108" />
+        <Component Subtype="LargeTube" Count="12" />
+        <Component Subtype="MetalGrid" Count="5" />
+        <Component Subtype="Construction" Count="140" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>Lascannon</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>80</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="Lascannon" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="2.0" PropertiesMask="2" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>BattleCannon</SubtypeId>
+      </Id>
+      <DisplayName>Leman Russ Battle Cannon</DisplayName>
+      <Description>
+        The Battle Cannon is the standard ballistic weapon used as the primary turret armament of the Leman Russ Battle Tank and the Rogal Dorn Battle Tank. 
+        It is a formidable weapon whose shells can deal significant damage from a long distance against both vehicle and infantry targets.
+      </Description>
+      <Icon>Textures\icons\BattleCannon.dds</Icon>
+      <CubeSize>Small</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="5" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\BattleCannon.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="Construction" Count="5" />
+        <Component Subtype="Computer" Count="1" />
+        <Component Subtype="SmallTube" Count="50" />
+        <Component Subtype="Motor" Count="1" />
+        <Component Subtype="LargeTube" Count="12" />
+        <Component Subtype="MetalGrid" Count="10" />
+        <Component Subtype="Construction" Count="10" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>BattleCannon</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>80</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="Bolter" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0" PropertiesMask="2" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>PlasmaCannon</SubtypeId>
+      </Id>
+      <DisplayName>Plasma Destroyer</DisplayName>
+      <Description>
+        A Plasma Destroyer, also called a Executioner Plasma Destroyer or Executioner Pattern Plasma Destroyer in some sources, is the largest
+        Plasma Weapon capable of being mounted on the hull of a Leman Russ main battle tank, which creates the variant of that vehicle known as the Leman Russ Executioner.
+        It is an extremely temperamental weapon that, due to its massive power requirements, is often disliked by Leman Russ Executioner crews for being unable to operate over the course of sustained engagements.
+      </Description>
+      <Icon>Textures\icons\Plasma Cannon.dds</Icon>
+      <CubeSize>Small</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="1" z="4" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Plasma Cannon.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="Construction" Count="5" />
+        <Component Subtype="Computer" Count="1" />
+        <Component Subtype="SmallTube" Count="50" />
+        <Component Subtype="Motor" Count="1" />
+        <Component Subtype="LargeTube" Count="12" />
+        <Component Subtype="MetalGrid" Count="10" />
+        <Component Subtype="Construction" Count="10" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>PlasmaCannon</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>80</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="Bolter" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0" PropertiesMask="2" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>EarthshakerCannon</SubtypeId>
+      </Id>
+      <DisplayName>Earthshaker Artillery Cannon</DisplayName>
+      <Description>
+        The Earthshaker Cannon is the standard heavy artillery piece used by the siege regiments of the Imperial Guard. Its shells are packed with powerful high-explosives that will destroy nearly anything within a sizable radius.
+        It is a 132 millimetre calibre gun, capable of firing a 38 kilogram shell over 15 kilometres at a velocity of 814 miles per hour. The cannon itself is extremely reliable and consistent.
+      </Description>
+      <Icon>Textures\icons\Earthshaker Cannon.dds</Icon>
+      <CubeSize>Small</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="3" z="18" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Earthshaker Cannon.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="Construction" Count="5" />
+        <Component Subtype="Computer" Count="1" />
+        <Component Subtype="SmallTube" Count="50" />
+        <Component Subtype="Motor" Count="1" />
+        <Component Subtype="LargeTube" Count="12" />
+        <Component Subtype="MetalGrid" Count="10" />
+        <Component Subtype="Construction" Count="10" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>EarthshakerCannon</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>80</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="Bolter" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0" PropertiesMask="2" />
+        <MountPoint Side="Bottom" StartX="0.0" StartY="15.0" EndX="3.0" EndY="18.0" PropertiesMask="2" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+    
+    
+  </CubeBlocks>
+  <BlueprintClassEntries>
+   
+    <Entry Class="LargeBlocks" BlueprintSubtypeId="LargeGatlingTurret/PDCTurretLB" />
+    <Entry Class="SmallBlocks" BlueprintSubtypeId="LargeGatlingTurret/PDCTurretSB" />
+    <Entry Class="Ammo" BlueprintSubtypeId="DeU_25x184mm" />
+  </BlueprintClassEntries>
+</Definitions>

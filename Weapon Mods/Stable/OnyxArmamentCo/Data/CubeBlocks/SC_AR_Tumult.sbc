@@ -6,7 +6,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>SC_AR_Tumult</SubtypeId>
       </Id>
-      <DisplayName>600mm Tumult Heavy Cannon</DisplayName>
+      <DisplayName>[ONYX] 600mm Tumult Heavy Cannon</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\Tumult.dds</Icon>
       <Description>
         Long Ranged Fixed: [15km]

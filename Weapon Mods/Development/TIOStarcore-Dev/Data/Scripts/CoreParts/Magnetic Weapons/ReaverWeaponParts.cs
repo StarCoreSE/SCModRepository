@@ -118,7 +118,7 @@ namespace Scripts {
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0.02f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
+                    RotateRate = 0.025f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
                     ElevateRate = 0.01f, // Max traversal speed of elevation subpart in radians per tick.
                     MinAzimuth = -180,
                     MaxAzimuth = 180,
@@ -127,7 +127,7 @@ namespace Scripts {
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 0, // Default resting elevation
                     InventorySize = 1f, // Inventory capacity in kL.
-                    IdlePower = 15f, // Constant base power draw in MW.
+                    IdlePower = 0.001f, //fix for animation??? Constant base power draw in MW.
                     FixedOffset = false, // Deprecated.
                     Offset = Vector(x: 0, y: 0, z: 0), // Offsets the aiming/firing line of the weapon, in metres.
                     Type = BlockWeapon, // What type of weapon this is; BlockWeapon, HandWeapon, Phantom 
@@ -251,9 +251,9 @@ namespace Scripts {
                  },
                 Muzzles = new[] {
                     "muzzle_projectile_1",
-                    "muzzle_projectile_4",
                     "muzzle_projectile_2",
                     "muzzle_projectile_3",
+                    "muzzle_projectile_4",
                 },
                 Ejector = "", // Optional; empty from which to eject "shells" if specified.
                 Scope = "Targeting", // Where line of sight checks are performed from. Must be clear of block collision.
@@ -264,14 +264,14 @@ namespace Scripts {
                     Grids, Neutrals, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
                 },
                 SubSystems = new[] {
-                    Utility, Offense, Thrust, Power, Production, Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
+                    Offense, Thrust, Utility,  Power, Production, Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
                 },
-                ClosestFirst = false, // Tries to pick closest targets first (blocks on grids, projectiles, etc...).
+                ClosestFirst = true, // Tries to pick closest targets first (blocks on grids, projectiles, etc...).
                 IgnoreDumbProjectiles = false, // Don't fire at non-smart projectiles.
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 3000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MaxTargetDistance = 2800, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
                 MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 0, // Maximum number of targets to randomize between; 0 = unlimited.
                 CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
@@ -302,14 +302,14 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "Salvo Battery", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
-                DeviateShotAngle = 0.15f, // Projectile inaccuracy in degrees.
-                AimingTolerance = 0.25f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
-                AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
+                PartName = "Raider Light Coilgun", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                DeviateShotAngle = 0.2f, // Projectile inaccuracy in degrees.
+                AimingTolerance = 1f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
+                AimLeadingPrediction = Basic, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
                 DelayCeaseFire = 0, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released.
                 AddToleranceToTracking = false, // Allows turret to track to the edge of the AimingTolerance cone instead of dead centre.
                 CanShootSubmerged = false, // Whether the weapon can be fired underwater when using WaterMod.
-                NpcSafe = false, // This is you tell npc moders that your ammo was designed with them in mind, if they tell you otherwise set this to false.
+                NpcSafe = true, // This is you tell npc moders that your ammo was designed with them in mind, if they tell you otherwise set this to false.
                 ScanTrackOnly = false, // This weapon only scans and tracks entities, this disables un-needed functionality and customizes for this purpose. 
                 Ui = new UiDef
                 {
@@ -343,7 +343,7 @@ namespace Scripts {
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 0, // Default resting elevation
                     InventorySize = 1f, // Inventory capacity in kL.
-                    IdlePower = 24f, // Constant base power draw in MW.
+                    IdlePower = 6f, // Constant base power draw in MW.
                     FixedOffset = false, // Deprecated.
                     Offset = Vector(x: 0, y: 0, z: 0), // Offsets the aiming/firing line of the weapon, in metres.
                     Type = BlockWeapon, // What type of weapon this is; BlockWeapon, HandWeapon, Phantom 
@@ -371,25 +371,25 @@ namespace Scripts {
                 },
                 Loading = new LoadingDef
                 {
-                    RateOfFire = 400, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
-                    BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
+                    RateOfFire = 130, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
+                    BarrelsPerShot = 2, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
-                    ReloadTime = 900, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    MagsToLoad = 20, // Number of physical magazines to consume on reload.
+                    ReloadTime = 600, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    MagsToLoad = 1, //20  Number of physical magazines to consume on reload.
                     DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    HeatPerShot = 5, // Heat generated per shot.
-                    MaxHeat = 100, // Max heat before weapon enters cooldown (70% of max heat).
+                    HeatPerShot = 1, // Heat generated per shot.
+                    MaxHeat = 400, // Max heat before weapon enters cooldown (70% of max heat).
                     Cooldown = .95f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
-                    HeatSinkRate = 7, // Amount of heat lost per second.
-                    DegradeRof = false, // Progressively lower rate of fire when over 80% heat threshold (80% of max heat).
-                    ShotsInBurst = 4, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
-                    DelayAfterBurst = 29, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    FireFull = false, // Whether the weapon should fire the full magazine (or the full burst instead if ShotsInBurst > 0), even if the target is lost or the player stops firing prematurely.
+                    HeatSinkRate = 10, // Amount of heat lost per second.
+                    DegradeRof = true, // Progressively lower rate of fire when over 80% heat threshold (80% of max heat).
+                    ShotsInBurst = 2, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
+                    DelayAfterBurst = 40, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    FireFull = true, // Whether the weapon should fire the full magazine (or the full burst instead if ShotsInBurst > 0), even if the target is lost or the player stops firing prematurely.
                     GiveUpAfter = false, // Whether the weapon should drop its current target and reacquire a new target after finishing its magazine or burst.
                     BarrelSpinRate = 0, // Visual only, 0 disables and uses RateOfFire.
                     DeterministicSpin = false, // Spin barrel position will always be relative to initial / starting positions (spin will not be as smooth).
-                    SpinFree = true, // Spin barrel while not firing.
+                    SpinFree = false, // Spin barrel while not firing.
                     StayCharged = false, // Will start recharging whenever power cap is not full.
                     MaxActiveProjectiles = 0, // Maximum number of drones in flight (only works for drone launchers)
                     MaxReloads = 0, // Maximum number of reloads in the LIFETIME of a weapon
@@ -398,11 +398,11 @@ namespace Scripts {
                 },
                 Audio = new HardPointAudioDef
                 {
-                    PreFiringSound = "", // Audio for warmup effect.
-                    FiringSound = "NewMediumCalibreShot", // Audio for firing.
+                    PreFiringSound = "snd_DeployPlatform", // Audio for warmup effect.
+                    FiringSound = "CoilShot", // Audio for firing.
                     FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "", // Sound SubtypeID, for when your Weapon is in a reloading state
-                    NoAmmoSound = "",
+                    NoAmmoSound = "Hydraulic_Stop.0",
                     HardPointRotationSound = "WepTurretGatlingRotate", // Audio played when turret is moving.
                     BarrelRotationSound = "WepShipGatlingRotation",
                     FireSoundEndDelay = 120, // How long the firing audio should keep playing after firing stops. Measured in game ticks(6 = 100ms, 60 = 1 seconds, etc..).
@@ -412,15 +412,16 @@ namespace Scripts {
                 {
                     Effect1 = new ParticleDef
                     {
-                        Name = "Definitive_Muzzle_Flash_MediumCalibre", // SubtypeId of muzzle particle effect.
+                        Name = "Light_Coil_Muzzle_Flash", // SubtypeId of muzzle particle effect.
                         Color = Color(red: 0, green: 0, blue: 0, alpha: 1), // Deprecated, set color in particle sbc.
-                        Offset = Vector(x: 0, y: 0, z: 0), // Offsets the effect from the muzzle empty.
+                        Offset = Vector(x: 0, y: -1, z: 0), // Offsets the effect from the muzzle empty.
+                        DisableCameraCulling = false, // If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                         Extras = new ParticleOptionDef
                         {
                             Loop = false, // Set this to the same as in the particle sbc!
                             Restart = false, // Whether to end a looping effect instantly when firing stops.
-                            MaxDistance = 1900, // Max distance at which this effect should be visible. NOTE: This will use whichever MaxDistance value is higher across Effect1 and Effect2!
-                            MaxDuration = 120, // How many ticks the effect should be ended after, if it's still running.
+                            MaxDistance = 2500,
+                            MaxDuration = 180,
                             Scale = 1f, // Scale of effect.
                         },
                     },
@@ -429,12 +430,11 @@ namespace Scripts {
                         Name = "",
                         Color = Color(red: 0, green: 0, blue: 0, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: 0),
-                        DisableCameraCulling = false, // If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                         Extras = new ParticleOptionDef
                         {
                             Loop = false,
                             Restart = false,
-                            MaxDistance = 300,
+                            MaxDistance = 1600,
                             MaxDuration = 3,
                             Scale = 1f,
                         },
@@ -442,9 +442,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                MediumCalibreSalvoAmmo,
-                MediumTurbolaserAmmo,
-                MediumBlasterAmmo, 
+                ReaverCoilgunAmmo,
                 // Must list all primary, shrapnel, and pattern ammos.
             },
             Animations = CoilgunMk1_AdvancedAnimation,

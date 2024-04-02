@@ -439,7 +439,7 @@
 		  <Mass>25</Mass>
 		  <Volume>2</Volume>
 		  <Model>Models\5InchShell_Small.mwm</Model>
-		  <Capacity>8</Capacity>
+		  <Capacity>1</Capacity>
 		  <AmmoDefinitionId Subtype="5InchHealShell" />
 	  </AmmoMagazine>
 

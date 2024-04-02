@@ -9,9 +9,9 @@
             </Id>
             <DisplayName>'Shipwreck' Heavy Carronade</DisplayName>
             <Description>
-              [2km Targeting Range]
+              [2.5km Targeting Range]
               [Energy damage]
-              [1200 m/s]
+              [1250 m/s]
                 POW! HA-HA!
             </Description>
 			<GuiVisible>true</GuiVisible>
@@ -37,7 +37,7 @@
 				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
 			</MountPoints>
             <WeaponDefinitionId Subtype="ShootMissileGooder" /> 
-            <BuildTimeSeconds>200</BuildTimeSeconds>
+            <BuildTimeSeconds>120</BuildTimeSeconds>
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>

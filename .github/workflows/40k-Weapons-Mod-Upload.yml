@@ -2,6 +2,8 @@ name: "Upload 40k-Weapons-Mod"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Weapon Mods/Stable/40k-Weapons-Mod/**"
 

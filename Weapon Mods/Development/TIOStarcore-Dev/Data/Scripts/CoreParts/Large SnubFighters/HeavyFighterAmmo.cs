@@ -45,10 +45,10 @@ namespace Scripts
             AmmoMagazine = "HeavyFighter1", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Heavy Fighter", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
-            EnergyCost = 0.001f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 1000f, // Direct damage; one steel plate is worth 100. 
+            EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
+            BaseDamage = 0.5f, // Direct damage; one steel plate is worth 100. 
             Mass = 5000, // In kilograms; how much force the impact will apply to the target.
-            Health = 1000, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            Health = 900, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 10, // Recoil.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
@@ -66,7 +66,7 @@ namespace Scripts
             Shape = new ShapeDef // Defines the collision shape of the projectile, defaults to LineShape and uses the visual Line Length if set to 0.
             {
                 Shape = LineShape, // LineShape or SphereShape. Do not use SphereShape for fast moving projectiles if you care about precision.
-                Diameter = 10, // Diameter is minimum length of LineShape or minimum diameter of SphereShape.
+                Diameter = 6, // Diameter is minimum length of LineShape or minimum diameter of SphereShape.
             },
             ObjectsHit = new ObjectsHitDef
             {
@@ -92,7 +92,7 @@ namespace Scripts
                     Interval = 0, // Time between spawning fragments, in ticks, 0 means every tick, 1 means every other
                     StartTime = 0, // Time delay to start spawning fragments, in ticks, of total projectile life
                     MaxSpawns = 600, // Max number of fragment children to spawn
-                    Proximity = 1200, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
+                    Proximity = 900, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
                     ParentDies = false, // Parent dies once after it spawns its last child.
                     PointAtTarget = true, // Start fragment direction pointing at Target
                     PointType = Direct, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
@@ -119,7 +119,7 @@ namespace Scripts
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
-                HealthHitModifier = 0.5, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
+                HealthHitModifier = 1000, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = 1, // Voxel damage multiplier; defaults to 1 if zero or less.
                 Characters = -1f, // Character damage multiplier; defaults to 1 if zero or less.
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
@@ -405,7 +405,7 @@ namespace Scripts
                         // Audio/Visual Section
                         AlternateParticle = new ParticleDef // if blank it will use default, must be a default version for this to be useable. 
                         {
-                            Name = "BSG_Viper_MK_I_Exhaust_High",
+                            Name = "",
                             Offset = Vector(x: 0, y: 0, z: 0),
                             DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                             Extras = new ParticleOptionDef
@@ -540,7 +540,7 @@ namespace Scripts
                         // Audio/Visual Section
                         AlternateParticle = new ParticleDef // if blank it will use default, must be a default version for this to be useable. 
                         {
-                            Name = "BSG_Viper_MK_I_Exhaust_High",
+                            Name = "",
                             Offset = Vector(x: 0, y: 0, z: 0),
                             DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                             Extras = new ParticleOptionDef
@@ -675,7 +675,7 @@ namespace Scripts
                         // Audio/Visual Section
                         AlternateParticle = new ParticleDef // if blank it will use default, must be a default version for this to be useable. 
                         {
-                            Name = "BSG_Viper_MK_I_Exhaust_High",
+                            Name = "",
                             Offset = Vector(x: 0, y: 0, z: 0),
                             DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                             Extras = new ParticleOptionDef
@@ -694,7 +694,7 @@ namespace Scripts
                             },
                         },
                         AlternateModel = "", // Define only if you want to switch to an alternate model in this phase
-                        AlternateSound = "" // if blank it will use default, must be a default version for this to be useable. 
+                        AlternateSound = "", // if blank it will use default, must be a default version for this to be useable. 
                     },
                     //3
                     new ApproachDef // Turn
@@ -810,7 +810,7 @@ namespace Scripts
                         // Audio/Visual Section
                         AlternateParticle = new ParticleDef // if blank it will use default, must be a default version for this to be useable. 
                         {
-                            Name = "BSG_Viper_MK_I_Exhaust_Low",
+                            Name = "",
                             Offset = Vector(x: 0, y: 0, z: 0),
                             DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                             Extras = new ParticleOptionDef
@@ -946,7 +946,7 @@ namespace Scripts
                         // Audio/Visual Section
                         AlternateParticle = new ParticleDef // if blank it will use default, must be a default version for this to be useable. 
                         {
-                            Name = "BSG_Viper_MK_I_Exhaust_Low",
+                            Name = "",
                             Offset = Vector(x: 0, y: 0, z: 0),
                             DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                             Extras = new ParticleOptionDef
@@ -966,7 +966,7 @@ namespace Scripts
                         },
                         AlternateModel = "", // Define only if you want to switch to an alternate model in this phase
                         AlternateSound = "", // if blank it will use default, must be a default version for this to be useable. 
-                        ModelRotateTime = 59, // If this value is greater than 0 then the projectile model will rotate to face the target, a value of 1 is instant (in ticks).
+                        ModelRotateTime = 120, // If this value is greater than 0 then the projectile model will rotate to face the target, a value of 1 is instant (in ticks).
                     },
                     //5
                     new ApproachDef // RTB
@@ -1059,7 +1059,7 @@ namespace Scripts
                         // Audio/Visual Section
                         AlternateParticle = new ParticleDef // if blank it will use default, must be a default version for this to be useable. 
                         {
-                            Name = "BSG_Viper_MK_I_Exhaust_High",
+                            Name = "",
                             Offset = Vector(x: 0, y: 0, z: 0),
                             DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                             Extras = new ParticleOptionDef
@@ -1078,7 +1078,7 @@ namespace Scripts
                             },
                         },
                         AlternateModel = "\\Models\\Strike_Craft\\HeavyFighterLanding.mwm", // Define only if you want to switch to an alternate model in this phase
-                        AlternateSound = "" // if blank it will use default, must be a default version for this to be useable. 
+                        AlternateSound = "", // if blank it will use default, must be a default version for this to be useable. 
                     },
                     //6
                     new ApproachDef // Recover Orbit
@@ -1171,7 +1171,7 @@ namespace Scripts
                         // Audio/Visual Section
                         AlternateParticle = new ParticleDef // if blank it will use default, must be a default version for this to be useable. 
                         {
-                            Name = "BSG_Viper_MK_I_Exhaust_High",
+                            Name = "",
                             Offset = Vector(x: 0, y: 0, z: 0),
                             DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                             Extras = new ParticleOptionDef
@@ -1190,7 +1190,7 @@ namespace Scripts
                             },
                         },
                         AlternateModel = "", // Define only if you want to switch to an alternate model in this phase
-                        AlternateSound = "" // if blank it will use default, must be a default version for this to be useable. 
+                        AlternateSound = "", // if blank it will use default, must be a default version for this to be useable. 
                     },
                     //7
                     new ApproachDef // Recover
@@ -1283,7 +1283,7 @@ namespace Scripts
                         // Audio/Visual Section
                         AlternateParticle = new ParticleDef // if blank it will use default, must be a default version for this to be useable. 
                         {
-                            Name = "BSG_Viper_MK_I_Exhaust_Low",
+                            Name = "",
                             Offset = Vector(x: 0, y: 0, z: 0),
                             DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                             Extras = new ParticleOptionDef
@@ -1302,7 +1302,7 @@ namespace Scripts
                             },
                         },
                         AlternateModel = "\\Models\\Strike_Craft\\HeavyFighterLanding.mwm", // Define only if you want to switch to an alternate model in this phase
-                        AlternateSound = "" // if blank it will use default, must be a default version for this to be useable. 
+                        AlternateSound = "", // if blank it will use default, must be a default version for this to be useable. 
                     },
                     //8
                     new ApproachDef // Dock
@@ -1395,7 +1395,7 @@ namespace Scripts
                         // Audio/Visual Section
                         AlternateParticle = new ParticleDef // if blank it will use default, must be a default version for this to be useable. 
                         {
-                            Name = "BSG_Viper_MK_I_Exhaust_Low",
+                            Name = "",
                             Offset = Vector(x: 0, y: 0, z: 0),
                             DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                             Extras = new ParticleOptionDef
@@ -1414,7 +1414,7 @@ namespace Scripts
                             },
                         },
                         AlternateModel = "\\Models\\Strike_Craft\\HeavyFighterLanding.mwm", // Define only if you want to switch to an alternate model in this phase
-                        AlternateSound = "" // if blank it will use default, must be a default version for this to be useable. 
+                        AlternateSound = "", // if blank it will use default, must be a default version for this to be useable. 
                     },
                 },
                 Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
@@ -1435,7 +1435,7 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "", //ShipWelderArc
+                        Name = "TypeCTrail", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -1524,9 +1524,9 @@ namespace Scripts
             },
             AmmoAudio = new AmmoAudioDef
             {
-                TravelSound = "hwshiploop", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
+                TravelSound = "SnubFighterFlight", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
                 HitSound = "",
-                ShotSound = "hwshiplaunchtalk",
+                ShotSound = "",
                 ShieldHitSound = "",
                 PlayerHitSound = "",
                 VoxelHitSound = "",
@@ -1553,7 +1553,7 @@ namespace Scripts
             AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Fighter Laser", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
-            EnergyCost = 0.001f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
+            EnergyCost = 1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 1000f, // Direct damage; one steel plate is worth 100.
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
@@ -1629,7 +1629,7 @@ namespace Scripts
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
-                HealthHitModifier = 5f, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
+                HealthHitModifier = 4f, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = 1, // Voxel damage multiplier; defaults to 1 if zero or less.
                 Characters = -1f, // Character damage multiplier; defaults to 1 if zero or less.
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
@@ -1652,7 +1652,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 2f, // Multiplier for damage against shields.
+                    Modifier = 3f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -2f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -1874,8 +1874,8 @@ namespace Scripts
                         Length = 10f,
                         Width = 0.2f,
                         Color = Color(red: 3, green: 3, blue: 3f, alpha: 0.2f),
-                        VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
-                        VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
+                        VisualFadeStart = 90, // Number of ticks the weapon has been firing before projectiles begin to fade their color
+                        VisualFadeEnd = 60, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
                             "WeaponLaser",
                         },
@@ -1901,7 +1901,7 @@ namespace Scripts
                     {
                         Enable = true,
                         Textures = new[] {
-                            "ProjectileTrailLine",
+                            "WeaponLaser",
                         },
                         TextureMode = Normal,
                         DecayTime = 1,
@@ -1922,11 +1922,11 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "hwshiphit",
-                ShotSound = "hwshipfire",
-                ShieldHitSound = "hwshiphit",
+                HitSound = "",
+                ShotSound = "FighterLaser",
+                ShieldHitSound = "",
                 PlayerHitSound = "",
-                VoxelHitSound = "hwshiphit",
+                VoxelHitSound = "",
                 FloatingHitSound = "",
                 HitPlayChance = 0.1f,
                 HitPlayShield = true,

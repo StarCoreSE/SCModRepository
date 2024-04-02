@@ -64,7 +64,7 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "Frickin Laser Shotty", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "Small X-Pulse Laser Array", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0.1f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 1f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Off, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
@@ -99,7 +99,7 @@ namespace Scripts {
                     MaxElevation = 90,
                     FixedOffset = false,
                     InventorySize = 0f,
-                    IdlePower = 15f, // Constant base power draw in MW.
+                    IdlePower = 1f, // Constant base power draw in MW.
                     Offset = Vector(x: 0, y: 0, z: 0),
                     Type = BlockWeapon, // BlockWeapon, HandWeapon, Phantom 
                     CriticalReaction = new CriticalDef
@@ -163,14 +163,14 @@ namespace Scripts {
                 {
                     Effect1 = new ParticleDef
                     {
-                        Name = "laserflash", // SubtypeId of muzzle particle effect.
+                        Name = "", // SubtypeId of muzzle particle effect.
                         Color = Color(red: 0, green: 0, blue: 0, alpha: 1), // Deprecated, set color in particle sbc.
                         Offset = Vector(x: 0, y: 0, z: 0), // Offsets the effect from the muzzle empty.
                         Extras = new ParticleOptionDef
                         {
-                            Loop = true, // Set this to the same as in the particle sbc!
-                            Restart = false, // Whether to end a looping effect instantly when firing stops.
-                            Scale = 2f, // Scale of effect.
+                            Loop = false, // Set this to the same as in the particle sbc!
+                            Restart = true, // Whether to end a looping effect instantly when firing stops.
+                            Scale = 1f, // Scale of effect.
                         },
                     },
                     Effect2 = new ParticleDef

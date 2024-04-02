@@ -8,12 +8,12 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>Fixed_Rockets</SubtypeId>
       </Id>
-      <DisplayName>Tiberiyaas Heavy Rockets</DisplayName>
+      <DisplayName>Tiberius Heavy Rockets</DisplayName>
       <Description>
-        [Rockets]
+        [Unguided Low Power Innaccurate Rockets]
         [2km Range]
         [Energy damage]
-        [1000 m/s]
+        [900 m/s]
       </Description>
       <GuiVisible>true</GuiVisible>
       <Icon>Textures\GUI\Icons\Peacemaker.dds</Icon>

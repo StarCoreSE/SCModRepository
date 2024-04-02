@@ -1,0 +1,393 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AmmoMagazines>
+  
+<!--  Missile -->  
+
+
+	<!--  Gauss -->  
+	
+	<AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>K_GaussCase_S</SubtypeId>
+      </Id>
+      <DisplayName>Standard-Gauss Case</DisplayName>
+      <Icon>Textures\GUI\Icons\K_SA_MSI_Mercury.dds</Icon>
+	  <ExtraInventoryTooltipLine>Serpent Arms, Gauss Ammunition, Standard Load comes in 120 shots.</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>30</Mass>
+      <Volume>1</Volume>
+      <Model>Models\SerpentArms\SA_Ammunition_GaussCase_Stan60_Small.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>5</Capacity>
+      <AmmoDefinitionId Subtype="K_HSR_FakeMissile" />
+    </AmmoMagazine>  
+	
+	<AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>K_GaussCase_Flashfire</SubtypeId>
+      </Id>
+      <DisplayName>Flashfire-Gauss Case</DisplayName>
+      <Icon>Textures\GUI\Icons\K_SA_MSI_Mercury.dds</Icon>
+	  <ExtraInventoryTooltipLine>Serpent Arms, Gauss Ammunition, Flashfire Load comes in 30 shots.</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>45</Mass>
+      <Volume>1</Volume>
+      <Model>Models\SerpentArms\SA_Ammunition_GaussCase_Flashfire_Small.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>5</Capacity>
+      <AmmoDefinitionId Subtype="K_HSR_FakeMissile" />
+    </AmmoMagazine>  
+
+	<AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>K_GaussHeavyCase_S</SubtypeId>
+      </Id>
+      <DisplayName>Heavy-Gauss Case</DisplayName>
+      <Icon>Textures\GUI\Icons\K_SA_MSI_Mercury.dds</Icon>
+	  <ExtraInventoryTooltipLine>Serpent Arms, Heavy Gauss Ammunition, Standard Load comes in 30 shots.</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>60</Mass>
+      <Volume>1</Volume>
+      <Model>Models\SerpentArms\SA_Ammunition_GaussCase_Stan60_Small.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>2</Capacity>
+      <AmmoDefinitionId Subtype="K_HSR_FakeMissile" />
+    </AmmoMagazine>
+
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>K_GaussHeavyCase_FM</SubtypeId>
+      </Id>
+      <DisplayName>Heavy-Gauss Case</DisplayName>
+      <Icon>Textures\GUI\Icons\K_SA_MSI_Mercury.dds</Icon>
+      <ExtraInventoryTooltipLine>Serpent Arms, Heavy Gauss Ammunition, Standard Load comes in 30 shots.</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>60</Mass>
+      <Volume>1</Volume>
+      <Model>Models\SerpentArms\SA_Ammunition_GaussCase_Stan60_Small.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="K_HSR_FakeMissile" />
+    </AmmoMagazine>
+
+
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>K_Cerberus_Gauss_Mag</SubtypeId>
+      </Id>
+      <DisplayName>Cerberus-Gauss Case</DisplayName>
+      <Icon>Textures\GUI\Icons\K_SA_MSI_Mercury.dds</Icon>
+      <ExtraInventoryTooltipLine>Serpent Arms, Heavy Gauss Ammunition, Standard Load comes in 30 shots.</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>60</Mass>
+      <Volume>1</Volume>
+      <Model>Models\SerpentArms\SA_Ammunition_GaussCase_Stan60_Small.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="K_HSR_FakeMissile" />
+    </AmmoMagazine>
+
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>K_GaussPrototypeBlitzCase</SubtypeId>
+      </Id>
+      <DisplayName>Blitz-Gauss Case</DisplayName>
+      <Icon>Textures\GUI\Icons\K_SA_MSI_Mercury.dds</Icon>
+	  <ExtraInventoryTooltipLine>Serpent Arms, Prototype Gauss Ammunition, Standard Load comes in 3000 shots.</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>150</Mass>
+      <Volume>1</Volume>
+      <Model>Models\SerpentArms\SA_Ammunition_GaussCase_Stan60_Small.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>100</Capacity>
+      <AmmoDefinitionId Subtype="K_HSR_FakeMissile" />
+    </AmmoMagazine>  
+    
+        <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>K_Hydra</SubtypeId>
+      </Id>
+      <DisplayName>Blitz-Gauss Case</DisplayName>
+      <Icon>Textures\GUI\Icons\K_SA_MSI_Mercury.dds</Icon>
+	  <ExtraInventoryTooltipLine>Shotgun</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>1</Mass>
+      <Volume>1</Volume>
+      <Model>Models\SerpentArms\SA_Ammunition_GaussCase_Stan60_Small.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="K_HSR_FakeMissile" />
+    </AmmoMagazine>  
+    
+            <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>K_RotaryAmmo</SubtypeId>
+      </Id>
+      <DisplayName>gun go brr</DisplayName>
+      <Icon>Textures\GUI\Icons\K_SA_MSI_Mercury.dds</Icon>
+	  <ExtraInventoryTooltipLine>Shotgun</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>1</Mass>
+      <Volume>1</Volume>
+      <Model>Models\SerpentArms\SA_Ammunition_GaussCase_Stan60_Small.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>100</Capacity>
+      <AmmoDefinitionId Subtype="K_HSR_FakeMissile" />
+    </AmmoMagazine>  
+	
+	
+	<AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>K_GaussCase_Flak</SubtypeId>
+      </Id>
+      <DisplayName>Flak-Gauss Case</DisplayName>
+      <Icon>Textures\GUI\Icons\K_SA_MSI_Mercury.dds</Icon>
+	  <ExtraInventoryTooltipLine>Serpent Arms, Flak-Type Gauss Ammunition, Standard Load comes in 90 shots.</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>30</Mass>
+      <Volume>1</Volume>
+      <Model>Models\SerpentArms\SA_Ammunition_GaussCase_Stan60_Small.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>90</Capacity>
+      <AmmoDefinitionId Subtype="K_HSR_FakeMissile" />
+    </AmmoMagazine>  
+	
+	
+		<AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>K_GaussCase_AMSIIC</SubtypeId>
+      </Id>
+      <DisplayName>AMS-IIC Gauss Case</DisplayName>
+      <Icon>Textures\GUI\Icons\K_SA_MSI_Mercury.dds</Icon>
+	  <ExtraInventoryTooltipLine>Serpent Arms, Phoenix-IIC Gauss Ammunition, Standard Load comes in single-shot.</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>30</Mass>
+      <Volume>1</Volume>
+      <Model>Models\SerpentArms\SA_Ammunition_GaussCase_Stan60_Small.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>3600</Capacity>
+      <AmmoDefinitionId Subtype="K_HSR_FakeMissile" />
+    </AmmoMagazine>  
+	
+	
+		<AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>K_Gauss_Helix_Kinetic</SubtypeId>
+      </Id>
+      <DisplayName>Helix Case (Kinetic)</DisplayName>
+      <Icon>Textures\GUI\Icons\K_SA_MSI_Mercury.dds</Icon>
+	  <ExtraInventoryTooltipLine>Serpent Arms, Helix Gauss Ammunition, Standard Load comes in 90 shots.</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>90</Mass>
+      <Volume>1</Volume>
+      <Model>Models\SerpentArms\SA_Ammunition_GaussCase_Stan60_Small.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>90</Capacity>
+      <AmmoDefinitionId Subtype="K_HSR_FakeMissile" />
+    </AmmoMagazine>  
+	
+	<AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>K_Gauss_Helix_Energy</SubtypeId>
+      </Id>
+      <DisplayName>Helix Case (Plasma)</DisplayName>
+      <Icon>Textures\GUI\Icons\K_SA_MSI_Mercury.dds</Icon>
+	  <ExtraInventoryTooltipLine>Serpent Arms, Helix Gauss Ammunition, Standard Load comes in 60 shots.</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>90</Mass>
+      <Volume>1</Volume>
+      <Model>Models\SerpentArms\SA_Ammunition_GaussCase_Stan60_Small.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>60</Capacity>
+      <AmmoDefinitionId Subtype="K_HSR_FakeMissile" />
+    </AmmoMagazine>  
+	
+	<AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>K_Gauss_Helix_Heavy</SubtypeId>
+      </Id>
+      <DisplayName>Helix Case (Heavy)</DisplayName>
+      <Icon>Textures\GUI\Icons\K_SA_MSI_Mercury.dds</Icon>
+	  <ExtraInventoryTooltipLine>Serpent Arms, Helix Gauss Ammunition, Standard Load comes in 1 shots.</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>90</Mass>
+      <Volume>1</Volume>
+      <Model>Models\SerpentArms\SA_Ammunition_GaussCase_Stan60_Small.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="K_HSR_FakeMissile" />
+    </AmmoMagazine>  
+	
+	<AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>K_SA_GrimlockIIMag</SubtypeId>
+      </Id>
+      <DisplayName>Grimlock-II Missile Case (3)</DisplayName>
+      <Icon>Textures\GUI\Icons\K_SA_MSI_Mercury.dds</Icon>
+	  <ExtraInventoryTooltipLine>Serpent Arms, Grimlock-II Ammunition, Standard Load comes in 3 shots.</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>10</Mass>
+      <Volume>1</Volume>
+      <Model>Models\SerpentArms\SA_Ammunition_GaussCase_Stan60_Small.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>3</Capacity>
+      <AmmoDefinitionId Subtype="K_HSR_FakeMissile" />
+    </AmmoMagazine>
+
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>K_GaussHeavyCase_Phoenix</SubtypeId>
+      </Id>
+      <DisplayName>Heavy-Gauss Phoenix Case</DisplayName>
+      <Icon>Textures\GUI\Icons\K_ERGauss.dds</Icon>
+      <ExtraInventoryTooltipLine>Serpent Arms, Heavy Gauss Ammunition, Standard Load comes in 20 shots.</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>60</Mass>
+      <Volume>1</Volume>
+      <Model>Models\SerpentArms\SA_Ammunition_GaussCase_Stan60_Small.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="K_SA_FakeMissile" />
+    </AmmoMagazine>
+
+
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>K_Grimlock_S</SubtypeId>
+      </Id>
+      <DisplayName>Grimlock Standard</DisplayName>
+      <Icon>Textures\GUI\Icons\K_GrimLock.dds</Icon>
+      <ExtraInventoryTooltipLine>Serpent Arms, Grimlock Missile, Standard Load, comes in pairs.</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>14</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Ammo\Projectile_Missile.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>2</Capacity>
+      <AmmoDefinitionId Subtype="K_SA_FakeMissile" />
+    </AmmoMagazine>
+
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>K_Grimlock_KineticKill</SubtypeId>
+      </Id>
+      <DisplayName>Grimlock Kinetic-Kill</DisplayName>
+      <Icon>Textures\GUI\Icons\K_GrimLock.dds</Icon>
+      <ExtraInventoryTooltipLine>Serpent Arms, Grimlock Missile, Kinetic-Kill Load, comes in pairs.</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>18</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Ammo\Projectile_Missile.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>2</Capacity>
+      <AmmoDefinitionId Subtype="K_SA_FakeMissile" />
+    </AmmoMagazine>
+
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>K_Grimlock_GravFissure</SubtypeId>
+      </Id>
+      <DisplayName>Grimlock Gravity-Fissure</DisplayName>
+      <Icon>Textures\GUI\Icons\K_GrimLock.dds</Icon>
+      <ExtraInventoryTooltipLine>Serpent Arms, Grimlock Missile, Gravity-Fissure Load, comes in pairs.</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>32</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Ammo\Projectile_Missile.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>2</Capacity>
+      <AmmoDefinitionId Subtype="K_SA_FakeMissile" />
+    </AmmoMagazine>
+  </AmmoMagazines>
+</Definitions>

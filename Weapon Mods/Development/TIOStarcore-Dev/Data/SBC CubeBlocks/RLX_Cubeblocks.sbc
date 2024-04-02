@@ -7,14 +7,14 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>Thagomizer</SubtypeId>
 		  </Id>
-		  <DisplayName>'Marauder' Naval RL-10X</DisplayName>
+		  <DisplayName>Naval RL-10x 'Avalanche' Medium Range Launchers</DisplayName>
 		  <Description>
 			  10 Barrels of High Explosive Rockets
-			  500m minimum range, 9000m max
-			  Energy Damage
-
+			  400m minimum range, 13500m max
+			  Kinetic Damage
+			  Draws 100MW
 		  </Description>
-		  <Icon>Textures\GUI\Icons\Cubes\jnick.dds</Icon>
+		  <Icon>Textures\GUI\Icons\Cubes\tempiconRLX.png</Icon>
 		  <CubeSize>Large</CubeSize>
 		  <GuiVisible>true</GuiVisible>
 		  <BlockTopology>TriangleMesh</BlockTopology>
@@ -46,7 +46,7 @@
 		  <MirroringBlock>Thagomizer_Flipped</MirroringBlock>
 		  <BlockPairName>Thagomizer</BlockPairName>
 		  <EdgeType>Light</EdgeType>
-		  <BuildTimeSeconds>240</BuildTimeSeconds>
+		  <BuildTimeSeconds>140</BuildTimeSeconds>
 		  <DisassembleRatio>5</DisassembleRatio>
 		  <NavigationDefinition>Default</NavigationDefinition>
 		  <WeaponDefinitionId Subtype="Thagomizer" />
@@ -69,14 +69,14 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>Thagomizer_Flipped</SubtypeId>
 		  </Id>
-		  <DisplayName>'Marauder' Naval RL-10X</DisplayName>
+		  <DisplayName>Naval RL-10x 'Avalanche' Medium Range Launchers</DisplayName>
 		  <Description>
 			  10 Barrels of High Explosive Rockets
-			  500m minimum range, 9000m max
-			  Energy Damage
+			  400m minimum range, 13500m max
+			  Kinetic Damage
 
 		  </Description>
-		  <Icon>Textures\GUI\Icons\Cubes\jnick.dds</Icon>
+		  <Icon>Textures\GUI\Icons\Cubes\tempiconRLX.png</Icon>
 		  <CubeSize>Large</CubeSize>
 		  <GuiVisible>true</GuiVisible>
 		  <BlockTopology>TriangleMesh</BlockTopology>
@@ -108,7 +108,7 @@
 		  <MirroringBlock>Thagomizer</MirroringBlock>
 		  <BlockPairName>Thagomizer3</BlockPairName>
 		  <EdgeType>Light</EdgeType>
-		  <BuildTimeSeconds>240</BuildTimeSeconds>
+		  <BuildTimeSeconds>140</BuildTimeSeconds>
 		  <DisassembleRatio>5</DisassembleRatio>
 		  <NavigationDefinition>Default</NavigationDefinition>
 		  <WeaponDefinitionId Subtype="Thagomizer" />
@@ -132,13 +132,14 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>Thagomizer_Angled</SubtypeId>
 		  </Id>
-		  <DisplayName>Naval RL-10X</DisplayName>
+		  <DisplayName>Naval RL-10x 'Avalanche' Angled Medium Range Launchers</DisplayName>
 		  <Description>
-			  10 Barrels of High Explosive Content
-			  Try Armoring with 4x1s
+			  10 Barrels of High Explosive Rockets
+			  400m minimum range, 13500m max
+			  Kinetic Damage
 
 		  </Description>
-		  <Icon>Textures\GUI\Icons\Cubes\jnick.dds</Icon>
+		  <Icon>Textures\GUI\Icons\Cubes\tempiconRLX.png</Icon>
 		  <CubeSize>Large</CubeSize>
 		  <GuiVisible>true</GuiVisible>
 		  <BlockTopology>TriangleMesh</BlockTopology>
@@ -160,8 +161,8 @@
 		  <CriticalComponent Subtype="Computer" Index="0" />
 		  <MountPoints>
 			  <MountPoint Side="Back" StartX="0.50" StartY="0.00" EndX="4.50" EndY="8.00" Default="true"/>
-			  			  <MountPoint Side="Back" StartX="-0.50" StartY="0.00" EndX="4.00" EndY="4.00"/>
-			  			  <MountPoint Side="Back" StartX="1.00" StartY="4.00" EndX="5.50" EndY="8.00"/>
+			  <MountPoint Side="Back" StartX="-0.50" StartY="0.00" EndX="4.00" EndY="4.00"/>
+			  <MountPoint Side="Back" StartX="1.00" StartY="4.00" EndX="5.50" EndY="8.00"/>
 			  <MountPoint Side="Front" StartX="-0.50" StartY="4.00" EndX="4.25" EndY="8.00"/>
 			  <MountPoint Side="Front" StartX="0.75" StartY="0.00" EndX="5.50" EndY="4.00"/>
 			  <MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
@@ -174,7 +175,7 @@
 		  <MirroringBlock>Thagomizer_Angled_Flipped</MirroringBlock>
 		  <BlockPairName>Thagomizer1</BlockPairName>
 		  <EdgeType>Light</EdgeType>
-		  <BuildTimeSeconds>275</BuildTimeSeconds>
+		  <BuildTimeSeconds>180</BuildTimeSeconds>
 		  <DisassembleRatio>5</DisassembleRatio>
 		  <NavigationDefinition>Default</NavigationDefinition>
 		  <WeaponDefinitionId Subtype="Thagomizer" />
@@ -197,13 +198,14 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>Thagomizer_Angled_Flipped</SubtypeId>
 		  </Id>
-		  <DisplayName>Naval RL-10X</DisplayName>
+		  <DisplayName>Naval RL-10x 'Avalanche' Angled Medium Range Launchers</DisplayName>
 		  <Description>
-			  10 Barrels of High Explosive Content
-			  Try Armoring with 4x1s
+			  10 Barrels of High Explosive Rockets
+			  400m minimum range, 13500m max
+			  Kinetic Damage
 
 		  </Description>
-		  <Icon>Textures\GUI\Icons\Cubes\jnick.dds</Icon>
+		  <Icon>Textures\GUI\Icons\Cubes\tempiconRLX.png</Icon>
 		  <CubeSize>Large</CubeSize>
 		  <GuiVisible>true</GuiVisible>
 		  <BlockTopology>TriangleMesh</BlockTopology>
@@ -240,7 +242,7 @@
 		  
 		  <BlockPairName>Thagomizer2</BlockPairName>
 		  <EdgeType>Light</EdgeType>
-		  <BuildTimeSeconds>275</BuildTimeSeconds>
+		  <BuildTimeSeconds>180</BuildTimeSeconds>
 		  <DisassembleRatio>5</DisassembleRatio>
 		  <NavigationDefinition>Default</NavigationDefinition>
 		  <WeaponDefinitionId Subtype="Thagomizer" />
@@ -289,7 +291,7 @@
 
 		<BlockVariantGroup>
 			<Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Thagomizer" />
-			<Icon>Textures\GUI\Icons\Cubes\jnick.dds</Icon>
+			<Icon>Textures\GUI\Icons\Cubes\tempiconRLX.png</Icon>
 			<DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
 			<Description>Description_BlockGroup_TurretGroup</Description>
 			<Blocks>

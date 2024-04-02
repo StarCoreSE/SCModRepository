@@ -232,6 +232,51 @@
 				</Wave>
 			</Waves>
 		</Sound>
+
+				<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>T4FiringSound</SubtypeId>
+			</Id>
+			<Category>SHOT</Category>
+			<MaxDistance>1000</MaxDistance>
+			<PitchVariation>20</PitchVariation>
+			<PreventSynchronization>0</PreventSynchronization>
+			<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+			<DynamicMusicAmount>3</DynamicMusicAmount>
+			<Pitch>-3</Pitch>
+			<Volume>1.4</Volume>
+			<Loopable>true</Loopable>
+			<Waves>
+				<Wave Type="D3">
+					<Start>Audio\Gladius_Fire_Start.wav</Start>
+					<Loop>Audio\Gladius_Fire_Loop.wav</Loop>
+					<End>Audio\Gladius_Fire_Stop.wav</End>
+				</Wave>
+			</Waves>
+		</Sound>
+		<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>T4PreFiringSound</SubtypeId>
+			</Id>
+			<Category>SHOT</Category>
+			<MaxDistance>400</MaxDistance>
+			<PitchVariation>100</PitchVariation>
+			<PreventSynchronization>0</PreventSynchronization>
+			<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+			<DynamicMusicAmount>3</DynamicMusicAmount>
+			<Pitch>-3</Pitch>
+			<Volume>.8</Volume>
+			<Loopable>false</Loopable>
+			<Waves>
+				<Wave Type="D3">
+					<Start>Audio\Gladius_PreFire.xwm</Start>
+				</Wave>
+			</Waves>
+		</Sound>
+
+
 		<Sound>
 			<Id>
 				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>

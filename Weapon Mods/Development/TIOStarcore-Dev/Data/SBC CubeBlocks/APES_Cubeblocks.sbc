@@ -8,7 +8,7 @@
 				<SubtypeId>APE_Strong</SubtypeId>
 			</Id>
 			<DisplayName>[APES] Anti Projectile Energy System</DisplayName>
-			<Description>Area denial system capable of engaging and destroying projectiles with extreme prejudice. Overheats after sustained use and will automatically reduce its damage output when it reaches max heat capacity. Power hungry munition killer</Description>
+			<Description>Draws 150 MW. Area denial system capable of engaging and destroying projectiles with extreme prejudice. Overheats after sustained use and will automatically reduce its damage output when it reaches max heat capacity. Power hungry munition killer</Description>
 			<GuiVisible>true</GuiVisible>
 
 			<Icon>Textures\GUI\Icons\LAMS.dds</Icon>
@@ -52,7 +52,7 @@
 			<RequiredPowerInput>0.00002</RequiredPowerInput>
 			<InventoryMaxVolume>1</InventoryMaxVolume>
 			<EdgeType>Light</EdgeType>
-			<BuildTimeSeconds>60</BuildTimeSeconds>
+			<BuildTimeSeconds>90</BuildTimeSeconds>
 			<ShowEdges>false</ShowEdges>
 			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
 			<DamagedSound>ParticleElectrical</DamagedSound>

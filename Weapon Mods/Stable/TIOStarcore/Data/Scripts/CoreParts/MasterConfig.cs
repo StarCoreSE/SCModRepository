@@ -10,11 +10,46 @@
             // PartDefinitions(Your1stDefinition, Your2ndDefinition, Your3rdDefinition);
             // PartDefinitions includes both Parts and phantoms
 
-            PartDefinitions(VMLS_Block,
-                 Priest_Block, Torp_Block, PriestReskin_Block,
-                 Type18_Artillery_Block, Type21_Artillery_Block,
-                 Type24_Artillery_Block, Type78_Railgun_Block,
-                 Type77_Railgun_Block, Type79_Railgun_Block, Reaver_Coilgun_Block);
+            PartDefinitions(
+                AdvancedCannon_Type18, 
+                AdvancedCannon_Type21,
+                AdvancedCannon_Type24,
+                MagDriver_Type19,
+                MagDriver_Type22,
+                MagDriver_Type25,
+                /*UNSC_Coilgun_Block*/ 
+                LightTurret_Reaver,
+                HeavyFixedRockets, 
+                //ParticleLance_Type17,
+                HeavyTorpedo_Trident,
+ 
+                HeavyMachinegun_Priest, 
+                HeavyMachinegun_Spartan, 
+                APE_Strong,
+                GoalkeeperPart, GoalieActual1SubPart, GoalieActual2SubPart,
+
+                HeavyPlas_Magnus, 
+                HeavyPlas_Hadean_Super,
+                HeavyPlas_X4, 
+                KineticLance_Vindicator_Super, 
+                WeaponThagomizer,
+                WeaponHGR,
+                DualPulseLaserTurret,
+                DualSnubnosedLaserTurret,
+                QuadCarronadeTurret,
+
+                //QuadBarrelAutocannon,
+                //B8T_Flare,
+                //HeavyLanceBattery,
+                DualBarrelArtillery,
+                LightMissileLauncher,
+                HeavyAssaultMissileLauncher,
+
+                HeavyFighterBay
+
+                //K_HSR_Utilities_ShieldRestore,
+                //Null_Point_Jump_Disruptor_Large
+                );
 
         }
     }

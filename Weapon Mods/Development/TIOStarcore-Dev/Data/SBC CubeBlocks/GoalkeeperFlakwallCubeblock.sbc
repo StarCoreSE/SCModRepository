@@ -9,9 +9,10 @@
 			</Id>
 			<DisplayName>Goalkeeper Casemate Flak Battery</DisplayName>
 			<Description>
-              [1200-600m Targeting Range]
-              [No Grid Damage]
-              [Targets Missiles, deals 80 AMS Damage Per Second]
+              [1600 Targeting Range]
+			  [1200 Flak Range]
+              [Clouds of small pre-cast fragments are lethal to missiles, biologicals, below average sized meteors, and small grids.]
+              [Targets Missiles, deals 160 AMS Damage Per Second]
 
 			</Description>
 			<Icon>Textures\GUI\Icons\HSR\HSR_Damnation.dds</Icon>
@@ -42,7 +43,7 @@
 			</MountPoints>
 			<BlockPairName>K_HS_Damnation</BlockPairName>
 			<EdgeType>Light</EdgeType>
-			<BuildTimeSeconds>100</BuildTimeSeconds>
+			<BuildTimeSeconds>75</BuildTimeSeconds>
 			<DisassembleRatio>5</DisassembleRatio>
 			<NavigationDefinition>Default</NavigationDefinition>
 			<WeaponDefinitionId Subtype="ShootMissileGooder" />

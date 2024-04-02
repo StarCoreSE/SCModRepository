@@ -46,7 +46,7 @@
 			<MirroringY>Z</MirroringY>
             <MirroringZ>Y</MirroringZ>
             <EdgeType>Light</EdgeType>
-            <BuildTimeSeconds>300</BuildTimeSeconds>
+            <BuildTimeSeconds>150</BuildTimeSeconds>
 			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 
             <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
             <DamagedSound>ParticleWeapExpl</DamagedSound>

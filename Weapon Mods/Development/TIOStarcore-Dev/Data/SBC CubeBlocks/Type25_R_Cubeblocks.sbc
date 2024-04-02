@@ -10,9 +10,9 @@
 			</Id>
 			<DisplayName>Type 25 'Manticore' Heavy Railgun Turret</DisplayName>
 			<Description>
-              [8km Targeting Range]
+              [6km Targeting Range]
               [Kinetic damage]
-              [Draws Power]
+              [Draws 650MW]
               [2200 m/s]
               This weapon slowly repairs itself while offline, and when below functional.
             </Description>
@@ -63,7 +63,7 @@
 			<ResourceSinkGroup>Defense</ResourceSinkGroup>
 			<RequiredPowerInput>0.00002</RequiredPowerInput>
 			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 
-            <BuildTimeSeconds>600</BuildTimeSeconds>
+            <BuildTimeSeconds>450</BuildTimeSeconds><!--increase by 140 each time -->
 			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>

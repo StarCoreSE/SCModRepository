@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>SC_AR_Eris</SubtypeId>
+			</Id>
+			<DisplayName>[ONYX] 0C-DNS Eris Superheavy Gauss Cannon</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\SC_AR_Eris.dds</Icon>
+			<Description>
+				Long Ranged Fixed: [15km]
+				Reload Speed: [25 seconds]
+				Ammunition: [5000m/s,] [Kinetic]
+        A laser shows the projectile's flight path, which may warn the target.
+			</Description>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="2" z="9"/>
+			<ModelOffset x="0" y="0" z="0" />
+			<Center x="1" y="0" z="7" />
+			<Model>Models\Cubes\large\SC_AR_Eris.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="1250" />
+				<Component Subtype="Construction" Count="600" />
+				<Component Subtype="MetalGrid" Count="250" />
+				<Component Subtype="PowerCell" Count="168" />
+				<Component Subtype="Superconductor" Count="336" />
+				<Component Subtype="SmallTube" Count="500" />
+				<Component Subtype="Motor" Count="250" />
+				<Component Subtype="Superconductor" Count ="328" />
+				<Component Subtype="Computer" Count="820" />
+				<Component Subtype="Construction" Count="400" />
+				<Component Subtype="SteelPlate" Count="750" />
+			</Components>
+			<CriticalComponent Subtype="SteelPlate" Index="0" />
+			<!--lmao this is how you comment in xml-->
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="2.0"/>
+				<MountPoint Side="Left" StartX="6.0" StartY="0.0" EndX="9.0" EndY="2"/>
+				<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="3.0" EndY="2"/>
+				<MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0"/>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="6.0" EndX="3.0" EndY="9.0"/>
+			</MountPoints>
+			<BuildProgressModels>
+			</BuildProgressModels>
+			<BlockPairName>SC_AR_Eris</BlockPairName>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>240</BuildTimeSeconds>
+			<InventoryMaxVolume>6</InventoryMaxVolume>
+			<DamageEffectId>213</DamageEffectId>
+			<DamagedSound>ParticleWeapExpl</DamagedSound>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<PCU>1500</PCU>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

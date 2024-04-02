@@ -79,6 +79,8 @@ namespace klime.PointCheck
         [ProtoMember(37)] public int MiscBps = 0;
         [ProtoMember(38)] public Vector3 OriginalFactionColor = Vector3.One;
         [ProtoMember(39)] public bool hasShield;
+
+        [ProtoMember(40)] public Dictionary<string, int> SubgridGunL = new Dictionary<string, int>();
         public ShipTracker() { }
 
         public ShipTracker(IMyCubeGrid grid)
@@ -169,10 +171,6 @@ namespace klime.PointCheck
 
                         }
 
-
-
-
-
                         var f = MyAPIGateway.Session?.Factions?.TryGetPlayerFaction(OwnerID);
                         if (f != null)
                         {
@@ -216,6 +214,8 @@ namespace klime.PointCheck
 
         private void TempBlockCheck(ref bool hasPower, ref bool hasCockpit, ref bool hasThrust, ref bool hasGyro, ref float movementBpts, ref float powerBpts, ref float offensiveBpts, ref float MiscBpts, ref int bonusBpts, ref int pdBpts, ref string controller)
         {
+            bool hasCTC = false;
+
             for (int i = 0; i < connectedGrids.Count; i++)
             {
                 IMyCubeGrid grid = connectedGrids[i];
@@ -346,13 +346,29 @@ namespace klime.PointCheck
                             offensiveBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
                         }
                     }
-                    FatHandling(ref hasPower, ref hasCockpit, ref hasThrust, ref hasGyro, ref movementBpts, ref powerBpts, ref offensiveBpts, ref MiscBpts, ref bonusBpts, ref pdBpts, ref controller, subgrid);
+                    FatHandling(ref hasPower, ref hasCockpit, ref hasThrust, ref hasGyro, ref hasCTC, ref movementBpts, ref powerBpts, ref offensiveBpts, ref MiscBpts, ref bonusBpts, ref pdBpts, ref controller, subgrid);
                 }
             }
+
+            if (hasCTC)
+            {
+                foreach (KeyValuePair<string, int> weapon in SubgridGunL)
+                {
+                    // Currently takes a global 20% extra cost wich is not multiplicative with clibing cost
+                    int bonusWeaponBP = (int)(PointCheck.PointValues.GetValueOrDefault(weapon.Key, 0) * weapon.Value * 0.2);
+                    offensiveBpts += bonusWeaponBP;
+                    Bpts += bonusWeaponBP;
+                }
+            }
+            
         }
 
-        private void FatHandling(ref bool hasPower, ref bool hasCockpit, ref bool hasThrust, ref bool hasGyro, ref float movementBpts, ref float powerBpts, ref float offensiveBpts, ref float MiscBpts, ref int bonusBpts, ref int pdBpts, ref string controller, MyCubeGrid subgrid)
+        private void FatHandling(ref bool hasPower, ref bool hasCockpit, ref bool hasThrust, ref bool hasGyro, ref bool hasCTC, ref float movementBpts, ref float powerBpts, ref float offensiveBpts, ref float MiscBpts, ref int bonusBpts, ref int pdBpts, ref string controller, MyCubeGrid subgrid)
         {
+            // Variables used for extra cost on subgrid weapons (rotorturrets)
+            bool isMainGrid = false;
+            Dictionary<string, int> tempGuns = new Dictionary<string, int>();
+
             VRage.Collections.ListReader<MyCubeBlock> blocklist = subgrid.GetFatBlocks();
             for (int i1 = 0; i1 < blocklist.Count; i1++)
             {
@@ -415,7 +431,14 @@ namespace klime.PointCheck
 
                     if (block is IMyCockpit && (block as IMyCockpit).CanControlShip)
                     {
+                        if (hasCockpit && !isMainGrid)
+                        {
+                            // Prevent players from placing Cockpits on subgrids to circumvent BP increase of weapons on subgrids
+                            MyAPIGateway.Utilities.ShowNotification("Illegal Cockpit placement on subgrid", 1000, font: "Red");
+                        }
+
                         hasCockpit = true;
+                        isMainGrid = true;
                     }
 
                     if (block is IMyReactor || block is IMyBatteryBlock)
@@ -471,6 +494,15 @@ namespace klime.PointCheck
                 {
                     offensiveBpts += PointCheck.PointValues.GetValueOrDefault(id, 0) + bonusBpts;
 
+                    if (tempGuns.ContainsKey(id))
+                    {
+                        tempGuns[id] += 1;
+                    }
+                    else
+                    {
+                        tempGuns.Add(id, 1);
+                    }
+
                     // isPointDefense;
                     if (PointCheckHelpers.pdDictionary.TryGetValue(block.BlockDefinition.Id.SubtypeName, out isPointDefense) && isPointDefense)
                     {
@@ -494,7 +526,29 @@ namespace klime.PointCheck
                         MiscBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
                     }
                 }
+
+                if (id == "LargeTurretControlBlock")
+                { 
+                    hasCTC = true;
+                }
             }
+
+            // Adding extra points to guns when they are not on the main grid
+            if (!isMainGrid && connectedGrids.Count != 1)
+            {
+                foreach (KeyValuePair<string, int> weapon in tempGuns)
+                {
+                    if (SubgridGunL.ContainsKey(weapon.Key))
+                    {
+                        SubgridGunL[weapon.Key] += 1;
+                    }
+                    else
+                    {
+                        SubgridGunL.Add(weapon.Key, 1);
+                    }
+                }
+            }
+
         }
 
         private static void ClimbingCostRename(ref string t_N, ref float mCs)
@@ -510,78 +564,78 @@ namespace klime.PointCheck
                     t_N = "SLAM";
                     mCs = 0.25f;
                     break;
-                case "MRM-10 Modular Launcher 45":
-                case "MRM-10 Modular Launcher 45 Reversed":
-                case "MRM-10 Modular Launcher":
-                case "MRM-10 Modular Launcher Middle":
-                case "MRM-10 Launcher":
+                case "[BTI] MRM-10 Modular Launcher 45":
+                case "[BTI] MRM-10 Modular Launcher 45 Reversed":
+                case "[BTI] MRM-10 Modular Launcher":
+                case "[BTI] MRM-10 Modular Launcher Middle":
+                case "[BTI] MRM-10 Launcher":
                     t_N = "MRM-10 Launcher";
                     mCs = 0.04f;
                     break;
-                case "LRM-5 Modular Launcher 45 Reversed":
-                case "LRM-5 Modular Launcher 45":
-                case "LRM-5 Modular Launcher Middle":
-                case "LRM-5 Modular Launcher":
-                case "LRM-5 Launcher":
+                case "[BTI] LRM-5 Modular Launcher 45 Reversed":
+                case "[BTI] LRM-5 Modular Launcher 45":
+                case "[BTI] LRM-5 Modular Launcher Middle":
+                case "[BTI] LRM-5 Modular Launcher":
+                case "[BTI] LRM-5 Launcher":
                     t_N = "LRM-5 Launcher";
                     mCs = 0.10f;
                     break;
-                case "Gimbal Laser T2 Armored":
-                case "Gimbal Laser T2 Armored Slope 45":
-                case "Gimbal Laser T2 Armored Slope 2":
-                case "Gimbal Laser T2 Armored Slope":
-                case "Gimbal Laser T2":
+                case "[MA] Gimbal Laser T2 Armored":
+                case "[MA] Gimbal Laser T2 Armored Slope 45":
+                case "[MA] Gimbal Laser T2 Armored Slope 2":
+                case "[MA] Gimbal Laser T2 Armored Slope":
+                case "[MA] Gimbal Laser T2":
                     t_N = "Gimbal Laser T2";
                     mCs = 0f;
                     break;
-                case "Gimbal Laser Armored Slope 45":
-                case "Gimbal Laser Armored Slope 2":
-                case "Gimbal Laser Armored Slope":
-                case "Gimbal Laser Armored":
-                case "Gimbal Laser":
+                case "[MA] Gimbal Laser Armored Slope 45":
+                case "[MA] Gimbal Laser Armored Slope 2":
+                case "[MA] Gimbal Laser Armored Slope":
+                case "[MA] Gimbal Laser Armored":
+                case "[MA] Gimbal Laser":
                     t_N = "Gimbal Laser";
                     mCs = 0f;
                     break;
-                case "BR-RT7 Afflictor Slanted Burst Cannon":
-                case "BR-RT7 Afflictor 70mm Burst Cannon":
-                case "Afflictor":
+                case "[ONYX] BR-RT7 Afflictor Slanted Burst Cannon":
+                case "[ONYX] BR-RT7 Afflictor 70mm Burst Cannon":
+                case "[ONYX] Afflictor":
                     t_N = "Afflictor";
                     mCs = 0f;
                     break;
-                case "Slinger AC 150mm Sloped 30":
-                case "Slinger AC 150mm Sloped 45":
-                case "Slinger AC 150mm Gantry Style":
-                case "Slinger AC 150mm Sloped 45 Gantry":
-                case "Slinger AC 150mm":
-                case "Slinger":
+                case "[MA] Slinger AC 150mm Sloped 30":
+                case "[MA] Slinger AC 150mm Sloped 45":
+                case "[MA] Slinger AC 150mm Gantry Style":
+                case "[MA] Slinger AC 150mm Sloped 45 Gantry":
+                case "[MA] Slinger AC 150mm":
+                case "[MA] Slinger":
                     t_N = "Slinger";
                     mCs = 0f;
                     break;
-                case "Phaethon Plasma Pulser":
-                    t_N = "Phaethon Plasma Pulser";
+                case "[ONYX] Heliod Plasma Pulser":
+                    t_N = "Heliod Plasma Pulser";
                     mCs = 0.15f;
                     break;
-                 case "UNN Heavy Torpedo Launcher":
+                case "[MA] UNN Heavy Torpedo Launcher":
                     t_N = "UNN Heavy Torpedo Launcher";
                     mCs = 0.15f;
                     break;
-                 case "SRM-8":
+                case "[BTI] SRM-8":
                     t_N = "SRM-8";
                     mCs = 0.15f;
                     break;
-                 case "Starcore Arrow-IV Launcher":
+                case "[BTI] Starcore Arrow-IV Launcher":
                     t_N = "Starcore Arrow-IV Launcher";
                     mCs = 0.15f;
                     break;
-                case "Tartarus VIII":
+                case "[HAS] Tartarus VIII":
                     t_N = "Tartarus VIII";
                     mCs = 0.15f;
                     break;
-                case "Cocytus IX":
+                case "[HAS] Cocytus IX":
                     t_N = "Cocytus IX";
                     mCs = 0.15f;
                     break;
-                case "MCRN Torpedo Launcher":
+                case "[MA] MCRN Torpedo Launcher":
                     t_N = "MCRN Torpedo Launcher";
                     mCs = 0.15f;
                     break;
@@ -589,12 +643,12 @@ namespace klime.PointCheck
                     t_N = "Flares";
                     mCs = 0.25f;
                     break;
-                case "Chiasm [Arc Emitter]":
+                case "[EXO] Chiasm [Arc Emitter]":
                     t_N = "Chiasm [Arc Emitter]";
                     mCs = 0.15f;
                     break;
-                case "Medium Laser":
-                case "Large Laser":
+                case "[BTI] Medium Laser":
+                case "[BTI] Large Laser":
                     t_N = " Laser";
                     mCs = 0.15f;
                     break;
@@ -602,13 +656,13 @@ namespace klime.PointCheck
                     t_N = "Reinforced Blastplate";
                     mCs = 1.00f;
                     break;
-                case "Taiidan":
-                case "Taiidan Fighter Launch Rail":
-                case "Taiidan Bomber Launch Rail":
-                case "Taiidan Fighter Hangar Bay":
-                case "Taiidan Bomber Hangar Bay":
-                case "Taiidan Bomber Hangar Bay Medium":
-                case "Taiidan Fighter Small Bay":
+                case "[EXO] Taiidan":
+                case "[EXO] Taiidan Fighter Launch Rail":
+                case "[EXO] Taiidan Bomber Launch Rail":
+                case "[EXO] Taiidan Fighter Hangar Bay":
+                case "[EXO] Taiidan Bomber Hangar Bay":
+                case "[EXO] Taiidan Bomber Hangar Bay Medium":
+                case "[EXO] Taiidan Fighter Small Bay":
                     t_N = "Taiidan";
                     mCs = 0.25f;
                     break;
@@ -726,6 +780,7 @@ namespace klime.PointCheck
         {
             SBL.Clear();
             GunL.Clear();
+            SubgridGunL.Clear();
             Bpts = 0;
             InstalledThrust = 0;
             Mass = 0;

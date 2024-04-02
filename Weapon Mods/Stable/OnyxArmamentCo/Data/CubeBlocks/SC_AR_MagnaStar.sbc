@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>SC_AR_MagnaStar</SubtypeId>
+			</Id>
+			<DisplayName>[ONYX] 0SH-1T MagnaStar™</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\SC_AR_MagnaStar.dds</Icon>
+			<Description>
+				Long Range Turret: [6km]
+				Magazine Capacity: [3]
+				Rate of Fire: [360]
+				Reload Speed: [10 seconds]
+				Ammunition: [1200m/s,] [Energy]
+			</Description>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="7" y="4" z="7"/>
+			<ModelOffset x="0" y="0" z="0" />
+			<Model>Models\Cubes\large\SC_AR_MagnaStar.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="125" />
+				<Component Subtype="Construction" Count="300" />
+				<Component Subtype="MetalGrid" Count="200" />
+				<Component Subtype="LargeTube" Count="70" />
+				<Component Subtype="Superconductor" Count="200" />
+				<Component Subtype="Computer" Count="325" />
+				<Component Subtype="Superconductor" Count="100" />
+				<Component Subtype="GravityGenerator" Count="300" />
+				<Component Subtype="Motor" Count="200" />
+				<Component Subtype="Construction" Count="150" />
+				<Component Subtype="SteelPlate" Count="750" />
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="7.0" EndY="1.0"/>
+				<MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="7.0" EndY="1"/>
+				<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="7.0" EndY="1"/>
+				<MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="7.0" EndY="1"/>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="7" EndY="7"/>
+			</MountPoints>
+			<!-- <BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\AWE_HeavyCannon\Onyx_CycloneCannonBase_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.66" File="Models\AWE_HeavyCannon\Onyx_CycloneCannonBase_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.0" File="Models\AWE_HeavyCannon\Onyx_CycloneCannonBase_BS3.mwm"/>
+			</BuildProgressModels>	-->
+			<BlockPairName>SC_AR_MagnaStar</BlockPairName>
+			<BuildTimeSeconds>150</BuildTimeSeconds>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+			<EdgeType>Light</EdgeType>
+			<WeaponDefinitionId Subtype="SCGenericWepDef" />
+			<OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<InventoryMaxVolume>0.9</InventoryMaxVolume>
+			<DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+			<DamagedSound>ParticleWeapExpl</DamagedSound>
+			<DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+			<PCU>500</PCU>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

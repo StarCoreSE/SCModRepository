@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+ <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"> 
+   <BlueprintClassEntries>
+	<Entry Class="Ammo" BlueprintSubtypeId="CoilBP" />
+   <Entry Class="Ammo" BlueprintSubtypeId="SAIDSBlueBP" />
+   <Entry Class="Ammo" BlueprintSubtypeId="SAIDSRedBP" />
+   <Entry Class="Ammo" BlueprintSubtypeId="SAIDSGreenBP" />
+   <Entry Class="Ammo" BlueprintSubtypeId="SAIDSPurpleBP" />
+	<Entry Class="Components" BlueprintSubtypeId="CoilBP" />
+   <Entry Class="Components" BlueprintSubtypeId="Coil1" />
+   <Entry Class="EliteConsumables" BlueprintSubtypeId="SAIDSBlueBP" />
+		<Entry Class="EliteConsumables" BlueprintSubtypeId="SAIDSRedBP" />	
+		<Entry Class="EliteConsumables" BlueprintSubtypeId="SAIDSGreenBP" />
+		<Entry Class="EliteConsumables" BlueprintSubtypeId="SAIDSPurpleBP" />
+      <Entry Class="EliteConsumables" BlueprintSubtypeId="AWE_ElectromagnetBP" />
+      <Entry Class="EliteConsumables" BlueprintSubtypeId="AWE_MilitaryPlateBP" />
+      <Entry Class="EliteConsumables" BlueprintSubtypeId="AWE_SuperchargerBP" />
+   </BlueprintClassEntries>
+</Definitions>

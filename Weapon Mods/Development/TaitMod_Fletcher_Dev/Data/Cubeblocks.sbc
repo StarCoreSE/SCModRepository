@@ -953,7 +953,7 @@
 			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>15cmTbtsKC36</SubtypeId>
       </Id>	
-      <DisplayName>150mm/36 Single</DisplayName>
+      <DisplayName>[FAS] Sharnhorst</DisplayName>
 	<Description>
 		150mm Single gun
 		5km AI range
@@ -1023,7 +1023,7 @@
 			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>127mmMk32</SubtypeId>
       </Id>	
-      <DisplayName>5"/38 Mk32</DisplayName>
+      <DisplayName>[FAS] Atlanta</DisplayName>
 	<Description>
 		127mm Twin gun
 		4km AI Range, 5km shell range, Heal has 6km
@@ -1092,7 +1092,7 @@
         <TypeId>LargeMissileTurret</TypeId>
         <SubtypeId>127mmMk12</SubtypeId>
       </Id>	
-      <DisplayName>5"/38 Mk12</DisplayName>
+      <DisplayName>[FAS] Benson</DisplayName>
 	<Description>
 		127mm Single gun
 		4km AI Range, 5km shell range, Heal has 6km
@@ -1160,7 +1160,7 @@
 			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>127mmMk24</SubtypeId>
       </Id>	
-      <DisplayName>5"/38 Mk24</DisplayName>
+      <DisplayName>[FAS] Fletcher</DisplayName>
 	<Description>
 		127mm Single gun
 		4km AI Range, 5km shell range, Heal has 6km
@@ -1235,7 +1235,7 @@
 			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>6InchTriple</SubtypeId>
       </Id>	
-      <DisplayName>6"/47 Triple Gun</DisplayName>
+      <DisplayName>[FAS] Helena</DisplayName>
 	<Description>
 		6 Inch Triple gun
 		5km Range
@@ -1304,10 +1304,10 @@
 			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>16InchTriple</SubtypeId>
       </Id>	
-      <DisplayName>16"/50 Triple Gun</DisplayName>
+      <DisplayName>[FAS] Iowa</DisplayName>
 	<Description>
 		16 Inch Triple Gun
-		6km AI range, 8km shell range
+		8km AI range, 10km shell range
 		Fires HE amd AP Shells
 		Temp BP: 400
 	</Description>
@@ -1375,10 +1375,10 @@
 			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>381mmDualR</SubtypeId>
       </Id>	
-      <DisplayName>15" mk24 Dual</DisplayName>
+      <DisplayName>[FAS] Tirpitz</DisplayName>
 	<Description>
 		15 Inch Twin gun
-		6km AI range, 8km shell range
+		8km AI range, 10km shell range
 		Fires HE amd AP Shells
 		Temp BP: 250
 	</Description>
@@ -1449,10 +1449,10 @@
 			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>381mmDualNR</SubtypeId>
       </Id>	
-      <DisplayName>15" mk25 Dual</DisplayName>
+      <DisplayName>[FAS] Tirpitz</DisplayName>
 	<Description>
 		15 Inch Twin gun
-		6km AI range, 8km shell range
+		8km AI range, 10km shell range
 		Fires HE amd AP Shells
 		Temp BP: 250
 	</Description>
@@ -1521,7 +1521,7 @@
 			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>15cmSKC28R</SubtypeId>
       </Id>	
-      <DisplayName>150mm/36 Twin</DisplayName>
+      <DisplayName>[FAS] Elbing</DisplayName>
 	    <Description>
 			150mm Twin gun
 			5km AI range
@@ -1543,7 +1543,7 @@
         <Component Subtype="Computer" Count="100" />
         <Component Subtype="Construction" Count="200" />
 		<Component Subtype="MetalGrid" Count="300" />
-        <Component Subtype="SteelPlate" Count="750" />
+        <Component Subtype="SteelPlate" Count="1250" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
@@ -1595,7 +1595,7 @@
 			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>15cmSKC28NR</SubtypeId>
       </Id>	
-      <DisplayName>150mm/36 Twin</DisplayName>
+      <DisplayName>[FAS] Elbing</DisplayName>
 	<Description>
 		150mm Twin gun
 		5km AI range
@@ -1618,7 +1618,7 @@
         <Component Subtype="Computer" Count="100" />
         <Component Subtype="Construction" Count="200" />
 		<Component Subtype="MetalGrid" Count="300" />
-        <Component Subtype="SteelPlate" Count="750" />
+        <Component Subtype="SteelPlate" Count="1250" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
@@ -1668,10 +1668,10 @@
 			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>380mmMLE1935</SubtypeId>
       </Id>	
-      <DisplayName>15"/45 mk20 Quad gun</DisplayName>
+      <DisplayName>[FAS] Jean Bart</DisplayName>
 	<Description>
 		15 Inch Quad gun
-		6km AI range, 8km shell range
+		8km AI range, 10km shell range
 		Fires HE amd AP Shells
 		Temp BP: 400
 	</Description>

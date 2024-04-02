@@ -1,4 +1,5 @@
 using ProtoBuf;
+using VRageMath;
 
 namespace StarCore.AutoRepairModule
 {
@@ -13,6 +14,12 @@ namespace StarCore.AutoRepairModule
         
         [ProtoMember(3)]
         public bool IgnoreArmor;
+
+        [ProtoMember(4)]
+        public Vector3I[] RepairPositionalList; 
+        
+        [ProtoMember(5)]
+        public Vector3I[] PriorityPositionalList;
 
     }
 }

@@ -86,7 +86,7 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "Nerf This!", //Heavy Bombardment Rockets.
+                PartName = "ROCKET LAUNCHER", //Heavy Bombardment Rockets.
                 DeviateShotAngle = 6.80f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 12f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Basic, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
@@ -127,7 +127,7 @@ namespace Scripts {
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 0, // Default resting elevation
                     InventorySize = 25f, // Inventory capacity in kL.
-                    IdlePower = 6f, // Constant base power draw in MW.
+                    IdlePower = 1f, // Constant base power draw in MW.
                     FixedOffset = false, // Deprecated.
                     Offset = Vector(x: 0, y: 0, z: 0), // Offsets the aiming/firing line of the weapon, in metres.
                     Type = BlockWeapon, // What type of weapon this is; BlockWeapon, HandWeapon, Phantom 
@@ -160,7 +160,7 @@ namespace Scripts {
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
                     ReloadTime = 240, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    MagsToLoad = 4, //1 Number of physical magazines to consume on reload.
+                    MagsToLoad = 1, //1 Number of physical magazines to consume on reload.
                     DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     HeatPerShot = 0, //8 Heat generated per shot.
                     MaxHeat = 74, // Max heat before weapon enters cooldown (70% of max heat).

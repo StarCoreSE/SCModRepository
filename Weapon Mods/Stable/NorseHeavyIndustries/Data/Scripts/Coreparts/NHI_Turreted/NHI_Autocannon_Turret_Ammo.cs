@@ -30,6 +30,7 @@ namespace Scripts
 { // Don't edit above this line
     partial class Parts
     {
+//unused        
         private AmmoDef Autocannon_Bullet_Primary => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "80mmAC1Ammo", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
@@ -100,7 +101,7 @@ namespace Scripts
             DamageScales = new DamageScaleDef
             {
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
-                DamageVoxels = true, // Whether to damage voxels.
+                DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
                 HealthHitModifier = 0, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = 0, // Voxel damage multiplier; defaults to 1 if zero or less.
@@ -415,7 +416,7 @@ namespace Scripts
                 }
             }, // Don't edit below this line
         };
-
+//unused
         private AmmoDef Autocannon_Bullet_Secondary => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "80mmAC2Ammo", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
@@ -486,7 +487,7 @@ namespace Scripts
             DamageScales = new DamageScaleDef
             {
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
-                DamageVoxels = true, // Whether to damage voxels.
+                DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
                 HealthHitModifier = 0, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = 0, // Voxel damage multiplier; defaults to 1 if zero or less.
@@ -801,7 +802,7 @@ namespace Scripts
                 }
             }, // Don't edit below this line
         };
-
+//used ammo
         private AmmoDef Autocannon_Bullet_Tertiary => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "80mmAC3Ammo", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
@@ -814,7 +815,7 @@ namespace Scripts
             BackKickForce = 400f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
-            EnergyMagazineSize = 28, // For energy weapons, how many shots to fire before reloading.
+            EnergyMagazineSize = 0, // For energy weapons, how many shots to fire before reloading.
             IgnoreWater = false, // Whether the projectile should be able to penetrate water when using WaterMod.
             IgnoreVoxels = false, // Whether the projectile should be able to penetrate voxels.
             Synchronize = false, // For future use
@@ -872,7 +873,7 @@ namespace Scripts
             DamageScales = new DamageScaleDef
             {
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
-                DamageVoxels = true, // Whether to damage voxels.
+                DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
                 HealthHitModifier = 0, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = 0, // Voxel damage multiplier; defaults to 1 if zero or less.

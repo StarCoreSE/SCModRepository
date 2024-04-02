@@ -2,6 +2,8 @@ name: "Upload Starcore Character Edits and Proximity Entry"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Utility Mods/Stable/Starcore Character Edits and Proximity Entry/**"
 

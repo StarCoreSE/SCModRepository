@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>SC_AR_Phobos</SubtypeId>
+			</Id>
+			<DisplayName>[ONYX] Phobos-250 Railgun</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\SC_AR_Phobos.dds</Icon>
+			<Description>
+				Medium Ranged Fixed: [7km || 5km]
+				Magazine Capacity: [1 || 5]
+				Rate of Fire: [60]
+				Reload Speed: [10 seconds]
+				Ammunition: [Kinetic]
+				Single Shot:
+				[8000m/s, 7km]
+				Repeating Shot:
+				[2000m/s, 5km]
+			</Description>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="5"/>
+			<Center x="0" y="0" z="4" />
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\large\SC_AR_Phobos.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="250" />
+				<Component Subtype="Construction" Count="180" />
+				<Component Subtype="MetalGrid" Count="50" />
+				<Component Subtype="PowerCell" Count="40" />
+				<Component Subtype="Superconductor" Count="80" />
+				<Component Subtype="SmallTube" Count="150" />
+				<Component Subtype="Motor" Count="150" />
+				<Component Subtype="Superconductor" Count ="60" />
+				<Component Subtype="Computer" Count="200" />
+				<Component Subtype="Construction" Count="120" />
+				<Component Subtype="SteelPlate" Count="250" />
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="5.00" EndY="1.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="5.00" EndY="1.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="1.00" EndY="5.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="1.00" EndY="5.00"/>
+			</MountPoints>
+			<BuildProgressModels>
+			</BuildProgressModels>
+			<BlockPairName>SC_AR_Phobos</BlockPairName>
+			<WeaponDefinitionId Subtype="SCGenericWeaponDef" />
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>80</BuildTimeSeconds>
+			<InventoryMaxVolume>1</InventoryMaxVolume>
+			<DamageEffectId>213</DamageEffectId>
+			<DamagedSound>ParticleWeapExpl</DamagedSound>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<PCU>750</PCU>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

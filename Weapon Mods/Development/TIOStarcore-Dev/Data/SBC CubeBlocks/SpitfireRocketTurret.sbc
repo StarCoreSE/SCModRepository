@@ -8,9 +8,10 @@
 				<SubtypeId>UnguidedRocketTurret</SubtypeId>
 			</Id>
 			<DisplayName>AX 'Spitfire' Light Rocket Turret</DisplayName>
-			<Description>[3km Targeting Range [600 m/s]]
+			<Description>[3km Targeting Range [500 m/s]]
               [Energy damage]
-			  [10 HP Unguided Missiles]
+			  [1 HP Unguided Missiles]
+			  [100m minimum range]
               [High Damage, Innacurate]</Description>
 			<Icon>Textures\GUI\Icons\LightMissileLauncher.dds</Icon>
 			<CubeSize>Large</CubeSize>
@@ -42,6 +43,7 @@
 			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 	  	  
       <ResourceSinkGroup>Defense</ResourceSinkGroup>
       <InventoryMaxVolume>0.144</InventoryMaxVolume>
+	              <BuildTimeSeconds>45</BuildTimeSeconds>
 	   <MirroringY>Z</MirroringY>
       <MirroringZ>Y</MirroringZ>
       <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>

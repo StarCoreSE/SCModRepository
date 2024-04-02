@@ -542,12 +542,12 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>LargeRailgun_SC</SubtypeId>
       </Id>
-      <DisplayName>Railgun 2.0</DisplayName>
+      <DisplayName>[HAS] Railgun 2.0</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\RailGun.dds</Icon>
       <Description>
-        11km range Railgun
+        10km range Railgun. 5000m/s velocity
         24Mw Passive Draw, 300Mw Recharge
-        Some Falloff After 9km.
+        Falloff After 6km.
         Deals Kinetic Damage.
       </Description>
       <CubeSize>Large</CubeSize>

@@ -2,6 +2,8 @@ name: "Upload AMP-Aristeas-Melee-Pack"
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "Weapon Mods/Stable/AMP-Aristeas-Melee-Pack/**"
 

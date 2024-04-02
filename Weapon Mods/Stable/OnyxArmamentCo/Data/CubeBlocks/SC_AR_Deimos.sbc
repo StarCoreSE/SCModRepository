@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>SC_AR_Deimos</SubtypeId>
+			</Id>
+			<DisplayName>[ONYX] Deimos-250 Railgun Turret</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\SC_AR_Deimos.dds</Icon>
+			<Description>A turreted version of the Phobos railgun</Description>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="2" z="5"/>
+			<ModelOffset x="0" y="0" z="0" />
+			<Model>Models\Cubes\large\SC_AR_Deimos.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="400" />
+				<Component Subtype="Construction" Count="270" />
+				<Component Subtype="MetalGrid" Count="120" />
+				<Component Subtype="PowerCell" Count="40" />
+				<Component Subtype="Superconductor" Count="80" />
+				<Component Subtype="SmallTube" Count="250" />
+				<Component Subtype="Motor" Count="400" />
+				<Component Subtype="Computer" Count="300" />
+				<Component Subtype="Construction" Count="220" />
+				<Component Subtype="SteelPlate" Count="600" />
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="1.0" StartY="1.0" EndX="2.0" EndY="4.0"/>
+				<MountPoint Side="Bottom" StartX="2.0" StartY="1.6" EndX="2.5" EndY="4.0"/>
+				<MountPoint Side="Bottom" StartX="0.5" StartY="1.6" EndX="1.0" EndY="4.0"/>
+			</MountPoints>
+			<BuildProgressModels>
+			</BuildProgressModels>
+			<OverlayTexture>Textures\GUI\Screens\turret_overlay.dds</OverlayTexture>
+			<BlockPairName>SC_AR_Deimos</BlockPairName>
+			<BuildTimeSeconds>120</BuildTimeSeconds>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+			<EdgeType>Light</EdgeType>
+			<WeaponDefinitionId Subtype="SCGenericWepDef" />
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<InventoryMaxVolume>1</InventoryMaxVolume>
+			<DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+			<DamagedSound>ParticleWeapExpl</DamagedSound>
+			<DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+			<PCU>1000</PCU>
+			<TargetingGroups>
+				<string>Weapons</string>
+			</TargetingGroups>
+		</Definition>
+	</CubeBlocks>
+</Definitions>
