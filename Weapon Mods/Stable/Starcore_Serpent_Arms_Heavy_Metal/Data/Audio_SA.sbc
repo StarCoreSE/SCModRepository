@@ -233,7 +233,7 @@
       <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
-          <Start>Audio\Gauss\Monopole_Charge.wav</Start>
+          <Start>Audio\Gauss\Monopole_Charge_1.wav</Start>
         </Wave>
       </Waves>
     </Sound>
