@@ -538,14 +538,14 @@
         <SubtypeId>HAS_AvengerBRRT</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>4500</MaxDistance>
+      <MaxDistance>5000</MaxDistance>
 		  <DistantSounds>
-			  <DistantSound DistanceCrossfade="0" Distance="200" Sound="HAS_AvengerShotDist1" />
-			  <DistantSound DistanceCrossfade="0" Distance="400" Sound="HAS_AvengerShotDist2" />
-			  <DistantSound DistanceCrossfade="0" Distance="800" Sound="HAS_AvengerShotDistC" />        
-        <DistantSound DistanceCrossfade="0" Distance="1200" Sound="HAS_AvengerShotDist3" />
-        <DistantSound DistanceCrossfade="0" Distance="2400" Sound="HAS_AvengerShotDist4" />
-        <DistantSound DistanceCrossfade="0" Distance="3600" Sound="HAS_AvengerShotDist5" />
+			  <DistantSound DistanceCrossfade="0" Distance="300" Sound="HAS_AvengerShotDist1" />
+			  <DistantSound DistanceCrossfade="0" Distance="600" Sound="HAS_AvengerShotDist2" />
+			  <DistantSound DistanceCrossfade="0" Distance="1000" Sound="HAS_AvengerShotDistC" />        
+        <DistantSound DistanceCrossfade="0" Distance="1400" Sound="HAS_AvengerShotDist3" />
+        <DistantSound DistanceCrossfade="0" Distance="2200" Sound="HAS_AvengerShotDist4" />
+        <DistantSound DistanceCrossfade="0" Distance="3300" Sound="HAS_AvengerShotDist5" />
 		  </DistantSounds>
       <!-- Prevents this sound from having this many active playbacks at once, 0 = infinite. -->
       <SoundLimit>2</SoundLimit>
@@ -566,7 +566,7 @@
         <SubtypeId>HAS_AvengerShotDist1</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>4500</MaxDistance>
+      <MaxDistance>5000</MaxDistance>
       <SoundLimit>2</SoundLimit>
       <Volume>3</Volume>
       <Loopable>true</Loopable>
@@ -583,7 +583,7 @@
         <SubtypeId>HAS_AvengerShotDist2</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>4500</MaxDistance>
+      <MaxDistance>5000</MaxDistance>
       <SoundLimit>2</SoundLimit>
       <Volume>2</Volume>
       <Loopable>true</Loopable>
@@ -600,7 +600,7 @@
         <SubtypeId>HAS_AvengerShotDistC</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>4500</MaxDistance>
+      <MaxDistance>5000</MaxDistance>
       <SoundLimit>2</SoundLimit>
       <Volume>1</Volume>
       <Loopable>true</Loopable>
@@ -618,7 +618,7 @@
         <SubtypeId>HAS_AvengerShotDist3</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>4500</MaxDistance>
+      <MaxDistance>5000</MaxDistance>
       <SoundLimit>2</SoundLimit>
       <Volume>5</Volume>
       <Loopable>true</Loopable>
@@ -637,7 +637,7 @@
         <SubtypeId>HAS_AvengerShotDist4</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>4500</MaxDistance>
+      <MaxDistance>5000</MaxDistance>
       <SoundLimit>2</SoundLimit>
       <Volume>3</Volume>
       <Loopable>true</Loopable>
@@ -656,7 +656,7 @@
         <SubtypeId>HAS_AvengerShotDist5</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>4500</MaxDistance>
+      <MaxDistance>5000</MaxDistance>
       <SoundLimit>2</SoundLimit>
       <Volume>1.5</Volume>
       <Loopable>true</Loopable>
