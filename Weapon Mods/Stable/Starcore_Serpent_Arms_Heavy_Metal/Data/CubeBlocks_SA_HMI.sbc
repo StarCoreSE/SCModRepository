@@ -81,7 +81,7 @@ Ammunition: [5000m/s,] [Kinetic, 95% Shieldpen] </Description>
 Magazine Capacity: [1] 
 Rate of Fire: [200] 
 Reload Speed: [0.5 seconds] 
-Ammunition: [2000m/s,] [Kinetic] </Description>
+Ammunition: [2000m/s,] [Kinetic]</Description>
       <Icon>Textures\GUI\Icons\Asterius.dds</Icon>
       <CubeSize>Large</CubeSize>
 	  <GuiVisible>false</GuiVisible>

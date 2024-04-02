@@ -71,7 +71,7 @@ Block Type="MyObjectBuilder_ConveyorSorter" Subtype="Starcore_AMS_II_Block" /
         <DisplayName>DisplayName_BlockGroup_TurretGroup</DisplayName>
         <Description>Description_BlockGroup_TurretGroup</Description>
         <Blocks>
-          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HAS_Vulcan" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HAS_Avenger" />
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="HAS_Esper" />
         </Blocks>
       </BlockVariantGroup>
