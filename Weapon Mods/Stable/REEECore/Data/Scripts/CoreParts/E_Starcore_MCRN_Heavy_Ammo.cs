@@ -441,7 +441,7 @@ namespace Scripts
             EnergyCost = 0f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 10f, // Direct damage; one steel plate is worth 100.
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
-            Health = 100, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            Health = 150, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = false, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
@@ -645,7 +645,7 @@ namespace Scripts
                 TargetLossTime = 0 , // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 2400 , // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 AccelPerSec = 300f ,
-                DesiredSpeed = 550 , // voxel phasing if you go above 5100
+                DesiredSpeed = 1000 , // voxel phasing if you go above 5100
                 MaxTrajectory = 20000f ,
                 DeaccelTime = 0 , // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f , // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable.
@@ -669,8 +669,8 @@ namespace Scripts
                     NoTargetExpire = false , // Expire without ever having a target at TargetLossTime
                     Roam = true , // Roam current area after target loss
                     KeepAliveAfterTargetLoss = true , // Whether to stop early death of projectile on target loss
-                    OffsetRatio = 0.25f , // The ratio to offset the random direction (0 to 1) 
-                    OffsetTime = 45 , // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
+                    OffsetRatio = 0.6f , // The ratio to offset the random direction (0 to 1) 
+                    OffsetTime = 30 , // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
                     OffsetMinRange = 100 , // The range from target at which offsets are no longer active
                     FocusOnly = true , // only target the constructs Ai's focus target
                     FocusEviction = false , // If FocusOnly and this to true will force smarts to lose target when there is no focus target
@@ -1508,7 +1508,7 @@ namespace Scripts
                         Enable = false,
                         Length = 5f,
                         Width = 1f,
-                        Color = Color(red: 30, green: 30, blue: 30f, alpha: 4),
+                        Color = Color(red: 300, green: 300, blue: 300f, alpha: 4),
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
