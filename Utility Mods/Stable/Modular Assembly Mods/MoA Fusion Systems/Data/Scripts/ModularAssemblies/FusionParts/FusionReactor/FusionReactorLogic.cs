@@ -99,9 +99,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         public override void UpdateAfterSimulation()
         {
             base.UpdateAfterSimulation();
-            float desiredInput = MaxPowerConsumption * Block.CurrentOutputRatio;
+            float storagePct = MemberSystem?.PowerStored / MemberSystem?.MaxPowerStored ?? 0;
 
-            if (MemberSystem?.PowerStored <= 0)
+            if (storagePct <= 0)
             {
                 if (Block.MaxOutput == 0)
                     return;
@@ -118,10 +118,10 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 PowerConsumption = 0;
                 SyncMultipliers.ReactorOutput(Block, 0);
             }
-            else if (MemberSystem?.PowerStored > desiredInput * 15)
+            else if (storagePct > 0.025f)
             {
                 SyncMultipliers.ReactorOutput(Block, BufferReactorOutput);
-                PowerConsumption = desiredInput;
+                PowerConsumption = MaxPowerConsumption * Block.CurrentOutputRatio;
             }
         }
 

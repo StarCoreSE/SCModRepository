@@ -18,11 +18,23 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         public List<S_FusionArm> Arms = new List<S_FusionArm>();
         public int BlockCount = 0;
         public int PhysicalAssemblyId;
-        public float PowerCapacity;
 
+        /// <summary>
+        /// Total power generated minus PowerConsumption
+        /// </summary>
         public float PowerGeneration;
+        /// <summary>
+        /// Total power consumed
+        /// </summary>
         public float PowerConsumption;
+        /// <summary>
+        /// Current power stored
+        /// </summary>
         public float PowerStored;
+        /// <summary>
+        /// Maximum power storage
+        /// </summary>
+        public float MaxPowerStored;
         public List<FusionReactorLogic> Reactors = new List<FusionReactorLogic>();
         public List<FusionThrusterLogic> Thrusters = new List<FusionThrusterLogic>();
 
@@ -144,14 +156,14 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
             // Subtract power usage afterwards so that all reactors have the same stats.
             PowerGeneration = powerGeneration;
-            PowerCapacity = powerCapacity;
+            MaxPowerStored = powerCapacity;
             PowerConsumption = totalPowerUsage;
             PowerGeneration -= totalPowerUsage;
 
             // Update PowerStored
             PowerStored += PowerGeneration;
-            if (PowerStored > PowerCapacity)
-                PowerStored = PowerCapacity;
+            if (PowerStored > MaxPowerStored)
+                PowerStored = MaxPowerStored;
         }
 
         public void UpdateTick()

@@ -52,7 +52,6 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                         Visible = true,
                     };
                 }
-                MyAPIGateway.Utilities.ShowNotification("" + RichHudClient.Registered, 1000/60);
 
                 FusionManager.UpdateTick();
                 ConsumptionBar?.Update();
@@ -70,7 +69,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                             continue;
 
                         MyVisualScriptLogicProvider.AddQuestlogDetailLocal(
-                            $"[{system.PhysicalAssemblyId}] Power: {Math.Round(system.PowerStored / system.PowerCapacity * 100f)}% ({Math.Round(system.PowerCapacity)} @ {Math.Round(system.PowerGeneration * 60, 1)}/s) | Loops: {system.Arms.Count} | Blocks: {system.BlockCount}",
+                            $"[{system.PhysicalAssemblyId}] Power: {Math.Round(system.PowerStored / system.MaxPowerStored * 100f)}% ({Math.Round(system.MaxPowerStored)} @ {Math.Round(system.PowerGeneration * 60, 1)}/s) | Loops: {system.Arms.Count} | Blocks: {system.BlockCount}",
                             false, false);
                         displayedCount++;
                     }

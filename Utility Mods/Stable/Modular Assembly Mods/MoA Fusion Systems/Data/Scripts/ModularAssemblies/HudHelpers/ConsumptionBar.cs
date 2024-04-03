@@ -61,20 +61,18 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
         {
             var playerCockpit = MyAPIGateway.Session?.Player?.Controller?.ControlledEntity?.Entity as IMyCockpit;
 
-            //if (playerCockpit == null)
-            //{
-            //    if (_storageBackground.Visible)
-            //    {
-            //        _storageBackground.Visible = false;
-            //        _storageForeground.Visible = false;
-            //    }
-            //    return;
-            //}
-            //if (!_storageBackground.Visible)
-            //{
-            //    _storageBackground.Visible = true;
-            //    _storageForeground.Visible = true;
-            //}
+            if (playerCockpit == null)
+            {
+                if (Visible)
+                {
+                    Visible = false;
+                }
+                return;
+            }
+            if (Visible)
+            {
+                Visible = true;
+            }
 
             var playerGrid = playerCockpit.CubeGrid;
 
@@ -86,14 +84,13 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
                 if (playerGrid != ModularAPI.GetAssemblyGrid(system.Key))
                     continue;
 
-                totalFusionCapacity += system.Value.PowerCapacity;
+                totalFusionCapacity += system.Value.MaxPowerStored;
                 totalFusionGeneration += system.Value.PowerGeneration;
                 totalFusionStored += system.Value.PowerStored;
             }
 
             _storageForeground.Height = totalFusionStored / totalFusionCapacity * _storageBackground.Height;
             //_storageForeground.Origin = new Vector2D(_storageForeground.Origin.X, _storageForeground.Width * 0.75 - _storageBackground.Width*0.35); // THIS SHOULD BE RICHHUD!
-            MyAPIGateway.Utilities.ShowNotification(Math.Round(totalFusionStored/totalFusionCapacity * 100, 1) + "%", 1000/60);
         }
     }
 }

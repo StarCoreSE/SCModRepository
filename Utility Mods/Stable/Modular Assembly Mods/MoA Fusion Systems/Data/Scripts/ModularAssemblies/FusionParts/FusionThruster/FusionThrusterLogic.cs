@@ -84,9 +84,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
         public override void UpdateAfterSimulation()
         {
             base.UpdateAfterSimulation();
-            float desiredInput = MaxPowerConsumption * (Block.CurrentThrustPercentage / 100f);
+            float storagePct = MemberSystem?.PowerStored / MemberSystem?.MaxPowerStored ?? 0;
 
-            if (MemberSystem?.PowerStored <= desiredInput * 15)
+            if (storagePct <= 0.05f)
             {
                 if (Block.ThrustMultiplier == 0)
                     return;
@@ -103,10 +103,10 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
                 PowerConsumption = 0;
                 SyncMultipliers.ThrusterOutput(Block, 0);
             }
-            else if (MemberSystem?.PowerStored > desiredInput * 30)
+            else if (storagePct > 0.1f)
             {
                 SyncMultipliers.ThrusterOutput(Block, BufferThrustOutput);
-                PowerConsumption = desiredInput;
+                PowerConsumption = MaxPowerConsumption * (Block.CurrentThrustPercentage / 100f);
             }
         }
 
