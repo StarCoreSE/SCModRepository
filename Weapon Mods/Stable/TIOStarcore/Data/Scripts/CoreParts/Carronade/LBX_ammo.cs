@@ -203,7 +203,7 @@ namespace Scripts
                     NoSound = false,
                     ParticleScale = 1,
                     CustomParticle = "LBX_High_Explosive_Anti_Fleet", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "LBXMyHeavyHit", // SubtypeID from your Audio SBC, not a filename
+                    CustomSound = "VanillaImpactCat5", // SubtypeID from your Audio SBC, not a filename
                     Shape = Round, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
             },
@@ -788,7 +788,7 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "VanillaImpactCat2",
+                HitSound = "",
                 ShotSound = "",
                 ShieldHitSound = "",
                 PlayerHitSound = "",
@@ -1169,7 +1169,7 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "VanillaImpactCat1",
+                HitSound = "",
                 ShotSound = "",
                 ShieldHitSound = "",
                 PlayerHitSound = "",
@@ -1558,7 +1558,7 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "VanillaImpactCat0",
+                HitSound = "",
                 ShotSound = "",
                 ShieldHitSound = "",
                 PlayerHitSound = "",
