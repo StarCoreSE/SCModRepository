@@ -24,10 +24,12 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
                 OverrideEnabled.Value
                     ? OverridePowerUsageSync
                     : PowerUsageSync.Value; // This is ugly, let's make it better.
-            var efficiencyMultiplier = 1 / (0.25f + consumptionMultiplier);
 
             // Power generation consumed (per second)
             var powerConsumption = PowerGeneration * 60 * consumptionMultiplier;
+
+            var efficiencyMultiplier = 1 / (0.25f + consumptionMultiplier);
+
             // Power generated (per second)
             var thrustOutput = efficiencyMultiplier * powerConsumption * NewtonsPerFusionPower;
             BufferThrustOutput = thrustOutput;
@@ -82,6 +84,16 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
         public override void UpdateAfterSimulation()
         {
             base.UpdateAfterSimulation();
+            float desiredInput = MaxPowerConsumption * (Block.CurrentThrustPercentage / 100f);
+
+            if (MemberSystem?.PowerStored <= desiredInput * 15)
+            {
+                if (Block.ThrustMultiplier == 0)
+                    return;
+                SyncMultipliers.ThrusterOutput(Block, 0);
+                PowerConsumption = 0;
+                return;
+            }
 
             // If boost is unsustainable, disable it.
             // If power draw exceeds power available, disable self until available.
@@ -91,10 +103,10 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
                 PowerConsumption = 0;
                 SyncMultipliers.ThrusterOutput(Block, 0);
             }
-            else
+            else if (MemberSystem?.PowerStored > desiredInput * 30)
             {
                 SyncMultipliers.ThrusterOutput(Block, BufferThrustOutput);
-                PowerConsumption = MaxPowerConsumption * (Block.CurrentThrustPercentage / 100f);
+                PowerConsumption = desiredInput;
             }
         }
 

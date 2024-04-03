@@ -148,6 +148,12 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
         private void SetApiMethod<T>(string name, ref T method) where T : class
         {
+            if (methodMap == null)
+            {
+                method = null;
+                return;
+            }
+
             if (!methodMap.ContainsKey(name))
                 throw new Exception("Method Map does not contain method " + name);
             Delegate del = methodMap[name];

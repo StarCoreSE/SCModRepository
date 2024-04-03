@@ -38,7 +38,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
             FusionManager.Unload();
             I = null;
 
-            RichHudClient.Reset();
+            //RichHudClient.Reset();
         }
 
         public override void UpdateAfterSimulation()
