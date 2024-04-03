@@ -897,14 +897,14 @@
 			  <SubtypeId>VanillaImpactCat4B</SubtypeId>
 		  </Id>
 		  <Category>R_IMP</Category>
-		  <Volume>2</Volume>
-		  <MaxDistance>2000</MaxDistance>
+		  <Volume>2.5</Volume>
+		  <MaxDistance>1800</MaxDistance>
 		  <PitchVariation>50</PitchVariation>
 		  <SoundLimit>4</SoundLimit>
 		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 		  <DynamicMusicAmount>25</DynamicMusicAmount>
 		  <DistantSounds>
-			  <DistantSound DistanceCrossfade="275" Distance="675" Sound="VanillaImpactCat4BDistA"/>
+			  <DistantSound DistanceCrossfade="60" Distance="675" Sound="VanillaImpactCat4BDistA"/>
 		  </DistantSounds>
 		  <Waves>
 			  <Wave Type="D3">
@@ -934,12 +934,11 @@
 			  <SubtypeId>VanillaImpactCat4BDistA</SubtypeId>
 		  </Id>
 		  <Category>R_IMP</Category>
-		  <Volume>1</Volume>
-		  <MaxDistance>1600</MaxDistance>
+		  <Volume>1.5</Volume>
+		  <MaxDistance>1800</MaxDistance>
 		  <PitchVariation>60</PitchVariation>
-		  <SoundLimit>4</SoundLimit>
 		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-		  <DynamicMusicAmount>5</DynamicMusicAmount>
+		  <DynamicMusicAmount>25</DynamicMusicAmount>
 		  <Waves>
 			  <Wave Type="D3">
 				  <Start>ARC\IMP_DIST\ArcImpMetalMetal4CatDistA3d01.wav</Start>
@@ -965,8 +964,8 @@
 			  <SubtypeId>VanillaImpactCat5</SubtypeId>
 		  </Id>
 		  <Category>R_IMP</Category>
-		  <Volume>4</Volume>
-		  <MaxDistance>1800</MaxDistance>
+		  <Volume>3</Volume>
+		  <MaxDistance>3000</MaxDistance>
 		  <PitchVariation>200</PitchVariation>
 		  <PreventSynchronization>20</PreventSynchronization>
 		  <SoundLimit>4</SoundLimit>
@@ -1000,8 +999,8 @@
 			  <SubtypeId>VanillaImpactCat5DistA</SubtypeId>
 		  </Id>
 		  <Category>R_IMP</Category>
-		  <Volume>2</Volume>
-		  <MaxDistance>1800</MaxDistance>
+		  <Volume>1.75</Volume>
+		  <MaxDistance>3000</MaxDistance>
 		  <PitchVariation>200</PitchVariation>
 		  <PreventSynchronization>20</PreventSynchronization>
 		  <SoundLimit>4</SoundLimit>
