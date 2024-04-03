@@ -10,6 +10,7 @@ using RichHudFramework.UI.Client;
 using RichHudFramework.UI.Rendering;
 using Sandbox.ModAPI;
 using VRage.Game.ModAPI;
+using VRage.Input;
 using VRage.Utils;
 using VRageMath;
 using VRageRender;
@@ -18,8 +19,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
 {
     internal class ConsumptionBar : WindowBase
     {
-        private TexturedBox _storageBackground; 
-        private TexturedBox _storageForeground;
+        private readonly TexturedBox _storageBackground; 
+        private readonly TexturedBox _storageForeground;
+        private bool _shouldHide = false;
         private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
 
 
@@ -39,15 +41,15 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
                 DimAlignment = DimAlignments.Both,
             };
 
-            BodyColor = new Color(41, 54, 62, 150);
-            BorderColor = new Color(58, 68, 77);
+            BodyColor = new Color(0, 0, 0, 0);
+            BorderColor = new Color(0, 0, 0, 0);
 
-            //header.Format = new GlyphFormat(GlyphFormat.Blueish.Color, TextAlignment.Center, 1.08f);
-            //header.Height = 30f;
+            header.Format = new GlyphFormat(GlyphFormat.Blueish.Color, TextAlignment.Center, 1f);
+            header.Height = 30f;
 
-            //HeaderText = "Fusion Systems";
-            Size = new Vector2(250f, 500f);
-            Offset = new Vector2(835, 290); // Top-right corner; relative to 1920x1080
+            HeaderText = "Fusion | 0% | 0s";
+            Size = new Vector2(150f, 400f);
+            Offset = new Vector2(-HudMain.ScreenWidth/(2.01f*HudMain.ResScale) + Width/2, 0); // Relative to 1920x1080
         }
 
         protected override void Layout()
@@ -59,19 +61,20 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
 
         public void Update()
         {
-            var playerCockpit = MyAPIGateway.Session?.Player?.Controller?.ControlledEntity?.Entity as IMyCockpit;
+            var playerCockpit = MyAPIGateway.Session?.Player?.Controller?.ControlledEntity?.Entity as IMyShipController;
 
-            if (playerCockpit == null)
+            // Pulling the current HudState is SLOOOOWWWW, so we only pull it when tab is just pressed.
+            if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.Tab))
+                _shouldHide = MyAPIGateway.Session?.Config?.HudState != 1;
+
+            // Hide HUD element if the player isn't in a cockpit
+            if (playerCockpit == null || _shouldHide)
             {
                 if (Visible)
                 {
                     Visible = false;
                 }
                 return;
-            }
-            if (Visible)
-            {
-                Visible = true;
             }
 
             var playerGrid = playerCockpit.CubeGrid;
@@ -89,7 +92,40 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
                 totalFusionStored += system.Value.PowerStored;
             }
 
-            _storageForeground.Height = totalFusionStored / totalFusionCapacity * _storageBackground.Height;
+            // Hide HUD element if the grid has no fusion systems (capacity is always >0 for a fusion system)
+            if (totalFusionCapacity == 0)
+            {
+                if (Visible)
+                {
+                    Visible = false;
+                }
+                return;
+            }
+
+            // Show otherwise
+            if (!Visible)
+            {
+                Visible = true;
+            }
+
+            float storagePct = totalFusionStored / totalFusionCapacity;
+            float timeToCharge;
+
+            if (totalFusionGeneration > 0)
+            {
+                timeToCharge = (totalFusionCapacity - totalFusionStored) / totalFusionGeneration / 60;
+            }
+            else if (totalFusionGeneration < 0)
+            {
+                timeToCharge = totalFusionStored / -totalFusionGeneration / 60;
+            }
+            else
+            {
+                timeToCharge = 0;
+            }
+
+            HeaderText = $"Fusion | {Math.Round(storagePct*100)}% | {(totalFusionGeneration > 0 ? "+" : "-")}{Math.Round(timeToCharge)}s";
+            _storageForeground.Height = storagePct * _storageBackground.Height;
             //_storageForeground.Origin = new Vector2D(_storageForeground.Origin.X, _storageForeground.Width * 0.75 - _storageBackground.Width*0.35); // THIS SHOULD BE RICHHUD!
         }
     }

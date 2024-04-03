@@ -163,7 +163,10 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             // Update PowerStored
             PowerStored += PowerGeneration;
             if (PowerStored > MaxPowerStored)
+            {
                 PowerStored = MaxPowerStored;
+                PowerGeneration = 0;
+            }
         }
 
         public void UpdateTick()
