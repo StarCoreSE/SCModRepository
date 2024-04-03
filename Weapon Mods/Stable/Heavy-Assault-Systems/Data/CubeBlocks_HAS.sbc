@@ -10,7 +10,7 @@
       </Id>
       <DisplayName>[HAS] RAC-5 Avenger</DisplayName>
       <Description>
-                GAU Style Cannon. 6 Seconds of BRRT with 20 seconds of cooldown. 4km range.
+                GAU-Yes style Rotary Cannon. 6 Seconds of BRRT with 20 seconds of cooldown.
       </Description>
       <Icon>Textures\GUI\Icons\Vulcan.png</Icon>
       <CubeSize>Large</CubeSize>
@@ -21,9 +21,9 @@
       <Model>Models\Vulcan.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
-        <Component Subtype="VulcanComponent" Count="3" />
+        <Component Subtype="VulcanComponent" Count="10" />
         <Component Subtype="Computer" Count="1" />
-        <Component Subtype="VulcanComponent" Count="13" />
+        <Component Subtype="VulcanComponent" Count="5" />
       </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
       <MountPoints>

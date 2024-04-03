@@ -102,7 +102,7 @@
 			<Volume>0</Volume>
 			<Model>Models\Components\ContractPackage.mwm</Model>
 			<PhysicalMaterial>Ammo</PhysicalMaterial>
-			<Capacity>102</Capacity>
+			<Capacity>100</Capacity>
 			<IconSymbol>3</IconSymbol>
 			<AmmoDefinitionId Subtype="VulcanAmmoMag" />
 		</AmmoMagazine>
