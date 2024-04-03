@@ -52,7 +52,69 @@
 			  </Wave>
 		  </Waves>
 	  </Sound>
-	  
+
+
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>LBXCluster</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>2500</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>35</DynamicMusicAmount>
+		  <Volume>2</Volume>
+          <PitchVariation>60</PitchVariation>
+		  <DistantSounds>
+			  <DistantSound DistanceCrossFade="0" Distance="500" Sound = "LBXClusterD1" />
+			  			  <DistantSound DistanceCrossFade="0" Distance="1000" Sound = "LBXClusterD2" />
+		  </DistantSounds>
+		  <Loopable>false</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Crunch\LBXCluster.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>LBXClusterD1</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>2500</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>5</DynamicMusicAmount>
+		  <Volume>1.5</Volume>
+          <PitchVariation>50</PitchVariation>
+		  <Loopable>false</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Crunch\LBXClusterD1.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	  	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>LBXClusterD2</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>2500</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>5</DynamicMusicAmount>
+		  <Volume>1</Volume>
+          <PitchVariation>40</PitchVariation>
+		  <Loopable>false</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Crunch\LBXClusterD2.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
 	  
 	  <!--LB-X reload-->
 	  <Sound>
@@ -647,11 +709,11 @@
 		  </Id>
 		  <Category>R_IMP</Category>
 		  <Volume>3</Volume>
-		  <MaxDistance>25</MaxDistance>
+		  <MaxDistance>100</MaxDistance>
 		  <PitchVariation>100</PitchVariation>
 		  <VolumeVariation>0.1</VolumeVariation>
 		  <PreventSynchronization>3</PreventSynchronization>
-		  <SoundLimit>10</SoundLimit>
+		  <SoundLimit>12</SoundLimit>
 		  <Waves>
 			  <Wave Type="D3">
 				  <Start>ARC\IMP\ArcImpMetalMetal0Cat3d01.wav</Start>
@@ -675,10 +737,10 @@
 		  </Id>
 		  <Category>R_IMP</Category>
 		  <Volume>3</Volume>
-		  <MaxDistance>30</MaxDistance>
+		  <MaxDistance>300</MaxDistance>
 		  <PitchVariation>250</PitchVariation>
 		  <PreventSynchronization>3</PreventSynchronization>
-		  <SoundLimit>3</SoundLimit>
+		  <SoundLimit>6</SoundLimit>
 		  <Waves>
 			  <Wave Type="D3">
 				  <Start>ARC\IMP\ArcImpMetalMetal1Cat3d01.wav</Start>
@@ -702,10 +764,10 @@
 		  </Id>
 		  <Category>R_IMP</Category>
 		  <Volume>1</Volume>
-		  <MaxDistance>400</MaxDistance>
-		  <PitchVariation>200</PitchVariation>
+		  <MaxDistance>600</MaxDistance>
+		  <PitchVariation>100</PitchVariation>
 		  <PreventSynchronization>12</PreventSynchronization>
-		  <SoundLimit>3</SoundLimit>
+		  <SoundLimit>5</SoundLimit>
 		  <Waves>
 			  <Wave Type="D3">
 				  <Start>ARC\IMP\ArcImpMetalMetal2Cat3d01.wav</Start>
@@ -735,9 +797,9 @@
 		  <Category>R_IMP</Category>
 		  <Volume>1</Volume>
 		  <MaxDistance>800</MaxDistance>
-		  <PitchVariation>200</PitchVariation>
-		  <PreventSynchronization>12</PreventSynchronization>
-		  <SoundLimit>3</SoundLimit>
+		  <PitchVariation>100</PitchVariation>
+		  <PreventSynchronization>5</PreventSynchronization>
+		  <SoundLimit>5</SoundLimit>
 		  <Waves>
 			  <Wave Type="D3">
 				  <Start>ARC\IMP\ArcImpMetalMetal3Cat3d01.wav</Start>

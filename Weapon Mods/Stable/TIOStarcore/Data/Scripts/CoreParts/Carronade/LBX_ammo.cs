@@ -1558,13 +1558,13 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "",
+                HitSound = "VanillaImpactCat0",
                 ShotSound = "",
                 ShieldHitSound = "",
                 PlayerHitSound = "",
                 VoxelHitSound = "",
                 FloatingHitSound = "",
-                HitPlayChance = 0.25f,
+                HitPlayChance = 1f,
                 HitPlayShield = true,
             },
             Ejection = new EjectionDef // Optional Component, allows generation of Particle or Item (Typically magazine), on firing, to simulate Tank shell ejection
@@ -2333,7 +2333,7 @@ namespace Scripts
             },
             AmmoAudio = new AmmoAudioDef
             {
-                TravelSound = "LBXMyHeavyHit", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
+                TravelSound = "LBXCluster", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
                 HitSound = "",
                 ShotSound = "",
                 ShieldHitSound = "",
@@ -2714,7 +2714,7 @@ namespace Scripts
                 PlayerHitSound = "",
                 VoxelHitSound = "",
                 FloatingHitSound = "",
-                HitPlayChance = 0.33f,
+                HitPlayChance = 0.5f,
                 HitPlayShield = false,
             },
             Ejection = new EjectionDef // Optional Component, allows generation of Particle or Item (Typically magazine), on firing, to simulate Tank shell ejection
