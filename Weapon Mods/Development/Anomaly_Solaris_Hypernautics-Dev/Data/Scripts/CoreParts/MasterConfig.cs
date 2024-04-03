@@ -9,11 +9,12 @@ namespace Scripts
 		AMP_FieldGenerator,
 		AMP_ImpulseTorch,
 		AMP_FlakShotgun,
-                S_Chem_Laser,
-                S_Armored_Laser,
+        Nariman_Smart_Turret,
+        S_Chem_Laser,
+        S_Armored_Laser,
 		SM3_Counter_Battery,
 		SolHyp_ArcStrike_HTorpedo,
-                SolHyp_MAC
+        SolHyp_MAC
 	    );
         }
     }

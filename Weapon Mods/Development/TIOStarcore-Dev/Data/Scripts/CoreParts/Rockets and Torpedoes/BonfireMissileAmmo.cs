@@ -413,7 +413,7 @@ namespace Scripts
                             "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
-                        DecayTime = 12, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
+                        DecayTime = 1, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
                         Color = Color(red: 8, green: 4, blue: 4, alpha: 1),
                         Back = false,
                         CustomWidth = 0.2f,

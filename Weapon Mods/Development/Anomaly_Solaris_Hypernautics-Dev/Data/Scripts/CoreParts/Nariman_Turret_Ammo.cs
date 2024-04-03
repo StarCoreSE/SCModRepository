@@ -32,8 +32,8 @@ namespace Scripts
     {
         private AmmoDef K_SA_GaussRound_Standard => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
-            AmmoMagazine = "K_GaussCase_S", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "Ceis Gauss", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
+            AmmoRound = "Smart NanoDart", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.04f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 9000f, // Direct damage; one steel plate is worth 100.
@@ -197,9 +197,9 @@ namespace Scripts
             Ewar = new EwarDef
             {
                 Enable = false, // Enables EWAR effects AND DISABLES BASE DAMAGE AND AOE DAMAGE!!
-                Type = EnergySink, // EnergySink, Emp, Offense, Nav, Dot, AntiSmart, JumpNull, Anchor, Tractor, Pull, Push, 
-                Mode = Effect, // Effect , Field
-                Strength = 100f,
+                Type = Anchor, // EnergySink, Emp, Offense, Nav, Dot, AntiSmart, JumpNull, Anchor, Tractor, Pull, Push, 
+                Mode = Field, // Effect , Field
+                Strength = 1000f,
                 Radius = 5f, // Meters
                 Duration = 100, // In Ticks
                 StackDuration = true, // Combined Durations
@@ -257,13 +257,13 @@ namespace Scripts
             },
             Trajectory = new TrajectoryDef
             {
-                Guidance = None, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
+                Guidance = Smart, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
                 TargetLossDegree = 80f, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 900, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 3500, // voxel phasing if you go above 5100
-                MaxTrajectory = 3500f, // Max Distance the projectile or beam can Travel.
+                DesiredSpeed = 5100, // voxel phasing if you go above 5100
+                MaxTrajectory = 5100f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
@@ -272,8 +272,8 @@ namespace Scripts
                 Smarts = new SmartsDef
                 {
                     Inaccuracy = 0f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
-                    Aggressiveness = 0f, // controls how responsive tracking is.
-                    MaxLateralThrust = 0, // controls how sharp the trajectile may turn
+                    Aggressiveness = 2f, // controls how responsive tracking is.
+                    MaxLateralThrust = 0.05, // controls how sharp the trajectile may turn
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
                     MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.

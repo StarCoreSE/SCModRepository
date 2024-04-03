@@ -143,6 +143,7 @@
     14km range
     Energy damage
     no physical damage
+	2min reload
 
 	 </Description>
      <Icon>Textures\GUI\Icons\OPA-Logo.dds</Icon>
@@ -196,9 +197,9 @@
      </Id>
      <DisplayName>SM-3 Counter Battery</DisplayName>
      <Description>Anti-Missile Torpedo
-	20km range.. maybe idk
+	10km range with 1.5km minimum
 	8 mini torps target missiles
-	Will hurt you if it impacts
+	Will heal shields if it impacts
 	40 second reload
 
      </Description>
@@ -400,12 +401,12 @@
 
 
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
-			<!-- Ceis Anti Armour -->
+			<!-- Nariman Anti Armour -->
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>K_SA_Gauss_APC</SubtypeId>
+				<SubtypeId>Nariman_Dart_Turret</SubtypeId>
 			</Id>
-			<DisplayName>Ceis Hybrid Gauss Turret</DisplayName>
+			<DisplayName>Nariman NanoDart Turret</DisplayName>
 			<Description>
 				Dual purpose turret
 			</Description>
@@ -450,13 +451,11 @@
 					<MinAllowed>0.01</MinAllowed>
 				</DynamicMode>
 			</VoxelPlacement>
-			<BlockPairName>K_SA_Gauss_APC</BlockPairName>
+			<BlockPairName>Nariman_Dart_Turret</BlockPairName>
 			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
 			<EdgeType>Light</EdgeType>
 			<BuildTimeSeconds>30</BuildTimeSeconds>
-			<OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
-			<WeaponDefinitionId Subtype="K_SA_Gun"/>
 			<InventoryMaxVolume>1</InventoryMaxVolume>
 			<DamageEffectId>213</DamageEffectId>
 			<AiEnabled>false</AiEnabled>
@@ -474,6 +473,16 @@
 			<MaxFov>2</MaxFov>
 			<EmissiveColorPreset>Default</EmissiveColorPreset>
 		</Definition>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -514,7 +523,7 @@
      <BuildProgressModels>
 				<Model BuildPercentUpperBound="1.0" File="Models\Starcore\muzzled_coil_odin_BS1_LOD1.mwm"/>
 			</BuildProgressModels>
-      <BlockPairName>SolHyp_MAC_Block</BlockPairName>
+      <BlockPairName>SolHyp_Magnetic_Coilgun</BlockPairName>
        <MirroringY>Z</MirroringY>
      <MirroringZ>Y</MirroringZ>
 	   <EdgeType>Light</EdgeType>
@@ -808,7 +817,7 @@
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="1" y="2" z="4"/>
 			<ModelOffset x="0" y="0" z="0"/>
-			<Model>Models\Cubes\large\SH_LG_BP24_2x4 Blastplate.mwm</Model>
+			<Model>Models\Cubes\large\SH_LG_BP24_2x4_Blastplate.mwm</Model>
 			<Components>
 				<Component Subtype="SteelPlate" Count="750" />
        		 	<Component Subtype="MetalGrid" Count="2500" />

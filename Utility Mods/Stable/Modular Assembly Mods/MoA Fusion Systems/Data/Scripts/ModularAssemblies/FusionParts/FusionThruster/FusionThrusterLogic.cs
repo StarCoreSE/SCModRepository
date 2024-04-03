@@ -24,7 +24,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
                 OverrideEnabled.Value
                     ? OverridePowerUsageSync
                     : PowerUsageSync.Value; // This is ugly, let's make it better.
-            var efficiencyMultiplier = 1 / (0.5f + consumptionMultiplier);
+            var efficiencyMultiplier = 1 / (0.25f + consumptionMultiplier);
 
             // Power generation consumed (per second)
             var powerConsumption = PowerGeneration * 60 * consumptionMultiplier;
@@ -85,7 +85,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
 
             // If boost is unsustainable, disable it.
             // If power draw exceeds power available, disable self until available.
-            if (MemberSystem?.PowerStored <= PowerConsumption * 120 || !Block.IsWorking)
+            if ((OverrideEnabled.Value && MemberSystem?.PowerStored <= PowerConsumption * 120) || !Block.IsWorking)
             {
                 SetPowerBoost(false);
                 PowerConsumption = 0;

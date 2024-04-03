@@ -70,8 +70,8 @@ namespace Scripts {
             HardPoint = new HardPointDef
             {
                 PartName = "Bonfire Guided Rocket Turret", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
-                DeviateShotAngle = 0f, // Projectile inaccuracy in degrees.
-                AimingTolerance = 1f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
+                DeviateShotAngle = 10f, // Projectile inaccuracy in degrees.
+                AimingTolerance = 90f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
                 DelayCeaseFire = 0, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released.
                 AddToleranceToTracking = false, // Allows turret to track to the edge of the AimingTolerance cone instead of dead centre.
@@ -125,8 +125,8 @@ namespace Scripts {
                     EnergyPriority = 0, // Deprecated.
                     MuzzleCheck = false, // Whether the weapon should check LOS from each individual muzzle in addition to the scope.
                     Debug = false, // Force enables debug mode.
-                    RestrictionRadius = 0, // Prevents other blocks of this type from being placed within this distance of the centre of the block.
-                    CheckInflatedBox = false, // If true, the above distance check is performed from the edge of the block instead of the centre.
+                    RestrictionRadius = 20, // Prevents other blocks of this type from being placed within this distance of the centre of the block.
+                    CheckInflatedBox = true, // If true, the above distance check is performed from the edge of the block instead of the centre.
                     CheckForAnyWeapon = false, // If true, the check will fail if ANY weapon is present, not just weapons of the same subtype.
                 },
                 Loading = new LoadingDef
@@ -197,7 +197,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                LrgRocketTurretAmmo,
+                LrgRocketTurretAmmo, LrgRocketTurretAmmoTerminal,
                  // Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = CoilgunAnim,

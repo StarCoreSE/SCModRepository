@@ -52,7 +52,7 @@ namespace Scripts {
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 6000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MaxTargetDistance = 7000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
                 MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 4, // Maximum number of targets to randomize between; 0 = unlimited.
                 CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.

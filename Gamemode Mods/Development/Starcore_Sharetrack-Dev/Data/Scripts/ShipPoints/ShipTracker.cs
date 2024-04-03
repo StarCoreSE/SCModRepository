@@ -79,6 +79,8 @@ namespace klime.PointCheck
         [ProtoMember(37)] public int MiscBps = 0;
         [ProtoMember(38)] public Vector3 OriginalFactionColor = Vector3.One;
         [ProtoMember(39)] public bool hasShield;
+
+        [ProtoMember(40)] public Dictionary<string, int> SubgridGunL = new Dictionary<string, int>();
         public ShipTracker() { }
 
         public ShipTracker(IMyCubeGrid grid)
@@ -169,10 +171,6 @@ namespace klime.PointCheck
 
                         }
 
-
-
-
-
                         var f = MyAPIGateway.Session?.Factions?.TryGetPlayerFaction(OwnerID);
                         if (f != null)
                         {
@@ -216,6 +214,8 @@ namespace klime.PointCheck
 
         private void TempBlockCheck(ref bool hasPower, ref bool hasCockpit, ref bool hasThrust, ref bool hasGyro, ref float movementBpts, ref float powerBpts, ref float offensiveBpts, ref float MiscBpts, ref int bonusBpts, ref int pdBpts, ref string controller)
         {
+            bool hasCTC = false;
+
             for (int i = 0; i < connectedGrids.Count; i++)
             {
                 IMyCubeGrid grid = connectedGrids[i];
@@ -346,13 +346,29 @@ namespace klime.PointCheck
                             offensiveBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
                         }
                     }
-                    FatHandling(ref hasPower, ref hasCockpit, ref hasThrust, ref hasGyro, ref movementBpts, ref powerBpts, ref offensiveBpts, ref MiscBpts, ref bonusBpts, ref pdBpts, ref controller, subgrid);
+                    FatHandling(ref hasPower, ref hasCockpit, ref hasThrust, ref hasGyro, ref hasCTC, ref movementBpts, ref powerBpts, ref offensiveBpts, ref MiscBpts, ref bonusBpts, ref pdBpts, ref controller, subgrid);
                 }
             }
+
+            if (hasCTC)
+            {
+                foreach (KeyValuePair<string, int> weapon in SubgridGunL)
+                {
+                    // Currently takes a global 20% extra cost wich is not multiplicative with clibing cost
+                    int bonusWeaponBP = (int)(PointCheck.PointValues.GetValueOrDefault(weapon.Key, 0) * weapon.Value * 0.2);
+                    offensiveBpts += bonusWeaponBP;
+                    Bpts += bonusWeaponBP;
+                }
+            }
+            
         }
 
-        private void FatHandling(ref bool hasPower, ref bool hasCockpit, ref bool hasThrust, ref bool hasGyro, ref float movementBpts, ref float powerBpts, ref float offensiveBpts, ref float MiscBpts, ref int bonusBpts, ref int pdBpts, ref string controller, MyCubeGrid subgrid)
+        private void FatHandling(ref bool hasPower, ref bool hasCockpit, ref bool hasThrust, ref bool hasGyro, ref bool hasCTC, ref float movementBpts, ref float powerBpts, ref float offensiveBpts, ref float MiscBpts, ref int bonusBpts, ref int pdBpts, ref string controller, MyCubeGrid subgrid)
         {
+            // Variables used for extra cost on subgrid weapons (rotorturrets)
+            bool isMainGrid = false;
+            Dictionary<string, int> tempGuns = new Dictionary<string, int>();
+
             VRage.Collections.ListReader<MyCubeBlock> blocklist = subgrid.GetFatBlocks();
             for (int i1 = 0; i1 < blocklist.Count; i1++)
             {
@@ -415,7 +431,14 @@ namespace klime.PointCheck
 
                     if (block is IMyCockpit && (block as IMyCockpit).CanControlShip)
                     {
+                        if (hasCockpit && !isMainGrid)
+                        {
+                            // Prevent players from placing Cockpits on subgrids to circumvent BP increase of weapons on subgrids
+                            MyAPIGateway.Utilities.ShowNotification("Illegal Cockpit placement on subgrid", 1000, font: "Red");
+                        }
+
                         hasCockpit = true;
+                        isMainGrid = true;
                     }
 
                     if (block is IMyReactor || block is IMyBatteryBlock)
@@ -471,6 +494,15 @@ namespace klime.PointCheck
                 {
                     offensiveBpts += PointCheck.PointValues.GetValueOrDefault(id, 0) + bonusBpts;
 
+                    if (tempGuns.ContainsKey(id))
+                    {
+                        tempGuns[id] += 1;
+                    }
+                    else
+                    {
+                        tempGuns.Add(id, 1);
+                    }
+
                     // isPointDefense;
                     if (PointCheckHelpers.pdDictionary.TryGetValue(block.BlockDefinition.Id.SubtypeName, out isPointDefense) && isPointDefense)
                     {
@@ -494,7 +526,29 @@ namespace klime.PointCheck
                         MiscBpts += PointCheck.PointValues.GetValueOrDefault(id, 0);
                     }
                 }
+
+                if (id == "LargeTurretControlBlock")
+                { 
+                    hasCTC = true;
+                }
             }
+
+            // Adding extra points to guns when they are not on the main grid
+            if (!isMainGrid && connectedGrids.Count != 1)
+            {
+                foreach (KeyValuePair<string, int> weapon in tempGuns)
+                {
+                    if (SubgridGunL.ContainsKey(weapon.Key))
+                    {
+                        SubgridGunL[weapon.Key] += 1;
+                    }
+                    else
+                    {
+                        SubgridGunL.Add(weapon.Key, 1);
+                    }
+                }
+            }
+
         }
 
         private static void ClimbingCostRename(ref string t_N, ref float mCs)
@@ -599,6 +653,12 @@ namespace klime.PointCheck
                     mCs = 0.15f;
                     break;
                 case "Reinforced Blastplate":
+                case "Active Blastplate":
+                case "Standard Blastplate A":
+                case "Standard Blastplate B":
+                case "Standard Blastplate C":
+                case "Elongated Blastplate":
+                case "7x7 Basedplate"
                     t_N = "Reinforced Blastplate";
                     mCs = 1.00f;
                     break;
@@ -726,6 +786,7 @@ namespace klime.PointCheck
         {
             SBL.Clear();
             GunL.Clear();
+            SubgridGunL.Clear();
             Bpts = 0;
             InstalledThrust = 0;
             Mass = 0;

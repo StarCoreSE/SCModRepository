@@ -93,7 +93,7 @@ namespace Scripts {
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 0, // Default resting elevation
                     InventorySize = 1f, // Inventory capacity in kL.
-                    IdlePower = 0.25f, // Constant base power draw in MW.
+                    IdlePower = 50f, // Constant base power draw in MW.
                     FixedOffset = false, // Deprecated.
                     Offset = Vector(x: 0, y: 0, z: 0), // Offsets the aiming/firing line of the weapon, in metres.
                     Type = BlockWeapon, // What type of weapon this is; BlockWeapon, HandWeapon, Phantom 
@@ -128,8 +128,8 @@ namespace Scripts {
                     DelayUntilFire = 60, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     HeatPerShot = 60, // Heat generated per shot.
                     MaxHeat = 600, // Max heat before weapon enters cooldown (70% of max heat).
-                    Cooldown = .15f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
-                    HeatSinkRate = 120, // Amount of heat lost per second.
+                    Cooldown = 0.1f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
+                    HeatSinkRate = 100, // Amount of heat lost per second.
                     DegradeRof = false, // Progressively lower rate of fire when over 80% heat threshold (80% of max heat).
                     ShotsInBurst = 0, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
                     DelayAfterBurst = 0, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).

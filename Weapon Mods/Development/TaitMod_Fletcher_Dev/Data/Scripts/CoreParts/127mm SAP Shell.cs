@@ -101,14 +101,14 @@ namespace Scripts
                 {
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
                     Light = 1.5f, // Multiplier for damage against light armor.
-                    Heavy = 1f, // Multiplier for damage against heavy armor.
+                    Heavy = 1.2f, // Multiplier for damage against heavy armor.
                     NonArmor = 0.4f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
                     Modifier = 2.4f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
-                    BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
+                    BypassModifier = 0f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {
@@ -241,7 +241,7 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 900, // voxel phasing if you go above 5100
+                DesiredSpeed = 1500, // voxel phasing if you go above 5100
                 MaxTrajectory = 5000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 2f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.

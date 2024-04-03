@@ -142,7 +142,8 @@ namespace Scripts {
         {
             SubtypeIds = new[] {
 			"K_SA_HeavyMetal_Gauss_PGBC",
-			"BFTriCannon",
+            "K_SA_HeavyMetal_Gauss_ERII",
+            "BFTriCannon",
 			"BattleshipCannonMK3",
 			"RailgunxTurret",
 			"C300mmTurret",

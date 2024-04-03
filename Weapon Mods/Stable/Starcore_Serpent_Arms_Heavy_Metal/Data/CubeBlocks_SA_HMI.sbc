@@ -81,7 +81,7 @@ Ammunition: [5000m/s,] [Kinetic, 95% Shieldpen] </Description>
 Magazine Capacity: [1] 
 Rate of Fire: [200] 
 Reload Speed: [0.5 seconds] 
-Ammunition: [2000m/s,] [Kinetic] </Description>
+Ammunition: [2000m/s,] [Kinetic]</Description>
       <Icon>Textures\GUI\Icons\Asterius.dds</Icon>
       <CubeSize>Large</CubeSize>
 	  <GuiVisible>false</GuiVisible>
@@ -91,7 +91,7 @@ Ammunition: [2000m/s,] [Kinetic] </Description>
       <Model>Models\SerpentArms\SA_GaussAPIIC_Large.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
-       <Component Subtype="SteelPlate" Count="50" />
+       <Component Subtype="SteelPlate" Count="800" />
         <Component Subtype="Superconductor" Count="150" />
         <Component Subtype="Construction" Count="340" />
 		<Component Subtype="Motor" Count="120" />
@@ -154,10 +154,10 @@ Ammunition: [2000m/s,] [Kinetic] </Description>
       </Id>
       <DisplayName>[SA] Cerberus Gauss Turret</DisplayName>
 <Description>Long Range Turret: [7km] 
-Magazine Capacity: [1] 
-Rate of Fire: [175] 
-Reload Speed: [10 seconds] 
-Ammunition: [5000m/s,] [Kinetic] </Description>
+Idle Power: 150 MW (50 MW per Barrel)
+Reload Power: ~600 MW (~200 MW per Barrel)
+Reload Speed: [8 seconds] 
+Ammunition: [Kinetic] </Description>
       <Icon>Textures\GUI\Icons\Cerberus.dds</Icon>
       <CubeSize>Large</CubeSize>
 	  <GuiVisible>false</GuiVisible>
@@ -167,14 +167,14 @@ Ammunition: [5000m/s,] [Kinetic] </Description>
       <Model>Models\SerpentArms\SA_GaussERII_Large.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
-        <Component Subtype="SteelPlate" Count="50" />
-        <Component Subtype="Superconductor" Count="225" />
-        <Component Subtype="Construction" Count="240" />
-		    <Component Subtype="Motor" Count="120" />
-		    <Component Subtype="Reactor" Count="45" />
-		    <Component Subtype="Detector" Count="60" />
-        <Component Subtype="Computer" Count="250" />
-        <Component Subtype="MetalGrid" Count="225" />
+        <Component Subtype="SteelPlate" Count="2500" />
+        <Component Subtype="Superconductor" Count="500" />
+        <Component Subtype="Construction" Count="500" />
+		    <Component Subtype="Motor" Count="250" />
+		    <Component Subtype="Reactor" Count="100" />
+		    <Component Subtype="Detector" Count="100" />
+        <Component Subtype="Computer" Count="500" />
+        <Component Subtype="MetalGrid" Count="500" />
         <Component Subtype="SteelPlate" Count="2500" />
       </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
@@ -230,10 +230,10 @@ Ammunition: [5000m/s,] [Kinetic] </Description>
       </Id>
       <DisplayName>[SA] Charon</DisplayName>
 <Description>Short Range Turret: [2.75km] 
-Magazine Capacity: [33] 
-Rate of Fire: [347] 
-Reload Speed: [6 seconds] 
-Ammunition: [2500m/s,] [Kinetic] </Description>
+Idle Power: [150 MW]
+Reload Power: [~600 MW] 
+Reload Speed: [7 seconds] 
+Ammunition: [Kinetic] </Description>
       <Icon>Textures\GUI\Icons\Charon.dds</Icon>
       <CubeSize>Large</CubeSize>
 	  <GuiVisible>false</GuiVisible>
@@ -382,11 +382,10 @@ Ammunition: [5000m/s,] [Kinetic] </Description>
         <SubtypeId>K_SA_HeavyMetal_Spinal_Rotary</SubtypeId>
       </Id>
       <DisplayName>[SA] Magnetic Monopole Compression Cannon</DisplayName>
-<Description>Long Ranged Fixed: [10km] 
-Magazine Capacity: [1] 
-Rate of Fire: [60] 
-Reload Speed: [1 seconds] 
-Ammunition: [2400m/s,] [Kinetic] </Description>
+<Description>Long Ranged Fixed: [7km] 
+Idle Power: [100 MW]
+Firing Power: [~450 MW]
+Ammunition: [Kinetic] </Description>
       <Icon>Textures\GUI\Icons\MMCC.dds</Icon>
       <CubeSize>Large</CubeSize>
 	  <GuiVisible>true</GuiVisible>
@@ -464,11 +463,10 @@ Ammunition: [2400m/s,] [Kinetic] </Description>
     <DisplayName>[SA] Magnetic Monopole Compression Cannon</DisplayName>
     <Description>
 		[Skin 2]
-		Long Ranged Fixed: [55km]
-		Magazine Capacity: [1]
-		Rate of Fire: [60]
-		Reload Speed: [1 seconds]
-		Ammunition: [2400m/s,] [Kinetic]
+		Long Ranged Fixed: [7km]
+		Idle Power: [100 MW]
+		Firing Power: [~450 MW]
+		Ammunition: [Kinetic]
 	</Description>
     <Icon>Textures\GUI\Icons\Cubes\MonopoleReskin.dds</Icon>
     <CubeSize>Large</CubeSize>
@@ -624,17 +622,17 @@ Ammunition: [5000m/s,] [Energy] </Description>
      <ModelOffset x="0" y="0" z="0" />
      <Model>Models\SerpentArms\SA_GaussAMSIIC_Large.mwm</Model>
      <UseModelIntersection>true</UseModelIntersection>
-     <Components>
-       <Component Subtype="SteelPlate" Count="50" />
-       <Component Subtype="Superconductor" Count="110" />
-       <Component Subtype="Construction" Count="180" />
-       <Component Subtype="Motor" Count="90" />
-       <Component Subtype="Reactor" Count="35" />
-       <Component Subtype="Detector" Count="55" />
-       <Component Subtype="Computer" Count="275" />
-       <Component Subtype="MetalGrid" Count="140" />
-       <Component Subtype="SteelPlate" Count="750" />
-     </Components>
+	<Components>
+		<Component Subtype="SteelPlate" Count="50" />
+		<Component Subtype="Superconductor" Count="110" />
+		<Component Subtype="Construction" Count="180" />
+		<Component Subtype="Motor" Count="90" />
+		<Component Subtype="Reactor" Count="35" />
+		<Component Subtype="Detector" Count="55" />
+		<Component Subtype="Computer" Count="275" />
+		<Component Subtype="MetalGrid" Count="140" />
+		<Component Subtype="SteelPlate" Count="750" />
+	</Components>
      <CriticalComponent Subtype="Computer" Index="0" />
      <MountPoints>
        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
@@ -759,10 +757,10 @@ Ammunition: [5000m/s,] [Energy] </Description>
       </Id>
       <DisplayName>[SA] Silvius Gauss Turret</DisplayName>
 <Description>Long Range Turret: [7km] 
-Magazine Capacity: [1] 
-Rate of Fire: [175] 
-Reload Speed: [10 seconds] 
-Ammunition: [5000m/s,] [Kinetic] </Description>
+Idle Power: [50 MW]
+Reload Power: [~300 MW]
+Reload Speed: [9 seconds] 
+Ammunition: [Kinetic] </Description>
       <Icon>Textures\GUI\Icons\Silvius.dds</Icon>
       <CubeSize>Large</CubeSize>
 	  <GuiVisible>false</GuiVisible>
@@ -771,17 +769,17 @@ Ammunition: [5000m/s,] [Kinetic] </Description>
       <ModelOffset x="0" y="0" z="0" />
       <Model>Models\SerpentArms\SA_GaussER_Large.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
-      <Components>
-       <Component Subtype="SteelPlate" Count="50" />
-        <Component Subtype="Superconductor" Count="150" />
-        <Component Subtype="Construction" Count="240" />
+	<Components>
+		<Component Subtype="SteelPlate" Count="800" />
+		<Component Subtype="Superconductor" Count="150" />
+		<Component Subtype="Construction" Count="340" />
 		<Component Subtype="Motor" Count="120" />
 		<Component Subtype="Reactor" Count="30" />
 		<Component Subtype="Detector" Count="45" />
-        <Component Subtype="Computer" Count="200" />
-        <Component Subtype="MetalGrid" Count="125" />
-        <Component Subtype="SteelPlate" Count="600" />
-      </Components>
+		<Component Subtype="Computer" Count="200" />
+		<Component Subtype="MetalGrid" Count="450" />
+		<Component Subtype="SteelPlate" Count="1150" />
+	</Components>
       <CriticalComponent Subtype="Computer" Index="0" />
       <MountPoints>
         <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="5" />
