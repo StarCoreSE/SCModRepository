@@ -28,7 +28,6 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             StoredDef = ModularDefinition.GetBaseDefinitions();
             Storage = MyAPIGateway.Utilities.SerializeToBinary(StoredDef);
 
-            ModularDefinition.ModularAPI = new ModularDefinitionAPI();
             ModularDefinition.ModularAPI.LoadData();
 
             // Send message in case this loads after the main mod

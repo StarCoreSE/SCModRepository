@@ -107,6 +107,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                     UpdatePower(true);
                     break;
                 }
+
+            if (BlockCount <= 0)
+                S_FusionManager.I.FusionSystems.Remove(PhysicalAssemblyId);
         }
 
         private void UpdatePower(bool updateReactors = false)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
 using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers;
 using Sandbox.Game;
@@ -48,18 +49,13 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
 
                     // Limits the number of displayed systems to 6
                     var displayedCount = 0;
-                    foreach (var assemblyId in ModularAPI.GetAllAssemblies())
+                    foreach (var system in FusionManager.FusionSystems.Values.ToList())
                     {
-                        if (displayedCount > 6 || !FusionManager.FusionSystems.ContainsKey(assemblyId))
-                            continue;
-
-                        var system = FusionManager.FusionSystems[assemblyId];
-
-                        if (system.Arms.Count == 0)
+                        if (displayedCount > 6 || system.Arms.Count == 0)
                             continue;
 
                         MyVisualScriptLogicProvider.AddQuestlogDetailLocal(
-                            $"[{assemblyId}] Power: {Math.Round(system.PowerStored / system.PowerCapacity * 100f)}% ({Math.Round(system.PowerCapacity)} @ {Math.Round(system.PowerGeneration * 60, 1)}/s) | Arms: {system.Arms.Count}",
+                            $"[{system.PhysicalAssemblyId}] Power: {Math.Round(system.PowerStored / system.PowerCapacity * 100f)}% ({Math.Round(system.PowerCapacity)} @ {Math.Round(system.PowerGeneration * 60, 1)}/s) | Loops: {system.Arms.Count} | Blocks: {system.BlockCount}",
                             false, false);
                         displayedCount++;
                     }
