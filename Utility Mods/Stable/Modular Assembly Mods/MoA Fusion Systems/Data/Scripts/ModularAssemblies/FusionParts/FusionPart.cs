@@ -139,7 +139,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
 
         private void AssignDetailedInfoGetter(IMyTerminalBlock block, List<IMyTerminalControl> controls)
         {
-            if (block.BlockDefinition.SubtypeName != BlockSubtype)
+            if (block?.BlockDefinition.SubtypeName != BlockSubtype)
                 return;
             block.RefreshCustomInfo();
             block.SetDetailedInfoDirty();
