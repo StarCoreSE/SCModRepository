@@ -3,80 +3,79 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Draygo.API;
 using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
+using RichHudFramework.Client;
+using RichHudFramework.UI;
+using RichHudFramework.UI.Client;
+using RichHudFramework.UI.Rendering;
 using Sandbox.ModAPI;
 using VRage.Game.ModAPI;
 using VRage.Utils;
 using VRageMath;
 using VRageRender;
-using static Draygo.API.HudAPIv2;
 
 namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
 {
-    internal class ConsumptionBar
+    internal class ConsumptionBar : WindowBase
     {
-        public HudAPIv2 TextApi;
-        private BillBoardHUDMessage _storageBackground; 
-        private BillBoardHUDMessage _storageForeground;
+        private TexturedBox _storageBackground; 
+        private TexturedBox _storageForeground;
         private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
 
 
-        public void Init()
+        public ConsumptionBar(HudParentBase parent) : base(parent)
         {
-            TextApi = new HudAPIv2(CreateHud);
+            MyAPIGateway.Utilities.ShowMessage("hi", "hiiii");
+            _storageForeground = new TexturedBox(body)
+            {
+                Material = new Material("ctf_score_background", Vector2.One * 100),
+                ParentAlignment = ParentAlignments.Bottom | ParentAlignments.InnerV,
+                DimAlignment = DimAlignments.Width,
+            };
+            
+            _storageBackground = new TexturedBox(body)
+            {
+                Material = new Material("fusionBarBackground", Vector2.One * 100),
+                ParentAlignment = ParentAlignments.Center,
+                DimAlignment = DimAlignments.Both,
+            };
+
+            BodyColor = new Color(41, 54, 62, 150);
+            BorderColor = new Color(58, 68, 77);
+
+            //header.Format = new GlyphFormat(GlyphFormat.Blueish.Color, TextAlignment.Center, 1.08f);
+            //header.Height = 30f;
+
+            //HeaderText = "Fusion Systems";
+            Size = new Vector2(250f, 500f);
+            Offset = new Vector2(835, 290); // Top-right corner; relative to 1920x1080
         }
 
-        void CreateHud()
+        protected override void Layout()
         {
-            _storageBackground = new BillBoardHUDMessage()
-            {
-                BillBoardColor = new Color(Color.Black, 1),
-                Material = MyStringId.GetOrCompute("ctf_score_background"),
-                Origin = new Vector2D(-0.91, 0),
-                Rotation = (float)Math.PI/2,
-                Scale = 0.5f,
-                Height = 0.6f,
-                Visible = true,
-                Options = Options.HideHud,
-                Blend = MyBillboard.BlendTypeEnum.Standard,
-            };
+            base.Layout();
 
-            _storageForeground = new BillBoardHUDMessage()
-            {
-                BillBoardColor = new Color(Color.White, 1),
-                Material = MyStringId.GetOrCompute("ctf_score_background"),
-                Origin = new Vector2D(-0.91, 0),
-                Rotation = (float)Math.PI / 2,
-                Height = 0.5f * 0.4f,
-                Visible = true,
-                Options = Options.HideHud,
-                Blend = MyBillboard.BlendTypeEnum.Standard,
-            };
+            MinimumSize = new Vector2(Math.Max(1, MinimumSize.X), MinimumSize.Y);
         }
 
         public void Update()
         {
-            if (!TextApi.Heartbeat)
-                return;
-
             var playerCockpit = MyAPIGateway.Session?.Player?.Controller?.ControlledEntity?.Entity as IMyCockpit;
 
-            if (playerCockpit == null)
-            {
-                MyAPIGateway.Utilities.ShowNotification("it's fucnking NULL " + MyAPIGateway.Session?.Player?.Controller?.ControlledEntity?.Entity?.GetType(), 1000 / 60);
-                if (_storageBackground.Visible)
-                {
-                    _storageBackground.Visible = false;
-                    _storageForeground.Visible = false;
-                }
-                return;
-            }
-            if (!_storageBackground.Visible)
-            {
-                _storageBackground.Visible = true;
-                _storageForeground.Visible = true;
-            }
+            //if (playerCockpit == null)
+            //{
+            //    if (_storageBackground.Visible)
+            //    {
+            //        _storageBackground.Visible = false;
+            //        _storageForeground.Visible = false;
+            //    }
+            //    return;
+            //}
+            //if (!_storageBackground.Visible)
+            //{
+            //    _storageBackground.Visible = true;
+            //    _storageForeground.Visible = true;
+            //}
 
             var playerGrid = playerCockpit.CubeGrid;
 
@@ -93,10 +92,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
                 totalFusionStored += system.Value.PowerStored;
             }
 
-            _storageForeground.Width = totalFusionStored / totalFusionCapacity * 0.4f;
-            _storageForeground.Origin = new Vector2D(_storageForeground.Origin.X, _storageForeground.Width * 0.75); // THIS SHOULD BE RICHHUD!
+            _storageForeground.Height = totalFusionStored / totalFusionCapacity * _storageBackground.Height;
+            //_storageForeground.Origin = new Vector2D(_storageForeground.Origin.X, _storageForeground.Width * 0.75 - _storageBackground.Width*0.35); // THIS SHOULD BE RICHHUD!
             MyAPIGateway.Utilities.ShowNotification(Math.Round(totalFusionStored/totalFusionCapacity * 100, 1) + "%", 1000/60);
-            MyAPIGateway.Utilities.ShowNotification("" + _storageForeground.Origin, 1000/60);
         }
     }
 }

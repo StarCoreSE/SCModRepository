@@ -2,7 +2,10 @@
 using System.Linq;
 using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
 using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers;
+using RichHudFramework.Client;
+using RichHudFramework.UI.Client;
 using Sandbox.Game;
+using Sandbox.ModAPI;
 using VRage.Game.Components;
 using VRage.Utils;
 
@@ -18,7 +21,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
         private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
         private static S_FusionManager FusionManager => S_FusionManager.I;
 
-        private ConsumptionBar ConsumptionBar = new ConsumptionBar();
+        private ConsumptionBar ConsumptionBar = null;
 
         #region Base Methods
 
@@ -26,21 +29,33 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
         {
             I = this;
             FusionManager.Load();
-            ConsumptionBar.Init();
+            
+            RichHudClient.Init("FusionSystems", () => { }, () => { });
         }
 
         protected override void UnloadData()
         {
             FusionManager.Unload();
             I = null;
+
+            RichHudClient.Reset();
         }
 
         public override void UpdateAfterSimulation()
         {
             try
             {
+                if (ConsumptionBar == null && RichHudClient.Registered)
+                {
+                    ConsumptionBar = new ConsumptionBar(HudMain.HighDpiRoot)
+                    {
+                        Visible = true,
+                    };
+                }
+                MyAPIGateway.Utilities.ShowNotification("" + RichHudClient.Registered, 1000/60);
+
                 FusionManager.UpdateTick();
-                ConsumptionBar.Update();
+                ConsumptionBar?.Update();
 
                 if (ModularAPI.IsDebug())
                 {
