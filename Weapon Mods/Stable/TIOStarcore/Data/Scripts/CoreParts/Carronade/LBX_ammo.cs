@@ -788,7 +788,7 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "",
+                HitSound = "VanillaImpactCat5",
                 ShotSound = "",
                 ShieldHitSound = "",
                 PlayerHitSound = "",
@@ -1169,13 +1169,13 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "",
+                HitSound = "VanillaImpactCat3",
                 ShotSound = "",
                 ShieldHitSound = "",
                 PlayerHitSound = "",
                 VoxelHitSound = "",
                 FloatingHitSound = "",
-                HitPlayChance = 0.33f,
+                HitPlayChance = 1f,
                 HitPlayShield = true,
             },
             Ejection = new EjectionDef // Optional Component, allows generation of Particle or Item (Typically magazine), on firing, to simulate Tank shell ejection
@@ -1558,7 +1558,7 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "VanillaImpactCat0",
+                HitSound = "VanillaImpactCat1",
                 ShotSound = "",
                 ShieldHitSound = "",
                 PlayerHitSound = "",
@@ -2708,14 +2708,14 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "VanillaImpactCat3",
+                HitSound = "VanillaImpactCat4B",
                 //FragmentSound = "",
-                ShieldHitSound = "",
+                ShieldHitSound = "VanillaImpactCat3",
                 PlayerHitSound = "",
                 VoxelHitSound = "",
                 FloatingHitSound = "",
                 HitPlayChance = 0.5f,
-                HitPlayShield = false,
+                HitPlayShield = true,
             },
             Ejection = new EjectionDef // Optional Component, allows generation of Particle or Item (Typically magazine), on firing, to simulate Tank shell ejection
             {

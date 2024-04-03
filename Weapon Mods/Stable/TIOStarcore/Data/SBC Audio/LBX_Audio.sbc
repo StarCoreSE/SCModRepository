@@ -890,7 +890,75 @@
 			  </Wave>
 		  </Waves>
 	  </Sound>	  
-	  
+
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>VanillaImpactCat4B</SubtypeId>
+		  </Id>
+		  <Category>R_IMP</Category>
+		  <Volume>2</Volume>
+		  <MaxDistance>2000</MaxDistance>
+		  <PitchVariation>50</PitchVariation>
+		  <SoundLimit>4</SoundLimit>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>25</DynamicMusicAmount>
+		  <DistantSounds>
+			  <DistantSound DistanceCrossfade="275" Distance="675" Sound="VanillaImpactCat4BDistA"/>
+		  </DistantSounds>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>ARC\IMP\ArcImpMetalMetal4Cat3d01.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>ARC\IMP\ArcImpMetalMetal4Cat3d02.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>ARC\IMP\ArcImpMetalMetal4Cat3d03.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>ARC\IMP\ArcImpMetalMetal4Cat3d04.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>ARC\IMP\ArcImpMetalMetal4Cat3d05.wav</Start>
+			  </Wave>
+		  	  <Wave Type="D3">
+				  <Start>ARC\IMP\ArcImpMetalMetal4Cat3d06.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>VanillaImpactCat4BDistA</SubtypeId>
+		  </Id>
+		  <Category>R_IMP</Category>
+		  <Volume>1</Volume>
+		  <MaxDistance>1600</MaxDistance>
+		  <PitchVariation>60</PitchVariation>
+		  <SoundLimit>4</SoundLimit>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>5</DynamicMusicAmount>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>ARC\IMP_DIST\ArcImpMetalMetal4CatDistA3d01.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>ARC\IMP_DIST\ArcImpMetalMetal4CatDistA3d02.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>ARC\IMP_DIST\ArcImpMetalMetal4CatDistA3d03.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>ARC\IMP_DIST\ArcImpMetalMetal4CatDistA3d04.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>ARC\IMP_DIST\ArcImpMetalMetal4CatDistA3d05.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>	  
+
 	  <Sound>
 		  <Id>
 			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
