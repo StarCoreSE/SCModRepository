@@ -145,20 +145,20 @@ namespace Scripts {
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "Monopole_Chargeup", // Audio for warmup effect.
-                    FiringSound = "RotaryGauss_w_spooldown", // Audio for firing.
-                    FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
+                    FiringSound = "Monopole_Firing", // Audio for firing.
+                    FiringSoundPerShot = false, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "", // Sound SubtypeID, for when your Weapon is in a reloading state
                     NoAmmoSound = "",
                     HardPointRotationSound = "", // Audio played when turret is moving.
                     BarrelRotationSound = "",
-                    FireSoundEndDelay = 10, // How long the firing audio should keep playing after firing stops. Measured in game ticks(6 = 100ms, 60 = 1 seconds, etc..).
+                    FireSoundEndDelay = 0, // How long the firing audio should keep playing after firing stops. Measured in game ticks(6 = 100ms, 60 = 1 seconds, etc..).
                     FireSoundNoBurst = true, // Don't stop firing sound from looping when delaying after burst.
                 },
                 Graphics = new HardPointParticleDef
                 {
                     Effect1 = new ParticleDef
                     {
-                        Name = "K_SA_GaussFire_rotary_Flash_2", // SubtypeId of muzzle particle effect.
+                        Name = "K_SA_GaussFire_rotary_Flash_3", // SubtypeId of muzzle particle effect.
                         Color = Color(red: 1, green: 1, blue: 1, alpha: 1), // Deprecated, set color in particle sbc.
                         Offset = Vector(x: 0, y: 0, z: 0), // Offsets the effect from the muzzle empty.
 

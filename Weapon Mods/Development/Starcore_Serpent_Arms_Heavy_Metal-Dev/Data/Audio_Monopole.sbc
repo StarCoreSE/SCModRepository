@@ -18,7 +18,7 @@
     <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
-          <Start>Audio\General\Monopole_Chargeup_6.wav</Start>
+          <Start>Audio\Monopole\Monopole_Chargeup_6.wav</Start>
         </Wave>
       </Waves>
     </Sound>
@@ -37,7 +37,7 @@
       <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
-          <Start>Audio\General\Monopole_Chargeup_Distant.wav</Start>
+          <Start>Audio\Monopole\Monopole_Chargeup_Distant.wav</Start>
         </Wave>
       </Waves>
     </Sound>
@@ -58,34 +58,32 @@
       <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
-          <Start>Audio\General\RotaryGauss_Distant.wav</Start>
+          <Start>Audio\Monopole\RotaryGauss_Distant.wav</Start>
         </Wave>
       </Waves>
     </Sound>
 
-    <Sound>
+     <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>RotaryGauss_w_spooldown</SubtypeId>
+        <SubtypeId>Monopole_Firing</SubtypeId>
       </Id>
       <Category>SHOT</Category>
       <MaxDistance>4000</MaxDistance>
-    <PreventSynchronization>0</PreventSynchronization>
-      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>35</DynamicMusicAmount>
+		  <DistantSounds>
+			  <DistantSound DistanceCrossfade="10" Distance="1750" Sound="K_SA_RotaryGauss_Distant" />
+		  </DistantSounds>
+      <!-- Prevents this sound from having this many active playbacks at once, 0 = infinite. -->
+      <SoundLimit>1</SoundLimit>
       <Volume>1</Volume>
-    <PitchVariation>0</PitchVariation>
-    <DistantSounds>
-        <DistantSound DistanceCrossfade="10" Distance="1750" Sound="K_SA_RotaryGauss_Distant" />
-      </DistantSounds>
-	  <Loopable>false</Loopable>
+      <Loopable>true</Loopable>
       <Waves>
         <Wave Type="D3">
-          <Start>Audio\General\RotaryGauss_Spooldown_2.wav</Start>
+          <Loop>Audio\Monopole\RotaryGauss_Loopable_2.wav</Loop>
+          <End>Audio\Monopole\Monopole_End.wav</End>
         </Wave>
-        </Waves>
+      </Waves>
     </Sound>
-
 
     <Sound>
       <Id>
@@ -102,7 +100,7 @@
       <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
-          <Start>Audio\General\Monopole_Shell_Pass.wav</Start>
+          <Start>Audio\Monopole\Monopole_Shell_Pass.wav</Start>
         </Wave>
       </Waves>
     </Sound>
