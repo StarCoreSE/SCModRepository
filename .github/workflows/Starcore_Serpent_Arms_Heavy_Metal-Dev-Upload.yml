@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "Weapon Mods\Development\Starcore_Serpent_Arms_Heavy_Metal-Dev**"
+      - "Weapon Mods/Development/Starcore_Serpent_Arms_Heavy_Metal-Dev**"
 
 jobs:
   upload:
@@ -16,7 +16,7 @@ jobs:
         with:
           appID: 244850
           publishedFileID: 3211537839
-          path: "Weapon Mods\Development\Starcore_Serpent_Arms_Heavy_Metal-Dev"
+          path: "Weapon Mods/Development/Starcore_Serpent_Arms_Heavy_Metal-Dev"
           changelog: ${{ github.event.head_commit.message }}            
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.accountname }}
