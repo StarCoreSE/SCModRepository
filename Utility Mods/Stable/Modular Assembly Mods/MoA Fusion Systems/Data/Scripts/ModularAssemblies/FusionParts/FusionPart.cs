@@ -57,6 +57,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
 
         private void CreateControls()
         {
+            /* TERMINAL */
             {
                 var boostPowerToggle =
                     MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlOnOffSwitch, T>(
@@ -130,6 +131,30 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
                 boostPowerUsageSlider.Enabled = block => true;
 
                 MyAPIGateway.TerminalControls.AddControl<T>(boostPowerUsageSlider);
+            }
+
+            /* ACTIONS */
+            {
+                var boostPowerAction = MyAPIGateway.TerminalControls.CreateAction<T>($"FusionSystems.{ReadableName}BoostPowerAction");
+                boostPowerAction.Name = new StringBuilder("Override Fusion Power");
+                boostPowerAction.Action = (block) =>
+                {
+                    var logic = block.GameLogic.GetAs<FusionPart<T>>();
+                    // Only allow value to be set if 2 seconds of power is stored
+                    if (logic.OverrideEnabled.Value || logic.MemberSystem?.PowerStored > MemberSystem?.PowerConsumption * 60)
+                        logic.OverrideEnabled.Value = !logic.OverrideEnabled.Value;
+                };
+                boostPowerAction.Writer = (b, sb) =>
+                {
+                    var logic = b?.GameLogic?.GetAs<FusionPart<T>>();
+                    if (logic != null)
+                    {
+                        sb.Append(logic.OverrideEnabled.Value ? "OVR   On" : "OVR  Off");
+                    }
+                };
+                boostPowerAction.Icon = @"Textures\GUI\Icons\Actions\Toggle.dds";
+                boostPowerAction.Enabled = block => block.BlockDefinition.SubtypeName == BlockSubtype;
+                MyAPIGateway.TerminalControls.AddAction<T>(boostPowerAction);
             }
 
             MyAPIGateway.TerminalControls.CustomControlGetter += AssignDetailedInfoGetter;
