@@ -70,7 +70,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
                 {
                     var logic = block.GameLogic.GetAs<FusionPart<T>>();
                     // Only allow value to be set if 2 seconds of power is stored
-                    if (!value || logic.MemberSystem?.PowerStored <= logic.PowerConsumption * 120)
+                    if (!value || logic.MemberSystem?.PowerStored > MemberSystem?.PowerConsumption * 60)
                         logic.OverrideEnabled.Value = value;
                 };
 
@@ -97,7 +97,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
                     block.GameLogic.GetAs<FusionPart<T>>().PowerUsageSync.Value = value;
 
                 powerUsageSlider.Writer = (block, builder) =>
-                    builder.Append(Math.Round(block.GameLogic.GetAs<FusionPart<T>>().PowerUsageSync.Value * 100))
+                    builder?.Append(Math.Round(block.GameLogic.GetAs<FusionPart<T>>()?.PowerUsageSync.Value * 100 ?? 0))
                         .Append('%');
 
                 powerUsageSlider.Visible = block => block.BlockDefinition.SubtypeName == BlockSubtype;
@@ -121,8 +121,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
                     block.GameLogic.GetAs<FusionPart<T>>().OverridePowerUsageSync.Value = value;
 
                 boostPowerUsageSlider.Writer = (block, builder) =>
-                    builder.Append(
-                            Math.Round(block.GameLogic.GetAs<FusionPart<T>>().OverridePowerUsageSync.Value * 100))
+                    builder?.Append(
+                            Math.Round(block.GameLogic.GetAs<FusionPart<T>>()?.OverridePowerUsageSync.Value * 100 ?? 0))
                         .Append('%');
 
                 boostPowerUsageSlider.Visible = block => block.BlockDefinition.SubtypeName == BlockSubtype;

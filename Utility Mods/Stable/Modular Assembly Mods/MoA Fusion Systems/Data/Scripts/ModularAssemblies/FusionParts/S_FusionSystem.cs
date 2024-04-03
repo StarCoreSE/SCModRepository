@@ -21,6 +21,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         public float PowerCapacity;
 
         public float PowerGeneration;
+        public float PowerConsumption;
         public float PowerStored;
         public List<FusionReactorLogic> Reactors = new List<FusionReactorLogic>();
         public List<FusionThrusterLogic> Thrusters = new List<FusionThrusterLogic>();
@@ -144,6 +145,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             // Subtract power usage afterwards so that all reactors have the same stats.
             PowerGeneration = powerGeneration;
             PowerCapacity = powerCapacity;
+            PowerConsumption = totalPowerUsage;
             PowerGeneration -= totalPowerUsage;
 
             // Update PowerStored

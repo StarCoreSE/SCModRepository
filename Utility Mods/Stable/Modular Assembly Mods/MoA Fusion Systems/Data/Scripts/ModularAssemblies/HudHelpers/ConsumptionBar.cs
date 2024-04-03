@@ -25,7 +25,6 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
 
         public ConsumptionBar(HudParentBase parent) : base(parent)
         {
-            MyAPIGateway.Utilities.ShowMessage("hi", "hiiii");
             _storageForeground = new TexturedBox(body)
             {
                 Material = new Material("ctf_score_background", Vector2.One * 100),
