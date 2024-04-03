@@ -273,7 +273,7 @@ namespace Scripts
                         Enable = true,
                         Length = 30f, //
                         Width = 1f, //
-                        Color = Color(red: 5f, green: 12.5f, blue: 25f, alpha: 0.5f), //10 25 50 1 RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Color = Color(red: 10f, green: 25f, blue: 50f, alpha: 1f), //10 25 50 1 //RBG 255 is Neon Glowing, 100 is Quite Bright.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
@@ -299,7 +299,7 @@ namespace Scripts
                     },
                     Trail = new TrailDef
                     {
-                        Enable = false, //true
+                        Enable = true, //true
                         Textures = new[] {
                             "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
