@@ -10,9 +10,9 @@
 		  </Id>
 		  <DisplayName>Naval LB-5X</DisplayName>
 		  <Description>
-		  9km Range, 2 ammo types.
-		  +High Explosive - Energy Damage 2km Blast Zone, please use with caution. 1100m/s
-		  +Cluster Shot - Kinetic Damage, shotgun blast. 1800m/s
+		  Long Ranged, 2 ammo types.
+		  +High Explosive - Energy Damage 2km Blast Zone, please use with caution. 900m/s
+		  +Cluster Shot - Kinetic Damage, proximity fused fragmentation warhead. 1600m/s
 		  
 		  </Description>
 		  <Icon>Textures\GUI\Icons\Cubes\LBX5.dds</Icon>
