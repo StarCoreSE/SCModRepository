@@ -15,9 +15,9 @@
 				<TypeId>LargeMissileTurret</TypeId>
 				<SubtypeId>VindicatorKineticLance</SubtypeId>
 			</Id>
-			<DisplayName>[CA] Vindicator Kinetic Battery</DisplayName>
+			<DisplayName>[EXO] Vindicator Kinetic Battery</DisplayName>
             <Description>
-			9KM range, 4000m/s velocity
+			7KM range, 4000m/s velocity
 			Kinetic Damage
 			Low Tracking Speed
 			Draws 360MW
