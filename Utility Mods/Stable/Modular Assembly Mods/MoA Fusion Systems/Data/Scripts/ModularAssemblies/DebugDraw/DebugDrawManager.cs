@@ -78,7 +78,6 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             if (Instance == null)
                 return;
 
-
             if (Instance.QueuedGridPoints.ContainsKey(blockPos))
                 Instance.QueuedGridPoints[blockPos] =
                     new MyTuple<long, Color, IMyCubeGrid>(

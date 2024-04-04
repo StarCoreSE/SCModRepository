@@ -65,12 +65,15 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                         UpdatePower(true);
                     }
                     break;
-                case "Caster_Feeder":
+                case "Caster_Feeder": // This is awful and I hate it. The idea is to generate new loops if a feeder is placed.
                     List<MyEntity> connectedAccelerators = new List<MyEntity>();
                     foreach (var connectedBlock in ModularAPI.GetConnectedBlocks((MyEntity)newPart))
                     {
                         string subtype = (connectedBlock as IMyCubeBlock)?.BlockDefinition.SubtypeName;
-                        if (subtype == "Caster_Accelerator_0" || subtype == "Caster_Accelerator_90")
+                        if (subtype != "Caster_Accelerator_0" && subtype != "Caster_Accelerator_90")
+                            continue;
+                       
+                        if (!BlockInLoops(connectedBlock))
                             connectedAccelerators.Add(connectedBlock);
                     }
 
@@ -198,6 +201,19 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         public void UpdateTick()
         {
             UpdatePower();
+        }
+
+        private bool BlockInLoops(MyEntity entity)
+        {
+            foreach (var loop in Arms)
+            {
+                if (loop.Parts.Contains((IMyCubeBlock)entity))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
