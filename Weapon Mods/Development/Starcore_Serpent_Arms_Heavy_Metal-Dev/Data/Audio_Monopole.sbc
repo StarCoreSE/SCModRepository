@@ -55,10 +55,10 @@
     <DynamicMusicAmount>35</DynamicMusicAmount>
       <Volume>1</Volume>
       <Pitch>-5</Pitch>
-      <Loopable>false</Loopable>
+      <Loopable>true</Loopable>
       <Waves>
         <Wave Type="D3">
-          <Start>Audio\Monopole\RotaryGauss_Distant.wav</Start>
+          <Loop>Audio\Monopole\RotaryGauss_Distant_Loopable.wav</Loop>
         </Wave>
       </Waves>
     </Sound>
@@ -80,7 +80,7 @@
       <Waves>
         <Wave Type="D3">
           <Loop>Audio\Monopole\RotaryGauss_Loopable_2.wav</Loop>
-          <End>Audio\Monopole\Monopole_End.wav</End>
+          <End>Audio\Monopole\Monopole_End_4.wav</End>
         </Wave>
       </Waves>
     </Sound>

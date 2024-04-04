@@ -188,7 +188,7 @@ namespace Scripts
                                     TicksToMove = 360, //number of ticks to complete motion, 60 = 1 second
                                     MovementType = ExpoDecay,
                                     LinearPoints = new XYZ[0],
-                                    Rotation = Transformation(0, 0, 240), //degrees
+                                    Rotation = Transformation(0, 0, 600), //degrees
                                     RotAroundCenter = Transformation(0, 0, 0), //degrees
                                 },
 
