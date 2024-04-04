@@ -11,33 +11,33 @@ using VRage.Utils;
 
 namespace ttrcwm
 {
-    static class sync_helper
+    static class Sync_helper
     {
         internal const ushort ROTATION_MESSAGE_ID = 17371;
 
-        private static Dictionary<long, grid_logic> entities = new Dictionary<long, grid_logic>();
+        private static Dictionary<long, Grid_logic> entities = new Dictionary<long, Grid_logic>();
 
-        public static bool network_handlers_registered { get; private set; }
+        public static bool Network_handlers_registered { get; private set; }
         //public static bool        is_spectator_mode_on { get; private set; }
 
         public static IMyPlayer             local_player     { get; private set; }
         public static IMyControllableEntity local_controller { get; private set; }
 
-        public static void try_register_handlers()
+        public static void Try_register_handlers()
         {
-            if (!network_handlers_registered && MyAPIGateway.Multiplayer != null)
+            if (!Network_handlers_registered && MyAPIGateway.Multiplayer != null)
             {
                 /*
                 if (MyAPIGateway.Multiplayer.IsServer)
                     MyAPIGateway.Multiplayer.RegisterMessageHandler(ROTATION_MESSAGE_ID, grid_logic.rotation_message_handler);
                 */
-                network_handlers_registered = true;
+                Network_handlers_registered = true;
             }
         }
 
-        public static void deregister_handlers()
+        public static void Deregister_handlers()
         {
-            if (!network_handlers_registered)
+            if (!Network_handlers_registered)
                 return;
             /*
             if (MyAPIGateway.Multiplayer.IsServer)
@@ -45,7 +45,7 @@ namespace ttrcwm
             */
         }
 
-        public static void register_logic_object(grid_logic obj, long entity_id)
+        public static void Register_logic_object(Grid_logic obj, long entity_id)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace ttrcwm
             }
         }
 
-        public static void deregister_logic_object(long entity_id)
+        public static void Deregister_logic_object(long entity_id)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace ttrcwm
         }
 
 
-        public static void encode_entity_id(IMyCubeGrid entity, byte[] message)
+        public static void Encode_entity_id(IMyCubeGrid entity, byte[] message)
         {
             long entity_id = entity.EntityId;
             for (int cur_byte = 0; cur_byte < 8; ++cur_byte)
@@ -92,7 +92,7 @@ namespace ttrcwm
             }
         }
 
-        public static grid_logic decode_entity_id(byte[] message)
+        public static Grid_logic Decode_entity_id(byte[] message)
         {
             long entity_id = 0;
             for (int cur_byte = 7; cur_byte >= 0; --cur_byte)
@@ -100,7 +100,7 @@ namespace ttrcwm
             return entities.ContainsKey(entity_id) ? entities[entity_id] : null;
         }
 
-        public static void handle_60Hz()
+        public static void Handle_60Hz()
         {
 
 
