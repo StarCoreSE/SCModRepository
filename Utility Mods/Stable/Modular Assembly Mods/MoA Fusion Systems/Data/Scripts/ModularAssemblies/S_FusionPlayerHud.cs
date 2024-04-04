@@ -22,6 +22,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
         private static S_FusionManager FusionManager => S_FusionManager.I;
 
         private ConsumptionBar ConsumptionBar = null;
+        private int _ticks = 0;
 
         #region Base Methods
 
@@ -43,6 +44,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
 
         public override void UpdateAfterSimulation()
         {
+            _ticks++;
             try
             {
                 if (ConsumptionBar == null && RichHudClient.Registered)
@@ -56,7 +58,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                 FusionManager.UpdateTick();
                 ConsumptionBar?.Update();
 
-                if (ModularAPI.IsDebug())
+                if (ModularAPI.IsDebug() && _ticks % 43 == 0)
                 {
                     MyVisualScriptLogicProvider.SetQuestlogLocal(true,
                         $"Fusion Systems ({FusionManager.FusionSystems.Count})");
