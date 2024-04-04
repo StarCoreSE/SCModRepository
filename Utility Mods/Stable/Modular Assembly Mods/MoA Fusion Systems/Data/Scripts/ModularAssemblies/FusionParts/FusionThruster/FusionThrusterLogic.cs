@@ -24,10 +24,12 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
                 OverrideEnabled.Value
                     ? OverridePowerUsageSync
                     : PowerUsageSync.Value; // This is ugly, let's make it better.
-            var efficiencyMultiplier = 1 / (0.25f + consumptionMultiplier);
 
             // Power generation consumed (per second)
             var powerConsumption = PowerGeneration * 60 * consumptionMultiplier;
+
+            var efficiencyMultiplier = 1 / (0.8f + consumptionMultiplier);
+
             // Power generated (per second)
             var thrustOutput = efficiencyMultiplier * powerConsumption * NewtonsPerFusionPower;
             BufferThrustOutput = thrustOutput;
@@ -82,16 +84,26 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
         public override void UpdateAfterSimulation()
         {
             base.UpdateAfterSimulation();
+            float storagePct = MemberSystem?.PowerStored / MemberSystem?.MaxPowerStored ?? 0;
+
+            if (storagePct <= 0.05f)
+            {
+                if (Block.ThrustMultiplier == 0)
+                    return;
+                SyncMultipliers.ThrusterOutput(Block, 0);
+                PowerConsumption = 0;
+                return;
+            }
 
             // If boost is unsustainable, disable it.
             // If power draw exceeds power available, disable self until available.
-            if ((OverrideEnabled.Value && MemberSystem?.PowerStored <= PowerConsumption * 120) || !Block.IsWorking)
+            if ((OverrideEnabled.Value && MemberSystem?.PowerStored <= MemberSystem?.PowerConsumption * 60) || !Block.IsWorking)
             {
                 SetPowerBoost(false);
                 PowerConsumption = 0;
                 SyncMultipliers.ThrusterOutput(Block, 0);
             }
-            else
+            else if (storagePct > 0.1f)
             {
                 SyncMultipliers.ThrusterOutput(Block, BufferThrustOutput);
                 PowerConsumption = MaxPowerConsumption * (Block.CurrentThrustPercentage / 100f);

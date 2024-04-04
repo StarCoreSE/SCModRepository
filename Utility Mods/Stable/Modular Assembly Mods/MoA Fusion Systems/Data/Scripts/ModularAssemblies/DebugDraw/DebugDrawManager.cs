@@ -78,7 +78,6 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             if (Instance == null)
                 return;
 
-
             if (Instance.QueuedGridPoints.ContainsKey(blockPos))
                 Instance.QueuedGridPoints[blockPos] =
                     new MyTuple<long, Color, IMyCubeGrid>(
@@ -143,7 +142,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             //MyTransparentGeometry.AddPointBillboard(MaterialDot, color, globalPos, 1.25f, 0, blendType: BlendTypeEnum.PostPP);
             var depthScale = ToAlwaysOnTop(ref globalPos);
             MyTransparentGeometry.AddPointBillboard(MaterialDot, color * OnTopColorMul, globalPos, 0.5f * depthScale, 0,
-                blendType: BlendTypeEnum.Standard);
+                blendType: BlendTypeEnum.LDR);
         }
 
         private void DrawGridPoint0(Vector3I blockPos, IMyCubeGrid grid, Color color)
