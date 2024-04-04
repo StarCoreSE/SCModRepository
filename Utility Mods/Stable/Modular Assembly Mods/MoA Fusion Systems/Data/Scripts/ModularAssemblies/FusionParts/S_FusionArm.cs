@@ -75,26 +75,23 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         private static bool PerformScan(MyEntity blockEntity, ref HashSet<IMyCubeBlock> parts, string stopAtSubtype,
             ref int stopHits)
         {
-            DebugDraw.DebugDraw.AddGridPoint(((IMyCubeBlock)blockEntity).Position,
-                ((IMyCubeBlock)blockEntity).CubeGrid, Color.Blue, 2);
+            if (ModularAPI.IsDebug())
+                DebugDraw.DebugDraw.AddGridPoint(((IMyCubeBlock)blockEntity).Position,
+                    ((IMyCubeBlock)blockEntity).CubeGrid, Color.Blue, 2);
 
             var connectedBlocks = ModularAPI.GetConnectedBlocks(blockEntity, false);
 
             if (connectedBlocks.Length < 2)
                 return false;
 
-            MyAPIGateway.Utilities.ShowNotification(connectedBlocks.Length + "");
-
             foreach (var connectedBlock in connectedBlocks)
             {
-                DebugDraw.DebugDraw.AddGridPoint(((IMyCubeBlock)connectedBlock).Position,
-                    ((IMyCubeBlock)connectedBlock).CubeGrid, Color.Red, 2);
-
                 var connectedSubtype = ((IMyCubeBlock)connectedBlock).BlockDefinition.SubtypeName;
+                bool valid = parts.Add((IMyCubeBlock)connectedBlock);
 
                 if (connectedSubtype == stopAtSubtype)
                     stopHits++;
-                else if (parts.Add((IMyCubeBlock)connectedBlock))
+                else if (valid)
                     PerformScan(connectedBlock, ref parts, stopAtSubtype, ref stopHits);
             }
             

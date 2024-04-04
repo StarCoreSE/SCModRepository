@@ -4,7 +4,7 @@
 		<TransparentMaterial>
 			<Id>
 				<TypeId>TransparentMaterialDefinition</TypeId>
-				<SubtypeId>ctf_score_background</SubtypeId>
+				<SubtypeId>fusionBarBackground</SubtypeId>
 			</Id>
 			<AlphaMistingEnable>false</AlphaMistingEnable>
 			<AlphaSaturation>1</AlphaSaturation>
@@ -16,7 +16,7 @@
 		<TransparentMaterial>
 			<Id>
 				<TypeId>TransparentMaterialDefinition</TypeId>
-				<SubtypeId>fusionBarBackground</SubtypeId>
+				<SubtypeId>fusionBarForeground</SubtypeId>
 			</Id>
 			<AlphaMistingEnable>false</AlphaMistingEnable>
 			<AlphaSaturation>1</AlphaSaturation>
