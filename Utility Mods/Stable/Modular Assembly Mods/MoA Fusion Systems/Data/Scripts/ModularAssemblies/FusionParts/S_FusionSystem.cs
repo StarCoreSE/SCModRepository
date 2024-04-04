@@ -95,7 +95,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                     }
                     break;
             }
-
+            
             if (newPart is IMyThrust)
             {
                 var logic = newPart.GameLogic.GetAs<FusionThrusterLogic>();
@@ -152,12 +152,14 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
             if (BlockCount <= 0)
                 S_FusionManager.I.FusionSystems.Remove(PhysicalAssemblyId);
+
+            UpdatePower();
         }
 
         private void UpdatePower(bool updateReactors = false)
         {
-            var powerGeneration = 0.01f;
-            var powerCapacity = 0.01f;
+            var powerGeneration = float.Epsilon;
+            var powerCapacity = float.Epsilon;
             var totalPowerUsage = 0f;
 
             foreach (var arm in Arms)
