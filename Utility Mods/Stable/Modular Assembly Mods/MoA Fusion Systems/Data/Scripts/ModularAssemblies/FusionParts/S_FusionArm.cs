@@ -87,10 +87,11 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             foreach (var connectedBlock in connectedBlocks)
             {
                 var connectedSubtype = ((IMyCubeBlock)connectedBlock).BlockDefinition.SubtypeName;
+                bool valid = parts.Add((IMyCubeBlock)connectedBlock);
 
                 if (connectedSubtype == stopAtSubtype)
                     stopHits++;
-                else if (parts.Add((IMyCubeBlock)connectedBlock))
+                else if (valid)
                     PerformScan(connectedBlock, ref parts, stopAtSubtype, ref stopHits);
             }
             

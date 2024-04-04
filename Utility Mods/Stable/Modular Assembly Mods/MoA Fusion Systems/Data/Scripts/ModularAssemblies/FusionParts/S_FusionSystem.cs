@@ -72,9 +72,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                         string subtype = (connectedBlock as IMyCubeBlock)?.BlockDefinition.SubtypeName;
                         if (subtype != "Caster_Accelerator_0" && subtype != "Caster_Accelerator_90")
                             continue;
-                       
-                        if (!BlockInLoops(connectedBlock))
-                            connectedAccelerators.Add(connectedBlock);
+                        connectedAccelerators.Add(connectedBlock);
                     }
 
                     foreach (var accelerator in connectedAccelerators)
@@ -90,6 +88,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                                 if (accelerator2 != accelerator && newArm2.Parts.Contains((IMyCubeBlock) accelerator2))
                                     accelsShareArm = true;
                         }
+                        MyAPIGateway.Utilities.ShowNotification(newArm2.Parts.Contains(newPart) + "C");
                         if (accelsShareArm)
                             break;
                     }
@@ -142,12 +141,11 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 Reactors.Remove(logic);
             }
 
-            foreach (var arm in Arms)
+            foreach (var arm in Arms.ToList())
                 if (arm.Parts.Contains(part))
                 {
                     Arms.Remove(arm);
                     UpdatePower(true);
-                    break;
                 }
 
             if (BlockCount <= 0)
@@ -205,17 +203,15 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             UpdatePower();
         }
 
-        private bool BlockInLoops(MyEntity entity)
+        private void RemoveBlockInLoops(MyEntity entity)
         {
-            foreach (var loop in Arms)
+            foreach (var loop in Arms.ToList())
             {
                 if (loop.Parts.Contains((IMyCubeBlock)entity))
                 {
-                    return true;
+                    Arms.Remove(loop);
                 }
             }
-
-            return false;
         }
     }
 }
