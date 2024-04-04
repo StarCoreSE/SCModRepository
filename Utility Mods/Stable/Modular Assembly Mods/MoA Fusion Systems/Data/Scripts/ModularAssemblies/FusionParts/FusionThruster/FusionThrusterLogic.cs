@@ -28,7 +28,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
             // Power generation consumed (per second)
             var powerConsumption = PowerGeneration * 60 * consumptionMultiplier;
 
-            var efficiencyMultiplier = 1 / (0.25f + consumptionMultiplier);
+            var efficiencyMultiplier = 1 / (0.8f + consumptionMultiplier);
 
             // Power generated (per second)
             var thrustOutput = efficiencyMultiplier * powerConsumption * NewtonsPerFusionPower;

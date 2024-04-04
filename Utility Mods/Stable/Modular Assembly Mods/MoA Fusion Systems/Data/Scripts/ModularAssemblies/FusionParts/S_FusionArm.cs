@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
+using Sandbox.ModAPI;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRageMath;
@@ -13,7 +14,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     /// </summary>
     internal struct S_FusionArm
     {
-        private const float LengthEfficiencyModifier = 0.05f;
+        private const float LengthEfficiencyModifier = 0.13f;
         private const float BlockPowerGeneration = 0.01f;
         private const float BlockPowerStorage = 4f;
 
@@ -30,8 +31,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         {
             var parts = new List<IMyCubeBlock>();
             var stopHits = 0;
-            var ignore = new List<MyEntity>();
+            var ignore = new HashSet<MyEntity>();
             IsValid = PerformScan(newPart, ref ignore, rootSubtype, ref stopHits, ref parts);
+            MyAPIGateway.Utilities.ShowNotification(stopHits + " | " + ignore.Count);
 
             PowerGeneration = 0;
             PowerStorage = 0;
@@ -70,7 +72,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         /// <param name="prevScan">The block entity to ignore; nullable.</param>
         /// <param name="stopAtSubtype">Exits the loop at this subtype.</param>
         /// <returns></returns>
-        private static bool PerformScan(MyEntity blockEntity, ref List<MyEntity> prevScan, string stopAtSubtype,
+        private static bool PerformScan(MyEntity blockEntity, ref HashSet<MyEntity> prevScan, string stopAtSubtype,
             ref int stopHits,
             ref List<IMyCubeBlock> parts)
         {
@@ -84,20 +86,27 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             if (connectedBlocks.Length < 2)
                 return false;
 
+            MyAPIGateway.Utilities.ShowNotification(connectedBlocks.Length + " | " +
+                                                    (((IMyCubeBlock)blockEntity).BlockDefinition.SubtypeName ==
+                                                     stopAtSubtype));
+
             foreach (var connectedBlock in connectedBlocks)
             {
+                if (!prevScan.Add(connectedBlock))
+                    continue;
+
                 var connectedSubtype = ((IMyCubeBlock)connectedBlock).BlockDefinition.SubtypeName;
+
                 if (connectedSubtype == stopAtSubtype)
-                    stopHits++;
-
-                if (!prevScan.Contains(connectedBlock) && connectedSubtype != stopAtSubtype)
                 {
-                    prevScan.Add(blockEntity);
-                    PerformScan(connectedBlock, ref prevScan, stopAtSubtype, ref stopHits, ref parts);
+                    stopHits++;
+                    parts.Add((IMyCubeBlock)connectedBlock);
                 }
+                else
+                    PerformScan(connectedBlock, ref prevScan, stopAtSubtype, ref stopHits, ref parts);
             }
-
-            return stopHits == 2;
+            
+            return stopHits >= 2;
         }
     }
 }
