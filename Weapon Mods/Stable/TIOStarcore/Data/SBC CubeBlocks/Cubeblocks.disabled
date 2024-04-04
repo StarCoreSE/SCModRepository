@@ -831,7 +831,7 @@
 			<DestroySound>WepSmallWarheadExpl</DestroySound>
 
 		</Definition>-->
-			<!-- Assault Battery -->
+			<!-- Assault Battery
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
@@ -863,7 +863,7 @@
 				<Component Count="150" Subtype="Computer"/>
 				<Component Count="700" Subtype="Construction"/>
 				<Component Count="500" Subtype="SteelPlate"/>
-<!-- 
+
 				<Component Subtype="SteelPlate" Count="400" />
 				<Component Subtype="Construction" Count="600" />
 				<Component Subtype="Computer" Count="20" />
@@ -872,7 +872,7 @@
 				<Component Subtype="LargeTube" Count="30" />
 				<Component Subtype="Motor" Count="35" />
 				<Component Subtype="Construction" Count="750" />
-				<Component Subtype="SteelPlate" Count="800" /> -->
+				<Component Subtype="SteelPlate" Count="800" />
 			</Components>
 			<CriticalComponent Index="0" Subtype="Computer"/>
 			<MountPoints>
@@ -906,7 +906,7 @@
 			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
 			<DestroySound>WepSmallWarheadExpl</DestroySound>
 
-		</Definition>
+		</Definition> -->
 		
 			<!-- Salvo Broadside Array
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
