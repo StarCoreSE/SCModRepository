@@ -29,14 +29,14 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
         {
             _storageForeground = new TexturedBox(body)
             {
-                Material = new Material("ctf_score_background", Vector2.One * 100),
+                Material = new Material("fusionBarBackground", Vector2.One * 100),
                 ParentAlignment = ParentAlignments.Bottom | ParentAlignments.InnerV,
                 DimAlignment = DimAlignments.Width,
             };
             
             _storageBackground = new TexturedBox(body)
             {
-                Material = new Material("fusionBarBackground", Vector2.One * 100),
+                Material = new Material("fusionBarForeground", Vector2.One * 100),
                 ParentAlignment = ParentAlignments.Center,
                 DimAlignment = DimAlignments.Both,
             };

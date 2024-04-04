@@ -194,7 +194,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             if (PowerStored > MaxPowerStored)
             {
                 PowerStored = MaxPowerStored;
-                PowerGeneration = 0;
+                //PowerGeneration = 0;
             }
         }
 
