@@ -20,7 +20,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         internal override string ReadableName => "Reactor";
 
 
-        public void UpdatePower(float PowerGeneration, float MegawattsPerFusionPower)
+        public override void UpdatePower(float PowerGeneration, float MegawattsPerFusionPower)
         {
             BufferPowerGeneration = PowerGeneration;
 

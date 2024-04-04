@@ -14,6 +14,7 @@ using VRage.Network;
 using VRage.ObjectBuilders;
 using VRage.Sync;
 using VRage.Utils;
+using static VRage.Game.MyObjectBuilder_BehaviorTreeDecoratorNode;
 
 namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
 {
@@ -137,7 +138,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
             {
                 var boostPowerAction = MyAPIGateway.TerminalControls.CreateAction<T>($"FusionSystems.{ReadableName}BoostPowerAction");
                 boostPowerAction.Name = new StringBuilder("Override Fusion Power");
-                boostPowerAction.Action = (block) =>
+                boostPowerAction.Action = block =>
                 {
                     var logic = block.GameLogic.GetAs<FusionPart<T>>();
                     // Only allow value to be set if 2 seconds of power is stored
@@ -174,6 +175,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
         {
             stringBuilder.Insert(0, InfoText.ToString());
         }
+
+        public abstract void UpdatePower(float PowerGeneration, float OutputPerFusionPower);
 
         #endregion
 

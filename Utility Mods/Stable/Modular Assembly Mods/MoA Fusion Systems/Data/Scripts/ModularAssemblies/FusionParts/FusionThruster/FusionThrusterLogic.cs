@@ -16,7 +16,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
         internal override string BlockSubtype => "Caster_FocusLens";
         internal override string ReadableName => "Thruster";
 
-        public void UpdateThrust(float PowerGeneration, float NewtonsPerFusionPower)
+        public override void UpdatePower(float PowerGeneration, float NewtonsPerFusionPower)
         {
             BufferPowerGeneration = PowerGeneration;
 
@@ -51,7 +51,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
                 return;
 
             OverrideEnabled.Value = value;
-            UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
+            UpdatePower(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
         }
 
         #region Base Methods
@@ -66,19 +66,19 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
             PowerUsageSync.ValueChanged += value =>
             {
                 if (!OverrideEnabled.Value)
-                    UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
+                    UpdatePower(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
             };
 
             // Trigger power update is only needed when OverrideEnabled is true
             OverridePowerUsageSync.ValueChanged += value =>
             {
                 if (OverrideEnabled.Value)
-                    UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
+                    UpdatePower(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
             };
 
             // Trigger power update if boostEnabled is changed
             OverrideEnabled.ValueChanged += value =>
-                UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
+                UpdatePower(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
         }
 
         public override void UpdateAfterSimulation()
