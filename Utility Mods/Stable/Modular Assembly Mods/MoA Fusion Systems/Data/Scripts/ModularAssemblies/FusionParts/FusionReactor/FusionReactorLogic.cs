@@ -20,7 +20,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         internal override string ReadableName => "Reactor";
 
 
-        public void UpdatePower(float PowerGeneration, float MegawattsPerFusionPower)
+        public override void UpdatePower(float PowerGeneration, float MegawattsPerFusionPower)
         {
             BufferPowerGeneration = PowerGeneration;
 
@@ -107,6 +107,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                     return;
                 SyncMultipliers.ReactorOutput(Block, 0);
                 PowerConsumption = 0;
+                LastShutdown = DateTime.Now.Ticks + 4 * TimeSpan.TicksPerSecond;
                 return;
             }
 
@@ -118,7 +119,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 PowerConsumption = 0;
                 SyncMultipliers.ReactorOutput(Block, 0);
             }
-            else if (storagePct > 0.025f)
+            else if (storagePct > 0.025f && DateTime.Now.Ticks > LastShutdown)
             {
                 SyncMultipliers.ReactorOutput(Block, BufferReactorOutput);
                 PowerConsumption = MaxPowerConsumption * Block.CurrentOutputRatio;

@@ -16,7 +16,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
         internal override string BlockSubtype => "Caster_FocusLens";
         internal override string ReadableName => "Thruster";
 
-        public void UpdateThrust(float PowerGeneration, float NewtonsPerFusionPower)
+        public override void UpdatePower(float PowerGeneration, float NewtonsPerFusionPower)
         {
             BufferPowerGeneration = PowerGeneration;
 
@@ -51,7 +51,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
                 return;
 
             OverrideEnabled.Value = value;
-            UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
+            UpdatePower(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
         }
 
         #region Base Methods
@@ -66,19 +66,19 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
             PowerUsageSync.ValueChanged += value =>
             {
                 if (!OverrideEnabled.Value)
-                    UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
+                    UpdatePower(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
             };
 
             // Trigger power update is only needed when OverrideEnabled is true
             OverridePowerUsageSync.ValueChanged += value =>
             {
                 if (OverrideEnabled.Value)
-                    UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
+                    UpdatePower(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
             };
 
             // Trigger power update if boostEnabled is changed
             OverrideEnabled.ValueChanged += value =>
-                UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
+                UpdatePower(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
         }
 
         public override void UpdateAfterSimulation()
@@ -92,6 +92,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
                     return;
                 SyncMultipliers.ThrusterOutput(Block, 0);
                 PowerConsumption = 0;
+                LastShutdown = DateTime.Now.Ticks + 4 * TimeSpan.TicksPerSecond;
                 return;
             }
 
@@ -103,7 +104,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
                 PowerConsumption = 0;
                 SyncMultipliers.ThrusterOutput(Block, 0);
             }
-            else if (storagePct > 0.1f)
+            else if (storagePct > 0.1f && DateTime.Now.Ticks > LastShutdown)
             {
                 SyncMultipliers.ThrusterOutput(Block, BufferThrustOutput);
                 PowerConsumption = MaxPowerConsumption * (Block.CurrentThrustPercentage / 100f);
