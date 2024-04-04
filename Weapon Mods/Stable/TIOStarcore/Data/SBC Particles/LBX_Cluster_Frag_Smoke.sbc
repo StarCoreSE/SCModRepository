@@ -9,7 +9,7 @@
       <LowRes>false</LowRes>
       <Loop>true</Loop>
       <DurationMin>0.2</DurationMin>
-      <DurationMax>4</DurationMax>
+      <DurationMax>1</DurationMax>
       <Version>0</Version>
       <ParticleGenerations>
         <ParticleGeneration Name="Trail_Smoke" Version="0">
@@ -45,7 +45,7 @@
                         <Value2D />
                       </Key>
                       <Key>
-                        <Time>0.09738786</Time>
+                        <Time>0.285668373</Time>
                         <ValueVector4>
                           <X>0.09608</X>
                           <Y>0.04</Y>
@@ -55,7 +55,7 @@
                         <Value2D />
                       </Key>
                       <Key>
-                        <Time>0.4717074</Time>
+                        <Time>0.559054</Time>
                         <ValueVector4>
                           <X>0.5175</X>
                           <Y>0.5175</Y>
@@ -226,17 +226,17 @@
                   <Value2D>
                     <Keys>
                       <Key>
-                        <Time>0</Time>
+                        <Time>0.114521146</Time>
                         <ValueFloat>1.7</ValueFloat>
                         <Value2D />
                       </Key>
                       <Key>
-                        <Time>0.2192504</Time>
+                        <Time>0.268746853</Time>
                         <ValueFloat>5</ValueFloat>
                         <Value2D />
                       </Key>
                       <Key>
-                        <Time>0.680495441</Time>
+                        <Time>0.6009129</Time>
                         <ValueFloat>3</ValueFloat>
                         <Value2D />
                       </Key>
@@ -251,7 +251,7 @@
               </Keys>
             </Property>
             <Property AnimationType="Const" Name="Life" Type="Float">
-              <ValueFloat>1.4</ValueFloat>
+              <ValueFloat>0.6</ValueFloat>
             </Property>
             <Property AnimationType="Const" Name="Soft particle distance scale" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -269,7 +269,7 @@
               <Keys>
                 <Key>
                   <Time>0</Time>
-                  <ValueFloat>450</ValueFloat>
+                  <ValueFloat>600</ValueFloat>
                   <Value2D />
                 </Key>
               </Keys>
@@ -421,7 +421,7 @@
               <ValueFloat>1</ValueFloat>
             </Property>
             <Property AnimationType="Const" Name="Radius var" Type="Float">
-              <ValueFloat>0.35</ValueFloat>
+              <ValueFloat>-0.3</ValueFloat>
             </Property>
             <Property AnimationType="Const" Name="Rotation velocity collision multiplier" Type="Float">
               <ValueFloat>1</ValueFloat>

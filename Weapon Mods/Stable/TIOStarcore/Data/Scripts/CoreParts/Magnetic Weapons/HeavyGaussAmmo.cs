@@ -633,7 +633,7 @@ namespace Scripts
                 {
                     Enable = true,
                     Radius = 5f, // Meters
-                    Damage = 335f, //33500f
+                    Damage = 33500f,
                     Depth = 0f,
                     MaxAbsorb = 0f,
                     Falloff = NoFalloff, //.NoFalloff applies the same damage to all blocks in radius

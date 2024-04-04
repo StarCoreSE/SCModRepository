@@ -8,10 +8,9 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>NavalHeavyGaussRifle</SubtypeId>
 		  </Id>
-		  <DisplayName>[CA]'Grizzly' Naval Heavy Gauss Rifle</DisplayName>
+		  <DisplayName>'Grizzly' Naval Heavy Gauss Rifle</DisplayName>
 		  <Description>
-		  9km Range. Kinetic. Short Ranged. 4 Second Targeting Beam, 1/60th of a second Hypervelocity Slug
-		  WIP, trying to make a hitscan feel like a bullet is hard.
+		  17km Range. Kinetic. Short Ranged. 4 Second Targeting Beam, 1/60th of a second Hypervelocity Slug
 
 		  </Description>
 		  <Icon>Textures\GUI\Icons\Cubes\LBX5.dds</Icon>
