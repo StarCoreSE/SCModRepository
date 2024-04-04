@@ -21,6 +21,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
     public abstract class FusionPart<T> : MyGameLogicComponent, IMyEventProxy
         where T : IMyCubeBlock
     {
+        // TODO organize variables
         public static readonly Guid SettingsGUID = new Guid("36a45185-2e80-461c-9f1c-e2140a47a4df");
 
         /// <summary>
@@ -53,6 +54,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
         ///     Human-readable name for this part type.
         /// </summary>
         internal abstract string ReadableName { get; }
+
+        internal long LastShutdown = 0;
 
         #region Controls
 

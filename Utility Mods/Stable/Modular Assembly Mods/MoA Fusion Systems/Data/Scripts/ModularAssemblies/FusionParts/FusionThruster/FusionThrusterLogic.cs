@@ -92,6 +92,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
                     return;
                 SyncMultipliers.ThrusterOutput(Block, 0);
                 PowerConsumption = 0;
+                LastShutdown = DateTime.Now.Ticks + 4 * TimeSpan.TicksPerSecond;
                 return;
             }
 
@@ -103,7 +104,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
                 PowerConsumption = 0;
                 SyncMultipliers.ThrusterOutput(Block, 0);
             }
-            else if (storagePct > 0.1f)
+            else if (storagePct > 0.1f && DateTime.Now.Ticks > LastShutdown)
             {
                 SyncMultipliers.ThrusterOutput(Block, BufferThrustOutput);
                 PowerConsumption = MaxPowerConsumption * (Block.CurrentThrustPercentage / 100f);
