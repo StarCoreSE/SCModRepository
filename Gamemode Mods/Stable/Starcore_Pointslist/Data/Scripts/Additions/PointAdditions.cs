@@ -648,7 +648,7 @@ Cat_UnusedOrOutated_Subtypes@23;
 				Caster_Accelerator_90@20;
 				Caster_Feeder@10;
 				Caster_FocusLens@50;
-				Caster_Reactor@250;
+				Caster_Reactor@125;
             "));
         }
     }
