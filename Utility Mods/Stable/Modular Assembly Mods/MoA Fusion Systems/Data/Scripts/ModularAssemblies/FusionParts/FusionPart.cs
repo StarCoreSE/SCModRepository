@@ -14,12 +14,14 @@ using VRage.Network;
 using VRage.ObjectBuilders;
 using VRage.Sync;
 using VRage.Utils;
+using static VRage.Game.MyObjectBuilder_BehaviorTreeDecoratorNode;
 
 namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
 {
     public abstract class FusionPart<T> : MyGameLogicComponent, IMyEventProxy
         where T : IMyCubeBlock
     {
+        // TODO organize variables
         public static readonly Guid SettingsGUID = new Guid("36a45185-2e80-461c-9f1c-e2140a47a4df");
 
         /// <summary>
@@ -53,10 +55,13 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
         /// </summary>
         internal abstract string ReadableName { get; }
 
+        internal long LastShutdown = 0;
+
         #region Controls
 
         private void CreateControls()
         {
+            /* TERMINAL */
             {
                 var boostPowerToggle =
                     MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlOnOffSwitch, T>(
@@ -70,7 +75,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
                 {
                     var logic = block.GameLogic.GetAs<FusionPart<T>>();
                     // Only allow value to be set if 2 seconds of power is stored
-                    if (!value || logic.MemberSystem?.PowerStored <= logic.PowerConsumption * 120)
+                    if (!value || logic.MemberSystem?.PowerStored > MemberSystem?.PowerConsumption * 60)
                         logic.OverrideEnabled.Value = value;
                 };
 
@@ -97,7 +102,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
                     block.GameLogic.GetAs<FusionPart<T>>().PowerUsageSync.Value = value;
 
                 powerUsageSlider.Writer = (block, builder) =>
-                    builder.Append(Math.Round(block.GameLogic.GetAs<FusionPart<T>>().PowerUsageSync.Value * 100))
+                    builder?.Append(Math.Round(block.GameLogic.GetAs<FusionPart<T>>()?.PowerUsageSync.Value * 100 ?? 0))
                         .Append('%');
 
                 powerUsageSlider.Visible = block => block.BlockDefinition.SubtypeName == BlockSubtype;
@@ -121,8 +126,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
                     block.GameLogic.GetAs<FusionPart<T>>().OverridePowerUsageSync.Value = value;
 
                 boostPowerUsageSlider.Writer = (block, builder) =>
-                    builder.Append(
-                            Math.Round(block.GameLogic.GetAs<FusionPart<T>>().OverridePowerUsageSync.Value * 100))
+                    builder?.Append(
+                            Math.Round(block.GameLogic.GetAs<FusionPart<T>>()?.OverridePowerUsageSync.Value * 100 ?? 0))
                         .Append('%');
 
                 boostPowerUsageSlider.Visible = block => block.BlockDefinition.SubtypeName == BlockSubtype;
@@ -132,6 +137,30 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
                 MyAPIGateway.TerminalControls.AddControl<T>(boostPowerUsageSlider);
             }
 
+            /* ACTIONS */
+            {
+                var boostPowerAction = MyAPIGateway.TerminalControls.CreateAction<T>($"FusionSystems.{ReadableName}BoostPowerAction");
+                boostPowerAction.Name = new StringBuilder("Override Fusion Power");
+                boostPowerAction.Action = block =>
+                {
+                    var logic = block.GameLogic.GetAs<FusionPart<T>>();
+                    // Only allow value to be set if 2 seconds of power is stored
+                    if (logic.OverrideEnabled.Value || logic.MemberSystem?.PowerStored > MemberSystem?.PowerConsumption * 60)
+                        logic.OverrideEnabled.Value = !logic.OverrideEnabled.Value;
+                };
+                boostPowerAction.Writer = (b, sb) =>
+                {
+                    var logic = b?.GameLogic?.GetAs<FusionPart<T>>();
+                    if (logic != null)
+                    {
+                        sb.Append(logic.OverrideEnabled.Value ? "OVR   On" : "OVR  Off");
+                    }
+                };
+                boostPowerAction.Icon = @"Textures\GUI\Icons\Actions\Toggle.dds";
+                boostPowerAction.Enabled = block => block.BlockDefinition.SubtypeName == BlockSubtype;
+                MyAPIGateway.TerminalControls.AddAction<T>(boostPowerAction);
+            }
+
             MyAPIGateway.TerminalControls.CustomControlGetter += AssignDetailedInfoGetter;
 
             _haveControlsInited.Add(ReadableName);
@@ -139,7 +168,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
 
         private void AssignDetailedInfoGetter(IMyTerminalBlock block, List<IMyTerminalControl> controls)
         {
-            if (block.BlockDefinition.SubtypeName != BlockSubtype)
+            if (block?.BlockDefinition.SubtypeName != BlockSubtype)
                 return;
             block.RefreshCustomInfo();
             block.SetDetailedInfoDirty();
@@ -149,6 +178,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
         {
             stringBuilder.Insert(0, InfoText.ToString());
         }
+
+        public abstract void UpdatePower(float PowerGeneration, float OutputPerFusionPower);
 
         #endregion
 

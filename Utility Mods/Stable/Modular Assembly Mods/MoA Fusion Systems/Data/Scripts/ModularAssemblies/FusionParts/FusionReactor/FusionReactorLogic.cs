@@ -20,7 +20,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         internal override string ReadableName => "Reactor";
 
 
-        public void UpdatePower(float PowerGeneration, float MegawattsPerFusionPower)
+        public override void UpdatePower(float PowerGeneration, float MegawattsPerFusionPower)
         {
             BufferPowerGeneration = PowerGeneration;
 
@@ -31,8 +31,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             // Power generation consumed (per second)
             var powerConsumption = PowerGeneration * 60 * reactorConsumptionMultiplier;
 
+            var reactorEfficiencyMultiplier = 1 / (0.8f + reactorConsumptionMultiplier);
 
-            var reactorEfficiencyMultiplier = 1 / (0.5f + reactorConsumptionMultiplier);
             // Power generated (per second)
             var reactorOutput = reactorEfficiencyMultiplier * powerConsumption * MegawattsPerFusionPower;
 
@@ -59,12 +59,6 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         {
             return reactorOutput / MegawattsPerFusionPower;
         }
-
-        //private float GetEfficiencyFromPower(float reactorConsumption)
-        //{
-        //    var a = (1 / (0.5f + reactorConsumptionMultiplier)) * (PowerGeneration * 60 * reactorConsumptionMultiplier);
-        //
-        //}
 
         public void SetPowerBoost(bool value)
         {
@@ -105,16 +99,27 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         public override void UpdateAfterSimulation()
         {
             base.UpdateAfterSimulation();
+            float storagePct = MemberSystem?.PowerStored / MemberSystem?.MaxPowerStored ?? 0;
+
+            if (storagePct <= 0)
+            {
+                if (Block.MaxOutput == 0)
+                    return;
+                SyncMultipliers.ReactorOutput(Block, 0);
+                PowerConsumption = 0;
+                LastShutdown = DateTime.Now.Ticks + 4 * TimeSpan.TicksPerSecond;
+                return;
+            }
 
             // If boost is unsustainable, disable it.
             // If power draw exceeds power available, disable self until available.
-            if ((OverrideEnabled.Value && MemberSystem?.PowerStored <= PowerConsumption * 120) || !Block.IsWorking)
+            if ((OverrideEnabled.Value && MemberSystem?.PowerStored <= MemberSystem?.PowerConsumption * 30) || !Block.IsWorking)
             {
                 SetPowerBoost(false);
                 PowerConsumption = 0;
                 SyncMultipliers.ReactorOutput(Block, 0);
             }
-            else
+            else if (storagePct > 0.025f && DateTime.Now.Ticks > LastShutdown)
             {
                 SyncMultipliers.ReactorOutput(Block, BufferReactorOutput);
                 PowerConsumption = MaxPowerConsumption * Block.CurrentOutputRatio;

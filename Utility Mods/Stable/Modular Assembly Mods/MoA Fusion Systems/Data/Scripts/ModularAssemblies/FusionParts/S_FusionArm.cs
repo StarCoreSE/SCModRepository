@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
+using Sandbox.ModAPI;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRageMath;
@@ -13,9 +15,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     /// </summary>
     internal struct S_FusionArm
     {
-        private const float LengthEfficiencyModifier = 1 / 40f;
-        private const float BlockPowerGeneration = 0.005f;
-        private const float BlockPowerStorage = 2f;
+        private const float LengthEfficiencyModifier = 0.13f;
+        private const float BlockPowerGeneration = 0.01f;
+        private const float BlockPowerStorage = 16f;
 
         private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
 
@@ -28,34 +30,36 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
         public S_FusionArm(MyEntity newPart, string rootSubtype)
         {
-            var parts = new List<IMyCubeBlock>();
             var stopHits = 0;
-            var ignore = new List<MyEntity>();
-            IsValid = PerformScan(newPart, ref ignore, rootSubtype, ref stopHits, ref parts);
+            var ignore = new HashSet<IMyCubeBlock>();
+            IsValid = PerformScan(newPart, ref ignore, rootSubtype, ref stopHits);
+            MyAPIGateway.Utilities.ShowNotification(stopHits + " | " + ignore.Count);
 
             PowerGeneration = 0;
             PowerStorage = 0;
 
             if (!IsValid)
             {
-                parts.Clear();
+                ignore.Clear();
                 Parts = Array.Empty<IMyCubeBlock>();
                 return;
             }
 
-            foreach (var part in parts)
+            foreach (var part in ignore)
                 switch (part?.BlockDefinition.SubtypeName)
                 {
                     case "Caster_Accelerator_90":
                         PowerGeneration += BlockPowerGeneration;
+                        PowerStorage += BlockPowerStorage * 0.05f;
                         break;
                     case "Caster_Accelerator_0":
                         PowerStorage += BlockPowerStorage;
+                        PowerGeneration += BlockPowerGeneration * 0.05f;
                         break;
                 }
 
-            Parts = parts.ToArray();
-            parts.Clear();
+            Parts = ignore.ToArray();
+            ignore.Clear();
 
             // Power capacities scale with length.
             PowerGeneration *= (float)Math.Pow(Parts.Length, LengthEfficiencyModifier);
@@ -70,35 +74,36 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         /// <param name="prevScan">The block entity to ignore; nullable.</param>
         /// <param name="stopAtSubtype">Exits the loop at this subtype.</param>
         /// <returns></returns>
-        private static bool PerformScan(MyEntity blockEntity, ref List<MyEntity> prevScan, string stopAtSubtype, ref int stopHits, ref List<IMyCubeBlock> parts, HashSet<MyEntity> visitedBlocks = null)
+private static bool PerformScan(MyEntity blockEntity, ref HashSet<IMyCubeBlock> parts, string stopAtSubtype, ref int stopHits, HashSet<MyEntity> visitedBlocks = null)
+{
+    if (visitedBlocks == null)
+        visitedBlocks = new HashSet<MyEntity>();
+
+    if (ModularAPI.IsDebug())
+        DebugDraw.DebugDraw.AddGridPoint(((IMyCubeBlock)blockEntity).Position, ((IMyCubeBlock)blockEntity).CubeGrid, Color.Blue, 2);
+
+    parts.Add((IMyCubeBlock)blockEntity);
+    var connectedBlocks = ModularAPI.GetConnectedBlocks(blockEntity, false);
+
+    if (connectedBlocks.Length < 2)
+        return false;
+
+    foreach (var connectedBlock in connectedBlocks)
+    {
+        var connectedSubtype = ((IMyCubeBlock)connectedBlock).BlockDefinition.SubtypeName;
+        bool valid = parts.Add((IMyCubeBlock)connectedBlock);
+
+        if (connectedSubtype == stopAtSubtype)
+            stopHits++;
+
+        if (!visitedBlocks.Contains(connectedBlock) && connectedSubtype != stopAtSubtype)
         {
-            if (visitedBlocks == null)
-                visitedBlocks = new HashSet<MyEntity>();
-
-            if (ModularAPI.IsDebug())
-                DebugDraw.DebugDraw.AddGridPoint(((IMyCubeBlock)blockEntity).Position, ((IMyCubeBlock)blockEntity).CubeGrid, Color.Blue, 2);
-
-            parts.Add((IMyCubeBlock)blockEntity);
-            var connectedBlocks = ModularAPI.GetConnectedBlocks(blockEntity, false);
-
-            if (connectedBlocks.Length < 2)
-                return false;
-
-            foreach (var connectedBlock in connectedBlocks)
-            {
-                var connectedSubtype = ((IMyCubeBlock)connectedBlock).BlockDefinition.SubtypeName;
-                if (connectedSubtype == stopAtSubtype)
-                    stopHits++;
-
-                if (!prevScan.Contains(connectedBlock) && connectedSubtype != stopAtSubtype && !visitedBlocks.Contains(connectedBlock))
-                {
-                    prevScan.Add(blockEntity);
-                    visitedBlocks.Add(connectedBlock);
-                    PerformScan(connectedBlock, ref prevScan, stopAtSubtype, ref stopHits, ref parts, visitedBlocks);
-                }
-            }
-
-            return stopHits == 2;
+            visitedBlocks.Add(connectedBlock);
+            PerformScan(connectedBlock, ref parts, stopAtSubtype, ref stopHits, visitedBlocks);
         }
+    }
+    
+    return stopHits >= 2;
+}
     }
 }

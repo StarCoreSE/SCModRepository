@@ -24,9 +24,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\ElectroShield3x3.mwm</Model>
 			<Components>
-				<Component Subtype="AMP_FrameComponent" Count="2"/>
+				<Component Subtype="AMP_FrameComponent" Count="1"/>
 				<Component Subtype="Computer" Count="1"/>
-				<Component Subtype="AMP_PlateComponent" Count="6"/>
+				<Component Subtype="AMP_PlateComponent" Count="3"/>
 			</Components>
       <BuildTimeSeconds>60</BuildTimeSeconds>
 			<CriticalComponent Subtype="Computer" Index="0"/>
@@ -451,7 +451,7 @@
 					<MinAllowed>0.01</MinAllowed>
 				</DynamicMode>
 			</VoxelPlacement>
-			<BlockPairName>K_SA_Gauss_APC</BlockPairName>
+			<BlockPairName>Nariman_Dart_Turret</BlockPairName>
 			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
 			<EdgeType>Light</EdgeType>
@@ -523,7 +523,7 @@
      <BuildProgressModels>
 				<Model BuildPercentUpperBound="1.0" File="Models\Starcore\muzzled_coil_odin_BS1_LOD1.mwm"/>
 			</BuildProgressModels>
-      <BlockPairName>SolHyp_MAC_Block</BlockPairName>
+      <BlockPairName>SolHyp_Magnetic_Coilgun</BlockPairName>
        <MirroringY>Z</MirroringY>
      <MirroringZ>Y</MirroringZ>
 	   <EdgeType>Light</EdgeType>

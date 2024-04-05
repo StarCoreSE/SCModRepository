@@ -16,7 +16,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
         internal override string BlockSubtype => "Caster_FocusLens";
         internal override string ReadableName => "Thruster";
 
-        public void UpdateThrust(float PowerGeneration, float NewtonsPerFusionPower)
+        public override void UpdatePower(float PowerGeneration, float NewtonsPerFusionPower)
         {
             BufferPowerGeneration = PowerGeneration;
 
@@ -24,10 +24,12 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
                 OverrideEnabled.Value
                     ? OverridePowerUsageSync
                     : PowerUsageSync.Value; // This is ugly, let's make it better.
-            var efficiencyMultiplier = 1 / (0.5f + consumptionMultiplier);
 
             // Power generation consumed (per second)
             var powerConsumption = PowerGeneration * 60 * consumptionMultiplier;
+
+            var efficiencyMultiplier = 1 / (0.8f + consumptionMultiplier);
+
             // Power generated (per second)
             var thrustOutput = efficiencyMultiplier * powerConsumption * NewtonsPerFusionPower;
             BufferThrustOutput = thrustOutput;
@@ -49,7 +51,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
                 return;
 
             OverrideEnabled.Value = value;
-            UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
+            UpdatePower(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
         }
 
         #region Base Methods
@@ -64,34 +66,45 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
             PowerUsageSync.ValueChanged += value =>
             {
                 if (!OverrideEnabled.Value)
-                    UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
+                    UpdatePower(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
             };
 
             // Trigger power update is only needed when OverrideEnabled is true
             OverridePowerUsageSync.ValueChanged += value =>
             {
                 if (OverrideEnabled.Value)
-                    UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
+                    UpdatePower(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
             };
 
             // Trigger power update if boostEnabled is changed
             OverrideEnabled.ValueChanged += value =>
-                UpdateThrust(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
+                UpdatePower(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
         }
 
         public override void UpdateAfterSimulation()
         {
             base.UpdateAfterSimulation();
+            float storagePct = MemberSystem?.PowerStored / MemberSystem?.MaxPowerStored ?? 0;
+
+            if (storagePct <= 0.05f)
+            {
+                if (Block.ThrustMultiplier == 0)
+                    return;
+                SyncMultipliers.ThrusterOutput(Block, 0);
+                PowerConsumption = 0;
+                LastShutdown = DateTime.Now.Ticks + 4 * TimeSpan.TicksPerSecond;
+                return;
+            }
 
             // If boost is unsustainable, disable it.
             // If power draw exceeds power available, disable self until available.
-            if ((OverrideEnabled.Value && MemberSystem?.PowerStored <= PowerConsumption * 120) || !Block.IsWorking)
+            if ((OverrideEnabled.Value && MemberSystem?.PowerStored <= MemberSystem?.PowerConsumption * 30) || !Block.IsWorking)
             {
                 SetPowerBoost(false);
                 PowerConsumption = 0;
                 SyncMultipliers.ThrusterOutput(Block, 0);
             }
-            else
+            else if (storagePct > 0.1f && DateTime.Now.Ticks > LastShutdown)
             {
                 SyncMultipliers.ThrusterOutput(Block, BufferThrustOutput);
                 PowerConsumption = MaxPowerConsumption * (Block.CurrentThrustPercentage / 100f);

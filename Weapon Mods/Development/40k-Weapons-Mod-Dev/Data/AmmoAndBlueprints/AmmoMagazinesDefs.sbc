@@ -1,0 +1,128 @@
+﻿<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <AmmoMagazines>
+     
+      <AmmoMagazine>
+        <Id>
+          <TypeId>AmmoMagazine</TypeId>
+          <SubtypeId>MacroCannonAmmoMag</SubtypeId>
+        </Id>
+        <DisplayName>Macro Cannon Round</DisplayName>
+        <Icon>Textures\GUI\Icons\ammo\CannonRound.dds</Icon>
+        <Size>
+          <X>0.25</X>
+          <Y>0.2</Y>
+          <Z>0.2</Z>
+        </Size>
+        <Mass>60</Mass>
+        <Volume>30</Volume>
+        <Model>Models\Ammo\CannonRound.mwm</Model>
+        <PhysicalMaterial>Ammo</PhysicalMaterial>
+        <Capacity>1</Capacity>
+        <AmmoDefinitionId Subtype="MacroCannonAmmo" />
+      </AmmoMagazine>
+      
+      
+      <AmmoMagazine>
+            <Id>
+                <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>HeavyBolterMagazine</SubtypeId>
+            </Id>
+            <DisplayName>Heavy Bolter Ammo Box</DisplayName>
+            <Icon>Textures\GUI\Icons\ammo\Ammo_Box.dds</Icon>
+            <Size>
+                <X>0.25</X>
+                <Y>0.2</Y>
+                <Z>0.2</Z>
+            </Size>
+            <Mass>40</Mass>
+            <Volume>20</Volume>
+            <Model>Models\Ammo\Ammo_Box.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>20</Capacity>
+            <AmmoDefinitionId Subtype="HeavyBolterAmmo" />
+        </AmmoMagazine>
+		
+		<AmmoMagazine>
+			<Id>
+				<TypeId>AmmoMagazine</TypeId>
+				<SubtypeId>BattleCannonMag</SubtypeId>
+			</Id>
+			<DisplayName>Battle Cannon Shell</DisplayName>
+			<Icon>Textures\GUI\Icons\ammo\AutocannonShell.dds</Icon>
+			<Size>
+				<X>0.7</X>
+				<Y>0.7</Y>
+				<Z>0.7</Z>
+			</Size>
+			<Mass>50</Mass>
+			<Volume>30</Volume>
+			<Model>Models\Ammo\AutocanonShell_LOD0.mwm</Model>
+			<PhysicalMaterial>Ammo</PhysicalMaterial>
+			<Capacity>1</Capacity>
+			<AmmoDefinitionId Subtype="BattleCannonAmmo" />
+		</AmmoMagazine>
+
+      <AmmoMagazine>
+        <Id>
+          <TypeId>AmmoMagazine</TypeId>
+          <SubtypeId>EarthshakerMag</SubtypeId>
+        </Id>
+        <DisplayName>Earthshaker Cannon Shell</DisplayName>
+        <Icon>Textures\GUI\Icons\ammo\AutocannonShell.dds</Icon>
+        <Size>
+          <X>0.7</X>
+          <Y>0.7</Y>
+          <Z>0.7</Z>
+        </Size>
+        <Mass>50</Mass>
+        <Volume>30</Volume>
+        <Model>Models\Ammo\AutocanonShell_LOD0.mwm</Model>
+        <PhysicalMaterial>Ammo</PhysicalMaterial>
+        <Capacity>1</Capacity>
+        <AmmoDefinitionId Subtype="EarthshakerAmmo" />
+      </AmmoMagazine>
+      
+
+		<AmmoMagazine>
+			<Id>
+				<TypeId>AmmoMagazine</TypeId>
+				<SubtypeId>NovaPlas1</SubtypeId>
+			</Id>
+			<DisplayName>Novacannon Plasma Warhead</DisplayName>
+			<Icon>Textures\GUI\Icons\ammo\Torp.png</Icon>
+			<Size>
+				<X>1</X>
+				<Y>1</Y>
+				<Z>1</Z>
+			</Size>
+			<Mass>300</Mass>
+			<Volume>2000</Volume>
+			<Model>Models\Ammo\TorpReaper_Torp.mwm</Model>
+			<PhysicalMaterial>Ammo</PhysicalMaterial>
+			<Capacity>1</Capacity>
+			<AmmoDefinitionId Subtype="NovaPlasAmmo" />
+		</AmmoMagazine>
+      
+      <AmmoMagazine>
+        <Id>
+          <TypeId>AmmoMagazine</TypeId>
+          <SubtypeId>NovaGrav1</SubtypeId>
+        </Id>
+        <DisplayName>Novacannon Gravitational Warhead</DisplayName>
+        <Icon>Textures\GUI\Icons\ammo\Torp.png</Icon>
+        <Size>
+          <X>1</X>
+          <Y>1</Y>
+          <Z>1</Z>
+        </Size>
+        <Mass>300</Mass>
+        <Volume>2000</Volume>
+        <Model>Models\Ammo\TorpReaper_Torp.mwm</Model>
+        <PhysicalMaterial>Ammo</PhysicalMaterial>
+        <Capacity>1</Capacity>
+        <AmmoDefinitionId Subtype="NovaGravAmmo" />
+      </AmmoMagazine>
+
+    </AmmoMagazines>
+</Definitions>

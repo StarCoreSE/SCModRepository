@@ -416,7 +416,7 @@ Cat_WysemanHA@17;
 				HAS_Esper@625;
 				HAS_Cyclops@350;
 				HAS_Crossfield@250;
-				HAS_Vulcan@1000;
+				HAS_Avenger@600;
 				HakkeroProjectileMini@400;
 				HakkeroBeamMini@400; 
 				HAS_Thanatos@350;
@@ -645,10 +645,10 @@ Cat_UnusedOrOutated_Subtypes@23;
 
 
 				Caster_Accelerator_0@5;
-				Caster_Accelerator_90@10;
+				Caster_Accelerator_90@20;
 				Caster_Feeder@10;
 				Caster_FocusLens@50;
-				Caster_Reactor@250;
+				Caster_Reactor@125;
             "));
         }
     }

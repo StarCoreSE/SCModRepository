@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
 using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionReactor;
 using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionThruster;
@@ -12,15 +13,29 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 {
     internal class S_FusionSystem
     {
-        public const float MegawattsPerFusionPower = 85;
+        public const float MegawattsPerFusionPower = 29;
         public const float NewtonsPerFusionPower = 3200000;
 
         public List<S_FusionArm> Arms = new List<S_FusionArm>();
+        public int BlockCount = 0;
         public int PhysicalAssemblyId;
-        public float PowerCapacity;
 
+        /// <summary>
+        /// Total power generated minus PowerConsumption
+        /// </summary>
         public float PowerGeneration;
+        /// <summary>
+        /// Total power consumed
+        /// </summary>
+        public float PowerConsumption;
+        /// <summary>
+        /// Current power stored
+        /// </summary>
         public float PowerStored;
+        /// <summary>
+        /// Maximum power storage
+        /// </summary>
+        public float MaxPowerStored;
         public List<FusionReactorLogic> Reactors = new List<FusionReactorLogic>();
         public List<FusionThrusterLogic> Thrusters = new List<FusionThrusterLogic>();
 
@@ -36,6 +51,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             if (newPart == null)
                 return;
 
+            BlockCount++;
+
             // Scan for 'arms' connected on both ends to the feeder block.
             switch (newPart.BlockDefinition.SubtypeName)
             {
@@ -47,10 +64,40 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                         Arms.Add(newArm);
                         UpdatePower(true);
                     }
+                    break;
+                case "Caster_Feeder": // This is awful and I hate it. The idea is to generate new loops if a feeder is placed.
+                    List<MyEntity> connectedAccelerators = new List<MyEntity>();
+                    foreach (var connectedBlock in ModularAPI.GetConnectedBlocks((MyEntity)newPart))
+                    {
+                        string subtype = (connectedBlock as IMyCubeBlock)?.BlockDefinition.SubtypeName;
+                        if (subtype != "Caster_Accelerator_0" && subtype != "Caster_Accelerator_90")
+                            continue;
+                        connectedAccelerators.Add(connectedBlock);
+                    }
+                    
+                    foreach (var accelerator in connectedAccelerators)
+                    {
+                        if (Arms.Any(arm => arm.Parts.Contains((IMyCubeBlock)accelerator)))
+                            continue;
 
+                        bool accelsShareArm = false;
+                        var newArm2 = new S_FusionArm(accelerator, "Caster_Feeder");
+                        if (newArm2.IsValid)
+                        {
+                            Arms.Add(newArm2);
+                            UpdatePower(true);
+                    
+                            foreach (var accelerator2 in connectedAccelerators)
+                                if (accelerator2 != accelerator && newArm2.Parts.Contains((IMyCubeBlock) accelerator2))
+                                    accelsShareArm = true;
+                        }
+                        MyAPIGateway.Utilities.ShowNotification(newArm2.Parts.Contains(newPart) + "C");
+                        if (accelsShareArm)
+                            break;
+                    }
                     break;
             }
-
+            
             if (newPart is IMyThrust)
             {
                 var logic = newPart.GameLogic.GetAs<FusionThrusterLogic>();
@@ -58,7 +105,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 {
                     Thrusters.Add(logic);
                     logic.MemberSystem = this;
-                    logic.UpdateThrust(PowerGeneration, NewtonsPerFusionPower);
+                    logic.UpdatePower(PowerGeneration, NewtonsPerFusionPower);
                 }
             }
 
@@ -81,6 +128,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             if (part == null)
                 return;
 
+            BlockCount--;
+
             if (part is IMyThrust)
             {
                 var logic = part.GameLogic.GetAs<FusionThrusterLogic>();
@@ -95,20 +144,24 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 Reactors.Remove(logic);
             }
 
-            foreach (var arm in Arms)
+            foreach (var arm in Arms.ToList())
                 if (arm.Parts.Contains(part))
                 {
                     Arms.Remove(arm);
                     UpdatePower(true);
-                    break;
                 }
+
+            if (BlockCount <= 0)
+                S_FusionManager.I.FusionSystems.Remove(PhysicalAssemblyId);
+
+            UpdatePower();
         }
 
         private void UpdatePower(bool updateReactors = false)
         {
-            float powerGeneration = 0.01f;
-            float powerCapacity = 0.01f;
-            float totalPowerUsage = 0f;
+            var powerGeneration = float.Epsilon;
+            var powerCapacity = float.Epsilon;
+            var totalPowerUsage = 0f;
 
             foreach (var arm in Arms)
             {
@@ -125,11 +178,12 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                     totalPowerUsage += reactor?.PowerConsumption ?? 0;
                 }
 
-                foreach (var thruster in Thrusters)
-                {
-                    thruster?.UpdateThrust(powerGeneration, NewtonsPerFusionPower);
-                    totalPowerUsage += thruster?.PowerConsumption ?? 0;
-                }
+            foreach (var thruster in Thrusters)
+            {
+                totalPowerUsage += thruster?.PowerConsumption ?? 0;
+
+                if (updateReactors)
+                    thruster?.UpdatePower(powerGeneration, NewtonsPerFusionPower);
             }
             else
             {
@@ -147,16 +201,32 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
             // Subtract power usage afterwards so that all reactors have the same stats.
             PowerGeneration = powerGeneration;
-            PowerCapacity = powerCapacity;
+            MaxPowerStored = powerCapacity;
+            PowerConsumption = totalPowerUsage;
             PowerGeneration -= totalPowerUsage;
 
             // Update PowerStored
             PowerStored += PowerGeneration;
-            PowerStored = Math.Min(PowerStored, PowerCapacity);
+            if (PowerStored > MaxPowerStored)
+            {
+                PowerStored = MaxPowerStored;
+                //PowerGeneration = 0;
+            }
         }
         public void UpdateTick()
         {
             UpdatePower();
+        }
+
+        private void RemoveBlockInLoops(MyEntity entity)
+        {
+            foreach (var loop in Arms.ToList())
+            {
+                if (loop.Parts.Contains((IMyCubeBlock)entity))
+                {
+                    Arms.Remove(loop);
+                }
+            }
         }
     }
 }
