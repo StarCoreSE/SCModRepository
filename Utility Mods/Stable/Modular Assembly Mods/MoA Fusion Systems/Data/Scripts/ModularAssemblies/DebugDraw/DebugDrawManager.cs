@@ -141,7 +141,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         {
             //MyTransparentGeometry.AddPointBillboard(MaterialDot, color, globalPos, 1.25f, 0, blendType: BlendTypeEnum.PostPP);
             var depthScale = ToAlwaysOnTop(ref globalPos);
-            MyTransparentGeometry.AddPointBillboard(MaterialDot, color * OnTopColorMul, globalPos, 0.5f * depthScale, 0,
+            MyTransparentGeometry.AddPointBillboard(MaterialDot, color * OnTopColorMul, globalPos, 0.35f * depthScale, 0,
                 blendType: BlendTypeEnum.LDR);
         }
 
@@ -155,7 +155,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             var length = (float)(destination - origin).Length();
             var direction = (destination - origin) / length;
 
-            MyTransparentGeometry.AddLineBillboard(MaterialSquare, color, origin, direction, length, 0.5f);
+            MyTransparentGeometry.AddLineBillboard(MaterialSquare, color, origin, direction, length, 0.35f);
 
             var depthScale = ToAlwaysOnTop(ref origin);
             direction *= depthScale;
