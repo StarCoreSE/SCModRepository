@@ -58,7 +58,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                 FusionManager.UpdateTick();
                 ConsumptionBar?.Update();
 
-                if (ModularAPI.IsDebug() && _ticks % 43 == 0)
+                if (ModularAPI.IsDebug())
                 {
                     MyVisualScriptLogicProvider.SetQuestlogLocal(true,
                         $"Fusion Systems ({FusionManager.FusionSystems.Count})");
