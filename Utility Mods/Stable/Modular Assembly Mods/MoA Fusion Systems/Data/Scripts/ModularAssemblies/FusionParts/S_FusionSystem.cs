@@ -74,16 +74,19 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                             continue;
                         connectedAccelerators.Add(connectedBlock);
                     }
-
+                    
                     foreach (var accelerator in connectedAccelerators)
                     {
+                        if (Arms.Any(arm => arm.Parts.Contains((IMyCubeBlock)accelerator)))
+                            continue;
+
                         bool accelsShareArm = false;
                         var newArm2 = new S_FusionArm(accelerator, "Caster_Feeder");
                         if (newArm2.IsValid)
                         {
                             Arms.Add(newArm2);
                             UpdatePower(true);
-
+                    
                             foreach (var accelerator2 in connectedAccelerators)
                                 if (accelerator2 != accelerator && newArm2.Parts.Contains((IMyCubeBlock) accelerator2))
                                     accelsShareArm = true;
