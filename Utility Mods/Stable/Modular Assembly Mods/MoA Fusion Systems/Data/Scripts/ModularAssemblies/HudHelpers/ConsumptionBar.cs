@@ -32,6 +32,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
                 Material = new Material("fusionBarBackground", Vector2.One * 100),
                 ParentAlignment = ParentAlignments.Bottom | ParentAlignments.InnerV,
                 DimAlignment = DimAlignments.Width,
+                Color = new Color(1, 1, 1, 0.75f),
             };
             
             _storageBackground = new TexturedBox(body)
@@ -39,6 +40,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
                 Material = new Material("fusionBarForeground", Vector2.One * 100),
                 ParentAlignment = ParentAlignments.Center,
                 DimAlignment = DimAlignments.Both,
+                Color = new Color(1, 1, 1, 1f),
             };
 
             BodyColor = new Color(0, 0, 0, 0);
@@ -47,8 +49,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
             header.Format = new GlyphFormat(GlyphFormat.Blueish.Color, TextAlignment.Center, 1f);
             header.Height = 30f;
 
-            HeaderText = "Fusion | 0% | 0s";
-            Size = new Vector2(150f, 400f);
+            HeaderText = "Fusion | 0s";
+            Size = new Vector2(100f, 300f);
             Offset = new Vector2(-HudMain.ScreenWidth/(2.01f*HudMain.ResScale) + Width/2, 0); // Relative to 1920x1080
         }
 
@@ -124,7 +126,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
                 timeToCharge = 0;
             }
 
-            HeaderText = $"Fusion | {Math.Round(storagePct*100)}% | {(totalFusionGeneration > 0 ? "+" : "-")}{Math.Round(timeToCharge)}s";
+            HeaderText = $"Fusion | {(totalFusionGeneration > 0 ? "+" : "-")}{Math.Round(timeToCharge)}s";
             _storageForeground.Height = storagePct * _storageBackground.Height;
             //_storageForeground.Origin = new Vector2D(_storageForeground.Origin.X, _storageForeground.Width * 0.75 - _storageBackground.Width*0.35); // THIS SHOULD BE RICHHUD!
         }
