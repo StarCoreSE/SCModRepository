@@ -98,7 +98,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
 
             // If boost is unsustainable, disable it.
             // If power draw exceeds power available, disable self until available.
-            if ((OverrideEnabled.Value && MemberSystem?.PowerStored <= MemberSystem?.PowerConsumption * 60) || !Block.IsWorking)
+            if ((OverrideEnabled.Value && MemberSystem?.PowerStored <= MemberSystem?.PowerConsumption * 30) || !Block.IsWorking)
             {
                 SetPowerBoost(false);
                 PowerConsumption = 0;
