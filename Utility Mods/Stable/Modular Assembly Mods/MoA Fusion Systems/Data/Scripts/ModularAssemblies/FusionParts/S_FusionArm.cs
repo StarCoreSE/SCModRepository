@@ -50,9 +50,11 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 {
                     case "Caster_Accelerator_90":
                         PowerGeneration += BlockPowerGeneration;
+                        PowerStorage += BlockPowerStorage * 0.05f;
                         break;
                     case "Caster_Accelerator_0":
                         PowerStorage += BlockPowerStorage;
+                        PowerGeneration += BlockPowerGeneration * 0.05f;
                         break;
                 }
 
