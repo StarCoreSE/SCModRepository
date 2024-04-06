@@ -7,7 +7,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>Type19_Driver</SubtypeId>
 			</Id>
-			<DisplayName>Type 19 'Merlin' Heavy Railgun Turret</DisplayName>
+			<DisplayName>[MID] Type 19 'Merlin' Heavy Railgun Turret</DisplayName>
 			<Description>
             Extended Ranged Turret Magazine Capacity: 8 Reload Speed: 21.25 seconds
             [6km Targeting Range]

@@ -44,7 +44,7 @@ namespace Scripts
             AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "APES_BEAM_Ammo", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
-            EnergyCost = 150f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
+            EnergyCost = 150f, //150MW //Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 1f, // Direct damage; one steel plate is worth 100.
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
@@ -95,9 +95,9 @@ namespace Scripts
             Pattern = new PatternDef
             {
                 Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo. Every 16th shot is high damage. 
-                    "",
+                    "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo", "APES_BEAM_Ammo_High_Damage",
                 },
-                Mode = Fragment, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
+                Mode = Weapon, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
                 TriggerChance = 1f, // This is %
                 Random = false, // This randomizes the number spawned at once, NOT the list order.
                 RandomMin = 1,
@@ -116,8 +116,8 @@ namespace Scripts
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
                 FallOff = new FallOffDef
                 {
-                    Distance = 500f, // Distance at which damage begins falling off.
-                    MinMultipler = 0.05f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
+                    Distance = 5000f, // Distance at which damage begins falling off.
+                    MinMultipler = 0.1f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
                 },
                 Grids = new GridSizeDef
                 {
@@ -271,7 +271,7 @@ namespace Scripts
                 Guidance = None, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
                 TargetLossDegree = 0f, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                MaxLifeTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
+                MaxLifeTime = 360, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 8000, // voxel phasing if you go above 5100
                 MaxTrajectory = 6400f, // Max Distance the projectile or beam can Travel.
@@ -354,7 +354,7 @@ namespace Scripts
                     {
                         Enable = true,
                         Length = 0.7f, //
-                        Width = 0.7f, //
+                        Width = 0.6f, //
                         Color = Color(red: 9, green: 2, blue: 1f, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
@@ -742,7 +742,7 @@ namespace Scripts
                         Enable = true,
                         Length = 0.7f, //
                         Width = 0.7f, //
-                        Color = Color(red: 9, green: 2, blue: 1f, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Color = Color(red: 36, green: 8, blue: 4f, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..

@@ -8,7 +8,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>Type25_Driver</SubtypeId>
 			</Id>
-			<DisplayName>Type 25 'Manticore' Heavy Railgun Turret</DisplayName>
+			<DisplayName>[MID] Type 25 'Manticore' Heavy Railgun Turret</DisplayName>
 			<Description>
               [6km Targeting Range]
               [Kinetic damage]

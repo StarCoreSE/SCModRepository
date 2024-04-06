@@ -7,7 +7,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>GoalieCasemate</SubtypeId>
 			</Id>
-			<DisplayName>Goalkeeper Casemate Flak Battery</DisplayName>
+			<DisplayName>[CA] Goalkeeper Casemate Flak Battery</DisplayName>
 			<Description>
               [1600 Targeting Range]
 			  [1200 Flak Range]
@@ -37,9 +37,9 @@
 			<MountPoints>
 				<MountPoint Side="Back" StartX="0" StartY="0" EndX="5" EndY="5" />
 				<MountPoint Side="Top" StartX="0" StartY="0" EndX="5" EndY="5" />
-				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="3" />
-				<MountPoint Side="Left" StartX="0" StartY="0" EndX="5" EndY="3" />
-				<MountPoint Side="Right" StartX="0" StartY="0" EndX="5" EndY="3" />
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="5" />
+				<MountPoint Side="Left" StartX="0" StartY="0" EndX="5" EndY="5" />
+				<MountPoint Side="Right" StartX="0" StartY="0" EndX="5" EndY="5" />
 			</MountPoints>
 			<BlockPairName>K_HS_Damnation</BlockPairName>
 			<EdgeType>Light</EdgeType>

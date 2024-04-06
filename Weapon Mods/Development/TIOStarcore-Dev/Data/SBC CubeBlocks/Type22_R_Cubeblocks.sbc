@@ -8,7 +8,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>Type22_Driver</SubtypeId>
 			</Id>
-			<DisplayName>Type 22 'Medusa' Heavy Railgun Turret</DisplayName>
+			<DisplayName>[MID] Type 22 'Medusa' Heavy Railgun Turret</DisplayName>
 			<Description>
             Extended Ranged Turret Magazine Capacity: 8 Reload Speed: 21.25 seconds
             [6km Targeting Range]

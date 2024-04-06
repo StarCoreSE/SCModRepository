@@ -7,7 +7,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>UnguidedRocketTurret</SubtypeId>
 			</Id>
-			<DisplayName>AX 'Spitfire' Light Rocket Turret</DisplayName>
+			<DisplayName>[MID] AX 'Spitfire' Light Rocket Turret</DisplayName>
 			<Description>[3km Targeting Range [500 m/s]]
               [Energy damage]
 			  [1 HP Unguided Missiles]

@@ -31,7 +31,7 @@ namespace Scripts
             AmmoMagazine = "Energy",
             AmmoRound = "SmallDualLaserAmmo",
             HybridRound = false, //AmmoMagazine based weapon with energy cost
-            EnergyCost = 0.12f, //120MW (((EnergyCost * DefaultDamage) * ShotsPerSecond) * BarrelsPerShot) * ShotsPerBarrel
+            EnergyCost = 0.09f, //90MW@0.09  //120MW@0.12 //(((EnergyCost * DefaultDamage) * ShotsPerSecond) * BarrelsPerShot) * ShotsPerBarrel = 1000
             BaseDamage = 500f,
             Mass = 0, // in kilograms
             Health = 0, // 0 = disabled, otherwise how much damage it can take from other trajectiles before dying.
@@ -75,13 +75,13 @@ namespace Scripts
                 MaxIntegrity = 0f, // 0 = disabled, 1000 = any blocks with currently integrity above 1000 will be immune to damage.
                 DamageVoxels = false, // true = voxels are vulnerable to this weapon
                 SelfDamage = false, // true = allow self damage.
-                HealthHitModifier = 0.5f, // defaults to a value of 1, this setting modifies how much Health is subtracted from a projectile per hit (1 = per hit).
+                HealthHitModifier = 1f, // defaults to a value of 1, this setting modifies how much Health is subtracted from a projectile per hit (1 = per hit).
                 VoxelHitModifier = 1,
-                Characters = 7f,
+                Characters = -1f,
                 FallOff = new FallOffDef
                 {
-                    Distance = 2500, // Distance at which max damage begins falling off.
-                    MinMultipler = 0.1f, // value from 0.0f to 1f where 0.1f would be a min damage of 10% of max damage.
+                    Distance = 1500, // Distance at which max damage begins falling off.
+                    MinMultipler = 0.6f, // value from 0.0f to 1f where 0.1f would be a min damage of 10% of max damage.
                 },
                 Grids = new GridSizeDef
                 {
@@ -93,11 +93,11 @@ namespace Scripts
                     Armor = -1f,
                     Light = -1f,
                     Heavy = -1f,
-                    NonArmor = -1f,
+                    NonArmor = 0.8f,
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 1.3f, //Heavy laser type.
+                    Modifier = 1.35f, //Heavy laser type.
                     Type = Default,
                     BypassModifier = -2f,
                 },
@@ -218,7 +218,7 @@ namespace Scripts
                 MaxLifeTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 AccelPerSec = 0f,
                 DesiredSpeed = 0,
-                MaxTrajectory = 2200f,
+                MaxTrajectory = 3200f,
                 //FieldTime was here, it's dead now is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed
