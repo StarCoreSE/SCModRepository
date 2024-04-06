@@ -18,6 +18,18 @@
   
     <Entry Class="EliteConsumables" BlueprintSubtypeId="NovaGrav1" />
     <Entry Class="Ammo" BlueprintSubtypeId="NovaGrav1" />
+
+    <Entry Class="EliteConsumables" BlueprintSubtypeId="PlasmaTorp" />
+    <Entry Class="Ammo" BlueprintSubtypeId="PlasmaTorp" />
+
+    <Entry Class="EliteConsumables" BlueprintSubtypeId="ShortBurnTorp" />
+    <Entry Class="Ammo" BlueprintSubtypeId="ShortBurnTorp" />
+
+    <Entry Class="EliteConsumables" BlueprintSubtypeId="MeltaTorp" />
+    <Entry Class="Ammo" BlueprintSubtypeId="MeltaTorp" />
+
+    <Entry Class="EliteConsumables" BlueprintSubtypeId="VortexTorp" />
+    <Entry Class="Ammo" BlueprintSubtypeId="VortexTorp" />
   
   </BlueprintClassEntries>
 </Definitions>

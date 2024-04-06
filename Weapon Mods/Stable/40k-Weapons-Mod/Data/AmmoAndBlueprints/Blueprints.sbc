@@ -17,11 +17,11 @@
 			  <Item Amount="20" TypeId="Ingot" SubtypeId="Cobalt" />
 		  </Prerequisites>
 		  <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="MacroCannonAmmoMag" />
-		  <BaseProductionTimeInSeconds>20</BaseProductionTimeInSeconds>
+		  <BaseProductionTimeInSeconds>10</BaseProductionTimeInSeconds>
 	  </Blueprint>
-	  
-	  
-	  <Blueprint>
+
+
+    <Blueprint>
 		  <Id>
 			  <TypeId>BlueprintDefinition</TypeId>
 			  <SubtypeId>HeavyBolterMagazine</SubtypeId>
@@ -91,7 +91,7 @@
         <Item Amount="30" TypeId="Ingot" SubtypeId="Platinum" />
 		  </Prerequisites>
 		  <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="NovaPlas1" />
-		  <BaseProductionTimeInSeconds>60</BaseProductionTimeInSeconds>
+		  <BaseProductionTimeInSeconds>120</BaseProductionTimeInSeconds>
 	  </Blueprint>
 
     <Blueprint>
@@ -112,9 +112,92 @@
         <Item Amount="6" TypeId="Component" SubtypeId="GravityGenerator" />
       </Prerequisites>
       <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="NovaGrav1" />
-      <BaseProductionTimeInSeconds>60</BaseProductionTimeInSeconds>
+      <BaseProductionTimeInSeconds>120</BaseProductionTimeInSeconds>
     </Blueprint>
 
-	  
+
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>PlasmaTorp</SubtypeId>
+      </Id>
+      <DisplayName>Plasma Warhead Torpedo</DisplayName>
+      <Icon>Textures\icons\GothicTorpLauncher.dds</Icon>
+      <Prerequisites>
+        <Item Amount="600" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="200" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="30" TypeId="Ingot" SubtypeId="Silicon" />
+        <Item Amount="100" TypeId="Ingot" SubtypeId="Magnesium" />
+        <Item Amount="20" TypeId="Ingot" SubtypeId="Cobalt" />
+        <Item Amount="30" TypeId="Ingot" SubtypeId="Uranium" />
+        <Item Amount="3" TypeId="Ingot" SubtypeId="Platinum" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="PlasmaTorp" />
+      <BaseProductionTimeInSeconds>20</BaseProductionTimeInSeconds>
+    </Blueprint>
+
+
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>ShortBurnTorp</SubtypeId>
+      </Id>
+      <DisplayName>Short Burn Plasma Torpedo</DisplayName>
+      <Icon>Textures\icons\GothicTorpLauncher.dds</Icon>
+      <Prerequisites>
+        <Item Amount="600" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="200" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="30" TypeId="Ingot" SubtypeId="Silicon" />
+        <Item Amount="80" TypeId="Ingot" SubtypeId="Magnesium" />
+        <Item Amount="30" TypeId="Ingot" SubtypeId="Uranium" />
+        <Item Amount="20" TypeId="Ingot" SubtypeId="Cobalt" />
+        <Item Amount="3" TypeId="Ingot" SubtypeId="Platinum" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="ShortBurnTorp" />
+      <BaseProductionTimeInSeconds>20</BaseProductionTimeInSeconds>
+    </Blueprint>
+
+
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>MeltaTorp</SubtypeId>
+      </Id>
+      <DisplayName>Melta Warhead Torpedo</DisplayName>
+      <Icon>Textures\icons\GothicTorpLauncher.dds</Icon>
+      <Prerequisites>
+        <Item Amount="600" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="200" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="30" TypeId="Ingot" SubtypeId="Silicon" />
+        <Item Amount="300" TypeId="Ingot" SubtypeId="Magnesium" />
+        <Item Amount="20" TypeId="Ingot" SubtypeId="Cobalt" />
+        <Item Amount="3" TypeId="Ingot" SubtypeId="Platinum" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="MeltaTorp" />
+      <BaseProductionTimeInSeconds>20</BaseProductionTimeInSeconds>
+    </Blueprint>
+
+    
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>VortexTorp</SubtypeId>
+      </Id>
+      <DisplayName>Vortex Warhead Torpedo</DisplayName>
+      <Icon>Textures\icons\GothicTorpLauncher.dds</Icon>
+      <Prerequisites>
+        <Item Amount="600" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="200" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="30" TypeId="Ingot" SubtypeId="Silicon" />
+        <Item Amount="100" TypeId="Ingot" SubtypeId="Magnesium" />
+        <Item Amount="20" TypeId="Ingot" SubtypeId="Cobalt" />
+        <Item Amount="30" TypeId="Ingot" SubtypeId="Platinum" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="VortexTorp" />
+      <BaseProductionTimeInSeconds>20</BaseProductionTimeInSeconds>
+    </Blueprint>
+
+    
+
   </Blueprints>
 </Definitions>

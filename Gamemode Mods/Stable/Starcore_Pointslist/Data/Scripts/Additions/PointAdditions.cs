@@ -507,8 +507,11 @@ Cat_Darth40kWeapons@20;
 				NovaCannon@800;
 				MacroCannon@200;
 				LanceBattery@400;
-
+				LanceLightBattery@280;
+				LanceBattery@650;
+				GothicTorp@300;
 				
+
 				65_Launcher_FixedMount@350;
 				Hellfire_Laser_Block@666;
 
