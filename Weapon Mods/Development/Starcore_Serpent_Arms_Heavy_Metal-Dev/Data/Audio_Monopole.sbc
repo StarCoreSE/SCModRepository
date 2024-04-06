@@ -54,11 +54,11 @@
       
     <DynamicMusicAmount>35</DynamicMusicAmount>
       <Volume>1</Volume>
-      <Pitch>-5</Pitch>
       <Loopable>true</Loopable>
       <Waves>
         <Wave Type="D3">
-          <Loop>Audio\Monopole\RotaryGauss_Distant_Loopable.wav</Loop>
+          <Loop>Audio\Monopole\thwump_distant.wav</Loop>
+          <End>Audio\Monopole\Monopole_Shutdown_Distant.wav</End>
         </Wave>
       </Waves>
     </Sound>
@@ -69,7 +69,7 @@
         <SubtypeId>Monopole_Firing</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>4000</MaxDistance>
+      <MaxDistance>3000</MaxDistance>
 		  <DistantSounds>
 			  <DistantSound DistanceCrossfade="10" Distance="1750" Sound="K_SA_RotaryGauss_Distant" />
 		  </DistantSounds>
@@ -79,7 +79,7 @@
       <Loopable>true</Loopable>
       <Waves>
         <Wave Type="D3">
-          <Loop>Audio\Monopole\RotaryGauss_Loopable_2.wav</Loop>
+          <Loop>Audio\Monopole\thwump.wav</Loop>
           <End>Audio\Monopole\Monopole_End_4.wav</End>
         </Wave>
       </Waves>
