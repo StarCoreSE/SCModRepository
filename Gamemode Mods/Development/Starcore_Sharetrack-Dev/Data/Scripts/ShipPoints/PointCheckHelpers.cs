@@ -297,7 +297,6 @@ internal static class PointCheckHelpers
 {"LanceBattery",true},
 {"LanceLightBattery",true},
 {"LanceHeavyBattery",true},
-{"LanceBattery",true},
 {"longsword",true},
 {"65_Launcher_FixedMount",true},
 {"Hellfire_Laser_Block",true},
