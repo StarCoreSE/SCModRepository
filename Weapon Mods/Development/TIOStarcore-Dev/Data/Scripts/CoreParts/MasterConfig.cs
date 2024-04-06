@@ -37,8 +37,7 @@
                 DualPulseLaserTurret,
                 DualSnubnosedLaserTurret,
                 QuadCarronadeTurret,
-                LB_5x,
-                
+
                 //QuadBarrelAutocannon,
                 //B8T_Flare,
                 //HeavyLanceBattery,
