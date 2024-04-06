@@ -7,7 +7,7 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>Thagomizer</SubtypeId>
 		  </Id>
-		  <DisplayName>Naval RL-10x 'Avalanche' Medium Range Launchers</DisplayName>
+		  <DisplayName>[CA] Naval RL-10x 'Avalanche' Medium Range Launchers</DisplayName>
 		  <Description>
 			  10 Barrels of High Explosive Rockets
 			  400m minimum range, 13500m max
@@ -69,7 +69,7 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>Thagomizer_Flipped</SubtypeId>
 		  </Id>
-		  <DisplayName>Naval RL-10x 'Avalanche' Medium Range Launchers</DisplayName>
+		  <DisplayName>[MID] Naval RL-10x 'Avalanche' Medium Range Launchers</DisplayName>
 		  <Description>
 			  10 Barrels of High Explosive Rockets
 			  400m minimum range, 13500m max
@@ -132,7 +132,7 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>Thagomizer_Angled</SubtypeId>
 		  </Id>
-		  <DisplayName>Naval RL-10x 'Avalanche' Angled Medium Range Launchers</DisplayName>
+		  <DisplayName>[MID] Naval RL-10x 'Avalanche' Angled Medium Range Launchers</DisplayName>
 		  <Description>
 			  10 Barrels of High Explosive Rockets
 			  400m minimum range, 13500m max
@@ -198,7 +198,7 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>Thagomizer_Angled_Flipped</SubtypeId>
 		  </Id>
-		  <DisplayName>Naval RL-10x 'Avalanche' Angled Medium Range Launchers</DisplayName>
+		  <DisplayName>[MID] Naval RL-10x 'Avalanche' Angled Medium Range Launchers</DisplayName>
 		  <Description>
 			  10 Barrels of High Explosive Rockets
 			  400m minimum range, 13500m max

@@ -7,7 +7,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>X4_7x7_HeavyTurret</SubtypeId>
 			</Id>
-			<DisplayName>X4 'Demolisher' Heavy Plasma Howitzer</DisplayName>
+			<DisplayName>[CA] X4 'Demolisher' Heavy Plasma Howitzer</DisplayName>
 			<Description>[6.5km Targeting Range [750 m/s]]
               [Energy damage]
               [High Damage, Large AOE, Long Reload, Innaccurate]

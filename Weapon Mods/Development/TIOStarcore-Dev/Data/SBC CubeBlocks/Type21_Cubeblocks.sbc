@@ -8,7 +8,7 @@
                 <TypeId>ConveyorSorter</TypeId>
                 <SubtypeId>Type21_Artillery</SubtypeId>
             </Id>
-            <DisplayName>Type 21 'Mars' Heavy Turret</DisplayName>
+            <DisplayName>[MID] Type 21 'Mars' Heavy Turret</DisplayName>
             <Description>
              A pair of extremely advanced artillery pieces, housed inside a fully mechanized and automated weapons control system.  We pair both an extremely large bore diameter with an exceptionally high muzzle velocity, just below the performance seen in electromagnetically assisted fire systems.  This ensures that you will put High Explosive pain on your target before the enemy can do the same to you.  Sold in standardized shipping container housings that feature fully automated repair algorithms to extend useful barrel life and even repair minor combat damages.
               [6km Targeting Range, 52ft dispersion circle at 20,000 ft]

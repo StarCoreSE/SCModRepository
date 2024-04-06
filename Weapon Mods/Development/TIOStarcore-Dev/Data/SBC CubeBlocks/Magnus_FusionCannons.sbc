@@ -16,7 +16,7 @@
 				<TypeId>LargeMissileTurret</TypeId> -->
 				<SubtypeId>KreegMagnetarCannon</SubtypeId>
 			</Id>
-			<DisplayName>Magnus Fusion Cannons</DisplayName>
+			<DisplayName>[CA] Magnus Fusion Cannons</DisplayName>
 			<Description>[6km Targeting Range [1200 m/s]]
               [Energy damage]
               [Anti-Shield]

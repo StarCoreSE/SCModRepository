@@ -194,9 +194,9 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = true,
-                    Radius = 6f, //8 Meters
-                    Damage = 16500,
-                    Depth = 2f,
+                    Radius = 1f, //8 Meters
+                    Damage = 500,
+                    Depth = 0f,
                     MaxAbsorb = 0f,
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
@@ -281,7 +281,7 @@ namespace Scripts
                 Guidance = None, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
                 TargetLossDegree = 0f, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                MaxLifeTime = 200, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
+                MaxLifeTime = 30, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 900, // voxel phasing if you go above 5100
                 MaxTrajectory = 2500f, // Max Distance the projectile or beam can Travel.

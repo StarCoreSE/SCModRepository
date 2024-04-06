@@ -7,7 +7,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>DrunkRocketTurret</SubtypeId>
 			</Id>
-			<DisplayName>EX 'Bonfire' Guided Rocket Turret</DisplayName>
+			<DisplayName>[MID] EX 'Bonfire' Guided Rocket Turret</DisplayName>
 			<Description>[4km Targeting Range [300 m/s]]
               [Energy damage]
 			  [3 HP Guided Missiles]

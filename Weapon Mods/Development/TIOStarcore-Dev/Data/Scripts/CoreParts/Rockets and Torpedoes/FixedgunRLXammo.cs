@@ -436,7 +436,6 @@ namespace Scripts
         };
 
 
-
         private AmmoDef LRX_Heavy_G => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
@@ -445,7 +444,7 @@ namespace Scripts
             EnergyCost = 0f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 10000f, // Direct damage; one steel plate is worth 100.
             Mass = 140f, // In kilograms; how much force the impact will apply to the target.
-            Health = 40, //Watch this against Erebos 100+ damage aoe in future!// How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            Health = 60, //40 //Watch this against Erebos 100+ damage aoe in future!// How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself. 
                                //float.MaxValue will drop the weapon to the first build state and destroy all components used for construction
@@ -675,10 +674,10 @@ namespace Scripts
             Trajectory = new TrajectoryDef
             {
                 Guidance = Smart, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
-                TargetLossDegree = 180f, // Degrees, Is pointed forward
+                TargetLossDegree = 90f, // Degrees, Is pointed forward
                 TargetLossTime = 60, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 900, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
-                AccelPerSec = 20f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
+                AccelPerSec = 40f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 900, // voxel phasing if you go above 5100
                 MaxTrajectory = 13500f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
@@ -688,15 +687,15 @@ namespace Scripts
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 Smarts = new SmartsDef
                 {
-                    Inaccuracy = 10f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
-                    Aggressiveness = 2f, // controls how responsive tracking is.
+                    Inaccuracy = 12f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
+                    Aggressiveness = 3f, // controls how responsive tracking is.
                     MaxLateralThrust = 0.3f, // controls how sharp the trajectile may turn
                     TrackingDelay = 300, // Measured in Shape diameter units traveled.
                     MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
                     CheckFutureIntersection = false, // Utilize obstacle avoidance for drones
                     MaxTargets = 0, // Number of targets allowed before ending, 0 = unlimited
-                    NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
+                    NoTargetExpire = true, // Expire without ever having a target at TargetLossTime
                     Roam = false, // Roam current area after target loss
                     KeepAliveAfterTargetLoss = false, // Whether to stop early death of projectile on target loss
                     OffsetRatio = 0f, // The ratio to offset the random direction (0 to 1) 

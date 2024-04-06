@@ -538,18 +538,20 @@
         <SubtypeId>HAS_AvengerBRRT</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>4500</MaxDistance>
+      <MaxDistance>5000</MaxDistance>
 		  <DistantSounds>
 			  <DistantSound DistanceCrossfade="0" Distance="200" Sound="HAS_AvengerShotDist1" />
 			  <DistantSound DistanceCrossfade="0" Distance="400" Sound="HAS_AvengerShotDist2" />
 			  <DistantSound DistanceCrossfade="0" Distance="800" Sound="HAS_AvengerShotDistC" />        
         <DistantSound DistanceCrossfade="0" Distance="1200" Sound="HAS_AvengerShotDist3" />
-        <DistantSound DistanceCrossfade="0" Distance="2400" Sound="HAS_AvengerShotDist4" />
-        <DistantSound DistanceCrossfade="0" Distance="3600" Sound="HAS_AvengerShotDist5" />
+        <DistantSound DistanceCrossfade="0" Distance="2200" Sound="HAS_AvengerShotDist4" />
+        <DistantSound DistanceCrossfade="0" Distance="3300" Sound="HAS_AvengerShotDist5" />
 		  </DistantSounds>
       <!-- Prevents this sound from having this many active playbacks at once, 0 = infinite. -->
-      <SoundLimit>2</SoundLimit>
-      <Volume>3</Volume>
+      <SoundLimit>1</SoundLimit>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>50</DynamicMusicAmount>
+      <Volume>2</Volume>
       <Loopable>true</Loopable>
       <Waves>
         <Wave Type="D3">
@@ -566,9 +568,9 @@
         <SubtypeId>HAS_AvengerShotDist1</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>4500</MaxDistance>
-      <SoundLimit>2</SoundLimit>
-      <Volume>3</Volume>
+      <MaxDistance>5000</MaxDistance>
+      <SoundLimit>1</SoundLimit>
+      <Volume>2</Volume>
       <Loopable>true</Loopable>
       <Waves>
         <Wave Type="D3">
@@ -583,9 +585,9 @@
         <SubtypeId>HAS_AvengerShotDist2</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>4500</MaxDistance>
-      <SoundLimit>2</SoundLimit>
-      <Volume>2</Volume>
+      <MaxDistance>5000</MaxDistance>
+      <SoundLimit>1</SoundLimit>
+      <Volume>1.5</Volume>
       <Loopable>true</Loopable>
       <Waves>
         <Wave Type="D3">
@@ -600,8 +602,8 @@
         <SubtypeId>HAS_AvengerShotDistC</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>4500</MaxDistance>
-      <SoundLimit>2</SoundLimit>
+      <MaxDistance>5000</MaxDistance>
+      <SoundLimit>1</SoundLimit>
       <Volume>1</Volume>
       <Loopable>true</Loopable>
       <Waves>
@@ -618,9 +620,9 @@
         <SubtypeId>HAS_AvengerShotDist3</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>4500</MaxDistance>
-      <SoundLimit>2</SoundLimit>
-      <Volume>5</Volume>
+      <MaxDistance>5000</MaxDistance>
+      <SoundLimit>1</SoundLimit>
+      <Volume>4</Volume>
       <Loopable>true</Loopable>
       <Waves>
         <Wave Type="D3">
@@ -637,9 +639,9 @@
         <SubtypeId>HAS_AvengerShotDist4</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>4500</MaxDistance>
-      <SoundLimit>2</SoundLimit>
-      <Volume>3</Volume>
+      <MaxDistance>5000</MaxDistance>
+      <SoundLimit>1</SoundLimit>
+      <Volume>2.5</Volume>
       <Loopable>true</Loopable>
       <Waves>
         <Wave Type="D3">
@@ -656,8 +658,8 @@
         <SubtypeId>HAS_AvengerShotDist5</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>4500</MaxDistance>
-      <SoundLimit>2</SoundLimit>
+      <MaxDistance>5000</MaxDistance>
+      <SoundLimit>1</SoundLimit>
       <Volume>1.5</Volume>
       <Loopable>true</Loopable>
       <Waves>
@@ -699,10 +701,58 @@
       </Waves>
     </Sound>
 
+	<!--Avenger Simple Hit-->
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>HAS2_AvengerHit</SubtypeId>
+		  </Id>
+      <DistantSounds>
+			<DistantSound DistanceCrossfade="0" Distance="60" Sound="HAS2_AvengerHitDist1" />
+      <DistantSound DistanceCrossfade="0" Distance="120" Sound="HAS2_AvengerHitDist2" />
+		  </DistantSounds>
+		  <Category>WEP_EXPL</Category>
+		  <MaxDistance>200</MaxDistance>
+		  <Volume>1</Volume>
+		  <PitchVariation>40</PitchVariation>
+		  <Waves>
+			  <Wave Type="D3">
+          <Start>Audio\Avenger\AvengerHit.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>      
+    <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>HAS2_AvengerHitDist1</SubtypeId>
+		  </Id>
+		  <Category>WEP_EXPL</Category>
+		  <MaxDistance>200</MaxDistance>
+		  <Volume>1</Volume>
+		  <PitchVariation>30</PitchVariation>
+		  <Waves>
+			  <Wave Type="D3">
+          <Start>Audio\Avenger\AvengerHitD1.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>HAS2_AvengerHitDist2</SubtypeId>
+		  </Id>
+		  <Category>WEP_EXPL</Category>
+		  <MaxDistance>200</MaxDistance>
+		  <Volume>1</Volume>
+		  <PitchVariation>20</PitchVariation>
+		  <Waves>
+			  <Wave Type="D3">
+          <Start>Audio\Avenger\AvengerHitD2.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
 
-
-
-	<!--Avenger Hit-->
+	<!--Avenger Complex Hit-->
 	  <Sound>
 		  <Id>
 			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>

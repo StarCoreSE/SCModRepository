@@ -8,9 +8,10 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>NavalHeavyGaussRifle</SubtypeId>
 		  </Id>
-		  <DisplayName>'Grizly' Naval Heavy Gauss Rifle</DisplayName>
+		  <DisplayName>[CA]'Grizzly' Naval Heavy Gauss Rifle</DisplayName>
 		  <Description>
-		  7km Range. Kinetic. Short Ranged.
+		  9km Range. Kinetic. Short Ranged. 4 Second Targeting Beam, 1/60th of a second Hypervelocity Slug
+		  WIP, trying to make a hitscan feel like a bullet is hard.
 
 		  </Description>
 		  <Icon>Textures\GUI\Icons\Cubes\LBX5.dds</Icon>
@@ -48,9 +49,9 @@
 		  </MountPoints>
 		  <MirroringY>Z</MirroringY>
 		  <MirroringZ>Y</MirroringZ>
-		  <BlockPairName>YourBlockPairName</BlockPairName>
+		  <BlockPairName>Helldivers2RailgunStratagem</BlockPairName>
 		  <EdgeType>Light</EdgeType>
-		  <BuildTimeSeconds>120</BuildTimeSeconds>
+		  <BuildTimeSeconds>160</BuildTimeSeconds>
 		  <DisassembleRatio>5</DisassembleRatio>
 		  <NavigationDefinition>Default</NavigationDefinition>
 		  <WeaponDefinitionId Subtype="JN_175Fixed" />
