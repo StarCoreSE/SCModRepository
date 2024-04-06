@@ -171,7 +171,7 @@ namespace Scripts {
                     SpinFree = true, // Spin barrel while not firing.
                     StayCharged = false, // Will start recharging whenever power cap is not full.
                     MaxActiveProjectiles = 0, // Maximum number of drones in flight (only works for drone launchers)
-                    MaxReloads = 3, // Maximum number of reloads in the LIFETIME of a weapon
+                    MaxReloads = 5, // Maximum number of reloads in the LIFETIME of a weapon
                     GoHomeToReload = false, // Tells the weapon it must be in the home position before it can reload.
                     DropTargetUntilLoaded = false, // If true this weapon will drop the target when its out of ammo and until its reloaded.
                 },
@@ -224,7 +224,7 @@ namespace Scripts {
             Ammos = new[] {
                 GothicTorpPlas, GothicTorpPlas2, GothicTorpShortBurn, GothicTorpShortBurn2, GothicTorpMelt, GothicTorpMelt2, GothicTorpVortex, GothicTorpVortex2, TorpGrav,   // Must list all primary, shrapnel, and pattern ammos.
             },
-            //Animations = Weapon75_Animation,
+            Animations = GothicTorpLauncherAnimation,
             //Upgrades = UpgradeModules,
         };
         // Don't edit below this line.

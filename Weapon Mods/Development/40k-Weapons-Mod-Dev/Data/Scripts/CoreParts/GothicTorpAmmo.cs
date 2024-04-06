@@ -191,9 +191,9 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = true,
-                    Radius = 1f, // Radius of AOE effect, in meters.
-                    Damage = 1f,
-                    Depth = 0f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
+                    Radius = 10f, // Radius of AOE effect, in meters.
+                    Damage = 250000f,
+                    Depth = 6f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
@@ -202,13 +202,13 @@ namespace Scripts
                     //.Squeeze does little damage to the middle, but rapidly increases damage toward max radius
                     //.Pooled damage behaves in a pooled manner that once exhausted damage ceases.
                     //.Exponential drops off exponentially.  Does not scale to max radius
-                    ArmOnlyOnHit = false, // Detonation only is available, After it hits something, when this is true. IE, if shot down, it won't explode.
+                    ArmOnlyOnHit = true, // Detonation only is available, After it hits something, when this is true. IE, if shot down, it won't explode.
                     MinArmingTime = 0, // In ticks, before the Ammo is allowed to explode, detonate or similar; This affects shrapnel spawning.
-                    NoVisuals = true,
-                    NoSound = true,
+                    NoVisuals = false,
+                    NoSound = false,
                     ParticleScale = 1f,
-                    CustomParticle = "particleName", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "soundName", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "TorpPlasmaHitexplosion", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "GothicTorpHit", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
             },
@@ -321,7 +321,7 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "RLX_Travel_Smoke", //ShipWelderArc
+                        Name = "GothicTorpTrail", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -360,7 +360,7 @@ namespace Scripts
                         Enable = true,
                         Length = 90f, //
                         Width = 5f, //
-                        Color = Color(red: 20, green: 20, blue: 0.5f, alpha: 0.4f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Color = Color(red: 15, green: 15, blue: 0.5f, alpha: 0.4f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         FactionColor = DontUse, // DontUse, Foreground, Background.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
@@ -394,7 +394,7 @@ namespace Scripts
                         },
                         TextureMode = Normal,
                         DecayTime = 30, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 20, green: 20f, blue: 0.5f, alpha: 0.3f),
+                        Color = Color(red: 15, green: 15, blue: 0.5f, alpha: 0.3f),
                         FactionColor = DontUse, // DontUse, Foreground, Background.
                         Back = false,
                         CustomWidth = 2,
@@ -590,7 +590,7 @@ namespace Scripts
                     Enable = true,
                     Radius = 10f, // Radius of AOE effect, in meters.
                     Damage = 250000f,
-                    Depth = 6f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
+                    Depth = 8f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
@@ -604,7 +604,7 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1f,
-                    CustomParticle = "RLX_Impact", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "TorpPlasmaHitexplosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "GothicTorpHit", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
@@ -697,7 +697,7 @@ namespace Scripts
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
                     Roam = false, // Roam current area after target loss
                     KeepAliveAfterTargetLoss = false, // Whether to stop early death of projectile on target loss
-                    OffsetRatio = 0.8f, // The ratio to offset the random direction (0 to 1) 
+                    OffsetRatio = 0.6f, // The ratio to offset the random direction (0 to 1) 
                     OffsetTime = 60, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
                 },
                 Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
@@ -730,7 +730,7 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "RLX_Travel_Smoke", //ShipWelderArc
+                        Name = "GothicTorpTrail", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -1010,13 +1010,13 @@ namespace Scripts
                     //.Squeeze does little damage to the middle, but rapidly increases damage toward max radius
                     //.Pooled damage behaves in a pooled manner that once exhausted damage ceases.
                     //.Exponential drops off exponentially.  Does not scale to max radius
-                    ArmOnlyOnHit = false, // Detonation only is available, After it hits something, when this is true. IE, if shot down, it won't explode.
+                    ArmOnlyOnHit = true, // Detonation only is available, After it hits something, when this is true. IE, if shot down, it won't explode.
                     MinArmingTime = 0, // In ticks, before the Ammo is allowed to explode, detonate or similar; This affects shrapnel spawning.
                     NoVisuals = true,
                     NoSound = true,
                     ParticleScale = 1f,
-                    CustomParticle = "particleName", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "soundName", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "TorpPlasmaHitexplosion", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "GothicTorpHit", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
             },
@@ -1129,7 +1129,7 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "RLX_Travel_Smoke", //ShipWelderArc
+                        Name = "GothicTorpTrail", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -1168,7 +1168,7 @@ namespace Scripts
                         Enable = true,
                         Length = 90f, //
                         Width = 5f, //
-                        Color = Color(red: 30, green: 10, blue: 0.5f, alpha: 0.5f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Color = Color(red: 30, green: 25, blue: 10f, alpha: 0.5f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         FactionColor = DontUse, // DontUse, Foreground, Background.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
@@ -1202,7 +1202,7 @@ namespace Scripts
                         },
                         TextureMode = Normal,
                         DecayTime = 30, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 30, green: 10f, blue: 0.5f, alpha: 0.3f),
+                        Color = Color(red: 25, green: 10f, blue: 0.5f, alpha: 0.3f),
                         FactionColor = DontUse, // DontUse, Foreground, Background.
                         Back = false,
                         CustomWidth = 2,
@@ -1412,7 +1412,7 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1f,
-                    CustomParticle = "RLX_Impact", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "TorpPlasmaHitexplosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "GothicTorpHit", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
@@ -1505,7 +1505,7 @@ namespace Scripts
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
                     Roam = false, // Roam current area after target loss
                     KeepAliveAfterTargetLoss = false, // Whether to stop early death of projectile on target loss
-                    OffsetRatio = 0.8f, // The ratio to offset the random direction (0 to 1) 
+                    OffsetRatio = 0.5f, // The ratio to offset the random direction (0 to 1) 
                     OffsetTime = 60, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
                 },
                 Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
@@ -1538,7 +1538,7 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "RLX_Travel_Smoke", //ShipWelderArc
+                        Name = "GothicTorpTrail", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -1578,7 +1578,7 @@ namespace Scripts
                         Enable = true,
                         Length = 150f, //
                         Width = 1.5f, //
-                        Color = Color(red: 30, green: 10f, blue: 0.50f, alpha: 0.4f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Color = Color(red: 25, green: 10f, blue: 0.50f, alpha: 0.4f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         FactionColor = DontUse, // DontUse, Foreground, Background.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
@@ -1612,7 +1612,7 @@ namespace Scripts
                         },
                         TextureMode = Normal,
                         DecayTime = 80, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 30, green: 10f, blue: 0.5f, alpha: 0.3f),
+                        Color = Color(red: 25, green: 10f, blue: 0.5f, alpha: 0.3f),
                         FactionColor = DontUse, // DontUse, Foreground, Background.
                         Back = true,
                         CustomWidth = 1.5f,
@@ -1937,7 +1937,7 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "RLX_Travel_Smoke", //ShipWelderArc
+                        Name = "GothicTorpTrail", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -1976,7 +1976,7 @@ namespace Scripts
                         Enable = true,
                         Length = 90f, //
                         Width = 5f, //
-                        Color = Color(red: 30, green: 1, blue: 0.5f, alpha: 0.4f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Color = Color(red: 35, green: 1, blue: 0.5f, alpha: 0.4f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         FactionColor = DontUse, // DontUse, Foreground, Background.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
@@ -2010,7 +2010,7 @@ namespace Scripts
                         },
                         TextureMode = Normal,
                         DecayTime = 30, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 30, green: 1f, blue: 0.5f, alpha: 0.3f),
+                        Color = Color(red: 35, green: 1f, blue: 0.5f, alpha: 0.3f),
                         FactionColor = DontUse, // DontUse, Foreground, Background.
                         Back = false,
                         CustomWidth = 2,
@@ -2220,7 +2220,7 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1f,
-                    CustomParticle = "RLX_Impact", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "TorpMeltaHitexplosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "GothicTorpHit", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
@@ -2313,7 +2313,7 @@ namespace Scripts
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
                     Roam = false, // Roam current area after target loss
                     KeepAliveAfterTargetLoss = false, // Whether to stop early death of projectile on target loss
-                    OffsetRatio = 0.8f, // The ratio to offset the random direction (0 to 1) 
+                    OffsetRatio = 0.5f, // The ratio to offset the random direction (0 to 1) 
                     OffsetTime = 60, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
                 },
                 Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
@@ -2346,7 +2346,7 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "RLX_Travel_Smoke", //ShipWelderArc
+                        Name = "GothicTorpTrail", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -2386,7 +2386,7 @@ namespace Scripts
                         Enable = true,
                         Length = 150f, //
                         Width = 1.5f, //
-                        Color = Color(red: 30, green: 1f, blue: 0.5f, alpha: 0.4f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Color = Color(red: 35, green: 1f, blue: 0.5f, alpha: 0.4f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         FactionColor = DontUse, // DontUse, Foreground, Background.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
@@ -2420,7 +2420,7 @@ namespace Scripts
                         },
                         TextureMode = Normal,
                         DecayTime = 80, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 30, green: 2f, blue: 0.5f, alpha: 0.3f),
+                        Color = Color(red: 35, green: 1f, blue: 0.5f, alpha: 0.3f),
                         FactionColor = DontUse, // DontUse, Foreground, Background.
                         Back = true,
                         CustomWidth = 1.5f,
@@ -2745,7 +2745,7 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "RLX_Travel_Smoke", //ShipWelderArc
+                        Name = "GothicTorpTrail", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -2784,7 +2784,7 @@ namespace Scripts
                         Enable = true,
                         Length = 90f, //
                         Width = 5f, //
-                        Color = Color(red: 20, green: 1, blue: 30f, alpha: 0.4f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Color = Color(red: 25, green: 5, blue: 35f, alpha: 0.4f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         FactionColor = DontUse, // DontUse, Foreground, Background.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
@@ -2818,7 +2818,7 @@ namespace Scripts
                         },
                         TextureMode = Normal,
                         DecayTime = 30, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 20, green: 5f, blue: 30f, alpha: 0.3f),
+                        Color = Color(red: 25, green: 5f, blue: 35f, alpha: 0.3f),
                         FactionColor = DontUse, // DontUse, Foreground, Background.
                         Back = false,
                         CustomWidth = 2,
@@ -3028,7 +3028,7 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1f,
-                    CustomParticle = "RLX_Impact", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "TorpVortexHitexplosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "GothicTorpHit", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
@@ -3121,7 +3121,7 @@ namespace Scripts
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
                     Roam = false, // Roam current area after target loss
                     KeepAliveAfterTargetLoss = false, // Whether to stop early death of projectile on target loss
-                    OffsetRatio = 0.8f, // The ratio to offset the random direction (0 to 1) 
+                    OffsetRatio = 0.6f, // The ratio to offset the random direction (0 to 1) 
                     OffsetTime = 60, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
                 },
                 Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
@@ -3154,7 +3154,7 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "RLX_Travel_Smoke", //ShipWelderArc
+                        Name = "GothicTorpTrail", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -3194,7 +3194,7 @@ namespace Scripts
                         Enable = true,
                         Length = 150f, //
                         Width = 1.5f, //
-                        Color = Color(red: 20, green: 5f, blue: 30f, alpha: 0.4f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Color = Color(red: 25, green: 5f, blue: 35f, alpha: 0.4f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         FactionColor = DontUse, // DontUse, Foreground, Background.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
@@ -3228,7 +3228,7 @@ namespace Scripts
                         },
                         TextureMode = Normal,
                         DecayTime = 80, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 20, green: 5f, blue: 30f, alpha: 0.3f),
+                        Color = Color(red: 25, green: 5f, blue: 35f, alpha: 0.3f),
                         FactionColor = DontUse, // DontUse, Foreground, Background.
                         Back = true,
                         CustomWidth = 1.5f,

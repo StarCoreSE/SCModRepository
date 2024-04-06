@@ -417,7 +417,7 @@
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>2</Volume>
+      <Volume>1</Volume>
       <PitchVariation>20</PitchVariation>
       <DistantSounds>
         <DistantSound DistanceCrossFade="10" Distance="1200" Sound = "GothicTorpFireDist" />
@@ -440,7 +440,7 @@
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>1</Volume>
+      <Volume>1.5</Volume>
       <PitchVariation>20</PitchVariation>
       <Loopable>false</Loopable>
       <Waves>
@@ -461,7 +461,7 @@
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>1</Volume>
+      <Volume>2</Volume>
       <PitchVariation>1</PitchVariation>
       <Loopable>false</Loopable>
       <Waves>
