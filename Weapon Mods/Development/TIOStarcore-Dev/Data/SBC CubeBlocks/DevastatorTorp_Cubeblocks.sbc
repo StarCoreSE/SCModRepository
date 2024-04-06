@@ -8,7 +8,7 @@
                 <TypeId>ConveyorSorter</TypeId>
                 <SubtypeId>Devastator_Torp</SubtypeId>
             </Id>
-            <DisplayName>Trident Torpedo Turret</DisplayName>
+            <DisplayName>[MID] Trident Torpedo Turret</DisplayName>
             <Description>
               [6km Targeting Range] [10km Fuel]
               [Energy damage]

@@ -55,7 +55,7 @@ namespace Scripts {
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 2800, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MaxTargetDistance = 3500, //2800 Maximum distance at which targets will be automatically shot at; 0 = unlimited.
                 MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 0, // Maximum number of targets to randomize between; 0 = unlimited.
                 CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
@@ -271,7 +271,7 @@ namespace Scripts {
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 2800, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MaxTargetDistance = 3500, //2800 Maximum distance at which targets will be automatically shot at; 0 = unlimited.
                 MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 0, // Maximum number of targets to randomize between; 0 = unlimited.
                 CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
@@ -343,7 +343,7 @@ namespace Scripts {
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 0, // Default resting elevation
                     InventorySize = 1f, // Inventory capacity in kL.
-                    IdlePower = 6f, // Constant base power draw in MW.
+                    IdlePower = 0.0001f, // Constant base power draw in MW.
                     FixedOffset = false, // Deprecated.
                     Offset = Vector(x: 0, y: 0, z: 0), // Offsets the aiming/firing line of the weapon, in metres.
                     Type = BlockWeapon, // What type of weapon this is; BlockWeapon, HandWeapon, Phantom 

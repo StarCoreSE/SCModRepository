@@ -8,9 +8,9 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Avenger</SubtypeId>
       </Id>
-      <DisplayName>[HA] RAC-5 Avenger</DisplayName>
+      <DisplayName>[HAS] RAC-5 Avenger</DisplayName>
       <Description>
-        GAU Style Cannon. 6 Seconds of BRRT with 20 seconds of cooldown. 4km range.
+                GAU-Yes style Rotary Cannon. 6 Seconds of BRRT with 20 seconds of cooldown.
       </Description>
       <Icon>Textures\GUI\Icons\Vulcan.png</Icon>
       <CubeSize>Large</CubeSize>
@@ -21,9 +21,9 @@
       <Model>Models\Vulcan.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
-        <Component Subtype="VulcanComponent" Count="3" />
+        <Component Subtype="VulcanComponent" Count="10" />
         <Component Subtype="Computer" Count="1" />
-        <Component Subtype="VulcanComponent" Count="13" />
+        <Component Subtype="VulcanComponent" Count="5" />
       </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
       <MountPoints>
@@ -77,7 +77,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Crossfield</SubtypeId>
       </Id>
-      <DisplayName>[HA] Crossfield</DisplayName>
+      <DisplayName>[HAS] Crossfield</DisplayName>
       <Description>
         [2km max range]
         [Energy damage]
@@ -144,13 +144,13 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Thanatos</SubtypeId>
       </Id>
-      <DisplayName>[HA] Thanatos</DisplayName>
+      <DisplayName>[HAS] Thanatos</DisplayName>
       <Description>
         Heavy Gimbaled Cannon
         Heavy Anti Armor
-        Medium-Low Shield Damage
-        Medium Component Damage
-        4km Targeting Range
+        Medium Shield Damage
+        High Component Damage
+        7km Targeting Range
         10km MANUAL ONLY Targeting Range
         Overheats
         Kinetic Damage
@@ -214,11 +214,11 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Mammon</SubtypeId>
       </Id>
-      <DisplayName>[HA] Mammon</DisplayName>
+      <DisplayName>[HAS] Mammon</DisplayName>
       <Description>
         Quad Barreled Beam Turret
         Heavy Anti Armor Damage
-        Medium-Low Shield Damage
+        Medium Shield Damage
         Low Component Damage
         4km Range
         Energy Damage
@@ -285,11 +285,11 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_MammonMK2</SubtypeId>
       </Id>
-      <DisplayName>[HA] Mammon MK2</DisplayName>
+      <DisplayName>[HAS] Mammon MK2</DisplayName>
       <Description>
         Quad Barreled Beam Turret
         Heavy Anti Armor Damage
-        Medium-Low Shield Damage
+        Medium Shield Damage
         Low Component Damage
         4km Range
         Energy Damage
@@ -356,7 +356,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Nyx</SubtypeId>
       </Id>
-      <DisplayName>[HA] Nyx</DisplayName>
+      <DisplayName>[HAS] Nyx</DisplayName>
       <Description>
         Dual Barreled Beam Turret
         Heavy Anti Armor Damage
@@ -427,7 +427,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Esper</SubtypeId>
       </Id>
-      <DisplayName>[HA] Tigtone</DisplayName>
+      <DisplayName>[HAS] Tigtone</DisplayName>
       <Description>
         6km Range. Rotary Triple-Barreled Kinetic Shotgun.
       </Description>
@@ -490,7 +490,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>HAS_Cyclops</SubtypeId>
       </Id>
-      <DisplayName>[HA] Cyclops</DisplayName>
+      <DisplayName>[HAS] Cyclops</DisplayName>
       <Description>
         Heavy Gimbaled Cannon
         Heavy Anti Armor

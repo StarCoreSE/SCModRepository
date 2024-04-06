@@ -7,7 +7,7 @@
                 <TypeId>ConveyorSorter</TypeId>
                 <SubtypeId>HeavyCarronade_5x5_Turret</SubtypeId>
             </Id>
-            <DisplayName>'Shipwreck' Heavy Carronade</DisplayName>
+            <DisplayName>[CA] 'Shipwreck' Heavy Carronade</DisplayName>
             <Description>
               [2.5km Targeting Range]
               [Energy damage]

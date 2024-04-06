@@ -8,7 +8,7 @@
                 <TypeId>ConveyorSorter</TypeId>
                 <SubtypeId>HeavyLanceBattery</SubtypeId>
 			</Id>
-			<DisplayName>'Granite' Superheavy Lance Battery</DisplayName>
+			<DisplayName>[MID] 'Granite' Superheavy Lance Battery</DisplayName>
 			<Description> 
 			Long Range 5km Laser Lance
 			Draws 420MW
