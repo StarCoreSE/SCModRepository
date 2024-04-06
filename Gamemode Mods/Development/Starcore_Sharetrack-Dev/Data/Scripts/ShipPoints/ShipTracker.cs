@@ -672,7 +672,10 @@ namespace klime.PointCheck
                     t_N = "Taiidan";
                     mCs = 0.25f;
                     break;
-
+                case "[40k] Gothic Torpedo":
+                    t_N = "Gothic Torpedo";
+                    mCs = 0.15f;
+                    break;
             }
         }
 
