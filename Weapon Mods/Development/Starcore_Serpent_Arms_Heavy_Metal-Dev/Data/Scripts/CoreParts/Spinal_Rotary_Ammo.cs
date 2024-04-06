@@ -44,7 +44,7 @@ namespace Scripts
             AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "Autocoil_Ammo_A", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
-            EnergyCost = .89f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
+            EnergyCost = .6f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 5000f, // Direct damage; one steel plate is worth 100.
             Mass = 0, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
@@ -71,7 +71,7 @@ namespace Scripts
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
                 AmmoRound = "AutoCoil_Shrap", // AmmoRound field of the ammo to spawn.
-                Fragments = 18, // Number of projectiles to spawn.
+                Fragments = 0, // Number of projectiles to spawn.
                 Degrees = 80, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = true, // fragments will not inherit velocity from parent.
@@ -100,7 +100,7 @@ namespace Scripts
                 Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
                     "AutoCoil_VFX1","AutoCoil_VFX2","AutoCoil_VFX3",
                 },
-                Mode = Weapon, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
+                Mode = Never, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
                 TriggerChance = 1f, // This is %
                 Random = false, // This randomizes the number spawned at once, NOT the list order.
                 RandomMin = 1,
@@ -113,7 +113,7 @@ namespace Scripts
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
-                HealthHitModifier = 1001, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
+                HealthHitModifier = 1001, // why?? //How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = 1, // Voxel damage multiplier; defaults to 1 if zero or less.
                 Characters = -1f, // Character damage multiplier; defaults to 1 if zero or less.
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
@@ -186,10 +186,10 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = true,
-                    Radius = 8f, // Radius of AOE effect, in meters.
-                    Damage = 26600f,
-                    Depth = 3f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
-                    MaxAbsorb = 5000f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
+                    Radius = 15f, // Radius of AOE effect, in meters.
+                    Damage = 85000f,
+                    Depth = 0f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
+                    MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
                     //.Curve drops off damage sharply as it approaches the max radius
@@ -328,7 +328,7 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "AutoCoil_ZapsReduced", //ShipWelderArc
+                        Name = "AutoCoil_ZapsReduced_3", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -367,7 +367,7 @@ namespace Scripts
                         Enable = true,
                         Length = 10f, //
                         Width = 0.15f, //
-                        Color = Color(red: 30, green: 10, blue: 1f, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Color = Color(red: 30, green: 20, blue: 1f, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         VisualFadeStart = 1, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 120, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
@@ -395,11 +395,11 @@ namespace Scripts
                     {
                         Enable = true,
                         Textures = new[] {
-                            "ProjectileTrailLine", // Please always have this Line set, if this Section is enabled.
+                            "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
-                        DecayTime = 2, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 30, green: 10, blue: 7, alpha: 1),
+                        DecayTime = 5, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
+                        Color = Color(red: 30, green: 20, blue: 7, alpha: 1),
                         Back = false,
                         CustomWidth = 0,
                         UseWidthVariance = false,
@@ -415,7 +415,7 @@ namespace Scripts
             },
             AmmoAudio = new AmmoAudioDef
             {
-                TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
+                TravelSound = "Monopole_Shell_Pass", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
                 HitSound = "",
                 ShotSound = "",
                 ShieldHitSound = "",
@@ -531,7 +531,7 @@ namespace Scripts
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
                     Light = -1f, // Multiplier for damage against light armor.
                     Heavy = -1f, // Multiplier for damage against heavy armor.
-                    NonArmor = -1f, // Multiplier for damage against every else.
+                    NonArmor = -.5f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {

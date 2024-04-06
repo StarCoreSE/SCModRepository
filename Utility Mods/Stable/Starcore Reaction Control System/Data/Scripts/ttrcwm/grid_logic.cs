@@ -12,19 +12,19 @@ using VRageMath;
 
 namespace ttrcwm
 {
-    class grid_logic: IDisposable
+    class Grid_logic: IDisposable
     {
         #region fields
 
         const float MESSAGE_MULTIPLIER = 10.0f, MESSAGE_SHIFT = 128.0f;
         const int   CONTROLS_TIMEOUT = 2;
 
-        private static byte[] long_message  = new byte[8 + 3];
+        private static readonly byte[] long_message  = new byte[8 + 3];
 
         private IMyCubeGrid                    _grid;
         private HashSet<IMyControllableEntity> _ship_controllers     = new HashSet<IMyControllableEntity>();
         private HashSet<IMyRemoteControl>      _RC_blocks            = new HashSet<IMyRemoteControl>();
-        private engine_control_unit            _ECU                  = null;
+        private Engine_control_unit            _ECU                  = null;
         private Vector3UByte                   _prev_manual_rotation = new Vector3UByte(128, 128, 128);
 
         private int  _num_thrusters = 0, _zero_controls_counter = 0;
@@ -39,28 +39,28 @@ namespace ttrcwm
             MyLog.Default.WriteLine(string.Format("TTDTWM\tgrid_logic.{0}(): \"{1}\" {2}", method_name, _grid.DisplayName, message));
         }
 
-        private void check_disposed()
+        private void Check_disposed()
         {
             if (_disposed)
                 throw new Exception(string.Format("grid_logic for \"{0}\" has been disposed", _grid.DisplayName));
         }
 
-        private IMyPlayer get_controlling_player()
+        private IMyPlayer Get_controlling_player()
         {
             if (MyAPIGateway.Multiplayer != null)
                 return MyAPIGateway.Multiplayer.Players.GetPlayerControllingEntity(_grid);
-            if (_ECU == null || !_ECU.is_under_control_of(sync_helper.local_controller))
+            if (_ECU == null || !_ECU.Is_under_control_of(Sync_helper.local_controller))
                 return null;
-            return sync_helper.local_player;
+            return Sync_helper.local_player;
         }
 
         #endregion
 
         #region event handlers
 
-        private void on_block_added(IMySlimBlock block)
+        private void On_block_added(IMySlimBlock block)
         {
-            check_disposed();
+            Check_disposed();
             IMyCubeBlock entity = block.FatBlock;
             if (entity != null)
             {
@@ -75,7 +75,7 @@ namespace ttrcwm
                 if (thruster != null)
                 {
                     if (_ECU == null)
-                        _ECU = new engine_control_unit(_grid);
+                        _ECU = new Engine_control_unit(_grid);
                     _ECU.assign_thruster(thruster);
                     ++_num_thrusters;
                 }
@@ -83,15 +83,15 @@ namespace ttrcwm
                 if (gyro != null)
                 {
                     if (_ECU == null)
-                        _ECU = new engine_control_unit(_grid);
+                        _ECU = new Engine_control_unit(_grid);
                     _ECU.assign_gyroscope(gyro);
                 }
             }
         }
 
-        private void on_block_removed(IMySlimBlock block)
+        private void On_block_removed(IMySlimBlock block)
         {
-            check_disposed();
+            Check_disposed();
             IMyCubeBlock entity = block.FatBlock;
             if (entity != null)
             {
@@ -159,19 +159,20 @@ namespace ttrcwm
 
         #endregion
 
-        private void handle_user_input(IMyControllableEntity controller)
+        private void Handle_user_input(IMyControllableEntity controller)
         {
             try
             {
                 Vector3 manual_rotation, manual_thrust;
-
                 if (_ECU == null)
                     return;
 
                 var ship_controller = controller as Sandbox.ModAPI.Ingame.IMyShipController;
-
                 if (ship_controller == null)
-                    manual_rotation = manual_thrust = Vector3.Zero;
+                {
+                    manual_rotation = Vector3.Zero;
+                    manual_thrust = Vector3.Zero;
+                }
                 else
                 {
                     manual_thrust = ship_controller.MoveIndicator;
@@ -180,33 +181,32 @@ namespace ttrcwm
                     manual_rotation.Z = ship_controller.RollIndicator;
                 }
 
-                _ECU.translate_rotation_input(manual_rotation, controller);
-                _ECU.translate_linear_input(manual_thrust, controller);
+                _ECU.Translate_rotation_input(manual_rotation, controller);
+                _ECU.Translate_linear_input(manual_thrust, controller);
                 _zero_controls_counter = 0;
             }
             catch (Exception e)
             {
-                // Log the error
                 MyLog.Default.WriteLine($"Error in handle_user_input: {e.Message}");
             }
         }
 
 
-        public void handle_60Hz()
+        public void Handle_60Hz()
         {
             try
             {
-                check_disposed();
+                Check_disposed();
                 if (!_grid.IsStatic && _ECU != null && _num_thrusters > 0)
                 {
-                    IMyPlayer controlling_player = get_controlling_player();
+                    IMyPlayer controlling_player = Get_controlling_player();
                     if (controlling_player == null)
                     {
-                        _ECU.reset_user_input(reset_gyros_only: false);
+                        _ECU.Reset_user_input(reset_gyros_only: false);
                         _prev_manual_rotation = Vector3UByte.Zero;
                     }
                     else //if (!sync_helper.network_handlers_registered || MyAPIGateway.Multiplayer == null || !MyAPIGateway.Multiplayer.IsServer || MyAPIGateway.Multiplayer.IsServerPlayer(controlling_player.Client))
-                        handle_user_input(controlling_player.Controller.ControlledEntity);
+                        Handle_user_input(controlling_player.Controller.ControlledEntity);
 
                     _ID_on = false;
                     foreach (var cur_controller in _ship_controllers)
@@ -214,9 +214,9 @@ namespace ttrcwm
                         _ID_on |= cur_controller.EnabledDamping;
                         //break;
                     }
-                    _ECU.linear_dampers_on = _ID_on;
+                    _ECU.Linear_dampers_on = _ID_on;
 
-                    _ECU.handle_60Hz();
+                    _ECU.Handle_60Hz();
                 }
             }
             catch (Exception ex)
@@ -225,19 +225,19 @@ namespace ttrcwm
             }
         }
 
-        public void handle_4Hz()
+        public void Handle_4Hz()
         {
             try
             {
-                check_disposed();
+                Check_disposed();
                 if (_ECU == null)
                     return;
                 if (!_grid.IsStatic && _num_thrusters > 0)
                 {
-                    _ECU.handle_4Hz();
-                    _ECU.autopilot_on = false;
+                    _ECU.Handle_4Hz();
+                    _ECU.Autopilot_on = false;
                     foreach (var cur_RC_block in _RC_blocks)
-                        _ECU.check_autopilot(cur_RC_block);
+                        _ECU.Check_autopilot(cur_RC_block);
                 }
             }
             catch (Exception ex)
@@ -247,15 +247,15 @@ namespace ttrcwm
         }
 
 
-        public void handle_2s_period()
+        public void Handle_2s_period()
         {
             try
             {
-                check_disposed();
+                Check_disposed();
 
                 if (!_grid.IsStatic && _ECU != null && _num_thrusters > 0)
                 {
-                    _ECU.handle_2s_period();
+                    _ECU.Handle_2s_period();
 
                     if (MyAPIGateway.Multiplayer != null && !MyAPIGateway.Multiplayer.IsServer)
                     {
@@ -263,7 +263,7 @@ namespace ttrcwm
                     }
                     else if (_zero_controls_counter++ >= CONTROLS_TIMEOUT)
                     {
-                        _ECU.reset_user_input(reset_gyros_only: false);
+                        _ECU.Reset_user_input(reset_gyros_only: false);
                         _prev_manual_rotation = new Vector3UByte(128, 128, 128);
                         _zero_controls_counter = 0;
                     }
@@ -278,18 +278,18 @@ namespace ttrcwm
         }
 
 
-        public grid_logic(IMyCubeGrid new_grid)
+        public Grid_logic(IMyCubeGrid new_grid)
         {
             try
             {
                 _grid = new_grid;
-                _grid.OnBlockAdded += on_block_added;
-                _grid.OnBlockRemoved += on_block_removed;
-                sync_helper.register_logic_object(this, _grid.EntityId);
+                _grid.OnBlockAdded += On_block_added;
+                _grid.OnBlockRemoved += On_block_removed;
+                Sync_helper.Register_logic_object(this, _grid.EntityId);
                 _ID_on = ((MyObjectBuilder_CubeGrid)_grid.GetObjectBuilder()).DampenersEnabled;
 
                 var block_list = new List<IMySlimBlock>();
-                _grid.GetBlocks(block_list, delegate (IMySlimBlock block)
+                _grid.GetBlocks(block_list, (block) =>
                 {
                     try
                     {
@@ -297,21 +297,19 @@ namespace ttrcwm
                     }
                     catch (Exception e)
                     {
-                        // Log the exception
                         MyLog.Default.WriteLine($"Error occurred while checking if block is valid: {e.Message}");
                         return false;
                     }
                 });
+
                 foreach (var cur_block in block_list)
-                    on_block_added(cur_block);
+                    On_block_added(cur_block);
             }
             catch (Exception e)
             {
-                // Log the exception
                 MyLog.Default.WriteLine($"Error occurred while initializing grid logic: {e.Message}");
             }
         }
-
 
         public void Dispose()
         {
@@ -319,27 +317,23 @@ namespace ttrcwm
             {
                 if (!_disposed)
                 {
-                    _grid.OnBlockAdded -= on_block_added;
-                    _grid.OnBlockRemoved -= on_block_removed;
-                    sync_helper.deregister_logic_object(_grid.EntityId);
+                    _grid.OnBlockAdded -= On_block_added;
+                    _grid.OnBlockRemoved -= On_block_removed;
+                    Sync_helper.Deregister_logic_object(_grid.EntityId);
 
                     var block_list = new List<IMySlimBlock>();
-                    _grid.GetBlocks(block_list, delegate (IMySlimBlock block)
-                    {
-                        return block.FatBlock is IMyThrust || block.FatBlock is IMyGyro || block.FatBlock is IMyCockpit || block.FatBlock is IMyRemoteControl;
-                    });
+                    _grid.GetBlocks(block_list, (block) => block.FatBlock is IMyThrust || block.FatBlock is IMyGyro || block.FatBlock is IMyCockpit || block.FatBlock is IMyRemoteControl);
+
                     foreach (var cur_block in block_list)
-                        on_block_removed(cur_block);
+                        On_block_removed(cur_block);
 
                     _disposed = true;
                 }
             }
             catch (Exception ex)
             {
-                // Log the error
                 MyLog.Default.WriteLineAndConsole($"Error occurred in Dispose method: {ex}");
             }
         }
-
     }
 }

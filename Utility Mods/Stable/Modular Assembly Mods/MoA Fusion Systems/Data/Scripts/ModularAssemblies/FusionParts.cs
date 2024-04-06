@@ -4,7 +4,7 @@ using static MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication.Def
 
 namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
 {
-    partial class ModularDefinition
+    internal partial class ModularDefinition
     {
         // You can declare functions in here, and they are shared between all other ModularDefinition files.
 
@@ -316,7 +316,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                             }
                         }
                     }
-                },
+                }
                 //{
                 //    "Caster_Controller", new Dictionary<Vector3I, string[]>
                 //    {

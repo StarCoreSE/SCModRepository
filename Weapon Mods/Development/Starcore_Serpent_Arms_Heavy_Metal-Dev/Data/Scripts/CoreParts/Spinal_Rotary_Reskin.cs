@@ -119,46 +119,46 @@ namespace Scripts {
                 },
                 Loading = new LoadingDef
                 {
-                    RateOfFire = 240, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
+                    RateOfFire = 360, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
                     BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
                     ReloadTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
-                    DelayUntilFire = 60, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    DelayUntilFire = 165, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     HeatPerShot = 60, // Heat generated per shot.
                     MaxHeat = 600, // Max heat before weapon enters cooldown (70% of max heat).
                     Cooldown = .15f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
-                    HeatSinkRate = 120, // Amount of heat lost per second.
+                    HeatSinkRate = 80, // Amount of heat lost per second.
                     DegradeRof = false, // Progressively lower rate of fire when over 80% heat threshold (80% of max heat).
                     ShotsInBurst = 0, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
                     DelayAfterBurst = 0, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     FireFull = false, // Whether the weapon should fire the full magazine (or the full burst instead if ShotsInBurst > 0), even if the target is lost or the player stops firing prematurely.
                     GiveUpAfter = false, // Whether the weapon should drop its current target and reacquire a new target after finishing its magazine or burst.
-                    BarrelSpinRate = 60, // Visual only, 0 disables and uses RateOfFire.
+                    BarrelSpinRate = 0, // Visual only, 0 disables and uses RateOfFire.
                     DeterministicSpin = true, // Spin barrel position will always be relative to initial / starting positions (spin will not be as smooth).
-                    SpinFree = false, // Spin barrel while not firing.
+                    SpinFree = true, // Spin barrel while not firing.
                     StayCharged = false, // Will start recharging whenever power cap is not full.
                     MaxActiveProjectiles = 0, // Maximum number of drones in flight (only works for drone launchers)
                     MaxReloads = 0, // Maximum number of reloads in the LIFETIME of a weapon
                 },
                 Audio = new HardPointAudioDef
                 {
-                    PreFiringSound = "Monopole_Charge", // Audio for warmup effect.
-                    FiringSound = "Rotary_Gauss_Fire", // Audio for firing.
-                    FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
+                    PreFiringSound = "Monopole_Chargeup", // Audio for warmup effect.
+                    FiringSound = "Monopole_Firing", // Audio for firing.
+                    FiringSoundPerShot = false, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "", // Sound SubtypeID, for when your Weapon is in a reloading state
                     NoAmmoSound = "",
                     HardPointRotationSound = "", // Audio played when turret is moving.
                     BarrelRotationSound = "",
-                    FireSoundEndDelay = 60, // How long the firing audio should keep playing after firing stops. Measured in game ticks(6 = 100ms, 60 = 1 seconds, etc..).
+                    FireSoundEndDelay = 10, // How long the firing audio should keep playing after firing stops. Measured in game ticks(6 = 100ms, 60 = 1 seconds, etc..).
                     FireSoundNoBurst = true, // Don't stop firing sound from looping when delaying after burst.
                 },
                 Graphics = new HardPointParticleDef
                 {
                     Effect1 = new ParticleDef
                     {
-                        Name = "K_SA_GaussFire_rotary_Flash", // SubtypeId of muzzle particle effect.
+                        Name = "K_SA_GaussFire_rotary_Flash_6", // SubtypeId of muzzle particle effect.
                         Color = Color(red: 1, green: 1, blue: 1, alpha: 1), // Deprecated, set color in particle sbc.
                         Offset = Vector(x: 0, y: 0, z: 0), // Offsets the effect from the muzzle empty.
 

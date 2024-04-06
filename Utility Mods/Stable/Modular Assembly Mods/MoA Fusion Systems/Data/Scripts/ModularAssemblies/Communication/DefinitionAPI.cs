@@ -33,6 +33,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         private Func<int, MyEntity> _getBasePart;
         private Func<bool> _isDebug;
         private Func<MyEntity, int> _getContainingAssembly;
+        private Func<int, IMyCubeGrid> _getAssemblyGrid;
+        private Action<Action<int>> _addOnAssemblyClose;
+        private Action<Action<int>> _removeOnAssemblyClose;
 
         /// <summary>
         ///     Gets all AssemblyParts in the world. Returns an array of all AssemblyParts.
@@ -97,27 +100,66 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             return _getContainingAssembly?.Invoke(blockPart) ?? -1;
         }
 
+        public IMyCubeGrid GetAssemblyGrid(int assemblyId)
+        {
+            return _getAssemblyGrid?.Invoke(assemblyId) ?? null;
+        }
 
+        public void AddOnAssemblyClose(Action<int> action)
+        {
+            _addOnAssemblyClose?.Invoke(action);
+        }
+
+        public void RemoveOnAssemblyClose(Action<int> action)
+        {
+            _removeOnAssemblyClose?.Invoke(action);
+        }
+
+
+        public Action OnReady;
         public bool IsReady;
         private bool _isRegistered;
         private bool _apiInit;
         private readonly long ApiChannel = 8774;
+        private IReadOnlyDictionary<string, Delegate> methodMap;
 
-        public void ApiAssign(IReadOnlyDictionary<string, Delegate> delegates)
+        public void ApiAssign()
         {
-            _apiInit = delegates != null;
-            AssignMethod(delegates, "GetAllParts", ref _getAllParts);
-            AssignMethod(delegates, "GetAllAssemblies", ref _getAllAssemblies);
-            AssignMethod(delegates, "GetMemberParts", ref _getMemberParts);
-            AssignMethod(delegates, "GetConnectedBlocks", ref _getConnectedBlocks);
-            AssignMethod(delegates, "GetBasePart", ref _getBasePart);
-            AssignMethod(delegates, "IsDebug", ref _isDebug);
-            AssignMethod(delegates, "GetContainingAssembly", ref _getContainingAssembly);
+            _apiInit = methodMap != null;
+            SetApiMethod("GetAllParts", ref _getAllParts);
+            SetApiMethod("GetAllAssemblies", ref _getAllAssemblies);
+            SetApiMethod("GetMemberParts", ref _getMemberParts);
+            SetApiMethod("GetConnectedBlocks", ref _getConnectedBlocks);
+            SetApiMethod("GetBasePart", ref _getBasePart);
+            SetApiMethod("IsDebug", ref _isDebug);
+            SetApiMethod("GetContainingAssembly", ref _getContainingAssembly);
+            SetApiMethod("GetAssemblyGrid", ref _getAssemblyGrid);
+            SetApiMethod("AddOnAssemblyClose", ref _addOnAssemblyClose);
+            SetApiMethod("RemoveOnAssemblyClose", ref _removeOnAssemblyClose);
 
             if (_apiInit)
                 MyLog.Default.WriteLineAndConsole("ModularDefinitions: ModularDefinitionsAPI loaded!");
             else
                 MyLog.Default.WriteLineAndConsole("ModularDefinitions: ModularDefinitionsAPI cleared.");
+
+            methodMap = null;
+            OnReady?.Invoke();
+        }
+
+        private void SetApiMethod<T>(string name, ref T method) where T : class
+        {
+            if (methodMap == null)
+            {
+                method = null;
+                return;
+            }
+
+            if (!methodMap.ContainsKey(name))
+                throw new Exception("Method Map does not contain method " + name);
+            Delegate del = methodMap[name];
+            if (del.GetType() != typeof(T))
+                throw new Exception($"Method {name} type mismatch! [MapMethod: {del.GetType().Name} | ApiMethod: {typeof(T).Name}]");
+            method = methodMap[name] as T;
         }
 
         public void LoadData()
@@ -135,7 +177,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         {
             MyAPIGateway.Utilities.UnregisterMessageHandler(ApiChannel, HandleMessage);
 
-            ApiAssign(null);
+            ApiAssign();
 
             _isRegistered = false;
             _apiInit = false;
@@ -145,45 +187,35 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
         private void HandleMessage(object obj)
         {
-            if (_apiInit ||
-                obj is string) // the sent "ApiEndpointRequest" will also be received here, explicitly ignoring that
+            try
             {
-                MyLog.Default.WriteLineAndConsole(
-                    $"ModularDefinitions: ModularDefinitionsAPI ignored message {obj as string}!");
-                return;
+                if (_apiInit ||
+                    obj is string) // the sent "ApiEndpointRequest" will also be received here, explicitly ignoring that
+                {
+                    MyLog.Default.WriteLineAndConsole(
+                        $"ModularDefinitions: ModularDefinitionsAPI ignored message {obj as string}!");
+                    return;
+                }
+
+                var dict = obj as Dictionary<string, Delegate>;
+
+                if (dict == null)
+                {
+                    MyLog.Default.WriteLineAndConsole(
+                        "ModularDefinitions: ModularDefinitionsAPI ERR: Recieved null dictionary!");
+                    return;
+                }
+
+                methodMap = dict;
+                ApiAssign();
+                methodMap = null;
+                IsReady = true;
             }
-
-            var dict = obj as IReadOnlyDictionary<string, Delegate>;
-
-            if (dict == null)
+            catch (Exception ex)
             {
-                MyLog.Default.WriteLineAndConsole(
-                    "ModularDefinitions: ModularDefinitionsAPI ERR: Recieved null dictionary!");
-                return;
+                MyLog.Default.WriteLineAndConsole("Exception in ModularAssemblies Client Mod DefinitionAPI! " + ex);
+                MyAPIGateway.Utilities.ShowMessage("Fusion Systems", "Exception in ModularAssemblies Client Mod DefinitionAPI! " + ex);
             }
-
-            ApiAssign(dict);
-            IsReady = true;
-        }
-
-        private void AssignMethod<T>(IReadOnlyDictionary<string, Delegate> delegates, string name, ref T field)
-            where T : class
-        {
-            if (delegates == null)
-            {
-                field = null;
-                return;
-            }
-
-            Delegate del;
-            if (!delegates.TryGetValue(name, out del))
-                throw new Exception($"{GetType().Name} :: Couldn't find {name} delegate of type {typeof(T)}");
-
-            field = del as T;
-
-            if (field == null)
-                throw new Exception(
-                    $"{GetType().Name} :: Delegate {name} is not type {typeof(T)}, instead it's: {del.GetType()}");
         }
 
         #endregion

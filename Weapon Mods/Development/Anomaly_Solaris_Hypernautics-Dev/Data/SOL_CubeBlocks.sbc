@@ -24,9 +24,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\ElectroShield3x3.mwm</Model>
 			<Components>
-				<Component Subtype="AMP_FrameComponent" Count="2"/>
+				<Component Subtype="AMP_FrameComponent" Count="1"/>
 				<Component Subtype="Computer" Count="1"/>
-				<Component Subtype="AMP_PlateComponent" Count="6"/>
+				<Component Subtype="AMP_PlateComponent" Count="3"/>
 			</Components>
       <BuildTimeSeconds>60</BuildTimeSeconds>
 			<CriticalComponent Subtype="Computer" Index="0"/>
@@ -401,12 +401,12 @@
 
 
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
-			<!-- Ceis Anti Armour -->
+			<!-- Nariman Anti Armour -->
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>K_SA_Gauss_APC</SubtypeId>
+				<SubtypeId>Nariman_Dart_Turret</SubtypeId>
 			</Id>
-			<DisplayName>Nariman Dart Turret</DisplayName>
+			<DisplayName>Nariman NanoDart Turret</DisplayName>
 			<Description>
 				Dual purpose turret
 			</Description>
@@ -451,13 +451,11 @@
 					<MinAllowed>0.01</MinAllowed>
 				</DynamicMode>
 			</VoxelPlacement>
-			<BlockPairName>K_SA_Gauss_APC</BlockPairName>
+			<BlockPairName>Nariman_Dart_Turret</BlockPairName>
 			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
 			<EdgeType>Light</EdgeType>
 			<BuildTimeSeconds>30</BuildTimeSeconds>
-			<OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
-			<WeaponDefinitionId Subtype="K_SA_Gun"/>
 			<InventoryMaxVolume>1</InventoryMaxVolume>
 			<DamageEffectId>213</DamageEffectId>
 			<AiEnabled>false</AiEnabled>
@@ -475,6 +473,16 @@
 			<MaxFov>2</MaxFov>
 			<EmissiveColorPreset>Default</EmissiveColorPreset>
 		</Definition>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -515,7 +523,7 @@
      <BuildProgressModels>
 				<Model BuildPercentUpperBound="1.0" File="Models\Starcore\muzzled_coil_odin_BS1_LOD1.mwm"/>
 			</BuildProgressModels>
-      <BlockPairName>SolHyp_MAC_Block</BlockPairName>
+      <BlockPairName>SolHyp_Magnetic_Coilgun</BlockPairName>
        <MirroringY>Z</MirroringY>
      <MirroringZ>Y</MirroringZ>
 	   <EdgeType>Light</EdgeType>
@@ -809,7 +817,7 @@
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="1" y="2" z="4"/>
 			<ModelOffset x="0" y="0" z="0"/>
-			<Model>Models\Cubes\large\SH_LG_BP24_2x4 Blastplate.mwm</Model>
+			<Model>Models\Cubes\large\SH_LG_BP24_2x4_Blastplate.mwm</Model>
 			<Components>
 				<Component Subtype="SteelPlate" Count="750" />
        		 	<Component Subtype="MetalGrid" Count="2500" />
