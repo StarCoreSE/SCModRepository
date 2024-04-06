@@ -74,36 +74,30 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         /// <param name="prevScan">The block entity to ignore; nullable.</param>
         /// <param name="stopAtSubtype">Exits the loop at this subtype.</param>
         /// <returns></returns>
-private static bool PerformScan(MyEntity blockEntity, ref HashSet<IMyCubeBlock> parts, string stopAtSubtype, ref int stopHits, HashSet<MyEntity> visitedBlocks = null)
-{
-    if (visitedBlocks == null)
-        visitedBlocks = new HashSet<MyEntity>();
-
-    if (ModularAPI.IsDebug())
-        DebugDraw.DebugDraw.AddGridPoint(((IMyCubeBlock)blockEntity).Position, ((IMyCubeBlock)blockEntity).CubeGrid, Color.Blue, 2);
-
-    parts.Add((IMyCubeBlock)blockEntity);
-    var connectedBlocks = ModularAPI.GetConnectedBlocks(blockEntity, false);
-
-    if (connectedBlocks.Length < 2)
-        return false;
-
-    foreach (var connectedBlock in connectedBlocks)
-    {
-        var connectedSubtype = ((IMyCubeBlock)connectedBlock).BlockDefinition.SubtypeName;
-        bool valid = parts.Add((IMyCubeBlock)connectedBlock);
-
-        if (connectedSubtype == stopAtSubtype)
-            stopHits++;
-
-        if (!visitedBlocks.Contains(connectedBlock) && connectedSubtype != stopAtSubtype)
+        private static bool PerformScan(MyEntity blockEntity, ref HashSet<IMyCubeBlock> parts, string stopAtSubtype,
+            ref int stopHits)
         {
-            visitedBlocks.Add(connectedBlock);
-            PerformScan(connectedBlock, ref parts, stopAtSubtype, ref stopHits, visitedBlocks);
+            if (ModularAPI.IsDebug())
+                DebugDraw.DebugDraw.AddGridPoint(((IMyCubeBlock)blockEntity).Position,
+                    ((IMyCubeBlock)blockEntity).CubeGrid, Color.Blue, 2);
+
+            var connectedBlocks = ModularAPI.GetConnectedBlocks(blockEntity, false);
+
+            if (connectedBlocks.Length < 2)
+                return false;
+
+            foreach (var connectedBlock in connectedBlocks)
+            {
+                var connectedSubtype = ((IMyCubeBlock)connectedBlock).BlockDefinition.SubtypeName;
+                bool valid = parts.Add((IMyCubeBlock)connectedBlock);
+
+                if (connectedSubtype == stopAtSubtype)
+                    stopHits++;
+                else if (valid)
+                    PerformScan(connectedBlock, ref parts, stopAtSubtype, ref stopHits);
+            }
+            
+            return stopHits >= 2;
         }
-    }
-    
-    return stopHits >= 2;
-}
     }
 }
