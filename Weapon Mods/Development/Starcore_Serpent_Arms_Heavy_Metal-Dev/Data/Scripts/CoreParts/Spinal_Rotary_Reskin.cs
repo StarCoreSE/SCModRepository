@@ -136,8 +136,8 @@ namespace Scripts {
                     FireFull = false, // Whether the weapon should fire the full magazine (or the full burst instead if ShotsInBurst > 0), even if the target is lost or the player stops firing prematurely.
                     GiveUpAfter = false, // Whether the weapon should drop its current target and reacquire a new target after finishing its magazine or burst.
                     BarrelSpinRate = 0, // Visual only, 0 disables and uses RateOfFire.
-                    DeterministicSpin = false, // Spin barrel position will always be relative to initial / starting positions (spin will not be as smooth).
-                    SpinFree = false, // Spin barrel while not firing.
+                    DeterministicSpin = true, // Spin barrel position will always be relative to initial / starting positions (spin will not be as smooth).
+                    SpinFree = true, // Spin barrel while not firing.
                     StayCharged = false, // Will start recharging whenever power cap is not full.
                     MaxActiveProjectiles = 0, // Maximum number of drones in flight (only works for drone launchers)
                     MaxReloads = 0, // Maximum number of reloads in the LIFETIME of a weapon
