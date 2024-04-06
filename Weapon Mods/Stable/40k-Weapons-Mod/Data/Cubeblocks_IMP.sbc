@@ -53,6 +53,56 @@
     <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
       <Id>
         <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>GothicTorp</SubtypeId>
+      </Id>
+      <DisplayName>[40K] Gothic Torpedo Launcher</DisplayName>
+      <Description>
+        Anti-ship torpedoes are powered by a plasma reactor, which makes up part of the warhead as well as the method of propulsion. 
+        Standard Imperial torpedoes move in a straight line and have limited sensing and targeting abilities, turning to intercept if they come close their target.
+      </Description>
+      <Icon>Textures\icons\GothicTorpLauncher.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="5" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\GothicTorpLauncher.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="200" />
+        <Component Subtype="Construction" Count="500" />
+        <Component Subtype="GravityGenerator" Count="20" />
+        <Component Subtype="Computer" Count="300" />
+        <Component Subtype="SmallTube" Count="1600" />
+        <Component Subtype="Motor" Count="500" />
+        <Component Subtype="LargeTube" Count="200" />
+        <Component Subtype="MetalGrid" Count="50" />
+        <Component Subtype="Construction" Count="500" />
+        <Component Subtype="SteelPlate" Count="600" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>GothicTorp</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>120</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="HeavyBolterLargeSponson" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0" PropertiesMask="2" />
+        <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="1.0" EndY="5.0" PropertiesMask="2" />
+        <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="5.0" EndY="1.0" PropertiesMask="2" />
+        <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="5.0" EndY="1.0" PropertiesMask="2" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MacroCannon</SubtypeId>
       </Id>
       <DisplayName>[40K] Macro Cannon</DisplayName>
@@ -94,7 +144,7 @@
         <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0" PropertiesMask="2" />
         <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0" PropertiesMask="2" />
       </MountPoints>
-      <IsAirTight>false</IsAirTight>
+      <IsAirTight>true</IsAirTight>
       <MirroringZ>Y</MirroringZ>
       <MirroringY>Z</MirroringY>
       <PhysicalMaterial>Metal</PhysicalMaterial>
@@ -153,7 +203,107 @@
       <Upgrades></Upgrades>
     </Definition>
 
-    
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>LanceLightBattery</SubtypeId>
+      </Id>
+      <DisplayName>[40K] Light Lance Battery</DisplayName>
+      <Description>
+        A lance is a large, spaceship-mounted energy weapon, often seen on various Imperial Navy vessels. The principle of such a weapon is an extremely high-powered energy beam;
+        the efficiency of a lance turret is increased by the incorporation of several smaller beam projectors into a single, focused beam.
+        The resulting weapon is capable of incinerating straight through the armoured hulls of other vessels as if they were irrelevant.
+      </Description>
+      <Icon>Textures\icons\LanceLightBattery.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="3" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\LanceLightBattery.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="1000" />
+        <Component Subtype="Construction" Count="500" />
+        <Component Subtype="SmallTube" Count="1600" />
+        <Component Subtype="Motor" Count="500" />
+        <Component Subtype="LargeTube" Count="120" />
+        <Component Subtype="Computer" Count="300" />
+        <Component Subtype="MetalGrid" Count="50" />
+        <Component Subtype="Construction" Count="500" />
+        <Component Subtype="SteelPlate" Count="2000" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>LightLance</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>120</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="HeavyBolterLargeSponson" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0" PropertiesMask="2" />
+        <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0" PropertiesMask="2" />
+        <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0" PropertiesMask="2" />
+        <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0" PropertiesMask="2" />
+        <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0" PropertiesMask="2" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>LanceHeavyBattery</SubtypeId>
+      </Id>
+      <DisplayName>[40K] Heavy Lance Battery</DisplayName>
+      <Description>
+        A lance is a large, spaceship-mounted energy weapon, often seen on various Imperial Navy vessels. The principle of such a weapon is an extremely high-powered energy beam;
+        the efficiency of a lance turret is increased by the incorporation of several smaller beam projectors into a single, focused beam.
+        The resulting weapon is capable of incinerating straight through the armoured hulls of other vessels as if they were irrelevant.
+      </Description>
+      <Icon>Textures\icons\LanceHeavyBattery.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="7" y="5" z="7" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\LanceHeavyBattery.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="2500" />
+        <Component Subtype="Construction" Count="500" />
+        <Component Subtype="SmallTube" Count="1600" />
+        <Component Subtype="Motor" Count="500" />
+        <Component Subtype="LargeTube" Count="120" />
+        <Component Subtype="Computer" Count="300" />
+        <Component Subtype="MetalGrid" Count="50" />
+        <Component Subtype="Construction" Count="500" />
+        <Component Subtype="SteelPlate" Count="3500" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>HeavyLance</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>120</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="HeavyBolterLargeSponson" />
+      <MountPoints>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="7.0" EndY="1.0" PropertiesMask="2" />
+        <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="7.0" EndY="7.0" PropertiesMask="2" />
+        <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="7.0" EndY="1.0" PropertiesMask="2" />
+        <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="7.0" EndY="1.0" PropertiesMask="2" />
+        <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="7.0" EndY="1.0" PropertiesMask="2" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+
+
     <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
       <Id>
         <TypeId>ConveyorSorter</TypeId>

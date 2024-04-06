@@ -13,7 +13,7 @@ namespace Scripts
             PartDefinitions(NID_Pyroacid, NID_HeavyPyroacid, NID_Bioplasma, NID_Hivedrone, NID_BioplasmaHivedrone,
                             LightParticleWhip, ParticleWhip, FluxArcSmall, FluxArcLarge, MonoWhip, MonoWhipSmall,
                             NovaCannon, HeavyBolterSmall, HeavyBolterSmallSponson, HeavyBolterLargeSponson, Lascannon, 
-                            BattleCannon, PlasmaCannon, EarthshakerCannon,MacroCannon, LanceBattery);
+                            BattleCannon, PlasmaCannon, EarthshakerCannon,MacroCannon, LanceBattery, LanceLightBattery, LanceHeavyBattery, GothicTorp);
 
         }
     }
