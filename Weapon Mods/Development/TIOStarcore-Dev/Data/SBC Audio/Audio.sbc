@@ -1446,10 +1446,10 @@
 			  <DistantSound DistanceCrossfade = "50" Distance = "1000" Sound = "ElectroGun_ShotD2" />
 			  <DistantSound DistanceCrossfade = "50" Distance = "2500" Sound = "ElectroGun_ShotD3" />
 			  <DistantSound DistanceCrossfade = "50" Distance = "4000" Sound = "ElectroGun_ShotD4" />
-
+			<Pitch>-12</Pitch>
 		  </DistantSounds>
 		  <Volume>1</Volume>
-		  <PitchVariation>100</PitchVariation>
+		  <PitchVariation>40</PitchVariation>
 		  <Waves>
 			  <Wave Type="D3">
 				  <Start>Audio\Shot\ElectroFiringSound1.wav</Start>
@@ -1465,7 +1465,8 @@
 		  <Category>SHOT</Category>
 		  <MaxDistance>7200</MaxDistance>
 		  <Volume>1</Volume>
-		  <PitchVariation>100</PitchVariation>
+		  <Pitch>-9</Pitch>
+		  <PitchVariation>40</PitchVariation>
 		  <Waves>
 			  <Wave Type="D3">
 				  <Start>Audio\Shot\ElectroFiringSoundD1.wav</Start>
@@ -1480,7 +1481,8 @@
 		  <Category>SHOT</Category>
 		  <MaxDistance>7200</MaxDistance>
 		  <Volume>1</Volume>
-		  <PitchVariation>100</PitchVariation>
+		  <Pitch>-5</Pitch>
+		  <PitchVariation>40</PitchVariation>
 		  <Waves>
 			  <Wave Type="D3">
 				  <Start>Audio\Shot\ElectroFiringSoundD2.wav</Start>
@@ -1495,7 +1497,8 @@
 		  <Category>SHOT</Category>
 		  <MaxDistance>7200</MaxDistance>
 		  <Volume>0.8</Volume>
-		  <PitchVariation>100</PitchVariation>
+		  <Pitch>-4</Pitch>
+		  <PitchVariation>40</PitchVariation>
 		  <Waves>
 			  <Wave Type="D3">
 				  <Start>Audio\Shot\ElectroFiringSoundD3.wav</Start>
@@ -1510,6 +1513,7 @@
 		  <Category>SHOT</Category>
 		  <MaxDistance>7200</MaxDistance>
 		  <Volume>0.8</Volume>
+		  <Pitch>-3</Pitch>
 		  <PitchVariation>100</PitchVariation>
 		  <Waves>
 			  <Wave Type="D3">
@@ -1658,9 +1662,9 @@
 		  <Loopable>true</Loopable>
 		  <Waves>
 			  <Wave Type="D3">
-				  <Start>Audio\MW4 Laser Medium.wav</Start>
-          <Loop>Audio\MW4 Laser MediumLoop.wav</Loop>
-          <End>Audio\MW4 Laser MediumEND.wav</End>
+				  	<Start>Audio\Shot\MW4 Laser Medium.wav</Start>
+          			<Loop>Audio\Shot\MW4 Laser MediumLoop.wav</Loop>
+          			<End>Audio\Shot\MW4 Laser MediumEND.wav</End>
 			  </Wave>
 		  </Waves>
 	  </Sound> 

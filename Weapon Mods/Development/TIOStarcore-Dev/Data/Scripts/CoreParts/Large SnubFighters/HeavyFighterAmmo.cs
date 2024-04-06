@@ -48,7 +48,7 @@ namespace Scripts
             EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 0.5f, // Direct damage; one steel plate is worth 100. 
             Mass = 5000, // In kilograms; how much force the impact will apply to the target.
-            Health = 900, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            Health = 800, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 10, // Recoil.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
@@ -91,7 +91,7 @@ namespace Scripts
                     Enable = true, // Enables TimedSpawns mechanism
                     Interval = 0, // Time between spawning fragments, in ticks, 0 means every tick, 1 means every other
                     StartTime = 0, // Time delay to start spawning fragments, in ticks, of total projectile life
-                    MaxSpawns = 600, // Max number of fragment children to spawn
+                    MaxSpawns = 720, // Max number of fragment children to spawn
                     Proximity = 900, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
                     ParentDies = false, // Parent dies once after it spawns its last child.
                     PointAtTarget = true, // Start fragment direction pointing at Target
@@ -119,7 +119,7 @@ namespace Scripts
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
-                HealthHitModifier = 1000, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
+                HealthHitModifier = 900, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = 1, // Voxel damage multiplier; defaults to 1 if zero or less.
                 Characters = -1f, // Character damage multiplier; defaults to 1 if zero or less.
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
@@ -279,7 +279,7 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 36000, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
                 AccelPerSec = 250f, // Acceleration in Meters Per Second. Projectile starts on tick 0 at its parents (weapon/other projectiles) travel velocity.
-                DesiredSpeed = 400f, // voxel phasing if you go above 5100
+                DesiredSpeed = 425f, // voxel phasing if you go above 5100
                 MaxTrajectory = 1000000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
@@ -289,10 +289,10 @@ namespace Scripts
                 TotalAcceleration = 0, // 0 means no limit, something to do due with a thing called delta and something called v.
                 Smarts = new SmartsDef
                 {
-                    SteeringLimit = 150, // 0 means no limit, value is in degrees, good starting is 150.  This enable advanced smart "control", cost of 3 on a scale of 1-5, 0 being basic smart.
+                    SteeringLimit = 90, // 0 means no limit, value is in degrees, good starting is 150.  This enable advanced smart "control", cost of 3 on a scale of 1-5, 0 being basic smart.
                     Inaccuracy = 0f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
-                    Aggressiveness = 1f, // controls how responsive tracking is.
-                    MaxLateralThrust = 1.5, // controls how sharp the projectile may turn, this is the cheaper but less realistic version of SteeringLimit, cost of 2 on a scale of 1-5, 0 being basic smart.
+                    Aggressiveness = 3f, // controls how responsive tracking is.
+                    MaxLateralThrust = 1f, // controls how sharp the projectile may turn, this is the cheaper but less realistic version of SteeringLimit, cost of 2 on a scale of 1-5, 0 being basic smart.
                     NavAcceleration = 0, // helps influence how the projectile steers. 
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
                     AccelClearance = false, // Setting this to true will prevent smart acceleration until it is clear of the grid and tracking delay has been met (free fall).
@@ -379,10 +379,10 @@ namespace Scripts
                         PushLeadByTravelDistance = false, // the follow lead position will move in its point direction by an amount equal to the projectiles travel distance.
 
                         // Modify speed and acceleration ratios while this approach is active
-                        AccelMulti = 1.0, // Modify default acceleration by this factor
+                        AccelMulti = 0.25, // Modify default acceleration by this factor
                         DeAccelMulti = 0, // Modifies your default deacceleration by this factor
                         TotalAccelMulti = 0, // Modifies your default totalacceleration by this factor
-                        SpeedCapMulti = 1.0, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
+                        SpeedCapMulti = 0.5, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
 
                         // Target navigation behavior 
                         Orbit = false, // Orbit the target
@@ -399,7 +399,7 @@ namespace Scripts
                         ReloadRefund = false, // Refund a reload (for max reload).
                         ToggleIngoreVoxels = false, // Toggles whatever the default IgnoreVoxel value to its opposite. 
                         SelfAvoidance = false, // If this and FutureIntersect is enabled then projectiles will actively avoid the parent grids.
-                        TargetAvoidance = false, // If this and FutureIntersect is enabled then projectiles will actively avoid the target.
+                        TargetAvoidance = true, // If this and FutureIntersect is enabled then projectiles will actively avoid the target.
                         SelfPhasing = true, // If enabled the projectiles can phase through the parent grids without doing damage or dying.
                         SwapNavigationType = false, // This will swap to other navigation  (i.e. the alternate of what is set in smart, ProNav vs ZeroEffort) 
                         // Audio/Visual Section
@@ -469,10 +469,10 @@ namespace Scripts
                         EndCondition3 = Ignore,
 
                         // Start/End thresholds -- both conditions are evaluated before activation, use Ignore to skip
-                        Start1Value = 301,
+                        Start1Value = 401,
                         Start2Value = 0,
-                        End1Value = 300,
-                        End2Value = 200,
+                        End1Value = 400,
+                        End2Value = 300,
                         End3Value = 0, 
                         
                         // Special triggers when the start/end conditions are met (DoNothing, EndProjectile, EndProjectileOnRestart, StoreDestination)
@@ -608,7 +608,7 @@ namespace Scripts
                         Start2Value = 0,
                         End1Value = 120,
                         End2Value = 60,
-                        End3Value = 100, 
+                        End3Value = 200, 
                         
                         // Special triggers when the start/end conditions are met (DoNothing, EndProjectile, EndProjectileOnRestart, StoreDestination)
                         StartEvent = DoNothing,
@@ -742,7 +742,7 @@ namespace Scripts
                         Start1Value = 90,
                         Start2Value = 0,
                         End1Value = 60,
-                        End2Value = 50,
+                        End2Value = 150,
                         End3Value = 0, 
                         
                         // Special triggers when the start/end conditions are met (DoNothing, EndProjectile, EndProjectileOnRestart, StoreDestination)
@@ -879,7 +879,7 @@ namespace Scripts
                         Start2Value = 0,
                         End1Value = 120,
                         End2Value = 60,
-                        End3Value = 50, 
+                        End3Value = 150, 
                         
                         // Special triggers when the start/end conditions are met (DoNothing, EndProjectile, EndProjectileOnRestart, StoreDestination)
                         StartEvent = DoNothing,
@@ -989,9 +989,9 @@ namespace Scripts
                         EndCondition3 = Ignore,
 
                         // Start/End thresholds -- both conditions are evaluated before activation, use Ignore to skip
-                        Start1Value = 301,
+                        Start1Value = 401,
                         Start2Value = 0,
-                        End1Value = 300,
+                        End1Value = 400,
                         End2Value = 0,
                         End3Value = 0, 
                         
@@ -1101,7 +1101,7 @@ namespace Scripts
                         EndCondition3 = Ignore,
 
                         // Start/End thresholds -- both conditions are evaluated before activation, use Ignore to skip
-                        Start1Value = 400,
+                        Start1Value = 390,
                         Start2Value = 0,
                         End1Value = 200,
                         End2Value = 0,
@@ -1213,7 +1213,7 @@ namespace Scripts
                         EndCondition3 = Ignore,
 
                         // Start/End thresholds -- both conditions are evaluated before activation, use Ignore to skip
-                        Start1Value = 200,
+                        Start1Value = 201,
                         Start2Value = 0,
                         End1Value = 100,
                         End2Value = 0,
@@ -1439,7 +1439,7 @@ namespace Scripts
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
-                            Scale = 1,
+                            Scale = 2f,
                         },
                     },
                     Hit = new ParticleDef
@@ -1873,7 +1873,7 @@ namespace Scripts
                         Enable = true,
                         Length = 10f,
                         Width = 0.2f,
-                        Color = Color(red: 3, green: 3, blue: 3f, alpha: 0.2f),
+                        Color = Color(red: 5, green: 5, blue: 5f, alpha: 0.25f),
                         VisualFadeStart = 90, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 60, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
@@ -1905,7 +1905,7 @@ namespace Scripts
                         },
                         TextureMode = Normal,
                         DecayTime = 1,
-                        Color = Color(red: 3, green: 1, blue: 1f, alpha: 0.1f),
+                        Color = Color(red: 7, green: 2, blue: 2f, alpha: 0.1f),
                         Back = false,
                         CustomWidth = 0.33f,
                         UseWidthVariance = false,

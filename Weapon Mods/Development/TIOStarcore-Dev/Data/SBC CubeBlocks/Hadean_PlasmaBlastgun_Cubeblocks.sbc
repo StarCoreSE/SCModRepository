@@ -8,9 +8,9 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>HadeanPlasmaBlastgun</SubtypeId>
 			</Id>
-			<DisplayName>Hadean Superheavy Plasma Blastguns</DisplayName>
+			<DisplayName>[CA] Hadean Superheavy Plasma Blastguns</DisplayName>
             <Description>
-			7km range, 1250 m/s velocity
+			8km range, 1250 m/s velocity
 			Plasma Vaporizes Hull armor with extreme Thermal Energy damage
 			Damage begins falling off past 3km.
 			Draws 550MW
@@ -24,13 +24,19 @@
 			<ModelOffset x="0" y="0" z="0" />
 			<Model>Models\HSR\K_HSR_KingTurret_Large.mwm</Model>
 			<UseModelIntersection>true</UseModelIntersection>
-			<Components>
-				<Component Subtype="TurretBaseComponent" Count="50" />
+			<Components> <!-- it has so much goddamn HP and yet feels so fucking fragile reeee-->
+				<!-- <Component Subtype="TurretBaseComponent" Count="50" />
 				<Component Subtype="TurretRotorComponent" Count="1" />
 				<Component Subtype="HeavyTurretComponent" Count="6" />
 				<Component Subtype="Computer" Count="1" />
 				<Component Subtype="StructuralComponent" Count="8" />
-				<Component Subtype="HeavyTurretComponent" Count="6" />
+				<Component Subtype="HeavyTurretComponent" Count="6" />-->
+				<Component Subtype="TurretBaseComponent" Count="90" />
+				<Component Subtype="TurretRotorComponent" Count="1" />
+				<Component Subtype="HeavyTurretComponent" Count="12" />
+				<Component Subtype="Computer" Count="1" />
+				<Component Subtype="StructuralComponent" Count="16" />
+				<Component Subtype="HeavyTurretComponent" Count="22" />
 			</Components>
 			<CriticalComponent Subtype="Computer" Index="0" />
 			<MountPoints>

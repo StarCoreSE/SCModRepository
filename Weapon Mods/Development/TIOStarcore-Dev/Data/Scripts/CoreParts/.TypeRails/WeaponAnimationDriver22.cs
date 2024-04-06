@@ -54,7 +54,7 @@ namespace Scripts
                        {
                            EmptyNames = Names("muzzle_projectile_2"), //If you want an effect on your own dummy
                            MuzzleNames = Names("muzzle_projectile_2"), //If you want an effect on the muzzle
-                           StartDelay = 0, //ticks 60 = 1 second, delay until particle starts.
+                           StartDelay = 10, //ticks 60 = 1 second, delay until particle starts.
                            LoopDelay = 0, //ticks 60 = 1 second
                            ForceStop = false,
                            Particle = new ParticleDef
