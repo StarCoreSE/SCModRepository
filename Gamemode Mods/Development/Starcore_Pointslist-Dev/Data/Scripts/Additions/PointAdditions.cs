@@ -514,7 +514,6 @@ Cat_Darth40kWeapons@20;
 				ParticleWhip@400;
 				NovaCannon@800;
 				MacroCannon@200;
-				LanceBattery@400;
 				LanceLightBattery@280;
 				LanceBattery@650;
 				GothicTorp@300;
