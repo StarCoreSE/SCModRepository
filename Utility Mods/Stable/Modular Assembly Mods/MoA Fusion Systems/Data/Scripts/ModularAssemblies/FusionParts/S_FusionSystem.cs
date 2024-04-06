@@ -170,13 +170,13 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             }
 
             // Math for slider on reactor parts to allow for a power <-> efficiency tradeoff.
-            foreach (var reactor in Reactors)
+            if (updateReactors)
             {
-                totalPowerUsage += reactor?.PowerConsumption ?? 0;
-
-                if (updateReactors)
+                foreach (var reactor in Reactors)
+                {
                     reactor?.UpdatePower(powerGeneration, MegawattsPerFusionPower);
-            }
+                    totalPowerUsage += reactor?.PowerConsumption ?? 0;
+                }
 
             foreach (var thruster in Thrusters)
             {
@@ -185,6 +185,19 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 if (updateReactors)
                     thruster?.UpdatePower(powerGeneration, NewtonsPerFusionPower);
             }
+            else
+            {
+                foreach (var reactor in Reactors)
+                {
+                    totalPowerUsage += reactor?.PowerConsumption ?? 0;
+                }
+
+                foreach (var thruster in Thrusters)
+                {
+                    totalPowerUsage += thruster?.PowerConsumption ?? 0;
+                }
+            }
+
 
             // Subtract power usage afterwards so that all reactors have the same stats.
             PowerGeneration = powerGeneration;
@@ -200,7 +213,6 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 //PowerGeneration = 0;
             }
         }
-
         public void UpdateTick()
         {
             UpdatePower();
