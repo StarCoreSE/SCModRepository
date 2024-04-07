@@ -169,8 +169,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 0.5f,
-                    CustomParticle = "ExplosionSmall",
-                    CustomSound = "ArcWepSmallMissileExpl",
+                    CustomParticle = "",
+                    CustomSound = "",
                 }, 
             },
             Ewar = new EwarDef
@@ -527,8 +527,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 0.5f,
-                    CustomParticle = "SmallArtExplosionLight",
-                    CustomSound = "ArcWepSmallMissileExpl",
+                    CustomParticle = "",
+                    CustomSound = "",
                 },
             },
             Ewar = new EwarDef

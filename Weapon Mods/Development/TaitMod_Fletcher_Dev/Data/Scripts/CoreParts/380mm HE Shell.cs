@@ -169,8 +169,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 0.7f,
-                    CustomParticle = "Explosion_AmmunitionLarge",
-                    CustomSound = "ArcWepLrgWarheadExpl",
+                    CustomParticle = "",
+                    CustomSound = "",
                 },
             },
             Ewar = new EwarDef
