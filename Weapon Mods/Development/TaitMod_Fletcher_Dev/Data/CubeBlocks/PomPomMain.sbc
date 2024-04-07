@@ -10,7 +10,6 @@
 			<Description>
 				40mm Quad Flak gun
 				4km Range, only effective vs smart munitions
-				Interim BP: 100
 			</Description>
 			<Icon>Textures\GUI\Icons\Cubes\PomPomMain.dds</Icon>
 			<CubeSize>Large</CubeSize>

@@ -6,7 +6,7 @@
 				<TypeId>GuiBlockCategoryDefinition</TypeId>
 				<SubtypeId/>
 			</Id>
-			<DisplayName>F.A Starcore</DisplayName>
+			<DisplayName>[FAS]</DisplayName>
 			<Name>FletcherArmsStarcore</Name>
 			<IsBlockCategory>true</IsBlockCategory>
 			<ItemIds>
@@ -15,34 +15,21 @@
 				<string>ConveyorSorter/127mmMk32</string>
 				<string>ConveyorSorter/127mmMk12</string>
 				<string>ConveyorSorter/127mmMk24</string>
-				<string>ConveyorSorter/127mmMk56</string>
 				<string>ConveyorSorter/381mmDualR</string>
 				<string>ConveyorSorter/15cmTbtsKC36</string>
-				<string>ConveyorSorter/128mmSKC34</string>
-				<string>ConveyorSorter/128mmL45</string>
 				<string>ConveyorSorter/105mmTwin</string>
 				<string>ConveyorSorter/380mmMLE1935</string>
-				<!--<string>ConveyorSorter/100mmSingleMain</string> -->
-				<!--<string>ConveyorSorter/100mmTwinMain</string> -->
-				<!--<string>ConveyorSorter/100mm55Main</string> -->
-				<string>ConveyorSorter/152mmMLE1930R</string>
-				<string>ConveyorSorter/152mmMLE1930NR</string>
-				<string>ConveyorSorter/152mmMLE1936HA</string>
 				<string>ConveyorSorter/15cmSKC28R</string>
 				<string>ConveyorSorter/15cmSKC28NR</string>
 				<string>ConveyorSorter/PomPomMain</string>
-				<string>ConveyorSorter/150mmCasemate</string>
 				<string>ConveyorSorter/BoforTwinRemodel</string>
 				<string>ConveyorSorter/BoforSingleRemodel</string>
-				<string>ConveyorSorter/203mmQuad</string>
-				<string>ConveyorSorter/203mmTwin</string>
 				<string>ConveyorSorter/TorpBarbette</string>
 				<string>Conveyor/Barbette5x5</string>
 				<string>ConveyorSorter/QuadBofor</string>
 				<string>ConveyorSorter/Mk25Rangefinder</string>
 				<string>ConveyorSorter/20InchTwin</string>
 				<string>ConveyorSorter/406alternate</string>
-				<string>ConveyorSorter/150mmCasemateTwin</string>
 			</ItemIds>
 		</Category>
 	</CategoryClasses>

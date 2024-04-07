@@ -9,9 +9,8 @@
 			<DisplayName>[FAS] Iowa</DisplayName>
 			<Description>
 				16 Inch Triple Gun
-				8km AI range, 10km shell range
+				7km AI range, 10km shell range
 				Fires HE amd AP Shells
-				Temp BP: 400
 			</Description>
 			<Icon>Textures\GUI\Icons\406alt.dds</Icon>
 			<CubeSize>Large</CubeSize>

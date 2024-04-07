@@ -10,7 +10,6 @@
 			<Description>
 				40mm Quad Bofor
 				4km Range, only effective vs smart munitions
-				Interim BP: 150
 			</Description>
 			<Icon>Textures\GUI\Icons\Cubes\QuadBofor.dds</Icon>
 			<CubeSize>Large</CubeSize>

@@ -10,7 +10,6 @@
 			<Description>
 				40mm Single Bofor
 				4km Range, only effective vs smart munitions
-				Interim BP: 75
 			</Description>
 			<Icon>Textures\GUI\Icons\Cubes\BoforSingleRemodel.dds</Icon>
 			<CubeSize>Large</CubeSize>

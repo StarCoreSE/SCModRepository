@@ -10,8 +10,7 @@
 			<Description>
 				20 Inch twin turret
 				Fires HE, AP and SAP
-				10km range
-				600BP interim
+				7km turret ai, 12km shell range
 			</Description>
 			<Icon>Textures\GUI\Icons\20Inch.dds</Icon>
 			<CubeSize>Large</CubeSize>
@@ -23,6 +22,7 @@
 				<Component Subtype="SteelPlate" Count="200" />
 				<Component Subtype="MetalGrid" Count="300" />
 				<Component Subtype="LargeTube" Count="250" />
+				<Component Subtype="GravityGenerator" Count="600" />
 				<Component Subtype="Motor" Count="400" />
 				<Component Subtype="Computer" Count="100" />
 				<Component Subtype="Construction" Count="6000" />
