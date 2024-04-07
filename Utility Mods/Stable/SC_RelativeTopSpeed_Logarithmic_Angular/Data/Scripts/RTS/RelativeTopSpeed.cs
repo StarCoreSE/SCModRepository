@@ -112,7 +112,7 @@ namespace RelativeTopSpeedGV
                 return;
 
             //Ignoring suspension wheels and debris
-            if (grid.BlocksCount <= 2)
+            if (grid.BlocksCount <= 0)
             {
                 /*foreach (var block in grid.GetBlocks())
                 {
