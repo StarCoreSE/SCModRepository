@@ -958,7 +958,6 @@
 		150mm Single gun
 		5km AI range
 		Fires HE shell
-		Temp BP: 100
 	</Description>
       <Icon>Textures\GUI\Icons\15cmTbtsKC36_Icon.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1028,7 +1027,6 @@
 		127mm Twin gun
 		4km AI Range, 5km shell range, Heal has 6km
 		Fires HE, SAP and Heal shell
-		Temp BP: 250
 	</Description>
       <Icon>Textures\GUI\Icons\5InchDualGun.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1097,7 +1095,6 @@
 		127mm Single gun
 		4km AI Range, 5km shell range, Heal has 6km
 		Fires HE, SAP and Heal shell
-		Temp BP: 175
 	</Description>
       <Icon>Textures\GUI\Icons\127mmMk12_Icon.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1165,7 +1162,6 @@
 		127mm Single gun
 		4km AI Range, 5km shell range, Heal has 6km
 		Fires HE, SAP and Heal shell
-		Temp BP: 175
 	</Description>
       <Icon>Textures\GUI\Icons\127mmMk24.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1239,8 +1235,7 @@
 	<Description>
 		6 Inch Triple gun
 		5km Range
-		Fires AP and HE shells
-		Temp BP: 200
+		Fires AP shells
 	</Description>
       <Icon>Textures\GUI\Icons\6InchTripleGun.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1307,9 +1302,8 @@
       <DisplayName>[FAS] Iowa</DisplayName>
 	<Description>
 		16 Inch Triple Gun
-		8km AI range, 10km shell range
+		7km AI range, 10km shell range
 		Fires HE amd AP Shells
-		Temp BP: 400
 	</Description>
       <Icon>Textures\GUI\Icons\16InchTripleGun.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1378,9 +1372,8 @@
       <DisplayName>[FAS] Tirpitz</DisplayName>
 	<Description>
 		15 Inch Twin gun
-		8km AI range, 10km shell range
+		7km AI range, 10km shell range
 		Fires HE amd AP Shells
-		Temp BP: 250
 	</Description>
       <Icon>Textures\GUI\Icons\381mmR.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1452,9 +1445,8 @@
       <DisplayName>[FAS] Tirpitz</DisplayName>
 	<Description>
 		15 Inch Twin gun
-		8km AI range, 10km shell range
+		7km AI range, 10km shell range
 		Fires HE amd AP Shells
-		Temp BP: 250
 	</Description>
       <Icon>Textures\GUI\Icons\381mmNR.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1526,7 +1518,6 @@
 			150mm Twin gun
 			5km AI range
 			Fires HE shell
-			Temp BP: 125
 		</Description>
       <Icon>Textures\GUI\Icons\15cmR.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1600,7 +1591,6 @@
 		150mm Twin gun
 		5km AI range
 		Fires HE shell
-		Temp BP: 125
 	</Description>
       <Icon>Textures\GUI\Icons\15cmNR.dds</Icon>
       <GuiVisible>false</GuiVisible>
@@ -1671,9 +1661,8 @@
       <DisplayName>[FAS] Jean Bart</DisplayName>
 	<Description>
 		15 Inch Quad gun
-		8km AI range, 10km shell range
+		7km AI range, 10km shell range
 		Fires HE amd AP Shells
-		Temp BP: 400
 	</Description>
       <Icon>Textures\GUI\Icons\380mmMLE1935_Icon.dds</Icon>
       <CubeSize>Large</CubeSize>

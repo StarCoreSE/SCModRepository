@@ -10,8 +10,7 @@
 			<Description>
 				20 Inch twin turret
 				Fires HE, AP and SAP
-				10km range
-				600BP interim
+				7km turret ai, 12km shell range
 			</Description>
 			<Icon>Textures\GUI\Icons\20Inch.dds</Icon>
 			<CubeSize>Large</CubeSize>

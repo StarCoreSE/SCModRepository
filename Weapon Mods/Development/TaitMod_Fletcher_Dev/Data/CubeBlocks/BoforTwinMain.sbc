@@ -10,7 +10,6 @@
 			<Description>
 				40mm Twin Bofor
 				4km Range, only effective vs smart munitions
-				Interim BP: 95
 			</Description>
 			<Icon>Textures\GUI\Icons\Cubes\BoforTwinMain.dds</Icon>
 			<CubeSize>Large</CubeSize>
