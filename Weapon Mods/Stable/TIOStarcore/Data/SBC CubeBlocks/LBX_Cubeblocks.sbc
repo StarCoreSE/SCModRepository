@@ -6,21 +6,22 @@
 	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 		  <Id>
 			  <TypeId>ConveyorSorter</TypeId>
-			  <SubtypeId>NavalHeavyGaussRifle</SubtypeId>
+			  <SubtypeId>JN_175Fixed</SubtypeId>
 		  </Id>
-		  <DisplayName>[CA]'Grizzly' Naval Heavy Gauss Rifle</DisplayName>
+		  <DisplayName>[CA] Naval LB-5X</DisplayName>
 		  <Description>
-		  9km Range. Kinetic. Short Ranged. 4 Second Targeting Beam, 1/60th of a second Hypervelocity Slug
-		  WIP, trying to make a hitscan feel like a bullet is hard.
-
+		  Long Ranged, 2 ammo types.
+		  +High Explosive - Energy Damage 2km Blast Zone, please use with caution. 900m/s
+		  +Cluster Shot - Kinetic Damage, proximity fused fragmentation warhead. 1600m/s
+		  
 		  </Description>
 		  <Icon>Textures\GUI\Icons\Cubes\LBX5.dds</Icon>
 		  <CubeSize>Large</CubeSize>
 		  <GuiVisible>true</GuiVisible>
 		  <BlockTopology>TriangleMesh</BlockTopology>
-		  <Size x="2" y="2" z="9"/>
-		  <ModelOffset x="0" y="0" z="-0.725" />
-		  <Model>Models\Cubes\NavalHeavyGaussRifle.mwm</Model>
+		  <Size x="2" y="2" z="10"/>
+		  <ModelOffset x="0" y="0" z="0" />
+		  <Model>Models\Cubes\LBX5_Main.mwm</Model>
 		  <Components>
 			  <Component Subtype="Construction" Count="2000" />
 			  <Component Subtype="GravityGenerator" Count="100" />			  
@@ -36,22 +37,16 @@
 		  <CriticalComponent Subtype="Computer" Index="0" />
 		  <MountPoints>
 			  <MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00" Default="true"/>
-			  <MountPoint Side="Front" StartX="1.50" StartY="0.00" EndX="2.00" EndY="2.00"/>
-			  <MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="0.50" EndY="2.00"/>
-			  <MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="2.00" EndY="0.50"/>
-			  <MountPoint Side="Front" StartX="0.00" StartY="1.50" EndX="2.00" EndY="2.00"/>
-			  <MountPoint Side="Left" StartX="5.50" StartY="0.00" EndX="9.00" EndY="2.00"/>
-			  <MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="3.50" EndY="2.00"/>
-			  <MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="2.00" EndY="3.50"/>
-			  <MountPoint Side="Bottom" StartX="0.00" StartY="5.50" EndX="2.00" EndY="9.00"/>
-			  <MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="2.00" EndY="3.50"/>
-			  <MountPoint Side="Top" StartX="0.00" StartY="4.50" EndX="2.00" EndY="9.00"/>
+			  <MountPoint Side="Left" StartX="8.00" StartY="0.00" EndX="10.00" EndY="2.00"/>
+			  <MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+			  <MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+			  <MountPoint Side="Bottom" StartX="0.00" StartY="8.00" EndX="2.00" EndY="10.00"/>
 		  </MountPoints>
 		  <MirroringY>Z</MirroringY>
 		  <MirroringZ>Y</MirroringZ>
-		  <BlockPairName>Helldivers2RailgunStratagem</BlockPairName>
+		  <BlockPairName>YourBlockPairName</BlockPairName>
 		  <EdgeType>Light</EdgeType>
-		  <BuildTimeSeconds>160</BuildTimeSeconds>
+		  <BuildTimeSeconds>180</BuildTimeSeconds>
 		  <DisassembleRatio>5</DisassembleRatio>
 		  <NavigationDefinition>Default</NavigationDefinition>
 		  <WeaponDefinitionId Subtype="JN_175Fixed" />
@@ -66,7 +61,10 @@
 		  <MaxRangeMeters>10000</MaxRangeMeters>
 		  <RotationSpeed>0</RotationSpeed>
 		  <ElevationSpeed>0</ElevationSpeed>
+		  <MinFov>0.1</MinFov>
+		  <MaxFov>1.1</MaxFov>
 	  </Definition>
-	</CubeBlocks>
+
+  </CubeBlocks>
 
 </Definitions>
