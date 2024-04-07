@@ -116,10 +116,10 @@ namespace Scripts
                 },
                 Armor = new ArmorDef
                 {
-                    Armor = 1.55f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
-                    Light = -1f, // Multiplier for damage against light armor.
-                    Heavy = -1f, // Multiplier for damage against heavy armor.
-                    NonArmor = 0.45f, // Multiplier for damage against every else.
+                    Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
+                    Light = 1.95f, // Multiplier for damage against light armor.
+                    Heavy = 1.55f, // Multiplier for damage against heavy armor.
+                    NonArmor = 0.35f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
@@ -416,7 +416,7 @@ namespace Scripts
         private AmmoDef K_SA_GaussRound_Flashfire => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "K_GaussCase_S", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "Carnifex", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
+            AmmoRound = "Concussion Bolter", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.05f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 12000f, // Direct damage; one steel plate is worth 100.
@@ -578,17 +578,17 @@ namespace Scripts
                     Shape = Diamond, // Round or Diamond
                 },
             },
-            Ewar = new EwarDef
+                        Ewar = new EwarDef
             {
-                Enable = false, // Enables EWAR effects AND DISABLES BASE DAMAGE AND AOE DAMAGE!!
-                Type = EnergySink, // EnergySink, Emp, Offense, Nav, Dot, AntiSmart, JumpNull, Anchor, Tractor, Pull, Push, 
-                Mode = Effect, // Effect , Field
-                Strength = 100f,
-                Radius = 5f, // Meters
-                Duration = 100, // In Ticks
-                StackDuration = true, // Combined Durations
+                Enable = true, // Enables EWAR effects AND DISABLES BASE DAMAGE AND AOE DAMAGE!!
+                Type = Push, // EnergySink, Emp, Offense, Nav, Dot, AntiSmart, JumpNull, Anchor, Tractor, Pull, Push, 
+                Mode = Field, // Effect , Field
+                Strength = 10f,
+                Radius = 250f, // Meters
+                Duration = 10, // In Ticks
+                StackDuration = false, // Combined Durations
                 Depletable = true,
-                MaxStacks = 10, // Max Debuffs at once
+                MaxStacks = 0, // Max Debuffs at once
                 NoHitParticle = false,
                 /*
                 EnergySink : Targets & Shutdowns Power Supplies, such as Batteries & Reactor
@@ -606,19 +606,19 @@ namespace Scripts
                 */
                 Force = new PushPullDef
                 {
-                    ForceFrom = ProjectileLastPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
-                    ForceTo = HitPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
-                    Position = TargetCenterOfMass, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
+                    ForceFrom = HitPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
+                    ForceTo = TargetCenter, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
+                    Position = TargetCenter, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
                     DisableRelativeMass = false,
                     TractorRange = 0,
                     ShooterFeelsForce = false,
                 },
                 Field = new FieldDef
                 {
-                    Interval = 0, // Time between each pulse, in game ticks (60 == 1 second).
-                    PulseChance = 0, // Chance from 0 - 100 that an entity in the field will be hit by any given pulse.
-                    GrowTime = 0, // How many ticks it should take the field to grow to full size.
-                    HideModel = false, // Hide the projectile model if it has one.
+                    Interval = 10, // Time between each pulse, in game ticks (60 == 1 second), starts at 0 (59 == tick 60).
+                    PulseChance = 100, // Chance from 0 - 100 that an entity in the field will be hit by any given pulse.
+                    GrowTime = 180, // How many ticks it should take the field to grow to full size.
+                    HideModel = false, // Hide the default bubble, or other model if specified.
                     ShowParticle = true, // Show Block damage effect.
                     TriggerRange = 250f, //range at which fields are triggered
                     Particle = new ParticleDef // Particle effect to generate at the field's position.

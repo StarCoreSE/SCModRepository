@@ -387,7 +387,7 @@ namespace Scripts
                         },
                         TextureMode = Normal,
                         DecayTime = 90,
-                        Color = Color(red: 50, green: 45, blue: 10f, alpha: 1),
+                        Color = Color(red: 25, green: 22, blue: 5f, alpha: 1),
                         Back = false,
                         CustomWidth = 0.1f,
                         UseWidthVariance = false,
@@ -397,7 +397,7 @@ namespace Scripts
                     {
                         MaxOffset = 0,// 0 offset value disables this effect
                         MinLength = 0.2f,
-                        MaxLength = 3,
+                        MaxLength = 2,
                     },
                 },
             },
