@@ -1662,9 +1662,9 @@
 		  <Loopable>true</Loopable>
 		  <Waves>
 			  <Wave Type="D3">
-				  <Start>Audio\MW4 Laser Medium.wav</Start>
-          <Loop>Audio\MW4 Laser MediumLoop.wav</Loop>
-          <End>Audio\MW4 Laser MediumEND.wav</End>
+				  	<Start>Audio\Shot\MW4 Laser Medium.wav</Start>
+          			<Loop>Audio\Shot\MW4 Laser MediumLoop.wav</Loop>
+          			<End>Audio\Shot\MW4 Laser MediumEND.wav</End>
 			  </Wave>
 		  </Waves>
 	  </Sound> 

@@ -37,6 +37,7 @@
 				<string>ConveyorSorter/KreegMagnetarCannon</string>
 				<string>ConveyorSorter/Thagomizer</string>
 				<string>ConveyorSorter/Thagomizer_Angled</string>
+				<string>ConveyorSorter/JN_175Fixed</string>
 
 
             </ItemIds>
@@ -79,6 +80,7 @@
 				<string>ConveyorSorter/KreegMagnetarCannon</string>
 				<string>ConveyorSorter/Thagomizer</string>
 				<string>ConveyorSorter/Thagomizer_Angled</string>
+				<string>ConveyorSorter/JN_175Fixed</string>
 
 
             </ItemIds>
