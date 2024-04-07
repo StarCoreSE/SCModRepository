@@ -8,7 +8,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>NovaCannon</SubtypeId>
       </Id>
-      <DisplayName>[40K] Nova Cannon</DisplayName>
+      <DisplayName>[EXO] 40K Nova Cannon</DisplayName>
       <Description>
         The Nova Cannon is a weapon of ancient providence dating back to the Age of Technology, easily able to wreak vast destruction upon enemy vessels at great range.
         Its projectiles vary, ranging from sophisticated plasma warheads which burn with the ferocity of a small star for a fraction of a second, to implosive devices which exert destructive gravitational forces upon all those caught within kilometres of the detonation.
@@ -55,7 +55,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>GothicTorp</SubtypeId>
       </Id>
-      <DisplayName>[40K] Gothic Torpedo Launcher</DisplayName>
+      <DisplayName>[EXO] 40K Gothic Torpedo Launcher</DisplayName>
       <Description>
         Anti-ship torpedoes are powered by a plasma reactor, which makes up part of the warhead as well as the method of propulsion. 
         Standard Imperial torpedoes move in a straight line and have limited sensing and targeting abilities, turning to intercept if they come close their target.
@@ -105,7 +105,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MacroCannon</SubtypeId>
       </Id>
-      <DisplayName>[40K] Macro Cannon</DisplayName>
+      <DisplayName>[EXO] 40K Macro Cannon</DisplayName>
       <Description>
         Macrocannons have been used as a main armament on the starships of the Imperium of Man since the time of the Great Crusade in the late 30th Millennium.
         These massive ballistic weapons are deployed in batteries, and destroy their targets through the delivery of powerful broadsides of shells fired in volley to overwhelm their enemy in a barrage of destruction.
@@ -158,7 +158,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>LanceBattery</SubtypeId>
       </Id>
-      <DisplayName>[40K] Lance Battery</DisplayName>
+      <DisplayName>[EXO] 40K Lance Battery</DisplayName>
       <Description>
         A lance is a large, spaceship-mounted energy weapon, often seen on various Imperial Navy vessels. The principle of such a weapon is an extremely high-powered energy beam;
         the efficiency of a lance turret is increased by the incorporation of several smaller beam projectors into a single, focused beam. 
@@ -208,7 +208,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>LanceLightBattery</SubtypeId>
       </Id>
-      <DisplayName>[40K] Light Lance Battery</DisplayName>
+      <DisplayName>[EXO] 40K Light Lance Battery</DisplayName>
       <Description>
         A lance is a large, spaceship-mounted energy weapon, often seen on various Imperial Navy vessels. The principle of such a weapon is an extremely high-powered energy beam;
         the efficiency of a lance turret is increased by the incorporation of several smaller beam projectors into a single, focused beam.
@@ -258,7 +258,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>LanceHeavyBattery</SubtypeId>
       </Id>
-      <DisplayName>[40K] Heavy Lance Battery</DisplayName>
+      <DisplayName>[EXO] 40K Heavy Lance Battery</DisplayName>
       <Description>
         A lance is a large, spaceship-mounted energy weapon, often seen on various Imperial Navy vessels. The principle of such a weapon is an extremely high-powered energy beam;
         the efficiency of a lance turret is increased by the incorporation of several smaller beam projectors into a single, focused beam.
