@@ -75,7 +75,7 @@
 		  </DistantSounds>
       <!-- Prevents this sound from having this many active playbacks at once, 0 = infinite. -->
       <SoundLimit>1</SoundLimit>
-      <Volume>1</Volume>
+      <Volume>1.5</Volume>
       <Loopable>true</Loopable>
       <Waves>
         <Wave Type="D3">
