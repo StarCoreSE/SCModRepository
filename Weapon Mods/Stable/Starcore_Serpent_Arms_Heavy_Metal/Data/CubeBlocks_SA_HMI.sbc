@@ -383,8 +383,8 @@ Ammunition: [5000m/s,] [Kinetic] </Description>
       </Id>
       <DisplayName>[SA] Magnetic Monopole Compression Cannon</DisplayName>
 <Description>Long Ranged Fixed: [7km] 
-Idle Power: [100 MW]
-Firing Power: [~450 MW]
+Idle Power: [0 MW]
+Firing Power: [~300 MW]
 Ammunition: [Kinetic] </Description>
       <Icon>Textures\GUI\Icons\MMCC.dds</Icon>
       <CubeSize>Large</CubeSize>
