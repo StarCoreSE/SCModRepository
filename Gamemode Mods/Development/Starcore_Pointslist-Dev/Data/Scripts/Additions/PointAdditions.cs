@@ -486,8 +486,8 @@ namespace ShipPoints
 				381mmDualR@250;
                 381mmDualNR@250;
                 380mmMLE1935@400;
-                15cmSKC28R@225;
-                15cmSKC28NR@225;
+                15cmSKC28R@175;
+                15cmSKC28NR@175;
                 128mmL45@200;
                 128mmSKC34@250;
                 127mmMk12@175;
