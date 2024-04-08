@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>150mmCasemate</SubtypeId>
+			</Id>
+			<DisplayName>[FAS] 150mm Casemate Single</DisplayName>
+			<Description>
+				150mm Twin gun
+				4.5km AI range
+				Fires HE shell
+				Temp BP: 100
+			</Description>
+			<Icon>Textures\GUI\Icons\150singlecasemate.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\150mmSingleCasemate\barbette.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="320" />
+				<Component Subtype="Construction" Count="300" />
+				<Component Subtype="SmallTube" Count="200" />
+				<Component Subtype="MetalGrid" Count="80" />
+				<Component Subtype="Motor" Count="100" />
+				<Component Subtype="LargeTube" Count="150" />
+				<Component Subtype="Computer" Count="300" />
+				<Component Subtype="Construction" Count="200" />
+				<Component Subtype="SteelPlate" Count="5000" />
+			</Components>
+			<CriticalComponent Index="15" Subtype="Computer"/>
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+				<MountPoint Side="Left" StartX="0.5" StartY="0.0" EndX="1.0" EndY="1.0"/>
+				<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="0.5" EndY="1.0"/>
+				<MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="0.5" EndX="1.0" EndY="1.0"/>
+			</MountPoints>
+			<BlockPairName>150mmCasemate</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

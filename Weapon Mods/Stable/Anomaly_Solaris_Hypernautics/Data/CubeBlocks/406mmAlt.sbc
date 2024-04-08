@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>406alternate</SubtypeId>
+			</Id>
+			<DisplayName>[FAS] Iowa</DisplayName>
+			<Description>
+				16 Inch Triple Gun
+				7km AI range, 10km shell range
+				Fires HE amd AP Shells
+			</Description>
+			<Icon>Textures\GUI\Icons\406alt.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="5" y="2" z="5"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\406mmAltModel\Barbette.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="200" />
+				<Component Subtype="MetalGrid" Count="300" />
+				<Component Subtype="LargeTube" Count="250" />
+				<Component Subtype="Motor" Count="400" />
+				<Component Subtype="Computer" Count="100" />
+				<Component Subtype="Construction" Count="3000" />
+				<Component Subtype="MetalGrid" Count="600" />
+				<Component Subtype="SteelPlate" Count="6500" />
+			</Components>
+			<CriticalComponent Subtype="Motor" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="1" StartY="1" EndX="6" EndY="6" />
+			</MountPoints>
+			<BlockPairName>406alternate</BlockPairName>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

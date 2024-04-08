@@ -1,0 +1,374 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Blueprints>
+ 
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>40mmClip</SubtypeId>
+      </Id>
+      <DisplayName>40mm Ammo Clip</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\40mmCan.dds</Icon>
+      <Prerequisites>
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="2" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="40mmClip" />
+      <BaseProductionTimeInSeconds>5</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+	<Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>40mmShellEmptyCase</SubtypeId>
+      </Id>
+      <DisplayName>40mm Shell Empty</DisplayName>
+      <Icon>Textures\GUI\Icons\component\ScrapMetalComponent.dds</Icon>
+      <Prerequisites>
+        <Item Amount="2" TypeId="Ingot" SubtypeId="Iron" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="40mmShellCaseEmpty" />
+      <BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>
+    </Blueprint>   
+
+	 
+
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>37mmClip</SubtypeId>
+      </Id>
+      <DisplayName>3.7cm Munitionsklammer</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\37mmClip.dds</Icon>
+      <Prerequisites>
+        <Item Amount="4" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="3" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="3" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="37mmClip" />
+      <BaseProductionTimeInSeconds>5</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>20mmDrum</SubtypeId>
+      </Id>
+      <DisplayName>20mm Drum</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\20mmDrum.dds</Icon>
+      <Prerequisites>
+        <Item Amount="2" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="4" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="20mmDrum" />
+      <BaseProductionTimeInSeconds>4</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>2cmClip</SubtypeId>
+      </Id>
+      <DisplayName>2cm Munitionsklammer</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\2cmClip.dds</Icon>
+      <Prerequisites>
+        <Item Amount="3" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="2" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="2cmClip" />
+      <BaseProductionTimeInSeconds>4</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>5InchShell</SubtypeId>
+      </Id>
+      <DisplayName>5 Inch HE Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\5InchShell.dds</Icon>
+      <Prerequisites>
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="2" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="5InchShell" />
+      <BaseProductionTimeInSeconds>5</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>128mmShell</SubtypeId>
+      </Id>
+      <DisplayName>12.8cm AP Runden</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\128mmShell.dds</Icon>
+      <Prerequisites>
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="2" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="128mmShell" />
+      <BaseProductionTimeInSeconds>5</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>6InchShell</SubtypeId>
+      </Id>
+      <DisplayName>6 Inch HE Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\6InchShell.dds</Icon>
+      <Prerequisites>
+        <Item Amount="1.2" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="1.5" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="3" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="6InchShell" />
+      <BaseProductionTimeInSeconds>10</BaseProductionTimeInSeconds>
+    </Blueprint>
+
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>16InchShell</SubtypeId>
+      </Id>
+      <DisplayName>16 Inch AP Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\16InchShell.dds</Icon>
+      <Prerequisites>
+        <Item Amount="7" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="4" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="8" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="16InchShell" />
+      <BaseProductionTimeInSeconds>15</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>381mmShell</SubtypeId>
+      </Id>
+      <DisplayName>38.1CM AP Runden</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\381mmShell.dds</Icon>
+      <Prerequisites>
+        <Item Amount="7" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="4" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="8" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="381mmShell" />
+      <BaseProductionTimeInSeconds>15</BaseProductionTimeInSeconds>
+    </Blueprint>
+
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>105mmSAP</SubtypeId>
+      </Id>
+      <DisplayName>10.5cm HE Runden</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\10cmRound_Icon.dds</Icon>
+      <Prerequisites>
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="1.6" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="4" TypeId="AmmoMagazine" SubtypeId="105mmSAP" />
+      <BaseProductionTimeInSeconds>5</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>15cmShell</SubtypeId>
+      </Id>
+      <DisplayName>15cm AP Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\15cmShell.dds</Icon>
+      <Prerequisites>
+        <Item Amount="1.2" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="1.5" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="3" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="15cmShell" />
+      <BaseProductionTimeInSeconds>7</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>127mmHVAR</SubtypeId>
+      </Id>
+      <DisplayName>127mm HVAR Rocket</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\127mmHVAR.dds</Icon>
+      <Prerequisites>
+        <Item Amount="0.8" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="1.2" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="127mmHVAR" />
+      <BaseProductionTimeInSeconds>5</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>12mmAmmoBox</SubtypeId>
+      </Id>
+      <DisplayName>12.7x108mm NATO 100rd</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\12.7mmAmmoCan_Icon.dds</Icon>
+      <Prerequisites>
+        <Item Amount="0.5" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="0.8" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="0.8" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="12mmAmmoBox" />
+      <BaseProductionTimeInSeconds>5</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+<Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>152mmMLE_APShell</SubtypeId>
+      </Id>
+      <DisplayName>152 x 1092 mm 17.1kg OPfk Mle 1937</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\152mm55AP_Icon.dds</Icon>
+      <Prerequisites>
+        <Item Amount="1.2" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="1.5" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="3" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="152mmMLEShell" />
+      <BaseProductionTimeInSeconds>10</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>13mmAmmoBox</SubtypeId>
+      </Id>
+      <DisplayName>13.2 x 9mm 40rd</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\13mmClip_icon.dds</Icon>
+      <Prerequisites>
+        <Item Amount="0.5" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="0.8" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="0.8" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="13mmAmmoBox" />
+      <BaseProductionTimeInSeconds>5</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>37mmMLE1933Shell</SubtypeId>
+      </Id>
+      <DisplayName>37 x 278mm Incendiaire MLE 1924</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\37mmMLE1933Round_icon.dds</Icon>
+      <Prerequisites>
+        <Item Amount="2" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="2" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="6" TypeId="AmmoMagazine" SubtypeId="37mmMLE1933Shell" />
+      <BaseProductionTimeInSeconds>5</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>100mmMLE1931Shell</SubtypeId>
+      </Id>
+      <DisplayName>100mm HE Shell</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\100mmMLE1931Ammo_icon.dds</Icon>
+      <Prerequisites>
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="1.4" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="100mmMLE1931Shell" />
+      <BaseProductionTimeInSeconds>7</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+<Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>203mm501931_HEShell</SubtypeId>
+      </Id>
+      <DisplayName>OEA Mle 1931 203mm</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\203MLE1931Ammo_icon.dds</Icon>
+      <Prerequisites>
+        <Item Amount="1.5" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="1.8" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="4" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="203mm501931_HEShell" />
+      <BaseProductionTimeInSeconds>10</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>380mmHEShell</SubtypeId>
+      </Id>
+      <DisplayName>380mm OEA Mle 1949</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\380mmShell_Icon.dds</Icon>
+      <Prerequisites>
+        <Item Amount="7" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="4" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="8" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="380mmHEShell" />
+      <BaseProductionTimeInSeconds>15</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>139mmHEShell</SubtypeId>
+      </Id>
+      <DisplayName>139 x 900mm 40kg OEA Mle 1929</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\139mm_Icon.dds</Icon>
+      <Prerequisites>
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="1" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="2.1" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="139mmHEShell" />
+      <BaseProductionTimeInSeconds>5</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>QF4PomPomMag</SubtypeId>
+      </Id>
+      <DisplayName>40 x 158R 14rd</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\QF4BoxMag_icon.dds</Icon>
+      <Prerequisites>
+        <Item Amount="2" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="2" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="2" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="QF4PomPomMag" />
+      <BaseProductionTimeInSeconds>5</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+    <Blueprint>
+      <Id>
+        <TypeId>BlueprintDefinition</TypeId>
+        <SubtypeId>120mmShell</SubtypeId>
+      </Id>
+      <DisplayName>4.7 Inch S.A.P.</DisplayName>
+      <Icon>Textures\GUI\Icons\ammo\4.7InchShell_Icon.dds</Icon>
+      <Prerequisites>
+        <Item Amount="1.5" TypeId="Ingot" SubtypeId="Iron" />
+        <Item Amount="1.5" TypeId="Ingot" SubtypeId="Nickel" />
+        <Item Amount="2.1" TypeId="Ingot" SubtypeId="Magnesium" />
+      </Prerequisites>
+      <Result Amount="1" TypeId="AmmoMagazine" SubtypeId="120mmShell" />
+      <BaseProductionTimeInSeconds>6</BaseProductionTimeInSeconds>
+    </Blueprint>
+	
+  </Blueprints>
+</Definitions>
