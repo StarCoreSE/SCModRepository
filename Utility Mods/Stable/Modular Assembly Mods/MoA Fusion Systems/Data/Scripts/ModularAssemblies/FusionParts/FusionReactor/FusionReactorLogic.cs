@@ -36,12 +36,6 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             // Power generated (per second)
             var reactorOutput = reactorEfficiencyMultiplier * powerConsumption * MegawattsPerFusionPower;
 
-            if (reactorOutput > MaxPowerPerReactor)
-            {
-                reactorOutput = MaxPowerPerReactor;
-                powerConsumption = GetConsumptionFromPower(reactorOutput, MegawattsPerFusionPower);
-            }
-
             BufferReactorOutput = reactorOutput;
             MaxPowerConsumption = powerConsumption / 60;
 
@@ -53,11 +47,6 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
             // Convert back into power per tick
             SyncMultipliers.ReactorOutput(Block, BufferReactorOutput);
-        }
-
-        private float GetConsumptionFromPower(float reactorOutput, float MegawattsPerFusionPower)
-        {
-            return reactorOutput / MegawattsPerFusionPower;
         }
 
         public void SetPowerBoost(bool value)
