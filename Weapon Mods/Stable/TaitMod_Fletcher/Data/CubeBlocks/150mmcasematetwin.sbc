@@ -6,7 +6,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>150mmCasemateTwin</SubtypeId>
 			</Id>
-			<DisplayName>150mm Twin Casemate</DisplayName>
+			<DisplayName>[FAS] 150mm Twin Casemate</DisplayName>
 			<Description>
 				150mm Twin gun
 				4.5km AI range

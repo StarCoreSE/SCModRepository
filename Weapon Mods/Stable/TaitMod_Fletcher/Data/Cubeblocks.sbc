@@ -947,26 +947,24 @@
       <MinFov>0.1</MinFov>
       <MaxFov>1.04719755</MaxFov>
     </Definition> -->
-	
-<Definition xsi:type="MyObjectBuilder_LargeTurretBaseDefinition">
-      <Id>
-        <TypeId>LargeMissileTurret</TypeId>
+
+	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>15cmTbtsKC36</SubtypeId>
       </Id>	
-      <DisplayName>150mm/36 Single</DisplayName>
+      <DisplayName>[FAS] Sharnhorst</DisplayName>
 	<Description>
 		150mm Single gun
 		5km AI range
 		Fires HE shell
-		Temp BP: 100
-		Missileturret: DO NOT GROUP
 	</Description>
       <Icon>Textures\GUI\Icons\15cmTbtsKC36_Icon.dds</Icon>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="1" y="1" z="1" />
       <ModelOffset x="0" y="0" z="0" />
-      <Model>Models\15cmTbtsKC36_Base_Large.mwm</Model>
+      <Model>Models\150mm single 36\15cmKCMain.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
         <Component Subtype="SteelPlate" Count="100" />
@@ -974,18 +972,14 @@
         <Component Subtype="LargeTube" Count="200" />
         <Component Subtype="Motor" Count="100" />
         <Component Subtype="Computer" Count="100" />
-        <Component Subtype="Construction" Count="2000" />
+        <Component Subtype="Construction" Count="1000" />
 		<Component Subtype="MetalGrid" Count="200" />
-        <Component Subtype="SteelPlate" Count="1600" />
+        <Component Subtype="SteelPlate" Count="800" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
         <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="1" EndY="1" />
       </MountPoints>
-      <BuildProgressModels>
-		<Model BuildPercentUpperBound="0.99" File="Models\15cmTbtskT_Build_Large.mwm" />	  
-        <Model BuildPercentUpperBound="1.00" File="Models\15cmTbtsKC36_Base_Large.mwm" />
-      </BuildProgressModels>
       <VoxelPlacement>
         <StaticMode>
           <PlacementMode>OutsideVoxel</PlacementMode>
@@ -1020,28 +1014,26 @@
       <MinFov>0.1</MinFov>
       <MaxFov>1.04719755</MaxFov>
     </Definition>
-	
 
 
-<Definition xsi:type="MyObjectBuilder_LargeTurretBaseDefinition">
-      <Id>
-        <TypeId>LargeMissileTurret</TypeId>
+
+	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>127mmMk32</SubtypeId>
       </Id>	
-      <DisplayName>5"/38 Mk32</DisplayName>
+      <DisplayName>[FAS] Atlanta</DisplayName>
 	<Description>
 		127mm Twin gun
 		4km AI Range, 5km shell range, Heal has 6km
 		Fires HE, SAP and Heal shell
-		Temp BP: 250
-		Missileturret: DO NOT GROUP
 	</Description>
       <Icon>Textures\GUI\Icons\5InchDualGun.dds</Icon>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="3" y="2" z="3" />
       <ModelOffset x="0" y="0" z="0" />
-      <Model>Models\Twin5InchGunsBase_Large.mwm</Model>
+      <Model>Models\127mm mk32\5Inch38Twin.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
         <Component Subtype="SteelPlate" Count="100" />
@@ -1057,11 +1049,6 @@
       <MountPoints>
         <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="2" EndY="2" />
       </MountPoints>
-      <BuildProgressModels>
-		<Model BuildPercentUpperBound="0.50" File="Models\Twin5InchBuild0_Large.mwm" />
-		<Model BuildPercentUpperBound="0.99" File="Models\Twin5InchBuild50_Large.mwm" />
-        <Model BuildPercentUpperBound="1.00" File="Models\Twin5InchGunsBase_Large.mwm" />
-      </BuildProgressModels>
       <VoxelPlacement>
         <StaticMode>
           <PlacementMode>OutsideVoxel</PlacementMode>
@@ -1103,20 +1090,18 @@
         <TypeId>LargeMissileTurret</TypeId>
         <SubtypeId>127mmMk12</SubtypeId>
       </Id>	
-      <DisplayName>5"/38 Mk12</DisplayName>
+      <DisplayName>[FAS] Benson</DisplayName>
 	<Description>
 		127mm Single gun
 		4km AI Range, 5km shell range, Heal has 6km
 		Fires HE, SAP and Heal shell
-		Temp BP: 175
-		Missileturret: DO NOT GROUP
 	</Description>
       <Icon>Textures\GUI\Icons\127mmMk12_Icon.dds</Icon>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="3" y="2" z="3" />
       <ModelOffset x="0" y="0" z="0" />
-      <Model>Models\127mmMk12Base_Large.mwm</Model>
+      <Model>Models\127mm mk12\5InchMk30Main.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
         <Component Subtype="SteelPlate" Count="100" />
@@ -1126,16 +1111,12 @@
         <Component Subtype="Computer" Count="100" />
         <Component Subtype="Construction" Count="200" />
 		<Component Subtype="MetalGrid" Count="200" />
-        <Component Subtype="SteelPlate" Count="1400" />
+        <Component Subtype="SteelPlate" Count="700" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
         <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="2" EndY="2" />
       </MountPoints>
-      <BuildProgressModels>
-        <Model BuildPercentUpperBound="1.00" File="Models\127mmMk12_Build_Large.mwm" />
-        <Model BuildPercentUpperBound="1.00" File="Models\127mmMk12Base_Large.mwm" />
-      </BuildProgressModels>
       <VoxelPlacement>
         <StaticMode>
           <PlacementMode>OutsideVoxel</PlacementMode>
@@ -1170,26 +1151,24 @@
       <MinFov>0.1</MinFov>
       <MaxFov>1.05</MaxFov>
     </Definition>
-	
-<Definition xsi:type="MyObjectBuilder_LargeTurretBaseDefinition">
-      <Id>
-        <TypeId>LargeMissileTurret</TypeId>
+
+	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>127mmMk24</SubtypeId>
       </Id>	
-      <DisplayName>5"/38 Mk24</DisplayName>
+      <DisplayName>[FAS] Fletcher</DisplayName>
 	<Description>
 		127mm Single gun
 		4km AI Range, 5km shell range, Heal has 6km
 		Fires HE, SAP and Heal shell
-		Temp BP: 175
-		Missileturret: DO NOT GROUP
 	</Description>
       <Icon>Textures\GUI\Icons\127mmMk24.dds</Icon>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="1" y="1" z="1" />
       <ModelOffset x="0" y="0" z="0" />
-      <Model>Models\127mmBase_Large.mwm</Model>
+      <Model>Models\127mm mk24\5InchSingleMain.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
         <Component Subtype="SteelPlate" Count="80" />
@@ -1199,7 +1178,7 @@
         <Component Subtype="Computer" Count="50" />
         <Component Subtype="Construction" Count="200" />
 		<Component Subtype="MetalGrid" Count="200" />
-        <Component Subtype="SteelPlate" Count="1500" />
+        <Component Subtype="SteelPlate" Count="750" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
@@ -1244,28 +1223,26 @@
       <MinFov>0.1</MinFov>
       <MaxFov>1.04719755</MaxFov>
     </Definition>
-	
 
-	
-<Definition xsi:type="MyObjectBuilder_LargeTurretBaseDefinition">
-      <Id>
-        <TypeId>LargeMissileTurret</TypeId>
+
+
+	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>6InchTriple</SubtypeId>
       </Id>	
-      <DisplayName>6"/47 Triple Gun</DisplayName>
+      <DisplayName>[FAS] Helena</DisplayName>
 	<Description>
 		6 Inch Triple gun
 		5km Range
-		Fires AP and HE shells
-		Temp BP: 200
-		Missileturret: DO NOT GROUP
+		Fires AP shells
 	</Description>
       <Icon>Textures\GUI\Icons\6InchTripleGun.dds</Icon>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="5" y="1" z="5" />
-      <ModelOffset x="0" y= "-0.65" z="0" />
-      <Model>Models\6InchTripleBase_Large.mwm</Model>
+      <ModelOffset x="0" y= "0.95" z="0" />
+      <Model>Models\152mm triple\6InchMain.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
         <Component Subtype="SteelPlate" Count="100" />
@@ -1281,10 +1258,6 @@
       <MountPoints>
         <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="4" EndY="4" />
       </MountPoints>
-      <BuildProgressModels>
-		<Model BuildPercentUpperBound="0.50" File="Models\6InchBuild50_Large.mwm" />
-        <Model BuildPercentUpperBound="1.00" File="Models\6InchTripleBase_Large.mwm" />
-      </BuildProgressModels>
       <VoxelPlacement>
         <StaticMode>
           <PlacementMode>OutsideVoxel</PlacementMode>
@@ -1319,27 +1292,25 @@
       <MinFov>0.1</MinFov>
       <MaxFov>1.04719755</MaxFov>
     </Definition>
-	
 
-<Definition xsi:type="MyObjectBuilder_LargeTurretBaseDefinition">
-      <Id>
-        <TypeId>LargeMissileTurret</TypeId>
+
+	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>16InchTriple</SubtypeId>
       </Id>	
-      <DisplayName>16"/50 Triple Gun</DisplayName>
+      <DisplayName>[FAS] Iowa</DisplayName>
 	<Description>
 		16 Inch Triple Gun
-		6km AI range, 8km shell range
+		7km AI range, 10km shell range
 		Fires HE amd AP Shells
-		Temp BP: 400
-		Missileturret: DO NOT GROUP
 	</Description>
       <Icon>Textures\GUI\Icons\16InchTripleGun.dds</Icon>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="7" y="2" z="7" />
       <ModelOffset x="0" y="0" z="0" />
-      <Model>Models\16InchBase_Large.mwm</Model>
+      <Model>Models\406mm triple\16InchGun.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
         <Component Subtype="SteelPlate" Count="200" />
@@ -1355,11 +1326,6 @@
       <MountPoints>
         <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="6" EndY="6" />
       </MountPoints>
-      <BuildProgressModels>
-		<Model BuildPercentUpperBound="0.50" File="Models\16InchBuild0_Large.mwm" />
-		<Model BuildPercentUpperBound="0.99" File="Models\16InchBuild50_Large.mwm" />
-        <Model BuildPercentUpperBound="1.00" File="Models\16InchBase_Large.mwm" />
-      </BuildProgressModels>
       <VoxelPlacement>
         <StaticMode>
           <PlacementMode>OutsideVoxel</PlacementMode>
@@ -1398,25 +1364,23 @@
 	
 <!-- Break -->
 
-<Definition xsi:type="MyObjectBuilder_LargeTurretBaseDefinition">
-      <Id>
-        <TypeId>LargeMissileTurret</TypeId>
+	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>381mmDualR</SubtypeId>
       </Id>	
-      <DisplayName>15" mk24 Dual</DisplayName>
+      <DisplayName>[FAS] Tirpitz</DisplayName>
 	<Description>
 		15 Inch Twin gun
-		6km AI range, 8km shell range
+		7km AI range, 10km shell range
 		Fires HE amd AP Shells
-		Temp BP: 250
-		Missileturret: DO NOT GROUP
 	</Description>
       <Icon>Textures\GUI\Icons\381mmR.dds</Icon>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="7" y="2" z="7" />
       <ModelOffset x="0" y="0" z="0" />
-      <Model>Models\381mmSKC34BaseA_Large.mwm</Model>
+      <Model>Models\381mm mk24\38cmSk34.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
         <Component Subtype="SteelPlate" Count="200" />
@@ -1432,13 +1396,9 @@
       <MountPoints>
         <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="6" EndY="6" />
       </MountPoints>
-      <BuildProgressModels>
-        <Model BuildPercentUpperBound="0.99" File="Models\381mmKM_Build_Large.mwm" />	 	  
-        <Model BuildPercentUpperBound="1.00" File="Models\381mmSKC34BaseA_Large.mwm" />
-      </BuildProgressModels>
       <BlockVariants>
         <BlockVariant>
-          <TypeId>LargeMissileTurret</TypeId>
+			<TypeId>ConveyorSorter</TypeId>
           <SubtypeId>381mmDualNR</SubtypeId>
         </BlockVariant>
       </BlockVariants>
@@ -1477,18 +1437,16 @@
       <MaxFov>1.04719755</MaxFov>
     </Definition>
 
-<Definition xsi:type="MyObjectBuilder_LargeTurretBaseDefinition">
-      <Id>
-        <TypeId>LargeMissileTurret</TypeId>
+	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>381mmDualNR</SubtypeId>
       </Id>	
-      <DisplayName>15" mk25 Dual</DisplayName>
+      <DisplayName>[FAS] Tirpitz</DisplayName>
 	<Description>
 		15 Inch Twin gun
-		6km AI range, 8km shell range
+		7km AI range, 10km shell range
 		Fires HE amd AP Shells
-		Temp BP: 250
-		Missileturret: DO NOT GROUP
 	</Description>
       <Icon>Textures\GUI\Icons\381mmNR.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1496,7 +1454,7 @@
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="7" y="2" z="7" />
       <ModelOffset x="0" y="0" z="0" />
-      <Model>Models\381mmSKC34BaseB_Large.mwm</Model>
+      <Model>Models\381mm mk24\38cmSk34NR.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
         <Component Subtype="SteelPlate" Count="200" />
@@ -1512,10 +1470,6 @@
       <MountPoints>
         <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="6" EndY="6" />
       </MountPoints>
-      <BuildProgressModels>
-        <Model BuildPercentUpperBound="0.99" File="Models\381mmKM_Build_Large.mwm" />	  
-        <Model BuildPercentUpperBound="1.00" File="Models\381mmSKC34BaseB_Large.mwm" />
-      </BuildProgressModels>
       <VoxelPlacement>
         <StaticMode>
           <PlacementMode>OutsideVoxel</PlacementMode>
@@ -1553,26 +1507,24 @@
 
 
 
-	
-<Definition xsi:type="MyObjectBuilder_LargeTurretBaseDefinition">
-      <Id>
-        <TypeId>LargeMissileTurret</TypeId>
+
+	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>15cmSKC28R</SubtypeId>
       </Id>	
-      <DisplayName>150mm/36 Twin</DisplayName>
+      <DisplayName>[FAS] Elbing</DisplayName>
 	    <Description>
 			150mm Twin gun
 			5km AI range
 			Fires HE shell
-			Temp BP: 125
-			Missileturret: DO NOT GROUP
 		</Description>
       <Icon>Textures\GUI\Icons\15cmR.dds</Icon>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="3" y="2" z="3" />
       <ModelOffset x="0" y="0" z="0" />
-      <Model>Models\15cmDualBaseA_Large.mwm</Model>
+      <Model>Models\150mm twins\15cmSk28.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
         <Component Subtype="SteelPlate" Count="100" />
@@ -1582,19 +1534,15 @@
         <Component Subtype="Computer" Count="100" />
         <Component Subtype="Construction" Count="200" />
 		<Component Subtype="MetalGrid" Count="300" />
-        <Component Subtype="SteelPlate" Count="1500" />
+        <Component Subtype="SteelPlate" Count="1250" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
         <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="2" EndY="2" />
       </MountPoints>
-      <BuildProgressModels>
-        <Model BuildPercentUpperBound="0.99" File="Models\15cmDual_Build_Large.mwm" /> 
-       <Model BuildPercentUpperBound="1.00" File="Models\15cmDualBaseA_Large.mwm" /> 
-      </BuildProgressModels>
 	  <BlockVariants>
         <BlockVariant>
-          <TypeId>LargeMissileTurret</TypeId>
+			<TypeId>ConveyorSorter</TypeId>
           <SubtypeId>15cmSKC28NR</SubtypeId>
         </BlockVariant>
       </BlockVariants>
@@ -1631,20 +1579,18 @@
       <ElevationSpeed>0.0005</ElevationSpeed>
       <MinFov>0.1</MinFov>
       <MaxFov>1.04719755</MaxFov>
-    </Definition> 
+    </Definition>
 
-<Definition xsi:type="MyObjectBuilder_LargeTurretBaseDefinition">
-      <Id>
-        <TypeId>LargeMissileTurret</TypeId>
+	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>15cmSKC28NR</SubtypeId>
       </Id>	
-      <DisplayName>150mm/36 Twin</DisplayName>
+      <DisplayName>[FAS] Elbing</DisplayName>
 	<Description>
 		150mm Twin gun
 		5km AI range
 		Fires HE shell
-		Temp BP: 125
-		Missileturret: DO NOT GROUP
 	</Description>
       <Icon>Textures\GUI\Icons\15cmNR.dds</Icon>
       <GuiVisible>false</GuiVisible>
@@ -1652,7 +1598,7 @@
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="3" y="2" z="3" />
       <ModelOffset x="0" y="0" z="0" />
-      <Model>Models\15cmDualBaseB_Large.mwm</Model>
+      <Model>Models\150mm twins\15cmSk28NRF.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
         <Component Subtype="SteelPlate" Count="100" />
@@ -1662,16 +1608,12 @@
         <Component Subtype="Computer" Count="100" />
         <Component Subtype="Construction" Count="200" />
 		<Component Subtype="MetalGrid" Count="300" />
-        <Component Subtype="SteelPlate" Count="1500" />
+        <Component Subtype="SteelPlate" Count="1250" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
         <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="2" EndY="2" />
       </MountPoints>
-      <BuildProgressModels>
-        <Model BuildPercentUpperBound="0.99" File="Models\15cmDual_Build_Large.mwm" /> 
-        <Model BuildPercentUpperBound="1.00" File="Models\15cmDualBaseB_Large.mwm" /> 
-      </BuildProgressModels>
       <VoxelPlacement>
         <StaticMode>
           <PlacementMode>OutsideVoxel</PlacementMode>
@@ -1711,25 +1653,23 @@
 
       
 	
-<Definition xsi:type="MyObjectBuilder_LargeTurretBaseDefinition">
-      <Id>
-        <TypeId>LargeMissileTurret</TypeId>
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>380mmMLE1935</SubtypeId>
       </Id>	
-      <DisplayName>15"/45 mk20 Quad gun</DisplayName>
+      <DisplayName>[FAS] Jean Bart</DisplayName>
 	<Description>
 		15 Inch Quad gun
-		6km AI range, 8km shell range
+		7km AI range, 10km shell range
 		Fires HE amd AP Shells
-		Temp BP: 400
-		Missileturret: DO NOT GROUP
 	</Description>
       <Icon>Textures\GUI\Icons\380mmMLE1935_Icon.dds</Icon>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="5" y="2" z="5" />
       <ModelOffset x="0" y="0" z="0" />
-      <Model>Models\380mm45MLE1935_Base_Large.mwm</Model>
+      <Model>Models\380mm quad\380mm45MLE.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
         <Component Subtype="SteelPlate" Count="200" />
@@ -1745,10 +1685,6 @@
       <MountPoints>
         <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="6" EndY="6" />
       </MountPoints>
-      <BuildProgressModels>
-        <Model BuildPercentUpperBound="0.99" File="Models\380mmFR_Build_Large.mwm" />	  
-        <Model BuildPercentUpperBound="1.00" File="Models\380mm45MLE1935_Base_Large.mwm" />
-      </BuildProgressModels>
       <VoxelPlacement>
         <StaticMode>
           <PlacementMode>OutsideVoxel</PlacementMode>

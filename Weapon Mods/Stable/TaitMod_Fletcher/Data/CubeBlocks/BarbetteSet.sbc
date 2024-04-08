@@ -20,6 +20,7 @@
 					<Component Subtype="Construction" Count="200" />
 					<Component Subtype="SmallTube" Count="12" />
 					<Component Subtype="Motor" Count="6" />
+					<Component Subtype="GravityGenerator" Count="100" />
 					<Component Subtype="SteelPlate" Count="7000" />
 			</Components>
 			<CriticalComponent Subtype="Motor" Index="0" />
@@ -62,6 +63,7 @@
 					<Component Subtype="InteriorPlate" Count="4" />
 					<Component Subtype="Construction" Count="200" />
 					<Component Subtype="SmallTube" Count="12" />
+				<Component Subtype="GravityGenerator" Count="66" />
 					<Component Subtype="Motor" Count="6" />
 					<Component Subtype="SteelPlate" Count="3500" />
 			</Components>
@@ -106,6 +108,7 @@
 					<Component Subtype="InteriorPlate" Count="4" />
 					<Component Subtype="Construction" Count="200" />
 					<Component Subtype="SmallTube" Count="12" />
+				<Component Subtype="GravityGenerator" Count="33" />
 					<Component Subtype="Motor" Count="6" />
 					<Component Subtype="SteelPlate" Count="1500" />
 			</Components>
@@ -130,6 +133,6 @@
 			<DestroySound>PoofExplosionCat3</DestroySound>
 			<PCU>10</PCU>
 			<IsAirTight>true</IsAirTight>
-		</Definition>
+		</Definition> 
 	</CubeBlocks>
 </Definitions>
