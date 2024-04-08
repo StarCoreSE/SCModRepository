@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>TorpBarbette</SubtypeId>
+			</Id>
+			<DisplayName>[FAS] Neptune Torpedo</DisplayName>
+			<Description>25 Inch Quintuple Torpedo launcher
+			10km dumb torpedo, launch stage is guided and pdable.
+			500bp	</Description>
+			<Icon>Textures\GUI\Icons\torplauncher.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="1" z="5"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\25inchquin\TorpBarbette.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="1500" />
+				<Component Subtype="MetalGrid" Count="100" />
+				<Component Subtype="LargeTube" Count="200" />
+				<Component Subtype="Motor" Count="100" />
+				<Component Subtype="Computer" Count="100" />
+				<Component Subtype="Construction" Count="2000" />
+				<Component Subtype="MetalGrid" Count="200" />
+				<Component Subtype="SteelPlate" Count="3200" />
+			</Components>
+			<CriticalComponent Subtype="Motor" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="1" StartY="1" EndX="2" EndY="2" />
+			</MountPoints>
+			<BlockPairName>TorpBarbette</BlockPairName>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

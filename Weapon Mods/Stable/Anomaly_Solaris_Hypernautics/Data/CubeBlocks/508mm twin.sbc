@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>20InchTwin</SubtypeId>
+			</Id>
+			<DisplayName>[FAS] Thunderer</DisplayName>
+			<Description>
+				20 Inch twin turret
+				Fires HE, AP and SAP
+				7km turret ai, 12km shell range
+			</Description>
+			<Icon>Textures\GUI\Icons\20Inch.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="9" y="4" z="9"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\20 inch\Barbette.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="200" />
+				<Component Subtype="MetalGrid" Count="300" />
+				<Component Subtype="LargeTube" Count="250" />
+				<Component Subtype="GravityGenerator" Count="600" />
+				<Component Subtype="Motor" Count="400" />
+				<Component Subtype="Computer" Count="100" />
+				<Component Subtype="Construction" Count="6000" />
+				<Component Subtype="MetalGrid" Count="600" />
+				<Component Subtype="SteelPlate" Count="6500" />
+			</Components>
+			<CriticalComponent Subtype="Motor" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="9" EndY="9" />
+			</MountPoints>
+			<BuildTimeSeconds>120</BuildTimeSeconds>
+			<BlockPairName>20InchTwin</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+		</Definition>
+	</CubeBlocks>
+</Definitions>
