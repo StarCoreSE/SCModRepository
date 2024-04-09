@@ -563,6 +563,7 @@ Cat_StarcoreUlitity@21;
 				  3x3_Blastplate_B@25;
 				  3x3_Blastplate_C@25;
 				  2x4_Blastplate@25;
+				  GIGA_BLASTPLATE@1000;
 
 				GravityGenerator@0;
 					SpaceBallSmall@50;
