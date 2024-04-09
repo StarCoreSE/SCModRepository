@@ -613,7 +613,7 @@ namespace klime.PointCheck
                     break;
                 case "[ONYX] Heliod Plasma Pulser":
                     t_N = "Heliod Plasma Pulser";
-                    mCs = 0.15f;
+                    mCs = 0.50f;
                     break;
                 case "[MA] UNN Heavy Torpedo Launcher":
                     t_N = "UNN Heavy Torpedo Launcher";
