@@ -140,6 +140,14 @@ namespace ShipPoints
 				AncientAfterburnerT43@200;
 				AncientAfterburnerT44@250;
 
+				S_Armored_Laser_Block@120;
+                S_Chem_Laser_Block@120;
+				Nariman_Dart_Turret@225;
+				Counter_Battery@250;
+				SolHyp_ArcStrike_Torp@275;
+                SolHyp_Magnetic_Coilgun@450;
+
+
 				LargeHydrogenTank@30;
 					LargeHydrogenTankIndustrial@30;
 				LargeHydrogenTankSmall@50;
@@ -506,12 +514,12 @@ Cat_Darth40kWeapons@20;
 				ParticleWhip@400;
 				NovaCannon@800;
 				MacroCannon@200;
-				LanceBattery@400;
+    				LanceBattery@400;
 				LanceLightBattery@280;
 				LanceHeavyBattery@650;
 				GothicTorp@300;
-				
 
+				
 				65_Launcher_FixedMount@350;
 				Hellfire_Laser_Block@666;
 
@@ -549,6 +557,12 @@ Cat_StarcoreUlitity@21;
 				SI_Field_Gen@450;
 				 SELtdLargeNanobotBuildAndRepairSystem@50;
 				  PM_LG_BLASTPLATE_BLASTPLATE@100;
+				  REINFORCED_BLASTPLATE@100;
+				  ACTIVE_BLASTPLATE@100;
+				  3x3_Blastplate_A@25;
+				  3x3_Blastplate_B@25;
+				  3x3_Blastplate_C@25;
+				  2x4_Blastplate@25;
 
 				GravityGenerator@0;
 					SpaceBallSmall@50;
@@ -587,7 +601,7 @@ Cat_BadModder@22;
 				  VindicatorKineticLance@800;
 
 				 Fixed_Rockets@250;
-				JN_175Fixed@100900; 
+				JN_175Fixed@1350; 
 				 Thagomizer@750; 
 					 Thagomizer_Flipped@750; 
 						 Thagomizer_Angled@750; 
@@ -629,8 +643,40 @@ Cat_Strikecraft@23;
 				MA_Laser_Armor16@1;
 
 
+Cat_Fletcher_Subtypes@23;
+				381mmDualR@400;
+                381mmDualNR@400;
+                380mmMLE1935@400;
+                15cmSKC28R@175;
+                15cmSKC28NR@175;
+                128mmL45@200;
+                128mmSKC34@250;
+                127mmMk12@220;
+                127mmMk24@220;
+                127mmMk32@250;
+                127mmMk56@350;
+                105mmTwin@100;
+                PomPomMain@75;
+                150mmCasemate@100;
+                150mmCasemateTwin@125;
+                BoforTwinRemodel@50;
+                BoforSingleRemodel@60;
+                QuadBofor@75;
+                TorpTestBuidl@350;
+                16InchTriple@400;
+                15cmTbtsKC36T@150;
+                15cmTbtsKC36@150;
+                203mmTwin@165;
+                203mmQuad@325;
+                TorpBarbette@500;
+                406alternate@400;
+                Mk25Rangefinder@10;
+                6InchTriple@200;
+                20InchTwin@600;	
 
-Cat_UnusedOrOutated_Subtypes@23;
+
+
+Cat_UnusedOrOutated_Subtypes@24;
 				SC_COV_Plasma_Turret@300;
 				NHI_Fixed_Missile_Battery@400;
 				Chet_Flak_Cannon@99999;
@@ -652,6 +698,11 @@ Cat_UnusedOrOutated_Subtypes@23;
 				Caster_Feeder@10;
 				Caster_FocusLens@50;
 				Caster_Reactor@125;
+
+
+
+			
+
             "));
         }
     }
