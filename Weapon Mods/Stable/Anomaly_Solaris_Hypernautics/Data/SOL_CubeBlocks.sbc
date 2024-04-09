@@ -644,7 +644,7 @@
 
 		<Definition>
 			<Id>
-				<TypeId>CubeBlock</TypeId>
+				<TypeId>TerminalBlock</TypeId>
 				<SubtypeId>REINFORCED_BLASTPLATE</SubtypeId>
 			</Id>
 			<DisplayName>Reinforced Blastplate</DisplayName>
@@ -686,7 +686,7 @@
 
 		<Definition>
 			<Id>
-				<TypeId>CubeBlock</TypeId>
+				<TypeId>TerminalBlock</TypeId>
 				<SubtypeId>3x3_Blastplate_C</SubtypeId>
 			</Id>
 			<DisplayName>Standard Blastplate C</DisplayName>
@@ -728,7 +728,7 @@
 
 		<Definition>
 			<Id>
-				<TypeId>CubeBlock</TypeId>
+				<TypeId>TerminalBlock</TypeId>
 				<SubtypeId>3x3_Blastplate_B</SubtypeId>
 			</Id>
 			<DisplayName>Standard Blastplate B</DisplayName>
@@ -769,7 +769,7 @@
 
 		<Definition>
 			<Id>
-				<TypeId>CubeBlock</TypeId>
+				<TypeId>TerminalBlock</TypeId>
 				<SubtypeId>3x3_Blastplate_A</SubtypeId>
 			</Id>
 			<DisplayName>Standard Blastplate A</DisplayName>
@@ -805,7 +805,7 @@
 
 				<Definition>
 			<Id>
-				<TypeId>CubeBlock</TypeId>
+				<TypeId>TerminalBlock</TypeId>
 				<SubtypeId>2x4_Blastplate</SubtypeId>
 			</Id>
 			<DisplayName>Elongated Blastplate</DisplayName>

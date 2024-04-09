@@ -653,7 +653,13 @@ namespace klime.PointCheck
                     mCs = 0.15f;
                     break;
                 case "Reinforced Blastplate":
-                    t_N = "Reinforced Blastplate";
+                case "Active Blastplate":
+                case "Standard Blastplate A":
+                case "Standard Blastplate B":
+                case "Standard Blastplate C":
+                case "Elongated Blastplate":
+                case "7x7 Basedplate":
+                    t_N = "Blastplate";
                     mCs = 1.00f;
                     break;
                 case "[EXO] Taiidan":
@@ -666,7 +672,7 @@ namespace klime.PointCheck
                     t_N = "Taiidan";
                     mCs = 0.25f;
                     break;
-                case "[EXO] 40K Gothic Torpedo Launcher":
+                case "[40k] Gothic Torpedo":
                     t_N = "Gothic Torpedo";
                     mCs = 0.15f;
                     break;
