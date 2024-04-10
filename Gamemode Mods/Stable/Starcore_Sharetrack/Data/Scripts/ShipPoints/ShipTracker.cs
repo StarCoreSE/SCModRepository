@@ -676,6 +676,39 @@ namespace klime.PointCheck
                     t_N = "Gothic Torpedo";
                     mCs = 0.15f;
                     break;
+                case "[MID] AX 'Spitfire' Light Rocket Turret":
+                    t_N = "Spitfire Turret";
+                    mCs = 0.15f;
+                    break;
+                case "[FLAW] Naval RL-10x 'Avalanche' Medium Range Launchers":
+                case "[FLAW] Naval RL-10x 'Avalanche' Angled Medium Range Launchers":
+                    t_N = "RL-10x Avalanche";
+                    mCs = 0.15f;
+                    break;
+                case "[MID] LK 'Bonfire' Guided Rocket Turret":
+                    t_N = "Bonfire Turret";
+                    mCs = 0.2f;
+                    break;
+                case "[FLAW] Warp Beacon - Longsword":
+                    t_N = "Longsword Bomber";
+                    mCs = 0.2f;
+                    break;
+                case "[FLAW] Phoenix Snubfighter Launch Bay":
+                    t_N = "Snubfighters";
+                    mCs = 0.1f;
+                    break;
+                case "[FLAW] Hadean Superheavy Plasma Blastguns":
+                    t_N = "Plasma Blastgun";
+                    mCs = 0.121f;
+                    break;
+                case "[FLAW] Vindicator Kinetic Battery":
+                    t_N = "Kinetic Battery";
+                    mCs = 0.120f;
+                    break;
+                case "[FLAW] Goalkeeper Casemate Flak Battery":
+                    t_N = "Goalkeeper Flakwall";
+                    mCs = 0.119f;
+                    break;
             }
         }
 

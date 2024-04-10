@@ -15,7 +15,7 @@
 				<TypeId>LargeMissileTurret</TypeId>
 				<SubtypeId>VindicatorKineticLance</SubtypeId>
 			</Id>
-			<DisplayName>[CA] Vindicator Kinetic Battery</DisplayName>
+			<DisplayName>[FLAW] Vindicator Kinetic Battery</DisplayName>
             <Description>
 			9KM range, 4000m/s velocity
 			Kinetic Damage
