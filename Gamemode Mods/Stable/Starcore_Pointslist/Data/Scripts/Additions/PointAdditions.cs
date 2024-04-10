@@ -561,7 +561,7 @@ Cat_StarcoreUlitity@21;
 
 Cat_BadModder@22;			
 				  APE_Strong@200; 
-				  GoalieCasemate@200;
+				  GoalieCasemate@175;
 				Reaver_Coilgun@125; 
 					Assault_Coil_Turret@125;
 				Priest_Block@125; 
@@ -577,26 +577,26 @@ Cat_BadModder@22;
 				  Type22_Driver@675; 
 				   Type25_Driver@1000; 
 
-				UnguidedRocketTurret@100; 
-				 DrunkRocketTurret@400; 
+				UnguidedRocketTurret@75; 
+				 DrunkRocketTurret@300; 
  				  Devastator_Torp@625;
 				X4_7x7_HeavyTurret@300;
 				 KreegMagnetarCannon@400;				
 				HeavyLanceBattery@1000;
-				 HadeanPlasmaBlastgun@900; 
-				  VindicatorKineticLance@800;
+				 HadeanPlasmaBlastgun@825; 
+				  VindicatorKineticLance@750;
 
 				 Fixed_Rockets@250;
 				JN_175Fixed@100900; 
-				 Thagomizer@750; 
-					 Thagomizer_Flipped@750; 
-						 Thagomizer_Angled@750; 
-							 Thagomizer_Angled_Flipped@750; 
+				 Thagomizer@635; 
+					 Thagomizer_Flipped@635; 
+						 Thagomizer_Angled@635; 
+							 Thagomizer_Angled_Flipped@635; 
 
 
 Cat_Strikecraft@23;
-				HeavyFighterBay@300; 
-					longsword@400;
+				HeavyFighterBay@230; 
+					longsword@625;
 				TaiidanSingleHangar@100;
 					TaiidanRailFighter@700;
 						TaiidanHangarFighter@800;
