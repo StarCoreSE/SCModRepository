@@ -30,10 +30,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
         public S_FusionArm(MyEntity newPart, string rootSubtype)
         {
-            var stopHits = 0;
             var ignore = new HashSet<IMyCubeBlock>();
-            IsValid = PerformScan(newPart, ref ignore, rootSubtype, ref stopHits);
-            MyAPIGateway.Utilities.ShowNotification(stopHits + " | " + ignore.Count);
+            IsValid = PerformScan(newPart, ref ignore, rootSubtype);
 
             PowerGeneration = 0;
             PowerStorage = 0;
@@ -71,11 +69,11 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         ///     Performs a recursive scan for connected blocks in an arm loop.
         /// </summary>
         /// <param name="blockEntity">The block entity to check.</param>
-        /// <param name="prevScan">The block entity to ignore; nullable.</param>
+        /// <param name="parts">Blocks determined to be part of the arm.</param>
         /// <param name="stopAtSubtype">Exits the loop at this subtype.</param>
+        /// <param name="stopHits">Internal variable.</param>
         /// <returns></returns>
-        private static bool PerformScan(MyEntity blockEntity, ref HashSet<IMyCubeBlock> parts, string stopAtSubtype,
-            ref int stopHits)
+        private static bool PerformScan(MyEntity blockEntity, ref HashSet<IMyCubeBlock> parts, string stopAtSubtype)
         {
             if (ModularAPI.IsDebug())
                 DebugDraw.DebugDraw.AddGridPoint(((IMyCubeBlock)blockEntity).Position,
@@ -91,13 +89,11 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 var connectedSubtype = ((IMyCubeBlock)connectedBlock).BlockDefinition.SubtypeName;
                 bool valid = parts.Add((IMyCubeBlock)connectedBlock);
 
-                if (connectedSubtype == stopAtSubtype)
-                    stopHits++;
-                else if (valid)
-                    PerformScan(connectedBlock, ref parts, stopAtSubtype, ref stopHits);
+                if (connectedSubtype != stopAtSubtype && valid && !PerformScan(connectedBlock, ref parts, stopAtSubtype))
+                    return false;
             }
             
-            return stopHits >= 2;
+            return true;
         }
     }
 }

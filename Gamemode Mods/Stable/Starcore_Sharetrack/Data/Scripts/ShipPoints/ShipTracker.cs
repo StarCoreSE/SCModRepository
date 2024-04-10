@@ -613,7 +613,7 @@ namespace klime.PointCheck
                     break;
                 case "[ONYX] Heliod Plasma Pulser":
                     t_N = "Heliod Plasma Pulser";
-                    mCs = 0.15f;
+                    mCs = 0.50f;
                     break;
                 case "[MA] UNN Heavy Torpedo Launcher":
                     t_N = "UNN Heavy Torpedo Launcher";
@@ -653,7 +653,13 @@ namespace klime.PointCheck
                     mCs = 0.15f;
                     break;
                 case "Reinforced Blastplate":
-                    t_N = "Reinforced Blastplate";
+                case "Active Blastplate":
+                case "Standard Blastplate A":
+                case "Standard Blastplate B":
+                case "Standard Blastplate C":
+                case "Elongated Blastplate":
+                case "7x7 Basedplate":
+                    t_N = "Blastplate";
                     mCs = 1.00f;
                     break;
                 case "[EXO] Taiidan":
