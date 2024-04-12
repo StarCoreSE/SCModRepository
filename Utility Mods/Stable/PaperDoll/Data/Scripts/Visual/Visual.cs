@@ -890,7 +890,7 @@ namespace klime.Visual
 
         private void UpdateRealLogic()
         {
-            if (realGrid?.MarkedForClose == true || realGrid?.Physics == null || !realGrid.IsPowered ) Close();
+            if (realGrid?.MarkedForClose == true || realGrid?.Physics == null) Close();
         }
 
         public void Close()
