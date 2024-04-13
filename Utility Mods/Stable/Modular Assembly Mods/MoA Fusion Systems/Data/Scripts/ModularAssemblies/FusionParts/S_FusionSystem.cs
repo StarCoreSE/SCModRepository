@@ -91,7 +91,6 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                                 if (accelerator2 != accelerator && newArm2.Parts.Contains((IMyCubeBlock) accelerator2))
                                     accelsShareArm = true;
                         }
-                        MyAPIGateway.Utilities.ShowNotification(newArm2.Parts.Contains(newPart) + "C");
                         if (accelsShareArm)
                             break;
                     }
