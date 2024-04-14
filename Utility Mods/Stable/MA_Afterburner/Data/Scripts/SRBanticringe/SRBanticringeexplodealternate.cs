@@ -89,7 +89,6 @@ namespace SRBanticringe
             {
                 SRB.EnabledChanged -= SRBEnabledChanged;
             }
-            MyAPIGateway.Session.DamageSystem.RegisterAfterDamageHandler(0, DamageHandler);
         }
     }
 }
