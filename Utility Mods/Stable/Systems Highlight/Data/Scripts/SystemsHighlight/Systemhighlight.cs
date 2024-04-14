@@ -15,7 +15,7 @@ using VRage.ModAPI;
 using VRage.Utils;
 using VRageMath;
 using VRageRender;
-using StarCore.SystemHighlight.APISession;
+using CoreSystems.Api;
 using static VRageRender.MyBillboard;
 using VRage.Game.Entity;
 
@@ -30,6 +30,7 @@ namespace StarCore.SystemHighlight
         private IMyHudNotification notifStatus = null;
         private IMyHudNotification notifDebug = null;
 
+        public static WcApi CoreSysAPI;
         private ulong AQDID = 2621169600;
 
         const string From = "SysHL";
@@ -65,6 +66,15 @@ namespace StarCore.SystemHighlight
                 }                   
             }
 
+            CoreSysAPI = new WcApi();
+            CoreSysAPI.Load();
+
+            if (CoreSysAPI.IsReady)
+            {
+                WCInstalled = true;
+                Log.Info("CoreSystems Mod Detected");
+            }
+
             HandleCommandDictionaryInit();
 
             Transparency = -0.5f;
@@ -73,6 +83,9 @@ namespace StarCore.SystemHighlight
 
         protected override void UnloadData()
         {
+            CoreSysAPI.Unload();
+            CoreSysAPI = null;
+
             MyAPIGateway.Utilities.MessageEntered -= HandleMessage;
         }
 
@@ -83,15 +96,6 @@ namespace StarCore.SystemHighlight
                 SeenMessage = true;
                 MyAPIGateway.Utilities.ShowMessage(From, Message);
 
-                if (CoreSysAPI._wcApi != null)
-                {
-                    if (CoreSysAPI._wcApi.IsReady && !WCInstalled)
-                    {
-                        WCInstalled = true;
-                        Log.Info("WeaponCore Detected");
-                    }
-                }
-
                 MyAPIGateway.Utilities.InvokeOnGameThread(() => SetUpdateOrder(MyUpdateOrder.NoUpdate));
             }
         }
@@ -100,6 +104,11 @@ namespace StarCore.SystemHighlight
         #region HandleMessages
         public void HandleMessage(String message, ref bool sendToOthers)
         {
+            if (!message.Contains("/hl"))
+            {
+                return;
+            }
+
             IHitInfo strike;
             IMyCubeGrid cubeGrid;
             List<IMySlimBlock> gridBlocks;
@@ -107,7 +116,7 @@ namespace StarCore.SystemHighlight
 
             if (gridBlocks == null || cubeGrid == null || strike == null)
             {
-                if (message.Contains("/hl") && strike == null && (!message.Contains("/hlhelp") || !message.Contains("/hldebug")))
+                if (strike == null && (!message.Contains("/hlhelp") || !message.Contains("/hldebug")))
                 {
                     sendToOthers = false;
                     SetStatus("No Target", 3000, "Red");
@@ -386,7 +395,22 @@ namespace StarCore.SystemHighlight
         {
             if (block.FatBlock != null && !gridHighlightedEntities.ContainsKey(block.FatBlock))
             {
+                /*MyEntity entBlock = block.FatBlock as MyEntity;
+                List<MyEntitySubpart> blockSubparts = new List<MyEntitySubpart>();
+                GetSubpartsRecursive(entBlock, blockSubparts);
+
+                if (entBlock != null && blockSubparts.Any())
+                {
+                    foreach (var subpart in blockSubparts)
+                    {
+                        subpart.Render.Transparency = 1f;
+                        subpart.Render.UpdateTransparency();
+                    }
+                }*/
+
                 block.Dithering = Transparency;
+
+                /*blockSubparts.Clear();*//*blockSubparts.Clear();*/
             }
             else if (block.FatBlock != null && gridHighlightedEntities.ContainsKey(block.FatBlock))
             {
@@ -396,7 +420,23 @@ namespace StarCore.SystemHighlight
             {
                 block.Dithering = Transparency;
             }
-        }      
+        }
+
+        /*public static void GetSubpartsRecursive(MyEntity entity, List<MyEntitySubpart> subparts)
+        {
+            if (entity == null)
+                return;
+            if (subparts == null)
+                return;
+            if (entity.Subparts.Count == 0)
+                return;
+
+            foreach (var part in entity.Subparts.Values)
+            {
+                subparts.Add(part);
+                GetSubpartsRecursive(part, subparts);
+            }
+        }*/
 
         public void ClearHighlight(List<IMySlimBlock> blockList, IMyCubeGrid cubeGrid)
         {
@@ -430,11 +470,11 @@ namespace StarCore.SystemHighlight
 
         #region Utilities
         private bool CoreCheckHelper(IMySlimBlock block)
-        {
-            var entBlock = block as MyEntity;
+        {         
             if (WCInstalled)
             {
-                return entBlock != null && CoreSysAPI._wcApi.HasCoreWeapon(entBlock);
+                var entBlock = block.FatBlock as MyEntity;
+                return entBlock != null && CoreSysAPI.HasCoreWeapon(entBlock);
             }
             else
             {
