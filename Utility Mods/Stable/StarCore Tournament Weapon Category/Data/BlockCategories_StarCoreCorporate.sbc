@@ -253,6 +253,12 @@
 		  <string>TaiidanRailFighter</string>
 		  <string>TaiidanSingleHangar</string>
 		  <string>VindicatorKineticLance</string>
+		  <string>GothicTorp</string>
+		  <string>LanceHeavyBattery</string>
+		  <string>LanceBattery</string>
+		  <string>LanceLightBattery</string>
+		  <string>MacroCannon</string>
+
 
 	  </ItemIds>
     </Category>
