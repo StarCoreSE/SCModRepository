@@ -316,10 +316,11 @@ namespace ShipPoints
 
 				OffroadWheel1x1@35000;
 				OffroadWheel3x3@35000;
-				OffroadWheel5x5@35000;
+				OffroadWheel2x2@35000;
 				OffroadWheel5x5@35000;
 				Wheel5x5@35000;
 				Wheel3x3@35000;
+				Wheel2x2@35000;
 				Wheel1x1@35000;
 
 				K_SA_Gauss_AMSIIC@350;
