@@ -239,6 +239,9 @@ namespace klime.EntityCover
         {
             // Find by entityId
             var blockEnt = allCoverEnts.Find(x => x.attachedEntityId == entityId);
+            MyCubeGrid coverGrid = MyAPIGateway.Entities.GetEntityById(entityId) as MyCubeGrid;
+            if (coverGrid != null)
+                coverGrid.DestructibleBlocks = false;
 
             if (blockEnt != null)
             {
