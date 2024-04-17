@@ -1414,8 +1414,8 @@ namespace klime.PointCheck
                 mobp[fn] += d.MovementBps;
 
                 int g = d.GunL.Values.Sum();
-                string pwr = FormatPower(d.CurrentPower);
-                string ts2 = FormatThrust(d.InstalledThrust);
+                string pwr = FormatPower(Math.Round(d.CurrentPower, 1));
+                string ts2 = FormatThrust(Math.Round(d.InstalledThrust, 2));
 
                 ts[fn].Add(CreateDisplayString(o, d, g, pwr, ts2));
             }
