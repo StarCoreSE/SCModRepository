@@ -58,7 +58,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             {
                 case "Caster_Accelerator_0":
                 case "Caster_Accelerator_90":
-                    var newArm = new S_FusionArm((MyEntity)newPart, "Caster_Feeder");
+                    var newArm = new S_FusionArm(newPart, "Caster_Feeder");
                     if (newArm.IsValid)
                     {
                         Arms.Add(newArm);
@@ -66,10 +66,10 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                     }
                     break;
                 case "Caster_Feeder": // This is awful and I hate it. The idea is to generate new loops if a feeder is placed.
-                    List<MyEntity> connectedAccelerators = new List<MyEntity>();
-                    foreach (var connectedBlock in ModularAPI.GetConnectedBlocks((MyEntity)newPart))
+                    List<IMyCubeBlock> connectedAccelerators = new List<IMyCubeBlock>();
+                    foreach (var connectedBlock in ModularAPI.GetConnectedBlocks(newPart, "Modular_Fusion"))
                     {
-                        string subtype = (connectedBlock as IMyCubeBlock)?.BlockDefinition.SubtypeName;
+                        string subtype = connectedBlock?.BlockDefinition.SubtypeName;
                         if (subtype != "Caster_Accelerator_0" && subtype != "Caster_Accelerator_90")
                             continue;
                         connectedAccelerators.Add(connectedBlock);
@@ -77,7 +77,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                     
                     foreach (var accelerator in connectedAccelerators)
                     {
-                        if (Arms.Any(arm => arm.Parts.Contains((IMyCubeBlock)accelerator)))
+                        if (Arms.Any(arm => arm.Parts.Contains(accelerator)))
                             continue;
 
                         bool accelsShareArm = false;
@@ -88,7 +88,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                             UpdatePower(true);
                     
                             foreach (var accelerator2 in connectedAccelerators)
-                                if (accelerator2 != accelerator && newArm2.Parts.Contains((IMyCubeBlock) accelerator2))
+                                if (accelerator2 != accelerator && newArm2.Parts.Contains(accelerator2))
                                     accelsShareArm = true;
                         }
                         if (accelsShareArm)

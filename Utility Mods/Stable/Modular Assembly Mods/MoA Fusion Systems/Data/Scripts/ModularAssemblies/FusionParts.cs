@@ -9,7 +9,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
         // You can declare functions in here, and they are shared between all other ModularDefinition files.
 
         // This is the important bit.
-        private PhysicalDefinition Modular_Fusion => new PhysicalDefinition
+        internal PhysicalDefinition Modular_Fusion => new PhysicalDefinition
         {
             // Unique name of the definition.
             Name = "Modular_Fusion",
