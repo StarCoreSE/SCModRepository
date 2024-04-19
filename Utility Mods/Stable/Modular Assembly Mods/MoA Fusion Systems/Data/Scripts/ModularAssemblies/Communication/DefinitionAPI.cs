@@ -170,7 +170,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         private bool _apiInit;
         private readonly long ApiChannel = 8774;
         private IReadOnlyDictionary<string, Delegate> methodMap;
-        private Action OnLoad;
+        public Action OnReady;
         private IMyModContext ModContext;
 
         public void ApiAssign()
@@ -205,7 +205,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 MyLog.Default.WriteLineAndConsole("ModularDefinitions: ModularDefinitionsAPI cleared.");
 
             methodMap = null;
-            OnLoad?.Invoke();
+            OnReady?.Invoke();
         }
 
         private void SetApiMethod<T>(string name, ref T method) where T : class
@@ -230,7 +230,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 throw new Exception($"{GetType().Name}.Load() should not be called multiple times!");
 
             ModContext = modContext;
-            OnLoad = onLoad;
+            OnReady = onLoad;
             _isRegistered = true;
             MyAPIGateway.Utilities.RegisterMessageHandler(ApiChannel, HandleMessage);
             MyAPIGateway.Utilities.SendModMessage(ApiChannel, "ApiEndpointRequest");
