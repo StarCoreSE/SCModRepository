@@ -104,8 +104,6 @@ namespace Invalid.ShieldProjector
                     var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<ShieldProjectorSettings>(Convert.FromBase64String(rawData));
                     if (loadedSettings != null)
                     {
-                        Settings.FoamRadius = loadedSettings.FoamRadius;  // Adjust according to your actual settings fields
-                        Settings.IsFoaming = loadedSettings.IsFoaming;
                         squareSize = loadedSettings.SquareSize;  // Example additional field
                         return true;
                     }
