@@ -185,6 +185,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         /// <returns></returns>
         public string[] RegisterDefinitions(DefinitionDefs.DefinitionContainer definitionContainer)
         {
+            MyAPIGateway.Utilities.ShowNotification("Definition registered!");
             return _registerDefinitions?.Invoke(MyAPIGateway.Utilities.SerializeToBinary(definitionContainer));
         }
 
@@ -328,7 +329,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             _isRegistered = true;
             MyAPIGateway.Utilities.RegisterMessageHandler(ApiChannel, HandleMessage);
             MyAPIGateway.Utilities.SendModMessage(ApiChannel, "ApiEndpointRequest");
-            MyLog.Default.WriteLineAndConsole($"{ModContext.ModName}: ModularDefinitionsAPI inited.");
+            MyLog.Default.WriteLineAndConsole($"{ModContext.ModName}: ModularDefinitionsAPI listening for API methods...");
         }
 
         public void UnloadData()
@@ -350,7 +351,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 if (_apiInit || obj is string || obj == null) // the sent "ApiEndpointRequest" will also be received here, explicitly ignoring that
                 {
                     MyLog.Default.WriteLineAndConsole(
-                        $"ModularDefinitions: ModularDefinitionsAPI ignored message {obj as string}!");
+                        $"{ModContext.ModName}: ModularDefinitionsAPI ignored message \"{obj as string}\"");
                     return;
                 }
 
@@ -363,7 +364,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 if (dict == null)
                 {
                     MyLog.Default.WriteLineAndConsole(
-                        "ModularDefinitions: ModularDefinitionsAPI ERR: Received null dictionary!");
+                        $"{ModContext.ModName}: ModularDefinitionsAPI ERR: Received null dictionary!");
                     return;
                 }
 
@@ -380,8 +381,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             }
             catch (Exception ex)
             {
-                MyLog.Default.WriteLineAndConsole("Exception in ModularAssemblies Client Mod DefinitionAPI! " + ex);
-                MyAPIGateway.Utilities.ShowMessage("Fusion Systems", "Exception in ModularAssemblies Client Mod DefinitionAPI! " + ex);
+                MyLog.Default.WriteLineAndConsole($"{ModContext.ModName}: Exception in ModularDefinitionsAPI! " + ex);
+                MyAPIGateway.Utilities.ShowMessage(ModContext.ModName, "Exception in ModularDefinitionsAPI!\n" + ex);
             }
         }
     }
