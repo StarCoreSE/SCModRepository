@@ -51,7 +51,7 @@ namespace klime.PointCheck
         [ProtoMember(10)] public int BlockCount;
         [ProtoMember(11)] public float ShieldStrength;
         [ProtoMember(12)] public float CurrentShieldStrength;
-        [ProtoMember(40)] public float OriginalShieldStrength = -1;
+        [ProtoMember(41)] public float OriginalShieldStrength = -1;
         [ProtoMember(13)] public int PCU;
         //[ProtoMember(14)] public float DPS;
         [ProtoMember(16)] public Dictionary<string, int> GunL = new Dictionary<string, int>();
