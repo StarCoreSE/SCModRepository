@@ -12,10 +12,15 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 {
     public class ModularDefinitionAPI
     {
-        public const int ApiVersion = 0;
-        public readonly int FrameworkVersion;
-        private Action OnLoad;
-        private IMyModContext ModContext;
+        /// <summary>
+        /// The expected API version. Don't touch this unless you're developing for the Modular Assemblies Framework.
+        /// </summary>
+        public const int ApiVersion = 1;
+        /// <summary>
+        /// The currently loaded Modular Assemblies Framework version.
+        /// </summary>
+        public int FrameworkVersion { get; private set; } = -1;
+        
 
         #region Delegates
 
@@ -160,12 +165,13 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         #endregion
 
 
-        public Action OnReady;
         public bool IsReady;
         private bool _isRegistered;
         private bool _apiInit;
         private readonly long ApiChannel = 8774;
         private IReadOnlyDictionary<string, Delegate> methodMap;
+        private Action OnLoad;
+        private IMyModContext ModContext;
 
         public void ApiAssign()
         {
@@ -199,7 +205,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 MyLog.Default.WriteLineAndConsole("ModularDefinitions: ModularDefinitionsAPI cleared.");
 
             methodMap = null;
-            OnReady?.Invoke();
+            OnLoad?.Invoke();
         }
 
         private void SetApiMethod<T>(string name, ref T method) where T : class
@@ -254,26 +260,29 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                     return;
                 }
 
-                var tuple = (MyTuple<Vector2I, IReadOnlyDictionary<string, Delegate>>)obj;
+                MyLog.Default.WriteLineAndConsole(obj.GetType().ToString());
+
+                var tuple = (MyTuple<Vector2I, IReadOnlyDictionary<string, Delegate>>) obj;
                 var receivedVersion = tuple.Item1;
                 var dict = tuple.Item2;
 
                 if (dict == null)
                 {
                     MyLog.Default.WriteLineAndConsole(
-                        "ModularDefinitions: ModularDefinitionsAPI ERR: Recieved null dictionary!");
+                        "ModularDefinitions: ModularDefinitionsAPI ERR: Received null dictionary!");
                     return;
                 }
+
+                if (receivedVersion.Y != ApiVersion)
+                    Log($"Expected API version ({ApiVersion}) differs from received API version {receivedVersion}; errors may occur.");
 
                 methodMap = dict;
                 ApiAssign();
                 methodMap = null;
 
+                FrameworkVersion = receivedVersion.X;
                 IsReady = true;
                 Log($"Modular API v{ApiVersion} loaded!");
-                if (receivedVersion.Y != ApiVersion)
-                    Log("Expected API version differs from received API; errors may occur.");
-                OnLoad?.Invoke();
             }
             catch (Exception ex)
             {
