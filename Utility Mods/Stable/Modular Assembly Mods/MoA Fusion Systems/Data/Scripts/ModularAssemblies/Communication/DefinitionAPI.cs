@@ -1,41 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sandbox.ModAPI;
+using VRage;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRage.Utils;
+using VRageMath;
 
 namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     Communication
 {
     public class ModularDefinitionAPI
     {
-        /// <summary>
-        ///     Returns the IMyCubeGrid of a given IMyCubeBlock's EntityId.
-        /// </summary>
-        /// <param name="blockId"></param>
-        /// <returns></returns>
-        public IMyCubeGrid GridFromBlockId(long blockId)
-        {
-            var entity = MyAPIGateway.Entities.GetEntityById(blockId);
-            if (entity is IMyCubeBlock)
-                return ((IMyCubeBlock)entity).CubeGrid;
-            return null;
-        }
+        public const int ApiVersion = 0;
+        public readonly int FrameworkVersion;
+        private Action OnLoad;
+        private IMyModContext ModContext;
 
+        #region Delegates
 
-        #region API calls
-
+        // Global assembly methods
         private Func<MyEntity[]> _getAllParts;
         private Func<int[]> _getAllAssemblies;
+
+        // Per-assembly methods
         private Func<int, MyEntity[]> _getMemberParts;
-        private Func<MyEntity, bool, MyEntity[]> _getConnectedBlocks;
         private Func<int, MyEntity> _getBasePart;
-        private Func<bool> _isDebug;
-        private Func<MyEntity, int> _getContainingAssembly;
         private Func<int, IMyCubeGrid> _getAssemblyGrid;
         private Action<Action<int>> _addOnAssemblyClose;
         private Action<Action<int>> _removeOnAssemblyClose;
+
+        // Per-part methods
+        private Func<MyEntity, bool, MyEntity[]> _getConnectedBlocks;
+        private Func<MyEntity, int> _getContainingAssembly;
+
+        // Global methods
+        private Func<bool> _isDebug;
+        private Action<string> _logWriteLine;
+        private Action<string, string, Action<string[]>, string> _addChatCommand;
+        private Action<string> _removeChatCommand;
+
+        #endregion
+
+        #region Global Assembly Methods
 
         /// <summary>
         ///     Gets all AssemblyParts in the world. Returns an array of all AssemblyParts.
@@ -56,6 +63,10 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             return _getAllAssemblies?.Invoke();
         }
 
+        #endregion
+
+        #region Per-Assembly Methods
+
         /// <summary>
         ///     Gets all member parts of a assembly. Returns an empty list on fail.
         ///     <para>
@@ -66,6 +77,46 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         {
             return _getMemberParts?.Invoke(assemblyId);
         }
+
+        /// <summary>
+        ///     Gets the base part of a PhysicalAssembly. Returns null if assembly does not exist.
+        /// </summary>
+        public MyEntity GetBasePart(int assemblyId)
+        {
+            return _getBasePart?.Invoke(assemblyId);
+        }
+
+        /// <summary>
+        /// Returns the IMyCubeGrid containing a given assembly ID.
+        /// </summary>
+        /// <param name="assemblyId"></param>
+        /// <returns></returns>
+        public IMyCubeGrid GetAssemblyGrid(int assemblyId)
+        {
+            return _getAssemblyGrid?.Invoke(assemblyId);
+        }
+
+        /// <summary>
+        /// Registers an Action<AssemblyId> triggered on assembly removal.
+        /// </summary>
+        /// <param name="action"></param>
+        public void AddOnAssemblyClose(Action<int> action)
+        {
+            _addOnAssemblyClose?.Invoke(action);
+        }
+
+        /// <summary>
+        /// De-registers an Action<AssemblyId> triggered on assembly removal.
+        /// </summary>
+        /// <param name="action"></param>
+        public void RemoveOnAssemblyClose(Action<int> action)
+        {
+            _removeOnAssemblyClose?.Invoke(action);
+        }
+
+        #endregion
+
+        #region Per-Part Methods
 
         /// <summary>
         ///     Gets all connected parts to a block. Returns an empty list on fail.
@@ -79,12 +130,18 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        ///     Gets the base part of a PhysicalAssembly. Returns null if assembly does not exist.
+        /// Returns the ID of the assembly containing a given part, or -1 if no assembly was found.
         /// </summary>
-        public MyEntity GetBasePart(int assemblyId)
+        /// <param name="blockPart"></param>
+        /// <returns></returns>
+        public int GetContainingAssembly(MyEntity blockPart)
         {
-            return _getBasePart?.Invoke(assemblyId);
+            return _getContainingAssembly?.Invoke(blockPart) ?? -1;
         }
+
+        #endregion
+
+        #region Global Methods
 
         /// <summary>
         ///     Returns true if debug mode is enabled.
@@ -95,25 +152,12 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             return _isDebug?.Invoke() ?? false;
         }
 
-        public int GetContainingAssembly(MyEntity blockPart)
+        public void Log(string text)
         {
-            return _getContainingAssembly?.Invoke(blockPart) ?? -1;
+            _logWriteLine?.Invoke($"[{ModContext.ModName}] {text}");
         }
 
-        public IMyCubeGrid GetAssemblyGrid(int assemblyId)
-        {
-            return _getAssemblyGrid?.Invoke(assemblyId) ?? null;
-        }
-
-        public void AddOnAssemblyClose(Action<int> action)
-        {
-            _addOnAssemblyClose?.Invoke(action);
-        }
-
-        public void RemoveOnAssemblyClose(Action<int> action)
-        {
-            _removeOnAssemblyClose?.Invoke(action);
-        }
+        #endregion
 
 
         public Action OnReady;
@@ -126,16 +170,28 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         public void ApiAssign()
         {
             _apiInit = methodMap != null;
+
+            // Global assembly methods
             SetApiMethod("GetAllParts", ref _getAllParts);
             SetApiMethod("GetAllAssemblies", ref _getAllAssemblies);
+
+            // Per-assembly methods
             SetApiMethod("GetMemberParts", ref _getMemberParts);
-            SetApiMethod("GetConnectedBlocks", ref _getConnectedBlocks);
             SetApiMethod("GetBasePart", ref _getBasePart);
-            SetApiMethod("IsDebug", ref _isDebug);
-            SetApiMethod("GetContainingAssembly", ref _getContainingAssembly);
             SetApiMethod("GetAssemblyGrid", ref _getAssemblyGrid);
             SetApiMethod("AddOnAssemblyClose", ref _addOnAssemblyClose);
             SetApiMethod("RemoveOnAssemblyClose", ref _removeOnAssemblyClose);
+
+            // Per-part methods
+            SetApiMethod("GetConnectedBlocks", ref _getConnectedBlocks);
+            SetApiMethod("GetContainingAssembly", ref _getContainingAssembly);
+
+            // Global methods
+            SetApiMethod("IsDebug", ref _isDebug);
+            SetApiMethod("LogWriteLine", ref _logWriteLine);
+            SetApiMethod("AddChatCommand", ref _addChatCommand);
+            SetApiMethod("RemoveChatCommand", ref _removeChatCommand);
+            
 
             if (_apiInit)
                 MyLog.Default.WriteLineAndConsole("ModularDefinitions: ModularDefinitionsAPI loaded!");
@@ -162,15 +218,17 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             method = methodMap[name] as T;
         }
 
-        public void LoadData()
+        public void LoadData(IMyModContext modContext, Action onLoad = null)
         {
             if (_isRegistered)
                 throw new Exception($"{GetType().Name}.Load() should not be called multiple times!");
 
+            ModContext = modContext;
+            OnLoad = onLoad;
             _isRegistered = true;
             MyAPIGateway.Utilities.RegisterMessageHandler(ApiChannel, HandleMessage);
             MyAPIGateway.Utilities.SendModMessage(ApiChannel, "ApiEndpointRequest");
-            MyLog.Default.WriteLineAndConsole("ModularDefinitions: ModularDefinitionsAPI inited.");
+            MyLog.Default.WriteLineAndConsole($"{ModContext.ModName}: ModularDefinitionsAPI inited.");
         }
 
         public void UnloadData()
@@ -182,22 +240,23 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             _isRegistered = false;
             _apiInit = false;
             IsReady = false;
-            MyLog.Default.WriteLineAndConsole("ModularDefinitions: ModularDefinitionsAPI unloaded.");
+            MyLog.Default.WriteLineAndConsole($"{ModContext.ModName}: ModularDefinitionsAPI unloaded.");
         }
 
         private void HandleMessage(object obj)
         {
             try
             {
-                if (_apiInit ||
-                    obj is string) // the sent "ApiEndpointRequest" will also be received here, explicitly ignoring that
+                if (_apiInit || obj is string || obj == null) // the sent "ApiEndpointRequest" will also be received here, explicitly ignoring that
                 {
                     MyLog.Default.WriteLineAndConsole(
                         $"ModularDefinitions: ModularDefinitionsAPI ignored message {obj as string}!");
                     return;
                 }
 
-                var dict = obj as Dictionary<string, Delegate>;
+                var tuple = (MyTuple<Vector2I, IReadOnlyDictionary<string, Delegate>>)obj;
+                var receivedVersion = tuple.Item1;
+                var dict = tuple.Item2;
 
                 if (dict == null)
                 {
@@ -209,7 +268,12 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 methodMap = dict;
                 ApiAssign();
                 methodMap = null;
+
                 IsReady = true;
+                Log($"Modular API v{ApiVersion} loaded!");
+                if (receivedVersion.Y != ApiVersion)
+                    Log("Expected API version differs from received API; errors may occur.");
+                OnLoad?.Invoke();
             }
             catch (Exception ex)
             {
@@ -217,7 +281,5 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 MyAPIGateway.Utilities.ShowMessage("Fusion Systems", "Exception in ModularAssemblies Client Mod DefinitionAPI! " + ex);
             }
         }
-
-        #endregion
     }
 }
