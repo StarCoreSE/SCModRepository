@@ -555,7 +555,7 @@ Cat_StarcoreUlitity@21;
 				 SC_Radome@10;
 				 Starcore_RWR_Projectiles@5;
 				  SC_Flare@50;
-				SI_Field_Gen@450;
+				SI_Field_Gen@50;
 				 SELtdLargeNanobotBuildAndRepairSystem@50;
 				  PM_LG_BLASTPLATE_BLASTPLATE@100;
 				  REINFORCED_BLASTPLATE@100;
