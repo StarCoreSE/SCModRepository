@@ -1,10 +1,5 @@
 ﻿using ProtoBuf;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VRage.Game.ModAPI.Network;
 using VRage.Sync;
 using VRage.Utils;
 
@@ -17,38 +12,43 @@ namespace Invalid.ShieldProjector
         public ShieldProjectorSettings(ShieldProjector owner)
         {
             Owner = owner;
-           // Owner.IsFoamingSync.ValueChanged += (obj) => isFoaming = obj.Value;
-           // Owner.FoamRadiusSync.ValueChanged += (obj) => foamRadius = obj.Value;
         }
 
-        [ProtoMember(1)] private bool isFoaming;
-        [ProtoMember(2)] private float foamRadius;
+        [ProtoMember(1)]
+        private bool isFoaming;
+        [ProtoMember(2)]
+        private float foamRadius;
+        [ProtoMember(3)] // Ensure this property is serialized by assigning it a unique ProtoMember tag.
+        private float squareSize = 5.0f; // Default value of 5 meters
+
         ShieldProjector Owner;
 
         public bool IsFoaming
         {
-            get
-            {
-                return isFoaming;
-            }
+            get { return isFoaming; }
             set
             {
                 isFoaming = value;
-              //  Owner.IsFoamingSync.Value = value;
+                // This can be uncommented if you handle sync values.
+                // Owner.IsFoamingSync.Value = value;
             }
         }
 
         public float FoamRadius
         {
-            get
-            {
-                return foamRadius;
-            }
+            get { return foamRadius; }
             set
             {
                 foamRadius = value;
-               // Owner.FoamRadiusSync.Value = value;
+                // This can be uncommented if you handle sync values.
+                // Owner.FoamRadiusSync.Value = value;
             }
+        }
+
+        public float SquareSize
+        {
+            get { return squareSize; }
+            set { squareSize = value; }
         }
     }
 }
