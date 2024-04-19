@@ -21,7 +21,7 @@ namespace Invalid.ShieldProjector
     {
         private IMyCubeBlock block;
         private ShieldProjectorSettings Settings;
-        public readonly Guid FoamSettingsGUID = new Guid("6200280a-be69-48ed-afa9-cf376ea62b8b");  // Preserved GUID
+        public readonly Guid ShieldProjectorGUID = new Guid("6200280a-be69-48ed-afa9-cf376ea62b8b");  // Preserved GUID
 
         private Vector3D offset = new Vector3D(0, 0, 10); // 10m in front of the block
         private float squareSize = 5.0f; // Default square size of 5 meters
@@ -43,6 +43,19 @@ namespace Invalid.ShieldProjector
             Settings = new ShieldProjectorSettings(this);
             LoadSettings();
             SaveSettings();
+        }
+
+        public override bool IsSerialized()
+        {
+            try
+            {
+                SaveSettings();
+            }
+            catch (Exception e)
+            {
+                // Optional: Log the exception or handle it appropriately
+            }
+            return base.IsSerialized();
         }
 
         public override void UpdateBeforeSimulation()
@@ -84,7 +97,7 @@ namespace Invalid.ShieldProjector
         internal bool LoadSettings()
         {
             string rawData;
-            if (block.Storage != null && block.Storage.TryGetValue(FoamSettingsGUID, out rawData))
+            if (block.Storage != null && block.Storage.TryGetValue(ShieldProjectorGUID, out rawData))
             {
                 try
                 {
@@ -118,7 +131,7 @@ namespace Invalid.ShieldProjector
 
                 Settings.SquareSize = squareSize;  // Save the current square size
                 string rawData = Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(Settings));
-                block.Storage.Add(FoamSettingsGUID, rawData);
+                block.Storage.Add(ShieldProjectorGUID, rawData);
             }
             catch (Exception e)
             {
