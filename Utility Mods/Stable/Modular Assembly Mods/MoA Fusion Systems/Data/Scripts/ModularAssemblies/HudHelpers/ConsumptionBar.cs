@@ -22,7 +22,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
         private readonly TexturedBox _storageBackground; 
         private readonly TexturedBox _storageForeground;
         private bool _shouldHide = false;
-        private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
+        private static ModularDefinitionApi ModularAPI => ModularDefinition.ModularAPI;
 
 
         public ConsumptionBar(HudParentBase parent) : base(parent)

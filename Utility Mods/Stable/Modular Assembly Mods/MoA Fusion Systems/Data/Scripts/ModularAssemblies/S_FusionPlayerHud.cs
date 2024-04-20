@@ -18,7 +18,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
     public class S_FusionPlayerHud : MySessionComponentBase
     {
         public static S_FusionPlayerHud I;
-        private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
+        private static ModularDefinitionApi ModularAPI => ModularDefinition.ModularAPI;
         private static S_FusionManager FusionManager => S_FusionManager.I;
 
         private ConsumptionBar ConsumptionBar = null;

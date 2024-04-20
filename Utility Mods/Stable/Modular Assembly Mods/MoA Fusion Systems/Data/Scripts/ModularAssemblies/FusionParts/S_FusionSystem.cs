@@ -44,7 +44,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             PhysicalAssemblyId = physicalAssemblyId;
         }
 
-        private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
+        private static ModularDefinitionApi ModularAPI => ModularDefinition.ModularAPI;
 
         public void AddPart(IMyCubeBlock newPart)
         {

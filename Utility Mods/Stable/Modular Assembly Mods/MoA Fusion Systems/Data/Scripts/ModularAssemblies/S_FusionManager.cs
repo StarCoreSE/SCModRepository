@@ -13,7 +13,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
         public static S_FusionManager I = new S_FusionManager();
         public ModularDefinition Definition;
         public Dictionary<int, S_FusionSystem> FusionSystems = new Dictionary<int, S_FusionSystem>();
-        private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
+        private static ModularDefinitionApi ModularAPI => ModularDefinition.ModularAPI;
 
 
         public void Load()

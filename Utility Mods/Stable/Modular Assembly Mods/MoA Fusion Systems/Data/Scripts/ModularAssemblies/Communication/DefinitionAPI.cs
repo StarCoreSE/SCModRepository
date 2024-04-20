@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using Sandbox.ModAPI;
 using VRage;
-using VRage.Game.Entity;
 using VRage.Game.ModAPI;
-using VRage.GameServices;
 using VRage.Utils;
 using VRageMath;
 
@@ -14,56 +10,71 @@ using VRageMath;
 namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     Communication
 {
-    public class ModularDefinitionAPI
+    /// <summary>
+    /// Class used to communicate with the Modular Assemblies Framework mod. <br/><br/>
+    /// Want to include in this your own mod? Check out the following documentation link: <br/>
+    /// <see href="https://github.com/StarCoreSE/Modular-Assemblies/wiki/The-Modular-API"></see>
+    /// </summary>
+    public class ModularDefinitionApi
     {
         /// <summary>
         /// The expected API version. Don't touch this unless you're developing for the Modular Assemblies Framework.
         /// </summary>
         public const int ApiVersion = 1;
+
         /// <summary>
-        /// The currently loaded Modular Assemblies Framework version.
+        /// The currently loaded Modular Assemblies Framework version. Don't touch this either.
         /// </summary>
         public int FrameworkVersion { get; private set; } = -1;
-        
 
-        #region Delegates
+        /// <summary>
+        /// Triggered whenever the API is ready - added to by the constructor or manually.
+        /// </summary>
+        public Action OnReady;
 
-        // Global assembly methods
-        private Func<IMyCubeBlock[]> _getAllParts;
-        private Func<int[]> _getAllAssemblies;
+        /// <summary>
+        /// Displays whether the API is ready.
+        /// </summary>
+        public bool IsReady { get; private set; }
 
-        // Per-assembly methods
-        private Func<int, IMyCubeBlock[]> _getMemberParts;
-        private Func<int, IMyCubeBlock> _getBasePart;
-        private Func<int, IMyCubeGrid> _getAssemblyGrid;
-        private Action<Action<int>> _addOnAssemblyClose;
-        private Action<Action<int>> _removeOnAssemblyClose;
-        private Action<int> _recreateAssembly;
+        /// <summary>
+        /// Call this to initialize the Modular API.
+        /// </summary>
+        /// <param name="modContext"></param>
+        /// <param name="onLoad"></param>
+        /// <exception cref="Exception"></exception>
+        public ModularDefinitionApi(IMyModContext modContext, Action onLoad = null)
+        {
+            if (_isRegistered)
+                throw new Exception($"{GetType().Name}.Load() should not be called multiple times!");
 
-        // Per-part methods
-        private Func<IMyCubeBlock, string, bool, IMyCubeBlock[]> _getConnectedBlocks;
-        private Func<IMyCubeBlock, string, int> _getContainingAssembly;
-        private Action<IMyCubeBlock, string> _recreateConnections;
+            _modContext = modContext;
+            OnReady = onLoad;
+            _isRegistered = true;
+            MyAPIGateway.Utilities.RegisterMessageHandler(ApiChannel, HandleMessage);
+            MyAPIGateway.Utilities.SendModMessage(ApiChannel, "ApiEndpointRequest");
+            MyLog.Default.WriteLineAndConsole($"{_modContext.ModName}: ModularDefinitionsAPI listening for API methods...");
+        }
 
-        // Definition methods
-        private Func<byte[], string[]> _registerDefinitions;
-        private Func<string, bool> _unregisterDefinition;
-        private Func<string[]> _getAllDefinitions;
-        private Action<string, Action<int, IMyCubeBlock, bool>> _registerOnPartAdd;
-        private Action<string, Action<int, IMyCubeBlock, bool>> _registerOnPartRemove;
-        private Action<string, Action<int, IMyCubeBlock, bool>> _registerOnPartDestroy;
-        private Action<string, Action<int, IMyCubeBlock, bool>> _unregisterOnPartAdd;
-        private Action<string, Action<int, IMyCubeBlock, bool>> _unregisterOnPartRemove;
-        private Action<string, Action<int, IMyCubeBlock, bool>> _unregisterOnPartDestroy;
+        /// <summary>
+        /// Call this to unload the Modular API. It will be called automatically when the Modular Assemblies Framework is closed.
+        /// </summary>
+        public void UnloadData()
+        {
+            MyAPIGateway.Utilities.UnregisterMessageHandler(ApiChannel, HandleMessage);
 
-        // Global methods
-        private Func<bool> _isDebug;
-        private Action<string> _logWriteLine;
-        private Action<string, string, Action<string[]>, string> _addChatCommand;
-        private Action<string> _removeChatCommand;
+            if (_apiInit)
+                ApiAssign(); // Clear API methods if the API is currently inited.
 
-        #endregion
+            _isRegistered = false;
+            _apiInit = false;
+            IsReady = false;
+            OnReady = null;
+            MyLog.Default.WriteLineAndConsole($"{_modContext.ModName}: ModularDefinitionsAPI unloaded.");
+        }
 
+        // These sections are what the user can actually see when referencing the API, and can be used freely. //
+        // Note the null checks. //
         #region Global Assembly Methods
 
         /// <summary>
@@ -200,6 +211,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 RegisterOnPartAdd(definition.Name, definition.OnPartAdd);
                 RegisterOnPartRemove(definition.Name, definition.OnPartRemove);
                 RegisterOnPartDestroy(definition.Name, definition.OnPartDestroy);
+
+                definition.OnInit?.Invoke();
             }
 
             return validDefinitions;
@@ -315,7 +328,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         /// <param name="text"></param>
         public void Log(string text)
         {
-            _logWriteLine?.Invoke($"[{ModContext.ModName}] {text}");
+            _logWriteLine?.Invoke($"[{_modContext.ModName}] {text}");
         }
 
         /// <summary>
@@ -326,7 +339,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         /// <param name="onTrigger"></param>
         public void AddChatCommand(string command, string helpText, Action<string[]> onTrigger)
         {
-            _addChatCommand?.Invoke(command, helpText, onTrigger, ModContext.ModName);
+            _addChatCommand?.Invoke(command, helpText, onTrigger, _modContext.ModName);
         }
 
         /// <summary>
@@ -341,17 +354,66 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         #endregion
 
 
-        public bool IsReady;
+
+
+        // This section lists all the delegates that will be assigned and utilized below. //
+        #region Delegates
+
+        // Global assembly methods
+        private Func<IMyCubeBlock[]> _getAllParts;
+        private Func<int[]> _getAllAssemblies;
+
+        // Per-assembly methods
+        private Func<int, IMyCubeBlock[]> _getMemberParts;
+        private Func<int, IMyCubeBlock> _getBasePart;
+        private Func<int, IMyCubeGrid> _getAssemblyGrid;
+        private Action<Action<int>> _addOnAssemblyClose;
+        private Action<Action<int>> _removeOnAssemblyClose;
+        private Action<int> _recreateAssembly;
+
+        // Per-part methods
+        private Func<IMyCubeBlock, string, bool, IMyCubeBlock[]> _getConnectedBlocks;
+        private Func<IMyCubeBlock, string, int> _getContainingAssembly;
+        private Action<IMyCubeBlock, string> _recreateConnections;
+
+        // Definition methods
+        private Func<byte[], string[]> _registerDefinitions;
+        private Func<string, bool> _unregisterDefinition;
+        private Func<string[]> _getAllDefinitions;
+        private Action<string, Action<int, IMyCubeBlock, bool>> _registerOnPartAdd;
+        private Action<string, Action<int, IMyCubeBlock, bool>> _registerOnPartRemove;
+        private Action<string, Action<int, IMyCubeBlock, bool>> _registerOnPartDestroy;
+        private Action<string, Action<int, IMyCubeBlock, bool>> _unregisterOnPartAdd;
+        private Action<string, Action<int, IMyCubeBlock, bool>> _unregisterOnPartRemove;
+        private Action<string, Action<int, IMyCubeBlock, bool>> _unregisterOnPartDestroy;
+
+        // Global methods
+        private Func<bool> _isDebug;
+        private Action<string> _logWriteLine;
+        private Action<string, string, Action<string[]>, string> _addChatCommand;
+        private Action<string> _removeChatCommand;
+
+        #endregion
+
+
+
+
+        // This section is the 'guts' of the API; it assigns out all the API endpoints internally and registers with the main framework mod. //
+        #region API Initialization
+
         private bool _isRegistered;
         private bool _apiInit;
-        private readonly long ApiChannel = 8774;
-        private IReadOnlyDictionary<string, Delegate> methodMap;
-        public Action OnReady;
-        private IMyModContext ModContext;
+        private const long ApiChannel = 8774;
+        private IReadOnlyDictionary<string, Delegate> _methodMap;
+        private readonly IMyModContext _modContext;
 
-        public void ApiAssign()
+        /// <summary>
+        /// Assigns all API methods. Internal function, avoid editing.
+        /// </summary>
+        /// <returns></returns>
+        public bool ApiAssign()
         {
-            _apiInit = methodMap != null;
+            _apiInit = _methodMap != null;
 
             // Global assembly methods
             SetApiMethod("GetAllParts", ref _getAllParts);
@@ -387,81 +449,72 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             SetApiMethod("AddChatCommand", ref _addChatCommand);
             SetApiMethod("RemoveChatCommand", ref _removeChatCommand);
 
-            methodMap = null;
-            OnReady?.Invoke();
+            // Unload data if told to by the framework, otherwise notify that the API is ready.
+            if (_methodMap == null)
+            {
+                UnloadData();
+                return false;
+            }
+            else
+            {
+                _methodMap = null;
+                OnReady?.Invoke();
+                return true;
+            }
         }
 
+        /// <summary>
+        /// Assigns a single API endpoint.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="name">Shared endpoint name; matches with the framework mod.</param>
+        /// <param name="method">Method to assign.</param>
+        /// <exception cref="Exception"></exception>
         private void SetApiMethod<T>(string name, ref T method) where T : class
         {
-            if (methodMap == null)
+            if (_methodMap == null)
             {
                 method = null;
                 return;
             }
 
-            if (!methodMap.ContainsKey(name))
+            if (!_methodMap.ContainsKey(name))
                 throw new Exception("Method Map does not contain method " + name);
-            Delegate del = methodMap[name];
+            Delegate del = _methodMap[name];
             if (del.GetType() != typeof(T))
                 throw new Exception($"Method {name} type mismatch! [MapMethod: {del.GetType().Name} | ApiMethod: {typeof(T).Name}]");
-            method = methodMap[name] as T;
+            method = _methodMap[name] as T;
         }
 
-        public void LoadData(IMyModContext modContext, Action onLoad = null)
-        {
-            if (_isRegistered)
-                throw new Exception($"{GetType().Name}.Load() should not be called multiple times!");
-
-            ModContext = modContext;
-            OnReady = onLoad;
-            _isRegistered = true;
-            MyAPIGateway.Utilities.RegisterMessageHandler(ApiChannel, HandleMessage);
-            MyAPIGateway.Utilities.SendModMessage(ApiChannel, "ApiEndpointRequest");
-            MyLog.Default.WriteLineAndConsole($"{ModContext.ModName}: ModularDefinitionsAPI listening for API methods...");
-        }
-
-        public void UnloadData()
-        {
-            MyAPIGateway.Utilities.UnregisterMessageHandler(ApiChannel, HandleMessage);
-
-            ApiAssign();
-
-            _isRegistered = false;
-            _apiInit = false;
-            IsReady = false;
-            MyLog.Default.WriteLineAndConsole($"{ModContext.ModName}: ModularDefinitionsAPI unloaded.");
-        }
-
+        /// <summary>
+        /// Triggered whenever the API receives a message from the framework mod.
+        /// </summary>
+        /// <param name="obj"></param>
         private void HandleMessage(object obj)
         {
             try
             {
-                if (_apiInit || obj is string || obj == null) // the sent "ApiEndpointRequest" will also be received here, explicitly ignoring that
-                {
-                    MyLog.Default.WriteLineAndConsole(
-                        $"{ModContext.ModName}: ModularDefinitionsAPI ignored message \"{obj as string}\"");
+                if (_apiInit || obj is string || obj == null) // the "ApiEndpointRequest" message will also be received here, we're ignoring that
                     return;
-                }
 
-                MyLog.Default.WriteLineAndConsole(obj.GetType().ToString());
-
-                var tuple = (MyTuple<Vector2I, IReadOnlyDictionary<string, Delegate>>) obj;
+                var tuple = (MyTuple<Vector2I, IReadOnlyDictionary<string, Delegate>>)obj;
                 var receivedVersion = tuple.Item1;
                 var dict = tuple.Item2;
 
                 if (dict == null)
                 {
                     MyLog.Default.WriteLineAndConsole(
-                        $"{ModContext.ModName}: ModularDefinitionsAPI ERR: Received null dictionary!");
+                        $"{_modContext.ModName}: ModularDefinitionsAPI ERR: Received null dictionary!");
                     return;
                 }
 
                 if (receivedVersion.Y != ApiVersion)
                     Log($"Expected API version ({ApiVersion}) differs from received API version {receivedVersion}; errors may occur.");
 
-                methodMap = dict;
-                ApiAssign();
-                methodMap = null;
+                _methodMap = dict;
+
+                if (!ApiAssign()) // If we're unassigning the API, don't notify when ready
+                    return;
 
                 FrameworkVersion = receivedVersion.X;
                 IsReady = true;
@@ -469,9 +522,12 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             }
             catch (Exception ex)
             {
-                MyLog.Default.WriteLineAndConsole($"{ModContext.ModName}: Exception in ModularDefinitionsAPI! " + ex);
-                MyAPIGateway.Utilities.ShowMessage(ModContext.ModName, "Exception in ModularDefinitionsAPI!\n" + ex);
+                // We really really want to notify the player if something goes wrong here.
+                MyLog.Default.WriteLineAndConsole($"{_modContext.ModName}: Exception in ModularDefinitionsAPI! " + ex);
+                MyAPIGateway.Utilities.ShowMessage(_modContext.ModName, "Exception in ModularDefinitionsAPI!\n" + ex);
             }
         }
+
+        #endregion
     }
 }
