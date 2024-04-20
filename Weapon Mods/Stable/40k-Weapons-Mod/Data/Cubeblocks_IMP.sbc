@@ -584,14 +584,14 @@
         <Component Subtype="Computer" Count="300" />
         <Component Subtype="MetalGrid" Count="50" />
         <Component Subtype="Construction" Count="500" />
-        <Component Subtype="SteelPlate" Count="400" />
+        <Component Subtype="SteelPlate" Count="250" />
       </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
       <BuildProgressModels>
       </BuildProgressModels>
-      <BlockPairName>LightLance</BlockPairName>
+      <BlockPairName>Aegis</BlockPairName>
       <EdgeType>Light</EdgeType>
-      <BuildTimeSeconds>100</BuildTimeSeconds>
+      <BuildTimeSeconds>30</BuildTimeSeconds>
       <WeaponDefinitionId Subtype="HeavyBolterLargeSponson" />
       <MountPoints>
         <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0" PropertiesMask="2" />
