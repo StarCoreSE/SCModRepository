@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using Sandbox.ModAPI;
 using VRage;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
+using VRage.GameServices;
 using VRage.Utils;
 using VRageMath;
+
 
 namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     Communication
@@ -25,19 +29,29 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         #region Delegates
 
         // Global assembly methods
-        private Func<MyEntity[]> _getAllParts;
+        private Func<IMyCubeBlock[]> _getAllParts;
         private Func<int[]> _getAllAssemblies;
 
         // Per-assembly methods
-        private Func<int, MyEntity[]> _getMemberParts;
-        private Func<int, MyEntity> _getBasePart;
+        private Func<int, IMyCubeBlock[]> _getMemberParts;
+        private Func<int, IMyCubeBlock> _getBasePart;
         private Func<int, IMyCubeGrid> _getAssemblyGrid;
         private Action<Action<int>> _addOnAssemblyClose;
         private Action<Action<int>> _removeOnAssemblyClose;
+        private Action<int> _recreateAssembly;
 
         // Per-part methods
-        private Func<MyEntity, bool, MyEntity[]> _getConnectedBlocks;
-        private Func<MyEntity, int> _getContainingAssembly;
+        private Func<IMyCubeBlock, string, bool, IMyCubeBlock[]> _getConnectedBlocks;
+        private Func<IMyCubeBlock, string, int> _getContainingAssembly;
+        private Action<IMyCubeBlock, string> _recreateConnections;
+
+        // Definition methods
+        private Func<byte[], string[]> _registerDefinitions;
+        private Func<string, bool> _unregisterDefinition;
+        private Func<string[]> _getAllDefinitions;
+        private Action<string, Action<int, IMyCubeBlock, bool>> _registerOnPartAdd;
+        private Action<string, Action<int, IMyCubeBlock, bool>> _registerOnPartRemove;
+        private Action<string, Action<int, IMyCubeBlock, bool>> _registerOnPartDestroy;
 
         // Global methods
         private Func<bool> _isDebug;
@@ -52,7 +66,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         /// <summary>
         ///     Gets all AssemblyParts in the world. Returns an array of all AssemblyParts.
         /// </summary>
-        public MyEntity[] GetAllParts()
+        public IMyCubeBlock[] GetAllParts()
         {
             return _getAllParts?.Invoke();
         }
@@ -78,7 +92,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         ///         Arg1 is EntityId
         ///     </para>
         /// </summary>
-        public MyEntity[] GetMemberParts(int assemblyId)
+        public IMyCubeBlock[] GetMemberParts(int assemblyId)
         {
             return _getMemberParts?.Invoke(assemblyId);
         }
@@ -86,7 +100,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         /// <summary>
         ///     Gets the base part of a PhysicalAssembly. Returns null if assembly does not exist.
         /// </summary>
-        public MyEntity GetBasePart(int assemblyId)
+        public IMyCubeBlock GetBasePart(int assemblyId)
         {
             return _getBasePart?.Invoke(assemblyId);
         }
@@ -111,7 +125,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        /// De-registers an Action<AssemblyId> triggered on assembly removal.
+        /// De-registers an Action(AssemblyId) triggered on assembly removal.
         /// </summary>
         /// <param name="action"></param>
         public void RemoveOnAssemblyClose(Action<int> action)
@@ -119,29 +133,113 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             _removeOnAssemblyClose?.Invoke(action);
         }
 
+        /// <summary>
+        /// Removes all blocks from the assembly and queues them for a connection check.
+        /// </summary>
+        /// <param name="assemblyId"></param>
+        public void RecreateAssembly(int assemblyId)
+        {
+            _recreateAssembly?.Invoke(assemblyId);
+        }
+
         #endregion
 
         #region Per-Part Methods
 
         /// <summary>
-        ///     Gets all connected parts to a block. Returns an empty list on fail.
-        ///     <para>
-        ///         <paramref name="useCached" />: Set this to 'false' if used in OnPartAdd.
-        ///     </para>
+        /// Gets all connected parts to a block. Returns an empty list on fail.
+        /// <para>
+        /// <paramref name="useCached" />: Set this to 'false' if used in OnPartAdd.
+        /// </para>
         /// </summary>
-        public MyEntity[] GetConnectedBlocks(MyEntity partBlockId, bool useCached = true)
+        public IMyCubeBlock[] GetConnectedBlocks(IMyCubeBlock partBlockId, string definition, bool useCached = true)
         {
-            return _getConnectedBlocks?.Invoke(partBlockId, useCached);
+            return _getConnectedBlocks?.Invoke(partBlockId, definition, useCached);
         }
 
         /// <summary>
         /// Returns the ID of the assembly containing a given part, or -1 if no assembly was found.
         /// </summary>
         /// <param name="blockPart"></param>
+        /// <param name="definition"></param>
         /// <returns></returns>
-        public int GetContainingAssembly(MyEntity blockPart)
+        public int GetContainingAssembly(IMyCubeBlock blockPart, string definition)
         {
-            return _getContainingAssembly?.Invoke(blockPart) ?? -1;
+            return _getContainingAssembly?.Invoke(blockPart, definition) ?? -1;
+        }
+
+        /// <summary>
+        /// Removes a part from its assembly and queues it for a connection check.
+        /// </summary>
+        /// <param name="blockPart"></param>
+        /// <param name="definition"></param>
+        public void RecreateConnections(IMyCubeBlock blockPart, string definition)
+        {
+            _recreateConnections?.Invoke(blockPart, definition);
+        }
+
+        #endregion
+
+        #region Definition Methods
+
+        /// <summary>
+        /// Registers a set of definitions with Modular Assemblies Framework.
+        /// </summary>
+        /// <param name="definitionContainer"></param>
+        /// <returns></returns>
+        public string[] RegisterDefinitions(DefinitionDefs.DefinitionContainer definitionContainer)
+        {
+            string[] validDefinitions =
+                _registerDefinitions?.Invoke(MyAPIGateway.Utilities.SerializeToBinary(definitionContainer));
+
+            foreach (var definition in definitionContainer.PhysicalDefs)
+            {
+                RegisterOnPartAdd(definition.Name, definition.OnPartAdd);
+                RegisterOnPartRemove(definition.Name, definition.OnPartRemove);
+                RegisterOnPartDestroy(definition.Name, definition.OnPartDestroy);
+            }
+
+            return validDefinitions;
+        }
+
+        /// <summary>
+        /// Unregisters a definition and removes all parts referencing it.
+        /// </summary>
+        /// <param name="definitionName"></param>
+        /// <returns></returns>
+        public bool UnregisterDefinition(string definitionName)
+        {
+            return _unregisterDefinition?.Invoke(definitionName) ?? false;
+        }
+
+        /// <summary>
+        /// Returns a list of all registered definition names.
+        /// </summary>
+        /// <returns></returns>
+        public string[] GetAllDefinitions()
+        {
+            return _getAllDefinitions?.Invoke();
+        }
+
+        public void RegisterOnPartAdd(string definitionName, Action<int, IMyCubeBlock, bool> action)
+        {
+            if (action == null)
+                return;
+            _registerOnPartAdd?.Invoke(definitionName, action);
+        }
+
+        public void RegisterOnPartRemove(string definitionName, Action<int, IMyCubeBlock, bool> action)
+        {
+            if (action == null)
+                return;
+            _registerOnPartRemove?.Invoke(definitionName, action);
+        }
+
+        public void RegisterOnPartDestroy(string definitionName, Action<int, IMyCubeBlock, bool> action)
+        {
+            if (action == null)
+                return;
+            _registerOnPartDestroy?.Invoke(definitionName, action);
         }
 
         #endregion
@@ -149,7 +247,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         #region Global Methods
 
         /// <summary>
-        ///     Returns true if debug mode is enabled.
+        /// Returns true if debug mode is enabled.
         /// </summary>
         /// <returns></returns>
         public bool IsDebug()
@@ -157,9 +255,33 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             return _isDebug?.Invoke() ?? false;
         }
 
+        /// <summary>
+        /// Writes a line to the Modular Assemblies log. %AppData%\Space Engineers\Storage\ModularAssemblies.log
+        /// </summary>
+        /// <param name="text"></param>
         public void Log(string text)
         {
             _logWriteLine?.Invoke($"[{ModContext.ModName}] {text}");
+        }
+
+        /// <summary>
+        /// Registers a chat command. Help page is autogenerated and tied into "!md help"
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="helpText"></param>
+        /// <param name="onTrigger"></param>
+        public void AddChatCommand(string command, string helpText, Action<string[]> onTrigger)
+        {
+            _addChatCommand?.Invoke(command, helpText, onTrigger, ModContext.ModName);
+        }
+
+        /// <summary>
+        /// De-registers a chat command.
+        /// </summary>
+        /// <param name="command"></param>
+        public void RemoveChatCommand(string command)
+        {
+            _removeChatCommand?.Invoke(command);
         }
 
         #endregion
@@ -187,22 +309,26 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             SetApiMethod("GetAssemblyGrid", ref _getAssemblyGrid);
             SetApiMethod("AddOnAssemblyClose", ref _addOnAssemblyClose);
             SetApiMethod("RemoveOnAssemblyClose", ref _removeOnAssemblyClose);
+            SetApiMethod("RecreateAssembly", ref _recreateAssembly);
 
             // Per-part methods
             SetApiMethod("GetConnectedBlocks", ref _getConnectedBlocks);
             SetApiMethod("GetContainingAssembly", ref _getContainingAssembly);
+            SetApiMethod("RecreateConnections", ref _recreateConnections);
+
+            // Definition methods
+            SetApiMethod("RegisterDefinitions", ref _registerDefinitions);
+            SetApiMethod("UnregisterDefinition", ref _unregisterDefinition);
+            SetApiMethod("GetAllDefinitions", ref _getAllDefinitions);
+            SetApiMethod("RegisterOnPartAdd", ref _registerOnPartAdd);
+            SetApiMethod("RegisterOnPartRemove", ref _registerOnPartRemove);
+            SetApiMethod("RegisterOnPartDestroy", ref _registerOnPartDestroy);
 
             // Global methods
             SetApiMethod("IsDebug", ref _isDebug);
             SetApiMethod("LogWriteLine", ref _logWriteLine);
             SetApiMethod("AddChatCommand", ref _addChatCommand);
             SetApiMethod("RemoveChatCommand", ref _removeChatCommand);
-            
-
-            if (_apiInit)
-                MyLog.Default.WriteLineAndConsole("ModularDefinitions: ModularDefinitionsAPI loaded!");
-            else
-                MyLog.Default.WriteLineAndConsole("ModularDefinitions: ModularDefinitionsAPI cleared.");
 
             methodMap = null;
             OnReady?.Invoke();
@@ -234,7 +360,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             _isRegistered = true;
             MyAPIGateway.Utilities.RegisterMessageHandler(ApiChannel, HandleMessage);
             MyAPIGateway.Utilities.SendModMessage(ApiChannel, "ApiEndpointRequest");
-            MyLog.Default.WriteLineAndConsole($"{ModContext.ModName}: ModularDefinitionsAPI inited.");
+            MyLog.Default.WriteLineAndConsole($"{ModContext.ModName}: ModularDefinitionsAPI listening for API methods...");
         }
 
         public void UnloadData()
@@ -256,7 +382,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 if (_apiInit || obj is string || obj == null) // the sent "ApiEndpointRequest" will also be received here, explicitly ignoring that
                 {
                     MyLog.Default.WriteLineAndConsole(
-                        $"ModularDefinitions: ModularDefinitionsAPI ignored message {obj as string}!");
+                        $"{ModContext.ModName}: ModularDefinitionsAPI ignored message \"{obj as string}\"");
                     return;
                 }
 
@@ -269,7 +395,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 if (dict == null)
                 {
                     MyLog.Default.WriteLineAndConsole(
-                        "ModularDefinitions: ModularDefinitionsAPI ERR: Received null dictionary!");
+                        $"{ModContext.ModName}: ModularDefinitionsAPI ERR: Received null dictionary!");
                     return;
                 }
 
@@ -286,8 +412,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             }
             catch (Exception ex)
             {
-                MyLog.Default.WriteLineAndConsole("Exception in ModularAssemblies Client Mod DefinitionAPI! " + ex);
-                MyAPIGateway.Utilities.ShowMessage("Fusion Systems", "Exception in ModularAssemblies Client Mod DefinitionAPI! " + ex);
+                MyLog.Default.WriteLineAndConsole($"{ModContext.ModName}: Exception in ModularDefinitionsAPI! " + ex);
+                MyAPIGateway.Utilities.ShowMessage(ModContext.ModName, "Exception in ModularDefinitionsAPI!\n" + ex);
             }
         }
     }

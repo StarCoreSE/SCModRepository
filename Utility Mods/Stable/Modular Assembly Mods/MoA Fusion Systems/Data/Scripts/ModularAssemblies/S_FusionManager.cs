@@ -52,22 +52,22 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
             }
         }
 
-        public void OnPartAdd(int PhysicalAssemblyId, MyEntity NewBlockEntity, bool IsBaseBlock)
+        public void OnPartAdd(int PhysicalAssemblyId, IMyCubeBlock NewBlockEntity, bool IsBaseBlock)
         {
             if (!FusionSystems.ContainsKey(PhysicalAssemblyId))
                 FusionSystems.Add(PhysicalAssemblyId, new S_FusionSystem(PhysicalAssemblyId));
 
-            FusionSystems[PhysicalAssemblyId].AddPart((IMyCubeBlock)NewBlockEntity);
+            FusionSystems[PhysicalAssemblyId].AddPart(NewBlockEntity);
         }
 
-        public void OnPartRemove(int PhysicalAssemblyId, MyEntity BlockEntity, bool IsBaseBlock)
+        public void OnPartRemove(int PhysicalAssemblyId, IMyCubeBlock BlockEntity, bool IsBaseBlock)
         {
             if (!FusionSystems.ContainsKey(PhysicalAssemblyId))
                 return;
             
             // Remove if the connection is broken.
             if (!IsBaseBlock)
-                FusionSystems[PhysicalAssemblyId].RemovePart((IMyCubeBlock)BlockEntity);
+                FusionSystems[PhysicalAssemblyId].RemovePart(BlockEntity);
 
             // TODO: OnAssemblyRemoved
         }
