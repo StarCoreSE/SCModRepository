@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using ProtoBuf;
-using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRageMath;
 

@@ -6,7 +6,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
 {
     internal partial class ModularDefinition
     {
-        internal static ModularDefinitionApi ModularAPI = new ModularDefinitionApi();
+        internal static ModularDefinitionApi ModularApi;
         internal DefinitionContainer Container = new DefinitionContainer();
 
         internal void LoadDefinitions(params PhysicalDefinition[] defs)

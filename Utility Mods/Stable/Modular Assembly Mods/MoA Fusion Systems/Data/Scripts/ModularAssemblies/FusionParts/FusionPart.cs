@@ -43,7 +43,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
 
         public MySync<float, SyncDirection.BothWays> PowerUsageSync;
         internal FusionPartSettings Settings = new FusionPartSettings();
-        internal static ModularDefinitionApi ModularAPI => ModularDefinition.ModularAPI;
+        internal static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
 
         /// <summary>
         ///     Block subtypes allowed.

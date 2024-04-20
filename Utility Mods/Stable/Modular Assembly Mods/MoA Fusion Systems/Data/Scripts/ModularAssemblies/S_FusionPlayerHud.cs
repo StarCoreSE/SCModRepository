@@ -20,7 +20,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
         private int _ticks;
 
         private ConsumptionBar ConsumptionBar;
-        private static ModularDefinitionApi ModularAPI => ModularDefinition.ModularAPI;
+        private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
         private static S_FusionManager FusionManager => S_FusionManager.I;
 
         #region Base Methods
@@ -28,9 +28,13 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
         public override void LoadData()
         {
             I = this;
-            FusionManager.Load();
 
             RichHudClient.Init("FusionSystems", () => { }, () => { });
+        }
+
+        public override void BeforeStart()
+        {
+            FusionManager.Load();
         }
 
         protected override void UnloadData()
@@ -55,7 +59,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                 FusionManager.UpdateTick();
                 ConsumptionBar?.Update();
 
-                if (ModularAPI.IsDebug())
+                if (ModularApi.IsDebug())
                 {
                     MyVisualScriptLogicProvider.SetQuestlogLocal(true,
                         $"Fusion Systems ({FusionManager.FusionSystems.Count})");

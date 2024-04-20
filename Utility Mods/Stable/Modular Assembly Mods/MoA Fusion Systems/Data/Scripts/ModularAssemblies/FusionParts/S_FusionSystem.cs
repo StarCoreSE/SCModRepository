@@ -49,7 +49,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             PhysicalAssemblyId = physicalAssemblyId;
         }
 
-        private static ModularDefinitionApi ModularAPI => ModularDefinition.ModularAPI;
+        private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
 
         public void AddPart(IMyCubeBlock newPart)
         {
@@ -74,7 +74,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 case "Caster_Feeder"
                     : // This is awful and I hate it. The idea is to generate new loops if a feeder is placed.
                     var connectedAccelerators = new List<IMyCubeBlock>();
-                    foreach (var connectedBlock in ModularAPI.GetConnectedBlocks(newPart, "Modular_Fusion"))
+                    foreach (var connectedBlock in ModularApi.GetConnectedBlocks(newPart, "Modular_Fusion"))
                     {
                         var subtype = connectedBlock?.BlockDefinition.SubtypeName;
                         if (subtype != "Caster_Accelerator_0" && subtype != "Caster_Accelerator_90")

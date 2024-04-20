@@ -46,7 +46,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
                 0); // Relative to 1920x1080
         }
 
-        private static ModularDefinitionApi ModularAPI => ModularDefinition.ModularAPI;
+        private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
 
         protected override void Layout()
         {
@@ -77,7 +77,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
             float totalFusionStored = 0;
             foreach (var system in S_FusionManager.I.FusionSystems)
             {
-                if (playerGrid != ModularAPI.GetAssemblyGrid(system.Key))
+                if (playerGrid != ModularApi.GetAssemblyGrid(system.Key))
                     continue;
 
                 totalFusionCapacity += system.Value.MaxPowerStored;
