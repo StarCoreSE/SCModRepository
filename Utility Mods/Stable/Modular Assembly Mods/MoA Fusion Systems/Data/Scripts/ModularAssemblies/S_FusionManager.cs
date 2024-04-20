@@ -15,11 +15,11 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
         public Dictionary<int, S_FusionSystem> FusionSystems = new Dictionary<int, S_FusionSystem>();
         private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
 
+        private bool _didRegisterAssemblyClose = false;
 
         public void Load()
         {
             I = this;
-            ModularApi.OnReady += () => ModularApi.AddOnAssemblyClose(assemblyId => FusionSystems.Remove(assemblyId));
         }
 
         public void Unload()
@@ -29,6 +29,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
 
         public void UpdateTick()
         {
+            if (!_didRegisterAssemblyClose && (ModularApi?.IsReady ?? false))
+                ModularApi.AddOnAssemblyClose(assemblyId => FusionSystems.Remove(assemblyId));
+
             foreach (var fusionSystem in FusionSystems.Values)
                 fusionSystem.UpdateTick();
 

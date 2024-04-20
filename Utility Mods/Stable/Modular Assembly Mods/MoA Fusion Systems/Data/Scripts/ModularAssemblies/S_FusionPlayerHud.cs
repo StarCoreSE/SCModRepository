@@ -29,12 +29,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
         {
             I = this;
 
-            RichHudClient.Init("FusionSystems", () => { }, () => { });
-        }
-
-        public override void BeforeStart()
-        {
             FusionManager.Load();
+            RichHudClient.Init("FusionSystems", () => { }, () => { });
         }
 
         protected override void UnloadData()
