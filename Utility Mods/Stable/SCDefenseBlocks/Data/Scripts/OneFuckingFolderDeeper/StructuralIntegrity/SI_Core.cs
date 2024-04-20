@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -405,7 +405,7 @@ namespace StarCore.StructuralIntegrity
                     if (fatBlock is IMyPowerProducer)
                     {
                         var powerProducer = fatBlock as IMyPowerProducer;
-                        totalPower += powerProducer.MaxOutput;
+                        totalPower = totalPower + powerProducer.MaxOutput;
                     }
                 }
             }
