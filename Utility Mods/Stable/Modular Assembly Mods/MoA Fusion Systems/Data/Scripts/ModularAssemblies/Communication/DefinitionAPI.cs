@@ -32,7 +32,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         /// <param name="modContext"></param>
         /// <param name="onLoad"></param>
         /// <exception cref="Exception"></exception>
-        public ModularDefinitionApi(IMyModContext modContext, Action onLoad = null)
+        public void Init(IMyModContext modContext, Action onLoad = null)
         {
             if (_isRegistered)
                 throw new Exception($"{GetType().Name}.Load() should not be called multiple times!");
@@ -406,7 +406,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         private bool _apiInit;
         private const long ApiChannel = 8774;
         private IReadOnlyDictionary<string, Delegate> _methodMap;
-        private readonly IMyModContext _modContext;
+        private IMyModContext _modContext;
 
         /// <summary>
         ///     Assigns all API methods. Internal function, avoid editing.
