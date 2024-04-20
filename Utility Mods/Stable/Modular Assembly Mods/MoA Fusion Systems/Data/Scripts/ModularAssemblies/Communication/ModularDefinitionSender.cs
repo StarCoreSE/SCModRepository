@@ -18,7 +18,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 $"{ModContext.ModName}.ModularDefinition: Init new ModularAssembliesDefinition");
 
             // Send definitions over as soon as the API loads, and create the API before anything else can init.
-            ModularDefinition.ModularApi = new ModularDefinitionApi(ModContext, SendDefinitions);
+            ModularDefinition.ModularApi.Init(ModContext, SendDefinitions);
 
             // Init
             StoredDef = ModularDefinition.GetBaseDefinitions();
