@@ -109,6 +109,83 @@
         </Wave>
       </Waves>
     </Sound>
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>AegisFlakFire</SubtypeId>
+      </Id>
+      <Volume>0.3</Volume>
+      <Category>SHOT</Category>
+      <MaxDistance>2000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Loopable>false</Loopable>
+
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aegis\AegisFire_1.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aegis\AegisFire_2.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aegis\AegisFire_3.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aegis\AegisFire_4.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Aegis\AegisFire_5.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>AegisFlakReload</SubtypeId>
+      </Id>
+      <Volume>1</Volume>
+      <Category>SHOT</Category>
+      <MaxDistance>500</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Loopable>true</Loopable>
+
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aegis\AegisReload.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>AegisFlakHit</SubtypeId>
+      </Id>
+      <Volume>0.3</Volume>
+      <Category>SHOT</Category>
+      <MaxDistance>1500</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Loopable>true</Loopable>
+
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Aegis\AegisHit.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
     
 
     <Sound>
@@ -389,6 +466,29 @@
     <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>HeavyMacroFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>7000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>3</Volume>
+      <PitchVariation>20</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossFade="10" Distance="1000" Sound = "MacroFireDist" />
+      </DistantSounds>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\MacroFire.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
         <SubtypeId>MacroFireDist</SubtypeId>
       </Id>
       <Category>SHOT</Category>
@@ -405,7 +505,64 @@
         </Wave>
       </Waves>
     </Sound>
-    
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>MacroCannonWhistle</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>0.8</Volume>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\MacroCannonWhistle.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>MacroHit</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\MacroHit.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>HeavyMacroHit</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\WEP\MacroHit.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
 
     <Sound>
       <Id>
@@ -470,8 +627,71 @@
         </Wave>
       </Waves>
     </Sound>
+
     
-    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>GothicTorpTravel</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3200</MaxDistance>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="50" Distance="900" Sound="GothicTorpTravel1" />
+        <!-- <DistantSound DistanceCrossfade="50" Distance="1800" Sound="GrowlerTone2" />-->
+      </DistantSounds>
+      <PreventSynchronization>0</PreventSynchronization>
+      <Volume>3</Volume>
+      <PitchVariation>50</PitchVariation>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <!--<Start>Audio\Shellflight\GrowlToneLoop.wav</Start>-->
+          <Loop>Audio\WEP\TorpTravelHigh.wav</Loop>
+          <!--<End>Audio\Shellflight\HighTrackTone.wav</End>-->
+        </Wave>
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>GothicTorpTravel1</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3200</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <Volume>2.5</Volume>
+      <PitchVariation>50</PitchVariation>
+
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+
+          <Loop>Audio\WEP\TorpTravelLow.wav</Loop>
+
+        </Wave>
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>GothicTorpTravel2</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3600</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <Volume>1.25</Volume>
+      <PitchVariation>50</PitchVariation>
+
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+
+          <Loop>Audio\WEP\TorpTravelLow.wav</Loop>
+
+        </Wave>
+      </Waves>
+    </Sound>
 
   </Sounds>
 </Definitions>

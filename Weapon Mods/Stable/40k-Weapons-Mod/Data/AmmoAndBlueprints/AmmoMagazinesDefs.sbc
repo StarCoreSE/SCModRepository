@@ -21,7 +21,26 @@
         <Capacity>1</Capacity>
         <AmmoDefinitionId Subtype="MacroCannonAmmo" />
       </AmmoMagazine>
-      
+
+      <AmmoMagazine>
+        <Id>
+          <TypeId>AmmoMagazine</TypeId>
+          <SubtypeId>AegisFlakMag</SubtypeId>
+        </Id>
+        <DisplayName>Aegis Flak Ammo Box</DisplayName>
+        <Icon>Textures\GUI\Icons\ammo\Ammo_Box.dds</Icon>
+        <Size>
+          <X>0.25</X>
+          <Y>0.2</Y>
+          <Z>0.2</Z>
+        </Size>
+        <Mass>40</Mass>
+        <Volume>20</Volume>
+        <Model>Models\Ammo\Ammo_Box.mwm</Model>
+        <PhysicalMaterial>Ammo</PhysicalMaterial>
+        <Capacity>200</Capacity>
+        <AmmoDefinitionId Subtype="AegisFlakAmmo" />
+      </AmmoMagazine>
       
       <AmmoMagazine>
             <Id>
