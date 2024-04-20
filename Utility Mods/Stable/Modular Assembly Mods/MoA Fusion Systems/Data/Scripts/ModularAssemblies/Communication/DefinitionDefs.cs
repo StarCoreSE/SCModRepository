@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ProtoBuf;
 using VRage.Game.Entity;
+using VRage.Game.ModAPI;
 using VRageMath;
 
 namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
@@ -35,7 +36,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             ///         Arg1 is PhysicalAssemblyId, Arg2 is BlockEntity, Arg3 is IsBaseBlock
             ///     </para>
             /// </summary>
-            public Action<int, MyEntity, bool> OnPartAdd { get; set; }
+            public Action<int, IMyCubeBlock, bool> OnPartAdd { get; set; }
 
             /// <summary>
             ///     Called when a valid part is removed.
@@ -43,7 +44,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             ///         Arg1 is PhysicalAssemblyId, Arg2 is BlockEntity, Arg3 is IsBaseBlock
             ///     </para>
             /// </summary>
-            public Action<int, MyEntity, bool> OnPartRemove { get; set; }
+            public Action<int, IMyCubeBlock, bool> OnPartRemove { get; set; }
 
             /// <summary>
             ///     Called when a component part is destroyed. Note - OnPartRemove is called simultaneously.
@@ -51,7 +52,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             ///         Arg1 is PhysicalAssemblyId, Arg2 is BlockEntity, Arg3 is IsBaseBlock
             ///     </para>
             /// </summary>
-            public Action<int, MyEntity, bool> OnPartDestroy { get; set; }
+            public Action<int, IMyCubeBlock, bool> OnPartDestroy { get; set; }
 
             /// <summary>
             ///     All allowed SubtypeIds. The mod will likely misbehave if two mods allow the same blocks, so please be cautious.

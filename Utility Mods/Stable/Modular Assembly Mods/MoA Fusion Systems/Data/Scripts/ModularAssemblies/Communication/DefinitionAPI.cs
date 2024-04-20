@@ -6,6 +6,7 @@ using Sandbox.ModAPI;
 using VRage;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
+using VRage.GameServices;
 using VRage.Utils;
 using VRageMath;
 
@@ -48,6 +49,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         private Func<byte[], string[]> _registerDefinitions;
         private Func<string, bool> _unregisterDefinition;
         private Func<string[]> _getAllDefinitions;
+        private Action<string, Action<int, IMyCubeBlock, bool>> _registerOnPartAdd;
+        private Action<string, Action<int, IMyCubeBlock, bool>> _registerOnPartRemove;
+        private Action<string, Action<int, IMyCubeBlock, bool>> _registerOnPartDestroy;
 
         // Global methods
         private Func<bool> _isDebug;
@@ -185,8 +189,17 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         /// <returns></returns>
         public string[] RegisterDefinitions(DefinitionDefs.DefinitionContainer definitionContainer)
         {
-            MyAPIGateway.Utilities.ShowNotification("Definition registered!");
-            return _registerDefinitions?.Invoke(MyAPIGateway.Utilities.SerializeToBinary(definitionContainer));
+            string[] validDefinitions =
+                _registerDefinitions?.Invoke(MyAPIGateway.Utilities.SerializeToBinary(definitionContainer));
+
+            foreach (var definition in definitionContainer.PhysicalDefs)
+            {
+                RegisterOnPartAdd(definition.Name, definition.OnPartAdd);
+                RegisterOnPartRemove(definition.Name, definition.OnPartRemove);
+                RegisterOnPartDestroy(definition.Name, definition.OnPartDestroy);
+            }
+
+            return validDefinitions;
         }
 
         /// <summary>
@@ -206,6 +219,27 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         public string[] GetAllDefinitions()
         {
             return _getAllDefinitions?.Invoke();
+        }
+
+        public void RegisterOnPartAdd(string definitionName, Action<int, IMyCubeBlock, bool> action)
+        {
+            if (action == null)
+                return;
+            _registerOnPartAdd?.Invoke(definitionName, action);
+        }
+
+        public void RegisterOnPartRemove(string definitionName, Action<int, IMyCubeBlock, bool> action)
+        {
+            if (action == null)
+                return;
+            _registerOnPartRemove?.Invoke(definitionName, action);
+        }
+
+        public void RegisterOnPartDestroy(string definitionName, Action<int, IMyCubeBlock, bool> action)
+        {
+            if (action == null)
+                return;
+            _registerOnPartDestroy?.Invoke(definitionName, action);
         }
 
         #endregion
@@ -286,18 +320,15 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             SetApiMethod("RegisterDefinitions", ref _registerDefinitions);
             SetApiMethod("UnregisterDefinition", ref _unregisterDefinition);
             SetApiMethod("GetAllDefinitions", ref _getAllDefinitions);
+            SetApiMethod("RegisterOnPartAdd", ref _registerOnPartAdd);
+            SetApiMethod("RegisterOnPartRemove", ref _registerOnPartRemove);
+            SetApiMethod("RegisterOnPartDestroy", ref _registerOnPartDestroy);
 
             // Global methods
             SetApiMethod("IsDebug", ref _isDebug);
             SetApiMethod("LogWriteLine", ref _logWriteLine);
             SetApiMethod("AddChatCommand", ref _addChatCommand);
             SetApiMethod("RemoveChatCommand", ref _removeChatCommand);
-            
-
-            if (_apiInit)
-                Log("ModularDefinitions: ModularDefinitionsAPI loaded!");
-            else
-                Log("ModularDefinitions: ModularDefinitionsAPI cleared.");
 
             methodMap = null;
             OnReady?.Invoke();
