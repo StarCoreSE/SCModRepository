@@ -511,27 +511,14 @@ Cat_Darth40kWeapons@20;
 				NID_Hivedrone@350;
 				NID_BioplasmaHivedrone@400;
 				NID_Leap@50;
-
-				MonoWhip@800;
-				LightLightningArc@250;
-				LightningArc@450;
-				FluxArcLarge@100;
-				
+				LightParticleWhip@200;
+				ParticleWhip@400;
 				NovaCannon@800;
 				MacroCannon@200;
-				MacroHeavyCannon@450;
-				MacroTurret@300;
-				MacroHeavyTurret@450;
-				MacroLightTurret@150;
-    			LanceBattery@400;
+    				LanceBattery@400;
 				LanceLightBattery@280;
 				LanceHeavyBattery@650;
-				FixedLance@350;
-				GothicTorp@150;
-				AegisFlakTurret@120;
-				
-
-
+				GothicTorp@300;
 
 				
 				65_Launcher_FixedMount@350;
