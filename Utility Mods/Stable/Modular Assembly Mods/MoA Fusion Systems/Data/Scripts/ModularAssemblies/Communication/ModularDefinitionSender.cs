@@ -7,7 +7,7 @@ using static MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication.Def
 namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     Communication
 {
-    [MySessionComponentDescriptor(MyUpdateOrder.Simulation, int.MaxValue - 1)]
+    [MySessionComponentDescriptor(MyUpdateOrder.Simulation, int.MinValue)]
     internal class ModularDefinitionSender : MySessionComponentBase
     {
         internal DefinitionContainer StoredDef;
