@@ -14,14 +14,12 @@ using VRage.Network;
 using VRage.ObjectBuilders;
 using VRage.Sync;
 using VRage.Utils;
-using static VRage.Game.MyObjectBuilder_BehaviorTreeDecoratorNode;
 
 namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
 {
     public abstract class FusionPart<T> : MyGameLogicComponent, IMyEventProxy
         where T : IMyCubeBlock
     {
-        // TODO organize variables
         public static readonly Guid SettingsGUID = new Guid("36a45185-2e80-461c-9f1c-e2140a47a4df");
 
         /// <summary>
@@ -33,6 +31,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
         internal T Block;
 
         internal float BufferPowerGeneration;
+
+        internal long LastShutdown = 0;
         public float MaxPowerConsumption;
 
         internal S_FusionSystem MemberSystem;
@@ -43,7 +43,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
 
         public MySync<float, SyncDirection.BothWays> PowerUsageSync;
         internal FusionPartSettings Settings = new FusionPartSettings();
-        internal static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
+        internal static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
 
         /// <summary>
         ///     Block subtypes allowed.
@@ -54,8 +54,6 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
         ///     Human-readable name for this part type.
         /// </summary>
         internal abstract string ReadableName { get; }
-
-        internal long LastShutdown = 0;
 
         #region Controls
 
@@ -139,22 +137,21 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
 
             /* ACTIONS */
             {
-                var boostPowerAction = MyAPIGateway.TerminalControls.CreateAction<T>($"FusionSystems.{ReadableName}BoostPowerAction");
+                var boostPowerAction =
+                    MyAPIGateway.TerminalControls.CreateAction<T>($"FusionSystems.{ReadableName}BoostPowerAction");
                 boostPowerAction.Name = new StringBuilder("Override Fusion Power");
                 boostPowerAction.Action = block =>
                 {
                     var logic = block.GameLogic.GetAs<FusionPart<T>>();
                     // Only allow value to be set if 2 seconds of power is stored
-                    if (logic.OverrideEnabled.Value || logic.MemberSystem?.PowerStored > MemberSystem?.PowerConsumption * 60)
+                    if (logic.OverrideEnabled.Value ||
+                        logic.MemberSystem?.PowerStored > MemberSystem?.PowerConsumption * 60)
                         logic.OverrideEnabled.Value = !logic.OverrideEnabled.Value;
                 };
                 boostPowerAction.Writer = (b, sb) =>
                 {
                     var logic = b?.GameLogic?.GetAs<FusionPart<T>>();
-                    if (logic != null)
-                    {
-                        sb.Append(logic.OverrideEnabled.Value ? "OVR   On" : "OVR  Off");
-                    }
+                    if (logic != null) sb.Append(logic.OverrideEnabled.Value ? "OVR   On" : "OVR  Off");
                 };
                 boostPowerAction.Icon = @"Textures\GUI\Icons\Actions\Toggle.dds";
                 boostPowerAction.Enabled = block => block.BlockDefinition.SubtypeName == BlockSubtype;

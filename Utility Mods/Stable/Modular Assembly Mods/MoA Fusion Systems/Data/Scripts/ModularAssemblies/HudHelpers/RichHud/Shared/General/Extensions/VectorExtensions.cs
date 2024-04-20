@@ -5,25 +5,31 @@ namespace RichHudFramework
     public static class VectorExtensions
     {
         /// <summary>
-        /// Converts a <see cref="Vector2"/> to a <see cref="Vector2D"/>
+        ///     Converts a <see cref="Vector2" /> to a <see cref="Vector2D" />
         /// </summary>
-        public static Vector2D ToDouble(this Vector2 vec) =>
-            new Vector2D(vec.X, vec.Y);
+        public static Vector2D ToDouble(this Vector2 vec)
+        {
+            return new Vector2D(vec.X, vec.Y);
+        }
 
         /// <summary>
-        /// Converts a <see cref="Vector2D"/> to a <see cref="Vector2"/>
+        ///     Converts a <see cref="Vector2D" /> to a <see cref="Vector2" />
         /// </summary>
-        public static Vector2 ToSingle(this Vector2D vec) =>
-            new Vector2((float)vec.X, (float)vec.Y);
+        public static Vector2 ToSingle(this Vector2D vec)
+        {
+            return new Vector2((float)vec.X, (float)vec.Y);
+        }
 
         /// <summary>
-        /// Calculates the alpha of the color based on a float value between 0 and 1 and returns the new color.
+        ///     Calculates the alpha of the color based on a float value between 0 and 1 and returns the new color.
         /// </summary>
-        public static Color SetAlphaPct(this Color color, float alphaPercent) =>
-            new Color(color.R, color.G, color.B, (byte)(alphaPercent * 255f));
+        public static Color SetAlphaPct(this Color color, float alphaPercent)
+        {
+            return new Color(color.R, color.G, color.B, (byte)(alphaPercent * 255f));
+        }
 
         /// <summary>
-        /// Retrieves the channel of a given <see cref="Color"/> by its index. R = 0, G = 1, B = 2, A = 3.
+        ///     Retrieves the channel of a given <see cref="Color" /> by its index. R = 0, G = 1, B = 2, A = 3.
         /// </summary>
         public static byte GetChannel(this Color color, int channel)
         {
@@ -43,11 +49,11 @@ namespace RichHudFramework
         }
 
         /// <summary>
-        /// Sets the channel of a given <see cref="Color"/> by its index to the given value. R = 0, G = 1, B = 2, A = 3.
+        ///     Sets the channel of a given <see cref="Color" /> by its index to the given value. R = 0, G = 1, B = 2, A = 3.
         /// </summary>
         public static Color SetChannel(this Color color, int channel, byte value)
         {
-            switch(channel)
+            switch (channel)
             {
                 case 0:
                     color.R = value;

@@ -1,24 +1,14 @@
-﻿using Sandbox.ModAPI;
-using System;
+﻿using System;
 using System.Diagnostics;
-using VRage;
+using Sandbox.ModAPI;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
-using VRageMath;
-using RichHudFramework.UI;
 
 namespace RichHudFramework.Internal
 {
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     public sealed class RichHudCore : ModBase
     {
-        public static RichHudCore Instance { get; private set; }
-
-        /// <summary>
-        /// Chat input event regestered later that the rest
-        /// </summary>
-        public static event MessageEnteredDel LateMessageEntered;
-
         private readonly Stopwatch handlerRegTimer;
 
         public RichHudCore() : base(false, true)
@@ -30,6 +20,13 @@ namespace RichHudFramework.Internal
 
             handlerRegTimer = new Stopwatch();
         }
+
+        public static RichHudCore Instance { get; private set; }
+
+        /// <summary>
+        ///     Chat input event regestered later that the rest
+        /// </summary>
+        public static event MessageEnteredDel LateMessageEntered;
 
         public override void BeforeStart()
         {
@@ -78,13 +75,17 @@ namespace RichHudFramework.Internal
 
     public abstract class RichHudComponentBase : ModBase.ModuleBase
     {
-        public RichHudComponentBase(bool runOnServer, bool runOnClient) : base(runOnServer, runOnClient, RichHudCore.Instance)
-        { }
+        public RichHudComponentBase(bool runOnServer, bool runOnClient) : base(runOnServer, runOnClient,
+            RichHudCore.Instance)
+        {
+        }
     }
 
     public abstract class RichHudParallelComponentBase : ModBase.ParallelModuleBase
     {
-        public RichHudParallelComponentBase(bool runOnServer, bool runOnClient) : base(runOnServer, runOnClient, RichHudCore.Instance)
-        { }
+        public RichHudParallelComponentBase(bool runOnServer, bool runOnClient) : base(runOnServer, runOnClient,
+            RichHudCore.Instance)
+        {
+        }
     }
 }

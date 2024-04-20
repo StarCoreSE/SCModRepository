@@ -5,7 +5,6 @@ using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers;
 using RichHudFramework.Client;
 using RichHudFramework.UI.Client;
 using Sandbox.Game;
-using Sandbox.ModAPI;
 using VRage.Game.Components;
 using VRage.Utils;
 
@@ -18,20 +17,24 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
     public class S_FusionPlayerHud : MySessionComponentBase
     {
         public static S_FusionPlayerHud I;
-        private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
-        private static S_FusionManager FusionManager => S_FusionManager.I;
+        private int _ticks;
 
-        private ConsumptionBar ConsumptionBar = null;
-        private int _ticks = 0;
+        private ConsumptionBar ConsumptionBar;
+        private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
+        private static S_FusionManager FusionManager => S_FusionManager.I;
 
         #region Base Methods
 
         public override void LoadData()
         {
             I = this;
-            FusionManager.Load();
-            
+
             RichHudClient.Init("FusionSystems", () => { }, () => { });
+        }
+
+        public override void BeforeStart()
+        {
+            FusionManager.Load();
         }
 
         protected override void UnloadData()
@@ -48,17 +51,15 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
             try
             {
                 if (ConsumptionBar == null && RichHudClient.Registered)
-                {
                     ConsumptionBar = new ConsumptionBar(HudMain.HighDpiRoot)
                     {
-                        Visible = true,
+                        Visible = true
                     };
-                }
 
                 FusionManager.UpdateTick();
                 ConsumptionBar?.Update();
 
-                if (ModularAPI.IsDebug())
+                if (ModularApi.IsDebug())
                 {
                     MyVisualScriptLogicProvider.SetQuestlogLocal(true,
                         $"Fusion Systems ({FusionManager.FusionSystems.Count})");

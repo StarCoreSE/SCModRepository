@@ -1,11 +1,5 @@
-﻿using Sandbox.ModAPI;
-using System;
-using System.Collections.Generic;
-using VRage.Game;
-using VRage.Utils;
+﻿using VRage.Utils;
 using VRageMath;
-using VRageRender;
-using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
 
 namespace RichHudFramework
 {
@@ -13,11 +7,8 @@ namespace RichHudFramework
     {
         namespace Rendering
         {
-            using Client;
-            using Server;
-
             /// <summary>
-            /// Bounding box paired with another as a mask for clipping billboards
+            ///     Bounding box paired with another as a mask for clipping billboards
             /// </summary>
             public struct CroppedBox
             {
@@ -29,7 +20,7 @@ namespace RichHudFramework
             }
 
             /// <summary>
-            /// Final 3D quad for <see cref="QuadBoard"/> generated prior to rendering
+            ///     Final 3D quad for <see cref="QuadBoard" /> generated prior to rendering
             /// </summary>
             public struct QuadBoardData
             {
@@ -38,7 +29,7 @@ namespace RichHudFramework
             }
 
             /// <summary>
-            /// <see cref="QuadBoard"/> with bounding
+            ///     <see cref="QuadBoard" /> with bounding
             /// </summary>
             public struct BoundedQuadBoard
             {
@@ -47,19 +38,19 @@ namespace RichHudFramework
             }
 
             /// <summary>
-            /// Defines a rectangular billboard with texture coordinates defined by a bounding box
+            ///     Defines a rectangular billboard with texture coordinates defined by a bounding box
             /// </summary>
             public struct QuadBoard
             {
                 public static readonly QuadBoard Default;
 
                 /// <summary>
-                /// Determines the extent to which the quad will be rhombused
+                ///     Determines the extent to which the quad will be rhombused
                 /// </summary>
                 public float skewRatio;
 
                 /// <summary>
-                /// Determines material applied to the billboard as well as its alignment, bounding and tint
+                ///     Determines material applied to the billboard as well as its alignment, bounding and tint
                 /// </summary>
                 public BoundedQuadMaterial materialData;
 
@@ -86,7 +77,7 @@ namespace RichHudFramework
                 }
 
                 /// <summary>
-                /// Draws a billboard in world space using the quad specified.
+                ///     Draws a billboard in world space using the quad specified.
                 /// </summary>
                 public void Draw(ref MyQuadD quad)
                 {
@@ -94,22 +85,23 @@ namespace RichHudFramework
                 }
 
                 /// <summary>
-                /// Draws a billboard in world space facing the +Z direction of the matrix specified. Units in meters, matrix
-                /// transform notwithstanding.
+                ///     Draws a billboard in world space facing the +Z direction of the matrix specified. Units in meters, matrix
+                ///     transform notwithstanding.
                 /// </summary>
                 public void Draw(ref CroppedBox box, MatrixD[] matrixRef)
                 {
-                    FlatQuad quad = new FlatQuad()
+                    var quad = new FlatQuad
                     {
                         Point0 = box.bounds.Max,
                         Point1 = new Vector2(box.bounds.Max.X, box.bounds.Min.Y),
                         Point2 = box.bounds.Min,
-                        Point3 = new Vector2(box.bounds.Min.X, box.bounds.Max.Y),
+                        Point3 = new Vector2(box.bounds.Min.X, box.bounds.Max.Y)
                     };
 
                     if (skewRatio != 0f)
                     {
-                        Vector2 start = quad.Point0, end = quad.Point3,
+                        Vector2 start = quad.Point0,
+                            end = quad.Point3,
                             offset = (end - start) * skewRatio * .5f;
 
                         quad.Point0 = Vector2.Lerp(start, end, skewRatio) - offset;

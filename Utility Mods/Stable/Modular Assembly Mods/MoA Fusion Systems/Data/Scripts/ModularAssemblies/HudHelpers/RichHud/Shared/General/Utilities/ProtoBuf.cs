@@ -1,5 +1,5 @@
-﻿using Sandbox.ModAPI;
-using System;
+﻿using System;
+using Sandbox.ModAPI;
 
 namespace RichHudFramework
 {
@@ -8,7 +8,7 @@ namespace RichHudFramework
         public static class ProtoBuf
         {
             /// <summary>
-            /// Attempts to serialize an object to a byte array.
+            ///     Attempts to serialize an object to a byte array.
             /// </summary>
             public static KnownException TrySerialize<T>(T obj, out byte[] dataOut)
             {
@@ -28,7 +28,7 @@ namespace RichHudFramework
             }
 
             /// <summary>
-            /// Attempts to deserialize an a byte array to an object of a given type.
+            ///     Attempts to deserialize an a byte array to an object of a given type.
             /// </summary>
             public static KnownException TryDeserialize<T>(byte[] dataIn, out T obj)
             {

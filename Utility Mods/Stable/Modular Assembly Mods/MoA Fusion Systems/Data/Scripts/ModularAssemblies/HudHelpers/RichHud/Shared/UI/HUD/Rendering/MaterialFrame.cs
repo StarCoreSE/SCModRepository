@@ -9,17 +9,17 @@ namespace RichHudFramework
             public interface IReadOnlyMaterialFrame
             {
                 /// <summary>
-                /// Texture associated with the frame
+                ///     Texture associated with the frame
                 /// </summary>
                 MaterialAlignment Alignment { get; }
 
                 /// <summary>
-                /// Determines how or if the material is scaled w/respect to its aspect ratio.
+                ///     Determines how or if the material is scaled w/respect to its aspect ratio.
                 /// </summary>
-                Material Material { get;}
+                Material Material { get; }
 
                 /// <summary>
-                /// Texture coordinate offset
+                ///     Texture coordinate offset
                 /// </summary>
                 Vector2 UvOffset { get; }
 
@@ -27,25 +27,10 @@ namespace RichHudFramework
             }
 
             /// <summary>
-            /// Defines the positioning and alignment of a Material on a QuadBoard.
+            ///     Defines the positioning and alignment of a Material on a QuadBoard.
             /// </summary>
             public class MaterialFrame : IReadOnlyMaterialFrame
             {
-                /// <summary>
-                /// Texture associated with the frame
-                /// </summary>
-                public Material Material { get; set; }
-
-                /// <summary>
-                /// Determines how or if the material is scaled w/respect to its aspect ratio.
-                /// </summary>
-                public MaterialAlignment Alignment { get; set; }
-
-                /// <summary>
-                /// Texture coordinate offset
-                /// </summary>
-                public Vector2 UvOffset { get; set; }
-
                 public MaterialFrame()
                 {
                     Material = Material.Default;
@@ -54,8 +39,23 @@ namespace RichHudFramework
                 }
 
                 /// <summary>
-                /// Calculates the texture coordinates needed to fit the material to the billboard. 
-                /// Aspect ratio = Width/Height
+                ///     Texture associated with the frame
+                /// </summary>
+                public Material Material { get; set; }
+
+                /// <summary>
+                ///     Determines how or if the material is scaled w/respect to its aspect ratio.
+                /// </summary>
+                public MaterialAlignment Alignment { get; set; }
+
+                /// <summary>
+                ///     Texture coordinate offset
+                /// </summary>
+                public Vector2 UvOffset { get; set; }
+
+                /// <summary>
+                ///     Calculates the texture coordinates needed to fit the material to the billboard.
+                ///     Aspect ratio = Width/Height
                 /// </summary>
                 public BoundingBox2 GetMaterialAlignment(float bbAspectRatio)
                 {
@@ -64,8 +64,8 @@ namespace RichHudFramework
 
                     if (Alignment != MaterialAlignment.StretchToFit)
                     {
-                        float matAspectRatio = Material.size.X / Material.size.Y;
-                        Vector2 localUV = new Vector2(1f);
+                        var matAspectRatio = Material.size.X / Material.size.Y;
+                        var localUV = new Vector2(1f);
 
                         if (Alignment == MaterialAlignment.FitAuto)
                         {

@@ -23,7 +23,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
             OnPartRemove = S_FusionManager.I.OnPartRemove,
 
             // Triggers whenever a part is destroyed, simultaneously with OnPartRemove
-            OnPartDestroy = (PhysicalAssemblyId, BlockEntity, IsBaseBlock) =>
+            OnPartDestroy = (physicalAssemblyId, blockEntity, isBaseBlock) =>
             {
                 // You can remove this function, and any others if need be.
             },
