@@ -52,6 +52,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         private Action<string, Action<int, IMyCubeBlock, bool>> _registerOnPartAdd;
         private Action<string, Action<int, IMyCubeBlock, bool>> _registerOnPartRemove;
         private Action<string, Action<int, IMyCubeBlock, bool>> _registerOnPartDestroy;
+        private Action<string, Action<int, IMyCubeBlock, bool>> _unregisterOnPartAdd;
+        private Action<string, Action<int, IMyCubeBlock, bool>> _unregisterOnPartRemove;
+        private Action<string, Action<int, IMyCubeBlock, bool>> _unregisterOnPartDestroy;
 
         // Global methods
         private Func<bool> _isDebug;
@@ -221,6 +224,11 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             return _getAllDefinitions?.Invoke();
         }
 
+        /// <summary>
+        /// Registers an action to be triggered when a part is added.
+        /// </summary>
+        /// <param name="definitionName"></param>
+        /// <param name="action"></param>
         public void RegisterOnPartAdd(string definitionName, Action<int, IMyCubeBlock, bool> action)
         {
             if (action == null)
@@ -228,6 +236,11 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             _registerOnPartAdd?.Invoke(definitionName, action);
         }
 
+        /// <summary>
+        /// Registers an action to be triggered when a part is removed.
+        /// </summary>
+        /// <param name="definitionName"></param>
+        /// <param name="action"></param>
         public void RegisterOnPartRemove(string definitionName, Action<int, IMyCubeBlock, bool> action)
         {
             if (action == null)
@@ -235,11 +248,52 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             _registerOnPartRemove?.Invoke(definitionName, action);
         }
 
+        /// <summary>
+        /// Registers an action to be triggered when a part is destroyed. Triggered immediately after OnPartRemove if a block was destroyed.
+        /// </summary>
+        /// <param name="definitionName"></param>
+        /// <param name="action"></param>
         public void RegisterOnPartDestroy(string definitionName, Action<int, IMyCubeBlock, bool> action)
         {
             if (action == null)
                 return;
             _registerOnPartDestroy?.Invoke(definitionName, action);
+        }
+
+        /// <summary>
+        /// Unregisters an action to be triggered when a part is added.
+        /// </summary>
+        /// <param name="definitionName"></param>
+        /// <param name="action"></param>
+        public void UnregisterOnPartAdd(string definitionName, Action<int, IMyCubeBlock, bool> action)
+        {
+            if (action == null)
+                return;
+            _unregisterOnPartAdd?.Invoke(definitionName, action);
+        }
+
+        /// <summary>
+        /// Unregisters an action to be triggered when a part is removed.
+        /// </summary>
+        /// <param name="definitionName"></param>
+        /// <param name="action"></param>
+        public void UnregisterOnPartRemove(string definitionName, Action<int, IMyCubeBlock, bool> action)
+        {
+            if (action == null)
+                return;
+            _unregisterOnPartRemove?.Invoke(definitionName, action);
+        }
+
+        /// <summary>
+        /// Unregisters an action to be triggered when a part is destroyed.
+        /// </summary>
+        /// <param name="definitionName"></param>
+        /// <param name="action"></param>
+        public void UnregisterOnPartDestroy(string definitionName, Action<int, IMyCubeBlock, bool> action)
+        {
+            if (action == null)
+                return;
+            _unregisterOnPartDestroy?.Invoke(definitionName, action);
         }
 
         #endregion
@@ -323,6 +377,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             SetApiMethod("RegisterOnPartAdd", ref _registerOnPartAdd);
             SetApiMethod("RegisterOnPartRemove", ref _registerOnPartRemove);
             SetApiMethod("RegisterOnPartDestroy", ref _registerOnPartDestroy);
+            SetApiMethod("UnregisterOnPartAdd", ref _unregisterOnPartAdd);
+            SetApiMethod("UnregisterOnPartRemove", ref _unregisterOnPartRemove);
+            SetApiMethod("UnregisterOnPartDestroy", ref _unregisterOnPartDestroy);
 
             // Global methods
             SetApiMethod("IsDebug", ref _isDebug);
