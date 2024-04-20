@@ -1,21 +1,34 @@
 ﻿using VRageMath;
-using System;
 
 namespace RichHudFramework
 {
     namespace UI
     {
-        using Client;
-
         namespace Rendering
         {
-            using Client;
-            using Server;
-
             public class MatBoard
             {
+                private readonly MaterialFrame matFrame;
+
+                private Color color;
+
+                private QuadBoard minBoard;
+                private bool updateMatFit;
+
                 /// <summary>
-                /// Coloring applied to the material.
+                ///     Initializes a new matboard with a size of 0 and a blank, white material.
+                /// </summary>
+                public MatBoard()
+                {
+                    matFrame = new MaterialFrame();
+                    minBoard = QuadBoard.Default;
+
+                    color = Color.White;
+                    updateMatFit = true;
+                }
+
+                /// <summary>
+                ///     Coloring applied to the material.
                 /// </summary>
                 public Color Color
                 {
@@ -30,7 +43,7 @@ namespace RichHudFramework
                 }
 
                 /// <summary>
-                /// Texture applied to the billboard.
+                ///     Texture applied to the billboard.
                 /// </summary>
                 public Material Material
                 {
@@ -47,7 +60,7 @@ namespace RichHudFramework
                 }
 
                 /// <summary>
-                /// Determines how the texture scales with the MatBoard's dimensions.
+                ///     Determines how the texture scales with the MatBoard's dimensions.
                 /// </summary>
                 public MaterialAlignment MatAlignment
                 {
@@ -62,26 +75,8 @@ namespace RichHudFramework
                     }
                 }
 
-                private Color color;
-                private bool updateMatFit;
-
-                private QuadBoard minBoard;
-                private readonly MaterialFrame matFrame;
-
                 /// <summary>
-                /// Initializes a new matboard with a size of 0 and a blank, white material.
-                /// </summary>
-                public MatBoard()
-                {
-                    matFrame = new MaterialFrame();
-                    minBoard = QuadBoard.Default;
-
-                    color = Color.White;
-                    updateMatFit = true;
-                }
-
-                /// <summary>
-                /// Draws a billboard in world space using the quad specified.
+                ///     Draws a billboard in world space using the quad specified.
                 /// </summary>
                 public void Draw(ref MyQuadD quad)
                 {
@@ -89,12 +84,12 @@ namespace RichHudFramework
                 }
 
                 /// <summary>
-                /// Draws a billboard in world space facing the +Z direction of the matrix given. Units in meters,
-                /// matrix transform notwithstanding. Dont forget to compensate for perspective scaling!
+                ///     Draws a billboard in world space facing the +Z direction of the matrix given. Units in meters,
+                ///     matrix transform notwithstanding. Dont forget to compensate for perspective scaling!
                 /// </summary
                 public void Draw(ref CroppedBox box, MatrixD[] matrixRef)
                 {
-                    ContainmentType containment = ContainmentType.Contains;
+                    var containment = ContainmentType.Contains;
 
                     if (box.mask != null)
                         box.mask.Value.Contains(ref box.bounds, out containment);
@@ -103,7 +98,7 @@ namespace RichHudFramework
                     {
                         if (updateMatFit && matFrame.Material != Material.Default)
                         {
-                            Vector2 boxSize = box.bounds.Size;
+                            var boxSize = box.bounds.Size;
                             minBoard.materialData.texBounds = matFrame.GetMaterialAlignment(boxSize.X / boxSize.Y);
                             updateMatFit = false;
                         }
@@ -111,7 +106,7 @@ namespace RichHudFramework
                         if (containment != ContainmentType.Disjoint)
                             minBoard.Draw(ref box, matrixRef);
                     }
-                }     
+                }
             }
         }
     }

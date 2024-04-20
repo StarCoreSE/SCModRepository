@@ -1,15 +1,15 @@
 ﻿namespace RichHudFramework.UI
 {
     /// <summary>
-    /// Interface for scrollbox entry containers.
+    ///     Interface for scrollbox entry containers.
     /// </summary>
-    public interface IScrollBoxEntry<TElement> : IHudElementContainer<TElement> 
+    public interface IScrollBoxEntry<TElement> : IHudElementContainer<TElement>
         where TElement : HudElementBase
     {
         bool Enabled { get; set; }
     }
 
-    public interface IScrollBoxEntryTuple<TElement, TData> : IScrollBoxEntry<TElement> 
+    public interface IScrollBoxEntryTuple<TElement, TData> : IScrollBoxEntry<TElement>
         where TElement : HudElementBase
     {
         TData AssocMember { get; set; }

@@ -1,33 +1,13 @@
-﻿using VRageMath;
-using System;
+﻿using System;
+using VRageMath;
 
 namespace RichHudFramework.UI
 {
     /// <summary>
-    /// Clickable button with text and a textured background. 
+    ///     Clickable button with text and a textured background.
     /// </summary>
     public class LabelBoxButton : LabelBox, IClickableElement
     {
-        /// <summary>
-        /// Color of the background when moused over.
-        /// </summary>
-        public virtual Color HighlightColor { get; set; }
-
-        /// <summary>
-        /// Determines whether or not the button will highlight when moused over.
-        /// </summary>
-        public virtual bool HighlightEnabled { get; set; }
-
-        /// <summary>
-        /// Indicates whether or not the cursor is currently over the element.
-        /// </summary>
-        public override bool IsMousedOver => _mouseInput.IsMousedOver;
-
-        /// <summary>
-        /// Mouse input for the button.
-        /// </summary>
-        public IMouseInput MouseInput => _mouseInput;
-
         protected MouseInputElement _mouseInput;
         protected Color oldColor;
 
@@ -43,7 +23,28 @@ namespace RichHudFramework.UI
         }
 
         public LabelBoxButton() : this(null)
-        { }
+        {
+        }
+
+        /// <summary>
+        ///     Color of the background when moused over.
+        /// </summary>
+        public virtual Color HighlightColor { get; set; }
+
+        /// <summary>
+        ///     Determines whether or not the button will highlight when moused over.
+        /// </summary>
+        public virtual bool HighlightEnabled { get; set; }
+
+        /// <summary>
+        ///     Indicates whether or not the cursor is currently over the element.
+        /// </summary>
+        public override bool IsMousedOver => _mouseInput.IsMousedOver;
+
+        /// <summary>
+        ///     Mouse input for the button.
+        /// </summary>
+        public IMouseInput MouseInput => _mouseInput;
 
         protected virtual void CursorEnter(object sender, EventArgs args)
         {
@@ -56,10 +57,7 @@ namespace RichHudFramework.UI
 
         protected virtual void CursorExit(object sender, EventArgs args)
         {
-            if (HighlightEnabled)
-            {
-                Color = oldColor;
-            }
+            if (HighlightEnabled) Color = oldColor;
         }
     }
 }

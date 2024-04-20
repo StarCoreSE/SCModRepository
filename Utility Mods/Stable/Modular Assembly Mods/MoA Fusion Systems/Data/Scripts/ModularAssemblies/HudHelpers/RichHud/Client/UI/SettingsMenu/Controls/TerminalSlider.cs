@@ -1,46 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using VRage;
-using GlyphFormatMembers = VRage.MyTuple<byte, float, VRageMath.Vector2I, VRageMath.Color>;
-using ApiMemberAccessor = System.Func<object, int, object>;
-using EventAccessor = VRage.MyTuple<bool, System.Action>;
+﻿using GlyphFormatMembers = VRage.MyTuple<byte, float, VRageMath.Vector2I, VRageMath.Color>;
 
 namespace RichHudFramework.UI.Client
 {
-    using RichStringMembers = MyTuple<StringBuilder, GlyphFormatMembers>;
-
-    public enum SliderSettingsAccessors : int
+    public enum SliderSettingsAccessors
     {
         /// <summary>
-        /// Float
+        ///     Float
         /// </summary>
         Min = 16,
 
         /// <summary>
-        /// Float
+        ///     Float
         /// </summary>
         Max = 17,
 
         /// <summary>
-        /// Float
+        ///     Float
         /// </summary>
         Percent = 18,
 
         /// <summary>
-        /// RichStringMembers[]
+        ///     RichStringMembers[]
         /// </summary>
-        ValueText = 19,
+        ValueText = 19
     }
 
     /// <summary>
-    /// Labeled slider used to set float values in the settings menu. Mimics the appearance of the slider in the
-    /// SE terminal.
+    ///     Labeled slider used to set float values in the settings menu. Mimics the appearance of the slider in the
+    ///     SE terminal.
     /// </summary>
     public class TerminalSlider : TerminalValue<float>
     {
+        public TerminalSlider() : base(MenuControls.SliderSetting)
+        {
+        }
+
         /// <summary>
-        /// Minimum configurable value for the slider.
+        ///     Minimum configurable value for the slider.
         /// </summary>
         public float Min
         {
@@ -49,7 +45,7 @@ namespace RichHudFramework.UI.Client
         }
 
         /// <summary>
-        /// Maximum configurable value for the slider.
+        ///     Maximum configurable value for the slider.
         /// </summary>
         public float Max
         {
@@ -58,7 +54,7 @@ namespace RichHudFramework.UI.Client
         }
 
         /// <summary>
-        /// Current slider value expreseed as a percentage between the min and maximum values.
+        ///     Current slider value expreseed as a percentage between the min and maximum values.
         /// </summary>
         public float Percent
         {
@@ -67,15 +63,12 @@ namespace RichHudFramework.UI.Client
         }
 
         /// <summary>
-        /// Text indicating the current value of the slider. Does not automatically reflect changes to the slider value.
+        ///     Text indicating the current value of the slider. Does not automatically reflect changes to the slider value.
         /// </summary>
         public string ValueText
         {
             get { return GetOrSetMember(null, (int)SliderSettingsAccessors.ValueText) as string; }
             set { GetOrSetMember(value, (int)SliderSettingsAccessors.ValueText); }
         }
-
-        public TerminalSlider() : base(MenuControls.SliderSetting)
-        { }
     }
 }

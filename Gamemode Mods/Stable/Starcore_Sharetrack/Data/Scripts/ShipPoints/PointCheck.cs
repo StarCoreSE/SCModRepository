@@ -586,7 +586,10 @@ namespace klime.PointCheck
                     }
                 }
             }
-            catch { }
+            catch (Exception e)
+            {
+                Log.Error($"Exception in TrackYourselfMyMan: {e}");
+            }
         }
 
         public static void AddPointValues(object obj)
@@ -771,8 +774,9 @@ namespace klime.PointCheck
                     if (IAmTheCaptainNow && ServerMatchState.Value != 1) { ServerMatchState.Value = 1; }
                 }
             }
-            catch
+            catch (Exception e)
             {
+                Log.Error($"Exception in UpdateAfterSimulation TryCatch 01: {e}");
             }
             try
             {
@@ -808,8 +812,9 @@ namespace klime.PointCheck
                     }
                 }
             }
-            catch
+            catch (Exception e)
             {
+                Log.Error($"Exception in UpdateAfterSimulation TryCatch 02: {e}");
             }
             try
             {
@@ -842,8 +847,9 @@ namespace klime.PointCheck
                     }
                 }
             }
-            catch
+            catch (Exception e)
             {
+                Log.Error($"Exception in UpdateAfterSimulation TryCatch 03: {e}");
             }
         }
 
@@ -880,56 +886,56 @@ namespace klime.PointCheck
                             var camMat = session.Camera.WorldMatrix;
                             IHitInfo hits = null;
                             var keyAndActionPairs = new Dictionary<MyKeys, Action>
-            {
-                {
-                    MyKeys.M, () =>
-                    {
-                        MyAPIGateway.Physics.CastRay(camMat.Translation + camMat.Forward * 0.5, camMat.Translation + camMat.Forward * 500, out hits);
-                        if(hits != null && hits.HitEntity is IMyCubeGrid)
-                        {
-                            PacketGridData packet = new PacketGridData { id = hits.HitEntity.EntityId, value = (byte)(Tracking.Contains(hits.HitEntity.EntityId) ? 2 : 1) };
-                            Static.MyNetwork.TransmitToServer(packet, true);
+                            {
+                                {
+                                    MyKeys.M, () =>
+                                    {
+                                        MyAPIGateway.Physics.CastRay(camMat.Translation + camMat.Forward * 0.5, camMat.Translation + camMat.Forward * 500, out hits);
+                                        if(hits != null && hits.HitEntity is IMyCubeGrid)
+                                        {
+                                            PacketGridData packet = new PacketGridData { id = hits.HitEntity.EntityId, value = (byte)(Tracking.Contains(hits.HitEntity.EntityId) ? 2 : 1) };
+                                            Static.MyNetwork.TransmitToServer(packet, true);
 
-                            if(packet.value == 1)
-                            {
-                                MyAPIGateway.Utilities.ShowNotification("ShipTracker: Added grid to tracker");
-                                Tracking.Add(hits.HitEntity.EntityId);
-                                if (!integretyMessage.Visible) integretyMessage.Visible = true;
-                                Data[hits.HitEntity.EntityId].CreateHud();
-                            }
-                            else
-                            {
-                                MyAPIGateway.Utilities.ShowNotification("ShipTracker: Removed grid from tracker");
-                                Tracking.Remove(hits.HitEntity.EntityId);
-                                Data[hits.HitEntity.EntityId].DisposeHud();
-                            }
-                        }
-                    }
-                },
-                {
-                    MyKeys.N, () =>
-                    {
-                        integretyMessage.Visible = !integretyMessage.Visible;
-                        MyAPIGateway.Utilities.ShowNotification("ShipTracker: Hud visibility set to " + integretyMessage.Visible);
-                    }
-                },
-                {
-                    MyKeys.B, () =>
-                    {
-                        timerMessage.Visible = !timerMessage.Visible;
-                        ticketmessage.Visible = !ticketmessage.Visible;
-                        MyAPIGateway.Utilities.ShowNotification("ShipTracker: Timer visibility set to " + timerMessage.Visible);
-                    }
-                },
-                {
-                    MyKeys.J, () =>
-                    {
-                        viewstat++;
-                        if (viewstat == 4) viewstat = 0; PointCheckHelpers.NameplateVisible = viewstat != 3;
-                        MyAPIGateway.Utilities.ShowNotification("ShipTracker: Nameplate visibility set to " + viewmode[viewstat]);
-                    }
-                }
-            };
+                                            if(packet.value == 1)
+                                            {
+                                                MyAPIGateway.Utilities.ShowNotification("ShipTracker: Added grid to tracker");
+                                                Tracking.Add(hits.HitEntity.EntityId);
+                                                if (!integretyMessage.Visible) integretyMessage.Visible = true;
+                                                Data[hits.HitEntity.EntityId].CreateHud();
+                                            }
+                                            else
+                                            {
+                                                MyAPIGateway.Utilities.ShowNotification("ShipTracker: Removed grid from tracker");
+                                                Tracking.Remove(hits.HitEntity.EntityId);
+                                                Data[hits.HitEntity.EntityId].DisposeHud();
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    MyKeys.N, () =>
+                                    {
+                                        integretyMessage.Visible = !integretyMessage.Visible;
+                                        MyAPIGateway.Utilities.ShowNotification("ShipTracker: Hud visibility set to " + integretyMessage.Visible);
+                                    }
+                                },
+                                {
+                                    MyKeys.B, () =>
+                                    {
+                                        timerMessage.Visible = !timerMessage.Visible;
+                                        ticketmessage.Visible = !ticketmessage.Visible;
+                                        MyAPIGateway.Utilities.ShowNotification("ShipTracker: Timer visibility set to " + timerMessage.Visible);
+                                    }
+                                },
+                                {
+                                    MyKeys.J, () =>
+                                    {
+                                        viewstat++;
+                                        if (viewstat == 4) viewstat = 0; PointCheckHelpers.NameplateVisible = viewstat != 3;
+                                        MyAPIGateway.Utilities.ShowNotification("ShipTracker: Nameplate visibility set to " + viewmode[viewstat]);
+                                    }
+                                }
+                            };
 
                             foreach (var pair in keyAndActionPairs)
                             {
@@ -994,6 +1000,7 @@ namespace klime.PointCheck
             }
             catch (Exception e)
             {
+                /*Log.Error($"Exception in Draw: {e}");*/
             }
 
         }

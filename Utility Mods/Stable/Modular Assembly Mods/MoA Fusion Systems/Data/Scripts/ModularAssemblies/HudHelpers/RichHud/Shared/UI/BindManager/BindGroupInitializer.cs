@@ -1,5 +1,6 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
+using RichHudFramework.UI.Client;
 using VRage;
 using VRage.Input;
 
@@ -7,19 +8,11 @@ namespace RichHudFramework
 {
     namespace UI
     {
-        using Server;
-        using Client;
-        using System.Collections;
-
         /// <summary>
-        /// Bind data container used to simplify bind registration.
+        ///     Bind data container used to simplify bind registration.
         /// </summary>
         public class BindGroupInitializer : IReadOnlyList<MyTuple<string, IReadOnlyList<int>>>
         {
-            public MyTuple<string, IReadOnlyList<int>> this[int index] => bindData[index];
-
-            public int Count => bindData.Count;
-
             private readonly List<MyTuple<string, IReadOnlyList<int>>> bindData;
 
             public BindGroupInitializer()
@@ -27,14 +20,22 @@ namespace RichHudFramework
                 bindData = new List<MyTuple<string, IReadOnlyList<int>>>();
             }
 
-            public IEnumerator<MyTuple<string, IReadOnlyList<int>>> GetEnumerator() =>
-                bindData.GetEnumerator();
+            public MyTuple<string, IReadOnlyList<int>> this[int index] => bindData[index];
 
-            IEnumerator IEnumerable.GetEnumerator() =>
-                GetEnumerator();
+            public int Count => bindData.Count;
+
+            public IEnumerator<MyTuple<string, IReadOnlyList<int>>> GetEnumerator()
+            {
+                return bindData.GetEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
 
             /// <summary>
-            /// Adds a bind with the given name and the given key combo.
+            ///     Adds a bind with the given name and the given key combo.
             /// </summary>
             public void Add(string bindName, string con1, string con2 = null, string con3 = null)
             {
@@ -53,7 +54,7 @@ namespace RichHudFramework
             }
 
             /// <summary>
-            /// Adds a bind with the given name and the given key combo.
+            ///     Adds a bind with the given name and the given key combo.
             /// </summary>
             public void Add(string bindName, int con1, int con2 = -1, int con3 = -1)
             {
@@ -72,7 +73,7 @@ namespace RichHudFramework
             }
 
             /// <summary>
-            /// Adds a bind with the given name and the given key combo.
+            ///     Adds a bind with the given name and the given key combo.
             /// </summary>
             public void Add(string bindName, ControlData con1 = null, ControlData con2 = null, ControlData con3 = null)
             {
@@ -91,17 +92,17 @@ namespace RichHudFramework
             }
 
             /// <summary>
-            /// Returns group data as a serializable array of BindDefinitions.
+            ///     Returns group data as a serializable array of BindDefinitions.
             /// </summary>
             public BindDefinition[] GetBindDefinitions()
             {
                 var definitions = new BindDefinition[bindData.Count];
 
-                for (int a = 0; a < definitions.Length; a++)
+                for (var a = 0; a < definitions.Length; a++)
                 {
                     var controlNames = new string[bindData[a].Item2.Count];
 
-                    for (int b = 0; b < controlNames.Length; b++)
+                    for (var b = 0; b < controlNames.Length; b++)
                         controlNames[b] = BindManager.Controls[bindData[a].Item2[b]].Name;
 
                     definitions[a] = new BindDefinition(bindData[a].Item1, controlNames);
@@ -125,14 +126,20 @@ namespace RichHudFramework
                 index = BindManager.GetControl(key).Index;
             }
 
-            public static implicit operator int(ControlData control) =>
-                control.index;
+            public static implicit operator int(ControlData control)
+            {
+                return control.index;
+            }
 
-            public static implicit operator ControlData(MyKeys key) =>
-                new ControlData(key);
+            public static implicit operator ControlData(MyKeys key)
+            {
+                return new ControlData(key);
+            }
 
-            public static implicit operator ControlData(RichHudControls key) =>
-                new ControlData(key);
+            public static implicit operator ControlData(RichHudControls key)
+            {
+                return new ControlData(key);
+            }
         }
     }
 }

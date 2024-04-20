@@ -72,38 +72,6 @@ namespace Scripts
                             },
 
                         },
-
- [EmptyOnGameLoad] = new[] //Firing, Reloading, Overheated, Tracking, On, Off, BurstReload, OutOfAmmo, PreFire, EmptyOnGameLoad define a new[] for each
-                        {
-
-
-                            new RelMove
-                            {
-                                CenterEmpty = "",
-                                TicksToMove = 1, //number of ticks to complete motion, 60 = 1 second
-                                MovementType = Hide,
-                                LinearPoints = new[]
-                                {
-                                    Transformation(0, 0, 0), //linear movement
-                                },
-                                Rotation = Transformation(0, 0, 0), //degrees
-                                RotAroundCenter = Transformation(0, 0, 0), //degrees
-                            },
-
-                            new RelMove
-                            {
-                                CenterEmpty = "",
-                                TicksToMove = 1, //number of ticks to complete motion, 60 = 1 second
-                                MovementType = Linear,
-                                LinearPoints = new[]
-                                {
-                                    Transformation(0, 0, 5), //linear movement
-                                },
-                                Rotation = Transformation(0, 0, 0), //degrees
-                                RotAroundCenter = Transformation(0, 0, 0), //degrees
-                            },
-
-                        },
                 }
                 },
 

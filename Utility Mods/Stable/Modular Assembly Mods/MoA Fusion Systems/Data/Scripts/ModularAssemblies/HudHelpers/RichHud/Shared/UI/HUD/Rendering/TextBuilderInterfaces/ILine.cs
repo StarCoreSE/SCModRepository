@@ -6,33 +6,33 @@ namespace RichHudFramework
     {
         namespace Rendering
         {
-            public enum LineAccessors : int
+            public enum LineAccessors
             {
                 /// <summary>
-                /// out: int
+                ///     out: int
                 /// </summary>
                 Count = 1,
 
                 /// <summary>
-                /// out: Vector2
+                ///     out: Vector2
                 /// </summary>
                 Size = 2,
 
                 /// <summary>
-                /// out: float
+                ///     out: float
                 /// </summary>
-                VerticalOffset = 3,
+                VerticalOffset = 3
             }
 
             public interface ILine : IIndexedCollection<IRichChar>
             {
                 /// <summary>
-                /// Size of the line as rendered
+                ///     Size of the line as rendered
                 /// </summary>
                 Vector2 Size { get; }
 
                 /// <summary>
-                /// Starting vertical position of the line starting from the center of the text element, sans text offset.
+                ///     Starting vertical position of the line starting from the center of the text element, sans text offset.
                 /// </summary>
                 float VerticalOffset { get; }
             }
