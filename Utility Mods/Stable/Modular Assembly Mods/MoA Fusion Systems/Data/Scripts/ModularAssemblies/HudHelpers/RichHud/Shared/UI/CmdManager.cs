@@ -1,16 +1,14 @@
-﻿using RichHudFramework.Internal;
-using Sandbox.ModAPI;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using RichHudFramework.Internal;
 using VRage;
-using VRage.Game;
 using VRage.Game.Components;
 
 namespace RichHudFramework.UI
 {
-    public interface ICommandGroup: IIndexedCollection<IChatCommand>
+    public interface ICommandGroup : IIndexedCollection<IChatCommand>
     {
         string Prefix { get; }
 
@@ -20,17 +18,13 @@ namespace RichHudFramework.UI
 
     public interface IChatCommand
     {
-        event Action<string[]> CommandInvoked;
-
         string CmdName { get; }
         int ArgsRequired { get; }
+        event Action<string[]> CommandInvoked;
     }
 
     public class CmdGroupInitializer : IReadOnlyList<MyTuple<string, Action<string[]>, int>>
     {
-        public MyTuple<string, Action<string[]>, int> this[int index] => data[index];
-        public int Count => data.Count;
-
         private readonly List<MyTuple<string, Action<string[]>, int>> data;
 
         public CmdGroupInitializer(int capacity = 0)
@@ -38,29 +32,31 @@ namespace RichHudFramework.UI
             data = new List<MyTuple<string, Action<string[]>, int>>(capacity);
         }
 
+        public MyTuple<string, Action<string[]>, int> this[int index] => data[index];
+        public int Count => data.Count;
+
+        public IEnumerator<MyTuple<string, Action<string[]>, int>> GetEnumerator()
+        {
+            return data.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return data.GetEnumerator();
+        }
+
         public void Add(string cmdName, Action<string[]> callback = null, int argsRequrired = 0)
         {
             data.Add(new MyTuple<string, Action<string[]>, int>(cmdName, callback, argsRequrired));
         }
-
-        public IEnumerator<MyTuple<string, Action<string[]>, int>> GetEnumerator() =>
-            data.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() =>
-            data.GetEnumerator();
     }
 
     /// <summary>
-    /// Manages chat commands. Independent session component. Use only after load data.
+    ///     Manages chat commands. Independent session component. Use only after load data.
     /// </summary>
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate, 0)]
     public sealed class CmdManager : MySessionComponentBase
     {
-        /// <summary>
-        /// List of command groups registered;
-        /// </summary>
-        public static IReadOnlyList<ICommandGroup> CommandGroups => instance?.commandGroups;
-
         private static CmdManager instance;
         private readonly Regex cmdParser;
         private readonly List<CommandGroup> commandGroups;
@@ -79,6 +75,11 @@ namespace RichHudFramework.UI
             RichHudCore.LateMessageEntered += MessageHandler;
         }
 
+        /// <summary>
+        ///     List of command groups registered;
+        /// </summary>
+        public static IReadOnlyList<ICommandGroup> CommandGroups => instance?.commandGroups;
+
         protected override void UnloadData()
         {
             RichHudCore.LateMessageEntered -= MessageHandler;
@@ -88,7 +89,7 @@ namespace RichHudFramework.UI
         public static ICommandGroup GetOrCreateGroup(string prefix, CmdGroupInitializer groupInitializer = null)
         {
             prefix = prefix.ToLower();
-            CommandGroup group = instance.commandGroups.Find(x => x.Prefix == prefix);
+            var group = instance.commandGroups.Find(x => x.Prefix == prefix);
 
             if (group == null)
             {
@@ -101,12 +102,12 @@ namespace RichHudFramework.UI
         }
 
         /// <summary>
-        /// Recieves chat commands and attempts to execute them.
+        ///     Recieves chat commands and attempts to execute them.
         /// </summary>
         private void MessageHandler(string message, ref bool sendToOthers)
         {
             message = message.ToLower();
-            CommandGroup group = commandGroups.Find(x => message.StartsWith(x.Prefix));
+            var group = commandGroups.Find(x => message.StartsWith(x.Prefix));
 
             if (group != null)
             {
@@ -116,15 +117,15 @@ namespace RichHudFramework.UI
         }
 
         /// <summary>
-        /// Parses list of arguments and their associated command name.
+        ///     Parses list of arguments and their associated command name.
         /// </summary>
         public static bool TryParseCommand(string cmd, out string[] matches)
         {
-            Match match = instance.cmdParser.Match(cmd);
-            CaptureCollection captures = match.Groups[3].Captures;
+            var match = instance.cmdParser.Match(cmd);
+            var captures = match.Groups[3].Captures;
             matches = new string[captures.Count];
 
-            for (int n = 0; n < captures.Count; n++)
+            for (var n = 0; n < captures.Count; n++)
             {
                 matches[n] = captures[n].Value;
 
@@ -137,17 +138,46 @@ namespace RichHudFramework.UI
 
         private class CommandGroup : ICommandGroup
         {
-            public IChatCommand this[int index] => commands[index];
-            public int Count => commands.Count;
-            public ICommandGroup Commands => this;
-            public string Prefix { get; }
-
             private readonly List<Command> commands;
 
             public CommandGroup(string prefix)
             {
                 commands = new List<Command>();
-                this.Prefix = prefix;
+                Prefix = prefix;
+            }
+
+            public ICommandGroup Commands => this;
+            public IChatCommand this[int index] => commands[index];
+            public int Count => commands.Count;
+            public string Prefix { get; }
+
+            public bool TryAdd(string name, Action<string[]> callback = null, int argsRequired = 0)
+            {
+                name = name.ToLower();
+                var key = $"{Prefix}.{name}";
+
+                if (instance != null && !instance.commands.ContainsKey(key))
+                {
+                    var command = new Command(name, argsRequired);
+                    commands.Add(command);
+                    instance.commands.Add(key, command);
+
+                    if (callback != null)
+                        command.CommandInvoked += callback;
+
+                    return true;
+                }
+
+                return false;
+            }
+
+            public void AddCommands(CmdGroupInitializer newCommands)
+            {
+                for (var n = 0; n < newCommands.Count; n++)
+                {
+                    var cmd = newCommands[n];
+                    TryAdd(cmd.Item1, cmd.Item2, cmd.Item3);
+                }
             }
 
             public bool TryRunCommand(string message)
@@ -157,12 +187,12 @@ namespace RichHudFramework.UI
 
                 if (TryParseCommand(message, out matches))
                 {
-                    string cmdName = matches[0];
+                    var cmdName = matches[0];
                     Command command;
 
                     if (instance.commands.TryGetValue($"{Prefix}.{cmdName}", out command))
                     {
-                        string[] args = matches.GetSubarray(1);
+                        var args = matches.GetSubarray(1);
                         cmdFound = true;
 
                         if (args.Length >= command.ArgsRequired)
@@ -171,8 +201,10 @@ namespace RichHudFramework.UI
                             success = true;
                         }
                         else
-                            ExceptionHandler.SendChatMessage($"Error: {cmdName} command requires at least {command.ArgsRequired} argument(s).");
-
+                        {
+                            ExceptionHandler.SendChatMessage(
+                                $"Error: {cmdName} command requires at least {command.ArgsRequired} argument(s).");
+                        }
                     }
                 }
 
@@ -181,51 +213,24 @@ namespace RichHudFramework.UI
 
                 return success;
             }
-
-            public bool TryAdd(string name, Action<string[]> callback = null, int argsRequired = 0)
-            {
-                name = name.ToLower();
-                string key = $"{Prefix}.{name}";
-
-                if (instance != null && !instance.commands.ContainsKey(key))
-                {
-                    Command command = new Command(name, argsRequired);
-                    commands.Add(command);
-                    instance.commands.Add(key, command);
-
-                    if (callback != null)
-                        command.CommandInvoked += callback;
-
-                    return true;
-                }
-                else
-                    return false;
-            }
-
-            public void AddCommands(CmdGroupInitializer newCommands)
-            {
-                for (int n = 0; n < newCommands.Count; n++)
-                {
-                    var cmd = newCommands[n];
-                    TryAdd(cmd.Item1, cmd.Item2, cmd.Item3);
-                }
-            }
         }
 
         private class Command : IChatCommand
         {
-            public event Action<string[]> CommandInvoked;
-            public string CmdName { get; }
-            public int ArgsRequired { get; }
-
             public Command(string cmdName, int argsRequired)
             {
                 CmdName = cmdName.ToLower();
                 ArgsRequired = argsRequired;
             }
 
-            public void InvokeCommand(string[] args) =>
+            public event Action<string[]> CommandInvoked;
+            public string CmdName { get; }
+            public int ArgsRequired { get; }
+
+            public void InvokeCommand(string[] args)
+            {
                 CommandInvoked?.Invoke(args);
+            }
         }
     }
 }

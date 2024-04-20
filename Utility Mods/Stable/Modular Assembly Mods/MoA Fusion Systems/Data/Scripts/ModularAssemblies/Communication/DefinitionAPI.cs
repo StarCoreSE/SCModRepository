@@ -6,39 +6,28 @@ using VRage.Game.ModAPI;
 using VRage.Utils;
 using VRageMath;
 
-
 namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     Communication
 {
     /// <summary>
-    /// Class used to communicate with the Modular Assemblies Framework mod. <br/><br/>
-    /// Want to include in this your own mod? Check out the following documentation link: <br/>
-    /// <see href="https://github.com/StarCoreSE/Modular-Assemblies/wiki/The-Modular-API"></see>
+    ///     Class used to communicate with the Modular Assemblies Framework mod. <br /><br />
+    ///     Want to include in this your own mod? Check out the following documentation link: <br />
+    ///     <see href="https://github.com/StarCoreSE/Modular-Assemblies/wiki/The-Modular-API"></see>
     /// </summary>
     public class ModularDefinitionApi
     {
         /// <summary>
-        /// The expected API version. Don't touch this unless you're developing for the Modular Assemblies Framework.
+        ///     The expected API version. Don't touch this unless you're developing for the Modular Assemblies Framework.
         /// </summary>
         public const int ApiVersion = 1;
 
         /// <summary>
-        /// The currently loaded Modular Assemblies Framework version. Don't touch this either.
-        /// </summary>
-        public int FrameworkVersion { get; private set; } = -1;
-
-        /// <summary>
-        /// Triggered whenever the API is ready - added to by the constructor or manually.
+        ///     Triggered whenever the API is ready - added to by the constructor or manually.
         /// </summary>
         public Action OnReady;
 
         /// <summary>
-        /// Displays whether the API is ready.
-        /// </summary>
-        public bool IsReady { get; private set; }
-
-        /// <summary>
-        /// Call this to initialize the Modular API.
+        ///     Call this to initialize the Modular API.
         /// </summary>
         /// <param name="modContext"></param>
         /// <param name="onLoad"></param>
@@ -53,11 +42,23 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             _isRegistered = true;
             MyAPIGateway.Utilities.RegisterMessageHandler(ApiChannel, HandleMessage);
             MyAPIGateway.Utilities.SendModMessage(ApiChannel, "ApiEndpointRequest");
-            MyLog.Default.WriteLineAndConsole($"{_modContext.ModName}: ModularDefinitionsAPI listening for API methods...");
+            MyLog.Default.WriteLineAndConsole(
+                $"{_modContext.ModName}: ModularDefinitionsAPI listening for API methods...");
         }
 
         /// <summary>
-        /// Call this to unload the Modular API. It will be called automatically when the Modular Assemblies Framework is closed.
+        ///     The currently loaded Modular Assemblies Framework version. Don't touch this either.
+        /// </summary>
+        public int FrameworkVersion { get; private set; } = -1;
+
+        /// <summary>
+        ///     Displays whether the API is ready.
+        /// </summary>
+        public bool IsReady { get; private set; }
+
+        /// <summary>
+        ///     Call this to unload the Modular API. It will be called automatically when the Modular Assemblies Framework is
+        ///     closed.
         /// </summary>
         public void UnloadData()
         {
@@ -75,6 +76,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
         // These sections are what the user can actually see when referencing the API, and can be used freely. //
         // Note the null checks. //
+
         #region Global Assembly Methods
 
         /// <summary>
@@ -120,7 +122,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        /// Returns the IMyCubeGrid containing a given assembly ID.
+        ///     Returns the IMyCubeGrid containing a given assembly ID.
         /// </summary>
         /// <param name="assemblyId"></param>
         /// <returns></returns>
@@ -130,7 +132,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        /// Registers an Action<AssemblyId> triggered on assembly removal.
+        ///     Registers an Action<AssemblyId> triggered on assembly removal.
         /// </summary>
         /// <param name="action"></param>
         public void AddOnAssemblyClose(Action<int> action)
@@ -139,7 +141,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        /// De-registers an Action(AssemblyId) triggered on assembly removal.
+        ///     De-registers an Action(AssemblyId) triggered on assembly removal.
         /// </summary>
         /// <param name="action"></param>
         public void RemoveOnAssemblyClose(Action<int> action)
@@ -148,7 +150,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        /// Removes all blocks from the assembly and queues them for a connection check.
+        ///     Removes all blocks from the assembly and queues them for a connection check.
         /// </summary>
         /// <param name="assemblyId"></param>
         public void RecreateAssembly(int assemblyId)
@@ -161,10 +163,10 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         #region Per-Part Methods
 
         /// <summary>
-        /// Gets all connected parts to a block. Returns an empty list on fail.
-        /// <para>
-        /// <paramref name="useCached" />: Set this to 'false' if used in OnPartAdd.
-        /// </para>
+        ///     Gets all connected parts to a block. Returns an empty list on fail.
+        ///     <para>
+        ///         <paramref name="useCached" />: Set this to 'false' if used in OnPartAdd.
+        ///     </para>
         /// </summary>
         public IMyCubeBlock[] GetConnectedBlocks(IMyCubeBlock partBlockId, string definition, bool useCached = true)
         {
@@ -172,7 +174,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        /// Returns the ID of the assembly containing a given part, or -1 if no assembly was found.
+        ///     Returns the ID of the assembly containing a given part, or -1 if no assembly was found.
         /// </summary>
         /// <param name="blockPart"></param>
         /// <param name="definition"></param>
@@ -183,7 +185,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        /// Removes a part from its assembly and queues it for a connection check.
+        ///     Removes a part from its assembly and queues it for a connection check.
         /// </summary>
         /// <param name="blockPart"></param>
         /// <param name="definition"></param>
@@ -197,13 +199,13 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         #region Definition Methods
 
         /// <summary>
-        /// Registers a set of definitions with Modular Assemblies Framework.
+        ///     Registers a set of definitions with Modular Assemblies Framework.
         /// </summary>
         /// <param name="definitionContainer"></param>
         /// <returns></returns>
         public string[] RegisterDefinitions(DefinitionDefs.DefinitionContainer definitionContainer)
         {
-            string[] validDefinitions =
+            var validDefinitions =
                 _registerDefinitions?.Invoke(MyAPIGateway.Utilities.SerializeToBinary(definitionContainer));
 
             foreach (var definition in definitionContainer.PhysicalDefs)
@@ -219,7 +221,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        /// Unregisters a definition and removes all parts referencing it.
+        ///     Unregisters a definition and removes all parts referencing it.
         /// </summary>
         /// <param name="definitionName"></param>
         /// <returns></returns>
@@ -229,7 +231,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        /// Returns a list of all registered definition names.
+        ///     Returns a list of all registered definition names.
         /// </summary>
         /// <returns></returns>
         public string[] GetAllDefinitions()
@@ -238,7 +240,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        /// Registers an action to be triggered when a part is added.
+        ///     Registers an action to be triggered when a part is added.
         /// </summary>
         /// <param name="definitionName"></param>
         /// <param name="action"></param>
@@ -250,7 +252,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        /// Registers an action to be triggered when a part is removed.
+        ///     Registers an action to be triggered when a part is removed.
         /// </summary>
         /// <param name="definitionName"></param>
         /// <param name="action"></param>
@@ -262,7 +264,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        /// Registers an action to be triggered when a part is destroyed. Triggered immediately after OnPartRemove if a block was destroyed.
+        ///     Registers an action to be triggered when a part is destroyed. Triggered immediately after OnPartRemove if a block
+        ///     was destroyed.
         /// </summary>
         /// <param name="definitionName"></param>
         /// <param name="action"></param>
@@ -274,7 +277,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        /// Unregisters an action to be triggered when a part is added.
+        ///     Unregisters an action to be triggered when a part is added.
         /// </summary>
         /// <param name="definitionName"></param>
         /// <param name="action"></param>
@@ -286,7 +289,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        /// Unregisters an action to be triggered when a part is removed.
+        ///     Unregisters an action to be triggered when a part is removed.
         /// </summary>
         /// <param name="definitionName"></param>
         /// <param name="action"></param>
@@ -298,7 +301,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        /// Unregisters an action to be triggered when a part is destroyed.
+        ///     Unregisters an action to be triggered when a part is destroyed.
         /// </summary>
         /// <param name="definitionName"></param>
         /// <param name="action"></param>
@@ -314,7 +317,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         #region Global Methods
 
         /// <summary>
-        /// Returns true if debug mode is enabled.
+        ///     Returns true if debug mode is enabled.
         /// </summary>
         /// <returns></returns>
         public bool IsDebug()
@@ -323,7 +326,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        /// Writes a line to the Modular Assemblies log. %AppData%\Space Engineers\Storage\ModularAssemblies.log
+        ///     Writes a line to the Modular Assemblies log. %AppData%\Space Engineers\Storage\ModularAssemblies.log
         /// </summary>
         /// <param name="text"></param>
         public void Log(string text)
@@ -332,7 +335,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        /// Registers a chat command. Help page is autogenerated and tied into "!md help"
+        ///     Registers a chat command. Help page is autogenerated and tied into "!md help"
         /// </summary>
         /// <param name="command"></param>
         /// <param name="helpText"></param>
@@ -343,7 +346,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        /// De-registers a chat command.
+        ///     De-registers a chat command.
         /// </summary>
         /// <param name="command"></param>
         public void RemoveChatCommand(string command)
@@ -354,9 +357,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         #endregion
 
 
-
-
         // This section lists all the delegates that will be assigned and utilized below. //
+
         #region Delegates
 
         // Global assembly methods
@@ -396,9 +398,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         #endregion
 
 
-
-
         // This section is the 'guts' of the API; it assigns out all the API endpoints internally and registers with the main framework mod. //
+
         #region API Initialization
 
         private bool _isRegistered;
@@ -408,7 +409,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         private readonly IMyModContext _modContext;
 
         /// <summary>
-        /// Assigns all API methods. Internal function, avoid editing.
+        ///     Assigns all API methods. Internal function, avoid editing.
         /// </summary>
         /// <returns></returns>
         public bool ApiAssign()
@@ -455,16 +456,14 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 UnloadData();
                 return false;
             }
-            else
-            {
-                _methodMap = null;
-                OnReady?.Invoke();
-                return true;
-            }
+
+            _methodMap = null;
+            OnReady?.Invoke();
+            return true;
         }
 
         /// <summary>
-        /// Assigns a single API endpoint.
+        ///     Assigns a single API endpoint.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="name">Shared endpoint name; matches with the framework mod.</param>
@@ -480,21 +479,23 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
             if (!_methodMap.ContainsKey(name))
                 throw new Exception("Method Map does not contain method " + name);
-            Delegate del = _methodMap[name];
+            var del = _methodMap[name];
             if (del.GetType() != typeof(T))
-                throw new Exception($"Method {name} type mismatch! [MapMethod: {del.GetType().Name} | ApiMethod: {typeof(T).Name}]");
+                throw new Exception(
+                    $"Method {name} type mismatch! [MapMethod: {del.GetType().Name} | ApiMethod: {typeof(T).Name}]");
             method = _methodMap[name] as T;
         }
 
         /// <summary>
-        /// Triggered whenever the API receives a message from the framework mod.
+        ///     Triggered whenever the API receives a message from the framework mod.
         /// </summary>
         /// <param name="obj"></param>
         private void HandleMessage(object obj)
         {
             try
             {
-                if (_apiInit || obj is string || obj == null) // the "ApiEndpointRequest" message will also be received here, we're ignoring that
+                if (_apiInit || obj is string ||
+                    obj == null) // the "ApiEndpointRequest" message will also be received here, we're ignoring that
                     return;
 
                 var tuple = (MyTuple<Vector2I, IReadOnlyDictionary<string, Delegate>>)obj;
@@ -509,7 +510,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 }
 
                 if (receivedVersion.Y != ApiVersion)
-                    Log($"Expected API version ({ApiVersion}) differs from received API version {receivedVersion}; errors may occur.");
+                    Log(
+                        $"Expected API version ({ApiVersion}) differs from received API version {receivedVersion}; errors may occur.");
 
                 _methodMap = dict;
 

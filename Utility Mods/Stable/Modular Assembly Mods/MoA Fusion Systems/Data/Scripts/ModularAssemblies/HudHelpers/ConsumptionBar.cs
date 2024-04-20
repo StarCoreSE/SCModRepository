@@ -1,28 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
-using RichHudFramework.Client;
 using RichHudFramework.UI;
 using RichHudFramework.UI.Client;
 using RichHudFramework.UI.Rendering;
 using Sandbox.ModAPI;
-using VRage.Game.ModAPI;
 using VRage.Input;
-using VRage.Utils;
 using VRageMath;
-using VRageRender;
 
 namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
 {
     internal class ConsumptionBar : WindowBase
     {
-        private readonly TexturedBox _storageBackground; 
+        private readonly TexturedBox _storageBackground;
         private readonly TexturedBox _storageForeground;
-        private bool _shouldHide = false;
-        private static ModularDefinitionApi ModularAPI => ModularDefinition.ModularAPI;
+        private bool _shouldHide;
 
 
         public ConsumptionBar(HudParentBase parent) : base(parent)
@@ -32,27 +23,30 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
                 Material = new Material("fusionBarBackground", Vector2.One * 100),
                 ParentAlignment = ParentAlignments.Bottom | ParentAlignments.InnerV,
                 DimAlignment = DimAlignments.Width,
-                Color = new Color(1, 1, 1, 0.75f),
+                Color = new Color(1, 1, 1, 0.75f)
             };
-            
+
             _storageBackground = new TexturedBox(body)
             {
                 Material = new Material("fusionBarForeground", Vector2.One * 100),
                 ParentAlignment = ParentAlignments.Center,
                 DimAlignment = DimAlignments.Both,
-                Color = new Color(1, 1, 1, 1f),
+                Color = new Color(1, 1, 1, 1f)
             };
 
             BodyColor = new Color(0, 0, 0, 0);
             BorderColor = new Color(0, 0, 0, 0);
 
-            header.Format = new GlyphFormat(GlyphFormat.Blueish.Color, TextAlignment.Center, 1f);
+            header.Format = new GlyphFormat(GlyphFormat.Blueish.Color, TextAlignment.Center);
             header.Height = 30f;
 
             HeaderText = "Fusion | 0s";
             Size = new Vector2(100f, 300f);
-            Offset = new Vector2(-HudMain.ScreenWidth/(2.01f*HudMain.ResScale) + Width/2, 0); // Relative to 1920x1080
+            Offset = new Vector2(-HudMain.ScreenWidth / (2.01f * HudMain.ResScale) + Width / 2,
+                0); // Relative to 1920x1080
         }
+
+        private static ModularDefinitionApi ModularAPI => ModularDefinition.ModularAPI;
 
         protected override void Layout()
         {
@@ -72,10 +66,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
             // Hide HUD element if the player isn't in a cockpit
             if (playerCockpit == null || _shouldHide)
             {
-                if (Visible)
-                {
-                    Visible = false;
-                }
+                if (Visible) Visible = false;
                 return;
             }
 
@@ -97,34 +88,22 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
             // Hide HUD element if the grid has no fusion systems (capacity is always >0 for a fusion system)
             if (totalFusionCapacity == 0)
             {
-                if (Visible)
-                {
-                    Visible = false;
-                }
+                if (Visible) Visible = false;
                 return;
             }
 
             // Show otherwise
-            if (!Visible)
-            {
-                Visible = true;
-            }
+            if (!Visible) Visible = true;
 
-            float storagePct = totalFusionStored / totalFusionCapacity;
+            var storagePct = totalFusionStored / totalFusionCapacity;
             float timeToCharge;
 
             if (totalFusionGeneration > 0)
-            {
                 timeToCharge = (totalFusionCapacity - totalFusionStored) / totalFusionGeneration / 60;
-            }
             else if (totalFusionGeneration < 0)
-            {
                 timeToCharge = totalFusionStored / -totalFusionGeneration / 60;
-            }
             else
-            {
                 timeToCharge = 0;
-            }
 
             HeaderText = $"Fusion | {(totalFusionGeneration > 0 ? "+" : "-")}{Math.Round(timeToCharge)}s";
             _storageForeground.Height = storagePct * _storageBackground.Height;

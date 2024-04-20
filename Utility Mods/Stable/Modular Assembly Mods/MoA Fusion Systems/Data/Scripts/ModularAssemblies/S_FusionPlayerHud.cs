@@ -5,7 +5,6 @@ using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers;
 using RichHudFramework.Client;
 using RichHudFramework.UI.Client;
 using Sandbox.Game;
-using Sandbox.ModAPI;
 using VRage.Game.Components;
 using VRage.Utils;
 
@@ -18,11 +17,11 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
     public class S_FusionPlayerHud : MySessionComponentBase
     {
         public static S_FusionPlayerHud I;
+        private int _ticks;
+
+        private ConsumptionBar ConsumptionBar;
         private static ModularDefinitionApi ModularAPI => ModularDefinition.ModularAPI;
         private static S_FusionManager FusionManager => S_FusionManager.I;
-
-        private ConsumptionBar ConsumptionBar = null;
-        private int _ticks = 0;
 
         #region Base Methods
 
@@ -30,7 +29,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
         {
             I = this;
             FusionManager.Load();
-            
+
             RichHudClient.Init("FusionSystems", () => { }, () => { });
         }
 
@@ -48,12 +47,10 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
             try
             {
                 if (ConsumptionBar == null && RichHudClient.Registered)
-                {
                     ConsumptionBar = new ConsumptionBar(HudMain.HighDpiRoot)
                     {
-                        Visible = true,
+                        Visible = true
                     };
-                }
 
                 FusionManager.UpdateTick();
                 ConsumptionBar?.Update();
