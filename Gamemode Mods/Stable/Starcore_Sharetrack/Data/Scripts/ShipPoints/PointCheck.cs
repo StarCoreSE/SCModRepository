@@ -1000,7 +1000,7 @@ namespace klime.PointCheck
             }
             catch (Exception e)
             {
-                Log.Error($"Exception in Draw: {e}");
+                /*Log.Error($"Exception in Draw: {e}");*/
             }
 
         }
