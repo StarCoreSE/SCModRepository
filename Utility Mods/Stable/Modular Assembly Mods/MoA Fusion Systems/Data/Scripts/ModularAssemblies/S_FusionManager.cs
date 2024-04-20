@@ -30,7 +30,10 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
         public void UpdateTick()
         {
             if (!_didRegisterAssemblyClose && (ModularApi?.IsReady ?? false))
+            {
                 ModularApi.AddOnAssemblyClose(assemblyId => FusionSystems.Remove(assemblyId));
+                _didRegisterAssemblyClose = true;
+            }
 
             foreach (var fusionSystem in FusionSystems.Values)
                 fusionSystem.UpdateTick();
