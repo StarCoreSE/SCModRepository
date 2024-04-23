@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using VRageMath;
+using RichHudFramework.Client;
 using VRage;
-using VRage.Utils;
+using VRageMath;
 using AtlasMembers = VRage.MyTuple<string, VRageMath.Vector2>;
 using GlyphMembers = VRage.MyTuple<int, VRageMath.Vector2, VRageMath.Vector2, float, float>;
 using ApiMemberAccessor = System.Func<object, int, object>;
 
 namespace RichHudFramework
 {
-    using Client;
     using FontMembers = MyTuple<
         string, // Name
         int, // Index
@@ -45,30 +44,15 @@ namespace RichHudFramework
             >;
 
             /// <summary>
-            /// Manages fonts used by the Rich Hud Framework
+            ///     Manages fonts used by the Rich Hud Framework
             /// </summary>
             public sealed partial class FontManager : RichHudClient.ApiModule<FontManagerMembers>
             {
-                /// <summary>
-                /// Retrieves default font for Space Engineers with regular styling.
-                /// </summary>
-                public static Vector2I Default => Vector2I.Zero;
-
-                /// <summary>
-                /// Read-only collection of all registered fonts.
-                /// </summary>
-                public static IReadOnlyList<IFontMin> Fonts => Instance.fonts;
-
-                private static FontManager Instance
-                {
-                    get { Init(); return instance; }
-                    set { instance = value; }
-                }
                 private static FontManager instance;
 
                 private readonly ReadOnlyApiCollection<IFontMin> fonts;
-                private readonly Func<FontDefinition, FontMembers?> TryAddFontFunc;
                 private readonly Func<string, FontMembers?> GetFontFunc;
+                private readonly Func<FontDefinition, FontMembers?> TryAddFontFunc;
 
                 private FontManager() : base(ApiModuleTypes.FontManager, false, true)
                 {
@@ -79,6 +63,26 @@ namespace RichHudFramework
 
                     TryAddFontFunc = members.Item2;
                     GetFontFunc = members.Item3;
+                }
+
+                /// <summary>
+                ///     Retrieves default font for Space Engineers with regular styling.
+                /// </summary>
+                public static Vector2I Default => Vector2I.Zero;
+
+                /// <summary>
+                ///     Read-only collection of all registered fonts.
+                /// </summary>
+                public static IReadOnlyList<IFontMin> Fonts => Instance.fonts;
+
+                private static FontManager Instance
+                {
+                    get
+                    {
+                        Init();
+                        return instance;
+                    }
+                    set { instance = value; }
                 }
 
                 private static void Init()
@@ -93,36 +97,36 @@ namespace RichHudFramework
                 }
 
                 /// <summary>
-                /// Attempts to register a new font using API data.
+                ///     Attempts to register a new font using API data.
                 /// </summary>
-                public static bool TryAddFont(FontDefinition fontData) =>
-                    Instance.TryAddFontFunc(fontData) != null;
+                public static bool TryAddFont(FontDefinition fontData)
+                {
+                    return Instance.TryAddFontFunc(fontData) != null;
+                }
 
                 /// <summary>
-                /// Attempts to register a new font using API data. Returns the font created.
+                ///     Attempts to register a new font using API data. Returns the font created.
                 /// </summary>
                 public static bool TryAddFont(FontDefinition fontData, out IFontMin font)
                 {
-                    FontMembers? members = Instance.TryAddFontFunc(fontData);
+                    var members = Instance.TryAddFontFunc(fontData);
 
                     if (members != null)
                     {
                         font = new FontData(members.Value);
                         return true;
                     }
-                    else
-                    {
-                        font = null;
-                        return false;
-                    }
+
+                    font = null;
+                    return false;
                 }
 
                 /// <summary>
-                /// Retrieves the font with the given name.
+                ///     Retrieves the font with the given name.
                 /// </summary>
                 public static IFontMin GetFont(string name)
                 {
-                    FontMembers? members = Instance.GetFontFunc(name);
+                    var members = Instance.GetFontFunc(name);
                     IFontMin font = null;
 
                     if (members != null)
@@ -132,17 +136,19 @@ namespace RichHudFramework
                 }
 
                 /// <summary>
-                /// Retrieves the font with the given name.
+                ///     Retrieves the font with the given name.
                 /// </summary>
-                public static IFontMin GetFont(int index) =>
-                    Instance.fonts[index];
+                public static IFontMin GetFont(int index)
+                {
+                    return Instance.fonts[index];
+                }
 
                 /// <summary>
-                /// Retrieves the font style index of the font with the given name and style.
+                ///     Retrieves the font style index of the font with the given name and style.
                 /// </summary>
                 public static Vector2I GetStyleIndex(string name, FontStyles style = FontStyles.Regular)
                 {
-                    IFontMin font = GetFont(name);
+                    var font = GetFont(name);
                     return new Vector2I(font.Index, (int)style);
                 }
             }

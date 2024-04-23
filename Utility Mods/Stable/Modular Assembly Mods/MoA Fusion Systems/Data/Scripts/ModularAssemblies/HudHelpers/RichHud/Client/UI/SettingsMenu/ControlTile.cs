@@ -1,16 +1,12 @@
-﻿using RichHudFramework.UI.Rendering;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using VRage;
 using GlyphFormatMembers = VRage.MyTuple<byte, float, VRageMath.Vector2I, VRageMath.Color>;
 using ApiMemberAccessor = System.Func<object, int, object>;
-using EventAccessor = VRage.MyTuple<bool, System.Action>;
 
 namespace RichHudFramework.UI.Client
 {
-    using RichStringMembers = MyTuple<StringBuilder, GlyphFormatMembers>;
     using ControlMembers = MyTuple<
         ApiMemberAccessor, // GetOrSetMember
         object // ID
@@ -22,21 +18,39 @@ namespace RichHudFramework.UI.Client
     >;
 
     /// <summary>
-    /// Small collection of terminal controls organized into a single block. No more than 1-3
-    /// controls should be added to a tile. If a group of controls can't fit on a tile, then they
-    /// will be drawn outside its bounds.
+    ///     Small collection of terminal controls organized into a single block. No more than 1-3
+    ///     controls should be added to a tile. If a group of controls can't fit on a tile, then they
+    ///     will be drawn outside its bounds.
     /// </summary>
     public class ControlTile : IControlTile
     {
+        private readonly ControlContainerMembers tileMembers;
+
+        public ControlTile() : this(RichHudTerminal.GetNewMenuTile())
+        {
+        }
+
+        public ControlTile(ControlContainerMembers data)
+        {
+            tileMembers = data;
+
+            var GetControlDataFunc = data.Item2.Item1 as Func<int, ControlMembers>;
+            Func<int, TerminalControlBase> GetControlFunc = x => new TerminalControl(GetControlDataFunc(x));
+
+            Controls = new ReadOnlyApiCollection<TerminalControlBase>(GetControlFunc, data.Item2.Item2);
+        }
+
+        private ApiMemberAccessor GetOrSetMemberFunc => tileMembers.Item1;
+
         /// <summary>
-        /// Read only collection of <see cref="TerminalControlBase"/>s attached to the tile
+        ///     Read only collection of <see cref="TerminalControlBase" />s attached to the tile
         /// </summary>
         public IReadOnlyList<TerminalControlBase> Controls { get; }
 
         public IControlTile ControlContainer => this;
 
         /// <summary>
-        /// Determines whether or not the tile will be rendered in the list.
+        ///     Determines whether or not the tile will be rendered in the list.
         /// </summary>
         public bool Enabled
         {
@@ -45,48 +59,41 @@ namespace RichHudFramework.UI.Client
         }
 
         /// <summary>
-        /// Unique identifier
+        ///     Unique identifier
         /// </summary>
         public object ID => tileMembers.Item3;
 
-        private ApiMemberAccessor GetOrSetMemberFunc => tileMembers.Item1;
-        private readonly ControlContainerMembers tileMembers;
-
-        public ControlTile() : this(RichHudTerminal.GetNewMenuTile())
-        { }
-
-        public ControlTile(ControlContainerMembers data)
+        IEnumerator<ITerminalControl> IEnumerable<ITerminalControl>.GetEnumerator()
         {
-            tileMembers = data;
-
-            var GetControlDataFunc = data.Item2.Item1 as Func<int, ControlMembers>;
-            Func<int, TerminalControlBase> GetControlFunc = (x => new TerminalControl(GetControlDataFunc(x)));
-
-            Controls = new ReadOnlyApiCollection<TerminalControlBase>(GetControlFunc, data.Item2.Item2);
+            return Controls.GetEnumerator();
         }
 
-        IEnumerator<ITerminalControl> IEnumerable<ITerminalControl>.GetEnumerator() =>
-            Controls.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() =>
-            Controls.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return Controls.GetEnumerator();
+        }
 
         /// <summary>
-        /// Adds a <see cref="TerminalControlBase"/> to the tile
+        ///     Adds a <see cref="TerminalControlBase" /> to the tile
         /// </summary>
-        public void Add(TerminalControlBase control) =>
+        public void Add(TerminalControlBase control)
+        {
             GetOrSetMemberFunc(control.ID, (int)ControlTileAccessors.AddControl);
+        }
 
         /// <summary>
-        /// Retrieves information needed by the Framework API 
+        ///     Retrieves information needed by the Framework API
         /// </summary>
-        public ControlContainerMembers GetApiData() =>
-            tileMembers;
+        public ControlContainerMembers GetApiData()
+        {
+            return tileMembers;
+        }
 
         private class TerminalControl : TerminalControlBase
         {
             public TerminalControl(ControlMembers data) : base(data)
-            { }
+            {
+            }
         }
     }
 }

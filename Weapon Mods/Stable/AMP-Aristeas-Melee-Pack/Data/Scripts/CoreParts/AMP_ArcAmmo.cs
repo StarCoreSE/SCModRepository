@@ -123,13 +123,13 @@ namespace Scripts
                     Armor = 0.8f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
                     Light = 0.5f, // Multiplier for damage against light armor.
                     Heavy = 0.35f, // Multiplier for damage against heavy armor.
-                    NonArmor = -1f, // Multiplier for damage against every else.
+                    NonArmor = 0.5f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
                     Modifier = 2f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
-                    BypassModifier = -2f, // If greater than zero, the percentage of damage that will penetrate the shield.
+                    BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {

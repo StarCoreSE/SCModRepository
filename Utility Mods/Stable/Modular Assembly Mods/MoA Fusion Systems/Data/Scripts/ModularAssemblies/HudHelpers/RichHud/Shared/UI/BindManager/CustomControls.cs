@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using VRage;
-
-namespace RichHudFramework
+﻿namespace RichHudFramework
 {
     namespace UI
     {
-        public enum RichHudControls : int
+        public enum RichHudControls
         {
             MousewheelUp = 256,
-            MousewheelDown = 257,
+            MousewheelDown = 257
         }
     }
 }

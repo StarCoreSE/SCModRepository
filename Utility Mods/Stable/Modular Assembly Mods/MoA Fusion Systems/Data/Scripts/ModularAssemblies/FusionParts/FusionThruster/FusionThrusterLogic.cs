@@ -84,7 +84,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
         public override void UpdateAfterSimulation()
         {
             base.UpdateAfterSimulation();
-            float storagePct = MemberSystem?.PowerStored / MemberSystem?.MaxPowerStored ?? 0;
+            var storagePct = MemberSystem?.PowerStored / MemberSystem?.MaxPowerStored ?? 0;
 
             if (storagePct <= 0.05f)
             {
@@ -98,7 +98,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
 
             // If boost is unsustainable, disable it.
             // If power draw exceeds power available, disable self until available.
-            if ((OverrideEnabled.Value && MemberSystem?.PowerStored <= MemberSystem?.PowerConsumption * 30) || !Block.IsWorking)
+            if ((OverrideEnabled.Value && MemberSystem?.PowerStored <= MemberSystem?.PowerConsumption * 30) ||
+                !Block.IsWorking)
             {
                 SetPowerBoost(false);
                 PowerConsumption = 0;

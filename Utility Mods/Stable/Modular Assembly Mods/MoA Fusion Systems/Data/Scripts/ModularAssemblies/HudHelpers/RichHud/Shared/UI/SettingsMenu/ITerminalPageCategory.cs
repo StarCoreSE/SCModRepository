@@ -1,71 +1,66 @@
-﻿using System;
-using System.Collections.Generic;
-using VRage;
-using ApiMemberAccessor = System.Func<object, int, object>;
+﻿using System.Collections.Generic;
+using RichHudFramework.UI.Client;
 
 namespace RichHudFramework
 {
     namespace UI
     {
-        using Server;
-        using Client;
-
-        public enum TerminalPageCategoryAccessors : int
+        public enum TerminalPageCategoryAccessors
         {
             /// <summary>
-            /// string
+            ///     string
             /// </summary>
             Name = 2,
 
             /// <summary>
-            /// bool
+            ///     bool
             /// </summary>
             Enabled = 3,
 
             /// <summary>
-            /// out: ControlMembers
+            ///     out: ControlMembers
             /// </summary>
             Selection = 4,
 
             /// <summary>
-            /// in: TerminalPageBase
+            ///     in: TerminalPageBase
             /// </summary>
             AddPage = 5,
 
             /// <summary>
-            /// in: IReadOnlyList<TerminalPageBase>
+            ///     in: IReadOnlyList<TerminalPageBase>
             /// </summary>
-            AddPageRange = 6,
+            AddPageRange = 6
         }
 
         /// <summary>
-        /// Indented dropdown list of terminal pages.
+        ///     Indented dropdown list of terminal pages.
         /// </summary>
         public interface ITerminalPageCategory : IEnumerable<TerminalPageBase>, IModRootMember
         {
             /// <summary>
-            /// Read only collection of <see cref="TerminalPageBase"/>s assigned to this object.
+            ///     Read only collection of <see cref="TerminalPageBase" />s assigned to this object.
             /// </summary>
             IReadOnlyList<TerminalPageBase> Pages { get; }
 
             /// <summary>
-            /// Used to allow the addition of category elements using collection-initializer syntax in
-            /// conjunction with normal initializers.
+            ///     Used to allow the addition of category elements using collection-initializer syntax in
+            ///     conjunction with normal initializers.
             /// </summary>
             ITerminalPageCategory PageContainer { get; }
 
             /// <summary>
-            /// Currently selected <see cref="TerminalPageBase"/>.
+            ///     Currently selected <see cref="TerminalPageBase" />.
             /// </summary>
             TerminalPageBase SelectedPage { get; }
 
             /// <summary>
-            /// Adds a terminal page to the category
+            ///     Adds a terminal page to the category
             /// </summary>
             void Add(TerminalPageBase page);
 
             /// <summary>
-            /// Adds a range of terminal pages to the category
+            ///     Adds a range of terminal pages to the category
             /// </summary>
             void AddRange(IReadOnlyList<TerminalPageBase> pages);
         }

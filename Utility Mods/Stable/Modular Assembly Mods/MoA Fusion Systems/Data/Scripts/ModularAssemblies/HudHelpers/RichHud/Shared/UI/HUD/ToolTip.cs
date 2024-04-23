@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using VRage;
 using VRageMath;
-using RichStringMembers = VRage.MyTuple<System.Text.StringBuilder, VRage.MyTuple<byte, float, VRageMath.Vector2I, VRageMath.Color>>;
+using RichStringMembers =
+    VRage.MyTuple<System.Text.StringBuilder, VRage.MyTuple<byte, float, VRageMath.Vector2I, VRageMath.Color>>;
 
 namespace RichHudFramework
 {
@@ -14,41 +15,42 @@ namespace RichHudFramework
         >;
 
         /// <summary>
-        /// Class used to define tooltips attached to the RHF cursor. Tooltips must be
-        /// registered in HandleInput() every input tick. The first tooltip registered
-        /// takes precedence.
+        ///     Class used to define tooltips attached to the RHF cursor. Tooltips must be
+        ///     registered in HandleInput() every input tick. The first tooltip registered
+        ///     takes precedence.
         /// </summary>
         public class ToolTip
         {
             public static readonly GlyphFormat DefaultText = GlyphFormat.Blueish.WithSize(.75f);
+
             public static readonly Color DefaultBG = new Color(73, 86, 95),
                 orangeWarningBG = new Color(180, 110, 0),
                 redWarningBG = new Color(126, 39, 44);
 
             /// <summary>
-            /// Text to be assigned to the tooltip. Multiline tooltips are allowed, but
-            /// are not wrapped.
+            ///     Callback delegate used by the API to retrieve tooltip information
             /// </summary>
-            public RichText text;
+            public readonly Func<ToolTipMembers> GetToolTipFunc;
 
             /// <summary>
-            /// Color of the text background
+            ///     Color of the text background
             /// </summary>
             public Color? bgColor;
 
             /// <summary>
-            /// Callback delegate used by the API to retrieve tooltip information
+            ///     Text to be assigned to the tooltip. Multiline tooltips are allowed, but
+            ///     are not wrapped.
             /// </summary>
-            public readonly Func<ToolTipMembers> GetToolTipFunc;
+            public RichText text;
 
             public ToolTip()
             {
                 bgColor = DefaultBG;
 
-                GetToolTipFunc = () => new ToolTipMembers()
+                GetToolTipFunc = () => new ToolTipMembers
                 {
                     Item1 = text?.apiData,
-                    Item2 = bgColor,
+                    Item2 = bgColor
                 };
             }
 
@@ -59,16 +61,20 @@ namespace RichHudFramework
             }
 
             /// <summary>
-            /// Implicitly converts <see cref="RichText"/> to <see cref="ToolTip"/>
+            ///     Implicitly converts <see cref="RichText" /> to <see cref="ToolTip" />
             /// </summary>
-            public static implicit operator ToolTip(RichText text) =>
-                new ToolTip() { text = text };
+            public static implicit operator ToolTip(RichText text)
+            {
+                return new ToolTip { text = text };
+            }
 
             /// <summary>
-            /// Implicitly converts <see cref="string"/> to <see cref="ToolTip"/>
+            ///     Implicitly converts <see cref="string" /> to <see cref="ToolTip" />
             /// </summary>
-            public static implicit operator ToolTip(string text) =>
-                new ToolTip() { text = new RichText(text, DefaultText) };
+            public static implicit operator ToolTip(string text)
+            {
+                return new ToolTip { text = new RichText(text, DefaultText) };
+            }
         }
     }
 }

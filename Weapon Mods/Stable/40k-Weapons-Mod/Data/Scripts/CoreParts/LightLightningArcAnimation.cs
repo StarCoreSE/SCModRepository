@@ -9,7 +9,7 @@ namespace Scripts
 { // Don't edit above this line
     partial class Parts
     {
-        private AnimationDef LightParticleWhipAnimation => new AnimationDef
+        private AnimationDef LightLightningArcAnimation => new AnimationDef
         {
 
 

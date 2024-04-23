@@ -1,43 +1,33 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using VRage;
-using System;
 
 namespace RichHudFramework
 {
     /// <summary>
-    /// Interface for collections with an indexer and a count property.
+    ///     Interface for collections with an indexer and a count property.
     /// </summary>
     public interface IIndexedCollection<T>
     {
         /// <summary>
-        /// Returns the element associated with the given index.
+        ///     Returns the element associated with the given index.
         /// </summary>
         T this[int index] { get; }
 
         /// <summary>
-        /// The number of elements in the collection
+        ///     The number of elements in the collection
         /// </summary>
         int Count { get; }
     }
 
     /// <summary>
-    /// Generic enumerator using delegates.
+    ///     Generic enumerator using delegates.
     /// </summary>
     public class CollectionDataEnumerator<T> : IEnumerator<T>
     {
-        /// <summary>
-        /// Returns the element at the enumerator's current position
-        /// </summary>
-        object IEnumerator.Current => Current;
-
-        /// <summary>
-        /// Returns the element at the enumerator's current position
-        /// </summary>
-        public T Current => Getter(index);
+        protected readonly Func<int> CountFunc;
 
         protected readonly Func<int, T> Getter;
-        protected readonly Func<int> CountFunc;
         protected int index;
 
         public CollectionDataEnumerator(Func<int, T> Getter, Func<int> CountFunc)
@@ -47,8 +37,19 @@ namespace RichHudFramework
             index = -1;
         }
 
+        /// <summary>
+        ///     Returns the element at the enumerator's current position
+        /// </summary>
+        object IEnumerator.Current => Current;
+
+        /// <summary>
+        ///     Returns the element at the enumerator's current position
+        /// </summary>
+        public T Current => Getter(index);
+
         public void Dispose()
-        { }
+        {
+        }
 
         public bool MoveNext()
         {

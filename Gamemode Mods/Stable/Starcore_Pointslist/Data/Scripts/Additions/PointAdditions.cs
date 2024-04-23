@@ -316,10 +316,11 @@ namespace ShipPoints
 
 				OffroadWheel1x1@35000;
 				OffroadWheel3x3@35000;
-				OffroadWheel5x5@35000;
+				OffroadWheel2x2@35000;
 				OffroadWheel5x5@35000;
 				Wheel5x5@35000;
 				Wheel3x3@35000;
+				Wheel2x2@35000;
 				Wheel1x1@35000;
 
 				K_SA_Gauss_AMSIIC@350;
@@ -554,7 +555,7 @@ Cat_StarcoreUlitity@21;
 				 SC_Radome@10;
 				 Starcore_RWR_Projectiles@5;
 				  SC_Flare@50;
-				SI_Field_Gen@450;
+				SI_Field_Gen@50;
 				 SELtdLargeNanobotBuildAndRepairSystem@50;
 				  PM_LG_BLASTPLATE_BLASTPLATE@100;
 				  REINFORCED_BLASTPLATE@100;
