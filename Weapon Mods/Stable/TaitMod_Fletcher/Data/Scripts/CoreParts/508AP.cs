@@ -53,7 +53,7 @@ namespace Scripts
             },
             ObjectsHit = new ObjectsHitDef
             {
-                MaxObjectsHit = 10, // Limits the number of entities (grids, players, projectiles) the projectile can penetrate; 0 = unlimited.
+                MaxObjectsHit = 6, // Limits the number of entities (grids, players, projectiles) the projectile can penetrate; 0 = unlimited.
                 CountBlocks = true, // Counts individual blocks, not just entities hit.
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
