@@ -68,7 +68,7 @@ namespace TIOSelfRepair
 
             // If the grid has an owner, proceed with repair and ownership change.
 
-            float repairAmount = 72;
+            float repairAmount = 24;
             slimBlock.IncreaseMountLevel(repairAmount, 0L, null, 0f, false, MyOwnershipShareModeEnum.Faction);
 
             // Try casting to MyCubeBlock and change the owner.

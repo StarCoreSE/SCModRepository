@@ -8,7 +8,9 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>longsword</SubtypeId>
 			</Id>
+
 			<DisplayName>[FLAW] Warp Beacon - Longsword</DisplayName>
+
 
       <Description> Calls in a C709 Longsword to fight for you. If it survives, you can call it in again. 1 minute cooldown [MaxActive 1 per block] [MinRange 1km] [500m/s Speed]</Description>
 			
