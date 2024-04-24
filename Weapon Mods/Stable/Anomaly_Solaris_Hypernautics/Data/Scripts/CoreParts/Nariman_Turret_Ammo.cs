@@ -412,7 +412,6 @@ namespace Scripts
                 }
             }, // Don't edit below this line
         };
-
         private AmmoDef Nariman_EWAR_Round => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.

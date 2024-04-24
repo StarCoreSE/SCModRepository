@@ -7,7 +7,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>GoalieCasemate</SubtypeId>
 			</Id>
-			<DisplayName>[CA] Goalkeeper Casemate Flak Battery</DisplayName>
+			<DisplayName>[FLAW] Goalkeeper Casemate Flak Battery</DisplayName>
 			<Description>
               [1600 Targeting Range]
 			  [1200 Flak Range]

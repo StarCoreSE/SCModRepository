@@ -1,99 +1,39 @@
 ﻿using System;
-using VRageMath;
+using RichHudFramework.UI.Client;
 using RichHudFramework.UI.Rendering;
-using RichHudFramework.Internal;
+using VRageMath;
 
 namespace RichHudFramework.UI
 {
-    using Client;
-    using Server;
-
     /// <summary>
-    /// Base type for HUD windows. Supports dragging/resizing like pretty much every other window ever.
+    ///     Base type for HUD windows. Supports dragging/resizing like pretty much every other window ever.
     /// </summary>
     public abstract class WindowBase : HudElementBase, IClickableElement
     {
         /// <summary>
-        /// Window header text
-        /// </summary>
-        public RichText HeaderText { get { return HeaderBuilder.GetText(); } set { HeaderBuilder.SetText(value); } }
-
-        /// <summary>
-        /// Text builder for the window header
-        /// </summary>
-        public ITextBuilder HeaderBuilder => header.TextBoard;
-
-        /// <summary>
-        /// Determines the color of both the header and the border.
-        /// </summary>
-        public virtual Color BorderColor
-        {
-            get { return header.Color; }
-            set
-            {
-                header.Color = value;
-                border.Color = value;
-            }
-        }
-
-        /// <summary>
-        /// Determines the color of the body of the window.
-        /// </summary>
-        public virtual Color BodyColor { get { return bodyBg.Color; } set { bodyBg.Color = value; } }
-
-        /// <summary>
-        /// Minimum allowable size for the window.
-        /// </summary>
-        public Vector2 MinimumSize { get { return minimumSize; } set { minimumSize = value; } }
-
-        /// <summary>
-        /// Determines whether or not the window can be resized by the user
-        /// </summary>
-        public bool AllowResizing { get; set; }
-
-        /// <summary>
-        /// Determines whether or not the user can reposition the window
-        /// </summary>
-        public bool CanDrag { get; set; }
-
-        /// <summary>
-        /// Returns true if the window has focus and is accepting input
-        /// </summary>
-        public bool WindowActive { get; protected set; }
-
-        /// <summary>
-        /// Returns true if the cursor is over the window
-        /// </summary>
-        public override bool IsMousedOver => resizeInput.IsMousedOver;
-
-        /// <summary>
-        /// Mouse input element for the window
-        /// </summary>
-        public IMouseInput MouseInput => resizeInput;
-
-        /// <summary>
-        /// Window header element
-        /// </summary>
-        public readonly LabelBoxButton header;
-
-        /// <summary>
-        /// Textured background. Body of the window
+        ///     Textured background. Body of the window
         /// </summary>
         public readonly HudElementBase body;
 
+        protected readonly TexturedBox bodyBg;
+
         /// <summary>
-        /// Window border
+        ///     Window border
         /// </summary>
         public readonly BorderBox border;
 
+        /// <summary>
+        ///     Window header element
+        /// </summary>
+        public readonly LabelBoxButton header;
+
         protected readonly MouseInputElement inputInner, resizeInput;
-        protected readonly TexturedBox bodyBg;
 
         protected readonly Action<byte> LoseFocusCallback;
-        protected float cornerSize = 16f;
         protected bool canMoveWindow, canResize;
-        protected int resizeDir;
+        protected float cornerSize = 16f;
         protected Vector2 cursorOffset, minimumSize;
+        protected int resizeDir;
 
         public WindowBase(HudParentBase parent) : base(parent)
         {
@@ -105,26 +45,26 @@ namespace RichHudFramework.UI
                 ZOffset = 1,
                 Format = GlyphFormat.White.WithAlignment(TextAlignment.Center),
                 HighlightEnabled = false,
-                AutoResize = false,
+                AutoResize = false
             };
 
             body = new EmptyHudElement(header)
             {
                 DimAlignment = DimAlignments.Width,
-                ParentAlignment = ParentAlignments.Bottom,
+                ParentAlignment = ParentAlignments.Bottom
             };
 
             bodyBg = new TexturedBox(body)
             {
                 DimAlignment = DimAlignments.Both | DimAlignments.IgnorePadding,
-                ZOffset = -2,
+                ZOffset = -2
             };
 
             border = new BorderBox(this)
             {
                 ZOffset = 1,
                 Thickness = 1f,
-                DimAlignment = DimAlignments.Both,
+                DimAlignment = DimAlignments.Both
             };
 
             resizeInput = new MouseInputElement(this)
@@ -134,10 +74,10 @@ namespace RichHudFramework.UI
                 DimAlignment = DimAlignments.Both,
                 CanIgnoreMasking = true
             };
-            
+
             inputInner = new MouseInputElement(resizeInput)
             {
-                DimAlignment = DimAlignments.Both | DimAlignments.IgnorePadding,
+                DimAlignment = DimAlignments.Both | DimAlignments.IgnorePadding
             };
 
             AllowResizing = true;
@@ -151,6 +91,76 @@ namespace RichHudFramework.UI
             GetFocus();
         }
 
+        /// <summary>
+        ///     Window header text
+        /// </summary>
+        public RichText HeaderText
+        {
+            get { return HeaderBuilder.GetText(); }
+            set { HeaderBuilder.SetText(value); }
+        }
+
+        /// <summary>
+        ///     Text builder for the window header
+        /// </summary>
+        public ITextBuilder HeaderBuilder => header.TextBoard;
+
+        /// <summary>
+        ///     Determines the color of both the header and the border.
+        /// </summary>
+        public virtual Color BorderColor
+        {
+            get { return header.Color; }
+            set
+            {
+                header.Color = value;
+                border.Color = value;
+            }
+        }
+
+        /// <summary>
+        ///     Determines the color of the body of the window.
+        /// </summary>
+        public virtual Color BodyColor
+        {
+            get { return bodyBg.Color; }
+            set { bodyBg.Color = value; }
+        }
+
+        /// <summary>
+        ///     Minimum allowable size for the window.
+        /// </summary>
+        public Vector2 MinimumSize
+        {
+            get { return minimumSize; }
+            set { minimumSize = value; }
+        }
+
+        /// <summary>
+        ///     Determines whether or not the window can be resized by the user
+        /// </summary>
+        public bool AllowResizing { get; set; }
+
+        /// <summary>
+        ///     Determines whether or not the user can reposition the window
+        /// </summary>
+        public bool CanDrag { get; set; }
+
+        /// <summary>
+        ///     Returns true if the window has focus and is accepting input
+        /// </summary>
+        public bool WindowActive { get; protected set; }
+
+        /// <summary>
+        ///     Returns true if the cursor is over the window
+        /// </summary>
+        public override bool IsMousedOver => resizeInput.IsMousedOver;
+
+        /// <summary>
+        ///     Mouse input element for the window
+        /// </summary>
+        public IMouseInput MouseInput => resizeInput;
+
         protected override void Layout()
         {
             body.Height = Height - header.Height;
@@ -159,7 +169,7 @@ namespace RichHudFramework.UI
             {
                 if (canMoveWindow)
                 {
-                    Vector3 cursorPos = HudSpace.CursorPos;
+                    var cursorPos = HudSpace.CursorPos;
                     Offset = new Vector2(cursorPos.X, cursorPos.Y) + cursorOffset - Origin;
                 }
 
@@ -175,7 +185,7 @@ namespace RichHudFramework.UI
 
         protected void Resize()
         {
-            Vector3 cursorPos = HudSpace.CursorPos;
+            var cursorPos = HudSpace.CursorPos;
             Vector2 center = Origin + Offset, newOffset = Offset;
             float newWidth, newHeight;
 
@@ -217,41 +227,37 @@ namespace RichHudFramework.UI
         protected override void HandleInput(Vector2 cursorPos)
         {
             if (IsMousedOver)
-            {
                 if (SharedBinds.LeftButton.IsNewPressed && !WindowActive)
                     GetFocus();
-            }
 
             if (AllowResizing && resizeInput.IsNewLeftClicked && !inputInner.IsMousedOver)
             {
-                Vector2 pos = Origin + Offset;
+                var pos = Origin + Offset;
                 canResize = true;
                 resizeDir = 0;
 
-                if (Width - (2f) * Math.Abs(pos.X - cursorPos.X) <= cornerSize)
+                if (Width - 2f * Math.Abs(pos.X - cursorPos.X) <= cornerSize)
                     resizeDir += 1;
 
-                if (Height - (2f) * Math.Abs(pos.Y - cursorPos.Y) <= cornerSize)
+                if (Height - 2f * Math.Abs(pos.Y - cursorPos.Y) <= cornerSize)
                     resizeDir += 2;
             }
             else if (CanDrag && header.MouseInput.IsNewLeftClicked)
             {
                 canMoveWindow = true;
-                cursorOffset = (Origin + Offset) - cursorPos;
+                cursorOffset = Origin + Offset - cursorPos;
             }
 
             if (canResize || canMoveWindow)
-            {
                 if (!SharedBinds.LeftButton.IsPressed)
                 {
                     canMoveWindow = false;
                     canResize = false;
                 }
-            }
         }
 
         /// <summary>
-        /// Brings the window into the foreground
+        ///     Brings the window into the foreground
         /// </summary>
         public virtual void GetFocus()
         {

@@ -6,206 +6,211 @@ namespace RichHudFramework
 
     namespace UI
     {
-        public enum HudMainAccessors : int
+        public enum HudMainAccessors
         {
             /// <summary>
-            /// out: float
+            ///     out: float
             /// </summary>
             ScreenWidth = 1,
 
             /// <summary>
-            /// out: float
+            ///     out: float
             /// </summary>
             ScreenHeight = 2,
 
             /// <summary>
-            /// out: float
+            ///     out: float
             /// </summary>
             AspectRatio = 3,
 
             /// <summary>
-            /// out: float
+            ///     out: float
             /// </summary>
             ResScale = 4,
 
             /// <summary>
-            /// out: float
+            ///     out: float
             /// </summary>
             Fov = 5,
 
             /// <summary>
-            /// out: float
+            ///     out: float
             /// </summary>
             FovScale = 6,
 
             /// <summary>
-            /// out: MatrixD
+            ///     out: MatrixD
             /// </summary>
             PixelToWorldTransform = 7,
 
             /// <summary>
-            /// in/out: RichText
+            ///     in/out: RichText
             /// </summary>
             ClipBoard = 8,
 
             /// <summary>
-            /// out: float
+            ///     out: float
             /// </summary>
             UiBkOpacity = 9,
 
             /// <summary>
-            /// in/out: bool
+            ///     in/out: bool
             /// </summary>
             EnableCursor = 10,
 
             /// <summary>
-            /// in/out: bool
+            ///     in/out: bool
             /// </summary>
             RefreshDrawList = 11,
 
             /// <summary>
-            /// in/out: Action<List<HudUpdateAccessors>, byte>
+            ///     in/out: Action<List<HudUpdateAccessors>, byte>
             /// </summary>
             GetUpdateAccessors = 12,
 
             /// <summary>
-            /// out: byte, in: Action{byte}
+            ///     out: byte, in: Action{byte}
             /// </summary>
             GetFocusOffset = 13,
 
             /// <summary>
-            /// out: HudSpaceDelegate
+            ///     out: HudSpaceDelegate
             /// </summary>
             GetPixelSpaceFunc = 14,
 
             /// <summary>
-            /// out: Func{Vector3D}
+            ///     out: Func{Vector3D}
             /// </summary>
             GetPixelSpaceOriginFunc = 15,
 
             /// <summary>
-            /// in: Action
+            ///     in: Action
             /// </summary>
             GetInputFocus = 16,
 
             /// <summary>
-            /// out: int
+            ///     out: int
             /// </summary>
             TreeRefreshRate = 17,
 
             /// <summary>
-            /// out: HudInputMode (int)
+            ///     out: HudInputMode (int)
             /// </summary>
             InputMode = 18,
 
             /// <summary>
-            /// in: Action
+            ///     in: Action
             /// </summary>
             SetBeforeDrawCallback = 19,
 
             /// <summary>
-            /// in: Action
+            ///     in: Action
             /// </summary>
             SetAfterDrawCallback = 20,
 
             /// <summary>
-            /// in: Action
+            ///     in: Action
             /// </summary>
             SetBeforeInputCallback = 21,
 
             /// <summary>
-            /// in: Action
+            ///     in: Action
             /// </summary>
-            SetAfterInputCallback = 22,
+            SetAfterInputCallback = 22
         }
 
-        public enum HudInputMode : int
+        public enum HudInputMode
         {
             NoInput = 0,
 
             /// <summary>
-            /// Cursor is enabled and visible
+            ///     Cursor is enabled and visible
             /// </summary>
             CursorOnly = 1,
 
             /// <summary>
-            /// Cursor and text input enabled
+            ///     Cursor and text input enabled
             /// </summary>
             Full = 2
         }
 
-        public enum ListBoxEntryAccessors : int
+        public enum ListBoxEntryAccessors
         {
             /// <summary>
-            /// IList<RichStringMembers>
+            ///     IList<RichStringMembers>
             /// </summary>
             Name = 1,
 
             /// <summary>
-            /// bool
+            ///     bool
             /// </summary>
             Enabled = 2,
 
             /// <summary>
-            /// Object
+            ///     Object
             /// </summary>
             AssocObject = 3,
 
             /// <summary>
-            /// Object
+            ///     Object
             /// </summary>
-            ID = 4,
+            ID = 4
         }
 
-        public enum ListBoxAccessors : int
+        public enum ListBoxAccessors
         {
             /// <summary>
-            /// CollectionData
+            ///     CollectionData
             /// </summary>
             ListMembers = 1,
 
             /// <summary>
-            /// in: MyTuple<IList<RichStringMembers>, T>, out: ApiMemberAccessor
+            ///     in: MyTuple<IList<RichStringMembers>, T>, out: ApiMemberAccessor
             /// </summary>
             Add = 2,
 
             /// <summary>
-            /// out: ListBoxEntry
+            ///     out: ListBoxEntry
             /// </summary>
             Selection = 3,
 
             /// <summary>
-            /// out: int
+            ///     out: int
             /// </summary>
             SelectionIndex = 4,
 
             /// <summary>
-            /// in: T (AssocObject)
+            ///     in: T (AssocObject)
             /// </summary>
             SetSelectionAtData = 5,
 
             /// <summary>
-            /// in: MyTuple<int, IList<RichStringMembers>, T>
+            ///     in: MyTuple<int, IList<RichStringMembers>, T>
             /// </summary>
             Insert = 6,
 
             /// <summary>
-            /// in: ListBoxEntry, out: bool
+            ///     in: ListBoxEntry, out: bool
             /// </summary>
             Remove = 7,
 
             /// <summary>
-            /// in: int
+            ///     in: int
             /// </summary>
             RemoveAt = 8,
 
             /// <summary>
-            /// void
+            ///     void
             /// </summary>
             ClearEntries = 9
         }
     }
 }
 
-namespace RichHudFramework.UI.Server { }
-namespace RichHudFramework.UI.Rendering.Server { }
+namespace RichHudFramework.UI.Server
+{
+}
+
+namespace RichHudFramework.UI.Rendering.Server
+{
+}

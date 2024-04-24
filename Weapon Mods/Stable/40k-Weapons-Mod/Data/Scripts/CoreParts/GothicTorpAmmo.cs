@@ -278,7 +278,7 @@ namespace Scripts
                 Guidance = Smart, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
                 TargetLossDegree = 0f, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                MaxLifeTime = 60, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
+                MaxLifeTime = 30, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 600, // voxel phasing if you go above 5100
                 MaxTrajectory = 11000f, // Max Distance the projectile or beam can Travel.
@@ -411,7 +411,7 @@ namespace Scripts
             },
             AmmoAudio = new AmmoAudioDef
             {
-                TravelSound = "RLX10FlightB", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
+                TravelSound = "GothicTorpTravel", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
                 HitSound = "",
                 ShotSound = "",
                 ShieldHitSound = "",
@@ -534,11 +534,11 @@ namespace Scripts
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
                     Light = -1f, // Multiplier for damage against light armor.
                     Heavy = -1f, // Multiplier for damage against heavy armor.
-                    NonArmor = 0.6f, // Multiplier for damage against every else.
+                    NonArmor = 0.5f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 6f, // Multiplier for damage against shields.
+                    Modifier = 8f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1.3f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -589,7 +589,7 @@ namespace Scripts
                 {
                     Enable = true,
                     Radius = 10f, // Radius of AOE effect, in meters.
-                    Damage = 250000f,
+                    Damage = 300000f,
                     Depth = 8f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
@@ -697,8 +697,8 @@ namespace Scripts
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
                     Roam = false, // Roam current area after target loss
                     KeepAliveAfterTargetLoss = false, // Whether to stop early death of projectile on target loss
-                    OffsetRatio = 0.6f, // The ratio to offset the random direction (0 to 1) 
-                    OffsetTime = 60, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
+                    OffsetRatio = 0.3f, // The ratio to offset the random direction (0 to 1) 
+                    OffsetTime = 120, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
                 },
                 Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
                 {
@@ -711,7 +711,7 @@ namespace Scripts
             },
             AmmoGraphics = new GraphicDef
             {
-                ModelName = "\\Models\\Cubes\\GothicTorp.mwm", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
+                ModelName = "\\Models\\Ammo\\GothicTorpFlight.mwm", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
                 Decals = new DecalDef
@@ -821,7 +821,7 @@ namespace Scripts
             },
             AmmoAudio = new AmmoAudioDef
             {
-                TravelSound = "GrowlerTone", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
+                TravelSound = "GothicTorpTravel", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
                 HitSound = "",
                 ShotSound = "",
                 ShieldHitSound = "",
@@ -1086,7 +1086,7 @@ namespace Scripts
                 Guidance = Smart, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
                 TargetLossDegree = 0f, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                MaxLifeTime = 30, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
+                MaxLifeTime = 15, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 1000, // voxel phasing if you go above 5100
                 MaxTrajectory = 5000f, // Max Distance the projectile or beam can Travel.
@@ -1219,7 +1219,7 @@ namespace Scripts
             },
             AmmoAudio = new AmmoAudioDef
             {
-                TravelSound = "RLX10FlightB", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
+                TravelSound = "GothicTorpTravel", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
                 HitSound = "",
                 ShotSound = "",
                 ShieldHitSound = "",
@@ -1346,7 +1346,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 4f, // Multiplier for damage against shields.
+                    Modifier = 8f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1.3f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -1397,7 +1397,7 @@ namespace Scripts
                 {
                     Enable = true,
                     Radius = 8f, // Radius of AOE effect, in meters.
-                    Damage = 230000f,
+                    Damage = 250000f,
                     Depth = 6f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
@@ -1496,7 +1496,7 @@ namespace Scripts
                 {
                     Inaccuracy = 0f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
                     Aggressiveness = 2f, // controls how responsive tracking is.
-                    MaxLateralThrust = 0.3f, // controls how sharp the trajectile may turn
+                    MaxLateralThrust = 0.35f, // controls how sharp the trajectile may turn
                     TrackingDelay = 300, // Measured in Shape diameter units traveled.
                     MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
@@ -1505,7 +1505,7 @@ namespace Scripts
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
                     Roam = false, // Roam current area after target loss
                     KeepAliveAfterTargetLoss = false, // Whether to stop early death of projectile on target loss
-                    OffsetRatio = 0.5f, // The ratio to offset the random direction (0 to 1) 
+                    OffsetRatio = 0.3f, // The ratio to offset the random direction (0 to 1) 
                     OffsetTime = 60, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
                 },
                 Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
@@ -1519,7 +1519,7 @@ namespace Scripts
             },
             AmmoGraphics = new GraphicDef
             {
-                ModelName = "\\Models\\Cubes\\GothicTorp.mwm", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
+                ModelName = "\\Models\\Ammo\\GothicTorpFlight.mwm", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
                 Decals = new DecalDef
@@ -1629,7 +1629,7 @@ namespace Scripts
             },
             AmmoAudio = new AmmoAudioDef
             {
-                TravelSound = "GrowlerTone", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
+                TravelSound = "GothicTorpTravel", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
                 HitSound = "",
                 ShotSound = "",
                 ShieldHitSound = "",
@@ -1894,7 +1894,7 @@ namespace Scripts
                 Guidance = Smart, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
                 TargetLossDegree = 0f, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                MaxLifeTime = 60, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
+                MaxLifeTime = 30, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 600, // voxel phasing if you go above 5100
                 MaxTrajectory = 11000f, // Max Distance the projectile or beam can Travel.
@@ -2027,7 +2027,7 @@ namespace Scripts
             },
             AmmoAudio = new AmmoAudioDef
             {
-                TravelSound = "RLX10FlightB", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
+                TravelSound = "GothicTorpTravel", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
                 HitSound = "",
                 ShotSound = "",
                 ShieldHitSound = "",
@@ -2057,7 +2057,7 @@ namespace Scripts
             AmmoRound = "MeltaTorpTravel", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 130000f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 160000f, // Direct damage; one steel plate is worth 100.
             Mass = 140f, // In kilograms; how much force the impact will apply to the target.
             Health = 300, //40 //Watch this against Erebos 100+ damage aoe in future!// How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
@@ -2083,7 +2083,7 @@ namespace Scripts
             },
             ObjectsHit = new ObjectsHitDef
             {
-                MaxObjectsHit = 5, // Limits the number of entities (grids, players, projectiles) the projectile can penetrate; 0 = unlimited.
+                MaxObjectsHit = 7, // Limits the number of entities (grids, players, projectiles) the projectile can penetrate; 0 = unlimited.
                 CountBlocks = true, // Counts individual blocks, not just entities hit.
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
@@ -2154,7 +2154,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 4f, // Multiplier for damage against shields.
+                    Modifier = 7f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1.3f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -2188,7 +2188,7 @@ namespace Scripts
                 ByBlockHit = new ByBlockHitDef
                 {
                     Enable = true,
-                    Radius = 9f, // Meters
+                    Radius = 12f, // Meters
                     Damage = 40000f,
                     Depth = 2f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 2000f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
@@ -2304,7 +2304,7 @@ namespace Scripts
                 {
                     Inaccuracy = 0f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
                     Aggressiveness = 2f, // controls how responsive tracking is.
-                    MaxLateralThrust = 0.3f, // controls how sharp the trajectile may turn
+                    MaxLateralThrust = 0.35f, // controls how sharp the trajectile may turn
                     TrackingDelay = 300, // Measured in Shape diameter units traveled.
                     MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
@@ -2313,8 +2313,8 @@ namespace Scripts
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
                     Roam = false, // Roam current area after target loss
                     KeepAliveAfterTargetLoss = false, // Whether to stop early death of projectile on target loss
-                    OffsetRatio = 0.5f, // The ratio to offset the random direction (0 to 1) 
-                    OffsetTime = 60, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
+                    OffsetRatio = 0.3f, // The ratio to offset the random direction (0 to 1) 
+                    OffsetTime = 120, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
                 },
                 Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
                 {
@@ -2327,7 +2327,7 @@ namespace Scripts
             },
             AmmoGraphics = new GraphicDef
             {
-                ModelName = "\\Models\\Cubes\\GothicTorp.mwm", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
+                ModelName = "\\Models\\Ammo\\GothicTorpFlight.mwm", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
                 Decals = new DecalDef
@@ -2437,7 +2437,7 @@ namespace Scripts
             },
             AmmoAudio = new AmmoAudioDef
             {
-                TravelSound = "GrowlerTone", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
+                TravelSound = "GothicTorpTravel", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
                 HitSound = "",
                 ShotSound = "",
                 ShieldHitSound = "",
@@ -2702,7 +2702,7 @@ namespace Scripts
                 Guidance = Smart, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
                 TargetLossDegree = 0f, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                MaxLifeTime = 60, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
+                MaxLifeTime = 30, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 600, // voxel phasing if you go above 5100
                 MaxTrajectory = 11000f, // Max Distance the projectile or beam can Travel.
@@ -2835,7 +2835,7 @@ namespace Scripts
             },
             AmmoAudio = new AmmoAudioDef
             {
-                TravelSound = "RLX10FlightB", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
+                TravelSound = "GothicTorpTravel", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
                 HitSound = "",
                 ShotSound = "",
                 ShieldHitSound = "",
@@ -2958,11 +2958,11 @@ namespace Scripts
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
                     Light = -1f, // Multiplier for damage against light armor.
                     Heavy = -1f, // Multiplier for damage against heavy armor.
-                    NonArmor = 0.6f, // Multiplier for damage against every else.
+                    NonArmor = 0.5f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 4f, // Multiplier for damage against shields.
+                    Modifier = 7f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1.3f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -3121,8 +3121,8 @@ namespace Scripts
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
                     Roam = false, // Roam current area after target loss
                     KeepAliveAfterTargetLoss = false, // Whether to stop early death of projectile on target loss
-                    OffsetRatio = 0.6f, // The ratio to offset the random direction (0 to 1) 
-                    OffsetTime = 60, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
+                    OffsetRatio = 0.3f, // The ratio to offset the random direction (0 to 1) 
+                    OffsetTime = 120, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
                 },
                 Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
                 {
@@ -3135,7 +3135,7 @@ namespace Scripts
             },
             AmmoGraphics = new GraphicDef
             {
-                ModelName = "\\Models\\Cubes\\GothicTorp.mwm", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
+                ModelName = "\\Models\\Ammo\\GothicTorpFlight.mwm", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
                 Decals = new DecalDef
@@ -3245,7 +3245,7 @@ namespace Scripts
             },
             AmmoAudio = new AmmoAudioDef
             {
-                TravelSound = "GrowlerTone", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
+                TravelSound = "GothicTorpTravel", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
                 HitSound = "",
                 ShotSound = "",
                 ShieldHitSound = "",

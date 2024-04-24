@@ -6,7 +6,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>203mmQuad</SubtypeId>
 			</Id>
-			<DisplayName>8" Quad Turret</DisplayName>
+			<DisplayName>[FAS] 8" Quad Turret</DisplayName>
 			<Description>
 				Quad barreled 203mm/8 Inch
 				Fires HE, AP
@@ -20,14 +20,14 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\203quad\Aziumuth.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="8000" />
+				<Component Subtype="SteelPlate" Count="800" />
 				<Component Subtype="MetalGrid" Count="100" />
 				<Component Subtype="LargeTube" Count="200" />
 				<Component Subtype="Motor" Count="100" />
 				<Component Subtype="Computer" Count="100" />
 				<Component Subtype="Construction" Count="2000" />
 				<Component Subtype="MetalGrid" Count="200" />
-				<Component Subtype="SteelPlate" Count="16000" />
+				<Component Subtype="SteelPlate" Count="1600" />
 			</Components>
 			<CriticalComponent Subtype="Motor" Index="0" />
 			<MountPoints>

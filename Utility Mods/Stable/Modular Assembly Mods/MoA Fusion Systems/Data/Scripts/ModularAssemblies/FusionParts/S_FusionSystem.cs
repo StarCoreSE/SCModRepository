@@ -17,25 +17,30 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         public const float NewtonsPerFusionPower = 3200000;
 
         public List<S_FusionArm> Arms = new List<S_FusionArm>();
-        public int BlockCount = 0;
+        public int BlockCount;
+
+        /// <summary>
+        ///     Maximum power storage
+        /// </summary>
+        public float MaxPowerStored;
+
         public int PhysicalAssemblyId;
 
         /// <summary>
-        /// Total power generated minus PowerConsumption
-        /// </summary>
-        public float PowerGeneration;
-        /// <summary>
-        /// Total power consumed
+        ///     Total power consumed
         /// </summary>
         public float PowerConsumption;
+
         /// <summary>
-        /// Current power stored
+        ///     Total power generated minus PowerConsumption
+        /// </summary>
+        public float PowerGeneration;
+
+        /// <summary>
+        ///     Current power stored
         /// </summary>
         public float PowerStored;
-        /// <summary>
-        /// Maximum power storage
-        /// </summary>
-        public float MaxPowerStored;
+
         public List<FusionReactorLogic> Reactors = new List<FusionReactorLogic>();
         public List<FusionThrusterLogic> Thrusters = new List<FusionThrusterLogic>();
 
@@ -44,7 +49,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             PhysicalAssemblyId = physicalAssemblyId;
         }
 
-        private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
+        private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
 
         public void AddPart(IMyCubeBlock newPart)
         {
@@ -58,46 +63,49 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             {
                 case "Caster_Accelerator_0":
                 case "Caster_Accelerator_90":
-                    var newArm = new S_FusionArm((MyEntity)newPart, "Caster_Feeder");
+                    var newArm = new S_FusionArm(newPart, "Caster_Feeder");
                     if (newArm.IsValid)
                     {
                         Arms.Add(newArm);
                         UpdatePower(true);
                     }
+
                     break;
-                case "Caster_Feeder": // This is awful and I hate it. The idea is to generate new loops if a feeder is placed.
-                    List<MyEntity> connectedAccelerators = new List<MyEntity>();
-                    foreach (var connectedBlock in ModularAPI.GetConnectedBlocks((MyEntity)newPart))
+                case "Caster_Feeder"
+                    : // This is awful and I hate it. The idea is to generate new loops if a feeder is placed.
+                    var connectedAccelerators = new List<IMyCubeBlock>();
+                    foreach (var connectedBlock in ModularApi.GetConnectedBlocks(newPart, "Modular_Fusion"))
                     {
-                        string subtype = (connectedBlock as IMyCubeBlock)?.BlockDefinition.SubtypeName;
+                        var subtype = connectedBlock?.BlockDefinition.SubtypeName;
                         if (subtype != "Caster_Accelerator_0" && subtype != "Caster_Accelerator_90")
                             continue;
                         connectedAccelerators.Add(connectedBlock);
                     }
-                    
+
                     foreach (var accelerator in connectedAccelerators)
                     {
-                        if (Arms.Any(arm => arm.Parts.Contains((IMyCubeBlock)accelerator)))
+                        if (Arms.Any(arm => arm.Parts.Contains(accelerator)))
                             continue;
 
-                        bool accelsShareArm = false;
+                        var accelsShareArm = false;
                         var newArm2 = new S_FusionArm(accelerator, "Caster_Feeder");
                         if (newArm2.IsValid)
                         {
                             Arms.Add(newArm2);
                             UpdatePower(true);
-                    
+
                             foreach (var accelerator2 in connectedAccelerators)
-                                if (accelerator2 != accelerator && newArm2.Parts.Contains((IMyCubeBlock) accelerator2))
+                                if (accelerator2 != accelerator && newArm2.Parts.Contains(accelerator2))
                                     accelsShareArm = true;
                         }
-                        MyAPIGateway.Utilities.ShowNotification(newArm2.Parts.Contains(newPart) + "C");
+
                         if (accelsShareArm)
                             break;
                     }
+
                     break;
             }
-            
+
             if (newPart is IMyThrust)
             {
                 var logic = newPart.GameLogic.GetAs<FusionThrusterLogic>();
@@ -194,11 +202,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
             // Update PowerStored
             PowerStored += PowerGeneration;
-            if (PowerStored > MaxPowerStored)
-            {
-                PowerStored = MaxPowerStored;
-                //PowerGeneration = 0;
-            }
+            if (PowerStored > MaxPowerStored) PowerStored = MaxPowerStored;
+            //PowerGeneration = 0;
         }
 
         public void UpdateTick()
@@ -209,12 +214,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         private void RemoveBlockInLoops(MyEntity entity)
         {
             foreach (var loop in Arms.ToList())
-            {
                 if (loop.Parts.Contains((IMyCubeBlock)entity))
-                {
                     Arms.Remove(loop);
-                }
-            }
         }
     }
 }

@@ -8,7 +8,7 @@ namespace RichHudFramework
         {
             public static void AssertNotNull<T>(T obj, string message = "")
             {
-                Assert(obj != null, $"Object of type {typeof(T).ToString()} is null. " + message);
+                Assert(obj != null, $"Object of type {typeof(T)} is null. " + message);
             }
 
             public static void Assert(bool condition, string message = "")

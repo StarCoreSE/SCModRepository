@@ -6,11 +6,10 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>QuadBofor</SubtypeId>
 			</Id>
-			<DisplayName>40 mm/56 Bofors Quad Mount</DisplayName>
+			<DisplayName>[FAS] 40 mm/56 Bofors Quad Mount</DisplayName>
 			<Description>
 				40mm Quad Bofor
 				4km Range, only effective vs smart munitions
-				Interim BP: 175
 			</Description>
 			<Icon>Textures\GUI\Icons\Cubes\QuadBofor.dds</Icon>
 			<CubeSize>Large</CubeSize>

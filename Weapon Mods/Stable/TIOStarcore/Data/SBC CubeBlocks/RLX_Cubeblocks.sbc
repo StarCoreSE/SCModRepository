@@ -7,10 +7,10 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>Thagomizer</SubtypeId>
 		  </Id>
-		  <DisplayName>[CA] Naval RL-10x 'Avalanche' Medium Range Launchers</DisplayName>
+		  <DisplayName>[FLAW] Naval RL-10x 'Avalanche' Medium Range Launchers</DisplayName>
 		  <Description>
 			  10 Barrels of High Explosive Rockets
-			  400m minimum range, 13500m max
+			  400m minimum range, 11500m max
 			  Kinetic Damage
 			  Draws 100MW
 		  </Description>
@@ -69,12 +69,12 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>Thagomizer_Flipped</SubtypeId>
 		  </Id>
-		  <DisplayName>[MID] Naval RL-10x 'Avalanche' Medium Range Launchers</DisplayName>
+		  <DisplayName>[FLAW] Naval RL-10x 'Avalanche' Medium Range Launchers</DisplayName>
 		  <Description>
 			  10 Barrels of High Explosive Rockets
-			  400m minimum range, 13500m max
+			  400m minimum range, 11500m max
 			  Kinetic Damage
-
+			  Draws 100MW
 		  </Description>
 		  <Icon>Textures\GUI\Icons\Cubes\tempiconRLX.png</Icon>
 		  <CubeSize>Large</CubeSize>
@@ -132,12 +132,12 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>Thagomizer_Angled</SubtypeId>
 		  </Id>
-		  <DisplayName>[MID] Naval RL-10x 'Avalanche' Angled Medium Range Launchers</DisplayName>
+		  <DisplayName>[FLAW] Naval RL-10x 'Avalanche' Angled Medium Range Launchers</DisplayName>
 		  <Description>
 			  10 Barrels of High Explosive Rockets
-			  400m minimum range, 13500m max
+			  400m minimum range, 11500m max
 			  Kinetic Damage
-
+			  Draws 100MW
 		  </Description>
 		  <Icon>Textures\GUI\Icons\Cubes\tempiconRLX.png</Icon>
 		  <CubeSize>Large</CubeSize>
@@ -198,12 +198,12 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>Thagomizer_Angled_Flipped</SubtypeId>
 		  </Id>
-		  <DisplayName>[MID] Naval RL-10x 'Avalanche' Angled Medium Range Launchers</DisplayName>
+		  <DisplayName>[FLAW] Naval RL-10x 'Avalanche' Angled Medium Range Launchers</DisplayName>
 		  <Description>
 			  10 Barrels of High Explosive Rockets
-			  400m minimum range, 13500m max
+			  400m minimum range, 11500m max
 			  Kinetic Damage
-
+			  Draws 100MW
 		  </Description>
 		  <Icon>Textures\GUI\Icons\Cubes\tempiconRLX.png</Icon>
 		  <CubeSize>Large</CubeSize>

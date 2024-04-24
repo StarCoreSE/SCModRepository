@@ -36,7 +36,7 @@ namespace Scripts
             AmmoRound = "105mm SAP", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 800f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 1200f, // Direct damage; one steel plate is worth 100.
             Mass = 1f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 5f, // Recoil. This is applied to the Parent Grid.
@@ -241,7 +241,7 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 900, // voxel phasing if you go above 5100
+                DesiredSpeed = 750, // voxel phasing if you go above 5100
                 MaxTrajectory = 4000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 1f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
@@ -393,7 +393,7 @@ namespace Scripts
             AmmoRound = "5InchSapShrap", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 300f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 450f, // Direct damage; one steel plate is worth 100.
             Mass = 1f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 50000f, // Recoil. This is applied to the Parent Grid.
@@ -526,8 +526,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 0.5f,
-                    CustomParticle = "SmallArtExplosionLight",
-                    CustomSound = "ArcWepSmallMissileExpl",
+                    CustomParticle = "",
+                    CustomSound = "",
                 },
             },
             Ewar = new EwarDef
@@ -632,9 +632,9 @@ namespace Scripts
             },
             AmmoGraphics = new GraphicDef
             {
-                ModelName = "\\Models\\5InchShellFired_Small.mwm",
+                ModelName = "",
                 VisualProbability = 1f,
-                ShieldHitDraw = true,
+                ShieldHitDraw = false,
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
@@ -654,7 +654,7 @@ namespace Scripts
                     Hit = new ParticleDef
                     {
                         Name = "",
-                        ApplyToShield = true,
+                        ApplyToShield = false,
 
 
                         Color = Color(red: 1f, green: 1f, blue: 1f, alpha: 1),
@@ -672,7 +672,7 @@ namespace Scripts
                     Eject = new ParticleDef
                     {
                         Name = "",
-                        ApplyToShield = true,
+                        ApplyToShield = false,
                         //ShrinkByDistance = false,
                         Color = Color(red: 1f, green: 1f, blue: 1f, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: 0),
@@ -695,7 +695,7 @@ namespace Scripts
                     WidthVariance = Random(start: 0f, end: 0.1f), // adds random value to default width (negatives shrinks width)
                     Tracer = new TracerBaseDef
                     {
-                        Enable = true,
+                        Enable = false,
                         Length = 5f,
                         Width = 0.1f,
                         Color = Color(red: 40.80f, green: 8.20f, blue: 1.6f, alpha: 0.8f),
@@ -709,7 +709,7 @@ namespace Scripts
                         Back = false,
                         CustomWidth = 0.1f,
                         UseWidthVariance = false,
-                        UseColorFade = true,
+                        UseColorFade = false,
                     },
                     OffsetEffect = new OffsetEffectDef
                     {

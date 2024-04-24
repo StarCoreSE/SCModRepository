@@ -6,7 +6,6 @@
 
 
 
-
     <!-- Shotgun fires Sounds -->
     <Sound>
       <Id>
@@ -27,9 +26,7 @@
       </Waves>
     </Sound>
 
-
-VenatorLaserFiringSFX
-    <!-- shield thing Sounds -->
+   <!-- shield thing Sounds -->
     <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>

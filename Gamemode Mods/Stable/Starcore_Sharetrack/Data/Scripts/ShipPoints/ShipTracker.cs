@@ -51,6 +51,7 @@ namespace klime.PointCheck
         [ProtoMember(10)] public int BlockCount;
         [ProtoMember(11)] public float ShieldStrength;
         [ProtoMember(12)] public float CurrentShieldStrength;
+        [ProtoMember(41)] public float OriginalShieldStrength = -1;
         [ProtoMember(13)] public int PCU;
         //[ProtoMember(14)] public float DPS;
         [ProtoMember(16)] public Dictionary<string, int> GunL = new Dictionary<string, int>();
@@ -200,6 +201,9 @@ namespace klime.PointCheck
                     {
                         ShieldStrength = PointCheck.SH_api.GetMaxHpCap(shield_block);
                         CurrentShieldStrength = PointCheck.SH_api.GetShieldPercent(shield_block);
+                        if (OriginalShieldStrength == -1 && !PointCheck.SH_api.IsFortified(shield_block))
+                            OriginalShieldStrength = PointCheck.SH_api.GetMaxHpCap(shield_block);
+                        CurrentShieldStrength = PointCheck.SH_api.GetShieldPercent(shield_block) * (OriginalShieldStrength == -1 ? 1 : PointCheck.SH_api.GetMaxHpCap(shield_block) / OriginalShieldStrength);
                         ShieldHeat = PointCheck.SH_api.GetShieldHeat(shield_block);
                     }
 
@@ -551,56 +555,56 @@ namespace klime.PointCheck
 
         }
 
-        private static void ClimbingCostRename(ref string t_N, ref float mCs)
+        private static void ClimbingCostRename(ref string costGroupName, ref float costMultiplier)
         {
-            switch (t_N)
+            switch (costGroupName)
             {
                 case "Blink Drive Large":
-                    t_N = "Blink Drive";
-                    mCs = 0.15f;
+                    costGroupName = "Blink Drive";
+                    costMultiplier = 0.15f;
                     break;
                 case "Project Pluto (SLAM)":
                 case "SLAM":
-                    t_N = "SLAM";
-                    mCs = 0.25f;
+                    costGroupName = "SLAM";
+                    costMultiplier = 0.25f;
                     break;
                 case "[BTI] MRM-10 Modular Launcher 45":
                 case "[BTI] MRM-10 Modular Launcher 45 Reversed":
                 case "[BTI] MRM-10 Modular Launcher":
                 case "[BTI] MRM-10 Modular Launcher Middle":
                 case "[BTI] MRM-10 Launcher":
-                    t_N = "MRM-10 Launcher";
-                    mCs = 0.04f;
+                    costGroupName = "MRM-10 Launcher";
+                    costMultiplier = 0.04f;
                     break;
                 case "[BTI] LRM-5 Modular Launcher 45 Reversed":
                 case "[BTI] LRM-5 Modular Launcher 45":
                 case "[BTI] LRM-5 Modular Launcher Middle":
                 case "[BTI] LRM-5 Modular Launcher":
                 case "[BTI] LRM-5 Launcher":
-                    t_N = "LRM-5 Launcher";
-                    mCs = 0.10f;
+                    costGroupName = "LRM-5 Launcher";
+                    costMultiplier = 0.10f;
                     break;
                 case "[MA] Gimbal Laser T2 Armored":
                 case "[MA] Gimbal Laser T2 Armored Slope 45":
                 case "[MA] Gimbal Laser T2 Armored Slope 2":
                 case "[MA] Gimbal Laser T2 Armored Slope":
                 case "[MA] Gimbal Laser T2":
-                    t_N = "Gimbal Laser T2";
-                    mCs = 0f;
+                    costGroupName = "Gimbal Laser T2";
+                    costMultiplier = 0f;
                     break;
                 case "[MA] Gimbal Laser Armored Slope 45":
                 case "[MA] Gimbal Laser Armored Slope 2":
                 case "[MA] Gimbal Laser Armored Slope":
                 case "[MA] Gimbal Laser Armored":
                 case "[MA] Gimbal Laser":
-                    t_N = "Gimbal Laser";
-                    mCs = 0f;
+                    costGroupName = "Gimbal Laser";
+                    costMultiplier = 0f;
                     break;
                 case "[ONYX] BR-RT7 Afflictor Slanted Burst Cannon":
                 case "[ONYX] BR-RT7 Afflictor 70mm Burst Cannon":
                 case "[ONYX] Afflictor":
-                    t_N = "Afflictor";
-                    mCs = 0f;
+                    costGroupName = "Afflictor";
+                    costMultiplier = 0f;
                     break;
                 case "[MA] Slinger AC 150mm Sloped 30":
                 case "[MA] Slinger AC 150mm Sloped 45":
@@ -608,53 +612,59 @@ namespace klime.PointCheck
                 case "[MA] Slinger AC 150mm Sloped 45 Gantry":
                 case "[MA] Slinger AC 150mm":
                 case "[MA] Slinger":
-                    t_N = "Slinger";
-                    mCs = 0f;
+                    costGroupName = "Slinger";
+                    costMultiplier = 0f;
                     break;
                 case "[ONYX] Heliod Plasma Pulser":
-                    t_N = "Heliod Plasma Pulser";
-                    mCs = 0.15f;
+                    costGroupName = "Heliod Plasma Pulser";
+                    costMultiplier = 0.50f;
                     break;
                 case "[MA] UNN Heavy Torpedo Launcher":
-                    t_N = "UNN Heavy Torpedo Launcher";
-                    mCs = 0.15f;
+                    costGroupName = "UNN Heavy Torpedo Launcher";
+                    costMultiplier = 0.15f;
                     break;
                 case "[BTI] SRM-8":
-                    t_N = "SRM-8";
-                    mCs = 0.15f;
+                    costGroupName = "SRM-8";
+                    costMultiplier = 0.15f;
                     break;
                 case "[BTI] Starcore Arrow-IV Launcher":
-                    t_N = "Starcore Arrow-IV Launcher";
-                    mCs = 0.15f;
+                    costGroupName = "Starcore Arrow-IV Launcher";
+                    costMultiplier = 0.15f;
                     break;
                 case "[HAS] Tartarus VIII":
-                    t_N = "Tartarus VIII";
-                    mCs = 0.15f;
+                    costGroupName = "Tartarus VIII";
+                    costMultiplier = 0.15f;
                     break;
                 case "[HAS] Cocytus IX":
-                    t_N = "Cocytus IX";
-                    mCs = 0.15f;
+                    costGroupName = "Cocytus IX";
+                    costMultiplier = 0.15f;
                     break;
                 case "[MA] MCRN Torpedo Launcher":
-                    t_N = "MCRN Torpedo Launcher";
-                    mCs = 0.15f;
+                    costGroupName = "MCRN Torpedo Launcher";
+                    costMultiplier = 0.15f;
                     break;
                 case "Flares":
-                    t_N = "Flares";
-                    mCs = 0.25f;
+                    costGroupName = "Flares";
+                    costMultiplier = 0.25f;
                     break;
                 case "[EXO] Chiasm [Arc Emitter]":
-                    t_N = "Chiasm [Arc Emitter]";
-                    mCs = 0.15f;
+                    costGroupName = "Chiasm [Arc Emitter]";
+                    costMultiplier = 0.15f;
                     break;
                 case "[BTI] Medium Laser":
                 case "[BTI] Large Laser":
-                    t_N = " Laser";
-                    mCs = 0.15f;
+                    costGroupName = " Laser";
+                    costMultiplier = 0.15f;
                     break;
                 case "Reinforced Blastplate":
-                    t_N = "Reinforced Blastplate";
-                    mCs = 1.00f;
+                case "Active Blastplate":
+                case "Standard Blastplate A":
+                case "Standard Blastplate B":
+                case "Standard Blastplate C":
+                case "Elongated Blastplate":
+                case "7x7 Basedplate":
+                    costGroupName = "Blastplate";
+                    costMultiplier = 1.00f;
                     break;
                 case "[EXO] Taiidan":
                 case "[EXO] Taiidan Fighter Launch Rail":
@@ -663,12 +673,51 @@ namespace klime.PointCheck
                 case "[EXO] Taiidan Bomber Hangar Bay":
                 case "[EXO] Taiidan Bomber Hangar Bay Medium":
                 case "[EXO] Taiidan Fighter Small Bay":
-                    t_N = "Taiidan";
-                    mCs = 0.25f;
+                    costGroupName = "Taiidan";
+                    costMultiplier = 0.25f;
                     break;
-                case "[EXO] 40K Gothic Torpedo Launcher":
-                    t_N = "Gothic Torpedo";
-                    mCs = 0.15f;
+                case "[40k] Gothic Torpedo":
+                    costGroupName = "Gothic Torpedo";
+                    costMultiplier = 0.15f;
+                    break;
+                case "[MID] AX 'Spitfire' Light Rocket Turret":
+                    costGroupName = "Spitfire Turret";
+                    costMultiplier = 0.15f;
+                    break;
+                case "[FLAW] Naval RL-10x 'Avalanche' Medium Range Launchers":
+                case "[FLAW] Naval RL-10x 'Avalanche' Angled Medium Range Launchers":
+                    costGroupName = "RL-10x Avalanche";
+                    costMultiplier = 0.15f;
+                    break;
+                case "[MID] LK 'Bonfire' Guided Rocket Turret":
+                    costGroupName = "Bonfire Turret";
+                    costMultiplier = 0.2f;
+                    break;
+                case "[FLAW] Warp Beacon - Longsword":
+                    costGroupName = "Longsword Bomber";
+                    costMultiplier = 0.2f;
+                    break;
+                case "[FLAW] Phoenix Snubfighter Launch Bay":
+                    costGroupName = "Snubfighters";
+                    costMultiplier = 0.1f;
+                    break;
+                case "[FLAW] Hadean Superheavy Plasma Blastguns":
+                    costGroupName = "Plasma Blastgun";
+                    costMultiplier = 0.121f;
+                    break;
+                case "[FLAW] Vindicator Kinetic Battery":
+                    costGroupName = "Kinetic Battery";
+                    costMultiplier = 0.120f;
+                    break;
+                case "[FLAW] Goalkeeper Casemate Flak Battery":
+                    costGroupName = "Goalkeeper Flakwall";
+                    costMultiplier = 0.119f;
+                    break;
+                case "Shield Controller":
+                case "Shield Controller Table":
+                case "Structural Integrity Field Generator":
+                    costGroupName = "Shield Controller";
+                    costMultiplier = 50f;
                     break;
             }
         }

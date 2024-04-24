@@ -748,7 +748,7 @@
               <ValueBool>true</ValueBool>
             </Property>
             <Property AnimationType="Const" Name="Motion inheritance" Type="Float">
-              <ValueFloat>0.99</ValueFloat>
+              <ValueFloat>1</ValueFloat>
             </Property>
             <Property AnimationType="Const" Name="Life var" Type="Float">
               <ValueFloat>0</ValueFloat>
@@ -1176,7 +1176,7 @@
               <ValueBool>true</ValueBool>
             </Property>
             <Property AnimationType="Const" Name="Motion inheritance" Type="Float">
-              <ValueFloat>0</ValueFloat>
+              <ValueFloat>1</ValueFloat>
             </Property>
             <Property AnimationType="Const" Name="Life var" Type="Float">
               <ValueFloat>0</ValueFloat>

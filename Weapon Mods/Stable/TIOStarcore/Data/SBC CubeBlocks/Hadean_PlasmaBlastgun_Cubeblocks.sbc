@@ -8,7 +8,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>HadeanPlasmaBlastgun</SubtypeId>
 			</Id>
-			<DisplayName>[CA] Hadean Superheavy Plasma Blastguns</DisplayName>
+			<DisplayName>[FLAW] Hadean Superheavy Plasma Blastguns</DisplayName>
             <Description>
 			8km range, 1250 m/s velocity
 			Plasma Vaporizes Hull armor with extreme Thermal Energy damage

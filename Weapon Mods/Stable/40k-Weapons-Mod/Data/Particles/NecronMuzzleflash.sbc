@@ -146,7 +146,7 @@
               <Keys>
                 <Key>
                   <Time>0</Time>
-                  <ValueFloat>1</ValueFloat>
+                  <ValueFloat>10</ValueFloat>
                   <Value2D />
                 </Key>
               </Keys>
@@ -155,7 +155,7 @@
               <Keys>
                 <Key>
                   <Time>0</Time>
-                  <ValueFloat>0</ValueFloat>
+                  <ValueFloat>100</ValueFloat>
                   <Value2D />
                 </Key>
               </Keys>
@@ -251,7 +251,7 @@
               </Keys>
             </Property>
             <Property AnimationType="Const" Name="Life" Type="Float">
-              <ValueFloat>0.1</ValueFloat>
+              <ValueFloat>0.2</ValueFloat>
             </Property>
             <Property AnimationType="Const" Name="Soft particle distance scale" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -263,7 +263,7 @@
               <ValueFloat>1</ValueFloat>
             </Property>
             <Property AnimationType="Const" Name="Enabled" Type="Bool">
-              <ValueBool>true</ValueBool>
+              <ValueBool>false</ValueBool>
             </Property>
             <Property AnimationType="Animated" Name="Particles per second" Type="Float">
               <Keys />
@@ -691,10 +691,16 @@
               <ValueFloat>0.01</ValueFloat>
             </Property>
             <Property AnimationType="Const" Name="Enabled" Type="Bool">
-              <ValueBool>true</ValueBool>
+              <ValueBool>false</ValueBool>
             </Property>
             <Property AnimationType="Animated" Name="Particles per second" Type="Float">
-              <Keys />
+              <Keys>
+                <Key>
+                  <Time>0</Time>
+                  <ValueFloat>0</ValueFloat>
+                  <Value2D />
+                </Key>
+              </Keys>
             </Property>
             <Property AnimationType="Const" Name="Material" Type="MyTransparentMaterial">
               <ValueString>Atlas_D_01</ValueString>
@@ -1119,7 +1125,7 @@
               <ValueFloat>0.002</ValueFloat>
             </Property>
             <Property AnimationType="Const" Name="Enabled" Type="Bool">
-              <ValueBool>true</ValueBool>
+              <ValueBool>false</ValueBool>
             </Property>
             <Property AnimationType="Animated" Name="Particles per second" Type="Float">
               <Keys />
@@ -1975,7 +1981,7 @@
               <ValueFloat>0.002</ValueFloat>
             </Property>
             <Property AnimationType="Const" Name="Enabled" Type="Bool">
-              <ValueBool>true</ValueBool>
+              <ValueBool>false</ValueBool>
             </Property>
             <Property AnimationType="Animated" Name="Particles per second" Type="Float">
               <Keys />

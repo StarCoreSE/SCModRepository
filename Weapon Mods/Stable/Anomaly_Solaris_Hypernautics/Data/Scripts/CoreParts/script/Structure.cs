@@ -820,14 +820,13 @@ namespace Scripts
                             Chaos,
                             Wave,
                         }
-
                         public enum FactionColor
                         {
                             DontUse,
                             Foreground,
                             Background,
                         }
-
+                      
                         [ProtoMember(1)] internal TracerBaseDef Tracer;
                         [ProtoMember(2)] internal string TracerMaterial;
                         [ProtoMember(3)] internal Randomize ColorVariance;
@@ -835,8 +834,6 @@ namespace Scripts
                         [ProtoMember(5)] internal TrailDef Trail;
                         [ProtoMember(6)] internal OffsetEffectDef OffsetEffect;
                         [ProtoMember(7)] internal bool DropParentVelocity;
-
-
                         [ProtoContract]
                         public struct OffsetEffectDef
                         {
@@ -859,6 +856,7 @@ namespace Scripts
                             [ProtoMember(9)] internal Texture TextureMode;
                             [ProtoMember(10)] internal bool AlwaysDraw;
                             [ProtoMember(11)] internal FactionColor FactionColor;
+
 
                             [ProtoContract]
                             public struct SegmentDef
@@ -942,6 +940,7 @@ namespace Scripts
                     [ProtoMember(13)] internal Vector3D AdvOffset;
                     [ProtoMember(14)] internal bool ArmWhenHit;
                         
+
                     [ProtoContract]
                     public struct TimedSpawnDef
                     {
@@ -1288,6 +1287,7 @@ namespace Scripts
                     [ProtoMember(16)] internal double TotalAcceleration;
                     [ProtoMember(17)] internal OnHitDef OnHit;
 
+
                     [ProtoContract]
                     public struct SmartsDef
                     {
@@ -1322,6 +1322,7 @@ namespace Scripts
                     public struct ApproachDef
                     {
                         public enum ReInitCondition
+
                         {
                             Wait,
                             MoveToPrevious,
@@ -1334,6 +1335,7 @@ namespace Scripts
                             Ignore,
                             Spawn,
                             DistanceFromPositionC,
+
                             Lifetime,
                             DesiredElevation,
                             MinTravelRequired,
@@ -1354,10 +1356,12 @@ namespace Scripts
                             DistanceToTarget,
                             DistanceFromEndTrajectory,
                             DistanceToEndTrajectory,
+
                         }
 
                         public enum UpRelativeTo
                         {
+
                             UpRelativeToBlock,
                             UpRelativeToGravity,
                             UpTargetDirection,
@@ -1391,6 +1395,7 @@ namespace Scripts
                         }
 
                         public enum RelativeTo
+
                         {
                             Origin,
                             Shooter,
@@ -1405,6 +1410,7 @@ namespace Scripts
                             StoredEndPosition,
                             StoredStartLocalPosition,
                             StoredEndLocalPosition,
+
                         }
 
                         public enum ConditionOperators
@@ -1518,7 +1524,6 @@ namespace Scripts
                         [ProtoMember(4)] internal bool Cloak;
                         [ProtoMember(5)] internal bool Persist;
                     }
-
                     [ProtoContract]
                     public struct OnHitDef
                     {

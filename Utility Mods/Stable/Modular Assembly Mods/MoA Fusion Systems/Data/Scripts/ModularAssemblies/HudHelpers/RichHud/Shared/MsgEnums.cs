@@ -1,13 +1,13 @@
 ﻿namespace RichHudFramework
 {
-    public enum MsgTypes : int
+    public enum MsgTypes
     {
         RegistrationRequest = 1,
         RegistrationSuccessful = 2,
-        RegistrationFailed = 3,
+        RegistrationFailed = 3
     }
 
-    public enum ApiModuleTypes : int
+    public enum ApiModuleTypes
     {
         BindManager = 1,
         HudMain = 2,
@@ -16,13 +16,13 @@
         BillBoardUtils = 5
     }
 
-    public enum ClientDataAccessors : int
-    {   
+    public enum ClientDataAccessors
+    {
         GetVersionID = 1,
         GetSubtype = 2
     }
 
-    public enum ClientSubtypes : int
+    public enum ClientSubtypes
     {
         Full = 1,
         NoLib = 2,

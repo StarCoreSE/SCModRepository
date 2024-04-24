@@ -8,7 +8,7 @@
 			  <TypeId>ConveyorSorter</TypeId>
 			  <SubtypeId>JN_175Fixed</SubtypeId>
 		  </Id>
-		  <DisplayName>[CA] Naval LB-5X</DisplayName>
+		  <DisplayName>[FLAW] Naval LB-5X</DisplayName>
 		  <Description>
 		  Long Ranged, 2 ammo types.
 		  +High Explosive - Energy Damage 2km Blast Zone, please use with caution. 900m/s

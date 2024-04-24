@@ -6,6 +6,9 @@
 
 	  <Entry Class="Ammo" BlueprintSubtypeId="HeavyBolterMagazine" />
 	  <Entry Class="Components" BlueprintSubtypeId="HeavyBolterMagazine" />
+
+    <Entry Class="Ammo" BlueprintSubtypeId="AegisFlakMag" />
+    <Entry Class="Components" BlueprintSubtypeId="AegisFlakMag" />
 	  
     <Entry Class="EliteConsumables" BlueprintSubtypeId="BattleCannonMag" />
     <Entry Class="Ammo" BlueprintSubtypeId="BattleCannonMag" />

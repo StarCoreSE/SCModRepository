@@ -6,11 +6,10 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>BoforTwinRemodel</SubtypeId>
 			</Id>
-			<DisplayName>40 mm/56 Bofors Twin Mount</DisplayName>
+			<DisplayName>[FAS] 40 mm/56 Bofors Twin Mount</DisplayName>
 			<Description>
 				40mm Twin Bofor
 				4km Range, only effective vs smart munitions
-				Interim BP: 95
 			</Description>
 			<Icon>Textures\GUI\Icons\Cubes\BoforTwinMain.dds</Icon>
 			<CubeSize>Large</CubeSize>

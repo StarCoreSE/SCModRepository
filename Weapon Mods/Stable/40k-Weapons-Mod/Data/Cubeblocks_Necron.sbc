@@ -6,10 +6,10 @@
     <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
       <Id>
         <TypeId>ConveyorSorter</TypeId>
-        <SubtypeId>LightParticleWhip</SubtypeId>
+        <SubtypeId>LightLightningArc</SubtypeId>
       </Id>
       <DisplayName>Necron Light Lightning Arc</DisplayName>
-      <Icon>Textures\icons\LightParticleWhipThumb.dds</Icon>
+      <Icon>Textures\icons\LightLightningArcThumb.dds</Icon>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="1" y="1" z="1" />
@@ -24,7 +24,7 @@
         <Component Subtype="LargeTube" Count="1200" />
         <Component Subtype="MetalGrid" Count="50" />
         <Component Subtype="Construction" Count="500" />
-        <Component Subtype="SteelPlate" Count="400" />
+        <Component Subtype="SteelPlate" Count="500" />
       </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
       <BuildProgressModels>
@@ -47,10 +47,10 @@
     <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
       <Id>
         <TypeId>ConveyorSorter</TypeId>
-        <SubtypeId>ParticleWhip</SubtypeId>
+        <SubtypeId>LightningArc</SubtypeId>
       </Id>
       <DisplayName>Necron Lightining Arc</DisplayName>
-      <Icon>Textures\icons\ParticleWhipThumb.dds</Icon>
+      <Icon>Textures\icons\LightningArcThumb.dds</Icon>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="3" y="2" z="3" />
@@ -65,7 +65,7 @@
         <Component Subtype="LargeTube" Count="1200" />
         <Component Subtype="MetalGrid" Count="250" />
         <Component Subtype="Construction" Count="1000" />
-        <Component Subtype="SteelPlate" Count="500" />
+        <Component Subtype="SteelPlate" Count="1500" />
       </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
       <BuildProgressModels>
@@ -177,6 +177,98 @@
       <Upgrades></Upgrades>
     </Definition>
 
+
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>DoomsdayCannonLarge</SubtypeId>
+      </Id>
+      <DisplayName>Necron Doomsday Cannon</DisplayName>
+      <Icon>Textures\icons\NecronDoomsdayCannon.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="7" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\LG_NecronDoomsdayCannon.mwm</Model>
+      <Components>
+        <Component Subtype="Construction" Count="200" />
+        <Component Subtype="GravityGenerator" Count="50" />
+        <Component Subtype="Computer" Count="120" />
+        <Component Subtype="SmallTube" Count="1060" />
+        <Component Subtype="Motor" Count="180" />
+        <Component Subtype="LargeTube" Count="1200" />
+        <Component Subtype="MetalGrid" Count="50" />
+        <Component Subtype="Construction" Count="500" />
+        <Component Subtype="SteelPlate" Count="300" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>Doomsday</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="Necron" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.0" StartY="6.0" EndX="1.0" EndY="7.0" PropertiesMask="2" />
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0" />
+        <MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0" />
+        <MountPoint Side="Left" StartX="6.0" StartY="0.0" EndX="7.0" EndY="1.0" />
+        <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringZ>Y</MirroringZ>
+      <MirroringY>Z</MirroringY>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>DoomsdayCannonSmall</SubtypeId>
+      </Id>
+      <DisplayName>Gauss Flux Arc</DisplayName>
+      <Icon>Textures\icons\NecronDoomsday.dds</Icon>
+      <CubeSize>Small</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="35" y="5" z="5" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\SG_NecronDoomsdayCannon.mwm</Model>
+      <Components>
+        <Component Subtype="Construction" Count="200" />
+        <Component Subtype="GravityGenerator" Count="50" />
+        <Component Subtype="Computer" Count="120" />
+        <Component Subtype="SmallTube" Count="1060" />
+        <Component Subtype="Motor" Count="180" />
+        <Component Subtype="LargeTube" Count="1200" />
+        <Component Subtype="MetalGrid" Count="50" />
+        <Component Subtype="Construction" Count="500" />
+        <Component Subtype="SteelPlate" Count="400" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>FluxArc</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="Necron" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="5.0" EndY="5.0" PropertiesMask="2" />
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="5.0" EndY="5.0" />
+        <MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="3.0" EndY="5.0" />
+        <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="5.0" EndY="5.0" />
+        <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="5.0" EndY="5.0" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringY>X</MirroringY>
+      <MirroringX>Y</MirroringX>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
     
     
     

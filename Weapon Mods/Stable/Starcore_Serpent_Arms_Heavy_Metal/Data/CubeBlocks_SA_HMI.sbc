@@ -464,8 +464,8 @@ Ammunition: [Kinetic] </Description>
     <Description>
 		[Skin 2]
 		Long Ranged Fixed: [7km]
-		Idle Power: [100 MW]
-		Firing Power: [~450 MW]
+		Idle Power: [0 MW]
+		Firing Power: [~300 MW]
 		Ammunition: [Kinetic]
 	</Description>
     <Icon>Textures\GUI\Icons\Cubes\MonopoleReskin.dds</Icon>
@@ -759,7 +759,7 @@ Ammunition: [5000m/s,] [Energy] </Description>
 <Description>Long Range Turret: [7km] 
 Idle Power: [50 MW]
 Reload Power: [~300 MW]
-Reload Speed: [9 seconds] 
+Reload Speed: [8 seconds] 
 Ammunition: [Kinetic] </Description>
       <Icon>Textures\GUI\Icons\Silvius.dds</Icon>
       <CubeSize>Large</CubeSize>
