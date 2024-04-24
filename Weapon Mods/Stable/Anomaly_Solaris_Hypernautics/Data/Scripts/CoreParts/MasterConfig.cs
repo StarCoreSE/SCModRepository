@@ -6,10 +6,6 @@ namespace Scripts
         internal Parts()
         {
             PartDefinitions(
-            AMP_FieldGenerator,
-           AMP_FlakShotgun,
-           AMP_ImpulseTorch,
-           AMP_ImpusleTorchSmall,
            SolHyp_ArcStrike_HTorpedo,
            Flechette_Cannon,
            Goncol_MagnaPulse,
