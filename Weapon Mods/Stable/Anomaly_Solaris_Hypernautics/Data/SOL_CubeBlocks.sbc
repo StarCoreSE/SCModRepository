@@ -142,7 +142,8 @@
     [14km range]
     [Energy damage]
     [no physical damage]
-	  [2min reload]
+	[2min reload]
+
 	 </Description>
      <Icon>Textures\GUI\Icons\OPA-Logo.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -193,12 +194,13 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>Counter_Battery</SubtypeId>
      </Id>
-     <DisplayName>SM-3 Counter Battery</DisplayName>
+     <DisplayName>[SOL] SM-3 Counter Battery</DisplayName>
      <Description>Anti-Missile Torpedo
-	10km range with 1.5km minimum
-	8 mini torps target missiles
-	Will heal shields if it impacts
-	40 second reload
+	[10km range with 1.5km minimum]
+	[8 mini torps target missiles]
+	[Will heal shields if it impacts]
+	[40 second reload]
+
      </Description>
      <Icon>Textures\GUI\missile_defense.png</Icon>
      <CubeSize>Large</CubeSize>
