@@ -6,16 +6,19 @@ namespace Scripts
         internal Parts()
         {
             PartDefinitions(
-		Goncol_MagnaPulse,
-		Gimballed_Impulse_Torch,
-		Flechette_Cannon,
-        Nariman_Smart_Turret,
-        S_Chem_Laser,
-        S_Armored_Laser,
-		SM3_Counter_Battery,
-		SolHyp_ArcStrike_HTorpedo,
-        SolHyp_MAC
-	    );
+            AMP_FieldGenerator,
+           AMP_FlakShotgun,
+           AMP_ImpulseTorch,
+           AMP_ImpusleTorchSmall,
+           SolHyp_ArcStrike_HTorpedo,
+           Flechette_Cannon,
+           Goncol_MagnaPulse,
+           SolHyp_MAC,
+           Nariman_Smart_Turret,
+           SM3_Counter_Battery,
+           S_Armored_Laser,
+           S_Chem_Laser
+        );
         }
     }
 }
