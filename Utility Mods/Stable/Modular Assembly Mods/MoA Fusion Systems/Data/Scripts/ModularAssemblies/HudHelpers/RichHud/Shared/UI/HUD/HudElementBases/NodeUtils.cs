@@ -1,33 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using VRage;
-using VRageMath;
-using ApiMemberAccessor = System.Func<object, int, object>;
 
 namespace RichHudFramework
 {
     namespace UI
     {
-        using Server;
-        using Client;
-
         public abstract partial class HudNodeBase
         {
             /// <summary>
-            /// Collection of utilities used internally to manage HUD nodes
+            ///     Collection of utilities used internally to manage HUD nodes
             /// </summary>
             protected static class NodeUtils
             {
                 /// <summary>
-                /// Used internally quickly register a list of child nodes to a parent.
+                ///     Used internally quickly register a list of child nodes to a parent.
                 /// </summary>
-                public static void RegisterNodes(HudParentBase newParent, List<HudNodeBase> children, IReadOnlyList<HudNodeBase> nodes, bool canPreload)
+                public static void RegisterNodes(HudParentBase newParent, List<HudNodeBase> children,
+                    IReadOnlyList<HudNodeBase> nodes, bool canPreload)
                 {
                     children.EnsureCapacity(children.Count + nodes.Count);
 
-                    for (int n = 0; n < nodes.Count; n++)
+                    for (var n = 0; n < nodes.Count; n++)
                     {
-                        HudNodeBase node = nodes[n];
+                        var node = nodes[n];
                         node.Parent = newParent;
                         node.State |= HudElementStates.IsRegistered;
                         node.ParentVisible = newParent.Visible;
@@ -42,15 +37,16 @@ namespace RichHudFramework
                 }
 
                 /// <summary>
-                /// Used internally quickly register a list of child nodes to a parent.
+                ///     Used internally quickly register a list of child nodes to a parent.
                 /// </summary>
-                public static void RegisterNodes<TCon, TNode>(HudParentBase newParent, List<HudNodeBase> children, IReadOnlyList<TCon> nodes, bool canPreload)
+                public static void RegisterNodes<TCon, TNode>(HudParentBase newParent, List<HudNodeBase> children,
+                    IReadOnlyList<TCon> nodes, bool canPreload)
                     where TCon : IHudElementContainer<TNode>, new()
                     where TNode : HudNodeBase
                 {
                     children.EnsureCapacity(children.Count + nodes.Count);
 
-                    for (int n = 0; n < nodes.Count; n++)
+                    for (var n = 0; n < nodes.Count; n++)
                     {
                         HudNodeBase node = nodes[n].Element;
                         node.Parent = newParent;
@@ -67,14 +63,15 @@ namespace RichHudFramework
                 }
 
                 /// <summary>
-                /// Used internally to quickly unregister child nodes from their parent. Removes the range of nodes
-                /// specified in the node list from the child list.
+                ///     Used internally to quickly unregister child nodes from their parent. Removes the range of nodes
+                ///     specified in the node list from the child list.
                 /// </summary>
-                public static void UnregisterNodes(HudParentBase parent, List<HudNodeBase> children, IReadOnlyList<HudNodeBase> nodes, int index, int count)
+                public static void UnregisterNodes(HudParentBase parent, List<HudNodeBase> children,
+                    IReadOnlyList<HudNodeBase> nodes, int index, int count)
                 {
                     if (count > 0)
                     {
-                        int conEnd = index + count - 1;
+                        var conEnd = index + count - 1;
 
                         if (!(index >= 0 && index < nodes.Count && conEnd <= nodes.Count))
                             throw new Exception("Specified indices are out of range.");
@@ -82,9 +79,9 @@ namespace RichHudFramework
                         if (parent == null)
                             throw new Exception("Parent cannot be null");
 
-                        for (int i = index; i <= conEnd; i++)
+                        for (var i = index; i <= conEnd; i++)
                         {
-                            int start = 0;
+                            var start = 0;
 
                             while (start < children.Count && children[start] != nodes[i])
                                 start++;
@@ -104,10 +101,10 @@ namespace RichHudFramework
                             }
                         }
 
-                        for (int n = index; n < count; n++)
+                        for (var n = index; n < count; n++)
                         {
-                            HudNodeBase node = nodes[n];
-                            HudParentBase nodeParent = node._parent;
+                            var node = nodes[n];
+                            var nodeParent = node._parent;
 
                             if (nodeParent != parent)
                                 throw new Exception("The child node specified is not registered to the parent given.");
@@ -120,16 +117,17 @@ namespace RichHudFramework
                 }
 
                 /// <summary>
-                /// Used internally to quickly unregister child nodes from their parent. Removes the range of nodes
-                /// specified in the node list from the child list.
+                ///     Used internally to quickly unregister child nodes from their parent. Removes the range of nodes
+                ///     specified in the node list from the child list.
                 /// </summary>
-                public static void UnregisterNodes<TCon, TNode>(HudParentBase parent, List<HudNodeBase> children, IReadOnlyList<TCon> nodes, int index, int count)
+                public static void UnregisterNodes<TCon, TNode>(HudParentBase parent, List<HudNodeBase> children,
+                    IReadOnlyList<TCon> nodes, int index, int count)
                     where TCon : IHudElementContainer<TNode>, new()
                     where TNode : HudNodeBase
                 {
                     if (count > 0)
                     {
-                        int conEnd = index + count - 1;
+                        var conEnd = index + count - 1;
 
                         if (!(index >= 0 && index < nodes.Count && conEnd <= nodes.Count))
                             throw new Exception("Specified indices are out of range.");
@@ -137,9 +135,9 @@ namespace RichHudFramework
                         if (parent == null)
                             throw new Exception("Parent cannot be null");
 
-                        for (int i = index; i <= conEnd; i++)
+                        for (var i = index; i <= conEnd; i++)
                         {
-                            int start = 0;
+                            var start = 0;
 
                             while (start < children.Count && children[start] != nodes[i].Element)
                                 start++;
@@ -159,10 +157,10 @@ namespace RichHudFramework
                             }
                         }
 
-                        for (int n = index; n < count; n++)
+                        for (var n = index; n < count; n++)
                         {
                             HudNodeBase node = nodes[n].Element;
-                            HudParentBase nodeParent = node._parent;
+                            var nodeParent = node._parent;
 
                             if (nodeParent != parent)
                                 throw new Exception("The child node specified is not registered to the parent given.");
@@ -174,50 +172,46 @@ namespace RichHudFramework
                 }
 
                 /// <summary>
-                /// Used internally to modify the state of hud nodes
+                ///     Used internally to modify the state of hud nodes
                 /// </summary>
-                public static void SetNodesState(HudElementStates state, bool mask, IReadOnlyList<HudNodeBase> nodes, int index, int count)
+                public static void SetNodesState(HudElementStates state, bool mask, IReadOnlyList<HudNodeBase> nodes,
+                    int index, int count)
                 {
                     if (count > 0)
                     {
-                        int end = index + count - 1;
-                        Utils.Debug.Assert(index >= 0 && end < nodes.Count, $"Range out of bounds. Index: {index}, End: {end}");
+                        var end = index + count - 1;
+                        Utils.Debug.Assert(index >= 0 && end < nodes.Count,
+                            $"Range out of bounds. Index: {index}, End: {end}");
 
                         if (mask)
-                        {
-                            for (int i = index; i <= end; i++)
+                            for (var i = index; i <= end; i++)
                                 nodes[i].State &= ~state;
-                        }
                         else
-                        {
-                            for (int i = index; i <= end; i++)
+                            for (var i = index; i <= end; i++)
                                 nodes[i].State |= state;
-                        }
                     }
                 }
 
                 /// <summary>
-                /// Used internally to modify the state of hud nodes
+                ///     Used internally to modify the state of hud nodes
                 /// </summary>
-                public static void SetNodesState<TCon, TNode>(HudElementStates state, bool mask, IReadOnlyList<TCon> nodes, int index, int count)
+                public static void SetNodesState<TCon, TNode>(HudElementStates state, bool mask,
+                    IReadOnlyList<TCon> nodes, int index, int count)
                     where TCon : IHudElementContainer<TNode>, new()
                     where TNode : HudNodeBase
                 {
                     if (count > 0)
                     {
-                        int end = index + count - 1;
-                        Utils.Debug.Assert(index >= 0 && end < nodes.Count, $"Range out of bounds. Index: {index}, End: {end}");
+                        var end = index + count - 1;
+                        Utils.Debug.Assert(index >= 0 && end < nodes.Count,
+                            $"Range out of bounds. Index: {index}, End: {end}");
 
                         if (mask)
-                        {
-                            for (int i = index; i <= end; i++)
+                            for (var i = index; i <= end; i++)
                                 nodes[i].Element.State &= ~state;
-                        }
                         else
-                        {
-                            for (int i = index; i <= end; i++)
+                            for (var i = index; i <= end; i++)
                                 nodes[i].Element.State |= state;
-                        }
                     }
                 }
             }

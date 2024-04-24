@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
-using Sandbox.ModAPI;
-using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRageMath;
 
@@ -19,7 +17,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         private const float BlockPowerGeneration = 0.01f;
         private const float BlockPowerStorage = 16f;
 
-        private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
+        private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
 
         public readonly bool IsValid;
 
@@ -28,7 +26,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
         public IMyCubeBlock[] Parts;
 
-        public S_FusionArm(MyEntity newPart, string rootSubtype)
+        public S_FusionArm(IMyCubeBlock newPart, string rootSubtype)
         {
             var ignore = new HashSet<IMyCubeBlock>();
             IsValid = PerformScan(newPart, ref ignore, rootSubtype);
@@ -73,26 +71,27 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         /// <param name="stopAtSubtype">Exits the loop at this subtype.</param>
         /// <param name="stopHits">Internal variable.</param>
         /// <returns></returns>
-        private static bool PerformScan(MyEntity blockEntity, ref HashSet<IMyCubeBlock> parts, string stopAtSubtype)
+        private static bool PerformScan(IMyCubeBlock blockEntity, ref HashSet<IMyCubeBlock> parts, string stopAtSubtype)
         {
-            if (ModularAPI.IsDebug())
-                DebugDraw.DebugDraw.AddGridPoint(((IMyCubeBlock)blockEntity).Position,
-                    ((IMyCubeBlock)blockEntity).CubeGrid, Color.Blue, 2);
+            if (ModularApi.IsDebug())
+                DebugDraw.DebugDraw.AddGridPoint(blockEntity.Position,
+                    blockEntity.CubeGrid, Color.Blue, 2);
 
-            var connectedBlocks = ModularAPI.GetConnectedBlocks(blockEntity, false);
+            var connectedBlocks = ModularApi.GetConnectedBlocks(blockEntity, "Modular_Fusion", false);
 
             if (connectedBlocks.Length < 2)
                 return false;
 
             foreach (var connectedBlock in connectedBlocks)
             {
-                var connectedSubtype = ((IMyCubeBlock)connectedBlock).BlockDefinition.SubtypeName;
-                bool valid = parts.Add((IMyCubeBlock)connectedBlock);
+                var connectedSubtype = connectedBlock.BlockDefinition.SubtypeName;
+                var valid = parts.Add(connectedBlock);
 
-                if (connectedSubtype != stopAtSubtype && valid && !PerformScan(connectedBlock, ref parts, stopAtSubtype))
+                if (connectedSubtype != stopAtSubtype && valid &&
+                    !PerformScan(connectedBlock, ref parts, stopAtSubtype))
                     return false;
             }
-            
+
             return true;
         }
     }

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Text;
-using VRage;
+﻿using VRage;
 using ApiMemberAccessor = System.Func<object, int, object>;
-using GlyphFormatMembers = VRage.MyTuple<byte, float, VRageMath.Vector2I, VRageMath.Color>;
 
 namespace RichHudFramework
 {
@@ -13,26 +10,23 @@ namespace RichHudFramework
 
     namespace UI
     {
-        using Client;
-        using Server;
-
-        public enum TerminalPageAccessors : int
+        public enum TerminalPageAccessors
         {
             /// <summary>
-            /// string
+            ///     string
             /// </summary>
             Name = 1,
 
             /// <summary>
-            /// bool
+            ///     bool
             /// </summary>
-            Enabled = 2,
+            Enabled = 2
         }
 
         public interface ITerminalPage : IModRootMember
         {
             /// <summary>
-            /// Retrieves information used by the Framework API
+            ///     Retrieves information used by the Framework API
             /// </summary>
             ControlMembers GetApiData();
         }

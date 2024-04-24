@@ -1,24 +1,17 @@
-﻿using System;
-using System.Text;
-using VRage;
-using System.Collections.Generic;
-using GlyphFormatMembers = VRage.MyTuple<byte, float, VRageMath.Vector2I, VRageMath.Color>;
-using ApiMemberAccessor = System.Func<object, int, object>;
-
-namespace RichHudFramework.UI
+﻿namespace RichHudFramework.UI
 {
     public class SelectionBoxEntry<TElement> : HudElementContainer<TElement>, ISelectionBoxEntry<TElement>
         where TElement : HudElementBase
     {
-        public virtual bool Enabled { get; set; }
-
-        public virtual bool AllowHighlighting { get; set; }
-
         public SelectionBoxEntry()
         {
             Enabled = true;
             AllowHighlighting = true;
         }
+
+        public virtual bool Enabled { get; set; }
+
+        public virtual bool AllowHighlighting { get; set; }
 
         public virtual void Reset()
         {
@@ -40,5 +33,4 @@ namespace RichHudFramework.UI
             AssocMember = default(TValue);
         }
     }
-
 }

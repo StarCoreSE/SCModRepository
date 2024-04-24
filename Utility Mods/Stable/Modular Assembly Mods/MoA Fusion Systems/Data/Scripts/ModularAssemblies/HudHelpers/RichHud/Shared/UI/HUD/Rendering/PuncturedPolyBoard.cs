@@ -4,16 +4,20 @@ using VRageMath;
 
 namespace RichHudFramework.UI.Rendering
 {
-    using Client;
-    using Server;
-
     /// <summary>
-    /// Renders a 2D polygon using billboards with the center punched out.
+    ///     Renders a 2D polygon using billboards with the center punched out.
     /// </summary>
     public class PuncturedPolyBoard : PolyBoard
     {
+        private float _innerRadius;
+
+        public PuncturedPolyBoard()
+        {
+            _innerRadius = 0.6f;
+        }
+
         /// <summary>
-        /// Scaled inner radius as fractional offset from exterior edge.
+        ///     Scaled inner radius as fractional offset from exterior edge.
         /// </summary>
         public float InnerRadius
         {
@@ -27,15 +31,8 @@ namespace RichHudFramework.UI.Rendering
             }
         }
 
-        private float _innerRadius;
-
-        public PuncturedPolyBoard()
-        {
-            _innerRadius = 0.6f;
-        }
-
         /// <summary>
-        /// Draws the given range of faces
+        ///     Draws the given range of faces
         /// </summary>
         public override void Draw(Vector2 size, Vector2 origin, Vector2I faceRange, MatrixD[] matrixRef)
         {
@@ -58,10 +55,8 @@ namespace RichHudFramework.UI.Rendering
                 faceRange.Y -= faceRange.Y % 2;
 
                 // Generate final vertices for drawing from unscaled vertices
-                for (int i = faceRange.X; i <= faceRange.Y + 1; i++)
-                {
+                for (var i = faceRange.X; i <= faceRange.Y + 1; i++)
                     drawVertices[i % drawVertices.Count] = origin + size * vertices[i % drawVertices.Count];
-                }
 
                 faceRange *= 3;
                 BillBoardUtils.AddTriangleRange(faceRange, triangles, drawVertices, ref polyMat, matrixRef);
@@ -69,7 +64,7 @@ namespace RichHudFramework.UI.Rendering
         }
 
         /// <summary>
-        /// Returns the center position of the given slice relative to the center of the billboard
+        ///     Returns the center position of the given slice relative to the center of the billboard
         /// </summary>
         public override Vector2 GetSliceOffset(Vector2 bbSize, Vector2I range)
         {
@@ -82,11 +77,11 @@ namespace RichHudFramework.UI.Rendering
             range.X -= range.X % 2;
             range.Y -= range.Y % 2;
 
-            int max = vertices.Count;
-            Vector2 sum = 
+            var max = vertices.Count;
+            var sum =
                 vertices[range.X] +
                 vertices[range.X + 1] +
-                vertices[(range.Y) % max] +
+                vertices[range.Y % max] +
                 vertices[(range.Y + 1) % max];
 
             return bbSize * sum * .25f;
@@ -94,11 +89,11 @@ namespace RichHudFramework.UI.Rendering
 
         protected override void GenerateTriangles()
         {
-            int max = vertices.Count;
+            var max = vertices.Count;
             triangles.Clear();
             triangles.EnsureCapacity(_sides * 3 * 2);
 
-            for (int i = 0; i < vertices.Count; i += 2)
+            for (var i = 0; i < vertices.Count; i += 2)
             {
                 int outerStart = i,
                     innerStart = (i + 1) % max,
@@ -126,13 +121,13 @@ namespace RichHudFramework.UI.Rendering
             vertices.Clear();
             vertices.EnsureCapacity(_sides * 2);
 
-            for (int i = 0; i < _sides; i++)
+            for (var i = 0; i < _sides; i++)
             {
-                Vector2 outerStart = Vector2.Zero;
+                var outerStart = Vector2.Zero;
                 outerStart.X = (float)Math.Cos(rotPos);
                 outerStart.Y = (float)Math.Sin(rotPos);
 
-                Vector2 innerStart = outerStart * _innerRadius;
+                var innerStart = outerStart * _innerRadius;
 
                 vertices.Add(.5f * outerStart);
                 vertices.Add(.5f * innerStart);

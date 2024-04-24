@@ -1,33 +1,51 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using VRage;
-using VRageMath;
-using System;
 
 namespace RichHudFramework
 {
     /// <summary>
-    /// Read-only collection of cached and indexed RHF API wrappers
+    ///     Read-only collection of cached and indexed RHF API wrappers
     /// </summary>
     public class ReadOnlyApiCollection<TValue> : IReadOnlyList<TValue>, IIndexedCollection<TValue>
     {
+        protected readonly CollectionDataEnumerator<TValue> enumerator;
+        protected readonly Func<int> GetCountFunc;
+
+        protected readonly Func<int, TValue> GetNewWrapperFunc;
+        protected readonly List<TValue> wrapperList;
+
+        public ReadOnlyApiCollection(Func<int, TValue> GetNewWrapper, Func<int> GetCount)
+        {
+            GetNewWrapperFunc = GetNewWrapper;
+            GetCountFunc = GetCount;
+
+            wrapperList = new List<TValue>();
+            enumerator = new CollectionDataEnumerator<TValue>(x => this[x], GetCount);
+        }
+
+        public ReadOnlyApiCollection(MyTuple<Func<int, TValue>, Func<int>> tuple)
+            : this(tuple.Item1, tuple.Item2)
+        {
+        }
+
         /// <summary>
-        /// Returns the element at the given index.
+        ///     Returns the element at the given index.
         /// </summary>
         public virtual TValue this[int index]
         {
-            get 
+            get
             {
-                int count = GetCountFunc();
+                var count = GetCountFunc();
 
                 if (index >= count)
-                    throw new Exception($"Index ({index}) was out of Range. Must be non-negative and less than {count}.");
+                    throw new Exception(
+                        $"Index ({index}) was out of Range. Must be non-negative and less than {count}.");
 
                 while (wrapperList.Count < count)
-                {
-                    for (int n = wrapperList.Count; wrapperList.Count < count; n++)
+                    for (var n = wrapperList.Count; wrapperList.Count < count; n++)
                         wrapperList.Add(GetNewWrapperFunc(n));
-                }
 
                 if (count > 9 && wrapperList.Count > count * 3)
                 {
@@ -40,69 +58,61 @@ namespace RichHudFramework
         }
 
         /// <summary>
-        /// Returns the number of elements in the collection
+        ///     Returns the number of elements in the collection
         /// </summary>
         public virtual int Count => GetCountFunc();
 
-        protected readonly Func<int, TValue> GetNewWrapperFunc;
-        protected readonly Func<int> GetCountFunc;
-        protected readonly List<TValue> wrapperList;
-        protected readonly CollectionDataEnumerator<TValue> enumerator;
-
-        public ReadOnlyApiCollection(Func<int, TValue> GetNewWrapper, Func<int> GetCount)
+        public virtual IEnumerator<TValue> GetEnumerator()
         {
-            this.GetNewWrapperFunc = GetNewWrapper;
-            this.GetCountFunc = GetCount;
-
-            wrapperList = new List<TValue>();
-            enumerator = new CollectionDataEnumerator<TValue>(x => this[x], GetCount);
+            return enumerator;
         }
 
-        public ReadOnlyApiCollection(MyTuple<Func<int, TValue>, Func<int>> tuple)
-            : this(tuple.Item1, tuple.Item2)
-        { }
-
-        public virtual IEnumerator<TValue> GetEnumerator() =>
-            enumerator;
-
-        IEnumerator IEnumerable.GetEnumerator() =>
-            GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 
     /// <summary>
-    /// Read-only collection backed by delegates
+    ///     Read-only collection backed by delegates
     /// </summary>
     public class ReadOnlyCollectionData<TValue> : IReadOnlyList<TValue>, IIndexedCollection<TValue>
     {
-        /// <summary>
-        /// Returns the element at the given index.
-        /// </summary>
-        public virtual TValue this[int index] => Getter(index);
-
-        /// <summary>
-        /// Returns the number of elements in the collection
-        /// </summary>
-        public virtual int Count => GetCountFunc();
+        protected readonly CollectionDataEnumerator<TValue> enumerator;
+        protected readonly Func<int> GetCountFunc;
 
         protected readonly Func<int, TValue> Getter;
-        protected readonly Func<int> GetCountFunc;
-        protected readonly CollectionDataEnumerator<TValue> enumerator;
 
         public ReadOnlyCollectionData(Func<int, TValue> Getter, Func<int> GetCount)
         {
             this.Getter = Getter;
-            this.GetCountFunc = GetCount;
+            GetCountFunc = GetCount;
             enumerator = new CollectionDataEnumerator<TValue>(x => this[x], GetCount);
         }
 
         public ReadOnlyCollectionData(MyTuple<Func<int, TValue>, Func<int>> tuple)
             : this(tuple.Item1, tuple.Item2)
-        { }
+        {
+        }
 
-        public virtual IEnumerator<TValue> GetEnumerator() =>
-            enumerator;
+        /// <summary>
+        ///     Returns the element at the given index.
+        /// </summary>
+        public virtual TValue this[int index] => Getter(index);
 
-        IEnumerator IEnumerable.GetEnumerator() =>
-            GetEnumerator();
+        /// <summary>
+        ///     Returns the number of elements in the collection
+        /// </summary>
+        public virtual int Count => GetCountFunc();
+
+        public virtual IEnumerator<TValue> GetEnumerator()
+        {
+            return enumerator;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }

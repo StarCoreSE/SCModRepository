@@ -19,15 +19,29 @@ namespace RichHudFramework
     namespace UI.Client
     {
         public class TerminalPageCategory : TerminalPageCategoryBase
-        { 
+        {
             public TerminalPageCategory() : base(RichHudTerminal.GetNewPageCategory())
-            { }
+            {
+            }
         }
 
         public abstract class TerminalPageCategoryBase : ITerminalPageCategory
         {
+            protected readonly ControlContainerMembers data;
+
+            public TerminalPageCategoryBase(ControlContainerMembers data)
+            {
+                this.data = data;
+
+                var GetPageDataFunc = data.Item2.Item1 as Func<int, ControlMembers>;
+                Func<int, TerminalPageBase> GetPageFunc = x => new TerminalPage(GetPageDataFunc(x));
+                Pages = new ReadOnlyApiCollection<TerminalPageBase>(GetPageFunc, data.Item2.Item2);
+            }
+
+            protected ApiMemberAccessor GetOrSetMemberFunc => data.Item1;
+
             /// <summary>
-            /// Name of the mod as it appears in the <see cref="RichHudTerminal"/> mod list
+            ///     Name of the mod as it appears in the <see cref="RichHudTerminal" /> mod list
             /// </summary>
             public string Name
             {
@@ -36,42 +50,38 @@ namespace RichHudFramework
             }
 
             /// <summary>
-            /// Read only collection of <see cref="TerminalPageBase"/>s assigned to this object.
+            ///     Read only collection of <see cref="TerminalPageBase" />s assigned to this object.
             /// </summary>
             public IReadOnlyList<TerminalPageBase> Pages { get; }
 
             public ITerminalPageCategory PageContainer => this;
 
             /// <summary>
-            /// Unique identifer
+            ///     Unique identifer
             /// </summary>
             public object ID => data.Item3;
 
             /// <summary>
-            /// Currently selected <see cref="TerminalPageBase"/>.
+            ///     Currently selected <see cref="TerminalPageBase" />.
             /// </summary>
             public TerminalPageBase SelectedPage
             {
                 get
                 {
-                    object id = GetOrSetMemberFunc(null, (int)TerminalPageCategoryAccessors.Selection);
+                    var id = GetOrSetMemberFunc(null, (int)TerminalPageCategoryAccessors.Selection);
 
                     if (id != null)
-                    {
-                        for (int n = 0; n < Pages.Count; n++)
-                        {
+                        for (var n = 0; n < Pages.Count; n++)
                             if (id == Pages[n].ID)
                                 return Pages[n];
-                        }
-                    }
 
                     return null;
                 }
             }
 
             /// <summary>
-            /// Determines whether or not the element will appear in the list.
-            /// Disabled by default.
+            ///     Determines whether or not the element will appear in the list.
+            ///     Disabled by default.
             /// </summary>
             public bool Enabled
             {
@@ -79,49 +89,46 @@ namespace RichHudFramework
                 set { GetOrSetMemberFunc(value, (int)TerminalPageCategoryAccessors.Enabled); }
             }
 
-            protected ApiMemberAccessor GetOrSetMemberFunc => data.Item1;
-            protected readonly ControlContainerMembers data;
-
-            public TerminalPageCategoryBase(ControlContainerMembers data)
+            /// <summary>
+            ///     Adds the given <see cref="TerminalPageBase" /> to the object.
+            /// </summary>
+            public void Add(TerminalPageBase page)
             {
-                this.data = data;
-
-                var GetPageDataFunc = data.Item2.Item1 as Func<int, ControlMembers>;
-                Func<int, TerminalPageBase> GetPageFunc = (x => new TerminalPage(GetPageDataFunc(x)));
-                Pages = new ReadOnlyApiCollection<TerminalPageBase>(GetPageFunc, data.Item2.Item2);
+                GetOrSetMemberFunc(page.ID, (int)TerminalPageCategoryAccessors.AddPage);
             }
 
             /// <summary>
-            /// Adds the given <see cref="TerminalPageBase"/> to the object.
-            /// </summary>
-            public void Add(TerminalPageBase page) =>
-                GetOrSetMemberFunc(page.ID, (int)TerminalPageCategoryAccessors.AddPage);
-
-            /// <summary>
-            /// Adds the given ranges of pages to the control root.
+            ///     Adds the given ranges of pages to the control root.
             /// </summary>
             public void AddRange(IReadOnlyList<TerminalPageBase> pages)
             {
-                foreach (TerminalPageBase page in pages)
+                foreach (var page in pages)
                     GetOrSetMemberFunc(page.ID, (int)TerminalPageCategoryAccessors.AddPage);
             }
 
+            public IEnumerator<TerminalPageBase> GetEnumerator()
+            {
+                return Pages.GetEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return Pages.GetEnumerator();
+            }
+
             /// <summary>
-            /// Retrieves data used by the Framework API
+            ///     Retrieves data used by the Framework API
             /// </summary>
-            public ControlContainerMembers GetApiData() =>
-                data;
-
-            public IEnumerator<TerminalPageBase> GetEnumerator() =>
-                Pages.GetEnumerator();
-
-            IEnumerator IEnumerable.GetEnumerator() =>
-                Pages.GetEnumerator();
+            public ControlContainerMembers GetApiData()
+            {
+                return data;
+            }
 
             protected class TerminalPage : TerminalPageBase
             {
                 public TerminalPage(ControlMembers data) : base(data)
-                { }
+                {
+                }
             }
         }
     }

@@ -11,8 +11,8 @@ What makes this mod unique (other than the modular stuff) is that you're suppose
 
 I tried my best to document stuff, most of it will be in DefinitionAPI.cs
   - You can also hover over variables in most IDEs for a description.
-You have access to ModularAPI, DebugDrawManager, and WcAPI; ModularAPI handles stuff like GetMemberParts for modular assemblies, whereas WcAPI is your bog-standard Assemblycore ModAPI. DebugDrawManager is useful for debugging, and can be accessed statically.
-If you need logic to run in a MySessionComponent, you can init the ModularAPI via LoadData() and UnloadData().
+You have access to ModularApi, DebugDrawManager, and WcAPI; ModularApi handles stuff like GetMemberParts for modular assemblies, whereas WcAPI is your bog-standard Assemblycore ModAPI. DebugDrawManager is useful for debugging, and can be accessed statically.
+If you need logic to run in a MySessionComponent, you can init the ModularApi via LoadData() and UnloadData().
 
 Modular Definitions can be found in Data\Scripts\ILOVEKEEN\ModularAssemblies\. Don't forget to make a Assemblycore gun! It doesn't have to be part of the same mod, but it is in this example.
 As for file structure, DON'T TOUCH ANYTHING IN Scripts\ILOVEKEEN\ModularAssemblies OTHER THAN DEFINITIONS. It is all important.

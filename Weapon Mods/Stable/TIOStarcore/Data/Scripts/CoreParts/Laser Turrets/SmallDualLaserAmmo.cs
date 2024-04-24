@@ -99,7 +99,7 @@ namespace Scripts
                 {
                     Modifier = 1.35f, //Heavy laser type.
                     Type = Default,
-                    BypassModifier = -2f,
+                    BypassModifier = -1f,
                 },
                 DamageType = new DamageTypes
                 {

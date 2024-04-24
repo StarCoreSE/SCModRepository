@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -217,7 +217,7 @@ namespace StarCore.StructuralIntegrity
                 if (!MyAPIGateway.Session.IsServer)
                 {
                     GridStopped.ValueChanged += GridStopped_ValueChanged;
-                    FieldPowerSync.ValueChanged += FieldPowerUpdate;
+                    /*FieldPowerSync.ValueChanged += FieldPowerUpdate;*/
                 }
                     
 
@@ -268,8 +268,8 @@ namespace StarCore.StructuralIntegrity
                     UpdateImpactRender();
                 }
 
-                /*CalculateMaxGridPower();*/
-                /*UpdateGridModifier(SIGenBlock);*/
+                CalculateMaxGridPower();
+                UpdateGridModifier(SIGenBlock);
 
                 /*if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0 && SIGenBlock != null && SIGenBlock.IsWorking && FieldPowerSync.Value != 0 && !(CurrentHeat.Value >= HeatCap.Value))
                 {
@@ -317,7 +317,7 @@ namespace StarCore.StructuralIntegrity
 
                 if (!MyAPIGateway.Session.IsServer)
                     GridStopped.ValueChanged -= GridStopped_ValueChanged;
-                    FieldPowerSync.ValueChanged += FieldPowerUpdate;
+                    /*FieldPowerSync.ValueChanged += FieldPowerUpdate;*/
 
                 ResetGridModifier(SIGenBlock);
                 SIGenBlock = null;
@@ -405,7 +405,7 @@ namespace StarCore.StructuralIntegrity
                     if (fatBlock is IMyPowerProducer)
                     {
                         var powerProducer = fatBlock as IMyPowerProducer;
-                        totalPower += powerProducer.MaxOutput;
+                        totalPower = totalPower + powerProducer.MaxOutput;
                     }
                 }
             }
@@ -567,10 +567,10 @@ namespace StarCore.StructuralIntegrity
             }
         }*/
 
-        private void FieldPowerUpdate(MySync<float, SyncDirection.BothWays> obj)
+        /*private void FieldPowerUpdate(MySync<float, SyncDirection.BothWays> obj)
         {
             UpdateGridModifier(SIGenBlock);
-        }
+        }*/
 
         private void SetPowerStatus(string text, int aliveTime = 300, string font = MyFontEnum.Green)
         {
@@ -1042,7 +1042,7 @@ namespace StarCore.StructuralIntegrity
                         return;
                     }
                     logic.FieldPowerSync.Value = logic.FieldPowerSync.Value + 1;
-                    logic.FieldPowerSync.Value = MathHelper.Clamp(logic.FieldPowerSync.Value, 0f, 30f);
+                    logic.FieldPowerSync.Value = MathHelper.Clamp(logic.FieldPowerSync.Value, minDivertedPower, maxDivertedPower);
                 }
 
             };
@@ -1084,7 +1084,7 @@ namespace StarCore.StructuralIntegrity
                         return;
                     }
                     logic.FieldPowerSync.Value = logic.FieldPowerSync.Value - 1;
-                    logic.FieldPowerSync.Value = MathHelper.Clamp(logic.FieldPowerSync.Value, 0f, 30f);
+                    logic.FieldPowerSync.Value = MathHelper.Clamp(logic.FieldPowerSync.Value, minDivertedPower, maxDivertedPower);
                 }
             };
             decreaseFieldPower.Writer = (b, sb) =>

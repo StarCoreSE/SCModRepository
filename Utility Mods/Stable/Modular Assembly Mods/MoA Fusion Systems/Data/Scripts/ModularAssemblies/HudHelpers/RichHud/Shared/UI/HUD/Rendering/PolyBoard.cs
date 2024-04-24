@@ -1,91 +1,25 @@
-﻿using RichHudFramework.UI.Rendering;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using VRageMath;
 
 namespace RichHudFramework.UI.Rendering
 {
-    using Client;
-    using Server;
-
     /// <summary>
-    /// Renders a 2D polygon using billboards
+    ///     Renders a 2D polygon using billboards
     /// </summary>
     public class PolyBoard
     {
-        /// <summary>
-        /// Tinting applied to the material
-        /// </summary>
-        public virtual Color Color
-        {
-            get { return color; }
-            set
-            {
-                if (value != color)
-                    polyMat.bbColor = BillBoardUtils.GetBillBoardBoardColor(value);
-
-                color = value;
-            }
-        }
-
-        /// <summary>
-        /// Texture applied to the billboard.
-        /// </summary>
-        public virtual Material Material
-        {
-            get { return matFrame.Material; }
-            set
-            {
-                if (value != matFrame.Material)
-                {
-                    updateMatFit = true;
-                    matFrame.Material = value;
-                    polyMat.textureID = value.TextureID;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Determines how the texture scales with the MatBoard's dimensions.
-        /// </summary>
-        public MaterialAlignment MatAlignment
-        {
-            get { return matFrame.Alignment; }
-            set
-            {
-                if (value != matFrame.Alignment)
-                {
-                    updateMatFit = true;
-                    matFrame.Alignment = value;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Get/set number of sides on the polygon
-        /// </summary>
-        public virtual int Sides
-        {
-            get { return _sides; }
-            set
-            {
-                if (value != _sides)
-                    updateVertices = true;
-
-                _sides = value;
-            }
-        }
+        protected readonly List<Vector2> drawVertices;
+        protected readonly MaterialFrame matFrame;
+        protected readonly List<int> triangles;
+        protected readonly List<Vector2> vertices;
 
         protected int _sides;
 
         protected Color color;
-        protected bool updateVertices, updateMatFit;
 
         protected PolyMaterial polyMat;
-        protected readonly MaterialFrame matFrame;
-        protected readonly List<int> triangles;
-        protected readonly List<Vector2> vertices;
-        protected readonly List<Vector2> drawVertices;
+        protected bool updateVertices, updateMatFit;
 
         public PolyBoard()
         {
@@ -102,7 +36,70 @@ namespace RichHudFramework.UI.Rendering
         }
 
         /// <summary>
-        /// Draws a polygon using billboards
+        ///     Tinting applied to the material
+        /// </summary>
+        public virtual Color Color
+        {
+            get { return color; }
+            set
+            {
+                if (value != color)
+                    polyMat.bbColor = BillBoardUtils.GetBillBoardBoardColor(value);
+
+                color = value;
+            }
+        }
+
+        /// <summary>
+        ///     Texture applied to the billboard.
+        /// </summary>
+        public virtual Material Material
+        {
+            get { return matFrame.Material; }
+            set
+            {
+                if (value != matFrame.Material)
+                {
+                    updateMatFit = true;
+                    matFrame.Material = value;
+                    polyMat.textureID = value.TextureID;
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Determines how the texture scales with the MatBoard's dimensions.
+        /// </summary>
+        public MaterialAlignment MatAlignment
+        {
+            get { return matFrame.Alignment; }
+            set
+            {
+                if (value != matFrame.Alignment)
+                {
+                    updateMatFit = true;
+                    matFrame.Alignment = value;
+                }
+            }
+        }
+
+        /// <summary>
+        ///     Get/set number of sides on the polygon
+        /// </summary>
+        public virtual int Sides
+        {
+            get { return _sides; }
+            set
+            {
+                if (value != _sides)
+                    updateVertices = true;
+
+                _sides = value;
+            }
+        }
+
+        /// <summary>
+        ///     Draws a polygon using billboards
         /// </summary>
         public virtual void Draw(Vector2 size, Vector2 origin, MatrixD[] matrixRef)
         {
@@ -119,17 +116,14 @@ namespace RichHudFramework.UI.Rendering
                 }
 
                 // Generate final vertices for drawing from unscaled vertices
-                for (int i = 0; i < drawVertices.Count; i++)
-                {
-                    drawVertices[i] = origin + size * vertices[i];
-                }
+                for (var i = 0; i < drawVertices.Count; i++) drawVertices[i] = origin + size * vertices[i];
 
                 BillBoardUtils.AddTriangles(triangles, drawVertices, ref polyMat, matrixRef);
             }
         }
 
         /// <summary>
-        /// Draws the given range of faces
+        ///     Draws the given range of faces
         /// </summary>
         public virtual void Draw(Vector2 size, Vector2 origin, Vector2I faceRange, MatrixD[] matrixRef)
         {
@@ -146,13 +140,10 @@ namespace RichHudFramework.UI.Rendering
                 }
 
                 // Generate final vertices for drawing from unscaled vertices
-                int max = drawVertices.Count - 1;
+                var max = drawVertices.Count - 1;
                 drawVertices[max] = origin + size * vertices[max];
 
-                for (int i = 0; i < drawVertices.Count; i++)
-                {
-                    drawVertices[i] = origin + size * vertices[i];
-                }
+                for (var i = 0; i < drawVertices.Count; i++) drawVertices[i] = origin + size * vertices[i];
 
                 faceRange *= 3;
                 BillBoardUtils.AddTriangleRange(faceRange, triangles, drawVertices, ref polyMat, matrixRef);
@@ -160,16 +151,16 @@ namespace RichHudFramework.UI.Rendering
         }
 
         /// <summary>
-        /// Returns the center position of the given slice relative to the center of the billboard
+        ///     Returns the center position of the given slice relative to the center of the billboard
         /// </summary>
         public virtual Vector2 GetSliceOffset(Vector2 bbSize, Vector2I range)
         {
             if (updateVertices)
                 GeneratePolygon();
 
-            int max = vertices.Count;
-            Vector2 start = vertices[range.X], 
-                end = vertices[(range.Y + 1) % max], 
+            var max = vertices.Count;
+            Vector2 start = vertices[range.X],
+                end = vertices[(range.Y + 1) % max],
                 center = Vector2.Zero;
 
             return bbSize * (start + end + center) / 3f;
@@ -181,7 +172,7 @@ namespace RichHudFramework.UI.Rendering
             GenerateTriangles();
             drawVertices.Clear();
 
-            for (int i = 0; i < vertices.Count; i++)
+            for (var i = 0; i < vertices.Count; i++)
                 drawVertices.Add(Vector2.Zero);
 
             updateMatFit = true;
@@ -189,11 +180,11 @@ namespace RichHudFramework.UI.Rendering
 
         protected virtual void GenerateTriangles()
         {
-            int max = vertices.Count - 1;
+            var max = vertices.Count - 1;
             triangles.Clear();
             triangles.EnsureCapacity(_sides * 3);
 
-            for (int i = 0; i < vertices.Count - 1; i++)
+            for (var i = 0; i < vertices.Count - 1; i++)
             {
                 triangles.Add(max);
                 triangles.Add(i);
@@ -209,9 +200,9 @@ namespace RichHudFramework.UI.Rendering
             polyMat.texCoords.Clear();
             polyMat.texCoords.EnsureCapacity(vertices.Count);
 
-            for (int i = 0; i < vertices.Count; i++)
+            for (var i = 0; i < vertices.Count; i++)
             {
-                Vector2 uv = vertices[i] * texScale;
+                var uv = vertices[i] * texScale;
                 uv.Y *= -1f;
 
                 polyMat.texCoords.Add(uv + texCenter);
@@ -226,9 +217,9 @@ namespace RichHudFramework.UI.Rendering
             vertices.Clear();
             vertices.EnsureCapacity(_sides + 1);
 
-            for (int i = 0; i < _sides; i++)
+            for (var i = 0; i < _sides; i++)
             {
-                Vector2 point = Vector2.Zero;
+                var point = Vector2.Zero;
                 point.X = (float)Math.Cos(rotPos);
                 point.Y = (float)Math.Sin(rotPos);
 

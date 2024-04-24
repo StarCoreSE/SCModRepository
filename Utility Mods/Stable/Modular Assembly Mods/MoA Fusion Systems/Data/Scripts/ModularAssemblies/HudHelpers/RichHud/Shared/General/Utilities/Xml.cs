@@ -1,5 +1,5 @@
-﻿using Sandbox.ModAPI;
-using System;
+﻿using System;
+using Sandbox.ModAPI;
 
 namespace RichHudFramework
 {
@@ -8,7 +8,7 @@ namespace RichHudFramework
         public static class Xml
         {
             /// <summary>
-            /// Attempts to serialize an object to an Xml string.
+            ///     Attempts to serialize an object to an Xml string.
             /// </summary>
             public static KnownException TrySerialize<T>(T obj, out string xmlOut)
             {
@@ -28,7 +28,7 @@ namespace RichHudFramework
             }
 
             /// <summary>
-            /// Attempts to deserialize an Xml string to an object of a given type.
+            ///     Attempts to deserialize an Xml string to an object of a given type.
             /// </summary>
             public static KnownException TryDeserialize<T>(string xmlIn, out T obj)
             {

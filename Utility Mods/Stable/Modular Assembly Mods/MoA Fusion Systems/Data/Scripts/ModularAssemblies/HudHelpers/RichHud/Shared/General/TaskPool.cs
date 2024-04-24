@@ -1,71 +1,73 @@
-﻿using ParallelTasks;
-using RichHudFramework.Internal;
-using Sandbox.ModAPI;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using ParallelTasks;
+using RichHudFramework.Internal;
+using Sandbox.ModAPI;
 using VRageMath;
 
 namespace RichHudFramework
 {
     /// <summary>
-    /// Simple aggregate exception class. Feed it a list of exceptions and out pops a new exception with their contents
-    /// crammed into one message.
+    ///     Simple aggregate exception class. Feed it a list of exceptions and out pops a new exception with their contents
+    ///     crammed into one message.
     /// </summary>
     public class AggregateException : Exception
     {
         public AggregateException(string aggregatedMsg) : base(aggregatedMsg)
-        { }
+        {
+        }
 
         public AggregateException(IReadOnlyList<Exception> exceptions) : base(GetExceptionMessages(exceptions))
-        { }
+        {
+        }
 
         public AggregateException(IReadOnlyList<AggregateException> exceptions) : base(GetExceptionMessages(exceptions))
-        { }
+        {
+        }
 
         private static string GetExceptionMessages<T>(IReadOnlyList<T> exceptions) where T : Exception
         {
-            StringBuilder sb = new StringBuilder(exceptions[0].Message.Length * exceptions.Count);
+            var sb = new StringBuilder(exceptions[0].Message.Length * exceptions.Count);
 
-            for (int n = 0; n < exceptions.Count; n++)
+            for (var n = 0; n < exceptions.Count; n++)
                 if (n != exceptions.Count - 1)
-                    sb.Append(exceptions[n].ToString() + "\n");
+                    sb.Append(exceptions[n] + "\n");
                 else
-                    sb.Append(exceptions[n].ToString());
+                    sb.Append(exceptions[n]);
 
             return sb.ToString();
         }
     }
 
     /// <summary>
-    /// Used to separate exceptions thrown manually in response to expected exceptions. Usually used in conjunction 
-    /// with IO/serialization operations.
+    ///     Used to separate exceptions thrown manually in response to expected exceptions. Usually used in conjunction
+    ///     with IO/serialization operations.
     /// </summary>
     public class KnownException : Exception
     {
-        public KnownException() : base()
-        { }
+        public KnownException()
+        {
+        }
 
         public KnownException(string message) : base(message)
-        { }
+        {
+        }
 
         public KnownException(string message, Exception innerException) : base(message, innerException)
-        { }
+        {
+        }
     }
 
     public class TaskPool : RichHudComponentBase
     {
-        /// <summary>
-        /// Sets the limit for the total number of tasks running in all <see cref="TaskPool"/>s.
-        /// </summary>
-        public static int MaxTasksRunning { get { return maxTasksRunning; } set { maxTasksRunning = MathHelper.Clamp(value, 1, 10); } }
-        private static int maxTasksRunning = 1, tasksRunningCount = 0;
+        private static int maxTasksRunning = 1, tasksRunningCount;
+        private readonly ConcurrentQueue<Action> actions;
+        private readonly Action<List<KnownException>, AggregateException> errorCallback;
 
         private readonly List<Task> tasksRunning;
         private readonly Queue<Action> tasksWaiting;
-        private readonly ConcurrentQueue<Action> actions;
-        private readonly Action<List<KnownException>, AggregateException> errorCallback;
 
         public TaskPool(Action<List<KnownException>, AggregateException> errorCallback) : base(true, true)
         {
@@ -76,13 +78,22 @@ namespace RichHudFramework
             tasksWaiting = new Queue<Action>();
         }
 
+        /// <summary>
+        ///     Sets the limit for the total number of tasks running in all <see cref="TaskPool" />s.
+        /// </summary>
+        public static int MaxTasksRunning
+        {
+            get { return maxTasksRunning; }
+            set { maxTasksRunning = MathHelper.Clamp(value, 1, 10); }
+        }
+
         public override void Close()
         {
             tasksRunningCount = 0;
         }
 
         /// <summary>
-        /// Updates public task/action queues and runs exception handling.
+        ///     Updates public task/action queues and runs exception handling.
         /// </summary>
         public override void Draw()
         {
@@ -92,7 +103,7 @@ namespace RichHudFramework
         }
 
         /// <summary>
-        /// Enqueues an action to run in parallel. Not thread safe; must be called from the main thread.
+        ///     Enqueues an action to run in parallel. Not thread safe; must be called from the main thread.
         /// </summary>
         public void EnqueueTask(Action action)
         {
@@ -105,7 +116,7 @@ namespace RichHudFramework
         }
 
         /// <summary>
-        /// Enqueues an action to run on the main thread. Meant to be used by threads other than the main.
+        ///     Enqueues an action to run on the main thread. Meant to be used by threads other than the main.
         /// </summary>
         public void EnqueueAction(Action action)
         {
@@ -118,14 +129,14 @@ namespace RichHudFramework
         }
 
         /// <summary>
-        /// Attempts to start any tasks in the waiting queue if the number of tasks running
-        /// is below a set threshold.
+        ///     Attempts to start any tasks in the waiting queue if the number of tasks running
+        ///     is below a set threshold.
         /// </summary>
         private void TryStartWaitingTasks()
         {
             Action action;
 
-            while (tasksRunningCount < maxTasksRunning && (tasksWaiting.Count > 0) && tasksWaiting.TryDequeue(out action))
+            while (tasksRunningCount < maxTasksRunning && tasksWaiting.Count > 0 && tasksWaiting.TryDequeue(out action))
             {
                 tasksRunning.Add(MyAPIGateway.Parallel.Start(action));
                 tasksRunningCount++;
@@ -133,28 +144,24 @@ namespace RichHudFramework
         }
 
         /// <summary>
-        /// Checks the task list for invalid tasks and tasks with exceptions then logs and throws exceptions as needed.
+        ///     Checks the task list for invalid tasks and tasks with exceptions then logs and throws exceptions as needed.
         /// </summary>
         private void UpdateRunningTasks()
         {
-            List<KnownException> knownExceptions = new List<KnownException>();
-            List<Exception> otherExceptions = new List<Exception>(); //unknown exceptions
+            var knownExceptions = new List<KnownException>();
+            var otherExceptions = new List<Exception>(); //unknown exceptions
             AggregateException unknownExceptions = null;
 
-            for (int n = 0; n < tasksRunning.Count; n++)
+            for (var n = 0; n < tasksRunning.Count; n++)
             {
-                Task task = tasksRunning[n];
+                var task = tasksRunning[n];
 
                 if (task.Exceptions != null && task.Exceptions.Length > 0)
-                {
-                    foreach (Exception exception in task.Exceptions)
-                    {
+                    foreach (var exception in task.Exceptions)
                         if (exception is KnownException)
                             knownExceptions.Add((KnownException)exception);
                         else
                             otherExceptions.Add(exception);
-                    }
-                }
 
                 if (!task.valid || task.IsComplete || (task.Exceptions != null && task.Exceptions.Length > 0))
                 {
@@ -170,8 +177,8 @@ namespace RichHudFramework
         }
 
         /// <summary>
-        /// Checks actions queue for any actions sent from tasks to be executed on the main 
-        /// thread and executes them.
+        ///     Checks actions queue for any actions sent from tasks to be executed on the main
+        ///     thread and executes them.
         /// </summary>
         private void RunTaskActions()
         {

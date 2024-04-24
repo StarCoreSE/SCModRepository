@@ -1,22 +1,18 @@
-﻿using System.Collections.Generic;
-using System;
-using System.Threading;
-using Sandbox.ModAPI;
-using VRage.Game;
+﻿using System;
+using System.Collections.Generic;
+using RichHudFramework.Client;
+using RichHudFramework.Internal;
 using VRage;
 using VRage.Utils;
 using VRageMath;
 using VRageRender;
-using RichHudFramework.UI.Rendering;
-using RichHudFramework.Client;
-using RichHudFramework.Internal;
 using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
 
 namespace RichHudFramework
 {
     namespace UI
     {
-        using ApiMemberAccessor = System.Func<object, int, object>;
+        using ApiMemberAccessor = Func<object, int, object>;
         using TriangleBillboardData = MyTuple<
             BlendTypeEnum, // blendType
             Vector2I, // bbID + matrixID
@@ -49,13 +45,13 @@ namespace RichHudFramework
                 private static BillBoardUtils instance;
 
                 private readonly List<MyTriangleBillboard> bbBuf;
-                private List<MyTriangleBillboard> bbPoolBack;
+                private readonly List<FlatTriangleBillboardData> flatTriangleList;
 
                 private readonly ApiMemberAccessor GetOrSetMember;
-                private readonly List<TriangleBillboardData> triangleList;
-                private readonly List<FlatTriangleBillboardData> flatTriangleList;
                 private readonly List<MatrixD> matrixBuf;
                 private readonly Dictionary<MatrixD[], int> matrixTable;
+                private readonly List<TriangleBillboardData> triangleList;
+                private List<MyTriangleBillboard> bbPoolBack;
 
                 private BillBoardUtils() : base(ApiModuleTypes.BillBoardUtils, false, true)
                 {
@@ -74,30 +70,25 @@ namespace RichHudFramework
 
                 public static void Init()
                 {
-                    if (instance == null)
-                    {
-                        instance = new BillBoardUtils();
-                    }
+                    if (instance == null) instance = new BillBoardUtils();
                 }
 
                 public override void Close()
                 {
-                    if (ExceptionHandler.Unloading)
-                    {
-                        instance = null;
-                    }
+                    if (ExceptionHandler.Unloading) instance = null;
                 }
 
                 public static void BeginDraw()
                 {
                     if (instance != null)
-                    {
-                        instance.bbPoolBack = instance.GetOrSetMember(null, (int)BillBoardUtilAccessors.GetPoolBack) as List<MyTriangleBillboard>;
-                    }
+                        instance.bbPoolBack =
+                            instance.GetOrSetMember(null, (int)BillBoardUtilAccessors.GetPoolBack) as
+                                List<MyTriangleBillboard>;
                 }
 
                 public static void FinishDraw()
-                { }
+                {
+                }
             }
         }
     }
