@@ -46,9 +46,9 @@ namespace Scripts
             AmmoRound = "Heavy Fighter", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 0.5f, // Direct damage; one steel plate is worth 100. 
+            BaseDamage = 1f, // Direct damage; one steel plate is worth 100. 
             Mass = 5000, // In kilograms; how much force the impact will apply to the target.
-            Health = 800, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            Health = 900, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 10, // Recoil.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
@@ -91,13 +91,13 @@ namespace Scripts
                     Enable = true, // Enables TimedSpawns mechanism
                     Interval = 0, // Time between spawning fragments, in ticks, 0 means every tick, 1 means every other
                     StartTime = 0, // Time delay to start spawning fragments, in ticks, of total projectile life
-                    MaxSpawns = 720, // Max number of fragment children to spawn
+                    MaxSpawns = 770, // Max number of fragment children to spawn
                     Proximity = 900, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
                     ParentDies = false, // Parent dies once after it spawns its last child.
                     PointAtTarget = true, // Start fragment direction pointing at Target
                     PointType = Direct, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
                     DirectAimCone = 0f, //Aim cone used for Direct fire, in degrees
-                    GroupSize = 120, // Number of spawns in each group
+                    GroupSize = 110, // Number of spawns in each group
                     GroupDelay = 60, // Delay between each group.
                 },
             },
@@ -211,67 +211,7 @@ namespace Scripts
                     Shape = Diamond, // Round or Diamond
                 },
             },
-            Ewar = new EwarDef
-            {
-                Enable = false, // Enables the EWAR , Electronic-Warfare System
-                Type = Offense, // EnergySink, Emp, Offense, Nav, Dot, AntiSmart, JumpNull, Anchor, Tractor, Pull, Push, 
-                Mode = Field, // Effect , Field
-                Strength = 1,
-                Radius = 1f, // Meters
-                Duration = 2, // In Ticks
-                StackDuration = true, // Combined Durations
-                Depletable = false,
-                MaxStacks = 2, // Max Debuffs at once
-                NoHitParticle = false,
-                /*
-                EnergySink : Targets & Shutdowns Power Supplies, such as Batteries & Reactor
-                Emp : Targets & Shutdown any Block capable of being powered
-                Offense : Targets & Shutdowns Weaponry
-                Nav : Targets & Shutdown Gyros, Thrusters, or Locks them down
-                Dot : Deals Damage to Blocks in radius
-                AntiSmart : Effects & Scrambles the Targeting List of Affected Missiles
-                JumpNull : Shutdown & Stops any Active Jumps, or JumpDrive Units in radius
-                Tractor : Affects target with Physics
-                Pull : Affects target with Physics
-                Push : Affects target with Physics
-                Anchor : Affects target with Physics
-                
-                */
-                Force = new PushPullDef
-                {
-                    ForceFrom = ProjectileLastPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
-                    ForceTo = HitPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
-                    Position = TargetCenterOfMass, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
-                    DisableRelativeMass = false,
-                    TractorRange = 0,
-                    ShooterFeelsForce = false,
-                },
-                Field = new FieldDef
-                {
-                    Interval = 0, // Time between each pulse, in game ticks (60 == 1 second).
-                    PulseChance = 0, // Chance from 0 - 100 that an entity in the field will be hit by any given pulse.
-                    GrowTime = 0, // How many ticks it should take the field to grow to full size.
-                    HideModel = false, // Hide the projectile model if it has one.
-                    ShowParticle = true, // Show Block damage effect.
-                    TriggerRange = 250f, //range at which fields are triggered
-                    Particle = new ParticleDef // Particle effect to generate at the field's position.
-                    {
-                        Name = "", // SubtypeId of field particle effect.
-                        Extras = new ParticleOptionDef
-                        {
-                            Scale = 1, // Scale of effect.
-                        },
-                    },
-                },
-            },
-            Beams = new BeamDef
-            {
-                Enable = false, // Enable beam behaviour. Please have 3600 RPM, when this Setting is enabled. Please do not fire Beams into Voxels.
-                VirtualBeams = false, // Only one damaging beam, but with the effectiveness of the visual beams combined (better performance).
-                ConvergeBeams = false, // When using virtual beams, converge the visual beams to the location of the real beam.
-                RotateRealBeam = false, // The real beam is rotated between all visual beams, instead of centered between them.
-                OneParticle = false, // Only spawn one particle hit per beam weapon.
-            },
+
             Trajectory = new TrajectoryDef
             {
                 Guidance = Smart, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
@@ -382,7 +322,7 @@ namespace Scripts
                         AccelMulti = 0.25, // Modify default acceleration by this factor
                         DeAccelMulti = 0, // Modifies your default deacceleration by this factor
                         TotalAccelMulti = 0, // Modifies your default totalacceleration by this factor
-                        SpeedCapMulti = 0.5, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
+                        SpeedCapMulti = 0.33, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
 
                         // Target navigation behavior 
                         Orbit = false, // Orbit the target
@@ -469,9 +409,9 @@ namespace Scripts
                         EndCondition3 = Ignore,
 
                         // Start/End thresholds -- both conditions are evaluated before activation, use Ignore to skip
-                        Start1Value = 401,
+                        Start1Value = 1001,
                         Start2Value = 0,
-                        End1Value = 400,
+                        End1Value = 1000,
                         End2Value = 300,
                         End3Value = 0, 
                         
@@ -502,15 +442,15 @@ namespace Scripts
                         // Tweaks to vantagepoint behavior
                         AngleOffset = 0.5, // value 0 - 1, rotates the Updir
                         AngleVariance = Random(-0.4f, 0.4f), // added to AngleOffset above, values of 0,0 disables feature
-                        ElevationTolerance = 0, // adds additional tolerance (in meters) to meet the Elevation condition requirement.  *note* collision size is also added to the tolerance
+                        ElevationTolerance = 500, // adds additional tolerance (in meters) to meet the Elevation condition requirement.  *note* collision size is also added to the tolerance
                         TrackingDistance = 0, // Minimum travel distance before projectile begins racing to target
-                        DesiredElevation = 500, // The desired elevation relative to source 
+                        DesiredElevation = 1000, // The desired elevation relative to source 
                         StoredStartId = 0, // Which approach id the the start storage was saved in, if any.
                         StoredEndId = 0, // Which approach id the the end storage was saved in, if any.
                         StoredStartType = PositionA,
                         StoredEndType = Target,
                         // Controls the leading behavior
-                        LeadDistance = 0, // Add additional "lead" in meters to the trajectory (project in the future), this will be applied even before TrackingDistance is met. 
+                        LeadDistance = 500, // Add additional "lead" in meters to the trajectory (project in the future), this will be applied even before TrackingDistance is met. 
                         PushLeadByTravelDistance = false, // the follow lead position will move in its point direction by an amount equal to the projectiles travel distance.
 
                         // Modify speed and acceleration ratios while this approach is active
@@ -604,9 +544,9 @@ namespace Scripts
                         EndCondition3 = RelativeHealthLost,
 
                         // Start/End thresholds -- both conditions are evaluated before activation, use Ignore to skip
-                        Start1Value = 600,
+                        Start1Value = 1000,
                         Start2Value = 0,
-                        End1Value = 120,
+                        End1Value = 240,
                         End2Value = 60,
                         End3Value = 200, 
                         
@@ -615,12 +555,12 @@ namespace Scripts
                         EndEvent = DoNothing,  
                         
                         // Relative positions and directions
-                        Forward = ForwardRelativeToBlock, // ForwardDestinationDirection*, ForwardRelativeToBlock, ForwardRelativeToShooter, ForwardRelativeToGravity, ForwardTargetDirection, ForwardTargetVelocity, ForwardStoredStartPosition, ForwardStoredEndPosition, ForwardStoredStartLocalPosition, ForwardStoredEndLocalPosition, ForwardOriginDirection    
-                        Up = UpRelativeToBlock, // UpRelativeToBlock*, UpRelativeToShooter, UpRelativeToGravity, UpTargetDirection, UpTargetVelocity, UpStoredStartPosition, UpStoredEndPosition, UpStoredStartLocalPosition, UpStoredEndLocalPosition, UpOriginDirection, UpDestinationDirection
+                        Forward = ForwardTargetVelocity, // ForwardDestinationDirection*, ForwardRelativeToBlock, ForwardRelativeToShooter, ForwardRelativeToGravity, ForwardTargetDirection, ForwardTargetVelocity, ForwardStoredStartPosition, ForwardStoredEndPosition, ForwardStoredStartLocalPosition, ForwardStoredEndLocalPosition, ForwardOriginDirection    
+                        Up = UpTargetDirection, // UpRelativeToBlock*, UpRelativeToShooter, UpRelativeToGravity, UpTargetDirection, UpTargetVelocity, UpStoredStartPosition, UpStoredEndPosition, UpStoredStartLocalPosition, UpStoredEndLocalPosition, UpOriginDirection, UpDestinationDirection
                         
                         PositionB = PositionA, // Origin, Shooter, Target, Surface, MidPoint, Current, Nothing, StoredStartDestination, StoredEndDestination
                         PositionC = Target,
-                        Elevation = Nothing, 
+                        Elevation = Target, 
                         
                         //
                         // Control if the vantagepoints update every frame or only at start.
@@ -637,15 +577,15 @@ namespace Scripts
                         // Tweaks to vantagepoint behavior
                         AngleOffset = 0, // value 0 - 1, rotates the Updir
                         AngleVariance = Random(-0.25f, 0.25f), // added to AngleOffset above, values of 0,0 disables feature
-                        ElevationTolerance = 0, // adds additional tolerance (in meters) to meet the Elevation condition requirement.  *note* collision size is also added to the tolerance
+                        ElevationTolerance = 500, // adds additional tolerance (in meters) to meet the Elevation condition requirement.  *note* collision size is also added to the tolerance
                         TrackingDistance = 0, // Minimum travel distance before projectile begins racing to target
-                        DesiredElevation = 0, // The desired elevation relative to source 
+                        DesiredElevation = 500, // The desired elevation relative to source 
                         StoredStartId = 0, // Which approach id the the start storage was saved in, if any.
                         StoredEndId = 0, // Which approach id the the end storage was saved in, if any.
                         StoredStartType = PositionA,
                         StoredEndType = Target,
                         // Controls the leading behavior
-                        LeadDistance = 0, // Add additional "lead" in meters to the trajectory (project in the future), this will be applied even before TrackingDistance is met. 
+                        LeadDistance = 250, // Add additional "lead" in meters to the trajectory (project in the future), this will be applied even before TrackingDistance is met. 
                         PushLeadByTravelDistance = false, // the follow lead position will move in its point direction by an amount equal to the projectiles travel distance.
 
                         // Modify speed and acceleration ratios while this approach is active
@@ -656,9 +596,9 @@ namespace Scripts
 
                         // Target navigation behavior 
                         Orbit = true, // Orbit the target
-                        OrbitRadius = 750, // The orbit radius to extend between the projectile and the target (target volume + this value)
-                        OffsetMinRadius = 500, // Min Radius to offset from target.  
-                        OffsetMaxRadius = 1000, // Max Radius to offset from target.  
+                        OrbitRadius = 800, // The orbit radius to extend between the projectile and the target (target volume + this value)
+                        OffsetMinRadius = 600, // Min Radius to offset from target.  
+                        OffsetMaxRadius = 1200, // Max Radius to offset from target.  
                         OffsetTime = 60, // How often to change the offset direction.
                         
                         // Other
@@ -741,7 +681,7 @@ namespace Scripts
                         // Start/End thresholds -- both conditions are evaluated before activation, use Ignore to skip
                         Start1Value = 90,
                         Start2Value = 0,
-                        End1Value = 60,
+                        End1Value = 120,
                         End2Value = 150,
                         End3Value = 0, 
                         
@@ -750,12 +690,12 @@ namespace Scripts
                         EndEvent = DoNothing,  
                         
                         // Relative positions and directions
-                        Forward = ForwardRelativeToBlock, // ForwardDestinationDirection*, ForwardRelativeToBlock, ForwardRelativeToShooter, ForwardRelativeToGravity, ForwardTargetDirection, ForwardTargetVelocity, ForwardStoredStartPosition, ForwardStoredEndPosition, ForwardStoredStartLocalPosition, ForwardStoredEndLocalPosition, ForwardOriginDirection    
-                        Up = UpRelativeToBlock, // UpRelativeToBlock*, UpRelativeToShooter, UpRelativeToGravity, UpTargetDirection, UpTargetVelocity, UpStoredStartPosition, UpStoredEndPosition, UpStoredStartLocalPosition, UpStoredEndLocalPosition, UpOriginDirection, UpDestinationDirection
+                        Forward = ForwardTargetVelocity, // ForwardDestinationDirection*, ForwardRelativeToBlock, ForwardRelativeToShooter, ForwardRelativeToGravity, ForwardTargetDirection, ForwardTargetVelocity, ForwardStoredStartPosition, ForwardStoredEndPosition, ForwardStoredStartLocalPosition, ForwardStoredEndLocalPosition, ForwardOriginDirection    
+                        Up = UpTargetDirection, // UpRelativeToBlock*, UpRelativeToShooter, UpRelativeToGravity, UpTargetDirection, UpTargetVelocity, UpStoredStartPosition, UpStoredEndPosition, UpStoredStartLocalPosition, UpStoredEndLocalPosition, UpOriginDirection, UpDestinationDirection
                         
                         PositionB = PositionA, // Origin, Shooter, Target, Surface, MidPoint, Current, Nothing, StoredStartDestination, StoredEndDestination
                         PositionC = Target,
-                        Elevation = Nothing, 
+                        Elevation = Target, 
                         
                         //
                         // Control if the vantagepoints update every frame or only at start.
@@ -771,30 +711,30 @@ namespace Scripts
                         
                         // Tweaks to vantagepoint behavior
                         AngleOffset = 0, // value 0 - 1, rotates the Updir
-                        AngleVariance = Random(0, 0), // added to AngleOffset above, values of 0,0 disables feature
-                        ElevationTolerance = 0, // adds additional tolerance (in meters) to meet the Elevation condition requirement.  *note* collision size is also added to the tolerance
+                        AngleVariance = Random(-0.25f, 0.25f), // added to AngleOffset above, values of 0,0 disables feature
+                        ElevationTolerance = 250, // adds additional tolerance (in meters) to meet the Elevation condition requirement.  *note* collision size is also added to the tolerance
                         TrackingDistance = 0, // Minimum travel distance before projectile begins racing to target
-                        DesiredElevation = 0, // The desired elevation relative to source 
+                        DesiredElevation = 250, // The desired elevation relative to source 
                         StoredStartId = 0, // Which approach id the the start storage was saved in, if any.
                         StoredEndId = 0, // Which approach id the the end storage was saved in, if any.
                         StoredStartType = PositionA,
                         StoredEndType = Target,
                         // Controls the leading behavior
-                        LeadDistance = 0, // Add additional "lead" in meters to the trajectory (project in the future), this will be applied even before TrackingDistance is met. 
+                        LeadDistance = 250, // Add additional "lead" in meters to the trajectory (project in the future), this will be applied even before TrackingDistance is met. 
                         PushLeadByTravelDistance = false, // the follow lead position will move in its point direction by an amount equal to the projectiles travel distance.
 
                         // Modify speed and acceleration ratios while this approach is active
                         AccelMulti = 1.0, // Modify default acceleration by this factor
                         DeAccelMulti = 0, // Modifies your default deacceleration by this factor
                         TotalAccelMulti = 0, // Modifies your default totalacceleration by this factor
-                        SpeedCapMulti = 0.5, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
+                        SpeedCapMulti = 0.66, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
 
                         // Target navigation behavior 
                         Orbit = true, // Orbit the target
-                        OrbitRadius = 750, // The orbit radius to extend between the projectile and the target (target volume + this value)
-                        OffsetMinRadius = 500, // Min Radius to offset from target.  
+                        OrbitRadius = 800, // The orbit radius to extend between the projectile and the target (target volume + this value)
+                        OffsetMinRadius = 600, // Min Radius to offset from target.  
                         OffsetMaxRadius = 1000, // Max Radius to offset from target.  
-                        OffsetTime = 60, // How often to change the offset direction.
+                        OffsetTime = 30, // How often to change the offset direction.
                         
                         // Other
                         NoTimedSpawns = false, // When true timedSpawns will not be triggered while this approach is active.
@@ -830,7 +770,7 @@ namespace Scripts
                         },
                         AlternateModel = "", // Define only if you want to switch to an alternate model in this phase
                         AlternateSound = "", // if blank it will use default, must be a default version for this to be useable. 
-                        ModelRotateTime = 60, // If this value is greater than 0 then the projectile model will rotate to face the target, a value of 1 is instant (in ticks).
+                        ModelRotateTime = 0, // If this value is greater than 0 then the projectile model will rotate to face the target, a value of 1 is instant (in ticks).
                     },
                     //4
                     new ApproachDef // Strafe
@@ -877,7 +817,7 @@ namespace Scripts
                         // Start/End thresholds -- both conditions are evaluated before activation, use Ignore to skip
                         Start1Value = 60,
                         Start2Value = 0,
-                        End1Value = 120,
+                        End1Value = 240,
                         End2Value = 60,
                         End3Value = 150, 
                         
@@ -886,12 +826,12 @@ namespace Scripts
                         EndEvent = DoNothing,  
                         
                         // Relative positions and directions
-                        Forward = ForwardRelativeToBlock, // ForwardDestinationDirection*, ForwardRelativeToBlock, ForwardRelativeToShooter, ForwardRelativeToGravity, ForwardTargetDirection, ForwardTargetVelocity, ForwardStoredStartPosition, ForwardStoredEndPosition, ForwardStoredStartLocalPosition, ForwardStoredEndLocalPosition, ForwardOriginDirection    
-                        Up = UpRelativeToBlock, // UpRelativeToBlock*, UpRelativeToShooter, UpRelativeToGravity, UpTargetDirection, UpTargetVelocity, UpStoredStartPosition, UpStoredEndPosition, UpStoredStartLocalPosition, UpStoredEndLocalPosition, UpOriginDirection, UpDestinationDirection
+                        Forward = ForwardTargetVelocity, // ForwardDestinationDirection*, ForwardRelativeToBlock, ForwardRelativeToShooter, ForwardRelativeToGravity, ForwardTargetDirection, ForwardTargetVelocity, ForwardStoredStartPosition, ForwardStoredEndPosition, ForwardStoredStartLocalPosition, ForwardStoredEndLocalPosition, ForwardOriginDirection    
+                        Up = UpTargetDirection, // UpRelativeToBlock*, UpRelativeToShooter, UpRelativeToGravity, UpTargetDirection, UpTargetVelocity, UpStoredStartPosition, UpStoredEndPosition, UpStoredStartLocalPosition, UpStoredEndLocalPosition, UpOriginDirection, UpDestinationDirection
                         
                         PositionB = PositionA, // Origin, Shooter, Target, Surface, MidPoint, Current, Nothing, StoredStartDestination, StoredEndDestination
                         PositionC = Target,
-                        Elevation = Nothing, 
+                        Elevation = Target, 
                         
                         //
                         // Control if the vantagepoints update every frame or only at start.
@@ -907,30 +847,30 @@ namespace Scripts
                         
                         // Tweaks to vantagepoint behavior
                         AngleOffset = 0, // value 0 - 1, rotates the Updir
-                        AngleVariance = Random(0, 0), // added to AngleOffset above, values of 0,0 disables feature
-                        ElevationTolerance = 0, // adds additional tolerance (in meters) to meet the Elevation condition requirement.  *note* collision size is also added to the tolerance
+                        AngleVariance = Random(-0.25f, 0.25f), // added to AngleOffset above, values of 0,0 disables feature
+                        ElevationTolerance = 250, // adds additional tolerance (in meters) to meet the Elevation condition requirement.  *note* collision size is also added to the tolerance
                         TrackingDistance = 0, // Minimum travel distance before projectile begins racing to target
-                        DesiredElevation = 0, // The desired elevation relative to source 
+                        DesiredElevation = 250, // The desired elevation relative to source 
                         StoredStartId = 0, // Which approach id the the start storage was saved in, if any.
                         StoredEndId = 0, // Which approach id the the end storage was saved in, if any.
                         StoredStartType = PositionA,
                         StoredEndType = Target,
                         // Controls the leading behavior
-                        LeadDistance = 0, // Add additional "lead" in meters to the trajectory (project in the future), this will be applied even before TrackingDistance is met. 
+                        LeadDistance = 250, // Add additional "lead" in meters to the trajectory (project in the future), this will be applied even before TrackingDistance is met. 
                         PushLeadByTravelDistance = false, // the follow lead position will move in its point direction by an amount equal to the projectiles travel distance.
 
                         // Modify speed and acceleration ratios while this approach is active
-                        AccelMulti = 1.0, // Modify default acceleration by this factor
+                        AccelMulti = 1.5, // Modify default acceleration by this factor
                         DeAccelMulti = 0, // Modifies your default deacceleration by this factor
                         TotalAccelMulti = 0, // Modifies your default totalacceleration by this factor
-                        SpeedCapMulti = 0.5, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
+                        SpeedCapMulti = 1.25, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
 
                         // Target navigation behavior 
                         Orbit = true, // Orbit the target
-                        OrbitRadius = 750, // The orbit radius to extend between the projectile and the target (target volume + this value)
-                        OffsetMinRadius = 500, // Min Radius to offset from target.  
-                        OffsetMaxRadius = 1000, // Max Radius to offset from target.  
-                        OffsetTime = 60, // How often to change the offset direction.
+                        OrbitRadius = 600, // The orbit radius to extend between the projectile and the target (target volume + this value)
+                        OffsetMinRadius = 400, // Min Radius to offset from target.  
+                        OffsetMaxRadius = 800, // Max Radius to offset from target.  
+                        OffsetTime = 30, // How often to change the offset direction.
                         
                         // Other
                         NoTimedSpawns = false, // When true timedSpawns will not be triggered while this approach is active.
@@ -1000,12 +940,12 @@ namespace Scripts
                         EndEvent = DoNothing,  
                         
                         // Relative positions and directions
-                        Forward = ForwardRelativeToBlock, // ForwardDestinationDirection*, ForwardRelativeToBlock, ForwardRelativeToShooter, ForwardRelativeToGravity, ForwardTargetDirection, ForwardTargetVelocity, ForwardStoredStartPosition, ForwardStoredEndPosition, ForwardStoredStartLocalPosition, ForwardStoredEndLocalPosition, ForwardOriginDirection    
-                        Up = UpRelativeToBlock, // UpRelativeToBlock*, UpRelativeToShooter, UpRelativeToGravity, UpTargetDirection, UpTargetVelocity, UpStoredStartPosition, UpStoredEndPosition, UpStoredStartLocalPosition, UpStoredEndLocalPosition, UpOriginDirection, UpDestinationDirection
+                        Forward = ForwardRelativeToShooter, // ForwardDestinationDirection*, ForwardRelativeToBlock, ForwardRelativeToShooter, ForwardRelativeToGravity, ForwardTargetDirection, ForwardTargetVelocity, ForwardStoredStartPosition, ForwardStoredEndPosition, ForwardStoredStartLocalPosition, ForwardStoredEndLocalPosition, ForwardOriginDirection    
+                        Up = UpRelativeToShooter, // UpRelativeToBlock*, UpRelativeToShooter, UpRelativeToGravity, UpTargetDirection, UpTargetVelocity, UpStoredStartPosition, UpStoredEndPosition, UpStoredStartLocalPosition, UpStoredEndLocalPosition, UpOriginDirection, UpDestinationDirection
                         
                         PositionB = PositionA, // Origin, Shooter, Target, Surface, MidPoint, Current, Nothing, StoredStartPosition, StoredEndPosition, StoredStartLocalPosition, StoredEndLocalPosition
                         PositionC = Shooter,
-                        Elevation = Nothing, 
+                        Elevation = Shooter, 
                         
                         //
                         // Control if the vantagepoints update every frame or only at start.
@@ -1021,22 +961,22 @@ namespace Scripts
                         
                         // Tweaks to vantagepoint behavior
                         AngleOffset = 0, // value 0 - 1, rotates the Updir
-                        ElevationTolerance = 0, // adds additional tolerance (in meters) to meet the Elevation condition requirement.  *note* collision size is also added to the tolerance
+                        ElevationTolerance = 500, // adds additional tolerance (in meters) to meet the Elevation condition requirement.  *note* collision size is also added to the tolerance
                         TrackingDistance = 0, // Minimum travel distance before projectile begins racing to target
-                        DesiredElevation = 0, // The desired elevation relative to source 
+                        DesiredElevation = 500, // The desired elevation relative to source 
                         StoredStartId = 0, // Which approach id the the start storage was saved in, if any.
                         StoredEndId = 0, // Which approach id the the end storage was saved in, if any.
                         StoredStartType = PositionA,
                         StoredEndType = Target,
                         // Controls the leading behavior
-                        LeadDistance = 0, // Add additional "lead" in meters to the trajectory (project in the future), this will be applied even before TrackingDistance is met. 
+                        LeadDistance = 100, // Add additional "lead" in meters to the trajectory (project in the future), this will be applied even before TrackingDistance is met. 
                         PushLeadByTravelDistance = false, // the follow lead position will move in its point direction by an amount equal to the projectiles travel distance.
 
                         // Modify speed and acceleration ratios while this approach is active
                         AccelMulti = 1.0, // Modify default acceleration by this factor
                         DeAccelMulti = 0, // Modifies your default deacceleration by this factor
                         TotalAccelMulti = 0, // Modifies your default totalacceleration by this factor
-                        SpeedCapMulti = 2.0, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
+                        SpeedCapMulti = 1.5, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
 
                         // Target navigation behavior 
                         Orbit = false, // Orbit the target
@@ -1046,7 +986,7 @@ namespace Scripts
                         OffsetTime = 0, // How often to change the offset direction.
                         
                         // Other
-                        NoTimedSpawns = true, // When true timedSpawns will not be triggered while this approach is active.
+                        NoTimedSpawns = false, // When true timedSpawns will not be triggered while this approach is active.
                         DisableAvoidance = false, // Disable futureIntersect.
                         IgnoreAntiSmart = true, // If set to true, antismart cannot change this approaches target.
                         HeatRefund = 0, // how much heat to refund when related EndEvent/StartEvent is met.
@@ -1059,7 +999,7 @@ namespace Scripts
                         // Audio/Visual Section
                         AlternateParticle = new ParticleDef // if blank it will use default, must be a default version for this to be useable. 
                         {
-                            Name = "",
+                            Name = "Fighter_Damaged",
                             Offset = Vector(x: 0, y: 0, z: 0),
                             DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                             Extras = new ParticleOptionDef
@@ -1117,7 +1057,7 @@ namespace Scripts
                         
                         PositionB = PositionA, // Origin, Shooter, Target, Surface, MidPoint, Current, Nothing, StoredStartDestination, StoredEndDestination
                         PositionC = Shooter,
-                        Elevation = Nothing, 
+                        Elevation = Shooter, 
                         
                         //
                         // Control if the vantagepoints update every frame or only at start.
@@ -1133,22 +1073,22 @@ namespace Scripts
                         
                         // Tweaks to vantagepoint behavior
                         AngleOffset = 0, // value 0 - 1, rotates the Updir
-                        ElevationTolerance = 0, // adds additional tolerance (in meters) to meet the Elevation condition requirement.  *note* collision size is also added to the tolerance
+                        ElevationTolerance = 100, // adds additional tolerance (in meters) to meet the Elevation condition requirement.  *note* collision size is also added to the tolerance
                         TrackingDistance = 0, // Minimum travel distance before projectile begins racing to target
-                        DesiredElevation = 0, // The desired elevation relative to source 
+                        DesiredElevation = 100, // The desired elevation relative to source 
                         StoredStartId = 0, // Which approach id the the start storage was saved in, if any.
                         StoredEndId = 0, // Which approach id the the end storage was saved in, if any.
                         StoredStartType = PositionA,
                         StoredEndType = Target,
                         // Controls the leading behavior
-                        LeadDistance = 0, // Add additional "lead" in meters to the trajectory (project in the future), this will be applied even before TrackingDistance is met. 
+                        LeadDistance = 50, // Add additional "lead" in meters to the trajectory (project in the future), this will be applied even before TrackingDistance is met. 
                         PushLeadByTravelDistance = false, // the follow lead position will move in its point direction by an amount equal to the projectiles travel distance.
 
                         // Modify speed and acceleration ratios while this approach is active
-                        AccelMulti = 1.0, // Modify default acceleration by this factor
+                        AccelMulti = 1.5, // Modify default acceleration by this factor
                         DeAccelMulti = 0, // Modifies your default deacceleration by this factor
                         TotalAccelMulti = 0, // Modifies your default totalacceleration by this factor
-                        SpeedCapMulti = 1.0, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
+                        SpeedCapMulti = 1.5, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
 
                         // Target navigation behavior 
                         Orbit = true, // Orbit the target
@@ -1229,7 +1169,7 @@ namespace Scripts
                         
                         PositionB = PositionA, // Origin, Shooter, Target, Surface, MidPoint, Current, Nothing, StoredStartPosition, StoredEndPosition, StoredStartLocalPosition, StoredEndLocalPosition
                         PositionC = StoredEndLocalPosition,
-                        Elevation = Nothing, 
+                        Elevation = Shooter, 
                         
                         //
                         // Control if the vantagepoints update every frame or only at start.
@@ -1245,9 +1185,9 @@ namespace Scripts
                         
                         // Tweaks to vantagepoint behavior
                         AngleOffset = 0, // value 0 - 1, rotates the Updir
-                        ElevationTolerance = 0, // adds additional tolerance (in meters) to meet the Elevation condition requirement.  *note* collision size is also added to the tolerance
+                        ElevationTolerance = 30, // adds additional tolerance (in meters) to meet the Elevation condition requirement.  *note* collision size is also added to the tolerance
                         TrackingDistance = 0, // Minimum travel distance before projectile begins racing to target
-                        DesiredElevation = 0, // The desired elevation relative to source 
+                        DesiredElevation = 20, // The desired elevation relative to source 
                         StoredStartId = 0, // Which approach id the the start storage was saved in, if any.
                         StoredEndId = 0, // Which approach id the the end storage was saved in, if any.
                         StoredStartType = PositionA,
@@ -1257,10 +1197,10 @@ namespace Scripts
                         PushLeadByTravelDistance = false, // the follow lead position will move in its point direction by an amount equal to the projectiles travel distance.
 
                         // Modify speed and acceleration ratios while this approach is active
-                        AccelMulti = 3.0, // Modify default acceleration by this factor
+                        AccelMulti = 2.0, // Modify default acceleration by this factor
                         DeAccelMulti = 0, // Modifies your default deacceleration by this factor
                         TotalAccelMulti = 0, // Modifies your default totalacceleration by this factor
-                        SpeedCapMulti = 1.0, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
+                        SpeedCapMulti = 1.25, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
 
                         // Target navigation behavior 
                         Orbit = false, // Orbit the target
@@ -1369,10 +1309,10 @@ namespace Scripts
                         PushLeadByTravelDistance = false, // the follow lead position will move in its point direction by an amount equal to the projectiles travel distance.
 
                         // Modify speed and acceleration ratios while this approach is active
-                        AccelMulti = 3.0, // Modify default acceleration by this factor
+                        AccelMulti = 2.0, // Modify default acceleration by this factor
                         DeAccelMulti = 0, // Modifies your default deacceleration by this factor
                         TotalAccelMulti = 0, // Modifies your default totalacceleration by this factor
-                        SpeedCapMulti = 1.0, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
+                        SpeedCapMulti = 1.5, // Limit max speed to this factor, must keep this value BELOW default maxspeed (1).
 
                         // Target navigation behavior 
                         Orbit = false, // Orbit the target
@@ -1726,50 +1666,7 @@ namespace Scripts
                     Shape = Diamond, // Round or Diamond
                 },
             },
-            Ewar = new EwarDef
-            {
-                Enable = false,
-                Type = Offense, //AntiSmart,JumpNull,EnergySink, Anchor,Emp,Offense,Nav,Dot,Push,Pull,Tractor,
-                Mode = Effect,
-                Strength = 1f,
-                Radius = 1f,
-                Duration = 120,
-                StackDuration = false,
-                Depletable = false,
-                MaxStacks = 0,
-                NoHitParticle = false,
-                Force = new PushPullDef
-                {
-                    ForceFrom = ProjectileLastPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
-                    ForceTo = HitPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
-                    Position = TargetCenterOfMass, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
-                    DisableRelativeMass = false,
-                    TractorRange = 0,
-                    ShooterFeelsForce = false,
-                },
-                Field = new FieldDef
-                {
-                    Interval = 0, // Time between each pulse, in game ticks (60 == 1 second).
-                    PulseChance = 0, // Chance from 0 - 100 that an entity in the field will be hit by any given pulse.
-                    GrowTime = 0, // How many ticks it should take the field to grow to full size.
-                    HideModel = false, // Hide the projectile model if it has one.
-                    ShowParticle = false, // Deprecated.
-                    Particle = new ParticleDef // Particle effect to generate at the field's position.
-                    {
-                        Name = "", // SubtypeId of field particle effect.
-                                   // Deprecated.
-                        Color = Color(red: 0, green: 0, blue: 0, alpha: 0), // Deprecated, set color in particle sbc.
-                        Extras = new ParticleOptionDef
-                        {
-                            Loop = false, // Deprecated, set this in particle sbc.
-                            Restart = false, // Not used.
-                            MaxDistance = 5000, // Not used.
-                            MaxDuration = 1, // Not used.
-                            Scale = 1, // Scale of effect.
-                        },
-                    },
-                },
-            },
+
             Beams = new BeamDef
             {
                 Enable = true, // Enable beam behaviour.
@@ -1826,27 +1723,37 @@ namespace Scripts
             {
                 ModelName = "",
                 VisualProbability = 1f,
-                ShieldHitDraw = false,
+                ShieldHitDraw = true,
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
                     {
                         Name = "", //ShipWelderArc
-                        Offset = Vector(x: 0, y: 0, z: -0.21f),
-                        DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
+                        //shrinkbydistance = false, obselete
+                        Color = Color(red: 128, green: 0, blue: 0, alpha: 32),
+                        Offset = Vector(x: 0, y: -1, z: 0),
                         Extras = new ParticleOptionDef
                         {
-                            Scale = 1f,
+                            Loop = true,
+                            Restart = true,
+                            MaxDistance = 3200,
+                            MaxDuration = 1,
+                            Scale = 1,
                         },
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "",
+                        Name = "PulseSmallLaserHitEffect",
                         ApplyToShield = true,
+                        //shrinkbydistance = false, obselete
+                        Color = Color(red: 1, green: 8f, blue: 10f, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: 0),
-                        DisableCameraCulling = true, // If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                         Extras = new ParticleOptionDef
                         {
+                            Loop = true,
+                            Restart = true,
+                            MaxDistance = 1200,
+                            MaxDuration = 30,
                             Scale = 1,
                             HitPlayChance = 1f,
                         },
@@ -1855,10 +1762,15 @@ namespace Scripts
                     {
                         Name = "",
                         ApplyToShield = true,
+                        //shrinkbydistance = false, obselete
+                        Color = Color(red: 1, green: 8f, blue: 10f, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: 0),
-                        DisableCameraCulling = true, // If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
                         Extras = new ParticleOptionDef
                         {
+                            Loop = false,
+                            Restart = false,
+                            MaxDistance = 5000,
+                            MaxDuration = 30,
                             Scale = 1,
                             HitPlayChance = 1f,
                         },
@@ -1866,15 +1778,15 @@ namespace Scripts
                 },
                 Lines = new LineDef
                 {
-                    ColorVariance = Random(start: 0f, end: 0f), // multiply the color by random values within range.
+                    ColorVariance = Random(start: 0.1f, end: 2f), // multiply the color by random values within range.
                     WidthVariance = Random(start: 0f, end: 0f), // adds random value to default width (negatives shrinks width)
                     Tracer = new TracerBaseDef
                     {
                         Enable = true,
-                        Length = 10f,
-                        Width = 0.2f,
-                        Color = Color(red: 5, green: 5, blue: 5f, alpha: 0.25f),
-                        VisualFadeStart = 90, // Number of ticks the weapon has been firing before projectiles begin to fade their color
+                        Length = 1f,
+                        Width = .2f,
+                        Color = Color(red: 12, green: 8f, blue: 8, alpha: 1f),
+                        VisualFadeStart = 60, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 60, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
                             "WeaponLaser",
@@ -1886,36 +1798,36 @@ namespace Scripts
                             Textures = new[] {
                                 "",
                             },
-                            SegmentLength = 0f, // Uses the values below.
-                            SegmentGap = 0f, // Uses Tracer textures and values
-                            Speed = 1f, // meters per second
-                            Color = Color(red: 30, green: 15, blue: 15, alpha: 1),
+                            SegmentLength = 65f, // Uses the values below.
+                            SegmentGap = 0, // Uses Tracer textures and values
+                            Speed = 60f, // meters per second
+                            Color = Color(red: 25, green: 3, blue: 3, alpha: 0.75f),
                             WidthMultiplier = 1f,
                             Reverse = false,
                             UseLineVariance = true,
-                            WidthVariance = Random(start: 0f, end: 0f),
-                            ColorVariance = Random(start: 0f, end: 0f)
+                            WidthVariance = Random(start: -0.05f, end: 0f),
+                            ColorVariance = Random(start: 0.3f, end: 1f)
                         }
                     },
                     Trail = new TrailDef
                     {
-                        Enable = true,
+                        Enable = false,
                         Textures = new[] {
                             "WeaponLaser",
                         },
                         TextureMode = Normal,
-                        DecayTime = 1,
-                        Color = Color(red: 7, green: 2, blue: 2f, alpha: 0.1f),
-                        Back = false,
-                        CustomWidth = 0.33f,
-                        UseWidthVariance = false,
+                        DecayTime = 15,
+                        Color = Color(red: 8f, green: 1f, blue: 1f, alpha: 0.4f),
+                        Back = true,
+                        CustomWidth = 0.6f,
+                        UseWidthVariance = true,
                         UseColorFade = true,
                     },
                     OffsetEffect = new OffsetEffectDef
                     {
                         MaxOffset = 0,// 0 offset value disables this effect
-                        MinLength = 0f,
-                        MaxLength = 0,
+                        MinLength = 0.2f,
+                        MaxLength = 3,
                     },
                 },
             },
@@ -1923,7 +1835,7 @@ namespace Scripts
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
                 HitSound = "",
-                ShotSound = "FighterLaser",
+                ShotSound = "SmallLaser_Fighter",
                 ShieldHitSound = "",
                 PlayerHitSound = "",
                 VoxelHitSound = "",

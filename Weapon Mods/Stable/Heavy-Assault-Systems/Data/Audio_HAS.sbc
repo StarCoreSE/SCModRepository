@@ -548,9 +548,10 @@
         <DistantSound DistanceCrossfade="0" Distance="3300" Sound="HAS_AvengerShotDist5" />
 		  </DistantSounds>
       <!-- Prevents this sound from having this many active playbacks at once, 0 = infinite. -->
-      <SoundLimit>1</SoundLimit>
+      <SoundLimit>5</SoundLimit>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 		  <DynamicMusicAmount>50</DynamicMusicAmount>
+      <VolumeVariation>0.1</VolumeVariation>
       <Volume>2</Volume>
       <Loopable>true</Loopable>
       <Waves>
@@ -569,7 +570,8 @@
       </Id>
       <Category>SHOT</Category>
       <MaxDistance>5000</MaxDistance>
-      <SoundLimit>1</SoundLimit>
+      <SoundLimit>5</SoundLimit>
+      <VolumeVariation>0.1</VolumeVariation>
       <Volume>2</Volume>
       <Loopable>true</Loopable>
       <Waves>
@@ -586,7 +588,8 @@
       </Id>
       <Category>SHOT</Category>
       <MaxDistance>5000</MaxDistance>
-      <SoundLimit>1</SoundLimit>
+      <SoundLimit>5</SoundLimit>
+      <VolumeVariation>0.1</VolumeVariation>
       <Volume>1.5</Volume>
       <Loopable>true</Loopable>
       <Waves>
@@ -603,7 +606,8 @@
       </Id>
       <Category>SHOT</Category>
       <MaxDistance>5000</MaxDistance>
-      <SoundLimit>1</SoundLimit>
+      <VolumeVariation>0.1</VolumeVariation>
+      <SoundLimit>5</SoundLimit>
       <Volume>1</Volume>
       <Loopable>true</Loopable>
       <Waves>
@@ -621,7 +625,7 @@
       </Id>
       <Category>SHOT</Category>
       <MaxDistance>5000</MaxDistance>
-      <SoundLimit>1</SoundLimit>
+      <SoundLimit>5</SoundLimit>
       <Volume>4</Volume>
       <Loopable>true</Loopable>
       <Waves>
@@ -640,7 +644,7 @@
       </Id>
       <Category>SHOT</Category>
       <MaxDistance>5000</MaxDistance>
-      <SoundLimit>1</SoundLimit>
+      <SoundLimit>5</SoundLimit>
       <Volume>2.5</Volume>
       <Loopable>true</Loopable>
       <Waves>
@@ -659,7 +663,7 @@
       </Id>
       <Category>SHOT</Category>
       <MaxDistance>5000</MaxDistance>
-      <SoundLimit>1</SoundLimit>
+      <SoundLimit>5</SoundLimit>
       <Volume>1.5</Volume>
       <Loopable>true</Loopable>
       <Waves>
@@ -689,7 +693,8 @@
       NOTE: Might not do anything if multiple sounds come from the same position. -->
      <PreventSynchronization>0</PreventSynchronization>
      <!-- Prevents this sound from having this many active playbacks at once, 0 = infinite. -->
-     <SoundLimit>1</SoundLimit>
+     <SoundLimit>5</SoundLimit>
+      <VolumeVariation>0.1</VolumeVariation>
       <Volume>1</Volume>
       <Loopable>true</Loopable>
       <Waves>

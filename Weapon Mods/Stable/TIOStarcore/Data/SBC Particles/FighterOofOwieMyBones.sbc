@@ -2,8 +2,8 @@
 <Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ParticleEffects>
     <ParticleEffect xsi:type="ParticleEffect">
-      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="Fighter_OofOwie" />
-      <ParticleId>5687214</ParticleId>
+      <Id Type="MyObjectBuilder_ParticleEffect" Subtype="Fighter_Damaged" />
+      <ParticleId>5687777</ParticleId>
       <Length>1</Length>
       <Preload>0</Preload>
       <LowRes>false</LowRes>
