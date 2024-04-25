@@ -13,13 +13,13 @@ namespace Scripts
     partial class Parts
     {
         // Don't edit above this line
-        WeaponDefinition AMP_FieldGenerator => new WeaponDefinition
+        WeaponDefinition Goncol_MagnaPulse => new WeaponDefinition
         {
             Assignments = new ModelAssignmentsDef
             {
                 MountPoints = new[] {
                     new MountPointDef {
-                        SubtypeId = "AMP_HealGenerator", // Block Subtypeid. Your Cubeblocks contain this information
+                        SubtypeId = "MagnaPulse_Gen", // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "", // For weapons with a spinning barrel such as Gatling Guns. Subpart_Boomsticks must be written as Boomsticks.
                         MuzzlePartId = "elevation", // The subpart where your muzzle empties are located. This is often the elevation subpart. Subpart_Boomsticks must be written as Boomsticks.
                         AzimuthPartId = "azimuth", // Your Rotating Subpart, the bit that moves sideways.
@@ -56,7 +56,7 @@ namespace Scripts
             },
             HardPoint = new HardPointDef
             {
-                PartName = "Field Generator", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "MagnaPulse Generator", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 10f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Off, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
@@ -143,7 +143,7 @@ namespace Scripts
                 },
                 Audio = new HardPointAudioDef
                 {
-                    PreFiringSound = "MaxMemeReload", // Audio for warmup effect.
+                    PreFiringSound = "", // Audio for warmup effect.
                     FiringSound = "shieldthing_firesound", // Audio for firing.
                     FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "MaxMemeReload", // Sound SubtypeID, for when your Weapon is in a reloading state
@@ -164,9 +164,9 @@ namespace Scripts
                         {
                             Loop = true, // Set this to the same as in the particle sbc!
                             Restart = true, // Whether to end a looping effect instantly when firing stops.
-                            MaxDistance = 10000, // Max distance at which this effect should be visible. NOTE: This will use whichever MaxDistance value is higher across Effect1 and Effect2!
-                            MaxDuration = 0, // How many ticks the effect should be ended after, if it's still running.
-                            Scale = 1f, // Scale of effect.
+                            //MaxDistance = 10000, // Max distance at which this effect should be visible. NOTE: This will use whichever MaxDistance value is higher across Effect1 and Effect2!
+                            //MaxDuration = 0, // How many ticks the effect should be ended after, if it's still running.
+                            //Scale = 1f, // Scale of effect.
                         },
                     },
                 },

@@ -165,7 +165,7 @@ namespace Scripts {
                         {
                             Loop = false, // Deprecated, set this in particle sbc.
                             Restart = true, // Whether to end the previous effect early and spawn a new one.
-                            MaxDistance = 1000, // Max distance at which this effect should be visible. NOTE: This will use whichever MaxDistance value is higher across Effect1 and Effect2!
+                            MaxDistance = 10000, // Max distance at which this effect should be visible. NOTE: This will use whichever MaxDistance value is higher across Effect1 and Effect2!
                             MaxDuration = 0, // How many ticks the effect should be ended after, if it's still running.
                             Scale = 1f, // Scale of effect.
                         },

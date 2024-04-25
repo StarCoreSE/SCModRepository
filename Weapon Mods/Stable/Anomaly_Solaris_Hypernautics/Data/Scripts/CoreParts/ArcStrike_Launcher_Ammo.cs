@@ -128,13 +128,13 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 35f, // Multiplier for damage against shields.
+                    Modifier = 8f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
-                    BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
+                    BypassModifier = -2f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {
-                    Base = Kinetic,
+                    Base = Energy,
                     AreaEffect = Energy, // Kinetic , Energy, are your Options.
                     Detonation = Energy,
                     Shield = Energy, // Damage against shields is currently all of one type per projectile.
@@ -372,7 +372,8 @@ namespace Scripts
                             SegmentLength = 0f, // Uses the values below.
                             SegmentGap = 0f, // Uses Tracer textures and values
                             Speed = 1f, // meters per second
-                            Color = Color(red: 1, green: 2, blue: 2.5f, alpha: 1),
+                            Color = Color(red: 1.5f, green: 0.5f, blue: 1.5f, alpha: 1),
+                            //Color = Color(red: 1, green: 2, blue: 2.5f, alpha: 1),
                             WidthMultiplier = 1f,
                             Reverse = false,
                             UseLineVariance = true,
@@ -434,7 +435,7 @@ namespace Scripts
             EnergyCost = 0f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 10f, // Direct damage; one steel plate is worth 100.
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
-            Health = 20, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            Health = 120, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = false, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
@@ -519,13 +520,13 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 35f, // Multiplier for damage against shields.
+                    Modifier = 8f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
-                    BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
+                    BypassModifier = -2f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {
-                    Base = Kinetic,
+                    Base = Energy,
                     AreaEffect = Energy, // Kinetic , Energy, are your Options.
                     Detonation = Energy,
                     Shield = Energy, // Damage against shields is currently all of one type per projectile.
@@ -736,7 +737,8 @@ namespace Scripts
                         Enable = true,
                         Length = 8f,
                         Width = 2f,
-                        Color = Color(red: 20, green: 20, blue: 80f, alpha: 1),
+                        //Color = Color(red: 1, green: 2, blue: 2.5f, alpha: 1),
+                        Color = Color(red: 40f, green: 25, blue: 40f, alpha: 1),
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
@@ -768,7 +770,8 @@ namespace Scripts
                         },
                         TextureMode = Normal,
                         DecayTime = 120,
-                        Color = Color(red: 20, green: 20, blue: 80f, alpha: 1),
+                        //Color = Color(red: 1, green: 2, blue: 2.5f, alpha: 1),
+                        Color = Color(red: 40f, green: 25f, blue: 40f, alpha: 1),
                         Back = false,
                         CustomWidth = 0.2f,
                         UseWidthVariance = false,
@@ -814,7 +817,7 @@ namespace Scripts
             EnergyCost = 0.01f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 10f, // Direct damage; one steel plate is worth 100.
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
-            Health = 20, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            Health = 120, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = false, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
@@ -899,13 +902,13 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 35f, // Multiplier for damage against shields.
+                    Modifier = 8f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
-                    BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
+                    BypassModifier = -2f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {
-                    Base = Kinetic,
+                    Base = Energy,
                     AreaEffect = Energy, // Kinetic , Energy, are your Options.
                     Detonation = Energy,
                     Shield = Energy, // Damage against shields is currently all of one type per projectile.
@@ -1116,7 +1119,8 @@ namespace Scripts
                         Enable = true,
                         Length = 8f,
                         Width = 1f,
-                        Color = Color(red: 30, green: 30, blue: 90f, alpha: 1),
+                        //Color = Color(red: 1, green: 2, blue: 2.5f, alpha: 1),
+                        Color = Color(red: 40f, green: 25f, blue: 40f, alpha: 1),
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
@@ -1272,9 +1276,9 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 35f, // Multiplier for damage against shields.
+                    Modifier = 8f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
-                    BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
+                    BypassModifier = -2f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {
@@ -1658,13 +1662,13 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 35f, // Multiplier for damage against shields.
+                    Modifier = 8f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
-                    BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
+                    BypassModifier = -2f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {
-                    Base = Kinetic,
+                    Base = Energy,
                     AreaEffect = Energy, // Kinetic , Energy, are your Options.
                     Detonation = Energy,
                     Shield = Energy, // Damage against shields is currently all of one type per projectile.
@@ -1907,7 +1911,8 @@ namespace Scripts
                         },
                         TextureMode = Normal,
                         DecayTime = 128,
-                        Color = Color(red: 0, green: 0, blue: 1, alpha: 1),
+                        //Color = Color(red: 1, green: 2, blue: 2.5f, alpha: 1),
+                        Color = Color(red: 2, green: 1, blue: 2, alpha: 1),
                         Back = false,
                         CustomWidth = 0,
                         UseWidthVariance = false,
@@ -2039,13 +2044,13 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 35f, // Multiplier for damage against shields.
+                    Modifier = 8f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
-                    BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
+                    BypassModifier = -2f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {
-                    Base = Kinetic,
+                    Base = Energy,
                     AreaEffect = Energy, // Kinetic , Energy, are your Options.
                     Detonation = Energy,
                     Shield = Energy, // Damage against shields is currently all of one type per projectile.
@@ -2288,7 +2293,8 @@ namespace Scripts
                         },
                         TextureMode = Normal,
                         DecayTime = 128,
-                        Color = Color(red: 0, green: 0, blue: 1, alpha: 1),
+                        //Color = Color(red: 1, green: 2, blue: 2.5f, alpha: 1),
+                        Color = Color(red: 2, green: 1, blue: 2, alpha: 1),
                         Back = false,
                         CustomWidth = 0,
                         UseWidthVariance = false,
@@ -2326,7 +2332,5 @@ namespace Scripts
                 }
             }, // Don't edit below this line
         };
-        
-
-        }
+    }
 }

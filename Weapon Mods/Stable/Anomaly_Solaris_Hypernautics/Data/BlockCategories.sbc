@@ -6,8 +6,8 @@
         <TypeId>GuiBlockCategoryDefinition</TypeId>
         <SubtypeId>Solaris Hypernautics</SubtypeId>
       </Id>
-      	<DisplayName>Solaris Hypernautics</DisplayName>
-      	<Name>Solaris Hypernautics</Name>
+      	<DisplayName>[SOL]</DisplayName>
+      	<Name>[SOL]</Name>
      		<ItemIds>
 			<string>AMP_HealGenerator</string>
 			<string>AMP_FlakShotgun</string>

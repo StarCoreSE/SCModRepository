@@ -6,16 +6,15 @@
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>AMP_HealGenerator</SubtypeId>
+				<SubtypeId>MagnaPulse_Gen</SubtypeId>
 			</Id>
-			<DisplayName>Goncol MagnaPulse</DisplayName>
+			<DisplayName>[SOL] Goncol MagnaPulse</DisplayName>
 			<Description>
 				Refresh your buddy's shields by manually shooting at it.
-				Grid limit 1
-				Range: 1.75km technically
-				Heal: 12-20 mill shields (surface area dependent)
-				Reload Charge: 755 megaawatt
-				Relaod Time: 24 seconds
+				[Range: 4.5km technically]
+				[Heal: 12-20 mill shields (surface area dependent)]
+				[Reload Charge: 755 megaawatt]
+				[Relaod Time: 24 seconds]
 			</Description>
 			<Icon>Textures\GUI\Icons\LargeArcEmitter.dds</Icon>
 			<CubeSize>Large</CubeSize>
@@ -37,7 +36,7 @@
 				<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="1.0" EndY="3.0"/>
 				<MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
 			</MountPoints>
-			<BlockPairName>HealGenerator</BlockPairName>
+			<BlockPairName>MagnaPulse_Gen</BlockPairName>
 			<MirroringZ>Y</MirroringZ>
 		</Definition>
 
@@ -46,15 +45,17 @@
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>AMP_FlakShotgun</SubtypeId>
+				<SubtypeId>Flechette_DoubleBarrel</SubtypeId>
 			</Id>
-			<DisplayName>Flechette Shotgun</DisplayName>
+			<DisplayName>[SOL] Flechette Shotgun</DisplayName>
 			<Description>
-				Two shotguns duct taped together, what's to know
-				Range: 8km technically
-				Damage: Kinetic
-				Reload Charge: 20 megawatts
-				Relaod Time: 15 seconds
+				Two shotguns duct taped together, with two ammo's.
+				Buckshot:
+				[Range: 2km technically]
+				[Damage: Kinetic]
+				[Reload Time: 4 seconds]
+				Smart Flak:
+				[Homing and AMS]
 			</Description>
 			<Icon>Textures\GUI\Icons\FlakShotgun.dds</Icon>
 			<CubeSize>Large</CubeSize>
@@ -76,29 +77,28 @@
 				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
 				<MountPoint Side="Bottom" StartX="0.00" StartY="4.00" EndX="2.00" EndY="6.00"/>
 			</MountPoints>
-			<BlockPairName>FlakShotgun</BlockPairName>
+			<BlockPairName>Flechette_DoubleBarrel</BlockPairName>
 		</Definition>
 
 
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>AMP_ImpulseTorch</SubtypeId>
+				<SubtypeId>Impulse_Torch</SubtypeId>
 			</Id>
-			<DisplayName>Impulse Torch</DisplayName>
+			<DisplayName>[SOL] Impulse Torch</DisplayName>
 			<Description>
 				Its a offensive afterburner that gimbals
-				Range: 1km technically
-				Damage: Energy
-				Reload Charge: 4 megawatts
-				Relaod Time: 10 seconds
+				[Range: 600m]
+				[Damage: Energy]
+				[Afterburner and Impulse]
 			</Description>
 			<Icon>Textures\GUI\Icons\ImpulseTorchBase.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="1" y="2" z="4"/>
 			<ModelOffset x="0" y="0" z="0"/>
-			<Model>Models\ImpulseTorchBase.mwm</Model>
+			<Model>Models\FlamethrowerBase.mwm</Model>
 			<Components>
 				<Component Subtype="AMP_FrameComponent" Count="1"/>
 				<Component Subtype="Computer" Count="1"/>
@@ -106,7 +106,7 @@
 				<Component Subtype="AMP_PlateComponent" Count="1"/>
 			</Components>
 			<CriticalComponent Subtype="Computer" Index="0"/>
-			<BlockPairName>ImpulseTorchBase</BlockPairName>
+			<BlockPairName>Impulse_Torch</BlockPairName>
 
 			<MountPoints>
 				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="1.00" EndY="2.00" Default="true"/>
@@ -136,14 +136,13 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>SolHyp_ArcStrike_Torp</SubtypeId>
      </Id>
-     <DisplayName>ArcStrike CS-LR Torpedo</DisplayName>
+     <DisplayName>[SOL] ArcStrike CS-LR Torpedo</DisplayName>
      <Description>
     Anti Shield Torpedo
-    
-    14km range
-    Energy damage
-    no physical damage
-	2min reload
+    [14km range]
+    [Energy damage]
+    [no physical damage]
+	[2min reload]
 
 	 </Description>
      <Icon>Textures\GUI\Icons\OPA-Logo.dds</Icon>
@@ -195,12 +194,12 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>Counter_Battery</SubtypeId>
      </Id>
-     <DisplayName>SM-3 Counter Battery</DisplayName>
+     <DisplayName>[SOL] SM-3 Counter Battery</DisplayName>
      <Description>Anti-Missile Torpedo
-	10km range with 1.5km minimum
-	8 mini torps target missiles
-	Will heal shields if it impacts
-	40 second reload
+	[10km range with 1.5km minimum]
+	[8 mini torps target missiles]
+	[Will heal shields if it impacts]
+	[40 second reload]
 
      </Description>
      <Icon>Textures\GUI\missile_defense.png</Icon>
@@ -265,13 +264,13 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>S_Chem_Laser_Block</SubtypeId>
      </Id>
-     <DisplayName>Saber Chemical Laser</DisplayName>
+     <DisplayName>[SOL] Saber Chemical Laser</DisplayName>
      <Description>
-       [1.75kmkm range]
+       [1km range]
        [Energy damage]
        [Hitscan]
-       [50% climbing cost]
-       Uses a limited fuel to power an extremely powerful laser for 5 seconds before running out.
+       [Reload: 35sec]
+       Uses a limited capacity fuel cell to power a powerful laser for 2 seconds before running out and needing 35 seconds to reset for another firing.
      </Description>
      <Icon>Textures\Icons\laser icon.png</Icon>
      <CubeSize>Large</CubeSize>
@@ -329,14 +328,14 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>S_Armored_Laser_Block</SubtypeId>
      </Id>
-     <DisplayName>Saber Armored Chemical Laser</DisplayName>
+     <DisplayName>[SOL] Saber Armored Chemical Laser</DisplayName>
      <Description>
 	   Armored Laser
-       [1.75kmkm range]
+       [1km range]
        [Energy damage]
        [Hitscan]
-       [50% climbing cost]
-       Uses a limited fuel to power an extremely powerful laser for 5 seconds before running out.
+       [Reload: 35sec]
+       Uses a limited capacity fuel cell to power a powerful laser for 2 seconds before running out and needing 35 seconds to reset for another firing.
      </Description>
      <Icon>Textures\Icons\laser icon.png</Icon>
      <CubeSize>Large</CubeSize>
@@ -401,14 +400,24 @@
 
 
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
-			<!-- Nariman Anti Armour -->
+			<!-- Nariman Anti Anything -->
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>Nariman_Dart_Turret</SubtypeId>
 			</Id>
-			<DisplayName>Nariman NanoDart Turret</DisplayName>
+			<DisplayName>[SOL] Nariman NanoDart Turret</DisplayName>
 			<Description>
-				Dual purpose turret
+			Dual Ammo, Dual Purpose Turret
+			Smart NanoDart:
+			[Range: 5km]
+			[Velocity: 2.5km/s]
+			[Damage: Energy]
+			[Homing and AMS]
+			Concussion Bolt:
+			[Range: 3.5km]
+			[Velocity: 600m/s]
+			[Damage: Energy]
+			[Homing and AOE]
 			</Description>
 			<Icon>Textures\GUI\Icons\Ceis.dds</Icon>
 			<CubeSize>Large</CubeSize>
@@ -492,7 +501,7 @@
 			<TypeId>ConveyorSorter</TypeId>
         <SubtypeId>SolHyp_Magnetic_Coilgun</SubtypeId>
       </Id>
-      <DisplayName>Hercules Magnetic Accelerator Coilgun</DisplayName>
+      <DisplayName>[SOL] Hercules Magnetic Accelerator Coilgun</DisplayName>
 	  <Description>
       Hercules MAC
       [10km range, 5km effective range]
