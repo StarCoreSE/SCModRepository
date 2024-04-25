@@ -187,9 +187,9 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = true,
-                    Radius = 7f, // Radius of AOE effect, in meters.
+                    Radius = 8f, // Radius of AOE effect, in meters.
                     Damage = 16666f,
-                    Depth = 2f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
+                    Depth = 3f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
                     Falloff = Linear, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
@@ -216,12 +216,12 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 600, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 600f, //1800 voxel phasing if you go above 5100
+                DesiredSpeed = 1600f, //1800 voxel phasing if you go above 5100
                 MaxTrajectory = 9000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
-                RangeVariance = Random(start: 0, end: 0), // subtracts value from MaxTrajectory
+                RangeVariance = Random(start: 0, end: 250), // subtracts value from MaxTrajectory
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
 
             },
@@ -434,8 +434,8 @@ namespace Scripts
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
                 FallOff = new FallOffDef
                 {
-                    Distance = 0f, // Distance at which damage begins falling off.
-                    MinMultipler = 1f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
+                    Distance = 3000f, // Distance at which damage begins falling off.
+                    MinMultipler = 0.5f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
                 },
                 Grids = new GridSizeDef
                 {
@@ -502,9 +502,9 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = true,
-                    Radius = 5f, // Radius of AOE effect, in meters.
+                    Radius = 7f, // Radius of AOE effect, in meters.
                     Damage = 16666f,
-                    Depth = 1f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
+                    Depth = 3f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
                     Falloff = Linear, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
@@ -523,59 +523,6 @@ namespace Scripts
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
             },
-            Ewar = new EwarDef
-            {
-                Enable = false, // Enables EWAR effects AND DISABLES BASE DAMAGE AND AOE DAMAGE!!
-                Type = EnergySink, // EnergySink, Emp, Offense, Nav, Dot, AntiSmart, JumpNull, Anchor, Tractor, Pull, Push, 
-                Mode = Field, // Effect , Field
-                Strength = 1f,
-                Radius = 50f, // Meters
-                Duration = 1200, // In Ticks
-                StackDuration = true, // Combined Durations
-                Depletable = false,
-                MaxStacks = 100, // Max Debuffs at once
-                NoHitParticle = false,
-                /*
-                EnergySink : Targets & Shutdowns Power Supplies, such as Batteries & Reactor
-                Emp : Targets & Shutdown any Block capable of being powered
-                Offense : Targets & Shutdowns Weaponry
-                Nav : Targets & Shutdown Gyros or Locks them down
-                Dot : Deals Damage to Blocks in radius
-                AntiSmart : Effects & Scrambles the Targeting List of Affected Missiles
-                JumpNull : Shutdown & Stops any Active Jumps, or JumpDrive Units in radius
-                Tractor : Affects target with Physics
-                Pull : Affects target with Physics
-                Push : Affects target with Physics
-                Anchor : Targets & Shutdowns Thrusters
-                
-                */
-                Force = new PushPullDef
-                {
-                    ForceFrom = ProjectileLastPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
-                    ForceTo = HitPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
-                    Position = TargetCenterOfMass, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
-                    DisableRelativeMass = false,
-                    TractorRange = 0,
-                    ShooterFeelsForce = false,
-                },
-                Field = new FieldDef
-                {
-                    Interval = 6, // Time between each pulse, in game ticks (60 == 1 second).
-                    PulseChance = 100, // Chance from 0 - 100 that an entity in the field will be hit by any given pulse.
-                    GrowTime = 1, // How many ticks it should take the field to grow to full size.
-                    HideModel = false, // Hide the default bubble, or other model if specified.
-                    ShowParticle = true, // Show Block damage effect.
-                    TriggerRange = 10f, //range at which fields are triggered
-                    Particle = new ParticleDef // Particle effect to generate at the field's position.
-                    {
-                        Name = "", // SubtypeId of field particle effect.
-                        Extras = new ParticleOptionDef
-                        {
-                            Scale = 1, // Scale of effect.
-                        },
-                    },
-                },
-            },
             Beams = new BeamDef
             {
                 Enable = false, // Enable beam behaviour. Please have 3600 RPM, when this Setting is enabled. Please do not fire Beams into Voxels.
@@ -592,11 +539,11 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 500, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 900f, // voxel phasing if you go above 5100
-                MaxTrajectory = 3000f, // Max Distance the projectile or beam can Travel.
+                DesiredSpeed = 1000f, // voxel phasing if you go above 5100
+                MaxTrajectory = 4500f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
-                SpeedVariance = Random(start: 0, end: 200), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
+                SpeedVariance = Random(start: 0, end: 150), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
                 RangeVariance = Random(start: 0, end: 500), // subtracts value from MaxTrajectory
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 TotalAcceleration = 0, // 0 means no limit, something to do due with a thing called delta and something called v.
