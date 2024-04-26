@@ -5,32 +5,26 @@
     <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
       <Id>
         <TypeId>GuiBlockCategoryDefinition</TypeId>
-        <SubtypeId>SC_NidMod_UI</SubtypeId>
+        <SubtypeId>SC_40K_BlockCategory</SubtypeId>
       </Id>
-      <DisplayName>Tyranid Weapons</DisplayName>
-      <Name>Tyranid Weapons</Name>
+      <DisplayName>[40K]</DisplayName>
+      <Name>[40K]</Name>
       <ItemIds>
-        <string>NID_Pyroacid</string>
-        <string>NID_Bioplasma</string>
-        <string>NID_HiveDrone</string>
-        <string>NID_BioplasmaHivedrone</string>
+        <string>NovaCannon</string>
+        <string>GothicTorp</string>
+        <string>MacroCannon</string>
+        <string>HeavyMacroCannon</string>
+        <string>FixedLance</string>
+        <string>LanceBattery</string>
+        <string>LanceLightBattery</string>
+        <string>LanceHeavyBattery</string>
+        <string>MacroTurret</string>
+        <string>MacroLightTurret</string>
+        <string>MacroHeavyTurret</string>
+        <string>AegisFlakTurret</string>
       </ItemIds>
     </Category>
 
-    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
-      <Id>
-        <TypeId>GuiBlockCategoryDefinition</TypeId>
-        <SubtypeId/>
-      </Id>
-      <DisplayName>DisplayName_Category_LargeBlocks</DisplayName>
-      <Name>LargeBlocks</Name>
-      <ItemIds>
-        <string>NID_Pyroacid</string>
-        <string>NID_Bioplasma</string>
-        <string>NID_HiveDrone</string>
-        <string>NID_BioplasmaHivedrone</string>
-      </ItemIds>
-    </Category>
 
   </CategoryClasses>
 </Definitions>
