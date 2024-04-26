@@ -605,7 +605,7 @@ Cat_BadModder@22;
 				  VindicatorKineticLance@750;
 
 				 Fixed_Rockets@250;
-				JN_175Fixed@100900; 
+				JN_175Fixed@600; 
 				 Thagomizer@635; 
 					 Thagomizer_Flipped@635; 
 						 Thagomizer_Angled@635; 

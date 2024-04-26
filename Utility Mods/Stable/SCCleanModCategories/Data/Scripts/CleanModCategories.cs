@@ -52,6 +52,8 @@ namespace Jakaria
                          definition.Value.Name != "[ONYX]" &&
                          definition.Value.Name != "[SA]" &&
                          definition.Value.Name != "[HAS]" &&
+                         definition.Value.Name != "[SOL]" &&
+						 definition.Value.Name != "[FAS]" &&
                          definition.Value.Name != "[EXO]" &&
                          definition.Value.Name != "[BTI]")
                 {
