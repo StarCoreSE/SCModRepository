@@ -142,6 +142,8 @@ namespace ShipPoints
 
 				S_Armored_Laser_Block@120;
                 S_Chem_Laser_Block@120;
+				Impulse_Torch@175;
+				Flechette_DoubleBarrel@200;
 				Nariman_Dart_Turret@225;
 				Counter_Battery@250;
 				SolHyp_ArcStrike_Torp@275;
