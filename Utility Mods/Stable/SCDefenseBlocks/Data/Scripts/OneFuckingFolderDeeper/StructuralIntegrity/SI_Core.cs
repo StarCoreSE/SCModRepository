@@ -55,6 +55,11 @@ namespace StarCore.StructuralIntegrity
         public float MaxFieldPower;
         public float MinGridModifier;
         public float MaxGridModifier;
+
+        public float BasePowerUsage;
+        public float MaxModifierPowerPercentage;
+        public float MinModifierPowerPercentage;
+
         public float ReferenceGridModifier = 0f;
 
         MySync<float, SyncDirection.BothWays> FieldPowerSync;
@@ -65,6 +70,8 @@ namespace StarCore.StructuralIntegrity
         public float SiegeMinPowerReq;
         public int SiegeTimer;
         public int SiegeCooldownTimer;
+
+        public float SiegePowerPercentage;
 
         public int SiegeVisibleTimer;
         public const int SiegeDisplayTimer = 60;
@@ -198,7 +205,7 @@ namespace StarCore.StructuralIntegrity
                 // i know why this exists
                 float minDivertedPower = MinFieldPower;
                 float maxDivertedPower = MaxFieldPower;
-                SetupTerminalControls<IMyCollector>(minDivertedPower, maxDivertedPower); ;
+                SetupTerminalControls<IMyCollector>(minDivertedPower, maxDivertedPower);
 
                 // Apply Defaults
                 FieldPowerSync.Value = MinFieldPower;
@@ -345,6 +352,15 @@ namespace StarCore.StructuralIntegrity
             if (MaxGridModifier != Config.MaxGridModifier)
                 MaxGridModifier = Config.MaxGridModifier;
 
+            if (BasePowerUsage != Config.BasePowerUsage)
+                BasePowerUsage = Config.BasePowerUsage;
+
+            if (MinModifierPowerPercentage != Config.MinModifierPowerPercentage)
+                MinModifierPowerPercentage = Config.MinModifierPowerPercentage;
+
+            if (MaxModifierPowerPercentage != Config.MaxModifierPowerPercentage)
+                MaxModifierPowerPercentage = Config.MaxModifierPowerPercentage;
+
             // Assign Siege Specific Values from Config
             if (SiegeEnabled != Config.SiegeEnabled)
                 SiegeEnabled = Config.SiegeEnabled;
@@ -358,6 +374,9 @@ namespace StarCore.StructuralIntegrity
             if (SiegeCooldownTimer != Config.SiegeCooldownTimer)
                 SiegeCooldownTimer = Config.SiegeCooldownTimer;
 
+            if (SiegePowerPercentage != Config.SiegePowerPercentage)
+                SiegePowerPercentage = Config.SiegePowerPercentage;
+
             // Calculate Visible Time from Ticks / 60 for Seconds
             CountSiegeDisplayTimer = SiegeDisplayTimer;
             SiegeVisibleTimer = SiegeTimer / SiegeDisplayTimer;
@@ -368,19 +387,24 @@ namespace StarCore.StructuralIntegrity
             if (!SIGenBlock.IsWorking)
                 return 0f;
 
-            if (FieldPowerSync.Value == 0f && !SiegeActive.Value)
+            if (SiegeActive.Value)
             {
-                return 50.000f;
+                CalculateMaxGridPower();
+
+                float powerPercentage = SIGenBlockDef.RequiredPowerInput = MaxAvailableGridPower * SiegePowerPercentage;
+
+                return powerPercentage;
             }
             else
             {
                 CalculateMaxGridPower();
 
-                float baseUsage = 50.000f;
+                float powerPercent = FieldPowerSync.Value / MaxFieldPower;
+                float adjustedPowerPercent = MinModifierPowerPercentage + (MaxModifierPowerPercentage - MinModifierPowerPercentage) * powerPercent;
 
-                float powerPrecentage = SIGenBlockDef.RequiredPowerInput = MaxAvailableGridPower * (1 - GridModifierSync.Value);
+                float powerPercentage = SIGenBlockDef.RequiredPowerInput = MaxAvailableGridPower * adjustedPowerPercent;
 
-                return baseUsage + powerPrecentage;
+                return BasePowerUsage + powerPercentage;
             }
         }
 

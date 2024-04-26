@@ -142,6 +142,8 @@ namespace ShipPoints
 
 				S_Armored_Laser_Block@120;
                 S_Chem_Laser_Block@120;
+				Impulse_Torch@175;
+				Flechette_DoubleBarrel@200;
 				Nariman_Dart_Turret@225;
 				Counter_Battery@250;
 				SolHyp_ArcStrike_Torp@275;
@@ -603,7 +605,7 @@ Cat_BadModder@22;
 				  VindicatorKineticLance@750;
 
 				 Fixed_Rockets@250;
-				JN_175Fixed@100900; 
+				JN_175Fixed@600; 
 				 Thagomizer@635; 
 					 Thagomizer_Flipped@635; 
 						 Thagomizer_Angled@635; 
