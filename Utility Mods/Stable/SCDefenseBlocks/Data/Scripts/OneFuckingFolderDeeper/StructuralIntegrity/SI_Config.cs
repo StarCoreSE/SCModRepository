@@ -26,7 +26,7 @@ namespace StarCore.StructuralIntegrity
             Log.Info($"MinGridModifier value={Settings.MinGridModifier}");
             Log.Info($"MaxGridModifier value={Settings.MaxGridModifier}");
 
-            Log.Info($"MaxGridModifier value={Settings.BasePowerUsage}");
+            Log.Info($"BasePowerUsage value={Settings.BasePowerUsage}");
             Log.Info($"MaxModifierPowerPercentage value={Settings.MaxModifierPowerPercentage}");
             Log.Info($"MinModifierPowerPercentage value={Settings.MinModifierPowerPercentage}");
 
