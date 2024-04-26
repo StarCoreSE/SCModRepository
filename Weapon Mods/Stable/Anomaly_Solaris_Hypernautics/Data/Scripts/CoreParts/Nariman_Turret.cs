@@ -140,7 +140,7 @@ namespace Scripts {
                 {
                     PreFiringSound = "", // Audio for warmup effect.
                     FiringSound = "Pulse_Flak_placeholder", // Audio for firing.
-                    FiringSoundPerShot = false, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
+                    FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "",
                     NoAmmoSound = "",
                     HardPointRotationSound = "", // Audio played when turret is moving.
