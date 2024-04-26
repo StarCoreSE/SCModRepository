@@ -182,7 +182,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                Torch_Charge_Ammo, // Must list all primary, shrapnel, and pattern ammos.
+                Impulse_Torch_Ammo, // Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = Weapon75_Animation,
             //Upgrades = UpgradeModules,
