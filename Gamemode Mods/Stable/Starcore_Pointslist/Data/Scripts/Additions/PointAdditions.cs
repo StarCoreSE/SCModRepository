@@ -516,11 +516,17 @@ Cat_Darth40kWeapons@20;
 				LightParticleWhip@200;
 				ParticleWhip@400;
 				NovaCannon@800;
+				FixedLance@350;
 				MacroCannon@200;
+				HeavyMacroCannon@450;
     				LanceBattery@400;
 				LanceLightBattery@280;
 				LanceHeavyBattery@650;
+				MacroTurret@300;
+				MacroLightTurret@150
+				MacroHeavyTurret@450;
 				GothicTorp@300;
+				AegisFlakTurret@120;
 
 				
 				65_Launcher_FixedMount@350;
