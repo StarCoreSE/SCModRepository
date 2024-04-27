@@ -776,7 +776,7 @@ namespace klime.PointCheck
             }
             catch (Exception e)
             {
-                Log.Error($"Exception in UpdateAfterSimulation TryCatch 01: {e}");
+                
             }
             try
             {
