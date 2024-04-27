@@ -17,6 +17,7 @@
 	    <string>Caster_CentralPipe_T</string>
 	    <string>Caster_FocusLens</string>
 	    <string>Caster_Reactor</string>
+	    <string>Heat_Heatsink</string>
       </ItemIds>
     </Category>
   </CategoryClasses>

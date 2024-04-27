@@ -14,7 +14,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
             // Unique name of the definition.
             Name = "Modular_Fusion",
 
-            OnInit = () => { S_FusionManager.I.Definition = this; },
+            OnInit = () => { S_FusionManager.I.FusionDefinition = this; },
 
             // Triggers whenever a new part is added to an assembly.
             OnPartAdd = S_FusionManager.I.OnPartAdd,
