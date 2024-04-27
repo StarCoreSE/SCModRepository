@@ -33,6 +33,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
             AllowedBlocks = new[]
             {
                 "Heat_Heatsink",
+                "Heat_FlatRadiator",
                 "Caster_CentralPipe_0",
                 "Caster_CentralPipe_90",
                 "Caster_CentralPipe_T",
@@ -49,6 +50,26 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                     [Vector3I.Down] = Array.Empty<string>(),
                     [Vector3I.Left] = Array.Empty<string>(),
                     [Vector3I.Right] = Array.Empty<string>(),
+                },
+                ["Heat_FlatRadiator"] = new Dictionary<Vector3I, string[]>
+                {
+                    [Vector3I.Forward] = Array.Empty<string>(),
+                    [Vector3I.Up] = new[]
+                    {
+                        "Heat_FlatRadiator"
+                    },
+                    [Vector3I.Down] = new[]
+                    {
+                        "Heat_FlatRadiator"
+                    },
+                    [Vector3I.Left] = new[]
+                    {
+                        "Heat_FlatRadiator"
+                    },
+                    [Vector3I.Right] = new[]
+                    {
+                        "Heat_FlatRadiator"
+                    },
                 },
                 ["Caster_CentralPipe_0"] = new Dictionary<Vector3I, string[]>
                 {
