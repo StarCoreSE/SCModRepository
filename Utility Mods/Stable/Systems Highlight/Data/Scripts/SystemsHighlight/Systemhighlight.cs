@@ -18,13 +18,28 @@ using VRageRender;
 using CoreSystems.Api;
 using static VRageRender.MyBillboard;
 using VRage.Game.Entity;
-
+using VRage.Render.Scene;
+using VRageRender.Messages;
 
 namespace StarCore.SystemHighlight
 {
+    public enum HighlightFilterType
+    {
+        Conveyor,
+        Thruster,
+        Steering,
+        Power,
+        Armor,
+        Weapon,
+        Damage,
+        Custom,
+    }
+
+
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     public class SubsystemHighlight : MySessionComponentBase
     {
+
         private Dictionary<IMyCubeGrid, Dictionary<IMySlimBlock, HighlightFilterType>> highlightedEntitiesPerGrid = new Dictionary<IMyCubeGrid, Dictionary<IMySlimBlock, HighlightFilterType>>();
         private Dictionary<long, IMyCubeGrid> ActiveGrids = new Dictionary<long, IMyCubeGrid>();
         private Dictionary<string, Action<string, List<IMySlimBlock>, IMyCubeGrid>> commandHandlers;
@@ -46,17 +61,9 @@ namespace StarCore.SystemHighlight
         private bool AQDInstalled = false;
         private bool WCInstalled = false;
 
-        public enum HighlightFilterType
-        {
-            Conveyor,
-            Thruster,
-            Steering,
-            Power,
-            Armor,
-            Weapon,
-            Damage,
-            Custom,
-        }
+        public List<IMySlimBlock> drawlist;
+
+
 
         #region Overrides
         public override void BeforeStart()
@@ -77,7 +84,7 @@ namespace StarCore.SystemHighlight
                 {
                     AQDInstalled = true;
                     Log.Info("AQD - Upgradable Gyros Detected");
-                }                   
+                }
             }
 
             CoreSysAPI = new WcApi();
@@ -97,6 +104,15 @@ namespace StarCore.SystemHighlight
 
         protected override void UnloadData()
         {
+            if (drawlist != null)
+            {
+                foreach (var block in drawlist)
+                {
+                    block.Dithering = 0;
+                }
+                drawlist = null;
+            }
+
             CoreSysAPI.Unload();
             CoreSysAPI = null;
 
@@ -226,7 +242,7 @@ namespace StarCore.SystemHighlight
         {
             MyAPIGateway.Utilities.ShowMissionScreen(
                 "Systems Highlight",
-                ""/*Empty to Null Prefix*/, 
+                ""/*Empty to Null Prefix*/,
                 "Systems Highlight Help Menu",
                 "/hlconv : \n" +
                 "   Highlights Conveyors\n" +
@@ -328,7 +344,7 @@ namespace StarCore.SystemHighlight
             }
         }
 
-        
+
         public bool IsBlockOfType(HighlightFilterType type, IMySlimBlock block, string customType = "")
         {
             switch (type)
@@ -345,7 +361,7 @@ namespace StarCore.SystemHighlight
         public void HandleHighlight(List<IMySlimBlock> blockList, HighlightFilterType type, string customType, IMyCubeGrid cubeGrid, string color)
         {
             if (cubeGrid == null)
-                return;           
+                return;
 
             var cubeGridID = cubeGrid.EntityId;
             Dictionary<IMySlimBlock, HighlightFilterType> gridHighlightedEntities;
@@ -362,12 +378,30 @@ namespace StarCore.SystemHighlight
                 ActiveGrids.Add(cubeGridID, cubeGrid);
             }
 
+            if (drawlist == null)
+            {
+                drawlist = new List<IMySlimBlock>();
+            }
+            else
+            {
+                foreach (var block in drawlist)
+                {
+                    block.Dithering = 0;
+                }
+                drawlist.Clear();
+            }
+
             foreach (var block in blockList.Where(block => block != null))
             {
                 if (IsBlockOfType(type, block, customType ?? ""))
                 {
                     HandleDictionary(gridHighlightedEntities, block, type);
                     HandleHighlighting(block, gridHighlightedEntities, type, color);
+                    if (block.FatBlock == null)
+                    {
+                        block.Dithering = -1.0f;
+                        drawlist.Add(block);
+                    }
                 }
                 else
                 {
@@ -380,7 +414,33 @@ namespace StarCore.SystemHighlight
                 SetStatus($"No Blocks of {customType} Found on Grid", 3000, "Red");
             }
 
-        }   
+        }
+
+        public override void Draw()
+        {
+            if (drawlist != null)
+            {
+                foreach (var block in drawlist)
+                {
+                    Vector3D blockPosition;
+                    block.ComputeWorldCenter(out blockPosition);
+                    Matrix blockRotation;
+                    block.Orientation.GetMatrix(out blockRotation);
+                    MatrixD gridRotationMatrix = block.CubeGrid.WorldMatrix;
+                    gridRotationMatrix.Translation = Vector3D.Zero;
+                    blockRotation *= gridRotationMatrix;
+                    MatrixD blockWorldMatrix = MatrixD.CreateWorld(blockPosition, blockRotation.Forward, blockRotation.Up);
+
+                    float unit = block.CubeGrid.GridSize * 0.5f;
+                    Vector3 halfExtents = new Vector3((float)unit, (float)unit, (float)unit);
+                    BoundingBoxD box = new BoundingBoxD(-halfExtents, halfExtents);
+                    Color c = Color.Cyan;
+                    c.A = 150;
+                    MySimpleObjectDraw.DrawTransparentBox(ref blockWorldMatrix, ref box, ref c, MySimpleObjectRasterizer.Solid, 1);
+                }
+            }
+        }
+
         private void HandleHighlighting(IMySlimBlock block, Dictionary<IMySlimBlock, HighlightFilterType> highlightedEntities, HighlightFilterType type, string customColor = null)
         {
             string name;
@@ -395,14 +455,19 @@ namespace StarCore.SystemHighlight
             {
                 isFunctional = block.IsFullIntegrity;
                 name = block.BlockDefinition.Id.SubtypeId.ToString();
+
+            }
+
+            Color highlightColor = type == HighlightFilterType.Custom ? HandleCustomColor(customColor) : HandleTypeColor(type, isFunctional);
+
+            if (block.FatBlock == null)
+            {
                 MyAPIGateway.Utilities.ShowNotification(block.Position.ToString());
             }
-            
-            Color highlightColor = type == HighlightFilterType.Custom ? HandleCustomColor(customColor) : HandleTypeColor(type, isFunctional);
 
             int pulseTimeInFrames = isFunctional ? -1 : 3; // Pulse if not functional
             int thickness = isFunctional ? HighlightIntensity : 6;
-            
+
             MyVisualScriptLogicProvider.SetHighlightLocal(name, thickness, pulseTimeInFrames, highlightColor);
 
             if (!highlightedEntities.ContainsKey(block))
@@ -435,6 +500,7 @@ namespace StarCore.SystemHighlight
 
         public void ClearHighlight(List<IMySlimBlock> blockList, IMyCubeGrid cubeGrid)
         {
+            if (drawlist != null) drawlist.Clear();
             var cubeGridID = cubeGrid.EntityId;
             Dictionary<IMySlimBlock, HighlightFilterType> gridHighlightedEntities;
 
@@ -474,7 +540,7 @@ namespace StarCore.SystemHighlight
 
         #region Utilities
         private bool CoreCheckHelper(IMySlimBlock block)
-        {         
+        {
             if (WCInstalled)
             {
                 var entBlock = block.FatBlock as MyEntity;
@@ -592,12 +658,12 @@ namespace StarCore.SystemHighlight
                     ClearHighlight(originalGridBlocks, originalGrid);
                     ClearHighlight(newGridBlocks, newGrid);
                 }
-            }          
+            }
         }
 
         public void HandleCommandDictionaryInit()
         {
-            commandHandlers = new Dictionary<string, Action<string, List<IMySlimBlock>, IMyCubeGrid>> 
+            commandHandlers = new Dictionary<string, Action<string, List<IMySlimBlock>, IMyCubeGrid>>
             {
                 { "/hlcustom", (m, b, g) => HandleCustomHighlight(m, b, g) },
                 { "/hlsettransparency", (m, b, g) => HandleSetTransparency(m) },
@@ -688,5 +754,7 @@ namespace StarCore.SystemHighlight
             }
         }
         #endregion
+
+
     }
 }
