@@ -288,7 +288,11 @@ namespace StarCore.SystemHighlight
                 "\n/hlsteering : \n" +
                 "   Highlights Gyroscopes [Supports AQD Upgrades if Installed]\n" +
                 "\n/hlweapon : \n" +
-                "   Highlights Weapons Blocks [Includes Sorters]\n" +
+                "   Highlights Weapons Blocks\n" +
+                 "\n/hllight : \n" +
+                "   Highlights Light Armor Blocks\n" +
+                 "\n/hlheavy : \n" +
+                "   Highlights Heavy Armor Blocks\n" +
                 "\n/hlcustom : \n" +
                 "   Adds Blocks to Current Highlight | Accepts SubtypeIDs \n" +
                 "   Example: [/hlcustom MySubtypeID Green]\n" +
