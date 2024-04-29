@@ -75,6 +75,7 @@ internal static class PointCheckHelpers
 {"NHI_PD_Turret_Half_Slope_Top",true},
 {"NHI_PD_Turret_Half_Slope_Tip",true},
 {"NHI_PD_Turret_45_Slope",true},
+{"AegisFlakTurret",true},
 {"Starcore_AMS_II_Block",true }
 
         };
@@ -294,7 +295,13 @@ internal static class PointCheckHelpers
 {"NovaCannon",true},
 {"GothicTorp",true},
 {"MacroCannon",true},
+{"HeavyMacroCannon",true},
+{"MacroTurret",true},
+{"MacroLightTurret",true},
+{"MacroHeavyTurret",true},
 {"LanceBattery",true},
+{"AegisFlakTurret",true},
+{"FixedLance",true},
 {"LanceLightBattery",true},
 {"LanceHeavyBattery",true},
 {"longsword",true},
