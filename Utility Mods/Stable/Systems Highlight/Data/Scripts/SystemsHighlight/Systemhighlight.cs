@@ -40,17 +40,23 @@ namespace StarCore.SystemHighlight
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     public class SubsystemHighlight : MySessionComponentBase
     {
-
         private Dictionary<IMyCubeGrid, Dictionary<IMySlimBlock, HighlightFilterType>> highlightedEntitiesPerGrid = new Dictionary<IMyCubeGrid, Dictionary<IMySlimBlock, HighlightFilterType>>();
         private Dictionary<IMyCubeGrid, Dictionary<IMySlimBlock, HighlightFilterType>> gridDrawLists = new Dictionary<IMyCubeGrid, Dictionary<IMySlimBlock, HighlightFilterType>>();
         private Dictionary<long, IMyCubeGrid> ActiveGrids = new Dictionary<long, IMyCubeGrid>();
         private Dictionary<string, Action<HighlightFilterType, string, List<IMySlimBlock>, IMyCubeGrid>> commandHandlers;
+
+        // Debug Billlboards
+        Color debugStrikeColor = Color.GreenYellow;
+        Vector4 strikeColorRef;
         private List<MyBillboard> persistBillboard = new List<MyBillboard>();
+
         private IMyHudNotification notifStatus = null;
         private IMyHudNotification notifDebug = null;
 
+        // CoreSys API and Addon ModIDs
         public static WcApi CoreSysAPI;
-        private readonly ulong AQDID = 2621169600;
+        private readonly ulong AQD_Gyros_ID = 2621169600;
+        private readonly ulong AQD_Armor_ID = 1;
 
         const string From = "SysHL";
         const string Message = "/hlhelp for list of Commands";
@@ -60,10 +66,12 @@ namespace StarCore.SystemHighlight
 
         private bool DebugToggle = false;
         private bool SeenMessage = false;
-        private bool AQDInstalled = false;
+        private bool AQD_Gyros_Installed = false;
+        private bool AQD_Armor_Installed = false;
         private bool WCInstalled = false;
         
         #region Overrides
+        // Vanilla Update/Load Methods
         public override void BeforeStart()
         {
             MyAPIGateway.Utilities.MessageEnteredSender += HandleMessage;
@@ -71,6 +79,7 @@ namespace StarCore.SystemHighlight
 
         public override void LoadData()
         {
+            // Return if Server-Side | Only Runs on Client
             if (MyAPIGateway.Session.IsServer && MyAPIGateway.Utilities.IsDedicated)
                 return;
 
@@ -78,13 +87,20 @@ namespace StarCore.SystemHighlight
 
             foreach (MyObjectBuilder_Checkpoint.ModItem mod in loadedMods)
             {
-                if (mod.PublishedFileId == AQDID)
+                if (mod.PublishedFileId == AQD_Gyros_ID)
                 {
-                    AQDInstalled = true;
+                    AQD_Gyros_Installed = true;
                     Log.Info("AQD - Upgradable Gyros Detected");
+                }
+
+                if (mod.PublishedFileId == AQD_Armor_ID)
+                {
+                    AQD_Armor_Installed = true;
+                    Log.Info("AQD - Armor Expansion Detected");
                 }
             }
 
+            // Init Non-Standard Command Dict
             commandHandlers = new Dictionary<string, Action<HighlightFilterType, string, List<IMySlimBlock>, IMyCubeGrid>>
             {
                 { "/hlcustom", (f, m, b, g) => HandleCustomHighlight(m, b, g) },
@@ -94,8 +110,11 @@ namespace StarCore.SystemHighlight
                 { "/hlheavy", (f, m, b, g) => HandleHighlightWrapper(HighlightFilterType.HeavyArmor, b, g) },
             };
 
+            // Set Default Settings
             Transparency = -0.5f;
             HighlightIntensity = 3;
+
+            strikeColorRef = debugStrikeColor.ToVector4();
         }
 
         protected override void UnloadData()
@@ -120,60 +139,66 @@ namespace StarCore.SystemHighlight
                 }
 
                 SeenMessage = true;
+
                 MyAPIGateway.Utilities.ShowMessage(From, Message);
-
                 MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0, HandleDamageEvent);
-
                 MyAPIGateway.Utilities.InvokeOnGameThread(() => SetUpdateOrder(MyUpdateOrder.NoUpdate));
             }
         }
 
         public override void Draw()
         {
-            foreach (IMyCubeGrid grid in ActiveGrids.Values)
+            // Draw any Blocks stored in per-grid non-fatblock armor dict
+            if (ActiveGrids.Any() && gridDrawLists.Any())
             {
-                if (grid != null && gridDrawLists.ContainsKey(grid))
+                foreach (IMyCubeGrid grid in ActiveGrids.Values)
                 {
-                    Dictionary<IMySlimBlock, HighlightFilterType> slimBlockDict = gridDrawLists[grid];
-
-                    foreach (KeyValuePair<IMySlimBlock, HighlightFilterType> entry in slimBlockDict)
+                    if (grid != null && gridDrawLists.ContainsKey(grid))
                     {
-                        IMySlimBlock slimBlock = entry.Key;
-                        HighlightFilterType filterType = entry.Value;
+                        Dictionary<IMySlimBlock, HighlightFilterType> slimBlockDict = gridDrawLists[grid];
 
-                        if (slimBlock.Dithering != 1.0f)
+                        foreach (KeyValuePair<IMySlimBlock, HighlightFilterType> entry in slimBlockDict)
                         {
-                            slimBlock.Dithering = 1.0f;
+                            IMySlimBlock slimBlock = entry.Key;
+                            HighlightFilterType filterType = entry.Value;
+
+                            if (slimBlock.Dithering != 1.0f)
+                            {
+                                slimBlock.Dithering = 1.0f;
+                            }
+
+                            Vector3D blockPosition;
+                            Matrix blockRotation;
+
+                            slimBlock.ComputeWorldCenter(out blockPosition);
+                            slimBlock.Orientation.GetMatrix(out blockRotation);
+
+                            MatrixD gridRotationMatrix = slimBlock.CubeGrid.WorldMatrix;
+                            gridRotationMatrix.Translation = Vector3D.Zero;
+                            blockRotation *= gridRotationMatrix;
+                            MatrixD blockWorldMatrix = MatrixD.CreateWorld(blockPosition, blockRotation.Forward, blockRotation.Up);
+
+                            float unit = slimBlock.CubeGrid.GridSize * 0.5f;
+                            Vector3 halfExtents = new Vector3((float)unit, (float)unit, (float)unit);
+                            BoundingBoxD box = new BoundingBoxD(-halfExtents, halfExtents);
+                            Color c = Color.White;
+
+                            if (filterType == HighlightFilterType.LightArmor)
+                            {
+                                c = Color.Lime;
+                            }
+                            else if (filterType == HighlightFilterType.HeavyArmor)
+                            {
+                                c = Color.MediumVioletRed * 2f;
+                            }
+
+                            MySimpleObjectDraw.DrawTransparentBox(ref blockWorldMatrix, ref box, ref c, MySimpleObjectRasterizer.Solid, 1, 0.001f, null, null, true, -1, BlendTypeEnum.AdditiveTop, 1000f);
                         }
-
-                        Vector3D blockPosition;
-                        Matrix blockRotation;
-
-                        slimBlock.ComputeWorldCenter(out blockPosition);
-                        slimBlock.Orientation.GetMatrix(out blockRotation);
-
-                        MatrixD gridRotationMatrix = slimBlock.CubeGrid.WorldMatrix;
-                        gridRotationMatrix.Translation = Vector3D.Zero;
-                        blockRotation *= gridRotationMatrix;
-                        MatrixD blockWorldMatrix = MatrixD.CreateWorld(blockPosition, blockRotation.Forward, blockRotation.Up);
-
-                        float unit = slimBlock.CubeGrid.GridSize * 0.5f;
-                        Vector3 halfExtents = new Vector3((float)unit, (float)unit, (float)unit);
-                        BoundingBoxD box = new BoundingBoxD(-halfExtents, halfExtents);
-                        Color c = Color.White;
-                        if (filterType == HighlightFilterType.LightArmor)
-                        {
-                            c = Color.Lime;
-                        }
-                        else if (filterType == HighlightFilterType.HeavyArmor)
-                        {
-                            c = Color.Violet;
-                        }                        
-
-                        MySimpleObjectDraw.DrawTransparentBox(ref blockWorldMatrix, ref box, ref c, MySimpleObjectRasterizer.Solid, 1, 0.001f, null, null, true, -1, BlendTypeEnum.AdditiveTop, 255);
                     }
-                }               
-            }        
+                }
+            }
+            else
+                return;
         }
         #endregion
 
@@ -185,41 +210,43 @@ namespace StarCore.SystemHighlight
                 return;
             }
 
+            sendToOthers = false;
+            bool handled = false;
+            HighlightFilterType type = HighlightFilterType.None;
+
+            if (message.Contains("/hlhelp"))
+            {
+                HandleHelpCommand();
+                return;
+            }
+            else if (message.Contains("/hlcolorhelp"))
+            {
+                HandleColorHelpCommand();
+                return;
+            }
+            else if (message.Contains("/hldebug"))
+            {
+                HandleToggleDebug();
+                return;
+            }
+
             IHitInfo strike;
             IMyCubeGrid cubeGrid;
             List<IMySlimBlock> gridBlocks;
             HandleRaycastAndGetGrid(out strike, out cubeGrid, out gridBlocks);
 
             if (gridBlocks == null || cubeGrid == null || strike == null)
-            {
-                if (strike == null && (!message.Contains("/hlhelp") || !message.Contains("/hldebug")))
-                {
-                    sendToOthers = false;
-                    SetStatus("No Target", 3000, "Red");
-                }
-                else if (message.Contains("/hlhelp"))
-                {
-                    HandleHelpCommand();
-                }
-                else if (message.Contains("/hldebug"))
-                {
-                    HandleToggleDebug();
-                }
-                else
-                    return;
+            {               
+                SetStatus("Invalid or No Target", 3000, "Red");
             }
-
-            sendToOthers = false;
-            bool handled = false;
-            HighlightFilterType type = HighlightFilterType.None;
-
+          
             foreach (var command in commandHandlers.Keys)
             {
                 if (message.Contains(command))
                 {
                     commandHandlers[command](type, message, gridBlocks, cubeGrid);
                     handled = true;
-                    break; // Assuming only one command per message
+                    break;
                 }
             }
 
@@ -254,18 +281,6 @@ namespace StarCore.SystemHighlight
             {
                 SetStatus("All Highlights Cleared", 3000, "Green");
                 ClearHighlight(gridBlocks, cubeGrid);
-            }
-            else if (message.Contains("/hldebug"))
-            {
-                HandleToggleDebug();
-            }
-            else if (message.Contains("/hlhelp"))
-            {
-                HandleHelpCommand();
-            }
-            else if (message.Contains("/hlcolorhelp"))
-            {
-                HandleColorHelpCommand();
             }
         }
 
@@ -341,66 +356,42 @@ namespace StarCore.SystemHighlight
 
         public void HandleSetTransparency(string message)
         {
-            string remainingMessage = message.Substring(18);
-            int spaceIndex = remainingMessage.IndexOf(' ');
+            string[] args = message.Split(' ');
 
-            if (spaceIndex >= 0)
+            if (args.Length > 1)
             {
-                if (spaceIndex + 1 < remainingMessage.Length)
-                {
-                    float tempTransparency;
-                    float.TryParse(remainingMessage.Substring(spaceIndex + 1), out tempTransparency);
-
+                float tempTransparency;
+                if (float.TryParse(args[1], out tempTransparency))
                     Transparency = tempTransparency;
-                }
+                else
+                    SetStatus("Failed to Set Transparency, Argument Unrecognized", 3000, "Red");
             }
         }
 
         public void HandleSetIntensity(string message)
         {
-            string remainingMessage = message.Substring(15);
-            int spaceIndex = remainingMessage.IndexOf(' ');
+            string[] args = message.Split(' ');
 
-            if (spaceIndex >= 0)
+            if (args.Length > 1)
             {
-                if (spaceIndex + 1 < remainingMessage.Length)
-                {
-                    int tempIntensity;
-                    int.TryParse(remainingMessage.Substring(spaceIndex + 1), out tempIntensity);
-
+                int tempIntensity;
+                if (int.TryParse(args[1], out tempIntensity))
                     HighlightIntensity = tempIntensity;
-                }
+                else
+                    SetStatus("Failed to Set Intensity, Argument Unrecognized", 3000, "Red");
             }
         }
 
         private void HandleCustomHighlight(string message, List<IMySlimBlock> gridBlocks, IMyCubeGrid cubeGrid)
         {
             string[] args = message.Split(' ');
-            string subtype;
-            string color;
-            if (args == null || args[0] != "/hlcustom") return;        
-            switch (args.Length)
-            {
-                case 2:
-                    {
-                        subtype = args[1];
-                        color = "";
-                    }
-                    break;
-                case 3:
-                    {
-                        subtype = args[1];
-                        color = args[2];
-                    }
-                    break;
-                default:
-                    {
-                        subtype = "";
-                        color = "";
-                    }
-                    break;
-            }               
-            
+            string subtype = "";
+            string color = "";
+            if (args == null || args.Length < 2 || args[0] != "/hlcustom") return;
+            if (args.Length >= 2) subtype = args[1];
+            if (args.Length >= 3) color = args[2];
+            if (args.Length > 3) SetStatus("Too many arguments provided. Only subtype and color will be used.", 3000, "Red");
+
             HandleHighlight(gridBlocks, HighlightFilterType.Custom, subtype, cubeGrid, color);
 
             if (DebugToggle)
@@ -421,7 +412,7 @@ namespace StarCore.SystemHighlight
                 case HighlightFilterType.Power:
                     return (block.FatBlock is IMyPowerProducer);
                 case HighlightFilterType.Steering:
-                    return (block.FatBlock != null && (block.FatBlock is IMyGyro || (AQDInstalled && (block.FatBlock.BlockDefinition.SubtypeName.Equals("AQD_LG_GyroBooster") || block.FatBlock.BlockDefinition.SubtypeName.Equals("AQD_LG_GyroUpgrade")))));
+                    return (block.FatBlock != null && (block.FatBlock is IMyGyro || (AQD_Gyros_Installed && (block.FatBlock.BlockDefinition.SubtypeName.Equals("AQD_LG_GyroBooster") || block.FatBlock.BlockDefinition.SubtypeName.Equals("AQD_LG_GyroUpgrade")))));
                 case HighlightFilterType.Weapon:
                     return CoreCheckHelper(block);
                 case HighlightFilterType.Damage:
@@ -506,7 +497,7 @@ namespace StarCore.SystemHighlight
                     {
                         Log.Info($"Cases Unmatched: Block {block} for Type {type}");
                     }
-                    
+
                     HandleHighlighting(block, gridHighlightedEntities, type, color);
                 }
                 else
@@ -522,7 +513,7 @@ namespace StarCore.SystemHighlight
                         block.Dithering = Transparency;
                     }
                     else if (block.FatBlock != null && gridHighlightedEntities.ContainsKey(block))
-                    {
+                    {                       
                         continue;
                     }
 
@@ -534,7 +525,7 @@ namespace StarCore.SystemHighlight
 
                 }
             }
-
+            
             // Non-Existant Subtype Error Message
             if (type == HighlightFilterType.Custom && !gridHighlightedEntities.Values.Any(v => v == HighlightFilterType.Custom))
             {
@@ -562,6 +553,7 @@ namespace StarCore.SystemHighlight
             // Fatblock SetHighlight
             if (block.FatBlock != null)
             {
+                block.Dithering = 0;
                 MyVisualScriptLogicProvider.SetHighlightLocal(block.FatBlock.Name, thickness, pulseTimeInFrames, highlightColor);
 
                 // Fatblock Debug Logging
@@ -672,11 +664,9 @@ namespace StarCore.SystemHighlight
             {
                 var entBlock = block.FatBlock as MyEntity;
                 return entBlock != null && CoreSysAPI.HasCoreWeapon(entBlock);
-            }
+            }            
             else
-            {
                 return block.FatBlock is IMyLargeTurretBase || block.FatBlock is IMySmallMissileLauncher;
-            }
         }
 
         public void HandleToggleDebug()
@@ -689,8 +679,8 @@ namespace StarCore.SystemHighlight
             }
             else if (DebugToggle)
             {
-                MyTransparentGeometry.RemovePersistentBillboards(persistBillboard);
                 DebugToggle = false;
+                MyTransparentGeometry.RemovePersistentBillboards(persistBillboard);               
                 DebugStatus($"Debug: {DebugToggle}", 3000, "Red");
                 Log.Info("Debug Disabled");
             }
@@ -706,18 +696,8 @@ namespace StarCore.SystemHighlight
             var player_camera = MyAPIGateway.Session.Camera;
             var camera_matrix = player_camera.WorldMatrix;
             cubeGrid = null;
-            MyAPIGateway.Physics.CastRay(camera_matrix.Translation, camera_matrix.Translation + camera_matrix.Forward * 150, out strike);
-
-            // Draw Strike Point
-            if (DebugToggle && strike != null)
-            {
-                Log.Info("Draw Point");
-                Color color = Color.GreenYellow;
-                var refcolor = color.ToVector4();
-                MyTransparentGeometry.AddPointBillboard(MyStringId.GetOrCompute("WhiteDot"), refcolor, strike.Position, 1f, 0f, -1, BlendTypeEnum.SDR, persistBillboard);
-            }
-
             gridBlocks = new List<IMySlimBlock>();
+            MyAPIGateway.Physics.CastRay(camera_matrix.Translation, camera_matrix.Translation + camera_matrix.Forward * 150, out strike);          
 
             if (strike != null)
             {
@@ -727,15 +707,13 @@ namespace StarCore.SystemHighlight
                     cubeGrid.GetBlocks(gridBlocks);
                 }
 
-                if (DebugToggle)
+                if (DebugToggle && cubeGrid != null && gridBlocks.Any())
                 {
                     DebugStatus($"Raycast Target: {cubeGrid.DisplayName}", 6000, "Green");
-                    Log.Info($"Raycast Target: {cubeGrid.DisplayName}");
-                }
-
-                if (DebugToggle)
-                {
-                    Log.Info($"Raycast hit at {strike.Position} on grid {cubeGrid.EntityId} with {gridBlocks.Count} blocks collected.");
+                    Log.Info($"Raycast hit at {strike.Position} on grid [{cubeGrid.DisplayName}/{cubeGrid.EntityId}] with {gridBlocks.Count} blocks collected.");
+                    Log.Info($"Drawing Point at {strike.Position}");
+                    MyTransparentGeometry.AddPointBillboard(MyStringId.GetOrCompute("WhiteDot"), strikeColorRef, strike.Position, 1f, 0f, -1, BlendTypeEnum.SDR, persistBillboard);
+                    
                     foreach (var block in gridBlocks)
                     {
                         Log.Info($"Collected block: {block.BlockDefinition.Id.SubtypeName}");
