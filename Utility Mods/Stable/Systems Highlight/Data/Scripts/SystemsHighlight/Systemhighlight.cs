@@ -141,6 +141,11 @@ namespace StarCore.SystemHighlight
                         IMySlimBlock slimBlock = entry.Key;
                         HighlightFilterType filterType = entry.Value;
 
+                        if (slimBlock.Dithering != 1.0f)
+                        {
+                            slimBlock.Dithering = 1.0f;
+                        }
+
                         Vector3D blockPosition;
                         Matrix blockRotation;
 
@@ -409,25 +414,25 @@ namespace StarCore.SystemHighlight
         {
             switch (type)
             {
-                case HighlightFilterType.Conveyor: 
-                    return (block.FatBlock != null && block.FatBlock is IMyConveyor || block.FatBlock is IMyConveyorTube);
-                case HighlightFilterType.Thruster: 
-                    return (block.FatBlock != null && block.FatBlock is IMyThrust);
-                case HighlightFilterType.Power: 
-                    return (block.FatBlock != null && block.FatBlock is IMyPowerProducer);
+                case HighlightFilterType.Conveyor:
+                    return (block.FatBlock is IMyConveyor || block.FatBlock is IMyConveyorTube);
+                case HighlightFilterType.Thruster:
+                    return (block.FatBlock is IMyThrust);
+                case HighlightFilterType.Power:
+                    return (block.FatBlock is IMyPowerProducer);
                 case HighlightFilterType.Steering:
                     return (block.FatBlock != null && (block.FatBlock is IMyGyro || (AQDInstalled && (block.FatBlock.BlockDefinition.SubtypeName.Equals("AQD_LG_GyroBooster") || block.FatBlock.BlockDefinition.SubtypeName.Equals("AQD_LG_GyroUpgrade")))));
                 case HighlightFilterType.Weapon:
-                    return (CoreCheckHelper(block));                 
+                    return CoreCheckHelper(block);
                 case HighlightFilterType.Damage:
-                    return (block.FatBlock != null && !block.FatBlock.IsFunctional);               
-                case HighlightFilterType.LightArmor: 
-                    return (block.FatBlock == null && !block.BlockDefinition.Id.SubtypeName.ToLower().Contains("heavy"));                
+                    return (!block.FatBlock.IsFunctional);
+                case HighlightFilterType.LightArmor:
+                    return (block.FatBlock == null && !block.BlockDefinition.Id.SubtypeName.ToLower().Contains("heavy"));
                 case HighlightFilterType.HeavyArmor:
-                    return (block.FatBlock == null && block.BlockDefinition.Id.SubtypeName.ToLower().Contains("heavy"));                
-                case HighlightFilterType.Custom: 
-                    return (block.BlockDefinition.Id.SubtypeId.ToString().ToLower() == customType.ToLower());                
-                default: 
+                    return (block.FatBlock == null && block.BlockDefinition.Id.SubtypeName.ToLower().Contains("heavy"));
+                case HighlightFilterType.Custom:
+                    return (block.BlockDefinition.Id.SubtypeId.ToString().ToLower() == customType.ToLower());
+                default:
                     return false;
             }
         }
@@ -441,41 +446,39 @@ namespace StarCore.SystemHighlight
             Dictionary<IMySlimBlock, HighlightFilterType> gridHighlightedEntities;
             Dictionary<IMySlimBlock, HighlightFilterType> gridDrawnBlocks;
 
+            // Create Fatblock Dictionary for Targetted Grid
             if (!highlightedEntitiesPerGrid.TryGetValue(cubeGrid, out gridHighlightedEntities))
             {
                 gridHighlightedEntities = new Dictionary<IMySlimBlock, HighlightFilterType>();
                 highlightedEntitiesPerGrid[cubeGrid] = gridHighlightedEntities;
-            }
+            }        
 
-            if (!ActiveGrids.Keys.Contains(cubeGridID) && !ActiveGrids.Values.Contains(cubeGrid))
-            {
-                cubeGrid.OnGridSplit += HandleGridSplit;
-                ActiveGrids.Add(cubeGridID, cubeGrid);
-            }
-
+            // Create Slimblock Dictionary for Targetted Grid
             if (!gridDrawLists.TryGetValue(cubeGrid, out gridDrawnBlocks))
             {
                 gridDrawnBlocks = new Dictionary<IMySlimBlock, HighlightFilterType>();
                 gridDrawLists[cubeGrid] = gridDrawnBlocks;
             }
 
+            // Add Grid to Active Grids
+            if (!ActiveGrids.Keys.Contains(cubeGridID) && !ActiveGrids.Values.Contains(cubeGrid))
+            {
+                cubeGrid.OnGridSplit += HandleGridSplit;
+                ActiveGrids.Add(cubeGridID, cubeGrid);
+            }
+
             foreach (var block in blockList.Where(block => block != null))
             {
                 if (IsBlockOfType(type, block, customType ?? ""))
                 {
-                    if (!gridHighlightedEntities.ContainsKey(block))
+                    if (DebugToggle)
                     {
-                        gridHighlightedEntities.Add(block, type);
-
-                        if (DebugToggle)
-                        {
-                            Log.Info($"Adding Block to Dictionary: {block}");
-                        }
+                        Log.Info($"Block of Type {type} Found. Block: {block}");
                     }
-                    HandleHighlighting(block, gridHighlightedEntities, type, color);
 
                     if ((type == HighlightFilterType.LightArmor || type == HighlightFilterType.HeavyArmor) && block.FatBlock == null)
                     {
+                        // Slimblock Dictionary Handling
                         if (!gridDrawnBlocks.ContainsKey(block))
                         {
                             gridDrawnBlocks.Add(block, type);
@@ -485,26 +488,54 @@ namespace StarCore.SystemHighlight
                                 Log.Info($"Adding Block to Draw Lists: {block}");
                             }
                         }
-                        block.Dithering = Transparency;
                     }
+                    else if ((type != HighlightFilterType.LightArmor || type != HighlightFilterType.HeavyArmor) && block.FatBlock != null)
+                    {
+                        // Fatblock Dictionary Handling
+                        if (!gridHighlightedEntities.ContainsKey(block))
+                        {
+                            gridHighlightedEntities.Add(block, type);
+
+                            if (DebugToggle)
+                            {
+                                Log.Info($"Adding Block to Dictionary: {block}");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Log.Info($"Cases Unmatched: Block {block} for Type {type}");
+                    }
+                    
+                    HandleHighlighting(block, gridHighlightedEntities, type, color);
                 }
                 else
                 {
+                    if (DebugToggle)
+                    {
+                        Log.Info($"Block Was Not of Type {type}. Block: {block}");
+                    }
+
+                    // Handle Fatblock Dithering
                     if (block.FatBlock != null && !gridHighlightedEntities.ContainsKey(block))
                     {
                         block.Dithering = Transparency;
                     }
                     else if (block.FatBlock != null && gridHighlightedEntities.ContainsKey(block))
                     {
-                        return;
+                        continue;
                     }
-                    else if (block.FatBlock == null)
+
+                    // Handle Slimblock Dithering
+                    if (block.FatBlock == null && !gridDrawnBlocks.ContainsKey(block))
                     {
                         block.Dithering = Transparency;
                     }
+
                 }
             }
 
+            // Non-Existant Subtype Error Message
             if (type == HighlightFilterType.Custom && !gridHighlightedEntities.Values.Any(v => v == HighlightFilterType.Custom))
             {
                 SetStatus($"No Blocks of {customType} Found on Grid", 3000, "Red");
@@ -520,25 +551,28 @@ namespace StarCore.SystemHighlight
             else
                 isFunctional = block.IsFullIntegrity;
 
+            // Return if not Dictionaried
+            if (!highlightedEntities.ContainsKey(block))
+                return;
+
             Color highlightColor = type == HighlightFilterType.Custom ? HandleCustomColor(customColor) : HandleTypeColor(type, isFunctional);
             int pulseTimeInFrames = isFunctional ? -1 : 3; // Pulse if not functional
             int thickness = isFunctional ? HighlightIntensity : 6;
 
+            // Fatblock SetHighlight
             if (block.FatBlock != null)
             {
                 MyVisualScriptLogicProvider.SetHighlightLocal(block.FatBlock.Name, thickness, pulseTimeInFrames, highlightColor);
+
+                // Fatblock Debug Logging
+                if (DebugToggle && block.FatBlock != null)
+                {
+                    Log.Info($"Highlighted {block.FatBlock.Name} as Type: {type}, Color: {highlightColor}, Thickness: {thickness}, Pulse: {pulseTimeInFrames}");
+                }
             }         
 
-            if (!highlightedEntities.ContainsKey(block))
-            {
-                highlightedEntities[block] = type;
-            }
-
-            if (DebugToggle && block.FatBlock != null)
-            {
-                Log.Info($"Highlighted {block.FatBlock.Name} as Type: {type}, Color: {highlightColor}, Thickness: {thickness}, Pulse: {pulseTimeInFrames}");
-            }
-            else if (DebugToggle && block.FatBlock == null)
+            // Slimblock Debug Logging      
+            if (DebugToggle && block.FatBlock == null)
             {
                 Log.Info($"Highlighted Armor Block as Type: {type}");
             }
@@ -548,34 +582,46 @@ namespace StarCore.SystemHighlight
         {
             var cubeGridID = cubeGrid.EntityId;
             Dictionary<IMySlimBlock, HighlightFilterType> gridHighlightedEntities;
+            Dictionary<IMySlimBlock, HighlightFilterType> gridDrawnBlocks;
 
             if (highlightedEntitiesPerGrid.TryGetValue(cubeGrid, out gridHighlightedEntities))
             {
+                // Iterate Active Highlights and Clear
                 foreach (var highlightedEntity in gridHighlightedEntities)
                 {
                     string name = highlightedEntity.Key.FatBlock?.Name ?? highlightedEntity.Key.GetType().Name;
+
+                    MyVisualScriptLogicProvider.SetHighlightLocal(name, thickness: -1);
+
                     if (DebugToggle)
                     {
                         Log.Info($"Clearing Highlight: {name} ");
-                    }
-                    MyVisualScriptLogicProvider.SetHighlightLocal(name, thickness: -1);
+                    }         
                 }
+
                 gridHighlightedEntities.Clear();
+
                 if (DebugToggle)
                 {
-                    Log.Info($"Highlight Dictionary Cleared ");
+                    Log.Info($"Highlight Dictionary Cleared");
                 }
-            }
-
-            Dictionary<IMySlimBlock, HighlightFilterType> gridDrawnBlocks;
+            }     
 
             if (gridDrawLists.TryGetValue(cubeGrid, out gridDrawnBlocks))
             {
+                foreach (var drawnBlock in gridDrawnBlocks.Keys)
+                {
+                    if (DebugToggle)
+                    {
+                        Log.Info($"Clearing Draw: {drawnBlock.BlockDefinition.Id.SubtypeName.ToLower()} ");
+                    }
+                }
+
                 gridDrawnBlocks.Clear();
 
                 if (DebugToggle)
                 {
-                    Log.Info($"Highlight Dictionary Cleared ");
+                    Log.Info($"Draw Dictionary Cleared");
                 }
             }
 
@@ -660,9 +706,9 @@ namespace StarCore.SystemHighlight
             var player_camera = MyAPIGateway.Session.Camera;
             var camera_matrix = player_camera.WorldMatrix;
             cubeGrid = null;
-            IMySlimBlock final_block = null;
             MyAPIGateway.Physics.CastRay(camera_matrix.Translation, camera_matrix.Translation + camera_matrix.Forward * 150, out strike);
 
+            // Draw Strike Point
             if (DebugToggle && strike != null)
             {
                 Log.Info("Draw Point");
@@ -678,21 +724,23 @@ namespace StarCore.SystemHighlight
                 if (strike.HitEntity is IMyCubeGrid)
                 {
                     cubeGrid = strike.HitEntity as IMyCubeGrid;
-
-                    if (cubeGrid.Physics != null)
-                    {
-                        var pos = cubeGrid.WorldToGridInteger(strike.Position + camera_matrix.Forward * 0.1);
-                        final_block = cubeGrid.GetCubeBlock(pos);
-                    }
+                    cubeGrid.GetBlocks(gridBlocks);
                 }
 
                 if (DebugToggle)
                 {
-                    DebugStatus($"Raycast Target: {final_block?.CubeGrid.DisplayName}", 6000, "Green");
-                    Log.Info($"Raycast Target: {final_block?.CubeGrid.DisplayName}");
+                    DebugStatus($"Raycast Target: {cubeGrid.DisplayName}", 6000, "Green");
+                    Log.Info($"Raycast Target: {cubeGrid.DisplayName}");
                 }
 
-                final_block?.CubeGrid.GetBlocks(gridBlocks);
+                if (DebugToggle)
+                {
+                    Log.Info($"Raycast hit at {strike.Position} on grid {cubeGrid.EntityId} with {gridBlocks.Count} blocks collected.");
+                    foreach (var block in gridBlocks)
+                    {
+                        Log.Info($"Collected block: {block.BlockDefinition.Id.SubtypeName}");
+                    }
+                }
             }
         }
 
