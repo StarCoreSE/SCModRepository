@@ -44,7 +44,7 @@ namespace Scripts
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.823f, //120MW@0.823  //58MW@0.4  // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 5000f, // Direct damage; one steel plate is worth 100. 
-            Mass = 1f, // In kilograms; how much force the impact will apply to the target.
+            Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 19500f, // Recoil.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
@@ -424,7 +424,7 @@ namespace Scripts
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.0f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 1f, // Direct damage; one steel plate is worth 100.
-            Mass = 1f, // In kilograms; how much force the impact will apply to the target.
+            Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0, // Recoil.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
@@ -788,7 +788,7 @@ namespace Scripts
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.0f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 1f, // Direct damage; one steel plate is worth 100.
-            Mass = 1f, // In kilograms; how much force the impact will apply to the target.
+            Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0, // Recoil.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
@@ -1151,7 +1151,7 @@ namespace Scripts
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 22000f, // Direct damage; one steel plate is worth 100. 
-            Mass = 1f, // In kilograms; how much force the impact will apply to the target.
+            Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
