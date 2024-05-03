@@ -1,17 +1,13 @@
-﻿using Sandbox.ModAPI;
-using System;
-using VRage.Game;
-using VRage.Game.Components;
-using VRage.Utils;
+﻿using VRage.Game.Components;
 
 namespace SENetworkAPI
 {
-	[MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
-	public class SessionTools : MySessionComponentBase
-	{
-		protected override void UnloadData()
-		{
-			NetworkAPI.Dispose();
-		}
-	}
+    [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
+    public class SessionTools : MySessionComponentBase
+    {
+        protected override void UnloadData()
+        {
+            NetworkApi.Dispose();
+        }
+    }
 }

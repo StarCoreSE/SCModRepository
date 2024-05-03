@@ -1,5 +1,4 @@
-﻿using klime.PointCheck;
-using ProtoBuf;
+﻿using ProtoBuf;
 using static Math0424.Networking.MyEasyNetworkManager;
 
 namespace Math0424.ShipPoints
