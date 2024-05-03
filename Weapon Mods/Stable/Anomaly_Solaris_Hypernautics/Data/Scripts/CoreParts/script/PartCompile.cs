@@ -74,7 +74,7 @@ namespace Scripts
             return new XYZ { x = X, y = Y, z = Z };
         }
 
-        internal Dictionary<EventTriggers, uint> Delays(uint FiringDelay = 0, uint ReloadingDelay = 0, uint OverheatedDelay = 0, uint TrackingDelay = 0, uint LockedDelay = 0, uint OnDelay = 0, uint OffDelay = 0, uint BurstReloadDelay = 0, uint OutOfAmmoDelay = 0, uint PreFireDelay = 0, uint StopFiringDelay = 0, uint StopTrackingDelay = 0, uint InitDelay = 0)
+        internal Dictionary<EventTriggers, uint> Delays(uint FiringDelay = 0, uint ReloadingDelay = 0, uint OverheatedDelay = 0, uint TrackingDelay = 0, uint LockedDelay = 0, uint OnDelay = 0, uint OffDelay = 0, uint BurstReloadDelay = 0, uint OutOfAmmoDelay = 0, uint PreFireDelay = 0, uint StopFiringDelay = 0, uint StopTrackingDelay = 0, uint InitDelay = 0, uint HomingDelay = 0, uint TargetAlignedDelay = 0, uint WhileOnDelay = 0, uint TargetRanged100Delay = 0, uint TargetRanged75Delay = 0, uint TargetRanged50Delay = 0, uint TargetRanged25Delay = 0)
         {
             return new Dictionary<EventTriggers, uint>
             {
@@ -92,6 +92,13 @@ namespace Scripts
                 [StopTracking] = StopTrackingDelay,
                 [LockDelay] = LockedDelay,
                 [Init] = InitDelay,
+                [Homing] = HomingDelay,
+                [TargetAligned] = TargetAlignedDelay,
+                [WhileOn] = WhileOnDelay,
+                [TargetRanged100] = TargetRanged100Delay,
+                [TargetRanged75] = TargetRanged75Delay,
+                [TargetRanged50] = TargetRanged50Delay,
+                [TargetRanged25] = TargetRanged25Delay,
             };
         }
 

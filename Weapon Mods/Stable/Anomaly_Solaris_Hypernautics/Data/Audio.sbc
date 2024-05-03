@@ -6,6 +6,29 @@
 
 
 
+
+    <!-- Shotgun fires Sounds -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>VenatorLaserFiring</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <Volume>0.95</Volume>
+      <Loopable>true</Loopable>
+      <PreventSynchronization>1</PreventSynchronization>
+      <MaxSounds>1</MaxSounds>
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Loop>Audio\VenatorLaserFiringC.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+VenatorLaserFiringSFX
     <!-- shield thing Sounds -->
     <Sound>
       <Id>

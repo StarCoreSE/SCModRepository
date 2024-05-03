@@ -142,6 +142,8 @@ namespace ShipPoints
 
 				S_Armored_Laser_Block@120;
                 S_Chem_Laser_Block@120;
+				Impulse_Torch@175;
+				Flechette_DoubleBarrel@200;
 				Nariman_Dart_Turret@225;
 				Counter_Battery@250;
 				SolHyp_ArcStrike_Torp@275;
@@ -514,11 +516,17 @@ Cat_Darth40kWeapons@20;
 				LightParticleWhip@200;
 				ParticleWhip@400;
 				NovaCannon@800;
+				FixedLance@350;
 				MacroCannon@200;
+				HeavyMacroCannon@450;
     				LanceBattery@400;
 				LanceLightBattery@280;
 				LanceHeavyBattery@650;
+				MacroTurret@300;
+				MacroLightTurret@150;
+				MacroHeavyTurret@450;
 				GothicTorp@300;
+				AegisFlakTurret@120;
 
 				
 				65_Launcher_FixedMount@350;
@@ -603,7 +611,7 @@ Cat_BadModder@22;
 				  VindicatorKineticLance@750;
 
 				 Fixed_Rockets@250;
-				JN_175Fixed@100900; 
+				JN_175Fixed@600; 
 				 Thagomizer@635; 
 					 Thagomizer_Flipped@635; 
 						 Thagomizer_Angled@635; 
@@ -645,21 +653,21 @@ Cat_Strikecraft@23;
 
 
 Cat_Fletcher_Subtypes@23;
-				381mmDualR@400;
-                381mmDualNR@400;
+				381mmDualR@250;
+                381mmDualNR@250;
                 380mmMLE1935@400;
                 15cmSKC28R@175;
                 15cmSKC28NR@175;
                 128mmL45@200;
                 128mmSKC34@250;
-                127mmMk12@220;
-                127mmMk24@220;
+                127mmMk12@175;
+                127mmMk24@175;
                 127mmMk32@250;
                 127mmMk56@350;
                 105mmTwin@100;
                 PomPomMain@75;
-                150mmCasemate@100;
-                150mmCasemateTwin@125;
+                150mmCasemate@150;
+                150mmCasemateTwin@175;
                 BoforTwinRemodel@50;
                 BoforSingleRemodel@60;
                 QuadBofor@75;
@@ -673,7 +681,7 @@ Cat_Fletcher_Subtypes@23;
                 406alternate@400;
                 Mk25Rangefinder@10;
                 6InchTriple@200;
-                20InchTwin@600;	
+                20InchTwin@600;
 
 
 

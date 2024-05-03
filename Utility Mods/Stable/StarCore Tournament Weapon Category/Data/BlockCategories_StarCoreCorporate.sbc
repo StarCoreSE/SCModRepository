@@ -72,6 +72,29 @@
 
 	  </ItemIds>
     </Category>
+	
+	    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+        <SubtypeId>SC_40K_BlockCategory</SubtypeId>
+      </Id>
+      <DisplayName>[40K]</DisplayName>
+      <Name>[40K]</Name>
+      <ItemIds>
+        <string>NovaCannon</string>
+        <string>GothicTorp</string>
+        <string>MacroCannon</string>
+        <string>HeavyMacroCannon</string>
+        <string>FixedLance</string>
+        <string>LanceBattery</string>
+        <string>LanceLightBattery</string>
+        <string>LanceHeavyBattery</string>
+        <string>MacroTurret</string>
+        <string>MacroLightTurret</string>
+        <string>MacroHeavyTurret</string>
+        <string>AegisFlakTurret</string>
+      </ItemIds>
+    </Category>
 
     <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
       <Id>
@@ -263,7 +286,7 @@
 	  </ItemIds>
     </Category>
     
-        <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+     <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
       <Id>
         <TypeId>GuiBlockCategoryDefinition</TypeId>
 
@@ -292,6 +315,25 @@
 	  </ItemIds>
     </Category>
 
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+        <SubtypeId>Solaris Hypernautics</SubtypeId>
+      </Id>
+      	<DisplayName>[SOL]</DisplayName>
+      	<Name>[SOL]</Name>
+     	<ItemIds>
+			<string>MagnaPulse_Gen</string>
+			<string>Flechette_DoubleBarrel</string>
+			<string>Impulse_Torch</string>
+			<string>SolHyp_ArcStrike_Torp</string>
+        	<string>Counter_Battery</string>
+        	<string>S_Chem_Laser_Block</string>
+			<string>S_Armored_Laser_Block</string>
+			<string>Nariman_Dart_Turret</string>
+			<string>SolHyp_Magnetic_Coilgun</string>
+	   	</ItemIds>
+	</Category>
     
   </CategoryClasses>
 </Definitions>

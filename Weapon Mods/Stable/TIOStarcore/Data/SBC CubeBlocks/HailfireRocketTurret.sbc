@@ -8,10 +8,10 @@
 				<SubtypeId>DrunkRocketTurret</SubtypeId>
 			</Id>
 			<DisplayName>[MID] LK 'Bonfire' Guided Rocket Turret</DisplayName>
-			<Description>[4km Targeting Range [300 m/s]]
+			<Description>[4km Targeting Range [350 m/s]]
               [Energy damage]
-			  [3 HP Guided Missiles]
-              [High Damage, Large AOE, Semi Guided Drunk Rockets, Innaccurate]</Description>
+			  [24 HP Guided Missiles]
+              [High Damage, Large AOE, 100m minimum range, Guided Drunk Rockets, Innaccurate]</Description>
 			<Icon>Textures\GUI\Icons\HAML.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>

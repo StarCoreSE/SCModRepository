@@ -126,9 +126,9 @@ namespace Scripts
                                {
                                    Loop = false, //Should match your particle definition.
                                    Restart = false,
-                                   Scale = 1, //How chunky the particle is.
-                                    MaxDistance = 1000,
-                                    MaxDuration = 1,
+                                   //Scale = 1, //How chunky the particle is.
+                                   // MaxDistance = 10000,
+                                    //MaxDuration = 1,
                                }
                            }
                        },
