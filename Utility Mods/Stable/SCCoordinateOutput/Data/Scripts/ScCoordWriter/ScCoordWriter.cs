@@ -24,7 +24,9 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         private const string Extension = ".scc";
         private const string CommandPrefix = "/coordwriter";
         public string Usage = $"Usage: {CommandPrefix} [stop|start]";
-        
+
+        private int TickCounter = 0;
+
         public override void LoadData()
         {
             Instance = this;
@@ -38,7 +40,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(NetworkId, ReceivedPacket);
             }
 
-            var fileName = $"{DateTime.Now:dd-MM-yyyy HHmm} , {Extension}";
+            var fileName = $"{DateTime.Now:dd-MM-yyyy HHmm}{Extension}";
 
             try
             {
@@ -111,26 +113,78 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         public override void UpdateAfterSimulation()
         {
             if (!Recording) return;
+            if (TrackedGrids == null)
+            {
+                MyVisualScriptLogicProvider.SendChatMessage("TrackedGrids is null");
+                return;
+            }
+
+            if (TickCounter++ < 60) { return; }
+            TickCounter = 0;
+
+            // TODO: Use seconds, milliseconds, frames, or ticks since start of recording instead?
+            Writer.WriteLine($"[START:T={DateTime.Now}]");
             TrackedGrids.ForEach(grid =>
             {
-                // TODO: maybe get player name if currently controlled by player?
-                //var controllerDisplayName = grid.ControlSystem.CurrentShipController.ControllerInfo.ControllingIdentityId;
+                if (grid == null)
+                {
+                    MyLog.Default.WriteLine("null grid in TrackedGrids");
+                    return;
+                }
 
-                var cockpit = (grid as MyCubeGrid)?.MainCockpit as IMyCubeBlock;
+
+                // TODO: Just use the grid's matrix and forget cockpits?
+                IMyCockpit Cockpit = null;
+                var cubeGrid = grid as MyCubeGrid;
+                if (cubeGrid != null && cubeGrid.HasMainCockpit())
+                {
+                    Cockpit = cubeGrid.MainCockpit as IMyCockpit;
+                }
                 
-                Matrix worldMatrix = cockpit?.WorldMatrix ?? grid.WorldMatrix;
+                if (Cockpit == null)
+                {
+                    foreach (var cockpit in grid.GetFatBlocks<IMyCockpit>())
+                    {
+                        if (cockpit.IsOccupied)
+                        {
+                            Cockpit = cockpit;
+                            break;
+                        }
+                    }
+                }
+                MatrixD worldMatrix = Cockpit?.WorldMatrix ?? grid.WorldMatrix;
                 Vector3D forwardDirection = worldMatrix.Forward;
                 var position = grid.GetPosition();
                 var rotation = Quaternion.CreateFromForwardUp(forwardDirection, grid.WorldMatrix.Up);
 
                 var healthPercent = 1.0f;
                 var owner = GetGridOwner(grid);
-                var faction = GetFactionName(owner.IdentityId);
-                Writer.WriteLine($"{grid.CustomName},{owner?.DisplayName ?? "Unowned"},{faction},{Math.Round(healthPercent, 2)},{position.X},{position.Y},{position.Z},{rotation.X},{rotation.Y},{rotation.Z},{rotation.W}");
+                var faction = "none";
+                if (owner != null)
+                {
+                    faction = GetFactionName(owner.IdentityId);
+                }
+                Writer.WriteLine($"[GRID]{grid.CustomName},{owner?.DisplayName ?? "Unowned"},{faction},{SmallDouble(healthPercent)},{SmallVector3D(position)},{SmallQuaternion(rotation)}");
             });
             const string frameSeparator = "[STOP]";
             Writer.WriteLine(frameSeparator);
             Writer.Flush();
+        }
+
+        public string SmallQuaternion(Quaternion q)
+        {
+            return
+                $"{SmallDouble(q.X)},{SmallDouble(q.Y)},{SmallDouble(q.Z)},{SmallDouble(q.W)}";
+        }
+        public string SmallVector3D(Vector3D v)
+        {
+            
+            return $"{SmallDouble(v.X)},{SmallDouble(v.Y)},{SmallDouble(v.Z)}";
+        }
+        public string SmallDouble(double value)
+        {
+            const int decimalPlaces = 2;
+            return value.ToString($"F{decimalPlaces}");
         }
 
         public void HandleMessage(ulong sender, string messageText, ref bool sendToOthers)
