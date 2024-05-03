@@ -52,6 +52,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 MyLog.Default.WriteLine(ex);
             }
 
+            TrackedGrids = new List<IMyCubeGrid>();
             MyAPIGateway.Entities.GetEntities(null, e =>
             {
                 var grid = e as IMyCubeGrid;
