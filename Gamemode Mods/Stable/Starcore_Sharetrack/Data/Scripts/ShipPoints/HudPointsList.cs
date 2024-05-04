@@ -100,12 +100,8 @@ namespace ShipPoints
             {
                 return PointCheck.RaycastGridFromCamera();
             }
-            else if (cockpit.CubeGrid?.Physics != null) // user is in cockpit
-            {
-                return cockpit.CubeGrid;
-            }
-
-            return null;
+            return cockpit.CubeGrid?.Physics != null ? // user is in cockpit
+                cockpit.CubeGrid : null;
         }
 
         private void ShiftTHandling()
@@ -246,7 +242,7 @@ namespace ShipPoints
             sb.Append(
                 $"<color=Green>PD Investment<color=White>: <color=Orange>( <color=white>{shipTracker.PointDefensePointsRatio*100:N0}% <color=Orange>|<color=Crimson> {(shipTracker.OffensivePoints == 0 ? 0 : (float) shipTracker.PointDefensePoints / shipTracker.OffensivePoints)*100f:N0}%<color=Orange> )\n");
             sb.AppendFormat(
-                "<color=Green>Shield Max HP<color=White>: {0} <color=Orange>(<color=White>{1}%<color=Orange>)\n",
+                "<color=Green>Shield Max HP<color=White>: {0} <color=Orange>(<color=White>{1:N0}%<color=Orange>)\n",
                 totalShieldString, shipTracker.CurrentShieldPercent);
             sb.AppendFormat("<color=Green>Thrust<color=White>: {0}N\n", thrustString);
             sb.AppendFormat("<color=Green>Gyro<color=White>: {0}N\n", gyroString);

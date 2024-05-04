@@ -31,8 +31,12 @@ namespace ShipPoints.ShipTracking
             _slimBlocks = allSlimBlocks.ToHashSet();
 
             foreach (var block in _slimBlocks)
+            {
                 if (block.FatBlock != null)
                     _fatBlocks.Add(block.FatBlock);
+                GridIntegrity += block.Integrity;
+            }
+            OriginalGridIntegrity = GridIntegrity;
 
             Grid.OnBlockAdded += OnBlockAdd;
             Grid.OnBlockRemoved += OnBlockRemove;
@@ -50,8 +54,8 @@ namespace ShipPoints.ShipTracking
 
         public void Update()
         {
-            if (!NeedsUpdate)
-                return;
+            if (!NeedsUpdate) // Modscripts changing the output of a block (i.e. Fusion Systems) without adding/removing blocks will not be updated properly.
+                return;       // I am willing to make this sacrifice.
 
             BattlePoints = 0;
             OffensivePoints = 0;
@@ -86,6 +90,8 @@ namespace ShipPoints.ShipTracking
         public float TotalThrust { get; private set; } = 0;
         public float TotalTorque { get; private set; } = 0;
         public float TotalPower { get; private set; } = 0;
+        public float GridIntegrity { get; private set; } = 0;
+        public float OriginalGridIntegrity { get; private set; } = 0;
 
         // BattlePoint Stats
         public int BattlePoints { get; private set; } = 0;
@@ -93,12 +99,6 @@ namespace ShipPoints.ShipTracking
         public int PowerPoints { get; private set; } = 0;
         public int MovementPoints { get; private set; } = 0;
         public int PointDefensePoints { get; private set; } = 0;
-
-        // Shield Stats
-        public float OriginalMaxShieldHealth { get; private set; } = -1;
-        public float MaxShieldHealth { get; private set; } = -1;
-        public float CurrentShieldPercent { get; private set; } = -1;
-        public float CurrentShieldHeat { get; private set; } = -1;
 
         // Weapon Stats
         public readonly Dictionary<string, int> WeaponCounts = new Dictionary<string, int>();
@@ -116,6 +116,8 @@ namespace ShipPoints.ShipTracking
             if (block.FatBlock != null)
                 _fatBlocks.Add(block.FatBlock);
 
+            GridIntegrity += block.Integrity;
+
             NeedsUpdate = true;
         }
 
@@ -127,6 +129,8 @@ namespace ShipPoints.ShipTracking
             _slimBlocks.Remove(block);
             if (block.FatBlock != null)
                 _fatBlocks.Remove(block.FatBlock);
+
+            GridIntegrity -= block.Integrity;
 
             NeedsUpdate = true;
         }
@@ -152,16 +156,16 @@ namespace ShipPoints.ShipTracking
 
             foreach (var block in _fatBlocks)
             {
-                if (block is IMyCockpit)
+                if (block is IMyCockpit && block.IsFunctional)
                     CockpitCount++;
 
-                if (block is IMyThrust)
+                if (block is IMyThrust && block.IsFunctional)
                     TotalThrust += ((IMyThrust)block).MaxEffectiveThrust;
 
-                else if (block is IMyGyro)
+                else if (block is IMyGyro && block.IsFunctional)
                     TotalTorque += ((MyGyroDefinition)MyDefinitionManager.Static.GetDefinition((block as IMyGyro).BlockDefinition)).ForceMagnitude * (block as IMyGyro).GyroStrengthMultiplier;
 
-                else if (block is IMyPowerProducer)
+                else if (block is IMyPowerProducer && block.IsFunctional)
                     TotalPower += ((IMyPowerProducer)block).MaxOutput;
 
                 else if (!WcApi.HasCoreWeapon((MyEntity)block))
@@ -171,7 +175,7 @@ namespace ShipPoints.ShipTracking
                         continue;
 
                     float ignored = 0;
-                    ShipTracker.ClimbingCostRename(ref blockDisplayName, ref ignored);
+                    PointCheck.ClimbingCostRename(ref blockDisplayName, ref ignored);
                     ShipTracker.SpecialBlockRename(ref blockDisplayName, block);
                     if (!SpecialBlockCounts.ContainsKey(blockDisplayName))
                         SpecialBlockCounts.Add(blockDisplayName, 0);
@@ -207,7 +211,7 @@ namespace ShipPoints.ShipTracking
 
                 float thisClimbingCostMult = 0;
 
-                ShipTracker.ClimbingCostRename(ref weaponDisplayName, ref thisClimbingCostMult);
+                PointCheck.ClimbingCostRename(ref weaponDisplayName, ref thisClimbingCostMult);
 
                 if (!WeaponCounts.ContainsKey(weaponDisplayName))
                     WeaponCounts.Add(weaponDisplayName, 0);
@@ -224,7 +228,7 @@ namespace ShipPoints.ShipTracking
                 return;
 
             float thisClimbingCostMult = 0;
-            ShipTracker.ClimbingCostRename(ref blockDisplayName, ref thisClimbingCostMult);
+            PointCheck.ClimbingCostRename(ref blockDisplayName, ref thisClimbingCostMult);
 
             if (!BlockCounts.ContainsKey(blockDisplayName))
                 BlockCounts.Add(blockDisplayName, 0);

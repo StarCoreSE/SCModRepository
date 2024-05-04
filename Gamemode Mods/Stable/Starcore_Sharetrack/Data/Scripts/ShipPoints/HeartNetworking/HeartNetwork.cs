@@ -16,7 +16,7 @@ namespace ShipPoints.HeartNetworking
         public int TotalNetworkLoad { get; private set; } = 0;
         public Dictionary<Type, int> TypeNetworkLoad = new Dictionary<Type, int>();
 
-        private int networkLoadUpdate = 0;
+        private int _networkLoadUpdate = 0;
 
         public void LoadData(ushort networkId)
         {
@@ -39,10 +39,10 @@ namespace ShipPoints.HeartNetworking
 
         public void Update()
         {
-            networkLoadUpdate--;
-            if (networkLoadUpdate <= 0)
+            _networkLoadUpdate--;
+            if (_networkLoadUpdate <= 0)
             {
-                networkLoadUpdate = NetworkLoadTicks;
+                _networkLoadUpdate = NetworkLoadTicks;
                 TotalNetworkLoad = 0;
                 foreach (var networkLoadArray in TypeNetworkLoad.Keys.ToArray())
                 {

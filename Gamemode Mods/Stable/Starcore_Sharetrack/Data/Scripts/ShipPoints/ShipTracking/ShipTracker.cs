@@ -10,6 +10,7 @@ using VRage.Game;
 using VRage.Game.ModAPI;
 using VRage.ModAPI;
 using VRageMath;
+using VRageRender.Utils;
 using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
 
 namespace ShipPoints.ShipTracking
@@ -47,6 +48,18 @@ namespace ShipPoints.ShipTracking
                 return total;
             }
         }
+        public float GridIntegrity
+        {
+            get
+            {
+                float total = 0;
+                foreach (var stats in _gridStats.Values)
+                    total += stats.GridIntegrity;
+                return total;
+            }
+        }
+
+        public float OriginalGridIntegrity = 0;
         public int HeavyArmorCount
         {
             get
@@ -269,13 +282,14 @@ namespace ShipPoints.ShipTracking
         public ShipTracker(IMyCubeGrid grid, bool showOnHud = true)
         {
             Grid = grid;
-            //_gridStats.Add(Grid, new GridStats(Grid));
 
             List<IMyCubeGrid> allAttachedGrids = new List<IMyCubeGrid>();
             Grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(allAttachedGrids);
             foreach (var attachedGrid in allAttachedGrids)
             {
-                _gridStats.Add(attachedGrid, new GridStats(attachedGrid));
+                GridStats stats = new GridStats(attachedGrid);
+                _gridStats.Add(attachedGrid, stats);
+                OriginalGridIntegrity += stats.OriginalGridIntegrity;
                 if (((MyCubeGrid)attachedGrid).BlocksCount > ((MyCubeGrid)Grid).BlocksCount) // Snap to the largest grid in the group.
                     Grid = attachedGrid;
             }
@@ -335,182 +349,18 @@ namespace ShipPoints.ShipTracking
         {
             if (_gridStats.ContainsKey(grid))
                 return;
-            _gridStats.Add(grid, new GridStats(grid));
+            GridStats stats = new GridStats(grid);
+            _gridStats.Add(grid, stats);
+            OriginalGridIntegrity += stats.OriginalGridIntegrity;
         }
 
         private void OnGridRemove(IMyGridGroupData groupData, IMyCubeGrid grid, IMyGridGroupData newGroupData)
         {
             if (!_gridStats.ContainsKey(grid))
                 return;
+            OriginalGridIntegrity -= _gridStats[grid].OriginalGridIntegrity;
             _gridStats[grid].Close();
             _gridStats.Remove(grid);
-        }
-
-        public static void ClimbingCostRename(ref string costGroupName, ref float costMultiplier)
-        {
-            switch (costGroupName)
-            {
-                case "Blink Drive Large":
-                    costGroupName = "Blink Drive";
-                    costMultiplier = 0.15f;
-                    break;
-                case "Project Pluto (SLAM)":
-                case "SLAM":
-                    costGroupName = "SLAM";
-                    costMultiplier = 0.25f;
-                    break;
-                case "[BTI] MRM-10 Modular Launcher 45":
-                case "[BTI] MRM-10 Modular Launcher 45 Reversed":
-                case "[BTI] MRM-10 Modular Launcher":
-                case "[BTI] MRM-10 Modular Launcher Middle":
-                case "[BTI] MRM-10 Launcher":
-                    costGroupName = "MRM-10 Launcher";
-                    costMultiplier = 0.04f;
-                    break;
-                case "[BTI] LRM-5 Modular Launcher 45 Reversed":
-                case "[BTI] LRM-5 Modular Launcher 45":
-                case "[BTI] LRM-5 Modular Launcher Middle":
-                case "[BTI] LRM-5 Modular Launcher":
-                case "[BTI] LRM-5 Launcher":
-                    costGroupName = "LRM-5 Launcher";
-                    costMultiplier = 0.10f;
-                    break;
-                case "[MA] Gimbal Laser T2 Armored":
-                case "[MA] Gimbal Laser T2 Armored Slope 45":
-                case "[MA] Gimbal Laser T2 Armored Slope 2":
-                case "[MA] Gimbal Laser T2 Armored Slope":
-                case "[MA] Gimbal Laser T2":
-                    costGroupName = "Gimbal Laser T2";
-                    costMultiplier = 0f;
-                    break;
-                case "[MA] Gimbal Laser Armored Slope 45":
-                case "[MA] Gimbal Laser Armored Slope 2":
-                case "[MA] Gimbal Laser Armored Slope":
-                case "[MA] Gimbal Laser Armored":
-                case "[MA] Gimbal Laser":
-                    costGroupName = "Gimbal Laser";
-                    costMultiplier = 0f;
-                    break;
-                case "[ONYX] BR-RT7 Afflictor Slanted Burst Cannon":
-                case "[ONYX] BR-RT7 Afflictor 70mm Burst Cannon":
-                case "[ONYX] Afflictor":
-                    costGroupName = "Afflictor";
-                    costMultiplier = 0f;
-                    break;
-                case "[MA] Slinger AC 150mm Sloped 30":
-                case "[MA] Slinger AC 150mm Sloped 45":
-                case "[MA] Slinger AC 150mm Gantry Style":
-                case "[MA] Slinger AC 150mm Sloped 45 Gantry":
-                case "[MA] Slinger AC 150mm":
-                case "[MA] Slinger":
-                    costGroupName = "Slinger";
-                    costMultiplier = 0f;
-                    break;
-                case "[ONYX] Heliod Plasma Pulser":
-                    costGroupName = "Heliod Plasma Pulser";
-                    costMultiplier = 0.50f;
-                    break;
-                case "[MA] UNN Heavy Torpedo Launcher":
-                    costGroupName = "UNN Heavy Torpedo Launcher";
-                    costMultiplier = 0.15f;
-                    break;
-                case "[BTI] SRM-8":
-                    costGroupName = "SRM-8";
-                    costMultiplier = 0.15f;
-                    break;
-                case "[BTI] Starcore Arrow-IV Launcher":
-                    costGroupName = "Starcore Arrow-IV Launcher";
-                    costMultiplier = 0.15f;
-                    break;
-                case "[HAS] Tartarus VIII":
-                    costGroupName = "Tartarus VIII";
-                    costMultiplier = 0.15f;
-                    break;
-                case "[HAS] Cocytus IX":
-                    costGroupName = "Cocytus IX";
-                    costMultiplier = 0.15f;
-                    break;
-                case "[MA] MCRN Torpedo Launcher":
-                    costGroupName = "MCRN Torpedo Launcher";
-                    costMultiplier = 0.15f;
-                    break;
-                case "Flares":
-                    costGroupName = "Flares";
-                    costMultiplier = 0.25f;
-                    break;
-                case "[EXO] Chiasm [Arc Emitter]":
-                    costGroupName = "Chiasm [Arc Emitter]";
-                    costMultiplier = 0.15f;
-                    break;
-                case "[BTI] Medium Laser":
-                case "[BTI] Large Laser":
-                    costGroupName = " Laser";
-                    costMultiplier = 0.15f;
-                    break;
-                case "Reinforced Blastplate":
-                case "Active Blastplate":
-                case "Standard Blastplate A":
-                case "Standard Blastplate B":
-                case "Standard Blastplate C":
-                case "Elongated Blastplate":
-                case "7x7 Basedplate":
-                    costGroupName = "Blastplate";
-                    costMultiplier = 1.00f;
-                    break;
-                case "[EXO] Taiidan":
-                case "[EXO] Taiidan Fighter Launch Rail":
-                case "[EXO] Taiidan Bomber Launch Rail":
-                case "[EXO] Taiidan Fighter Hangar Bay":
-                case "[EXO] Taiidan Bomber Hangar Bay":
-                case "[EXO] Taiidan Bomber Hangar Bay Medium":
-                case "[EXO] Taiidan Fighter Small Bay":
-                    costGroupName = "Taiidan";
-                    costMultiplier = 0.25f;
-                    break;
-                case "[40K] Gothic Torpedo Launcher":
-                    costGroupName = "Gothic Torpedo Launcher";
-                    costMultiplier = 0.15f;
-                    break;
-                case "[MID] AX 'Spitfire' Light Rocket Turret":
-                    costGroupName = "Spitfire Turret";
-                    costMultiplier = 0.15f;
-                    break;
-                case "[FLAW] Naval RL-10x 'Avalanche' Medium Range Launchers":
-                case "[FLAW] Naval RL-10x 'Avalanche' Angled Medium Range Launchers":
-                    costGroupName = "RL-10x Avalanche";
-                    costMultiplier = 0.15f;
-                    break;
-                case "[MID] LK 'Bonfire' Guided Rocket Turret":
-                    costGroupName = "Bonfire Turret";
-                    costMultiplier = 0.2f;
-                    break;
-                case "[FLAW] Warp Beacon - Longsword":
-                    costGroupName = "Longsword Bomber";
-                    costMultiplier = 0.2f;
-                    break;
-                case "[FLAW] Phoenix Snubfighter Launch Bay":
-                    costGroupName = "Snubfighters";
-                    costMultiplier = 0.1f;
-                    break;
-                case "[FLAW] Hadean Superheavy Plasma Blastguns":
-                    costGroupName = "Plasma Blastgun";
-                    costMultiplier = 0.121f;
-                    break;
-                case "[FLAW] Vindicator Kinetic Battery":
-                    costGroupName = "Kinetic Battery";
-                    costMultiplier = 0.120f;
-                    break;
-                case "[FLAW] Goalkeeper Casemate Flak Battery":
-                    costGroupName = "Goalkeeper Flakwall";
-                    costMultiplier = 0.119f;
-                    break;
-                case "Shield Controller":
-                case "Shield Controller Table":
-                case "Structural Integrity Field Generator":
-                    costGroupName = "Defensive Generator";
-                    costMultiplier = 50.00f;
-                    break;
-            }
         }
 
         public static void SpecialBlockRename(ref string blockDisplayName, IMyCubeBlock block)
@@ -638,7 +488,7 @@ namespace ShipPoints.ShipTracking
                                  30 / Math.Max(maxAngle, angle * angle * angle);
                 _nametag.Origin = new Vector2D(targetHudPos.X,
                     targetHudPos.Y + MathHelper.Clamp(-0.000125 * distance + 0.25, 0.05, 0.25));
-                _nametag.Visible = PointCheckHelpers.NameplateVisible && visible;
+                _nametag.Visible = visible && PointCheck.NametagViewState != NametagSettings.None;
 
                 _nametag.Message.Clear();
 

@@ -1,6 +1,4 @@
 ﻿using System;
-using Math0424.Networking;
-using SENetworkAPI;
 using ShipPoints.Commands;
 using ShipPoints.HeartNetworking;
 using ShipPoints.ShipTracking;
@@ -25,9 +23,6 @@ namespace ShipPoints
 
             try
             {
-                MyNetworkHandler.Init();
-                if (!NetworkApi.IsInitialized)
-                    NetworkApi.Init(ComId, DisplayName, Keyword);
                 HeartNetwork.I = new HeartNetwork();
                 HeartNetwork.I.LoadData(42521);
                 CommandHandler.Init();
@@ -48,7 +43,6 @@ namespace ShipPoints
                 TrackingManager.Close();
                 CommandHandler.Close();
                 HeartNetwork.I.UnloadData();
-                MyNetworkHandler.Static?.Dispose();
             }
             catch (Exception ex)
             {

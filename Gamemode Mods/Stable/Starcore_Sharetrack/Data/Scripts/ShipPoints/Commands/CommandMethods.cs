@@ -1,7 +1,9 @@
-﻿using ShipPoints.Data.Scripts.ShipPoints.Networking;
-using System;
-using Math0424.Networking;
+﻿using System;
+using System.Text.RegularExpressions;
 using Sandbox.ModAPI;
+using SCModRepository_Dev.Gamemode_Mods.Development.Starcore_Sharetrack_Dev.Data.Scripts.ShipPoints.HeartNetworking.Custom;
+using ShipPoints.HeartNetworking;
+using ShipPoints.HeartNetworking.Custom;
 using ShipPoints.MatchTiming;
 
 namespace ShipPoints.Commands
@@ -12,33 +14,35 @@ namespace ShipPoints.Commands
 
         public static void Start(string[] args)
         {
-            MyNetworkHandler.Static.MyNetwork.TransmitToServer(new BasicPacket(6), true, true);
-            PointCheck.AmTheCaptainNow = true;
-            PointCheck.LocalMatchState = 1;
-            MatchTimer.I.Start();
-            MyAPIGateway.Utilities.ShowMessage("GM", "You are the captain now.");
+            if (MyAPIGateway.Session.IsServer)
+                new GameStatePacket(true).Received(0);
+            else
+                HeartNetwork.I.SendToServer(new GameStatePacket(true));
+            TakeOverControl(null);
             MyAPIGateway.Utilities.ShowNotification("HEY DUMBASS, IS DAMAGE ON?", 10000, "Red");
         }
 
         public static void End(string[] args)
         {
-            MyNetworkHandler.Static.MyNetwork.TransmitToServer(new BasicPacket(8), true, true);
-            PointCheck.AmTheCaptainNow = false;
-            PointCheck.LocalMatchState = 0;
-            MatchTimer.I.Stop();
-            MyAPIGateway.Utilities.ShowMessage("GM", "Match Ended.");
+            if (MyAPIGateway.Session.IsServer)
+                new GameStatePacket(false).Received(0);
+            else
+                HeartNetwork.I.SendToServer(new GameStatePacket(true));
+            GiveUpControl(null);
         }
 
-        public static void TakeOver(string[] args)
+        public static void TakeOverControl(string[] args)
         {
             PointCheck.AmTheCaptainNow = true;
-            MyAPIGateway.Utilities.ShowMessage("GM", "You are the captain now.");
+            MyAPIGateway.Utilities.SendMessage(MyAPIGateway.Session.Player?.DisplayName + " has match control.");
+            MyAPIGateway.Utilities.ShowMessage("ShareTrack", "You are the captain now.");
         }
 
-        public static void GiveUp(string[] args)
+        public static void GiveUpControl(string[] args)
         {
             PointCheck.AmTheCaptainNow = false;
-            MyAPIGateway.Utilities.ShowMessage("GM", "You are not the captain now.");
+            MyAPIGateway.Utilities.SendMessage(MyAPIGateway.Session.Player?.DisplayName + " released match control.");
+            MyAPIGateway.Utilities.ShowMessage("ShareTrack", "You are a deckhand now.");
         }
 
         #endregion
@@ -47,6 +51,12 @@ namespace ShipPoints.Commands
 
         public static void SetMatchTime(string[] args)
         {
+            if (!PointCheck.AmTheCaptainNow)
+            {
+                MyAPIGateway.Utilities.ShowNotification("You aren't the captain! Run \"/st takeover\" to take over the match.");
+                return;
+            }
+
             try
             {
                 MatchTimer.I.SetMatchTime(double.Parse(args[1]));
@@ -60,14 +70,26 @@ namespace ShipPoints.Commands
 
         public static void SetTeams(string[] args)
         {
+            if (!PointCheck.AmTheCaptainNow)
+            {
+                MyAPIGateway.Utilities.ShowNotification("You aren't the captain! Run \"/st takeover\" to take over the match.");
+                return;
+            }
+
+            if (args?.Length < 2)
+            {
+                MyAPIGateway.Utilities.ShowNotification("Teams not changed, make sure to have two or more arguments.");
+                return;
+            }
+
             try
             {
-                PointCheck.I.Team1.Value = args[1].ToUpper();
-                PointCheck.I.Team2.Value = args[2].ToUpper();
-                PointCheck.I.Team3.Value = args[3].ToUpper();
-                //team1_Local = tempdist[1].ToUpper(); team2_Local = tempdist[2].ToUpper(); team3_Local = tempdist[3].ToUpper();
-                MyAPIGateway.Utilities.ShowNotification("Teams changed to " + args[1] + " vs " + args[2] +
-                                                        " vs " + args[3]); //sendToOthers = true;
+                string[] teamNames = new string[args.Length-1];
+                for (int i = 1; i < args.Length; i++) // Skip the first argument as it's always "setteams"
+                    teamNames[i-1] = args[i].ToUpper();
+
+                PointCheck.I.TeamNames = teamNames;
+                MyAPIGateway.Utilities.ShowNotification("Teams changed to " + string.Join(" v. ", teamNames));
             }
             catch (Exception)
             {
@@ -77,10 +99,17 @@ namespace ShipPoints.Commands
 
         public static void SetWinTime(string[] args)
         {
+            if (!PointCheck.AmTheCaptainNow)
+            {
+                MyAPIGateway.Utilities.ShowNotification("You aren't the captain! Run \"/st takeover\" to take over the match.");
+                return;
+            }
+
             try
             {
                 MatchTimer.I.MatchDurationMinutes = int.Parse(args[1]);
                 MyAPIGateway.Utilities.ShowNotification("Match duration changed to " + MatchTimer.I.MatchDurationMinutes + "m.");
+                MatchTimerPacket.SendMatchUpdate(MatchTimer.I);
             }
             catch (Exception)
             {
@@ -88,8 +117,14 @@ namespace ShipPoints.Commands
             }
         }
 
-        public static void SetDelay(string[] args)
+        public static void SetDelay(string[] args) // TODO these aren't synced
         {
+            if (!PointCheck.AmTheCaptainNow)
+            {
+                MyAPIGateway.Utilities.ShowNotification("You aren't the captain! Run \"/st takeover\" to take over the match.");
+                return;
+            }
+
             try
             {
                 PointCheck.Delaytime = int.Parse(args[1]);
@@ -102,58 +137,30 @@ namespace ShipPoints.Commands
             }
         }
 
-        public static void SetDecay(string[] args)
-        {
-            try
-            {
-                PointCheck.Decaytime = int.Parse(args[1]);
-                MyAPIGateway.Utilities.ShowNotification("Decay time changed to " + PointCheck.Decaytime + " seconds.");
-                PointCheck.Decaytime *= 60;
-            }
-            catch (Exception)
-            {
-                MyAPIGateway.Utilities.ShowNotification("Decay time not changed, try /st setdecay xxx (in seconds)");
-            }
-        }
-
-        public static void SetTwoTeams(string[] args)
-        {
-            MyAPIGateway.Utilities.ShowMessage("GM", "Teams set to two.");
-            PointCheck.I.ThreeTeams.Value = 0;
-        }
-
-        public static void SetThreeTeams(string[] args)
-        {
-            MyAPIGateway.Utilities.ShowMessage("GM", "Teams set to three.");
-            PointCheck.I.ThreeTeams.Value = 1;
-        }
-
         #endregion
 
         #region Utility Commands
 
-        public static void ToggleSphere(string[] args)
-        {
-            PointCheck.I.SphereVisual = !PointCheck.I.SphereVisual;
-        }
-
         public static void Shields(string[] args)
         {
-            MyNetworkHandler.Static.MyNetwork.TransmitToServer(new BasicPacket(5));
+            if (MyAPIGateway.Session.IsServer)
+                new ShieldFillRequestPacket().Received(0);
+            else
+                HeartNetwork.I.SendToEveryone(new ShieldFillRequestPacket());
         }
 
         public static void ReportProblem(string[] args)
         {
-            MyAPIGateway.Utilities.ShowNotification("A problem has been reported.", 10000);
-            PointCheck.LocalProblemSwitch = 1;
-            MyNetworkHandler.Static.MyNetwork.TransmitToServer(new BasicPacket(17), true, true);
+            string message = "@" + (MyAPIGateway.Session.Player?.DisplayName ?? "ERR") + ":";
+            for (int i = 1; i < args.Length; i++) // Skip the first argument as it's always "problem"
+                message += ' ' + args[i];
+
+            PointCheck.I.ReportProblem(args.Length > 1 ? message : "");
         }
 
         public static void ReportFixed(string[] args)
         {
-            MyAPIGateway.Utilities.ShowNotification("Fixed :^)", 10000);
-            PointCheck.LocalProblemSwitch = 0;
-            MyNetworkHandler.Static.MyNetwork.TransmitToServer(new BasicPacket(18), true, true);
+            PointCheck.I.ResolvedProblem();
         }
 
         #endregion

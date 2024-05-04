@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
 using ShipPoints.HeartNetworking;
 using ShipPoints.HeartNetworking.Custom;
@@ -12,6 +13,12 @@ namespace ShipPoints.ShipTracking
     internal class TrackingManager
     {
         public static TrackingManager I;
+
+        private static readonly string[] AutoTrackSubtypes = new[]
+        {
+            "LargeFlightMovement",
+            "RivalAIRemoteControlLarge",
+        };
 
         #region Public Methods
 
@@ -53,7 +60,7 @@ namespace ShipPoints.ShipTracking
 
         public void TrackGrid(IMyCubeGrid grid, bool share = true)
         {
-            if (TrackedGrids.ContainsKey(grid))
+            if (!(((MyCubeGrid)grid)?.DestructibleBlocks ?? false) || TrackedGrids.ContainsKey(grid)) // Ignore invulnerable and already tracked grids
                 return;
 
             // Don't allow tracking grids that are already tracked in the group.
@@ -178,6 +185,11 @@ namespace ShipPoints.ShipTracking
                 return;
 
             AllGrids.Add(grid);
+            grid.GetBlocks(null, block =>
+            {
+                CheckAutotrack(block);
+                return false;
+            });
 
             if (_queuedGridTracks.Contains(grid.EntityId))
             {
@@ -189,7 +201,6 @@ namespace ShipPoints.ShipTracking
 
         private void OnEntityRemove(IMyEntity entity)
         {
-
             if (!(entity is IMyCubeGrid) || entity.Physics == null)
                 return;
             var grid = (IMyCubeGrid) entity;
@@ -213,6 +224,14 @@ namespace ShipPoints.ShipTracking
                 gridIds.Add(grid.EntityId);
             }
             return gridIds.ToArray();
+        }
+
+        private void CheckAutotrack(IMySlimBlock block)
+        {
+            if (block.FatBlock == null ||
+                !AutoTrackSubtypes.Contains(block.BlockDefinition.Id.SubtypeName))
+                return;
+            TrackGrid(block.CubeGrid, false);
         }
     }
 }
