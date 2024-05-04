@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ProtoBuf;
-using ShipPoints.HeartNetworking;
+﻿using ProtoBuf;
 
 namespace ShipPoints.HeartNetworking.Custom
 {
     [ProtoContract]
     internal class GameStatePacket : PacketBase
     {
-        [ProtoMember(1)] public int MatchState { get; private set; }
-
         public GameStatePacket(PointCheck pointCheck)
         {
-            MatchState = (int) PointCheck.MatchState;
+            MatchState = (int)PointCheck.MatchState;
         }
 
         public GameStatePacket(bool matchActive)
@@ -27,9 +19,11 @@ namespace ShipPoints.HeartNetworking.Custom
         {
         }
 
+        [ProtoMember(1)] public int MatchState { get; }
+
         public override void Received(ulong SenderSteamId)
         {
-            PointCheck.MatchState = (PointCheck.MatchStateEnum) MatchState;
+            PointCheck.MatchState = (PointCheck.MatchStateEnum)MatchState;
 
             if (PointCheck.MatchState == PointCheck.MatchStateEnum.Active)
                 PointCheck.BeginMatch();

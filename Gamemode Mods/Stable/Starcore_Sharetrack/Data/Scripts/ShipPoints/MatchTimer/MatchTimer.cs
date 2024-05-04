@@ -19,9 +19,9 @@ namespace ShipPoints.MatchTiming
         public const ushort NetworkId = 8576;
         public const long ModMessageId = 8573643466;
         public static MatchTimer I;
-        public bool IsMatchEnded = true;
 
         private double _matchDurationMinutes = 20;
+        public bool IsMatchEnded = true;
 
         /// <summary>
         ///     Match duration, in format [mm:ss].
@@ -48,10 +48,7 @@ namespace ShipPoints.MatchTiming
         /// </summary>
         public double MatchDurationMinutes
         {
-            get
-            {
-                return _matchDurationMinutes;
-            }
+            get { return _matchDurationMinutes; }
             set
             {
                 _matchDurationMinutes = value;
@@ -78,9 +75,9 @@ namespace ShipPoints.MatchTiming
         }
 
         /// <summary>
-        /// NON-SYNCHRONIZED tick counter, incremented once per UpdateAfterSimulation().
+        ///     NON-SYNCHRONIZED tick counter, incremented once per UpdateAfterSimulation().
         /// </summary>
-        public int Ticks = 0;
+        public int Ticks;
 
         public override void UpdateAfterSimulation()
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using ProtoBuf;
-using SCModRepository_Dev.Gamemode_Mods.Development.Starcore_Sharetrack_Dev.Data.Scripts.ShipPoints.HeartNetworking.Custom;
+using SCModRepository_Dev.Gamemode_Mods.Development.Starcore_Sharetrack_Dev.Data.Scripts.ShipPoints.HeartNetworking.
+    Custom;
 using ShipPoints.HeartNetworking.Custom;
 
 namespace ShipPoints.HeartNetworking
@@ -10,23 +11,23 @@ namespace ShipPoints.HeartNetworking
     [ProtoInclude(93, typeof(GameStatePacket))]
     [ProtoInclude(94, typeof(ProblemReportPacket))]
     [ProtoInclude(95, typeof(ShieldFillRequestPacket))]
-
     [ProtoContract(UseProtoMembersOnly = true)]
-    public abstract partial class PacketBase
+    public abstract class PacketBase
     {
-        /// <summary>
-        /// Called whenever your packet is recieved.
-        /// </summary>
-        /// <param name="SenderSteamId"></param>
-        public abstract void Received(ulong SenderSteamId);
-
-        public static Type[] Types = {
+        public static Type[] Types =
+        {
             typeof(PacketBase),
             typeof(TrackingSyncPacket),
             typeof(SyncRequestPacket),
             typeof(GameStatePacket),
             typeof(ProblemReportPacket),
-            typeof(ShieldFillRequestPacket),
+            typeof(ShieldFillRequestPacket)
         };
+
+        /// <summary>
+        ///     Called whenever your packet is recieved.
+        /// </summary>
+        /// <param name="SenderSteamId"></param>
+        public abstract void Received(ulong SenderSteamId);
     }
 }

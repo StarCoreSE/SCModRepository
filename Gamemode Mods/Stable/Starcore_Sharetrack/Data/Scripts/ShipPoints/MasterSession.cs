@@ -9,11 +9,10 @@ namespace ShipPoints
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     internal class MasterSession : MySessionComponentBase
     {
-        public static MasterSession I;
-
         public const ushort ComId = 42511;
         public const string Keyword = "/debug";
         public const string DisplayName = "Debug";
+        public static MasterSession I;
 
         private readonly PointCheck _pointCheck = new PointCheck();
 
@@ -82,7 +81,6 @@ namespace ShipPoints
         {
             try
             {
-
             }
             catch (Exception ex)
             {

@@ -1,20 +1,22 @@
-﻿using ProtoBuf;
-using ShipPoints.ShipTracking;
-using System;
+﻿using System;
+using ProtoBuf;
 using Sandbox.ModAPI;
+using ShipPoints.ShipTracking;
 
 namespace ShipPoints.HeartNetworking.Custom
 {
     /// <summary>
-    /// Packet used for syncing tracked grids.
+    ///     Packet used for syncing tracked grids.
     /// </summary>
     [ProtoContract]
     internal class TrackingSyncPacket : PacketBase
     {
-        [ProtoMember(21)] public long[] TrackedGrids;
         [ProtoMember(22)] public bool? IsAddingReference;
+        [ProtoMember(21)] public long[] TrackedGrids;
 
-        public TrackingSyncPacket() { }
+        public TrackingSyncPacket()
+        {
+        }
 
         public TrackingSyncPacket(long[] trackedGrids)
         {
@@ -37,7 +39,7 @@ namespace ShipPoints.HeartNetworking.Custom
 
             if (IsAddingReference == null)
                 TrackingManager.I.BulkTrackGrids(TrackedGrids);
-            else if ((bool) IsAddingReference)
+            else if ((bool)IsAddingReference)
                 TrackingManager.I.TrackGrid(TrackedGrids[0], MyAPIGateway.Session.IsServer);
             else
                 TrackingManager.I.UntrackGrid(TrackedGrids[0], MyAPIGateway.Session.IsServer);

@@ -14,147 +14,20 @@ namespace ShipPoints.ShipTracking
     {
         public static TrackingManager I;
 
-        private static readonly string[] AutoTrackSubtypes = new[]
+        private static readonly string[] AutoTrackSubtypes =
         {
             "LargeFlightMovement",
-            "RivalAIRemoteControlLarge",
+            "RivalAIRemoteControlLarge"
         };
 
-        #region Public Methods
-
-        public static void Init()
-        {
-            I = new TrackingManager();
-        }
-
-        public static void UpdateAfterSimulation()
-        {
-            I?.Update();
-        }
-
-        public static void Close()
-        {
-            I?.Unload();
-            I = null;
-        }
-
-        public void BulkTrackGrids(long[] gridIds)
-        {
-            Log.Info($"Receive bulk track request with {gridIds.Length} items!");
-            List<long> gridIds_List = new List<long>(gridIds);
-            foreach (var grid in TrackedGrids.Keys.ToArray())
-            {
-                if (gridIds.Contains(grid.EntityId))
-                {
-                    gridIds_List.Remove(grid.EntityId);
-                    continue;
-                }
-                UntrackGrid(grid, false);
-            }
-
-            foreach (long gridId in gridIds_List)
-            {
-                TrackGrid(gridId, false);
-            }
-        }
-
-        public void TrackGrid(IMyCubeGrid grid, bool share = true)
-        {
-            if (!(((MyCubeGrid)grid)?.DestructibleBlocks ?? false) || TrackedGrids.ContainsKey(grid)) // Ignore invulnerable and already tracked grids
-                return;
-
-            // Don't allow tracking grids that are already tracked in the group.
-            List<IMyCubeGrid> allAttachedGrids = new List<IMyCubeGrid>();
-            grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(allAttachedGrids);
-            foreach (var attachedGrid in allAttachedGrids)
-                if (TrackedGrids.ContainsKey(attachedGrid))
-                    return;
-
-            ShipTracker tracker = new ShipTracker(grid);
-            TrackedGrids.Add(grid, tracker);
-
-            if (!share)
-                return;
-
-            if (MyAPIGateway.Session.IsServer)
-            {
-                ServerDoSync();
-            }
-            else
-            {
-                TrackingSyncPacket packet = new TrackingSyncPacket(grid.EntityId, true);
-                HeartNetwork.I.SendToServer(packet);
-            }
-        }
-
-        public void TrackGrid(long gridId, bool share = true)
-        {
-            IMyCubeGrid grid = MyAPIGateway.Entities.GetEntityById(gridId) as IMyCubeGrid;
-            if (grid == null)
-            {
-                _queuedGridTracks.Add(gridId);
-                return;
-            }
-            TrackGrid(grid, share);
-        }
-
-        public void UntrackGrid(IMyCubeGrid grid, bool share = true)
-        {
-            // Untrack all grids in group.
-            List<IMyCubeGrid> allAttachedGrids = new List<IMyCubeGrid>();
-            grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(allAttachedGrids);
-            foreach (var attachedGrid in allAttachedGrids.Where(attachedGrid => TrackedGrids.ContainsKey(attachedGrid)))
-            {
-                TrackedGrids[attachedGrid].DisposeHud();
-                TrackedGrids.Remove(attachedGrid);
-            }
-
-            if (!share)
-                return;
-
-            if (MyAPIGateway.Session.IsServer)
-            {
-                ServerDoSync();
-            }
-            else
-            {
-                TrackingSyncPacket packet = new TrackingSyncPacket(grid.EntityId, false);
-                HeartNetwork.I.SendToServer(packet);
-            }
-        }
-
-        public void UntrackGrid(long gridId, bool share = true)
-        {
-            IMyCubeGrid grid = MyAPIGateway.Entities.GetEntityById(gridId) as IMyCubeGrid;
-            _queuedGridTracks.Remove(gridId);
-            if (grid != null)
-                UntrackGrid(grid, share);
-        }
-
-        public bool IsGridTracked(IMyCubeGrid grid)
-        {
-            List<IMyCubeGrid> allAttachedGrids = new List<IMyCubeGrid>();
-            grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(allAttachedGrids);
-            foreach (var attachedGrid in allAttachedGrids.Where(attachedGrid => TrackedGrids.ContainsKey(attachedGrid)))
-                return true;
-            return false;
-        }
-
-        public void ServerDoSync()
-        {
-            TrackingSyncPacket packet = new TrackingSyncPacket(GetGridIds());
-            HeartNetwork.I.SendToEveryone(packet);
-        }
-
-        #endregion
+        private readonly HashSet<long> _queuedGridTracks = new HashSet<long>();
 
         public HashSet<IMyCubeGrid> AllGrids = new HashSet<IMyCubeGrid>();
         public Dictionary<IMyCubeGrid, ShipTracker> TrackedGrids = new Dictionary<IMyCubeGrid, ShipTracker>();
-        private readonly HashSet<long> _queuedGridTracks = new HashSet<long>();
 
         private TrackingManager()
         {
-            HashSet<IMyEntity> entities = new HashSet<IMyEntity>();
+            var entities = new HashSet<IMyEntity>();
             MyAPIGateway.Entities.GetEntities(entities);
             foreach (var entity in entities)
                 OnEntityAdd(entity);
@@ -164,7 +37,6 @@ namespace ShipPoints.ShipTracking
 
         private void Update()
         {
-            
         }
 
         private void Unload()
@@ -194,7 +66,7 @@ namespace ShipPoints.ShipTracking
             if (_queuedGridTracks.Contains(grid.EntityId))
             {
                 _queuedGridTracks.Remove(grid.EntityId);
-                ShipTracker tracker = new ShipTracker(grid);
+                var tracker = new ShipTracker(grid);
                 TrackedGrids.Add(grid, tracker);
             }
         }
@@ -203,7 +75,7 @@ namespace ShipPoints.ShipTracking
         {
             if (!(entity is IMyCubeGrid) || entity.Physics == null)
                 return;
-            var grid = (IMyCubeGrid) entity;
+            var grid = (IMyCubeGrid)entity;
 
             AllGrids.Remove(grid);
 
@@ -212,17 +84,14 @@ namespace ShipPoints.ShipTracking
                 TrackedGrids[grid].DisposeHud();
                 TrackedGrids.Remove(grid);
             }
-            
+
             _queuedGridTracks.Remove(grid.EntityId);
         }
 
         private long[] GetGridIds()
         {
             var gridIds = new List<long>();
-            foreach (var grid in TrackedGrids.Keys)
-            {
-                gridIds.Add(grid.EntityId);
-            }
+            foreach (var grid in TrackedGrids.Keys) gridIds.Add(grid.EntityId);
             return gridIds.ToArray();
         }
 
@@ -233,5 +102,133 @@ namespace ShipPoints.ShipTracking
                 return;
             TrackGrid(block.CubeGrid, false);
         }
+
+        #region Public Methods
+
+        public static void Init()
+        {
+            I = new TrackingManager();
+        }
+
+        public static void UpdateAfterSimulation()
+        {
+            I?.Update();
+        }
+
+        public static void Close()
+        {
+            I?.Unload();
+            I = null;
+        }
+
+        public void BulkTrackGrids(long[] gridIds)
+        {
+            Log.Info($"Receive bulk track request with {gridIds.Length} items!");
+            var gridIds_List = new List<long>(gridIds);
+            foreach (var grid in TrackedGrids.Keys.ToArray())
+            {
+                if (gridIds.Contains(grid.EntityId))
+                {
+                    gridIds_List.Remove(grid.EntityId);
+                    continue;
+                }
+
+                UntrackGrid(grid, false);
+            }
+
+            foreach (var gridId in gridIds_List) TrackGrid(gridId, false);
+        }
+
+        public void TrackGrid(IMyCubeGrid grid, bool share = true)
+        {
+            if (!(((MyCubeGrid)grid)?.DestructibleBlocks ?? false) ||
+                TrackedGrids.ContainsKey(grid)) // Ignore invulnerable and already tracked grids
+                return;
+
+            // Don't allow tracking grids that are already tracked in the group.
+            var allAttachedGrids = new List<IMyCubeGrid>();
+            grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(allAttachedGrids);
+            foreach (var attachedGrid in allAttachedGrids)
+                if (TrackedGrids.ContainsKey(attachedGrid))
+                    return;
+
+            var tracker = new ShipTracker(grid);
+            TrackedGrids.Add(grid, tracker);
+
+            if (!share)
+                return;
+
+            if (MyAPIGateway.Session.IsServer)
+            {
+                ServerDoSync();
+            }
+            else
+            {
+                var packet = new TrackingSyncPacket(grid.EntityId, true);
+                HeartNetwork.I.SendToServer(packet);
+            }
+        }
+
+        public void TrackGrid(long gridId, bool share = true)
+        {
+            var grid = MyAPIGateway.Entities.GetEntityById(gridId) as IMyCubeGrid;
+            if (grid == null)
+            {
+                _queuedGridTracks.Add(gridId);
+                return;
+            }
+
+            TrackGrid(grid, share);
+        }
+
+        public void UntrackGrid(IMyCubeGrid grid, bool share = true)
+        {
+            // Untrack all grids in group.
+            var allAttachedGrids = new List<IMyCubeGrid>();
+            grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(allAttachedGrids);
+            foreach (var attachedGrid in allAttachedGrids.Where(attachedGrid => TrackedGrids.ContainsKey(attachedGrid)))
+            {
+                TrackedGrids[attachedGrid].DisposeHud();
+                TrackedGrids.Remove(attachedGrid);
+            }
+
+            if (!share)
+                return;
+
+            if (MyAPIGateway.Session.IsServer)
+            {
+                ServerDoSync();
+            }
+            else
+            {
+                var packet = new TrackingSyncPacket(grid.EntityId, false);
+                HeartNetwork.I.SendToServer(packet);
+            }
+        }
+
+        public void UntrackGrid(long gridId, bool share = true)
+        {
+            var grid = MyAPIGateway.Entities.GetEntityById(gridId) as IMyCubeGrid;
+            _queuedGridTracks.Remove(gridId);
+            if (grid != null)
+                UntrackGrid(grid, share);
+        }
+
+        public bool IsGridTracked(IMyCubeGrid grid)
+        {
+            var allAttachedGrids = new List<IMyCubeGrid>();
+            grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(allAttachedGrids);
+            foreach (var attachedGrid in allAttachedGrids.Where(attachedGrid => TrackedGrids.ContainsKey(attachedGrid)))
+                return true;
+            return false;
+        }
+
+        public void ServerDoSync()
+        {
+            var packet = new TrackingSyncPacket(GetGridIds());
+            HeartNetwork.I.SendToEveryone(packet);
+        }
+
+        #endregion
     }
 }

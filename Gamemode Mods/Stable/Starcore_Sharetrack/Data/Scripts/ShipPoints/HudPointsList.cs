@@ -1,11 +1,11 @@
-﻿using CoreSystems.Api;
+﻿using System;
+using System.Text;
+using CoreSystems.Api;
 using DefenseShields;
 using Draygo.API;
 using RelativeTopSpeed;
 using Sandbox.Definitions;
 using Sandbox.ModAPI;
-using System;
-using System.Text;
 using ShipPoints.MatchTiming;
 using ShipPoints.ShipTracking;
 using VRage.Game;
@@ -16,24 +16,12 @@ using static VRageRender.MyBillboard;
 namespace ShipPoints
 {
     /// <summary>
-    /// Shift-T screen
+    ///     Shift-T screen
     /// </summary>
     internal class HudPointsList
     {
-        #region APIs
-        private WcApi WcApi => PointCheck.I.WcApi;
-        private ShieldApi ShApi => PointCheck.I.ShieldApi;
-        private RtsApi RtsApi => PointCheck.I.RtsApi;
-        private HudAPIv2 TextHudApi => PointCheck.I.TextHudApi;
-        #endregion
-
-        private ViewState _viewState = ViewState.None;
-        private enum ViewState
-        {
-            None,
-            InView,
-            InView2,
-        }
+        private readonly StringBuilder _gunTextBuilder = new StringBuilder();
+        private readonly StringBuilder _speedTextBuilder = new StringBuilder();
 
 
         private readonly HudAPIv2.HUDMessage
@@ -56,60 +44,27 @@ namespace ShipPoints
                 Visible = false
             };
 
-        private readonly StringBuilder _gunTextBuilder = new StringBuilder();
-        private readonly StringBuilder _speedTextBuilder = new StringBuilder();
-
-        #region Public Methods
-
-        public void CycleViewState()
-        {
-            _viewState++;
-            if (_viewState > ViewState.InView2)
-            {
-                _statMessageBattle.Message.Clear();
-                _statMessageBattleWeaponCountsist.Message.Clear();
-                _statMessageBattle.Visible = false;
-                _statMessageBattleWeaponCountsist.Visible = false;
-
-                _viewState = ViewState.None;
-            }
-        }
-
-        public void UpdateDraw()
-        {
-            if (!TextHudApi.Heartbeat)
-                return;
-
-            switch (_viewState)
-            {
-                case ViewState.InView:
-                    ShiftTHandling();
-                    break;
-                case ViewState.InView2:
-                    BattleShiftTHandling();
-                    break;
-            }
-        }
-
-        #endregion
+        private ViewState _viewState = ViewState.None;
 
         private static IMyCubeGrid GetFocusedGrid()
         {
             var cockpit = MyAPIGateway.Session.ControlledObject?.Entity as IMyCockpit;
             if (cockpit == null || MyAPIGateway.Session.IsCameraUserControlledSpectator)
-            {
                 return PointCheck.RaycastGridFromCamera();
-            }
-            return cockpit.CubeGrid?.Physics != null ? // user is in cockpit
-                cockpit.CubeGrid : null;
+            return cockpit.CubeGrid?.Physics != null
+                ? // user is in cockpit
+                cockpit.CubeGrid
+                : null;
         }
 
         private void ShiftTHandling()
         {
-            IMyCubeGrid focusedGrid = GetFocusedGrid();
-            if (focusedGrid != null) 
+            var focusedGrid = GetFocusedGrid();
+            if (focusedGrid != null)
+            {
                 ShiftTCalcs(focusedGrid);
-            else if(_statMessage.Visible)
+            }
+            else if (_statMessage.Visible)
             {
                 _statMessage.Message.Clear();
                 _statMessage.Visible = false;
@@ -124,9 +79,11 @@ namespace ShipPoints
                 _statMessage.Visible = false;
             }
 
-            IMyCubeGrid focusedGrid = GetFocusedGrid();
+            var focusedGrid = GetFocusedGrid();
             if (focusedGrid != null)
+            {
                 BattleShiftTCalcs(focusedGrid);
+            }
             else if (_statMessageBattle.Visible)
             {
                 _statMessageBattle.Message.Clear();
@@ -161,7 +118,8 @@ namespace ShipPoints
 
             var specialBlockTextBuilder = new StringBuilder();
             foreach (var x in shipTracker.SpecialBlockCounts.Keys)
-                specialBlockTextBuilder.AppendFormat("<color=Green>{0}<color=White> x {1}\n", shipTracker.SpecialBlockCounts[x], x);
+                specialBlockTextBuilder.AppendFormat("<color=Green>{0}<color=White> x {1}\n",
+                    shipTracker.SpecialBlockCounts[x], x);
             var specialBlockText = specialBlockTextBuilder.ToString();
 
             var massString = $"{shipTracker.Mass}";
@@ -171,10 +129,7 @@ namespace ShipPoints
             var mass = shipTracker.Mass;
             var twr = (float)Math.Round(thrustInKilograms / mass, 1);
 
-            if (shipTracker.Mass > 1000000)
-            {
-                massString = $"{Math.Round(shipTracker.Mass / 1000000f, 1):F2}m";
-            }
+            if (shipTracker.Mass > 1000000) massString = $"{Math.Round(shipTracker.Mass / 1000000f, 1):F2}m";
 
             var twRs = $"{twr:F3}";
             var thrustString = $"{Math.Round(shipTracker.TotalThrust, 1)}";
@@ -209,8 +164,10 @@ namespace ShipPoints
 
             if (shipTracker.TotalTorque >= 1000000)
             {
-                double tempGyro2 = Math.Round(shipTracker.TotalTorque / 1000000f, 1);
-                gyroString = tempGyro2 > 1000 ? $"{Math.Round(tempGyro2 / 1000, 1):F1}G" : $"{Math.Round(tempGyro2, 1):F1}M";
+                var tempGyro2 = Math.Round(shipTracker.TotalTorque / 1000000f, 1);
+                gyroString = tempGyro2 > 1000
+                    ? $"{Math.Round(tempGyro2 / 1000, 1):F1}G"
+                    : $"{Math.Round(tempGyro2, 1):F1}M";
             }
 
 
@@ -238,9 +195,11 @@ namespace ShipPoints
             sb.AppendFormat("<color=Green>Battle Points<color=White>: {0}\n", shipTracker.BattlePoints);
             sb.AppendFormat(
                 "<color=Orange>[<color=Red> {0}% <color=Orange>| <color=Green>{1}% <color=Orange>| <color=DeepSkyBlue>{2}% <color=Orange>| <color=LightGray>{3}% <color=Orange>]\n",
-                Math.Round(shipTracker.OffensivePointsRatio*100f), Math.Round(shipTracker.PowerPointsRatio*100f), Math.Round(shipTracker.MovementPointsRatio*100f), Math.Round(shipTracker.RemainingPointsRatio*100f));
+                Math.Round(shipTracker.OffensivePointsRatio * 100f), Math.Round(shipTracker.PowerPointsRatio * 100f),
+                Math.Round(shipTracker.MovementPointsRatio * 100f),
+                Math.Round(shipTracker.RemainingPointsRatio * 100f));
             sb.Append(
-                $"<color=Green>PD Investment<color=White>: <color=Orange>( <color=white>{shipTracker.PointDefensePointsRatio*100:N0}% <color=Orange>|<color=Crimson> {(shipTracker.OffensivePoints == 0 ? 0 : (float) shipTracker.PointDefensePoints / shipTracker.OffensivePoints)*100f:N0}%<color=Orange> )\n");
+                $"<color=Green>PD Investment<color=White>: <color=Orange>( <color=white>{shipTracker.PointDefensePointsRatio * 100:N0}% <color=Orange>|<color=Crimson> {(shipTracker.OffensivePoints == 0 ? 0 : (float)shipTracker.PointDefensePoints / shipTracker.OffensivePoints) * 100f:N0}%<color=Orange> )\n");
             sb.AppendFormat(
                 "<color=Green>Shield Max HP<color=White>: {0} <color=Orange>(<color=White>{1:N0}%<color=Orange>)\n",
                 totalShieldString, shipTracker.CurrentShieldPercent);
@@ -335,5 +294,55 @@ namespace ShipPoints
             _statMessageBattle.Visible = true;
             _statMessageBattleWeaponCountsist.Visible = true;
         }
+
+        private enum ViewState
+        {
+            None,
+            InView,
+            InView2
+        }
+
+        #region APIs
+
+        private WcApi WcApi => PointCheck.I.WcApi;
+        private ShieldApi ShApi => PointCheck.I.ShieldApi;
+        private RtsApi RtsApi => PointCheck.I.RtsApi;
+        private HudAPIv2 TextHudApi => PointCheck.I.TextHudApi;
+
+        #endregion
+
+        #region Public Methods
+
+        public void CycleViewState()
+        {
+            _viewState++;
+            if (_viewState > ViewState.InView2)
+            {
+                _statMessageBattle.Message.Clear();
+                _statMessageBattleWeaponCountsist.Message.Clear();
+                _statMessageBattle.Visible = false;
+                _statMessageBattleWeaponCountsist.Visible = false;
+
+                _viewState = ViewState.None;
+            }
+        }
+
+        public void UpdateDraw()
+        {
+            if (!TextHudApi.Heartbeat)
+                return;
+
+            switch (_viewState)
+            {
+                case ViewState.InView:
+                    ShiftTHandling();
+                    break;
+                case ViewState.InView2:
+                    BattleShiftTHandling();
+                    break;
+            }
+        }
+
+        #endregion
     }
 }

@@ -20,29 +20,32 @@ namespace ShipPoints.Commands
                 message => I.ShowHelp()),
 
             #region Match Commands
+
             ["start"] = new Command(
                 "ShareTrack.Match",
                 "Begins a new match.",
                 CommandMethods.Start
-                ),
+            ),
             ["end"] = new Command(
                 "ShareTrack.Match",
                 "Ends the current match.",
                 CommandMethods.End
-                ),
+            ),
             ["takeover"] = new Command(
                 "ShareTrack.Match",
                 "Takes over control of the match.",
                 CommandMethods.TakeOverControl
-                ),
+            ),
             ["giveup"] = new Command(
                 "ShareTrack.Match",
                 "Gives up control of the match.",
                 CommandMethods.GiveUpControl
-                ),
+            ),
+
             #endregion
 
             #region Match Config
+
             ["setmatchtime"] = new Command(
                 "ShareTrack.Match.Config",
                 "Sets the current match timer to [arg1] in minutes.",
@@ -63,24 +66,27 @@ namespace ShipPoints.Commands
                 "Sets the current delay time to [arg1] in minutes.",
                 CommandMethods.SetDelay
             ),
+
             #endregion
 
             #region Util Commands
+
             ["shields"] = new Command(
                 "ShareTrack.Utils",
                 "Fills shields to full capacity.",
                 CommandMethods.Shields
-                ),
+            ),
             ["problem"] = new Command(
                 "ShareTrack.Utils",
                 "Reports a problem with optional message [arg1].",
                 CommandMethods.ReportProblem
-                ),
+            ),
             ["fixed"] = new Command(
                 "ShareTrack.Utils",
                 "Marks a problem as fixed.",
                 CommandMethods.ReportFixed
-                ),
+            ),
+
             #endregion
         };
 
@@ -114,7 +120,7 @@ namespace ShipPoints.Commands
             Close(); // Close existing command handlers.
             I = new CommandHandler();
             MyAPIGateway.Utilities.MessageEnteredSender += I.Command_MessageEnteredSender;
-            MyAPIGateway.Utilities.ShowMessage($"StarCore ShareTrack",
+            MyAPIGateway.Utilities.ShowMessage("StarCore ShareTrack",
                 "Chat commands registered - run \"/st help\" for help.");
         }
 
@@ -147,7 +153,7 @@ namespace ShipPoints.Commands
                     return;
                 }
 
-                string command = parts[0].ToLower();
+                var command = parts[0].ToLower();
 
                 // Really basic command handler
                 if (_commands.ContainsKey(command))
@@ -206,9 +212,9 @@ namespace ShipPoints.Commands
 
             public Command(string modName, string helpText, Action<string[]> action)
             {
-                this.ModName = modName;
-                this.HelpText = helpText;
-                this.Action = action;
+                ModName = modName;
+                HelpText = helpText;
+                Action = action;
             }
         }
     }

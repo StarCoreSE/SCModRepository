@@ -12,11 +12,11 @@ namespace ShipPoints.ShipTracking
 {
     internal class GridStats // TODO convert this to be event-driven. OnBlockPlace, etc. Keep a queue.
     {
-        private ShieldApi ShieldApi => PointCheck.I.ShieldApi;
-        private WcApi WcApi => PointCheck.I.WcApi;
+        private readonly HashSet<IMyCubeBlock> _fatBlocks = new HashSet<IMyCubeBlock>();
 
         private readonly HashSet<IMySlimBlock> _slimBlocks;
-        private readonly HashSet<IMyCubeBlock> _fatBlocks = new HashSet<IMyCubeBlock>();
+        private ShieldApi ShieldApi => PointCheck.I.ShieldApi;
+        private WcApi WcApi => PointCheck.I.WcApi;
 
         public bool NeedsUpdate { get; private set; } = true;
 
@@ -26,7 +26,7 @@ namespace ShipPoints.ShipTracking
         {
             Grid = grid;
 
-            List<IMySlimBlock> allSlimBlocks = new List<IMySlimBlock>();
+            var allSlimBlocks = new List<IMySlimBlock>();
             Grid.GetBlocks(allSlimBlocks);
             _slimBlocks = allSlimBlocks.ToHashSet();
 
@@ -36,6 +36,7 @@ namespace ShipPoints.ShipTracking
                     _fatBlocks.Add(block.FatBlock);
                 GridIntegrity += block.Integrity;
             }
+
             OriginalGridIntegrity = GridIntegrity;
 
             Grid.OnBlockAdded += OnBlockAdd;
@@ -55,7 +56,7 @@ namespace ShipPoints.ShipTracking
         public void Update()
         {
             if (!NeedsUpdate) // Modscripts changing the output of a block (i.e. Fusion Systems) without adding/removing blocks will not be updated properly.
-                return;       // I am willing to make this sacrifice.
+                return; // I am willing to make this sacrifice.
 
             BattlePoints = 0;
             OffensivePoints = 0;
@@ -65,7 +66,8 @@ namespace ShipPoints.ShipTracking
             CockpitCount = 0;
 
             // Setting battlepoints first so that calcs can do calc stuff
-            foreach (var block in _fatBlocks) // If slimblock points become necessary in the future, change this to _slimBlock
+            foreach (var block in
+                     _fatBlocks) // If slimblock points become necessary in the future, change this to _slimBlock
                 CalculateCost(block);
 
             UpdateGlobalStats();
@@ -81,24 +83,24 @@ namespace ShipPoints.ShipTracking
         public readonly IMyCubeGrid Grid;
 
         // Global Stats
-        public int BlockCount { get; private set; } = 0;
-        public int HeavyArmorCount { get; private set; } = 0;
-        public int CockpitCount { get; private set; } = 0;
-        public int PCU { get; private set; } = 0;
+        public int BlockCount { get; private set; }
+        public int HeavyArmorCount { get; private set; }
+        public int CockpitCount { get; private set; }
+        public int PCU { get; private set; }
         public readonly Dictionary<string, int> BlockCounts = new Dictionary<string, int>();
         public readonly Dictionary<string, int> SpecialBlockCounts = new Dictionary<string, int>();
-        public float TotalThrust { get; private set; } = 0;
-        public float TotalTorque { get; private set; } = 0;
-        public float TotalPower { get; private set; } = 0;
-        public float GridIntegrity { get; private set; } = 0;
-        public float OriginalGridIntegrity { get; private set; } = 0;
+        public float TotalThrust { get; private set; }
+        public float TotalTorque { get; private set; }
+        public float TotalPower { get; private set; }
+        public float GridIntegrity { get; private set; }
+        public float OriginalGridIntegrity { get; private set; }
 
         // BattlePoint Stats
-        public int BattlePoints { get; private set; } = 0;
-        public int OffensivePoints { get; private set; } = 0;
-        public int PowerPoints { get; private set; } = 0;
-        public int MovementPoints { get; private set; } = 0;
-        public int PointDefensePoints { get; private set; } = 0;
+        public int BattlePoints { get; private set; }
+        public int OffensivePoints { get; private set; }
+        public int PowerPoints { get; private set; }
+        public int MovementPoints { get; private set; }
+        public int PointDefensePoints { get; private set; }
 
         // Weapon Stats
         public readonly Dictionary<string, int> WeaponCounts = new Dictionary<string, int>();
@@ -145,7 +147,6 @@ namespace ShipPoints.ShipTracking
 
         #region Private Methods
 
-
         private void UpdateGlobalStats()
         {
             BlockCounts.Clear();
@@ -160,18 +161,27 @@ namespace ShipPoints.ShipTracking
                     CockpitCount++;
 
                 if (block is IMyThrust && block.IsFunctional)
+                {
                     TotalThrust += ((IMyThrust)block).MaxEffectiveThrust;
+                }
 
                 else if (block is IMyGyro && block.IsFunctional)
-                    TotalTorque += ((MyGyroDefinition)MyDefinitionManager.Static.GetDefinition((block as IMyGyro).BlockDefinition)).ForceMagnitude * (block as IMyGyro).GyroStrengthMultiplier;
+                {
+                    TotalTorque +=
+                        ((MyGyroDefinition)MyDefinitionManager.Static.GetDefinition((block as IMyGyro).BlockDefinition))
+                        .ForceMagnitude * (block as IMyGyro).GyroStrengthMultiplier;
+                }
 
                 else if (block is IMyPowerProducer && block.IsFunctional)
+                {
                     TotalPower += ((IMyPowerProducer)block).MaxOutput;
+                }
 
                 else if (!WcApi.HasCoreWeapon((MyEntity)block))
                 {
-                    string blockDisplayName = block.DefinitionDisplayNameText;
-                    if (blockDisplayName.Contains("Armor")) // This is a bit stupid. TODO find a better way to sort out armor blocks.
+                    var blockDisplayName = block.DefinitionDisplayNameText;
+                    if (blockDisplayName
+                        .Contains("Armor")) // This is a bit stupid. TODO find a better way to sort out armor blocks.
                         continue;
 
                     float ignored = 0;
@@ -181,7 +191,6 @@ namespace ShipPoints.ShipTracking
                         SpecialBlockCounts.Add(blockDisplayName, 0);
                     SpecialBlockCounts[blockDisplayName]++;
                 }
-                    
             }
 
             BlockCount = ((MyCubeGrid)Grid).BlocksCount;
@@ -204,9 +213,9 @@ namespace ShipPoints.ShipTracking
             {
                 // Check that the block has points and is a weapon
                 int weaponPoints;
-                string weaponDisplayName = weaponBlock.DefinitionDisplayNameText;
+                var weaponDisplayName = weaponBlock.DefinitionDisplayNameText;
                 if (!PointCheck.PointValues.TryGetValue(weaponBlock.BlockDefinition.SubtypeName, out weaponPoints) ||
-                    !WcApi.HasCoreWeapon((MyEntity) weaponBlock))
+                    !WcApi.HasCoreWeapon((MyEntity)weaponBlock))
                     continue;
 
                 float thisClimbingCostMult = 0;
@@ -223,7 +232,7 @@ namespace ShipPoints.ShipTracking
         private void CalculateCost(IMyCubeBlock block)
         {
             int blockPoints;
-            string blockDisplayName = GetDDT(block);
+            var blockDisplayName = GetDDT(block);
             if (!PointCheck.PointValues.TryGetValue(block.BlockDefinition.SubtypeName, out blockPoints))
                 return;
 
@@ -233,7 +242,7 @@ namespace ShipPoints.ShipTracking
             if (!BlockCounts.ContainsKey(blockDisplayName))
                 BlockCounts.Add(blockDisplayName, 0);
 
-            int thisSpecialBlocksCount = BlockCounts[blockDisplayName]++;
+            var thisSpecialBlocksCount = BlockCounts[blockDisplayName]++;
 
             if (thisClimbingCostMult > 0 && thisSpecialBlocksCount > 1)
                 blockPoints += (int)(blockPoints * thisSpecialBlocksCount * thisClimbingCostMult);

@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 using Sandbox.ModAPI;
-using SCModRepository_Dev.Gamemode_Mods.Development.Starcore_Sharetrack_Dev.Data.Scripts.ShipPoints.HeartNetworking.Custom;
+using SCModRepository_Dev.Gamemode_Mods.Development.Starcore_Sharetrack_Dev.Data.Scripts.ShipPoints.HeartNetworking.
+    Custom;
 using ShipPoints.HeartNetworking;
 using ShipPoints.HeartNetworking.Custom;
 using ShipPoints.MatchTiming;
@@ -53,7 +53,8 @@ namespace ShipPoints.Commands
         {
             if (!PointCheck.AmTheCaptainNow)
             {
-                MyAPIGateway.Utilities.ShowNotification("You aren't the captain! Run \"/st takeover\" to take over the match.");
+                MyAPIGateway.Utilities.ShowNotification(
+                    "You aren't the captain! Run \"/st takeover\" to take over the match.");
                 return;
             }
 
@@ -72,7 +73,8 @@ namespace ShipPoints.Commands
         {
             if (!PointCheck.AmTheCaptainNow)
             {
-                MyAPIGateway.Utilities.ShowNotification("You aren't the captain! Run \"/st takeover\" to take over the match.");
+                MyAPIGateway.Utilities.ShowNotification(
+                    "You aren't the captain! Run \"/st takeover\" to take over the match.");
                 return;
             }
 
@@ -84,9 +86,9 @@ namespace ShipPoints.Commands
 
             try
             {
-                string[] teamNames = new string[args.Length-1];
-                for (int i = 1; i < args.Length; i++) // Skip the first argument as it's always "setteams"
-                    teamNames[i-1] = args[i].ToUpper();
+                var teamNames = new string[args.Length - 1];
+                for (var i = 1; i < args.Length; i++) // Skip the first argument as it's always "setteams"
+                    teamNames[i - 1] = args[i].ToUpper();
 
                 PointCheck.I.TeamNames = teamNames;
                 MyAPIGateway.Utilities.ShowNotification("Teams changed to " + string.Join(" v. ", teamNames));
@@ -101,14 +103,16 @@ namespace ShipPoints.Commands
         {
             if (!PointCheck.AmTheCaptainNow)
             {
-                MyAPIGateway.Utilities.ShowNotification("You aren't the captain! Run \"/st takeover\" to take over the match.");
+                MyAPIGateway.Utilities.ShowNotification(
+                    "You aren't the captain! Run \"/st takeover\" to take over the match.");
                 return;
             }
 
             try
             {
                 MatchTimer.I.MatchDurationMinutes = int.Parse(args[1]);
-                MyAPIGateway.Utilities.ShowNotification("Match duration changed to " + MatchTimer.I.MatchDurationMinutes + "m.");
+                MyAPIGateway.Utilities.ShowNotification("Match duration changed to " +
+                                                        MatchTimer.I.MatchDurationMinutes + "m.");
                 MatchTimerPacket.SendMatchUpdate(MatchTimer.I);
             }
             catch (Exception)
@@ -121,7 +125,8 @@ namespace ShipPoints.Commands
         {
             if (!PointCheck.AmTheCaptainNow)
             {
-                MyAPIGateway.Utilities.ShowNotification("You aren't the captain! Run \"/st takeover\" to take over the match.");
+                MyAPIGateway.Utilities.ShowNotification(
+                    "You aren't the captain! Run \"/st takeover\" to take over the match.");
                 return;
             }
 
@@ -151,8 +156,8 @@ namespace ShipPoints.Commands
 
         public static void ReportProblem(string[] args)
         {
-            string message = "@" + (MyAPIGateway.Session.Player?.DisplayName ?? "ERR") + ":";
-            for (int i = 1; i < args.Length; i++) // Skip the first argument as it's always "problem"
+            var message = "@" + (MyAPIGateway.Session.Player?.DisplayName ?? "ERR") + ":";
+            for (var i = 1; i < args.Length; i++) // Skip the first argument as it's always "problem"
                 message += ' ' + args[i];
 
             PointCheck.I.ReportProblem(args.Length > 1 ? message : "");

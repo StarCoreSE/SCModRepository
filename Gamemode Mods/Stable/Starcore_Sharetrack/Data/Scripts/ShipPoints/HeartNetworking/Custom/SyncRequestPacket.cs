@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ProtoBuf;
+﻿using ProtoBuf;
 using Sandbox.ModAPI;
-using ShipPoints.HeartNetworking;
 using ShipPoints.ShipTracking;
 
 namespace ShipPoints.HeartNetworking.Custom

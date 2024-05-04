@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Text;
 using DefenseShields;
 using Draygo.API;
@@ -10,269 +9,24 @@ using VRage.Game;
 using VRage.Game.ModAPI;
 using VRage.ModAPI;
 using VRageMath;
-using VRageRender.Utils;
 using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
 
 namespace ShipPoints.ShipTracking
 {
     public class ShipTracker
     {
-        private ShieldApi ShieldApi => PointCheck.I.ShieldApi;
-
-
-        public IMyCubeGrid Grid { get; private set; }
-        public IMyPlayer Owner => MyAPIGateway.Players.GetPlayerControllingEntity(Grid) ?? PointCheck.GetOwner(OwnerId);
-        public long OwnerId => Grid?.BigOwners.Count > 0 ? Grid?.BigOwners[0] ?? -1 : -1;
-
-
-        public string GridName => Grid?.DisplayName;
-        public float Mass => ((MyCubeGrid)Grid).GetCurrentMass();
-        public Vector3 Position => Grid.Physics.CenterOfMassWorld;
-        public IMyFaction OwnerFaction => MyAPIGateway.Session?.Factions?.TryGetPlayerFaction(OwnerId);
-        public string FactionName => OwnerFaction?.Name ?? "None";
-        public Vector3 FactionColor => ColorMaskToRgb(OwnerFaction?.CustomColor ?? Vector3.Zero);
-        public string OwnerName => Owner?.DisplayName ?? GridName;
-
-        #region GridStats Pointers
-
-        #region Global Stats
-
-        public bool IsFunctional => TotalPower > 0 && TotalTorque > 0 && CockpitCount > 0;
-        public int BlockCount
+        [Flags]
+        public enum NametagSettings
         {
-            get
-            {
-                int total = 0;
-                foreach (var stats in _gridStats.Values)
-                    total += stats.BlockCount;
-                return total;
-            }
-        }
-        public float GridIntegrity
-        {
-            get
-            {
-                float total = 0;
-                foreach (var stats in _gridStats.Values)
-                    total += stats.GridIntegrity;
-                return total;
-            }
+            None = 0,
+            PlayerName = 1,
+            GridName = 2
         }
 
-        public float OriginalGridIntegrity = 0;
-        public int HeavyArmorCount
-        {
-            get
-            {
-                int total = 0;
-                foreach (var stats in _gridStats.Values)
-                    total += stats.HeavyArmorCount;
-                return total;
-            }
-        }
-        public int CockpitCount
-        {
-            get
-            {
-                int total = 0;
-                foreach (var stats in _gridStats.Values)
-                    total += stats.CockpitCount;
-                return total;
-            }
-        }
-        public int PCU
-        {
-            get
-            {
-                int total = 0;
-                foreach (var stats in _gridStats.Values)
-                    total += stats.PCU;
-                return total;
-            }
-        }
-        public float TotalThrust
-        {
-            get
-            {
-                float total = 0;
-                foreach (var stats in _gridStats.Values)
-                    total += stats.TotalThrust;
-                return total;
-            }
-        }
-        public float TotalTorque
-        {
-            get
-            {
-                float total = 0;
-                foreach (var stats in _gridStats.Values)
-                    total += stats.TotalTorque;
-                return total;
-            }
-        }
-        public float TotalPower
-        {
-            get
-            {
-                float total = 0;
-                foreach (var stats in _gridStats.Values)
-                    total += stats.TotalPower;
-                return total;
-            }
-        }
-        public Dictionary<string, int> SpecialBlockCounts
-        {
-            get
-            {
-                Dictionary<string, int> blockCounts = new Dictionary<string, int>();
-                foreach (var stats in _gridStats.Values)
-                {
-                    foreach (var kvp in stats.SpecialBlockCounts)
-                    {
-                        if (!blockCounts.ContainsKey(kvp.Key))
-                            blockCounts.Add(kvp.Key, 0);
-                        blockCounts[kvp.Key] += kvp.Value;
-                    }
-                }
-
-                return blockCounts;
-            }
-        }
-
-        #endregion
-
-        #region BattlePoint Stats
-        public int BattlePoints
-        {
-            get
-            {
-                int total = 0;
-                foreach (var stats in _gridStats.Values)
-                    total += stats.BattlePoints;
-                return total;
-            }
-        }
-        public int OffensivePoints
-        {
-            get
-            {
-                int total = 0;
-                foreach (var stats in _gridStats.Values)
-                    total += stats.OffensivePoints;
-                return total;
-            }
-        }
-
-        public float OffensivePointsRatio => BattlePoints == 0 ? 0 : (float) OffensivePoints / BattlePoints;
-        public int PowerPoints
-        {
-            get
-            {
-                int total = 0;
-                foreach (var stats in _gridStats.Values)
-                    total += stats.PowerPoints;
-                return total;
-            }
-        }
-        public float PowerPointsRatio => BattlePoints == 0 ? 0 : (float)PowerPoints / BattlePoints;
-
-        public int MovementPoints
-        {
-            get
-            {
-                int total = 0;
-                foreach (var stats in _gridStats.Values)
-                    total += stats.MovementPoints;
-                return total;
-            }
-        }
-        public float MovementPointsRatio => BattlePoints == 0 ? 0 : (float)MovementPoints / BattlePoints;
-
-        public int PointDefensePoints
-        {
-            get
-            {
-                int total = 0;
-                foreach (var stats in _gridStats.Values)
-                    total += stats.PointDefensePoints;
-                return total;
-            }
-        }
-        public float PointDefensePointsRatio => BattlePoints == 0 ? 0 : (float) PointDefensePoints / BattlePoints;
-
-
-        public int RemainingPoints => BattlePoints - OffensivePoints - PowerPoints - MovementPoints - PointDefensePoints;
-        public int RemainingPointsRatio => BattlePoints == 0 ? 0 : RemainingPoints / BattlePoints;
-
-        #endregion
-
-        #region Shield Stats
-
-        public float OriginalMaxShieldHealth = -1;
-        public float MaxShieldHealth
-        {
-            get
-            {
-                var shieldController = ShieldApi.GetShieldBlock(Grid);
-                if (shieldController == null)
-                    return -1;
-                return ShieldApi.GetMaxHpCap(shieldController);
-            }
-        }
-        public float CurrentShieldPercent
-        {
-            get
-            {
-                var shieldController = ShieldApi.GetShieldBlock(Grid);
-                if (shieldController == null)
-                    return -1;
-                return ShieldApi.GetShieldPercent(shieldController);
-            }
-        }
-        public float CurrentShieldHeat
-        {
-            get
-            {
-                var shieldController = ShieldApi.GetShieldBlock(Grid);
-                if (shieldController == null)
-                    return -1;
-                return ShieldApi.GetShieldHeat(shieldController);
-            }
-        }
-
-        #endregion
-
-        #region Weapon Stats 
-
-        public Dictionary<string, int> WeaponCounts
-        {
-            get
-            {
-                Dictionary<string, int> blockCounts = new Dictionary<string, int>();
-                foreach (var stats in _gridStats.Values)
-                {
-                    foreach (var kvp in stats.WeaponCounts)
-                    {
-                        if (!blockCounts.ContainsKey(kvp.Key))
-                            blockCounts.Add(kvp.Key, 0);
-                        blockCounts[kvp.Key] += kvp.Value;
-                    }
-                }
-
-                return blockCounts;
-            }
-        }
-
-        #endregion
-
-        #endregion
-
-
+        private readonly Dictionary<IMyCubeGrid, GridStats> _gridStats = new Dictionary<IMyCubeGrid, GridStats>();
 
 
         private HudAPIv2.HUDMessage _nametag;
-
-        private readonly Dictionary<IMyCubeGrid, GridStats> _gridStats = new Dictionary<IMyCubeGrid, GridStats>();
 
 
         private ShipTracker()
@@ -283,14 +37,15 @@ namespace ShipPoints.ShipTracking
         {
             Grid = grid;
 
-            List<IMyCubeGrid> allAttachedGrids = new List<IMyCubeGrid>();
+            var allAttachedGrids = new List<IMyCubeGrid>();
             Grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(allAttachedGrids);
             foreach (var attachedGrid in allAttachedGrids)
             {
-                GridStats stats = new GridStats(attachedGrid);
+                var stats = new GridStats(attachedGrid);
                 _gridStats.Add(attachedGrid, stats);
                 OriginalGridIntegrity += stats.OriginalGridIntegrity;
-                if (((MyCubeGrid)attachedGrid).BlocksCount > ((MyCubeGrid)Grid).BlocksCount) // Snap to the largest grid in the group.
+                if (((MyCubeGrid)attachedGrid).BlocksCount >
+                    ((MyCubeGrid)Grid).BlocksCount) // Snap to the largest grid in the group.
                     Grid = attachedGrid;
             }
 
@@ -306,10 +61,27 @@ namespace ShipPoints.ShipTracking
             if (MyAPIGateway.Utilities.IsDedicated)
                 return;
 
-            _nametag = new HudAPIv2.HUDMessage(new StringBuilder("Initializing..."), Vector2D.Zero, font: "BI_SEOutlined",
+            _nametag = new HudAPIv2.HUDMessage(new StringBuilder("Initializing..."), Vector2D.Zero,
+                font: "BI_SEOutlined",
                 blend: BlendTypeEnum.PostPP, hideHud: false, shadowing: true);
             UpdateHud();
         }
+
+        private ShieldApi ShieldApi => PointCheck.I.ShieldApi;
+
+
+        public IMyCubeGrid Grid { get; }
+        public IMyPlayer Owner => MyAPIGateway.Players.GetPlayerControllingEntity(Grid) ?? PointCheck.GetOwner(OwnerId);
+        public long OwnerId => Grid?.BigOwners.Count > 0 ? Grid?.BigOwners[0] ?? -1 : -1;
+
+
+        public string GridName => Grid?.DisplayName;
+        public float Mass => ((MyCubeGrid)Grid).GetCurrentMass();
+        public Vector3 Position => Grid.Physics.CenterOfMassWorld;
+        public IMyFaction OwnerFaction => MyAPIGateway.Session?.Factions?.TryGetPlayerFaction(OwnerId);
+        public string FactionName => OwnerFaction?.Name ?? "None";
+        public Vector3 FactionColor => ColorMaskToRgb(OwnerFaction?.CustomColor ?? Vector3.Zero);
+        public string OwnerName => Owner?.DisplayName ?? GridName;
 
         public void OnClose(IMyEntity e)
         {
@@ -349,7 +121,7 @@ namespace ShipPoints.ShipTracking
         {
             if (_gridStats.ContainsKey(grid))
                 return;
-            GridStats stats = new GridStats(grid);
+            var stats = new GridStats(grid);
             _gridStats.Add(grid, stats);
             OriginalGridIntegrity += stats.OriginalGridIntegrity;
         }
@@ -365,23 +137,16 @@ namespace ShipPoints.ShipTracking
 
         public static void SpecialBlockRename(ref string blockDisplayName, IMyCubeBlock block)
         {
-            string subtype = block.BlockDefinition.SubtypeName;
+            var subtype = block.BlockDefinition.SubtypeName;
             // WHY CAN'T WE JUST USE THE LATEST C# VERSION THIS IS UGLY AS HECK
 
             if (block is IMyGasGenerator)
-            {
                 blockDisplayName = "H2O2Generator";
-            }
             else if (block is IMyGasTank)
-            {
                 blockDisplayName = "HydrogenTank";
-            }
             else if (block is IMyMotorStator && subtype == "SubgridBase")
-            {
                 blockDisplayName = "Invincible Subgrid";
-            }
             else if (block is IMyUpgradeModule)
-            {
                 switch (subtype)
                 {
                     case "LargeEnhancer":
@@ -405,9 +170,7 @@ namespace ShipPoints.ShipTracking
                         blockDisplayName = "Large Gyro Booster";
                         break;
                 }
-            }
             else if (block is IMyReactor)
-            {
                 switch (subtype)
                 {
                     case "LargeBlockLargeGenerator":
@@ -419,9 +182,7 @@ namespace ShipPoints.ShipTracking
                         blockDisplayName = "Small Reactor";
                         break;
                 }
-            }
             else if (block is IMyGyro)
-            {
                 switch (subtype)
                 {
                     case "LargeBlockGyro":
@@ -431,9 +192,7 @@ namespace ShipPoints.ShipTracking
                         blockDisplayName = "Large Gyro";
                         break;
                 }
-            }
             else if (block is IMyCameraBlock)
-            {
                 switch (subtype)
                 {
                     case "MA_Buster_Camera":
@@ -443,11 +202,7 @@ namespace ShipPoints.ShipTracking
                         blockDisplayName = "Camera";
                         break;
                 }
-            }
-            else if (block is IMyConveyor || block is IMyConveyorTube)
-            {
-                blockDisplayName = "Conveyor";
-            }
+            else if (block is IMyConveyor || block is IMyConveyorTube) blockDisplayName = "Conveyor";
         }
 
 
@@ -457,7 +212,7 @@ namespace ShipPoints.ShipTracking
         }
 
         /// <summary>
-        /// Updates the nametag display.
+        ///     Updates the nametag display.
         /// </summary>
         public void UpdateHud()
         {
@@ -477,7 +232,8 @@ namespace ShipPoints.ShipTracking
 
                 _nametag.InitialColor = new Color(FactionColor);
                 var fov = camera.FieldOfViewAngle;
-                var angle = GetAngleBetweenDegree(gridPosition - camera.WorldMatrix.Translation, camera.WorldMatrix.Forward);
+                var angle = GetAngleBetweenDegree(gridPosition - camera.WorldMatrix.Translation,
+                    camera.WorldMatrix.Forward);
 
                 var stealthed = ((uint)Grid.Flags & 0x1000000) > 0;
                 var visible = !(newOrigin.X > 1 || newOrigin.X < -1 || newOrigin.Y > 1 || newOrigin.Y < -1) &&
@@ -492,7 +248,7 @@ namespace ShipPoints.ShipTracking
 
                 _nametag.Message.Clear();
 
-                string nameTagText = "";
+                var nameTagText = "";
 
                 if ((PointCheck.NametagViewState & NametagSettings.PlayerName) > 0)
                     nameTagText += OwnerName;
@@ -529,12 +285,254 @@ namespace ShipPoints.ShipTracking
             _nametag = null;
         }
 
-        [Flags]
-        public enum NametagSettings
+        #region GridStats Pointers
+
+        #region Global Stats
+
+        public bool IsFunctional => TotalPower > 0 && TotalTorque > 0 && CockpitCount > 0;
+
+        public int BlockCount
         {
-            None = 0,
-            PlayerName = 1,
-            GridName = 2,
+            get
+            {
+                var total = 0;
+                foreach (var stats in _gridStats.Values)
+                    total += stats.BlockCount;
+                return total;
+            }
         }
+
+        public float GridIntegrity
+        {
+            get
+            {
+                float total = 0;
+                foreach (var stats in _gridStats.Values)
+                    total += stats.GridIntegrity;
+                return total;
+            }
+        }
+
+        public float OriginalGridIntegrity;
+
+        public int HeavyArmorCount
+        {
+            get
+            {
+                var total = 0;
+                foreach (var stats in _gridStats.Values)
+                    total += stats.HeavyArmorCount;
+                return total;
+            }
+        }
+
+        public int CockpitCount
+        {
+            get
+            {
+                var total = 0;
+                foreach (var stats in _gridStats.Values)
+                    total += stats.CockpitCount;
+                return total;
+            }
+        }
+
+        public int PCU
+        {
+            get
+            {
+                var total = 0;
+                foreach (var stats in _gridStats.Values)
+                    total += stats.PCU;
+                return total;
+            }
+        }
+
+        public float TotalThrust
+        {
+            get
+            {
+                float total = 0;
+                foreach (var stats in _gridStats.Values)
+                    total += stats.TotalThrust;
+                return total;
+            }
+        }
+
+        public float TotalTorque
+        {
+            get
+            {
+                float total = 0;
+                foreach (var stats in _gridStats.Values)
+                    total += stats.TotalTorque;
+                return total;
+            }
+        }
+
+        public float TotalPower
+        {
+            get
+            {
+                float total = 0;
+                foreach (var stats in _gridStats.Values)
+                    total += stats.TotalPower;
+                return total;
+            }
+        }
+
+        public Dictionary<string, int> SpecialBlockCounts
+        {
+            get
+            {
+                var blockCounts = new Dictionary<string, int>();
+                foreach (var stats in _gridStats.Values)
+                foreach (var kvp in stats.SpecialBlockCounts)
+                {
+                    if (!blockCounts.ContainsKey(kvp.Key))
+                        blockCounts.Add(kvp.Key, 0);
+                    blockCounts[kvp.Key] += kvp.Value;
+                }
+
+                return blockCounts;
+            }
+        }
+
+        #endregion
+
+        #region BattlePoint Stats
+
+        public int BattlePoints
+        {
+            get
+            {
+                var total = 0;
+                foreach (var stats in _gridStats.Values)
+                    total += stats.BattlePoints;
+                return total;
+            }
+        }
+
+        public int OffensivePoints
+        {
+            get
+            {
+                var total = 0;
+                foreach (var stats in _gridStats.Values)
+                    total += stats.OffensivePoints;
+                return total;
+            }
+        }
+
+        public float OffensivePointsRatio => BattlePoints == 0 ? 0 : (float)OffensivePoints / BattlePoints;
+
+        public int PowerPoints
+        {
+            get
+            {
+                var total = 0;
+                foreach (var stats in _gridStats.Values)
+                    total += stats.PowerPoints;
+                return total;
+            }
+        }
+
+        public float PowerPointsRatio => BattlePoints == 0 ? 0 : (float)PowerPoints / BattlePoints;
+
+        public int MovementPoints
+        {
+            get
+            {
+                var total = 0;
+                foreach (var stats in _gridStats.Values)
+                    total += stats.MovementPoints;
+                return total;
+            }
+        }
+
+        public float MovementPointsRatio => BattlePoints == 0 ? 0 : (float)MovementPoints / BattlePoints;
+
+        public int PointDefensePoints
+        {
+            get
+            {
+                var total = 0;
+                foreach (var stats in _gridStats.Values)
+                    total += stats.PointDefensePoints;
+                return total;
+            }
+        }
+
+        public float PointDefensePointsRatio => BattlePoints == 0 ? 0 : (float)PointDefensePoints / BattlePoints;
+
+
+        public int RemainingPoints =>
+            BattlePoints - OffensivePoints - PowerPoints - MovementPoints - PointDefensePoints;
+
+        public int RemainingPointsRatio => BattlePoints == 0 ? 0 : RemainingPoints / BattlePoints;
+
+        #endregion
+
+        #region Shield Stats
+
+        public float OriginalMaxShieldHealth = -1;
+
+        public float MaxShieldHealth
+        {
+            get
+            {
+                var shieldController = ShieldApi.GetShieldBlock(Grid);
+                if (shieldController == null)
+                    return -1;
+                return ShieldApi.GetMaxHpCap(shieldController);
+            }
+        }
+
+        public float CurrentShieldPercent
+        {
+            get
+            {
+                var shieldController = ShieldApi.GetShieldBlock(Grid);
+                if (shieldController == null)
+                    return -1;
+                return ShieldApi.GetShieldPercent(shieldController);
+            }
+        }
+
+        public float CurrentShieldHeat
+        {
+            get
+            {
+                var shieldController = ShieldApi.GetShieldBlock(Grid);
+                if (shieldController == null)
+                    return -1;
+                return ShieldApi.GetShieldHeat(shieldController);
+            }
+        }
+
+        #endregion
+
+        #region Weapon Stats
+
+        public Dictionary<string, int> WeaponCounts
+        {
+            get
+            {
+                var blockCounts = new Dictionary<string, int>();
+                foreach (var stats in _gridStats.Values)
+                foreach (var kvp in stats.WeaponCounts)
+                {
+                    if (!blockCounts.ContainsKey(kvp.Key))
+                        blockCounts.Add(kvp.Key, 0);
+                    blockCounts[kvp.Key] += kvp.Value;
+                }
+
+                return blockCounts;
+            }
+        }
+
+        #endregion
+
+        #endregion
     }
 }

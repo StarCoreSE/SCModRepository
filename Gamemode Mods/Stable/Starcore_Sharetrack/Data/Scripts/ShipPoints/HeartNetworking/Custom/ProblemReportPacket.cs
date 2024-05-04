@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ProtoBuf;
-using ShipPoints;
-using ShipPoints.HeartNetworking;
+﻿using ProtoBuf;
 
 namespace ShipPoints.HeartNetworking.Custom
 {
     [ProtoContract]
     internal class ProblemReportPacket : PacketBase
     {
-        [ProtoMember(1)] public bool IssueState;
         [ProtoMember(1)] public string IssueMessage;
+        [ProtoMember(1)] public bool IssueState;
 
         private ProblemReportPacket()
         {

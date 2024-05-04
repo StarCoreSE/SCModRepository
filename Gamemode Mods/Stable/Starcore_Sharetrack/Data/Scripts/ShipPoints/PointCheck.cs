@@ -6,42 +6,36 @@ using CoreSystems.Api;
 using DefenseShields;
 using Draygo.API;
 using RelativeTopSpeed;
-using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
-using ShipPoints.HeartNetworking.Custom;
 using ShipPoints.HeartNetworking;
+using ShipPoints.HeartNetworking.Custom;
 using ShipPoints.MatchTiming;
+using ShipPoints.ShipTracking;
+using VRage;
 using VRage.Game.ModAPI;
 using VRage.Input;
-using VRage.ModAPI;
 using VRageMath;
-using ShipPoints.ShipTracking;
 using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
-using VRage;
 
 namespace ShipPoints
 {
     public class PointCheck
     {
-        public static PointCheck I;
-
         public enum MatchStateEnum
         {
             Stopped,
             Active
         }
 
-        public string[] TeamNames = { "RED", "BLU" }; // TODO this doesn't actually do anything.
+        public static PointCheck I;
         public static MatchStateEnum MatchState;
         public static bool AmTheCaptainNow;
 
 
         public static Dictionary<string, int> PointValues = new Dictionary<string, int>();
-        private Func<string, MyTuple<string, float>> _climbingCostFunction = null;
 
 
         private static readonly Dictionary<long, IMyPlayer> AllPlayers = new Dictionary<long, IMyPlayer>();
-        private readonly List<IMyPlayer> _listPlayers = new List<IMyPlayer>();
 
         public static HudAPIv2.HUDMessage
             IntegretyMessage,
@@ -54,9 +48,52 @@ namespace ShipPoints
 
         private readonly Dictionary<string, int> _bp = new Dictionary<string, int>(); // TODO refactor info storage
 
-        // Get the sphere model based on the given cap color
 
-        private bool _awaitingTrackRequest = true;
+        private readonly Dictionary<MyKeys, Action> _keyAndActionPairs = new Dictionary<MyKeys, Action>
+        {
+            {
+                MyKeys.M, () =>
+                {
+                    var castGrid = RaycastGridFromCamera();
+                    if (castGrid == null)
+                        return;
+
+                    if (!TrackingManager.I.IsGridTracked(castGrid))
+                        TrackingManager.I.TrackGrid(castGrid);
+                    else
+                        TrackingManager.I.UntrackGrid(castGrid);
+                }
+            },
+            {
+                MyKeys.N, () =>
+                {
+                    IntegretyMessage.Visible = !IntegretyMessage.Visible;
+                    MyAPIGateway.Utilities.ShowNotification("ShipTracker: Hud visibility set to " +
+                                                            IntegretyMessage.Visible);
+                }
+            },
+            {
+                MyKeys.B, () =>
+                {
+                    TimerMessage.Visible = !TimerMessage.Visible;
+                    Ticketmessage.Visible = !Ticketmessage.Visible;
+                    MyAPIGateway.Utilities.ShowNotification(
+                        "ShipTracker: Timer visibility set to " + TimerMessage.Visible);
+                }
+            },
+            {
+                MyKeys.J, () =>
+                {
+                    NametagViewState++;
+                    if (NametagViewState > (ShipTracker.NametagSettings)3)
+                        NametagViewState = 0;
+                    MyAPIGateway.Utilities.ShowNotification(
+                        "ShipTracker: Nameplate visibility set to " + NametagViewState);
+                }
+            }
+        };
+
+        private readonly List<IMyPlayer> _listPlayers = new List<IMyPlayer>();
         private readonly Dictionary<string, double> _m = new Dictionary<string, double>();
         private readonly Dictionary<string, int> _mbp = new Dictionary<string, int>();
         private readonly Dictionary<string, int> _mobp = new Dictionary<string, int>();
@@ -67,162 +104,12 @@ namespace ShipPoints
         // todo: remove this and replace with old solution for just combining BP and mass
         private readonly Dictionary<string, List<string>> _ts = new Dictionary<string, List<string>>();
 
-        #region API Fields
-        public HudAPIv2 TextHudApi { get; private set; }
-        public WcApi WcApi { get; private set; }
-        public ShieldApi ShieldApi { get; private set; }
-        public RtsApi RtsApi { get; private set; }
+        // Get the sphere model based on the given cap color
 
-        private HudPointsList _hudPointsList;
-        #endregion
+        private bool _awaitingTrackRequest = true;
+        private Func<string, MyTuple<string, float>> _climbingCostFunction;
 
-
-        #region Public Methods
-
-        public void Init()
-        {
-            I = this;
-
-            MyAPIGateway.Utilities.ShowMessage("ShipPoints v3.2 - Control Zone",
-                "Aim at a grid and press Shift+T to show stats, " +
-                "Shift+M to track a grid, Shift+J to cycle nametag style. ");
-
-            MyAPIGateway.Utilities.RegisterMessageHandler(2546247, ParsePointsDict);
-
-            // Check if the current instance is not a dedicated server
-            if (!MyAPIGateway.Utilities.IsDedicated)
-                // Initialize the sphere entities
-                // Initialize the text_api with the HUDRegistered callback
-                TextHudApi = new HudAPIv2(HudRegistered);
-
-            // Initialize the WC_api and load it if it's not null
-
-            WcApi = new WcApi();
-            WcApi?.Load();
-
-            // Initialize the SH_api and load it if it's not null
-            ShieldApi = new ShieldApi();
-            ShieldApi?.Load();
-
-            // Initialize the RTS_api and load it if it's not null
-            RtsApi = new RtsApi();
-            RtsApi?.Load();
-        }
-
-        public void Close()
-        {
-            Log.Info("Start PointCheck.UnloadData()");
-
-            TextHudApi?.Unload();
-            WcApi?.Unload();
-            ShieldApi?.Unload();
-            if (PointValues != null)
-            {
-                PointValues.Clear();
-                AllPlayers.Clear();
-            }
-
-            MyAPIGateway.Utilities.UnregisterMessageHandler(2546247, ParsePointsDict);
-
-            I = null;
-        }
-
-        public void UpdateAfterSimulation()
-        {
-            // Send request to server for tracked grids.
-            if (_awaitingTrackRequest && !MyAPIGateway.Session.IsServer)
-            {
-                HeartNetwork.I.SendToServer(new SyncRequestPacket());
-                _awaitingTrackRequest = false;
-            }
-
-            try
-            {
-                UpdateTrackingData();
-            }
-            catch (Exception e)
-            {
-                Log.Error($"Exception in UpdateAfterSimulation TryCatch 01: {e}");
-            }
-
-            try
-            {
-                if (MatchTimer.I.Ticks % 60 == 0)
-                {
-                    AllPlayers.Clear();
-                    MyAPIGateway.Multiplayer.Players.GetPlayers(_listPlayers, delegate (IMyPlayer p)
-                    {
-                        AllPlayers.Add(p.IdentityId, p);
-                        return false;
-                    }
-                    );
-                }
-            }
-            catch (Exception e)
-            {
-                Log.Error($"Exception in UpdateAfterSimulation TryCatch 02: {e}");
-            }
-        }
-
-        public void Draw()
-        {
-            //if you are the server do nothing here
-            if (MyAPIGateway.Utilities.IsDedicated || !TextHudApi.Heartbeat)
-                return;
-            try
-            {
-                if (MyAPIGateway.Session?.Camera != null && MyAPIGateway.Session.CameraController != null && !MyAPIGateway.Gui.ChatEntryVisible &&
-                    !MyAPIGateway.Gui.IsCursorVisible && MyAPIGateway.Gui.GetCurrentScreen == MyTerminalPageEnum.None)
-                {
-                    HandleKeyInputs();
-                }
-
-                foreach (var tracker in TrackingManager.I.TrackedGrids.Values)
-                    tracker.UpdateHud();
-
-                _hudPointsList?.UpdateDraw();
-            }
-            catch (Exception e)
-            {
-                Log.Error($"Exception in Draw: {e}");
-            }
-        }
-
-        public void ReportProblem(string issueMessage = "", bool sync = true)
-        {
-            if (issueMessage.Length > 50)
-                issueMessage = issueMessage.Substring(0, 50);
-
-            Problemmessage.Message.Clear();
-            Problemmessage.Message.Append("<color=red>A PROBLEM HAS BEEN REPORTED.\n<color=white>CHECK WITH BOTH TEAMS AND THEN TYPE '/st fixed' TO CLEAR THIS MESSAGE.");
-            if (issueMessage != "")
-                Problemmessage.Message.Append("\n" + issueMessage);
-            Problemmessage.Visible = true;
-
-            if (sync)
-                HeartNetwork.I.SendToEveryone(new ProblemReportPacket(true, issueMessage));
-        }
-
-        public void ResolvedProblem(bool sync = true)
-        {
-            Problemmessage.Message.Clear();
-            Problemmessage.Visible = false;
-
-            if (sync)
-                HeartNetwork.I.SendToEveryone(new ProblemReportPacket(false));
-        }
-
-        public static void ClimbingCostRename(ref string blockDisplayName, ref float climbingCostMultiplier)
-        {
-            if (I._climbingCostFunction == null)
-                return;
-            MyTuple<string, float> results = I._climbingCostFunction.Invoke(blockDisplayName);
-
-            blockDisplayName = results.Item1;
-            climbingCostMultiplier = results.Item2;
-        }
-
-        #endregion
+        public string[] TeamNames = { "RED", "BLU" }; // TODO this doesn't actually do anything.
 
         private void ParsePointsDict(object message)
         {
@@ -239,7 +126,6 @@ namespace ShipPoints
                 if (climbCostFunc != null)
                 {
                     _climbingCostFunction = climbCostFunc;
-                    return;
                 }
             }
             catch (Exception ex)
@@ -285,7 +171,7 @@ namespace ShipPoints
         private void HudRegistered()
         {
             _hudPointsList = new HudPointsList();
-            
+
             IntegretyMessage = new HudAPIv2.HUDMessage(scale: 1.15f, font: "BI_SEOutlined",
                 Message: new StringBuilder(""), origin: new Vector2D(.51, .95), hideHud: false,
                 blend: BlendTypeEnum.PostPP)
@@ -312,51 +198,6 @@ namespace ShipPoints
                 InitialColor = Color.White
             };
         }
-
-
-        private readonly Dictionary<MyKeys, Action> _keyAndActionPairs = new Dictionary<MyKeys, Action>
-        {
-            {
-                MyKeys.M, () =>
-                {
-                    IMyCubeGrid castGrid = RaycastGridFromCamera();
-                    if (castGrid == null)
-                        return;
-
-                    if (!TrackingManager.I.IsGridTracked(castGrid))
-                        TrackingManager.I.TrackGrid(castGrid);
-                    else
-                        TrackingManager.I.UntrackGrid(castGrid);
-                }
-            },
-            {
-                MyKeys.N, () =>
-                {
-                    IntegretyMessage.Visible = !IntegretyMessage.Visible;
-                    MyAPIGateway.Utilities.ShowNotification("ShipTracker: Hud visibility set to " +
-                                                            IntegretyMessage.Visible);
-                }
-            },
-            {
-                MyKeys.B, () =>
-                {
-                    TimerMessage.Visible = !TimerMessage.Visible;
-                    Ticketmessage.Visible = !Ticketmessage.Visible;
-                    MyAPIGateway.Utilities.ShowNotification(
-                        "ShipTracker: Timer visibility set to " + TimerMessage.Visible);
-                }
-            },
-            {
-                MyKeys.J, () =>
-                {
-                    NametagViewState++;
-                    if (NametagViewState > (ShipTracker.NametagSettings) 3)
-                        NametagViewState = 0;
-                    MyAPIGateway.Utilities.ShowNotification(
-                        "ShipTracker: Nameplate visibility set to " + NametagViewState);
-                }
-            }
-        };
 
         private void HandleKeyInputs()
         {
@@ -462,8 +303,12 @@ namespace ShipPoints
 
         private string CreateDisplayString(string ownerName, ShipTracker tracker, int g, string power, string thrust)
         {
-            var ownerDisplay = ownerName != null ? ownerName.Substring(0, Math.Min(ownerName.Length, 7)) : tracker.GridName;
-            var integrityPercent = (int)(tracker.GridIntegrity / tracker.OriginalGridIntegrity * 100); // TODO fix this to use hull integrity
+            var ownerDisplay = ownerName != null
+                ? ownerName.Substring(0, Math.Min(ownerName.Length, 7))
+                : tracker.GridName;
+            var integrityPercent =
+                (int)(tracker.GridIntegrity / tracker.OriginalGridIntegrity *
+                      100); // TODO fix this to use hull integrity
             var shieldPercent = (int)tracker.CurrentShieldPercent;
             var shieldColor = shieldPercent <= 0
                 ? "red"
@@ -520,5 +365,164 @@ namespace ShipPoints
 
             return null;
         }
+
+        #region API Fields
+
+        public HudAPIv2 TextHudApi { get; private set; }
+        public WcApi WcApi { get; private set; }
+        public ShieldApi ShieldApi { get; private set; }
+        public RtsApi RtsApi { get; private set; }
+
+        private HudPointsList _hudPointsList;
+
+        #endregion
+
+
+        #region Public Methods
+
+        public void Init()
+        {
+            I = this;
+
+            MyAPIGateway.Utilities.ShowMessage("ShipPoints v3.2 - Control Zone",
+                "Aim at a grid and press Shift+T to show stats, " +
+                "Shift+M to track a grid, Shift+J to cycle nametag style. ");
+
+            MyAPIGateway.Utilities.RegisterMessageHandler(2546247, ParsePointsDict);
+
+            // Check if the current instance is not a dedicated server
+            if (!MyAPIGateway.Utilities.IsDedicated)
+                // Initialize the sphere entities
+                // Initialize the text_api with the HUDRegistered callback
+                TextHudApi = new HudAPIv2(HudRegistered);
+
+            // Initialize the WC_api and load it if it's not null
+
+            WcApi = new WcApi();
+            WcApi?.Load();
+
+            // Initialize the SH_api and load it if it's not null
+            ShieldApi = new ShieldApi();
+            ShieldApi?.Load();
+
+            // Initialize the RTS_api and load it if it's not null
+            RtsApi = new RtsApi();
+            RtsApi?.Load();
+        }
+
+        public void Close()
+        {
+            Log.Info("Start PointCheck.UnloadData()");
+
+            TextHudApi?.Unload();
+            WcApi?.Unload();
+            ShieldApi?.Unload();
+            if (PointValues != null)
+            {
+                PointValues.Clear();
+                AllPlayers.Clear();
+            }
+
+            MyAPIGateway.Utilities.UnregisterMessageHandler(2546247, ParsePointsDict);
+
+            I = null;
+        }
+
+        public void UpdateAfterSimulation()
+        {
+            // Send request to server for tracked grids.
+            if (_awaitingTrackRequest && !MyAPIGateway.Session.IsServer)
+            {
+                HeartNetwork.I.SendToServer(new SyncRequestPacket());
+                _awaitingTrackRequest = false;
+            }
+
+            try
+            {
+                UpdateTrackingData();
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Exception in UpdateAfterSimulation TryCatch 01: {e}");
+            }
+
+            try
+            {
+                if (MatchTimer.I.Ticks % 60 == 0)
+                {
+                    AllPlayers.Clear();
+                    MyAPIGateway.Multiplayer.Players.GetPlayers(_listPlayers, delegate(IMyPlayer p)
+                        {
+                            AllPlayers.Add(p.IdentityId, p);
+                            return false;
+                        }
+                    );
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Exception in UpdateAfterSimulation TryCatch 02: {e}");
+            }
+        }
+
+        public void Draw()
+        {
+            //if you are the server do nothing here
+            if (MyAPIGateway.Utilities.IsDedicated || !TextHudApi.Heartbeat)
+                return;
+            try
+            {
+                if (MyAPIGateway.Session?.Camera != null && MyAPIGateway.Session.CameraController != null &&
+                    !MyAPIGateway.Gui.ChatEntryVisible &&
+                    !MyAPIGateway.Gui.IsCursorVisible && MyAPIGateway.Gui.GetCurrentScreen == MyTerminalPageEnum.None)
+                    HandleKeyInputs();
+
+                foreach (var tracker in TrackingManager.I.TrackedGrids.Values)
+                    tracker.UpdateHud();
+
+                _hudPointsList?.UpdateDraw();
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Exception in Draw: {e}");
+            }
+        }
+
+        public void ReportProblem(string issueMessage = "", bool sync = true)
+        {
+            if (issueMessage.Length > 50)
+                issueMessage = issueMessage.Substring(0, 50);
+
+            Problemmessage.Message.Clear();
+            Problemmessage.Message.Append(
+                "<color=red>A PROBLEM HAS BEEN REPORTED.\n<color=white>CHECK WITH BOTH TEAMS AND THEN TYPE '/st fixed' TO CLEAR THIS MESSAGE.");
+            if (issueMessage != "")
+                Problemmessage.Message.Append("\n" + issueMessage);
+            Problemmessage.Visible = true;
+
+            if (sync)
+                HeartNetwork.I.SendToEveryone(new ProblemReportPacket(true, issueMessage));
+        }
+
+        public void ResolvedProblem(bool sync = true)
+        {
+            Problemmessage.Message.Clear();
+            Problemmessage.Visible = false;
+
+            if (sync)
+                HeartNetwork.I.SendToEveryone(new ProblemReportPacket(false));
+        }
+
+        public static void ClimbingCostRename(ref string blockDisplayName, ref float climbingCostMultiplier)
+        {
+            if (I._climbingCostFunction == null)
+                return;
+            var results = I._climbingCostFunction.Invoke(blockDisplayName);
+
+            blockDisplayName = results.Item1;
+            climbingCostMultiplier = results.Item2;
+        }
+
+        #endregion
     }
 }
