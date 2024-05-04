@@ -63,7 +63,7 @@ namespace ShipPoints.ShipTracking
                 return false;
             });
 
-            if (_queuedGridTracks.Contains(grid.EntityId))
+            if (_queuedGridTracks.Contains(grid.EntityId) && !TrackedGrids.ContainsKey(grid))
             {
                 _queuedGridTracks.Remove(grid.EntityId);
                 var tracker = new ShipTracker(grid);
