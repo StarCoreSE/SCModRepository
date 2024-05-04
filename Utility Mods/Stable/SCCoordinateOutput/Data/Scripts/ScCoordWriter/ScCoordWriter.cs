@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Sandbox.Game;
 using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
@@ -20,6 +21,12 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         private List<IMyCubeGrid> TrackedGrids;
         private TextWriter Writer;
         private bool Recording;
+
+        private const int Version = 1;
+        private readonly string[] _columns =
+        {
+            "kind", "name", "owner", "faction", "health", "position", "rotation"
+        };
 
         private const string Extension = ".scc";
         private const string CommandPrefix = "/coordwriter";
@@ -45,7 +52,10 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             try
             {
                 Writer = MyAPIGateway.Utilities.WriteFileInWorldStorage(fileName, typeof(ScCoordWriter));
+                Writer.NewLine = "\n";
                 MyVisualScriptLogicProvider.SendChatMessage($"Global grid tracker file created");
+                Writer.WriteLine($"version {Version}");
+                Writer.WriteLine(string.Join(",", _columns));
             }
             catch (Exception ex)
             {
@@ -123,7 +133,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             TickCounter = 0;
 
             // TODO: Use seconds, milliseconds, frames, or ticks since start of recording instead?
-            Writer.WriteLine($"[START:T={DateTime.Now}]");
+            Writer.WriteLine($"start_block,{DateTime.Now}");
             TrackedGrids.ForEach(grid =>
             {
                 if (grid == null)
@@ -159,27 +169,22 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
 
                 var healthPercent = 1.0f;
                 var owner = GetGridOwner(grid);
-                var faction = "none";
-                if (owner != null)
-                {
-                    faction = GetFactionName(owner.IdentityId);
-                }
-                Writer.WriteLine($"[GRID]{grid.CustomName},{owner?.DisplayName ?? "Unowned"},{faction},{SmallDouble(healthPercent)},{SmallVector3D(position)},{SmallQuaternion(rotation)}");
+                var faction = GetFactionName(owner);
+
+                Writer.WriteLine($"grid,{grid.CustomName},{owner?.DisplayName ?? "Unowned"},{faction},{SmallDouble(healthPercent)},{SmallVector3D(position)},{SmallQuaternion(rotation)}");
             });
-            const string frameSeparator = "[STOP]";
-            Writer.WriteLine(frameSeparator);
             Writer.Flush();
         }
 
         public string SmallQuaternion(Quaternion q)
         {
             return
-                $"{SmallDouble(q.X)},{SmallDouble(q.Y)},{SmallDouble(q.Z)},{SmallDouble(q.W)}";
+                $"{SmallDouble(q.X)} {SmallDouble(q.Y)} {SmallDouble(q.Z)} {SmallDouble(q.W)}";
         }
         public string SmallVector3D(Vector3D v)
         {
             
-            return $"{SmallDouble(v.X)},{SmallDouble(v.Y)},{SmallDouble(v.Z)}";
+            return $"{SmallDouble(v.X)} {SmallDouble(v.Y)} {SmallDouble(v.Z)}";
         }
         public string SmallDouble(double value)
         {
@@ -224,9 +229,10 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             }
         }
 
-        private string GetFactionName(long playerId)
+        private string GetFactionName(IMyIdentity player)
         {
-            IMyFaction playerFaction = MyAPIGateway.Session.Factions.TryGetPlayerFaction(playerId);
+            if (player == null) return "Unowned";
+            IMyFaction playerFaction = MyAPIGateway.Session.Factions.TryGetPlayerFaction(player.IdentityId);
             return playerFaction != null ? playerFaction.Name : "Unowned";
         }
 
