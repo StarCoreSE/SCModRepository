@@ -116,36 +116,36 @@ namespace PickMe
 
         private void MessageEntered(string messageText, ref bool sendToOthers)
         {
-            sendToOthers = true;
-
-            if(messageText.ToLower() == "/setup")
-            {
-                networking.SendToServer(new StatePacket("/setup"));
-            }
-            if (messageText.ToLower() == "/auto")
-            {
-                networking.SendToServer(new StatePacket("/auto"));
-            }
-            if (messageText.ToLower() == "/match")
-            {
-                networking.SendToServer(new StatePacket("/match"));
-            }
-            if (messageText.ToLower() == "/start")
-            {
-                networking.SendToServer(new StatePacket("/start"));
-            }
-            if (messageText.ToLower() == "/end")
-            {
-                networking.SendToServer(new StatePacket("/end"));
-            }
-            if (messageText.ToLower() == "/cancel")
-            {
-                networking.SendToServer(new StatePacket("/cancel"));
-            }
-            if (messageText.ToLower() == "/dump")
-            {
-                networking.SendToServer(new StatePacket("/dump"));
-            }
+            //sendToOthers = true;
+            //
+            //if(messageText.ToLower() == "/setup")
+            //{
+            //    networking.SendToServer(new StatePacket("/setup"));
+            //}
+            //if (messageText.ToLower() == "/auto")
+            //{
+            //    networking.SendToServer(new StatePacket("/auto"));
+            //}
+            //if (messageText.ToLower() == "/match")
+            //{
+            //    networking.SendToServer(new StatePacket("/match"));
+            //}
+            //if (messageText.ToLower() == "/start")
+            //{
+            //    networking.SendToServer(new StatePacket("/start"));
+            //}
+            //if (messageText.ToLower() == "/end")
+            //{
+            //    networking.SendToServer(new StatePacket("/end"));
+            //}
+            //if (messageText.ToLower() == "/cancel")
+            //{
+            //    networking.SendToServer(new StatePacket("/cancel"));
+            //}
+            //if (messageText.ToLower() == "/dump")
+            //{
+            //    networking.SendToServer(new StatePacket("/dump"));
+            //}
         }
     }
 }
