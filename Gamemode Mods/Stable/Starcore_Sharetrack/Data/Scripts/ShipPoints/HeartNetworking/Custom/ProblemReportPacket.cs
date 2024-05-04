@@ -6,7 +6,7 @@ namespace ShipPoints.HeartNetworking.Custom
     internal class ProblemReportPacket : PacketBase
     {
         [ProtoMember(1)] public string IssueMessage;
-        [ProtoMember(1)] public bool IssueState;
+        [ProtoMember(2)] public bool IssueState;
 
         private ProblemReportPacket()
         {
