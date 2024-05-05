@@ -25,7 +25,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         private const int Version = 1;
         private readonly string[] _columns =
         {
-            "kind", "name", "owner", "faction", "health", "position", "rotation"
+            "kind", "name", "owner", "faction", "entityId", "health", "position", "rotation"
         };
 
         private const string Extension = ".scc";
@@ -47,30 +47,16 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(NetworkId, ReceivedPacket);
             }
 
-            var fileName = $"{DateTime.Now:dd-MM-yyyy HHmm}{Extension}";
-
-            try
-            {
-                Writer = MyAPIGateway.Utilities.WriteFileInWorldStorage(fileName, typeof(ScCoordWriter));
-                Writer.NewLine = "\n";
-                MyVisualScriptLogicProvider.SendChatMessage($"Global grid tracker file created");
-                Writer.WriteLine($"version {Version}");
-                Writer.WriteLine(string.Join(",", _columns));
-            }
-            catch (Exception ex)
-            {
-                MyLog.Default.WriteLine("Failed to create grid tracker file.");
-                MyVisualScriptLogicProvider.SendChatMessage("Failed to create grid tracker file.");
-                MyLog.Default.WriteLine(ex);
-            }
-
             TrackedGrids = new List<IMyCubeGrid>();
             MyAPIGateway.Entities.GetEntities(null, e =>
             {
                 var grid = e as IMyCubeGrid;
-                if (e != null)
+                if (grid != null)
                 {
-                    TrackedGrids.Add(grid);
+                    if (!grid.IsStatic)
+                    {
+                        TrackedGrids.Add(grid);
+                    }
                 }
                 return false;
             });
@@ -110,14 +96,33 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
 
         public void Start()
         {
+            var fileName = $"{DateTime.Now:dd-MM-yyyy HHmm}{Extension}";
+
+            try
+            {
+                Writer = MyAPIGateway.Utilities.WriteFileInWorldStorage(fileName, typeof(ScCoordWriter));
+                Writer.NewLine = "\n";
+                MyVisualScriptLogicProvider.SendChatMessage($"Global grid tracker file created");
+                Writer.WriteLine($"version {Version}");
+                Writer.WriteLine(string.Join(",", _columns));
+            }
+            catch (Exception ex)
+            {
+                MyLog.Default.WriteLine("Failed to create grid tracker file.");
+                MyVisualScriptLogicProvider.SendChatMessage("Failed to create grid tracker file.");
+                MyLog.Default.WriteLine(ex);
+            }
+
             Recording = true;
             MyAPIGateway.Multiplayer.SendMessageToServer(NetworkId, new byte[] { 1 });
+            MyAPIGateway.Utilities.ShowNotification("Recording started.");
         }
 
         public void Stop()
         {
             Recording = false;
             MyAPIGateway.Multiplayer.SendMessageToServer(NetworkId, new byte[] { 0 });
+            MyAPIGateway.Utilities.ShowNotification("Recording ended.");
         }
 
         public override void UpdateAfterSimulation()
@@ -171,7 +176,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 var owner = GetGridOwner(grid);
                 var faction = GetFactionName(owner);
 
-                Writer.WriteLine($"grid,{grid.CustomName},{owner?.DisplayName ?? "Unowned"},{faction},{SmallDouble(healthPercent)},{SmallVector3D(position)},{SmallQuaternion(rotation)}");
+                Writer.WriteLine($"grid,{grid.CustomName},{owner?.DisplayName ?? "Unowned"},{faction},{grid.EntityId},{SmallDouble(healthPercent)},{SmallVector3D(position)},{SmallQuaternion(rotation)}");
             });
             Writer.Flush();
         }
@@ -226,6 +231,14 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             if (data != null && data.Length == 1)
             {
                 Recording = data[0] == 1;
+                if (Recording)
+                {
+                    Start();
+                }
+                else
+                {
+                    Stop();
+                }
             }
         }
 
