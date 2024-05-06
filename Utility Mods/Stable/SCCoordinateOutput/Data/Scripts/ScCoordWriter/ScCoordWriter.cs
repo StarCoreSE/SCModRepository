@@ -48,15 +48,11 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             }
 
             TrackedGrids = new List<IMyCubeGrid>();
-            MyAPIGateway.Entities.GetEntities(null, e =>
+            MyAPIGateway.Entities.GetEntities(null, entity =>
             {
-                var grid = e as IMyCubeGrid;
-                if (grid != null)
+                if (ShouldBeTracked(entity))
                 {
-                    if (!grid.IsStatic)
-                    {
-                        TrackedGrids.Add(grid);
-                    }
+                    TrackedGrids.Add(entity as IMyCubeGrid);
                 }
                 return false;
             });
@@ -66,9 +62,10 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
 
         private void OnEntityAdd(IMyEntity entity)
         {
-            var grid = entity as IMyCubeGrid;
-            if (grid == null) return;
-            TrackedGrids.Add(grid);
+            if (ShouldBeTracked(entity))
+            {
+                TrackedGrids.Add(entity as IMyCubeGrid);
+            }
         }
 
         private void OnEntityRemove(IMyEntity entity)
@@ -76,6 +73,12 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             var grid = entity as IMyCubeGrid;
             if (grid == null) return;
             TrackedGrids.Remove(grid);
+        }
+
+        private bool ShouldBeTracked(IMyEntity entity)
+        {
+            var grid = entity as IMyCubeGrid;
+            return grid != null && !grid.IsStatic;
         }
 
         protected override void UnloadData()
