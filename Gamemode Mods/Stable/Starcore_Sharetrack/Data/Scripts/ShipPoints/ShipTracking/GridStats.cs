@@ -232,7 +232,7 @@ namespace ShipPoints.ShipTracking
         private void CalculateCost(IMyCubeBlock block)
         {
             int blockPoints;
-            var blockDisplayName = GetDDT(block);
+            var blockDisplayName = block.DefinitionDisplayNameText;
             if (!PointCheck.PointValues.TryGetValue(block.BlockDefinition.SubtypeName, out blockPoints))
                 return;
 
@@ -244,7 +244,7 @@ namespace ShipPoints.ShipTracking
 
             var thisSpecialBlocksCount = BlockCounts[blockDisplayName]++;
 
-            if (thisClimbingCostMult > 0 && thisSpecialBlocksCount > 1)
+            if (thisClimbingCostMult > 0)
                 blockPoints += (int)(blockPoints * thisSpecialBlocksCount * thisClimbingCostMult);
 
             if (block is IMyThrust || block is IMyGyro)
@@ -262,11 +262,6 @@ namespace ShipPoints.ShipTracking
             }
 
             BattlePoints += blockPoints;
-        }
-
-        private string GetDDT(IMyCubeBlock block)
-        {
-            return block.DefinitionDisplayNameText;
         }
 
         #endregion
