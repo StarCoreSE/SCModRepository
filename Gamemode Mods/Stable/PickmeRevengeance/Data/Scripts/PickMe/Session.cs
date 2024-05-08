@@ -100,33 +100,12 @@ namespace PickMe
 
         public void AddPointValues(object obj)
         {
-            string var = MyAPIGateway.Utilities.SerializeFromBinary<string>((byte[])obj);
-            if (var != null)
-            {
-                string[] split = var.Split(';');
-                foreach (string s in split)
-                {
-                    string[] parts = s.Split('@');
-                    int value;
-                    if (parts.Length == 2 && int.TryParse(parts[1], out value))
-                    {
-                        string name = parts[0].Trim();
-                        if (name.Contains("{LS}"))
-                        {
-                            PointValues.Remove(name.Replace("{LS}", "Large"));
-                            PointValues.Add(name.Replace("{LS}", "Large"), value);
+            var dict = obj as Dictionary<string, int>;
+            if (dict == null)
+                return;
 
-                            PointValues.Remove(name.Replace("{LS}", "Small"));
-                            PointValues.Add(name.Replace("{LS}", "Small"), value);
-                        }
-                        else
-                        {
-                            PointValues.Remove(name);
-                            PointValues.Add(name, value);
-                        }
-                    }
-                }
-            }
+            PointValues = dict;
+
             foreach (var key in PointValues) Header.Add(key.Key);
         }
 
@@ -137,36 +116,36 @@ namespace PickMe
 
         private void MessageEntered(string messageText, ref bool sendToOthers)
         {
-            sendToOthers = true;
-
-            if(messageText.ToLower() == "/setup")
-            {
-                networking.SendToServer(new StatePacket("/setup"));
-            }
-            if (messageText.ToLower() == "/auto")
-            {
-                networking.SendToServer(new StatePacket("/auto"));
-            }
-            if (messageText.ToLower() == "/match")
-            {
-                networking.SendToServer(new StatePacket("/match"));
-            }
-            if (messageText.ToLower() == "/start")
-            {
-                networking.SendToServer(new StatePacket("/start"));
-            }
-            if (messageText.ToLower() == "/end")
-            {
-                networking.SendToServer(new StatePacket("/end"));
-            }
-            if (messageText.ToLower() == "/cancel")
-            {
-                networking.SendToServer(new StatePacket("/cancel"));
-            }
-            if (messageText.ToLower() == "/dump")
-            {
-                networking.SendToServer(new StatePacket("/dump"));
-            }
+            //sendToOthers = true;
+            //
+            //if(messageText.ToLower() == "/setup")
+            //{
+            //    networking.SendToServer(new StatePacket("/setup"));
+            //}
+            //if (messageText.ToLower() == "/auto")
+            //{
+            //    networking.SendToServer(new StatePacket("/auto"));
+            //}
+            //if (messageText.ToLower() == "/match")
+            //{
+            //    networking.SendToServer(new StatePacket("/match"));
+            //}
+            //if (messageText.ToLower() == "/start")
+            //{
+            //    networking.SendToServer(new StatePacket("/start"));
+            //}
+            //if (messageText.ToLower() == "/end")
+            //{
+            //    networking.SendToServer(new StatePacket("/end"));
+            //}
+            //if (messageText.ToLower() == "/cancel")
+            //{
+            //    networking.SendToServer(new StatePacket("/cancel"));
+            //}
+            //if (messageText.ToLower() == "/dump")
+            //{
+            //    networking.SendToServer(new StatePacket("/dump"));
+            //}
         }
     }
 }
