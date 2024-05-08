@@ -46,8 +46,9 @@ namespace Jakaria
                         /*definition.Value.Name != ".Ship Cores" && */
                         /*definition.Value.Name != ".SC Vanilla 2.0 Weapons" && */
                          definition.Value.Name != "[40K]" &&               
-                         definition.Value.Name != "[TIO]" &&
+                        /*definition.Value.Name != "[TIO]" && */
                          definition.Value.Name != "[MID]" &&
+                         definition.Value.Name != "[FLAW]" &&
                          definition.Value.Name != "[MA]" &&
                          definition.Value.Name != "[NHI]" &&
                          definition.Value.Name != "[ONYX]" &&
