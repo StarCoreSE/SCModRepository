@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using CoreSystems.Api;
 using DefenseShields;
@@ -45,7 +47,9 @@ namespace ShipPoints
             };
 
         private ViewState _viewState = ViewState.None;
-
+        private Queue<double> _executionTimes = new Queue<double>();
+        private const int _sampleSize = 1;  // Number of samples to consider for the average
+        private double _executionTimeSum = 0;  // Running total of execution times
         private static IMyCubeGrid GetFocusedGrid()
         {
             var cockpit = MyAPIGateway.Session.ControlledObject?.Entity as IMyCockpit;
@@ -98,11 +102,14 @@ namespace ShipPoints
             // Update once per second
             if (MatchTimer.I.Ticks % 60 != 0)
                 return;
-
+            var stopwatch = new System.Diagnostics.Stopwatch();
+            stopwatch.Start();
             ShipTracker shipTracker;
-            TrackingManager.I.TrackedGrids.TryGetValue(focusedGrid, out shipTracker);
-            if (shipTracker == null)
+            if (!TrackingManager.I.TrackedGrids.TryGetValue(focusedGrid, out shipTracker))
+            {
                 shipTracker = new ShipTracker(focusedGrid, false);
+                TrackingManager.I.TrackedGrids[focusedGrid] = shipTracker;
+            }
 
             var totalShieldString = "None";
 
@@ -125,7 +132,6 @@ namespace ShipPoints
             var massString = $"{shipTracker.Mass}";
 
             var thrustInKilograms = focusedGrid.GetMaxThrustInDirection(Base6Directions.Direction.Backward) / 9.81f;
-            //float weight = trkd.Mass;
             var mass = shipTracker.Mass;
             var twr = (float)Math.Round(thrustInKilograms / mass, 1);
 
@@ -172,7 +178,10 @@ namespace ShipPoints
 
 
             var sb = new StringBuilder();
+            double lastExecutionTime = _executionTimes.Count > 0 ? _executionTimes.Last() : 0;
 
+
+            sb.AppendLine($"Last Update took: {lastExecutionTime:F2} ms");
             // Basic Info
             sb.AppendLine("----Basic Info----");
             sb.AppendFormat("<color=White>{0} ", focusedGrid.DisplayName);
@@ -217,6 +226,8 @@ namespace ShipPoints
 
             _statMessage.Message = sb;
             _statMessage.Visible = true;
+            stopwatch.Stop();
+            UpdateExecutionTimes(stopwatch.Elapsed.TotalMilliseconds);
         }
 
         private void BattleShiftTCalcs(IMyCubeGrid focusedGrid)
@@ -229,12 +240,12 @@ namespace ShipPoints
             if (tracked == null)
                 tracked = new ShipTracker(focusedGrid, false);
 
-            var totalShield = tracked.CurrentShieldPercent;
-            var totalShieldString = totalShield > 100
-                ? $"{Math.Round(totalShield / 100f, 2):F2} M"
-                : totalShield > 1
-                    ? $"{Math.Round(totalShield, 0):F0}0 K"
-                    : "None";
+            var totalShieldString = "None";
+
+            if (tracked.MaxShieldHealth > 100)
+                totalShieldString = $"{tracked.MaxShieldHealth / 100f:F2} M";
+            else if (tracked.MaxShieldHealth > 1 && tracked.MaxShieldHealth < 100)
+                totalShieldString = $"{tracked.MaxShieldHealth:F0}0 K";
 
             var maxSpeed = focusedGrid.GridSizeEnum == MyCubeSize.Large
                 ? MyDefinitionManager.Static.EnvironmentDefinition.LargeShipMaxSpeed
@@ -289,12 +300,17 @@ namespace ShipPoints
             _statMessageBattleWeaponCountsist.Message.Append(_gunTextBuilder);
 
             _statMessageBattle.Message.Length = 0;
-            _statMessageBattle.Message.Append($"<color=White>{totalShieldString} ({(int)tracked.MaxShieldHealth}%)");
+            _statMessageBattle.Message.Append($"<color=White>{totalShieldString} ({(int)tracked.CurrentShieldPercent}%)");
 
             _statMessageBattle.Visible = true;
             _statMessageBattleWeaponCountsist.Visible = true;
         }
-
+        private void UpdateExecutionTimes(double elapsedTime)
+        {
+            if (_executionTimes.Count >= _sampleSize)
+                _executionTimes.Dequeue();  // Remove the oldest time if at capacity
+            _executionTimes.Enqueue(elapsedTime);
+        }
         private enum ViewState
         {
             None,
