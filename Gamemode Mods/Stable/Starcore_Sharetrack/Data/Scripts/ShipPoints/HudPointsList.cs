@@ -25,6 +25,8 @@ namespace ShipPoints
         private readonly StringBuilder _gunTextBuilder = new StringBuilder();
         private readonly StringBuilder _speedTextBuilder = new StringBuilder();
 
+        private ShipTracker _shipTracker = null;
+
 
         private readonly HudAPIv2.HUDMessage
             _statMessage = new HudAPIv2.HUDMessage(scale: 1f, font: "BI_SEOutlined", Message: new StringBuilder(""),
@@ -70,6 +72,7 @@ namespace ShipPoints
             }
             else if (_statMessage.Visible)
             {
+                _shipTracker = null;
                 _statMessage.Message.Clear();
                 _statMessage.Visible = false;
             }
@@ -90,6 +93,7 @@ namespace ShipPoints
             }
             else if (_statMessageBattle.Visible)
             {
+                _shipTracker = null;
                 _statMessageBattle.Message.Clear();
                 _statMessageBattle.Visible = false;
                 _statMessageBattleWeaponCountsist.Message.Clear();
@@ -104,49 +108,47 @@ namespace ShipPoints
                 return;
             var stopwatch = new System.Diagnostics.Stopwatch();
             stopwatch.Start();
-            ShipTracker shipTracker;
-            if (!TrackingManager.I.TrackedGrids.TryGetValue(focusedGrid, out shipTracker))
+            if (_shipTracker == null && !TrackingManager.I.TrackedGrids.TryGetValue(focusedGrid, out _shipTracker))
             {
-                shipTracker = new ShipTracker(focusedGrid, false);
-                TrackingManager.I.TrackedGrids[focusedGrid] = shipTracker;
+                _shipTracker = new ShipTracker(focusedGrid, false);
             }
 
             var totalShieldString = "None";
 
-            if (shipTracker.MaxShieldHealth > 100)
-                totalShieldString = $"{shipTracker.MaxShieldHealth / 100f:F2} M";
-            else if (shipTracker.MaxShieldHealth > 1 && shipTracker.MaxShieldHealth < 100)
-                totalShieldString = $"{shipTracker.MaxShieldHealth:F0}0 K";
+            if (_shipTracker.MaxShieldHealth > 100)
+                totalShieldString = $"{_shipTracker.MaxShieldHealth / 100f:F2} M";
+            else if (_shipTracker.MaxShieldHealth > 1 && _shipTracker.MaxShieldHealth < 100)
+                totalShieldString = $"{_shipTracker.MaxShieldHealth:F0}0 K";
 
             var gunTextBuilder = new StringBuilder();
-            foreach (var x in shipTracker.WeaponCounts.Keys)
-                gunTextBuilder.AppendFormat("<color=Green>{0}<color=White> x {1}\n", shipTracker.WeaponCounts[x], x);
+            foreach (var x in _shipTracker.WeaponCounts.Keys)
+                gunTextBuilder.AppendFormat("<color=Green>{0}<color=White> x {1}\n", _shipTracker.WeaponCounts[x], x);
             var gunText = gunTextBuilder.ToString();
 
             var specialBlockTextBuilder = new StringBuilder();
-            foreach (var x in shipTracker.SpecialBlockCounts.Keys)
+            foreach (var x in _shipTracker.SpecialBlockCounts.Keys)
                 specialBlockTextBuilder.AppendFormat("<color=Green>{0}<color=White> x {1}\n",
-                    shipTracker.SpecialBlockCounts[x], x);
+                    _shipTracker.SpecialBlockCounts[x], x);
             var specialBlockText = specialBlockTextBuilder.ToString();
 
-            var massString = $"{shipTracker.Mass}";
+            var massString = $"{_shipTracker.Mass}";
 
             var thrustInKilograms = focusedGrid.GetMaxThrustInDirection(Base6Directions.Direction.Backward) / 9.81f;
-            var mass = shipTracker.Mass;
+            var mass = _shipTracker.Mass;
             var twr = (float)Math.Round(thrustInKilograms / mass, 1);
 
-            if (shipTracker.Mass > 1000000) massString = $"{Math.Round(shipTracker.Mass / 1000000f, 1):F2}m";
+            if (_shipTracker.Mass > 1000000) massString = $"{Math.Round(_shipTracker.Mass / 1000000f, 1):F2}m";
 
             var twRs = $"{twr:F3}";
-            var thrustString = $"{Math.Round(shipTracker.TotalThrust, 1)}";
+            var thrustString = $"{Math.Round(_shipTracker.TotalThrust, 1)}";
 
-            if (shipTracker.TotalThrust > 1000000)
-                thrustString = $"{Math.Round(shipTracker.TotalThrust / 1000000f, 1):F2}M";
+            if (_shipTracker.TotalThrust > 1000000)
+                thrustString = $"{Math.Round(_shipTracker.TotalThrust / 1000000f, 1):F2}M";
 
-            var playerName = shipTracker.Owner == null ? shipTracker.GridName : shipTracker.Owner.DisplayName;
-            var factionName = shipTracker.Owner == null
+            var playerName = _shipTracker.Owner == null ? _shipTracker.GridName : _shipTracker.Owner.DisplayName;
+            var factionName = _shipTracker.Owner == null
                 ? ""
-                : MyAPIGateway.Session?.Factions?.TryGetPlayerFaction(shipTracker.OwnerId)?.Name;
+                : MyAPIGateway.Session?.Factions?.TryGetPlayerFaction(_shipTracker.OwnerId)?.Name;
 
             var speed = focusedGrid.GridSizeEnum == MyCubeSize.Large
                 ? MyDefinitionManager.Static.EnvironmentDefinition.LargeShipMaxSpeed
@@ -160,17 +162,17 @@ namespace ShipPoints
             }
 
 
-            var pwrNotation = shipTracker.TotalPower > 1000 ? "GW" : "MW";
-            var tempPwr = shipTracker.TotalPower > 1000
-                ? $"{Math.Round(shipTracker.TotalPower / 1000, 1):F1}"
-                : Math.Round(shipTracker.TotalPower, 1).ToString();
+            var pwrNotation = _shipTracker.TotalPower > 1000 ? "GW" : "MW";
+            var tempPwr = _shipTracker.TotalPower > 1000
+                ? $"{Math.Round(_shipTracker.TotalPower / 1000, 1):F1}"
+                : Math.Round(_shipTracker.TotalPower, 1).ToString();
             var pwr = tempPwr + pwrNotation;
 
-            var gyroString = $"{Math.Round(shipTracker.TotalTorque, 1)}";
+            var gyroString = $"{Math.Round(_shipTracker.TotalTorque, 1)}";
 
-            if (shipTracker.TotalTorque >= 1000000)
+            if (_shipTracker.TotalTorque >= 1000000)
             {
-                var tempGyro2 = Math.Round(shipTracker.TotalTorque / 1000000f, 1);
+                var tempGyro2 = Math.Round(_shipTracker.TotalTorque / 1000000f, 1);
                 gyroString = tempGyro2 > 1000
                     ? $"{Math.Round(tempGyro2 / 1000, 1):F1}G"
                     : $"{Math.Round(tempGyro2, 1):F1}M";
@@ -188,9 +190,9 @@ namespace ShipPoints
             sb.AppendFormat("<color=Green>Owner<color=White>: {0} ", playerName);
             sb.AppendFormat("<color=Green>Faction<color=White>: {0}\n", factionName);
             sb.AppendFormat("<color=Green>Mass<color=White>: {0} kg\n", massString);
-            sb.AppendFormat("<color=Green>Heavy blocks<color=White>: {0}\n", shipTracker.HeavyArmorCount);
-            sb.AppendFormat("<color=Green>Total blocks<color=White>: {0}\n", shipTracker.BlockCount);
-            sb.AppendFormat("<color=Green>PCU<color=White>: {0}\n", shipTracker.PCU);
+            sb.AppendFormat("<color=Green>Heavy blocks<color=White>: {0}\n", _shipTracker.HeavyArmorCount);
+            sb.AppendFormat("<color=Green>Total blocks<color=White>: {0}\n", _shipTracker.BlockCount);
+            sb.AppendFormat("<color=Green>PCU<color=White>: {0}\n", _shipTracker.PCU);
             sb.AppendFormat("<color=Green>Size<color=White>: {0}\n",
                 (focusedGrid.Max + Vector3.Abs(focusedGrid.Min)).ToString());
             // sb.AppendFormat("<color=Green>Max Speed<color=White>: {0} | <color=Green>TWR<color=White>: {1}\n", speed, TWRs);
@@ -201,17 +203,17 @@ namespace ShipPoints
 
             // Battle Stats
             sb.AppendLine("<color=Orange>----Battle Stats----");
-            sb.AppendFormat("<color=Green>Battle Points<color=White>: {0}\n", shipTracker.BattlePoints);
+            sb.AppendFormat("<color=Green>Battle Points<color=White>: {0}\n", _shipTracker.BattlePoints);
             sb.AppendFormat(
                 "<color=Orange>[<color=Red> {0}% <color=Orange>| <color=Green>{1}% <color=Orange>| <color=DeepSkyBlue>{2}% <color=Orange>| <color=LightGray>{3}% <color=Orange>]\n",
-                Math.Round(shipTracker.OffensivePointsRatio * 100f), Math.Round(shipTracker.PowerPointsRatio * 100f),
-                Math.Round(shipTracker.MovementPointsRatio * 100f),
-                Math.Round(shipTracker.RemainingPointsRatio * 100f));
+                Math.Round(_shipTracker.OffensivePointsRatio * 100f), Math.Round(_shipTracker.PowerPointsRatio * 100f),
+                Math.Round(_shipTracker.MovementPointsRatio * 100f),
+                Math.Round(_shipTracker.RemainingPointsRatio * 100f));
             sb.Append(
-                $"<color=Green>PD Investment<color=White>: <color=Orange>( <color=white>{shipTracker.PointDefensePointsRatio * 100:N0}% <color=Orange>|<color=Crimson> {(shipTracker.OffensivePoints == 0 ? 0 : (float)shipTracker.PointDefensePoints / shipTracker.OffensivePoints) * 100f:N0}%<color=Orange> )\n");
+                $"<color=Green>PD Investment<color=White>: <color=Orange>( <color=white>{_shipTracker.PointDefensePointsRatio * 100:N0}% <color=Orange>|<color=Crimson> {(_shipTracker.OffensivePoints == 0 ? 0 : (float)_shipTracker.PointDefensePoints / _shipTracker.OffensivePoints) * 100f:N0}%<color=Orange> )\n");
             sb.AppendFormat(
                 "<color=Green>Shield Max HP<color=White>: {0} <color=Orange>(<color=White>{1:N0}%<color=Orange>)\n",
-                totalShieldString, shipTracker.CurrentShieldPercent);
+                totalShieldString, _shipTracker.CurrentShieldPercent);
             sb.AppendFormat("<color=Green>Thrust<color=White>: {0}N\n", thrustString);
             sb.AppendFormat("<color=Green>Gyro<color=White>: {0}N\n", gyroString);
             sb.AppendFormat("<color=Green>Power<color=White>: {0}\n", pwr);
