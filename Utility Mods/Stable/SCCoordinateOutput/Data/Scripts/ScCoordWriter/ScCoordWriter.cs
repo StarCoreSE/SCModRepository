@@ -211,7 +211,11 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 var blockList = new List<IMySlimBlock>();
                 grid.GetBlocks(blockList);
                 var currentBlockCount = blockList.Count;
-                var healthPercent = currentBlockCount / element.initialBlockCount;
+                if (currentBlockCount > element.initialBlockCount)
+                {
+                    element.initialBlockCount = currentBlockCount;
+                }
+                var healthPercent = (float)currentBlockCount / element.initialBlockCount;
                 var owner = GetGridOwner(grid);
                 var faction = GetFactionName(owner);
 
