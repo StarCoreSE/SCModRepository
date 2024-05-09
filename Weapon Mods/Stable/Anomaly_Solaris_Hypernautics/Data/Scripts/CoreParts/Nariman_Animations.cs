@@ -23,7 +23,7 @@ namespace Scripts
         //StopFiring,
         //StopTracking
 
-        private AnimationDef K_SA_GaussAPAnimations => new AnimationDef
+        private AnimationDef Nariman_Dart_Animation => new AnimationDef
         {
         
 		//EventParticles = new Dictionary<PartAnimationSetDef.EventTriggers, EventParticle[]>
