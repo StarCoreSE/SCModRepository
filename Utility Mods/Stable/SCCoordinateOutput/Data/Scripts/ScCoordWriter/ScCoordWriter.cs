@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Sandbox.Game;
@@ -18,14 +19,14 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
     {
         public static ScCoordWriter Instance;
         private ushort NetworkId;
-        private List<IMyCubeGrid> TrackedGrids;
+        private List<TrackedItem> TrackedItems;
         private TextWriter Writer;
         private bool Recording;
 
         private const int Version = 1;
         private readonly string[] _columns =
         {
-            "kind", "name", "owner", "faction", "health", "position", "rotation"
+            "kind", "name", "owner", "faction", "entityId", "health", "position", "rotation"
         };
 
         private const string Extension = ".scc";
@@ -33,6 +34,18 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         public string Usage = $"Usage: {CommandPrefix} [stop|start]";
 
         private int TickCounter = 0;
+
+        private class TrackedItem
+        {
+            public object item;
+            public int initialBlockCount;
+
+            public TrackedItem(object item, int initialBlockCount = 1)
+            {
+                this.item = item;
+                this.initialBlockCount = initialBlockCount;
+            }
+        }
 
         public override void LoadData()
         {
@@ -47,30 +60,18 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(NetworkId, ReceivedPacket);
             }
 
-            var fileName = $"{DateTime.Now:dd-MM-yyyy HHmm}{Extension}";
-
-            try
+            TrackedItems = new List<TrackedItem>();
+            MyAPIGateway.Entities.GetEntities(null, entity =>
             {
-                Writer = MyAPIGateway.Utilities.WriteFileInWorldStorage(fileName, typeof(ScCoordWriter));
-                Writer.NewLine = "\n";
-                MyVisualScriptLogicProvider.SendChatMessage($"Global grid tracker file created");
-                Writer.WriteLine($"version {Version}");
-                Writer.WriteLine(string.Join(",", _columns));
-            }
-            catch (Exception ex)
-            {
-                MyLog.Default.WriteLine("Failed to create grid tracker file.");
-                MyVisualScriptLogicProvider.SendChatMessage("Failed to create grid tracker file.");
-                MyLog.Default.WriteLine(ex);
-            }
-
-            TrackedGrids = new List<IMyCubeGrid>();
-            MyAPIGateway.Entities.GetEntities(null, e =>
-            {
-                var grid = e as IMyCubeGrid;
-                if (e != null)
+                if (ShouldBeTracked(entity))
                 {
-                    TrackedGrids.Add(grid);
+                    var grid = entity as IMyCubeGrid;
+                    if (grid != null)
+                    {
+                        var blocks = new List<IMySlimBlock>();
+                        grid.GetBlocks(blocks);
+                        TrackedItems.Add(new TrackedItem(grid, blocks.Count));
+                    }
                 }
                 return false;
             });
@@ -80,22 +81,42 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
 
         private void OnEntityAdd(IMyEntity entity)
         {
-            var grid = entity as IMyCubeGrid;
-            if (grid == null) return;
-            TrackedGrids.Add(grid);
+            if (ShouldBeTracked(entity))
+            {
+                var grid = entity as IMyCubeGrid;
+                if (grid != null)
+                {
+                    var blocks = new List<IMySlimBlock>();
+                    grid.GetBlocks(blocks);
+                    TrackedItems.Add(new TrackedItem(grid, blocks.Count));
+                }
+            }
         }
 
         private void OnEntityRemove(IMyEntity entity)
         {
+            for (var i = 0; i < TrackedItems.Count; ++i)
+            {
+                var cur = TrackedItems[i];
+                var grid = cur.item as IMyCubeGrid;
+                if (grid != null && grid.EntityId == entity.EntityId)
+                {
+                    TrackedItems.RemoveAt(i);
+                    break;
+                }
+            }
+        }
+
+        private bool ShouldBeTracked(IMyEntity entity)
+        {
             var grid = entity as IMyCubeGrid;
-            if (grid == null) return;
-            TrackedGrids.Remove(grid);
+            return grid != null && !grid.IsStatic;
         }
 
         protected override void UnloadData()
         {
             Writer.Close();
-            TrackedGrids.Clear();
+            TrackedItems.Clear();
             if (!MyAPIGateway.Utilities.IsDedicated)
             {
                 MyAPIGateway.Utilities.MessageEnteredSender -= HandleMessage;
@@ -110,22 +131,41 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
 
         public void Start()
         {
+            var fileName = $"{DateTime.Now:dd-MM-yyyy HHmm}{Extension}";
+
+            try
+            {
+                Writer = MyAPIGateway.Utilities.WriteFileInWorldStorage(fileName, typeof(ScCoordWriter));
+                Writer.NewLine = "\n";
+                MyVisualScriptLogicProvider.SendChatMessage("Global grid tracker file created");
+                Writer.WriteLine($"version {Version}");
+                Writer.WriteLine(string.Join(",", _columns));
+            }
+            catch (Exception ex)
+            {
+                MyLog.Default.WriteLine("Failed to create grid tracker file.");
+                MyVisualScriptLogicProvider.SendChatMessage("Failed to create grid tracker file.");
+                MyLog.Default.WriteLine(ex);
+            }
+
             Recording = true;
             MyAPIGateway.Multiplayer.SendMessageToServer(NetworkId, new byte[] { 1 });
+            MyAPIGateway.Utilities.ShowNotification("Recording started.");
         }
 
         public void Stop()
         {
             Recording = false;
             MyAPIGateway.Multiplayer.SendMessageToServer(NetworkId, new byte[] { 0 });
+            MyAPIGateway.Utilities.ShowNotification("Recording ended.");
         }
 
         public override void UpdateAfterSimulation()
         {
             if (!Recording) return;
-            if (TrackedGrids == null)
+            if (TrackedItems == null)
             {
-                MyVisualScriptLogicProvider.SendChatMessage("TrackedGrids is null");
+                MyVisualScriptLogicProvider.SendChatMessage("TrackedItems is null");
                 return;
             }
 
@@ -134,14 +174,15 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
 
             // TODO: Use seconds, milliseconds, frames, or ticks since start of recording instead?
             Writer.WriteLine($"start_block,{DateTime.Now}");
-            TrackedGrids.ForEach(grid =>
+            TrackedItems.ForEach(element =>
             {
-                if (grid == null)
+                if (element.item == null)
                 {
-                    MyLog.Default.WriteLine("null grid in TrackedGrids");
+                    MyLog.Default.WriteLine("null item in TrackedItems");
                     return;
                 }
 
+                var grid = element.item as IMyCubeGrid;
 
                 // TODO: Just use the grid's matrix and forget cockpits?
                 IMyCockpit Cockpit = null;
@@ -167,11 +208,18 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 var position = grid.GetPosition();
                 var rotation = Quaternion.CreateFromForwardUp(forwardDirection, grid.WorldMatrix.Up);
 
-                var healthPercent = 1.0f;
+                var blockList = new List<IMySlimBlock>();
+                grid.GetBlocks(blockList);
+                var currentBlockCount = blockList.Count;
+                if (currentBlockCount > element.initialBlockCount)
+                {
+                    element.initialBlockCount = currentBlockCount;
+                }
+                var healthPercent = (float)currentBlockCount / element.initialBlockCount;
                 var owner = GetGridOwner(grid);
                 var faction = GetFactionName(owner);
 
-                Writer.WriteLine($"grid,{grid.CustomName},{owner?.DisplayName ?? "Unowned"},{faction},{SmallDouble(healthPercent)},{SmallVector3D(position)},{SmallQuaternion(rotation)}");
+                Writer.WriteLine($"grid,{grid.CustomName},{owner?.DisplayName ?? "Unowned"},{faction},{grid.EntityId},{SmallDouble(healthPercent)},{SmallVector3D(position)},{SmallQuaternion(rotation)}");
             });
             Writer.Flush();
         }
@@ -226,6 +274,14 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             if (data != null && data.Length == 1)
             {
                 Recording = data[0] == 1;
+                if (Recording)
+                {
+                    Start();
+                }
+                else
+                {
+                    Stop();
+                }
             }
         }
 
