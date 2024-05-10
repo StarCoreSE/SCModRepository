@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ProtoBuf;
 using VRageMath;
+
 //using static CoreSystems.Support.WeaponDefinition.AmmoDef.GraphicDef.LineDef;
 //using static CoreSystems.Support.WeaponDefinition.AmmoDef.TrajectoryDef.ApproachDef;
 //using static CoreSystems.Support.WeaponDefinition.AnimationDef.PartAnimationSetDef;
@@ -12,31 +13,31 @@ namespace CoreSystems.Api
         [ProtoContract]
         public class ContainerDefinition
         {
-            [ProtoMember(1)] internal WeaponDefinition[] WeaponDefs;
             [ProtoMember(2)] internal ArmorDefinition[] ArmorDefs;
-            [ProtoMember(3)] internal UpgradeDefinition[] UpgradeDefs;
             [ProtoMember(4)] internal SupportDefinition[] SupportDefs;
+            [ProtoMember(3)] internal UpgradeDefinition[] UpgradeDefs;
+            [ProtoMember(1)] internal WeaponDefinition[] WeaponDefs;
         }
 
         [ProtoContract]
         public class ConsumeableDef
         {
-            [ProtoMember(1)] internal string ItemName;
-            [ProtoMember(2)] internal string InventoryItem;
-            [ProtoMember(3)] internal int ItemsNeeded;
-            [ProtoMember(4)] internal bool Hybrid;
             [ProtoMember(5)] internal float EnergyCost;
+            [ProtoMember(4)] internal bool Hybrid;
+            [ProtoMember(2)] internal string InventoryItem;
+            [ProtoMember(1)] internal string ItemName;
+            [ProtoMember(3)] internal int ItemsNeeded;
             [ProtoMember(6)] internal float Strength;
         }
 
         [ProtoContract]
         public class UpgradeDefinition
         {
-            [ProtoMember(1)] internal ModelAssignmentsDef Assignments;
-            [ProtoMember(2)] internal HardPointDef HardPoint;
             [ProtoMember(3)] internal WeaponDefinition.AnimationDef Animations;
-            [ProtoMember(4)] internal string ModPath;
+            [ProtoMember(1)] internal ModelAssignmentsDef Assignments;
             [ProtoMember(5)] internal ConsumeableDef[] Consumable;
+            [ProtoMember(2)] internal HardPointDef HardPoint;
+            [ProtoMember(4)] internal string ModPath;
 
             [ProtoContract]
             public struct ModelAssignmentsDef
@@ -71,13 +72,12 @@ namespace CoreSystems.Api
                 {
                     public enum HardwareType
                     {
-                        Default,
+                        Default
                     }
 
                     [ProtoMember(1)] internal float InventorySize;
                     [ProtoMember(2)] internal HardwareType Type;
                     [ProtoMember(3)] internal int BlockDistance;
-
                 }
 
                 [ProtoContract]
@@ -97,12 +97,12 @@ namespace CoreSystems.Api
         [ProtoContract]
         public class SupportDefinition
         {
-            [ProtoMember(1)] internal ModelAssignmentsDef Assignments;
-            [ProtoMember(2)] internal HardPointDef HardPoint;
             [ProtoMember(3)] internal WeaponDefinition.AnimationDef Animations;
-            [ProtoMember(4)] internal string ModPath;
+            [ProtoMember(1)] internal ModelAssignmentsDef Assignments;
             [ProtoMember(5)] internal ConsumeableDef[] Consumable;
             [ProtoMember(6)] internal SupportEffect Effect;
+            [ProtoMember(2)] internal HardPointDef HardPoint;
+            [ProtoMember(4)] internal string ModPath;
 
             [ProtoContract]
             public struct ModelAssignmentsDef
@@ -117,6 +117,7 @@ namespace CoreSystems.Api
                     [ProtoMember(3)] internal string IconName;
                 }
             }
+
             [ProtoContract]
             public struct HardPointDef
             {
@@ -158,7 +159,7 @@ namespace CoreSystems.Api
                     Armor,
                     ArmorPlus,
                     PlusFunctional,
-                    All,
+                    All
                 }
 
                 public enum Protections
@@ -167,7 +168,7 @@ namespace CoreSystems.Api
                     EnergeticProt,
                     GenericProt,
                     Regenerate,
-                    Structural,
+                    Structural
                 }
 
                 [ProtoMember(1)] internal Protections Protection;
@@ -187,28 +188,29 @@ namespace CoreSystems.Api
         [ProtoContract]
         public class ArmorDefinition
         {
+            [ProtoMember(4)] internal double EnergeticResistance;
+            [ProtoMember(2)] internal ArmorType Kind;
+            [ProtoMember(3)] internal double KineticResistance;
+
+            [ProtoMember(1)] internal string[] SubtypeIds;
+
             internal enum ArmorType
             {
                 Light,
                 Heavy,
-                NonArmor,
+                NonArmor
             }
-
-            [ProtoMember(1)] internal string[] SubtypeIds;
-            [ProtoMember(2)] internal ArmorType Kind;
-            [ProtoMember(3)] internal double KineticResistance;
-            [ProtoMember(4)] internal double EnergeticResistance;
         }
 
         [ProtoContract]
         public class WeaponDefinition
         {
-            [ProtoMember(1)] internal ModelAssignmentsDef Assignments;
-            [ProtoMember(2)] internal TargetingDef Targeting;
-            [ProtoMember(3)] internal AnimationDef Animations;
-            [ProtoMember(4)] internal HardPointDef HardPoint;
             [ProtoMember(5)] internal AmmoDef[] Ammos;
+            [ProtoMember(3)] internal AnimationDef Animations;
+            [ProtoMember(1)] internal ModelAssignmentsDef Assignments;
+            [ProtoMember(4)] internal HardPointDef HardPoint;
             [ProtoMember(6)] internal string ModPath;
+            [ProtoMember(2)] internal TargetingDef Targeting;
             [ProtoMember(7)] internal Dictionary<string, UpgradeValues[]> Upgrades;
 
             [ProtoContract]
@@ -297,14 +299,14 @@ namespace CoreSystems.Api
                         BroadCast,
                         Relay,
                         Jamming,
-                        RelayAndBroadCast,
+                        RelayAndBroadCast
                     }
 
                     public enum SecurityMode
                     {
                         Public,
                         Private,
-                        Secure,
+                        Secure
                     }
 
                     [ProtoMember(1)] internal bool StoreTargets;
@@ -349,7 +351,7 @@ namespace CoreSystems.Api
                         EmptyOnGameLoad,
                         StopFiring,
                         StopTracking,
-                        LockDelay,
+                        LockDelay
                     }
 
                     public enum ResetConditions
@@ -371,7 +373,6 @@ namespace CoreSystems.Api
                     [ProtoMember(8)] internal EventTriggers[] TriggerOnce;
                     [ProtoMember(9)] internal EventTriggers[] ResetEmissives;
                     [ProtoMember(10)] internal ResetConditions Resets;
-
                 }
 
                 [ProtoContract]
@@ -384,6 +385,7 @@ namespace CoreSystems.Api
                     [ProtoMember(5)] internal Vector4[] Colors;
                     [ProtoMember(6)] internal float[] IntensityRange;
                 }
+
                 [ProtoContract]
                 public struct EventParticle
                 {
@@ -394,6 +396,7 @@ namespace CoreSystems.Api
                     [ProtoMember(5)] internal uint LoopDelay;
                     [ProtoMember(6)] internal bool ForceStop;
                 }
+
                 [ProtoContract]
                 internal struct RelMove
                 {
@@ -404,7 +407,7 @@ namespace CoreSystems.Api
                         ExpoGrowth,
                         Delay,
                         Show, //instant or fade
-                        Hide, //instant or fade
+                        Hide //instant or fade
                     }
 
                     [ProtoMember(1)] internal MoveType MovementType;
@@ -456,7 +459,7 @@ namespace CoreSystems.Api
                     Off,
                     Basic,
                     Accurate,
-                    Advanced,
+                    Advanced
                 }
 
                 [ProtoMember(1)] internal string PartName;
@@ -539,7 +542,7 @@ namespace CoreSystems.Api
                     {
                         BlockWeapon = 0,
                         HandWeapon = 1,
-                        Phantom = 6,
+                        Phantom = 6
                     }
 
                     [ProtoMember(1)] internal float RotateRate;
@@ -608,37 +611,37 @@ namespace CoreSystems.Api
             [ProtoContract]
             public class AmmoDef
             {
+                [ProtoMember(17)] internal AmmoAudioDef AmmoAudio;
+                [ProtoMember(16)] internal GraphicDef AmmoGraphics;
                 [ProtoMember(1)] internal string AmmoMagazine;
                 [ProtoMember(2)] internal string AmmoRound;
-                [ProtoMember(3)] internal bool HybridRound;
-                [ProtoMember(4)] internal float EnergyCost;
-                [ProtoMember(5)] internal float BaseDamage;
-                [ProtoMember(6)] internal float Mass;
-                [ProtoMember(7)] internal float Health;
-                [ProtoMember(8)] internal float BackKickForce;
-                [ProtoMember(9)] internal DamageScaleDef DamageScales;
-                [ProtoMember(10)] internal ShapeDef Shape;
-                [ProtoMember(11)] internal ObjectsHitDef ObjectsHit;
-                [ProtoMember(12)] internal TrajectoryDef Trajectory;
                 [ProtoMember(13)] internal AreaDamageDef AreaEffect;
+                [ProtoMember(24)] internal AreaOfDamageDef AreaOfDamage;
+                [ProtoMember(8)] internal float BackKickForce;
+                [ProtoMember(5)] internal float BaseDamage;
                 [ProtoMember(14)] internal BeamDef Beams;
-                [ProtoMember(15)] internal FragmentDef Fragment;
-                [ProtoMember(16)] internal GraphicDef AmmoGraphics;
-                [ProtoMember(17)] internal AmmoAudioDef AmmoAudio;
-                [ProtoMember(18)] internal bool HardPointUsable;
-                [ProtoMember(19)] internal PatternDef Pattern;
-                [ProtoMember(20)] internal int EnergyMagazineSize;
+                [ProtoMember(9)] internal DamageScaleDef DamageScales;
                 [ProtoMember(21)] internal float DecayPerShot;
                 [ProtoMember(22)] internal EjectionDef Ejection;
-                [ProtoMember(23)] internal bool IgnoreWater;
-                [ProtoMember(24)] internal AreaOfDamageDef AreaOfDamage;
+                [ProtoMember(4)] internal float EnergyCost;
+                [ProtoMember(20)] internal int EnergyMagazineSize;
                 [ProtoMember(25)] internal EwarDef Ewar;
-                [ProtoMember(26)] internal bool IgnoreVoxels;
-                [ProtoMember(27)] internal bool Synchronize;
+                [ProtoMember(15)] internal FragmentDef Fragment;
+                [ProtoMember(18)] internal bool HardPointUsable;
+                [ProtoMember(7)] internal float Health;
                 [ProtoMember(28)] internal double HeatModifier;
-                [ProtoMember(29)] internal bool NpcSafe;
-                [ProtoMember(30)] internal SynchronizeDef Sync;
+                [ProtoMember(3)] internal bool HybridRound;
+                [ProtoMember(26)] internal bool IgnoreVoxels;
+                [ProtoMember(23)] internal bool IgnoreWater;
+                [ProtoMember(6)] internal float Mass;
                 [ProtoMember(31)] internal bool NoGridOrArmorScaling;
+                [ProtoMember(29)] internal bool NpcSafe;
+                [ProtoMember(11)] internal ObjectsHitDef ObjectsHit;
+                [ProtoMember(19)] internal PatternDef Pattern;
+                [ProtoMember(10)] internal ShapeDef Shape;
+                [ProtoMember(30)] internal SynchronizeDef Sync;
+                [ProtoMember(27)] internal bool Synchronize;
+                [ProtoMember(12)] internal TrajectoryDef Trajectory;
 
                 [ProtoContract]
                 public struct SynchronizeDef
@@ -651,7 +654,6 @@ namespace CoreSystems.Api
                 [ProtoContract]
                 public struct DamageScaleDef
                 {
-
                     [ProtoMember(1)] internal float MaxIntegrity;
                     [ProtoMember(2)] internal bool DamageVoxels;
                     [ProtoMember(3)] internal float Characters;
@@ -696,7 +698,7 @@ namespace CoreSystems.Api
                         {
                             NoSkip,
                             Inclusive,
-                            Exclusive,
+                            Exclusive
                         }
 
                         [ProtoMember(1)] internal CustomBlocksDef[] Types;
@@ -710,7 +712,7 @@ namespace CoreSystems.Api
                         internal enum Damage
                         {
                             Energy,
-                            Kinetic,
+                            Kinetic
                         }
 
                         [ProtoMember(1)] internal Damage Base;
@@ -727,7 +729,7 @@ namespace CoreSystems.Api
                             Default,
                             Heal,
                             Bypass,
-                            EmpRetired,
+                            EmpRetired
                         }
 
                         [ProtoMember(1)] internal float Modifier;
@@ -742,7 +744,7 @@ namespace CoreSystems.Api
                         {
                             HitBlock,
                             AllDamagedBlocks,
-                            NoDeform,
+                            NoDeform
                         }
 
                         [ProtoMember(1)] internal DeformTypes DeformType;
@@ -756,7 +758,7 @@ namespace CoreSystems.Api
                     public enum Shapes
                     {
                         LineShape,
-                        SphereShape,
+                        SphereShape
                     }
 
                     [ProtoMember(1)] internal Shapes Shape;
@@ -804,13 +806,14 @@ namespace CoreSystems.Api
                             Normal,
                             Cycle,
                             Chaos,
-                            Wave,
+                            Wave
                         }
+
                         public enum FactionColor
                         {
                             DontUse,
                             Foreground,
-                            Background,
+                            Background
                         }
 
                         [ProtoMember(1)] internal TracerBaseDef Tracer;
@@ -884,7 +887,6 @@ namespace CoreSystems.Api
                     [ProtoContract]
                     public struct DecalDef
                     {
-
                         [ProtoMember(1)] internal int MaxAge;
                         [ProtoMember(2)] internal TextureMapDef[] Map;
 
@@ -933,7 +935,7 @@ namespace CoreSystems.Api
                         {
                             Direct,
                             Lead,
-                            Predict,
+                            Predict
                         }
 
                         [ProtoMember(1)] internal bool Enable;
@@ -957,7 +959,7 @@ namespace CoreSystems.Api
                         Never,
                         Weapon,
                         Fragment,
-                        Both,
+                        Both
                     }
 
 
@@ -978,8 +980,9 @@ namespace CoreSystems.Api
                     public enum SpawnType
                     {
                         Item,
-                        Particle,
+                        Particle
                     }
+
                     [ProtoMember(1)] internal float Speed;
                     [ProtoMember(2)] internal float SpawnChance;
                     [ProtoMember(3)] internal SpawnType Type;
@@ -1006,13 +1009,13 @@ namespace CoreSystems.Api
                         InvCurve,
                         Squeeze,
                         Pooled,
-                        Exponential,
+                        Exponential
                     }
 
                     public enum AoeShape
                     {
                         Round,
-                        Diamond,
+                        Diamond
                     }
 
                     [ProtoMember(1)] internal ByBlockHitDef ByBlockHit;
@@ -1065,13 +1068,13 @@ namespace CoreSystems.Api
                         Dot,
                         Push,
                         Pull,
-                        Tractor,
+                        Tractor
                     }
 
                     public enum EwarMode
                     {
                         Effect,
-                        Field,
+                        Field
                     }
 
                     [ProtoMember(1)] internal bool Enable;
@@ -1109,7 +1112,7 @@ namespace CoreSystems.Api
                             ProjectileOrigin,
                             HitPosition,
                             TargetCenter,
-                            TargetCenterOfMass,
+                            TargetCenterOfMass
                         }
 
                         [ProtoMember(1)] internal Force ForceFrom;
@@ -1140,7 +1143,7 @@ namespace CoreSystems.Api
                         DotField,
                         PushField,
                         PullField,
-                        TractorField,
+                        TractorField
                     }
 
                     [ProtoMember(1)] internal double AreaEffectRadius;
@@ -1191,7 +1194,7 @@ namespace CoreSystems.Api
                                 ProjectileOrigin,
                                 HitPosition,
                                 TargetCenter,
-                                TargetCenterOfMass,
+                                TargetCenterOfMass
                             }
 
                             [ProtoMember(1)] internal Force ForceFrom;
@@ -1252,7 +1255,7 @@ namespace CoreSystems.Api
                         DetectTravelTo,
                         DetectSmart,
                         DetectFixed,
-                        DroneAdvanced,
+                        DroneAdvanced
                     }
 
                     [ProtoMember(1)] internal float MaxTrajectory;
@@ -1310,7 +1313,7 @@ namespace CoreSystems.Api
                             Wait,
                             MoveToPrevious,
                             MoveToNext,
-                            ForceRestart,
+                            ForceRestart
                         }
 
                         public enum Conditions
@@ -1337,7 +1340,7 @@ namespace CoreSystems.Api
                             DistanceFromTarget,
                             DistanceToTarget,
                             DistanceFromEndTrajectory,
-                            DistanceToEndTrajectory,
+                            DistanceToEndTrajectory
                         }
 
                         public enum UpRelativeTo
@@ -1354,7 +1357,7 @@ namespace CoreSystems.Api
                             UpStoredEndLocalPosition,
                             UpRelativeToShooter,
                             UpOriginDirection,
-                            UpElevationDirection,
+                            UpElevationDirection
                         }
 
                         public enum FwdRelativeTo
@@ -1371,7 +1374,7 @@ namespace CoreSystems.Api
                             ForwardStoredStartLocalPosition,
                             ForwardStoredEndLocalPosition,
                             ForwardRelativeToShooter,
-                            ForwardOriginDirection,
+                            ForwardOriginDirection
                         }
 
                         public enum RelativeTo
@@ -1388,7 +1391,7 @@ namespace CoreSystems.Api
                             StoredStartPosition,
                             StoredEndPosition,
                             StoredStartLocalPosition,
-                            StoredEndLocalPosition,
+                            StoredEndLocalPosition
                         }
 
                         public enum ConditionOperators
@@ -1396,7 +1399,7 @@ namespace CoreSystems.Api
                             StartEnd_And,
                             StartEnd_Or,
                             StartAnd_EndOr,
-                            StartOr_EndAnd,
+                            StartOr_EndAnd
                         }
 
                         public enum StageEvents
@@ -1409,13 +1412,12 @@ namespace CoreSystems.Api
                             Refund,
                             StorePositionA,
                             StorePositionB,
-                            StorePositionC,
+                            StorePositionC
                         }
 
                         [ProtoContract]
                         public struct WeightedIdListDef
                         {
-
                             [ProtoMember(1)] public int ApproachId;
                             [ProtoMember(2)] public Randomize Weight;
                             [ProtoMember(3)] public double End1WeightMod;
@@ -1536,5 +1538,4 @@ namespace CoreSystems.Api
             }
         }
     }
-
 }

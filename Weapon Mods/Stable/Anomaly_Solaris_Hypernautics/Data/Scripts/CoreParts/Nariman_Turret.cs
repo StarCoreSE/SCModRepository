@@ -151,8 +151,8 @@ namespace Scripts {
                 {
                     Effect1 = new ParticleDef
                     {
-                        Name = "K_SA_GaussFire", // SubtypeId of muzzle particle effect.
-                        Color = Color(red: 1, green: 2, blue: 0, alpha: 1), // Deprecated, set color in particle sbc.
+                        Name = "", // SubtypeId of muzzle particle effect.
+                        Color = Color(red: 0.1f, green: 0.2f, blue: 0, alpha: 0.1f), // Deprecated, set color in particle sbc.
                         Offset = Vector(x: 0, y: 0, z: 0), // Offsets the effect from the muzzle empty.
 
                         Extras = new ParticleOptionDef
@@ -166,8 +166,8 @@ namespace Scripts {
                     },
                     Effect2 = new ParticleDef
                     {
-                        Name = "K_SA_GaussFire",
-                        Color = Color(red: 1, green: 1, blue: 1, alpha: 1),
+                        Name = "",
+                        Color = Color(red: 0.1f, green: 0.1f, blue: 0.1f, alpha: 0.1f),
                         Offset = Vector(x: 0, y: 0, z: 0),
 
                         Extras = new ParticleOptionDef
@@ -183,7 +183,7 @@ namespace Scripts {
             Ammos = new[] {
                 Nariman_Dart_Round, Nariman_EWAR_Round, // Must list all primary, shrapnel, and pattern ammos.
             },
-            Animations = K_SA_GaussAPAnimations,
+            //Animations = Nariman_Dart_Animation,
             //Upgrades = UpgradeModules,
         };
         // Don't edit below this line.
