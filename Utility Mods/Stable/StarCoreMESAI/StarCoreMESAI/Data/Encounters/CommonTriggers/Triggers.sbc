@@ -1,0 +1,377 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EntityComponents>
+
+  
+    
+<!--I have lost 50% of my total weapons. It's time.-->
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+          <TypeId>Inventory</TypeId>
+          <SubtypeId>WeaponsBelow50</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Trigger]
+        [UseTrigger:true]
+        [MinCooldownMs:10000]
+        [MaxCooldownMs:10001]
+        [Type:ActiveWeaponsPercentage]
+        [PercentageOfWeaponsRemaining:50]
+        [UseFailCondition:true]
+        [Actions:WeaponsBelow50Action]
+        [Actions:ActionRandomRamming]
+
+      </Description>
+      
+    </EntityComponent>
+
+<!--holy fucking SHIT I have flown outside of this <zone>!!-->
+ 
+ <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+          <TypeId>Inventory</TypeId>
+          <SubtypeId>OutOfZone</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Trigger]
+
+        [UseTrigger:true]
+        [Type:OutsideZone]
+        [StartsReady:true]
+        [ZoneName:THELIGHTNINGSPHERE]
+
+        [MinCooldownMs:10000]
+        [MaxCooldownMs:10001]
+
+        [Actions:SCZoneOutAction]
+
+
+      </Description>
+      
+    </EntityComponent>
+
+<!--I am inside the <zone> everything is OK.-->
+ 
+ <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+          <TypeId>Inventory</TypeId>
+          <SubtypeId>InsideZone</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Trigger]
+
+        [UseTrigger:true]
+        [Type:InsideZone]
+        [StartsReady:true]
+        [ZoneName:THELIGHTNINGSPHERE]
+
+        [MinCooldownMs:10000]
+        [MaxCooldownMs:10001]
+
+        [Actions:SCInsideZoneAction]
+
+
+      </Description>
+      
+    </EntityComponent>
+    
+    
+<!--I see the enemy-->
+ 
+     <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+          <TypeId>Inventory</TypeId>
+          <SubtypeId>AcquiredTargetTrigger</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Trigger]
+
+        [UseTrigger:true]
+        [Type:AcquiredTarget]
+
+        [MinCooldownMs:5000]
+        [MaxCooldownMs:5001]
+
+        [Actions:AcquiredTargetAction]
+
+      </Description>
+      
+    </EntityComponent>
+
+<!--I am refreshing my target-->
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>RefreshingTargetTrigger</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Trigger]
+
+        [UseTrigger:true]
+        [Type:Timer]
+
+        [MinCooldownMs:60000]
+        [MaxCooldownMs:120000]
+
+        [Actions:RefreshingTargetAction]
+
+      </Description>
+
+    </EntityComponent>    
+
+<!--I AM TAKING HULL DAMAGE-->
+
+     <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>TakingDamage</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Trigger]
+
+        [UseTrigger:true]
+        [StartsReady:true]
+        [Type:Damage]
+        [DamageTypes:Any]
+        [ExcludedDamageTypes:Environment]
+
+
+        [MinCooldownMs:300000]
+        [MaxCooldownMs:300001]
+
+        [Actions:TakingDamageAction]
+
+      </Description>
+
+    </EntityComponent>
+
+
+<!--check for health-->
+    
+     <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+          <Id>
+            <TypeId>Inventory</TypeId>
+            <SubtypeId>SCHealthCheck</SubtypeId>
+          </Id>
+          <Description>
+
+            [RivalAI Trigger]
+
+            [UseTrigger:true]
+            [Type:HealthPercentage]
+
+            [PercentageOfHealthRemaining:70]
+            [UseFailCondition:true]
+
+            [MinCooldownMs:5000]
+            [MaxCooldownMs:5001]
+
+            [StartsReady:true]
+            [ActionExecution:Random]
+            [Actions:SCHealthCheckAction1]
+
+          </Description>
+
+        </EntityComponent>
+
+<!--RC is dead!-->    
+    
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>RCCompromisedTrigger</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Trigger]
+
+        [UseTrigger:true]
+        [Type:Compromised]
+
+        [MinCooldownMs:60000]
+        [MaxCooldownMs:60001]
+
+        [StartsReady:true]
+        [ActionExecution:Random]
+        [Actions:CompromisedAction]
+
+      </Description>
+
+    </EntityComponent>
+
+<!--RAM CONSTANTLY-->
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>RamConstantlyTrigger</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Trigger]
+
+        [UseTrigger:true]
+        [Type:TargetNear]
+        [TargetDistance:2000]
+
+
+        [MinCooldownMs:10000]
+        [MaxCooldownMs:10001]
+
+        [StartsReady:true]
+        [ActionExecution:Random]
+        [Actions:RamConstantlyAction]
+
+      </Description>
+
+    </EntityComponent>
+
+<!--I need to pretend to have self preservation-->
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>CowardAIHealthCheckTrigger</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Trigger]
+
+        [UseTrigger:true]
+        [Type:HealthPercentage]
+
+        [PercentageOfHealthRemaining:95]
+        [UseFailCondition:true]
+
+        [MinCooldownMs:60000]
+        [MaxCooldownMs:60001]
+
+        [StartsReady:true]
+        [ActionExecution:Random]
+        [Actions:CowardAIHealthCheckAction]
+
+      </Description>
+
+    </EntityComponent>
+
+    <!--attack thing when close-->
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>CloseRangeAttackTrigger</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Trigger]
+
+        [UseTrigger:true]
+        [Type:TargetNear]
+        [TargetDistance:1500]
+
+
+        [MinCooldownMs:10000]
+        [MaxCooldownMs:10001]
+
+        [StartsReady:true]
+        [ActionExecution:Random]
+        [Actions:CloseRangeAttackAction]
+
+      </Description>
+
+    </EntityComponent>
+
+    <!--panic when close-->
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>CloseRangePanicTrigger</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Trigger]
+
+        [UseTrigger:true]
+        [Type:TargetNear]
+        [TargetDistance:1500]
+
+
+        [MinCooldownMs:10000]
+        [MaxCooldownMs:10001]
+
+        [StartsReady:true]
+        [ActionExecution:Random]
+        [Actions:CloseRangePanicAction]
+
+      </Description>
+
+    </EntityComponent>
+
+    <!--just fire your fucking guns fam-->
+
+    <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>ForceFireTrigger</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Trigger]
+
+        [UseTrigger:true]
+        [Type:TargetNear]
+        [TargetDistance:15000]
+
+
+        [MinCooldownMs:10000]
+        [MaxCooldownMs:10001]
+
+        [StartsReady:true]
+        [ActionExecution:Random]
+        [Actions:ForceFireAction]
+
+      </Description>
+
+    </EntityComponent>
+
+
+
+    <!--greatdying special behavior-->
+    
+  <EntityComponent xsi:type="MyObjectBuilder_InventoryComponentDefinition">
+      <Id>
+        <TypeId>Inventory</TypeId>
+        <SubtypeId>GreatDyingDeadTrigger</SubtypeId>
+      </Id>
+      <Description>
+
+        [RivalAI Trigger]
+
+        [UseTrigger:true]
+        [Type:Compromised]
+
+        [MinCooldownMs:60000]
+        [MaxCooldownMs:60001]
+
+        [StartsReady:true]
+        [ActionExecution:Random]
+        [Actions:GreatDyingDeadAction]
+
+      </Description>
+
+    </EntityComponent>
+
+   
+    
+
+  </EntityComponents>
+    </Definitions>    
