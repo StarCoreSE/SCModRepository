@@ -36,7 +36,7 @@ namespace Scripts
             AmmoRound = "5-InchHealer", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 8000f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 30000f, // Direct damage; one steel plate is worth 100.
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
@@ -106,7 +106,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 3f, // Multiplier for damage against shields.
+                    Modifier = 6f, // Multiplier for damage against shields.
                     Type = Heal, // Damage vs healing against shields; Default, Heal
                     BypassModifier = 0f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -169,8 +169,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1f,
-                    CustomParticle = "ExplosionSmall",
-                    CustomSound = "ArcWepSmallMissileExpl",
+                    CustomParticle = "",
+                    CustomSound = "",
                 }, 
             },
             Ewar = new EwarDef
@@ -241,7 +241,7 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 3500, // voxel phasing if you go above 5100
+                DesiredSpeed = 4500, // voxel phasing if you go above 5100
                 MaxTrajectory = 6000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 1f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
@@ -340,17 +340,17 @@ namespace Scripts
                     {
                         Enable = true,
                         Length = 5f,
-                        Width = 0.1f,
-                        Color = Color(red: 0.80f, green: 150.20f, blue: 100.6f, alpha: 0.9f),
+                        Width = 1f,
+                        Color = Color(red: 20.55f, green: 20.55f, blue: 5.51f, alpha: 10f),
                     },
                     Trail = new TrailDef
                     {
                         Enable = true,
                         Material = "WeaponLaser",
                         DecayTime = 15,
-                        Color = Color(red: 1.585f, green: 75.062f, blue: 50.01f, alpha: 0.5f),
+                        Color = Color(red: 20.55f, green: 20.55f, blue: 5.51f, alpha: 1f),
                         Back = false,
-                        CustomWidth = 0.1f,
+                        CustomWidth = 0.4f,
                         UseWidthVariance = false,
                         UseColorFade = true,
                     },

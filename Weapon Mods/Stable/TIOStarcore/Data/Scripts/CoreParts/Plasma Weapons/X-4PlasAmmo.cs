@@ -386,9 +386,9 @@ namespace Scripts
                     },
                     OffsetEffect = new OffsetEffectDef
                     {
-                        MaxOffset = 0,// 0 offset value disables this effect
-                        MinLength = 0.2f,
-                        MaxLength = 3,
+                        MaxOffset = 0, // 0 offset value disables this effect //how far away it can be from the straight line
+                        MinLength = 0.2f, //
+                        MaxLength = 3, //segment length
                     },
                 },
             },

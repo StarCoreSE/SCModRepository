@@ -162,10 +162,10 @@
         <SubtypeId>longswordstart</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>3000</MaxDistance>
+      <MaxDistance>1000</MaxDistance>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>1</Volume>
+      <Volume>2</Volume>
       <Loopable>false</Loopable>
       <PreventSynchronization>0</PreventSynchronization>
       <Waves>
@@ -181,10 +181,10 @@
         <SubtypeId>longswordend</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>3000</MaxDistance>
+      <MaxDistance>1000</MaxDistance>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>1</Volume>
+      <Volume>0.9</Volume>
       <Loopable>false</Loopable>
       <PreventSynchronization>0</PreventSynchronization>
       <Waves>
@@ -203,7 +203,7 @@
       </Id>
       <Category>SHOT</Category>
       <MaxDistance>2000</MaxDistance>
-      <Volume>5</Volume>
+      <Volume>3</Volume>
       <Loopable>false</Loopable>
       <PreventSynchronization>0</PreventSynchronization>
       <Waves>
@@ -219,10 +219,10 @@
         <SubtypeId>halobombexplode</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>3000</MaxDistance>
+      <MaxDistance>2000</MaxDistance>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>1</Volume>
+      <Volume>0.75</Volume>
       <Loopable>false</Loopable>
       <PreventSynchronization>0</PreventSynchronization>
       <Waves>
@@ -241,7 +241,7 @@
       <MaxDistance>3000</MaxDistance>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>1</Volume>
+      <Volume>1.2</Volume>
       <Loopable>true</Loopable>
       <PreventSynchronization>0</PreventSynchronization>
       <Waves>
@@ -263,7 +263,7 @@
       <MaxDistance>5000</MaxDistance>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>3</Volume>
+      <Volume>1.5</Volume>
       <Loopable>false</Loopable>
       <!--<PitchVariation>50</PitchVariation>-->
       <PreventSynchronization>0</PreventSynchronization>
@@ -288,7 +288,7 @@
       <MaxDistance>5000</MaxDistance>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>4</Volume>
+      <Volume>3</Volume>
       <Loopable>false</Loopable>
       <PreventSynchronization>0</PreventSynchronization>
       <Waves>
@@ -306,7 +306,7 @@
       <MaxDistance>5000</MaxDistance>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>2</Volume>
+      <Volume>1.5</Volume>
       <Loopable>false</Loopable>
       <PreventSynchronization>0</PreventSynchronization>
       <Waves>
@@ -343,7 +343,7 @@
       <MaxDistance>2000</MaxDistance>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>1</Volume>
+      <Volume>0.75</Volume>
       <Loopable>true</Loopable>
       <PreventSynchronization>0</PreventSynchronization>
       <Waves>

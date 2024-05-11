@@ -131,7 +131,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 4f, // Multiplier for damage against shields.
+                    Modifier = 1f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -519,7 +519,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 4f, // Multiplier for damage against shields.
+                    Modifier = 1f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -656,7 +656,7 @@ namespace Scripts
                 Guidance = Smart, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
                 TargetLossDegree = 0f, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                MaxLifeTime = 240, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
+                MaxLifeTime = 360, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 125, // voxel phasing if you go above 5100
                 MaxTrajectory = 10000f, // Max Distance the projectile or beam can Travel.
@@ -667,9 +667,9 @@ namespace Scripts
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 Smarts = new SmartsDef
                 {
-                    Inaccuracy = 2f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
+                    Inaccuracy = 1f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
                     Aggressiveness = 100f, // controls how responsive tracking is.
-                    MaxLateralThrust = 10f, // controls how sharp the trajectile may turn
+                    MaxLateralThrust = 20f, // controls how sharp the trajectile may turn
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
                     MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
@@ -784,7 +784,7 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "FlakExplosion",
+                HitSound = "",
                 //FragmentSound = "",
                 ShieldHitSound = "",
                 PlayerHitSound = "",
@@ -813,8 +813,8 @@ namespace Scripts
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 100f, // Direct damage; one steel plate is worth 100.
-            Mass = 100000f, // In kilograms; how much force the impact will apply to the target.
-            Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            Mass = 1000f, // In kilograms; how much force the impact will apply to the target.
+            Health = 400, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = false, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
@@ -906,7 +906,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 4f, // Multiplier for damage against shields.
+                    Modifier = 1f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -973,7 +973,7 @@ namespace Scripts
                     NoSound = false,
                     ParticleScale = 1f,
                     CustomParticle = "", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "", // SubtypeID from your Audio SBC, not a filename
+                    CustomSound = "TORPLAND", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
             },
@@ -1040,7 +1040,7 @@ namespace Scripts
             },
             Trajectory = new TrajectoryDef
             {
-                Guidance = None, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
+                Guidance = Smart, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
                 TargetLossDegree = 0f, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
@@ -1054,18 +1054,18 @@ namespace Scripts
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 Smarts = new SmartsDef
                 {
-                    Inaccuracy = 0f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
-                    Aggressiveness = 0f, // controls how responsive tracking is.
-                    MaxLateralThrust = 0, // controls how sharp the trajectile may turn
+                    Inaccuracy = 1f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
+                    Aggressiveness = 100f, // controls how responsive tracking is.
+                    MaxLateralThrust = 20f, // controls how sharp the trajectile may turn
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
                     MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    OverideTarget = true, // when set to true ammo picks its own target, does not use hardpoint's.
+                    OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
                     MaxTargets = 0, // Number of targets allowed before ending, 0 = unlimited
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
                     Roam = false, // Roam current area after target loss
                     KeepAliveAfterTargetLoss = false, // Whether to stop early death of projectile on target loss
                     OffsetRatio = 0f, // The ratio to offset the random direction (0 to 1) 
-                    OffsetTime = 0, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
+                    OffsetTime = 120, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
                 },
                 Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
                 {
@@ -1171,7 +1171,7 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "FlakExplosion",
+                HitSound = "TORPLAND",
                 //FragmentSound = "",
                 ShieldHitSound = "",
                 PlayerHitSound = "",

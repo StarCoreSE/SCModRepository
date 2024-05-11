@@ -21,7 +21,26 @@
         <Capacity>1</Capacity>
         <AmmoDefinitionId Subtype="MacroCannonAmmo" />
       </AmmoMagazine>
-      
+
+      <AmmoMagazine>
+        <Id>
+          <TypeId>AmmoMagazine</TypeId>
+          <SubtypeId>AegisFlakMag</SubtypeId>
+        </Id>
+        <DisplayName>Aegis Flak Ammo Box</DisplayName>
+        <Icon>Textures\GUI\Icons\ammo\Ammo_Box.dds</Icon>
+        <Size>
+          <X>0.25</X>
+          <Y>0.2</Y>
+          <Z>0.2</Z>
+        </Size>
+        <Mass>40</Mass>
+        <Volume>20</Volume>
+        <Model>Models\Ammo\Ammo_Box.mwm</Model>
+        <PhysicalMaterial>Ammo</PhysicalMaterial>
+        <Capacity>200</Capacity>
+        <AmmoDefinitionId Subtype="AegisFlakAmmo" />
+      </AmmoMagazine>
       
       <AmmoMagazine>
             <Id>
@@ -122,6 +141,86 @@
         <PhysicalMaterial>Ammo</PhysicalMaterial>
         <Capacity>1</Capacity>
         <AmmoDefinitionId Subtype="NovaGravAmmo" />
+      </AmmoMagazine>
+
+      <AmmoMagazine>
+        <Id>
+          <TypeId>AmmoMagazine</TypeId>
+          <SubtypeId>PlasmaTorp</SubtypeId>
+        </Id>
+        <DisplayName>Plasma Warhead Torpedo</DisplayName>
+        <Icon>Textures\icons\GothicTorpLauncher.dds</Icon>
+        <Size>
+          <X>1</X>
+          <Y>1</Y>
+          <Z>1</Z>
+        </Size>
+        <Mass>60</Mass>
+        <Volume>200</Volume>
+        <Model>Models\Cubes\GothicTorp.mwm</Model>
+        <PhysicalMaterial>Ammo</PhysicalMaterial>
+        <Capacity>1</Capacity>
+        <AmmoDefinitionId Subtype="PlasmaTorp" />
+      </AmmoMagazine>
+
+      <AmmoMagazine>
+        <Id>
+          <TypeId>AmmoMagazine</TypeId>
+          <SubtypeId>ShortBurnTorp</SubtypeId>
+        </Id>
+        <DisplayName>Short Burn Plasma Torpedo</DisplayName>
+        <Icon>Textures\icons\GothicTorpLauncher.dds</Icon>
+        <Size>
+          <X>1</X>
+          <Y>1</Y>
+          <Z>1</Z>
+        </Size>
+        <Mass>60</Mass>
+        <Volume>200</Volume>
+        <Model>Models\Cubes\GothicTorp.mwm</Model>
+        <PhysicalMaterial>Ammo</PhysicalMaterial>
+        <Capacity>1</Capacity>
+        <AmmoDefinitionId Subtype="ShortBurnTorp" />
+      </AmmoMagazine>
+
+      <AmmoMagazine>
+        <Id>
+          <TypeId>AmmoMagazine</TypeId>
+          <SubtypeId>MeltaTorp</SubtypeId>
+        </Id>
+        <DisplayName>Melta Warhead Torpedo</DisplayName>
+        <Icon>Textures\icons\GothicTorpLauncher.dds</Icon>
+        <Size>
+          <X>1</X>
+          <Y>1</Y>
+          <Z>1</Z>
+        </Size>
+        <Mass>60</Mass>
+        <Volume>200</Volume>
+        <Model>Models\Cubes\GothicTorp.mwm</Model>
+        <PhysicalMaterial>Ammo</PhysicalMaterial>
+        <Capacity>1</Capacity>
+        <AmmoDefinitionId Subtype="MeltaTorp" />
+      </AmmoMagazine>
+
+      <AmmoMagazine>
+        <Id>
+          <TypeId>AmmoMagazine</TypeId>
+          <SubtypeId>VortexTorp</SubtypeId>
+        </Id>
+        <DisplayName>Vortex Warhead Torpedo</DisplayName>
+        <Icon>Textures\icons\GothicTorpLauncher.dds</Icon>
+        <Size>
+          <X>1</X>
+          <Y>1</Y>
+          <Z>1</Z>
+        </Size>
+        <Mass>60</Mass>
+        <Volume>200</Volume>
+        <Model>Models\Cubes\GothicTorp.mwm</Model>
+        <PhysicalMaterial>Ammo</PhysicalMaterial>
+        <Capacity>1</Capacity>
+        <AmmoDefinitionId Subtype="VortexTorp" />
       </AmmoMagazine>
 
     </AmmoMagazines>

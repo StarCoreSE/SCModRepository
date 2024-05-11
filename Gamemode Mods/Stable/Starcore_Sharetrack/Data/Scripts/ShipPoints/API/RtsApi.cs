@@ -1,19 +1,25 @@
-﻿using Sandbox.ModAPI;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Sandbox.ModAPI;
 using VRage.Game.ModAPI;
-using VRage.Utils;
 
 namespace RelativeTopSpeed
 {
     public class RtsApi
     {
         private const long ChannelId = 2772681332;
-        public bool IsReady { get; private set; }
+        private Func<IMyCubeGrid, float[]> _GetAcceleration;
+        private Func<IMyCubeGrid, float[]> _GetAccelerationByDirection;
+        private Func<IMyCubeGrid, float[]> _GetBoost;
+        private Func<IMyCubeGrid, float> _GetCruiseSpeed;
+        private Func<IMyCubeGrid, float> _GetMaxSpeed;
+        private Func<IMyCubeGrid, float> _GetNegativeInfluence;
+        private Func<IMyCubeGrid, float> _GetReducedAngularSpeed;
+
+        private bool isRegistered;
 
         private Action ReadyCallback;
-
-        private bool isRegistered = false;
+        public bool IsReady { get; private set; }
 
         public void Load(Action readyCallback = null)
         {
@@ -55,7 +61,8 @@ namespace RelativeTopSpeed
             ReadyCallback?.Invoke();
         }
 
-        private void AssignMethod<T>(IReadOnlyDictionary<string, Delegate> delegates, string name, ref T field) where T : class
+        private void AssignMethod<T>(IReadOnlyDictionary<string, Delegate> delegates, string name, ref T field)
+            where T : class
         {
             if (delegates == null)
             {
@@ -75,49 +82,63 @@ namespace RelativeTopSpeed
         }
 
         /// <summary>
-        /// Returns the cruising speed of the grid.
+        ///     Returns the cruising speed of the grid.
         /// </summary>
-        public float GetCruiseSpeed(IMyCubeGrid grid) => _GetCruiseSpeed.Invoke(grid);
-        private Func<IMyCubeGrid, float> _GetCruiseSpeed;
+        public float GetCruiseSpeed(IMyCubeGrid grid)
+        {
+            return _GetCruiseSpeed.Invoke(grid);
+        }
 
         /// <summary>
-        /// Gets the maximum possible speed (cruise speed + max boost)
+        ///     Gets the maximum possible speed (cruise speed + max boost)
         /// </summary>
-        public float GetMaxSpeed(IMyCubeGrid grid) => _GetMaxSpeed.Invoke(grid);
-        private Func<IMyCubeGrid, float> _GetMaxSpeed;
+        public float GetMaxSpeed(IMyCubeGrid grid)
+        {
+            return _GetMaxSpeed.Invoke(grid);
+        }
 
         /// <summary>
-        /// Returns 4 values: forward boost, min, average, max
+        ///     Returns 4 values: forward boost, min, average, max
         /// </summary>
-        public float[] GetBoost(IMyCubeGrid grid) => _GetBoost.Invoke(grid);
-        private Func<IMyCubeGrid, float[]> _GetBoost;
+        public float[] GetBoost(IMyCubeGrid grid)
+        {
+            return _GetBoost.Invoke(grid);
+        }
 
         /// <summary>
-        /// Returns 4 values: forward accel, min, average, max
+        ///     Returns 4 values: forward accel, min, average, max
         /// </summary>
-        public float[] GetAcceleration(IMyCubeGrid grid) => _GetAcceleration.Invoke(grid);
-        private Func<IMyCubeGrid, float[]> _GetAcceleration;
+        public float[] GetAcceleration(IMyCubeGrid grid)
+        {
+            return _GetAcceleration.Invoke(grid);
+        }
 
         /// <summary>
-        /// Uses Base6Directions.Direction
-        /// forward = reverse accel
-        /// backward = forward accel
-        /// left = right accel
-        /// ...
+        ///     Uses Base6Directions.Direction
+        ///     forward = reverse accel
+        ///     backward = forward accel
+        ///     left = right accel
+        ///     ...
         /// </summary>
-        public float[] GetAccelerationByDirection(IMyCubeGrid grid) => _GetAccelerationByDirection.Invoke(grid);
-        private Func<IMyCubeGrid, float[]> _GetAccelerationByDirection;
+        public float[] GetAccelerationByDirection(IMyCubeGrid grid)
+        {
+            return _GetAccelerationByDirection.Invoke(grid);
+        }
 
         /// <summary>
-        /// Returns the negative influence for the specified grid.
+        ///     Returns the negative influence for the specified grid.
         /// </summary>
-        public float GetNegativeInfluence(IMyCubeGrid grid) => _GetNegativeInfluence.Invoke(grid);
-        private Func<IMyCubeGrid, float> _GetNegativeInfluence;
+        public float GetNegativeInfluence(IMyCubeGrid grid)
+        {
+            return _GetNegativeInfluence.Invoke(grid);
+        }
 
         /// <summary>
-        /// Returns the reduced angular speed for the specified grid.
+        ///     Returns the reduced angular speed for the specified grid.
         /// </summary>
-        public float GetReducedAngularSpeed(IMyCubeGrid grid) => _GetReducedAngularSpeed.Invoke(grid);
-        private Func<IMyCubeGrid, float> _GetReducedAngularSpeed;
+        public float GetReducedAngularSpeed(IMyCubeGrid grid)
+        {
+            return _GetReducedAngularSpeed.Invoke(grid);
+        }
     }
 }

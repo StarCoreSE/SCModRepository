@@ -154,7 +154,7 @@ namespace Scripts {
                 {
                     Effect1 = new ParticleDef
                     {
-                        Name = "Macro_Muzzle_Blast", // SubtypeId of muzzle particle effect.
+                        Name = "Muzzle_Macro_Blast", // SubtypeId of muzzle particle effect.
                         Color = Color(red: 1, green: 1, blue: 1, alpha: 1), // Deprecated, set color in particle sbc.
                         Offset = Vector(x: 0, y: 0, z: 0), // Offsets the effect from the muzzle empty.
 

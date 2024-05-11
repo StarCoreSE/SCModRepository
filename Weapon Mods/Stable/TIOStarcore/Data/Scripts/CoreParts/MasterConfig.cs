@@ -17,7 +17,7 @@
                 MagDriver_Type19,
                 MagDriver_Type22,
                 MagDriver_Type25,
-                /*UNSC_Coilgun_Block*/ 
+                UNSC_Coilgun_Block,
                 LightTurret_Reaver,
                 HeavyFixedRockets, 
                 //ParticleLance_Type17,
@@ -37,7 +37,8 @@
                 DualPulseLaserTurret,
                 DualSnubnosedLaserTurret,
                 QuadCarronadeTurret,
-
+                LB_5x,
+                
                 //QuadBarrelAutocannon,
                 //B8T_Flare,
                 //HeavyLanceBattery,

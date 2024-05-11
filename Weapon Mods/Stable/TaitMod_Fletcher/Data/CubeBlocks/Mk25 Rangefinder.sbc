@@ -6,12 +6,12 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>Mk25Rangefinder</SubtypeId>
 			</Id>
-			<DisplayName>Mk25 Rangefinder</DisplayName>
+			<DisplayName>[FAS] Mk25 Rangefinder</DisplayName>
 			<Description>
 				Mark 25 Rangefinder
 				Can be used for camera targetting
 				Also extends lock range to 15km
-				50BP
+				10BP
 			</Description>
 			<Icon>Textures\GUI\Icons\Rangefinder.dds</Icon>
 			<CubeSize>Large</CubeSize>
@@ -21,14 +21,12 @@
 			<Model>Models\Rangefinder\Mk25 Rangefinder.mwm</Model>
 			<UseModelIntersection>true</UseModelIntersection>
 			<Components>
-				<Component Subtype="SteelPlate" Count="4000" />
-				<Component Subtype="MetalGrid" Count="100" />
-				<Component Subtype="LargeTube" Count="200" />
-				<Component Subtype="Motor" Count="100" />
-				<Component Subtype="Computer" Count="100" />
-				<Component Subtype="Construction" Count="2000" />
-				<Component Subtype="MetalGrid" Count="200" />
-				<Component Subtype="SteelPlate" Count="7000" />
+        <Component Subtype="SteelPlate" Count="25" />
+        <Component Subtype="Construction" Count="20" />
+        <Component Subtype="Detector" Count="10" />
+        <Component Subtype="LargeTube" Count="5" />
+        <Component Subtype="Computer" Count="40" />
+        <Component Subtype="SteelPlate" Count="25" />
 			</Components>
 			<CriticalComponent Subtype="Motor" Index="0" />
 			<MountPoints>

@@ -47,7 +47,7 @@ namespace Scripts
             EnergyCost = 0f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 10f, // Direct damage; one steel plate is worth 100.
             Mass = 100f, // In kilograms; how much force the impact will apply to the target.
-            Health = 5, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            Health = 10, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 200000f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
@@ -462,7 +462,7 @@ namespace Scripts
             EnergyCost = 0f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 1600f, // Direct damage; one steel plate is worth 100.
             Mass = 100f, // In kilograms; how much force the impact will apply to the target.
-            Health = 10, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            Health = 24, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 200000f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = false, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
@@ -691,13 +691,13 @@ namespace Scripts
                 Guidance = Smart, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
                 TargetLossDegree = 120, // Degrees, Is pointed forward
                 TargetLossTime = 240, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                MaxLifeTime = 1500, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
-                AccelPerSec = 100, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
+                MaxLifeTime = 1800, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
+                AccelPerSec = 120, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 375, // voxel phasing if you go above 5100
                 MaxTrajectory = 9000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
-                SpeedVariance = Random(start: 0, end: 100), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
+                SpeedVariance = Random(start: 0, end: 50), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
                 RangeVariance = Random(start: 600, end: 900), // subtracts value from MaxTrajectory
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 TotalAcceleration = 0, // 0 means no limit, something to do due with a thing called delta and something called v.
@@ -718,9 +718,9 @@ namespace Scripts
                     NoTargetExpire = true, // Expire without ever having a target at TargetLossTime
                     Roam = true, // Roam current area after target loss
                     KeepAliveAfterTargetLoss = true, // Whether to stop early death of projectile on target loss
-                    OffsetRatio = 0.9f, // The ratio to offset the random direction (0 to 1)                    
+                    OffsetRatio = 1f, // The ratio to offset the random direction (0 to 1)                    
                     OffsetTime = 20, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
-                    OffsetMinRange = 30, // The range from target at which offsets are no longer active
+                    OffsetMinRange = 40, // The range from target at which offsets are no longer active
                     FocusOnly = false, // only target the constructs Ai's focus target
                     FocusEviction = false, // If FocusOnly and this to true will force smarts to lose target when there is no focus target
                     ScanRange = 0, // 0 disables projectile screening, the max range that this projectile will be seen at by defending grids (adds this projectile to defenders lookup database). 
