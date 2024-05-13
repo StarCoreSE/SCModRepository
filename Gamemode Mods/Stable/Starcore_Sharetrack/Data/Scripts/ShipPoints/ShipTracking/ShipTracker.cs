@@ -203,6 +203,9 @@ namespace ShipPoints.ShipTracking
                         break;
                 }
             else if (block is IMyConveyor || block is IMyConveyorTube) blockDisplayName = "Conveyor";
+
+            if (blockDisplayName.Contains("Letter")) blockDisplayName = "Letter";
+            else if (blockDisplayName.Contains("Beam Block")) blockDisplayName = "Beam Block";
         }
 
 

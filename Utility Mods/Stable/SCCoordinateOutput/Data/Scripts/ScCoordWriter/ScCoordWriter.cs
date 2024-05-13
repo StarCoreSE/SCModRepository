@@ -23,10 +23,10 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         private TextWriter Writer;
         private bool Recording;
 
-        private const int Version = 1;
+        private const int Version = 2;
         private readonly string[] _columns =
         {
-            "kind", "name", "owner", "faction", "entityId", "health", "position", "rotation"
+            "kind", "name", "owner", "faction", "factionColor", "entityId", "health", "position", "rotation"
         };
 
         private const string Extension = ".scc";
@@ -109,7 +109,47 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         private bool ShouldBeTracked(IMyEntity entity)
         {
             var grid = entity as IMyCubeGrid;
-            return grid != null && !grid.IsStatic;
+            if (grid == null || grid.IsStatic || grid.Physics == null)
+                return false;
+
+            bool hasPowerBlock = false;
+            bool hasGyro = false;
+            bool hasThruster = false;
+
+            var blocks = new List<IMySlimBlock>();
+            grid.GetBlocks(blocks, block =>
+            {
+                // Check for functional power block (reactor or battery)
+                if (!hasPowerBlock)
+                {
+                    var battery = block.FatBlock as IMyBatteryBlock;
+                    var reactor = block.FatBlock as IMyReactor;
+                    if ((battery != null && battery.IsFunctional) || (reactor != null && reactor.IsFunctional))
+                        hasPowerBlock = true;
+                }
+
+                // Check for functional gyroscope
+                if (!hasGyro)
+                {
+                    var gyro = block.FatBlock as IMyGyro;
+                    if (gyro != null && gyro.IsFunctional)
+                        hasGyro = true;
+                }
+
+                // Check for functional thruster
+                if (!hasThruster)
+                {
+                    var thruster = block.FatBlock as IMyThrust;
+                    if (thruster != null && thruster.IsFunctional)
+                        hasThruster = true;
+                }
+
+                // Continue iterating until all conditions are checked or all are true
+                return !(hasPowerBlock && hasGyro && hasThruster); // Return false to stop iterating if all conditions are met
+            });
+
+            // Only track grids that have functional power blocks, gyroscopes, and thrusters
+            return hasPowerBlock && hasGyro && hasThruster;
         }
 
         protected override void UnloadData()
@@ -171,7 +211,6 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             if (TickCounter++ < 60) { return; }
             TickCounter = 0;
 
-            // TODO: Use seconds, milliseconds, frames, or ticks since start of recording instead?
             Writer.WriteLine($"start_block,{DateTime.Now}");
             TrackedItems.ForEach(element =>
             {
@@ -182,30 +221,13 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 }
 
                 var grid = element.item as IMyCubeGrid;
+                var owner = GetGridOwner(grid);
+                var factionName = GetFactionName(owner);
+                var factionColor = GetFactionColor(owner);
 
-                // TODO: Just use the grid's matrix and forget cockpits?
-                IMyCockpit Cockpit = null;
-                var cubeGrid = grid as MyCubeGrid;
-                if (cubeGrid != null && cubeGrid.HasMainCockpit())
-                {
-                    Cockpit = cubeGrid.MainCockpit as IMyCockpit;
-                }
-                
-                if (Cockpit == null)
-                {
-                    foreach (var cockpit in grid.GetFatBlocks<IMyCockpit>())
-                    {
-                        if (cockpit.IsOccupied)
-                        {
-                            Cockpit = cockpit;
-                            break;
-                        }
-                    }
-                }
-                MatrixD worldMatrix = Cockpit?.WorldMatrix ?? grid.WorldMatrix;
-                Vector3D forwardDirection = worldMatrix.Forward;
+                MatrixD worldMatrix = grid.WorldMatrix;
                 var position = grid.GetPosition();
-                var rotation = Quaternion.CreateFromForwardUp(forwardDirection, grid.WorldMatrix.Up);
+                var rotation = Quaternion.CreateFromForwardUp(worldMatrix.Forward, worldMatrix.Up);
 
                 var blockList = new List<IMySlimBlock>();
                 grid.GetBlocks(blockList);
@@ -215,10 +237,8 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                     element.initialBlockCount = currentBlockCount;
                 }
                 var healthPercent = (float)currentBlockCount / element.initialBlockCount;
-                var owner = GetGridOwner(grid);
-                var faction = GetFactionName(owner);
 
-                Writer.WriteLine($"grid,{grid.CustomName},{owner?.DisplayName ?? "Unowned"},{faction},{grid.EntityId},{SmallDouble(healthPercent)},{SmallVector3D(position)},{SmallQuaternion(rotation)}");
+                Writer.WriteLine($"grid,{grid.CustomName},{owner?.DisplayName ?? "Unowned"},{factionName},{factionColor},{grid.EntityId},{SmallDouble(healthPercent)},{SmallVector3D(position)},{SmallQuaternion(rotation)}");
             });
             Writer.Flush();
         }
@@ -290,6 +310,21 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             IMyFaction playerFaction = MyAPIGateway.Session.Factions.TryGetPlayerFaction(player.IdentityId);
             return playerFaction != null ? playerFaction.Name : "Unowned";
         }
+
+        private string GetFactionColor(IMyIdentity owner)
+        {
+            if (owner == null) return SmallVector3D(Vector3D.Zero);
+
+            var faction = MyAPIGateway.Session.Factions.TryGetPlayerFaction(owner.IdentityId);
+            if (faction != null)
+            {
+                // Example, replace with actual way to get faction color if available
+
+                return SmallVector3D(faction.CustomColor); 
+            }
+            return "None"; // Default color if no faction or no color defined
+        }
+
 
         public IMyIdentity GetGridOwner(IMyCubeGrid grid)
         {

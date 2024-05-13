@@ -197,6 +197,9 @@ namespace ShipPoints
                 Visible = false, //defaulted off?
                 InitialColor = Color.White
             };
+
+            // Avoid bootlock when opening world with autotracked grids.
+            TrackingManager.Init();
         }
 
         private void HandleKeyInputs()
