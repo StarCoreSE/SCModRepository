@@ -684,7 +684,7 @@ namespace ttrcwm
 
                         if (!curThrusterInfo.is_RCS && !curThrusterInfo.override_cleared)
                         {
-                            curThruster.Key.SetValueFloat("Override", 0.0f);
+                            curThruster.Key.ThrustOverride = 0;
                             curThrusterInfo.override_cleared = changesMade = true;
                         }
                     }
