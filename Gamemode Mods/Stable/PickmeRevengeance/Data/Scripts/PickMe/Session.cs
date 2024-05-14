@@ -101,12 +101,17 @@ namespace PickMe
         public void AddPointValues(object obj)
         {
             var dict = obj as Dictionary<string, int>;
-            if (dict == null)
-                return;
+            if (dict == null) return;
+
+            // Serialize the dictionary to a byte array
+            byte[] serializedData = MyAPIGateway.Utilities.SerializeToBinary(dict);
+
+            // Send the serialized data as the payload
+            MyAPIGateway.Utilities.SendModMessage(2546247, serializedData);
 
             PointValues = dict;
-
-            foreach (var key in PointValues) Header.Add(key.Key);
+            foreach (var key in PointValues)
+                Header.Add(key.Key);
         }
 
         public override MyObjectBuilder_SessionComponent GetObjectBuilder()
