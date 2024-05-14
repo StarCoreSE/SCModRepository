@@ -19,7 +19,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
     {
         public static ScCoordWriter Instance;
         private ushort NetworkId;
-        private List<TrackedItem> TrackedItems;
+        private List<TrackedItem> TrackedItems = new List<TrackedItem>();
         private TextWriter Writer;
         private bool Recording;
 
@@ -39,6 +39,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         {
             public object item;
             public int initialBlockCount;
+            public bool isVolumeExported;
 
             public TrackedItem(object item, int initialBlockCount = 1)
             {
@@ -60,7 +61,6 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(NetworkId, ReceivedPacket);
             }
 
-            TrackedItems = new List<TrackedItem>();
             MyAPIGateway.Entities.GetEntities(null, entity =>
             {
                 if (ShouldBeTracked(entity))
@@ -155,8 +155,8 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
 
         protected override void UnloadData()
         {
-            Writer.Close();
-            TrackedItems.Clear();
+            Writer?.Close();
+            TrackedItems?.Clear();
             if (!MyAPIGateway.Utilities.IsDedicated)
             {
                 MyAPIGateway.Utilities.MessageEnteredSender -= HandleMessage;
@@ -186,6 +186,14 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 MyLog.Default.WriteLine("Failed to create grid tracker file.");
                 MyVisualScriptLogicProvider.SendChatMessage("Failed to create grid tracker file.");
                 MyLog.Default.WriteLine(ex);
+            }
+
+            if (TrackedItems != null)
+            {
+                foreach (var element in TrackedItems)
+                {
+                    element.isVolumeExported = false;
+                }
             }
 
             Recording = true;
@@ -266,6 +274,14 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 var healthPercent = (float)currentBlockCount / element.initialBlockCount;
 
                 Writer.WriteLine($"grid,{grid.CustomName},{owner?.DisplayName ?? "Unowned"},{factionName},{factionColor},{grid.EntityId},{SmallDouble(healthPercent)},{SmallVector3D(position)},{SmallQuaternion(rotation)}");
+
+                if (!element.isVolumeExported)
+                {
+                    var volume = ConvertToBase64BinaryVolume(grid);
+                    Writer.WriteLine($"volume,{grid.EntityId},{volume}");
+                    element.isVolumeExported = true;
+                }
+
             });
             Writer.Flush();
 
@@ -367,6 +383,93 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 }
             }
             return owner;
+        }
+
+        public string ConvertToBase64BinaryVolume(IMyCubeGrid grid)
+        {
+            // Get grid dimensions
+            var extents = grid.Max - grid.Min + Vector3I.One;
+            int width  = extents.X;
+            int height = extents.Y;
+            int depth  = extents.Z;
+
+            // Calculate number of bytes needed to store the volume
+            int numBytes = (width * height * depth + 7) / 8;
+
+            // Create byte array to store binary volume
+            byte[] binaryVolume = new byte[numBytes];
+
+            // Iterate over grid cells
+            for (int z = 0; z < depth; z++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        // Calculate index in byte array
+                        int byteIndex = z * width * height + y * width + x;
+                        int bytePosition = byteIndex % 8;
+
+                        // Check if block is present at the cell
+                        var block = grid.GetCubeBlock(new Vector3I(x, y, z) + grid.Min);
+                        bool blockPresent = block != null;
+
+                        // Set corresponding bit in byte
+                        if (blockPresent)
+                        {
+//                            binaryVolume[byteIndex / 8] |= (byte)(1 << bytePosition);
+                            binaryVolume[byteIndex / 8] |= (byte)(1 << (7 - bytePosition)); // Invert the byte position
+
+                        }
+                    }
+                }
+            }
+
+            // Create header with grid extents
+            byte[] header = BitConverter.GetBytes(width)
+                .Concat(BitConverter.GetBytes(height))
+                .Concat(BitConverter.GetBytes(depth))
+                .ToArray();
+
+            // Combine header and binary volume
+            byte[] result = header.Concat(binaryVolume).ToArray();
+
+            // Compress the result using RLE
+            byte[] compressedData = Compress(result);
+
+            // Convert to base64 string
+            string base64String = Convert.ToBase64String(compressedData);
+
+            return base64String;
+        }
+
+        private byte[] Compress(byte[] data)
+        {
+            List<byte> compressedData = new List<byte>();
+
+            int count = 1;
+            byte currentByte = data[0];
+
+            for (int i = 1; i < data.Length; i++)
+            {
+                if (data[i] == currentByte)
+                {
+                    count++;
+                }
+                else
+                {
+                    compressedData.Add(currentByte);
+                    compressedData.Add((byte)count);
+                    count = 1;
+                    currentByte = data[i];
+                }
+            }
+
+            // Add the last byte and its count
+            compressedData.Add(currentByte);
+            compressedData.Add((byte)count);
+
+            return compressedData.ToArray();
         }
     }
 }

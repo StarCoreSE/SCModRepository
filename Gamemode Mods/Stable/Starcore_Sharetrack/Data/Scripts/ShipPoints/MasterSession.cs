@@ -25,7 +25,6 @@ namespace ShipPoints
                 HeartNetwork.I = new HeartNetwork();
                 HeartNetwork.I.LoadData(42521);
                 CommandHandler.Init();
-                TrackingManager.Init();
                 _pointCheck.Init();
             }
             catch (Exception ex)
