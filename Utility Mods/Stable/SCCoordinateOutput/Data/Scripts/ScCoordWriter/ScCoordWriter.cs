@@ -19,7 +19,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
     {
         public static ScCoordWriter Instance;
         private ushort NetworkId;
-        private List<TrackedItem> TrackedItems;
+        private List<TrackedItem> TrackedItems = new List<TrackedItem>();
         private TextWriter Writer;
         private bool Recording;
 
@@ -60,7 +60,6 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(NetworkId, ReceivedPacket);
             }
 
-            TrackedItems = new List<TrackedItem>();
             MyAPIGateway.Entities.GetEntities(null, entity =>
             {
                 if (ShouldBeTracked(entity))
@@ -155,8 +154,8 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
 
         protected override void UnloadData()
         {
-            Writer.Close();
-            TrackedItems.Clear();
+            Writer?.Close();
+            TrackedItems?.Clear();
             if (!MyAPIGateway.Utilities.IsDedicated)
             {
                 MyAPIGateway.Utilities.MessageEnteredSender -= HandleMessage;

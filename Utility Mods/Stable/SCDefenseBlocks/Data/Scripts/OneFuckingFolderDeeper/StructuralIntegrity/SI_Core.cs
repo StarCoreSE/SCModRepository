@@ -518,7 +518,7 @@ namespace StarCore.StructuralIntegrity
             {
                 IMyCubeGrid targetGrid = targetBlock.CubeGrid;
 
-                if (SiegeActive && targetGrid.EntityId == SIGenBlock.CubeGrid.EntityId)
+                if (SIGenBlock != null && SIGenBlock.CubeGrid != null && SiegeActive && targetGrid.EntityId == SIGenBlock.CubeGrid.EntityId)
                 {
                     SI_Impact_Render renderer = new SI_Impact_Render(targetBlock);
                     impactRenders.TryAdd(renderer, renderer);
