@@ -255,6 +255,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                     Writer.WriteLine($"volume,{grid.EntityId},{volume}");
                     element.isVolumeExported = true;
                 }
+
             });
             Writer.Flush();
         }
