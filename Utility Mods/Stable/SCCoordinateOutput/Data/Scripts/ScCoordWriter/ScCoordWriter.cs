@@ -366,7 +366,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
 
                 return SmallVector3D(faction.CustomColor); 
             }
-            return "None"; // Default color if no faction or no color defined
+            return SmallVector3D(Vector3D.Zero); // Default color if no faction or no color defined
         }
 
 
