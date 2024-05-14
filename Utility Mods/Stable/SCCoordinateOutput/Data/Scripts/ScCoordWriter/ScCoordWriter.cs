@@ -226,9 +226,35 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 var factionName = GetFactionName(owner);
                 var factionColor = GetFactionColor(owner);
 
-                MatrixD worldMatrix = grid.WorldMatrix;
-                var position = grid.GetPosition();
-                var rotation = Quaternion.CreateFromForwardUp(worldMatrix.Forward, worldMatrix.Up);
+                IMyCockpit selectedCockpit = null;
+
+                // Attempt to find an occupied cockpit
+                foreach (var cockpit in grid.GetFatBlocks<IMyCockpit>())
+                {
+                    if (cockpit.IsOccupied)
+                    {
+                        selectedCockpit = cockpit;
+                        break;
+                    }
+                }
+
+                // If no occupied cockpit is found, use any available cockpit
+                if (selectedCockpit == null)
+                {
+                    var cockpits = grid.GetFatBlocks<IMyCockpit>().ToList();
+                    if (cockpits.Count > 0)
+                    {
+                        selectedCockpit = cockpits[0];
+                    }
+                }
+
+                // If no cockpit is found, fall back to the grid's matrix
+                MatrixD worldMatrix = selectedCockpit?.WorldMatrix ?? grid.WorldMatrix;
+                Vector3D forwardDirection = worldMatrix.Forward;
+
+                // Get position and rotation
+                Vector3D position = worldMatrix.Translation;
+                Quaternion rotation = Quaternion.CreateFromForwardUp(worldMatrix.Forward, worldMatrix.Up);
 
                 var blockList = new List<IMySlimBlock>();
                 grid.GetBlocks(blockList);
@@ -242,6 +268,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 Writer.WriteLine($"grid,{grid.CustomName},{owner?.DisplayName ?? "Unowned"},{factionName},{factionColor},{grid.EntityId},{SmallDouble(healthPercent)},{SmallVector3D(position)},{SmallQuaternion(rotation)}");
             });
             Writer.Flush();
+
         }
 
         public string SmallQuaternion(Quaternion q)
