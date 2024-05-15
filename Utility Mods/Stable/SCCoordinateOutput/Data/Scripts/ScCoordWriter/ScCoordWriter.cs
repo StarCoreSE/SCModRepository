@@ -110,47 +110,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         private bool ShouldBeTracked(IMyEntity entity)
         {
             var grid = entity as IMyCubeGrid;
-            if (grid == null || grid.IsStatic || grid.Physics == null)
-                return false;
-
-            bool hasPowerBlock = false;
-            bool hasGyro = false;
-            bool hasThruster = false;
-
-            var blocks = new List<IMySlimBlock>();
-            grid.GetBlocks(blocks, block =>
-            {
-                // Check for functional power block (reactor or battery)
-                if (!hasPowerBlock)
-                {
-                    var battery = block.FatBlock as IMyBatteryBlock;
-                    var reactor = block.FatBlock as IMyReactor;
-                    if ((battery != null && battery.IsFunctional) || (reactor != null && reactor.IsFunctional))
-                        hasPowerBlock = true;
-                }
-
-                // Check for functional gyroscope
-                if (!hasGyro)
-                {
-                    var gyro = block.FatBlock as IMyGyro;
-                    if (gyro != null && gyro.IsFunctional)
-                        hasGyro = true;
-                }
-
-                // Check for functional thruster
-                if (!hasThruster)
-                {
-                    var thruster = block.FatBlock as IMyThrust;
-                    if (thruster != null && thruster.IsFunctional)
-                        hasThruster = true;
-                }
-
-                // Continue iterating until all conditions are checked or all are true
-                return !(hasPowerBlock && hasGyro && hasThruster); // Return false to stop iterating if all conditions are met
-            });
-
-            // Only track grids that have functional power blocks, gyroscopes, and thrusters
-            return hasPowerBlock && hasGyro && hasThruster;
+            return grid != null && !grid.IsStatic && grid.Physics != null;
         }
 
         protected override void UnloadData()
