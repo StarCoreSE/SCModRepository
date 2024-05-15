@@ -110,47 +110,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         private bool ShouldBeTracked(IMyEntity entity)
         {
             var grid = entity as IMyCubeGrid;
-            if (grid == null || grid.IsStatic || grid.Physics == null)
-                return false;
-
-            bool hasPowerBlock = false;
-            bool hasGyro = false;
-            bool hasThruster = false;
-
-            var blocks = new List<IMySlimBlock>();
-            grid.GetBlocks(blocks, block =>
-            {
-                // Check for functional power block (reactor or battery)
-                if (!hasPowerBlock)
-                {
-                    var battery = block.FatBlock as IMyBatteryBlock;
-                    var reactor = block.FatBlock as IMyReactor;
-                    if ((battery != null && battery.IsFunctional) || (reactor != null && reactor.IsFunctional))
-                        hasPowerBlock = true;
-                }
-
-                // Check for functional gyroscope
-                if (!hasGyro)
-                {
-                    var gyro = block.FatBlock as IMyGyro;
-                    if (gyro != null && gyro.IsFunctional)
-                        hasGyro = true;
-                }
-
-                // Check for functional thruster
-                if (!hasThruster)
-                {
-                    var thruster = block.FatBlock as IMyThrust;
-                    if (thruster != null && thruster.IsFunctional)
-                        hasThruster = true;
-                }
-
-                // Continue iterating until all conditions are checked or all are true
-                return !(hasPowerBlock && hasGyro && hasThruster); // Return false to stop iterating if all conditions are met
-            });
-
-            // Only track grids that have functional power blocks, gyroscopes, and thrusters
-            return hasPowerBlock && hasGyro && hasThruster;
+            return grid != null && !grid.IsStatic && grid.Physics != null;
         }
 
         protected override void UnloadData()
@@ -234,30 +194,8 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 var factionName = GetFactionName(owner);
                 var factionColor = GetFactionColor(owner);
 
-                IMyCockpit selectedCockpit = null;
-
-                // Attempt to find an occupied cockpit
-                foreach (var cockpit in grid.GetFatBlocks<IMyCockpit>())
-                {
-                    if (cockpit.IsOccupied)
-                    {
-                        selectedCockpit = cockpit;
-                        break;
-                    }
-                }
-
-                // If no occupied cockpit is found, use any available cockpit
-                if (selectedCockpit == null)
-                {
-                    var cockpits = grid.GetFatBlocks<IMyCockpit>().ToList();
-                    if (cockpits.Count > 0)
-                    {
-                        selectedCockpit = cockpits[0];
-                    }
-                }
-
-                // If no cockpit is found, fall back to the grid's matrix
-                MatrixD worldMatrix = selectedCockpit?.WorldMatrix ?? grid.WorldMatrix;
+                // Use the grid's world matrix for position and rotation
+                MatrixD worldMatrix = grid.WorldMatrix;
                 Vector3D forwardDirection = worldMatrix.Forward;
 
                 // Get position and rotation
@@ -294,7 +232,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         }
         public string SmallVector3D(Vector3D v)
         {
-            
+
             return $"{SmallDouble(v.X)} {SmallDouble(v.Y)} {SmallDouble(v.Z)}";
         }
         public string SmallDouble(double value)
@@ -318,17 +256,20 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
 
             switch (args[1])
             {
-                case "start": Start();
+                case "start":
+                    Start();
                     break;
-                case "stop": Stop();
+                case "stop":
+                    Stop();
                     break;
                 default:
-                {
-                    var error = $"[{nameof(ScCoordWriter)}] Unknown command '{args[1]}'";
-                    MyLog.Default.WriteLine(error);
-                    MyAPIGateway.Utilities.ShowMessage($"[{nameof(ScCoordWriter)}]", error);
-                    MyAPIGateway.Utilities.ShowMessage($"[{nameof(ScCoordWriter)}]", Usage);
-                } break;
+                    {
+                        var error = $"[{nameof(ScCoordWriter)}] Unknown command '{args[1]}'";
+                        MyLog.Default.WriteLine(error);
+                        MyAPIGateway.Utilities.ShowMessage($"[{nameof(ScCoordWriter)}]", error);
+                        MyAPIGateway.Utilities.ShowMessage($"[{nameof(ScCoordWriter)}]", Usage);
+                    }
+                    break;
             }
         }
 
@@ -364,7 +305,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             {
                 // Example, replace with actual way to get faction color if available
 
-                return SmallVector3D(faction.CustomColor); 
+                return SmallVector3D(faction.CustomColor);
             }
             return SmallVector3D(Vector3D.Zero); // Default color if no faction or no color defined
         }
@@ -389,9 +330,9 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         {
             // Get grid dimensions
             var extents = grid.Max - grid.Min + Vector3I.One;
-            int width  = extents.X;
+            int width = extents.X;
             int height = extents.Y;
-            int depth  = extents.Z;
+            int depth = extents.Z;
 
             // Calculate number of bytes needed to store the volume
             int numBytes = (width * height * depth + 7) / 8;
@@ -417,7 +358,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                         // Set corresponding bit in byte
                         if (blockPresent)
                         {
-//                            binaryVolume[byteIndex / 8] |= (byte)(1 << bytePosition);
+                            //                            binaryVolume[byteIndex / 8] |= (byte)(1 << bytePosition);
                             binaryVolume[byteIndex / 8] |= (byte)(1 << (7 - bytePosition)); // Invert the byte position
 
                         }
