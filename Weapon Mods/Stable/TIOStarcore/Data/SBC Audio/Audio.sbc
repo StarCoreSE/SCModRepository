@@ -44,7 +44,7 @@
 			  <SubtypeId>SnubFighterFlight</SubtypeId>
 		  </Id>
 		  <Category>SHOT</Category>
-		  <MaxDistance>2000</MaxDistance>
+		  <MaxDistance>3000</MaxDistance>
 		  <DistantSounds>
 		  <DistantSound DistanceCrossFade="100" Distance="400" Sound = "SnubFighterFlightD1" />
 		  		  <DistantSound DistanceCrossFade="100" Distance="800" Sound = "SnubFighterFlightD2" />
@@ -65,7 +65,7 @@
 			  <SubtypeId>SnubFighterFlightD1</SubtypeId>
 		  </Id>
 		  <Category>SHOT</Category>
-		  <MaxDistance>2000</MaxDistance>
+		  <MaxDistance>3000</MaxDistance>
 		  <Volume>1.5</Volume>
 		  <Loopable>true</Loopable>
 	  
@@ -81,8 +81,8 @@
 			  <SubtypeId>SnubFighterFlightD2</SubtypeId>
 		  </Id>
 		  <Category>SHOT</Category>
-		  <MaxDistance>2000</MaxDistance>
-		  <Volume>1</Volume>
+		  <MaxDistance>3000</MaxDistance>
+		  <Volume>0.75</Volume>
 		  <Loopable>true</Loopable>
 	  
 		  <Waves>
@@ -97,8 +97,8 @@
 			  <SubtypeId>SnubFighterFlightD3</SubtypeId>
 		  </Id>
 		  <Category>SHOT</Category>
-		  <MaxDistance>2000</MaxDistance>
-		  <Volume>0.5</Volume>
+		  <MaxDistance>3000</MaxDistance>
+		  <Volume>0.33</Volume>
 		  <Loopable>true</Loopable>
 	  
 		  <Waves>
@@ -125,6 +125,56 @@
 		  </Waves>
 	    </Sound>
 
+		<Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>SmallLaser_Fighter</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>2000</MaxDistance>
+			<DistantSound DistanceCrossFade="100" Distance="500" Sound = "SmallLaser_Fighter1" />
+			<DistantSound DistanceCrossFade="100" Distance="1000" Sound = "SmallLaser_Fighter2" />
+		  <Volume>1</Volume>
+		  <Loopable>true</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Loop>Audio\Shot\SmallLaser2.wav</Loop>
+			  </Wave>
+
+		  </Waves>
+	    </Sound>
+		<Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>SmallLaser_Fighter1</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>2000</MaxDistance>
+		  <Volume>0.66</Volume>
+		  <Loopable>true</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Loop>Audio\Shot\SmallLaser2.wav</Loop>
+			  </Wave>
+
+		  </Waves>
+	    </Sound>
+		<Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>SmallLaser_Fighter2</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>2000</MaxDistance>
+		  <Volume>0.33</Volume>
+		  <Loopable>true</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Loop>Audio\Shot\SmallLaser2.wav</Loop>
+			  </Wave>
+
+		  </Waves>
+	    </Sound>
 
 	<!--A Classic Hit-Pop! noise good for anything really-->
 	  <Sound>

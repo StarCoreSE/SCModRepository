@@ -25,10 +25,16 @@ namespace StarCore.StructuralIntegrity
             Log.Info($"MaxFieldPower value={Settings.MaxFieldPower}");
             Log.Info($"MinGridModifier value={Settings.MinGridModifier}");
             Log.Info($"MaxGridModifier value={Settings.MaxGridModifier}");
+
+            Log.Info($"BasePowerUsage value={Settings.BasePowerUsage}");
+            Log.Info($"MaxModifierPowerPercentage value={Settings.MaxModifierPowerPercentage}");
+            Log.Info($"MinModifierPowerPercentage value={Settings.MinModifierPowerPercentage}");
+
             Log.Info($"SiegeEnabled value={Settings.SiegeEnabled}");
             Log.Info($"SiegeMinPowerReq value={Settings.SiegeMinPowerReq}");
             Log.Info($"SiegeTimer value={Settings.SiegeTimer}");
             Log.Info($"SiegeCooldownTimer value={Settings.SiegeCooldownTimer}");
+            Log.Info($"SiegePowerPercentage value={Settings.SiegePowerPercentage}");
         }
     }
 
@@ -42,10 +48,16 @@ namespace StarCore.StructuralIntegrity
         public float MaxFieldPower = 50f;
         public float MinGridModifier = 1.0f;
         public float MaxGridModifier = 0.5f;
+
+        public float BasePowerUsage = 50f;
+        public float MaxModifierPowerPercentage = 0.5f;
+        public float MinModifierPowerPercentage = 0f;
+
         public bool SiegeEnabled = true;
         public float SiegeMinPowerReq = 150f;
         public int SiegeTimer = 9000;
         public int SiegeCooldownTimer = 18000;
+        public float SiegePowerPercentage = 0.9f;
 
         void LoadConfig(MyIni iniParser)
         {
@@ -53,10 +65,16 @@ namespace StarCore.StructuralIntegrity
             MaxFieldPower = iniParser.Get(IniSection, nameof(MaxFieldPower)).ToSingle(MaxFieldPower);
             MinGridModifier = iniParser.Get(IniSection, nameof(MinGridModifier)).ToSingle(MinGridModifier);
             MaxGridModifier = iniParser.Get(IniSection, nameof(MaxGridModifier)).ToSingle(MaxGridModifier);
+
+            BasePowerUsage = iniParser.Get(IniSection, nameof(BasePowerUsage)).ToSingle(BasePowerUsage);
+            MinModifierPowerPercentage = iniParser.Get(IniSection, nameof(MinModifierPowerPercentage)).ToSingle(MinModifierPowerPercentage);
+            MaxModifierPowerPercentage = iniParser.Get(IniSection, nameof(MaxModifierPowerPercentage)).ToSingle(MaxModifierPowerPercentage);     
+
             SiegeEnabled = iniParser.Get(IniSection, nameof(SiegeEnabled)).ToBoolean(SiegeEnabled);
             SiegeMinPowerReq = iniParser.Get(IniSection, nameof(SiegeMinPowerReq)).ToSingle(SiegeMinPowerReq);
             SiegeTimer = (int)iniParser.Get(IniSection, nameof(SiegeTimer)).ToSingle(SiegeTimer);
             SiegeCooldownTimer = (int)iniParser.Get(IniSection, nameof(SiegeCooldownTimer)).ToSingle(SiegeCooldownTimer);
+            SiegePowerPercentage = iniParser.Get(IniSection, nameof(SiegePowerPercentage)).ToSingle(SiegePowerPercentage);
         }
 
         void SaveConfig(MyIni iniParser)
@@ -74,6 +92,15 @@ namespace StarCore.StructuralIntegrity
             iniParser.Set(IniSection, nameof(MaxGridModifier), MaxGridModifier);
             iniParser.SetComment(IniSection, nameof(MaxGridModifier), "Maximum Value for Potential Grid Resistence [Default: 0.7]"); // optional
 
+            iniParser.Set(IniSection, nameof(BasePowerUsage), BasePowerUsage);
+            iniParser.SetComment(IniSection, nameof(BasePowerUsage), "Base Power Required while Idle in MW [Default: 50.000]"); // optional
+
+            iniParser.Set(IniSection, nameof(MinModifierPowerPercentage), MinModifierPowerPercentage);
+            iniParser.SetComment(IniSection, nameof(MinModifierPowerPercentage), "Mnimum Value for Power Usage Percentage at Min Resistence [Default: 0] [Percentage of Grid Max Power]"); // optional
+
+            iniParser.Set(IniSection, nameof(MaxModifierPowerPercentage), MaxModifierPowerPercentage);
+            iniParser.SetComment(IniSection, nameof(MaxModifierPowerPercentage), "Maximum Value for Power Usage Percentage at Max Resistence [Default: 0.5] [Percentage of Grid Max Power]"); // optional
+
             iniParser.Set(IniSection, nameof(SiegeEnabled), SiegeEnabled);
             iniParser.SetComment(IniSection, nameof(SiegeEnabled), "True/False Value to Enable or Disable Siege Mode"); // optional
 
@@ -85,6 +112,9 @@ namespace StarCore.StructuralIntegrity
 
             iniParser.Set(IniSection, nameof(SiegeCooldownTimer), SiegeCooldownTimer);
             iniParser.SetComment(IniSection, nameof(SiegeCooldownTimer), "Siege Mode Cooldown Timer Value in Ticks [Default: 18000]"); // optional
+
+            iniParser.Set(IniSection, nameof(SiegePowerPercentage), SiegePowerPercentage);
+            iniParser.SetComment(IniSection, nameof(SiegePowerPercentage), "Power Usage Percentage during Siege Mode [Default: 0.9] [Percentage of Grid Max Power]"); // optional
         }
 
         // nothing to edit below this point
