@@ -1,8 +1,10 @@
 name: Generate Changelog
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 * * 0' # Run every Sunday at 00:00
+  
 
 jobs:
   generate-changelog:
