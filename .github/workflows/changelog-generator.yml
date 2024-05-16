@@ -1,5 +1,6 @@
 name: 'changelog-generator'
 on:
+  workflow_dispatch:
   push:
     tags:
       - '*'
