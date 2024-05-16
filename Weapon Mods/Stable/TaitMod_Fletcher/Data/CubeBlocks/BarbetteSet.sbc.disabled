@@ -15,13 +15,13 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\Barbette5x5.mwm</Model>
 			<Components>
-				<Component Subtype="Construction" Count="250" />
-				<Component Subtype="SmallTube" Count="250" />
-				<Component Subtype="Motor" Count="250" />
-				<Component Subtype="Construction" Count="250" />
-				<Component Subtype="InteriorPlate" Count="250" />
-				<Component Subtype="MetalGrid" Count="1250" />
-				<Component Subtype="SteelPlate" Count="3125" />
+					<Component Subtype="SteelPlate" Count="85" />
+					<Component Subtype="InteriorPlate" Count="4" />
+					<Component Subtype="Construction" Count="200" />
+					<Component Subtype="SmallTube" Count="12" />
+					<Component Subtype="Motor" Count="6" />
+					<Component Subtype="GravityGenerator" Count="100" />
+					<Component Subtype="SteelPlate" Count="7000" />
 			</Components>
 			<CriticalComponent Subtype="Motor" Index="0" />
 			<MountPoints>
@@ -59,13 +59,13 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\Barbette3x3.mwm</Model>
 			<Components>
-				<Component Subtype="Construction" Count="180" />
-				<Component Subtype="SmallTube" Count="180" />
-				<Component Subtype="Motor" Count="54" />
-				<Component Subtype="Construction" Count="90" />
-				<Component Subtype="InteriorPlate" Count="90" />
-				<Component Subtype="MetalGrid" Count="450" />
-				<Component Subtype="SteelPlate" Count="1125" />
+					<Component Subtype="SteelPlate" Count="45" />
+					<Component Subtype="InteriorPlate" Count="4" />
+					<Component Subtype="Construction" Count="200" />
+					<Component Subtype="SmallTube" Count="12" />
+				<Component Subtype="GravityGenerator" Count="66" />
+					<Component Subtype="Motor" Count="6" />
+					<Component Subtype="SteelPlate" Count="3500" />
 			</Components>
 			<CriticalComponent Subtype="Motor" Index="0" />
 			<MountPoints>
@@ -104,13 +104,13 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\Barbette1x1.mwm</Model>
 			<Components>
-				<Component Subtype="Construction" Count="20" />
-				<Component Subtype="SmallTube" Count="20" />
-				<Component Subtype="Motor" Count="6" />
-				<Component Subtype="Construction" Count="10" />
-				<Component Subtype="InteriorPlate" Count="10" />
-				<Component Subtype="MetalGrid" Count="50" />
-				<Component Subtype="SteelPlate" Count="125" />
+					<Component Subtype="SteelPlate" Count="25" />
+					<Component Subtype="InteriorPlate" Count="4" />
+					<Component Subtype="Construction" Count="200" />
+					<Component Subtype="SmallTube" Count="12" />
+				<Component Subtype="GravityGenerator" Count="33" />
+					<Component Subtype="Motor" Count="6" />
+					<Component Subtype="SteelPlate" Count="1500" />
 			</Components>
 			<CriticalComponent Subtype="Motor" Index="0" />
 			<MountPoints>
