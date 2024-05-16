@@ -6,6 +6,7 @@ using System.Linq;
 using Sandbox.Game;
 using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
+using VRage.Game;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.ModAPI;
@@ -26,7 +27,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         private const int Version = 2;
         private readonly string[] _columns =
         {
-            "kind", "name", "owner", "faction", "factionColor", "entityId", "health", "position", "rotation"
+            "kind", "name", "owner", "faction", "factionColor", "entityId", "health", "position", "rotation", "gridSize"
         };
 
         private const string Extension = ".scc";
@@ -211,7 +212,10 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 }
                 var healthPercent = (float)currentBlockCount / element.initialBlockCount;
 
-                Writer.WriteLine($"grid,{grid.CustomName},{owner?.DisplayName ?? "Unowned"},{factionName},{factionColor},{grid.EntityId},{SmallDouble(healthPercent)},{SmallVector3D(position)},{SmallQuaternion(rotation)}");
+                // Determine if the grid is small or large
+                var gridSize = grid.GridSizeEnum == MyCubeSize.Small ? "Small" : "Large";
+
+                Writer.WriteLine($"grid,{grid.CustomName},{owner?.DisplayName ?? "Unowned"},{factionName},{factionColor},{grid.EntityId},{SmallDouble(healthPercent)},{SmallVector3D(position)},{SmallQuaternion(rotation)},{gridSize}");
 
                 if (!element.isVolumeExported)
                 {
@@ -358,9 +362,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                         // Set corresponding bit in byte
                         if (blockPresent)
                         {
-                            //                            binaryVolume[byteIndex / 8] |= (byte)(1 << bytePosition);
                             binaryVolume[byteIndex / 8] |= (byte)(1 << (7 - bytePosition)); // Invert the byte position
-
                         }
                     }
                 }
