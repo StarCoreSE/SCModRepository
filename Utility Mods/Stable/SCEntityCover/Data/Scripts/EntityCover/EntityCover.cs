@@ -196,8 +196,8 @@ namespace klime.EntityCover
             this.modelName = modelName;
         }
 
-        public bool DoDamage(float damage, MyStringHash damageSource, bool sync, MyHitInfo? hitInfo = null,
-            long attackerId = 0, long realHitEntityId = 0, bool shouldDetonateAmmo = true)
+        public bool DoDamage(float damage, MyStringHash damageSource, bool sync, MyHitInfo? hitInfo = null, long attackerId = 0,
+            long realHitEntityId = 0, bool shouldDetonateAmmo = true, MyStringHash? extraInfo = null)
         {
             return true;
         }

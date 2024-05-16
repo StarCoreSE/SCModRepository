@@ -41,6 +41,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
             //RichHudClient.Reset();
         }
 
+        private bool _questlogDisposed = false;
         public override void UpdateAfterSimulation()
         {
             _ticks++;
@@ -72,10 +73,12 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                             false, false);
                         displayedCount++;
                     }
+                    _questlogDisposed = false;
                 }
-                else
+                else if (!_questlogDisposed)
                 {
                     MyVisualScriptLogicProvider.SetQuestlogLocal(false, "Fusion Systems");
+                    _questlogDisposed = true;
                 }
             }
             catch (Exception ex)

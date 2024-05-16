@@ -6,6 +6,7 @@ using System.Linq;
 using Sandbox.Game;
 using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
+using VRage.Game;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.ModAPI;
@@ -19,14 +20,14 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
     {
         public static ScCoordWriter Instance;
         private ushort NetworkId;
-        private List<TrackedItem> TrackedItems;
+        private List<TrackedItem> TrackedItems = new List<TrackedItem>();
         private TextWriter Writer;
         private bool Recording;
 
-        private const int Version = 1;
+        private const int Version = 2;
         private readonly string[] _columns =
         {
-            "kind", "name", "owner", "faction", "entityId", "health", "position", "rotation"
+            "kind", "name", "owner", "faction", "factionColor", "entityId", "health", "position", "rotation", "gridSize"
         };
 
         private const string Extension = ".scc";
@@ -39,6 +40,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         {
             public object item;
             public int initialBlockCount;
+            public bool isVolumeExported;
 
             public TrackedItem(object item, int initialBlockCount = 1)
             {
@@ -60,7 +62,6 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(NetworkId, ReceivedPacket);
             }
 
-            TrackedItems = new List<TrackedItem>();
             MyAPIGateway.Entities.GetEntities(null, entity =>
             {
                 if (ShouldBeTracked(entity))
@@ -110,13 +111,13 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         private bool ShouldBeTracked(IMyEntity entity)
         {
             var grid = entity as IMyCubeGrid;
-            return grid != null && !grid.IsStatic;
+            return grid != null && !grid.IsStatic && grid.Physics != null;
         }
 
         protected override void UnloadData()
         {
-            Writer.Close();
-            TrackedItems.Clear();
+            Writer?.Close();
+            TrackedItems?.Clear();
             if (!MyAPIGateway.Utilities.IsDedicated)
             {
                 MyAPIGateway.Utilities.MessageEnteredSender -= HandleMessage;
@@ -148,6 +149,14 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 MyLog.Default.WriteLine(ex);
             }
 
+            if (TrackedItems != null)
+            {
+                foreach (var element in TrackedItems)
+                {
+                    element.isVolumeExported = false;
+                }
+            }
+
             Recording = true;
             MyAPIGateway.Multiplayer.SendMessageToServer(NetworkId, new byte[] { 1 });
             MyAPIGateway.Utilities.ShowNotification("Recording started.");
@@ -172,7 +181,6 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             if (TickCounter++ < 60) { return; }
             TickCounter = 0;
 
-            // TODO: Use seconds, milliseconds, frames, or ticks since start of recording instead?
             Writer.WriteLine($"start_block,{DateTime.Now}");
             TrackedItems.ForEach(element =>
             {
@@ -183,30 +191,17 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 }
 
                 var grid = element.item as IMyCubeGrid;
+                var owner = GetGridOwner(grid);
+                var factionName = GetFactionName(owner);
+                var factionColor = GetFactionColor(owner);
 
-                // TODO: Just use the grid's matrix and forget cockpits?
-                IMyCockpit Cockpit = null;
-                var cubeGrid = grid as MyCubeGrid;
-                if (cubeGrid != null && cubeGrid.HasMainCockpit())
-                {
-                    Cockpit = cubeGrid.MainCockpit as IMyCockpit;
-                }
-                
-                if (Cockpit == null)
-                {
-                    foreach (var cockpit in grid.GetFatBlocks<IMyCockpit>())
-                    {
-                        if (cockpit.IsOccupied)
-                        {
-                            Cockpit = cockpit;
-                            break;
-                        }
-                    }
-                }
-                MatrixD worldMatrix = Cockpit?.WorldMatrix ?? grid.WorldMatrix;
+                // Use the grid's world matrix for position and rotation
+                MatrixD worldMatrix = grid.WorldMatrix;
                 Vector3D forwardDirection = worldMatrix.Forward;
-                var position = grid.GetPosition();
-                var rotation = Quaternion.CreateFromForwardUp(forwardDirection, grid.WorldMatrix.Up);
+
+                // Get position and rotation
+                Vector3D position = worldMatrix.Translation;
+                Quaternion rotation = Quaternion.CreateFromForwardUp(worldMatrix.Forward, worldMatrix.Up);
 
                 var blockList = new List<IMySlimBlock>();
                 grid.GetBlocks(blockList);
@@ -216,12 +211,22 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                     element.initialBlockCount = currentBlockCount;
                 }
                 var healthPercent = (float)currentBlockCount / element.initialBlockCount;
-                var owner = GetGridOwner(grid);
-                var faction = GetFactionName(owner);
 
-                Writer.WriteLine($"grid,{grid.CustomName},{owner?.DisplayName ?? "Unowned"},{faction},{grid.EntityId},{SmallDouble(healthPercent)},{SmallVector3D(position)},{SmallQuaternion(rotation)}");
+                // Determine if the grid is small or large
+                var gridSize = grid.GridSizeEnum == MyCubeSize.Small ? "Small" : "Large";
+
+                Writer.WriteLine($"grid,{grid.CustomName},{owner?.DisplayName ?? "Unowned"},{factionName},{factionColor},{grid.EntityId},{SmallDouble(healthPercent)},{SmallVector3D(position)},{SmallQuaternion(rotation)},{gridSize}");
+
+                if (!element.isVolumeExported)
+                {
+                    var volume = ConvertToBase64BinaryVolume(grid);
+                    Writer.WriteLine($"volume,{grid.EntityId},{volume}");
+                    element.isVolumeExported = true;
+                }
+
             });
             Writer.Flush();
+
         }
 
         public string SmallQuaternion(Quaternion q)
@@ -231,7 +236,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
         }
         public string SmallVector3D(Vector3D v)
         {
-            
+
             return $"{SmallDouble(v.X)} {SmallDouble(v.Y)} {SmallDouble(v.Z)}";
         }
         public string SmallDouble(double value)
@@ -255,17 +260,20 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
 
             switch (args[1])
             {
-                case "start": Start();
+                case "start":
+                    Start();
                     break;
-                case "stop": Stop();
+                case "stop":
+                    Stop();
                     break;
                 default:
-                {
-                    var error = $"[{nameof(ScCoordWriter)}] Unknown command '{args[1]}'";
-                    MyLog.Default.WriteLine(error);
-                    MyAPIGateway.Utilities.ShowMessage($"[{nameof(ScCoordWriter)}]", error);
-                    MyAPIGateway.Utilities.ShowMessage($"[{nameof(ScCoordWriter)}]", Usage);
-                } break;
+                    {
+                        var error = $"[{nameof(ScCoordWriter)}] Unknown command '{args[1]}'";
+                        MyLog.Default.WriteLine(error);
+                        MyAPIGateway.Utilities.ShowMessage($"[{nameof(ScCoordWriter)}]", error);
+                        MyAPIGateway.Utilities.ShowMessage($"[{nameof(ScCoordWriter)}]", Usage);
+                    }
+                    break;
             }
         }
 
@@ -292,6 +300,21 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
             return playerFaction != null ? playerFaction.Name : "Unowned";
         }
 
+        private string GetFactionColor(IMyIdentity owner)
+        {
+            if (owner == null) return SmallVector3D(Vector3D.Zero);
+
+            var faction = MyAPIGateway.Session.Factions.TryGetPlayerFaction(owner.IdentityId);
+            if (faction != null)
+            {
+                // Example, replace with actual way to get faction color if available
+
+                return SmallVector3D(faction.CustomColor);
+            }
+            return SmallVector3D(Vector3D.Zero); // Default color if no faction or no color defined
+        }
+
+
         public IMyIdentity GetGridOwner(IMyCubeGrid grid)
         {
             IMyIdentity owner = null;
@@ -305,6 +328,91 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 }
             }
             return owner;
+        }
+
+        public string ConvertToBase64BinaryVolume(IMyCubeGrid grid)
+        {
+            // Get grid dimensions
+            var extents = grid.Max - grid.Min + Vector3I.One;
+            int width = extents.X;
+            int height = extents.Y;
+            int depth = extents.Z;
+
+            // Calculate number of bytes needed to store the volume
+            int numBytes = (width * height * depth + 7) / 8;
+
+            // Create byte array to store binary volume
+            byte[] binaryVolume = new byte[numBytes];
+
+            // Iterate over grid cells
+            for (int z = 0; z < depth; z++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        // Calculate index in byte array
+                        int byteIndex = z * width * height + y * width + x;
+                        int bytePosition = byteIndex % 8;
+
+                        // Check if block is present at the cell
+                        var block = grid.GetCubeBlock(new Vector3I(x, y, z) + grid.Min);
+                        bool blockPresent = block != null;
+
+                        // Set corresponding bit in byte
+                        if (blockPresent)
+                        {
+                            binaryVolume[byteIndex / 8] |= (byte)(1 << (7 - bytePosition)); // Invert the byte position
+                        }
+                    }
+                }
+            }
+
+            // Create header with grid extents
+            byte[] header = BitConverter.GetBytes(width)
+                .Concat(BitConverter.GetBytes(height))
+                .Concat(BitConverter.GetBytes(depth))
+                .ToArray();
+
+            // Combine header and binary volume
+            byte[] result = header.Concat(binaryVolume).ToArray();
+
+            // Compress the result using RLE
+            byte[] compressedData = Compress(result);
+
+            // Convert to base64 string
+            string base64String = Convert.ToBase64String(compressedData);
+
+            return base64String;
+        }
+
+        private byte[] Compress(byte[] data)
+        {
+            List<byte> compressedData = new List<byte>();
+
+            int count = 1;
+            byte currentByte = data[0];
+
+            for (int i = 1; i < data.Length; i++)
+            {
+                if (data[i] == currentByte)
+                {
+                    count++;
+                }
+                else
+                {
+                    compressedData.Add(currentByte);
+                    compressedData.Add((byte)count);
+                    count = 1;
+                    currentByte = data[i];
+                }
+            }
+
+            // Add the last byte and its count
+            compressedData.Add(currentByte);
+            compressedData.Add((byte)count);
+
+            return compressedData.ToArray();
         }
     }
 }
