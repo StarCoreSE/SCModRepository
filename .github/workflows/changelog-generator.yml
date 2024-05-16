@@ -1,26 +1,21 @@
-name: Generate Changelog
-
+name: 'changelog-generator'
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * 0' # Run every Sunday at 00:00
-  
+  push:
+    tags:
+      - '*'
 
 jobs:
-  generate-changelog:
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Generate changelog
-        uses: your-org/parse-commits-action@v1
-        with:
-          output-file: CHANGELOG.md
-          format: |
-            # Changelog
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            {% for mod, commits in commits_by_mod %}
-            ## {{ mod }}
-            {% for commit in commits %}
-            - {{ commit.message }}
-            {% endfor %}
-            {% endfor %}
+      - name: Create Release
+        uses: mikepenz/action-gh-release@v0.2.0-a03 #softprops/action-gh-release
+        with:
+          body: ${{steps.github_release.outputs.changelog}}
