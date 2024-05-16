@@ -1,0 +1,24 @@
+name: Generate Changelog
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Run every Sunday at 00:00
+
+jobs:
+  generate-changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate changelog
+        uses: your-org/parse-commits-action@v1
+        with:
+          output-file: CHANGELOG.md
+          format: |
+            # Changelog
+
+            {% for mod, commits in commits_by_mod %}
+            ## {{ mod }}
+            {% for commit in commits %}
+            - {{ commit.message }}
+            {% endfor %}
+            {% endfor %}
