@@ -674,6 +674,9 @@ Cat_Fletcher_Subtypes@23;
                 Mk25Rangefinder@10;
                 6InchTriple@200;
                 20InchTwin@600;
+				Barbette1x1@4;
+				Barbette3x3@36;
+				Barbette5x5@100;
 
 
 
