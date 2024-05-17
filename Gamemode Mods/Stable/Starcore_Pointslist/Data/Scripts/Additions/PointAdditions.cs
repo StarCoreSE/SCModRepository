@@ -685,9 +685,9 @@ namespace ShipPoints
             ["Mk25Rangefinder"] = 10,
             ["6InchTriple"] = 200,
             ["20InchTwin"] = 600,
-			["Barbette1x1"] = 4,
-			["Barbette3x3"] = 36,
-			["Barbette5x5"] = 100,
+            ["Barbette1x1"] = 4,
+            ["Barbette3x3"] = 36,
+            ["Barbette5x5"] = 100,
 
 
 
@@ -708,8 +708,8 @@ namespace ShipPoints
             ["Type17_BeamLance"] = 100000,
 
             #region Fusion Systems
-            ["Caster_Accelerator_0"] = 10,
-            ["Caster_Accelerator_90"] = 40,
+            ["Caster_Accelerator_0"] = 5,
+            ["Caster_Accelerator_90"] = 20,
             ["Caster_Feeder"] = 10,
             ["Caster_FocusLens"] = 50,
             ["Caster_Reactor"] = 125,
@@ -821,6 +821,10 @@ namespace ShipPoints
                     blockDisplayName = " Laser";
                     costMultiplier = 0.15f;
                     break;
+                case "[SOL] ArcStrike CS-LR Torpedo":
+                    blockDisplayName = "ArcStrike Torpedo";
+                    costMultiplier = 0.25f;
+                    break;
                 case "Reinforced Blastplate":
                 case "Active Blastplate":
                 case "Standard Blastplate A":
@@ -884,12 +888,19 @@ namespace ShipPoints
                     blockDisplayName = "Defensive Generator";
                     costMultiplier = 50.00f;
                     break;
+                case "[FAS] Neptune Torpedo":
+                    blockDisplayName = "Neptune Torpedo";
+                    costMultiplier = 0.25f;
+                    break;
             }
 
             return new MyTuple<string, float>(blockDisplayName, costMultiplier);
         }
 
-        
+        public override void Init(MyObjectBuilder_SessionComponent sessionComponent)
+        {
+            MyAPIGateway.Utilities.SendModMessage(2546247, PointValues);
+            MyAPIGateway.Utilities.SendModMessage(2546247, _climbingCostRename);
         }
     }
 }
