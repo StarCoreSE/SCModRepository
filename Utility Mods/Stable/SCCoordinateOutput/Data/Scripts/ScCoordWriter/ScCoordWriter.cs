@@ -380,7 +380,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
 
             return base64String;
         }
-
+        
         private byte[] Compress(byte[] data)
         {
             List<byte> compressedData = new List<byte>();
@@ -393,6 +393,13 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                 if (data[i] == currentByte)
                 {
                     count++;
+                    if (count == 256)
+                    {
+                        // Add the current byte and max count (255), reset the count
+                        compressedData.Add(currentByte);
+                        compressedData.Add(255);
+                        count = 1;
+                    }
                 }
                 else
                 {
