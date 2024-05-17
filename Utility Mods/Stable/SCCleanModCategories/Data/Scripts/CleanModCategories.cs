@@ -42,7 +42,7 @@ namespace Jakaria
                          definition.Value.Name != ".Starcore Basic Greebles" &&
                          definition.Value.Name != "Fusion Systems" &&
                          /*definition.Value.Name != ".SC WIP" && */
-                         definition.Value.Name != "[All Access]" &&
+                         definition.Value.Name != ".[All Access]" &&
                         /*definition.Value.Name != ".Ship Cores" && */
                         /*definition.Value.Name != ".SC Vanilla 2.0 Weapons" && */
                          definition.Value.Name != "[40K]" &&               
@@ -70,7 +70,7 @@ namespace Jakaria
 
             if (categoryDefinition == null)
             {
-                throw new Exception("The custom Mod Category definition was not found!");
+                MyLog.Default.WriteLine("The custom Mod Category definition was not found!");
             }
 
             foreach (var definition in MyDefinitionManager.Static.GetAllDefinitions())
