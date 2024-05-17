@@ -197,10 +197,7 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
 
                 // Use the grid's world matrix for position and rotation
                 MatrixD worldMatrix = grid.WorldMatrix;
-                Vector3D forwardDirection = worldMatrix.Forward;
-
-                // Get position and rotation
-                Vector3D position = worldMatrix.Translation;
+                Vector3D position = grid.Physics.CenterOfMassWorld;
                 Quaternion rotation = Quaternion.CreateFromForwardUp(worldMatrix.Forward, worldMatrix.Up);
 
                 var blockList = new List<IMySlimBlock>();
@@ -223,10 +220,8 @@ namespace YourName.ModName.Data.Scripts.ScCoordWriter
                     Writer.WriteLine($"volume,{grid.EntityId},{volume}");
                     element.isVolumeExported = true;
                 }
-
             });
             Writer.Flush();
-
         }
 
         public string SmallQuaternion(Quaternion q)
