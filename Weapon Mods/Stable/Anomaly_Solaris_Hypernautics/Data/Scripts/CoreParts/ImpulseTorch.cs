@@ -139,7 +139,7 @@ namespace Scripts {
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "", // Audio for warmup effect.
-                    FiringSound = "ShipLargeThrusterHydrogen", // Audio for firing.
+                    FiringSound = "MA_Afterburner_Large_Fug", // Audio for firing.
                     FiringSoundPerShot = false, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "ArcBlockPiston", // Sound SubtypeID, for when your Weapon is in a reloading state
                     NoAmmoSound = "",
@@ -182,7 +182,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                Torch_Charge_Ammo, // Must list all primary, shrapnel, and pattern ammos.
+                Impulse_Torch_Ammo, // Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = Weapon75_Animation,
             //Upgrades = UpgradeModules,

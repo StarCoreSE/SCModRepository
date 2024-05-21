@@ -7,7 +7,7 @@
 				<SubtypeId/>
 			</Id>
 			<DisplayName>[FAS]</DisplayName>
-			<Name>FletcherArmsStarcore</Name>
+			<Name>[FAS]</Name>
 			<IsBlockCategory>true</IsBlockCategory>
 			<ItemIds>
 				<string>ConveyorSorter/16InchTriple</string>

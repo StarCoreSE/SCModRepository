@@ -28,7 +28,7 @@ namespace Scripts {
                     
                  },
                 Muzzles = new[] {
-                    "missile_1",
+                    "muzzle_missile_1",
 					
                     				
                     

@@ -10,7 +10,7 @@
 			<DisplayName>[MID] AX 'Spitfire' Light Rocket Turret</DisplayName>
 			<Description>[3km Targeting Range [500 m/s]]
               [Energy damage]
-			  [1 HP Unguided Missiles]
+			  [10 HP Unguided Rockets]
 			  [100m minimum range]
               [High Damage, Innacurate]</Description>
 			<Icon>Textures\GUI\Icons\LightMissileLauncher.dds</Icon>
