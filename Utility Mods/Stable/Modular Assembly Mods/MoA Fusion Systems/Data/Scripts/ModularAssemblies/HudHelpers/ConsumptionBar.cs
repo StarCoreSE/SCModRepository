@@ -1,5 +1,6 @@
 ﻿using System;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
+using FusionSystems.Communication;
+using FusionSystems.FusionParts;
 using RichHudFramework.UI;
 using RichHudFramework.UI.Client;
 using RichHudFramework.UI.Rendering;
@@ -7,7 +8,7 @@ using Sandbox.ModAPI;
 using VRage.Input;
 using VRageMath;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
+namespace FusionSystems.HudHelpers
 {
     internal class ConsumptionBar : WindowBase
     {

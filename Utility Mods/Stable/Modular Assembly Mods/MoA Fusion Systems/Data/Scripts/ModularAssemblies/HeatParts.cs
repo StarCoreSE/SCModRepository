@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using FusionSystems.FusionParts;
+using FusionSystems.HeatParts;
 using VRageMath;
-using static MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication.DefinitionDefs;
+using static FusionSystems.Communication.DefinitionDefs;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
+namespace FusionSystems
 {
     internal partial class ModularDefinition
     {
@@ -15,13 +17,16 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
             // Unique name of the definition.
             Name = "Modular_Heat",
 
-            OnInit = () => { S_FusionManager.I.HeatDefinition = this; },
+            OnInit = () =>
+            {
+                S_FusionManager.I.HeatDefinition = this;
+            },
 
             // Triggers whenever a new part is added to an assembly.
-            OnPartAdd = null,
+            OnPartAdd = HeatManager.I.OnPartAdd,
 
             // Triggers whenever a part is removed from an assembly.
-            OnPartRemove = null,
+            OnPartRemove = HeatManager.I.OnPartRemove,
 
             // Triggers whenever a part is destroyed, simultaneously with OnPartRemove
             OnPartDestroy = null,

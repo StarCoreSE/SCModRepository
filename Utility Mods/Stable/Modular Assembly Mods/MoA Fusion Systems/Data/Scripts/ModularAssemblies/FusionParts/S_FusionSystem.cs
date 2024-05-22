@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionReactor;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionThruster;
+using FusionSystems.Communication;
+using FusionSystems.FusionParts.FusionReactor;
+using FusionSystems.FusionParts.FusionThruster;
+using FusionSystems.HeatParts;
 using Sandbox.ModAPI;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
+namespace FusionSystems.
     FusionParts
 {
     internal class S_FusionSystem
@@ -18,6 +19,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
         public List<S_FusionArm> Arms = new List<S_FusionArm>();
         public int BlockCount;
+        private IMyCubeGrid _grid;
 
         /// <summary>
         ///     Maximum power storage
@@ -57,6 +59,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         public S_FusionSystem(int physicalAssemblyId)
         {
             PhysicalAssemblyId = physicalAssemblyId;
+            _grid = ModularApi.GetAssemblyGrid(physicalAssemblyId);
         }
 
         private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
@@ -177,13 +180,14 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
         private void UpdatePower(bool updateReactors = false)
         {
+            float generationModifier = 1/(HeatManager.I.GetGridHeatLevel(_grid) + 0.5f);
             var powerGeneration = float.Epsilon;
             var powerCapacity = float.Epsilon;
             var totalPowerUsage = 0f;
 
             foreach (var arm in Arms)
             {
-                powerGeneration += arm.PowerGeneration;
+                powerGeneration += arm.PowerGeneration * generationModifier;
                 powerCapacity += arm.PowerStorage;
             }
 
@@ -214,11 +218,12 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             PowerStored += PowerGeneration;
             if (PowerStored > MaxPowerStored) PowerStored = MaxPowerStored;
             //PowerGeneration = 0;
+            ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "HeatGeneration", PowerConsumption * MegawattsPerFusionPower);
         }
 
         public void UpdateTick()
         {
-            UpdatePower();
+            UpdatePower(true);
         }
 
         private void RemoveBlockInLoops(MyEntity entity)

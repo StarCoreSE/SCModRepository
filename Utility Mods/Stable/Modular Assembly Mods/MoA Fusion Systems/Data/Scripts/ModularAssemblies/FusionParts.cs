@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using FusionSystems.FusionParts;
 using VRageMath;
-using static MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication.DefinitionDefs;
+using static FusionSystems.Communication.DefinitionDefs;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
+namespace FusionSystems
 {
     internal partial class ModularDefinition
     {

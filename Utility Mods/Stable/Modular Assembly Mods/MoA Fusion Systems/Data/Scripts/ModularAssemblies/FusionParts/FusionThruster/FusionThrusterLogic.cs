@@ -5,7 +5,7 @@ using VRage.Game.Components;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionThruster
+namespace FusionSystems.FusionParts.FusionThruster
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Thrust), false, "Caster_FocusLens")]
     public class FusionThrusterLogic : FusionPart<IMyThrust>
@@ -28,7 +28,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionTh
             // Power generation consumed (per second)
             var powerConsumption = PowerGeneration * 60 * consumptionMultiplier;
 
-            var efficiencyMultiplier = 1 / (0.8f + consumptionMultiplier);
+            var efficiencyMultiplier = 1 / (0.669f + consumptionMultiplier);
 
             // Power generated (per second)
             var thrustOutput = efficiencyMultiplier * powerConsumption * NewtonsPerFusionPower;

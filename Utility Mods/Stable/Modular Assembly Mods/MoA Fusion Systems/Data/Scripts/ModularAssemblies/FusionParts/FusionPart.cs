@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
+using FusionSystems.Communication;
 using ProtoBuf;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
@@ -15,7 +15,7 @@ using VRage.ObjectBuilders;
 using VRage.Sync;
 using VRage.Utils;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
+namespace FusionSystems.FusionParts
 {
     public abstract class FusionPart<T> : MyGameLogicComponent, IMyEventProxy
         where T : IMyCubeBlock

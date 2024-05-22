@@ -2,9 +2,9 @@
 using VRage.Game;
 using VRage.Game.Components;
 using VRage.Utils;
-using static MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication.DefinitionDefs;
+using static FusionSystems.Communication.DefinitionDefs;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
+namespace FusionSystems.
     Communication
 {
     [MySessionComponentDescriptor(MyUpdateOrder.Simulation, int.MinValue)]

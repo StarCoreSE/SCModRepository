@@ -1,8 +1,8 @@
-﻿using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
-using static MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication.DefinitionDefs;
+﻿using FusionSystems.Communication;
+using static FusionSystems.Communication.DefinitionDefs;
 
 // ReSharper disable once CheckNamespace
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
+namespace FusionSystems
 {
     internal partial class ModularDefinition
     {
