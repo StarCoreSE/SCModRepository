@@ -10,7 +10,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
         // You can declare functions in here, and they are shared between all other ModularDefinition files.
 
         // This is the important bit.
-        internal PhysicalDefinition Modular_Heat => new PhysicalDefinition
+        private ModularPhysicalDefinition ModularHeat => new ModularPhysicalDefinition
         {
             // Unique name of the definition.
             Name = "Modular_Heat",
@@ -27,16 +27,13 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
             OnPartDestroy = null,
 
             // The most important block in an assembly. Connection checking starts here.
-            BaseBlock = null,
+            BaseBlockSubtype = null,
 
             // All SubtypeIds that can be part of this assembly.
-            AllowedBlocks = new[]
+            AllowedBlockSubtypes = new[]
             {
                 "Heat_Heatsink",
                 "Heat_FlatRadiator",
-                "Caster_CentralPipe_0",
-                "Caster_CentralPipe_90",
-                "Caster_CentralPipe_T",
             },
 
             // Allowed connection directions & whitelists, measured in blocks.
@@ -70,22 +67,6 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                     {
                         "Heat_FlatRadiator"
                     },
-                },
-                ["Caster_CentralPipe_0"] = new Dictionary<Vector3I, string[]>
-                {
-                    [Vector3I.Forward] = Array.Empty<string>(),
-                    [Vector3I.Backward] = Array.Empty<string>(),
-                },
-                ["Caster_CentralPipe_90"] = new Dictionary<Vector3I, string[]>
-                {
-                    [Vector3I.Forward] = Array.Empty<string>(),
-                    [Vector3I.Right] = Array.Empty<string>(),
-                },
-                ["Caster_CentralPipe_T"] = new Dictionary<Vector3I, string[]>
-                {
-                    [Vector3I.Forward] = Array.Empty<string>(),
-                    [Vector3I.Right] = Array.Empty<string>(),
-                    [Vector3I.Backward] = Array.Empty<string>(),
                 },
             },
         };

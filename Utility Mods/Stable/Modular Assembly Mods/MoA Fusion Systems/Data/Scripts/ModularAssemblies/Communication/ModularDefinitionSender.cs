@@ -10,7 +10,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     [MySessionComponentDescriptor(MyUpdateOrder.Simulation, int.MinValue)]
     internal class ModularDefinitionSender : MySessionComponentBase
     {
-        internal DefinitionContainer StoredDef;
+        internal ModularDefinitionContainer StoredDef;
 
         public override void LoadData()
         {

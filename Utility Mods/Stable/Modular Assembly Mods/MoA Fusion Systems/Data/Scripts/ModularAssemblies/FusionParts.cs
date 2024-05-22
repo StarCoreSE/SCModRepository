@@ -9,7 +9,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
         // You can declare functions in here, and they are shared between all other ModularDefinition files.
 
         // This is the important bit.
-        internal PhysicalDefinition Modular_Fusion => new PhysicalDefinition
+        private ModularPhysicalDefinition ModularFusion => new ModularPhysicalDefinition
         {
             // Unique name of the definition.
             Name = "Modular_Fusion",
@@ -29,10 +29,10 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
             },
 
             // The most important block in an assembly. Connection checking starts here.
-            BaseBlock = null,
+            BaseBlockSubtype = null,
 
             // All SubtypeIds that can be part of this assembly.
-            AllowedBlocks = new[]
+            AllowedBlockSubtypes = new[]
             {
                 "Caster_FocusLens",
                 "Caster_Accelerator_0",

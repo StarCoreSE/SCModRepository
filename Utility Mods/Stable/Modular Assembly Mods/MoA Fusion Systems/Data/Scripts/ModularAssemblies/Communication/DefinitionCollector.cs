@@ -7,9 +7,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
     internal partial class ModularDefinition
     {
         internal static ModularDefinitionApi ModularApi = new ModularDefinitionApi();
-        internal DefinitionContainer Container = new DefinitionContainer();
+        internal ModularDefinitionContainer Container = new ModularDefinitionContainer();
 
-        internal void LoadDefinitions(params PhysicalDefinition[] defs)
+        internal void LoadDefinitions(params ModularPhysicalDefinition[] defs)
         {
             Container.PhysicalDefs = defs;
         }
@@ -18,7 +18,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
         ///     Load all definitions for DefinitionSender
         /// </summary>
         /// <param name="baseDefs"></param>
-        internal static DefinitionContainer GetBaseDefinitions()
+        internal static ModularDefinitionContainer GetBaseDefinitions()
         {
             return new ModularDefinition().Container;
         }
