@@ -708,8 +708,8 @@ namespace ShipPoints
             ["Type17_BeamLance"] = 100000,
 
             #region Fusion Systems
-            ["Caster_Accelerator_0"] = 5,
-            ["Caster_Accelerator_90"] = 20,
+            ["Caster_Accelerator_0"] = 10,
+            ["Caster_Accelerator_90"] = 40,
             ["Caster_Feeder"] = 10,
             ["Caster_FocusLens"] = 50,
             ["Caster_Reactor"] = 125,
