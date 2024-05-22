@@ -8,8 +8,8 @@
       <Id>
         <TypeId>GuiBlockCategoryDefinition</TypeId>
       </Id>
-      <DisplayName>[All Access]</DisplayName>
-      <Name>[All Access]</Name>
+      <DisplayName>.[All Access]</DisplayName>
+      <Name>.[All Access]</Name>
       <StrictSearch>true</StrictSearch>
       <ItemIds>
 
