@@ -39,7 +39,17 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         /// <summary>
         ///     Current power stored
         /// </summary>
-        public float PowerStored;
+        public float PowerStored
+        {
+            get
+            {
+                return ModularApi.GetAssemblyProperty<float>(PhysicalAssemblyId, "PowerStored");
+            }
+            set
+            {
+                ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "PowerStored", value);
+            }
+        }
 
         public List<FusionReactorLogic> Reactors = new List<FusionReactorLogic>();
         public List<FusionThrusterLogic> Thrusters = new List<FusionThrusterLogic>();

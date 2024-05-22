@@ -7,7 +7,7 @@
         {
             // it's just like assemblycore, insert definitions here
 
-            LoadDefinitions(Modular_Fusion, ModularHeat);
+            LoadDefinitions(ModularFusion/*, ModularHeat*/);
         }
     }
 }

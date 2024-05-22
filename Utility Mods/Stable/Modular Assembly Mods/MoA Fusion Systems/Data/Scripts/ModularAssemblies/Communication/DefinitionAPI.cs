@@ -188,14 +188,16 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        ///     Returns a given property of an assembly, or null if it could not be found.
+        ///     Returns a given property of an assembly, or the default value of T if it could not be found.
         /// </summary>
         /// <param name="assemblyId"></param>
         /// <param name="propertyName"></param>
         /// <returns></returns>
-        public object GetAssemblyProperty<T>(int assemblyId, string propertyName) where T : class
+        public T GetAssemblyProperty<T>(int assemblyId, string propertyName)
         {
-            return _getAssemblyProperty?.Invoke(assemblyId, propertyName) as T;
+            object value = _getAssemblyProperty(assemblyId, propertyName);
+
+            return value == null ? default(T) : (T) value;
         }
 
         /// <summary>
