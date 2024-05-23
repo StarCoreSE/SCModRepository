@@ -19,7 +19,7 @@ namespace FusionSystems.
 
         public List<S_FusionArm> Arms = new List<S_FusionArm>();
         public int BlockCount;
-        private IMyCubeGrid _grid;
+        public readonly IMyCubeGrid Grid;
 
         /// <summary>
         ///     Maximum power storage
@@ -59,7 +59,7 @@ namespace FusionSystems.
         public S_FusionSystem(int physicalAssemblyId)
         {
             PhysicalAssemblyId = physicalAssemblyId;
-            _grid = ModularApi.GetAssemblyGrid(physicalAssemblyId);
+            Grid = ModularApi.GetAssemblyGrid(physicalAssemblyId);
         }
 
         private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
@@ -180,7 +180,7 @@ namespace FusionSystems.
 
         private void UpdatePower(bool updateReactors = false)
         {
-            float generationModifier = 1/(HeatManager.I.GetGridHeatLevel(_grid) + 0.5f);
+            float generationModifier = 1/(HeatManager.I.GetGridHeatLevel(Grid) + 0.5f);
             var powerGeneration = float.Epsilon;
             var powerCapacity = float.Epsilon;
             var totalPowerUsage = 0f;

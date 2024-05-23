@@ -48,7 +48,6 @@ namespace FusionSystems.HeatParts
                 HeatStored = (HeatCapacity + BaseHeatCapacity);
 
             HeatRatio = HeatStored / (HeatCapacity + BaseHeatCapacity);
-            MyAPIGateway.Utilities.ShowNotification($"Heat: {HeatRatio*100:N0}% |  {HeatStored:F}/{(HeatCapacity + BaseHeatCapacity):F} | +{HeatGeneration:F} -{(HeatDissipation + BaseHeatDissipation)*HeatRatio:F}/s", 1000/60);
         }
 
         private int _ticks = 0;

@@ -1,6 +1,7 @@
 ﻿using System;
 using FusionSystems.Communication;
 using FusionSystems.FusionParts;
+using FusionSystems.HeatParts;
 using RichHudFramework.UI;
 using RichHudFramework.UI.Client;
 using RichHudFramework.UI.Rendering;
@@ -13,18 +14,25 @@ namespace FusionSystems.HudHelpers
     internal class ConsumptionBar : WindowBase
     {
         private readonly TexturedBox _storageBackground;
-        private readonly TexturedBox _storageForeground;
+        private readonly TexturedBox _storageBar;
+        private readonly TexturedBox _heatBar;
         private bool _shouldHide;
 
 
         public ConsumptionBar(HudParentBase parent) : base(parent)
         {
-            _storageForeground = new TexturedBox(body)
+            _storageBar = new TexturedBox(body)
             {
                 Material = new Material("fusionBarBackground", Vector2.One * 100),
-                ParentAlignment = ParentAlignments.Bottom | ParentAlignments.InnerV,
-                DimAlignment = DimAlignments.Width,
+                ParentAlignment = ParentAlignments.Bottom | ParentAlignments.Left | ParentAlignments.Inner,
                 Color = new Color(1, 1, 1, 0.75f)
+            };
+
+            _heatBar = new TexturedBox(body)
+            {
+                Material = new Material("fusionBarBackground", Vector2.One * 100),
+                ParentAlignment = ParentAlignments.Bottom | ParentAlignments.Right | ParentAlignments.Inner,
+                Color = new Color(1, 0, 0, 0.75f)
             };
 
             _storageBackground = new TexturedBox(body)
@@ -107,7 +115,14 @@ namespace FusionSystems.HudHelpers
                 timeToCharge = 0;
 
             HeaderText = $"Fusion | {(totalFusionGeneration > 0 ? "+" : "-")}{Math.Round(timeToCharge)}s";
-            _storageForeground.Height = storagePct * _storageBackground.Height;
+            _storageBar.Height = storagePct * _storageBackground.Height;
+
+            float heatPct = HeatManager.I.GetGridHeatLevel(playerGrid);
+            _heatBar.Height = heatPct * _storageBackground.Height;
+            _heatBar.Color = new Color(heatPct, 1-heatPct, 0, 0.75f);
+
+            _storageBar.Width = _storageBackground.Width/2;
+            _heatBar.Width = _storageBackground.Width/2;
             //_storageForeground.Origin = new Vector2D(_storageForeground.Origin.X, _storageForeground.Width * 0.75 - _storageBackground.Width*0.35); // THIS SHOULD BE RICHHUD!
         }
     }

@@ -139,8 +139,9 @@ namespace FusionSystems.HeatParts
 
             bool doesIntersect = false;
 
-            DebugDraw.DebugDraw.AddLine(blockMatrix.Translation,
-                blockMatrix.Translation + blockMatrix.Backward * gridMaxExtents, Color.Bisque, 2);
+            if (ModularApi.IsDebug())
+                DebugDraw.DebugDraw.AddLine(blockMatrix.Translation,
+                    blockMatrix.Translation + blockMatrix.Backward * gridMaxExtents, Color.Bisque, 2);
 
             Parent.Grid.RayCastCells(blockMatrix.Translation,
                 blockMatrix.Translation + blockMatrix.Backward * gridMaxExtents, _cellPositions);
