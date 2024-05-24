@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Linq;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers;
+using FusionSystems.Communication;
+using FusionSystems.FusionParts;
+using FusionSystems.HeatParts;
+using FusionSystems.HudHelpers;
 using RichHudFramework.Client;
 using RichHudFramework.UI.Client;
 using Sandbox.Game;
 using VRage.Game.Components;
 using VRage.Utils;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
+namespace FusionSystems
 {
     /// <summary>
     ///     Semi-independent script for managing the player HUD.
@@ -22,6 +24,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
         private ConsumptionBar ConsumptionBar;
         private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
         private static S_FusionManager FusionManager => S_FusionManager.I;
+        private static HeatManager HeatManager => HeatManager.I;
 
         #region Base Methods
 
@@ -30,12 +33,14 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
             I = this;
 
             FusionManager.Load();
+            HeatManager.Load();
             RichHudClient.Init("FusionSystems", () => { }, () => { });
         }
 
         protected override void UnloadData()
         {
             FusionManager.Unload();
+            HeatManager.Unload();
             I = null;
 
             //RichHudClient.Reset();
@@ -53,6 +58,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                         Visible = true
                     };
 
+                HeatManager.UpdateTick();
                 FusionManager.UpdateTick();
                 ConsumptionBar?.Update();
 
@@ -69,7 +75,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                             continue;
 
                         MyVisualScriptLogicProvider.AddQuestlogDetailLocal(
-                            $"[{system.PhysicalAssemblyId}] Power: {Math.Round(system.PowerStored / system.MaxPowerStored * 100f)}% ({Math.Round(system.MaxPowerStored)} @ {Math.Round(system.PowerGeneration * 60, 1)}/s) | Loops: {system.Arms.Count} | Blocks: {system.BlockCount}",
+                            $"[{system.PhysicalAssemblyId}] Power: {Math.Round(system.PowerStored / system.MaxPowerStored * 100f)}% ({Math.Round(system.MaxPowerStored)} @ {Math.Round(system.PowerGeneration * 60, 1)}/s) | Loops: {system.Arms.Count} | Blocks: {system.BlockCount} | Heat: {HeatManager.I.GetGridHeatLevel(system.Grid)*100:N0}%",
                             false, false);
                         displayedCount++;
                     }

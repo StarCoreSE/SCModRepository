@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
+using FusionSystems.Communication;
 using VRage.Game.ModAPI;
 using VRageMath;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
+namespace FusionSystems.
     FusionParts
 {
     /// <summary>
@@ -13,9 +13,10 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
     /// </summary>
     internal struct S_FusionArm
     {
-        private const float LengthEfficiencyModifier = 0.13f;
+        private const float LengthEfficiencyModifier = 0.15f;
         private const float BlockPowerGeneration = 0.02f;
         private const float BlockPowerStorage = 32f;
+        private const float SharedPropertyModifier = 0.05f;
 
         private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
 
@@ -46,11 +47,11 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 {
                     case "Caster_Accelerator_90":
                         PowerGeneration += BlockPowerGeneration;
-                        PowerStorage += BlockPowerStorage * 0.05f;
+                        PowerStorage += BlockPowerStorage * SharedPropertyModifier;
                         break;
                     case "Caster_Accelerator_0":
                         PowerStorage += BlockPowerStorage;
-                        PowerGeneration += BlockPowerGeneration * 0.05f;
+                        PowerGeneration += BlockPowerGeneration * SharedPropertyModifier;
                         break;
                 }
 

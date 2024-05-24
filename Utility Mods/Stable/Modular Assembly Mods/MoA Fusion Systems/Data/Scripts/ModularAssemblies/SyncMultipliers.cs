@@ -4,7 +4,7 @@ using ProtoBuf;
 using Sandbox.ModAPI;
 using VRage.Game.Components;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
+namespace FusionSystems
 {
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     public class SyncMultipliers : MySessionComponentBase

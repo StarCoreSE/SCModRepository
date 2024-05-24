@@ -10,7 +10,7 @@ using VRage.Utils;
 using VRageMath;
 using static VRageRender.MyBillboard;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
+namespace FusionSystems.
     DebugDraw
 {
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]

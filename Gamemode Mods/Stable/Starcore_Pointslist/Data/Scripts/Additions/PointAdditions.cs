@@ -713,6 +713,8 @@ namespace ShipPoints
             ["Caster_Feeder"] = 10,
             ["Caster_FocusLens"] = 50,
             ["Caster_Reactor"] = 125,
+            ["Heat_Heatsink"] = 10,
+            ["Heat_FlatRadiator"] = 10,
             #endregion
         };
 

@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts;
+using FusionSystems.Communication;
 using VRage.Game.ModAPI;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
+namespace FusionSystems.FusionParts
 {
     internal class S_FusionManager
     {
         public static S_FusionManager I = new S_FusionManager();
 
         private int _ticks;
-        public ModularDefinition Definition;
+        public ModularDefinition FusionDefinition;
+        public ModularDefinition HeatDefinition;
         public Dictionary<int, S_FusionSystem> FusionSystems = new Dictionary<int, S_FusionSystem>();
         private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
 

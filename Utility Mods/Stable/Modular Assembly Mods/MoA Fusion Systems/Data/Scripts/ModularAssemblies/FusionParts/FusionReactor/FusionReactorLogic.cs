@@ -5,7 +5,7 @@ using VRage.Game.Components;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
+namespace FusionSystems.
     FusionParts.FusionReactor
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Reactor), false, "Caster_Reactor")]
@@ -31,7 +31,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             // Power generation consumed (per second)
             var powerConsumption = PowerGeneration * 60 * reactorConsumptionMultiplier;
 
-            var reactorEfficiencyMultiplier = 1 / (0.8f + reactorConsumptionMultiplier);
+            var reactorEfficiencyMultiplier = 1 / (0.669f + reactorConsumptionMultiplier);
 
             // Power generated (per second)
             var reactorOutput = reactorEfficiencyMultiplier * powerConsumption * MegawattsPerFusionPower;
