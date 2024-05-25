@@ -1,4 +1,5 @@
-﻿using ProtoBuf;
+﻿using System;
+using ProtoBuf;
 using Sandbox.ModAPI;
 using ShipPoints.ShipTracking;
 
@@ -11,6 +12,11 @@ namespace ShipPoints.HeartNetworking.Custom
         {
             if (!MyAPIGateway.Session.IsServer)
                 return;
+
+            if (PointCheck.I == null)
+                throw new Exception("Null PointCheck instance!");
+            if (TrackingManager.I == null)
+                throw new Exception("Null TrackingManager instance!");
 
             Log.Info("Received join-sync request from " + SenderSteamId);
 
