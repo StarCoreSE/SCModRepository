@@ -31,6 +31,12 @@ namespace ShipPoints.HeartNetworking.Custom
 
         public override void Received(ulong SenderSteamId)
         {
+            if (TrackingManager.I == null)
+            {
+                Log.Info("TrackingManager is null!");
+                return;
+            }
+
             if (TrackedGrids == null)
             {
                 Log.Info("Null TrackedGrids!");
