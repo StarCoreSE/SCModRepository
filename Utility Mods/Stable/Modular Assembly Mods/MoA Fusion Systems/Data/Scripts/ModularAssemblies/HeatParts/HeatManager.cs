@@ -35,7 +35,7 @@ namespace FusionSystems.HeatParts
 
         public float GetGridHeatLevel(IMyCubeGrid grid)
         {
-            return _heatSystems[grid].HeatRatio;
+            return _heatSystems.GetValueOrDefault(grid, null)?.HeatRatio ?? -1;
         }
 
         private void OnEntityAdd(IMyEntity entity)
