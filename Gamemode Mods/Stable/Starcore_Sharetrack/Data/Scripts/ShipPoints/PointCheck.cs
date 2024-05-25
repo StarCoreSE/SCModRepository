@@ -197,9 +197,6 @@ namespace ShipPoints
                 Visible = false, //defaulted off?
                 InitialColor = Color.White
             };
-
-            // Avoid bootlock when opening world with autotracked grids.
-            TrackingManager.Init();
         }
 
         private void HandleKeyInputs()
@@ -398,6 +395,9 @@ namespace ShipPoints
                 // Initialize the sphere entities
                 // Initialize the text_api with the HUDRegistered callback
                 TextHudApi = new HudAPIv2(HudRegistered);
+
+            // Avoid bootlock when opening world with autotracked grids.
+            TrackingManager.Init();
 
             // Initialize the WC_api and load it if it's not null
 
