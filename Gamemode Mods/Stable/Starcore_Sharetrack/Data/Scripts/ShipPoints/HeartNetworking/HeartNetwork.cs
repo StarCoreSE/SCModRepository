@@ -70,7 +70,14 @@ namespace ShipPoints.HeartNetworking
 
         private void HandlePacket(PacketBase packet, ulong senderSteamId)
         {
-            packet.Received(senderSteamId);
+            try
+            {
+                packet.Received(senderSteamId);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
         }
 
 

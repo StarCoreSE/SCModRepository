@@ -206,6 +206,10 @@ namespace ShipPoints.ShipTracking
 
             if (blockDisplayName.Contains("Letter")) blockDisplayName = "Letter";
             else if (blockDisplayName.Contains("Beam Block")) blockDisplayName = "Beam Block";
+            else if (blockDisplayName.Contains("Window") && !blockDisplayName.Contains("Buster"))
+                blockDisplayName = "Window";
+            else if (blockDisplayName.Contains("Neon"))
+                blockDisplayName = "Neon Tube";
         }
 
 

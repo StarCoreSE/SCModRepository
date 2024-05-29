@@ -177,7 +177,7 @@ namespace ShipPoints.ShipTracking
                     TotalPower += ((IMyPowerProducer)block).MaxOutput;
                 }
 
-                else if (!WcApi.HasCoreWeapon((MyEntity)block))
+                if (!(block is IMyConveyorSorter) || !WcApi.HasCoreWeapon((MyEntity)block))
                 {
                     var blockDisplayName = block.DefinitionDisplayNameText;
                     if (blockDisplayName

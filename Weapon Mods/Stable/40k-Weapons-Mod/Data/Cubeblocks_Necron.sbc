@@ -230,11 +230,11 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>DoomsdayCannonSmall</SubtypeId>
       </Id>
-      <DisplayName>Gauss Flux Arc</DisplayName>
-      <Icon>Textures\icons\NecronDoomsday.dds</Icon>
+      <DisplayName>Necron Doomsday Cannon</DisplayName>
+      <Icon>Textures\icons\NecronDoomsdayCannon.dds</Icon>
       <CubeSize>Small</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
-      <Size x="35" y="5" z="5" />
+      <Size x="5" y="5" z="35" />
       <ModelOffset x="0" y="0" z="0" />
       <Model>Models\SG_NecronDoomsdayCannon.mwm</Model>
       <Components>
@@ -251,7 +251,7 @@
       <CriticalComponent Subtype="Computer" Index="0" />
       <BuildProgressModels>
       </BuildProgressModels>
-      <BlockPairName>FluxArc</BlockPairName>
+      <BlockPairName>Doomsday</BlockPairName>
       <EdgeType>Light</EdgeType>
       <BuildTimeSeconds>40</BuildTimeSeconds>
       <WeaponDefinitionId Subtype="Necron" />
