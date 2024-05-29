@@ -10,9 +10,6 @@ namespace SCModRepository_Dev.Gamemode_Mods.Development.Starcore_Sharetrack_Dev.
     {
         public override void Received(ulong SenderSteamId)
         {
-            if (!MyAPIGateway.Session.IsUserAdmin(SenderSteamId))
-                return;
-
             foreach (var g in MyEntities.GetEntities())
                 if (g != null && !g.MarkedForClose && g is MyCubeGrid)
                 {
