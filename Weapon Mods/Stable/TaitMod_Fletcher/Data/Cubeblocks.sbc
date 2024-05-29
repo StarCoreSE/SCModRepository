@@ -953,7 +953,7 @@
 			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>15cmTbtsKC36</SubtypeId>
       </Id>	
-      <DisplayName>[FAS] Sharnhorst</DisplayName>
+      <DisplayName>[FAS] Scharnhorst</DisplayName>
 	<Description>
 		150mm Single gun
 		5km AI range
@@ -1378,7 +1378,7 @@
       <Icon>Textures\GUI\Icons\381mmR.dds</Icon>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
-      <Size x="7" y="2" z="7" />
+      <Size x="5" y="2" z="5" />
       <ModelOffset x="0" y="0" z="0" />
       <Model>Models\381mm mk24\38cmSk34.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
@@ -1390,7 +1390,7 @@
         <Component Subtype="Computer" Count="100" />
         <Component Subtype="Construction" Count="300" />
 		<Component Subtype="MetalGrid" Count="500" />
-        <Component Subtype="SteelPlate" Count="6000" />
+        <Component Subtype="SteelPlate" Count="5000" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
@@ -1452,7 +1452,7 @@
       <CubeSize>Large</CubeSize>
       <GuiVisible>false</GuiVisible>
       <BlockTopology>TriangleMesh</BlockTopology>
-      <Size x="7" y="2" z="7" />
+      <Size x="5" y="2" z="5" />
       <ModelOffset x="0" y="0" z="0" />
       <Model>Models\381mm mk24\38cmSk34NR.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
@@ -1464,7 +1464,7 @@
         <Component Subtype="Computer" Count="100" />
         <Component Subtype="Construction" Count="300" />
 		<Component Subtype="MetalGrid" Count="500" />
-        <Component Subtype="SteelPlate" Count="6000" />
+        <Component Subtype="SteelPlate" Count="5000" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>

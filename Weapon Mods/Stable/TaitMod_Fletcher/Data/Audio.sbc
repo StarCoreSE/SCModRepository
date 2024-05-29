@@ -985,7 +985,7 @@
       </Id>
       <Category>WEP_SHIP</Category>
       <MaxDistance>150</MaxDistance>
-      <Volume>1</Volume>
+      <Volume>0.25</Volume>
       <Loopable>true</Loopable>
       <Waves>
         <Wave Type="D3">
