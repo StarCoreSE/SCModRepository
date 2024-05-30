@@ -25,9 +25,9 @@
 				<Component Subtype="GravityGenerator" Count="600" />
 				<Component Subtype="Motor" Count="400" />
 				<Component Subtype="Computer" Count="100" />
-				<Component Subtype="Construction" Count="6000" />
+				<Component Subtype="Construction" Count="5500" />
 				<Component Subtype="MetalGrid" Count="600" />
-				<Component Subtype="SteelPlate" Count="6500" />
+				<Component Subtype="SteelPlate" Count="5500" />
 			</Components>
 			<CriticalComponent Subtype="Motor" Index="0" />
 			<MountPoints>
