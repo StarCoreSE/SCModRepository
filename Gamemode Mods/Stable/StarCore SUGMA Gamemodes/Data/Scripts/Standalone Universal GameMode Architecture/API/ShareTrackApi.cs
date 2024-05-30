@@ -1,12 +1,12 @@
-﻿using Sandbox.ModAPI;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Sandbox.ModAPI;
+using VRage;
 using VRage.Game.ModAPI;
 using VRage.Utils;
-using VRage;
 using VRageMath;
 
-namespace ShipPoints.TrackerApi
+namespace SC.SUGMA.API
 {
     // Aristeas? Reuse code? NEVER...
     public class ShareTrackApi
@@ -14,7 +14,7 @@ namespace ShipPoints.TrackerApi
         /// <summary>
         ///     The expected API version.
         /// </summary>
-        public const int ApiVersion = 2;
+        public const int ApiVersion = 1;
 
         /// <summary>
         ///     Triggered whenever the API is ready - added to by the constructor or manually.

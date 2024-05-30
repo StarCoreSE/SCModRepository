@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using SC.SUGMA.GameModes.DeathMatch;
+using SC.SUGMA.API;
+using SC.SUGMA.GameModes.TeamDeathMatch;
 using SC.SUGMA.GameState;
 using SC.SUGMA.HeartNetworking;
 using VRage.Game.Components;
@@ -20,10 +21,12 @@ namespace SC.SUGMA
             ["HeartNetwork"] = new HeartNetwork(),
             ["PointTracker"] = new PointTracker(),
             ["PlayerTracker"] = new PlayerTracker(),
-            ["DeathmatchGamemode"] = new DeathmatchGamemode("PointTracker"),
+            ["DeathmatchGamemode"] = new TeamDeathmatchGamemode("PointTracker"),
         };
 
         public static SUGMA_SessionComponent I { get; private set; }
+
+        public ShareTrackApi ShareTrackApi = new ShareTrackApi();
 
         #region Base Methods
 
@@ -31,6 +34,18 @@ namespace SC.SUGMA
         {
             I = this;
             Log.Init();
+            try
+            {
+                ShareTrackApi.Init(ModContext, FinishInit);
+            }
+            catch (Exception ex)
+            {
+                Log.Exception(ex, typeof(SUGMA_SessionComponent));
+            }
+        }
+
+        private void FinishInit()
+        {
             try
             {
                 foreach (var component in _components)
@@ -44,6 +59,9 @@ namespace SC.SUGMA
 
         public override void UpdateAfterSimulation()
         {
+            if (!ShareTrackApi.IsReady)
+                return;
+
             try
             {
                 foreach (var component in _components.Values)
@@ -61,6 +79,15 @@ namespace SC.SUGMA
             {
                 foreach (var component in _components.Values)
                     component.Close();
+            }
+            catch (Exception ex)
+            {
+                Log.Exception(ex, typeof(SUGMA_SessionComponent));
+            }
+
+            try
+            {
+                ShareTrackApi.UnloadData();
             }
             catch (Exception ex)
             {
