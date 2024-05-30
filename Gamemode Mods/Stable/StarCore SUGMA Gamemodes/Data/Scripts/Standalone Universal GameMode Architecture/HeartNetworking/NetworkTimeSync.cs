@@ -1,11 +1,10 @@
 ﻿using System;
 using ProtoBuf;
 using Sandbox.ModAPI;
-using SC.SUGMA;
 using VRage.Game.Components;
 using VRage.Utils;
 
-namespace ShipPoints.MatchTiming
+namespace SC.SUGMA.HeartNetworking
 {
     /// <summary>
     ///     Packet used for syncing time betweeen client and server.

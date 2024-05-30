@@ -1,10 +1,9 @@
 ﻿using System;
 using Sandbox.ModAPI;
 using SC.SUGMA.HeartNetworking.Custom;
-using ShipPoints.MatchTiming;
 using VRage.Utils;
 
-namespace SC.SUGMA.MatchTiming
+namespace SC.SUGMA.GameState
 {
     /// <summary>
     ///     Keeps track of the match timer for networking and other mods.
@@ -58,11 +57,7 @@ namespace SC.SUGMA.MatchTiming
 
         #region Overrides
 
-        public void Init()
-        {
-        }
-
-        public void Close()
+        public override void Close()
         {
         }
 
@@ -71,7 +66,7 @@ namespace SC.SUGMA.MatchTiming
         /// </summary>
         public int Ticks;
 
-        public void UpdateTick()
+        public override void UpdateTick()
         {
             try
             {

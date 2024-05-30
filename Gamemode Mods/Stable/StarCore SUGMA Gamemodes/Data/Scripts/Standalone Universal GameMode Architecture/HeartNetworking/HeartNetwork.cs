@@ -21,9 +21,9 @@ namespace SC.SUGMA.HeartNetworking
         public ushort NetworkId { get; private set; }
         public int TotalNetworkLoad { get; private set; }
 
-        public void Init()
+        public override void Init(string id)
         {
-            
+            base.Init(id);
             I = this;
 
             NetworkId = 47591;
@@ -32,13 +32,13 @@ namespace SC.SUGMA.HeartNetworking
             foreach (var type in PacketBase.PacketTypes) TypeNetworkLoad.Add(type, 0);
         }
 
-        public void Close()
+        public override void Close()
         {
             MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(NetworkId, ReceivedPacket);
             I = null;
         }
 
-        public void UpdateTick()
+        public override void UpdateTick()
         {
             _networkLoadUpdate--;
             if (_networkLoadUpdate <= 0)

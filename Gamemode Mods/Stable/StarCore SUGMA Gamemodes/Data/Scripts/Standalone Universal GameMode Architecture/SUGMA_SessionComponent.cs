@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using SC.SUGMA.MatchTiming;
+using SC.SUGMA.GameModes.DeathMatch;
+using SC.SUGMA.GameState;
+using SC.SUGMA.HeartNetworking;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 
@@ -14,7 +16,11 @@ namespace SC.SUGMA
 
         private readonly Dictionary<string, ComponentBase> _components = new Dictionary<string, ComponentBase>
         {
-            ["GameTimer"] = new MatchTimer() 
+            ["GameTimer"] = new MatchTimer(),
+            ["HeartNetwork"] = new HeartNetwork(),
+            ["PointTracker"] = new PointTracker(),
+            ["PlayerTracker"] = new PlayerTracker(),
+            ["DeathmatchGamemode"] = new DeathmatchGamemode("PointTracker"),
         };
 
         public static SUGMA_SessionComponent I { get; private set; }
@@ -27,8 +33,8 @@ namespace SC.SUGMA
             Log.Init();
             try
             {
-                foreach (var component in _components.Values)
-                    component.Init();
+                foreach (var component in _components)
+                    component.Value.Init(component.Key);
             }
             catch (Exception ex)
             {
@@ -67,11 +73,11 @@ namespace SC.SUGMA
 
         #endregion
 
-        public ComponentBase GetComponent(string id)
+        public T GetComponent<T>(string id) where T : ComponentBase
         {
-            ComponentBase component = null;
+            ComponentBase component;
             _components.TryGetValue(id, out component);
-            return component;
+            return (T) component;
         }
     }
 }

@@ -3,7 +3,7 @@ namespace SC.SUGMA
 {
     public abstract class ComponentBase
     {
-        string Id;
+        public string Id;
 
         public virtual void Init(string id)
         {

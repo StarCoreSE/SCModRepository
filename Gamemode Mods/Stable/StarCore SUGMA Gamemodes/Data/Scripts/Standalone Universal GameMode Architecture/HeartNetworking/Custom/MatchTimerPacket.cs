@@ -1,8 +1,7 @@
 ﻿using System;
 using ProtoBuf;
 using Sandbox.ModAPI;
-using SC.SUGMA.MatchTiming;
-using ShipPoints.MatchTiming;
+using SC.SUGMA.GameState;
 
 namespace SC.SUGMA.HeartNetworking.Custom
 {
@@ -43,7 +42,7 @@ namespace SC.SUGMA.HeartNetworking.Custom
 
         public override void Received(ulong sender)
         {
-            (SUGMA_SessionComponent.I.GetComponent(_senderObjectId) as MatchTimer)?.Update(MatchStartTime(), MatchEndTime());
+            SUGMA_SessionComponent.I.GetComponent<MatchTimer>(_senderObjectId)?.Update(MatchStartTime(), MatchEndTime());
         }
 
         public static void SendMatchUpdate(MatchTimer timer)
