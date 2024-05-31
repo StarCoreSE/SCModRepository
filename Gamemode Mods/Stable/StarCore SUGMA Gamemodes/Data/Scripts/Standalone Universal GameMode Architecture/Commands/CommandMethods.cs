@@ -16,35 +16,24 @@ namespace SC.SUGMA.Commands
                 return;
             }
 
-            GamemodeBase gamemode = SUGMA_SessionComponent.I.GetComponent<GamemodeBase>(args[1].ToLower());
-
-            if (gamemode == null)
+            if (!SUGMA_SessionComponent.I.StartGamemode(args[1].ToLower()))
             {
-                MyAPIGateway.Utilities.ShowMessage("SUGMA", $"Unrecognized gamemode \"{args[1].ToLower()}\". Available gamemodes:\n  {string.Join("\n  ", SUGMA_SessionComponent.I.GetGamemodes())}");
+                MyAPIGateway.Utilities.ShowMessage("SUGMA", $"Unrecognized gamemode \"{args[1].ToLower()}\". Available gamemodes:\n-    {string.Join("\n-    ", SUGMA_SessionComponent.I.GetGamemodes())}");
                 return;
             }
 
-            MyAPIGateway.Utilities.ShowMessage("SUGMA", "Attempting to start match of type " + args[1].ToLower());
-            gamemode.StartRound();
-
-            SUtils.SetWorldPermissionsForMatch(true);
+            MyAPIGateway.Utilities.ShowMessage("SUGMA", "Starting match of type " + args[1].ToLower() + ".");
         }
 
         public static void End(string[] args)
         {
-            SUtils.SetWorldPermissionsForMatch(false);
-            GamemodeBase gamemode = SUGMA_SessionComponent.I.CurrentGamemode;
-
-            if (gamemode == null)
+            if (!SUGMA_SessionComponent.I.StopGamemode())
             {
-                MyAPIGateway.Utilities.ShowMessage("SUGMA", $"There isn't a game running, idiot.");
+                MyAPIGateway.Utilities.ShowMessage("SUGMA", $"There isn't a match running, idiot.");
                 return;
             }
 
-            MyAPIGateway.Utilities.ShowMessage("SUGMA", "Attempting to end match.");
-
-
-            gamemode.StopRound();
+            MyAPIGateway.Utilities.ShowMessage("SUGMA", "Match ended.");
         }
 
         #endregion

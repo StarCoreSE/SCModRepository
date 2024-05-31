@@ -5,6 +5,7 @@ using SC.SUGMA.Commands;
 using SC.SUGMA.GameModes.TeamDeathMatch;
 using SC.SUGMA.GameState;
 using SC.SUGMA.HeartNetworking;
+using SC.SUGMA.HeartNetworking.Custom;
 using VRage.Game.Components;
 
 namespace SC.SUGMA
@@ -137,6 +138,41 @@ namespace SC.SUGMA
                 gamemodes.Add(component.Key);
             }
             return gamemodes.ToArray();
+        }
+
+        public bool StartGamemode(string id)
+        {
+            Log.Info("Attempting to start gamemode ID: " + id);
+            if (!GetGamemodes().Contains(id))
+                return false;
+            CurrentGamemode?.StopRound();
+
+            CurrentGamemode = (GamemodeBase) _components[id];
+            CurrentGamemode.StartRound();
+
+            SUtils.SetWorldPermissionsForMatch(true);
+
+            GameStatePacket.UpdateGamestate();
+
+            return true;
+        }
+
+        public bool StopGamemode()
+        {
+            Log.Info("Attempting to stop gamemode.");
+            if (CurrentGamemode == null)
+                return false;
+
+            if (CurrentGamemode.IsStarted)
+                CurrentGamemode.StopRound();
+
+            CurrentGamemode = null;
+
+            SUtils.SetWorldPermissionsForMatch(false);
+
+            GameStatePacket.UpdateGamestate();
+
+            return true;
         }
     }
 }

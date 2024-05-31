@@ -12,7 +12,7 @@ namespace SC.SUGMA
 
         public virtual void StartRound()
         {
-            if (SUGMA_SessionComponent.I.CurrentGamemode != null && SUGMA_SessionComponent.I.CurrentGamemode.IsStarted)
+            if (SUGMA_SessionComponent.I.CurrentGamemode != null && SUGMA_SessionComponent.I.CurrentGamemode != this && SUGMA_SessionComponent.I.CurrentGamemode.IsStarted)
                 SUGMA_SessionComponent.I.CurrentGamemode.StopRound();
             SUGMA_SessionComponent.I.CurrentGamemode = this;
 
@@ -33,6 +33,7 @@ namespace SC.SUGMA
         {
             DisplayWinMessage();
             IsStarted = false;
+            SUGMA_SessionComponent.I.StopGamemode();
         }
 
         internal virtual void DisplayStartMessage()

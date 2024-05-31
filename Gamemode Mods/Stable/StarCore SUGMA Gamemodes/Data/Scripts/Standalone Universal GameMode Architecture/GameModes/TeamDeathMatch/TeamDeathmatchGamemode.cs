@@ -100,7 +100,6 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             _winningFaction = null;
             _trackedFactions.Clear();
             _pointTracker = null;
-            SUGMA_SessionComponent.I.CurrentGamemode = null;
         }
 
         internal override void DisplayWinMessage()
