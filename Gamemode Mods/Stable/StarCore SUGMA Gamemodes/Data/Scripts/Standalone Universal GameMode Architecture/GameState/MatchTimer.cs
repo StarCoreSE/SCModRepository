@@ -10,6 +10,8 @@ namespace SC.SUGMA.GameState
     /// </summary>
     public class MatchTimer : ComponentBase
     {
+        // TODO Create an OnInterval action.
+
         /// <summary>
         ///     How often the match timer should be synced, in ticks.
         /// </summary>

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using SC.SUGMA.API;
+using SC.SUGMA.Commands;
 using SC.SUGMA.GameModes.TeamDeathMatch;
 using SC.SUGMA.GameState;
 using SC.SUGMA.HeartNetworking;
 using VRage.Game.Components;
-using VRage.Game.ModAPI;
 
 namespace SC.SUGMA
 {
@@ -17,16 +16,16 @@ namespace SC.SUGMA
 
         private readonly Dictionary<string, ComponentBase> _components = new Dictionary<string, ComponentBase>
         {
-            ["GameTimer"] = new MatchTimer(),
+            ["MatchTimer"] = new MatchTimer(),
             ["HeartNetwork"] = new HeartNetwork(),
-            ["PointTracker"] = new PointTracker(),
             ["PlayerTracker"] = new PlayerTracker(),
-            ["DeathmatchGamemode"] = new TeamDeathmatchGamemode("PointTracker"),
+            ["tdm"] = new TeamDeathmatchGamemode(),
         };
 
         public static SUGMA_SessionComponent I { get; private set; }
 
         public ShareTrackApi ShareTrackApi = new ShareTrackApi();
+        public GamemodeBase CurrentGamemode = null;
 
         #region Base Methods
 
@@ -36,6 +35,7 @@ namespace SC.SUGMA
             Log.Init();
             try
             {
+                CommandHandler.Init();
                 ShareTrackApi.Init(ModContext, FinishInit);
             }
             catch (Exception ex)
@@ -87,6 +87,7 @@ namespace SC.SUGMA
 
             try
             {
+                CommandHandler.Close();
                 ShareTrackApi.UnloadData();
             }
             catch (Exception ex)
@@ -105,6 +106,37 @@ namespace SC.SUGMA
             ComponentBase component;
             _components.TryGetValue(id, out component);
             return (T) component;
+        }
+
+        public bool RegisterComponent<T>(string id, T component) where T : ComponentBase
+        {
+            if (_components.ContainsKey(id))
+                return false;
+
+            _components.Add(id, component);
+            component.Init(id);
+
+            return true;
+        }
+
+        public bool UnregisterComponent(string id)
+        {
+            ComponentBase component;
+            if (_components.TryGetValue(id, out component))
+                component.Close();
+            return _components.Remove(id);
+        }
+
+        public string[] GetGamemodes()
+        {
+            List<string> gamemodes = new List<string>();
+            foreach (var component in _components)
+            {
+                if (!(component.Value is GamemodeBase))
+                    continue;
+                gamemodes.Add(component.Key);
+            }
+            return gamemodes.ToArray();
         }
     }
 }
