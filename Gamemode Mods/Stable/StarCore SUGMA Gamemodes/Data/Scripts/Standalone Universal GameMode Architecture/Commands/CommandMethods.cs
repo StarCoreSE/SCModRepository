@@ -1,5 +1,6 @@
 ﻿using System;
 using Sandbox.ModAPI;
+using VRage.Game;
 
 namespace SC.SUGMA.Commands
 {
@@ -26,11 +27,12 @@ namespace SC.SUGMA.Commands
             MyAPIGateway.Utilities.ShowMessage("SUGMA", "Attempting to start match of type " + args[1].ToLower());
             gamemode.StartRound();
 
-            MyAPIGateway.Utilities.ShowNotification("HEY DUMBASS, IS DAMAGE ON?", 10000, "Red");
+            SUtils.SetWorldPermissionsForMatch(true);
         }
 
         public static void End(string[] args)
         {
+            SUtils.SetWorldPermissionsForMatch(false);
             GamemodeBase gamemode = SUGMA_SessionComponent.I.CurrentGamemode;
 
             if (gamemode == null)
