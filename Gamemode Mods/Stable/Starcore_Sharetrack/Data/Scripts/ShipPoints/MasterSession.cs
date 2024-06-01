@@ -2,19 +2,21 @@
 using ShipPoints.Commands;
 using ShipPoints.HeartNetworking;
 using ShipPoints.ShipTracking;
+using ShipPoints.TrackerApi;
 using VRage.Game.Components;
+using VRageMath;
 
 namespace ShipPoints
 {
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     internal class MasterSession : MySessionComponentBase
     {
-        public const ushort ComId = 42511;
-        public const string Keyword = "/debug";
-        public const string DisplayName = "Debug";
+        public static readonly Vector2I ModVersion = new Vector2I(2, 1);
+
         public static MasterSession I;
 
         private readonly PointCheck _pointCheck = new PointCheck();
+        private ApiProvider _apiProvider;
 
         public override void LoadData()
         {
@@ -26,6 +28,7 @@ namespace ShipPoints
                 HeartNetwork.I.LoadData(42521);
                 CommandHandler.Init();
                 _pointCheck.Init();
+                _apiProvider = new ApiProvider();
             }
             catch (Exception ex)
             {
@@ -37,6 +40,7 @@ namespace ShipPoints
         {
             try
             {
+                _apiProvider.Unload();
                 _pointCheck.Close();
                 TrackingManager.Close();
                 CommandHandler.Close();

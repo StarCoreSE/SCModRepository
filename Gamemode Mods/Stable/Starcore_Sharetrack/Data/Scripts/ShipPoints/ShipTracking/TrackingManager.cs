@@ -25,6 +25,13 @@ namespace ShipPoints.ShipTracking
         public HashSet<IMyCubeGrid> AllGrids = new HashSet<IMyCubeGrid>();
         public Dictionary<IMyCubeGrid, ShipTracker> TrackedGrids = new Dictionary<IMyCubeGrid, ShipTracker>();
 
+        #region Public Actions
+
+        public Action<IMyCubeGrid, bool> OnShipTracked;
+        public Action<IMyCubeGrid, bool> OnShipAliveChanged;
+
+        #endregion
+
         private TrackingManager()
         {
             var entities = new HashSet<IMyEntity>();
@@ -158,6 +165,8 @@ namespace ShipPoints.ShipTracking
             var tracker = new ShipTracker(grid);
             TrackedGrids.Add(grid, tracker);
 
+            OnShipTracked?.Invoke(grid, true);
+
             if (!share)
                 return;
 
@@ -193,6 +202,8 @@ namespace ShipPoints.ShipTracking
             {
                 TrackedGrids[attachedGrid].DisposeHud();
                 TrackedGrids.Remove(attachedGrid);
+
+                OnShipTracked?.Invoke(attachedGrid, false);
             }
 
             if (!share)

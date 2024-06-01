@@ -115,6 +115,11 @@ namespace ShipPoints.ShipTracking
             // TODO: Update pilots
             foreach (var gridStat in _gridStats.Values)
                 gridStat.Update();
+
+            bool bufferIsFunctional = IsFunctional;
+            IsFunctional = TotalPower > 0 && TotalTorque > 0 && CockpitCount > 0;
+            if (bufferIsFunctional != IsFunctional)
+                TrackingManager.I.OnShipAliveChanged?.Invoke(Grid, IsFunctional);
         }
 
         private void OnGridAdd(IMyGridGroupData groupData, IMyCubeGrid grid, IMyGridGroupData previousGroupData)
@@ -296,7 +301,7 @@ namespace ShipPoints.ShipTracking
 
         #region Global Stats
 
-        public bool IsFunctional => TotalPower > 0 && TotalTorque > 0 && CockpitCount > 0;
+        public bool IsFunctional = false;
 
         public int BlockCount
         {
