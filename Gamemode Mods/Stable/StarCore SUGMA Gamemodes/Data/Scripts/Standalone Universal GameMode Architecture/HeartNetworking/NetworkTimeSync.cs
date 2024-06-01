@@ -12,7 +12,7 @@ namespace SC.SUGMA.HeartNetworking
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     internal class NetworkTimeSync : MySessionComponentBase
     {
-        public const ushort NetworkId = 23762;
+        public const ushort NetworkId = 23764;
         public static double ThisPlayerPing;
         public static double ServerTimeOffset;
 

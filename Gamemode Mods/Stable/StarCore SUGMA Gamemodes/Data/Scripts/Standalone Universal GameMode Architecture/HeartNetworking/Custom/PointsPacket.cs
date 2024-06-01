@@ -8,10 +8,11 @@ using VRage.Game.ModAPI;
 
 namespace SC.SUGMA.HeartNetworking.Custom
 {
+    [ProtoContract]
     internal class PointsPacket : PacketBase
     {
-        [ProtoMember(1)] private string _senderObjectId;
-        [ProtoMember(2)] private Dictionary<long, int> _points;
+        [ProtoMember(11)] private string _senderObjectId;
+        [ProtoMember(12)] private Dictionary<long, int> _points;
 
         public Dictionary<IMyFaction, int> FactionPoints
         {
@@ -40,6 +41,8 @@ namespace SC.SUGMA.HeartNetworking.Custom
             _points = new Dictionary<long, int>();
             foreach (var factionKvp in pointTracker.FactionPoints)
                 _points.Add(factionKvp.Key.FactionId, factionKvp.Value);
+
+            Log.Info("Created new PointsPacket with factions: " + _points.Count);
         }
 
         public override void Received(ulong SenderSteamId)

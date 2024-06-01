@@ -1,23 +1,28 @@
-﻿using Sandbox.ModAPI;
+﻿using ProtoBuf;
+using Sandbox.ModAPI;
 
 namespace SC.SUGMA.HeartNetworking.Custom
 {
+    [ProtoContract]
     public class GameStatePacket : PacketBase
     {
-        public string Gamemode;
+        [ProtoMember(11)] public string Gamemode;
 
         public override void Received(ulong SenderSteamId)
         {
+            Log.Info("Recieved gamestate update packet. Contents: " + Gamemode);
+
             if (Gamemode == "null")
             {
                 SUGMA_SessionComponent.I.StopGamemode();
                 return;
             }
 
-            if (SUGMA_SessionComponent.I.CurrentGamemode?.Id == Gamemode)
+            if ((SUGMA_SessionComponent.I.CurrentGamemode?.Id ?? "null") == Gamemode)
                 return;
 
-            SUGMA_SessionComponent.I.StartGamemode(Gamemode);
+            if (!SUGMA_SessionComponent.I.StartGamemode(Gamemode))
+                Log.Info("Somehow received invalid gamemode request of type " + Gamemode);
         }
 
         public static void UpdateGamestate()

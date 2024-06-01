@@ -16,7 +16,7 @@ namespace SC.SUGMA
                 .WriteFileInGlobalStorage(
                     "SUGMA_GameMode.log"); // Only creating one debug.log to avoid clutter. Might change in the future.
             _writer.WriteLine(
-                $"     SUGMA v{SUGMA_SessionComponent.ModVersion} - Debug Log\n===========================================\n");
+                $"      SUGMA v{SUGMA_SessionComponent.ModVersion} - {(MyAPIGateway.Session.IsServer ? "Server" : "Client")} Debug Log\n===========================================\n");
             _writer.Flush();
         }
         

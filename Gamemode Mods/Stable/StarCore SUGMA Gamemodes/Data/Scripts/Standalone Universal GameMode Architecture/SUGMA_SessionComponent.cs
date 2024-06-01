@@ -28,6 +28,8 @@ namespace SC.SUGMA
         public ShareTrackApi ShareTrackApi = new ShareTrackApi();
         public GamemodeBase CurrentGamemode = null;
 
+        public bool HasInited = false;
+
         #region Base Methods
 
         public override void LoadData()
@@ -62,6 +64,12 @@ namespace SC.SUGMA
         {
             if (!ShareTrackApi.IsReady)
                 return;
+
+            if (!HasInited)
+            {
+                // TODO sync request packet
+                HasInited = true;
+            }
 
             try
             {
@@ -142,6 +150,8 @@ namespace SC.SUGMA
 
         public bool StartGamemode(string id)
         {
+            // TODO: Apex Legends-esque starting screen.
+
             Log.Info("Attempting to start gamemode ID: " + id);
             if (!GetGamemodes().Contains(id))
                 return false;

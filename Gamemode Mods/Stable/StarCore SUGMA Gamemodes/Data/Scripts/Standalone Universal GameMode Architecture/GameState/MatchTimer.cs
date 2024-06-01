@@ -106,7 +106,8 @@ namespace SC.SUGMA.GameState
         {
             StartTime = DateTime.UtcNow;
             MatchDurationMinutes = matchDurationMinutes;
-            MatchTimerPacket.SendMatchUpdate(this);
+            if (MyAPIGateway.Session.IsServer)
+                MatchTimerPacket.SendMatchUpdate(this);
             IsMatchEnded = false;
             MyLog.Default.WriteLineAndConsole("[MatchTimer] Started Match. " + CurrentMatchTime);
         }

@@ -8,10 +8,9 @@ namespace SC.SUGMA.HeartNetworking.Custom
     [ProtoContract]
     internal class MatchTimerPacket : PacketBase
     {
-        [ProtoMember(4)] private string _senderObjectId;
-        [ProtoMember(3)] private readonly long _matchEndTime;
-        [ProtoMember(2)] private readonly long _matchStartTime;
-        [ProtoMember(1)] public ulong SenderSteamId;
+        [ProtoMember(13)] private string _senderObjectId;
+        [ProtoMember(12)] private readonly long _matchEndTime;
+        [ProtoMember(11)] private readonly long _matchStartTime;
 
         public MatchTimerPacket()
         {
@@ -20,7 +19,6 @@ namespace SC.SUGMA.HeartNetworking.Custom
         private MatchTimerPacket(MatchTimer timer)
         {
             _senderObjectId = timer.Id;
-            SenderSteamId = MyAPIGateway.Multiplayer.MyId;
             _matchStartTime = timer.StartTime.Ticks;
             _matchEndTime = timer.EndTime.Ticks;
         }
@@ -42,15 +40,22 @@ namespace SC.SUGMA.HeartNetworking.Custom
 
         public override void Received(ulong sender)
         {
+            //Log.Info($"Receive MatchTimerPacket:\n{this}\nTime offset: {NetworkTimeSync.ServerTimeOffset}");
             SUGMA_SessionComponent.I.GetComponent<MatchTimer>(_senderObjectId)?.Update(MatchStartTime(), MatchEndTime());
         }
 
         public static void SendMatchUpdate(MatchTimer timer)
         {
             var packet = new MatchTimerPacket(timer);
+            //Log.Info($"Send MatchTimerPacket:\n{packet}");
             HeartNetwork.I.SendToEveryone(packet);
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            return $"TimerId: {_senderObjectId}\nStartTime: {MatchStartTime()}\nEndTime: {MatchEndTime()}";
+        }
     }
 }

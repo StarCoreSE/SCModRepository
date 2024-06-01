@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sandbox.ModAPI;
+using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
 using VRage.Game.ModAPI;
 
@@ -12,6 +13,7 @@ namespace SC.SUGMA.GameState
         public int StartingPoints;
 
         public Dictionary<IMyFaction, int> FactionPoints { get; internal set; } = new Dictionary<IMyFaction, int>();
+        private bool _pointsUpdated = false;
 
         #region Base Methods
 
@@ -36,6 +38,12 @@ namespace SC.SUGMA.GameState
 
         public override void UpdateTick()
         {
+            if (_pointsUpdated && MyAPIGateway.Session.IsServer)
+            {
+                HeartNetwork.I.SendToEveryone(new PointsPacket(this));
+                _pointsUpdated = false;
+            }
+
             foreach (var faction in FactionPoints)
             {
                 //MyAPIGateway.Utilities.ShowNotification($"{faction.Key.Tag}: {faction.Value}", 1000/60);
@@ -67,6 +75,7 @@ namespace SC.SUGMA.GameState
 
             if (VictoryPoints > StartingPoints ? value >= VictoryPoints : value <= VictoryPoints)
                 OnFactionWin?.Invoke(faction);
+            _pointsUpdated = true;
         }
 
         public void SetFactionPoints(long factionId, int value)
@@ -83,6 +92,7 @@ namespace SC.SUGMA.GameState
 
             if (VictoryPoints > StartingPoints ? FactionPoints[faction] >= VictoryPoints : FactionPoints[faction] <= VictoryPoints)
                 OnFactionWin?.Invoke(faction);
+            _pointsUpdated = true;
         }
 
         public void AddFactionPoints(long factionId, int value)
@@ -93,6 +103,7 @@ namespace SC.SUGMA.GameState
         public void UpdateFromPacket(PointsPacket packet)
         {
             FactionPoints = packet.FactionPoints;
+            Log.Info("Updated from packet with factions: " + FactionPoints.Count);
         }
 
         #endregion
