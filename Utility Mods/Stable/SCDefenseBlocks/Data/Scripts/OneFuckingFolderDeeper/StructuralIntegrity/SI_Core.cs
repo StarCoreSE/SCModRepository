@@ -413,29 +413,32 @@ namespace StarCore.StructuralIntegrity
             if (!SIGenBlock.IsWorking || SIGenBlock.GameLogic == null)
                 return;
 
-            var blockLogic = SIGenBlock.GameLogic.GetAs<SI_Core>();
-            if (blockLogic == null)
-                return;
+            //var blockLogic = SIGenBlock.GameLogic.GetAs<SI_Core>();
+            //if (blockLogic == null)
+            //    return;
 
-            float totalPower = 0f;
-            var blocks = new List<IMySlimBlock>();
-            SIGenBlock.CubeGrid.GetBlocks(blocks);
+            //float totalPower = 0f;
+            //var blocks = new List<IMySlimBlock>();
+            //SIGenBlock.CubeGrid.GetBlocks(blocks);
+            //
+            //foreach (var block in blocks)
+            //{
+            //    if (block.FatBlock != null && block.FatBlock.IsWorking)
+            //    {
+            //        var fatBlock = block.FatBlock;
+            //        if (fatBlock is IMyPowerProducer)
+            //        {
+            //            var powerProducer = fatBlock as IMyPowerProducer;
+            //            totalPower = totalPower + powerProducer.MaxOutput;
+            //        }
+            //    }
+            //}
+            //
+            //if (MaxAvailableGridPower != totalPower)
+            //    MaxAvailableGridPower = totalPower;
 
-            foreach (var block in blocks)
-            {
-                if (block.FatBlock != null && block.FatBlock.IsWorking)
-                {
-                    var fatBlock = block.FatBlock;
-                    if (fatBlock is IMyPowerProducer)
-                    {
-                        var powerProducer = fatBlock as IMyPowerProducer;
-                        totalPower = totalPower + powerProducer.MaxOutput;
-                    }
-                }
-            }
-
-            if (MaxAvailableGridPower != totalPower)
-                MaxAvailableGridPower = totalPower;
+            MaxAvailableGridPower = SIGenBlock.CubeGrid.ResourceDistributor.MaxAvailableResourceByType(MyResourceDistributorComponent
+                .ElectricityId);
         }
 
         private void DisplayMessageToNearPlayers(int msgId)
