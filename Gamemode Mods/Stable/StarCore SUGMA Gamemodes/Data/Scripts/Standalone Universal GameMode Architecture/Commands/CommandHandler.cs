@@ -23,7 +23,7 @@ namespace SC.SUGMA.Commands
 
             ["start"] = new Command(
                 "SUGMA.Match",
-                "Begins a new match.",
+                "Begins a new match of type [arg1]. Run without arguments for a list of available gamemodes.",
                 CommandMethods.Start
             ),
             ["end"] = new Command(

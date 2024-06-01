@@ -16,7 +16,7 @@ namespace SC.SUGMA.Commands
                 return;
             }
 
-            if (!SUGMA_SessionComponent.I.StartGamemode(args[1].ToLower()))
+            if (!SUGMA_SessionComponent.I.StartGamemode(args[1].ToLower(), true))
             {
                 MyAPIGateway.Utilities.ShowMessage("SUGMA", $"Unrecognized gamemode \"{args[1].ToLower()}\". Available gamemodes:\n-    {string.Join("\n-    ", SUGMA_SessionComponent.I.GetGamemodes())}");
                 return;
@@ -27,7 +27,7 @@ namespace SC.SUGMA.Commands
 
         public static void End(string[] args)
         {
-            if (!SUGMA_SessionComponent.I.StopGamemode())
+            if (!SUGMA_SessionComponent.I.StopGamemode(true))
             {
                 MyAPIGateway.Utilities.ShowMessage("SUGMA", $"There isn't a match running, idiot.");
                 return;

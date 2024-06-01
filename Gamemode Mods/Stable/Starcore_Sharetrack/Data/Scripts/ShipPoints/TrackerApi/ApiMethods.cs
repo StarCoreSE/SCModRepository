@@ -27,32 +27,36 @@ namespace ShipPoints.TrackerApi
 
         private IMyCubeGrid[] GetTrackedGrids()
         {
-            return TrackingManager.I.TrackedGrids.Keys.ToArray();
+            return TrackingManager.I?.TrackedGrids.Keys.ToArray();
         }
 
         private bool IsGridAlive(IMyCubeGrid grid)
         {
-            return TrackingManager.I.TrackedGrids.GetValueOrDefault(grid, null)?.IsFunctional ?? false;
+            return TrackingManager.I?.TrackedGrids.GetValueOrDefault(grid, null)?.IsFunctional ?? false;
         }
 
         private void RegisterOnTrack(Action<IMyCubeGrid, bool> action)
         {
-            TrackingManager.I.OnShipTracked += action;
+            if (TrackingManager.I != null)
+                TrackingManager.I.OnShipTracked += action;
         }
 
         private void UnregisterOnTrack(Action<IMyCubeGrid, bool> action)
         {
-            TrackingManager.I.OnShipTracked -= action;
+            if (TrackingManager.I != null)
+                TrackingManager.I.OnShipTracked -= action;
         }
 
         private void RegisterOnAliveChanged(Action<IMyCubeGrid, bool> action)
         {
-            TrackingManager.I.OnShipAliveChanged += action;
+            if (TrackingManager.I != null)
+                TrackingManager.I.OnShipAliveChanged += action;
         }
 
         private void UnregisterOnAliveChanged(Action<IMyCubeGrid, bool> action)
         {
-            TrackingManager.I.OnShipAliveChanged -= action;
+            if (TrackingManager.I != null)
+                TrackingManager.I.OnShipAliveChanged -= action;
         }
     }
 }

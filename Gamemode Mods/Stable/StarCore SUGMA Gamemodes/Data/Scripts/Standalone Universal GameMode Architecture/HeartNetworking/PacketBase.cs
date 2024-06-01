@@ -8,6 +8,7 @@ namespace SC.SUGMA.HeartNetworking
     [ProtoInclude(1, typeof(MatchTimerPacket))]
     [ProtoInclude(2, typeof(GameStatePacket))]
     [ProtoInclude(3, typeof(PointsPacket))]
+    [ProtoInclude(4, typeof(SyncRequestPacket))]
     public abstract class PacketBase
     {
         public static readonly Type[] PacketTypes =
@@ -16,6 +17,7 @@ namespace SC.SUGMA.HeartNetworking
             typeof(MatchTimerPacket),
             typeof(GameStatePacket),
             typeof(PointsPacket),
+            typeof(SyncRequestPacket),
         };
 
         /// <summary>

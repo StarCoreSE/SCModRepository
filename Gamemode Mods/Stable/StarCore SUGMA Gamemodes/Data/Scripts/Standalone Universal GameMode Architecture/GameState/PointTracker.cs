@@ -103,7 +103,13 @@ namespace SC.SUGMA.GameState
         public void UpdateFromPacket(PointsPacket packet)
         {
             FactionPoints = packet.FactionPoints;
-            Log.Info("Updated from packet with factions: " + FactionPoints.Count);
+
+            //string data = "";
+            //foreach (var kvp in FactionPoints)
+            //{
+            //    data += $"\n-    {kvp.Key.Tag}: {kvp.Value}";
+            //}
+            //Log.Info("Updated from packet with:" + data);
         }
 
         #endregion

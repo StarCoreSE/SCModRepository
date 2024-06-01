@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Sandbox.ModAPI;
 using SC.SUGMA.API;
 using SC.SUGMA.Commands;
 using SC.SUGMA.GameModes.TeamDeathMatch;
@@ -7,6 +9,7 @@ using SC.SUGMA.GameState;
 using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
 using VRage.Game.Components;
+using VRage.ModAPI;
 
 namespace SC.SUGMA
 {
@@ -29,6 +32,7 @@ namespace SC.SUGMA
         public GamemodeBase CurrentGamemode = null;
 
         public bool HasInited = false;
+        private int _pollTimer = 0;
 
         #region Base Methods
 
@@ -51,7 +55,7 @@ namespace SC.SUGMA
         {
             try
             {
-                foreach (var component in _components)
+                foreach (var component in _components.ToArray())
                     component.Value.Init(component.Key);
             }
             catch (Exception ex)
@@ -67,13 +71,23 @@ namespace SC.SUGMA
 
             if (!HasInited)
             {
-                // TODO sync request packet
+                _pollTimer = 600;
                 HasInited = true;
             }
 
+            if (_pollTimer == 0)
+            {
+                // Clients should sync first-thing, in case a game is already running.
+                if (!MyAPIGateway.Session.IsServer)
+                    SyncRequestPacket.RequestSync();
+                _pollTimer = -1;
+            }
+            else if (_pollTimer > 0)
+                _pollTimer--;
+
             try
             {
-                foreach (var component in _components.Values)
+                foreach (var component in _components.Values.ToArray())
                     component.UpdateTick();
             }
             catch (Exception ex)
@@ -86,7 +100,7 @@ namespace SC.SUGMA
         {
             try
             {
-                foreach (var component in _components.Values)
+                foreach (var component in _components.Values.ToArray())
                     component.Close();
             }
             catch (Exception ex)
@@ -148,7 +162,7 @@ namespace SC.SUGMA
             return gamemodes.ToArray();
         }
 
-        public bool StartGamemode(string id)
+        public bool StartGamemode(string id, bool notifyNetwork = false)
         {
             // TODO: Apex Legends-esque starting screen.
 
@@ -162,14 +176,15 @@ namespace SC.SUGMA
 
             SUtils.SetWorldPermissionsForMatch(true);
 
-            GameStatePacket.UpdateGamestate();
+            if (MyAPIGateway.Session.IsServer || notifyNetwork)
+                GameStatePacket.UpdateGamestate();
 
             return true;
         }
 
-        public bool StopGamemode()
+        public bool StopGamemode(bool notifyNetwork = false)
         {
-            Log.Info("Attempting to stop gamemode.");
+            Log.Info("Attempting to stop gamemode [" + CurrentGamemode?.Id + "].");
             if (CurrentGamemode == null)
                 return false;
 
@@ -180,7 +195,8 @@ namespace SC.SUGMA
 
             SUtils.SetWorldPermissionsForMatch(false);
 
-            GameStatePacket.UpdateGamestate();
+            if (MyAPIGateway.Session.IsServer || notifyNetwork)
+                GameStatePacket.UpdateGamestate();
 
             return true;
         }
