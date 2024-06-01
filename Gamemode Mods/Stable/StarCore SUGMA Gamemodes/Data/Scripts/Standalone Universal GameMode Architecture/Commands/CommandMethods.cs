@@ -1,6 +1,7 @@
 ﻿using System;
 using Sandbox.ModAPI;
 using VRage.Game;
+using MyAPIGateway = Sandbox.ModAPI.MyAPIGateway;
 
 namespace SC.SUGMA.Commands
 {
@@ -22,7 +23,14 @@ namespace SC.SUGMA.Commands
                 return;
             }
 
-            MyAPIGateway.Utilities.ShowMessage("SUGMA", "Starting match of type " + args[1].ToLower() + ".");
+            if (SUGMA_SessionComponent.I.CurrentGamemode == null)
+            {
+                MyAPIGateway.Utilities.ShowMessage("SUGMA", "Internal exception encountered - failed to start match.");
+                return;
+            }
+                
+
+            MyAPIGateway.Utilities.ShowMessage("SUGMA", "Now starting: " + SUGMA_SessionComponent.I.CurrentGamemode.ReadableName + ".");
         }
 
         public static void End(string[] args)
