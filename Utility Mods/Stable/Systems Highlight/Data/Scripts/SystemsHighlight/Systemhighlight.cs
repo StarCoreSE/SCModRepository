@@ -119,9 +119,12 @@ namespace StarCore.SystemHighlight
 
         protected override void UnloadData()
         {
-            CoreSysAPI.Unload();
-            CoreSysAPI = null;
-
+            if (CoreSysAPI.IsReady || WCInstalled)
+            {
+                CoreSysAPI.Unload();
+                CoreSysAPI = null;
+            }
+            
             MyAPIGateway.Utilities.MessageEnteredSender -= HandleMessage;
         }
 
@@ -255,26 +258,32 @@ namespace StarCore.SystemHighlight
 
             if (message.Contains("/hlconv"))
             {
+                SetStatus($"Highlighting Conveyors \n Transparency: {Transparency} | Intensity: {HighlightIntensity}", 3000, "Green");
                 HandleHighlightWrapper(HighlightFilterType.Conveyor, gridBlocks, cubeGrid);
             }
             else if (message.Contains("/hlthrust"))
             {
+                SetStatus($"Highlighting Thrusters \n Transparency: {Transparency} | Intensity: {HighlightIntensity}", 3000, "Green");
                 HandleHighlightWrapper(HighlightFilterType.Thruster, gridBlocks, cubeGrid);
             }
             else if (message.Contains("/hlpower"))
             {
+                SetStatus($"Highlighting Power Blocks \n Transparency: {Transparency} | Intensity: {HighlightIntensity}", 3000, "Green");
                 HandleHighlightWrapper(HighlightFilterType.Power, gridBlocks, cubeGrid);
             }
             else if (message.Contains("/hlweapon"))
             {
+                SetStatus($"Highlighting Weapon Blocks \n Transparency: {Transparency} | Intensity: {HighlightIntensity}", 3000, "Green");
                 HandleHighlightWrapper(HighlightFilterType.Weapon, gridBlocks, cubeGrid);
             }
             else if (message.Contains("/hldamage"))
             {
+                SetStatus($"Highlighting Damaged Blocks \n Transparency: {Transparency} | Intensity: {HighlightIntensity}", 3000, "Green");
                 HandleHighlightWrapper(HighlightFilterType.Damage, gridBlocks, cubeGrid);
             }
             else if (message.Contains("/hlsteering"))
             {
+                SetStatus($"Highlighting Steering Blocks \n Transparency: {Transparency} | Intensity: {HighlightIntensity}", 3000, "Green");
                 HandleHighlightWrapper(HighlightFilterType.Steering, gridBlocks, cubeGrid);
             }
             else if (message.Contains("/hlclear"))
