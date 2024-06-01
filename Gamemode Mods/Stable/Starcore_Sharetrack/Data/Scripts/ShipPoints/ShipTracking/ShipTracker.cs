@@ -119,7 +119,9 @@ namespace ShipPoints.ShipTracking
             bool bufferIsFunctional = IsFunctional;
             IsFunctional = TotalPower > 0 && TotalTorque > 0 && CockpitCount > 0;
             if (bufferIsFunctional != IsFunctional)
+            {
                 TrackingManager.I.OnShipAliveChanged?.Invoke(Grid, IsFunctional);
+            }
         }
 
         private void OnGridAdd(IMyGridGroupData groupData, IMyCubeGrid grid, IMyGridGroupData previousGroupData)

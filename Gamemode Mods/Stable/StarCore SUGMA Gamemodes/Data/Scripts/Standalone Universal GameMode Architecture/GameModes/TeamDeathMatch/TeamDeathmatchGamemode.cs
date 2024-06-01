@@ -27,26 +27,20 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
         /// </summary>
         Dictionary<IMyFaction, int> _trackedFactions = new Dictionary<IMyFaction, int>();
 
-        public override void Init(string id)
-        {
-            base.Init(id);
-            // TODO move this into StartRound().
-            ShareTrackApi.RegisterOnTrack(OnTracked);
-        }
-
         public override void Close()
         {
-            ShareTrackApi.UnregisterOnTrack(OnTracked);
             StopRound();
         }
 
         public override void UpdateActive()
         {
+            if (_pointTracker == null)
+                return;
+
             int basePoints = (int)(_matchTimer.MatchDurationMinutes * 60);
             TimeSpan matchTime = _matchTimer.CurrentMatchTime;
-            int remainingBasePoints = (int) (basePoints - matchTime.TotalSeconds);
 
-            foreach (var factionKvp in _trackedFactions)
+            foreach (var factionKvp in _trackedFactions.ToArray())
             {
                 int factionPoints = (int) (basePoints * (_pointTracker.GetFactionPoints(factionKvp.Key) / (float) factionKvp.Value) - matchTime.TotalSeconds);
                 if (factionPoints <= 0)
@@ -68,7 +62,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             foreach (var grid in ShareTrackApi.GetTrackedGrids())
             {
                 IMyFaction faction = PlayerTracker.I.GetGridFaction(grid);
-                if (faction == null)
+                if (faction == null || !ShareTrackApi.IsGridAlive(grid))
                     continue;
 
                 if (!_trackedFactions.ContainsKey(faction))
@@ -88,6 +82,12 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             base.StartRound();
             MyAPIGateway.Utilities.ShowNotification("Combatants: " + string.Join(" vs ", factionNames),10000, "Red");
             _matchTimer.Start();
+
+            if (_trackedFactions.Count <= 1)
+            {
+                MyAPIGateway.Utilities.ShowNotification("There aren't any combatants, idiot!",10000, "Red");
+                StopRound();
+            }
         }
 
         public override void StopRound()
@@ -120,13 +120,9 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
 
 
-        private void OnTracked(IMyCubeGrid grid, bool isTracked)
-        {
-            MyAPIGateway.Utilities.ShowNotification($"T {grid.DisplayName}: {isTracked}");
-        }
-
         private void OnAliveChanged(IMyCubeGrid grid, bool isAlive)
         {
+            Log.Info("GridAliveSet: " + grid.DisplayName + " -> " + isAlive);
             if (isAlive)
                 return;
 

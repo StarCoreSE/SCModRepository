@@ -214,7 +214,15 @@ namespace ShipPoints
 
         private void UpdateTrackingData()
         {
-            if (MatchTimer.I.Ticks % 60 != 0 || IntegretyMessage == null || !TextHudApi.Heartbeat)
+            if (MatchTimer.I.Ticks % 60 != 0)
+                return;
+
+            foreach (var shipTracker in TrackingManager.I.TrackedGrids.Values)
+            {
+                shipTracker.Update();
+            }
+
+            if (IntegretyMessage == null || !TextHudApi.Heartbeat)
                 return;
 
             var tt = new StringBuilder();
@@ -250,8 +258,6 @@ namespace ShipPoints
         {
             foreach (var shipTracker in TrackingManager.I.TrackedGrids.Values)
             {
-                shipTracker.Update();
-
                 var fn = shipTracker.FactionName;
                 var o = shipTracker.OwnerName;
                 var nd = shipTracker.IsFunctional;

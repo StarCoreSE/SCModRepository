@@ -72,7 +72,6 @@ namespace ShipPoints.ShipTracking
 
             UpdateGlobalStats();
             UpdateWeaponStats();
-
             NeedsUpdate = false;
         }
 

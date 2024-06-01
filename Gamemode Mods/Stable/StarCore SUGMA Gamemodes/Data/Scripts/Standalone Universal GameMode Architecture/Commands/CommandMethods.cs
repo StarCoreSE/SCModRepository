@@ -1,6 +1,7 @@
 ﻿using System;
 using Sandbox.ModAPI;
 using VRage.Game;
+using MyAPIGateway = Sandbox.ModAPI.MyAPIGateway;
 
 namespace SC.SUGMA.Commands
 {
@@ -16,18 +17,25 @@ namespace SC.SUGMA.Commands
                 return;
             }
 
-            if (!SUGMA_SessionComponent.I.StartGamemode(args[1].ToLower()))
+            if (!SUGMA_SessionComponent.I.StartGamemode(args[1].ToLower(), true))
             {
                 MyAPIGateway.Utilities.ShowMessage("SUGMA", $"Unrecognized gamemode \"{args[1].ToLower()}\". Available gamemodes:\n-    {string.Join("\n-    ", SUGMA_SessionComponent.I.GetGamemodes())}");
                 return;
             }
 
-            MyAPIGateway.Utilities.ShowMessage("SUGMA", "Starting match of type " + args[1].ToLower() + ".");
+            if (SUGMA_SessionComponent.I.CurrentGamemode == null)
+            {
+                MyAPIGateway.Utilities.ShowMessage("SUGMA", "Internal exception encountered - failed to start match.");
+                return;
+            }
+                
+
+            MyAPIGateway.Utilities.ShowMessage("SUGMA", "Now starting: " + SUGMA_SessionComponent.I.CurrentGamemode.ReadableName + ".");
         }
 
         public static void End(string[] args)
         {
-            if (!SUGMA_SessionComponent.I.StopGamemode())
+            if (!SUGMA_SessionComponent.I.StopGamemode(true))
             {
                 MyAPIGateway.Utilities.ShowMessage("SUGMA", $"There isn't a match running, idiot.");
                 return;

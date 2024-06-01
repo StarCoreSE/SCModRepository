@@ -10,7 +10,7 @@ namespace SC.SUGMA.HeartNetworking.Custom
 
         public override void Received(ulong SenderSteamId)
         {
-            Log.Info("Recieved gamestate update packet. Contents: " + Gamemode);
+            Log.Info("Recieved gamestate update packet. Contents:\n    Gamemode: " + Gamemode);
 
             if (Gamemode == "null")
             {
@@ -25,13 +25,13 @@ namespace SC.SUGMA.HeartNetworking.Custom
                 Log.Info("Somehow received invalid gamemode request of type " + Gamemode);
         }
 
-        public static void UpdateGamestate()
+        public static void UpdateGamestate(string message = "")
         {
             GameStatePacket packet = new GameStatePacket
             {
                 Gamemode = SUGMA_SessionComponent.I.CurrentGamemode?.Id ?? "null"
             };
-            Log.Info("Sending gamestate update packet. Contents: " + packet.Gamemode);
+            Log.Info("Sending gamestate update packet. Contents:\n    Gamemode: " + packet.Gamemode);
 
             if (MyAPIGateway.Session.IsServer)
                 HeartNetwork.I.SendToEveryone(packet);

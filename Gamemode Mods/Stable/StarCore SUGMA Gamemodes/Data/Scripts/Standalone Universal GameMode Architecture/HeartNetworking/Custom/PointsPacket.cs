@@ -42,7 +42,13 @@ namespace SC.SUGMA.HeartNetworking.Custom
             foreach (var factionKvp in pointTracker.FactionPoints)
                 _points.Add(factionKvp.Key.FactionId, factionKvp.Value);
 
-            Log.Info("Created new PointsPacket with factions: " + _points.Count);
+            //string data = "";
+            //foreach (var kvp in pointTracker.FactionPoints)
+            //{
+            //    data += $"\n-    {kvp.Key.Tag}: {kvp.Value}";
+            //}
+            //
+            //Log.Info("Created new PointsPacket with:" + data);
         }
 
         public override void Received(ulong SenderSteamId)

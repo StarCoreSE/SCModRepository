@@ -1,5 +1,6 @@
 ﻿using Sandbox.ModAPI;
 using SC.SUGMA.GameState;
+using System.Runtime.Serialization.Formatters;
 using VRage.Game.ModAPI;
 
 namespace SC.SUGMA
