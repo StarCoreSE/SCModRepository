@@ -9,7 +9,7 @@ namespace FusionSystems.HeatParts
     internal class HeatSystem
     {
         private const float HeatCapacityPerSink = 60;
-        private const float HeatDissipationPerRadiator = 1f;
+        private const float HeatDissipationPerRadiator = 1.5f;
 
         private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
 
