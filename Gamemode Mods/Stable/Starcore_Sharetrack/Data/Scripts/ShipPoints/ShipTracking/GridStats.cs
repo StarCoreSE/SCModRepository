@@ -92,8 +92,6 @@ namespace ShipPoints.ShipTracking
         public float TotalThrust { get; private set; }
         public float TotalTorque { get; private set; }
 
-        public float TotalPower =>
-            Grid.ResourceDistributor.MaxAvailableResourceByType(MyResourceDistributorComponent.ElectricityId);
         public float GridIntegrity { get; private set; }
         public float OriginalGridIntegrity { get; private set; }
 

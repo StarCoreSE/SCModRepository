@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using DefenseShields;
 using Draygo.API;
 using Sandbox.Game.Entities;
+using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
 using VRage.Game;
 using VRage.Game.ModAPI;
@@ -35,7 +37,42 @@ namespace ShipPoints.ShipTracking
 
         public ShipTracker(IMyCubeGrid grid, bool showOnHud = true)
         {
-            Grid = grid;
+            TransferToGrid(grid);
+
+            Update();
+
+            if (!showOnHud)
+                return;
+
+            if (MyAPIGateway.Utilities.IsDedicated)
+                return;
+
+            _nametag = new HudAPIv2.HUDMessage(new StringBuilder("Initializing..."), Vector2D.Zero,
+                font: "BI_SEOutlined",
+                blend: BlendTypeEnum.PostPP, hideHud: false, shadowing: true);
+            UpdateHud();
+        }
+
+        private void TransferToGrid(IMyCubeGrid newGrid)
+        {
+            if (Grid != null)
+            {
+                Grid.OnClose -= OnClose;
+                Grid.OnGridSplit -= OnGridSplit;
+                Grid.GetGridGroup(GridLinkTypeEnum.Physical).OnGridAdded -= OnGridAdd;
+                Grid.GetGridGroup(GridLinkTypeEnum.Physical).OnGridRemoved -= OnGridRemove;
+
+                foreach (var gridStat in _gridStats)
+                {
+                    if (gridStat.Key != newGrid)
+                        gridStat.Value.Close();
+                }
+                
+                _gridStats.Clear();
+                TrackingManager.I.TrackedGrids.Remove(Grid);
+            }
+
+            Grid = newGrid;
 
             var allAttachedGrids = new List<IMyCubeGrid>();
             Grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(allAttachedGrids);
@@ -49,28 +86,18 @@ namespace ShipPoints.ShipTracking
                     Grid = attachedGrid;
             }
 
-            Update();
-
-            if (!showOnHud)
-                return;
-
             Grid.OnClose += OnClose;
+            Grid.OnGridSplit += OnGridSplit;
             Grid.GetGridGroup(GridLinkTypeEnum.Physical).OnGridAdded += OnGridAdd;
             Grid.GetGridGroup(GridLinkTypeEnum.Physical).OnGridRemoved += OnGridRemove;
-
-            if (MyAPIGateway.Utilities.IsDedicated)
-                return;
-
-            _nametag = new HudAPIv2.HUDMessage(new StringBuilder("Initializing..."), Vector2D.Zero,
-                font: "BI_SEOutlined",
-                blend: BlendTypeEnum.PostPP, hideHud: false, shadowing: true);
-            UpdateHud();
+            if (!TrackingManager.I.TrackedGrids.ContainsKey(Grid))
+                TrackingManager.I.TrackedGrids.Add(Grid, this);
         }
 
         private ShieldApi ShieldApi => PointCheck.I.ShieldApi;
 
 
-        public IMyCubeGrid Grid { get; }
+        public IMyCubeGrid Grid { get; private set; }
         public IMyPlayer Owner => MyAPIGateway.Players.GetPlayerControllingEntity(Grid) ?? PointCheck.GetOwner(OwnerId);
         public long OwnerId => Grid?.BigOwners.Count > 0 ? Grid?.BigOwners[0] ?? -1 : -1;
 
@@ -99,6 +126,34 @@ namespace ShipPoints.ShipTracking
             TrackingManager.I.TrackedGrids.Remove(Grid);
 
             DisposeHud();
+        }
+
+        /// <summary>
+        /// Ensures that the tracker will follow the correct grid on split.
+        /// </summary>
+        /// <param name="originalGrid"></param>
+        /// <param name="newGrid"></param>
+        public void OnGridSplit(IMyCubeGrid originalGrid, IMyCubeGrid newGrid)
+        {
+            // sorry this is really laggy
+            int originalCockpitsCount = originalGrid.GetFatBlocks<IMyShipController>().Count();
+            int newCockpitsCount = newGrid.GetFatBlocks<IMyShipController>().Count();
+
+            if (newCockpitsCount > originalCockpitsCount)
+            {
+                TransferToGrid(newGrid);
+                return;
+            }
+
+            if (newCockpitsCount < originalCockpitsCount)
+            {
+                return;
+            }
+
+            if (((MyCubeGrid)newGrid).BlocksCount > ((MyCubeGrid)originalGrid).BlocksCount)
+            {
+                TransferToGrid(newGrid);
+            }
         }
 
         public void Update()
@@ -135,7 +190,7 @@ namespace ShipPoints.ShipTracking
 
         private void OnGridRemove(IMyGridGroupData groupData, IMyCubeGrid grid, IMyGridGroupData newGroupData)
         {
-            if (!_gridStats.ContainsKey(grid))
+            if (!_gridStats.ContainsKey(grid) || grid == Grid)
                 return;
             OriginalGridIntegrity -= _gridStats[grid].OriginalGridIntegrity;
             _gridStats[grid].Close();
@@ -384,16 +439,7 @@ namespace ShipPoints.ShipTracking
             }
         }
 
-        public float TotalPower
-        {
-            get
-            {
-                float total = 0;
-                foreach (var stats in _gridStats.Values)
-                    total += stats.TotalPower;
-                return total;
-            }
-        }
+        public float TotalPower => Grid?.ResourceDistributor?.MaxAvailableResourceByType(MyResourceDistributorComponent.ElectricityId) ?? 0;
 
         public Dictionary<string, int> SpecialBlockCounts
         {
