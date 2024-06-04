@@ -9,7 +9,6 @@ using RelativeTopSpeed;
 using Sandbox.ModAPI;
 using ShipPoints.HeartNetworking;
 using ShipPoints.HeartNetworking.Custom;
-using ShipPoints.MatchTiming;
 using ShipPoints.ShipTracking;
 using VRage;
 using VRage.Game.ModAPI;
@@ -21,16 +20,8 @@ namespace ShipPoints
 {
     public class PointCheck
     {
-        public enum MatchStateEnum
-        {
-            Stopped,
-            Active
-        }
 
         public static PointCheck I;
-        public static MatchStateEnum MatchState;
-        public static bool AmTheCaptainNow;
-
 
         public static Dictionary<string, int> PointValues = new Dictionary<string, int>();
 
@@ -44,7 +35,6 @@ namespace ShipPoints
             Problemmessage;
 
         public static ShipTracker.NametagSettings NametagViewState = ShipTracker.NametagSettings.PlayerName;
-        public static int Delaytime = 60; //debug
 
         private readonly Dictionary<string, int> _bp = new Dictionary<string, int>(); // TODO refactor info storage
 
@@ -109,8 +99,6 @@ namespace ShipPoints
         private bool _awaitingTrackRequest = true;
         private Func<string, MyTuple<string, float>> _climbingCostFunction;
 
-        public string[] TeamNames = { "RED", "BLU" }; // TODO this doesn't actually do anything.
-
         private void ParsePointsDict(object message)
         {
             try
@@ -132,40 +120,6 @@ namespace ShipPoints
             {
                 Log.Error(ex);
             }
-        }
-
-        public static void BeginMatch()
-        {
-            MatchTimer.I.Ticks = 0;
-            if (TimerMessage != null)
-                TimerMessage.Visible = true;
-            if (Ticketmessage != null)
-                Ticketmessage.Visible = true;
-            MatchState = MatchStateEnum.Active;
-            MatchTimer.I.Start();
-            MyAPIGateway.Utilities.ShowNotification("Commit die. Zone activates in " + Delaytime / 3600 +
-                                                    "m, match ends in " + MatchTimer.I.MatchDurationMinutes + "m.");
-            Log.Info("Match started!");
-
-            if (MyAPIGateway.Session.IsServer)
-                HeartNetwork.I.SendToEveryone(new GameStatePacket(I));
-        }
-
-        public static void EndMatch()
-        {
-            MatchTimer.I.Ticks = 0;
-            if (TimerMessage != null)
-                TimerMessage.Visible = false;
-            if (Ticketmessage != null)
-                Ticketmessage.Visible = false;
-            MatchState = MatchStateEnum.Stopped;
-            AmTheCaptainNow = false;
-            MatchTimer.I.Stop();
-            MyAPIGateway.Utilities.ShowNotification("Match Ended.");
-            Log.Info("Match Ended.");
-
-            if (MyAPIGateway.Session.IsServer)
-                HeartNetwork.I.SendToEveryone(new GameStatePacket(I));
         }
 
         private void HudRegistered()
@@ -214,7 +168,7 @@ namespace ShipPoints
 
         private void UpdateTrackingData()
         {
-            if (MatchTimer.I.Ticks % 60 != 0)
+            if (MasterSession.I.Ticks % 59 != 0)
                 return;
 
             foreach (var shipTracker in TrackingManager.I.TrackedGrids.Values)
@@ -237,13 +191,6 @@ namespace ShipPoints
             _mobp.Clear();
 
             MainTrackerUpdate(_ts, _m, _bp, _mbp, _pbp, _obp, _mobp);
-
-            // Match time
-            tt.Append("<color=orange>----                 <color=white>Match Time: ")
-                .Append(MatchTimer.I.CurrentMatchTime.ToString(@"mm\:ss"))
-                .Append('/')
-                .Append(MatchTimer.I.MatchDurationString)
-                .Append("                 <color=orange>----\n");
 
             TeamBpCalc(tt, _ts, _m, _bp, _mbp, _pbp, _obp, _mobp);
 
@@ -457,7 +404,7 @@ namespace ShipPoints
 
             try
             {
-                if (MatchTimer.I.Ticks % 60 == 0)
+                if (MasterSession.I.Ticks % 61 == 0)
                 {
                     AllPlayers.Clear();
                     MyAPIGateway.Multiplayer.Players.GetPlayers(_listPlayers, delegate(IMyPlayer p)

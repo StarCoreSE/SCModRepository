@@ -8,7 +8,6 @@ using Draygo.API;
 using RelativeTopSpeed;
 using Sandbox.Definitions;
 using Sandbox.ModAPI;
-using ShipPoints.MatchTiming;
 using ShipPoints.ShipTracking;
 using VRage.Game;
 using VRage.Game.ModAPI;
@@ -104,7 +103,7 @@ namespace ShipPoints
         private void ShiftTCalcs(IMyCubeGrid focusedGrid)
         {
             // Update once per second
-            if (MatchTimer.I.Ticks % 60 != 0)
+            if (MasterSession.I.Ticks % 59 != 0)
                 return;
             var stopwatch = new System.Diagnostics.Stopwatch();
             stopwatch.Start();
@@ -234,7 +233,7 @@ namespace ShipPoints
 
         private void BattleShiftTCalcs(IMyCubeGrid focusedGrid)
         {
-            if (MatchTimer.I.Ticks % 60 != 0)
+            if (MasterSession.I.Ticks % 59 != 0)
                 return;
 
             ShipTracker tracked;

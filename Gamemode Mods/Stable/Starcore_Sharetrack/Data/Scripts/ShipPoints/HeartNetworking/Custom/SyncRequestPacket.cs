@@ -20,7 +20,6 @@ namespace ShipPoints.HeartNetworking.Custom
 
             Log.Info("Received join-sync request from " + SenderSteamId);
 
-            HeartNetwork.I.SendToPlayer(new GameStatePacket(PointCheck.I), SenderSteamId);
             TrackingManager.I.ServerDoSync();
         }
     }

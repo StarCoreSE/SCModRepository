@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sandbox.ModAPI;
+using SC.SUGMA.GameState;
+using SC.SUGMA.HeartNetworking.Custom;
 using VRage.Game;
 using MyAPIGateway = Sandbox.ModAPI.MyAPIGateway;
 
@@ -53,5 +55,47 @@ namespace SC.SUGMA.Commands
         }
 
         #endregion
+
+        //public static void SetMatchTime(string[] args)
+        //{
+        //    if (!PointCheck.AmTheCaptainNow)
+        //    {
+        //        MyAPIGateway.Utilities.ShowNotification(
+        //            "You aren't the captain! Run \"/st takeover\" to take over the match.");
+        //        return;
+        //    }
+        //
+        //    try
+        //    {
+        //        MatchTimer.I.SetMatchTime(double.Parse(args[1]));
+        //        MyAPIGateway.Utilities.ShowNotification("Match time changed to " + args[1] + " minutes.");
+        //    }
+        //    catch (Exception)
+        //    {
+        //        MyAPIGateway.Utilities.ShowNotification("Win time not changed, try /st setmatchtime xxx (in minutes)");
+        //    }
+        //}
+
+        //public static void SetWinTime(string[] args)
+        //{
+        //    if (!PointCheck.AmTheCaptainNow)
+        //    {
+        //        MyAPIGateway.Utilities.ShowNotification(
+        //            "You aren't the captain! Run \"/st takeover\" to take over the match.");
+        //        return;
+        //    }
+        //
+        //    try
+        //    {
+        //        MatchTimer.I.MatchDurationMinutes = int.Parse(args[1]);
+        //        MyAPIGateway.Utilities.ShowNotification("Match duration changed to " +
+        //                                                MatchTimer.I.MatchDurationMinutes + "m.");
+        //        MatchTimerPacket.SendMatchUpdate(MatchTimer.I);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        MyAPIGateway.Utilities.ShowNotification("Win time not changed, try /st settime xxx (in seconds)");
+        //    }
+        //}
     }
 }
