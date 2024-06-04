@@ -4,6 +4,7 @@ using CoreSystems.Api;
 using DefenseShields;
 using Sandbox.Definitions;
 using Sandbox.Game.Entities;
+using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
@@ -90,7 +91,9 @@ namespace ShipPoints.ShipTracking
         public readonly Dictionary<string, int> SpecialBlockCounts = new Dictionary<string, int>();
         public float TotalThrust { get; private set; }
         public float TotalTorque { get; private set; }
-        public float TotalPower { get; private set; }
+
+        public float TotalPower =>
+            Grid.ResourceDistributor.MaxAvailableResourceByType(MyResourceDistributorComponent.ElectricityId);
         public float GridIntegrity { get; private set; }
         public float OriginalGridIntegrity { get; private set; }
 
@@ -152,7 +155,6 @@ namespace ShipPoints.ShipTracking
 
             TotalThrust = 0;
             TotalTorque = 0;
-            TotalPower = 0;
 
             foreach (var block in _fatBlocks)
             {
@@ -169,11 +171,6 @@ namespace ShipPoints.ShipTracking
                     TotalTorque +=
                         ((MyGyroDefinition)MyDefinitionManager.Static.GetDefinition((block as IMyGyro).BlockDefinition))
                         .ForceMagnitude * (block as IMyGyro).GyroStrengthMultiplier;
-                }
-
-                else if (block is IMyPowerProducer && block.IsFunctional)
-                {
-                    TotalPower += ((IMyPowerProducer)block).MaxOutput;
                 }
 
                 if (!(block is IMyConveyorSorter) || !WcApi.HasCoreWeapon((MyEntity)block))
