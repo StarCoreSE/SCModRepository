@@ -124,6 +124,9 @@ namespace ShipPoints
 
         private void HudRegistered()
         {
+            // Avoid bootlock when opening world with autotracked grids.
+            TrackingManager.Init();
+
             _hudPointsList = new HudPointsList();
 
             IntegretyMessage = new HudAPIv2.HUDMessage(scale: 1.15f, font: "BI_SEOutlined",
@@ -348,9 +351,8 @@ namespace ShipPoints
                 // Initialize the sphere entities
                 // Initialize the text_api with the HUDRegistered callback
                 TextHudApi = new HudAPIv2(HudRegistered);
-
-            // Avoid bootlock when opening world with autotracked grids.
-            TrackingManager.Init();
+            else
+                TrackingManager.Init();
 
             // Initialize the WC_api and load it if it's not null
 
