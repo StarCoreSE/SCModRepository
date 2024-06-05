@@ -217,13 +217,17 @@ namespace ShipPoints
             sb.AppendFormat("<color=Green>Gyro<color=White>: {0}N\n", gyroString);
             sb.AppendFormat("<color=Green>Power<color=White>: {0}\n", pwr);
             sb.AppendLine(); //blank line
-            // Blocks Info
-            sb.AppendLine("<color=Orange>----Blocks----");
-            sb.AppendLine(specialBlockText);
-            sb.AppendLine(); //blank line
+
             // Armament Info
             sb.AppendLine("<color=Orange>----Armament----");
             sb.Append(gunText);
+            sb.AppendLine(); //blank line
+
+            // Blocks Info
+            sb.AppendLine("<color=Orange>----Blocks----");
+            sb.AppendLine(specialBlockText);
+
+            
 
             _statMessage.Message = sb;
             _statMessage.Visible = true;

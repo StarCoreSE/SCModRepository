@@ -265,14 +265,17 @@ namespace ShipPoints.ShipTracking
                         blockDisplayName = "Camera";
                         break;
                 }
+            else if (block is IMyLightingBlock && !(block is IMyReflectorLight)) blockDisplayName = "Light";
             else if (block is IMyConveyor || block is IMyConveyorTube) blockDisplayName = "Conveyor";
+            else if (blockDisplayName.Contains("Buster")) blockDisplayName = "Buster Block";
+            else if (!(block is IMyTerminalBlock)) blockDisplayName = "CubeBlock"; // If this is ever an issue, look here.
 
-            if (blockDisplayName.Contains("Letter")) blockDisplayName = "Letter";
-            else if (blockDisplayName.Contains("Beam Block")) blockDisplayName = "Beam Block";
-            else if (blockDisplayName.Contains("Window") && !blockDisplayName.Contains("Buster"))
-                blockDisplayName = "Window";
-            else if (blockDisplayName.Contains("Neon"))
-                blockDisplayName = "Neon Tube";
+            //if (blockDisplayName.Contains("Letter")) blockDisplayName = "Letter";
+            //else if (blockDisplayName.Contains("Beam Block")) blockDisplayName = "Beam Block";
+            //else if (blockDisplayName.Contains("Window"))
+            //    blockDisplayName = "Window";
+            //else if (blockDisplayName.Contains("Neon"))
+            //    blockDisplayName = "Neon Tube";
         }
 
 
