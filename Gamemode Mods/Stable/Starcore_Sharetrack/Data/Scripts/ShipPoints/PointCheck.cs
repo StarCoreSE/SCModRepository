@@ -197,8 +197,11 @@ namespace ShipPoints
 
             TeamBpCalc(tt, _ts, _m, _bp, _mbp, _pbp, _obp, _mobp);
 
-            IntegretyMessage.Message.Clear();
-            IntegretyMessage.Message.Append(tt);
+            if (!IntegretyMessage.Message.Equals(tt))
+            {
+                IntegretyMessage.Message = tt;
+            }
+            
             IntegretyMessage.Origin = new Vector2D(0.975 - IntegretyMessage.GetTextLength().X, IntegretyMessage.Origin.Y);
         }
 

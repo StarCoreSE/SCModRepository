@@ -176,7 +176,7 @@ namespace ShipPoints.ShipTracking
                 {
                     var blockDisplayName = block.DefinitionDisplayNameText;
                     if (blockDisplayName
-                        .Contains("Armor")) // This is a bit stupid. TODO find a better way to sort out armor blocks.
+                        .Contains("Armor") && !blockDisplayName.StartsWith("Armor Laser")) // This is a bit stupid. TODO find a better way to sort out armor blocks.
                         continue;
 
                     float ignored = 0;

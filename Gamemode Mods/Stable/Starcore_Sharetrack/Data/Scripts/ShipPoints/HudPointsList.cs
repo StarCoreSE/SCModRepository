@@ -182,7 +182,7 @@ namespace ShipPoints
             double lastExecutionTime = _executionTimes.Count > 0 ? _executionTimes.Last() : 0;
 
 
-            sb.AppendLine($"Last Update took: {lastExecutionTime:F2} ms");
+            //sb.AppendLine($"Last Update took: {lastExecutionTime:F2} ms");
             // Basic Info
             sb.AppendLine("----Basic Info----");
             sb.AppendFormat("<color=White>{0} ", focusedGrid.DisplayName);
@@ -227,9 +227,8 @@ namespace ShipPoints
             sb.AppendLine("<color=Orange>----Blocks----");
             sb.AppendLine(specialBlockText);
 
-            
-
-            _statMessage.Message = sb;
+            if (!_statMessage.Message.Equals(sb))
+                _statMessage.Message = sb;
             _statMessage.Visible = true;
             stopwatch.Stop();
             UpdateExecutionTimes(stopwatch.Elapsed.TotalMilliseconds);
