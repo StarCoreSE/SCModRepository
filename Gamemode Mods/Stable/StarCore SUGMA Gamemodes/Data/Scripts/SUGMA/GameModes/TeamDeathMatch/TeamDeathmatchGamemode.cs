@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
 using SC.SUGMA.API;
 using SC.SUGMA.GameState;
@@ -25,6 +26,8 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
         internal IMyFaction _winningFaction = null;
 
+        private bool _remOuter = false, _remMiddle = false, _remInner = false;
+
         /// <summary>
         /// Lists currently tracked factions. Mapped to grid count.
         /// </summary>
@@ -41,19 +44,71 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                 return;
 
             int basePoints = (int)(_matchTimer.MatchDurationMinutes * 60);
-            TimeSpan matchTime = _matchTimer.CurrentMatchTime;
+            double currentPoints = _matchTimer.CurrentMatchTime.TotalSeconds;
 
             foreach (var factionKvp in TrackedFactions.ToArray())
             {
                 int factionPoints =
                     (int)(basePoints * (PointTracker.GetFactionPoints(factionKvp.Key) / (float)factionKvp.Value) -
-                          matchTime.TotalSeconds);
+                          currentPoints);
                 if (factionPoints <= 0)
                 {
                     OnFactionKilled(factionKvp.Key);
                     // TODO: Spawn keen explosion on remaining grids.
                 }
             }
+
+            //double matchRatio = 1 - currentPoints / basePoints;
+            //
+            //if (matchRatio <= 0.76) // If within 12 seconds of 15:00 matchtime (assuming 20:00 total)
+            //{
+            //    if (matchRatio >= 0.75)
+            //        MyAPIGateway.Utilities.ShowNotification($"Removing outer cover in T-{basePoints*0.25 - currentPoints:N1}", 1000/60, "Red");
+            //    else if (!_remOuter)
+            //    {
+            //        RemoveBlockers(9750);
+            //        _remOuter = true;
+            //    }
+            //}
+            //
+            //if (matchRatio <= 0.51) // If within 12 seconds of 10:00 matchtime
+            //{
+            //    if (matchRatio >= 0.5)
+            //        MyAPIGateway.Utilities.ShowNotification($"Removing middle cover in T-{basePoints*0.5 - currentPoints:N1}", 1000/60, "Red");
+            //    else if (!_remMiddle)
+            //    {
+            //        RemoveBlockers(5750);
+            //        _remMiddle = true;
+            //    }
+            //}
+            //
+            //if (matchRatio <= 0.26) // If within 12 seconds of 5:00 matchtime
+            //{
+            //    if (matchRatio >= 0.25)
+            //        MyAPIGateway.Utilities.ShowNotification($"Removing inner cover in T-{basePoints*0.75 - currentPoints:N1}", 1000/60, "Red");
+            //    else if (!_remInner)
+            //    {
+            //        RemoveBlockers(1750);
+            //        _remInner = true;
+            //    }
+            //}
+        }
+
+        private void RemoveBlockers(float maxDistanceFromCenter)
+        {
+            List<IMyCubeGrid> covers = new List<IMyCubeGrid>();
+            MyAPIGateway.Entities.GetEntities(null, (ent) =>
+            {
+                IMyCubeGrid grid = ent as IMyCubeGrid;
+                if (grid == null || grid.DisplayName != "#EntityCover" || ((MyCubeGrid)grid).BlocksCount > 1 || grid.GetPosition().Length() <= maxDistanceFromCenter)
+                    return false;
+
+                covers.Add(grid);
+
+                return false;
+            });
+            foreach (var grid in covers)
+                grid.Close();
         }
 
         public override void StartRound(string[] arguments = null)
@@ -81,7 +136,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                 factionNames.Add($"|{factionKvp.Key.Tag}|");
             }
 
-            base.StartRound();
+            base.StartRound(arguments);
             MyAPIGateway.Utilities.ShowNotification("Combatants: " + string.Join(" vs ", factionNames), 10000, "Red");
             _matchTimer.Start();
 
