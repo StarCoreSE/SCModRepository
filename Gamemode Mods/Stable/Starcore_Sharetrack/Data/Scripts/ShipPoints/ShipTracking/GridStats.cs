@@ -150,6 +150,7 @@ namespace ShipPoints.ShipTracking
         private void UpdateGlobalStats()
         {
             BlockCounts.Clear();
+            SpecialBlockCounts.Clear();
 
             TotalThrust = 0;
             TotalTorque = 0;
