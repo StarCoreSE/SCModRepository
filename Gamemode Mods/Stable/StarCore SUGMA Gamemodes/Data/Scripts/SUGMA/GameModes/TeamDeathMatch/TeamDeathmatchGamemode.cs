@@ -114,6 +114,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
         public override void StartRound(string[] arguments = null)
         {
             PointTracker = new PointTracker(3, 0);
+            SUGMA_SessionComponent.I.UnregisterComponent("TDMPointTracker");
             SUGMA_SessionComponent.I.RegisterComponent("TDMPointTracker", PointTracker);
             ShareTrackApi.RegisterOnAliveChanged(OnAliveChanged);
 
@@ -144,6 +145,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             {
                 MyAPIGateway.Utilities.ShowNotification("There aren't any combatants, idiot!", 10000, "Red");
                 StopRound();
+                return;
             }
 
             if (!MyAPIGateway.Utilities.IsDedicated)
@@ -152,7 +154,8 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
         public override void StopRound()
         {
-            SUGMA_SessionComponent.I.UnregisterComponent("tdmHud");
+            SUGMA_SessionComponent.I.GetComponent<TeamDeathmatchHud>("tdmHud").MatchEnded(_winningFaction);
+
             _matchTimer.Stop();
             SUGMA_SessionComponent.I.UnregisterComponent("TDMPointTracker");
             ShareTrackApi.UnregisterOnAliveChanged(OnAliveChanged);

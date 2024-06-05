@@ -18,7 +18,7 @@ namespace SC.SUGMA.HeartNetworking.Custom
 
         private MatchTimerPacket(MatchTimer timer)
         {
-            _senderObjectId = timer.Id;
+            _senderObjectId = timer.ComponentId;
             _matchStartTime = timer.StartTime.Ticks;
             _matchEndTime = timer.EndTime.Ticks;
         }

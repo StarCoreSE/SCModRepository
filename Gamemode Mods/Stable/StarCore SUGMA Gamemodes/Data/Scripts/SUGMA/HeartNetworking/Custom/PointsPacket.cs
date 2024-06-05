@@ -37,7 +37,7 @@ namespace SC.SUGMA.HeartNetworking.Custom
 
         public PointsPacket(PointTracker pointTracker)
         {
-            _senderObjectId = pointTracker.Id;
+            _senderObjectId = pointTracker.ComponentId;
             _points = new Dictionary<long, int>();
             foreach (var factionKvp in pointTracker.FactionPoints)
                 _points.Add(factionKvp.Key.FactionId, factionKvp.Value);

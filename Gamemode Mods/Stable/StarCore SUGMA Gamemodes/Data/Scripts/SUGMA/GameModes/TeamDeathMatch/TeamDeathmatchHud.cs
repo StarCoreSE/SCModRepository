@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using RichHudFramework.Client;
 using RichHudFramework.UI;
 using RichHudFramework.UI.Client;
+using RichHudFramework.UI.Rendering;
 using SC.SUGMA.GameState;
+using VRage.Game.ModAPI;
 using VRageMath;
 
 namespace SC.SUGMA.GameModes.TeamDeathMatch
 {
     internal class TeamDeathmatchHud : ComponentBase
     {
+        private const int MatchResultsVisibleTicks = 600;
+
         private TDMHud_Window _window;
+        private int _closeTime = -1;
 
         public override void Init(string id)
         {
@@ -30,6 +35,15 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
         public override void UpdateTick()
         {
             _window.Update();
+            if (_closeTime > 0)
+                _closeTime--;
+            if (_closeTime == 0)
+                SUGMA_SessionComponent.I.UnregisterComponent(ComponentId);
+        }
+
+        public void MatchEnded(IMyFaction winner)
+        {
+            _window.MatchEnded(winner);
         }
     }
 
@@ -40,6 +54,8 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
         private LabelBox _timerLabel;
         private TDMHud_TeamBanner[] _banners;
+
+        private bool _matchEnded = false;
 
         public TDMHud_Window(HudParentBase parent) : base(parent)
         {
@@ -88,6 +104,10 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
         public void Update()
         {
+            if (_matchEnded)
+                return;
+
+
             TimeSpan matchTime = _timer.CurrentMatchTime;
             int matchSeconds = (int)matchTime.TotalSeconds;
             int basePoints = (int)(_timer.MatchDurationMinutes * 60);
@@ -103,6 +123,33 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             {
                 banner.Update(_gamemode.PointTracker.GetFactionPoints(banner.Faction), matchSeconds, basePoints);
             }
+        }
+
+        public void MatchEnded(IMyFaction winner)
+        {
+            _matchEnded = true;
+            int winnerPoints = 0;
+            foreach (var banner in _banners)
+            {
+                if (banner.Faction == winner)
+                    winnerPoints = (int)(_timer.MatchDurationMinutes * 60 * (_gamemode.PointTracker.GetFactionPoints(winner) / (float)banner.StartShipCount) - _timer.CurrentMatchTime.TotalSeconds);
+                RemoveChild(banner);
+            }
+
+            
+
+            LabelBox winnerLabel = new LabelBox(_timerLabel)
+            {
+                Text = winner != null ? 
+                    $"A WINNER IS {winner.Name}. {winnerPoints} tickets remaining." :
+                    "YOU ARE ALL LOSERS",
+                ParentAlignment = ParentAlignments.Bottom,
+                Height = TDMHud_TeamBanner.BaseHeight,
+                TextPadding = new Vector2(2.5f, 0),
+                Color = new Color(255, 255, 255, 40),
+            };
+            winnerLabel.TextBoard.SetFormatting(new GlyphFormat(Color.Yellow, TextAlignment.Center, 10,
+                FontStyles.Bold | FontStyles.Underline));
         }
     }
 }

@@ -72,21 +72,23 @@ namespace SC.SUGMA
             if (!ShareTrackApi.IsReady)
                 return;
 
-            if (!HasInited)
-            {
-                _pollTimer = 600;
-                HasInited = true;
-            }
-
-            if (_pollTimer == 0)
             {
                 // Clients should sync first-thing, in case a game is already running.
-                if (!MyAPIGateway.Session.IsServer)
-                    SyncRequestPacket.RequestSync();
-                _pollTimer = -1;
+                if (!HasInited)
+                {
+                    _pollTimer = 600;
+                    HasInited = true;
+                }
+
+                if (_pollTimer == 0)
+                {
+                    if (!MyAPIGateway.Session.IsServer)
+                        SyncRequestPacket.RequestSync();
+                    _pollTimer = -1;
+                }
+                else if (_pollTimer > 0)
+                    _pollTimer--;
             }
-            else if (_pollTimer > 0)
-                _pollTimer--;
 
             try
             {
@@ -188,7 +190,7 @@ namespace SC.SUGMA
 
         public bool StopGamemode(bool notifyNetwork = false)
         {
-            Log.Info("Attempting to stop gamemode [" + CurrentGamemode?.Id + "].");
+            Log.Info("Attempting to stop gamemode [" + CurrentGamemode?.ComponentId + "].");
             if (CurrentGamemode == null)
                 return false;
 
