@@ -23,7 +23,7 @@ namespace SC.SUGMA.Commands
 
             ["start"] = new Command(
                 "SUGMA.Match",
-                "Begins a new match of type [arg1]. Run without arguments for a list of available gamemodes.",
+                "Begins a new match of type [arg1] with arguments. Run without arguments for a list of available gamemodes.",
                 CommandMethods.Start
             ),
             ["end"] = new Command(
@@ -53,7 +53,7 @@ namespace SC.SUGMA.Commands
             {
                 foreach (var command in _commands)
                     if (command.Value.ModName == modName)
-                        helpBuilder.Append($"\n{{/ug {command.Key}}}: " + command.Value.HelpText);
+                        helpBuilder.Append($"\n{{/sc {command.Key}}}: " + command.Value.HelpText);
 
                 MyAPIGateway.Utilities.ShowMessage($"[{modName}]", helpBuilder + "\n");
                 helpBuilder.Clear();
@@ -65,8 +65,8 @@ namespace SC.SUGMA.Commands
             Close(); // Close existing command handlers.
             I = new CommandHandler();
             MyAPIGateway.Utilities.MessageEnteredSender += I.Command_MessageEnteredSender;
-            MyAPIGateway.Utilities.ShowMessage("StarCore Universal Gamemodes",
-                "Chat commands registered - run \"/ug help\" for help.");
+            MyAPIGateway.Utilities.ShowMessage("StarCore Universal Gamemode",
+                "Chat commands registered - run \"/sc help\" for help.");
         }
 
         public static void Close()
@@ -85,7 +85,7 @@ namespace SC.SUGMA.Commands
             try
             {
                 // Only register for commands
-                if (messageText.Length == 0 || !messageText.ToLower().StartsWith("/ug "))
+                if (messageText.Length == 0 || !messageText.ToLower().StartsWith("/sc "))
                     return;
 
                 sendToOthers = false;

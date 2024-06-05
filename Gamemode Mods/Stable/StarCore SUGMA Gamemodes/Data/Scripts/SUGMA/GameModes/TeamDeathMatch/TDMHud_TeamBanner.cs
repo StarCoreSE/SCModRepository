@@ -12,7 +12,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
         public const int BaseHeight = 25;
 
         public IMyFaction Faction;
-        private int _startShipCount = 0;
+        public int StartShipCount = 0;
 
         private TexturedBox _ticketsBar;
         private LabelBox _factionLabel;
@@ -23,7 +23,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             base(parent)
         {
             Faction = faction;
-            _startShipCount = shipCount;
+            StartShipCount = shipCount;
 
             Size = new Vector2(BaseWidth, BaseHeight);
 
@@ -83,7 +83,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
         public void Update(int remainingShips, int matchTimeSeconds, int startingPoints)
         {
-            int factionPoints = (int)(startingPoints * (remainingShips / (float)_startShipCount) - matchTimeSeconds);
+            int factionPoints = (int)(startingPoints * (remainingShips / (float)StartShipCount) - matchTimeSeconds);
             if (factionPoints < 0)
                 factionPoints = 0;
 

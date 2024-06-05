@@ -4,11 +4,11 @@ namespace SC.SUGMA
 {
     public abstract class ComponentBase
     {
-        public string Id;
+        public string ComponentId;
 
         public virtual void Init(string id)
         {
-            Id = id;
+            ComponentId = id;
         }
 
         public abstract void Close();

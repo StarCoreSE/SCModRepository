@@ -8,7 +8,6 @@ namespace ShipPoints.HeartNetworking
 {
     [ProtoInclude(91, typeof(TrackingSyncPacket))]
     [ProtoInclude(92, typeof(SyncRequestPacket))]
-    [ProtoInclude(93, typeof(GameStatePacket))]
     [ProtoInclude(94, typeof(ProblemReportPacket))]
     [ProtoInclude(95, typeof(ShieldFillRequestPacket))]
     [ProtoContract(UseProtoMembersOnly = true)]
@@ -19,7 +18,6 @@ namespace ShipPoints.HeartNetworking
             typeof(PacketBase),
             typeof(TrackingSyncPacket),
             typeof(SyncRequestPacket),
-            typeof(GameStatePacket),
             typeof(ProblemReportPacket),
             typeof(ShieldFillRequestPacket)
         };

@@ -17,6 +17,7 @@ namespace ShipPoints
 
         private readonly PointCheck _pointCheck = new PointCheck();
         private ApiProvider _apiProvider;
+        public int Ticks { get; private set; } = 0;
 
         public override void LoadData()
         {
@@ -58,6 +59,7 @@ namespace ShipPoints
         {
             try
             {
+                Ticks++;
                 HeartNetwork.I.Update();
                 TrackingManager.UpdateAfterSimulation();
                 _pointCheck.UpdateAfterSimulation();

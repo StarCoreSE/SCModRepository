@@ -19,56 +19,6 @@ namespace ShipPoints.Commands
                 "Displays command help.",
                 message => I.ShowHelp()),
 
-            #region Match Commands
-
-            ["start"] = new Command(
-                "ShareTrack.Match",
-                "Begins a new match.",
-                CommandMethods.Start
-            ),
-            ["end"] = new Command(
-                "ShareTrack.Match",
-                "Ends the current match.",
-                CommandMethods.End
-            ),
-            ["takeover"] = new Command(
-                "ShareTrack.Match",
-                "Takes over control of the match.",
-                CommandMethods.TakeOverControl
-            ),
-            ["giveup"] = new Command(
-                "ShareTrack.Match",
-                "Gives up control of the match.",
-                CommandMethods.GiveUpControl
-            ),
-
-            #endregion
-
-            #region Match Config
-
-            ["setmatchtime"] = new Command(
-                "ShareTrack.Match.Config",
-                "Sets the current match timer to [arg1] in minutes.",
-                CommandMethods.SetMatchTime
-            ),
-            //["setteams"] = new Command( // TODO this doesn't actually do anything.
-            //    "ShareTrack.Match.Config",
-            //    "Assigns teams to specified. Minimum two, maximum infinite.",
-            //    CommandMethods.SetTeams
-            //),
-            ["setwintime"] = new Command( // TODO this isn't synced.
-                "ShareTrack.Match.Config",
-                "Sets the current win time to [arg1] in minutes.",
-                CommandMethods.SetWinTime
-            ),
-            ["setdelay"] = new Command(
-                "ShareTrack.Match.Config",
-                "Sets the current delay time to [arg1] in minutes.",
-                CommandMethods.SetDelay
-            ),
-
-            #endregion
-
             #region Util Commands
 
             ["shields"] = new Command(

@@ -76,7 +76,7 @@ namespace ShipPoints.ShipTracking
                 if (!TrackedGrids.ContainsKey(grid))
                 {
                     var tracker = new ShipTracker(grid);
-                    TrackedGrids.Add(grid, tracker);
+                    // Automatically added to the TrackedGrids list
                 }
             }
         }
@@ -163,7 +163,7 @@ namespace ShipPoints.ShipTracking
                     return;
 
             var tracker = new ShipTracker(grid);
-            TrackedGrids.Add(grid, tracker);
+            // Automatically added to tracked grid list
 
             OnShipTracked?.Invoke(grid, true);
 

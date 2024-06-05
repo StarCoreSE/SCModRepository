@@ -9,7 +9,6 @@ using RelativeTopSpeed;
 using Sandbox.ModAPI;
 using ShipPoints.HeartNetworking;
 using ShipPoints.HeartNetworking.Custom;
-using ShipPoints.MatchTiming;
 using ShipPoints.ShipTracking;
 using VRage;
 using VRage.Game.ModAPI;
@@ -21,16 +20,8 @@ namespace ShipPoints
 {
     public class PointCheck
     {
-        public enum MatchStateEnum
-        {
-            Stopped,
-            Active
-        }
 
         public static PointCheck I;
-        public static MatchStateEnum MatchState;
-        public static bool AmTheCaptainNow;
-
 
         public static Dictionary<string, int> PointValues = new Dictionary<string, int>();
 
@@ -44,7 +35,6 @@ namespace ShipPoints
             Problemmessage;
 
         public static ShipTracker.NametagSettings NametagViewState = ShipTracker.NametagSettings.PlayerName;
-        public static int Delaytime = 60; //debug
 
         private readonly Dictionary<string, int> _bp = new Dictionary<string, int>(); // TODO refactor info storage
 
@@ -109,8 +99,6 @@ namespace ShipPoints
         private bool _awaitingTrackRequest = true;
         private Func<string, MyTuple<string, float>> _climbingCostFunction;
 
-        public string[] TeamNames = { "RED", "BLU" }; // TODO this doesn't actually do anything.
-
         private void ParsePointsDict(object message)
         {
             try
@@ -134,42 +122,11 @@ namespace ShipPoints
             }
         }
 
-        public static void BeginMatch()
-        {
-            MatchTimer.I.Ticks = 0;
-            if (TimerMessage != null)
-                TimerMessage.Visible = true;
-            if (Ticketmessage != null)
-                Ticketmessage.Visible = true;
-            MatchState = MatchStateEnum.Active;
-            MatchTimer.I.Start();
-            MyAPIGateway.Utilities.ShowNotification("Commit die. Zone activates in " + Delaytime / 3600 +
-                                                    "m, match ends in " + MatchTimer.I.MatchDurationMinutes + "m.");
-            Log.Info("Match started!");
-
-            if (MyAPIGateway.Session.IsServer)
-                HeartNetwork.I.SendToEveryone(new GameStatePacket(I));
-        }
-
-        public static void EndMatch()
-        {
-            MatchTimer.I.Ticks = 0;
-            if (TimerMessage != null)
-                TimerMessage.Visible = false;
-            if (Ticketmessage != null)
-                Ticketmessage.Visible = false;
-            MatchState = MatchStateEnum.Stopped;
-            AmTheCaptainNow = false;
-            MatchTimer.I.Stop();
-            MyAPIGateway.Utilities.ShowNotification("Match Ended.");
-            Log.Info("Match Ended.");
-
-            if (MyAPIGateway.Session.IsServer)
-                HeartNetwork.I.SendToEveryone(new GameStatePacket(I));
-        }
-
         private void HudRegistered()
         {
+            // Avoid bootlock when opening world with autotracked grids.
+            TrackingManager.Init();
+
             _hudPointsList = new HudPointsList();
 
             IntegretyMessage = new HudAPIv2.HUDMessage(scale: 1.15f, font: "BI_SEOutlined",
@@ -214,7 +171,7 @@ namespace ShipPoints
 
         private void UpdateTrackingData()
         {
-            if (MatchTimer.I.Ticks % 60 != 0)
+            if (MasterSession.I.Ticks % 59 != 0)
                 return;
 
             foreach (var shipTracker in TrackingManager.I.TrackedGrids.Values)
@@ -238,17 +195,14 @@ namespace ShipPoints
 
             MainTrackerUpdate(_ts, _m, _bp, _mbp, _pbp, _obp, _mobp);
 
-            // Match time
-            tt.Append("<color=orange>----                 <color=white>Match Time: ")
-                .Append(MatchTimer.I.CurrentMatchTime.ToString(@"mm\:ss"))
-                .Append('/')
-                .Append(MatchTimer.I.MatchDurationString)
-                .Append("                 <color=orange>----\n");
-
             TeamBpCalc(tt, _ts, _m, _bp, _mbp, _pbp, _obp, _mobp);
 
-            IntegretyMessage.Message.Clear();
-            IntegretyMessage.Message.Append(tt);
+            if (!IntegretyMessage.Message.Equals(tt))
+            {
+                IntegretyMessage.Message = tt;
+            }
+            
+            IntegretyMessage.Origin = new Vector2D(0.975 - IntegretyMessage.GetTextLength().X, IntegretyMessage.Origin.Y);
         }
 
 
@@ -288,11 +242,11 @@ namespace ShipPoints
                 obp[fn] += shipTracker.OffensivePoints;
                 mobp[fn] += shipTracker.MovementPoints;
 
-                var g = shipTracker.WeaponCounts.Values.Sum();
+                var dps = (int) shipTracker.DamagePerSecond;
                 var pwr = FormatPower(Math.Round(shipTracker.TotalPower, 1));
                 var ts2 = FormatThrust(Math.Round(shipTracker.TotalThrust, 2));
 
-                ts[fn].Add(CreateDisplayString(o, shipTracker, g, pwr, ts2));
+                ts[fn].Add(CreateDisplayString(o, shipTracker, dps, pwr, ts2));
             }
         }
 
@@ -307,7 +261,7 @@ namespace ShipPoints
             return thrustInMega > 1e2 ? $"{Math.Round(thrustInMega / 1e3, 2)}GN" : $"{thrustInMega}MN";
         }
 
-        private string CreateDisplayString(string ownerName, ShipTracker tracker, int g, string power, string thrust)
+        private string CreateDisplayString(string ownerName, ShipTracker tracker, int dps, string power, string thrust)
         {
             var ownerDisplay = ownerName != null
                 ? ownerName.Substring(0, Math.Min(ownerName.Length, 7))
@@ -319,10 +273,19 @@ namespace ShipPoints
             var shieldColor = shieldPercent <= 0
                 ? "red"
                 : $"{255},{255 - tracker.CurrentShieldHeat * 2.5f},{255 - tracker.CurrentShieldHeat * 2.5f}";
-            var weaponColor = g == 0 ? "red" : "orange";
+            var weaponColor = dps == 0 ? "red" : "orange";
+
+            string dpsString;
+            if (dps > 1000000)
+                dpsString = (dps / 1000000) + "M";
+            else if (dps > 1000)
+                dpsString = (dps / 1000) + "K";
+            else
+                dpsString = dps.ToString();
+
             var functionalColor = tracker.IsFunctional ? "white" : "red";
             return
-                $"<color={functionalColor}>{ownerDisplay,-8}{integrityPercent,3}%<color={functionalColor}> P:<color=orange>{power,3}<color={functionalColor}> T:<color=orange>{thrust,3}<color={functionalColor}> W:<color={weaponColor}>{g,3}<color={functionalColor}> S:<color={shieldColor}>{shieldPercent,3}%<color=white>";
+                $"<color={functionalColor}>{ownerDisplay,-8}{integrityPercent,3}%<color={functionalColor}> P:<color=orange>{power,3}<color={functionalColor}> T:<color=orange>{thrust,3}<color={functionalColor}> DPS:<color={weaponColor}>{dpsString}<color={functionalColor}> S:<color={shieldColor}>{shieldPercent,3}%<color=white>";
         }
 
 
@@ -401,9 +364,8 @@ namespace ShipPoints
                 // Initialize the sphere entities
                 // Initialize the text_api with the HUDRegistered callback
                 TextHudApi = new HudAPIv2(HudRegistered);
-
-            // Avoid bootlock when opening world with autotracked grids.
-            TrackingManager.Init();
+            else
+                TrackingManager.Init();
 
             // Initialize the WC_api and load it if it's not null
 
@@ -457,7 +419,7 @@ namespace ShipPoints
 
             try
             {
-                if (MatchTimer.I.Ticks % 60 == 0)
+                if (MasterSession.I.Ticks % 61 == 0)
                 {
                     AllPlayers.Clear();
                     MyAPIGateway.Multiplayer.Players.GetPlayers(_listPlayers, delegate(IMyPlayer p)

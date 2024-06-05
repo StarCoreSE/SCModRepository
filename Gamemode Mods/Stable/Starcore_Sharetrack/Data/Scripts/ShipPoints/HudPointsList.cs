@@ -8,7 +8,6 @@ using Draygo.API;
 using RelativeTopSpeed;
 using Sandbox.Definitions;
 using Sandbox.ModAPI;
-using ShipPoints.MatchTiming;
 using ShipPoints.ShipTracking;
 using VRage.Game;
 using VRage.Game.ModAPI;
@@ -104,7 +103,7 @@ namespace ShipPoints
         private void ShiftTCalcs(IMyCubeGrid focusedGrid)
         {
             // Update once per second
-            if (MatchTimer.I.Ticks % 60 != 0)
+            if (MasterSession.I.Ticks % 59 != 0)
                 return;
             var stopwatch = new System.Diagnostics.Stopwatch();
             stopwatch.Start();
@@ -183,7 +182,7 @@ namespace ShipPoints
             double lastExecutionTime = _executionTimes.Count > 0 ? _executionTimes.Last() : 0;
 
 
-            sb.AppendLine($"Last Update took: {lastExecutionTime:F2} ms");
+            //sb.AppendLine($"Last Update took: {lastExecutionTime:F2} ms");
             // Basic Info
             sb.AppendLine("----Basic Info----");
             sb.AppendFormat("<color=White>{0} ", focusedGrid.DisplayName);
@@ -218,15 +217,18 @@ namespace ShipPoints
             sb.AppendFormat("<color=Green>Gyro<color=White>: {0}N\n", gyroString);
             sb.AppendFormat("<color=Green>Power<color=White>: {0}\n", pwr);
             sb.AppendLine(); //blank line
-            // Blocks Info
-            sb.AppendLine("<color=Orange>----Blocks----");
-            sb.AppendLine(specialBlockText);
-            sb.AppendLine(); //blank line
+
             // Armament Info
             sb.AppendLine("<color=Orange>----Armament----");
             sb.Append(gunText);
+            sb.AppendLine(); //blank line
 
-            _statMessage.Message = sb;
+            // Blocks Info
+            sb.AppendLine("<color=Orange>----Blocks----");
+            sb.AppendLine(specialBlockText);
+
+            if (!_statMessage.Message.Equals(sb))
+                _statMessage.Message = sb;
             _statMessage.Visible = true;
             stopwatch.Stop();
             UpdateExecutionTimes(stopwatch.Elapsed.TotalMilliseconds);
@@ -234,7 +236,7 @@ namespace ShipPoints
 
         private void BattleShiftTCalcs(IMyCubeGrid focusedGrid)
         {
-            if (MatchTimer.I.Ticks % 60 != 0)
+            if (MasterSession.I.Ticks % 59 != 0)
                 return;
 
             ShipTracker tracked;

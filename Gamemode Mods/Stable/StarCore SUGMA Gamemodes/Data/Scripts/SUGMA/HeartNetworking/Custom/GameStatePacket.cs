@@ -19,7 +19,7 @@ namespace SC.SUGMA.HeartNetworking.Custom
                 return;
             }
 
-            if ((SUGMA_SessionComponent.I.CurrentGamemode?.Id ?? "null") == Gamemode)
+            if ((SUGMA_SessionComponent.I.CurrentGamemode?.ComponentId ?? "null") == Gamemode)
                 return;
 
             if (!SUGMA_SessionComponent.I.StartGamemode(Gamemode, Array.Empty<string>())) // TODO add arguments
@@ -30,7 +30,7 @@ namespace SC.SUGMA.HeartNetworking.Custom
         {
             GameStatePacket packet = new GameStatePacket
             {
-                Gamemode = SUGMA_SessionComponent.I.CurrentGamemode?.Id ?? "null"
+                Gamemode = SUGMA_SessionComponent.I.CurrentGamemode?.ComponentId ?? "null"
             };
             Log.Info("Sending gamestate update packet. Contents:\n    Gamemode: " + packet.Gamemode);
 
