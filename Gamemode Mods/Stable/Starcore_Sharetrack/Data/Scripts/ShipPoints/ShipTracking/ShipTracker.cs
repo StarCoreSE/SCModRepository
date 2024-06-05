@@ -8,6 +8,7 @@ using Sandbox.Game.Entities;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
 using VRage.Game;
+using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRage.ModAPI;
 using VRageMath;
@@ -590,6 +591,8 @@ namespace ShipPoints.ShipTracking
                 return blockCounts;
             }
         }
+
+        public float DamagePerSecond => PointCheck.I.WcApi.GetConstructEffectiveDps((MyEntity) Grid);
 
         #endregion
 

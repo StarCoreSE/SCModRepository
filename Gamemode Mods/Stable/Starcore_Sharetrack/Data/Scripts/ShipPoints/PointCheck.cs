@@ -199,6 +199,7 @@ namespace ShipPoints
 
             IntegretyMessage.Message.Clear();
             IntegretyMessage.Message.Append(tt);
+            IntegretyMessage.Origin = new Vector2D(0.975 - IntegretyMessage.GetTextLength().X, IntegretyMessage.Origin.Y);
         }
 
 
@@ -238,11 +239,11 @@ namespace ShipPoints
                 obp[fn] += shipTracker.OffensivePoints;
                 mobp[fn] += shipTracker.MovementPoints;
 
-                var g = shipTracker.WeaponCounts.Values.Sum();
+                var dps = (int) shipTracker.DamagePerSecond;
                 var pwr = FormatPower(Math.Round(shipTracker.TotalPower, 1));
                 var ts2 = FormatThrust(Math.Round(shipTracker.TotalThrust, 2));
 
-                ts[fn].Add(CreateDisplayString(o, shipTracker, g, pwr, ts2));
+                ts[fn].Add(CreateDisplayString(o, shipTracker, dps, pwr, ts2));
             }
         }
 
@@ -257,7 +258,7 @@ namespace ShipPoints
             return thrustInMega > 1e2 ? $"{Math.Round(thrustInMega / 1e3, 2)}GN" : $"{thrustInMega}MN";
         }
 
-        private string CreateDisplayString(string ownerName, ShipTracker tracker, int g, string power, string thrust)
+        private string CreateDisplayString(string ownerName, ShipTracker tracker, int dps, string power, string thrust)
         {
             var ownerDisplay = ownerName != null
                 ? ownerName.Substring(0, Math.Min(ownerName.Length, 7))
@@ -269,10 +270,19 @@ namespace ShipPoints
             var shieldColor = shieldPercent <= 0
                 ? "red"
                 : $"{255},{255 - tracker.CurrentShieldHeat * 2.5f},{255 - tracker.CurrentShieldHeat * 2.5f}";
-            var weaponColor = g == 0 ? "red" : "orange";
+            var weaponColor = dps == 0 ? "red" : "orange";
+
+            string dpsString;
+            if (dps > 1000000)
+                dpsString = (dps / 1000000) + "M";
+            else if (dps > 1000)
+                dpsString = (dps / 1000) + "K";
+            else
+                dpsString = dps.ToString();
+
             var functionalColor = tracker.IsFunctional ? "white" : "red";
             return
-                $"<color={functionalColor}>{ownerDisplay,-8}{integrityPercent,3}%<color={functionalColor}> P:<color=orange>{power,3}<color={functionalColor}> T:<color=orange>{thrust,3}<color={functionalColor}> W:<color={weaponColor}>{g,3}<color={functionalColor}> S:<color={shieldColor}>{shieldPercent,3}%<color=white>";
+                $"<color={functionalColor}>{ownerDisplay,-8}{integrityPercent,3}%<color={functionalColor}> P:<color=orange>{power,3}<color={functionalColor}> T:<color=orange>{thrust,3}<color={functionalColor}> DPS:<color={weaponColor}>{dpsString}<color={functionalColor}> S:<color={shieldColor}>{shieldPercent,3}%<color=white>";
         }
 
 
