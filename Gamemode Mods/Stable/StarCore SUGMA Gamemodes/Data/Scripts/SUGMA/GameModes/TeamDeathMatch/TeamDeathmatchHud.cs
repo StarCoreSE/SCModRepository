@@ -4,6 +4,7 @@ using RichHudFramework.Client;
 using RichHudFramework.UI;
 using RichHudFramework.UI.Client;
 using RichHudFramework.UI.Rendering;
+using Sandbox.ModAPI;
 using SC.SUGMA.GameState;
 using VRage.Game.ModAPI;
 using VRageMath;
@@ -12,7 +13,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 {
     internal class TeamDeathmatchHud : ComponentBase
     {
-        private const int MatchResultsVisibleTicks = 600;
+        private const int MatchResultsVisibleTicks = 900;
 
         private TDMHud_Window _window;
         private int _closeTime = -1;
@@ -37,13 +38,17 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             _window.Update();
             if (_closeTime > 0)
                 _closeTime--;
+
             if (_closeTime == 0)
+            {
                 SUGMA_SessionComponent.I.UnregisterComponent(ComponentId);
+            }
         }
 
         public void MatchEnded(IMyFaction winner)
         {
             _window.MatchEnded(winner);
+            _closeTime = MatchResultsVisibleTicks;
         }
     }
 
@@ -107,7 +112,6 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             if (_matchEnded)
                 return;
 
-
             TimeSpan matchTime = _timer.CurrentMatchTime;
             int matchSeconds = (int)matchTime.TotalSeconds;
             int basePoints = (int)(_timer.MatchDurationMinutes * 60);
@@ -147,9 +151,8 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                 Height = TDMHud_TeamBanner.BaseHeight,
                 TextPadding = new Vector2(2.5f, 0),
                 Color = new Color(255, 255, 255, 40),
+                Format = GlyphFormat.White,
             };
-            winnerLabel.TextBoard.SetFormatting(new GlyphFormat(Color.Yellow, TextAlignment.Center, 10,
-                FontStyles.Bold | FontStyles.Underline));
         }
     }
 }
