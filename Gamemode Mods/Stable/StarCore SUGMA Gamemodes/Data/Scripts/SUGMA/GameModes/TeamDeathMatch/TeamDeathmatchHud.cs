@@ -140,8 +140,6 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                 RemoveChild(banner);
             }
 
-            
-
             LabelBox winnerLabel = new LabelBox(_timerLabel)
             {
                 Text = winner != null ? 
@@ -151,8 +149,9 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                 Height = TDMHud_TeamBanner.BaseHeight,
                 TextPadding = new Vector2(2.5f, 0),
                 Color = new Color(255, 255, 255, 40),
-                Format = GlyphFormat.White,
             };
+
+            winnerLabel.TextBoard.SetFormatting(GlyphFormat.White.WithColor(Color.Red).WithSize(3).WithAlignment(TextAlignment.Center));
         }
     }
 }
