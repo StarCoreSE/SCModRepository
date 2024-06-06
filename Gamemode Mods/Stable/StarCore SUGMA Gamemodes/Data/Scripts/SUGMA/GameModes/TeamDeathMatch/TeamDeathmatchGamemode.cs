@@ -135,6 +135,14 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             {
                 PointTracker.SetFactionPoints(factionKvp.Key, factionKvp.Value);
                 factionNames.Add($"|{factionKvp.Key.Tag}|");
+                foreach (var faction in TrackedFactions.Keys)
+                {
+                    if (faction == factionKvp.Key)
+                        continue;
+
+                    MyAPIGateway.Session.Factions.DeclareWar(factionKvp.Key.FactionId, faction.FactionId);
+                    MyAPIGateway.Utilities.ShowMessage("TDM", $"Declared war between {factionKvp.Key.Name} and {faction.Name}");
+                }
             }
 
             base.StartRound(arguments);
@@ -155,6 +163,18 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
         public override void StopRound()
         {
             SUGMA_SessionComponent.I.GetComponent<TeamDeathmatchHud>("tdmHud").MatchEnded(_winningFaction);
+
+            foreach (var factionKvp in TrackedFactions)
+            {
+                foreach (var faction in TrackedFactions.Keys)
+                {
+                    if (faction == factionKvp.Key)
+                        continue;
+
+                    MyAPIGateway.Session.Factions.SendPeaceRequest(factionKvp.Key.FactionId, faction.FactionId);
+                    MyAPIGateway.Session.Factions.AcceptPeace(faction.FactionId, factionKvp.Key.FactionId);
+                }
+            }
 
             _matchTimer.Stop();
             SUGMA_SessionComponent.I.UnregisterComponent("TDMPointTracker");
