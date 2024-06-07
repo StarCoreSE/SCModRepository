@@ -21,6 +21,8 @@ namespace SCModRepository_Dev.Gamemode_Mods.Development.Starcore_Sharetrack_Dev.
                 }
 
             MyAPIGateway.Utilities.ShowMessage("Shields", "Charged");
+            if (MyAPIGateway.Session.IsServer)
+                HeartNetwork.I.SendToEveryone(this);
         }
     }
 }

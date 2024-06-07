@@ -16,7 +16,7 @@ namespace ShipPoints.Commands
             if (MyAPIGateway.Session.IsServer)
                 new ShieldFillRequestPacket().Received(0);
             else
-                HeartNetwork.I.SendToEveryone(new ShieldFillRequestPacket());
+                HeartNetwork.I.SendToServer(new ShieldFillRequestPacket());
         }
 
         public static void ReportProblem(string[] args)
