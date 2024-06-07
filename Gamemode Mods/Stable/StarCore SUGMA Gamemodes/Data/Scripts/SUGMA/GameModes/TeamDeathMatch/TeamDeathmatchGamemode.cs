@@ -162,7 +162,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
         public override void StopRound()
         {
-            SUGMA_SessionComponent.I.GetComponent<TeamDeathmatchHud>("tdmHud").MatchEnded(_winningFaction);
+            SUGMA_SessionComponent.I.GetComponent<TeamDeathmatchHud>("tdmHud")?.MatchEnded(_winningFaction);
 
             foreach (var factionKvp in TrackedFactions)
             {
@@ -176,7 +176,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                 }
             }
 
-            _matchTimer.Stop();
+            _matchTimer?.Stop();
             SUGMA_SessionComponent.I.UnregisterComponent("TDMPointTracker");
             ShareTrackApi.UnregisterOnAliveChanged(OnAliveChanged);
 

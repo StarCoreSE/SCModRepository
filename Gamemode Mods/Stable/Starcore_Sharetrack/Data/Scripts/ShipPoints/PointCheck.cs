@@ -293,23 +293,25 @@ namespace ShipPoints
             Dictionary<string, double> m, Dictionary<string, int> bp, Dictionary<string, int> mbp,
             Dictionary<string, int> pbp, Dictionary<string, int> obp, Dictionary<string, int> mobp)
         {
-            foreach (var x in trackedShip.Keys)
+            foreach (var faction in trackedShip.Keys)
             {
-                var msValue = m[x] / 1e6;
-                var tbi = 100f / bp[x];
+                if (trackedShip[faction] == null || trackedShip[faction].Count == 0) continue;
+
+                var msValue = m[faction] / 1e6;
+                var tbi = 100f / bp[faction];
 
                 tt.Append("<color=orange>---- ")
-                    .Append(x)
+                    .Append(faction)
                     .Append(" : ")
-                    .AppendFormat("{0:0.00}M : {1}bp <color=orange>[", msValue, bp[x]);
+                    .AppendFormat("{0:0.00}M : {1}bp <color=orange>[", msValue, bp[faction]);
 
-                tt.AppendFormat("<color=Red>{0}<color=white>%<color=orange>|", (int)(obp[x] * tbi + 0.5f))
-                    .AppendFormat("<color=Green>{0}<color=white>%<color=orange>|", (int)(pbp[x] * tbi + 0.5f))
-                    .AppendFormat("<color=DeepSkyBlue>{0}<color=white>%<color=orange>|", (int)(mobp[x] * tbi + 0.5f))
-                    .AppendFormat("<color=LightGray>{0}<color=white>%<color=orange>]", (int)(mbp[x] * tbi + 0.5f))
+                tt.AppendFormat("<color=Red>{0}<color=white>%<color=orange>|", (int)(obp[faction] * tbi + 0.5f))
+                    .AppendFormat("<color=Green>{0}<color=white>%<color=orange>|", (int)(pbp[faction] * tbi + 0.5f))
+                    .AppendFormat("<color=DeepSkyBlue>{0}<color=white>%<color=orange>|", (int)(mobp[faction] * tbi + 0.5f))
+                    .AppendFormat("<color=LightGray>{0}<color=white>%<color=orange>]", (int)(mbp[faction] * tbi + 0.5f))
                     .AppendLine(" ---------");
 
-                foreach (var y in trackedShip[x]) tt.AppendLine(y);
+                foreach (var y in trackedShip[faction]) tt.AppendLine(y);
             }
         }
 
