@@ -141,7 +141,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                         continue;
 
                     MyAPIGateway.Session.Factions.DeclareWar(factionKvp.Key.FactionId, faction.FactionId);
-                    MyAPIGateway.Utilities.ShowMessage("TDM", $"Declared war between {factionKvp.Key.Name} and {faction.Name}");
+                    //MyAPIGateway.Utilities.ShowMessage("TDM", $"Declared war between {factionKvp.Key.Name} and {faction.Name}");
                 }
             }
 
@@ -190,42 +190,51 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
         {
             if (_winningFaction == null)
             {
-                MyAPIGateway.Utilities.ShowNotification("YOU ARE ALL LOSERS", 10000, "Red");
+                MyAPIGateway.Utilities.ShowNotification("YOU ARE ALL LOSERS.", 10000, "Red");
                 return;
             }
 
-            MyAPIGateway.Utilities.ShowNotification($"A WINNER IS [{_winningFaction?.Name}]", 10000);
+            MyAPIGateway.Utilities.ShowNotification($"A WINNER IS [{_winningFaction?.Name}]!", 10000);
         }
 
 
         internal virtual void OnAliveChanged(IMyCubeGrid grid, bool isAlive)
         {
             Log.Info("GridAliveSet: " + grid.DisplayName + " -> " + isAlive);
-            if (isAlive)
-                return;
 
             IMyFaction gridFaction = PlayerTracker.I.GetGridFaction(grid);
             if (gridFaction == null)
                 return;
 
-            PointTracker.AddFactionPoints(gridFaction, -1);
+            PointTracker.AddFactionPoints(gridFaction, isAlive ? 1 : -1);
+            if (isAlive)
+            {
+                MyAPIGateway.Utilities.ShowMessage("TDM", $"[{grid.DisplayName}] has returned to life!");
+                int newPoints = PointTracker.GetFactionPoints(gridFaction);
+                if (newPoints > TrackedFactions.GetValueOrDefault(gridFaction))
+                    TrackedFactions[gridFaction] = newPoints; // TODO the UI will break a little bit if this gets called.
+            }
         }
 
-        internal virtual void OnFactionKilled(IMyFaction faction)
+        internal virtual bool OnFactionKilled(IMyFaction faction)
         {
             TrackedFactions.Remove(faction);
-            MyAPIGateway.Utilities.ShowNotification($"|{faction.Tag}| IS KILL", 10000, "Red");
+            MyAPIGateway.Utilities.ShowNotification($"|{faction.Tag}| IS OUT!", 10000, "Red");
 
             if (TrackedFactions.Count == 1)
             {
                 _winningFaction = TrackedFactions.Keys.First();
                 StopRound();
+                return true;
             }
             else if (TrackedFactions.Count == 0)
             {
                 _winningFaction = null;
                 StopRound();
+                return true;
             }
+
+            return false;
         }
     }
 }
