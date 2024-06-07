@@ -1,4 +1,5 @@
-﻿using Sandbox.Game.Entities;
+﻿using ProtoBuf;
+using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
 using ShipPoints;
 using ShipPoints.HeartNetworking;
@@ -6,6 +7,7 @@ using ShipPoints.HeartNetworking;
 namespace SCModRepository_Dev.Gamemode_Mods.Development.Starcore_Sharetrack_Dev.Data.Scripts.ShipPoints.HeartNetworking.
     Custom
 {
+    [ProtoContract]
     internal class ShieldFillRequestPacket : PacketBase
     {
         public override void Received(ulong SenderSteamId)
