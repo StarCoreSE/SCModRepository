@@ -16,7 +16,7 @@ namespace SC.SUGMA
 
         public static void SetDamageEnabled(bool value)
         {
-            MyAPIGateway.Utilities.ShowMessage("SUGMA", $"Global damage {(value ? "enabled" : "disabled")}.");
+            //MyAPIGateway.Utilities.ShowMessage("SUGMA", $"Global damage {(value ? "enabled" : "disabled")}.");
 
             int existing = (int)MySessionComponentSafeZones.AllowedActions;
             MySessionComponentSafeZones.AllowedActions = CastProhibit(MySessionComponentSafeZones.AllowedActions,
@@ -25,8 +25,8 @@ namespace SC.SUGMA
 
         public static void SetWorldPermissionsForMatch(bool matchActive)
         {
-            MyAPIGateway.Utilities.ShowMessage("SUGMA",
-                $"Match global permissions {(matchActive ? "enabled" : "disabled")}.");
+            //MyAPIGateway.Utilities.ShowMessage("SUGMA",
+            //    $"Match global permissions {(matchActive ? "enabled" : "disabled")}.");
 
             MySessionComponentSafeZones.AllowedActions = CastProhibit(MySessionComponentSafeZones.AllowedActions,
                 matchActive ? MatchPermsInt : FullPermsInt);

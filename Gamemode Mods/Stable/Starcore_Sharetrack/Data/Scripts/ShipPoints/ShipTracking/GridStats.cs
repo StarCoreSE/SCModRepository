@@ -42,6 +42,7 @@ namespace ShipPoints.ShipTracking
 
             Grid.OnBlockAdded += OnBlockAdd;
             Grid.OnBlockRemoved += OnBlockRemove;
+            Grid.OnGridBlockDamaged += OnBlockDamage;
             Update();
         }
 
@@ -49,6 +50,7 @@ namespace ShipPoints.ShipTracking
         {
             Grid.OnBlockAdded -= OnBlockAdd;
             Grid.OnBlockRemoved -= OnBlockRemove;
+            Grid.OnGridBlockDamaged -= OnBlockDamage;
 
             _slimBlocks.Clear();
             _fatBlocks.Clear();
@@ -135,6 +137,11 @@ namespace ShipPoints.ShipTracking
             GridIntegrity -= block.Integrity;
 
             NeedsUpdate = true;
+        }
+
+        private void OnBlockDamage(IMySlimBlock block, float damage, MyHitInfo? hitInfo, long attacker)
+        {
+            GridIntegrity -= damage;
         }
 
         #endregion
