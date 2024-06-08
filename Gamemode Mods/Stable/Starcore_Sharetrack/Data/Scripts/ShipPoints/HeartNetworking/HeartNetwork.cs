@@ -51,6 +51,12 @@ namespace ShipPoints.HeartNetworking
                 }
 
                 TotalNetworkLoad /= NetworkLoadTicks / 60; // Average per-second
+
+                Log.Info("Network Load Stats:");
+                foreach (var type in TypeNetworkLoad)
+                {
+                    Log.Info($"\n    {type.Key.Name}: {type.Value}");
+                }
             }
         }
 

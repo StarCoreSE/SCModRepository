@@ -596,7 +596,7 @@ namespace ShipPoints.ShipTracking
             }
         }
 
-        public float DamagePerSecond => PointCheck.I.WcApi.GetConstructEffectiveDps((MyEntity) Grid);
+        public float DamagePerSecond => Math.Abs(PointCheck.I.WcApi.GetConstructEffectiveDps((MyEntity) Grid));
 
         #endregion
 
