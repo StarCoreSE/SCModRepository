@@ -11,7 +11,7 @@
 			<TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_AC150</SubtypeId>
       </Id>
-      <DisplayName>[MA] Slinger AC 150mm</DisplayName>
+      <DisplayName>Slinger AC 150mm</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\MA_AC150.png</Icon>
       <Description>
         [3.5km Targeting Range]
@@ -150,7 +150,7 @@
 			<TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_AC150_30</SubtypeId>
       </Id>
-      <DisplayName>[MA] Slinger AC 150mm Sloped 30</DisplayName>
+      <DisplayName>Slinger AC 150mm Sloped 30</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\MA_AC150_30.png</Icon>
       <Description>
         [3.5km Targeting Range]
@@ -261,7 +261,7 @@
 			<TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_AC150_45</SubtypeId>
       </Id>
-      <DisplayName>[MA] Slinger AC 150mm Sloped 45</DisplayName>
+      <DisplayName>Slinger AC 150mm Sloped 45</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\MA_AC150_45.png</Icon>
       <Description>
         [3.5km Targeting Range]
@@ -375,7 +375,7 @@
 			<TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_AC150_Gantry</SubtypeId>
       </Id>
-      <DisplayName>[MA] Slinger AC 150mm Gantry Style</DisplayName>
+      <DisplayName>Slinger AC 150mm Gantry Style</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\MA_AC150_Gantry.png</Icon>
       <Description>
         [3.5km Targeting Range]
@@ -491,7 +491,7 @@
 			<TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_AC150_45_Gantry</SubtypeId>
       </Id>
-      <DisplayName>[MA] Slinger AC 150mm Sloped 45 Gantry</DisplayName>
+      <DisplayName>Slinger AC 150mm Sloped 45 Gantry</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\MA_AC150_45_Gantry.png</Icon>
       <Description>
         [3.5km Targeting Range]
