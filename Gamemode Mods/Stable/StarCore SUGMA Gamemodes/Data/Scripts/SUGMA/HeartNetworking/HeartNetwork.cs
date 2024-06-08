@@ -38,6 +38,7 @@ namespace SC.SUGMA.HeartNetworking
             I = null;
         }
 
+        private int ctr = 0;
         public override void UpdateTick()
         {
             _networkLoadUpdate--;
@@ -53,10 +54,14 @@ namespace SC.SUGMA.HeartNetworking
 
                 TotalNetworkLoad /= NetworkLoadTicks / 60; // Average per-second
 
-                Log.Info("Network Load Stats:");
-                foreach (var type in TypeNetworkLoad)
+                ctr++;
+                if (ctr % 4 == 0)
                 {
-                    Log.Info($"\n    {type.Key.Name}: {type.Value}");
+                    Log.Info("Network Load Stats:");
+                    foreach (var type in TypeNetworkLoad)
+                    {
+                        Log.Info($"|    {type.Key.Name}: {type.Value}");
+                    }
                 }
             }
         }
