@@ -57,11 +57,7 @@ namespace SC.SUGMA.HeartNetworking
                 ctr++;
                 if (ctr % 4 == 0)
                 {
-                    Log.Info("Network Load Stats:");
-                    foreach (var type in TypeNetworkLoad)
-                    {
-                        Log.Info($"|    {type.Key.Name}: {type.Value}");
-                    }
+                    Log.Info($"Network Load: {TotalNetworkLoad}");
                 }
             }
         }
