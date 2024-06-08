@@ -4,6 +4,7 @@ using RichHudFramework.Client;
 using RichHudFramework.UI;
 using RichHudFramework.UI.Client;
 using RichHudFramework.UI.Rendering;
+using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
 using SC.SUGMA.GameState;
 using VRage.Game.ModAPI;

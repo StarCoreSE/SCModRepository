@@ -40,7 +40,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
         public override void UpdateActive()
         {
-            if (PointTracker == null)
+            if (PointTracker == null || _matchTimer == null || TrackedFactions == null) // ten billion nullchecks of aristeas
                 return;
 
             int basePoints = (int)(_matchTimer.MatchDurationMinutes * 60);
@@ -53,7 +53,8 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                           currentPoints);
                 if (factionPoints <= 0)
                 {
-                    OnFactionKilled(factionKvp.Key);
+                    if (OnFactionKilled(factionKvp.Key))
+                        return;
                     // TODO: Spawn keen explosion on remaining grids.
                 }
             }
