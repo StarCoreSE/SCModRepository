@@ -37,7 +37,6 @@ namespace ShipPoints.HeartNetworking
             I = null;
         }
 
-        private int ctr = 0;
         public void Update()
         {
             _networkLoadUpdate--;
@@ -52,12 +51,6 @@ namespace ShipPoints.HeartNetworking
                 }
 
                 TotalNetworkLoad /= NetworkLoadTicks / 60; // Average per-second
-
-                ctr++;
-                if (ctr % 4 == 0)
-                {
-                    Log.Info($"Network Load: {TotalNetworkLoad}");
-                }
             }
         }
 
