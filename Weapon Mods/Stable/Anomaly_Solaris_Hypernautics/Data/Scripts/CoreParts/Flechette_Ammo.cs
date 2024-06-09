@@ -556,7 +556,7 @@ namespace Scripts
             {
                 ByBlockHit = new ByBlockHitDef
                 {
-                    Enable = true,
+                    Enable = false,
                     Radius = 3f, // Meters
                     Damage = 2500f,
                     Depth = 1f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value

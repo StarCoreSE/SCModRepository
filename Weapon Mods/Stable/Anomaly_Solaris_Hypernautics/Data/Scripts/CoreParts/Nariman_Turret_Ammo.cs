@@ -540,7 +540,7 @@ namespace Scripts
             {
                 ByBlockHit = new ByBlockHitDef
                 {
-                    Enable = true,
+                    Enable = false,
                     Radius = 13f, // Meters
                     Damage = 5000f,
                     Depth = 3f, // Meters
@@ -557,11 +557,11 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = true,
-                    Radius = 10f, // Meters
-                    Damage = 10200f,
-                    Depth = 5f,
+                    Radius = 3f, // Meters
+                    Damage = 15200f,
+                    Depth = 1f,
                     MaxAbsorb = 0f,
-                    Falloff = Linear, //.NoFalloff applies the same damage to all blocks in radius
+                    Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
                     //.Curve drops off damage sharply as it approaches the max radius
                     //.InvCurve drops off sharply from the middle and tapers to max radius

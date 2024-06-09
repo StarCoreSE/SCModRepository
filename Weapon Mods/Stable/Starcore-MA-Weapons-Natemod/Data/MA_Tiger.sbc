@@ -11,7 +11,7 @@
 			<TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_Tiger</SubtypeId>
       </Id>
-      <DisplayName>[MA] Tiger AC 150mm</DisplayName>
+      <DisplayName>Tiger AC 150mm</DisplayName>
       <Icon>Textures\Icons\MA_Tiger.dds</Icon>
       <Description>
         [3.5km Targeting Range]
@@ -130,7 +130,7 @@
 			<TypeId>ConveyorSorter</TypeId>
         <SubtypeId>MA_Crouching_Tiger</SubtypeId>
       </Id>
-      <DisplayName>[MA] Crouching Tiger AC 150mm</DisplayName>
+      <DisplayName>Crouching Tiger AC 150mm</DisplayName>
       <Icon>Textures\Icons\MA_Crouching_Tiger.png</Icon>
       <Description>
         [3.5km Targeting Range]
