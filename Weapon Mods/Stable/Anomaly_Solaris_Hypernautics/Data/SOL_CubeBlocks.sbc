@@ -23,9 +23,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\ElectroShield3x3.mwm</Model>
 			<Components>
-				<Component Subtype="AMP_FrameComponent" Count="1"/>
+				<Component Subtype="ASH_FrameComponent" Count="1"/>
 				<Component Subtype="Computer" Count="1"/>
-				<Component Subtype="AMP_PlateComponent" Count="3"/>
+				<Component Subtype="ASH_PlateComponent" Count="3"/>
 			</Components>
       <BuildTimeSeconds>60</BuildTimeSeconds>
 			<CriticalComponent Subtype="Computer" Index="0"/>
@@ -41,7 +41,7 @@
 		</Definition>
 
 
-
+		<!--
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
@@ -64,9 +64,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\FlakShotgun.mwm</Model>
 			<Components>
-				<Component Subtype="AMP_FrameComponent" Count="1"/>
+				<Component Subtype="ASH_FrameComponent" Count="1"/>
 				<Component Subtype="Computer" Count="1"/>
-				<Component Subtype="AMP_PlateComponent" Count="1"/>
+				<Component Subtype="ASH_PlateComponent" Count="1"/>
 			</Components>
 			<CriticalComponent Subtype="Computer" Index="0"/>
 
@@ -79,7 +79,7 @@
 			</MountPoints>
 			<BlockPairName>Flechette_DoubleBarrel</BlockPairName>
 		</Definition>
-
+		-->
 
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
@@ -100,10 +100,10 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\FlamethrowerBase.mwm</Model>
 			<Components>
-				<Component Subtype="AMP_FrameComponent" Count="1"/>
+				<Component Subtype="ASH_FrameComponent" Count="1"/>
 				<Component Subtype="Computer" Count="1"/>
-				<Component Subtype="AMP_FrameComponent" Count="2"/>
-				<Component Subtype="AMP_PlateComponent" Count="1"/>
+				<Component Subtype="ASH_FrameComponent" Count="2"/>
+				<Component Subtype="ASH_PlateComponent" Count="1"/>
 			</Components>
 			<CriticalComponent Subtype="Computer" Index="0"/>
 			<BlockPairName>Impulse_Torch</BlockPairName>
@@ -128,9 +128,8 @@
 
 
 
-
-
-<!-- ArcStrike Torpedo -->
+		<!-- ArcStrike Torpedo -->
+		<!--
 <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
      <Id>
        <TypeId>ConveyorSorter</TypeId>
@@ -187,6 +186,7 @@
       <MaxFov>1.04719755</MaxFov>
   <DestroySound>Betty_Weapon_Destroyed</DestroySound>
     </Definition>	
+	-->
 
 <!-- OPA Light -->
 <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
@@ -257,7 +257,7 @@
 
 
 
-
+		<!--
    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 
      <Id>
@@ -320,8 +320,9 @@
      <MaxFov>1.04719755</MaxFov>
      <DestroySound>Betty_Weapon_Destroyed</DestroySound>
    </Definition>   
+	-->
 
-
+		<!--
    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 
      <Id>
@@ -386,6 +387,7 @@
      <MaxFov>1.04719755</MaxFov>
      <DestroySound>Betty_Weapon_Destroyed</DestroySound>
    </Definition>   
+		-->
 
 
 
@@ -397,10 +399,8 @@
 
 
 
-
-
+		<!--
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
-			<!-- Nariman Anti Anything -->
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>Nariman_Dart_Turret</SubtypeId>
@@ -442,13 +442,12 @@
 			<MountPoints>
 				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
 			</MountPoints>
-			<!--<BuildProgressModels>
+			<BuildProgressModels>
 			<Model BuildPercentUpperBound="0.10" File="Models\SA_GaussAP_Large_Constr1.mwm" />
 			<Model BuildPercentUpperBound="0.5" File="Models\SA_GaussAP_Large_Constr2.mwm" />
 			<Model BuildPercentUpperBound="0.90" File="Models\SA_GaussAP_Large_Constr3.mwm" />
-		</BuildProgressModels>-->
+		</BuildProgressModels>
 			<VoxelPlacement>
-				<!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
 				<StaticMode>
 					<PlacementMode>OutsideVoxel</PlacementMode>
 					<MaxAllowed>0.2</MaxAllowed>
@@ -482,6 +481,7 @@
 			<MaxFov>2</MaxFov>
 			<EmissiveColorPreset>Default</EmissiveColorPreset>
 		</Definition>
+		-->
 
 
 
@@ -493,8 +493,7 @@
 
 
 
-
-
+		<!--
    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
 		
 		  <Id>
@@ -555,7 +554,7 @@
       <MaxFov>1.04719755</MaxFov>
   <DestroySound>Betty_Weapon_Destroyed</DestroySound>
     </Definition>
-
+		-->
 
 
 
