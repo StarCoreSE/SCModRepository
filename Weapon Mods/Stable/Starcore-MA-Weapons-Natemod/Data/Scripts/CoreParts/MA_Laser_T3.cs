@@ -62,9 +62,9 @@ namespace Scripts {
                 MaxTargetDistance = 3000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
                 MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 14, // Maximum number of targets to randomize between; 0 = unlimited.
-                CycleTargets = 2, // Number of targets to "cycle" per acquire attempt.
+                CycleTargets = 1, // Number of targets to "cycle" per acquire attempt.
                 TopBlocks = 18, // Maximum number of blocks to randomize between; 0 = unlimited.
-                CycleBlocks = 8, // Number of blocks to "cycle" per acquire attempt.
+                CycleBlocks = 2, // Number of blocks to "cycle" per acquire attempt.
                 StopTrackingSpeed = 0, // do not track target threats traveling faster than this speed
                 MaxTrackingTime = 35, // After this time has been reached the weapon will stop tracking existing target and scan for a new one, only applies to turreted weapons
             },
@@ -251,7 +251,7 @@ namespace Scripts {
             {
                 PartName = "Gladius Laser", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0f, // Projectile inaccuracy in degrees.
-                AimingTolerance = .1f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
+                AimingTolerance = 4f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Off, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
                 DelayCeaseFire = 0, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released.
                 AddToleranceToTracking = false, // Allows turret to only track to the edge of the AimingTolerance cone instead of dead centre.
