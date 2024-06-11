@@ -119,7 +119,9 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             if (!MyAPIGateway.Utilities.IsDedicated)
                 SUGMA_SessionComponent.I.UnregisterComponent("tdmHud");
             SUGMA_SessionComponent.I.RegisterComponent("TDMPointTracker", PointTracker);
+
             ShareTrackApi.RegisterOnAliveChanged(OnAliveChanged);
+            ShareTrackApi.RegisterOnTrack(OnGridTrackChanged);
 
             foreach (var grid in ShareTrackApi.GetTrackedGrids())
             {
@@ -182,6 +184,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             _matchTimer?.Stop();
             SUGMA_SessionComponent.I.UnregisterComponent("TDMPointTracker");
             ShareTrackApi.UnregisterOnAliveChanged(OnAliveChanged);
+            ShareTrackApi.UnregisterOnTrack(OnGridTrackChanged);
 
             base.StopRound();
             _winningFaction = null;
@@ -213,9 +216,23 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             if (isAlive)
             {
                 MyAPIGateway.Utilities.ShowMessage("TDM", $"[{grid.DisplayName}] has returned to life!");
-                int newPoints = PointTracker.GetFactionPoints(gridFaction);
-                if (newPoints > TrackedFactions.GetValueOrDefault(gridFaction))
-                    TrackedFactions[gridFaction] = newPoints; // TODO the UI will break a little bit if this gets called.
+                //int newPoints = PointTracker.GetFactionPoints(gridFaction);
+                //if (newPoints > TrackedFactions.GetValueOrDefault(gridFaction))
+                //    TrackedFactions[gridFaction] = newPoints; // TODO the UI will break a little bit if this gets called.
+            }
+        }
+
+        internal virtual void OnGridTrackChanged(IMyCubeGrid grid, bool isTracked)
+        {
+            Log.Info("GridTrackSet: " + grid.DisplayName + " -> " + isTracked);
+
+            if (ShareTrackApi.IsGridAlive(grid))
+            {
+                IMyFaction gridFaction = PlayerTracker.I.GetGridFaction(grid);
+                if (gridFaction == null)
+                    return;
+
+                PointTracker.AddFactionPoints(gridFaction, -1);
             }
         }
 
