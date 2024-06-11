@@ -116,6 +116,8 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
         {
             PointTracker = new PointTracker(3, 0);
             SUGMA_SessionComponent.I.UnregisterComponent("TDMPointTracker");
+            if (!MyAPIGateway.Utilities.IsDedicated)
+                SUGMA_SessionComponent.I.UnregisterComponent("tdmHud");
             SUGMA_SessionComponent.I.RegisterComponent("TDMPointTracker", PointTracker);
             ShareTrackApi.RegisterOnAliveChanged(OnAliveChanged);
 
