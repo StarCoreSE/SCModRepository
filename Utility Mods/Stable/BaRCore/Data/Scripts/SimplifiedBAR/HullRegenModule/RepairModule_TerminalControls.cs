@@ -56,7 +56,7 @@ namespace StarCore.RepairModule
                 var logic = b?.GameLogic?.GetAs<RepairModule>();
                 if (logic != null)
                 {
-                    return logic.Settings.SubsystemPriority;
+                    return logic.SubsystemPriority;
                 }
                 else
                 {
@@ -88,7 +88,7 @@ namespace StarCore.RepairModule
                 var logic = b?.GameLogic?.GetAs<RepairModule>();
                 if (logic != null)
                 {
-                    return logic.Settings.PriorityOnly;
+                    return logic.PriorityOnly;
                 }
                 else
                 {
@@ -110,7 +110,7 @@ namespace StarCore.RepairModule
                 var logic = b?.GameLogic?.GetAs<RepairModule>();
                 if (logic != null)
                 {
-                    return logic.Settings.IgnoreArmor;
+                    return logic.IgnoreArmor;
                 }
                 else
                 {
@@ -151,7 +151,7 @@ namespace StarCore.RepairModule
                 var logic = b?.GameLogic?.GetAs<RepairModule>();
                 if (logic != null)
                 {
-                    logic.Settings.PriorityOnly = !logic.Settings.PriorityOnly;
+                    logic.PriorityOnly = !logic.PriorityOnly;
                 }
             };
             PriorityCheckboxAction.Writer = (b, sb) =>
@@ -159,7 +159,7 @@ namespace StarCore.RepairModule
                 var logic = b?.GameLogic?.GetAs<RepairModule>();
                 if (logic != null)
                 {
-                    string boolState = logic.Settings.PriorityOnly ? "True" : "False";
+                    string boolState = logic.PriorityOnly ? "True" : "False";
                     sb.Append(boolState);
                 }
             };
@@ -183,7 +183,7 @@ namespace StarCore.RepairModule
                 var logic = b?.GameLogic?.GetAs<RepairModule>();
                 if (logic != null)
                 {
-                    logic.Settings.IgnoreArmor = !logic.Settings.IgnoreArmor;
+                    logic.IgnoreArmor = !logic.IgnoreArmor;
                 }
             };
             IgnoreArmorCheckboxAction.Writer = (b, sb) =>
@@ -191,7 +191,7 @@ namespace StarCore.RepairModule
                 var logic = b?.GameLogic?.GetAs<RepairModule>();
                 if (logic != null)
                 {
-                    string boolState = logic.Settings.IgnoreArmor ? "True" : "False";
+                    string boolState = logic.IgnoreArmor ? "True" : "False";
                     sb.Append(boolState);
                 }
             };
@@ -213,7 +213,7 @@ namespace StarCore.RepairModule
             var logic = GetLogic(block);
             if (logic != null)
             {
-                logic.Settings.SubsystemPriority = key;
+                logic.SubsystemPriority = key;
             }
         }
 
@@ -222,13 +222,13 @@ namespace StarCore.RepairModule
             var logic = GetLogic(block);
             if (logic != null)
             {
-                if (logic.subsystemPrioritySync.Value < 5)
+                if (logic.SubsystemPriority < 5)
                 {
-                    logic.Settings.SubsystemPriority++;
+                    logic.SubsystemPriority++;
                 }
                 else
                 {
-                    logic.Settings.SubsystemPriority = 0;
+                    logic.SubsystemPriority = 0;
                 }
             }          
         }
@@ -238,7 +238,7 @@ namespace StarCore.RepairModule
             var logic = GetLogic(block);
             if (logic != null)
             {
-                switch (logic.Settings.SubsystemPriority)
+                switch (logic.SubsystemPriority)
                 {
                     case 0:
                         sb.Append("Any");
@@ -267,7 +267,7 @@ namespace StarCore.RepairModule
             var logic = GetLogic(block);
             if (logic != null)
             {
-                logic.Settings.PriorityOnly = v;
+                logic.PriorityOnly = v;
             }               
         }
 
@@ -276,7 +276,7 @@ namespace StarCore.RepairModule
             var logic = GetLogic(block);
             if (logic != null)
             {
-                logic.Settings.IgnoreArmor = v;
+                logic.IgnoreArmor = v;
             }               
         }
     }

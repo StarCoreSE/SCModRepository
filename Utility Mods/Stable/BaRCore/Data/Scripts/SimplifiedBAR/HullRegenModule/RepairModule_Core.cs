@@ -16,6 +16,8 @@ using VRage.Game.ObjectBuilders.ComponentSystem;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRageMath;
+using StarCore.RepairModule.Networking;
+using StarCore.RepairModule.Networking.Custom;
 
 namespace StarCore.RepairModule
 {
@@ -34,13 +36,42 @@ namespace StarCore.RepairModule
     {
         private IMyCollector Block;
         private bool IsServer = MyAPIGateway.Session.IsServer;
+        public static RepairModule Instance { get; private set; }      
 
-        // Block Settings      
-        public MySync<bool, SyncDirection.BothWays> ignoreArmorSync;
-        public MySync<bool, SyncDirection.BothWays> priorityOnlySync;
-        public MySync<long, SyncDirection.BothWays> subsystemPrioritySync;
+        // Block Settings
+        public bool IgnoreArmor
+        {
+            get { return ignoreArmor;  }
+            set
+            {
+                ignoreArmor = value;
+                OnIgnoreArmorChanged?.Invoke(ignoreArmor);
+            }
+        }
+        private bool ignoreArmor;
+        private event Action<bool> OnIgnoreArmorChanged;
+        public bool PriorityOnly
+        {
+            get { return priorityOnly; }
+            set
+            {
+                priorityOnly = value;
+                OnPriorityOnlyChanged?.Invoke(priorityOnly);
+            }
+        }
+        private bool priorityOnly;
+        private event Action<bool> OnPriorityOnlyChanged;
+        public long SubsystemPriority
+        {
+            get { return GetLongFromPriority(subsystemPriority); }
+            set
+            {
+                subsystemPriority = GetPriorityFromLong(value);
+                OnSubsystemPriorityChanged?.Invoke(value);
+            }
+        }
         private RepairPriority subsystemPriority = RepairPriority.None;
-        public  RepairModuleSettings Settings;
+        private event Action<long> OnSubsystemPriorityChanged;
 
         // Timed Sort
         private int SortTimer = 0;
@@ -67,14 +98,9 @@ namespace StarCore.RepairModule
         {
             base.Init(objectBuilder);
 
+            Instance = this;
+            
             Block = (IMyCollector)Entity;
-
-            if (IsServer)
-            {
-                ignoreArmorSync.Value = false;
-                priorityOnlySync.Value = false;
-                subsystemPrioritySync.Value = GetLongFromPriority(RepairPriority.None);
-            }
 
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
         }
@@ -91,17 +117,22 @@ namespace StarCore.RepairModule
             MyParticlesManager.TryCreateParticleEffect(WeldParticle, ref MatrixD.Identity, ref Vector3D.Zero, uint.MaxValue, out WeldParticleEmitter);
             WeldSoundEmitter = new MyEntity3DSoundEmitter(null);
 
-            Settings = new RepairModuleSettings(this);
+            OnIgnoreArmorChanged += IgnoreArmor_Update;
+            OnPriorityOnlyChanged += PriorityOnly_Update;
+            OnSubsystemPriorityChanged += SubsystemPriority_Update;
 
-            subsystemPrioritySync.ValueChanged += SubsystemPriority_ValueChanged;
+            IgnoreArmor = false;
+            PriorityOnly = false;
+            SubsystemPriority = 0;
+
+            Block.AppendingCustomInfo += AppendCustomInfo;
 
             if (IsServer)
             {
                 InitRepairTargets(Block.CubeGrid);
 
                 Block.CubeGrid.OnBlockIntegrityChanged += HandleDamagedBlocks;
-                Block.CubeGrid.OnBlockRemoved += HandleRemovedBlocks;
-                Block.AppendingCustomInfo += AppendCustomInfo;
+                Block.CubeGrid.OnBlockRemoved += HandleRemovedBlocks;              
 
                 if (AssociatedGrids.Any())
                 {
@@ -134,7 +165,7 @@ namespace StarCore.RepairModule
 
                         RepairTarget(PriorityRepairTargets[0]);
                     }
-                    else if (RepairTargets.Any() && !Settings.PriorityOnly)
+                    else if (RepairTargets.Any() && !PriorityOnly)
                     {
                         RepairTargets[0].ComputeWorldCenter(out targetBlockPosition);
                         TargetPosition.Value = targetBlockPosition;
@@ -219,7 +250,7 @@ namespace StarCore.RepairModule
         #region Event Handlers
         public void HandleDamagedBlocks(IMySlimBlock block)
         {
-            if (Settings.IgnoreArmor && (block.FatBlock == null || block.ToString().Contains("MyCubeBlock")))
+            if (IgnoreArmor && (block.FatBlock == null || block.ToString().Contains("MyCubeBlock")))
                 return;
 
             List<IMySlimBlock> targetList = IsPriority(block) ? PriorityRepairTargets : RepairTargets;
@@ -253,9 +284,19 @@ namespace StarCore.RepairModule
             }
         }
 
-        private void SubsystemPriority_ValueChanged(MySync<long, SyncDirection.BothWays> obj)
+        private void IgnoreArmor_Update(bool _bool)
         {
-            subsystemPriority = GetPriorityFromLong(obj.Value);
+            IgnoreArmorPacket.UpdateIgnoreArmor();
+        }
+
+        private void PriorityOnly_Update(bool _bool)
+        {
+            PriorityOnlyPacket.UpdatePriorityOnly();
+        }
+
+        private void SubsystemPriority_Update(long _long)
+        {
+            SubsystemPriorityPacket.UpdateSubsystemPriority();
         }
         #endregion
 
