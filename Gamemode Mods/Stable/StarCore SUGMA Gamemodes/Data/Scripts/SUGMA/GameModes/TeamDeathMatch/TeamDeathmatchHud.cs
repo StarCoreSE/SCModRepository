@@ -126,7 +126,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
             foreach (var banner in _banners)
             {
-                banner.Update(_gamemode.PointTracker.GetFactionPoints(banner.Faction), matchSeconds, basePoints);
+                banner.Update(_gamemode.CalculateFactionPoints(banner.Faction), basePoints);
             }
         }
 
