@@ -81,9 +81,8 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             }
         }
 
-        public void Update(int remainingShips, int matchTimeSeconds, int startingPoints)
+        public void Update(int factionPoints, int startingPoints)
         {
-            int factionPoints = (int)(startingPoints * (remainingShips / (float)StartShipCount) - matchTimeSeconds);
             if (factionPoints < 0)
                 factionPoints = 0;
 
