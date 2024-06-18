@@ -10,6 +10,7 @@ using SC.SUGMA.GameModes.TeamDeathMatch_Zones;
 using SC.SUGMA.GameState;
 using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
+using SC.SUGMA.Textures;
 using VRage.Game.Components;
 using VRage.ModAPI;
 

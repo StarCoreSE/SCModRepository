@@ -4,8 +4,12 @@ using SC.SUGMA.GameModes.TeamDeathMatch;
 using System;
 using System.Collections.Generic;
 using RichHudFramework.UI;
+using RichHudFramework.UI.Rendering;
 using Sandbox.ModAPI;
+using VRage.Game.Entity;
 using VRage.Game.ModAPI;
+using VRage.ModAPI;
+using VRage.Utils;
 using VRageMath;
 
 namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
@@ -45,6 +49,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
     {
         private TDMZonesGamemode _gamemode;
         private TDMHud_Window _windowBase;
+        private static Material _chevronMaterial = new Material(MyStringId.GetOrCompute("SugmaChevron"), new Vector2(16, 16));
 
         private Dictionary<IMyFaction, List<TexturedBox>> _factionChevrons =
             new Dictionary<IMyFaction, List<TexturedBox>>();
@@ -78,12 +83,12 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
             foreach (var factionBanner in _windowBase.Banners)
             {
                 int needed = neededChevrons[factionBanner.Faction];
-                MyAPIGateway.Utilities.ShowNotification($"{factionBanner.Faction.Tag}: {needed}", 1000/60);
 
                 while (_factionChevrons[factionBanner.Faction].Count > needed)
                 {
-                    factionBanner.RemoveChild(
-                        _factionChevrons[factionBanner.Faction][_factionChevrons[factionBanner.Faction].Count - 1]);
+                    var toRemove =
+                        _factionChevrons[factionBanner.Faction][_factionChevrons[factionBanner.Faction].Count - 1];
+                    toRemove.Parent.RemoveChild(toRemove);
                     _factionChevrons[factionBanner.Faction]
                         .RemoveAt(_factionChevrons[factionBanner.Faction].Count - 1);
                     Log.Info($"Removed chevron for {factionBanner.Faction.Tag}.");
@@ -91,14 +96,23 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
 
                 while (_factionChevrons[factionBanner.Faction].Count < needed)
                 {
-                    TexturedBox newChevron = new TexturedBox(factionBanner)
+                    TexturedBox newChevron = new TexturedBox(factionBanner.TicketsBar)
                     {
-                        Color = Color.White,
-                        DimAlignment = DimAlignments.Height,
-                        ParentAlignment = ParentAlignments.Inner | ParentAlignments.Top
+                        Material = _chevronMaterial,
+                        ParentAlignment = ParentAlignments.Inner |
+                                          (factionBanner.IsLeftAligned ? ParentAlignments.Right : ParentAlignments.Left),
+                        Size = new Vector2(factionBanner.Height/2, factionBanner.Height/2),
+                        Offset = new Vector2(2 + _factionChevrons[factionBanner.Faction].Count * factionBanner.Height / 2, 0)
                     };
                     _factionChevrons[factionBanner.Faction].Add(newChevron);
                     Log.Info($"Created chevron for {factionBanner.Faction.Tag}.");
+                }
+
+                if (factionBanner.Width < 2 + needed * factionBanner.Height / 2)
+                {
+                    foreach (var chevron in _factionChevrons[factionBanner.Faction])
+                        chevron.ParentAlignment = ParentAlignments.Inner |
+                                                  (factionBanner.IsLeftAligned ? ParentAlignments.Left : ParentAlignments.Right);
                 }
             }
         }

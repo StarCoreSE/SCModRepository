@@ -4,7 +4,7 @@ using VRage.Game;
 using VRage.Game.ModAPI;
 using VRageMath;
 
-namespace SC.SUGMA
+namespace SC.SUGMA.Textures
 {
     public static class SUtils
     {

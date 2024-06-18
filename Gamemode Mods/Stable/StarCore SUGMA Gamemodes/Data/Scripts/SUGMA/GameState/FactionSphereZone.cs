@@ -1,6 +1,7 @@
 ﻿using RichHudFramework;
 using Sandbox.ModAPI;
 using SC.SUGMA.API;
+using SC.SUGMA.Textures;
 using VRage.Game;
 using VRage.Game.ModAPI;
 using VRageMath;
@@ -60,7 +61,7 @@ namespace SC.SUGMA.GameState
                 if (gridFaction == Faction || CapturingFaction != gridFaction)
                 {
                     CapturingFaction = null;
-                    break;
+                    return;
                 }
 
                 capturingFactionGrids++;

@@ -1,6 +1,7 @@
 ﻿using RichHudFramework.UI;
 using Sandbox.Game;
 using Sandbox.ModAPI;
+using SC.SUGMA.Textures;
 using VRage.Game;
 using VRage.Game.ModAPI;
 using VRageMath;
@@ -14,8 +15,9 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
         public IMyFaction Faction;
         public int StartShipCount = 0;
+        public readonly bool IsLeftAligned;
 
-        private TexturedBox _ticketsBar;
+        public TexturedBox TicketsBar;
         private LabelBox _factionLabel;
         private LabelBox _ticketsLabel;
         private TexturedBox[] _ticketDividers;
@@ -25,10 +27,11 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
         {
             Faction = faction;
             StartShipCount = shipCount;
+            IsLeftAligned = isLeftAligned;
 
             Size = new Vector2(BaseWidth, BaseHeight);
 
-            _ticketsBar = new TexturedBox(this)
+            TicketsBar = new TexturedBox(this)
             {
                 ParentAlignment = ParentAlignments.Inner |
                                   (isLeftAligned ? ParentAlignments.Left : ParentAlignments.Right),
@@ -75,8 +78,8 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                     ParentAlignment = ParentAlignments.Inner |
                                       (isLeftAligned ? ParentAlignments.Left : ParentAlignments.Right),
                     Offset = isLeftAligned
-                        ? new Vector2(_ticketsBar.Width / shipCount * (i + 1), 0)
-                        : new Vector2(-_ticketsBar.Width / shipCount * (i + 1), 0)
+                        ? new Vector2(TicketsBar.Width / shipCount * (i + 1), 0)
+                        : new Vector2(-TicketsBar.Width / shipCount * (i + 1), 0)
                 };
             }
         }
@@ -94,7 +97,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                                (factionPoints < 10 ? "0" : "") + factionPoints;
 
             _factionLabel.Text = $"{Faction.Tag}{(Faction.Tag.Length > 3 ? "" : "  ")} {pointsString}";
-            _ticketsBar.Width = BaseWidth / 3.5f * 2.4f * factionPoints / startingPoints;
+            TicketsBar.Width = BaseWidth / 3.5f * 2.4f * factionPoints / startingPoints;
         }
     }
 }
