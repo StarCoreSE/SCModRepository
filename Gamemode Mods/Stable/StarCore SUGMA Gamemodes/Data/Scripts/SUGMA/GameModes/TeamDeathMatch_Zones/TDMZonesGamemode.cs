@@ -34,9 +34,9 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
             base.StartRound(arguments);
 
             // Here you could init visuals for the zones using the above arguments.
-            FactionZones.Add(new FactionSphereZone(Vector3D.Zero, 1000, 2));
-            FactionZones.Add(new FactionSphereZone(new Vector3D(4000, 0, 0), 500, 2));
-            FactionZones.Add(new FactionSphereZone(new Vector3D(-4000, 0, 0), 500, 2));
+            FactionZones.Add(new FactionSphereZone(Vector3D.Zero, 1000, 20));
+            FactionZones.Add(new FactionSphereZone(new Vector3D(4000, 0, 0), 500, 20));
+            FactionZones.Add(new FactionSphereZone(new Vector3D(-4000, 0, 0), 500, 20));
 
             for (int i = 0; i < FactionZones.Count; i++)
                 SUGMA_SessionComponent.I.RegisterComponent("TDMZONE_FAC_" + i, FactionZones[i]);
