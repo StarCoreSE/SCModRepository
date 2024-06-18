@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Text;
 using Sandbox.ModAPI;
 using SC.SUGMA.GameState;
 using SC.SUGMA.HeartNetworking.Custom;
@@ -27,8 +29,15 @@ namespace SC.SUGMA.Commands
 
             if (!SUGMA_SessionComponent.I.StartGamemode(args[1].ToLower(), startArgs, true))
             {
+                StringBuilder availableGamemodes = new StringBuilder();
+
+                foreach (var gamemode in SUGMA_SessionComponent.I.GetGamemodes())
+                {
+                    availableGamemodes.Append($"\n-    {gamemode} ({SUGMA_SessionComponent.I.GetComponent<GamemodeBase>(gamemode).ReadableName})");
+                }
+
                 MyAPIGateway.Utilities.ShowMessage("SUGMA",
-                    $"Unrecognized gamemode \"{args[1].ToLower()}\". Available gamemodes:\n-    {string.Join("\n-    ", SUGMA_SessionComponent.I.GetGamemodes())}");
+                    $"Unrecognized gamemode \"{args[1].ToLower()}\". Available gamemodes:{availableGamemodes}");
                 return;
             }
 

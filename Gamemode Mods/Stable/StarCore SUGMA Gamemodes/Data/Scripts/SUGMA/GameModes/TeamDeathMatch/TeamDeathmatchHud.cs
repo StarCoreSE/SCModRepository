@@ -16,8 +16,14 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
     {
         private const int MatchResultsVisibleTicks = 900;
 
-        private TDMHud_Window _window;
+        public TDMHud_Window Window;
         private int _closeTime = -1;
+        private TeamDeathmatchGamemode _gamemode;
+
+        public TeamDeathmatchHud(TeamDeathmatchGamemode gamemode)
+        {
+            _gamemode = gamemode;
+        }
 
         public override void Init(string id)
         {
@@ -26,17 +32,17 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             if (!RichHudClient.Registered)
                 throw new Exception("RichHudAPI was not initialized in time!");
 
-            _window = new TDMHud_Window(HudMain.HighDpiRoot);
+            Window = new TDMHud_Window(HudMain.HighDpiRoot, _gamemode);
         }
 
         public override void Close()
         {
-            HudMain.HighDpiRoot.RemoveChild(_window);
+            HudMain.HighDpiRoot.RemoveChild(Window);
         }
 
         public override void UpdateTick()
         {
-            _window.Update();
+            Window.Update();
             if (_closeTime > 0)
                 _closeTime--;
 
@@ -48,7 +54,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
         public void MatchEnded(IMyFaction winner)
         {
-            _window.MatchEnded(winner);
+            Window.MatchEnded(winner);
             _closeTime = MatchResultsVisibleTicks;
         }
     }
@@ -59,14 +65,14 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
         private MatchTimer _timer;
 
         private LabelBox _timerLabel;
-        private TDMHud_TeamBanner[] _banners;
+        public TDMHud_TeamBanner[] Banners;
 
         private bool _matchEnded = false;
 
-        public TDMHud_Window(HudParentBase parent) : base(parent)
+        public TDMHud_Window(HudParentBase parent, TeamDeathmatchGamemode gamemode) : base(parent)
         {
-            _gamemode = SUGMA_SessionComponent.I.GetComponent<TeamDeathmatchGamemode>("tdm");
-            _timer = SUGMA_SessionComponent.I.GetComponent<MatchTimer>("MatchTimer");
+            _gamemode = gamemode;
+            _timer = gamemode._matchTimer;
 
             if (_gamemode == null)
                 throw new Exception("Null TDM gamemode!");
@@ -105,7 +111,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                 idx++;
             }
 
-            _banners = banners.ToArray();
+            Banners = banners.ToArray();
         }
 
         public void Update()
@@ -124,7 +130,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             _timerLabel.Text =
                 $"{(remainingMinutes < 10 ? "0" + remainingMinutes : remainingMinutes.ToString())}:{(remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds.ToString())}";
 
-            foreach (var banner in _banners)
+            foreach (var banner in Banners)
             {
                 banner.Update(_gamemode.CalculateFactionPoints(banner.Faction), basePoints);
             }
@@ -134,7 +140,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
         {
             _matchEnded = true;
             int winnerPoints = 0;
-            foreach (var banner in _banners)
+            foreach (var banner in Banners)
             {
                 if (banner.Faction == winner)
                     winnerPoints = (int)(_timer.MatchDurationMinutes * 60 * (_gamemode.PointTracker.GetFactionPoints(winner) / (float)banner.StartShipCount) - _timer.CurrentMatchTime.TotalSeconds);

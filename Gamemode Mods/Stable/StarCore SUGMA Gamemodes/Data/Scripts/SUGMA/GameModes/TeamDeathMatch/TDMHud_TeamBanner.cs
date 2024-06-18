@@ -1,4 +1,5 @@
 ﻿using RichHudFramework.UI;
+using Sandbox.Game;
 using Sandbox.ModAPI;
 using VRage.Game;
 using VRage.Game.ModAPI;
@@ -32,7 +33,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                 ParentAlignment = ParentAlignments.Inner |
                                   (isLeftAligned ? ParentAlignments.Left : ParentAlignments.Right),
                 DimAlignment = DimAlignments.Height,
-                Color = ColorMaskToRgb(faction.CustomColor),
+                Color = faction.CustomColor.ColorMaskToRgb(),
                 Size = new Vector2(BaseWidth / 3.5f * 2.4f, BaseHeight)
             };
             TexturedBox ticketsBarBackground = new TexturedBox(this)
@@ -44,7 +45,6 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                 Size = new Vector2(BaseWidth / 3.5f * 2.4f, BaseHeight),
                 ZOffset = -1
             };
-
 
             _factionLabel = new LabelBox(this)
             {
@@ -95,11 +95,6 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
             _factionLabel.Text = $"{Faction.Tag}{(Faction.Tag.Length > 3 ? "" : "  ")} {pointsString}";
             _ticketsBar.Width = BaseWidth / 3.5f * 2.4f * factionPoints / startingPoints;
-        }
-
-        private static Vector3 ColorMaskToRgb(Vector3 colorMask)
-        {
-            return MyColorPickerConstants.HSVOffsetToHSV(colorMask).HSVtoColor();
         }
     }
 }

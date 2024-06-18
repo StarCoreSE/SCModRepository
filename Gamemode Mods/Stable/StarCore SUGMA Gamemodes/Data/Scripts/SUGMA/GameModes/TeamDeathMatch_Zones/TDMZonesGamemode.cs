@@ -13,7 +13,18 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
 {
     internal class TDMZonesGamemode : TeamDeathmatchGamemode
     {
+        /// <summary>
+        /// The number of seconds to drain one ticket per captured zone.
+        /// </summary>
+        public const float ZoneTicketDrainRate = 1;
+
+        public override string ReadableName { get; internal set; } = "Team Deathmatch w/ Zones";
+
+        public override string Description { get; internal set; } =
+            "Factions fight against eachother until tickets run out. Kill enemy players or capture zones to remove tickets.";
+
         private PointTracker _zonePointTracker;
+        public List<FactionSphereZone> FactionZones = new List<FactionSphereZone>();
 
         public override void StartRound(string[] arguments = null)
         {
@@ -23,27 +34,46 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
             base.StartRound(arguments);
 
             // Here you could init visuals for the zones using the above arguments.
+            FactionZones.Add(new FactionSphereZone(Vector3D.Zero, 1000, 20));
+            FactionZones.Add(new FactionSphereZone(new Vector3D(4000, 0, 0), 500, 20));
+            FactionZones.Add(new FactionSphereZone(new Vector3D(-4000, 0, 0), 500, 20));
+
+            for (int i = 0; i < FactionZones.Count; i++)
+                SUGMA_SessionComponent.I.RegisterComponent("TDMZONE_FAC_" + i, FactionZones[i]);
+
+            if (!MyAPIGateway.Utilities.IsDedicated)
+                SUGMA_SessionComponent.I.RegisterComponent("TDMZonesHud", new TDMZonesHud(this));
         }
 
         public override void StopRound()
         {
             base.StopRound();
+            SUGMA_SessionComponent.I.UnregisterComponent("TDMZonesHud");
             SUGMA_SessionComponent.I.UnregisterComponent("tdmZonePointTracker");
 
             // Here you could close visuals for the zones
+            foreach (var zone in FactionZones)
+                SUGMA_SessionComponent.I.UnregisterComponent(zone.ComponentId);
+            FactionZones.Clear();
+
         }
 
         public override void UpdateActive()
         {
             base.UpdateActive();
 
-            IMyCubeGrid[] trackedGrids = ShareTrackApi.GetTrackedGrids();
+            if (_matchTimer.Ticks % (int)(ZoneTicketDrainRate*60) != 0)
+                return;
 
-            foreach (var grid in new List<IMyCubeGrid>()) // TODO: Add support 
+            foreach (var zone in FactionZones)
             {
-                if (false) // pretend this is a check for zones
+                if (zone.Faction == null)
+                    continue;
+
+                foreach (var faction in TrackedFactions.Keys)
                 {
-                    PointTracker.AddFactionPoints(PlayerTracker.I.GetGridFaction(grid), -1);
+                    if (faction != zone.Faction)
+                        _zonePointTracker.AddFactionPoints(faction, 1); // Each zone doubles the ticket drain rate
                 }
             }
         }
@@ -51,7 +81,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
         public override int CalculateFactionPoints(IMyFaction faction)
         {
             int points = base.CalculateFactionPoints(faction);
-            return points == -1 ? -1 : points - _zonePointTracker.GetFactionPoints(faction); // TODO
+            return points == -1 ? -1 : points - _zonePointTracker.GetFactionPoints(faction);
         }
     }
 }

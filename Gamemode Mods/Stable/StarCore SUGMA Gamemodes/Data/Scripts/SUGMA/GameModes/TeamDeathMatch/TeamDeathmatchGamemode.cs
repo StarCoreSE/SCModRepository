@@ -157,7 +157,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             }
 
             if (!MyAPIGateway.Utilities.IsDedicated)
-                SUGMA_SessionComponent.I.RegisterComponent("tdmHud", new TeamDeathmatchHud());
+                SUGMA_SessionComponent.I.RegisterComponent("tdmHud", new TeamDeathmatchHud(this));
         }
 
         public override void StopRound()
