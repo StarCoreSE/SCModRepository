@@ -7,23 +7,46 @@
         <SubtypeId>Monopole_Chargeup</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>7000</MaxDistance>
+      <MaxDistance>75</MaxDistance>
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>12</Volume>
+      <SoundLimit>1</SoundLimit>
+      <Volume>2</Volume>
       <DistantSounds>
-        <DistantSound DistanceCrossfade="10" Distance="1750" Sound="Monopole_Chargeup_Distant" />
+        <DistantSound DistanceCrossfade="1" Distance="100" Sound="Monopole_Chargeup_Redux" />
+        <DistantSound DistanceCrossfade="10" Distance="3000" Sound="Monopole_Chargeup_Distant" />
+
       </DistantSounds>
     <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
-          <Start>Audio\Monopole\Monopole_Chargeup_6.wav</Start>
+          <Start>Audio\Monopole\Monopole_Gunsight_Chargeup.wav</Start>
         </Wave>
       </Waves>
     </Sound>
 	
 	 <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Monopole_Chargeup_Redux</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <SoundLimit>1</SoundLimit>
+      <Volume>3</Volume>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Monopole\Monopole_Chargeup_Redux.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+  <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
         <SubtypeId>Monopole_Chargeup_Distant</SubtypeId>
@@ -33,7 +56,8 @@
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>1</Volume>
+      <SoundLimit>1</SoundLimit>
+      <Volume>2</Volume>
       <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">
@@ -45,19 +69,20 @@
     <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>K_SA_RotaryGauss_Distant</SubtypeId>
+        <SubtypeId>Monopole_Fire_Distant</SubtypeId>
       </Id>
       <Category>SHOT</Category>
       <MaxDistance>7000</MaxDistance>
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      
+      <SoundLimit>1</SoundLimit>
     <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>1</Volume>
+      <Volume>2</Volume>
+      
       <Loopable>true</Loopable>
       <Waves>
         <Wave Type="D3">
-          <Loop>Audio\Monopole\thwump_distant.wav</Loop>
+          <Loop>Audio\Monopole\Monopole_Fire_Distant.wav</Loop>
           <End>Audio\Monopole\Monopole_Shutdown_Distant.wav</End>
         </Wave>
       </Waves>
@@ -69,18 +94,42 @@
         <SubtypeId>Monopole_Firing</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>3000</MaxDistance>
+      <MaxDistance>75</MaxDistance>
 		  <DistantSounds>
-			  <DistantSound DistanceCrossfade="10" Distance="1750" Sound="K_SA_RotaryGauss_Distant" />
+        <DistantSound DistanceCrossfade="1" Distance="100" Sound="Monopole_Fire_Redux" />
+			  <DistantSound DistanceCrossfade="10" Distance="3000" Sound="Monopole_Fire_Distant" />
 		  </DistantSounds>
       <!-- Prevents this sound from having this many active playbacks at once, 0 = infinite. -->
       <SoundLimit>1</SoundLimit>
-      <Volume>1.5</Volume>
+      
+      <Volume>4</Volume>
       <Loopable>true</Loopable>
       <Waves>
         <Wave Type="D3">
-          <Loop>Audio\Monopole\thwump.wav</Loop>
-          <End>Audio\Monopole\Monopole_End_4.wav</End>
+          <Loop>Audio\Monopole\Monopole_Gunsight_Fire.wav</Loop>
+          <End>Audio\Monopole\Monopole_Gunsight_Shutdown.wav</End>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Monopole_Fire_Redux</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <SoundLimit>1</SoundLimit>
+    <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>3</Volume>
+      
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Loop>Audio\Monopole\Monopole_Fire_redux.wav</Loop>
+          <End>Audio\Monopole\Monopole_Shutdown_redux.wav</End>
         </Wave>
       </Waves>
     </Sound>
@@ -95,7 +144,8 @@
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>2</Volume>
+      <Volume>1</Volume>
+      <SoundLimit>0</SoundLimit>
       <PitchVariation>20</PitchVariation>
       <Loopable>false</Loopable>
       <Waves>

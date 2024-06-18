@@ -153,7 +153,7 @@ namespace Scripts
                                 new RelMove
                                 {
                                     CenterEmpty = "Spinner",
-                                    TicksToMove = 165, //number of ticks to complete motion, 60 = 1 second
+                                    TicksToMove = 166, //number of ticks to complete motion, 60 = 1 second
                                     MovementType = ExpoGrowth,
                                     LinearPoints = new XYZ[0],
                                     Rotation = Transformation(0, 0, 240), //degrees

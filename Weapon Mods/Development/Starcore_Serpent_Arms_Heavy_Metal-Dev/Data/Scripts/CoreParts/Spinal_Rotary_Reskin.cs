@@ -151,7 +151,7 @@ namespace Scripts {
                     NoAmmoSound = "",
                     HardPointRotationSound = "", // Audio played when turret is moving.
                     BarrelRotationSound = "",
-                    FireSoundEndDelay = 10, // How long the firing audio should keep playing after firing stops. Measured in game ticks(6 = 100ms, 60 = 1 seconds, etc..).
+                    FireSoundEndDelay = 1, // How long the firing audio should keep playing after firing stops. Measured in game ticks(6 = 100ms, 60 = 1 seconds, etc..).
                     FireSoundNoBurst = true, // Don't stop firing sound from looping when delaying after burst.
                 },
                 Graphics = new HardPointParticleDef
@@ -191,7 +191,6 @@ namespace Scripts {
             Ammos = new[] {
                 Spinal_AutoCoil_Base_A,
                 Spinal_AutoCoil_Shrap,
-                Spinal_AutoCoil_VFX1,
                 Spinal_AutoCoil_VFX2,
                 Spinal_AutoCoil_VFX3,// Must list all primary, shrapnel, and pattern ammos.
             },
