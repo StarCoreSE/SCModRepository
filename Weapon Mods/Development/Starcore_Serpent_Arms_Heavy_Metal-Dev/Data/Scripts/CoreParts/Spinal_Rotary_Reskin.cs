@@ -191,6 +191,7 @@ namespace Scripts {
             Ammos = new[] {
                 Spinal_AutoCoil_Base_A,
                 Spinal_AutoCoil_Shrap,
+                Spinal_AutoCoil_VFX1,
                 Spinal_AutoCoil_VFX2,
                 Spinal_AutoCoil_VFX3,// Must list all primary, shrapnel, and pattern ammos.
             },
