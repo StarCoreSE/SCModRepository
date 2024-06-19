@@ -60,9 +60,9 @@ namespace SC.SUGMA.GameState
 
                 for (int i = _containedEntities.Count - 1; i >= 0; i--)
                 {
-                    if (_containedEntities[i] is IMyCubeGrid)
+                    if (_containedEntities[i] is IMyCubeGrid grid)
                     {
-                        ContainedGrids.Add(_containedEntities[i] as IMyCubeGrid);
+                        ContainedGrids.Add(grid);
                     }
                 }
 
@@ -70,8 +70,7 @@ namespace SC.SUGMA.GameState
                 {
                     MyAPIGateway.Entities.GetEntities(null, b =>
                     {
-                        var grid = b as IMyCubeGrid;
-                        if (grid != null && !_containedEntities.Contains((MyEntity)grid))
+                        if (b is IMyCubeGrid grid && !_containedEntities.Contains((MyEntity)grid))
                         {
                             OutsideGrids.Add(grid);
                         }
@@ -84,6 +83,8 @@ namespace SC.SUGMA.GameState
                 double radiusSquare = Sphere.Radius * Sphere.Radius;
                 foreach (var grid in GridFilter)
                 {
+                    if (grid == null) continue;
+
                     if (Vector3D.DistanceSquared(grid.GetPosition(), Sphere.Center) <= radiusSquare)
                     {
                         ContainedGrids.Add(grid);
