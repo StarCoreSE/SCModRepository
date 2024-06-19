@@ -43,17 +43,12 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             if (PointTracker == null || _matchTimer == null || TrackedFactions == null) // ten billion nullchecks of aristeas
                 return;
 
-            int basePoints = (int)(_matchTimer.MatchDurationMinutes * 60);
-            double currentPoints = _matchTimer.CurrentMatchTime.TotalSeconds;
-
-            foreach (var factionKvp in TrackedFactions.ToArray())
+            foreach (var factionKvp in TrackedFactions.Keys.ToArray())
             {
-                int factionPoints =
-                    (int)(basePoints * (PointTracker.GetFactionPoints(factionKvp.Key) / (float)factionKvp.Value) -
-                          currentPoints);
-                if (factionPoints <= 0)
+                if (CalculateFactionPoints(factionKvp) <= 0)
                 {
-                    if (OnFactionKilled(factionKvp.Key))
+                    // Stop updating if the game just ended
+                    if (OnFactionKilled(factionKvp))
                         return;
                     // TODO: Spawn keen explosion on remaining grids.
                 }
@@ -162,7 +157,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             }
 
             if (!MyAPIGateway.Utilities.IsDedicated)
-                SUGMA_SessionComponent.I.RegisterComponent("tdmHud", new TeamDeathmatchHud());
+                SUGMA_SessionComponent.I.RegisterComponent("tdmHud", new TeamDeathmatchHud(this));
         }
 
         public override void StopRound()
@@ -203,6 +198,15 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             MyAPIGateway.Utilities.ShowNotification($"A WINNER IS [{_winningFaction?.Name}]!", 10000);
         }
 
+
+        public virtual int CalculateFactionPoints(IMyFaction faction)
+        {
+            if (!TrackedFactions.ContainsKey(faction))
+                return -1;
+
+            return (int)(_matchTimer.MatchDurationMinutes * 60 * (PointTracker.GetFactionPoints(faction) / (float)TrackedFactions[faction]) -
+                         _matchTimer.CurrentMatchTime.TotalSeconds);
+        }
 
         internal virtual void OnAliveChanged(IMyCubeGrid grid, bool isAlive)
         {

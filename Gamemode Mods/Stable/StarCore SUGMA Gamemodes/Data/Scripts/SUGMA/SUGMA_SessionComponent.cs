@@ -6,9 +6,11 @@ using Sandbox.ModAPI;
 using SC.SUGMA.API;
 using SC.SUGMA.Commands;
 using SC.SUGMA.GameModes.TeamDeathMatch;
+using SC.SUGMA.GameModes.TeamDeathMatch_Zones;
 using SC.SUGMA.GameState;
 using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
+using SC.SUGMA.Textures;
 using VRage.Game.Components;
 using VRage.ModAPI;
 
@@ -25,6 +27,7 @@ namespace SC.SUGMA
             ["HeartNetwork"] = new HeartNetwork(),
             ["PlayerTracker"] = new PlayerTracker(),
             ["tdm"] = new TeamDeathmatchGamemode(),
+            ["tdmz"] = new TDMZonesGamemode(),
             // You would need to add in the zones gamemode too
         };
 

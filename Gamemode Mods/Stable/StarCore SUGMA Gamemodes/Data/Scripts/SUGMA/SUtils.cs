@@ -1,8 +1,10 @@
 ﻿using Sandbox.Game.Entities;
-using Sandbox.ModAPI;
-using VRage.Game.ObjectBuilders.Components;
+using SC.SUGMA.GameState;
+using VRage.Game;
+using VRage.Game.ModAPI;
+using VRageMath;
 
-namespace SC.SUGMA
+namespace SC.SUGMA.Textures
 {
     public static class SUtils
     {
@@ -30,6 +32,16 @@ namespace SC.SUGMA
 
             MySessionComponentSafeZones.AllowedActions = CastProhibit(MySessionComponentSafeZones.AllowedActions,
                 matchActive ? MatchPermsInt : FullPermsInt);
+        }
+
+        public static IMyFaction GetFaction(this IMyCubeGrid grid)
+        {
+            return PlayerTracker.I.GetGridFaction(grid);
+        }
+
+        public static Color ColorMaskToRgb(this Vector3 colorMask)
+        {
+            return MyColorPickerConstants.HSVOffsetToHSV(colorMask).HSVtoColor();
         }
     }
 }
