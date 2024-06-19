@@ -42,11 +42,10 @@ namespace SC.SUGMA.GameState
             GridFilter = SUGMA_SessionComponent.I.ShareTrackApi.GetTrackedGrids();
             base.UpdateTick();
 
-            if (ContainedGrids.Count == 0)
-                CapturingFaction = null;
 
             int capturingFactionGrids = 0;
 
+            bool zoneContested = false;
             foreach (var grid in ContainedGrids)
             {
                 IMyFaction gridFaction = grid.GetFaction();
@@ -60,31 +59,34 @@ namespace SC.SUGMA.GameState
 
                 if (gridFaction == Faction || CapturingFaction != gridFaction)
                 {
-                    CapturingFaction = null;
-                    return;
+                    zoneContested = true;
+                    break;
                 }
 
                 capturingFactionGrids++;
             }
 
-            if (CapturingFaction == null)
+            if (CapturingFaction == null || zoneContested)
             {
-                CaptureTimeCurrent -= CaptureTime * 0.05f;
+                CaptureTimeCurrent -= CaptureTime * 0.05f * 1/60f;
                 if (CaptureTimeCurrent < 0)
+                {
                     CaptureTimeCurrent = 0;
-                return;
+                    CapturingFaction = null;
+                }
             }
-
-            CaptureTimeCurrent += 1/60f * capturingFactionGrids;
+            else
+            {
+                CaptureTimeCurrent += 1/60f * capturingFactionGrids;
+                if (CaptureTimeCurrent >= CaptureTime)
+                {
+                    CaptureTimeCurrent = 0;
+                    Faction = CapturingFaction;
+                    CapturingFaction = null;
+                }
+            }
 
             SphereDrawColor = Color.Lerp(_originalColor, (CapturingFaction?.CustomColor.ColorMaskToRgb() ?? Color.White), CaptureTimeCurrent/CaptureTime).SetAlphaPct(0.25f);
-
-            if (CaptureTimeCurrent >= CaptureTime)
-            {
-                CaptureTimeCurrent = 0;
-                Faction = CapturingFaction;
-                CapturingFaction = null;
-            }
         }
     }
 }

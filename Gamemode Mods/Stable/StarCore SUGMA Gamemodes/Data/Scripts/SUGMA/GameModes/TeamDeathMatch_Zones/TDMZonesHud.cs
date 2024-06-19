@@ -87,6 +87,9 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
             // I am so sorry
             foreach (var factionBanner in _windowBase.Banners)
             {
+                if (factionBanner.TicketsBar.Width == 0)
+                    continue;
+
                 int needed = neededChevrons[factionBanner.Faction];
 
                 while (_factionChevrons[factionBanner.Faction].Count > needed)
