@@ -115,10 +115,6 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             SUGMA_SessionComponent.I.UnregisterComponent("TDMPointTracker");
             if (!MyAPIGateway.Utilities.IsDedicated)
                 SUGMA_SessionComponent.I.UnregisterComponent("tdmHud");
-            SUGMA_SessionComponent.I.RegisterComponent("TDMPointTracker", PointTracker);
-
-            ShareTrackApi.RegisterOnAliveChanged(OnAliveChanged);
-            ShareTrackApi.RegisterOnTrack(OnGridTrackChanged);
 
             foreach (var grid in ShareTrackApi.GetTrackedGrids())
             {
@@ -131,6 +127,18 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                 else
                     TrackedFactions[faction]++;
             }
+
+            if (TrackedFactions.Count <= 1)
+            {
+                MyAPIGateway.Utilities.ShowNotification("There aren't any combatants, idiot!", 10000, "Red");
+                StopRound();
+                return;
+            }
+
+            SUGMA_SessionComponent.I.RegisterComponent("TDMPointTracker", PointTracker);
+
+            ShareTrackApi.RegisterOnAliveChanged(OnAliveChanged);
+            ShareTrackApi.RegisterOnTrack(OnGridTrackChanged);
 
             List<string> factionNames = new List<string>();
             foreach (var factionKvp in TrackedFactions)
@@ -150,13 +158,6 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             base.StartRound(arguments);
             MyAPIGateway.Utilities.ShowNotification("Combatants: " + string.Join(" vs ", factionNames), 10000, "Red");
             _matchTimer.Start(MatchDuration);
-
-            if (TrackedFactions.Count <= 1)
-            {
-                MyAPIGateway.Utilities.ShowNotification("There aren't any combatants, idiot!", 10000, "Red");
-                StopRound();
-                return;
-            }
 
             if (!MyAPIGateway.Utilities.IsDedicated)
                 SUGMA_SessionComponent.I.RegisterComponent("tdmHud", new TeamDeathmatchHud(this));

@@ -1,6 +1,9 @@
 ﻿using Sandbox.Game.Entities;
+using Sandbox.ModAPI;
 using SC.SUGMA.GameState;
 using VRage.Game;
+using VRage.Game.Components;
+using VRage.Game.Entity.EntityComponents.Interfaces;
 using VRage.Game.ModAPI;
 using VRageMath;
 
