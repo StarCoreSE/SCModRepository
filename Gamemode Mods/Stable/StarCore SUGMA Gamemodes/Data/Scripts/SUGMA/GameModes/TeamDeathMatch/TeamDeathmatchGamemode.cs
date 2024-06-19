@@ -14,6 +14,8 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
     /// </summary>
     internal class TeamDeathmatchGamemode : GamemodeBase
     {
+        public const double MatchDuration = 20;
+
         internal ShareTrackApi ShareTrackApi => SUGMA_SessionComponent.I.ShareTrackApi;
         internal MatchTimer _matchTimer => SUGMA_SessionComponent.I.GetComponent<MatchTimer>("MatchTimer");
 
@@ -147,7 +149,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
             base.StartRound(arguments);
             MyAPIGateway.Utilities.ShowNotification("Combatants: " + string.Join(" vs ", factionNames), 10000, "Red");
-            _matchTimer.Start();
+            _matchTimer.Start(MatchDuration);
 
             if (TrackedFactions.Count <= 1)
             {
