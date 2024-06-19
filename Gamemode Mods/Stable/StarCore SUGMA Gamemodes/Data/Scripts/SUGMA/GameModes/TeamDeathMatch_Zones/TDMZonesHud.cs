@@ -69,6 +69,37 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
 
         public void Update()
         {
+            Dictionary<IMyFaction, int> neededChevrons = CalculateNeededChevrons();
+
+            // I am so sorry
+            foreach (var factionBanner in _windowBase.Banners)
+            {
+                if (factionBanner.TicketsBar.Width == 0)
+                    continue;
+
+                int needed = neededChevrons[factionBanner.Faction];
+
+                RemoveExcessChevrons(factionBanner.Faction, needed);
+
+                AddChevrons(factionBanner, needed);
+
+                // Adjust chevrons if they're about to go off of the ticket bar
+                if (!_didShiftChevrons[factionBanner.Faction] && factionBanner.TicketsBar.Width < needed * factionBanner.Height / 2)
+                {
+                    foreach (var chevron in _factionChevrons[factionBanner.Faction])
+                    {
+                        chevron.ParentAlignment = ParentAlignments.Inner |
+                                                  (factionBanner.IsLeftAligned ? ParentAlignments.Left : ParentAlignments.Right);
+                        chevron.Offset = -chevron.Offset;
+                    }
+
+                    _didShiftChevrons[factionBanner.Faction] = true;
+                }
+            }
+        }
+
+        private Dictionary<IMyFaction, int> CalculateNeededChevrons()
+        {
             Dictionary<IMyFaction, int> neededChevrons = new Dictionary<IMyFaction, int>();
 
             foreach (var faction in _gamemode.TrackedFactions.Keys)
@@ -84,51 +115,38 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
                         neededChevrons[faction]++;
             }
 
-            // I am so sorry
-            foreach (var factionBanner in _windowBase.Banners)
+            return neededChevrons;
+        }
+
+        private void RemoveExcessChevrons(IMyFaction faction, int needed)
+        {
+            while (_factionChevrons[faction].Count > needed)
             {
-                if (factionBanner.TicketsBar.Width == 0)
-                    continue;
+                var toRemove =
+                    _factionChevrons[faction][_factionChevrons[faction].Count - 1];
+                toRemove.Parent.RemoveChild(toRemove);
+                _factionChevrons[faction]
+                    .RemoveAt(_factionChevrons[faction].Count - 1);
+                Log.Info($"Removed chevron for {faction.Tag}.");
+            }
+        }
 
-                int needed = neededChevrons[factionBanner.Faction];
-
-                while (_factionChevrons[factionBanner.Faction].Count > needed)
+        private void AddChevrons(TDMHud_TeamBanner factionBanner, int needed)
+        {
+            while (_factionChevrons[factionBanner.Faction].Count < needed)
+            {
+                TexturedBox newChevron = new TexturedBox(factionBanner.TicketsBar)
                 {
-                    var toRemove =
-                        _factionChevrons[factionBanner.Faction][_factionChevrons[factionBanner.Faction].Count - 1];
-                    toRemove.Parent.RemoveChild(toRemove);
-                    _factionChevrons[factionBanner.Faction]
-                        .RemoveAt(_factionChevrons[factionBanner.Faction].Count - 1);
-                    Log.Info($"Removed chevron for {factionBanner.Faction.Tag}.");
-                }
-
-                while (_factionChevrons[factionBanner.Faction].Count < needed)
-                {
-                    TexturedBox newChevron = new TexturedBox(factionBanner.TicketsBar)
-                    {
-                        Material = factionBanner.IsLeftAligned ? _chevronMaterialFlip : _chevronMaterial,
-                        ParentAlignment = ParentAlignments.Inner |
-                                          (factionBanner.IsLeftAligned ? ParentAlignments.Right : ParentAlignments.Left),
-                        Size = new Vector2(factionBanner.Height/2, factionBanner.Height/2),
-                        Offset = (factionBanner.IsLeftAligned ? -1 : 1) * new Vector2(_factionChevrons[factionBanner.Faction].Count * factionBanner.Height / 2, 0),
-                        Padding = Vector2.One*2,
-                        ZOffset = sbyte.MaxValue,
-                    };
-                    _factionChevrons[factionBanner.Faction].Add(newChevron);
-                    Log.Info($"Created chevron for {factionBanner.Faction.Tag}.");
-                }
-
-                if (!_didShiftChevrons[factionBanner.Faction] && factionBanner.TicketsBar.Width < needed * factionBanner.Height / 2)
-                {
-                    foreach (var chevron in _factionChevrons[factionBanner.Faction])
-                    {
-                        chevron.ParentAlignment = ParentAlignments.Inner |
-                                                  (factionBanner.IsLeftAligned ? ParentAlignments.Left : ParentAlignments.Right);
-                        chevron.Offset = -chevron.Offset;
-                    }
-
-                    _didShiftChevrons[factionBanner.Faction] = true;
-                }
+                    Material = factionBanner.IsLeftAligned ? _chevronMaterialFlip : _chevronMaterial,
+                    ParentAlignment = ParentAlignments.Inner |
+                                      (factionBanner.IsLeftAligned ? ParentAlignments.Right : ParentAlignments.Left),
+                    Size = new Vector2(factionBanner.Height/2, factionBanner.Height/2),
+                    Offset = (factionBanner.IsLeftAligned ? -1 : 1) * new Vector2(_factionChevrons[factionBanner.Faction].Count * factionBanner.Height / 2, 0),
+                    Padding = Vector2.One*2,
+                    ZOffset = sbyte.MaxValue,
+                };
+                _factionChevrons[factionBanner.Faction].Add(newChevron);
+                Log.Info($"Created chevron for {factionBanner.Faction.Tag}.");
             }
         }
     }
