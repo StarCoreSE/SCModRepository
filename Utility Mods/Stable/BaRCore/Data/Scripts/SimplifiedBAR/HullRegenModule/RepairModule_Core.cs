@@ -275,7 +275,11 @@ namespace StarCore.RepairModule
         public void HandleDamagedBlocks(IMySlimBlock block)
         {
             if (IgnoreArmor && (block.FatBlock == null || block.ToString().Contains("MyCubeBlock")))
+            {
+                HandleRemovedBlocks(block);
                 return;
+            }
+                
 
             List<IMySlimBlock> targetList = IsPriority(block) ? PriorityRepairTargets : RepairTargets;
 
