@@ -36,19 +36,11 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
 
         public override void Close()
         {
-            if (HudMain.HighDpiRoot != null && _window != null)
-            {
-                HudMain.HighDpiRoot.RemoveChild(_window);
-            }
+            HudMain.HighDpiRoot.RemoveChild(_window);
         }
 
         public override void UpdateTick()
         {
-            if (_window == null)
-            {
-                Log.Info("TDMZonesHud_Window is null in TDMZonesHud.UpdateTick");
-                return;
-            }
             _window.Update();
         }
     }
@@ -60,33 +52,14 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
         private static Material _chevronMaterial = new Material(MyStringId.GetOrCompute("SugmaChevron"), new Vector2(16, 16));
         private static Material _chevronMaterialFlip = new Material(MyStringId.GetOrCompute("SugmaChevronFlip"), new Vector2(16, 16));
 
-        private Dictionary<IMyFaction, List<TexturedBox>> _factionChevrons = new Dictionary<IMyFaction, List<TexturedBox>>();
+        private Dictionary<IMyFaction, List<TexturedBox>> _factionChevrons =
+            new Dictionary<IMyFaction, List<TexturedBox>>();
         private Dictionary<IMyFaction, bool> _didShiftChevrons = new Dictionary<IMyFaction, bool>();
 
         public TDMZonesHud_Window(HudParentBase parent, TDMZonesGamemode gamemode) : base(parent)
         {
             _gamemode = gamemode;
-
-            if (SUGMA_SessionComponent.I == null)
-            {
-                Log.Info("SUGMA_SessionComponent.I is null in TDMZonesHud_Window constructor");
-                return;
-            }
-
-            var tdmHudComponent = SUGMA_SessionComponent.I.GetComponent<TeamDeathmatchHud>("tdmHud");
-            if (tdmHudComponent == null)
-            {
-                Log.Info("tdmHud component is null in TDMZonesHud_Window constructor");
-                return;
-            }
-
-            _windowBase = tdmHudComponent.Window;
-            if (_windowBase == null)
-            {
-                Log.Info("WindowBase is null in TDMZonesHud_Window constructor");
-                return;
-            }
-
+            _windowBase = SUGMA_SessionComponent.I.GetComponent<TeamDeathmatchHud>("tdmHud").Window;
             foreach (var faction in _gamemode.TrackedFactions.Keys)
             {
                 _factionChevrons.Add(faction, new List<TexturedBox>());
@@ -96,18 +69,6 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
 
         public void Update()
         {
-            if (_gamemode == null)
-            {
-                Log.Info("Gamemode is null in TDMZonesHud_Window.Update");
-                return;
-            }
-
-            if (_windowBase == null)
-            {
-                Log.Info("WindowBase is null in TDMZonesHud_Window.Update");
-                return;
-            }
-
             Dictionary<IMyFaction, int> neededChevrons = new Dictionary<IMyFaction, int>();
 
             foreach (var faction in _gamemode.TrackedFactions.Keys)
@@ -129,13 +90,15 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
                 if (factionBanner.TicketsBar.Width == 0)
                     continue;
 
-                int needed = neededChevrons.GetValueOrDefault(factionBanner.Faction, 0);
+                int needed = neededChevrons[factionBanner.Faction];
 
                 while (_factionChevrons[factionBanner.Faction].Count > needed)
                 {
-                    var toRemove = _factionChevrons[factionBanner.Faction][_factionChevrons[factionBanner.Faction].Count - 1];
-                    toRemove.Parent?.RemoveChild(toRemove);
-                    _factionChevrons[factionBanner.Faction].RemoveAt(_factionChevrons[factionBanner.Faction].Count - 1);
+                    var toRemove =
+                        _factionChevrons[factionBanner.Faction][_factionChevrons[factionBanner.Faction].Count - 1];
+                    toRemove.Parent.RemoveChild(toRemove);
+                    _factionChevrons[factionBanner.Faction]
+                        .RemoveAt(_factionChevrons[factionBanner.Faction].Count - 1);
                     Log.Info($"Removed chevron for {factionBanner.Faction.Tag}.");
                 }
 
@@ -144,21 +107,23 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
                     TexturedBox newChevron = new TexturedBox(factionBanner.TicketsBar)
                     {
                         Material = factionBanner.IsLeftAligned ? _chevronMaterialFlip : _chevronMaterial,
-                        ParentAlignment = ParentAlignments.Inner | (factionBanner.IsLeftAligned ? ParentAlignments.Right : ParentAlignments.Left),
-                        Size = new Vector2(factionBanner.Height / 2, factionBanner.Height / 2),
+                        ParentAlignment = ParentAlignments.Inner |
+                                          (factionBanner.IsLeftAligned ? ParentAlignments.Right : ParentAlignments.Left),
+                        Size = new Vector2(factionBanner.Height/2, factionBanner.Height/2),
                         Offset = (factionBanner.IsLeftAligned ? -1 : 1) * new Vector2(_factionChevrons[factionBanner.Faction].Count * factionBanner.Height / 2, 0),
-                        Padding = Vector2.One * 2,
+                        Padding = Vector2.One*2,
                         ZOffset = sbyte.MaxValue,
                     };
                     _factionChevrons[factionBanner.Faction].Add(newChevron);
                     Log.Info($"Created chevron for {factionBanner.Faction.Tag}.");
                 }
 
-                if (!_didShiftChevrons.GetValueOrDefault(factionBanner.Faction, false) && factionBanner.TicketsBar.Width < needed * factionBanner.Height / 2)
+                if (!_didShiftChevrons[factionBanner.Faction] && factionBanner.TicketsBar.Width < needed * factionBanner.Height / 2)
                 {
                     foreach (var chevron in _factionChevrons[factionBanner.Faction])
                     {
-                        chevron.ParentAlignment = ParentAlignments.Inner | (factionBanner.IsLeftAligned ? ParentAlignments.Left : ParentAlignments.Right);
+                        chevron.ParentAlignment = ParentAlignments.Inner |
+                                                  (factionBanner.IsLeftAligned ? ParentAlignments.Left : ParentAlignments.Right);
                         chevron.Offset = -chevron.Offset;
                     }
 
