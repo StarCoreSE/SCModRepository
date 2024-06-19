@@ -60,7 +60,8 @@ namespace SC.SUGMA.GameState
 
                 for (int i = _containedEntities.Count - 1; i >= 0; i--)
                 {
-                    if (_containedEntities[i] is IMyCubeGrid grid)
+                    var grid = _containedEntities[i] as IMyCubeGrid;
+                    if (grid != null)
                     {
                         ContainedGrids.Add(grid);
                     }
@@ -70,7 +71,8 @@ namespace SC.SUGMA.GameState
                 {
                     MyAPIGateway.Entities.GetEntities(null, b =>
                     {
-                        if (b is IMyCubeGrid grid && !_containedEntities.Contains((MyEntity)grid))
+                        var grid = b as IMyCubeGrid;
+                        if (grid != null && !_containedEntities.Contains((MyEntity)grid))
                         {
                             OutsideGrids.Add(grid);
                         }
