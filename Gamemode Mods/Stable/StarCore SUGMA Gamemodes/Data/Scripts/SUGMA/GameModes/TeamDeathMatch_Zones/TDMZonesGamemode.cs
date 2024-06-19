@@ -29,9 +29,13 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
         public override void StartRound(string[] arguments = null)
         {
             _zonePointTracker = new PointTracker(0, 0);
-            SUGMA_SessionComponent.I.RegisterComponent("tdmZonePointTracker", _zonePointTracker);
 
             base.StartRound(arguments);
+
+            if (TrackedFactions.Count <= 1)
+                return;
+
+            SUGMA_SessionComponent.I.RegisterComponent("tdmZonePointTracker", _zonePointTracker);
 
             // Here you could init visuals for the zones using the above arguments.
             FactionZones.Add(new FactionSphereZone(Vector3D.Zero, 1000, 20));

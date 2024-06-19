@@ -39,20 +39,15 @@ namespace SC.SUGMA.GameState
 
         public override void UpdateTick()
         {
-            if (SUGMA_SessionComponent.I?.ShareTrackApi == null)
-            {
-                Log.Info("ShareTrackApi or SUGMA_SessionComponent.I is null in FactionSphereZone.UpdateTick");
-                return;
-            }
-
             GridFilter = SUGMA_SessionComponent.I.ShareTrackApi.GetTrackedGrids();
             base.UpdateTick();
 
             int capturingFactionGrids = 0;
+
             bool zoneContested = false;
             foreach (var grid in ContainedGrids)
             {
-                IMyFaction gridFaction = grid?.GetFaction();
+                IMyFaction gridFaction = grid.GetFaction();
 
                 if (CapturingFaction == null && gridFaction != Faction)
                 {
@@ -72,7 +67,7 @@ namespace SC.SUGMA.GameState
 
             if (CapturingFaction == null || zoneContested || ContainedGrids.Count == 0)
             {
-                CaptureTimeCurrent -= 1 / 60f;
+                CaptureTimeCurrent -= 1/60f;
                 if (CaptureTimeCurrent < 0)
                 {
                     CaptureTimeCurrent = 0;
@@ -81,7 +76,7 @@ namespace SC.SUGMA.GameState
             }
             else
             {
-                CaptureTimeCurrent += 1 / 60f * capturingFactionGrids;
+                CaptureTimeCurrent += 1/60f * capturingFactionGrids;
                 if (CaptureTimeCurrent >= CaptureTime)
                 {
                     CaptureTimeCurrent = 0;
@@ -90,7 +85,7 @@ namespace SC.SUGMA.GameState
                 }
             }
 
-            SphereDrawColor = Color.Lerp(_originalColor, (CapturingFaction?.CustomColor.ColorMaskToRgb() ?? Color.White), CaptureTimeCurrent / CaptureTime).SetAlphaPct(0.25f);
+            SphereDrawColor = Color.Lerp(_originalColor, (CapturingFaction?.CustomColor.ColorMaskToRgb() ?? Color.White), CaptureTimeCurrent/CaptureTime).SetAlphaPct(0.25f);
         }
     }
 }
