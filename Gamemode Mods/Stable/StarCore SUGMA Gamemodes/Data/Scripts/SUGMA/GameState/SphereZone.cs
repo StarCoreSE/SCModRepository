@@ -60,9 +60,10 @@ namespace SC.SUGMA.GameState
 
                 for (int i = _containedEntities.Count - 1; i >= 0; i--)
                 {
-                    if (_containedEntities[i] is IMyCubeGrid)
+                    var grid = _containedEntities[i] as IMyCubeGrid;
+                    if (grid != null)
                     {
-                        ContainedGrids.Add(_containedEntities[i] as IMyCubeGrid);
+                        ContainedGrids.Add(grid);
                     }
                 }
 
@@ -84,6 +85,8 @@ namespace SC.SUGMA.GameState
                 double radiusSquare = Sphere.Radius * Sphere.Radius;
                 foreach (var grid in GridFilter)
                 {
+                    if (grid == null) continue;
+
                     if (Vector3D.DistanceSquared(grid.GetPosition(), Sphere.Center) <= radiusSquare)
                     {
                         ContainedGrids.Add(grid);

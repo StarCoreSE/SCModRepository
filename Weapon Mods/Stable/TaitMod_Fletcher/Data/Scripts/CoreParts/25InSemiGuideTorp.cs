@@ -507,7 +507,7 @@ namespace Scripts
                 },
                 Grids = new GridSizeDef
                 {
-                    Large = 1.2f, // Multiplier for damage against large grids.
+                    Large = 1.25f, // Multiplier for damage against large grids.
                     Small = -1f, // Multiplier for damage against small grids.
                 },
                 Armor = new ArmorDef
@@ -586,7 +586,7 @@ namespace Scripts
                     NoSound = false,
                     ParticleScale = 1f,
                     CustomParticle = "", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "TORPLAND", // SubtypeID from your Audio SBC, not a filename
+                    CustomSound = "2CmFlak38FireDist", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
             },
