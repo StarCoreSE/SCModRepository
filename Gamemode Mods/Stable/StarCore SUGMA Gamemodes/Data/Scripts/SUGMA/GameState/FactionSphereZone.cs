@@ -42,7 +42,6 @@ namespace SC.SUGMA.GameState
             GridFilter = SUGMA_SessionComponent.I.ShareTrackApi.GetTrackedGrids();
             base.UpdateTick();
 
-
             int capturingFactionGrids = 0;
 
             bool zoneContested = false;
@@ -66,9 +65,9 @@ namespace SC.SUGMA.GameState
                 capturingFactionGrids++;
             }
 
-            if (CapturingFaction == null || zoneContested)
+            if (CapturingFaction == null || zoneContested || ContainedGrids.Count == 0)
             {
-                CaptureTimeCurrent -= CaptureTime * 0.05f * 1/60f;
+                CaptureTimeCurrent -= 1/60f;
                 if (CaptureTimeCurrent < 0)
                 {
                     CaptureTimeCurrent = 0;
