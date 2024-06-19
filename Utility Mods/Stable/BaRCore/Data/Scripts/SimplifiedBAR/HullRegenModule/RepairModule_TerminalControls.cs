@@ -143,7 +143,7 @@ namespace StarCore.RepairModule
 
             #region Priority Checkbox Action
             var PriorityCheckboxAction = MyAPIGateway.TerminalControls.CreateAction<IMyCollector>(IdPrefix + "PriorityCheckboxAction");
-            PriorityCheckboxAction.Name = new StringBuilder("Toggle Exclusive Mode");
+            PriorityCheckboxAction.Name = new StringBuilder("Toggle Priority Only");
             PriorityCheckboxAction.ValidForGroups = true;
             PriorityCheckboxAction.Icon = @"Textures\GUI\Icons\Actions\StationToggle.dds";
             PriorityCheckboxAction.Action = (b) =>

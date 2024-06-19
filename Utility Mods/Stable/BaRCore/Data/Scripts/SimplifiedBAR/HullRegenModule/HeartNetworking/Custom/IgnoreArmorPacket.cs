@@ -8,21 +8,23 @@ namespace StarCore.RepairModule.Networking.Custom
     public class IgnoreArmorPacket : PacketBase
     {
         [ProtoMember(6)] private bool ignoreArmor;
+        [ProtoMember(7)] private long entityId;
 
         public override void Received(ulong SenderSteamId)
         {
             Log.Info("Recieved Terminal Controls Update Request. Contents:\n    IgnoreArmor: " + ignoreArmor);
 
-            RepairModule.Instance.IgnoreArmor = ignoreArmor;
+            RepairModule.GetLogic<RepairModule>(entityId).IgnoreArmor = ignoreArmor;
         }
 
-        public static void UpdateIgnoreArmor(string message = "")
+        public static void UpdateIgnoreArmor(long entityID)
         {
             try
             {
                 IgnoreArmorPacket packet = new IgnoreArmorPacket
                 {
-                    ignoreArmor = RepairModule.Instance.IgnoreArmor,
+                    ignoreArmor = RepairModule.GetLogic<RepairModule>(entityID).IgnoreArmor,
+                    entityId = entityID,
                 };
 
                 Log.Info("Sending Terminal Controls Update. Contents:\n    IgnoreArmor: " + packet.ignoreArmor);

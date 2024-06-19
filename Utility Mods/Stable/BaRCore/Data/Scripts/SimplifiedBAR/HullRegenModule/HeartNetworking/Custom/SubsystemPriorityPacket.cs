@@ -7,22 +7,24 @@ namespace StarCore.RepairModule.Networking.Custom
     [ProtoContract]
     public class SubsystemPriorityPacket : PacketBase
     {
-        [ProtoMember(8)] private long subsystemPriority;
+        [ProtoMember(10)] private long subsystemPriority;
+        [ProtoMember(11)] private long entityId;
 
         public override void Received(ulong SenderSteamId)
         {
             Log.Info("Recieved Terminal Controls Update Request. Contents:\n    SubsystemPriority: " + subsystemPriority);
 
-            RepairModule.Instance.SubsystemPriority = subsystemPriority;
+            RepairModule.GetLogic<RepairModule>(entityId).SubsystemPriority = subsystemPriority;
         }
 
-        public static void UpdateSubsystemPriority(string message = "")
+        public static void UpdateSubsystemPriority(long entityID)
         {
             try
             {
                 SubsystemPriorityPacket packet = new SubsystemPriorityPacket
                 {
-                    subsystemPriority = RepairModule.Instance.SubsystemPriority
+                    subsystemPriority = RepairModule.GetLogic<RepairModule>(entityID).SubsystemPriority,
+                    entityId = entityID,
                 };
 
                 Log.Info("Sending Terminal Controls Update. Contents:\n    SubsystemPriority: " + packet.subsystemPriority);

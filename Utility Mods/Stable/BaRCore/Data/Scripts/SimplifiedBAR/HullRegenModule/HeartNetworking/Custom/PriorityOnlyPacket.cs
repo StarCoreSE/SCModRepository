@@ -7,22 +7,24 @@ namespace StarCore.RepairModule.Networking.Custom
     [ProtoContract]
     public class PriorityOnlyPacket : PacketBase
     {
-        [ProtoMember(7)] private bool priorityOnly;
+        [ProtoMember(8)] private bool priorityOnly;
+        [ProtoMember(9)] private long entityId;
 
         public override void Received(ulong SenderSteamId)
         {
             Log.Info("Recieved Terminal Controls Update Request. Contents:\n    PriorityOnly: " + priorityOnly);
 
-            RepairModule.Instance.PriorityOnly = priorityOnly;
+            RepairModule.GetLogic<RepairModule>(entityId).PriorityOnly = priorityOnly;
         }
 
-        public static void UpdatePriorityOnly(string message = "")
+        public static void UpdatePriorityOnly(long entityID )
         {
             try
             {
                 PriorityOnlyPacket packet = new PriorityOnlyPacket
                 {
-                    priorityOnly = RepairModule.Instance.PriorityOnly,
+                    priorityOnly = RepairModule.GetLogic<RepairModule>(entityID).PriorityOnly,
+                    entityId = entityID,
                 };
 
                 Log.Info("Sending Terminal Controls Update. Contents:\n    SubsystemPriority: " + packet.priorityOnly);

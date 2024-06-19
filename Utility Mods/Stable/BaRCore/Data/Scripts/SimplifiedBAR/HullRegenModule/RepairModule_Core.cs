@@ -12,11 +12,9 @@ using VRage.Game.ModAPI.Network;
 using VRage.Sync;
 using VRage.Network;
 using VRage.Game.Components;
-using VRage.Game.ObjectBuilders.ComponentSystem;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRageMath;
-using StarCore.RepairModule.Networking;
 using StarCore.RepairModule.Networking.Custom;
 
 namespace StarCore.RepairModule
@@ -35,8 +33,7 @@ namespace StarCore.RepairModule
     public class RepairModule : MyGameLogicComponent, IMyEventProxy
     {
         private IMyCollector Block;
-        private bool IsServer = MyAPIGateway.Session.IsServer;
-        public static RepairModule Instance { get; private set; }      
+        private bool IsServer = MyAPIGateway.Session.IsServer;      
 
         // Block Settings
         public bool IgnoreArmor
@@ -44,8 +41,11 @@ namespace StarCore.RepairModule
             get { return ignoreArmor;  }
             set
             {
-                ignoreArmor = value;
-                OnIgnoreArmorChanged?.Invoke(ignoreArmor);
+                if (ignoreArmor != value)
+                {
+                    ignoreArmor = value;
+                    OnIgnoreArmorChanged?.Invoke(ignoreArmor);
+                }
             }
         }
         private bool ignoreArmor;
@@ -55,8 +55,11 @@ namespace StarCore.RepairModule
             get { return priorityOnly; }
             set
             {
-                priorityOnly = value;
-                OnPriorityOnlyChanged?.Invoke(priorityOnly);
+                if (priorityOnly != value)
+                {
+                    priorityOnly = value;
+                    OnPriorityOnlyChanged?.Invoke(priorityOnly);
+                }
             }
         }
         private bool priorityOnly;
@@ -66,12 +69,18 @@ namespace StarCore.RepairModule
             get { return GetLongFromPriority(subsystemPriority); }
             set
             {
-                subsystemPriority = GetPriorityFromLong(value);
-                OnSubsystemPriorityChanged?.Invoke(value);
+                var newPriority = GetPriorityFromLong(value);
+                if (subsystemPriority != newPriority)
+                {
+                    subsystemPriority = newPriority;
+                    OnSubsystemPriorityChanged?.Invoke(value);
+                }
             }
         }
         private RepairPriority subsystemPriority = RepairPriority.None;
         private event Action<long> OnSubsystemPriorityChanged;
+
+        float RepairAmount = 2f;
 
         // Timed Sort
         private int SortTimer = 0;
@@ -97,8 +106,6 @@ namespace StarCore.RepairModule
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             base.Init(objectBuilder);
-
-            Instance = this;
             
             Block = (IMyCollector)Entity;
 
@@ -121,7 +128,7 @@ namespace StarCore.RepairModule
             OnPriorityOnlyChanged += PriorityOnly_Update;
             OnSubsystemPriorityChanged += SubsystemPriority_Update;
 
-            IgnoreArmor = false;
+            IgnoreArmor = true;
             PriorityOnly = false;
             SubsystemPriority = 0;
 
@@ -133,6 +140,7 @@ namespace StarCore.RepairModule
 
                 Block.CubeGrid.OnBlockIntegrityChanged += HandleDamagedBlocks;
                 Block.CubeGrid.OnBlockRemoved += HandleRemovedBlocks;              
+                Block.CubeGrid.OnBlockAdded += HandleAddedBlocks;              
 
                 if (AssociatedGrids.Any())
                 {
@@ -140,6 +148,7 @@ namespace StarCore.RepairModule
                     {
                         grid.OnBlockIntegrityChanged += HandleDamagedBlocks;
                         grid.OnBlockRemoved += HandleRemovedBlocks;
+                        grid.OnBlockAdded += HandleAddedBlocks;
                     }
                 }
             }         
@@ -240,6 +249,21 @@ namespace StarCore.RepairModule
 
             if (IsServer)
             {
+                Block.CubeGrid.OnBlockIntegrityChanged -= HandleDamagedBlocks;
+                Block.CubeGrid.OnBlockRemoved -= HandleRemovedBlocks;
+                Block.CubeGrid.OnBlockAdded -= HandleAddedBlocks;
+
+                if (AssociatedGrids.Any())
+                {
+                    foreach (IMyCubeGrid grid in AssociatedGrids)
+                    {
+                        grid.OnBlockIntegrityChanged -= HandleDamagedBlocks;
+                        grid.OnBlockRemoved -= HandleRemovedBlocks;
+                        grid.OnBlockAdded -= HandleAddedBlocks;
+                    }
+                }
+
+
                 AssociatedGrids.Clear();
                 RepairTargets.Clear();
                 PriorityRepairTargets.Clear();
@@ -249,6 +273,29 @@ namespace StarCore.RepairModule
 
         #region Event Handlers
         public void HandleDamagedBlocks(IMySlimBlock block)
+        {
+            if (IgnoreArmor && (block.FatBlock == null || block.ToString().Contains("MyCubeBlock")))
+                return;
+
+            List<IMySlimBlock> targetList = IsPriority(block) ? PriorityRepairTargets : RepairTargets;
+
+            if (block.Integrity != block.MaxIntegrity)
+            {
+                if (!targetList.Contains(block))
+                {
+                    targetList.Add(block);
+                }
+            }
+            else
+            {
+                if (targetList.Contains(block))
+                {
+                    targetList.Remove(block);
+                }
+            }
+        }
+
+        public void HandleAddedBlocks(IMySlimBlock block)
         {
             if (IgnoreArmor && (block.FatBlock == null || block.ToString().Contains("MyCubeBlock")))
                 return;
@@ -286,21 +333,50 @@ namespace StarCore.RepairModule
 
         private void IgnoreArmor_Update(bool _bool)
         {
-            IgnoreArmorPacket.UpdateIgnoreArmor();
+            IgnoreArmorPacket.UpdateIgnoreArmor(Block.EntityId);
+            ScanRepairTargets(Block.CubeGrid);
         }
 
         private void PriorityOnly_Update(bool _bool)
         {
-            PriorityOnlyPacket.UpdatePriorityOnly();
+            PriorityOnlyPacket.UpdatePriorityOnly(Block.EntityId);
         }
 
         private void SubsystemPriority_Update(long _long)
         {
-            SubsystemPriorityPacket.UpdateSubsystemPriority();
+            SubsystemPriorityPacket.UpdateSubsystemPriority(Block.EntityId);
+            ScanRepairTargets(Block.CubeGrid);
         }
         #endregion
 
         #region Utility Methods
+        public static T GetLogic<T>(long entityId) where T : MyGameLogicComponent
+        {
+            IMyEntity targetEntity = MyAPIGateway.Entities.GetEntityById(entityId);
+            IMyTerminalBlock targetBlock = targetEntity as IMyTerminalBlock;
+
+            return targetBlock?.GameLogic?.GetAs<T>();       
+        }
+
+        private void AppendCustomInfo(IMyTerminalBlock block, StringBuilder sb)
+        {
+            try // only for non-critical code
+            {
+                // NOTE: don't Clear() the StringBuilder, it's the same instance given to all mods.
+
+                // Process both priority and regular lists
+                string priorityListAsString = ProcessTargetsToString(PriorityRepairTargets);
+                string listAsString = ProcessTargetsToString(RepairTargets);
+
+                sb.Append("Priority Targets: ").Append("\n").Append(priorityListAsString).Append("\n\n")
+                  .Append("Regular Targets: ").Append("\n").Append(listAsString);
+            }
+            catch (Exception e)
+            {
+                MyLog.Default.WriteLine(e);
+            }
+        }
+
         private string ProcessTargetsToString(List<IMySlimBlock> list)
         {
             return string.Join(Environment.NewLine, list.Select(listItem =>
@@ -448,6 +524,7 @@ namespace StarCore.RepairModule
         }
         #endregion
 
+        #region Main
         private void InitRepairTargets(IMyCubeGrid grid)
         {
             var gridGroup = grid.GetGridGroup(GridLinkTypeEnum.Mechanical);
@@ -488,15 +565,49 @@ namespace StarCore.RepairModule
             }
         }
 
+        private void ScanRepairTargets(IMyCubeGrid grid)
+        {
+            var gridGroup = grid.GetGridGroup(GridLinkTypeEnum.Mechanical);
+
+            if (AssociatedGrids.Any())
+            {
+                foreach (IMyCubeGrid groupGrid in AssociatedGrids)
+                {
+                    var tempBlockList = new List<IMySlimBlock>();
+
+                    groupGrid.GetBlocks(tempBlockList);
+
+                    foreach (var block in tempBlockList)
+                    {
+                        HandleDamagedBlocks(block);
+                    }
+
+                    tempBlockList.Clear();
+                }
+            }
+            else
+            {
+                var tempBlockList = new List<IMySlimBlock>();
+
+                grid.GetBlocks(tempBlockList);
+
+                foreach (var block in tempBlockList)
+                {
+                    HandleDamagedBlocks(block);
+                }
+
+                tempBlockList.Clear();
+            }
+        }
+
         private void RepairTarget(IMySlimBlock block)
         {
             if (block == null || block.CubeGrid.Physics == null)
                 return;
 
             if(!block.IsFullIntegrity || block.HasDeformation)
-            {
-                float repairAmount = 2f;
-                block.IncreaseMountLevel(repairAmount * MyAPIGateway.Session.WelderSpeedMultiplier, block.OwnerId, null, 1);
+            {             
+                block.IncreaseMountLevel(RepairAmount * MyAPIGateway.Session.WelderSpeedMultiplier, block.OwnerId, null, 1);
             }
             else
             {
@@ -516,25 +627,7 @@ namespace StarCore.RepairModule
                 PriorityRepairTargets.Remove(block);
                 NeedsSorting = true;
             }
-        }
-
-        private void AppendCustomInfo(IMyTerminalBlock block, StringBuilder sb)
-        {
-            try // only for non-critical code
-            {
-                // NOTE: don't Clear() the StringBuilder, it's the same instance given to all mods.
-
-                // Process both priority and regular lists
-                string priorityListAsString = ProcessTargetsToString(PriorityRepairTargets);
-                string listAsString = ProcessTargetsToString(RepairTargets);
-
-                sb.Append("Priority Targets: ").Append("\n").Append(priorityListAsString).Append("\n\n")
-                  .Append("Regular Targets: ").Append("\n").Append(listAsString);
-            }
-            catch (Exception e)
-            {
-                MyLog.Default.WriteLine(e);
-            }
-        }   
+        }      
+        #endregion
     }
 }
