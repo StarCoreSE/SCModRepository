@@ -39,7 +39,7 @@ namespace SC.SUGMA.GameState
         {
             if (_pointsUpdated && MyAPIGateway.Session.IsServer)
             {
-                HeartNetwork.I.SendToEveryone(new PointsPacket(this));
+                HeartNetwork.I?.SendToEveryone(new PointsPacket(this));
                 _pointsUpdated = false;
             }
 

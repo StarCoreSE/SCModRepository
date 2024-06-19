@@ -62,7 +62,10 @@ namespace SC.SUGMA
             try
             {
                 foreach (var component in _components.ToArray())
+                {
+                    Log.Info($"Initializing component: {component.Key}");
                     component.Value.Init(component.Key);
+                }
             }
             catch (Exception ex)
             {
@@ -75,28 +78,32 @@ namespace SC.SUGMA
             if (!ShareTrackApi.IsReady)
                 return;
 
+            if (!HasInited)
             {
-                // Clients should sync first-thing, in case a game is already running.
-                if (!HasInited)
-                {
-                    _pollTimer = 600;
-                    HasInited = true;
-                }
-
-                if (_pollTimer == 0)
-                {
-                    if (!MyAPIGateway.Session.IsServer)
-                        SyncRequestPacket.RequestSync();
-                    _pollTimer = -1;
-                }
-                else if (_pollTimer > 0)
-                    _pollTimer--;
+                _pollTimer = 600;
+                HasInited = true;
             }
+
+            if (_pollTimer == 0)
+            {
+                if (!MyAPIGateway.Session.IsServer)
+                    SyncRequestPacket.RequestSync();
+                _pollTimer = -1;
+            }
+            else if (_pollTimer > 0)
+                _pollTimer--;
 
             try
             {
                 foreach (var component in _components.Values.ToArray())
+                {
+                    if (component == null)
+                    {
+                        Log.Info("Component is null in SUGMA_SessionComponent.UpdateAfterSimulation");
+                        continue;
+                    }
                     component.UpdateTick();
+                }
             }
             catch (Exception ex)
             {
