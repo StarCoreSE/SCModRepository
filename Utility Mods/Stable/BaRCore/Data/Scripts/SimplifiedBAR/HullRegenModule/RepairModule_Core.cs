@@ -81,6 +81,7 @@ namespace StarCore.RepairModule
         private event Action<long> OnSubsystemPriorityChanged;
 
         float RepairAmount = 2f;
+        bool defaultsSet = false;
 
         // Timed Sort
         private int SortTimer = 0;
@@ -160,6 +161,15 @@ namespace StarCore.RepairModule
         public override void UpdateAfterSimulation()
         {
             base.UpdateAfterSimulation();
+
+            if (Block != null && !defaultsSet)
+            {
+                IgnoreArmor = true;
+                PriorityOnly = false;
+                SubsystemPriority = 0;
+
+                defaultsSet = true;
+            }
 
             if (IsServer)
             {

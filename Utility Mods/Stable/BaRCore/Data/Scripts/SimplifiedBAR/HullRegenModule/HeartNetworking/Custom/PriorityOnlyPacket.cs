@@ -22,7 +22,7 @@ namespace StarCore.RepairModule.Networking.Custom
             }
             else
             {
-                Log.Error("Received method failed: RepairModule is null. Entity ID: " + entityId);
+                Log.Info("Received method failed: RepairModule is null. Entity ID: " + entityId);
             }
         }
 
