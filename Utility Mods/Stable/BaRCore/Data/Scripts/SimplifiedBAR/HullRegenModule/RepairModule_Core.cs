@@ -80,6 +80,7 @@ namespace StarCore.RepairModule
         private RepairPriority subsystemPriority = RepairPriority.None;
         private event Action<long> OnSubsystemPriorityChanged;
 
+        // General Settings     
         float RepairAmount = 2f;
         bool defaultsSet = false;
 
@@ -174,7 +175,7 @@ namespace StarCore.RepairModule
             if (IsServer)
             {
                 if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0 && Block.IsWorking)
-                {
+                {                                        
                     Vector3D targetBlockPosition = Vector3D.Zero;
                     if (PriorityRepairTargets.Any())
                     {
@@ -196,13 +197,13 @@ namespace StarCore.RepairModule
                     {
                         ShowWeldEffects.Value = false;
                     }
-                }
+                }                            
+            }
 
-                if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0 && MyAPIGateway.Gui.GetCurrentScreen == MyTerminalPageEnum.ControlPanel)
-                {
-                    Block.RefreshCustomInfo();
-                    Block.SetDetailedInfoDirty();
-                }             
+            if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0 && MyAPIGateway.Gui.GetCurrentScreen == MyTerminalPageEnum.ControlPanel)
+            {
+                Block.RefreshCustomInfo();
+                Block.SetDetailedInfoDirty();
             }
 
             if (ShowWeldEffects.Value && TargetPosition != null)
@@ -234,8 +235,8 @@ namespace StarCore.RepairModule
 
                     SortTimer = SortInterval;
                     NeedsSorting = false;
-                }
-            }       
+                }                        
+            }
         }
 
         public override void Close()
@@ -243,19 +244,6 @@ namespace StarCore.RepairModule
             base.Close();
             if (Block == null)
                 return;
-
-            Block = null;
-
-            if (WeldParticleEmitter == null)
-                return;
-
-            WeldParticleEmitter.SetTranslation(ref Vector3D.Zero);
-
-            if (WeldSoundEmitter == null)
-                return;
-
-            WeldSoundEmitter.SetPosition(Vector3D.Zero);
-            WeldSoundEmitter.StopSound(true);
 
             if (IsServer)
             {
@@ -272,12 +260,24 @@ namespace StarCore.RepairModule
                         grid.OnBlockAdded -= HandleAddedBlocks;
                     }
                 }
+            }
 
+            AssociatedGrids.Clear();
+            RepairTargets.Clear();
+            PriorityRepairTargets.Clear();
 
-                AssociatedGrids.Clear();
-                RepairTargets.Clear();
-                PriorityRepairTargets.Clear();
-            }         
+            if (WeldParticleEmitter == null)
+                return;
+
+            WeldParticleEmitter.SetTranslation(ref Vector3D.Zero);
+
+            if (WeldSoundEmitter == null)
+                return;
+
+            WeldSoundEmitter.SetPosition(Vector3D.Zero);
+            WeldSoundEmitter.StopSound(true);
+
+            Block = null;
         }
         #endregion
 
@@ -656,6 +656,7 @@ namespace StarCore.RepairModule
             {
                 RepairTargets.Remove(block);
                 PriorityRepairTargets.Remove(block);
+
                 NeedsSorting = true;
             }
         }      
