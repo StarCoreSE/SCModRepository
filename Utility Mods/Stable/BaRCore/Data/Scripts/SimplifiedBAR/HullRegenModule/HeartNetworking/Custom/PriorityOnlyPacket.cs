@@ -14,7 +14,16 @@ namespace StarCore.RepairModule.Networking.Custom
         {
             Log.Info("Recieved Terminal Controls Update Request. Contents:\n    PriorityOnly: " + priorityOnly);
 
-            RepairModule.GetLogic<RepairModule>(entityId).PriorityOnly = priorityOnly;
+            var repairModule = RepairModule.GetLogic<RepairModule>(entityId);
+
+            if (repairModule != null)
+            {
+                repairModule.PriorityOnly = priorityOnly;
+            }
+            else
+            {
+                Log.Error("Received method failed: RepairModule is null. Entity ID: " + entityId);
+            }
         }
 
         public static void UpdatePriorityOnly(long entityID )

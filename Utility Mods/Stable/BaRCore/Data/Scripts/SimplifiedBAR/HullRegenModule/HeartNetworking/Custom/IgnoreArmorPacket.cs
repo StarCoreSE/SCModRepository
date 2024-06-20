@@ -14,7 +14,16 @@ namespace StarCore.RepairModule.Networking.Custom
         {
             Log.Info("Recieved Terminal Controls Update Request. Contents:\n    IgnoreArmor: " + ignoreArmor);
 
-            RepairModule.GetLogic<RepairModule>(entityId).IgnoreArmor = ignoreArmor;
+            var repairModule = RepairModule.GetLogic<RepairModule>(entityId);
+
+            if (repairModule != null)
+            {
+                repairModule.IgnoreArmor = ignoreArmor;
+            }
+            else
+            {
+                Log.Error("Received method failed: RepairModule is null. Entity ID: " + entityId);
+            }
         }
 
         public static void UpdateIgnoreArmor(long entityID)

@@ -14,7 +14,16 @@ namespace StarCore.RepairModule.Networking.Custom
         {
             Log.Info("Recieved Terminal Controls Update Request. Contents:\n    SubsystemPriority: " + subsystemPriority);
 
-            RepairModule.GetLogic<RepairModule>(entityId).SubsystemPriority = subsystemPriority;
+            var repairModule = RepairModule.GetLogic<RepairModule>(entityId);
+
+            if (repairModule != null)
+            {
+                repairModule.SubsystemPriority = subsystemPriority;
+            }
+            else
+            {
+                Log.Error("Received method failed: RepairModule is null. Entity ID: " + entityId);
+            }
         }
 
         public static void UpdateSubsystemPriority(long entityID)
