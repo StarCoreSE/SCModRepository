@@ -9,7 +9,7 @@ using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.Utils;
 
-namespace StarCore.AutoRepairModule
+namespace StarCore.RepairModule
 {
     /// <summary>
     /// <para>Standalone logger, does not require any setup.</para>
@@ -23,19 +23,25 @@ namespace StarCore.AutoRepairModule
         private static Handler handler;
         private static bool unloaded = false;
 
-        public const string FILE = "info.log";
+        public static readonly string FILE = GenerateTimestampedFileName();
         private const int DEFAULT_TIME_INFO = 3000;
         private const int DEFAULT_TIME_ERROR = 10000;
 
+        private static string GenerateTimestampedFileName()
+        {
+            string timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+            return $"[{timestamp}]-RepairModule.log";
+        }
+
         /// <summary>
         /// Print the generic error info.
-        /// (For use in <see cref="Log.Error(string, string, int)"/>'s 2nd arg)
+        /// (For use in <see cref="Error(string, string, int)"/>'s 2nd arg)
         /// </summary>
         public const string PRINT_ERROR = "<err>";
 
         /// <summary>
         /// Prints the message instead of the generic generated error info.
-        /// (For use in <see cref="Log.Error(string, string, int)"/>'s 2nd arg)
+        /// (For use in <see cref="Error(string, string, int)"/>'s 2nd arg)
         /// </summary>
         public const string PRINT_MSG = "<msg>";
 
@@ -51,7 +57,7 @@ namespace StarCore.AutoRepairModule
         {
             instance = null;
 
-            if(handler != null && handler.AutoClose)
+            if (handler != null && handler.AutoClose)
             {
                 Unload();
             }
@@ -61,14 +67,14 @@ namespace StarCore.AutoRepairModule
         {
             try
             {
-                if(unloaded)
+                if (unloaded)
                     return;
 
                 unloaded = true;
                 handler?.Close();
                 handler = null;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MyLog.Default.WriteLine($"Error in {ModContext.ModName} ({ModContext.ModId}): {e.Message}\n{e.StackTrace}");
                 throw new ModCrashedException(e, ModContext);
@@ -77,10 +83,10 @@ namespace StarCore.AutoRepairModule
 
         private static void EnsureHandlerCreated()
         {
-            if(unloaded)
+            if (unloaded)
                 throw new Exception("Digi.Log accessed after it was unloaded!");
 
-            if(handler == null)
+            if (handler == null)
                 handler = new Handler();
         }
         #endregion
@@ -213,9 +219,9 @@ namespace StarCore.AutoRepairModule
         {
             EnsureHandlerCreated();
 
-            if(task.Exceptions != null && task.Exceptions.Length > 0)
+            if (task.Exceptions != null && task.Exceptions.Length > 0)
             {
-                foreach(var e in task.Exceptions)
+                foreach (var e in task.Exceptions)
                 {
                     Error($"Error in {taskName} thread!\n{e}");
                 }
@@ -266,10 +272,10 @@ namespace StarCore.AutoRepairModule
 
             public void Init(Log sessionComp)
             {
-                if(writer != null)
+                if (writer != null)
                     return; // already initialized
 
-                if(MyAPIGateway.Utilities == null)
+                if (MyAPIGateway.Utilities == null)
                 {
                     Error("MyAPIGateway.Utilities is NULL !");
                     return;
@@ -277,7 +283,7 @@ namespace StarCore.AutoRepairModule
 
                 this.sessionComp = sessionComp;
 
-                if(string.IsNullOrWhiteSpace(ModName))
+                if (string.IsNullOrWhiteSpace(ModName))
                     ModName = sessionComp.ModContext.ModName;
 
                 WorkshopId = GetWorkshopID(sessionComp.ModContext.ModId);
@@ -285,13 +291,13 @@ namespace StarCore.AutoRepairModule
                 writer = MyAPIGateway.Utilities.WriteFileInLocalStorage(FILE, typeof(Log));
 
                 #region Pre-init messages
-                if(preInitMessages != null)
+                if (preInitMessages != null)
                 {
                     string warning = $"{modName} WARNING: there are log messages before the mod initialized!";
 
                     Info($"--- pre-init messages ---");
 
-                    foreach(var msg in preInitMessages)
+                    foreach (var msg in preInitMessages)
                     {
                         Info(msg, warning);
                     }
@@ -342,7 +348,7 @@ namespace StarCore.AutoRepairModule
 
             public void Close()
             {
-                if(writer != null)
+                if (writer != null)
                 {
                     Info("Unloaded.");
 
@@ -364,7 +370,7 @@ namespace StarCore.AutoRepairModule
 
             public void DecreaseIndent()
             {
-                if(indent > 0)
+                if (indent > 0)
                     indent--;
             }
 
@@ -379,7 +385,7 @@ namespace StarCore.AutoRepairModule
 
                 LogMessage(message, "ERROR: "); // write to custom log
 
-                if(printText != null) // printing to HUD is optional
+                if (printText != null) // printing to HUD is optional
                     ShowHudMessage(ref notifyError, message, printText, printTime, MyFontEnum.Red);
             }
 
@@ -387,25 +393,25 @@ namespace StarCore.AutoRepairModule
             {
                 LogMessage(message); // write to custom log
 
-                if(printText != null) // printing to HUD is optional
+                if (printText != null) // printing to HUD is optional
                     ShowHudMessage(ref notifyInfo, message, printText, printTime, MyFontEnum.White);
             }
 
             private void ShowHudMessage(ref IMyHudNotification notify, string message, string printText, int printTime, string font)
             {
-                if(printText == null)
+                if (printText == null)
                     return;
 
                 try
                 {
-                    if(MyAPIGateway.Utilities != null && !MyAPIGateway.Utilities.IsDedicated)
+                    if (MyAPIGateway.Utilities != null && !MyAPIGateway.Utilities.IsDedicated)
                     {
-                        if(printText == PRINT_ERROR)
+                        if (printText == PRINT_ERROR)
                             printText = errorPrintText;
-                        else if(printText == PRINT_MSG)
+                        else if (printText == PRINT_MSG)
                             printText = $"[ {modName} ERROR: {message} ]";
 
-                        if(notify == null)
+                        if (notify == null)
                         {
                             notify = MyAPIGateway.Utilities.CreateNotification(printText, printTime, font);
                         }
@@ -419,7 +425,7 @@ namespace StarCore.AutoRepairModule
                         notify.Show();
                     }
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Info("ERROR: Could not send notification to local client: " + e);
                     MyLog.Default.WriteLineAndConsole(modName + " logger error/exception: Could not send notification to local client: " + e);
@@ -433,20 +439,20 @@ namespace StarCore.AutoRepairModule
                     sb.Clear();
                     sb.Append(DateTime.Now.ToString("[HH:mm:ss] "));
 
-                    if(writer == null)
+                    if (writer == null)
                         sb.Append("(PRE-INIT) ");
 
-                    for(int i = 0; i < indent; i++)
+                    for (int i = 0; i < indent; i++)
                         sb.Append(' ', 4);
 
-                    if(prefix != null)
+                    if (prefix != null)
                         sb.Append(prefix);
 
                     sb.Append(message);
 
-                    if(writer == null)
+                    if (writer == null)
                     {
-                        if(preInitMessages == null)
+                        if (preInitMessages == null)
                             preInitMessages = new List<string>();
 
                         preInitMessages.Add(sb.ToString());
@@ -459,7 +465,7 @@ namespace StarCore.AutoRepairModule
 
                     sb.Clear();
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     MyLog.Default.WriteLineAndConsole($"{modName} had an error while logging message = '{message}'\nLogger error: {e.Message}\n{e.StackTrace}");
                 }
@@ -468,9 +474,9 @@ namespace StarCore.AutoRepairModule
             private ulong GetWorkshopID(string modId)
             {
                 // NOTE workaround for MyModContext not having the actual workshop ID number.
-                foreach(var mod in MyAPIGateway.Session.Mods)
+                foreach (var mod in MyAPIGateway.Session.Mods)
                 {
-                    if(mod.Name == modId)
+                    if (mod.Name == modId)
                         return mod.PublishedFileId;
                 }
 
