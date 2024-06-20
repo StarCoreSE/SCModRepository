@@ -367,9 +367,26 @@ namespace StarCore.RepairModule
         public static T GetLogic<T>(long entityId) where T : MyGameLogicComponent
         {
             IMyEntity targetEntity = MyAPIGateway.Entities.GetEntityById(entityId);
-            IMyTerminalBlock targetBlock = targetEntity as IMyTerminalBlock;
+            if (targetEntity == null)
+            {
+                Log.Info("GetLogic failed: Entity not found. Entity ID: " + entityId);
+                return null;
+            }
 
-            return targetBlock?.GameLogic?.GetAs<T>();       
+            IMyTerminalBlock targetBlock = targetEntity as IMyTerminalBlock;
+            if (targetBlock == null)
+            {
+                Log.Info("GetLogic failed: Target entity is not a terminal block. Entity ID: " + entityId);
+                return null;
+            }
+
+            var logic = targetBlock.GameLogic?.GetAs<T>();
+            if (logic == null)
+            {
+                Log.Info("GetLogic failed: Logic component not found. Entity ID: " + entityId);
+            }
+
+            return logic;
         }
 
         private void AppendCustomInfo(IMyTerminalBlock block, StringBuilder sb)
