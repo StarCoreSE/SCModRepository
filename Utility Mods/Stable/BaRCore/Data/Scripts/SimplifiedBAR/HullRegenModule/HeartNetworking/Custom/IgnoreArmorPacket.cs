@@ -18,7 +18,7 @@ namespace StarCore.RepairModule.Networking.Custom
 
             if (repairModule != null)
             {
-                repairModule.IgnoreArmor = ignoreArmor;
+                repairModule.ignoreArmor = ignoreArmor;
             }
             else
             {
