@@ -29,7 +29,7 @@ namespace StarCore.RepairModule
         None
     }
 
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "SELtdLargeNanobotBuildAndRepairSystem", "SELtdSmallNanobotBuildAndRepairSystem")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "Collector")]
     public class RepairModule : MyGameLogicComponent, IMyEventProxy
     {
         private IMyCollector Block;
