@@ -26,7 +26,7 @@ namespace StarCore.RepairModule.Networking
             base.Init(id);
             I = this;
 
-            NetworkId = 47591;
+            NetworkId = 20871;
             MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(NetworkId, ReceivedPacket);
 
             foreach (var type in PacketBase.PacketTypes) TypeNetworkLoad.Add(type, 0);
