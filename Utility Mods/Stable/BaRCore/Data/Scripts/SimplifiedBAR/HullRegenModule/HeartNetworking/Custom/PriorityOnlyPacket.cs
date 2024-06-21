@@ -18,7 +18,7 @@ namespace StarCore.RepairModule.Networking.Custom
 
             if (repairModule != null)
             {
-                repairModule.PriorityOnly = priorityOnly;
+                repairModule.priorityOnly = priorityOnly;
             }
             else
             {
