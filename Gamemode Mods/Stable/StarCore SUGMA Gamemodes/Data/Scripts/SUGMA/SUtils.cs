@@ -17,11 +17,11 @@ namespace SC.SUGMA.Textures
 
         private const int DamageToggleInt = 0x1;
         private const int MatchPermsInt = 0x29B;
-        private const int FullPermsInt = 0x3FE;
+        private const int FullPermsInt = 0x3FF;
 
         public static void SetDamageEnabled(bool value)
         {
-            //MyAPIGateway.Utilities.ShowMessage("SUGMA", $"Global damage {(value ? "enabled" : "disabled")}.");
+            MyAPIGateway.Utilities.ShowMessage("SUGMA", $"Global damage {(value ? "enabled" : "disabled")}.");
 
             int existing = (int)MySessionComponentSafeZones.AllowedActions;
             MySessionComponentSafeZones.AllowedActions = CastProhibit(MySessionComponentSafeZones.AllowedActions,
@@ -30,8 +30,8 @@ namespace SC.SUGMA.Textures
 
         public static void SetWorldPermissionsForMatch(bool matchActive)
         {
-            //MyAPIGateway.Utilities.ShowMessage("SUGMA",
-            //    $"Match global permissions {(matchActive ? "enabled" : "disabled")}.");
+            MyAPIGateway.Utilities.ShowMessage("SUGMA",
+                $"Match global permissions {(matchActive ? "enabled" : "disabled")}.");
 
             MySessionComponentSafeZones.AllowedActions = CastProhibit(MySessionComponentSafeZones.AllowedActions,
                 matchActive ? MatchPermsInt : FullPermsInt);
