@@ -18,7 +18,10 @@ namespace StarCore.RepairModule.Networking.Custom
 
             if (repairModule != null)
             {
-                repairModule.IgnoreArmor = ignoreArmor;
+                repairModule.ignoreArmor = ignoreArmor;
+
+                if (MyAPIGateway.Session.IsServer)
+                    HeartNetwork.I.SendToEveryone(this);
             }
             else
             {
