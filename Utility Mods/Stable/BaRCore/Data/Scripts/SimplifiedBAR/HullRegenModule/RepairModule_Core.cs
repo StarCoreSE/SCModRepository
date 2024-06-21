@@ -95,6 +95,7 @@ namespace StarCore.RepairModule
         private List<IMySlimBlock> PriorityRepairTargets = new List<IMySlimBlock>();
 
         // Client-Side Particle Effects
+        // ooga booga
         public MySync<Vector3D, SyncDirection.FromServer> TargetPosition = null;
         public MySync<bool, SyncDirection.FromServer> ShowWeldEffects = null;
         private const string WeldParticle = MyParticleEffectsNameEnum.WelderContactPoint;
