@@ -18,7 +18,7 @@ namespace StarCore.RepairModule.Networking.Custom
 
             if (repairModule != null)
             {
-                repairModule.SubsystemPriority = subsystemPriority;
+                repairModule.subsystemPriority = repairModule.GetPriorityFromLong(subsystemPriority);
             }
             else
             {

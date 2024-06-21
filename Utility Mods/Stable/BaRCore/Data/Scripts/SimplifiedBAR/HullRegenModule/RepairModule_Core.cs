@@ -48,7 +48,7 @@ namespace StarCore.RepairModule
                 }
             }
         }
-        private bool ignoreArmor;
+        public bool ignoreArmor;
         private event Action<bool> OnIgnoreArmorChanged;
         public bool PriorityOnly
         {
@@ -62,7 +62,7 @@ namespace StarCore.RepairModule
                 }
             }
         }
-        private bool priorityOnly;
+        public bool priorityOnly;
         private event Action<bool> OnPriorityOnlyChanged;
         public long SubsystemPriority
         {
@@ -77,7 +77,7 @@ namespace StarCore.RepairModule
                 }
             }
         }
-        private RepairPriority subsystemPriority = RepairPriority.None;
+        public RepairPriority subsystemPriority = RepairPriority.None;
         private event Action<long> OnSubsystemPriorityChanged;
 
         // General Settings     
@@ -460,7 +460,7 @@ namespace StarCore.RepairModule
             return " " + itemModelName; // Default if no "_" found
         }
         
-        private RepairPriority GetPriorityFromLong(long priority)
+        public RepairPriority GetPriorityFromLong(long priority)
         {
             switch (priority)
             {
@@ -481,7 +481,7 @@ namespace StarCore.RepairModule
             }
         }
 
-        private long GetLongFromPriority(RepairPriority priority)
+        public long GetLongFromPriority(RepairPriority priority)
         {
             switch (priority)
             {
