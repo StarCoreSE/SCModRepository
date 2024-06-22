@@ -16,7 +16,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
         /// <summary>
         /// The number of seconds to drain one ticket per captured zone.
         /// </summary>
-        public const float ZoneTicketDrainRate = 4;
+        public const float ZoneTicketDrainRate = 1.5;
 
         public override string ReadableName { get; internal set; } = "Team Deathmatch w/ Zones";
 
@@ -84,7 +84,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
 
         public override int CalculateFactionPoints(IMyFaction faction)
         {
-            int points = base.CalculateFactionPoints(faction);
+            int points = base.CalculateFactionPoints(faction) + (int) _matchTimer.CurrentMatchTime.TotalSeconds;
             return points == -1 ? -1 : points - _zonePointTracker.GetFactionPoints(faction);
         }
     }
