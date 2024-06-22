@@ -183,6 +183,12 @@ namespace SC.SUGMA
             CurrentGamemode = (GamemodeBase)_components[id];
             CurrentGamemode.StartRound(arguments);
 
+            if (!CurrentGamemode.IsStarted)
+            {
+                CurrentGamemode = null;
+                return false;
+            }
+
             SUtils.SetWorldPermissionsForMatch(true);
 
             if (MyAPIGateway.Session.IsServer || notifyNetwork)
