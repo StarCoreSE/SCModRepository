@@ -95,6 +95,8 @@ namespace SC.SUGMA.GameState
                 }
             }
 
+            if (MyAPIGateway.Session.IsServer)
+                return;
             // Visuals
             var stupidMatrix = MatrixD.CreateWorld(Sphere.Center, Vector3D.Up, Vector3D.Forward);
             if (IsVisible)
