@@ -16,7 +16,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
         /// <summary>
         /// The number of seconds to drain one ticket per captured zone.
         /// </summary>
-        public const float ZoneTicketDrainRate = 2;
+        public const float ZoneTicketDrainRate = 1;
 
         public override string ReadableName { get; internal set; } = "Team Deathmatch w/ Zones";
 
