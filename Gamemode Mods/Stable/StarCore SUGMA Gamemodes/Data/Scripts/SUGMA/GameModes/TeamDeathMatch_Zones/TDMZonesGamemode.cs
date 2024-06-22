@@ -84,7 +84,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
 
         public override int CalculateFactionPoints(IMyFaction faction)
         {
-            int points = base.CalculateFactionPoints(faction);
+            int points = base.CalculateFactionPoints(faction) + _matchTimer.CurrentMatchTime.TotalSeconds;
             return points == -1 ? -1 : points - _zonePointTracker.GetFactionPoints(faction);
         }
     }
