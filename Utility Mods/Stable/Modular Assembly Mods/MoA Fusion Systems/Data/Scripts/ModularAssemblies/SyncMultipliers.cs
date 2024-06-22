@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ProtoBuf;
 using Sandbox.ModAPI;
 using VRage.Game.Components;
+using VRage.Game.ModAPI;
 
 namespace FusionSystems
 {
@@ -10,11 +11,14 @@ namespace FusionSystems
     public class SyncMultipliers : MySessionComponentBase
     {
         private const int Channel = 8775;
+        private const int MaxUpdateRateTicks = 10;
+
         private static SyncMultipliers Instance;
         private readonly Dictionary<IMyReactor, float> mReactorList = new Dictionary<IMyReactor, float>();
         private readonly Dictionary<IMyThrust, float> mThrustList = new Dictionary<IMyThrust, float>();
 
         private bool needsUpdate;
+        private HashSet<IMyCubeBlock> _updateLimiter = new HashSet<IMyCubeBlock>();
 
         public override void LoadData()
         {
@@ -28,6 +32,7 @@ namespace FusionSystems
                 needsUpdate = true;
         }
 
+        private int _ticks = 0;
         public override void UpdateAfterSimulation()
         {
             if (needsUpdate && MyAPIGateway.Session != null && MyAPIGateway.Multiplayer != null &&
@@ -37,6 +42,11 @@ namespace FusionSystems
                     MyAPIGateway.Utilities.SerializeToBinary(new SerializableMultiplier(-1, 0, 0,
                         MyAPIGateway.Session.Player.SteamUserId)));
                 needsUpdate = false;
+            }
+
+            if (_ticks % MaxUpdateRateTicks == 0)
+            {
+                _updateLimiter.Clear();
             }
         }
 
@@ -90,7 +100,7 @@ namespace FusionSystems
 
         public static void ReactorOutput(IMyReactor reactor, float output)
         {
-            if (Math.Abs(reactor.MaxOutput - output) < 0.1f)
+            if (Math.Abs(reactor.MaxOutput - output) < 0.1f || !Instance._updateLimiter.Add(reactor))
                 return;
 
             if (MyAPIGateway.Session.IsServer)
@@ -113,7 +123,7 @@ namespace FusionSystems
 
         public static void ThrusterOutput(IMyThrust thrust, float output)
         {
-            if (Math.Abs(thrust.MaxThrust - output) < 1.0f)
+            if (Math.Abs(thrust.MaxThrust - output) < 1.0f || !Instance._updateLimiter.Add(thrust))
                 return;
 
             if (MyAPIGateway.Session.IsServer)
