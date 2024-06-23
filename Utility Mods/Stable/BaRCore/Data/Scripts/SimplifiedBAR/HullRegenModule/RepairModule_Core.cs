@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using Sandbox.ModAPI;
 using Sandbox.Common.ObjectBuilders;
 using Sandbox.Game.Entities;
+using Sandbox.Game.EntityComponents;
+using ProtoBuf;
 using VRage.Utils;
 using VRage.Game;
 using VRage.Game.ModAPI;
@@ -83,6 +85,7 @@ namespace StarCore.RepairModule
         // General Settings     
         float RepairAmount = 2f;
         bool defaultsSet = false;
+        public readonly Guid SettingsID = new Guid("09E18094-46AE-4F55-8215-A407B49F9CAA");
 
         // Timed Sort
         private int SortTimer = 0;
@@ -131,9 +134,14 @@ namespace StarCore.RepairModule
             OnPriorityOnlyChanged += PriorityOnly_Update;
             OnSubsystemPriorityChanged += SubsystemPriority_Update;
 
-            IgnoreArmor = true;
-            PriorityOnly = false;
-            SubsystemPriority = 0;
+            if (!LoadSettings())
+            {
+                IgnoreArmor = true;
+                PriorityOnly = false;
+                SubsystemPriority = 0;
+            }
+
+            SaveSettings();
 
             Block.AppendingCustomInfo += AppendCustomInfo;
 
@@ -163,15 +171,6 @@ namespace StarCore.RepairModule
         public override void UpdateAfterSimulation()
         {
             base.UpdateAfterSimulation();
-
-            if (Block != null && !defaultsSet)
-            {
-                IgnoreArmor = true;
-                PriorityOnly = false;
-                SubsystemPriority = 0;
-
-                defaultsSet = true;
-            }
 
             if (IsServer)
             {
@@ -280,6 +279,20 @@ namespace StarCore.RepairModule
 
             Block = null;
         }
+
+        public override bool IsSerialized()
+        {
+            try
+            {
+                SaveSettings();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+
+            return base.IsSerialized();
+        }
         #endregion
 
         #region Event Handlers
@@ -349,18 +362,81 @@ namespace StarCore.RepairModule
         private void IgnoreArmor_Update(bool _bool)
         {
             IgnoreArmorPacket.UpdateIgnoreArmor(Block.EntityId);
+            SaveSettings();
             ScanRepairTargets(Block.CubeGrid);
         }
 
         private void PriorityOnly_Update(bool _bool)
         {
             PriorityOnlyPacket.UpdatePriorityOnly(Block.EntityId);
+            SaveSettings();
         }
 
         private void SubsystemPriority_Update(long _long)
         {
             SubsystemPriorityPacket.UpdateSubsystemPriority(Block.EntityId);
+            SaveSettings();
             ScanRepairTargets(Block.CubeGrid);
+        }
+        #endregion
+
+        #region Settings
+        bool LoadSettings()
+        {
+            if (Block.Storage == null)
+                return false;
+
+            string rawData;
+            if (!Block.Storage.TryGetValue(SettingsID, out rawData))
+                return false;
+
+            try
+            {
+                var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<RepairSettings>(Convert.FromBase64String(rawData));
+
+                if (loadedSettings != null)
+                {
+                    IgnoreArmor = loadedSettings.IgnoreArmor;
+                    PriorityOnly = loadedSettings.PriorityOnly;
+                    SubsystemPriority = loadedSettings.SubsystemPriority;
+
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                MyLog.Default.WriteLineAndConsole($"Error loading settings!\n{e}");
+            }
+
+            return false;
+        }
+
+        void SaveSettings()
+        {
+            try
+            {
+                if (Block == null)
+                    return;
+
+                if (MyAPIGateway.Utilities == null)
+                    throw new NullReferenceException($"MyAPIGateway.Utilities == null; entId={Entity?.EntityId};");
+
+                if (Block.Storage == null)
+                    Block.Storage = new MyModStorageComponent();
+
+                var settings = new RepairSettings
+                {
+                    IgnoreArmor = IgnoreArmor,
+                    PriorityOnly = PriorityOnly,
+                    SubsystemPriority = SubsystemPriority
+                };
+
+                Block.Storage.SetValue(SettingsID, Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(settings)));
+            }
+            catch (Exception e)
+            {
+                MyLog.Default.WriteLineAndConsole($"Error saving settings!\n{e}");
+            }
         }
         #endregion
 
@@ -662,5 +738,18 @@ namespace StarCore.RepairModule
             }
         }      
         #endregion
+    }
+
+    [ProtoContract]
+    public class RepairSettings
+    {
+        [ProtoMember(41)]
+        public bool IgnoreArmor { get; set; }
+
+        [ProtoMember(42)]
+        public bool PriorityOnly { get; set; }
+
+        [ProtoMember(43)]
+        public long SubsystemPriority { get; set; }
     }
 }
