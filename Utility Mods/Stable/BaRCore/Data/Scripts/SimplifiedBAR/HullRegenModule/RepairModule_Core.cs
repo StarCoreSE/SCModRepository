@@ -84,7 +84,6 @@ namespace StarCore.RepairModule
 
         // General Settings     
         float RepairAmount = 4f;
-        bool defaultsSet = false;
         public readonly Guid SettingsID = new Guid("09E18094-46AE-4F55-8215-A407B49F9CAA");
 
         // Timed Sort
