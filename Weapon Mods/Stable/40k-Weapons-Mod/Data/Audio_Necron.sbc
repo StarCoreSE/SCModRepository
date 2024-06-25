@@ -123,10 +123,10 @@
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>2</Volume>
+      <Volume>3</Volume>
       <PitchVariation>10</PitchVariation>
       <DistantSounds>
-        <DistantSound DistanceCrossFade="10" Distance="600" Sound = "NecronMonoFireDist" />
+        <DistantSound DistanceCrossFade="10" Distance="1000" Sound = "NecronMonoFireDist" />
       </DistantSounds>
       <Loopable>false</Loopable>
       <Waves>
@@ -142,7 +142,7 @@
         <SubtypeId>NecronMonoFireDist</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>6000</MaxDistance>
+      <MaxDistance>8000</MaxDistance>
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>35</DynamicMusicAmount>
@@ -212,7 +212,7 @@
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>2</Volume>
+      <Volume>1</Volume>
       <PitchVariation>10</PitchVariation>
       <Loopable>false</Loopable>
       <Waves>
@@ -233,7 +233,7 @@
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>4</Volume>
+      <Volume>1</Volume>
       <PitchVariation>10</PitchVariation>
       <Loopable>false</Loopable>
       <Waves>
@@ -254,7 +254,7 @@
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>1</Volume>
+      <Volume>0.5</Volume>
       <PitchVariation>10</PitchVariation>
       <Loopable>false</Loopable>
       <Waves>

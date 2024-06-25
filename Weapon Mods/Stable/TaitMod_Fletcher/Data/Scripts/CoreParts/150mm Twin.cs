@@ -28,11 +28,8 @@ namespace Scripts {
                     
                  },
                 Muzzles = new[] {
-                    "muzzle_missile_01",
-					"muzzle_missile_02",
-                    				
-                    
-                },
+                    "muzzle_missile_1", 
+                    "muzzle_missile_2" },
                 Ejector = "", // Optional; empty from which to eject "shells" if specified.
                 Scope = "camera", // Where line of sight checks are performed from. Must be clear of block collision.
             },
@@ -57,7 +54,7 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "15Cm SKC28R", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "Elbing 15Cm SKC28R", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0.25f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 1f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Advanced, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
@@ -185,7 +182,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                FA15CmCaShell,FA15CmShrap // Must list all primary, shrapnel, and pattern ammos.
+                FA15CmShell,FA15CmShrap // Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = Weapon75_Animation,
             //Upgrades = UpgradeModules,

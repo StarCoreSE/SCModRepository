@@ -45,49 +45,9 @@
     </Sound>
 	
 	
-  <Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>K_SA_RotaryGauss</SubtypeId>
-      </Id>
-      <Category>SHOT</Category>
-      <MaxDistance>4000</MaxDistance>
-    <PreventSynchronization>0</PreventSynchronization>
-      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>1</Volume>
-    <PitchVariation>50</PitchVariation>
-    <DistantSounds>
-        <DistantSound DistanceCrossfade="10" Distance="1750" Sound="K_SA_RotaryGauss_Distant" />
-      </DistantSounds>
-	  <Loopable>false</Loopable>
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\General\RotaryGauss.wav</Start>
-        </Wave>
-        </Waves>
-    </Sound>
+  
 
-    <Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>K_SA_RotaryGauss_Distant</SubtypeId>
-      </Id>
-      <Category>SHOT</Category>
-      <MaxDistance>4000</MaxDistance>
-      <PreventSynchronization>0</PreventSynchronization>
-      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      
-    <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>1</Volume>
-      <Pitch>-5</Pitch>
-      <Loopable>false</Loopable>
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\General\RotaryGauss_Distant.wav</Start>
-        </Wave>
-      </Waves>
-    </Sound>
+    
   
   
   
@@ -135,6 +95,8 @@
       </Waves>
     </Sound>
     
+    
+
     <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
@@ -154,24 +116,7 @@
       </Waves>
     </Sound>
 
-    <Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>Monopole_Charge_Distant</SubtypeId>
-      </Id>
-      <Category>SHOT</Category>
-      <MaxDistance>7000</MaxDistance>
-      <PreventSynchronization>0</PreventSynchronization>
-      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>3</Volume>
-      <Loopable>false</Loopable>
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\Gauss\Monopole_Charge_Distant.wav</Start>
-        </Wave>
-      </Waves>
-    </Sound>
+   
 
 
     
@@ -216,27 +161,7 @@
         </Waves>
     </Sound>
     
-    <Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>Monopole_Charge</SubtypeId>
-      </Id>
-      <Category>SHOT</Category>
-      <MaxDistance>7000</MaxDistance>
-      <PreventSynchronization>0</PreventSynchronization>
-      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>2</Volume>
-      <DistantSounds>
-        <DistantSound DistanceCrossfade="10" Distance="1750" Sound="Monopole_Charge_Distant" />
-      </DistantSounds>
-      <Loopable>false</Loopable>
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\Gauss\Monopole_Charge.wav</Start>
-        </Wave>
-      </Waves>
-    </Sound>
+    
     
 	<Sound>
       <Id>
@@ -666,28 +591,7 @@
     
 
 
-    <Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>Rotary_Gauss_Fire</SubtypeId>
-      </Id>
-      <Category>SHOT</Category>
-      <MaxDistance>5000</MaxDistance>
-      <PreventSynchronization>0</PreventSynchronization>
-      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>1</Volume>
-      <PitchVariation>20</PitchVariation>
-      <DistantSounds>
-        <DistantSound DistanceCrossfade="10" Distance="1750" Sound="Rotary_Gauss_Fire_Distant" />
-      </DistantSounds>
-      <Loopable>false</Loopable>
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\General\RotaryGauss.wav</Start>
-        </Wave>
-      </Waves>
-    </Sound>
+    
     
     <Sound>
       <Id>

@@ -121,7 +121,7 @@
         <!--HAS-->
         <!--<string>HAS_Alecto</string>-->
         <string>HAS_Mammon</string>
-        <string>HAS_Vulcan</string>
+        <string>HAS_Avenger</string>
 
         <!--WYSEMAN ONESHOT-->
         <string>K_SA_Launcher_VI</string>
@@ -129,13 +129,6 @@
 
         <!--EXPANSE-->
         <string>MCRN_Heavy_Torpedo</string>
-
-        <!--Jnick/nate meme weapons
-		<string>JN_175Fixed</string>-->
-        <!--<string>AMP_FlameThrower</string>-->
-        <string>AMP_ArcMelee</string>
-        <!--<string>AMP_CryoShotgun</string>
-		<string>AMP_FlameThrowerSmall</string>-->
 		
 		<string>Type18_Artillery_Block</string>
         <string>Type77_Railgun_Block</string>

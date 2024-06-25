@@ -8,11 +8,11 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>HeavyFighterBay</SubtypeId>
 			</Id>
-			<DisplayName>[MID] Phoenix Snubfighter Launch Bay</DisplayName>
+			<DisplayName>[FLAW] Phoenix Snubfighter Launch Bay</DisplayName>
       		<Description>Launches Powerful strikecraft. Please have target selected, then turn shoot ON, to launch fighters.
      		 Capacity: 1
      		 MaxActive = 1
-			 500 HP Fighter, Holds 10 seconds of ammo for its onboard High Powered Laser.
+			 900 HP Fighter, Holds 10 seconds of ammo for its onboard High Powered Laser.
 			 Deals 300 AMS damage per second.
 				Managed by heat. 'Hawk' and 'Argonaut' Variants to follow.
      		 </Description>		

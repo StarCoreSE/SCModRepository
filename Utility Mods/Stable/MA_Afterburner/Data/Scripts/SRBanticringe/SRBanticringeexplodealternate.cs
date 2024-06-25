@@ -30,6 +30,10 @@ namespace SRBanticringe
 
         private void DamageHandler(object arg1, MyDamageInformation information)
         {
+            var damagedEntity = arg1 as IMySlimBlock;
+            if (damagedEntity == null || damagedEntity.FatBlock != SRB)
+                return;
+
             if (MyUtils.GetRandomInt(0, 100) < 1)
             {
                 DoSpontaneusExplosion();
@@ -85,7 +89,6 @@ namespace SRBanticringe
             {
                 SRB.EnabledChanged -= SRBEnabledChanged;
             }
-            MyAPIGateway.Session.DamageSystem.RegisterAfterDamageHandler(0, DamageHandler);
         }
     }
 }

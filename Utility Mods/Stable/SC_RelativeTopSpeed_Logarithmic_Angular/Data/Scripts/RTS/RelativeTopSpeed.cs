@@ -112,7 +112,7 @@ namespace RelativeTopSpeedGV
                 return;
 
             //Ignoring suspension wheels and debris
-            if (grid.BlocksCount <= 2)
+            if (grid.BlocksCount <= 0)
             {
                 /*foreach (var block in grid.GetBlocks())
                 {
@@ -226,26 +226,29 @@ namespace RelativeTopSpeedGV
                     var gridsToAdd = new ConcurrentBag<MyCubeGrid>();
                     var gridsToRemove = new ConcurrentBag<MyCubeGrid>();
 
-                    foreach (var grid in PassiveGrids)
+                    lock (PassiveGrids)
                     {
-                        if (!HasActivationBlock(grid))
+                        foreach (var grid in PassiveGrids.ToList()) // ToList() to avoid modification during enumeration
                         {
-                            continue;
+                            if (!HasActivationBlock(grid))
+                            {
+                                continue;
+                            }
+                            if (IsMoving(grid))
+                            {
+                                gridsToAdd.Add(grid);
+                                gridsToRemove.Add(grid);
+                            }
                         }
-                        if (IsMoving(grid))
-                        {
-                            gridsToAdd.Add(grid);
-                            gridsToRemove.Add(grid);
-                        }
-                    }
 
-                    foreach (var grid in gridsToAdd)
-                    {
-                        ActiveGrids.Add(grid);
-                    }
-                    foreach (var grid in gridsToRemove)
-                    {
-                        PassiveGrids.Remove(grid);
+                        foreach (var grid in gridsToAdd)
+                        {
+                            ActiveGrids.Add(grid);
+                        }
+                        foreach (var grid in gridsToRemove)
+                        {
+                            PassiveGrids.Remove(grid);
+                        }
                     }
                 });
 
@@ -254,22 +257,25 @@ namespace RelativeTopSpeedGV
                     var gridsToAdd = new ConcurrentBag<MyCubeGrid>();
                     var gridsToRemove = new ConcurrentBag<MyCubeGrid>();
 
-                    foreach (var grid in ActiveGrids)
+                    lock (ActiveGrids)
                     {
-                        if (!IsMoving(grid) || !HasActivationBlock(grid))
+                        foreach (var grid in ActiveGrids.ToList()) // ToList() to avoid modification during enumeration
                         {
-                            gridsToAdd.Add(grid);
-                            gridsToRemove.Add(grid);
+                            if (!IsMoving(grid) || !HasActivationBlock(grid))
+                            {
+                                gridsToAdd.Add(grid);
+                                gridsToRemove.Add(grid);
+                            }
                         }
-                    }
 
-                    foreach (var grid in gridsToAdd)
-                    {
-                        PassiveGrids.Add(grid);
-                    }
-                    foreach (var grid in gridsToRemove)
-                    {
-                        ActiveGrids.Remove(grid);
+                        foreach (var grid in gridsToAdd)
+                        {
+                            PassiveGrids.Add(grid);
+                        }
+                        foreach (var grid in gridsToRemove)
+                        {
+                            ActiveGrids.Remove(grid);
+                        }
                     }
                 });
 
@@ -277,23 +283,26 @@ namespace RelativeTopSpeedGV
                 {
                     var keysToRemove = new ConcurrentBag<long>();
 
-                    foreach (var key in AccelForces.Keys)
+                    lock (AccelForces)
                     {
-                        try
+                        foreach (var key in AccelForces.Keys.ToList()) // ToList() to avoid modification during enumeration
+                        {
+                            try
+                            {
+                                Vector3 value;
+                                if (AccelForces.TryGetValue(key, out value) && value == Vector3.Zero)
+                                {
+                                    keysToRemove.Add(key);
+                                }
+                            }
+                            catch { }
+                        }
+
+                        foreach (var key in keysToRemove)
                         {
                             Vector3 value;
-                            if (AccelForces.TryGetValue(key, out value) && value == Vector3.Zero)
-                            {
-                                keysToRemove.Add(key);
-                            }
+                            AccelForces.TryRemove(key, out value);
                         }
-                        catch { }
-                    }
-
-                    foreach (var key in keysToRemove)
-                    {
-                        Vector3 value;
-                        AccelForces.TryRemove(key, out value);
                     }
                 });
 
@@ -302,10 +311,13 @@ namespace RelativeTopSpeedGV
 
             try
             {
-                parallelTask.ForEach(ActiveGrids.ToArray(), (grid) =>
+                lock (ActiveGrids)
                 {
-                    UpdateGrid(grid);
-                });
+                    parallelTask.ForEach(ActiveGrids.ToArray(), (grid) =>
+                    {
+                        UpdateGrid(grid);
+                    });
+                }
             }
             catch (Exception ex)
             {

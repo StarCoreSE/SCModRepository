@@ -1,20 +1,21 @@
 ﻿using System.Collections.Generic;
+using FusionSystems.FusionParts;
 using VRageMath;
-using static MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication.DefinitionDefs;
+using static FusionSystems.Communication.DefinitionDefs;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
+namespace FusionSystems
 {
     internal partial class ModularDefinition
     {
         // You can declare functions in here, and they are shared between all other ModularDefinition files.
 
         // This is the important bit.
-        private PhysicalDefinition Modular_Fusion => new PhysicalDefinition
+        private ModularPhysicalDefinition ModularFusion => new ModularPhysicalDefinition
         {
             // Unique name of the definition.
             Name = "Modular_Fusion",
 
-            OnInit = () => { S_FusionManager.I.Definition = this; },
+            OnInit = () => { S_FusionManager.I.FusionDefinition = this; },
 
             // Triggers whenever a new part is added to an assembly.
             OnPartAdd = S_FusionManager.I.OnPartAdd,
@@ -23,16 +24,16 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
             OnPartRemove = S_FusionManager.I.OnPartRemove,
 
             // Triggers whenever a part is destroyed, simultaneously with OnPartRemove
-            OnPartDestroy = (PhysicalAssemblyId, BlockEntity, IsBaseBlock) =>
+            OnPartDestroy = (physicalAssemblyId, blockEntity, isBaseBlock) =>
             {
                 // You can remove this function, and any others if need be.
             },
 
             // The most important block in an assembly. Connection checking starts here.
-            BaseBlock = null,
+            BaseBlockSubtype = null,
 
             // All SubtypeIds that can be part of this assembly.
-            AllowedBlocks = new[]
+            AllowedBlockSubtypes = new[]
             {
                 "Caster_FocusLens",
                 "Caster_Accelerator_0",

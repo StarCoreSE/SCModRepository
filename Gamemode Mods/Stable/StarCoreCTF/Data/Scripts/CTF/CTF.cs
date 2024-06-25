@@ -1017,15 +1017,38 @@ namespace Klime.CTF
 
         private void SendGameState()
         {
-            packet.all_flags_packet = null;
-            packet.gamestate_packet = gamestate;
-            packet.packet_op = PacketOp.UpdateGameState;
-            //byte[] serialized = NetworkDebug.SerializeLogged(packet.packet_op.ToString(), packet);
-            byte[] serialized = MyAPIGateway.Utilities.SerializeToBinary(packet);
-
-            foreach (var player in allplayers)
+            try
             {
-                MyAPIGateway.Multiplayer.SendMessageTo(netid, serialized, player.SteamUserId);
+                if (packet == null)
+                {
+                    packet = new PacketBase();
+                }
+
+                if (gamestate == null)
+                {
+                    // Initialize gamestate or handle the error
+                    return;
+                }
+
+                packet.all_flags_packet = null;
+                packet.gamestate_packet = gamestate;
+                packet.packet_op = PacketOp.UpdateGameState;
+
+                byte[] serialized = MyAPIGateway.Utilities.SerializeToBinary(packet);
+                if (allplayers == null)
+                {
+                    // Handle null case, maybe initialize or log an error
+                    return;
+                }
+
+                foreach (var player in allplayers)
+                {
+                    MyAPIGateway.Multiplayer.SendMessageTo(netid, serialized, player.SteamUserId);
+                }
+            }
+            catch (Exception e)
+            {
+                // Handle or log exception
             }
         }
 

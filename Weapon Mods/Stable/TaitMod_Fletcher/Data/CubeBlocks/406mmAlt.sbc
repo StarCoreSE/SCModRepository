@@ -1,17 +1,16 @@
 <?xml version="1.0" ?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<CubeBlocks>
-		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		<!-- <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>406alternate</SubtypeId>
 			</Id>
-			<DisplayName>16" Triple Turret</DisplayName>
+			<DisplayName>[FAS] Iowa</DisplayName>
 			<Description>
 				16 Inch Triple Gun
-				6km AI range, 8km shell range
+				7km AI range, 10km shell range
 				Fires HE amd AP Shells
-				Temp BP: 400
 			</Description>
 			<Icon>Textures\GUI\Icons\406alt.dds</Icon>
 			<CubeSize>Large</CubeSize>
@@ -34,6 +33,6 @@
 				<MountPoint Side="Bottom" StartX="1" StartY="1" EndX="6" EndY="6" />
 			</MountPoints>
 			<BlockPairName>406alternate</BlockPairName>
-		</Definition>
+		</Definition> -->
 	</CubeBlocks>
 </Definitions>

@@ -16,19 +16,19 @@ using VRageMath;
 
 namespace ttrcwm
 {
-    class engine_control_unit
+    class Engine_control_unit
     {
         #region fields
 
         const int NUM_ROTATION_SAMPLES = 6, PHYSICS_ENABLE_DELAY = 6;
         const float MAX_THRUST_LEVEL = 0.2f;
 
-        enum thrust_dir { fore = 0, aft = 3, starboard = 1, port = 4, dorsal = 2, ventral = 5 };
-        class thruster_info     // Technically a struct
+        enum Thrust_dir { fore = 0, aft = 3, starboard = 1, port = 4, dorsal = 2, ventral = 5 };
+        class Thruster_info     // Technically a struct
         {
             public float max_force, actual_max_force;
             public Vector3 max_torque, grid_centre_pos, CoM_offset, reference_vector, static_moment;
-            public thrust_dir nozzle_direction;
+            public Thrust_dir nozzle_direction;
             public float current_setting, prev_setting;
             public bool is_RCS, group_no_RCS, override_cleared;
         };
@@ -48,23 +48,23 @@ namespace ttrcwm
         private List<IMyBlockGroup> _all_groups = new List<IMyBlockGroup>();
         private List<IMyTerminalBlock> _blocks_in_group = new List<IMyTerminalBlock>();
 
-        private Dictionary<MyThrust, thruster_info>[] _thrusters =
+        private Dictionary<MyThrust, Thruster_info>[] _thrusters =
         {
-            new Dictionary<MyThrust, thruster_info>(),   // fore
-            new Dictionary<MyThrust, thruster_info>(),   // starboard
-            new Dictionary<MyThrust, thruster_info>(),   // dorsal
-            new Dictionary<MyThrust, thruster_info>(),   // aft
-            new Dictionary<MyThrust, thruster_info>(),   // port
-            new Dictionary<MyThrust, thruster_info>()    // ventral
+            new Dictionary<MyThrust, Thruster_info>(),   // fore
+            new Dictionary<MyThrust, Thruster_info>(),   // starboard
+            new Dictionary<MyThrust, Thruster_info>(),   // dorsal
+            new Dictionary<MyThrust, Thruster_info>(),   // aft
+            new Dictionary<MyThrust, Thruster_info>(),   // port
+            new Dictionary<MyThrust, Thruster_info>()    // ventral
         };
-        private HashSet<thruster_info>[] _control_sets =
+        private HashSet<Thruster_info>[] _control_sets =
         {
-            new HashSet<thruster_info>(),   // roll clockwise
-            new HashSet<thruster_info>(),   // pitch down
-            new HashSet<thruster_info>(),   // yaw right
-            new HashSet<thruster_info>(),   // roll counter-clockwise
-            new HashSet<thruster_info>(),   // pitch up
-            new HashSet<thruster_info>()    // yaw left
+            new HashSet<Thruster_info>(),   // roll clockwise
+            new HashSet<Thruster_info>(),   // pitch down
+            new HashSet<Thruster_info>(),   // yaw right
+            new HashSet<Thruster_info>(),   // roll counter-clockwise
+            new HashSet<Thruster_info>(),   // pitch up
+            new HashSet<Thruster_info>()    // yaw left
         };
         private float[] _max_force = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
         private float[] _lin_force = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
@@ -87,14 +87,14 @@ namespace ttrcwm
 
         #region Properties
 
-        public bool autopilot_on { get; set; }
-        public bool linear_dampers_on { get; set; }
+        public bool Autopilot_on { get; set; }
+        public bool Linear_dampers_on { get; set; }
 
         #endregion
 
         #region DEBUG
 
-        private void screen_info(string message, int display_time_ms, MyFontEnum font, bool controlled_only)
+        private void Screen_info(string message, int display_time_ms, MyFontEnum font, bool controlled_only)
         {
             try
             {
@@ -125,43 +125,43 @@ namespace ttrcwm
                 num_controlled_thrusters += cur_direction.Count;
             MyLog.Default.WriteLine(string.Format("TTDTWM\ttotal thrusters: {0} ({1}/{2}/{3}/{4}/{5}/{6} controlled)",
                 num_controlled_thrusters,
-                _thrusters[(int)thrust_dir.fore].Count,
-                _thrusters[(int)thrust_dir.aft].Count,
-                _thrusters[(int)thrust_dir.starboard].Count,
-                _thrusters[(int)thrust_dir.port].Count,
-                _thrusters[(int)thrust_dir.dorsal].Count,
-                _thrusters[(int)thrust_dir.ventral].Count));
+                _thrusters[(int)Thrust_dir.fore].Count,
+                _thrusters[(int)Thrust_dir.aft].Count,
+                _thrusters[(int)Thrust_dir.starboard].Count,
+                _thrusters[(int)Thrust_dir.port].Count,
+                _thrusters[(int)Thrust_dir.dorsal].Count,
+                _thrusters[(int)Thrust_dir.ventral].Count));
         }
 
-        private void screen_text(string method_name, string message, int display_time_ms, bool controlled_only)
+        private void Screen_text(string method_name, string message, int display_time_ms, bool controlled_only)
         {
             if (method_name == "")
-                screen_info(string.Format("\"{0}\" {1}", _grid.DisplayName, message), display_time_ms, MyFontEnum.White, controlled_only);
+                Screen_info(string.Format("\"{0}\" {1}", _grid.DisplayName, message), display_time_ms, MyFontEnum.White, controlled_only);
             else
-                screen_info(string.Format("engine_control_unit.{0}(): \"{1}\" {2}", method_name, _grid.DisplayName, message), display_time_ms, MyFontEnum.White, controlled_only);
+                Screen_info(string.Format("engine_control_unit.{0}(): \"{1}\" {2}", method_name, _grid.DisplayName, message), display_time_ms, MyFontEnum.White, controlled_only);
         }
 
         private void screen_vector<type>(string method_name, string vector_name, type[] vector, int display_time_ms, bool controlled_only)
         {
-            screen_text(method_name, string.Format("{0} = {1:F3}/{2:F3}/{3:F3}/{4:F3}/{5:F3}/{6:F3}",
+            Screen_text(method_name, string.Format("{0} = {1:F3}/{2:F3}/{3:F3}/{4:F3}/{5:F3}/{6:F3}",
                 vector_name,
-                vector[(int)thrust_dir.fore],
-                vector[(int)thrust_dir.aft],
-                vector[(int)thrust_dir.starboard],
-                vector[(int)thrust_dir.port],
-                vector[(int)thrust_dir.dorsal],
-                vector[(int)thrust_dir.ventral]), display_time_ms, controlled_only);
+                vector[(int)Thrust_dir.fore],
+                vector[(int)Thrust_dir.aft],
+                vector[(int)Thrust_dir.starboard],
+                vector[(int)Thrust_dir.port],
+                vector[(int)Thrust_dir.dorsal],
+                vector[(int)Thrust_dir.ventral]), display_time_ms, controlled_only);
         }
 
         #endregion
 
         #region torque calculation
 
-        private void refresh_thruster_info_for_single_direction(Dictionary<MyThrust, thruster_info> thrusters)
+        private void Refresh_thruster_info_for_single_direction(Dictionary<MyThrust, Thruster_info> thrusters)
         {
             try
             {
-                thruster_info cur_thruster_info;
+                Thruster_info cur_thruster_info;
 
                 foreach (var cur_thruster in thrusters)
                 {
@@ -176,12 +176,14 @@ namespace ttrcwm
             }
         }
 
-        private void refresh_thruster_info()
+        private void Refresh_thruster_info()
         {
             try
             {
-                for (int dir_index = 0; dir_index < 6; ++dir_index)
-                    refresh_thruster_info_for_single_direction(_thrusters[dir_index]);
+                MyAPIGateway.Parallel.For(0, 6, dir_index =>
+                {
+                    Refresh_thruster_info_for_single_direction(_thrusters[dir_index]);
+                });
             }
             catch (Exception ex)
             {
@@ -190,7 +192,7 @@ namespace ttrcwm
         }
 
 
-        private void calculate_and_apply_torque()
+        private void Calculate_and_apply_torque()
         {
             try
             {
@@ -212,7 +214,7 @@ namespace ttrcwm
                     }
                 }
 
-                if (!_rotation_active || autopilot_on)
+                if (!_rotation_active || Autopilot_on)
                 {
                     useful_torque = Vector3.Zero;
                     parasitic_torque = torque;
@@ -271,16 +273,16 @@ namespace ttrcwm
 
         #region thrust control
 
-        private static void decompose_vector(Vector3 source_vector, float[] decomposed_vector)
+        private static void Decompose_vector(Vector3 source_vector, float[] decomposed_vector)
         {
             try
             {
-                decomposed_vector[(int)thrust_dir.fore] = (source_vector.Z > 0.0f) ? (source_vector.Z) : 0.0f;
-                decomposed_vector[(int)thrust_dir.aft] = (source_vector.Z < 0.0f) ? (-source_vector.Z) : 0.0f;
-                decomposed_vector[(int)thrust_dir.port] = (source_vector.X > 0.0f) ? (source_vector.X) : 0.0f;
-                decomposed_vector[(int)thrust_dir.starboard] = (source_vector.X < 0.0f) ? (-source_vector.X) : 0.0f;
-                decomposed_vector[(int)thrust_dir.ventral] = (source_vector.Y > 0.0f) ? (source_vector.Y) : 0.0f;
-                decomposed_vector[(int)thrust_dir.dorsal] = (source_vector.Y < 0.0f) ? (-source_vector.Y) : 0.0f;
+                decomposed_vector[(int)Thrust_dir.fore] = (source_vector.Z > 0.0f) ? (source_vector.Z) : 0.0f;
+                decomposed_vector[(int)Thrust_dir.aft] = (source_vector.Z < 0.0f) ? (-source_vector.Z) : 0.0f;
+                decomposed_vector[(int)Thrust_dir.port] = (source_vector.X > 0.0f) ? (source_vector.X) : 0.0f;
+                decomposed_vector[(int)Thrust_dir.starboard] = (source_vector.X < 0.0f) ? (-source_vector.X) : 0.0f;
+                decomposed_vector[(int)Thrust_dir.ventral] = (source_vector.Y > 0.0f) ? (source_vector.Y) : 0.0f;
+                decomposed_vector[(int)Thrust_dir.dorsal] = (source_vector.Y < 0.0f) ? (-source_vector.Y) : 0.0f;
             }
             catch (Exception e)
             {
@@ -290,13 +292,13 @@ namespace ttrcwm
             }
         }
 
-        private static void recompose_vector(float[] decomposed_vector, out Vector3 result_vector)
+        private static void Recompose_vector(float[] decomposed_vector, out Vector3 result_vector)
         {
             try
             {
-                result_vector.Z = decomposed_vector[(int)thrust_dir.fore] - decomposed_vector[(int)thrust_dir.aft];
-                result_vector.X = decomposed_vector[(int)thrust_dir.port] - decomposed_vector[(int)thrust_dir.starboard];
-                result_vector.Y = decomposed_vector[(int)thrust_dir.ventral] - decomposed_vector[(int)thrust_dir.dorsal];
+                result_vector.Z = decomposed_vector[(int)Thrust_dir.fore] - decomposed_vector[(int)Thrust_dir.aft];
+                result_vector.X = decomposed_vector[(int)Thrust_dir.port] - decomposed_vector[(int)Thrust_dir.starboard];
+                result_vector.Y = decomposed_vector[(int)Thrust_dir.ventral] - decomposed_vector[(int)Thrust_dir.dorsal];
             }
             catch (Exception e)
             {
@@ -306,7 +308,7 @@ namespace ttrcwm
         }
 
 
-        private void fill_control_sets(thruster_info cur_thruster_info)
+        private void Fill_control_sets(Thruster_info cur_thruster_info)
         {
             try
             {
@@ -314,15 +316,15 @@ namespace ttrcwm
                     return;
 
                 Vector3 sample_vector, reference_norm = Vector3.Normalize(cur_thruster_info.reference_vector);
-                for (int dir_index = 0; dir_index < 6; ++dir_index)
+                MyAPIGateway.Parallel.For(0, 6, dir_index =>
                 {
                     __cur_firing_vector[dir_index] = 1.0f;
-                    recompose_vector(__cur_firing_vector, out sample_vector);
-                    decompose_vector(Vector3.Cross(sample_vector, reference_norm), __linear_component);
+                    Recompose_vector(__cur_firing_vector, out sample_vector);
+                    Decompose_vector(Vector3.Cross(sample_vector, reference_norm), __linear_component);
                     if (__linear_component[(int)cur_thruster_info.nozzle_direction] > 0.0f)
                         _control_sets[dir_index].Add(cur_thruster_info);
                     __cur_firing_vector[dir_index] = 0.0f;
-                }
+                });
             }
             catch (Exception ex)
             {
@@ -333,7 +335,7 @@ namespace ttrcwm
         }
 
 
-        private void refresh_control_sets()
+        private void Refresh_control_sets()
         {
             try
             {
@@ -342,7 +344,7 @@ namespace ttrcwm
                 foreach (var cur_direction in _thrusters)
                 {
                     foreach (var cur_thruster_info in cur_direction.Values)
-                        fill_control_sets(cur_thruster_info);
+                        Fill_control_sets(cur_thruster_info);
                 }
             }
             catch (Exception e)
@@ -353,13 +355,13 @@ namespace ttrcwm
         }
 
 
-        private void apply_thrust_settings(bool reset_all_thrusters)
+        private void Apply_thrust_settings(bool reset_all_thrusters)
         {
             const float MIN_OVERRIDE = 1.001f;
             float setting, setting_ratio;
             int thruster_dir, opposite_dir;
             bool dry_run, reset_thrusters;
-            thruster_info cur_thruster_info;
+            Thruster_info cur_thruster_info;
 
             if (reset_all_thrusters && _all_engines_off && !_force_override_refresh)
                 return;
@@ -490,26 +492,26 @@ namespace ttrcwm
             }
 
             _rotation_active = desirted_angular_velocity.LengthSquared() >= 0.0005f;
-            if (!_rotation_active || _is_gyro_override_active || autopilot_on)
+            if (!_rotation_active || _is_gyro_override_active || Autopilot_on)
             {
-                apply_thrust_settings(reset_all_thrusters: true);
+                Apply_thrust_settings(reset_all_thrusters: true);
                 return;
             }
-            decompose_vector(desirted_angular_velocity, __control_vector);
-            decompose_vector(local_linear_velocity, __linear_velocity);
-            float min_control = (!linear_dampers_on || local_linear_velocity.LengthSquared() <= 1.0f) ? 0.02f : 0.3f,
-                longitudinal_speed = __linear_velocity[(int)thrust_dir.fore] + __linear_velocity[(int)thrust_dir.aft],
-                     lateral_speed = __linear_velocity[(int)thrust_dir.port] + __linear_velocity[(int)thrust_dir.starboard],
-                    vertical_speed = __linear_velocity[(int)thrust_dir.dorsal] + __linear_velocity[(int)thrust_dir.ventral];
-            bool pitch_control_on = __control_vector[(int)thrust_dir.port] + __control_vector[(int)thrust_dir.starboard] >= min_control,
-                   yaw_control_on = __control_vector[(int)thrust_dir.dorsal] + __control_vector[(int)thrust_dir.ventral] >= min_control,
-                  roll_control_on = __control_vector[(int)thrust_dir.fore] + __control_vector[(int)thrust_dir.aft] >= min_control;
-            __rotation_enable[(int)thrust_dir.fore] = __rotation_enable[(int)thrust_dir.aft] = pitch_control_on || yaw_control_on || longitudinal_speed <= 1.0f;
-            __rotation_enable[(int)thrust_dir.port] = __rotation_enable[(int)thrust_dir.starboard] = yaw_control_on || roll_control_on || lateral_speed <= 1.0f;
-            __rotation_enable[(int)thrust_dir.dorsal] = __rotation_enable[(int)thrust_dir.ventral] = pitch_control_on || roll_control_on || vertical_speed <= 1.0f;
+            Decompose_vector(desirted_angular_velocity, __control_vector);
+            Decompose_vector(local_linear_velocity, __linear_velocity);
+            float min_control = (!Linear_dampers_on || local_linear_velocity.LengthSquared() <= 1.0f) ? 0.02f : 0.3f,
+                longitudinal_speed = __linear_velocity[(int)Thrust_dir.fore] + __linear_velocity[(int)Thrust_dir.aft],
+                     lateral_speed = __linear_velocity[(int)Thrust_dir.port] + __linear_velocity[(int)Thrust_dir.starboard],
+                    vertical_speed = __linear_velocity[(int)Thrust_dir.dorsal] + __linear_velocity[(int)Thrust_dir.ventral];
+            bool pitch_control_on = __control_vector[(int)Thrust_dir.port] + __control_vector[(int)Thrust_dir.starboard] >= min_control,
+                   yaw_control_on = __control_vector[(int)Thrust_dir.dorsal] + __control_vector[(int)Thrust_dir.ventral] >= min_control,
+                  roll_control_on = __control_vector[(int)Thrust_dir.fore] + __control_vector[(int)Thrust_dir.aft] >= min_control;
+            __rotation_enable[(int)Thrust_dir.fore] = __rotation_enable[(int)Thrust_dir.aft] = pitch_control_on || yaw_control_on || longitudinal_speed <= 1.0f;
+            __rotation_enable[(int)Thrust_dir.port] = __rotation_enable[(int)Thrust_dir.starboard] = yaw_control_on || roll_control_on || lateral_speed <= 1.0f;
+            __rotation_enable[(int)Thrust_dir.dorsal] = __rotation_enable[(int)Thrust_dir.ventral] = pitch_control_on || roll_control_on || vertical_speed <= 1.0f;
 
             Vector3 local_gravity_force/*, linear_damping*/;
-            if (!linear_dampers_on)
+            if (!Linear_dampers_on)
                 local_gravity_force = /*linear_damping =*/ Vector3.Zero;
             else
             {
@@ -517,8 +519,8 @@ namespace ttrcwm
                 //linear_damping      = (-2.0f * _grid.Physics.Mass) * Vector3.Transform(_grid.Physics.LinearVelocity, inverse_world_rotation);
             }
             //decompose_vector(      linear_damping, __braking_vector );
-            decompose_vector(_manual_thrust, __thrust_vector);
-            decompose_vector(-local_gravity_force, __counter_gravity);
+            Decompose_vector(_manual_thrust, __thrust_vector);
+            Decompose_vector(-local_gravity_force, __counter_gravity);
 
             /*
             for (int dir_index = 0; dir_index < 6; ++dir_index)
@@ -563,31 +565,31 @@ namespace ttrcwm
             }
 
             normalise_thrust();
-            apply_thrust_settings(reset_all_thrusters: false);
+            Apply_thrust_settings(reset_all_thrusters: false);
         }
         #endregion
 
         #region thruster manager
 
-        private static thrust_dir get_nozzle_orientation(MyThrust thruster)
+        private static Thrust_dir Get_nozzle_orientation(MyThrust thruster)
         {
             Vector3I dir_vector = thruster.ThrustForwardVector;
             if (dir_vector == Vector3I.Forward)
-                return thrust_dir.fore;
+                return Thrust_dir.fore;
             if (dir_vector == Vector3I.Backward)
-                return thrust_dir.aft;
+                return Thrust_dir.aft;
             if (dir_vector == Vector3I.Left)
-                return thrust_dir.port;
+                return Thrust_dir.port;
             if (dir_vector == Vector3I.Right)
-                return thrust_dir.starboard;
+                return Thrust_dir.starboard;
             if (dir_vector == Vector3I.Up)
-                return thrust_dir.dorsal;
+                return Thrust_dir.dorsal;
             if (dir_vector == Vector3I.Down)
-                return thrust_dir.ventral;
-            throw new ArgumentException("Thruster " + ((IMyTerminalBlock) thruster).CustomName  + " is not grid-aligned");
+                return Thrust_dir.ventral;
+            throw new ArgumentException("Thruster " + ((IMyTerminalBlock)thruster).CustomName + " is not grid-aligned");
         }
 
-        private void update_reference_vectors()
+        private void Update_reference_vectors()
         {
             try
             {
@@ -643,16 +645,17 @@ namespace ttrcwm
                 foreach (var curGroup in _all_groups)
                 {
                     MyThrust curThruster;
-
                     if (curGroup.Name.ToUpper().Contains("[NO RCS]"))
                     {
                         _blocks_in_group.Clear();
                         curGroup.GetBlocks(_blocks_in_group);
+
                         foreach (var curBlock in _blocks_in_group)
                         {
                             curThruster = curBlock as MyThrust;
                             if (curThruster == null)
                                 continue;
+
                             foreach (var curDirection in _thrusters)
                             {
                                 if (curDirection.ContainsKey(curThruster))
@@ -665,64 +668,60 @@ namespace ttrcwm
                     }
                 }
 
-                foreach (var curDirection in _thrusters)
+                MyAPIGateway.Parallel.ForEach(_thrusters, curDirection =>
                 {
-                    thruster_info curThrusterInfo;
-
                     foreach (var curThruster in curDirection)
                     {
-                        curThrusterInfo = curThruster.Value;
+                        var curThrusterInfo = curThruster.Value;
+
                         if (curThrusterInfo.actual_max_force < 0.01f * curThrusterInfo.max_force || !curThruster.Key.IsWorking)
                             curThrusterInfo.is_RCS = false;
-                        else if (!(curThrusterInfo.is_RCS ^ curThrusterInfo.group_no_RCS))
+                        else if (curThrusterInfo.is_RCS ^ curThrusterInfo.group_no_RCS)
                         {
                             curThrusterInfo.is_RCS = !curThrusterInfo.group_no_RCS;
                             changesMade = true;
                         }
+
                         if (!curThrusterInfo.is_RCS && !curThrusterInfo.override_cleared)
                         {
-                            curThruster.Key.SetValueFloat("Override", 0.0f);
+                            curThruster.Key.ThrustOverride = 0;
                             curThrusterInfo.override_cleared = changesMade = true;
                         }
                     }
-                }
+                });
+
                 if (changesMade)
                 {
-                    for (int dirIndex = 0; dirIndex < 6; ++dirIndex)
+                    MyAPIGateway.Parallel.For(0, 6, dirIndex =>
                     {
-                        _max_force[dirIndex] = 0.0f;
-                        foreach (var curThrusterInfo in _thrusters[dirIndex].Values)
-                        {
-                            if (curThrusterInfo.is_RCS)
-                                _max_force[dirIndex] += curThrusterInfo.max_force;
-                        }
-                    }
+                        _max_force[dirIndex] = _thrusters[dirIndex].Values.Where(t => t.is_RCS).Sum(t => t.max_force);
+                    });
                 }
+
                 if (changesMade || _thruster_added_or_removed)
                 {
-                    refresh_thruster_info();
-                    update_reference_vectors();
-                    refresh_control_sets();
+                    Refresh_thruster_info();
+                    Update_reference_vectors();
+                    Refresh_control_sets();
                     _thruster_added_or_removed = false;
                 }
             }
             catch (Exception e)
             {
-                // Log the error
-                MyLog.Default.WriteLine($"Error occurred in check_thruster_control_changed: {e.Message}");
+                MyLog.Default.WriteLine($"Error in check_thruster_control_changed: {e.Message}");
             }
         }
-
         private void refresh_real_max_forces_for_single_direction(int dir_index, bool atmosphere_present, float air_density)
         {
-            thruster_info      cur_thruster_info;
-            float              thrust_multiplier, planetoid_influence;
+            Thruster_info cur_thruster_info;
+            float thrust_multiplier, planetoid_influence;
             MyThrustDefinition thruster_definition;
 
             _lin_force[dir_index] = 0.0f;
+
             foreach (var cur_thruster in _thrusters[dir_index])
             {
-                cur_thruster_info   = cur_thruster.Value;
+                cur_thruster_info = cur_thruster.Value;
                 thruster_definition = cur_thruster.Key.BlockDefinition;
 
                 if (!atmosphere_present && thruster_definition.NeedsAtmosphereForInfluence)
@@ -731,35 +730,35 @@ namespace ttrcwm
                     planetoid_influence = 1.0f;
                 else
                 {
-                    planetoid_influence = (air_density - thruster_definition.MinPlanetaryInfluence) / (thruster_definition.MaxPlanetaryInfluence - thruster_definition.MinPlanetaryInfluence);
-                    if (planetoid_influence < 0.0f)
-                        planetoid_influence = 0.0f;
-                    else if (planetoid_influence > 1.0f)
-                        planetoid_influence = 1.0f;
+                    planetoid_influence = (air_density - thruster_definition.MinPlanetaryInfluence) /
+                                          (thruster_definition.MaxPlanetaryInfluence - thruster_definition.MinPlanetaryInfluence);
+                    planetoid_influence = MathHelper.Clamp(planetoid_influence, 0.0f, 1.0f);
                 }
-                thrust_multiplier = (1.0f - planetoid_influence) * thruster_definition.EffectivenessAtMinInfluence + planetoid_influence * thruster_definition.EffectivenessAtMaxInfluence;
 
-                cur_thruster_info.actual_max_force = cur_thruster_info.max_force  * thrust_multiplier;
-                _lin_force[dir_index]             += cur_thruster_info.actual_max_force;
+                thrust_multiplier = (1.0f - planetoid_influence) * thruster_definition.EffectivenessAtMinInfluence +
+                                    planetoid_influence * thruster_definition.EffectivenessAtMaxInfluence;
+
+                cur_thruster_info.actual_max_force = cur_thruster_info.max_force * thrust_multiplier;
+                _lin_force[dir_index] += cur_thruster_info.actual_max_force;
             }
         }
 
         private void refresh_real_max_forces()
         {
             BoundingBoxD grid_bounding_box = _grid.PositionComp.WorldAABB;
-            MyPlanet     closest_planetoid = MyGamePruningStructure.GetClosestPlanet(ref grid_bounding_box);
-            bool         atmosphere_present;
-            float        air_density;
+            MyPlanet closest_planetoid = MyGamePruningStructure.GetClosestPlanet(ref grid_bounding_box);
+            bool atmosphere_present;
+            float air_density;
 
             if (closest_planetoid == null)
             {
                 atmosphere_present = false;
-                air_density        = 0.0f;
+                air_density = 0.0f;
             }
             else
             {
                 atmosphere_present = closest_planetoid.HasAtmosphere;
-                air_density        = closest_planetoid.GetAirDensity(grid_bounding_box.Center);
+                air_density = closest_planetoid.GetAirDensity(grid_bounding_box.Center);
             }
 
             for (int dir_index = 0; dir_index < 6; ++dir_index)
@@ -775,12 +774,12 @@ namespace ttrcwm
                 if (MyAPIGateway.Multiplayer == null || MyAPIGateway.Multiplayer.IsServer)
                     thruster.SetValueFloat("Override", 0.0f);
 
-                var new_thruster = new thruster_info();
+                var new_thruster = new Thruster_info();
                 new_thruster.grid_centre_pos = (thruster.Min + thruster.Max) * (_grid.GridSize / 2.0f);
                 new_thruster.max_force = new_thruster.actual_max_force = thruster.BlockDefinition.ForceMagnitude;
                 new_thruster.CoM_offset = new_thruster.reference_vector = new_thruster.grid_centre_pos - _grid_CoM_location;
                 new_thruster.static_moment = new_thruster.grid_centre_pos * new_thruster.max_force;
-                new_thruster.nozzle_direction = get_nozzle_orientation(thruster);
+                new_thruster.nozzle_direction = Get_nozzle_orientation(thruster);
                 new_thruster.override_cleared = false;
                 new_thruster.is_RCS = new_thruster.group_no_RCS = _thruster_added_or_removed = true;
 
@@ -815,11 +814,11 @@ namespace ttrcwm
 
                 for (int dir_index = 0; dir_index < 6; ++dir_index)
                 {
-                    Dictionary<MyThrust, thruster_info> cur_direction = _thrusters[dir_index];
+                    Dictionary<MyThrust, Thruster_info> cur_direction = _thrusters[dir_index];
 
                     if (cur_direction.ContainsKey(thruster))
                     {
-                        thruster_info cur_thruster_info = cur_direction[thruster];
+                        Thruster_info cur_thruster_info = cur_direction[thruster];
                         if (cur_thruster_info.is_RCS)
                             _max_force[(int)cur_thruster_info.nozzle_direction] -= cur_thruster_info.max_force;
                         _lin_force[(int)cur_thruster_info.nozzle_direction] -= cur_thruster_info.actual_max_force;
@@ -837,7 +836,7 @@ namespace ttrcwm
         }
 
 
-        public engine_control_unit(IMyCubeGrid grid_ref)
+        public Engine_control_unit(IMyCubeGrid grid_ref)
         {
             try
             {
@@ -854,7 +853,7 @@ namespace ttrcwm
 
         #region Gyroscope handling
 
-        private void calc_spherical_moment_of_inertia()
+        private void Calc_spherical_moment_of_inertia()
         {
             try
             {
@@ -930,7 +929,7 @@ namespace ttrcwm
                 MyLog.Default.WriteLine($"Error in refresh_gyro_info(): {e}");
             }
 
-            if (autopilot_on)
+            if (Autopilot_on)
             {
                 gyro_override = Vector3.Zero;
                 _is_gyro_override_active = true;
@@ -942,7 +941,7 @@ namespace ttrcwm
             }
             else if (_is_gyro_override_active)
             {
-                reset_user_input(reset_gyros_only: true);
+                Reset_user_input(reset_gyros_only: true);
                 _is_gyro_override_active = false;
             }
 
@@ -1002,26 +1001,26 @@ namespace ttrcwm
 
         #region Flight controls handling
 
-        public bool is_under_control_of(VRage.Game.ModAPI.Interfaces.IMyControllableEntity current_controller)
+        public bool Is_under_control_of(VRage.Game.ModAPI.Interfaces.IMyControllableEntity current_controller)
         {
-            var    controller = current_controller as MyShipController;
+            var controller = current_controller as MyShipController;
             return controller != null && controller.CubeGrid == _grid;
         }
 
-        public void check_autopilot(IMyRemoteControl RC_block)
+        public void Check_autopilot(IMyRemoteControl RC_block)
         {
             //var RC_block_proper = (MyRemoteControl) RC_block;
             //autopilot_on       |= ((MyObjectBuilder_RemoteControl) RC_block_proper.GetObjectBuilderCubeBlock()).AutoPilotEnabled;
-            autopilot_on |= RC_block.IsAutoPilotEnabled;
+            Autopilot_on |= RC_block.IsAutoPilotEnabled;
         }
 
-        public void reset_user_input(bool reset_gyros_only)
+        public void Reset_user_input(bool reset_gyros_only)
         {
-            _manual_rotation       = _target_rotation = Vector3.Zero;
+            _manual_rotation = _target_rotation = Vector3.Zero;
             _under_player_control &= reset_gyros_only;
         }
 
-        public void translate_linear_input(Vector3 input_thrust, VRage.Game.ModAPI.Interfaces.IMyControllableEntity current_controller)
+        public void Translate_linear_input(Vector3 input_thrust, VRage.Game.ModAPI.Interfaces.IMyControllableEntity current_controller)
         {
             try
             {
@@ -1035,7 +1034,7 @@ namespace ttrcwm
                 }
                 else
                 {
-                    reset_user_input(reset_gyros_only: false);
+                    Reset_user_input(reset_gyros_only: false);
                 }
             }
             catch (Exception e)
@@ -1047,14 +1046,14 @@ namespace ttrcwm
 
 
 
-        public void translate_rotation_input(Vector3 input_rotation, VRage.Game.ModAPI.Interfaces.IMyControllableEntity current_controller)
+        public void Translate_rotation_input(Vector3 input_rotation, VRage.Game.ModAPI.Interfaces.IMyControllableEntity current_controller)
         {
             try
             {
                 var controller = current_controller as MyShipController;
                 if (controller == null || controller.CubeGrid != _grid)
                 {
-                    reset_user_input(reset_gyros_only: false);
+                    Reset_user_input(reset_gyros_only: false);
                     return;
                 }
 
@@ -1079,7 +1078,7 @@ namespace ttrcwm
         const int checkFrequency = 10;  // Check every 10 calls, i.e., at 6Hz
         List<IMyConveyorSorter> cachedBlocks = new List<IMyConveyorSorter>();  // Class-level variable to cache blocks
 
-        public void handle_60Hz()
+        public void Handle_60Hz()
         {
             counter++;
             if (counter % checkFrequency != 0)
@@ -1110,7 +1109,7 @@ namespace ttrcwm
                     {
                         try
                         {
-                            thruster_info curThrusterInfo = curThruster.Value;
+                            Thruster_info curThrusterInfo = curThruster.Value;
                             if (!curThrusterInfo.override_cleared)
                             {
                                 curThruster.Key.SetValueFloat("Override", 0.0f);
@@ -1137,9 +1136,9 @@ namespace ttrcwm
 
                     if (changesMade || _thruster_added_or_removed)
                     {
-                        refresh_thruster_info();
-                        update_reference_vectors();
-                        refresh_control_sets();
+                        Refresh_thruster_info();
+                        Update_reference_vectors();
+                        Refresh_control_sets();
                         _thruster_added_or_removed = false;
                     }
                     disabler = true;
@@ -1191,7 +1190,7 @@ namespace ttrcwm
                     }
                 });
 
-                calculate_and_apply_torque();
+                Calculate_and_apply_torque();
             }
             catch (Exception e)
             {
@@ -1199,23 +1198,23 @@ namespace ttrcwm
             }
         }
 
-        public void handle_4Hz()
+        public void Handle_4Hz()
         {
             try
             {
                 if (_grid.Physics == null || _grid.Physics.IsStatic)
                     return;
 
-                calc_spherical_moment_of_inertia();
+                Calc_spherical_moment_of_inertia();
                 refresh_gyro_info();
                 var current_grid_CoM = Vector3D.Transform(_grid.Physics.CenterOfMassWorld, _inverse_world_transform);
                 bool CoM_shifted = (current_grid_CoM - _grid_CoM_location).LengthSquared() > 0.01f;
                 if (CoM_shifted)
                 {
                     _grid_CoM_location = current_grid_CoM;
-                    refresh_thruster_info();
-                    update_reference_vectors();
-                    refresh_control_sets();
+                    Refresh_thruster_info();
+                    Update_reference_vectors();
+                    Refresh_control_sets();
                     //log_ECU_action("handle_4Hz", "CoM refreshed");
                 }
                 refresh_real_max_forces();
@@ -1226,7 +1225,7 @@ namespace ttrcwm
             }
         }
 
-        public void handle_2s_period()
+        public void Handle_2s_period()
         {
             try
             {

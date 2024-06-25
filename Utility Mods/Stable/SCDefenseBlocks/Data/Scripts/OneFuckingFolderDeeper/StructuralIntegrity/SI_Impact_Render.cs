@@ -94,10 +94,10 @@ namespace StarCore.StructuralIntegrity
 		private IMyEntity generateShieldEffect(string name)
 		{
 			
-			SI_Core.shieldEffectLargeObjectBuilder.CubeBlocks[0].SubtypeName = name;
+			SI_Core.impactEffectObjectBuilder.CubeBlocks[0].SubtypeName = name;
 
-			MyAPIGateway.Entities.RemapObjectBuilder(SI_Core.shieldEffectLargeObjectBuilder);
-			var ent = MyAPIGateway.Entities.CreateFromObjectBuilder(SI_Core.shieldEffectLargeObjectBuilder);
+			MyAPIGateway.Entities.RemapObjectBuilder(SI_Core.impactEffectObjectBuilder);
+			var ent = MyAPIGateway.Entities.CreateFromObjectBuilder(SI_Core.impactEffectObjectBuilder);
 			ent.Flags &= ~EntityFlags.Sync;
 			ent.Flags &= ~EntityFlags.Save;
 

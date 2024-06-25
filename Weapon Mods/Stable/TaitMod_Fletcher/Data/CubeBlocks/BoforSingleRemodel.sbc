@@ -1,16 +1,15 @@
 <?xml version="1.0" ?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<CubeBlocks>
+	<!--<CubeBlocks>
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>BoforSingleRemodel</SubtypeId>
 			</Id>
-			<DisplayName>40 mm/56 Bofors Single Mount</DisplayName>
+			<DisplayName>[FAS] 40 mm/56 Bofors Single Mount</DisplayName>
 			<Description>
 				40mm Single Bofor
 				4km Range, only effective vs smart munitions
-				Interim BP: 75
 			</Description>
 			<Icon>Textures\GUI\Icons\Cubes\BoforSingleRemodel.dds</Icon>
 			<CubeSize>Large</CubeSize>
@@ -43,5 +42,5 @@
 				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\BoforSingleRemodel_BS2.mwm"/>
 			</BuildProgressModels>
 		</Definition>
-	</CubeBlocks>
+	</CubeBlocks> -->
 </Definitions>

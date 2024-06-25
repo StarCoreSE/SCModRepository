@@ -1,51 +1,119 @@
 ﻿using System;
 using System.Collections.Generic;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionReactor;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts.FusionThruster;
+using System.Linq;
+using FusionSystems.Communication;
+using FusionSystems.FusionParts.FusionReactor;
+using FusionSystems.FusionParts.FusionThruster;
+using FusionSystems.HeatParts;
 using Sandbox.ModAPI;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
+namespace FusionSystems.
     FusionParts
 {
     internal class S_FusionSystem
     {
-        public const float MegawattsPerFusionPower = 85;
-        public const float NewtonsPerFusionPower = 3200000;
+        public const float MegawattsPerFusionPower = 29;
+        public const float NewtonsPerFusionPower = 12800000;
 
         public List<S_FusionArm> Arms = new List<S_FusionArm>();
-        public int PhysicalAssemblyId;
-        public float PowerCapacity;
+        public int BlockCount;
+        public readonly IMyCubeGrid Grid;
 
+        /// <summary>
+        ///     Maximum power storage
+        /// </summary>
+        public float MaxPowerStored;
+
+        public int PhysicalAssemblyId;
+
+        /// <summary>
+        ///     Total power consumed
+        /// </summary>
+        public float PowerConsumption;
+
+        /// <summary>
+        ///     Total power generated minus PowerConsumption
+        /// </summary>
         public float PowerGeneration;
-        public float PowerStored;
+
+        /// <summary>
+        ///     Current power stored
+        /// </summary>
+        public float PowerStored
+        {
+            get
+            {
+                return ModularApi.GetAssemblyProperty<float>(PhysicalAssemblyId, "PowerStored");
+            }
+            set
+            {
+                ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "PowerStored", value);
+            }
+        }
+
         public List<FusionReactorLogic> Reactors = new List<FusionReactorLogic>();
         public List<FusionThrusterLogic> Thrusters = new List<FusionThrusterLogic>();
 
         public S_FusionSystem(int physicalAssemblyId)
         {
             PhysicalAssemblyId = physicalAssemblyId;
+            Grid = ModularApi.GetAssemblyGrid(physicalAssemblyId);
         }
 
-        private static ModularDefinitionAPI ModularAPI => ModularDefinition.ModularAPI;
+        private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
 
         public void AddPart(IMyCubeBlock newPart)
         {
             if (newPart == null)
                 return;
 
+            BlockCount++;
+
             // Scan for 'arms' connected on both ends to the feeder block.
             switch (newPart.BlockDefinition.SubtypeName)
             {
                 case "Caster_Accelerator_0":
                 case "Caster_Accelerator_90":
-                    var newArm = new S_FusionArm((MyEntity)newPart, "Caster_Feeder");
+                    var newArm = new S_FusionArm(newPart, "Caster_Feeder");
                     if (newArm.IsValid)
                     {
                         Arms.Add(newArm);
                         UpdatePower(true);
+                    }
+
+                    break;
+                case "Caster_Feeder"
+                    : // This is awful and I hate it. The idea is to generate new loops if a feeder is placed.
+                    var connectedAccelerators = new List<IMyCubeBlock>();
+                    foreach (var connectedBlock in ModularApi.GetConnectedBlocks(newPart, "Modular_Fusion"))
+                    {
+                        var subtype = connectedBlock?.BlockDefinition.SubtypeName;
+                        if (subtype != "Caster_Accelerator_0" && subtype != "Caster_Accelerator_90")
+                            continue;
+                        connectedAccelerators.Add(connectedBlock);
+                    }
+
+                    foreach (var accelerator in connectedAccelerators)
+                    {
+                        if (Arms.Any(arm => arm.Parts.Contains(accelerator)))
+                            continue;
+
+                        var accelsShareArm = false;
+                        var newArm2 = new S_FusionArm(accelerator, "Caster_Feeder");
+                        if (newArm2.IsValid)
+                        {
+                            Arms.Add(newArm2);
+                            UpdatePower(true);
+
+                            foreach (var accelerator2 in connectedAccelerators)
+                                if (accelerator2 != accelerator && newArm2.Parts.Contains(accelerator2))
+                                    accelsShareArm = true;
+                        }
+
+                        if (accelsShareArm)
+                            break;
                     }
 
                     break;
@@ -58,7 +126,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 {
                     Thrusters.Add(logic);
                     logic.MemberSystem = this;
-                    logic.UpdateThrust(PowerGeneration, NewtonsPerFusionPower);
+                    logic.UpdatePower(PowerGeneration, NewtonsPerFusionPower);
                 }
             }
 
@@ -81,6 +149,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             if (part == null)
                 return;
 
+            BlockCount--;
+
             if (part is IMyThrust)
             {
                 var logic = part.GameLogic.GetAs<FusionThrusterLogic>();
@@ -95,24 +165,29 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 Reactors.Remove(logic);
             }
 
-            foreach (var arm in Arms)
+            foreach (var arm in Arms.ToList())
                 if (arm.Parts.Contains(part))
                 {
                     Arms.Remove(arm);
                     UpdatePower(true);
-                    break;
                 }
+
+            if (BlockCount <= 0)
+                S_FusionManager.I.FusionSystems.Remove(PhysicalAssemblyId);
+
+            UpdatePower();
         }
 
         private void UpdatePower(bool updateReactors = false)
         {
-            var powerGeneration = 0.01f;
-            var powerCapacity = 0.01f;
+            float generationModifier = 1/(HeatManager.I.GetGridHeatLevel(Grid) + 0.5f);
+            var powerGeneration = float.Epsilon;
+            var powerCapacity = float.Epsilon;
             var totalPowerUsage = 0f;
 
             foreach (var arm in Arms)
             {
-                powerGeneration += arm.PowerGeneration;
+                powerGeneration += arm.PowerGeneration * generationModifier;
                 powerCapacity += arm.PowerStorage;
             }
 
@@ -130,23 +205,32 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 totalPowerUsage += thruster?.PowerConsumption ?? 0;
 
                 if (updateReactors)
-                    thruster?.UpdateThrust(powerGeneration, NewtonsPerFusionPower);
+                    thruster?.UpdatePower(powerGeneration, NewtonsPerFusionPower);
             }
 
             // Subtract power usage afterwards so that all reactors have the same stats.
             PowerGeneration = powerGeneration;
-            PowerCapacity = powerCapacity;
+            MaxPowerStored = powerCapacity;
+            PowerConsumption = totalPowerUsage;
             PowerGeneration -= totalPowerUsage;
 
             // Update PowerStored
             PowerStored += PowerGeneration;
-            if (PowerStored > PowerCapacity)
-                PowerStored = PowerCapacity;
+            if (PowerStored > MaxPowerStored) PowerStored = MaxPowerStored;
+            //PowerGeneration = 0;
+            ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "HeatGeneration", PowerConsumption * MegawattsPerFusionPower);
         }
 
         public void UpdateTick()
         {
-            UpdatePower();
+            UpdatePower(true);
+        }
+
+        private void RemoveBlockInLoops(MyEntity entity)
+        {
+            foreach (var loop in Arms.ToList())
+                if (loop.Parts.Contains((IMyCubeBlock)entity))
+                    Arms.Remove(loop);
         }
     }
 }

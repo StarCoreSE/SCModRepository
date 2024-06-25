@@ -196,8 +196,8 @@ namespace klime.EntityCover
             this.modelName = modelName;
         }
 
-        public bool DoDamage(float damage, MyStringHash damageSource, bool sync, MyHitInfo? hitInfo = null,
-            long attackerId = 0, long realHitEntityId = 0, bool shouldDetonateAmmo = true)
+        public bool DoDamage(float damage, MyStringHash damageSource, bool sync, MyHitInfo? hitInfo = null, long attackerId = 0,
+            long realHitEntityId = 0, bool shouldDetonateAmmo = true, MyStringHash? extraInfo = null)
         {
             return true;
         }
@@ -239,6 +239,9 @@ namespace klime.EntityCover
         {
             // Find by entityId
             var blockEnt = allCoverEnts.Find(x => x.attachedEntityId == entityId);
+            MyCubeGrid coverGrid = MyAPIGateway.Entities.GetEntityById(entityId) as MyCubeGrid;
+            if (coverGrid != null)
+                coverGrid.DestructibleBlocks = false;
 
             if (blockEnt != null)
             {
