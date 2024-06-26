@@ -83,8 +83,7 @@ namespace StarCore.RepairModule
         private event Action<long> OnSubsystemPriorityChanged;
 
         // General Settings     
-        float RepairAmount = 2f;
-        bool defaultsSet = false;
+        float RepairAmount = 4f;
         public readonly Guid SettingsID = new Guid("09E18094-46AE-4F55-8215-A407B49F9CAA");
 
         // Timed Sort
