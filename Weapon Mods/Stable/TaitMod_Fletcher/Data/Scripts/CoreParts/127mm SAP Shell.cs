@@ -139,7 +139,7 @@ namespace Scripts
             {
                 ByBlockHit = new ByBlockHitDef
                 {
-                    Enable = true,
+                    Enable = false,
                     Radius = 5f, // Meters
                     Damage = 5f,
                     Depth = 1f, // Meters
@@ -153,7 +153,7 @@ namespace Scripts
                 },
                 EndOfLife = new EndOfLifeDef
                 {
-                   Enable = true,
+                   Enable = false,
                     Radius = 20f,
                     Damage = 100f,
                     Depth = 0f,
@@ -496,7 +496,7 @@ namespace Scripts
             {
                 ByBlockHit = new ByBlockHitDef
                 {
-                    Enable = true,
+                    Enable = false,
                     Radius = 5f, // Meters
                     Damage = 15f,
                     Depth = 1f, // Meters

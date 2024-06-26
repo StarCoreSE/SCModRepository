@@ -66,8 +66,8 @@ namespace Scripts
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
                 AmmoRound = "Plasma-X-Shrap", // AmmoRound field of the ammo to spawn.
-                Fragments = 9, // Number of projectiles to spawn.
-                Degrees = 65, // Cone in which to randomize direction of spawned projectiles.
+                Fragments = 7, // Number of projectiles to spawn.
+                Degrees = 50, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = true, // fragments will not inherit velocity from parent.
                 Offset = -5f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards), value is read from parent ammo type.
@@ -1150,7 +1150,7 @@ namespace Scripts
             AmmoRound = "Plasma-X-Shrap", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 22000f, // Direct damage; one steel plate is worth 100. 
+            BaseDamage = 25385f, // Direct damage; one steel plate is worth 100. 
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil.
@@ -1270,7 +1270,7 @@ namespace Scripts
             {
                 ByBlockHit = new ByBlockHitDef
                 {
-                    Enable = true,
+                    Enable = false,
                     Radius = 2.5f, // Meters
                     Damage = 5000f,
                     Depth = 1f, // Meters

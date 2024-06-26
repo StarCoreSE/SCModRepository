@@ -205,7 +205,7 @@ namespace Scripts
                     NoSound = false,
                     ParticleScale = 1,
                     CustomParticle = "TypeDriverHit1", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "soundName", // SubtypeID from your Audio SBC, not a filename
+                    CustomSound = "TypeDriverHit", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
             },
@@ -446,14 +446,14 @@ namespace Scripts
             },
             AmmoAudio = new AmmoAudioDef
             {
-                TravelSound = "MyLargeCalibreTravel", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
+                TravelSound = "MySabotTravel", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
                 HitSound = "",
                 ShotSound = "",
-                ShieldHitSound = "",
+                ShieldHitSound = "TypeDriverShieldsHit",
                 PlayerHitSound = "",
                 VoxelHitSound = "ImpMetalRockCat0",
                 FloatingHitSound = "",
-                HitPlayChance = 0.5f,
+                HitPlayChance = 1f,
                 HitPlayShield = true,
             },
             Ejection = new EjectionDef // Optional Component, allows generation of Particle or Item (Typically magazine), on firing, to simulate Tank shell ejection
@@ -887,7 +887,7 @@ namespace Scripts
             },
             AmmoAudio = new AmmoAudioDef
             {
-                TravelSound = "MyLargeCalibreTravel", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
+                TravelSound = "TypeDriverRicochetHit", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
                 HitSound = "",
                 ShotSound = "",
                 ShieldHitSound = "",
