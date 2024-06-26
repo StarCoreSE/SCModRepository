@@ -823,7 +823,7 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "GrowlerTone", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "VanillaImpactCat4",
+                HitSound = "", // VanillaImpactCat4
                 ShotSound = "",
                 ShieldHitSound = "RLX10Shot",
                 PlayerHitSound = "",

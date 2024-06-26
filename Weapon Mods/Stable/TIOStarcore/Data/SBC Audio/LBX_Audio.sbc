@@ -13,21 +13,47 @@
 		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 		  <DynamicMusicAmount>35</DynamicMusicAmount>
 		  <Volume>3</Volume>
-          <PitchVariation>100</PitchVariation>
+          <PitchVariation>25</PitchVariation>
 		  <DistantSounds>
 			  <DistantSound DistanceCrossFade="10" Distance="1600" Sound = "LBXMyHeavyDistantHit" />
 		  </DistantSounds>
 		  <Loopable>false</Loopable>
 		  <Waves>
 			  <Wave Type="D3">
-				  <Start>Audio\Crunch\HeavyCannonDistantHit1.wav</Start>
-			  </Wave>
-			  <!-- <Wave Type="D3">
-				  <Start>Audio\Crunch\HeavyCannonHit1.wav</Start>
+				  <Start>Audio\Crunch\BeefyPunchyShortExplosion2.wav</Start>
 			  </Wave>
 			  <Wave Type="D3">
-				  <Start>Audio\Crunch\HeavyCannonHit2.wav</Start>
+				  <Start>Audio\Crunch\BeefyPunchyShortExplosion3.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\Crunch\BeefyPunchyShortExplosion2.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\Crunch\BeefyBuildingLongExplosion2.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\Crunch\BeefyPunchyShortExplosion2.wav</Start>
+			  </Wave>
+
+
+
+			<!--
+			<Wave Type="D3">
+				  <Start>Audio\Crunch\EXP_SW_G_M5.wav</Start>
+			  </Wave>
+			<Wave Type="D3">
+				  <Start>Audio\Crunch\EXP_SW_G_M4.wav</Start>
+			  </Wave>
+			<Wave Type="D3">
+				  <Start>Audio\Crunch\EXP_SW_G_M3.wav</Start>
+			  </Wave>
+			<Wave Type="D3">
+				  <Start>Audio\Crunch\EXP_SW_G_M2.wav</Start>
+			  </Wave>
+			<Wave Type="D3">
+				  <Start>Audio\Crunch\EXP_SW_G_M1.wav</Start>
 			  </Wave>-->
+
 		  </Waves>
 	  </Sound>
 	  <Sound>
