@@ -154,11 +154,11 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                    Enable = false,
-                    Radius = 20f,
-                    Damage = 100f,
-                    Depth = 0f,
+                    Radius = 2.5f,
+                    Damage = 6000f,
+                    Depth = 5f,
                     MaxAbsorb = 0f,
-                    Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
+                    Falloff = Linear, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
                     //.Curve drops off damage sharply as it approaches the max radius
                     //.InvCurve drops off sharply from the middle and tapers to max radius
@@ -169,8 +169,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1f,
-                    CustomParticle = "ExplosionSmall",
-                    CustomSound = "ArcWepSmallMissileExpl",
+                    CustomParticle = "",
+                    CustomSound = "",
                 }, 
             },
             Ewar = new EwarDef

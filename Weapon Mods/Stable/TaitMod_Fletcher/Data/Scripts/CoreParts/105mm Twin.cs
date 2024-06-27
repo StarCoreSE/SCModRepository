@@ -184,7 +184,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                SapShell105, SapShell105Srap // Must list all primary, shrapnel, and pattern ammos.
+                SapShell105 // Must list all primary, shrapnel, and pattern ammos.
             },
             Animations = FA105CmRecoil,
             //Upgrades = UpgradeModules,

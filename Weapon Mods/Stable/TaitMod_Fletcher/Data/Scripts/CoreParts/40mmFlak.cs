@@ -169,10 +169,10 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                    Enable = true,
-                    Radius = 25f,
+                    Radius = 1f,
                     Damage = 1f,
-                    Depth = 5f,
-                    MaxAbsorb = 5f,
+                    Depth = 1f,
+                    MaxAbsorb = 0f,
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
                     //.Curve drops off damage sharply as it approaches the max radius
@@ -184,8 +184,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1f,
-                    CustomParticle = "",
-                    CustomSound = "",
+                    CustomParticle = "FlakGoBoom",
+                    CustomSound = "FlakExplosion",
                 }, 
             },
             Ewar = new EwarDef
