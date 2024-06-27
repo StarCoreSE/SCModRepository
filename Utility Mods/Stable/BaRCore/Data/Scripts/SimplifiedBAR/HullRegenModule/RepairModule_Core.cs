@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using System.Linq;
 using System.Collections.Generic;
@@ -395,9 +395,9 @@ namespace StarCore.RepairModule
 
                 if (loadedSettings != null)
                 {
-                    IgnoreArmor = loadedSettings.IgnoreArmor;
-                    PriorityOnly = loadedSettings.PriorityOnly;
-                    SubsystemPriority = loadedSettings.SubsystemPriority;
+                    IgnoreArmor = loadedSettings.Stored_IgnoreArmor;
+                    PriorityOnly = loadedSettings.Stored_PriorityOnly;
+                    SubsystemPriority = loadedSettings.Stored_SubsystemPriority;
 
                     return true;
                 }
@@ -425,9 +425,9 @@ namespace StarCore.RepairModule
 
                 var settings = new RepairSettings
                 {
-                    IgnoreArmor = IgnoreArmor,
-                    PriorityOnly = PriorityOnly,
-                    SubsystemPriority = SubsystemPriority
+                    Stored_IgnoreArmor = IgnoreArmor,
+                    Stored_PriorityOnly = PriorityOnly,
+                    Stored_SubsystemPriority = SubsystemPriority
                 };
 
                 Block.Storage.SetValue(SettingsID, Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(settings)));
@@ -743,12 +743,12 @@ namespace StarCore.RepairModule
     public class RepairSettings
     {
         [ProtoMember(41)]
-        public bool IgnoreArmor { get; set; }
+        public bool Stored_IgnoreArmor { get; set; }
 
         [ProtoMember(42)]
-        public bool PriorityOnly { get; set; }
+        public bool Stored_PriorityOnly { get; set; }
 
         [ProtoMember(43)]
-        public long SubsystemPriority { get; set; }
+        public long Stored_SubsystemPriority { get; set; }
     }
 }
