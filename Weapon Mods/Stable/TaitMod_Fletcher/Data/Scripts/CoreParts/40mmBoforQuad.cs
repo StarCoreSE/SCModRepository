@@ -157,12 +157,14 @@ namespace Scripts {
                 },
                 Graphics = new HardPointParticleDef
                 {
-                    Effect1 = new ParticleDef {
+                    Effect1 = new ParticleDef
+                    {
                         Name = "", // Smoke_LargeGunShot
                         Color = Color(red: 15, green: 2, blue: 1, alpha: 0.8f),
                         Offset = Vector(x: 0, y: 0, z: 0),
 
-                        Extras = new ParticleOptionDef {
+                        Extras = new ParticleOptionDef
+                        {
                             Loop = false,
                             Restart = false,
                             MaxDistance = 300,
@@ -170,12 +172,14 @@ namespace Scripts {
                             Scale = 1f,
                         },
                     },
-                    Effect2 = new ParticleDef {
+                    Effect2 = new ParticleDef
+                    {
                         Name = "",//Muzzle_Flash_Large
                         Color = Color(red: 1, green: 1, blue: 1, alpha: 1f),
                         Offset = Vector(x: 0, y: 0, z: 0),
 
-                        Extras = new ParticleOptionDef {
+                        Extras = new ParticleOptionDef
+                        {
                             Loop = true,
                             Restart = false,
                             MaxDistance = 350,

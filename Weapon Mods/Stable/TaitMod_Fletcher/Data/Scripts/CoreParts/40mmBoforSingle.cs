@@ -155,7 +155,7 @@ namespace Scripts {
                 Graphics = new HardPointParticleDef
                 {
                     Effect1 = new ParticleDef {
-                        Name = "Muzzle_Flash_Autocannon", // Smoke_LargeGunShot
+                        Name = "", // Smoke_LargeGunShot
                         Color = Color(red: 15, green: 2, blue: 1, alpha: 0.8f),
                         Offset = Vector(x: 0, y: 0, z: 0),
 
@@ -168,7 +168,7 @@ namespace Scripts {
                         },
                     },
                     Effect2 = new ParticleDef {
-                        Name = "Smoke_Autocannon",//Muzzle_Flash_Large
+                        Name = "",//Muzzle_Flash_Large
                         Color = Color(red: 1, green: 1, blue: 1, alpha: 1f),
                         Offset = Vector(x: 0, y: 0, z: 0),
 
