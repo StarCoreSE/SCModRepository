@@ -153,7 +153,7 @@ namespace Scripts
                 },
                 EndOfLife = new EndOfLifeDef
                 {
-                    Enable = false,
+                    Enable = true,
                     Radius = 3.5f,
                     Damage = 4500,
                     Depth = 0f,
