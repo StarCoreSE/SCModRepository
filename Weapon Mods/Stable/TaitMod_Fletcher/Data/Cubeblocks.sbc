@@ -1047,7 +1047,7 @@
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
-        <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="2" EndY="2" />
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
       </MountPoints>
       <VoxelPlacement>
         <StaticMode>
@@ -1115,7 +1115,7 @@
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
-        <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="2" EndY="2" />
+		  <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
       </MountPoints>
       <VoxelPlacement>
         <StaticMode>
@@ -1240,7 +1240,7 @@
       <Icon>Textures\GUI\Icons\6InchTripleGun.dds</Icon>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
-      <Size x="5" y="1" z="5" />
+      <Size x="3" y="1" z="3" />
       <ModelOffset x="0" y= "0.95" z="0" />
       <Model>Models\152mm triple\6InchMain.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
@@ -1256,7 +1256,7 @@
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
-        <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="4" EndY="4" />
+		  <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
       </MountPoints>
       <VoxelPlacement>
         <StaticMode>
@@ -1581,7 +1581,7 @@
       <MaxFov>1.04719755</MaxFov>
     </Definition> -->
 
-	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+	  <!--<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 		  <Id>
 			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>15cmSKC28NR</SubtypeId>
@@ -1647,7 +1647,7 @@
       <ElevationSpeed>0.0005</ElevationSpeed>
       <MinFov>0.1</MinFov>
       <MaxFov>1.04719755</MaxFov>
-    </Definition>
+    </Definition> -->
 
 	<!-- French Guns -->
 
