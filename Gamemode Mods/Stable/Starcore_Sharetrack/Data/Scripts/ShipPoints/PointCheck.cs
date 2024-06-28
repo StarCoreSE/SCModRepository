@@ -284,8 +284,10 @@ namespace ShipPoints
                 dpsString = dps.ToString();
 
             var functionalColor = tracker.IsFunctional ? "white" : "red";
+            var integrityColor = integrityPercent >= 75 ? "White" : integrityPercent >= 50 ? "LightCoral" : integrityPercent >= 25 ? "IndianRed" : "FireBrick";
+
             return
-                $"<color={functionalColor}>{ownerDisplay,-8}{integrityPercent,3}%<color={functionalColor}> P:<color=orange>{power,3}<color={functionalColor}> T:<color=orange>{thrust,3}<color={functionalColor}> DPS:<color={weaponColor}>{dpsString}<color={functionalColor}> S:<color={shieldColor}>{shieldPercent,3}%<color=white>";
+                $"<color={functionalColor}>{ownerDisplay,-8}<color={integrityColor}>{integrityPercent,3}%<color={functionalColor}> P:<color=orange>{power,3}<color={functionalColor}> T:<color=orange>{thrust,3}<color={functionalColor}> DPS:<color={weaponColor}>{dpsString}<color={functionalColor}> S:<color={shieldColor}>{shieldPercent,3}%<color=white>";
         }
 
 

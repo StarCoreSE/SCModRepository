@@ -44,6 +44,10 @@ namespace ShipPoints.ShipTracking
 
         private void Update()
         {
+            foreach (var tracker in TrackedGrids.Values)
+            {
+                tracker.UpdateAfterSim();
+            }
         }
 
         private void Unload()

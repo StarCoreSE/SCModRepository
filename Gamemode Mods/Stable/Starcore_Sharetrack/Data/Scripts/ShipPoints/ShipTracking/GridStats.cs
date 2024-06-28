@@ -34,15 +34,17 @@ namespace ShipPoints.ShipTracking
             foreach (var block in _slimBlocks)
             {
                 if (block.FatBlock != null)
+                {
                     _fatBlocks.Add(block.FatBlock);
-                GridIntegrity += block.Integrity;
+                    GridIntegrity += block.Integrity;
+                }         
             }
 
             OriginalGridIntegrity = GridIntegrity;
 
             Grid.OnBlockAdded += OnBlockAdd;
             Grid.OnBlockRemoved += OnBlockRemove;
-            Grid.OnGridBlockDamaged += OnBlockDamage;
+
             Update();
         }
 
@@ -50,10 +52,24 @@ namespace ShipPoints.ShipTracking
         {
             Grid.OnBlockAdded -= OnBlockAdd;
             Grid.OnBlockRemoved -= OnBlockRemove;
-            Grid.OnGridBlockDamaged -= OnBlockDamage;
 
             _slimBlocks.Clear();
             _fatBlocks.Clear();
+        }
+
+        public void UpdateAfterSim()
+        {
+            float tempGridInteg = 0;
+
+            foreach (var block in _slimBlocks)
+            {
+                if (block.FatBlock != null)
+                {
+                    tempGridInteg += block.Integrity;
+                }
+            }
+
+            GridIntegrity = tempGridInteg;
         }
 
         public void Update()
@@ -120,8 +136,6 @@ namespace ShipPoints.ShipTracking
             if (block.FatBlock != null)
                 _fatBlocks.Add(block.FatBlock);
 
-            GridIntegrity += block.Integrity;
-
             NeedsUpdate = true;
         }
 
@@ -134,14 +148,7 @@ namespace ShipPoints.ShipTracking
             if (block.FatBlock != null)
                 _fatBlocks.Remove(block.FatBlock);
 
-            GridIntegrity -= block.Integrity;
-
             NeedsUpdate = true;
-        }
-
-        private void OnBlockDamage(IMySlimBlock block, float damage, MyHitInfo? hitInfo, long attacker)
-        {
-            GridIntegrity -= damage;
         }
 
         #endregion
