@@ -298,18 +298,18 @@ namespace Scripts
                 ModelName = "", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = true,
-                Decals = new DecalDef   //warning: this is being applied every tick, need to be careful. If too intensive will need to kill the maxtrajtime and put on pattern.
-                {
-                    MaxAge = 300,
-                    Map = new[]
-                    {
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Metal",
-                            DecalMaterial = "SA_Laser_Hellfire_Decal",
-                        },
-                    },
-                },
+                //Decals = new DecalDef   //warning: this is being applied every tick, need to be careful. If too intensive will need to kill the maxtrajtime and put on pattern.
+                //{
+                //    MaxAge = 300,
+                //    Map = new[]
+                //    {
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Metal",
+                //            DecalMaterial = "SA_Laser_Hellfire_Decal",
+                //        },
+                //    },
+                //},
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
