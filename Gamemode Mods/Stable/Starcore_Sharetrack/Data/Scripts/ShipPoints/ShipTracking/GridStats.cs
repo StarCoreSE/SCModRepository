@@ -59,17 +59,32 @@ namespace ShipPoints.ShipTracking
 
         public void UpdateAfterSim()
         {
-            float tempGridInteg = 0;
+            UpdateCounter++;
 
-            foreach (var block in _slimBlocks)
+            if (Grid != null)
             {
-                if (block.FatBlock != null)
+                int updateCount = (int)(Grid.EntityId % UpdateInterval);
+
+                if (UpdateCounter % UpdateInterval == updateCount)
                 {
-                    tempGridInteg += block.Integrity;
+                    float tempGridInteg = 0;
+
+                    foreach (var block in _slimBlocks)
+                    {
+                        if (block.FatBlock != null) // Remove To Count All Blocks
+                        {
+                            tempGridInteg += block.Integrity;
+                        }
+                    }
+
+                    GridIntegrity = tempGridInteg;
                 }
             }
 
-            GridIntegrity = tempGridInteg;
+            if (UpdateCounter >= int.MaxValue - UpdateInterval)
+            {
+                UpdateCounter = 0;
+            }             
         }
 
         public void Update()
@@ -155,6 +170,8 @@ namespace ShipPoints.ShipTracking
 
         #region Private Fields
 
+        private int UpdateCounter = 0;
+        private int UpdateInterval = 10;
         // TODO
 
         #endregion
