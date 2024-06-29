@@ -462,7 +462,7 @@ namespace Scripts
             EnergyCost = 0f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 1600f, // Direct damage; one steel plate is worth 100.
             Mass = 100f, // In kilograms; how much force the impact will apply to the target.
-            Health = 24, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            Health = 10, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = false, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
@@ -604,9 +604,9 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = true,
-                    Radius = 8f, // Radius of AOE effect, in meters.
+                    Radius = 7f, // Radius of AOE effect, in meters.
                     Damage = 10000f,
-                    Depth = 3f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
+                    Depth = 2f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
                     Falloff = Linear, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius

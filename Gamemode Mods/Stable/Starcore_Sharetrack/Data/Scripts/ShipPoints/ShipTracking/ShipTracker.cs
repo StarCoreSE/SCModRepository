@@ -180,6 +180,14 @@ namespace ShipPoints.ShipTracking
             }
         }
 
+        public void UpdateAfterSim()
+        {
+            foreach (var gridStat in _gridStats.Values)
+            {
+                gridStat.UpdateAfterSim();
+            }
+        }
+
         private void OnGridAdd(IMyGridGroupData groupData, IMyCubeGrid grid, IMyGridGroupData previousGroupData)
         {
             if (_gridStats.ContainsKey(grid))

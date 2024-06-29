@@ -21,7 +21,12 @@ namespace StarCore.RepairModule.Networking.Custom
                 repairModule.subsystemPriority = repairModule.GetPriorityFromLong(subsystemPriority);
 
                 if (MyAPIGateway.Session.IsServer)
+                {
+                    repairModule.ScanRepairTargets(repairModule.Block.CubeGrid);
+
                     HeartNetwork.I.SendToEveryone(this);
+                }
+                    
             }
             else
             {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using System.Linq;
 using System.Collections.Generic;
@@ -34,7 +34,7 @@ namespace StarCore.RepairModule
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "SELtdLargeNanobotBuildAndRepairSystem", "SELtdSmallNanobotBuildAndRepairSystem")]
     public class RepairModule : MyGameLogicComponent, IMyEventProxy
     {
-        private IMyCollector Block;
+        public IMyCollector Block;
         private bool IsServer = MyAPIGateway.Session.IsServer;      
 
         // Block Settings
@@ -83,8 +83,7 @@ namespace StarCore.RepairModule
         private event Action<long> OnSubsystemPriorityChanged;
 
         // General Settings     
-        float RepairAmount = 2f;
-        bool defaultsSet = false;
+        float RepairAmount = 4f;
         public readonly Guid SettingsID = new Guid("09E18094-46AE-4F55-8215-A407B49F9CAA");
 
         // Timed Sort
@@ -362,21 +361,31 @@ namespace StarCore.RepairModule
         private void IgnoreArmor_Update(bool _bool)
         {
             IgnoreArmorPacket.UpdateIgnoreArmor(Block.EntityId);
-            SaveSettings();
-            ScanRepairTargets(Block.CubeGrid);
+
+            if (!IsServer)
+            {
+                SaveSettings();
+            }
         }
 
         private void PriorityOnly_Update(bool _bool)
         {
             PriorityOnlyPacket.UpdatePriorityOnly(Block.EntityId);
-            SaveSettings();
+
+            if (!IsServer)
+            {
+                SaveSettings();
+            }
         }
 
         private void SubsystemPriority_Update(long _long)
         {
             SubsystemPriorityPacket.UpdateSubsystemPriority(Block.EntityId);
-            SaveSettings();
-            ScanRepairTargets(Block.CubeGrid);
+
+            if (!IsServer)
+            {
+                SaveSettings();
+            }         
         }
         #endregion
 
@@ -396,9 +405,9 @@ namespace StarCore.RepairModule
 
                 if (loadedSettings != null)
                 {
-                    IgnoreArmor = loadedSettings.IgnoreArmor;
-                    PriorityOnly = loadedSettings.PriorityOnly;
-                    SubsystemPriority = loadedSettings.SubsystemPriority;
+                    IgnoreArmor = loadedSettings.Stored_IgnoreArmor;
+                    PriorityOnly = loadedSettings.Stored_PriorityOnly;
+                    SubsystemPriority = loadedSettings.Stored_SubsystemPriority;
 
                     return true;
                 }
@@ -426,9 +435,9 @@ namespace StarCore.RepairModule
 
                 var settings = new RepairSettings
                 {
-                    IgnoreArmor = IgnoreArmor,
-                    PriorityOnly = PriorityOnly,
-                    SubsystemPriority = SubsystemPriority
+                    Stored_IgnoreArmor = IgnoreArmor,
+                    Stored_PriorityOnly = PriorityOnly,
+                    Stored_SubsystemPriority = SubsystemPriority
                 };
 
                 Block.Storage.SetValue(SettingsID, Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(settings)));
@@ -673,7 +682,7 @@ namespace StarCore.RepairModule
             }
         }
 
-        private void ScanRepairTargets(IMyCubeGrid grid)
+        public void ScanRepairTargets(IMyCubeGrid grid)
         {
             var gridGroup = grid.GetGridGroup(GridLinkTypeEnum.Mechanical);
 
@@ -744,12 +753,12 @@ namespace StarCore.RepairModule
     public class RepairSettings
     {
         [ProtoMember(41)]
-        public bool IgnoreArmor { get; set; }
+        public bool Stored_IgnoreArmor { get; set; }
 
         [ProtoMember(42)]
-        public bool PriorityOnly { get; set; }
+        public bool Stored_PriorityOnly { get; set; }
 
         [ProtoMember(43)]
-        public long SubsystemPriority { get; set; }
+        public long Stored_SubsystemPriority { get; set; }
     }
 }

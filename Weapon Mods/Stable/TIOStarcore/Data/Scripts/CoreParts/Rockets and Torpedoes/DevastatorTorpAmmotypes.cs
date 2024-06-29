@@ -654,9 +654,9 @@ namespace Scripts
                 TargetLossDegree = 0f, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 3000, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
-                AccelPerSec = 90f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
+                AccelPerSec = 70f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 400, // voxel phasing if you go above 5100
-                MaxTrajectory = 11000f, // Max Distance the projectile or beam can Travel.
+                MaxTrajectory = 10000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 40), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
@@ -666,7 +666,7 @@ namespace Scripts
                 {
                     Inaccuracy = 6f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
                     Aggressiveness = 1.7f, // controls how responsive tracking is.
-                    MaxLateralThrust = 0.7f, // controls how sharp the trajectile may turn
+                    MaxLateralThrust = 0.5f, // controls how sharp the trajectile may turn
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
                     MaxChaseTime = 3000, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
@@ -1441,9 +1441,9 @@ namespace Scripts
                 TargetLossDegree = 0f, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 3000, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
-                AccelPerSec = 90f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
+                AccelPerSec = 70f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 400, // voxel phasing if you go above 5100
-                MaxTrajectory = 11000f, // Max Distance the projectile or beam can Travel.
+                MaxTrajectory = 10000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 40), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
@@ -1453,7 +1453,7 @@ namespace Scripts
                 {
                     Inaccuracy = 6f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
                     Aggressiveness = 1.7f, // controls how responsive tracking is.
-                    MaxLateralThrust = 0.7f, // controls how sharp the trajectile may turn
+                    MaxLateralThrust = 0.5f, // controls how sharp the trajectile may turn
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
                     MaxChaseTime = 3000, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
