@@ -34,7 +34,7 @@ namespace StarCore.RepairModule
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "SELtdLargeNanobotBuildAndRepairSystem", "SELtdSmallNanobotBuildAndRepairSystem")]
     public class RepairModule : MyGameLogicComponent, IMyEventProxy
     {
-        private IMyCollector Block;
+        public IMyCollector Block;
         private bool IsServer = MyAPIGateway.Session.IsServer;      
 
         // Block Settings
@@ -361,21 +361,31 @@ namespace StarCore.RepairModule
         private void IgnoreArmor_Update(bool _bool)
         {
             IgnoreArmorPacket.UpdateIgnoreArmor(Block.EntityId);
-            SaveSettings();
-            ScanRepairTargets(Block.CubeGrid);
+
+            if (!IsServer)
+            {
+                SaveSettings();
+            }
         }
 
         private void PriorityOnly_Update(bool _bool)
         {
             PriorityOnlyPacket.UpdatePriorityOnly(Block.EntityId);
-            SaveSettings();
+
+            if (!IsServer)
+            {
+                SaveSettings();
+            }
         }
 
         private void SubsystemPriority_Update(long _long)
         {
             SubsystemPriorityPacket.UpdateSubsystemPriority(Block.EntityId);
-            SaveSettings();
-            ScanRepairTargets(Block.CubeGrid);
+
+            if (!IsServer)
+            {
+                SaveSettings();
+            }         
         }
         #endregion
 
@@ -672,7 +682,7 @@ namespace StarCore.RepairModule
             }
         }
 
-        private void ScanRepairTargets(IMyCubeGrid grid)
+        public void ScanRepairTargets(IMyCubeGrid grid)
         {
             var gridGroup = grid.GetGridGroup(GridLinkTypeEnum.Mechanical);
 
