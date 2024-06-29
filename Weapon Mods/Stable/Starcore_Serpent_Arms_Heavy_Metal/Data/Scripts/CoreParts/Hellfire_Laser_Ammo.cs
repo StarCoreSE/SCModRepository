@@ -173,7 +173,7 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = true,
-                    Radius = 5f, // Meters
+                    Radius = 1f, // Meters
                     Damage = 2500f,
                     Depth = 1f,
                     MaxAbsorb = 500f,
@@ -566,7 +566,7 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = true,
-                    Radius = 5f, // Meters
+                    Radius = 1f, // Meters
                     Damage = 2500f,
                     Depth = 1f,
                     MaxAbsorb = 500f,
