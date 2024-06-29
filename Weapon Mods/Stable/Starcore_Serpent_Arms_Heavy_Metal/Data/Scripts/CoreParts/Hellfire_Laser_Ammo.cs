@@ -172,7 +172,7 @@ namespace Scripts
                 },
                 EndOfLife = new EndOfLifeDef
                 {
-                    Enable = false,
+                    Enable = true,
                     Radius = 5f, // Meters
                     Damage = 2500f,
                     Depth = 1f,
@@ -565,7 +565,7 @@ namespace Scripts
                 },
                 EndOfLife = new EndOfLifeDef
                 {
-                    Enable = false,
+                    Enable = true,
                     Radius = 5f, // Meters
                     Damage = 2500f,
                     Depth = 1f,
