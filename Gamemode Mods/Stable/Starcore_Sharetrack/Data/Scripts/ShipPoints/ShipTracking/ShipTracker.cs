@@ -591,9 +591,11 @@ namespace ShipPoints.ShipTracking
         {
             get
             {
+                GridStats gridStats;
+                _gridStats.TryGetValue(Grid, out gridStats);
+
                 var blockCounts = new Dictionary<string, int>();
-                foreach (var stats in _gridStats.Values)
-                foreach (var kvp in stats.WeaponCounts)
+                foreach (var kvp in gridStats.WeaponCounts)
                 {
                     if (!blockCounts.ContainsKey(kvp.Key))
                         blockCounts.Add(kvp.Key, 0);
