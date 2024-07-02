@@ -262,10 +262,6 @@ namespace ShipPoints.ShipTracking
             if (!PointCheck.PointValues.TryGetValue(block.BlockDefinition.SubtypeName, out blockPoints))
                 return;
 
-            // Skip blocks with 0 points
-            if (blockPoints == 0)
-                return;
-
             float thisClimbingCostMult = 0;
             PointCheck.ClimbingCostRename(ref blockDisplayName, ref thisClimbingCostMult);
 
