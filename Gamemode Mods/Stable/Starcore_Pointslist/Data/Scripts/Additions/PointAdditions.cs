@@ -47,6 +47,7 @@ namespace ShipPoints
             ["DampeningEnhancer_x2_Large"] = 100,
 
             ["LargeDecoy"] = 4,
+            ["TrussPilarDecoy"] = 4,
             ["SmallDecoy"] = 10,
             ["LargeDecoy_MetalFoam"] = 50,
 
@@ -332,6 +333,7 @@ namespace ShipPoints
             ["SA_HMI_Erebos"] = 300,
 
             ["LargeBlockRadioAntenna"] = 5,
+            ["LargeBlockCompactRadioAntenna"] = 5,
             ["LargeBlockRadioAntennaDish"] = 5,
             ["SC1x1Antenna"] = 5,
             ["C500mmTurret"] = 300,
