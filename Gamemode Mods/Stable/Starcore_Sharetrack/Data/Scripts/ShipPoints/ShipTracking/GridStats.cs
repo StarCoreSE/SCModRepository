@@ -210,6 +210,9 @@ namespace ShipPoints.ShipTracking
                         .Contains("Armor") && !blockDisplayName.StartsWith("Armor Laser")) // This is a bit stupid. TODO find a better way to sort out armor blocks.
                         continue;
 
+                    if (!PointCheck.PointValues.ContainsKey(block.BlockDefinition.SubtypeName))
+                        continue;
+
                     float ignored = 0;
                     PointCheck.ClimbingCostRename(ref blockDisplayName, ref ignored);
                     ShipTracker.SpecialBlockRename(ref blockDisplayName, block);
