@@ -269,10 +269,50 @@
       <EmissiveColorPreset>Default</EmissiveColorPreset>
       <Upgrades></Upgrades>
     </Definition>
-    
-    
-    
-    
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>DestroyerTorso</SubtypeId>
+      </Id>
+      <DisplayName>Necron Destroyer</DisplayName>
+      <Icon>Textures\icons\DestroyerBase.dds</Icon>
+      <CubeSize>Small</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="4" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\DestroyerBase.mwm</Model>
+      <Components>
+        <Component Subtype="Construction" Count="200" />
+        <Component Subtype="GravityGenerator" Count="50" />
+        <Component Subtype="Computer" Count="120" />
+        <Component Subtype="SmallTube" Count="160" />
+        <Component Subtype="Motor" Count="180" />
+        <Component Subtype="LargeTube" Count="120" />
+        <Component Subtype="MetalGrid" Count="50" />
+        <Component Subtype="Construction" Count="50" />
+        <Component Subtype="SteelPlate" Count="400" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <BuildProgressModels>
+      </BuildProgressModels>
+      <BlockPairName>DestroyerTorso</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>30</BuildTimeSeconds>
+      <WeaponDefinitionId Subtype="Necron" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0" PropertiesMask="2" />
+      </MountPoints>
+      <IsAirTight>false</IsAirTight>
+      <MirroringY>X</MirroringY>
+      <MirroringX>Y</MirroringX>
+      <PhysicalMaterial>Metal</PhysicalMaterial>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <Upgrades></Upgrades>
+    </Definition>
+
+
     <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
       <Id>
         <TypeId>ConveyorSorter</TypeId>
