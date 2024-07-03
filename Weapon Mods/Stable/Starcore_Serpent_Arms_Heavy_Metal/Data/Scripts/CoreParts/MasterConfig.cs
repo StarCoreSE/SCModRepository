@@ -20,7 +20,8 @@ namespace Scripts
             SA_HMI_Erebos,
             K_SA_LoW_CapitalSpinalA,
             SA_HeavyMetal_Spinal_Rotary,
-            SA_HeavyMetal_Spinal_Rotary_Reskin
+            SA_HeavyMetal_Spinal_Rotary_Reskin,
+            NetworkTester_Laser
             );
         }
     }
