@@ -297,7 +297,7 @@ namespace StarCore.RepairModule
         #region Event Handlers
         public void HandleDamagedBlocks(IMySlimBlock block)
         {
-            if (IgnoreArmor && (block.FatBlock == null || block.ToString().Contains("MyCubeBlock")))
+            if (IgnoreArmor && (block.FatBlock == null || block.ToString().Contains("MyCubeBlock") || block.FatBlock.BlockDefinition.SubtypeId.Contains("AQD_LA") || block.FatBlock.BlockDefinition.SubtypeId.Contains("AQD_HA")))
             {
                 HandleRemovedBlocks(block);
                 return;
