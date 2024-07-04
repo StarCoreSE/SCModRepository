@@ -671,7 +671,6 @@ namespace Scripts
                     Ammo = new ParticleDef
                     {
                         Name = "", //ShipWelderArc
-                        Color = Color(red: 50, green: 10, blue: 1, alpha: 1),
                         Extras = new ParticleOptionDef
                         {
                             Scale = 1,
