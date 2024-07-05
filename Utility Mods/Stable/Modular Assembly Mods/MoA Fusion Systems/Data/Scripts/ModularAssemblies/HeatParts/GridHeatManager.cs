@@ -28,6 +28,8 @@ namespace FusionSystems.HeatParts
 
         public float HeatGeneration = 0;
 
+        public float GrossHeatDissipation => (HeatDissipation + BaseHeatDissipation) * HeatRatio;
+
         public void UpdateTick()
         {
             if (_ticks % 15 == 0)
@@ -41,7 +43,7 @@ namespace FusionSystems.HeatParts
                 return;
             }
 
-            HeatStored = HeatStored - (HeatDissipation + BaseHeatDissipation)*HeatRatio/60 + HeatGeneration/60;
+            HeatStored = HeatStored - GrossHeatDissipation/60 + HeatGeneration/60;
             if (HeatStored < 0)
                 HeatStored = 0;
             else if (HeatStored > (HeatCapacity + BaseHeatCapacity))

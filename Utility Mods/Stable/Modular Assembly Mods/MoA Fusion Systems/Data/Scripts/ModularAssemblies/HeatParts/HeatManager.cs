@@ -45,7 +45,7 @@ namespace FusionSystems.HeatParts
 
         public float GetGridHeatDissipation(IMyCubeGrid grid)
         {
-            return _heatSystems.GetValueOrDefault(grid, null)?.HeatDissipation ?? -1;
+            return _heatSystems.GetValueOrDefault(grid, null)?.GrossHeatDissipation ?? -1;
         }
 
         public float GetGridHeatGeneration(IMyCubeGrid grid)
