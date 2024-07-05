@@ -43,7 +43,7 @@ namespace FusionSystems.HeatParts
                 return;
             }
 
-            HeatStored = HeatStored - GrossHeatDissipation/60 + HeatGeneration/60;
+            HeatStored += (HeatGeneration - GrossHeatDissipation)/60;
             if (HeatStored < 0)
                 HeatStored = 0;
             else if (HeatStored > (HeatCapacity + BaseHeatCapacity))
