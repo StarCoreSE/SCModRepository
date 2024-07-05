@@ -42,7 +42,7 @@ namespace FusionSystems.FusionParts
         public float PowerConsumption;
 
         public MySync<float, SyncDirection.BothWays> PowerUsageSync;
-        internal FusionPartSettings Settings = new FusionPartSettings();
+        internal FusionPartSettings Settings = null;
         internal static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
 
         /// <summary>
@@ -197,11 +197,11 @@ namespace FusionSystems.FusionParts
                 return; // ignore ghost/projected grids
 
             LoadSettings();
-            Settings.PowerUsage = PowerUsageSync.Value;
+            PowerUsageSync.Value = Settings.PowerUsage;
             PowerUsageSync.ValueChanged += value =>
                 Settings.PowerUsage = value.Value;
 
-            Settings.OverridePowerUsage = OverridePowerUsageSync.Value;
+            OverridePowerUsageSync.Value = Settings.OverridePowerUsage;
             OverridePowerUsageSync.ValueChanged += value =>
                 Settings.OverridePowerUsage = value.Value;
             SaveSettings();
@@ -220,11 +220,8 @@ namespace FusionSystems.FusionParts
 
         internal void SaveSettings()
         {
-            if (Block == null)
+            if (Block == null || Settings == null)
                 return; // called too soon or after it was already closed, ignore
-
-            if (Settings == null)
-                throw new NullReferenceException($"Settings == null on entId={Entity?.EntityId}; Test log 1");
 
             if (MyAPIGateway.Utilities == null)
                 throw new NullReferenceException(
@@ -251,6 +248,9 @@ namespace FusionSystems.FusionParts
 
         internal virtual bool LoadSettings()
         {
+            if (Settings == null)
+                Settings = new FusionPartSettings();
+
             if (Block.Storage == null)
             {
                 LoadDefaultSettings();
@@ -291,6 +291,9 @@ namespace FusionSystems.FusionParts
 
         public override bool IsSerialized()
         {
+            if (Block.CubeGrid?.Physics == null)
+                return base.IsSerialized();
+
             try
             {
                 SaveSettings();

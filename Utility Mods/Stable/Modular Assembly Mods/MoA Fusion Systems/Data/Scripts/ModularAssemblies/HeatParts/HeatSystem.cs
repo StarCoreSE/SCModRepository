@@ -9,7 +9,7 @@ namespace FusionSystems.HeatParts
     internal class HeatSystem
     {
         private const float HeatCapacityPerSink = 60;
-        private const float HeatDissipationPerRadiator = 1.5f;
+        private const float HeatDissipationPerRadiator = 5f;
 
         private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
 
@@ -17,7 +17,6 @@ namespace FusionSystems.HeatParts
 
         public int AssemblyId;
         public int BlockCount { get; private set; } = 0;
-
         private List<IMyCubeBlock> _radiatorBlocks = new List<IMyCubeBlock>();
 
         private HashSet<IMyCubeBlock> _occludedRadiators = new HashSet<IMyCubeBlock>();
