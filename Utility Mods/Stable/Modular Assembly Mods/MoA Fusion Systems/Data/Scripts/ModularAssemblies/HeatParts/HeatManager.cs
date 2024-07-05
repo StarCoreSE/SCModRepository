@@ -38,6 +38,21 @@ namespace FusionSystems.HeatParts
             return _heatSystems.GetValueOrDefault(grid, null)?.HeatRatio ?? -1;
         }
 
+        public float GetGridHeatCapacity(IMyCubeGrid grid)
+        {
+            return _heatSystems.GetValueOrDefault(grid, null)?.HeatCapacity ?? -1;
+        }
+
+        public float GetGridHeatDissipation(IMyCubeGrid grid)
+        {
+            return _heatSystems.GetValueOrDefault(grid, null)?.HeatDissipation ?? -1;
+        }
+
+        public float GetGridHeatGeneration(IMyCubeGrid grid)
+        {
+            return _heatSystems.GetValueOrDefault(grid, null)?.HeatGeneration ?? -1;
+        }
+
         private void OnEntityAdd(IMyEntity entity)
         {
             if (!(entity is IMyCubeGrid) || entity.Physics == null)
