@@ -597,7 +597,7 @@ namespace ShipPoints
             ["PriestReskin_Block"] = 125,
             ["DualSnubLaserTurret"] = 150,
             ["DualPulseLaserTurret"] = 150,
-            ["HeavyCarronade_5x5_Turret"] = 500,
+            ["HeavyCarronade_5x5_Turret"] = 600,
 
             ["Type18_Artillery"] = 270,
             ["Type21_Artillery"] = 540,
