@@ -187,7 +187,7 @@ namespace FusionSystems.
 
             foreach (var arm in Arms)
             {
-                powerGeneration += arm.PowerGeneration * generationModifier;
+                powerGeneration += arm.PowerGeneration;
                 powerCapacity += arm.PowerStorage;
             }
 
@@ -197,7 +197,7 @@ namespace FusionSystems.
                 totalPowerUsage += reactor?.PowerConsumption ?? 0;
 
                 if (updateReactors)
-                    reactor?.UpdatePower(powerGeneration, MegawattsPerFusionPower);
+                    reactor?.UpdatePower(powerGeneration, MegawattsPerFusionPower * generationModifier);
             }
 
             foreach (var thruster in Thrusters)
@@ -205,7 +205,7 @@ namespace FusionSystems.
                 totalPowerUsage += thruster?.PowerConsumption ?? 0;
 
                 if (updateReactors)
-                    thruster?.UpdatePower(powerGeneration, NewtonsPerFusionPower);
+                    thruster?.UpdatePower(powerGeneration, NewtonsPerFusionPower * generationModifier);
             }
 
             // Subtract power usage afterwards so that all reactors have the same stats.
