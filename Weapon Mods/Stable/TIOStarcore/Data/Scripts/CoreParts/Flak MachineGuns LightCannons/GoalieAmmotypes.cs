@@ -107,7 +107,7 @@ namespace Scripts
             },
             DamageScales = new DamageScaleDef
             {
-                MaxIntegrity = 16000f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
+                MaxIntegrity = 1f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
                 HealthHitModifier = 100, //was 25 How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
@@ -491,7 +491,7 @@ namespace Scripts
             },
             DamageScales = new DamageScaleDef
             {
-                MaxIntegrity = 16000f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
+                MaxIntegrity = 1f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
                 HealthHitModifier = 60, //was 10 How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
@@ -875,7 +875,7 @@ namespace Scripts
             },
             DamageScales = new DamageScaleDef
             {
-                MaxIntegrity = 16000f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
+                MaxIntegrity = 1f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
                 HealthHitModifier = 40, //was 10 How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
@@ -1259,7 +1259,7 @@ namespace Scripts
             },
             DamageScales = new DamageScaleDef
             {
-                MaxIntegrity = 16000f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
+                MaxIntegrity = 1f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
                 HealthHitModifier = 25, //was 5, How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
@@ -1644,7 +1644,7 @@ namespace Scripts
             },
             DamageScales = new DamageScaleDef
             {
-                MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
+                MaxIntegrity = 1f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
                 HealthHitModifier = 25, //was 10 How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
