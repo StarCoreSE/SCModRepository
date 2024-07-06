@@ -139,7 +139,7 @@ namespace Scripts
             {
                 ByBlockHit = new ByBlockHitDef
                 {
-                    Enable = true,
+                    Enable = false,
                     Radius = 5f, // Meters
                     Damage = 7500f,
                     Depth = 1f, // Meters
@@ -169,8 +169,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1f,
-                    CustomParticle = "Explosion_AmmunitionLarge",
-                    CustomSound = "ArcWepSmallMissileExpl",
+                    CustomParticle = "",
+                    CustomSound = "",
                 }, 
             },
             Ewar = new EwarDef

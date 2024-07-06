@@ -1379,7 +1379,7 @@
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="5" y="2" z="5" />
-      <ModelOffset x="0" y="0" z="0" />
+		  <ModelOffset x="0" y= "0.95" z="0" />
       <Model>Models\381mm mk24\38cmSk34.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
@@ -1394,7 +1394,7 @@
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
-        <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="6" EndY="6" />
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="5" />
       </MountPoints>
       <BlockVariants>
         <BlockVariant>
@@ -1453,7 +1453,7 @@
       <GuiVisible>false</GuiVisible>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="5" y="2" z="5" />
-      <ModelOffset x="0" y="0" z="0" />
+		  <ModelOffset x="0" y= "0.95" z="0" />
       <Model>Models\381mm mk24\38cmSk34NR.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
@@ -1468,7 +1468,7 @@
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
-        <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="6" EndY="6" />
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="5" />
       </MountPoints>
       <VoxelPlacement>
         <StaticMode>
@@ -1683,7 +1683,7 @@
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
-        <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="6" EndY="6" />
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="5" />
       </MountPoints>
       <VoxelPlacement>
         <StaticMode>
