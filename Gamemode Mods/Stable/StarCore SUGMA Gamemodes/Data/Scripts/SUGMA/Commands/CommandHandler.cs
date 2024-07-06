@@ -65,8 +65,8 @@ namespace SC.SUGMA.Commands
             Close(); // Close existing command handlers.
             I = new CommandHandler();
             MyAPIGateway.Utilities.MessageEnteredSender += I.Command_MessageEnteredSender;
-            MyAPIGateway.Utilities.ShowMessage("StarCore Universal Gamemode",
-                "Chat commands registered - run \"/sc help\" for help.");
+            MyAPIGateway.Utilities.ShowMessage("SUGMA",
+                "Run \"/sc help\" for commands.");
         }
 
         public static void Close()
