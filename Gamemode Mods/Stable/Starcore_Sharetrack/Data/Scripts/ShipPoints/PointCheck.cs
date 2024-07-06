@@ -354,9 +354,12 @@ namespace ShipPoints
         {
             I = this;
 
-            MyAPIGateway.Utilities.ShowMessage("ShipPoints v3.2 - Control Zone",
-                "Aim at a grid and press Shift+T to show stats, " +
-                "Shift+M to track a grid, Shift+J to cycle nametag style. ");
+            MyAPIGateway.Utilities.ShowMessage("ShareTrack",
+                "Aim at a grid and press:" +
+                "\n- Shift+T to show grid stats." +
+                "\n- Shift+M to track a grid." +
+                "\n- Shift+J to cycle nametag style."
+                );
 
             MyAPIGateway.Utilities.RegisterMessageHandler(2546247, ParsePointsDict);
 

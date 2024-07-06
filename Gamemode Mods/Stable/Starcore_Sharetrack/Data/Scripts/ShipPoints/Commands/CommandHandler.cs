@@ -70,8 +70,8 @@ namespace ShipPoints.Commands
             Close(); // Close existing command handlers.
             I = new CommandHandler();
             MyAPIGateway.Utilities.MessageEnteredSender += I.Command_MessageEnteredSender;
-            MyAPIGateway.Utilities.ShowMessage("StarCore ShareTrack",
-                "Chat commands registered - run \"/st help\" for help.");
+            MyAPIGateway.Utilities.ShowMessage("ShareTrack",
+                "Run \"/st help\" for commands.");
         }
 
         public static void Close()
