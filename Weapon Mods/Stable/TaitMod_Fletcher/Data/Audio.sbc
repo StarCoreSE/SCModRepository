@@ -1013,5 +1013,31 @@
 			  </Wave>
 		  </Waves>
 	  </Sound>
+
+
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>FALargeShot</SubtypeId>
+		  </Id>
+		  <Category>WEP_SHIP</Category>
+		  <MaxDistance>900</MaxDistance>
+		  <Volume>1.2</Volume>
+
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>5</DynamicMusicAmount>
+		  <Loopable>false</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\LargeShot1.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\LargeShot2.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\LargeShot3.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
   </Sounds>
 </Definitions>
