@@ -100,7 +100,7 @@ namespace Scripts
                 Armor = new ArmorDef
                 {
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
-                    Light = 1.5f, // Multiplier for damage against light armor.
+                    Light = 0.75f, // Multiplier for damage against light armor.
                     Heavy = 1.2f, // Multiplier for damage against heavy armor.
                     NonArmor = 0.4f, // Multiplier for damage against every else.
                 },
@@ -155,10 +155,10 @@ namespace Scripts
                 {
                    Enable = true,
                     Radius = 4f,
-                    Damage = 7500,
+                    Damage = 5000,
                     Depth = 5f,
                     MaxAbsorb = 0f,
-                    Falloff = Linear, //.NoFalloff applies the same damage to all blocks in radius
+                    Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
                     //.Curve drops off damage sharply as it approaches the max radius
                     //.InvCurve drops off sharply from the middle and tapers to max radius
