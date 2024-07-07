@@ -1,0 +1,1 @@
+use SEImageConverter on the images and itll make its own mod then you need to ensure to move the data over to this one and set the range and depth to decently large
