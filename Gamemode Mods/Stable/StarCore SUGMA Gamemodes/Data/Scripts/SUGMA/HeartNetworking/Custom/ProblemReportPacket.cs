@@ -24,8 +24,6 @@ namespace SC.SUGMA.HeartNetworking.Custom
 
         public override void Received(ulong SenderSteamId)
         {
-            MyAPIGateway.Utilities.SendMessage("A problem was reported:\n" + IssueMessage);
-            MyLog.Default.WriteLineAndConsole("hi");
             if (IssueState)
             {
                 if (IssueMessage.Length > 50)
