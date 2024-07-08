@@ -463,31 +463,6 @@ namespace ShipPoints
             }
         }
 
-        public void ReportProblem(string issueMessage = "", bool sync = true)
-        {
-            if (issueMessage.Length > 50)
-                issueMessage = issueMessage.Substring(0, 50);
-
-            Problemmessage.Message.Clear();
-            Problemmessage.Message.Append(
-                "<color=red>A PROBLEM HAS BEEN REPORTED.\n<color=white>CHECK WITH BOTH TEAMS AND THEN TYPE '/st fixed' TO CLEAR THIS MESSAGE.");
-            if (issueMessage != "")
-                Problemmessage.Message.Append("\n" + issueMessage);
-            Problemmessage.Visible = true;
-
-            if (sync)
-                HeartNetwork.I.SendToEveryone(new ProblemReportPacket(true, issueMessage));
-        }
-
-        public void ResolvedProblem(bool sync = true)
-        {
-            Problemmessage.Message.Clear();
-            Problemmessage.Visible = false;
-
-            if (sync)
-                HeartNetwork.I.SendToEveryone(new ProblemReportPacket(false));
-        }
-
         public static void ClimbingCostRename(ref string blockDisplayName, ref float climbingCostMultiplier)
         {
             if (I._climbingCostFunction == null)

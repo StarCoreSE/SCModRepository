@@ -33,6 +33,26 @@ namespace SC.SUGMA.Commands
             ),
 
             #endregion
+
+            #region Util Commands
+
+            ["shields"] = new Command(
+                "SUGMA.Utils",
+                "Fills shields to full capacity.",
+                CommandMethods.Shields
+            ),
+            ["problem"] = new Command(
+                "SUGMA.Utils",
+                "Reports a problem with optional message [arg1].",
+                CommandMethods.ReportProblem
+            ),
+            ["fixed"] = new Command(
+                "SUGMA.Utils",
+                "Marks a problem as fixed.",
+                CommandMethods.ReportFixed
+            ),
+
+            #endregion
         };
 
         private CommandHandler()

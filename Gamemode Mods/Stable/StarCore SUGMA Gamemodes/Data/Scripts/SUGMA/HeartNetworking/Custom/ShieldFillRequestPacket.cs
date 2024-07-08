@@ -1,11 +1,8 @@
 ﻿using ProtoBuf;
 using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
-using ShipPoints;
-using ShipPoints.HeartNetworking;
 
-namespace SCModRepository_Dev.Gamemode_Mods.Development.Starcore_Sharetrack_Dev.Data.Scripts.ShipPoints.HeartNetworking.
-    Custom
+namespace SC.SUGMA.HeartNetworking.Custom
 {
     [ProtoContract]
     internal class ShieldFillRequestPacket : PacketBase
@@ -16,8 +13,8 @@ namespace SCModRepository_Dev.Gamemode_Mods.Development.Starcore_Sharetrack_Dev.
                 if (g != null && !g.MarkedForClose && g is MyCubeGrid)
                 {
                     var grid = g as MyCubeGrid;
-                    var block = PointCheck.I.ShieldApi.GetShieldBlock(grid);
-                    if (block != null) PointCheck.I.ShieldApi.SetCharge(block, 99999999999);
+                    var block = SUGMA_SessionComponent.I.ShieldApi.GetShieldBlock(grid);
+                    if (block != null) SUGMA_SessionComponent.I.ShieldApi.SetCharge(block, 99999999999);
                 }
 
             MyAPIGateway.Utilities.ShowMessage("Shields", "Charged");
