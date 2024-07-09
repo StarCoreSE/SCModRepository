@@ -21,7 +21,7 @@ namespace SC.SUGMA.HeartNetworking
             typeof(PointsPacket),
             typeof(SyncRequestPacket),
             typeof(ShieldFillRequestPacket),
-            typeof(ProblemReportPacket),
+            typeof(ProblemReportPacket)
         };
 
         /// <summary>

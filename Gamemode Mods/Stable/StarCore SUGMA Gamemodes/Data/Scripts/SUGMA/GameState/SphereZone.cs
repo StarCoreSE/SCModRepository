@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
 using VRage.Game;
@@ -11,6 +10,21 @@ namespace SC.SUGMA.GameState
 {
     public class SphereZone : ComponentBase
     {
+        private readonly List<MyEntity> _containedEntities = new List<MyEntity>();
+
+        public bool
+            CheckOutside = false,
+            IsVisible = true;
+
+        public List<IMyCubeGrid>
+            ContainedGrids = new List<IMyCubeGrid>(),
+            OutsideGrids = new List<IMyCubeGrid>();
+
+        /// <summary>
+        ///     Assign this to limit the grid set. Leave null to check all grids.
+        /// </summary>
+        public ICollection<IMyCubeGrid> GridFilter = null;
+
         // display sphere on player hud
         // detects if any griven grid is whithn sphnere
         // has callbacks if grid is in or outside of sphere (idiot read: actions)
@@ -20,18 +34,6 @@ namespace SC.SUGMA.GameState
         public BoundingSphereD Sphere;
 
         public Color SphereDrawColor = Color.White;
-        public bool
-            CheckOutside = false,
-            IsVisible = true;
-        private readonly List<MyEntity> _containedEntities = new List<MyEntity>();
-        public List<IMyCubeGrid>
-            ContainedGrids = new List<IMyCubeGrid>(),
-            OutsideGrids = new List<IMyCubeGrid>();
-
-        /// <summary>
-        /// Assign this to limit the grid set. Leave null to check all grids.
-        /// </summary>
-        public ICollection<IMyCubeGrid> GridFilter = null;
 
         public SphereZone(Vector3D center, double radius)
         {
@@ -58,41 +60,25 @@ namespace SC.SUGMA.GameState
             {
                 MyGamePruningStructure.GetAllTopMostEntitiesInSphere(ref Sphere, _containedEntities);
 
-                for (int i = _containedEntities.Count - 1; i >= 0; i--)
-                {
+                for (var i = _containedEntities.Count - 1; i >= 0; i--)
                     if (_containedEntities[i] is IMyCubeGrid)
-                    {
                         ContainedGrids.Add(_containedEntities[i] as IMyCubeGrid);
-                    }
-                }
 
                 if (CheckOutside)
-                {
                     MyAPIGateway.Entities.GetEntities(null, b =>
                     {
                         var grid = b as IMyCubeGrid;
-                        if (grid != null && !_containedEntities.Contains((MyEntity)grid))
-                        {
-                            OutsideGrids.Add(grid);
-                        }
+                        if (grid != null && !_containedEntities.Contains((MyEntity)grid)) OutsideGrids.Add(grid);
                         return false;
                     });
-                }
             }
             else
             {
-                double radiusSquare = Sphere.Radius * Sphere.Radius;
+                var radiusSquare = Sphere.Radius * Sphere.Radius;
                 foreach (var grid in GridFilter)
-                {
                     if (Vector3D.DistanceSquared(grid.GetPosition(), Sphere.Center) <= radiusSquare)
-                    {
                         ContainedGrids.Add(grid);
-                    }
-                    else if (CheckOutside)
-                    {
-                        OutsideGrids.Add(grid);
-                    }
-                }
+                    else if (CheckOutside) OutsideGrids.Add(grid);
             }
 
             if (MyAPIGateway.Session.IsServer)
@@ -100,9 +86,8 @@ namespace SC.SUGMA.GameState
             // Visuals
             var stupidMatrix = MatrixD.CreateWorld(Sphere.Center, Vector3D.Up, Vector3D.Forward);
             if (IsVisible)
-            {
-                MySimpleObjectDraw.DrawTransparentSphere(ref stupidMatrix, (float)Sphere.Radius, ref SphereDrawColor, MySimpleObjectRasterizer.Solid, 20);
-            }
+                MySimpleObjectDraw.DrawTransparentSphere(ref stupidMatrix, (float)Sphere.Radius, ref SphereDrawColor,
+                    MySimpleObjectRasterizer.Solid, 20);
         }
     }
 }

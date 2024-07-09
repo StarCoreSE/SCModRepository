@@ -1,8 +1,6 @@
 ﻿using ProtoBuf;
 using Sandbox.ModAPI;
 using SC.SUGMA.GameState;
-using SC.SUGMA.Textures;
-using VRage.Utils;
 
 namespace SC.SUGMA.HeartNetworking.Custom
 {

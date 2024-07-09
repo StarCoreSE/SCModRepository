@@ -9,11 +9,16 @@ namespace SC.SUGMA.GameState
 {
     internal class PointTracker : ComponentBase
     {
-        public int VictoryPoints = 3;
+        private bool _pointsUpdated;
         public int StartingPoints;
+        public int VictoryPoints = 3;
 
         public Dictionary<IMyFaction, int> FactionPoints { get; internal set; } = new Dictionary<IMyFaction, int>();
-        private bool _pointsUpdated = false;
+
+        private void OnFactionCreated(long factionId)
+        {
+            FactionPoints.Add(MyAPIGateway.Session.Factions.TryGetFactionById(factionId), StartingPoints);
+        }
 
         #region Base Methods
 
@@ -114,10 +119,5 @@ namespace SC.SUGMA.GameState
         }
 
         #endregion
-
-        private void OnFactionCreated(long factionId)
-        {
-            FactionPoints.Add(MyAPIGateway.Session.Factions.TryGetFactionById(factionId), StartingPoints);
-        }
     }
 }
