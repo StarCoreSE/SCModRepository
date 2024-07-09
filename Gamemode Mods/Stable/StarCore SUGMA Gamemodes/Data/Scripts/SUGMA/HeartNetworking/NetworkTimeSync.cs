@@ -17,6 +17,7 @@ namespace SC.SUGMA.HeartNetworking
         public static double ServerTimeOffset;
 
         private int _tickCounter;
+        public static double MessageSendTimestamp { get; private set; }
 
         public override void LoadData()
         {
@@ -63,12 +64,12 @@ namespace SC.SUGMA.HeartNetworking
 
         private void UpdateTimeOffset()
         {
-            ThisPlayerPing = DateTime.UtcNow.TimeOfDay.TotalMilliseconds;
+            MessageSendTimestamp = DateTime.UtcNow.TimeOfDay.TotalMilliseconds;
             if (!MyAPIGateway.Session.IsServer)
                 MyAPIGateway.Multiplayer.SendMessageToServer(
                     NetworkId,
                     MyAPIGateway.Utilities.SerializeToBinary(new TimeSyncPacket
-                        { OutgoingTimestamp = ThisPlayerPing }));
+                        { OutgoingTimestamp = MessageSendTimestamp }));
         }
 
         private void ReceiveMessage(ushort networkId, byte[] serialized, ulong sender, bool isFromServer)
@@ -105,11 +106,12 @@ namespace SC.SUGMA.HeartNetworking
             else
             {
                 NetworkTimeSync.ThisPlayerPing =
-                    DateTime.UtcNow.TimeOfDay.TotalMilliseconds - NetworkTimeSync.ThisPlayerPing;
+                    DateTime.UtcNow.TimeOfDay.TotalMilliseconds - NetworkTimeSync.MessageSendTimestamp;
                 NetworkTimeSync.ServerTimeOffset =
                     OutgoingTimestamp - IncomingTimestamp - NetworkTimeSync.ThisPlayerPing;
-                //HeartLog.Log("Outgoing Timestamp: " + OutgoingTimestamp + "\nIncoming Timestamp: " + IncomingTimestamp);
-                //HeartLog.Log("Total ping time (ms): " + HeartData.I.Net.estimatedPing);
+                Log.Info("\nOutgoing Timestamp: " + OutgoingTimestamp + "\nIncoming Timestamp: " + IncomingTimestamp);
+                Log.Info("ThisPlayerPing: " + NetworkTimeSync.ThisPlayerPing);
+                Log.Info("ServerTimeOffset: " + NetworkTimeSync.ServerTimeOffset);
             }
         }
     }

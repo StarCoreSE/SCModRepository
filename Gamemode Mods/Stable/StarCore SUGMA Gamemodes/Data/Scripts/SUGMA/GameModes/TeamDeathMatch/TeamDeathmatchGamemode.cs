@@ -161,6 +161,12 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
             if (!MyAPIGateway.Utilities.IsDedicated)
                 SUGMA_SessionComponent.I.RegisterComponent("tdmHud", new TeamDeathmatchHud(this));
+
+            Log.Info($"Started a TDM match." +
+                          $"\n- Combatants: {string.Join(" vs ", factionNames)}" +
+                          $"\n- Tracked grids:");
+            foreach (var faction in TrackedFactions)
+                Log.Info($"-   {faction.Key.Name}: {faction.Value} | {CalculateFactionPoints(faction.Key)}pts");
         }
 
         public override void StopRound()
@@ -247,6 +253,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
         {
             TrackedFactions.Remove(faction);
             MyAPIGateway.Utilities.ShowNotification($"|{faction.Tag}| IS OUT!", 10000, "Red");
+            Log.Info($"|{faction.Tag}| was killed!");
 
             if (TrackedFactions.Count == 1)
             {
