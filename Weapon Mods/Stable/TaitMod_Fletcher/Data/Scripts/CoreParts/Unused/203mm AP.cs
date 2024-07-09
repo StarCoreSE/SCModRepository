@@ -101,8 +101,8 @@ namespace Scripts
                 {
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
                     Light = 1f, // Multiplier for damage against light armor.
-                    Heavy = 2f, // Multiplier for damage against heavy armor.
-                    NonArmor = 1.3f, // Multiplier for damage against every else.
+                    Heavy = 3f, // Multiplier for damage against heavy armor.
+                    NonArmor = 0.5f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
@@ -139,7 +139,7 @@ namespace Scripts
             {
                 ByBlockHit = new ByBlockHitDef
                 {
-                    Enable = true,
+                    Enable = false,
                     Radius = 5f, // Meters
                     Damage = 7500f,
                     Depth = 1f, // Meters
@@ -169,8 +169,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1f,
-                    CustomParticle = "Explosion_AmmunitionLarge",
-                    CustomSound = "ArcWepSmallMissileExpl",
+                    CustomParticle = "",
+                    CustomSound = "",
                 }, 
             },
             Ewar = new EwarDef

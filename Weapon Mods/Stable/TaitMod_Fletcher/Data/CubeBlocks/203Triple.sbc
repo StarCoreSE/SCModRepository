@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>203mmQuad</SubtypeId>
+			</Id>
+			<DisplayName>[FAS] Des Moines</DisplayName>
+			<Description>
+				Triple barreled 203mm/8 Inch
+				Fires HE, AP
+				Ai range of 5km, shell range of 7km
+				BP: 400
+				Temp inclusion to see performance
+			</Description>
+			<Icon>Textures\GUI\Icons\8Inch55RF.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="2" z="3"/>
+			<Scale> 2 </Scale>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\203quad\8Inch55RF.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="800" />
+				<Component Subtype="MetalGrid" Count="100" />
+				<Component Subtype="LargeTube" Count="200" />
+				<Component Subtype="Motor" Count="100" />
+				<Component Subtype="Computer" Count="100" />
+				<Component Subtype="Construction" Count="2000" />
+				<Component Subtype="MetalGrid" Count="200" />
+				<Component Subtype="SteelPlate" Count="1600" />
+			</Components>
+			<CriticalComponent Subtype="Motor" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
+			</MountPoints>
+			<BlockPairName>203mmQuad</BlockPairName>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

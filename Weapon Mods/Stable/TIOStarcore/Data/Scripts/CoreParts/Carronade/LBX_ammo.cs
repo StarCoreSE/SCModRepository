@@ -1953,13 +1953,13 @@ namespace Scripts
                     Enable = true, // Enables TimedSpawns mechanism
                     Interval = 0, // Time between spawning fragments, in ticks, 0 means every tick, 1 means every other
                     StartTime = 0, // Time delay to start spawning fragments, in ticks, of total projectile life
-                    MaxSpawns = 3, // Max number of fragment children to spawn
+                    MaxSpawns = 4, // Max number of fragment children to spawn
                     Proximity = 500, //400 Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
                     ParentDies = true, // Parent dies once after it spawns its last child.
                     PointAtTarget = false, // Start fragment direction pointing at Target
                     PointType = Lead, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
                     DirectAimCone = 15f, //Aim cone used for Direct fire, in degrees
-                    GroupSize = 5, // Number of spawns in each group
+                    GroupSize = 6, // Number of spawns in each group
                     GroupDelay = 4, //5 Delay between each group.
                 },
             },
