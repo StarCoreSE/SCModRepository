@@ -247,6 +247,11 @@ namespace ShipPoints.ShipTracking
             HeartNetwork.I.SendToEveryone(packet);
         }
 
+        public long[] GetQueuedGridTracks()
+        {
+            return _queuedGridTracks.ToArray();
+        }
+
         #endregion
     }
 }

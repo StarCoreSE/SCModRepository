@@ -14,7 +14,7 @@ namespace ShipPoints.TrackerApi
         /// <summary>
         ///     The expected API version.
         /// </summary>
-        public const int ApiVersion = 2;
+        public const int ApiVersion = 3;
 
         /// <summary>
         ///     Triggered whenever the API is ready - added to by the constructor or manually.
@@ -114,6 +114,11 @@ namespace ShipPoints.TrackerApi
             _unregisterOnAliveChanged?.Invoke(action);
         }
 
+        public bool AreTrackedGridsLoaded()
+        {
+            return _areTrackedGridsLoaded?.Invoke() ?? false;
+        }
+
         #endregion
 
 
@@ -128,6 +133,7 @@ namespace ShipPoints.TrackerApi
         private Action<Action<IMyCubeGrid, bool>> _unRegisterOnTrack;
         private Action<Action<IMyCubeGrid, bool>> _registerOnAliveChanged;
         private Action<Action<IMyCubeGrid, bool>> _unregisterOnAliveChanged;
+        private Func<bool> _areTrackedGridsLoaded;
 
         #endregion
 
@@ -157,6 +163,7 @@ namespace ShipPoints.TrackerApi
             SetApiMethod("UnregisterOnTrack", ref _unRegisterOnTrack);
             SetApiMethod("RegisterOnAliveChanged", ref _registerOnAliveChanged);
             SetApiMethod("UnregisterOnAliveChanged", ref _unregisterOnAliveChanged);
+            SetApiMethod("AreTrackedGridsLoaded", ref _areTrackedGridsLoaded);
 
             // Unload data if told to, otherwise notify that the API is ready.
             if (_methodMap == null)
