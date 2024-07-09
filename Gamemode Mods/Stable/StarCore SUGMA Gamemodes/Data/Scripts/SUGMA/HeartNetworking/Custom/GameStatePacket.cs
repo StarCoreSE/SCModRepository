@@ -7,12 +7,13 @@ namespace SC.SUGMA.HeartNetworking.Custom
     [ProtoContract]
     public class GameStatePacket : PacketBase
     {
-        [ProtoMember(11)] public string Gamemode;
         [ProtoMember(12)] public string[] Arguments;
+        [ProtoMember(11)] public string Gamemode;
 
         public override void Received(ulong SenderSteamId)
         {
-            Log.Info("Recieved gamestate update packet. Contents:\n    Gamemode: " + Gamemode + "\n    Arguments: " + string.Join(", ", Arguments ?? Array.Empty<string>()));
+            Log.Info("Recieved gamestate update packet. Contents:\n    Gamemode: " + Gamemode + "\n    Arguments: " +
+                     string.Join(", ", Arguments ?? Array.Empty<string>()));
 
             if (Gamemode == "null")
             {
@@ -29,12 +30,13 @@ namespace SC.SUGMA.HeartNetworking.Custom
 
         public static void UpdateGamestate(string[] args = null)
         {
-            GameStatePacket packet = new GameStatePacket
+            var packet = new GameStatePacket
             {
                 Gamemode = SUGMA_SessionComponent.I.CurrentGamemode?.ComponentId ?? "null",
                 Arguments = args
             };
-            Log.Info("Sending gamestate update packet. Contents:\n    Gamemode: " + packet.Gamemode + "\n    Arguments: " + string.Join(", ", args ?? Array.Empty<string>()));
+            Log.Info("Sending gamestate update packet. Contents:\n    Gamemode: " + packet.Gamemode +
+                     "\n    Arguments: " + string.Join(", ", args ?? Array.Empty<string>()));
 
             if (MyAPIGateway.Session.IsServer)
                 HeartNetwork.I.SendToEveryone(packet);

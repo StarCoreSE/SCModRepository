@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Text;
-using Sandbox.ModAPI;
-using SC.SUGMA.GameState;
 using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
 using SC.SUGMA.Textures;
-using VRage.Game;
 using MyAPIGateway = Sandbox.ModAPI.MyAPIGateway;
 
 namespace SC.SUGMA.Commands
@@ -26,25 +21,21 @@ namespace SC.SUGMA.Commands
             }
 
             // Remove first two items from arguments
-            string[] startArgs = Array.Empty<string>();
+            var startArgs = Array.Empty<string>();
             if (args.Length > 3)
             {
-                string[] newStartArgs = new string[args.Length - 2];
-                for (int i = 2; i < args.Length; i++)
-                {
-                    newStartArgs[i-2] = args[i];
-                }
+                var newStartArgs = new string[args.Length - 2];
+                for (var i = 2; i < args.Length; i++) newStartArgs[i - 2] = args[i];
                 startArgs = newStartArgs;
             }
 
             if (!SUGMA_SessionComponent.I.StartGamemode(args[1].ToLower(), startArgs, true))
             {
-                StringBuilder availableGamemodes = new StringBuilder();
+                var availableGamemodes = new StringBuilder();
 
                 foreach (var gamemode in SUGMA_SessionComponent.I.GetGamemodes())
-                {
-                    availableGamemodes.Append($"\n-    {gamemode} ({SUGMA_SessionComponent.I.GetComponent<GamemodeBase>(gamemode).ReadableName})");
-                }
+                    availableGamemodes.Append(
+                        $"\n-    {gamemode} ({SUGMA_SessionComponent.I.GetComponent<GamemodeBase>(gamemode).ReadableName})");
 
                 MyAPIGateway.Utilities.ShowMessage("SUGMA",
                     $"Unrecognized gamemode \"{args[1].ToLower()}\". Available gamemodes:{availableGamemodes}");
@@ -66,7 +57,7 @@ namespace SC.SUGMA.Commands
         {
             if (!SUGMA_SessionComponent.I.StopGamemode(true))
             {
-                MyAPIGateway.Utilities.ShowMessage("SUGMA", $"There isn't a match running, idiot.");
+                MyAPIGateway.Utilities.ShowMessage("SUGMA", "There isn't a match running, idiot.");
                 return;
             }
 
