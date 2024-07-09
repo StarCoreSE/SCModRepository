@@ -230,8 +230,6 @@ namespace StarCore.RepairModule
 
                 if (SortTimer == 0 || NeedsSorting)
                 {
-                    ProcessRepairTargets(Block.CubeGrid, false);
-
                     RepairTargets = RepairTargets.OrderBy(block => block.Integrity).ToList();
                     PriorityRepairTargets = PriorityRepairTargets.OrderBy(block => block.Integrity).ToList();
 
@@ -605,9 +603,6 @@ namespace StarCore.RepairModule
 
         private void SpawnWeldEffects(Vector3D position)
         {
-            if (WeldParticleEmitter == null)
-                return;
-
             if (TargetBlock.Value != 0)
             {
                 IMyEntity entity;
@@ -617,7 +612,7 @@ namespace StarCore.RepairModule
 
                     if (targetBlock != null)
                     {
-                        WeldParticleEmitter.WorldMatrix = targetBlock.WorldMatrix;
+                        WeldParticleEmitter?.WorldMatrix = targetBlock.WorldMatrix;
                         return;
                     }
                     else
@@ -625,7 +620,7 @@ namespace StarCore.RepairModule
                 }
             }
 
-            WeldParticleEmitter.WorldMatrix = MatrixD.Identity;
+            WeldParticleEmitter?.WorldMatrix = MatrixD.Identity;
             WeldParticleEmitter?.SetTranslation(ref position);
 
             WeldSoundEmitter?.SetPosition(position);
@@ -634,10 +629,7 @@ namespace StarCore.RepairModule
 
         private void ResetWeldEffects()
         {
-            if (WeldParticleEmitter == null)
-                return;
-
-            WeldParticleEmitter.WorldMatrix = MatrixD.Identity;
+            WeldParticleEmitter?.WorldMatrix = MatrixD.Identity;
             WeldParticleEmitter?.SetTranslation(ref Vector3D.Zero);
 
             WeldSoundEmitter?.SetPosition(Vector3D.Zero);
