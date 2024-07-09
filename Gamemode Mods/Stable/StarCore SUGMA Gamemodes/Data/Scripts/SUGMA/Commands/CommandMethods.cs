@@ -4,7 +4,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using Sandbox.ModAPI;
 using SC.SUGMA.GameState;
+using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
+using SC.SUGMA.Textures;
 using VRage.Game;
 using MyAPIGateway = Sandbox.ModAPI.MyAPIGateway;
 
@@ -106,5 +108,31 @@ namespace SC.SUGMA.Commands
         //        MyAPIGateway.Utilities.ShowNotification("Win time not changed, try /st settime xxx (in seconds)");
         //    }
         //}
+
+        #region Utility Commands
+
+        public static void Shields(string[] args)
+        {
+            if (MyAPIGateway.Session.IsServer)
+                new ShieldFillRequestPacket().Received(0);
+            else
+                HeartNetwork.I.SendToServer(new ShieldFillRequestPacket());
+        }
+
+        public static void ReportProblem(string[] args)
+        {
+            var message = "@" + (MyAPIGateway.Session.Player?.DisplayName ?? "ERR") + ":";
+            for (var i = 1; i < args.Length; i++) // Skip the first argument as it's always "problem"
+                message += ' ' + args[i];
+
+            SUtils.ReportProblem(args.Length > 1 ? message : "");
+        }
+
+        public static void ReportFixed(string[] args)
+        {
+            SUtils.ResolvedProblem();
+        }
+
+        #endregion
     }
 }

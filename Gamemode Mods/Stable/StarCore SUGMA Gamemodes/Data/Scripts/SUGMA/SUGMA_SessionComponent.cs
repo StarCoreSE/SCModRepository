@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DefenseShields;
 using RichHudFramework.Client;
 using Sandbox.ModAPI;
 using SC.SUGMA.API;
@@ -28,12 +29,12 @@ namespace SC.SUGMA
             ["PlayerTracker"] = new PlayerTracker(),
             ["tdm"] = new TeamDeathmatchGamemode(),
             ["tdmz"] = new TDMZonesGamemode(),
-            // You would need to add in the zones gamemode too
         };
 
         public static SUGMA_SessionComponent I { get; private set; }
 
         public ShareTrackApi ShareTrackApi = new ShareTrackApi();
+        public ShieldApi ShieldApi = new ShieldApi();
         public GamemodeBase CurrentGamemode = null;
 
         public bool HasInited = false;
@@ -50,6 +51,7 @@ namespace SC.SUGMA
                 CommandHandler.Init();
                 ShareTrackApi.Init(ModContext, FinishInit);
                 RichHudClient.Init(DebugName, () => { Log.Info("RichHudClient registered."); }, null);
+                ShieldApi.Load();
             }
             catch (Exception ex)
             {
@@ -120,6 +122,7 @@ namespace SC.SUGMA
             {
                 CommandHandler.Close();
                 ShareTrackApi.UnloadData();
+                ShieldApi.Unload();
             }
             catch (Exception ex)
             {

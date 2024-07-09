@@ -1,5 +1,4 @@
 ﻿using System;
-using ShipPoints.Commands;
 using ShipPoints.HeartNetworking;
 using ShipPoints.ShipTracking;
 using ShipPoints.TrackerApi;
@@ -27,7 +26,6 @@ namespace ShipPoints
             {
                 HeartNetwork.I = new HeartNetwork();
                 HeartNetwork.I.LoadData(42521);
-                CommandHandler.Init();
                 _pointCheck.Init();
                 _apiProvider = new ApiProvider();
             }
@@ -44,7 +42,6 @@ namespace ShipPoints
                 _apiProvider.Unload();
                 _pointCheck.Close();
                 TrackingManager.Close();
-                CommandHandler.Close();
                 HeartNetwork.I.UnloadData();
             }
             catch (Exception ex)

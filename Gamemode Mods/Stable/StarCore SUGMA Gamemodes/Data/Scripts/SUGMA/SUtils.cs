@@ -1,6 +1,9 @@
-﻿using Sandbox.Game.Entities;
+﻿using Sandbox.Game;
+using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
 using SC.SUGMA.GameState;
+using SC.SUGMA.HeartNetworking;
+using SC.SUGMA.HeartNetworking.Custom;
 using VRage.Game;
 using VRage.Game.Components;
 using VRage.Game.Entity.EntityComponents.Interfaces;
@@ -22,7 +25,6 @@ namespace SC.SUGMA.Textures
         public static void SetDamageEnabled(bool value)
         {
             MyAPIGateway.Utilities.ShowMessage("SUGMA", $"Global damage {(value ? "enabled" : "disabled")}.");
-
             int existing = (int)MySessionComponentSafeZones.AllowedActions;
             MySessionComponentSafeZones.AllowedActions = CastProhibit(MySessionComponentSafeZones.AllowedActions,
                 value ? existing | DamageToggleInt : existing & ~DamageToggleInt);
@@ -45,6 +47,23 @@ namespace SC.SUGMA.Textures
         public static Color ColorMaskToRgb(this Vector3 colorMask)
         {
             return MyColorPickerConstants.HSVOffsetToHSV(colorMask).HSVtoColor();
+        }
+
+
+        public static void ReportProblem(string issueMessage = "")
+        {
+            if (MyAPIGateway.Session.IsServer)
+                new ProblemReportPacket(true, issueMessage).Received(0);
+            else
+                HeartNetwork.I.SendToServer(new ProblemReportPacket(true, issueMessage));
+        }
+
+        public static void ResolvedProblem()
+        {
+            if (MyAPIGateway.Session.IsServer)
+                new ProblemReportPacket(false).Received(0);
+            else
+                HeartNetwork.I.SendToServer(new ProblemReportPacket(false));
         }
     }
 }

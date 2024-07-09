@@ -49,8 +49,8 @@ namespace invalid.BugReporter
 		public override void Init(MyObjectBuilder_SessionComponent sessionComponent)
 		{
 
-            MyAPIGateway.Utilities.ShowMessage("GODFORSAKEN ASTRONAUT", "Press Shift + F2 to open the StarCore Infodoc" );
-            MyAPIGateway.Utilities.ShowMessage("GODFORSAKEN ASTRONAUT", "Press Ctrl + F2 to open an issue submission form");
+            //MyAPIGateway.Utilities.ShowMessage("GODFORSAKEN ASTRONAUT", "Press Shift + F2 to open the StarCore Infodoc" );
+            //MyAPIGateway.Utilities.ShowMessage("GODFORSAKEN ASTRONAUT", "Press Ctrl + F2 to open an issue submission form");
 			
            // MyAPIGateway.Utilities.ShowNotification("\n\n ALT+P = Starcore Pointsheet \n SHIFT+F2 = Report Bug", 30000, "Red"); //this is fucking stupid.
 			
