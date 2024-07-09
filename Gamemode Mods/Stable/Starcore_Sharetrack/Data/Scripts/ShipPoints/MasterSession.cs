@@ -10,7 +10,10 @@ namespace ShipPoints
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     internal class MasterSession : MySessionComponentBase
     {
-        public static readonly Vector2I ModVersion = new Vector2I(2, 1);
+        /// <summary>
+        /// API version, Mod version
+        /// </summary>
+        public static readonly Vector2I ModVersion = new Vector2I(3, 2);
 
         public static MasterSession I;
 
