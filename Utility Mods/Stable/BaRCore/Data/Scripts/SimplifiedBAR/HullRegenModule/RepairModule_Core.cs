@@ -341,8 +341,7 @@ namespace StarCore.RepairModule
         {
             IgnoreArmorPacket.UpdateIgnoreArmor(Block.EntityId);
 
-            if (!IsServer)
-                SaveSettings();
+            SaveSettings();
 
             if (IsServer)
                 ProcessRepairTargets(Block.CubeGrid, false);
@@ -352,8 +351,7 @@ namespace StarCore.RepairModule
         {
             PriorityOnlyPacket.UpdatePriorityOnly(Block.EntityId);
 
-            if (!IsServer)
-                SaveSettings();
+            SaveSettings();
 
             if (IsServer)
                 ProcessRepairTargets(Block.CubeGrid, false);
@@ -363,8 +361,7 @@ namespace StarCore.RepairModule
         {
             SubsystemPriorityPacket.UpdateSubsystemPriority(Block.EntityId);
 
-            if (!IsServer)
-                SaveSettings();
+            SaveSettings();
             
             if (IsServer)
                 ProcessRepairTargets(Block.CubeGrid, false);
