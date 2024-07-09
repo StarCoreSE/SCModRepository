@@ -109,9 +109,9 @@ namespace SC.SUGMA.HeartNetworking
                     DateTime.UtcNow.TimeOfDay.TotalMilliseconds - NetworkTimeSync.MessageSendTimestamp;
                 NetworkTimeSync.ServerTimeOffset =
                     OutgoingTimestamp - IncomingTimestamp - NetworkTimeSync.ThisPlayerPing;
-                Log.Info("\nOutgoing Timestamp: " + OutgoingTimestamp + "\nIncoming Timestamp: " + IncomingTimestamp);
-                Log.Info("ThisPlayerPing: " + NetworkTimeSync.ThisPlayerPing);
-                Log.Info("ServerTimeOffset: " + NetworkTimeSync.ServerTimeOffset);
+                //Log.Info("\nOutgoing Timestamp: " + OutgoingTimestamp + "\nIncoming Timestamp: " + IncomingTimestamp);
+                //Log.Info("ThisPlayerPing: " + NetworkTimeSync.ThisPlayerPing);
+                //Log.Info("ServerTimeOffset: " + NetworkTimeSync.ServerTimeOffset);
             }
         }
     }
