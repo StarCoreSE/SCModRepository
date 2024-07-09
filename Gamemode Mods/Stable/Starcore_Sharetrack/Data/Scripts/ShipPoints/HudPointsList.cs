@@ -112,6 +112,8 @@ namespace ShipPoints
                 _shipTracker = new ShipTracker(focusedGrid, false);
             }
 
+            _shipTracker.Update();
+
             var totalShieldString = "None";
 
             if (_shipTracker.MaxShieldHealth > 100)
@@ -182,7 +184,7 @@ namespace ShipPoints
             double lastExecutionTime = _executionTimes.Count > 0 ? _executionTimes.Last() : 0;
 
 
-            //sb.AppendLine($"Last Update took: {lastExecutionTime:F2} ms");
+            sb.AppendLine($"Last Update took: {lastExecutionTime:F2} ms");
             // Basic Info
             sb.AppendLine("----Basic Info----");
             sb.AppendFormat("<color=White>{0} ", focusedGrid.DisplayName);

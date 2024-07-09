@@ -14,7 +14,7 @@ namespace FusionSystems.
 {
     internal class S_FusionSystem
     {
-        public const float MegawattsPerFusionPower = 29;
+        public const float MegawattsPerFusionPower = 32;
         public const float NewtonsPerFusionPower = 12800000;
 
         public List<S_FusionArm> Arms = new List<S_FusionArm>();

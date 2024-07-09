@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<!--<CubeBlocks>
-		 <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+	<CubeBlocks>
+		 <!--<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>203mmTwin</SubtypeId>
@@ -13,12 +13,12 @@
 				Ai range of 5km, shell range of 7km
 				BP: 200
 			</Description>
-			<Icon>Textures\GUI\Icons\203twin.dds</Icon>
+			<Icon>Textures\GUI\Icons\Ger203mm.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="3" y="2" z="3"/>
 			<ModelOffset x="0" y="0" z="0"/>
-			<Model>Models\203mmTwin\203Base.mwm</Model>
+			<Model>Models\203mmTwin\Ger203mm.mwm</Model>
 			<Components>
 				<Component Subtype="SteelPlate" Count="400" />
 				<Component Subtype="MetalGrid" Count="100" />
@@ -34,6 +34,6 @@
 				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
 			</MountPoints>
 			<BlockPairName>203mmTwin</BlockPairName>
-		</Definition> 
-	</CubeBlocks>-->
+		</Definition> -->
+	</CubeBlocks>
 </Definitions>
