@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Blueprints>
+	
+        <Blueprint>
+            <Id>
+                <TypeId>BlueprintDefinition</TypeId>
+                <SubtypeId>ASH_FrameComponent</SubtypeId>
+            </Id>
+            <DisplayName>ASH_FrameComponent</DisplayName>
+            <Icon>Textures\GUI\Icons\component\construction_components_component.dds</Icon>
+            <Prerequisites>
+                <Item Amount="8" TypeId="Ingot" SubtypeId="Iron" />
+            </Prerequisites>
+            <Result Amount="1" TypeId="Component" SubtypeId="ASH_FrameComponent" />
+            <BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>
+            <IsPrimary>true</IsPrimary>
+        </Blueprint>
+
+      <Blueprint>
+        <Id>
+          <TypeId>BlueprintDefinition</TypeId>
+          <SubtypeId>ASH_PlateComponent</SubtypeId>
+        </Id>
+        <DisplayName>ASH_PlateComponent</DisplayName>
+        <Icon>Textures\GUI\Icons\component\construction_components_component.dds</Icon>
+        <Prerequisites>
+          <Item Amount="8" TypeId="Ingot" SubtypeId="Iron" />
+        </Prerequisites>
+        <Result Amount="1" TypeId="Component" SubtypeId="ASH_PlateComponent" />
+        <BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>
+        <IsPrimary>true</IsPrimary>
+      </Blueprint>
+    </Blueprints>
+</Definitions>
