@@ -9,7 +9,7 @@ namespace SC.SUGMA.HeartNetworking.Custom
         public override void Received(ulong SenderSteamId)
         {
             Log.Info("Received join-sync request from " + SenderSteamId);
-            GameStatePacket.UpdateGamestate();
+            GameStatePacket.UpdateGamestate(SUGMA_SessionComponent.I.CurrentGamemode?.Arguments);
         }
 
         public static void RequestSync()

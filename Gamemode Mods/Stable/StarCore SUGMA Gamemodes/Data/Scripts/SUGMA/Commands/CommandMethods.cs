@@ -25,9 +25,17 @@ namespace SC.SUGMA.Commands
                 return;
             }
 
+            // Remove first two items from arguments
             string[] startArgs = Array.Empty<string>();
-            //if (args.Length > 2)
-            //    startArgs = args.RemoveIndices(new List<int>() { 0, 1 }); // TODO remove first two objects from args array
+            if (args.Length > 3)
+            {
+                string[] newStartArgs = new string[args.Length - 2];
+                for (int i = 2; i < args.Length; i++)
+                {
+                    newStartArgs[i-2] = args[i];
+                }
+                startArgs = newStartArgs;
+            }
 
             if (!SUGMA_SessionComponent.I.StartGamemode(args[1].ToLower(), startArgs, true))
             {

@@ -193,7 +193,7 @@ namespace SC.SUGMA
             SUtils.SetWorldPermissionsForMatch(true);
 
             if (MyAPIGateway.Session.IsServer || notifyNetwork)
-                GameStatePacket.UpdateGamestate();
+                GameStatePacket.UpdateGamestate(arguments);
 
             return true;
         }

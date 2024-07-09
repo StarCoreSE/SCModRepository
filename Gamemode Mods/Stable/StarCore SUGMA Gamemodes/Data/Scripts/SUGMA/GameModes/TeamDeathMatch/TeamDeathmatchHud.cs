@@ -147,6 +147,9 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                 RemoveChild(banner);
             }
 
+            if (_timerLabel == null)
+                return;
+
             LabelBox winnerLabel = new LabelBox(_timerLabel)
             {
                 Text = winner != null ? 

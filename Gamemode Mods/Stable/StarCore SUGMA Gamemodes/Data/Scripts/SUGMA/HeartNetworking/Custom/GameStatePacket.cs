@@ -8,10 +8,11 @@ namespace SC.SUGMA.HeartNetworking.Custom
     public class GameStatePacket : PacketBase
     {
         [ProtoMember(11)] public string Gamemode;
+        [ProtoMember(12)] public string[] Arguments;
 
         public override void Received(ulong SenderSteamId)
         {
-            Log.Info("Recieved gamestate update packet. Contents:\n    Gamemode: " + Gamemode);
+            Log.Info("Recieved gamestate update packet. Contents:\n    Gamemode: " + Gamemode + "\n    Arguments: " + string.Join(", ", Arguments ?? Array.Empty<string>()));
 
             if (Gamemode == "null")
             {
@@ -22,17 +23,18 @@ namespace SC.SUGMA.HeartNetworking.Custom
             if ((SUGMA_SessionComponent.I.CurrentGamemode?.ComponentId ?? "null") == Gamemode)
                 return;
 
-            if (!SUGMA_SessionComponent.I.StartGamemode(Gamemode, Array.Empty<string>())) // TODO add arguments
+            if (!SUGMA_SessionComponent.I.StartGamemode(Gamemode, Arguments))
                 Log.Info("Somehow received invalid gamemode request of type " + Gamemode);
         }
 
-        public static void UpdateGamestate(string message = "")
+        public static void UpdateGamestate(string[] args = null)
         {
             GameStatePacket packet = new GameStatePacket
             {
-                Gamemode = SUGMA_SessionComponent.I.CurrentGamemode?.ComponentId ?? "null"
+                Gamemode = SUGMA_SessionComponent.I.CurrentGamemode?.ComponentId ?? "null",
+                Arguments = args
             };
-            Log.Info("Sending gamestate update packet. Contents:\n    Gamemode: " + packet.Gamemode);
+            Log.Info("Sending gamestate update packet. Contents:\n    Gamemode: " + packet.Gamemode + "\n    Arguments: " + string.Join(", ", args ?? Array.Empty<string>()));
 
             if (MyAPIGateway.Session.IsServer)
                 HeartNetwork.I.SendToEveryone(packet);
