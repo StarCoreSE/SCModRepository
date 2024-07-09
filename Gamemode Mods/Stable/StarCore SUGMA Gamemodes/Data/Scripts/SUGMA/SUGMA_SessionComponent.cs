@@ -38,7 +38,10 @@ namespace SC.SUGMA
         public GamemodeBase CurrentGamemode = null;
 
         public bool HasInited = false;
-        private int _pollTimer = 0;
+        /// <summary>
+        /// How many ticks to wait after joining before requesting sync
+        /// </summary>
+        private int _pollTimer = 300;
 
         #region Base Methods
 
@@ -77,22 +80,17 @@ namespace SC.SUGMA
             if (!ShareTrackApi.IsReady)
                 return;
 
+            if (!HasInited && !MyAPIGateway.Session.IsServer)
             {
-                // Clients should sync first-thing, in case a game is already running.
-                if (!HasInited)
+                // Clients should sync with a slight delay, in case a game is already running.
+                // This gives time for ShareTrack to catch up.
+                if (_pollTimer <= 0 && ShareTrackApi.AreTrackedGridsLoaded())
                 {
-                    _pollTimer = 600;
+                    SyncRequestPacket.RequestSync();
                     HasInited = true;
                 }
 
-                if (_pollTimer == 0)
-                {
-                    if (!MyAPIGateway.Session.IsServer)
-                        SyncRequestPacket.RequestSync();
-                    _pollTimer = -1;
-                }
-                else if (_pollTimer > 0)
-                    _pollTimer--;
+                _pollTimer--;
             }
 
             try
