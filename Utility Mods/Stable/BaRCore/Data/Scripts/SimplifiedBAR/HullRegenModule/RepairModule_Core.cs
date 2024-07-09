@@ -230,6 +230,8 @@ namespace StarCore.RepairModule
 
                 if (SortTimer == 0 || NeedsSorting)
                 {
+                    ProcessRepairTargets(Block.CubeGrid, false);
+
                     RepairTargets = RepairTargets.OrderBy(block => block.Integrity).ToList();
                     PriorityRepairTargets = PriorityRepairTargets.OrderBy(block => block.Integrity).ToList();
 
