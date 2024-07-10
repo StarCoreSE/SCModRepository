@@ -51,92 +51,8 @@
       </Waves>
     </Sound>
 	
-	<Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>37mmFire</SubtypeId>
-      </Id>
-      <Category>WEP_SHIP</Category>
-      <MaxDistance>250</MaxDistance>
-      <Volume>1</Volume>
-	  <SoundLimit>10</SoundLimit>
-	  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>5</DynamicMusicAmount>
-      <Loopable>false</Loopable>
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\37mmFire1.wav</Start>
-        </Wave>
-		<Wave Type="D3">
-          <Start>Audio\37mmFire2.wav</Start>
-        </Wave>
-		<Wave Type="D3">
-          <Start>Audio\37mmFire3.wav</Start>
-        </Wave>
-      </Waves>
-    </Sound>
 	
-	<Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>37mmAcadFire</SubtypeId>
-      </Id>
-      <Category>WEP_SHIP</Category>
-      <MaxDistance>500</MaxDistance>
-      <Volume>1.5</Volume>
-	  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>5</DynamicMusicAmount>
-      <Loopable>false</Loopable>
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\37mmAcadShot1.wav</Start>
-        </Wave>
-		<Wave Type="D3">
-          <Start>Audio\37mmAcadShot2.wav</Start>
-        </Wave>
-		<Wave Type="D3">
-          <Start>Audio\37mmAcadShot3.wav</Start>
-        </Wave>
-      </Waves>
-    </Sound>
 	
-    <Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>37mmFireDist</SubtypeId>
-      </Id>
-      <Category>SHOT</Category>
-      <MaxDistance>5000</MaxDistance>
-      <Volume>0.5</Volume>
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\old\3.7cmFire.xwm</Start>
-        </Wave>
-      </Waves>
-    </Sound>
-	
-	<Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>20mmOerlikon_Fire</SubtypeId>
-      </Id>
-      <Category>WEP_SHIP</Category>
-      <MaxDistance>450</MaxDistance>
-	  <DistantSounds>
-        <DistantSound DistanceCrossfade="10" Distance="500" Sound="20mmOerlikon_FireDist" />
-      </DistantSounds>
-	  <SoundLimit>10</SoundLimit>
-      <Volume>1</Volume>
-	  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>5</DynamicMusicAmount>
-      <Loopable>true</Loopable>
-      <Waves>
-		<Wave Type="D3">
-          <Loop>Audio\20mmOerlikonFireLoop.wav</Loop>
-		  <End>Audio\20mmOerlikonFireEnd.wav</End>
-        </Wave>	
-      </Waves>
-    </Sound>
 	
 	<Sound>
       <Id>
@@ -199,38 +115,6 @@
       </Waves>
     </Sound>
 	
-    <Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>20mmOerlikon_FireDist</SubtypeId>
-      </Id>
-      <Category>SHOT</Category>
-      <MaxDistance>2500</MaxDistance>
-      <Volume>0.6</Volume>
-	  <SoundLimit>5</SoundLimit>
-	  <Loopable>true</Loopable>
-      <Waves>
-		<Wave Type="D3">
-          <Loop>Audio\20mmOerlikonFireLoopFar.wav</Loop>
-		  
-        </Wave>	
-      </Waves>
-    </Sound>
-	
-	<Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>20mmOerlikon_Reload</SubtypeId>
-      </Id>
-      <Category>SHOT</Category>
-      <MaxDistance>300</MaxDistance>
-      <Volume>0.5</Volume>
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\old\20mmReload.wav</Start>
-        </Wave>
-      </Waves>
-    </Sound>
 
 	<Sound>
       <Id>
@@ -263,31 +147,7 @@
           <Start>Audio\old\12.8cmFire.xwm</Start>
         </Wave>
       </Waves>
-    </Sound>
-
-	<Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>105mmFire</SubtypeId>
-      </Id>
-      <Category>WEP_SHIP</Category>
-      <MaxDistance>700</MaxDistance>
-      <Volume>1.5</Volume>
-	  <SoundLimit>10</SoundLimit>
-	  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>5</DynamicMusicAmount>
-      <Loopable>false</Loopable>
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\105mmFire1.wav</Start>
-        </Wave>
-		<Wave Type="D3">
-          <Start>Audio\105mmFire2.wav</Start>
-        </Wave>
-      </Waves>
     </Sound>	
-
-	
 	
 	<Sound>
       <Id>
@@ -472,106 +332,7 @@
         </Wave>
       </Waves>
     </Sound>
-	
-	<Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>16InchFire</SubtypeId>
-      </Id>
-      <Category>WEP_SHIP</Category>
-      <MaxDistance>500</MaxDistance>
-      <Volume>1</Volume>
-	  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>5</DynamicMusicAmount>
-	  <SoundLimit>10</SoundLimit>
-      <Loopable>false</Loopable>
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\16InchFire1.wav</Start>
-        </Wave>
-		<Wave Type="D3">
-          <Start>Audio\16InchFire2.wav</Start>
-        </Wave>
-		<Wave Type="D3">
-          <Start>Audio\16InchFire3.wav</Start>
-        </Wave>
-      </Waves>
-    </Sound>
-	
-	<Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>AxisGenBBFire</SubtypeId>
-      </Id>
-      <Category>WEP_SHIP</Category>
-      <MaxDistance>500</MaxDistance>
-      <Volume>1</Volume>
-	  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>5</DynamicMusicAmount>
-	  <SoundLimit>5</SoundLimit>
-      <Loopable>false</Loopable>
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\AxisBBShot1.wav</Start>
-        </Wave>
-		<Wave Type="D3">
-          <Start>Audio\AxisBBShot2.wav</Start>
-        </Wave>
-		
-      </Waves>
-    </Sound>
-	
-	<Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>381mmFire</SubtypeId>
-      </Id>
-      <Category>WEP_SHIP</Category>
-      <MaxDistance>500</MaxDistance>
-      <Volume>1</Volume>
-	  <PreventSynchronization>6</PreventSynchronization>
-	  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>5</DynamicMusicAmount>
-	  <SoundLimit>10</SoundLimit>
-      <Loopable>false</Loopable>
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\381mmFire1.wav</Start>
-        </Wave>
-		<Wave Type="D3">
-          <Start>Audio\381mmFire2.wav</Start>
-        </Wave>
-		
-      </Waves>
-    </Sound>
-	
-	<Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>20mmACFire</SubtypeId>
-      </Id>
-      <Category>WEP_SHIP</Category>
-      <MaxDistance>200</MaxDistance>
-      <Volume>1.5</Volume>
-	  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>5</DynamicMusicAmount>
-      <Loopable>false</Loopable>
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\20mmFire1.wav</Start>
-        </Wave>
-		<Wave Type="D3">
-          <Start>Audio\20mmFire2.wav</Start>
-        </Wave>
-		<Wave Type="D3">
-          <Start>Audio\20mmFire3.wav</Start>
-        </Wave>
-		<Wave Type="D3">
-          <Start>Audio\20mmFire4.wav</Start>
-        </Wave>
-      </Waves>
-    </Sound>
-	
+
 	<Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
@@ -1021,7 +782,7 @@
 			  <SubtypeId>FALargeShot</SubtypeId>
 		  </Id>
 		  <Category>WEP_SHIP</Category>
-		  <MaxDistance>900</MaxDistance>
+		  <MaxDistance>5000</MaxDistance>
 		  <Volume>1.2</Volume>
 
 		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
@@ -1039,5 +800,94 @@
 			  </Wave>
 		  </Waves>
 	  </Sound>
+
+
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>FAHeavyShot</SubtypeId>
+		  </Id>
+		  <Category>WEP_SHIP</Category>
+		  <MaxDistance>6000</MaxDistance>
+		  <Volume>1.5</Volume>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>5</DynamicMusicAmount>
+
+		  <Loopable>false</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\HeavyShot1.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\HeavyShot2.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\HeavyShot3.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\HeavyShot4.wav</Start>
+			  </Wave>
+
+		  </Waves>
+	  </Sound>
+
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>GenSmallShot</SubtypeId>
+		  </Id>
+		  <Category>WEP_SHIP</Category>
+		  <MaxDistance>3500</MaxDistance>
+		  <Volume>1.5</Volume>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>5</DynamicMusicAmount>
+		  <Loopable>false</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\SmallShot1.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\SmallShot2.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\SmallShot3.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\SmallShot4.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+
+
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>FAMediumShot</SubtypeId>
+		  </Id>
+		  <Category>WEP_SHIP</Category>
+		  <MaxDistance>4000</MaxDistance>
+		  <Volume>2</Volume>
+
+
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>5</DynamicMusicAmount>
+		  <Loopable>false</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\MediumShot1.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\MediumShot2.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\MediumShot3.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\MediumShot4.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	  
+	  
   </Sounds>
 </Definitions>
