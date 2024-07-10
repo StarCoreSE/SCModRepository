@@ -339,38 +339,56 @@ namespace StarCore.RepairModule
 
         private void IgnoreArmor_Update(bool _bool)
         {
+            Log.Info("IgnoreArmor Update triggered");
+
             IgnoreArmorPacket.UpdateIgnoreArmor(Block.EntityId);
 
             SaveSettings();
 
             if (IsServer)
+            {
+                Log.Info("Processing Repair Targets on Event Trigger: IgnoreArmor");
                 ProcessRepairTargets(Block.CubeGrid, false);
+            }
+                
         }
 
         private void PriorityOnly_Update(bool _bool)
         {
+            Log.Info("PriorityOnly Update triggered");
+
             PriorityOnlyPacket.UpdatePriorityOnly(Block.EntityId);
 
             SaveSettings();
 
             if (IsServer)
+            {
+                Log.Info("Processing Repair Targets on Event Trigger: PriorityOnly");
                 ProcessRepairTargets(Block.CubeGrid, false);
+            }
         }
 
         private void SubsystemPriority_Update(long _long)
         {
+            Log.Info("SubsystemPriority Update triggered");
+
             SubsystemPriorityPacket.UpdateSubsystemPriority(Block.EntityId);
 
             SaveSettings();
-            
+
             if (IsServer)
+            {
+                Log.Info("Processing Repair Targets on Event Trigger: SubsystemPriority");
                 ProcessRepairTargets(Block.CubeGrid, false);
+            }
         }
         #endregion
 
         #region Settings
         bool LoadSettings()
         {
+            Log.Info("Attempting to Load Settings...");
+
             if (Block.Storage == null)
                 return false;
 
@@ -388,12 +406,13 @@ namespace StarCore.RepairModule
                     PriorityOnly = loadedSettings.Stored_PriorityOnly;
                     SubsystemPriority = loadedSettings.Stored_SubsystemPriority;
 
+                    Log.Info("Settings Loaded Successfully");
                     return true;
                 }
             }
             catch (Exception e)
             {
-                MyLog.Default.WriteLineAndConsole($"Error loading settings!\n{e}");
+                Log.Error($"Error loading settings!\n{e}");
             }
 
             return false;
@@ -404,7 +423,11 @@ namespace StarCore.RepairModule
             try
             {
                 if (Block == null)
+                {
+                    Log.Info("SaveSettings called but Block is null.");
                     return;
+                }
+                    
 
                 if (MyAPIGateway.Utilities == null)
                     throw new NullReferenceException($"MyAPIGateway.Utilities == null; entId={Entity?.EntityId};");
@@ -420,10 +443,11 @@ namespace StarCore.RepairModule
                 };
 
                 Block.Storage.SetValue(SettingsID, Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(settings)));
+                Log.Info("Settings saved successfully");
             }
             catch (Exception e)
             {
-                MyLog.Default.WriteLineAndConsole($"Error saving settings!\n{e}");
+                Log.Error($"Error saving settings!\n{e}");
             }
         }
         #endregion
