@@ -110,6 +110,7 @@ namespace ShipPoints
             if (_shipTracker == null && !TrackingManager.I.TrackedGrids.TryGetValue(focusedGrid, out _shipTracker))
             {
                 _shipTracker = new ShipTracker(focusedGrid, false);
+                Log.Info($"ShiftTCalcs Tracked grid {focusedGrid.DisplayName}. Visible: false");
             }
 
             _shipTracker.Update();
@@ -244,7 +245,10 @@ namespace ShipPoints
             ShipTracker tracked;
             TrackingManager.I.TrackedGrids.TryGetValue(focusedGrid, out tracked);
             if (tracked == null)
+            {
                 tracked = new ShipTracker(focusedGrid, false);
+                Log.Info($"BattleShiftTCalcs Tracked grid {focusedGrid.DisplayName}. Visible: false");
+            }
 
             var totalShieldString = "None";
 

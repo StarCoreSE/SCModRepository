@@ -80,6 +80,7 @@ namespace ShipPoints.ShipTracking
                 if (!TrackedGrids.ContainsKey(grid))
                 {
                     var tracker = new ShipTracker(grid);
+                    Log.Info($"OnEntityAdd Tracked grid {grid.DisplayName}. Visible: true");
                     // Automatically added to the TrackedGrids list
                 }
             }
@@ -167,6 +168,7 @@ namespace ShipPoints.ShipTracking
                     return;
 
             var tracker = new ShipTracker(grid);
+            Log.Info($"TrackGrid Tracked grid {grid.DisplayName}. Visible: true");
             // Automatically added to tracked grid list
 
             OnShipTracked?.Invoke(grid, true);
