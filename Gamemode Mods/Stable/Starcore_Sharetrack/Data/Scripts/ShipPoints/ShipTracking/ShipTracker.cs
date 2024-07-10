@@ -38,14 +38,11 @@ namespace ShipPoints.ShipTracking
 
         public ShipTracker(IMyCubeGrid grid, bool showOnHud = true)
         {
-            TransferToGrid(grid);
+            TransferToGrid(grid, showOnHud);
 
             Update();
 
-            if (!showOnHud)
-                return;
-
-            if (MyAPIGateway.Utilities.IsDedicated)
+            if (!showOnHud || MyAPIGateway.Utilities.IsDedicated)
                 return;
 
             _nametag = new HudAPIv2.HUDMessage(new StringBuilder("Initializing..."), Vector2D.Zero,
@@ -54,7 +51,7 @@ namespace ShipPoints.ShipTracking
             UpdateHud();
         }
 
-        private void TransferToGrid(IMyCubeGrid newGrid)
+        private void TransferToGrid(IMyCubeGrid newGrid, bool showOnHud = true)
         {
             if (Grid != null)
             {
@@ -91,7 +88,7 @@ namespace ShipPoints.ShipTracking
             Grid.OnGridSplit += OnGridSplit;
             Grid.GetGridGroup(GridLinkTypeEnum.Physical).OnGridAdded += OnGridAdd;
             Grid.GetGridGroup(GridLinkTypeEnum.Physical).OnGridRemoved += OnGridRemove;
-            if (!TrackingManager.I.TrackedGrids.ContainsKey(Grid))
+            if (!TrackingManager.I.TrackedGrids.ContainsKey(Grid) && showOnHud)
                 TrackingManager.I.TrackedGrids.Add(Grid, this);
         }
 

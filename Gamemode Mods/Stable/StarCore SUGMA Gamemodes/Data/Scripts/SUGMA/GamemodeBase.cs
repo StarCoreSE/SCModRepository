@@ -1,15 +1,13 @@
 ﻿using Sandbox.ModAPI;
-using SC.SUGMA.GameState;
-using System.Runtime.Serialization.Formatters;
-using VRage.Game.ModAPI;
 
 namespace SC.SUGMA
 {
     public abstract class GamemodeBase : ComponentBase
     {
+        public bool IsStarted;
         public abstract string ReadableName { get; internal set; }
         public abstract string Description { get; internal set; }
-        public bool IsStarted = false;
+        public string[] Arguments { get; internal set; }
 
         public virtual void StartRound(string[] arguments = null)
         {
@@ -17,6 +15,7 @@ namespace SC.SUGMA
                 SUGMA_SessionComponent.I.CurrentGamemode.IsStarted)
                 SUGMA_SessionComponent.I.CurrentGamemode.StopRound();
             SUGMA_SessionComponent.I.CurrentGamemode = this;
+            Arguments = arguments;
 
             DisplayStartMessage();
             IsStarted = true;

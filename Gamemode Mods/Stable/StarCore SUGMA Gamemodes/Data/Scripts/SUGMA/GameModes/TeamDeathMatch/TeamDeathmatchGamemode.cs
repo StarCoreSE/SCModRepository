@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
@@ -10,30 +9,30 @@ using VRage.Game.ModAPI;
 namespace SC.SUGMA.GameModes.TeamDeathMatch
 {
     /// <summary>
-    /// Each faction starts with 1200 seconds. Deaths remove a fraction of seconds.
+    ///     Each faction starts with 1200 seconds. Deaths remove a fraction of seconds.
     /// </summary>
     internal class TeamDeathmatchGamemode : GamemodeBase
     {
         public const double MatchDuration = 20;
 
-        internal ShareTrackApi ShareTrackApi => SUGMA_SessionComponent.I.ShareTrackApi;
-        internal MatchTimer _matchTimer => SUGMA_SessionComponent.I.GetComponent<MatchTimer>("MatchTimer");
+        /// <summary>
+        ///     Lists currently tracked factions. Mapped to grid count.
+        /// </summary>
+        public readonly Dictionary<IMyFaction, int> TrackedFactions = new Dictionary<IMyFaction, int>();
+
+        private bool _remOuter = false, _remMiddle = false, _remInner = false;
+
+        internal IMyFaction _winningFaction;
 
 
         public PointTracker PointTracker;
+
+        internal ShareTrackApi ShareTrackApi => SUGMA_SessionComponent.I.ShareTrackApi;
+        internal MatchTimer _matchTimer => SUGMA_SessionComponent.I.GetComponent<MatchTimer>("MatchTimer");
         public override string ReadableName { get; internal set; } = "Team Deathmatch";
 
         public override string Description { get; internal set; } =
             "Factions fight against eachother until tickets run out. Kill enemy players to remove tickets.";
-
-        internal IMyFaction _winningFaction = null;
-
-        private bool _remOuter = false, _remMiddle = false, _remInner = false;
-
-        /// <summary>
-        /// Lists currently tracked factions. Mapped to grid count.
-        /// </summary>
-        public readonly Dictionary<IMyFaction, int> TrackedFactions = new Dictionary<IMyFaction, int>();
 
         public override void Close()
         {
@@ -42,20 +41,16 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
         public override void UpdateActive()
         {
-            if (PointTracker == null || _matchTimer == null || TrackedFactions == null) // ten billion nullchecks of aristeas
+            if (PointTracker == null || _matchTimer == null ||
+                TrackedFactions == null) // ten billion nullchecks of aristeas
                 return;
 
             foreach (var factionKvp in TrackedFactions.Keys.ToArray())
-            {
                 if (CalculateFactionPoints(factionKvp) <= 0)
-                {
                     // Stop updating if the game just ended
                     if (OnFactionKilled(factionKvp))
                         return;
-                    // TODO: Spawn keen explosion on remaining grids.
-                }
-            }
-
+            // TODO: Spawn keen explosion on remaining grids.
             //double matchRatio = 1 - currentPoints / basePoints;
             //
             //if (matchRatio <= 0.76) // If within 12 seconds of 15:00 matchtime (assuming 20:00 total)
@@ -94,11 +89,12 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
         private void RemoveBlockers(float maxDistanceFromCenter)
         {
-            List<IMyCubeGrid> covers = new List<IMyCubeGrid>();
-            MyAPIGateway.Entities.GetEntities(null, (ent) =>
+            var covers = new List<IMyCubeGrid>();
+            MyAPIGateway.Entities.GetEntities(null, ent =>
             {
-                IMyCubeGrid grid = ent as IMyCubeGrid;
-                if (grid == null || grid.DisplayName != "#EntityCover" || ((MyCubeGrid)grid).BlocksCount > 1 || grid.GetPosition().Length() <= maxDistanceFromCenter)
+                var grid = ent as IMyCubeGrid;
+                if (grid == null || grid.DisplayName != "#EntityCover" || ((MyCubeGrid)grid).BlocksCount > 1 ||
+                    grid.GetPosition().Length() <= maxDistanceFromCenter)
                     return false;
 
                 covers.Add(grid);
@@ -118,7 +114,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
             foreach (var grid in ShareTrackApi.GetTrackedGrids())
             {
-                IMyFaction faction = PlayerTracker.I.GetGridFaction(grid);
+                var faction = PlayerTracker.I.GetGridFaction(grid);
                 if (faction == null || !ShareTrackApi.IsGridAlive(grid))
                     continue;
 
@@ -140,7 +136,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             ShareTrackApi.RegisterOnAliveChanged(OnAliveChanged);
             ShareTrackApi.RegisterOnTrack(OnGridTrackChanged);
 
-            List<string> factionNames = new List<string>();
+            var factionNames = new List<string>();
             foreach (var factionKvp in TrackedFactions)
             {
                 PointTracker.SetFactionPoints(factionKvp.Key, factionKvp.Value);
@@ -157,14 +153,14 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
             base.StartRound(arguments);
             MyAPIGateway.Utilities.ShowNotification("Combatants: " + string.Join(" vs ", factionNames), 10000, "Red");
-            _matchTimer.Start(MatchDuration);
+            _matchTimer.Start();
 
             if (!MyAPIGateway.Utilities.IsDedicated)
                 SUGMA_SessionComponent.I.RegisterComponent("tdmHud", new TeamDeathmatchHud(this));
 
-            Log.Info($"Started a TDM match." +
-                          $"\n- Combatants: {string.Join(" vs ", factionNames)}" +
-                          $"\n- Tracked grids:");
+            Log.Info("Started a TDM match." +
+                     $"\n- Combatants: {string.Join(" vs ", factionNames)}" +
+                     "\n- Tracked grids:");
             foreach (var faction in TrackedFactions)
                 Log.Info($"-   {faction.Key.Name}: {faction.Value} | {CalculateFactionPoints(faction.Key)}pts");
         }
@@ -174,15 +170,13 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             SUGMA_SessionComponent.I.GetComponent<TeamDeathmatchHud>("tdmHud")?.MatchEnded(_winningFaction);
 
             foreach (var factionKvp in TrackedFactions)
+            foreach (var faction in TrackedFactions.Keys)
             {
-                foreach (var faction in TrackedFactions.Keys)
-                {
-                    if (faction == factionKvp.Key)
-                        continue;
+                if (faction == factionKvp.Key)
+                    continue;
 
-                    MyAPIGateway.Session.Factions.SendPeaceRequest(factionKvp.Key.FactionId, faction.FactionId);
-                    MyAPIGateway.Session.Factions.AcceptPeace(faction.FactionId, factionKvp.Key.FactionId);
-                }
+                MyAPIGateway.Session.Factions.SendPeaceRequest(factionKvp.Key.FactionId, faction.FactionId);
+                MyAPIGateway.Session.Factions.AcceptPeace(faction.FactionId, factionKvp.Key.FactionId);
             }
 
             _matchTimer?.Stop();
@@ -213,7 +207,8 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             if (!TrackedFactions.ContainsKey(faction))
                 return -1;
 
-            return (int)(_matchTimer.MatchDurationMinutes * 60 * (PointTracker.GetFactionPoints(faction) / (float)TrackedFactions[faction]) -
+            return (int)(_matchTimer.MatchDurationMinutes * 60 *
+                         (PointTracker.GetFactionPoints(faction) / (float)TrackedFactions[faction]) -
                          _matchTimer.CurrentMatchTime.TotalSeconds);
         }
 
@@ -221,18 +216,15 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
         {
             Log.Info("GridAliveSet: " + grid.DisplayName + " -> " + isAlive);
 
-            IMyFaction gridFaction = PlayerTracker.I.GetGridFaction(grid);
+            var gridFaction = PlayerTracker.I.GetGridFaction(grid);
             if (gridFaction == null)
                 return;
 
             PointTracker.AddFactionPoints(gridFaction, isAlive ? 1 : -1);
-            if (isAlive)
-            {
-                MyAPIGateway.Utilities.ShowMessage("TDM", $"[{grid.DisplayName}] has returned to life!");
-                //int newPoints = PointTracker.GetFactionPoints(gridFaction);
-                //if (newPoints > TrackedFactions.GetValueOrDefault(gridFaction))
-                //    TrackedFactions[gridFaction] = newPoints; // TODO the UI will break a little bit if this gets called.
-            }
+            if (isAlive) MyAPIGateway.Utilities.ShowMessage("TDM", $"[{grid.DisplayName}] has returned to life!");
+            //int newPoints = PointTracker.GetFactionPoints(gridFaction);
+            //if (newPoints > TrackedFactions.GetValueOrDefault(gridFaction))
+            //    TrackedFactions[gridFaction] = newPoints; // TODO the UI will break a little bit if this gets called.
         }
 
         internal virtual void OnGridTrackChanged(IMyCubeGrid grid, bool isTracked)
@@ -241,7 +233,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
             if (ShareTrackApi.IsGridAlive(grid))
             {
-                IMyFaction gridFaction = PlayerTracker.I.GetGridFaction(grid);
+                var gridFaction = PlayerTracker.I.GetGridFaction(grid);
                 if (gridFaction == null)
                     return;
 
@@ -261,7 +253,8 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                 StopRound();
                 return true;
             }
-            else if (TrackedFactions.Count == 0)
+
+            if (TrackedFactions.Count == 0)
             {
                 _winningFaction = null;
                 StopRound();

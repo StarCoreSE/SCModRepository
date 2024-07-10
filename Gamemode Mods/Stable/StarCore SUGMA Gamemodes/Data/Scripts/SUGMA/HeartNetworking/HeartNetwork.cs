@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Sandbox.ModAPI;
-using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 
 namespace SC.SUGMA.HeartNetworking
@@ -11,12 +10,12 @@ namespace SC.SUGMA.HeartNetworking
     {
         public static HeartNetwork I;
 
+
+        private readonly List<IMyPlayer> TempPlayers = new List<IMyPlayer>();
+
         private int _networkLoadUpdate;
 
         public int NetworkLoadTicks = 240;
-
-
-        private readonly List<IMyPlayer> TempPlayers = new List<IMyPlayer>();
         public Dictionary<Type, int> TypeNetworkLoad = new Dictionary<Type, int>();
 
         public ushort NetworkId { get; private set; }
