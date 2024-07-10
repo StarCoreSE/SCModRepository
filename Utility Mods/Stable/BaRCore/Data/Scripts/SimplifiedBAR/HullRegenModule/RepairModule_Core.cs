@@ -87,7 +87,9 @@ namespace StarCore.RepairModule
         public readonly Guid SettingsID = new Guid("09E18094-46AE-4F55-8215-A407B49F9CAA");
 
         // Timed Sort
-        private int SortTimer = 0;
+        private int UpdateCounter = 0;
+        private const int UpdateInterval = 100;
+        private int SortCounter = 0;
         private const int SortInterval = 48;
         private bool NeedsSorting = false;
 
@@ -138,9 +140,9 @@ namespace StarCore.RepairModule
                 IgnoreArmor = true;
                 PriorityOnly = false;
                 SubsystemPriority = 0;
-            }
 
-            SaveSettings();
+                SaveSettings();
+            }
 
             Block.AppendingCustomInfo += AppendCustomInfo;
 
@@ -171,6 +173,7 @@ namespace StarCore.RepairModule
         {
             base.UpdateAfterSimulation();
 
+            // Repair Function
             if (IsServer)
             {
                 if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0 && Block.IsWorking)
@@ -200,6 +203,27 @@ namespace StarCore.RepairModule
                 }
             }
 
+            // Entity ID based Update Spreading for Reacquisition
+            if (IsServer)
+            {
+                UpdateCounter++;
+
+                if (Block.CubeGrid != null)
+                {
+                    int updateCount = (int)(Block.CubeGrid.EntityId % UpdateInterval);
+
+                    if (UpdateCounter % UpdateInterval == updateCount)
+                    {
+                        ProcessRepairTargets(Block.CubeGrid, false);
+                    }
+                }
+
+                if (UpdateCounter >= int.MaxValue - UpdateInterval)
+                {
+                    UpdateCounter = 0;
+                }
+            }
+
             if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0 && MyAPIGateway.Gui.GetCurrentScreen == MyTerminalPageEnum.ControlPanel)
             {
                 Block.RefreshCustomInfo();
@@ -222,22 +246,20 @@ namespace StarCore.RepairModule
 
             if (IsServer)
             {
-                if (SortTimer > 0 && !NeedsSorting)
+                if (SortCounter > 0 && !NeedsSorting)
                 {
-                    SortTimer--;
+                    SortCounter--;
                     return;
                 }
 
-                if (SortTimer == 0 || NeedsSorting)
+                if (SortCounter == 0 || NeedsSorting)
                 {
-                    ProcessRepairTargets(Block.CubeGrid, false);
-
                     RepairTargets = RepairTargets.OrderBy(block => block.Integrity).ToList();
                     PriorityRepairTargets = PriorityRepairTargets.OrderBy(block => block.Integrity).ToList();
 
-                    SortTimer = SortInterval;
+                    SortCounter = SortInterval;
                     NeedsSorting = false;
-                }                        
+                }
             }
         }
 
@@ -339,8 +361,6 @@ namespace StarCore.RepairModule
 
         private void IgnoreArmor_Update(bool _bool)
         {
-            Log.Info("IgnoreArmor Update triggered");
-
             IgnoreArmorPacket.UpdateIgnoreArmor(Block.EntityId);
 
             SaveSettings();
@@ -355,8 +375,6 @@ namespace StarCore.RepairModule
 
         private void PriorityOnly_Update(bool _bool)
         {
-            Log.Info("PriorityOnly Update triggered");
-
             PriorityOnlyPacket.UpdatePriorityOnly(Block.EntityId);
 
             SaveSettings();
@@ -370,8 +388,6 @@ namespace StarCore.RepairModule
 
         private void SubsystemPriority_Update(long _long)
         {
-            Log.Info("SubsystemPriority Update triggered");
-
             SubsystemPriorityPacket.UpdateSubsystemPriority(Block.EntityId);
 
             SaveSettings();
@@ -387,8 +403,6 @@ namespace StarCore.RepairModule
         #region Settings
         bool LoadSettings()
         {
-            Log.Info("Attempting to Load Settings...");
-
             if (Block.Storage == null)
                 return false;
 
@@ -406,7 +420,6 @@ namespace StarCore.RepairModule
                     PriorityOnly = loadedSettings.Stored_PriorityOnly;
                     SubsystemPriority = loadedSettings.Stored_SubsystemPriority;
 
-                    Log.Info("Settings Loaded Successfully");
                     return true;
                 }
             }
@@ -443,7 +456,6 @@ namespace StarCore.RepairModule
                 };
 
                 Block.Storage.SetValue(SettingsID, Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(settings)));
-                Log.Info("Settings saved successfully");
             }
             catch (Exception e)
             {
