@@ -46,6 +46,15 @@ namespace StarCore.RepairModule
                 if (ignoreArmor != value)
                 {
                     ignoreArmor = value;
+
+                    SaveSettings();
+
+                    if (IsServer)
+                    {
+                        Log.Info("Processing Repair Targets on Event Trigger: IgnoreArmor");
+                        ProcessRepairTargets(Block.CubeGrid, false);
+                    }
+
                     OnIgnoreArmorChanged?.Invoke(ignoreArmor);
                 }
             }
@@ -60,6 +69,15 @@ namespace StarCore.RepairModule
                 if (priorityOnly != value)
                 {
                     priorityOnly = value;
+
+                    SaveSettings();
+
+                    if (IsServer)
+                    {
+                        Log.Info("Processing Repair Targets on Event Trigger: PriorityOnly");
+                        ProcessRepairTargets(Block.CubeGrid, false);
+                    }
+
                     OnPriorityOnlyChanged?.Invoke(priorityOnly);
                 }
             }
@@ -75,6 +93,15 @@ namespace StarCore.RepairModule
                 if (subsystemPriority != newPriority)
                 {
                     subsystemPriority = newPriority;
+
+                    SaveSettings();
+
+                    if (IsServer)
+                    {
+                        Log.Info("Processing Repair Targets on Event Trigger: SubsystemPriority");
+                        ProcessRepairTargets(Block.CubeGrid, false);
+                    }
+
                     OnSubsystemPriorityChanged?.Invoke(value);
                 }
             }
@@ -361,42 +388,17 @@ namespace StarCore.RepairModule
 
         private void IgnoreArmor_Update(bool _bool)
         {
-            IgnoreArmorPacket.UpdateIgnoreArmor(Block.EntityId);
-
-            SaveSettings();
-
-            if (IsServer)
-            {
-                Log.Info("Processing Repair Targets on Event Trigger: IgnoreArmor");
-                ProcessRepairTargets(Block.CubeGrid, false);
-            }
-                
+            IgnoreArmorPacket.UpdateIgnoreArmor(Block.EntityId);                
         }
 
         private void PriorityOnly_Update(bool _bool)
         {
             PriorityOnlyPacket.UpdatePriorityOnly(Block.EntityId);
-
-            SaveSettings();
-
-            if (IsServer)
-            {
-                Log.Info("Processing Repair Targets on Event Trigger: PriorityOnly");
-                ProcessRepairTargets(Block.CubeGrid, false);
-            }
         }
 
         private void SubsystemPriority_Update(long _long)
         {
             SubsystemPriorityPacket.UpdateSubsystemPriority(Block.EntityId);
-
-            SaveSettings();
-
-            if (IsServer)
-            {
-                Log.Info("Processing Repair Targets on Event Trigger: SubsystemPriority");
-                ProcessRepairTargets(Block.CubeGrid, false);
-            }
         }
         #endregion
 
