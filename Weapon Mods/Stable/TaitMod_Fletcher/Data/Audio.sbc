@@ -783,7 +783,7 @@
 		  </Id>
 		  <Category>WEP_SHIP</Category>
 		  <MaxDistance>5000</MaxDistance>
-		  <Volume>1.2</Volume>
+		  <Volume>1</Volume>
 
 		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 		  <DynamicMusicAmount>5</DynamicMusicAmount>
@@ -809,10 +809,9 @@
 		  </Id>
 		  <Category>WEP_SHIP</Category>
 		  <MaxDistance>6000</MaxDistance>
-		  <Volume>1.5</Volume>
+		  <Volume>1</Volume>
 		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 		  <DynamicMusicAmount>5</DynamicMusicAmount>
-
 		  <Loopable>false</Loopable>
 		  <Waves>
 			  <Wave Type="D3">
@@ -837,10 +836,12 @@
 			  <SubtypeId>GenSmallShot</SubtypeId>
 		  </Id>
 		  <Category>WEP_SHIP</Category>
-		  <MaxDistance>3500</MaxDistance>
-		  <Volume>1.5</Volume>
+		  <MaxDistance>3000</MaxDistance>
+		  <Volume>0.2</Volume>
 		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 		  <DynamicMusicAmount>5</DynamicMusicAmount>
+		  <PreventSynchronization> 0 </PreventSynchronization>
+		  <SoundLimit> 4 </SoundLimit>
 		  <Loopable>false</Loopable>
 		  <Waves>
 			  <Wave Type="D3">
@@ -866,11 +867,11 @@
 		  </Id>
 		  <Category>WEP_SHIP</Category>
 		  <MaxDistance>4000</MaxDistance>
-		  <Volume>2</Volume>
-
-
+		  <Volume>0.3</Volume>
 		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 		  <DynamicMusicAmount>5</DynamicMusicAmount>
+		  <PreventSynchronization> 0 </PreventSynchronization>
+		  <SoundLimit> 6 </SoundLimit>
 		  <Loopable>false</Loopable>
 		  <Waves>
 			  <Wave Type="D3">
