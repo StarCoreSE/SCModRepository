@@ -658,8 +658,8 @@ namespace ShipPoints
 
 
             ["Cat_Fletcher_Subtypes"] = 23,
-            ["381mmDualR"] = 250,
-            ["381mmDualNR"] = 250,
+            ["381mmDualR"] = 325,
+            ["381mmDualNR"] = 325,
             ["380mmMLE1935"] = 400,
             ["15cmSKC28R"] = 175,
             ["15cmSKC28NR"] = 175,
@@ -681,7 +681,7 @@ namespace ShipPoints
             ["15cmTbtsKC36T"] = 150,
             ["15cmTbtsKC36"] = 150,
             ["203mmTwin"] = 165,
-            ["203mmQuad"] = 325,
+            ["203mmQuad"] = 250,
             ["TorpBarbette"] = 500,
             ["406alternate"] = 400,
             ["Mk25Rangefinder"] = 10,
