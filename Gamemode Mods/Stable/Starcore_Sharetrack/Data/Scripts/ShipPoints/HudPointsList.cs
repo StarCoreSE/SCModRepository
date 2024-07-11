@@ -129,8 +129,14 @@ namespace ShipPoints
 
             var specialBlockTextBuilder = new StringBuilder();
             foreach (var x in _shipTracker.SpecialBlockCounts.Keys)
+            {
+                if (PointCheck.I.GetBattlePoints(x) == 0)
+                    continue;
+
                 specialBlockTextBuilder.AppendFormat("<color=Green>{0}<color=White> x {1}\n",
                     _shipTracker.SpecialBlockCounts[x], x);
+            }
+                
             var specialBlockText = specialBlockTextBuilder.ToString();
 
             var massString = $"{_shipTracker.Mass}";
