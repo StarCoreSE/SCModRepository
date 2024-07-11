@@ -47,7 +47,10 @@ namespace StarCore.RepairModule
                 {
                     ignoreArmor = value;
 
-                    SaveSettings();
+                    if (!IsServer)
+                    {
+                        SaveSettings();
+                    }
 
                     if (IsServer)
                     {
@@ -70,7 +73,10 @@ namespace StarCore.RepairModule
                 {
                     priorityOnly = value;
 
-                    SaveSettings();
+                    if (!IsServer)
+                    {
+                        SaveSettings();
+                    }
 
                     if (IsServer)
                     {
@@ -94,7 +100,10 @@ namespace StarCore.RepairModule
                 {
                     subsystemPriority = newPriority;
 
-                    SaveSettings();
+                    if (!IsServer)
+                    {
+                        SaveSettings();
+                    }
 
                     if (IsServer)
                     {
@@ -162,14 +171,17 @@ namespace StarCore.RepairModule
             OnPriorityOnlyChanged += PriorityOnly_Update;
             OnSubsystemPriorityChanged += SubsystemPriority_Update;
 
-            if (!LoadSettings())
+            if (!IsServer)
             {
-                IgnoreArmor = true;
-                PriorityOnly = false;
-                SubsystemPriority = 0;
+                if (!LoadSettings())
+                {
+                    IgnoreArmor = true;
+                    PriorityOnly = false;
+                    SubsystemPriority = 0;
 
-                SaveSettings();
-            }
+                    SaveSettings();
+                }
+            }           
 
             Block.AppendingCustomInfo += AppendCustomInfo;
 
@@ -336,7 +348,10 @@ namespace StarCore.RepairModule
         {
             try
             {
-                SaveSettings();
+                if (!IsServer)
+                {
+                    SaveSettings();
+                }
             }
             catch (Exception e)
             {
