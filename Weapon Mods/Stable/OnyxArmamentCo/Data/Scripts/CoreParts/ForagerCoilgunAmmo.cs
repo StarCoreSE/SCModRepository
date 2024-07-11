@@ -60,7 +60,7 @@ namespace Scripts
             {
                 AmmoRound = "Forager Shrapnel", // AmmoRound field of the ammo to spawn.
                 Fragments = 50, // Number of projectiles to spawn.
-                Degrees = 80, // Cone in which to randomize direction of spawned projectiles.
+                Degrees = 100, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = false, // fragments will not inherit velocity from parent.
                 Offset = 0f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards), value is read from parent ammo type.
@@ -174,7 +174,7 @@ namespace Scripts
                 {
                     Enable = true,
                     Radius = 3f, // Meters
-                    Damage = 400000f,
+                    Damage = 375000f,
                     Depth = 1f,
                     MaxAbsorb = 0f,
                     Falloff = Linear, //.NoFalloff applies the same damage to all blocks in radius
@@ -502,7 +502,7 @@ namespace Scripts
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
                     Light = 0.5f, // Multiplier for damage against light armor.
                     Heavy = 2f, // Multiplier for damage against heavy armor.
-                    NonArmor = -1f, // Multiplier for damage against every else.
+                    NonArmor = 0.15f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
