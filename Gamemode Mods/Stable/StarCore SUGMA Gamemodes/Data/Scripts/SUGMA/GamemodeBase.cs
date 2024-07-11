@@ -1,4 +1,5 @@
-﻿using Sandbox.ModAPI;
+﻿using System;
+using Sandbox.ModAPI;
 
 namespace SC.SUGMA
 {
@@ -7,7 +8,7 @@ namespace SC.SUGMA
         public bool IsStarted;
         public abstract string ReadableName { get; internal set; }
         public abstract string Description { get; internal set; }
-        public string[] Arguments { get; internal set; }
+        public string[] Arguments { get; internal set; } = Array.Empty<string>();
 
         public virtual void StartRound(string[] arguments = null)
         {
@@ -15,7 +16,7 @@ namespace SC.SUGMA
                 SUGMA_SessionComponent.I.CurrentGamemode.IsStarted)
                 SUGMA_SessionComponent.I.CurrentGamemode.StopRound();
             SUGMA_SessionComponent.I.CurrentGamemode = this;
-            Arguments = arguments;
+            Arguments = arguments ?? Array.Empty<string>();
 
             DisplayStartMessage();
             IsStarted = true;

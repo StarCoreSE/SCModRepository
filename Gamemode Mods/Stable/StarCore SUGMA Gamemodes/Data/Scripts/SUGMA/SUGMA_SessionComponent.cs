@@ -115,15 +115,18 @@ namespace SC.SUGMA
             if (CurrentGamemode == null)
                 return false;
 
-            if (CurrentGamemode.IsStarted)
-                CurrentGamemode.StopRound();
-
+            var currentGamemode = CurrentGamemode;
             CurrentGamemode = null;
+
+            if (currentGamemode.IsStarted)
+                currentGamemode.StopRound();
+
+            string[] oldArgs = currentGamemode.Arguments;
 
             SUtils.SetWorldPermissionsForMatch(false);
 
             if (MyAPIGateway.Session.IsServer || notifyNetwork)
-                GameStatePacket.UpdateGamestate();
+                GameStatePacket.UpdateGamestate(oldArgs);
 
             return true;
         }

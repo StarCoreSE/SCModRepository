@@ -15,6 +15,9 @@ namespace SC.SUGMA.HeartNetworking.Custom
             Log.Info("Recieved gamestate update packet. Contents:\n    Gamemode: " + Gamemode + "\n    Arguments: " +
                      string.Join(", ", Arguments ?? Array.Empty<string>()));
 
+            if (SUGMA_SessionComponent.I.CurrentGamemode != null)
+                SUGMA_SessionComponent.I.CurrentGamemode.Arguments = Arguments ?? Array.Empty<string>();
+
             if (Gamemode == "null")
             {
                 SUGMA_SessionComponent.I.StopGamemode();
@@ -33,7 +36,7 @@ namespace SC.SUGMA.HeartNetworking.Custom
             var packet = new GameStatePacket
             {
                 Gamemode = SUGMA_SessionComponent.I.CurrentGamemode?.ComponentId ?? "null",
-                Arguments = args
+                Arguments = args ?? SUGMA_SessionComponent.I.CurrentGamemode?.Arguments
             };
             Log.Info("Sending gamestate update packet. Contents:\n    Gamemode: " + packet.Gamemode +
                      "\n    Arguments: " + string.Join(", ", args ?? Array.Empty<string>()));

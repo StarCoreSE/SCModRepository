@@ -50,7 +50,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                     // Stop updating if the game just ended
                     if (OnFactionKilled(factionKvp))
                         return;
-            // TODO: Spawn keen explosion on remaining grids.
+
             //double matchRatio = 1 - currentPoints / basePoints;
             //
             //if (matchRatio <= 0.76) // If within 12 seconds of 15:00 matchtime (assuming 20:00 total)
@@ -158,15 +158,42 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             if (!MyAPIGateway.Utilities.IsDedicated)
                 SUGMA_SessionComponent.I.RegisterComponent("tdmHud", new TeamDeathmatchHud(this));
 
+            string trackedGrids = "";
+            foreach (var faction in TrackedFactions)
+                trackedGrids += $"\n-   {faction.Key.Name}: {faction.Value} | {CalculateFactionPoints(faction.Key)}pts";
+
             Log.Info("Started a TDM match." +
                      $"\n- Combatants: {string.Join(" vs ", factionNames)}" +
-                     "\n- Tracked grids:");
-            foreach (var faction in TrackedFactions)
-                Log.Info($"-   {faction.Key.Name}: {faction.Value} | {CalculateFactionPoints(faction.Key)}pts");
+                     "\n- Tracked grids:" + trackedGrids);
+            
         }
 
         public override void StopRound()
         {
+            bool setWinnerFromArgs = false;
+            Log.Info("!!! " + string.Join(", ", Arguments));
+            foreach (var arg in Arguments)
+            {
+                if (arg.StartsWith("win"))
+                {
+                    Log.Info("Winner in arguments found: " + arg);
+                    long factionId;
+                    long.TryParse(arg.Remove(0, 3), out factionId);
+
+                    _winningFaction = MyAPIGateway.Session.Factions.TryGetFactionById(factionId);
+                    setWinnerFromArgs = true;
+                    break;
+                }
+            }
+
+            if (!setWinnerFromArgs)
+            {
+                if (!MyAPIGateway.Session.IsServer)
+                    return;
+
+                Arguments = Arguments.Concat(new[] { $"win{_winningFaction?.FactionId ?? -1}" }).ToArray();
+            }
+
             SUGMA_SessionComponent.I.GetComponent<TeamDeathmatchHud>("tdmHud")?.MatchEnded(_winningFaction);
 
             foreach (var factionKvp in TrackedFactions)
