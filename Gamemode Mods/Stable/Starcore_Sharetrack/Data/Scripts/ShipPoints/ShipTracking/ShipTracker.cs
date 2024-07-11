@@ -274,7 +274,7 @@ namespace ShipPoints.ShipTracking
             else if (block is IMyConveyor || block is IMyConveyorTube) blockDisplayName = "Conveyor";
             else if (blockDisplayName.Contains("Buster")) blockDisplayName = "Buster Block";
             else if (blockDisplayName.StartsWith("Armor Laser")) blockDisplayName = "Laser Armor";
-            else if (!(block is IMyTerminalBlock)) blockDisplayName = "CubeBlock"; // If this is ever an issue, look here.
+            //else if (!(block is IMyTerminalBlock)) blockDisplayName = "CubeBlock"; // If this is ever an issue, look here.
 
             //if (blockDisplayName.Contains("Letter")) blockDisplayName = "Letter";
             //else if (blockDisplayName.Contains("Beam Block")) blockDisplayName = "Beam Block";
