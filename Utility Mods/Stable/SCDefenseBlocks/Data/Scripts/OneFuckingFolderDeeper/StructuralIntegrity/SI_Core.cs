@@ -40,9 +40,6 @@ namespace StarCore.StructuralIntegrity
         public MyPoweredCargoContainerDefinition SIGenBlockDef;
 
         public readonly Config_Settings Config = new Config_Settings();
-        /*public readonly SI_Settings Settings = new SI_Settings();*/
-
-        /*SI_Utility Mod => SI_Utility.Instance;*/
 
         //Utility Declarations 
         public const string ControlPrefix = "SI_Control.";
@@ -119,9 +116,6 @@ namespace StarCore.StructuralIntegrity
         public MySync<bool, SyncDirection.BothWays> SiegeActive = null;
         public MySync<bool, SyncDirection.FromServer> GridStopped = null;
 
-        /*public MySync<int, SyncDirection.BothWays> CurrentHeat = null;
-        public MySync<int, SyncDirection.BothWays> HeatCap = null;*/
-
         public bool SiegeCooldownActive = false;
         public bool SiegeModeModifier = false;
 
@@ -132,43 +126,6 @@ namespace StarCore.StructuralIntegrity
 
         private IMyHudNotification notifFieldPower = null;
         private IMyHudNotification notifCountdown = null;
-        /*private IMyHudNotification notifHeat = null;*/
-
-        /*public float CurrentFieldPower
-        {
-            get
-            { return Settings.FieldPower; }
-            set
-            {
-                Settings.FieldPower = MathHelper.Clamp((float)Math.Floor(value), MinFieldPower, MaxFieldPower);
-
-                FieldPowerSync.Value = value;
-                SaveSettings();
-
-                if ((NeedsUpdate & MyEntityUpdateEnum.EACH_10TH_FRAME) == 0)
-                    NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
-
-                SIGenBlock?.Components?.Get<MyResourceSinkComponent>()?.Update();
-            }
-        }*/
-
-        /*public float CurrentGridModifier
-        {
-            get
-            { return Settings.GridModifier; }
-            set
-            {
-                Settings.GridModifier = MathHelper.Clamp((float)Math.Round(value, 2), MaxGridModifier, MinGridModifier);
-
-                GridModifierSync.Value = value;
-                SaveSettings();
-
-                if ((NeedsUpdate & MyEntityUpdateEnum.EACH_10TH_FRAME) == 0)
-                    NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
-
-                SIGenBlock?.Components?.Get<MyResourceSinkComponent>()?.Update();
-            }
-        }*/
 
         #region Overrides
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
@@ -212,19 +169,11 @@ namespace StarCore.StructuralIntegrity
                 GridModifierSync.Value = MinGridModifier;
                 SiegeActive.Value = false;
 
-                /*CurrentHeat.Value = 0;
-                HeatCap.Value = 3000;*/
-
-                /*LoadSettings();
-
-                SaveSettings();*/
-
                 MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0, HandleSiegeModeImpacts);
 
                 if (!MyAPIGateway.Session.IsServer)
                 {
                     GridStopped.ValueChanged += GridStopped_ValueChanged;
-                    /*FieldPowerSync.ValueChanged += FieldPowerUpdate;*/
                 }
                     
 
@@ -278,31 +227,6 @@ namespace StarCore.StructuralIntegrity
                 CalculateMaxGridPower();
                 UpdateGridModifier(SIGenBlock);
 
-                /*if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0 && SIGenBlock != null && SIGenBlock.IsWorking && FieldPowerSync.Value != 0 && !(CurrentHeat.Value >= HeatCap.Value))
-                {
-                    int currentHeat = CurrentHeat.Value;
-                    int maxHeat = HeatCap.Value;
-                    int fieldPower = (int)FieldPowerSync.Value;
-
-                    if ((currentHeat + fieldPower) > maxHeat)
-                    {
-                        CurrentHeat.Value = maxHeat;
-                    }
-                    else
-                    {
-                        currentHeat = currentHeat + fieldPower;
-
-                        CurrentHeat.Value = currentHeat;
-                    }
-
-                }
-                else if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0 && SIGenBlock != null && SIGenBlock.IsWorking && FieldPowerSync.Value != 0 && (CurrentHeat.Value >= HeatCap.Value))
-                {
-                    SIGenBlock.Enabled = false;
-                }
-
-                SetHeatStatus($"Current Heat: {CurrentHeat.Value} / {HeatCap.Value}", 60, "Green");*/
-
             }
             catch (Exception e)
             {
@@ -324,9 +248,7 @@ namespace StarCore.StructuralIntegrity
 
                 if (!MyAPIGateway.Session.IsServer)
                     GridStopped.ValueChanged -= GridStopped_ValueChanged;
-                    /*FieldPowerSync.ValueChanged += FieldPowerUpdate;*/
 
-                ResetGridModifier(SIGenBlock);
                 SIGenBlock = null;
             }
             catch (Exception e)
@@ -413,37 +335,13 @@ namespace StarCore.StructuralIntegrity
             if (!SIGenBlock.IsWorking || SIGenBlock.GameLogic == null)
                 return;
 
-            //var blockLogic = SIGenBlock.GameLogic.GetAs<SI_Core>();
-            //if (blockLogic == null)
-            //    return;
-
-            //float totalPower = 0f;
-            //var blocks = new List<IMySlimBlock>();
-            //SIGenBlock.CubeGrid.GetBlocks(blocks);
-            //
-            //foreach (var block in blocks)
-            //{
-            //    if (block.FatBlock != null && block.FatBlock.IsWorking)
-            //    {
-            //        var fatBlock = block.FatBlock;
-            //        if (fatBlock is IMyPowerProducer)
-            //        {
-            //            var powerProducer = fatBlock as IMyPowerProducer;
-            //            totalPower = totalPower + powerProducer.MaxOutput;
-            //        }
-            //    }
-            //}
-            //
-            //if (MaxAvailableGridPower != totalPower)
-            //    MaxAvailableGridPower = totalPower;
-
             MaxAvailableGridPower = SIGenBlock.CubeGrid.ResourceDistributor.MaxAvailableResourceByType(MyResourceDistributorComponent
                 .ElectricityId);
         }
 
         private void DisplayMessageToNearPlayers(int msgId)
         {
-            if (SIGenBlock != null)
+            if (SIGenBlock != null && !MyAPIGateway.Session.IsServer)
             {
                 var bound = new BoundingSphereD(SIGenBlock.GetPosition(), 50);
                 List<IMyEntity> nearEntities = MyAPIGateway.Entities.GetEntitiesInSphere(ref bound);
@@ -515,89 +413,23 @@ namespace StarCore.StructuralIntegrity
         {
             IMySlimBlock targetBlock = target as IMySlimBlock;
 
-            /*SetCountStatus($"Last Damage: {info.Amount}", 6000, "Red");*/
-
             if (targetBlock.CubeGrid != null && targetBlock != null)
             {
                 IMyCubeGrid targetGrid = targetBlock.CubeGrid;
 
-                if (SIGenBlock != null && SIGenBlock.CubeGrid != null && SiegeActive && targetGrid.EntityId == SIGenBlock.CubeGrid.EntityId)
+                if (SIGenBlock != null && SIGenBlock.CubeGrid != null && targetGrid.EntityId == SIGenBlock.CubeGrid.EntityId)
                 {
-                    SI_Impact_Render renderer = new SI_Impact_Render(targetBlock);
-                    impactRenders.TryAdd(renderer, renderer);
-                }
-            }
+                    info.Amount = info.Amount * GridModifierSync.Value;
 
-        }
-
-        /*public MatrixD ImpactEffect(IMySlimBlock block)
-        {
-            MatrixD m_matrix;
-            Vector3D m_shieldScale;
-
-            MyCubeBlockDefinition blockDefinition = block.BlockDefinition as MyCubeBlockDefinition;
-
-            m_shieldScale.X = blockDefinition.Size.X + 0.1;
-            m_shieldScale.Y = blockDefinition.Size.Y + 0.1;
-            m_shieldScale.Z = blockDefinition.Size.Z + 0.1;
-
-            Vector3D impact_Position;
-
-            if (block.FatBlock == null)
-            {
-                impact_Position = block.CubeGrid.GridIntegerToWorld(block.Position);
-
-                m_matrix = MatrixD.CreateFromTransformScale(Quaternion.CreateFromRotationMatrix(block.CubeGrid.WorldMatrix.GetOrientation()), impact_Position, m_shieldScale);
-
-                return m_matrix;
-            }
-            else
-            {
-                impact_Position = block.FatBlock.WorldMatrix.Translation;
-
-                m_matrix = MatrixD.CreateFromTransformScale(Quaternion.CreateFromRotationMatrix(block.FatBlock.WorldMatrix.GetOrientation()), impact_Position, m_shieldScale);
-
-                return m_matrix;
-
-            }
-
-            return m_matrix;
-        }
-
-        public void update()
-        {
-            tickCounter--;
-
-            if (!SIGenBlock.CubeGrid.Closed)
-            {
-                if (SiegeActive)
-                {
-                    Color impact_Color = Color.White;
-                    MyStringId impact_Material = MyStringId.GetOrCompute("WeaponLaser");
-
-                    float ttlPercent = tickCounter / 8f;
-
-                    if ((ttlPercent < 0.4) || (ttlPercent > 0.7))
+                    if (SiegeActive)
                     {
-
-                        BoundingBoxD renderBox = new BoundingBoxD(new Vector3D(-1.25d), new Vector3D(1.25d));
-
-
-                        MySimpleObjectDraw.DrawTransparentBox(ref storedImpact_Matrix, ref renderBox, ref impact_Color, MySimpleObjectRasterizer.Solid, 0, 1f, impact_Material, null, true);
-
-                    }
+                        SI_Impact_Render renderer = new SI_Impact_Render(targetBlock);
+                        impactRenders.TryAdd(renderer, renderer);
+                    }              
                 }
             }
-            else
-            {
-                tickCounter = 0;
-            }
-        }*/
 
-        /*private void FieldPowerUpdate(MySync<float, SyncDirection.BothWays> obj)
-        {
-            UpdateGridModifier(SIGenBlock);
-        }*/
+        }
 
         private void SetPowerStatus(string text, int aliveTime = 300, string font = MyFontEnum.Green)
         {
@@ -623,17 +455,6 @@ namespace StarCore.StructuralIntegrity
             notifCountdown.Show();
         }
 
-        /*public void SetHeatStatus(string text, int aliveTime = 300, string font = MyFontEnum.Green)
-        {
-            if (notifHeat == null)
-                notifHeat = MyAPIGateway.Utilities.CreateNotification("", aliveTime, font);
-
-            notifHeat.Hide();
-            notifHeat.Font = font;
-            notifHeat.Text = text;
-            notifHeat.AliveTime = aliveTime;
-            notifHeat.Show();
-        }*/
         #endregion
 
         #region General Function
@@ -645,7 +466,11 @@ namespace StarCore.StructuralIntegrity
             {
                 if (!SiegeActive.Value && MaxAvailableGridPower <= SiegeMinPowerReq)
                 {
-                    SetCountStatus($"Insufficient Power", 1500, MyFontEnum.Red);
+                    if (!MyAPIGateway.Session.IsServer)
+                    {
+                        SetCountStatus($"Insufficient Power", 1500, MyFontEnum.Red);
+                    }
+                    
                     GridModifierSync.Value = 1.0f;
                     return;
                 }
@@ -661,34 +486,15 @@ namespace StarCore.StructuralIntegrity
 
                         newGridModifier = (float)Math.Round(newGridModifier, 2);
 
-                        GridModifierSync.Value = newGridModifier;
-
-                        if (GridModifierSync.Value == ReferenceGridModifier)
+                        if (newGridModifier == ReferenceGridModifier)
                             return;
                         else
                         {
                             Sink.Update();
 
-                            var gridGroup = obj.CubeGrid.GetGridGroup(GridLinkTypeEnum.Mechanical);
-
-                            if (gridGroup != null)
-                            {
-                                List<IMyCubeGrid> allGridsInGroup = new List<IMyCubeGrid>();
-                                gridGroup.GetGrids(allGridsInGroup);
-
-                                foreach (var grid in allGridsInGroup)
-                                {
-                                    MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(grid.Name, newGridModifier);
-                                }
-                            }
-                            else
-                            {
-                                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(obj.CubeGrid.Name, newGridModifier);
-                            }
-
+                            GridModifierSync.Value = newGridModifier;
                             ReferenceGridModifier = newGridModifier;
 
-                            /*SetPowerStatus($"Integrity Field Power: " + FieldPowerSync.Value + "%", 1500, MyFontEnum.Green);*/
                         }
                     }
                 }
@@ -699,34 +505,11 @@ namespace StarCore.StructuralIntegrity
                 {
                     FieldPowerSync.Value = 0f;
                     GridModifierSync.Value = 1.0f;
-                    ResetGridModifier(SIGenBlock);
                 }
                 else
                     return;
             }
 
-        }
-
-        private void ResetGridModifier(IMyTerminalBlock obj)
-        {
-            if (obj.EntityId != SIGenBlock.EntityId) return;
-
-            var gridGroup = obj.CubeGrid.GetGridGroup(GridLinkTypeEnum.Mechanical);
-
-            if (gridGroup != null)
-            {
-                List<IMyCubeGrid> allGridsInGroup = new List<IMyCubeGrid>();
-                gridGroup.GetGrids(allGridsInGroup);
-
-                foreach (var grid in allGridsInGroup)
-                {
-                    MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(grid.Name, 1f);
-                }
-            }
-            else
-            {
-                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(obj.CubeGrid.Name, 1f);
-            }
         }
         #endregion
 
@@ -796,20 +579,7 @@ namespace StarCore.StructuralIntegrity
 
             if (!SiegeModeModifier && SIGenBlock.IsWorking && MaxAvailableGridPower > 150f)
             {
-                if (gridGroup != null)
-                {
-                    List<IMyCubeGrid> allGridsInGroup = new List<IMyCubeGrid>();
-                    gridGroup.GetGrids(allGridsInGroup);
-
-                    foreach (var grid in allGridsInGroup)
-                    {
-                        MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(grid.Name, 0.1f);
-                    }
-                }
-                else
-                {
-                    MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(SIGenBlock.CubeGrid.Name, 0.1f);
-                }
+                GridModifierSync.Value = 0.1f;
                
                 SiegeModeModifier = true;
             }
@@ -825,8 +595,6 @@ namespace StarCore.StructuralIntegrity
 
                     if (SIGenBlock.CubeGrid.Physics.LinearVelocity != Vector3D.Zero)
                     {
-                        //Vector3D linearVelocity = SIGenBlock.CubeGrid.Physics.LinearVelocity;
-                        //Vector3D oppositeVector = new Vector3D(-linearVelocity.X, -linearVelocity.Y, -linearVelocity.Z);
                         SIGenBlock.CubeGrid.Physics.LinearVelocity = Vector3.Zero;
                         if (MyAPIGateway.Session.IsServer && !GridStopped.Value)
                             GridStopped.Value = true;
@@ -845,7 +613,7 @@ namespace StarCore.StructuralIntegrity
                 {
                     RetrieveValuesFromConfig();
 
-                    ResetGridModifier(SIGenBlock);
+                    GridModifierSync.Value = 1.0f;
                     SiegeBlockReboot(allTerminalBlocks);
                     DisplayMessageToNearPlayers(1);
 
@@ -863,7 +631,7 @@ namespace StarCore.StructuralIntegrity
             {
                 RetrieveValuesFromConfig();
 
-                ResetGridModifier(SIGenBlock);
+                GridModifierSync.Value = 1.0f;
                 SiegeBlockReboot(allTerminalBlocks);
                 DisplayMessageToNearPlayers(2);
 
