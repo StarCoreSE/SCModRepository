@@ -118,12 +118,13 @@ namespace SC.SUGMA
             if (CurrentGamemode.IsStarted)
                 CurrentGamemode.StopRound();
 
+            string[] oldArgs = CurrentGamemode.Arguments;
             CurrentGamemode = null;
 
             SUtils.SetWorldPermissionsForMatch(false);
 
             if (MyAPIGateway.Session.IsServer || notifyNetwork)
-                GameStatePacket.UpdateGamestate();
+                GameStatePacket.UpdateGamestate(oldArgs);
 
             return true;
         }
