@@ -73,33 +73,40 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
         {
             var neededChevrons = CalculateNeededChevrons();
 
-            // I am so sorry
-            foreach (var factionBanner in _windowBase.Banners)
+            try
             {
-                if (factionBanner.TicketsBar.Width == 0)
-                    continue;
-
-                var needed = neededChevrons[factionBanner.Faction];
-
-                RemoveExcessChevrons(factionBanner.Faction, needed);
-
-                AddChevrons(factionBanner, needed);
-
-                // Adjust chevrons if they're about to go off of the ticket bar
-                if (!_didShiftChevrons[factionBanner.Faction] &&
-                    factionBanner.TicketsBar.Width < needed * factionBanner.Height / 2)
+                // I am so sorry
+                foreach (var factionBanner in _windowBase.Banners)
                 {
-                    foreach (var chevron in _factionChevrons[factionBanner.Faction])
-                    {
-                        chevron.ParentAlignment = ParentAlignments.Inner |
-                                                  (factionBanner.IsLeftAligned
-                                                      ? ParentAlignments.Left
-                                                      : ParentAlignments.Right);
-                        chevron.Offset = -chevron.Offset;
-                    }
+                    if (factionBanner.TicketsBar.Width == 0)
+                        continue;
 
-                    _didShiftChevrons[factionBanner.Faction] = true;
+                    var needed = neededChevrons[factionBanner.Faction];
+
+                    RemoveExcessChevrons(factionBanner.Faction, needed);
+
+                    AddChevrons(factionBanner, needed);
+
+                    // Adjust chevrons if they're about to go off of the ticket bar
+                    if (!_didShiftChevrons[factionBanner.Faction] &&
+                        factionBanner.TicketsBar.Width < needed * factionBanner.Height / 2)
+                    {
+                        foreach (var chevron in _factionChevrons[factionBanner.Faction])
+                        {
+                            chevron.ParentAlignment = ParentAlignments.Inner |
+                                                      (factionBanner.IsLeftAligned
+                                                          ? ParentAlignments.Left
+                                                          : ParentAlignments.Right);
+                            chevron.Offset = -chevron.Offset;
+                        }
+
+                        _didShiftChevrons[factionBanner.Faction] = true;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Log.Exception(ex, typeof(TDMZonesHud_Window));
             }
         }
 
