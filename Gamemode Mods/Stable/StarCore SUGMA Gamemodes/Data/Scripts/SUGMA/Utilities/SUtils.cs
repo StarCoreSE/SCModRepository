@@ -3,14 +3,17 @@ using Sandbox.ModAPI;
 using SC.SUGMA.GameState;
 using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
+using System;
 using VRage.Game;
 using VRage.Game.ModAPI;
 using VRageMath;
 
-namespace SC.SUGMA.Textures
+namespace SC.SUGMA.Utilities
 {
     public static class SUtils
     {
+        public static Random Random = new Random();
+
         private const int DamageToggleInt = 0x1;
         private const int MatchPermsInt = 0x29B;
 
@@ -64,6 +67,14 @@ namespace SC.SUGMA.Textures
                 new ProblemReportPacket(false).Received(0);
             else
                 HeartNetwork.I.SendToServer(new ProblemReportPacket(false));
+        }
+
+        public static Vector3D RandVector()
+        {
+            var theta = Random.NextDouble() * 2.0 * Math.PI;
+            var phi = Math.Acos(2.0 * Random.NextDouble() - 1.0);
+            var sinPhi = Math.Sin(phi);
+            return Math.Pow(Random.NextDouble(), 1/3d) * new Vector3D(sinPhi * Math.Cos(theta), sinPhi * Math.Sin(theta), Math.Cos(phi));
         }
     }
 }
