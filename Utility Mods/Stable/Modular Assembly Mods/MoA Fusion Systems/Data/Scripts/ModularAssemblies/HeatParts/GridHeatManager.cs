@@ -85,13 +85,13 @@ namespace FusionSystems.HeatParts
                 _heatSystems[assemblyId] = new HeatSystem(assemblyId, this);
             }
 
-            _heatSystems[assemblyId].OnBlockAdd(block);
+            _heatSystems[assemblyId].OnPartAdd(block);
         }
 
         public void OnPartRemove(int assemblyId, IMyCubeBlock block, bool isBaseBlock)
         {
             HeatSystem system = _heatSystems[assemblyId];
-            system.OnBlockRemove(block);
+            system.OnPartRemove(block);
 
             if (system.BlockCount <= 0)
             {

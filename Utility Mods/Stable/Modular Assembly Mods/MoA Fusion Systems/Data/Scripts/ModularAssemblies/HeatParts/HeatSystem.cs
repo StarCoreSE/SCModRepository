@@ -65,7 +65,7 @@ namespace FusionSystems.HeatParts
             Parent.Grid.OnBlockRemoved += UpdateLoS;
         }
 
-        public void OnBlockAdd(IMyCubeBlock block)
+        public void OnPartAdd(IMyCubeBlock block)
         {
             switch (block.BlockDefinition.SubtypeName)
             {
@@ -85,7 +85,7 @@ namespace FusionSystems.HeatParts
             BlockCount++;
         }
 
-        public void OnBlockRemove(IMyCubeBlock block)
+        public void OnPartRemove(IMyCubeBlock block)
         {
             switch (block.BlockDefinition.SubtypeName)
             {

@@ -35,7 +35,7 @@ namespace ShipPoints
 
         public static ShipTracker.NametagSettings NametagViewState = ShipTracker.NametagSettings.PlayerName;
 
-        private readonly Dictionary<string, int> _bp = new Dictionary<string, int>(); // TODO refactor info storage
+        private readonly Dictionary<string, int> _bp = new Dictionary<string, int>();
 
         private readonly Dictionary<MyKeys, Action> _keyAndActionPairs = new Dictionary<MyKeys, Action>
         {
