@@ -374,7 +374,7 @@ namespace Scripts
                         },
                         TextureMode = Normal,
                         DecayTime = 12, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 3, green: 50, blue: 50, alpha: 1),
+                        Color = Color(red: 3, green: 10, blue: 50, alpha: 1),
                         Back = false,
                         CustomWidth = 0.25f,
                         UseWidthVariance = false,
