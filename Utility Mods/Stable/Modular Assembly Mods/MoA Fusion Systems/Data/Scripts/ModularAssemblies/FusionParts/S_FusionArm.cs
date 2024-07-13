@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FusionSystems.Communication;
+using StarCore.FusionSystems.Communication;
 using VRage.Game.ModAPI;
 using VRageMath;
 
-namespace FusionSystems.
+namespace StarCore.FusionSystems.
     FusionParts
 {
     /// <summary>
     ///     Represents a single 'arm' (loop) of fusion accelerators.
     /// </summary>
-    internal struct S_FusionArm
+    internal struct SFusionArm
     {
         private const float LengthEfficiencyModifier = 0f;
-        private const float BlockPowerGeneration = 0.019f;
+        private const float BlockPowerGeneration = 0.023f;
         private const float BlockPowerStorage = 32f;
         private const float SharedPropertyModifier = 0.05f;
 
@@ -27,7 +27,7 @@ namespace FusionSystems.
 
         public IMyCubeBlock[] Parts;
 
-        public S_FusionArm(IMyCubeBlock newPart, string rootSubtype)
+        public SFusionArm(IMyCubeBlock newPart, string rootSubtype)
         {
             var ignore = new HashSet<IMyCubeBlock>();
             IsValid = PerformScan(newPart, ref ignore, rootSubtype);

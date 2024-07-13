@@ -26,8 +26,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
         public override string Description { get; internal set; } =
             "Factions fight against eachother until tickets run out. Kill enemy players or capture zones to remove tickets.";
 
-        internal ZoneDef[] FixedZonePositions = new[]
-        {
+        internal ZoneDef[] FixedZonePositions = {
             new ZoneDef
             {
                 Position = Vector3D.Zero,

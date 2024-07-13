@@ -1,10 +1,8 @@
-﻿using System;
-using VRage.Game;
-using VRage.Game.Components;
+﻿using VRage.Game.Components;
 using VRage.Utils;
-using static FusionSystems.Communication.DefinitionDefs;
+using static StarCore.FusionSystems.Communication.DefinitionDefs;
 
-namespace FusionSystems.
+namespace StarCore.FusionSystems.
     Communication
 {
     [MySessionComponentDescriptor(MyUpdateOrder.Simulation, int.MinValue)]
