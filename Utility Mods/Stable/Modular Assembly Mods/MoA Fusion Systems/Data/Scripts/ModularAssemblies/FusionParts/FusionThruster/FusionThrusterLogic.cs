@@ -10,7 +10,7 @@ namespace StarCore.FusionSystems.FusionParts.FusionThruster
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Thrust), false, "Caster_FocusLens")]
     public class FusionThrusterLogic : FusionPart<IMyThrust>
     {
-        private int _bufferBlockCount;
+        private int _bufferBlockCount = 1;
         private float _bufferThrustOutput;
 
 
@@ -26,9 +26,10 @@ namespace StarCore.FusionSystems.FusionParts.FusionThruster
                 OverrideEnabled.Value
                     ? OverridePowerUsageSync
                     : PowerUsageSync.Value; // This is ugly, let's make it better.
+            consumptionMultiplier /= numberThrusters;
 
             // Power generation consumed (per second)
-            var powerConsumption = powerGeneration * 60 * consumptionMultiplier / numberThrusters;
+            var powerConsumption = powerGeneration * 60 * consumptionMultiplier;
 
             var efficiencyMultiplier = 1 / (0.669f + consumptionMultiplier);
 

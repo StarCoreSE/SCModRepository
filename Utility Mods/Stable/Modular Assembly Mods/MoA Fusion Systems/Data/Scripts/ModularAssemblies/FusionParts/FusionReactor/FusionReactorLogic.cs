@@ -10,7 +10,7 @@ namespace StarCore.FusionSystems.FusionParts.FusionReactor
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Reactor), false, "Caster_Reactor")]
     public class FusionReactorLogic : FusionPart<IMyReactor>
     {
-        private int _bufferBlockCount;
+        private int _bufferBlockCount = 1;
         private float _bufferReactorOutput;
 
 
@@ -25,10 +25,12 @@ namespace StarCore.FusionSystems.FusionParts.FusionReactor
 
             var reactorConsumptionMultiplier =
                 OverrideEnabled.Value
-                    ? OverridePowerUsageSync
+                    ? OverridePowerUsageSync.Value
                     : PowerUsageSync.Value; // This is ugly, let's make it better.
+            reactorConsumptionMultiplier /= numberReactors;
+
             // Power generation consumed (per second)
-            var powerConsumption = powerGeneration * 60 * reactorConsumptionMultiplier / numberReactors;
+            var powerConsumption = powerGeneration * 60 * reactorConsumptionMultiplier;
 
             var reactorEfficiencyMultiplier = 1 / (0.669f + reactorConsumptionMultiplier);
 
