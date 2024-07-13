@@ -17,7 +17,7 @@ namespace StarCore.FusionSystems.
         public const float NewtonsPerFusionPower = 12800000;
         public readonly IMyCubeGrid Grid;
 
-        public List<SFusionArm> Arms = new List<SFusionArm>();
+        public readonly List<SFusionArm> Arms = new List<SFusionArm>();
         public int BlockCount;
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace StarCore.FusionSystems.
         /// </summary>
         public float MaxPowerStored;
 
-        public int PhysicalAssemblyId;
+        public readonly int PhysicalAssemblyId;
 
         /// <summary>
         ///     Total power consumed
@@ -37,8 +37,8 @@ namespace StarCore.FusionSystems.
         /// </summary>
         public float PowerGeneration;
 
-        public List<FusionReactorLogic> Reactors = new List<FusionReactorLogic>();
-        public List<FusionThrusterLogic> Thrusters = new List<FusionThrusterLogic>();
+        public readonly List<FusionReactorLogic> Reactors = new List<FusionReactorLogic>();
+        public readonly List<FusionThrusterLogic> Thrusters = new List<FusionThrusterLogic>();
 
         public SFusionSystem(int physicalAssemblyId)
         {
