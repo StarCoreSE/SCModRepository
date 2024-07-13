@@ -47,11 +47,6 @@ namespace SC.SUGMA.GameState
                 HeartNetwork.I.SendToEveryone(new PointsPacket(this));
                 _pointsUpdated = false;
             }
-
-            foreach (var faction in FactionPoints)
-            {
-                //MyAPIGateway.Utilities.ShowNotification($"{faction.Key.Tag}: {faction.Value}", 1000/60);
-            }
         }
 
         #endregion
@@ -72,7 +67,7 @@ namespace SC.SUGMA.GameState
 
         public void SetFactionPoints(IMyFaction faction, int value)
         {
-            if (!FactionPoints.ContainsKey(faction))
+            if (!MyAPIGateway.Session.IsServer || !FactionPoints.ContainsKey(faction))
                 return;
 
             FactionPoints[faction] = value;
@@ -89,7 +84,7 @@ namespace SC.SUGMA.GameState
 
         public void AddFactionPoints(IMyFaction faction, int value)
         {
-            if (!FactionPoints.ContainsKey(faction))
+            if (!MyAPIGateway.Session.IsServer || !FactionPoints.ContainsKey(faction))
                 return;
 
             FactionPoints[faction] += value;
