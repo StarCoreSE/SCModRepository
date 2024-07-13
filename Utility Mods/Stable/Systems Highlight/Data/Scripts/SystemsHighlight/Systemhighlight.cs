@@ -119,56 +119,13 @@ namespace StarCore.SystemHighlight
 
         protected override void UnloadData()
         {
-            try
+            if (CoreSysAPI.IsReady || WCInstalled)
             {
-                // Unsubscribe from events
-                MyAPIGateway.Utilities.MessageEnteredSender -= HandleMessage;
-
-                // Clear all highlights and remove grid split handlers
-                foreach (var grid in ActiveGrids.Values)
-                {
-                    if (grid != null)
-                    {
-                        List<IMySlimBlock> blocks = new List<IMySlimBlock>();
-                        grid.GetBlocks(blocks);
-                        ClearHighlight(blocks, grid);
-                        grid.OnGridSplit -= HandleGridSplit;
-                    }
-                }
-
-                // Clear collections
-                highlightedEntitiesPerGrid.Clear();
-                gridDrawLists.Clear();
-                ActiveGrids.Clear();
-                commandHandlers.Clear();
-
-                // Remove persistent billboards
-                MyTransparentGeometry.RemovePersistentBillboards(persistBillboard);
-                persistBillboard.Clear();
-
-                // Dispose notifications
-                if (notifStatus != null)
-                {
-                    notifStatus.Hide();
-                    notifStatus = null;
-                }
-                if (notifDebug != null)
-                {
-                    notifDebug.Hide();
-                    notifDebug = null;
-                }
-
-                // Unload CoreSysAPI
-                if (CoreSysAPI != null && (CoreSysAPI.IsReady || WCInstalled))
-                {
-                    CoreSysAPI.Unload();
-                    CoreSysAPI = null;
-                }
+                CoreSysAPI.Unload();
+                CoreSysAPI = null;
             }
-            catch (Exception ex)
-            {
-                Log.Error($"Error in UnloadData: {ex}");
-            }
+            
+            MyAPIGateway.Utilities.MessageEnteredSender -= HandleMessage;
         }
 
         public override void UpdateAfterSimulation()
