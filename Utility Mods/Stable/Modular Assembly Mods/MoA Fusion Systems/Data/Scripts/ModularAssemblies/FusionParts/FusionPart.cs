@@ -93,7 +93,7 @@ namespace FusionSystems.FusionParts
                 powerUsageSlider.Title = MyStringId.GetOrCompute("Fusion Power Usage");
                 powerUsageSlider.Tooltip =
                     MyStringId.GetOrCompute($"Fusion Power generation this {ReadableName} should use.");
-                powerUsageSlider.SetLimits(0.01f, 0.99f);
+                powerUsageSlider.SetLimits(0.005f, 0.995f);
                 powerUsageSlider.Getter = block =>
                     block.GameLogic.GetAs<FusionPart<T>>()?.PowerUsageSync.Value ?? 0;
                 powerUsageSlider.Setter = (block, value) =>
@@ -176,7 +176,7 @@ namespace FusionSystems.FusionParts
             stringBuilder.Insert(0, InfoText.ToString());
         }
 
-        public abstract void UpdatePower(float PowerGeneration, float OutputPerFusionPower);
+        public abstract void UpdatePower(float PowerGeneration, float OutputPerFusionPower, int numberParts);
 
         #endregion
 

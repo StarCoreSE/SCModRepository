@@ -11,25 +11,25 @@ namespace FusionSystems.
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Reactor), false, "Caster_Reactor")]
     public class FusionReactorLogic : FusionPart<IMyReactor>
     {
-        private const float MaxPowerPerReactor = 2000;
-
         private float BufferReactorOutput;
+        private int BufferBlockCount;
 
 
         internal override string BlockSubtype => "Caster_Reactor";
         internal override string ReadableName => "Reactor";
 
 
-        public override void UpdatePower(float PowerGeneration, float MegawattsPerFusionPower)
+        public override void UpdatePower(float PowerGeneration, float MegawattsPerFusionPower, int numberReactors)
         {
             BufferPowerGeneration = PowerGeneration;
+            BufferBlockCount = numberReactors;
 
             var reactorConsumptionMultiplier =
                 OverrideEnabled.Value
                     ? OverridePowerUsageSync
                     : PowerUsageSync.Value; // This is ugly, let's make it better.
             // Power generation consumed (per second)
-            var powerConsumption = PowerGeneration * 60 * reactorConsumptionMultiplier;
+            var powerConsumption = PowerGeneration * 60 * reactorConsumptionMultiplier / numberReactors;
 
             var reactorEfficiencyMultiplier = 1 / (0.669f + reactorConsumptionMultiplier);
 
@@ -55,7 +55,7 @@ namespace FusionSystems.
                 return;
 
             OverrideEnabled.Value = value;
-            UpdatePower(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+            UpdatePower(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower, BufferBlockCount);
         }
 
         #region Base Methods
@@ -70,19 +70,19 @@ namespace FusionSystems.
             PowerUsageSync.ValueChanged += value =>
             {
                 if (!OverrideEnabled.Value)
-                    UpdatePower(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+                    UpdatePower(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower, BufferBlockCount);
             };
 
             // Trigger power update is only needed when OverrideEnabled is true
             OverridePowerUsageSync.ValueChanged += value =>
             {
                 if (OverrideEnabled.Value)
-                    UpdatePower(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+                    UpdatePower(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower, BufferBlockCount);
             };
 
             // Trigger power update if boostEnabled is changed
             OverrideEnabled.ValueChanged += value =>
-                UpdatePower(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower);
+                UpdatePower(BufferPowerGeneration, S_FusionSystem.MegawattsPerFusionPower, BufferBlockCount);
         }
 
         public override void UpdateAfterSimulation()

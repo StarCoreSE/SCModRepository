@@ -14,7 +14,7 @@ namespace FusionSystems.
     internal struct S_FusionArm
     {
         private const float LengthEfficiencyModifier = 0f;
-        private const float BlockPowerGeneration = 0.019f;
+        private const float BlockPowerGeneration = 0.023f;
         private const float BlockPowerStorage = 32f;
         private const float SharedPropertyModifier = 0.05f;
 

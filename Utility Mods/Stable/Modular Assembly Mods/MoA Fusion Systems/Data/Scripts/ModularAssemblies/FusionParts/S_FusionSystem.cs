@@ -126,7 +126,7 @@ namespace FusionSystems.
                 {
                     Thrusters.Add(logic);
                     logic.MemberSystem = this;
-                    logic.UpdatePower(PowerGeneration, NewtonsPerFusionPower);
+                    logic.UpdatePower(PowerGeneration, NewtonsPerFusionPower, Thrusters.Count);
                 }
             }
 
@@ -137,7 +137,7 @@ namespace FusionSystems.
                 {
                     Reactors.Add(logic);
                     logic.MemberSystem = this;
-                    logic.UpdatePower(PowerGeneration, MegawattsPerFusionPower);
+                    logic.UpdatePower(PowerGeneration, MegawattsPerFusionPower, Reactors.Count);
                 }
             }
 
@@ -197,7 +197,7 @@ namespace FusionSystems.
                 totalPowerUsage += reactor?.PowerConsumption ?? 0;
 
                 if (updateReactors)
-                    reactor?.UpdatePower(powerGeneration, MegawattsPerFusionPower * generationModifier);
+                    reactor?.UpdatePower(powerGeneration, MegawattsPerFusionPower * generationModifier, Reactors.Count);
             }
 
             foreach (var thruster in Thrusters)
@@ -205,7 +205,7 @@ namespace FusionSystems.
                 totalPowerUsage += thruster?.PowerConsumption ?? 0;
 
                 if (updateReactors)
-                    thruster?.UpdatePower(powerGeneration, NewtonsPerFusionPower * generationModifier);
+                    thruster?.UpdatePower(powerGeneration, NewtonsPerFusionPower * generationModifier, Thrusters.Count);
             }
 
             // Subtract power usage afterwards so that all reactors have the same stats.
@@ -224,13 +224,6 @@ namespace FusionSystems.
         public void UpdateTick()
         {
             UpdatePower(true);
-        }
-
-        private void RemoveBlockInLoops(MyEntity entity)
-        {
-            foreach (var loop in Arms.ToList())
-                if (loop.Parts.Contains((IMyCubeBlock)entity))
-                    Arms.Remove(loop);
         }
     }
 }
