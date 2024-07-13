@@ -10,7 +10,7 @@ using VRage.Utils;
 using VRageMath;
 using static VRageRender.MyBillboard;
 
-namespace FusionSystems.
+namespace StarCore.FusionSystems.
     DebugDraw
 {
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]

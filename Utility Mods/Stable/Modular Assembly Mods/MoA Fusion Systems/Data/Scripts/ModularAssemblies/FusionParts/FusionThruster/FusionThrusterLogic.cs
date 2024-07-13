@@ -5,13 +5,13 @@ using VRage.Game.Components;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
 
-namespace FusionSystems.FusionParts.FusionThruster
+namespace StarCore.FusionSystems.FusionParts.FusionThruster
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Thrust), false, "Caster_FocusLens")]
     public class FusionThrusterLogic : FusionPart<IMyThrust>
     {
-        private float BufferThrustOutput;
         private int BufferBlockCount;
+        private float BufferThrustOutput;
 
 
         internal override string BlockSubtype => "Caster_FocusLens";

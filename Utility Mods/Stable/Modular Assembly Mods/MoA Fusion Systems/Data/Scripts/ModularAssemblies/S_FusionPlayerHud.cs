@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Linq;
-using FusionSystems.Communication;
-using FusionSystems.FusionParts;
-using FusionSystems.HeatParts;
-using FusionSystems.HudHelpers;
 using RichHudFramework.Client;
 using RichHudFramework.UI.Client;
 using Sandbox.Game;
+using StarCore.FusionSystems.Communication;
+using StarCore.FusionSystems.FusionParts;
+using StarCore.FusionSystems.HeatParts;
+using StarCore.FusionSystems.HudHelpers;
 using VRage.Game.Components;
 using VRage.Utils;
 
-namespace FusionSystems
+namespace StarCore.FusionSystems
 {
     /// <summary>
     ///     Semi-independent script for managing the player HUD.
@@ -46,7 +46,8 @@ namespace FusionSystems
             //RichHudClient.Reset();
         }
 
-        private bool _questlogDisposed = false;
+        private bool _questlogDisposed;
+
         public override void UpdateAfterSimulation()
         {
             _ticks++;
@@ -79,6 +80,7 @@ namespace FusionSystems
                             false, false);
                         displayedCount++;
                     }
+
                     _questlogDisposed = false;
                 }
                 else if (!_questlogDisposed)

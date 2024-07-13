@@ -1,21 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using FusionSystems.Communication;
+using StarCore.FusionSystems.Communication;
 using VRage.Game.ModAPI;
 
-namespace FusionSystems.FusionParts
+namespace StarCore.FusionSystems.FusionParts
 {
     internal class S_FusionManager
     {
         public static S_FusionManager I = new S_FusionManager();
 
+        private bool _didRegisterAssemblyClose;
+
         private int _ticks;
         public ModularDefinition FusionDefinition;
-        public ModularDefinition HeatDefinition;
         public Dictionary<int, S_FusionSystem> FusionSystems = new Dictionary<int, S_FusionSystem>();
+        public ModularDefinition HeatDefinition;
         private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
-
-        private bool _didRegisterAssemblyClose = false;
 
         public void Load()
         {

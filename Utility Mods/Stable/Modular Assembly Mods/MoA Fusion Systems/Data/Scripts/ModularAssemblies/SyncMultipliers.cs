@@ -5,7 +5,7 @@ using Sandbox.ModAPI;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 
-namespace FusionSystems
+namespace StarCore.FusionSystems
 {
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     public class SyncMultipliers : MySessionComponentBase
@@ -17,8 +17,10 @@ namespace FusionSystems
         private readonly Dictionary<IMyReactor, float> mReactorList = new Dictionary<IMyReactor, float>();
         private readonly Dictionary<IMyThrust, float> mThrustList = new Dictionary<IMyThrust, float>();
 
+        private readonly int _ticks = 0;
+        private readonly HashSet<IMyCubeBlock> _updateLimiter = new HashSet<IMyCubeBlock>();
+
         private bool needsUpdate;
-        private HashSet<IMyCubeBlock> _updateLimiter = new HashSet<IMyCubeBlock>();
 
         public override void LoadData()
         {
@@ -32,7 +34,6 @@ namespace FusionSystems
                 needsUpdate = true;
         }
 
-        private int _ticks = 0;
         public override void UpdateAfterSimulation()
         {
             if (needsUpdate && MyAPIGateway.Session != null && MyAPIGateway.Multiplayer != null &&
@@ -44,10 +45,7 @@ namespace FusionSystems
                 needsUpdate = false;
             }
 
-            if (_ticks % MaxUpdateRateTicks == 0)
-            {
-                _updateLimiter.Clear();
-            }
+            if (_ticks % MaxUpdateRateTicks == 0) _updateLimiter.Clear();
         }
 
         private void HandleMessage(ushort handlerId, byte[] package, ulong senderId, bool fromServer)

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using FusionSystems.Communication;
 using ProtoBuf;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
 using Sandbox.ModAPI.Interfaces.Terminal;
+using StarCore.FusionSystems.Communication;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.Game.ModAPI.Network;
@@ -15,7 +15,7 @@ using VRage.ObjectBuilders;
 using VRage.Sync;
 using VRage.Utils;
 
-namespace FusionSystems.FusionParts
+namespace StarCore.FusionSystems.FusionParts
 {
     public abstract class FusionPart<T> : MyGameLogicComponent, IMyEventProxy
         where T : IMyCubeBlock
@@ -42,7 +42,7 @@ namespace FusionSystems.FusionParts
         public float PowerConsumption;
 
         public MySync<float, SyncDirection.BothWays> PowerUsageSync;
-        internal FusionPartSettings Settings = null;
+        internal FusionPartSettings Settings;
         internal static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
 
         /// <summary>

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FusionSystems.Communication;
+using StarCore.FusionSystems.Communication;
 using VRage.Game.ModAPI;
 using VRageMath;
 
-namespace FusionSystems.
+namespace StarCore.FusionSystems.
     FusionParts
 {
     /// <summary>

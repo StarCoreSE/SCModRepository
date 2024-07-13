@@ -1,25 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FusionSystems.Communication;
-using FusionSystems.FusionParts.FusionReactor;
-using FusionSystems.FusionParts.FusionThruster;
-using FusionSystems.HeatParts;
 using Sandbox.ModAPI;
-using VRage.Game.Entity;
+using StarCore.FusionSystems.Communication;
+using StarCore.FusionSystems.FusionParts.FusionReactor;
+using StarCore.FusionSystems.FusionParts.FusionThruster;
+using StarCore.FusionSystems.HeatParts;
 using VRage.Game.ModAPI;
 
-namespace FusionSystems.
+namespace StarCore.FusionSystems.
     FusionParts
 {
     internal class S_FusionSystem
     {
         public const float MegawattsPerFusionPower = 32;
         public const float NewtonsPerFusionPower = 12800000;
+        public readonly IMyCubeGrid Grid;
 
         public List<S_FusionArm> Arms = new List<S_FusionArm>();
         public int BlockCount;
-        public readonly IMyCubeGrid Grid;
 
         /// <summary>
         ///     Maximum power storage
@@ -38,21 +37,6 @@ namespace FusionSystems.
         /// </summary>
         public float PowerGeneration;
 
-        /// <summary>
-        ///     Current power stored
-        /// </summary>
-        public float PowerStored
-        {
-            get
-            {
-                return ModularApi.GetAssemblyProperty<float>(PhysicalAssemblyId, "PowerStored");
-            }
-            set
-            {
-                ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "PowerStored", value);
-            }
-        }
-
         public List<FusionReactorLogic> Reactors = new List<FusionReactorLogic>();
         public List<FusionThrusterLogic> Thrusters = new List<FusionThrusterLogic>();
 
@@ -60,6 +44,15 @@ namespace FusionSystems.
         {
             PhysicalAssemblyId = physicalAssemblyId;
             Grid = ModularApi.GetAssemblyGrid(physicalAssemblyId);
+        }
+
+        /// <summary>
+        ///     Current power stored
+        /// </summary>
+        public float PowerStored
+        {
+            get { return ModularApi.GetAssemblyProperty<float>(PhysicalAssemblyId, "PowerStored"); }
+            set { ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "PowerStored", value); }
         }
 
         private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
@@ -180,7 +173,7 @@ namespace FusionSystems.
 
         private void UpdatePower(bool updateReactors = false)
         {
-            float generationModifier = 1/(HeatManager.I.GetGridHeatLevel(Grid) + 0.5f);
+            var generationModifier = 1 / (HeatManager.I.GetGridHeatLevel(Grid) + 0.5f);
             var powerGeneration = float.Epsilon;
             var powerCapacity = float.Epsilon;
             var totalPowerUsage = 0f;
@@ -218,7 +211,8 @@ namespace FusionSystems.
             PowerStored += PowerGeneration;
             if (PowerStored > MaxPowerStored) PowerStored = MaxPowerStored;
             //PowerGeneration = 0;
-            ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "HeatGeneration", PowerConsumption * MegawattsPerFusionPower);
+            ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "HeatGeneration",
+                PowerConsumption * MegawattsPerFusionPower);
         }
 
         public void UpdateTick()

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using FusionSystems.FusionParts;
+using StarCore.FusionSystems.FusionParts;
 using VRageMath;
-using static FusionSystems.Communication.DefinitionDefs;
+using static StarCore.FusionSystems.Communication.DefinitionDefs;
 
-namespace FusionSystems
+namespace StarCore.FusionSystems
 {
     internal partial class ModularDefinition
     {

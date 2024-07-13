@@ -1,15 +1,15 @@
 ﻿using System;
-using FusionSystems.Communication;
-using FusionSystems.FusionParts;
-using FusionSystems.HeatParts;
 using RichHudFramework.UI;
 using RichHudFramework.UI.Client;
 using RichHudFramework.UI.Rendering;
 using Sandbox.ModAPI;
+using StarCore.FusionSystems.Communication;
+using StarCore.FusionSystems.FusionParts;
+using StarCore.FusionSystems.HeatParts;
 using VRage.Input;
 using VRageMath;
 
-namespace FusionSystems.HudHelpers
+namespace StarCore.FusionSystems.HudHelpers
 {
     internal class ConsumptionBar : WindowBase
     {
