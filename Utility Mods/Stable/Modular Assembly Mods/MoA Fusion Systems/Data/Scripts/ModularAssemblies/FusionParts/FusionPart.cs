@@ -20,12 +20,12 @@ namespace StarCore.FusionSystems.FusionParts
     public abstract class FusionPart<T> : MyGameLogicComponent, IMyEventProxy
         where T : IMyCubeBlock
     {
-        public static readonly Guid SettingsGUID = new Guid("36a45185-2e80-461c-9f1c-e2140a47a4df");
+        public static readonly Guid SettingsGuid = new Guid("36a45185-2e80-461c-9f1c-e2140a47a4df");
 
         /// <summary>
         ///     List of all types that have inited controls.
         /// </summary>
-        private static readonly List<string> _haveControlsInited = new List<string>();
+        private static readonly List<string> HaveControlsInited = new List<string>();
 
         internal readonly StringBuilder InfoText = new StringBuilder("Output: 0/0\nInput: 0/0\nEfficiency: N/A");
         internal T Block;
@@ -35,7 +35,7 @@ namespace StarCore.FusionSystems.FusionParts
         internal long LastShutdown = 0;
         public float MaxPowerConsumption;
 
-        internal S_FusionSystem MemberSystem;
+        internal SFusionSystem MemberSystem;
         public MySync<bool, SyncDirection.BothWays> OverrideEnabled;
         public MySync<float, SyncDirection.BothWays> OverridePowerUsageSync;
 
@@ -160,7 +160,7 @@ namespace StarCore.FusionSystems.FusionParts
 
             MyAPIGateway.TerminalControls.CustomControlGetter += AssignDetailedInfoGetter;
 
-            _haveControlsInited.Add(ReadableName);
+            HaveControlsInited.Add(ReadableName);
         }
 
         private void AssignDetailedInfoGetter(IMyTerminalBlock block, List<IMyTerminalControl> controls)
@@ -176,7 +176,7 @@ namespace StarCore.FusionSystems.FusionParts
             stringBuilder.Insert(0, InfoText.ToString());
         }
 
-        public abstract void UpdatePower(float PowerGeneration, float OutputPerFusionPower, int numberParts);
+        public abstract void UpdatePower(float powerGeneration, float outputPerFusionPower, int numberParts);
 
         #endregion
 
@@ -206,7 +206,7 @@ namespace StarCore.FusionSystems.FusionParts
                 Settings.OverridePowerUsage = value.Value;
             SaveSettings();
 
-            if (!_haveControlsInited.Contains(ReadableName))
+            if (!HaveControlsInited.Contains(ReadableName))
                 CreateControls();
 
             ((IMyTerminalBlock)Block).AppendingCustomInfo += AppendingCustomInfo;
@@ -230,7 +230,7 @@ namespace StarCore.FusionSystems.FusionParts
             if (Block.Storage == null)
                 Block.Storage = new MyModStorageComponent();
 
-            Block.Storage.SetValue(SettingsGUID,
+            Block.Storage.SetValue(SettingsGuid,
                 Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(Settings)));
         }
 
@@ -258,7 +258,7 @@ namespace StarCore.FusionSystems.FusionParts
             }
 
             string rawData;
-            if (!Block.Storage.TryGetValue(SettingsGUID, out rawData))
+            if (!Block.Storage.TryGetValue(SettingsGuid, out rawData))
             {
                 LoadDefaultSettings();
                 return false;

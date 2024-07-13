@@ -11,13 +11,13 @@ using VRage.Game.ModAPI;
 namespace StarCore.FusionSystems.
     FusionParts
 {
-    internal class S_FusionSystem
+    internal class SFusionSystem
     {
         public const float MegawattsPerFusionPower = 32;
         public const float NewtonsPerFusionPower = 12800000;
         public readonly IMyCubeGrid Grid;
 
-        public List<S_FusionArm> Arms = new List<S_FusionArm>();
+        public List<SFusionArm> Arms = new List<SFusionArm>();
         public int BlockCount;
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace StarCore.FusionSystems.
         public List<FusionReactorLogic> Reactors = new List<FusionReactorLogic>();
         public List<FusionThrusterLogic> Thrusters = new List<FusionThrusterLogic>();
 
-        public S_FusionSystem(int physicalAssemblyId)
+        public SFusionSystem(int physicalAssemblyId)
         {
             PhysicalAssemblyId = physicalAssemblyId;
             Grid = ModularApi.GetAssemblyGrid(physicalAssemblyId);
@@ -69,7 +69,7 @@ namespace StarCore.FusionSystems.
             {
                 case "Caster_Accelerator_0":
                 case "Caster_Accelerator_90":
-                    var newArm = new S_FusionArm(newPart, "Caster_Feeder");
+                    var newArm = new SFusionArm(newPart, "Caster_Feeder");
                     if (newArm.IsValid)
                     {
                         Arms.Add(newArm);
@@ -94,7 +94,7 @@ namespace StarCore.FusionSystems.
                             continue;
 
                         var accelsShareArm = false;
-                        var newArm2 = new S_FusionArm(accelerator, "Caster_Feeder");
+                        var newArm2 = new SFusionArm(accelerator, "Caster_Feeder");
                         if (newArm2.IsValid)
                         {
                             Arms.Add(newArm2);
@@ -166,7 +166,7 @@ namespace StarCore.FusionSystems.
                 }
 
             if (BlockCount <= 0)
-                S_FusionManager.I.FusionSystems.Remove(PhysicalAssemblyId);
+                SFusionManager.I.FusionSystems.Remove(PhysicalAssemblyId);
 
             UpdatePower();
         }

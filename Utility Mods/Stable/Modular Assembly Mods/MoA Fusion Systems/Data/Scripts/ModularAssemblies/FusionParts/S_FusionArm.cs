@@ -11,7 +11,7 @@ namespace StarCore.FusionSystems.
     /// <summary>
     ///     Represents a single 'arm' (loop) of fusion accelerators.
     /// </summary>
-    internal struct S_FusionArm
+    internal struct SFusionArm
     {
         private const float LengthEfficiencyModifier = 0f;
         private const float BlockPowerGeneration = 0.023f;
@@ -27,7 +27,7 @@ namespace StarCore.FusionSystems.
 
         public IMyCubeBlock[] Parts;
 
-        public S_FusionArm(IMyCubeBlock newPart, string rootSubtype)
+        public SFusionArm(IMyCubeBlock newPart, string rootSubtype)
         {
             var ignore = new HashSet<IMyCubeBlock>();
             IsValid = PerformScan(newPart, ref ignore, rootSubtype);

@@ -17,7 +17,7 @@ namespace StarCore.FusionSystems
             // Unique name of the definition.
             Name = "Modular_Heat",
 
-            OnInit = () => { S_FusionManager.I.HeatDefinition = this; },
+            OnInit = () => { SFusionManager.I.HeatDefinition = this; },
 
             // Triggers whenever a new part is added to an assembly.
             OnPartAdd = HeatManager.I.OnPartAdd,

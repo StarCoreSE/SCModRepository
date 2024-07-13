@@ -84,7 +84,7 @@ namespace StarCore.FusionSystems.HudHelpers
             float totalFusionCapacity = 0;
             float totalFusionGeneration = 0;
             float totalFusionStored = 0;
-            foreach (var system in S_FusionManager.I.FusionSystems)
+            foreach (var system in SFusionManager.I.FusionSystems)
             {
                 if (playerGrid != ModularApi.GetAssemblyGrid(system.Key))
                     continue;

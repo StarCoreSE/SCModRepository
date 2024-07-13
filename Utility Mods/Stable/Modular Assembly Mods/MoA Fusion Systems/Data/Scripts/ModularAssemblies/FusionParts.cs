@@ -15,13 +15,13 @@ namespace StarCore.FusionSystems
             // Unique name of the definition.
             Name = "Modular_Fusion",
 
-            OnInit = () => { S_FusionManager.I.FusionDefinition = this; },
+            OnInit = () => { SFusionManager.I.FusionDefinition = this; },
 
             // Triggers whenever a new part is added to an assembly.
-            OnPartAdd = S_FusionManager.I.OnPartAdd,
+            OnPartAdd = SFusionManager.I.OnPartAdd,
 
             // Triggers whenever a part is removed from an assembly.
-            OnPartRemove = S_FusionManager.I.OnPartRemove,
+            OnPartRemove = SFusionManager.I.OnPartRemove,
 
             // Triggers whenever a part is destroyed, simultaneously with OnPartRemove
             OnPartDestroy = (physicalAssemblyId, blockEntity, isBaseBlock) =>
