@@ -145,6 +145,10 @@ namespace StarCore.FusionSystems
         [ProtoContract]
         private class SerializableMultiplier
         {
+            public SerializableMultiplier()
+            {
+            }
+
             public SerializableMultiplier(int type, float value, long entityid)
             {
                 this.Type = type;
