@@ -2,7 +2,7 @@
 using System.Text;
 using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
-using SC.SUGMA.Textures;
+using SC.SUGMA.Utilities;
 using MyAPIGateway = Sandbox.ModAPI.MyAPIGateway;
 
 namespace SC.SUGMA.Commands
@@ -16,13 +16,13 @@ namespace SC.SUGMA.Commands
             if (args.Length < 2)
             {
                 MyAPIGateway.Utilities.ShowMessage("SUGMA",
-                    $"Unrecognized gamemode \"null\". Available gamemodes:\n  {string.Join("\n  ", SUGMA_SessionComponent.I.GetGamemodes())}");
+                    $"Unrecognized gamemode \"null\". Available gamemodes:{SUGMA_SessionComponent.ListGamemodes()}");
                 return;
             }
 
             // Remove first two items from arguments
             var startArgs = Array.Empty<string>();
-            if (args.Length > 3)
+            if (args.Length > 2)
             {
                 var newStartArgs = new string[args.Length - 2];
                 for (var i = 2; i < args.Length; i++) newStartArgs[i - 2] = args[i];
@@ -31,14 +31,8 @@ namespace SC.SUGMA.Commands
 
             if (!SUGMA_SessionComponent.I.StartGamemode(args[1].ToLower(), startArgs, true))
             {
-                var availableGamemodes = new StringBuilder();
-
-                foreach (var gamemode in SUGMA_SessionComponent.I.GetGamemodes())
-                    availableGamemodes.Append(
-                        $"\n-    {gamemode} ({SUGMA_SessionComponent.I.GetComponent<GamemodeBase>(gamemode).ReadableName})");
-
                 MyAPIGateway.Utilities.ShowMessage("SUGMA",
-                    $"Unrecognized gamemode \"{args[1].ToLower()}\". Available gamemodes:{availableGamemodes}");
+                    $"Unrecognized gamemode \"{args[1].ToLower()}\". Available gamemodes:{SUGMA_SessionComponent.ListGamemodes()}");
                 return;
             }
 

@@ -1,5 +1,5 @@
 ﻿using RichHudFramework.UI;
-using SC.SUGMA.Textures;
+using SC.SUGMA.Utilities;
 using VRage.Game.ModAPI;
 using VRageMath;
 

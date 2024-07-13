@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using DefenseShields;
 using RichHudFramework.Client;
 using Sandbox.ModAPI;
@@ -11,7 +12,7 @@ using SC.SUGMA.GameModes.TeamDeathMatch_Zones;
 using SC.SUGMA.GameState;
 using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
-using SC.SUGMA.Textures;
+using SC.SUGMA.Utilities;
 using VRage.Game.Components;
 
 namespace SC.SUGMA
@@ -101,8 +102,6 @@ namespace SC.SUGMA
                 return false;
             }
 
-            SUtils.SetWorldPermissionsForMatch(true);
-
             if (MyAPIGateway.Session.IsServer || notifyNetwork)
                 GameStatePacket.UpdateGamestate(arguments);
 
@@ -123,12 +122,24 @@ namespace SC.SUGMA
 
             string[] oldArgs = currentGamemode.Arguments;
 
-            SUtils.SetWorldPermissionsForMatch(false);
-
             if (MyAPIGateway.Session.IsServer || notifyNetwork)
                 GameStatePacket.UpdateGamestate(oldArgs);
 
             return true;
+        }
+
+        public static string ListGamemodes()
+        {
+            var availableGamemodes = new StringBuilder();
+
+            foreach (var gamemode in I.GetGamemodes())
+            {
+                var gamemodeObject = I.GetComponent<GamemodeBase>(gamemode);
+                availableGamemodes.Append(
+                    $"\n-  {gamemode} ({gamemodeObject.ReadableName})\n  *  {gamemodeObject.ArgumentParser.HelpText.Replace("\n", "\n  *  ")}");
+            }
+
+            return availableGamemodes.ToString();
         }
 
         #region Base Methods

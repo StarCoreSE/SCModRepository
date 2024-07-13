@@ -4,6 +4,7 @@ using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
 using SC.SUGMA.API;
 using SC.SUGMA.GameState;
+using SC.SUGMA.Utilities;
 using VRage.Game.ModAPI;
 
 namespace SC.SUGMA.GameModes.TeamDeathMatch
@@ -13,7 +14,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
     /// </summary>
     internal class TeamDeathmatchGamemode : GamemodeBase
     {
-        public const double MatchDuration = 20;
+        public static double MatchDuration = 20;
 
         /// <summary>
         ///     Lists currently tracked factions. Mapped to grid count.
@@ -33,6 +34,17 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
         public override string Description { get; internal set; } =
             "Factions fight against eachother until tickets run out. Kill enemy players to remove tickets.";
+
+        public TeamDeathmatchGamemode()
+        {
+            ArgumentParser += new ArgumentParser(
+                new ArgumentParser.ArgumentDefinition(
+                    time => double.TryParse(time, out MatchDuration),
+                    "t",
+                    "match-time",
+                    "Match time, in minutes.")
+            );
+        }
 
         public override void Close()
         {
@@ -153,7 +165,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
             base.StartRound(arguments);
             MyAPIGateway.Utilities.ShowNotification("Combatants: " + string.Join(" vs ", factionNames), 10000, "Red");
-            _matchTimer.Start();
+            _matchTimer.Start(MatchDuration);
 
             if (!MyAPIGateway.Utilities.IsDedicated)
                 SUGMA_SessionComponent.I.RegisterComponent("tdmHud", new TeamDeathmatchHud(this));
@@ -171,7 +183,6 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
         public override void StopRound()
         {
             bool setWinnerFromArgs = false;
-            Log.Info("!!! " + string.Join(", ", Arguments));
             foreach (var arg in Arguments)
             {
                 if (arg.StartsWith("win"))
