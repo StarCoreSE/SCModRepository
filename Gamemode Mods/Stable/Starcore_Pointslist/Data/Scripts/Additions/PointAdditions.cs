@@ -438,8 +438,8 @@ namespace ShipPoints
             ["HAS_Thanatos"] = 350,
             ["HAS_Alecto"] = 400,
             ["HAS_Assault"] = 250,
-            ["HAS_Nyx"] = 250,
-            ["HAS_Mammon"] = 450,
+            ["HAS_Nyx"] = 200,
+            ["HAS_Mammon"] = 400,
 
             ["K_SA_Launcher_VIV"] = 350,
             ["K_SA_Launcher_VI"] = 350,
