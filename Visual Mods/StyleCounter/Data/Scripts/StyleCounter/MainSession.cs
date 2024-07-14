@@ -1,6 +1,8 @@
 ﻿using RichHudFramework.Client;
 using RichHudFramework.UI.Client;
+using Sandbox.ModAPI;
 using VRage.Game.Components;
+using VRage.Input;
 
 namespace StarCore.StyleCounter
 {
@@ -21,14 +23,15 @@ namespace StarCore.StyleCounter
 
         }
 
-        private int _ticks = 0;
         public override void Draw()
         {
             if (!RichHudClient.Registered)
                 return;
 
-            Hud.SetStyleMeter((_ticks % 120)/120f);
-            _ticks++;
+            Hud.UpdateStyleMeter();
+
+            if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.Insert))
+                Hud.StylePoints += 50;
         }
 
         #endregion
