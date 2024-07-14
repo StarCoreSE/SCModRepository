@@ -21,12 +21,14 @@ namespace StarCore.StyleCounter
 
         }
 
+        private int _ticks = 0;
         public override void Draw()
         {
             if (!RichHudClient.Registered)
                 return;
 
-
+            Hud.SetStyleMeter((_ticks % 120)/120f);
+            _ticks++;
         }
 
         #endregion
