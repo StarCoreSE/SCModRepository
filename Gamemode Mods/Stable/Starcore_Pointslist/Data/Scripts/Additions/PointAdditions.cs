@@ -742,7 +742,7 @@ namespace ShipPoints
                 case "[BTI] MRM-10 Modular Launcher":
                 case "[BTI] MRM-10 Modular Launcher Middle":
                 case "[BTI] MRM-10 Launcher":
-                    blockDisplayName = "MRM-10 Launcher";
+                    blockDisplayName = "[BTI] MRM-10 Launcher";
                     costMultiplier = 0.04f;
                     break;
                 case "[BTI] LRM-5 Modular Launcher 45 Reversed":
@@ -750,7 +750,7 @@ namespace ShipPoints
                 case "[BTI] LRM-5 Modular Launcher Middle":
                 case "[BTI] LRM-5 Modular Launcher":
                 case "[BTI] LRM-5 Launcher":
-                    blockDisplayName = "LRM-5 Launcher";
+                    blockDisplayName = "[BTI] LRM-5 Launcher";
                     costMultiplier = 0.10f;
                     break;
                 case "[MA] Gimbal Laser T2 Armored":
@@ -758,7 +758,7 @@ namespace ShipPoints
                 case "[MA] Gimbal Laser T2 Armored Slope 2":
                 case "[MA] Gimbal Laser T2 Armored Slope":
                 case "[MA] Gimbal Laser T2":
-                    blockDisplayName = "Gimbal Laser T2";
+                    blockDisplayName = "[MA] Gimbal Laser T2";
                     costMultiplier = 0f;
                     break;
                 case "[MA] Gimbal Laser Armored Slope 45":
@@ -766,13 +766,13 @@ namespace ShipPoints
                 case "[MA] Gimbal Laser Armored Slope":
                 case "[MA] Gimbal Laser Armored":
                 case "[MA] Gimbal Laser":
-                    blockDisplayName = "Gimbal Laser";
+                    blockDisplayName = "[MA] Gimbal Laser";
                     costMultiplier = 0f;
                     break;
                 case "[ONYX] BR-RT7 Afflictor Slanted Burst Cannon":
                 case "[ONYX] BR-RT7 Afflictor 70mm Burst Cannon":
                 case "[ONYX] Afflictor":
-                    blockDisplayName = "Afflictor";
+                    blockDisplayName = "[ONYX] Afflictor";
                     costMultiplier = 0f;
                     break;
                 case "[MA] Slinger AC 150mm Sloped 30":
@@ -781,35 +781,35 @@ namespace ShipPoints
                 case "[MA] Slinger AC 150mm Sloped 45 Gantry":
                 case "[MA] Slinger AC 150mm":
                 case "[MA] Slinger":
-                    blockDisplayName = "Slinger";
+                    blockDisplayName = "[MA] Slinger";
                     costMultiplier = 0f;
                     break;
                 case "[ONYX] Heliod Plasma Pulser":
-                    blockDisplayName = "Heliod Plasma Pulser";
+                    blockDisplayName = "[ONYX] Heliod Plasma Pulser";
                     costMultiplier = 0.50f;
                     break;
                 case "[MA] UNN Heavy Torpedo Launcher":
-                    blockDisplayName = "UNN Heavy Torpedo Launcher";
+                    blockDisplayName = "[MA] UNN Heavy Torpedo Launcher";
                     costMultiplier = 0.15f;
                     break;
                 case "[BTI] SRM-8":
-                    blockDisplayName = "SRM-8";
+                    blockDisplayName = "[BTI] SRM-8";
                     costMultiplier = 0.15f;
                     break;
                 case "[BTI] Starcore Arrow-IV Launcher":
-                    blockDisplayName = "Starcore Arrow-IV Launcher";
+                    blockDisplayName = "[BTI] Starcore Arrow-IV Launcher";
                     costMultiplier = 0.15f;
                     break;
                 case "[HAS] Tartarus VIII":
-                    blockDisplayName = "Tartarus VIII";
+                    blockDisplayName = "[HAS] Tartarus VIII";
                     costMultiplier = 0.15f;
                     break;
                 case "[HAS] Cocytus IX":
-                    blockDisplayName = "Cocytus IX";
+                    blockDisplayName = "[HAS] Cocytus IX";
                     costMultiplier = 0.15f;
                     break;
                 case "[MA] MCRN Torpedo Launcher":
-                    blockDisplayName = "MCRN Torpedo Launcher";
+                    blockDisplayName = "[MA] MCRN Torpedo Launcher";
                     costMultiplier = 0.15f;
                     break;
                 case "Flares":
@@ -817,16 +817,16 @@ namespace ShipPoints
                     costMultiplier = 0.25f;
                     break;
                 case "[EXO] Chiasm [Arc Emitter]":
-                    blockDisplayName = "Chiasm [Arc Emitter]";
+                    blockDisplayName = "[EXO] Chiasm [Arc Emitter]";
                     costMultiplier = 0.15f;
                     break;
                 case "[BTI] Medium Laser":
                 case "[BTI] Large Laser":
-                    blockDisplayName = " Laser";
+                    blockDisplayName = "[BTI] Laser";
                     costMultiplier = 0.15f;
                     break;
                 case "[SOL] ArcStrike CS-LR Torpedo":
-                    blockDisplayName = "ArcStrike Torpedo";
+                    blockDisplayName = "[SOL] ArcStrike Torpedo";
                     costMultiplier = 0.25f;
                     break;
                 case "Reinforced Blastplate":
@@ -846,44 +846,44 @@ namespace ShipPoints
                 case "[EXO] Taiidan Bomber Hangar Bay":
                 case "[EXO] Taiidan Bomber Hangar Bay Medium":
                 case "[EXO] Taiidan Fighter Small Bay":
-                    blockDisplayName = "Taiidan";
+                    blockDisplayName = "[EXO] Taiidan Bay";
                     costMultiplier = 0.25f;
                     break;
                 case "[40K] Gothic Torpedo Launcher":
-                    blockDisplayName = "Gothic Torpedo Launcher";
+                    blockDisplayName = "[40k] Gothic Torpedo Launcher";
                     costMultiplier = 0.15f;
                     break;
                 case "[MID] AX 'Spitfire' Light Rocket Turret":
-                    blockDisplayName = "Spitfire Turret";
+                    blockDisplayName = "[MID] Spitfire Turret";
                     costMultiplier = 0.15f;
                     break;
                 case "[FLAW] Naval RL-10x 'Avalanche' Medium Range Launchers":
                 case "[FLAW] Naval RL-10x 'Avalanche' Angled Medium Range Launchers":
-                    blockDisplayName = "RL-10x Avalanche";
+                    blockDisplayName = "[FLAW] RL-10x Avalanche";
                     costMultiplier = 0.15f;
                     break;
                 case "[MID] LK 'Bonfire' Guided Rocket Turret":
-                    blockDisplayName = "Bonfire Turret";
+                    blockDisplayName = "[MID] Bonfire Turret";
                     costMultiplier = 0.2f;
                     break;
                 case "[FLAW] Warp Beacon - Longsword":
-                    blockDisplayName = "Longsword Bomber";
+                    blockDisplayName = "[FLAW] Longsword Bomber";
                     costMultiplier = 0.2f;
                     break;
                 case "[FLAW] Phoenix Snubfighter Launch Bay":
-                    blockDisplayName = "Snubfighters";
+                    blockDisplayName = "[FLAW] Snubfighters";
                     costMultiplier = 0.1f;
                     break;
                 case "[FLAW] Hadean Superheavy Plasma Blastguns":
-                    blockDisplayName = "Plasma Blastgun";
+                    blockDisplayName = "[FLAW] Plasma Blastgun";
                     costMultiplier = 0.121f;
                     break;
                 case "[FLAW] Vindicator Kinetic Battery":
-                    blockDisplayName = "Kinetic Battery";
+                    blockDisplayName = "[FLAW] Kinetic Battery";
                     costMultiplier = 0.120f;
                     break;
                 case "[FLAW] Goalkeeper Casemate Flak Battery":
-                    blockDisplayName = "Goalkeeper Flakwall";
+                    blockDisplayName = "[FLAW] Goalkeeper Flakwall";
                     costMultiplier = 0.119f;
                     break;
                 case "Shield Controller":
@@ -893,7 +893,7 @@ namespace ShipPoints
                     costMultiplier = 50.00f;
                     break;
                 case "[FAS] Neptune Torpedo":
-                    blockDisplayName = "Neptune Torpedo";
+                    blockDisplayName = "[FAS] Neptune Torpedo";
                     costMultiplier = 0.25f;
                     break;
             }
