@@ -16,7 +16,7 @@
 			<Icon>Textures\GUI\Icons\8Inch55RF.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
-			<Size x="3" y="2" z="3"/>
+			<Size x="5" y="2" z="5"/>
 			<Scale> 2 </Scale>
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\203quad\8Inch55RF.mwm</Model>
@@ -32,7 +32,7 @@
 			</Components>
 			<CriticalComponent Subtype="Motor" Index="0" />
 			<MountPoints>
-				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
+				<MountPoint Side="Bottom" StartX="1" StartY="1" EndX="4" EndY="4" />
 			</MountPoints>
 			<BuildTimeSeconds>30</BuildTimeSeconds>
 			<BlockPairName>203mmQuad</BlockPairName>

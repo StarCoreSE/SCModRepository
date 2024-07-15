@@ -783,7 +783,7 @@
 		  </Id>
 		  <Category>WEP_SHIP</Category>
 		  <MaxDistance>5000</MaxDistance>
-		  <Volume>1</Volume>
+		  <Volume>0.5</Volume>
 
 		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 		  <DynamicMusicAmount>5</DynamicMusicAmount>
@@ -809,7 +809,7 @@
 		  </Id>
 		  <Category>WEP_SHIP</Category>
 		  <MaxDistance>6000</MaxDistance>
-		  <Volume>1</Volume>
+		  <Volume>0.5</Volume>
 		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 		  <DynamicMusicAmount>5</DynamicMusicAmount>
 		  <Loopable>false</Loopable>
@@ -837,7 +837,7 @@
 		  </Id>
 		  <Category>WEP_SHIP</Category>
 		  <MaxDistance>3000</MaxDistance>
-		  <Volume>0.2</Volume>
+		  <Volume>0.1</Volume>
 		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 		  <DynamicMusicAmount>5</DynamicMusicAmount>
 		  <PreventSynchronization> 0 </PreventSynchronization>
@@ -867,7 +867,7 @@
 		  </Id>
 		  <Category>WEP_SHIP</Category>
 		  <MaxDistance>4000</MaxDistance>
-		  <Volume>0.3</Volume>
+		  <Volume>0.15</Volume>
 		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 		  <DynamicMusicAmount>5</DynamicMusicAmount>
 		  <PreventSynchronization> 0 </PreventSynchronization>
