@@ -8,6 +8,7 @@ using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.Utils;
 using VRageMath;
+using VRageRender;
 using static VRageRender.MyBillboard;
 
 namespace StarCore.FusionSystems.
