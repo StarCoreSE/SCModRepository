@@ -41,7 +41,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                 ParentAlignment = ParentAlignments.Inner |
                                   (isLeftAligned ? ParentAlignments.Left : ParentAlignments.Right),
                 DimAlignment = DimAlignments.Height,
-                Color = new Color(255, 255, 255, 40),
+                Color = HudConstants.HudBackgroundColor,
                 Size = new Vector2(BaseWidth / 3.5f * 2.4f, BaseHeight),
                 ZOffset = -1
             };
@@ -49,12 +49,12 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             _factionLabel = new LabelBox(this)
             {
                 Text = "MMMM888", // Text padding
-                Color = new Color(255, 255, 255, 40),
+                Color = HudConstants.HudBackgroundColor,
                 DimAlignment = DimAlignments.Height,
                 ParentAlignment = ParentAlignments.Inner |
                                   (isLeftAligned ? ParentAlignments.Right : ParentAlignments.Left),
                 Size = new Vector2(BaseWidth / 5f, BaseHeight),
-                AutoResize = false,
+                //AutoResize = false,
                 FitToTextElement = false,
                 Format = new GlyphFormat(Color.White, TextAlignment.Center)
             };

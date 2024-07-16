@@ -85,7 +85,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                 Text = "20:00",
                 TextPadding = new Vector2(2.5f, 0),
                 FitToTextElement = false,
-                Color = new Color(255, 255, 255, 40)
+                Color = HudConstants.HudBackgroundColor
             };
 
             var banners = new List<TDMHud_TeamBanner>(_gamemode.TrackedFactions.Count);
@@ -152,7 +152,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                 ParentAlignment = ParentAlignments.Bottom,
                 Height = TDMHud_TeamBanner.BaseHeight,
                 TextPadding = new Vector2(2.5f, 0),
-                Color = new Color(255, 255, 255, 40)
+                Color = HudConstants.HudBackgroundColor
             };
 
             winnerLabel.TextBoard.SetFormatting(GlyphFormat.White.WithColor(Color.Red).WithSize(3)

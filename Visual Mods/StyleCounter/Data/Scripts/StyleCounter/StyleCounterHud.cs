@@ -104,6 +104,9 @@ namespace StarCore.StyleCounter
                 return;
             }
 
+            if (StylePoints > Ranks[Ranks.Length - 1].MaxPoints)
+                StylePoints = Ranks[Ranks.Length - 1].MaxPoints;
+
             Visible = true;
 
             StyleRank rank = Ranks[0];
