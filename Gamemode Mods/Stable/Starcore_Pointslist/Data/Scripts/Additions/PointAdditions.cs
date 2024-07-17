@@ -330,7 +330,8 @@ namespace ShipPoints
             ["Wheel1x1"] = 35000,
 
             ["K_SA_Gauss_AMSIIC"] = 350,
-            ["SA_HMI_Erebos"] = 300,
+            //["SA_HMI_Erebos"] = 300,
+            ["SA_HMI_Erebos"] = 35000,
 
             ["LargeBlockRadioAntenna"] = 5,
             ["LargeBlockCompactRadioAntenna"] = 5,
