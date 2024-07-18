@@ -53,35 +53,54 @@ namespace ShipPoints.ShipTracking
 
         private void TransferToGrid(IMyCubeGrid newGrid, bool showOnHud = true)
         {
+            if (newGrid == null)
+            {
+                Log.Error("TransferToGrid called with null newGrid");
+                return;
+            }
+
             if (Grid != null)
             {
                 Grid.OnClose -= OnClose;
                 Grid.OnGridSplit -= OnGridSplit;
-                Grid.GetGridGroup(GridLinkTypeEnum.Physical).OnGridAdded -= OnGridAdd;
-                Grid.GetGridGroup(GridLinkTypeEnum.Physical).OnGridRemoved -= OnGridRemove;
-
+                var gridGroup = Grid.GetGridGroup(GridLinkTypeEnum.Physical);
+                if (gridGroup != null)
+                {
+                    gridGroup.OnGridAdded -= OnGridAdd;
+                    gridGroup.OnGridRemoved -= OnGridRemove;
+                }
                 foreach (var gridStat in _gridStats)
                 {
                     if (gridStat.Key != newGrid)
                         gridStat.Value.Close();
                 }
-                
                 _gridStats.Clear();
                 TrackingManager.I.TrackedGrids.Remove(Grid);
             }
 
             Grid = newGrid;
-
             var allAttachedGrids = new List<IMyCubeGrid>();
-            Grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(allAttachedGrids);
+            var newGridGroup = Grid.GetGridGroup(GridLinkTypeEnum.Physical);
+            if (newGridGroup != null)
+            {
+                newGridGroup.GetGrids(allAttachedGrids);
+            }
+            else
+            {
+                Log.Info($"Grid {Grid.DisplayName} has no physical grid group");
+                allAttachedGrids.Add(Grid);
+            }
+
             foreach (var attachedGrid in allAttachedGrids)
             {
-                var stats = new GridStats(attachedGrid);
-                _gridStats.Add(attachedGrid, stats);
-                OriginalGridIntegrity += stats.OriginalGridIntegrity;
-                if (((MyCubeGrid)attachedGrid).BlocksCount >
-                    ((MyCubeGrid)Grid).BlocksCount) // Snap to the largest grid in the group.
-                    Grid = attachedGrid;
+                if (attachedGrid != null)
+                {
+                    var stats = new GridStats(attachedGrid);
+                    _gridStats.Add(attachedGrid, stats);
+                    OriginalGridIntegrity += stats.OriginalGridIntegrity;
+                    if (((MyCubeGrid)attachedGrid).BlocksCount > ((MyCubeGrid)Grid).BlocksCount)
+                        Grid = attachedGrid;
+                }
             }
 
             Grid.OnClose += OnClose;

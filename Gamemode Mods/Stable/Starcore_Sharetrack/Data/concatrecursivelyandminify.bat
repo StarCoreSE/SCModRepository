@@ -5,8 +5,8 @@ REM ^^ this is to change the encoding to UTF-8, apparently
 
 echo Starting operation...
 
-set TEMP_OUTPUT=temp_concatenated.cs
-set FINAL_OUTPUT=minified_output.cs
+set TEMP_OUTPUT=temp_concatenated.txt
+set FINAL_OUTPUT=minified_output.txt
 set /a COUNT=0
 set /a ERRORS=0
 

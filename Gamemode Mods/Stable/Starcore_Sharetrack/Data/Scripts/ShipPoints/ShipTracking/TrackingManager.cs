@@ -13,24 +13,12 @@ namespace ShipPoints.ShipTracking
     internal class TrackingManager
     {
         public static TrackingManager I;
-
-        private static readonly string[] AutoTrackSubtypes =
-        {
-            "LargeFlightMovement",
-            "RivalAIRemoteControlLarge"
-        };
-
+        private static readonly string[] AutoTrackSubtypes = { "LargeFlightMovement", "RivalAIRemoteControlLarge" };
         private readonly HashSet<long> _queuedGridTracks = new HashSet<long>();
-
         public HashSet<IMyCubeGrid> AllGrids = new HashSet<IMyCubeGrid>();
         public Dictionary<IMyCubeGrid, ShipTracker> TrackedGrids = new Dictionary<IMyCubeGrid, ShipTracker>();
-
-        #region Public Actions
-
         public Action<IMyCubeGrid, bool> OnShipTracked;
         public Action<IMyCubeGrid, bool> OnShipAliveChanged;
-
-        #endregion
 
         private TrackingManager()
         {
@@ -56,7 +44,6 @@ namespace ShipPoints.ShipTracking
             foreach (var tracker in TrackedGrids.Values)
                 tracker.DisposeHud();
             TrackedGrids.Clear();
-
             MyAPIGateway.Entities.OnEntityAdd -= OnEntityAdd;
             MyAPIGateway.Entities.OnEntityRemove -= OnEntityRemove;
         }
@@ -79,9 +66,15 @@ namespace ShipPoints.ShipTracking
                 _queuedGridTracks.Remove(grid.EntityId);
                 if (!TrackedGrids.ContainsKey(grid))
                 {
-                    var tracker = new ShipTracker(grid);
-                    Log.Info($"OnEntityAdd Tracked grid {grid.DisplayName}. Visible: true");
-                    // Automatically added to the TrackedGrids list
+                    try
+                    {
+                        var tracker = new ShipTracker(grid);
+                        Log.Info($"OnEntityAdd Tracked grid {grid.DisplayName}. Visible: true");
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error($"Error creating ShipTracker for grid {grid.DisplayName} in OnEntityAdd: {ex}");
+                    }
                 }
             }
         }
@@ -90,35 +83,43 @@ namespace ShipPoints.ShipTracking
         {
             if (!(entity is IMyCubeGrid) || entity.Physics == null)
                 return;
+
             var grid = (IMyCubeGrid)entity;
-
             AllGrids.Remove(grid);
-
             if (TrackedGrids.ContainsKey(grid))
             {
                 TrackedGrids[grid].DisposeHud();
                 TrackedGrids.Remove(grid);
             }
-
             _queuedGridTracks.Remove(grid.EntityId);
         }
 
         private long[] GetGridIds()
         {
             var gridIds = new List<long>();
-            foreach (var grid in TrackedGrids.Keys) gridIds.Add(grid.EntityId);
+            foreach (var grid in TrackedGrids.Keys)
+                gridIds.Add(grid.EntityId);
             return gridIds.ToArray();
         }
 
         private void CheckAutotrack(IMySlimBlock block)
         {
-            if (block.FatBlock == null ||
-                !AutoTrackSubtypes.Contains(block.BlockDefinition.Id.SubtypeName))
+            if (block == null)
+            {
+                Log.Error("CheckAutotrack called with null block");
                 return;
+            }
+            if (block.FatBlock == null || !AutoTrackSubtypes.Contains(block.BlockDefinition.Id.SubtypeName))
+                return;
+
+            if (block.CubeGrid == null)
+            {
+                Log.Error($"Block {block.BlockDefinition.Id.SubtypeName} has null CubeGrid");
+                return;
+            }
+
             TrackGrid(block.CubeGrid, false);
         }
-
-        #region Public Methods
 
         public static void Init()
         {
@@ -147,35 +148,52 @@ namespace ShipPoints.ShipTracking
                     gridIds_List.Remove(grid.EntityId);
                     continue;
                 }
-
                 UntrackGrid(grid, false);
             }
-
-            foreach (var gridId in gridIds_List) TrackGrid(gridId, false);
+            foreach (var gridId in gridIds_List)
+                TrackGrid(gridId, false);
         }
 
         public void TrackGrid(IMyCubeGrid grid, bool share = true)
         {
-            if (!(((MyCubeGrid)grid)?.DestructibleBlocks ?? false) ||
-                TrackedGrids.ContainsKey(grid)) // Ignore invulnerable and already tracked grids
+            if (grid == null)
+            {
+                Log.Error("TrackGrid called with null grid");
+                return;
+            }
+
+            if (!(((MyCubeGrid)grid)?.DestructibleBlocks ?? false) || TrackedGrids.ContainsKey(grid))
                 return;
 
-            // Don't allow tracking grids that are already tracked in the group.
             var allAttachedGrids = new List<IMyCubeGrid>();
-            grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(allAttachedGrids);
+            var gridGroup = grid.GetGridGroup(GridLinkTypeEnum.Physical);
+            if (gridGroup != null)
+            {
+                gridGroup.GetGrids(allAttachedGrids);
+            }
+            else
+            {
+                Log.Error($"Grid {grid.DisplayName} has no physical grid group");
+                allAttachedGrids.Add(grid);
+            }
+
             foreach (var attachedGrid in allAttachedGrids)
                 if (TrackedGrids.ContainsKey(attachedGrid))
                     return;
 
-            var tracker = new ShipTracker(grid);
-            Log.Info($"TrackGrid Tracked grid {grid.DisplayName}. Visible: true");
-            // Automatically added to tracked grid list
-
-            OnShipTracked?.Invoke(grid, true);
-
-            if (!share)
+            try
+            {
+                var tracker = new ShipTracker(grid);
+                Log.Info($"TrackGrid Tracked grid {grid.DisplayName}. Visible: true");
+                OnShipTracked?.Invoke(grid, true);
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Error creating ShipTracker for grid {grid.DisplayName}: {ex}");
                 return;
+            }
 
+            if (!share) return;
             if (MyAPIGateway.Session.IsServer)
             {
                 ServerDoSync();
@@ -195,26 +213,21 @@ namespace ShipPoints.ShipTracking
                 _queuedGridTracks.Add(gridId);
                 return;
             }
-
             TrackGrid(grid, share);
         }
 
         public void UntrackGrid(IMyCubeGrid grid, bool share = true)
         {
-            // Untrack all grids in group.
             var allAttachedGrids = new List<IMyCubeGrid>();
             grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(allAttachedGrids);
             foreach (var attachedGrid in allAttachedGrids.Where(attachedGrid => TrackedGrids.ContainsKey(attachedGrid)))
             {
                 TrackedGrids[attachedGrid].DisposeHud();
                 TrackedGrids.Remove(attachedGrid);
-
                 OnShipTracked?.Invoke(attachedGrid, false);
             }
 
-            if (!share)
-                return;
-
+            if (!share) return;
             if (MyAPIGateway.Session.IsServer)
             {
                 ServerDoSync();
@@ -253,7 +266,5 @@ namespace ShipPoints.ShipTracking
         {
             return _queuedGridTracks.ToArray();
         }
-
-        #endregion
     }
 }
