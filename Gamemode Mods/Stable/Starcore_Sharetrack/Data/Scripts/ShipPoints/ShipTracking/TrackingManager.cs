@@ -17,8 +17,13 @@ namespace ShipPoints.ShipTracking
         private readonly HashSet<long> _queuedGridTracks = new HashSet<long>();
         public HashSet<IMyCubeGrid> AllGrids = new HashSet<IMyCubeGrid>();
         public Dictionary<IMyCubeGrid, ShipTracker> TrackedGrids = new Dictionary<IMyCubeGrid, ShipTracker>();
+
+        #region Public Actions
+
         public Action<IMyCubeGrid, bool> OnShipTracked;
         public Action<IMyCubeGrid, bool> OnShipAliveChanged;
+
+        #endregion
 
         private bool _isTracking = false;
 
@@ -185,6 +190,7 @@ namespace ShipPoints.ShipTracking
             if (!(((MyCubeGrid)grid)?.DestructibleBlocks ?? false) || TrackedGrids.ContainsKey(grid))
                 return;
 
+            // Don't allow tracking grids that are already tracked in the group.
             var allAttachedGrids = new List<IMyCubeGrid>();
             var gridGroup = grid.GetGridGroup(GridLinkTypeEnum.Physical);
             if (gridGroup != null)
@@ -205,6 +211,7 @@ namespace ShipPoints.ShipTracking
             {
                 var tracker = new ShipTracker(grid);
                 TrackedGrids[grid] = tracker;
+                // Automatically added to tracked grid list
                 Log.Info($"TrackGrid Tracked grid {grid.DisplayName}. Visible: true");
                 OnShipTracked?.Invoke(grid, true);
             }
@@ -245,6 +252,7 @@ namespace ShipPoints.ShipTracking
 
         public void UntrackGrid(IMyCubeGrid grid, bool share = true)
         {
+            // Untrack all grids in group.
             var allAttachedGrids = new List<IMyCubeGrid>();
             grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(allAttachedGrids);
             foreach (var attachedGrid in allAttachedGrids.Where(attachedGrid => TrackedGrids.ContainsKey(attachedGrid)))
