@@ -133,6 +133,8 @@ namespace ShipPoints.ShipTracking
             TrackGrid(block.CubeGrid, false);
         }
 
+        #region Public Methods
+        
         public static void Init()
         {
             I = new TrackingManager();
@@ -301,5 +303,7 @@ namespace ShipPoints.ShipTracking
         {
             return _queuedGridTracks.ToArray();
         }
+
+        #endregion
     }
 }
