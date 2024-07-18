@@ -102,11 +102,11 @@ namespace ShipPoints
 
                 if (_preInitMessages != null)
                 {
-                    var warning = $"{_modName} WARNING: there are log messages before the mod initialized!";
+                    var Error = $"{_modName} Error: there are log messages before the mod initialized!";
 
                     Info("--- pre-init messages ---");
 
-                    foreach (var msg in _preInitMessages) Info(msg, warning);
+                    foreach (var msg in _preInitMessages) Info(msg, Error);
 
                     Info("--- end pre-init messages ---");
 

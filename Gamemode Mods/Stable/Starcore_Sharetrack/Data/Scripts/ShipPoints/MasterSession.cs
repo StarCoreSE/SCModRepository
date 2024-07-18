@@ -21,6 +21,10 @@ namespace ShipPoints
         private ApiProvider _apiProvider;
         public int Ticks { get; private set; } = 0;
 
+        private const int DelayTicks = 600; // 10 seconds at 60 ticks per second
+        private bool _trackingStarted = false;
+
+
         public override void LoadData()
         {
             I = this;
@@ -31,6 +35,7 @@ namespace ShipPoints
                 HeartNetwork.I.LoadData(42521);
                 _pointCheck.Init();
                 _apiProvider = new ApiProvider();
+                TrackingManager.Init(); // Initialize TrackingManager, but don't start tracking yet
             }
             catch (Exception ex)
             {
@@ -61,7 +66,20 @@ namespace ShipPoints
             {
                 Ticks++;
                 HeartNetwork.I.Update();
-                TrackingManager.UpdateAfterSimulation();
+
+                if (!_trackingStarted)
+                {
+                    if (Ticks >= DelayTicks)
+                    {
+                        _trackingStarted = true;
+                        TrackingManager.I.StartTracking(); // New method to start tracking
+                    }
+                }
+                else
+                {
+                    TrackingManager.UpdateAfterSimulation();
+                }
+
                 _pointCheck.UpdateAfterSimulation();
             }
             catch (Exception ex)

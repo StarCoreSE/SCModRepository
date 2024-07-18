@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CoreSystems.Api;
 using DefenseShields;
@@ -25,26 +26,29 @@ namespace ShipPoints.ShipTracking
 
         public GridStats(IMyCubeGrid grid)
         {
-            Grid = grid;
+            if (grid == null)
+            {
+                Log.Error("GridStats constructor called with null grid");
+                throw new ArgumentNullException(nameof(grid));
+            }
 
+            Grid = grid;
             var allSlimBlocks = new List<IMySlimBlock>();
             Grid.GetBlocks(allSlimBlocks);
             _slimBlocks = allSlimBlocks.ToHashSet();
 
             foreach (var block in _slimBlocks)
             {
-                if (block.FatBlock != null)
+                if (block?.FatBlock != null)
                 {
                     _fatBlocks.Add(block.FatBlock);
                     GridIntegrity += block.Integrity;
-                }         
+                }
             }
 
             OriginalGridIntegrity = GridIntegrity;
-
             Grid.OnBlockAdded += OnBlockAdd;
             Grid.OnBlockRemoved += OnBlockRemove;
-
             Update();
         }
 
