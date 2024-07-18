@@ -11,7 +11,6 @@ using VRage.Game;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRage.ModAPI;
-using VRage.Utils;
 using VRageMath;
 using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
 
@@ -39,13 +38,8 @@ namespace ShipPoints.ShipTracking
 
         public ShipTracker(IMyCubeGrid grid, bool showOnHud = true)
         {
-            if (grid == null)
-            {
-                MyLog.Default.WriteLine("ShipTracker constructor: grid is null.");
-                return;
-            }
-
             TransferToGrid(grid, showOnHud);
+
             Update();
 
             if (!showOnHud || MyAPIGateway.Utilities.IsDedicated)
@@ -59,87 +53,43 @@ namespace ShipPoints.ShipTracking
 
         private void TransferToGrid(IMyCubeGrid newGrid, bool showOnHud = true)
         {
-            try
+            if (Grid != null)
             {
-                // Detach event handlers and close statistics for the old grid if it exists
-                if (Grid != null)
+                Grid.OnClose -= OnClose;
+                Grid.OnGridSplit -= OnGridSplit;
+                Grid.GetGridGroup(GridLinkTypeEnum.Physical).OnGridAdded -= OnGridAdd;
+                Grid.GetGridGroup(GridLinkTypeEnum.Physical).OnGridRemoved -= OnGridRemove;
+
+                foreach (var gridStat in _gridStats)
                 {
-                    // Unsubscribe from events on the old grid
-                    Grid.OnClose -= OnClose;
-                    Grid.OnGridSplit -= OnGridSplit;
-                    var oldGridGroup = Grid.GetGridGroup(GridLinkTypeEnum.Physical);
-                    if (oldGridGroup != null)
-                    {
-                        oldGridGroup.OnGridAdded -= OnGridAdd;
-                        oldGridGroup.OnGridRemoved -= OnGridRemove;
-                    }
-
-                    // Close statistics for grids that are not the new grid
-                    foreach (var gridStat in _gridStats)
-                    {
-                        if (gridStat.Key != newGrid && gridStat.Value != null)
-                        {
-                            gridStat.Value.Close();
-                        }
-                    }
-
-                    _gridStats.Clear();
-                    // Remove the old grid from the tracked grids if it's there
-                    if (TrackingManager.I?.TrackedGrids?.ContainsKey(Grid) == true)
-                    {
-                        TrackingManager.I.TrackedGrids.Remove(Grid);
-                    }
+                    if (gridStat.Key != newGrid)
+                        gridStat.Value.Close();
                 }
-
-                // Set the new grid as the current grid
-                Grid = newGrid;
-
-                // Set up the new grid
-                if (newGrid != null)
-                {
-                    var allAttachedGrids = new List<IMyCubeGrid>();
-                    var newGridGroup = newGrid.GetGridGroup(GridLinkTypeEnum.Physical);
-                    if (newGridGroup != null)
-                    {
-                        newGridGroup.GetGrids(allAttachedGrids);
-                        foreach (var attachedGrid in allAttachedGrids)
-                        {
-                            if (attachedGrid != null)
-                            {
-                                var stats = new GridStats(attachedGrid);
-                                _gridStats[attachedGrid] = stats;
-                                OriginalGridIntegrity += stats.OriginalGridIntegrity;
-                                // Determine the main grid based on the number of blocks
-                                if (((MyCubeGrid)attachedGrid).BlocksCount > ((MyCubeGrid)newGrid).BlocksCount)
-                                {
-                                    Grid = attachedGrid;
-                                }
-                            }
-                        }
-                    }
-
-                    // Subscribe to events on the new grid
-                    Grid.OnClose += OnClose;
-                    Grid.OnGridSplit += OnGridSplit;
-                    if (newGridGroup != null)
-                    {
-                        newGridGroup.OnGridAdded += OnGridAdd;
-                        newGridGroup.OnGridRemoved -= OnGridRemove;
-                    }
-
-                    // Add the new grid to the tracked grids if it's not already there and should be shown on HUD
-                    if (TrackingManager.I?.TrackedGrids != null && !TrackingManager.I.TrackedGrids.ContainsKey(Grid) && showOnHud)
-                    {
-                        TrackingManager.I.TrackedGrids.Add(Grid, this);
-                    }
-                }
+                
+                _gridStats.Clear();
+                TrackingManager.I.TrackedGrids.Remove(Grid);
             }
-            catch (Exception ex)
+
+            Grid = newGrid;
+
+            var allAttachedGrids = new List<IMyCubeGrid>();
+            Grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(allAttachedGrids);
+            foreach (var attachedGrid in allAttachedGrids)
             {
-                MyLog.Default.WriteLine($"Exception in TransferToGrid: {ex.Message}");
-                MyLog.Default.WriteLine(ex.StackTrace);
-                // You might want to rethrow the exception or handle it in a way that's appropriate for your mod
+                var stats = new GridStats(attachedGrid);
+                _gridStats.Add(attachedGrid, stats);
+                OriginalGridIntegrity += stats.OriginalGridIntegrity;
+                if (((MyCubeGrid)attachedGrid).BlocksCount >
+                    ((MyCubeGrid)Grid).BlocksCount) // Snap to the largest grid in the group.
+                    Grid = attachedGrid;
             }
+
+            Grid.OnClose += OnClose;
+            Grid.OnGridSplit += OnGridSplit;
+            Grid.GetGridGroup(GridLinkTypeEnum.Physical).OnGridAdded += OnGridAdd;
+            Grid.GetGridGroup(GridLinkTypeEnum.Physical).OnGridRemoved += OnGridRemove;
+            if (!TrackingManager.I.TrackedGrids.ContainsKey(Grid) && showOnHud)
+                TrackingManager.I.TrackedGrids.Add(Grid, this);
         }
 
         private ShieldApi ShieldApi => PointCheck.I.ShieldApi;
@@ -206,38 +156,24 @@ namespace ShipPoints.ShipTracking
 
         public void Update()
         {
-            if (Grid == null || Grid.Physics == null)
-            {
-                MyLog.Default.WriteLine("Update: Grid or Grid Physics is not initialized.");
+            if (Grid?.Physics == null) // TODO transfer to a different grid
                 return;
-            }
 
-            var shieldController = ShieldApi?.GetShieldBlock(Grid);
+            var shieldController = ShieldApi.GetShieldBlock(Grid);
             if (shieldController == null)
-            {
                 OriginalMaxShieldHealth = -1;
-            }
-            else
-            {
-                if (OriginalMaxShieldHealth == -1 && ShieldApi?.IsFortified(shieldController) == false)
-                {
-                    OriginalMaxShieldHealth = MaxShieldHealth;
-                }
-            }
+            if (OriginalMaxShieldHealth == -1 && !ShieldApi.IsFortified(shieldController))
+                OriginalMaxShieldHealth = MaxShieldHealth;
 
-            if (_gridStats != null)
-            {
-                foreach (var gridStat in _gridStats.Values)
-                {
-                    gridStat?.Update();
-                }
-            }
+            // TODO: Update pilots
+            foreach (var gridStat in _gridStats.Values)
+                gridStat.Update();
 
             bool bufferIsFunctional = IsFunctional;
             IsFunctional = TotalPower > 0 && TotalTorque > 0 && CockpitCount > 0;
             if (bufferIsFunctional != IsFunctional)
             {
-                TrackingManager.I?.OnShipAliveChanged?.Invoke(Grid, IsFunctional);
+                TrackingManager.I.OnShipAliveChanged?.Invoke(Grid, IsFunctional);
             }
         }
 
