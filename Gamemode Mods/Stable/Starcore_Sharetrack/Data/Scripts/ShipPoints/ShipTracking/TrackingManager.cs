@@ -20,18 +20,50 @@ namespace ShipPoints.ShipTracking
         public Action<IMyCubeGrid, bool> OnShipTracked;
         public Action<IMyCubeGrid, bool> OnShipAliveChanged;
 
+        private bool _isTracking = false;
+
         private TrackingManager()
         {
-            var entities = new HashSet<IMyEntity>();
-            MyAPIGateway.Entities.GetEntities(entities);
-            foreach (var entity in entities)
-                OnEntityAdd(entity);
             MyAPIGateway.Entities.OnEntityAdd += OnEntityAdd;
             MyAPIGateway.Entities.OnEntityRemove += OnEntityRemove;
         }
 
+        public void StartTracking()
+        {
+            Log.Info("Starting grid tracking");
+            _isTracking = true;
+            var entities = new HashSet<IMyEntity>();
+            MyAPIGateway.Entities.GetEntities(entities);
+            foreach (var entity in entities)
+                ProcessEntity(entity);
+        }
+
+        private void ProcessEntity(IMyEntity entity)
+        {
+            var grid = entity as IMyCubeGrid;
+            if (grid?.Physics == null) return;
+
+            AllGrids.Add(grid);
+            grid.GetBlocks(null, block =>
+            {
+                CheckAutotrack(block);
+                return false;
+            });
+
+            if (_queuedGridTracks.Contains(grid.EntityId))
+            {
+                _queuedGridTracks.Remove(grid.EntityId);
+                if (!TrackedGrids.ContainsKey(grid))
+                {
+                    TrackGrid(grid, false);
+                }
+            }
+        }
+
         private void Update()
         {
+            if (!_isTracking) return;
+
             foreach (var tracker in TrackedGrids.Values)
             {
                 tracker.UpdateAfterSim();
@@ -50,33 +82,8 @@ namespace ShipPoints.ShipTracking
 
         private void OnEntityAdd(IMyEntity entity)
         {
-            var grid = entity as IMyCubeGrid;
-            if (grid?.Physics == null)
-                return;
-
-            AllGrids.Add(grid);
-            grid.GetBlocks(null, block =>
-            {
-                CheckAutotrack(block);
-                return false;
-            });
-
-            if (_queuedGridTracks.Contains(grid.EntityId))
-            {
-                _queuedGridTracks.Remove(grid.EntityId);
-                if (!TrackedGrids.ContainsKey(grid))
-                {
-                    try
-                    {
-                        var tracker = new ShipTracker(grid);
-                        Log.Info($"OnEntityAdd Tracked grid {grid.DisplayName}. Visible: true");
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.Error($"Error creating ShipTracker for grid {grid.DisplayName} in OnEntityAdd: {ex}");
-                    }
-                }
-            }
+            if (!_isTracking) return;
+            ProcessEntity(entity);
         }
 
         private void OnEntityRemove(IMyEntity entity)
@@ -139,7 +146,14 @@ namespace ShipPoints.ShipTracking
 
         public void BulkTrackGrids(long[] gridIds)
         {
-            Log.Info($"Receive bulk track request with {gridIds.Length} items!");
+            if (!_isTracking)
+            {
+                Log.Info($"Queuing bulk track request with {gridIds.Length} items!");
+                _queuedGridTracks.UnionWith(gridIds);
+                return;
+            }
+
+            Log.Info($"Processing bulk track request with {gridIds.Length} items!");
             var gridIds_List = new List<long>(gridIds);
             foreach (var grid in TrackedGrids.Keys.ToArray())
             {
@@ -156,6 +170,12 @@ namespace ShipPoints.ShipTracking
 
         public void TrackGrid(IMyCubeGrid grid, bool share = true)
         {
+            if (!_isTracking)
+            {
+                _queuedGridTracks.Add(grid.EntityId);
+                return;
+            }
+
             if (grid == null)
             {
                 Log.Error("TrackGrid called with null grid");
@@ -184,6 +204,7 @@ namespace ShipPoints.ShipTracking
             try
             {
                 var tracker = new ShipTracker(grid);
+                TrackedGrids[grid] = tracker;
                 Log.Info($"TrackGrid Tracked grid {grid.DisplayName}. Visible: true");
                 OnShipTracked?.Invoke(grid, true);
             }
@@ -207,6 +228,12 @@ namespace ShipPoints.ShipTracking
 
         public void TrackGrid(long gridId, bool share = true)
         {
+            if (!_isTracking)
+            {
+                _queuedGridTracks.Add(gridId);
+                return;
+            }
+
             var grid = MyAPIGateway.Entities.GetEntityById(gridId) as IMyCubeGrid;
             if (grid == null)
             {
