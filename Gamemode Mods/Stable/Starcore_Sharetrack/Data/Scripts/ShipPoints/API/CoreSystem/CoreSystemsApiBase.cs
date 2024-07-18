@@ -414,7 +414,7 @@ namespace CoreSystems.Api
         }
 
         /// <summary>
-        ///     Set projectile values *Error* be sure to pass in Vector3D.MinValue or float.MinValue to NOT set that value.
+        ///     Set projectile values *Warning* be sure to pass in Vector3D.MinValue or float.MinValue to NOT set that value.
         ///     bool = EndNow
         ///     Vector3D Position
         ///     Vector3D Additive velocity
