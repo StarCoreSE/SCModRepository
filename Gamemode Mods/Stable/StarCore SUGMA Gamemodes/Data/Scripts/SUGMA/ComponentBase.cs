@@ -1,6 +1,4 @@
-﻿using static SC.SUGMA.Log;
-
-namespace SC.SUGMA
+﻿namespace SC.SUGMA
 {
     public abstract class ComponentBase
     {

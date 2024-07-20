@@ -1,6 +1,5 @@
 ﻿using System;
 using ProtoBuf;
-using Sandbox.ModAPI;
 using SC.SUGMA.GameState;
 
 namespace SC.SUGMA.HeartNetworking.Custom
@@ -8,9 +7,9 @@ namespace SC.SUGMA.HeartNetworking.Custom
     [ProtoContract]
     internal class MatchTimerPacket : PacketBase
     {
-        [ProtoMember(13)] private string _senderObjectId;
         [ProtoMember(12)] private readonly long _matchEndTime;
         [ProtoMember(11)] private readonly long _matchStartTime;
+        [ProtoMember(13)] private readonly string _senderObjectId;
 
         public MatchTimerPacket()
         {
@@ -35,6 +34,11 @@ namespace SC.SUGMA.HeartNetworking.Custom
             return new DateTime(time < DateTime.MinValue.Ticks ? DateTime.MinValue.Ticks : time);
         }
 
+        public override string ToString()
+        {
+            return $"TimerId: {_senderObjectId}\nStartTime: {MatchStartTime()}\nEndTime: {MatchEndTime()}";
+        }
+
 
         #region Static Methods
 
@@ -53,10 +57,5 @@ namespace SC.SUGMA.HeartNetworking.Custom
         }
 
         #endregion
-
-        public override string ToString()
-        {
-            return $"TimerId: {_senderObjectId}\nStartTime: {MatchStartTime()}\nEndTime: {MatchEndTime()}";
-        }
     }
 }

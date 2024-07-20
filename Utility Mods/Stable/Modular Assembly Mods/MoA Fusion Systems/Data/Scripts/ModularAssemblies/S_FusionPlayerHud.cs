@@ -1,29 +1,29 @@
 ﻿using System;
 using System.Linq;
-using FusionSystems.Communication;
-using FusionSystems.FusionParts;
-using FusionSystems.HeatParts;
-using FusionSystems.HudHelpers;
 using RichHudFramework.Client;
 using RichHudFramework.UI.Client;
 using Sandbox.Game;
+using StarCore.FusionSystems.Communication;
+using StarCore.FusionSystems.FusionParts;
+using StarCore.FusionSystems.HeatParts;
+using StarCore.FusionSystems.HudHelpers;
 using VRage.Game.Components;
 using VRage.Utils;
 
-namespace FusionSystems
+namespace StarCore.FusionSystems
 {
     /// <summary>
     ///     Semi-independent script for managing the player HUD.
     /// </summary>
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
-    public class S_FusionPlayerHud : MySessionComponentBase
+    public class SFusionPlayerHud : MySessionComponentBase
     {
-        public static S_FusionPlayerHud I;
+        public static SFusionPlayerHud I;
         private int _ticks;
 
-        private ConsumptionBar ConsumptionBar;
+        private ConsumptionBar _consumptionBar;
         private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
-        private static S_FusionManager FusionManager => S_FusionManager.I;
+        private static SFusionManager FusionManager => SFusionManager.I;
         private static HeatManager HeatManager => HeatManager.I;
 
         #region Base Methods
@@ -46,21 +46,22 @@ namespace FusionSystems
             //RichHudClient.Reset();
         }
 
-        private bool _questlogDisposed = false;
+        private bool _questlogDisposed;
+
         public override void UpdateAfterSimulation()
         {
             _ticks++;
             try
             {
-                if (ConsumptionBar == null && RichHudClient.Registered)
-                    ConsumptionBar = new ConsumptionBar(HudMain.HighDpiRoot)
+                if (_consumptionBar == null && RichHudClient.Registered)
+                    _consumptionBar = new ConsumptionBar(HudMain.HighDpiRoot)
                     {
                         Visible = true
                     };
 
                 HeatManager.UpdateTick();
                 FusionManager.UpdateTick();
-                ConsumptionBar?.Update();
+                _consumptionBar?.Update();
 
                 if (ModularApi.IsDebug())
                 {
@@ -79,6 +80,7 @@ namespace FusionSystems
                             false, false);
                         displayedCount++;
                     }
+
                     _questlogDisposed = false;
                 }
                 else if (!_questlogDisposed)

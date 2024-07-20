@@ -1,8 +1,5 @@
 ﻿using RichHudFramework;
-using Sandbox.ModAPI;
-using SC.SUGMA.API;
-using SC.SUGMA.Textures;
-using VRage.Game;
+using SC.SUGMA.Utilities;
 using VRage.Game.ModAPI;
 using VRageMath;
 
@@ -11,12 +8,23 @@ namespace SC.SUGMA.GameState
     public class FactionSphereZone : SphereZone
     {
         private IMyFaction _faction;
+        private Color _originalColor = Color.White.SetAlphaPct(0.25f);
+
+        public float CaptureTime;
+        public float CaptureTimeCurrent;
+
+        public IMyFaction CapturingFaction;
+
+        public FactionSphereZone(Vector3D center, double radius, float captureTime, IMyFaction faction = null) : base(
+            center, radius)
+        {
+            Faction = faction;
+            CaptureTime = captureTime;
+        }
+
         public IMyFaction Faction
         {
-            get
-            {
-                return _faction;
-            }
+            get { return _faction; }
             set
             {
                 _faction = value;
@@ -25,29 +33,17 @@ namespace SC.SUGMA.GameState
             }
         }
 
-        public IMyFaction CapturingFaction;
-
-        public float CaptureTime;
-        public float CaptureTimeCurrent = 0;
-        private Color _originalColor = Color.White.SetAlphaPct(0.25f);
-
-        public FactionSphereZone(Vector3D center, double radius, float captureTime, IMyFaction faction = null) : base(center, radius)
-        {
-            Faction = faction;
-            CaptureTime = captureTime;
-        }
-
         public override void UpdateTick()
         {
             GridFilter = SUGMA_SessionComponent.I.ShareTrackApi.GetTrackedGrids();
             base.UpdateTick();
 
-            int capturingFactionGrids = 0;
+            var capturingFactionGrids = 0;
 
-            bool zoneContested = false;
+            var zoneContested = false;
             foreach (var grid in ContainedGrids)
             {
-                IMyFaction gridFaction = grid.GetFaction();
+                var gridFaction = grid.GetFaction();
 
                 if (CapturingFaction == null && gridFaction != Faction)
                 {
@@ -67,7 +63,7 @@ namespace SC.SUGMA.GameState
 
             if (CapturingFaction == null || zoneContested || ContainedGrids.Count == 0)
             {
-                CaptureTimeCurrent -= 1/60f;
+                CaptureTimeCurrent -= 1 / 60f;
                 if (CaptureTimeCurrent < 0)
                 {
                     CaptureTimeCurrent = 0;
@@ -76,7 +72,7 @@ namespace SC.SUGMA.GameState
             }
             else
             {
-                CaptureTimeCurrent += 1/60f * capturingFactionGrids;
+                CaptureTimeCurrent += 1 / 60f * capturingFactionGrids;
                 if (CaptureTimeCurrent >= CaptureTime)
                 {
                     CaptureTimeCurrent = 0;
@@ -85,7 +81,8 @@ namespace SC.SUGMA.GameState
                 }
             }
 
-            SphereDrawColor = Color.Lerp(_originalColor, (CapturingFaction?.CustomColor.ColorMaskToRgb() ?? Color.White), CaptureTimeCurrent/CaptureTime).SetAlphaPct(0.25f);
+            SphereDrawColor = Color.Lerp(_originalColor, CapturingFaction?.CustomColor.ColorMaskToRgb() ?? Color.White,
+                CaptureTimeCurrent / CaptureTime).SetAlphaPct(0.25f);
         }
     }
 }

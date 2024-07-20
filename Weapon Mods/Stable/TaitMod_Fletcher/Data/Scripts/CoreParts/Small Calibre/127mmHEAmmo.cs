@@ -155,7 +155,7 @@ namespace Scripts
                 {
                    Enable = true,
                     Radius = 5f,
-                    Damage = 2500f,
+                    Damage = 9000f,
                     Depth = 2.5f,
                     MaxAbsorb = 0f,
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius

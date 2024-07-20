@@ -9,11 +9,16 @@ namespace SC.SUGMA.GameState
 {
     internal class PointTracker : ComponentBase
     {
-        public int VictoryPoints = 3;
+        private bool _pointsUpdated;
         public int StartingPoints;
+        public int VictoryPoints = 3;
 
         public Dictionary<IMyFaction, int> FactionPoints { get; internal set; } = new Dictionary<IMyFaction, int>();
-        private bool _pointsUpdated = false;
+
+        private void OnFactionCreated(long factionId)
+        {
+            FactionPoints.Add(MyAPIGateway.Session.Factions.TryGetFactionById(factionId), StartingPoints);
+        }
 
         #region Base Methods
 
@@ -42,11 +47,6 @@ namespace SC.SUGMA.GameState
                 HeartNetwork.I.SendToEveryone(new PointsPacket(this));
                 _pointsUpdated = false;
             }
-
-            foreach (var faction in FactionPoints)
-            {
-                //MyAPIGateway.Utilities.ShowNotification($"{faction.Key.Tag}: {faction.Value}", 1000/60);
-            }
         }
 
         #endregion
@@ -67,7 +67,7 @@ namespace SC.SUGMA.GameState
 
         public void SetFactionPoints(IMyFaction faction, int value)
         {
-            if (!FactionPoints.ContainsKey(faction))
+            if (!MyAPIGateway.Session.IsServer || !FactionPoints.ContainsKey(faction))
                 return;
 
             FactionPoints[faction] = value;
@@ -84,7 +84,7 @@ namespace SC.SUGMA.GameState
 
         public void AddFactionPoints(IMyFaction faction, int value)
         {
-            if (!FactionPoints.ContainsKey(faction))
+            if (!MyAPIGateway.Session.IsServer || !FactionPoints.ContainsKey(faction))
                 return;
 
             FactionPoints[faction] += value;
@@ -114,10 +114,5 @@ namespace SC.SUGMA.GameState
         }
 
         #endregion
-
-        private void OnFactionCreated(long factionId)
-        {
-            FactionPoints.Add(MyAPIGateway.Session.Factions.TryGetFactionById(factionId), StartingPoints);
-        }
     }
 }

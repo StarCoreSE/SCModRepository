@@ -1226,7 +1226,7 @@
 
 
 
-	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+	  <!--<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 		  <Id>
 			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>6InchTriple</SubtypeId>
@@ -1291,7 +1291,7 @@
       <ElevationSpeed>0.0005</ElevationSpeed>
       <MinFov>0.1</MinFov>
       <MaxFov>1.04719755</MaxFov>
-    </Definition>
+    </Definition> -->
 
 
 	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">

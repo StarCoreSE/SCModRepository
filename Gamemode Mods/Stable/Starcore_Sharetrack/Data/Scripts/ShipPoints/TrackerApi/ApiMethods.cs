@@ -22,6 +22,7 @@ namespace ShipPoints.TrackerApi
                 ["UnregisterOnTrack"] = new Action<Action<IMyCubeGrid, bool>>(UnregisterOnTrack),
                 ["RegisterOnAliveChanged"] = new Action<Action<IMyCubeGrid, bool>>(RegisterOnAliveChanged),
                 ["UnregisterOnAliveChanged"] = new Action<Action<IMyCubeGrid, bool>>(UnregisterOnAliveChanged),
+                ["AreTrackedGridsLoaded"] = new Func<bool>(AreTrackedGridsLoaded),
             };
         }
 
@@ -57,6 +58,14 @@ namespace ShipPoints.TrackerApi
         {
             if (TrackingManager.I != null)
                 TrackingManager.I.OnShipAliveChanged -= action;
+        }
+
+        private bool AreTrackedGridsLoaded()
+        {
+            if (TrackingManager.I == null)
+                return false;
+
+            return TrackingManager.I.GetQueuedGridTracks().Length == 0;
         }
     }
 }

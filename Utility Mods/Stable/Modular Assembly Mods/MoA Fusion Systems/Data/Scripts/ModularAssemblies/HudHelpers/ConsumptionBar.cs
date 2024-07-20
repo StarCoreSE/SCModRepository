@@ -1,15 +1,15 @@
 ﻿using System;
-using FusionSystems.Communication;
-using FusionSystems.FusionParts;
-using FusionSystems.HeatParts;
 using RichHudFramework.UI;
 using RichHudFramework.UI.Client;
 using RichHudFramework.UI.Rendering;
 using Sandbox.ModAPI;
+using StarCore.FusionSystems.Communication;
+using StarCore.FusionSystems.FusionParts;
+using StarCore.FusionSystems.HeatParts;
 using VRage.Input;
 using VRageMath;
 
-namespace FusionSystems.HudHelpers
+namespace StarCore.FusionSystems.HudHelpers
 {
     internal class ConsumptionBar : WindowBase
     {
@@ -84,7 +84,7 @@ namespace FusionSystems.HudHelpers
             float totalFusionCapacity = 0;
             float totalFusionGeneration = 0;
             float totalFusionStored = 0;
-            foreach (var system in S_FusionManager.I.FusionSystems)
+            foreach (var system in SFusionManager.I.FusionSystems)
             {
                 if (playerGrid != ModularApi.GetAssemblyGrid(system.Key))
                     continue;

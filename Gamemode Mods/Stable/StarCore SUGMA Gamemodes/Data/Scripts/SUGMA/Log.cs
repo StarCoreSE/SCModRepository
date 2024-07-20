@@ -62,7 +62,8 @@ namespace SC.SUGMA
             }
 
             _Log(prefix + $"Exception in {callingType.FullName}! {ex.Message}\n{ex.StackTrace}\n{ex.InnerException}");
-            MyAPIGateway.Utilities.ShowNotification($"{ex.GetType().Name} in Universal Gamemode! Check logs for more info.", 10000, "Red");
+            MyAPIGateway.Utilities.ShowNotification(
+                $"{ex.GetType().Name} in Universal Gamemode! Check logs for more info.", 10000, "Red");
         }
     }
 }

@@ -9,12 +9,12 @@ namespace RichHudFramework.UI
         private readonly Action OnBackspaceAction;
         public Func<char, bool> IsCharAllowedFunc;
 
-        public TextInput(Action<char> OnAppendAction, Action OnBackspaceAction,
-            Func<char, bool> IsCharAllowedFunc = null)
+        public TextInput(Action<char> OnAppendAction, Action onBackspaceAction,
+            Func<char, bool> isCharAllowedFunc = null)
         {
             this.OnAppendAction = OnAppendAction;
-            this.OnBackspaceAction = OnBackspaceAction;
-            this.IsCharAllowedFunc = IsCharAllowedFunc;
+            this.OnBackspaceAction = onBackspaceAction;
+            this.IsCharAllowedFunc = isCharAllowedFunc;
         }
 
         private void Backspace()

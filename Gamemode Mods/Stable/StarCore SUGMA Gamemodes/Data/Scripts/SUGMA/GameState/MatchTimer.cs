@@ -111,8 +111,9 @@ namespace SC.SUGMA.GameState
                 MatchTimerPacket.SendMatchUpdate(this);
             IsMatchEnded = false;
             MyLog.Default.WriteLineAndConsole("[MatchTimer] Started Match. " + CurrentMatchTime);
-            Log.Info($"[MatchTimer] Started Match.\n- CurrentMatchTime: {CurrentMatchTime}\n- StartTime: {StartTime}\n- EndTime: {EndTime}\n- MatchDuration: {MatchDurationMinutes}");
-    }
+            Log.Info(
+                $"[MatchTimer] Started Match.\n- CurrentMatchTime: {CurrentMatchTime}\n- StartTime: {StartTime}\n- EndTime: {EndTime}\n- MatchDuration: {MatchDurationMinutes}");
+        }
 
         public void Stop()
         {

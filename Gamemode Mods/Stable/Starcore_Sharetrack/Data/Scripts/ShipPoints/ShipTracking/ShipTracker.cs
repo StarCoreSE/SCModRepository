@@ -38,61 +38,88 @@ namespace ShipPoints.ShipTracking
 
         public ShipTracker(IMyCubeGrid grid, bool showOnHud = true)
         {
-            TransferToGrid(grid);
-
+            TransferToGrid(grid, showOnHud);
             Update();
-
-            if (!showOnHud)
-                return;
-
-            if (MyAPIGateway.Utilities.IsDedicated)
-                return;
-
-            _nametag = new HudAPIv2.HUDMessage(new StringBuilder("Initializing..."), Vector2D.Zero,
-                font: "BI_SEOutlined",
-                blend: BlendTypeEnum.PostPP, hideHud: false, shadowing: true);
+            if (!showOnHud || MyAPIGateway.Utilities.IsDedicated) return;
+            _nametag = new HudAPIv2.HUDMessage(new StringBuilder("Initializing..."), Vector2D.Zero, font: "BI_SEOutlined", blend: BlendTypeEnum.PostPP, hideHud: false, shadowing: true);
             UpdateHud();
         }
 
-        private void TransferToGrid(IMyCubeGrid newGrid)
+        private void TransferToGrid(IMyCubeGrid newGrid, bool showOnHud = true)
         {
+            Log.Info($"TransferToGrid called for grid {newGrid?.DisplayName ?? "null"}");
+
+            if (newGrid == null)
+            {
+                Log.Error("TransferToGrid called with null newGrid");
+                return;
+            }
+
             if (Grid != null)
             {
                 Grid.OnClose -= OnClose;
                 Grid.OnGridSplit -= OnGridSplit;
-                Grid.GetGridGroup(GridLinkTypeEnum.Physical).OnGridAdded -= OnGridAdd;
-                Grid.GetGridGroup(GridLinkTypeEnum.Physical).OnGridRemoved -= OnGridRemove;
-
+                var oldGridGroup = Grid.GetGridGroup(GridLinkTypeEnum.Physical);
+                if (oldGridGroup != null)
+                {
+                    oldGridGroup.OnGridAdded -= OnGridAdd;
+                    oldGridGroup.OnGridRemoved -= OnGridRemove;
+                }
                 foreach (var gridStat in _gridStats)
                 {
                     if (gridStat.Key != newGrid)
                         gridStat.Value.Close();
                 }
-                
                 _gridStats.Clear();
                 TrackingManager.I.TrackedGrids.Remove(Grid);
             }
 
             Grid = newGrid;
-
             var allAttachedGrids = new List<IMyCubeGrid>();
-            Grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(allAttachedGrids);
+            var newGridGroup = Grid.GetGridGroup(GridLinkTypeEnum.Physical);
+            if (newGridGroup != null)
+            {
+                newGridGroup.GetGrids(allAttachedGrids);
+            }
+            else
+            {
+                Log.Error($"Grid {Grid.DisplayName} has no physical grid group");
+                allAttachedGrids.Add(Grid);
+            }
+
+            OriginalGridIntegrity = 0;
             foreach (var attachedGrid in allAttachedGrids)
             {
-                var stats = new GridStats(attachedGrid);
-                _gridStats.Add(attachedGrid, stats);
-                OriginalGridIntegrity += stats.OriginalGridIntegrity;
-                if (((MyCubeGrid)attachedGrid).BlocksCount >
-                    ((MyCubeGrid)Grid).BlocksCount) // Snap to the largest grid in the group.
-                    Grid = attachedGrid;
+                if (attachedGrid != null)
+                {
+                    try
+                    {
+                        var stats = new GridStats(attachedGrid);
+                        _gridStats.Add(attachedGrid, stats);
+                        OriginalGridIntegrity += stats.OriginalGridIntegrity;
+                        if (((MyCubeGrid)attachedGrid).BlocksCount > ((MyCubeGrid)Grid).BlocksCount)
+                            Grid = attachedGrid;
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error($"Error processing attached grid {attachedGrid.DisplayName}: {ex}");
+                    }
+                }
             }
 
             Grid.OnClose += OnClose;
             Grid.OnGridSplit += OnGridSplit;
-            Grid.GetGridGroup(GridLinkTypeEnum.Physical).OnGridAdded += OnGridAdd;
-            Grid.GetGridGroup(GridLinkTypeEnum.Physical).OnGridRemoved += OnGridRemove;
-            if (!TrackingManager.I.TrackedGrids.ContainsKey(Grid))
+            var gridGroup = Grid.GetGridGroup(GridLinkTypeEnum.Physical);
+            if (gridGroup != null)
+            {
+                gridGroup.OnGridAdded += OnGridAdd;
+                gridGroup.OnGridRemoved += OnGridRemove;
+            }
+
+            if (!TrackingManager.I.TrackedGrids.ContainsKey(Grid) && showOnHud)
                 TrackingManager.I.TrackedGrids.Add(Grid, this);
+
+            Log.Info($"TransferToGrid completed for grid {Grid.DisplayName}");
         }
 
         private ShieldApi ShieldApi => PointCheck.I.ShieldApi;
@@ -277,7 +304,7 @@ namespace ShipPoints.ShipTracking
             else if (block is IMyConveyor || block is IMyConveyorTube) blockDisplayName = "Conveyor";
             else if (blockDisplayName.Contains("Buster")) blockDisplayName = "Buster Block";
             else if (blockDisplayName.StartsWith("Armor Laser")) blockDisplayName = "Laser Armor";
-            else if (!(block is IMyTerminalBlock)) blockDisplayName = "CubeBlock"; // If this is ever an issue, look here.
+            //else if (!(block is IMyTerminalBlock)) blockDisplayName = "CubeBlock"; // If this is ever an issue, look here.
 
             //if (blockDisplayName.Contains("Letter")) blockDisplayName = "Letter";
             //else if (blockDisplayName.Contains("Beam Block")) blockDisplayName = "Beam Block";

@@ -1,5 +1,4 @@
 ﻿using System;
-using ShipPoints.Commands;
 using ShipPoints.HeartNetworking;
 using ShipPoints.ShipTracking;
 using ShipPoints.TrackerApi;
@@ -11,13 +10,20 @@ namespace ShipPoints
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     internal class MasterSession : MySessionComponentBase
     {
-        public static readonly Vector2I ModVersion = new Vector2I(2, 1);
+        /// <summary>
+        /// API version, Mod version
+        /// </summary>
+        public static readonly Vector2I ModVersion = new Vector2I(3, 2);
 
         public static MasterSession I;
 
         private readonly PointCheck _pointCheck = new PointCheck();
         private ApiProvider _apiProvider;
         public int Ticks { get; private set; } = 0;
+
+        private const int DelayTicks = 600; // 10 seconds at 60 ticks per second
+        private bool _trackingStarted = false;
+
 
         public override void LoadData()
         {
@@ -27,9 +33,9 @@ namespace ShipPoints
             {
                 HeartNetwork.I = new HeartNetwork();
                 HeartNetwork.I.LoadData(42521);
-                CommandHandler.Init();
                 _pointCheck.Init();
                 _apiProvider = new ApiProvider();
+                TrackingManager.Init(); // Initialize TrackingManager, but don't start tracking yet
             }
             catch (Exception ex)
             {
@@ -44,7 +50,6 @@ namespace ShipPoints
                 _apiProvider.Unload();
                 _pointCheck.Close();
                 TrackingManager.Close();
-                CommandHandler.Close();
                 HeartNetwork.I.UnloadData();
             }
             catch (Exception ex)
@@ -61,7 +66,20 @@ namespace ShipPoints
             {
                 Ticks++;
                 HeartNetwork.I.Update();
-                TrackingManager.UpdateAfterSimulation();
+
+                if (!_trackingStarted)
+                {
+                    if (Ticks >= DelayTicks)
+                    {
+                        _trackingStarted = true;
+                        TrackingManager.I.StartTracking(); // New method to start tracking
+                    }
+                }
+                else
+                {
+                    TrackingManager.UpdateAfterSimulation();
+                }
+
                 _pointCheck.UpdateAfterSimulation();
             }
             catch (Exception ex)

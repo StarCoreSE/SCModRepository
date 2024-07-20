@@ -1,8 +1,5 @@
 ﻿using RichHudFramework.UI;
-using Sandbox.Game;
-using Sandbox.ModAPI;
-using SC.SUGMA.Textures;
-using VRage.Game;
+using SC.SUGMA.Utilities;
 using VRage.Game.ModAPI;
 using VRageMath;
 
@@ -12,15 +9,15 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
     {
         public const int BaseWidth = 290;
         public const int BaseHeight = 25;
+        public readonly bool IsLeftAligned;
+        private readonly LabelBox _factionLabel;
+        private readonly TexturedBox[] _ticketDividers;
+        private LabelBox _ticketsLabel;
 
         public IMyFaction Faction;
-        public int StartShipCount = 0;
-        public readonly bool IsLeftAligned;
+        public int StartShipCount;
 
         public TexturedBox TicketsBar;
-        private LabelBox _factionLabel;
-        private LabelBox _ticketsLabel;
-        private TexturedBox[] _ticketDividers;
 
         public TDMHud_TeamBanner(HudParentBase parent, IMyFaction faction, int shipCount, bool isLeftAligned) :
             base(parent)
@@ -39,12 +36,12 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                 Color = faction.CustomColor.ColorMaskToRgb(),
                 Size = new Vector2(BaseWidth / 3.5f * 2.4f, BaseHeight)
             };
-            TexturedBox ticketsBarBackground = new TexturedBox(this)
+            var ticketsBarBackground = new TexturedBox(this)
             {
                 ParentAlignment = ParentAlignments.Inner |
                                   (isLeftAligned ? ParentAlignments.Left : ParentAlignments.Right),
                 DimAlignment = DimAlignments.Height,
-                Color = new Color(255, 255, 255, 40),
+                Color = HudConstants.HudBackgroundColor,
                 Size = new Vector2(BaseWidth / 3.5f * 2.4f, BaseHeight),
                 ZOffset = -1
             };
@@ -52,12 +49,12 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             _factionLabel = new LabelBox(this)
             {
                 Text = "MMMM888", // Text padding
-                Color = new Color(255, 255, 255, 40),
+                Color = HudConstants.HudBackgroundColor,
                 DimAlignment = DimAlignments.Height,
                 ParentAlignment = ParentAlignments.Inner |
                                   (isLeftAligned ? ParentAlignments.Right : ParentAlignments.Left),
                 Size = new Vector2(BaseWidth / 5f, BaseHeight),
-                AutoResize = false,
+                //AutoResize = false,
                 FitToTextElement = false,
                 Format = new GlyphFormat(Color.White, TextAlignment.Center)
             };
@@ -69,8 +66,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             //};
 
             _ticketDividers = new TexturedBox[shipCount - 1];
-            for (int i = 0; i < _ticketDividers.Length; i++)
-            {
+            for (var i = 0; i < _ticketDividers.Length; i++)
                 _ticketDividers[i] = new TexturedBox(this)
                 {
                     Color = Color.Black,
@@ -81,7 +77,6 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                         ? new Vector2(TicketsBar.Width / shipCount * (i + 1), 0)
                         : new Vector2(-TicketsBar.Width / shipCount * (i + 1), 0)
                 };
-            }
         }
 
         public void Update(int factionPoints, int startingPoints)

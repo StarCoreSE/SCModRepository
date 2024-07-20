@@ -31,56 +31,50 @@ namespace ShipPoints
         public static HudAPIv2.HUDMessage
             IntegretyMessage,
             TimerMessage,
-            Ticketmessage,
-            Problemmessage;
+            Ticketmessage;
 
         public static ShipTracker.NametagSettings NametagViewState = ShipTracker.NametagSettings.PlayerName;
 
-        private readonly Dictionary<string, int> _bp = new Dictionary<string, int>(); // TODO refactor info storage
-
+        private readonly Dictionary<string, int> _bp = new Dictionary<string, int>();
 
         private readonly Dictionary<MyKeys, Action> _keyAndActionPairs = new Dictionary<MyKeys, Action>
         {
+            [MyKeys.M] = () =>
             {
-                MyKeys.M, () =>
-                {
-                    var castGrid = RaycastGridFromCamera();
-                    if (castGrid == null)
-                        return;
+                var castGrid = RaycastGridFromCamera();
+                if (castGrid == null)
+                    return;
 
-                    if (!TrackingManager.I.IsGridTracked(castGrid))
-                        TrackingManager.I.TrackGrid(castGrid);
-                    else
-                        TrackingManager.I.UntrackGrid(castGrid);
-                }
+                if (!TrackingManager.I.IsGridTracked(castGrid))
+                    TrackingManager.I.TrackGrid(castGrid);
+                else
+                    TrackingManager.I.UntrackGrid(castGrid);
             },
+            [MyKeys.N] = () =>
             {
-                MyKeys.N, () =>
-                {
-                    IntegretyMessage.Visible = !IntegretyMessage.Visible;
-                    MyAPIGateway.Utilities.ShowNotification("ShipTracker: Hud visibility set to " +
-                                                            IntegretyMessage.Visible);
-                }
+                IntegretyMessage.Visible = !IntegretyMessage.Visible;
+                MyAPIGateway.Utilities.ShowNotification("ShipTracker: Hud visibility set to " +
+                                                        IntegretyMessage.Visible);
             },
+            [MyKeys.B] = () =>
             {
-                MyKeys.B, () =>
-                {
-                    TimerMessage.Visible = !TimerMessage.Visible;
-                    Ticketmessage.Visible = !Ticketmessage.Visible;
-                    MyAPIGateway.Utilities.ShowNotification(
-                        "ShipTracker: Timer visibility set to " + TimerMessage.Visible);
-                }
+                TimerMessage.Visible = !TimerMessage.Visible;
+                Ticketmessage.Visible = !Ticketmessage.Visible;
+                MyAPIGateway.Utilities.ShowNotification(
+                    "ShipTracker: Timer visibility set to " + TimerMessage.Visible);
             },
+            [MyKeys.J] = () =>
             {
-                MyKeys.J, () =>
-                {
-                    NametagViewState++;
-                    if (NametagViewState > (ShipTracker.NametagSettings)3)
-                        NametagViewState = 0;
-                    MyAPIGateway.Utilities.ShowNotification(
-                        "ShipTracker: Nameplate visibility set to " + NametagViewState);
-                }
-            }
+                NametagViewState++;
+                if (NametagViewState > (ShipTracker.NametagSettings)3)
+                    NametagViewState = 0;
+                MyAPIGateway.Utilities.ShowNotification(
+                    "ShipTracker: Nameplate visibility set to " + NametagViewState);
+            },
+            [MyKeys.T] = () =>
+            {
+                I?._hudPointsList?.CycleViewState();
+            },
         };
 
         private readonly List<IMyPlayer> _listPlayers = new List<IMyPlayer>();
@@ -147,22 +141,12 @@ namespace ShipPoints
                 Visible = false, //defaulted off?
                 InitialColor = Color.White
             };
-
-            Problemmessage = new HudAPIv2.HUDMessage(scale: 2f, font: "BI_SEOutlined", Message: new StringBuilder(""),
-                origin: new Vector2D(-.99, 0), hideHud: false, shadowing: true, blend: BlendTypeEnum.PostPP)
-            {
-                Visible = false, //defaulted off?
-                InitialColor = Color.White
-            };
         }
 
         private void HandleKeyInputs()
         {
             if (!MyAPIGateway.Input.IsAnyShiftKeyPressed())
                 return;
-
-            if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.T))
-                _hudPointsList?.CycleViewState();
 
             foreach (var pair in _keyAndActionPairs)
                 if (MyAPIGateway.Input.IsNewKeyPressed(pair.Key))
@@ -461,31 +445,6 @@ namespace ShipPoints
             {
                 Log.Error($"Exception in Draw: {e}");
             }
-        }
-
-        public void ReportProblem(string issueMessage = "", bool sync = true)
-        {
-            if (issueMessage.Length > 50)
-                issueMessage = issueMessage.Substring(0, 50);
-
-            Problemmessage.Message.Clear();
-            Problemmessage.Message.Append(
-                "<color=red>A PROBLEM HAS BEEN REPORTED.\n<color=white>CHECK WITH BOTH TEAMS AND THEN TYPE '/st fixed' TO CLEAR THIS MESSAGE.");
-            if (issueMessage != "")
-                Problemmessage.Message.Append("\n" + issueMessage);
-            Problemmessage.Visible = true;
-
-            if (sync)
-                HeartNetwork.I.SendToEveryone(new ProblemReportPacket(true, issueMessage));
-        }
-
-        public void ResolvedProblem(bool sync = true)
-        {
-            Problemmessage.Message.Clear();
-            Problemmessage.Visible = false;
-
-            if (sync)
-                HeartNetwork.I.SendToEveryone(new ProblemReportPacket(false));
         }
 
         public static void ClimbingCostRename(ref string blockDisplayName, ref float climbingCostMultiplier)
