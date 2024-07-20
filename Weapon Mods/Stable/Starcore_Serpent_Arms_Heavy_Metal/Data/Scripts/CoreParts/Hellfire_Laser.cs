@@ -127,7 +127,7 @@ namespace Scripts
                     ReloadTime = 1, // sixty why you knew why the MA lasers were changed //Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 0, // f in the chat for delay to fire :( // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    HeatPerShot = 30, //was 15 //if it fires 2 bullets per barrel then i probably dont need to double this. I think. //Heat generated per shot.
+                    HeatPerShot = 15, // if it fires 2 bullets per barrel then i probably dont need to double this. I think. //Heat generated per shot.
                     MaxHeat = 3000, // Max heat before weapon enters cooldown (70% of max heat).
                     Cooldown = 0.1f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
                     HeatSinkRate = 300, // Amount of heat lost per second.
