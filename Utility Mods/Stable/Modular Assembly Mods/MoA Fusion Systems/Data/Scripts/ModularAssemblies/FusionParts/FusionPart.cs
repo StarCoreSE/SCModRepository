@@ -239,7 +239,7 @@ namespace StarCore.FusionSystems.FusionParts
             if (!MyAPIGateway.Session.IsServer)
                 return;
 
-            Settings.PowerUsage = 0.5f;
+            Settings.PowerUsage = 1.0f;
             Settings.OverridePowerUsage = 1.5f;
 
             PowerUsageSync.Value = Settings.PowerUsage;
