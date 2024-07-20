@@ -162,7 +162,7 @@ namespace Scripts
                     Enable = true,
                     Radius = 3.5f, // previously 1, original was 5. //Meters
                     Damage = 2500f,
-                    Depth = 1f,
+                    Depth = 0.5f, //idfk ree
                     MaxAbsorb = 500f,
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
