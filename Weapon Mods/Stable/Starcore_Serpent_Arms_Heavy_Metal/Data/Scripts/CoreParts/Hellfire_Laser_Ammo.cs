@@ -83,12 +83,25 @@ namespace Scripts
                     GroupDelay = 0, // Delay between each group.
                 },
             },
+            Pattern = new PatternDef
+            {
+                Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
+                "",
+                 },
+                Mode = Weapon, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
+                TriggerChance = 1f, // This is %
+                Random = false, // This randomizes the number spawned at once, NOT the list order.
+                RandomMin = 1,
+                RandomMax = 1,
+                SkipParent = false, // Skip the Ammo itself, in the list
+                PatternSteps = 1, // Number of Ammos activated per round, will progress in order and loop. Ignored if Random = true.
+            },
             DamageScales = new DamageScaleDef
             {
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
-                HealthHitModifier = 25, //now two beams //How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
+                HealthHitModifier = 50, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = 1, // Voxel damage multiplier; defaults to 1 if zero or less.
                 Characters = -1f, // Character damage multiplier; defaults to 1 if zero or less.
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
@@ -160,7 +173,7 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = true,
-                    Radius = 3.5f, // previously 1, original was 5. //Meters
+                    Radius = 1f, // Meters
                     Damage = 2500f,
                     Depth = 1f,
                     MaxAbsorb = 500f,
@@ -170,7 +183,7 @@ namespace Scripts
                     //.InvCurve drops off sharply from the middle and tapers to max radius
                     //.Squeeze does little damage to the middle, but rapidly increases damage toward max radius
                     //.Pooled damage behaves in a pooled manner that once exhausted damage ceases.
-                    ArmOnlyOnHit = true, //no aoe if no hit //Detonation only is available, After it hits something, when this is true. IE, if shot down, it won't explode.
+                    ArmOnlyOnHit = false, // Detonation only is available, After it hits something, when this is true. IE, if shot down, it won't explode.
                     MinArmingTime = 0, // In ticks, before the Ammo is allowed to explode, detonate or similar; This affects shrapnel spawning.
                     NoVisuals = true,
                     NoSound = true,
@@ -180,7 +193,59 @@ namespace Scripts
                     Shape = Diamond, // Round or Diamond
                 },
             },
-
+            Ewar = new EwarDef
+            {
+                Enable = false, // Enables the EWAR , Electronic-Warfare System
+                Type = Emp, // EnergySink, Emp, Offense, Nav, Dot, AntiSmart, JumpNull, Anchor, Tractor, Pull, Push, 
+                Mode = Effect, // Effect , Field
+                Strength = 1f,
+                Radius = 15f, // Meters
+                Duration = 500, // In Ticks
+                StackDuration = true, // Combined Durations
+                Depletable = false,
+                MaxStacks = 2, // Max Debuffs at once
+                NoHitParticle = false,
+                /*
+                EnergySink : Targets & Shutdowns Power Supplies, such as Batteries & Reactor
+                Emp : Targets & Shutdown any Block capable of being powered
+                Offense : Targets & Shutdowns Weaponry
+                Nav : Targets & Shutdown Gyros, Thrusters, or Locks them down
+                Dot : Deals Damage to Blocks in radius
+                AntiSmart : Effects & Scrambles the Targeting List of Affected Missiles
+                JumpNull : Shutdown & Stops any Active Jumps, or JumpDrive Units in radius
+                Tractor : Affects target with Physics
+                Pull : Affects target with Physics
+                Push : Affects target with Physics
+                Anchor : Affects target with Physics
+                
+                */
+                Force = new PushPullDef
+                {
+                    ForceFrom = ProjectileLastPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
+                    ForceTo = HitPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
+                    Position = TargetCenterOfMass, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
+                    DisableRelativeMass = false,
+                    TractorRange = 0,
+                    ShooterFeelsForce = false,
+                },
+                Field = new FieldDef
+                {
+                    Interval = 0, // Time between each pulse, in game ticks (60 == 1 second).
+                    PulseChance = 0, // Chance from 0 - 100 that an entity in the field will be hit by any given pulse.
+                    GrowTime = 0, // How many ticks it should take the field to grow to full size.
+                    HideModel = false, // Hide the projectile model if it has one.
+                    ShowParticle = true, // Show Block damage effect.
+                    TriggerRange = 250f, //range at which fields are triggered
+                    Particle = new ParticleDef // Particle effect to generate at the field's position.
+                    {
+                        Name = "", // SubtypeId of field particle effect.
+                        Extras = new ParticleOptionDef
+                        {
+                            Scale = 1, // Scale of effect.
+                        },
+                    },
+                },
+            },
             Beams = new BeamDef
             {
                 Enable = true, // Enable beam behaviour. Please have 3600 RPM, when this Setting is enabled. Please do not fire Beams into Voxels.
@@ -188,7 +253,7 @@ namespace Scripts
                 ConvergeBeams = false, // When using virtual beams, converge the visual beams to the location of the real beam.
                 RotateRealBeam = false, // The real beam is rotated between all visual beams, instead of centered between them.
                 OneParticle = false, // Only spawn one particle hit per beam weapon.
-				FakeVoxelHitTicks = 30, //this will only be 1 even tho its set to 30 because yeah.  dont fire at rocks pls  // If this beam hits/misses a voxel it assumes it will continue to do so for this many ticks at the same hit length and not extend further within this window.  This can save up to n times worth of cpu.
+				FakeVoxelHitTicks = 30, // If this beam hits/misses a voxel it assumes it will continue to do so for this many ticks at the same hit length and not extend further within this window.  This can save up to n times worth of cpu.
             },
             Trajectory = new TrajectoryDef
             {
@@ -202,8 +267,8 @@ namespace Scripts
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
-                RangeVariance = Random(start: 0, end: 2222), //eh good enough //subtracts value from MaxTrajectory
-                MaxTrajectoryTime = 0, //well damn, guess ill put in range variance instead as the low effort solution //How long the weapon must fire before it reaches MaxTrajectory.
+                RangeVariance = Random(start: 0, end: 0), // subtracts value from MaxTrajectory
+                MaxTrajectoryTime = 120, // How long the weapon must fire before it reaches MaxTrajectory.
                 Smarts = new SmartsDef
                 {
                     Inaccuracy = 0f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
@@ -219,7 +284,14 @@ namespace Scripts
                     OffsetRatio = 0f, // The ratio to offset the random direction (0 to 1) 
                     OffsetTime = 0, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
                 },
-
+                Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
+                {
+                    DetectRadius = 0,
+                    DeCloakRadius = 0,
+                    FieldTime = 0,
+                    Cloak = false,
+                    Persist = false,
+                },
             },
             AmmoGraphics = new GraphicDef
             {
@@ -312,7 +384,7 @@ namespace Scripts
                             "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
-                        DecayTime = 2, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
+                        DecayTime = 1, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
                         Color = Color(red: 30f, green: 0.25f, blue: 1.5f, alpha: 0.1f),
                         Back = true,
                         CustomWidth = 0.015f,
