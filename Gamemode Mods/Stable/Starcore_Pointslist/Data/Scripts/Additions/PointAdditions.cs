@@ -47,7 +47,7 @@ namespace ShipPoints
             ["DampeningEnhancer_x2_Large"] = 100,
 
             ["LargeDecoy"] = 4,
-            ["TrussPilarDecoy"] = 4,
+            ["TrussPillarDecoy"] = 4,
             ["SmallDecoy"] = 10,
             ["LargeDecoy_MetalFoam"] = 50,
 
