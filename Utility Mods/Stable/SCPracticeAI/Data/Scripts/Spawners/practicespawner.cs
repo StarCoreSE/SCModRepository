@@ -51,8 +51,8 @@ namespace Invalid.PracticeSpawner
         {
 
             { "Cougar8750AI", "Cougar8750AI" },
-            { "Gales8750AI", "Gales8750AI" },
-            { "Star9400AI", "Star9400AI" },
+            { "NewCougar8750AI", "NewCougar8750AI" },
+            { "BlackKnight8750AI", "BlackKnight8750AI" },
 
 
             // Add more prefab mappings here.
