@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Invalid.SCPracticeAI;
 using Sandbox.Game;
 using Sandbox.ModAPI;
 using VRage.Game;
@@ -12,55 +13,10 @@ using ProtoBuf;
 
 namespace Invalid.spawnoneteam
 {
-    [ProtoInclude(1000, typeof(PrefabSpawnPacket))]
-    [ProtoContract]
-    public class Packet
-    {
-        public Packet()
-        {
-
-        }
-    }
-
-    [ProtoContract]
-    public class PrefabSpawnPacket : Packet
-    {
-        [ProtoMember(1)]
-        public string PrefabName;
-
-        [ProtoMember(2)]
-        public int PrefabAmount;
-
-        [ProtoMember(3)]  // New member for faction name
-        public string FactionName;
-
-        // Add a parameterless constructor required by ProtoBuf
-        public PrefabSpawnPacket()
-        {
-
-        }
-
-        public PrefabSpawnPacket(string prefabName, int prefabAmount, string factionName)
-        {
-            PrefabName = prefabName;
-            PrefabAmount = prefabAmount;
-            FactionName = factionName; // Set the faction name
-        }
-    }
-
-
 
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     public class spawnblueteamComponent : MySessionComponentBase
     {
-        private Dictionary<string, string> prefabMap = new Dictionary<string, string>
-        {
-            { "Cougar8750AI", "Cougar8750AI" },
-            { "Gales8750AI", "Gales8750AI" },
-            { "Star9400AI", "Star9400AI" },
-
-            // Add more prefab mappings here.
-        };
 
         private int defaultSpawnCount = 1; // Default number of prefabs to spawn
 
@@ -90,10 +46,10 @@ namespace Invalid.spawnoneteam
             PrefabSpawnPacket prefabPacket = packet as PrefabSpawnPacket;
             if (prefabPacket == null) return;
 
-            if (prefabMap.ContainsKey(prefabPacket.PrefabName))
+            if (PrefabMaster.PrefabMap.ContainsKey(prefabPacket.PrefabName))
             {
                 string factionName = prefabPacket.FactionName; // Set to faction name from packet
-                SpawnRandomPrefabs(new List<string>(prefabMap.Keys), prefabPacket.PrefabAmount, factionName);
+                SpawnRandomPrefabs(new List<string>(PrefabMaster.PrefabMap.Keys), prefabPacket.PrefabAmount, factionName);
             }
             else
             {
@@ -127,7 +83,7 @@ namespace Invalid.spawnoneteam
                         {
                             string factionName = "BLU";  // Set to BLU team
 
-                            List<string> prefabNames = new List<string>(prefabMap.Keys);
+                            List<string> prefabNames = new List<string>(PrefabMaster.PrefabMap.Keys);
 
                             for (int i = 0; i < spawnCount; i++)
                             {
@@ -172,7 +128,7 @@ namespace Invalid.spawnoneteam
                         {
                             string factionName = "RED";  // Set to BLU team
 
-                            List<string> prefabNames = new List<string>(prefabMap.Keys);
+                            List<string> prefabNames = new List<string>(PrefabMaster.PrefabMap.Keys);
 
                             for (int i = 0; i < spawnCount; i++)
                             {
@@ -209,12 +165,12 @@ namespace Invalid.spawnoneteam
         private void ShowPrefabList()
         {
             string prefabListMessage = "Available prefabs:";
-            foreach (string prefabName in prefabMap.Keys)
+            foreach (string prefabName in PrefabMaster.PrefabMap.Keys)
             {
                 prefabListMessage += "\n" + prefabName;
             }
 
-            if (prefabMap.Count > 0)
+            if (PrefabMaster.PrefabMap.Count > 0)
             {
                 prefabListMessage += "\n\nTo start a battle, type '/spawnblueteam [amount]' (e.g., /spawnblueteam  10. Default 10.";
             }
