@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Invalid.SCPracticeAI;
 using Sandbox.Game;
 using Sandbox.ModAPI;
 using VRage.Game;
@@ -12,37 +13,6 @@ using ProtoBuf;
 
 namespace Invalid.PracticeSpawner
 {
-    [ProtoInclude(1000, typeof(PrefabSpawnPacket))]
-    [ProtoContract]
-    public class Packet
-    {
-        public Packet()
-        {
-
-        }
-    }
-
-    [ProtoContract]
-    public class PrefabSpawnPacket : Packet
-    {
-        [ProtoMember(1)]
-        public string PrefabName;
-
-        [ProtoMember(2)]
-        public int PrefabAmount;
-
-        public PrefabSpawnPacket()
-        {
-
-        }
-
-        public PrefabSpawnPacket(string prefabName, int prefabAmount)
-        {
-            PrefabName = prefabName;
-            PrefabAmount = prefabAmount;
-        }
-    }
-
 
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     public class spawntargetComponent : MySessionComponentBase
@@ -53,6 +23,9 @@ namespace Invalid.PracticeSpawner
             { "Cougar8750AI", "Cougar8750AI" },
             { "NewCougar8750AI", "NewCougar8750AI" },
             { "BlackKnight8750AI", "BlackKnight8750AI" },
+            { "Gunsled9000AI", "Gunsled9000AI" },
+            { "Blood8750AI", "Blood8750AI" },
+
 
 
             // Add more prefab mappings here.
@@ -119,7 +92,7 @@ namespace Invalid.PracticeSpawner
                     }
                 }
 
-                PrefabSpawnPacket prefabSpawnPacket = new PrefabSpawnPacket(prefabName, spawnCount);
+                PrefabSpawnPacket prefabSpawnPacket = new PrefabSpawnPacket(prefabName, spawnCount, null);
                 byte[] data = MyAPIGateway.Utilities.SerializeToBinary(prefabSpawnPacket);
 
                 MyAPIGateway.Multiplayer.SendMessageTo(netID, data, MyAPIGateway.Multiplayer.ServerId);
