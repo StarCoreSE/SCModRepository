@@ -17,17 +17,6 @@ namespace Invalid.spawnoneteam
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     public class spawnblueteamComponent : MySessionComponentBase
     {
-        private Dictionary<string, string> prefabMap = new Dictionary<string, string>
-        {
-            { "Cougar8750AI", "Cougar8750AI" },
-            { "NewCougar8750AI", "NewCougar8750AI" },
-            { "BlackKnight8750AI", "BlackKnight8750AI" },
-            { "Gunsled9000AI", "Gunsled9000AI" },
-            { "Blood8750AI", "Blood8750AI" },
-
-
-            // Add more prefab mappings here.
-        };
 
         private int defaultSpawnCount = 1; // Default number of prefabs to spawn
 
@@ -57,10 +46,10 @@ namespace Invalid.spawnoneteam
             PrefabSpawnPacket prefabPacket = packet as PrefabSpawnPacket;
             if (prefabPacket == null) return;
 
-            if (prefabMap.ContainsKey(prefabPacket.PrefabName))
+            if (PrefabMaster.PrefabMap.ContainsKey(prefabPacket.PrefabName))
             {
                 string factionName = prefabPacket.FactionName; // Set to faction name from packet
-                SpawnRandomPrefabs(new List<string>(prefabMap.Keys), prefabPacket.PrefabAmount, factionName);
+                SpawnRandomPrefabs(new List<string>(PrefabMaster.PrefabMap.Keys), prefabPacket.PrefabAmount, factionName);
             }
             else
             {
@@ -94,7 +83,7 @@ namespace Invalid.spawnoneteam
                         {
                             string factionName = "BLU";  // Set to BLU team
 
-                            List<string> prefabNames = new List<string>(prefabMap.Keys);
+                            List<string> prefabNames = new List<string>(PrefabMaster.PrefabMap.Keys);
 
                             for (int i = 0; i < spawnCount; i++)
                             {
@@ -139,7 +128,7 @@ namespace Invalid.spawnoneteam
                         {
                             string factionName = "RED";  // Set to BLU team
 
-                            List<string> prefabNames = new List<string>(prefabMap.Keys);
+                            List<string> prefabNames = new List<string>(PrefabMaster.PrefabMap.Keys);
 
                             for (int i = 0; i < spawnCount; i++)
                             {
@@ -176,12 +165,12 @@ namespace Invalid.spawnoneteam
         private void ShowPrefabList()
         {
             string prefabListMessage = "Available prefabs:";
-            foreach (string prefabName in prefabMap.Keys)
+            foreach (string prefabName in PrefabMaster.PrefabMap.Keys)
             {
                 prefabListMessage += "\n" + prefabName;
             }
 
-            if (prefabMap.Count > 0)
+            if (PrefabMaster.PrefabMap.Count > 0)
             {
                 prefabListMessage += "\n\nTo start a battle, type '/spawnblueteam [amount]' (e.g., /spawnblueteam  10. Default 10.";
             }

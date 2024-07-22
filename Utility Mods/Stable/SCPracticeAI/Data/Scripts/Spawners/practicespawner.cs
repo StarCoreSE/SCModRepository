@@ -17,19 +17,6 @@ namespace Invalid.PracticeSpawner
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     public class spawntargetComponent : MySessionComponentBase
     {
-        private Dictionary<string, string> prefabMap = new Dictionary<string, string>
-        {
-
-            { "Cougar8750AI", "Cougar8750AI" },
-            { "NewCougar8750AI", "NewCougar8750AI" },
-            { "BlackKnight8750AI", "BlackKnight8750AI" },
-            { "Gunsled9000AI", "Gunsled9000AI" },
-            { "Blood8750AI", "Blood8750AI" },
-
-
-
-            // Add more prefab mappings here.
-        };
 
         private int defaultSpawnCount = 1; // Default number of prefabs to spawn
 
@@ -58,9 +45,9 @@ namespace Invalid.PracticeSpawner
             if (prefabPacket == null) return;
 
 
-            if (prefabMap.ContainsKey(prefabPacket.PrefabName))
+            if (PrefabMaster.PrefabMap.ContainsKey(prefabPacket.PrefabName))
             {
-                SpawnRandomPrefabs(prefabMap[prefabPacket.PrefabName], prefabPacket.PrefabAmount);
+                SpawnRandomPrefabs(PrefabMaster.PrefabMap[prefabPacket.PrefabName], prefabPacket.PrefabAmount);
             }
             else
             {
@@ -106,7 +93,7 @@ namespace Invalid.PracticeSpawner
         private void ShowPrefabList()
         {
             string prefabListMessage = "Available prefabs:";
-            foreach (string prefabName in prefabMap.Keys)
+            foreach (string prefabName in PrefabMaster.PrefabMap.Keys)
             {
                 prefabListMessage += "\n" + prefabName;
             }
