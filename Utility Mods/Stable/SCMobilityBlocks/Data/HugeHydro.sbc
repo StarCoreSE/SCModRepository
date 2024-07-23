@@ -84,7 +84,7 @@
             <FlamePointMaterial>EngineThrustMiddle</FlamePointMaterial>
             <FlameLengthMaterial>EngineThrustMiddle</FlameLengthMaterial>
             <FlameFlare>LargeGridLargeThruster</FlameFlare>
-            <FlameVisibilityDistance>700</FlameVisibilityDistance>
+            <FlameVisibilityDistance>7000</FlameVisibilityDistance>
             <FlameGlareQuerySize>1.5</FlameGlareQuerySize>
             <PrimarySound>LrgShipLrgJetHydrogen</PrimarySound>
             <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
