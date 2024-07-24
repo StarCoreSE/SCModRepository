@@ -572,12 +572,12 @@ namespace ShipPoints
             ["SI_Field_Gen"] = 50,
             ["SELtdLargeNanobotBuildAndRepairSystem"] = 50,
             ["PM_LG_BLASTPLATE_BLASTPLATE"] = 100,
-            ["REINFORCED_BLASTPLATE"] = 100,
-            ["ACTIVE_BLASTPLATE"] = 100,
-            ["3x3_Blastplate_A"] = 25,
-            ["3x3_Blastplate_B"] = 25,
-            ["3x3_Blastplate_C"] = 25,
-            ["2x4_Blastplate"] = 25,
+            ["REINFORCED_BLASTPLATE"] = 90,
+            ["ACTIVE_BLASTPLATE"] = 90,
+            ["3x3_Blastplate_A"] = 30,
+            ["3x3_Blastplate_B"] = 30,
+            ["3x3_Blastplate_C"] = 30,
+            ["2x4_Blastplate"] = 30,
             ["GIGA_BLASTPLATE"] = 1000,
 
             ["GravityGenerator"] = 0,
@@ -832,13 +832,16 @@ namespace ShipPoints
                     break;
                 case "Reinforced Blastplate":
                 case "Active Blastplate":
+                case "7x7 Basedplate":
+                    blockDisplayName = "Large Blastplate";
+                    costMultiplier = 0.22f;
+                    break;
                 case "Standard Blastplate A":
                 case "Standard Blastplate B":
                 case "Standard Blastplate C":
                 case "Elongated Blastplate":
-                case "7x7 Basedplate":
                     blockDisplayName = "Blastplate";
-                    costMultiplier = 1.00f;
+                    costMultiplier = 0.11f;
                     break;
                 case "[EXO] Taiidan":
                 case "[EXO] Taiidan Fighter Launch Rail":
