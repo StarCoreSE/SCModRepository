@@ -395,7 +395,7 @@ namespace Scripts
                         },
                         TextureMode = Normal,
                         DecayTime = 20, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 2.585f, green: 2.562f, blue: 2.21f, alpha: 0.5f),
+                        Color = Color(red: 2.585f, green: 2.562f, blue: 2.21f, alpha: 0.5f), //Pilfit 203mm AP Ammo Trail.  // God Bless that Magnificent Bastard o7
                         Back = false,
                         CustomWidth = 0.1f,
                         UseWidthVariance = false,

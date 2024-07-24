@@ -429,7 +429,7 @@ namespace Scripts
                         },
                         TextureMode = Normal,
                         DecayTime = 18, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 2.585f, green: 2.21f, blue: 2.562f, alpha: 0.5f),
+                        Color = Color(red: 2.585f, green: 2.21f, blue: 2.562f, alpha: 0.5f), //Adapted Pilfit 203mm AP trail line, swapping blue and green values for a lovely color.
                         FactionColor = DontUse, // DontUse, Foreground, Background.
                         Back = false,
                         CustomWidth = 0.1f,
