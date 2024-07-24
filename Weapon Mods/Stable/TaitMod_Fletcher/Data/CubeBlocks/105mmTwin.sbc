@@ -39,6 +39,7 @@
 				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="1.00" EndY="2.00"/>
 			</MountPoints>
 			<BlockPairName>105mmTwin</BlockPairName>
+			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
 			<BuildProgressModels>
 				<Model BuildPercentUpperBound="0.50" File="Models\Cubes\large\105mmTwin_BS1.mwm"/>

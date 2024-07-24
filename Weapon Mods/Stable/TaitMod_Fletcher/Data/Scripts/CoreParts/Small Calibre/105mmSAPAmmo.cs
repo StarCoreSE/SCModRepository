@@ -36,7 +36,7 @@ namespace Scripts
             AmmoRound = "105mm SAP", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 1200f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 1500f, // Direct damage; one steel plate is worth 100.
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 5f, // Recoil. This is applied to the Parent Grid.
@@ -58,7 +58,7 @@ namespace Scripts
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
-                AmmoRound = "105InchSapShrap", // AmmoRound field of the ammo to spawn.
+                AmmoRound = "", // AmmoRound field of the ammo to spawn.
                 Fragments = 25, // Number of projectiles to spawn.
                 Degrees = 120, // Cone in which to randomise direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
@@ -101,12 +101,12 @@ namespace Scripts
                 {
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
                     Light = 1.5f, // Multiplier for damage against light armor.
-                    Heavy = 1f, // Multiplier for damage against heavy armor.
-                    NonArmor = 0.6f, // Multiplier for damage against every else.
+                    Heavy = 1.2f, // Multiplier for damage against heavy armor.
+                    NonArmor = 2f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 5f, // Multiplier for damage against shields.
+                    Modifier = 2f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -114,7 +114,7 @@ namespace Scripts
                 {
                     Base = Kinetic, // Base Damage uses this
                     AreaEffect = Kinetic,
-                    Detonation = Energy,
+                    Detonation = Kinetic,
                     Shield = Kinetic, // Damage against shields is currently all of one type per projectile. Shield Bypass Weapons, always Deal Kinetic regardless of this line
                 },
                 Custom = new CustomScalesDef
@@ -153,9 +153,9 @@ namespace Scripts
                 },
                 EndOfLife = new EndOfLifeDef
                 {
-                   Enable = false,
+                   Enable = true,
                     Radius = 2.5f,
-                    Damage = 6000f,
+                    Damage = 3000f,
                     Depth = 5f,
                     MaxAbsorb = 0f,
                     Falloff = Linear, //.NoFalloff applies the same damage to all blocks in radius

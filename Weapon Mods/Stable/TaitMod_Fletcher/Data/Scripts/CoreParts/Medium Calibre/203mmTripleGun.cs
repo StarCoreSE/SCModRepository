@@ -14,13 +14,13 @@ using static Scripts.Structure.WeaponDefinition.HardPointDef.HardwareDef.Hardwar
 namespace Scripts {   
     partial class Parts {
         // Don't edit above this line
-        WeaponDefinition Quad203 => new WeaponDefinition
+        WeaponDefinition Triple203 => new WeaponDefinition
         {
             Assignments = new ModelAssignmentsDef
             {
                 MountPoints = new[] {
                     new MountPointDef {
-                        SubtypeId = "203mmQuad", // Block Subtypeid. Your Cubeblocks contain this information
+                        SubtypeId = "203mmTriple", // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "None", // For weapons with a spinning barrel such as Gatling Guns. Subpart_Boomsticks must be written as Boomsticks.
                         MuzzlePartId = "MissileTurretBarrels", // The subpart where your muzzle empties are located. This is often the elevation subpart. Subpart_Boomsticks must be written as Boomsticks.
                         AzimuthPartId = "MissileTurretBase1", // Your Rotating Subpart, the bit that moves sideways.
@@ -59,7 +59,7 @@ namespace Scripts {
             },
             HardPoint = new HardPointDef
             {
-                PartName = "Quad 203mm", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "Des Moines Triple 203mm", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0.15f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 2f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Advanced, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
@@ -115,17 +115,17 @@ namespace Scripts {
                     EnergyPriority = 0, // Deprecated.
                     MuzzleCheck = false, // Whether the weapon should check LOS from each individual muzzle in addition to the scope.
                     Debug = false, // Force enables debug mode.
-                    RestrictionRadius = 0, // Prevents other blocks of this type from being placed within this distance of the centre of the block.
+                    RestrictionRadius = 7, // Prevents other blocks of this type from being placed within this distance of the centre of the block.
                     CheckInflatedBox = false, // If true, the above distance check is performed from the edge of the block instead of the centre.
                     CheckForAnyWeapon = false, // If true, the check will fail if ANY weapon is present, not just weapons of the same subtype.
                 },
                 Loading = new LoadingDef
                 {
-                    RateOfFire = 240, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
+                    RateOfFire = 600, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
                     BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
-                    ReloadTime = 300, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    ReloadTime = 1, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 3, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     HeatPerShot = 1, // Heat generated per shot.
@@ -133,8 +133,8 @@ namespace Scripts {
                     Cooldown = .95f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
                     HeatSinkRate = 9000000, // Amount of heat lost per second.
                     DegradeRof = false, // Progressively lower rate of fire when over 80% heat threshold (80% of max heat).
-                    ShotsInBurst = 3, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
-                    DelayAfterBurst = 5, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    ShotsInBurst = 1, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
+                    DelayAfterBurst = 100, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     FireFull = false, // Whether the weapon should fire the full magazine (or the full burst instead if ShotsInBurst > 0), even if the target is lost or the player stops firing prematurely.
                     GiveUpAfter = false, // Whether the weapon should drop its current target and reacquire a new target after finishing its magazine or burst.
                     BarrelSpinRate = 0, // Visual only, 0 disables and uses RateOfFire.

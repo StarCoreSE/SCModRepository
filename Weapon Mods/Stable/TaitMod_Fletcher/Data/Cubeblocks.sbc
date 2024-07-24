@@ -1025,8 +1025,8 @@
       <DisplayName>[FAS] Atlanta</DisplayName>
 	<Description>
 		127mm Twin gun
-		4km AI Range, 5km shell range, Heal has 6km
-		Fires HE, SAP and Heal shell
+		4km AI Range, 5km shell range
+		Fires HE and SAP
 	</Description>
       <Icon>Textures\GUI\Icons\5InchDualGun.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1093,8 +1093,8 @@
       <DisplayName>[FAS] Benson</DisplayName>
 	<Description>
 		127mm Single gun
-		4km AI Range, 5km shell range, Heal has 6km
-		Fires HE, SAP and Heal shell
+		4km AI Range, 5km shell range
+		Fires HE and SAP
 	</Description>
       <Icon>Textures\GUI\Icons\127mmMk12_Icon.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1103,7 +1103,7 @@
       <ModelOffset x="0" y="0" z="0" />
       <Model>Models\127mm mk12\5InchMk30Main.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
-      <Components>
+    <Components>
         <Component Subtype="SteelPlate" Count="100" />
         <Component Subtype="MetalGrid" Count="100" />
         <Component Subtype="LargeTube" Count="200" />
@@ -1111,7 +1111,7 @@
         <Component Subtype="Computer" Count="100" />
         <Component Subtype="Construction" Count="200" />
 		<Component Subtype="MetalGrid" Count="200" />
-        <Component Subtype="SteelPlate" Count="700" />
+        <Component Subtype="SteelPlate" Count="1600" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
@@ -1160,8 +1160,8 @@
       <DisplayName>[FAS] Fletcher</DisplayName>
 	<Description>
 		127mm Single gun
-		4km AI Range, 5km shell range, Heal has 6km
-		Fires HE, SAP and Heal shell
+		4km AI Range, 5km shell range
+		Fires HE and SAP
 	</Description>
       <Icon>Textures\GUI\Icons\127mmMk24.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1171,14 +1171,14 @@
       <Model>Models\127mm mk24\5InchSingleMain.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
-        <Component Subtype="SteelPlate" Count="80" />
-        <Component Subtype="MetalGrid" Count="80" />
-        <Component Subtype="LargeTube" Count="150" />
-        <Component Subtype="Motor" Count="80" />
-        <Component Subtype="Computer" Count="50" />
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="MetalGrid" Count="100" />
+        <Component Subtype="LargeTube" Count="200" />
+        <Component Subtype="Motor" Count="100" />
+        <Component Subtype="Computer" Count="100" />
         <Component Subtype="Construction" Count="200" />
 		<Component Subtype="MetalGrid" Count="200" />
-        <Component Subtype="SteelPlate" Count="750" />
+        <Component Subtype="SteelPlate" Count="1600" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
@@ -1313,14 +1313,15 @@
       <Model>Models\406mm triple\16InchGun.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
-        <Component Subtype="SteelPlate" Count="200" />
-        <Component Subtype="MetalGrid" Count="300" />
-        <Component Subtype="LargeTube" Count="250" />
-        <Component Subtype="Motor" Count="400" />
-        <Component Subtype="Computer" Count="100" />
-        <Component Subtype="Construction" Count="3000" />
-		<Component Subtype="MetalGrid" Count="600" />
-        <Component Subtype="SteelPlate" Count="6500" />
+            <Component Subtype="SteelPlate" Count="200" />
+			<Component Subtype="MetalGrid" Count="300" />
+			<Component Subtype="LargeTube" Count="250" />
+			<Component Subtype="GravityGenerator" Count="600" />
+			<Component Subtype="Motor" Count="400" />
+			<Component Subtype="Computer" Count="100" />
+		    <Component Subtype="Construction" Count="1000" />
+			<Component Subtype="MetalGrid" Count="600" />
+			<Component Subtype="SteelPlate" Count="2000" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
@@ -1382,15 +1383,16 @@
 		  <ModelOffset x="0" y= "0.95" z="0" />
       <Model>Models\381mm mk24\38cmSk34.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
-      <Components>
-        <Component Subtype="SteelPlate" Count="200" />
-        <Component Subtype="MetalGrid" Count="300" />
-        <Component Subtype="LargeTube" Count="250" />
-        <Component Subtype="Motor" Count="400" />
-        <Component Subtype="Computer" Count="100" />
-        <Component Subtype="Construction" Count="300" />
-		<Component Subtype="MetalGrid" Count="500" />
-        <Component Subtype="SteelPlate" Count="5000" />
+       <Components>
+            <Component Subtype="SteelPlate" Count="200" />
+			<Component Subtype="MetalGrid" Count="300" />
+			<Component Subtype="LargeTube" Count="250" />
+			<Component Subtype="GravityGenerator" Count="600" />
+			<Component Subtype="Motor" Count="400" />
+			<Component Subtype="Computer" Count="100" />
+		    <Component Subtype="Construction" Count="1000" />
+			<Component Subtype="MetalGrid" Count="600" />
+			<Component Subtype="SteelPlate" Count="3000" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
@@ -1457,14 +1459,15 @@
       <Model>Models\381mm mk24\38cmSk34NR.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
-        <Component Subtype="SteelPlate" Count="200" />
-        <Component Subtype="MetalGrid" Count="300" />
-        <Component Subtype="LargeTube" Count="250" />
-        <Component Subtype="Motor" Count="400" />
-        <Component Subtype="Computer" Count="100" />
-        <Component Subtype="Construction" Count="300" />
-		<Component Subtype="MetalGrid" Count="500" />
-        <Component Subtype="SteelPlate" Count="5000" />
+            <Component Subtype="SteelPlate" Count="200" />
+			<Component Subtype="MetalGrid" Count="300" />
+			<Component Subtype="LargeTube" Count="250" />
+			<Component Subtype="GravityGenerator" Count="600" />
+			<Component Subtype="Motor" Count="400" />
+			<Component Subtype="Computer" Count="100" />
+		    <Component Subtype="Construction" Count="1000" />
+			<Component Subtype="MetalGrid" Count="600" />
+			<Component Subtype="SteelPlate" Count="3000" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
@@ -1671,15 +1674,16 @@
       <ModelOffset x="0" y="0" z="0" />
       <Model>Models\380mm quad\380mm45MLE.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
-      <Components>
-        <Component Subtype="SteelPlate" Count="200" />
-        <Component Subtype="MetalGrid" Count="300" />
-        <Component Subtype="LargeTube" Count="250" />
-        <Component Subtype="Motor" Count="400" />
-        <Component Subtype="Computer" Count="100" />
-        <Component Subtype="Construction" Count="300" />
-		<Component Subtype="MetalGrid" Count="750" />
-        <Component Subtype="SteelPlate" Count="5000" />
+       <Components>
+            <Component Subtype="SteelPlate" Count="200" />
+			<Component Subtype="MetalGrid" Count="300" />
+			<Component Subtype="LargeTube" Count="250" />
+			<Component Subtype="GravityGenerator" Count="600" />
+			<Component Subtype="Motor" Count="400" />
+			<Component Subtype="Computer" Count="100" />
+		    <Component Subtype="Construction" Count="1000" />
+			<Component Subtype="MetalGrid" Count="600" />
+			<Component Subtype="SteelPlate" Count="3000" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
