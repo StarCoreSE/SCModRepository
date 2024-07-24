@@ -155,7 +155,7 @@ namespace Scripts {
                 Graphics = new HardPointParticleDef
                 {
                     Effect1 = new ParticleDef {
-                        Name = "Tait_PD_Flash", // Smoke_LargeGunShot
+                        Name = "TaitSmallPDBlast", // Smoke_LargeGunShot
                         Color = Color(red: 15, green: 2, blue: 1, alpha: 0.8f),
                         Offset = Vector(x: 0, y: 0, z: 0),
 
