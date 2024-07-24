@@ -566,7 +566,7 @@
 
 <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
 			<Id>
-				<TypeId>ConveyorSorter</TypeId>
+				<TypeId>ConveyorSorter</TypeId>     <!-- im sure there is a good reason why its not something simple like a <TypeId>Passage</TypeId> but the reason eludes me-->
 				<SubtypeId>GIGA_BLASTPLATE</SubtypeId>
 			</Id>
 			<DisplayName>7x7 Basedplate</DisplayName>
@@ -645,7 +645,7 @@
 
 		<Definition>
 			<Id>
-				<TypeId>TerminalBlock</TypeId>
+				<TypeId>TerminalBlock</TypeId>  <!-- im sure there is a good reason why its not something simple like a <TypeId>Passage</TypeId> but the reason eludes me-->
 				<SubtypeId>REINFORCED_BLASTPLATE</SubtypeId>
 			</Id>
 			<DisplayName>Reinforced Blastplate</DisplayName>
