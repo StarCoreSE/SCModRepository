@@ -678,7 +678,7 @@ namespace klime.PointCheck
                     break;
                 case "[40k] Gothic Torpedo":
                     costGroupName = "Gothic Torpedo";
-                    costMultiplier = 0.15f;
+                    costMultiplier = 0.1f;
                     break;
                 case "[MID] AX 'Spitfire' Light Rocket Turret":
                     costGroupName = "Spitfire Turret";

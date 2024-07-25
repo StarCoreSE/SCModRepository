@@ -525,7 +525,7 @@ Cat_Darth40kWeapons@20;
 				MacroTurret@300;
 				MacroLightTurret@150
 				MacroHeavyTurret@450;
-				GothicTorp@300;
+				GothicTorp@250;
 				AegisFlakTurret@120;
 
 				
