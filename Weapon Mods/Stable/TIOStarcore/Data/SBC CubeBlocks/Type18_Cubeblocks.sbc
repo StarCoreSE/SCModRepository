@@ -9,13 +9,24 @@
                 <SubtypeId>Type18_Artillery</SubtypeId>
             </Id>
             <DisplayName>[MID] Type 18 'Mercury' Heavy Turret</DisplayName>
-            <Description>
-             An extremely advanced artillery piece, housed inside a fully mechanized and automated weapons control system.  We pair both an extremely large bore diameter with an exceptionally high muzzle velocity, just below the performance seen in electromagnetically assisted fire systems.  This ensures that you will put High Explosive pain on your target before the enemy can do the same to you.  Sold in standardized shipping container housings that feature fully automated repair algorithms to extend useful barrel life and even repair minor combat damages.
-              [6km Targeting Range, 64ft dispersion circle at 20,000 ft]
-              [High Energy Damage in a 37ft Blast Radius/ 75ft AOE Diameter]
-              [1560 m/s| 5120 ft/s Shell Velocity]
-              This weapon slowly repairs itself while offline, and when below functional.
-            </Description>
+<Description>[6km Targeting Range, 64ft dispersion circle at 20,000 ft]
+[37ft Blast Radius/ 75ft AOE Diameter HE Shell, Energy Damage]
+[1560 m/s| 5120 ft/s Shell Velocity]
+[This weapon slowly repairs itself while offline, and when below functional.]
+Pros:
++ Types feature the highest hit chance of all Battleship cannons; due to having both the highest bullet velocity, highest AI accuracy, largest AOE size, & lowest dispersion stats of all the turrets in its class.
++ Types also have the highest integrity of all the turrets.
+Cons:
+- Types have the largest size and mass of all the turrets in Starcore.
+- The Type Series has the lowest damage of all the Battleship Turrets:
+     - Shield Dmg: Poor
+     - Armor Dmg: Below Average
+     - Comp Dmg: Extremely Poor
+-Types are the most expensive Battleship Cannons.
+
+Lore: An extremely advanced artillery piece, housed inside a fully mechanized and automated weapons control system.  We at MID pair both an extremely large bore diameter with an exceptionally high muzzle velocity, just below the performance seen in electromagnetically assisted fire systems.  This ensures that you will put High Explosive pain on your target before the enemy can do the same to you.  Sold in standardized shipping container housings that feature miniaturized 3D Projector Printers to extend useful barrel life and even repair minor combat damages.
+
+</Description>
 			<GuiVisible>true</GuiVisible>
             <Icon>Textures\GUI\Icons\Mk1CannonMainScene.dds</Icon>
             <CubeSize>Large</CubeSize>
