@@ -738,7 +738,7 @@ namespace Scripts
                         Enable = true,
                         Length = 25f, //
                         Width = 0.5f, //
-                        Color = Color(red: 0, green: 0, blue: 0, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Color = Color(red: 10f, green: 35f, blue: 32f, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         TextureMode = Normal, // Normal, Cycle, Chaos, Wave
@@ -751,7 +751,7 @@ namespace Scripts
                             SegmentLength = 0f, // Uses the values below.
                             SegmentGap = 0f, // Uses Tracer textures and values
                             Speed = 1f, // meters per second
-                            Color = Color(red: 1, green: 2, blue: 2.5f, alpha: 1),
+                            Color = Color(red: 10f, green: 35f, blue: 32f, alpha: 1),
                             WidthMultiplier = 1f,
                             Reverse = false,
                             UseLineVariance = true,
@@ -775,9 +775,9 @@ namespace Scripts
                     },
                     OffsetEffect = new OffsetEffectDef
                     {
-                        MaxOffset = 0,// 0 offset value disables this effect
+                        MaxOffset = 1,// 0 offset value disables this effect
                         MinLength = 0.2f,
-                        MaxLength = 3,
+                        MaxLength = 1,
                     },
                 },
             },
