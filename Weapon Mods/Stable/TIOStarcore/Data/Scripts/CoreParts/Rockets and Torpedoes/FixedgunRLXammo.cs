@@ -539,7 +539,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 6f, // Multiplier for damage against shields.
+                    Modifier = 4f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1.3f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -823,7 +823,7 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "GrowlerTone", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "VanillaImpactCat4",
+                HitSound = "", // VanillaImpactCat4
                 ShotSound = "",
                 ShieldHitSound = "RLX10Shot",
                 PlayerHitSound = "",

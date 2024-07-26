@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Invalid.SCPracticeAI;
 using Sandbox.Game;
 using Sandbox.ModAPI;
 using VRage.Game;
@@ -12,51 +13,10 @@ using ProtoBuf;
 
 namespace Invalid.PracticeSpawner
 {
-    [ProtoInclude(1000, typeof(PrefabSpawnPacket))]
-    [ProtoContract]
-    public class Packet
-    {
-        public Packet()
-        {
-
-        }
-    }
-
-    [ProtoContract]
-    public class PrefabSpawnPacket : Packet
-    {
-        [ProtoMember(1)]
-        public string PrefabName;
-
-        [ProtoMember(2)]
-        public int PrefabAmount;
-
-        public PrefabSpawnPacket()
-        {
-
-        }
-
-        public PrefabSpawnPacket(string prefabName, int prefabAmount)
-        {
-            PrefabName = prefabName;
-            PrefabAmount = prefabAmount;
-        }
-    }
-
 
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     public class spawntargetComponent : MySessionComponentBase
     {
-        private Dictionary<string, string> prefabMap = new Dictionary<string, string>
-        {
-
-            { "Cougar8750AI", "Cougar8750AI" },
-            { "Gales8750AI", "Gales8750AI" },
-            { "Star9400AI", "Star9400AI" },
-
-
-            // Add more prefab mappings here.
-        };
 
         private int defaultSpawnCount = 1; // Default number of prefabs to spawn
 
@@ -85,9 +45,9 @@ namespace Invalid.PracticeSpawner
             if (prefabPacket == null) return;
 
 
-            if (prefabMap.ContainsKey(prefabPacket.PrefabName))
+            if (PrefabMaster.PrefabMap.ContainsKey(prefabPacket.PrefabName))
             {
-                SpawnRandomPrefabs(prefabMap[prefabPacket.PrefabName], prefabPacket.PrefabAmount);
+                SpawnRandomPrefabs(PrefabMaster.PrefabMap[prefabPacket.PrefabName], prefabPacket.PrefabAmount);
             }
             else
             {
@@ -119,7 +79,7 @@ namespace Invalid.PracticeSpawner
                     }
                 }
 
-                PrefabSpawnPacket prefabSpawnPacket = new PrefabSpawnPacket(prefabName, spawnCount);
+                PrefabSpawnPacket prefabSpawnPacket = new PrefabSpawnPacket(prefabName, spawnCount, null);
                 byte[] data = MyAPIGateway.Utilities.SerializeToBinary(prefabSpawnPacket);
 
                 MyAPIGateway.Multiplayer.SendMessageTo(netID, data, MyAPIGateway.Multiplayer.ServerId);
@@ -133,7 +93,7 @@ namespace Invalid.PracticeSpawner
         private void ShowPrefabList()
         {
             string prefabListMessage = "Available prefabs:";
-            foreach (string prefabName in prefabMap.Keys)
+            foreach (string prefabName in PrefabMaster.PrefabMap.Keys)
             {
                 prefabListMessage += "\n" + prefabName;
             }

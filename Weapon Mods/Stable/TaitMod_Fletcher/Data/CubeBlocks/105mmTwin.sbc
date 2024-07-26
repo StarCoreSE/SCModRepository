@@ -8,9 +8,16 @@
 			</Id>
 			<DisplayName>[FAS] Prinz Eugen</DisplayName>
 			<Description>
-				105mm Twin gun mount
-				Medium fire rate
-				4km range, fires SAP
+				[Turret Range: 4000]
+				[Reload: 1 Seconds/Barrel]
+
+				[Ammo Types: SAP]
+				[Shell Range: 4km]
+				[Shell Speed:  750m/s]
+				[Damage Types:  Kinetic]
+
+				105mm Twin gun mount used quite extensivly by the Kriegsmarine of the German ww2 era
+				Twin light turret used as a secondary armament on a large potion of ships of the Kriegsmarine
 			</Description>
 			<Icon>Textures\GUI\Icons\Cubes\105mmTwin.dds</Icon>
 			<CubeSize>Large</CubeSize>
@@ -20,14 +27,14 @@
 			<Model>Models\Cubes\large\105mmTwin.mwm</Model>
 			<DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
 			<Components>
-				<Component Subtype="SteelPlate" Count="400" />
+				<Component Subtype="SteelPlate" Count="200" />
 				<Component Subtype="MetalGrid" Count="100" />
 				<Component Subtype="LargeTube" Count="200" />
 				<Component Subtype="Motor" Count="100" />
 				<Component Subtype="Computer" Count="150" />
 				<Component Subtype="Construction" Count="150" />
 				<Component Subtype="MetalGrid" Count="150" />
-				<Component Subtype="SteelPlate" Count="800" />
+				<Component Subtype="SteelPlate" Count="350" />
 			</Components>
 			<CriticalComponent Subtype="Computer" Index="15"/>
 			<MountPoints>
@@ -39,6 +46,7 @@
 				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="1.00" EndY="2.00"/>
 			</MountPoints>
 			<BlockPairName>105mmTwin</BlockPairName>
+			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
 			<BuildProgressModels>
 				<Model BuildPercentUpperBound="0.50" File="Models\Cubes\large\105mmTwin_BS1.mwm"/>

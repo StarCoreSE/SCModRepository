@@ -45,12 +45,12 @@ namespace StarCore.StructuralIntegrity
         const string IniSection = "Config";
 
         public float MinFieldPower = 0f;
-        public float MaxFieldPower = 50f;
+        public float MaxFieldPower = 40f;
         public float MinGridModifier = 1.0f;
-        public float MaxGridModifier = 0.5f;
+        public float MaxGridModifier = 0.6f;
 
         public float BasePowerUsage = 50f;
-        public float MaxModifierPowerPercentage = 0.5f;
+        public float MaxModifierPowerPercentage = 0.4f;
         public float MinModifierPowerPercentage = 0f;
 
         public bool SiegeEnabled = true;

@@ -1,29 +1,38 @@
 ﻿using System;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
 using RichHudFramework.UI;
 using RichHudFramework.UI.Client;
 using RichHudFramework.UI.Rendering;
 using Sandbox.ModAPI;
+using StarCore.FusionSystems.Communication;
+using StarCore.FusionSystems.FusionParts;
+using StarCore.FusionSystems.HeatParts;
 using VRage.Input;
 using VRageMath;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
+namespace StarCore.FusionSystems.HudHelpers
 {
     internal class ConsumptionBar : WindowBase
     {
         private readonly TexturedBox _storageBackground;
-        private readonly TexturedBox _storageForeground;
+        private readonly TexturedBox _storageBar;
+        private readonly TexturedBox _heatBar;
         private bool _shouldHide;
 
 
         public ConsumptionBar(HudParentBase parent) : base(parent)
         {
-            _storageForeground = new TexturedBox(body)
+            _storageBar = new TexturedBox(body)
             {
                 Material = new Material("fusionBarBackground", Vector2.One * 100),
-                ParentAlignment = ParentAlignments.Bottom | ParentAlignments.InnerV,
-                DimAlignment = DimAlignments.Width,
+                ParentAlignment = ParentAlignments.Bottom | ParentAlignments.Left | ParentAlignments.Inner,
                 Color = new Color(1, 1, 1, 0.75f)
+            };
+
+            _heatBar = new TexturedBox(body)
+            {
+                Material = new Material("fusionBarBackground", Vector2.One * 100),
+                ParentAlignment = ParentAlignments.Bottom | ParentAlignments.Right | ParentAlignments.Inner,
+                Color = new Color(1, 0, 0, 0.75f)
             };
 
             _storageBackground = new TexturedBox(body)
@@ -60,8 +69,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
             var playerCockpit = MyAPIGateway.Session?.Player?.Controller?.ControlledEntity?.Entity as IMyShipController;
 
             // Pulling the current HudState is SLOOOOWWWW, so we only pull it when tab is just pressed.
-            if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.Tab))
-                _shouldHide = MyAPIGateway.Session?.Config?.HudState != 1;
+            //if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.Tab))
+            //    _shouldHide = MyAPIGateway.Session?.Config?.HudState != 1;
 
             // Hide HUD element if the player isn't in a cockpit
             if (playerCockpit == null || _shouldHide)
@@ -75,7 +84,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
             float totalFusionCapacity = 0;
             float totalFusionGeneration = 0;
             float totalFusionStored = 0;
-            foreach (var system in S_FusionManager.I.FusionSystems)
+            foreach (var system in SFusionManager.I.FusionSystems)
             {
                 if (playerGrid != ModularApi.GetAssemblyGrid(system.Key))
                     continue;
@@ -106,7 +115,14 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
                 timeToCharge = 0;
 
             HeaderText = $"Fusion | {(totalFusionGeneration > 0 ? "+" : "-")}{Math.Round(timeToCharge)}s";
-            _storageForeground.Height = storagePct * _storageBackground.Height;
+            _storageBar.Height = storagePct * _storageBackground.Height;
+
+            float heatPct = HeatManager.I.GetGridHeatLevel(playerGrid);
+            _heatBar.Height = heatPct * _storageBackground.Height;
+            _heatBar.Color = new Color(heatPct, 1-heatPct, 0, 0.75f);
+
+            _storageBar.Width = _storageBackground.Width/2;
+            _heatBar.Width = _storageBackground.Width/2;
             //_storageForeground.Origin = new Vector2D(_storageForeground.Origin.X, _storageForeground.Width * 0.75 - _storageBackground.Width*0.35); // THIS SHOULD BE RICHHUD!
         }
     }

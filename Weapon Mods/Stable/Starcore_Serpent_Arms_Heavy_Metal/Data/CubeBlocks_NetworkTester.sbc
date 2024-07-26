@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CubeBlocks>
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>NetworkTester_Laser_Block</SubtypeId>
+      </Id>
+      <DisplayName>[ADMIN] NetworkTester Laser</DisplayName>
+      <Description>
+        Shoot your friend with this to stress test the networking. Experts call this a "Unit Test"
+      </Description>
+      <Icon>Textures\GUI\Icons\NetworkTester.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="3" z="23" />
+      <ModelOffset x="0" y="0" z= "0" />
+      <Model>Models\Hellfire_Laser_Block.mwm</Model>
+      <Components>
+        <Component Subtype="Construction" Count="2000" />
+        <Component Subtype="GravityGenerator" Count="186" />
+        <Component Subtype="Computer" Count="666" />
+        <Component Subtype="SmallTube" Count="1200" />
+        <Component Subtype="Motor" Count="1070" />
+        <Component Subtype="LargeTube" Count="1200" />
+        <Component Subtype="MetalGrid" Count="660" />
+        <Component Subtype="Construction" Count="2000" />
+        <Component Subtype="SteelPlate" Count="3500" />
+      </Components>
+      <CriticalComponent Subtype="LargeTube" Index="0" />
+      <BlockPairName>NetworkTester_Laser_Block</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>65</BuildTimeSeconds>
+      <DisassembleRatio>5</DisassembleRatio>
+      <NavigationDefinition>Default</NavigationDefinition>
+      <WeaponDefinitionId Subtype="K_SA_Gun" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <MinElevationDegrees>-15</MinElevationDegrees>
+      <MaxElevationDegrees>75</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <AiEnabled>false</AiEnabled>
+      <MaxRangeMeters>7000</MaxRangeMeters>
+      <RotationSpeed>0.0005</RotationSpeed>
+      <ElevationSpeed>0.0002 </ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+      <DestroySound>Betty_Weapon_Destroyed</DestroySound>
+    </Definition>
+  </CubeBlocks>
+</Definitions>

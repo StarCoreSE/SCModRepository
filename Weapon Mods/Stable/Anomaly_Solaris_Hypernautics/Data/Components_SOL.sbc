@@ -1,0 +1,48 @@
+﻿<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Components>
+
+		<Component>
+			<Id>
+				<TypeId>Component</TypeId>
+				<SubtypeId>ASH_FrameComponent</SubtypeId>
+			</Id>
+			<DisplayName>Insulated Frame [ASH]</DisplayName>
+			<Icon>Textures\GUI\Icons\component\construction_components_component.dds</Icon>
+			<Size>
+				<X>0.5</X>
+				<Y>0.5</Y>
+				<Z>0.01</Z>
+			</Size>
+			<Mass>22000</Mass>
+			<Volume>3</Volume>
+			<Model>Models\Components\construction_components_component.mwm</Model>
+			<PhysicalMaterial>Metal</PhysicalMaterial>
+			<MaxIntegrity>30000</MaxIntegrity>
+			<DropProbability>0.9</DropProbability>
+			<Health>30000</Health>
+		</Component>
+
+		<Component>
+			<Id>
+				<TypeId>Component</TypeId>
+				<SubtypeId>ASH_PlateComponent</SubtypeId>
+			</Id>
+			<DisplayName>Armored Plating [ASH]</DisplayName>
+			<Icon>Textures\GUI\Icons\component\interior_plate_component.dds</Icon>
+			<Size>
+				<X>0.5</X>
+				<Y>0.5</Y>
+				<Z>0.01</Z>
+			</Size>
+			<Mass>76000</Mass>
+			<Volume>3</Volume>
+			<Model>Models\Components\interior_plate_component.mwm</Model>
+			<PhysicalMaterial>Metal</PhysicalMaterial>
+			<MaxIntegrity>100000</MaxIntegrity>
+			<DropProbability>0.9</DropProbability>
+			<Health>100000</Health>
+		</Component>
+		
+	</Components>
+</Definitions>

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
 using ProtoBuf;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
 using Sandbox.ModAPI.Interfaces.Terminal;
+using StarCore.FusionSystems.Communication;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.Game.ModAPI.Network;
@@ -15,17 +15,17 @@ using VRage.ObjectBuilders;
 using VRage.Sync;
 using VRage.Utils;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
+namespace StarCore.FusionSystems.FusionParts
 {
     public abstract class FusionPart<T> : MyGameLogicComponent, IMyEventProxy
         where T : IMyCubeBlock
     {
-        public static readonly Guid SettingsGUID = new Guid("36a45185-2e80-461c-9f1c-e2140a47a4df");
+        public static readonly Guid SettingsGuid = new Guid("36a45185-2e80-461c-9f1c-e2140a47a4df");
 
         /// <summary>
         ///     List of all types that have inited controls.
         /// </summary>
-        private static readonly List<string> _haveControlsInited = new List<string>();
+        private static readonly List<string> HaveControlsInited = new List<string>();
 
         internal readonly StringBuilder InfoText = new StringBuilder("Output: 0/0\nInput: 0/0\nEfficiency: N/A");
         internal T Block;
@@ -35,14 +35,14 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
         internal long LastShutdown = 0;
         public float MaxPowerConsumption;
 
-        internal S_FusionSystem MemberSystem;
+        internal SFusionSystem MemberSystem;
         public MySync<bool, SyncDirection.BothWays> OverrideEnabled;
         public MySync<float, SyncDirection.BothWays> OverridePowerUsageSync;
 
         public float PowerConsumption;
 
         public MySync<float, SyncDirection.BothWays> PowerUsageSync;
-        internal FusionPartSettings Settings = new FusionPartSettings();
+        internal FusionPartSettings Settings;
         internal static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
                 powerUsageSlider.Title = MyStringId.GetOrCompute("Fusion Power Usage");
                 powerUsageSlider.Tooltip =
                     MyStringId.GetOrCompute($"Fusion Power generation this {ReadableName} should use.");
-                powerUsageSlider.SetLimits(0.01f, 0.99f);
+                powerUsageSlider.SetLimits(0.005f, 0.995f);
                 powerUsageSlider.Getter = block =>
                     block.GameLogic.GetAs<FusionPart<T>>()?.PowerUsageSync.Value ?? 0;
                 powerUsageSlider.Setter = (block, value) =>
@@ -160,7 +160,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
 
             MyAPIGateway.TerminalControls.CustomControlGetter += AssignDetailedInfoGetter;
 
-            _haveControlsInited.Add(ReadableName);
+            HaveControlsInited.Add(ReadableName);
         }
 
         private void AssignDetailedInfoGetter(IMyTerminalBlock block, List<IMyTerminalControl> controls)
@@ -176,7 +176,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
             stringBuilder.Insert(0, InfoText.ToString());
         }
 
-        public abstract void UpdatePower(float PowerGeneration, float OutputPerFusionPower);
+        public abstract void UpdatePower(float powerGeneration, float outputPerFusionPower, int numberParts);
 
         #endregion
 
@@ -197,16 +197,16 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
                 return; // ignore ghost/projected grids
 
             LoadSettings();
-            Settings.PowerUsage = PowerUsageSync.Value;
+            PowerUsageSync.Value = Settings.PowerUsage;
             PowerUsageSync.ValueChanged += value =>
                 Settings.PowerUsage = value.Value;
 
-            Settings.OverridePowerUsage = OverridePowerUsageSync.Value;
+            OverridePowerUsageSync.Value = Settings.OverridePowerUsage;
             OverridePowerUsageSync.ValueChanged += value =>
                 Settings.OverridePowerUsage = value.Value;
             SaveSettings();
 
-            if (!_haveControlsInited.Contains(ReadableName))
+            if (!HaveControlsInited.Contains(ReadableName))
                 CreateControls();
 
             ((IMyTerminalBlock)Block).AppendingCustomInfo += AppendingCustomInfo;
@@ -220,11 +220,8 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
 
         internal void SaveSettings()
         {
-            if (Block == null)
+            if (Block == null || Settings == null)
                 return; // called too soon or after it was already closed, ignore
-
-            if (Settings == null)
-                throw new NullReferenceException($"Settings == null on entId={Entity?.EntityId}; Test log 1");
 
             if (MyAPIGateway.Utilities == null)
                 throw new NullReferenceException(
@@ -233,7 +230,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
             if (Block.Storage == null)
                 Block.Storage = new MyModStorageComponent();
 
-            Block.Storage.SetValue(SettingsGUID,
+            Block.Storage.SetValue(SettingsGuid,
                 Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(Settings)));
         }
 
@@ -242,7 +239,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
             if (!MyAPIGateway.Session.IsServer)
                 return;
 
-            Settings.PowerUsage = 0.5f;
+            Settings.PowerUsage = 1.0f;
             Settings.OverridePowerUsage = 1.5f;
 
             PowerUsageSync.Value = Settings.PowerUsage;
@@ -251,6 +248,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
 
         internal virtual bool LoadSettings()
         {
+            if (Settings == null)
+                Settings = new FusionPartSettings();
+
             if (Block.Storage == null)
             {
                 LoadDefaultSettings();
@@ -258,7 +258,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
             }
 
             string rawData;
-            if (!Block.Storage.TryGetValue(SettingsGUID, out rawData))
+            if (!Block.Storage.TryGetValue(SettingsGuid, out rawData))
             {
                 LoadDefaultSettings();
                 return false;
@@ -291,6 +291,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.FusionParts
 
         public override bool IsSerialized()
         {
+            if (Block.CubeGrid?.Physics == null)
+                return base.IsSerialized();
+
             try
             {
                 SaveSettings();

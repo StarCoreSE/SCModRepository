@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>203mmTriple</SubtypeId>
+			</Id>
+			<DisplayName>[FAS] Des Moines</DisplayName>
+			<Description>
+				[Turret Range: 5000]
+				[Reload: 3 Seconds/Barrel]
+
+				[Ammo Types: HE | AP]
+				[Shell Range: 7km]
+				[Shell Speed: 1000m/s | 1100m/s]
+				[Damage Types: Energy | Kinetic]
+				
+				Triple barreled 203mm/8 Inch used commonly by the Us navy during ww2 and into the cold war period
+				Medium to long range artillery turret, used heavily on heavy cruisers likt eh Des Moines.
+			</Description>
+			<Icon>Textures\GUI\Icons\8Inch55RF.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="2" z="3"/>
+			<Scale> 2 </Scale>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\203quad\8Inch55RF.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="800" />
+				<Component Subtype="MetalGrid" Count="100" />
+				<Component Subtype="LargeTube" Count="200" />
+				<Component Subtype="Motor" Count="100" />
+				<Component Subtype="Computer" Count="100" />
+				<Component Subtype="Construction" Count="2000" />
+				<Component Subtype="MetalGrid" Count="200" />
+				<Component Subtype="SteelPlate" Count="1600" />
+			</Components>
+			<CriticalComponent Subtype="Motor" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
+			</MountPoints>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+			<BuildTimeSeconds>30</BuildTimeSeconds>
+			<BlockPairName>203mmQuad</BlockPairName>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

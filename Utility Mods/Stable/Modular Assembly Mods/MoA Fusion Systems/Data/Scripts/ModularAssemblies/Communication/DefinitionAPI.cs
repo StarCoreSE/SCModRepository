@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using ProtoBuf;
 using Sandbox.ModAPI;
 using VRage;
 using VRage.Game.ModAPI;
 using VRage.Utils;
 using VRageMath;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
+namespace StarCore.FusionSystems.
     Communication
 {
     /// <summary>
@@ -19,7 +20,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         /// <summary>
         ///     The expected API version. Don't touch this unless you're developing for the Modular Assemblies Framework.
         /// </summary>
-        public const int ApiVersion = 1;
+        public const int ApiVersion = 2;
 
         /// <summary>
         ///     Triggered whenever the API is ready - added to by the constructor or manually.
@@ -27,10 +28,27 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         public Action OnReady;
 
         /// <summary>
-        ///     Call this to initialize the Modular API.
+        ///     The currently loaded Modular Assemblies Framework version.
+        ///     <remarks>
+        ///         Not the API version; see <see cref="ApiVersion" />
+        ///     </remarks>
+        /// </summary>
+        public int FrameworkVersion { get; private set; } = -1;
+
+        /// <summary>
+        ///     Displays whether endpoints are loaded and the API is ready for use.
+        /// </summary>
+        public bool IsReady { get; private set; }
+
+        /// <summary>
+        ///     Call this to initialize the Modular API.<br />
+        ///     <remarks>
+        ///         API methods will be unusable until the endpoints are populated. Check <see cref="IsReady" /> or utilize
+        ///         <see cref="OnReady" /> for safety.
+        ///     </remarks>
         /// </summary>
         /// <param name="modContext"></param>
-        /// <param name="onLoad"></param>
+        /// <param name="onLoad">Method to be triggered when the API is ready.</param>
         /// <exception cref="Exception"></exception>
         public void Init(IMyModContext modContext, Action onLoad = null)
         {
@@ -47,18 +65,11 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         /// <summary>
-        ///     The currently loaded Modular Assemblies Framework version. Don't touch this either.
-        /// </summary>
-        public int FrameworkVersion { get; private set; } = -1;
-
-        /// <summary>
-        ///     Displays whether the API is ready.
-        /// </summary>
-        public bool IsReady { get; private set; }
-
-        /// <summary>
-        ///     Call this to unload the Modular API. It will be called automatically when the Modular Assemblies Framework is
-        ///     closed.
+        ///     Call this to unload the Modular API; i.e. in case of instantiating a new API or for freeing up resources.
+        ///     <remarks>
+        ///         This method will also be called automatically when the Modular Assemblies Framework is
+        ///         closed.
+        ///     </remarks>
         /// </summary>
         public void UnloadData()
         {
@@ -96,6 +107,24 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         public int[] GetAllAssemblies()
         {
             return _getAllAssemblies?.Invoke();
+        }
+
+        /// <summary>
+        ///     Gets all PhysicalAssembly ids on a specific grid. Returns an empty list on fail.
+        ///     <para>
+        ///         Arg1 is assembly id
+        ///     </para>
+        /// </summary>
+        public int[] GetGridAssemblies(IMyCubeGrid grid)
+        {
+            var allAssemblies = GetAllAssemblies();
+            var validAssemblies = new List<int>();
+
+            foreach (var assemblyId in allAssemblies)
+                if (GetAssemblyGrid(assemblyId) == grid)
+                    validAssemblies.Add(assemblyId);
+
+            return validAssemblies.ToArray();
         }
 
         #endregion
@@ -158,6 +187,48 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             _recreateAssembly?.Invoke(assemblyId);
         }
 
+        /// <summary>
+        ///     Returns a given property of an assembly, or the default value of T if it could not be found.
+        /// </summary>
+        /// <param name="assemblyId"></param>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        public T GetAssemblyProperty<T>(int assemblyId, string propertyName)
+        {
+            var value = _getAssemblyProperty(assemblyId, propertyName);
+
+            return value == null ? default(T) : (T)value;
+        }
+
+        /// <summary>
+        ///     Sets a global property of an assembly. Properties are saved to the assembly, and are accessible by all mods.<br />
+        ///     <remarks>
+        ///         Properties can be removed by setting them to null. value must be a byte array, string, bool, or number.
+        ///     </remarks>
+        /// </summary>
+        /// <param name="assemblyId"></param>
+        /// <param name="propertyName"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public void SetAssemblyProperty<T>(int assemblyId, string propertyName, T value)
+        {
+            if (!(value is byte[] || value is string || value is bool ||
+                  value is int || value is short || value is float || value is double || value is long))
+                return;
+
+            _setAssemblyProperty?.Invoke(assemblyId, propertyName, value);
+        }
+
+        /// <summary>
+        ///     Lists all set properties of an assembly.
+        /// </summary>
+        /// <param name="assemblyId"></param>
+        /// <returns></returns>
+        public string[] ListAssemblyProperties(int assemblyId)
+        {
+            return _listAssemblyProperties?.Invoke(assemblyId);
+        }
+
         #endregion
 
         #region Per-Part Methods
@@ -201,20 +272,21 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         /// <summary>
         ///     Registers a set of definitions with Modular Assemblies Framework.
         /// </summary>
-        /// <param name="definitionContainer"></param>
+        /// <param name="modularDefinitionContainer"></param>
         /// <returns></returns>
-        public string[] RegisterDefinitions(DefinitionDefs.DefinitionContainer definitionContainer)
+        public string[] RegisterDefinitions(DefinitionDefs.ModularDefinitionContainer modularDefinitionContainer)
         {
             var validDefinitions =
-                _registerDefinitions?.Invoke(MyAPIGateway.Utilities.SerializeToBinary(definitionContainer));
+                _registerDefinitions?.Invoke(MyAPIGateway.Utilities.SerializeToBinary(modularDefinitionContainer));
 
-            foreach (var definition in definitionContainer.PhysicalDefs)
+            foreach (var definition in modularDefinitionContainer.PhysicalDefs)
             {
                 RegisterOnPartAdd(definition.Name, definition.OnPartAdd);
                 RegisterOnPartRemove(definition.Name, definition.OnPartRemove);
                 RegisterOnPartDestroy(definition.Name, definition.OnPartDestroy);
 
-                definition.OnInit?.Invoke();
+                if (validDefinitions.Contains(definition.Name))
+                    definition.OnInit?.Invoke();
             }
 
             return validDefinitions;
@@ -372,6 +444,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         private Action<Action<int>> _addOnAssemblyClose;
         private Action<Action<int>> _removeOnAssemblyClose;
         private Action<int> _recreateAssembly;
+        private Func<int, string, object> _getAssemblyProperty;
+        private Action<int, string, object> _setAssemblyProperty;
+        private Func<int, string[]> _listAssemblyProperties;
 
         // Per-part methods
         private Func<IMyCubeBlock, string, bool, IMyCubeBlock[]> _getConnectedBlocks;
@@ -427,6 +502,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
             SetApiMethod("AddOnAssemblyClose", ref _addOnAssemblyClose);
             SetApiMethod("RemoveOnAssemblyClose", ref _removeOnAssemblyClose);
             SetApiMethod("RecreateAssembly", ref _recreateAssembly);
+            SetApiMethod("GetAssemblyProperty", ref _getAssemblyProperty);
+            SetApiMethod("SetAssemblyProperty", ref _setAssemblyProperty);
+            SetApiMethod("ListAssemblyProperties", ref _listAssemblyProperties);
 
             // Per-part methods
             SetApiMethod("GetConnectedBlocks", ref _getConnectedBlocks);
@@ -531,5 +609,78 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
         }
 
         #endregion
+    }
+
+    public class DefinitionDefs
+    {
+        /// <summary>
+        ///     Stores and serialized an array of definitions.
+        /// </summary>
+        [ProtoContract]
+        public class ModularDefinitionContainer
+        {
+            [ProtoMember(1)] internal ModularPhysicalDefinition[] PhysicalDefs;
+        }
+
+        /// <summary>
+        ///     Class representing a Modular Assemblies definition.
+        /// </summary>
+        [ProtoContract]
+        public class ModularPhysicalDefinition
+        {
+            /// <summary>
+            ///     The name of this definition. Must be unique!
+            /// </summary>
+            [ProtoMember(1)]
+            public string Name { get; set; }
+
+            /// <summary>
+            ///     Triggered whenever the definition is first loaded.
+            /// </summary>
+            public Action OnInit { get; set; }
+
+            /// <summary>
+            ///     Called when a valid part is placed.
+            ///     <para>
+            ///         Arg1 is PhysicalAssemblyId, Arg2 is BlockEntity, Arg3 is IsBaseBlock
+            ///     </para>
+            /// </summary>
+            public Action<int, IMyCubeBlock, bool> OnPartAdd { get; set; }
+
+            /// <summary>
+            ///     Called when a valid part is removed.
+            ///     <para>
+            ///         Arg1 is PhysicalAssemblyId, Arg2 is BlockEntity, Arg3 is IsBaseBlock
+            ///     </para>
+            /// </summary>
+            public Action<int, IMyCubeBlock, bool> OnPartRemove { get; set; }
+
+            /// <summary>
+            ///     Called when a component part is destroyed. Note - OnPartRemove is called simultaneously.
+            ///     <para>
+            ///         Arg1 is PhysicalAssemblyId, Arg2 is BlockEntity, Arg3 is IsBaseBlock
+            ///     </para>
+            /// </summary>
+            public Action<int, IMyCubeBlock, bool> OnPartDestroy { get; set; }
+
+            /// <summary>
+            ///     All allowed SubtypeIds. The mod will likely misbehave if two mods allow the same blocks, so please be cautious.
+            /// </summary>
+            [ProtoMember(2)]
+            public string[] AllowedBlockSubtypes { get; set; }
+
+            /// <summary>
+            ///     Allowed connection directions. Measured in blocks. If an allowed SubtypeId is not included here, connections are
+            ///     allowed on all sides. If the connection type whitelist is empty, all allowed subtypes may connect on that side.
+            /// </summary>
+            [ProtoMember(3)]
+            public Dictionary<string, Dictionary<Vector3I, string[]>> AllowedConnections { get; set; }
+
+            /// <summary>
+            ///     The primary block of a PhysicalAssembly. Make sure this is an AssemblyCore block OR null.
+            /// </summary>
+            [ProtoMember(4)]
+            public string BaseBlockSubtype { get; set; }
+        }
     }
 }

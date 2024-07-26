@@ -948,12 +948,12 @@
       <MaxFov>1.04719755</MaxFov>
     </Definition> -->
 
-	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+	  <!--<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 		  <Id>
 			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>15cmTbtsKC36</SubtypeId>
       </Id>	
-      <DisplayName>[FAS] Sharnhorst</DisplayName>
+      <DisplayName>[FAS] Scharnhorst</DisplayName>
 	<Description>
 		150mm Single gun
 		5km AI range
@@ -1013,7 +1013,7 @@
       <ElevationSpeed>0.00025</ElevationSpeed>
       <MinFov>0.1</MinFov>
       <MaxFov>1.04719755</MaxFov>
-    </Definition>
+    </Definition> -->
 
 
 
@@ -1024,9 +1024,17 @@
       </Id>	
       <DisplayName>[FAS] Atlanta</DisplayName>
 	<Description>
-		127mm Twin gun
-		4km AI Range, 5km shell range, Heal has 6km
-		Fires HE, SAP and Heal shell
+		[Turret Range: 4000]
+        [Reload: 1.5 Seconds/Barrel]
+
+        [Ammo Types: HE | SAP]
+        [Shell Range: 5km]
+        [Shell Speed: 850m/s | 1500m/s]
+        [Damage Types: Energy | Kinetic]
+		[AMS capable: 50]
+		
+		127mm Twin gun or 5 inch turret, Used quite extensivly as a mixed purpose gun by the US Navy during WW2 and into the cold war
+		Medium/short range artillery capable of acting as AA and anti-ship
 	</Description>
       <Icon>Textures\GUI\Icons\5InchDualGun.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1047,7 +1055,7 @@
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
-        <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="2" EndY="2" />
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
       </MountPoints>
       <VoxelPlacement>
         <StaticMode>
@@ -1092,9 +1100,17 @@
       </Id>	
       <DisplayName>[FAS] Benson</DisplayName>
 	<Description>
-		127mm Single gun
-		4km AI Range, 5km shell range, Heal has 6km
-		Fires HE, SAP and Heal shell
+		[Turret Range: 4000]
+        [Reload: 1.5 Seconds/Barrel]
+
+        [Ammo Types: HE | SAP]
+        [Shell Range: 5km]
+        [Shell Speed: 850m/s | 1500m/s]
+        [Damage Types: Energy | Kinetic]
+		[AMS capable: 50]
+		
+		127mm single gun or 5 inch turret, Used quite extensivly as a mixed purpose gun by the US Navy during WW2 and into the cold war
+		Medium/short range artillery capable of acting as AA and anti-ship
 	</Description>
       <Icon>Textures\GUI\Icons\127mmMk12_Icon.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1103,7 +1119,7 @@
       <ModelOffset x="0" y="0" z="0" />
       <Model>Models\127mm mk12\5InchMk30Main.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
-      <Components>
+    <Components>
         <Component Subtype="SteelPlate" Count="100" />
         <Component Subtype="MetalGrid" Count="100" />
         <Component Subtype="LargeTube" Count="200" />
@@ -1111,11 +1127,11 @@
         <Component Subtype="Computer" Count="100" />
         <Component Subtype="Construction" Count="200" />
 		<Component Subtype="MetalGrid" Count="200" />
-        <Component Subtype="SteelPlate" Count="700" />
+        <Component Subtype="SteelPlate" Count="1600" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
-        <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="2" EndY="2" />
+		  <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
       </MountPoints>
       <VoxelPlacement>
         <StaticMode>
@@ -1159,9 +1175,18 @@
       </Id>	
       <DisplayName>[FAS] Fletcher</DisplayName>
 	<Description>
-		127mm Single gun
-		4km AI Range, 5km shell range, Heal has 6km
-		Fires HE, SAP and Heal shell
+		[Turret Range: 4000]
+        [Reload: 1.5 Seconds/Barrel]
+
+        [Ammo Types: HE | SAP]
+        [Shell Range: 5km]
+        [Shell Speed: 850m/s | 1500m/s]
+        [Damage Types: Energy | Kinetic]
+		[AMS capable: 50]
+		
+		
+		127mm single gun or 5 inch turret, Used quite extensivly as a mixed purpose gun by the US Navy during WW2 and into the cold war
+		Medium/short range artillery capable of acting as AA and anti-ship
 	</Description>
       <Icon>Textures\GUI\Icons\127mmMk24.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1171,14 +1196,14 @@
       <Model>Models\127mm mk24\5InchSingleMain.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
-        <Component Subtype="SteelPlate" Count="80" />
-        <Component Subtype="MetalGrid" Count="80" />
-        <Component Subtype="LargeTube" Count="150" />
-        <Component Subtype="Motor" Count="80" />
-        <Component Subtype="Computer" Count="50" />
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="MetalGrid" Count="100" />
+        <Component Subtype="LargeTube" Count="200" />
+        <Component Subtype="Motor" Count="100" />
+        <Component Subtype="Computer" Count="100" />
         <Component Subtype="Construction" Count="200" />
 		<Component Subtype="MetalGrid" Count="200" />
-        <Component Subtype="SteelPlate" Count="750" />
+        <Component Subtype="SteelPlate" Count="1600" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
@@ -1226,7 +1251,7 @@
 
 
 
-	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+	  <!--<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 		  <Id>
 			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>6InchTriple</SubtypeId>
@@ -1240,7 +1265,7 @@
       <Icon>Textures\GUI\Icons\6InchTripleGun.dds</Icon>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
-      <Size x="5" y="1" z="5" />
+      <Size x="3" y="1" z="3" />
       <ModelOffset x="0" y= "0.95" z="0" />
       <Model>Models\152mm triple\6InchMain.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
@@ -1256,7 +1281,7 @@
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
-        <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="4" EndY="4" />
+		  <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
       </MountPoints>
       <VoxelPlacement>
         <StaticMode>
@@ -1291,7 +1316,7 @@
       <ElevationSpeed>0.0005</ElevationSpeed>
       <MinFov>0.1</MinFov>
       <MaxFov>1.04719755</MaxFov>
-    </Definition>
+    </Definition> -->
 
 
 	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
@@ -1301,9 +1326,16 @@
       </Id>	
       <DisplayName>[FAS] Iowa</DisplayName>
 	<Description>
-		16 Inch Triple Gun
-		7km AI range, 10km shell range
-		Fires HE amd AP Shells
+		[Turret Range: 7000]
+        [Reload: 3 Seconds/Barrel]
+
+        [Ammo Types: HE | AP]
+        [Shell Range: 10km]
+        [Shell Speed: 1200m/s | 1300m/s]
+        [Damage Types: Energy | Kinetic]
+		
+		16 Inch Triple Gun Used by the US Navy from the interwar periods to the late 1900s
+		Long Range heavy artillery, found aboard ships like the Iowa Class, with variations of the turret seeing use on other ships of the US Navy.
 	</Description>
       <Icon>Textures\GUI\Icons\16InchTripleGun.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1313,14 +1345,15 @@
       <Model>Models\406mm triple\16InchGun.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
-        <Component Subtype="SteelPlate" Count="200" />
-        <Component Subtype="MetalGrid" Count="300" />
-        <Component Subtype="LargeTube" Count="250" />
-        <Component Subtype="Motor" Count="400" />
-        <Component Subtype="Computer" Count="100" />
-        <Component Subtype="Construction" Count="3000" />
-		<Component Subtype="MetalGrid" Count="600" />
-        <Component Subtype="SteelPlate" Count="6500" />
+            <Component Subtype="SteelPlate" Count="200" />
+			<Component Subtype="MetalGrid" Count="300" />
+			<Component Subtype="LargeTube" Count="250" />
+			<Component Subtype="GravityGenerator" Count="600" />
+			<Component Subtype="Motor" Count="400" />
+			<Component Subtype="Computer" Count="100" />
+		    <Component Subtype="Construction" Count="1000" />
+			<Component Subtype="MetalGrid" Count="600" />
+			<Component Subtype="SteelPlate" Count="2000" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
@@ -1371,30 +1404,38 @@
       </Id>	
       <DisplayName>[FAS] Tirpitz</DisplayName>
 	<Description>
-		15 Inch Twin gun
-		7km AI range, 10km shell range
-		Fires HE amd AP Shells
+		[Turret Range: 7000]
+        [Reload: 3 Seconds/Barrel]
+
+        [Ammo Types: HE | AP]
+        [Shell Range: 10km]
+        [Shell Speed: 1200m/s | 1300m/s]
+        [Damage Types: Energy | Kinetic]
+		
+		15 Inch Twin naval gun, used heavily by the Kriegsmarine of the German ww2 era.
+		Long range Naval artillery, Found on ships like the Bismarck and Tirpitz, almost seeing fitting out on the Scharnhorst.
 	</Description>
       <Icon>Textures\GUI\Icons\381mmR.dds</Icon>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
-      <Size x="7" y="2" z="7" />
-      <ModelOffset x="0" y="0" z="0" />
+      <Size x="5" y="2" z="5" />
+		  <ModelOffset x="0" y= "0.95" z="0" />
       <Model>Models\381mm mk24\38cmSk34.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
-      <Components>
-        <Component Subtype="SteelPlate" Count="200" />
-        <Component Subtype="MetalGrid" Count="300" />
-        <Component Subtype="LargeTube" Count="250" />
-        <Component Subtype="Motor" Count="400" />
-        <Component Subtype="Computer" Count="100" />
-        <Component Subtype="Construction" Count="300" />
-		<Component Subtype="MetalGrid" Count="500" />
-        <Component Subtype="SteelPlate" Count="6000" />
+       <Components>
+            <Component Subtype="SteelPlate" Count="200" />
+			<Component Subtype="MetalGrid" Count="300" />
+			<Component Subtype="LargeTube" Count="250" />
+			<Component Subtype="GravityGenerator" Count="600" />
+			<Component Subtype="Motor" Count="400" />
+			<Component Subtype="Computer" Count="100" />
+		    <Component Subtype="Construction" Count="1000" />
+			<Component Subtype="MetalGrid" Count="600" />
+			<Component Subtype="SteelPlate" Count="3000" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
-        <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="6" EndY="6" />
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="5" />
       </MountPoints>
       <BlockVariants>
         <BlockVariant>
@@ -1444,31 +1485,39 @@
       </Id>	
       <DisplayName>[FAS] Tirpitz</DisplayName>
 	<Description>
-		15 Inch Twin gun
-		7km AI range, 10km shell range
-		Fires HE amd AP Shells
+		[Turret Range: 7000]
+        [Reload: 3 Seconds/Barrel]
+
+        [Ammo Types: HE | AP]
+        [Shell Range: 10km]
+        [Shell Speed: 1200m/s | 1300m/s]
+        [Damage Types: Energy | Kinetic]
+		
+		15 Inch Twin naval gun, used heavily by the Kriegsmarine of the German ww2 era.
+		Long range Naval artillery, Found on ships like the Bismarck and Tirpitz, almost seeing fitting out on the Scharnhorst.
 	</Description>
       <Icon>Textures\GUI\Icons\381mmNR.dds</Icon>
       <CubeSize>Large</CubeSize>
       <GuiVisible>false</GuiVisible>
       <BlockTopology>TriangleMesh</BlockTopology>
-      <Size x="7" y="2" z="7" />
-      <ModelOffset x="0" y="0" z="0" />
+      <Size x="5" y="2" z="5" />
+		  <ModelOffset x="0" y= "0.95" z="0" />
       <Model>Models\381mm mk24\38cmSk34NR.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
-        <Component Subtype="SteelPlate" Count="200" />
-        <Component Subtype="MetalGrid" Count="300" />
-        <Component Subtype="LargeTube" Count="250" />
-        <Component Subtype="Motor" Count="400" />
-        <Component Subtype="Computer" Count="100" />
-        <Component Subtype="Construction" Count="300" />
-		<Component Subtype="MetalGrid" Count="500" />
-        <Component Subtype="SteelPlate" Count="6000" />
+            <Component Subtype="SteelPlate" Count="200" />
+			<Component Subtype="MetalGrid" Count="300" />
+			<Component Subtype="LargeTube" Count="250" />
+			<Component Subtype="GravityGenerator" Count="600" />
+			<Component Subtype="Motor" Count="400" />
+			<Component Subtype="Computer" Count="100" />
+		    <Component Subtype="Construction" Count="1000" />
+			<Component Subtype="MetalGrid" Count="600" />
+			<Component Subtype="SteelPlate" Count="3000" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
-        <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="6" EndY="6" />
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="5" />
       </MountPoints>
       <VoxelPlacement>
         <StaticMode>
@@ -1508,7 +1557,7 @@
 
 
 
-	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+	 <!-- <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 		  <Id>
 			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>15cmSKC28R</SubtypeId>
@@ -1579,9 +1628,9 @@
       <ElevationSpeed>0.0005</ElevationSpeed>
       <MinFov>0.1</MinFov>
       <MaxFov>1.04719755</MaxFov>
-    </Definition>
+    </Definition> -->
 
-	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+	  <!--<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 		  <Id>
 			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>15cmSKC28NR</SubtypeId>
@@ -1647,7 +1696,7 @@
       <ElevationSpeed>0.0005</ElevationSpeed>
       <MinFov>0.1</MinFov>
       <MaxFov>1.04719755</MaxFov>
-    </Definition>
+    </Definition> -->
 
 	<!-- French Guns -->
 
@@ -1660,9 +1709,15 @@
       </Id>	
       <DisplayName>[FAS] Jean Bart</DisplayName>
 	<Description>
-		15 Inch Quad gun
-		7km AI range, 10km shell range
-		Fires HE amd AP Shells
+		[Turret Range: 7000]
+        [Reload: 3 Seconds/Barrel]
+
+        [Ammo Types: HE | AP]
+        [Shell Range: 10km]
+        [Shell Speed: 1200m/s | 1300m/s]
+        [Damage Types: Energy | Kinetic]
+		15 Inch Quad naval gun used by the French navy of ww2
+		Long range artillery found on ships like Richeleu and Jean Bart
 	</Description>
       <Icon>Textures\GUI\Icons\380mmMLE1935_Icon.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1671,19 +1726,20 @@
       <ModelOffset x="0" y="0" z="0" />
       <Model>Models\380mm quad\380mm45MLE.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
-      <Components>
-        <Component Subtype="SteelPlate" Count="200" />
-        <Component Subtype="MetalGrid" Count="300" />
-        <Component Subtype="LargeTube" Count="250" />
-        <Component Subtype="Motor" Count="400" />
-        <Component Subtype="Computer" Count="100" />
-        <Component Subtype="Construction" Count="300" />
-		<Component Subtype="MetalGrid" Count="750" />
-        <Component Subtype="SteelPlate" Count="5000" />
+       <Components>
+            <Component Subtype="SteelPlate" Count="200" />
+			<Component Subtype="MetalGrid" Count="300" />
+			<Component Subtype="LargeTube" Count="250" />
+			<Component Subtype="GravityGenerator" Count="600" />
+			<Component Subtype="Motor" Count="400" />
+			<Component Subtype="Computer" Count="100" />
+		    <Component Subtype="Construction" Count="1000" />
+			<Component Subtype="MetalGrid" Count="600" />
+			<Component Subtype="SteelPlate" Count="3000" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
-        <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="6" EndY="6" />
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="5" />
       </MountPoints>
       <VoxelPlacement>
         <StaticMode>

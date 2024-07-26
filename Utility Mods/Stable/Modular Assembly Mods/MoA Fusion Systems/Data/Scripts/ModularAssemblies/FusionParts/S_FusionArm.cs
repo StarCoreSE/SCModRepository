@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
+using StarCore.FusionSystems.Communication;
 using VRage.Game.ModAPI;
 using VRageMath;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
+namespace StarCore.FusionSystems.
     FusionParts
 {
     /// <summary>
     ///     Represents a single 'arm' (loop) of fusion accelerators.
     /// </summary>
-    internal struct S_FusionArm
+    internal struct SFusionArm
     {
-        private const float LengthEfficiencyModifier = 0.13f;
-        private const float BlockPowerGeneration = 0.01f;
-        private const float BlockPowerStorage = 16f;
+        private const float LengthEfficiencyModifier = 0f;
+        private const float BlockPowerGeneration = 0.023f;
+        private const float BlockPowerStorage = 32f;
+        private const float SharedPropertyModifier = 0.05f;
 
         private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
 
@@ -26,7 +27,7 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
 
         public IMyCubeBlock[] Parts;
 
-        public S_FusionArm(IMyCubeBlock newPart, string rootSubtype)
+        public SFusionArm(IMyCubeBlock newPart, string rootSubtype)
         {
             var ignore = new HashSet<IMyCubeBlock>();
             IsValid = PerformScan(newPart, ref ignore, rootSubtype);
@@ -46,11 +47,11 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.
                 {
                     case "Caster_Accelerator_90":
                         PowerGeneration += BlockPowerGeneration;
-                        PowerStorage += BlockPowerStorage * 0.05f;
+                        PowerStorage += BlockPowerStorage * SharedPropertyModifier;
                         break;
                     case "Caster_Accelerator_0":
                         PowerStorage += BlockPowerStorage;
-                        PowerGeneration += BlockPowerGeneration * 0.05f;
+                        PowerGeneration += BlockPowerGeneration * SharedPropertyModifier;
                         break;
                 }
 
