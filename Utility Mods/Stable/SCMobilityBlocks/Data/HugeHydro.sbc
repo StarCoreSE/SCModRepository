@@ -27,7 +27,7 @@
                 <Component Subtype="SteelPlate" Count="500" />
             </Components>
             <CriticalComponent Subtype="LargeTube" Index="0" />
-            <Center x="1" y="1" z="2" />
+            <Center x="1" y="1" z="1" />
             <MountPoints>
                 <MountPoint Side="Back" StartX="0" StartY="0" EndX="5" EndY="5" Default="true"/>
                 <MountPoint Side="Right" StartX="0" StartY="0" EndX="5" EndY="5" />
@@ -84,7 +84,7 @@
             <FlamePointMaterial>EngineThrustMiddle</FlamePointMaterial>
             <FlameLengthMaterial>EngineThrustMiddle</FlameLengthMaterial>
             <FlameFlare>LargeGridLargeThruster</FlameFlare>
-            <FlameVisibilityDistance>700</FlameVisibilityDistance>
+            <FlameVisibilityDistance>7000</FlameVisibilityDistance>
             <FlameGlareQuerySize>1.5</FlameGlareQuerySize>
             <PrimarySound>LrgShipLrgJetHydrogen</PrimarySound>
             <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
