@@ -531,7 +531,7 @@ namespace ShipPoints
             ["MacroTurret"] = 300,
             ["MacroLightTurret"] = 150,
             ["MacroHeavyTurret"] = 450,
-            ["GothicTorp"] = 300,
+            ["GothicTorp"] = 250,
             ["AegisFlakTurret"] = 120,
 
 
@@ -855,7 +855,7 @@ namespace ShipPoints
                     break;
                 case "[40K] Gothic Torpedo Launcher":
                     blockDisplayName = "[40k] Gothic Torpedo Launcher";
-                    costMultiplier = 0.15f;
+                    costMultiplier = 0.1f;
                     break;
                 case "[MID] AX 'Spitfire' Light Rocket Turret":
                     blockDisplayName = "[MID] Spitfire Turret";
