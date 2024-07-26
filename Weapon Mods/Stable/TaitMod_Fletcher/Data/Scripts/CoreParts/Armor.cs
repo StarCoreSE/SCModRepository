@@ -12,7 +12,7 @@ namespace Scripts {
             },
             EnergeticResistance = 3f, //Resistance to Energy damage. 0.5f = 200% damage, 2f = 50% damage
             KineticResistance = 3f, //Resistance to Kinetic damage. Leave these as 1 for no effect
-            Kind = NonArmor, //Heavy, Light, NonArmor - which ammo damage multipliers to apply
+            Kind = Heavy, //Heavy, Light, NonArmor - which ammo damage multipliers to apply
         };
     }
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<!--<CubeBlocks>
+				<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>FAM2BrowningTurret</SubtypeId>
+			</Id>
+			<DisplayName>[FAS] 12.7mm M2 Browning MG</DisplayName>
+			<Description>
+				2.5km Light AA gun
+				Capable of supportive PD, but bosting a medium-high fire-rate.
+			</Description>
+			<Icon>Textures\GUI\Icons\Cubes\FAM2BrowningTurret.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Browning\FAM2BrowningTurret.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="10" />
+				<Component Subtype="MetalGrid" Count="10" />
+				<Component Subtype="LargeTube" Count="12" />
+				<Component Subtype="Motor" Count="8" />
+				<Component Subtype="Computer" Count="4" />
+				<Component Subtype="Construction" Count="12" />
+				<Component Subtype="MetalGrid" Count="15" />
+				<Component Subtype="SteelPlate" Count="45" />
+			</Components>
+			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" Default="true"/>
+			</MountPoints>
+			<BlockPairName>FAM2BrowningTurret</BlockPairName>
+			<MirroringZ>Y</MirroringZ>
+		</Definition>
+	</CubeBlocks> -->
+</Definitions>
