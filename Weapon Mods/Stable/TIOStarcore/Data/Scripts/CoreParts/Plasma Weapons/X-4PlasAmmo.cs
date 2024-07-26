@@ -89,19 +89,19 @@ namespace Scripts
                     GroupDelay = 0, // Delay between each group.
                 },
             },
-            //Pattern = new PatternDef
-            //{
-              //  Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo. 
-                //    "PlasmaFXshots-X", "PlasmaFXshots2-X",
-               // },
-                //Mode = Weapon, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
-              //  TriggerChance = 1f, // This is %
-                //Random = false, // This randomizes the number spawned at once, NOT the list order.
-              //  RandomMin = 1,
-              //  RandomMax = 1,
-              //  SkipParent = false, // Skip the Ammo itself, in the list
-              //  PatternSteps = 3, // Number of Ammos activated per round, will progress in order and loop. Ignored if Random = true.
-            //},
+            Pattern = new PatternDef
+            {
+                Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
+                    "PlasmaFXshots-X", "PlasmaFXshots2-X",
+                },
+                Mode = Weapon, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
+                TriggerChance = 1f, // This is %
+                Random = false, // This randomizes the number spawned at once, NOT the list order.
+                RandomMin = 1,
+                RandomMax = 1,
+                SkipParent = false, // Skip the Ammo itself, in the list
+                PatternSteps = 3, // Number of Ammos activated per round, will progress in order and loop. Ignored if Random = true.
+            },
             DamageScales = new DamageScaleDef
             {
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
@@ -199,6 +199,67 @@ namespace Scripts
                     Shape = Diamond, // Round or Diamond
                 },
             },
+            Ewar = new EwarDef
+            {
+                Enable = false, // Enables the EWAR , Electronic-Warfare System
+                Type = Offense, // EnergySink, Emp, Offense, Nav, Dot, AntiSmart, JumpNull, Anchor, Tractor, Pull, Push, 
+                Mode = Field, // Effect , Field
+                Strength = 1,
+                Radius = 8f, // Meters
+                Duration = 240, // In Ticks
+                StackDuration = true, // Combined Durations
+                Depletable = false,
+                MaxStacks = 2, // Max Debuffs at once
+                NoHitParticle = false,
+                /*
+                EnergySink : Targets & Shutdowns Power Supplies, such as Batteries & Reactor
+                Emp : Targets & Shutdown any Block capable of being powered
+                Offense : Targets & Shutdowns Weaponry
+                Nav : Targets & Shutdown Gyros, Thrusters, or Locks them down
+                Dot : Deals Damage to Blocks in radius
+                AntiSmart : Effects & Scrambles the Targeting List of Affected Missiles
+                JumpNull : Shutdown & Stops any Active Jumps, or JumpDrive Units in radius
+                Tractor : Affects target with Physics
+                Pull : Affects target with Physics
+                Push : Affects target with Physics
+                Anchor : Affects target with Physics
+                
+                */
+                Force = new PushPullDef
+                {
+                    ForceFrom = ProjectileLastPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
+                    ForceTo = HitPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
+                    Position = TargetCenterOfMass, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
+                    DisableRelativeMass = false,
+                    TractorRange = 0,
+                    ShooterFeelsForce = false,
+                },
+                Field = new FieldDef
+                {
+                    Interval = 0, // Time between each pulse, in game ticks (60 == 1 second).
+                    PulseChance = 0, // Chance from 0 - 100 that an entity in the field will be hit by any given pulse.
+                    GrowTime = 0, // How many ticks it should take the field to grow to full size.
+                    HideModel = false, // Hide the projectile model if it has one.
+                    ShowParticle = true, // Show Block damage effect.
+                    TriggerRange = 250f, //range at which fields are triggered
+                    Particle = new ParticleDef // Particle effect to generate at the field's position.
+                    {
+                        Name = "", // SubtypeId of field particle effect.
+                        Extras = new ParticleOptionDef
+                        {
+                            Scale = 1, // Scale of effect.
+                        },
+                    },
+                },
+            },
+            Beams = new BeamDef
+            {
+                Enable = false, // Enable beam behaviour. Please have 3600 RPM, when this Setting is enabled. Please do not fire Beams into Voxels.
+                VirtualBeams = false, // Only one damaging beam, but with the effectiveness of the visual beams combined (better performance).
+                ConvergeBeams = false, // When using virtual beams, converge the visual beams to the location of the real beam.
+                RotateRealBeam = false, // The real beam is rotated between all visual beams, instead of centered between them.
+                OneParticle = false, // Only spawn one particle hit per beam weapon.
+            },
             Trajectory = new TrajectoryDef
             {
                 Guidance = None, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
@@ -228,7 +289,14 @@ namespace Scripts
                     OffsetRatio = 0f, // The ratio to offset the random direction (0 to 1) 
                     OffsetTime = 0, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
                 },
-
+                Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
+                {
+                    DetectRadius = 0,
+                    DeCloakRadius = 0,
+                    FieldTime = 0,
+                    Cloak = false,
+                    Persist = false,
+                },
             },
             AmmoGraphics = new GraphicDef
             {
@@ -239,11 +307,11 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "RedPlasma2E", //ShipWelderArc 
+                        Name = "", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
-                            Scale = 1f,
+                            Scale = 1,
                         },
                     },
                     Hit = new ParticleDef
@@ -276,9 +344,9 @@ namespace Scripts
                     Tracer = new TracerBaseDef
                     {
                         Enable = true,
-                        Length = 10f, //
-                        Width = 0.2f, //
-                        Color = Color(red: 5.585f, green: 5f, blue: 5.562f, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Length = 15f, //
+                        Width = 0.45f, //
+                        Color = Color(red: 15, green: 12, blue: 2f, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
@@ -299,18 +367,18 @@ namespace Scripts
                             Reverse = false,
                             UseLineVariance = true,
                             WidthVariance = Random(start: 0f, end: 0f),
-                            ColorVariance = Random(start: 0f, end: 0f) 
+                            ColorVariance = Random(start: 0f, end: 0f)
                         }
                     },
                     Trail = new TrailDef
                     {
-                        Enable = false,
+                        Enable = true,
                         Textures = new[] {
                             "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
-                        DecayTime = 15, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 2.585f, green: 2.21f, blue: 2.562f, alpha: 0.5f), //Adapted Pilfit 203mm AP trail line
+                        DecayTime = 10, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
+                        Color = Color(red: 1, green: 0, blue: 0, alpha: 1),
                         Back = false,
                         CustomWidth = 0.2f,
                         UseWidthVariance = false,

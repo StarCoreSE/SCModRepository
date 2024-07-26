@@ -422,17 +422,17 @@ namespace Scripts
                     },
                     Trail = new TrailDef
                     {
-                        Enable = true,
+                        Enable = false,
                         AlwaysDraw = false, // Prevents this tracer from being culled.  Only use if you have a reason too (very long tracers/trails).
                         Textures = new[] {
-                            "WeaponLaser", // Please always have this Line set, if this Section is enabled.
+                            "", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
-                        DecayTime = 18, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 2.585f, green: 2.21f, blue: 2.562f, alpha: 0.5f), //Adapted Pilfit 203mm AP trail line, swapping blue and green values for a lovely color.
+                        DecayTime = 3, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
+                        Color = Color(red: 0, green: 0, blue: 1, alpha: 1),
                         FactionColor = DontUse, // DontUse, Foreground, Background.
                         Back = false,
-                        CustomWidth = 0.1f,
+                        CustomWidth = 0,
                         UseWidthVariance = false,
                         UseColorFade = true,
                     },
