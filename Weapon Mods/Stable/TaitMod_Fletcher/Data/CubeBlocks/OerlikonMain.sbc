@@ -8,7 +8,9 @@
 			</Id>
 			<DisplayName>[FAS] 20mm/70 Oerlikons Single Mount</DisplayName>
 			<Description>
-			Ammo Type: 20×110mmRB Drum
+				Short range AA firepower of 2km
+				Supportive PD
+				
 			</Description>
 			<Icon>Textures\GUI\Icons\OerlikonMain.dds</Icon>
 			<CubeSize>Large</CubeSize>

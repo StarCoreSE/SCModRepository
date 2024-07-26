@@ -8,9 +8,15 @@
 			</Id>
 			<DisplayName>[FAS] Sovreign</DisplayName>
 			<Description>
-				20 Inch triple turret (this model is temp in to replace the current ugly model)
-				Fires HE, AP and SAP
-				7km turret ai, 12km shell range
+				[Turret Range: 7000]
+				[Reload: 8 Seconds/Barrel]
+
+				[Ammo Types: HE | AP]
+				[Shell Range: 12km]
+				[Shell Speed: 1400m/s | 1550m/s]
+				[Damage Types: Energy | Kinetic]
+				20 Inch triple turret, never saw use during WW2, however was commonly used as a design for large capital ships
+				Super heavy artillery boasing extreme ranges and high alpha
 			</Description>
 			<Icon>Textures\GUI\Icons\18Inch48.dds</Icon>
 			<CubeSize>Large</CubeSize>

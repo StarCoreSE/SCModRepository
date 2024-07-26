@@ -1024,9 +1024,17 @@
       </Id>	
       <DisplayName>[FAS] Atlanta</DisplayName>
 	<Description>
-		127mm Twin gun
-		4km AI Range, 5km shell range
-		Fires HE and SAP
+		[Turret Range: 4000]
+        [Reload: 1.5 Seconds/Barrel]
+
+        [Ammo Types: HE | SAP]
+        [Shell Range: 5km]
+        [Shell Speed: 850m/s | 1500m/s]
+        [Damage Types: Energy | Kinetic]
+		[AMS capable: 50]
+		
+		127mm Twin gun or 5 inch turret, Used quite extensivly as a mixed purpose gun by the US Navy during WW2 and into the cold war
+		Medium/short range artillery capable of acting as AA and anti-ship
 	</Description>
       <Icon>Textures\GUI\Icons\5InchDualGun.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1092,9 +1100,17 @@
       </Id>	
       <DisplayName>[FAS] Benson</DisplayName>
 	<Description>
-		127mm Single gun
-		4km AI Range, 5km shell range
-		Fires HE and SAP
+		[Turret Range: 4000]
+        [Reload: 1.5 Seconds/Barrel]
+
+        [Ammo Types: HE | SAP]
+        [Shell Range: 5km]
+        [Shell Speed: 850m/s | 1500m/s]
+        [Damage Types: Energy | Kinetic]
+		[AMS capable: 50]
+		
+		127mm single gun or 5 inch turret, Used quite extensivly as a mixed purpose gun by the US Navy during WW2 and into the cold war
+		Medium/short range artillery capable of acting as AA and anti-ship
 	</Description>
       <Icon>Textures\GUI\Icons\127mmMk12_Icon.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1159,9 +1175,18 @@
       </Id>	
       <DisplayName>[FAS] Fletcher</DisplayName>
 	<Description>
-		127mm Single gun
-		4km AI Range, 5km shell range
-		Fires HE and SAP
+		[Turret Range: 4000]
+        [Reload: 1.5 Seconds/Barrel]
+
+        [Ammo Types: HE | SAP]
+        [Shell Range: 5km]
+        [Shell Speed: 850m/s | 1500m/s]
+        [Damage Types: Energy | Kinetic]
+		[AMS capable: 50]
+		
+		
+		127mm single gun or 5 inch turret, Used quite extensivly as a mixed purpose gun by the US Navy during WW2 and into the cold war
+		Medium/short range artillery capable of acting as AA and anti-ship
 	</Description>
       <Icon>Textures\GUI\Icons\127mmMk24.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1301,9 +1326,16 @@
       </Id>	
       <DisplayName>[FAS] Iowa</DisplayName>
 	<Description>
-		16 Inch Triple Gun
-		7km AI range, 10km shell range
-		Fires HE amd AP Shells
+		[Turret Range: 7000]
+        [Reload: 3 Seconds/Barrel]
+
+        [Ammo Types: HE | AP]
+        [Shell Range: 10km]
+        [Shell Speed: 1200m/s | 1300m/s]
+        [Damage Types: Energy | Kinetic]
+		
+		16 Inch Triple Gun Used by the US Navy from the interwar periods to the late 1900s
+		Long Range heavy artillery, found aboard ships like the Iowa Class, with variations of the turret seeing use on other ships of the US Navy.
 	</Description>
       <Icon>Textures\GUI\Icons\16InchTripleGun.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1372,9 +1404,16 @@
       </Id>	
       <DisplayName>[FAS] Tirpitz</DisplayName>
 	<Description>
-		15 Inch Twin gun
-		7km AI range, 10km shell range
-		Fires HE amd AP Shells
+		[Turret Range: 7000]
+        [Reload: 3 Seconds/Barrel]
+
+        [Ammo Types: HE | AP]
+        [Shell Range: 10km]
+        [Shell Speed: 1200m/s | 1300m/s]
+        [Damage Types: Energy | Kinetic]
+		
+		15 Inch Twin naval gun, used heavily by the Kriegsmarine of the German ww2 era.
+		Long range Naval artillery, Found on ships like the Bismarck and Tirpitz, almost seeing fitting out on the Scharnhorst.
 	</Description>
       <Icon>Textures\GUI\Icons\381mmR.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1446,9 +1485,16 @@
       </Id>	
       <DisplayName>[FAS] Tirpitz</DisplayName>
 	<Description>
-		15 Inch Twin gun
-		7km AI range, 10km shell range
-		Fires HE amd AP Shells
+		[Turret Range: 7000]
+        [Reload: 3 Seconds/Barrel]
+
+        [Ammo Types: HE | AP]
+        [Shell Range: 10km]
+        [Shell Speed: 1200m/s | 1300m/s]
+        [Damage Types: Energy | Kinetic]
+		
+		15 Inch Twin naval gun, used heavily by the Kriegsmarine of the German ww2 era.
+		Long range Naval artillery, Found on ships like the Bismarck and Tirpitz, almost seeing fitting out on the Scharnhorst.
 	</Description>
       <Icon>Textures\GUI\Icons\381mmNR.dds</Icon>
       <CubeSize>Large</CubeSize>
@@ -1663,9 +1709,15 @@
       </Id>	
       <DisplayName>[FAS] Jean Bart</DisplayName>
 	<Description>
-		15 Inch Quad gun
-		7km AI range, 10km shell range
-		Fires HE amd AP Shells
+		[Turret Range: 7000]
+        [Reload: 3 Seconds/Barrel]
+
+        [Ammo Types: HE | AP]
+        [Shell Range: 10km]
+        [Shell Speed: 1200m/s | 1300m/s]
+        [Damage Types: Energy | Kinetic]
+		15 Inch Quad naval gun used by the French navy of ww2
+		Long range artillery found on ships like Richeleu and Jean Bart
 	</Description>
       <Icon>Textures\GUI\Icons\380mmMLE1935_Icon.dds</Icon>
       <CubeSize>Large</CubeSize>
