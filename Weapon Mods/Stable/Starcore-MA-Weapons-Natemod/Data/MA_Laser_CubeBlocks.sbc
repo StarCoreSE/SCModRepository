@@ -12,8 +12,8 @@
       </Id>
       <DisplayName>Guardian T4 Beam</DisplayName>
       <Description>
-        [4.5km Targeting Range]
-        [Draws 750MW]
+        [4km Targeting Range]
+        [Draws ~1,375MW]
         [Energy damage]
         [Hitscan]
       </Description>
@@ -101,8 +101,8 @@
       </Id>
       <DisplayName>Gladius Heavy Laser</DisplayName>
       <Description>
-        [3.5km Targeting Range]
-        [Draws 448MW]
+        [3km Targeting Range]
+        [Draws ~550MW]
         [Energy damage]
         [Hitscan]
       </Description>
@@ -285,9 +285,8 @@
       </Id>
       <DisplayName>PDX Laser T2</DisplayName>
       <Description>
-        [2.5km Targeting Range]
-        [Excellent PD]
-        [Draws 100MW]
+        [2km Targeting Range]
+        [Draws ~125MW]
         [Energy damage]
         [Hitscan]
         Made by AutoMcD Astronautical, CriegWarfare, Mike_Dude.
@@ -377,8 +376,7 @@
       <DisplayName>PDX Laser T2 Slope</DisplayName>
       <Description>
         [2km Targeting Range]
-        [Excellent PD]
-        [Draws 100MW]
+        [Draws ~125MW]
         [Energy damage]
         [Hitscan]
       </Description>
@@ -476,8 +474,7 @@
       <DisplayName>PDX Laser T2 Slope2</DisplayName>
       <Description>
         [2km Targeting Range]
-        [Excellent PD]
-        [Draws 100MW]
+        [Draws ~125MW]
         [Energy damage]
         [Hitscan]
       </Description>

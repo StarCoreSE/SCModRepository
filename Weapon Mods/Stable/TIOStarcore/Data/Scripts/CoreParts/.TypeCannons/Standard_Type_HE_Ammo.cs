@@ -127,13 +127,13 @@ namespace Scripts
                 Armor = new ArmorDef
                 {
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
-                    Light = 0.7f, // Multiplier for damage against light armor.
+                    Light = 0.6f, // Multiplier for damage against light armor.
                     Heavy = -1f, // Multiplier for damage against heavy armor.
-                    NonArmor = 0.30f, // Multiplier for damage against every else.
+                    NonArmor = 0.25f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 2.1f, // Multiplier for damage against shields.
+                    Modifier = 2f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1.25f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -389,15 +389,15 @@ namespace Scripts
                     },
                     Trail = new TrailDef
                     {
-                        Enable = true,
+                        Enable = false,
                         Textures = new[] {
                             "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
-                        DecayTime = 20, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 2.585f, green: 2.562f, blue: 2.21f, alpha: 0.5f), //Pilfit 203mm AP Ammo Trail.  // God Bless that Magnificent Bastard o7
+                        DecayTime = 1, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
+                        Color = Color(red: 23, green: 13f, blue: 1, alpha: 0.1f),
                         Back = false,
-                        CustomWidth = 0.1f,
+                        CustomWidth = 0.35f,
                         UseWidthVariance = false,
                         UseColorFade = true,
                     },
