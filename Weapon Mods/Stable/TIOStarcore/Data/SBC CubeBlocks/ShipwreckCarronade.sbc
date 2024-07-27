@@ -9,9 +9,9 @@
             </Id>
             <DisplayName>[FLAW] 'Shipwreck' Heavy Carronade</DisplayName>
             <Description>
-              [2.5km Targeting Range]
+              [2.25km Targeting Range]
               [Energy damage]
-              [1250 m/s]
+              [750 m/s]
                 POW! HA-HA!
             </Description>
 			<GuiVisible>true</GuiVisible>

@@ -9,7 +9,7 @@
 			  <SubtypeId>NavalHeavyGaussRifle</SubtypeId>
 		  </Id>
 		  <DisplayName>[FLAW] [WIP] 'Grizzly' Naval Heavy Gauss Rifle</DisplayName>
-		  <Description>
+		  <Description>Not for Starcore.
 		  9km Range. Kinetic. Short Ranged. 4 Second Targeting Beam, 1/60th of a second Hypervelocity Slug
 		  WIP, trying to make a hitscan feel like a bullet is hard.
 

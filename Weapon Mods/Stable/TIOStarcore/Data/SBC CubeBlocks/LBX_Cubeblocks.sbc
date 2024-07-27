@@ -10,8 +10,7 @@
 		  </Id>
 		  <DisplayName>[FLAW] Naval LB-5X</DisplayName>
 		  <Description>
-		  Long Ranged, 2 ammo types.
-		  +High Explosive - Energy Damage 2km Blast Zone, please use with caution. 900m/s
+		  Long Ranged, 1 ammo types.
 		  +Cluster Shot - Kinetic Damage, proximity fused fragmentation warhead. 1600m/s
 		  
 		  </Description>
