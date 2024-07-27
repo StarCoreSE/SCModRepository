@@ -47,9 +47,7 @@
       <DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
       <DestroySound>WepSmallWarheadExpl</DestroySound>
       <PCU>200</PCU>      
-      <TargetingGroups>
-		<string>Weapons</string>
-      </TargetingGroups>      
+		<AiEnabled>false</AiEnabled>  
 		</Definition>
 		
 	</CubeBlocks>

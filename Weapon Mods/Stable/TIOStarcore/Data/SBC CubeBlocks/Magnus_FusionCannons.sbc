@@ -66,15 +66,7 @@
 			<AiEnabled>false</AiEnabled>
 			<DamagedSound>ParticleWeapExpl</DamagedSound>
 			<ResourceSinkGroup>Defense</ResourceSinkGroup>
-			<MinElevationDegrees>-5</MinElevationDegrees>
-			<MaxElevationDegrees>100</MaxElevationDegrees>
-			<MinAzimuthDegrees>-180</MinAzimuthDegrees>
-			<MaxAzimuthDegrees>180</MaxAzimuthDegrees>
-			<RotationSpeed>0.0001</RotationSpeed>
-			<ElevationSpeed>0.0001 </ElevationSpeed>
 			<IdleRotation>false</IdleRotation>
-			<MinFov>0.0001</MinFov>
-			<MaxFov>2</MaxFov>
 			<EmissiveColorPreset>Default</EmissiveColorPreset>
 		</Definition>
 		

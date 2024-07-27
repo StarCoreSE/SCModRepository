@@ -59,9 +59,9 @@
             <MirroringZ>Y</MirroringZ>
             <MirroringY>Z</MirroringY>
 			<ResourceSinkGroup>Defense</ResourceSinkGroup>
-			<RequiredPowerInput>0.00002</RequiredPowerInput>
             <PCU>800</PCU>
             <IsAirTight>true</IsAirTight>
+            <AiEnabled>false</AiEnabled>
         </Definition>
 
 
@@ -115,13 +115,12 @@
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>
             			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 
-
+            <AiEnabled>false</AiEnabled>
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
             <DestroySound>WepSmallWarheadExpl</DestroySound>
             <MirroringZ>Y</MirroringZ>
             <MirroringY>Z</MirroringY>
 			<ResourceSinkGroup>Defense</ResourceSinkGroup>
-			<RequiredPowerInput>0.00002</RequiredPowerInput>
             <PCU>800</PCU>
             <IsAirTight>true</IsAirTight>
         </Definition>

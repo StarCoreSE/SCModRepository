@@ -51,17 +51,9 @@
 		  <WeaponDefinitionId Subtype="JN_175Fixed" />
 		  <ResourceSinkGroup>Defense</ResourceSinkGroup>
 		  <InventoryMaxVolume>100</InventoryMaxVolume>
-		  <MinElevationDegrees>-1</MinElevationDegrees>
-		  <MaxElevationDegrees>1</MaxElevationDegrees>
-		  <MinAzimuthDegrees>-1</MinAzimuthDegrees>
-		  <MaxAzimuthDegrees>1</MaxAzimuthDegrees>
 		  <IdleRotation>false</IdleRotation>
 		  <AiEnabled>false</AiEnabled>
 		  <MaxRangeMeters>10000</MaxRangeMeters>
-		  <RotationSpeed>0</RotationSpeed>
-		  <ElevationSpeed>0</ElevationSpeed>
-		  <MinFov>0.1</MinFov>
-		  <MaxFov>1.1</MaxFov>
 	  </Definition>
 
   </CubeBlocks>

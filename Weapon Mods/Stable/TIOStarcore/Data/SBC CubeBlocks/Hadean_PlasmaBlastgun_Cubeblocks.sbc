@@ -15,7 +15,7 @@
 			Damage begins falling off past 3km.
 			Draws 550MW
 			</Description>            
-			<GuiVisible>true</GuiVisible>
+			<GuiVisible>false</GuiVisible>
 			<Public>true</Public>
 			<Icon>Textures\GUI\Icons\PlasmaBlastgun.dds</Icon>
 			<CubeSize>Large</CubeSize>
@@ -55,6 +55,7 @@
             <DestroySound>WepSmallWarheadExpl</DestroySound>
             <PCU>280</PCU>
             <IsAirTight>false</IsAirTight>
+			<AiEnabled>false</AiEnabled>
 			<EmissiveColorPreset>Default</EmissiveColorPreset>
 		</Definition>
 
