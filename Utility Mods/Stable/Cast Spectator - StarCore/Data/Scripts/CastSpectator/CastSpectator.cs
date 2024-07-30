@@ -843,8 +843,10 @@ namespace KlimeDraygoMath.CastSpectator
             FindAndMoveInput = new HudAPIv2.MenuKeybindInput("Find and Move - " + m_Pref.FindAndMove.ToString(), KeybindCat, "Press any Key [Find and Move]", SetFindAndMoveKeybind);
             FindAndMoveSpinInput = new HudAPIv2.MenuKeybindInput("Find and Move Spin - " + m_Pref.FindAndMoveSpin.ToString(), KeybindCat, "Press any Key [Find and Move Spin]", SetFindAndMoveSpinKeybind);
             CameraSmoothKeybind = new HudAPIv2.MenuKeybindInput("Toggle Smooth Camera - " + m_Pref.ToggleSmoothCamera.ToString(), KeybindCat, "Press any Key [Smooth Camera]", SetSmoothCameraInputKeybind);
-            CyclePlayerUp = new HudAPIv2.MenuKeybindInput("Cycle Player Up - " + m_Pref.CyclePlayerUp.ToString(), KeybindCat, "Press any Key [Cycle Player Up]", SetCyclePlayerUp);
-            CyclePlayerDown = new HudAPIv2.MenuKeybindInput("Cycle Player Down - " + m_Pref.CyclePlayerDown.ToString(), KeybindCat, "Press any Key [Cycle Player Down]", SetCyclePlayerDown);
+
+            // Remove Cycle Player Up and Cycle Player Down inputs from the menu
+            // CyclePlayerUp = new HudAPIv2.MenuKeybindInput("Cycle Player Up - " + m_Pref.CyclePlayerUp.ToString(), KeybindCat, "Press any Key [Cycle Player Up]", SetCyclePlayerUp);
+            // CyclePlayerDown = new HudAPIv2.MenuKeybindInput("Cycle Player Down - " + m_Pref.CyclePlayerDown.ToString(), KeybindCat, "Press any Key [Cycle Player Down]", SetCyclePlayerDown);
 
             ModeFreeInput = new HudAPIv2.MenuKeybindInput("Mode Free - " + m_Pref.FreeMode.ToString(), KeybindCat, "Press any Key [Free Mode]", SetFreeModeInputKeybind);
             ModeFollowInput = new HudAPIv2.MenuKeybindInput("Mode Follow - " + m_Pref.FollowMode.ToString(), KeybindCat, "Press any Key [Follow Mode]", SetFollowModeInputKeybind);
@@ -856,18 +858,14 @@ namespace KlimeDraygoMath.CastSpectator
             foreach (var saved in SavedTargets)
             {
                 saved.InitMenu(++i, SaveTargetCat, this);
-
             }
-            CameraSmoothOnOff = new HudAPIv2.MenuItem(m_SmoothCamera ? "Smooth Camera On" : "Smooth Camera Off", SpectatorCameraRootCat, ToggleSmoothCamera);
 
+            CameraSmoothOnOff = new HudAPIv2.MenuItem(m_SmoothCamera ? "Smooth Camera On" : "Smooth Camera Off", SpectatorCameraRootCat, ToggleSmoothCamera);
             HideHudOnOff = new HudAPIv2.MenuItem(m_Pref.HideHud ? "Hud Hidden" : "HUD Always Visible", SpectatorCameraRootCat, ToggleHideHud);
 
             CameraSmoothRate = new HudAPIv2.MenuSliderInput(string.Format("Camera Smooth Rate {0:N0}", SmoothSenseToValue(m_Pref.SmoothCameraLERP).ToString()), SpectatorCameraRootCat, m_Pref.SmoothCameraLERP, "Higher is less smooth", SmoothOnSubmit, SmoothSenseToValue);
 
-
-
             Reset = new HudAPIv2.MenuItem("Reset to default", SpectatorCameraRootCat, ResetPrefDefaults);
-
         }
 
         private void UpdateMenu()
@@ -886,8 +884,10 @@ namespace KlimeDraygoMath.CastSpectator
             CameraSmoothRate.Text = string.Format("Camera Smooth Rate {0:N0}", SmoothSenseToValue(m_Pref.SmoothCameraLERP).ToString());
 
             CameraSmoothRate.InitialPercent = m_Pref.SmoothCameraLERP;
-            CyclePlayerUp.Text = "Cycle Player Up - " + m_Pref.CyclePlayerUp.ToString();
-            CyclePlayerDown.Text = "Cycle Player Down - " + m_Pref.CyclePlayerDown.ToString();
+
+            // Remove updates for Cycle Player Up and Cycle Player Down
+            // CyclePlayerUp.Text = "Cycle Player Up - " + m_Pref.CyclePlayerUp.ToString();
+            // CyclePlayerDown.Text = "Cycle Player Down - " + m_Pref.CyclePlayerDown.ToString();
 
             HideHudOnOff.Text = m_Pref.HideHud ? "Hud Hidden" : "HUD Always Visible";
         }
@@ -1038,6 +1038,8 @@ namespace KlimeDraygoMath.CastSpectator
             {
                 List<IMyCubeGrid> grids = new List<IMyCubeGrid>();
                 group.GetGrids(grids);
+                // Exclude static grids
+                grids = grids.Where(grid => !grid.IsStatic).ToList();
                 if (grids.Count == 0) continue;
 
                 grids.OrderBy(x => x.WorldAABB.Volume);
@@ -1046,7 +1048,7 @@ namespace KlimeDraygoMath.CastSpectator
 
                 if (cBiggestGrid == null || cBiggestGrid.Physics == null) continue;
 
-                bool isBackup = cBiggestGrid.BlocksCount < 50 || cBiggestGrid.IsStatic;
+                bool isBackup = cBiggestGrid.BlocksCount < 50;
 
                 var vectorToGrid = cBiggestGrid.PositionComp.WorldAABB.Center - camera.WorldMatrix.Translation;
                 var dirToGrid = Vector3D.Normalize(vectorToGrid);
@@ -1092,8 +1094,8 @@ namespace KlimeDraygoMath.CastSpectator
 
             MyCubeGrid grid = hitInfo.HitEntity as MyCubeGrid;
 
-            //Raycast search doesn't hit backups - rely on cone searh for that
-            if (grid == null || grid.Physics == null || grid.BlocksCount < 50 || grid.IsStatic) return gridGroup;
+            //Raycast search doesn't hit backups - rely on cone searh for that. also exclude static grids
+            if (grid == null || grid.Physics == null || grid.IsStatic) return gridGroup;
 
             gridGroup = MyAPIGateway.GridGroups.GetGridGroup(GridLinkTypeEnum.Physical, grid);
             return gridGroup;
