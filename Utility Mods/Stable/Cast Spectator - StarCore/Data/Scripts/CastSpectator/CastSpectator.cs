@@ -289,8 +289,11 @@ namespace KlimeDraygoMath.CastSpectator
                     if (saved.IsModifyKeybindPressed())
                     {
                         saved.State = ObsCameraState;
-                    }
 
+                        // Show notification when a preset is saved
+                        string entityName = ObsCameraState.lockEntity?.DisplayName ?? "Unknown";
+                        MyAPIGateway.Utilities.ShowNotification($"Preset {SavedTargets.IndexOf(saved) + 1} saved on to {entityName}", 2000, MyFontEnum.Green);
+                    }
                 }
 
                 //Move to target
