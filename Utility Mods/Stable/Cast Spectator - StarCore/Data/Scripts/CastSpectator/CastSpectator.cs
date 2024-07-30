@@ -292,7 +292,7 @@ namespace KlimeDraygoMath.CastSpectator
 
                         // Show notification when a preset is saved
                         string entityName = ObsCameraState.lockEntity?.DisplayName ?? "Unknown";
-                        MyAPIGateway.Utilities.ShowNotification($"Preset {SavedTargets.IndexOf(saved) + 1} saved on to {entityName}", 2000, MyFontEnum.Green);
+                        MyAPIGateway.Utilities.ShowNotification($"Preset {SavedTargets.IndexOf(saved) + 1} saved to {entityName}", 2000, MyFontEnum.White);
                     }
                 }
 
