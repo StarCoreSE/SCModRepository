@@ -47,6 +47,11 @@ namespace StarCore.RepairModule
                 {
                     ignoreArmor = value;
 
+                    if (!IsServer)
+                    {
+                        SaveSettings();
+                    }
+
                     if (IsServer)
                     {
                         Log.Info("Processing Repair Targets on Event Trigger: IgnoreArmor");
@@ -59,6 +64,7 @@ namespace StarCore.RepairModule
         }
         public bool ignoreArmor;
         private event Action<bool> OnIgnoreArmorChanged;
+
         public bool PriorityOnly
         {
             get { return priorityOnly; }
@@ -67,6 +73,11 @@ namespace StarCore.RepairModule
                 if (priorityOnly != value)
                 {
                     priorityOnly = value;
+
+                    if (!IsServer)
+                    {
+                        SaveSettings();
+                    }
 
                     if (IsServer)
                     {
@@ -80,6 +91,7 @@ namespace StarCore.RepairModule
         }
         public bool priorityOnly;
         private event Action<bool> OnPriorityOnlyChanged;
+
         public long SubsystemPriority
         {
             get { return GetLongFromPriority(subsystemPriority); }
@@ -89,6 +101,11 @@ namespace StarCore.RepairModule
                 if (subsystemPriority != newPriority)
                 {
                     subsystemPriority = newPriority;
+
+                    if (!IsServer)
+                    {
+                        SaveSettings();
+                    }
 
                     if (IsServer)
                     {
@@ -123,6 +140,7 @@ namespace StarCore.RepairModule
         public MySync<Vector3D, SyncDirection.FromServer> TargetPosition = null;
         public MySync<long, SyncDirection.FromServer> TargetBlock = null;
         public MySync<bool, SyncDirection.FromServer> ShowWeldEffects = null;
+
         private const string WeldParticle = MyParticleEffectsNameEnum.WelderContactPoint;
         private MyParticleEffect WeldParticleEmitter;      
         private const string WeldSound = "ToolLrgWeldMetal";
@@ -156,11 +174,17 @@ namespace StarCore.RepairModule
             OnPriorityOnlyChanged += PriorityOnly_Update;
             OnSubsystemPriorityChanged += SubsystemPriority_Update;
 
-           
-            IgnoreArmor = true;
-            PriorityOnly = false;
-            SubsystemPriority = 0;
-    
+            if (!IsServer)
+            {
+                if (!LoadSettings())
+                {
+                    IgnoreArmor = true;
+                    PriorityOnly = false;
+                    SubsystemPriority = 0;
+
+                    SaveSettings();
+                }
+            }           
 
             Block.AppendingCustomInfo += AppendCustomInfo;
 
@@ -322,6 +346,23 @@ namespace StarCore.RepairModule
 
             Block = null;
         }
+
+        public override bool IsSerialized()
+        {
+            try
+            {
+                if (!IsServer)
+                {
+                    SaveSettings();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+
+            return base.IsSerialized();
+        }
         #endregion
 
         #region Event Handlers
@@ -376,6 +417,70 @@ namespace StarCore.RepairModule
         private void SubsystemPriority_Update(long _long)
         {
             SubsystemPriorityPacket.UpdateSubsystemPriority(Block.EntityId);
+        }
+        #endregion
+
+        #region Settings
+        bool LoadSettings()
+        {
+            if (Block.Storage == null)
+                return false;
+
+            string rawData;
+            if (!Block.Storage.TryGetValue(SettingsID, out rawData))
+                return false;
+
+            try
+            {
+                var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<RepairSettings>(Convert.FromBase64String(rawData));
+
+                if (loadedSettings != null)
+                {
+                    IgnoreArmor = loadedSettings.Stored_IgnoreArmor;
+                    PriorityOnly = loadedSettings.Stored_PriorityOnly;
+                    SubsystemPriority = loadedSettings.Stored_SubsystemPriority;
+
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error loading settings!\n{e}");
+            }
+
+            return false;
+        }
+
+        void SaveSettings()
+        {
+            try
+            {
+                if (Block == null)
+                {
+                    Log.Info("SaveSettings called but Block is null.");
+                    return;
+                }
+                    
+
+                if (MyAPIGateway.Utilities == null)
+                    throw new NullReferenceException($"MyAPIGateway.Utilities == null; entId={Entity?.EntityId};");
+
+                if (Block.Storage == null)
+                    Block.Storage = new MyModStorageComponent();
+
+                var settings = new RepairSettings
+                {
+                    Stored_IgnoreArmor = IgnoreArmor,
+                    Stored_PriorityOnly = PriorityOnly,
+                    Stored_SubsystemPriority = SubsystemPriority
+                };
+
+                Block.Storage.SetValue(SettingsID, Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(settings)));
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error saving settings!\n{e}");
+            }
         }
         #endregion
 
@@ -664,5 +769,18 @@ namespace StarCore.RepairModule
             }
         }      
         #endregion
+    }
+
+    [ProtoContract]
+    public class RepairSettings
+    {
+        [ProtoMember(41)]
+        public bool Stored_IgnoreArmor { get; set; }
+
+        [ProtoMember(42)]
+        public bool Stored_PriorityOnly { get; set; }
+
+        [ProtoMember(43)]
+        public long Stored_SubsystemPriority { get; set; }
     }
 }
