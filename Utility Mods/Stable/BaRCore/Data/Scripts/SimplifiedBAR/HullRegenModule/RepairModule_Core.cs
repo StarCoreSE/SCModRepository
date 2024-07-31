@@ -64,6 +64,7 @@ namespace StarCore.RepairModule
         }
         public bool ignoreArmor;
         private event Action<bool> OnIgnoreArmorChanged;
+
         public bool PriorityOnly
         {
             get { return priorityOnly; }
@@ -90,6 +91,7 @@ namespace StarCore.RepairModule
         }
         public bool priorityOnly;
         private event Action<bool> OnPriorityOnlyChanged;
+
         public long SubsystemPriority
         {
             get { return GetLongFromPriority(subsystemPriority); }
@@ -138,6 +140,7 @@ namespace StarCore.RepairModule
         public MySync<Vector3D, SyncDirection.FromServer> TargetPosition = null;
         public MySync<long, SyncDirection.FromServer> TargetBlock = null;
         public MySync<bool, SyncDirection.FromServer> ShowWeldEffects = null;
+
         private const string WeldParticle = MyParticleEffectsNameEnum.WelderContactPoint;
         private MyParticleEffect WeldParticleEmitter;      
         private const string WeldSound = "ToolLrgWeldMetal";
