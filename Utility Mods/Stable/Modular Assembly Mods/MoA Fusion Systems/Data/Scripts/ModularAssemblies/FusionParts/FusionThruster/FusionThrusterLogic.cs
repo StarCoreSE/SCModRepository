@@ -91,8 +91,6 @@ namespace StarCore.FusionSystems.FusionParts.FusionThruster
             base.UpdateAfterSimulation();
             var storagePct = MemberSystem?.PowerStored / MemberSystem?.MaxPowerStored ?? 0;
 
-            MyAPIGateway.Utilities.ShowNotification(Block.ThrustMultiplier.ToString(), 1000/60);
-
             if (storagePct <= 0.05f)
             {
                 if (Block.ThrustMultiplier <= 0.01)
