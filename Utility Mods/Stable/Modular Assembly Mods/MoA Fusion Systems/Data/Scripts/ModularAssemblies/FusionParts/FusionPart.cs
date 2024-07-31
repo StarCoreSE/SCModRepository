@@ -39,6 +39,7 @@ namespace StarCore.FusionSystems.FusionParts
         public MySync<bool, SyncDirection.BothWays> OverrideEnabled;
         public MySync<float, SyncDirection.BothWays> OverridePowerUsageSync;
 
+        public bool IsShutdown = false;
         public float PowerConsumption;
 
         public MySync<float, SyncDirection.BothWays> PowerUsageSync;
