@@ -9,9 +9,11 @@
 			  <SubtypeId>JN_175Fixed</SubtypeId>
 		  </Id>
 		  <DisplayName>[FLAW] Naval LB-5X</DisplayName>
-		  <Description>
-		  Long Ranged, 1 ammo types.
-		  +Cluster Shot - Kinetic Damage, proximity fused fragmentation warhead. 1600m/s
+		  <Description>[8km range][Kinetic][High Damage]
++Cluster Shot - proximity fused fragmentation warhead. 1600m/s
+
+Attention!
+Requires target lock to fire the proximity fused ammo. Weapon damage drops by 75% when fired with override on and without a target lock. Gun checks a cone around the muzzle and this cannot be disabled. If it detects that it has been buried too deeply the gun stops working.
 		  
 		  </Description>
 		  <Icon>Textures\GUI\Icons\Cubes\LBX5.dds</Icon>
