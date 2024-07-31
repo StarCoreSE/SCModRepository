@@ -14,6 +14,8 @@ namespace Invalid.SCPracticeAI
             {"Bugbear8750AI", "Bugbear8750AI"},
             {"Bullpup8750AI", "Bullpup8750AI"},
             {"GreenFrigate7000AI", "GreenFrigate7000AI"},
+            {"RedDestroyer8000AI", "RedDestroyer8000AI"},
+            {"BlueDestroyer8000AI", "BlueDestroyer8000AI"},
             {"Littler7000AI", "Littler7000AI"},
         };
     }

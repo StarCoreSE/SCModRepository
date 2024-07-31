@@ -624,5 +624,27 @@
 		  <Capacity>1</Capacity>
 		  <AmmoDefinitionId Subtype="105mmHE" />
 	  </AmmoMagazine>
+
+
+
+	  <AmmoMagazine>
+		  <Id>
+			  <TypeId>AmmoMagazine</TypeId>
+			  <SubtypeId>M2BrowningAmmoBox</SubtypeId>
+		  </Id>
+		  <DisplayName>12.7mm Ammo Box</DisplayName>
+		  <Description></Description>
+		  <Icon>Textures\GUI\Icons\ammo\10cmRound_Icon.dds</Icon>
+		  <Size>
+			  <X>1</X>
+			  <Y>1</Y>
+			  <Z>1</Z>
+		  </Size>
+		  <Mass>15</Mass>
+		  <Volume>1</Volume>
+		  <Model>Models\105mmShell_Small.mwm</Model>
+		  <Capacity>100</Capacity>
+		  <AmmoDefinitionId Subtype="M2BrowningAmmoBox" />
+	  </AmmoMagazine>
   </AmmoMagazines>
 </Definitions>

@@ -4,19 +4,25 @@
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>203mmQuad</SubtypeId>
+				<SubtypeId>203mmTriple</SubtypeId>
 			</Id>
 			<DisplayName>[FAS] Des Moines</DisplayName>
 			<Description>
-				Triple barreled 203mm/8 Inch
-				Fires HE, AP
-				Ai range of 5km, shell range of 7km
-				BP: 400
+				[Turret Range: 5000]
+				[Reload: 3 Seconds/Barrel]
+
+				[Ammo Types: HE | AP]
+				[Shell Range: 7km]
+				[Shell Speed: 1000m/s | 1100m/s]
+				[Damage Types: Energy | Kinetic]
+				
+				Triple barreled 203mm/8 Inch used commonly by the Us navy during ww2 and into the cold war period
+				Medium to long range artillery turret, used heavily on heavy cruisers likt eh Des Moines.
 			</Description>
 			<Icon>Textures\GUI\Icons\8Inch55RF.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
-			<Size x="5" y="2" z="5"/>
+			<Size x="3" y="2" z="3"/>
 			<Scale> 2 </Scale>
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\203quad\8Inch55RF.mwm</Model>
@@ -32,8 +38,10 @@
 			</Components>
 			<CriticalComponent Subtype="Motor" Index="0" />
 			<MountPoints>
-				<MountPoint Side="Bottom" StartX="1" StartY="1" EndX="4" EndY="4" />
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
 			</MountPoints>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
 			<BuildTimeSeconds>30</BuildTimeSeconds>
 			<BlockPairName>203mmQuad</BlockPairName>
 		</Definition>

@@ -242,7 +242,7 @@
 	  <Weapon>
 		  <Id>
 			  <TypeId>WeaponDefinition</TypeId>
-			  <SubtypeId>203mmQuad</SubtypeId>
+			  <SubtypeId>203mmTriple</SubtypeId>
 		  </Id>
 		  <MissileAmmoData RateOfFire="400" ShootSoundName="5InchFire" ShotsInBurst="2" />
 		  <ReleaseTimeAfterFire>204</ReleaseTimeAfterFire>
@@ -301,7 +301,7 @@
 		  <ReloadTime>3300</ReloadTime>
 	  </Weapon>
 
-
+	  
 	
     </Weapons>
 </Definitions>

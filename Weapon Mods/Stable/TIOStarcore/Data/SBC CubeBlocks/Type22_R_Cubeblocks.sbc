@@ -57,6 +57,7 @@
 				<Model BuildPercentUpperBound="0.67" File="Models\MK2RailgunMain_BS2.mwm"/>
 				<Model BuildPercentUpperBound="1.00" File="Models\MK2RailgunMain_BS3.mwm"/>
 			</BuildProgressModels>
+						<AiEnabled>false</AiEnabled>
 			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 
             <BuildTimeSeconds>330</BuildTimeSeconds>
 			<DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
@@ -66,7 +67,6 @@
 			<MirroringZ>Y</MirroringZ>
             <MirroringY>Z</MirroringY>
 			<ResourceSinkGroup>Defense</ResourceSinkGroup>
-			<RequiredPowerInput>0.00002</RequiredPowerInput>
             <PCU>800</PCU>
             <IsAirTight>true</IsAirTight>
         </Definition>

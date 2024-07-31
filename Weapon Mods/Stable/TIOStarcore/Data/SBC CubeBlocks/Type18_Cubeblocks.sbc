@@ -14,7 +14,7 @@
 [1560 m/s| 5120 ft/s Shell Velocity]
 [This weapon slowly repairs itself while offline, and when below functional.]
 Pros:
-+ Types feature the highest hit chance of all Battleship cannons; due to having both the highest bullet velocity, highest AI accuracy, largest AOE size, & lowest dispersion stats of all the turrets in its class.
++ Types feature the highest hit chance of all Battleship cannons; due to having both the highest bullet velocity, highest AI accuracy, largest AOE size, and lowest dispersion stats of all the turrets in its class.
 + Types also have the highest integrity of all the turrets.
 Cons:
 - Types have the largest size and mass of all the turrets in Starcore.
@@ -83,9 +83,9 @@ Lore: An extremely advanced artillery piece, housed inside a fully mechanized an
             <MirroringZ>Y</MirroringZ>
             <MirroringY>Z</MirroringY>
 			<ResourceSinkGroup>Defense</ResourceSinkGroup>
-			<RequiredPowerInput>0.00002</RequiredPowerInput>
             <PCU>800</PCU>
             <IsAirTight>true</IsAirTight>
+            <AiEnabled>false</AiEnabled>
         </Definition>
     </CubeBlocks>
 </Definitions>

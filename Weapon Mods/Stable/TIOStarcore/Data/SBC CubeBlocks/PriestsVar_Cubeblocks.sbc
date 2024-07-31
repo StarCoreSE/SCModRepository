@@ -10,7 +10,7 @@
             </Id>
             <DisplayName>[MID] F-3 "Priest" Heavy Machinegun</DisplayName>
             <Description>
-              [2.25km Targeting Range [1750 m/s]]
+              [3.5km Targeting Range [800 m/s]]
               [Kinetic damage]
               [Targets Missiles, deals 175 AMS Damage Per Second]
               This weapon slowly repairs itself while offline, and when below functional.
@@ -59,9 +59,9 @@
             <MirroringZ>Y</MirroringZ>
             <MirroringY>Z</MirroringY>
 			<ResourceSinkGroup>Defense</ResourceSinkGroup>
-			<RequiredPowerInput>0.00002</RequiredPowerInput>
             <PCU>800</PCU>
             <IsAirTight>true</IsAirTight>
+            <AiEnabled>false</AiEnabled>
         </Definition>
 
 
@@ -72,7 +72,7 @@
             </Id>
             <DisplayName>[MID] F-2 "Spartan" Heavy Gatling Machinegun</DisplayName>
             <Description>
-              [2.25km Targeting Range [1750 m/s]]
+              [3.5km Targeting Range [800 m/s]]
               [Kinetic damage]
               [Targets Missiles, deals 175 AMS Damage Per Second]
               This weapon slowly repairs itself while offline, and when below functional.
@@ -115,13 +115,14 @@
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>
             			<WeaponDefinitionId Subtype="ShootMissileGooder" /> 
-
+            <AiEnabled>false</AiEnabled>
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
             <DestroySound>WepSmallWarheadExpl</DestroySound>
+            <MirroringZ>Y</MirroringZ>
             <MirroringY>Z</MirroringY>
 			<ResourceSinkGroup>Defense</ResourceSinkGroup>
-			<RequiredPowerInput>0.00002</RequiredPowerInput>
             <PCU>800</PCU>
+            <IsAirTight>true</IsAirTight>
         </Definition>
     </CubeBlocks>
 </Definitions>

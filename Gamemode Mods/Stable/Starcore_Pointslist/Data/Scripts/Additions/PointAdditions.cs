@@ -330,8 +330,7 @@ namespace ShipPoints
             ["Wheel1x1"] = 35000,
 
             ["K_SA_Gauss_AMSIIC"] = 350,
-            //["SA_HMI_Erebos"] = 300,
-            ["SA_HMI_Erebos"] = 35000,
+            ["SA_HMI_Erebos"] = 300,
 
             ["LargeBlockRadioAntenna"] = 5,
             ["LargeBlockCompactRadioAntenna"] = 5,
@@ -531,7 +530,7 @@ namespace ShipPoints
             ["MacroTurret"] = 300,
             ["MacroLightTurret"] = 150,
             ["MacroHeavyTurret"] = 450,
-            ["GothicTorp"] = 300,
+            ["GothicTorp"] = 250,
             ["AegisFlakTurret"] = 120,
 
 
@@ -659,38 +658,41 @@ namespace ShipPoints
 
 
             ["Cat_Fletcher_Subtypes"] = 23,
-            ["381mmDualR"] = 325,
-            ["381mmDualNR"] = 325,
-            ["380mmMLE1935"] = 400,
+            ["381mmDualR"] = 350,
+            ["381mmDualNR"] = 350,
+            ["380mmMLE1935"] = 350,
             ["15cmSKC28R"] = 175,
             ["15cmSKC28NR"] = 175,
             ["128mmL45"] = 200,
             ["128mmSKC34"] = 250,
-            ["127mmMk12"] = 175,
-            ["127mmMk24"] = 175,
-            ["127mmMk32"] = 250,
+            ["127mmMk12"] = 150,
+            ["127mmMk24"] = 150,
+            ["127mmMk32"] = 150,
             ["127mmMk56"] = 350,
             ["105mmTwin"] = 100,
             ["PomPomMain"] = 75,
             ["150mmCasemate"] = 150,
             ["150mmCasemateTwin"] = 175,
-            ["BoforTwinRemodel"] = 50,
-            ["BoforSingleRemodel"] = 60,
-            ["QuadBofor"] = 75,
+            ["BoforTwinRemodel"] = 40,
+            ["BoforSingleRemodel"] = 20,
+            ["QuadBofor"] = 80,
             ["TorpTestBuidl"] = 350,
-            ["16InchTriple"] = 400,
+            ["16InchTriple"] = 350,
             ["15cmTbtsKC36T"] = 150,
             ["15cmTbtsKC36"] = 150,
-            ["203mmTwin"] = 165,
-            ["203mmQuad"] = 250,
+            ["203mmTwin"] = 200,
+            ["203mmTriple"] = 200,
             ["TorpBarbette"] = 500,
-            ["406alternate"] = 400,
+            ["406alternate"] = 350,
             ["Mk25Rangefinder"] = 10,
             ["6InchTriple"] = 200,
             ["20InchTwin"] = 600,
             ["Barbette1x1"] = 4,
             ["Barbette3x3"] = 36,
             ["Barbette5x5"] = 100,
+			["FAM2BrowningTurret"] = 35,
+			["OerlikonDual"] = 35,
+			["OerlikonMain"] = 35,
 
 
 
@@ -852,7 +854,7 @@ namespace ShipPoints
                     break;
                 case "[40K] Gothic Torpedo Launcher":
                     blockDisplayName = "[40k] Gothic Torpedo Launcher";
-                    costMultiplier = 0.15f;
+                    costMultiplier = 0.1f;
                     break;
                 case "[MID] AX 'Spitfire' Light Rocket Turret":
                     blockDisplayName = "[MID] Spitfire Turret";
