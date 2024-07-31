@@ -4,6 +4,7 @@ using Sandbox.ModAPI;
 using VRage.Game.Components;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
+using VRageMath;
 
 namespace StarCore.FusionSystems.FusionParts.FusionThruster
 {
@@ -45,7 +46,8 @@ namespace StarCore.FusionSystems.FusionParts.FusionThruster
             InfoText.AppendLine($"Efficiency: {Math.Round(efficiencyMultiplier * 100)}%");
 
             // Convert back into power per tick
-            SyncMultipliers.ThrusterOutput(Block, _bufferThrustOutput);
+            if (!IsShutdown)
+                SyncMultipliers.ThrusterOutput(Block, _bufferThrustOutput);
         }
 
         public void SetPowerBoost(bool value)
@@ -89,13 +91,16 @@ namespace StarCore.FusionSystems.FusionParts.FusionThruster
             base.UpdateAfterSimulation();
             var storagePct = MemberSystem?.PowerStored / MemberSystem?.MaxPowerStored ?? 0;
 
+            MyAPIGateway.Utilities.ShowNotification(Block.ThrustMultiplier.ToString(), 1000/60);
+
             if (storagePct <= 0.05f)
             {
-                if (Block.ThrustMultiplier == 0)
+                if (Block.ThrustMultiplier <= 0.01)
                     return;
                 SyncMultipliers.ThrusterOutput(Block, 0);
                 PowerConsumption = 0;
                 LastShutdown = DateTime.Now.Ticks + 4 * TimeSpan.TicksPerSecond;
+                IsShutdown = true;
                 return;
             }
 
@@ -112,6 +117,7 @@ namespace StarCore.FusionSystems.FusionParts.FusionThruster
             {
                 SyncMultipliers.ThrusterOutput(Block, _bufferThrustOutput);
                 PowerConsumption = MaxPowerConsumption * (Block.CurrentThrustPercentage / 100f);
+                IsShutdown = false;
             }
         }
 

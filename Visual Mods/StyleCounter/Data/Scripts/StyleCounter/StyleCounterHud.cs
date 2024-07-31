@@ -110,7 +110,7 @@ namespace StarCore.StyleCounter
             Visible = true;
 
             StyleRank rank = Ranks[0];
-            for (int i = Ranks.Length-1; i >= 0; i--)
+            for (int i = Ranks.Length - 1; i >= 0; i--)
             {
                 if (StylePoints < Ranks[i].MinPoints)
                     continue;
@@ -118,11 +118,11 @@ namespace StarCore.StyleCounter
                 break;
             }
 
-            MyAPIGateway.Utilities.ShowNotification(rank.Name, 1000/60);
-            float percent = (float)(StylePoints - rank.MinPoints)/(rank.MaxPoints - rank.MinPoints);
+            MyAPIGateway.Utilities.ShowNotification(rank.Name, 1000 / 60);
+            float percent = (float)(StylePoints - rank.MinPoints) / (rank.MaxPoints - rank.MinPoints);
 
             _meterBar.Size = new Vector2(368 * percent, 30);
-            _meterBar.Offset = new Vector2(-184 + 368 * percent/2, 58);
+            _meterBar.Offset = new Vector2(-184 + 368 * percent / 2, 58);
 
             StylePoints -= 15 * rank.DecayRate / 60;
         }
