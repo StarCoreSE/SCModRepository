@@ -23,6 +23,14 @@ namespace YourModNamespace
 
         public override void UpdateAfterSimulation()
         {
+            // Check if the player is in spectator mode
+            bool isSpectator = MyAPIGateway.Session.IsCameraUserControlledSpectator;
+
+            // If in spectator mode, don't draw anything
+            if (isSpectator)
+            {
+                return;
+            }
 
             Vector3D? playerPosition = PlayerPosition;
             if (!playerPosition.HasValue)
@@ -49,8 +57,6 @@ namespace YourModNamespace
             DrawBlueBoxes(distanceToOrigin, directionToOrigin, rotationMatrix);
             // DrawRedBoxes(playerPosition.Value, directionToOrigin, rotationMatrix.Value, boxSpacing);
             DrawGreenLine(distanceToOrigin, playerPosition.Value, directionToOrigin);
-
-
         }
 
         private void ShowDistanceNotification(double remainingDistance)
