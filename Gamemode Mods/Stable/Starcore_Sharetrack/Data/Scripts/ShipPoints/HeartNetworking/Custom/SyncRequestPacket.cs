@@ -13,7 +13,7 @@ namespace ShipPoints.HeartNetworking.Custom
             if (!MyAPIGateway.Session.IsServer)
                 return;
 
-            if (PointCheck.I == null)
+            if (AllGridsList.I == null)
                 throw new Exception("Null PointCheck instance!");
             if (TrackingManager.I == null)
                 throw new Exception("Null TrackingManager instance!");

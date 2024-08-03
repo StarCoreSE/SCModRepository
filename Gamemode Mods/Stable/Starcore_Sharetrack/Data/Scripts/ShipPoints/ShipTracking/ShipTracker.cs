@@ -92,11 +92,11 @@ namespace ShipPoints.ShipTracking
                 TrackingManager.I.TrackedGrids.Add(Grid, this);
         }
 
-        private ShieldApi ShieldApi => PointCheck.I.ShieldApi;
+        private ShieldApi ShieldApi => AllGridsList.I.ShieldApi;
 
 
         public IMyCubeGrid Grid { get; private set; }
-        public IMyPlayer Owner => MyAPIGateway.Players.GetPlayerControllingEntity(Grid) ?? PointCheck.GetOwner(OwnerId);
+        public IMyPlayer Owner => MyAPIGateway.Players.GetPlayerControllingEntity(Grid) ?? AllGridsList.GetOwner(OwnerId);
         public long OwnerId => Grid?.BigOwners.Count > 0 ? Grid?.BigOwners[0] ?? -1 : -1;
 
 
@@ -323,15 +323,15 @@ namespace ShipPoints.ShipTracking
                                  30 / Math.Max(maxAngle, angle * angle * angle);
                 _nametag.Origin = new Vector2D(targetHudPos.X,
                     targetHudPos.Y + MathHelper.Clamp(-0.000125 * distance + 0.25, 0.05, 0.25));
-                _nametag.Visible = visible && PointCheck.NametagViewState != NametagSettings.None;
+                _nametag.Visible = visible && AllGridsList.NametagViewState != NametagSettings.None;
 
                 _nametag.Message.Clear();
 
                 var nameTagText = "";
 
-                if ((PointCheck.NametagViewState & NametagSettings.PlayerName) > 0)
+                if ((AllGridsList.NametagViewState & NametagSettings.PlayerName) > 0)
                     nameTagText += OwnerName;
-                if ((PointCheck.NametagViewState & NametagSettings.GridName) > 0)
+                if ((AllGridsList.NametagViewState & NametagSettings.GridName) > 0)
                     nameTagText += "\n" + GridName;
                 if (!IsFunctional)
                     nameTagText += "<color=white>:[Dead]";
@@ -601,7 +601,7 @@ namespace ShipPoints.ShipTracking
             }
         }
 
-        public float DamagePerSecond => Math.Abs(PointCheck.I.WcApi.GetConstructEffectiveDps((MyEntity) Grid));
+        public float DamagePerSecond => Math.Abs(AllGridsList.I.WcApi.GetConstructEffectiveDps((MyEntity) Grid));
 
         #endregion
 

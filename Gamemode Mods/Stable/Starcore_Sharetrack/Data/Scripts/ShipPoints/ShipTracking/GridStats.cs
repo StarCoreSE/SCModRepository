@@ -16,8 +16,8 @@ namespace ShipPoints.ShipTracking
         private readonly HashSet<IMyCubeBlock> _fatBlocks = new HashSet<IMyCubeBlock>();
 
         private readonly HashSet<IMySlimBlock> _slimBlocks;
-        private ShieldApi ShieldApi => PointCheck.I.ShieldApi;
-        private WcApi WcApi => PointCheck.I.WcApi;
+        private ShieldApi ShieldApi => AllGridsList.I.ShieldApi;
+        private WcApi WcApi => AllGridsList.I.WcApi;
 
         public bool NeedsUpdate { get; private set; } = true;
 
@@ -210,11 +210,11 @@ namespace ShipPoints.ShipTracking
                         .Contains("Armor") && !blockDisplayName.StartsWith("Armor Laser")) // This is a bit stupid. TODO find a better way to sort out armor blocks.
                         continue;
 
-                    if (!PointCheck.PointValues.ContainsKey(block.BlockDefinition.SubtypeName))
+                    if (!AllGridsList.PointValues.ContainsKey(block.BlockDefinition.SubtypeName))
                         continue;
 
                     float ignored = 0;
-                    PointCheck.ClimbingCostRename(ref blockDisplayName, ref ignored);
+                    AllGridsList.ClimbingCostRename(ref blockDisplayName, ref ignored);
                     ShipTracker.SpecialBlockRename(ref blockDisplayName, block);
                     if (!SpecialBlockCounts.ContainsKey(blockDisplayName))
                         SpecialBlockCounts.Add(blockDisplayName, 0);
@@ -243,13 +243,13 @@ namespace ShipPoints.ShipTracking
                 // Check that the block has points and is a weapon
                 int weaponPoints;
                 var weaponDisplayName = weaponBlock.DefinitionDisplayNameText;
-                if (!PointCheck.PointValues.TryGetValue(weaponBlock.BlockDefinition.SubtypeName, out weaponPoints) ||
+                if (!AllGridsList.PointValues.TryGetValue(weaponBlock.BlockDefinition.SubtypeName, out weaponPoints) ||
                     !WcApi.HasCoreWeapon((MyEntity)weaponBlock))
                     continue;
 
                 float thisClimbingCostMult = 0;
 
-                PointCheck.ClimbingCostRename(ref weaponDisplayName, ref thisClimbingCostMult);
+                AllGridsList.ClimbingCostRename(ref weaponDisplayName, ref thisClimbingCostMult);
 
                 if (!WeaponCounts.ContainsKey(weaponDisplayName))
                     WeaponCounts.Add(weaponDisplayName, 0);
@@ -262,11 +262,11 @@ namespace ShipPoints.ShipTracking
         {
             int blockPoints;
             var blockDisplayName = block.DefinitionDisplayNameText;
-            if (!PointCheck.PointValues.TryGetValue(block.BlockDefinition.SubtypeName, out blockPoints))
+            if (!AllGridsList.PointValues.TryGetValue(block.BlockDefinition.SubtypeName, out blockPoints))
                 return;
 
             float thisClimbingCostMult = 0;
-            PointCheck.ClimbingCostRename(ref blockDisplayName, ref thisClimbingCostMult);
+            AllGridsList.ClimbingCostRename(ref blockDisplayName, ref thisClimbingCostMult);
 
             if (!BlockCounts.ContainsKey(blockDisplayName))
                 BlockCounts.Add(blockDisplayName, 0);

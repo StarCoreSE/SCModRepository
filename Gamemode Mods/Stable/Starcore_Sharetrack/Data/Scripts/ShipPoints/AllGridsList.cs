@@ -18,10 +18,10 @@ using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
 
 namespace ShipPoints
 {
-    public class PointCheck
+    public class AllGridsList
     {
 
-        public static PointCheck I;
+        public static AllGridsList I;
 
         public static Dictionary<string, int> PointValues = new Dictionary<string, int>();
 
@@ -196,7 +196,7 @@ namespace ShipPoints
         {
             foreach (var shipTracker in TrackingManager.I.TrackedGrids.Values)
             {
-                var fn = shipTracker.FactionName;
+                var fn = shipTracker.FactionName.Length > 6 ? shipTracker.FactionName.Substring(0, 6) : shipTracker.FactionName;
                 var o = shipTracker.OwnerName;
                 var nd = shipTracker.IsFunctional;
 

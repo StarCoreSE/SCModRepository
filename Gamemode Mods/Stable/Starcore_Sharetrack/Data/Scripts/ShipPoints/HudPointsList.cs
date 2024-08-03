@@ -55,7 +55,7 @@ namespace ShipPoints
         {
             var cockpit = MyAPIGateway.Session.ControlledObject?.Entity as IMyCockpit;
             if (cockpit == null || MyAPIGateway.Session.IsCameraUserControlledSpectator)
-                return PointCheck.RaycastGridFromCamera();
+                return AllGridsList.RaycastGridFromCamera();
             return cockpit.CubeGrid?.Physics != null
                 ? // user is in cockpit
                 cockpit.CubeGrid
@@ -333,10 +333,10 @@ namespace ShipPoints
 
         #region APIs
 
-        private WcApi WcApi => PointCheck.I.WcApi;
-        private ShieldApi ShApi => PointCheck.I.ShieldApi;
-        private RtsApi RtsApi => PointCheck.I.RtsApi;
-        private HudAPIv2 TextHudApi => PointCheck.I.TextHudApi;
+        private WcApi WcApi => AllGridsList.I.WcApi;
+        private ShieldApi ShApi => AllGridsList.I.ShieldApi;
+        private RtsApi RtsApi => AllGridsList.I.RtsApi;
+        private HudAPIv2 TextHudApi => AllGridsList.I.TextHudApi;
 
         #endregion
 

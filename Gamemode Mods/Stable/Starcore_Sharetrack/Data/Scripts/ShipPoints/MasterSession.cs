@@ -17,7 +17,7 @@ namespace ShipPoints
 
         public static MasterSession I;
 
-        private readonly PointCheck _pointCheck = new PointCheck();
+        private readonly AllGridsList _allGridsList = new AllGridsList();
         private ApiProvider _apiProvider;
         public int Ticks { get; private set; } = 0;
 
@@ -29,7 +29,7 @@ namespace ShipPoints
             {
                 HeartNetwork.I = new HeartNetwork();
                 HeartNetwork.I.LoadData(42521);
-                _pointCheck.Init();
+                _allGridsList.Init();
                 _apiProvider = new ApiProvider();
             }
             catch (Exception ex)
@@ -43,7 +43,7 @@ namespace ShipPoints
             try
             {
                 _apiProvider.Unload();
-                _pointCheck.Close();
+                _allGridsList.Close();
                 TrackingManager.Close();
                 HeartNetwork.I.UnloadData();
             }
@@ -62,7 +62,7 @@ namespace ShipPoints
                 Ticks++;
                 HeartNetwork.I.Update();
                 TrackingManager.UpdateAfterSimulation();
-                _pointCheck.UpdateAfterSimulation();
+                _allGridsList.UpdateAfterSimulation();
             }
             catch (Exception ex)
             {
@@ -74,7 +74,7 @@ namespace ShipPoints
         {
             try
             {
-                _pointCheck.Draw();
+                _allGridsList.Draw();
             }
             catch (Exception ex)
             {
