@@ -1,12 +1,12 @@
-﻿using Sandbox.ModAPI;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Sandbox.ModAPI;
+using VRage;
 using VRage.Game.ModAPI;
 using VRage.Utils;
-using VRage;
 using VRageMath;
 
-namespace ShipPoints.TrackerApi
+namespace StarCore.ShareTrack.TrackerApi
 {
     // Aristeas? Reuse code? NEVER...
     public class ShareTrackApi

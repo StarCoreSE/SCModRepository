@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DefenseShields;
-using Draygo.API;
 using Sandbox.Game.Entities;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
+using StarCore.ShareTrack.API;
 using VRage.Game;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
@@ -14,7 +13,7 @@ using VRage.ModAPI;
 using VRageMath;
 using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
 
-namespace ShipPoints.ShipTracking
+namespace StarCore.ShareTrack.ShipTracking
 {
     public class ShipTracker
     {

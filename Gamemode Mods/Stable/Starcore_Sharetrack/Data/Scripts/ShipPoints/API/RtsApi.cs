@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Sandbox.ModAPI;
 using VRage.Game.ModAPI;
 
-namespace RelativeTopSpeed
+namespace StarCore.ShareTrack.API
 {
     public class RtsApi
     {

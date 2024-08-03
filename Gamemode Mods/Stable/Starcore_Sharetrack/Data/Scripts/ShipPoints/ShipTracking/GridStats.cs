@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CoreSystems.Api;
-using DefenseShields;
 using Sandbox.Definitions;
 using Sandbox.Game.Entities;
-using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
+using StarCore.ShareTrack.API;
+using StarCore.ShareTrack.API.CoreSystem;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 
-namespace ShipPoints.ShipTracking
+namespace StarCore.ShareTrack.ShipTracking
 {
     internal class GridStats // TODO convert this to be event-driven. OnBlockPlace, etc. Keep a queue.
     {

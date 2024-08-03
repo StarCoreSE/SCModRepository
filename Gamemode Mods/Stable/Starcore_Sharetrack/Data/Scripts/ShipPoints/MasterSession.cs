@@ -1,11 +1,11 @@
 ﻿using System;
-using ShipPoints.HeartNetworking;
-using ShipPoints.ShipTracking;
-using ShipPoints.TrackerApi;
+using StarCore.ShareTrack.HeartNetworking;
+using StarCore.ShareTrack.ShipTracking;
+using StarCore.ShareTrack.TrackerApi;
 using VRage.Game.Components;
 using VRageMath;
 
-namespace ShipPoints
+namespace StarCore.ShareTrack
 {
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     internal class MasterSession : MySessionComponentBase

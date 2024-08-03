@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CoreSystems.Api;
-using DefenseShields;
-using Draygo.API;
-using RelativeTopSpeed;
 using Sandbox.Definitions;
 using Sandbox.ModAPI;
-using ShipPoints.ShipTracking;
+using StarCore.ShareTrack.API;
+using StarCore.ShareTrack.API.CoreSystem;
+using StarCore.ShareTrack.ShipTracking;
 using VRage.Game;
 using VRage.Game.ModAPI;
 using VRageMath;
 using static VRageRender.MyBillboard;
 
-namespace ShipPoints
+namespace StarCore.ShareTrack
 {
     /// <summary>
     ///     Shift-T screen
