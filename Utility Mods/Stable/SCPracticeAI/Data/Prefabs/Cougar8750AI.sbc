@@ -24401,7 +24401,7 @@ Breadstick&gt;Egg</Text>
                   <ComponentData>
                     <TypeId>MyOffensiveCombatCircleOrbit</TypeId>
                     <Component xsi:type="MyObjectBuilder_OffensiveCombatCircleOrbit">
-                      <CircleDistance>723.0233</CircleDistance>
+                      <CircleDistance>1250</CircleDistance>
                       <CircleInPGravity>false</CircleInPGravity>
                       <FacingPriority />
                       <WasActive>true</WasActive>

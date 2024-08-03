@@ -7,9 +7,17 @@
 				<SubtypeId>TorpBarbette</SubtypeId>
 			</Id>
 			<DisplayName>[FAS] Neptune Torpedo</DisplayName>
-			<Description>25 Inch Quintuple Torpedo launcher
-			10km dumb torpedo, launch stage is guided and pdable.
-			500bp	</Description>
+			<Description>
+				[Turret Range: 10000]
+				[Reload: 60 Seconds]
+
+				[Ammo Types: Guided torpedo]
+				[Shell Range: 10km]
+				[Shell Speed: 200m/s]
+				[Damage Types: Energy]
+				Quintuple torpedo launcher rack, that has extremely high alpha but very slow speed.
+				Bearing resemblance to the torpedos used upon the Fletcher class destroyers of the US navy
+			</Description>
 			<Icon>Textures\GUI\Icons\torplauncher.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
@@ -31,6 +39,8 @@
 				<MountPoint Side="Bottom" StartX="1" StartY="1" EndX="2" EndY="2" />
 			</MountPoints>
 			<BlockPairName>TorpBarbette</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
 		</Definition>
 	</CubeBlocks>
 </Definitions>

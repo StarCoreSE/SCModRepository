@@ -55,6 +55,7 @@
             <DestroySound>WepSmallWarheadExpl</DestroySound>
             <PCU>280</PCU>
             <IsAirTight>false</IsAirTight>
+			<AiEnabled>false</AiEnabled>
 			<InventoryFillFactorMin>1</InventoryFillFactorMin>
 		</Definition>
     </CubeBlocks>

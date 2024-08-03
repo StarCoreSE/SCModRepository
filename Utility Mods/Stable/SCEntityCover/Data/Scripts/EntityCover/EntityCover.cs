@@ -42,7 +42,7 @@ namespace klime.EntityCover
             { "EntityCover4BLU", new ModelInfo("REMlikeblocker1kmplate_blue.mwm", new Vector3(500, 500, 50)) },    //don't forget the entitycomponentdescriptor too dumbass
             { "EntityCover4RED", new ModelInfo("REMlikeblocker1kmplate_red.mwm", new Vector3(500, 500, 50)) },    //don't forget the entitycomponentdescriptor too dumbass
             { "EntityCoverSatellite", new ModelInfo("essarray.mwm", new Vector3(200, 55, 110)) },    //don't forget the entitycomponentdescriptor too dumbass
-            { "EntityCoverContainerL", new ModelInfo("ContainerL.mwm", new Vector3(160, 70, 70)) },    //don't forget the entitycomponentdescriptor too dumbass
+            { "EntityCoverContainerL", new ModelInfo("ContainerL.mwm", new Vector3(70, 70, 160)) },    //don't forget the entitycomponentdescriptor too dumbass
             { "EntityCoverEveDerelict", new ModelInfo("EntityCoverEveDerelict.mwm", new Vector3(200, 1250, 200)) },    //don't forget the entitycomponentdescriptor too dumbass
             // Add more entries for additional variants...
         };

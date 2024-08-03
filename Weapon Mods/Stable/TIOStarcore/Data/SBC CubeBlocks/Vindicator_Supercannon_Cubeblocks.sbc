@@ -16,13 +16,13 @@
 				<SubtypeId>VindicatorKineticLance</SubtypeId>
 			</Id>
 			<DisplayName>[FLAW] Vindicator Kinetic Battery</DisplayName>
-            <Description>
+            <Description>RETIRED
 			9KM range, 4000m/s velocity
 			Kinetic Damage
 			Low Tracking Speed
 			Draws 360MW
 			</Description>            
-			<GuiVisible>true</GuiVisible>
+			<GuiVisible>false</GuiVisible>
 			<Public>true</Public>
 			<Icon>Textures\GUI\Icons\KineticBattery.dds</Icon>
 			<CubeSize>Large</CubeSize>
@@ -59,7 +59,6 @@
 			<InventoryMaxVolume>1</InventoryMaxVolume>
             <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
             <DamagedSound>ParticleWeapExpl</DamagedSound>
-            <EmissiveColorPreset>Default</EmissiveColorPreset>
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
             <DestroySound>WepSmallWarheadExpl</DestroySound>
             <PCU>280</PCU>

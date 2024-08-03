@@ -9,13 +9,13 @@
 				<SubtypeId>HadeanPlasmaBlastgun</SubtypeId>
 			</Id>
 			<DisplayName>[FLAW] Hadean Superheavy Plasma Blastguns</DisplayName>
-            <Description>
+            <Description>RETIRED
 			8km range, 1250 m/s velocity
 			Plasma Vaporizes Hull armor with extreme Thermal Energy damage
 			Damage begins falling off past 3km.
 			Draws 550MW
 			</Description>            
-			<GuiVisible>true</GuiVisible>
+			<GuiVisible>false</GuiVisible>
 			<Public>true</Public>
 			<Icon>Textures\GUI\Icons\PlasmaBlastgun.dds</Icon>
 			<CubeSize>Large</CubeSize>
@@ -55,6 +55,7 @@
             <DestroySound>WepSmallWarheadExpl</DestroySound>
             <PCU>280</PCU>
             <IsAirTight>false</IsAirTight>
+			<AiEnabled>false</AiEnabled>
 			<EmissiveColorPreset>Default</EmissiveColorPreset>
 		</Definition>
 

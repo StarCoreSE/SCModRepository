@@ -69,8 +69,8 @@ namespace StarCore.FusionSystems.HudHelpers
             var playerCockpit = MyAPIGateway.Session?.Player?.Controller?.ControlledEntity?.Entity as IMyShipController;
 
             // Pulling the current HudState is SLOOOOWWWW, so we only pull it when tab is just pressed.
-            if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.Tab))
-                _shouldHide = MyAPIGateway.Session?.Config?.HudState != 1;
+            //if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.Tab))
+            //    _shouldHide = MyAPIGateway.Session?.Config?.HudState != 1;
 
             // Hide HUD element if the player isn't in a cockpit
             if (playerCockpit == null || _shouldHide)

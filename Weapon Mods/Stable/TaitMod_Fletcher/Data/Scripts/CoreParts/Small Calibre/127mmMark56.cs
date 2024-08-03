@@ -115,16 +115,16 @@ namespace Scripts {
                 Loading = new LoadingDef
                 {
                     RateOfFire = 900, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
-                    BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
+                    BarrelsPerShot = 2, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
-                    ReloadTime = 900, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    MagsToLoad = 64, // Number of physical magazines to consume on reload.
+                    ReloadTime = 90, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    MagsToLoad = 2, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    HeatPerShot = 1, // Heat generated per shot.
-                    MaxHeat = 20000, // Max heat before weapon enters cooldown (70% of max heat).
-                    Cooldown = .15f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
-                    HeatSinkRate = 1000, // Amount of heat lost per second.
+                    HeatPerShot = 2, // Heat generated per shot.
+                    MaxHeat = 100, // Max heat before weapon enters cooldown (70% of max heat).
+                    Cooldown = .1f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
+                    HeatSinkRate = 1, // Amount of heat lost per second.
                     DegradeRof = false, // Progressively lower rate of fire when over 80% heat threshold (80% of max heat).
                     ShotsInBurst = 2, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
                     DelayAfterBurst = 20, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).

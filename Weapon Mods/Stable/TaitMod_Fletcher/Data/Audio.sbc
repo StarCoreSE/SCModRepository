@@ -340,7 +340,7 @@
       </Id>
       <Category>WEP_SHIP</Category>
       <MaxDistance>3000</MaxDistance>
-      <Volume>1</Volume>
+      <Volume>2</Volume>
 	  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>5</DynamicMusicAmount>
 	  <SoundLimit>5</SoundLimit>
@@ -783,7 +783,7 @@
 		  </Id>
 		  <Category>WEP_SHIP</Category>
 		  <MaxDistance>5000</MaxDistance>
-		  <Volume>1</Volume>
+		  <Volume>0.5</Volume>
 
 		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 		  <DynamicMusicAmount>5</DynamicMusicAmount>
@@ -809,7 +809,7 @@
 		  </Id>
 		  <Category>WEP_SHIP</Category>
 		  <MaxDistance>6000</MaxDistance>
-		  <Volume>1</Volume>
+		  <Volume>0.5</Volume>
 		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 		  <DynamicMusicAmount>5</DynamicMusicAmount>
 		  <Loopable>false</Loopable>
@@ -837,7 +837,7 @@
 		  </Id>
 		  <Category>WEP_SHIP</Category>
 		  <MaxDistance>3000</MaxDistance>
-		  <Volume>0.2</Volume>
+		  <Volume>0.1</Volume>
 		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 		  <DynamicMusicAmount>5</DynamicMusicAmount>
 		  <PreventSynchronization> 0 </PreventSynchronization>
@@ -867,7 +867,7 @@
 		  </Id>
 		  <Category>WEP_SHIP</Category>
 		  <MaxDistance>4000</MaxDistance>
-		  <Volume>0.3</Volume>
+		  <Volume>0.15</Volume>
 		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
 		  <DynamicMusicAmount>5</DynamicMusicAmount>
 		  <PreventSynchronization> 0 </PreventSynchronization>
@@ -889,6 +889,73 @@
 		  </Waves>
 	  </Sound>
 	  
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>M2OneShot</SubtypeId>
+		  </Id>
+		  <Category>WEP_SHIP</Category>
+		  <MaxDistance>175</MaxDistance>
+		  <DistantSounds>
+			  <DistantSound DistanceCrossfade="25" Distance="300" Sound="AAGenericDistantShot" />
+		  </DistantSounds>
+
+
+		  <Volume>0.2</Volume>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>5</DynamicMusicAmount>
+		  <Loopable>false</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\M2Shot1.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\M2Shot2.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\M2Shot3.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\M2Shot4.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+
 	  
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>TorpHit</SubtypeId>
+		  </Id>
+		  <Category>WEP_SHIP</Category>
+		  <MaxDistance>3000</MaxDistance>
+		  <SoundLimit>5</SoundLimit>
+		  <Volume>20</Volume>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <Loopable>false</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\GetLanded.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>TorpInbound</SubtypeId>
+		  </Id>
+		  <Category>WEP_SHIP</Category>
+		  <MaxDistance>500</MaxDistance>
+		  <SoundLimit>3</SoundLimit>
+		  <Volume>3</Volume>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <Loopable>true</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Loop>Audio\incoming.wav</Loop>
+			  </Wave>
+		  </Waves>
+	  </Sound>
   </Sounds>
 </Definitions>

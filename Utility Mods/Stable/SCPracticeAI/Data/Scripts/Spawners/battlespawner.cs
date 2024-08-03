@@ -10,62 +10,15 @@ using VRage.Utils;
 using VRageMath;
 using ProtoBuf;
 
-namespace Invalid.spawnbattle
+namespace Invalid.SCPracticeAI
 {
-    [ProtoInclude(1000, typeof(PrefabSpawnPacket))]
-    [ProtoContract]
-    public class Packet
-    {
-        public Packet()
-        {
-
-        }
-    }
-
-    [ProtoContract]
-    public class PrefabSpawnPacket : Packet
-    {
-        [ProtoMember(1)]
-        public string PrefabName;
-
-        [ProtoMember(2)]
-        public int PrefabAmount;
-
-        [ProtoMember(3)]  // New member for faction name
-        public string FactionName;
-
-        // Add a parameterless constructor required by ProtoBuf
-        public PrefabSpawnPacket()
-        {
-
-        }
-
-        public PrefabSpawnPacket(string prefabName, int prefabAmount, string factionName)
-        {
-            PrefabName = prefabName;
-            PrefabAmount = prefabAmount;
-            FactionName = factionName; // Set the faction name
-        }
-    }
-
 
 
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     public class spawnbattleComponent : MySessionComponentBase
     {
-        private Dictionary<string, string> prefabMap = new Dictionary<string, string>
-        {
-            { "Cougar8750AI", "Cougar8750AI" },
-            { "Gales8750AI", "Gales8750AI" },
-            { "Star9400AI", "Star9400AI" },
-
-            // Add more prefab mappings here.
-        };
-
         private int defaultSpawnCount = 1; // Default number of prefabs to spawn
-
         private ushort netID = 29396;
-
         private double minSpawnRadiusFromCenter = 1000; // Minimum spawn distance from the center in meters
         private double minSpawnRadiusFromGrids = 1000;  // Minimum spawn distance from other grids in meters
         private IMyFaction RedFaction = null;
@@ -90,19 +43,18 @@ namespace Invalid.spawnbattle
             PrefabSpawnPacket prefabPacket = packet as PrefabSpawnPacket;
             if (prefabPacket == null) return;
 
-            if (prefabMap.ContainsKey(prefabPacket.PrefabName))
+            if (PrefabMaster.PrefabMap.ContainsKey(prefabPacket.PrefabName))
             {
                 // Randomly choose the faction
                 string factionName = MyUtils.GetRandomInt(0, 2) == 0 ? "RED" : "BLU";
 
-                SpawnRandomPrefabs(new List<string>(prefabMap.Keys), prefabPacket.PrefabAmount, factionName);
+                SpawnRandomPrefabs(new List<string>(PrefabMaster.PrefabMap.Keys), prefabPacket.PrefabAmount, factionName);
             }
             else
             {
                 MyVisualScriptLogicProvider.SendChatMessage($"Prefab {prefabPacket.PrefabName} not found", "spawnbattle");
             }
         }
-
 
         private void OnMessageEntered(string messageText, ref bool sendToOthers)
         {
@@ -124,8 +76,8 @@ namespace Invalid.spawnbattle
                         // Randomly choose the starting faction
                         string factionName = MyUtils.GetRandomInt(0, 2) == 0 ? "RED" : "BLU";
 
-                        // Select a random prefab from the prefabMap
-                        List<string> prefabNames = new List<string>(prefabMap.Keys);
+                        // Select a random prefab from the PrefabMap
+                        List<string> prefabNames = new List<string>(PrefabMaster.PrefabMap.Keys);
 
                         // Spawn prefabs alternately using the selected faction
                         for (int i = 0; i < spawnCount; i++)
@@ -160,16 +112,15 @@ namespace Invalid.spawnbattle
             sendToOthers = false;
         }
 
-
         private void ShowPrefabList()
         {
             string prefabListMessage = "Available prefabs:";
-            foreach (string prefabName in prefabMap.Keys)
+            foreach (string prefabName in PrefabMaster.PrefabMap.Keys)
             {
                 prefabListMessage += "\n" + prefabName;
             }
 
-            if (prefabMap.Count > 0)
+            if (PrefabMaster.PrefabMap.Count > 0)
             {
                 prefabListMessage += "\n\nTo start a battle, type '/spawnbattle [amount]' (e.g., /spawnbattle  10. Default 10.";
             }
@@ -180,7 +131,6 @@ namespace Invalid.spawnbattle
 
             MyAPIGateway.Utilities.ShowMessage("spawnbattle", prefabListMessage);
         }
-
 
         private void SpawnRandomPrefabs(List<string> prefabNames, int spawnCount, string startingFactionName)
         {
