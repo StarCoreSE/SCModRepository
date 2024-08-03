@@ -35,7 +35,8 @@ namespace StarCore.RepairModule
     public class RepairModule : MyGameLogicComponent, IMyEventProxy
     {
         public IMyCollector Block;
-        private bool IsServer = MyAPIGateway.Session.IsServer;      
+        private bool IsServer = MyAPIGateway.Session.IsServer;
+        private bool ClientSettingsLoaded = false;
 
         // Block Settings
         public bool IgnoreArmor
@@ -172,19 +173,7 @@ namespace StarCore.RepairModule
 
             OnIgnoreArmorChanged += IgnoreArmor_Update;
             OnPriorityOnlyChanged += PriorityOnly_Update;
-            OnSubsystemPriorityChanged += SubsystemPriority_Update;
-
-            if (!IsServer)
-            {
-                if (!LoadSettings())
-                {
-                    IgnoreArmor = true;
-                    PriorityOnly = false;
-                    SubsystemPriority = 0;
-
-                    SaveSettings();
-                }
-            }           
+            OnSubsystemPriorityChanged += SubsystemPriority_Update;          
 
             Block.AppendingCustomInfo += AppendCustomInfo;
 
@@ -209,6 +198,7 @@ namespace StarCore.RepairModule
 
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
             NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
+            NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME;
         }
 
         public override void UpdateAfterSimulation()
@@ -302,6 +292,23 @@ namespace StarCore.RepairModule
                     SortCounter = SortInterval;
                     NeedsSorting = false;
                 }
+            }
+        }
+
+        public override void UpdateAfterSimulation100()
+        {
+            base.UpdateAfterSimulation100();
+
+            if (!ClientSettingsLoaded && !IsServer)
+            {
+                if (!LoadSettings())
+                {
+                    IgnoreArmor = true;
+                    PriorityOnly = false;
+                    SubsystemPriority = 0;
+                }
+
+                ClientSettingsLoaded = true;
             }
         }
 
