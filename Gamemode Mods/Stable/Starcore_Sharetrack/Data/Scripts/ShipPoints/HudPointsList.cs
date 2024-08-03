@@ -107,7 +107,7 @@ namespace ShipPoints
                 return;
             var stopwatch = new System.Diagnostics.Stopwatch();
             stopwatch.Start();
-            if (_shipTracker == null && !TrackingManager.I.TrackedGrids.TryGetValue(focusedGrid, out _shipTracker))
+            if (_shipTracker?.Grid?.GetGridGroup(GridLinkTypeEnum.Physical) != focusedGrid.GetGridGroup(GridLinkTypeEnum.Physical) && !TrackingManager.I.TrackedGrids.TryGetValue(focusedGrid, out _shipTracker))
             {
                 _shipTracker = new ShipTracker(focusedGrid, false);
                 Log.Info($"ShiftTCalcs Tracked grid {focusedGrid.DisplayName}. Visible: false");
