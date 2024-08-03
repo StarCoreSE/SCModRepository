@@ -69,6 +69,19 @@ namespace SC.SUGMA.Utilities
                 HeartNetwork.I.SendToServer(new ProblemReportPacket(false));
         }
 
+        public static void ShieldCharge()
+        {
+            foreach (var g in MyEntities.GetEntities())
+                if (g != null && !g.MarkedForClose && g is MyCubeGrid)
+                {
+                    var grid = g as MyCubeGrid;
+                    var block = SUGMA_SessionComponent.I.ShieldApi.GetShieldBlock(grid);
+                    if (block != null) SUGMA_SessionComponent.I.ShieldApi.SetCharge(block, 99999999999);
+                }
+
+            MyAPIGateway.Utilities.ShowMessage("Shields", "Charged");
+        }
+
         public static Vector3D RandVector()
         {
             var theta = Random.NextDouble() * 2.0 * Math.PI;

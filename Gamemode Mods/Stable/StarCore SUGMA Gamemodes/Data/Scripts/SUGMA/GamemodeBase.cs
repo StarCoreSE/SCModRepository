@@ -58,6 +58,7 @@ namespace SC.SUGMA
             IsStarted = false;
             SUGMA_SessionComponent.I.StopGamemode();
             SUtils.SetWorldPermissionsForMatch(false);
+            SUtils.ShieldCharge();
         }
 
         internal virtual void DisplayStartMessage()
