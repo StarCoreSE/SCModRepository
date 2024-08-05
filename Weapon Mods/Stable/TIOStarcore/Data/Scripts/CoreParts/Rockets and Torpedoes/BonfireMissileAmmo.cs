@@ -380,9 +380,9 @@ namespace Scripts
                     Tracer = new TracerBaseDef
                     {
                         Enable = true,
-                        Length = 15f, //
-                        Width = 0.3f, //
-                        Color = Color(red: 6, green: 4, blue: 2f, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Length = 25f, //
+                        Width = 0.4f, //
+                        Color = Color(red: 42f, green: 24f, blue: 15f, alpha: 0.5f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
@@ -531,7 +531,7 @@ namespace Scripts
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
-                HealthHitModifier = 2, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
+                HealthHitModifier = 0.5f, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = 1, // Voxel damage multiplier; defaults to 1 if zero or less.
                 Characters = -1f, // Character damage multiplier; defaults to 1 if zero or less.
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
@@ -556,7 +556,7 @@ namespace Scripts
                 {
                     Modifier = 2f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
-                    BypassModifier = -1.35f, // If greater than zero, the percentage of damage that will penetrate the shield.
+                    BypassModifier = -1.5f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {
@@ -619,7 +619,7 @@ namespace Scripts
                     MinArmingTime = 6, //stops double hits when close ranged. In ticks, before the Ammo is allowed to explode, detonate or similar; This affects shrapnel spawning.
                     NoVisuals = false,
                     NoSound = false,
-                    ParticleScale = 1f,
+                    ParticleScale = 1.25f,
                     CustomParticle = "My_Simple_Rocket_Explosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "NewAssaultHit", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
@@ -744,7 +744,7 @@ namespace Scripts
                 ShieldHitDraw = true,
                 Decals = new DecalDef
                 {
-                    MaxAge = 3600,
+                    MaxAge = 900,
                     Map = new[]
                     {
                         new TextureMapDef
@@ -762,7 +762,7 @@ namespace Scripts
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
-                            Scale = 1f,
+                            Scale = 1.25f,
                         },
                     },
                     Hit = new ParticleDef
@@ -790,14 +790,14 @@ namespace Scripts
                 },
                 Lines = new LineDef
                 {
-                    ColorVariance = Random(start: 0.8f, end: 1.2f), // multiply the color by random values within range.
+                    ColorVariance = Random(start: 1f, end: 1.5f), // multiply the color by random values within range.
                     WidthVariance = Random(start: 0f, end: 0f), // adds random value to default width (negatives shrinks width)
                     Tracer = new TracerBaseDef
                     {
                         Enable = true,
-                        Length = 15f, //
-                        Width = 0.3f, //
-                        Color = Color(red: 6, green: 4, blue: 2f, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Length = 22f, //
+                        Width = 0.5f, //
+                        Color = Color(red: 30f, green: 18f, blue: 12f, alpha: 1f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
@@ -823,7 +823,7 @@ namespace Scripts
                     },
                     Trail = new TrailDef
                     {
-                        Enable = true,
+                        Enable = false,
                         Textures = new[] {
                             "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
