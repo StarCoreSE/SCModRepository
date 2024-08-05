@@ -11,6 +11,7 @@ namespace SC.SUGMA.HeartNetworking
     [ProtoInclude(94, typeof(SyncRequestPacket))]
     [ProtoInclude(95, typeof(ShieldFillRequestPacket))]
     [ProtoInclude(96, typeof(ProblemReportPacket))]
+    [ProtoInclude(97, typeof(MissingPlayerOverridePacket))]
     public abstract class PacketBase
     {
         public static readonly Type[] PacketTypes =
@@ -21,7 +22,8 @@ namespace SC.SUGMA.HeartNetworking
             typeof(PointsPacket),
             typeof(SyncRequestPacket),
             typeof(ShieldFillRequestPacket),
-            typeof(ProblemReportPacket)
+            typeof(ProblemReportPacket),
+            typeof(MissingPlayerOverridePacket),
         };
 
         /// <summary>

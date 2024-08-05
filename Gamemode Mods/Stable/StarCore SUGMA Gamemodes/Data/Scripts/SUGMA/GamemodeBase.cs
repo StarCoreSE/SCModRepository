@@ -3,6 +3,7 @@ using System.CodeDom;
 using System.Text;
 using Sandbox.Game.World;
 using Sandbox.ModAPI;
+using SC.SUGMA.GameState;
 using SC.SUGMA.Utilities;
 using VRage.Game.ModAPI;
 
@@ -40,6 +41,8 @@ namespace SC.SUGMA
 
             SUtils.SetWorldPermissionsForMatch(!ScrimMode);
 
+            DisconnectHandler.I.Activate();
+
             DisplayStartMessage();
             IsStarted = true;
         }
@@ -59,6 +62,7 @@ namespace SC.SUGMA
             SUGMA_SessionComponent.I.StopGamemode();
             SUtils.SetWorldPermissionsForMatch(false);
             SUtils.ShieldCharge();
+            DisconnectHandler.I.Deactivate();
         }
 
         internal virtual void DisplayStartMessage()
