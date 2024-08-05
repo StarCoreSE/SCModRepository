@@ -37,9 +37,9 @@
                       <Key>
                         <Time>0</Time>
                         <ValueVector4>
-                          <X>10</X>
+                          <X>5</X>
                           <Y>5</Y>
-                          <Z>0</Z>
+                          <Z>10</Z>
                           <W>1</W>
                         </ValueVector4>
                         <Value2D />
@@ -47,9 +47,9 @@
                       <Key>
                         <Time>0.333333343</Time>
                         <ValueVector4>
-                          <X>10</X>
+                          <X>5</X>
                           <Y>5</Y>
-                          <Z>0</Z>
+                          <Z>10</Z>
                           <W>1</W>
                         </ValueVector4>
                         <Value2D />
@@ -57,9 +57,9 @@
                       <Key>
                         <Time>0.6666667</Time>
                         <ValueVector4>
-                          <X>10</X>
+                          <X>5</X>
                           <Y>5</Y>
-                          <Z>0</Z>
+                          <Z>10</Z>
                           <W>1</W>
                         </ValueVector4>
                         <Value2D />
@@ -67,9 +67,9 @@
                       <Key>
                         <Time>1</Time>
                         <ValueVector4>
-                          <X>10</X>
+                          <X>5</X>
                           <Y>5</Y>
-                          <Z>0</Z>
+                          <Z>10</Z>
                           <W>1</W>
                         </ValueVector4>
                         <Value2D />
@@ -269,7 +269,7 @@
               <Keys />
             </Property>
             <Property AnimationType="Const" Name="Material" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_D_01</ValueString>
             </Property>
             <Property AnimationType="Const" Name="OIT weight factor" Type="Float">
               <ValueFloat>1</ValueFloat>
@@ -712,7 +712,7 @@
               <Keys />
             </Property>
             <Property AnimationType="Const" Name="Material" Type="MyTransparentMaterial">
-              <ValueString>Atlas_AryxAWEBlue_01</ValueString>
+              <ValueString>Atlas_D_01</ValueString>
             </Property>
             <Property AnimationType="Const" Name="OIT weight factor" Type="Float">
               <ValueFloat>1</ValueFloat>

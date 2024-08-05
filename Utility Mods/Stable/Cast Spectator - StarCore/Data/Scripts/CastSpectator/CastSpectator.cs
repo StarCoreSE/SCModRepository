@@ -89,6 +89,12 @@ namespace KlimeDraygoMath.CastSpectator
         public bool m_SmoothCamera = false;
         public bool m_GlobalSmoothing = false;
 
+        private bool m_PeriodicSwitchEnabled = false;
+        private float m_PeriodicSwitchInterval = 5f; // Default 5 seconds
+        private DateTime m_LastSwitchTime;
+        private bool m_PeriodicSwitchRandom = false;
+        private int m_CurrentTargetIndex = 0;
+
 
         public StringBuilder statusSB = new StringBuilder();
 
@@ -293,6 +299,21 @@ namespace KlimeDraygoMath.CastSpectator
                         // Show notification when a preset is saved
                         string entityName = ObsCameraState.lockEntity?.DisplayName ?? "Unknown";
                         MyAPIGateway.Utilities.ShowNotification($"Preset {SavedTargets.IndexOf(saved) + 1} saved to {entityName}", 2000, MyFontEnum.White);
+                    }
+                }
+
+                if (m_Pref.PeriodicSwitch.IsKeybindPressed())
+                {
+                    TogglePeriodicSwitch();
+                }
+
+                if (m_PeriodicSwitchEnabled)
+                {
+                    TimeSpan timeSinceLastSwitch = DateTime.Now - m_LastSwitchTime;
+                    if (timeSinceLastSwitch.TotalSeconds >= m_PeriodicSwitchInterval)
+                    {
+                        SwitchToNextTarget();
+                        m_LastSwitchTime = DateTime.Now;
                     }
                 }
 
@@ -824,6 +845,10 @@ namespace KlimeDraygoMath.CastSpectator
         HudAPIv2.MenuItem CameraSmoothOnOff, HideHudOnOff;
         HudAPIv2.MenuItem Reset;
 
+        HudAPIv2.MenuKeybindInput PeriodicSwitchInput;
+        HudAPIv2.MenuSliderInput PeriodicSwitchIntervalSlider;
+        HudAPIv2.MenuItem PeriodicSwitchRandomToggle;
+
         private void onRegistered()
         {
             if (CameraMessage != null)
@@ -846,6 +871,10 @@ namespace KlimeDraygoMath.CastSpectator
             FindAndMoveInput = new HudAPIv2.MenuKeybindInput("Find and Move - " + m_Pref.FindAndMove.ToString(), KeybindCat, "Press any Key [Find and Move]", SetFindAndMoveKeybind);
             FindAndMoveSpinInput = new HudAPIv2.MenuKeybindInput("Find and Move Spin - " + m_Pref.FindAndMoveSpin.ToString(), KeybindCat, "Press any Key [Find and Move Spin]", SetFindAndMoveSpinKeybind);
             CameraSmoothKeybind = new HudAPIv2.MenuKeybindInput("Toggle Smooth Camera - " + m_Pref.ToggleSmoothCamera.ToString(), KeybindCat, "Press any Key [Smooth Camera]", SetSmoothCameraInputKeybind);
+
+            PeriodicSwitchInput = new HudAPIv2.MenuKeybindInput("Periodic Switch - " + m_Pref.PeriodicSwitch.ToString(), KeybindCat, "Press any Key [Periodic Switch]", SetPeriodicSwitchKeybind);
+            PeriodicSwitchIntervalSlider = new HudAPIv2.MenuSliderInput("Switch Interval: " + m_PeriodicSwitchInterval + "s", SpectatorCameraRootCat, m_PeriodicSwitchInterval / 30f, "Adjust interval (1-30 seconds)", SetPeriodicSwitchInterval, SliderToInterval);
+            PeriodicSwitchRandomToggle = new HudAPIv2.MenuItem(m_PeriodicSwitchRandom ? "Random Switch: On" : "Random Switch: Off", SpectatorCameraRootCat, TogglePeriodicSwitchRandom);
 
             // Remove Cycle Player Up and Cycle Player Down inputs from the menu
             // CyclePlayerUp = new HudAPIv2.MenuKeybindInput("Cycle Player Up - " + m_Pref.CyclePlayerUp.ToString(), KeybindCat, "Press any Key [Cycle Player Up]", SetCyclePlayerUp);
@@ -891,6 +920,11 @@ namespace KlimeDraygoMath.CastSpectator
             // Remove updates for Cycle Player Up and Cycle Player Down
             // CyclePlayerUp.Text = "Cycle Player Up - " + m_Pref.CyclePlayerUp.ToString();
             // CyclePlayerDown.Text = "Cycle Player Down - " + m_Pref.CyclePlayerDown.ToString();
+
+            PeriodicSwitchInput.Text = "Periodic Switch - " + m_Pref.PeriodicSwitch.ToString();
+            PeriodicSwitchIntervalSlider.Text = "Switch Interval: " + m_PeriodicSwitchInterval + "s";
+            PeriodicSwitchIntervalSlider.InitialPercent = m_PeriodicSwitchInterval / 30f;
+            PeriodicSwitchRandomToggle.Text = m_PeriodicSwitchRandom ? "Random Switch: On" : "Random Switch: Off";
 
             HideHudOnOff.Text = m_Pref.HideHud ? "Hud Hidden" : "HUD Always Visible";
         }
@@ -982,6 +1016,31 @@ namespace KlimeDraygoMath.CastSpectator
             UpdateMenu();
         }
 
+        private void SetPeriodicSwitchKeybind(MyKeys arg1, bool arg2, bool arg3, bool arg4)
+        {
+            var newKeybind = new Keybind(arg1, arg2, arg3, arg4);
+            m_Pref.PeriodicSwitch = newKeybind;
+            UpdateMenu();
+        }
+
+        private void SetPeriodicSwitchInterval(float value)
+        {
+            m_PeriodicSwitchInterval = Math.Max(1f, Math.Min(30f, value * 30f));
+            MyAPIGateway.Utilities.ShowNotification($"Switch interval set to {m_PeriodicSwitchInterval}s", 2000);
+            UpdateMenu();
+        }
+
+        private object SliderToInterval(float value)
+        {
+            return Math.Round(value * 30f, 1) + "s";
+        }
+
+        private void TogglePeriodicSwitchRandom()
+        {
+            m_PeriodicSwitchRandom = !m_PeriodicSwitchRandom;
+            UpdateMenu();
+        }
+
         private void SetCyclePlayerUp(MyKeys arg1, bool arg2, bool arg3, bool arg4)
         {
             var newKeybind = new Keybind(arg1, arg2, arg3, arg4);
@@ -1002,6 +1061,66 @@ namespace KlimeDraygoMath.CastSpectator
             m_Pref = new SpecCamPreferences();
             SpecCamTarget.LoadKeybinds(SavedTargets, m_Pref.SaveTarget);
             UpdateMenu();
+        }
+
+        private void TogglePeriodicSwitch()
+        {
+            m_PeriodicSwitchEnabled = !m_PeriodicSwitchEnabled;
+            if (m_PeriodicSwitchEnabled)
+            {
+                m_LastSwitchTime = DateTime.Now;
+                MyAPIGateway.Utilities.ShowNotification($"Periodic switching enabled (Interval: {m_PeriodicSwitchInterval}s)", 2000);
+            }
+            else
+            {
+                MyAPIGateway.Utilities.ShowNotification("Periodic switching disabled", 2000);
+            }
+        }
+
+        private void SwitchToNextTarget()
+        {
+            // Count the number of valid (set) presets
+            int validPresetsCount = SavedTargets.Count(target => target.HasState);
+
+            if (validPresetsCount == 0)
+            {
+                MyAPIGateway.Utilities.ShowNotification("No saved presets to switch between", 2000);
+                m_PeriodicSwitchEnabled = false;
+                return;
+            }
+
+            if (m_PeriodicSwitchRandom)
+            {
+                // Switch to a random preset (excluding the current one)
+                int currentRandomIndex = SavedTargets.IndexOf(SavedTargets.FirstOrDefault(target => target.HasState && target.State.Equals(ObsCameraState)));
+                int randomIndex;
+                do
+                {
+                    randomIndex = new Random().Next(SavedTargets.Count);
+                } while (!SavedTargets[randomIndex].HasState || randomIndex == currentRandomIndex);
+
+                ObsCameraState = SavedTargets[randomIndex].State;
+                MyAPIGateway.Utilities.ShowNotification($"Switched to preset {randomIndex + 1}", 1000);
+            }
+            else
+            {
+                // Find the next valid preset in sequential order
+                int startIndex = m_CurrentTargetIndex;
+                do
+                {
+                    m_CurrentTargetIndex = (m_CurrentTargetIndex + 1) % SavedTargets.Count;
+                    if (SavedTargets[m_CurrentTargetIndex].HasState)
+                    {
+                        ObsCameraState = SavedTargets[m_CurrentTargetIndex].State;
+                        MyAPIGateway.Utilities.ShowNotification($"Switched to preset {m_CurrentTargetIndex + 1}", 1000);
+                        return;
+                    }
+                } while (m_CurrentTargetIndex != startIndex);
+
+                // This should never happen due to the validPresetsCount check, but just in case
+                MyAPIGateway.Utilities.ShowNotification("No valid presets found", 2000);
+                m_PeriodicSwitchEnabled = false;
+            }
         }
 
         private Vector3D WorldToLocal(Vector3D position, MatrixD worldMatrixNormalizedInv)

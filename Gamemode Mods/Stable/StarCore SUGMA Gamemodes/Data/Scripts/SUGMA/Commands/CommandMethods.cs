@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using SC.SUGMA.GameState;
 using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
 using SC.SUGMA.Utilities;
@@ -126,6 +127,13 @@ namespace SC.SUGMA.Commands
             SUtils.ResolvedProblem();
         }
 
+        public static void ResolveMissingPlayers(string[] args)
+        {
+            if (MyAPIGateway.Session.IsServer)
+                DisconnectHandler.I.ResolveProblem();
+            else
+                HeartNetwork.I.SendToServer(new MissingPlayerOverridePacket());
+        }
         #endregion
     }
 }

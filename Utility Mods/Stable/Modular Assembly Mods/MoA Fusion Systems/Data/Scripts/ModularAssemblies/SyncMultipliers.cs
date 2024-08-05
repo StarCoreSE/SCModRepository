@@ -139,7 +139,8 @@ namespace StarCore.FusionSystems
                 }
             }
 
-            thrust.ThrustMultiplier = output / (thrust.MaxThrust / thrust.ThrustMultiplier);
+            float val = output / (thrust.MaxThrust / thrust.ThrustMultiplier);
+            thrust.ThrustMultiplier = val < 0.01f ? 0.01f : val;
         }
 
         [ProtoContract]

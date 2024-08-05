@@ -1,6 +1,7 @@
 ﻿using ProtoBuf;
 using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
+using SC.SUGMA.Utilities;
 
 namespace SC.SUGMA.HeartNetworking.Custom
 {
@@ -9,15 +10,7 @@ namespace SC.SUGMA.HeartNetworking.Custom
     {
         public override void Received(ulong SenderSteamId)
         {
-            foreach (var g in MyEntities.GetEntities())
-                if (g != null && !g.MarkedForClose && g is MyCubeGrid)
-                {
-                    var grid = g as MyCubeGrid;
-                    var block = SUGMA_SessionComponent.I.ShieldApi.GetShieldBlock(grid);
-                    if (block != null) SUGMA_SessionComponent.I.ShieldApi.SetCharge(block, 99999999999);
-                }
-
-            MyAPIGateway.Utilities.ShowMessage("Shields", "Charged");
+            SUtils.ShieldCharge();
             if (MyAPIGateway.Session.IsServer)
                 HeartNetwork.I.SendToEveryone(this);
         }

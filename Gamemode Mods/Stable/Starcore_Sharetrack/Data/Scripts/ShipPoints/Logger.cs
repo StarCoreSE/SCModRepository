@@ -9,7 +9,7 @@ using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.Utils;
 
-namespace ShipPoints
+namespace StarCore.ShareTrack
 {
     /// <summary>
     ///     <para>Standalone logger, does not require any setup.</para>
@@ -102,11 +102,11 @@ namespace ShipPoints
 
                 if (_preInitMessages != null)
                 {
-                    var Error = $"{_modName} Error: there are log messages before the mod initialized!";
+                    var warning = $"{_modName} WARNING: there are log messages before the mod initialized!";
 
                     Info("--- pre-init messages ---");
 
-                    foreach (var msg in _preInitMessages) Info(msg, Error);
+                    foreach (var msg in _preInitMessages) Info(msg, warning);
 
                     Info("--- end pre-init messages ---");
 

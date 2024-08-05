@@ -1,8 +1,8 @@
 ﻿using System;
 using ProtoBuf;
-using ShipPoints.HeartNetworking.Custom;
+using StarCore.ShareTrack.HeartNetworking.Custom;
 
-namespace ShipPoints.HeartNetworking
+namespace StarCore.ShareTrack.HeartNetworking
 {
     [ProtoInclude(91, typeof(TrackingSyncPacket))]
     [ProtoInclude(92, typeof(SyncRequestPacket))]
