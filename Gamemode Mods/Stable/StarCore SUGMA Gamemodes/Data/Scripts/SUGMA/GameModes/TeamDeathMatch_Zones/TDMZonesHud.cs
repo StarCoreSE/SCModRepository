@@ -38,7 +38,8 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
 
         public override void UpdateTick()
         {
-            _window.Update();
+            if (SUGMA_SessionComponent.I.CurrentGamemode != null)
+                _window.Update();
         }
     }
 

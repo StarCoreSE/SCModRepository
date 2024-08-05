@@ -1,4 +1,5 @@
-﻿using Sandbox.Game.Entities;
+﻿using Sandbox.Game.Components;
+using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
 using SC.SUGMA.GameState;
 using SC.SUGMA.HeartNetworking;
@@ -6,6 +7,7 @@ using SC.SUGMA.HeartNetworking.Custom;
 using System;
 using VRage.Game;
 using VRage.Game.ModAPI;
+using VRage.Utils;
 using VRageMath;
 
 namespace SC.SUGMA.Utilities
@@ -88,6 +90,11 @@ namespace SC.SUGMA.Utilities
             var phi = Math.Acos(2.0 * Random.NextDouble() - 1.0);
             var sinPhi = Math.Sin(phi);
             return Math.Pow(Random.NextDouble(), 1/3d) * new Vector3D(sinPhi * Math.Cos(theta), sinPhi * Math.Sin(theta), Math.Cos(phi));
+        }
+
+        public static void PlaySound(MySoundPair sound)
+        {
+            MyAPIGateway.Session?.Player?.Character?.Components.Get<MyCharacterSoundComponent>()?.PlayActionSound(sound);
         }
     }
 }
