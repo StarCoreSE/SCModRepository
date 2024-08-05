@@ -27,9 +27,9 @@ namespace SC.SUGMA
             ["MatchTimer"] = new MatchTimer(),
             ["HeartNetwork"] = new HeartNetwork(),
             ["PlayerTracker"] = new PlayerTracker(),
+            ["DisconnectHandler"] = new DisconnectHandler(),
             ["tdm"] = new TeamDeathmatchGamemode(),
-            ["tdmz"] = new TDMZonesGamemode(),
-            ["DisconnectHandler"] = new DisconnectHandler()
+            ["tdmz"] = new TDMZonesGamemode()
         };
 
         /// <summary>
