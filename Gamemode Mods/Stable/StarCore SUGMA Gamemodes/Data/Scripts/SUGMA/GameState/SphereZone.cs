@@ -81,7 +81,7 @@ namespace SC.SUGMA.GameState
                     else if (CheckOutside) OutsideGrids.Add(grid);
             }
 
-            if (MyAPIGateway.Session.IsServer)
+            if (MyAPIGateway.Utilities.IsDedicated)
                 return;
             // Visuals
             var stupidMatrix = MatrixD.CreateWorld(Sphere.Center, Vector3D.Up, Vector3D.Forward);

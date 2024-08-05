@@ -41,6 +41,7 @@ namespace SC.SUGMA
 
             SUtils.SetWorldPermissionsForMatch(!ScrimMode);
 
+            SUtils.ShieldCharge();
             DisconnectHandler.I.Activate();
 
             DisplayStartMessage();
@@ -61,7 +62,6 @@ namespace SC.SUGMA
             IsStarted = false;
             SUGMA_SessionComponent.I.StopGamemode();
             SUtils.SetWorldPermissionsForMatch(false);
-            SUtils.ShieldCharge();
             DisconnectHandler.I.Deactivate();
         }
 
