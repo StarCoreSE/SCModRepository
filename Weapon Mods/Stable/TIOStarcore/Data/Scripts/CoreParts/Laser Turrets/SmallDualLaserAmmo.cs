@@ -135,7 +135,7 @@ namespace Scripts
                     },
                     Hit = new ParticleDef
                     {
-                        Name = ""//PulseSmallLaserHitEffect",
+                        Name = "None",//PulseSmallLaserHitEffect",
                         ApplyToShield = true,
                         //shrinkbydistance = false, obselete
                         Color = Color(red: 1, green: 8f, blue: 10f, alpha: 1),
