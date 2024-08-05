@@ -51,6 +51,11 @@ namespace SC.SUGMA.Commands
                 "Marks a problem as fixed.",
                 CommandMethods.ReportFixed
             ),
+            ["missing"] = new Command(
+                "SUGMA.Utils",
+                "Manual override missing players.",
+                CommandMethods.ResolveMissingPlayers
+            )
 
             #endregion
         };
