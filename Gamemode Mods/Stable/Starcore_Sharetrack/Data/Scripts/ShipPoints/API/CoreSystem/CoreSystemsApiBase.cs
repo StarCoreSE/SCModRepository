@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Sandbox.ModAPI;
 using VRage;
@@ -10,7 +10,7 @@ using VRageMath;
 
 //using CoreSystems.Platform;
 
-namespace CoreSystems.Api
+namespace StarCore.ShareTrack.API.CoreSystem
 {
     /// <summary>
     ///     https://github.com/sstixrud/CoreSystems/blob/master/BaseData/Scripts/CoreSystems/Api/CoreSystemsApiBase.cs

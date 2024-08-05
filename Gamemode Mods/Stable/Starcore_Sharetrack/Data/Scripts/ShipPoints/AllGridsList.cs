@@ -1,27 +1,24 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using CoreSystems.Api;
-using DefenseShields;
-using Draygo.API;
-using RelativeTopSpeed;
 using Sandbox.ModAPI;
-using ShipPoints.HeartNetworking;
-using ShipPoints.HeartNetworking.Custom;
-using ShipPoints.ShipTracking;
+using StarCore.ShareTrack.API;
+using StarCore.ShareTrack.API.CoreSystem;
+using StarCore.ShareTrack.HeartNetworking;
+using StarCore.ShareTrack.HeartNetworking.Custom;
+using StarCore.ShareTrack.ShipTracking;
 using VRage;
 using VRage.Game.ModAPI;
 using VRage.Input;
 using VRageMath;
 using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
 
-namespace ShipPoints
+namespace StarCore.ShareTrack
 {
-    public class PointCheck
+    public class AllGridsList
     {
 
-        public static PointCheck I;
+        public static AllGridsList I;
 
         public static Dictionary<string, int> PointValues = new Dictionary<string, int>();
 
@@ -196,7 +193,7 @@ namespace ShipPoints
         {
             foreach (var shipTracker in TrackingManager.I.TrackedGrids.Values)
             {
-                var fn = shipTracker.FactionName;
+                var fn = shipTracker.FactionName.Length > 6 ? shipTracker.FactionName.Substring(0, 6) : shipTracker.FactionName;
                 var o = shipTracker.OwnerName;
                 var nd = shipTracker.IsFunctional;
 

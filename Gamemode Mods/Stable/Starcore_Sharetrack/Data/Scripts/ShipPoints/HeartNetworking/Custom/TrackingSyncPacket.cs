@@ -1,9 +1,9 @@
 ﻿using System;
 using ProtoBuf;
 using Sandbox.ModAPI;
-using ShipPoints.ShipTracking;
+using StarCore.ShareTrack.ShipTracking;
 
-namespace ShipPoints.HeartNetworking.Custom
+namespace StarCore.ShareTrack.HeartNetworking.Custom
 {
     /// <summary>
     ///     Packet used for syncing tracked grids.

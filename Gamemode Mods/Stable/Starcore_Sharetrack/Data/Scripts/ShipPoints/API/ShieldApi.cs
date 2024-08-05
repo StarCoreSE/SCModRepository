@@ -8,7 +8,7 @@ using VRage.Game.ModAPI;
 using VRage.ModAPI;
 using VRageMath;
 
-namespace DefenseShields
+namespace StarCore.ShareTrack.API
 {
     public class ShieldApi
     {

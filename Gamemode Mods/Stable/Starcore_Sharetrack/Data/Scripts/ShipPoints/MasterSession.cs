@@ -1,11 +1,11 @@
 ﻿using System;
-using ShipPoints.HeartNetworking;
-using ShipPoints.ShipTracking;
-using ShipPoints.TrackerApi;
+using StarCore.ShareTrack.HeartNetworking;
+using StarCore.ShareTrack.ShipTracking;
+using StarCore.ShareTrack.TrackerApi;
 using VRage.Game.Components;
 using VRageMath;
 
-namespace ShipPoints
+namespace StarCore.ShareTrack
 {
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     internal class MasterSession : MySessionComponentBase
@@ -17,7 +17,7 @@ namespace ShipPoints
 
         public static MasterSession I;
 
-        private readonly PointCheck _pointCheck = new PointCheck();
+        private readonly AllGridsList _allGridsList = new AllGridsList();
         private ApiProvider _apiProvider;
         public int Ticks { get; private set; } = 0;
 
@@ -33,7 +33,7 @@ namespace ShipPoints
             {
                 HeartNetwork.I = new HeartNetwork();
                 HeartNetwork.I.LoadData(42521);
-                _pointCheck.Init();
+                _allGridsList.Init();
                 _apiProvider = new ApiProvider();
                 TrackingManager.Init(); // Initialize TrackingManager, but don't start tracking yet
             }
@@ -48,7 +48,7 @@ namespace ShipPoints
             try
             {
                 _apiProvider.Unload();
-                _pointCheck.Close();
+                _allGridsList.Close();
                 TrackingManager.Close();
                 HeartNetwork.I.UnloadData();
             }
@@ -80,7 +80,7 @@ namespace ShipPoints
                     TrackingManager.UpdateAfterSimulation();
                 }
 
-                _pointCheck.UpdateAfterSimulation();
+                _allGridsList.UpdateAfterSimulation();
             }
             catch (Exception ex)
             {
@@ -92,7 +92,7 @@ namespace ShipPoints
         {
             try
             {
-                _pointCheck.Draw();
+                _allGridsList.Draw();
             }
             catch (Exception ex)
             {
