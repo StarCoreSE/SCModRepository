@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using RichHudFramework;
 using RichHudFramework.Client;
 using RichHudFramework.UI;
 using RichHudFramework.UI.Client;
 using RichHudFramework.UI.Rendering;
+using Sandbox.Game.World;
+using Sandbox.ModAPI;
 using SC.SUGMA.GameModes.TeamDeathMatch;
+using SC.SUGMA.GameState;
+using SC.SUGMA.Utilities;
 using VRage.Game.ModAPI;
 using VRage.Utils;
 using VRageMath;
@@ -51,10 +56,16 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
         private static readonly Material _chevronMaterialFlip =
             new Material(MyStringId.GetOrCompute("SugmaChevronFlip"), new Vector2(16, 16));
 
+        private static readonly Material _circleMaterial =
+            new Material(MyStringId.GetOrCompute("SugmaCircle"), new Vector2(32, 32));
+
+
         private readonly Dictionary<IMyFaction, bool> _didShiftChevrons = new Dictionary<IMyFaction, bool>();
 
         private readonly Dictionary<IMyFaction, List<TexturedBox>> _factionChevrons =
             new Dictionary<IMyFaction, List<TexturedBox>>();
+
+        private readonly TexturedBox[] _captureIndicators;
 
         private readonly TDMZonesGamemode _gamemode;
         private readonly TDMHud_Window _windowBase;
@@ -67,6 +78,20 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
             {
                 _factionChevrons.Add(faction, new List<TexturedBox>());
                 _didShiftChevrons.Add(faction, false);
+            }
+
+            _captureIndicators = new TexturedBox[_gamemode.FactionZones.Count];
+            float indicatorsSectionWidth = _captureIndicators.Length * 48;
+            for (int i = 0; i < _captureIndicators.Length; i++)
+            {
+                _captureIndicators[i] = new TexturedBox(_windowBase)
+                {
+                    Material = _circleMaterial,
+                    ParentAlignment = ParentAlignments.Bottom,
+                    Size = Vector2.One * 32,
+                    Offset = new Vector2(-indicatorsSectionWidth/2f + (i * 48) + 24, -4),
+                    ZOffset = sbyte.MaxValue
+                };
             }
         }
 
@@ -103,6 +128,15 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch_Zones
 
                         _didShiftChevrons[factionBanner.Faction] = true;
                     }
+                }
+
+                for (int i = 0; i < _captureIndicators.Length; i++)
+                {
+                    FactionSphereZone zone = _gamemode.FactionZones[i];
+                    if (zone.CapturingFaction != null && (int)zone.CaptureTimeCurrent % 2 == 0)
+                        _captureIndicators[i].Color = zone.CapturingFaction.CustomColor.ColorMaskToRgb().SetAlphaPct(0.5f);
+                    else
+                        _captureIndicators[i].Color = zone.Faction == null ? HudConstants.HudBackgroundColor : zone.SphereDrawColor;
                 }
             }
             catch (Exception ex)
