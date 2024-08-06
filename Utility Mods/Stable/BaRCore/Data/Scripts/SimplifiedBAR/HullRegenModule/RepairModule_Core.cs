@@ -37,6 +37,7 @@ namespace StarCore.RepairModule
         public IMyCollector Block;
         private bool IsServer = MyAPIGateway.Session.IsServer;
         private bool ClientSettingsLoaded = false;
+        private int CycleCounter = 0;
 
         // Block Settings
         public bool IgnoreArmor
@@ -194,11 +195,15 @@ namespace StarCore.RepairModule
                         grid.OnBlockRemoved += HandleRemovedBlocks;                  
                     }
                 }
-            }         
+            }
 
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
             NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
-            NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME;
+
+            if (!IsServer)
+            {
+                NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME;
+            }
         }
 
         public override void UpdateAfterSimulation()
@@ -299,7 +304,16 @@ namespace StarCore.RepairModule
         {
             base.UpdateAfterSimulation100();
 
-            if (!ClientSettingsLoaded && !IsServer)
+            if (ClientSettingsLoaded)
+                return;
+
+            if (CycleCounter == 0)
+            {
+                CycleCounter++;
+                return;
+            }
+
+            if (CycleCounter >= 1)
             {
                 if (!LoadSettings())
                 {
@@ -309,6 +323,7 @@ namespace StarCore.RepairModule
                 }
 
                 ClientSettingsLoaded = true;
+                return;
             }
         }
 
