@@ -21,6 +21,7 @@ namespace StarCore.ShareTrack.TrackerApi
                 ["RegisterOnAliveChanged"] = new Action<Action<IMyCubeGrid, bool>>(RegisterOnAliveChanged),
                 ["UnregisterOnAliveChanged"] = new Action<Action<IMyCubeGrid, bool>>(UnregisterOnAliveChanged),
                 ["AreTrackedGridsLoaded"] = new Func<bool>(AreTrackedGridsLoaded),
+                ["GetGridPoints"] = new Func<IMyCubeGrid, int>(GetGridPoints),
             };
         }
 
@@ -64,6 +65,14 @@ namespace StarCore.ShareTrack.TrackerApi
                 return false;
 
             return TrackingManager.I.GetQueuedGridTracks().Length == 0;
+        }
+
+        private int GetGridPoints(IMyCubeGrid grid)
+        {
+            if (TrackingManager.I == null || !TrackingManager.I.TrackedGrids.ContainsKey(grid))
+                return -1;
+
+            return TrackingManager.I.TrackedGrids[grid].BattlePoints;
         }
     }
 }

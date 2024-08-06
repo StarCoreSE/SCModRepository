@@ -119,6 +119,11 @@ namespace StarCore.ShareTrack.TrackerApi
             return _areTrackedGridsLoaded?.Invoke() ?? false;
         }
 
+        public int GetGridPoints(IMyCubeGrid grid)
+        {
+            return _getGridPoints?.Invoke(grid) ?? -1;
+        }
+
         #endregion
 
 
@@ -134,6 +139,7 @@ namespace StarCore.ShareTrack.TrackerApi
         private Action<Action<IMyCubeGrid, bool>> _registerOnAliveChanged;
         private Action<Action<IMyCubeGrid, bool>> _unregisterOnAliveChanged;
         private Func<bool> _areTrackedGridsLoaded;
+        private Func<IMyCubeGrid, int> _getGridPoints;
 
         #endregion
 
@@ -164,6 +170,7 @@ namespace StarCore.ShareTrack.TrackerApi
             SetApiMethod("RegisterOnAliveChanged", ref _registerOnAliveChanged);
             SetApiMethod("UnregisterOnAliveChanged", ref _unregisterOnAliveChanged);
             SetApiMethod("AreTrackedGridsLoaded", ref _areTrackedGridsLoaded);
+            SetApiMethod("GetGridPoints", ref _getGridPoints);
 
             // Unload data if told to, otherwise notify that the API is ready.
             if (_methodMap == null)
