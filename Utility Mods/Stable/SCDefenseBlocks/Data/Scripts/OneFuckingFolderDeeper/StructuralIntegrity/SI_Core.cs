@@ -412,25 +412,27 @@ namespace StarCore.StructuralIntegrity
         private void HandleSiegeModeImpacts(object target, ref MyDamageInformation info)
         {
             IMySlimBlock targetBlock = target as IMySlimBlock;
+            if (targetBlock == null)
+                return;
 
-            if (targetBlock.CubeGrid != null && targetBlock != null)
+            IMyCubeGrid targetGrid = targetBlock.CubeGrid;
+            if (targetBlock.CubeGrid == null)
+                return;
+
+            if (SIGenBlock != null && targetGrid.EntityId == SIGenBlock?.CubeGrid?.EntityId)
             {
-                IMyCubeGrid targetGrid = targetBlock.CubeGrid;
+                info.Amount = info.Amount * GridModifierSync.Value;
 
-                if (SIGenBlock != null && SIGenBlock.CubeGrid != null && targetGrid.EntityId == SIGenBlock.CubeGrid.EntityId)
+                if (SiegeActive)
                 {
-                    info.Amount = info.Amount * GridModifierSync.Value;
-
-                    if (SiegeActive)
-                    {
-                        SI_Impact_Render renderer = new SI_Impact_Render(targetBlock);
-                        impactRenders.TryAdd(renderer, renderer);
-                    }              
+                    SI_Impact_Render renderer = new SI_Impact_Render(targetBlock);
+                    impactRenders.TryAdd(renderer, renderer);
                 }
             }
-
+            else
+                return;
         }
-
+        
         private void SetPowerStatus(string text, int aliveTime = 300, string font = MyFontEnum.Green)
         {
             if (notifFieldPower == null)
