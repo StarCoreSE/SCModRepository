@@ -37,11 +37,11 @@ namespace Invalid.SCPracticeAI
             RedFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag("RED");
             BluFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag("BLU");
 
-            if (config.AutomaticSpawnBattle)
+            if (config.AutomaticSpawnBattle && MyAPIGateway.Session.IsServer)
             {
                 MyAPIGateway.Utilities.InvokeOnGameThread(() =>
                 {
-                    MyAPIGateway.Utilities.ShowNotification("Automatic battle will start in 30 seconds", 5000);
+                    MyVisualScriptLogicProvider.SendChatMessage("Automatic battle will start", "Server");
                 });
 
                 MyAPIGateway.Utilities.InvokeOnGameThread(() =>
