@@ -259,9 +259,10 @@
      <DisplayName>[NHI] 'Vanir' Light Autocannon</DisplayName>
      <Description>
 Light Autocannon that fires an APHE Round.
-[Range: 3500]
+[Range: 3000]
 [Shell Speed: 1250m/s]
-[Damage Type: Energy]
+[Shield Damage Type: EN]
+[Armor Damage Type: KIN]
      </Description>
      <Icon>Textures\GUI\Icons\Odin_Defense_Cannon_1x1x2.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -312,7 +313,8 @@ Light Autocannon that fires an APHE Round.
 A General Purpose Autocannon. Fires an APHE Shell with Generalized Damage Capabilities.
 [Range: 5000]
 [Shell Speed: 1500m/s]
-[Damage Type: EN/KIN]
+[Shield Damage Type: EN]
+[Armor Damage Type: KIN]
      </Description>
      <Icon>Textures\GUI\Icons\New_Autocannon_3x3_2.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -588,9 +590,9 @@ Heavy Railgun Turret that fires a single slug every 10 Seconds
      </Id>
      <DisplayName>[NHI] Mk3 Battleship Cannon</DisplayName>
      <Description>
-A Heavy Battleship Cannon, Can fire either an HE Shell or Canister Shot
-[Range: 7000]
-[Shell Speed: 1400m/s]
+A Heavy Battleship Cannon, Can fire either an HE Shell or AP Shot
+[Shell Range: 7000m   - 5200m]
+[Shell Speed: 1800m/s - 3600m/s]
 [Damage Type: EN/KIN]
      </Description>
      <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk3.dds</Icon>
@@ -656,10 +658,10 @@ A Heavy Battleship Cannon, Can fire either an HE Shell or Canister Shot
      </Id>
      <DisplayName>[NHI] Mk3 Battleship Cannon</DisplayName>
      <Description>
-A Heavy Battleship Cannon, Can fire either an HE Shell or Canister Shot
-[Range: 7000]
-[Shell Speed: 1400m/s]
-[Damage Type: EN/KIN].
+A Heavy Battleship Cannon, Can fire either an HE Shell or AP Shot
+[Shell Range: 7000m   - 5200m]
+[Shell Speed: 1800m/s - 3600m/s]
+[Damage Type: EN/KIN]
      </Description>
      <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk3.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -725,10 +727,10 @@ A Heavy Battleship Cannon, Can fire either an HE Shell or Canister Shot
      </Id>
      <DisplayName>[NHI] Mk2 Battleship Cannon</DisplayName>
      <Description>
-A Heavy Battleship Cannon, Fires an HE Shell
+A Heavy Battleship Cannon, Can fire either an HE Shell or AP Shell
 [Range: 6000]
-[Shell Speed: 1100m/s]
-[Damage Type: EN]
+[Shell Speed: 1100m/s - 2200m/s]
+[Damage Type: EN - KIN]
      </Description>
      <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk2.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -794,10 +796,10 @@ A Heavy Battleship Cannon, Fires an HE Shell
      </Id>
      <DisplayName>[NHI] Mk2 Battleship Cannon</DisplayName>
      <Description>
-A Heavy Battleship Cannon, Fires an HE Shell
+A Heavy Battleship Cannon, Can fire either an HE Shell or AP Shell
 [Range: 6000]
-[Shell Speed: 1100m/s]
-[Damage Type: EN]
+[Shell Speed: 1100m/s - 2200m/s]
+[Damage Type: EN - KIN]
      </Description>
      <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk2.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -863,10 +865,10 @@ A Heavy Battleship Cannon, Fires an HE Shell
      </Id>
      <DisplayName>[NHI] Mk1 Battleship Cannon</DisplayName>
      <Description>
-A Heavy Battleship Cannon, Fires an HE Shell
+A Heavy Battleship Cannon, Can fire either an HE Shell or AP Shell
 [Range: 5000]
-[Shell Speed: 1100m/s]
-[Damage Type: EN]
+[Shell Speed: 1100m/s - 2200m/s]
+[Damage Type: EN - KIN]
      </Description>
      <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk1.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -915,10 +917,10 @@ A Heavy Battleship Cannon, Fires an HE Shell
      </Id>
      <DisplayName>[NHI] Mk1 Battleship Cannon</DisplayName>
      <Description>
-A Heavy Battleship Cannon, Fires an HE Shell
+A Heavy Battleship Cannon, Can fire either an HE Shell or AP Shell
 [Range: 5000]
-[Shell Speed: 1100m/s]
-[Damage Type: EN]
+[Shell Speed: 1100m/s - 2200m/s]
+[Damage Type: EN - KIN]
      </Description>
      <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk1.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -1833,7 +1835,7 @@ Lacks the Ability to Heal Shields and and Must Completely cool down after reachi
      <Description>
        A Heavy Naval Cannon, Fires an APCBC Shell
        [Range: 5000]
-       [Shell Speed: 1100m/s]
+       [Shell Speed: 1300m/s]
        [Damage Type: KIN]
      </Description>
      <Icon>Textures\GUI\Icons\NHI_Kinetic_Turret.dds</Icon>
