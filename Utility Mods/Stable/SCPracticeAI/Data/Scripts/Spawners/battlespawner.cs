@@ -12,8 +12,6 @@ using ProtoBuf;
 
 namespace Invalid.SCPracticeAI
 {
-
-
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     public class spawnbattleComponent : MySessionComponentBase
     {
@@ -23,6 +21,7 @@ namespace Invalid.SCPracticeAI
         private double minSpawnRadiusFromGrids = 1000;  // Minimum spawn distance from other grids in meters
         private IMyFaction RedFaction = null;
         private IMyFaction BluFaction = null;
+        private const int maxRetryAttempts = 3; // Configurable retry attempts
 
         public override void BeforeStart()
         {
@@ -45,10 +44,8 @@ namespace Invalid.SCPracticeAI
 
             if (PrefabMaster.PrefabMap.ContainsKey(prefabPacket.PrefabName))
             {
-                // Randomly choose the faction
-                string factionName = MyUtils.GetRandomInt(0, 2) == 0 ? "RED" : "BLU";
-
-                SpawnRandomPrefabs(new List<string>(PrefabMaster.PrefabMap.Keys), prefabPacket.PrefabAmount, factionName);
+                // Start with RED team for the first half and switch to BLU team for the second half
+                SpawnRandomPrefabs(new List<string>(PrefabMaster.PrefabMap.Keys), prefabPacket.PrefabAmount);
             }
             else
             {
@@ -73,27 +70,11 @@ namespace Invalid.SCPracticeAI
                 {
                     if (spawnCount > 0)
                     {
-                        // Randomly choose the starting faction
-                        string factionName = MyUtils.GetRandomInt(0, 2) == 0 ? "RED" : "BLU";
-
                         // Select a random prefab from the PrefabMap
                         List<string> prefabNames = new List<string>(PrefabMaster.PrefabMap.Keys);
 
                         // Spawn prefabs alternately using the selected faction
-                        for (int i = 0; i < spawnCount; i++)
-                        {
-                            string randomPrefabName = prefabNames[MyUtils.GetRandomInt(0, prefabNames.Count)];
-
-                            // Create PrefabSpawnPacket instance with the factionName parameter
-                            PrefabSpawnPacket prefabSpawnPacket = new PrefabSpawnPacket(randomPrefabName, 1, factionName);
-
-                            // Serialize and send the packet
-                            byte[] data = MyAPIGateway.Utilities.SerializeToBinary(prefabSpawnPacket);
-                            MyAPIGateway.Multiplayer.SendMessageTo(netID, data, MyAPIGateway.Multiplayer.ServerId);
-
-                            // Alternate the faction for the next spawn
-                            factionName = factionName == "RED" ? "BLU" : "RED";
-                        }
+                        SpawnRandomPrefabs(prefabNames, spawnCount);
 
                         // Show a confirmation message
                         MyAPIGateway.Utilities.ShowMessage("spawnbattle", $"Spawned: {spawnCount} prefabs alternately.");
@@ -132,14 +113,14 @@ namespace Invalid.SCPracticeAI
             MyAPIGateway.Utilities.ShowMessage("spawnbattle", prefabListMessage);
         }
 
-        private void SpawnRandomPrefabs(List<string> prefabNames, int spawnCount, string startingFactionName)
+        private void SpawnRandomPrefabs(List<string> prefabNames, int spawnCount)
         {
             double maxSpawnRadius = 10000; // Maximum spawn radius in meters
 
             List<Vector3D> spawnPositions = new List<Vector3D>();
             Dictionary<string, int> spawnedCounts = new Dictionary<string, int>(); // To store the counts of each spawned prefab
 
-            string currentFactionName = startingFactionName; // Set the starting faction name
+            string currentFactionName = "RED"; // Start with RED team
 
             for (int i = 0; i < spawnCount; i++)
             {
@@ -153,10 +134,25 @@ namespace Invalid.SCPracticeAI
                 Vector3D up = Vector3D.Normalize(Vector3D.Cross(direction, Vector3D.Up));
 
                 // Determine the current faction based on the iteration
-                string factionName = currentFactionName;
+                if (i < spawnCount / 2)
+                {
+                    currentFactionName = "RED";
+                }
+                else
+                {
+                    currentFactionName = "BLU";
+                }
 
                 // Check if the spawn position is valid
                 bool isValidPosition = CheckAsteroidDistance(spawnPosition, minSpawnRadiusFromGrids) && CheckGridDistance(spawnPosition, minSpawnRadiusFromGrids);
+
+                int attempts = 0;
+                while (!isValidPosition && attempts < maxRetryAttempts)
+                {
+                    spawnPosition = origin + (Vector3D.Normalize(MyUtils.GetRandomVector3D()) * MyUtils.GetRandomDouble(minSpawnRadiusFromCenter, maxSpawnRadius));
+                    isValidPosition = CheckAsteroidDistance(spawnPosition, minSpawnRadiusFromGrids) && CheckGridDistance(spawnPosition, minSpawnRadiusFromGrids);
+                    attempts++;
+                }
 
                 if (isValidPosition)
                 {
@@ -181,7 +177,7 @@ namespace Invalid.SCPracticeAI
                         List<IMyCubeGrid> resultList = new List<IMyCubeGrid>();
 
                         // Determine the faction to use for the spawned prefab
-                        IMyFaction faction = MyAPIGateway.Session.Factions.TryGetFactionByTag(factionName);
+                        IMyFaction faction = MyAPIGateway.Session.Factions.TryGetFactionByTag(currentFactionName);
 
                         // Spawn the prefab with the current faction as the owner
                         prefabManager.SpawnPrefab(resultList, randomPrefabName, spawnPosition, direction, up, ownerId: faction?.FounderId ?? 0, spawningOptions: SpawningOptions.None);
@@ -204,10 +200,11 @@ namespace Invalid.SCPracticeAI
                         {
                             spawnedCounts[randomPrefabName] = 1;
                         }
-
-                        // Switch to the other faction for the next spawn
-                        currentFactionName = (currentFactionName == "RED") ? "BLU" : "RED";
                     }
+                }
+                else
+                {
+                    MyAPIGateway.Utilities.ShowMessage("spawnbattle", $"Failed to spawn prefab {prefabNames[i]} after {maxRetryAttempts} attempts.");
                 }
             }
 
@@ -217,7 +214,6 @@ namespace Invalid.SCPracticeAI
                 MyAPIGateway.Utilities.ShowMessage("spawnbattle", $"Spawned: {kvp.Key} x {kvp.Value}");
             }
         }
-
 
         private bool CheckGridDistance(Vector3D spawnPosition, double minDistance)
         {
