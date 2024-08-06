@@ -15,21 +15,47 @@ namespace Invalid.SCPracticeAI
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     public class spawnbattleComponent : MySessionComponentBase
     {
-        private int defaultSpawnCount = 1; // Default number of prefabs to spawn
+        private ModConfig config;
+        private int defaultSpawnCount = 1;
         private ushort netID = 29396;
-        private double minSpawnRadiusFromCenter = 1000; // Minimum spawn distance from the center in meters
-        private double minSpawnRadiusFromGrids = 1000;  // Minimum spawn distance from other grids in meters
+        private double minSpawnRadiusFromCenter = 1000;
+        private double minSpawnRadiusFromGrids = 1000;
         private IMyFaction RedFaction = null;
         private IMyFaction BluFaction = null;
-        private const int maxRetryAttempts = 3; // Configurable retry attempts
+        private const int maxRetryAttempts = 3;
+
+        public override void LoadData()
+        {
+            config = ConfigManager.LoadConfig();
+        }
 
         public override void BeforeStart()
         {
-            MyAPIGateway.Utilities.MessageEntered += OnMessageEntered; // Listen for chat messages
+            MyAPIGateway.Utilities.MessageEntered += OnMessageEntered;
             MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(netID, NetworkHandler);
 
             RedFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag("RED");
             BluFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag("BLU");
+
+            if (config.AutomaticSpawnBattle)
+            {
+                MyAPIGateway.Utilities.InvokeOnGameThread(() =>
+                {
+                    MyAPIGateway.Utilities.ShowNotification("Automatic battle will start in 30 seconds", 5000);
+                });
+
+                MyAPIGateway.Utilities.InvokeOnGameThread(() =>
+                {
+                    SpawnRandomPrefabs(new List<string>(PrefabMaster.PrefabMap.Keys), config.AutomaticSpawnBattleAmount);
+                }, 30000.ToString()); // 30 seconds delay
+            }
+        }
+
+        private void UpdateConfig(bool automaticSpawnBattle, int automaticSpawnBattleAmount)
+        {
+            config.AutomaticSpawnBattle = automaticSpawnBattle;
+            config.AutomaticSpawnBattleAmount = automaticSpawnBattleAmount;
+            ConfigManager.SaveConfig(config);
         }
 
         private void NetworkHandler(ushort arg1, byte[] arg2, ulong arg3, bool arg4)
@@ -58,9 +84,48 @@ namespace Invalid.SCPracticeAI
             if (!messageText.StartsWith("/spawnbattle", StringComparison.OrdinalIgnoreCase)) return;
             string[] parts = messageText.Split(' ');
 
+            // Config command handling
+            if (parts.Length >= 2 && parts[1].Equals("config", StringComparison.OrdinalIgnoreCase))
+            {
+                if (parts.Length == 2)
+                {
+                    // Display current config
+                    MyAPIGateway.Utilities.ShowMessage("Config", $"AutomaticSpawnBattle: {config.AutomaticSpawnBattle}");
+                    MyAPIGateway.Utilities.ShowMessage("Config", $"AutomaticSpawnBattleAmount: {config.AutomaticSpawnBattleAmount}");
+                    MyAPIGateway.Utilities.ShowMessage("Config", "Usage: /spawnbattle config [true/false] [amount]");
+                }
+                else if (parts.Length == 4)
+                {
+                    bool newAutomaticSpawnBattle;
+                    int newAutomaticSpawnBattleAmount;
+
+                    if (bool.TryParse(parts[2], out newAutomaticSpawnBattle) &&
+                       int.TryParse(parts[3], out newAutomaticSpawnBattleAmount))
+                    {
+                        config.AutomaticSpawnBattle = newAutomaticSpawnBattle;
+                        config.AutomaticSpawnBattleAmount = newAutomaticSpawnBattleAmount;
+                        ConfigManager.SaveConfig(config);
+
+                        MyAPIGateway.Utilities.ShowMessage("Config", "Configuration updated successfully!");
+                        MyAPIGateway.Utilities.ShowMessage("Config", $"New values: AutomaticSpawnBattle: {newAutomaticSpawnBattle}, AutomaticSpawnBattleAmount: {newAutomaticSpawnBattleAmount}");
+                    }
+                    else
+                    {
+                        MyAPIGateway.Utilities.ShowMessage("Config", "Invalid input! Usage: /spawnbattle config [true/false] [amount]");
+                    }
+                }
+                else
+                {
+                    MyAPIGateway.Utilities.ShowMessage("Config", "Invalid input! Usage: /spawnbattle config [true/false] [amount]");
+                }
+
+                sendToOthers = false;
+                return;  // Exit after handling config command
+            }
+
+            // Your existing battle spawning implementation
             if (parts.Length == 1)
             {
-                // Show list of available prefabs and usage instructions
                 ShowPrefabList();
             }
             if (parts.Length >= 2)
@@ -70,13 +135,8 @@ namespace Invalid.SCPracticeAI
                 {
                     if (spawnCount > 0)
                     {
-                        // Select a random prefab from the PrefabMap
                         List<string> prefabNames = new List<string>(PrefabMaster.PrefabMap.Keys);
-
-                        // Spawn prefabs alternately using the selected faction
                         SpawnRandomPrefabs(prefabNames, spawnCount);
-
-                        // Show a confirmation message
                         MyAPIGateway.Utilities.ShowMessage("spawnbattle", $"Spawned: {spawnCount} prefabs alternately.");
                     }
                     else
@@ -269,7 +329,8 @@ namespace Invalid.SCPracticeAI
 
         protected override void UnloadData()
         {
-            MyAPIGateway.Utilities.MessageEntered -= OnMessageEntered; // Unsubscribe from chat message events
+            ConfigManager.SaveConfig(config);
+            MyAPIGateway.Utilities.MessageEntered -= OnMessageEntered;
             MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(netID, NetworkHandler);
         }
     }

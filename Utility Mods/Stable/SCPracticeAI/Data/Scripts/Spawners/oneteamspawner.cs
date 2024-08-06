@@ -11,7 +11,7 @@ using VRage.Utils;
 using VRageMath;
 using ProtoBuf;
 
-namespace Invalid.spawnoneteam
+namespace Invalid.SCPracticeAI
 {
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     public class spawnoneteam : MySessionComponentBase
