@@ -26,6 +26,8 @@ namespace SC.SUGMA.Utilities
 
             Dictionary<IMyFaction, IMyCubeGrid> factionSpawns = GetFactionSpawns();
 
+            SUtils.SetDamageEnabled(false);
+
             foreach (var factionKvp in AssignTeams(ShareTrackApi.GetTrackedGrids()))
             {
                 IMyCubeGrid spawnGrid;
@@ -35,17 +37,15 @@ namespace SC.SUGMA.Utilities
                     continue;
                 }
 
-                Vector3D spawnPos = spawnGrid.GetPosition();
+                Vector3D spawnPos = spawnGrid.Physics.CenterOfMassWorld;
                 Vector3D spawnDirection = -spawnPos.Normalized();
                 Vector3D spawnLineDirection = Vector3D.Cross(spawnDirection, Vector3D.Up);
 
                 spawnPos += spawnDirection * 250;
 
-                Vector3D initialSpawnPos = spawnPos - spawnLineDirection * 250 * factionKvp.Value.Count;
+                Vector3D initialSpawnPos = spawnPos - (spawnLineDirection * 250 * factionKvp.Value.Count / 2f);
                 for (int i = 0; i < factionKvp.Value.Count; i++)
-                {
                     factionKvp.Value[i].Teleport(MatrixD.CreateWorld(initialSpawnPos + spawnLineDirection * 250 * i, spawnDirection, Vector3D.Up));
-                }
             }
 
             MyAPIGateway.Utilities.SendMessage($"Autobalance completed.");
