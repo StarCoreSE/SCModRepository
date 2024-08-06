@@ -6,6 +6,8 @@ using Sandbox.Game;
 using Sandbox.ModAPI;
 using SC.SUGMA.API;
 using SC.SUGMA.GameState;
+using SC.SUGMA.HeartNetworking;
+using SC.SUGMA.HeartNetworking.Custom;
 using VRage.Game.ModAPI;
 using VRageMath;
 
@@ -22,7 +24,10 @@ namespace SC.SUGMA.Utilities
 
             // Only server should run this
             if (!MyAPIGateway.Session.IsServer)
+            {
+                HeartNetwork.I.SendToServer(new AutoBalancePacket());
                 return;
+            }
 
             Dictionary<IMyFaction, IMyCubeGrid> factionSpawns = GetFactionSpawns();
 
