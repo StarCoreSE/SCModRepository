@@ -27,6 +27,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
 
         public PointTracker PointTracker;
+        public RespawnManager RespawnManager;
 
         internal ShareTrackApi ShareTrackApi => SUGMA_SessionComponent.I.ShareTrackApi;
         internal MatchTimer _matchTimer => SUGMA_SessionComponent.I.GetComponent<MatchTimer>("MatchTimer");
@@ -120,6 +121,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
         public override void StartRound(string[] arguments = null)
         {
             PointTracker = new PointTracker(3, 0);
+            RespawnManager = new RespawnManager();
             SUGMA_SessionComponent.I.UnregisterComponent("TDMPointTracker");
             if (!MyAPIGateway.Utilities.IsDedicated)
                 SUGMA_SessionComponent.I.UnregisterComponent("tdmHud");
@@ -162,6 +164,8 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                     //MyAPIGateway.Utilities.ShowMessage("TDM", $"Declared war between {factionKvp.Key.Name} and {faction.Name}");
                 }
             }
+
+            SUGMA_SessionComponent.I.RegisterComponent("TDMRespawnManager", RespawnManager);
 
             base.StartRound(arguments);
             MyAPIGateway.Utilities.ShowNotification("Combatants: " + string.Join(" vs ", factionNames), 10000, "Red");
@@ -219,6 +223,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
             _matchTimer?.Stop();
             SUGMA_SessionComponent.I.UnregisterComponent("TDMPointTracker");
+            SUGMA_SessionComponent.I.UnregisterComponent("TDMRespawnManager");
             ShareTrackApi.UnregisterOnAliveChanged(OnAliveChanged);
             ShareTrackApi.UnregisterOnTrack(OnGridTrackChanged);
 

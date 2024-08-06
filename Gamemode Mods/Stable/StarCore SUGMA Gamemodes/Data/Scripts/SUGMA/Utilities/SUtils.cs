@@ -5,6 +5,8 @@ using SC.SUGMA.GameState;
 using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using VRage.Game;
 using VRage.Game.ModAPI;
 using VRage.Utils;
@@ -100,6 +102,28 @@ namespace SC.SUGMA.Utilities
         public static void PlaySound(MySoundPair sound)
         {
             MyAPIGateway.Session?.Player?.Character?.Components.Get<MyCharacterSoundComponent>()?.PlayActionSound(sound);
+        }
+
+        public static Dictionary<IMyFaction, IMyCubeGrid> GetFactionSpawns()
+        {
+            HashSet<IMyCubeGrid> allGrids = new HashSet<IMyCubeGrid>();
+            MyAPIGateway.Entities.GetEntities(null, e =>
+            {
+                if (e is IMyCubeGrid)
+                    allGrids.Add((IMyCubeGrid) e);
+                return false;
+            });
+
+            Dictionary<IMyFaction, IMyCubeGrid> factionSpawns = new Dictionary<IMyFaction, IMyCubeGrid>();
+
+            foreach (var grid in allGrids.Where(g => g.IsStatic && g.DisplayName.EndsWith(" Spawn")))
+            {
+                if (grid.BigOwners.Count < 1)
+                    continue;
+                factionSpawns[grid.GetFaction()] = grid;
+            }
+
+            return factionSpawns;
         }
     }
 }
