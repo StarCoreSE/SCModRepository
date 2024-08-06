@@ -47,7 +47,7 @@ namespace Invalid.SCPracticeAI
                 MyAPIGateway.Utilities.InvokeOnGameThread(() =>
                 {
                     SpawnRandomPrefabs(new List<string>(PrefabMaster.PrefabMap.Keys), config.AutomaticSpawnBattleAmount);
-                }, 30000.ToString()); // 30 seconds delay
+                }, 60000.ToString()); // 60 seconds delay
             }
         }
 
