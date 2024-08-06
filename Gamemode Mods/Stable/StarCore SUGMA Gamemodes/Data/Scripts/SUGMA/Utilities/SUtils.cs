@@ -49,6 +49,11 @@ namespace SC.SUGMA.Utilities
             return PlayerTracker.I.GetGridFaction(grid);
         }
 
+        public static IMyPlayer GetOwner(this IMyCubeGrid grid)
+        {
+            return PlayerTracker.I.GetGridOwner(grid);
+        }
+
         public static Color ColorMaskToRgb(this Vector3 colorMask)
         {
             return MyColorPickerConstants.HSVOffsetToHSV(colorMask).HSVtoColor();
