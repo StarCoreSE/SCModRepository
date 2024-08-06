@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Sandbox.Game;
 using Sandbox.ModAPI;
 using VRage.Game;
@@ -7,8 +9,6 @@ using VRage.ModAPI;
 using VRage.Utils;
 using VRageMath;
 using ProtoBuf;
-using System.Collections.Generic;
-using System;
 
 namespace Invalid.SCPracticeAI
 {
@@ -26,10 +26,7 @@ namespace Invalid.SCPracticeAI
 
         public override void LoadData()
         {
-            if (MyAPIGateway.Session.IsServer)
-            {
-                config = ConfigManager.LoadConfig();
-            }
+            config = ConfigManager.LoadConfig();
         }
 
         public override void BeforeStart()
@@ -37,34 +34,28 @@ namespace Invalid.SCPracticeAI
             MyAPIGateway.Utilities.MessageEntered += OnMessageEntered;
             MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(netID, NetworkHandler);
 
-            if (MyAPIGateway.Session.IsServer)
+            RedFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag("RED");
+            BluFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag("BLU");
+
+            if (config.AutomaticSpawnBattle && MyAPIGateway.Session.IsServer)
             {
-                RedFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag("RED");
-                BluFaction = MyAPIGateway.Session.Factions.TryGetFactionByTag("BLU");
-
-                if (config.AutomaticSpawnBattle)
+                MyAPIGateway.Utilities.InvokeOnGameThread(() =>
                 {
-                    MyAPIGateway.Utilities.InvokeOnGameThread(() =>
-                    {
-                        MyVisualScriptLogicProvider.SendChatMessage("Automatic battle will start", "Server");
-                    });
+                    MyVisualScriptLogicProvider.SendChatMessage("Automatic battle will start", "Server");
+                });
 
-                    MyAPIGateway.Utilities.InvokeOnGameThread(() =>
-                    {
-                        SpawnRandomPrefabs(new List<string>(PrefabMaster.PrefabMap.Keys), config.AutomaticSpawnBattleAmount);
-                    }, 60000.ToString()); // 60 seconds delay
-                }
+                MyAPIGateway.Utilities.InvokeOnGameThread(() =>
+                {
+                    SpawnRandomPrefabs(new List<string>(PrefabMaster.PrefabMap.Keys), config.AutomaticSpawnBattleAmount);
+                }, 60000.ToString()); // 60 seconds delay
             }
         }
 
         private void UpdateConfig(bool automaticSpawnBattle, int automaticSpawnBattleAmount)
         {
-            if (MyAPIGateway.Session.IsServer)
-            {
-                config.AutomaticSpawnBattle = automaticSpawnBattle;
-                config.AutomaticSpawnBattleAmount = automaticSpawnBattleAmount;
-                ConfigManager.SaveConfig(config);
-            }
+            config.AutomaticSpawnBattle = automaticSpawnBattle;
+            config.AutomaticSpawnBattleAmount = automaticSpawnBattleAmount;
+            ConfigManager.SaveConfig(config);
         }
 
         private void NetworkHandler(ushort arg1, byte[] arg2, ulong arg3, bool arg4)
@@ -96,82 +87,67 @@ namespace Invalid.SCPracticeAI
             // Config command handling
             if (parts.Length >= 2 && parts[1].Equals("config", StringComparison.OrdinalIgnoreCase))
             {
-                if (MyAPIGateway.Session.IsServer)
+                if (parts.Length == 2)
                 {
-                    HandleConfigCommand(parts, ref sendToOthers);
+                    // Display current config
+                    MyAPIGateway.Utilities.ShowMessage("Config", $"AutomaticSpawnBattle: {config.AutomaticSpawnBattle}");
+                    MyAPIGateway.Utilities.ShowMessage("Config", $"AutomaticSpawnBattleAmount: {config.AutomaticSpawnBattleAmount}");
+                    MyAPIGateway.Utilities.ShowMessage("Config", "Usage: /spawnbattle config [true/false] [amount]");
                 }
-                return;  // Exit after handling config command
-            }
-
-            // Battle spawning command
-            if (parts.Length == 1)
-            {
-                ShowPrefabList();
-            }
-            else if (parts.Length >= 2)
-            {
-                HandleSpawnCommand(parts, ref sendToOthers);
-            }
-
-            sendToOthers = false;
-        }
-
-        private void HandleConfigCommand(string[] parts, ref bool sendToOthers)
-        {
-            if (parts.Length == 2)
-            {
-                // Display current config
-                MyAPIGateway.Utilities.ShowMessage("Config", $"AutomaticSpawnBattle: {config.AutomaticSpawnBattle}");
-                MyAPIGateway.Utilities.ShowMessage("Config", $"AutomaticSpawnBattleAmount: {config.AutomaticSpawnBattleAmount}");
-                MyAPIGateway.Utilities.ShowMessage("Config", "Usage: /spawnbattle config [true/false] [amount]");
-            }
-            else if (parts.Length == 4)
-            {
-                bool newAutomaticSpawnBattle;
-                int newAutomaticSpawnBattleAmount;
-
-                if (bool.TryParse(parts[2], out newAutomaticSpawnBattle) &&
-                   int.TryParse(parts[3], out newAutomaticSpawnBattleAmount))
+                else if (parts.Length == 4)
                 {
-                    config.AutomaticSpawnBattle = newAutomaticSpawnBattle;
-                    config.AutomaticSpawnBattleAmount = newAutomaticSpawnBattleAmount;
-                    ConfigManager.SaveConfig(config);
+                    bool newAutomaticSpawnBattle;
+                    int newAutomaticSpawnBattleAmount;
 
-                    MyAPIGateway.Utilities.ShowMessage("Config", "Configuration updated successfully!");
-                    MyAPIGateway.Utilities.ShowMessage("Config", $"New values: AutomaticSpawnBattle: {newAutomaticSpawnBattle}, AutomaticSpawnBattleAmount: {newAutomaticSpawnBattleAmount}");
+                    if (bool.TryParse(parts[2], out newAutomaticSpawnBattle) &&
+                       int.TryParse(parts[3], out newAutomaticSpawnBattleAmount))
+                    {
+                        config.AutomaticSpawnBattle = newAutomaticSpawnBattle;
+                        config.AutomaticSpawnBattleAmount = newAutomaticSpawnBattleAmount;
+                        ConfigManager.SaveConfig(config);
+
+                        MyAPIGateway.Utilities.ShowMessage("Config", "Configuration updated successfully!");
+                        MyAPIGateway.Utilities.ShowMessage("Config", $"New values: AutomaticSpawnBattle: {newAutomaticSpawnBattle}, AutomaticSpawnBattleAmount: {newAutomaticSpawnBattleAmount}");
+                    }
+                    else
+                    {
+                        MyAPIGateway.Utilities.ShowMessage("Config", "Invalid input! Usage: /spawnbattle config [true/false] [amount]");
+                    }
                 }
                 else
                 {
                     MyAPIGateway.Utilities.ShowMessage("Config", "Invalid input! Usage: /spawnbattle config [true/false] [amount]");
                 }
-            }
-            else
-            {
-                MyAPIGateway.Utilities.ShowMessage("Config", "Invalid input! Usage: /spawnbattle config [true/false] [amount]");
+
+                sendToOthers = false;
+                return;  // Exit after handling config command
             }
 
-            sendToOthers = false;
-        }
-
-        private void HandleSpawnCommand(string[] parts, ref bool sendToOthers)
-        {
-            int spawnCount;
-            if (int.TryParse(parts[1], out spawnCount))
+            // Your existing battle spawning implementation
+            if (parts.Length == 1)
             {
-                if (spawnCount > 0)
+                ShowPrefabList();
+            }
+            if (parts.Length >= 2)
+            {
+                int spawnCount;
+                if (int.TryParse(parts[1], out spawnCount))
                 {
-                    List<string> prefabNames = new List<string>(PrefabMaster.PrefabMap.Keys);
-                    SpawnRandomPrefabs(prefabNames, spawnCount);
-                    MyAPIGateway.Utilities.ShowMessage("spawnbattle", $"Spawned: {spawnCount} prefabs alternately.");
+                    if (spawnCount > 0)
+                    {
+                        List<string> prefabNames = new List<string>(PrefabMaster.PrefabMap.Keys);
+                        SpawnRandomPrefabs(prefabNames, spawnCount);
+                        MyAPIGateway.Utilities.ShowMessage("spawnbattle", $"Spawned: {spawnCount} prefabs alternately.");
+                    }
+                    else
+                    {
+                        MyAPIGateway.Utilities.ShowMessage("spawnbattle", "Invalid spawn count. Please specify a positive number.");
+                    }
                 }
                 else
                 {
-                    MyAPIGateway.Utilities.ShowMessage("spawnbattle", "Invalid spawn count. Please specify a positive number.");
+                    MyAPIGateway.Utilities.ShowMessage("spawnbattle", "Invalid spawn count. Please specify a valid number.");
                 }
-            }
-            else
-            {
-                MyAPIGateway.Utilities.ShowMessage("spawnbattle", "Invalid spawn count. Please specify a valid number.");
             }
 
             sendToOthers = false;
@@ -187,7 +163,7 @@ namespace Invalid.SCPracticeAI
 
             if (PrefabMaster.PrefabMap.Count > 0)
             {
-                prefabListMessage += "\n\nTo start a battle, type '/spawnbattle [amount]' (e.g., /spawnbattle 10). Default 10.";
+                prefabListMessage += "\n\nTo start a battle, type '/spawnbattle [amount]' (e.g., /spawnbattle  10. Default 10.";
             }
             else
             {
@@ -199,8 +175,6 @@ namespace Invalid.SCPracticeAI
 
         private void SpawnRandomPrefabs(List<string> prefabNames, int spawnCount)
         {
-            if (!MyAPIGateway.Session.IsServer) return;
-
             double maxSpawnRadius = 10000; // Maximum spawn radius in meters
 
             List<Vector3D> spawnPositions = new List<Vector3D>();
@@ -355,10 +329,7 @@ namespace Invalid.SCPracticeAI
 
         protected override void UnloadData()
         {
-            if (MyAPIGateway.Session.IsServer)
-            {
-                ConfigManager.SaveConfig(config);
-            }
+            ConfigManager.SaveConfig(config);
             MyAPIGateway.Utilities.MessageEntered -= OnMessageEntered;
             MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(netID, NetworkHandler);
         }
