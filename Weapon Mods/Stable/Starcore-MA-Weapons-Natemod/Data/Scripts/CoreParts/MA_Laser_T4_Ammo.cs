@@ -321,7 +321,7 @@ namespace Scripts
                 ModelName = "",
                 VisualProbability = 1f,
                 ShieldHitDraw = false,
-                //                Decals = new DecalDef
+//                Decals = new DecalDef
 //                {
 //                   MaxAge = 3600,
 //                   Map = new[]
