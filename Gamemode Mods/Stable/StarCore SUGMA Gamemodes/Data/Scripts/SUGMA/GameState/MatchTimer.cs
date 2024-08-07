@@ -77,8 +77,7 @@ namespace SC.SUGMA.GameState
 
                 if (DateTime.UtcNow > EndTime && !IsMatchEnded && MyAPIGateway.Session.IsServer)
                 {
-                    //PointCheck.EndMatch();
-                    // TODO
+                    IsMatchEnded = true;
                     MyLog.Default.WriteLineAndConsole("[MatchTimer] Auto-Stopped Match. " + CurrentMatchTime);
                     Log.Info("[MatchTimer] Auto-Stopped Match. " + CurrentMatchTime);
                 }
