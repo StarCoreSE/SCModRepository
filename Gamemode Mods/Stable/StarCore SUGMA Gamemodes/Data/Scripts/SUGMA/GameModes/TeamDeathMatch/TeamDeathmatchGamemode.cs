@@ -27,7 +27,6 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
 
         public PointTracker PointTracker;
-        public RespawnManager RespawnManager;
 
         internal ShareTrackApi ShareTrackApi => SUGMA_SessionComponent.I.ShareTrackApi;
         internal MatchTimer _matchTimer => SUGMA_SessionComponent.I.GetComponent<MatchTimer>("MatchTimer");
@@ -121,7 +120,6 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
         public override void StartRound(string[] arguments = null)
         {
             PointTracker = new PointTracker(3, 0);
-            RespawnManager = new RespawnManager();
             SUGMA_SessionComponent.I.UnregisterComponent("TDMPointTracker");
             if (!MyAPIGateway.Utilities.IsDedicated)
                 SUGMA_SessionComponent.I.UnregisterComponent("tdmHud");
@@ -165,8 +163,6 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
                 }
             }
 
-            SUGMA_SessionComponent.I.RegisterComponent("TDMRespawnManager", RespawnManager);
-
             base.StartRound(arguments);
             MyAPIGateway.Utilities.ShowNotification("Combatants: " + string.Join(" vs ", factionNames), 10000, "Red");
             _matchTimer.Start(MatchDuration);
@@ -181,7 +177,6 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             Log.Info("Started a TDM match." +
                      $"\n- Combatants: {string.Join(" vs ", factionNames)}" +
                      "\n- Tracked grids:" + trackedGrids);
-            
         }
 
         public override void StopRound()
@@ -223,7 +218,6 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
             _matchTimer?.Stop();
             SUGMA_SessionComponent.I.UnregisterComponent("TDMPointTracker");
-            SUGMA_SessionComponent.I.UnregisterComponent("TDMRespawnManager");
             ShareTrackApi.UnregisterOnAliveChanged(OnAliveChanged);
             ShareTrackApi.UnregisterOnTrack(OnGridTrackChanged);
 

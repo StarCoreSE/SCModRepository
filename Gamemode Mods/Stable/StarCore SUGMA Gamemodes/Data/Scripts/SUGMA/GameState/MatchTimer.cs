@@ -95,6 +95,16 @@ namespace SC.SUGMA.GameState
             }
         }
 
+        public string RemainingTimeString()
+        {
+            var remainingMinutes = (int)Math.Floor(MatchDurationMinutes - CurrentMatchTime.TotalMinutes);
+            var remainingSeconds =
+                (int)((MatchDurationMinutes - CurrentMatchTime.TotalMinutes - remainingMinutes) * 60);
+
+            return
+                $"{(remainingMinutes < 10 ? "0" + remainingMinutes : remainingMinutes.ToString())}:{(remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds.ToString())}";
+        }
+
         #endregion
 
         #region Custom Methods

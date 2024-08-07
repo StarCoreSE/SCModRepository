@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Sandbox.Game.Multiplayer;
 using Sandbox.ModAPI;
 using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
+using SC.SUGMA.Utilities;
 using VRage.Game.ModAPI;
 
 namespace SC.SUGMA.GameState
@@ -14,6 +18,7 @@ namespace SC.SUGMA.GameState
         public int VictoryPoints = 3;
 
         public Dictionary<IMyFaction, int> FactionPoints { get; internal set; } = new Dictionary<IMyFaction, int>();
+        public Action<IMyFaction, int> OnPointsUpdated = null;
 
         private void OnFactionCreated(long factionId)
         {
@@ -72,6 +77,7 @@ namespace SC.SUGMA.GameState
 
             FactionPoints[faction] = value;
 
+            OnPointsUpdated?.Invoke(faction, FactionPoints[faction]);
             if (VictoryPoints > StartingPoints ? value >= VictoryPoints : value <= VictoryPoints)
                 OnFactionWin?.Invoke(faction);
             _pointsUpdated = true;
@@ -89,6 +95,7 @@ namespace SC.SUGMA.GameState
 
             FactionPoints[faction] += value;
 
+            OnPointsUpdated?.Invoke(faction, FactionPoints[faction]);
             if (VictoryPoints > StartingPoints
                     ? FactionPoints[faction] >= VictoryPoints
                     : FactionPoints[faction] <= VictoryPoints)
@@ -114,5 +121,15 @@ namespace SC.SUGMA.GameState
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            IEnumerable<IMyFaction> playerFactions = PlayerTracker.I.GetPlayerFactions();
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var faction in FactionPoints.Where(k => playerFactions.Contains(k.Key)))
+                sb.Append($"{faction.Key.Name}: {faction.Value}pts\n");
+            return sb.ToString();
+        }
     }
 }
