@@ -298,18 +298,18 @@ namespace Scripts
                 ModelName = "", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
-                Decals = new DecalDef
-                {
-                    MaxAge = 1200,
-                    Map = new[]
-                    {
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Metal",
-                            DecalMaterial = "REE_Bullet_Decal",
-                        },
-                    },
-                },
+                //Decals = new DecalDef
+                //{
+                //    MaxAge = 1200,
+                //    Map = new[]
+                //    {
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Metal",
+                //            DecalMaterial = "REE_Bullet_Decal",
+                //        },
+                //    },
+                //},
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
@@ -1369,18 +1369,18 @@ namespace Scripts
                 ModelName = "", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
-                Decals = new DecalDef
-                {
-                    MaxAge = 1200,
-                    Map = new[]
-                    {
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Metal",
-                            DecalMaterial = "REE_Bullet_Decal",
-                        },
-                    },
-                },
+                //Decals = new DecalDef
+                //{
+                //    MaxAge = 1200,
+                //    Map = new[]
+                //    {
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Metal",
+                //            DecalMaterial = "REE_Bullet_Decal",
+                //        },
+                //    },
+                //},
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
