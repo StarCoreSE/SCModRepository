@@ -62,7 +62,8 @@ namespace SC.SUGMA.GameModes.Domination
             //if (PointTracker == null || MatchTimer == null ||
             //    TrackedFactions == null) // ten billion nullchecks of aristeas
             //    return;
-            MyAPIGateway.Utilities.ShowNotification(PointTracker.ToString(), 1000/60);
+            if (MatchTimer.IsMatchEnded)
+                StopRound();
         }
 
         public override void StartRound(string[] arguments)
@@ -93,7 +94,7 @@ namespace SC.SUGMA.GameModes.Domination
                 WinningFaction = faction;
                 StopRound();
             };
-
+            
             var factionNames = new List<string>();
             foreach (var faction in TrackedFactions)
             {
@@ -141,6 +142,9 @@ namespace SC.SUGMA.GameModes.Domination
             {
                 if (!MyAPIGateway.Session.IsServer)
                     return;
+
+                if (WinningFaction == null)
+                    WinningFaction = PointTracker.FactionPoints.MaxBy(f => f.Value).Key;
 
                 Arguments = Arguments.Concat(new[] { $"win{WinningFaction?.FactionId ?? -1}" }).ToArray();
             }
