@@ -88,6 +88,11 @@ namespace SC.SUGMA.GameModes.Domination
             SUGMA_SessionComponent.I.RegisterComponent("DOMRespawnManager", RespawnManager);
 
             ShareTrackApi.RegisterOnAliveChanged(OnAliveChanged);
+            PointTracker.OnFactionWin += faction =>
+            {
+                WinningFaction = faction;
+                StopRound();
+            };
 
             var factionNames = new List<string>();
             foreach (var faction in TrackedFactions)
