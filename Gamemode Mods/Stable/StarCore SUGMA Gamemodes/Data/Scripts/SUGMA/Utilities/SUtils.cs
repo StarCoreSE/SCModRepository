@@ -91,12 +91,15 @@ namespace SC.SUGMA.Utilities
             MyAPIGateway.Utilities.ShowMessage("Shields", "Charged");
         }
 
-        public static Vector3D RandVector()
+        public static Vector3D RandVector(double min = 0, double max = 1)
         {
+            if (max < min)
+                max = min;
+
             var theta = Random.NextDouble() * 2.0 * Math.PI;
             var phi = Math.Acos(2.0 * Random.NextDouble() - 1.0);
             var sinPhi = Math.Sin(phi);
-            return Math.Pow(Random.NextDouble(), 1/3d) * new Vector3D(sinPhi * Math.Cos(theta), sinPhi * Math.Sin(theta), Math.Cos(phi));
+            return Math.Pow(Random.NextDouble() * (max - min) + min, 1/3d) * new Vector3D(sinPhi * Math.Cos(theta), sinPhi * Math.Sin(theta), Math.Cos(phi));
         }
 
         public static void PlaySound(MySoundPair sound)

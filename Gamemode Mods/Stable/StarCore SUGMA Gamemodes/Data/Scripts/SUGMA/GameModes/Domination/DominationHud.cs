@@ -124,7 +124,7 @@ namespace SC.SUGMA.GameModes.Domination
                         ParentAlignments.Top,
                     Color = HudConstants.HudBackgroundColor,
                     Offset = new Vector2(0, (int)-Math.Floor(idx / 2f) * (24 + 5)),
-                    Text = "0%",
+                    Text = _gamemode.PointTracker.VictoryPoints == -1 ? "0" : "0%",
                 };
                 idx++;
             }
@@ -137,7 +137,7 @@ namespace SC.SUGMA.GameModes.Domination
             if (!_factionLabels.ContainsKey(faction))
                 return;
 
-            _factionLabels[faction].Text = $"{100f*((float)points/_gamemode.PointTracker.VictoryPoints):N0}%";
+            _factionLabels[faction].Text = _gamemode.PointTracker.VictoryPoints == -1 ? points.ToString() : $"{100f*((float)points/_gamemode.PointTracker.VictoryPoints):N0}%";
         }
 
         public void Update()
