@@ -22,6 +22,8 @@ namespace StarCore.ShareTrack.TrackerApi
                 ["UnregisterOnAliveChanged"] = new Action<Action<IMyCubeGrid, bool>>(UnregisterOnAliveChanged),
                 ["AreTrackedGridsLoaded"] = new Func<bool>(AreTrackedGridsLoaded),
                 ["GetGridPoints"] = new Func<IMyCubeGrid, int>(GetGridPoints),
+                ["TrackGrid"] = new Action<IMyCubeGrid, bool>(TrackGrid),
+                ["UnTrackGrid"] = new Action<IMyCubeGrid, bool>(UnTrackGrid),
             };
         }
 
@@ -73,6 +75,16 @@ namespace StarCore.ShareTrack.TrackerApi
                 return -1;
 
             return TrackingManager.I.TrackedGrids[grid].BattlePoints;
+        }
+
+        private void TrackGrid(IMyCubeGrid grid, bool share)
+        {
+            TrackingManager.I?.TrackGrid(grid, share);
+        }
+
+        private void UnTrackGrid(IMyCubeGrid grid, bool share)
+        {
+            TrackingManager.I?.UntrackGrid(grid, share);
         }
     }
 }

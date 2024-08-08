@@ -174,7 +174,7 @@ namespace StarCore.ShareTrack.ShipTracking
         #region Private Fields
 
         private int UpdateCounter = 0;
-        private int UpdateInterval = 10;
+        private int UpdateInterval = 100;
         // TODO
 
         #endregion

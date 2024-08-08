@@ -7,6 +7,7 @@ using RichHudFramework.Client;
 using Sandbox.ModAPI;
 using SC.SUGMA.API;
 using SC.SUGMA.Commands;
+using SC.SUGMA.GameModes.Domination;
 using SC.SUGMA.GameModes.TeamDeathMatch;
 using SC.SUGMA.GameModes.TeamDeathMatch_Zones;
 using SC.SUGMA.GameState;
@@ -29,7 +30,8 @@ namespace SC.SUGMA
             ["PlayerTracker"] = new PlayerTracker(),
             ["DisconnectHandler"] = new DisconnectHandler(),
             ["tdm"] = new TeamDeathmatchGamemode(),
-            ["tdmz"] = new TDMZonesGamemode()
+            ["tdmz"] = new TDMZonesGamemode(),
+            ["dom"] = new DominationGamemode(),
         };
 
         /// <summary>
