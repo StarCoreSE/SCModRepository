@@ -13,8 +13,19 @@
      </Id>
      <DisplayName>[NHI] 'Heimdallr' Point-Defense Cannon</DisplayName>
 	   <Description>
-       The 'Heimdallr' is a 20mm Point-Defense Cannon with a Mid-Tier Range of 3000 Meters. Most Effective against Missiles, Rockets, and other Similar Guided Munitions. Also Decently Effective against Small Grids.
-	   </Description>
+[Turret Range: MAX 3000m | MIN 100m]
+[Reload: 1 Second]
+[Power Draw: None]
+
+[Ammo Types: CRAM]
+[Shell Range: 3100m]
+[Shell Speed: 1800m/s]
+[Damage Types: Kinetic]
+[Damage Falloffs: None]
+
+The 'Heimdallr' is a 20mm Point-Defense Cannon with a Mid-Tier Range of 3000 Meters. 
+Most Effective against Missiles, Rockets, and other Similar Guided Munitions, but Also Decently Effective against Small Grids.
+     </Description>
      <Icon>Textures\GUI\Icons\MyGat.dds</Icon>
      <CubeSize>Large</CubeSize>
 	   <GuiVisible>true</GuiVisible>
@@ -62,7 +73,18 @@
      </Id>
      <DisplayName>[NHI] 'Heimdallr' Point-Defense Cannon Half Block</DisplayName>
      <Description>
-       The 'Heimdallr' is a 20mm Point-Defense Cannon with a Mid-Tier Range of 3000 Meters. Most Effective against Missiles, Rockets, and other Similar Guided Munitions. Also Decently Effective against Small Grids.
+[Turret Range: MAX 3000m | MIN 100m]
+[Reload: 1 Second]
+[Power Draw: None]
+
+[Ammo Types: CRAM]
+[Shell Range: 3100m]
+[Shell Speed: 1800m/s]
+[Damage Types: Kinetic]
+[Damage Falloffs: None]
+
+The 'Heimdallr' is a 20mm Point-Defense Cannon with a Mid-Tier Range of 3000 Meters. 
+Most Effective against Missiles, Rockets, and other Similar Guided Munitions, but Also Decently Effective against Small Grids.
      </Description>
      <Icon>Textures\GUI\Icons\Odin_PDC_Half_Block.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -111,7 +133,18 @@
      </Id>
      <DisplayName>[NHI] 'Heimdallr' Point-Defense Cannon 1x2 Slope Top</DisplayName>
      <Description>
-       The 'Heimdallr' is a 20mm Point-Defense Cannon with a Mid-Tier Range of 3000 Meters. Most Effective against Missiles, Rockets, and other Similar Guided Munitions. Also Decently Effective against Small Grids.
+[Turret Range: MAX 3000m | MIN 100m]
+[Reload: 1 Second]
+[Power Draw: None]
+
+[Ammo Types: CRAM]
+[Shell Range: 3100m]
+[Shell Speed: 1800m/s]
+[Damage Types: Kinetic]
+[Damage Falloffs: None]
+
+The 'Heimdallr' is a 20mm Point-Defense Cannon with a Mid-Tier Range of 3000 Meters. 
+Most Effective against Missiles, Rockets, and other Similar Guided Munitions, but Also Decently Effective against Small Grids.
      </Description>
      <Icon>Textures\GUI\Icons\Odin_PDC_Half_Slope_Top.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -160,7 +193,18 @@
      </Id>
      <DisplayName>[NHI] 'Heimdallr' Point-Defense Cannon 1x2 Slope Tip</DisplayName>
      <Description>
-       The 'Heimdallr' is a 20mm Point-Defense Cannon with a Mid-Tier Range of 3000 Meters. Most Effective against Missiles, Rockets, and other Similar Guided Munitions. Also Decently Effective against Small Grids.
+[Turret Range: MAX 3000m | MIN 100m]
+[Reload: 1 Second]
+[Power Draw: None]
+
+[Ammo Types: CRAM]
+[Shell Range: 3100m]
+[Shell Speed: 1800m/s]
+[Damage Types: Kinetic]
+[Damage Falloffs: None]
+
+The 'Heimdallr' is a 20mm Point-Defense Cannon with a Mid-Tier Range of 3000 Meters. 
+Most Effective against Missiles, Rockets, and other Similar Guided Munitions, but Also Decently Effective against Small Grids.
      </Description>
      <Icon>Textures\GUI\Icons\Odin_PDC_Half_Slope_Tip.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -209,7 +253,18 @@
      </Id>
      <DisplayName>[NHI] 'Heimdallr' Point-Defense Cannon 45 Slope</DisplayName>
      <Description>
-       The 'Heimdallr' is a 20mm Point-Defense Cannon with a Mid-Tier Range of 3000 Meters. Most Effective against Missiles, Rockets, and other Similar Guided Munitions. Also Decently Effective against Small Grids.
+[Turret Range: MAX 3000m | MIN 100m]
+[Reload: 1 Second]
+[Power Draw: None]
+
+[Ammo Types: CRAM]
+[Shell Range: 3100m]
+[Shell Speed: 1800m/s]
+[Damage Types: Kinetic]
+[Damage Falloffs: None]
+
+The 'Heimdallr' is a 20mm Point-Defense Cannon with a Mid-Tier Range of 3000 Meters. 
+Most Effective against Missiles, Rockets, and other Similar Guided Munitions, but Also Decently Effective against Small Grids.
      </Description>
      <Icon>Textures\GUI\Icons\Odin_PDC_45_Slope.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -258,10 +313,17 @@
      </Id>
      <DisplayName>[NHI] 'Vanir' Light Autocannon</DisplayName>
      <Description>
-Light Autocannon that fires an APHE Round.
-[Range: 3500]
+[Turret Range: 3500m]
+[Reload: 8 Seconds]
+[Power Draw: 12MW]
+
+[Ammo Types: APHE]
+[Shell Range: 3500m]
 [Shell Speed: 1250m/s]
-[Damage Type: Energy]
+[Damage Types: Energy]
+[Damage Falloffs: None]
+
+Light Autocannon that fires an APHE Round.
      </Description>
      <Icon>Textures\GUI\Icons\Odin_Defense_Cannon_1x1x2.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -309,10 +371,19 @@ Light Autocannon that fires an APHE Round.
      </Id>
      <DisplayName>[NHI] 'Aesir' Autocannon</DisplayName>
 	   <Description>
-A General Purpose Autocannon. Fires an APHE Shell with Generalized Damage Capabilities.
-[Range: 5000]
+[Range: 5000m]
+[Reload: 10 Seconds]
+[Power Draw: None]
+
+[Ammo Types: APHE]
+[Shell Range: 5000m]
 [Shell Speed: 1500m/s]
-[Damage Type: EN/KIN]
+[Damage Types: Energy]
+[Damage Falloffs: None]
+       
+General Purpose Autocannon. Uses an APHE round with no specific or special damage capabilities.
+
+None
      </Description>
      <Icon>Textures\GUI\Icons\New_Autocannon_3x3_2.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -362,10 +433,17 @@ A General Purpose Autocannon. Fires an APHE Shell with Generalized Damage Capabi
      </Id>
      <DisplayName>[NHI] 'Surtr' Rotary Laser Cannon</DisplayName>
      <Description>
+[Turret Range: 3500m]
+[Reload: 11 Seconds]
+[Power Draw: 225MW]
+
+[Ammo Types: Pulse Laser]
+[Shell Range: 3650m]
+[Shell Speed: Hitscan]
+[Damage Types: Energy]
+[Damage Falloffs: None]
+
 Turreted Rotary Laser Cannon. Fires a Laser Pulse that Excels at Light Armor and Component Damage.
-[Range: 3500]
-[Shell Speed: 5000m/s]
-[Damage Type: EN]
      </Description>
      <Icon>Textures\GUI\Icons\NHI_Gatling_Laser_Turret_U.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -427,10 +505,17 @@ Turreted Rotary Laser Cannon. Fires a Laser Pulse that Excels at Light Armor and
      </Id>
      <DisplayName>[NHI] 'Skadi' Light Railgun</DisplayName>
      <Description>
+[Turret Range: 4500m]
+[Reload: 15 Seconds]
+[Power Draw: 192MW]
+
+[Ammo Types: Kinetic Slug]
+[Shell Range: 7000m]
+[Shell Speed: 3000m/s]
+[Damage Types: Kinetic]
+[Damage Falloffs: None]
+
 Light Railgun Turret that fires a 3 Slug Burst
-[Range: 6000]
-[Shell Speed: 2500m/s]
-[Damage Type: KIN]
      </Description>
      <Icon>Textures\GUI\Icons\Odin_Railgun_3x3.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -535,11 +620,18 @@ Heavy Railgun Turret that fires a single slug every 10 Seconds
        <SubtypeId>NHI_Heavy_Gun_Turret</SubtypeId>
      </Id>
      <DisplayName>[NHI] 27-Inch 'Gugnir' Heavy Gun Turret</DisplayName>
-     <Description>
-27-Inch Heavy Gun Turret that fires a Canister Shot Shell
-[Range: 6000]
-[Shell Speed: 1400m/s]
-[Damage Type: KIN]
+     <Description>       
+[Turret Range: 6000m]
+[Reload: 12 Seconds]
+[Power Draw: None]
+
+[Ammo Types: Canister Shot | Flare Shot]
+[Shell Range: 6500m | 4000m]
+[Shell Speed: 1400m/s | 400m/s]
+[Damage Types: Kinetic | None]
+[Damage Falloffs: None]
+
+27-Inch Heavy Gun Turret that fires a Canister Shot Shell or a Flare Shell that distract enemy PD.
      </Description>
      <Icon>Textures\GUI\Icons\Gungir_Thumper.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -588,10 +680,17 @@ Heavy Railgun Turret that fires a single slug every 10 Seconds
      </Id>
      <DisplayName>[NHI] Mk3 Battleship Cannon</DisplayName>
      <Description>
-A Heavy Battleship Cannon, Can fire either an HE Shell or Canister Shot
-[Range: 7000]
-[Shell Speed: 1400m/s]
-[Damage Type: EN/KIN]
+[Turret Range: 7000m]
+[Reload: 13 Seconds]
+[Power Draw: None]
+
+[Ammo Types: HE | HVAP]
+[Shell Range: 8200m | 5200m]
+[Shell Speed: 1800m/s | 3200m/s]
+[Damage Types: Energy | Kinetic]
+[Damage Falloffs: None]
+
+A Heavy Battleship Cannon. Fires an HE Shell or an HVAP Shell.
      </Description>
      <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk3.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -656,10 +755,17 @@ A Heavy Battleship Cannon, Can fire either an HE Shell or Canister Shot
      </Id>
      <DisplayName>[NHI] Mk3 Battleship Cannon</DisplayName>
      <Description>
-A Heavy Battleship Cannon, Can fire either an HE Shell or Canister Shot
-[Range: 7000]
-[Shell Speed: 1400m/s]
-[Damage Type: EN/KIN].
+[Turret Range: 7000m]
+[Reload: 13 Seconds]
+[Power Draw: None]
+
+[Ammo Types: HE | HVAP]
+[Shell Range: 8200m | 5200m]
+[Shell Speed: 1800m/s | 3200m/s]
+[Damage Types: Energy | Kinetic]
+[Damage Falloffs: None]
+
+A Heavy Battleship Cannon. Fires an HE Shell or an HVAP Shell.
      </Description>
      <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk3.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -725,10 +831,17 @@ A Heavy Battleship Cannon, Can fire either an HE Shell or Canister Shot
      </Id>
      <DisplayName>[NHI] Mk2 Battleship Cannon</DisplayName>
      <Description>
-A Heavy Battleship Cannon, Fires an HE Shell
-[Range: 6000]
-[Shell Speed: 1100m/s]
-[Damage Type: EN]
+[Turret Range: 6000m]
+[Reload: 9 Seconds]
+[Power Draw: None]
+
+[Ammo Types: HE | HVAP]
+[Shell Range: 7200m | 7200m]
+[Shell Speed: 1100m/s | 2200m/s]
+[Damage Types: Energy | Kinetic]
+[Damage Falloffs: None]
+
+A Medium Battleship Cannon. Fires an HE Shell or an HVAP Shell.
      </Description>
      <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk2.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -794,10 +907,17 @@ A Heavy Battleship Cannon, Fires an HE Shell
      </Id>
      <DisplayName>[NHI] Mk2 Battleship Cannon</DisplayName>
      <Description>
-A Heavy Battleship Cannon, Fires an HE Shell
-[Range: 6000]
-[Shell Speed: 1100m/s]
-[Damage Type: EN]
+[Turret Range: 6000m]
+[Reload: 9 Seconds]
+[Power Draw: None]
+
+[Ammo Types: HE | HVAP]
+[Shell Range: 7200m | 7200m]
+[Shell Speed: 1100m/s | 2200m/s]
+[Damage Types: Energy | Kinetic]
+[Damage Falloffs: None]
+
+A Medium Battleship Cannon. Fires an HE Shell or an HVAP Shell.
      </Description>
      <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk2.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -863,10 +983,17 @@ A Heavy Battleship Cannon, Fires an HE Shell
      </Id>
      <DisplayName>[NHI] Mk1 Battleship Cannon</DisplayName>
      <Description>
-A Heavy Battleship Cannon, Fires an HE Shell
-[Range: 5000]
-[Shell Speed: 1100m/s]
-[Damage Type: EN]
+[Turret Range: 5000m]
+[Reload: 4.5 Seconds]
+[Power Draw: None]
+
+[Ammo Types: HE | HVAP]
+[Shell Range: 6200m | 6200m]
+[Shell Speed: 1100m/s | 2200m/s]
+[Damage Types: Energy | Kinetic]
+[Damage Falloffs: None]
+
+A Light Battleship Cannon. Fires an HE Shell or an HVAP Shell.
      </Description>
      <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk1.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -915,10 +1042,17 @@ A Heavy Battleship Cannon, Fires an HE Shell
      </Id>
      <DisplayName>[NHI] Mk1 Battleship Cannon</DisplayName>
      <Description>
-A Heavy Battleship Cannon, Fires an HE Shell
-[Range: 5000]
-[Shell Speed: 1100m/s]
-[Damage Type: EN]
+[Turret Range: 5000m]
+[Reload: 4.5 Seconds]
+[Power Draw: None]
+
+[Ammo Types: HE | HVAP]
+[Shell Range: 6200m | 6200m]
+[Shell Speed: 1100m/s | 2200m/s]
+[Damage Types: Energy | Kinetic]
+[Damage Falloffs: None]
+
+A Light Battleship Cannon. Fires an HE Shell or an HVAP Shell.
      </Description>
      <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk1.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -1016,7 +1150,7 @@ A Heavy Battleship Cannon, Fires an HE Shell
      <MaxFov>1.04719755</MaxFov>
    </Definition>
 
-   <!-- Utility Launcher -->
+<!-- Utility Launcher -->
    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
      <Id>
        <TypeId>ConveyorSorter</TypeId>
@@ -1120,7 +1254,7 @@ A Heavy Battleship Cannon, Fires an HE Shell
      <MaxFov>1.04719755</MaxFov>
    </Definition>
    
-   <!-- Spinal Ion Beam -->
+<!-- Spinal Ion Beam -->
    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
      <Id>
        <TypeId>ConveyorSorter</TypeId>
@@ -1180,10 +1314,17 @@ A Heavy Battleship Cannon, Fires an HE Shell
      </Id>
      <DisplayName>[NHI] 'Fenrir' Fixed Autocannon</DisplayName>
      <Description>
-Fixed Rotary Autocannon, Fires either HE or AP Rounds, which prioritise either Component or Armor Damage Respectively.
-[Range: 3500]
-[Shell Speed: 1500m/s]
-[Damage Type: EN/KIN]
+[Turret Range: 5000m]
+[Reload: None]
+[Power Draw: None]
+
+[Ammo Types: HE | AP]
+[Shell Range: 5000m | 5000m]
+[Shell Speed: 1500m/s | 15000m/s]
+[Damage Types: Energy | Kinetic]
+[Damage Falloffs: None]
+
+Fixed Rotary Autocannon, Fires either HE or AP Rounds, which prioritise either Shield/Comp or Armor Damage Respectively.
      </Description>
      <Icon>Textures\GUI\Icons\Fixed_Heavy_Autocannon.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -1223,7 +1364,7 @@ Fixed Rotary Autocannon, Fires either HE or AP Rounds, which prioritise either C
      <InventoryMaxVolume>1</InventoryMaxVolume>
    </Definition>
 
-   <!-- Fixed Light Autocannon -->
+<!-- Fixed Light Autocannon -->
    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
      <Id>
        <TypeId>ConveyorSorter</TypeId>
@@ -1284,10 +1425,17 @@ Cheaper and Smaller Version of the Fenrir, with a Burst Fire Pattern. Unlike the
      </Id>
      <DisplayName>[NHI] 'Jotunn' Fixed Gatling Laser</DisplayName>
   <Description>
-Fixed Gatling Laser. Can fire either a Laser Pulse, or a Shield Healing Pulse
-[Range: 3500/2000]
-[Shell Speed: 5000m/s]
-[Damage Type: EN/HEAL]
+[Turret Range: 5000m]
+[Reload: None]
+[Power Draw: 45MW]
+
+[Ammo Types: Pulse Laser | Pulse Heal]
+[Shell Range: 5000m | 2000m]
+[Shell Speed: Hitscan | Hitscan]
+[Damage Types: Energy | Heal]
+[Damage Falloffs: None]
+
+Fixed Gatling Laser. Can fire either a Laser Pulse, or a Shield Healing Pulse.
   </Description>
      <Icon>Textures\GUI\Icons\Fixed_Heavy_Laser.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -1340,7 +1488,7 @@ Fixed Gatling Laser. Can fire either a Laser Pulse, or a Shield Healing Pulse
      <MaxFov>1.04719755</MaxFov>
    </Definition>
 
-   <!-- Fixed Light Laser -->
+<!-- Fixed Light Laser -->
    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
      <Id>
        <TypeId>ConveyorSorter</TypeId>
@@ -1831,10 +1979,17 @@ Lacks the Ability to Heal Shields and and Must Completely cool down after reachi
      </Id>
      <DisplayName>[NHI] 'Hurricane' Naval Gun</DisplayName>
      <Description>
-       A Heavy Naval Cannon, Fires an APCBC Shell
-       [Range: 5000]
-       [Shell Speed: 1100m/s]
-       [Damage Type: KIN]
+[Turret Range: 5000m]
+[Reload: 5 Seconds]
+[Power Draw: None]
+
+[Ammo Types: APCBC]
+[Shell Range: 5400m]
+[Shell Speed: 1300m/s]
+[Damage Types: Kinetic]
+[Damage Falloffs: None]
+
+A Heavy Naval Cannon, Fires an APCBC Shell
      </Description>
      <Icon>Textures\GUI\Icons\NHI_Kinetic_Turret.dds</Icon>
      <CubeSize>Large</CubeSize>
