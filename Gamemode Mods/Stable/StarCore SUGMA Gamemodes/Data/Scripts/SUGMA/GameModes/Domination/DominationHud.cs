@@ -8,7 +8,9 @@ using SC.SUGMA.GameState;
 using SC.SUGMA.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using RichHudFramework.UI.Rendering;
+using Sandbox.Engine.Platform;
 using VRage.Game.ModAPI;
 using VRageMath;
 
@@ -44,7 +46,7 @@ namespace SC.SUGMA.GameModes.Domination
 
         public override void UpdateTick()
         {
-            if (RespawnTimeRemaining > 0)
+            if (RespawnTimeRemaining > 0 && Gamemode.IsStarted)
             {
                 RespawnTimeRemaining -= 1 / 60d;
                 MyAPIGateway.Utilities.ShowNotification($"Respawning in {RespawnTimeRemaining:F1}", 1000/60, "Red");
@@ -81,7 +83,6 @@ namespace SC.SUGMA.GameModes.Domination
 
         private bool _matchEnded;
         private readonly MatchTimer _timer;
-
         private readonly LabelBox _timerLabel;
 
         private readonly Dictionary<IMyFaction, LabelBox> _factionLabels = new Dictionary<IMyFaction, LabelBox>();
@@ -96,7 +97,7 @@ namespace SC.SUGMA.GameModes.Domination
             if (_timer == null)
                 throw new Exception("Null match timer!");
 
-            Size = new Vector2(320, 24);
+            Size = new Vector2(100, 24);
 
             Offset = new Vector2(0, 515); // Regardless of screen size, this is out of 1920x1080
 
@@ -119,12 +120,12 @@ namespace SC.SUGMA.GameModes.Domination
                     Format = GlyphFormat.White.WithColor(faction.CustomColor.ColorMaskToRgb()).WithSize(2)
                         .WithAlignment(TextAlignment.Center),
                     ParentAlignment =
-                        ParentAlignments.Inner |
-                        (idx % 2 == 0 ? ParentAlignments.Left : ParentAlignments.Right) |
+                        ParentAlignments.InnerV |
+                        (idx % 2 == 0 ? ParentAlignments.Right : ParentAlignments.Left) |
                         ParentAlignments.Top,
                     Color = HudConstants.HudBackgroundColor,
                     Offset = new Vector2(0, (int)-Math.Floor(idx / 2f) * (24 + 5)),
-                    Text = "0%",
+                    Text = _gamemode.PointTracker.VictoryPoints == -1 ? "0" : "0%",
                 };
                 idx++;
             }
@@ -137,7 +138,7 @@ namespace SC.SUGMA.GameModes.Domination
             if (!_factionLabels.ContainsKey(faction))
                 return;
 
-            _factionLabels[faction].Text = $"{100f*((float)points/_gamemode.PointTracker.VictoryPoints):N0}%";
+            _factionLabels[faction].Text = _gamemode.PointTracker.VictoryPoints == -1 ? points.ToString() : $"{100f*((float)points/_gamemode.PointTracker.VictoryPoints):N0}%";
         }
 
         public void Update()
@@ -153,13 +154,13 @@ namespace SC.SUGMA.GameModes.Domination
             _matchEnded = true;
             var winnerPoints = 0;
 
-            if (_timerLabel == null)
-                return;
+            _timerLabel?.Unregister();
+            _factionLabels.ForEach(l => l.Value.Unregister());
 
             var winnerLabel = new LabelBox(_timerLabel)
             {
                 Text = winner != null
-                    ? $"A WINNER IS {winner.Name}. {winnerPoints} tickets remaining."
+                    ? $"A WINNER IS {winner.Name}."
                     : "YOU ARE ALL LOSERS",
                 ParentAlignment = ParentAlignments.Bottom,
                 Height = TDMHud_TeamBanner.BaseHeight,
