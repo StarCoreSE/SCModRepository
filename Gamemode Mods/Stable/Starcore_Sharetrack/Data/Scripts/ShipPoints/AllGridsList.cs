@@ -155,9 +155,12 @@ namespace StarCore.ShareTrack
             if (MasterSession.I.Ticks % 59 != 0)
                 return;
 
-            foreach (var shipTracker in TrackingManager.I.TrackedGrids.Values)
+            lock (TrackingManager.I.TrackedGrids)
             {
-                shipTracker.Update();
+                foreach (var shipTracker in TrackingManager.I.TrackedGrids.Values)
+                {
+                    shipTracker.Update();
+                }
             }
 
             if (IntegretyMessage == null || !TextHudApi.Heartbeat)
