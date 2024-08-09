@@ -155,7 +155,8 @@ namespace SC.SUGMA.GameModes.Domination
             var winnerPoints = 0;
 
             _timerLabel?.Unregister();
-            _factionLabels.ForEach(l => l.Value.Unregister());
+            foreach (var label in _factionLabels)
+                label.Value.Unregister();
 
             var winnerLabel = new LabelBox(_timerLabel)
             {
