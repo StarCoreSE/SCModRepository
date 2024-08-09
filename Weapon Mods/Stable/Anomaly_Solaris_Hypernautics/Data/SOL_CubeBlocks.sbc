@@ -493,7 +493,7 @@
 
 
 
-		<!--
+	
    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
 		
 		  <Id>
@@ -554,7 +554,6 @@
       <MaxFov>1.04719755</MaxFov>
   <DestroySound>Betty_Weapon_Destroyed</DestroySound>
     </Definition>
-		-->
 
 
 
