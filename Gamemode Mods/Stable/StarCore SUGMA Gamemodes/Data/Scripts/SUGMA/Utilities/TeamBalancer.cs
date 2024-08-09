@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Sandbox.Game;
 using Sandbox.ModAPI;
 using SC.SUGMA.API;
@@ -15,6 +13,7 @@ namespace SC.SUGMA.Utilities
 {
     public static class TeamBalancer
     {
+        public const float MassWeightModifier = 20/1000000f;
         private static ShareTrackApi ShareTrackApi => SUGMA_SessionComponent.I.ShareTrackApi;
 
         public static void PerformBalancing()
@@ -78,7 +77,7 @@ namespace SC.SUGMA.Utilities
             for (int i = 0; i < grids.Length; i++)
             {
                 IMyFaction lowestFaction = factionPoints.MinBy(a => a.Value).Key;
-                factionPoints[lowestFaction] += ShareTrackApi.GetGridPoints(grids[i]);
+                factionPoints[lowestFaction] += ShareTrackApi.GetGridPoints(grids[i]) + (int)((grids[i].Physics?.Mass ?? 0) * MassWeightModifier);
 
                 if (grids[i].BigOwners.Count < 1)
                 {
