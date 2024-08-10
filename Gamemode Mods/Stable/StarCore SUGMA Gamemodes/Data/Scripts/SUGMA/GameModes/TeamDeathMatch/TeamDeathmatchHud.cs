@@ -11,7 +11,6 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 {
     internal class TeamDeathmatchHud : ComponentBase
     {
-        private const int MatchResultsVisibleTicks = 900;
         private int _closeTime = -1;
         private readonly TeamDeathmatchGamemode _gamemode;
 
@@ -49,7 +48,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
         public void MatchEnded(IMyFaction winner)
         {
             Window.MatchEnded(winner);
-            _closeTime = MatchResultsVisibleTicks;
+            _closeTime = HudConstants.MatchResultsVisibleTicks;
         }
     }
 
@@ -113,16 +112,9 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             if (_matchEnded)
                 return;
 
-            var matchTime = _timer.CurrentMatchTime;
-            var matchSeconds = (int)matchTime.TotalSeconds;
             var basePoints = (int)(_timer.MatchDurationMinutes * 60);
 
-            var remainingMinutes = (int)Math.Floor(_timer.MatchDurationMinutes - matchTime.TotalMinutes);
-            var remainingSeconds =
-                (int)((_timer.MatchDurationMinutes - matchTime.TotalMinutes - remainingMinutes) * 60);
-
-            _timerLabel.Text =
-                $"{(remainingMinutes < 10 ? "0" + remainingMinutes : remainingMinutes.ToString())}:{(remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds.ToString())}";
+            _timerLabel.Text = _timer.RemainingTimeString();
 
             foreach (var banner in Banners) banner.Update(_gamemode.CalculateFactionPoints(banner.Faction), basePoints);
         }

@@ -177,7 +177,6 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
             Log.Info("Started a TDM match." +
                      $"\n- Combatants: {string.Join(" vs ", factionNames)}" +
                      "\n- Tracked grids:" + trackedGrids);
-            
         }
 
         public override void StopRound()

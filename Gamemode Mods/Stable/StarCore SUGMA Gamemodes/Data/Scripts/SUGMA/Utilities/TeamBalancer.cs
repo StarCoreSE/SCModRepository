@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Sandbox.Game;
 using Sandbox.ModAPI;
 using SC.SUGMA.API;
@@ -15,6 +13,7 @@ namespace SC.SUGMA.Utilities
 {
     public static class TeamBalancer
     {
+        public const float MassWeightModifier = 20/1000000f;
         private static ShareTrackApi ShareTrackApi => SUGMA_SessionComponent.I.ShareTrackApi;
 
         public static void PerformBalancing()
@@ -29,7 +28,7 @@ namespace SC.SUGMA.Utilities
                 return;
             }
 
-            Dictionary<IMyFaction, IMyCubeGrid> factionSpawns = GetFactionSpawns();
+            Dictionary<IMyFaction, IMyCubeGrid> factionSpawns = SUtils.GetFactionSpawns();
 
             SUtils.SetDamageEnabled(false);
 
@@ -78,7 +77,7 @@ namespace SC.SUGMA.Utilities
             for (int i = 0; i < grids.Length; i++)
             {
                 IMyFaction lowestFaction = factionPoints.MinBy(a => a.Value).Key;
-                factionPoints[lowestFaction] += ShareTrackApi.GetGridPoints(grids[i]);
+                factionPoints[lowestFaction] += ShareTrackApi.GetGridPoints(grids[i]) + (int)((grids[i].Physics?.Mass ?? 0) * MassWeightModifier);
 
                 if (grids[i].BigOwners.Count < 1)
                 {
@@ -91,28 +90,6 @@ namespace SC.SUGMA.Utilities
             }
 
             return factionGrids;
-        }
-
-        private static Dictionary<IMyFaction, IMyCubeGrid> GetFactionSpawns()
-        {
-            HashSet<IMyCubeGrid> allGrids = new HashSet<IMyCubeGrid>();
-            MyAPIGateway.Entities.GetEntities(null, e =>
-            {
-                if (e is IMyCubeGrid)
-                    allGrids.Add((IMyCubeGrid) e);
-                return false;
-            });
-
-            Dictionary<IMyFaction, IMyCubeGrid> factionSpawns = new Dictionary<IMyFaction, IMyCubeGrid>();
-
-            foreach (var grid in allGrids.Where(g => g.IsStatic && g.DisplayName.EndsWith(" Spawn")))
-            {
-                if (grid.BigOwners.Count < 1)
-                    continue;
-                factionSpawns[grid.GetFaction()] = grid;
-            }
-
-            return factionSpawns;
         }
     }
 }
