@@ -339,6 +339,9 @@ namespace Starcore.FieldGenerator
 
             _gridBlockCount++;
 
+            if (!_gridBlocks.Contains(block))
+                _gridBlocks.Add(block);
+
             if (block.FatBlock != null && block.FatBlock.BlockDefinition.SubtypeId == "FieldGen_Capacity_Upgrade")
             {
                 if (IsNeighbour(block) && IsModuleValid(block))
@@ -362,6 +365,9 @@ namespace Starcore.FieldGenerator
                 return;
 
             _gridBlockCount--;
+
+            if (_gridBlocks.Contains(block))
+                _gridBlocks.Remove(block);
 
             if (block.FatBlock != null)
             {
@@ -442,7 +448,7 @@ namespace Starcore.FieldGenerator
                 {
                     SiegeElapsedTime++;
 
-                    SiegeBlockShutdown((List<IMySlimBlock>)_gridBlocks.Where(b => b.FatBlock != null));
+                    SiegeBlockShutdown(_gridBlocks);
 
                     if (Block.CubeGrid.Physics.LinearVelocity != Vector3D.Zero)
                     {
@@ -456,7 +462,7 @@ namespace Starcore.FieldGenerator
                     if (IsServer && GridStopped.Value)
                         GridStopped.Value = false;
 
-                    SiegeBlockReboot((List<IMySlimBlock>)_gridBlocks.Where(b => b.FatBlock != null));
+                    SiegeBlockReboot(_gridBlocks);
 
                     SiegeMode = false;
                     
@@ -618,6 +624,9 @@ namespace Starcore.FieldGenerator
         {
             foreach (var block in allTerminalBlocks)
             {
+                if (block.FatBlock == null)
+                    continue;
+
                 var entBlock = block as MyEntity;
                 if (entBlock != null && FieldGeneratorSession.CoreSysAPI.HasCoreWeapon(entBlock))
                 {
@@ -637,6 +646,9 @@ namespace Starcore.FieldGenerator
         {
             foreach (var block in allTerminalBlocks)
             {
+                if (block.FatBlock == null)
+                    continue;
+
                 var entBlock = block as MyEntity;
                 if (entBlock != null && FieldGeneratorSession.CoreSysAPI.HasCoreWeapon(entBlock))
                 {
