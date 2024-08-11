@@ -58,7 +58,9 @@ namespace SC.SUGMA.GameState
         public override void UpdateTick()
         {
             if (!MyAPIGateway.Session.IsServer)
+            {
                 return;
+            }
 
             _ticks++;
             while (_respawnTimeBuffer.Count > 0 && _respawnTimeBuffer.Peek().Item1 <= _ticks)
@@ -94,7 +96,7 @@ namespace SC.SUGMA.GameState
                 var newControl = (MyCockpit) ((MyCubeGrid)newGrid).MainCockpit ?? (MyCockpit) newGrid.GetFatBlocks<IMyCockpit>().FirstOrDefault();
 
                 if (newControl != null)
-                    MyVisualScriptLogicProvider.CockpitInsertPilot(newControl.Name, false);
+                    MyVisualScriptLogicProvider.CockpitInsertPilot(newControl.Name, false, newGrid.BigOwners[0]);
             }
 
             var refObjectBuilder = (MyObjectBuilder_CubeGrid)newGrid.GetObjectBuilder();
