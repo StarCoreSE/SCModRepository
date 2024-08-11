@@ -624,21 +624,23 @@ namespace Starcore.FieldGenerator
         {
             foreach (var block in allTerminalBlocks)
             {
-                if (block.FatBlock == null)
-                    continue;
-
-                var entBlock = block as MyEntity;
-                if (entBlock != null && FieldGeneratorSession.CoreSysAPI.HasCoreWeapon(entBlock))
+                if (block.FatBlock != null)
                 {
-                    FieldGeneratorSession.CoreSysAPI.SetFiringAllowed(entBlock, false);
-                }
+                    var entBlock = block as MyEntity;
+                    if (entBlock != null && FieldGeneratorSession.CoreSysAPI.HasCoreWeapon(entBlock))
+                    {
+                        FieldGeneratorSession.CoreSysAPI.SetFiringAllowed(entBlock, false);
 
-                var functionalBlock = block.FatBlock as IMyFunctionalBlock;
-                if (functionalBlock != null)
-                {
-                    functionalBlock.Enabled = false;
-                    
+                        var functionalBlock = block.FatBlock as IMyFunctionalBlock;
+                        if (functionalBlock != null)
+                        {
+                            functionalBlock.Enabled = false;
+
+                        }
+                    }
                 }
+                else
+                    continue;             
             }
         }
 
@@ -646,20 +648,23 @@ namespace Starcore.FieldGenerator
         {
             foreach (var block in allTerminalBlocks)
             {
-                if (block.FatBlock == null)
-                    continue;
-
-                var entBlock = block as MyEntity;
-                if (entBlock != null && FieldGeneratorSession.CoreSysAPI.HasCoreWeapon(entBlock))
+                if (block.FatBlock != null)
                 {
-                    FieldGeneratorSession.CoreSysAPI.SetFiringAllowed(entBlock, true);
-                }
+                    var entBlock = block as MyEntity;
+                    if (entBlock != null && FieldGeneratorSession.CoreSysAPI.HasCoreWeapon(entBlock))
+                    {
+                        FieldGeneratorSession.CoreSysAPI.SetFiringAllowed(entBlock, true);
 
-                var functionalBlock = block.FatBlock as IMyFunctionalBlock;
-                if (functionalBlock != null)
-                {
-                    functionalBlock.Enabled = true;
+                        var functionalBlock = block.FatBlock as IMyFunctionalBlock;
+                        if (functionalBlock != null)
+                        {
+                            functionalBlock.Enabled = true;
+
+                        }
+                    }
                 }
+                else
+                    continue;             
             }
         }
         #endregion
