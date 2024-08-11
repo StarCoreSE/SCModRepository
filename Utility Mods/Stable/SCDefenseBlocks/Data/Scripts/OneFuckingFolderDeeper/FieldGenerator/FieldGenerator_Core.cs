@@ -178,7 +178,7 @@ namespace Starcore.FieldGenerator
         #endregion
 
         private Dictionary<string, IMyModelDummy> _coreDummies = new Dictionary<string, IMyModelDummy>();
-        private List<IMySlimBlock> _gridBlocks;
+        private List<IMySlimBlock> _gridBlocks = new List<IMySlimBlock>();
         private int _gridBlockCount;
         private HashSet<long> _attachedModuleIds = new HashSet<long>();
         private int _moduleCount = 0;
