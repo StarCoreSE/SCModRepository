@@ -14,6 +14,9 @@ using VRageMath;
 
 namespace SC.SUGMA.GameState
 {
+    /// <summary>
+    /// Controls serverside respawn mechanics.
+    /// </summary>
     public class RespawnManager : ComponentBase
     {
         private static ShareTrackApi ShareTrackApi => SUGMA_SessionComponent.I.ShareTrackApi;
