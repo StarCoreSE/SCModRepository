@@ -11,11 +11,13 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
+      - uses: actions/checkout@v4.1.4
+
       - name: Get changed files
-        id: files
-        uses: jitterbit/get-changed-files@v1
+        id: changed-files
+        uses: tj-actions/changed-files@v44
         with:
-          format: 'csv'
+            separator: ','
       
       #- name: List all changed files
       #  env:
@@ -26,7 +28,7 @@ jobs:
       #    done
 
       - id: set-matrix
-        run: bash ModIdFinder.sh "${{ steps.files.outputs.all }}" >> $GITHUB_OUTPUT
+        run: bash ModIdFinder.sh "${{ steps.changed-files.outputs.all_changed_files }}" >> $GITHUB_OUTPUT
   
   workshop-upload:
     needs: setup
