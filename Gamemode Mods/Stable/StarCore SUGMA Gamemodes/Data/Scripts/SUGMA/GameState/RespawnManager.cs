@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Sandbox.Game;
 using Sandbox.Game.Entities;
-using Sandbox.Game.Entities.Cube;
 using Sandbox.ModAPI;
 using SC.SUGMA.API;
 using SC.SUGMA.Utilities;
@@ -20,7 +19,7 @@ namespace SC.SUGMA.GameState
         private static ShareTrackApi ShareTrackApi => SUGMA_SessionComponent.I.ShareTrackApi;
 
         public double RespawnTimeSeconds;
-        private readonly Dictionary<IMyCubeGrid, IMyCubeGrid> _respawnBuffer = new Dictionary<IMyCubeGrid, IMyCubeGrid>();
+        private readonly Dictionary<IMyCubeGrid, MyObjectBuilder_CubeGrid> _respawnBuffer = new Dictionary<IMyCubeGrid, MyObjectBuilder_CubeGrid>();
         private readonly Queue<MyTuple<int, IMyCubeGrid, IMyCubeGrid>> _respawnTimeBuffer = new Queue<MyTuple<int, IMyCubeGrid, IMyCubeGrid>>();
 
         public RespawnManager(double respawnTimeSeconds = 0)
@@ -39,7 +38,10 @@ namespace SC.SUGMA.GameState
 
             foreach (var grid in ShareTrackApi.GetTrackedGrids())
             {
-                _respawnBuffer[grid] = GenerateGridCopy(grid, SetupBufferGrid);
+                var refObjectBuilder = (MyObjectBuilder_CubeGrid)grid.GetObjectBuilder();
+                refObjectBuilder.CreatePhysics = true;
+                MyEntities.RemapObjectBuilder(refObjectBuilder);
+                _respawnBuffer[grid] = refObjectBuilder;
             }
             ShareTrackApi.RegisterOnAliveChanged(OnAliveChanged);
         }
@@ -48,9 +50,6 @@ namespace SC.SUGMA.GameState
         {
             if (!MyAPIGateway.Session.IsServer)
                 return;
-
-            foreach (var grid in _respawnBuffer.Values)
-                grid.Close();
 
             ShareTrackApi.UnregisterOnAliveChanged(OnAliveChanged);
         }
@@ -98,7 +97,10 @@ namespace SC.SUGMA.GameState
                     MyVisualScriptLogicProvider.CockpitInsertPilot(newControl.Name, false);
             }
 
-            _respawnBuffer[newGrid] = GenerateGridCopy(newGrid, SetupBufferGrid);
+            var refObjectBuilder = (MyObjectBuilder_CubeGrid)newGrid.GetObjectBuilder();
+            refObjectBuilder.CreatePhysics = true;
+            MyEntities.RemapObjectBuilder(refObjectBuilder);
+            _respawnBuffer[newGrid] = refObjectBuilder;
 
             Log.Info("Respawned grid " + newGrid.DisplayName);
         }
@@ -108,22 +110,13 @@ namespace SC.SUGMA.GameState
             if (isAlive || !_respawnBuffer.ContainsKey(grid))
                 return;
 
-            IMyCubeGrid newGrid = _respawnBuffer[grid];
+            IMyCubeGrid newGrid = (IMyCubeGrid)MyAPIGateway.Entities.CreateFromObjectBuilderParallel(_respawnBuffer[grid], false, SetupBufferGrid);
             _respawnBuffer.Remove(grid);
 
             foreach (var powerProducer in grid.GetFatBlocks<IMyPowerProducer>())
                 powerProducer.Close();
 
             _respawnTimeBuffer.Enqueue(new MyTuple<int, IMyCubeGrid, IMyCubeGrid>(_ticks + (int)(60 * RespawnTimeSeconds), newGrid, grid));
-        }
-
-        private IMyCubeGrid GenerateGridCopy(IMyCubeGrid refGrid, Action<IMyEntity> onCompletion = null)
-        {
-            Log.Info("Try copying grid " + refGrid.DisplayName);
-            var refObjectBuilder = (MyObjectBuilder_CubeGrid) refGrid.GetObjectBuilder();
-            refObjectBuilder.CreatePhysics = true;
-            MyEntities.RemapObjectBuilder(refObjectBuilder);
-            return (IMyCubeGrid) MyAPIGateway.Entities.CreateFromObjectBuilderParallel(refObjectBuilder, false, onCompletion);
         }
 
         private void SetupBufferGrid(IMyEntity gridEnt)
