@@ -11,11 +11,22 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - name: Get changed files
-        id: files
-        uses: jitterbit/get-changed-files@v1
+      - uses: actions/checkout@v3
         with:
-          format: 'csv'
+          fetch-depth: ${{ github.event_name == 'pull_request' && 2 || 0 }}
+      - name: Get changed files
+        id: changed-files
+        run: |
+            if ${{ github.event_name == 'pull_request' }}; then
+                echo "changed_files=$(git diff --name-only -r HEAD^1 HEAD | xargs)" >> $GITHUB_OUTPUT
+            else
+                echo "changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | xargs)" >> $GITHUB_OUTPUT
+            fi
+      - name: List changed files
+        run: |
+            for file in ${{ steps.changed-files.outputs.changed_files }}; do
+                echo "$file was changed"
+            done
       
       #- name: List all changed files
       #  env:
@@ -25,8 +36,8 @@ jobs:
       #      echo "$file was changed"
       #    done
 
-      - id: set-matrix
-        run: bash ModIdFinder.sh "${{ steps.files.outputs.all }}" >> $GITHUB_OUTPUT
+      #- id: set-matrix
+      #  run: bash ModIdFinder.sh "${{ steps.changed-files.outputs.changed_files }}" >> $GITHUB_OUTPUT
   
   workshop-upload:
     needs: setup
