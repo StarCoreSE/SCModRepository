@@ -8,8 +8,8 @@ using Sandbox.ModAPI;
 using SC.SUGMA.API;
 using SC.SUGMA.Commands;
 using SC.SUGMA.GameModes.Domination;
-using SC.SUGMA.GameModes.TeamDeathMatch;
-using SC.SUGMA.GameModes.TeamDeathMatch_Zones;
+using SC.SUGMA.GameModes.Elimination;
+using SC.SUGMA.GameModes.TeamDeathmatch;
 using SC.SUGMA.GameState;
 using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
@@ -29,9 +29,9 @@ namespace SC.SUGMA
             ["HeartNetwork"] = new HeartNetwork(),
             ["PlayerTracker"] = new PlayerTracker(),
             ["DisconnectHandler"] = new DisconnectHandler(),
-            ["tdm"] = new TeamDeathmatchGamemode(),
-            ["tdmz"] = new TDMZonesGamemode(),
+            ["elm"] = new EliminationGamemode(),
             ["dom"] = new DominationGamemode(),
+            ["tdm"] = new TeamDeathmatchGamemode(),
         };
 
         /// <summary>

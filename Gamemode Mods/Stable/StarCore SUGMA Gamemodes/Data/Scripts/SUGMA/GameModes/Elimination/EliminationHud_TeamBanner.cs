@@ -3,9 +3,9 @@ using SC.SUGMA.Utilities;
 using VRage.Game.ModAPI;
 using VRageMath;
 
-namespace SC.SUGMA.GameModes.TeamDeathMatch
+namespace SC.SUGMA.GameModes.Elimination
 {
-    internal class TDMHud_TeamBanner : HudElementBase
+    internal class EliminationHud_TeamBanner : HudElementBase
     {
         public const int BaseWidth = 290;
         public const int BaseHeight = 25;
@@ -19,7 +19,7 @@ namespace SC.SUGMA.GameModes.TeamDeathMatch
 
         public TexturedBox TicketsBar;
 
-        public TDMHud_TeamBanner(HudParentBase parent, IMyFaction faction, int shipCount, bool isLeftAligned) :
+        public EliminationHud_TeamBanner(HudParentBase parent, IMyFaction faction, int shipCount, bool isLeftAligned) :
             base(parent)
         {
             Faction = faction;
