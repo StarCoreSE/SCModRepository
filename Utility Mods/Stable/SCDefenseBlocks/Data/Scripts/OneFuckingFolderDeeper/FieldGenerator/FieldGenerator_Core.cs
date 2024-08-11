@@ -339,6 +339,9 @@ namespace Starcore.FieldGenerator
 
             _gridBlockCount++;
 
+            if (!_gridBlocks.Contains(block))
+                _gridBlocks.Add(block);
+
             if (block.FatBlock != null && block.FatBlock.BlockDefinition.SubtypeId == "FieldGen_Capacity_Upgrade")
             {
                 if (IsNeighbour(block) && IsModuleValid(block))
@@ -362,6 +365,9 @@ namespace Starcore.FieldGenerator
                 return;
 
             _gridBlockCount--;
+
+            if (_gridBlocks.Contains(block))
+                _gridBlocks.Remove(block);
 
             if (block.FatBlock != null)
             {
@@ -456,7 +462,7 @@ namespace Starcore.FieldGenerator
                     if (IsServer && GridStopped.Value)
                         GridStopped.Value = false;
 
-                    SiegeBlockReboot(_gridBlocks));
+                    SiegeBlockReboot(_gridBlocks);
 
                     SiegeMode = false;
                     
