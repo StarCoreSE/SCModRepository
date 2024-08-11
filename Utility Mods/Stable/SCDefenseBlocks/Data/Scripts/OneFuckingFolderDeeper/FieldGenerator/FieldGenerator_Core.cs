@@ -178,7 +178,7 @@ namespace Starcore.FieldGenerator
         #endregion
 
         private Dictionary<string, IMyModelDummy> _coreDummies = new Dictionary<string, IMyModelDummy>();
-        private List<IMySlimBlock> _gridBlocks;
+        private List<IMySlimBlock> _gridBlocks = new List<IMySlimBlock>();
         private int _gridBlockCount;
         private HashSet<long> _attachedModuleIds = new HashSet<long>();
         private int _moduleCount = 0;
@@ -442,7 +442,7 @@ namespace Starcore.FieldGenerator
                 {
                     SiegeElapsedTime++;
 
-                    SiegeBlockShutdown((List<IMySlimBlock>)_gridBlocks.Where(b => b.FatBlock != null));
+                    SiegeBlockShutdown(_gridBlocks);
 
                     if (Block.CubeGrid.Physics.LinearVelocity != Vector3D.Zero)
                     {
@@ -456,7 +456,7 @@ namespace Starcore.FieldGenerator
                     if (IsServer && GridStopped.Value)
                         GridStopped.Value = false;
 
-                    SiegeBlockReboot((List<IMySlimBlock>)_gridBlocks.Where(b => b.FatBlock != null));
+                    SiegeBlockReboot(_gridBlocks));
 
                     SiegeMode = false;
                     
@@ -618,6 +618,9 @@ namespace Starcore.FieldGenerator
         {
             foreach (var block in allTerminalBlocks)
             {
+                if (block.FatBlock == null)
+                    continue;
+
                 var entBlock = block as MyEntity;
                 if (entBlock != null && FieldGeneratorSession.CoreSysAPI.HasCoreWeapon(entBlock))
                 {
@@ -637,6 +640,9 @@ namespace Starcore.FieldGenerator
         {
             foreach (var block in allTerminalBlocks)
             {
+                if (block.FatBlock == null)
+                    continue;
+
                 var entBlock = block as MyEntity;
                 if (entBlock != null && FieldGeneratorSession.CoreSysAPI.HasCoreWeapon(entBlock))
                 {
