@@ -12,7 +12,7 @@ namespace Scripts
             // PartDefinitions includes both weapons and phantoms
             PartDefinitions(NID_Pyroacid, NID_HeavyPyroacid, NID_Bioplasma, NID_Hivedrone, NID_BioplasmaHivedrone,
                             LightLightningArc, LightningArc, FluxArcSmall, FluxArcLarge, MonoWhip, MonoWhipSmall, DoomsdayCannonLarge, DestroyerTorso, DestroyerHead,
-                            NovaCannon, HeavyBolterSmall, HeavyBolterSmallSponson, HeavyBolterLargeSponson, Lascannon, BattleCannon, PlasmaCannon, EarthshakerCannon, FixedLance, AegisFlakTurret,
+                            NovaCannon, HeavyBolterSmall, HeavyBolterSmallSponson, HeavyBolterLargeSponson, Lascannon, BattleCannon, PlasmaCannon, EarthshakerCannon, FixedLance, AegisFlakTurret, AegisLascannonTurret,
                             MacroTurret, MacroLightTurret, MacroHeavyTurret, MacroCannon, HeavyMacroCannon, LanceBattery, LanceLightBattery, LanceHeavyBattery, GothicTorp);
 
         }
