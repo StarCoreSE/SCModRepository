@@ -139,7 +139,7 @@ namespace Scripts {
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "", // Audio for warmup effect.
-                    FiringSound = "Pulse_Flak_placeholder", // Audio for firing.
+                    FiringSound = "DroidTankArtillery", // Audio for firing.
                     FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "",
                     NoAmmoSound = "",
@@ -181,7 +181,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                Nariman_Dart_Round, Nariman_EWAR_Round, // Must list all primary, shrapnel, and pattern ammos.
+                Nariman_Dart_Round, //Nariman_EWAR_Round,  Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = Nariman_Dart_Animation,
             //Upgrades = UpgradeModules,

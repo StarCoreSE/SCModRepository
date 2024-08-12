@@ -41,7 +41,7 @@
 		</Definition>
 
 
-		<!--
+		
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
@@ -79,7 +79,7 @@
 			</MountPoints>
 			<BlockPairName>Flechette_DoubleBarrel</BlockPairName>
 		</Definition>
-		-->
+
 
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
@@ -399,7 +399,7 @@
 
 
 
-		<!--
+		
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
@@ -481,7 +481,7 @@
 			<MaxFov>2</MaxFov>
 			<EmissiveColorPreset>Default</EmissiveColorPreset>
 		</Definition>
-		-->
+	
 
 
 
