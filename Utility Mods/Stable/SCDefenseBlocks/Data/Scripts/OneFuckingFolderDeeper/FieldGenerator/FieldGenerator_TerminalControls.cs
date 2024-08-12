@@ -47,7 +47,7 @@ namespace Starcore.FieldGenerator
         {
             var logic = GetLogic(b);
 
-            return !logic._siegeCooldownActive;
+            return !logic.SiegeCooldownActive;
         }
 
         static void CreateControls()
