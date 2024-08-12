@@ -399,7 +399,7 @@
 
 
 
-		<!--
+		
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
@@ -481,7 +481,7 @@
 			<MaxFov>2</MaxFov>
 			<EmissiveColorPreset>Default</EmissiveColorPreset>
 		</Definition>
-		-->
+	
 
 
 
