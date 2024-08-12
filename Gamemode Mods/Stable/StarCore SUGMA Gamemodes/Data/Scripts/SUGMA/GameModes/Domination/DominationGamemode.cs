@@ -1,204 +1,129 @@
-﻿using Sandbox.ModAPI;
-using SC.SUGMA.API;
-using SC.SUGMA.GameModes.TeamDeathMatch;
+﻿using System.Collections.Generic;
+using Sandbox.ModAPI;
+using SC.SUGMA.GameModes.Elimination;
 using SC.SUGMA.GameState;
-using SC.SUGMA.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using VRage.Game.ModAPI;
+using VRageMath;
 
 namespace SC.SUGMA.GameModes.Domination
 {
-    internal class DominationGamemode : GamemodeBase
+    internal class DominationGamemode : EliminationGamemode
     {
-        public static double MatchDuration = 15;
-        public static int VictoryPoints = -1;
-        public static double RespawnTimeSeconds = 10;
+        /// <summary>
+        ///     The number of seconds to drain one ticket per captured zone.
+        /// </summary>
+        public const float ZoneTicketDrainRate = 1.5f;
 
-        public override string ReadableName { get; internal set; } = "Domination";
-        public override string Description { get; internal set; } = "Teams fight to for who can get the most kills within a time limit.";
+        private PointTracker _zonePointTracker;
+        public List<FactionSphereZone> FactionZones = new List<FactionSphereZone>();
+        public int RandomZoneCount = 3;
+        public bool DoRandomZones = false;
 
-        internal static ShareTrackApi ShareTrackApi => SUGMA_SessionComponent.I.ShareTrackApi;
+        public override string ReadableName { get; internal set; } = "Team Domination";
 
-        internal PointTracker PointTracker;
-        internal RespawnManager RespawnManager;
-        internal MatchTimer MatchTimer => SUGMA_SessionComponent.I.GetComponent<MatchTimer>("MatchTimer");
+        public override string Description { get; internal set; } =
+            "Factions fight until tickets run out. Kill enemy players or capture zones to remove tickets.";
 
-        internal IMyFaction WinningFaction;
-
-        public DominationGamemode()
-        {
-            ArgumentParser += new ArgumentParser(
-                new ArgumentParser.ArgumentDefinition(
-                    time => double.TryParse(time, out MatchDuration),
-                    "t",
-                    "match-time",
-                    "Match time, in minutes."),
-                new ArgumentParser.ArgumentDefinition(
-                    time => int.TryParse(time, out VictoryPoints),
-                    "k",
-                    "victory-kills",
-                    "Number of kills to end the match."),
-                new ArgumentParser.ArgumentDefinition(
-                    time => double.TryParse(time, out RespawnTimeSeconds),
-                    "r",
-                    "respawn-time",
-                    "Respawn time in seconds.")
-            );
-        }
-
-        internal HashSet<IMyFaction> TrackedFactions = new HashSet<IMyFaction>();
-
-
-
-        public override void Close()
-        {
-            StopRound();
-        }
-
-        public override void UpdateActive()
-        {
-            //if (PointTracker == null || MatchTimer == null ||
-            //    TrackedFactions == null) // ten billion nullchecks of aristeas
-            //    return;
-            if (MatchTimer.IsMatchEnded)
-                StopRound();
-        }
-
-        public override void StartRound(string[] arguments)
-        {
-            foreach (var grid in ShareTrackApi.GetTrackedGrids())
+        internal ZoneDef[] FixedZonePositions = {
+            new ZoneDef
             {
-                if (grid.GetFaction() != null)
-                    TrackedFactions.Add(grid.GetFaction());
-            }
-
-            if (TrackedFactions.Count < 2)
+                Position = Vector3D.Zero,
+                Radius = 1000,
+                CaptureTime = 20,
+            },
+            new ZoneDef
             {
-                MyAPIGateway.Utilities.ShowNotification("There aren't any combatants, idiot!", 10000, "Red");
-                StopRound();
-                return;
-            }
+                Position = new Vector3D(0, 0, 4000),
+                Radius = 500,
+                CaptureTime = 15,
+            },
+            new ZoneDef
+            {
+                Position = new Vector3D(0, 0, -4000),
+                Radius = 500,
+                CaptureTime = 15,
+            },
+        };
+
+        //public TDMZonesGamemode()
+        //{
+        //    ArgumentParser += new ArgumentParser(
+        //        new ArgumentParser.ArgumentDefinition(text => int.TryParse(text, out RandomZoneCount), "zc", "zone-count", "The number of zones in the arena. Only applies if randomization is enabled."),
+        //        new ArgumentParser.ArgumentDefinition(text => DoRandomZones = true, "rz", "random-zones", "Enables randomly-placed zones.")
+        //        );
+        //}
+
+        public override void StartRound(string[] arguments = null)
+        {
+            _zonePointTracker = new PointTracker(0, 0);
 
             base.StartRound(arguments);
 
-            PointTracker = new PointTracker(0, VictoryPoints);
-            RespawnManager = new RespawnManager(RespawnTimeSeconds);
-            SUGMA_SessionComponent.I.RegisterComponent("DOMPointTracker", PointTracker);
-            SUGMA_SessionComponent.I.RegisterComponent("DOMRespawnManager", RespawnManager);
+            if (TrackedFactions.Count <= 1)
+                return;
 
-            ShareTrackApi.RegisterOnAliveChanged(OnAliveChanged);
-            PointTracker.OnFactionWin += faction =>
-            {
-                WinningFaction = faction;
-                StopRound();
-            };
-            
-            var factionNames = new List<string>();
-            foreach (var faction in TrackedFactions)
-            {
-                factionNames.Add($"|{faction.Tag}|");
-                foreach (var otherFaction in TrackedFactions)
-                {
-                    if (otherFaction == faction)
-                        continue;
+            SUGMA_SessionComponent.I.RegisterComponent("domPointTracker", _zonePointTracker);
 
-                    MyAPIGateway.Session.Factions.DeclareWar(faction.FactionId, otherFaction.FactionId);
-                    //MyAPIGateway.Utilities.ShowMessage("DOM", $"Declared war between {factionKvp.Key.Name} and {faction.Name}");
-                }
-            }
+            // Commented out because this would need to be synced.
+            //if (DoRandomZones)
+            //{
+            //    for (int i = 0; i < RandomZoneCount; i++)
+            //        FactionZones.Add(new FactionSphereZone(SUtils.RandVector() * 20000, 500, 15));
+            //}
+            //else
+            //{
+                foreach (var zone in FixedZonePositions)
+                    FactionZones.Add(new FactionSphereZone(zone.Position, zone.Radius, zone.CaptureTime));
+            //}
 
-            MyAPIGateway.Utilities.ShowNotification("Combatants: " + string.Join(" vs ", factionNames), 10000, "Red");
-            MatchTimer.Start(MatchDuration);
+            for (var i = 0; i < FactionZones.Count; i++)
+                SUGMA_SessionComponent.I.RegisterComponent("DOMZONE_FAC_" + i, FactionZones[i]);
 
             if (!MyAPIGateway.Utilities.IsDedicated)
-                SUGMA_SessionComponent.I.RegisterComponent("domHud", new DominationHud(this));
-
-            Log.Info("Started a Domination match." +
-                     $"\nDuration: {MatchDuration}m" + 
-                     $"\nVictory Points: {VictoryPoints}" + 
-                     $"\n- Combatants: {string.Join(" vs ", factionNames)}");
+                SUGMA_SessionComponent.I.RegisterComponent("DOMHud", new DominationHud(this));
         }
 
         public override void StopRound()
         {
-            bool setWinnerFromArgs = false;
-            foreach (var arg in Arguments)
-            {
-                if (arg.StartsWith("win"))
-                {
-                    Log.Info("Winner in arguments found: " + arg);
-                    long factionId;
-                    long.TryParse(arg.Remove(0, 3), out factionId);
-
-                    WinningFaction = MyAPIGateway.Session.Factions.TryGetFactionById(factionId);
-                    setWinnerFromArgs = true;
-                    break;
-                }
-            }
-
-            if (!setWinnerFromArgs)
-            {
-                if (!MyAPIGateway.Session.IsServer)
-                    return;
-
-                if (WinningFaction == null)
-                    WinningFaction = PointTracker.FactionPoints.MaxBy(f => f.Value).Key;
-
-                Arguments = Arguments.Concat(new[] { $"win{WinningFaction?.FactionId ?? -1}" }).ToArray();
-            }
-
-            SUGMA_SessionComponent.I.GetComponent<DominationHud>("domHud")?.MatchEnded(WinningFaction);
-
-            foreach (var factionKvp in TrackedFactions)
-            {
-                foreach (var faction in TrackedFactions)
-                {
-                    if (faction == factionKvp)
-                        continue;
-
-                    MyAPIGateway.Session.Factions.SendPeaceRequest(factionKvp.FactionId, faction.FactionId);
-                    MyAPIGateway.Session.Factions.AcceptPeace(faction.FactionId, factionKvp.FactionId);
-                }
-            }
-            
-
-            MatchTimer?.Stop();
-            SUGMA_SessionComponent.I.UnregisterComponent("DOMPointTracker");
-            SUGMA_SessionComponent.I.UnregisterComponent("DOMRespawnManager");
-            ShareTrackApi.UnregisterOnAliveChanged(OnAliveChanged);
-
             base.StopRound();
-            WinningFaction = null;
-            TrackedFactions.Clear();
-            PointTracker = null;
-            RespawnManager = null;
+            SUGMA_SessionComponent.I.UnregisterComponent("DOMHud");
+            SUGMA_SessionComponent.I.UnregisterComponent("domPointTracker");
+
+            // Here you could close visuals for the zones
+            foreach (var zone in FactionZones)
+                SUGMA_SessionComponent.I.UnregisterComponent(zone.ComponentId);
+            FactionZones.Clear();
         }
 
-        internal override void DisplayWinMessage()
+        public override void UpdateActive()
         {
-            if (WinningFaction == null)
-            {
-                MyAPIGateway.Utilities.ShowNotification("YOU ARE ALL LOSERS.", 10000, "Red");
-                return;
-            }
+            base.UpdateActive();
 
-            MyAPIGateway.Utilities.ShowNotification($"A WINNER IS [{WinningFaction?.Name}]!", 10000);
+            if (_matchTimer.Ticks % (int)(ZoneTicketDrainRate * 60) != 0)
+                return;
+
+            foreach (var zone in FactionZones)
+            {
+                if (zone.Faction == null)
+                    continue;
+
+                foreach (var faction in TrackedFactions.Keys)
+                    if (faction != zone.Faction)
+                        _zonePointTracker.AddFactionPoints(faction, 1); // Each zone doubles the ticket drain rate
+            }
         }
 
-        private void OnAliveChanged(IMyCubeGrid grid, bool isAlive)
+        public override int CalculateFactionPoints(IMyFaction faction)
         {
-            if (isAlive)
-                return;
+            var points = base.CalculateFactionPoints(faction) + (int)_matchTimer.CurrentMatchTime.TotalSeconds;
+            return points == -1 ? -1 : points - _zonePointTracker.GetFactionPoints(faction);
+        }
 
-            var gridFaction = grid.GetFaction();
-
-            foreach (var faction in TrackedFactions)
-            {
-                if (faction != gridFaction)
-                    PointTracker.AddFactionPoints(faction, 1);
-            }
+        internal class ZoneDef
+        {
+            public Vector3D Position;
+            public double Radius;
+            public float CaptureTime;
         }
     }
 }

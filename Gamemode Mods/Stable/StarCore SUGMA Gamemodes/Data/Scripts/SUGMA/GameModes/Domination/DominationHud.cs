@@ -1,176 +1,199 @@
-﻿using RichHudFramework.Client;
+﻿using System;
+using System.Collections.Generic;
+using RichHudFramework;
+using RichHudFramework.Client;
 using RichHudFramework.UI;
 using RichHudFramework.UI.Client;
-using Sandbox.ModAPI;
-using SC.SUGMA.API;
-using SC.SUGMA.GameModes.TeamDeathMatch;
+using RichHudFramework.UI.Rendering;
+using SC.SUGMA.GameModes.Elimination;
 using SC.SUGMA.GameState;
 using SC.SUGMA.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using RichHudFramework.UI.Rendering;
-using Sandbox.Engine.Platform;
 using VRage.Game.ModAPI;
+using VRage.Utils;
 using VRageMath;
 
 namespace SC.SUGMA.GameModes.Domination
 {
     internal class DominationHud : ComponentBase
     {
-        internal DominationGamemode Gamemode;
-        internal DOMHud_Window Window;
-        internal double RespawnTimeRemaining = -1;
-        private int _closeTime = -1;
+        private readonly DominationGamemode _gamemode;
+        private DominationHud_Window _window;
 
         public DominationHud(DominationGamemode gamemode)
         {
-            Gamemode = gamemode;
+            _gamemode = gamemode;
         }
 
         public override void Init(string id)
         {
             base.Init(id);
-            SUGMA_SessionComponent.I.ShareTrackApi.RegisterOnAliveChanged(OnAliveChanged);
+
             if (!RichHudClient.Registered)
                 throw new Exception("RichHudAPI was not initialized in time!");
 
-            Window = new DOMHud_Window(HudMain.HighDpiRoot, Gamemode);
+            _window = new DominationHud_Window(HudMain.HighDpiRoot, _gamemode);
         }
 
         public override void Close()
         {
-            HudMain.HighDpiRoot.RemoveChild(Window);
-            SUGMA_SessionComponent.I.ShareTrackApi.UnregisterOnAliveChanged(OnAliveChanged);
+            HudMain.HighDpiRoot.RemoveChild(_window);
         }
 
         public override void UpdateTick()
         {
-            if (RespawnTimeRemaining > 0 && Gamemode.IsStarted)
-            {
-                RespawnTimeRemaining -= 1 / 60d;
-                MyAPIGateway.Utilities.ShowNotification($"Respawning in {RespawnTimeRemaining:F1}", 1000/60, "Red");
-            }
-
-            Window.Update();
-            if (_closeTime > 0)
-                _closeTime--;
-
-            if (_closeTime == 0) SUGMA_SessionComponent.I.UnregisterComponent(ComponentId);
-        }
-
-        public void MatchEnded(IMyFaction winningFaction)
-        {
-            Window.MatchEnded(winningFaction);
-            _closeTime = HudConstants.MatchResultsVisibleTicks;
-        }
-
-        private void OnAliveChanged(IMyCubeGrid grid, bool isAlive)
-        {
-            if (isAlive)
-                return;
-
-            if (grid.GetOwner() != MyAPIGateway.Session?.Player)
-                return;
-
-            RespawnTimeRemaining = Gamemode.RespawnManager.RespawnTimeSeconds;
+            if (SUGMA_SessionComponent.I.CurrentGamemode != null)
+                _window.Update();
         }
     }
 
-    internal class DOMHud_Window : HudElementBase
+    internal class DominationHud_Window : WindowBase
     {
+        private static readonly Material _chevronMaterial =
+            new Material(MyStringId.GetOrCompute("SugmaChevron"), new Vector2(16, 16));
+
+        private static readonly Material _chevronMaterialFlip =
+            new Material(MyStringId.GetOrCompute("SugmaChevronFlip"), new Vector2(16, 16));
+
+        private static readonly Material _circleMaterial =
+            new Material(MyStringId.GetOrCompute("SugmaCircle"), new Vector2(32, 32));
+
+
+        private readonly Dictionary<IMyFaction, bool> _didShiftChevrons = new Dictionary<IMyFaction, bool>();
+
+        private readonly Dictionary<IMyFaction, List<TexturedBox>> _factionChevrons =
+            new Dictionary<IMyFaction, List<TexturedBox>>();
+
+        private readonly TexturedBox[] _captureIndicators;
+
         private readonly DominationGamemode _gamemode;
+        private readonly elmHud_Window _windowBase;
 
-        private bool _matchEnded;
-        private readonly MatchTimer _timer;
-        private readonly LabelBox _timerLabel;
-
-        private readonly Dictionary<IMyFaction, LabelBox> _factionLabels = new Dictionary<IMyFaction, LabelBox>();
-
-        public DOMHud_Window(HudParentBase parent, DominationGamemode gamemode) : base(parent)
+        public DominationHud_Window(HudParentBase parent, DominationGamemode gamemode) : base(parent)
         {
             _gamemode = gamemode;
-            _timer = gamemode.MatchTimer;
-
-            if (_gamemode == null)
-                throw new Exception("Null DOM gamemode!");
-            if (_timer == null)
-                throw new Exception("Null match timer!");
-
-            Size = new Vector2(100, 24);
-
-            Offset = new Vector2(0, 515); // Regardless of screen size, this is out of 1920x1080
-
-            _timerLabel = new LabelBox(this)
+            _windowBase = SUGMA_SessionComponent.I.GetComponent<EliminationHud>("elmHud").Window;
+            foreach (var faction in _gamemode.TrackedFactions.Keys)
             {
-                ParentAlignment = ParentAlignments.Inner | ParentAlignments.Top,
-                Height = 24,
-                DimAlignment = DimAlignments.Height,
-                Text = "20:00",
-                TextPadding = new Vector2(2.5f, 0),
-                FitToTextElement = false,
-                Color = HudConstants.HudBackgroundColor
-            };
-
-            var idx = 0;
-            foreach (var faction in _gamemode.TrackedFactions)
-            {
-                _factionLabels[faction] = new LabelBox(this)
-                {
-                    Format = GlyphFormat.White.WithColor(faction.CustomColor.ColorMaskToRgb()).WithSize(2)
-                        .WithAlignment(TextAlignment.Center),
-                    ParentAlignment =
-                        ParentAlignments.InnerV |
-                        (idx % 2 == 0 ? ParentAlignments.Right : ParentAlignments.Left) |
-                        ParentAlignments.Top,
-                    Color = HudConstants.HudBackgroundColor,
-                    Offset = new Vector2(0, (int)-Math.Floor(idx / 2f) * (24 + 5)),
-                    Text = _gamemode.PointTracker.VictoryPoints == -1 ? "0" : "0%",
-                };
-                idx++;
+                _factionChevrons.Add(faction, new List<TexturedBox>());
+                _didShiftChevrons.Add(faction, false);
             }
 
-            _gamemode.PointTracker.OnPointsUpdated += OnPointsUpdated;
-        }
-
-        private void OnPointsUpdated(IMyFaction faction, int points)
-        {
-            if (!_factionLabels.ContainsKey(faction))
-                return;
-
-            _factionLabels[faction].Text = _gamemode.PointTracker.VictoryPoints == -1 ? points.ToString() : $"{100f*((float)points/_gamemode.PointTracker.VictoryPoints):N0}%";
+            _captureIndicators = new TexturedBox[_gamemode.FactionZones.Count];
+            float indicatorsSectionWidth = _captureIndicators.Length * 48;
+            for (int i = 0; i < _captureIndicators.Length; i++)
+            {
+                _captureIndicators[i] = new TexturedBox(_windowBase)
+                {
+                    Material = _circleMaterial,
+                    ParentAlignment = ParentAlignments.Bottom,
+                    Size = Vector2.One * 32,
+                    Offset = new Vector2(-indicatorsSectionWidth/2f + (i * 48) + 24, -4),
+                    ZOffset = sbyte.MaxValue
+                };
+            }
         }
 
         public void Update()
         {
-            if (_matchEnded)
-                return;
+            var neededChevrons = CalculateNeededChevrons();
 
-            _timerLabel.Text = _timer.RemainingTimeString();
+            try
+            {
+                // I am so sorry
+                foreach (var factionBanner in _windowBase.Banners)
+                {
+                    if (factionBanner.TicketsBar.Width == 0)
+                        continue;
+
+                    var needed = neededChevrons[factionBanner.Faction];
+
+                    RemoveExcessChevrons(factionBanner.Faction, needed);
+
+                    AddChevrons(factionBanner, needed);
+
+                    // Adjust chevrons if they're about to go off of the ticket bar
+                    if (!_didShiftChevrons[factionBanner.Faction] &&
+                        factionBanner.TicketsBar.Width < needed * factionBanner.Height / 2)
+                    {
+                        foreach (var chevron in _factionChevrons[factionBanner.Faction])
+                        {
+                            chevron.ParentAlignment = ParentAlignments.Inner |
+                                                      (factionBanner.IsLeftAligned
+                                                          ? ParentAlignments.Left
+                                                          : ParentAlignments.Right);
+                            chevron.Offset = -chevron.Offset;
+                        }
+
+                        _didShiftChevrons[factionBanner.Faction] = true;
+                    }
+                }
+
+                for (int i = 0; i < _captureIndicators.Length; i++)
+                {
+                    FactionSphereZone zone = _gamemode.FactionZones[i];
+                    if (zone.CapturingFaction != null && (int)zone.CaptureTimeCurrent % 2 == 0)
+                        _captureIndicators[i].Color = zone.CapturingFaction.CustomColor.ColorMaskToRgb().SetAlphaPct(0.5f);
+                    else
+                        _captureIndicators[i].Color = zone.Faction == null ? HudConstants.HudBackgroundColor : zone.SphereDrawColor;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Exception(ex, typeof(DominationHud_Window));
+            }
         }
 
-        public void MatchEnded(IMyFaction winner)
+        private Dictionary<IMyFaction, int> CalculateNeededChevrons()
         {
-            _matchEnded = true;
-            var winnerPoints = 0;
+            var neededChevrons = new Dictionary<IMyFaction, int>();
 
-            _timerLabel?.Unregister();
-            foreach (var label in _factionLabels)
-                label.Value.Unregister();
+            foreach (var faction in _gamemode.TrackedFactions.Keys)
+                neededChevrons.Add(faction, 0);
 
-            var winnerLabel = new LabelBox(_timerLabel)
+            foreach (var zone in _gamemode.FactionZones)
             {
-                Text = winner != null
-                    ? $"A WINNER IS {winner.Name}."
-                    : "YOU ARE ALL LOSERS",
-                ParentAlignment = ParentAlignments.Bottom,
-                Height = TDMHud_TeamBanner.BaseHeight,
-                TextPadding = new Vector2(2.5f, 0),
-                Color = HudConstants.HudBackgroundColor
-            };
+                if (zone.Faction == null)
+                    continue;
 
-            winnerLabel.TextBoard.SetFormatting(GlyphFormat.White.WithColor(Color.Red).WithSize(3)
-                .WithAlignment(TextAlignment.Center));
+                foreach (var faction in _gamemode.TrackedFactions.Keys)
+                    if (faction != zone.Faction)
+                        neededChevrons[faction]++;
+            }
+
+            return neededChevrons;
+        }
+
+        private void RemoveExcessChevrons(IMyFaction faction, int needed)
+        {
+            while (_factionChevrons[faction].Count > needed)
+            {
+                var toRemove =
+                    _factionChevrons[faction][_factionChevrons[faction].Count - 1];
+                toRemove.Parent.RemoveChild(toRemove);
+                _factionChevrons[faction]
+                    .RemoveAt(_factionChevrons[faction].Count - 1);
+                Log.Info($"Removed chevron for {faction.Tag}.");
+            }
+        }
+
+        private void AddChevrons(EliminationHud_TeamBanner factionBanner, int needed)
+        {
+            while (_factionChevrons[factionBanner.Faction].Count < needed)
+            {
+                var newChevron = new TexturedBox(factionBanner.TicketsBar)
+                {
+                    Material = factionBanner.IsLeftAligned ? _chevronMaterialFlip : _chevronMaterial,
+                    ParentAlignment = ParentAlignments.Inner |
+                                      (factionBanner.IsLeftAligned ? ParentAlignments.Right : ParentAlignments.Left),
+                    Size = new Vector2(factionBanner.Height / 2, factionBanner.Height / 2),
+                    Offset = (factionBanner.IsLeftAligned ? -1 : 1) *
+                             new Vector2(_factionChevrons[factionBanner.Faction].Count * factionBanner.Height / 2, 0),
+                    Padding = Vector2.One * 2,
+                    ZOffset = sbyte.MaxValue
+                };
+                _factionChevrons[factionBanner.Faction].Add(newChevron);
+                Log.Info($"Created chevron for {factionBanner.Faction.Tag}.");
+            }
         }
     }
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <BlockVariantGroups>
+
+      <!-- Macro Turret Variants-->
+      <BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="MacroTurretVariants" />
+        <Icon>Textures\icons\MacroTurret.dds</Icon>
+        <DisplayName>Macro Cannon Turret </DisplayName>
+        <Description>Macro Turret Group</Description>
+        <Blocks>
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="MacroLightTurret" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="MacroTurret" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="MacroHeavyTurret" />
+        </Blocks>
+      </BlockVariantGroup>
+
+
+
+      <!-- Lance Turret Variants-->
+      <BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="LanceBatteryVariants" />
+        <Icon>Textures\icons\LanceBattery.dds</Icon>
+        <DisplayName>Lance Battery </DisplayName>
+        <Description>Lance Battery Group</Description>
+        <Blocks>
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="LanceLightBattery" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="LanceBattery" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="LanceHeavyBattery" />
+        </Blocks>
+      </BlockVariantGroup>
+
+      
+
+      <!-- Aegis Turret Variants-->
+      <BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="AegisTurretVariants" />
+        <Icon>Textures\icons\AegisFlakTurret.dds</Icon>
+        <DisplayName>Aegis Autocannon Flak Turret </DisplayName>
+        <Description>Aegis Turret Group</Description>
+        <Blocks>
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="AegisFlakTurret" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="AegisLascannonTurret" />
+        </Blocks>
+      </BlockVariantGroup>
+      
+      
+    </BlockVariantGroups>
+</Definitions>

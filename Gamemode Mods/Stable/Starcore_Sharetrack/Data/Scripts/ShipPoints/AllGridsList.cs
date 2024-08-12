@@ -15,6 +15,9 @@ using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
 
 namespace StarCore.ShareTrack
 {
+    /// <summary>
+    /// Shift-M menu
+    /// </summary>
     public class AllGridsList
     {
 
