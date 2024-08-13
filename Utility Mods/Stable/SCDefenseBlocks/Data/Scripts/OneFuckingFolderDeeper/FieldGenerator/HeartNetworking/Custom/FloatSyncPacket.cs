@@ -30,6 +30,9 @@ namespace Starcore.FieldGenerator.Networking.Custom
                     case nameof(FieldGenerator.MinFieldPower):
                         fieldGenerator.MinFieldPower = value;
                         break;
+                    case nameof(FieldGenerator.SizeModifier):
+                        fieldGenerator.SizeModifier = value;
+                        break;
                     case nameof(FieldGenerator.Stability):
                         fieldGenerator.Stability = value;
                         break;
