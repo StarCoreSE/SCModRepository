@@ -1,6 +1,4 @@
 ﻿using System;
-using Sandbox.ModAPI;
-using StarCore.ShareTrack.API;
 using StarCore.ShareTrack.HeartNetworking;
 using StarCore.ShareTrack.ShipTracking;
 using StarCore.ShareTrack.TrackerApi;
@@ -19,11 +17,7 @@ namespace StarCore.ShareTrack
 
         public static MasterSession I;
 
-        public HudAPIv2 TextHudApi;
-        public Action HudRegistered = () => { };
-
         private readonly AllGridsList _allGridsList = new AllGridsList();
-        private BuildingBlockPoints _buildingBlockPoints;
         private ApiProvider _apiProvider;
         public int Ticks { get; private set; } = 0;
 
@@ -41,13 +35,7 @@ namespace StarCore.ShareTrack
                 HeartNetwork.I.LoadData(42521);
                 _allGridsList.Init();
                 _apiProvider = new ApiProvider();
-                _buildingBlockPoints = new BuildingBlockPoints();
                 TrackingManager.Init(); // Initialize TrackingManager, but don't start tracking yet
-
-                if (!MyAPIGateway.Utilities.IsDedicated)
-                    // Initialize the sphere entities
-                    // Initialize the text_api with the HUDRegistered callback
-                    TextHudApi = new HudAPIv2(HudRegistered);
             }
             catch (Exception ex)
             {
@@ -59,7 +47,6 @@ namespace StarCore.ShareTrack
         {
             try
             {
-                TextHudApi?.Unload();
                 _apiProvider.Unload();
                 _allGridsList.Close();
                 TrackingManager.Close();
@@ -106,7 +93,6 @@ namespace StarCore.ShareTrack
             try
             {
                 _allGridsList.Draw();
-                _buildingBlockPoints?.Update();
             }
             catch (Exception ex)
             {
