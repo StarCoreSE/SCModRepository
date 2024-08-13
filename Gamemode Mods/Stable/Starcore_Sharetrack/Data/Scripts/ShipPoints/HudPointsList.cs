@@ -334,7 +334,7 @@ namespace StarCore.ShareTrack
         private WcApi WcApi => AllGridsList.I.WcApi;
         private ShieldApi ShApi => AllGridsList.I.ShieldApi;
         private RtsApi RtsApi => AllGridsList.I.RtsApi;
-        private HudAPIv2 TextHudApi => MasterSession.I.TextHudApi;
+        private HudAPIv2 TextHudApi => AllGridsList.I.TextHudApi;
 
         #endregion
 
