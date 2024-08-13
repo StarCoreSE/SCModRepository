@@ -46,8 +46,11 @@ namespace Starcore.FieldGenerator
         static bool CooldownEnabler(IMyTerminalBlock b)
         {
             var logic = GetLogic(b);
-
-            return !logic.SiegeCooldownActive;
+            if (logic != null)
+            {
+                return !logic.SiegeCooldownActive; ;
+            }
+            return false;
         }
 
         static void CreateControls()
