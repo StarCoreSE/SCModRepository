@@ -61,7 +61,7 @@
           <TypeId>Collector</TypeId>
           <SubtypeId>FieldGen_Capacity_Upgrade</SubtypeId>
         </Id>
-        <DisplayName>Capacity_Upgrade</DisplayName>
+        <DisplayName>Structural Integrity Generator Upgrade</DisplayName>
         <Icon>Textures\GUI\Icons\Cubes\collector.dds</Icon>
         <Description>Description_Collector</Description>
         <CubeSize>Large</CubeSize>
