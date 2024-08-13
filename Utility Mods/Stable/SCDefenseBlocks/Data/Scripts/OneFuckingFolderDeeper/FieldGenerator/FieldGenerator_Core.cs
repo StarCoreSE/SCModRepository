@@ -57,8 +57,6 @@ namespace Starcore.FieldGenerator
         private int _damageEventCounter = 0;
         private float _stabilityChange = 0;
         private int _resetCounter = 0;
-        
-        private float SizeModifier = 0;
 
         #region Sync Properties
         public bool SiegeMode
@@ -160,7 +158,21 @@ namespace Starcore.FieldGenerator
             }
         }
         public float _minFieldPower;
-        
+
+        public float SizeModifier
+        {
+            get { return _sizeModifier; }
+            set
+            {
+                if (_sizeModifier != value)
+                {
+                    _sizeModifier = value;
+                    OnFloatPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<float>(nameof(SizeModifier), _sizeModifier));
+                }
+            }
+        }
+        public float _sizeModifier;
+
         public float Stability
         {
             get { return _stability; }
@@ -178,14 +190,15 @@ namespace Starcore.FieldGenerator
         #endregion
 
         private Dictionary<string, IMyModelDummy> _coreDummies = new Dictionary<string, IMyModelDummy>();
-        private List<IMySlimBlock> _gridBlocks = new List<IMySlimBlock>();
-        private int _gridBlockCount;
         private HashSet<long> _attachedModuleIds = new HashSet<long>();
         private int _moduleCount = 0;
 
-        private MyResourceSinkComponent Sink = null;
+        private List<IMySlimBlock> _gridBlocks = new List<IMySlimBlock>();
+        private int _gridBlockCount;             
 
         public MySync<bool, SyncDirection.FromServer> GridStopped = null;
+
+        private MyResourceSinkComponent Sink = null;
 
         private IMyHudNotification notifSiege = null;
 
@@ -232,7 +245,7 @@ namespace Starcore.FieldGenerator
                 Block.CubeGrid.OnBlockRemoved += OnBlockRemoved;
             }
 
-            if (!MyAPIGateway.Session.IsServer)
+            if (!IsServer)
             {
                 GridStopped.ValueChanged += OnGridStopValueChange;
             }
@@ -324,8 +337,10 @@ namespace Starcore.FieldGenerator
                 Block.CubeGrid.OnBlockRemoved -= OnBlockRemoved;
             }
 
-            if (!MyAPIGateway.Session.IsServer)
+            if (!IsServer)
+            {
                 GridStopped.ValueChanged -= OnGridStopValueChange;
+            }              
 
             Block = null;
         }
