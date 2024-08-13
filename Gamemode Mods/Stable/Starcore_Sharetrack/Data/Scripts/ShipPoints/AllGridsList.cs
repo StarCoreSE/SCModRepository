@@ -166,7 +166,7 @@ namespace StarCore.ShareTrack
                 }
             }
 
-            if (IntegretyMessage == null || !TextHudApi.Heartbeat)
+            if (IntegretyMessage == null || !MasterSession.I.TextHudApi.Heartbeat)
                 return;
 
             var tt = new StringBuilder();
@@ -325,7 +325,6 @@ namespace StarCore.ShareTrack
 
         #region API Fields
 
-        public HudAPIv2 TextHudApi { get; private set; }
         public WcApi WcApi { get; private set; }
         public ShieldApi ShieldApi { get; private set; }
         public RtsApi RtsApi { get; private set; }
@@ -351,11 +350,7 @@ namespace StarCore.ShareTrack
             MyAPIGateway.Utilities.RegisterMessageHandler(2546247, ParsePointsDict);
 
             // Check if the current instance is not a dedicated server
-            if (!MyAPIGateway.Utilities.IsDedicated)
-                // Initialize the sphere entities
-                // Initialize the text_api with the HUDRegistered callback
-                TextHudApi = new HudAPIv2(HudRegistered);
-            else
+            if (MyAPIGateway.Utilities.IsDedicated)
                 TrackingManager.Init();
 
             // Initialize the WC_api and load it if it's not null
@@ -376,7 +371,6 @@ namespace StarCore.ShareTrack
         {
             Log.Info("Start PointCheck.UnloadData()");
 
-            TextHudApi?.Unload();
             WcApi?.Unload();
             ShieldApi?.Unload();
             if (PointValues != null)
@@ -430,7 +424,7 @@ namespace StarCore.ShareTrack
         public void Draw()
         {
             //if you are the server do nothing here
-            if (MyAPIGateway.Utilities.IsDedicated || !TextHudApi.Heartbeat)
+            if (MyAPIGateway.Utilities.IsDedicated || !MasterSession.I.TextHudApi.Heartbeat)
                 return;
             try
             {
