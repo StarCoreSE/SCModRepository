@@ -270,10 +270,10 @@ namespace Scripts
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 Smarts = new SmartsDef
                 {
-                    SteeringLimit = 10, // 0 means no limit, value is in degrees, good starting is 150.  This enable advanced smart "control", cost of 3 on a scale of 1-5, 0 being basic smart.
+                    SteeringLimit = 30, // 0 means no limit, value is in degrees, good starting is 150.  This enable advanced smart "control", cost of 3 on a scale of 1-5, 0 being basic smart.
                     Inaccuracy = 0f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
                     Aggressiveness = 1f, // controls how responsive tracking is.
-                    MaxLateralThrust = 0.03f, // controls how sharp the trajectile may turn
+                    MaxLateralThrust = 0.55f, // controls how sharp the trajectile may turn
                     TrackingDelay = 20, // Measured in Shape diameter units traveled.
                     MaxChaseTime = 120, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
