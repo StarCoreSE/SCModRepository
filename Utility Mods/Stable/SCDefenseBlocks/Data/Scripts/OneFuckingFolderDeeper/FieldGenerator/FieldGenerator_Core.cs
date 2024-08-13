@@ -491,7 +491,7 @@ namespace Starcore.FieldGenerator
                 if (IsServer && GridStopped.Value)
                     GridStopped.Value = false;
 
-                SiegeBlockReboot((List<IMySlimBlock>)_gridBlocks.Where(b => b.FatBlock != null));
+                SiegeBlockReboot(_gridBlocks.Where(b => b.FatBlock != null).ToList());
 
                 SiegeCooldownTime = SiegeElapsedTime * 2;
                 SiegeElapsedTime = 0;
