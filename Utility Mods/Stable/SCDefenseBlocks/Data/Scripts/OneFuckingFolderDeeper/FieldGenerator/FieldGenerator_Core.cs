@@ -384,12 +384,13 @@ namespace Starcore.FieldGenerator
             if (_gridBlocks.Contains(block))
                 _gridBlocks.Remove(block);
 
-            if (block.FatBlock != null)
+            if (block.FatBlock != null && block.FatBlock.BlockDefinition.SubtypeId == "FieldGen_Capacity_Upgrade")
             {
                 long entityId = block.FatBlock.EntityId;
 
-                if (_attachedModuleIds.Remove(entityId))
+                if (_attachedModuleIds.Contains(entityId))
                 {
+                    _attachedModuleIds.Remove(entityId);
                     _moduleCount--;
 
                     CalculateUpgradeAmounts();
@@ -462,8 +463,7 @@ namespace Starcore.FieldGenerator
                 if (SiegeElapsedTime + 1 <= Config.MaxSiegeTime)
                 {
                     SiegeElapsedTime++;
-
-                    SiegeBlockShutdown(_gridBlocks);
+                    SiegeBlockEnabler(_gridBlocks, false);
 
                     if (Block.CubeGrid.Physics.LinearVelocity != Vector3D.Zero)
                     {
@@ -474,30 +474,19 @@ namespace Starcore.FieldGenerator
                 }
                 else
                 {
-                    if (IsServer && GridStopped.Value)
-                        GridStopped.Value = false;
-
-                    SiegeBlockReboot(_gridBlocks);
-
+                    EndSiegeMode();
                     SiegeMode = false;
-                    
-                    SiegeCooldownTime = SiegeElapsedTime * 2;
-                    SiegeElapsedTime = 0;
-                    SiegeCooldownActive = true;
+                    return;
                 }
             }
-            else if (!SiegeMode && !SiegeCooldownActive && SiegeElapsedTime > 0)
+
+            if (!SiegeMode && !SiegeCooldownActive && SiegeElapsedTime > 0)
             {
-                if (IsServer && GridStopped.Value)
-                    GridStopped.Value = false;
-
-                SiegeBlockReboot((List<IMySlimBlock>)_gridBlocks.Where(b => b.FatBlock != null));
-
-                SiegeCooldownTime = SiegeElapsedTime * 2;
-                SiegeElapsedTime = 0;
-                SiegeCooldownActive = true;
+                EndSiegeMode();
+                return;
             }
-            else if (SiegeCooldownActive)
+
+            if (SiegeCooldownActive)
             {
                 if (SiegeCooldownTime > 0)
                 {
@@ -508,6 +497,18 @@ namespace Starcore.FieldGenerator
                     SiegeCooldownActive = false;
                 }
             }
+        }
+
+        private void EndSiegeMode()
+        {
+            if (IsServer && GridStopped.Value)
+                GridStopped.Value = false;
+
+            SiegeBlockEnabler(_gridBlocks, true);
+
+            SiegeCooldownTime = SiegeElapsedTime * 2;
+            SiegeElapsedTime = 0;
+            SiegeCooldownActive = true;
         }
         #endregion
 
@@ -570,13 +571,11 @@ namespace Starcore.FieldGenerator
 
                     if (Vector3D.Distance(coreDummyPos, neighborDummyPos) < 0.5)
                     {
-                        /*MyAPIGateway.Utilities.ShowMessage("Overlap", $"Overlap detected between {Block.DisplayNameText} and {neighbor.FatBlock.DisplayNameText} at dummies {CoreDummy.Key} and {neighborDummy.Key}");*/
                         return true;
                     }
                 }
             }
 
-            /*MyAPIGateway.Utilities.ShowMessage("Overlap", $"Module Is Not Valid");*/
             return false;
         }
 
@@ -620,22 +619,19 @@ namespace Starcore.FieldGenerator
 
                 foreach (var cockpit in cockpits)
                 {
-                    if (cockpit.Pilot != null)
+                    if (cockpit.Pilot != null && cockpit.Pilot.EntityId == MyAPIGateway.Session.Player.Character.EntityId)
                     {
-                        if (cockpit.Pilot.EntityId == MyAPIGateway.Session.Player.Character.EntityId)
-                        {
-                            return true;
-                        }
+                        return true;
                     }
                     else
-                        return false;
+                        continue;
                 }
             }
 
             return false;
         }
 
-        private void SiegeBlockShutdown(List<IMySlimBlock> allTerminalBlocks)
+        private void SiegeBlockEnabler(List<IMySlimBlock> allTerminalBlocks, bool enabled)
         {
             foreach (var block in allTerminalBlocks)
             {
@@ -644,36 +640,12 @@ namespace Starcore.FieldGenerator
                     var entBlock = block as MyEntity;
                     if (entBlock != null && FieldGeneratorSession.CoreSysAPI.HasCoreWeapon(entBlock))
                     {
-                        FieldGeneratorSession.CoreSysAPI.SetFiringAllowed(entBlock, false);
+                        FieldGeneratorSession.CoreSysAPI.SetFiringAllowed(entBlock, enabled);
 
                         var functionalBlock = block.FatBlock as IMyFunctionalBlock;
                         if (functionalBlock != null)
                         {
-                            functionalBlock.Enabled = false;
-
-                        }
-                    }
-                }
-                else
-                    continue;             
-            }
-        }
-
-        private void SiegeBlockReboot(List<IMySlimBlock> allTerminalBlocks)
-        {
-            foreach (var block in allTerminalBlocks)
-            {
-                if (block.FatBlock != null)
-                {
-                    var entBlock = block as MyEntity;
-                    if (entBlock != null && FieldGeneratorSession.CoreSysAPI.HasCoreWeapon(entBlock))
-                    {
-                        FieldGeneratorSession.CoreSysAPI.SetFiringAllowed(entBlock, true);
-
-                        var functionalBlock = block.FatBlock as IMyFunctionalBlock;
-                        if (functionalBlock != null)
-                        {
-                            functionalBlock.Enabled = true;
+                            functionalBlock.Enabled = enabled;
 
                         }
                     }
