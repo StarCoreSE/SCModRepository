@@ -339,6 +339,7 @@ namespace StarCore.ShareTrack
         public void Init()
         {
             I = this;
+            MasterSession.I.HudRegistered += HudRegistered;
 
             MyAPIGateway.Utilities.ShowMessage("ShareTrack",
                 "Aim at a grid and press:" +
