@@ -13,7 +13,7 @@ namespace Scripts
         S_Chem_Laser,
         //S_Armored_Laser,
 		SM3_Counter_Battery,
-		//SolHyp_ArcStrike_HTorpedo,
+		SolHyp_ArcStrike_HTorpedo,
         SolHyp_MAC
 	    );
         }
