@@ -619,7 +619,7 @@ namespace Starcore.FieldGenerator
 
                 foreach (var cockpit in cockpits)
                 {
-                    if (cockpit.Pilot != null && cockpit.Pilot.EntityId == MyAPIGateway.Session.Player.Character.EntityId)
+                    if (cockpit.Pilot != null && cockpit.Pilot.EntityId == MyAPIGateway.Session?.Player?.Character?.EntityId)
                     {
                         return true;
                     }
