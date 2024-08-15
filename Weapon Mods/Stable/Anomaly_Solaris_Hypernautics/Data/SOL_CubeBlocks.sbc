@@ -129,7 +129,6 @@
 
 
 		<!-- ArcStrike Torpedo -->
-		<!--
 <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
      <Id>
        <TypeId>ConveyorSorter</TypeId>
@@ -186,7 +185,6 @@
       <MaxFov>1.04719755</MaxFov>
   <DestroySound>Betty_Weapon_Destroyed</DestroySound>
     </Definition>	
-	-->
 
 <!-- OPA Light -->
 <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
