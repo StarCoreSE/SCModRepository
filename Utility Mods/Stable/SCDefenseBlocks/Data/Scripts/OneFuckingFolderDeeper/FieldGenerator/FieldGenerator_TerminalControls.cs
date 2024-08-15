@@ -62,7 +62,7 @@ namespace Starcore.FieldGenerator
             SiegeModeToggle.OnText = MyStringId.GetOrCompute("On");
             SiegeModeToggle.OffText = MyStringId.GetOrCompute("Off");
             SiegeModeToggle.Visible = IsVisible;
-            SiegeModeToggle.Enabled = CooldownEnabler; // Replace with Cooldown Enabler
+            SiegeModeToggle.Enabled = CooldownEnabler;
             SiegeModeToggle.Getter = (b) => b.GameLogic.GetAs<FieldGenerator>().SiegeMode;
             SiegeModeToggle.Setter = (b, v) => b.GameLogic.GetAs<FieldGenerator>().SiegeMode = v;
             SiegeModeToggle.SupportsMultipleBlocks = true;
