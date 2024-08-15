@@ -110,6 +110,12 @@ namespace SC.SUGMA.GameState
 
         public void UpdateFromPacket(PointsPacket packet)
         {
+            int bufferPoints;
+            foreach (var factionPts in packet.FactionPoints)
+            {
+                if (!FactionPoints.TryGetValue(factionPts.Key, out bufferPoints) || factionPts.Value != bufferPoints)
+                    OnPointsUpdated.Invoke(factionPts.Key, factionPts.Value);
+            }
             FactionPoints = packet.FactionPoints;
 
             //string data = "";
