@@ -229,15 +229,17 @@ namespace Klime.ProximityEntry
                         }
                     }
 
-                    // If there's a main cockpit, send entry request for it
+                    // If there's a main cockpit, send entry request for it and display its name
                     if (mainCockpit != null)
                     {
                         SendEntryRequest(mainCockpit);
+                        DisplayCockpitName(mainCockpit, cubeG.DisplayName);
                     }
-                    // If there's no main cockpit, but there's a closest one, send entry request for it
+                    // If there's no main cockpit, but there's a closest one, send entry request for it and display its name
                     else if (closestCockpit != null)
                     {
                         SendEntryRequest(closestCockpit);
+                        DisplayCockpitName(closestCockpit, cubeG.DisplayName);
                     }
                 }
             }
@@ -247,6 +249,13 @@ namespace Klime.ProximityEntry
             }
         }
 
+        private void DisplayCockpitName(IMyCockpit cockpit, string gridName)
+        {
+            text.Clear();
+            string cockpitName = string.IsNullOrEmpty(cockpit.CustomName) ? cockpit.DefinitionDisplayNameText : cockpit.CustomName;
+            text.Append("Hold F to enter: " + gridName + " (" + cockpitName + ")");
+            HUD_Message.Visible = true;
+        }
         private bool IsClosestCockpit(IMyCockpit cockpit, MyCubeGrid cubeG)
         {
             var player_pos = MyAPIGateway.Session.Player.Character.WorldMatrix.Translation;
