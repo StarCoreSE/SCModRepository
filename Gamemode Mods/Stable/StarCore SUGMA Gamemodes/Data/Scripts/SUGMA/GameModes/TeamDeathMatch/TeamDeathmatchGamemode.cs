@@ -136,11 +136,8 @@ namespace SC.SUGMA.GameModes.TeamDeathmatch
                 }
             }
 
-            if (!setWinnerFromArgs)
+            if (!setWinnerFromArgs && MyAPIGateway.Session.IsServer)
             {
-                if (!MyAPIGateway.Session.IsServer)
-                    return;
-
                 if (WinningFaction == null)
                     WinningFaction = PointTracker.FactionPoints.MaxBy(f => f.Value).Key;
 

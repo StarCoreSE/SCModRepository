@@ -196,11 +196,8 @@ namespace SC.SUGMA.GameModes.Elimination
                 }
             }
 
-            if (!setWinnerFromArgs)
+            if (!setWinnerFromArgs && MyAPIGateway.Session.IsServer)
             {
-                if (!MyAPIGateway.Session.IsServer)
-                    return;
-
                 Arguments = Arguments.Concat(new[] { $"win{_winningFaction?.FactionId ?? -1}" }).ToArray();
             }
 
