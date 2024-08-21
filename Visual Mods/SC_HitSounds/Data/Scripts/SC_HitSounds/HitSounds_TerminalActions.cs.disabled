@@ -1,5 +1,4 @@
-﻿using CoreSystems.Api;
-using Sandbox.Game.Localization;
+﻿using Sandbox.Game.Localization;
 using Sandbox.ModAPI;
 using Sandbox.ModAPI.Interfaces.Terminal;
 using System.Collections.Generic;
@@ -17,7 +16,7 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
             return validSorterWeapons.Contains(block.BlockDefinition.SubtypeId);
         }
 
-        public static void CreateTerminalControls(WcApi wcApi)
+        public static void CreateTerminalControls()
         {
             wcApi.RegisterTerminalControl("HS_HitSoundEnabled"); // CRINGE
 
