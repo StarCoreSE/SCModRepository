@@ -4,72 +4,48 @@ import subprocess
 from pathlib import Path
 import uuid
 
-
 def get_user_confirmation(prompt, default="y"):
     valid = {"yes": True, "y": True, "ye": True, "no": False, "n": False}
-    if default == "y":
-        prompt += " [Y/n] "
-    elif default == "n":
-        prompt += " [y/N] "
-    else:
-        raise ValueError(f"Invalid default value: '{default}'")
+    if default == "y": prompt += " [Y/n] "
+    elif default == "n": prompt += " [y/N] "
+    else: raise ValueError(f"Invalid default value: '{default}'")
 
     while True:
         choice = input(prompt).lower()
-        if choice == '':
-            return valid[default]
-        elif choice in valid:
-            return valid[choice]
-        else:
-            print("Please respond with 'yes' or 'no' (or 'y' or 'n').")
+        if choice == '': return valid[default]
+        elif choice in valid: return valid[choice]
+        else: print("Please respond with 'yes' or 'no' (or 'y' or 'n').")
 
-def check_audio_sample_rate(file_path):
+def check_audio_properties(file_path):
     try:
-        result = subprocess.run(
-            ['ffprobe', '-v', 'error', '-select_streams', 'a:0', '-show_entries', 'stream=sample_rate', '-of', 'default=noprint_wrappers=1:nokey=1', str(file_path)],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            text=True
+        sample_rate_result = subprocess.run(
+            ['ffprobe', '-v', 'error', '-select_streams', 'a:0', '-show_entries', 'stream=sample_rate,channels', '-of', 'csv=p=0', str(file_path)],
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, check=True
         )
-        return int(result.stdout.strip())
+        rate, channels = sample_rate_result.stdout.strip().split(',')
+        return int(rate), int(channels)
     except (ValueError, subprocess.CalledProcessError):
-        return None  # Return None if we can't determine the sample rate
+        return None, None
 
 def convert_audio(input_file, output_file):
     try:
-        if input_file == output_file:
-            # Generate a temporary filename
-            temp_output = output_file.with_stem(f"{output_file.stem}_{uuid.uuid4().hex[:8]}_temp")
-        else:
-            temp_output = output_file
+        temp_output = output_file.with_stem(f"{output_file.stem}_{uuid.uuid4().hex[:8]}_temp") if input_file == output_file else output_file
 
         command = [
-            'ffmpeg',
-            '-y',  # Overwrite output files without asking
-            '-i', str(input_file),
-            '-acodec', 'pcm_s16le',
-            '-ar', '44100',
-            str(temp_output)
+            'ffmpeg', '-y', '-i', str(input_file), '-acodec', 'pcm_s16le',
+            '-ar', '44100', '-ac', '1', str(temp_output)
         ]
         subprocess.run(command, check=True, stderr=subprocess.PIPE, text=True)
 
         if input_file == output_file:
-            # Replace the original file with the temp file
             os.remove(input_file)
             os.rename(temp_output, output_file)
-
         return True
-    except subprocess.CalledProcessError as e:
-        print(f"❌ FFmpeg error converting {input_file.name}: {e.stderr.strip()}")
-    except FileNotFoundError:
-        print("❌ FFmpeg is not installed or not in system PATH. Please install FFmpeg to use this script.")
-        sys.exit(1)
-    except PermissionError:
-        print(f"❌ Permission denied when trying to replace {input_file.name}. Please check file permissions.")
-    except Exception as e:
-        print(f"❌ Unexpected error converting {input_file.name}: {e}")
 
-    return False
+    except Exception as e:
+        print(f"❌ Error processing {input_file.name}: {e}")
+        return False
+
 def process_directory():
     current_dir = Path.cwd()
     print(f"🔍 Processing audio files in: {current_dir}\n")
@@ -78,14 +54,10 @@ def process_directory():
         print("Process aborted by user.")
         return
 
-    replace_originals = get_user_confirmation("\nReplace original files with new .wav files? If no, both will be kept.",
-                                              default="n")
+    replace_originals = get_user_confirmation("\nReplace original files with new mono 44100Hz WAV files? If no, both will be kept.", default="n")
     print(f"\n{'Replacing' if replace_originals else 'Keeping'} original files.\n")
 
-    total_files = 0
-    successful = 0
-    failed = 0
-    skipped = 0
+    total_files, successful, failed, skipped = 0, 0, 0, 0
     audio_extensions = ('.mp3', '.m4a', '.flac', '.ogg', '.aac', '.wav', '.wma', '.opus')
 
     for file_path in current_dir.rglob('*'):
@@ -100,17 +72,21 @@ def process_directory():
                 failed += 1
                 continue
 
-            if file_path.suffix.lower() == '.wav':
-                sample_rate = check_audio_sample_rate(file_path)
-                if sample_rate == 44100:
-                    print(f"✅ {file_path.name} is already a 44100Hz WAV. Skipping.")
-                    skipped += 1
-                    continue
+            sample_rate, channels = check_audio_properties(file_path)
+            if sample_rate == 44100 and channels == 1:
+                print(f"✅ {file_path.name} is already mono 44100Hz. Skipping.")
+                skipped += 1
+                continue
+            elif sample_rate == 44100 and channels > 1:
+                print(f"🔄 {file_path.name} is 44100Hz but has {channels} channels. Converting to mono.")
+            elif sample_rate != 44100 and channels == 1:
+                print(f"🔄 {file_path.name} is mono but at {sample_rate}Hz. Converting to 44100Hz.")
+            else:
+                print(f"🔄 {file_path.name} is {channels}-channel {sample_rate}Hz. Converting to mono 44100Hz.")
 
             if convert_audio(file_path, output_path):
-                if replace_originals:
-                    if file_path.suffix.lower() != '.wav' or not file_path.samefile(output_path):
-                        os.remove(file_path)
+                if replace_originals and (file_path.suffix.lower() != '.wav' or not file_path.samefile(output_path)):
+                    os.remove(file_path)
                     print(f"✅ Converted and replaced with {output_path.name}")
                 else:
                     print(f"✅ Converted. Kept both {file_path.name} and {output_path.name}")
@@ -119,7 +95,6 @@ def process_directory():
                 print(f"❌ Conversion failed for {file_path.name}")
                 failed += 1
 
-    # Summary
     print(f"\n📊 Conversion Summary:")
     print(f"   Total audio files found: {total_files}")
     print(f"   Successfully converted:  {successful}")
