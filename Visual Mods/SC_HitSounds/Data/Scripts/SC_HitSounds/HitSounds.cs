@@ -1,5 +1,4 @@
-﻿using CoreSystems.Api;
-using RichHudFramework.Client;
+﻿using RichHudFramework.Client;
 using RichHudFramework.UI;
 using RichHudFramework.UI.Client;
 using Sandbox.Game.Components;
@@ -45,7 +44,6 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
 
 
 
-        internal WcApi wAPI;
         internal HitSounds_Settings Settings = new HitSounds_Settings();
 
         MyCharacterSoundComponent SoundEmitter = null;
@@ -60,8 +58,6 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
 
             if (MyAPIGateway.Utilities.IsDedicated)
                 return;
-
-            wAPI = new WcApi();
 
             Settings.InitSettings(ModContext);
         }
@@ -86,9 +82,6 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
         {
             if (MyAPIGateway.Utilities.IsDedicated)
                 return;
-
-            if (!wAPI.IsReady) // Vain attempt to load terminal controls after weaponcore
-                wAPI.Load(/*() => HitSounds_TerminalActions.CreateTerminalControls(wAPI)*/); // TODO look into why only the Enabled toggle is dissapearing
 
             if (SoundEmitter == null && MyAPIGateway.Session.Player != null)
             {
@@ -131,12 +124,17 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
                 SoundEmitter?.PlayActionSound(CritSoundEffects[Settings.CurrentCritSound]);
             }
 
-            if ((Settings.ForceHitSounds || HitSounds_TerminalActions.ShouldPlayBlockSounds(attackerWeapon)) && info.Amount >= Settings.MinDamageToPlay) // Hit sound
+            if ((Settings.ForceHitSounds || ShouldPlayBlockSounds(attackerWeapon)) && info.Amount >= Settings.MinDamageToPlay) // Hit sound
             {
                 SoundEmitter?.PlayActionSound(HitSoundEffects[Settings.CurrentHitSound]);
             }
 
             LastSoundTick = Ticks;
+        }
+
+        public bool ShouldPlayBlockSounds(IMyConveyorSorter block)
+        {
+            return Settings.validSorterWeapons.Contains(block.BlockDefinition.SubtypeId);
         }
 
         #endregion
