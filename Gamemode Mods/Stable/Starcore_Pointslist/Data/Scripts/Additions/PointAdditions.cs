@@ -897,6 +897,7 @@ namespace ShipPoints
                 case "Shield Controller":
                 case "Shield Controller Table":
                 case "Structural Integrity Field Generator":
+		case "Structural Integrity Generator Core":
                     blockDisplayName = "Defensive Generator";
                     costMultiplier = 50.00f;
                     break;
