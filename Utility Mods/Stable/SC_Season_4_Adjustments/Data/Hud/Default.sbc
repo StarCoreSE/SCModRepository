@@ -1494,8 +1494,8 @@
                 <StatStyles>
                     <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
                       <OffsetPx>
-                        <X>-681</X>
-                        <Y>-195</Y>
+                        <X>-455</X>
+                        <Y>-205</Y>
                       </OffsetPx>
                       <SizePx>
                         <X>-220</X>
