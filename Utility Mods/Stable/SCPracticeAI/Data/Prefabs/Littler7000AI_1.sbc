@@ -6,17 +6,17 @@
       <CubeGrids>
         <CubeGrid>
           <SubtypeName />
-          <EntityId>92413378199011316</EntityId>
+          <EntityId>96118170066332677</EntityId>
           <PersistentFlags>CastShadows InScene</PersistentFlags>
           <PositionAndOrientation>
-            <Position x="16.902396864325965" y="1386.080504922591" z="287.017065613406" />
-            <Forward x="-0.0564365573" y="-0.9978274" z="0.0339919738" />
-            <Up x="-0.005840497" y="-0.0337157249" z="-0.999414444" />
+            <Position x="5388.2832030703657" y="-5225.71044921875" z="-621.82494781111018" />
+            <Forward x="0.17748341" y="0.0169745721" z="0.9839773" />
+            <Up x="-0.706195" y="0.69856143" z="0.115327969" />
             <Orientation>
-              <X>-0.7186962</X>
-              <Y>0.021720767</Y>
-              <Z>-0.0182662532</Z>
-              <W>0.6947448</W>
+              <X>-0.387299925</X>
+              <Y>0.9175987</Y>
+              <Z>0.026796408</Z>
+              <W>-0.0854005739</W>
             </Orientation>
           </PositionAndOrientation>
           <LocalPositionAndOrientation xsi:nil="true" />
@@ -53,10 +53,11 @@
           <CubeBlocks>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Reactor">
               <SubtypeName>LargeBlockLargeGenerator</SubtypeName>
-              <EntityId>110874301181485846</EntityId>
+              <EntityId>121889125655398459</EntityId>
               <Min x="-1" y="-1" z="-1" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
               <SkinSubtypeId>CarbonFibre_Armor</SkinSubtypeId>
+              <ShareMode>Faction</ShareMode>
               <ComponentContainer>
                 <Components>
                   <ComponentData>
@@ -99,7 +100,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Reactor">
               <SubtypeName>LargeBlockLargeGenerator</SubtypeName>
-              <EntityId>91172536971860883</EntityId>
+              <EntityId>94946004262136007</EntityId>
               <Min x="2" y="-1" z="-1" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
               <SkinSubtypeId>CarbonFibre_Armor</SkinSubtypeId>
@@ -146,7 +147,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Reactor">
               <SubtypeName>LargeBlockLargeGenerator</SubtypeName>
-              <EntityId>122170071263269695</EntityId>
+              <EntityId>106926723710610533</EntityId>
               <Min x="2" y="2" z="-1" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
               <SkinSubtypeId>CarbonFibre_Armor</SkinSubtypeId>
@@ -193,7 +194,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Reactor">
               <SubtypeName>LargeBlockLargeGenerator</SubtypeName>
-              <EntityId>137376986672607326</EntityId>
+              <EntityId>86699200220951183</EntityId>
               <Min x="-1" y="2" z="-1" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
               <SkinSubtypeId>CarbonFibre_Armor</SkinSubtypeId>
@@ -240,7 +241,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Reactor">
               <SubtypeName>LargeBlockLargeGenerator</SubtypeName>
-              <EntityId>120166905184558948</EntityId>
+              <EntityId>134761471645401715</EntityId>
               <Min x="2" y="5" z="-1" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
               <SkinSubtypeId>CarbonFibre_Armor</SkinSubtypeId>
@@ -287,7 +288,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Reactor">
               <SubtypeName>LargeBlockLargeGenerator</SubtypeName>
-              <EntityId>127883224872152948</EntityId>
+              <EntityId>127766830648230307</EntityId>
               <Min x="-1" y="5" z="-1" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
               <SkinSubtypeId>CarbonFibre_Armor</SkinSubtypeId>
@@ -334,7 +335,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_UpgradeModule">
               <SubtypeName>LargeLargeBlockUpgrade</SubtypeName>
-              <EntityId>88934533374990971</EntityId>
+              <EntityId>73586699199975259</EntityId>
               <Min x="2" y="-1" z="-2" />
               <BlockOrientation Forward="Backward" Up="Up" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -349,7 +350,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_UpgradeModule">
               <SubtypeName>LargeLargeBlockUpgrade</SubtypeName>
-              <EntityId>139980987420983472</EntityId>
+              <EntityId>119092019535889868</EntityId>
               <Min x="2" y="2" z="-2" />
               <BlockOrientation Forward="Backward" Up="Up" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -364,7 +365,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_UpgradeModule">
               <SubtypeName>LargeLargeBlockUpgrade</SubtypeName>
-              <EntityId>73853785081069235</EntityId>
+              <EntityId>97709727015069939</EntityId>
               <Min x="2" y="5" z="-2" />
               <BlockOrientation Forward="Backward" Up="Up" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -379,7 +380,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_UpgradeModule">
               <SubtypeName>LargeLargeBlockUpgrade</SubtypeName>
-              <EntityId>91800208347642408</EntityId>
+              <EntityId>82771251583741581</EntityId>
               <Min x="-1" y="-1" z="-2" />
               <BlockOrientation Forward="Backward" Up="Up" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -394,7 +395,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_UpgradeModule">
               <SubtypeName>LargeLargeBlockUpgrade</SubtypeName>
-              <EntityId>125891859988800361</EntityId>
+              <EntityId>127695087453652013</EntityId>
               <Min x="-1" y="2" z="-2" />
               <BlockOrientation Forward="Backward" Up="Up" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -409,7 +410,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_UpgradeModule">
               <SubtypeName>LargeLargeBlockUpgrade</SubtypeName>
-              <EntityId>118013202556598883</EntityId>
+              <EntityId>127876224144997180</EntityId>
               <Min x="-1" y="5" z="-2" />
               <BlockOrientation Forward="Backward" Up="Up" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -424,7 +425,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_UpgradeModule">
               <SubtypeName>LargeLargeBlockUpgrade</SubtypeName>
-              <EntityId>102022871636555901</EntityId>
+              <EntityId>88704298203355865</EntityId>
               <Min x="2" y="-1" z="2" />
               <BlockOrientation Forward="Forward" Up="Down" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -439,7 +440,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_UpgradeModule">
               <SubtypeName>LargeLargeBlockUpgrade</SubtypeName>
-              <EntityId>90250213314118099</EntityId>
+              <EntityId>96050218863977139</EntityId>
               <Min x="2" y="2" z="2" />
               <BlockOrientation Forward="Forward" Up="Down" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -454,7 +455,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_UpgradeModule">
               <SubtypeName>LargeLargeBlockUpgrade</SubtypeName>
-              <EntityId>110663165611377145</EntityId>
+              <EntityId>126172106598867231</EntityId>
               <Min x="2" y="5" z="2" />
               <BlockOrientation Forward="Forward" Up="Down" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -469,7 +470,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_UpgradeModule">
               <SubtypeName>LargeLargeBlockUpgrade</SubtypeName>
-              <EntityId>139925152852714367</EntityId>
+              <EntityId>135610199336865955</EntityId>
               <Min x="-1" y="-1" z="2" />
               <BlockOrientation Forward="Forward" Up="Down" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -484,7 +485,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_UpgradeModule">
               <SubtypeName>LargeLargeBlockUpgrade</SubtypeName>
-              <EntityId>127622818955966615</EntityId>
+              <EntityId>111830889187490472</EntityId>
               <Min x="-1" y="2" z="2" />
               <BlockOrientation Forward="Forward" Up="Down" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -499,7 +500,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_UpgradeModule">
               <SubtypeName>LargeLargeBlockUpgrade</SubtypeName>
-              <EntityId>96965669433025400</EntityId>
+              <EntityId>133557323622974601</EntityId>
               <Min x="-1" y="5" z="2" />
               <BlockOrientation Forward="Forward" Up="Down" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -808,7 +809,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_UpgradeModule">
               <SubtypeName>LargeShieldModulator</SubtypeName>
-              <EntityId>113873433765324282</EntityId>
+              <EntityId>121029749034427685</EntityId>
               <Min x="0" y="4" z="-3" />
               <BlockOrientation Forward="Down" Up="Left" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -823,11 +824,11 @@
                         <dictionary>
                           <item>
                             <Key>85bbb4f5-4fb9-4230-beef-bb79c9811509</Key>
-                            <Value>CAAYACDs//////////8BKAAwCDgA</Value>
+                            <Value>CAAYACDs//////////8BKAAwCTgA</Value>
                           </item>
                           <item>
                             <Key>85bbb4f5-4fb9-4230-beef-bb79c9811510</Key>
-                            <Value>CAEVVVVVvx2amZm/KAAwATgK</Value>
+                            <Value>CAEVVVVVvx2amZm/KAAwATgL</Value>
                           </item>
                         </dictionary>
                       </Storage>
@@ -2327,7 +2328,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Cockpit">
               <SubtypeName>LargeBlockCockpitSeat</SubtypeName>
-              <EntityId>138209194105793070</EntityId>
+              <EntityId>105618808952401242</EntityId>
               <Min x="-2" y="3" z="0" />
               <BlockOrientation Forward="Right" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -2693,7 +2694,7 @@
                     <Item />
                     <Data xsi:type="MyObjectBuilder_ToolbarItemTerminalBlock">
                       <Action>DS-M_DamageModulation_EnFull</Action>
-                      <BlockEntityId>113873433765324282</BlockEntityId>
+                      <BlockEntityId>121029749034427685</BlockEntityId>
                     </Data>
                   </Slot>
                   <Slot>
@@ -2701,7 +2702,7 @@
                     <Item />
                     <Data xsi:type="MyObjectBuilder_ToolbarItemTerminalBlock">
                       <Action>DS-M_DamageModulation_Reset</Action>
-                      <BlockEntityId>113873433765324282</BlockEntityId>
+                      <BlockEntityId>121029749034427685</BlockEntityId>
                     </Data>
                   </Slot>
                   <Slot>
@@ -2709,7 +2710,7 @@
                     <Item />
                     <Data xsi:type="MyObjectBuilder_ToolbarItemTerminalBlock">
                       <Action>DS-M_DamageModulation_KiFull</Action>
-                      <BlockEntityId>113873433765324282</BlockEntityId>
+                      <BlockEntityId>121029749034427685</BlockEntityId>
                     </Data>
                   </Slot>
                   <Slot>
@@ -2717,7 +2718,7 @@
                     <Item />
                     <Data xsi:type="MyObjectBuilder_ToolbarItemTerminalBlock">
                       <Action>DS-C_SideRedirect_Toggle</Action>
-                      <BlockEntityId>91526132623121103</BlockEntityId>
+                      <BlockEntityId>81747926910483841</BlockEntityId>
                     </Data>
                   </Slot>
                   <Slot>
@@ -2725,7 +2726,7 @@
                     <Item />
                     <Data xsi:type="MyObjectBuilder_ToolbarItemTerminalBlock">
                       <Action>DS-C_ShieldFortify_Toggle</Action>
-                      <BlockEntityId>91526132623121103</BlockEntityId>
+                      <BlockEntityId>81747926910483841</BlockEntityId>
                     </Data>
                   </Slot>
                   <Slot>
@@ -2733,7 +2734,7 @@
                     <Item />
                     <Data xsi:type="MyObjectBuilder_ToolbarItemTerminalBlock">
                       <Action>DS-SinkHeat_Toggle</Action>
-                      <BlockEntityId>91526132623121103</BlockEntityId>
+                      <BlockEntityId>81747926910483841</BlockEntityId>
                     </Data>
                   </Slot>
                   <Slot>
@@ -2742,7 +2743,7 @@
                     <Data xsi:type="MyObjectBuilder_ToolbarItemTerminalGroup">
                       <Action>SubSystems</Action>
                       <GridEntityId>0</GridEntityId>
-                      <BlockEntityId>138209194105793070</BlockEntityId>
+                      <BlockEntityId>105618808952401242</BlockEntityId>
                       <GroupName>a</GroupName>
                     </Data>
                   </Slot>
@@ -2751,7 +2752,7 @@
                     <Item />
                     <Data xsi:type="MyObjectBuilder_ToolbarItemTerminalBlock">
                       <Action>ActionFire</Action>
-                      <BlockEntityId>121121315843934395</BlockEntityId>
+                      <BlockEntityId>116004579212024531</BlockEntityId>
                     </Data>
                   </Slot>
                   <Slot>
@@ -2759,7 +2760,7 @@
                     <Item />
                     <Data xsi:type="MyObjectBuilder_ToolbarItemTerminalBlock">
                       <Action>ActionFire</Action>
-                      <BlockEntityId>115704007504899147</BlockEntityId>
+                      <BlockEntityId>95845893644379637</BlockEntityId>
                     </Data>
                   </Slot>
                 </Slots>
@@ -2769,7 +2770,7 @@
                     <Item />
                     <Data xsi:type="MyObjectBuilder_ToolbarItemTerminalBlock">
                       <Action>DS-M_DamageModulation_EnFull</Action>
-                      <BlockEntityId>113873433765324282</BlockEntityId>
+                      <BlockEntityId>121029749034427685</BlockEntityId>
                     </Data>
                   </Slot>
                   <Slot>
@@ -2777,7 +2778,7 @@
                     <Item />
                     <Data xsi:type="MyObjectBuilder_ToolbarItemTerminalBlock">
                       <Action>DS-M_DamageModulation_Reset</Action>
-                      <BlockEntityId>113873433765324282</BlockEntityId>
+                      <BlockEntityId>121029749034427685</BlockEntityId>
                     </Data>
                   </Slot>
                   <Slot>
@@ -2785,7 +2786,7 @@
                     <Item />
                     <Data xsi:type="MyObjectBuilder_ToolbarItemTerminalBlock">
                       <Action>DS-M_DamageModulation_KiFull</Action>
-                      <BlockEntityId>113873433765324282</BlockEntityId>
+                      <BlockEntityId>121029749034427685</BlockEntityId>
                     </Data>
                   </Slot>
                   <Slot>
@@ -2793,7 +2794,7 @@
                     <Item />
                     <Data xsi:type="MyObjectBuilder_ToolbarItemTerminalBlock">
                       <Action>DS-C_SideRedirect_Toggle</Action>
-                      <BlockEntityId>91526132623121103</BlockEntityId>
+                      <BlockEntityId>81747926910483841</BlockEntityId>
                     </Data>
                   </Slot>
                   <Slot>
@@ -2801,7 +2802,7 @@
                     <Item />
                     <Data xsi:type="MyObjectBuilder_ToolbarItemTerminalBlock">
                       <Action>DS-C_ShieldFortify_Toggle</Action>
-                      <BlockEntityId>91526132623121103</BlockEntityId>
+                      <BlockEntityId>81747926910483841</BlockEntityId>
                     </Data>
                   </Slot>
                   <Slot>
@@ -2809,7 +2810,7 @@
                     <Item />
                     <Data xsi:type="MyObjectBuilder_ToolbarItemTerminalBlock">
                       <Action>DS-SinkHeat_Toggle</Action>
-                      <BlockEntityId>91526132623121103</BlockEntityId>
+                      <BlockEntityId>81747926910483841</BlockEntityId>
                     </Data>
                   </Slot>
                   <Slot>
@@ -2818,7 +2819,7 @@
                     <Data xsi:type="MyObjectBuilder_ToolbarItemTerminalGroup">
                       <Action>SubSystems</Action>
                       <GridEntityId>0</GridEntityId>
-                      <BlockEntityId>138209194105793070</BlockEntityId>
+                      <BlockEntityId>105618808952401242</BlockEntityId>
                       <GroupName>a</GroupName>
                     </Data>
                   </Slot>
@@ -2827,7 +2828,7 @@
                     <Item />
                     <Data xsi:type="MyObjectBuilder_ToolbarItemTerminalBlock">
                       <Action>ActionFire</Action>
-                      <BlockEntityId>121121315843934395</BlockEntityId>
+                      <BlockEntityId>116004579212024531</BlockEntityId>
                     </Data>
                   </Slot>
                   <Slot>
@@ -2835,7 +2836,7 @@
                     <Item />
                     <Data xsi:type="MyObjectBuilder_ToolbarItemTerminalBlock">
                       <Action>ActionFire</Action>
-                      <BlockEntityId>115704007504899147</BlockEntityId>
+                      <BlockEntityId>95845893644379637</BlockEntityId>
                     </Data>
                   </Slot>
                 </SlotsGamepad>
@@ -2856,17 +2857,17 @@
               </OnLockedToolbar>
               <PilotRelativeWorld>
                 <Position x="11.532378196716309" y="5.6524009704589844" z="19.541032791137695" />
-                <Forward x="-0.360245258" y="-0.3349667" z="-0.870644" />
-                <Up x="-0.2652339" y="0.931567967" z="-0.248660818" />
+                <Forward x="-0.3602452" y="-0.3349666" z="-0.870643854" />
+                <Up x="-0.265233874" y="0.931567967" z="-0.248660713" />
                 <Orientation>
-                  <X>-0.1517771</X>
+                  <X>-0.151777089</X>
                   <Y>0.204063162</Y>
-                  <Z>0.105734281</Z>
+                  <Z>0.105734289</Z>
                   <W>0.961323142</W>
                 </Orientation>
               </PilotRelativeWorld>
               <PilotGunDefinition xsi:nil="true" />
-              <IsInFirstPersonView>false</IsInFirstPersonView>
+              <IsInFirstPersonView>true</IsInFirstPersonView>
               <OxygenLevel>0</OxygenLevel>
               <PilotJetpackEnabled xsi:nil="true" />
               <TargetData>
@@ -2874,7 +2875,7 @@
                 <IsTargetLocked>false</IsTargetLocked>
                 <LockingProgress>0</LockingProgress>
               </TargetData>
-              <SitAnimation>790360</SitAnimation>
+              <SitAnimation>0</SitAnimation>
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>LargeBlockArmorBlock</SubtypeName>
@@ -3166,7 +3167,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_ConveyorConnector">
               <SubtypeName>AQD_LG_ConveyorStraightArmored</SubtypeName>
-              <EntityId>102498715325350947</EntityId>
+              <EntityId>92683437563860236</EntityId>
               <Min x="-3" y="1" z="0" />
               <BlockOrientation Forward="Down" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -3174,7 +3175,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Cockpit">
               <SubtypeName>LargeBlockCockpitSeat</SubtypeName>
-              <EntityId>88094873767002296</EntityId>
+              <EntityId>121996170659547533</EntityId>
               <Min x="-3" y="0" z="0" />
               <BlockOrientation Forward="Right" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -3552,12 +3553,12 @@
               </OnLockedToolbar>
               <PilotRelativeWorld>
                 <Position x="-17.344505310058594" y="-0.75627338886260986" z="-52.760643005371094" />
-                <Forward x="0.5741533" y="0.0919135362" z="0.8135723" />
-                <Up x="0.02243519" y="0.9915394" z="-0.12785235" />
+                <Forward x="0.5741533" y="0.09191354" z="0.8135723" />
+                <Up x="0.022435192" y="0.9915394" z="-0.127852365" />
                 <Orientation>
-                  <X>0.02996872</X>
+                  <X>0.0299687237</X>
                   <Y>0.9517815</Y>
-                  <Z>-0.0577248819</Z>
+                  <Z>-0.0577248856</Z>
                   <W>-0.29980275</W>
                 </Orientation>
               </PilotRelativeWorld>
@@ -3574,7 +3575,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Cockpit">
               <SubtypeName>LargeBlockCockpitSeat</SubtypeName>
-              <EntityId>82375360689561183</EntityId>
+              <EntityId>75951770295771523</EntityId>
               <Min x="-3" y="6" z="0" />
               <BlockOrientation Forward="Right" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -3952,11 +3953,11 @@
               </OnLockedToolbar>
               <PilotRelativeWorld>
                 <Position x="-7.1606988906860352" y="0.84678411483764648" z="10.509310722351074" />
-                <Forward x="0.07413298" y="-0.0501235649" z="-0.9959879" />
-                <Up x="-0.0145280091" y="0.9985758" z="-0.0513351448" />
+                <Forward x="0.07413299" y="-0.05012357" z="-0.9959879" />
+                <Up x="-0.0145280082" y="0.9985758" z="-0.05133515" />
                 <Orientation>
-                  <X>-0.0253910143</X>
-                  <Y>-0.03689632</Y>
+                  <X>-0.0253910162</X>
+                  <Y>-0.0368963219</Y>
                   <Z>0.008209354</Z>
                   <W>0.99896276</W>
                 </Orientation>
@@ -3974,7 +3975,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>LargeFakeBlockRadioAntenna</SubtypeName>
-              <EntityId>110162927655541692</EntityId>
+              <EntityId>114098938764529553</EntityId>
               <Min x="-12" y="9" z="0" />
               <BlockOrientation Forward="Forward" Up="Left" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -3982,7 +3983,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>LargeBlockLargeHydrogenThrust</SubtypeName>
-              <EntityId>110171360453174015</EntityId>
+              <EntityId>124330433984066152</EntityId>
               <Min x="-5" y="4" z="1" />
               <BlockOrientation Forward="Left" Up="Up" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -4027,7 +4028,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>85714516049143707</EntityId>
+              <EntityId>92231445250830864</EntityId>
               <Min x="-6" y="0" z="-3" />
               <BlockOrientation Forward="Left" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -4072,7 +4073,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>77787062428408820</EntityId>
+              <EntityId>139827061397594547</EntityId>
               <Min x="-6" y="4" z="-3" />
               <BlockOrientation Forward="Left" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -4117,7 +4118,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>LargeBlockLargeHydrogenThrust</SubtypeName>
-              <EntityId>133438735506213023</EntityId>
+              <EntityId>139031007802905928</EntityId>
               <Min x="6" y="4" z="-3" />
               <BlockOrientation Forward="Right" Up="Down" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -4162,7 +4163,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>LargeBlockLargeHydrogenThrust</SubtypeName>
-              <EntityId>111310975984643000</EntityId>
+              <EntityId>133340008139923507</EntityId>
               <Min x="6" y="0" z="-3" />
               <BlockOrientation Forward="Right" Up="Up" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -4207,7 +4208,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>LargeBlockLargeHydrogenThrust</SubtypeName>
-              <EntityId>141919956414795990</EntityId>
+              <EntityId>87338098920324839</EntityId>
               <Min x="6" y="4" z="1" />
               <BlockOrientation Forward="Right" Up="Down" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -4252,7 +4253,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>LargeBlockLargeHydrogenThrust</SubtypeName>
-              <EntityId>131368785954603563</EntityId>
+              <EntityId>73713201919214791</EntityId>
               <Min x="6" y="0" z="1" />
               <BlockOrientation Forward="Right" Up="Up" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -4297,7 +4298,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>126902643772931982</EntityId>
+              <EntityId>113629967768627969</EntityId>
               <Min x="-1" y="5" z="-5" />
               <BlockOrientation Forward="Up" Up="Backward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -4342,7 +4343,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>113434803138255948</EntityId>
+              <EntityId>109031029948226052</EntityId>
               <Min x="-1" y="-2" z="-5" />
               <BlockOrientation Forward="Down" Up="Backward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -4387,7 +4388,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>74388238109324047</EntityId>
+              <EntityId>121077412909599303</EntityId>
               <Min x="-1" y="5" z="4" />
               <BlockOrientation Forward="Up" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -4432,7 +4433,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>81588898765137935</EntityId>
+              <EntityId>102647421410080286</EntityId>
               <Min x="-1" y="-2" z="4" />
               <BlockOrientation Forward="Down" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -4477,7 +4478,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>121121449273558745</EntityId>
+              <EntityId>140545111886586395</EntityId>
               <Min x="3" y="5" z="-5" />
               <BlockOrientation Forward="Up" Up="Backward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -4522,7 +4523,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>134473547350219726</EntityId>
+              <EntityId>126195048793792362</EntityId>
               <Min x="3" y="-2" z="-5" />
               <BlockOrientation Forward="Down" Up="Backward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -4567,7 +4568,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>139180292176733807</EntityId>
+              <EntityId>99090277028309825</EntityId>
               <Min x="3" y="5" z="4" />
               <BlockOrientation Forward="Up" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -4612,7 +4613,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>134810396428908726</EntityId>
+              <EntityId>132681847232180605</EntityId>
               <Min x="3" y="-2" z="4" />
               <BlockOrientation Forward="Down" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -4657,7 +4658,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>85731532225918907</EntityId>
+              <EntityId>140358643278560429</EntityId>
               <Min x="0" y="-5" z="0" />
               <BlockOrientation Forward="Backward" Up="Right" />
               <ColorMaskHSV x="0.5222222" y="0.04" z="0.54" />
@@ -4702,7 +4703,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>103990468023221637</EntityId>
+              <EntityId>91266486916585174</EntityId>
               <Min x="0" y="9" z="0" />
               <BlockOrientation Forward="Backward" Up="Right" />
               <ColorMaskHSV x="0.5222222" y="0.04" z="0.54" />
@@ -4747,7 +4748,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>91233002811578123</EntityId>
+              <EntityId>89635171270251573</EntityId>
               <Min x="-2" y="-5" z="-3" />
               <BlockOrientation Forward="Forward" Up="Left" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -4792,7 +4793,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>118587979475671447</EntityId>
+              <EntityId>127807121409314946</EntityId>
               <Min x="-2" y="9" z="-3" />
               <BlockOrientation Forward="Forward" Up="Left" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -4837,7 +4838,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>129206213121019708</EntityId>
+              <EntityId>142848067459181959</EntityId>
               <Min x="2" y="9" z="-3" />
               <BlockOrientation Forward="Forward" Up="Right" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -4882,7 +4883,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>107898283308690870</EntityId>
+              <EntityId>105689986088763576</EntityId>
               <Min x="2" y="-5" z="-3" />
               <BlockOrientation Forward="Forward" Up="Right" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -4927,7 +4928,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>108395972305083206</EntityId>
+              <EntityId>117155642316071021</EntityId>
               <Min x="4" y="9" z="0" />
               <BlockOrientation Forward="Backward" Up="Right" />
               <ColorMaskHSV x="0.5222222" y="0.04" z="0.54" />
@@ -4972,7 +4973,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>116135142677610483</EntityId>
+              <EntityId>76730829316797950</EntityId>
               <Min x="4" y="-5" z="0" />
               <BlockOrientation Forward="Backward" Up="Right" />
               <ColorMaskHSV x="0.5222222" y="0.04" z="0.54" />
@@ -5017,7 +5018,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>140646884801622103</EntityId>
+              <EntityId>88602482193499600</EntityId>
               <Min x="-6" y="-2" z="-1" />
               <BlockOrientation Forward="Left" Up="Up" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -5062,7 +5063,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>105697851296614027</EntityId>
+              <EntityId>114209913666099161</EntityId>
               <Min x="-6" y="7" z="-1" />
               <BlockOrientation Forward="Left" Up="Down" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -5107,7 +5108,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>93350715943093210</EntityId>
+              <EntityId>115169862747824281</EntityId>
               <Min x="6" y="7" z="-1" />
               <BlockOrientation Forward="Right" Up="Up" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -5152,7 +5153,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>AQD_LG_IonThrusterL_Armored</SubtypeName>
-              <EntityId>111964142525496973</EntityId>
+              <EntityId>95027215929870028</EntityId>
               <Min x="6" y="-2" z="-1" />
               <BlockOrientation Forward="Right" Up="Down" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -5197,7 +5198,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_ConveyorConnector">
               <SubtypeName>AQD_LG_ConveyorStraightArmored</SubtypeName>
-              <EntityId>120691150371178384</EntityId>
+              <EntityId>126524238808767472</EntityId>
               <Min x="6" y="1" z="0" />
               <BlockOrientation Forward="Down" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -5205,7 +5206,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_OxygenTank">
               <SubtypeName>LargeHydrogenTankSmall</SubtypeName>
-              <EntityId>142357116403077096</EntityId>
+              <EntityId>138462955695175526</EntityId>
               <Min x="6" y="3" z="-1" />
               <BlockOrientation Forward="Down" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -5325,7 +5326,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_ConveyorConnector">
               <SubtypeName>AQD_LG_ConveyorStraightArmored</SubtypeName>
-              <EntityId>88195432369092999</EntityId>
+              <EntityId>100990899609647391</EntityId>
               <Min x="6" y="5" z="0" />
               <BlockOrientation Forward="Down" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -5333,7 +5334,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Conveyor">
               <SubtypeName>AQD_LG_ConveyorTArmored</SubtypeName>
-              <EntityId>87702391866669669</EntityId>
+              <EntityId>141687779752414700</EntityId>
               <Min x="6" y="3" z="2" />
               <BlockOrientation Forward="Right" Up="Down" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -5341,7 +5342,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Conveyor">
               <SubtypeName>AQD_LG_ConveyorTArmored</SubtypeName>
-              <EntityId>93516879971217400</EntityId>
+              <EntityId>136972850530993925</EntityId>
               <Min x="6" y="3" z="-2" />
               <BlockOrientation Forward="Left" Up="Down" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -5415,7 +5416,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_OxygenTank">
               <SubtypeName>LargeHydrogenTankSmall</SubtypeName>
-              <EntityId>78602096279992151</EntityId>
+              <EntityId>142850098645124190</EntityId>
               <Min x="-3" y="3" z="0" />
               <BlockOrientation Forward="Down" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -5499,7 +5500,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_ConveyorSorter">
               <SubtypeName>SC_AR_Heliod</SubtypeName>
-              <EntityId>121121315843934395</EntityId>
+              <EntityId>116004579212024531</EntityId>
               <Min x="8" y="3" z="-1" />
               <BlockOrientation Forward="Right" Up="Up" />
               <ColorMaskHSV x="0.3472222" y="0.04" z="0.54" />
@@ -5528,7 +5529,7 @@
                         <dictionary>
                           <item>
                             <Key>75bbb4f5-4fb9-4230-beef-bb79c9811501</Key>
-                            <Value>+nzcAQoJCAAQBB1WW89HEs4BCAASRC0AgLtFMj0IARAAGAAgACgBMABAAkgAUABYAHgAgAEAkAEAoAEAsAEAuAEEwAEA0AF42AEA4AEC6AEA8AEA+AEBkAIAGkUSCg0AAAAAEAAg7gEYACCBgICAgICAgAIwADgAQABIAFIjGhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAgACgAMAAiKwgAEAAgACoGINT2//8HMhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAqEAgAIAEoADAAOABAAUgAUAAIIg==</Value>
+                            <Value>+nzYAQoJCAAQBB1WW89HEsoBCAASQS0AgLtFMjoIARAAGAAgACgBMABAAkgAUABYAHgAgAEAkAEAoAEAsAEAuAEEwAEA0AF42AEA6AEA8AEA+AEBkAIAGkQSCQ0AAAAAEAAgABgAIIGAgICAgICAAjAAOABAAEgAUiMaGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACAAKAAwACIrCAAQACAAKgYg+v///wcyGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACoQCAAgASgAMAA4AEABSABQAAgi</Value>
                           </item>
                         </dictionary>
                       </Storage>
@@ -6067,7 +6068,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_ConveyorSorter">
               <SubtypeName>K_SA_HeavyMetal_Gauss_A</SubtypeName>
-              <EntityId>132650150078603589</EntityId>
+              <EntityId>102784352827031962</EntityId>
               <Min x="6" y="2" z="-7" />
               <BlockOrientation Forward="Right" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -6096,7 +6097,7 @@
                         <dictionary>
                           <item>
                             <Key>75bbb4f5-4fb9-4230-beef-bb79c9811501</Key>
-                            <Value>+nzWAQoJCAAQAR2s6vdEEsgBCAASPi0AQJxFMjcIARAAGAAgASgBMABAA0gAUABYAHgAgAEAkAEAoAEAsAEAwAEA0AF42AEA6AEA8AEA+AEBkAIAGkUSCg0AAAAAEAAg7wEYACCBgICAgICAgAIwADgAQABIAFIjGhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAgACgAMAAiKwgAEAAgACoGIM/2//8HMhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAqEAgAIAEoADAAOABAAUgAUAAIIg==</Value>
+                            <Value>+nzVAQoJCAAQAR2s6vdEEscBCAASPi0AQJxFMjcIARAAGAAgACgBMABAA0gAUABYAHgAgAEAkAEAoAEAsAEAwAEA0AF42AEA6AEA8AEA+AEBkAIAGkQSCQ0AAAAAEAAgARgAIIGAgICAgICAAjAAOABAAEgAUiMaGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACAAKAAwACIrCAAQACAAKgYg9f///wcyGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACoQCAAgASgAMAA4AEABSABQAAgi</Value>
                           </item>
                         </dictionary>
                       </Storage>
@@ -6147,7 +6148,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_ConveyorSorter">
               <SubtypeName>K_SA_HeavyMetal_Gauss_A</SubtypeName>
-              <EntityId>125065727090931213</EntityId>
+              <EntityId>98458350270351348</EntityId>
               <Min x="6" y="2" z="4" />
               <BlockOrientation Forward="Right" Up="Backward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -6176,7 +6177,7 @@
                         <dictionary>
                           <item>
                             <Key>75bbb4f5-4fb9-4230-beef-bb79c9811501</Key>
-                            <Value>+nzWAQoJCAAQAR2s6vdEEsgBCAASPi0AQJxFMjcIARAAGAAgASgBMABAA0gAUABYAHgAgAEAkAEAoAEAsAEAwAEA0AF42AEA6AEA8AEA+AEBkAIAGkUSCg0AAAAAEAAg8AEYACCBgICAgICAgAIwADgAQABIAFIjGhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAgACgAMAAiKwgAEAAgACoGIMr2//8HMhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAqEAgAIAEoADAAOABAAUgAUAAIIg==</Value>
+                            <Value>+nzVAQoJCAAQAR2s6vdEEscBCAASPi0AQJxFMjcIARAAGAAgACgBMABAA0gAUABYAHgAgAEAkAEAoAEAsAEAwAEA0AF42AEA6AEA8AEA+AEBkAIAGkQSCQ0AAAAAEAAgAhgAIIGAgICAgICAAjAAOABAAEgAUiMaGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACAAKAAwACIrCAAQACAAKgYg8P///wcyGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACoQCAAgASgAMAA4AEABSABQAAgi</Value>
                           </item>
                         </dictionary>
                       </Storage>
@@ -7877,7 +7878,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Gyro">
               <SubtypeName>LargeBlockGyro</SubtypeName>
-              <EntityId>95875838143278872</EntityId>
+              <EntityId>83589433253856000</EntityId>
               <Min x="4" y="3" z="-4" />
               <BlockOrientation Forward="Down" Up="Right" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -7916,7 +7917,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_UpgradeModule">
               <SubtypeName>AQD_LG_GyroBooster</SubtypeName>
-              <EntityId>108525055661709484</EntityId>
+              <EntityId>89224176418271442</EntityId>
               <Min x="3" y="3" z="4" />
               <BlockOrientation Forward="Backward" Up="Down" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -7943,7 +7944,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_UpgradeModule">
               <SubtypeName>AQD_LG_GyroBooster</SubtypeName>
-              <EntityId>83709932571221282</EntityId>
+              <EntityId>102440012407850770</EntityId>
               <Min x="3" y="3" z="-5" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
               <SkinSubtypeId>CarbonFibre_Armor</SkinSubtypeId>
@@ -8191,7 +8192,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Gyro">
               <SubtypeName>LargeBlockGyro</SubtypeName>
-              <EntityId>104867473681937432</EntityId>
+              <EntityId>125491205092843353</EntityId>
               <Min x="4" y="3" z="4" />
               <BlockOrientation Forward="Down" Up="Right" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -8314,7 +8315,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_ConveyorSorter">
               <SubtypeName>SC_Flare</SubtypeName>
-              <EntityId>115704007504899147</EntityId>
+              <EntityId>95845893644379637</EntityId>
               <Min x="-1" y="3" z="-5" />
               <BlockOrientation Forward="Right" Up="Forward" />
               <ColorMaskHSV x="0.5222222" y="0.04" z="0.54" />
@@ -8343,7 +8344,7 @@
                         <dictionary>
                           <item>
                             <Key>75bbb4f5-4fb9-4230-beef-bb79c9811501</Key>
-                            <Value>+nzXAQoJCAAQCB0A0J1HEskBCAASPy0AQJxFMjgIARAAGAAgACgAMABIAFAAcAB4AIABAJABAKABALABAMABANABeNgBAOABA+gBAPABAPgBAZACABpFEgoNAAAAABAAIPEBGAAggYCAgICAgIACMAA4AEAASABSIxobCQAAAAAAAAAAIQAAAAAAAAAAOQAAAAAAAAAAIAAoADAAIisIABAAIAAqBiDF9v//BzIbCQAAAAAAAAAAIQAAAAAAAAAAOQAAAAAAAAAAKhAIACABKAAwADgAQAFIAFAACCI=</Value>
+                            <Value>+nzWAQoJCAAQCB0A0J1HEsgBCAASPy0AQJxFMjgIARAAGAAgACgAMABIAFAAcAB4AIABAJABAKABALABAMABANABeNgBAOABA+gBAPABAPgBAZACABpEEgkNAAAAABAAIAMYACCBgICAgICAgAIwADgAQABIAFIjGhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAgACgAMAAiKwgAEAAgACoGIOv///8HMhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAqEAgAIAEoADAAOABAAUgAUAAIIg==</Value>
                           </item>
                         </dictionary>
                       </Storage>
@@ -8436,7 +8437,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Gyro">
               <SubtypeName>LargeBlockGyro</SubtypeName>
-              <EntityId>88941894336449530</EntityId>
+              <EntityId>124815936768825830</EntityId>
               <Min x="2" y="3" z="-4" />
               <BlockOrientation Forward="Down" Up="Left" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -8475,7 +8476,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Gyro">
               <SubtypeName>LargeBlockGyro</SubtypeName>
-              <EntityId>91277411662269453</EntityId>
+              <EntityId>88666125771160089</EntityId>
               <Min x="4" y="3" z="5" />
               <BlockOrientation Forward="Down" Up="Right" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -8502,7 +8503,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Gyro">
               <SubtypeName>LargeBlockGyro</SubtypeName>
-              <EntityId>114350576155340596</EntityId>
+              <EntityId>98893855675293386</EntityId>
               <Min x="4" y="3" z="-5" />
               <BlockOrientation Forward="Down" Up="Right" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -9333,7 +9334,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_ConveyorConnector">
               <SubtypeName>AQD_LG_ConveyorStraightArmored</SubtypeName>
-              <EntityId>135370018803375750</EntityId>
+              <EntityId>137672022123755032</EntityId>
               <Min x="-3" y="5" z="0" />
               <BlockOrientation Forward="Down" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -9341,7 +9342,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Conveyor">
               <SubtypeName>AQD_LG_ConveyorTArmored</SubtypeName>
-              <EntityId>141301516002979235</EntityId>
+              <EntityId>142804102358054898</EntityId>
               <Min x="-3" y="3" z="2" />
               <BlockOrientation Forward="Right" Up="Down" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -9349,7 +9350,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Conveyor">
               <SubtypeName>AQD_LG_ConveyorTArmored</SubtypeName>
-              <EntityId>99543461399457058</EntityId>
+              <EntityId>107040469563586699</EntityId>
               <Min x="-3" y="3" z="-2" />
               <BlockOrientation Forward="Left" Up="Down" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -9357,7 +9358,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Thrust">
               <SubtypeName>LargeBlockLargeHydrogenThrust</SubtypeName>
-              <EntityId>127848977506815663</EntityId>
+              <EntityId>81536307557434979</EntityId>
               <Min x="-5" y="0" z="1" />
               <BlockOrientation Forward="Left" Up="Up" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -9420,7 +9421,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_UpgradeModule">
               <SubtypeName>DSControlLarge</SubtypeName>
-              <EntityId>91526132623121103</EntityId>
+              <EntityId>81747926910483841</EntityId>
               <Min x="-3" y="3" z="-3" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
               <SkinSubtypeId>CarbonFibre_Armor</SkinSubtypeId>
@@ -9434,11 +9435,11 @@
                         <dictionary>
                           <item>
                             <Key>85bbb4f5-4fb9-4230-beef-bb79c9811508</Key>
-                            <Value>FQAA8EEdAADwQSUAAPBBKAAwAD0AAEhCQAFIAFAAeAqIAQCSAQYIACAAOACYAQygAQCwAQC6AQYIAiAAOAHAAQDIAQDVAQDAeUQ=</Value>
+                            <Value>FQAA8EEdAADwQSUAAPBBKAAwAD0AAEhCQAFIAFAAeAqIAQCSAQYIACAAOACYAQ2gAQCwAQC6AQYIAiAAOAHAAQDIAQDVAQDAeUQ=</Value>
                           </item>
                           <item>
                             <Key>85bbb4f5-4fb9-4230-beef-bb79c9811505</Key>
-                            <Value>DbenGkgdqG+CPyVVVVU/OAFAAEgAUABYAGAAaABwAHgAgAEBkAEAmAEAoQE4S0ZT/PzxP6oBGwkAAAAAAKBEQCEAAAAAACBCQDkAAAAAAEA1QLABAbgBAcUBAAAAANABAN0BAADIQvUBAACAP/gBAIACl56RtIO5/44BiAIRkAIAnQKDT49ApQLCTQ1AqgIPDQAAJUIlAAARQj0AAKpBvQIAAAAA8gIHDbenGkgQAfICBw23pxpIEAHyAgcNt6caSBAB8gIHDbenGkgQAfICBw23pxpIEAHyAgcNt6caSBAB</Value>
+                            <Value>DbenGkgdqG+CPyVVVVU/OAFAAEgAUABYAGAAaABwAHgAgAEBkAEAmAEAoQE4S0ZT/PzxP6oBGwkAAAAAAKBEQCEAAAAAACBCQDkAAAAAAEA1QLABAbgBAcUBAAAAANABAN0BAADIQvUBAACAP/gBAIACjt7vsIiD1e0BiAISkAIAnQKVWY9ApQKwVw1AqgIPDQAAJUIlAAARQj0AAKpBvQIAAAAA8gIHDbenGkgQAfICBw23pxpIEAHyAgcNt6caSBAB8gIHDbenGkgQAfICBw23pxpIEAHyAgcNt6caSBAB</Value>
                           </item>
                           <item>
                             <Key>85bbb4f5-4fb9-4230-beef-bb79c9811511</Key>
@@ -9672,7 +9673,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Collector">
               <SubtypeName>SELtdLargeNanobotBuildAndRepairSystem</SubtypeName>
-              <EntityId>96158858065207668</EntityId>
+              <EntityId>119684298340850298</EntityId>
               <Min x="-3" y="2" z="-1" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
               <SkinSubtypeId>CarbonFibre_Armor</SkinSubtypeId>
@@ -9691,6 +9692,19 @@
                       <Size xsi:nil="true" />
                       <InventoryFlags>CanSend</InventoryFlags>
                       <RemoveEntityOnEmpty>false</RemoveEntityOnEmpty>
+                    </Component>
+                  </ComponentData>
+                  <ComponentData>
+                    <TypeId>MyModStorageComponentBase</TypeId>
+                    <Component xsi:type="MyObjectBuilder_ModStorageComponent">
+                      <Storage>
+                        <dictionary>
+                          <item>
+                            <Key>09e18094-46ae-4f55-8215-a407b49f9caa</Key>
+                            <Value>yAIA0AIA2AIA</Value>
+                          </item>
+                        </dictionary>
+                      </Storage>
                     </Component>
                   </ComponentData>
                 </Components>
@@ -12584,7 +12598,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_ConveyorSorter">
               <SubtypeName>K_SA_HeavyMetal_Gauss_A</SubtypeName>
-              <EntityId>109310917990025644</EntityId>
+              <EntityId>100532179895858768</EntityId>
               <Min x="7" y="9" z="-3" />
               <BlockOrientation Forward="Right" Up="Up" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.3" />
@@ -12613,7 +12627,7 @@
                         <dictionary>
                           <item>
                             <Key>75bbb4f5-4fb9-4230-beef-bb79c9811501</Key>
-                            <Value>+nzWAQoJCAAQAR2s6vdEEsgBCAASPi0AQJxFMjcIARAAGAAgASgBMABAA0gAUABYAHgAgAEAkAEAoAEAsAEAwAEA0AF42AEA6AEA8AEA+AEBkAIAGkUSCg0AAAAAEAAg8gEYACCBgICAgICAgAIwADgAQABIAFIjGhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAgACgAMAAiKwgAEAAgACoGIMD2//8HMhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAqEAgAIAEoADAAOABAAUgAUAAIIg==</Value>
+                            <Value>+nzVAQoJCAAQAR2s6vdEEscBCAASPi0AQJxFMjcIARAAGAAgACgBMABAA0gAUABYAHgAgAEAkAEAoAEAsAEAwAEA0AF42AEA6AEA8AEA+AEBkAIAGkQSCQ0AAAAAEAAgBBgAIIGAgICAgICAAjAAOABAAEgAUiMaGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACAAKAAwACIrCAAQACAAKgYg5v///wcyGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACoQCAAgASgAMAA4AEABSABQAAgi</Value>
                           </item>
                         </dictionary>
                       </Storage>
@@ -12634,7 +12648,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_ConveyorSorter">
               <SubtypeName>K_SA_HeavyMetal_Gauss_A</SubtypeName>
-              <EntityId>104257701787038649</EntityId>
+              <EntityId>95405082304469922</EntityId>
               <Min x="7" y="-6" z="-3" />
               <BlockOrientation Forward="Right" Up="Down" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.3" />
@@ -12663,7 +12677,7 @@
                         <dictionary>
                           <item>
                             <Key>75bbb4f5-4fb9-4230-beef-bb79c9811501</Key>
-                            <Value>+nzWAQoJCAAQAR2s6vdEEsgBCAASPi0AQJxFMjcIARAAGAAgASgBMABAA0gAUABYAHgAgAEAkAEAoAEAsAEAwAEA0AF42AEA6AEA8AEA+AEBkAIAGkUSCg0AAAAAEAAg8wEYACCBgICAgICAgAIwADgAQABIAFIjGhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAgACgAMAAiKwgAEAAgACoGILv2//8HMhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAqEAgAIAEoADAAOABAAUgAUAAIIg==</Value>
+                            <Value>+nzVAQoJCAAQAR2s6vdEEscBCAASPi0AQJxFMjcIARAAGAAgACgBMABAA0gAUABYAHgAgAEAkAEAoAEAsAEAwAEA0AF42AEA6AEA8AEA+AEBkAIAGkQSCQ0AAAAAEAAgBRgAIIGAgICAgICAAjAAOABAAEgAUiMaGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACAAKAAwACIrCAAQACAAKgYg4f///wcyGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACoQCAAgASgAMAA4AEABSABQAAgi</Value>
                           </item>
                         </dictionary>
                       </Storage>
@@ -12684,7 +12698,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_ConveyorSorter">
               <SubtypeName>K_SA_HeavyMetal_Gauss_A</SubtypeName>
-              <EntityId>82234392376521468</EntityId>
+              <EntityId>83301032207243961</EntityId>
               <Min x="7" y="9" z="1" />
               <BlockOrientation Forward="Right" Up="Up" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.3" />
@@ -12713,7 +12727,7 @@
                         <dictionary>
                           <item>
                             <Key>75bbb4f5-4fb9-4230-beef-bb79c9811501</Key>
-                            <Value>+nzWAQoJCAAQAR2s6vdEEsgBCAASPi0AQJxFMjcIARAAGAAgASgBMABAA0gAUABYAHgAgAEAkAEAoAEAsAEAwAEA0AF42AEA6AEA8AEA+AEBkAIAGkUSCg0AAAAAEAAg9AEYACCBgICAgICAgAIwADgAQABIAFIjGhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAgACgAMAAiKwgAEAAgACoGILb2//8HMhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAqEAgAIAEoADAAOABAAUgAUAAIIg==</Value>
+                            <Value>+nzVAQoJCAAQAR2s6vdEEscBCAASPi0AQJxFMjcIARAAGAAgACgBMABAA0gAUABYAHgAgAEAkAEAoAEAsAEAwAEA0AF42AEA6AEA8AEA+AEBkAIAGkQSCQ0AAAAAEAAgBhgAIIGAgICAgICAAjAAOABAAEgAUiMaGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACAAKAAwACIrCAAQACAAKgYg3P///wcyGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACoQCAAgASgAMAA4AEABSABQAAgi</Value>
                           </item>
                         </dictionary>
                       </Storage>
@@ -12734,7 +12748,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_ConveyorSorter">
               <SubtypeName>K_SA_HeavyMetal_Gauss_A</SubtypeName>
-              <EntityId>84765771317041958</EntityId>
+              <EntityId>100983040084735510</EntityId>
               <Min x="7" y="-6" z="1" />
               <BlockOrientation Forward="Right" Up="Down" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.3" />
@@ -12763,7 +12777,7 @@
                         <dictionary>
                           <item>
                             <Key>75bbb4f5-4fb9-4230-beef-bb79c9811501</Key>
-                            <Value>+nzWAQoJCAAQAR2s6vdEEsgBCAASPi0AQJxFMjcIARAAGAAgASgBMABAA0gAUABYAHgAgAEAkAEAoAEAsAEAwAEA0AF42AEA6AEA8AEA+AEBkAIAGkUSCg0AAAAAEAAg9QEYACCBgICAgICAgAIwADgAQABIAFIjGhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAgACgAMAAiKwgAEAAgACoGILH2//8HMhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAqEAgAIAEoADAAOABAAUgAUAAIIg==</Value>
+                            <Value>+nzVAQoJCAAQAR2s6vdEEscBCAASPi0AQJxFMjcIARAAGAAgACgBMABAA0gAUABYAHgAgAEAkAEAoAEAsAEAwAEA0AF42AEA6AEA8AEA+AEBkAIAGkQSCQ0AAAAAEAAgBxgAIIGAgICAgICAAjAAOABAAEgAUiMaGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACAAKAAwACIrCAAQACAAKgYg1////wcyGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACoQCAAgASgAMAA4AEABSABQAAgi</Value>
                           </item>
                         </dictionary>
                       </Storage>
@@ -14709,7 +14723,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_UpgradeModule">
               <SubtypeName>EmitterLA</SubtypeName>
-              <EntityId>80499404712464151</EntityId>
+              <EntityId>133793078243487502</EntityId>
               <Min x="-6" y="3" z="0" />
               <BlockOrientation Forward="Forward" Up="Right" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -14724,7 +14738,7 @@
                         <dictionary>
                           <item>
                             <Key>85bbb4f5-4fb9-4230-beef-bb79c9811506</Key>
-                            <Value>GAEgACgAMAE4AUH2nFhDHTBHQFCXnpG0g7n/jgFYAw==</Value>
+                            <Value>GAEgACgAMAE4AUH2nFhDHTBHQFCO3u+wiIPV7QFYBA==</Value>
                           </item>
                         </dictionary>
                       </Storage>
@@ -15282,10 +15296,11 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_FlightMovementBlock">
               <SubtypeName>LargeFlightMovement</SubtypeName>
-              <EntityId>77208641677837668</EntityId>
+              <EntityId>82305207670001569</EntityId>
               <Min x="-3" y="3" z="-1" />
               <BlockOrientation Forward="Right" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="0" />
+              <ShareMode>Faction</ShareMode>
               <ComponentContainer>
                 <Components>
                   <ComponentData>
@@ -15844,7 +15859,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Gyro">
               <SubtypeName>LargeBlockGyro</SubtypeName>
-              <EntityId>136784845069089865</EntityId>
+              <EntityId>82672358254378247</EntityId>
               <Min x="2" y="3" z="4" />
               <BlockOrientation Forward="Down" Up="Left" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -15871,7 +15886,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Gyro">
               <SubtypeName>LargeBlockGyro</SubtypeName>
-              <EntityId>99313056107142255</EntityId>
+              <EntityId>137408800755935503</EntityId>
               <Min x="2" y="3" z="-5" />
               <BlockOrientation Forward="Down" Up="Left" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -15898,7 +15913,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_Gyro">
               <SubtypeName>LargeBlockGyro</SubtypeName>
-              <EntityId>85125164512931813</EntityId>
+              <EntityId>123791636817391605</EntityId>
               <Min x="2" y="3" z="5" />
               <BlockOrientation Forward="Down" Up="Left" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -16333,7 +16348,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope4x1</SubtypeName>
-              <EntityId>78316978522593861</EntityId>
+              <EntityId>81254575152163070</EntityId>
               <Min x="8" y="-6" z="0" />
               <BlockOrientation Forward="Right" Up="Down" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -16341,7 +16356,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope4x1</SubtypeName>
-              <EntityId>96722009617634837</EntityId>
+              <EntityId>91201489710616273</EntityId>
               <Min x="8" y="12" z="0" />
               <BlockOrientation Forward="Right" Up="Up" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -16349,7 +16364,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope4x1</SubtypeName>
-              <EntityId>130717994998916854</EntityId>
+              <EntityId>118876187202665418</EntityId>
               <Min x="4" y="-7" z="0" />
               <BlockOrientation Forward="Right" Up="Down" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -16357,7 +16372,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope4x1</SubtypeName>
-              <EntityId>104502804970733807</EntityId>
+              <EntityId>122066402072164071</EntityId>
               <Min x="4" y="13" z="0" />
               <BlockOrientation Forward="Right" Up="Up" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -16365,7 +16380,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope3x1</SubtypeName>
-              <EntityId>85392730842098894</EntityId>
+              <EntityId>127257910284851525</EntityId>
               <Min x="1" y="-8" z="0" />
               <BlockOrientation Forward="Right" Up="Down" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -16373,7 +16388,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope3x1</SubtypeName>
-              <EntityId>98409155910489093</EntityId>
+              <EntityId>115223301784364233</EntityId>
               <Min x="1" y="14" z="0" />
               <BlockOrientation Forward="Right" Up="Up" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -16381,7 +16396,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope3x1</SubtypeName>
-              <EntityId>90148694168570904</EntityId>
+              <EntityId>81497258292433642</EntityId>
               <Min x="-2" y="-9" z="0" />
               <BlockOrientation Forward="Right" Up="Down" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -16389,7 +16404,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope3x1</SubtypeName>
-              <EntityId>90000437865182666</EntityId>
+              <EntityId>139093886598437698</EntityId>
               <Min x="-2" y="15" z="0" />
               <BlockOrientation Forward="Right" Up="Up" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -16453,7 +16468,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope3x1</SubtypeName>
-              <EntityId>140978701150149154</EntityId>
+              <EntityId>140204913153537117</EntityId>
               <Min x="10" y="1" z="-6" />
               <BlockOrientation Forward="Right" Up="Forward" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -16461,7 +16476,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope3x1</SubtypeName>
-              <EntityId>119262615332746807</EntityId>
+              <EntityId>106435615534617847</EntityId>
               <Min x="10" y="5" z="-6" />
               <BlockOrientation Forward="Right" Up="Forward" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -16469,7 +16484,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope3x1</SubtypeName>
-              <EntityId>79647946701736866</EntityId>
+              <EntityId>137807261615297501</EntityId>
               <Min x="10" y="1" z="6" />
               <BlockOrientation Forward="Right" Up="Backward" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -16477,7 +16492,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope3x1</SubtypeName>
-              <EntityId>92130054031696171</EntityId>
+              <EntityId>88839420851501815</EntityId>
               <Min x="10" y="5" z="6" />
               <BlockOrientation Forward="Right" Up="Backward" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -16485,7 +16500,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope5x1</SubtypeName>
-              <EntityId>136131265886281621</EntityId>
+              <EntityId>94975896114924917</EntityId>
               <Min x="5" y="1" z="-7" />
               <BlockOrientation Forward="Right" Up="Forward" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -16493,7 +16508,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope5x1</SubtypeName>
-              <EntityId>82968461516753944</EntityId>
+              <EntityId>74382117280350815</EntityId>
               <Min x="5" y="5" z="-7" />
               <BlockOrientation Forward="Right" Up="Forward" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -16501,7 +16516,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope5x1</SubtypeName>
-              <EntityId>102893942550119629</EntityId>
+              <EntityId>84867027231544417</EntityId>
               <Min x="5" y="1" z="7" />
               <BlockOrientation Forward="Right" Up="Backward" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -16509,7 +16524,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope5x1</SubtypeName>
-              <EntityId>128682614676482623</EntityId>
+              <EntityId>122275815797131787</EntityId>
               <Min x="5" y="5" z="7" />
               <BlockOrientation Forward="Right" Up="Backward" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -16637,7 +16652,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope5x1</SubtypeName>
-              <EntityId>118613922162449711</EntityId>
+              <EntityId>106243584107857113</EntityId>
               <Min x="0" y="1" z="-8" />
               <BlockOrientation Forward="Right" Up="Forward" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -16645,7 +16660,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope5x1</SubtypeName>
-              <EntityId>83543857384981032</EntityId>
+              <EntityId>115029205540748610</EntityId>
               <Min x="0" y="5" z="-8" />
               <BlockOrientation Forward="Right" Up="Forward" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -16653,7 +16668,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope5x1</SubtypeName>
-              <EntityId>128184439380024378</EntityId>
+              <EntityId>109115905038337969</EntityId>
               <Min x="0" y="1" z="8" />
               <BlockOrientation Forward="Right" Up="Backward" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -16661,7 +16676,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope5x1</SubtypeName>
-              <EntityId>77935665878257265</EntityId>
+              <EntityId>115522626716917856</EntityId>
               <Min x="0" y="5" z="8" />
               <BlockOrientation Forward="Right" Up="Backward" />
               <ColorMaskHSV x="0.9111111" y="0.04" z="0.54" />
@@ -16890,7 +16905,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope5x1</SubtypeName>
-              <EntityId>97477047720107139</EntityId>
+              <EntityId>82742477855246927</EntityId>
               <Min x="10" y="4" z="-5" />
               <BlockOrientation Forward="Right" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -16898,7 +16913,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope5x1</SubtypeName>
-              <EntityId>105931298819227038</EntityId>
+              <EntityId>95479896990602778</EntityId>
               <Min x="10" y="2" z="-5" />
               <BlockOrientation Forward="Right" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -16906,7 +16921,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope5x1</SubtypeName>
-              <EntityId>132366023931602498</EntityId>
+              <EntityId>72421813391687666</EntityId>
               <Min x="10" y="4" z="5" />
               <BlockOrientation Forward="Right" Up="Backward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -16914,7 +16929,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope5x1</SubtypeName>
-              <EntityId>138597172695720149</EntityId>
+              <EntityId>88366064180819776</EntityId>
               <Min x="10" y="2" z="5" />
               <BlockOrientation Forward="Right" Up="Backward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -16922,7 +16937,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope5x1</SubtypeName>
-              <EntityId>111574803585084654</EntityId>
+              <EntityId>134043956452726690</EntityId>
               <Min x="10" y="3" z="-5" />
               <BlockOrientation Forward="Right" Up="Forward" />
               <ColorMaskHSV x="0.5222222" y="0.04" z="0.54" />
@@ -16930,7 +16945,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>AQD_LG_LA_Slope5x1</SubtypeName>
-              <EntityId>77488841453769281</EntityId>
+              <EntityId>107421566614911394</EntityId>
               <Min x="10" y="3" z="5" />
               <BlockOrientation Forward="Right" Up="Backward" />
               <ColorMaskHSV x="0.5222222" y="0.04" z="0.54" />
@@ -16980,7 +16995,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_ConveyorSorter">
               <SubtypeName>HAS_Nyx</SubtypeName>
-              <EntityId>124560498010984533</EntityId>
+              <EntityId>122491332195686925</EntityId>
               <Min x="6" y="-3" z="-6" />
               <BlockOrientation Forward="Right" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -17009,7 +17024,7 @@
                         <dictionary>
                           <item>
                             <Key>75bbb4f5-4fb9-4230-beef-bb79c9811501</Key>
-                            <Value>+nzWAQoJCAAQeB0AoAxHEsgBCAASPi0AAHpFMjcIARAAGAAgASgBMABAA0gAUABYAHgAgAEAkAEAoAEAsAEAwAEA0AF42AEA6AEA8AEA+AEBkAIAGkUSCg0AAAAAEAAg9gEYACCBgICAgICAgAIwADgAQABIAFIjGhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAgACgAMAAiKwgAEAAgACoGIKz2//8HMhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAqEAgAIAEoADAAOABAAUgAUAAIIg==</Value>
+                            <Value>+nzVAQoJCAAQeB0AoAxHEscBCAASPi0AAHpFMjcIARAAGAAgACgBMABAA0gAUABYAHgAgAEAkAEAoAEAsAEAwAEA0AF42AEA6AEA8AEA+AEBkAIAGkQSCQ0AAAAAEAAgCBgAIIGAgICAgICAAjAAOABAAEgAUiMaGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACAAKAAwACIrCAAQACAAKgYg0v///wcyGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACoQCAAgASgAMAA4AEABSABQAAgi</Value>
                           </item>
                         </dictionary>
                       </Storage>
@@ -17030,7 +17045,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_ConveyorSorter">
               <SubtypeName>HAS_Nyx</SubtypeName>
-              <EntityId>72741391401047430</EntityId>
+              <EntityId>105424762798290120</EntityId>
               <Min x="6" y="7" z="-6" />
               <BlockOrientation Forward="Right" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -17059,7 +17074,7 @@
                         <dictionary>
                           <item>
                             <Key>75bbb4f5-4fb9-4230-beef-bb79c9811501</Key>
-                            <Value>+nzWAQoJCAAQeB0AoAxHEsgBCAASPi0AAHpFMjcIARAAGAAgASgBMABAA0gAUABYAHgAgAEAkAEAoAEAsAEAwAEA0AF42AEA6AEA8AEA+AEBkAIAGkUSCg0AAAAAEAAg9wEYACCBgICAgICAgAIwADgAQABIAFIjGhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAgACgAMAAiKwgAEAAgACoGIKf2//8HMhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAqEAgAIAEoADAAOABAAUgAUAAIIg==</Value>
+                            <Value>+nzVAQoJCAAQeB0AoAxHEscBCAASPi0AAHpFMjcIARAAGAAgACgBMABAA0gAUABYAHgAgAEAkAEAoAEAsAEAwAEA0AF42AEA6AEA8AEA+AEBkAIAGkQSCQ0AAAAAEAAgCRgAIIGAgICAgICAAjAAOABAAEgAUiMaGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACAAKAAwACIrCAAQACAAKgYgzf///wcyGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACoQCAAgASgAMAA4AEABSABQAAgi</Value>
                           </item>
                         </dictionary>
                       </Storage>
@@ -17080,7 +17095,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_ConveyorSorter">
               <SubtypeName>HAS_Nyx</SubtypeName>
-              <EntityId>125857540999115088</EntityId>
+              <EntityId>80126421828925853</EntityId>
               <Min x="6" y="-3" z="6" />
               <BlockOrientation Forward="Right" Up="Backward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -17109,7 +17124,7 @@
                         <dictionary>
                           <item>
                             <Key>75bbb4f5-4fb9-4230-beef-bb79c9811501</Key>
-                            <Value>+nzWAQoJCAAQeB0AoAxHEsgBCAASPi0AAHpFMjcIARAAGAAgASgBMABAA0gAUABYAHgAgAEAkAEAoAEAsAEAwAEA0AF42AEA6AEA8AEA+AEBkAIAGkUSCg0AAAAAEAAg+AEYACCBgICAgICAgAIwADgAQABIAFIjGhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAgACgAMAAiKwgAEAAgACoGIKL2//8HMhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAqEAgAIAEoADAAOABAAUgAUAAIIg==</Value>
+                            <Value>+nzVAQoJCAAQeB0AoAxHEscBCAASPi0AAHpFMjcIARAAGAAgACgBMABAA0gAUABYAHgAgAEAkAEAoAEAsAEAwAEA0AF42AEA6AEA8AEA+AEBkAIAGkQSCQ0AAAAAEAAgChgAIIGAgICAgICAAjAAOABAAEgAUiMaGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACAAKAAwACIrCAAQACAAKgYgyP///wcyGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACoQCAAgASgAMAA4AEABSABQAAgi</Value>
                           </item>
                         </dictionary>
                       </Storage>
@@ -17130,7 +17145,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_ConveyorSorter">
               <SubtypeName>HAS_Nyx</SubtypeName>
-              <EntityId>78251532256729754</EntityId>
+              <EntityId>132999117076658083</EntityId>
               <Min x="6" y="7" z="6" />
               <BlockOrientation Forward="Right" Up="Backward" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -17159,7 +17174,7 @@
                         <dictionary>
                           <item>
                             <Key>75bbb4f5-4fb9-4230-beef-bb79c9811501</Key>
-                            <Value>+nzWAQoJCAAQeB0AoAxHEsgBCAASPi0AAHpFMjcIARAAGAAgASgBMABAA0gAUABYAHgAgAEAkAEAoAEAsAEAwAEA0AF42AEA6AEA8AEA+AEBkAIAGkUSCg0AAAAAEAAg+QEYACCBgICAgICAgAIwADgAQABIAFIjGhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAgACgAMAAiKwgAEAAgACoGIJ32//8HMhsJAAAAAAAAAAAhAAAAAAAAAAA5AAAAAAAAAAAqEAgAIAEoADAAOABAAUgAUAAIIg==</Value>
+                            <Value>+nzVAQoJCAAQeB0AoAxHEscBCAASPi0AAHpFMjcIARAAGAAgACgBMABAA0gAUABYAHgAgAEAkAEAoAEAsAEAwAEA0AF42AEA6AEA8AEA+AEBkAIAGkQSCQ0AAAAAEAAgCxgAIIGAgICAgICAAjAAOABAAEgAUiMaGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACAAKAAwACIrCAAQACAAKgYgw////wcyGwkAAAAAAAAAACEAAAAAAAAAADkAAAAAAAAAACoQCAAgASgAMAA4AEABSABQAAgi</Value>
                           </item>
                         </dictionary>
                       </Storage>
@@ -17234,7 +17249,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>LargeFakeBlockRadioAntenna</SubtypeName>
-              <EntityId>83598518326349005</EntityId>
+              <EntityId>116955437815597306</EntityId>
               <Min x="-12" y="3" z="-4" />
               <BlockOrientation Forward="Backward" Up="Left" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -17242,7 +17257,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>LargeFakeBlockRadioAntenna</SubtypeName>
-              <EntityId>73063056028947186</EntityId>
+              <EntityId>105969934535729763</EntityId>
               <Min x="-12" y="-3" z="0" />
               <BlockOrientation Forward="Backward" Up="Left" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -17250,7 +17265,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>LargeFakeBlockRadioAntenna</SubtypeName>
-              <EntityId>95926605268168592</EntityId>
+              <EntityId>115719646897906371</EntityId>
               <Min x="-12" y="3" z="3" />
               <BlockOrientation Forward="Forward" Up="Left" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -17258,7 +17273,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>LargeFakeBlockRadioAntenna</SubtypeName>
-              <EntityId>136544214112673744</EntityId>
+              <EntityId>73934884499086462</EntityId>
               <Min x="15" y="7" z="-3" />
               <BlockOrientation Forward="Forward" Up="Right" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -17266,7 +17281,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>LargeFakeBlockRadioAntenna</SubtypeName>
-              <EntityId>130654784648405822</EntityId>
+              <EntityId>130772613305172828</EntityId>
               <Min x="15" y="-1" z="-3" />
               <BlockOrientation Forward="Forward" Up="Right" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -17274,7 +17289,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>LargeFakeBlockRadioAntenna</SubtypeName>
-              <EntityId>100877251713968200</EntityId>
+              <EntityId>117388031475566553</EntityId>
               <Min x="15" y="7" z="2" />
               <BlockOrientation Forward="Backward" Up="Right" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -17282,7 +17297,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>LargeFakeBlockRadioAntenna</SubtypeName>
-              <EntityId>129715424027702998</EntityId>
+              <EntityId>87250232777487615</EntityId>
               <Min x="15" y="-1" z="2" />
               <BlockOrientation Forward="Backward" Up="Right" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -17290,7 +17305,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>LargeFakeBlockRadioAntenna</SubtypeName>
-              <EntityId>83851704289944823</EntityId>
+              <EntityId>77370908756289773</EntityId>
               <Min x="15" y="3" z="-4" />
               <BlockOrientation Forward="Forward" Up="Right" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -17298,7 +17313,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>LargeFakeBlockRadioAntenna</SubtypeName>
-              <EntityId>143665926227446381</EntityId>
+              <EntityId>78740509810727068</EntityId>
               <Min x="15" y="3" z="3" />
               <BlockOrientation Forward="Backward" Up="Right" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -17306,7 +17321,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>LargeFakeBlockRadioAntenna</SubtypeName>
-              <EntityId>135075517089330142</EntityId>
+              <EntityId>115034358024619858</EntityId>
               <Min x="15" y="5" z="0" />
               <BlockOrientation Forward="Up" Up="Right" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -17314,7 +17329,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>LargeFakeBlockRadioAntenna</SubtypeName>
-              <EntityId>74091741122939576</EntityId>
+              <EntityId>119110535638739771</EntityId>
               <Min x="15" y="0" z="0" />
               <BlockOrientation Forward="Down" Up="Right" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.45" />
@@ -17322,7 +17337,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>LargeFakeBlockRadioAntenna</SubtypeName>
-              <EntityId>117806251846675351</EntityId>
+              <EntityId>120562802209164365</EntityId>
               <Min x="1" y="12" z="-2" />
               <BlockOrientation Forward="Backward" Up="Up" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.3" />
@@ -17330,7 +17345,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>LargeFakeBlockRadioAntenna</SubtypeName>
-              <EntityId>117466621240769791</EntityId>
+              <EntityId>77701766024479668</EntityId>
               <Min x="1" y="-11" z="-2" />
               <BlockOrientation Forward="Backward" Up="Down" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.3" />
@@ -17338,14 +17353,14 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>LargeFakeBlockRadioAntenna</SubtypeName>
-              <EntityId>110681102297705592</EntityId>
+              <EntityId>123732389301656220</EntityId>
               <Min x="1" y="12" z="1" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.3" />
               <SkinSubtypeId>CarbonFibre_Armor</SkinSubtypeId>
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_CubeBlock">
               <SubtypeName>LargeFakeBlockRadioAntenna</SubtypeName>
-              <EntityId>129586767082788484</EntityId>
+              <EntityId>94967153660390288</EntityId>
               <Min x="1" y="-11" z="1" />
               <BlockOrientation Forward="Forward" Up="Down" />
               <ColorMaskHSV x="0" y="-0.8" z="-0.3" />
@@ -17353,7 +17368,7 @@
             </MyObjectBuilder_CubeBlock>
             <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_OffensiveCombatBlock">
               <SubtypeName>LargeOffensiveCombat</SubtypeName>
-              <EntityId>94833462203503287</EntityId>
+              <EntityId>139684089765974512</EntityId>
               <Min x="-4" y="3" z="-1" />
               <BlockOrientation Forward="Right" Up="Forward" />
               <ColorMaskHSV x="0" y="-0.8" z="0" />
@@ -17404,7 +17419,7 @@
                           <Z>0</Z>
                         </RunAwayDirection>
                         <LastPosition xsi:nil="true" />
-                        <RunAwayStartedFrame>11811</RunAwayStartedFrame>
+                        <RunAwayStartedFrame>7275</RunAwayStartedFrame>
                       </HitAndRunState>
                     </Component>
                   </ComponentData>
@@ -17434,179 +17449,60 @@
               <SelectedAttackPattern>0</SelectedAttackPattern>
               <CanTargetCharacters>false</CanTargetCharacters>
             </MyObjectBuilder_CubeBlock>
+            <MyObjectBuilder_CubeBlock xsi:type="MyObjectBuilder_TerminalBlock">
+              <SubtypeName>ControlPanel</SubtypeName>
+              <EntityId>142491209467199251</EntityId>
+              <Min x="-1" y="8" z="6" />
+              <BlockOrientation Forward="Backward" Up="Down" />
+              <ColorMaskHSV x="0" y="-0.8" z="0" />
+              <ShareMode>Faction</ShareMode>
+              <ShowOnHUD>false</ShowOnHUD>
+              <ShowInTerminal>true</ShowInTerminal>
+              <ShowInToolbarConfig>true</ShowInToolbarConfig>
+              <ShowInInventory>true</ShowInInventory>
+              <NumberInGrid>1</NumberInGrid>
+            </MyObjectBuilder_CubeBlock>
           </CubeBlocks>
           <Skeleton>
             <BoneInfo>
-              <BonePosition x="19" y="10" z="9" />
-              <BoneOffset x="128" y="127" z="147" />
+              <BonePosition x="17" y="15" z="4" />
+              <BoneOffset x="127" y="127" z="132" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="18" y="15" z="4" />
-              <BoneOffset x="127" y="127" z="114" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="18" y="15" z="6" />
-              <BoneOffset x="127" y="127" z="110" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="19" y="10" z="1" />
-              <BoneOffset x="126" y="127" z="145" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="3" z="6" />
-              <BoneOffset x="127" y="127" z="119" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="3" z="4" />
-              <BoneOffset x="127" y="127" z="114" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="-1" z="-2" />
-              <BoneOffset x="127" y="127" z="107" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="-1" z="-4" />
-              <BoneOffset x="127" y="127" z="124" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="0" z="-4" />
-              <BoneOffset x="127" y="127" z="131" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="0" z="-2" />
-              <BoneOffset x="127" y="127" z="134" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="18" y="2" z="9" />
-              <BoneOffset x="128" y="128" z="120" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="13" z="4" />
-              <BoneOffset x="127" y="127" z="130" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="13" z="6" />
-              <BoneOffset x="127" y="127" z="111" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="18" y="2" z="1" />
-              <BoneOffset x="127" y="126" z="123" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="14" z="6" />
-              <BoneOffset x="127" y="127" z="126" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="14" z="4" />
-              <BoneOffset x="127" y="127" z="143" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="18" y="-1" z="-2" />
-              <BoneOffset x="127" y="127" z="119" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="19" y="2" z="1" />
-              <BoneOffset x="126" y="127" z="112" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="19" y="2" z="9" />
-              <BoneOffset x="126" y="127" z="119" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="11" z="6" />
-              <BoneOffset x="127" y="127" z="116" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="11" z="4" />
-              <BoneOffset x="127" y="127" z="113" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="10" z="-5" />
-              <BoneOffset x="127" y="126" z="122" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="10" z="-6" />
-              <BoneOffset x="126" y="127" z="124" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="10" z="-7" />
-              <BoneOffset x="126" y="127" z="120" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="10" z="-1" />
-              <BoneOffset x="127" y="125" z="130" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="10" z="-2" />
-              <BoneOffset x="128" y="128" z="133" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="10" z="-3" />
-              <BoneOffset x="127" y="126" z="145" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="10" z="-4" />
-              <BoneOffset x="127" y="128" z="140" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="18" y="4" z="1" />
-              <BoneOffset x="127" y="127" z="142" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="18" y="4" z="9" />
-              <BoneOffset x="127" y="126" z="134" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="18" y="10" z="1" />
-              <BoneOffset x="127" y="125" z="135" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="19" y="-1" z="-4" />
-              <BoneOffset x="127" y="127" z="110" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="19" y="-1" z="-2" />
-              <BoneOffset x="127" y="127" z="125" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="18" y="10" z="9" />
-              <BoneOffset x="127" y="128" z="134" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="19" y="15" z="4" />
-              <BoneOffset x="127" y="127" z="145" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="19" y="15" z="6" />
-              <BoneOffset x="127" y="127" z="126" />
+              <BonePosition x="17" y="12" z="-5" />
+              <BoneOffset x="126" y="127" z="108" />
             </BoneInfo>
             <BoneInfo>
               <BonePosition x="17" y="4" z="5" />
               <BoneOffset x="127" y="127" z="128" />
             </BoneInfo>
             <BoneInfo>
+              <BonePosition x="17" y="12" z="-6" />
+              <BoneOffset x="127" y="127" z="121" />
+            </BoneInfo>
+            <BoneInfo>
               <BonePosition x="17" y="4" z="4" />
               <BoneOffset x="126" y="125" z="105" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="18" y="12" z="1" />
+              <BoneOffset x="128" y="126" z="127" />
             </BoneInfo>
             <BoneInfo>
               <BonePosition x="17" y="4" z="7" />
               <BoneOffset x="126" y="126" z="116" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="9" z="-4" />
-              <BoneOffset x="127" y="127" z="115" />
-            </BoneInfo>
-            <BoneInfo>
               <BonePosition x="17" y="4" z="6" />
               <BoneOffset x="127" y="127" z="129" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="4" z="1" />
-              <BoneOffset x="128" y="128" z="109" />
+              <BonePosition x="19" y="4" z="9" />
+              <BoneOffset x="127" y="128" z="114" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="9" z="-2" />
-              <BoneOffset x="127" y="127" z="134" />
+              <BonePosition x="17" y="4" z="1" />
+              <BoneOffset x="128" y="128" z="109" />
             </BoneInfo>
             <BoneInfo>
               <BonePosition x="17" y="4" z="0" />
@@ -17629,100 +17525,368 @@
               <BoneOffset x="127" y="128" z="125" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="19" y="4" z="-7" />
-              <BoneOffset x="126" y="127" z="112" />
+              <BonePosition x="18" y="7" z="4" />
+              <BoneOffset x="127" y="127" z="99" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="19" y="12" z="9" />
-              <BoneOffset x="127" y="127" z="136" />
+              <BonePosition x="18" y="7" z="6" />
+              <BoneOffset x="127" y="127" z="141" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="19" y="12" z="1" />
+              <BonePosition x="18" y="4" z="-7" />
+              <BoneOffset x="128" y="127" z="125" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="19" y="12" z="-7" />
+              <BoneOffset x="127" y="127" z="135" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="18" y="10" z="-7" />
+              <BoneOffset x="128" y="128" z="142" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="10" z="9" />
+              <BoneOffset x="126" y="126" z="118" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="14" z="-2" />
+              <BoneOffset x="127" y="127" z="117" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="10" z="8" />
+              <BoneOffset x="127" y="128" z="122" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="14" z="-4" />
+              <BoneOffset x="127" y="127" z="145" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="13" z="4" />
+              <BoneOffset x="127" y="127" z="130" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="10" z="3" />
+              <BoneOffset x="127" y="127" z="103" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="13" z="6" />
+              <BoneOffset x="127" y="127" z="111" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="19" y="-1" z="-4" />
+              <BoneOffset x="127" y="127" z="110" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="10" z="2" />
+              <BoneOffset x="127" y="127" z="128" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="10" z="1" />
+              <BoneOffset x="126" y="126" z="122" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="19" y="-1" z="-2" />
+              <BoneOffset x="127" y="127" z="125" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="10" z="0" />
+              <BoneOffset x="128" y="127" z="119" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="10" z="7" />
+              <BoneOffset x="128" y="126" z="138" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="10" z="6" />
+              <BoneOffset x="128" y="128" z="135" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="10" z="5" />
+              <BoneOffset x="126" y="127" z="137" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="3" z="6" />
+              <BoneOffset x="127" y="127" z="119" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="10" z="4" />
+              <BoneOffset x="126" y="127" z="125" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="18" y="-1" z="-2" />
+              <BoneOffset x="127" y="127" z="119" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="3" z="4" />
               <BoneOffset x="127" y="127" z="114" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="19" y="15" z="4" />
+              <BoneOffset x="127" y="127" z="145" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="-1" z="-2" />
+              <BoneOffset x="127" y="127" z="107" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="19" y="15" z="6" />
+              <BoneOffset x="127" y="127" z="126" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="-1" z="-4" />
+              <BoneOffset x="127" y="127" z="124" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="19" y="10" z="-7" />
+              <BoneOffset x="127" y="127" z="130" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="1" z="-4" />
+              <BoneOffset x="127" y="127" z="143" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="1" z="-2" />
+              <BoneOffset x="127" y="127" z="129" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="8" z="-4" />
+              <BoneOffset x="127" y="127" z="130" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="19" y="10" z="9" />
+              <BoneOffset x="128" y="127" z="147" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="8" z="4" />
+              <BoneOffset x="127" y="127" z="118" />
             </BoneInfo>
             <BoneInfo>
               <BonePosition x="17" y="1" z="4" />
               <BoneOffset x="127" y="127" z="145" />
             </BoneInfo>
             <BoneInfo>
+              <BonePosition x="17" y="8" z="6" />
+              <BoneOffset x="127" y="127" z="132" />
+            </BoneInfo>
+            <BoneInfo>
               <BonePosition x="17" y="1" z="6" />
               <BoneOffset x="127" y="127" z="124" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="12" z="-3" />
-              <BoneOffset x="128" y="127" z="143" />
+              <BonePosition x="19" y="10" z="1" />
+              <BoneOffset x="126" y="127" z="145" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="12" z="-4" />
-              <BoneOffset x="126" y="127" z="114" />
+              <BonePosition x="17" y="3" z="-2" />
+              <BoneOffset x="127" y="127" z="128" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="12" z="-1" />
-              <BoneOffset x="126" y="127" z="127" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="12" z="-2" />
-              <BoneOffset x="127" y="127" z="113" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="12" z="-7" />
-              <BoneOffset x="128" y="128" z="140" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="12" z="-5" />
-              <BoneOffset x="126" y="127" z="108" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="12" z="-6" />
+              <BonePosition x="17" y="3" z="-4" />
               <BoneOffset x="127" y="127" z="121" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="19" y="7" z="-4" />
-              <BoneOffset x="127" y="127" z="108" />
+              <BonePosition x="17" y="-1" z="6" />
+              <BoneOffset x="127" y="127" z="118" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="2" z="-5" />
-              <BoneOffset x="125" y="126" z="120" />
+              <BonePosition x="17" y="-1" z="4" />
+              <BoneOffset x="127" y="127" z="125" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="2" z="-6" />
-              <BoneOffset x="125" y="128" z="123" />
+              <BonePosition x="19" y="15" z="-4" />
+              <BoneOffset x="127" y="127" z="140" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="19" y="7" z="-2" />
-              <BoneOffset x="127" y="127" z="124" />
+              <BonePosition x="17" y="10" z="-5" />
+              <BoneOffset x="127" y="126" z="122" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="2" z="-7" />
+              <BonePosition x="17" y="10" z="-6" />
+              <BoneOffset x="126" y="127" z="124" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="19" y="15" z="-2" />
+              <BoneOffset x="127" y="127" z="132" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="10" z="-7" />
+              <BoneOffset x="126" y="127" z="120" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="18" y="-1" z="4" />
+              <BoneOffset x="127" y="127" z="123" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="10" z="-1" />
+              <BoneOffset x="127" y="125" z="130" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="10" z="-2" />
+              <BoneOffset x="128" y="128" z="133" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="10" z="-3" />
+              <BoneOffset x="127" y="126" z="145" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="14" z="6" />
+              <BoneOffset x="127" y="127" z="126" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="10" z="-4" />
+              <BoneOffset x="127" y="128" z="140" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="19" y="-1" z="4" />
+              <BoneOffset x="127" y="127" z="121" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="14" z="4" />
+              <BoneOffset x="127" y="127" z="143" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="13" z="-4" />
+              <BoneOffset x="127" y="127" z="129" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="19" y="-1" z="6" />
+              <BoneOffset x="127" y="127" z="131" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="18" y="10" z="1" />
+              <BoneOffset x="127" y="125" z="135" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="13" z="-2" />
+              <BoneOffset x="127" y="127" z="111" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="19" y="12" z="9" />
+              <BoneOffset x="127" y="127" z="136" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="18" y="10" z="9" />
+              <BoneOffset x="127" y="128" z="134" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="19" y="12" z="1" />
+              <BoneOffset x="127" y="127" z="114" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="7" z="6" />
+              <BoneOffset x="127" y="127" z="121" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="18" y="4" z="1" />
               <BoneOffset x="127" y="127" z="142" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="2" z="-1" />
-              <BoneOffset x="126" y="128" z="119" />
+              <BonePosition x="18" y="7" z="-4" />
+              <BoneOffset x="127" y="127" z="107" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="2" z="-2" />
-              <BoneOffset x="125" y="128" z="148" />
+              <BonePosition x="18" y="4" z="9" />
+              <BoneOffset x="127" y="126" z="134" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="2" z="-3" />
-              <BoneOffset x="126" y="127" z="130" />
+              <BonePosition x="17" y="4" z="-3" />
+              <BoneOffset x="127" y="127" z="109" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="18" y="12" z="9" />
-              <BoneOffset x="127" y="128" z="126" />
+              <BonePosition x="17" y="4" z="-4" />
+              <BoneOffset x="127" y="126" z="116" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="2" z="-4" />
-              <BoneOffset x="126" y="128" z="147" />
+              <BonePosition x="17" y="4" z="-1" />
+              <BoneOffset x="127" y="126" z="129" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="18" y="12" z="1" />
-              <BoneOffset x="128" y="126" z="127" />
+              <BonePosition x="17" y="12" z="9" />
+              <BoneOffset x="127" y="126" z="144" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="4" z="-2" />
+              <BoneOffset x="127" y="127" z="147" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="12" z="8" />
+              <BoneOffset x="127" y="126" z="123" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="4" z="-7" />
+              <BoneOffset x="128" y="127" z="129" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="4" z="-5" />
+              <BoneOffset x="126" y="126" z="116" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="12" z="5" />
+              <BoneOffset x="126" y="127" z="122" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="4" z="-6" />
+              <BoneOffset x="126" y="126" z="119" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="12" z="4" />
+              <BoneOffset x="126" y="127" z="126" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="12" z="7" />
+              <BoneOffset x="126" y="126" z="126" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="12" z="6" />
+              <BoneOffset x="129" y="128" z="120" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="15" z="-2" />
+              <BoneOffset x="127" y="127" z="128" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="12" z="1" />
+              <BoneOffset x="126" y="128" z="142" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="12" z="0" />
+              <BoneOffset x="127" y="128" z="116" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="15" z="-4" />
+              <BoneOffset x="127" y="127" z="137" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="12" z="3" />
+              <BoneOffset x="126" y="127" z="124" />
             </BoneInfo>
             <BoneInfo>
               <BonePosition x="18" y="12" z="-7" />
               <BoneOffset x="128" y="127" z="139" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="12" z="2" />
+              <BoneOffset x="127" y="127" z="123" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="19" y="4" z="-7" />
+              <BoneOffset x="126" y="127" z="112" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="18" y="15" z="4" />
+              <BoneOffset x="127" y="127" z="114" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="18" y="15" z="6" />
+              <BoneOffset x="127" y="127" z="110" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="5" z="4" />
+              <BoneOffset x="127" y="127" z="146" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="5" z="6" />
+              <BoneOffset x="127" y="127" z="140" />
             </BoneInfo>
             <BoneInfo>
               <BonePosition x="17" y="2" z="3" />
@@ -17757,220 +17921,48 @@
               <BoneOffset x="128" y="127" z="135" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="19" y="7" z="4" />
-              <BoneOffset x="127" y="127" z="129" />
-            </BoneInfo>
-            <BoneInfo>
               <BonePosition x="17" y="2" z="9" />
               <BoneOffset x="127" y="127" z="128" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="2" z="8" />
-              <BoneOffset x="128" y="128" z="114" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="19" y="7" z="6" />
-              <BoneOffset x="127" y="127" z="122" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="12" z="9" />
-              <BoneOffset x="127" y="126" z="144" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="12" z="8" />
-              <BoneOffset x="127" y="126" z="123" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="12" z="5" />
-              <BoneOffset x="126" y="127" z="122" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="12" z="4" />
-              <BoneOffset x="126" y="127" z="126" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="12" z="7" />
-              <BoneOffset x="126" y="126" z="126" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="1" z="-4" />
-              <BoneOffset x="127" y="127" z="143" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="12" z="6" />
-              <BoneOffset x="129" y="128" z="120" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="12" z="1" />
-              <BoneOffset x="126" y="128" z="142" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="1" z="-2" />
-              <BoneOffset x="127" y="127" z="129" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="12" z="0" />
-              <BoneOffset x="127" y="128" z="116" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="12" z="3" />
-              <BoneOffset x="126" y="127" z="124" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="12" z="2" />
-              <BoneOffset x="127" y="127" z="123" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="19" y="12" z="-7" />
-              <BoneOffset x="127" y="127" z="135" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="19" y="4" z="1" />
-              <BoneOffset x="127" y="126" z="118" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="19" y="4" z="9" />
-              <BoneOffset x="127" y="128" z="114" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="9" z="4" />
-              <BoneOffset x="127" y="127" z="139" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="9" z="6" />
-              <BoneOffset x="127" y="127" z="131" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="4" z="-3" />
-              <BoneOffset x="127" y="127" z="109" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="4" z="-4" />
-              <BoneOffset x="127" y="126" z="116" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="4" z="-1" />
-              <BoneOffset x="127" y="126" z="129" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="4" z="-2" />
-              <BoneOffset x="127" y="127" z="147" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="4" z="-7" />
-              <BoneOffset x="128" y="127" z="129" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="4" z="-5" />
-              <BoneOffset x="126" y="126" z="116" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="4" z="-6" />
-              <BoneOffset x="126" y="126" z="119" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="19" y="15" z="-4" />
-              <BoneOffset x="127" y="127" z="140" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="19" y="15" z="-2" />
-              <BoneOffset x="127" y="127" z="132" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="19" y="-1" z="4" />
-              <BoneOffset x="127" y="127" z="121" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="18" y="10" z="-7" />
-              <BoneOffset x="128" y="128" z="142" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="19" y="-1" z="6" />
-              <BoneOffset x="127" y="127" z="131" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="10" z="9" />
-              <BoneOffset x="126" y="126" z="118" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="10" z="8" />
-              <BoneOffset x="127" y="128" z="122" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="18" y="4" z="-7" />
-              <BoneOffset x="128" y="127" z="125" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="10" z="3" />
-              <BoneOffset x="127" y="127" z="103" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="10" z="2" />
-              <BoneOffset x="127" y="127" z="128" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="10" z="1" />
-              <BoneOffset x="126" y="126" z="122" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="11" z="-2" />
-              <BoneOffset x="127" y="127" z="107" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="10" z="0" />
-              <BoneOffset x="128" y="127" z="119" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="10" z="7" />
-              <BoneOffset x="128" y="126" z="138" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="11" z="-4" />
-              <BoneOffset x="127" y="127" z="124" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="10" z="6" />
-              <BoneOffset x="128" y="128" z="135" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="10" z="5" />
-              <BoneOffset x="126" y="127" z="137" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="10" z="4" />
-              <BoneOffset x="126" y="127" z="125" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="19" y="2" z="-7" />
-              <BoneOffset x="127" y="126" z="108" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="18" y="-1" z="4" />
-              <BoneOffset x="127" y="127" z="123" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="14" z="-2" />
-              <BoneOffset x="127" y="127" z="117" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="7" z="6" />
-              <BoneOffset x="127" y="127" z="121" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="14" z="-4" />
-              <BoneOffset x="127" y="127" z="145" />
             </BoneInfo>
             <BoneInfo>
               <BonePosition x="18" y="2" z="-7" />
               <BoneOffset x="127" y="127" z="130" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="13" z="-4" />
+              <BonePosition x="17" y="2" z="8" />
+              <BoneOffset x="128" y="128" z="114" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="19" y="2" z="-7" />
+              <BoneOffset x="127" y="126" z="108" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="6" z="-4" />
+              <BoneOffset x="127" y="127" z="132" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="9" z="-4" />
+              <BoneOffset x="127" y="127" z="115" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="9" z="-2" />
+              <BoneOffset x="127" y="127" z="134" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="11" z="6" />
+              <BoneOffset x="127" y="127" z="116" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="19" y="7" z="4" />
               <BoneOffset x="127" y="127" z="129" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="13" z="-2" />
-              <BoneOffset x="127" y="127" z="111" />
+              <BonePosition x="17" y="11" z="4" />
+              <BoneOffset x="127" y="127" z="113" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="19" y="7" z="6" />
+              <BoneOffset x="127" y="127" z="122" />
             </BoneInfo>
             <BoneInfo>
               <BonePosition x="17" y="0" z="4" />
@@ -17981,80 +17973,44 @@
               <BoneOffset x="127" y="127" z="144" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="3" z="-2" />
-              <BoneOffset x="127" y="127" z="128" />
+              <BonePosition x="17" y="0" z="-4" />
+              <BoneOffset x="127" y="127" z="131" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="3" z="-4" />
-              <BoneOffset x="127" y="127" z="121" />
+              <BonePosition x="17" y="0" z="-2" />
+              <BoneOffset x="127" y="127" z="134" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="-1" z="6" />
-              <BoneOffset x="127" y="127" z="118" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="-1" z="4" />
-              <BoneOffset x="127" y="127" z="125" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="19" y="10" z="-7" />
-              <BoneOffset x="127" y="127" z="130" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="18" y="15" z="-4" />
-              <BoneOffset x="127" y="127" z="124" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="18" y="15" z="-2" />
-              <BoneOffset x="127" y="127" z="117" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="15" z="6" />
-              <BoneOffset x="127" y="127" z="125" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="6" z="-4" />
-              <BoneOffset x="127" y="127" z="132" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="15" z="4" />
-              <BoneOffset x="127" y="127" z="132" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="5" z="-4" />
-              <BoneOffset x="127" y="127" z="113" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="8" z="4" />
-              <BoneOffset x="127" y="127" z="118" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="17" y="8" z="6" />
-              <BoneOffset x="127" y="127" z="132" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="18" y="7" z="4" />
-              <BoneOffset x="127" y="127" z="99" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="18" y="7" z="6" />
-              <BoneOffset x="127" y="127" z="141" />
-            </BoneInfo>
-            <BoneInfo>
-              <BonePosition x="18" y="7" z="-4" />
+              <BonePosition x="17" y="11" z="-2" />
               <BoneOffset x="127" y="127" z="107" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="8" z="-4" />
-              <BoneOffset x="127" y="127" z="130" />
+              <BonePosition x="17" y="11" z="-4" />
+              <BoneOffset x="127" y="127" z="124" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="5" z="4" />
-              <BoneOffset x="127" y="127" z="146" />
+              <BonePosition x="17" y="9" z="4" />
+              <BoneOffset x="127" y="127" z="139" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="5" z="6" />
-              <BoneOffset x="127" y="127" z="140" />
+              <BonePosition x="19" y="7" z="-4" />
+              <BoneOffset x="127" y="127" z="108" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="9" z="6" />
+              <BoneOffset x="127" y="127" z="131" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="19" y="7" z="-2" />
+              <BoneOffset x="127" y="127" z="124" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="18" y="2" z="9" />
+              <BoneOffset x="128" y="128" z="120" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="19" y="2" z="1" />
+              <BoneOffset x="126" y="127" z="112" />
             </BoneInfo>
             <BoneInfo>
               <BonePosition x="17" y="6" z="6" />
@@ -18065,16 +18021,86 @@
               <BoneOffset x="127" y="127" z="129" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="15" z="-2" />
-              <BoneOffset x="127" y="127" z="128" />
+              <BonePosition x="18" y="2" z="1" />
+              <BoneOffset x="127" y="126" z="123" />
             </BoneInfo>
             <BoneInfo>
-              <BonePosition x="17" y="15" z="-4" />
-              <BoneOffset x="127" y="127" z="137" />
+              <BonePosition x="19" y="2" z="9" />
+              <BoneOffset x="126" y="127" z="119" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="2" z="-5" />
+              <BoneOffset x="125" y="126" z="120" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="2" z="-6" />
+              <BoneOffset x="125" y="128" z="123" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="2" z="-7" />
+              <BoneOffset x="127" y="127" z="142" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="2" z="-1" />
+              <BoneOffset x="126" y="128" z="119" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="2" z="-2" />
+              <BoneOffset x="125" y="128" z="148" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="2" z="-3" />
+              <BoneOffset x="126" y="127" z="130" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="2" z="-4" />
+              <BoneOffset x="126" y="128" z="147" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="5" z="-4" />
+              <BoneOffset x="127" y="127" z="113" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="18" y="15" z="-4" />
+              <BoneOffset x="127" y="127" z="124" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="18" y="15" z="-2" />
+              <BoneOffset x="127" y="127" z="117" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="18" y="12" z="9" />
+              <BoneOffset x="127" y="128" z="126" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="12" z="-3" />
+              <BoneOffset x="128" y="127" z="143" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="12" z="-4" />
+              <BoneOffset x="126" y="127" z="114" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="19" y="4" z="1" />
+              <BoneOffset x="127" y="126" z="118" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="12" z="-1" />
+              <BoneOffset x="126" y="127" z="127" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="12" z="-2" />
+              <BoneOffset x="127" y="127" z="113" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="15" z="6" />
+              <BoneOffset x="127" y="127" z="125" />
+            </BoneInfo>
+            <BoneInfo>
+              <BonePosition x="17" y="12" z="-7" />
+              <BoneOffset x="128" y="128" z="140" />
             </BoneInfo>
           </Skeleton>
-          <YMirroxPlane x="0" y="3" z="0" />
-          <ZMirroxPlane x="0" y="3" z="0" />
           <ConveyorLines>
             <MyObjectBuilder_ConveyorLine>
               <StartPosition x="0" y="1" z="0" />
@@ -18267,6 +18293,7 @@
           <IsRespawnGrid>false</IsRespawnGrid>
           <LocalCoordSys>0</LocalCoordSys>
           <TargetingTargets />
+          <GridPresenceTier>Tier1</GridPresenceTier>
           <NPCGridClaimElapsed xsi:nil="true" />
         </CubeGrid>
       </CubeGrids>
