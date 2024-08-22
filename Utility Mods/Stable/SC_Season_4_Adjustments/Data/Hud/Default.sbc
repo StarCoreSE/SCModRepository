@@ -1772,6 +1772,71 @@
             </ColorMask>
         </StatStyle>
 
+        <!--Energy Icon On-->
+
+        <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
+            <StatId>controlled_power_usage</StatId>
+
+            <OffsetPx>
+                <X>-489</X> <!-- -715 + 226 -->
+                <Y>-170</Y> <!-- -160 - 10 -->
+            </OffsetPx>
+            <SizePx>
+                <X>24</X>
+                <Y>24</Y>
+            </SizePx>
+
+            <VisibleCondition xsi:type="StatCondition">
+                <StatId>controlled_is_grid</StatId>
+                <Value>0.5</Value>
+                <Operator>Above</Operator>
+            </VisibleCondition>
+            <BlinkCondition xsi:type="StatCondition">
+                <StatId>controlled_power_usage</StatId>
+                <Value>0.95</Value>
+                <Operator>Above</Operator>
+            </BlinkCondition>
+            <Blink>
+                <ColorMask>
+                    <X>1</X>
+                    <Y>0</Y>
+                    <Z>0</Z>
+                    <W>1</W>
+                </ColorMask>
+                <MinAlpha>1</MinAlpha>
+                <MaxAlpha>1</MaxAlpha>
+            </Blink>
+            <Texture>EnergyIcon</Texture>
+        </StatStyle>
+
+        <!--Energy Icon Off-->
+
+        <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
+            <StatId>controlled_power_usage</StatId>
+
+            <OffsetPx>
+                <X>-489</X> <!-- -715 + 226 -->
+                <Y>-170</Y> <!-- -160 - 10 -->
+            </OffsetPx>
+            <SizePx>
+                <X>24</X>
+                <Y>24</Y>
+            </SizePx>
+
+            <VisibleCondition xsi:type="StatCondition">
+                <StatId>controlled_is_grid</StatId>
+                <Value>0.5</Value>
+                <Operator>Below</Operator>
+            </VisibleCondition>
+
+            <Texture>EnergyIcon</Texture>
+            <ColorMask>
+                <X>1</X>
+                <Y>1</Y>
+                <Z>1</Z>
+                <W>0.2</W>
+            </ColorMask>
+        </StatStyle>
 
         <!-- Grid Icons -->
 
