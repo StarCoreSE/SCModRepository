@@ -1494,11 +1494,11 @@
     <StatStyles>
         <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
             <OffsetPx>
-                <X>-455</X> <!-- -455 + 226 -->
+                <X>-464</X> <!-- -455 + 226 -->
                 <Y>-205</Y> <!-- -205 - 10 -->
             </OffsetPx>
             <SizePx>
-                <X>-220</X>
+                <X>-144</X>
                 <Y>60</Y>
             </SizePx>
             <Category>Background</Category>
@@ -1642,11 +1642,11 @@
         <StatStyle xsi:type="MyObjectBuilder_ProgressBarStatVisualStyle">
             <StatId>controlled_power_usage</StatId>
             <OffsetPx>
-                <X>-644</X> <!-- -870 + 226 -->
+                <X>-585</X> <!-- -870 + 226 -->
                 <Y>-160</Y> <!-- -150 - 10 -->
             </OffsetPx>
             <SizePx>
-                <X>150</X>
+                <X>100</X>
                 <Y>9</Y>
             </SizePx>
 
@@ -1696,7 +1696,7 @@
             <StatId>controlled_power_usage</StatId>
 
             <OffsetPx>
-                <X>-669</X> <!-- -895 + 226 -->
+                <X>-605</X> <!-- -895 + 226 -->
                 <Y>-165</Y> <!-- -155 - 10 -->
             </OffsetPx>
             <SizePx>
@@ -1738,7 +1738,7 @@
             <StatId>controlled_power_usage</StatId>
 
             <OffsetPx>
-                <X>-669</X> <!-- -895 + 226 -->
+                <X>-605</X> <!-- -895 + 226 -->
                 <Y>-165</Y> <!-- -155 - 10 -->
             </OffsetPx>
             <SizePx>
@@ -1772,87 +1772,8 @@
             </ColorMask>
         </StatStyle>
 
-        <!--Energy Icon On-->
-
-        <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
-            <StatId>controlled_power_usage</StatId>
-
-            <OffsetPx>
-                <X>-489</X> <!-- -715 + 226 -->
-                <Y>-170</Y> <!-- -160 - 10 -->
-            </OffsetPx>
-            <SizePx>
-                <X>24</X>
-                <Y>24</Y>
-            </SizePx>
-
-            <VisibleCondition xsi:type="StatCondition">
-                <StatId>controlled_is_grid</StatId>
-                <Value>0.5</Value>
-                <Operator>Above</Operator>
-            </VisibleCondition>
-            <BlinkCondition xsi:type="StatCondition">
-                <StatId>controlled_power_usage</StatId>
-                <Value>0.95</Value>
-                <Operator>Above</Operator>
-            </BlinkCondition>
-            <Blink>
-                <ColorMask>
-                    <X>1</X>
-                    <Y>0</Y>
-                    <Z>0</Z>
-                    <W>1</W>
-                </ColorMask>
-                <MinAlpha>1</MinAlpha>
-                <MaxAlpha>1</MaxAlpha>
-            </Blink>
-            <Texture>EnergyIcon</Texture>
-        </StatStyle>
-
-        <!--Energy Icon Off-->
-
-        <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
-            <StatId>controlled_power_usage</StatId>
-
-            <OffsetPx>
-                <X>-489</X> <!-- -715 + 226 -->
-                <Y>-170</Y> <!-- -160 - 10 -->
-            </OffsetPx>
-            <SizePx>
-                <X>24</X>
-                <Y>24</Y>
-            </SizePx>
-
-            <VisibleCondition xsi:type="StatCondition">
-                <StatId>controlled_is_grid</StatId>
-                <Value>0.5</Value>
-                <Operator>Below</Operator>
-            </VisibleCondition>
-
-            <Texture>EnergyIcon</Texture>
-            <ColorMask>
-                <X>1</X>
-                <Y>1</Y>
-                <Z>1</Z>
-                <W>0.2</W>
-            </ColorMask>
-        </StatStyle>
 
         <!-- Grid Icons -->
-
-        <!--GridPower Background-->
-        <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
-            <OffsetPx>
-                <X>-394</X> <!-- -620 + 226 -->
-                <Y>-205</Y> <!-- -195 - 10 -->
-            </OffsetPx>
-            <SizePx>
-                <X>-60</X>
-                <Y>60</Y>
-            </SizePx>
-            <Category>Background</Category>
-            <Texture>IconsBackground</Texture>
-        </StatStyle>
 
         <!--GridPower On-->
 
@@ -1860,12 +1781,12 @@
             <StatId>controlled_reactors</StatId>
 
             <OffsetPx>
-                <X>-394</X> <!-- -620 + 226 -->
-                <Y>-205</Y> <!-- -195 - 10 -->
+                <X>-489</X> <!-- -715 + 226 -->
+                <Y>-150</Y> <!-- -160 - 10 -->
             </OffsetPx>
             <SizePx>
-                <X>-60</X>
-                <Y>60</Y>
+                <X>32</X>
+                <Y>32</Y>
             </SizePx>
 
             <FadeInTimeMs>100</FadeInTimeMs>
@@ -1906,12 +1827,12 @@
             <StatId>controlled_reactors</StatId>
 
             <OffsetPx>
-                <X>-394</X> <!-- -620 + 226 -->
-                <Y>-205</Y> <!-- -195 - 10 -->
+                <X>-489</X> <!-- -715 + 226 -->
+                <Y>-150</Y> <!-- -160 - 10 -->
             </OffsetPx>
             <SizePx>
-                <X>-60</X>
-                <Y>60</Y>
+                <X>32</X>
+                <Y>32</Y>
             </SizePx>
 
             <FadeInTimeMs>100</FadeInTimeMs>
@@ -1953,12 +1874,12 @@
             <StatId>controlled_reactors</StatId>
 
             <OffsetPx>
-                <X>-394</X> <!-- -620 + 226 -->
-                <Y>-205</Y> <!-- -195 - 10 -->
+                <X>-489</X> <!-- -715 + 226 -->
+                <Y>-150</Y> <!-- -160 - 10 -->
             </OffsetPx>
             <SizePx>
-                <X>-60</X>
-                <Y>60</Y>
+                <X>32</X>
+                <Y>32</Y>
             </SizePx>
 
             <FadeInTimeMs>100</FadeInTimeMs>
