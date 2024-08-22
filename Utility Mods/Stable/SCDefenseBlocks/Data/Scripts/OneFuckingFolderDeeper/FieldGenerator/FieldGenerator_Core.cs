@@ -299,9 +299,11 @@ namespace Starcore.FieldGenerator
                 }
                 else if (!Block.IsWorking)
                 {
-                    FieldPower = 0;
+                    if (FieldPower > 0)
+                        FieldPower = 0;
+                    
                     if (SiegeMode)
-                        SiegeMode = false;
+                        SiegeMode = false;                    
                 }
             }
         }
