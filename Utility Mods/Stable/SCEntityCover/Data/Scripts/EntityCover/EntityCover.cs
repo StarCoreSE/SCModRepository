@@ -36,7 +36,7 @@ namespace klime.EntityCover
             { "EntityCoverColor", new ModelInfo("null", new Vector3(275, 275, 275)) },    //block subtype, block model filename, hitbox dimensions //in Large Blocks (???)
             { "EntityCoverEVEDepot", new ModelInfo("null", new Vector3(150, 80, 200)) },    //block subtype, block model filename, hitbox dimensions //in Large Blocks (???)
             { "EntityCover2", new ModelInfo("REMlikeblocker2_5km_purple.mwm", new Vector3(1250, 1250, 1250)) },    
-            { "EntityCoverEveFreighter", new ModelInfo("eveobstacle3.mwm", new Vector3(180, 60, 500)) },
+            { "EntityCoverEveFreighter", new ModelInfo("evefreighter.mwm", new Vector3(180, 60, 500)) },
             { "EntityCover3", new ModelInfo("REMlikeblockerLong25kX.mwm", new Vector3(1250, 275, 275)) },
             { "EntityCover4", new ModelInfo("REMlikeblocker1kmplate_purple.mwm", new Vector3(500, 500, 50)) },    //don't forget the entitycomponentdescriptor too dumbass
             { "EntityCover4BLU", new ModelInfo("REMlikeblocker1kmplate_blue.mwm", new Vector3(500, 500, 50)) },    //don't forget the entitycomponentdescriptor too dumbass
