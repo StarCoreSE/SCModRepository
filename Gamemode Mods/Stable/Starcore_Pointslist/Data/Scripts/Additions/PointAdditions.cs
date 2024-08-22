@@ -569,6 +569,8 @@ namespace ShipPoints
             ["Starcore_RWR_Projectiles"] = 5,
             ["SC_Flare"] = 50,
             ["SI_Field_Gen"] = 50,
+	    ["FieldGen_Core"] = 50,
+    	    ["FieldGen_Capacity_Upgrade"] = 50,
             ["SELtdLargeNanobotBuildAndRepairSystem"] = 50,
             ["PM_LG_BLASTPLATE_BLASTPLATE"] = 100,
             ["REINFORCED_BLASTPLATE"] = 105,

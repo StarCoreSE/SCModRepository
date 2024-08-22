@@ -299,9 +299,11 @@ namespace Starcore.FieldGenerator
                 }
                 else if (!Block.IsWorking)
                 {
-                    FieldPower = 0;
+                    if (FieldPower > 0)
+                        FieldPower = 0;
+                    
                     if (SiegeMode)
-                        SiegeMode = false;
+                        SiegeMode = false;                    
                 }
             }
         }
@@ -506,7 +508,7 @@ namespace Starcore.FieldGenerator
 
             SiegeBlockEnabler(_gridBlocks, true);
 
-            SiegeCooldownTime = SiegeElapsedTime * 2;
+            SiegeCooldownTime = (SiegeElapsedTime > 5) ? (SiegeElapsedTime * 2) : 5;
             SiegeElapsedTime = 0;
             SiegeCooldownActive = true;
         }
@@ -635,7 +637,7 @@ namespace Starcore.FieldGenerator
         {
             foreach (var block in allTerminalBlocks)
             {
-                if (block.FatBlock != null)
+                if (block.FatBlock != null && block.FatBlock.BlockDefinition.SubtypeId != "FieldGen_Core")
                 {
                     var entBlock = block as MyEntity;
                     if (entBlock != null && FieldGeneratorSession.CoreSysAPI.HasCoreWeapon(entBlock))
