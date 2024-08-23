@@ -267,12 +267,12 @@ namespace Starcore.FieldGenerator
                 {
                     Sink.Update();
 
-                    UpdateSiegeState();
-
-                    SizeModifier = CalculateSizeModifier();
+                    UpdateSiegeState();             
 
                     if (!Config.SimplifiedMode)
                     {
+                        SizeModifier = CalculateSizeModifier();
+
                         if (_damageEventCounter > Config.DamageEventThreshold)
                         {
                             _stabilityChange = -((1.6666666666667f * SizeModifier) * (FieldPower / 50));
