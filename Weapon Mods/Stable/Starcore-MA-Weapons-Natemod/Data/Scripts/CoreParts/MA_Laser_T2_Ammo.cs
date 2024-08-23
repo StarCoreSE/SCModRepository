@@ -132,6 +132,11 @@ namespace Scripts
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
+                Deform = new DeformDef
+                {
+                    DeformType = NoDeform,
+                    DeformDelay = 30,
+                },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {
                     Base = Energy,

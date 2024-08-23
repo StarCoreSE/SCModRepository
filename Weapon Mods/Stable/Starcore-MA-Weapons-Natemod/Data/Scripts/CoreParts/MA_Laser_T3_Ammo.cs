@@ -480,7 +480,7 @@ namespace Scripts
                 },
                 Deform = new DeformDef
                 {
-                    DeformType = AllDamagedBlocks,
+                    DeformType = NoDeform,
                     DeformDelay = 30,
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
