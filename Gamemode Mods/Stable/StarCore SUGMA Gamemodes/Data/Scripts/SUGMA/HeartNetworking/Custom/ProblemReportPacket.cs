@@ -28,7 +28,10 @@ namespace SC.SUGMA.HeartNetworking.Custom
                     IssueMessage = IssueMessage.Substring(0, 50);
 
                 if (!MyAPIGateway.Utilities.IsDedicated)
+                {
+                    SUGMA_SessionComponent.I?.UnregisterComponent("problemReport");
                     SUGMA_SessionComponent.I?.RegisterComponent("problemReport", new ProblemReport(IssueMessage));
+                }
             }
             else
             {
