@@ -13,7 +13,7 @@ namespace SC.SUGMA.GameState
 {
     public class DisconnectHandler : ComponentBase
     {
-        private const bool FreezeAllGrids = false; //use this if you want to stop every grid instead of just the player who disconnects
+        private const bool FreezeAllGrids = true; //use this if you want to stop every grid instead of just the player who disconnects
         private const bool TeleportToSpawn = false;
         private const bool ReportProblem = true;
 
@@ -202,7 +202,7 @@ namespace SC.SUGMA.GameState
             if (ReportProblem && MyAPIGateway.Multiplayer?.IsServer == true)
             {
                 //automatic "/sc problem {Player} has disconnected!"?
-                SUtils.ReportProblem($"{player.DisplayName} has disconnected! (override with '/sc missing')");
+                SUtils.ReportProblem($"{player.DisplayName} has disconnected! ('/sc missing' to override)");
             }
 
             if (TeleportToSpawn)
