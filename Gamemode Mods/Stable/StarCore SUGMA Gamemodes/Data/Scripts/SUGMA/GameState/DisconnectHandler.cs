@@ -13,7 +13,7 @@ namespace SC.SUGMA.GameState
 {
     public class DisconnectHandler : ComponentBase
     {
-        private const bool FreezeAllGrids = true; //use this if you want to stop every grid instead of just the player who disconnects
+        private const bool FreezeAllGrids = false; //use this if you want to stop every grid instead of just the player who disconnects
         private const bool TeleportToSpawn = false;
         private const bool ReportProblem = true;
 
