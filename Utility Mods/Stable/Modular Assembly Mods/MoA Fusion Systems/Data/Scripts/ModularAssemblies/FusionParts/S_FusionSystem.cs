@@ -201,6 +201,9 @@ namespace StarCore.FusionSystems.
                     thruster?.UpdatePower(powerGeneration, NewtonsPerFusionPower * generationModifier, Thrusters.Count);
             }
 
+            ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "HeatGeneration",
+                PowerGeneration * MegawattsPerFusionPower);
+
             // Subtract power usage afterwards so that all reactors have the same stats.
             PowerGeneration = powerGeneration;
             MaxPowerStored = powerCapacity;
@@ -211,8 +214,6 @@ namespace StarCore.FusionSystems.
             PowerStored += PowerGeneration;
             if (PowerStored > MaxPowerStored) PowerStored = MaxPowerStored;
             //PowerGeneration = 0;
-            ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "HeatGeneration",
-                PowerConsumption * MegawattsPerFusionPower);
         }
 
         public void UpdateTick()
