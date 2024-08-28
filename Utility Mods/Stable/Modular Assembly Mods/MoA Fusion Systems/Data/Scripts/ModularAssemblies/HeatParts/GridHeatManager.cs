@@ -2,6 +2,7 @@
 using Sandbox.Game.Entities;
 using StarCore.FusionSystems.Communication;
 using VRage.Game.ModAPI;
+using VRageMath;
 
 namespace StarCore.FusionSystems.HeatParts
 {
@@ -59,7 +60,7 @@ namespace StarCore.FusionSystems.HeatParts
 
         private void Update15Tick()
         {
-            var gridSize = (Grid.Max - Grid.Min) * Grid.GridSize;
+            var gridSize = (Grid.Max - Grid.Min + Vector3I.One) * Grid.GridSize;
 
             BaseHeatCapacity = Grid.BlocksCount * BaseHeatCapacityModifier;
             BaseHeatDissipation = 2 * (gridSize.X * gridSize.Y + gridSize.Y * gridSize.Z + gridSize.Z * gridSize.X) *
