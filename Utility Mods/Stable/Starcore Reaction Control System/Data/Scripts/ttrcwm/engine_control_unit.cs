@@ -1076,7 +1076,7 @@ namespace ttrcwm
 
         int counter = 0;  // Define this as a class-level variable
         const int checkFrequency = 10;  // Check every 10 calls, i.e., at 6Hz
-        List<IMyConveyorSorter> cachedBlocks = new List<IMyConveyorSorter>();  // Class-level variable to cache blocks
+        List<IMyCollector> cachedBlocks = new List<IMyCollector>();  // Class-level variable to cache blocks
 
         public void Handle_60Hz()
         {
