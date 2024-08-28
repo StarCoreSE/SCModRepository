@@ -20,7 +20,7 @@ namespace StarCore.FusionSystems
         private readonly int _ticks = 0;
         private readonly HashSet<IMyCubeBlock> _updateLimiter = new HashSet<IMyCubeBlock>();
 
-        private bool _needsUpdate;
+        private bool _needsUpdate = true;
 
         public override void LoadData()
         {
@@ -40,8 +40,7 @@ namespace StarCore.FusionSystems
                 MyAPIGateway.Session.Player != null)
             {
                 MyAPIGateway.Multiplayer.SendMessageToServer(Channel,
-                    MyAPIGateway.Utilities.SerializeToBinary(new SerializableMultiplier(-1, 0, 0,
-                        MyAPIGateway.Session.Player.SteamUserId)));
+                    MyAPIGateway.Utilities.SerializeToBinary(new SerializableMultiplier(float.MinValue, 0)));
                 _needsUpdate = false;
             }
 
@@ -53,39 +52,34 @@ namespace StarCore.FusionSystems
             var sm = MyAPIGateway.Utilities.SerializeFromBinary<SerializableMultiplier>(package);
             if (sm == null)
                 return;
-            switch (sm.Type)
+
+            if (sm.Value == float.MinValue)
             {
-                case 0:
-                    if (MyAPIGateway.Session.IsServer)
-                        break;
-                    var react = MyAPIGateway.Entities.GetEntityById(sm.Entityid) as IMyReactor;
-                    if (react != null)
-                        ReactorOutput(react, sm.Value);
-                    else
-                        _needsUpdate = true;
-                    break;
-                case 1:
-                    if (MyAPIGateway.Session.IsServer)
-                        break;
-                    var thrust = MyAPIGateway.Entities.GetEntityById(sm.Entityid) as IMyThrust;
-                    if (thrust != null)
-                        ThrusterOutput(thrust, sm.Value);
-                    else
-                        _needsUpdate = true;
-                    break;
-                case -1:
-                    if (!MyAPIGateway.Session.IsServer)
-                        break;
-                    foreach (var reactor in _mReactorList)
-                        MyAPIGateway.Multiplayer.SendMessageTo(Channel,
-                            MyAPIGateway.Utilities.SerializeToBinary(
-                                new SerializableMultiplier(0, reactor.Value, reactor.Key.EntityId)), sm.Playerid);
-                    foreach (var thruster in _mThrustList)
-                        MyAPIGateway.Multiplayer.SendMessageTo(Channel,
-                            MyAPIGateway.Utilities.SerializeToBinary(
-                                new SerializableMultiplier(1, thruster.Value, thruster.Key.EntityId)), sm.Playerid);
-                    break;
+                if (!MyAPIGateway.Session.IsServer)
+                    return;
+
+                foreach (var reactor in _mReactorList)
+                    MyAPIGateway.Multiplayer.SendMessageTo(Channel,
+                        MyAPIGateway.Utilities.SerializeToBinary(
+                            new SerializableMultiplier(reactor.Value, reactor.Key.EntityId)), senderId);
+
+                foreach (var thruster in _mThrustList)
+                    MyAPIGateway.Multiplayer.SendMessageTo(Channel,
+                        MyAPIGateway.Utilities.SerializeToBinary(
+                            new SerializableMultiplier(thruster.Value, thruster.Key.EntityId)), senderId);
             }
+
+            if (MyAPIGateway.Session.IsServer)
+                return;
+
+            var ent = MyAPIGateway.Entities.GetEntityById(sm.Entityid);
+            if (ent == null)
+                return;
+
+            if (ent is IMyReactor)
+                ReactorOutput((IMyReactor) ent, sm.Value);
+            else if (ent is IMyThrust)
+                ThrusterOutput((IMyThrust) ent, sm.Value);
         }
 
         protected override void UnloadData()
@@ -104,7 +98,7 @@ namespace StarCore.FusionSystems
             if (MyAPIGateway.Session.IsServer)
             {
                 MyAPIGateway.Multiplayer.SendMessageToOthers(Channel,
-                    MyAPIGateway.Utilities.SerializeToBinary(new SerializableMultiplier(0, output, reactor.EntityId)));
+                    MyAPIGateway.Utilities.SerializeToBinary(new SerializableMultiplier(output, reactor.EntityId)));
                 if (_i._mReactorList.ContainsKey(reactor))
                 {
                     _i._mReactorList[reactor] = output;
@@ -127,7 +121,7 @@ namespace StarCore.FusionSystems
             if (MyAPIGateway.Session.IsServer)
             {
                 MyAPIGateway.Multiplayer.SendMessageToOthers(Channel,
-                    MyAPIGateway.Utilities.SerializeToBinary(new SerializableMultiplier(0, output, thrust.EntityId)));
+                    MyAPIGateway.Utilities.SerializeToBinary(new SerializableMultiplier(output, thrust.EntityId)));
                 if (_i._mThrustList.ContainsKey(thrust))
                 {
                     _i._mThrustList[thrust] = output;
@@ -150,25 +144,14 @@ namespace StarCore.FusionSystems
             {
             }
 
-            public SerializableMultiplier(int type, float value, long entityid)
+            public SerializableMultiplier(float value, long entityid)
             {
-                this.Type = type;
                 this.Value = value;
                 this.Entityid = entityid;
             }
 
-            public SerializableMultiplier(int type, float value, long entityid, ulong playerid)
-            {
-                this.Type = type;
-                this.Value = value;
-                this.Entityid = entityid;
-                this.Playerid = playerid;
-            }
-
-            [ProtoMember(1)] public int Type { get; }
-            [ProtoMember(2)] public float Value { get; }
-            [ProtoMember(3)] public long Entityid { get; }
-            [ProtoMember(4)] public ulong Playerid { get; }
+            [ProtoMember(1)] public float Value { get; }
+            [ProtoMember(2)] public long Entityid { get; }
         }
     }
 }
