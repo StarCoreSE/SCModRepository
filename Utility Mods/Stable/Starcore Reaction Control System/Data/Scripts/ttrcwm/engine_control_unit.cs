@@ -1151,7 +1151,7 @@ namespace ttrcwm
 
             try
             {
-                if (_grid.Physics == null || _grid.Physics.IsStatic || disabler == true)
+                if (_grid.Physics == null || _grid.Physics.IsStatic || disabler)
                 {
                     _physics_enable_delay = PHYSICS_ENABLE_DELAY;
                     return;
