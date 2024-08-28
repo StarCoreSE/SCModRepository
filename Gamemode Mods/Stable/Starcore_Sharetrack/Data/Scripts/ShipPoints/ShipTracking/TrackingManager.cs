@@ -49,13 +49,8 @@ namespace StarCore.ShareTrack.ShipTracking
             if (grid?.Physics == null) return;
 
             AllGrids.Add(grid);
-            grid.GetBlocks(null, block =>
-            {
-                CheckAutotrack(block);
-                return false;
-            });
 
-            if (_queuedGridTracks.Contains(grid.EntityId))
+            if (_queuedGridTracks.Contains(grid.EntityId) || CheckAutotrack(grid))
             {
                 _queuedGridTracks.Remove(grid.EntityId);
                 if (!TrackedGrids.ContainsKey(grid))
@@ -114,23 +109,16 @@ namespace StarCore.ShareTrack.ShipTracking
             return gridIds.ToArray();
         }
 
-        private void CheckAutotrack(IMySlimBlock block)
+        private bool CheckAutotrack(IMyCubeGrid grid)
         {
-            if (block == null)
+            foreach (var block in grid.GetFatBlocks<IMyCubeBlock>())
             {
-                Log.Error("CheckAutotrack called with null block");
-                return;
-            }
-            if (block.FatBlock == null || !AutoTrackSubtypes.Contains(block.BlockDefinition.Id.SubtypeName))
-                return;
-
-            if (block.CubeGrid == null)
-            {
-                Log.Error($"Block {block.BlockDefinition.Id.SubtypeName} has null CubeGrid");
-                return;
+                if (!(block is IMyCockpit) && !AutoTrackSubtypes.Contains(block.BlockDefinition.SubtypeName))
+                    continue;
+                return true;
             }
 
-            TrackGrid(block.CubeGrid, false);
+            return false;
         }
 
         #region Public Methods

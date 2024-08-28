@@ -196,7 +196,10 @@ namespace StarCore.ShareTrack.ShipTracking
 
             // TODO: Update pilots
             foreach (var gridStat in _gridStats.Values)
+            {
+                gridStat.IsPrimaryGrid = gridStat.Grid == Grid;
                 gridStat.Update();
+            }
 
             bool bufferIsFunctional = IsFunctional;
             IsFunctional = TotalPower > 0 && TotalTorque > 0 && CockpitCount > 0;
