@@ -61,7 +61,7 @@ namespace Scripts
             NpcSafe = false, // This is you tell npc moders that your ammo was designed with them in mind, if they tell you otherwise set this to false.
             Sync = new SynchronizeDef
             {
-                Full = true, // Be careful, do not use on high fire rate weapons or ammos with many simultaneous fragments. This will send position updates twice per second per projectile/fragment and sync target (grid/block) changes.
+                Full = false, // Be careful, do not use on high fire rate weapons or ammos with many simultaneous fragments. This will send position updates twice per second per projectile/fragment and sync target (grid/block) changes.
                 PointDefense = true, // Server will inform clients of what projectiles have died by PD defense and will trigger destruction.
                 OnHitDeath = true, // Server will inform clients when projectiles die due to them hitting something and will trigger destruction.
             },
@@ -463,7 +463,7 @@ namespace Scripts
             NpcSafe = false, // This is you tell npc moders that your ammo was designed with them in mind, if they tell you otherwise set this to false.
             Sync = new SynchronizeDef
             {
-                Full = true, // Be careful, do not use on high fire rate weapons. Do not use with other sync options. Only works on drones and Smart projectiles.Will only work on chained / staged fragments with a frag count of 1, will no longer sync once frag chain > 1.
+                Full = false, // Be careful, do not use on high fire rate weapons. Do not use with other sync options. Only works on drones and Smart projectiles.Will only work on chained / staged fragments with a frag count of 1, will no longer sync once frag chain > 1.
                 PointDefense = true, // Server will inform clients of what projectiles have died by PD defense and will trigger destruction.
                 OnHitDeath = true, // Server will inform clients when projectiles die due to them hitting something and will trigger destruction.
             },
@@ -859,7 +859,7 @@ namespace Scripts
             NpcSafe = false , // This is you tell npc moders that your ammo was designed with them in mind, if they tell you otherwise set this to false.
             Sync = new SynchronizeDef
             {
-                Full = true, // Be careful, do not use on high fire rate weapons. Do not use with other sync options. Only works on drones and Smart projectiles.Will only work on chained / staged fragments with a frag count of 1, will no longer sync once frag chain > 1.
+                Full = false, // Be careful, do not use on high fire rate weapons. Do not use with other sync options. Only works on drones and Smart projectiles.Will only work on chained / staged fragments with a frag count of 1, will no longer sync once frag chain > 1.
                 PointDefense = true, // Server will inform clients of what projectiles have died by PD defense and will trigger destruction.
                 OnHitDeath = true, // Server will inform clients when projectiles die due to them hitting something and will trigger destruction.
             },
@@ -1570,7 +1570,7 @@ namespace Scripts
             NpcSafe = false, // This is you tell npc moders that your ammo was designed with them in mind, if they tell you otherwise set this to false.
             Sync = new SynchronizeDef
             {
-                Full = true, // Be careful, do not use on high fire rate weapons. Do not use with other sync options. Only works on drones and Smart projectiles.Will only work on chained / staged fragments with a frag count of 1, will no longer sync once frag chain > 1.
+                Full = false, // Be careful, do not use on high fire rate weapons. Do not use with other sync options. Only works on drones and Smart projectiles.Will only work on chained / staged fragments with a frag count of 1, will no longer sync once frag chain > 1.
                 PointDefense = true, // Server will inform clients of what projectiles have died by PD defense and will trigger destruction.
                 OnHitDeath = true, // Server will inform clients when projectiles die due to them hitting something and will trigger destruction.
             },
