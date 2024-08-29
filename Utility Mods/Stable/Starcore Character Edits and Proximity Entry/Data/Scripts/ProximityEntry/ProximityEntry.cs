@@ -82,6 +82,7 @@ namespace Klime.ProximityEntry
                 if (reuse_cockpit != null && reuse_character != null && reuse_cockpit.Pilot == null)
                 {
                     reuse_cockpit.AttachPilot(reuse_character);
+                    MyAPIGateway.Utilities.ShowNotification($"Entered cockpit: {reuse_cockpit.CustomName}", 2000, "Green");
                 }
             }
         }
@@ -234,12 +235,14 @@ namespace Klime.ProximityEntry
                     {
                         SendEntryRequest(mainCockpit);
                         DisplayCockpitName(mainCockpit, cubeG.DisplayName);
+                        MyAPIGateway.Utilities.ShowNotification($"Entering cockpit: {mainCockpit.CustomName}", 2000, "White");
                     }
                     // If there's no main cockpit, but there's a closest one, send entry request for it and display its name
                     else if (closestCockpit != null)
                     {
                         SendEntryRequest(closestCockpit);
                         DisplayCockpitName(closestCockpit, cubeG.DisplayName);
+                        MyAPIGateway.Utilities.ShowNotification($"Entering cockpit: {closestCockpit.CustomName}", 2000, "White");
                     }
                 }
             }
