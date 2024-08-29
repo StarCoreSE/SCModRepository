@@ -52,9 +52,10 @@ namespace StarCore.FusionSystems.HudHelpers
                 Color = new Color(1, 1, 1, 1f)
             };
 
-            _noticeLabel = new LabelBox(parent)
+            _noticeLabel = new LabelBox(body)
             {
-                ParentAlignment = ParentAlignments.Bottom | ParentAlignments.Right,
+                ParentAlignment = ParentAlignments.Bottom | ParentAlignments.Left | ParentAlignments.InnerH,
+                CanIgnoreMasking = true,
                 Text = "Something went wrong...",
                 Color = new Color(0, 0, 0, 0),
                 BuilderMode = TextBuilderModes.Lined
@@ -95,6 +96,12 @@ namespace StarCore.FusionSystems.HudHelpers
             if (playerCockpit == null || _shouldHide)
             {
                 if (Visible) Visible = false;
+
+                if (_soundEmitter != null)
+                {
+                    _soundEmitter.StopSound(true);
+                    _soundEmitter = null;
+                }
                 return;
             }
 
@@ -145,12 +152,12 @@ namespace StarCore.FusionSystems.HudHelpers
             _noticeLabel.Text = new RichText
             {
                 {"Reactor Integrity: ", GlyphFormat.White},
-                {(reactorIntegrity*100).ToString("N0") + "%", GlyphFormat.White.WithColor(reactorIntegrity > 0.51 ? Color.White : Color.Red)}
+                {(reactorIntegrity*100).ToString("N0") + "%", GlyphFormat.White.WithColor(reactorIntegrity > 0.52 ? Color.White : Color.Red)}
             };
 
             if (HeatManager.I.GetGridHeatLevel(playerGrid) > 0.8f)
             {
-                _noticeLabel.TextBoard.Append("\nTAKING THERMAL DAMAGE!", GlyphFormat.White.WithColor(Color.Red));
+                _noticeLabel.TextBoard.Append("\nTAKING THERMAL DAMAGE", GlyphFormat.White.WithColor(Color.Red));
 
                 if (_soundEmitter == null)
                 {
@@ -160,17 +167,9 @@ namespace StarCore.FusionSystems.HudHelpers
                     };
                     _soundEmitter.PlaySound(_alertSound);
                 }
-
-                if (_ticks % 10 == 0)
-                {
-                    _heatBar.Visible = !_heatBar.Visible;
-                }
             }
             else
             {
-                if (!_heatBar.Visible)
-                    _heatBar.Visible = true;
-
                 if (_soundEmitter != null)
                 {
                     _soundEmitter.StopSound(true);
