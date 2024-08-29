@@ -319,18 +319,18 @@ namespace Scripts
                 ModelName = "",
                 VisualProbability = 0.3f,
                 ShieldHitDraw = false,
-                Decals = new DecalDef
-                {
-                    MaxAge = 1200,
-                    Map = new[]
-                    {
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Metal",
-                            DecalMaterial = "REE_Laser_Decal",
-                        },
-                    },
-                },
+                //Decals = new DecalDef
+                //{
+                //    MaxAge = 1200,
+                //    Map = new[]
+                //    {
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Metal",
+                //            DecalMaterial = "REE_Laser_Decal",
+                //        },
+                //    },
+                //},
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef

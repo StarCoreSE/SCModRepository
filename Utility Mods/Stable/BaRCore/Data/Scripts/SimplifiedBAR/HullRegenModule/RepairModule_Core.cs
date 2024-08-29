@@ -36,6 +36,7 @@ namespace StarCore.RepairModule
     {
         public IMyCollector Block;
         private bool IsServer = MyAPIGateway.Session.IsServer;
+        private bool IsDedicated = MyAPIGateway.Utilities.IsDedicated;
         private bool ClientSettingsLoaded = false;
 
         // Block Settings
@@ -47,11 +48,6 @@ namespace StarCore.RepairModule
                 if (ignoreArmor != value)
                 {
                     ignoreArmor = value;
-
-                    if (!IsServer)
-                    {
-                        SaveSettings();
-                    }
 
                     if (IsServer)
                     {
@@ -74,12 +70,7 @@ namespace StarCore.RepairModule
                 if (priorityOnly != value)
                 {
                     priorityOnly = value;
-
-                    if (!IsServer)
-                    {
-                        SaveSettings();
-                    }
-
+                       
                     if (IsServer)
                     {
                         Log.Info("Processing Repair Targets on Event Trigger: PriorityOnly");
@@ -102,11 +93,6 @@ namespace StarCore.RepairModule
                 if (subsystemPriority != newPriority)
                 {
                     subsystemPriority = newPriority;
-
-                    if (!IsServer)
-                    {
-                        SaveSettings();
-                    }
 
                     if (IsServer)
                     {
@@ -194,7 +180,7 @@ namespace StarCore.RepairModule
                         grid.OnBlockRemoved += HandleRemovedBlocks;                  
                     }
                 }
-            }         
+            }
 
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
             NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
@@ -299,17 +285,22 @@ namespace StarCore.RepairModule
         {
             base.UpdateAfterSimulation100();
 
-            if (!ClientSettingsLoaded && !IsServer)
+            if (IsDedicated)
             {
-                if (!LoadSettings())
-                {
-                    IgnoreArmor = true;
-                    PriorityOnly = false;
-                    SubsystemPriority = 0;
-                }
+                NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME;
+                return;
+            }            
 
-                ClientSettingsLoaded = true;
+            if (!LoadSettings())
+            {               
+                IgnoreArmor = true;
+                PriorityOnly = false;
+                SubsystemPriority = 0;
             }
+
+            ClientSettingsLoaded = true;
+            NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME;
+            return;
         }
 
         public override void Close()
@@ -358,10 +349,7 @@ namespace StarCore.RepairModule
         {
             try
             {
-                if (!IsServer)
-                {
-                    SaveSettings();
-                }
+                SaveSettings();
             }
             catch (Exception e)
             {
@@ -413,16 +401,22 @@ namespace StarCore.RepairModule
 
         private void IgnoreArmor_Update(bool _bool)
         {
+            SaveSettings();
+
             IgnoreArmorPacket.UpdateIgnoreArmor(Block.EntityId);                
         }
 
         private void PriorityOnly_Update(bool _bool)
         {
+            SaveSettings();
+
             PriorityOnlyPacket.UpdatePriorityOnly(Block.EntityId);
         }
 
         private void SubsystemPriority_Update(long _long)
         {
+            SaveSettings();
+
             SubsystemPriorityPacket.UpdateSubsystemPriority(Block.EntityId);
         }
         #endregion
@@ -460,6 +454,9 @@ namespace StarCore.RepairModule
 
         void SaveSettings()
         {
+            if (IsDedicated)
+                return;
+
             try
             {
                 if (Block == null)

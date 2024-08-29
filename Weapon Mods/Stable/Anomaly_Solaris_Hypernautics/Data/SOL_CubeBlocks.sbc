@@ -41,7 +41,7 @@
 		</Definition>
 
 
-		<!--
+		
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
@@ -79,7 +79,7 @@
 			</MountPoints>
 			<BlockPairName>Flechette_DoubleBarrel</BlockPairName>
 		</Definition>
-		-->
+
 
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
@@ -129,7 +129,6 @@
 
 
 		<!-- ArcStrike Torpedo -->
-		<!--
 <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
      <Id>
        <TypeId>ConveyorSorter</TypeId>
@@ -186,7 +185,6 @@
       <MaxFov>1.04719755</MaxFov>
   <DestroySound>Betty_Weapon_Destroyed</DestroySound>
     </Definition>	
-	-->
 
 <!-- OPA Light -->
 <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
@@ -257,7 +255,7 @@
 
 
 
-		<!--
+
    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 
      <Id>
@@ -320,7 +318,7 @@
      <MaxFov>1.04719755</MaxFov>
      <DestroySound>Betty_Weapon_Destroyed</DestroySound>
    </Definition>   
-	-->
+	
 
 		<!--
    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
@@ -399,7 +397,7 @@
 
 
 
-		<!--
+		
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
@@ -481,7 +479,7 @@
 			<MaxFov>2</MaxFov>
 			<EmissiveColorPreset>Default</EmissiveColorPreset>
 		</Definition>
-		-->
+	
 
 
 
@@ -493,7 +491,7 @@
 
 
 
-		<!--
+	
    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
 		
 		  <Id>
@@ -554,7 +552,6 @@
       <MaxFov>1.04719755</MaxFov>
   <DestroySound>Betty_Weapon_Destroyed</DestroySound>
     </Definition>
-		-->
 
 
 

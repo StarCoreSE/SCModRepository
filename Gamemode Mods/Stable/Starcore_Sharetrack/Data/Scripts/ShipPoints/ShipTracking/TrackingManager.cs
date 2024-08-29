@@ -189,7 +189,7 @@ namespace StarCore.ShareTrack.ShipTracking
                 return;
             }
 
-            if (!(((MyCubeGrid)grid)?.DestructibleBlocks ?? false) || TrackedGrids.ContainsKey(grid))
+            if (((MyCubeGrid)grid).IsStatic || TrackedGrids.ContainsKey(grid))
                 return;
 
             // Don't allow tracking grids that are already tracked in the group.

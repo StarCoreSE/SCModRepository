@@ -1,4 +1,6 @@
 ﻿using RichHudFramework;
+using Sandbox.Game;
+using Sandbox.Game.Entities;
 using SC.SUGMA.Utilities;
 using VRage.Game.ModAPI;
 using VRageMath;
@@ -12,6 +14,7 @@ namespace SC.SUGMA.GameState
 
         public float CaptureTime;
         public float CaptureTimeCurrent;
+        public MySoundPair CaptureSound = new MySoundPair("SUGMA_CaptureSound_TF2");
 
         public IMyFaction CapturingFaction;
 
@@ -78,11 +81,17 @@ namespace SC.SUGMA.GameState
                     CaptureTimeCurrent = 0;
                     Faction = CapturingFaction;
                     CapturingFaction = null;
+                    OnCapture();
                 }
             }
 
             SphereDrawColor = Color.Lerp(_originalColor, CapturingFaction?.CustomColor.ColorMaskToRgb() ?? Color.White,
                 CaptureTimeCurrent / CaptureTime).SetAlphaPct(0.25f);
+        }
+
+        public virtual void OnCapture()
+        {
+            SUtils.PlaySound(CaptureSound);
         }
     }
 }

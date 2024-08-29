@@ -14,7 +14,7 @@ namespace SC.SUGMA.API
         /// <summary>
         ///     The expected API version.
         /// </summary>
-        public const int ApiVersion = 2;
+        public const int ApiVersion = 3;
 
         /// <summary>
         ///     Triggered whenever the API is ready - added to by the constructor or manually.
@@ -119,6 +119,21 @@ namespace SC.SUGMA.API
             return _areTrackedGridsLoaded?.Invoke() ?? false;
         }
 
+        public int GetGridPoints(IMyCubeGrid grid)
+        {
+            return _getGridPoints?.Invoke(grid) ?? -1;
+        }
+
+        public void TrackGrid(IMyCubeGrid grid, bool share = true)
+        {
+            _trackGrid?.Invoke(grid, share);
+        }
+
+        public void UnTrackGrid(IMyCubeGrid grid, bool share = true)
+        {
+            _unTrackGrid?.Invoke(grid, share);
+        }
+
         #endregion
 
 
@@ -134,6 +149,9 @@ namespace SC.SUGMA.API
         private Action<Action<IMyCubeGrid, bool>> _registerOnAliveChanged;
         private Action<Action<IMyCubeGrid, bool>> _unregisterOnAliveChanged;
         private Func<bool> _areTrackedGridsLoaded;
+        private Func<IMyCubeGrid, int> _getGridPoints;
+        private Action<IMyCubeGrid, bool> _trackGrid;
+        private Action<IMyCubeGrid, bool> _unTrackGrid;
 
         #endregion
 
@@ -164,6 +182,9 @@ namespace SC.SUGMA.API
             SetApiMethod("RegisterOnAliveChanged", ref _registerOnAliveChanged);
             SetApiMethod("UnregisterOnAliveChanged", ref _unregisterOnAliveChanged);
             SetApiMethod("AreTrackedGridsLoaded", ref _areTrackedGridsLoaded);
+            SetApiMethod("GetGridPoints", ref _getGridPoints);
+            SetApiMethod("TrackGrid", ref _trackGrid);
+            SetApiMethod("UnTrackGrid", ref _unTrackGrid);
 
             // Unload data if told to, otherwise notify that the API is ready.
             if (_methodMap == null)

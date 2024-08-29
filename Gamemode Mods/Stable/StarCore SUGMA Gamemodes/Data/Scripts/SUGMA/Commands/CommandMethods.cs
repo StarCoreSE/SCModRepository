@@ -134,6 +134,12 @@ namespace SC.SUGMA.Commands
             else
                 HeartNetwork.I.SendToServer(new MissingPlayerOverridePacket());
         }
+
+        public static void AutoBalance(string[] args)
+        {
+            TeamBalancer.PerformBalancing();
+        }
+
         #endregion
     }
 }

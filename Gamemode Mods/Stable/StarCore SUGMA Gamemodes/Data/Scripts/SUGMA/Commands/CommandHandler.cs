@@ -55,6 +55,11 @@ namespace SC.SUGMA.Commands
                 "SUGMA.Utils",
                 "Manual override missing players.",
                 CommandMethods.ResolveMissingPlayers
+            ),
+            ["auto"] = new Command(
+                "SUGMA.Utils",
+                "Automatically balance tracked grids",
+                CommandMethods.AutoBalance
             )
 
             #endregion

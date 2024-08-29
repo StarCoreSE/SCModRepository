@@ -1,11 +1,15 @@
-﻿using Sandbox.Game.Entities;
+﻿using Sandbox.Game.Components;
+using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
 using SC.SUGMA.GameState;
 using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using VRage.Game;
 using VRage.Game.ModAPI;
+using VRage.Utils;
 using VRageMath;
 
 namespace SC.SUGMA.Utilities
@@ -47,6 +51,11 @@ namespace SC.SUGMA.Utilities
             return PlayerTracker.I.GetGridFaction(grid);
         }
 
+        public static IMyPlayer GetOwner(this IMyCubeGrid grid)
+        {
+            return PlayerTracker.I.GetGridOwner(grid);
+        }
+
         public static Color ColorMaskToRgb(this Vector3 colorMask)
         {
             return MyColorPickerConstants.HSVOffsetToHSV(colorMask).HSVtoColor();
@@ -82,12 +91,42 @@ namespace SC.SUGMA.Utilities
             MyAPIGateway.Utilities.ShowMessage("Shields", "Charged");
         }
 
-        public static Vector3D RandVector()
+        public static Vector3D RandVector(double min = 0, double max = 1)
         {
+            if (max < min)
+                max = min;
+
             var theta = Random.NextDouble() * 2.0 * Math.PI;
             var phi = Math.Acos(2.0 * Random.NextDouble() - 1.0);
             var sinPhi = Math.Sin(phi);
-            return Math.Pow(Random.NextDouble(), 1/3d) * new Vector3D(sinPhi * Math.Cos(theta), sinPhi * Math.Sin(theta), Math.Cos(phi));
+            return Math.Pow(Random.NextDouble() * (max - min) + min, 1/3d) * new Vector3D(sinPhi * Math.Cos(theta), sinPhi * Math.Sin(theta), Math.Cos(phi));
+        }
+
+        public static void PlaySound(MySoundPair sound)
+        {
+            MyAPIGateway.Session?.Player?.Character?.Components.Get<MyCharacterSoundComponent>()?.PlayActionSound(sound);
+        }
+
+        public static Dictionary<IMyFaction, IMyCubeGrid> GetFactionSpawns()
+        {
+            HashSet<IMyCubeGrid> allGrids = new HashSet<IMyCubeGrid>();
+            MyAPIGateway.Entities.GetEntities(null, e =>
+            {
+                if (e is IMyCubeGrid)
+                    allGrids.Add((IMyCubeGrid) e);
+                return false;
+            });
+
+            Dictionary<IMyFaction, IMyCubeGrid> factionSpawns = new Dictionary<IMyFaction, IMyCubeGrid>();
+
+            foreach (var grid in allGrids.Where(g => g.IsStatic && g.DisplayName.EndsWith(" Spawn")))
+            {
+                if (grid.BigOwners.Count < 1)
+                    continue;
+                factionSpawns[grid.GetFaction()] = grid;
+            }
+
+            return factionSpawns;
         }
     }
 }
