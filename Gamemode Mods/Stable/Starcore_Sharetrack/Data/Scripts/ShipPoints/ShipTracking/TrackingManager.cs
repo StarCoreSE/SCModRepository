@@ -14,6 +14,8 @@ namespace StarCore.ShareTrack.ShipTracking
     {
         public static TrackingManager I;
         private static readonly string[] AutoTrackSubtypes = { "LargeFlightMovement", "RivalAIRemoteControlLarge" };
+        public bool EnableAutotrack = true;
+
         private readonly HashSet<long> _queuedGridTracks = new HashSet<long>();
         public HashSet<IMyCubeGrid> AllGrids = new HashSet<IMyCubeGrid>();
         public Dictionary<IMyCubeGrid, ShipTracker> TrackedGrids = new Dictionary<IMyCubeGrid, ShipTracker>();
@@ -111,6 +113,9 @@ namespace StarCore.ShareTrack.ShipTracking
 
         private bool CheckAutotrack(IMyCubeGrid grid)
         {
+            if (!EnableAutotrack)
+                return false;
+
             foreach (var block in grid.GetFatBlocks<IMyCubeBlock>())
             {
                 if (!(block is IMyCockpit) && !AutoTrackSubtypes.Contains(block.BlockDefinition.SubtypeName))

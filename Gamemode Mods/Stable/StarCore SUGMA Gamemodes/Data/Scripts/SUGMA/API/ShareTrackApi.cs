@@ -134,6 +134,11 @@ namespace SC.SUGMA.API
             _unTrackGrid?.Invoke(grid, share);
         }
 
+        public void SetAutotrack(bool value)
+        {
+            _setAutotrack?.Invoke(value);
+        }
+
         #endregion
 
 
@@ -152,6 +157,7 @@ namespace SC.SUGMA.API
         private Func<IMyCubeGrid, int> _getGridPoints;
         private Action<IMyCubeGrid, bool> _trackGrid;
         private Action<IMyCubeGrid, bool> _unTrackGrid;
+        private Action<bool> _setAutotrack;
 
         #endregion
 
@@ -185,6 +191,7 @@ namespace SC.SUGMA.API
             SetApiMethod("GetGridPoints", ref _getGridPoints);
             SetApiMethod("TrackGrid", ref _trackGrid);
             SetApiMethod("UnTrackGrid", ref _unTrackGrid);
+            SetApiMethod("SetAutotrack", ref _setAutotrack);
 
             // Unload data if told to, otherwise notify that the API is ready.
             if (_methodMap == null)

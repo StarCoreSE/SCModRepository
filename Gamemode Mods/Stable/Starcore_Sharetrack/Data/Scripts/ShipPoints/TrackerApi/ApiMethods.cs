@@ -24,6 +24,7 @@ namespace StarCore.ShareTrack.TrackerApi
                 ["GetGridPoints"] = new Func<IMyCubeGrid, int>(GetGridPoints),
                 ["TrackGrid"] = new Action<IMyCubeGrid, bool>(TrackGrid),
                 ["UnTrackGrid"] = new Action<IMyCubeGrid, bool>(UnTrackGrid),
+                ["SetAutotrack"] = new Action<bool>(value => TrackingManager.I.EnableAutotrack = value),
             };
         }
 
