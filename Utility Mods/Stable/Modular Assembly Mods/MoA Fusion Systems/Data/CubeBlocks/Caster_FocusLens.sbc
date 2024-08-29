@@ -19,9 +19,9 @@
 			<Model>Models\Caster_FocusLens.mwm</Model>
 			<Components>
 				<Component Subtype="SteelPlate" Count="100" />
+				<Component Subtype="LargeTube" Count="40" />
 				<Component Subtype="Construction" Count="150" />
 				<Component Subtype="MetalGrid" Count="250" />
-				<Component Subtype="LargeTube" Count="40" />
 				<Component Subtype="Construction" Count="30" />
 				<Component Subtype="SteelPlate" Count="50" />
 			</Components>

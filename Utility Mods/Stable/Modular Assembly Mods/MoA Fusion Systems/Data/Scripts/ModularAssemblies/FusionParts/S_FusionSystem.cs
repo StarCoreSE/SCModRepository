@@ -173,7 +173,8 @@ namespace StarCore.FusionSystems.
 
         private void UpdatePower(bool updateReactors = false)
         {
-            var generationModifier = 1 / (HeatManager.I.GetGridHeatLevel(Grid) + 0.5f);
+            //var generationModifier = 1 / (HeatManager.I.GetGridHeatLevel(Grid) + 0.5f);
+            var generationModifier = 1;
             var powerGeneration = float.Epsilon;
             var powerCapacity = float.Epsilon;
             var totalPowerUsage = 0f;
@@ -201,9 +202,6 @@ namespace StarCore.FusionSystems.
                     thruster?.UpdatePower(powerGeneration, NewtonsPerFusionPower * generationModifier, Thrusters.Count);
             }
 
-            ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "HeatGeneration",
-                PowerGeneration * MegawattsPerFusionPower);
-
             // Subtract power usage afterwards so that all reactors have the same stats.
             PowerGeneration = powerGeneration;
             MaxPowerStored = powerCapacity;
@@ -213,7 +211,9 @@ namespace StarCore.FusionSystems.
             // Update PowerStored
             PowerStored += PowerGeneration;
             if (PowerStored > MaxPowerStored) PowerStored = MaxPowerStored;
-            //PowerGeneration = 0;
+
+            ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "HeatGeneration",
+                PowerConsumption * MegawattsPerFusionPower);
         }
 
         public void UpdateTick()

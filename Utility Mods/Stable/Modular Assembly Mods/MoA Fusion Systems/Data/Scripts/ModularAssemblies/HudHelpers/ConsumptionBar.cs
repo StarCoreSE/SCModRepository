@@ -1,11 +1,17 @@
 ﻿using System;
+using RichHudFramework;
+using RichHudFramework.Internal;
 using RichHudFramework.UI;
 using RichHudFramework.UI.Client;
 using RichHudFramework.UI.Rendering;
+using Sandbox.Game;
+using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
 using StarCore.FusionSystems.Communication;
 using StarCore.FusionSystems.FusionParts;
 using StarCore.FusionSystems.HeatParts;
+using VRage.Audio;
+using VRage.Game.Entity;
 using VRage.Input;
 using VRageMath;
 
@@ -16,7 +22,10 @@ namespace StarCore.FusionSystems.HudHelpers
         private readonly TexturedBox _storageBackground;
         private readonly TexturedBox _storageBar;
         private readonly TexturedBox _heatBar;
+        private readonly LabelBox _noticeLabel;
         private bool _shouldHide;
+        private MyEntity3DSoundEmitter _soundEmitter = null;
+        private readonly MySoundPair _alertSound = new MySoundPair("ArcSoundBlockAlert2");
 
 
         public ConsumptionBar(HudParentBase parent) : base(parent)
@@ -43,6 +52,14 @@ namespace StarCore.FusionSystems.HudHelpers
                 Color = new Color(1, 1, 1, 1f)
             };
 
+            _noticeLabel = new LabelBox(parent)
+            {
+                ParentAlignment = ParentAlignments.Bottom | ParentAlignments.Right,
+                Text = "Something went wrong...",
+                Color = new Color(0, 0, 0, 0),
+                BuilderMode = TextBuilderModes.Lined
+            };
+
             BodyColor = new Color(0, 0, 0, 0);
             BorderColor = new Color(0, 0, 0, 0);
 
@@ -64,8 +81,10 @@ namespace StarCore.FusionSystems.HudHelpers
             MinimumSize = new Vector2(Math.Max(1, MinimumSize.X), MinimumSize.Y);
         }
 
+        private int _ticks = 0;
         public void Update()
         {
+            _ticks++;
             var playerCockpit = MyAPIGateway.Session?.Player?.Controller?.ControlledEntity?.Entity as IMyShipController;
 
             // Pulling the current HudState is SLOOOOWWWW, so we only pull it when tab is just pressed.
@@ -84,6 +103,8 @@ namespace StarCore.FusionSystems.HudHelpers
             float totalFusionCapacity = 0;
             float totalFusionGeneration = 0;
             float totalFusionStored = 0;
+            float reactorIntegrity = 0;
+
             foreach (var system in SFusionManager.I.FusionSystems)
             {
                 if (playerGrid != ModularApi.GetAssemblyGrid(system.Key))
@@ -92,6 +113,12 @@ namespace StarCore.FusionSystems.HudHelpers
                 totalFusionCapacity += system.Value.MaxPowerStored;
                 totalFusionGeneration += system.Value.PowerGeneration;
                 totalFusionStored += system.Value.PowerStored;
+                foreach (var reactor in system.Value.Reactors)
+                {
+                    reactorIntegrity += reactor.Block.SlimBlock.Integrity/reactor.Block.SlimBlock.MaxIntegrity;
+                }
+
+                reactorIntegrity /= system.Value.Reactors.Count;
             }
 
             // Hide HUD element if the grid has no fusion systems (capacity is always >0 for a fusion system)
@@ -115,6 +142,42 @@ namespace StarCore.FusionSystems.HudHelpers
                 timeToCharge = 0;
 
             HeaderText = $"Fusion | {(totalFusionGeneration > 0 ? "+" : "-")}{Math.Round(timeToCharge)}s";
+            _noticeLabel.Text = new RichText
+            {
+                {"Reactor Integrity: ", GlyphFormat.White},
+                {(reactorIntegrity*100).ToString("N0") + "%", GlyphFormat.White.WithColor(reactorIntegrity > 0.51 ? Color.White : Color.Red)}
+            };
+
+            if (HeatManager.I.GetGridHeatLevel(playerGrid) > 0.8f)
+            {
+                _noticeLabel.TextBoard.Append("\nTAKING THERMAL DAMAGE!", GlyphFormat.White.WithColor(Color.Red));
+
+                if (_soundEmitter == null)
+                {
+                    _soundEmitter = new MyEntity3DSoundEmitter((MyEntity) playerCockpit.Entity)
+                    {
+                        CanPlayLoopSounds = true
+                    };
+                    _soundEmitter.PlaySound(_alertSound);
+                }
+
+                if (_ticks % 10 == 0)
+                {
+                    _heatBar.Visible = !_heatBar.Visible;
+                }
+            }
+            else
+            {
+                if (!_heatBar.Visible)
+                    _heatBar.Visible = true;
+
+                if (_soundEmitter != null)
+                {
+                    _soundEmitter.StopSound(true);
+                    _soundEmitter = null;
+                }
+            }
+
             _storageBar.Height = storagePct * _storageBackground.Height;
 
             float heatPct = HeatManager.I.GetGridHeatLevel(playerGrid);
