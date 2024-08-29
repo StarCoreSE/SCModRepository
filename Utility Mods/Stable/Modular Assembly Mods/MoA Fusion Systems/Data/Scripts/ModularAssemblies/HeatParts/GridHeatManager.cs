@@ -21,7 +21,7 @@ namespace StarCore.FusionSystems.HeatParts
 
         public float HeatGeneration;
 
-        public float HeatRatio = float.PositiveInfinity;
+        public float HeatRatio = float.Epsilon;
 
         public float HeatStored;
 

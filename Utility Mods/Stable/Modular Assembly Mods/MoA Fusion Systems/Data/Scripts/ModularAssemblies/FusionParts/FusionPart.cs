@@ -6,6 +6,8 @@ using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
 using Sandbox.ModAPI.Interfaces.Terminal;
 using StarCore.FusionSystems.Communication;
+using StarCore.FusionSystems.HeatParts;
+using VRage.Game;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.Game.ModAPI.Network;
@@ -213,6 +215,29 @@ namespace StarCore.FusionSystems.FusionParts
             ((IMyTerminalBlock)Block).AppendingCustomInfo += AppendingCustomInfo;
 
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
+        }
+
+        public override void UpdateAfterSimulation()
+        {
+            base.UpdateAfterSimulation();
+
+            try
+            {
+                if (!MyAPIGateway.Session.IsServer)
+                    return;
+
+                float heatLevel = HeatManager.I.GetGridHeatLevel(Block.CubeGrid);
+                if (heatLevel > 0.8f)
+                {
+                    // 10h^8
+                    float damagePerTick = 100 * heatLevel * heatLevel * heatLevel * heatLevel * heatLevel * heatLevel * heatLevel * heatLevel;
+                    Block.SlimBlock.DoDamage(damagePerTick, MyDamageType.Temperature, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                ModularApi.Log(ex.ToString());
+            }
         }
 
         #endregion
