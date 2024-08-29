@@ -211,7 +211,6 @@ namespace StarCore.FusionSystems.
             // Update PowerStored
             PowerStored += PowerGeneration;
             if (PowerStored > MaxPowerStored) PowerStored = MaxPowerStored;
-
             ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "HeatGeneration",
                 PowerConsumption * MegawattsPerFusionPower);
         }
