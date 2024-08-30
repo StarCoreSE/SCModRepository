@@ -171,23 +171,13 @@ namespace Klime.ProximityEntry
                 if (raycast != null && raycast.HitEntity != null)
                 {
                     reuse_cubegrid = raycast.HitEntity as MyCubeGrid;
-                    if (reuse_cubegrid == null || reuse_cubegrid.Physics == null || reuse_cubegrid.IsStatic || reuse_cubegrid.GridSizeEnum == MyCubeSize.Small)
+                    if (reuse_cubegrid == null || reuse_cubegrid.Physics == null || reuse_cubegrid.IsStatic)
                     {
                         reuse_cubegrid = null;
                     }
-
-                    if (reuse_cubegrid != null)
+                    else
                     {
                         reuse_gridgroup = MyAPIGateway.GridGroups.GetGroup(reuse_cubegrid, GridLinkTypeEnum.Logical);
-                        foreach (var grid in reuse_gridgroup)
-                        {
-                            if (grid.GridSizeEnum == MyCubeSize.Small)
-                            {
-                                reuse_cubegrid = null;
-                                break;
-                            }
-                        }
-
                     }
                 }
             }
