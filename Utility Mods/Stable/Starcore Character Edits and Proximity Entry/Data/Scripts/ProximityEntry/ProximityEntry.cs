@@ -44,7 +44,7 @@ namespace Klime.ProximityEntry
         private double holdStartTime = 0;
         private const double HOLD_DURATION = 0.5; // Half a second hold duration
         private const double COOLDOWN_DURATION = 1.0; // One second cooldown duration
-        private double cooldownEndTime = 0;
+        private double cooldownEndTime = 0; // Track the end time of the cooldown
 
         [ProtoContract]
         public class EntryRequest
@@ -114,6 +114,8 @@ namespace Klime.ProximityEntry
             {
                 if (MyAPIGateway.Utilities.IsDedicated) return;
 
+                double currentTime = MyAPIGateway.Session.ElapsedPlayTime.TotalSeconds;
+
                 if (timer % 10 == 0)
                 {
                     UpdateRaycastInfo();
@@ -129,11 +131,17 @@ namespace Klime.ProximityEntry
                             ShowTargetCockpit();
                         }
                     }
-                    else if (MyAPIGateway.Input.IsNewKeyReleased(MyKeys.F))
+                    if (MyAPIGateway.Input.IsNewKeyReleased(MyKeys.F))
                     {
-                        if (ValidInput() && MyAPIGateway.Session?.Player?.Character != null)
+                        if (currentTime >= cooldownEndTime && ValidInput() && MyAPIGateway.Session?.Player?.Character != null)
                         {
                             AddToCockpit();
+                            cooldownEndTime = currentTime + COOLDOWN_DURATION; // Start the cooldown timer
+                        }
+                        else
+                        {
+                            // Clear the highlight if in cooldown
+                            ClearHighlight();
                         }
                     }
                     else
