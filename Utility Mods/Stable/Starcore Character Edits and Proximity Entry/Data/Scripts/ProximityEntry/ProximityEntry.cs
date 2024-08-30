@@ -244,6 +244,7 @@ namespace Klime.ProximityEntry
                     if (cockpit.IsMainCockpit)
                     {
                         mainCockpit = cockpit;
+                        break; // Exit loop as we found the main cockpit
                     }
 
                     // asignable variable moment
@@ -260,8 +261,8 @@ namespace Klime.ProximityEntry
                 }
             }
 
-            // If the main cockpit is the closest to the center, return it
-            if (mainCockpit != null && mainCockpit == closestCockpit)
+            // If the main cockpit is found, return it immediately
+            if (mainCockpit != null)
             {
                 return mainCockpit;
             }
@@ -269,6 +270,7 @@ namespace Klime.ProximityEntry
             // Otherwise, return the closest cockpit to the center
             return closestCockpit;
         }
+
         private void UpdateHUDMessage()
         {
             if (HUD_Message != null)
