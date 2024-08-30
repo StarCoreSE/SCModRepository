@@ -42,7 +42,7 @@ namespace Klime.ProximityEntry
 
         private bool isHoldingF = false;
         private double holdStartTime = 0;
-        private const double HOLD_DURATION = 0.5; // Half a second hold duration
+        private const double HOLD_DURATION = 0.5; // Required hold duration to highlight and enter
         private const double COOLDOWN_DURATION = 1.0; // One second cooldown duration
         private double cooldownEndTime = 0; // Track the end time of the cooldown
 
@@ -125,24 +125,38 @@ namespace Klime.ProximityEntry
                 {
                     if (MyAPIGateway.Input.IsKeyPress(MyKeys.F))
                     {
-                        if (ValidInput() && MyAPIGateway.Session?.Player?.Character != null)
+                        if (!isHoldingF)
                         {
-                            MyAPIGateway.CubeBuilder.DeactivateBlockCreation();
-                            ShowTargetCockpit();
+                            isHoldingF = true;
+                            holdStartTime = currentTime;
+                        }
+
+                        if (isHoldingF && currentTime - holdStartTime >= HOLD_DURATION)
+                        {
+                            if (ValidInput() && MyAPIGateway.Session?.Player?.Character != null)
+                            {
+                                MyAPIGateway.CubeBuilder.DeactivateBlockCreation();
+                                ShowTargetCockpit();
+                            }
                         }
                     }
-                    if (MyAPIGateway.Input.IsNewKeyReleased(MyKeys.F))
+                    else if (MyAPIGateway.Input.IsNewKeyReleased(MyKeys.F))
                     {
-                        if (currentTime >= cooldownEndTime && ValidInput() && MyAPIGateway.Session?.Player?.Character != null)
+                        if (isHoldingF && currentTime - holdStartTime >= HOLD_DURATION)
                         {
-                            AddToCockpit();
-                            cooldownEndTime = currentTime + COOLDOWN_DURATION; // Start the cooldown timer
+                            if (currentTime >= cooldownEndTime && ValidInput() && MyAPIGateway.Session?.Player?.Character != null)
+                            {
+                                AddToCockpit();
+                                cooldownEndTime = currentTime + COOLDOWN_DURATION; // Start the cooldown timer
+                            }
+                            else
+                            {
+                                // Clear the highlight if in cooldown
+                                ClearHighlight();
+                            }
                         }
-                        else
-                        {
-                            // Clear the highlight if in cooldown
-                            ClearHighlight();
-                        }
+
+                        isHoldingF = false;
                     }
                     else
                     {
