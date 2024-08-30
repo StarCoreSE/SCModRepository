@@ -33,6 +33,8 @@ namespace Klime.ProximityEntry
         List<IMyCubeGrid> reuse_gridgroup = new List<IMyCubeGrid>();
         IMyCockpit reuse_cockpit;
 
+        IMyCockpit lastHighlightedCockpit; // To keep track of the last highlighted cockpit
+
         ushort net_id = 49864;
         int timer = 0;
         int current_hold = 0;
@@ -68,7 +70,6 @@ namespace Klime.ProximityEntry
             }
         }
 
-
         public override void Init(MyObjectBuilder_SessionComponent sessionComponent)
         {
             if (MyAPIGateway.Session.IsServer)
@@ -81,7 +82,7 @@ namespace Klime.ProximityEntry
         {
             EntryRequest request = MyAPIGateway.Utilities.SerializeFromBinary<EntryRequest>(obj);
             if (request != null)
-            {                              
+            {
                 reuse_cockpit = MyAPIGateway.Entities.GetEntityById(request.cockpit_id) as IMyCockpit;
                 reuse_character = MyAPIGateway.Entities.GetEntityById(request.character_id) as IMyCharacter;
                 if (reuse_cockpit != null && reuse_character != null && reuse_cockpit.Pilot == null)
@@ -143,6 +144,8 @@ namespace Klime.ProximityEntry
                 else
                 {
                     current_hold = 0;
+                    // Clear the highlight if the player looks away from the cockpit
+                    ClearHighlight();
                 }
 
                 UpdateHUDMessage();
@@ -196,7 +199,14 @@ namespace Klime.ProximityEntry
             if (targetCockpit != null)
             {
                 string cockpitName = string.IsNullOrEmpty(targetCockpit.CustomName) ? targetCockpit.DefinitionDisplayNameText : targetCockpit.CustomName;
-                MyAPIGateway.Utilities.ShowNotification($"Target cockpit: {cockpitName}", 1000 / 60, "White"); // Show for 1 second
+                MyAPIGateway.Utilities.ShowNotification($"Target cockpit: {cockpitName}", 1000 / 60, "White");
+
+                // Clear the highlight on the last highlighted cockpit
+                ClearHighlight();
+
+                // Highlight the current cockpit
+                MyVisualScriptLogicProvider.SetHighlightLocal(targetCockpit.Name);
+                lastHighlightedCockpit = targetCockpit; // Update the last highlighted cockpit
             }
         }
 
@@ -209,6 +219,9 @@ namespace Klime.ProximityEntry
                 {
                     SendEntryRequest(targetCockpit);
                     DisplayCockpitName(targetCockpit, reuse_cubegrid.DisplayName);
+
+                    // Clear the highlight after entering
+                    ClearHighlight();
                 }
             }
             catch (Exception e)
@@ -223,6 +236,7 @@ namespace Klime.ProximityEntry
 
             IMyCockpit mainCockpit = null;
             IMyCockpit closestCockpit = null;
+            double minDistanceToCenter = double.MaxValue;
 
             foreach (var fatblock in reuse_cubegrid.GetFatBlocks())
             {
@@ -233,16 +247,30 @@ namespace Klime.ProximityEntry
                     {
                         mainCockpit = cockpit;
                     }
-                    else if (IsClosestCockpit(cockpit, reuse_cubegrid))
+
+                    // asignable variable moment
+                    var cockpitpos = cockpit.GetPosition();
+                    // Calculate the distance from the cockpit to the center of the screen
+                    Vector3D cockpitScreenPosition = MyAPIGateway.Session.Camera.WorldToScreen(ref cockpitpos);
+                    double distanceToCenter = Vector2D.Distance(new Vector2D(cockpitScreenPosition.X, cockpitScreenPosition.Y), new Vector2D(0, 0));
+
+                    if (distanceToCenter < minDistanceToCenter)
                     {
+                        minDistanceToCenter = distanceToCenter;
                         closestCockpit = cockpit;
                     }
                 }
             }
 
-            return mainCockpit ?? closestCockpit;
-        }
+            // If the main cockpit is the closest to the center, return it
+            if (mainCockpit != null && mainCockpit == closestCockpit)
+            {
+                return mainCockpit;
+            }
 
+            // Otherwise, return the closest cockpit to the center
+            return closestCockpit;
+        }
         private void UpdateHUDMessage()
         {
             if (HUD_Message != null)
@@ -296,6 +324,15 @@ namespace Klime.ProximityEntry
             return false;
         }
 
+        private void ClearHighlight()
+        {
+            if (lastHighlightedCockpit != null)
+            {
+                MyVisualScriptLogicProvider.SetHighlightLocal(lastHighlightedCockpit.Name, thickness: -1);
+                lastHighlightedCockpit = null;
+            }
+        }
+
         protected override void UnloadData()
         {
             if (HUD_Base != null)
@@ -306,6 +343,9 @@ namespace Klime.ProximityEntry
             {
                 MyAPIGateway.Multiplayer.UnregisterMessageHandler(net_id, CockpitRequestHandler);
             }
+
+            // Ensure to clear any highlighted cockpits on unload
+            ClearHighlight();
         }
     }
 }
