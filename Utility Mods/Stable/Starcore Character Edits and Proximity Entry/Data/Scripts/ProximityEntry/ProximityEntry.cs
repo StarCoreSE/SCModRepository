@@ -33,6 +33,8 @@ namespace Klime.ProximityEntry
         List<IMyCubeGrid> reuse_gridgroup = new List<IMyCubeGrid>();
         IMyCockpit reuse_cockpit;
 
+        IMyCockpit lastHighlightedCockpit; // To keep track of the last highlighted cockpit
+
         ushort net_id = 49864;
         int timer = 0;
         int current_hold = 0;
@@ -40,9 +42,9 @@ namespace Klime.ProximityEntry
 
         private bool isHoldingF = false;
         private double holdStartTime = 0;
-        private const double HOLD_DURATION = 0.5; // Half a second hold duration
+        private const double HOLD_DURATION = 0.5; // Required hold duration to highlight and enter
         private const double COOLDOWN_DURATION = 1.0; // One second cooldown duration
-        private double cooldownEndTime = 0;
+        private double cooldownEndTime = 0; // Track the end time of the cooldown
 
         [ProtoContract]
         public class EntryRequest
@@ -68,7 +70,6 @@ namespace Klime.ProximityEntry
             }
         }
 
-
         public override void Init(MyObjectBuilder_SessionComponent sessionComponent)
         {
             if (MyAPIGateway.Session.IsServer)
@@ -81,7 +82,7 @@ namespace Klime.ProximityEntry
         {
             EntryRequest request = MyAPIGateway.Utilities.SerializeFromBinary<EntryRequest>(obj);
             if (request != null)
-            {                              
+            {
                 reuse_cockpit = MyAPIGateway.Entities.GetEntityById(request.cockpit_id) as IMyCockpit;
                 reuse_character = MyAPIGateway.Entities.GetEntityById(request.character_id) as IMyCharacter;
                 if (reuse_cockpit != null && reuse_character != null && reuse_cockpit.Pilot == null)
@@ -113,6 +114,8 @@ namespace Klime.ProximityEntry
             {
                 if (MyAPIGateway.Utilities.IsDedicated) return;
 
+                double currentTime = MyAPIGateway.Session.ElapsedPlayTime.TotalSeconds;
+
                 if (timer % 10 == 0)
                 {
                     UpdateRaycastInfo();
@@ -122,18 +125,38 @@ namespace Klime.ProximityEntry
                 {
                     if (MyAPIGateway.Input.IsKeyPress(MyKeys.F))
                     {
-                        if (ValidInput() && MyAPIGateway.Session?.Player?.Character != null)
+                        if (!isHoldingF)
                         {
-                            MyAPIGateway.CubeBuilder.DeactivateBlockCreation();
-                            ShowTargetCockpit();
+                            isHoldingF = true;
+                            holdStartTime = currentTime;
+                        }
+
+                        if (isHoldingF && currentTime - holdStartTime >= HOLD_DURATION)
+                        {
+                            if (ValidInput() && MyAPIGateway.Session?.Player?.Character != null)
+                            {
+                                MyAPIGateway.CubeBuilder.DeactivateBlockCreation();
+                                ShowTargetCockpit();
+                            }
                         }
                     }
                     else if (MyAPIGateway.Input.IsNewKeyReleased(MyKeys.F))
                     {
-                        if (ValidInput() && MyAPIGateway.Session?.Player?.Character != null)
+                        if (isHoldingF && currentTime - holdStartTime >= HOLD_DURATION)
                         {
-                            AddToCockpit();
+                            if (currentTime >= cooldownEndTime && ValidInput() && MyAPIGateway.Session?.Player?.Character != null)
+                            {
+                                AddToCockpit();
+                                cooldownEndTime = currentTime + COOLDOWN_DURATION; // Start the cooldown timer
+                            }
+                            else
+                            {
+                                // Clear the highlight if in cooldown
+                                ClearHighlight();
+                            }
                         }
+
+                        isHoldingF = false;
                     }
                     else
                     {
@@ -143,6 +166,8 @@ namespace Klime.ProximityEntry
                 else
                 {
                     current_hold = 0;
+                    // Clear the highlight if the player looks away from the cockpit
+                    ClearHighlight();
                 }
 
                 UpdateHUDMessage();
@@ -168,23 +193,13 @@ namespace Klime.ProximityEntry
                 if (raycast != null && raycast.HitEntity != null)
                 {
                     reuse_cubegrid = raycast.HitEntity as MyCubeGrid;
-                    if (reuse_cubegrid == null || reuse_cubegrid.Physics == null || reuse_cubegrid.IsStatic || reuse_cubegrid.GridSizeEnum == MyCubeSize.Small)
+                    if (reuse_cubegrid == null || reuse_cubegrid.Physics == null || reuse_cubegrid.IsStatic)
                     {
                         reuse_cubegrid = null;
                     }
-
-                    if (reuse_cubegrid != null)
+                    else
                     {
                         reuse_gridgroup = MyAPIGateway.GridGroups.GetGroup(reuse_cubegrid, GridLinkTypeEnum.Logical);
-                        foreach (var grid in reuse_gridgroup)
-                        {
-                            if (grid.GridSizeEnum == MyCubeSize.Small)
-                            {
-                                reuse_cubegrid = null;
-                                break;
-                            }
-                        }
-
                     }
                 }
             }
@@ -196,7 +211,14 @@ namespace Klime.ProximityEntry
             if (targetCockpit != null)
             {
                 string cockpitName = string.IsNullOrEmpty(targetCockpit.CustomName) ? targetCockpit.DefinitionDisplayNameText : targetCockpit.CustomName;
-                MyAPIGateway.Utilities.ShowNotification($"Target cockpit: {cockpitName}", 1000 / 60, "White"); // Show for 1 second
+                MyAPIGateway.Utilities.ShowNotification($"Target cockpit: {cockpitName}", 1000 / 60, "White");
+
+                // Clear the highlight on the last highlighted cockpit
+                ClearHighlight();
+
+                // Highlight the current cockpit
+                MyVisualScriptLogicProvider.SetHighlightLocal(targetCockpit.Name);
+                lastHighlightedCockpit = targetCockpit; // Update the last highlighted cockpit
             }
         }
 
@@ -209,6 +231,9 @@ namespace Klime.ProximityEntry
                 {
                     SendEntryRequest(targetCockpit);
                     DisplayCockpitName(targetCockpit, reuse_cubegrid.DisplayName);
+
+                    // Clear the highlight after entering
+                    ClearHighlight();
                 }
             }
             catch (Exception e)
@@ -223,6 +248,7 @@ namespace Klime.ProximityEntry
 
             IMyCockpit mainCockpit = null;
             IMyCockpit closestCockpit = null;
+            double minDistanceToCenter = double.MaxValue;
 
             foreach (var fatblock in reuse_cubegrid.GetFatBlocks())
             {
@@ -232,15 +258,31 @@ namespace Klime.ProximityEntry
                     if (cockpit.IsMainCockpit)
                     {
                         mainCockpit = cockpit;
+                        break; // Exit loop as we found the main cockpit
                     }
-                    else if (IsClosestCockpit(cockpit, reuse_cubegrid))
+
+                    // asignable variable moment
+                    var cockpitpos = cockpit.GetPosition();
+                    // Calculate the distance from the cockpit to the center of the screen
+                    Vector3D cockpitScreenPosition = MyAPIGateway.Session.Camera.WorldToScreen(ref cockpitpos);
+                    double distanceToCenter = Vector2D.Distance(new Vector2D(cockpitScreenPosition.X, cockpitScreenPosition.Y), new Vector2D(0, 0));
+
+                    if (distanceToCenter < minDistanceToCenter)
                     {
+                        minDistanceToCenter = distanceToCenter;
                         closestCockpit = cockpit;
                     }
                 }
             }
 
-            return mainCockpit ?? closestCockpit;
+            // If the main cockpit is found, return it immediately
+            if (mainCockpit != null)
+            {
+                return mainCockpit;
+            }
+
+            // Otherwise, return the closest cockpit to the center
+            return closestCockpit;
         }
 
         private void UpdateHUDMessage()
@@ -296,6 +338,15 @@ namespace Klime.ProximityEntry
             return false;
         }
 
+        private void ClearHighlight()
+        {
+            if (lastHighlightedCockpit != null)
+            {
+                MyVisualScriptLogicProvider.SetHighlightLocal(lastHighlightedCockpit.Name, thickness: -1);
+                lastHighlightedCockpit = null;
+            }
+        }
+
         protected override void UnloadData()
         {
             if (HUD_Base != null)
@@ -306,6 +357,9 @@ namespace Klime.ProximityEntry
             {
                 MyAPIGateway.Multiplayer.UnregisterMessageHandler(net_id, CockpitRequestHandler);
             }
+
+            // Ensure to clear any highlighted cockpits on unload
+            ClearHighlight();
         }
     }
 }
