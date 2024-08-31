@@ -140,7 +140,7 @@
     [14km range]
     [Energy damage]
     [no physical damage]
-	[2min reload]
+	[1min reload]
 
 	 </Description>
      <Icon>Textures\GUI\Icons\OPA-Logo.dds</Icon>
@@ -262,13 +262,13 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>S_Chem_Laser_Block</SubtypeId>
      </Id>
-     <DisplayName>[SOL] Saber Chemical Laser</DisplayName>
+     <DisplayName>[SOL] Saber Guided Laser</DisplayName>
      <Description>
-       [1km range]
+       [3km range]
        [Energy damage]
-       [Hitscan]
-       [Reload: 35sec]
-       Uses a limited capacity fuel cell to power a powerful laser for 2 seconds before running out and needing 35 seconds to reset for another firing.
+       [Homing]
+       [Reload: 10sec]
+       Uses a limited capacity fuel cell to power a powerful laser for 2 seconds before running out and needing 10 seconds to reset for another firing.
      </Description>
      <Icon>Textures\Icons\laser icon.png</Icon>
      <CubeSize>Large</CubeSize>
@@ -575,12 +575,12 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\SH_LG_BPB_Basedplate.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="13500" />
+				<Component Subtype="SteelPlate" Count="1500" />
 				<Component Subtype="Computer" Count="10" />
      			<Component Subtype="SmallTube" Count="20" />
       			<Component Subtype="Construction" Count="10" />
        		 	<Component Subtype="MetalGrid" Count="5000" />
-        		<Component Subtype="SteelPlate" Count="1500" />
+        		<Component Subtype="SteelPlate" Count="45000" />
 			</Components>
 			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<MountPoints>
@@ -616,9 +616,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\PM_LG_BLASTPLATE_BLASTPLATE.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="4050" />
-       		 	<Component Subtype="MetalGrid" Count="1500" />
-        		<Component Subtype="SteelPlate" Count="450" />
+				<Component Subtype="SteelPlate" Count="8100" />
+       		 	<Component Subtype="MetalGrid" Count="3000" />
+        		<Component Subtype="SteelPlate" Count="900" />
 			</Components>
 			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<MountPoints>
@@ -654,9 +654,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\PM_LG_BLASTPLATEINERT_BLASTPLATEINERT.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="4050" />
-       		 	<Component Subtype="MetalGrid" Count="1500" />
-        		<Component Subtype="SteelPlate" Count="450" />
+				<Component Subtype="SteelPlate" Count="1500" />
+       		 	<Component Subtype="MetalGrid" Count="5000" />
+        		<Component Subtype="SteelPlate" Count="13500" />
 			</Components>
 			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<MountPoints>
@@ -697,9 +697,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\SH_LG_BP33C_3x3_Blast_Plate_C.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="1350" />
-       		 	<Component Subtype="MetalGrid" Count="500" />
-        		<Component Subtype="SteelPlate" Count="150" />
+				<Component Subtype="SteelPlate" Count="1650" />
+       		 	<Component Subtype="MetalGrid" Count="600" />
+        		<Component Subtype="SteelPlate" Count="200" />
 			</Components>
 			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<MountPoints>
@@ -737,9 +737,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\SH_LG_BP33B_3x3_Blastplate.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="1350" />
-       		 	<Component Subtype="MetalGrid" Count="500" />
-        		<Component Subtype="SteelPlate" Count="150" />
+				<Component Subtype="SteelPlate" Count="1650" />
+       		 	<Component Subtype="MetalGrid" Count="600" />
+        		<Component Subtype="SteelPlate" Count="200" />
 			</Components>
 			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<MountPoints>
@@ -776,9 +776,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\SH_LG_BP33A_3x3_Blastplate.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="1350" />
-       		 	<Component Subtype="MetalGrid" Count="500" />
-        		<Component Subtype="SteelPlate" Count="150" />
+				<Component Subtype="SteelPlate" Count="1650" />
+       		 	<Component Subtype="MetalGrid" Count="600" />
+        		<Component Subtype="SteelPlate" Count="200" />
 			</Components>
 			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<BlockPairName>3x3_Blastplate_A</BlockPairName>
@@ -810,9 +810,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\SH_LG_BP24_2x4_Blastplate.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="1350" />
-       		 	<Component Subtype="MetalGrid" Count="500" />
-        		<Component Subtype="SteelPlate" Count="150" />
+				<Component Subtype="SteelPlate" Count="1650" />
+       		 	<Component Subtype="MetalGrid" Count="600" />
+        		<Component Subtype="SteelPlate" Count="200" />
 			</Components>
 			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<BlockPairName>2x4_Blastplate</BlockPairName>
