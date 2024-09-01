@@ -575,12 +575,12 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\SH_LG_BPB_Basedplate.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="1500" />
+				<Component Subtype="SteelPlate" Count="13500" />
 				<Component Subtype="Computer" Count="10" />
      			<Component Subtype="SmallTube" Count="20" />
       			<Component Subtype="Construction" Count="10" />
        		 	<Component Subtype="MetalGrid" Count="5000" />
-        		<Component Subtype="SteelPlate" Count="45000" />
+        		<Component Subtype="SteelPlate" Count="1500" />
 			</Components>
 			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<MountPoints>
@@ -616,9 +616,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\PM_LG_BLASTPLATE_BLASTPLATE.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="8100" />
-       		 	<Component Subtype="MetalGrid" Count="3000" />
-        		<Component Subtype="SteelPlate" Count="900" />
+				<Component Subtype="SteelPlate" Count="6100" />
+       		 	<Component Subtype="MetalGrid" Count="2500" />
+        		<Component Subtype="SteelPlate" Count="800" />
 			</Components>
 			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<MountPoints>
@@ -654,9 +654,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\PM_LG_BLASTPLATEINERT_BLASTPLATEINERT.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="1500" />
-       		 	<Component Subtype="MetalGrid" Count="5000" />
-        		<Component Subtype="SteelPlate" Count="13500" />
+				<Component Subtype="SteelPlate" Count="8100" />
+       		 	<Component Subtype="MetalGrid" Count="3000" />
+        		<Component Subtype="SteelPlate" Count="900" />
 			</Components>
 			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<MountPoints>
