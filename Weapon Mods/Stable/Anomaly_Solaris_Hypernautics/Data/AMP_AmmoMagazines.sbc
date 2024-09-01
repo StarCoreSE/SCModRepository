@@ -39,5 +39,96 @@
 			<Capacity>1</Capacity>
 			<AmmoDefinitionId Subtype="FlakShotgun_Mag" />
 		</AmmoMagazine>
+
+
+
+
+
+
+
+
+        <AmmoMagazine>
+            <Id>
+                <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>ManticoreBomber</SubtypeId>
+            </Id>
+            <DisplayName>Manticore Torpedo Bomber</DisplayName>
+            <Icon>Textures\GUI\Icons\Manticore.dds</Icon>
+            <Size>
+                <X>1</X>
+                <Y>2</Y>
+                <Z>0.5</Z>
+            </Size>
+            <Mass>300</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Drones\Manticore.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>1</Capacity>
+            <AmmoDefinitionId Subtype="TestAmmoB8T" />
+
+            <MinimumOfferAmount>6</MinimumOfferAmount>
+            <MaximumOfferAmount>12</MaximumOfferAmount>
+            <MinimumOrderAmount>3</MinimumOrderAmount>
+            <MaximumOrderAmount>24</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+        </AmmoMagazine>	
+        <AmmoMagazine>
+            <Id>
+                <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>MalleusDrone</SubtypeId>
+            </Id>
+            <DisplayName>Malleus Torpedo Bomber</DisplayName>
+            <Icon>Textures\GUI\Icons\Manticore.dds</Icon>
+            <Size>
+                <X>1</X>
+                <Y>2</Y>
+                <Z>0.5</Z>
+            </Size>
+            <Mass>350</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Drones\Manticore.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>1</Capacity>
+            <AmmoDefinitionId Subtype="TestAmmoB8T" />
+
+            <MinimumOfferAmount>6</MinimumOfferAmount>
+            <MaximumOfferAmount>12</MaximumOfferAmount>
+            <MinimumOrderAmount>3</MinimumOrderAmount>
+            <MaximumOrderAmount>24</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+        </AmmoMagazine>	
+        <AmmoMagazine>
+            <Id>
+                <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>TemplarDrone</SubtypeId>
+            </Id>
+            <DisplayName>Templar Medium Space Superiority</DisplayName>
+            <Icon>Textures\GUI\Icons\Manticore.dds</Icon>
+            <Size>
+                <X>1</X>
+                <Y>2</Y>
+                <Z>0.5</Z>
+            </Size>
+            <Mass>290</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Drones\Manticore.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>1</Capacity>
+            <AmmoDefinitionId Subtype="TestAmmoB8T" />
+
+            <MinimumOfferAmount>6</MinimumOfferAmount>
+            <MaximumOfferAmount>12</MaximumOfferAmount>
+            <MinimumOrderAmount>3</MinimumOrderAmount>
+            <MaximumOrderAmount>24</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+        </AmmoMagazine>		    
+
+
+
+
+
+
+
+
 	</AmmoMagazines>
 </Definitions>
