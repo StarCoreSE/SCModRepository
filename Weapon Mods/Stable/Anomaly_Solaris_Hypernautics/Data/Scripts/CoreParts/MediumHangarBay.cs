@@ -187,11 +187,11 @@ namespace Scripts
                 Manticore, //Offensive Combat Drone
                 ConcussionMissile, //Manticore's missile
                 Fegyver, //Light Artillery Drone
-                
+                //Fegyver Vanrail analog
                 Agyu, //Heavy Artillery Sentry Drone
-
+                //Agyu Forager analog
                 Orszem, //Sentinel Drone
-
+                //Orszem Painless analog
                 
                 
             },
