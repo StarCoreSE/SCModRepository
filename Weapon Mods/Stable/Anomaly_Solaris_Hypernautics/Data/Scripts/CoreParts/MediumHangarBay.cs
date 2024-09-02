@@ -184,11 +184,15 @@ namespace Scripts
                 },
             },
             Ammos = new[] {
-                Manticore,
-                // AryxATLASAmmoDrone,
-                Templar,
-                Malleus,
-                TestMissile,
+                Manticore, //Offensive Combat Drone
+                ConcussionMissile, //Manticore's missile
+                Fegyver, //Light Artillery Drone
+                
+                Agyu, //Heavy Artillery Sentry Drone
+
+                Orszem, //Sentinel Drone
+
+                
                 
             },
             //Animations = AryxSmallHangarAnimations,
