@@ -787,6 +787,390 @@
 		  </Waves>
 	  </Sound>
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	  <!--Railflight-->
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>RailRoundFlight</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>11000</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>35</DynamicMusicAmount>
+		  <Volume>2</Volume>
+		  <DistantSounds>
+			  <DistantSound Distance="4000" Sound = "RailRoundFlightD1" />
+			  <DistantSound Distance="6000" Sound = "RailRoundFlightD2" />
+		  </DistantSounds>
+		  <Loopable>true</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\ShellFlight\NewRailTravel.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>RailRoundFlightD1</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>11000</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>35</DynamicMusicAmount>
+		  <Volume>2</Volume>
+		  <Loopable>true</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\ShellFlight\NewRailTravelD1.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>RailRoundFlightD2</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>11000</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>35</DynamicMusicAmount>
+		  <Volume>2</Volume>
+		  <Loopable>true</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\ShellFlight\NewRailTravelD2.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>	 
+	  
+	  <!--Railhit-->
+	<Sound>
+		<Id>
+			<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			<SubtypeId>MyRailRoundHit</SubtypeId>
+		</Id>
+		<Category>WEP_EXPL</Category>
+		<MaxDistance>15000</MaxDistance>
+		<PreventSynchronization>0</PreventSynchronization>
+		<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		<DynamicMusicAmount>3</DynamicMusicAmount>
+		<Volume>10</Volume>
+		<DistantSounds>
+			<DistantSound DistanceCrossFade="100" Distance="2000" Sound = "MyRailRoundHitDistant1" />
+			<DistantSound DistanceCrossFade="100" Distance="5000" Sound = "MyRailRoundHitDistant2" />
+			<DistantSound DistanceCrossFade="100" Distance="8000" Sound = "MyRailRoundHitDistant3" />
+			<DistantSound DistanceCrossFade="100" Distance="11000" Sound = "MyRailRoundHitDistant4" />
+		</DistantSounds>
+		<Waves>
+			<Wave Type="D3">
+				<Start>Audio\Crunch\RailgunNewHit1.wav</Start>
+			</Wave>
+			<Wave Type="D3">
+				<Start>Audio\Crunch\RailgunNewHit2.wav</Start>
+			</Wave>
+		</Waves>
+	</Sound>
+	<Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>MyRailRoundHitDistant1</SubtypeId>
+		  </Id>
+		  <Category>WEP_EXPL</Category>
+		  <MaxDistance>15000</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>3</DynamicMusicAmount>
+		  <Volume>10</Volume>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Crunch\RailgunNewHit1Range1.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\Crunch\RailgunNewHit2Range1.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>MyRailRoundHitDistant2</SubtypeId>
+		  </Id>
+		  <Category>WEP_EXPL</Category>
+		  <MaxDistance>15000</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>3</DynamicMusicAmount>
+		  <Volume>10</Volume>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Crunch\RailgunNewHit1Range2.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\Crunch\RailgunNewHit2Range2.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>MyRailRoundHitDistant3</SubtypeId>
+		  </Id>
+		  <Category>WEP_EXPL</Category>
+		  <MaxDistance>15000</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>3</DynamicMusicAmount>
+		  <Volume>10</Volume>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Crunch\RailgunNewHit1Range3.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\Crunch\RailgunNewHit2Range3.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>MyRailRoundHitDistant4</SubtypeId>
+		  </Id>
+		  <Category>WEP_EXPL</Category>
+		  <MaxDistance>15000</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>3</DynamicMusicAmount>
+		  <Volume>10</Volume>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Crunch\RailgunNewHit1Range4.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\Crunch\RailgunNewHit2Range4.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>	  
+	  
+	  
+	  
+	<Sound>
+		<Id>
+			<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			<SubtypeId>RailRoundShot</SubtypeId>
+		</Id>
+		<Category>WEP_EXPL</Category>
+		<MaxDistance>10000</MaxDistance>
+		<PreventSynchronization>0</PreventSynchronization>
+		<DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		<DynamicMusicAmount>3</DynamicMusicAmount>
+		<Volume>1</Volume>
+		<Waves>
+			<Wave Type="D3">
+				<Start>Audio\Shot\RailgunDistantShot.wav</Start>
+			</Wave>
+		</Waves>
+	</Sound>
+	  
+	  
+	  <!--vanilla SBC sound overwrites-->
+	  <!--rails-->
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>MyRailgunLargeCharge</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>5000</MaxDistance>
+		  <Volume>2.5</Volume>
+		  <PitchVariation>30</PitchVariation>
+		  <PreventSynchronization>1</PreventSynchronization>
+		  <DistantSounds>
+			  <DistantSound DistanceCrossfade="200" Distance="1500" Sound="MyRailgunLargeChargeDistant" />
+		  </DistantSounds>		  
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Rail\RailGun_Charge_01.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>MyRailgunLargeChargeDistant</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>5000</MaxDistance>
+		  <Volume>2.5</Volume>
+		  <PitchVariation>30</PitchVariation>
+		  <PreventSynchronization>1</PreventSynchronization>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Shot\RailGun_Charge_Distant_01.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>	  
+	    
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>MyRailgunLargeShot</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>9000</MaxDistance>
+		  <PreventSynchronization>2</PreventSynchronization>
+		  <DistantSounds>
+			  <DistantSound DistanceCrossfade="800" Distance="2000" Sound="MyLargeRailgunShotDist" />
+		  </DistantSounds>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>15</DynamicMusicAmount>
+		  <Volume>2</Volume>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Rail\RailGun_Shot_01.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\Rail\RailGun_Shot_2.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\Rail\RailGun_Shot_3.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	  
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>MyLargeRailgunShotDist</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>9000</MaxDistance>
+		  <Volume>3</Volume>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Rail\RailGun_Shot_1_Distant.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\Rail\RailGun_Shot_2_Distant.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	  
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>RailgunSmallCharge</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>1500</MaxDistance>
+		  <Volume>1.5</Volume>
+		  <PitchVariation>30</PitchVariation>
+		  <PreventSynchronization>1</PreventSynchronization>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Rail\RailGun_S_Grid_Charge_01_Short.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	  
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>RailgunSmallCharge</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>1500</MaxDistance>
+		  <Volume>1.5</Volume>
+		  <RealisticFilter>realShipFilter</RealisticFilter>
+		  <PitchVariation>30</PitchVariation>
+		  <PreventSynchronization>1</PreventSynchronization>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Rail\RailGun_S_Grid_Charge_01_Short.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	  
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>RailgunSmallShot</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>5000</MaxDistance>
+		  <PreventSynchronization>2</PreventSynchronization>
+		  <DistantSounds>
+			  <DistantSound DistanceCrossfade="500" Distance="1500" Sound="SmallRailgunShotDist" />
+		  </DistantSounds>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>15</DynamicMusicAmount>
+		  <Volume>2</Volume>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Rail\RailGun_S_Grid_Shot_01.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\Rail\RailGun_S_Grid_Shot_2.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\Rail\RailGun_S_Grid_Shot_3.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	  <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>SmallRailgunShotDist</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>5000</MaxDistance>
+		  <Volume>1</Volume>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Rail\RailGun_Shot_1_Distant.wav</Start>
+			  </Wave>
+			  <Wave Type="D3">
+				  <Start>Audio\Rail\RailGun_Shot_2_Distant.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+	  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
   </Sounds>
 </Definitions>

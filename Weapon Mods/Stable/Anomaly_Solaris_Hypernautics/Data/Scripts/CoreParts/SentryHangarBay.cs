@@ -184,10 +184,10 @@ namespace Scripts
                 },
             },
             Ammos = new[] {
-                Manticore, //Offensive Combat Drone
-                ConcussionMissile, //Manticore's missile
+                Dragonyos, //Offensive Combat Drone
+                ConcussionMissile, //Dragonyos's missile
                 Fegyver, //Light Artillery Drone
-                //Fegyver Vanrail analog
+                LightArtillery,//Fegyver Vanrail analog
                 Agyu, //Heavy Artillery Sentry Drone
                 //Agyu Forager analog
                 Orszem, //Sentinel Drone
@@ -195,7 +195,7 @@ namespace Scripts
                 
                 
             },
-            //Animations = AryxSmallHangarAnimations,
+            Animations = LargeRailgunAnimation,
             //Upgrades = UpgradeModules,
         };
 

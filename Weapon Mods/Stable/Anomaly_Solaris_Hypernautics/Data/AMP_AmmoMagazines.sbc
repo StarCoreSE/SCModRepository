@@ -50,9 +50,9 @@
         <AmmoMagazine>
             <Id>
                 <TypeId>AmmoMagazine</TypeId>
-                <SubtypeId>ManticoreBomber</SubtypeId>
+                <SubtypeId>DragonyosBomber</SubtypeId>
             </Id>
-            <DisplayName>Manticore Torpedo Bomber</DisplayName>
+            <DisplayName>Dragonyos Torpedo Bomber</DisplayName>
             <Icon>Textures\GUI\Icons\Manticore.dds</Icon>
             <Size>
                 <X>1</X>
