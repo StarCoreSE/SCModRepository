@@ -13,7 +13,7 @@ namespace Scripts
     partial class Parts
     {
 
-        WeaponDefinition CombatUtility_Hangar => new WeaponDefinition
+        WeaponDefinition Sentry_Hangar => new WeaponDefinition
         {
             Assignments = new ModelAssignmentsDef
             {
@@ -121,7 +121,7 @@ namespace Scripts
                     BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
-                    ReloadTime = 3600, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    ReloadTime = 360, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 3, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 30, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     HeatPerShot = 0, // Heat generated per shot.
@@ -184,18 +184,18 @@ namespace Scripts
                 },
             },
             Ammos = new[] {
-                Dragonyos, //Offensive Combat Drone
-                ConcussionMissile, //Dragonyos's missile
-                Fegyver, //Light Artillery Drone
-                LightArtillery,//Fegyver Vanrail analog
-                Agyu, //Heavy Artillery Sentry Drone
-                //Agyu Forager analog
-                Orszem, //Sentinel Drone
-                //Orszem Painless analog
-                
+                Dragonyos,
+                // AryxATLASAmmoDrone,
+                Fegyver,
+                Agyu,
+                Orszem,
+                ConcussionMissile,
+                LightArtillery,
+                HeavyArtillery,
+                PointDefenseBullet,
                 
             },
-            Animations = LargeRailgunAnimation,
+            //Animations = AryxSmallHangarAnimations,
             //Upgrades = UpgradeModules,
         };
 

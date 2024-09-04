@@ -71,7 +71,9 @@
             <MinimumOrderAmount>3</MinimumOrderAmount>
             <MaximumOrderAmount>24</MaximumOrderAmount>
             <CanPlayerOrder>true</CanPlayerOrder>
-        </AmmoMagazine>	
+        </AmmoMagazine>
+
+
         <AmmoMagazine>
             <Id>
                 <TypeId>AmmoMagazine</TypeId>
@@ -84,7 +86,7 @@
                 <Y>2</Y>
                 <Z>0.5</Z>
             </Size>
-            <Mass>300</Mass>
+            <Mass>350</Mass>
             <Volume>500</Volume>
             <Model>Models\Drones\Manticore.mwm</Model>
             <PhysicalMaterial>Ammo</PhysicalMaterial>
@@ -96,7 +98,9 @@
             <MinimumOrderAmount>3</MinimumOrderAmount>
             <MaximumOrderAmount>24</MaximumOrderAmount>
             <CanPlayerOrder>true</CanPlayerOrder>
-        </AmmoMagazine>	
+        </AmmoMagazine>
+
+        
         <AmmoMagazine>
             <Id>
                 <TypeId>AmmoMagazine</TypeId>
@@ -109,7 +113,7 @@
                 <Y>2</Y>
                 <Z>0.5</Z>
             </Size>
-            <Mass>300</Mass>
+            <Mass>290</Mass>
             <Volume>500</Volume>
             <Model>Models\Drones\Manticore.mwm</Model>
             <PhysicalMaterial>Ammo</PhysicalMaterial>
@@ -122,6 +126,8 @@
             <MaximumOrderAmount>24</MaximumOrderAmount>
             <CanPlayerOrder>true</CanPlayerOrder>
         </AmmoMagazine>		    
+
+        
         <AmmoMagazine>
             <Id>
                 <TypeId>AmmoMagazine</TypeId>
@@ -134,7 +140,7 @@
                 <Y>2</Y>
                 <Z>0.5</Z>
             </Size>
-            <Mass>300</Mass>
+            <Mass>290</Mass>
             <Volume>500</Volume>
             <Model>Models\Drones\Manticore.mwm</Model>
             <PhysicalMaterial>Ammo</PhysicalMaterial>
@@ -147,6 +153,8 @@
             <MaximumOrderAmount>24</MaximumOrderAmount>
             <CanPlayerOrder>true</CanPlayerOrder>
         </AmmoMagazine>		    
+
+
 
 
 
