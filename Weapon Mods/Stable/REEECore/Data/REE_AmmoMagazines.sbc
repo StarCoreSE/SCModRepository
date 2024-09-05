@@ -26,6 +26,27 @@
     <AmmoMagazine>
       <Id>
         <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>ARROWSINGLEAMMO</SubtypeId>
+      </Id>
+      <DisplayName>NOOOKS</DisplayName>
+      <Icon>Textures\Icons\arrowiv.dds</Icon>
+      <ExtraInventoryTooltipLine>I'M HERE TO EAT ASS AND KICK BUBBLEGUM.</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>30</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Ammo\Starcore_Arrow_Missile_Large.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="K_HSR_FakeMissile" />
+    </AmmoMagazine>
+
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
         <SubtypeId>MRMAMMO</SubtypeId>
       </Id>
       <DisplayName>MEDIUMRANGEMISSILES</DisplayName>
