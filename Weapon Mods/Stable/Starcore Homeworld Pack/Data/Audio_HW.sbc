@@ -1,0 +1,241 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Sounds>
+    <!--IHarpo, a glorious man. Damnable Keen file structure.-->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>hwshipstart</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>100</PitchVariation>
+      <SoundLimit>50</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Homeworld\hwshipstart.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>hwshiploop</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Loopable>true</Loopable>
+      <PitchVariation>100</PitchVariation>
+      <SoundLimit>50</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Loop>Audio\Homeworld\hwshiploop.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>hwshiptalk</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>100</PitchVariation>
+      <SoundLimit>2</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Homeworld\hwshiptalk1.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Homeworld\hwshiptalk2.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Homeworld\hwshiptalk3.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Homeworld\hwshiptalk4.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Homeworld\hwshiptalk5.wav</Start>
+        </Wave>        
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>hwshiplaunchtalk</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>100</PitchVariation>
+      <SoundLimit>50</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Homeworld\hwshiplaunchtalk1.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Homeworld\hwshiplaunchtalk2.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Homeworld\hwshiplaunchtalk3.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Homeworld\hwshiplaunchtalk4.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Homeworld\hwshiplaunchtalk5.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>hwshipfire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Loopable>true</Loopable>
+      <PitchVariation>100</PitchVariation>
+      <SoundLimit>500</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Homeworld\hwshipfire.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>hwshipexplode</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Loopable>true</Loopable>
+      <PitchVariation>100</PitchVariation>
+      <SoundLimit>500</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Homeworld\hwshipexplode.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>hwshiphit</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>300</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>100</PitchVariation>
+      <SoundLimit>500</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Homeworld\hwshiphit.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>hwhangarreload</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>100</PitchVariation>
+      <SoundLimit>5</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Homeworld\hwhangarreload.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>hwfathangarreload</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>5</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>100</PitchVariation>
+      <SoundLimit>5</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Homeworld\hwfathangarreload.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>hwbomberfire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>4</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>100</PitchVariation>
+      <SoundLimit>500</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Homeworld\hwbomberfire.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+  </Sounds>
+</Definitions>
