@@ -575,7 +575,7 @@
         <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>WCDrone_Hangar</SubtypeId>
       </Id>
-      <DisplayName>Strikecraft Hangar Bay</DisplayName>
+      <DisplayName>[SOL] Sentry Hangar Bay</DisplayName>
       <Icon>Textures\GUI\Icons\Hangar.dds</Icon>
       <Description>These drones can be given orders via the hangar's ActionFriend/ActionEnemy options. </Description>
       <CubeSize>Large</CubeSize>
