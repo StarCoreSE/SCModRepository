@@ -7,13 +7,9 @@
 				<SubtypeId>CHP_MediumKineticTurret</SubtypeId>
 			</Id>
 			<DisplayName>Medium Kinetic Turret</DisplayName>
-			<Description>Standard mainline turret used by numerous ships
-				Range: 3500m
-				Shots Per Salvo: 2
-				Damage: 3000 Piercing, 5500 AoE
-				Velocity: 900ms
-				Ammo Magazine: Medium Kinetic Gun Shell
-				</Description>
+			<Description>
+        [DESCRIPTION PENDING]
+      </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_MediumKineticTurret.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>

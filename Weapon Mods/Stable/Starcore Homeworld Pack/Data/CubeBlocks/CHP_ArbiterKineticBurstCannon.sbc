@@ -7,13 +7,8 @@
 				<SubtypeId>CHP_ArbiterKineticBurstCannon</SubtypeId>
 			</Id>
 			<DisplayName>Arbiter Kinetic Burst Cannon Turret</DisplayName>
-			<Description>Heavy kinetic gun turret used mainly in the largest ships
-			Range: 6000m
-			Shots Per Salvo: 2
-			Damage: 7600 Piercing
-			        23500 AoE
-			Velocity: 750ms
-			Ammo Magazine: Arbiter Cannon Shell
+			<Description>
+        [DESCRIPTION PENDING]
 			</Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_ArbiterKineticBurstCannon.dds</Icon>
 			<CubeSize>Large</CubeSize>

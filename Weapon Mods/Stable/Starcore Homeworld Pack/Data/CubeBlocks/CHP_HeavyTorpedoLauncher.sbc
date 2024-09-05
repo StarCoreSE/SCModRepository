@@ -7,11 +7,9 @@
 				<SubtypeId>CHP_HeavyTorpedoLauncher</SubtypeId>
 			</Id>
 			<DisplayName>Heavy Torpedo Launcher</DisplayName>
-			<Description>Launches heavy anti-capital ship torpedoes
-			Range: 8,000m
-			Damage: 2550 Piercing, 225,500 AoE
-			Velocity: 250ms, 25m/s^2 accel
-			</Description>
+			<Description>
+        [DESCRIPTION PENDING]
+      </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_HeavyTorpedoLauncher.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>

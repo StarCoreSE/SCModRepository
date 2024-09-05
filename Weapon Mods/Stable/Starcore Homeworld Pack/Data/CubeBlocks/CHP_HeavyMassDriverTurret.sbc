@@ -7,14 +7,9 @@
 				<SubtypeId>CHP_HeavyMassDriverTurret</SubtypeId>
 			</Id>
 			<DisplayName>Heavy Mass Driver Turret</DisplayName>
-			<Description>Heavy Mass Driver turret used mainly in the largest ships
-				Range: 6000m
-				Shots Per Salvo: 1
-				Damage: 16720 Piercing
-						51700 AoE
-				Velocity: 750ms
-				Ammo Magazine: Heavy Mass Driver Cannon Shell
-			</Description>
+			<Description>
+        [DESCRIPTION PENDING]
+      </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_HeavyMassDriverTurret.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>

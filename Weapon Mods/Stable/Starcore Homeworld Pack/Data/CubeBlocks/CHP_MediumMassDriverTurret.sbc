@@ -7,12 +7,9 @@
 				<SubtypeId>CHP_MediumMassDriverTurret</SubtypeId>
 			</Id>
 			<DisplayName>Medium Mass Driver Dual Turret</DisplayName>
-			<Description>Standard mainline turret used by numerous ships
-				Range: 3500m
-				Shots Per Salvo: 2
-				Damage: 3000 Piercing, 5500 AoE
-				Velocity: 900ms
-				Ammo Magazine: Medium Mass Driver Shell</Description>
+			<Description>
+        [DESCRIPTION PENDING]
+      </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_MediumMassDriverTurret.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>

@@ -417,6 +417,14 @@
         <string>CHP_FlakTurret</string>
         <string>CHP_MediumIonTurret</string>
         <string>CHP_IonTurret</string>
+        <string>CHP_DroneHangarHiigara</string>
+        <string>CHP_DroneBomberHangarHiigara</string>
+        <string>CHP_DroneHangarHiigara_Rail</string>
+        <string>CHP_DroneBomberHangarHiigara_Rail</string>
+        <string>CHP_DroneHangarHiigara_Tall</string>
+        <string>CHP_DroneHangarHiigara_TallFlat</string>
+        <string>CHP_DroneBomberHangarHiigara_Tall</string>
+        <string>CHP_DroneBomberHangarHiigara_TallFlat</string>
       </ItemIds>
     </Category>
 

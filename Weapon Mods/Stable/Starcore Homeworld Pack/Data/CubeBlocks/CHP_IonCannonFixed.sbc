@@ -7,12 +7,9 @@
 				<SubtypeId>CHP_IonCannonFixed</SubtypeId>
 			</Id>
 			<DisplayName>Fixed Ion Cannon</DisplayName>
-			<Description>A fixed ion cannon used primarily by frigate class vessels.
-			Range: 3,500m
-			Damage: Approximately 48,000 DPS
-			Burst time: 2 Seconds
-			Power Required: 168.35 MW
-			</Description>
+			<Description>
+        [DESCRIPTION PENDING]
+      </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_IonCannonFixed.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>

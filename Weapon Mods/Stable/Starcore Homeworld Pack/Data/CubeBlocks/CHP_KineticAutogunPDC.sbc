@@ -7,11 +7,9 @@
 				<SubtypeId>CHP_KineticAutogunPDC</SubtypeId>
 			</Id>
 			<DisplayName>Kinetic Gun Point Defense</DisplayName>
-			<Description>Point Defense Casemate used for protection against small craft and missiles
-			Range: 1200
-			Damage: 550
-			Muzzle Velocity: 650
-			</Description>
+			<Description>
+        [DESCRIPTION PENDING]
+      </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_KineticAutogunPDC.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>

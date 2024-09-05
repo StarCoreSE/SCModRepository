@@ -7,12 +7,9 @@
 				<SubtypeId>CHP_IonTurret</SubtypeId>
 			</Id>
 			<DisplayName>Heavy Ion Turret</DisplayName>
-			<Description>Mounted Ion Cannon Turret that houses two ion cannons
-			Range: 4,000m
-			Damage: Approximately 41,000 DPS
-			Burst Time: 4 Seconds
-			Power Required: 300.5 MW
-			</Description>
+			<Description>
+        [DESCRIPTION PENDING]
+      </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_IonTurret.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
@@ -85,11 +82,9 @@
 				<SubtypeId>CHP_MediumIonTurret</SubtypeId>
 			</Id>
 			<DisplayName>Medium Ion Turret</DisplayName>
-			<Description>Mounted Ion Cannon Turret that houses two ion cannons
-			Range: 4,000m
-			Damage: Approximately 30000 DPS
-			Burst Time: 3 Seconds
-			Power Required: 192.45 MW</Description>
+			<Description>
+        [DESCRIPTION PENDING]
+      </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_MediumIonTurret.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>

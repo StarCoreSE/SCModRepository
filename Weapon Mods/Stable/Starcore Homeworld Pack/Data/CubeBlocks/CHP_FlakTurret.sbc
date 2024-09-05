@@ -7,14 +7,7 @@
 				<SubtypeId>CHP_FlakTurret</SubtypeId>
 			</Id>
 			<DisplayName>Flak Turret</DisplayName>
-			<Description>Defense turret effective against incoming missiles, and strike craft
-				Range: 1250m
-				Shots Per Salvo: 2
-				Shells Per Shot: 5
-				Damage: 1 Piercing
-				------| 750 AoE (Pooled)
-				------| 5 Projectile Damage (vs drones/missiles)
-				Velocity: 850ms</Description>
+			<Description>[DESCRIPTION PENDING]</Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_FlakTurret.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>

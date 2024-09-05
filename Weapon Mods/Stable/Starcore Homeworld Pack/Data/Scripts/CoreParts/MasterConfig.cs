@@ -23,14 +23,6 @@ namespace Scripts
                             CHP_FlakTurret,
 
                             //drones
-                            CHP_DroneHangarInterceptor_Taiidan,
-                            CHP_DroneHangarBomber_Taiidan,
-                            CHP_DroneHangarInterceptorQL_Taiidan,
-                            CHP_DroneHangarBomberQL_Taiidan,
-                            CHP_DroneHangarInterceptor_Taiidan_Rail,
-                            CHP_DroneHangarBomber_Taiidan_Rail,
-
-
                             CHP_DroneHangarInterceptor_Hiigara,
                             CHP_DroneHangarBomber_Hiigara,
                             CHP_DroneHangarInterceptorQL_Hiigara,
