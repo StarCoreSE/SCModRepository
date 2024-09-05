@@ -799,7 +799,7 @@ namespace ShipPoints
                     break;
                 case "[BTI] Starcore Arrow-IV Launcher":
                 case "[BTI] Starcore Arrow-IV Single Launcher":
-                    blockDisplayName = "Starcore Arrow-IV Launcher";
+                    blockDisplayName = "[BTI] Starcore Arrow-IV Launcher";
                     costMultiplier = 0.15f;
                     break;
                 case "[HAS] Tartarus VIII":
