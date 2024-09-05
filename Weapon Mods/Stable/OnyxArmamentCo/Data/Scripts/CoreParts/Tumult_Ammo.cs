@@ -126,7 +126,7 @@ namespace Scripts
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
                     Light = -1f, // Multiplier for damage against light armor.
                     Heavy = 2.5f, // Multiplier for damage against heavy armor.
-                    NonArmor = 2.5f, // Multiplier for damage against every else.
+                    NonArmor = -1f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
@@ -302,7 +302,7 @@ namespace Scripts
             },
             AmmoGraphics = new GraphicDef
             {
-                ModelName = "", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
+                ModelName = "\\Models\\PPC_Proj_On_The_Tumult", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
                 Particles = new AmmoParticleDef
@@ -902,7 +902,7 @@ namespace Scripts
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
                     Light = -1f, // Multiplier for damage against light armor.
                     Heavy = 2.5f, // Multiplier for damage against heavy armor.
-                    NonArmor = 2.5f, // Multiplier for damage against every else.
+                    NonArmor = -1f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
@@ -1078,7 +1078,7 @@ namespace Scripts
             },
             AmmoGraphics = new GraphicDef
             {
-                ModelName = "", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
+                ModelName = "\\Models\\PPC_Proj_On_The_Tumult", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
                 Particles = new AmmoParticleDef
@@ -1155,7 +1155,7 @@ namespace Scripts
                             "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
-                        DecayTime = 15, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
+                        DecayTime = 60, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
                         Color = Color(red: 9f, green: 3f, blue: 6, alpha: 1),
                         Back = false,
                         CustomWidth = 0.15f,

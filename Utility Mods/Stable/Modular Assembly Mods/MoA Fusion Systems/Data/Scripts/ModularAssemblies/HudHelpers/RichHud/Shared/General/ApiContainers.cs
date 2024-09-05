@@ -16,13 +16,13 @@ namespace RichHudFramework
         protected readonly Func<int, TValue> GetNewWrapperFunc;
         protected readonly List<TValue> wrapperList;
 
-        public ReadOnlyApiCollection(Func<int, TValue> GetNewWrapper, Func<int> GetCount)
+        public ReadOnlyApiCollection(Func<int, TValue> GetNewWrapper, Func<int> getCount)
         {
             GetNewWrapperFunc = GetNewWrapper;
-            GetCountFunc = GetCount;
+            GetCountFunc = getCount;
 
             wrapperList = new List<TValue>();
-            enumerator = new CollectionDataEnumerator<TValue>(x => this[x], GetCount);
+            enumerator = new CollectionDataEnumerator<TValue>(x => this[x], getCount);
         }
 
         public ReadOnlyApiCollection(MyTuple<Func<int, TValue>, Func<int>> tuple)
@@ -83,11 +83,11 @@ namespace RichHudFramework
 
         protected readonly Func<int, TValue> Getter;
 
-        public ReadOnlyCollectionData(Func<int, TValue> Getter, Func<int> GetCount)
+        public ReadOnlyCollectionData(Func<int, TValue> Getter, Func<int> getCount)
         {
             this.Getter = Getter;
-            GetCountFunc = GetCount;
-            enumerator = new CollectionDataEnumerator<TValue>(x => this[x], GetCount);
+            GetCountFunc = getCount;
+            enumerator = new CollectionDataEnumerator<TValue>(x => this[x], getCount);
         }
 
         public ReadOnlyCollectionData(MyTuple<Func<int, TValue>, Func<int>> tuple)

@@ -58,24 +58,24 @@ namespace Scripts {
             Targeting = new TargetingDef
             {
                 Threats = new[] {
-                    Projectiles, Grids, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
+                    Projectiles, Grids, Neutrals, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
                 },
                 SubSystems = new[] {
                     Thrust, Utility, Offense, Power, Production, Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
                 },
-                ClosestFirst = true, // Tries to pick closest targets first (blocks on grids, projectiles, etc...).
+                ClosestFirst = false, // Tries to pick closest targets first (blocks on grids, projectiles, etc...).
                 IgnoreDumbProjectiles = true, // Don't fire at non-smart projectiles.
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
                 MaxTargetDistance = 2500, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
                 MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
-                TopTargets = 4, // Maximum number of targets to randomize between; 0 = unlimited.
-                CycleTargets = 2, // Number of targets to "cycle" per acquire attempt.
-                TopBlocks = 4, // Maximum number of blocks to randomize between; 0 = unlimited.
-                CycleBlocks = 3, // Number of blocks to "cycle" per acquire attempt.
+                TopTargets = 0, // Maximum number of targets to randomize between; 0 = unlimited.
+                CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
+                TopBlocks = 0, // Maximum number of blocks to randomize between; 0 = unlimited.
+                CycleBlocks = 0, // Number of blocks to "cycle" per acquire attempt.
                 StopTrackingSpeed = 0, // do not track target threats traveling faster than this speed
-                MaxTrackingTime = 120, // After this time has been reached the weapon will stop tracking existing target and scan for a new one, only applies to turreted weapons
+                MaxTrackingTime = 0, // After this time has been reached the weapon will stop tracking existing target and scan for a new one, only applies to turreted weapons
             },
             HardPoint = new HardPointDef
             {
@@ -226,7 +226,7 @@ namespace Scripts {
                         MuzzlePartId = "T2_EL", // The subpart where your muzzle empties are located.
                         AzimuthPartId = "T2_AZ1",
                         ElevationPartId = "T2_EL",
-                        DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 400% resistance.
+                        DurabilityMod = 0.2f, // GeneralDamageMultiplier, 0.25f = 400% resistance.
                         IconName = "filter_energy.dds"
                     },
 
@@ -267,24 +267,24 @@ namespace Scripts {
             Targeting = new TargetingDef
             {
                 Threats = new[] {
-                    Projectiles, Grids, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
+                    Projectiles, Grids, Neutrals, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
                 },
                 SubSystems = new[] {
                     Offense, Power, Utility, Production, Thrust, Jumping, Steering, Any // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
                 },
                 ClosestFirst = false, // Tries to pick closest targets first (blocks on grids, projectiles, etc...).
-                IgnoreDumbProjectiles = false, // Don't fire at non-smart projectiles.
+                IgnoreDumbProjectiles = true, // Don't fire at non-smart projectiles.
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
                 MaxTargetDistance = 0, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
                 MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
-                TopTargets = 14, // Maximum number of targets to randomize between; 0 = unlimited.
-                CycleTargets = 2, // Number of targets to "cycle" per acquire attempt.
-                TopBlocks = 18, // Maximum number of blocks to randomize between; 0 = unlimited.
-                CycleBlocks = 8, // Number of blocks to "cycle" per acquire attempt.
+                TopTargets = 0, // Maximum number of targets to randomize between; 0 = unlimited.
+                CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
+                TopBlocks = 0, // Maximum number of blocks to randomize between; 0 = unlimited.
+                CycleBlocks = 0, // Number of blocks to "cycle" per acquire attempt.
                 StopTrackingSpeed = 0, // do not track target threats traveling faster than this speed
-                MaxTrackingTime = 35, // After this time has been reached the weapon will stop tracking existing target and scan for a new one, only applies to turreted weapons
+                MaxTrackingTime = 0, // After this time has been reached the weapon will stop tracking existing target and scan for a new one, only applies to turreted weapons
             },
             HardPoint = new HardPointDef
             {
@@ -533,8 +533,8 @@ namespace Scripts {
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0.08f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
-                    ElevateRate = 0.05f, // Max traversal speed of elevation subpart in radians per tick.
+                    RotateRate = 0.4f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
+                    ElevateRate = 0.4f, // Max traversal speed of elevation subpart in radians per tick.
                     MinAzimuth = -180,
                     MaxAzimuth = 180,
                     MinElevation = 45,
@@ -572,8 +572,8 @@ namespace Scripts {
                     BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
-                    ReloadTime = 90, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    MagsToLoad = 1, // Number of physical magazines to consume on reload.
+                    ReloadTime = 30, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    MagsToLoad = 2, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 1, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     HeatPerShot = 1, // Heat generated per shot.
                     MaxHeat = 400, // Max heat before weapon enters cooldown (70% of max heat).

@@ -30,10 +30,10 @@ namespace RichHudFramework
         protected readonly Func<int, T> Getter;
         protected int index;
 
-        public CollectionDataEnumerator(Func<int, T> Getter, Func<int> CountFunc)
+        public CollectionDataEnumerator(Func<int, T> Getter, Func<int> countFunc)
         {
             this.Getter = Getter;
-            this.CountFunc = CountFunc;
+            this.CountFunc = countFunc;
             index = -1;
         }
 

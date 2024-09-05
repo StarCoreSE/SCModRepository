@@ -339,23 +339,23 @@ namespace Scripts
                 ModelName = "\\Models\\Ammo\\SA_LauncherMissile_Large", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
-                Decals = new DecalDef
-                {
-                    MaxAge = 3600,
-                    Map = new[]
-                    {
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Metal",
-                            DecalMaterial = "GunBullet",
-                        },
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Glass",
-                            DecalMaterial = "GunBullet",
-                        },
-                    },
-                },
+                //Decals = new DecalDef
+                //{
+                //    MaxAge = 3600,
+                //    Map = new[]
+                //    {
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Metal",
+                //            DecalMaterial = "GunBullet",
+                //        },
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Glass",
+                //            DecalMaterial = "GunBullet",
+                //        },
+                //    },
+                //},
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
@@ -781,23 +781,23 @@ namespace Scripts
                 ModelName = "\\Models\\Ammo\\SA_LauncherMissile_Large", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
-                Decals = new DecalDef
-                {
-                    MaxAge = 3600,
-                    Map = new[]
-                    {
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Metal",
-                            DecalMaterial = "GunBullet",
-                        },
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Glass",
-                            DecalMaterial = "GunBullet",
-                        },
-                    },
-                },
+                //Decals = new DecalDef
+                //{
+                //    MaxAge = 3600,
+                //    Map = new[]
+                //    {
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Metal",
+                //            DecalMaterial = "GunBullet",
+                //        },
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Glass",
+                //            DecalMaterial = "GunBullet",
+                //        },
+                //    },
+                //},
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
@@ -1223,23 +1223,23 @@ namespace Scripts
                 ModelName = "\\Models\\Ammo\\SA_LauncherMissile_Large", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
-                Decals = new DecalDef
-                {
-                    MaxAge = 3600,
-                    Map = new[]
-                    {
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Metal",
-                            DecalMaterial = "GunBullet",
-                        },
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Glass",
-                            DecalMaterial = "GunBullet",
-                        },
-                    },
-                },
+                //Decals = new DecalDef
+                //{
+                //    MaxAge = 3600,
+                //    Map = new[]
+                //    {
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Metal",
+                //            DecalMaterial = "GunBullet",
+                //        },
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Glass",
+                //            DecalMaterial = "GunBullet",
+                //        },
+                //    },
+                //},
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
@@ -1665,23 +1665,23 @@ namespace Scripts
                 ModelName = "\\Models\\Ammo\\SA_LauncherMissile_Large", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
-                Decals = new DecalDef
-                {
-                    MaxAge = 3600,
-                    Map = new[]
-                    {
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Metal",
-                            DecalMaterial = "GunBullet",
-                        },
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Glass",
-                            DecalMaterial = "GunBullet",
-                        },
-                    },
-                },
+                //Decals = new DecalDef
+                //{
+                //    MaxAge = 3600,
+                //    Map = new[]
+                //    {
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Metal",
+                //            DecalMaterial = "GunBullet",
+                //        },
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Glass",
+                //            DecalMaterial = "GunBullet",
+                //        },
+                //    },
+                //},
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
@@ -2107,23 +2107,23 @@ namespace Scripts
                 ModelName = "\\Models\\Ammo\\SA_LauncherMissile_Large", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
-                Decals = new DecalDef
-                {
-                    MaxAge = 3600,
-                    Map = new[]
-                    {
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Metal",
-                            DecalMaterial = "GunBullet",
-                        },
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Glass",
-                            DecalMaterial = "GunBullet",
-                        },
-                    },
-                },
+                //Decals = new DecalDef
+                //{
+                //    MaxAge = 3600,
+                //    Map = new[]
+                //    {
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Metal",
+                //            DecalMaterial = "GunBullet",
+                //        },
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Glass",
+                //            DecalMaterial = "GunBullet",
+                //        },
+                //    },
+                //},
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
@@ -2549,23 +2549,23 @@ namespace Scripts
                 ModelName = "\\Models\\Ammo\\SA_LauncherMissile_Large", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
-                Decals = new DecalDef
-                {
-                    MaxAge = 3600,
-                    Map = new[]
-                    {
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Metal",
-                            DecalMaterial = "GunBullet",
-                        },
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Glass",
-                            DecalMaterial = "GunBullet",
-                        },
-                    },
-                },
+                //Decals = new DecalDef
+                //{
+                //    MaxAge = 3600,
+                //    Map = new[]
+                //    {
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Metal",
+                //            DecalMaterial = "GunBullet",
+                //        },
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Glass",
+                //            DecalMaterial = "GunBullet",
+                //        },
+                //    },
+                //},
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
@@ -2991,23 +2991,23 @@ namespace Scripts
                 ModelName = "\\Models\\Ammo\\SA_LauncherMissile_Large", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
-                Decals = new DecalDef
-                {
-                    MaxAge = 3600,
-                    Map = new[]
-                    {
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Metal",
-                            DecalMaterial = "GunBullet",
-                        },
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Glass",
-                            DecalMaterial = "GunBullet",
-                        },
-                    },
-                },
+                //Decals = new DecalDef
+                //{
+                //    MaxAge = 3600,
+                //    Map = new[]
+                //    {
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Metal",
+                //            DecalMaterial = "GunBullet",
+                //        },
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Glass",
+                //            DecalMaterial = "GunBullet",
+                //        },
+                //    },
+                //},
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
@@ -3433,23 +3433,23 @@ namespace Scripts
                 ModelName = "\\Models\\Ammo\\SA_LauncherMissile_Large", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
-                Decals = new DecalDef
-                {
-                    MaxAge = 3600,
-                    Map = new[]
-                    {
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Metal",
-                            DecalMaterial = "GunBullet",
-                        },
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Glass",
-                            DecalMaterial = "GunBullet",
-                        },
-                    },
-                },
+                //Decals = new DecalDef
+                //{
+                //    MaxAge = 3600,
+                //    Map = new[]
+                //    {
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Metal",
+                //            DecalMaterial = "GunBullet",
+                //        },
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Glass",
+                //            DecalMaterial = "GunBullet",
+                //        },
+                //    },
+                //},
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
@@ -3875,23 +3875,23 @@ namespace Scripts
                 ModelName = "\\Models\\Ammo\\SA_LauncherMissile_Large", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
-                Decals = new DecalDef
-                {
-                    MaxAge = 3600,
-                    Map = new[]
-                   {
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Metal",
-                            DecalMaterial = "GunBullet",
-                        },
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Glass",
-                            DecalMaterial = "GunBullet",
-                        },
-                    },
-                },
+                //Decals = new DecalDef
+                //{
+                //    MaxAge = 3600,
+                //    Map = new[]
+                //   {
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Metal",
+                //            DecalMaterial = "GunBullet",
+                //        },
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Glass",
+                //            DecalMaterial = "GunBullet",
+                //        },
+                //    },
+                //},
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
@@ -4317,23 +4317,23 @@ namespace Scripts
                 ModelName = "\\Models\\Ammo\\SA_LauncherMissile_Large", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
-                Decals = new DecalDef
-                {
-                    MaxAge = 3600,
-                    Map = new[]
-                   {
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Metal",
-                            DecalMaterial = "GunBullet",
-                        },
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Glass",
-                            DecalMaterial = "GunBullet",
-                        },
-                    },
-                },
+                //Decals = new DecalDef
+                //{
+                //    MaxAge = 3600,
+                //    Map = new[]
+                //   {
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Metal",
+                //            DecalMaterial = "GunBullet",
+                //        },
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Glass",
+                //            DecalMaterial = "GunBullet",
+                //        },
+                //    },
+                //},
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef

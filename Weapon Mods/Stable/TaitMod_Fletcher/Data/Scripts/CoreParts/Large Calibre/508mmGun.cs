@@ -22,18 +22,19 @@ namespace Scripts {
                     new MountPointDef {
                         SubtypeId = "20InchTwin",  // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "",   // For weapons with a spinning barrel such as Gatling Guns. Subpart_Boomsticks must be written as Boomsticks.
-                        MuzzlePartId = "elevation",  // The subpart where your muzzle empties are located. This is often the elevation subpart. Subpart_Boomsticks must be written as Boomsticks.
-                        AzimuthPartId = "azimuth",  // Your Rotating Subpart, the bit that moves sideways.
-                        ElevationPartId = "elevation",  // Your Elevating Subpart, that bit that moves up.
+                        MuzzlePartId = "MissileTurretBarrels",  // The subpart where your muzzle empties are located. This is often the elevation subpart. Subpart_Boomsticks must be written as Boomsticks.
+                        AzimuthPartId = "MissileTurretBase1",  // Your Rotating Subpart, the bit that moves sideways.
+                        ElevationPartId = "MissileTurretBarrels",  // Your Elevating Subpart, that bit that moves up.
                         DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
                     
                  },
                 Muzzles = new[] {
-                    "barrel_1",
-                    "barrel_2",			
-                    
+                    "muzzle_missile_1",
+                    "muzzle_missile_2",
+                    "muzzle_missile_3",
+
                 },
                 Ejector = "", // Optional; empty from which to eject "shells" if specified.
                 Scope = "camera", // Where line of sight checks are performed from. Must be clear of block collision.
@@ -60,7 +61,7 @@ namespace Scripts {
             HardPoint = new HardPointDef
             {
                 PartName = "Thunderer 20 Inch", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
-                DeviateShotAngle = 0.2f, // Projectile inaccuracy in degrees.
+                DeviateShotAngle = 0.15f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 1f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Advanced, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
                 DelayCeaseFire = 0, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released - while a target is available.
@@ -86,7 +87,7 @@ namespace Scripts {
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0.001f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
+                    RotateRate = 0.002f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
                     ElevateRate = 0.0015f, // Max traversal speed of elevation subpart in radians per tick.
                     MinAzimuth = -180,
                     MaxAzimuth = 180,
@@ -115,18 +116,18 @@ namespace Scripts {
                     EnergyPriority = 0, // Deprecated.
                     MuzzleCheck = false, // Whether the weapon should check LOS from each individual muzzle in addition to the scope.
                     Debug = false, // Force enables debug mode.
-                    RestrictionRadius = 0, // Prevents other blocks of this type from being placed within this distance of the centre of the block.
+                    RestrictionRadius = 13f, // Prevents other blocks of this type from being placed within this distance of the centre of the block.
                     CheckInflatedBox = false, // If true, the above distance check is performed from the edge of the block instead of the centre.
                     CheckForAnyWeapon = false, // If true, the check will fail if ANY weapon is present, not just weapons of the same subtype.
                 },
                 Loading = new LoadingDef
                 {
-                    RateOfFire = 400, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
+                    RateOfFire = 600, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
                     BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
-                    ReloadTime = 1080, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    MagsToLoad = 2, // Number of physical magazines to consume on reload.
+                    ReloadTime = 1, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    MagsToLoad = 3, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     HeatPerShot = 1, // Heat generated per shot.
                     MaxHeat = 70000, // Max heat before weapon enters cooldown (70% of max heat).
@@ -134,8 +135,8 @@ namespace Scripts {
                     HeatSinkRate = 9000000, // Amount of heat lost per second.
                     DegradeRof = false, // Progressively lower rate of fire when over 80% heat threshold (80% of max heat).
                     ShotsInBurst = 1, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
-                    DelayAfterBurst = 60, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    FireFull = true, // Whether the weapon should fire the full magazine (or the full burst instead if ShotsInBurst > 0), even if the target is lost or the player stops firing prematurely.
+                    DelayAfterBurst = 480, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    FireFull = false, // Whether the weapon should fire the full magazine (or the full burst instead if ShotsInBurst > 0), even if the target is lost or the player stops firing prematurely.
                     GiveUpAfter = false, // Whether the weapon should drop its current target and reacquire a new target after finishing its magazine or burst.
                     BarrelSpinRate = 0, // Visual only, 0 disables and uses RateOfFire.
                     DeterministicSpin = false, // Spin barrel position will always be relative to initial / starting positions (spin will not be as smooth).

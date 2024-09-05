@@ -77,8 +77,7 @@ namespace SC.SUGMA.GameState
 
                 if (DateTime.UtcNow > EndTime && !IsMatchEnded && MyAPIGateway.Session.IsServer)
                 {
-                    //PointCheck.EndMatch();
-                    // TODO
+                    IsMatchEnded = true;
                     MyLog.Default.WriteLineAndConsole("[MatchTimer] Auto-Stopped Match. " + CurrentMatchTime);
                     Log.Info("[MatchTimer] Auto-Stopped Match. " + CurrentMatchTime);
                 }
@@ -93,6 +92,16 @@ namespace SC.SUGMA.GameState
             {
                 Log.Exception(ex, typeof(MatchTimer));
             }
+        }
+
+        public string RemainingTimeString()
+        {
+            var remainingMinutes = (int)Math.Floor(MatchDurationMinutes - CurrentMatchTime.TotalMinutes);
+            var remainingSeconds =
+                (int)((MatchDurationMinutes - CurrentMatchTime.TotalMinutes - remainingMinutes) * 60);
+
+            return
+                $"{(remainingMinutes < 10 ? "0" + remainingMinutes : remainingMinutes.ToString())}:{(remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds.ToString())}";
         }
 
         #endregion
@@ -111,8 +120,9 @@ namespace SC.SUGMA.GameState
                 MatchTimerPacket.SendMatchUpdate(this);
             IsMatchEnded = false;
             MyLog.Default.WriteLineAndConsole("[MatchTimer] Started Match. " + CurrentMatchTime);
-            Log.Info($"[MatchTimer] Started Match.\n- CurrentMatchTime: {CurrentMatchTime}\n- StartTime: {StartTime}\n- EndTime: {EndTime}\n- MatchDuration: {MatchDurationMinutes}");
-    }
+            Log.Info(
+                $"[MatchTimer] Started Match.\n- CurrentMatchTime: {CurrentMatchTime}\n- StartTime: {StartTime}\n- EndTime: {EndTime}\n- MatchDuration: {MatchDurationMinutes}");
+        }
 
         public void Stop()
         {

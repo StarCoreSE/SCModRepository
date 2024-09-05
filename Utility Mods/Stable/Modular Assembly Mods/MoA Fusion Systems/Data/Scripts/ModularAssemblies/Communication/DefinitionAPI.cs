@@ -7,7 +7,7 @@ using VRage.Game.ModAPI;
 using VRage.Utils;
 using VRageMath;
 
-namespace FusionSystems.
+namespace StarCore.FusionSystems.
     Communication
 {
     /// <summary>
@@ -195,9 +195,9 @@ namespace FusionSystems.
         /// <returns></returns>
         public T GetAssemblyProperty<T>(int assemblyId, string propertyName)
         {
-            object value = _getAssemblyProperty(assemblyId, propertyName);
+            var value = _getAssemblyProperty(assemblyId, propertyName);
 
-            return value == null ? default(T) : (T) value;
+            return value == null ? default(T) : (T)value;
         }
 
         /// <summary>

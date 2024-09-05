@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Sandbox.ModAPI;
 using VRage.Game.ModAPI;
 
@@ -9,6 +9,47 @@ namespace SC.SUGMA.GameState
     {
         public static PlayerTracker I;
         public readonly Dictionary<long, IMyPlayer> AllPlayers = new Dictionary<long, IMyPlayer>();
+
+        private static readonly string[] ExcludedFactionTags = {
+            "NEU",
+            "SPRT",
+            "OUT",
+            "ADM",
+        };
+
+        #region Public Methods
+
+        public IMyFaction GetGridFaction(IMyCubeGrid grid)
+        {
+            if (grid.BigOwners.Count == 0)
+                return null;
+
+            return MyAPIGateway.Session.Factions.TryGetPlayerFaction(grid.BigOwners[0]);
+        }
+
+        public IMyPlayer GetGridOwner(IMyCubeGrid grid)
+        {
+            if (grid.BigOwners.Count == 0)
+                return null;
+
+            return AllPlayers.GetValueOrDefault(grid.BigOwners[0], null);
+        }
+
+        public IEnumerable<IMyFaction> GetPlayerFactions()
+        {
+            return MyAPIGateway.Session.Factions.Factions.Values.Where(f => !ExcludedFactionTags.Contains(f.Tag));
+        }
+
+        #endregion
+
+        private void UpdatePlayers()
+        {
+            var allPlayersList = new List<IMyPlayer>();
+            MyAPIGateway.Players.GetPlayers(allPlayersList);
+
+            AllPlayers.Clear();
+            foreach (var player in allPlayersList) AllPlayers.Add(player.IdentityId, player);
+        }
 
         #region Base Methods
 
@@ -25,7 +66,7 @@ namespace SC.SUGMA.GameState
             I = null;
         }
 
-        private int _ticks = 0;
+        private int _ticks;
 
         public override void UpdateTick()
         {
@@ -36,29 +77,5 @@ namespace SC.SUGMA.GameState
         }
 
         #endregion
-
-        #region Public Methods
-
-        public IMyFaction GetGridFaction(IMyCubeGrid grid)
-        {
-            if (grid.BigOwners.Count == 0)
-                return null;
-
-            return MyAPIGateway.Session.Factions.TryGetPlayerFaction(grid.BigOwners[0]);
-        }
-
-        #endregion
-
-        private void UpdatePlayers()
-        {
-            List<IMyPlayer> allPlayersList = new List<IMyPlayer>();
-            MyAPIGateway.Players.GetPlayers(allPlayersList);
-
-            AllPlayers.Clear();
-            foreach (var player in allPlayersList)
-            {
-                AllPlayers.Add(player.IdentityId, player);
-            }
-        }
     }
 }

@@ -150,7 +150,7 @@ namespace Scripts
                 },
                 Deform = new DeformDef
                 {
-                    DeformType = AllDamagedBlocks,
+                    DeformType = NoDeform,
                     DeformDelay = 30,
                 },
                 Custom = new CustomScalesDef
@@ -321,7 +321,7 @@ namespace Scripts
                 ModelName = "",
                 VisualProbability = 1f,
                 ShieldHitDraw = false,
-                //                Decals = new DecalDef
+//                Decals = new DecalDef
 //                {
 //                   MaxAge = 3600,
 //                   Map = new[]

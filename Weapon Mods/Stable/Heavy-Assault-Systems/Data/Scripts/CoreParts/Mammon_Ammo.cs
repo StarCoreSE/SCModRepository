@@ -14,6 +14,7 @@ using static Scripts.Structure.WeaponDefinition.AmmoDef.TrajectoryDef;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.TrajectoryDef.GuidanceType;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.DamageScaleDef;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.DamageScaleDef.ShieldDef.ShieldType;
+using static Scripts.Structure.WeaponDefinition.AmmoDef.DamageScaleDef.DeformDef.DeformTypes;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.AreaOfDamageDef;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.AreaOfDamageDef.Falloff;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.AreaOfDamageDef.AoeShape;
@@ -127,6 +128,11 @@ namespace Scripts
                     Modifier = 3f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
+                },
+                Deform = new DeformDef
+                {
+                    DeformType = NoDeform,
+                    DeformDelay = 30,
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {
@@ -374,7 +380,7 @@ namespace Scripts
                         },
                         TextureMode = Normal,
                         DecayTime = 12, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 3, green: 50, blue: 50, alpha: 1),
+                        Color = Color(red: 3, green: 10, blue: 50, alpha: 1),
                         Back = false,
                         CustomWidth = 0.25f,
                         UseWidthVariance = false,

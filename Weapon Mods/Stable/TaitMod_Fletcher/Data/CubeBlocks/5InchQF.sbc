@@ -1,14 +1,14 @@
 <?xml version="1.0" ?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<!-- <CubeBlocks>
-		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+	<CubeBlocks>
+		<!--<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>127mmMk56</SubtypeId>
 			</Id>
-			<DisplayName>[FAS] 5"/38 Mk32 QRF</DisplayName>
+			<DisplayName>[FAS] Austin </DisplayName>
 			<Description>
-				127mm Twin Rapid Fire gun
+				127mm/5" Twin Rapid Fire gun
 				4km AI range
 				Fires HE, SAP shell
 				Temp BP: 350
@@ -30,10 +30,12 @@
 				<Component Subtype="SteelPlate" Count="1600" />
 			</Components>
 			<CriticalComponent Subtype="Motor" Index="0" />
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
 			<MountPoints>
 				<MountPoint Side="Bottom" StartX="1" StartY="1" EndX="2" EndY="2" />
 			</MountPoints>
 			<BlockPairName>127mmMk56</BlockPairName>
-		</Definition>
-	</CubeBlocks> -->
+		</Definition> -->
+	</CubeBlocks>
 </Definitions>

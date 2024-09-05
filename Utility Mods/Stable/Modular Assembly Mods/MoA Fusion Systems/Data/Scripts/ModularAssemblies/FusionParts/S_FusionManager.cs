@@ -1,21 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using FusionSystems.Communication;
+using StarCore.FusionSystems.Communication;
 using VRage.Game.ModAPI;
 
-namespace FusionSystems.FusionParts
+namespace StarCore.FusionSystems.FusionParts
 {
-    internal class S_FusionManager
+    internal class SFusionManager
     {
-        public static S_FusionManager I = new S_FusionManager();
+        public static SFusionManager I = new SFusionManager();
+
+        private bool _didRegisterAssemblyClose;
 
         private int _ticks;
         public ModularDefinition FusionDefinition;
+        public Dictionary<int, SFusionSystem> FusionSystems = new Dictionary<int, SFusionSystem>();
         public ModularDefinition HeatDefinition;
-        public Dictionary<int, S_FusionSystem> FusionSystems = new Dictionary<int, S_FusionSystem>();
         private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
-
-        private bool _didRegisterAssemblyClose = false;
 
         public void Load()
         {
@@ -53,22 +53,22 @@ namespace FusionSystems.FusionParts
                     FusionSystems.Remove(fusionSystem.PhysicalAssemblyId);
         }
 
-        public void OnPartAdd(int PhysicalAssemblyId, IMyCubeBlock NewBlockEntity, bool IsBaseBlock)
+        public void OnPartAdd(int physicalAssemblyId, IMyCubeBlock newBlockEntity, bool isBaseBlock)
         {
-            if (!FusionSystems.ContainsKey(PhysicalAssemblyId))
-                FusionSystems.Add(PhysicalAssemblyId, new S_FusionSystem(PhysicalAssemblyId));
+            if (!FusionSystems.ContainsKey(physicalAssemblyId))
+                FusionSystems.Add(physicalAssemblyId, new SFusionSystem(physicalAssemblyId));
 
-            FusionSystems[PhysicalAssemblyId].AddPart(NewBlockEntity);
+            FusionSystems[physicalAssemblyId].AddPart(newBlockEntity);
         }
 
-        public void OnPartRemove(int PhysicalAssemblyId, IMyCubeBlock BlockEntity, bool IsBaseBlock)
+        public void OnPartRemove(int physicalAssemblyId, IMyCubeBlock blockEntity, bool isBaseBlock)
         {
-            if (!FusionSystems.ContainsKey(PhysicalAssemblyId))
+            if (!FusionSystems.ContainsKey(physicalAssemblyId))
                 return;
 
             // Remove if the connection is broken.
-            if (!IsBaseBlock)
-                FusionSystems[PhysicalAssemblyId].RemovePart(BlockEntity);
+            if (!isBaseBlock)
+                FusionSystems[physicalAssemblyId].RemovePart(blockEntity);
 
             // TODO: OnAssemblyRemoved
         }

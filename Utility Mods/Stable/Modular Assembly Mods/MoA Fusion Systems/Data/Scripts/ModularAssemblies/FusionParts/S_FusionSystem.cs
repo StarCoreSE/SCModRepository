@@ -1,32 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FusionSystems.Communication;
-using FusionSystems.FusionParts.FusionReactor;
-using FusionSystems.FusionParts.FusionThruster;
-using FusionSystems.HeatParts;
 using Sandbox.ModAPI;
-using VRage.Game.Entity;
+using StarCore.FusionSystems.Communication;
+using StarCore.FusionSystems.FusionParts.FusionReactor;
+using StarCore.FusionSystems.FusionParts.FusionThruster;
+using StarCore.FusionSystems.HeatParts;
 using VRage.Game.ModAPI;
 
-namespace FusionSystems.
+namespace StarCore.FusionSystems.
     FusionParts
 {
-    internal class S_FusionSystem
+    internal class SFusionSystem
     {
         public const float MegawattsPerFusionPower = 32;
         public const float NewtonsPerFusionPower = 12800000;
-
-        public List<S_FusionArm> Arms = new List<S_FusionArm>();
-        public int BlockCount;
         public readonly IMyCubeGrid Grid;
+
+        public readonly List<SFusionArm> Arms = new List<SFusionArm>();
+        public int BlockCount;
 
         /// <summary>
         ///     Maximum power storage
         /// </summary>
         public float MaxPowerStored;
 
-        public int PhysicalAssemblyId;
+        public readonly int PhysicalAssemblyId;
 
         /// <summary>
         ///     Total power consumed
@@ -38,28 +37,22 @@ namespace FusionSystems.
         /// </summary>
         public float PowerGeneration;
 
+        public readonly List<FusionReactorLogic> Reactors = new List<FusionReactorLogic>();
+        public readonly List<FusionThrusterLogic> Thrusters = new List<FusionThrusterLogic>();
+
+        public SFusionSystem(int physicalAssemblyId)
+        {
+            PhysicalAssemblyId = physicalAssemblyId;
+            Grid = ModularApi.GetAssemblyGrid(physicalAssemblyId);
+        }
+
         /// <summary>
         ///     Current power stored
         /// </summary>
         public float PowerStored
         {
-            get
-            {
-                return ModularApi.GetAssemblyProperty<float>(PhysicalAssemblyId, "PowerStored");
-            }
-            set
-            {
-                ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "PowerStored", value);
-            }
-        }
-
-        public List<FusionReactorLogic> Reactors = new List<FusionReactorLogic>();
-        public List<FusionThrusterLogic> Thrusters = new List<FusionThrusterLogic>();
-
-        public S_FusionSystem(int physicalAssemblyId)
-        {
-            PhysicalAssemblyId = physicalAssemblyId;
-            Grid = ModularApi.GetAssemblyGrid(physicalAssemblyId);
+            get { return ModularApi.GetAssemblyProperty<float>(PhysicalAssemblyId, "PowerStored"); }
+            set { ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "PowerStored", value); }
         }
 
         private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
@@ -76,7 +69,7 @@ namespace FusionSystems.
             {
                 case "Caster_Accelerator_0":
                 case "Caster_Accelerator_90":
-                    var newArm = new S_FusionArm(newPart, "Caster_Feeder");
+                    var newArm = new SFusionArm(newPart, "Caster_Feeder");
                     if (newArm.IsValid)
                     {
                         Arms.Add(newArm);
@@ -101,7 +94,7 @@ namespace FusionSystems.
                             continue;
 
                         var accelsShareArm = false;
-                        var newArm2 = new S_FusionArm(accelerator, "Caster_Feeder");
+                        var newArm2 = new SFusionArm(accelerator, "Caster_Feeder");
                         if (newArm2.IsValid)
                         {
                             Arms.Add(newArm2);
@@ -126,7 +119,7 @@ namespace FusionSystems.
                 {
                     Thrusters.Add(logic);
                     logic.MemberSystem = this;
-                    logic.UpdatePower(PowerGeneration, NewtonsPerFusionPower);
+                    logic.UpdatePower(PowerGeneration, NewtonsPerFusionPower, Thrusters.Count);
                 }
             }
 
@@ -137,7 +130,7 @@ namespace FusionSystems.
                 {
                     Reactors.Add(logic);
                     logic.MemberSystem = this;
-                    logic.UpdatePower(PowerGeneration, MegawattsPerFusionPower);
+                    logic.UpdatePower(PowerGeneration, MegawattsPerFusionPower, Reactors.Count);
                 }
             }
 
@@ -173,14 +166,15 @@ namespace FusionSystems.
                 }
 
             if (BlockCount <= 0)
-                S_FusionManager.I.FusionSystems.Remove(PhysicalAssemblyId);
+                SFusionManager.I.FusionSystems.Remove(PhysicalAssemblyId);
 
             UpdatePower();
         }
 
         private void UpdatePower(bool updateReactors = false)
         {
-            float generationModifier = 1/(HeatManager.I.GetGridHeatLevel(Grid) + 0.5f);
+            //var generationModifier = 1 / (HeatManager.I.GetGridHeatLevel(Grid) + 0.5f);
+            var generationModifier = 1;
             var powerGeneration = float.Epsilon;
             var powerCapacity = float.Epsilon;
             var totalPowerUsage = 0f;
@@ -197,7 +191,7 @@ namespace FusionSystems.
                 totalPowerUsage += reactor?.PowerConsumption ?? 0;
 
                 if (updateReactors)
-                    reactor?.UpdatePower(powerGeneration, MegawattsPerFusionPower * generationModifier);
+                    reactor?.UpdatePower(powerGeneration, MegawattsPerFusionPower * generationModifier, Reactors.Count);
             }
 
             foreach (var thruster in Thrusters)
@@ -205,7 +199,7 @@ namespace FusionSystems.
                 totalPowerUsage += thruster?.PowerConsumption ?? 0;
 
                 if (updateReactors)
-                    thruster?.UpdatePower(powerGeneration, NewtonsPerFusionPower * generationModifier);
+                    thruster?.UpdatePower(powerGeneration, NewtonsPerFusionPower * generationModifier, Thrusters.Count);
             }
 
             // Subtract power usage afterwards so that all reactors have the same stats.
@@ -217,20 +211,13 @@ namespace FusionSystems.
             // Update PowerStored
             PowerStored += PowerGeneration;
             if (PowerStored > MaxPowerStored) PowerStored = MaxPowerStored;
-            //PowerGeneration = 0;
-            ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "HeatGeneration", PowerConsumption * MegawattsPerFusionPower);
+            ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "HeatGeneration",
+                PowerConsumption * MegawattsPerFusionPower);
         }
 
         public void UpdateTick()
         {
             UpdatePower(true);
-        }
-
-        private void RemoveBlockInLoops(MyEntity entity)
-        {
-            foreach (var loop in Arms.ToList())
-                if (loop.Parts.Contains((IMyCubeBlock)entity))
-                    Arms.Remove(loop);
         }
     }
 }

@@ -44,16 +44,14 @@
       <ResourceSinkGroup>Defense</ResourceSinkGroup>
       <InventoryMaxVolume>0.144</InventoryMaxVolume>
 	              <BuildTimeSeconds>45</BuildTimeSeconds>
-	   <MirroringY>Z</MirroringY>
+	  <MirroringY>Z</MirroringY>
       <MirroringZ>Y</MirroringZ>
       <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
       <DamagedSound>ParticleWeapExpl</DamagedSound>
       <DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
       <DestroySound>WepSmallWarheadExpl</DestroySound>
-      <PCU>200</PCU>      
-      <TargetingGroups>
-		<string>Weapons</string>
-      </TargetingGroups>      
+	  <AiEnabled>false</AiEnabled>
+      <PCU>200</PCU>          
 		</Definition>
 	</CubeBlocks>
 </Definitions>

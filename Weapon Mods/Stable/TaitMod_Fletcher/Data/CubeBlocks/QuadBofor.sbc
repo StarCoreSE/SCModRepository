@@ -37,6 +37,7 @@
 				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" Default="true"/>
 			</MountPoints>
 			<BlockPairName>QuadBofor</BlockPairName>
+			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
 			<BuildProgressModels>
 				<Model BuildPercentUpperBound="0.50" File="Models\Cubes\large\QuadBofor_BS1.mwm"/>

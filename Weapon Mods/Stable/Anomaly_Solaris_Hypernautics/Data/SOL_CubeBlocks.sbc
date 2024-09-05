@@ -41,7 +41,7 @@
 		</Definition>
 
 
-		<!--
+		
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
@@ -79,7 +79,7 @@
 			</MountPoints>
 			<BlockPairName>Flechette_DoubleBarrel</BlockPairName>
 		</Definition>
-		-->
+
 
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
@@ -129,7 +129,6 @@
 
 
 		<!-- ArcStrike Torpedo -->
-		<!--
 <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
      <Id>
        <TypeId>ConveyorSorter</TypeId>
@@ -141,7 +140,7 @@
     [14km range]
     [Energy damage]
     [no physical damage]
-	[2min reload]
+	[1min reload]
 
 	 </Description>
      <Icon>Textures\GUI\Icons\OPA-Logo.dds</Icon>
@@ -186,7 +185,6 @@
       <MaxFov>1.04719755</MaxFov>
   <DestroySound>Betty_Weapon_Destroyed</DestroySound>
     </Definition>	
-	-->
 
 <!-- OPA Light -->
 <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
@@ -257,20 +255,20 @@
 
 
 
-		<!--
+
    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 
      <Id>
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>S_Chem_Laser_Block</SubtypeId>
      </Id>
-     <DisplayName>[SOL] Saber Chemical Laser</DisplayName>
+     <DisplayName>[SOL] Saber Guided Laser</DisplayName>
      <Description>
-       [1km range]
+       [3km range]
        [Energy damage]
-       [Hitscan]
-       [Reload: 35sec]
-       Uses a limited capacity fuel cell to power a powerful laser for 2 seconds before running out and needing 35 seconds to reset for another firing.
+       [Homing]
+       [Reload: 10sec]
+       Uses a limited capacity fuel cell to power a powerful laser for 2 seconds before running out and needing 10 seconds to reset for another firing.
      </Description>
      <Icon>Textures\Icons\laser icon.png</Icon>
      <CubeSize>Large</CubeSize>
@@ -320,7 +318,9 @@
      <MaxFov>1.04719755</MaxFov>
      <DestroySound>Betty_Weapon_Destroyed</DestroySound>
    </Definition>   
-	-->
+	
+
+
 
 		<!--
    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
@@ -399,7 +399,7 @@
 
 
 
-		<!--
+		
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
@@ -481,7 +481,7 @@
 			<MaxFov>2</MaxFov>
 			<EmissiveColorPreset>Default</EmissiveColorPreset>
 		</Definition>
-		-->
+	
 
 
 
@@ -493,7 +493,7 @@
 
 
 
-		<!--
+	
    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
 		
 		  <Id>
@@ -554,7 +554,76 @@
       <MaxFov>1.04719755</MaxFov>
   <DestroySound>Betty_Weapon_Destroyed</DestroySound>
     </Definition>
-		-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>WCDrone_Hangar</SubtypeId>
+      </Id>
+      <DisplayName>Strikecraft Hangar Bay</DisplayName>
+      <Icon>Textures\GUI\Icons\Hangar.dds</Icon>
+      <Description>These drones can be given orders via the hangar's ActionFriend/ActionEnemy options. </Description>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="5" y="2" z="2"/>
+			<ModelOffset x="0" y="0" z="0"/>
+      <Model>Models\Hangar.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="250" />
+        <Component Subtype="Construction" Count="500" />	
+        <Component Subtype="MetalGrid" Count="400" />
+        <Component Subtype="Motor" Count="200" />
+        <Component Subtype="Computer" Count="400" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+		<MountPoints>
+			<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="5.00" EndY="2.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="5.00" EndY="2.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="5.00" EndY="2.00"/>
+		</MountPoints>
+    <BuildProgressModels>
+				<Model BuildPercentUpperBound="0.50" File="Models\Cubes\large\Hangar_BS1.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\Hangar_BS2.mwm"/>
+			</BuildProgressModels>
+      <BlockPairName>FighterHangar</BlockPairName>
+      <MirroringX>Z</MirroringX>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>30</BuildTimeSeconds>
+      <NavigationDefinition>Default</NavigationDefinition>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>500</PCU>
+      <TargetingGroups>
+		<string>Weapons</string>
+      </TargetingGroups>      
+    </Definition>
+
+
+
 
 
 
@@ -566,11 +635,11 @@
 
 <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
 			<Id>
-				<TypeId>ConveyorSorter</TypeId>
+				<TypeId>ConveyorSorter</TypeId>     <!-- im sure there is a good reason why its not something simple like a <TypeId>Passage</TypeId> but the reason eludes me-->
 				<SubtypeId>GIGA_BLASTPLATE</SubtypeId>
 			</Id>
 			<DisplayName>7x7 Basedplate</DisplayName>
-			<Description>A massive 7x7 armored plate to protect ships from directional damage. Lined with an integrated nanite repair network to slowly but constantly fix the blastplate.</Description>
+			<Description>A massive 7x7 armored plate with the mass and integrity of 100 buster blocks to protect ships from directional damage. Lined with an integrated nanite repair network to slowly but constantly fix the blastplate.</Description>
 			<Icon>Textures\Icons\SH_LG_BPB_Basedplate.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
@@ -578,13 +647,11 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\SH_LG_BPB_Basedplate.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="45000" />
+				<Component Subtype="SteelPlate" Count="13500" />
 				<Component Subtype="Computer" Count="10" />
-				<Component Subtype="SteelPlate" Count="45000" />
      			<Component Subtype="SmallTube" Count="20" />
-				<Component Subtype="SteelPlate" Count="45000" />
       			<Component Subtype="Construction" Count="10" />
-       		 	<Component Subtype="MetalGrid" Count="50000" />
+       		 	<Component Subtype="MetalGrid" Count="5000" />
         		<Component Subtype="SteelPlate" Count="1500" />
 			</Components>
 			<CriticalComponent Subtype="MetalGrid" Index="0"/>
@@ -599,11 +666,10 @@
 			<BlockPairName>GIGA_BLASTPLATE</BlockPairName>
 			
       		<EdgeType>Heavy</EdgeType>
-      		<BuildTimeSeconds>900</BuildTimeSeconds>
+      		<BuildTimeSeconds>1080</BuildTimeSeconds>
       		<DisassembleRatio>3</DisassembleRatio>
       		<GeneralDamageMultiplier>0.5</GeneralDamageMultiplier>
-      		<PCU>1</PCU>
-      		<PCUConsole>2</PCUConsole>
+      		<PCU>400</PCU>
       		<IsAirTight>true</IsAirTight>
 		</Definition>
 
@@ -614,7 +680,7 @@
 				<SubtypeId>ACTIVE_BLASTPLATE</SubtypeId>
 			</Id>
 			<DisplayName>Active Blastplate</DisplayName>
-			<Description>A 5x5 armor plate to protect ships from directional damage. Has a pair of boreholes for weapon's fire to pass through uneffected. Lined with an integrated nanite repair network to slowly but constantly fix the blastplate.</Description>
+			<Description>A 5x5 armor plate with the mass and integrity of 30 buster blocks to protect ships from directional damage. Has a pair of boreholes for weapon's fire to pass through uneffected. Lined with an integrated nanite repair network to slowly but constantly fix the blastplate.</Description>
 			<Icon>Textures\GUI\Icons\ACTIVE_BLASTPLATE_icon.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
@@ -622,12 +688,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\PM_LG_BLASTPLATE_BLASTPLATE.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="13500" />
-				<Component Subtype="Computer" Count="10" />
-     			<Component Subtype="SmallTube" Count="20" />
-      			<Component Subtype="Construction" Count="10" />
-       		 	<Component Subtype="MetalGrid" Count="5000" />
-        		<Component Subtype="SteelPlate" Count="1500" />
+				<Component Subtype="SteelPlate" Count="6100" />
+       		 	<Component Subtype="MetalGrid" Count="2500" />
+        		<Component Subtype="SteelPlate" Count="800" />
 			</Components>
 			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<MountPoints>
@@ -641,22 +704,21 @@
 			<BlockPairName>ACTIVE_BLASTPLATE</BlockPairName>
 			
       		<EdgeType>Heavy</EdgeType>
-      		<BuildTimeSeconds>900</BuildTimeSeconds>
+      		<BuildTimeSeconds>420</BuildTimeSeconds>
       		<DisassembleRatio>3</DisassembleRatio>
-      		<GeneralDamageMultiplier>0.4</GeneralDamageMultiplier>
-      		<PCU>1</PCU>
-      		<PCUConsole>2</PCUConsole>
+      		<GeneralDamageMultiplier>0.5</GeneralDamageMultiplier>
+      		<PCU>300</PCU>
       		<IsAirTight>true</IsAirTight>
 		</Definition>
 
 
 		<Definition>
 			<Id>
-				<TypeId>TerminalBlock</TypeId>
+				<TypeId>TerminalBlock</TypeId>  <!-- im sure there is a good reason why its not something simple like a <TypeId>Passage</TypeId> but the reason eludes me-->
 				<SubtypeId>REINFORCED_BLASTPLATE</SubtypeId>
 			</Id>
 			<DisplayName>Reinforced Blastplate</DisplayName>
-			<Description>A 5x5 reinforced armor plate to protect ships from directional damage. Has a pair of boreholes for weapon's fire to pass through uneffected.</Description>
+			<Description>A 5x5 reinforced armor with the mass and integrity of 30 buster blocks plate to protect ships from directional damage. Has a pair of boreholes for weapon's fire to pass through uneffected.</Description>
 			<Icon>Textures\GUI\Icons\REINFORCED_BLASTPLATE_icon.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
@@ -664,11 +726,11 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\PM_LG_BLASTPLATEINERT_BLASTPLATEINERT.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="1500" />
-       		 	<Component Subtype="MetalGrid" Count="5000" />
-        		<Component Subtype="SteelPlate" Count="13500" />
+				<Component Subtype="SteelPlate" Count="8100" />
+       		 	<Component Subtype="MetalGrid" Count="3000" />
+        		<Component Subtype="SteelPlate" Count="900" />
 			</Components>
-			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<MountPoints>
 				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
 				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
@@ -680,11 +742,10 @@
 			<BlockPairName>REINFORCED_BLASTPLATE</BlockPairName>
 
       		<EdgeType>Heavy</EdgeType>
-      		<BuildTimeSeconds>900</BuildTimeSeconds>
+      		<BuildTimeSeconds>420</BuildTimeSeconds>
       		<DisassembleRatio>3</DisassembleRatio>
-      		<GeneralDamageMultiplier>0.2</GeneralDamageMultiplier>
-      		<PCU>1</PCU>
-      		<PCUConsole>2</PCUConsole>
+      		<GeneralDamageMultiplier>0.5</GeneralDamageMultiplier>
+      		<PCU>300</PCU>
       		<IsAirTight>true</IsAirTight>
 
 		</Definition>
@@ -698,7 +759,7 @@
 				<SubtypeId>3x3_Blastplate_C</SubtypeId>
 			</Id>
 			<DisplayName>Standard Blastplate C</DisplayName>
-			<Description>A 3x3 armored plate to protect ships from directional damage. Has four boreholes in an X shape for weapon's fire to pass through uneffected.
+			<Description>A 3x3 armored plate with the mass and integrity of 10 buster blocks to protect ships from directional damage. Has four boreholes in an X shape for weapon's fire to pass through uneffected.
 			
 			</Description>
 			<Icon>Textures\Icons\SH_LG_BP33C_3x3_Blast_Plate_C.dds</Icon>
@@ -708,11 +769,11 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\SH_LG_BP33C_3x3_Blast_Plate_C.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="750" />
-       		 	<Component Subtype="MetalGrid" Count="2500" />
-        		<Component Subtype="SteelPlate" Count="6750" />
+				<Component Subtype="SteelPlate" Count="1650" />
+       		 	<Component Subtype="MetalGrid" Count="600" />
+        		<Component Subtype="SteelPlate" Count="200" />
 			</Components>
-			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<MountPoints>
 				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
 				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
@@ -722,13 +783,11 @@
 				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="1.00"/>
 			</MountPoints>
 			<BlockPairName>3x3_Blastplate_C</BlockPairName>
-
+      		<GeneralDamageMultiplier>0.5</GeneralDamageMultiplier>
       		<EdgeType>Heavy</EdgeType>
-      		<BuildTimeSeconds>300</BuildTimeSeconds>
+      		<BuildTimeSeconds>180</BuildTimeSeconds>
       		<DisassembleRatio>3</DisassembleRatio>
-      		<GeneralDamageMultiplier>0.4</GeneralDamageMultiplier>
-      		<PCU>1</PCU>
-      		<PCUConsole>2</PCUConsole>
+      		<PCU>100</PCU>
       		<IsAirTight>true</IsAirTight>
 
 		</Definition>
@@ -740,7 +799,7 @@
 				<SubtypeId>3x3_Blastplate_B</SubtypeId>
 			</Id>
 			<DisplayName>Standard Blastplate B</DisplayName>
-			<Description>A 3x3 armored plate to protect ships from directional damage. Has four boreholes for weapon's fire to pass through uneffected.
+			<Description>A 3x3 armored plate with the mass and integrity of 10 buster blocks to protect ships from directional damage. Has four boreholes for weapon's fire to pass through uneffected.
 			
 			</Description>
 			<Icon>Textures\Icons\SH_LG_BP33B_3x3_Blastplate.dds</Icon>
@@ -750,11 +809,11 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\SH_LG_BP33B_3x3_Blastplate.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="750" />
-       		 	<Component Subtype="MetalGrid" Count="2500" />
-        		<Component Subtype="SteelPlate" Count="6750" />
+				<Component Subtype="SteelPlate" Count="1650" />
+       		 	<Component Subtype="MetalGrid" Count="600" />
+        		<Component Subtype="SteelPlate" Count="200" />
 			</Components>
-			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<MountPoints>
 				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
 				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
@@ -764,13 +823,11 @@
 				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="1.00"/>
 			</MountPoints>
 			<BlockPairName>3x3_Blastplate_B</BlockPairName>
-
+      		<GeneralDamageMultiplier>0.5</GeneralDamageMultiplier>
       		<EdgeType>Heavy</EdgeType>
-      		<BuildTimeSeconds>300</BuildTimeSeconds>
+      		<BuildTimeSeconds>180</BuildTimeSeconds>
       		<DisassembleRatio>3</DisassembleRatio>
-      		<GeneralDamageMultiplier>0.4</GeneralDamageMultiplier>
-      		<PCU>1</PCU>
-      		<PCUConsole>2</PCUConsole>
+      		<PCU>100</PCU>
       		<IsAirTight>true</IsAirTight>
 
 		</Definition>
@@ -781,7 +838,7 @@
 				<SubtypeId>3x3_Blastplate_A</SubtypeId>
 			</Id>
 			<DisplayName>Standard Blastplate A</DisplayName>
-			<Description>A 3x3 armored plate to protect ships from directional damage. Has a pair of boreholes for weapon's fire to pass through uneffected.
+			<Description>A 3x3 armored plate with the mass and integrity of 10 buster blocks to protect ships from directional damage. Has a pair of boreholes for weapon's fire to pass through uneffected.
 			
 			</Description>
 			<Icon>Textures\Icons\SH_LG_BP33A_3x3_Blastplate.dds</Icon>
@@ -791,20 +848,18 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\SH_LG_BP33A_3x3_Blastplate.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="750" />
-       		 	<Component Subtype="MetalGrid" Count="2500" />
-        		<Component Subtype="SteelPlate" Count="6750" />
+				<Component Subtype="SteelPlate" Count="1650" />
+       		 	<Component Subtype="MetalGrid" Count="600" />
+        		<Component Subtype="SteelPlate" Count="200" />
 			</Components>
-			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<BlockPairName>3x3_Blastplate_A</BlockPairName>
 
-
+      		<GeneralDamageMultiplier>0.5</GeneralDamageMultiplier>
       		<EdgeType>Heavy</EdgeType>
-      		<BuildTimeSeconds>300</BuildTimeSeconds>
+      		<BuildTimeSeconds>180</BuildTimeSeconds>
       		<DisassembleRatio>3</DisassembleRatio>
-      		<GeneralDamageMultiplier>0.4</GeneralDamageMultiplier>
-      		<PCU>1</PCU>
-      		<PCUConsole>2</PCUConsole>
+      		<PCU>100</PCU>
       		<IsAirTight>true</IsAirTight>
 
 
@@ -817,7 +872,7 @@
 				<SubtypeId>2x4_Blastplate</SubtypeId>
 			</Id>
 			<DisplayName>Elongated Blastplate</DisplayName>
-			<Description>An elongated 2x4 armored plate to protect ships from directional damage. Has a single central borehole for weapon's fire to pass through uneffected.
+			<Description>An elongated 2x4 armored plate with the mass and integrity of 10 buster blocks to protect ships from directional damage. Has a single central borehole for weapon's fire to pass through uneffected.
 			
 			</Description>
 			<Icon>Textures\Icons\SH_LG_BP24_2x4_Blastplate.dds</Icon>
@@ -827,19 +882,17 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\SH_LG_BP24_2x4_Blastplate.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="750" />
-       		 	<Component Subtype="MetalGrid" Count="2500" />
-        		<Component Subtype="SteelPlate" Count="6750" />
+				<Component Subtype="SteelPlate" Count="1650" />
+       		 	<Component Subtype="MetalGrid" Count="600" />
+        		<Component Subtype="SteelPlate" Count="200" />
 			</Components>
-			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<BlockPairName>2x4_Blastplate</BlockPairName>
-			
+      		<GeneralDamageMultiplier>0.5</GeneralDamageMultiplier>			
       		<EdgeType>Heavy</EdgeType>
-      		<BuildTimeSeconds>300</BuildTimeSeconds>
+      		<BuildTimeSeconds>180</BuildTimeSeconds>
       		<DisassembleRatio>3</DisassembleRatio>
-      		<GeneralDamageMultiplier>0.4</GeneralDamageMultiplier>
-      		<PCU>1</PCU>
-      		<PCUConsole>2</PCUConsole>
+      		<PCU>100</PCU>
       		<IsAirTight>true</IsAirTight>
 
 		</Definition>

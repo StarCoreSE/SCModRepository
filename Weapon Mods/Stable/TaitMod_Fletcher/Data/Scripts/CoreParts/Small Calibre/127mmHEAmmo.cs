@@ -102,7 +102,7 @@ namespace Scripts
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
                     Light = 1.5f, // Multiplier for damage against light armor.
                     Heavy = 0.9f, // Multiplier for damage against heavy armor.
-                    NonArmor = 0.4f, // Multiplier for damage against every else.
+                    NonArmor = 1.3f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
@@ -155,7 +155,7 @@ namespace Scripts
                 {
                    Enable = true,
                     Radius = 5f,
-                    Damage = 2500f,
+                    Damage = 9000f,
                     Depth = 2.5f,
                     MaxAbsorb = 0f,
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius

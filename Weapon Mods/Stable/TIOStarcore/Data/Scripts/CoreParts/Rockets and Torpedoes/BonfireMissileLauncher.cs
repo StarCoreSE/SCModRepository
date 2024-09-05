@@ -66,14 +66,14 @@ namespace Scripts {
                 TopTargets = 10, // Maximum number of targets to randomize between; 0 = unlimited.
                 CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
                 TopBlocks = 10, // Maximum number of blocks to randomize between; 0 = unlimited.
-                CycleBlocks = 4, // Number of blocks to "cycle" per acquire attempt.
+                CycleBlocks = 0, // Number of blocks to "cycle" per acquire attempt.
                 StopTrackingSpeed = 0, // Do not track threats traveling faster than this speed; 0 = unlimited.
             },
             HardPoint = new HardPointDef
             {
                 PartName = "Bonfire Guided Rocket Turret", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 10f, // Projectile inaccuracy in degrees.
-                AimingTolerance = 20f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
+                AimingTolerance = 30f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Basic, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
                 DelayCeaseFire = 0, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released.
                 AddToleranceToTracking = true, // Allows turret to track to the edge of the AimingTolerance cone instead of dead centre.
@@ -103,7 +103,7 @@ namespace Scripts {
                     MinAzimuth = -180,
                     MaxAzimuth = 180,
                     MinElevation = -12,
-                    MaxElevation = 50,
+                    MaxElevation = 65,
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 0, // Default resting elevation
                     InventorySize = 1f, // Inventory capacity in kL.
