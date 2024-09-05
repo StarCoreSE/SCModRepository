@@ -19,13 +19,7 @@ namespace Scripts
 							CHP_MediumMassDriverSingleTurret,
 							CHP_MediumMassDriverDualTurret,
 							CHP_HeavyTorpedoLauncher,
-							CHP_SmallKineticTurretLG,
-							CHP_SmallKineticTurretSG,
-							CHP_SmallMassDriverTurretLG,
-							CHP_SmallMassDriverTurretSG,
-							CHP_KineticAutogun,
 							CHP_KineticAutogunPDC,
-							CHP_PlasmaBombLauncher,
 							CHP_FlakTurret,
 							
 							//drones
