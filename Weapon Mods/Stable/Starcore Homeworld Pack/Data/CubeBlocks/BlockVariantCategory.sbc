@@ -1,54 +1,5 @@
 <?xml version="1.0"?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <CategoryClasses>
-    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
-      <Id>
-        <TypeId>GuiBlockCategoryDefinition</TypeId>
-        <SubtypeId/>
-		</Id>
-		<DisplayName>Homeworld Pack</DisplayName>
-		<Name>Homeworld Pack</Name>
-			<ItemIds>
-				
-				<string>ConveyorSorter/CHP_ArbiterKineticBurstCannon</string>
-				<string>ConveyorSorter/CHP_HeavyMassDriverTurret</string>
-				<string>ConveyorSorter/CHP_MediumKineticTurret</string>
-				<string>ConveyorSorter/CHP_MediumMassDriverSingleTurret</string>
-				<string>ConveyorSorter/CHP_MediumMassDriverTurret</string>
-				<string>ConveyorSorter/CHP_IonTurret</string>
-				<string>ConveyorSorter/CHP_SmallKineticTurretLG</string>
-				<string>ConveyorSorter/CHP_SmallKineticTurretSG</string>
-				<string>ConveyorSorter/CHP_KineticAutogun</string>
-				<string>ConveyorSorter/CHP_KineticAutogunMirror</string>
-				
-				<string>ConveyorSorter/CHP_ArbiterKineticBurstCannonColorable</string>
-				<string>ConveyorSorter/CHP_MediumKineticTurretColorable</string>
-				<string>ConveyorSorter/CHP_IonTurretColorable</string>
-				<string>ConveyorSorter/CHP_SmallKineticTurretLGColorable</string>
-				<string>ConveyorSorter/CHP_SmallKineticTurretSGColorable</string>
-				
-				
-				<string>ConveyorSorter/CHP_PlasmaBombLauncher_New</string>
-				
-				<string>ConveyorSorter/CHP_KineticAutogunPDC</string>
-				
-				<string>ConveyorSorter/CHP_IonCannonFixed</string>
-				<string>ConveyorSorter/CHP_HeavyTorpedoLauncher</string>
-				
-				<string>Assembler/CHP_LargeAssembler</string>
-				
-				<!-- Drones -->
-				
-				<string>ConveyorSorter/CHP_DroneHangarVaygr</string>
-				<string>ConveyorSorter/CHP_DroneHangarHiigara</string>
-				<string>ConveyorSorter/CHP_DroneHangarTaiidan</string>
-				<string>ConveyorSorter/CHP_DroneHangarKushan</string>
-				
-			</ItemIds>
-		</Category>
-		
-	</CategoryClasses>
-	
 	<BlockVariantGroups>
 		
 		
@@ -146,9 +97,7 @@
             <Description>Large Turrets</Description>
             <Blocks>
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="CHP_SmallKineticTurretLG" />
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="CHP_SmallKineticTurretSG" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="CHP_SmallMassDriverTurretLG" />
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="CHP_SmallMassDriverTurretSG" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="CHP_MediumKineticTurret" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="CHP_MediumMassDriverTurret" />
 				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="CHP_MediumMassDriverSingleTurret" />
@@ -161,33 +110,7 @@
 				
             </Blocks>
         </BlockVariantGroup>
-		
-		<BlockVariantGroup>
-		
-		
-            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="CHP_LargeTurretsColorable" />
-            <Icon>Textures\GUI\Icons\Cubes\CHP_SmallKineticTurretLG.dds</Icon>
-			<Icon>Textures\GUI\Icons\Cubes\OverlayNoOrange.dds</Icon>
-            <DisplayName>Large Turrets Colorable</DisplayName>
-            <Description>Large Turrets Colorable</Description>
-            <Blocks>
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="CHP_SmallKineticTurretLGColorable" />
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="CHP_SmallKineticTurretSGColorable" />
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="CHP_SmallMassDriverTurretLG" />
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="CHP_SmallMassDriverTurretSG" />
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="CHP_MediumKineticTurretColorable" />
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="CHP_MediumMassDriverTurret" />
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="CHP_MediumMassDriverSingleTurret" />
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="CHP_ArbiterKineticBurstCannonColorable" />
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="CHP_HeavyMassDriverTurret" />
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="CHP_KineticAutogunPDC" />
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="CHP_FlakTurret" />
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="CHP_MediumIonTurret" />
-				<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="CHP_IonTurretColorable" />
 				
-            </Blocks>
-        </BlockVariantGroup>
-		
 		<BlockVariantGroup>
 		
 		
