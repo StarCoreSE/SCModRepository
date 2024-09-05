@@ -1,0 +1,123 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>CHP_PlasmaBombLauncher</SubtypeId>
+			</Id>
+			<DisplayName>Plasma Bomb Launcher</DisplayName>
+			<Description>Anti-ship bombs typically found on bombers. Fires superheated plasma effective at short ranges
+			Effective Range: 600m
+			Max Range: 1500m
+			Damage: 500 Impact, 12500 Explosive
+			Damage at Max Range: 5%
+			Velocity: 250ms
+			Energy Required: 13.84 MW</Description>
+			<Icon>Textures\GUI\Icons\Cubes\CHP_PlasmaBombLauncher.dds</Icon>
+			<CubeSize>Small</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="3" z="10"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\small\CHP_PlasmaBombLauncher.mwm</Model>
+			<Public>false</Public>
+			<Components>
+                <Component Subtype="SteelPlate" Count="35" />
+                <Component Subtype="Construction" Count="25" />
+                <Component Subtype="MetalGrid" Count="18" />
+				<Component Subtype="Computer" Count="15" />
+				<Component Subtype="Motor" Count="16" />
+                <Component Subtype="LargeTube" Count="5" />
+                <Component Subtype="SteelPlate" Count="40" />
+            </Components>
+            <CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="10.00" EndY="3.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="10.00" EndY="3.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="3.00" EndY="10.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="10.00"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\small\CHP_PlasmaBombLauncher_BS1.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>CHP_PlasmaBombLauncher</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+			
+            <BuildTimeSeconds>25</BuildTimeSeconds>
+            <EdgeType>Light</EdgeType>
+            <ResourceSinkGroup>Defense</ResourceSinkGroup>
+            <InventoryMaxVolume>0.072</InventoryMaxVolume>
+            <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+            <DamagedSound>ParticleWeapExpl</DamagedSound>
+            <DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
+            <DestroySound>WepSmallWarheadExpl</DestroySound>
+            <PCU>80</PCU>
+            <TargetingGroups>
+                <string>Weapons</string>
+            </TargetingGroups>
+			
+		</Definition>
+		
+		
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>CHP_PlasmaBombLauncher_New</SubtypeId>
+			</Id>
+			<DisplayName>Plasma Bomb Launcher</DisplayName>
+			<Description>Anti-ship bombs typically found on bombers. Fires superheated plasma effective at short ranges
+			Effective Range: 600m
+			Max Range: 1500m
+			Damage: 500 Impact, 12500 Explosive
+			Damage at Max Range: 5%
+			Velocity: 250ms
+			Energy Required: 13.84 MW</Description>
+			<Icon>Textures\GUI\Icons\Cubes\CHP_PlasmaBombLauncher.dds</Icon>
+			<CubeSize>Small</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="2" y="2" z="7"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\small\CHP_PlasmaBombLauncher_New.mwm</Model>
+			<Components>
+                <Component Subtype="SteelPlate" Count="35" />
+                <Component Subtype="Construction" Count="25" />
+                <Component Subtype="MetalGrid" Count="18" />
+				<Component Subtype="Computer" Count="15" />
+				<Component Subtype="Motor" Count="16" />
+                <Component Subtype="LargeTube" Count="5" />
+                <Component Subtype="SteelPlate" Count="40" />
+            </Components>
+            <CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="7.00" EndY="2.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="7.00" EndY="2.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="2.00" EndY="7.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="2.00" EndY="7.00"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\small\CHP_PlasmaBombLauncher_New_BS1.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>CHP_PlasmaBombLauncher_New</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+			
+			
+			<UseModelIntersection>true</UseModelIntersection>
+			<BuildTimeSeconds>55</BuildTimeSeconds>
+            <EdgeType>Light</EdgeType>
+            <ResourceSinkGroup>Defense</ResourceSinkGroup>
+            <InventoryMaxVolume>0.072</InventoryMaxVolume>
+            <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+            <DamagedSound>ParticleWeapExpl</DamagedSound>
+            <DestroyEffect>BlockDestroyedExplosion_Small</DestroyEffect>
+            <DestroySound>WepSmallWarheadExpl</DestroySound>
+            <PCU>80</PCU>
+            <TargetingGroups>
+                <string>Weapons</string>
+            </TargetingGroups>
+		</Definition>
+	</CubeBlocks>
+</Definitions>
