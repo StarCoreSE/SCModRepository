@@ -43,7 +43,7 @@ namespace Scripts
         private AmmoDef CHP_taiidan_interceptor_Main => new AmmoDef // StarCore AMS I
         {
             AmmoMagazine = "CHP_TaiidanInterceptorDrone_Mag", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
-            AmmoRound = "Taiidani Interceptor", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
+            AmmoRound = "CHPTaiidanInterceptor", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.001f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
             BaseDamage = 1000f, // Direct damage; one steel plate is worth 100. 

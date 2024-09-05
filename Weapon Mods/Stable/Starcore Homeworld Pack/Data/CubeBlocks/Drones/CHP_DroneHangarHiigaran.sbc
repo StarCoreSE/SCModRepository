@@ -4,17 +4,17 @@
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>CHP_DroneHangarTaiidan</SubtypeId>
+				<SubtypeId>CHP_DroneHangarHiigara</SubtypeId>
 			</Id>
-			<DisplayName>Drone Hangar Interceptor (T)</DisplayName>
+			<DisplayName>Drone Hangar Interceptor (H)</DisplayName>
 			<Description>
-        Launches Taiidan fighters.
+        Launches Hiigaran fighters.
         Capacity: X Fighters
         MaxActive = 5
         Slowly restocks craft.
       </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_DroneHangarHiigaran.dds</Icon>
-			<Icon>Textures\GUI\Icons\Cubes\CHP_Overlay_Taiidan.dds</Icon>
+			<Icon>Textures\GUI\Icons\Cubes\CHP_Overlay_Hiigaran.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="3" y="1" z="4"/>
@@ -43,7 +43,7 @@
 			<BuildProgressModels>
 				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\CHP_DroneHangarHiigaran_BS1.mwm"/>
 			</BuildProgressModels>
-			<BlockPairName>CHP_DroneHangarTaiidan</BlockPairName>
+			<BlockPairName>CHP_DroneHangarHiigara</BlockPairName>
 			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
 			
@@ -83,17 +83,17 @@
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>CHP_DroneHangarTaiidan_Rail</SubtypeId>
+				<SubtypeId>CHP_DroneHangarHiigara_Rail</SubtypeId>
 			</Id>
-			<DisplayName>Drone Launch Rail Interceptor (T)</DisplayName>
+			<DisplayName>Drone Launch Rail Interceptor (H)</DisplayName>
 			<Description>
-        Launches Taiidan fighters.
+        Launches Hiigaran fighters.
         Capacity: X Fighters
         MaxActive = 5
         Slowly restocks craft.
       </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_DroneHangarHiigaranRail.dds</Icon>
-			<Icon>Textures\GUI\Icons\Cubes\CHP_Overlay_Taiidan.dds</Icon>
+			<Icon>Textures\GUI\Icons\Cubes\CHP_Overlay_Hiigaran.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="1" y="2" z="6"/>
@@ -123,7 +123,7 @@
 				<Model BuildPercentUpperBound="0.50" File="Models\Cubes\large\CHP_DroneHangarHiigaranRail_BS1.mwm"/>
 				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\CHP_DroneHangarHiigaranRail_BS2.mwm"/>
 			</BuildProgressModels>
-			<BlockPairName>CHP_DroneHangarTaiidan_Rail</BlockPairName>
+			<BlockPairName>CHP_DroneHangarHiigara_Rail</BlockPairName>
 			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
 			
@@ -160,17 +160,17 @@
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>CHP_DroneBomberHangarTaiidan</SubtypeId>
+				<SubtypeId>CHP_DroneBomberHangarHiigara</SubtypeId>
 			</Id>
-			<DisplayName>Drone Hangar Bomber (T)</DisplayName>
+			<DisplayName>Drone Hangar Bomber (H)</DisplayName>
 			<Description>
-        Launches Taiidan fighters.
-        Capacity: X Fighters
+        Launches Hiigaran bombers.
+        Capacity: X Bombers
         MaxActive = 5
         Slowly restocks craft.
       </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_DroneBomberHangarHiigaran.dds</Icon>
-			<Icon>Textures\GUI\Icons\Cubes\CHP_Overlay_Taiidan.dds</Icon>
+			<Icon>Textures\GUI\Icons\Cubes\CHP_Overlay_Hiigaran.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="4" y="1" z="4"/>
@@ -178,12 +178,12 @@
 			<Model>Models\Cubes\large\CHP_DroneBomberHangarHiigaran.mwm</Model>
 			<Components>
 				<Component Subtype="SteelPlate" Count="180" />
-				<Component Subtype="Construction" Count="225" />
-				<Component Subtype="MetalGrid" Count="45" />
-				<Component Subtype="LargeTube" Count="20" />
-				<Component Subtype="Motor" Count="75" />
-				<Component Subtype="Computer" Count="50" />
-				<Component Subtype="Construction" Count="150" />
+				<Component Subtype="Construction" Count="270" />
+				<Component Subtype="MetalGrid" Count="50" />
+				<Component Subtype="LargeTube" Count="25" />
+				<Component Subtype="Motor" Count="90" />
+				<Component Subtype="Computer" Count="60" />
+				<Component Subtype="Construction" Count="180" />
 				<Component Subtype="SteelPlate" Count="250" />
 			</Components>
 			<CriticalComponent Subtype="Computer" Index="0" />
@@ -199,7 +199,7 @@
 			<BuildProgressModels>
 				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\CHP_DroneBomberHangarHiigaran_BS1.mwm"/>
 			</BuildProgressModels>
-			<BlockPairName>CHP_DroneBomberHangarTaiidan</BlockPairName>
+			<BlockPairName>CHP_DroneBomberHangarHiigara</BlockPairName>
 			
 			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
@@ -235,19 +235,17 @@
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>CHP_DroneBomberHangarTaiidan_Rail</SubtypeId>
+				<SubtypeId>CHP_DroneBomberHangarHiigara_Rail</SubtypeId>
 			</Id>
-			<DisplayName>Drone Launch Rail Bomber (T)</DisplayName>
-			<Description>Drone hangar to deploy Taiidan Bombers
-			Max Drones: 3
-			Weapon: Plasma Bomb Launcher
-			Drone HP: 220
-			Speed: Medium
-			Burst Count: 6
-			Ammo Count: 48
-			Ammo Used: Drone Bomber (T)</Description>
+			<DisplayName>Drone Launch Rail Bomber (H)</DisplayName>
+			<Description>
+        Launches Hiigaran bombers.
+        Capacity: X Bombers
+        MaxActive = 5
+        Slowly restocks craft.
+      </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_DroneBomberHangarRail.dds</Icon>
-			<Icon>Textures\GUI\Icons\Cubes\CHP_Overlay_Taiidan.dds</Icon>
+			<Icon>Textures\GUI\Icons\Cubes\CHP_Overlay_Hiigaran.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="2" y="2" z="6"/>
@@ -255,12 +253,12 @@
 			<Model>Models\Cubes\large\CHP_DroneBomberHangarRail.mwm</Model>
 			<Components>
 				<Component Subtype="SteelPlate" Count="180" />
-				<Component Subtype="Construction" Count="225" />
-				<Component Subtype="MetalGrid" Count="45" />
-				<Component Subtype="LargeTube" Count="20" />
-				<Component Subtype="Motor" Count="75" />
-				<Component Subtype="Computer" Count="50" />
-				<Component Subtype="Construction" Count="150" />
+				<Component Subtype="Construction" Count="270" />
+				<Component Subtype="MetalGrid" Count="50" />
+				<Component Subtype="LargeTube" Count="25" />
+				<Component Subtype="Motor" Count="90" />
+				<Component Subtype="Computer" Count="60" />
+				<Component Subtype="Construction" Count="180" />
 				<Component Subtype="SteelPlate" Count="250" />
 			</Components>
 			<CriticalComponent Subtype="Computer" Index="0" />
@@ -277,7 +275,7 @@
 				<Model BuildPercentUpperBound="0.50" File="Models\Cubes\large\CHP_DroneBomberHangarRail_BS1.mwm"/>
 				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\CHP_DroneBomberHangarRail_BS2.mwm"/>
 			</BuildProgressModels>
-			<BlockPairName>CHP_DroneBomberHangarTaiidan_Rail</BlockPairName>
+			<BlockPairName>CHP_DroneBomberHangarHiigara_Rail</BlockPairName>
 			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
 			
@@ -321,19 +319,17 @@
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>CHP_DroneHangarTaiidan_Tall</SubtypeId>
+				<SubtypeId>CHP_DroneHangarHiigara_Tall</SubtypeId>
 			</Id>
-			<DisplayName>Quick Launch Drone Hangar (T)</DisplayName>
-			<Description>Drone hangar to deploy Taiidan Interceptors
-			Max Drones: 3
-			Weapon: Kinetic Autogun
-			Drone HP: 150
-			Speed: Medium
-			Burst Count: 10
-			Ammo Count: 400
-			Ammo Used:Drone Interceptor (T)</Description>
+			<DisplayName>Quick Launch Drone Hangar (H)</DisplayName>
+			<Description>
+        Launches Hiigaran fighters.
+        Capacity: X Fighters
+        MaxActive = 5
+        Slowly restocks craft.
+      </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_DroneHangarTall.dds</Icon>
-			<Icon>Textures\GUI\Icons\Cubes\CHP_Overlay_Taiidan.dds</Icon>
+			<Icon>Textures\GUI\Icons\Cubes\CHP_Overlay_Hiigaran.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="4" y="2" z="4"/>
@@ -362,7 +358,7 @@
 			<BuildProgressModels>
 				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\CHP_DroneHangarTall_BS1.mwm"/>
 			</BuildProgressModels>
-			<BlockPairName>CHP_DroneHangarTaiidan_Tall</BlockPairName>
+			<BlockPairName>CHP_DroneHangarHiigara_Tall</BlockPairName>
 			
 			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
@@ -398,19 +394,17 @@
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>CHP_DroneHangarTaiidan_TallFlat</SubtypeId>
+				<SubtypeId>CHP_DroneHangarHiigara_TallFlat</SubtypeId>
 			</Id>
-			<DisplayName>Quick Launch Drone Hangar (T)</DisplayName>
-			<Description>Drone hangar to deploy Taiidan Interceptors
-			Max Drones: 3
-			Weapon: Kinetic Autogun
-			Drone HP: 150
-			Speed: Medium
-			Burst Count: 10
-			Ammo Count: 400
-			Ammo Used:Drone Interceptor (T)</Description>
+			<DisplayName>Quick Launch Drone Hangar (H)</DisplayName>
+			<Description>
+        Launches Hiigaran fighters.
+        Capacity: X Fighters
+        MaxActive = 5
+        Slowly restocks craft.
+      </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_DroneHangarTallFlat.dds</Icon>
-			<Icon>Textures\GUI\Icons\Cubes\CHP_Overlay_Taiidan.dds</Icon>
+			<Icon>Textures\GUI\Icons\Cubes\CHP_Overlay_Hiigaran.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="4" y="2" z="4"/>
@@ -439,7 +433,7 @@
 			<BuildProgressModels>
 				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\CHP_DroneHangarTallFlat_BS1.mwm"/>
 			</BuildProgressModels>
-			<BlockPairName>CHP_DroneHangarTaiidan_TallFlat</BlockPairName>
+			<BlockPairName>CHP_DroneHangarHiigara_TallFlat</BlockPairName>
 			
 			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
@@ -478,19 +472,17 @@
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>CHP_DroneBomberHangarTaiidan_Tall</SubtypeId>
+				<SubtypeId>CHP_DroneBomberHangarHiigara_Tall</SubtypeId>
 			</Id>
-			<DisplayName>Quick Launch Drone Hangar Bomber (T)</DisplayName>
-			<Description>Drone hangar to deploy Taiidan Bombers
-			Max Drones: 3
-			Weapon: Plasma Bomb Launcher
-			Drone HP: 220
-			Speed: Medium
-			Burst Count: 6
-			Ammo Count: 48
-			Ammo Used: Drone Bomber (T)</Description>
+			<DisplayName>Quick Launch Drone Hangar Bomber (H)</DisplayName>
+			<Description>
+        Launches Hiigaran bombers.
+        Capacity: X Bombers
+        MaxActive = 5
+        Slowly restocks craft.
+      </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_DroneBomberHangarTall.dds</Icon>
-			<Icon>Textures\GUI\Icons\Cubes\CHP_Overlay_Taiidan.dds</Icon>
+			<Icon>Textures\GUI\Icons\Cubes\CHP_Overlay_Hiigaran.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="5" y="2" z="4"/>
@@ -519,7 +511,7 @@
 			<BuildProgressModels>
 				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\CHP_DroneBomberHangarTall_BS1.mwm"/>
 			</BuildProgressModels>
-			<BlockPairName>CHP_DroneBomberHangarTaiidan_Tall</BlockPairName>
+			<BlockPairName>CHP_DroneBomberHangarHiigara_Tall</BlockPairName>
 			
 			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
@@ -555,25 +547,22 @@
 		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
-				<SubtypeId>CHP_DroneBomberHangarTaiidan_TallFlat</SubtypeId>
+				<SubtypeId>CHP_DroneBomberHangarHiigara_TallFlat</SubtypeId>
 			</Id>
-			<DisplayName>Quick Launch Drone Hangar Bomber Flat (T)</DisplayName>
-			<Description>Drone hangar to deploy Taiidan Bombers
-			Max Drones: 3
-			Weapon: Plasma Bomb Launcher
-			Drone HP: 220
-			Speed: Medium
-			Burst Count: 6
-			Ammo Count: 48
-			Ammo Used: Drone Bomber (T)</Description>
+			<DisplayName>Quick Launch Drone Hangar Bomber Flat(H)</DisplayName>
+			<Description>
+        Launches Hiigaran bombers.
+        Capacity: X Bombers
+        MaxActive = 5
+        Slowly restocks craft.
+      </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_DroneBomberHangarTallFlat.dds</Icon>
-			<Icon>Textures\GUI\Icons\Cubes\CHP_Overlay_Taiidan.dds</Icon>
+			<Icon>Textures\GUI\Icons\Cubes\CHP_Overlay_Hiigaran.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="5" y="2" z="4"/>
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\CHP_DroneBomberHangarTallFlat.mwm</Model>
-			
 			<Components>
 				<Component Subtype="SteelPlate" Count="240" />
 				<Component Subtype="Construction" Count="360" />
@@ -597,7 +586,7 @@
 			<BuildProgressModels>
 				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\CHP_DroneBomberHangarTallFlat_BS1.mwm"/>
 			</BuildProgressModels>
-			<BlockPairName>CHP_DroneBomberHangarTaiidan_TallFlat</BlockPairName>
+			<BlockPairName>CHP_DroneBomberHangarHiigara_TallFlat</BlockPairName>
 			
 			
 			<MirroringY>Z</MirroringY>
@@ -630,9 +619,6 @@
 				<string>Weapons</string>
 			</TargetingGroups>
 		</Definition>
-		
-		
-		
 		
 	</CubeBlocks>
 </Definitions>
