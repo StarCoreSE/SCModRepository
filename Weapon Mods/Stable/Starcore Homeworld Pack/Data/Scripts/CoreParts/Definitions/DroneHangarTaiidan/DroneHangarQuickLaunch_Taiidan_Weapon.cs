@@ -243,9 +243,9 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                CHP_TaiidanInterceptorDrone_Ammo,
-                CHP_KineticAutogunAmmo,
-				CHP_KineticAutogunAmmoNoAudio,
+                CHP_taiidan_interceptor_Main,
+                CHP_taiidan_interceptor_attack,
+                CHP_taiidan_interceptor_missile_attack,
                 
 
             },
@@ -480,8 +480,8 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                CHP_TaiidanBomberDrone_Ammo,
-				CHP_PlasmaBombAmmo,
+                taiidan_bomber_Main,
+                taiidan_bomber_attack,
 
             },
 
