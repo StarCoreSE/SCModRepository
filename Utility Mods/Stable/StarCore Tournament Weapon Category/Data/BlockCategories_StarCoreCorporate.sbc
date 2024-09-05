@@ -417,6 +417,8 @@
         <string>CHP_FlakTurret</string>
         <string>CHP_MediumIonTurret</string>
         <string>CHP_IonTurret</string>
+        <string>CHP_IonCannonFixed</string>
+        <string>CHP_HeavyTorpedoLauncher</string>
         <string>CHP_DroneHangarHiigara</string>
         <string>CHP_DroneBomberHangarHiigara</string>
         <string>CHP_DroneHangarHiigara_Rail</string>
