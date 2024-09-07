@@ -20,7 +20,7 @@ namespace StarCore.ShareTrack.ShipTracking
         private WcApi WcApi => AllGridsList.I.WcApi;
 
         public bool NeedsUpdate { get; private set; } = true;
-        public bool IsPrimaryGrid = false;
+        public bool IsPrimaryGrid = true;
 
         #region Public Methods
 
