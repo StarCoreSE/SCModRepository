@@ -439,7 +439,7 @@ namespace Scripts
             BackKickForce = 0f, // Recoil.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
-            EnergyMagazineSize = 3, // For energy weapons, how many shots to fire before reloading.
+            EnergyMagazineSize = 2, // For energy weapons, how many shots to fire before reloading.
             IgnoreWater = false, // Whether the projectile should be able to penetrate water when using WaterMod.
 
             Shape = new ShapeDef // Defines the collision shape of the projectile, defaults to LineShape and uses the visual Line Length if set to 0.
@@ -462,7 +462,7 @@ namespace Scripts
                 Offset = 0f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards).
                 Radial = 0f, // Determines starting angle for Degrees of spread above.  IE, 0 degrees and 90 radial goes perpendicular to travel path
                 MaxChildren = 0, // number of maximum branches for fragments from the roots point of view, 0 is unlimited
-                IgnoreArming = true, // If true, ignore ArmOnHit or MinArmingTime in EndOfLife definitions
+                IgnoreArming = false, // If true, ignore ArmOnHit or MinArmingTime in EndOfLife definitions
 
                 TimedSpawns = new TimedSpawnDef // disables FragOnEnd in favor of info specified below
                 {
@@ -470,7 +470,7 @@ namespace Scripts
                     Interval = 360, // Time between spawning fragments, in ticks
                     StartTime = 0, // Time delay to start spawning fragments, in ticks, of total projectile life
                     MaxSpawns = 10, // Max number of fragment children to spawn
-                    Proximity = 10000, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
+                    Proximity = 8000, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
                     ParentDies = false, // Parent dies once after it spawns its last child.
                     PointAtTarget = true, // Start fragment direction pointing at Target
                     PointType = Predict, // Point accuracy, Direct, Lead (always fire), Predict (only fire if it can hit)
@@ -569,7 +569,7 @@ namespace Scripts
                 },
                 EndOfLife = new EndOfLifeDef
                 {
-                    Enable = false,
+                    Enable = true,
                     Radius = 3, // Meters
                     Damage = 50,
                     Depth = 2f,
@@ -581,7 +581,7 @@ namespace Scripts
                     //.Squeeze does little damage to the middle, but rapidly increases damage toward max radius
                     //.Pooled damage behaves in a pooled manner that once exhausted damage ceases.
                     ArmOnlyOnHit = false, // Detonation only is available, After it hits something, when this is true. IE, if shot down, it won't explode.
-                    MinArmingTime = 100, // In ticks, before the Ammo is allowed to explode, detonate or similar; This affects shrapnel spawning.
+                    MinArmingTime = 3600, // In ticks, before the Ammo is allowed to explode, detonate or similar; This affects shrapnel spawning.
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 1f,
@@ -657,8 +657,9 @@ namespace Scripts
                 TargetLossDegree = 0f,
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 7200, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                AccelPerSec = 100f,
-                DesiredSpeed = 30, // voxel phasing if you go above 5100
+                AccelPerSec = 1f,
+                DesiredSpeed = 5, // voxel phasing if you go above 5100
+                //MaxSpeed = 50, //Unknown
                 MaxTrajectory = 10000,
                 //FieldTime was here, it's dead now is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable.
@@ -668,18 +669,19 @@ namespace Scripts
                 Smarts = new SmartsDef
                 {
                     Inaccuracy = 0, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
-                    Aggressiveness = 0.25, // controls how responsive tracking is.
-                    MaxLateralThrust = 0.5f, // controls how sharp the trajectile may turn
+                    Aggressiveness = 3, // controls how responsive tracking is.
+                    MaxLateralThrust = 0.45f, // controls how sharp the trajectile may turn
+                    //AccelClearance = 1000f, //Unknown
                     TrackingDelay = 10, // Measured in Shape diameter units traveled.
                     MaxChaseTime = 12000, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
                     MaxTargets = 0, // Number of targets allowed before ending, 0 = unlimited
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
                     Roam = true, // Roam current area after target loss
-                    KeepAliveAfterTargetLoss = false, // Whether to stop early death of projectile on target loss
+                    KeepAliveAfterTargetLoss = true, // Whether to stop early death of projectile on target loss
                     CheckFutureIntersection = true,
                     OffsetRatio = 0.05f, // The ratio to offset the random dir (0 to 1) 
-                    OffsetTime = 120, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
+                    OffsetTime = 3600, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
                 },
                 Mines = new MinesDef
                 {
@@ -2063,7 +2065,7 @@ namespace Scripts
                     Interval = 10, // Time between spawning fragments, in ticks
                     StartTime = 0, // Time delay to start spawning fragments, in ticks, of total projectile life
                     MaxSpawns = 900, // Max number of fragment children to spawn
-                    Proximity = 1000, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
+                    Proximity = 10000, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
                     ParentDies = false, // Parent dies once after it spawns its last child.
                     PointAtTarget = true, // Start fragment direction pointing at Target
                     PointType = Predict, // Point accuracy, Direct, Lead (always fire), Predict (only fire if it can hit)
