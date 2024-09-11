@@ -5,12 +5,12 @@ using Sandbox.Definitions;
 using Sandbox.Game.Entities;
 using Sandbox.Game.Weapons;
 using Sandbox.ModAPI;
-using TLB.ShareTrack.API;
-using TLB.ShareTrack.API.CoreSystem;
+using StarCore.ShareTrack.API;
+using StarCore.ShareTrack.API.CoreSystem;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 
-namespace TLB.ShareTrack.ShipTracking
+namespace StarCore.ShareTrack.ShipTracking
 {
     internal class GridStats // TODO convert this to be event-driven. OnBlockPlace, etc. Keep a queue.
     {

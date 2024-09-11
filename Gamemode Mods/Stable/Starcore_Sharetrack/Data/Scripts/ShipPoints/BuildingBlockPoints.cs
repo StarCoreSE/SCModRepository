@@ -1,11 +1,11 @@
 ﻿using System.Text;
 using Sandbox.Game.Gui;
 using Sandbox.ModAPI;
-using TLB.ShareTrack.API;
+using StarCore.ShareTrack.API;
 using VRageMath;
 using VRageRender;
 
-namespace TLB.ShareTrack
+namespace StarCore.ShareTrack
 {
     internal class BuildingBlockPoints
     {

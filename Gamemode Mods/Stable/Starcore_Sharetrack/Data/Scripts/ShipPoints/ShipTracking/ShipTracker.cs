@@ -5,7 +5,7 @@ using System.Text;
 using Sandbox.Game.Entities;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
-using TLB.ShareTrack.API;
+using StarCore.ShareTrack.API;
 using VRage.Game;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
@@ -13,7 +13,7 @@ using VRage.ModAPI;
 using VRageMath;
 using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
 
-namespace TLB.ShareTrack.ShipTracking
+namespace StarCore.ShareTrack.ShipTracking
 {
     public class ShipTracker
     {

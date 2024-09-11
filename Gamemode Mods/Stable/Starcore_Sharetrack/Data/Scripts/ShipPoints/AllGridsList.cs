@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Sandbox.ModAPI;
-using TLB.ShareTrack.API;
-using TLB.ShareTrack.API.CoreSystem;
-using TLB.ShareTrack.HeartNetworking;
-using TLB.ShareTrack.HeartNetworking.Custom;
-using TLB.ShareTrack.ShipTracking;
+using StarCore.ShareTrack.API;
+using StarCore.ShareTrack.API.CoreSystem;
+using StarCore.ShareTrack.HeartNetworking;
+using StarCore.ShareTrack.HeartNetworking.Custom;
+using StarCore.ShareTrack.ShipTracking;
 using VRage;
 using VRage.Game.ModAPI;
 using VRage.Input;
 using VRageMath;
 using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
 
-namespace TLB.ShareTrack
+namespace StarCore.ShareTrack
 {
     /// <summary>
     /// Shift-M menu
