@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using Sandbox.Definitions;
 using Sandbox.Game.Entities;
+using Sandbox.Game.Weapons;
 using Sandbox.ModAPI;
-using StarCore.ShareTrack.API;
-using StarCore.ShareTrack.API.CoreSystem;
+using TLB.ShareTrack.API;
+using TLB.ShareTrack.API.CoreSystem;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 
-namespace StarCore.ShareTrack.ShipTracking
+namespace TLB.ShareTrack.ShipTracking
 {
     internal class GridStats // TODO convert this to be event-driven. OnBlockPlace, etc. Keep a queue.
     {
@@ -20,7 +21,6 @@ namespace StarCore.ShareTrack.ShipTracking
         private WcApi WcApi => AllGridsList.I.WcApi;
 
         public bool NeedsUpdate { get; private set; } = true;
-        public bool IsPrimaryGrid = true;
 
         #region Public Methods
 
@@ -133,11 +133,11 @@ namespace StarCore.ShareTrack.ShipTracking
         public float OriginalGridIntegrity { get; private set; }
 
         // BattlePoint Stats
-        public int BattlePoints { get; private set; }
-        public int OffensivePoints { get; private set; }
-        public int PowerPoints { get; private set; }
-        public int MovementPoints { get; private set; }
-        public int PointDefensePoints { get; private set; }
+        public double BattlePoints { get; private set; }
+        public double OffensivePoints { get; private set; }
+        public double PowerPoints { get; private set; }
+        public double MovementPoints { get; private set; }
+        public double PointDefensePoints { get; private set; }
 
         // Weapon Stats
         public readonly Dictionary<string, int> WeaponCounts = new Dictionary<string, int>();
@@ -242,33 +242,59 @@ namespace StarCore.ShareTrack.ShipTracking
         private void UpdateWeaponStats()
         {
             WeaponCounts.Clear();
-            foreach (var weaponBlock in _fatBlocks)
+            foreach (var block in _fatBlocks)
             {
-                // Check that the block has points and is a weapon
-                int weaponPoints;
-                var weaponDisplayName = weaponBlock.DefinitionDisplayNameText;
-                if (!AllGridsList.PointValues.TryGetValue(weaponBlock.BlockDefinition.SubtypeName, out weaponPoints) ||
-                    !WcApi.HasCoreWeapon((MyEntity)weaponBlock))
+                double weaponPoints;
+                var weaponDisplayName = block.DefinitionDisplayNameText;
+
+                // Check for WeaponCore weapons
+                if (AllGridsList.PointValues.TryGetValue(block.BlockDefinition.SubtypeName, out weaponPoints) && WcApi.HasCoreWeapon((MyEntity)block))
+                {
+                    float thisClimbingCostMult = 0;
+                    AllGridsList.ClimbingCostRename(ref weaponDisplayName, ref thisClimbingCostMult);
+                    AddWeaponCount(weaponDisplayName);
                     continue;
+                }
 
-                float thisClimbingCostMult = 0;
-
-                AllGridsList.ClimbingCostRename(ref weaponDisplayName, ref thisClimbingCostMult);
-
-                if (!WeaponCounts.ContainsKey(weaponDisplayName))
-                    WeaponCounts.Add(weaponDisplayName, 0);
-
-                WeaponCounts[weaponDisplayName]++;
+                // Check for vanilla and modded weapons using IMyGunObject<MyGunBase>
+                var gunObject = block as IMyGunObject<MyGunBase>;
+                if (gunObject != null && block is IMyCubeBlock) // Ensure it's a block, not a hand weapon
+                {
+                    AddWeaponCount(weaponDisplayName);
+                }
             }
+        }
+
+        private string GetWeaponDisplayName(IMyCubeBlock block, IMyGunObject<MyGunBase> gunObject)
+        {
+            // You can customize this method to categorize weapons as needed
+            if (block is IMyLargeTurretBase)
+                return $"{block.DefinitionDisplayNameText} Turret";
+            else
+                return block.DefinitionDisplayNameText;
+        }
+
+        private void AddWeaponCount(string weaponDisplayName)
+        {
+            if (!WeaponCounts.ContainsKey(weaponDisplayName))
+                WeaponCounts.Add(weaponDisplayName, 0);
+            WeaponCounts[weaponDisplayName]++;
         }
 
         private void CalculateCost(IMyCubeBlock block)
         {
-            int blockPoints;
-            var blockDisplayName = block.DefinitionDisplayNameText;
-            if (!AllGridsList.PointValues.TryGetValue(block.BlockDefinition.SubtypeName, out blockPoints))
-                return;
+            double blockPoints = 0;
+            foreach (var kvp in AllGridsList.PointValues)
+            {
+                if (block.BlockDefinition.SubtypeName.StartsWith(kvp.Key, StringComparison.OrdinalIgnoreCase))
+                {
+                    blockPoints = kvp.Value;
+                    break;
+                }
+            }
+            if (blockPoints == 0) return;
 
+            var blockDisplayName = block.DefinitionDisplayNameText;
             float thisClimbingCostMult = 0;
             AllGridsList.ClimbingCostRename(ref blockDisplayName, ref thisClimbingCostMult);
 
@@ -278,18 +304,15 @@ namespace StarCore.ShareTrack.ShipTracking
             var thisSpecialBlocksCount = BlockCounts[blockDisplayName]++;
 
             if (thisClimbingCostMult > 0)
-                blockPoints += (int)(blockPoints * thisSpecialBlocksCount * thisClimbingCostMult);
+                blockPoints += (blockPoints * thisSpecialBlocksCount * thisClimbingCostMult);
 
             if (block is IMyThrust || block is IMyGyro)
                 MovementPoints += blockPoints;
             if (block is IMyPowerProducer)
                 PowerPoints += blockPoints;
+
             if (WcApi.HasCoreWeapon((MyEntity)block))
             {
-                // Weapons on subgrids have an extra 20% cost applied
-                if (!IsPrimaryGrid)
-                    blockPoints = (int)(blockPoints * 1.2f);
-
                 var validTargetTypes = new List<string>();
                 WcApi.GetTurretTargetTypes((MyEntity)block, validTargetTypes);
                 if (validTargetTypes.Contains("Projectiles"))
@@ -299,6 +322,8 @@ namespace StarCore.ShareTrack.ShipTracking
             }
 
             BattlePoints += blockPoints;
+
+            //MyAPIGateway.Utilities.ShowNotification($"EEEEEEEEE{blockPoints}", 3000);
         }
 
         #endregion

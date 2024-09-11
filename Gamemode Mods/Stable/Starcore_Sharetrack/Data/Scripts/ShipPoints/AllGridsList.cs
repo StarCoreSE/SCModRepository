@@ -1,19 +1,20 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Sandbox.ModAPI;
-using StarCore.ShareTrack.API;
-using StarCore.ShareTrack.API.CoreSystem;
-using StarCore.ShareTrack.HeartNetworking;
-using StarCore.ShareTrack.HeartNetworking.Custom;
-using StarCore.ShareTrack.ShipTracking;
+using TLB.ShareTrack.API;
+using TLB.ShareTrack.API.CoreSystem;
+using TLB.ShareTrack.HeartNetworking;
+using TLB.ShareTrack.HeartNetworking.Custom;
+using TLB.ShareTrack.ShipTracking;
 using VRage;
 using VRage.Game.ModAPI;
 using VRage.Input;
 using VRageMath;
 using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
 
-namespace StarCore.ShareTrack
+namespace TLB.ShareTrack
 {
     /// <summary>
     /// Shift-M menu
@@ -23,7 +24,7 @@ namespace StarCore.ShareTrack
 
         public static AllGridsList I;
 
-        public static Dictionary<string, int> PointValues = new Dictionary<string, int>();
+        public static Dictionary<string, double> PointValues = new Dictionary<string, double>();
 
 
         private static readonly Dictionary<long, IMyPlayer> AllPlayers = new Dictionary<long, IMyPlayer>();
@@ -35,7 +36,7 @@ namespace StarCore.ShareTrack
 
         public static ShipTracker.NametagSettings NametagViewState = ShipTracker.NametagSettings.PlayerName;
 
-        private readonly Dictionary<string, int> _bp = new Dictionary<string, int>();
+        private readonly Dictionary<string, double> _bp = new Dictionary<string, double>();
 
         private readonly Dictionary<MyKeys, Action> _keyAndActionPairs = new Dictionary<MyKeys, Action>
         {
@@ -79,11 +80,11 @@ namespace StarCore.ShareTrack
 
         private readonly List<IMyPlayer> _listPlayers = new List<IMyPlayer>();
         private readonly Dictionary<string, double> _m = new Dictionary<string, double>();
-        private readonly Dictionary<string, int> _mbp = new Dictionary<string, int>();
-        private readonly Dictionary<string, int> _mobp = new Dictionary<string, int>();
-        private readonly Dictionary<string, int> _obp = new Dictionary<string, int>();
+        private readonly Dictionary<string, double> _mbp = new Dictionary<string, double>();
+        private readonly Dictionary<string, double> _mobp = new Dictionary<string, double>();
+        private readonly Dictionary<string, double> _obp = new Dictionary<string, double>();
 
-        private readonly Dictionary<string, int> _pbp = new Dictionary<string, int>();
+        private readonly Dictionary<string, double> _pbp = new Dictionary<string, double>();
 
         // todo: remove this and replace with old solution for just combining BP and mass
         private readonly Dictionary<string, List<string>> _ts = new Dictionary<string, List<string>>();
@@ -97,13 +98,16 @@ namespace StarCore.ShareTrack
         {
             try
             {
-                var dict = message as Dictionary<string, int>;
+                var dict = message as Dictionary<string, double>;
                 if (dict != null)
                 {
-                    PointValues = dict;
+                    PointValues = new Dictionary<string, double>();
+                    foreach (var kvp in dict)
+                    {
+                        AddFuzzyPointValue(kvp.Key, kvp.Value);
+                    }
                     return;
                 }
-
                 var climbCostFunc = message as Func<string, MyTuple<string, float>>;
                 if (climbCostFunc != null)
                 {
@@ -114,6 +118,18 @@ namespace StarCore.ShareTrack
             {
                 Log.Error(ex);
             }
+        }
+
+        private void AddFuzzyPointValue(string key, double value)
+        {
+            foreach (var existingKey in PointValues.Keys.ToList())
+            {
+                if (existingKey.StartsWith(key, StringComparison.OrdinalIgnoreCase))
+                {
+                    PointValues[existingKey] = value;
+                }
+            }
+            PointValues[key] = value;
         }
 
         private void HudRegistered()
@@ -194,8 +210,8 @@ namespace StarCore.ShareTrack
 
 
         private void MainTrackerUpdate(Dictionary<string, List<string>> ts, Dictionary<string, double> m,
-            Dictionary<string, int> bp, Dictionary<string, int> mbp, Dictionary<string, int> pbp,
-            Dictionary<string, int> obp, Dictionary<string, int> mobp)
+            Dictionary<string, double> bp, Dictionary<string, double> mbp, Dictionary<string, double> pbp,
+            Dictionary<string, double> obp, Dictionary<string, double> mobp)
         {
             foreach (var shipTracker in TrackingManager.I.TrackedGrids.Values)
             {
@@ -276,8 +292,8 @@ namespace StarCore.ShareTrack
 
 
         private static void TeamBpCalc(StringBuilder tt, Dictionary<string, List<string>> trackedShip,
-            Dictionary<string, double> m, Dictionary<string, int> bp, Dictionary<string, int> mbp,
-            Dictionary<string, int> pbp, Dictionary<string, int> obp, Dictionary<string, int> mobp)
+            Dictionary<string, double> m, Dictionary<string, double> bp, Dictionary<string, double> mbp,
+            Dictionary<string, double> pbp, Dictionary<string, double> obp, Dictionary<string, double> mobp)
         {
             foreach (var faction in trackedShip.Keys)
             {

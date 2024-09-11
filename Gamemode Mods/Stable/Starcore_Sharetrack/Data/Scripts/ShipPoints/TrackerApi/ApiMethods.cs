@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using StarCore.ShareTrack.ShipTracking;
+using TLB.ShareTrack.ShipTracking;
 using VRage.Game.ModAPI;
 
-namespace StarCore.ShareTrack.TrackerApi
+namespace TLB.ShareTrack.TrackerApi
 {
     internal class ApiMethods
     {
@@ -21,10 +21,9 @@ namespace StarCore.ShareTrack.TrackerApi
                 ["RegisterOnAliveChanged"] = new Action<Action<IMyCubeGrid, bool>>(RegisterOnAliveChanged),
                 ["UnregisterOnAliveChanged"] = new Action<Action<IMyCubeGrid, bool>>(UnregisterOnAliveChanged),
                 ["AreTrackedGridsLoaded"] = new Func<bool>(AreTrackedGridsLoaded),
-                ["GetGridPoints"] = new Func<IMyCubeGrid, int>(GetGridPoints),
+                ["GetGridPoints"] = new Func<IMyCubeGrid, double>(GetGridPoints),
                 ["TrackGrid"] = new Action<IMyCubeGrid, bool>(TrackGrid),
                 ["UnTrackGrid"] = new Action<IMyCubeGrid, bool>(UnTrackGrid),
-                ["SetAutotrack"] = new Action<bool>(value => TrackingManager.I.EnableAutotrack = value),
             };
         }
 
@@ -70,7 +69,7 @@ namespace StarCore.ShareTrack.TrackerApi
             return TrackingManager.I.GetQueuedGridTracks().Length == 0;
         }
 
-        private int GetGridPoints(IMyCubeGrid grid)
+        private double GetGridPoints(IMyCubeGrid grid)
         {
             if (TrackingManager.I == null || !TrackingManager.I.TrackedGrids.ContainsKey(grid))
                 return -1;

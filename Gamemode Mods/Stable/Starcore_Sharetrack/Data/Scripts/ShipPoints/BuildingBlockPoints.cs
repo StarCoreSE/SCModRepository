@@ -1,11 +1,11 @@
 ﻿using System.Text;
 using Sandbox.Game.Gui;
 using Sandbox.ModAPI;
-using StarCore.ShareTrack.API;
+using TLB.ShareTrack.API;
 using VRageMath;
 using VRageRender;
 
-namespace StarCore.ShareTrack
+namespace TLB.ShareTrack
 {
     internal class BuildingBlockPoints
     {
@@ -39,7 +39,7 @@ namespace StarCore.ShareTrack
             if (_pointsMessage == null)
                 return;
 
-            int blockPoints;
+            double blockPoints;
             if (blockInfo == null || !AllGridsList.PointValues.TryGetValue(blockInfo.DefinitionId.SubtypeName, out blockPoints))
             {
                 _pointsMessage.Visible = false;
@@ -54,7 +54,7 @@ namespace StarCore.ShareTrack
             _pointsMessage.Message.Clear();
             _pointsMessage.Message.Append($"{blockDisplayName}:\n{blockPoints}bp");
             if (thisClimbingCostMult != 0)
-                _pointsMessage.Message.Append($" +{(int)(blockPoints*thisClimbingCostMult)}bp/b");
+                _pointsMessage.Message.Append($" +{(blockPoints*thisClimbingCostMult)}bp/b");
             _pointsMessage.Visible = true;
         }
     }
