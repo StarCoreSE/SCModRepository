@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
+using Sandbox.Definitions;
 using Sandbox.ModAPI;
 using VRage;
 using VRage.Game;
@@ -11,7 +12,7 @@ namespace ShipPoints
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     internal class PointAdditions : MySessionComponentBase
     {
-        readonly Dictionary<string, int> PointValues = new Dictionary<string, int>
+        readonly Dictionary<string, double> PointValues = new Dictionary<string, double>
         {
             ["LargeBlockBatteryBlock"] = 14,
             ["LargeBlockBatteryBlockWarfare2"] = 14,
@@ -748,21 +749,22 @@ namespace ShipPoints
             #endregion
         };
 
-        private readonly Func<string, MyTuple<string, float>> _climbingCostRename = ClimbingCostRename;
+        private readonly Dictionary<string, double> FuzzyPoints = new Dictionary<string, double>();
+        private readonly Func<string, MyTuple<string, double>> _climbingCostRename = ClimbingCostRename;
 
-        private static MyTuple<string, float> ClimbingCostRename(string blockDisplayName)
+        private static MyTuple<string, double> ClimbingCostRename(string blockSubtypeName)
         {
             float costMultiplier = 0;
 
-            switch (blockDisplayName)
+            switch (blockSubtypeName)
             {
                 case "Blink Drive Large":
-                    blockDisplayName = "Blink Drive";
+                    blockSubtypeName = "Blink Drive";
                     costMultiplier = 0.15f;
                     break;
                 case "Project Pluto (SLAM)":
                 case "SLAM":
-                    blockDisplayName = "SLAM";
+                    blockSubtypeName = "SLAM";
                     costMultiplier = 0.25f;
                     break;
                 case "[BTI] MRM-10 Modular Launcher 45":
@@ -770,15 +772,15 @@ namespace ShipPoints
                 case "[BTI] MRM-10 Modular Launcher":
                 case "[BTI] MRM-10 Modular Launcher Middle":
                 case "[BTI] MRM-10 Launcher":
-                    blockDisplayName = "[BTI] MRM-10 Launcher";
+                    blockSubtypeName = "[BTI] MRM-10 Launcher";
                     costMultiplier = 0.04f;
                     break;
-                case "[BTI] LRM-5 Modular Launcher 45 Reversed":
+                case "ModularLRM5Angled":
                 case "[BTI] LRM-5 Modular Launcher 45":
                 case "[BTI] LRM-5 Modular Launcher Middle":
                 case "[BTI] LRM-5 Modular Launcher":
                 case "[BTI] LRM-5 Launcher":
-                    blockDisplayName = "[BTI] LRM-5 Launcher";
+                    blockSubtypeName = "[BTI] LRM-5 Launcher";
                     costMultiplier = 0.10f;
                     break;
                 case "[MA] Gimbal Laser T2 Armored":
@@ -786,7 +788,7 @@ namespace ShipPoints
                 case "[MA] Gimbal Laser T2 Armored Slope 2":
                 case "[MA] Gimbal Laser T2 Armored Slope":
                 case "[MA] Gimbal Laser T2":
-                    blockDisplayName = "[MA] Gimbal Laser T2";
+                    blockSubtypeName = "[MA] Gimbal Laser T2";
                     costMultiplier = 0f;
                     break;
                 case "[MA] Gimbal Laser Armored Slope 45":
@@ -794,13 +796,13 @@ namespace ShipPoints
                 case "[MA] Gimbal Laser Armored Slope":
                 case "[MA] Gimbal Laser Armored":
                 case "[MA] Gimbal Laser":
-                    blockDisplayName = "[MA] Gimbal Laser";
+                    blockSubtypeName = "[MA] Gimbal Laser";
                     costMultiplier = 0f;
                     break;
                 case "[ONYX] BR-RT7 Afflictor Slanted Burst Cannon":
                 case "[ONYX] BR-RT7 Afflictor 70mm Burst Cannon":
                 case "[ONYX] Afflictor":
-                    blockDisplayName = "[ONYX] Afflictor";
+                    blockSubtypeName = "[ONYX] Afflictor";
                     costMultiplier = 0f;
                     break;
                 case "[MA] Slinger AC 150mm Sloped 30":
@@ -809,66 +811,66 @@ namespace ShipPoints
                 case "[MA] Slinger AC 150mm Sloped 45 Gantry":
                 case "[MA] Slinger AC 150mm":
                 case "[MA] Slinger":
-                    blockDisplayName = "[MA] Slinger";
+                    blockSubtypeName = "[MA] Slinger";
                     costMultiplier = 0f;
                     break;
                 case "[ONYX] Heliod Plasma Pulser":
-                    blockDisplayName = "[ONYX] Heliod Plasma Pulser";
+                    blockSubtypeName = "[ONYX] Heliod Plasma Pulser";
                     costMultiplier = 0.50f;
                     break;
                 case "[MA] UNN Heavy Torpedo Launcher":
-                    blockDisplayName = "[MA] UNN Heavy Torpedo Launcher";
+                    blockSubtypeName = "[MA] UNN Heavy Torpedo Launcher";
                     costMultiplier = 0.15f;
                     break;
                 case "[BTI] SRM-8":
-                    blockDisplayName = "[BTI] SRM-8";
+                    blockSubtypeName = "[BTI] SRM-8";
                     costMultiplier = 0.15f;
                     break;
                 case "[BTI] Starcore Arrow-IV Launcher":
                 case "[BTI] Starcore Arrow-IV Single Launcher":
-                    blockDisplayName = "[BTI] Starcore Arrow-IV Launcher";
+                    blockSubtypeName = "[BTI] Starcore Arrow-IV Launcher";
                     costMultiplier = 0.15f;
                     break;
                 case "[HAS] Tartarus VIII":
-                    blockDisplayName = "[HAS] Tartarus VIII";
+                    blockSubtypeName = "[HAS] Tartarus VIII";
                     costMultiplier = 0.15f;
                     break;
                 case "[HAS] Cocytus IX":
-                    blockDisplayName = "[HAS] Cocytus IX";
+                    blockSubtypeName = "[HAS] Cocytus IX";
                     costMultiplier = 0.15f;
                     break;
                 case "[MA] MCRN Torpedo Launcher":
-                    blockDisplayName = "[MA] MCRN Torpedo Launcher";
+                    blockSubtypeName = "[MA] MCRN Torpedo Launcher";
                     costMultiplier = 0.15f;
                     break;
                 case "Flares":
-                    blockDisplayName = "Flares";
+                    blockSubtypeName = "Flares";
                     costMultiplier = 0.25f;
                     break;
                 case "[EXO] Chiasm [Arc Emitter]":
-                    blockDisplayName = "[EXO] Chiasm [Arc Emitter]";
+                    blockSubtypeName = "[EXO] Chiasm [Arc Emitter]";
                     costMultiplier = 0.15f;
                     break;
                 case "[BTI] Medium Laser":
                 case "[BTI] Large Laser":
-                    blockDisplayName = "[BTI] Laser";
+                    blockSubtypeName = "[BTI] Laser";
                     costMultiplier = 0.15f;
                     break;
                 case "[SOL] ArcStrike CS-LR Torpedo":
-                    blockDisplayName = "[SOL] ArcStrike Torpedo";
+                    blockSubtypeName = "[SOL] ArcStrike Torpedo";
                     costMultiplier = 0.25f;
                     break;
                 case "Reinforced Blastplate":
                 case "Active Blastplate":
                 case "7x7 Basedplate":
-                    blockDisplayName = "Large Blastplate";
+                    blockSubtypeName = "Large Blastplate";
                     costMultiplier = 0f;
                     break;
                 case "Standard Blastplate A":
                 case "Standard Blastplate B":
                 case "Standard Blastplate C":
                 case "Elongated Blastplate":
-                    blockDisplayName = "Blastplate";
+                    blockSubtypeName = "Blastplate";
                     costMultiplier = 0f;
                     break;
                 case "[EXO] Taiidan":
@@ -878,66 +880,99 @@ namespace ShipPoints
                 case "[EXO] Taiidan Bomber Hangar Bay":
                 case "[EXO] Taiidan Bomber Hangar Bay Medium":
                 case "[EXO] Taiidan Fighter Small Bay":
-                    blockDisplayName = "[EXO] Taiidan Bay";
+                    blockSubtypeName = "[EXO] Taiidan Bay";
                     costMultiplier = 0.25f;
                     break;
                 case "[40K] Gothic Torpedo Launcher":
-                    blockDisplayName = "[40k] Gothic Torpedo Launcher";
+                    blockSubtypeName = "[40k] Gothic Torpedo Launcher";
                     costMultiplier = 0.1f;
                     break;
                 case "[MID] AX 'Spitfire' Light Rocket Turret":
-                    blockDisplayName = "[MID] Spitfire Turret";
+                    blockSubtypeName = "[MID] Spitfire Turret";
                     costMultiplier = 0.15f;
                     break;
                 case "[FLAW] Naval RL-10x 'Avalanche' Medium Range Launchers":
                 case "[FLAW] Naval RL-10x 'Avalanche' Angled Medium Range Launchers":
-                    blockDisplayName = "[FLAW] RL-10x Avalanche";
+                    blockSubtypeName = "[FLAW] RL-10x Avalanche";
                     costMultiplier = 0.15f;
                     break;
                 case "[MID] LK 'Bonfire' Guided Rocket Turret":
-                    blockDisplayName = "[MID] Bonfire Turret";
+                    blockSubtypeName = "[MID] Bonfire Turret";
                     costMultiplier = 0.2f;
                     break;
                 case "[FLAW] Warp Beacon - Longsword":
-                    blockDisplayName = "[FLAW] Longsword Bomber";
+                    blockSubtypeName = "[FLAW] Longsword Bomber";
                     costMultiplier = 0.2f;
                     break;
                 case "[FLAW] Phoenix Snubfighter Launch Bay":
-                    blockDisplayName = "[FLAW] Snubfighters";
+                    blockSubtypeName = "[FLAW] Snubfighters";
                     costMultiplier = 0.1f;
                     break;
                 case "[FLAW] Hadean Superheavy Plasma Blastguns":
-                    blockDisplayName = "[FLAW] Plasma Blastgun";
+                    blockSubtypeName = "[FLAW] Plasma Blastgun";
                     costMultiplier = 0.121f;
                     break;
                 case "[FLAW] Vindicator Kinetic Battery":
-                    blockDisplayName = "[FLAW] Kinetic Battery";
+                    blockSubtypeName = "[FLAW] Kinetic Battery";
                     costMultiplier = 0.120f;
                     break;
                 case "[FLAW] Goalkeeper Casemate Flak Battery":
-                    blockDisplayName = "[FLAW] Goalkeeper Flakwall";
+                    blockSubtypeName = "[FLAW] Goalkeeper Flakwall";
                     costMultiplier = 0.119f;
                     break;
                 case "Shield Controller":
                 case "Shield Controller Table":
                 case "Structural Integrity Field Generator":
 		case "Structural Integrity Generator Core":
-                    blockDisplayName = "Defensive Generator";
+                    blockSubtypeName = "Defensive Generator";
                     costMultiplier = 50.00f;
                     break;
                 case "[FAS] Neptune Torpedo":
-                    blockDisplayName = "[FAS] Neptune Torpedo";
+                    blockSubtypeName = "[FAS] Neptune Torpedo";
                     costMultiplier = 0.25f;
                     break;
             }
 
-            return new MyTuple<string, float>(blockDisplayName, costMultiplier);
+            return new MyTuple<string, double>(blockSubtypeName, costMultiplier);
         }
 
         public override void Init(MyObjectBuilder_SessionComponent sessionComponent)
         {
+            // Add fuzzy rules (can be displayname or subtype)
+            //FuzzyPoints.Add("example", 0.33);
+
+
+            // Process fuzzy rules
+            foreach (var kvp in FuzzyPoints)
+            {
+                foreach (var block in MyDefinitionManager.Static.GetAllDefinitions())
+                {
+                    var cubeBlock = block as MyCubeBlockDefinition;
+                    if (cubeBlock != null)
+                    {
+                        // Check if the subtype contains the fuzzy rule key (case-insensitive)
+                        if (cubeBlock.Id.SubtypeName.IndexOf(kvp.Key, StringComparison.OrdinalIgnoreCase) >= 0)
+                        {
+                            if (!PointValues.ContainsKey(cubeBlock.Id.SubtypeName))
+                            {
+                                PointValues[cubeBlock.Id.SubtypeName] = kvp.Value;
+                            }
+                        }
+                        else if (cubeBlock.DisplayNameString != null && cubeBlock.DisplayNameString.Contains(kvp.Key))
+                        {
+                            if (!PointValues.ContainsKey(cubeBlock.Id.SubtypeName))
+                            {
+                                PointValues[cubeBlock.Id.SubtypeName] = kvp.Value;
+                            }
+
+                        }
+                    }
+                }
+            }
+
             MyAPIGateway.Utilities.SendModMessage(2546247, PointValues);
             MyAPIGateway.Utilities.SendModMessage(2546247, _climbingCostRename);
         }
+
     }
 }
