@@ -38,7 +38,6 @@ namespace StarCore.ShareTrack.ShipTracking
         public ShipTracker(IMyCubeGrid grid, bool showOnHud = true)
         {
             TransferToGrid(grid, showOnHud);
-            Update();
             if (!showOnHud || MyAPIGateway.Utilities.IsDedicated) return;
             _nametag = new HudAPIv2.HUDMessage(new StringBuilder("Initializing..."), Vector2D.Zero, font: "BI_SEOutlined", blend: BlendTypeEnum.PostPP, hideHud: false, shadowing: true);
             UpdateHud();
@@ -119,6 +118,8 @@ namespace StarCore.ShareTrack.ShipTracking
                 TrackingManager.I.TrackedGrids.Add(Grid, this);
 
             Log.Info($"TransferToGrid completed for grid {Grid.DisplayName}");
+
+            Update();
         }
 
         private ShieldApi ShieldApi => AllGridsList.I.ShieldApi;
@@ -196,7 +197,10 @@ namespace StarCore.ShareTrack.ShipTracking
 
             // TODO: Update pilots
             foreach (var gridStat in _gridStats.Values)
+            {
+                gridStat.IsPrimaryGrid = gridStat.Grid.EntityId == Grid.EntityId;
                 gridStat.Update();
+            }
 
             bool bufferIsFunctional = IsFunctional;
             IsFunctional = TotalPower > 0 && TotalTorque > 0 && CockpitCount > 0;
