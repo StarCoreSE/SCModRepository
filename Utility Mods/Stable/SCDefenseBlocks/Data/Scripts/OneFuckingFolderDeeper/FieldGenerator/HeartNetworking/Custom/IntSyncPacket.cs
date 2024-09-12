@@ -52,6 +52,9 @@ namespace Starcore.FieldGenerator.Networking.Custom
                     value = value
                 };
 
+                if (!HeartNetwork.CheckRateLimit(entityId))
+                    return;
+
                 Log.Info($"Sending Int Sync: {propertyName} = {value}");
 
                 if (MyAPIGateway.Session.IsServer)

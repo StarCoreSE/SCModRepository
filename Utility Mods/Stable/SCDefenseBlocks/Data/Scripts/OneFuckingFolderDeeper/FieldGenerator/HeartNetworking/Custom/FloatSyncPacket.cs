@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ProtoBuf;
 using Sandbox.ModAPI;
 
@@ -60,6 +61,9 @@ namespace Starcore.FieldGenerator.Networking.Custom
                     propertyName = propertyName,
                     value = value
                 };
+
+                if (!HeartNetwork.CheckRateLimit(entityId))
+                    return;
 
                 Log.Info($"Sending Float Sync: {propertyName} = {value}");
 

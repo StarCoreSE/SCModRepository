@@ -21,6 +21,8 @@ namespace Starcore.FieldGenerator.Networking
         public ushort NetworkId { get; private set; }
         public int TotalNetworkLoad { get; private set; }
 
+        private Dictionary<long, DateTime> _rateLimiter = new Dictionary<long, DateTime>();
+
         public override void Init(string id)
         {
             base.Init(id);
@@ -152,6 +154,28 @@ namespace Starcore.FieldGenerator.Networking
                 serialized = MyAPIGateway.Utilities.SerializeToBinary(packet);
 
             MyAPIGateway.Multiplayer.SendMessageToServer(NetworkId, serialized);
+        }
+
+        /// <summary>
+        /// Used to rate-limit packets by ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="delayMs">Milliseconds to wait before allowing another packet</param>
+        /// <returns></returns>
+        public static bool CheckRateLimit(long id, double delayMs = 5000/60d)
+        {
+            if (I == null)
+                throw new Exception("Null HeartNetwork.I!");
+
+            DateTime originalTime;
+            DateTime nowTime = DateTime.Now; // caching because i'm a nerd
+            if (!I._rateLimiter.TryGetValue(id, out originalTime) || (nowTime - originalTime).TotalMilliseconds >= delayMs)
+            {
+                I._rateLimiter[id] = nowTime;
+                return true;
+            }
+
+            return false;
         }
     }
 }
