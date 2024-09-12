@@ -6,9 +6,13 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>CHP_IonCannonFixed</SubtypeId>
 			</Id>
-			<DisplayName>Fixed Ion Cannon</DisplayName>
+			<DisplayName>[CHP] Fixed Ion Cannon</DisplayName>
 			<Description>
-        [DESCRIPTION PENDING]
+        [3.5km Max Range]
+        [Falloff to 80% starts at 3km)
+        [Draws ~112MW]
+        [Energy damage]
+        [Hitscan]
       </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_IonCannonFixed.dds</Icon>
 			<CubeSize>Large</CubeSize>

@@ -6,9 +6,13 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>CHP_KineticAutogunPDC</SubtypeId>
 			</Id>
-			<DisplayName>Kinetic Gun Point Defense</DisplayName>
+			<DisplayName>[CHP] Kinetic Gun Point Defense</DisplayName>
 			<Description>
-        [DESCRIPTION PENDING]
+        [4km Max Range]
+        [Falloff to 33% starts at 2.75km)
+        [Draws ~112MW]
+        [Energy damage]
+        [Hitscan]
       </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_KineticAutogunPDC.dds</Icon>
 			<CubeSize>Large</CubeSize>

@@ -6,10 +6,12 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>CHP_ArbiterKineticBurstCannon</SubtypeId>
 			</Id>
-			<DisplayName>Arbiter Kinetic Burst Cannon Turret</DisplayName>
+			<DisplayName>[CHP] Arbiter Kinetic Burst Cannon Turret</DisplayName>
 			<Description>
-        [DESCRIPTION PENDING]
-			</Description>
+        [6km Targeting Range]
+        [Kinetic/Energy damage]
+        [750 m/s]
+      </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_ArbiterKineticBurstCannon.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>

@@ -6,9 +6,13 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>CHP_IonTurret</SubtypeId>
 			</Id>
-			<DisplayName>Heavy Ion Turret</DisplayName>
+			<DisplayName>[CHP] Heavy Ion Turret</DisplayName>
 			<Description>
-        [DESCRIPTION PENDING]
+        [4km Max Range]
+        [Falloff to 33% starts at 2.75km)
+        [Draws ~224MW]
+        [Energy damage]
+        [Hitscan]
       </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_IonTurret.dds</Icon>
 			<CubeSize>Large</CubeSize>
@@ -83,7 +87,11 @@
 			</Id>
 			<DisplayName>Medium Ion Turret</DisplayName>
 			<Description>
-        [DESCRIPTION PENDING]
+        [5km Max Range]
+        [Falloff to 80% starts at 3km)
+        [Draws ~192MW]
+        [Energy damage]
+        [Hitscan]
       </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_MediumIonTurret.dds</Icon>
 			<CubeSize>Large</CubeSize>
