@@ -885,7 +885,7 @@ namespace ShipPoints
                 case "[CHP] Quick Launch Drone Hangar (H)":
                 case "[CHP] Quick Launch Drone Hangar Bomber (H)":
                 case "[CHP] Quick Launch Drone Hangar Bomber Flat (H)":
-                    blockDisplayName = "[EXO] Taiidan Bay";
+                    blockDisplayName = "Hangar Bays";
                     costMultiplier = 0.25f;
                     break;
                 case "[40K] Gothic Torpedo Launcher":
