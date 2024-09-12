@@ -6,7 +6,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>CHP_DroneHangarHiigara</SubtypeId>
 			</Id>
-			<DisplayName>Drone Hangar Interceptor (H)</DisplayName>
+			<DisplayName>[CHP] Drone Hangar Interceptor (H)</DisplayName>
 			<Description>
         Launches Hiigaran fighters.
         Capacity: X Fighters
@@ -85,7 +85,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>CHP_DroneHangarHiigara_Rail</SubtypeId>
 			</Id>
-			<DisplayName>Drone Launch Rail Interceptor (H)</DisplayName>
+			<DisplayName>[CHP] Drone Launch Rail Interceptor (H)</DisplayName>
 			<Description>
         Launches Hiigaran fighters.
         Capacity: X Fighters
@@ -162,7 +162,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>CHP_DroneBomberHangarHiigara</SubtypeId>
 			</Id>
-			<DisplayName>Drone Hangar Bomber (H)</DisplayName>
+			<DisplayName>[CHP] Drone Hangar Bomber (H)</DisplayName>
 			<Description>
         Launches Hiigaran bombers.
         Capacity: X Bombers
@@ -237,7 +237,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>CHP_DroneBomberHangarHiigara_Rail</SubtypeId>
 			</Id>
-			<DisplayName>Drone Launch Rail Bomber (H)</DisplayName>
+			<DisplayName>[CHP] Drone Launch Rail Bomber (H)</DisplayName>
 			<Description>
         Launches Hiigaran bombers.
         Capacity: X Bombers
@@ -321,7 +321,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>CHP_DroneHangarHiigara_Tall</SubtypeId>
 			</Id>
-			<DisplayName>Quick Launch Drone Hangar (H)</DisplayName>
+			<DisplayName>[CHP] Quick Launch Drone Hangar (H)</DisplayName>
 			<Description>
         Launches Hiigaran fighters.
         Capacity: X Fighters
@@ -396,7 +396,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>CHP_DroneHangarHiigara_TallFlat</SubtypeId>
 			</Id>
-			<DisplayName>Quick Launch Drone Hangar (H)</DisplayName>
+			<DisplayName>[CHP] Quick Launch Drone Hangar (H)</DisplayName>
 			<Description>
         Launches Hiigaran fighters.
         Capacity: X Fighters
@@ -474,7 +474,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>CHP_DroneBomberHangarHiigara_Tall</SubtypeId>
 			</Id>
-			<DisplayName>Quick Launch Drone Hangar Bomber (H)</DisplayName>
+			<DisplayName>[CHP] Quick Launch Drone Hangar Bomber (H)</DisplayName>
 			<Description>
         Launches Hiigaran bombers.
         Capacity: X Bombers
@@ -549,7 +549,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>CHP_DroneBomberHangarHiigara_TallFlat</SubtypeId>
 			</Id>
-			<DisplayName>Quick Launch Drone Hangar Bomber Flat(H)</DisplayName>
+			<DisplayName>[CHP] Quick Launch Drone Hangar Bomber Flat (H)</DisplayName>
 			<Description>
         Launches Hiigaran bombers.
         Capacity: X Bombers

@@ -878,6 +878,13 @@ namespace ShipPoints
                 case "[EXO] Taiidan Bomber Hangar Bay":
                 case "[EXO] Taiidan Bomber Hangar Bay Medium":
                 case "[EXO] Taiidan Fighter Small Bay":
+                case "[CHP] Drone Hangar Interceptor (H)":
+                case "[CHP] Drone Launch Rail Interceptor (H)":
+                case "[CHP] Drone Hangar Bomber (H)":
+                case "[CHP] Drone Launch Rail Bomber (H)":
+                case "[CHP] Quick Launch Drone Hangar (H)":
+                case "[CHP] Quick Launch Drone Hangar Bomber (H)":
+                case "[CHP] Quick Launch Drone Hangar Bomber Flat (H)":
                     blockDisplayName = "[EXO] Taiidan Bay";
                     costMultiplier = 0.25f;
                     break;

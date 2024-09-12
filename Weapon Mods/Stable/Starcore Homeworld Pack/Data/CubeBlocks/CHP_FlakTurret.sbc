@@ -6,8 +6,13 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>CHP_FlakTurret</SubtypeId>
 			</Id>
-			<DisplayName>Flak Turret</DisplayName>
-			<Description>[DESCRIPTION PENDING]</Description>
+			<DisplayName>[CHP] Flak Turret</DisplayName>
+			<Description>
+        [1.25km Max Range]
+        [Energy Damage]
+        [Point-Defense]
+        [850 m/s]
+      </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_FlakTurret.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>

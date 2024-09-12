@@ -6,9 +6,11 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>CHP_HeavyTorpedoLauncher</SubtypeId>
 			</Id>
-			<DisplayName>Heavy Torpedo Launcher</DisplayName>
+			<DisplayName>[CHP] Heavy Torpedo Launcher</DisplayName>
 			<Description>
-        [DESCRIPTION PENDING]
+        [8km Targeting Range]
+        [Kinetic/Energy damage]
+        [~250 m/s]
       </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_HeavyTorpedoLauncher.dds</Icon>
 			<CubeSize>Large</CubeSize>

@@ -6,9 +6,11 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>CHP_HeavyMassDriverTurret</SubtypeId>
 			</Id>
-			<DisplayName>Heavy Mass Driver Turret</DisplayName>
+			<DisplayName>[CHP] Heavy Mass Driver Turret</DisplayName>
 			<Description>
-        [DESCRIPTION PENDING]
+        [3.5km Targeting Range]
+        [Kinetic/Energy damage]
+        [900 m/s]
       </Description>
 			<Icon>Textures\GUI\Icons\Cubes\CHP_HeavyMassDriverTurret.dds</Icon>
 			<CubeSize>Large</CubeSize>
