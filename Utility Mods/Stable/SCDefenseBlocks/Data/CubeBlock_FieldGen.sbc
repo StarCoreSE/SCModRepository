@@ -54,6 +54,7 @@
             <DestroySound>WepSmallWarheadExpl</DestroySound>
             <PCU>25</PCU>
             <IsAirTight>true</IsAirTight>
+            <Public>false</Public>
         </Definition>
 
         <Definition xsi:type="MyObjectBuilder_PoweredCargoContainerDefinition">
