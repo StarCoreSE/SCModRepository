@@ -85,7 +85,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>CHP_MediumIonTurret</SubtypeId>
 			</Id>
-			<DisplayName>Medium Ion Turret</DisplayName>
+			<DisplayName>[CHP] Medium Ion Turret</DisplayName>
 			<Description>
         [5km Max Range]
         [Falloff to 80% starts at 3km)
