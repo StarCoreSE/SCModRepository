@@ -716,7 +716,7 @@ namespace ShipPoints
             ["Type17_BeamLance"] = 100000,
 
             ["CHP_FlakTurret"] = 50,
-            ["CHP_KineticGunPointDefense"] = 75,
+            ["CHP_KineticAutogunPDC"] = 75,
             ["CHP_MediumKineticTurret"] = 150,
             ["CHP_MediumMassDriverTurret"] = 150,
             ["CHP_MediumMassDriverSingleTurret"] = 150,
