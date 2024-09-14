@@ -720,6 +720,7 @@ namespace ShipPoints
             ["CHP_MediumKineticTurret"] = 150,
             ["CHP_MediumMassDriverTurret"] = 150,
             ["CHP_MediumMassDriverSingleTurret"] = 150,
+            ["CHP_IonTurret"] = 250,
             ["CHP_MediumIonTurret"] = 150,
             ["CHP_IonCannonFixed"] = 150,
             ["CHP_ArbiterKineticBurstCannon"] = 200,
