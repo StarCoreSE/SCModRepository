@@ -13,7 +13,7 @@
       [10km Targeting Range]
       [510 m/s]
       [Energy Damage]
-      [Does not reload]
+      [3 Reloads]
       [5 Missiles]
     </Description>
      <Icon>Textures\Icons\lrm5icon.dds</Icon>
@@ -67,7 +67,7 @@
 	  <Description>[10km Targeting Range]
     [390 m/s]
     [Energy Damage]
-    [Does not reload]
+    [3 Reloads]
     [5 Missiles]
     Effective armor, shield and module damage.
 	 </Description>
@@ -111,7 +111,7 @@
 	  <Description>[10km Targeting Range]
     [390 m/s]
     [Energy Damage]
-    [Does not reload]
+    [3 Reloads]
     [5 Missiles]
     Effective armor, shield and module damage.
 	 </Description>
@@ -156,7 +156,7 @@
       <Description>[10km Targeting Range]
     [390 m/s]
     [Energy Damage]
-    [Does not reload]
+    [3 Reloads]
     [5 Missiles]
     Effective armor, shield and module damage.
      </Description>
@@ -406,7 +406,7 @@
 	  <Description>[3.5km Range]
     [420~ m/s]
     [Energy Damage]
-    [Does not reload]
+    [3 Reloads]
     Effective against armor, shields and modules.
 	 </Description>
      <Icon>Textures\Icons\srm8l.dds</Icon>
