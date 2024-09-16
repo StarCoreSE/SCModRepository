@@ -434,40 +434,44 @@ namespace Starcore.FieldGenerator
 
             private void LogMessage(string message, string prefix = null)
             {
-                try
+                if (Config.DebugMode)
                 {
-                    sb.Clear();
-                    sb.Append(DateTime.Now.ToString("[HH:mm:ss] "));
-
-                    if (writer == null)
-                        sb.Append("(PRE-INIT) ");
-
-                    for (int i = 0; i < indent; i++)
-                        sb.Append(' ', 4);
-
-                    if (prefix != null)
-                        sb.Append(prefix);
-
-                    sb.Append(message);
-
-                    if (writer == null)
+                    try
                     {
-                        if (preInitMessages == null)
-                            preInitMessages = new List<string>();
+                        sb.Clear();
+                        sb.Append(DateTime.Now.ToString("[HH:mm:ss] "));
 
-                        preInitMessages.Add(sb.ToString());
+                        if (writer == null)
+                            sb.Append("(PRE-INIT) ");
+
+                        for (int i = 0; i < indent; i++)
+                            sb.Append(' ', 4);
+
+                        if (prefix != null)
+                            sb.Append(prefix);
+
+                        sb.Append(message);
+
+                        if (writer == null)
+                        {
+                            if (preInitMessages == null)
+                                preInitMessages = new List<string>();
+
+                            preInitMessages.Add(sb.ToString());
+                        }
+                        else
+                        {
+                            writer.WriteLine(sb);
+                            writer.Flush();
+                        }
+
+                        sb.Clear();
                     }
-                    else
+                    catch (Exception e)
                     {
-                        writer.WriteLine(sb);
-                        writer.Flush();
+                        MyLog.Default.WriteLineAndConsole(
+                            $"{modName} had an error while logging message = '{message}'\nLogger error: {e.Message}\n{e.StackTrace}");
                     }
-
-                    sb.Clear();
-                }
-                catch (Exception e)
-                {
-                    MyLog.Default.WriteLineAndConsole($"{modName} had an error while logging message = '{message}'\nLogger error: {e.Message}\n{e.StackTrace}");
                 }
             }
 

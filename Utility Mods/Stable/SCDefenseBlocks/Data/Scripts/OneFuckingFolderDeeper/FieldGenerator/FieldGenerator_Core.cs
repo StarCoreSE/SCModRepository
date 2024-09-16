@@ -28,6 +28,8 @@ namespace Starcore.FieldGenerator
     public class Config
     {
         public const bool SimplifiedMode = true;
+        public const bool DebugMode = true;
+
 
         public const float PerModuleAmount = 12.5f;
         public const int MaxModuleCount = 4;
