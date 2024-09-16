@@ -39,49 +39,23 @@ namespace StarCore.RepairModule
         private bool IsDedicated = MyAPIGateway.Utilities.IsDedicated;
         private bool ClientSettingsLoaded = false;
 
-        private readonly Queue<Action> _updateQueue = new Queue<Action>();
-        private readonly object _queueLock = new object();
-
-        public readonly Guid SettingsID = new Guid("09E18094-46AE-4F55-8215-A407B49F9CAA");
-
-        private void EnqueueUpdate(Action update)
-        {
-            lock (_queueLock)
-            {
-                _updateQueue.Enqueue(update);
-            }
-        }
-
-        private void ProcessUpdateQueue()
-        {
-            lock (_queueLock)
-            {
-                while (_updateQueue.Count > 0)
-                {
-                    var action = _updateQueue.Dequeue();
-                    action.Invoke();
-                }
-            }
-        }
-
         // Block Settings
         public bool IgnoreArmor
         {
-            get { return ignoreArmor; }
+            get { return ignoreArmor;  }
             set
             {
                 if (ignoreArmor != value)
                 {
-                    EnqueueUpdate(() =>
+                    ignoreArmor = value;
+
+                    if (IsServer)
                     {
-                        ignoreArmor = value;
-                        if (IsServer)
-                        {
-                            Log.Info("Processing Repair Targets on Event Trigger: IgnoreArmor");
-                            ProcessRepairTargets(Block.CubeGrid, false);
-                        }
-                        OnIgnoreArmorChanged?.Invoke(ignoreArmor);
-                    });
+                        Log.Info("Processing Repair Targets on Event Trigger: IgnoreArmor");
+                        ProcessRepairTargets(Block.CubeGrid, false);
+                    }
+
+                    OnIgnoreArmorChanged?.Invoke(ignoreArmor);
                 }
             }
         }
@@ -95,16 +69,15 @@ namespace StarCore.RepairModule
             {
                 if (priorityOnly != value)
                 {
-                    EnqueueUpdate(() =>
+                    priorityOnly = value;
+                       
+                    if (IsServer)
                     {
-                        priorityOnly = value;
-                        if (IsServer)
-                        {
-                            Log.Info("Processing Repair Targets on Event Trigger: PriorityOnly");
-                            ProcessRepairTargets(Block.CubeGrid, false);
-                        }
-                        OnPriorityOnlyChanged?.Invoke(priorityOnly);
-                    });
+                        Log.Info("Processing Repair Targets on Event Trigger: PriorityOnly");
+                        ProcessRepairTargets(Block.CubeGrid, false);
+                    }
+
+                    OnPriorityOnlyChanged?.Invoke(priorityOnly);
                 }
             }
         }
@@ -119,16 +92,15 @@ namespace StarCore.RepairModule
                 var newPriority = GetPriorityFromLong(value);
                 if (subsystemPriority != newPriority)
                 {
-                    EnqueueUpdate(() =>
+                    subsystemPriority = newPriority;
+
+                    if (IsServer)
                     {
-                        subsystemPriority = newPriority;
-                        if (IsServer)
-                        {
-                            Log.Info("Processing Repair Targets on Event Trigger: SubsystemPriority");
-                            ProcessRepairTargets(Block.CubeGrid, false);
-                        }
-                        OnSubsystemPriorityChanged?.Invoke(GetLongFromPriority(subsystemPriority));
-                    });
+                        Log.Info("Processing Repair Targets on Event Trigger: SubsystemPriority");
+                        ProcessRepairTargets(Block.CubeGrid, false);
+                    }
+
+                    OnSubsystemPriorityChanged?.Invoke(value);
                 }
             }
         }
@@ -137,6 +109,7 @@ namespace StarCore.RepairModule
 
         // General Settings     
         float RepairAmount = 4f;
+        public readonly Guid SettingsID = new Guid("09E18094-46AE-4F55-8215-A407B49F9CAA");
 
         // Timed Sort
         private int UpdateCounter = 0;
@@ -165,16 +138,15 @@ namespace StarCore.RepairModule
         #region Update Methods
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
-            Log.Info($"RepairModule.Init started for EntityId: {Entity?.EntityId}");
             base.Init(objectBuilder);
+            
             Block = (IMyCollector)Entity;
+
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
-            Log.Info($"RepairModule.Init completed for EntityId: {Entity?.EntityId}");
         }
 
         public override void UpdateOnceBeforeFrame()
         {
-            Log.Info($"RepairModule.UpdateOnceBeforeFrame started for EntityId: {Entity?.EntityId}");
             base.UpdateOnceBeforeFrame();
 
             RepairModuleControls.DoOnce(ModContext);
@@ -213,17 +185,11 @@ namespace StarCore.RepairModule
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
             NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
             NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME;
-            Log.Info($"RepairModule.UpdateOnceBeforeFrame completed for EntityId: {Entity?.EntityId}");
         }
 
         public override void UpdateAfterSimulation()
         {
             base.UpdateAfterSimulation();
-
-            if (IsServer)
-            {
-                ProcessUpdateQueue();
-            }
 
             // Repair Function
             if (IsServer)
@@ -290,7 +256,11 @@ namespace StarCore.RepairModule
             {
                 ResetWeldEffects();
             }
+        }
 
+        public override void UpdateAfterSimulation10()
+        {
+            base.UpdateAfterSimulation10();
 
             if (IsServer)
             {
@@ -309,15 +279,20 @@ namespace StarCore.RepairModule
                     NeedsSorting = false;
                 }
             }
+        }
+
+        public override void UpdateAfterSimulation100()
+        {
+            base.UpdateAfterSimulation100();
 
             if (IsDedicated)
             {
                 NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME;
                 return;
-            }
+            }            
 
             if (!LoadSettings())
-            {
+            {               
                 IgnoreArmor = true;
                 PriorityOnly = false;
                 SubsystemPriority = 0;
@@ -326,21 +301,6 @@ namespace StarCore.RepairModule
             ClientSettingsLoaded = true;
             NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME;
             return;
-
-        }
-
-        public override void UpdateAfterSimulation10()
-        {
-            base.UpdateAfterSimulation10();
-
-
-        }
-
-        public override void UpdateAfterSimulation100()
-        {
-            base.UpdateAfterSimulation100();
-
-
         }
 
         public override void Close()
@@ -464,21 +424,33 @@ namespace StarCore.RepairModule
         #region Settings
         bool LoadSettings()
         {
-            if (Block?.Storage == null)
+            if (Block.Storage == null)
+            {
+                Log.Info($"LoadSettings: Block storage is null for {Block.EntityId}");
                 return false;
+            }
 
             string rawData;
             if (!Block.Storage.TryGetValue(SettingsID, out rawData))
+            {
+                Log.Info($"LoadSettings: No data found for {Block.EntityId}");
                 return false;
+            }
 
             try
             {
                 var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<RepairSettings>(Convert.FromBase64String(rawData));
+
                 if (loadedSettings != null)
                 {
+                    Log.Info($"LoadSettings: Successfully loaded settings for {Block.EntityId}");
+                    Log.Info($"Loaded values: IgnoreArmor={loadedSettings.Stored_IgnoreArmor}, PriorityOnly={loadedSettings.Stored_PriorityOnly}, SubsystemPriority={loadedSettings.Stored_SubsystemPriority}");
+
                     IgnoreArmor = loadedSettings.Stored_IgnoreArmor;
                     PriorityOnly = loadedSettings.Stored_PriorityOnly;
                     SubsystemPriority = loadedSettings.Stored_SubsystemPriority;
+
+                    Log.Info($"After assignment: IgnoreArmor={IgnoreArmor}, PriorityOnly={PriorityOnly}, SubsystemPriority={SubsystemPriority}");
                     return true;
                 }
             }
@@ -497,8 +469,6 @@ namespace StarCore.RepairModule
                 Log.Info("SaveSettings called but Block is null.");
                 return;
             }
-
-            Log.Info($"SaveSettings started for EntityId: {Block.EntityId}");
 
             try
             {
@@ -527,8 +497,6 @@ namespace StarCore.RepairModule
             {
                 Log.Error($"Error saving settings for {Block.EntityId}!\n{e}");
             }
-
-            Log.Info($"SaveSettings completed for EntityId: {Block.EntityId}");
         }
         #endregion
 
@@ -822,13 +790,13 @@ namespace StarCore.RepairModule
     [ProtoContract]
     public class RepairSettings
     {
-        [ProtoMember(1)]
+        [ProtoMember(41)]
         public bool Stored_IgnoreArmor { get; set; }
 
-        [ProtoMember(2)]
+        [ProtoMember(42)]
         public bool Stored_PriorityOnly { get; set; }
 
-        [ProtoMember(3)]
+        [ProtoMember(43)]
         public long Stored_SubsystemPriority { get; set; }
     }
 }
