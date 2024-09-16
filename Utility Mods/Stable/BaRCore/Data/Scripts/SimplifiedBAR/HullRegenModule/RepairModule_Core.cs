@@ -464,33 +464,21 @@ namespace StarCore.RepairModule
         #region Settings
         bool LoadSettings()
         {
-            if (Block.Storage == null)
-            {
-                Log.Info($"LoadSettings: Block storage is null for {Block.EntityId}");
+            if (Block?.Storage == null)
                 return false;
-            }
 
             string rawData;
             if (!Block.Storage.TryGetValue(SettingsID, out rawData))
-            {
-                Log.Info($"LoadSettings: No data found for {Block.EntityId}");
                 return false;
-            }
 
             try
             {
                 var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<RepairSettings>(Convert.FromBase64String(rawData));
-
                 if (loadedSettings != null)
                 {
-                    Log.Info($"LoadSettings: Successfully loaded settings for {Block.EntityId}");
-                    Log.Info($"Loaded values: IgnoreArmor={loadedSettings.Stored_IgnoreArmor}, PriorityOnly={loadedSettings.Stored_PriorityOnly}, SubsystemPriority={loadedSettings.Stored_SubsystemPriority}");
-
                     IgnoreArmor = loadedSettings.Stored_IgnoreArmor;
                     PriorityOnly = loadedSettings.Stored_PriorityOnly;
                     SubsystemPriority = loadedSettings.Stored_SubsystemPriority;
-
-                    Log.Info($"After assignment: IgnoreArmor={IgnoreArmor}, PriorityOnly={PriorityOnly}, SubsystemPriority={SubsystemPriority}");
                     return true;
                 }
             }
@@ -510,18 +498,18 @@ namespace StarCore.RepairModule
                 return;
             }
 
-            if (Block.Storage == null)
-            {
-                Log.Info($"Creating new storage for {Block.EntityId}");
-                Block.Storage = new MyModStorageComponent();
-            }
+            Log.Info($"SaveSettings started for EntityId: {Block.EntityId}");
 
             try
             {
                 if (MyAPIGateway.Utilities == null)
                     throw new NullReferenceException($"MyAPIGateway.Utilities == null; entId={Entity?.EntityId};");
 
-
+                if (Block.Storage == null)
+                {
+                    Log.Info($"Creating new storage for {Block.EntityId}");
+                    Block.Storage = new MyModStorageComponent();
+                }
 
                 var settings = new RepairSettings
                 {
@@ -539,6 +527,8 @@ namespace StarCore.RepairModule
             {
                 Log.Error($"Error saving settings for {Block.EntityId}!\n{e}");
             }
+
+            Log.Info($"SaveSettings completed for EntityId: {Block.EntityId}");
         }
         #endregion
 
@@ -832,13 +822,13 @@ namespace StarCore.RepairModule
     [ProtoContract]
     public class RepairSettings
     {
-        [ProtoMember(41)]
+        [ProtoMember(1)]
         public bool Stored_IgnoreArmor { get; set; }
 
-        [ProtoMember(42)]
+        [ProtoMember(2)]
         public bool Stored_PriorityOnly { get; set; }
 
-        [ProtoMember(43)]
+        [ProtoMember(3)]
         public long Stored_SubsystemPriority { get; set; }
     }
 }
