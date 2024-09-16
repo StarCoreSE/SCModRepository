@@ -350,7 +350,7 @@ namespace StarCore.RepairModule
             Log.Info($"IsSerialized called for {Block.EntityId}");
             try
             {
-                SaveSettings();
+                //SaveSettings(); NO NO NO DON'T CALL IT HERE IT SYNCS ELSEWHERE THIS KILLS EVERYTHING FOR SOME REASON
             }
             catch (Exception e)
             {
