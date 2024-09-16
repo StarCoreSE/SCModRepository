@@ -16,6 +16,8 @@ using VRage.Game.ModAPI.Network;
 using VRage.ModAPI;
 using System.Text;
 using Sandbox.Game;
+using VRage.Game;
+using VRageRender;
 
 namespace Starcore.ResistBlock
 {
@@ -34,8 +36,10 @@ namespace Starcore.ResistBlock
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             base.Init(objectBuilder);
-            NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
             block = (IMyCollector)Entity;
+
+            // This will ensure we keep drawing the line every frame
+            NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
         }
 
         public override void UpdateOnceBeforeFrame()
@@ -81,6 +85,32 @@ namespace Starcore.ResistBlock
         {
             // Reset the grid's damage modifier to normal when resistance is off
             MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(block.CubeGrid.Name, 1.0f); // Reset to normal damage
+        }
+
+        public override void UpdateBeforeSimulation()
+        {
+            base.UpdateBeforeSimulation();
+            DrawTestLine();
+        }
+
+        private void DrawTestLine()
+        {
+            if (block == null || block.CubeGrid == null)
+                return;
+
+            // Define start and end points for the line
+            Vector3D start = block.WorldMatrix.Translation;
+            Vector3D end = start + block.WorldMatrix.Forward * 10; // Draws 10 meters in front of the block
+
+            // Draw a visible line from start to end
+            MyTransparentGeometry.AddLineBillboard(
+                material: MyStringId.GetOrCompute("WeaponLaser"),
+                color: Color.Red,
+                origin: start,
+                directionNormalized: Vector3D.Normalize(end - start),
+                length: (float)Vector3D.Distance(start, end),
+                thickness: 0.1f,
+                blendType: MyBillboard.BlendTypeEnum.AdditiveTop);
         }
 
         public override void UpdateBeforeSimulation100()
