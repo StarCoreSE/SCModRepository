@@ -61,44 +61,6 @@ namespace Starcore.ResistBlock
 
         private IMySlimBlock hitSlimBlock; // Store the reference to the block that was hit
 
-        private void DamageHandler(object target, ref MyDamageInformation info)
-        {
-            try
-            {
-                // Ensure the block and its grid are initialized
-                if (block?.CubeGrid == null)
-                    return;
-
-                // Ensure the target is a valid slim block
-                var slimBlock = target as IMySlimBlock;
-                if (slimBlock == null || slimBlock.CubeGrid == null)
-                    return;
-
-                // Only process damage if it is occurring on the core block's grid
-                if (slimBlock.CubeGrid != coreBlockGrid)
-                    return;
-
-                // Check if settings and the resistance are active
-                if (Settings != null && Settings.IsActive)
-                {
-                    // Ensure the hit position can be calculated
-                    hitPosition = slimBlock?.CubeGrid?.GridIntegerToWorld(slimBlock.Position) ?? Vector3D.Zero;
-                    if (hitPosition == Vector3D.Zero)
-                        return;
-
-                    // Start the flashing effect
-                    hitSlimBlock = slimBlock;
-                    isFlashing = true;
-                    flashCounter = flashDuration;
-                }
-            }
-            catch (Exception ex)
-            {
-                // Log the exception to understand why it failed
-                MyLog.Default.WriteLineAndConsole($"Exception in DamageHandler: {ex}");
-            }
-        }
-
         public override void UpdateOnceBeforeFrame()
         {
             base.UpdateOnceBeforeFrame();
@@ -174,6 +136,44 @@ namespace Starcore.ResistBlock
             }
         }
 
+        private void DamageHandler(object target, ref MyDamageInformation info)
+        {
+            try
+            {
+                // Ensure the block and its grid are initialized
+                if (block == null || block.CubeGrid == null)
+                    return;
+
+                // Ensure the target is a valid slim block
+                var slimBlock = target as IMySlimBlock;
+                if (slimBlock == null || slimBlock.CubeGrid == null)
+                    return;
+
+                // Only process damage if it is occurring on the core block's grid
+                if (slimBlock.CubeGrid != coreBlockGrid)
+                    return;
+
+                // Check if settings and the resistance are active
+                if (Settings != null && Settings.IsActive)
+                {
+                    // Ensure the hit position can be calculated
+                    hitPosition = slimBlock?.CubeGrid?.GridIntegerToWorld(slimBlock.Position) ?? Vector3D.Zero;
+                    if (hitPosition == Vector3D.Zero)
+                        return;
+
+                    // Start the flashing effect
+                    hitSlimBlock = slimBlock;
+                    isFlashing = true;
+                    flashCounter = flashDuration;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception to understand why it failed
+                MyLog.Default.WriteLineAndConsole($"Exception in DamageHandler: {ex}");
+            }
+        }
+
         private void DrawFlashingSquare()
         {
             try
@@ -202,14 +202,33 @@ namespace Starcore.ResistBlock
                 if (gridBoundingBox == default(BoundingBoxD))
                     return;
 
-                // Get the center of mass of the grid, ensure it’s available
+                // Get the center of mass of the grid
                 Vector3D centerOfMass = block.CubeGrid.Physics?.CenterOfMassWorld ?? gridBoundingBox.Center;
 
                 // Calculate the direction from the center of mass to the hit position
                 Vector3D hitDirection = Vector3D.Normalize(hitPosition - centerOfMass);
 
-                // Determine which face of the bounding box the hit direction points to
-                Vector3D hitFaceNormal = GetHitFaceNormal(gridBoundingBox, hitDirection);
+                // Transform hitDirection to the grid's local space
+                MatrixD gridOrientation = block.CubeGrid.WorldMatrix;
+                Vector3D localHitDirection = Vector3D.TransformNormal(hitDirection, MatrixD.Transpose(gridOrientation));
+
+                // Determine the closest axis-aligned face based on the local hit direction
+                Vector3D hitFaceNormal = Vector3D.Zero;
+                if (Math.Abs(localHitDirection.X) > Math.Abs(localHitDirection.Y) && Math.Abs(localHitDirection.X) > Math.Abs(localHitDirection.Z))
+                {
+                    hitFaceNormal = localHitDirection.X > 0 ? Vector3D.Right : Vector3D.Left;
+                }
+                else if (Math.Abs(localHitDirection.Y) > Math.Abs(localHitDirection.X) && Math.Abs(localHitDirection.Y) > Math.Abs(localHitDirection.Z))
+                {
+                    hitFaceNormal = localHitDirection.Y > 0 ? Vector3D.Up : Vector3D.Down;
+                }
+                else
+                {
+                    hitFaceNormal = localHitDirection.Z > 0 ? Vector3D.Forward : Vector3D.Backward;
+                }
+
+                // Transform the hitFaceNormal back to world space for billboard orientation
+                hitFaceNormal = Vector3D.TransformNormal(hitFaceNormal, gridOrientation);
 
                 // Determine the size of the face (width and height) based on the normal
                 double faceWidth, faceHeight;
@@ -232,9 +251,9 @@ namespace Starcore.ResistBlock
                 // Position the square on the appropriate face of the bounding box
                 Vector3D faceCenter = gridBoundingBox.Center + hitFaceNormal * gridBoundingBox.HalfExtents.AbsMax();
 
-                // Calculate the left and up vectors to align the billboard correctly on the face
-                Vector3 leftVector = Vector3.Cross(Vector3.Up, hitFaceNormal);
-                Vector3 upVector = Vector3.Cross(hitFaceNormal, leftVector);
+                // Calculate the left and up vectors for the billboard in world space
+                Vector3 leftVector = Vector3.Cross(Vector3.Up, hitFaceNormal); // Left vector perpendicular to up and face normal
+                Vector3 upVector = Vector3.Cross(hitFaceNormal, leftVector);   // Ensure up vector is perpendicular to both
 
                 // Set default UV offset and other missing parameters
                 Vector2 uvOffset = Vector2.Zero;
