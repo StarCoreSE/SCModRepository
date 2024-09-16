@@ -6,6 +6,7 @@ using VRage.Game.ModAPI;
 using VRage.ObjectBuilders;
 using VRage.Sync;
 using System;
+using System.Collections.Generic;
 using VRage.Utils;
 using VRageMath;
 using VRage.Game.ObjectBuilders.ComponentSystem;
@@ -29,17 +30,43 @@ namespace Starcore.ResistBlock
         public MySync<bool, SyncDirection.BothWays> IsActiveSync;
         public MySync<float, SyncDirection.BothWays> ResistanceStrengthSync;
 
+        private bool isFlashing;
+        private int flashDuration = 120; // Flash for 120 frames (2 seconds at 60 FPS)
+        private int flashCounter;
+
         private static bool m_controlsCreated = false;
 
         public readonly Guid ResistSettingsGUID = new Guid("160803f9-9800-4515-9619-e5385d5208fb");
-
+ 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             base.Init(objectBuilder);
             block = (IMyCollector)Entity;
 
-            // This will ensure we keep drawing the line every frame
+            // Register the global damage handler
+            if (MyAPIGateway.Session != null)
+            {
+                MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0, DamageHandler);
+            }
+
+            NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
+        }
+
+        private void DamageHandler(object target, ref MyDamageInformation info)
+        {
+            // Check if the target is a block (IMySlimBlock)
+            var slimBlock = target as IMySlimBlock;
+            if (slimBlock != null && slimBlock.CubeGrid == block.CubeGrid)
+            {
+                // Ensure the damaged block is part of the current grid and it matches our block
+                if (slimBlock.FatBlock == block)
+                {
+                    // Block was damaged, start flashing
+                    isFlashing = true;
+                    flashCounter = flashDuration;
+                }
+            }
         }
 
         public override void UpdateOnceBeforeFrame()
@@ -90,28 +117,56 @@ namespace Starcore.ResistBlock
         public override void UpdateBeforeSimulation()
         {
             base.UpdateBeforeSimulation();
-            DrawTestLine();
+
+            if (isFlashing)
+            {
+                if (flashCounter > 0)
+                {
+                    DrawFlashingSquare();
+                    flashCounter--;
+                }
+                else
+                {
+                    isFlashing = false; // Stop flashing after the duration
+                }
+            }
         }
 
-        private void DrawTestLine()
+        private void DrawFlashingSquare()
         {
             if (block == null || block.CubeGrid == null)
                 return;
 
-            // Define start and end points for the line
-            Vector3D start = block.WorldMatrix.Translation;
-            Vector3D end = start + block.WorldMatrix.Forward * 10; // Draws 10 meters in front of the block
+            // Define square size (adjust as needed)
+            float squareSize = 10f;
 
-            // Draw a visible line from start to end
-            MyTransparentGeometry.AddLineBillboard(
-                material: MyStringId.GetOrCompute("WeaponLaser"),
-                color: Color.Red,
-                origin: start,
-                directionNormalized: Vector3D.Normalize(end - start),
-                length: (float)Vector3D.Distance(start, end),
-                thickness: 0.1f,
-                blendType: MyBillboard.BlendTypeEnum.AdditiveTop);
+            // Define billboard color and position
+            Color color = Color.Red; // Flashing color
+            Vector3D blockPosition = block.WorldMatrix.Translation;
+
+            // Set default UV offset and other missing parameters
+            Vector2 uvOffset = Vector2.Zero; // No UV offset
+            int customViewProjection = -1; // Default projection
+            float reflection = 0f; // Default reflection
+            List<MyBillboard> billboards = null; // We don't need persistent billboards
+
+            // Draw a square billboard around the block
+            MyTransparentGeometry.AddBillboardOriented(
+                material: MyStringId.GetOrCompute("Square"),
+                color: color.ToVector4(), // Convert Color to Vector4 for the API
+                origin: blockPosition + block.WorldMatrix.Forward * 2, // Slightly offset in front
+                leftVector: block.WorldMatrix.Left,
+                upVector: block.WorldMatrix.Up,
+                width: squareSize,
+                height: squareSize,
+                uvOffset: uvOffset,
+                blendType: MyBillboard.BlendTypeEnum.AdditiveTop,
+                customViewProjection: customViewProjection,
+                reflection: reflection,
+                persistentBillboards: billboards);
         }
+
+
 
         public override void UpdateBeforeSimulation100()
         {
@@ -268,6 +323,12 @@ namespace Starcore.ResistBlock
             if (IsActiveSync != null)
             {
                 IsActiveSync.ValueChanged -= IsActive_ValueChanged;
+            }
+
+            // Clean up: Unsubscribe from the global damage handler
+            if (MyAPIGateway.Session != null)
+            {
+                MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0, null); // Unregister handler
             }
 
             base.Close();
