@@ -139,14 +139,8 @@ namespace StarCore.RepairModule
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             base.Init(objectBuilder);
+            
             Block = (IMyCollector)Entity;
-
-            // Initialize Block.Storage here
-            if (Block.Storage == null)
-            {
-                Log.Info($"Init: Creating new storage for {Block.EntityId}");
-                Block.Storage = new MyModStorageComponent();
-            }
 
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
         }
@@ -203,12 +197,7 @@ namespace StarCore.RepairModule
                 if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0 && Block.IsWorking)
                 {
                     Vector3D targetBlockPosition = Vector3D.Zero;
-                    IMySlimBlock targetBlock = null;
-
-                    lock (repairTargetsLock)
-                    {
-                        targetBlock = PriorityRepairTargets.FirstOrDefault() ?? (!PriorityOnly ? RepairTargets.FirstOrDefault() : null);
-                    }
+                    IMySlimBlock targetBlock = PriorityRepairTargets.FirstOrDefault() ?? (!PriorityOnly ? RepairTargets.FirstOrDefault() : null);
 
                     if (targetBlock != null)
                     {
@@ -283,11 +272,9 @@ namespace StarCore.RepairModule
 
                 if (SortCounter == 0 || NeedsSorting)
                 {
-                    lock (repairTargetsLock)
-                    {
-                        RepairTargets = RepairTargets.OrderBy(block => block.Integrity).ToList();
-                        PriorityRepairTargets = PriorityRepairTargets.OrderBy(block => block.Integrity).ToList();
-                    }
+                    RepairTargets = RepairTargets.OrderBy(block => block.Integrity).ToList();
+                    PriorityRepairTargets = PriorityRepairTargets.OrderBy(block => block.Integrity).ToList();
+
                     SortCounter = SortInterval;
                     NeedsSorting = false;
                 }
@@ -361,13 +348,17 @@ namespace StarCore.RepairModule
         public override bool IsSerialized()
         {
             Log.Info($"IsSerialized called for {Block.EntityId}");
-            // Do not call SaveSettings() here
+            try
+            {
+                SaveSettings();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
             return base.IsSerialized();
         }
-
         #endregion
-
-        private readonly object repairTargetsLock = new object();
 
         #region Event Handlers
         public void HandleBlocks(IMySlimBlock block)
@@ -378,42 +369,35 @@ namespace StarCore.RepairModule
                 return;
             }
 
-            // Exclude the module block itself
-            if (block.FatBlock != null && block.FatBlock.EntityId == Block.EntityId)
-            {
-                return;
-            }
-
             List<IMySlimBlock> newTargetList = IsPriority(block) ? PriorityRepairTargets : RepairTargets;
             List<IMySlimBlock> oldTargetList = newTargetList == PriorityRepairTargets ? RepairTargets : PriorityRepairTargets;
 
-            lock (repairTargetsLock)
+            if (oldTargetList.Contains(block))
             {
-                if (oldTargetList.Contains(block))
-                {
-                    oldTargetList.Remove(block);
-                }
+                oldTargetList.Remove(block);
+            }
 
-                if (block.Integrity != block.MaxIntegrity)
+            if (block.Integrity != block.MaxIntegrity)
+            {
+                if (!newTargetList.Contains(block))
                 {
-                    if (!newTargetList.Contains(block))
-                    {
-                        newTargetList.Add(block);
-                    }
+                    newTargetList.Add(block);
                 }
             }
         }
-
 
         public void HandleRemovedBlocks(IMySlimBlock block)
         {
-            lock (repairTargetsLock)
+            if (RepairTargets.Contains(block))
             {
                 RepairTargets.Remove(block);
+            }
+
+            if (PriorityRepairTargets.Contains(block))
+            {
                 PriorityRepairTargets.Remove(block);
             }
         }
-
 
         private void IgnoreArmor_Update(bool _bool)
         {
@@ -491,11 +475,10 @@ namespace StarCore.RepairModule
                 if (MyAPIGateway.Utilities == null)
                     throw new NullReferenceException($"MyAPIGateway.Utilities == null; entId={Entity?.EntityId};");
 
-                // Do not create new Block.Storage during serialization
                 if (Block.Storage == null)
                 {
-                    Log.Info($"Block.Storage is null for {Block.EntityId}, skipping SaveSettings to avoid modifying during serialization.");
-                    return;
+                    Log.Info($"Creating new storage for {Block.EntityId}");
+                    Block.Storage = new MyModStorageComponent();
                 }
 
                 var settings = new RepairSettings
@@ -507,7 +490,6 @@ namespace StarCore.RepairModule
 
                 string serializedData = Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(settings));
                 Block.Storage.SetValue(SettingsID, serializedData);
-
                 Log.Info($"SaveSettings: Successfully saved settings for {Block.EntityId}");
                 Log.Info($"Saved values: IgnoreArmor={IgnoreArmor}, PriorityOnly={PriorityOnly}, SubsystemPriority={SubsystemPriority}");
             }
@@ -516,7 +498,6 @@ namespace StarCore.RepairModule
                 Log.Error($"Error saving settings for {Block.EntityId}!\n{e}");
             }
         }
-
         #endregion
 
         #region Utility Methods
@@ -736,42 +717,42 @@ namespace StarCore.RepairModule
         #region Main
         public void ProcessRepairTargets(IMyCubeGrid grid, bool init)
         {
-            //var gridGroup = grid.GetGridGroup(GridLinkTypeEnum.Mechanical);
-            //List<IMyCubeGrid> gridsList = new List<IMyCubeGrid>();
-            //
-            //if (gridGroup != null)
-            //{
-            //    gridGroup.GetGrids(gridsList);
-            //    if (init)
-            //    {
-            //        AssociatedGrids = gridsList;
-            //    }               
-            //
-            //    foreach (IMyCubeGrid groupGrid in gridsList)
-            //    {
-            //        var tempBlockList = new List<IMySlimBlock>();
-            //        groupGrid.GetBlocks(tempBlockList);
-            //
-            //        foreach (var block in tempBlockList)
-            //        {
-            //            HandleBlocks(block);
-            //        }
-            //
-            //        tempBlockList.Clear();
-            //    }
-            //}
-            //else
-            //{
-            //    var tempBlockList = new List<IMySlimBlock>();
-            //    grid.GetBlocks(tempBlockList);
-            //
-            //    foreach (var block in tempBlockList)
-            //    {
-            //        HandleBlocks(block);
-            //    }
-            //
-            //    tempBlockList.Clear();
-            //}
+            var gridGroup = grid.GetGridGroup(GridLinkTypeEnum.Mechanical);
+            List<IMyCubeGrid> gridsList = new List<IMyCubeGrid>();
+
+            if (gridGroup != null)
+            {
+                gridGroup.GetGrids(gridsList);
+                if (init)
+                {
+                    AssociatedGrids = gridsList;
+                }               
+
+                foreach (IMyCubeGrid groupGrid in gridsList)
+                {
+                    var tempBlockList = new List<IMySlimBlock>();
+                    groupGrid.GetBlocks(tempBlockList);
+
+                    foreach (var block in tempBlockList)
+                    {
+                        HandleBlocks(block);
+                    }
+
+                    tempBlockList.Clear();
+                }
+            }
+            else
+            {
+                var tempBlockList = new List<IMySlimBlock>();
+                grid.GetBlocks(tempBlockList);
+
+                foreach (var block in tempBlockList)
+                {
+                    HandleBlocks(block);
+                }
+
+                tempBlockList.Clear();
+            }
         }
 
         private void RepairTarget(IMySlimBlock block)
@@ -779,32 +760,30 @@ namespace StarCore.RepairModule
             if (block == null || block.CubeGrid.Physics == null)
                 return;
 
-            if (!block.IsFullIntegrity || block.HasDeformation)
-            {
+            if(!block.IsFullIntegrity || block.HasDeformation)
+            {             
                 block.IncreaseMountLevel(RepairAmount * MyAPIGateway.Session.WelderSpeedMultiplier, block.OwnerId, null, 1);
             }
             else
             {
-                lock (repairTargetsLock)
-                {
-                    RepairTargets.Remove(block);
-                    PriorityRepairTargets.Remove(block);
-                }
+                RepairTargets.Remove(block);
+                PriorityRepairTargets.Remove(block);
+
                 TargetPosition.Value = Vector3D.Zero;
                 ShowWeldEffects.Value = false;
+
                 NeedsSorting = true;
             }
 
+            // Double Check Existence
             if (block.CubeGrid.GetCubeBlock(block.Position) == null)
             {
-                lock (repairTargetsLock)
-                {
-                    RepairTargets.Remove(block);
-                    PriorityRepairTargets.Remove(block);
-                }
+                RepairTargets.Remove(block);
+                PriorityRepairTargets.Remove(block);
+
                 NeedsSorting = true;
             }
-        }
+        }      
         #endregion
     }
 
