@@ -406,7 +406,7 @@ namespace Starcore.ResistBlock
         internal bool LoadSettings()
         {
             string rawData;
-            if (block.Storage == null || !block.Storage.TryGetValue(ResistSettingsGUID, out rawData))
+            if (block == null || block.Storage == null || !block.Storage.TryGetValue(ResistSettingsGUID, out rawData))
                 return false;
 
             try
@@ -429,25 +429,37 @@ namespace Starcore.ResistBlock
 
         internal void SaveSettings()
         {
-            if (block == null || Settings == null)
-                return;
+            try
+            {
+                if (block == null || Settings == null)
+                    return;
 
-            if (block.Storage == null)
-                block.Storage = new MyModStorageComponent();
+                if (block.Storage == null)
+                    block.Storage = new MyModStorageComponent();
 
-            string rawData = Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(Settings));
-            block.Storage[ResistSettingsGUID] = rawData;
+                string rawData = Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(Settings));
+                block.Storage[ResistSettingsGUID] = rawData;
+            }
+            catch (Exception e)
+            {
+                MyLog.Default.WriteLineAndConsole($"Failed to save resist settings: {e}");
+            }
         }
 
         public override bool IsSerialized()
         {
             try
             {
+                // Ensure the block and settings are valid
+                if (block == null || Settings == null)
+                    return false;
+
+                // Safely save the settings if block and settings are properly initialized
                 SaveSettings();
             }
             catch (Exception e)
             {
-                MyLog.Default.WriteLineAndConsole($"Failed to save resist settings: {e}");
+                MyLog.Default.WriteLineAndConsole($"Failed to save resist settings in IsSerialized: {e}");
             }
 
             return base.IsSerialized();
