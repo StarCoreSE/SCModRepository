@@ -15,6 +15,7 @@ using Sandbox.ModAPI.Interfaces.Terminal;
 using VRage.Game.ModAPI.Network;
 using VRage.ModAPI;
 using System.Text;
+using Sandbox.Game;
 
 namespace Starcore.ResistBlock
 {
@@ -71,12 +72,15 @@ namespace Starcore.ResistBlock
 
         private void StartResistance()
         {
-            // Logic to start applying resistance
+            // Apply grid-wide resistance based on the current slider value
+            float resistanceStrength = Settings.ResistanceStrength;
+            MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(block.CubeGrid.Name, 1f - resistanceStrength); // Adjusting resistance
         }
 
         private void StopResistance()
         {
-            // Logic to stop applying resistance
+            // Reset the grid's damage modifier to normal when resistance is off
+            MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(block.CubeGrid.Name, 1.0f); // Reset to normal damage
         }
 
         public override void UpdateBeforeSimulation100()
@@ -91,8 +95,13 @@ namespace Starcore.ResistBlock
 
         private void ApplyResistance()
         {
-            // Logic to apply resistance to the grid
-            block.CubeGrid.Physics.LinearDamping = Math.Max(block.CubeGrid.Physics.LinearDamping, Settings.ResistanceStrength);
+            float resistanceStrength = Settings.ResistanceStrength;
+
+            // oh lmao it made space drag that's hilarius, wrong kind of resistance but might be cool later
+            // block.CubeGrid.Physics.LinearDamping = Math.Max(block.CubeGrid.Physics.LinearDamping, resistanceStrength);
+
+            //update grid damage resistance dynamically
+            MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(block.CubeGrid.Name, 1f - resistanceStrength);
         }
 
         private static void CreateTerminalControls()
