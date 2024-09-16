@@ -30,6 +30,7 @@ namespace Starcore.ResistBlock
         public MySync<bool, SyncDirection.BothWays> IsActiveSync;
         public MySync<float, SyncDirection.BothWays> ResistanceStrengthSync;
 
+        private Vector3D hitPosition; // Store the hit position
         private bool isFlashing;
         private int flashDuration = 120; // Flash for 120 frames (2 seconds at 60 FPS)
         private int flashCounter;
@@ -53,16 +54,21 @@ namespace Starcore.ResistBlock
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
         }
 
+
+        // Global damage handler using MyDamageInformation
         private void DamageHandler(object target, ref MyDamageInformation info)
         {
             // Check if the target is a block (IMySlimBlock)
             var slimBlock = target as IMySlimBlock;
             if (slimBlock != null && slimBlock.CubeGrid == block.CubeGrid)
             {
-                // Ensure the damaged block is part of the current grid and it matches our block
-                if (slimBlock.FatBlock == block)
+                // If the block is part of the same grid and resistance is active
+                if (Settings.IsActive)
                 {
-                    // Block was damaged, start flashing
+                    // Estimate the hit position using the block's world matrix and grid size
+                    hitPosition = slimBlock.CubeGrid.GridIntegerToWorld(slimBlock.Position);
+
+                    // Start flashing the billboard
                     isFlashing = true;
                     flashCounter = flashDuration;
                 }
@@ -134,15 +140,18 @@ namespace Starcore.ResistBlock
 
         private void DrawFlashingSquare()
         {
-            if (block == null || block.CubeGrid == null)
+            if (block == null || block.CubeGrid == null || !Settings.IsActive)
                 return;
 
             // Define square size (adjust as needed)
             float squareSize = 10f;
 
-            // Define billboard color and position
-            Color color = Color.Red; // Flashing color
-            Vector3D blockPosition = block.WorldMatrix.Translation;
+            // Define transparency or brightness based on resistance
+            float resistanceStrength = Settings.ResistanceStrength;
+            float transparency = 1f - resistanceStrength; // The higher the resistance, the more transparent
+
+            // Define billboard color and transparency
+            Color color = new Color(255, 0, 0, (byte)(255 * transparency)); // Red with variable transparency
 
             // Set default UV offset and other missing parameters
             Vector2 uvOffset = Vector2.Zero; // No UV offset
@@ -150,11 +159,11 @@ namespace Starcore.ResistBlock
             float reflection = 0f; // Default reflection
             List<MyBillboard> billboards = null; // We don't need persistent billboards
 
-            // Draw a square billboard around the block
+            // Draw a square billboard at the estimated hit position
             MyTransparentGeometry.AddBillboardOriented(
                 material: MyStringId.GetOrCompute("Square"),
                 color: color.ToVector4(), // Convert Color to Vector4 for the API
-                origin: blockPosition + block.WorldMatrix.Forward * 2, // Slightly offset in front
+                origin: hitPosition, // Use the estimated hit position
                 leftVector: block.WorldMatrix.Left,
                 upVector: block.WorldMatrix.Up,
                 width: squareSize,
@@ -165,8 +174,6 @@ namespace Starcore.ResistBlock
                 reflection: reflection,
                 persistentBillboards: billboards);
         }
-
-
 
         public override void UpdateBeforeSimulation100()
         {
