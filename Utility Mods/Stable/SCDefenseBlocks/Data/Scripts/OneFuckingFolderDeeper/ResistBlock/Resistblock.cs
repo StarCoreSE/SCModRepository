@@ -31,6 +31,7 @@ namespace Starcore.ResistBlock
         public MySync<float, SyncDirection.BothWays> ResistanceStrengthSync;
 
         private Vector3D hitPosition; // Store the hit position
+        private Vector3D attackerPosition; // Store the attacker's position
         private bool isFlashing;
         private int flashDuration = 120; // Flash for 120 frames (2 seconds at 60 FPS)
         private int flashCounter;
@@ -38,7 +39,7 @@ namespace Starcore.ResistBlock
         private static bool m_controlsCreated = false;
 
         public readonly Guid ResistSettingsGUID = new Guid("160803f9-9800-4515-9619-e5385d5208fb");
- 
+
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             base.Init(objectBuilder);
@@ -54,6 +55,7 @@ namespace Starcore.ResistBlock
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
         }
 
+        private IMySlimBlock hitSlimBlock; // Store the reference to the block that was hit
 
         // Global damage handler using MyDamageInformation
         private void DamageHandler(object target, ref MyDamageInformation info)
@@ -67,6 +69,20 @@ namespace Starcore.ResistBlock
                 {
                     // Estimate the hit position using the block's world matrix and grid size
                     hitPosition = slimBlock.CubeGrid.GridIntegerToWorld(slimBlock.Position);
+
+                    // Get the attacker's position if possible
+                    var attackerEntity = MyAPIGateway.Entities.GetEntityById(info.AttackerId);
+                    if (attackerEntity != null)
+                    {
+                        attackerPosition = attackerEntity.WorldMatrix.Translation; // Get attacker's world position
+                    }
+                    else
+                    {
+                        attackerPosition = hitPosition; // Fallback to hit position if attacker is not found
+                    }
+
+                    // Store the hit block for later use in the flashing effect
+                    hitSlimBlock = slimBlock;
 
                     // Start flashing the billboard
                     isFlashing = true;
@@ -124,17 +140,29 @@ namespace Starcore.ResistBlock
         {
             base.UpdateBeforeSimulation();
 
-            if (isFlashing)
+            if (isFlashing && hitSlimBlock != null)
             {
                 if (flashCounter > 0)
                 {
+                    // Use the stored hit block for flashing
                     DrawFlashingSquare();
                     flashCounter--;
                 }
                 else
                 {
                     isFlashing = false; // Stop flashing after the duration
+                    hitSlimBlock = null; // Clear the reference to the hit block
                 }
+            }
+        }
+
+        public override void UpdateBeforeSimulation100()
+        {
+            base.UpdateBeforeSimulation100();
+
+            if (Settings.IsActive)
+            {
+                ApplyResistance();
             }
         }
 
@@ -153,19 +181,26 @@ namespace Starcore.ResistBlock
             // Define billboard color and transparency
             Color color = new Color(255, 0, 0, (byte)(255 * transparency)); // Red with variable transparency
 
+            // Calculate the direction vector from the hit position to the attacker
+            Vector3D directionToAttacker = Vector3D.Normalize(attackerPosition - hitPosition);
+
+            // Calculate the right and up vectors for the billboard, which should be perpendicular to the directionToAttacker
+            Vector3 leftVector = Vector3.Cross(Vector3.Up, directionToAttacker); // Create a perpendicular vector
+            Vector3 upVector = Vector3.Cross(directionToAttacker, leftVector);   // Ensure up vector is perpendicular to both
+
             // Set default UV offset and other missing parameters
             Vector2 uvOffset = Vector2.Zero; // No UV offset
             int customViewProjection = -1; // Default projection
             float reflection = 0f; // Default reflection
             List<MyBillboard> billboards = null; // We don't need persistent billboards
 
-            // Draw a square billboard at the estimated hit position
+            // Draw a square billboard at the hit position
             MyTransparentGeometry.AddBillboardOriented(
                 material: MyStringId.GetOrCompute("Square"),
                 color: color.ToVector4(), // Convert Color to Vector4 for the API
-                origin: hitPosition, // Use the estimated hit position
-                leftVector: block.WorldMatrix.Left,
-                upVector: block.WorldMatrix.Up,
+                origin: hitPosition, // Use the hit position on the grid
+                leftVector: leftVector, // Rotate the square to face the attacker
+                upVector: upVector,     // Rotate the square to face the attacker
                 width: squareSize,
                 height: squareSize,
                 uvOffset: uvOffset,
@@ -173,16 +208,6 @@ namespace Starcore.ResistBlock
                 customViewProjection: customViewProjection,
                 reflection: reflection,
                 persistentBillboards: billboards);
-        }
-
-        public override void UpdateBeforeSimulation100()
-        {
-            base.UpdateBeforeSimulation100();
-
-            if (Settings.IsActive)
-            {
-                ApplyResistance();
-            }
         }
 
         private void ApplyResistance()
