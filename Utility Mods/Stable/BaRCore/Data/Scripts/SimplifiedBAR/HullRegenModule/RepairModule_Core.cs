@@ -42,6 +42,8 @@ namespace StarCore.RepairModule
         private readonly Queue<Action> _updateQueue = new Queue<Action>();
         private readonly object _queueLock = new object();
 
+        public readonly Guid SettingsID = new Guid("09E18094-46AE-4F55-8215-A407B49F9CAA");
+
         private void EnqueueUpdate(Action update)
         {
             lock (_queueLock)
@@ -135,7 +137,6 @@ namespace StarCore.RepairModule
 
         // General Settings     
         float RepairAmount = 4f;
-        public readonly Guid SettingsID = new Guid("09E18094-46AE-4F55-8215-A407B49F9CAA");
 
         // Timed Sort
         private int UpdateCounter = 0;
@@ -509,16 +510,18 @@ namespace StarCore.RepairModule
                 return;
             }
 
+            if (Block.Storage == null)
+            {
+                Log.Info($"Creating new storage for {Block.EntityId}");
+                Block.Storage = new MyModStorageComponent();
+            }
+
             try
             {
                 if (MyAPIGateway.Utilities == null)
                     throw new NullReferenceException($"MyAPIGateway.Utilities == null; entId={Entity?.EntityId};");
 
-                if (Block.Storage == null)
-                {
-                    Log.Info($"Creating new storage for {Block.EntityId}");
-                    Block.Storage = new MyModStorageComponent();
-                }
+
 
                 var settings = new RepairSettings
                 {
