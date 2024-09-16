@@ -35,6 +35,7 @@ namespace Starcore.ResistBlock
         private bool isFlashing;
         private int flashDuration = 120; // Flash for 120 frames (2 seconds at 60 FPS)
         private int flashCounter;
+        private IMyCubeGrid coreBlockGrid; // Store the grid containing the core block
 
         private static bool m_controlsCreated = false;
 
@@ -45,7 +46,10 @@ namespace Starcore.ResistBlock
             base.Init(objectBuilder);
             block = (IMyCollector)Entity;
 
-            // Register the global damage handler
+            // Store the grid that contains the core block
+            coreBlockGrid = block?.CubeGrid;
+
+            // Register the global damage handler, but the logic will only apply to the core block's grid
             if (MyAPIGateway.Session != null)
             {
                 MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0, DamageHandler);
@@ -57,37 +61,41 @@ namespace Starcore.ResistBlock
 
         private IMySlimBlock hitSlimBlock; // Store the reference to the block that was hit
 
-        // Global damage handler using MyDamageInformation
         private void DamageHandler(object target, ref MyDamageInformation info)
         {
-            // Check if the target is a block (IMySlimBlock)
-            var slimBlock = target as IMySlimBlock;
-            if (slimBlock != null && slimBlock.CubeGrid == block.CubeGrid)
+            try
             {
-                // If the block is part of the same grid and resistance is active
-                if (Settings.IsActive)
+                // Ensure the block and its grid are initialized
+                if (block?.CubeGrid == null)
+                    return;
+
+                // Ensure the target is a valid slim block
+                var slimBlock = target as IMySlimBlock;
+                if (slimBlock == null || slimBlock.CubeGrid == null)
+                    return;
+
+                // Only process damage if it is occurring on the core block's grid
+                if (slimBlock.CubeGrid != coreBlockGrid)
+                    return;
+
+                // Check if settings and the resistance are active
+                if (Settings != null && Settings.IsActive)
                 {
-                    // Estimate the hit position using the block's world matrix and grid size
-                    hitPosition = slimBlock.CubeGrid.GridIntegerToWorld(slimBlock.Position);
+                    // Ensure the hit position can be calculated
+                    hitPosition = slimBlock?.CubeGrid?.GridIntegerToWorld(slimBlock.Position) ?? Vector3D.Zero;
+                    if (hitPosition == Vector3D.Zero)
+                        return;
 
-                    // Get the attacker's position if possible
-                    var attackerEntity = MyAPIGateway.Entities.GetEntityById(info.AttackerId);
-                    if (attackerEntity != null)
-                    {
-                        attackerPosition = attackerEntity.WorldMatrix.Translation; // Get attacker's world position
-                    }
-                    else
-                    {
-                        attackerPosition = hitPosition; // Fallback to hit position if attacker is not found
-                    }
-
-                    // Store the hit block for later use in the flashing effect
+                    // Start the flashing effect
                     hitSlimBlock = slimBlock;
-
-                    // Start flashing the billboard
                     isFlashing = true;
                     flashCounter = flashDuration;
                 }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception to understand why it failed
+                MyLog.Default.WriteLineAndConsole($"Exception in DamageHandler: {ex}");
             }
         }
 
@@ -168,46 +176,122 @@ namespace Starcore.ResistBlock
 
         private void DrawFlashingSquare()
         {
-            if (block == null || block.CubeGrid == null || !Settings.IsActive)
-                return;
+            try
+            {
+                if (block == null || block.CubeGrid == null || !Settings.IsActive)
+                    return;
 
-            // Define square size (adjust as needed)
-            float squareSize = 10f;
+                // Only draw the billboard if this is the core block's grid
+                if (block.CubeGrid != coreBlockGrid)
+                    return;
 
-            // Define transparency or brightness based on resistance
-            float resistanceStrength = Settings.ResistanceStrength;
-            float transparency = 1f - resistanceStrength; // The higher the resistance, the more transparent
+                // Get resistance strength (1.0 = full resistance, 0.0 = no resistance)
+                float resistanceStrength = Settings.ResistanceStrength;
 
-            // Define billboard color and transparency
-            Color color = new Color(255, 0, 0, (byte)(255 * transparency)); // Red with variable transparency
+                // Calculate transparency based on resistance (lower resistance = more transparent)
+                float transparency = 1f - resistanceStrength;
 
-            // Calculate the direction vector from the hit position to the attacker
-            Vector3D directionToAttacker = Vector3D.Normalize(attackerPosition - hitPosition);
+                // Interpolate color between green (high resistance) and red (low resistance)
+                Color color = Color.Lerp(Color.Red, Color.Green, resistanceStrength); // Green at 1, Red at 0
 
-            // Calculate the right and up vectors for the billboard, which should be perpendicular to the directionToAttacker
-            Vector3 leftVector = Vector3.Cross(Vector3.Up, directionToAttacker); // Create a perpendicular vector
-            Vector3 upVector = Vector3.Cross(directionToAttacker, leftVector);   // Ensure up vector is perpendicular to both
+                // Adjust alpha channel based on transparency
+                color = new Color(color.R, color.G, color.B, (byte)(255 * transparency));
 
-            // Set default UV offset and other missing parameters
-            Vector2 uvOffset = Vector2.Zero; // No UV offset
-            int customViewProjection = -1; // Default projection
-            float reflection = 0f; // Default reflection
-            List<MyBillboard> billboards = null; // We don't need persistent billboards
+                // Get the grid's bounding box
+                BoundingBoxD gridBoundingBox = block?.CubeGrid?.PositionComp?.WorldAABB ?? default(BoundingBoxD);
+                if (gridBoundingBox == default(BoundingBoxD))
+                    return;
 
-            // Draw a square billboard at the hit position
-            MyTransparentGeometry.AddBillboardOriented(
-                material: MyStringId.GetOrCompute("Square"),
-                color: color.ToVector4(), // Convert Color to Vector4 for the API
-                origin: hitPosition, // Use the hit position on the grid
-                leftVector: leftVector, // Rotate the square to face the attacker
-                upVector: upVector,     // Rotate the square to face the attacker
-                width: squareSize,
-                height: squareSize,
-                uvOffset: uvOffset,
-                blendType: MyBillboard.BlendTypeEnum.AdditiveTop,
-                customViewProjection: customViewProjection,
-                reflection: reflection,
-                persistentBillboards: billboards);
+                // Get the center of mass of the grid, ensure it’s available
+                Vector3D centerOfMass = block.CubeGrid.Physics?.CenterOfMassWorld ?? gridBoundingBox.Center;
+
+                // Calculate the direction from the center of mass to the hit position
+                Vector3D hitDirection = Vector3D.Normalize(hitPosition - centerOfMass);
+
+                // Determine which face of the bounding box the hit direction points to
+                Vector3D hitFaceNormal = GetHitFaceNormal(gridBoundingBox, hitDirection);
+
+                // Determine the size of the face (width and height) based on the normal
+                double faceWidth, faceHeight;
+                if (Vector3D.Abs(hitFaceNormal) == Vector3D.Forward || Vector3D.Abs(hitFaceNormal) == Vector3D.Backward)
+                {
+                    faceWidth = gridBoundingBox.Size.X;
+                    faceHeight = gridBoundingBox.Size.Y;
+                }
+                else if (Vector3D.Abs(hitFaceNormal) == Vector3D.Left || Vector3D.Abs(hitFaceNormal) == Vector3D.Right)
+                {
+                    faceWidth = gridBoundingBox.Size.Y;
+                    faceHeight = gridBoundingBox.Size.Z;
+                }
+                else
+                {
+                    faceWidth = gridBoundingBox.Size.X;
+                    faceHeight = gridBoundingBox.Size.Z;
+                }
+
+                // Position the square on the appropriate face of the bounding box
+                Vector3D faceCenter = gridBoundingBox.Center + hitFaceNormal * gridBoundingBox.HalfExtents.AbsMax();
+
+                // Calculate the left and up vectors to align the billboard correctly on the face
+                Vector3 leftVector = Vector3.Cross(Vector3.Up, hitFaceNormal);
+                Vector3 upVector = Vector3.Cross(hitFaceNormal, leftVector);
+
+                // Set default UV offset and other missing parameters
+                Vector2 uvOffset = Vector2.Zero;
+                int customViewProjection = -1;
+                float reflection = 0f;
+                List<MyBillboard> billboards = null;
+
+                // Draw the square billboard to take up the entire face of the bounding box
+                MyTransparentGeometry.AddBillboardOriented(
+                    material: MyStringId.GetOrCompute("Square"),
+                    color: color.ToVector4(),
+                    origin: faceCenter,
+                    leftVector: leftVector,
+                    upVector: upVector,
+                    width: (float)faceWidth,
+                    height: (float)faceHeight,
+                    uvOffset: uvOffset,
+                    blendType: MyBillboard.BlendTypeEnum.AdditiveTop,
+                    customViewProjection: customViewProjection,
+                    reflection: reflection,
+                    persistentBillboards: billboards);
+            }
+            catch (Exception ex)
+            {
+                MyLog.Default.WriteLineAndConsole($"Exception in DrawFlashingSquare: {ex}");
+            }
+        }
+
+        // Function to determine which face of the bounding box is hit
+        private Vector3D GetHitFaceNormal(BoundingBoxD boundingBox, Vector3D hitDirection)
+        {
+            // We need to find the face that aligns most closely with the hit direction
+            Vector3D[] normals = new Vector3D[]
+            {
+        Vector3D.Forward,  Vector3D.Backward,
+        Vector3D.Left,     Vector3D.Right,
+        Vector3D.Up,       Vector3D.Down
+            };
+
+            // Find the face whose normal is most aligned with the hit direction
+            Vector3D closestNormal = Vector3D.Zero;
+            double maxDot = -1; // Start with a very low dot product
+
+            foreach (var normal in normals)
+            {
+                // Calculate dot product to determine how closely aligned the normal is with the hit direction
+                double dot = Vector3D.Dot(hitDirection, normal);
+
+                // We want the normal that is most aligned (i.e., the largest dot product)
+                if (dot > maxDot)
+                {
+                    maxDot = dot;
+                    closestNormal = normal;
+                }
+            }
+
+            return closestNormal;
         }
 
         private void ApplyResistance()
