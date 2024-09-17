@@ -77,10 +77,38 @@
         <AmmoMagazine>
             <Id>
                 <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>HarcosFighter</SubtypeId>
+            </Id>
+            <DisplayName>Harcos Laser Fighter</DisplayName>
+            <Icon>Textures\GUI\Icons\Fighter_drone.dds</Icon>
+            <Size>
+                <X>1</X>
+                <Y>2</Y>
+                <Z>0.5</Z>
+            </Size>
+            <Mass>300</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Drones\Fighter_drone.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>1</Capacity>
+            <AmmoDefinitionId Subtype="TestAmmoB8T" />
+
+            <MinimumOfferAmount>6</MinimumOfferAmount>
+            <MaximumOfferAmount>12</MaximumOfferAmount>
+            <MinimumOrderAmount>3</MinimumOrderAmount>
+            <MaximumOrderAmount>24</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+        </AmmoMagazine>
+
+
+        
+        <AmmoMagazine>
+            <Id>
+                <TypeId>AmmoMagazine</TypeId>
                 <SubtypeId>FegyverDrone</SubtypeId>
             </Id>
             <DisplayName>Fegyver Light Sentry</DisplayName>
-            <Icon>Textures\GUI\Icons\Manticore.dds</Icon>
+            <Icon>Textures\GUI\Icons\Artillery_drone.dds</Icon>
             <Size>
                 <X>1</X>
                 <Y>2</Y>
@@ -88,7 +116,7 @@
             </Size>
             <Mass>350</Mass>
             <Volume>500</Volume>
-            <Model>Models\Drones\Manticore.mwm</Model>
+            <Model>Models\Drones\Artillery_drone.mwm</Model>
             <PhysicalMaterial>Ammo</PhysicalMaterial>
             <Capacity>1</Capacity>
             <AmmoDefinitionId Subtype="TestAmmoB8T" />
@@ -107,7 +135,7 @@
                 <SubtypeId>AgyuDrone</SubtypeId>
             </Id>
             <DisplayName>Agyu Heavy Sentry</DisplayName>
-            <Icon>Textures\GUI\Icons\Manticore.dds</Icon>
+            <Icon>Textures\GUI\Icons\Artillery_drone.dds</Icon>
             <Size>
                 <X>1</X>
                 <Y>2</Y>
@@ -115,7 +143,7 @@
             </Size>
             <Mass>290</Mass>
             <Volume>500</Volume>
-            <Model>Models\Drones\Manticore.mwm</Model>
+            <Model>Models\Drones\Artillery_drone.mwm</Model>
             <PhysicalMaterial>Ammo</PhysicalMaterial>
             <Capacity>1</Capacity>
             <AmmoDefinitionId Subtype="TestAmmoB8T" />
@@ -134,7 +162,7 @@
                 <SubtypeId>OrszemDrone</SubtypeId>
             </Id>
             <DisplayName>Orszem Sentinel</DisplayName>
-            <Icon>Textures\GUI\Icons\Manticore.dds</Icon>
+            <Icon>Textures\GUI\Icons\Artillery_drone.dds</Icon>
             <Size>
                 <X>1</X>
                 <Y>2</Y>
@@ -142,7 +170,7 @@
             </Size>
             <Mass>290</Mass>
             <Volume>500</Volume>
-            <Model>Models\Drones\Manticore.mwm</Model>
+            <Model>Models\Drones\Artillery_drone.mwm</Model>
             <PhysicalMaterial>Ammo</PhysicalMaterial>
             <Capacity>1</Capacity>
             <AmmoDefinitionId Subtype="TestAmmoB8T" />

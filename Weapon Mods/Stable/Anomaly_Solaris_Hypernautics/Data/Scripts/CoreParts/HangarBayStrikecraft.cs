@@ -13,13 +13,13 @@ namespace Scripts
     partial class Parts
     {
 
-        WeaponDefinition Sentry_Hangar => new WeaponDefinition
+        WeaponDefinition Strikecraft_Hangar => new WeaponDefinition
         {
             Assignments = new ModelAssignmentsDef
             {
                 MountPoints = new[] {
                     new MountPointDef {
-                        SubtypeId = "WCDrone_Hangar",
+                        SubtypeId = "WCStrikecraft_Hangar",
                         SpinPartId = "None", // For weapons with a spinning barrel such as Gatling Guns.
                         MuzzlePartId = "None", // The subpart where your muzzle empties are located.
                         AzimuthPartId = "None",
@@ -55,7 +55,7 @@ namespace Scripts
             },
             HardPoint = new HardPointDef
             {
-                PartName = "Strikecraft Hangar Bay", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
+                PartName = "Sentry Hangar Bay", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0f, // Projectile inaccuracy in degrees.
                 AimingTolerance = 1f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Off, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
@@ -110,7 +110,7 @@ namespace Scripts
                     RotateBarrelAxis = 0, // For spinning barrels, which axis to spin the barrel around; 0 = none.
                     EnergyPriority = 0, // Deprecated.
                     MuzzleCheck = false, // Whether the weapon should check LOS from each individual muzzle in addition to the scope.
-                    Debug = true, // Force enables debug mode.
+                    Debug = false, // Force enables debug mode.
                     RestrictionRadius = 0, // Prevents other blocks of this type from being placed within this distance of the centre of the block.
                     CheckInflatedBox = false, // If true, the above distance check is performed from the edge of the block instead of the centre.
                     CheckForAnyWeapon = false, // If true, the check will fail if ANY weapon is present, not just weapons of the same subtype.
@@ -184,15 +184,13 @@ namespace Scripts
                 },
             },
             Ammos = new[] {
-                Dragonyos,
-                // AryxATLASAmmoDrone,
-                Fegyver,
-                Agyu,
-                Orszem,
-                ConcussionMissile,
-                LightArtillery,
-                HeavyArtillery,
-                PointDefenseBullet,
+                Dragonyos, //Torpedo Drone
+                Harcos, //Fighter Drone
+                //Villam, //Interceptor Drone
+                //akna - mine??
+                ConcussionMissile, //Dragonyos weapon
+                LaserPulse //Harcos weapon
+                //ArcBolt //Elcsapat weapon
                 
             },
             //Animations = AryxSmallHangarAnimations,
