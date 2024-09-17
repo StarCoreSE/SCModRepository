@@ -4,7 +4,7 @@
 
 
         <BlockVariantGroup>
-            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Plates" />
+            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Blastplates" />
             <Icon>Textures\GUI\Icons\REINFORCED_BLASTPLATE_icon.dds</Icon>
             <DisplayName>Blastplates</DisplayName>
             <Description>Armored defensive plates</Description>
