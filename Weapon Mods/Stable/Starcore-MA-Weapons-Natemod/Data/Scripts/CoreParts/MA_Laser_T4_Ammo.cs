@@ -96,19 +96,19 @@ namespace Scripts
                     GroupDelay = 120, // Delay between each group.
                 },
             },
-//            Pattern = new PatternDef
-//            {
- //               Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
-  //                  "", //"MA_Laser_T4_Ammo_Decal", 	
-   //             },
-    //            Mode = Weapon,
-     //           TriggerChance = 1f,
-      //          Random = false,
-       //         RandomMin = 1,
-        //        RandomMax = 1,
-         //       SkipParent = false,
-          //      PatternSteps = 1, // Number of Ammos activated per round, will progress in order and loop.  Ignored if Random = true.				
-           // },
+            Pattern = new PatternDef
+            {
+                Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
+                    "MA_Laser_T4_Ammo_Decal",	
+                },
+                Mode = Weapon,
+                TriggerChance = 1f,
+                Random = false,
+                RandomMin = 1,
+                RandomMax = 1,
+                SkipParent = false,
+                PatternSteps = 2, // Number of Ammos activated per round, will progress in order and loop.  Ignored if Random = true.				
+            },
             DamageScales = new DamageScaleDef
             {
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
