@@ -319,18 +319,18 @@ namespace Scripts
                 ModelName = "",
                 VisualProbability = 0.3f,
                 ShieldHitDraw = false,
-                Decals = new DecalDef
-                {
-                    MaxAge = 3600,
-                    Map = new[]
-                    {
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Metal",
-                            DecalMaterial = "SA_Laser_Hellfire_Decal",
-                        },
-                    },
-                },
+                //Decals = new DecalDef
+                //{
+                //    MaxAge = 3600,
+                //    Map = new[]
+                //    {
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Metal",
+                //            DecalMaterial = "SA_Laser_Hellfire_Decal",
+                //        },
+                //    },
+                //},
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef

@@ -65,7 +65,7 @@
             <MirroringZ>Y</MirroringZ>
             <MirroringY>Z</MirroringY>
 			<ResourceSinkGroup>Defense</ResourceSinkGroup>
-			<RequiredPowerInput>0.00002</RequiredPowerInput>
+			<AiEnabled>false</AiEnabled>
             <PCU>800</PCU>
             <IsAirTight>true</IsAirTight>
         </Definition>

@@ -7,10 +7,8 @@
 				<SubtypeId>AncientAfterburnerT42L</SubtypeId>
 			</Id>
 			<DisplayName>Ancient Afterburner T42L</DisplayName>
-			<Description>
-        Propulsion of unknown composition. Found embedded in a spherical structure, deformed from the impact.
-      
-       Alternate version of the Ion Afterburner.
+			<Description>Propulsion of unknown composition. Found embedded in a spherical structure, deformed from the impact.
+Alternate version of the Ion Afterburner.
       </Description>
 			<Icon>Textures\Icons\ancient\type 42L thruster icon.png</Icon>
 			<CubeSize>Large</CubeSize>

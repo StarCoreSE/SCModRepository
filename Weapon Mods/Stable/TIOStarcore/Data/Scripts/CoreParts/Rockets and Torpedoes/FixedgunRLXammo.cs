@@ -314,7 +314,7 @@ namespace Scripts
             },
             AmmoGraphics = new GraphicDef
             {
-                ModelName = "\\Models\\Ammo\\LBX5_AmmoShellGeneric.mwm", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
+                ModelName = "\\Models\\Ammo\\LBX5_AmmoShellExplosive.mwm", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
                 Particles = new AmmoParticleDef
@@ -539,7 +539,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 6f, // Multiplier for damage against shields.
+                    Modifier = 4f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1.3f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -712,21 +712,21 @@ namespace Scripts
             },
             AmmoGraphics = new GraphicDef
             {
-                ModelName = "\\Models\\Ammo\\LBX5_AmmoShellGeneric.mwm", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
+                ModelName = "\\Models\\Ammo\\LBX5_AmmoShellExplosive.mwm", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
-                Decals = new DecalDef
-                {
-                    MaxAge = 3600,
-                    Map = new[]
-                    {
-                        new TextureMapDef
-                        {
-                            HitMaterial = "Metal",
-                            DecalMaterial = "TIO_Explosive_Decal",
-                        },
-                    },
-                },
+                //Decals = new DecalDef
+                //{
+                //    MaxAge = 3600,
+                //    Map = new[]
+                //    {
+                //        new TextureMapDef
+                //        {
+                //            HitMaterial = "Metal",
+                //            DecalMaterial = "TIO_Explosive_Decal",
+                //        },
+                //    },
+                //},
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
@@ -823,7 +823,7 @@ namespace Scripts
             AmmoAudio = new AmmoAudioDef
             {
                 TravelSound = "GrowlerTone", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "VanillaImpactCat4",
+                HitSound = "", // VanillaImpactCat4
                 ShotSound = "",
                 ShieldHitSound = "RLX10Shot",
                 PlayerHitSound = "",

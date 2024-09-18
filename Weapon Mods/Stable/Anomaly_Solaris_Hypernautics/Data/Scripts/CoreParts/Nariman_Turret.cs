@@ -55,7 +55,7 @@ namespace Scripts {
             {
                 PartName = "Nariman", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0.25f, // Projectile inaccuracy in degrees.
-                AimingTolerance = 1f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
+                AimingTolerance = 5f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Advanced, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
                 DelayCeaseFire = 0, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released.
                 AddToleranceToTracking = false, // Allows turret to track to the edge of the AimingTolerance cone instead of dead centre.
@@ -139,7 +139,7 @@ namespace Scripts {
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "", // Audio for warmup effect.
-                    FiringSound = "Pulse_Flak_placeholder", // Audio for firing.
+                    FiringSound = "DroidTankArtillery", // Audio for firing.
                     FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
                     ReloadSound = "",
                     NoAmmoSound = "",
@@ -181,7 +181,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                Nariman_Dart_Round, Nariman_EWAR_Round, // Must list all primary, shrapnel, and pattern ammos.
+                Nariman_Dart_Round, //Nariman_EWAR_Round,  Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = Nariman_Dart_Animation,
             //Upgrades = UpgradeModules,

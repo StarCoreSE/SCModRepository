@@ -1464,554 +1464,524 @@
             <!-- ****************************************************************************************************************************************************************************************
       ****************** RIGHT PLATE ****************************************************** RIGHT PLATE *************************************************** RIGHT PLATE ***************************
       *********************************************************************************************************************************************************************************************-->
-            <StatControl>
-                <VisibleCondition xsi:type="Condition">
-                    <Operator>And</Operator>
-                    <Terms>
-                        <Term xsi:type="StatCondition">
-                            <StatId>controlled_is_grid</StatId>
-                            <Operator>Above</Operator>
-                            <Value>0</Value>
-                        </Term>
-                        <Term xsi:type="StatCondition">
-                            <StatId>controlled_is_turret</StatId>
-                            <Operator>Below</Operator>
-                            <Value>1</Value>
-                        </Term>
-                        <Term xsi:type="StatCondition">
-                            <StatId>hud_mode</StatId>
-                            <Operator>Above</Operator>
-                            <Value>0</Value>
-                        </Term>
-                    </Terms>
-                </VisibleCondition>
+<StatControl>
+    <VisibleCondition xsi:type="Condition">
+        <Operator>And</Operator>
+        <Terms>
+            <Term xsi:type="StatCondition">
+                <StatId>controlled_is_grid</StatId>
+                <Operator>Above</Operator>
+                <Value>0</Value>
+            </Term>
+            <Term xsi:type="StatCondition">
+                <StatId>controlled_is_turret</StatId>
+                <Operator>Below</Operator>
+                <Value>1</Value>
+            </Term>
+            <Term xsi:type="StatCondition">
+                <StatId>hud_mode</StatId>
+                <Operator>Above</Operator>
+                <Value>0</Value>
+            </Term>
+        </Terms>
+    </VisibleCondition>
 
-                <Position>
-                    <X>-0.003</X>
-                    <Y>-0</Y>
-                </Position>
-                <OriginAlign>HORISONTAL_RIGHT_AND_VERTICAL_BOTTOM</OriginAlign>
-                <StatStyles>
-                    <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
-                      <OffsetPx>
-                        <X>-681</X>
-                        <Y>-195</Y>
-                      </OffsetPx>
-                      <SizePx>
-                        <X>-220</X>
-                        <Y>60</Y>
-                      </SizePx>
-                      <Category>Background</Category>
+    <Position>
+        <X>-0.003</X>
+        <Y>-0</Y>
+    </Position>
+    <OriginAlign>HORISONTAL_RIGHT_AND_VERTICAL_BOTTOM</OriginAlign>
+    <StatStyles>
+        <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
+            <OffsetPx>
+                <X>-464</X> <!-- -455 + 226 -->
+                <Y>-205</Y> <!-- -205 - 10 -->
+            </OffsetPx>
+            <SizePx>
+                <X>-144</X>
+                <Y>60</Y>
+            </SizePx>
+            <Category>Background</Category>
+            <Texture>Toolbar_tabs</Texture>
+        </StatStyle>
 
-                      <Texture>Toolbar_tabs</Texture>
-                    </StatStyle>
-                  
+        <!--Mass Value On-->
+        <StatStyle xsi:type="MyObjectBuilder_TextStatVisualStyle">
+            <StatId>controlled_mass</StatId>
 
-                    <!--Mass Value On-->
-                    <StatStyle xsi:type="MyObjectBuilder_TextStatVisualStyle">
-                        <StatId>controlled_mass</StatId>
+            <OffsetPx>
+                <X>-502</X> <!-- -728 + 226 -->
+                <Y>-190</Y> <!-- -180 - 10 -->
+            </OffsetPx>
+            <SizePx>
+                <X>16</X>
+                <Y>16</Y>
+            </SizePx>
 
-                        <OffsetPx>
-                            <X>-728</X>
-                            <Y>-180</Y>
-                        </OffsetPx>
-                        <SizePx>
-                            <X>16</X>
-                            <Y>16</Y>
-                        </SizePx>
+            <VisibleCondition xsi:type="Condition">
+                <Operator>And</Operator>
+                <Terms>
+                    <Term xsi:type="StatCondition">
+                        <StatId>controlled_is_grid</StatId>
+                        <Value>0.5</Value>
+                        <Operator>Above</Operator>
+                    </Term>
+                    <Term xsi:type="StatCondition">
+                        <StatId>controlled_is_static</StatId>
+                        <Value>0.5</Value>
+                        <Operator>Above</Operator>
+                    </Term>
+                </Terms>
+            </VisibleCondition>
 
-                        <VisibleCondition xsi:type="Condition">
-                            <Operator>And</Operator>
-                            <Terms>
-                                <Term xsi:type="StatCondition">
-                                    <StatId>controlled_is_grid</StatId>
-                                    <Value>0.5</Value>
-                                    <Operator>Above</Operator>
-                                </Term>
-                                <Term xsi:type="StatCondition">
-                                    <StatId>controlled_is_static</StatId>
-                                    <Value>0.5</Value>
-                                    <Operator>Above</Operator>
-                                </Term>
-                            </Terms>
-                        </VisibleCondition>
+            <Text>Station</Text>
+            <Font>Blue</Font>
+            <Scale>0.7</Scale>
+            <ColorMask>
+                <X>1</X>
+                <Y>1</Y>
+                <Z>1</Z>
+                <W>0.8</W>
+            </ColorMask>
+            <TextAlign>HORISONTAL_RIGHT_AND_VERTICAL_CENTER</TextAlign>
+        </StatStyle>
 
-                        <Text>Station</Text>
-                        <Font>Blue</Font>
-                        <Scale>0.7</Scale>
-                        <ColorMask>
-                            <X>1</X>
-                            <Y>1</Y>
-                            <Z>1</Z>
-                            <W>0.8</W>
-                        </ColorMask>
-                        <TextAlign>HORISONTAL_RIGHT_AND_VERTICAL_CENTER</TextAlign>
-                    </StatStyle>
+        <!--Mass Value Off-->
+        <StatStyle xsi:type="MyObjectBuilder_TextStatVisualStyle">
+            <StatId>controlled_mass</StatId>
 
-                    <!--Mass Value Off-->
-                    <StatStyle xsi:type="MyObjectBuilder_TextStatVisualStyle">
-                        <StatId>controlled_mass</StatId>
+            <OffsetPx>
+                <X>-502</X> <!-- -728 + 226 -->
+                <Y>-190</Y> <!-- -180 - 10 -->
+            </OffsetPx>
+            <SizePx>
+                <X>16</X>
+                <Y>16</Y>
+            </SizePx>
 
-                        <OffsetPx>
-                            <X>-728</X>
-                            <Y>-180</Y>
-                        </OffsetPx>
-                        <SizePx>
-                            <X>16</X>
-                            <Y>16</Y>
-                        </SizePx>
+            <VisibleCondition xsi:type="Condition">
+                <Operator>And</Operator>
+                <Terms>
+                    <Term xsi:type="StatCondition">
+                        <StatId>controlled_is_grid</StatId>
+                        <Value>0.5</Value>
+                        <Operator>Above</Operator>
+                    </Term>
+                    <Term xsi:type="StatCondition">
+                        <StatId>controlled_is_static</StatId>
+                        <Value>0.5</Value>
+                        <Operator>Below</Operator>
+                    </Term>
+                </Terms>
+            </VisibleCondition>
 
-                        <VisibleCondition xsi:type="Condition">
-                            <Operator>And</Operator>
-                            <Terms>
-                                <Term xsi:type="StatCondition">
-                                    <StatId>controlled_is_grid</StatId>
-                                    <Value>0.5</Value>
-                                    <Operator>Above</Operator>
-                                </Term>
-                                <Term xsi:type="StatCondition">
-                                    <StatId>controlled_is_static</StatId>
-                                    <Value>0.5</Value>
-                                    <Operator>Below</Operator>
-                                </Term>
-                            </Terms>
-                        </VisibleCondition>
+            <Text>{STAT} Kg</Text>
+            <Font>Blue</Font>
+            <Scale>0.7</Scale>
+            <ColorMask>
+                <X>1</X>
+                <Y>1</Y>
+                <Z>1</Z>
+                <W>0.2</W>
+            </ColorMask>
+            <TextAlign>HORISONTAL_RIGHT_AND_VERTICAL_CENTER</TextAlign>
+        </StatStyle>
 
+        <!--Mass Icon On-->
+        <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
+            <StatId>controlled_mass</StatId>
 
-                        <Text>{STAT} Kg</Text>
-                        <Font>Blue</Font>
-                        <Scale>0.7</Scale>
-                        <ColorMask>
-                            <X>1</X>
-                            <Y>1</Y>
-                            <Z>1</Z>
-                            <W>0.2</W>
-                        </ColorMask>
-                        <TextAlign>HORISONTAL_RIGHT_AND_VERTICAL_CENTER</TextAlign>
-                    </StatStyle>
+            <OffsetPx>
+                <X>-489</X> <!-- -715 + 226 -->
+                <Y>-195</Y> <!-- -185 - 10 -->
+            </OffsetPx>
+            <SizePx>
+                <X>24</X>
+                <Y>24</Y>
+            </SizePx>
 
-                    <!--Mass Icon On-->
-                    <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
-                        <StatId>controlled_mass</StatId>
+            <VisibleCondition xsi:type="StatCondition">
+                <StatId>controlled_is_grid</StatId>
+                <Value>0.5</Value>
+                <Operator>Above</Operator>
+            </VisibleCondition>
 
-                        <OffsetPx>
-                            <X>-715</X>
-                            <Y>-185</Y>
-                        </OffsetPx>
-                        <SizePx>
-                            <X>24</X>
-                            <Y>24</Y>
-                        </SizePx>
+            <Texture>Mass</Texture>
+        </StatStyle>
 
-                        <VisibleCondition xsi:type="StatCondition">
-                            <StatId>controlled_is_grid</StatId>
-                            <Value>0.5</Value>
-                            <Operator>Above</Operator>
-                        </VisibleCondition>
+        <!--Mass Icon Off-->
+        <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
+            <StatId>controlled_mass</StatId>
 
-                        <Texture>Mass</Texture>
-                    </StatStyle>
+            <OffsetPx>
+                <X>-489</X> <!-- -715 + 226 -->
+                <Y>-195</Y> <!-- -185 - 10 -->
+            </OffsetPx>
+            <SizePx>
+                <X>24</X>
+                <Y>24</Y>
+            </SizePx>
 
-                    <!--Mass Icon Off-->
-                    <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
-                        <StatId>controlled_mass</StatId>
+            <VisibleCondition xsi:type="StatCondition">
+                <StatId>controlled_is_grid</StatId>
+                <Value>0.5</Value>
+                <Operator>Below</Operator>
+            </VisibleCondition>
 
-                        <OffsetPx>
-                            <X>-715</X><!-- -65 -->
-                            <Y>-185</Y>
-                        </OffsetPx>
-                        <SizePx>
-                            <X>24</X>
-                            <Y>24</Y>
-                        </SizePx>
+            <Texture>Mass</Texture>
+            <ColorMask>
+                <X>1</X>
+                <Y>1</Y>
+                <Z>1</Z>
+                <W>0.2</W>
+            </ColorMask>
+        </StatStyle>
 
-                        <VisibleCondition xsi:type="StatCondition">
-                            <StatId>controlled_is_grid</StatId>
-                            <Value>0.5</Value>
-                            <Operator>Below</Operator>
-                        </VisibleCondition>
+        <!--Energy Progress Bar-->
 
-                        <Texture>Mass</Texture>
-                        <ColorMask>
-                            <X>1</X>
-                            <Y>1</Y>
-                            <Z>1</Z>
-                            <W>0.2</W>
-                        </ColorMask>
-                    </StatStyle>
+        <StatStyle xsi:type="MyObjectBuilder_ProgressBarStatVisualStyle">
+            <StatId>controlled_power_usage</StatId>
+            <OffsetPx>
+                <X>-585</X> <!-- -870 + 226 -->
+                <Y>-160</Y> <!-- -150 - 10 -->
+            </OffsetPx>
+            <SizePx>
+                <X>100</X>
+                <Y>9</Y>
+            </SizePx>
 
-                    <!--Energy Progress Bar-->
+            <BlinkCondition xsi:type="StatCondition">
+                <StatId>controlled_power_usage</StatId>
+                <Value>0.95</Value>
+                <Operator>Above</Operator>
+            </BlinkCondition>
 
-                    <StatStyle xsi:type="MyObjectBuilder_ProgressBarStatVisualStyle">
-                        <StatId>controlled_power_usage</StatId>
-                        <OffsetPx>
-                            <X>-870</X>
-                            <Y>-150</Y>
-                        </OffsetPx>
-                        <SizePx>
-                            <X>150</X>
-                            <Y>9</Y>
-                        </SizePx>
+            <Blink>
+                <ColorMask>
+                    <X>1</X>
+                    <Y>0</Y>
+                    <Z>0</Z>
+                    <W>1</W>
+                </ColorMask>
+                <MinAlpha>0.6</MinAlpha>
+                <MaxAlpha>1</MaxAlpha>
+            </Blink>
+            <Inverted>true</Inverted>
 
-                        <!--<VisibleCondition xsi:type="StatCondition">
-              <StatId>controlled_is_grid</StatId>
-              <Value>0.5</Value>
-              <Operator>Above</Operator>
-            </VisibleCondition>-->
+            <SimpleStyle>
+                <BackgroundTexture>ProgressBar_Background</BackgroundTexture>
+                <ProgressTexture>ProgressBar_Bar</ProgressTexture>
+                <ProgressTextureOffsetPx>
+                    <X>0</X>
+                    <Y>0</Y>
+                </ProgressTextureOffsetPx>
+                <ProgressColorMask>
+                    <X>0.734375</X>
+                    <Y>0.9137254901960784</Y>
+                    <Z>0.9647058823529412</Z>
+                    <W>1</W>
+                </ProgressColorMask>
+                <BackgroundColorMask>
+                    <X>0.3137</X>
+                    <Y>0.3607</Y>
+                    <Z>0.4039</Z>
+                    <W>1</W>
+                </BackgroundColorMask>
+            </SimpleStyle>
+        </StatStyle>
 
-                        <BlinkCondition xsi:type="StatCondition">
-                            <StatId>controlled_power_usage</StatId>
-                            <Value>0.95</Value>
-                            <Operator>Above</Operator>
-                        </BlinkCondition>
+        <!--Energy Stat Value On-->
 
-                        <Blink>
-                            <ColorMask>
-                                <X>1</X>
-                                <Y>0</Y>
-                                <Z>0</Z>
-                                <W>1</W>
-                            </ColorMask>
-                            <MinAlpha>0.6</MinAlpha>
-                            <MaxAlpha>1</MaxAlpha>
-                        </Blink>
-                        <Inverted>true</Inverted>
+        <StatStyle xsi:type="MyObjectBuilder_TextStatVisualStyle">
+            <StatId>controlled_power_usage</StatId>
 
-                        <SimpleStyle>
-                            <BackgroundTexture>ProgressBar_Background</BackgroundTexture>
-                            <ProgressTexture>ProgressBar_Bar</ProgressTexture>
-                            <ProgressTextureOffsetPx>
-                                <X>0</X>
-                                <Y>0</Y>
-                            </ProgressTextureOffsetPx>
-                            <ProgressColorMask>
-                                <X>0.734375</X>
-                                <Y>0.9137254901960784</Y>
-                                <Z>0.9647058823529412</Z>
-                                <W>1</W>
-                            </ProgressColorMask>
-                            <BackgroundColorMask>
-                                <X>0.3137</X>
-                                <Y>0.3607</Y>
-                                <Z>0.4039</Z>
-                                <W>1</W>
-                            </BackgroundColorMask>
-                        </SimpleStyle>
-                    </StatStyle>
+            <OffsetPx>
+                <X>-605</X> <!-- -895 + 226 -->
+                <Y>-165</Y> <!-- -155 - 10 -->
+            </OffsetPx>
+            <SizePx>
+                <X>16</X>
+                <Y>16</Y>
+            </SizePx>
 
-                    <!--Energy Stat Value On-->
+            <VisibleCondition xsi:type="StatCondition">
+                <StatId>controlled_is_grid</StatId>
+                <Value>0.5</Value>
+                <Operator>Above</Operator>
+            </VisibleCondition>
 
-                    <StatStyle xsi:type="MyObjectBuilder_TextStatVisualStyle">
-                        <StatId>controlled_power_usage</StatId>
+            <BlinkCondition xsi:type="StatCondition">
+                <StatId>controlled_power_usage</StatId>
+                <Value>0.95</Value>
+                <Operator>Above</Operator>
+            </BlinkCondition>
+            <Blink>
+                <ColorMask>
+                    <X>1</X>
+                    <Y>0</Y>
+                    <Z>0</Z>
+                    <W>1</W>
+                </ColorMask>
+            </Blink>
 
-                        <OffsetPx>
-                            <X>-895</X>
-                            <Y>-155</Y>
-                        </OffsetPx>
-                        <SizePx>
-                            <X>16</X>
-                            <Y>16</Y>
-                        </SizePx>
+            <Percentage>true</Percentage>
+            <Precision>0</Precision>
+            <Text>{STAT}</Text>
+            <Font>White</Font>
+            <Scale>0.7</Scale>
+            <TextAlign>HORISONTAL_CENTER_AND_VERTICAL_CENTER</TextAlign>
+        </StatStyle>
 
-                        <VisibleCondition xsi:type="StatCondition">
-                            <StatId>controlled_is_grid</StatId>
-                            <Value>0.5</Value>
-                            <Operator>Above</Operator>
-                        </VisibleCondition>
+        <!--Energy Stat Value Off-->
 
+        <StatStyle xsi:type="MyObjectBuilder_TextStatVisualStyle">
+            <StatId>controlled_power_usage</StatId>
 
-                        <BlinkCondition xsi:type="StatCondition">
-                            <StatId>controlled_power_usage</StatId>
-                            <Value>0.95</Value>
-                            <Operator>Above</Operator>
-                        </BlinkCondition>
-                        <Blink>
-                            <ColorMask>
-                                <X>1</X>
-                                <Y>0</Y>
-                                <Z>0</Z>
-                                <W>1</W>
-                            </ColorMask>
-                        </Blink>
+            <OffsetPx>
+                <X>-605</X> <!-- -895 + 226 -->
+                <Y>-165</Y> <!-- -155 - 10 -->
+            </OffsetPx>
+            <SizePx>
+                <X>16</X>
+                <Y>16</Y>
+            </SizePx>
 
-                        <Percentage>true</Percentage>
-                        <Precision>0</Precision>
-                        <Text>{STAT}</Text>
-                        <Font>White</Font>
-                        <Scale>0.7</Scale>
-                        <TextAlign>HORISONTAL_CENTER_AND_VERTICAL_CENTER</TextAlign>
-                    </StatStyle>
+            <VisibleCondition xsi:type="StatCondition">
+                <StatId>controlled_is_grid</StatId>
+                <Value>0.5</Value>
+                <Operator>Below</Operator>
+            </VisibleCondition>
 
-                    <!--Energy Stat Value Off-->
+            <BlinkCondition xsi:type="StatCondition">
+                <StatId>controlled_power_usage</StatId>
+                <Value>0.9</Value>
+                <Operator>Below</Operator>
+            </BlinkCondition>
 
-                    <StatStyle xsi:type="MyObjectBuilder_TextStatVisualStyle">
-                        <StatId>controlled_power_usage</StatId>
+            <Percentage>true</Percentage>
+            <Precision>0</Precision>
+            <Text>{STAT}</Text>
+            <Font>White</Font>
+            <Scale>0.7</Scale>
+            <TextAlign>HORISONTAL_CENTER_AND_VERTICAL_CENTER</TextAlign>
+            <ColorMask>
+                <X>1</X>
+                <Y>1</Y>
+                <Z>1</Z>
+                <W>0.2</W>
+            </ColorMask>
+        </StatStyle>
 
-                        <OffsetPx>
-                            <X>-895</X>
-                            <Y>-155</Y>
-                        </OffsetPx>
-                        <SizePx>
-                            <X>16</X>
-                            <Y>16</Y>
-                        </SizePx>
+        <!--Energy Icon On-->
 
-                        <VisibleCondition xsi:type="StatCondition">
-                            <StatId>controlled_is_grid</StatId>
-                            <Value>0.5</Value>
-                            <Operator>Below</Operator>
-                        </VisibleCondition>
+        <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
+            <StatId>controlled_power_usage</StatId>
 
-                        <BlinkCondition xsi:type="StatCondition">
-                            <StatId>controlled_power_usage</StatId>
-                            <Value>0.9</Value>
-                            <Operator>Below</Operator>
-                        </BlinkCondition>
+            <OffsetPx>
+                <X>-489</X> <!-- -715 + 226 -->
+                <Y>-170</Y> <!-- -160 - 10 -->
+            </OffsetPx>
+            <SizePx>
+                <X>24</X>
+                <Y>24</Y>
+            </SizePx>
 
-                        <Percentage>true</Percentage>
-                        <Precision>0</Precision>
-                        <Text>{STAT}</Text>
-                        <Font>White</Font>
-                        <Scale>0.7</Scale>
-                        <TextAlign>HORISONTAL_CENTER_AND_VERTICAL_CENTER</TextAlign>
-                        <ColorMask>
-                            <X>1</X>
-                            <Y>1</Y>
-                            <Z>1</Z>
-                            <W>0.2</W>
-                        </ColorMask>
-                    </StatStyle>
+            <VisibleCondition xsi:type="StatCondition">
+                <StatId>controlled_is_grid</StatId>
+                <Value>0.5</Value>
+                <Operator>Above</Operator>
+            </VisibleCondition>
+            <BlinkCondition xsi:type="StatCondition">
+                <StatId>controlled_power_usage</StatId>
+                <Value>0.95</Value>
+                <Operator>Above</Operator>
+            </BlinkCondition>
+            <Blink>
+                <ColorMask>
+                    <X>1</X>
+                    <Y>0</Y>
+                    <Z>0</Z>
+                    <W>1</W>
+                </ColorMask>
+                <MinAlpha>1</MinAlpha>
+                <MaxAlpha>1</MaxAlpha>
+            </Blink>
+            <Texture>EnergyIcon</Texture>
+        </StatStyle>
 
-                    <!--Energy Icon On-->
+        <!--Energy Icon Off-->
 
-                    <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
-                        <StatId>controlled_power_usage</StatId>
+        <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
+            <StatId>controlled_power_usage</StatId>
 
-                        <OffsetPx>
-                            <X>-715</X>
-                            <Y>-160</Y>
-                        </OffsetPx>
-                        <SizePx>
-                            <X>24</X>
-                            <Y>24</Y>
-                        </SizePx>
+            <OffsetPx>
+                <X>-489</X> <!-- -715 + 226 -->
+                <Y>-170</Y> <!-- -160 - 10 -->
+            </OffsetPx>
+            <SizePx>
+                <X>24</X>
+                <Y>24</Y>
+            </SizePx>
 
-                        <VisibleCondition xsi:type="StatCondition">
-                            <StatId>controlled_is_grid</StatId>
-                            <Value>0.5</Value>
-                            <Operator>Above</Operator>
-                        </VisibleCondition>
-                        <BlinkCondition xsi:type="StatCondition">
-                            <StatId>controlled_power_usage</StatId>
-                            <Value>0.95</Value>
-                            <Operator>Above</Operator>
-                        </BlinkCondition>
-                        <Blink>
-                            <ColorMask>
-                                <X>1</X>
-                                <Y>0</Y>
-                                <Z>0</Z>
-                                <W>1</W>
-                            </ColorMask>
-                            <MinAlpha>1</MinAlpha>
-                            <MaxAlpha>1</MaxAlpha>
-                        </Blink>
-                        <Texture>EnergyIcon</Texture>
-                    </StatStyle>
+            <VisibleCondition xsi:type="StatCondition">
+                <StatId>controlled_is_grid</StatId>
+                <Value>0.5</Value>
+                <Operator>Below</Operator>
+            </VisibleCondition>
 
-                    <!--Energy Icon Off-->
+            <Texture>EnergyIcon</Texture>
+            <ColorMask>
+                <X>1</X>
+                <Y>1</Y>
+                <Z>1</Z>
+                <W>0.2</W>
+            </ColorMask>
+        </StatStyle>
 
-                    <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
-                        <StatId>controlled_power_usage</StatId>
+        <!-- Grid Icons -->
 
-                        <OffsetPx>
-                            <X>-715</X>
-                            <Y>-160</Y>
-                        </OffsetPx>
-                        <SizePx>
-                            <X>24</X>
-                            <Y>24</Y>
-                        </SizePx>
+        <!--GridPower On-->
 
-                        <VisibleCondition xsi:type="StatCondition">
-                            <StatId>controlled_is_grid</StatId>
-                            <Value>0.5</Value>
-                            <Operator>Below</Operator>
-                        </VisibleCondition>
+        <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
+            <StatId>controlled_reactors</StatId>
 
-                        <Texture>EnergyIcon</Texture>
-                        <ColorMask>
-                            <X>1</X>
-                            <Y>1</Y>
-                            <Z>1</Z>
-                            <W>0.2</W>
-                        </ColorMask>
-                    </StatStyle>
+            <OffsetPx>
+                <X>-489</X> <!-- -715 + 226 -->
+                <Y>-150</Y> <!-- -160 - 10 -->
+            </OffsetPx>
+            <SizePx>
+                <X>32</X>
+                <Y>32</Y>
+            </SizePx>
 
-                    <!-- Grid Icons -->
+            <FadeInTimeMs>100</FadeInTimeMs>
+            <FadeOutTimeMs>500</FadeOutTimeMs>
 
-                    <!--GridPower Background-->
-                    <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
-                        <OffsetPx>
-                            <X>-620</X>
-                            <Y>-195</Y>
-                        </OffsetPx>
-                        <SizePx>
-                            <X>-60</X>
-                            <Y>60</Y>
-                        </SizePx>
-                        <Category>Background</Category>
-                        <Texture>IconsBackground</Texture>
-                    </StatStyle>
-                  
-                    <!--GridPower On-->
-
-                    <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
+            <VisibleCondition xsi:type="Condition">
+                <Operator>Or</Operator>
+                <Terms>
+                    <Term xsi:type="Condition">
+                        <Operator>And</Operator>
+                        <Terms>
+                            <Term xsi:type="StatCondition">
+                                <StatId>controlled_reactors</StatId>
+                                <Value>0.5</Value>
+                                <Operator>Above</Operator>
+                            </Term>
+                            <Term xsi:type="StatCondition">
+                                <StatId>hud_show_states</StatId>
+                                <Value>0.5</Value>
+                                <Operator>Below</Operator>
+                            </Term>
+                        </Terms>
+                    </Term>
+                    <Term xsi:type="StatCondition">
                         <StatId>controlled_reactors</StatId>
+                        <Value>0.5</Value>
+                        <Operator>Above</Operator>
+                    </Term>
+                </Terms>
+            </VisibleCondition>
 
-                        <OffsetPx>
-                            <X>-620</X>
-                            <Y>-195</Y>
-                        </OffsetPx>
-                        <SizePx>
-                            <X>-60</X>
-                            <Y>60</Y>
-                        </SizePx>
+            <Texture>GridPower</Texture>
+        </StatStyle>
 
-                        <FadeInTimeMs>100</FadeInTimeMs>
-                        <FadeOutTimeMs>500</FadeOutTimeMs>
-                        <!--<MaxOnScreenTimeMs>1000</MaxOnScreenTimeMs>-->
+        <!--GridPower Off inside grid-->
 
-                        <VisibleCondition xsi:type="Condition">
-                            <Operator>Or</Operator>
-                            <Terms>
-                                <Term xsi:type="Condition">
-                                    <Operator>And</Operator>
-                                    <Terms>
-                                        <Term xsi:type="StatCondition">
-                                            <StatId>controlled_reactors</StatId>
-                                            <Value>0.5</Value>
-                                            <Operator>Above</Operator>
-                                        </Term>
-                                        <Term xsi:type="StatCondition">
-                                            <StatId>hud_show_states</StatId>
-                                            <Value>0.5</Value>
-                                            <Operator>Below</Operator>
-                                        </Term>
-                                    </Terms>
-                                </Term>
-                                <Term xsi:type="StatCondition">
-                                    <StatId>controlled_reactors</StatId>
-                                    <Value>0.5</Value>
-                                    <Operator>Above</Operator>
-                                </Term>
-                            </Terms>
-                        </VisibleCondition>
+        <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
+            <StatId>controlled_reactors</StatId>
 
-                        <Texture>GridPower</Texture>
-                    </StatStyle>
+            <OffsetPx>
+                <X>-489</X> <!-- -715 + 226 -->
+                <Y>-150</Y> <!-- -160 - 10 -->
+            </OffsetPx>
+            <SizePx>
+                <X>32</X>
+                <Y>32</Y>
+            </SizePx>
 
+            <FadeInTimeMs>100</FadeInTimeMs>
+            <FadeOutTimeMs>500</FadeOutTimeMs>
 
+            <VisibleCondition xsi:type="Condition">
+                <Operator>Or</Operator>
+                <Terms>
+                    <Term xsi:type="Condition">
+                        <Operator>And</Operator>
+                        <Terms>
+                            <Term xsi:type="StatCondition">
+                                <StatId>controlled_reactors</StatId>
+                                <Value>0.5</Value>
+                                <Operator>Below</Operator>
+                            </Term>
+                            <Term xsi:type="StatCondition">
+                                <StatId>controlled_is_grid</StatId>
+                                <Value>0.5</Value>
+                                <Operator>Above</Operator>
+                            </Term>
+                        </Terms>
+                    </Term>
+                </Terms>
+            </VisibleCondition>
 
+            <Texture>GridPower</Texture>
+            <ColorMask>
+                <X>1</X>
+                <Y>0</Y>
+                <Z>0</Z>
+                <W>1</W>
+            </ColorMask>
+        </StatStyle>
 
-                    <!--GridPower Off inside grid-->
+        <!--GridPower Off outside of grid-->
 
-                    <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
-                        <StatId>controlled_reactors</StatId>
+        <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
+            <StatId>controlled_reactors</StatId>
 
-                        <OffsetPx>
-                            <X>-620</X>
-                            <Y>-195</Y>
-                        </OffsetPx>
-                        <SizePx>
-                            <X>-60</X>
-                            <Y>60</Y>
-                        </SizePx>
+            <OffsetPx>
+                <X>-489</X> <!-- -715 + 226 -->
+                <Y>-150</Y> <!-- -160 - 10 -->
+            </OffsetPx>
+            <SizePx>
+                <X>32</X>
+                <Y>32</Y>
+            </SizePx>
 
-                        <FadeInTimeMs>100</FadeInTimeMs>
-                        <FadeOutTimeMs>500</FadeOutTimeMs>
-                        <!--<MaxOnScreenTimeMs>1000</MaxOnScreenTimeMs>-->
+            <FadeInTimeMs>100</FadeInTimeMs>
+            <FadeOutTimeMs>500</FadeOutTimeMs>
 
-                        <VisibleCondition xsi:type="Condition">
-                            <Operator>Or</Operator>
-                            <Terms>
-                                <Term xsi:type="Condition">
-                                    <Operator>And</Operator>
-                                    <Terms>
-                                        <Term xsi:type="StatCondition">
-                                            <StatId>controlled_reactors</StatId>
-                                            <Value>0.5</Value>
-                                            <Operator>Below</Operator>
-                                        </Term>
-                                        <Term xsi:type="StatCondition">
-                                            <StatId>controlled_is_grid</StatId>
-                                            <Value>0.5</Value>
-                                            <Operator>Above</Operator>
-                                        </Term>
-                                    </Terms>
-                                </Term>
-                            </Terms>
-                        </VisibleCondition>
+            <VisibleCondition xsi:type="Condition">
+                <Operator>Or</Operator>
+                <Terms>
+                    <Term xsi:type="Condition">
+                        <Operator>And</Operator>
+                        <Terms>
+                            <Term xsi:type="StatCondition">
+                                <StatId>controlled_reactors</StatId>
+                                <Value>0.5</Value>
+                                <Operator>Below</Operator>
+                            </Term>
+                            <Term xsi:type="StatCondition">
+                                <StatId>controlled_is_grid</StatId>
+                                <Value>0.5</Value>
+                                <Operator>Below</Operator>
+                            </Term>
+                        </Terms>
+                    </Term>
+                </Terms>
+            </VisibleCondition>
 
-                        <Texture>GridPower</Texture>
-                        <ColorMask>
-                            <X>1</X>
-                            <Y>0</Y>
-                            <Z>0</Z>
-                            <W>1</W>
-                        </ColorMask>
-                    </StatStyle>
+            <Texture>GridPower</Texture>
+            <ColorMask>
+                <X>1</X>
+                <Y>1</Y>
+                <Z>1</Z>
+                <W>0.2</W>
+            </ColorMask>
+        </StatStyle>
 
-                    <!--GridPower Off outside of grid-->
-
-                    <StatStyle xsi:type="MyObjectBuilder_ImageStatVisualStyle">
-                        <StatId>controlled_reactors</StatId>
-
-                        <OffsetPx>
-                            <X>-620</X>
-                            <Y>-195</Y>
-                        </OffsetPx>
-                        <SizePx>
-                            <X>-60</X>
-                            <Y>60</Y>
-                        </SizePx>
-
-                        <FadeInTimeMs>100</FadeInTimeMs>
-                        <FadeOutTimeMs>500</FadeOutTimeMs>
-                        <!--<MaxOnScreenTimeMs>1000</MaxOnScreenTimeMs>-->
-
-                        <VisibleCondition xsi:type="Condition">
-                            <Operator>Or</Operator>
-                            <Terms>
-                                <Term xsi:type="Condition">
-                                    <Operator>And</Operator>
-                                    <Terms>
-                                        <Term xsi:type="StatCondition">
-                                            <StatId>controlled_reactors</StatId>
-                                            <Value>0.5</Value>
-                                            <Operator>Below</Operator>
-                                        </Term>
-                                        <Term xsi:type="StatCondition">
-                                            <StatId>controlled_is_grid</StatId>
-                                            <Value>0.5</Value>
-                                            <Operator>Below</Operator>
-                                        </Term>
-                                    </Terms>
-                                </Term>
-                            </Terms>
-                        </VisibleCondition>
-
-                        <Texture>GridPower</Texture>
-                        <ColorMask>
-                            <X>1</X>
-                            <Y>1</Y>
-                            <Z>1</Z>
-                            <W>0.2</W>
-                        </ColorMask>
-                    </StatStyle>
-
-                </StatStyles>
-            </StatControl>
+    </StatStyles>
+</StatControl>
         </StatControls>
 
         <TargetingMarkers>

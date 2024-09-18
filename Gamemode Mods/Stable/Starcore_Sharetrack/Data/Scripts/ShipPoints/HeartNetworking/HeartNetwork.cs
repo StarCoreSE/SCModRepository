@@ -4,7 +4,7 @@ using System.Linq;
 using Sandbox.ModAPI;
 using VRage.Game.ModAPI;
 
-namespace ShipPoints.HeartNetworking
+namespace StarCore.ShareTrack.HeartNetworking
 {
     public class HeartNetwork
     {
@@ -70,7 +70,14 @@ namespace ShipPoints.HeartNetworking
 
         private void HandlePacket(PacketBase packet, ulong senderSteamId)
         {
-            packet.Received(senderSteamId);
+            try
+            {
+                packet.Received(senderSteamId);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
         }
 
 

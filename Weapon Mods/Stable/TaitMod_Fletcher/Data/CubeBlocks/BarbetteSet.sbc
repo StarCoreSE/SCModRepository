@@ -1,0 +1,138 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition>
+				<Id>
+						<TypeId>Conveyor</TypeId>
+				<SubtypeId>Barbette5x5</SubtypeId>
+			</Id>
+			<DisplayName>Turret Barbette 5X5</DisplayName>
+			<Description>A barbette is a protective circular armour support for a heavy gun turret.</Description>
+			<Icon>Textures\GUI\Icons\Barbette5x5.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="5" y="1" z="5"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\large\Barbette5x5.mwm</Model>
+			<Components>
+				<Component Subtype="Construction" Count="250" />
+				<Component Subtype="SmallTube" Count="250" />
+				<Component Subtype="Motor" Count="250" />
+				<Component Subtype="Construction" Count="250" />
+				<Component Subtype="InteriorPlate" Count="250" />
+				<Component Subtype="MetalGrid" Count="1250" />
+				<Component Subtype="SteelPlate" Count="3125" />
+			</Components>
+			<CriticalComponent Subtype="Motor" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\large\Barbette5x5_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\Cubes\large\Barbette5x5_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\Barbette5x5_BS3.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>Barbette5x5</BlockPairName>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>15</BuildTimeSeconds>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
+			<DamagedSound>ParticleHeavyMech</DamagedSound>
+			<DestroyEffect>BlockDestroyed_Large</DestroyEffect>
+			<DestroySound>PoofExplosionCat3</DestroySound>
+			<PCU>25</PCU>
+			<IsAirTight>true</IsAirTight>
+		</Definition>
+
+		<Definition>
+				<Id>
+						<TypeId>Conveyor</TypeId>
+				<SubtypeId>Barbette3x3</SubtypeId>
+			</Id>
+			<DisplayName>Turret Barbette 3X3</DisplayName>
+			<Description>A barbette is a protective circular armour support for a heavy gun turret.</Description>
+			<Icon>Textures\GUI\Icons\Barbette3x3.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="1" z="3"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\large\Barbette3x3.mwm</Model>
+			<Components>
+				<Component Subtype="Construction" Count="180" />
+				<Component Subtype="SmallTube" Count="180" />
+				<Component Subtype="Motor" Count="54" />
+				<Component Subtype="Construction" Count="90" />
+				<Component Subtype="InteriorPlate" Count="90" />
+				<Component Subtype="MetalGrid" Count="450" />
+				<Component Subtype="SteelPlate" Count="1125" />
+			</Components>
+			<CriticalComponent Subtype="Motor" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\large\Barbette3x3_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\Cubes\large\Barbette3x3_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\Barbette3x3_BS3.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>Barbette3x3</BlockPairName>
+			<MirroringY>X</MirroringY>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>10</BuildTimeSeconds>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
+			<DamagedSound>ParticleHeavyMech</DamagedSound>
+			<DestroyEffect>BlockDestroyed_Large</DestroyEffect>
+			<DestroySound>PoofExplosionCat3</DestroySound>
+			<PCU>15</PCU>
+			<IsAirTight>true</IsAirTight>
+		</Definition>
+
+		<Definition>
+				<Id>
+						<TypeId>Conveyor</TypeId>
+				<SubtypeId>Barbette1x1</SubtypeId>
+			</Id>
+			<DisplayName>Turret Barbette 1X1</DisplayName>
+			<Description>A barbette is a protective circular armour support for a heavy gun turret.</Description>
+			<Icon>Textures\GUI\Icons\Barbette1x1.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\large\Barbette1x1.mwm</Model>
+			<Components>
+				<Component Subtype="Construction" Count="20" />
+				<Component Subtype="SmallTube" Count="20" />
+				<Component Subtype="Motor" Count="6" />
+				<Component Subtype="Construction" Count="10" />
+				<Component Subtype="InteriorPlate" Count="10" />
+				<Component Subtype="MetalGrid" Count="50" />
+				<Component Subtype="SteelPlate" Count="125" />
+			</Components>
+			<CriticalComponent Subtype="Motor" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\large\Barbette1x1_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.67" File="Models\Cubes\large\Barbette1x1_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\Barbette1x1_BS3.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>Barbette1x1</BlockPairName>
+			<MirroringY>X</MirroringY>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>5</BuildTimeSeconds>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
+			<DamagedSound>ParticleHeavyMech</DamagedSound>
+			<DestroyEffect>BlockDestroyed_Large</DestroyEffect>
+			<DestroySound>PoofExplosionCat3</DestroySound>
+			<PCU>10</PCU>
+			<IsAirTight>true</IsAirTight>
+		</Definition> 
+	</CubeBlocks>
+</Definitions>

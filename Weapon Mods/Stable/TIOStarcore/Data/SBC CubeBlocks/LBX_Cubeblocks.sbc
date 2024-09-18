@@ -9,10 +9,11 @@
 			  <SubtypeId>JN_175Fixed</SubtypeId>
 		  </Id>
 		  <DisplayName>[FLAW] Naval LB-5X</DisplayName>
-		  <Description>
-		  Long Ranged, 2 ammo types.
-		  +High Explosive - Energy Damage 2km Blast Zone, please use with caution. 900m/s
-		  +Cluster Shot - Kinetic Damage, proximity fused fragmentation warhead. 1600m/s
+		  <Description>[8km range][Kinetic][High Damage]
++Cluster Shot - proximity fused fragmentation warhead. 1600m/s
+
+Attention!
+Requires target lock to fire the proximity fused ammo. Weapon damage drops by 75% when fired with override on and without a target lock. Gun checks a cone around the muzzle and this cannot be disabled. If it detects that it has been buried too deeply the gun stops working.
 		  
 		  </Description>
 		  <Icon>Textures\GUI\Icons\Cubes\LBX5.dds</Icon>
@@ -52,17 +53,9 @@
 		  <WeaponDefinitionId Subtype="JN_175Fixed" />
 		  <ResourceSinkGroup>Defense</ResourceSinkGroup>
 		  <InventoryMaxVolume>100</InventoryMaxVolume>
-		  <MinElevationDegrees>-1</MinElevationDegrees>
-		  <MaxElevationDegrees>1</MaxElevationDegrees>
-		  <MinAzimuthDegrees>-1</MinAzimuthDegrees>
-		  <MaxAzimuthDegrees>1</MaxAzimuthDegrees>
 		  <IdleRotation>false</IdleRotation>
 		  <AiEnabled>false</AiEnabled>
 		  <MaxRangeMeters>10000</MaxRangeMeters>
-		  <RotationSpeed>0</RotationSpeed>
-		  <ElevationSpeed>0</ElevationSpeed>
-		  <MinFov>0.1</MinFov>
-		  <MaxFov>1.1</MaxFov>
 	  </Definition>
 
   </CubeBlocks>

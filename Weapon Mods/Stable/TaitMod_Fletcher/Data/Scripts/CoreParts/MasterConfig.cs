@@ -38,14 +38,16 @@ namespace Scripts
 			FaTwin100MM1945Remodel,
             SingleCasemate,
             Torpedo635mm,
-            Quad203,
+            Triple203,
             Twin203,
             QuinTorpLauncher,
             CasemateTwin,
             alt406,
-            twin508
+            twin508,
+            FaM2Turret,
 
-
+            FaOerlikon20mmRemodel,
+            FaOerlikon20mmDualRemodel
 
             );
           

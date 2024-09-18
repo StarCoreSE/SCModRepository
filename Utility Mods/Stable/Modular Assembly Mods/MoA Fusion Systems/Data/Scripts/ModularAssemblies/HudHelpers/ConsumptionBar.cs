@@ -1,29 +1,47 @@
 ﻿using System;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
+using RichHudFramework;
+using RichHudFramework.Internal;
 using RichHudFramework.UI;
 using RichHudFramework.UI.Client;
 using RichHudFramework.UI.Rendering;
+using Sandbox.Game;
+using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
+using StarCore.FusionSystems.Communication;
+using StarCore.FusionSystems.FusionParts;
+using StarCore.FusionSystems.HeatParts;
+using VRage.Audio;
+using VRage.Game.Entity;
 using VRage.Input;
 using VRageMath;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
+namespace StarCore.FusionSystems.HudHelpers
 {
     internal class ConsumptionBar : WindowBase
     {
         private readonly TexturedBox _storageBackground;
-        private readonly TexturedBox _storageForeground;
+        private readonly TexturedBox _storageBar;
+        private readonly TexturedBox _heatBar;
+        private readonly LabelBox _noticeLabel;
         private bool _shouldHide;
+        private MyEntity3DSoundEmitter _soundEmitter = null;
+        private readonly MySoundPair _alertSound = new MySoundPair("ArcSoundBlockAlert2");
 
 
         public ConsumptionBar(HudParentBase parent) : base(parent)
         {
-            _storageForeground = new TexturedBox(body)
+            _storageBar = new TexturedBox(body)
             {
                 Material = new Material("fusionBarBackground", Vector2.One * 100),
-                ParentAlignment = ParentAlignments.Bottom | ParentAlignments.InnerV,
-                DimAlignment = DimAlignments.Width,
+                ParentAlignment = ParentAlignments.Bottom | ParentAlignments.Left | ParentAlignments.Inner,
                 Color = new Color(1, 1, 1, 0.75f)
+            };
+
+            _heatBar = new TexturedBox(body)
+            {
+                Material = new Material("fusionBarBackground", Vector2.One * 100),
+                ParentAlignment = ParentAlignments.Bottom | ParentAlignments.Right | ParentAlignments.Inner,
+                Color = new Color(1, 0, 0, 0.75f)
             };
 
             _storageBackground = new TexturedBox(body)
@@ -32,6 +50,15 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
                 ParentAlignment = ParentAlignments.Center,
                 DimAlignment = DimAlignments.Both,
                 Color = new Color(1, 1, 1, 1f)
+            };
+
+            _noticeLabel = new LabelBox(body)
+            {
+                ParentAlignment = ParentAlignments.Bottom | ParentAlignments.Left | ParentAlignments.InnerH,
+                CanIgnoreMasking = true,
+                Text = "Something went wrong...",
+                Color = new Color(0, 0, 0, 0),
+                BuilderMode = TextBuilderModes.Lined
             };
 
             BodyColor = new Color(0, 0, 0, 0);
@@ -55,18 +82,26 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
             MinimumSize = new Vector2(Math.Max(1, MinimumSize.X), MinimumSize.Y);
         }
 
+        private int _ticks = 0;
         public void Update()
         {
+            _ticks++;
             var playerCockpit = MyAPIGateway.Session?.Player?.Controller?.ControlledEntity?.Entity as IMyShipController;
 
             // Pulling the current HudState is SLOOOOWWWW, so we only pull it when tab is just pressed.
-            if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.Tab))
-                _shouldHide = MyAPIGateway.Session?.Config?.HudState != 1;
+            //if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.Tab))
+            //    _shouldHide = MyAPIGateway.Session?.Config?.HudState != 1;
 
             // Hide HUD element if the player isn't in a cockpit
             if (playerCockpit == null || _shouldHide)
             {
                 if (Visible) Visible = false;
+
+                if (_soundEmitter != null)
+                {
+                    _soundEmitter.StopSound(true);
+                    _soundEmitter = null;
+                }
                 return;
             }
 
@@ -75,7 +110,9 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
             float totalFusionCapacity = 0;
             float totalFusionGeneration = 0;
             float totalFusionStored = 0;
-            foreach (var system in S_FusionManager.I.FusionSystems)
+            float reactorIntegrity = 0;
+
+            foreach (var system in SFusionManager.I.FusionSystems)
             {
                 if (playerGrid != ModularApi.GetAssemblyGrid(system.Key))
                     continue;
@@ -83,6 +120,12 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
                 totalFusionCapacity += system.Value.MaxPowerStored;
                 totalFusionGeneration += system.Value.PowerGeneration;
                 totalFusionStored += system.Value.PowerStored;
+                foreach (var reactor in system.Value.Reactors)
+                {
+                    reactorIntegrity += reactor.Block.SlimBlock.Integrity/reactor.Block.SlimBlock.MaxIntegrity;
+                }
+
+                reactorIntegrity /= system.Value.Reactors.Count;
             }
 
             // Hide HUD element if the grid has no fusion systems (capacity is always >0 for a fusion system)
@@ -106,7 +149,42 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers
                 timeToCharge = 0;
 
             HeaderText = $"Fusion | {(totalFusionGeneration > 0 ? "+" : "-")}{Math.Round(timeToCharge)}s";
-            _storageForeground.Height = storagePct * _storageBackground.Height;
+            _noticeLabel.Text = new RichText
+            {
+                {"Reactor Integrity: ", GlyphFormat.White},
+                {(reactorIntegrity*100).ToString("N0") + "%", GlyphFormat.White.WithColor(reactorIntegrity > 0.52 ? Color.White : Color.Red)}
+            };
+
+            if (HeatManager.I.GetGridHeatLevel(playerGrid) > 0.8f)
+            {
+                _noticeLabel.TextBoard.Append("\nTAKING THERMAL DAMAGE", GlyphFormat.White.WithColor(Color.Red));
+
+                if (_soundEmitter == null)
+                {
+                    _soundEmitter = new MyEntity3DSoundEmitter((MyEntity) playerCockpit.Entity)
+                    {
+                        CanPlayLoopSounds = true
+                    };
+                    _soundEmitter.PlaySound(_alertSound);
+                }
+            }
+            else
+            {
+                if (_soundEmitter != null)
+                {
+                    _soundEmitter.StopSound(true);
+                    _soundEmitter = null;
+                }
+            }
+
+            _storageBar.Height = storagePct * _storageBackground.Height;
+
+            float heatPct = HeatManager.I.GetGridHeatLevel(playerGrid);
+            _heatBar.Height = heatPct * _storageBackground.Height;
+            _heatBar.Color = new Color(heatPct, 1-heatPct, 0, 0.75f);
+
+            _storageBar.Width = _storageBackground.Width/2;
+            _heatBar.Width = _storageBackground.Width/2;
             //_storageForeground.Origin = new Vector2D(_storageForeground.Origin.X, _storageForeground.Width * 0.75 - _storageBackground.Width*0.35); // THIS SHOULD BE RICHHUD!
         }
     }

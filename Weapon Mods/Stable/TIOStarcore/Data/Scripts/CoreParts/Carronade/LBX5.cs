@@ -107,7 +107,7 @@ namespace Scripts
                 },
                 Other = new OtherDef
                 {
-                    ConstructPartCap = 4, // Maximum number of blocks with this weapon on a grid; 0 = unlimited.
+                    ConstructPartCap = 3, // Maximum number of blocks with this weapon on a grid; 0 = unlimited.
                     RotateBarrelAxis = 0, // For spinning barrels, which axis to spin the barrel around; 0 = none.
                     EnergyPriority = 0, // Deprecated.
                     MuzzleCheck = false, // Whether the weapon should check LOS from each individual muzzle in addition to the scope.
@@ -187,10 +187,10 @@ namespace Scripts
             },
             Ammos = new[] {
                  // LBX5_Slug,
-                LBX5_HighExplosive,
-                Frag_LBX5_HighExplosive,
-                Shrap_Frag_LBX5_HighExplosive,
-                The_Frag_for_the_Shrap_for_the_Frag_of_the_LBX5_HighExplosive,
+                 // LBX5_HighExplosive,
+                 // Frag_LBX5_HighExplosive,
+                 // Shrap_Frag_LBX5_HighExplosive,
+                 // The_Frag_for_the_Shrap_for_the_Frag_of_the_LBX5_HighExplosive,
                 Fix4LBX5_Cluster,
                 LBX5_Cluster_Canister,
                 Frag_LBX5_Cluster,

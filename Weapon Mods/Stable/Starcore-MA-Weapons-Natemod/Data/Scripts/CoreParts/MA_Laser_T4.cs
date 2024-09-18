@@ -56,12 +56,12 @@ namespace Scripts {
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 4000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MaxTargetDistance = 4500, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
                 MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
-                TopTargets = 4, // Maximum number of targets to randomize between; 0 = unlimited.
-                CycleTargets = 20, // Number of targets to "cycle" per acquire attempt.
-                TopBlocks = 20, // Maximum number of blocks to randomize between; 0 = unlimited.
-                CycleBlocks = 2, // Number of blocks to "cycle" per acquire attempt.
+                TopTargets = 8, // Maximum number of targets to randomize between; 0 = unlimited.
+                CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
+                TopBlocks = 10, // Maximum number of blocks to randomize between; 0 = unlimited.
+                CycleBlocks = 3, // Number of blocks to "cycle" per acquire attempt.
                 StopTrackingSpeed = 0, // Do not track threats traveling faster than this speed; 0 = unlimited.
                 UniqueTargetPerWeapon = false, // only applies to multi-weapon blocks 
                 MaxTrackingTime = 0, // After this time has been reached the weapon will stop tracking existing target and scan for a new one, only applies to turreted weapons

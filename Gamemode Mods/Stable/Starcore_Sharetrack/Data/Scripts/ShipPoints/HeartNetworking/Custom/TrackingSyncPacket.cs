@@ -1,9 +1,9 @@
 ﻿using System;
 using ProtoBuf;
 using Sandbox.ModAPI;
-using ShipPoints.ShipTracking;
+using StarCore.ShareTrack.ShipTracking;
 
-namespace ShipPoints.HeartNetworking.Custom
+namespace StarCore.ShareTrack.HeartNetworking.Custom
 {
     /// <summary>
     ///     Packet used for syncing tracked grids.
@@ -31,6 +31,12 @@ namespace ShipPoints.HeartNetworking.Custom
 
         public override void Received(ulong SenderSteamId)
         {
+            if (TrackingManager.I == null)
+            {
+                Log.Info("TrackingManager is null!");
+                return;
+            }
+
             if (TrackedGrids == null)
             {
                 Log.Info("Null TrackedGrids!");

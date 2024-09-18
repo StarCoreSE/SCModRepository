@@ -205,7 +205,7 @@ namespace Scripts
                     NoSound = false,
                     ParticleScale = 1,
                     CustomParticle = "TypeDriverHit1", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "soundName", // SubtypeID from your Audio SBC, not a filename
+                    CustomSound = "TypeDriverHit", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
             },
@@ -422,17 +422,17 @@ namespace Scripts
                     },
                     Trail = new TrailDef
                     {
-                        Enable = false,
+                        Enable = true,
                         AlwaysDraw = false, // Prevents this tracer from being culled.  Only use if you have a reason too (very long tracers/trails).
                         Textures = new[] {
-                            "", // Please always have this Line set, if this Section is enabled.
+                            "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
-                        DecayTime = 3, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 0, green: 0, blue: 1, alpha: 1),
+                        DecayTime = 18, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
+                        Color = Color(red: 2.585f, green: 2.21f, blue: 2.562f, alpha: 0.5f), //Adapted Pilfit 203mm AP trail line, swapping blue and green values for a lovely color.
                         FactionColor = DontUse, // DontUse, Foreground, Background.
                         Back = false,
-                        CustomWidth = 0,
+                        CustomWidth = 0.1f,
                         UseWidthVariance = false,
                         UseColorFade = true,
                     },
@@ -446,14 +446,14 @@ namespace Scripts
             },
             AmmoAudio = new AmmoAudioDef
             {
-                TravelSound = "MyLargeCalibreTravel", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
+                TravelSound = "MySabotTravel", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
                 HitSound = "",
                 ShotSound = "",
-                ShieldHitSound = "",
+                ShieldHitSound = "TypeDriverShieldsHit",
                 PlayerHitSound = "",
                 VoxelHitSound = "ImpMetalRockCat0",
                 FloatingHitSound = "",
-                HitPlayChance = 0.5f,
+                HitPlayChance = 1f,
                 HitPlayShield = true,
             },
             Ejection = new EjectionDef // Optional Component, allows generation of Particle or Item (Typically magazine), on firing, to simulate Tank shell ejection
@@ -887,7 +887,7 @@ namespace Scripts
             },
             AmmoAudio = new AmmoAudioDef
             {
-                TravelSound = "MyLargeCalibreTravel", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
+                TravelSound = "TypeDriverRicochetHit", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
                 HitSound = "",
                 ShotSound = "",
                 ShieldHitSound = "",

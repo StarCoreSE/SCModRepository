@@ -1,27 +1,30 @@
 ﻿using System;
 using System.Linq;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.Communication;
-using MoA_Fusion_Systems.Data.Scripts.ModularAssemblies.HudHelpers;
 using RichHudFramework.Client;
 using RichHudFramework.UI.Client;
 using Sandbox.Game;
+using StarCore.FusionSystems.Communication;
+using StarCore.FusionSystems.FusionParts;
+using StarCore.FusionSystems.HeatParts;
+using StarCore.FusionSystems.HudHelpers;
 using VRage.Game.Components;
 using VRage.Utils;
 
-namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
+namespace StarCore.FusionSystems
 {
     /// <summary>
     ///     Semi-independent script for managing the player HUD.
     /// </summary>
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
-    public class S_FusionPlayerHud : MySessionComponentBase
+    public class SFusionPlayerHud : MySessionComponentBase
     {
-        public static S_FusionPlayerHud I;
+        public static SFusionPlayerHud I;
         private int _ticks;
 
-        private ConsumptionBar ConsumptionBar;
+        private ConsumptionBar _consumptionBar;
         private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
-        private static S_FusionManager FusionManager => S_FusionManager.I;
+        private static SFusionManager FusionManager => SFusionManager.I;
+        private static HeatManager HeatManager => HeatManager.I;
 
         #region Base Methods
 
@@ -30,31 +33,35 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
             I = this;
 
             FusionManager.Load();
+            HeatManager.Load();
             RichHudClient.Init("FusionSystems", () => { }, () => { });
         }
 
         protected override void UnloadData()
         {
             FusionManager.Unload();
+            HeatManager.Unload();
             I = null;
 
             //RichHudClient.Reset();
         }
 
-        private bool _questlogDisposed = false;
+        private bool _questlogDisposed;
+
         public override void UpdateAfterSimulation()
         {
             _ticks++;
             try
             {
-                if (ConsumptionBar == null && RichHudClient.Registered)
-                    ConsumptionBar = new ConsumptionBar(HudMain.HighDpiRoot)
+                if (_consumptionBar == null && RichHudClient.Registered)
+                    _consumptionBar = new ConsumptionBar(HudMain.HighDpiRoot)
                     {
                         Visible = true
                     };
 
+                HeatManager.UpdateTick();
                 FusionManager.UpdateTick();
-                ConsumptionBar?.Update();
+                _consumptionBar?.Update();
 
                 if (ModularApi.IsDebug())
                 {
@@ -69,10 +76,11 @@ namespace MoA_Fusion_Systems.Data.Scripts.ModularAssemblies
                             continue;
 
                         MyVisualScriptLogicProvider.AddQuestlogDetailLocal(
-                            $"[{system.PhysicalAssemblyId}] Power: {Math.Round(system.PowerStored / system.MaxPowerStored * 100f)}% ({Math.Round(system.MaxPowerStored)} @ {Math.Round(system.PowerGeneration * 60, 1)}/s) | Loops: {system.Arms.Count} | Blocks: {system.BlockCount}",
+                            $"[{system.PhysicalAssemblyId}] Power: {Math.Round(system.PowerStored / system.MaxPowerStored * 100f)}% ({Math.Round(system.MaxPowerStored)} @ {Math.Round(system.PowerGeneration * 60, 1)}/s) | Loops: {system.Arms.Count} | Heat: -{HeatManager.I.GetGridHeatDissipation(system.Grid):N0} +{HeatManager.I.GetGridHeatGeneration(system.Grid):N0} ({HeatManager.I.GetGridHeatLevel(system.Grid)*100:F1}%)",
                             false, false);
                         displayedCount++;
                     }
+
                     _questlogDisposed = false;
                 }
                 else if (!_questlogDisposed)

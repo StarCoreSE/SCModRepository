@@ -7,6 +7,7 @@ namespace Scripts
         {
             PartDefinitions(
             Starcore_Arrow,
+            Starcore_Arrow_Single,
             Starcore_AMS_I,
             Starcore_AMS_Comm,
             Starcore_AMS_II,

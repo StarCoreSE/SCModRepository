@@ -60,7 +60,7 @@ namespace Scripts
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
                 AmmoRound = "", // AmmoRound field of the ammo to spawn.
-                Fragments = 100, // Number of projectiles to spawn.
+                Fragments = 1, // Number of projectiles to spawn.
                 Degrees = 15, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = false, // fragments will not inherit velocity from parent.
@@ -100,7 +100,7 @@ namespace Scripts
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
-                HealthHitModifier = 14.5, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
+                HealthHitModifier = 24, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = 1, // Voxel damage multiplier; defaults to 1 if zero or less.
                 Characters = -1f, // Character damage multiplier; defaults to 1 if zero or less.
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
@@ -117,13 +117,13 @@ namespace Scripts
                 Armor = new ArmorDef
                 {
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
-                    Light = 1.95f, // Multiplier for damage against light armor.
-                    Heavy = 1.55f, // Multiplier for damage against heavy armor.
-                    NonArmor = 0.35f, // Multiplier for damage against every else.
+                    Light = 1.65f, // Multiplier for damage against light armor.
+                    Heavy = 0.95f, // Multiplier for damage against heavy armor.
+                    NonArmor = 0.55f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 1f, // Multiplier for damage against shields.
+                    Modifier = 1.4f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -271,6 +271,7 @@ namespace Scripts
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 Smarts = new SmartsDef
                 {
+                    SteeringLimit = 30, // 0 means no limit, value is in degrees, good starting is 150.  This enable advanced smart "control", cost of 3 on a scale of 1-5, 0 being basic smart.
                     Inaccuracy = 0.5f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
                     Aggressiveness = 2f, // controls how responsive tracking is.
                     MaxLateralThrust = 0.15, // controls how sharp the trajectile may turn
@@ -413,6 +414,18 @@ namespace Scripts
             }, // Don't edit below this line
         };
 
+
+
+
+
+
+
+
+
+
+
+
+        /*
         private AmmoDef Nariman_EWAR_Round => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
@@ -590,20 +603,20 @@ namespace Scripts
                 Depletable = true,
                 MaxStacks = 1, // Max Debuffs at once
                 NoHitParticle = false,
-                /*
-                EnergySink : Targets & Shutdowns Power Supplies, such as Batteries & Reactor
-                Emp : Targets & Shutdown any Block capable of being powered
-                Offense : Targets & Shutdowns Weaponry
-                Nav : Targets & Shutdown Gyros or Locks them down
-                Dot : Deals Damage to Blocks in radius
-                AntiSmart : Effects & Scrambles the Targeting List of Affected Missiles
-                JumpNull : Shutdown & Stops any Active Jumps, or JumpDrive Units in radius
-                Tractor : Affects target with Physics
-                Pull : Affects target with Physics
-                Push : Affects target with Physics
-                Anchor : Targets & Shutdowns Thrusters
                 
-                */
+                //EnergySink : Targets & Shutdowns Power Supplies, such as Batteries & Reactor
+                //Emp : Targets & Shutdown any Block capable of being powered
+                //Offense : Targets & Shutdowns Weaponry
+                //Nav : Targets & Shutdown Gyros or Locks them down
+                //Dot : Deals Damage to Blocks in radius
+                //AntiSmart : Effects & Scrambles the Targeting List of Affected Missiles
+                //JumpNull : Shutdown & Stops any Active Jumps, or JumpDrive Units in radius
+                //Tractor : Affects target with Physics
+                //Pull : Affects target with Physics
+                //Push : Affects target with Physics
+                //Anchor : Targets & Shutdowns Thrusters
+                
+                
                 Force = new PushPullDef
                 {
                     ForceFrom = HitPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
@@ -805,6 +818,8 @@ namespace Scripts
             }, // Don't edit below this line
         };
 
+
+        */
     }
 }
 

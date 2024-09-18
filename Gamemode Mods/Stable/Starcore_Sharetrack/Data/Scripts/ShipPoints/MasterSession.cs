@@ -1,20 +1,35 @@
 ﻿using System;
-using ShipPoints.Commands;
-using ShipPoints.HeartNetworking;
-using ShipPoints.ShipTracking;
+using Sandbox.ModAPI;
+using StarCore.ShareTrack.API;
+using StarCore.ShareTrack.HeartNetworking;
+using StarCore.ShareTrack.ShipTracking;
+using StarCore.ShareTrack.TrackerApi;
 using VRage.Game.Components;
+using VRageMath;
 
-namespace ShipPoints
+namespace StarCore.ShareTrack
 {
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     internal class MasterSession : MySessionComponentBase
     {
-        public const ushort ComId = 42511;
-        public const string Keyword = "/debug";
-        public const string DisplayName = "Debug";
+        /// <summary>
+        /// API version, Mod version
+        /// </summary>
+        public static readonly Vector2I ModVersion = new Vector2I(3, 2);
+
         public static MasterSession I;
 
-        private readonly PointCheck _pointCheck = new PointCheck();
+        public HudAPIv2 TextHudApi;
+        public Action HudRegistered = () => { };
+
+        private readonly AllGridsList _allGridsList = new AllGridsList();
+        private BuildingBlockPoints _buildingBlockPoints;
+        private ApiProvider _apiProvider;
+        public int Ticks { get; private set; } = 0;
+
+        private const int DelayTicks = 600; // 10 seconds at 60 ticks per second
+        private bool _trackingStarted = false;
+
 
         public override void LoadData()
         {
@@ -24,8 +39,15 @@ namespace ShipPoints
             {
                 HeartNetwork.I = new HeartNetwork();
                 HeartNetwork.I.LoadData(42521);
-                CommandHandler.Init();
-                _pointCheck.Init();
+                _allGridsList.Init();
+                _apiProvider = new ApiProvider();
+                _buildingBlockPoints = new BuildingBlockPoints();
+                TrackingManager.Init(); // Initialize TrackingManager, but don't start tracking yet
+
+                if (!MyAPIGateway.Utilities.IsDedicated)
+                    // Initialize the sphere entities
+                    // Initialize the text_api with the HUDRegistered callback
+                    TextHudApi = new HudAPIv2(HudRegistered);
             }
             catch (Exception ex)
             {
@@ -37,9 +59,10 @@ namespace ShipPoints
         {
             try
             {
-                _pointCheck.Close();
+                TextHudApi?.Unload();
+                _apiProvider.Unload();
+                _allGridsList.Close();
                 TrackingManager.Close();
-                CommandHandler.Close();
                 HeartNetwork.I.UnloadData();
             }
             catch (Exception ex)
@@ -54,9 +77,23 @@ namespace ShipPoints
         {
             try
             {
+                Ticks++;
                 HeartNetwork.I.Update();
-                TrackingManager.UpdateAfterSimulation();
-                _pointCheck.UpdateAfterSimulation();
+
+                if (!_trackingStarted)
+                {
+                    if (Ticks >= DelayTicks)
+                    {
+                        _trackingStarted = true;
+                        TrackingManager.I.StartTracking(); // New method to start tracking
+                    }
+                }
+                else
+                {
+                    TrackingManager.UpdateAfterSimulation();
+                }
+
+                _allGridsList.UpdateAfterSimulation();
             }
             catch (Exception ex)
             {
@@ -68,7 +105,8 @@ namespace ShipPoints
         {
             try
             {
-                _pointCheck.Draw();
+                _allGridsList.Draw();
+                _buildingBlockPoints?.Update();
             }
             catch (Exception ex)
             {

@@ -7,10 +7,8 @@
 				<SubtypeId>AncientAfterburnerT41</SubtypeId>
 			</Id>
 			<DisplayName>Ancient Afterburner T41</DisplayName>
-			<Description>
-        Propulsion of unknown origin. Found drifting in space.
-
-        Alternate version the 1x1 afterburner.
+			<Description>Propulsion of unknown origin. Found drifting in space.
+Alternate version the 1x1 afterburner.
       </Description>
 			<Icon>Textures\Icons\ancient\type 41 thruster icon.png</Icon>
 			<CubeSize>Large</CubeSize>

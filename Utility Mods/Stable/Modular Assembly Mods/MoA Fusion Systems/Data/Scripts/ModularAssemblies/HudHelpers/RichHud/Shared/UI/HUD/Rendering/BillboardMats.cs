@@ -141,12 +141,12 @@ namespace RichHudFramework
             {
                 public Vector2 Point0, Point1, Point2, Point3;
 
-                public FlatQuad(Vector2 Point0, Vector2 Point1, Vector2 Point2, Vector2 Point3)
+                public FlatQuad(Vector2 Point0, Vector2 point1, Vector2 point2, Vector2 point3)
                 {
                     this.Point0 = Point0;
-                    this.Point1 = Point1;
-                    this.Point2 = Point2;
-                    this.Point3 = Point3;
+                    this.Point1 = point1;
+                    this.Point2 = point2;
+                    this.Point3 = point3;
                 }
             }
 
@@ -157,11 +157,11 @@ namespace RichHudFramework
             {
                 public Vector2 Point0, Point1, Point2;
 
-                public Triangle(Vector2 Point0, Vector2 Point1, Vector2 Point2)
+                public Triangle(Vector2 Point0, Vector2 point1, Vector2 point2)
                 {
                     this.Point0 = Point0;
-                    this.Point1 = Point1;
-                    this.Point2 = Point2;
+                    this.Point1 = point1;
+                    this.Point2 = point2;
                 }
             }
 
@@ -172,11 +172,11 @@ namespace RichHudFramework
             {
                 public Vector3D Point0, Point1, Point2;
 
-                public TriangleD(Vector3D Point0, Vector3D Point1, Vector3D Point2)
+                public TriangleD(Vector3D Point0, Vector3D point1, Vector3D point2)
                 {
                     this.Point0 = Point0;
-                    this.Point1 = Point1;
-                    this.Point2 = Point2;
+                    this.Point1 = point1;
+                    this.Point2 = point2;
                 }
             }
         }

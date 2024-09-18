@@ -66,8 +66,8 @@ namespace Scripts
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
                 AmmoRound = "Plasma-X-Shrap", // AmmoRound field of the ammo to spawn.
-                Fragments = 9, // Number of projectiles to spawn.
-                Degrees = 65, // Cone in which to randomize direction of spawned projectiles.
+                Fragments = 7, // Number of projectiles to spawn.
+                Degrees = 50, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = true, // fragments will not inherit velocity from parent.
                 Offset = -5f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards), value is read from parent ammo type.
@@ -89,19 +89,19 @@ namespace Scripts
                     GroupDelay = 0, // Delay between each group.
                 },
             },
-            Pattern = new PatternDef
-            {
-                Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
-                    "PlasmaFXshots-X", "PlasmaFXshots2-X",
-                },
-                Mode = Weapon, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
-                TriggerChance = 1f, // This is %
-                Random = false, // This randomizes the number spawned at once, NOT the list order.
-                RandomMin = 1,
-                RandomMax = 1,
-                SkipParent = false, // Skip the Ammo itself, in the list
-                PatternSteps = 3, // Number of Ammos activated per round, will progress in order and loop. Ignored if Random = true.
-            },
+            //Pattern = new PatternDef
+            //{
+              //  Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo. 
+                //    "PlasmaFXshots-X", "PlasmaFXshots2-X",
+               // },
+                //Mode = Weapon, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
+              //  TriggerChance = 1f, // This is %
+                //Random = false, // This randomizes the number spawned at once, NOT the list order.
+              //  RandomMin = 1,
+              //  RandomMax = 1,
+              //  SkipParent = false, // Skip the Ammo itself, in the list
+              //  PatternSteps = 3, // Number of Ammos activated per round, will progress in order and loop. Ignored if Random = true.
+            //},
             DamageScales = new DamageScaleDef
             {
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
@@ -199,67 +199,6 @@ namespace Scripts
                     Shape = Diamond, // Round or Diamond
                 },
             },
-            Ewar = new EwarDef
-            {
-                Enable = false, // Enables the EWAR , Electronic-Warfare System
-                Type = Offense, // EnergySink, Emp, Offense, Nav, Dot, AntiSmart, JumpNull, Anchor, Tractor, Pull, Push, 
-                Mode = Field, // Effect , Field
-                Strength = 1,
-                Radius = 8f, // Meters
-                Duration = 240, // In Ticks
-                StackDuration = true, // Combined Durations
-                Depletable = false,
-                MaxStacks = 2, // Max Debuffs at once
-                NoHitParticle = false,
-                /*
-                EnergySink : Targets & Shutdowns Power Supplies, such as Batteries & Reactor
-                Emp : Targets & Shutdown any Block capable of being powered
-                Offense : Targets & Shutdowns Weaponry
-                Nav : Targets & Shutdown Gyros, Thrusters, or Locks them down
-                Dot : Deals Damage to Blocks in radius
-                AntiSmart : Effects & Scrambles the Targeting List of Affected Missiles
-                JumpNull : Shutdown & Stops any Active Jumps, or JumpDrive Units in radius
-                Tractor : Affects target with Physics
-                Pull : Affects target with Physics
-                Push : Affects target with Physics
-                Anchor : Affects target with Physics
-                
-                */
-                Force = new PushPullDef
-                {
-                    ForceFrom = ProjectileLastPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
-                    ForceTo = HitPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
-                    Position = TargetCenterOfMass, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
-                    DisableRelativeMass = false,
-                    TractorRange = 0,
-                    ShooterFeelsForce = false,
-                },
-                Field = new FieldDef
-                {
-                    Interval = 0, // Time between each pulse, in game ticks (60 == 1 second).
-                    PulseChance = 0, // Chance from 0 - 100 that an entity in the field will be hit by any given pulse.
-                    GrowTime = 0, // How many ticks it should take the field to grow to full size.
-                    HideModel = false, // Hide the projectile model if it has one.
-                    ShowParticle = true, // Show Block damage effect.
-                    TriggerRange = 250f, //range at which fields are triggered
-                    Particle = new ParticleDef // Particle effect to generate at the field's position.
-                    {
-                        Name = "", // SubtypeId of field particle effect.
-                        Extras = new ParticleOptionDef
-                        {
-                            Scale = 1, // Scale of effect.
-                        },
-                    },
-                },
-            },
-            Beams = new BeamDef
-            {
-                Enable = false, // Enable beam behaviour. Please have 3600 RPM, when this Setting is enabled. Please do not fire Beams into Voxels.
-                VirtualBeams = false, // Only one damaging beam, but with the effectiveness of the visual beams combined (better performance).
-                ConvergeBeams = false, // When using virtual beams, converge the visual beams to the location of the real beam.
-                RotateRealBeam = false, // The real beam is rotated between all visual beams, instead of centered between them.
-                OneParticle = false, // Only spawn one particle hit per beam weapon.
-            },
             Trajectory = new TrajectoryDef
             {
                 Guidance = None, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
@@ -289,14 +228,7 @@ namespace Scripts
                     OffsetRatio = 0f, // The ratio to offset the random direction (0 to 1) 
                     OffsetTime = 0, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
                 },
-                Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
-                {
-                    DetectRadius = 0,
-                    DeCloakRadius = 0,
-                    FieldTime = 0,
-                    Cloak = false,
-                    Persist = false,
-                },
+
             },
             AmmoGraphics = new GraphicDef
             {
@@ -307,11 +239,11 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "", //ShipWelderArc
+                        Name = "RedPlasma2E", //ShipWelderArc 
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
-                            Scale = 1,
+                            Scale = 1f,
                         },
                     },
                     Hit = new ParticleDef
@@ -344,9 +276,9 @@ namespace Scripts
                     Tracer = new TracerBaseDef
                     {
                         Enable = true,
-                        Length = 15f, //
-                        Width = 0.45f, //
-                        Color = Color(red: 15, green: 12, blue: 2f, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Length = 10f, //
+                        Width = 0.2f, //
+                        Color = Color(red: 5.585f, green: 5f, blue: 5.562f, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
@@ -367,18 +299,18 @@ namespace Scripts
                             Reverse = false,
                             UseLineVariance = true,
                             WidthVariance = Random(start: 0f, end: 0f),
-                            ColorVariance = Random(start: 0f, end: 0f)
+                            ColorVariance = Random(start: 0f, end: 0f) 
                         }
                     },
                     Trail = new TrailDef
                     {
-                        Enable = true,
+                        Enable = false,
                         Textures = new[] {
                             "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
-                        DecayTime = 10, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 1, green: 0, blue: 0, alpha: 1),
+                        DecayTime = 15, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
+                        Color = Color(red: 2.585f, green: 2.21f, blue: 2.562f, alpha: 0.5f), //Adapted Pilfit 203mm AP trail line
                         Back = false,
                         CustomWidth = 0.2f,
                         UseWidthVariance = false,
@@ -671,7 +603,6 @@ namespace Scripts
                     Ammo = new ParticleDef
                     {
                         Name = "", //ShipWelderArc
-                        Color = Color(red: 50, green: 10, blue: 1, alpha: 1),
                         Extras = new ParticleOptionDef
                         {
                             Scale = 1,
@@ -1150,7 +1081,7 @@ namespace Scripts
             AmmoRound = "Plasma-X-Shrap", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 22000f, // Direct damage; one steel plate is worth 100. 
+            BaseDamage = 25385f, // Direct damage; one steel plate is worth 100. 
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil.
@@ -1270,7 +1201,7 @@ namespace Scripts
             {
                 ByBlockHit = new ByBlockHitDef
                 {
-                    Enable = true,
+                    Enable = false,
                     Radius = 2.5f, // Meters
                     Damage = 5000f,
                     Depth = 1f, // Meters

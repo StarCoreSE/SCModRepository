@@ -184,9 +184,9 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = true,
-                    Radius = 5f, // Radius of AOE effect, in meters.
+                    Radius = 6f, // Radius of AOE effect, in meters.
                     Damage = 120000f,
-                    Depth = 5f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
+                    Depth = 6f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
@@ -364,8 +364,8 @@ namespace Scripts
                     {
                         Enable = true,
                         Length = 5f, //
-                        Width = 2f, //
-                        Color = Color(red: 500, green: 10, blue: 10f, alpha: 3), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Width = 1.75f, //
+                        Color = Color(red: 300, green: 20, blue: 20f, alpha: 3), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..

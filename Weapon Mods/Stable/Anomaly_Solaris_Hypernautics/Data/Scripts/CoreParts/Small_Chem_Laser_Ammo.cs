@@ -37,7 +37,7 @@ namespace Scripts
             AmmoRound = "Stronk Laser", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.0000001f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 12000f, // Direct damage; one steel plate is worth 100. 
+            BaseDamage = 1600f, // Direct damage; one steel plate is worth 100.
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0, // Recoil.
@@ -77,8 +77,8 @@ namespace Scripts
                     MaxSpawns = 1, // Max number of fragment children to spawn
                     Proximity = 0, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
                     ParentDies = true, // Parent dies once after it spawns its last child.
-                    PointAtTarget = false, // Start fragment direction pointing at Target
-                    PointType = Direct, // Point accuracy, Direct, Lead (always fire), Predict (only fire if it can hit)
+                    PointAtTarget = true, // Start fragment direction pointing at Target
+                    PointType = Predict, // Point accuracy, Direct, Lead (always fire), Predict (only fire if it can hit)
                     GroupSize = 0, // Number of spawns in each group
                     GroupDelay = 0, // Delay between each group.
                 },
@@ -107,8 +107,8 @@ namespace Scripts
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
                 FallOff = new FallOffDef
                 {
-                    Distance = 1000f, // Distance at which damage begins falling off.
-                    MinMultipler = 0.5f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
+                    Distance = 3000f, // Distance at which damage begins falling off.
+                    MinMultipler = 1f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
                 },
                 Grids = new GridSizeDef
                 {
@@ -124,7 +124,7 @@ namespace Scripts
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 0.25f, // Multiplier for damage against shields.
+                    Modifier = 1.25f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -2f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -235,7 +235,7 @@ namespace Scripts
                     GrowTime = 0, // How many ticks it should take the field to grow to full size.
                     HideModel = false, // Hide the projectile model if it has one.
                     ShowParticle = true, // Show Block damage effect.
-                    TriggerRange = 250f, //range at which fields are triggered
+                    TriggerRange = 0f, //range at which fields are triggered
                     Particle = new ParticleDef // Particle effect to generate at the field's position.
                     {
                         Name = "", // SubtypeId of field particle effect.
@@ -248,7 +248,7 @@ namespace Scripts
             },
             Beams = new BeamDef
             {
-                Enable = true, // Enable beam behaviour. Please have 3600 RPM, when this Setting is enabled. Please do not fire Beams into Voxels.
+                Enable = false, // Enable beam behaviour. Please have 3600 RPM, when this Setting is enabled. Please do not fire Beams into Voxels.
                 VirtualBeams = false, // Only one damaging beam, but with the effectiveness of the visual beams combined (better performance).
                 ConvergeBeams = false, // When using virtual beams, converge the visual beams to the location of the real beam.
                 RotateRealBeam = false, // The real beam is rotated between all visual beams, instead of centered between them.
@@ -256,13 +256,13 @@ namespace Scripts
             },
             Trajectory = new TrajectoryDef
             {
-                Guidance = None, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
-                TargetLossDegree = 0f, // Degrees, Is pointed forward
+                Guidance = Smart, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
+                TargetLossDegree = 20f, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                MaxLifeTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
-                AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
+                MaxLifeTime = 120, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
+                AccelPerSec = 3600f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 3600, // voxel phasing if you go above 5100
-                MaxTrajectory = 1000f, // Max Distance the projectile or beam can Travel.
+                MaxTrajectory = 3000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
@@ -270,11 +270,12 @@ namespace Scripts
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 Smarts = new SmartsDef
                 {
+                    SteeringLimit = 30, // 0 means no limit, value is in degrees, good starting is 150.  This enable advanced smart "control", cost of 3 on a scale of 1-5, 0 being basic smart.
                     Inaccuracy = 0f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
-                    Aggressiveness = 0f, // controls how responsive tracking is.
-                    MaxLateralThrust = 0, // controls how sharp the trajectile may turn
-                    TrackingDelay = 0, // Measured in Shape diameter units traveled.
-                    MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    Aggressiveness = 1f, // controls how responsive tracking is.
+                    MaxLateralThrust = 0.55f, // controls how sharp the trajectile may turn
+                    TrackingDelay = 60, // Measured in Shape diameter units traveled.
+                    MaxChaseTime = 120, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
                     MaxTargets = 0, // Number of targets allowed before ending, 0 = unlimited
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
@@ -422,7 +423,7 @@ namespace Scripts
                 }
             }, // Don't edit below this line
         };
-    
+    /*
         private AmmoDef S_Chem_Laser_Ammo_Fake => new AmmoDef // StarCore AMS I
         {
             AmmoMagazine = "", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
@@ -611,6 +612,7 @@ namespace Scripts
                 Anchor : Affects target with Physics
                 
                 */
+                /*
                 Force = new PushPullDef
                 {
                     ForceFrom = ProjectileLastPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
@@ -648,13 +650,13 @@ namespace Scripts
             },
             Trajectory = new TrajectoryDef
             {
-                Guidance = None, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
+                Guidance = Smart, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
                 TargetLossDegree = 0f, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
-                AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
+                AccelPerSec = 3600f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 3600, // voxel phasing if you go above 5100
-                MaxTrajectory = 1000f, // Max Distance the projectile or beam can Travel.
+                MaxTrajectory = 3000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
@@ -801,7 +803,7 @@ namespace Scripts
                     Delay = 0, // delay in ticks after shot before ejected
                 }
             }, // Don't edit below this line
-        };
+        };*/
     
         }
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <BlockVariantGroups>
+
+
+        <BlockVariantGroup>
+            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="Blastplates" />
+            <Icon>Textures\GUI\Icons\REINFORCED_BLASTPLATE_icon.dds</Icon>
+            <DisplayName>Blastplates</DisplayName>
+            <Description>Armored defensive plates</Description>
+            <Blocks>
+                <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="GIGA_BLASTPLATE" /> 
+                <Block Type="MyObjectBuilder_TerminalBlock" Subtype="REINFORCED_BLASTPLATE" />
+            	<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="ACTIVE_BLASTPLATE" /> 
+                <Block Type="MyObjectBuilder_TerminalBlock" Subtype="3x3_Blastplate_A" />
+                <Block Type="MyObjectBuilder_TerminalBlock" Subtype="3x3_Blastplate_B" />
+                <Block Type="MyObjectBuilder_TerminalBlock" Subtype="3x3_Blastplate_C" />
+                <Block Type="MyObjectBuilder_TerminalBlock" Subtype="2x4_Blastplate" />
+            </Blocks>
+        </BlockVariantGroup>
+
+
+        
+    </BlockVariantGroups>
+</Definitions>

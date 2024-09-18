@@ -222,7 +222,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                GothicTorpPlas, GothicTorpPlas2, GothicTorpShortBurn, GothicTorpShortBurn2, GothicTorpMelt, GothicTorpMelt2, GothicTorpVortex, GothicTorpVortex2, TorpGrav,   // Must list all primary, shrapnel, and pattern ammos.
+                GothicTorpPlas, GothicTorpPlas2, GothicTorpShortBurn, GothicTorpShortBurn2, GothicTorpMelt, GothicTorpMelt2, GothicTorpVortex, GothicTorpVortex2, TorpGrav, GothicTorpFrag,   // Must list all primary, shrapnel, and pattern ammos.
             },
             Animations = GothicTorpLauncherAnimation,
             //Upgrades = UpgradeModules,

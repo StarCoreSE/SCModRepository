@@ -57,7 +57,7 @@
 			<MirroringY>Z</MirroringY>
 			<WeaponDefinitionId Subtype="ShootMissileGooder"/>
 			<ResourceSinkGroup>Defense</ResourceSinkGroup>
-			<RequiredPowerInput>0.00002</RequiredPowerInput>
+			<AiEnabled>false</AiEnabled>
 			<InventoryMaxVolume>1</InventoryMaxVolume>
 			<EdgeType>Light</EdgeType>
 			<BuildTimeSeconds>90</BuildTimeSeconds>
@@ -114,9 +114,10 @@
 
             <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
             <DestroySound>WepSmallWarheadExpl</DestroySound>
+            <MirroringZ>Y</MirroringZ>
             <MirroringY>Z</MirroringY>
 			    <ResourceSinkGroup>Defense</ResourceSinkGroup>
-			    <RequiredPowerInput>0.00002</RequiredPowerInput>
+			    <AiEnabled>false</AiEnabled>
             <PCU>150</PCU>
       </Definition>
 
@@ -167,7 +168,7 @@
             <MirroringZ>Y</MirroringZ>
             <MirroringY>Z</MirroringY>
 			<ResourceSinkGroup>Defense</ResourceSinkGroup>
-			<RequiredPowerInput>0.00002</RequiredPowerInput>
+			<AiEnabled>false</AiEnabled>
             <PCU>150</PCU>
             <IsAirTight>false</IsAirTight>
     </Definition>

@@ -1,16 +1,11 @@
 ﻿using System;
 using ProtoBuf;
-using SCModRepository_Dev.Gamemode_Mods.Development.Starcore_Sharetrack_Dev.Data.Scripts.ShipPoints.HeartNetworking.
-    Custom;
-using ShipPoints.HeartNetworking.Custom;
+using StarCore.ShareTrack.HeartNetworking.Custom;
 
-namespace ShipPoints.HeartNetworking
+namespace StarCore.ShareTrack.HeartNetworking
 {
     [ProtoInclude(91, typeof(TrackingSyncPacket))]
     [ProtoInclude(92, typeof(SyncRequestPacket))]
-    [ProtoInclude(93, typeof(GameStatePacket))]
-    [ProtoInclude(94, typeof(ProblemReportPacket))]
-    [ProtoInclude(95, typeof(ShieldFillRequestPacket))]
     [ProtoContract(UseProtoMembersOnly = true)]
     public abstract class PacketBase
     {
@@ -19,9 +14,6 @@ namespace ShipPoints.HeartNetworking
             typeof(PacketBase),
             typeof(TrackingSyncPacket),
             typeof(SyncRequestPacket),
-            typeof(GameStatePacket),
-            typeof(ProblemReportPacket),
-            typeof(ShieldFillRequestPacket)
         };
 
         /// <summary>

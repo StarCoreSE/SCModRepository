@@ -35,23 +35,23 @@ namespace Scripts
 
                 },
                 Ejector = "", // Optional; empty from which to eject "shells" if specified.
-                Scope = "", // Where line of sight checks are performed from. Must be clear of block collision.
+                Scope = "muzzle_beam_001", // Where line of sight checks are performed from. Must be clear of block collision.
             },
             Targeting = new TargetingDef
             {
                 Threats = new[] {
-                    Grids, Neutrals, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
+                    Grids, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
                 },
                 SubSystems = new[] {
                     Thrust, Utility, Offense, Power, Production, Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
                 },
-                ClosestFirst = false, // Tries to pick closest targets first (blocks on grids, projectiles, etc...).
+                ClosestFirst = true, // Tries to pick closest targets first (blocks on grids, projectiles, etc...).
                 IgnoreDumbProjectiles = false, // Don't fire at non-smart projectiles.
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 0, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
-                MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
+                MaxTargetDistance = 3500, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MinTargetDistance = 50, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 4, // Maximum number of targets to randomize between; 0 = unlimited.
                 TopBlocks = 8, // Maximum number of blocks to randomize between; 0 = unlimited.
                 StopTrackingSpeed = 0, // Do not track threats traveling faster than this speed; 0 = unlimited.
@@ -60,10 +60,10 @@ namespace Scripts
             {
                 PartName = "Saber Laser", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
                 DeviateShotAngle = 0f, // Projectile inaccuracy in degrees.
-                AimingTolerance = 0f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
-                AimLeadingPrediction = Off, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
+                AimingTolerance = 20f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
+                AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
                 DelayCeaseFire = 0, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released.
-                AddToleranceToTracking = false, // Allows turret to track to the edge of the AimingTolerance cone instead of dead centre.
+                AddToleranceToTracking = true, // Allows turret to track to the edge of the AimingTolerance cone instead of dead centre.
                 CanShootSubmerged = false, // Whether the weapon can be fired underwater when using WaterMod.
 
                 Ui = new UiDef
@@ -71,17 +71,17 @@ namespace Scripts
                     RateOfFire = false, // Enables terminal slider for changing rate of fire.
                     DamageModifier = false, // Enables terminal slider for changing damage per shot.
                     ToggleGuidance = false, // Enables terminal option to disable smart projectile guidance.
-                    EnableOverload = true, // Enables terminal option to turn on Overload; this allows energy weapons to double damage per shot, at the cost of quadrupled power draw and heat gain, and 2% self damage on overheat.
+                    EnableOverload = false, // Enables terminal option to turn on Overload; this allows energy weapons to double damage per shot, at the cost of quadrupled power draw and heat gain, and 2% self damage on overheat.
                 },
                 Ai = new AiDef
                 {
-                    TrackTargets = false, // Whether this weapon tracks its own targets, or (for multiweapons) relies on the weapon with PrimaryTracking enabled for target designation.
+                    TrackTargets = true, // Whether this weapon tracks its own targets, or (for multiweapons) relies on the weapon with PrimaryTracking enabled for target designation.
                     TurretAttached = false, // Whether this weapon is a turret and should have the UI and API options for such.
                     TurretController = false, // Whether this weapon can physically control the turret's movement.
-                    PrimaryTracking = false, // For multiweapons: whether this weapon should designate targets for other weapons on the platform without their own tracking.
+                    PrimaryTracking = true, // For multiweapons: whether this weapon should designate targets for other weapons on the platform without their own tracking.
                     LockOnFocus = false, // If enabled, weapon will only fire at targets that have been HUD selected AND locked onto by pressing Numpad 0.
-                    SuppressFire = true, // If enabled, weapon can only be fired manually.
-                    OverrideLeads = true, // Disable target leading on fixed weapons, or allow it for turrets.
+                    SuppressFire = false, // If enabled, weapon can only be fired manually.
+                    OverrideLeads = false, // Disable target leading on fixed weapons, or allow it for turrets.
                 },
                 HardWare = new HardwareDef
                 {
@@ -114,9 +114,9 @@ namespace Scripts
                     EnergyPriority = 0, // Deprecated.
                     MuzzleCheck = false, // Whether the weapon should check LOS from each individual muzzle in addition to the scope.
                     Debug = false, // Force enables debug mode.
-                    RestrictionRadius = 10, // Prevents other blocks of this type from being placed within this distance of the centre of the block.
+                    RestrictionRadius = 0, // Prevents other blocks of this type from being placed within this distance of the centre of the block.
                     CheckInflatedBox = false, // If true, the above distance check is performed from the edge of the block instead of the centre.
-                    CheckForAnyWeapon = true, // If true, the check will fail if ANY weapon is present, not just weapons of the same subtype.
+                    CheckForAnyWeapon = false, // If true, the check will fail if ANY weapon is present, not just weapons of the same subtype.
                 },
                 Loading = new LoadingDef
                 {
@@ -124,7 +124,7 @@ namespace Scripts
                     BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
-                    ReloadTime = 2100, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    ReloadTime = 600, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 10, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     HeatPerShot = 1, // Heat generated per shot.
@@ -139,7 +139,7 @@ namespace Scripts
                     BarrelSpinRate = 0, // Visual only, 0 disables and uses RateOfFire.
                     DeterministicSpin = false, // Spin barrel position will always be relative to initial / starting positions (spin will not be as smooth).
                     SpinFree = false, // Spin barrel while not firing.
-                    StayCharged = false, // Will start recharging whenever power cap is not full.
+                    StayCharged = true, // Will start recharging whenever power cap is not full.
                     //MaxReloads = 4, // Maximum number of reloads in the LIFETIME of a weapon
                     
                 },
@@ -187,7 +187,7 @@ namespace Scripts
             },
             Ammos = new[] {
                 S_Chem_Laser_Ammo,
-                S_Chem_Laser_Ammo_Fake,
+                //S_Chem_Laser_Ammo_Fake,
                 //REEE_Laser_Ammo_Decal
                 // Must list all primary, shrapnel, and pattern ammos.
             },
