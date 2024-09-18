@@ -573,9 +573,61 @@
     <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
       <Id>
         <TypeId>ConveyorSorter</TypeId>
-        <SubtypeId>WCDrone_Hangar</SubtypeId>
+        <SubtypeId>WCSentry_Hangar</SubtypeId>
       </Id>
       <DisplayName>[SOL] Sentry Hangar Bay</DisplayName>
+      <Icon>Textures\GUI\Icons\Hangar.dds</Icon>
+      <Description>These drones can be given orders via the hangar's ActionFriend/ActionEnemy options. </Description>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="5" y="2" z="2"/>
+			<ModelOffset x="0" y="0" z="0"/>
+      <Model>Models\Hangar.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="250" />
+        <Component Subtype="Construction" Count="500" />	
+        <Component Subtype="MetalGrid" Count="400" />
+        <Component Subtype="Motor" Count="200" />
+        <Component Subtype="Computer" Count="400" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+		<MountPoints>
+			<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="5.00" EndY="2.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="5.00" EndY="2.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="5.00" EndY="2.00"/>
+		</MountPoints>
+    <BuildProgressModels>
+				<Model BuildPercentUpperBound="0.50" File="Models\Cubes\large\Hangar_BS1.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\Hangar_BS2.mwm"/>
+			</BuildProgressModels>
+      <BlockPairName>SentryHangar</BlockPairName>
+      <MirroringX>Z</MirroringX>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>30</BuildTimeSeconds>
+      <NavigationDefinition>Default</NavigationDefinition>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>500</PCU>
+      <TargetingGroups>
+		<string>Weapons</string>
+      </TargetingGroups>      
+    </Definition>
+
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>WCStrikecraft_Hangar</SubtypeId>
+      </Id>
+      <DisplayName>[SOL] Strikecraft Hangar Bay</DisplayName>
       <Icon>Textures\GUI\Icons\Hangar.dds</Icon>
       <Description>These drones can be given orders via the hangar's ActionFriend/ActionEnemy options. </Description>
       <CubeSize>Large</CubeSize>

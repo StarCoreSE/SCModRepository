@@ -102,10 +102,10 @@ namespace SC.SUGMA.GameState
                     MyVisualScriptLogicProvider.CockpitInsertPilot(newControl.Name, false, newGrid.BigOwners[0]);
             }
 
-            var refObjectBuilder = (MyObjectBuilder_CubeGrid)newGrid.GetObjectBuilder();
-            refObjectBuilder.CreatePhysics = true;
-            MyEntities.RemapObjectBuilder(refObjectBuilder);
-            _respawnBuffer[newGrid] = refObjectBuilder;
+            //var refObjectBuilder = (MyObjectBuilder_CubeGrid)newGrid.GetObjectBuilder();
+            //refObjectBuilder.CreatePhysics = true;
+            //MyEntities.RemapObjectBuilder(refObjectBuilder);
+            //_respawnBuffer[newGrid] = refObjectBuilder;
 
             Log.Info("Respawned grid " + newGrid.DisplayName);
         }

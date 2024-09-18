@@ -75,8 +75,8 @@ namespace StarCore.FusionSystems.FusionParts
                 boostPowerToggle.Setter = (block, value) =>
                 {
                     var logic = block.GameLogic.GetAs<FusionPart<T>>();
-                    // Only allow value to be set if 2 seconds of power is stored
-                    if (!value || logic.MemberSystem?.PowerStored > MemberSystem?.PowerConsumption * 60)
+                    // Only allow value to be set if 1 second of power is stored
+                    if (!value || logic.MemberSystem?.PowerStored > -logic.MemberSystem?.PowerGeneration * 60)
                         logic.OverrideEnabled.Value = value;
                 };
 
@@ -146,9 +146,9 @@ namespace StarCore.FusionSystems.FusionParts
                 boostPowerAction.Action = block =>
                 {
                     var logic = block.GameLogic.GetAs<FusionPart<T>>();
-                    // Only allow value to be set if 2 seconds of power is stored
+                    // Only allow value to be set if 1 second of power is stored
                     if (logic.OverrideEnabled.Value ||
-                        logic.MemberSystem?.PowerStored > MemberSystem?.PowerConsumption * 60)
+                        logic.MemberSystem?.PowerStored > -logic.MemberSystem?.PowerGeneration * 60)
                         logic.OverrideEnabled.Value = !logic.OverrideEnabled.Value;
                 };
                 boostPowerAction.Writer = (b, sb) =>
