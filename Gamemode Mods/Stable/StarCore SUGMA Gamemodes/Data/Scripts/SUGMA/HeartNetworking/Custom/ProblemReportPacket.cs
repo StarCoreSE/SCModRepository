@@ -24,11 +24,14 @@ namespace SC.SUGMA.HeartNetworking.Custom
         {
             if (IssueState)
             {
-                if (IssueMessage.Length > 50)
-                    IssueMessage = IssueMessage.Substring(0, 50);
+                if (IssueMessage.Length > 500)
+                    IssueMessage = IssueMessage.Substring(0, 500);
 
                 if (!MyAPIGateway.Utilities.IsDedicated)
+                {
+                    SUGMA_SessionComponent.I?.UnregisterComponent("problemReport");
                     SUGMA_SessionComponent.I?.RegisterComponent("problemReport", new ProblemReport(IssueMessage));
+                }
             }
             else
             {

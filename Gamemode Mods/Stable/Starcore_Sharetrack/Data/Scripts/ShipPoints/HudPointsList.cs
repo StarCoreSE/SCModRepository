@@ -197,7 +197,7 @@ namespace StarCore.ShareTrack
             sb.AppendFormat("<color=Green>Total blocks<color=White>: {0}\n", _shipTracker.BlockCount);
             sb.AppendFormat("<color=Green>PCU<color=White>: {0}\n", _shipTracker.PCU);
             sb.AppendFormat("<color=Green>Size<color=White>: {0}\n",
-                (focusedGrid.Max + Vector3.Abs(focusedGrid.Min)).ToString());
+                (focusedGrid.Max - focusedGrid.Min + Vector3I.One).ToString());
             // sb.AppendFormat("<color=Green>Max Speed<color=White>: {0} | <color=Green>TWR<color=White>: {1}\n", speed, TWRs);
             sb.AppendFormat(
                 "<color=Green>Max Speed<color=White>: {0} | <color=Green>Reduced Angular Speed<color=White>: {1:F2} | <color=Green>TWR<color=White>: {2}\n",

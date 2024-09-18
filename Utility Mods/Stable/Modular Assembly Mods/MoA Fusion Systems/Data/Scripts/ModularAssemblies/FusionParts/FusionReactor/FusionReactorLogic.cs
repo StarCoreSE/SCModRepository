@@ -32,7 +32,7 @@ namespace StarCore.FusionSystems.FusionParts.FusionReactor
             // Power generation consumed (per second)
             var powerConsumption = powerGeneration * 60 * reactorConsumptionMultiplier;
 
-            var reactorEfficiencyMultiplier = 1 / (0.669f + reactorConsumptionMultiplier);
+            var reactorEfficiencyMultiplier = 1 / (0.489f + reactorConsumptionMultiplier);
 
             // Power generated (per second)
             var reactorOutput = reactorEfficiencyMultiplier * powerConsumption * megawattsPerFusionPower;

@@ -140,7 +140,7 @@
     [14km range]
     [Energy damage]
     [no physical damage]
-	[2min reload]
+	[1min reload]
 
 	 </Description>
      <Icon>Textures\GUI\Icons\OPA-Logo.dds</Icon>
@@ -262,13 +262,13 @@
        <TypeId>ConveyorSorter</TypeId>
        <SubtypeId>S_Chem_Laser_Block</SubtypeId>
      </Id>
-     <DisplayName>[SOL] Saber Chemical Laser</DisplayName>
+     <DisplayName>[SOL] Saber Guided Laser</DisplayName>
      <Description>
-       [1km range]
+       [3km range]
        [Energy damage]
-       [Hitscan]
-       [Reload: 35sec]
-       Uses a limited capacity fuel cell to power a powerful laser for 2 seconds before running out and needing 35 seconds to reset for another firing.
+       [Homing]
+       [Reload: 10sec]
+       Uses a limited capacity fuel cell to power a powerful laser for 2 seconds before running out and needing 10 seconds to reset for another firing.
      </Description>
      <Icon>Textures\Icons\laser icon.png</Icon>
      <CubeSize>Large</CubeSize>
@@ -319,6 +319,8 @@
      <DestroySound>Betty_Weapon_Destroyed</DestroySound>
    </Definition>   
 	
+
+
 
 		<!--
    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
@@ -561,6 +563,128 @@
 
 
 
+
+
+
+
+
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>WCSentry_Hangar</SubtypeId>
+      </Id>
+      <DisplayName>[SOL] Sentry Hangar Bay</DisplayName>
+      <Icon>Textures\GUI\Icons\Hangar.dds</Icon>
+      <Description>These drones can be given orders via the hangar's ActionFriend/ActionEnemy options. </Description>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="5" y="2" z="2"/>
+			<ModelOffset x="0" y="0" z="0"/>
+      <Model>Models\Hangar.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="250" />
+        <Component Subtype="Construction" Count="500" />	
+        <Component Subtype="MetalGrid" Count="400" />
+        <Component Subtype="Motor" Count="200" />
+        <Component Subtype="Computer" Count="400" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+		<MountPoints>
+			<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="5.00" EndY="2.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="5.00" EndY="2.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="5.00" EndY="2.00"/>
+		</MountPoints>
+    <BuildProgressModels>
+				<Model BuildPercentUpperBound="0.50" File="Models\Cubes\large\Hangar_BS1.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\Hangar_BS2.mwm"/>
+			</BuildProgressModels>
+      <BlockPairName>SentryHangar</BlockPairName>
+      <MirroringX>Z</MirroringX>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>30</BuildTimeSeconds>
+      <NavigationDefinition>Default</NavigationDefinition>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>500</PCU>
+      <TargetingGroups>
+		<string>Weapons</string>
+      </TargetingGroups>      
+    </Definition>
+
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>WCStrikecraft_Hangar</SubtypeId>
+      </Id>
+      <DisplayName>[SOL] Strikecraft Hangar Bay</DisplayName>
+      <Icon>Textures\GUI\Icons\Hangar.dds</Icon>
+      <Description>These drones can be given orders via the hangar's ActionFriend/ActionEnemy options. </Description>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="5" y="2" z="2"/>
+			<ModelOffset x="0" y="0" z="0"/>
+      <Model>Models\Hangar.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="250" />
+        <Component Subtype="Construction" Count="500" />	
+        <Component Subtype="MetalGrid" Count="400" />
+        <Component Subtype="Motor" Count="200" />
+        <Component Subtype="Computer" Count="400" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+		<MountPoints>
+			<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="5.00" EndY="2.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="5.00" EndY="2.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="5.00" EndY="2.00"/>
+		</MountPoints>
+    <BuildProgressModels>
+				<Model BuildPercentUpperBound="0.50" File="Models\Cubes\large\Hangar_BS1.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\Hangar_BS2.mwm"/>
+			</BuildProgressModels>
+      <BlockPairName>FighterHangar</BlockPairName>
+      <MirroringX>Z</MirroringX>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>30</BuildTimeSeconds>
+      <NavigationDefinition>Default</NavigationDefinition>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>500</PCU>
+      <TargetingGroups>
+		<string>Weapons</string>
+      </TargetingGroups>      
+    </Definition>
+
+
+
+
+
+
+
+
+
+
+
+
 <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>     <!-- im sure there is a good reason why its not something simple like a <TypeId>Passage</TypeId> but the reason eludes me-->
@@ -616,9 +740,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\PM_LG_BLASTPLATE_BLASTPLATE.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="4050" />
-       		 	<Component Subtype="MetalGrid" Count="1500" />
-        		<Component Subtype="SteelPlate" Count="450" />
+				<Component Subtype="SteelPlate" Count="6100" />
+       		 	<Component Subtype="MetalGrid" Count="2500" />
+        		<Component Subtype="SteelPlate" Count="800" />
 			</Components>
 			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<MountPoints>
@@ -654,9 +778,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\PM_LG_BLASTPLATEINERT_BLASTPLATEINERT.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="4050" />
-       		 	<Component Subtype="MetalGrid" Count="1500" />
-        		<Component Subtype="SteelPlate" Count="450" />
+				<Component Subtype="SteelPlate" Count="8100" />
+       		 	<Component Subtype="MetalGrid" Count="3000" />
+        		<Component Subtype="SteelPlate" Count="900" />
 			</Components>
 			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<MountPoints>
@@ -697,9 +821,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\SH_LG_BP33C_3x3_Blast_Plate_C.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="1350" />
-       		 	<Component Subtype="MetalGrid" Count="500" />
-        		<Component Subtype="SteelPlate" Count="150" />
+				<Component Subtype="SteelPlate" Count="1650" />
+       		 	<Component Subtype="MetalGrid" Count="600" />
+        		<Component Subtype="SteelPlate" Count="200" />
 			</Components>
 			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<MountPoints>
@@ -737,9 +861,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\SH_LG_BP33B_3x3_Blastplate.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="1350" />
-       		 	<Component Subtype="MetalGrid" Count="500" />
-        		<Component Subtype="SteelPlate" Count="150" />
+				<Component Subtype="SteelPlate" Count="1650" />
+       		 	<Component Subtype="MetalGrid" Count="600" />
+        		<Component Subtype="SteelPlate" Count="200" />
 			</Components>
 			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<MountPoints>
@@ -776,9 +900,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\SH_LG_BP33A_3x3_Blastplate.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="1350" />
-       		 	<Component Subtype="MetalGrid" Count="500" />
-        		<Component Subtype="SteelPlate" Count="150" />
+				<Component Subtype="SteelPlate" Count="1650" />
+       		 	<Component Subtype="MetalGrid" Count="600" />
+        		<Component Subtype="SteelPlate" Count="200" />
 			</Components>
 			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<BlockPairName>3x3_Blastplate_A</BlockPairName>
@@ -810,9 +934,9 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Cubes\large\SH_LG_BP24_2x4_Blastplate.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="1350" />
-       		 	<Component Subtype="MetalGrid" Count="500" />
-        		<Component Subtype="SteelPlate" Count="150" />
+				<Component Subtype="SteelPlate" Count="1650" />
+       		 	<Component Subtype="MetalGrid" Count="600" />
+        		<Component Subtype="SteelPlate" Count="200" />
 			</Components>
 			<CriticalComponent Subtype="MetalGrid" Index="0"/>
 			<BlockPairName>2x4_Blastplate</BlockPairName>

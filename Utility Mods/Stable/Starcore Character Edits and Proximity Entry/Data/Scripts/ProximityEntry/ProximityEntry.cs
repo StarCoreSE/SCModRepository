@@ -33,10 +33,18 @@ namespace Klime.ProximityEntry
         List<IMyCubeGrid> reuse_gridgroup = new List<IMyCubeGrid>();
         IMyCockpit reuse_cockpit;
 
+        IMyCockpit lastHighlightedCockpit; // To keep track of the last highlighted cockpit
+
         ushort net_id = 49864;
         int timer = 0;
         int current_hold = 0;
         int max_hold = 30;
+
+        private bool isHoldingF = false;
+        private double holdStartTime = 0;
+        private const double HOLD_DURATION = 0.5; // Required hold duration to highlight and enter
+        private const double COOLDOWN_DURATION = 1.0; // One second cooldown duration
+        private double cooldownEndTime = 0; // Track the end time of the cooldown
 
         [ProtoContract]
         public class EntryRequest
@@ -62,7 +70,6 @@ namespace Klime.ProximityEntry
             }
         }
 
-
         public override void Init(MyObjectBuilder_SessionComponent sessionComponent)
         {
             if (MyAPIGateway.Session.IsServer)
@@ -74,7 +81,6 @@ namespace Klime.ProximityEntry
         private void CockpitRequestHandler(byte[] obj)
         {
             EntryRequest request = MyAPIGateway.Utilities.SerializeFromBinary<EntryRequest>(obj);
-
             if (request != null)
             {
                 reuse_cockpit = MyAPIGateway.Entities.GetEntityById(request.cockpit_id) as IMyCockpit;
@@ -82,6 +88,9 @@ namespace Klime.ProximityEntry
                 if (reuse_cockpit != null && reuse_character != null && reuse_cockpit.Pilot == null)
                 {
                     reuse_cockpit.AttachPilot(reuse_character);
+
+                    // Add this line to show a notification
+                    MyAPIGateway.Utilities.ShowNotification($"Entered cockpit: {reuse_cockpit.CustomName}", 1000 / 60, "White");
                 }
             }
         }
@@ -103,149 +112,193 @@ namespace Klime.ProximityEntry
         {
             try
             {
-                if (MyAPIGateway.Utilities.IsDedicated)
-                {
-                    return;
-                }
+                if (MyAPIGateway.Utilities.IsDedicated) return;
+
+                double currentTime = MyAPIGateway.Session.ElapsedPlayTime.TotalSeconds;
 
                 if (timer % 10 == 0)
                 {
-                    reuse_cubegrid = null;
-                    if (MyAPIGateway.Session?.Player?.Character != null && MyAPIGateway.Session.Player?.Controller?.ControlledEntity is IMyCharacter
-                        && MyAPIGateway.Session.CameraController != null && MyAPIGateway.Session.CameraController.IsInFirstPersonView && MyAPIGateway.Session.Camera != null)
-                    {
-                        reuse_character = MyAPIGateway.Session.Player.Character;
-                        camera_matrix = MyAPIGateway.Session.Camera.WorldMatrix;
-
-                        MyAPIGateway.Physics.CastRay(camera_matrix.Translation, camera_matrix.Translation + camera_matrix.Forward * 80, out raycast);
-
-                        if (raycast != null && raycast.HitEntity != null)
-                        {
-                            reuse_cubegrid = raycast.HitEntity as MyCubeGrid;
-                            if (reuse_cubegrid == null || reuse_cubegrid.Physics == null || reuse_cubegrid.IsStatic || reuse_cubegrid.GridSizeEnum == MyCubeSize.Small)
-                            {
-                                reuse_cubegrid = null;
-                            }
-
-                            if (reuse_cubegrid != null)
-                            {
-                                reuse_gridgroup = MyAPIGateway.GridGroups.GetGroup(reuse_cubegrid, GridLinkTypeEnum.Logical);
-                                foreach (var grid in reuse_gridgroup)
-                                {
-                                    if (grid.GridSizeEnum == MyCubeSize.Small)
-                                    {
-                                        reuse_cubegrid = null;
-                                        break;
-                                    }
-                                }
-
-                            }
-                        }
-                    }
+                    UpdateRaycastInfo();
                 }
 
                 if (reuse_cubegrid != null && !reuse_cubegrid.MarkedForClose)
                 {
                     if (MyAPIGateway.Input.IsKeyPress(MyKeys.F))
                     {
-                        if (ValidInput() && MyAPIGateway.Session?.Player?.Character != null)
+                        if (!isHoldingF)
                         {
-                            //MyAPIGateway.CubeBuilder.Deactivate();
-                            MyAPIGateway.CubeBuilder.DeactivateBlockCreation();
-                            if (current_hold >= max_hold)
+                            isHoldingF = true;
+                            holdStartTime = currentTime;
+                        }
+
+                        if (isHoldingF && currentTime - holdStartTime >= HOLD_DURATION)
+                        {
+                            if (ValidInput() && MyAPIGateway.Session?.Player?.Character != null)
+                            {
+                                MyAPIGateway.CubeBuilder.DeactivateBlockCreation();
+                                ShowTargetCockpit();
+                            }
+                        }
+                    }
+                    else if (MyAPIGateway.Input.IsNewKeyReleased(MyKeys.F))
+                    {
+                        if (isHoldingF && currentTime - holdStartTime >= HOLD_DURATION)
+                        {
+                            if (currentTime >= cooldownEndTime && ValidInput() && MyAPIGateway.Session?.Player?.Character != null)
                             {
                                 AddToCockpit();
-                                current_hold = 0;
+                                cooldownEndTime = currentTime + COOLDOWN_DURATION; // Start the cooldown timer
                             }
                             else
                             {
-                                current_hold += 1;
+                                // Clear the highlight if in cooldown
+                                ClearHighlight();
                             }
                         }
+
+                        isHoldingF = false;
                     }
                     else
                     {
                         current_hold = 0;
                     }
-                    //if (MyAPIGateway.Input.IsNewKeyPressed(MyKeys.E))
-                    //{
-                    //    if (ValidInput() && MyAPIGateway.Session?.Player?.Character != null)
-                    //    {
-                    //        AddToCockpit();
-                    //    }
-                    //}
                 }
                 else
                 {
                     current_hold = 0;
+                    // Clear the highlight if the player looks away from the cockpit
+                    ClearHighlight();
                 }
 
-                if (HUD_Message != null)
-                {
-                    if (reuse_cubegrid != null)
-                    {
-                        text.Clear();
-                        text.Append("Hold F to enter: " + reuse_cubegrid.DisplayName);
-                        HUD_Message.Visible = true;
-                    }
-                    else
-                    {
-                        HUD_Message.Visible = false;
-                    }
-                }
+                UpdateHUDMessage();
             }
             catch (Exception e)
             {
                 MyAPIGateway.Utilities.ShowMessage("", e.Message);
             }
-
             timer += 1;
+        }
+
+        private void UpdateRaycastInfo()
+        {
+            reuse_cubegrid = null;
+            if (MyAPIGateway.Session?.Player?.Character != null && MyAPIGateway.Session.Player?.Controller?.ControlledEntity is IMyCharacter
+                                                                && MyAPIGateway.Session.CameraController != null && MyAPIGateway.Session.CameraController.IsInFirstPersonView && MyAPIGateway.Session.Camera != null)
+            {
+                reuse_character = MyAPIGateway.Session.Player.Character;
+                camera_matrix = MyAPIGateway.Session.Camera.WorldMatrix;
+
+                MyAPIGateway.Physics.CastRay(camera_matrix.Translation, camera_matrix.Translation + camera_matrix.Forward * 80, out raycast);
+
+                if (raycast != null && raycast.HitEntity != null)
+                {
+                    reuse_cubegrid = raycast.HitEntity as MyCubeGrid;
+                    if (reuse_cubegrid == null || reuse_cubegrid.Physics == null || reuse_cubegrid.IsStatic)
+                    {
+                        reuse_cubegrid = null;
+                    }
+                    else
+                    {
+                        reuse_gridgroup = MyAPIGateway.GridGroups.GetGroup(reuse_cubegrid, GridLinkTypeEnum.Logical);
+                    }
+                }
+            }
+        }
+
+        private void ShowTargetCockpit()
+        {
+            IMyCockpit targetCockpit = GetTargetCockpit();
+            if (targetCockpit != null)
+            {
+                string cockpitName = string.IsNullOrEmpty(targetCockpit.CustomName) ? targetCockpit.DefinitionDisplayNameText : targetCockpit.CustomName;
+                MyAPIGateway.Utilities.ShowNotification($"Target cockpit: {cockpitName}", 1000 / 60, "White");
+
+                // Clear the highlight on the last highlighted cockpit
+                ClearHighlight();
+
+                // Highlight the current cockpit
+                MyVisualScriptLogicProvider.SetHighlightLocal(targetCockpit.Name);
+                lastHighlightedCockpit = targetCockpit; // Update the last highlighted cockpit
+            }
         }
 
         private void AddToCockpit()
         {
             try
             {
-                cockpits.Clear();
-                MyCubeGrid cubeG = reuse_cubegrid as MyCubeGrid;
-                if (cubeG.Physics != null && !cubeG.IsStatic)
+                IMyCockpit targetCockpit = GetTargetCockpit();
+                if (targetCockpit != null)
                 {
-                    IMyCockpit mainCockpit = null;
-                    IMyCockpit closestCockpit = null;
+                    SendEntryRequest(targetCockpit);
+                    DisplayCockpitName(targetCockpit, reuse_cubegrid.DisplayName);
 
-                    foreach (var fatblock in cubeG.GetFatBlocks())
-                    {
-                        IMyCockpit cockpit = fatblock as IMyCockpit;
-                        if (cockpit != null && cockpit.Pilot == null)
-                        {
-                            if (cockpit.IsMainCockpit)
-                            {
-                                mainCockpit = cockpit;
-                            }
-                            else if (IsClosestCockpit(cockpit, cubeG))
-                            {
-                                closestCockpit = cockpit;
-                            }
-                        }
-                    }
-
-                    // If there's a main cockpit, send entry request for it and display its name
-                    if (mainCockpit != null)
-                    {
-                        SendEntryRequest(mainCockpit);
-                        DisplayCockpitName(mainCockpit, cubeG.DisplayName);
-                    }
-                    // If there's no main cockpit, but there's a closest one, send entry request for it and display its name
-                    else if (closestCockpit != null)
-                    {
-                        SendEntryRequest(closestCockpit);
-                        DisplayCockpitName(closestCockpit, cubeG.DisplayName);
-                    }
+                    // Clear the highlight after entering
+                    ClearHighlight();
                 }
             }
             catch (Exception e)
             {
                 MyAPIGateway.Utilities.ShowMessage("", e.Message);
+            }
+        }
+
+        private IMyCockpit GetTargetCockpit()
+        {
+            if (reuse_cubegrid?.Physics == null || reuse_cubegrid.IsStatic) return null;
+
+            IMyCockpit mainCockpit = null;
+            IMyCockpit closestCockpit = null;
+            double minDistanceToCenter = double.MaxValue;
+
+            foreach (var fatblock in reuse_cubegrid.GetFatBlocks())
+            {
+                IMyCockpit cockpit = fatblock as IMyCockpit;
+                if (cockpit != null && cockpit.Pilot == null)
+                {
+                    if (cockpit.IsMainCockpit)
+                    {
+                        mainCockpit = cockpit;
+                        break; // Exit loop as we found the main cockpit
+                    }
+
+                    // asignable variable moment
+                    var cockpitpos = cockpit.GetPosition();
+                    // Calculate the distance from the cockpit to the center of the screen
+                    Vector3D cockpitScreenPosition = MyAPIGateway.Session.Camera.WorldToScreen(ref cockpitpos);
+                    double distanceToCenter = Vector2D.Distance(new Vector2D(cockpitScreenPosition.X, cockpitScreenPosition.Y), new Vector2D(0, 0));
+
+                    if (distanceToCenter < minDistanceToCenter)
+                    {
+                        minDistanceToCenter = distanceToCenter;
+                        closestCockpit = cockpit;
+                    }
+                }
+            }
+
+            // If the main cockpit is found, return it immediately
+            if (mainCockpit != null)
+            {
+                return mainCockpit;
+            }
+
+            // Otherwise, return the closest cockpit to the center
+            return closestCockpit;
+        }
+
+        private void UpdateHUDMessage()
+        {
+            if (HUD_Message != null)
+            {
+                if (reuse_cubegrid != null)
+                {
+                    text.Clear();
+                    text.Append("Hold F to target cockpit, release to enter: " + reuse_cubegrid.DisplayName);
+                    HUD_Message.Visible = true;
+                }
+                else
+                {
+                    HUD_Message.Visible = false;
+                }
             }
         }
 
@@ -253,9 +306,9 @@ namespace Klime.ProximityEntry
         {
             text.Clear();
             string cockpitName = string.IsNullOrEmpty(cockpit.CustomName) ? cockpit.DefinitionDisplayNameText : cockpit.CustomName;
-            text.Append("Hold F to enter: " + gridName + " (" + cockpitName + ")");
-            HUD_Message.Visible = true;
+            MyAPIGateway.Utilities.ShowNotification($"Entering: {gridName} ({cockpitName})", 1000, "White"); // Show for 1 second
         }
+
         private bool IsClosestCockpit(IMyCockpit cockpit, MyCubeGrid cubeG)
         {
             var player_pos = MyAPIGateway.Session.Player.Character.WorldMatrix.Translation;
@@ -270,6 +323,9 @@ namespace Klime.ProximityEntry
         {
             EntryRequest request = new EntryRequest(cockpit.EntityId, MyAPIGateway.Session.Player.IdentityId, MyAPIGateway.Session.Player.Character.EntityId);
             MyAPIGateway.Multiplayer.SendMessageToServer(net_id, MyAPIGateway.Utilities.SerializeToBinary<EntryRequest>(request));
+
+            // Add this line to show a local notification
+            MyAPIGateway.Utilities.ShowNotification($"Attempting to enter: {cockpit.CustomName}", 500, "White");
         }
 
         private bool ValidInput()
@@ -282,6 +338,15 @@ namespace Klime.ProximityEntry
             return false;
         }
 
+        private void ClearHighlight()
+        {
+            if (lastHighlightedCockpit != null)
+            {
+                MyVisualScriptLogicProvider.SetHighlightLocal(lastHighlightedCockpit.Name, thickness: -1);
+                lastHighlightedCockpit = null;
+            }
+        }
+
         protected override void UnloadData()
         {
             if (HUD_Base != null)
@@ -292,6 +357,9 @@ namespace Klime.ProximityEntry
             {
                 MyAPIGateway.Multiplayer.UnregisterMessageHandler(net_id, CockpitRequestHandler);
             }
+
+            // Ensure to clear any highlighted cockpits on unload
+            ClearHighlight();
         }
     }
 }

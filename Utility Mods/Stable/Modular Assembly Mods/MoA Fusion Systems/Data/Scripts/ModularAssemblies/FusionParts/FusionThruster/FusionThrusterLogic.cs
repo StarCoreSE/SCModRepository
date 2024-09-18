@@ -32,7 +32,7 @@ namespace StarCore.FusionSystems.FusionParts.FusionThruster
             // Power generation consumed (per second)
             var powerConsumption = powerGeneration * 60 * consumptionMultiplier;
 
-            var efficiencyMultiplier = 1 / (0.669f + consumptionMultiplier);
+            var efficiencyMultiplier = 1 / (0.489f + consumptionMultiplier);
 
             // Power generated (per second)
             var thrustOutput = efficiencyMultiplier * powerConsumption * newtonsPerFusionPower;

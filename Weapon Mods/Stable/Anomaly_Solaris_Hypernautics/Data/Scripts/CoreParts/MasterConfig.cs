@@ -14,7 +14,9 @@ namespace Scripts
         //S_Armored_Laser,
 		SM3_Counter_Battery,
 		SolHyp_ArcStrike_HTorpedo,
-        SolHyp_MAC
+        SolHyp_MAC,
+        Sentry_Hangar,
+        Strikecraft_Hangar
 	    );
         }
     }

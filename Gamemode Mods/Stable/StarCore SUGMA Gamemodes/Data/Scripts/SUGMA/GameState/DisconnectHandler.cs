@@ -202,7 +202,7 @@ namespace SC.SUGMA.GameState
             if (ReportProblem && MyAPIGateway.Multiplayer?.IsServer == true)
             {
                 //automatic "/sc problem {Player} has disconnected!"?
-                SUtils.ReportProblem($"{player.DisplayName} has disconnected! (override with '/sc missing')");
+                SUtils.ReportProblem($"{player.DisplayName} has disconnected! ('/sc missing' to override)");
             }
 
             if (TeleportToSpawn)

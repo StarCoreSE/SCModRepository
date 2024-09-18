@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 
 using Sandbox.Game;
+using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
 using VRage.Game;
 using VRage.Game.ModAPI;
-using VRage.Game.ModAPI.Interfaces;
 using VRage.Input;
 using VRage.Utils;
 using VRageMath;
+using IMyControllableEntity = VRage.Game.ModAPI.Interfaces.IMyControllableEntity;
 
 namespace ttrcwm
 {
@@ -286,7 +287,7 @@ namespace ttrcwm
                 _grid.OnBlockAdded += On_block_added;
                 _grid.OnBlockRemoved += On_block_removed;
                 Sync_helper.Register_logic_object(this, _grid.EntityId);
-                _ID_on = ((MyObjectBuilder_CubeGrid)_grid.GetObjectBuilder()).DampenersEnabled;
+                _ID_on = ((MyCubeGrid)_grid).DampenersEnabled;
 
                 var block_list = new List<IMySlimBlock>();
                 _grid.GetBlocks(block_list, (block) =>
