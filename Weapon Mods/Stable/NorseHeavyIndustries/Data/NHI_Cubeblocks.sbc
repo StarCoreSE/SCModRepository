@@ -313,17 +313,10 @@ Most Effective against Missiles, Rockets, and other Similar Guided Munitions, bu
      </Id>
      <DisplayName>[NHI] 'Vanir' Light Autocannon</DisplayName>
      <Description>
-[Turret Range: 3500m]
-[Reload: 8 Seconds]
-[Power Draw: 12MW]
-
-[Ammo Types: APHE]
-[Shell Range: 3500m]
-[Shell Speed: 1250m/s]
-[Damage Types: Energy]
-[Damage Falloffs: None]
-
 Light Autocannon that fires an APHE Round.
+[Range: 3500]
+[Shell Speed: 1250m/s]
+[Damage Type: Energy]
      </Description>
      <Icon>Textures\GUI\Icons\Odin_Defense_Cannon_1x1x2.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -378,12 +371,7 @@ Light Autocannon that fires an APHE Round.
 [Ammo Types: APHE]
 [Shell Range: 5000m]
 [Shell Speed: 1500m/s]
-[Damage Types: Energy]
-[Damage Falloffs: None]
-       
-General Purpose Autocannon. Uses an APHE round with no specific or special damage capabilities.
-
-None
+[Damage Type: EN/KIN]
      </Description>
      <Icon>Textures\GUI\Icons\New_Autocannon_3x3_2.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -680,17 +668,10 @@ Heavy Railgun Turret that fires a single slug every 10 Seconds
      </Id>
      <DisplayName>[NHI] Mk3 Battleship Cannon</DisplayName>
      <Description>
-[Turret Range: 7000m]
-[Reload: 13 Seconds]
-[Power Draw: None]
-
-[Ammo Types: HE | HVAP]
-[Shell Range: 8200m | 5200m]
-[Shell Speed: 1800m/s | 3200m/s]
-[Damage Types: Energy | Kinetic]
-[Damage Falloffs: None]
-
-A Heavy Battleship Cannon. Fires an HE Shell or an HVAP Shell.
+A Heavy Battleship Cannon, Can fire either an HE Shell or Canister Shot
+[Range: 7000]
+[Shell Speed: 1400m/s]
+[Damage Type: EN/KIN]
      </Description>
      <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk3.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -755,17 +736,10 @@ A Heavy Battleship Cannon. Fires an HE Shell or an HVAP Shell.
      </Id>
      <DisplayName>[NHI] Mk3 Battleship Cannon</DisplayName>
      <Description>
-[Turret Range: 7000m]
-[Reload: 13 Seconds]
-[Power Draw: None]
-
-[Ammo Types: HE | HVAP]
-[Shell Range: 8200m | 5200m]
-[Shell Speed: 1800m/s | 3200m/s]
-[Damage Types: Energy | Kinetic]
-[Damage Falloffs: None]
-
-A Heavy Battleship Cannon. Fires an HE Shell or an HVAP Shell.
+A Heavy Battleship Cannon, Can fire either an HE Shell or Canister Shot
+[Range: 7000]
+[Shell Speed: 1400m/s]
+[Damage Type: EN/KIN].
      </Description>
      <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk3.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -831,17 +805,10 @@ A Heavy Battleship Cannon. Fires an HE Shell or an HVAP Shell.
      </Id>
      <DisplayName>[NHI] Mk2 Battleship Cannon</DisplayName>
      <Description>
-[Turret Range: 6000m]
-[Reload: 9 Seconds]
-[Power Draw: None]
-
-[Ammo Types: HE | HVAP]
-[Shell Range: 7200m | 7200m]
-[Shell Speed: 1100m/s | 2200m/s]
-[Damage Types: Energy | Kinetic]
-[Damage Falloffs: None]
-
-A Medium Battleship Cannon. Fires an HE Shell or an HVAP Shell.
+A Heavy Battleship Cannon, Fires an HE Shell
+[Range: 6000]
+[Shell Speed: 1100m/s]
+[Damage Type: EN]
      </Description>
      <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk2.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -907,17 +874,10 @@ A Medium Battleship Cannon. Fires an HE Shell or an HVAP Shell.
      </Id>
      <DisplayName>[NHI] Mk2 Battleship Cannon</DisplayName>
      <Description>
-[Turret Range: 6000m]
-[Reload: 9 Seconds]
-[Power Draw: None]
-
-[Ammo Types: HE | HVAP]
-[Shell Range: 7200m | 7200m]
-[Shell Speed: 1100m/s | 2200m/s]
-[Damage Types: Energy | Kinetic]
-[Damage Falloffs: None]
-
-A Medium Battleship Cannon. Fires an HE Shell or an HVAP Shell.
+A Heavy Battleship Cannon, Fires an HE Shell
+[Range: 6000]
+[Shell Speed: 1100m/s]
+[Damage Type: EN]
      </Description>
      <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk2.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -983,17 +943,10 @@ A Medium Battleship Cannon. Fires an HE Shell or an HVAP Shell.
      </Id>
      <DisplayName>[NHI] Mk1 Battleship Cannon</DisplayName>
      <Description>
-[Turret Range: 5000m]
-[Reload: 4.5 Seconds]
-[Power Draw: None]
-
-[Ammo Types: HE | HVAP]
-[Shell Range: 6200m | 6200m]
-[Shell Speed: 1100m/s | 2200m/s]
-[Damage Types: Energy | Kinetic]
-[Damage Falloffs: None]
-
-A Light Battleship Cannon. Fires an HE Shell or an HVAP Shell.
+A Heavy Battleship Cannon, Fires an HE Shell
+[Range: 5000]
+[Shell Speed: 1100m/s]
+[Damage Type: EN]
      </Description>
      <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk1.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -1042,17 +995,10 @@ A Light Battleship Cannon. Fires an HE Shell or an HVAP Shell.
      </Id>
      <DisplayName>[NHI] Mk1 Battleship Cannon</DisplayName>
      <Description>
-[Turret Range: 5000m]
-[Reload: 4.5 Seconds]
-[Power Draw: None]
-
-[Ammo Types: HE | HVAP]
-[Shell Range: 6200m | 6200m]
-[Shell Speed: 1100m/s | 2200m/s]
-[Damage Types: Energy | Kinetic]
-[Damage Falloffs: None]
-
-A Light Battleship Cannon. Fires an HE Shell or an HVAP Shell.
+A Heavy Battleship Cannon, Fires an HE Shell
+[Range: 5000]
+[Shell Speed: 1100m/s]
+[Damage Type: EN]
      </Description>
      <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk1.dds</Icon>
      <CubeSize>Large</CubeSize>
@@ -1979,17 +1925,10 @@ Lacks the Ability to Heal Shields and and Must Completely cool down after reachi
      </Id>
      <DisplayName>[NHI] 'Hurricane' Naval Gun</DisplayName>
      <Description>
-[Turret Range: 5000m]
-[Reload: 5 Seconds]
-[Power Draw: None]
-
-[Ammo Types: APCBC]
-[Shell Range: 5400m]
-[Shell Speed: 1300m/s]
-[Damage Types: Kinetic]
-[Damage Falloffs: None]
-
-A Heavy Naval Cannon, Fires an APCBC Shell
+       A Heavy Naval Cannon, Fires an APCBC Shell
+       [Range: 5000]
+       [Shell Speed: 1100m/s]
+       [Damage Type: KIN]
      </Description>
      <Icon>Textures\GUI\Icons\NHI_Kinetic_Turret.dds</Icon>
      <CubeSize>Large</CubeSize>
