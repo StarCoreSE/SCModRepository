@@ -82,20 +82,19 @@ namespace Blues_Thruster_Particles
         private static long GetThrusterAnimation(IMyTerminalBlock block)
         {
             var moddedThruster = block?.GameLogic?.GetAs<Thrusters>();
-            moddedThruster.LoadCustomData();
             if (moddedThruster != null)
             {
+                moddedThruster.LoadCustomData();
                 foreach (var item in items)
                 {
                     if (item.Value == moddedThruster.ParticleEffectToGenerate)
                     {
                         return item.Key;
-                    }            
+                    }
                 }
             }
             return 1;
         }
-
 
 
         private static void AlphaSliderWriter(IMyTerminalBlock block, StringBuilder builder)
@@ -134,14 +133,12 @@ namespace Blues_Thruster_Particles
 
         private static Color GetThrusterColor(IMyTerminalBlock block)
         {
-           
             var moddedThruster = block?.GameLogic?.GetAs<Thrusters>();
-            moddedThruster.LoadCustomData();
             if (moddedThruster != null)
             {
+                moddedThruster.LoadCustomData();
                 return new Color(moddedThruster.FlameColor);
             }
-            //CustomDataCheckHere
             return Color.White;
         }
 

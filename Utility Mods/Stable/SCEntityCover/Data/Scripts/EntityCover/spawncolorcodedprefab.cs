@@ -22,64 +22,61 @@ namespace Klime.spawncolorcodedprefab
     [ProtoContract]
     public class PrefabSpawnPacket : Packet
     {
-        [ProtoMember(1)]
-        public string prefabName;
-
         [ProtoMember(2)]
-        public int prefabAmount;
+        public int PrefabAmount { get; set; }
 
         [ProtoMember(3)]
-        public double ringRadius; // New field
+        public double RingRadius { get; set; }
 
         [ProtoMember(4)]
-        public double rotation; // New field
+        public Vector3D Rotation { get; set; }
 
         public PrefabSpawnPacket() { }
 
-        public PrefabSpawnPacket(string prefabName, int prefabAmount, double ringRadius, double rotation)
+        public PrefabSpawnPacket(int prefabAmount, double ringRadius, Vector3D rotation)
         {
-            this.prefabName = prefabName;
-            this.prefabAmount = prefabAmount;
-            this.ringRadius = ringRadius;
-            this.rotation = rotation;
+            PrefabAmount = prefabAmount;
+            RingRadius = ringRadius;
+            Rotation = rotation;
         }
     }
 
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
-    public class spawncolorprefab : MySessionComponentBase
+    public class SpawnColorPrefab : MySessionComponentBase
     {
-        private Dictionary<string, string> prefabMap = new Dictionary<string, string>
+        private readonly Dictionary<string, string> prefabMap = new Dictionary<string, string>
         {
-            { "EntityCover4BLU", "#EntityCover4BLU" },
-            { "EntityCover4RED", "#EntityCover4RED" },
+            ["EntityCover4BLU"] = "#EntityCover4BLU",
+            ["EntityCover4RED"] = "#EntityCover4RED"
         };
 
-        private int defaultSpawnCount = 50; // Default number of prefabs to spawn
-        private ushort netID = 29399;
+        private const int DefaultSpawnCount = 50;
+        private const double DefaultRingRadius = 5000;
+        private static readonly Vector3D DefaultRotation = Vector3D.Zero;
+        private const ushort NetId = 29399;
 
         public override void BeforeStart()
         {
             MyAPIGateway.Utilities.MessageEntered += OnMessageEntered;
-            MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(netID, NetworkHandler);
+            MyAPIGateway.Multiplayer.RegisterSecureMessageHandler(NetId, NetworkHandler);
         }
 
         private void NetworkHandler(ushort arg1, byte[] arg2, ulong arg3, bool arg4)
         {
             if (!MyAPIGateway.Session.IsServer) return;
 
-            Packet packet = MyAPIGateway.Utilities.SerializeFromBinary<Packet>(arg2);
-            if (packet == null) return;
-
-            PrefabSpawnPacket prefabPacket = packet as PrefabSpawnPacket;
-            if (prefabPacket == null) return;
-
-            SpawnRandomPrefabs(prefabPacket.prefabAmount, prefabPacket.ringRadius, prefabPacket.rotation);
+            var packet = MyAPIGateway.Utilities.SerializeFromBinary<Packet>(arg2);
+            var prefabPacket = packet as PrefabSpawnPacket;
+            if (prefabPacket != null)
+            {
+                SpawnRandomPrefabs(prefabPacket.PrefabAmount, prefabPacket.RingRadius, prefabPacket.Rotation);
+            }
         }
 
         private void OnMessageEntered(string messageText, ref bool sendToOthers)
         {
             if (!messageText.StartsWith("/spawncolorcover", StringComparison.OrdinalIgnoreCase)) return;
-            string[] parts = messageText.Split(' ');
+            var parts = messageText.Split(' ');
 
             if (parts.Length == 1)
             {
@@ -89,104 +86,102 @@ namespace Klime.spawncolorcodedprefab
 
             if (parts.Length >= 2)
             {
-                string prefabName = parts[1];
-
-                // Initialize spawnCount to the default value to ensure it has a valid value.
-                int spawnCount = defaultSpawnCount;
-                double ringRadius = 5000; // Default ring radius
-                double rotation = 0; // Default rotation
-
-                // Parse spawn count
-                if (parts.Length >= 3)
-                {
-                    // Try to parse the spawn count provided by the user.
-                    if (int.TryParse(parts[2], out spawnCount))
-                    {
-                        // If the user has entered a number less than 1, override it with 1 to ensure at least one prefab spawns.
-                        if (spawnCount < 1)
-                        {
-                            spawnCount = 1;
-                        }
-                    }
-                    else
-                    {
-                        // If the parsing fails, notify the user and fall back to the default value.
-                        MyAPIGateway.Utilities.ShowMessage("SpawnCover", "Invalid spawn count. Using default value of " + defaultSpawnCount);
-                        spawnCount = defaultSpawnCount;
-                    }
-                }
-
-                // Parse ring radius
-                if (parts.Length >= 4)
-                {
-                    double parsedRadius;
-                    if (double.TryParse(parts[3], out parsedRadius))
-                    {
-                        ringRadius = parsedRadius;
-                    }
-                }
-
-                // Parse rotation
-                if (parts.Length >= 5)
-                {
-                    double parsedRotation;
-                    if (double.TryParse(parts[4], out parsedRotation))
-                    {
-                        rotation = parsedRotation;
-                    }
-                }
-
-                // Create the packet with the user-specified or default values.
-                PrefabSpawnPacket prefabSpawnPacket = new PrefabSpawnPacket(prefabName, spawnCount, ringRadius, rotation);
-                byte[] data = MyAPIGateway.Utilities.SerializeToBinary(prefabSpawnPacket);
-                MyAPIGateway.Multiplayer.SendMessageTo(netID, data, MyAPIGateway.Multiplayer.ServerId);
-                // The message has been corrected to accurately reflect the user's request.
-                MyAPIGateway.Utilities.ShowMessage("SpawnCover", $"Requesting {spawnCount} prefabs of {prefabName} at radius {ringRadius} with rotation {rotation}");
+                HandleSpawnCommand(parts);
             }
 
             sendToOthers = false;
         }
 
+        private void HandleSpawnCommand(string[] parts)
+        {
+            var spawnCount = ParseIntParameter(parts, 1, DefaultSpawnCount, "spawn count");
+            var ringRadius = ParseDoubleParameter(parts, 2, DefaultRingRadius, "ring radius");
+            var rotX = ParseDoubleParameter(parts, 3, DefaultRotation.X, "rotation X");
+            var rotY = ParseDoubleParameter(parts, 4, DefaultRotation.Y, "rotation Y");
+            var rotZ = ParseDoubleParameter(parts, 5, DefaultRotation.Z, "rotation Z");
+
+            var rotation = new Vector3D(rotX, rotY, rotZ);
+
+            var prefabSpawnPacket = new PrefabSpawnPacket(spawnCount, ringRadius, rotation);
+            var data = MyAPIGateway.Utilities.SerializeToBinary(prefabSpawnPacket);
+            MyAPIGateway.Multiplayer.SendMessageTo(NetId, data, MyAPIGateway.Multiplayer.ServerId);
+            MyAPIGateway.Utilities.ShowMessage("SpawnCover", $"Requesting a ring of {spawnCount} color covers at radius {ringRadius} with rotation X: {rotX}, Y: {rotY}, Z: {rotZ}");
+        }
+
+        private int ParseIntParameter(string[] parts, int index, int defaultValue, string paramName)
+        {
+            int value;
+            if (parts.Length > index && int.TryParse(parts[index], out value) && value > 0)
+            {
+                return value;
+            }
+
+            MyAPIGateway.Utilities.ShowMessage("SpawnCover", $"Invalid {paramName}. Using default value of {defaultValue}.");
+            return defaultValue;
+        }
+
+        private double ParseDoubleParameter(string[] parts, int index, double defaultValue, string paramName)
+        {
+            double value;
+            if (parts.Length > index && double.TryParse(parts[index], out value))
+            {
+                return value;
+            }
+
+            MyAPIGateway.Utilities.ShowMessage("SpawnCover", $"Invalid {paramName}. Using default value of {defaultValue}.");
+            return defaultValue;
+        }
 
         private void ShowPrefabList()
         {
-            string prefabListMessage = "Available prefabs:";
-            foreach (string prefabName in prefabMap.Keys)
-            {
-                prefabListMessage += "\n" + prefabName;
-            }
-
-            prefabListMessage += "\n\nTo spawn a prefab, type '/spawncolorcover [prefabName] [amount] [ringRadius] [rotation]'. Default 250 prefabs.";
+            var prefabListMessage = "Color Cover Ring Generator:";
+            prefabListMessage += $"\n\nTo spawn a ring of color covers, type '/spawncolorcover [amount] [ringRadius] [rotationX] [rotationY] [rotationZ]'.";
+            prefabListMessage += "\nRed covers will spawn on +X, Blue covers on -X.";
+            prefabListMessage += $"\n[amount]: Number of covers (default {DefaultSpawnCount})";
+            prefabListMessage += $"\n[ringRadius]: Radius of the ring (default {DefaultRingRadius})";
+            prefabListMessage += $"\n[rotationX]: Rotation around X axis in radians (default {DefaultRotation.X})";
+            prefabListMessage += $"\n[rotationY]: Rotation around Y axis in radians (default {DefaultRotation.Y})";
+            prefabListMessage += $"\n[rotationZ]: Rotation around Z axis in radians (default {DefaultRotation.Z})";
             MyAPIGateway.Utilities.ShowMessage("SpawnCover", prefabListMessage);
         }
 
-        private void SpawnRandomPrefabs(int spawnCount, double ringRadius, double rotation)
+        private void SpawnRandomPrefabs(int spawnCount, double ringRadius, Vector3D rotation)
         {
-            for (int i = 0; i < spawnCount; i++)
-            {
-                double angle = (double)i / spawnCount * MathHelper.TwoPi + rotation;
-                Vector3D spawnPosition = new Vector3D(ringRadius * Math.Cos(angle), 0, ringRadius * Math.Sin(angle));
-                Vector3D origin = new Vector3D(0, 0, 0);
-                Vector3D direction = Vector3D.Normalize(origin - spawnPosition);
-                Vector3D up = Vector3D.Normalize(Vector3D.Cross(direction, Vector3D.Up));
+            var spawnedCount = 0;
 
-                string targetPrefab = spawnPosition.X > 0 ? "EntityCover4RED" : "EntityCover4BLU";
+            for (var i = 0; i < spawnCount; i++)
+            {
+                var angle = (double)i / spawnCount * MathHelper.TwoPi;
+                var basePosition = new Vector3D(ringRadius * Math.Cos(angle), 0, ringRadius * Math.Sin(angle));
+
+                basePosition = Vector3D.Transform(basePosition, Matrix.CreateRotationY((float)rotation.Y));
+                basePosition = Vector3D.Transform(basePosition, Matrix.CreateRotationX((float)rotation.X));
+                basePosition = Vector3D.Transform(basePosition, Matrix.CreateRotationZ((float)rotation.Z));
+
+                var spawnPosition = basePosition;
+                var direction = Vector3D.Normalize(-spawnPosition);
+                var up = Vector3D.Normalize(Vector3D.Cross(direction, Vector3D.Up));
+
+                var targetPrefab = spawnPosition.X > 0 ? "EntityCover4RED" : "EntityCover4BLU";
 
                 if (prefabMap.ContainsKey(targetPrefab))
                 {
                     MyVisualScriptLogicProvider.SpawnPrefab(prefabMap[targetPrefab], spawnPosition, direction, up);
+                    spawnedCount++;
                 }
                 else
                 {
                     MyVisualScriptLogicProvider.SendChatMessage($"Prefab {targetPrefab} not found", "SpawnCover");
                 }
             }
+
+            MyAPIGateway.Utilities.ShowMessage("SpawnCover", $"Successfully spawned {spawnedCount} color covers in a ring at radius {ringRadius} with rotation X: {rotation.X}, Y: {rotation.Y}, Z: {rotation.Z}.");
         }
 
         protected override void UnloadData()
         {
             MyAPIGateway.Utilities.MessageEntered -= OnMessageEntered;
-            MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(netID, NetworkHandler);
+            MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(NetId, NetworkHandler);
         }
     }
 }

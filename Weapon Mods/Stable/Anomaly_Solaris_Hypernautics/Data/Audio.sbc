@@ -27,8 +27,27 @@
       </Waves>
     </Sound>
 
+    <!-- Nanodart Artillery fires Sounds -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>DroidTankArtillery</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <Volume>0.55</Volume>
+      <Loopable>true</Loopable>
+      <PreventSynchronization>1</PreventSynchronization>
+      <MaxSounds>1</MaxSounds>
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Loop>Audio\DroidTankArtillerySFX.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
 
-VenatorLaserFiringSFX
+
     <!-- shield thing Sounds -->
     <Sound>
       <Id>
@@ -69,6 +88,31 @@ VenatorLaserFiringSFX
       </Waves>
     </Sound>
 
+
+<!-- Drone launch thing Sounds -->
+  <Sound>
+	    <Id>
+	      <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+	      <SubtypeId>DroneLaunch</SubtypeId>
+	    </Id>
+	    <Category>WEP_EXPL</Category>
+	    <MaxDistance>500</MaxDistance>
+	    <Volume>2.0</Volume>
+	    <PitchVariation>100</PitchVariation>
+	    <PreventSynchronization>10</PreventSynchronization>
+	    <SoundLimit>3</SoundLimit>
+	    <Waves>
+	      <Wave Type="D3">
+	        <Start>Audio\sfx\dronelaunchaudio.wav</Start>
+	      </Wave>
+	      <Wave Type="D3">
+	        <Start>Audio\sfx\dronelaunchaudio.wav</Start>
+	      </Wave>
+	      <Wave Type="D3">
+	        <Start>Audio\sfx\dronelaunchaudio.wav</Start>
+	      </Wave>
+	    </Waves>
+	  </Sound>
 
 
 

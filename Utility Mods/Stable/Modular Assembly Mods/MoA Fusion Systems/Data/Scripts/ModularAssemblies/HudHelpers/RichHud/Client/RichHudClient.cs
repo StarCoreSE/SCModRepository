@@ -30,10 +30,10 @@ namespace RichHudFramework.Client
         private bool regFail, registered, inQueue;
         private Action UnregisterAction;
 
-        private RichHudClient(string modName, Action InitCallback, Action ResetCallback) : base(false, true)
+        private RichHudClient(string modName, Action InitCallback, Action resetCallback) : base(false, true)
         {
             InitAction = InitCallback;
-            OnResetAction = ResetCallback;
+            OnResetAction = resetCallback;
 
             ExceptionHandler.ModName = modName;
 
@@ -52,12 +52,12 @@ namespace RichHudFramework.Client
         /// </summary>
         /// <param name="modName">Name of the mod as it appears in the settings menu and in diagnostics</param>
         /// <param name="InitCallback">Invoked upon successfully registering with the API.</param>
-        /// <param name="ResetCallback">Invoked on client reset.</param>
-        public static void Init(string modName, Action InitCallback, Action ResetCallback)
+        /// <param name="resetCallback">Invoked on client reset.</param>
+        public static void Init(string modName, Action InitCallback, Action resetCallback)
         {
             if (Instance == null)
             {
-                Instance = new RichHudClient(modName, InitCallback, ResetCallback);
+                Instance = new RichHudClient(modName, InitCallback, resetCallback);
                 Instance.RequestRegistration();
 
                 if (!Registered && !Instance.regFail) Instance.EnterQueue();

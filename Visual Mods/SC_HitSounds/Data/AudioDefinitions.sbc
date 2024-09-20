@@ -1,0 +1,102 @@
+﻿<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Sounds>
+		<!-- HitSounds -->
+		
+        <Sound>
+            <Id>
+                <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+                <SubtypeId>SC_HitSound_TF2</SubtypeId>
+            </Id>
+            <Category>HUD</Category>
+			<MaxDistance>2000</MaxDistance>
+			<Volume>0.3</Volume>
+            <Waves>
+                <Wave Type="D3">
+                    <Start>Audio\Hitsound.wav</Start>
+                </Wave>
+            </Waves>
+        </Sound>
+
+		<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>SC_HitSound_COD</SubtypeId>
+			</Id>
+			<Category>HUD</Category>
+			<MaxDistance>2000</MaxDistance>
+			<Volume>1</Volume>
+			<Waves>
+				<Wave Type="D3">
+					<Start>Audio\Hitsound_cod.wav</Start>
+				</Wave>
+			</Waves>
+		</Sound>
+		
+		
+		<!-- CritSounds -->
+		
+		<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>SC_CritSound_TF2</SubtypeId>
+			</Id>
+			<Category>HUD</Category>
+			<MaxDistance>2000</MaxDistance>
+			<Volume>0.3</Volume>
+			<Waves>
+				<Wave Type="D3">
+					<Start>Audio\Critsound.wav</Start>
+				</Wave>
+			</Waves>
+		</Sound>
+
+		
+		<!-- KillSounds -->
+		
+		<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>SC_KillSound_MW</SubtypeId>
+			</Id>
+			<Category>HUD</Category>
+			<MaxDistance>2000</MaxDistance>
+			<Volume>0.4</Volume>
+			<Waves>
+				<Wave Type="D3">
+					<Start>Audio\mechwarrior_retroarcade_warhorn.wav</Start>
+				</Wave>
+			</Waves>
+		</Sound>
+
+		<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>SC_KillSound_TF2</SubtypeId>
+			</Id>
+			<Category>HUD</Category>
+			<MaxDistance>2000</MaxDistance>
+			<Volume>0.3</Volume>
+			<Waves>
+				<Wave Type="D3">
+					<Start>Audio\Killsound.wav</Start>
+				</Wave>
+			</Waves>
+		</Sound>
+		
+		<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>SC_KillSound_Pipe</SubtypeId>
+			</Id>
+			<Category>HUD</Category>
+			<MaxDistance>2000</MaxDistance>
+			<Volume>0.5</Volume>
+			<Waves>
+				<Wave Type="D3">
+					<Start>Audio\Killsound_metalpipe.wav</Start>
+				</Wave>
+			</Waves>
+		</Sound>
+    </Sounds>
+</Definitions>

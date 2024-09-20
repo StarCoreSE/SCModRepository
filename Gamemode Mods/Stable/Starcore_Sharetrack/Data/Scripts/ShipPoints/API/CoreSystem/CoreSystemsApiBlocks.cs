@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Sandbox.ModAPI;
 
-namespace CoreSystems.Api
+namespace StarCore.ShareTrack.API.CoreSystem
 {
     /// <summary>
     ///     https://github.com/sstixrud/CoreSystems/blob/master/BaseData/Scripts/CoreSystems/Api/CoreSystemsApiBlocks.cs

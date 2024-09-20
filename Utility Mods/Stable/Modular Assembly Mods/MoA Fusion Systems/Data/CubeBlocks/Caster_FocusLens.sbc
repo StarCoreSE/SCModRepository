@@ -19,9 +19,9 @@
 			<Model>Models\Caster_FocusLens.mwm</Model>
 			<Components>
 				<Component Subtype="SteelPlate" Count="100" />
+				<Component Subtype="LargeTube" Count="40" />
 				<Component Subtype="Construction" Count="150" />
 				<Component Subtype="MetalGrid" Count="250" />
-				<Component Subtype="LargeTube" Count="40" />
 				<Component Subtype="Construction" Count="30" />
 				<Component Subtype="SteelPlate" Count="50" />
 			</Components>
@@ -34,8 +34,8 @@
 			<ForceMagnitude>100</ForceMagnitude>
 			<MaxPowerConsumption>0.200</MaxPowerConsumption>
 			<MinPowerConsumption>0.000002</MinPowerConsumption>
-			<FlameDamageLengthScale>0.61</FlameDamageLengthScale>
-			<FlameLengthScale>1.5</FlameLengthScale>
+			<FlameDamageLengthScale>1</FlameDamageLengthScale>
+			<FlameLengthScale>5</FlameLengthScale>
 			<SlowdownFactor>1</SlowdownFactor>
 			<FlameIdleColor>
 				<X>0.2745098</X>
@@ -50,11 +50,11 @@
 				<W>0.75</W>
 			</FlameFullColor>
 			<FlamePointMaterial>EngineThrustMiddle</FlamePointMaterial>
-			<FlameLengthMaterial>EngineThrustMiddle</FlameLengthMaterial>
+			<FlameLengthMaterial>FusionDriveThrustMiddle</FlameLengthMaterial>
 			<FlameFlare>LargeGridSmallThruster</FlameFlare>
-			<FlameVisibilityDistance>500</FlameVisibilityDistance>
-			<FlameGlareQuerySize>1</FlameGlareQuerySize>
-			<PrimarySound>LrgShipSmJet</PrimarySound>
+			<FlameVisibilityDistance>5000</FlameVisibilityDistance>
+			<FlameGlareQuerySize>0.1</FlameGlareQuerySize>
+			<PrimarySound>Fusion_Thruster_Sound</PrimarySound>
 		</Definition>
 	</CubeBlocks>
 </Definitions>

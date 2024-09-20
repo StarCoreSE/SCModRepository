@@ -39,13 +39,13 @@ namespace RichHudFramework
         private readonly Func<T> GetNewObjectFunc;
         private readonly Action<T> ResetObjectAction;
 
-        public PooledObjectPolicy(Func<T> GetNewObjectFunc, Action<T> ResetObjectAction)
+        public PooledObjectPolicy(Func<T> GetNewObjectFunc, Action<T> resetObjectAction)
         {
-            if (GetNewObjectFunc == null || ResetObjectAction == null)
+            if (GetNewObjectFunc == null || resetObjectAction == null)
                 throw new Exception("Neither GetNewObjectFunc nor ResetObjectAction can be null.");
 
             this.GetNewObjectFunc = GetNewObjectFunc;
-            this.ResetObjectAction = ResetObjectAction;
+            this.ResetObjectAction = resetObjectAction;
         }
 
         /// <summary>
@@ -107,13 +107,13 @@ namespace RichHudFramework
         /// <summary>
         ///     Creates a new ObjectPool with an generic object policy defined by the given delegates
         /// </summary>
-        public ObjectPool(Func<T> GetNewObjectFunc, Action<T> ResetObjectAction)
+        public ObjectPool(Func<T> GetNewObjectFunc, Action<T> resetObjectAction)
         {
-            if (GetNewObjectFunc == null || ResetObjectAction == null)
+            if (GetNewObjectFunc == null || resetObjectAction == null)
                 throw new Exception("Neither GetNewObjectFunc nor ResetObjectAction can be null.");
 
             pooledObjects = new List<T>();
-            objectPolicy = new PooledObjectPolicy<T>(GetNewObjectFunc, ResetObjectAction);
+            objectPolicy = new PooledObjectPolicy<T>(GetNewObjectFunc, resetObjectAction);
         }
 
         public int Count => pooledObjects.Count;

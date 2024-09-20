@@ -4,45 +4,50 @@ using Sandbox.ModAPI;
 using VRage.Game.Components;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
+using VRageMath;
 
-namespace FusionSystems.FusionParts.FusionThruster
+namespace StarCore.FusionSystems.FusionParts.FusionThruster
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Thrust), false, "Caster_FocusLens")]
     public class FusionThrusterLogic : FusionPart<IMyThrust>
     {
-        private float BufferThrustOutput;
+        private int _bufferBlockCount = 1;
+        private float _bufferThrustOutput;
 
 
         internal override string BlockSubtype => "Caster_FocusLens";
         internal override string ReadableName => "Thruster";
 
-        public override void UpdatePower(float PowerGeneration, float NewtonsPerFusionPower)
+        public override void UpdatePower(float powerGeneration, float newtonsPerFusionPower, int numberThrusters)
         {
-            BufferPowerGeneration = PowerGeneration;
+            BufferPowerGeneration = powerGeneration;
+            _bufferBlockCount = numberThrusters;
 
             var consumptionMultiplier =
                 OverrideEnabled.Value
                     ? OverridePowerUsageSync
                     : PowerUsageSync.Value; // This is ugly, let's make it better.
+            consumptionMultiplier /= numberThrusters;
 
             // Power generation consumed (per second)
-            var powerConsumption = PowerGeneration * 60 * consumptionMultiplier;
+            var powerConsumption = powerGeneration * 60 * consumptionMultiplier;
 
-            var efficiencyMultiplier = 1 / (0.669f + consumptionMultiplier);
+            var efficiencyMultiplier = 1 / (0.489f + consumptionMultiplier);
 
             // Power generated (per second)
-            var thrustOutput = efficiencyMultiplier * powerConsumption * NewtonsPerFusionPower;
-            BufferThrustOutput = thrustOutput;
+            var thrustOutput = efficiencyMultiplier * powerConsumption * newtonsPerFusionPower;
+            _bufferThrustOutput = thrustOutput;
             MaxPowerConsumption = powerConsumption / 60;
 
             InfoText.Clear();
             InfoText.AppendLine(
-                $"\nOutput: {Math.Round(thrustOutput, 1)}/{Math.Round(PowerGeneration * 60 * NewtonsPerFusionPower, 1)}");
-            InfoText.AppendLine($"Input: {Math.Round(powerConsumption, 1)}/{Math.Round(PowerGeneration * 60, 1)}");
+                $"\nOutput: {Math.Round(thrustOutput, 1)}/{Math.Round(powerGeneration * 60 * newtonsPerFusionPower, 1)}");
+            InfoText.AppendLine($"Input: {Math.Round(powerConsumption, 1)}/{Math.Round(powerGeneration * 60, 1)}");
             InfoText.AppendLine($"Efficiency: {Math.Round(efficiencyMultiplier * 100)}%");
 
             // Convert back into power per tick
-            SyncMultipliers.ThrusterOutput(Block, BufferThrustOutput);
+            if (!IsShutdown)
+                SyncMultipliers.ThrusterOutput(Block, _bufferThrustOutput);
         }
 
         public void SetPowerBoost(bool value)
@@ -51,7 +56,7 @@ namespace FusionSystems.FusionParts.FusionThruster
                 return;
 
             OverrideEnabled.Value = value;
-            UpdatePower(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
+            UpdatePower(BufferPowerGeneration, SFusionSystem.NewtonsPerFusionPower, _bufferBlockCount);
         }
 
         #region Base Methods
@@ -66,19 +71,19 @@ namespace FusionSystems.FusionParts.FusionThruster
             PowerUsageSync.ValueChanged += value =>
             {
                 if (!OverrideEnabled.Value)
-                    UpdatePower(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
+                    UpdatePower(BufferPowerGeneration, SFusionSystem.NewtonsPerFusionPower, _bufferBlockCount);
             };
 
             // Trigger power update is only needed when OverrideEnabled is true
             OverridePowerUsageSync.ValueChanged += value =>
             {
                 if (OverrideEnabled.Value)
-                    UpdatePower(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
+                    UpdatePower(BufferPowerGeneration, SFusionSystem.NewtonsPerFusionPower, _bufferBlockCount);
             };
 
             // Trigger power update if boostEnabled is changed
             OverrideEnabled.ValueChanged += value =>
-                UpdatePower(BufferPowerGeneration, S_FusionSystem.NewtonsPerFusionPower);
+                UpdatePower(BufferPowerGeneration, SFusionSystem.NewtonsPerFusionPower, _bufferBlockCount);
         }
 
         public override void UpdateAfterSimulation()
@@ -88,11 +93,12 @@ namespace FusionSystems.FusionParts.FusionThruster
 
             if (storagePct <= 0.05f)
             {
-                if (Block.ThrustMultiplier == 0)
+                if (Block.ThrustMultiplier <= 0.01)
                     return;
                 SyncMultipliers.ThrusterOutput(Block, 0);
                 PowerConsumption = 0;
                 LastShutdown = DateTime.Now.Ticks + 4 * TimeSpan.TicksPerSecond;
+                IsShutdown = true;
                 return;
             }
 
@@ -107,8 +113,9 @@ namespace FusionSystems.FusionParts.FusionThruster
             }
             else if (storagePct > 0.1f && DateTime.Now.Ticks > LastShutdown)
             {
-                SyncMultipliers.ThrusterOutput(Block, BufferThrustOutput);
+                SyncMultipliers.ThrusterOutput(Block, _bufferThrustOutput);
                 PowerConsumption = MaxPowerConsumption * (Block.CurrentThrustPercentage / 100f);
+                IsShutdown = false;
             }
         }
 
