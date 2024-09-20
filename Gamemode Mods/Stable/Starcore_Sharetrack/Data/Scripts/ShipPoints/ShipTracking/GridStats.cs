@@ -20,7 +20,7 @@ namespace StarCore.ShareTrack.ShipTracking
         private WcApi WcApi => AllGridsList.I.WcApi;
 
         public bool NeedsUpdate { get; private set; } = true;
-        public bool IsPrimaryGrid = false;
+        public bool IsPrimaryGrid = true;
 
         #region Public Methods
 
@@ -287,8 +287,8 @@ namespace StarCore.ShareTrack.ShipTracking
             if (WcApi.HasCoreWeapon((MyEntity)block))
             {
                 // Weapons on subgrids have an extra 20% cost applied
-                if (!IsPrimaryGrid)
-                    blockPoints = (int)(blockPoints * 1.2f);
+                //if (!IsPrimaryGrid)
+                //    blockPoints = (int)(blockPoints * 1.2f);
 
                 var validTargetTypes = new List<string>();
                 WcApi.GetTurretTargetTypes((MyEntity)block, validTargetTypes);

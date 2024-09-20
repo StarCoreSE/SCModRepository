@@ -57,7 +57,8 @@ namespace Jakaria
                          definition.Value.Name != "[SOL]" &&
                          definition.Value.Name != "[FAS]" &&
                          definition.Value.Name != "[EXO]" &&
-                         definition.Value.Name != "[BTI]")
+                         definition.Value.Name != "[BTI]" &&
+                         definition.Value.Name != "[CHP]")
                 {
                     // Disable modded block categories
                     definition.Value.Enabled = false;

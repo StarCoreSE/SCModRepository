@@ -20,11 +20,11 @@ namespace Scripts {
             {
                 MountPoints = new[] {
                     new MountPointDef {
-                        SubtypeId = "LasannonTurret", // Block Subtypeid. Your Cubeblocks contain this information
+                        SubtypeId = "AegisLascannonTurret", // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "", // For weapons with a spinning barrel such as Gatling Guns.
-                        MuzzlePartId = "LascannonTurretElevation", // The subpart where your muzzle empties are located. This is often the elevation subpart.
-                        AzimuthPartId = "LascannonTurretAzimuth", // Your Rotating Subpart, the bit that moves sideways
-                        ElevationPartId = "LascannonTurretElevation",// Your Elevating Subpart, that bit that moves up
+                        MuzzlePartId = "AegisLascannonTurretElevation", // The subpart where your muzzle empties are located. This is often the elevation subpart.
+                        AzimuthPartId = "AegisLascannonTurretAzimuth", // Your Rotating Subpart, the bit that moves sideways
+                        ElevationPartId = "AegisLascannonTurretElevation",// Your Elevating Subpart, that bit that moves up
                         DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
@@ -36,7 +36,7 @@ namespace Scripts {
 
 					
                 },
-                Ejector = "muzzle", // Optional; empty from which to eject "shells" if specified.
+                Ejector = "", // Optional; empty from which to eject "shells" if specified.
                 Scope = "muzzle", // Where line of sight checks are performed from. Must be clear of block collision.
             },
             Targeting = new TargetingDef
@@ -64,8 +64,8 @@ namespace Scripts {
             HardPoint = new HardPointDef
             {   
                 PartName = "Aegis Lascannon Turret", // Name of the weapon in terminal, should be unique for each weapon definition that shares a SubtypeId (i.e. multiweapons).
-                DeviateShotAngle = 0.1f, // Projectile inaccuracy in degrees.
-                AimingTolerance = 0.1f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
+                DeviateShotAngle = 0.25f, // Projectile inaccuracy in degrees.
+                AimingTolerance = 1f, // How many degrees off target a turret can fire at. 0 - 180 firing angle.
                 AimLeadingPrediction = Accurate, // Level of turret aim prediction; Off, Basic, Accurate, Advanced
                 DelayCeaseFire = 0, // Measured in game ticks (6 = 100ms, 60 = 1 second, etc..). Length of time the weapon continues firing after trigger is released.
                 AddToleranceToTracking = false, // Allows turret to track to the edge of the AimingTolerance cone instead of dead centre.
@@ -97,7 +97,7 @@ namespace Scripts {
                     MinElevation = -15,
                     MaxElevation = 105,
                     HomeAzimuth = 0, // Default resting rotation angle
-                    HomeElevation = 20, // Default resting elevation
+                    HomeElevation = 10, // Default resting elevation
                     InventorySize = 1f, // Inventory capacity in kL.
                     IdlePower = 0.02f, // Constant base power draw in MW.
                     FixedOffset = false, // Deprecated.
@@ -161,7 +161,7 @@ namespace Scripts {
                 {
                     Effect1 = new ParticleDef
                     {
-                        Name = "AegisFlakMuzzelFlash", // SubtypeId of muzzle particle effect.
+                        Name = "", // SubtypeId of muzzle particle effect.
                         Color = Color(red: 15, green: 2, blue: 1, alpha: 0.8f),  // Deprecated, set color in particle sbc.
                         Offset = Vector(x: 0, y: 0, z: -2), // Offsets the effect from the muzzle empty.
 

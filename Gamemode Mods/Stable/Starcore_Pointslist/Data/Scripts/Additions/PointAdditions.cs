@@ -715,6 +715,29 @@ namespace ShipPoints
             ["Null_Point_Jump_Disruptor_Large"] = 100000,
             ["Type17_BeamLance"] = 100000,
 
+            ["CHP_FlakTurret"] = 50,
+            ["CHP_KineticAutogunPDC"] = 75,
+            ["CHP_MediumKineticTurret"] = 150,
+            ["CHP_MediumMassDriverTurret"] = 150,
+            ["CHP_MediumMassDriverSingleTurret"] = 150,
+            ["CHP_IonTurret"] = 250,
+            ["CHP_MediumIonTurret"] = 150,
+            ["CHP_IonCannonFixed"] = 150,
+            ["CHP_ArbiterKineticBurstCannon"] = 200,
+            ["CHP_HeavyMassDriverTurret"] = 200,
+            ["CHP_HeavyIonTurret"] = 250,
+            ["CHP_DroneHangarRail"] = 250,
+            ["CHP_QuickLaunchDroneHangar"] = 300,
+            ["CHP_HeavyTorpedoLauncher"] = 200,
+            ["CHP_DroneHangarHiigara"] = 250,
+            ["CHP_DroneBomberHangarHiigara"] = 250,
+            ["CHP_DroneHangarHiigara_Rail"] = 250,
+            ["CHP_DroneBomberHangarHiigara_Rail"] = 250,
+            ["CHP_DroneHangarHiigara_Tall"] = 300,
+            ["CHP_DroneHangarHiigara_TallFlat"] = 300,
+            ["CHP_DroneBomberHangarHiigara_Tall"] = 300,
+            ["CHP_DroneBomberHangarHiigara_TallFlat"] = 300,
+
             #region Fusion Systems
             ["Caster_Accelerator_0"] = 10,
             ["Caster_Accelerator_90"] = 40,
@@ -856,7 +879,14 @@ namespace ShipPoints
                 case "[EXO] Taiidan Bomber Hangar Bay":
                 case "[EXO] Taiidan Bomber Hangar Bay Medium":
                 case "[EXO] Taiidan Fighter Small Bay":
-                    blockDisplayName = "[EXO] Taiidan Bay";
+                case "[CHP] Drone Hangar Interceptor (H)":
+                case "[CHP] Drone Launch Rail Interceptor (H)":
+                case "[CHP] Drone Hangar Bomber (H)":
+                case "[CHP] Drone Launch Rail Bomber (H)":
+                case "[CHP] Quick Launch Drone Hangar (H)":
+                case "[CHP] Quick Launch Drone Hangar Bomber (H)":
+                case "[CHP] Quick Launch Drone Hangar Bomber Flat (H)":
+                    blockDisplayName = "Hangar Bays";
                     costMultiplier = 0.25f;
                     break;
                 case "[40K] Gothic Torpedo Launcher":

@@ -1521,7 +1521,7 @@ namespace Scripts
                         Color = Color(red: 15f, green: 8f, blue: 0f, alpha: 0.10f),
                         FactionColor = Background, // Tracer uses faction color if it exists.
                         Back = true,
-                        CustomWidth = 2f,
+                        CustomWidth = 1f,
                         UseWidthVariance = true,
                         UseColorFade = true,
                     },
