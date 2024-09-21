@@ -30,7 +30,7 @@ namespace Starcore.ResistBlock
 
         private static bool m_controlsCreated = false;
 
-        public readonly Guid ResistSettingsGUID = new Guid("160803f9-9800-4515-9619-e5385d5208fb");
+        public readonly Guid ResistSettingsGUID = new Guid("169803f9-9800-4515-9619-e5385d5208fb");
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
