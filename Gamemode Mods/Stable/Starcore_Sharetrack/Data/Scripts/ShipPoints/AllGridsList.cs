@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Sandbox.ModAPI;
 using StarCore.ShareTrack.API;
@@ -92,6 +93,8 @@ namespace StarCore.ShareTrack
 
         private bool _awaitingTrackRequest = true;
         private Func<string, MyTuple<string, float>> _climbingCostFunction;
+
+        public string[] WeaponSubtytes = Array.Empty<string>();
 
         private void ParsePointsDict(object message)
         {
@@ -357,7 +360,15 @@ namespace StarCore.ShareTrack
             // Initialize the WC_api and load it if it's not null
 
             WcApi = new WcApi();
-            WcApi?.Load();
+            WcApi?.Load(() =>
+            {
+                List<string> subtypes = new List<string>();
+
+                foreach (var definition in WcApi.WeaponDefinitions)
+                    subtypes.AddRange(definition.Assignments.MountPoints.Select(m => m.SubtypeId));
+
+                WeaponSubtytes = subtypes.ToArray();
+            }, true);
 
             // Initialize the SH_api and load it if it's not null
             ShieldApi = new ShieldApi();
