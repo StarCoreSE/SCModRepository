@@ -386,7 +386,7 @@ namespace Starcore.FieldGenerator
 
             if (block.FatBlock != null && block.FatBlock.BlockDefinition.SubtypeId == "FieldGen_Capacity_Upgrade")
             {
-                if (IsNeighbour(block) && IsModuleValid(block))
+                if (IsNeighbour(block)/* && IsModuleValid(block)*/)
                 {
                     long entityId = block.FatBlock.EntityId;
 
