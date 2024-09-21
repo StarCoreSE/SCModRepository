@@ -65,7 +65,7 @@
         <DisplayName>[S.I] Generator Capacity Upgrade</DisplayName>
         <Icon>Textures\GUI\Icons\Cubes\Upgrade_Icon.dds</Icon>
         <Description>
-			Capacity Upgrade for the Geberator Core.
+			Capacity Upgrade for the Generator Core.
 			Each Upgrade adds 12.5% Additional Damage Reduction for a Maximum of 50%
 		</Description>
         <CubeSize>Large</CubeSize>

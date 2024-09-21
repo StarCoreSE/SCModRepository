@@ -15,6 +15,10 @@
 
         <!--BAR-->
         <string>SELtdLargeNanobotBuildAndRepairSystem</string>
+		  
+		<!-- S.I -->
+        <string>FieldGen_Core</string>
+        <string>FieldGen_Capacity_Upgrade</string>
 
         <!--INVALID-->
         <string>MA_Afterburner_Large_5x</string>
@@ -47,7 +51,6 @@
         <string>AQD_LG_GyroBooster</string>
         <string>AQD_LG_GyroUpgrade</string>
         <string>SC_Radome</string>
-        <string>SI_Field_Gen</string>
         <string>PM_LG_BLASTPLATE_BLASTPLATE</string>
         <string>WorklightSmall</string>
         <string>BlinkDriveLarge</string>
