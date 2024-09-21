@@ -204,6 +204,7 @@ namespace Starcore.FieldGenerator
         private MyResourceSinkComponent Sink = null;
 
         private IMyHudNotification notifSiege = null;
+        private IMyHudNotification notifPower = null;
 
         #region Overrides
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
@@ -234,7 +235,6 @@ namespace Starcore.FieldGenerator
             if (IsServer)
             {
                 Block.Model.GetDummies(_coreDummies);
-                // InitExistingUpgrades will be delayed, so don't call it directly here
 
                 Stability = 100;
                 MinFieldPower = 0;
@@ -330,17 +330,24 @@ namespace Starcore.FieldGenerator
         {
             base.UpdateAfterSimulation10();
 
-            if (!IsClientInShip())
-                return;
+            if (IsClientInShip() || IsClientNearShip())
+            {
+                if (SiegeMode)
+                {
+                    SetSiegeNotification($"<S.I> Siege Mode Active | {SiegeElapsedTime} / {Config.MaxSiegeTime}", 600);
+                }
+                else if (!SiegeMode && SiegeCooldownActive)
+                {
+                    SetSiegeNotification($"<S.I> Siege Mode On Cooldown | {SiegeCooldownTime}", 600, "Red");
+                }
 
-            if (SiegeMode)
-            {
-                SetSiegeNotification($"Siege Active | {SiegeElapsedTime} / {Config.MaxSiegeTime}", 3000);
+                if (!Block.IsWorking)
+                {
+                    SetPowerNotification($"<S.I> Generator Core is Offline! | Insufficient Power?", 600, "Red");
+                }
             }
-            else if (!SiegeMode && SiegeCooldownActive)
-            {
-                SetSiegeNotification($"Siege On Cooldown | {SiegeCooldownTime}", 3000, "Red");
-            }
+            else
+                return;            
         }
 
         public override void Close()
@@ -651,6 +658,26 @@ namespace Starcore.FieldGenerator
             return false;
         }
 
+        private bool IsClientNearShip()
+        {
+            if (Block != null)
+            {
+                var bound = new BoundingSphereD(Block.CubeGrid.GetPosition(), 65);
+                List<IMyEntity> nearEntities = MyAPIGateway.Entities.GetEntitiesInSphere(ref bound);
+
+                foreach (var entity in nearEntities)
+                
+                    if ( entity != null && entity?.EntityId == MyAPIGateway.Session?.Player?.Character?.EntityId)
+                    {
+                        return true;
+                    }
+                    else
+                        continue;
+            }                          
+
+            return false;
+        }
+
         private void SiegeBlockEnabler(List<IMySlimBlock> allTerminalBlocks, bool enabled)
         {
             foreach (var block in allTerminalBlocks)
@@ -687,6 +714,18 @@ namespace Starcore.FieldGenerator
             notifSiege.Text = text;
             notifSiege.AliveTime = aliveTime;
             notifSiege.Show();
+        }
+
+        public void SetPowerNotification(string text, int aliveTime = 300, string font = MyFontEnum.Green)
+        {
+            if (notifPower == null)
+                notifPower = MyAPIGateway.Utilities.CreateNotification("", aliveTime, font);
+
+            notifPower.Hide();
+            notifPower.Font = font;
+            notifPower.Text = text;
+            notifPower.AliveTime = aliveTime;
+            notifPower.Show();
         }
         #endregion
     }
