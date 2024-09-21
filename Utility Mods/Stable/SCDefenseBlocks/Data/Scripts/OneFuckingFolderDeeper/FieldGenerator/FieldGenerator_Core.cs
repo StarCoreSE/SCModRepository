@@ -262,7 +262,7 @@ namespace Starcore.FieldGenerator
         {
             base.UpdateAfterSimulation();
 
-            if (IsServer && !upgradesInitialized)
+            if (!upgradesInitialized)
             {
                 // Delay InitExistingUpgrades by 60 ticks (1 second)
                 if (initUpgradeDelayTicks > 0)
