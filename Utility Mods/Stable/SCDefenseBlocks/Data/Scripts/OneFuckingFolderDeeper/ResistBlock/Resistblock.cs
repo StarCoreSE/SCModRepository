@@ -45,11 +45,6 @@ namespace Starcore.ResistBlock
 
             coreBlockGrid = block.CubeGrid;
 
-            if (MyAPIGateway.Session != null)
-            {
-                MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(9, DamageHandler);
-            }
-
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
         }
@@ -88,8 +83,7 @@ namespace Starcore.ResistBlock
 
         private void StartResistance()
         {
-            // Apply grid-wide resistance based on the current slider value
-            // The resistance strength is now capped at 50%
+            // Apply grid-wide resistance based on the current slider value (capped at 50%)
             float resistanceStrength = Math.Min(Settings.ResistanceStrength, 0.5f);
             MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(block.CubeGrid.Name, 1f - resistanceStrength); // Adjusting resistance
         }
@@ -107,40 +101,6 @@ namespace Starcore.ResistBlock
             if (Settings.IsActive)
             {
                 ApplyResistance();
-            }
-        }
-
-        private void DamageHandler(object target, ref MyDamageInformation info)
-        {
-            try
-            {
-                if (block == null || block.CubeGrid == null)
-                {
-                    MyLog.Default.WriteLineAndConsole($"Block or CubeGrid is null in DamageHandler.");
-                    return;
-                }
-
-                var slimBlock = target as IMySlimBlock;
-                if (slimBlock == null || slimBlock.CubeGrid == null)
-                {
-                    MyLog.Default.WriteLineAndConsole($"SlimBlock or its CubeGrid is null in DamageHandler.");
-                    return;
-                }
-
-                if (slimBlock.CubeGrid != coreBlockGrid)
-                {
-                    MyLog.Default.WriteLineAndConsole($"Block does not belong to the correct grid.");
-                    return;
-                }
-
-                if (Settings != null && Settings.IsActive)
-                {
-                    ApplyResistance();
-                }
-            }
-            catch (Exception ex)
-            {
-                MyLog.Default.WriteLineAndConsole($"Exception in DamageHandler: {ex}");
             }
         }
 
@@ -295,11 +255,6 @@ namespace Starcore.ResistBlock
             if (IsActiveSync != null)
             {
                 IsActiveSync.ValueChanged -= IsActive_ValueChanged;
-            }
-
-            if (MyAPIGateway.Session != null)
-            {
-                MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0, null);
             }
 
             base.Close();
