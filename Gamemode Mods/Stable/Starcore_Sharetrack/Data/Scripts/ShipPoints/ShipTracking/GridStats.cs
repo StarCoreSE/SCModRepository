@@ -207,7 +207,7 @@ namespace StarCore.ShareTrack.ShipTracking
                         .ForceMagnitude * (block as IMyGyro).GyroStrengthMultiplier;
                 }
 
-                if (!(block is IMyConveyorSorter) || !WcApi.HasCoreWeapon((MyEntity)block))
+                if (!(block is IMyConveyorSorter) || AllGridsList.I.WeaponSubtytes.Contains(block.BlockDefinition.SubtypeId))
                 {
                     var blockDisplayName = block.DefinitionDisplayNameText;
                     if (blockDisplayName
