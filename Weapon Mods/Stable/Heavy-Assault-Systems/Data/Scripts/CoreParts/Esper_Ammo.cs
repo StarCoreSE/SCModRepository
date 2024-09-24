@@ -60,8 +60,8 @@ namespace Scripts
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
                 AmmoRound = "EsperShot", // AmmoRound field of the ammo to spawn.
-                Fragments = 27, // Number of projectiles to spawn.
-                Degrees = 2, // Cone in which to randomize direction of spawned projectiles.
+                Fragments = 10, // Number of projectiles to spawn.
+                Degrees = 1.5f, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = false, // fragments will not inherit velocity from parent.
                 Offset = -5f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards), value is read from parent ammo type.
@@ -130,10 +130,10 @@ namespace Scripts
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {
-                    Base = Kinetic, // Base Damage uses this
+                    Base = Energy, // Base Damage uses this
                     AreaEffect = Energy,
                     Detonation = Energy,
-                    Shield = Kinetic, // Damage against shields is currently all of one type per projectile. Shield Bypass Weapons, always Deal Energy regardless of this line
+                    Shield = Energy, // Damage against shields is currently all of one type per projectile. Shield Bypass Weapons, always Deal Energy regardless of this line
                 },
                 Custom = new CustomScalesDef
                 {
@@ -307,7 +307,7 @@ namespace Scripts
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
-                            Scale = 1,
+                            Scale = 5,
                         },
                     },
                     Hit = new ParticleDef
@@ -339,7 +339,7 @@ namespace Scripts
                     WidthVariance = Random(start: 0f, end: 0f), // adds random value to default width (negatives shrinks width)
                     Tracer = new TracerBaseDef
                     {
-                        Enable = true,
+                        Enable = false,
                         Length = 10f, //
                         Width = 1f, //
                         Color = Color(red: 1, green: 3, blue: 1f, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
@@ -368,7 +368,7 @@ namespace Scripts
                     },
                     Trail = new TrailDef
                     {
-                        Enable = true,
+                        Enable = false,
                         Textures = new[] {
                             "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
@@ -419,7 +419,7 @@ namespace Scripts
             AmmoRound = "EsperShot", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.25f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 7500, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 20500, // Direct damage; one steel plate is worth 100.
             Mass = 185f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
@@ -513,10 +513,10 @@ namespace Scripts
                 },
                 DamageType = new DamageTypes // Damage type of each element of the projectile's damage; Kinetic, Energy
                 {
-                    Base = Kinetic, // Base Damage uses this
+                    Base = Energy, // Base Damage uses this
                     AreaEffect = Kinetic,
                     Detonation = Kinetic,
-                    Shield = Kinetic, // Damage against shields is currently all of one type per projectile. Shield Bypass Weapons, always Deal Energy regardless of this line
+                    Shield = Energy, // Damage against shields is currently all of one type per projectile. Shield Bypass Weapons, always Deal Energy regardless of this line
                 },
                 Custom = new CustomScalesDef
                 {
@@ -686,11 +686,12 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "", //ShipWelderArc
+                        Name = "Dragons'_breath_pellet_07", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
-                            Scale = 1,
+                            Scale = 5,
+                            
                         },
                     },
                     Hit = new ParticleDef
@@ -711,7 +712,7 @@ namespace Scripts
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
-                            Scale = 1,
+                            Scale = 10,
                             HitPlayChance = 1f,
                         },
                     },
@@ -722,10 +723,10 @@ namespace Scripts
                     WidthVariance = Random(start: 0f, end: 0f), // adds random value to default width (negatives shrinks width)
                     Tracer = new TracerBaseDef
                     {
-                        Enable = true,
-                        Length = 5f, //
-                        Width = 1f, //
-                        Color = Color(red: 1, green: 3, blue: 1f, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Enable = false,
+                        Length = 0f, //
+                        Width = 0f, //
+                        Color = Color(red: 0, green: 0, blue: 0f, alpha: 0), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
@@ -751,7 +752,7 @@ namespace Scripts
                     },
                     Trail = new TrailDef
                     {
-                        Enable = true,
+                        Enable = false,
                         Textures = new[] {
                             "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
