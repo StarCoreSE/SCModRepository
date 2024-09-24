@@ -162,7 +162,7 @@
       <PreventSynchronization>1</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>2</Volume>
+      <Volume>0.2</Volume>
       <Loopable>false</Loopable>
       <PitchVariation>100</PitchVariation>
       <SoundLimit>500</SoundLimit>

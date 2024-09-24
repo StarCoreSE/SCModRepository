@@ -62,9 +62,12 @@
           <TypeId>Collector</TypeId>
           <SubtypeId>FieldGen_Capacity_Upgrade</SubtypeId>
         </Id>
-        <DisplayName>Structural Integrity Generator Upgrade</DisplayName>
-        <Icon>Textures\GUI\Icons\Cubes\collector.dds</Icon>
-        <Description>Description_Collector</Description>
+        <DisplayName>[S.I] Generator Capacity Upgrade</DisplayName>
+        <Icon>Textures\GUI\Icons\Cubes\Upgrade_Icon.dds</Icon>
+        <Description>
+			Capacity Upgrade for the Generator Core.
+			Each Upgrade adds 12.5% Additional Damage Reduction for a Maximum of 50%
+		</Description>
         <CubeSize>Large</CubeSize>
         <BlockTopology>TriangleMesh</BlockTopology>
         <Size x="1" y="1" z="2" />
@@ -117,22 +120,27 @@
           <TypeId>Collector</TypeId>
           <SubtypeId>FieldGen_Core</SubtypeId>
         </Id>
-        <DisplayName>Structural Integrity Generator Core</DisplayName>
-        <Icon>Textures\GUI\Icons\Cubes\collector.dds</Icon>
-        <Description>Description_Collector</Description>
+        <DisplayName>[S.I] Generator Core</DisplayName>
+        <Icon>Textures\GUI\Icons\Cubes\Core_Icon.dds</Icon>
+        <Description>
+			This Block Consumes 0-500 MW of Power, in exchange for a 0-50% Incoming Damage Reduction.
+			Capacity Upgrades are required for this Function.
+
+			This Block has an Additional 'Siege Mode' which provides a 90% Damage Reduction in exchange for 900MW of Power Draw, No Movement, and Disabled Weapons.
+		</Description>
         <CubeSize>Large</CubeSize>
         <BlockTopology>TriangleMesh</BlockTopology>
         <Size x="1" y="1" z="4" />
         <ModelOffset x="0" y="0" z="0" />
         <Model>Models\Cubes\Large\Field_Gen_Core.mwm</Model>
         <Components>
-          <Component Subtype="SteelPlate" Count="30" />
-          <Component Subtype="Construction" Count="50" />
-          <Component Subtype="SmallTube" Count="12" />
-          <Component Subtype="Motor" Count="8" />
-          <Component Subtype="Display" Count="4" />
-          <Component Subtype="Computer" Count="10" />
-          <Component Subtype="SteelPlate" Count="15" />
+            <Component Subtype="SteelPlate" Count="750" />
+            <Component Subtype="Construction" Count="250" />
+            <Component Subtype="SmallTube" Count="60" />
+            <Component Subtype="Motor" Count="40" />
+            <Component Subtype="Display" Count="20" />
+            <Component Subtype="Computer" Count="50" />
+            <Component Subtype="SteelPlate" Count="750" />
         </Components>
         <CriticalComponent Subtype="Computer" Index="0" />
         <BuildProgressModels>

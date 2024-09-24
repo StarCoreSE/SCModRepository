@@ -64,7 +64,8 @@ namespace StarCore.FusionSystems
                                 "Caster_CentralPipe_T",
                                 "Caster_Feeder",
                                 "Caster_Reactor",
-                                "Caster_Controller"
+                                "Caster_Controller",
+                                "Caster_FocusLens"
                             }
                         },
                         {
@@ -75,7 +76,8 @@ namespace StarCore.FusionSystems
                                 "Caster_CentralPipe_T",
                                 "Caster_Feeder",
                                 "Caster_Reactor",
-                                "Caster_Controller"
+                                "Caster_Controller",
+                                "Caster_FocusLens"
                             }
                         },
                         {
@@ -86,7 +88,8 @@ namespace StarCore.FusionSystems
                                 "Caster_CentralPipe_T",
                                 "Caster_Feeder",
                                 "Caster_Reactor",
-                                "Caster_Controller"
+                                "Caster_Controller",
+                                "Caster_FocusLens"
                             }
                         },
                         {
@@ -97,7 +100,8 @@ namespace StarCore.FusionSystems
                                 "Caster_CentralPipe_T",
                                 "Caster_Feeder",
                                 "Caster_Reactor",
-                                "Caster_Controller"
+                                "Caster_Controller",
+                                "Caster_FocusLens"
                             }
                         }
                     }
