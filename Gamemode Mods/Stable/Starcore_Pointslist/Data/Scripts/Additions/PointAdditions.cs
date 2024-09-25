@@ -315,7 +315,7 @@ namespace ShipPoints
             ["AQD_LG_GyroUpgrade"] = 10,
 
             ["K_SA_HeavyMetal_Gauss_ERFM"] = 400,
-            ["K_SA_HeavyMetal_Gauss_A"] = 300,
+            ["K_SA_HeavyMetal_Gauss_A"] = 350,
             ["K_SA_HeavyMetal_Gauss_PGBC"] = 900,
 
             ["MA_Derecho"] = 225,
@@ -417,7 +417,7 @@ namespace ShipPoints
             ["ModularMiddleLRM5"] = 40,
             ["ModularLRM5AngledReversed"] = 40,
             ["Starcore_Arrow_Block"] = 300,
-            ["Starcore_Arrow_Block_Single"] = 60,
+            ["Starcore_Arrow_Block_Single"] = 100,
 
 
             ["Cat_AristeasAMP"] = 16,
@@ -430,7 +430,7 @@ namespace ShipPoints
             ["Hexcannon"] = 500,
             ["HakkeroBeam"] = 400,
             ["HakkeroProjectile"] = 400,
-            ["HAS_Esper"] = 625,
+            ["HAS_Esper"] = 600,
             ["HAS_Cyclops"] = 350,
             ["HAS_Crossfield"] = 250,
             ["HAS_Avenger"] = 600,
@@ -546,7 +546,7 @@ namespace ShipPoints
             ["LargeProgrammableBlockReskin"] = 100,
             ["6SidePB"] = 100,
             ["SmallProgrammableBlock"] = 50,
-            ["LargeTurretControlBlock"] = 10,
+            ["LargeTurretControlBlock"] = 150,
             ["EventControllerLarge"] = 5,
             ["EventControllerSmall"] = 5,
             ["LargeFlightMovement"] = 5,
@@ -593,7 +593,7 @@ namespace ShipPoints
 
             ["Cat_BadModder"] = 22,
             ["APE_Strong"] = 200,
-            ["GoalieCasemate"] = 175,
+            ["GoalieCasemate"] = 200,
             ["Reaver_Coilgun"] = 115,
             ["Assault_Coil_Turret"] = 115,
             ["Priest_Block"] = 100,
@@ -904,7 +904,7 @@ namespace ShipPoints
                     break;
                 case "[MID] LK 'Bonfire' Guided Rocket Turret":
                     blockDisplayName = "[MID] Bonfire Turret";
-                    costMultiplier = 0.2f;
+                    costMultiplier = 0.15f;
                     break;
                 case "[FLAW] Warp Beacon - Longsword":
                     blockDisplayName = "[FLAW] Longsword Bomber";
@@ -922,14 +922,18 @@ namespace ShipPoints
                     blockDisplayName = "[FLAW] Kinetic Battery";
                     costMultiplier = 0.120f;
                     break;
-                case "[FLAW] Goalkeeper Casemate Flak Battery":
-                    blockDisplayName = "[FLAW] Goalkeeper Flakwall";
-                    costMultiplier = 0.119f;
+                case "[NHI] 'Heimdallr' Point-Defense Cannon":
+                case "[NHI] 'Heimdallr' Point-Defense Cannon Half Block":
+                case "[NHI] 'Heimdallr' Point-Defense Cannon 1x2 Slope Top":
+                case "[NHI] 'Heimdallr' Point-Defense Cannon 1x2 Slope Tip":
+                case "[NHI] 'Heimdallr' Point-Defense Cannon 45 Slope":
+                    blockDisplayName = "[NHI] 'Heimdallr' PDC";
+                    costMultiplier = 0f;
                     break;
                 case "Shield Controller":
                 case "Shield Controller Table":
                 case "Structural Integrity Field Generator":
-		case "Structural Integrity Generator Core":
+		        case "Structural Integrity Generator Core":
                     blockDisplayName = "Defensive Generator";
                     costMultiplier = 50.00f;
                     break;
