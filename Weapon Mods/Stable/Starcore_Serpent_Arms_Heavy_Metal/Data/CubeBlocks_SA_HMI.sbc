@@ -21,15 +21,15 @@ Ammunition: [5000m/s,] [Kinetic, 95% Shieldpen] </Description>
       <Model>Models\SerpentArms\SA_CSG_A_Large.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
       <Components>
-              <Component Subtype="Construction" Count="2000" />
-              <Component Subtype="GravityGenerator" Count="186" />              
+              <Component Subtype="Construction" Count="1000" />
+              <Component Subtype="GravityGenerator" Count="66" />              
               <Component Subtype="Computer" Count="666" />
-              <Component Subtype="SmallTube" Count="1200" />
+              <Component Subtype="SmallTube" Count="600" />
               <Component Subtype="Motor" Count="1070" />
-              <Component Subtype="LargeTube" Count="1200" />
-              <Component Subtype="MetalGrid" Count="660" />
-              <Component Subtype="Construction" Count="2000" />
-              <Component Subtype="SteelPlate" Count="3500" />
+              <Component Subtype="LargeTube" Count="600" />
+              <Component Subtype="MetalGrid" Count="330" />
+              <Component Subtype="Construction" Count="1000" />
+              <Component Subtype="SteelPlate" Count="2000" />
       </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
 
@@ -175,7 +175,7 @@ Ammunition: [Kinetic] </Description>
 		    <Component Subtype="Detector" Count="100" />
         <Component Subtype="Computer" Count="500" />
         <Component Subtype="MetalGrid" Count="500" />
-        <Component Subtype="SteelPlate" Count="2500" />
+        <Component Subtype="SteelPlate" Count="500" />
       </Components>
       <CriticalComponent Subtype="Computer" Index="0" />
       <MountPoints>
@@ -778,7 +778,7 @@ Ammunition: [Kinetic] </Description>
 		<Component Subtype="Detector" Count="45" />
 		<Component Subtype="Computer" Count="200" />
 		<Component Subtype="MetalGrid" Count="450" />
-		<Component Subtype="SteelPlate" Count="1150" />
+		<Component Subtype="SteelPlate" Count="550" />
 	</Components>
       <CriticalComponent Subtype="Computer" Index="0" />
       <MountPoints>
