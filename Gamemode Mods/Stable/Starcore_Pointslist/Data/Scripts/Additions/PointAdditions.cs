@@ -465,7 +465,7 @@ namespace ShipPoints
             ["NHI_Mk1_Cannon_Surface_Turret"] = 200,
             ["NHI_Fixed_Autocannon"] = 225,
             ["NHI_Fixed_Gatling_Laser"] = 225,
-            ["NHI_Kinetic_Cannon_Turret"] = 300,
+            ["NHI_Kinetic_Cannon_Turret"] = 325,
             ["Odin_Laser_Fixed"] = 350,
             ["Odin_Autocannon_Fixed"] = 350,
             ["Odin_PDC"] = 100,
