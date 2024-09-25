@@ -110,16 +110,16 @@ namespace Scripts {
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0.1f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
-                    ElevateRate = 0.1f, // Max traversal speed of elevation subpart in radians per tick.
-                    MinAzimuth = -180,
-                    MaxAzimuth = 180,
-                    MinElevation = -9,
-                    MaxElevation = 50,
+                    RotateRate = 0f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
+                    ElevateRate = 0f, // Max traversal speed of elevation subpart in radians per tick.
+                    MinAzimuth = 0,
+                    MaxAzimuth = 0,
+                    MinElevation = 0,
+                    MaxElevation = 0,
                     HomeAzimuth = 0, // Default resting rotation angle
-                    HomeElevation = 15, // Default resting elevation
+                    HomeElevation = 0, // Default resting elevation
                     InventorySize = 2f, // Inventory capacity in kL.
-                    IdlePower = 100f, // Constant base power draw in MW.
+                    IdlePower = 50f, // Constant base power draw in MW.
                     FixedOffset = false, // Deprecated.
                     Offset = Vector(x: 0, y: 0, z: 0), // Offsets the aiming/firing line of the weapon, in metres.
                     Type = BlockWeapon, // What type of weapon this is; BlockWeapon, HandWeapon, Phantom 
