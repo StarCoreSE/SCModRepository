@@ -189,7 +189,7 @@ namespace Scripts
                     ParticleScale = 0.5f,
                     CustomParticle = "Starcore_PPC_WarpField", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "ERPPCImpact", // SubtypeID from your Audio SBC, not a filename
-                    Shape = Round, // Round or Diamond shape.  Diamond is more performance friendly.
+                    Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
             },
             Trajectory = new TrajectoryDef
