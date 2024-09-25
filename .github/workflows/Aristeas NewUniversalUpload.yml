@@ -1,0 +1,13 @@
+name: Aristeas NewUniversalUpload
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  setup:
+    runs-on: self-hosted
+    steps:
+      - id: test
+        run: echo "Test Doc" > TestDoc.txt
