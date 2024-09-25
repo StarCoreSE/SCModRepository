@@ -151,7 +151,9 @@ namespace ShipPoints
             ["Nariman_Dart_Turret"] = 225,
             ["Counter_Battery"] = 250,
             ["SolHyp_ArcStrike_Torp"] = 275,
+            ["MagnaPulse_Gen"] = 400,
             ["SolHyp_Magnetic_Coilgun"] = 450,
+
 
 
             ["LargeHydrogenTank"] = 30,
