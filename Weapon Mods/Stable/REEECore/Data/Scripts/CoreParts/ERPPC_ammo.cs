@@ -171,7 +171,7 @@ namespace Scripts
                 EndOfLife = new EndOfLifeDef
                 {
                     Enable = true,
-                    Radius = 12f, // Radius of AOE effect, in meters.
+                    Radius = 9f, // Radius of AOE effect, in meters.
                     Damage = 40000f,
                     Depth = 4f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
@@ -189,7 +189,7 @@ namespace Scripts
                     ParticleScale = 0.5f,
                     CustomParticle = "Starcore_PPC_WarpField", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "ERPPCImpact", // SubtypeID from your Audio SBC, not a filename
-                    Shape = Round, // Round or Diamond shape.  Diamond is more performance friendly.
+                    Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
             },
             Trajectory = new TrajectoryDef
