@@ -13,11 +13,11 @@ namespace ShipPoints
     {
         readonly Dictionary<string, int> PointValues = new Dictionary<string, int>
         {
-            ["LargeBlockBatteryBlock"] = 14,
-            ["LargeBlockBatteryBlockWarfare2"] = 14,
-            ["SmallLargeBlockUpgrade"] = 20,
-            ["LargeBlockSmallGenerator"] = 17,
-            ["LargeBlockSmallGeneratorWarfare2"] = 17,
+            ["LargeBlockBatteryBlock"] = 15,
+            ["LargeBlockBatteryBlockWarfare2"] = 15,
+            ["SmallLargeBlockUpgrade"] = 15,
+            ["LargeBlockSmallGenerator"] = 18,
+            ["LargeBlockSmallGeneratorWarfare2"] = 18,
             ["LargeLargeBlockUpgrade"] = 100,
             ["LargeBlockLargeGenerator"] = 300,
             ["LargeBlockLargeGeneratorWarfare2"] = 300,
