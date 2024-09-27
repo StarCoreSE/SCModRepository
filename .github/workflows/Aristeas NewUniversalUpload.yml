@@ -9,6 +9,4 @@ jobs:
   setup:
     runs-on: self-hosted
     steps:
-      - id: test
-        run: echo "Test Doc" > TestDoc.txt
       - uses: actions/checkout@v4.1.4
