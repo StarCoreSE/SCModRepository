@@ -28,4 +28,4 @@ jobs:
       #    done
       - id: test_SEWT
         run: |
-          & "C:\actions-runner\externals\SC_NewUniversalUpload.exe" ${{ steps.changed-files.outputs.all_changed_files }}
+          & "C:\actions-runner\externals\SC_NewUniversalUpload.exe" "${{ steps.changed-files.outputs.all_changed_files }}" "desc:${{ github.event.head_commit.message }}"
