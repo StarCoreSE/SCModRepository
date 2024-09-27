@@ -13,4 +13,4 @@ jobs:
       - id: test_SEWT
         run: |
           & cd "C:\Program Files (x86)\Steam\steamapps\common\SpaceEngineers\Bin64\"
-          & ./SEWorkshopTool push --mods "C:\actions-runner\_work\SCModRepository\SCModRepository\Weapon Mods\Stable"
+          & ./SEWorkshopTool
