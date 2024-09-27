@@ -12,5 +12,4 @@ jobs:
       - uses: actions/checkout@v4.1.4
       - id: test_SEWT
         run: |
-          & cd "C:\Program Files (x86)\Steam\steamapps\common\SpaceEngineers\Bin64\"
-          & ./SEWorkshopTool
+          & "C:\actions-runner\_work\SCModRepository\SCModRepository\Weapon Mods\Stable\testupload.ps1"
