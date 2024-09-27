@@ -11,3 +11,5 @@ jobs:
     steps:
       - id: test
         run: echo "Test Doc" > TestDoc.txt
+      - id: retrieve git files
+      - uses: actions/checkout@v4.1.4
