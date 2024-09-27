@@ -11,4 +11,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.4
       - id: test_SEWT
-        run: "C:\Program Files (x86)\Steam\steamapps\common\SpaceEngineers\Bin64\SEWorkshopTool.exe" push --mods "C:\actions-runner\_work\SCModRepository\SCModRepository\Weapon Mods\Stable"
+        run: |
+          & "C:\Program Files (x86)\Steam\steamapps\common\SpaceEngineers\Bin64\SEWorkshopTool.exe" push --mods "C:\actions-runner\_work\SCModRepository\SCModRepository\Weapon Mods\Stable"
