@@ -419,7 +419,7 @@ namespace ShipPoints
             ["ModularMiddleLRM5"] = 40,
             ["ModularLRM5AngledReversed"] = 40,
             ["Starcore_Arrow_Block"] = 300,
-            ["Starcore_Arrow_Block_Single"] = 100,
+            ["Starcore_Arrow_Block_Single"] = 200,
 
 
             ["Cat_AristeasAMP"] = 16,
@@ -830,7 +830,7 @@ namespace ShipPoints
                 case "[BTI] Starcore Arrow-IV Launcher":
                 case "[BTI] Starcore Arrow-IV Single Launcher":
                     blockDisplayName = "[BTI] Starcore Arrow-IV Launcher";
-                    costMultiplier = 0.15f;
+                    costMultiplier = 0.25f;
                     break;
                 case "[HAS] Tartarus VIII":
                     blockDisplayName = "[HAS] Tartarus VIII";
