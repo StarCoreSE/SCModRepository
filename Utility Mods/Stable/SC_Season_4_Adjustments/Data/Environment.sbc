@@ -6,7 +6,7 @@
       <TypeId>EnvironmentDefinition</TypeId>
       <SubtypeId>Default</SubtypeId>
     </Id>
-    <LargeShipMaxAngularSpeed>90</LargeShipMaxAngularSpeed>
+    <LargeShipMaxAngularSpeed>180</LargeShipMaxAngularSpeed>
 
 	<PlanetProperties>
         <AtmosphereIntensityMultiplier>17</AtmosphereIntensityMultiplier>
