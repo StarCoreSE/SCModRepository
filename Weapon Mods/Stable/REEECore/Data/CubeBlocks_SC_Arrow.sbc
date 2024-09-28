@@ -38,7 +38,7 @@
       <MirroringY>Z</MirroringY>
      <MirroringZ>Y</MirroringZ>
 	   <EdgeType>Light</EdgeType>
-      <BuildTimeSeconds>65</BuildTimeSeconds>
+      <BuildTimeSeconds>90</BuildTimeSeconds>
       <DisassembleRatio>5</DisassembleRatio>
       <NavigationDefinition>Default</NavigationDefinition>
 	   <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
@@ -73,7 +73,7 @@
        [500m minimum range]
        [Energy damage]
        [400~ m/s]
-       [Does not reload]
+       [Does reload]
        Fires decoys when near the target to confuse point defense.
      </Description>
      <Icon>Textures\Icons\arrowiv.dds</Icon>
@@ -84,21 +84,21 @@
      <ModelOffset x="0" y="0" z="0" />
      <Model>Models\Starcore\Arrow_IV_Single.mwm</Model>
      <Components>
-       <Component Subtype="SteelPlate" Count="75" />
+       <Component Subtype="SteelPlate" Count="400" />
        <Component Subtype="Construction" Count="25" />
        <Component Subtype="MetalGrid" Count="10" />
        <Component Subtype="LargeTube" Count="8" />
        <Component Subtype="Motor" Count="50" />
        <Component Subtype="Computer" Count="20" />
        <Component Subtype="Construction" Count="20" />
-       <Component Subtype="SteelPlate" Count="80" />
+       <Component Subtype="SteelPlate" Count="400" />
      </Components>
      <CriticalComponent Subtype="LargeTube" Index="0" />
      <BlockPairName>Starcore_Arrow_Block_Single</BlockPairName>
      <MirroringY>Z</MirroringY>
      <MirroringZ>Y</MirroringZ>
      <EdgeType>Light</EdgeType>
-     <BuildTimeSeconds>65</BuildTimeSeconds>
+     <BuildTimeSeconds>60</BuildTimeSeconds>
      <DisassembleRatio>5</DisassembleRatio>
      <NavigationDefinition>Default</NavigationDefinition>
      <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />

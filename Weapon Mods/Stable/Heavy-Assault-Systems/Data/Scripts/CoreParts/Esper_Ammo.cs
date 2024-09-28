@@ -36,7 +36,7 @@ namespace Scripts
             AmmoRound = "EsperShell", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.20f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 7500, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 75000, // Direct damage; one steel plate is worth 100.
             Mass = 5000f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 300000f, // Recoil. This is applied to the Parent Grid.
@@ -63,7 +63,7 @@ namespace Scripts
                 Fragments = 10, // Number of projectiles to spawn.
                 Degrees = 1.5f, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
-                DropVelocity = false, // fragments will not inherit velocity from parent.
+                DropVelocity = true, // fragments will not inherit velocity from parent.
                 Offset = -5f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards), value is read from parent ammo type.
                 Radial = 0f, // Determines starting angle for Degrees of spread above.  IE, 0 degrees and 90 radial goes perpendicular to travel path
                 MaxChildren = 0, // number of maximum branches for fragments from the roots point of view, 0 is unlimited
@@ -296,7 +296,7 @@ namespace Scripts
             },
             AmmoGraphics = new GraphicDef
             {
-                ModelName = "\\Models\\AssaultPack\\Ammo\\1500mmShell.mwm", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
+                ModelName = "", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = true,
                 Particles = new AmmoParticleDef
@@ -446,7 +446,7 @@ namespace Scripts
                 Fragments = 100, // Number of projectiles to spawn.
                 Degrees = 15, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
-                DropVelocity = false, // fragments will not inherit velocity from parent.
+                DropVelocity = true, // fragments will not inherit velocity from parent.
                 Offset = 0f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards), value is read from parent ammo type.
                 Radial = 0f, // Determines starting angle for Degrees of spread above.  IE, 0 degrees and 90 radial goes perpendicular to travel path
                 MaxChildren = 0, // number of maximum branches for fragments from the roots point of view, 0 is unlimited
@@ -556,9 +556,9 @@ namespace Scripts
                 },
                 EndOfLife = new EndOfLifeDef
                 {
-                    Enable = false,
-                    Radius = 3f, // Radius of AOE effect, in meters.
-                    Damage = 500f,
+                    Enable = true,
+                    Radius = 1f, // Radius of AOE effect, in meters.
+                    Damage = 5f,
                     Depth = 1f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
@@ -568,13 +568,13 @@ namespace Scripts
                     //.Squeeze does little damage to the middle, but rapidly increases damage toward max radius
                     //.Pooled damage behaves in a pooled manner that once exhausted damage ceases.
                     //.Exponential drops off exponentially.  Does not scale to max radius
-                    ArmOnlyOnHit = false, // Detonation only is available, After it hits something, when this is true. IE, if shot down, it won't explode.
+                    ArmOnlyOnHit = true, // Detonation only is available, After it hits something, when this is true. IE, if shot down, it won't explode.
                     MinArmingTime = 0, // In ticks, before the Ammo is allowed to explode, detonate or similar; This affects shrapnel spawning.
                     NoVisuals = false,
                     NoSound = false,
-                    ParticleScale = 1,
-                    CustomParticle = "K_SA_Explosion_I", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "soundName", // SubtypeID from your Audio SBC, not a filename
+                    ParticleScale = .5f,
+                    CustomParticle = "Dragons_breath_pellet_impact2", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "HAS_Tigtone_Hit", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
             },
@@ -679,14 +679,14 @@ namespace Scripts
             },
             AmmoGraphics = new GraphicDef
             {
-                ModelName = "\\Models\\AssaultPack\\Ammo\\1500mmShell.mwm", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
+                ModelName = "", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = true,
                 Particles = new AmmoParticleDef
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "Dragons'_breath_pellet_07", //ShipWelderArc
+                        Name = "Dragons'_breath_pellet_13", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -696,13 +696,12 @@ namespace Scripts
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "",
+                        Name = "Dragons_breath_pellet_impact1",
                         ApplyToShield = true,
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
                             Scale = 1,
-                            HitPlayChance = 1f,
                         },
                     },
                     Eject = new ParticleDef
@@ -774,7 +773,7 @@ namespace Scripts
             },
             AmmoAudio = new AmmoAudioDef
             {
-                TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
+                TravelSound = "HAS_Tigtone_Travel", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
                 HitSound = "HAS_ThanatosFireFar",
                 ShieldHitSound = "",
                 PlayerHitSound = "",
