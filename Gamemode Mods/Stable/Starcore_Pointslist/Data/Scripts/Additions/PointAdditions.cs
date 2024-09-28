@@ -317,7 +317,7 @@ namespace ShipPoints
             ["AQD_LG_GyroUpgrade"] = 10,
 
             ["K_SA_HeavyMetal_Gauss_ERFM"] = 400,
-            ["K_SA_HeavyMetal_Gauss_A"] = 350,
+            ["K_SA_HeavyMetal_Gauss_A"] = 300,
             ["K_SA_HeavyMetal_Gauss_PGBC"] = 900,
 
             ["MA_Derecho"] = 225,
@@ -419,7 +419,7 @@ namespace ShipPoints
             ["ModularMiddleLRM5"] = 40,
             ["ModularLRM5AngledReversed"] = 40,
             ["Starcore_Arrow_Block"] = 300,
-            ["Starcore_Arrow_Block_Single"] = 100,
+            ["Starcore_Arrow_Block_Single"] = 60,
 
 
             ["Cat_AristeasAMP"] = 16,
@@ -432,7 +432,7 @@ namespace ShipPoints
             ["Hexcannon"] = 500,
             ["HakkeroBeam"] = 400,
             ["HakkeroProjectile"] = 400,
-            ["HAS_Esper"] = 600,
+            ["HAS_Esper"] = 625,
             ["HAS_Cyclops"] = 350,
             ["HAS_Crossfield"] = 250,
             ["HAS_Avenger"] = 600,
@@ -467,7 +467,7 @@ namespace ShipPoints
             ["NHI_Mk1_Cannon_Surface_Turret"] = 200,
             ["NHI_Fixed_Autocannon"] = 225,
             ["NHI_Fixed_Gatling_Laser"] = 225,
-            ["NHI_Kinetic_Cannon_Turret"] = 325,
+            ["NHI_Kinetic_Cannon_Turret"] = 300,
             ["Odin_Laser_Fixed"] = 350,
             ["Odin_Autocannon_Fixed"] = 350,
             ["Odin_PDC"] = 100,
@@ -548,7 +548,7 @@ namespace ShipPoints
             ["LargeProgrammableBlockReskin"] = 100,
             ["6SidePB"] = 100,
             ["SmallProgrammableBlock"] = 50,
-            ["LargeTurretControlBlock"] = 150,
+            ["LargeTurretControlBlock"] = 10,
             ["EventControllerLarge"] = 5,
             ["EventControllerSmall"] = 5,
             ["LargeFlightMovement"] = 5,
@@ -595,7 +595,7 @@ namespace ShipPoints
 
             ["Cat_BadModder"] = 22,
             ["APE_Strong"] = 200,
-            ["GoalieCasemate"] = 200,
+            ["GoalieCasemate"] = 175,
             ["Reaver_Coilgun"] = 115,
             ["Assault_Coil_Turret"] = 115,
             ["Priest_Block"] = 100,
@@ -906,7 +906,7 @@ namespace ShipPoints
                     break;
                 case "[MID] LK 'Bonfire' Guided Rocket Turret":
                     blockDisplayName = "[MID] Bonfire Turret";
-                    costMultiplier = 0.15f;
+                    costMultiplier = 0.2f;
                     break;
                 case "[FLAW] Warp Beacon - Longsword":
                     blockDisplayName = "[FLAW] Longsword Bomber";
@@ -924,18 +924,14 @@ namespace ShipPoints
                     blockDisplayName = "[FLAW] Kinetic Battery";
                     costMultiplier = 0.120f;
                     break;
-                case "[NHI] 'Heimdallr' Point-Defense Cannon":
-                case "[NHI] 'Heimdallr' Point-Defense Cannon Half Block":
-                case "[NHI] 'Heimdallr' Point-Defense Cannon 1x2 Slope Top":
-                case "[NHI] 'Heimdallr' Point-Defense Cannon 1x2 Slope Tip":
-                case "[NHI] 'Heimdallr' Point-Defense Cannon 45 Slope":
-                    blockDisplayName = "[NHI] 'Heimdallr' PDC";
-                    costMultiplier = 0f;
+                case "[FLAW] Goalkeeper Casemate Flak Battery":
+                    blockDisplayName = "[FLAW] Goalkeeper Flakwall";
+                    costMultiplier = 0.119f;
                     break;
                 case "Shield Controller":
                 case "Shield Controller Table":
                 case "Structural Integrity Field Generator":
-		        case "Structural Integrity Generator Core":
+		case "Structural Integrity Generator Core":
                     blockDisplayName = "Defensive Generator";
                     costMultiplier = 50.00f;
                     break;
