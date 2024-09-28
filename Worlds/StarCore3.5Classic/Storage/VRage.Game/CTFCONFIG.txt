@@ -1,0 +1,49 @@
+[Flag Position Faction 1]
+GPS=GPS:REDFLAG:6500:0:0:#FF75C9F1:
+
+[Flag Position Faction 2]
+GPS=GPS:BLUFLAG:-6500:0:0:#FF75C9F1:
+
+[Faction 1 Tag]
+string=RED
+
+[Faction 2 Tag]
+string=BLU
+
+[Faction 1 Color]
+string=255,0,0,255
+
+[Faction 2 Color]
+string=0,0,255,255
+
+[Use Game Radius]
+bool=false
+
+[Game Center]
+GPS=GPSHERE
+
+[Game Radius]
+double=10000
+
+[Max Caps]
+int=3
+
+[Pickup in Cockpit]
+bool=true
+
+[Drop in Cockpit]
+bool=true
+
+[Drop Type]
+Instant/Ground/Floating=Floating
+
+[Drop Reset Time]
+int=3600
+
+[Single Flag]
+bool=false
+
+[Single Flag Data]
+string=ReplaceThis
+
+;DELETE THE _blank part of the filename to make it a valid config

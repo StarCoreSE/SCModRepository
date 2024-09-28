@@ -1,0 +1,23 @@
+name: see offline and set it to public
+
+on:
+  workflow_run:
+    workflows: ["validate maxplayers after the workflow finishes holy fuck why"]
+    types:
+      - completed
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "<OnlineMode>OFFLINE</OnlineMode>"
+          replace: "<OnlineMode>PUBLIC</OnlineMode>"
+          include: "**.sbc"
+          regex: true
+      - name: Push changes
+        uses: stefanzweifel/git-auto-commit-action@v4        

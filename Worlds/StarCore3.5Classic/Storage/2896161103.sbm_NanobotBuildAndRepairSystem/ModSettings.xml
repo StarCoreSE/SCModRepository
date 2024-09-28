@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-16"?>
+<SyncModSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Version>6</Version>
+  <DisableLocalization>false</DisableLocalization>
+  <LogLevel>Error</LogLevel>
+  <Range>150</Range>
+  <SourcesAndTargetsUpdateIntervalTicks>100000000</SourcesAndTargetsUpdateIntervalTicks>
+  <FriendlyDamageTimeoutTicks>600000000</FriendlyDamageTimeoutTicks>
+  <FriendlyDamageCleanupTicks>100000000</FriendlyDamageCleanupTicks>
+  <MaximumRequiredElectricPowerTransport>0.01</MaximumRequiredElectricPowerTransport>
+  <MaximumRequiredElectricPowerStandby>2E-05</MaximumRequiredElectricPowerStandby>
+  <Welder>
+    <MaximumRequiredElectricPowerWelding>0.002</MaximumRequiredElectricPowerWelding>
+    <MaximumRequiredElectricPowerGrinding>0.0015</MaximumRequiredElectricPowerGrinding>
+    <WeldingMultiplier>6</WeldingMultiplier>
+    <GrindingMultiplier>1</GrindingMultiplier>
+    <AllowedSearchModes>Grids</AllowedSearchModes>
+    <SearchModeDefault>Grids</SearchModeDefault>
+    <AllowBuildFixed>false</AllowBuildFixed>
+    <AllowBuildDefault>true</AllowBuildDefault>
+    <AllowedWorkModes>WeldOnly</AllowedWorkModes>
+    <WorkModeDefault>WeldOnly</WorkModeDefault>
+    <UseIgnoreColorFixed>false</UseIgnoreColorFixed>
+    <UseIgnoreColorDefault>false</UseIgnoreColorDefault>
+    <IgnoreColorDefault>
+      <float>321</float>
+      <float>100</float>
+      <float>51</float>
+    </IgnoreColorDefault>
+    <UseGrindColorFixed>true</UseGrindColorFixed>
+    <UseGrindColorDefault>false</UseGrindColorDefault>
+    <GrindColorDefault>
+      <float>321</float>
+      <float>100</float>
+      <float>50</float>
+    </GrindColorDefault>
+    <UseGrindJanitorFixed>true</UseGrindJanitorFixed>
+    <UseGrindJanitorDefault></UseGrindJanitorDefault>
+    <GrindJanitorOptionsDefault />
+    <AllowedGrindJanitorRelations></AllowedGrindJanitorRelations>
+    <ShowAreaFixed>true</ShowAreaFixed>
+    <AreaSizeFixed>false</AreaSizeFixed>
+    <AreaOffsetFixed>false</AreaOffsetFixed>
+    <PriorityFixed>false</PriorityFixed>
+    <CollectPriorityFixed>false</CollectPriorityFixed>
+    <PushIngotOreImmediatelyFixed>true</PushIngotOreImmediatelyFixed>
+    <PushIngotOreImmediatelyDefault>false</PushIngotOreImmediatelyDefault>
+    <PushComponentImmediatelyFixed>true</PushComponentImmediatelyFixed>
+    <PushComponentImmediatelyDefault>false</PushComponentImmediatelyDefault>
+    <PushItemsImmediatelyFixed>true</PushItemsImmediatelyFixed>
+    <PushItemsImmediatelyDefault>false</PushItemsImmediatelyDefault>
+    <CollectIfIdleFixed>true</CollectIfIdleFixed>
+    <CollectIfIdleDefault>false</CollectIfIdleDefault>
+    <SoundVolumeFixed>false</SoundVolumeFixed>
+    <SoundVolumeDefault>0.5</SoundVolumeDefault>
+    <ScriptControllFixed>false</ScriptControllFixed>
+    <AllowedEffects>WeldingSoundEffect GrindingVisualEffect GrindingSoundEffect TransportVisualEffect</AllowedEffects>
+  </Welder>
+  <MaxBackgroundTasks>16</MaxBackgroundTasks>
+  <MaximumOffset>300</MaximumOffset>
+</SyncModSettings>
