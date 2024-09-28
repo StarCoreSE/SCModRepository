@@ -1,0 +1,18 @@
+name: validate syncrange
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "<SyncDistance>20000</SyncDistance>"
+          replace: "<SyncDistance>25000</SyncDistance>"
+          include: "**.sbc"
+          regex: true
+      - name: Push changes
+        uses: stefanzweifel/git-auto-commit-action@v4        
