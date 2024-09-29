@@ -4,9 +4,10 @@ on:
   push:
     branches:
       - main
+      - stable
 
 jobs:
-  setup:
+  UploadMods:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4.1.4
