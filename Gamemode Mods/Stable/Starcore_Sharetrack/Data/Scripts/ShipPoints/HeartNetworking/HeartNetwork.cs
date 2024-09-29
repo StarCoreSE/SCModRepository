@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sandbox.ModAPI;
 using VRage.Game.ModAPI;
+using VRage.Utils;
 
 namespace StarCore.ShareTrack.HeartNetworking
 {
@@ -58,25 +59,50 @@ namespace StarCore.ShareTrack.HeartNetworking
         {
             try
             {
+                if (serialized == null || serialized.Length == 0)
+                {
+                    Log.Info("Received empty or null packet.");
+                    return;
+                }
+
                 var packet = MyAPIGateway.Utilities.SerializeFromBinary<PacketBase>(serialized);
-                TypeNetworkLoad[packet.GetType()] += serialized.Length;
+                if (packet == null)
+                {
+                    Log.Info("Failed to deserialize packet.");
+                    return;
+                }
+
+                TypeNetworkLoad[packet.GetType()] = TypeNetworkLoad.GetValueOrDefault(packet.GetType(), 0) + serialized.Length;
                 HandlePacket(packet, senderSteamId);
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                try
+                {
+                    Log.Error(ex, "Error processing received packet");
+                }
+                catch
+                {
+                    MyLog.Default.WriteLine($"ShareTrack: Failed to log error. Error processing received packet: {ex}");
+                }
             }
         }
 
         private void HandlePacket(PacketBase packet, ulong senderSteamId)
         {
+            if (packet == null)
+            {
+                Log.Info("Attempted to handle null packet.");
+                return;
+            }
+
             try
             {
                 packet.Received(senderSteamId);
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error($"Error handling packet of type {packet.GetType().Name}: {ex}");
             }
         }
 

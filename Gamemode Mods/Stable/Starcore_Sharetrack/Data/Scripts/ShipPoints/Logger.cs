@@ -309,32 +309,43 @@ namespace StarCore.ShareTrack
         {
             _instance = null;
 
-            if (_handler != null && _handler.AutoClose) Unload();
+            try
+            {
+                if (_handler != null && _handler.AutoClose) Unload();
+            }
+            catch (Exception e)
+            {
+                MyLog.Default.WriteLine($"Error in {ModContext?.ModName} ({ModContext?.ModId}): {e.Message}\n{e.StackTrace}");
+            }
         }
 
         private void Unload()
         {
+            if (_unloaded)
+                return;
+
+            _unloaded = true;
             try
             {
-                if (_unloaded)
-                    return;
-
-                _unloaded = true;
                 _handler?.Close();
-                _handler = null;
             }
             catch (Exception e)
             {
-                MyLog.Default.WriteLine(
-                    $"Error in {ModContext.ModName} ({ModContext.ModId}): {e.Message}\n{e.StackTrace}");
-                throw new ModCrashedException(e, ModContext);
+                MyLog.Default.WriteLine($"Error closing Log handler: {e.Message}\n{e.StackTrace}");
+            }
+            finally
+            {
+                _handler = null;
             }
         }
 
         private static void EnsureHandlerCreated()
         {
             if (_unloaded)
-                throw new Exception("Digi.Log accessed after it was unloaded!");
+            {
+                MyLog.Default.WriteLine($"Warning: Attempt to access Log after it was unloaded. Message not logged.");
+                return;
+            }
 
             if (_handler == null)
                 _handler = new Handler();
@@ -435,11 +446,16 @@ namespace StarCore.ShareTrack
         ///     exception message, <see cref="PrintError" /> to use the predefined error message, or any other custom string.
         /// </param>
         /// <param name="printTimeMs">How long to show the HUD notification for, in miliseconds.</param>
-        public static void Error(Exception exception, string printText = PrintError,
-            int printTimeMs = DefaultTimeError)
+        public static void Error(Exception exception, string printText = PrintError, int printTimeMs = DefaultTimeError)
         {
+            if (_unloaded)
+            {
+                MyLog.Default.WriteLine($"Error after Log unloaded: {exception}");
+                return;
+            }
+
             EnsureHandlerCreated();
-            _handler.Error(exception.ToString(), printText, printTimeMs);
+            _handler?.Error(exception.ToString(), printText, printTimeMs);
         }
 
         /// <summary>
@@ -469,8 +485,14 @@ namespace StarCore.ShareTrack
         /// <param name="printTimeMs">How long to show the HUD notification for, in miliseconds.</param>
         public static void Info(string message, string printText = null, int printTimeMs = DefaultTimeInfo)
         {
+            if (_unloaded)
+            {
+                MyLog.Default.WriteLine($"Info after Log unloaded: {message}");
+                return;
+            }
+
             EnsureHandlerCreated();
-            _handler.Info(message, printText, printTimeMs);
+            _handler?.Info(message, printText, printTimeMs);
         }
 
         /// <summary>
