@@ -93,7 +93,30 @@ namespace SC.SUGMA.HeartNetworking
 
         public void SendToEveryone(PacketBase packet, byte[] serialized = null)
         {
-            RelayToClients(packet, MyAPIGateway.Session?.Player?.SteamUserId ?? 0, serialized);
+            if (packet == null)
+            {
+                Log.Info("Attempted to send null packet to everyone.");
+                return;
+            }
+
+            try
+            {
+                if (serialized == null)
+                {
+                    serialized = MyAPIGateway.Utilities.SerializeToBinary(packet);
+                    if (serialized == null)
+                    {
+                        Log.Info($"Failed to serialize packet of type {packet.GetType().Name}.");
+                        return;
+                    }
+                }
+
+                RelayToClients(packet, MyAPIGateway.Session?.Player?.SteamUserId ?? 0, serialized);
+            }
+            catch (Exception ex)
+            {
+                Log.Exception(ex, typeof(HeartNetwork), $"Error sending packet to everyone: {packet.GetType().Name}");
+            }
         }
 
         public void SendToServer(PacketBase packet, byte[] serialized = null)
