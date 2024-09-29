@@ -11,6 +11,19 @@ namespace ShipPoints
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     internal class PointAdditions : MySessionComponentBase
     {
+		/* Hey, modder!
+		 *
+		 * To assign a block points, add a new line to the below Dictionary in the following format:
+		 * ["subtypeid"] = numPoints,
+		 *
+		 * To assign a block a climbing cost, add to the ClimbingCostRename function towards the bottom of the file in the following format:
+		 * case "BlockDisplayName1":
+		 * case "BlockDisplayName2":
+		 *     blockDisplayName = "groupDisplayName";
+		 *     costMultiplier = costMultiplerPercent;
+		 * 	   break;
+		 */
+		
         readonly Dictionary<string, int> PointValues = new Dictionary<string, int>
         {
             ["LargeBlockBatteryBlock"] = 14,
