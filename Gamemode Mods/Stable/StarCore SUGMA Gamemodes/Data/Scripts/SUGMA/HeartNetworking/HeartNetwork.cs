@@ -57,46 +57,21 @@ namespace SC.SUGMA.HeartNetworking
 
         private void ReceivedPacket(ushort channelId, byte[] serialized, ulong senderSteamId, bool isSenderServer)
         {
-            if (serialized == null || serialized.Length == 0)
-            {
-                Log.Info("Received empty or null packet.");
-                return;
-            }
-
             try
             {
                 var packet = MyAPIGateway.Utilities.SerializeFromBinary<PacketBase>(serialized);
-                if (packet == null)
-                {
-                    Log.Info("Failed to deserialize packet.");
-                    return;
-                }
-
-                TypeNetworkLoad[packet.GetType()] = TypeNetworkLoad.GetValueOrDefault(packet.GetType(), 0) + serialized.Length;
+                TypeNetworkLoad[packet.GetType()] += serialized.Length;
                 HandlePacket(packet, senderSteamId);
             }
             catch (Exception ex)
             {
-                Log.Exception(ex, typeof(HeartNetwork), "Error processing received packet");
+                Log.Exception(ex, typeof(HeartNetwork));
             }
         }
 
         private void HandlePacket(PacketBase packet, ulong senderSteamId)
         {
-            if (packet == null)
-            {
-                Log.Info("Attempted to handle null packet.");
-                return;
-            }
-
-            try
-            {
-                packet.Received(senderSteamId);
-            }
-            catch (Exception ex)
-            {
-                Log.Exception(ex, packet.GetType(), $"Error handling packet of type {packet.GetType().Name}");
-            }
+            packet.Received(senderSteamId);
         }
 
 
