@@ -196,52 +196,52 @@ namespace StarCore.ShareTrack
         }
 
 
-        private void MainTrackerUpdate(Dictionary<string, List<string>> ts, Dictionary<string, double> m,
-            Dictionary<string, int> bp, Dictionary<string, int> mbp, Dictionary<string, int> pbp,
-            Dictionary<string, int> obp, Dictionary<string, int> mobp)
+        private void MainTrackerUpdate(Dictionary<string, List<string>> teamShipStrings, Dictionary<string, double> massDict,
+            Dictionary<string, int> battlepointsDict, Dictionary<string, int> miscBattlepointsDict, Dictionary<string, int> powerPointsDict,
+            Dictionary<string, int> offensiveBattlepointsDict, Dictionary<string, int> movementBattlepointsDict)
         {
             foreach (var shipTracker in TrackingManager.I.TrackedGrids.Values)
             {
-                var fn = shipTracker.FactionName.Length > 6 ? shipTracker.FactionName.Substring(0, 6) : shipTracker.FactionName;
-                var o = shipTracker.OwnerName;
-                var nd = shipTracker.IsFunctional;
+                var factionName = shipTracker.FactionTag.Length > 6 ? shipTracker.FactionTag.Substring(0, 6) : shipTracker.FactionTag;
+                var ownerName = shipTracker.OwnerName;
+                var isFunctional = shipTracker.IsFunctional;
 
-                if (!ts.ContainsKey(fn))
+                if (!teamShipStrings.ContainsKey(factionName))
                 {
-                    ts.Add(fn, new List<string>());
-                    m[fn] = 0;
-                    bp[fn] = 0;
-                    mbp[fn] = 0;
-                    pbp[fn] = 0;
-                    obp[fn] = 0;
-                    mobp[fn] = 0;
+                    teamShipStrings.Add(factionName, new List<string>());
+                    massDict[factionName] = 0;
+                    battlepointsDict[factionName] = 0;
+                    miscBattlepointsDict[factionName] = 0;
+                    powerPointsDict[factionName] = 0;
+                    offensiveBattlepointsDict[factionName] = 0;
+                    movementBattlepointsDict[factionName] = 0;
                 }
 
-                if (nd)
+                if (isFunctional)
                 {
-                    m[fn] += shipTracker.Mass;
-                    bp[fn] += shipTracker.BattlePoints;
+                    massDict[factionName] += shipTracker.Mass;
+                    battlepointsDict[factionName] += shipTracker.BattlePoints;
                 }
                 else
                 {
                     continue;
                 }
 
-                mbp[fn] += shipTracker.RemainingPoints;
-                pbp[fn] += shipTracker.PowerPoints;
-                obp[fn] += shipTracker.OffensivePoints;
-                mobp[fn] += shipTracker.MovementPoints;
+                miscBattlepointsDict[factionName] += shipTracker.RemainingPoints;
+                powerPointsDict[factionName] += shipTracker.PowerPoints;
+                offensiveBattlepointsDict[factionName] += shipTracker.OffensivePoints;
+                movementBattlepointsDict[factionName] += shipTracker.MovementPoints;
 
-                var wep = 0;
+                var weaponCount = 0;
                 foreach (var kvp in shipTracker.WeaponCounts)
                 {
-                    wep += kvp.Value;
+                    weaponCount += kvp.Value;
                 }
 
-                var pwr = FormatPower(Math.Round(shipTracker.TotalPower, 1));
-                var ts2 = FormatThrust(Math.Round(shipTracker.TotalThrust, 2));
+                var powerString = FormatPower(Math.Round(shipTracker.TotalPower, 1));
+                var thrustString = FormatThrust(Math.Round(shipTracker.TotalThrust, 2));
 
-                ts[fn].Add(CreateDisplayString(o, shipTracker, wep, pwr, ts2));
+                teamShipStrings[factionName].Add(CreateDisplayString(ownerName, shipTracker, weaponCount, powerString, thrustString));
             }
         }
 
