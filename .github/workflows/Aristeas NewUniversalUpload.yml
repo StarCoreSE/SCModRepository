@@ -19,6 +19,7 @@ jobs:
         uses: tj-actions/changed-files@v44
         with:
             separator: ','
+            recover_deleted_files: 'true'
       
       #- name: List all changed files
       #  env:
