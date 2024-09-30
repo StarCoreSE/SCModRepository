@@ -30,9 +30,7 @@ namespace StarCore.ShareTrack
         private static readonly Dictionary<long, IMyPlayer> AllPlayers = new Dictionary<long, IMyPlayer>();
 
         public static HudAPIv2.HUDMessage
-            IntegretyMessage,
-            TimerMessage,
-            Ticketmessage;
+            IntegretyMessage;
 
         public static ShipTracker.NametagSettings NametagViewState = ShipTracker.NametagSettings.PlayerName;
 
@@ -56,13 +54,6 @@ namespace StarCore.ShareTrack
                 IntegretyMessage.Visible = !IntegretyMessage.Visible;
                 MyAPIGateway.Utilities.ShowNotification("ShipTracker: Hud visibility set to " +
                                                         IntegretyMessage.Visible);
-            },
-            [MyKeys.B] = () =>
-            {
-                TimerMessage.Visible = !TimerMessage.Visible;
-                Ticketmessage.Visible = !Ticketmessage.Visible;
-                MyAPIGateway.Utilities.ShowNotification(
-                    "ShipTracker: Timer visibility set to " + TimerMessage.Visible);
             },
             [MyKeys.J] = () =>
             {
@@ -131,18 +122,6 @@ namespace StarCore.ShareTrack
                 blend: BlendTypeEnum.PostPP)
             {
                 Visible = true
-            };
-            TimerMessage = new HudAPIv2.HUDMessage(scale: 1.2f, font: "BI_SEOutlined", Message: new StringBuilder(""),
-                origin: new Vector2D(0.35, .99), hideHud: false, shadowing: true, blend: BlendTypeEnum.PostPP)
-            {
-                Visible = false, //defaulted off?
-                InitialColor = Color.White
-            };
-            Ticketmessage = new HudAPIv2.HUDMessage(scale: 1f, font: "BI_SEOutlined", Message: new StringBuilder(""),
-                origin: new Vector2D(0.51, .99), hideHud: false, shadowing: true, blend: BlendTypeEnum.PostPP)
-            {
-                Visible = false, //defaulted off?
-                InitialColor = Color.White
             };
         }
 
@@ -356,9 +335,13 @@ namespace StarCore.ShareTrack
             // Check if the current instance is not a dedicated server
             if (MyAPIGateway.Utilities.IsDedicated)
                 TrackingManager.Init();
+        }
 
-            // Initialize the WC_api and load it if it's not null
-
+        /// <summary>
+        /// This has to come late in startup, as WeaponCore can receive its weapon definitions late into loading.
+        /// </summary>
+        public void InitApi()
+        {
             WcApi = new WcApi();
             WcApi?.Load(() =>
             {

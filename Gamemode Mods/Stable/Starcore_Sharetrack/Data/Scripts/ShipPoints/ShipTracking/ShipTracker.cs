@@ -624,12 +624,15 @@ namespace StarCore.ShareTrack.ShipTracking
             get
             {
                 var blockCounts = new Dictionary<string, int>();
+
                 foreach (var stats in _gridStats.Values)
-                foreach (var kvp in stats.WeaponCounts)
                 {
-                    if (!blockCounts.ContainsKey(kvp.Key))
-                        blockCounts.Add(kvp.Key, 0);
-                    blockCounts[kvp.Key] += kvp.Value;
+                    foreach (var kvp in stats.WeaponCounts)
+                    {
+                        if (!blockCounts.ContainsKey(kvp.Key))
+                            blockCounts.Add(kvp.Key, 0);
+                        blockCounts[kvp.Key] += kvp.Value;
+                    }
                 }
 
                 return blockCounts;
