@@ -136,6 +136,7 @@ namespace StarCore.ShareTrack.ShipTracking
         public Vector3 Position => Grid.Physics.CenterOfMassWorld;
         public IMyFaction OwnerFaction => MyAPIGateway.Session?.Factions?.TryGetPlayerFaction(OwnerId);
         public string FactionName => OwnerFaction?.Name ?? "None";
+        public string FactionTag => OwnerFaction?.Tag ?? "N/A";
         public Vector3 FactionColor => ColorMaskToRgb(OwnerFaction?.CustomColor ?? Vector3.Zero);
         public string OwnerName => Owner?.DisplayName ?? GridName;
 
@@ -623,12 +624,15 @@ namespace StarCore.ShareTrack.ShipTracking
             get
             {
                 var blockCounts = new Dictionary<string, int>();
+
                 foreach (var stats in _gridStats.Values)
-                foreach (var kvp in stats.WeaponCounts)
                 {
-                    if (!blockCounts.ContainsKey(kvp.Key))
-                        blockCounts.Add(kvp.Key, 0);
-                    blockCounts[kvp.Key] += kvp.Value;
+                    foreach (var kvp in stats.WeaponCounts)
+                    {
+                        if (!blockCounts.ContainsKey(kvp.Key))
+                            blockCounts.Add(kvp.Key, 0);
+                        blockCounts[kvp.Key] += kvp.Value;
+                    }
                 }
 
                 return blockCounts;
