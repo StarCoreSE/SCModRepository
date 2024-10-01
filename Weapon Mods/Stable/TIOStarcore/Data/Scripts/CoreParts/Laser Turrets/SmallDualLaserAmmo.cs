@@ -267,7 +267,7 @@ namespace Scripts
             },
         };
 
-        private AmmoDef SmallDualLaserTurretAmmo => new AmmoDef //Longest range, lowest dmg.
+        private AmmoDef SmallDualLaserTurretAmmoFake => new AmmoDef //Longest range, lowest dmg.
         {
             AmmoMagazine = "Energy",
             AmmoRound = "SmallFakeLaserAmmo",
