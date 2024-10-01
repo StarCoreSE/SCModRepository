@@ -187,7 +187,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                SmallDualLaserTurretAmmo, 
+                SmallDualLaserTurretAmmo, SmallDualLaserTurretAmmoFake,
                  // Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = CoilgunAnim,
