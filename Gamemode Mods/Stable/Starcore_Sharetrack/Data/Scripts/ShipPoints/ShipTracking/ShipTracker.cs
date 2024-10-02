@@ -600,7 +600,7 @@ namespace StarCore.ShareTrack.ShipTracking
                 var shieldController = ShieldApi.GetShieldBlock(Grid);
                 if (shieldController == null)
                     return -1;
-                return ShieldApi.GetShieldPercent(shieldController);
+                return ShieldApi.GetShieldPercent(shieldController) * (OriginalMaxShieldHealth == -1 ? 1 : ShieldApi.GetMaxHpCap(shieldController)/OriginalMaxShieldHealth);
             }
         }
 
@@ -611,6 +611,7 @@ namespace StarCore.ShareTrack.ShipTracking
                 var shieldController = ShieldApi.GetShieldBlock(Grid);
                 if (shieldController == null)
                     return -1;
+                
                 return ShieldApi.GetShieldHeat(shieldController);
             }
         }
