@@ -1092,10 +1092,10 @@
       <MaxFov>1.04719755</MaxFov>
     </Definition>
 
-	
-<Definition xsi:type="MyObjectBuilder_LargeTurretBaseDefinition">
-      <Id>
-        <TypeId>LargeMissileTurret</TypeId>
+
+	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>127mmMk12</SubtypeId>
       </Id>	
       <DisplayName>[FAS] Benson</DisplayName>
