@@ -1,0 +1,11 @@
+name: Aristeas ForceUploadAll
+on:
+  workflow_dispatch:
+
+jobs:
+  delete:
+    runs-on: self-hosted
+    steps:
+      - id: local_forceUpload
+        run: |
+          & "C:\actions-runner\externals\SC_NewUniversalUpload.exe" "uploadall"
