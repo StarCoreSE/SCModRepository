@@ -4,6 +4,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
+using System.Collections.Concurrent;
 //Sandboxs
 using Sandbox.Common.ObjectBuilders;
 using Sandbox.Game.EntityComponents;
@@ -27,8 +28,6 @@ using VRage.Sync;
 namespace Blues_Thruster_Particles
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Thrust), false)]
-
-
     public class Thrusters : MyGameLogicComponent
     {
         public static Thrusters Instance;
@@ -42,6 +41,8 @@ namespace Blues_Thruster_Particles
 
         private MySync<bool, SyncDirection.BothWays> requiresUpdate;
 
+        private ConcurrentDictionary<long, ThrusterData> thrusterCache = new ConcurrentDictionary<long, ThrusterData>();
+        private const int CacheUpdateInterval = 60; // Update cache every 60 frames
 
         string particleeffect = "";
 
@@ -60,10 +61,8 @@ namespace Blues_Thruster_Particles
         public string ParticleEffectToGenerate;
         public Vector4 FlameColor;
 
-
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
-
             Instance = this;
             //Update Every Frame
             NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME;
@@ -73,9 +72,7 @@ namespace Blues_Thruster_Particles
             MyCoreBlockDefinition = MyCoreBlock.BlockDefinition;
             terminalBlock = Entity as IMyTerminalBlock;
 
-
             ParticleEffectToGenerate = "";
-
 
             //Adapt for block size
             string SubtypeId = CoreBlock.BlockDefinition.SubtypeId;
@@ -127,17 +124,12 @@ namespace Blues_Thruster_Particles
             LoadCustomData();
             UpdateCustomData();
             requiresUpdate.ValidateAndSet(true);
-
-
+            thrusterCache.TryAdd(Entity.EntityId, new ThrusterData(ParticleEffectToGenerate, FlameColor, CoreBlock.Enabled, CoreBlock.CurrentThrust, CoreBlock.MaxThrust));
         }
-        //UpdateAfterSimulation
 
         public override void UpdateAfterSimulation()
         {
-            /*if (MyCoreBlockDefinition.FuelConverter.FuelId != HydrogenId)
-				return;*/
-
-            if (IsDedicated) { return; }
+            if (IsDedicated) return;
 
             CustomControls.AddControls(ModContext);
 
@@ -150,83 +142,88 @@ namespace Blues_Thruster_Particles
                     MyCoreBlockDefinition.FlameIdleColor = FlameColor;
                     (MyCoreBlock.Render).UpdateFlameAnimatorData();
                 }
-                catch { MyLog.Default.WriteLine("Un-Able to ajust thruster flame"); }
+                catch { MyLog.Default.WriteLine("Unable to adjust thruster flame"); }
             }
 
-            //MyAPIGateway.Parallel.Start(delegate{});
-            //if(CoreBlock.BlockDefinition.SubtypeId.Contains("STR_DISABLED")){particleSize=1f;}
-            //Create and Maintain
-            float ThrusterOutput = CoreBlock.CurrentThrust / CoreBlock.MaxThrust;
-            float particleSize = (CoreBlock.CurrentThrust / CoreBlock.MaxThrust) * ParticleSizeAdjuster;
-            if (ParticleEffectToGenerate != "Vanilla" || ParticleEffectToGenerate != "" || !CoreBlock.Enabled || ThrusterOutput < 0.049)
+            ThrusterData cachedData;
+            if (thrusterCache.TryGetValue(Entity.EntityId, out cachedData))
             {
-                string particleToCreate;
-                float particleRadius = 1f;
-                //if(ThrusterOutput< 0.049){particleSize=0.0f;}
-                try
+                if (MyAPIGateway.Session.GameplayFrameCounter % CacheUpdateInterval == 0 || cachedData.ParticleEffect != ParticleEffectToGenerate || cachedData.FlameColor != FlameColor || cachedData.Enabled != CoreBlock.Enabled || cachedData.CurrentThrust != CoreBlock.CurrentThrust || cachedData.MaxThrust != CoreBlock.MaxThrust)
                 {
-                    particleToCreate = Globals.ParticleEffectsList[ParticleEffectToGenerate] + BlockSizeAdjuster;
-                }
-                catch
-                {
-                    particleToCreate = "Blueshift" + BlockSizeAdjuster;
+                    cachedData.ParticleEffect = ParticleEffectToGenerate;
+                    cachedData.FlameColor = FlameColor;
+                    cachedData.Enabled = CoreBlock.Enabled;
+                    cachedData.CurrentThrust = CoreBlock.CurrentThrust;
+                    cachedData.MaxThrust = CoreBlock.MaxThrust;
+                    thrusterCache[Entity.EntityId] = cachedData;
                 }
 
-                if (ParticleEmitter == null)
-                {
-                    particle_matrix = CoreBlock.WorldMatrix;
-                    particle_position = particle_matrix.Translation;
+                float ThrusterOutput = cachedData.CurrentThrust / cachedData.MaxThrust;
+                float particleSize = ThrusterOutput * ParticleSizeAdjuster;
 
-                    if (MyParticlesManager.TryCreateParticleEffect(particleToCreate, ref particle_matrix, ref particle_position, uint.MaxValue, out ParticleEmitter))
+                if (cachedData.ParticleEffect != "Vanilla" || cachedData.ParticleEffect != "" || !cachedData.Enabled || ThrusterOutput < 0.049)
+                {
+                    string particleToCreate;
+                    float particleRadius = 1f;
+
+                    try
                     {
-                        particleeffect = ParticleEffectToGenerate;
-                        ParticleEmitter.UserRadiusMultiplier = particleRadius;
-                        ParticleEmitter.UserScale = particleSize;
-                        //userscale=ParticleEmitter.UserScale;
-                        //((MyRenderComponentThrust)MyCoreBlock.Render).UpdateFlameAnimatorData();
+                        particleToCreate = Globals.ParticleEffectsList[cachedData.ParticleEffect] + BlockSizeAdjuster;
+                    }
+                    catch
+                    {
+                        particleToCreate = "Blueshift" + BlockSizeAdjuster;
                     }
 
+                    if (ParticleEmitter == null)
+                    {
+                        particle_matrix = CoreBlock.WorldMatrix;
+                        particle_position = particle_matrix.Translation;
+
+                        if (MyParticlesManager.TryCreateParticleEffect(particleToCreate, ref particle_matrix, ref particle_position, uint.MaxValue, out ParticleEmitter))
+                        {
+                            particleeffect = cachedData.ParticleEffect;
+                            ParticleEmitter.UserRadiusMultiplier = particleRadius;
+                            ParticleEmitter.UserScale = particleSize;
+                        }
+                    }
+                    else
+                    {
+                        if (particleeffect != cachedData.ParticleEffect)
+                        {
+                            ParticleEmitter.UserScale = 0.0f;
+                            ParticleEmitter.StopLights();
+                            ParticleEmitter.StopEmitting();
+                            ParticleEmitter = null;
+                        }
+                        else
+                        {
+                            ParticleEmitter.WorldMatrix = CoreBlock.WorldMatrix;
+                            ParticleEmitter.UserRadiusMultiplier = particleRadius;
+                            ParticleEmitter.UserScale = particleSize;
+                            ParticleEmitter.Play();
+                        }
+                    }
                 }
                 else
                 {
-                    //terminalBlock.CustomData="Particle Exists!";
-                    if (particleeffect != ParticleEffectToGenerate)
+                    try
                     {
-                        ParticleEmitter.UserScale = 0.0f;
+                        ParticleEmitter.Stop();
                         ParticleEmitter.StopLights();
                         ParticleEmitter.StopEmitting();
                         ParticleEmitter = null;
                     }
-                    else
-                    {
-                        ParticleEmitter.WorldMatrix = CoreBlock.WorldMatrix;
-                        ParticleEmitter.UserRadiusMultiplier = particleRadius;
-                        //if(particleToCreate=="ThunderDomeLightning"){}
-                        ParticleEmitter.UserScale = particleSize;
-                        ParticleEmitter.Play();
-                    }
+                    catch { MyLog.Default.WriteLine("Unable to close particle effects"); }
                 }
-
             }
-            else
-            {
-                try
-                {
-                    ParticleEmitter.Stop();
-                    ParticleEmitter.StopLights();
-                    ParticleEmitter.StopEmitting();
-                    ParticleEmitter = null;
-                }
-                catch { MyLog.Default.WriteLine("Un-Able to close particle effects"); }
-
-            }
-
-
         }
+
         public override void UpdateAfterSimulation10()
         {
 
         }
+
         public static Thrusters GetInstance()
         {
             return Instance;
@@ -251,7 +248,6 @@ namespace Blues_Thruster_Particles
                 { FlameColor = new Vector4(1f, 1f, 1f, 0.5f); }
                 else
                 { FlameColor = new Vector4(0.60f, 1.40f, 2.55f, 0.5f); }
-                //FlameColor = Color.White; Don't mess with what doesnt need messsed with :)
             }
             else
             {
@@ -265,10 +261,10 @@ namespace Blues_Thruster_Particles
                 catch (Exception x)
                 {
                     ParticleEffectToGenerate = "Vanilla";
-                    FlameColor = Color.Red;//I wanna know when shit goes wrong
+                    FlameColor = Color.Red;
                 }
             }
-            UpdateCustomData();//So Custom data will be updated after all effects
+            UpdateCustomData();
         }
 
         public override void Close()
@@ -278,8 +274,24 @@ namespace Blues_Thruster_Particles
                 ParticleEmitter.Stop();
             }
             Instance = null;
-
         }
+    }
 
+    public class ThrusterData
+    {
+        public string ParticleEffect;
+        public Vector4 FlameColor;
+        public bool Enabled;
+        public float CurrentThrust;
+        public float MaxThrust;
+
+        public ThrusterData(string particleEffect, Vector4 flameColor, bool enabled, float currentThrust, float maxThrust)
+        {
+            ParticleEffect = particleEffect;
+            FlameColor = flameColor;
+            Enabled = enabled;
+            CurrentThrust = currentThrust;
+            MaxThrust = maxThrust;
+        }
     }
 }
