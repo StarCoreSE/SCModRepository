@@ -58,9 +58,6 @@ namespace Starcore.FieldGenerator
         private float _stabilityChange = 0;
         private int _resetCounter = 0;
 
-        private int initUpgradeDelayTicks = 60; // 1 second delay (60 ticks)
-        private bool upgradesInitialized = false;
-
         #region Sync Properties
         public bool SiegeMode
         {
@@ -235,6 +232,7 @@ namespace Starcore.FieldGenerator
             if (IsServer)
             {
                 Block.Model.GetDummies(_coreDummies);
+                InitExistingUpgrades();
 
                 Stability = 100;
                 MinFieldPower = 0;
@@ -257,27 +255,12 @@ namespace Starcore.FieldGenerator
             NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
         }
 
-
         public override void UpdateAfterSimulation()
         {
             base.UpdateAfterSimulation();
 
-            if (IsServer && !upgradesInitialized)
-            {
-                // Delay InitExistingUpgrades by 60 ticks (1 second)
-                if (initUpgradeDelayTicks > 0)
-                {
-                    initUpgradeDelayTicks--; // Decrease the timer
-                }
-                else
-                {
-                    InitExistingUpgrades(); // Call InitExistingUpgrades after the delay
-                    upgradesInitialized = true; // Ensure it only happens once
-                }
-            }
-
             if (!IsServer)
-                return;
+                return;      
 
             if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0)
             {
@@ -285,7 +268,7 @@ namespace Starcore.FieldGenerator
                 {
                     Sink.Update();
 
-                    UpdateSiegeState();
+                    UpdateSiegeState();             
 
                     if (!Config.SimplifiedMode)
                     {
@@ -313,15 +296,15 @@ namespace Starcore.FieldGenerator
                             _damageEventCounter = 0;
                             return;
                         }
-                    }
+                    }                  
                 }
                 else if (!Block.IsWorking)
                 {
                     if (FieldPower > 0)
                         FieldPower = 0;
-
+                    
                     if (SiegeMode)
-                        SiegeMode = false;
+                        SiegeMode = false;                    
                 }
             }
         }
@@ -367,7 +350,7 @@ namespace Starcore.FieldGenerator
             if (!IsServer)
             {
                 GridStopped.ValueChanged -= OnGridStopValueChange;
-            }
+            }              
 
             Block = null;
         }
@@ -567,13 +550,32 @@ namespace Starcore.FieldGenerator
 
         private void InitExistingUpgrades()
         {
+            List<long> validUpgradeModules = new List<long>();
             List<IMySlimBlock> neighbours = new List<IMySlimBlock>();
             Block.SlimBlock.GetNeighbours(neighbours);
 
             foreach (var n in neighbours)
             {
-                OnBlockAdded(n);
+                if (n?.FatBlock == null)
+                {
+                    continue;
+                }
+                else if (n.FatBlock.BlockDefinition.SubtypeId == "FieldGen_Capacity_Upgrade" && IsModuleValid(n))
+                {
+                    validUpgradeModules.Add(n.FatBlock.EntityId);
+                }
             }
+
+            foreach (var entityId in validUpgradeModules)
+            {
+                if (!_attachedModuleIds.Contains(entityId) && _moduleCount < Config.MaxModuleCount)
+                {
+                    _attachedModuleIds.Add(entityId);
+                    _moduleCount++;
+                }
+            }
+
+            CalculateUpgradeAmounts();
         }
 
         private bool IsNeighbour(IMySlimBlock block)
