@@ -205,7 +205,6 @@ namespace Scripts {
             //Upgrades = UpgradeModules,
         };
 
-
         WeaponDefinition MA_Gimbal_Laser => new WeaponDefinition
         {
             Assignments = new ModelAssignmentsDef
@@ -418,6 +417,7 @@ namespace Scripts {
             },
             Ammos = new[] {
                 MA_Laser_1, // Must list all primary, shrapnel, and pattern ammos.
+                MA_Laser_1_Fake, // Must list all primary, shrapnel, and pattern ammos.
             },
             //``````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````Animations = PDX_Animations,
             //Upgrades = UpgradeModules,

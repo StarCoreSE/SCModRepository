@@ -55,6 +55,18 @@ namespace StarCore.ShareTrack
             }
         }
 
+        public override void BeforeStart()
+        {
+            try
+            {
+                AllGridsList.I.InitApi();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
         protected override void UnloadData()
         {
             try
