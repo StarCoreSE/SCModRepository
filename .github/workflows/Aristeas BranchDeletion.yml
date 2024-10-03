@@ -10,5 +10,4 @@ jobs:
     steps:
       - id: local_DeleteMods
         run: |
-          echo "Clean up for branch ${{ github.event.ref }}"
           & "C:\actions-runner\externals\SC_NewUniversalUpload.exe" "deletebranch" "${{ github.event.ref }}"
