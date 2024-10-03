@@ -1,0 +1,16 @@
+name: Aristeas BranchDeletion
+on:
+  workflow_dispatch:
+  delete:
+
+jobs:
+  DeleteBranchMods:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4.1.4
+        with:
+          fetch-depth: 0
+          
+      - id: local_DeleteMods
+        run: |
+          & "C:\actions-runner\externals\SC_NewUniversalUpload.exe" "deletebranch"
