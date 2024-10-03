@@ -4,22 +4,18 @@ using System.Linq;
 using System.Collections.Generic;
 using Sandbox.ModAPI;
 using Sandbox.Common.ObjectBuilders;
-using Sandbox.Game.Entities;
 using Sandbox.Game.EntityComponents;
 using ProtoBuf;
-using VRage.Utils;
 using VRage.Game;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRage.Game.ModAPI.Network;
-using VRage.Game.ObjectBuilders.ComponentSystem;
 using VRage.Sync;
 using VRage.Network;
 using VRage.Game.Components;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRageMath;
-using VRageRender.Models;
 
 using Starcore.FieldGenerator.Networking.Custom;
 
@@ -326,7 +322,8 @@ namespace Starcore.FieldGenerator
 
                 if (!Block.IsWorking)
                 {
-                    SetPowerNotification($"<S.I> Generator Core is Offline! | Insufficient Power?", 600, "Red");
+                    string reason = Block.IsFunctional ? "Insufficient Power?" : "Block Damaged!";
+                    SetPowerNotification($"<S.I> Generator Core is Offline! | {reason}", 600, "Red");
                 }
             }
             else
