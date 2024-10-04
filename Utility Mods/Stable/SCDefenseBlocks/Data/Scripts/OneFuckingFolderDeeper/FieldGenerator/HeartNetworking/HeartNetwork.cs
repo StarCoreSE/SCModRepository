@@ -4,8 +4,6 @@ using System.Linq;
 using Sandbox.ModAPI;
 using VRage.Game.ModAPI;
 
-using Starcore.FieldGenerator.Networking.Custom;
-
 namespace Starcore.FieldGenerator.Networking
 {
     public class HeartNetwork : ComponentBase
