@@ -177,6 +177,5 @@ namespace Starcore.FieldGenerator.Networking
 
             return false;
         }
-
     }
 }
