@@ -63,7 +63,10 @@ namespace Starcore.FieldGenerator.Networking.Custom
                 };
 
                 if (!HeartNetwork.CheckRateLimit(entityId))
+                {
+                    HeartNetwork.I.queuedFloatPackets.Add(entityId, packet);
                     return;
+                }
 
                 Log.Info($"Sending Float Sync: {propertyName} = {value}");
 

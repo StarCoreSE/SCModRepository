@@ -53,7 +53,10 @@ namespace Starcore.FieldGenerator.Networking.Custom
                 };
 
                 if (!HeartNetwork.CheckRateLimit(entityId))
+                {
+                    HeartNetwork.I.queuedIntPackets.Add(entityId, packet);
                     return;
+                }
 
                 Log.Info($"Sending Int Sync: {propertyName} = {value}");
 

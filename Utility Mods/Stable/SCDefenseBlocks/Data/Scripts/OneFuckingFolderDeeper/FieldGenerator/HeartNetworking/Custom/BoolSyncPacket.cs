@@ -53,7 +53,10 @@ namespace Starcore.FieldGenerator.Networking.Custom
                 };
 
                 if (!HeartNetwork.CheckRateLimit(entityId))
+                {
+                    HeartNetwork.I.queuedBoolPackets.Add(entityId, packet);
                     return;
+                }
 
                 Log.Info($"Sending Bool Sync: {propertyName} = {value}");
 

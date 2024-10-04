@@ -4,6 +4,8 @@ using System.Linq;
 using Sandbox.ModAPI;
 using VRage.Game.ModAPI;
 
+using Starcore.FieldGenerator.Networking.Custom;
+
 namespace Starcore.FieldGenerator.Networking
 {
     public class HeartNetwork : ComponentBase
@@ -22,6 +24,10 @@ namespace Starcore.FieldGenerator.Networking
         public int TotalNetworkLoad { get; private set; }
 
         private Dictionary<long, DateTime> _rateLimiter = new Dictionary<long, DateTime>();
+
+        public Dictionary<long, FloatSyncPacket> queuedFloatPackets = new Dictionary<long, FloatSyncPacket>();
+        public Dictionary<long, IntSyncPacket> queuedIntPackets = new Dictionary<long, IntSyncPacket>();
+        public Dictionary<long, BoolSyncPacket> queuedBoolPackets = new Dictionary<long, BoolSyncPacket>();
 
         public override void Init(string id)
         {
