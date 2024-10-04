@@ -9,7 +9,7 @@ namespace Starcore.FieldGenerator.Networking.Custom
     {
         [ProtoMember(21)] private string propertyName;
         [ProtoMember(22)] private bool value;
-        [ProtoMember(23)] private long entityId;
+        [ProtoMember(23)] public long entityId;
 
         public override void Received(ulong SenderSteamId)
         {
@@ -54,7 +54,7 @@ namespace Starcore.FieldGenerator.Networking.Custom
 
                 if (!HeartNetwork.CheckRateLimit(entityId))
                 {
-                    HeartNetwork.I.queuedBoolPackets.Add(entityId, packet);
+                    PacketQueueManager.I.Enqueue(packet);
                     return;
                 }
 

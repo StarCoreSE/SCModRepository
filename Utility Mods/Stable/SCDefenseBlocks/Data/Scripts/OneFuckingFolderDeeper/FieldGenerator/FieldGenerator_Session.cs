@@ -16,6 +16,7 @@ namespace Starcore.FieldGenerator
     {
         public static WcApi CoreSysAPI;
         public static HeartNetwork Networking = new HeartNetwork();
+        public static PacketQueueManager PacketQueue = new PacketQueueManager();
 
         private int UpdateCounter = 0;
         private int UpdateInterval = 100;
@@ -25,6 +26,7 @@ namespace Starcore.FieldGenerator
             base.LoadData();
 
             Networking.Init("FieldGeneratorNetwork");
+            PacketQueue.Init();
 
             CoreSysAPI = new WcApi();
             CoreSysAPI.Load();
@@ -34,12 +36,13 @@ namespace Starcore.FieldGenerator
         {
             base.UpdateAfterSimulation();
 
+            if (!PacketQueueManager.I.HasPackets())
+                return;
+
             long entityID = 0;
             PacketBase packet = null;
 
-            packet = (PacketBase)TryGetFirstPacket<FloatSyncPacket>(HeartNetwork.I.queuedFloatPackets, ref entityID)
-                  ?? (PacketBase)TryGetFirstPacket<IntSyncPacket>(HeartNetwork.I.queuedIntPackets, ref entityID)
-                  ?? (PacketBase)TryGetFirstPacket<BoolSyncPacket>(HeartNetwork.I.queuedBoolPackets, ref entityID);
+            packet = PacketQueueManager.I.Dequeue(out entityID);
 
             if (packet != null)
             {
@@ -62,22 +65,10 @@ namespace Starcore.FieldGenerator
             }
         }
 
-        private T TryGetFirstPacket<T>(Dictionary<long, T> packetQueue, ref long entityID) where T : PacketBase
-        {
-            if (packetQueue.Any())
-            {
-                var dictFirst = packetQueue.First();
-                entityID = dictFirst.Key;
-                packetQueue.Remove(entityID);
-                return dictFirst.Value;
-            }
-
-            return null;
-        }
-
         protected override void UnloadData()
         {
             Networking.Close();
+            PacketQueue.Close();
 
             if (CoreSysAPI.IsReady)
             {

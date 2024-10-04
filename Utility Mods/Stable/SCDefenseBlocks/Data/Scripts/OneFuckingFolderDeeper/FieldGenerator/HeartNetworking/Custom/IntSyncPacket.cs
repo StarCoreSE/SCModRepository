@@ -9,7 +9,7 @@ namespace Starcore.FieldGenerator.Networking.Custom
     {
         [ProtoMember(41)] private string propertyName;
         [ProtoMember(42)] private int value;
-        [ProtoMember(43)] private long entityId;
+        [ProtoMember(43)] public long entityId;
 
         public override void Received(ulong SenderSteamId)
         {
@@ -54,7 +54,7 @@ namespace Starcore.FieldGenerator.Networking.Custom
 
                 if (!HeartNetwork.CheckRateLimit(entityId))
                 {
-                    HeartNetwork.I.queuedIntPackets.Add(entityId, packet);
+                    PacketQueueManager.I.Enqueue(packet);
                     return;
                 }
 

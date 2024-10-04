@@ -25,10 +25,6 @@ namespace Starcore.FieldGenerator.Networking
 
         private Dictionary<long, DateTime> _rateLimiter = new Dictionary<long, DateTime>();
 
-        public Dictionary<long, FloatSyncPacket> queuedFloatPackets = new Dictionary<long, FloatSyncPacket>();
-        public Dictionary<long, IntSyncPacket> queuedIntPackets = new Dictionary<long, IntSyncPacket>();
-        public Dictionary<long, BoolSyncPacket> queuedBoolPackets = new Dictionary<long, BoolSyncPacket>();
-
         public override void Init(string id)
         {
             base.Init(id);
@@ -183,5 +179,6 @@ namespace Starcore.FieldGenerator.Networking
 
             return false;
         }
+
     }
 }
