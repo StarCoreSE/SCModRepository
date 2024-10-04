@@ -19,7 +19,7 @@ namespace Starcore.FieldGenerator
         public static PacketQueueManager PacketQueue = new PacketQueueManager();
 
         private int UpdateCounter = 0;
-        private int UpdateInterval = 100;
+        private int UpdateInterval = 10;
 
         public override void LoadData()
         {
