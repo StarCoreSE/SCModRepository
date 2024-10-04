@@ -65,6 +65,7 @@ namespace Starcore.FieldGenerator.Networking.Custom
                 if (!HeartNetwork.CheckRateLimit(entityId))
                 {
                     PacketQueueManager.I.Enqueue(packet);
+                    Log.Info($"Float Sync Cancelled: Rated Limited and Queued");
                     return;
                 }
 

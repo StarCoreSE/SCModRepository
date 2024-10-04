@@ -55,6 +55,7 @@ namespace Starcore.FieldGenerator.Networking.Custom
                 if (!HeartNetwork.CheckRateLimit(entityId))
                 {
                     PacketQueueManager.I.Enqueue(packet);
+                    Log.Info($"Int Sync Cancelled: Rated Limited and Queued");
                     return;
                 }
 

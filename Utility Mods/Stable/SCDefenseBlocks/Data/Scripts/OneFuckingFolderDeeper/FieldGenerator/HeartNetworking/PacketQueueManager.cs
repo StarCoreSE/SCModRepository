@@ -37,33 +37,54 @@ namespace Starcore.FieldGenerator.Networking
             boolPackets.Enqueue(packet);
         }
 
-
-        public PacketBase Dequeue(out long entityID)
+        public PacketBase Peek(out long entityID)
         {
             entityID = 0;
             if (floatPackets.Count > 0)
             {
-                var packet = floatPackets.Dequeue();
+                var packet = floatPackets.Peek();
                 entityID = packet.entityId;
                 return packet;
             }
 
             if (intPackets.Count > 0)
             {
-                var packet = intPackets.Dequeue();
+                var packet = intPackets.Peek();
                 entityID = packet.entityId;
                 return packet;
             }
 
             if (boolPackets.Count > 0)
             {
-                var packet = boolPackets.Dequeue();
+                var packet = boolPackets.Peek();
                 entityID = packet.entityId;
                 return packet;
             }
 
             return null;
         }
+
+        public void Dequeue()
+        {
+            if (floatPackets.Count > 0)
+            {
+                floatPackets.Dequeue(); // Remove the first packet from the queue
+                return;
+            }
+
+            if (intPackets.Count > 0)
+            {
+                intPackets.Dequeue();
+                return;
+            }
+
+            if (boolPackets.Count > 0)
+            {
+                boolPackets.Dequeue();
+                return;
+            }
+        }
+
 
         public bool HasPackets()
         {

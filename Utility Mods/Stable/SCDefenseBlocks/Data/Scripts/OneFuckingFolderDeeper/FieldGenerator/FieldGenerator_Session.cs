@@ -39,23 +39,35 @@ namespace Starcore.FieldGenerator
             if (!PacketQueueManager.I.HasPackets())
                 return;
 
+            Log.Info($"PacketManager: Packets in Queue");
+
             long entityID = 0;
             PacketBase packet = null;
 
-            packet = PacketQueueManager.I.Dequeue(out entityID);
+            packet = PacketQueueManager.I.Peek(out entityID);           
 
             if (packet != null)
             {
+                Log.Info($"PacketManager: Queued Packet Found!");
+
                 UpdateCounter++;
 
                 int updateCount = (int)(entityID % UpdateInterval);
 
                 if (UpdateCounter % UpdateInterval == updateCount)
                 {
+                    Log.Info($"PacketManager: Sending Queued Packet, Then Removing From Queue");
+
                     if (MyAPIGateway.Session.IsServer)
                         HeartNetwork.I.SendToEveryone(packet);
                     else
                         HeartNetwork.I.SendToServer(packet);
+
+                    PacketQueueManager.I.Dequeue();
+                }
+                else 
+                {
+                    Log.Info($"PacketManager: Packet Not Sent, Left In Queue");
                 }
 
                 if (UpdateCounter >= int.MaxValue - UpdateInterval)
