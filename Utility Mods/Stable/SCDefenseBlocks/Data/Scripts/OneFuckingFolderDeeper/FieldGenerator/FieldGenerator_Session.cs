@@ -48,18 +48,14 @@ namespace Starcore.FieldGenerator
 
                     if (HeartNetwork.CheckRateLimit(entityID))
                     {
-                        Log.Info($"PacketManager: Sending Queued Packet for Entity ID: {entityID}, Then Removing From Queue");
-
                         if (MyAPIGateway.Session.IsServer)
                             HeartNetwork.I.SendToEveryone(packet);
                         else
                             HeartNetwork.I.SendToServer(packet);
 
+                        Log.Info($"PacketManager: Sent Queued Packet for Entity ID: {entityID}, Removing From Queue");
+
                         PacketQueueManager.I.DequeuePacket(entityID);
-                    }
-                    else
-                    {
-                        Log.Info($"PacketManager: Packet for Entity ID: {entityID} Not Sent, Left In Queue");
                     }
                 }
             }
