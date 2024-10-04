@@ -18,9 +18,6 @@ namespace Starcore.FieldGenerator
         public static HeartNetwork Networking = new HeartNetwork();
         public static PacketQueueManager PacketQueue = new PacketQueueManager();
 
-        private int UpdateCounter = 0;
-        private int UpdateInterval = 10;
-
         public override void LoadData()
         {
             base.LoadData();
@@ -41,38 +38,29 @@ namespace Starcore.FieldGenerator
 
             Log.Info($"PacketManager: Packets in Queue");
 
-            long entityID = 0;
-            PacketBase packet = null;
-
-            packet = PacketQueueManager.I.Peek(out entityID);           
-
-            if (packet != null)
+            foreach (long entityID in PacketQueueManager.I.GetEntitiesWithPackets())
             {
-                Log.Info($"PacketManager: Queued Packet Found!");
+                PacketBase packet = PacketQueueManager.I.PeekNextPacket(entityID);
 
-                UpdateCounter++;
-
-                int updateCount = (int)(entityID % UpdateInterval);
-
-                if (UpdateCounter % UpdateInterval == updateCount)
+                if (packet != null)
                 {
-                    Log.Info($"PacketManager: Sending Queued Packet, Then Removing From Queue");
+                    Log.Info($"PacketManager: Queued Packet Found for Entity ID: {entityID}");
 
-                    if (MyAPIGateway.Session.IsServer)
-                        HeartNetwork.I.SendToEveryone(packet);
+                    if (HeartNetwork.CheckRateLimit(entityID))
+                    {
+                        Log.Info($"PacketManager: Sending Queued Packet for Entity ID: {entityID}, Then Removing From Queue");
+
+                        if (MyAPIGateway.Session.IsServer)
+                            HeartNetwork.I.SendToEveryone(packet);
+                        else
+                            HeartNetwork.I.SendToServer(packet);
+
+                        PacketQueueManager.I.DequeuePacket(entityID);
+                    }
                     else
-                        HeartNetwork.I.SendToServer(packet);
-
-                    PacketQueueManager.I.Dequeue();
-                }
-                else 
-                {
-                    Log.Info($"PacketManager: Packet Not Sent, Left In Queue");
-                }
-
-                if (UpdateCounter >= int.MaxValue - UpdateInterval)
-                {
-                    UpdateCounter = 0;
+                    {
+                        Log.Info($"PacketManager: Packet for Entity ID: {entityID} Not Sent, Left In Queue");
+                    }
                 }
             }
         }

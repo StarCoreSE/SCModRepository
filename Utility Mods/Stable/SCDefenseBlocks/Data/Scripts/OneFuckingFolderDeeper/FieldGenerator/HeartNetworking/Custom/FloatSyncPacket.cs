@@ -8,7 +8,7 @@ namespace Starcore.FieldGenerator.Networking.Custom
     [ProtoContract]
     public class FloatSyncPacket : PacketBase
     {
-        [ProtoMember(31)] private string propertyName;
+        [ProtoMember(31)] public string propertyName;
         [ProtoMember(32)] private float value;
         [ProtoMember(33)] public long entityId;
 
@@ -61,20 +61,10 @@ namespace Starcore.FieldGenerator.Networking.Custom
                     propertyName = propertyName,
                     value = value
                 };
+                   
+                Log.Info($"Float-Type Packet Added to Queue: {propertyName} = {value}");
 
-                if (!HeartNetwork.CheckRateLimit(entityId))
-                {
-                    PacketQueueManager.I.Enqueue(packet);
-                    Log.Info($"Float Sync Cancelled: Rated Limited and Queued");
-                    return;
-                }
-
-                Log.Info($"Sending Float Sync: {propertyName} = {value}");
-
-                if (MyAPIGateway.Session.IsServer)
-                    HeartNetwork.I.SendToEveryone(packet);
-                else
-                    HeartNetwork.I.SendToServer(packet);
+                PacketQueueManager.I.Enqueue(packet);
             }
             catch (Exception ex)
             {

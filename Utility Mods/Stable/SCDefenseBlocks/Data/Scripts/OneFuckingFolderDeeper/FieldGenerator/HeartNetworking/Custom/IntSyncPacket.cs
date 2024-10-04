@@ -7,7 +7,7 @@ namespace Starcore.FieldGenerator.Networking.Custom
     [ProtoContract]
     public class IntSyncPacket : PacketBase
     {
-        [ProtoMember(41)] private string propertyName;
+        [ProtoMember(41)] public string propertyName;
         [ProtoMember(42)] private int value;
         [ProtoMember(43)] public long entityId;
 
@@ -52,19 +52,9 @@ namespace Starcore.FieldGenerator.Networking.Custom
                     value = value
                 };
 
-                if (!HeartNetwork.CheckRateLimit(entityId))
-                {
-                    PacketQueueManager.I.Enqueue(packet);
-                    Log.Info($"Int Sync Cancelled: Rated Limited and Queued");
-                    return;
-                }
+                Log.Info($"Int-Type Packet Added to Queue: {propertyName} = {value}");
 
-                Log.Info($"Sending Int Sync: {propertyName} = {value}");
-
-                if (MyAPIGateway.Session.IsServer)
-                    HeartNetwork.I.SendToEveryone(packet);
-                else
-                    HeartNetwork.I.SendToServer(packet);
+                PacketQueueManager.I.Enqueue(packet);
             }
             catch (Exception ex)
             {

@@ -7,7 +7,7 @@ namespace Starcore.FieldGenerator.Networking.Custom
     [ProtoContract]
     public class BoolSyncPacket : PacketBase
     {
-        [ProtoMember(21)] private string propertyName;
+        [ProtoMember(21)] public string propertyName;
         [ProtoMember(22)] private bool value;
         [ProtoMember(23)] public long entityId;
 
@@ -52,19 +52,9 @@ namespace Starcore.FieldGenerator.Networking.Custom
                     value = value
                 };
 
-                if (!HeartNetwork.CheckRateLimit(entityId))
-                {
-                    PacketQueueManager.I.Enqueue(packet);
-                    Log.Info($"Bool Sync Cancelled: Rated Limited and Queued");
-                    return;
-                }
+                Log.Info($"Bool-Type Packet Added to Queue: {propertyName} = {value}");
 
-                Log.Info($"Sending Bool Sync: {propertyName} = {value}");
-
-                if (MyAPIGateway.Session.IsServer)
-                    HeartNetwork.I.SendToEveryone(packet);
-                else
-                    HeartNetwork.I.SendToServer(packet);
+                PacketQueueManager.I.Enqueue(packet);
             }
             catch (Exception ex)
             {
