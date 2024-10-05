@@ -54,9 +54,8 @@ namespace Starcore.FieldGenerator
         private float _stabilityChange = 0;
         private int _resetCounter = 0;
 
-        private int initUpgradeDelayTicks = 60; // 1 second delay (60 ticks)
-        private bool upgradesInitialized = false;
-
+        private int initValueDelayTicks = 60; // 1 second delay (60 ticks)
+        private bool syncedValuesInitialized = false;
 
         #region Sync Properties
         public bool SiegeMode
@@ -67,7 +66,7 @@ namespace Starcore.FieldGenerator
                 if (_siegeMode != value)
                 {
                     _siegeMode = value;
-                    OnBoolPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<bool>(nameof(SiegeMode), _siegeMode));
+                    OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<object>(nameof(SiegeMode), _siegeMode));
                 }
             }
         }
@@ -81,12 +80,11 @@ namespace Starcore.FieldGenerator
                 if (_siegeCooldownActive != value)
                 {
                     _siegeCooldownActive = value;
-                    OnBoolPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<bool>(nameof(SiegeCooldownActive), _siegeCooldownActive));
+                    OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<object>(nameof(SiegeCooldownActive), _siegeCooldownActive));
                 }
             }
         }
         public bool _siegeCooldownActive;
-        public event PropertyChangedEventHandler<bool> OnBoolPropertyChanged;
 
         public int SiegeElapsedTime
         {
@@ -96,7 +94,7 @@ namespace Starcore.FieldGenerator
                 if (_siegeElapsedTime != value)
                 {
                     _siegeElapsedTime = value;
-                    OnIntPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<int>(nameof(SiegeElapsedTime), _siegeElapsedTime));
+                    OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<object>(nameof(SiegeElapsedTime), _siegeElapsedTime));
                 }
             }
         }
@@ -110,12 +108,11 @@ namespace Starcore.FieldGenerator
                 if (_siegeCooldownTime != value)
                 {
                     _siegeCooldownTime = value;
-                    OnIntPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<int>(nameof(SiegeCooldownTime), _siegeCooldownTime));
+                    OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<object>(nameof(SiegeCooldownTime), _siegeCooldownTime));
                 }
             }
         }
         public int _siegeCooldownTime;
-        public event PropertyChangedEventHandler<int> OnIntPropertyChanged;
 
         public float FieldPower
         {
@@ -125,7 +122,7 @@ namespace Starcore.FieldGenerator
                 if (_fieldPower != value)
                 {               
                     _fieldPower = MathHelper.Clamp(value, MinFieldPower, MaxFieldPower);
-                    OnFloatPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<float>(nameof(FieldPower), _fieldPower));
+                    OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<object>(nameof(FieldPower), _fieldPower));
                 }
             }
         }
@@ -139,7 +136,7 @@ namespace Starcore.FieldGenerator
                 if (_maxFieldPower != value)
                 {
                     _maxFieldPower = value;
-                    OnFloatPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<float>(nameof(MaxFieldPower), _maxFieldPower));
+                    OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<object>(nameof(MaxFieldPower), _maxFieldPower));
                 }
             }
         }
@@ -153,7 +150,7 @@ namespace Starcore.FieldGenerator
                 if (_minFieldPower != value)
                 {
                     _minFieldPower = value;
-                    OnFloatPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<float>(nameof(MinFieldPower), _minFieldPower));
+                    OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<object>(nameof(MinFieldPower), _minFieldPower));
                 }
             }
         }
@@ -167,7 +164,7 @@ namespace Starcore.FieldGenerator
                 if (_sizeModifier != value)
                 {
                     _sizeModifier = value;
-                    OnFloatPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<float>(nameof(SizeModifier), _sizeModifier));
+                    OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<object>(nameof(SizeModifier), _sizeModifier));
                 }
             }
         }
@@ -181,12 +178,13 @@ namespace Starcore.FieldGenerator
                 if (_stability != value)
                 {
                     _stability = value;
-                    OnFloatPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<float>(nameof(Stability), _stability));
+                    OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<object>(nameof(Stability), _stability));
                 }
             }
         }
         public float _stability;
-        public event PropertyChangedEventHandler<float> OnFloatPropertyChanged;
+
+        public event PropertyChangedEventHandler<object> OnPropertyChanged;
         #endregion
 
         private Dictionary<string, IMyModelDummy> _coreDummies = new Dictionary<string, IMyModelDummy>();
@@ -225,17 +223,11 @@ namespace Starcore.FieldGenerator
             Sink = Block.Components.Get<MyResourceSinkComponent>();
             Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, CalculatePowerDraw);
 
-            OnBoolPropertyChanged += HandleBoolPacket;
-            OnIntPropertyChanged += HandleIntPacket;
-            OnFloatPropertyChanged += HandleFloatPacket;
+            OnPropertyChanged += HandlePacketUpdate;
 
             if (IsServer)
             {
-                Block.Model.GetDummies(_coreDummies);               
-
-                Stability = 100;
-                MinFieldPower = 0;
-
+                Block.Model.GetDummies(_coreDummies);                             
                 Block.CubeGrid.GetBlocks(_gridBlocks);
                 _gridBlockCount = _gridBlocks.Count;
 
@@ -257,16 +249,18 @@ namespace Starcore.FieldGenerator
         {
             base.UpdateAfterSimulation();
 
-            if (IsServer && !upgradesInitialized)
+            if (IsServer && !syncedValuesInitialized)
             {
-                if (initUpgradeDelayTicks > 0)
+                if (initValueDelayTicks > 0)
                 {
-                    initUpgradeDelayTicks--;
+                    initValueDelayTicks--;
                 }
                 else
                 {
+                    Stability = 100;
                     InitExistingUpgrades();
-                    upgradesInitialized = true;
+
+                    syncedValuesInitialized = true;
                 }
             }
 
@@ -316,14 +310,8 @@ namespace Starcore.FieldGenerator
                     
                     if (SiegeMode)
                     {
-                        EndSiegeMode();
-                        SiegeMode = false;
-
-                        if (IsClientInShip() || IsClientNearShip())
-                        {
-                            string reason = Block.IsFunctional ? "Insufficient Power" : "Block Damaged!";
-                            SetPowerNotification($"<S.I> Siege Mode Cancelled! | {reason}", 600, "Red");
-                        }                   
+                        CancelSiegeMode();
+                        SiegeMode = false;                                         
                     }                                         
                 }
             }
@@ -358,9 +346,7 @@ namespace Starcore.FieldGenerator
         {
             base.Close();
 
-            OnBoolPropertyChanged -= HandleBoolPacket;
-            OnIntPropertyChanged -= HandleIntPacket;
-            OnFloatPropertyChanged -= HandleFloatPacket;
+            OnPropertyChanged += HandlePacketUpdate;
 
             if (IsServer)
             {
@@ -470,19 +456,27 @@ namespace Starcore.FieldGenerator
         #endregion
 
         #region Terminal Control Packet Handlers
-        private void HandleBoolPacket(object sender, PropertyChangedEventArgs<bool> e)
+        private void HandlePacketUpdate(object sender, PropertyChangedEventArgs<object> e)
         {
-            BoolSyncPacket.SyncBoolProperty(Block.EntityId, e.PropertyName, e.NewValue);
-        }
-
-        private void HandleIntPacket(object sender, PropertyChangedEventArgs<int> e)
-        {
-            IntSyncPacket.SyncIntProperty(Block.EntityId, e.PropertyName, e.NewValue);
-        }
-
-        private void HandleFloatPacket(object sender, PropertyChangedEventArgs<float> e)
-        {
-            FloatSyncPacket.SyncFloatProperty(Block.EntityId, e.PropertyName, e.NewValue);
+            if (e.NewValue is float)
+            {
+                float floatValue = (float)e.NewValue;
+                SyncPacket<float>.SyncProperty(Block.EntityId, e.PropertyName, floatValue);
+            }
+            else if (e.NewValue is bool)
+            {
+                bool boolValue = (bool)e.NewValue;
+                SyncPacket<bool>.SyncProperty(Block.EntityId, e.PropertyName, boolValue);
+            }
+            else if (e.NewValue is int)
+            {
+                int intValue = (int)e.NewValue;
+                SyncPacket<int>.SyncProperty(Block.EntityId, e.PropertyName, intValue);
+            }
+            else
+            {
+                Log.Error($"Unsupported property type: {e.NewValue.GetType()} for {e.PropertyName}");
+            }
         }
         #endregion
 
@@ -540,6 +534,17 @@ namespace Starcore.FieldGenerator
             SiegeCooldownTime = (SiegeElapsedTime > 5) ? (SiegeElapsedTime * 2) : 5;
             SiegeElapsedTime = 0;
             SiegeCooldownActive = true;
+        }
+
+        private void CancelSiegeMode()
+        {
+            if (IsServer && GridStopped.Value)
+                GridStopped.Value = false;
+
+            SiegeBlockEnabler(_gridBlocks, true);
+
+            SiegeCooldownTime = 0;
+            SiegeElapsedTime = 0;
         }
         #endregion
 
