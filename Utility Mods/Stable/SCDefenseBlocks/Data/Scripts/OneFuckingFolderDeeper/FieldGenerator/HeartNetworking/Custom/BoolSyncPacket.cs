@@ -7,9 +7,9 @@ namespace Starcore.FieldGenerator.Networking.Custom
     [ProtoContract]
     public class BoolSyncPacket : PacketBase
     {
-        [ProtoMember(21)] private string propertyName;
+        [ProtoMember(21)] public string propertyName;
         [ProtoMember(22)] private bool value;
-        [ProtoMember(23)] private long entityId;
+        [ProtoMember(23)] public long entityId;
 
         public override void Received(ulong SenderSteamId)
         {
@@ -52,15 +52,9 @@ namespace Starcore.FieldGenerator.Networking.Custom
                     value = value
                 };
 
-                if (!HeartNetwork.CheckRateLimit(entityId))
-                    return;
+                Log.Info($"Bool-Type Packet Added to Queue: {propertyName} = {value}");
 
-                Log.Info($"Sending Bool Sync: {propertyName} = {value}");
-
-                if (MyAPIGateway.Session.IsServer)
-                    HeartNetwork.I.SendToEveryone(packet);
-                else
-                    HeartNetwork.I.SendToServer(packet);
+                PacketQueueManager.I.Enqueue(packet);
             }
             catch (Exception ex)
             {

@@ -54,6 +54,10 @@ namespace Starcore.FieldGenerator
         private float _stabilityChange = 0;
         private int _resetCounter = 0;
 
+        private int initUpgradeDelayTicks = 60; // 1 second delay (60 ticks)
+        private bool upgradesInitialized = false;
+
+
         #region Sync Properties
         public bool SiegeMode
         {
@@ -227,12 +231,10 @@ namespace Starcore.FieldGenerator
 
             if (IsServer)
             {
-                Block.Model.GetDummies(_coreDummies);
-                InitExistingUpgrades();
+                Block.Model.GetDummies(_coreDummies);               
 
                 Stability = 100;
                 MinFieldPower = 0;
-                FieldPower = MinFieldPower;
 
                 Block.CubeGrid.GetBlocks(_gridBlocks);
                 _gridBlockCount = _gridBlocks.Count;
@@ -255,8 +257,21 @@ namespace Starcore.FieldGenerator
         {
             base.UpdateAfterSimulation();
 
+            if (IsServer && !upgradesInitialized)
+            {
+                if (initUpgradeDelayTicks > 0)
+                {
+                    initUpgradeDelayTicks--;
+                }
+                else
+                {
+                    InitExistingUpgrades();
+                    upgradesInitialized = true;
+                }
+            }
+
             if (!IsServer)
-                return;      
+                return;
 
             if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0)
             {
@@ -300,7 +315,16 @@ namespace Starcore.FieldGenerator
                         FieldPower = 0;
                     
                     if (SiegeMode)
-                        SiegeMode = false;                    
+                    {
+                        EndSiegeMode();
+                        SiegeMode = false;
+
+                        if (IsClientInShip() || IsClientNearShip())
+                        {
+                            string reason = Block.IsFunctional ? "Insufficient Power" : "Block Damaged!";
+                            SetPowerNotification($"<S.I> Siege Mode Cancelled! | {reason}", 600, "Red");
+                        }                   
+                    }                                         
                 }
             }
         }
