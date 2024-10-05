@@ -36,18 +36,16 @@ namespace Starcore.FieldGenerator
             if (!PacketQueueManager.I.HasPackets())
                 return;
 
-            Log.Info($"PacketManager: Packets in Queue");
-
             foreach (long entityID in PacketQueueManager.I.GetEntitiesWithPackets())
             {
                 PacketBase packet = PacketQueueManager.I.PeekNextPacket(entityID);
 
                 if (packet != null)
-                {
-                    Log.Info($"PacketManager: Queued Packet Found for Entity ID: {entityID}");
-
+                {                 
                     if (HeartNetwork.CheckRateLimit(entityID))
                     {
+                        Log.Info($"PacketManager: Queued Packet Found for Entity ID: {entityID}");
+
                         if (MyAPIGateway.Session.IsServer)
                             HeartNetwork.I.SendToEveryone(packet);
                         else

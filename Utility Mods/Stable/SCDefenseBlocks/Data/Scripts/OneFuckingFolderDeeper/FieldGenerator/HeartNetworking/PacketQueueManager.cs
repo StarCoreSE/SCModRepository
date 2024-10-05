@@ -11,12 +11,9 @@ namespace Starcore.FieldGenerator.Networking
     {
         public static PacketQueueManager I;
 
-        private Dictionary<long, LinkedList<FloatSyncPacket>> floatPacketQueues = new Dictionary<long, LinkedList<FloatSyncPacket>>();
-        private Dictionary<long, LinkedList<IntSyncPacket>> intPacketQueues = new Dictionary<long, LinkedList<IntSyncPacket>>();
-        private Dictionary<long, LinkedList<BoolSyncPacket>> boolPacketQueues = new Dictionary<long, LinkedList<BoolSyncPacket>>();
+        private Dictionary<long, LinkedList<PacketBase>> packetQueues = new Dictionary<long, LinkedList<PacketBase>>();
 
         private List<long> entityIds = new List<long>();
-        private int lastEntityProcessedIndex = -1;
 
         public void Init()
         {
@@ -28,47 +25,23 @@ namespace Starcore.FieldGenerator.Networking
             I = null;
         }
 
-        // Seperate Enqueues needed because reasons (TODO: Be Smarter)
-        public void Enqueue(FloatSyncPacket packet)
+        public void Enqueue(PacketBase packet)
         {
-            if (!floatPacketQueues.ContainsKey(packet.entityId))
+            long entityId = GetEntityId(packet);
+
+            if (!packetQueues.ContainsKey(entityId))
             {
-                floatPacketQueues[packet.entityId] = new LinkedList<FloatSyncPacket>();
-                entityIds.Add(packet.entityId);
+                packetQueues[entityId] = new LinkedList<PacketBase>();
+                entityIds.Add(entityId);
             }
 
-            RemoveStalePackets(floatPacketQueues[packet.entityId], packet.propertyName);
+            string propertyName = GetPropertyName(packet);
+            RemoveStalePackets(packetQueues[entityId], propertyName);
 
-            floatPacketQueues[packet.entityId].AddLast(packet);
+            packetQueues[entityId].AddLast(packet);
         }
 
-        public void Enqueue(IntSyncPacket packet)
-        {
-            if (!intPacketQueues.ContainsKey(packet.entityId))
-            {
-                intPacketQueues[packet.entityId] = new LinkedList<IntSyncPacket>();
-                entityIds.Add(packet.entityId);
-            }
-
-            RemoveStalePackets(intPacketQueues[packet.entityId], packet.propertyName);
-
-            intPacketQueues[packet.entityId].AddLast(packet);
-        }
-
-        public void Enqueue(BoolSyncPacket packet)
-        {
-            if (!boolPacketQueues.ContainsKey(packet.entityId))
-            {
-                boolPacketQueues[packet.entityId] = new LinkedList<BoolSyncPacket>();
-                entityIds.Add(packet.entityId);
-            }
-
-            RemoveStalePackets(boolPacketQueues[packet.entityId], packet.propertyName);
-
-            boolPacketQueues[packet.entityId].AddLast(packet);
-        }
-
-        private void RemoveStalePackets<T>(LinkedList<T> list, string propertyName) where T : PacketBase
+        private void RemoveStalePackets(LinkedList<PacketBase> list, string propertyName)
         {
             var currentNode = list.First;
 
@@ -76,15 +49,7 @@ namespace Starcore.FieldGenerator.Networking
             {
                 var nextNode = currentNode.Next;
 
-                if (typeof(T) == typeof(FloatSyncPacket) && (currentNode.Value as FloatSyncPacket).propertyName == propertyName)
-                {
-                    list.Remove(currentNode);
-                }
-                else if (typeof(T) == typeof(IntSyncPacket) && (currentNode.Value as IntSyncPacket).propertyName == propertyName)
-                {
-                    list.Remove(currentNode);
-                }
-                else if (typeof(T) == typeof(BoolSyncPacket) && (currentNode.Value as BoolSyncPacket).propertyName == propertyName)
+                if (GetPropertyName(currentNode.Value) == propertyName)
                 {
                     list.Remove(currentNode);
                 }
@@ -95,19 +60,7 @@ namespace Starcore.FieldGenerator.Networking
 
         public IEnumerable<long> GetEntitiesWithPackets()
         {
-            foreach (var entry in floatPacketQueues)
-            {
-                if (entry.Value.Count > 0)
-                    yield return entry.Key;
-            }
-
-            foreach (var entry in intPacketQueues)
-            {
-                if (entry.Value.Count > 0)
-                    yield return entry.Key;
-            }
-
-            foreach (var entry in boolPacketQueues)
+            foreach (var entry in packetQueues)
             {
                 if (entry.Value.Count > 0)
                     yield return entry.Key;
@@ -116,17 +69,9 @@ namespace Starcore.FieldGenerator.Networking
 
         public PacketBase PeekNextPacket(long entityID)
         {
-            if (floatPacketQueues.ContainsKey(entityID) && floatPacketQueues[entityID].Count > 0)
+            if (packetQueues.ContainsKey(entityID) && packetQueues[entityID].Count > 0)
             {
-                return floatPacketQueues[entityID].First.Value;
-            }
-            else if (intPacketQueues.ContainsKey(entityID) && intPacketQueues[entityID].Count > 0)
-            {
-                return intPacketQueues[entityID].First.Value;
-            }
-            else if (boolPacketQueues.ContainsKey(entityID) && boolPacketQueues[entityID].Count > 0)
-            {
-                return boolPacketQueues[entityID].First.Value;
+                return packetQueues[entityID].First.Value;
             }
 
             return null;
@@ -134,17 +79,9 @@ namespace Starcore.FieldGenerator.Networking
 
         public void DequeuePacket(long entityID)
         {
-            if (floatPacketQueues.ContainsKey(entityID) && floatPacketQueues[entityID].Count > 0)
+            if (packetQueues.ContainsKey(entityID) && packetQueues[entityID].Count > 0)
             {
-                floatPacketQueues[entityID].RemoveFirst();
-            }
-            else if (intPacketQueues.ContainsKey(entityID) && intPacketQueues[entityID].Count > 0)
-            {
-                intPacketQueues[entityID].RemoveFirst();
-            }
-            else if (boolPacketQueues.ContainsKey(entityID) && boolPacketQueues[entityID].Count > 0)
-            {
-                boolPacketQueues[entityID].RemoveFirst();
+                packetQueues[entityID].RemoveFirst();
             }
 
             if (HasNoPackets(entityID))
@@ -155,14 +92,36 @@ namespace Starcore.FieldGenerator.Networking
 
         private bool HasNoPackets(long entityID)
         {
-            return (!floatPacketQueues.ContainsKey(entityID) || floatPacketQueues[entityID].Count == 0) &&
-                   (!intPacketQueues.ContainsKey(entityID) || intPacketQueues[entityID].Count == 0) &&
-                   (!boolPacketQueues.ContainsKey(entityID) || boolPacketQueues[entityID].Count == 0);
+            return !packetQueues.ContainsKey(entityID) || packetQueues[entityID].Count == 0;
         }
 
         public bool HasPackets()
         {
             return entityIds.Count > 0;
+        }
+
+        private long GetEntityId(PacketBase packet)
+        {
+            if (packet.GetType() == typeof(FloatSyncPacket))
+                return ((FloatSyncPacket)packet).entityId;
+            if (packet.GetType() == typeof(IntSyncPacket))
+                return ((IntSyncPacket)packet).entityId;
+            if (packet.GetType() == typeof(BoolSyncPacket))
+                return ((BoolSyncPacket)packet).entityId;
+
+            return 0;
+        }
+
+        private string GetPropertyName(PacketBase packet)
+        {
+            if (packet.GetType() == typeof(FloatSyncPacket))
+                return ((FloatSyncPacket)packet).propertyName;
+            if (packet.GetType() == typeof(IntSyncPacket))
+                return ((IntSyncPacket)packet).propertyName;
+            if (packet.GetType() == typeof(BoolSyncPacket))
+                return ((BoolSyncPacket)packet).propertyName;
+
+            return string.Empty;
         }
     }
 }
