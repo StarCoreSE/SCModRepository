@@ -54,8 +54,8 @@ namespace Starcore.FieldGenerator
         private float _stabilityChange = 0;
         private int _resetCounter = 0;
 
-        private int initUpgradeDelayTicks = 60; // 1 second delay (60 ticks)
-        private bool upgradesInitialized = false;
+        private int initValueDelayTicks = 60; // 1 second delay (60 ticks)
+        private bool valuesInitialized = false;
 
         #region Sync Properties
         public bool SiegeMode
@@ -223,10 +223,7 @@ namespace Starcore.FieldGenerator
 
             if (IsServer)
             {
-                Block.Model.GetDummies(_coreDummies);               
-
-                Stability = 100;
-                MinFieldPower = 0;
+                Block.Model.GetDummies(_coreDummies);                         
 
                 Block.CubeGrid.GetBlocks(_gridBlocks);
                 _gridBlockCount = _gridBlocks.Count;
@@ -249,16 +246,17 @@ namespace Starcore.FieldGenerator
         {
             base.UpdateAfterSimulation();
 
-            if (IsServer && !upgradesInitialized)
+            if (IsServer && !valuesInitialized)
             {
-                if (initUpgradeDelayTicks > 0)
+                if (initValueDelayTicks > 0)
                 {
-                    initUpgradeDelayTicks--;
+                    initValueDelayTicks--;
                 }
                 else
                 {
-                    InitExistingUpgrades();
-                    upgradesInitialized = true;
+                    Stability = 100;
+                    InitExistingUpgrades();                
+                    valuesInitialized = true;
                 }
             }
 
@@ -308,14 +306,8 @@ namespace Starcore.FieldGenerator
                     
                     if (SiegeMode)
                     {
-                        EndSiegeMode();
-                        SiegeMode = false;
-
-                        if (IsClientInShip() || IsClientNearShip())
-                        {
-                            string reason = Block.IsFunctional ? "Insufficient Power" : "Block Damaged!";
-                            SetPowerNotification($"<S.I> Siege Mode Cancelled! | {reason}", 600, "Red");
-                        }                   
+                        CancelSiegeMode();
+                        SiegeMode = false;                 
                     }                                         
                 }
             }
@@ -511,6 +503,17 @@ namespace Starcore.FieldGenerator
             SiegeCooldownTime = (SiegeElapsedTime > 5) ? (SiegeElapsedTime * 2) : 5;
             SiegeElapsedTime = 0;
             SiegeCooldownActive = true;
+        }
+
+        private void CancelSiegeMode()
+        {
+            if (IsServer && GridStopped.Value)
+                GridStopped.Value = false;
+
+            SiegeBlockEnabler(_gridBlocks, true);
+
+            SiegeCooldownTime = 0;
+            SiegeElapsedTime = 0;
         }
         #endregion
 
