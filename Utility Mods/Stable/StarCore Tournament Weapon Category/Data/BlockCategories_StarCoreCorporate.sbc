@@ -345,6 +345,7 @@
         <string>Starcore_PPC_Block</string>
         <string>ModularSRM8</string>
         <string>Starcore_Arrow_Block</string>
+        <string>Starcore_Arrow_Block_Single</string>
       </ItemIds>
     </Category>
 
