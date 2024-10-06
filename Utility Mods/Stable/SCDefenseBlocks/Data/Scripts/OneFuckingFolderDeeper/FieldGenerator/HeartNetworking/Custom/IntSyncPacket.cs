@@ -54,7 +54,7 @@ namespace Starcore.FieldGenerator.Networking.Custom
 
                 Log.Info($"Int-Type Packet Added to Queue: {propertyName} = {value}");
 
-                PacketQueueManager.I.Enqueue(packet);
+                PacketQueueManager.I.EnqueuePacket(packet);
             }
             catch (Exception ex)
             {

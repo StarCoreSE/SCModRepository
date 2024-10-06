@@ -420,25 +420,23 @@ namespace Starcore.FieldGenerator
             {
                 IMyCubeGrid targetGrid = targetBlock.CubeGrid;
 
-                if (Block != null && targetGrid.EntityId == Block.CubeGrid.EntityId)
-                {
-                    if (SiegeMode)
-                    {
-                        info.Amount *= 0.1f;
-                        return;
-                    }
-                    else
-                    {
-                        if (!Config.SimplifiedMode)
-                        {
-                            _damageEventCounter++;
-                        }                   
+                if (targetGrid.EntityId != Block.CubeGrid.EntityId)
+                    return;
 
-                        float roundedModifier = (float)Math.Round(1 - ((double)FieldPower / 100), 3);
-                        info.Amount *= roundedModifier;
-                        return;
-                    }
-                }                          
+                if (SiegeMode)
+                {
+                    info.Amount *= 0.1f;
+                    return;
+                }
+
+                if (!Config.SimplifiedMode)
+                {
+                    _damageEventCounter++;
+                }
+
+                float roundedModifier = (float)Math.Round(1 - ((double)FieldPower / 100), 3);
+                info.Amount *= roundedModifier;
+                return;
             }
         }
 
@@ -490,6 +488,30 @@ namespace Starcore.FieldGenerator
                 {
                     SiegeCooldownActive = false;
                 }
+            }
+        }
+
+        private void SiegeBlockEnabler(List<IMySlimBlock> allTerminalBlocks, bool enabled)
+        {
+            foreach (var block in allTerminalBlocks)
+            {
+                if (block.FatBlock != null && block.FatBlock.BlockDefinition.SubtypeId != "FieldGen_Core")
+                {
+                    var entBlock = block as MyEntity;
+                    if (entBlock != null && FieldGeneratorSession.CoreSysAPI.HasCoreWeapon(entBlock))
+                    {
+                        FieldGeneratorSession.CoreSysAPI.SetFiringAllowed(entBlock, enabled);
+
+                        var functionalBlock = block.FatBlock as IMyFunctionalBlock;
+                        if (functionalBlock != null)
+                        {
+                            functionalBlock.Enabled = enabled;
+
+                        }
+                    }
+                }
+                else
+                    continue;
             }
         }
 
@@ -639,9 +661,7 @@ namespace Starcore.FieldGenerator
         {
             if (Block != null)
             {
-                var cockpits = Block.CubeGrid.GetFatBlocks<IMyCockpit>();
-
-                foreach (var cockpit in cockpits)
+                foreach (var cockpit in Block.CubeGrid.GetFatBlocks<IMyCockpit>())
                 {
                     if (cockpit.Pilot != null && cockpit.Pilot.EntityId == MyAPIGateway.Session?.Player?.Character?.EntityId)
                     {
@@ -673,31 +693,7 @@ namespace Starcore.FieldGenerator
             }                          
 
             return false;
-        }
-
-        private void SiegeBlockEnabler(List<IMySlimBlock> allTerminalBlocks, bool enabled)
-        {
-            foreach (var block in allTerminalBlocks)
-            {
-                if (block.FatBlock != null && block.FatBlock.BlockDefinition.SubtypeId != "FieldGen_Core")
-                {
-                    var entBlock = block as MyEntity;
-                    if (entBlock != null && FieldGeneratorSession.CoreSysAPI.HasCoreWeapon(entBlock))
-                    {
-                        FieldGeneratorSession.CoreSysAPI.SetFiringAllowed(entBlock, enabled);
-
-                        var functionalBlock = block.FatBlock as IMyFunctionalBlock;
-                        if (functionalBlock != null)
-                        {
-                            functionalBlock.Enabled = enabled;
-
-                        }
-                    }
-                }
-                else
-                    continue;             
-            }
-        }
+        }       
         #endregion
 
         #region Notifs

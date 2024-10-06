@@ -15,6 +15,7 @@ namespace Starcore.FieldGenerator.Networking
 
         private List<long> entityIds = new List<long>();
 
+        #region Init
         public void Init()
         {
             I = this;
@@ -24,8 +25,23 @@ namespace Starcore.FieldGenerator.Networking
         {
             I = null;
         }
+        #endregion
 
-        public void Enqueue(PacketBase packet)
+        #region Public Methods
+        /// <summary>
+        /// Checks for Entities with Open Queues
+        /// </summary>
+        /// <returns>Bool</returns>
+        public bool QueuesWithPackets()
+        {
+            return entityIds.Count > 0;
+        }
+
+        /// <summary>
+        /// Adds Packet to Per-Entity Queue
+        /// </summary>
+        /// <param name="packet"></param>
+        public void EnqueuePacket(PacketBase packet)
         {
             long entityId = GetEntityId(packet);
 
@@ -41,6 +57,53 @@ namespace Starcore.FieldGenerator.Networking
             packetQueues[entityId].AddLast(packet);
         }
 
+        /// <summary>
+        /// Removes the first packet from an Entitys Queue. If its the last packet in Queue, closes the Queue for that Entity.
+        /// </summary>
+        /// <param name="entityID"></param>
+        public void DequeuePacket(long entityID)
+        {
+            if (packetQueues.ContainsKey(entityID) && packetQueues[entityID].Count > 0)
+            {
+                packetQueues[entityID].RemoveFirst();
+            }
+
+            if (!EntityHasPackets(entityID))
+            {
+                entityIds.Remove(entityID);
+            }
+        }
+
+        /// <summary>
+        /// Gets Entities with a Queue
+        /// </summary>
+        /// <returns>IEnumerable of EntityIDs with Queues</returns>
+        public IEnumerable<long> EntitiesWithQueue()
+        {
+            foreach (var entry in packetQueues)
+            {
+                if (entry.Value.Count > 0)
+                    yield return entry.Key;
+            }
+        }
+
+        /// <summary>
+        /// Retrieves First Packet of an Entities Queue
+        /// </summary>
+        /// <param name="entityID"></param>
+        /// <returns>PacketBase Packet Type</returns>
+        public PacketBase FirstInQueue(long entityID)
+        {
+            if (packetQueues.ContainsKey(entityID) && packetQueues[entityID].Count > 0)
+            {
+                return packetQueues[entityID].First.Value;
+            }
+
+            return null;
+        }
+        #endregion
+
+        #region Private Methods
         private void RemoveStalePackets(LinkedList<PacketBase> list, string propertyName)
         {
             var currentNode = list.First;
@@ -56,48 +119,11 @@ namespace Starcore.FieldGenerator.Networking
 
                 currentNode = nextNode;
             }
-        }
+        } 
 
-        public IEnumerable<long> GetEntitiesWithPackets()
+        private bool EntityHasPackets(long entityID)
         {
-            foreach (var entry in packetQueues)
-            {
-                if (entry.Value.Count > 0)
-                    yield return entry.Key;
-            }
-        }
-
-        public PacketBase PeekNextPacket(long entityID)
-        {
-            if (packetQueues.ContainsKey(entityID) && packetQueues[entityID].Count > 0)
-            {
-                return packetQueues[entityID].First.Value;
-            }
-
-            return null;
-        }
-
-        public void DequeuePacket(long entityID)
-        {
-            if (packetQueues.ContainsKey(entityID) && packetQueues[entityID].Count > 0)
-            {
-                packetQueues[entityID].RemoveFirst();
-            }
-
-            if (HasNoPackets(entityID))
-            {
-                entityIds.Remove(entityID);
-            }
-        }
-
-        private bool HasNoPackets(long entityID)
-        {
-            return !packetQueues.ContainsKey(entityID) || packetQueues[entityID].Count == 0;
-        }
-
-        public bool HasPackets()
-        {
-            return entityIds.Count > 0;
+            return packetQueues.ContainsKey(entityID) || packetQueues[entityID].Count != 0;
         }
 
         private long GetEntityId(PacketBase packet)
@@ -123,5 +149,6 @@ namespace Starcore.FieldGenerator.Networking
 
             return string.Empty;
         }
+        #endregion
     }
 }
