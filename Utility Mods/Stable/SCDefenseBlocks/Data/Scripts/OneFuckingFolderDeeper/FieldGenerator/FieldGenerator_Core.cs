@@ -66,7 +66,7 @@ namespace Starcore.FieldGenerator
                 if (_siegeMode != value)
                 {
                     _siegeMode = value;
-                    OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<object>(nameof(SiegeMode), _siegeMode));
+                    SyncPacket<bool>.SyncProperty(Block.EntityId, nameof(SiegeMode), _siegeMode);
                 }
             }
         }
@@ -80,7 +80,7 @@ namespace Starcore.FieldGenerator
                 if (_siegeCooldownActive != value)
                 {
                     _siegeCooldownActive = value;
-                    OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<object>(nameof(SiegeCooldownActive), _siegeCooldownActive));
+                    SyncPacket<bool>.SyncProperty(Block.EntityId, nameof(SiegeCooldownActive), _siegeCooldownActive);
                 }
             }
         }
@@ -94,7 +94,7 @@ namespace Starcore.FieldGenerator
                 if (_siegeElapsedTime != value)
                 {
                     _siegeElapsedTime = value;
-                    OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<object>(nameof(SiegeElapsedTime), _siegeElapsedTime));
+                    SyncPacket<int>.SyncProperty(Block.EntityId, nameof(SiegeElapsedTime), _siegeElapsedTime);
                 }
             }
         }
@@ -108,7 +108,7 @@ namespace Starcore.FieldGenerator
                 if (_siegeCooldownTime != value)
                 {
                     _siegeCooldownTime = value;
-                    OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<object>(nameof(SiegeCooldownTime), _siegeCooldownTime));
+                    SyncPacket<int>.SyncProperty(Block.EntityId, nameof(SiegeCooldownTime), _siegeCooldownTime);
                 }
             }
         }
@@ -122,7 +122,7 @@ namespace Starcore.FieldGenerator
                 if (_fieldPower != value)
                 {               
                     _fieldPower = MathHelper.Clamp(value, MinFieldPower, MaxFieldPower);
-                    OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<object>(nameof(FieldPower), _fieldPower));
+                    SyncPacket<float>.SyncProperty(Block.EntityId, nameof(FieldPower), _fieldPower);
                 }
             }
         }
@@ -136,7 +136,7 @@ namespace Starcore.FieldGenerator
                 if (_maxFieldPower != value)
                 {
                     _maxFieldPower = value;
-                    OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<object>(nameof(MaxFieldPower), _maxFieldPower));
+                    SyncPacket<float>.SyncProperty(Block.EntityId, nameof(MaxFieldPower), _maxFieldPower);
                 }
             }
         }
@@ -150,7 +150,7 @@ namespace Starcore.FieldGenerator
                 if (_minFieldPower != value)
                 {
                     _minFieldPower = value;
-                    OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<object>(nameof(MinFieldPower), _minFieldPower));
+                    SyncPacket<float>.SyncProperty(Block.EntityId, nameof(MinFieldPower), _minFieldPower);
                 }
             }
         }
@@ -164,7 +164,7 @@ namespace Starcore.FieldGenerator
                 if (_sizeModifier != value)
                 {
                     _sizeModifier = value;
-                    OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<object>(nameof(SizeModifier), _sizeModifier));
+                    SyncPacket<float>.SyncProperty(Block.EntityId, nameof(SizeModifier), _sizeModifier);
                 }
             }
         }
@@ -178,13 +178,11 @@ namespace Starcore.FieldGenerator
                 if (_stability != value)
                 {
                     _stability = value;
-                    OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<object>(nameof(Stability), _stability));
+                    SyncPacket<float>.SyncProperty(Block.EntityId, nameof(Stability), _stability);
                 }
             }
         }
         public float _stability;
-
-        public event PropertyChangedEventHandler<object> OnPropertyChanged;
         #endregion
 
         private Dictionary<string, IMyModelDummy> _coreDummies = new Dictionary<string, IMyModelDummy>();
@@ -222,8 +220,6 @@ namespace Starcore.FieldGenerator
 
             Sink = Block.Components.Get<MyResourceSinkComponent>();
             Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, CalculatePowerDraw);
-
-            OnPropertyChanged += HandlePacketUpdate;
 
             if (IsServer)
             {
@@ -346,8 +342,6 @@ namespace Starcore.FieldGenerator
         {
             base.Close();
 
-            OnPropertyChanged += HandlePacketUpdate;
-
             if (IsServer)
             {
                 Block.CubeGrid.OnBlockAdded -= OnBlockAdded;
@@ -452,31 +446,6 @@ namespace Starcore.FieldGenerator
         {
             if (obj?.Value ?? false)
                 Block.CubeGrid.Physics.LinearVelocity = Vector3.Zero;
-        }
-        #endregion
-
-        #region Terminal Control Packet Handlers
-        private void HandlePacketUpdate(object sender, PropertyChangedEventArgs<object> e)
-        {
-            if (e.NewValue is float)
-            {
-                float floatValue = (float)e.NewValue;
-                SyncPacket<float>.SyncProperty(Block.EntityId, e.PropertyName, floatValue);
-            }
-            else if (e.NewValue is bool)
-            {
-                bool boolValue = (bool)e.NewValue;
-                SyncPacket<bool>.SyncProperty(Block.EntityId, e.PropertyName, boolValue);
-            }
-            else if (e.NewValue is int)
-            {
-                int intValue = (int)e.NewValue;
-                SyncPacket<int>.SyncProperty(Block.EntityId, e.PropertyName, intValue);
-            }
-            else
-            {
-                Log.Error($"Unsupported property type: {e.NewValue.GetType()} for {e.PropertyName}");
-            }
         }
         #endregion
 
@@ -756,19 +725,5 @@ namespace Starcore.FieldGenerator
             notifPower.Show();
         }
         #endregion
-    }
-
-    public delegate void PropertyChangedEventHandler<T>(object sender, PropertyChangedEventArgs<T> e);
-
-    public class PropertyChangedEventArgs<T> : EventArgs
-    {
-        public string PropertyName { get; }
-        public T NewValue { get; }
-
-        public PropertyChangedEventArgs(string propertyName, T newValue)
-        {
-            PropertyName = propertyName;
-            NewValue = newValue;
-        }
     }
 }
