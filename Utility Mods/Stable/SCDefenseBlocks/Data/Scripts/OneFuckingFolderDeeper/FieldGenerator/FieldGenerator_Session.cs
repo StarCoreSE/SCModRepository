@@ -33,9 +33,12 @@ namespace Starcore.FieldGenerator
         {
             base.UpdateAfterSimulation();
 
-            foreach (long entityID in PacketQueueManager.I.GetEntitiesWithPackets())
+            if (!PacketQueueManager.I.QueuesWithPackets())
+                return;
+
+            foreach (long entityID in PacketQueueManager.I.EntitiesWithQueue())
             {
-                PacketBase packet = PacketQueueManager.I.PeekNextPacket(entityID);
+                PacketBase packet = PacketQueueManager.I.FirstInQueue(entityID);
 
                 if (packet != null)
                 {                 
