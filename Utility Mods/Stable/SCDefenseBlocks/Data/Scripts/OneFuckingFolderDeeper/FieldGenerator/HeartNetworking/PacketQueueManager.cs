@@ -102,24 +102,24 @@ namespace Starcore.FieldGenerator.Networking
 
         private long GetEntityId(PacketBase packet)
         {
-            if (packet is SyncPacket<float>)
-                return ((SyncPacket<float>)packet).entityId;
-            if (packet is SyncPacket<int>)
-                return ((SyncPacket<int>)packet).entityId;
-            if (packet is SyncPacket<bool>)
-                return ((SyncPacket<bool>)packet).entityId;
+            if (packet.GetType() == typeof(FloatSyncPacket))
+                return ((FloatSyncPacket)packet).entityId;
+            if (packet.GetType() == typeof(IntSyncPacket))
+                return ((IntSyncPacket)packet).entityId;
+            if (packet.GetType() == typeof(BoolSyncPacket))
+                return ((BoolSyncPacket)packet).entityId;
 
-            return long.MaxValue;
+            return 0;
         }
 
         private string GetPropertyName(PacketBase packet)
         {
-            if (packet is SyncPacket<float>)
-                return ((SyncPacket<float>)packet).propertyName;
-            if (packet is SyncPacket<int>)
-                return ((SyncPacket<int>)packet).propertyName;
-            if (packet is SyncPacket<bool>)
-                return ((SyncPacket<bool>)packet).propertyName;
+            if (packet.GetType() == typeof(FloatSyncPacket))
+                return ((FloatSyncPacket)packet).propertyName;
+            if (packet.GetType() == typeof(IntSyncPacket))
+                return ((IntSyncPacket)packet).propertyName;
+            if (packet.GetType() == typeof(BoolSyncPacket))
+                return ((BoolSyncPacket)packet).propertyName;
 
             return string.Empty;
         }

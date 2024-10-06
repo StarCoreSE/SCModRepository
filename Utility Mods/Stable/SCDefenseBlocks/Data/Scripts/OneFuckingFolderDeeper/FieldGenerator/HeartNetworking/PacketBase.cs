@@ -5,13 +5,18 @@ using Starcore.FieldGenerator.Networking.Custom;
 namespace Starcore.FieldGenerator.Networking
 {
     [ProtoContract(UseProtoMembersOnly = true)]
-    [ProtoInclude(1, typeof(SyncPacket<>))]
+    [ProtoInclude(1, typeof(BoolSyncPacket))]
+    [ProtoInclude(2, typeof(IntSyncPacket))]
+    [ProtoInclude(3, typeof(FloatSyncPacket))]
+    //[ProtoInclude(4, typeof(SyncRequestPacket))]
     public abstract class PacketBase
     {
         public static readonly Type[] PacketTypes =
         {
             typeof(PacketBase),
-            typeof(SyncPacket<>),
+            typeof(BoolSyncPacket),
+            typeof(IntSyncPacket),
+            typeof(FloatSyncPacket),
            // typeof(SyncRequestPacket),
         };
 
