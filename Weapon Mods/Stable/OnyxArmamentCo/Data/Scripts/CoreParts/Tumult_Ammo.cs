@@ -309,11 +309,11 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "Tumult_sparkle1", //ShipWelderArc
+                        Name = "Tumult_sparkle2", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
-                            Scale = 5,
+                            Scale = 1,
                         },
                     },
                     Hit = new ParticleDef
