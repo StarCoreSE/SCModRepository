@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlockRestrictions.Settings
+namespace SC_BlockRestrictions.Settings
 {
   public class PlayerData
   {

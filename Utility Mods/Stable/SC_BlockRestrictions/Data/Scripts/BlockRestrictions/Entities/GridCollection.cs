@@ -21,7 +21,7 @@ using VRage.Utils;
 using CollisionLayers = Sandbox.Engine.Physics.MyPhysics.CollisionLayers;
 using Sandbox.Definitions;
 
-namespace BlockRestrictions
+namespace SC_BlockRestrictions
 {
   public class GridCollection
   {

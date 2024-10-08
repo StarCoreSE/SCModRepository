@@ -11,7 +11,7 @@ using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRage.Utils;
 
-namespace BlockRestrictions
+namespace SC_BlockRestrictions
 {
   public static class Utilities
   {
@@ -97,7 +97,7 @@ namespace BlockRestrictions
         catch(Exception e)
         {
           sb?.Append($"ERROR in ReturnCompsToPlayer:\n{e.Message}\n{e.StackTrace}\n");
-          MyLog.Default.WriteLineAndConsole($"ERROR in BlockRestrictions.RefundComponents! Unable to refund components to {block.OwnerId}:\n{e.Message}\n{e.StackTrace}");
+          MyLog.Default.WriteLineAndConsole($"ERROR in SC_BlockRestrictions.RefundComponents! Unable to refund components to {block.OwnerId}:\n{e.Message}\n{e.StackTrace}");
         }
       }
     }

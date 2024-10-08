@@ -7,7 +7,7 @@ using VRage.ObjectBuilders;
 using ProtoBuf;
 using System.Xml.Serialization;
 
-namespace BlockRestrictions
+namespace SC_BlockRestrictions
 {
   [ProtoContract]
   public class BlockSaveData

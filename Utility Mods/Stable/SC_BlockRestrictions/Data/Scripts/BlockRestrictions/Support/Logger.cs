@@ -9,7 +9,7 @@ using Sandbox.ModAPI;
 
 using VRage.Game.ModAPI.Ingame.Utilities;
 
-namespace BlockRestrictions
+namespace SC_BlockRestrictions
 {
   public class Logger
   {
