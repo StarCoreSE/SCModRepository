@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace BlockRestrictions.Settings
+namespace SC_BlockRestrictions.Settings
 {
   public class DefaultSettings
   {

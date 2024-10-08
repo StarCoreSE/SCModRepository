@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using ProtoBuf;
 
-namespace BlockRestrictions
+namespace SC_BlockRestrictions
 {
 
   [ProtoContract]

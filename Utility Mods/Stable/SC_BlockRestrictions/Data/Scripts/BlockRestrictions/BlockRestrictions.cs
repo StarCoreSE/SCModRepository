@@ -36,12 +36,12 @@ using IMyMechanicalConnectionBlock = Sandbox.ModAPI.IMyMechanicalConnectionBlock
 using IMyMotorStator = Sandbox.ModAPI.IMyMotorStator;
 using IMyPistonBase = Sandbox.ModAPI.IMyPistonBase;
 using System.Runtime.InteropServices;
-using BlockRestrictions.Settings;
+using SC_BlockRestrictions.Settings;
 
-namespace BlockRestrictions
+namespace SC_BlockRestrictions
 {
   [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
-  public class BlockRestrictions : MySessionComponentBase
+  public class SC_BlockRestrictions : MySessionComponentBase
   {
     HashSet<MyObjectBuilderType> _ignoreTypes = new HashSet<MyObjectBuilderType>()
     {
@@ -205,7 +205,7 @@ namespace BlockRestrictions
           BlockTypeDict[typeId] = cubeDef;
       }
 
-      ModSaveData = Config.ReadFileFromWorldStorage<BlockSaveData>("BlockRestrictions.cfg", typeof(BlockSaveData), Logger) ?? new BlockSaveData();
+      ModSaveData = Config.ReadFileFromWorldStorage<BlockSaveData>("SC_BlockRestrictions.cfg", typeof(BlockSaveData), Logger) ?? new BlockSaveData();
       PlayerData = Config.ReadFileFromWorldStorage<PlayerSaveData>("PlayerData.cfg", typeof(PlayerSaveData), Logger) ?? new PlayerSaveData();
       
       if (PlayerData.PlayerSettings == null)
@@ -322,7 +322,7 @@ namespace BlockRestrictions
       Logger.AddLine($"\nBeforeStart() - Checking Entity Components");
       foreach (var def in MyDefinitionManager.Static.GetEntityComponentDefinitions())
       {
-        if (def.Id.SubtypeName.StartsWith("BlockRestrictions"))
+        if (def.Id.SubtypeName.StartsWith("SC_BlockRestrictions"))
         {
           Logger.AddLine($"-> Found EC: Subtype = {def.Id.SubtypeName}");
           _debug.Clear();
@@ -441,7 +441,7 @@ namespace BlockRestrictions
     {
       UpdateAllPlayerData();
 
-      Config.WriteFileToWorldStorage("BlockRestrictions.cfg", typeof(BlockSaveData), ModSaveData, Logger);
+      Config.WriteFileToWorldStorage("SC_BlockRestrictions.cfg", typeof(BlockSaveData), ModSaveData, Logger);
       Config.WriteFileToWorldStorage("PlayerData.cfg", typeof(PlayerSaveData), PlayerData, Logger);
     }
 
@@ -537,8 +537,8 @@ namespace BlockRestrictions
         IsDedicatedServer = MyAPIGateway.Utilities.IsDedicated;
         MyAPIGateway.Utilities.MessageEntered += OnMessageEntered;
 
-        Logger = new Logger("BlockRestrictions.log", MyAPIGateway.Utilities.IsDedicated);
-        Network = new Networking(2053202808, 02808, this, _debug);
+        Logger = new Logger("SC_BlockRestrictions.log", MyAPIGateway.Utilities.IsDedicated);
+        Network = new Networking(3344961488, 61488, this, _debug);
         Network.Register();
 
         foreach (var mod in MyAPIGateway.Session.Mods)
@@ -805,7 +805,7 @@ namespace BlockRestrictions
       catch (Exception e)
       {
         Logger?.Log($"Error in UpdateAfterSim: {e.Message}\n{e.StackTrace}", MessageType.ERROR);
-        ShowMessage($"An unhandled exception has occurred. Please send the 'BlockRestrictions.log' file to jTurp for analysis");
+        ShowMessage($"An unhandled exception has occurred. Please send the 'SC_BlockRestrictions.log' file to jTurp for analysis");
       }
 
       base.UpdateAfterSimulation();
@@ -837,7 +837,7 @@ namespace BlockRestrictions
         try
         {
           if (_modPacket == null)
-            _modPacket = new ModPacket(2053202808, _restrictedDefinitions.ToList());
+            _modPacket = new ModPacket(3344961488, _restrictedDefinitions.ToList());
 
           Network.SendToMod(2307665159, _modPacket);
         }

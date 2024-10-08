@@ -8,7 +8,7 @@ using Sandbox.ModAPI;
 
 using VRage.Utils;
 
-namespace BlockRestrictions
+namespace SC_BlockRestrictions
 {
   public static class Config
   {
@@ -27,7 +27,7 @@ namespace BlockRestrictions
       }
       catch (Exception e)
       {
-        MyLog.Default.WriteLineAndConsole($"Error in BlockRestrictions.Config.ReadFileFromLocalStorage: {e.Message}\n{e.StackTrace}");
+        MyLog.Default.WriteLineAndConsole($"Error in SC_BlockRestrictions.Config.ReadFileFromLocalStorage: {e.Message}\n{e.StackTrace}");
         log?.LogAll($"Error reading the file '{filename}' from local storage\n{e.Message}\n\n{e.StackTrace}", MessageType.ERROR);
         return default(T);
       }
@@ -48,7 +48,7 @@ namespace BlockRestrictions
       }
       catch (Exception e)
       {
-        MyLog.Default.WriteLineAndConsole($"Error in BlockRestrictions.Config.ReadFileFromWorldStorage: {e.Message}\n{e.StackTrace}");
+        MyLog.Default.WriteLineAndConsole($"Error in SC_BlockRestrictions.Config.ReadFileFromWorldStorage: {e.Message}\n{e.StackTrace}");
         log?.LogAll($"Error reading the file '{filename}' from world storage\n{e.Message}\n\n{e.StackTrace}", MessageType.ERROR);
         return default(T);
       }
@@ -70,7 +70,7 @@ namespace BlockRestrictions
       }
       catch (Exception e)
       {
-        MyLog.Default.WriteLineAndConsole($"Error in BlockRestrictions.Config.WriteFileToWorldStorage: {e.Message}\n{e.StackTrace}");
+        MyLog.Default.WriteLineAndConsole($"Error in SC_BlockRestrictions.Config.WriteFileToWorldStorage: {e.Message}\n{e.StackTrace}");
         log?.LogAll($"Error writing the file '{filename}' in world storage\n{e.Message}\n\n{e.StackTrace}", MessageType.ERROR);
       }
     }
@@ -90,7 +90,7 @@ namespace BlockRestrictions
       }
       catch (Exception e)
       {
-        MyLog.Default.WriteLineAndConsole($"Error in BlockRestrictions.Config.WriteFileToLocalStorage: {e.Message}\n{e.StackTrace}");
+        MyLog.Default.WriteLineAndConsole($"Error in SC_BlockRestrictions.Config.WriteFileToLocalStorage: {e.Message}\n{e.StackTrace}");
         log?.LogAll($"Error writing the file '{filename}' in local storage\n{e.Message}\n\n{e.StackTrace}", MessageType.ERROR);
       }
     }

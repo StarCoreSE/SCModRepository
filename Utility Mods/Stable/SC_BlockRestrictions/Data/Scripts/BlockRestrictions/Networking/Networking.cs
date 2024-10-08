@@ -7,7 +7,7 @@ using VRage.Game.ModAPI;
 using VRage.ObjectBuilders;
 using VRage.Utils;
 
-namespace BlockRestrictions
+namespace SC_BlockRestrictions
 {
   public class Networking
   {
@@ -15,9 +15,9 @@ namespace BlockRestrictions
     public readonly long PublishedId;
     List<IMyPlayer> _tempPlayers;
     StringBuilder _debugSB;
-    BlockRestrictions _mod;
+    SC_BlockRestrictions _mod;
 
-    public Networking(long publishedId, ushort networkId, BlockRestrictions mod, StringBuilder sb)
+    public Networking(long publishedId, ushort networkId, SC_BlockRestrictions mod, StringBuilder sb)
     {
       PublishedId = publishedId;
       NetworkId = networkId;
@@ -118,7 +118,7 @@ namespace BlockRestrictions
         _mod?.Logger?.Log($"Error in ReceivedPacket:\n{e.Message}\n{e.StackTrace}", MessageType.ERROR);
 
         if (MyAPIGateway.Session?.LocalHumanPlayer != null)
-          MyAPIGateway.Utilities.ShowNotification($"[BlockRestrictions] ERROR: {GetType().FullName} -- {e.Message} | Send BlockRestrictions.log to mod author", 10000, MyFontEnum.Red);
+          MyAPIGateway.Utilities.ShowNotification($"[SC_BlockRestrictions] ERROR: {GetType().FullName} -- {e.Message} | Send SC_BlockRestrictions.log to mod author", 10000, MyFontEnum.Red);
       }
     }
 

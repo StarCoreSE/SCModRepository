@@ -10,7 +10,7 @@ using ProtoBuf;
 using VRage.Game;
 using VRage.ObjectBuilders;
 
-namespace BlockRestrictions
+namespace SC_BlockRestrictions
 {
   [ProtoContract]
   public class SerialId

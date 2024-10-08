@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using VRage.Game;
 using VRage.ObjectBuilders;
 
-namespace BlockRestrictions
+namespace SC_BlockRestrictions
 {
   public class BlockSetting : SettingBase
   {

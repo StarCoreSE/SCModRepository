@@ -8,7 +8,7 @@ using ProtoBuf;
 using Sandbox.ModAPI;
 using VRage.Utils;
 
-namespace BlockRestrictions
+namespace SC_BlockRestrictions
 {
   [ProtoInclude(1000, typeof(BlockSaveData))]
   [ProtoInclude(2000, typeof(SerializableBlockSetting))]

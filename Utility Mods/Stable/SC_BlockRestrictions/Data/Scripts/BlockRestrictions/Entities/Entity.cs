@@ -36,7 +36,7 @@ using IMyMechanicalConnectionBlock = Sandbox.ModAPI.IMyMechanicalConnectionBlock
 using IMyMotorStator = Sandbox.ModAPI.IMyMotorStator;
 using IMyPistonBase = Sandbox.ModAPI.IMyPistonBase;
 
-namespace BlockRestrictions
+namespace SC_BlockRestrictions
 {
   public class Entity
   {
@@ -51,7 +51,7 @@ namespace BlockRestrictions
     public bool IsStatic => GridCollection?.IsStatic ?? false;
     public bool MarkedForClose => !(GridCollection?.CubeGridHash?.Count > 0);
 
-    BlockRestrictions _mod;
+    SC_BlockRestrictions _mod;
     Dictionary<MyDefinitionId, int> _gridBlockDict;
     Dictionary<string, int> _gridGroupDict;
     HashSet<IMyCubeGrid> _gridsToAdd, _gridHash;
@@ -61,7 +61,7 @@ namespace BlockRestrictions
     StringBuilder _debug;
     Logger _logger;
 
-    public Entity(MyCubeGrid grid, List<MyEntity> boxList, HashSet<IMyCubeGrid> gridHash, HashSet<IMyCubeGrid> gridAddHash, BlockRestrictions mod, StringBuilder debug = null, Logger logger = null)
+    public Entity(MyCubeGrid grid, List<MyEntity> boxList, HashSet<IMyCubeGrid> gridHash, HashSet<IMyCubeGrid> gridAddHash, SC_BlockRestrictions mod, StringBuilder debug = null, Logger logger = null)
     {
       _mod = mod;
       _boxList = boxList;
