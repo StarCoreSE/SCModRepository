@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<CubeBlocks>
-		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		<!--<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>105mmTwin</SubtypeId>
@@ -52,6 +52,6 @@
 				<Model BuildPercentUpperBound="0.50" File="Models\Cubes\large\105mmTwin_BS1.mwm"/>
 				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\105mmTwin_BS2.mwm"/>
 			</BuildProgressModels>
-		</Definition>
+		</Definition>-->
 	</CubeBlocks>
 </Definitions>

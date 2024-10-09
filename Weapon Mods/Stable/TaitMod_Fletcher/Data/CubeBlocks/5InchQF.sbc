@@ -1,17 +1,22 @@
 <?xml version="1.0" ?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<CubeBlocks>
-		<!--<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 			<Id>
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>127mmMk56</SubtypeId>
 			</Id>
-			<DisplayName>[FAS] Austin </DisplayName>
+			<DisplayName>[FAS] Montana </DisplayName>
 			<Description>
-				127mm/5" Twin Rapid Fire gun
-				4km AI range
-				Fires HE, SAP shell
-				Temp BP: 350
+				[Turret Range: 4000]
+				[Reload: 1.5 Seconds/Barrel]
+
+				[Ammo Types: HE | SAP]
+				[Shell Range: 5km]
+				[Shell Speed: 850m/s | 1500m/s]
+				[Damage Types: Energy | Kinetic]
+				[AMS capable: 50]
+				5 inch twin, dual purpose turret, originally concieved as a turret to be mounted on the non-completed Montana class, claiming its name from that
 			</Description>
 			<Icon>Textures\GUI\Icons\5InQF.dds</Icon>
 			<CubeSize>Large</CubeSize>
@@ -33,9 +38,9 @@
 			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
 			<MountPoints>
-				<MountPoint Side="Bottom" StartX="1" StartY="1" EndX="2" EndY="2" />
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
 			</MountPoints>
 			<BlockPairName>127mmMk56</BlockPairName>
-		</Definition> -->
+		</Definition>
 	</CubeBlocks>
 </Definitions>

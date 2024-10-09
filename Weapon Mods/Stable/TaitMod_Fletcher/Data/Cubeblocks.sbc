@@ -1251,17 +1251,25 @@
 
 
 
-	  <!--<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
 		  <Id>
 			  <TypeId>ConveyorSorter</TypeId>
         <SubtypeId>6InchTriple</SubtypeId>
       </Id>	
       <DisplayName>[FAS] Helena</DisplayName>
-	<Description>
-		6 Inch Triple gun
-		5km Range
-		Fires AP shells
-	</Description>
+		  <Description>
+			  [Turret Range: 4000]
+			  [Reload: 1.5 Seconds/Barrel]
+
+			  [Ammo Types: HE | SAP]
+			  [Shell Range: 5km]
+			  [Shell Speed: 850m/s | 1500m/s]
+			  [Damage Types: Energy | Kinetic]
+			  [AMS capable: 50]
+
+
+			  152mm Triple turret, commonly found on US navy light cruisers during WW2, limited dual purpose capacity when comapred to the 5 inch guns
+		  </Description>
       <Icon>Textures\GUI\Icons\6InchTripleGun.dds</Icon>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
@@ -1269,16 +1277,16 @@
       <ModelOffset x="0" y= "0.95" z="0" />
       <Model>Models\152mm triple\6InchMain.mwm</Model>
       <UseModelIntersection>true</UseModelIntersection>
-      <Components>
-        <Component Subtype="SteelPlate" Count="100" />
-        <Component Subtype="MetalGrid" Count="100" />
-        <Component Subtype="LargeTube" Count="200" />
-        <Component Subtype="Motor" Count="150" />
-        <Component Subtype="Computer" Count="100" />
-        <Component Subtype="Construction" Count="200" />
-		<Component Subtype="MetalGrid" Count="300" />
-        <Component Subtype="SteelPlate" Count="2000" />
-      </Components>
+		  <Components>
+			  <Component Subtype="SteelPlate" Count="100" />
+			  <Component Subtype="MetalGrid" Count="100" />
+			  <Component Subtype="LargeTube" Count="200" />
+			  <Component Subtype="Motor" Count="100" />
+			  <Component Subtype="Computer" Count="100" />
+			  <Component Subtype="Construction" Count="200" />
+			  <Component Subtype="MetalGrid" Count="200" />
+			  <Component Subtype="SteelPlate" Count="1600" />
+		  </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
       <MountPoints>
 		  <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
@@ -1316,7 +1324,7 @@
       <ElevationSpeed>0.0005</ElevationSpeed>
       <MinFov>0.1</MinFov>
       <MaxFov>1.04719755</MaxFov>
-    </Definition> -->
+    </Definition>
 
 
 	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
