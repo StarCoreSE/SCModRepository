@@ -44,7 +44,7 @@
         </Blocks>
       </BlockVariantGroup>
 
-<BlockVariantGroup>
+    <BlockVariantGroup>
         <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="FAS_8_inch_set" />
         <Icon>Textures\GUI\Icons\Ger203mm.dds</Icon>
         <DisplayName>8 inch guns</DisplayName>
