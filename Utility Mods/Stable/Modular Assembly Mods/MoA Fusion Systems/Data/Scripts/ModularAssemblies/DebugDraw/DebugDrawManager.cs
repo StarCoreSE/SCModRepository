@@ -8,9 +8,10 @@ using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.Utils;
 using VRageMath;
+using VRageRender;
 using static VRageRender.MyBillboard;
 
-namespace FusionSystems.
+namespace StarCore.FusionSystems.
     DebugDraw
 {
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
@@ -21,46 +22,46 @@ namespace FusionSystems.
         private const float DepthRatioF = 0.01f;
         // i'm gonna kiss digi on the 
 
-        private static DebugDraw Instance;
+        private static DebugDraw _instance;
         protected static readonly MyStringId MaterialDot = MyStringId.GetOrCompute("WhiteDot");
         protected static readonly MyStringId MaterialSquare = MyStringId.GetOrCompute("Square");
 
-        private readonly Dictionary<Vector3I, MyTuple<long, Color, IMyCubeGrid>> QueuedGridPoints =
+        private readonly Dictionary<Vector3I, MyTuple<long, Color, IMyCubeGrid>> _queuedGridPoints =
             new Dictionary<Vector3I, MyTuple<long, Color, IMyCubeGrid>>();
 
-        private readonly Dictionary<MyTuple<Vector3D, Vector3D>, MyTuple<long, Color>> QueuedLinePoints =
+        private readonly Dictionary<MyTuple<Vector3D, Vector3D>, MyTuple<long, Color>> _queuedLinePoints =
             new Dictionary<MyTuple<Vector3D, Vector3D>, MyTuple<long, Color>>();
 
-        private readonly Dictionary<Vector3D, MyTuple<long, Color>> QueuedPoints =
+        private readonly Dictionary<Vector3D, MyTuple<long, Color>> _queuedPoints =
             new Dictionary<Vector3D, MyTuple<long, Color>>();
 
         public override void LoadData()
         {
             if (!MyAPIGateway.Utilities.IsDedicated)
-                Instance = this;
+                _instance = this;
         }
 
         protected override void UnloadData()
         {
-            Instance = null;
+            _instance = null;
         }
 
         public static void AddPoint(Vector3D globalPos, Color color, float duration)
         {
-            if (Instance == null)
+            if (_instance == null)
                 return;
 
 
-            if (Instance.QueuedPoints.ContainsKey(globalPos))
-                Instance.QueuedPoints[globalPos] =
+            if (_instance._queuedPoints.ContainsKey(globalPos))
+                _instance._queuedPoints[globalPos] =
                     new MyTuple<long, Color>(DateTime.UtcNow.Ticks + (long)(duration * TimeSpan.TicksPerSecond), color);
             else
-                Instance.QueuedPoints.Add(globalPos,
+                _instance._queuedPoints.Add(globalPos,
                     new MyTuple<long, Color>(DateTime.UtcNow.Ticks + (long)(duration * TimeSpan.TicksPerSecond),
                         color));
         }
 
-        public static void AddGPS(string name, Vector3D position, float duration)
+        public static void AddGps(string name, Vector3D position, float duration)
         {
             var gps = MyAPIGateway.Session.GPS.Create(name, string.Empty, position, true, true);
             gps.DiscardAt =
@@ -68,38 +69,38 @@ namespace FusionSystems.
             MyAPIGateway.Session.GPS.AddLocalGps(gps);
         }
 
-        public static void AddGridGPS(string name, Vector3I gridPosition, IMyCubeGrid grid, float duration)
+        public static void AddGridGps(string name, Vector3I gridPosition, IMyCubeGrid grid, float duration)
         {
-            AddGPS(name, GridToGlobal(gridPosition, grid), duration);
+            AddGps(name, GridToGlobal(gridPosition, grid), duration);
         }
 
         public static void AddGridPoint(Vector3I blockPos, IMyCubeGrid grid, Color color, float duration)
         {
-            if (Instance == null)
+            if (_instance == null)
                 return;
 
-            if (Instance.QueuedGridPoints.ContainsKey(blockPos))
-                Instance.QueuedGridPoints[blockPos] =
+            if (_instance._queuedGridPoints.ContainsKey(blockPos))
+                _instance._queuedGridPoints[blockPos] =
                     new MyTuple<long, Color, IMyCubeGrid>(
                         DateTime.UtcNow.Ticks + (long)(duration * TimeSpan.TicksPerSecond), color, grid);
             else
-                Instance.QueuedGridPoints.Add(blockPos,
+                _instance._queuedGridPoints.Add(blockPos,
                     new MyTuple<long, Color, IMyCubeGrid>(
                         DateTime.UtcNow.Ticks + (long)(duration * TimeSpan.TicksPerSecond), color, grid));
         }
 
         public static void AddLine(Vector3D origin, Vector3D destination, Color color, float duration)
         {
-            if (Instance == null)
+            if (_instance == null)
                 return;
 
 
             var key = new MyTuple<Vector3D, Vector3D>(origin, destination);
-            if (Instance.QueuedLinePoints.ContainsKey(key))
-                Instance.QueuedLinePoints[key] =
+            if (_instance._queuedLinePoints.ContainsKey(key))
+                _instance._queuedLinePoints[key] =
                     new MyTuple<long, Color>(DateTime.UtcNow.Ticks + (long)(duration * TimeSpan.TicksPerSecond), color);
             else
-                Instance.QueuedLinePoints.Add(key,
+                _instance._queuedLinePoints.Add(key,
                     new MyTuple<long, Color>(DateTime.UtcNow.Ticks + (long)(duration * TimeSpan.TicksPerSecond),
                         color));
         }
@@ -108,28 +109,28 @@ namespace FusionSystems.
         {
             try
             {
-                foreach (var key in QueuedPoints.Keys.ToList())
+                foreach (var key in _queuedPoints.Keys.ToList())
                 {
-                    DrawPoint0(key, QueuedPoints[key].Item2);
+                    DrawPoint0(key, _queuedPoints[key].Item2);
 
-                    if (DateTime.UtcNow.Ticks > QueuedPoints[key].Item1)
-                        QueuedPoints.Remove(key);
+                    if (DateTime.UtcNow.Ticks > _queuedPoints[key].Item1)
+                        _queuedPoints.Remove(key);
                 }
 
-                foreach (var key in QueuedGridPoints.Keys.ToList())
+                foreach (var key in _queuedGridPoints.Keys.ToList())
                 {
-                    DrawGridPoint0(key, QueuedGridPoints[key].Item3, QueuedGridPoints[key].Item2);
+                    DrawGridPoint0(key, _queuedGridPoints[key].Item3, _queuedGridPoints[key].Item2);
 
-                    if (DateTime.UtcNow.Ticks > QueuedGridPoints[key].Item1)
-                        QueuedGridPoints.Remove(key);
+                    if (DateTime.UtcNow.Ticks > _queuedGridPoints[key].Item1)
+                        _queuedGridPoints.Remove(key);
                 }
 
-                foreach (var key in QueuedLinePoints.Keys.ToList())
+                foreach (var key in _queuedLinePoints.Keys.ToList())
                 {
-                    DrawLine0(key.Item1, key.Item2, QueuedLinePoints[key].Item2);
+                    DrawLine0(key.Item1, key.Item2, _queuedLinePoints[key].Item2);
 
-                    if (DateTime.UtcNow.Ticks > QueuedLinePoints[key].Item1)
-                        QueuedLinePoints.Remove(key);
+                    if (DateTime.UtcNow.Ticks > _queuedLinePoints[key].Item1)
+                        _queuedLinePoints.Remove(key);
                 }
             }
             catch

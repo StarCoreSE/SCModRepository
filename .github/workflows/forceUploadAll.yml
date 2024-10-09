@@ -1,0 +1,17 @@
+name: Aristeas ForceUploadAll
+on:
+  workflow_dispatch:
+
+jobs:
+  forceupload:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4.1.4
+        with:
+          fetch-depth: 0
+    
+      - id: local_forceUpload
+        run: |
+          & "C:\actions-runner\externals\SC_NewUniversalUpload.exe" "uploadall"
+
+      - uses: EndBug/add-and-commit@v9

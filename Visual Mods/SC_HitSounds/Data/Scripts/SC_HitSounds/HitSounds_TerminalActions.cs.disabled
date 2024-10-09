@@ -1,0 +1,50 @@
+﻿using Sandbox.Game.Localization;
+using Sandbox.ModAPI;
+using Sandbox.ModAPI.Interfaces.Terminal;
+using System.Collections.Generic;
+using VRage.Game.Entity;
+using VRage.Utils;
+
+namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
+{
+    internal class HitSounds_TerminalActions
+    {
+        static HashSet<string> validSorterWeapons => HitSounds.I.Settings.validSorterWeapons;
+
+        public static bool ShouldPlayBlockSounds(IMyConveyorSorter block)
+        {
+            return validSorterWeapons.Contains(block.BlockDefinition.SubtypeId);
+        }
+
+        public static void CreateTerminalControls()
+        {
+            wcApi.RegisterTerminalControl("HS_HitSoundEnabled"); // CRINGE
+
+            var SoundToggle = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlOnOffSwitch, IMyConveyorSorter>("HS_HitSoundEnabled");
+            SoundToggle.Title = MyStringId.GetOrCompute("Subtype Hit Sounds");
+            SoundToggle.Tooltip = MyStringId.GetOrCompute("Toggles whether this weapon TYPE should have hit sounds.");
+            SoundToggle.SupportsMultipleBlocks = true; // wether this control should be visible when multiple blocks are selected (as long as they all have this control).
+                                                       // callbacks to determine if the control should be visible or not-grayed-out(Enabled) depending on whatever custom condition you want, given a block instance.
+                                                       // optional, they both default to true.
+
+            SoundToggle.Visible = (block) => wcApi?.HasCoreWeapon(block as MyEntity) ?? false;
+            SoundToggle.OnText = MySpaceTexts.SwitchText_On;
+            SoundToggle.OffText = MySpaceTexts.SwitchText_Off;
+            SoundToggle.Getter = (block) => validSorterWeapons.Contains(block.BlockDefinition.SubtypeId);
+            SoundToggle.Setter = (block, value) =>
+            {
+                bool hasBlock = validSorterWeapons.Contains(block.BlockDefinition.SubtypeId);
+                if (value && !hasBlock)
+                {
+                    validSorterWeapons.Add(block.BlockDefinition.SubtypeId);
+                }
+                else if (hasBlock)
+                {
+                    validSorterWeapons.Remove(block.BlockDefinition.SubtypeId);
+                }
+            };
+            
+            MyAPIGateway.TerminalControls.AddControl<IMyConveyorSorter>(SoundToggle);
+        }
+    }
+}

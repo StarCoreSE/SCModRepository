@@ -156,8 +156,8 @@ namespace Scripts {
                     ReloadTime = 1, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 60, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    HeatPerShot = 200, // Heat generated per shot.
-                    MaxHeat = 200, // Max heat before weapon enters cooldown (70% of max heat).
+                    HeatPerShot = 160, // Heat generated per shot.
+                    MaxHeat = 150, // Max heat before weapon enters cooldown (70% of max heat).
                     Cooldown = 0.10f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
                     HeatSinkRate = 1, // Amount of heat lost per second.
                     DegradeRof = false, // Progressively lower rate of fire when over 80% heat threshold (80% of max heat).

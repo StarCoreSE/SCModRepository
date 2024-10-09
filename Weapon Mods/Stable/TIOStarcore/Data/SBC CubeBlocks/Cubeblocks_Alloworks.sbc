@@ -47,8 +47,6 @@
 				<Model BuildPercentUpperBound="0.66" File="Models\CoilgunMk2_BS2.mwm"/>
 				<Model BuildPercentUpperBound="1.0" File="Models\CoilgunMk2_BS3.mwm"/>
 			</BuildProgressModels>
-            <MirroringZ>Y</MirroringZ>
-			<MirroringY>Z</MirroringY>
             <BuildTimeSeconds>100</BuildTimeSeconds>
             <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
             <DamagedSound>ParticleElectrical</DamagedSound>
@@ -57,9 +55,9 @@
 			<MirroringZ>Y</MirroringZ>
             <MirroringY>Z</MirroringY>
 			<ResourceSinkGroup>Defense</ResourceSinkGroup>
-			<RequiredPowerInput>0.00002</RequiredPowerInput>
             <PCU>800</PCU>
             <IsAirTight>true</IsAirTight>
+			<AiEnabled>false</AiEnabled>
         </Definition>
   
 
@@ -72,6 +70,7 @@
 			</Id>
 			<DisplayName>[MID] Raider Light Coilgun</DisplayName>
 			<Description>[Kinetic damage, 5000 m/s, 3.5km range] [115MW]
+[Clone of Reaver Coilgun]
 
 
 			</Description>
@@ -125,8 +124,7 @@
 			<MirroringZ>Y</MirroringZ>
 			<MirroringY>Z</MirroringY>
 			<ResourceSinkGroup>Defense</ResourceSinkGroup>
-			<RequiredPowerInput>0.00002</RequiredPowerInput>
-
+			<AiEnabled>false</AiEnabled>
 			<EdgeType>Heavy</EdgeType>
 			<BuildTimeSeconds>125</BuildTimeSeconds>
 			<InventoryMaxVolume>1</InventoryMaxVolume>

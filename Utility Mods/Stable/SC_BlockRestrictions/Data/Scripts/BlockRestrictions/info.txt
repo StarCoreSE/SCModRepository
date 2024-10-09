@@ -1,0 +1,1 @@
+this is a version of block restrictions from early 2023; a "bug" we were using as a feature where restricted blocks applied even in creative was fixed. since we do everything in creative we need that bug. jturp said it was fine to reupload unlisted

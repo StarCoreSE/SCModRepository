@@ -139,6 +139,136 @@
         </Wave>
       </Waves>
     </Sound>
+    
+
+<!--Beeg fire shotgun-->
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>HAS_TigtoneFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>6000</MaxDistance>
+		  <DistantSounds>
+			  <DistantSound DistanceCrossfade="100" Distance="800" Sound="Tigtonefire2d1" />
+			  <DistantSound DistanceCrossfade="100" Distance="4000" Sound="Tigtonefire2d2" />        
+        
+		  </DistantSounds>
+      <!-- Prevents this sound from having this many active playbacks at once, 0 = infinite. -->
+      <SoundLimit>2</SoundLimit>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>50</DynamicMusicAmount>
+      <VolumeVariation>0</VolumeVariation>
+      <Volume>2</Volume>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Loop>Audio\shotgun\Tigtonefire2.wav</Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+        
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Tigtonefire2d1</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>6000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Loop>Audio\shotgun\Tigtonefire2d1.wav</Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Tigtonefire2d2</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>6000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Loop>Audio\shotgun\Tigtonefire2d2.wav</Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>HAS_Tigtone_Reload</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>40</Volume>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\shotgun\Tigtone_reload.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>HAS_Tigtone_Hit</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>6000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\shotgun\ThanatosFireFar.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>HAS_Tigtone_Travel</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>.5</Volume>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\shotgun\Tigtone_Travel.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
 
     <Sound>
       <Id>
@@ -159,25 +289,7 @@
       </Waves>
     </Sound>
 
-    <Sound>
-      <Id>
-        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
-        <SubtypeId>HAS_TwinFire</SubtypeId>
-      </Id>
-      <Category>SHOT</Category>
-      <MaxDistance>5000</MaxDistance>
-      <PreventSynchronization>0</PreventSynchronization>
-      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
-      <DynamicMusicAmount>35</DynamicMusicAmount>
-      <Volume>1</Volume>
-      <Loopable>false</Loopable>
-      <Waves>
-        <Wave Type="D3">
-          <Start>Audio\General\TwinFire.wav</Start>
-        </Wave>
-      </Waves>
-    </Sound>
-
+   
     <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>

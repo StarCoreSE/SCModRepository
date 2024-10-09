@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<TransparentMaterials>
+    
 		<TransparentMaterial>
 			<Id>
 				<TypeId>TransparentMaterialDefinition</TypeId>
@@ -13,6 +14,7 @@
 			<SoftParticleDistanceScale>0.1</SoftParticleDistanceScale>
 			<Texture>Textures\Chevron.dds</Texture>
 		</TransparentMaterial>
+    
 		<TransparentMaterial>
 			<Id>
 				<TypeId>TransparentMaterialDefinition</TypeId>
@@ -25,5 +27,19 @@
 			<SoftParticleDistanceScale>0.1</SoftParticleDistanceScale>
 			<Texture>Textures\Chevron_Flip.dds</Texture>
 		</TransparentMaterial>
+    
+        <TransparentMaterial>
+            <Id>
+            <TypeId>TransparentMaterialDefinition</TypeId>
+            <SubtypeId>SugmaCircle</SubtypeId>
+            </Id>
+            <AlphaMistingEnable>false</AlphaMistingEnable>
+            <AlphaSaturation>1</AlphaSaturation>
+            <CanBeAffectedByOtherLights>false</CanBeAffectedByOtherLights>
+            <IgnoreDepth>false</IgnoreDepth>
+            <SoftParticleDistanceScale>0.1</SoftParticleDistanceScale>
+            <Texture>Textures\circle.dds</Texture>
+        </TransparentMaterial>
+    
 	</TransparentMaterials>
 </Definitions>

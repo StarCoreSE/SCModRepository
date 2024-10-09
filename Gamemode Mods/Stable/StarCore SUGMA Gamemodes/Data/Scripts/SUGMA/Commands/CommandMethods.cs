@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Text;
-using Sandbox.ModAPI;
 using SC.SUGMA.GameState;
+using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
-using VRage.Game;
+using SC.SUGMA.Utilities;
 using MyAPIGateway = Sandbox.ModAPI.MyAPIGateway;
 
 namespace SC.SUGMA.Commands
@@ -19,25 +17,23 @@ namespace SC.SUGMA.Commands
             if (args.Length < 2)
             {
                 MyAPIGateway.Utilities.ShowMessage("SUGMA",
-                    $"Unrecognized gamemode \"null\". Available gamemodes:\n  {string.Join("\n  ", SUGMA_SessionComponent.I.GetGamemodes())}");
+                    $"Unrecognized gamemode \"null\". Available gamemodes:{SUGMA_SessionComponent.ListGamemodes()}");
                 return;
             }
 
-            string[] startArgs = Array.Empty<string>();
-            //if (args.Length > 2)
-            //    startArgs = args.RemoveIndices(new List<int>() { 0, 1 }); // TODO remove first two objects from args array
+            // Remove first two items from arguments
+            var startArgs = Array.Empty<string>();
+            if (args.Length > 2)
+            {
+                var newStartArgs = new string[args.Length - 2];
+                for (var i = 2; i < args.Length; i++) newStartArgs[i - 2] = args[i];
+                startArgs = newStartArgs;
+            }
 
             if (!SUGMA_SessionComponent.I.StartGamemode(args[1].ToLower(), startArgs, true))
             {
-                StringBuilder availableGamemodes = new StringBuilder();
-
-                foreach (var gamemode in SUGMA_SessionComponent.I.GetGamemodes())
-                {
-                    availableGamemodes.Append($"\n-    {gamemode} ({SUGMA_SessionComponent.I.GetComponent<GamemodeBase>(gamemode).ReadableName})");
-                }
-
                 MyAPIGateway.Utilities.ShowMessage("SUGMA",
-                    $"Unrecognized gamemode \"{args[1].ToLower()}\". Available gamemodes:{availableGamemodes}");
+                    $"Unrecognized gamemode \"{args[1].ToLower()}\". Available gamemodes:{SUGMA_SessionComponent.ListGamemodes()}");
                 return;
             }
 
@@ -56,7 +52,7 @@ namespace SC.SUGMA.Commands
         {
             if (!SUGMA_SessionComponent.I.StopGamemode(true))
             {
-                MyAPIGateway.Utilities.ShowMessage("SUGMA", $"There isn't a match running, idiot.");
+                MyAPIGateway.Utilities.ShowMessage("SUGMA", "There isn't a match running, idiot.");
                 return;
             }
 
@@ -106,5 +102,44 @@ namespace SC.SUGMA.Commands
         //        MyAPIGateway.Utilities.ShowNotification("Win time not changed, try /st settime xxx (in seconds)");
         //    }
         //}
+
+        #region Utility Commands
+
+        public static void Shields(string[] args)
+        {
+            if (MyAPIGateway.Session.IsServer)
+                new ShieldFillRequestPacket().Received(0);
+            else
+                HeartNetwork.I.SendToServer(new ShieldFillRequestPacket());
+        }
+
+        public static void ReportProblem(string[] args)
+        {
+            var message = "@" + (MyAPIGateway.Session.Player?.DisplayName ?? "ERR") + ":";
+            for (var i = 1; i < args.Length; i++) // Skip the first argument as it's always "problem"
+                message += ' ' + args[i];
+
+            SUtils.ReportProblem(args.Length > 1 ? message : "");
+        }
+
+        public static void ReportFixed(string[] args)
+        {
+            SUtils.ResolvedProblem();
+        }
+
+        public static void ResolveMissingPlayers(string[] args)
+        {
+            if (MyAPIGateway.Session.IsServer)
+                DisconnectHandler.I.ResolveProblem();
+            else
+                HeartNetwork.I.SendToServer(new MissingPlayerOverridePacket());
+        }
+
+        public static void AutoBalance(string[] args)
+        {
+            TeamBalancer.PerformBalancing();
+        }
+
+        #endregion
     }
 }

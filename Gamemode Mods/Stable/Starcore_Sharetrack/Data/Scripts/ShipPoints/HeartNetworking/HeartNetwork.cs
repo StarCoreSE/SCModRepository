@@ -4,7 +4,7 @@ using System.Linq;
 using Sandbox.ModAPI;
 using VRage.Game.ModAPI;
 
-namespace ShipPoints.HeartNetworking
+namespace StarCore.ShareTrack.HeartNetworking
 {
     public class HeartNetwork
     {
