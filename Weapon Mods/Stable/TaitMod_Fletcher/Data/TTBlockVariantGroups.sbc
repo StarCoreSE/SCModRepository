@@ -12,19 +12,21 @@
                 <Block Type="MyObjectBuilder_Conveyor" Subtype="Barbette1x1" />
         </Blocks>
     </BlockVariantGroup>
-  
-	
-		
-			
-	<BlockVariantGroup>
+
+
+	  
+
+	  <BlockVariantGroup>
         <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="FAS_5_Inch_set" />
         <Icon>Textures\GUI\Icons\5InchDualGun.dds</Icon>
         <DisplayName>5 Inch gun set</DisplayName>
         <Description>Fletcher 5 inch gun group</Description>
         <Blocks>
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="127mmMk32" />
+		  <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="127mmMk56" />
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="127mmMk24" />
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="127mmMk12" />
+		  <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="6InchTriple" />
         </Blocks>
       </BlockVariantGroup>
   
@@ -52,6 +54,17 @@
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="203mmTriple" />
         </Blocks>
       </BlockVariantGroup>
+
+
+	  <BlockVariantGroup>
+		  <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="FAS_Super_Heavy_set" />
+		  <Icon>Textures\GUI\Icons\18Inch48.dds</Icon>
+		  <DisplayName>20 inch guns</DisplayName>
+		  <Description>20 inch gun group</Description>
+		  <Blocks>
+			  <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="20InchTwin" />
+		  </Blocks>
+	  </BlockVariantGroup>
 
   </BlockVariantGroups>
   <BlockPositions>

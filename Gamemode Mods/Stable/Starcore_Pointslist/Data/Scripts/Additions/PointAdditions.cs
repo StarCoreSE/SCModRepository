@@ -668,7 +668,7 @@ namespace ShipPoints
             ["127mmMk12"] = 150,
             ["127mmMk24"] = 150,
             ["127mmMk32"] = 150,
-            ["127mmMk56"] = 350,
+            ["127mmMk56"] = 150,
             ["105mmTwin"] = 100,
             ["PomPomMain"] = 75,
             ["150mmCasemate"] = 150,
@@ -680,8 +680,8 @@ namespace ShipPoints
             ["16InchTriple"] = 350,
             ["15cmTbtsKC36T"] = 150,
             ["15cmTbtsKC36"] = 150,
-            ["203mmTwin"] = 200,
-            ["203mmTriple"] = 200,
+            ["203mmTwin"] = 225,
+            ["203mmTriple"] = 225,
             ["TorpBarbette"] = 500,
             ["406alternate"] = 350,
             ["Mk25Rangefinder"] = 10,
@@ -894,10 +894,6 @@ namespace ShipPoints
                 case "Structural Integrity Field Generator":
                     blockDisplayName = "Defensive Generator";
                     costMultiplier = 50.00f;
-                    break;
-                case "[FAS] Neptune Torpedo":
-                    blockDisplayName = "Neptune Torpedo";
-                    costMultiplier = 0.25f;
                     break;
             }
 
