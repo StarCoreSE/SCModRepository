@@ -10,11 +10,18 @@
      </Id>
      <DisplayName>[NHI] Magnetic Coil Cannon Mk.2</DisplayName>
      <Description>
+[Turret Range: 6800m]
+[Reload: 13.5 Seconds]
+[Power Draw: 160MW]
+
+[Ammo Types: 460mm Slug]
+[Shell Range: 10km]
+[Shell Speed: 1800m/s]
+[Damage Types: Kinetic]
+[Damage Falloffs: None]
+
 A Turreted Magnetic Coil Cannon
 Exceptional Shield Damage and Range
-[Range: 6800]
-[Shell Speed: 1800m/s]
-[Damage Type: KIN]
      </Description>
      <Icon>Textures\GUI\Icons\CoilCannon.dds</Icon>
      <CubeSize>Large</CubeSize>

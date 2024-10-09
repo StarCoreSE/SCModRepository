@@ -9,7 +9,7 @@ using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.Utils;
 
-namespace ShipPoints
+namespace StarCore.ShareTrack
 {
     /// <summary>
     ///     <para>Standalone logger, does not require any setup.</para>

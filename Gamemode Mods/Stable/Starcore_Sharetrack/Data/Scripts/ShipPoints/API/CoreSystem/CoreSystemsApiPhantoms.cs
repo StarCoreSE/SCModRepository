@@ -3,7 +3,7 @@ using VRage;
 using VRage.Game.Entity;
 using VRageMath;
 
-namespace CoreSystems.Api
+namespace StarCore.ShareTrack.API.CoreSystem
 {
     /// <summary>
     ///     https://github.com/sstixrud/CoreSystems/blob/master/BaseData/Scripts/CoreSystems/Api/CoreSystemsApiPhantoms.cs

@@ -6,7 +6,7 @@ using VRageMath;
 //using static CoreSystems.Support.WeaponDefinition.AmmoDef.TrajectoryDef.ApproachDef;
 //using static CoreSystems.Support.WeaponDefinition.AnimationDef.PartAnimationSetDef;
 
-namespace CoreSystems.Api
+namespace StarCore.ShareTrack.API.CoreSystem
 {
     public static class WcApiDef
     {

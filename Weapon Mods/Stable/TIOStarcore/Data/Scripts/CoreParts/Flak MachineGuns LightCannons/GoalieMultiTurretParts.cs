@@ -27,7 +27,7 @@ namespace Scripts {
                         MuzzlePartId = "Damnation_MainDisk_E", // The subpart where your muzzle empties are located. This is often the elevation subpart.
                         AzimuthPartId = "Damnation_MainDisk_R", // Your Rotating Subpart, the bit that moves sideways
                         ElevationPartId = "Damnation_MainDisk_E",// Your Elevating Subpart, that bit that moves up
-                        DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
+                        DurabilityMod = 0.2f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
 
@@ -50,7 +50,7 @@ namespace Scripts {
             Targeting = new TargetingDef
             {
                 Threats = new[] {
-                    Projectiles, Characters, Meteors, Neutrals,  // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
+                    Projectiles, Meteors, Neutrals,  // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
                 },
                 SubSystems = new[] {
                     Offense, Thrust, Utility, Power, Production, Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
@@ -60,8 +60,8 @@ namespace Scripts {
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 1800, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
-                MinTargetDistance = 100, // Minimum distance at which targets will be automatically shot at.
+                MaxTargetDistance = 3000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 0, // Maximum number of targets to randomize between; 0 = unlimited.
                 CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
                 TopBlocks = 0, // Maximum number of blocks to randomize between; 0 = unlimited.
@@ -123,12 +123,12 @@ namespace Scripts {
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0.08f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
-                    ElevateRate = 0.08f, // Max traversal speed of elevation subpart in radians per tick.
-                    MinAzimuth = -22,
-                    MaxAzimuth = 22,
-                    MinElevation = -22,
-                    MaxElevation = 22,
+                    RotateRate = 0.12f, //FAST //Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
+                    ElevateRate = 0.12f, //FAST //Max traversal speed of elevation subpart in radians per tick.
+                    MinAzimuth = -24,
+                    MaxAzimuth = 24,
+                    MinElevation = -24,
+                    MaxElevation = 24,
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 0, // Default resting elevation
                     InventorySize = 10f, // Inventory capacity in kL.
@@ -160,7 +160,7 @@ namespace Scripts {
                 },
                 Loading = new LoadingDef
                 {
-                    RateOfFire = 180, // Set this to 3600 for beam weapons. This is how fast your Gun fires.
+                    RateOfFire = 180, //15 ticks per shot Set this to 3600 for beam weapons. This is how fast your Gun fires.
                     BarrelsPerShot = 7, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
@@ -247,7 +247,7 @@ namespace Scripts {
                         MuzzlePartId = "Damnation_Disk1_Elevation", // The subpart where your muzzle empties are located. This is often the elevation subpart.
                         AzimuthPartId = "Damnation_Disc1_Rot", // Your Rotating Subpart, the bit that moves sideways
                         ElevationPartId = "Damnation_Disk1_Elevation",// Your Elevating Subpart, that bit that moves up
-                        DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
+                        DurabilityMod = 0.2f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
 
@@ -263,7 +263,7 @@ namespace Scripts {
             Targeting = new TargetingDef
             {
                 Threats = new[] {
-                    Projectiles, Characters, Meteors, Neutrals,// Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
+                    Projectiles, Meteors, Neutrals,// Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
                 },
                 SubSystems = new[] {
                     Offense, Thrust, Utility, Power, Production, Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
@@ -273,7 +273,7 @@ namespace Scripts {
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 1800, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MaxTargetDistance = 3250, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
                 MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 0, // Maximum number of targets to randomize between; 0 = unlimited.
                 CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
@@ -336,12 +336,12 @@ namespace Scripts {
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0.08f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
-                    ElevateRate = 0.08f, // Max traversal speed of elevation subpart in radians per tick.
-                    MinAzimuth = -22,
-                    MaxAzimuth = 22,
-                    MinElevation = -32,
-                    MaxElevation = 32,
+                    RotateRate = 0.12f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
+                    ElevateRate = 0.12f, // Max traversal speed of elevation subpart in radians per tick.
+                    MinAzimuth = -24,
+                    MaxAzimuth = 24,
+                    MinElevation = -35,
+                    MaxElevation = 35,
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 0, // Default resting elevation
                     InventorySize = 10f, // Inventory capacity in kL.
@@ -461,7 +461,7 @@ namespace Scripts {
                         MuzzlePartId = "Damnation_Disk2_Elevation", // The subpart where your muzzle empties are located. This is often the elevation subpart.
                         AzimuthPartId = "Damnation_Disk2_Rot", // Your Rotating Subpart, the bit that moves sideways
                         ElevationPartId = "Damnation_Disk2_Elevation",// Your Elevating Subpart, that bit that moves up
-                        DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
+                        DurabilityMod = 0.2f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
 
@@ -477,7 +477,7 @@ namespace Scripts {
             Targeting = new TargetingDef
             {
                 Threats = new[] {
-                    Projectiles, Characters, Meteors, Neutrals,// Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
+                    Projectiles, Meteors, Neutrals,// Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
                 },
                 SubSystems = new[] {
                     Offense, Thrust, Utility, Power, Production, Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
@@ -487,7 +487,7 @@ namespace Scripts {
                 LockedSmartOnly = false, // Only fire at smart projectiles that are locked on to parent grid.
                 MinimumDiameter = 0, // Minimum radius of threat to engage.
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
-                MaxTargetDistance = 1800, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
+                MaxTargetDistance = 3100, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
                 MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
                 TopTargets = 0, // Maximum number of targets to randomize between; 0 = unlimited.
                 CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
@@ -550,12 +550,12 @@ namespace Scripts {
                 },
                 HardWare = new HardwareDef
                 {
-                    RotateRate = 0.08f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
-                    ElevateRate = 0.08f, // Max traversal speed of elevation subpart in radians per tick.
-                    MinAzimuth = -22,
-                    MaxAzimuth = 22,
-                    MinElevation = -32,
-                    MaxElevation = 32,
+                    RotateRate = 0.12f, // Max traversal speed of azimuth subpart in radians per tick (0.1 is approximately 360 degrees per second).
+                    ElevateRate = 0.12f, // Max traversal speed of elevation subpart in radians per tick.
+                    MinAzimuth = -24,
+                    MaxAzimuth = 24,
+                    MinElevation = -35,
+                    MaxElevation = 35,
                     HomeAzimuth = 0, // Default resting rotation angle
                     HomeElevation = 0, // Default resting elevation
                     InventorySize = 10f, // Inventory capacity in kL.
@@ -592,7 +592,7 @@ namespace Scripts {
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
                     ReloadTime = 30, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    MagsToLoad = 14, // Number of physical magazines to consume on reload.
+                    MagsToLoad = 14, //Deprecated//Number of physical magazines to consume on reload.
                     DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     HeatPerShot = 1, // Heat generated per shot.
                     MaxHeat = 100, // Max heat before weapon enters cooldown (70% of max heat).

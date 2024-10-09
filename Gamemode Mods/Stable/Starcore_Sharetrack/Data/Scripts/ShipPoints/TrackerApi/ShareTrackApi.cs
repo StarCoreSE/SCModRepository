@@ -1,12 +1,12 @@
-﻿using Sandbox.ModAPI;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Sandbox.ModAPI;
+using VRage;
 using VRage.Game.ModAPI;
 using VRage.Utils;
-using VRage;
 using VRageMath;
 
-namespace ShipPoints.TrackerApi
+namespace StarCore.ShareTrack.TrackerApi
 {
     // Aristeas? Reuse code? NEVER...
     public class ShareTrackApi
@@ -14,7 +14,7 @@ namespace ShipPoints.TrackerApi
         /// <summary>
         ///     The expected API version.
         /// </summary>
-        public const int ApiVersion = 2;
+        public const int ApiVersion = 3;
 
         /// <summary>
         ///     Triggered whenever the API is ready - added to by the constructor or manually.
@@ -114,6 +114,31 @@ namespace ShipPoints.TrackerApi
             _unregisterOnAliveChanged?.Invoke(action);
         }
 
+        public bool AreTrackedGridsLoaded()
+        {
+            return _areTrackedGridsLoaded?.Invoke() ?? false;
+        }
+
+        public int GetGridPoints(IMyCubeGrid grid)
+        {
+            return _getGridPoints?.Invoke(grid) ?? -1;
+        }
+
+        public void TrackGrid(IMyCubeGrid grid, bool share = true)
+        {
+            _trackGrid?.Invoke(grid, share);
+        }
+
+        public void UnTrackGrid(IMyCubeGrid grid, bool share = true)
+        {
+            _unTrackGrid?.Invoke(grid, share);
+        }
+
+        public void SetAutotrack(bool value)
+        {
+            _setAutotrack?.Invoke(value);
+        }
+
         #endregion
 
 
@@ -128,6 +153,11 @@ namespace ShipPoints.TrackerApi
         private Action<Action<IMyCubeGrid, bool>> _unRegisterOnTrack;
         private Action<Action<IMyCubeGrid, bool>> _registerOnAliveChanged;
         private Action<Action<IMyCubeGrid, bool>> _unregisterOnAliveChanged;
+        private Func<bool> _areTrackedGridsLoaded;
+        private Func<IMyCubeGrid, int> _getGridPoints;
+        private Action<IMyCubeGrid, bool> _trackGrid;
+        private Action<IMyCubeGrid, bool> _unTrackGrid;
+        private Action<bool> _setAutotrack;
 
         #endregion
 
@@ -157,6 +187,11 @@ namespace ShipPoints.TrackerApi
             SetApiMethod("UnregisterOnTrack", ref _unRegisterOnTrack);
             SetApiMethod("RegisterOnAliveChanged", ref _registerOnAliveChanged);
             SetApiMethod("UnregisterOnAliveChanged", ref _unregisterOnAliveChanged);
+            SetApiMethod("AreTrackedGridsLoaded", ref _areTrackedGridsLoaded);
+            SetApiMethod("GetGridPoints", ref _getGridPoints);
+            SetApiMethod("TrackGrid", ref _trackGrid);
+            SetApiMethod("UnTrackGrid", ref _unTrackGrid);
+            SetApiMethod("SetAutotrack", ref _setAutotrack);
 
             // Unload data if told to, otherwise notify that the API is ready.
             if (_methodMap == null)

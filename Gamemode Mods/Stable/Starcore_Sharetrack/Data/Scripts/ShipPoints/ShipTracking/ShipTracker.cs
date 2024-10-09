@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DefenseShields;
-using Draygo.API;
 using Sandbox.Game.Entities;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
+using StarCore.ShareTrack.API;
 using VRage.Game;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRage.ModAPI;
 using VRageMath;
+using VRageRender.Utils;
 using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
 
-namespace ShipPoints.ShipTracking
+namespace StarCore.ShareTrack.ShipTracking
 {
     public class ShipTracker
     {
@@ -38,68 +38,96 @@ namespace ShipPoints.ShipTracking
 
         public ShipTracker(IMyCubeGrid grid, bool showOnHud = true)
         {
-            TransferToGrid(grid);
-
-            Update();
-
-            if (!showOnHud)
-                return;
-
-            if (MyAPIGateway.Utilities.IsDedicated)
-                return;
-
-            _nametag = new HudAPIv2.HUDMessage(new StringBuilder("Initializing..."), Vector2D.Zero,
-                font: "BI_SEOutlined",
-                blend: BlendTypeEnum.PostPP, hideHud: false, shadowing: true);
+            TransferToGrid(grid, showOnHud);
+            if (!showOnHud || MyAPIGateway.Utilities.IsDedicated) return;
+            _nametag = new HudAPIv2.HUDMessage(new StringBuilder("Initializing..."), Vector2D.Zero, font: "BI_SEOutlined", blend: BlendTypeEnum.PostPP, hideHud: false, shadowing: true);
             UpdateHud();
         }
 
-        private void TransferToGrid(IMyCubeGrid newGrid)
+        private void TransferToGrid(IMyCubeGrid newGrid, bool showOnHud = true)
         {
+            Log.Info($"TransferToGrid called for grid {newGrid?.DisplayName ?? "null"}");
+
+            if (newGrid == null)
+            {
+                Log.Error("TransferToGrid called with null newGrid");
+                return;
+            }
+
             if (Grid != null)
             {
                 Grid.OnClose -= OnClose;
                 Grid.OnGridSplit -= OnGridSplit;
-                Grid.GetGridGroup(GridLinkTypeEnum.Physical).OnGridAdded -= OnGridAdd;
-                Grid.GetGridGroup(GridLinkTypeEnum.Physical).OnGridRemoved -= OnGridRemove;
-
+                var oldGridGroup = Grid.GetGridGroup(GridLinkTypeEnum.Physical);
+                if (oldGridGroup != null)
+                {
+                    oldGridGroup.OnGridAdded -= OnGridAdd;
+                    oldGridGroup.OnGridRemoved -= OnGridRemove;
+                }
                 foreach (var gridStat in _gridStats)
                 {
                     if (gridStat.Key != newGrid)
                         gridStat.Value.Close();
                 }
-                
                 _gridStats.Clear();
                 TrackingManager.I.TrackedGrids.Remove(Grid);
             }
 
             Grid = newGrid;
-
             var allAttachedGrids = new List<IMyCubeGrid>();
-            Grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(allAttachedGrids);
+            var newGridGroup = Grid.GetGridGroup(GridLinkTypeEnum.Physical);
+            if (newGridGroup != null)
+            {
+                newGridGroup.GetGrids(allAttachedGrids);
+            }
+            else
+            {
+                Log.Error($"Grid {Grid.DisplayName} has no physical grid group");
+                allAttachedGrids.Add(Grid);
+            }
+
+            OriginalGridIntegrity = 0;
             foreach (var attachedGrid in allAttachedGrids)
             {
-                var stats = new GridStats(attachedGrid);
-                _gridStats.Add(attachedGrid, stats);
-                OriginalGridIntegrity += stats.OriginalGridIntegrity;
-                if (((MyCubeGrid)attachedGrid).BlocksCount >
-                    ((MyCubeGrid)Grid).BlocksCount) // Snap to the largest grid in the group.
-                    Grid = attachedGrid;
+                if (attachedGrid != null)
+                {
+                    try
+                    {
+                        var stats = new GridStats(attachedGrid);
+                        _gridStats.Add(attachedGrid, stats);
+                        OriginalGridIntegrity += stats.OriginalGridIntegrity;
+                        if (((MyCubeGrid)attachedGrid).BlocksCount > ((MyCubeGrid)Grid).BlocksCount)
+                            Grid = attachedGrid;
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error($"Error processing attached grid {attachedGrid.DisplayName}: {ex}");
+                    }
+                }
             }
 
             Grid.OnClose += OnClose;
             Grid.OnGridSplit += OnGridSplit;
-            Grid.GetGridGroup(GridLinkTypeEnum.Physical).OnGridAdded += OnGridAdd;
-            Grid.GetGridGroup(GridLinkTypeEnum.Physical).OnGridRemoved += OnGridRemove;
-            if (!TrackingManager.I.TrackedGrids.ContainsKey(Grid))
+            var gridGroup = Grid.GetGridGroup(GridLinkTypeEnum.Physical);
+            if (gridGroup != null)
+            {
+                gridGroup.OnGridAdded += OnGridAdd;
+                gridGroup.OnGridRemoved += OnGridRemove;
+            }
+
+            if (!TrackingManager.I.TrackedGrids.ContainsKey(Grid) && showOnHud)
                 TrackingManager.I.TrackedGrids.Add(Grid, this);
+
+            Log.Info($"TransferToGrid completed for grid {Grid.DisplayName}");
+
+            Update();
         }
 
-        private ShieldApi ShieldApi => PointCheck.I.ShieldApi;
+        private ShieldApi ShieldApi => AllGridsList.I.ShieldApi;
 
 
         public IMyCubeGrid Grid { get; private set; }
-        public IMyPlayer Owner => MyAPIGateway.Players.GetPlayerControllingEntity(Grid) ?? PointCheck.GetOwner(OwnerId);
+        public IMyPlayer Owner => MyAPIGateway.Players.GetPlayerControllingEntity(Grid) ?? AllGridsList.GetOwner(OwnerId);
         public long OwnerId => Grid?.BigOwners.Count > 0 ? Grid?.BigOwners[0] ?? -1 : -1;
 
 
@@ -108,6 +136,7 @@ namespace ShipPoints.ShipTracking
         public Vector3 Position => Grid.Physics.CenterOfMassWorld;
         public IMyFaction OwnerFaction => MyAPIGateway.Session?.Factions?.TryGetPlayerFaction(OwnerId);
         public string FactionName => OwnerFaction?.Name ?? "None";
+        public string FactionTag => OwnerFaction?.Tag ?? "N/A";
         public Vector3 FactionColor => ColorMaskToRgb(OwnerFaction?.CustomColor ?? Vector3.Zero);
         public string OwnerName => Owner?.DisplayName ?? GridName;
 
@@ -170,7 +199,10 @@ namespace ShipPoints.ShipTracking
 
             // TODO: Update pilots
             foreach (var gridStat in _gridStats.Values)
+            {
+                gridStat.IsPrimaryGrid = gridStat.Grid.EntityId == Grid.EntityId;
                 gridStat.Update();
+            }
 
             bool bufferIsFunctional = IsFunctional;
             IsFunctional = TotalPower > 0 && TotalTorque > 0 && CockpitCount > 0;
@@ -277,7 +309,7 @@ namespace ShipPoints.ShipTracking
             else if (block is IMyConveyor || block is IMyConveyorTube) blockDisplayName = "Conveyor";
             else if (blockDisplayName.Contains("Buster")) blockDisplayName = "Buster Block";
             else if (blockDisplayName.StartsWith("Armor Laser")) blockDisplayName = "Laser Armor";
-            else if (!(block is IMyTerminalBlock)) blockDisplayName = "CubeBlock"; // If this is ever an issue, look here.
+            //else if (!(block is IMyTerminalBlock)) blockDisplayName = "CubeBlock"; // If this is ever an issue, look here.
 
             //if (blockDisplayName.Contains("Letter")) blockDisplayName = "Letter";
             //else if (blockDisplayName.Contains("Beam Block")) blockDisplayName = "Beam Block";
@@ -326,15 +358,15 @@ namespace ShipPoints.ShipTracking
                                  30 / Math.Max(maxAngle, angle * angle * angle);
                 _nametag.Origin = new Vector2D(targetHudPos.X,
                     targetHudPos.Y + MathHelper.Clamp(-0.000125 * distance + 0.25, 0.05, 0.25));
-                _nametag.Visible = visible && PointCheck.NametagViewState != NametagSettings.None;
+                _nametag.Visible = visible && AllGridsList.NametagViewState != NametagSettings.None;
 
                 _nametag.Message.Clear();
 
                 var nameTagText = "";
 
-                if ((PointCheck.NametagViewState & NametagSettings.PlayerName) > 0)
+                if ((AllGridsList.NametagViewState & NametagSettings.PlayerName) > 0)
                     nameTagText += OwnerName;
-                if ((PointCheck.NametagViewState & NametagSettings.GridName) > 0)
+                if ((AllGridsList.NametagViewState & NametagSettings.GridName) > 0)
                     nameTagText += "\n" + GridName;
                 if (!IsFunctional)
                     nameTagText += "<color=white>:[Dead]";
@@ -568,7 +600,7 @@ namespace ShipPoints.ShipTracking
                 var shieldController = ShieldApi.GetShieldBlock(Grid);
                 if (shieldController == null)
                     return -1;
-                return ShieldApi.GetShieldPercent(shieldController);
+                return ShieldApi.GetShieldPercent(shieldController) * (OriginalMaxShieldHealth == -1 ? 1 : ShieldApi.GetMaxHpCap(shieldController)/OriginalMaxShieldHealth);
             }
         }
 
@@ -579,6 +611,7 @@ namespace ShipPoints.ShipTracking
                 var shieldController = ShieldApi.GetShieldBlock(Grid);
                 if (shieldController == null)
                     return -1;
+                
                 return ShieldApi.GetShieldHeat(shieldController);
             }
         }
@@ -592,19 +625,22 @@ namespace ShipPoints.ShipTracking
             get
             {
                 var blockCounts = new Dictionary<string, int>();
+
                 foreach (var stats in _gridStats.Values)
-                foreach (var kvp in stats.WeaponCounts)
                 {
-                    if (!blockCounts.ContainsKey(kvp.Key))
-                        blockCounts.Add(kvp.Key, 0);
-                    blockCounts[kvp.Key] += kvp.Value;
+                    foreach (var kvp in stats.WeaponCounts)
+                    {
+                        if (!blockCounts.ContainsKey(kvp.Key))
+                            blockCounts.Add(kvp.Key, 0);
+                        blockCounts[kvp.Key] += kvp.Value;
+                    }
                 }
 
                 return blockCounts;
             }
         }
 
-        public float DamagePerSecond => Math.Abs(PointCheck.I.WcApi.GetConstructEffectiveDps((MyEntity) Grid));
+        public float DamagePerSecond => Math.Abs(AllGridsList.I.WcApi.GetConstructEffectiveDps((MyEntity) Grid));
 
         #endregion
 

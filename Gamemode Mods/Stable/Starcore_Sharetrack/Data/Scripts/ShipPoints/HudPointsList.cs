@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CoreSystems.Api;
-using DefenseShields;
-using Draygo.API;
-using RelativeTopSpeed;
 using Sandbox.Definitions;
 using Sandbox.ModAPI;
-using ShipPoints.ShipTracking;
+using StarCore.ShareTrack.API;
+using StarCore.ShareTrack.API.CoreSystem;
+using StarCore.ShareTrack.ShipTracking;
 using VRage.Game;
 using VRage.Game.ModAPI;
 using VRageMath;
 using static VRageRender.MyBillboard;
 
-namespace ShipPoints
+namespace StarCore.ShareTrack
 {
     /// <summary>
     ///     Shift-T screen
@@ -55,7 +53,7 @@ namespace ShipPoints
         {
             var cockpit = MyAPIGateway.Session.ControlledObject?.Entity as IMyCockpit;
             if (cockpit == null || MyAPIGateway.Session.IsCameraUserControlledSpectator)
-                return PointCheck.RaycastGridFromCamera();
+                return AllGridsList.RaycastGridFromCamera();
             return cockpit.CubeGrid?.Physics != null
                 ? // user is in cockpit
                 cockpit.CubeGrid
@@ -107,9 +105,10 @@ namespace ShipPoints
                 return;
             var stopwatch = new System.Diagnostics.Stopwatch();
             stopwatch.Start();
-            if (_shipTracker == null && !TrackingManager.I.TrackedGrids.TryGetValue(focusedGrid, out _shipTracker))
+            if (_shipTracker?.Grid?.GetGridGroup(GridLinkTypeEnum.Physical) != focusedGrid.GetGridGroup(GridLinkTypeEnum.Physical) && !TrackingManager.I.TrackedGrids.TryGetValue(focusedGrid, out _shipTracker))
             {
                 _shipTracker = new ShipTracker(focusedGrid, false);
+                Log.Info($"ShiftTCalcs Tracked grid {focusedGrid.DisplayName}. Visible: false");
             }
 
             _shipTracker.Update();
@@ -128,8 +127,11 @@ namespace ShipPoints
 
             var specialBlockTextBuilder = new StringBuilder();
             foreach (var x in _shipTracker.SpecialBlockCounts.Keys)
+            {
                 specialBlockTextBuilder.AppendFormat("<color=Green>{0}<color=White> x {1}\n",
                     _shipTracker.SpecialBlockCounts[x], x);
+            }
+                
             var specialBlockText = specialBlockTextBuilder.ToString();
 
             var massString = $"{_shipTracker.Mass}";
@@ -195,7 +197,7 @@ namespace ShipPoints
             sb.AppendFormat("<color=Green>Total blocks<color=White>: {0}\n", _shipTracker.BlockCount);
             sb.AppendFormat("<color=Green>PCU<color=White>: {0}\n", _shipTracker.PCU);
             sb.AppendFormat("<color=Green>Size<color=White>: {0}\n",
-                (focusedGrid.Max + Vector3.Abs(focusedGrid.Min)).ToString());
+                (focusedGrid.Max - focusedGrid.Min + Vector3I.One).ToString());
             // sb.AppendFormat("<color=Green>Max Speed<color=White>: {0} | <color=Green>TWR<color=White>: {1}\n", speed, TWRs);
             sb.AppendFormat(
                 "<color=Green>Max Speed<color=White>: {0} | <color=Green>Reduced Angular Speed<color=White>: {1:F2} | <color=Green>TWR<color=White>: {2}\n",
@@ -244,7 +246,10 @@ namespace ShipPoints
             ShipTracker tracked;
             TrackingManager.I.TrackedGrids.TryGetValue(focusedGrid, out tracked);
             if (tracked == null)
+            {
                 tracked = new ShipTracker(focusedGrid, false);
+                Log.Info($"BattleShiftTCalcs Tracked grid {focusedGrid.DisplayName}. Visible: false");
+            }
 
             var totalShieldString = "None";
 
@@ -326,10 +331,10 @@ namespace ShipPoints
 
         #region APIs
 
-        private WcApi WcApi => PointCheck.I.WcApi;
-        private ShieldApi ShApi => PointCheck.I.ShieldApi;
-        private RtsApi RtsApi => PointCheck.I.RtsApi;
-        private HudAPIv2 TextHudApi => PointCheck.I.TextHudApi;
+        private WcApi WcApi => AllGridsList.I.WcApi;
+        private ShieldApi ShApi => AllGridsList.I.ShieldApi;
+        private RtsApi RtsApi => AllGridsList.I.RtsApi;
+        private HudAPIv2 TextHudApi => MasterSession.I.TextHudApi;
 
         #endregion
 

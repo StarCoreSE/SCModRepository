@@ -35,7 +35,9 @@ namespace StarCore.RepairModule
     public class RepairModule : MyGameLogicComponent, IMyEventProxy
     {
         public IMyCollector Block;
-        private bool IsServer = MyAPIGateway.Session.IsServer;      
+        private bool IsServer = MyAPIGateway.Session.IsServer;
+        private bool IsDedicated = MyAPIGateway.Utilities.IsDedicated;
+        private bool ClientSettingsLoaded = false;
 
         // Block Settings
         public bool IgnoreArmor
@@ -46,12 +48,20 @@ namespace StarCore.RepairModule
                 if (ignoreArmor != value)
                 {
                     ignoreArmor = value;
+
+                    if (IsServer)
+                    {
+                        Log.Info("Processing Repair Targets on Event Trigger: IgnoreArmor");
+                        ProcessRepairTargets(Block.CubeGrid, false);
+                    }
+
                     OnIgnoreArmorChanged?.Invoke(ignoreArmor);
                 }
             }
         }
         public bool ignoreArmor;
         private event Action<bool> OnIgnoreArmorChanged;
+
         public bool PriorityOnly
         {
             get { return priorityOnly; }
@@ -60,12 +70,20 @@ namespace StarCore.RepairModule
                 if (priorityOnly != value)
                 {
                     priorityOnly = value;
+                       
+                    if (IsServer)
+                    {
+                        Log.Info("Processing Repair Targets on Event Trigger: PriorityOnly");
+                        ProcessRepairTargets(Block.CubeGrid, false);
+                    }
+
                     OnPriorityOnlyChanged?.Invoke(priorityOnly);
                 }
             }
         }
         public bool priorityOnly;
         private event Action<bool> OnPriorityOnlyChanged;
+
         public long SubsystemPriority
         {
             get { return GetLongFromPriority(subsystemPriority); }
@@ -75,6 +93,13 @@ namespace StarCore.RepairModule
                 if (subsystemPriority != newPriority)
                 {
                     subsystemPriority = newPriority;
+
+                    if (IsServer)
+                    {
+                        Log.Info("Processing Repair Targets on Event Trigger: SubsystemPriority");
+                        ProcessRepairTargets(Block.CubeGrid, false);
+                    }
+
                     OnSubsystemPriorityChanged?.Invoke(value);
                 }
             }
@@ -87,7 +112,9 @@ namespace StarCore.RepairModule
         public readonly Guid SettingsID = new Guid("09E18094-46AE-4F55-8215-A407B49F9CAA");
 
         // Timed Sort
-        private int SortTimer = 0;
+        private int UpdateCounter = 0;
+        private const int UpdateInterval = 100;
+        private int SortCounter = 0;
         private const int SortInterval = 48;
         private bool NeedsSorting = false;
 
@@ -100,6 +127,7 @@ namespace StarCore.RepairModule
         public MySync<Vector3D, SyncDirection.FromServer> TargetPosition = null;
         public MySync<long, SyncDirection.FromServer> TargetBlock = null;
         public MySync<bool, SyncDirection.FromServer> ShowWeldEffects = null;
+
         private const string WeldParticle = MyParticleEffectsNameEnum.WelderContactPoint;
         private MyParticleEffect WeldParticleEmitter;      
         private const string WeldSound = "ToolLrgWeldMetal";
@@ -131,16 +159,7 @@ namespace StarCore.RepairModule
 
             OnIgnoreArmorChanged += IgnoreArmor_Update;
             OnPriorityOnlyChanged += PriorityOnly_Update;
-            OnSubsystemPriorityChanged += SubsystemPriority_Update;
-
-            if (!LoadSettings())
-            {
-                IgnoreArmor = true;
-                PriorityOnly = false;
-                SubsystemPriority = 0;
-            }
-
-            SaveSettings();
+            OnSubsystemPriorityChanged += SubsystemPriority_Update;          
 
             Block.AppendingCustomInfo += AppendCustomInfo;
 
@@ -161,16 +180,18 @@ namespace StarCore.RepairModule
                         grid.OnBlockRemoved += HandleRemovedBlocks;                  
                     }
                 }
-            }         
+            }
 
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
             NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
+            NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME;
         }
 
         public override void UpdateAfterSimulation()
         {
             base.UpdateAfterSimulation();
 
+            // Repair Function
             if (IsServer)
             {
                 if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0 && Block.IsWorking)
@@ -200,6 +221,27 @@ namespace StarCore.RepairModule
                 }
             }
 
+            // Entity ID based Update Spreading for Reacquisition
+            if (IsServer)
+            {
+                UpdateCounter++;
+
+                if (Block.CubeGrid != null)
+                {
+                    int updateCount = (int)(Block.CubeGrid.EntityId % UpdateInterval);
+
+                    if (UpdateCounter % UpdateInterval == updateCount)
+                    {
+                        ProcessRepairTargets(Block.CubeGrid, false);
+                    }
+                }
+
+                if (UpdateCounter >= int.MaxValue - UpdateInterval)
+                {
+                    UpdateCounter = 0;
+                }
+            }
+
             if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0 && MyAPIGateway.Gui.GetCurrentScreen == MyTerminalPageEnum.ControlPanel)
             {
                 Block.RefreshCustomInfo();
@@ -222,21 +264,43 @@ namespace StarCore.RepairModule
 
             if (IsServer)
             {
-                if (SortTimer > 0 && !NeedsSorting)
+                if (SortCounter > 0 && !NeedsSorting)
                 {
-                    SortTimer--;
+                    SortCounter--;
                     return;
                 }
 
-                if (SortTimer == 0 || NeedsSorting)
+                if (SortCounter == 0 || NeedsSorting)
                 {
                     RepairTargets = RepairTargets.OrderBy(block => block.Integrity).ToList();
                     PriorityRepairTargets = PriorityRepairTargets.OrderBy(block => block.Integrity).ToList();
 
-                    SortTimer = SortInterval;
+                    SortCounter = SortInterval;
                     NeedsSorting = false;
-                }                        
+                }
             }
+        }
+
+        public override void UpdateAfterSimulation100()
+        {
+            base.UpdateAfterSimulation100();
+
+            if (IsDedicated)
+            {
+                NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME;
+                return;
+            }            
+
+            if (!LoadSettings())
+            {               
+                IgnoreArmor = true;
+                PriorityOnly = false;
+                SubsystemPriority = 0;
+            }
+
+            ClientSettingsLoaded = true;
+            NeedsUpdate &= ~MyEntityUpdateEnum.EACH_100TH_FRAME;
+            return;
         }
 
         public override void Close()
@@ -283,15 +347,15 @@ namespace StarCore.RepairModule
 
         public override bool IsSerialized()
         {
+            Log.Info($"IsSerialized called for {Block.EntityId}");
             try
             {
-                SaveSettings();
+                //SaveSettings(); NO NO NO DON'T CALL IT HERE IT SYNCS ELSEWHERE THIS KILLS EVERYTHING FOR SOME REASON
             }
             catch (Exception e)
             {
                 Log.Error(e);
             }
-
             return base.IsSerialized();
         }
         #endregion
@@ -337,35 +401,23 @@ namespace StarCore.RepairModule
 
         private void IgnoreArmor_Update(bool _bool)
         {
-            IgnoreArmorPacket.UpdateIgnoreArmor(Block.EntityId);
+            SaveSettings();
 
-            if (!IsServer)
-                SaveSettings();
-
-            if (IsServer)
-                ProcessRepairTargets(Block.CubeGrid, false);
+            IgnoreArmorPacket.UpdateIgnoreArmor(Block.EntityId);                
         }
 
         private void PriorityOnly_Update(bool _bool)
         {
+            SaveSettings();
+
             PriorityOnlyPacket.UpdatePriorityOnly(Block.EntityId);
-
-            if (!IsServer)
-                SaveSettings();
-
-            if (IsServer)
-                ProcessRepairTargets(Block.CubeGrid, false);
         }
 
         private void SubsystemPriority_Update(long _long)
         {
-            SubsystemPriorityPacket.UpdateSubsystemPriority(Block.EntityId);
+            SaveSettings();
 
-            if (!IsServer)
-                SaveSettings();
-            
-            if (IsServer)
-                ProcessRepairTargets(Block.CubeGrid, false);
+            SubsystemPriorityPacket.UpdateSubsystemPriority(Block.EntityId);
         }
         #endregion
 
@@ -373,11 +425,17 @@ namespace StarCore.RepairModule
         bool LoadSettings()
         {
             if (Block.Storage == null)
+            {
+                Log.Info($"LoadSettings: Block storage is null for {Block.EntityId}");
                 return false;
+            }
 
             string rawData;
             if (!Block.Storage.TryGetValue(SettingsID, out rawData))
+            {
+                Log.Info($"LoadSettings: No data found for {Block.EntityId}");
                 return false;
+            }
 
             try
             {
@@ -385,16 +443,20 @@ namespace StarCore.RepairModule
 
                 if (loadedSettings != null)
                 {
+                    Log.Info($"LoadSettings: Successfully loaded settings for {Block.EntityId}");
+                    Log.Info($"Loaded values: IgnoreArmor={loadedSettings.Stored_IgnoreArmor}, PriorityOnly={loadedSettings.Stored_PriorityOnly}, SubsystemPriority={loadedSettings.Stored_SubsystemPriority}");
+
                     IgnoreArmor = loadedSettings.Stored_IgnoreArmor;
                     PriorityOnly = loadedSettings.Stored_PriorityOnly;
                     SubsystemPriority = loadedSettings.Stored_SubsystemPriority;
 
+                    Log.Info($"After assignment: IgnoreArmor={IgnoreArmor}, PriorityOnly={PriorityOnly}, SubsystemPriority={SubsystemPriority}");
                     return true;
                 }
             }
             catch (Exception e)
             {
-                MyLog.Default.WriteLineAndConsole($"Error loading settings!\n{e}");
+                Log.Error($"Error loading settings for {Block.EntityId}!\n{e}");
             }
 
             return false;
@@ -402,16 +464,22 @@ namespace StarCore.RepairModule
 
         void SaveSettings()
         {
+            if (Block == null)
+            {
+                Log.Info("SaveSettings called but Block is null.");
+                return;
+            }
+
             try
             {
-                if (Block == null)
-                    return;
-
                 if (MyAPIGateway.Utilities == null)
                     throw new NullReferenceException($"MyAPIGateway.Utilities == null; entId={Entity?.EntityId};");
 
                 if (Block.Storage == null)
+                {
+                    Log.Info($"Creating new storage for {Block.EntityId}");
                     Block.Storage = new MyModStorageComponent();
+                }
 
                 var settings = new RepairSettings
                 {
@@ -420,11 +488,14 @@ namespace StarCore.RepairModule
                     Stored_SubsystemPriority = SubsystemPriority
                 };
 
-                Block.Storage.SetValue(SettingsID, Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(settings)));
+                string serializedData = Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(settings));
+                Block.Storage.SetValue(SettingsID, serializedData);
+                Log.Info($"SaveSettings: Successfully saved settings for {Block.EntityId}");
+                Log.Info($"Saved values: IgnoreArmor={IgnoreArmor}, PriorityOnly={PriorityOnly}, SubsystemPriority={SubsystemPriority}");
             }
             catch (Exception e)
             {
-                MyLog.Default.WriteLineAndConsole($"Error saving settings!\n{e}");
+                Log.Error($"Error saving settings for {Block.EntityId}!\n{e}");
             }
         }
         #endregion

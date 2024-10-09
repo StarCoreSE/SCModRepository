@@ -1,57 +1,25 @@
 ﻿using System.Collections.Generic;
-using FusionSystems.Communication;
-using Sandbox.ModAPI;
+using StarCore.FusionSystems.Communication;
 using VRage.Game.ModAPI;
 using VRageMath;
 
-namespace FusionSystems.HeatParts
+namespace StarCore.FusionSystems.HeatParts
 {
     internal class HeatSystem
     {
         private const float HeatCapacityPerSink = 60;
         private const float HeatDissipationPerRadiator = 5f;
 
-        private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
+        private readonly List<Vector3I> _cellPositions = new List<Vector3I>();
+
+        private readonly HashSet<IMyCubeBlock> _occludedRadiators = new HashSet<IMyCubeBlock>();
+        private readonly List<IMyCubeBlock> _radiatorBlocks = new List<IMyCubeBlock>();
+        private readonly HashSet<IMyCubeBlock> _visibleRadiators = new HashSet<IMyCubeBlock>();
+
+        public int AssemblyId;
 
         public GridHeatManager Parent;
 
-        public int AssemblyId;
-        public int BlockCount { get; private set; } = 0;
-        private List<IMyCubeBlock> _radiatorBlocks = new List<IMyCubeBlock>();
-
-        private HashSet<IMyCubeBlock> _occludedRadiators = new HashSet<IMyCubeBlock>();
-        private HashSet<IMyCubeBlock> _visibleRadiators = new HashSet<IMyCubeBlock>();
-
-        /// <summary>
-        /// Total heat dispersed per second by this assembly.
-        /// </summary>
-        public float HeatDissipation
-        {
-            get
-            {
-                return ModularApi.GetAssemblyProperty<float>(AssemblyId, "HeatDissipation");
-            }
-            private set
-            {
-                ModularApi.SetAssemblyProperty(AssemblyId, "HeatDissipation", value);
-            }
-        }
-
-        /// <summary>
-        /// Total heat able to be stored by this assembly.
-        /// </summary>
-        public float HeatCapacity
-        {
-            get
-            {
-                return ModularApi.GetAssemblyProperty<float>(AssemblyId, "HeatCapacity");
-            }
-            private set
-            {
-                ModularApi.SetAssemblyProperty(AssemblyId, "HeatCapacity", value);
-            }
-        }
-        
 
         public HeatSystem(int assemblyId, GridHeatManager parent)
         {
@@ -65,7 +33,28 @@ namespace FusionSystems.HeatParts
             Parent.Grid.OnBlockRemoved += UpdateLoS;
         }
 
-        public void OnBlockAdd(IMyCubeBlock block)
+        private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
+        public int BlockCount { get; private set; }
+
+        /// <summary>
+        ///     Total heat dispersed per second by this assembly.
+        /// </summary>
+        public float HeatDissipation
+        {
+            get { return ModularApi.GetAssemblyProperty<float>(AssemblyId, "HeatDissipation"); }
+            private set { ModularApi.SetAssemblyProperty(AssemblyId, "HeatDissipation", value); }
+        }
+
+        /// <summary>
+        ///     Total heat able to be stored by this assembly.
+        /// </summary>
+        public float HeatCapacity
+        {
+            get { return ModularApi.GetAssemblyProperty<float>(AssemblyId, "HeatCapacity"); }
+            private set { ModularApi.SetAssemblyProperty(AssemblyId, "HeatCapacity", value); }
+        }
+
+        public void OnPartAdd(IMyCubeBlock block)
         {
             switch (block.BlockDefinition.SubtypeName)
             {
@@ -85,7 +74,7 @@ namespace FusionSystems.HeatParts
             BlockCount++;
         }
 
-        public void OnBlockRemove(IMyCubeBlock block)
+        public void OnPartRemove(IMyCubeBlock block)
         {
             switch (block.BlockDefinition.SubtypeName)
             {
@@ -101,6 +90,7 @@ namespace FusionSystems.HeatParts
                         HeatDissipation -= HeatDissipationPerRadiator;
                         Parent.HeatDissipation -= HeatDissipationPerRadiator;
                     }
+
                     break;
             }
 
@@ -120,23 +110,19 @@ namespace FusionSystems.HeatParts
             {
                 radiator.Orientation.GetQuaternion(out radQuaternion);
 
-                Vector3I offset = (Vector3I) (radQuaternion * (newBlock.Position - radiator.Position));
+                var offset = (Vector3I)(radQuaternion * (newBlock.Position - radiator.Position));
 
                 // If block is in front of radiator panel
-                if (offset.X == 0 && offset.Y == 0 && offset.Z > 0)
-                {
-                    DoLoSCheck(radiator);
-                }
+                if (offset.X == 0 && offset.Y == 0 && offset.Z > 0) DoLoSCheck(radiator);
             }
         }
 
-        private readonly List<Vector3I> _cellPositions = new List<Vector3I>();
         private void DoLoSCheck(IMyCubeBlock radiatorBlock)
         {
-            MatrixD blockMatrix = radiatorBlock.WorldMatrix;
-            float gridMaxExtents = Vector3.Distance(Parent.Grid.Max, Parent.Grid.Min) * Parent.Grid.GridSize;
+            var blockMatrix = radiatorBlock.WorldMatrix;
+            var gridMaxExtents = Vector3.Distance(Parent.Grid.Max, Parent.Grid.Min) * Parent.Grid.GridSize;
 
-            bool doesIntersect = false;
+            var doesIntersect = false;
 
             if (ModularApi.IsDebug())
                 DebugDraw.DebugDraw.AddLine(blockMatrix.Translation,
@@ -153,6 +139,7 @@ namespace FusionSystems.HeatParts
                 doesIntersect = true;
                 break;
             }
+
             _cellPositions.Clear();
 
             if (doesIntersect)

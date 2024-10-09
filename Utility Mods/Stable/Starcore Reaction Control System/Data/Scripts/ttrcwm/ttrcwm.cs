@@ -21,6 +21,27 @@ namespace ttrcwm
         private int _count15 = 0, _count8 = 0;
         private bool _entity_events_set = false;
 
+        public override void LoadData()
+        {
+            base.LoadData();
+
+            Try_register_handlers();
+
+            // Ensure all existing grids are registered
+            var existing_entities = new HashSet<IMyEntity>();
+            MyAPIGateway.Entities.GetEntities(existing_entities, entity => entity is IMyCubeGrid);
+
+            foreach (var entity in existing_entities)
+            {
+                var grid = entity as IMyCubeGrid;
+                if (grid != null && !_grids.ContainsKey(grid))
+                {
+                    On_entity_added(grid);
+                }
+            }
+        }
+
+
         private void On_entity_added(IMyEntity entity)
         {
             try
@@ -28,16 +49,22 @@ namespace ttrcwm
                 var grid = entity as IMyCubeGrid;
                 if (grid != null)
                 {
-                    var new_grid_logic = new Grid_logic(grid);
-                    _grids_handle_60Hz += new_grid_logic.Handle_60Hz;
-                    _grids_handle_4Hz += new_grid_logic.Handle_4Hz;
-                    _grids_handle_2s_period += new_grid_logic.Handle_2s_period;
-                    _grids.TryAdd(grid, new_grid_logic);
+                    // Check if this grid is new and doesn't have logic yet
+                    if (!_grids.ContainsKey(grid))
+                    {
+                        var new_grid_logic = new Grid_logic(grid);
+                        _grids_handle_60Hz += new_grid_logic.Handle_60Hz;
+                        _grids_handle_4Hz += new_grid_logic.Handle_4Hz;
+                        _grids_handle_2s_period += new_grid_logic.Handle_2s_period;
+                        _grids.TryAdd(grid, new_grid_logic);
+
+                        MyLog.Default.WriteLineAndConsole($"New grid detected and added: {grid.DisplayName}");
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MyLog.Default.WriteLineAndConsole($"Error in on_entity_added: {ex}");
+                MyLog.Default.WriteLineAndConsole($"Error in On_entity_added: {ex}");
                 throw new Exception("An error occurred while adding a new entity.", ex);
             }
         }
@@ -74,19 +101,21 @@ namespace ttrcwm
 
                 if (!_entity_events_set && MyAPIGateway.Entities != null)
                 {
+                    MyAPIGateway.Entities.OnEntityAdd += On_entity_added;
+                    MyAPIGateway.Entities.OnEntityRemove += On_entity_removed;
+
+                    // Register existing entities
                     var existing_entities = new HashSet<IMyEntity>();
                     MyAPIGateway.Entities.GetEntities(existing_entities);
                     foreach (var cur_entity in existing_entities)
                         On_entity_added(cur_entity);
 
-                    MyAPIGateway.Entities.OnEntityAdd += On_entity_added;
-                    MyAPIGateway.Entities.OnEntityRemove += On_entity_removed;
                     _entity_events_set = true;
                 }
             }
             catch (Exception e)
             {
-                MyLog.Default.WriteLineAndConsole($"Error in try_register_handlers: {e.Message}");
+                MyLog.Default.WriteLineAndConsole($"Error in Try_register_handlers: {e.Message}");
             }
         }
 

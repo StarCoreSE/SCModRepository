@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using DefenseShields;
 using RichHudFramework.Client;
 using Sandbox.ModAPI;
 using SC.SUGMA.API;
 using SC.SUGMA.Commands;
-using SC.SUGMA.GameModes.TeamDeathMatch;
-using SC.SUGMA.GameModes.TeamDeathMatch_Zones;
+using SC.SUGMA.GameModes.Domination;
+using SC.SUGMA.GameModes.Elimination;
+using SC.SUGMA.GameModes.TeamDeathmatch;
 using SC.SUGMA.GameState;
 using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
-using SC.SUGMA.Textures;
+using SC.SUGMA.Utilities;
 using VRage.Game.Components;
-using VRage.ModAPI;
 
 namespace SC.SUGMA
 {
@@ -26,111 +28,25 @@ namespace SC.SUGMA
             ["MatchTimer"] = new MatchTimer(),
             ["HeartNetwork"] = new HeartNetwork(),
             ["PlayerTracker"] = new PlayerTracker(),
+            ["DisconnectHandler"] = new DisconnectHandler(),
+            ["elm"] = new EliminationGamemode(),
+            ["dom"] = new DominationGamemode(),
             ["tdm"] = new TeamDeathmatchGamemode(),
-            ["tdmz"] = new TDMZonesGamemode(),
-            // You would need to add in the zones gamemode too
         };
 
-        public static SUGMA_SessionComponent I { get; private set; }
+        /// <summary>
+        ///     How many ticks to wait after joining before requesting sync
+        /// </summary>
+        private int _pollTimer = 300;
+
+        public GamemodeBase CurrentGamemode;
+
+        public bool HasInited;
 
         public ShareTrackApi ShareTrackApi = new ShareTrackApi();
-        public GamemodeBase CurrentGamemode = null;
+        public ShieldApi ShieldApi = new ShieldApi();
 
-        public bool HasInited = false;
-        private int _pollTimer = 0;
-
-        #region Base Methods
-
-        public override void LoadData()
-        {
-            I = this;
-            Log.Init();
-            try
-            {
-                CommandHandler.Init();
-                ShareTrackApi.Init(ModContext, FinishInit);
-                RichHudClient.Init(DebugName, () => { Log.Info("RichHudClient registered."); }, null);
-            }
-            catch (Exception ex)
-            {
-                Log.Exception(ex, typeof(SUGMA_SessionComponent));
-            }
-        }
-
-        private void FinishInit()
-        {
-            try
-            {
-                foreach (var component in _components.ToArray())
-                    component.Value.Init(component.Key);
-            }
-            catch (Exception ex)
-            {
-                Log.Exception(ex, typeof(SUGMA_SessionComponent));
-            }
-        }
-
-        public override void UpdateAfterSimulation()
-        {
-            if (!ShareTrackApi.IsReady)
-                return;
-
-            {
-                // Clients should sync first-thing, in case a game is already running.
-                if (!HasInited)
-                {
-                    _pollTimer = 600;
-                    HasInited = true;
-                }
-
-                if (_pollTimer == 0)
-                {
-                    if (!MyAPIGateway.Session.IsServer)
-                        SyncRequestPacket.RequestSync();
-                    _pollTimer = -1;
-                }
-                else if (_pollTimer > 0)
-                    _pollTimer--;
-            }
-
-            try
-            {
-                foreach (var component in _components.Values.ToArray())
-                    component.UpdateTick();
-            }
-            catch (Exception ex)
-            {
-                Log.Exception(ex, typeof(SUGMA_SessionComponent));
-            }
-        }
-
-        protected override void UnloadData()
-        {
-            try
-            {
-                foreach (var component in _components.Values.ToArray())
-                    component.Close();
-            }
-            catch (Exception ex)
-            {
-                Log.Exception(ex, typeof(SUGMA_SessionComponent));
-            }
-
-            try
-            {
-                CommandHandler.Close();
-                ShareTrackApi.UnloadData();
-            }
-            catch (Exception ex)
-            {
-                Log.Exception(ex, typeof(SUGMA_SessionComponent));
-            }
-
-            I = null;
-            Log.Close();
-        }
-
-        #endregion
+        public static SUGMA_SessionComponent I { get; private set; }
 
         public T GetComponent<T>(string id) where T : ComponentBase
         {
@@ -160,7 +76,7 @@ namespace SC.SUGMA
 
         public string[] GetGamemodes()
         {
-            List<string> gamemodes = new List<string>();
+            var gamemodes = new List<string>();
             foreach (var component in _components)
             {
                 if (!(component.Value is GamemodeBase))
@@ -189,10 +105,8 @@ namespace SC.SUGMA
                 return false;
             }
 
-            SUtils.SetWorldPermissionsForMatch(true);
-
             if (MyAPIGateway.Session.IsServer || notifyNetwork)
-                GameStatePacket.UpdateGamestate();
+                GameStatePacket.UpdateGamestate(arguments);
 
             return true;
         }
@@ -203,17 +117,122 @@ namespace SC.SUGMA
             if (CurrentGamemode == null)
                 return false;
 
-            if (CurrentGamemode.IsStarted)
-                CurrentGamemode.StopRound();
-
+            var currentGamemode = CurrentGamemode;
             CurrentGamemode = null;
 
-            SUtils.SetWorldPermissionsForMatch(false);
+            if (currentGamemode.IsStarted)
+                currentGamemode.StopRound();
+
+            string[] oldArgs = currentGamemode.Arguments;
 
             if (MyAPIGateway.Session.IsServer || notifyNetwork)
-                GameStatePacket.UpdateGamestate();
+                GameStatePacket.UpdateGamestate(oldArgs);
 
             return true;
         }
+
+        public static string ListGamemodes()
+        {
+            var availableGamemodes = new StringBuilder();
+
+            foreach (var gamemode in I.GetGamemodes())
+            {
+                var gamemodeObject = I.GetComponent<GamemodeBase>(gamemode);
+                availableGamemodes.Append(
+                    $"\n-  {gamemode} ({gamemodeObject.ReadableName})\n  *  {gamemodeObject.ArgumentParser.HelpText.Replace("\n", "\n  *  ")}");
+            }
+
+            return availableGamemodes.ToString();
+        }
+
+        #region Base Methods
+
+        public override void LoadData()
+        {
+            I = this;
+            Log.Init();
+            try
+            {
+                CommandHandler.Init();
+                ShareTrackApi.Init(ModContext, FinishInit);
+                RichHudClient.Init(DebugName, () => { Log.Info("RichHudClient registered."); }, null);
+                ShieldApi.Load();
+            }
+            catch (Exception ex)
+            {
+                Log.Exception(ex, typeof(SUGMA_SessionComponent));
+            }
+        }
+
+        private void FinishInit()
+        {
+            try
+            {
+                foreach (var component in _components.ToArray())
+                    component.Value.Init(component.Key);
+            }
+            catch (Exception ex)
+            {
+                Log.Exception(ex, typeof(SUGMA_SessionComponent));
+            }
+        }
+
+        public override void UpdateAfterSimulation()
+        {
+            if (!ShareTrackApi.IsReady)
+                return;
+
+            if (!HasInited && !MyAPIGateway.Session.IsServer)
+            {
+                // Clients should sync with a slight delay, in case a game is already running.
+                // This gives time for ShareTrack to catch up.
+                if (_pollTimer <= 0 && ShareTrackApi.AreTrackedGridsLoaded())
+                {
+                    SyncRequestPacket.RequestSync();
+                    HasInited = true;
+                }
+
+                _pollTimer--;
+            }
+
+            try
+            {
+                foreach (var component in _components.Values.ToArray())
+                    component.UpdateTick();
+            }
+            catch (Exception ex)
+            {
+                Log.Exception(ex, typeof(SUGMA_SessionComponent));
+            }
+        }
+
+        protected override void UnloadData()
+        {
+            try
+            {
+                foreach (var component in _components.Values.ToArray())
+                    component.Close();
+            }
+            catch (Exception ex)
+            {
+                Log.Exception(ex, typeof(SUGMA_SessionComponent));
+            }
+
+            try
+            {
+                CommandHandler.Close();
+                ShareTrackApi.UnloadData();
+                ShieldApi.Unload();
+            }
+            catch (Exception ex)
+            {
+                Log.Exception(ex, typeof(SUGMA_SessionComponent));
+            }
+
+            I = null;
+            Log.Close();
+        }
+
+        #endregion
     }
 }

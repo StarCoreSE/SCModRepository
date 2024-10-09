@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using FusionSystems.FusionParts;
-using FusionSystems.HeatParts;
+using StarCore.FusionSystems.FusionParts;
+using StarCore.FusionSystems.HeatParts;
 using VRageMath;
-using static FusionSystems.Communication.DefinitionDefs;
+using static StarCore.FusionSystems.Communication.DefinitionDefs;
 
-namespace FusionSystems
+namespace StarCore.FusionSystems
 {
     internal partial class ModularDefinition
     {
@@ -17,10 +17,7 @@ namespace FusionSystems
             // Unique name of the definition.
             Name = "Modular_Heat",
 
-            OnInit = () =>
-            {
-                S_FusionManager.I.HeatDefinition = this;
-            },
+            OnInit = () => { SFusionManager.I.HeatDefinition = this; },
 
             // Triggers whenever a new part is added to an assembly.
             OnPartAdd = HeatManager.I.OnPartAdd,
@@ -38,7 +35,7 @@ namespace FusionSystems
             AllowedBlockSubtypes = new[]
             {
                 "Heat_Heatsink",
-                "Heat_FlatRadiator",
+                "Heat_FlatRadiator"
             },
 
             // Allowed connection directions & whitelists, measured in blocks.
@@ -51,7 +48,7 @@ namespace FusionSystems
                     [Vector3I.Up] = Array.Empty<string>(),
                     [Vector3I.Down] = Array.Empty<string>(),
                     [Vector3I.Left] = Array.Empty<string>(),
-                    [Vector3I.Right] = Array.Empty<string>(),
+                    [Vector3I.Right] = Array.Empty<string>()
                 },
                 ["Heat_FlatRadiator"] = new Dictionary<Vector3I, string[]>
                 {
@@ -71,9 +68,9 @@ namespace FusionSystems
                     [Vector3I.Right] = new[]
                     {
                         "Heat_FlatRadiator"
-                    },
-                },
-            },
+                    }
+                }
+            }
         };
     }
 }

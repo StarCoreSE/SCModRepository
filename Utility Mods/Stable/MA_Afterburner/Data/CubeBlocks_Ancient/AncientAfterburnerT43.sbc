@@ -7,10 +7,8 @@
 				<SubtypeId>AncientAfterburnerT43</SubtypeId>
 			</Id>
 			<DisplayName>Ancient Afterburner T43</DisplayName>
-			<Description>
-        Propulsion with unknown symmetry. Fell off of a moderately sized warship.
-        
-        Alternate version of the 3x3 Afterburner.
+			<Description>Propulsion with unknown symmetry. Fell off of a moderately sized warship.
+Alternate version of the 3x3 Afterburner.
       </Description>
       <Icon>Textures\Icons\ancient\type 43 thruster icon.png</Icon>
       <CubeSize>Large</CubeSize>

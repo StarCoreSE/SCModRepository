@@ -19,7 +19,7 @@
       <Volume>1</Volume>
       <Model></Model>
       <PhysicalMaterial>Ammo</PhysicalMaterial>
-      <Capacity>2</Capacity>
+      <Capacity>1</Capacity>
       <AmmoDefinitionId Subtype="red projectile go really fast" />
     </AmmoMagazine>  
 	

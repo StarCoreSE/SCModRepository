@@ -5,10 +5,14 @@ using SC.SUGMA.HeartNetworking.Custom;
 namespace SC.SUGMA.HeartNetworking
 {
     [ProtoContract(UseProtoMembersOnly = true)]
-    [ProtoInclude(1, typeof(MatchTimerPacket))]
-    [ProtoInclude(2, typeof(GameStatePacket))]
-    [ProtoInclude(3, typeof(PointsPacket))]
-    [ProtoInclude(4, typeof(SyncRequestPacket))]
+    [ProtoInclude(91, typeof(MatchTimerPacket))]
+    [ProtoInclude(92, typeof(GameStatePacket))]
+    [ProtoInclude(93, typeof(PointsPacket))]
+    [ProtoInclude(94, typeof(SyncRequestPacket))]
+    [ProtoInclude(95, typeof(ShieldFillRequestPacket))]
+    [ProtoInclude(96, typeof(ProblemReportPacket))]
+    [ProtoInclude(97, typeof(MissingPlayerOverridePacket))]
+    [ProtoInclude(98, typeof(AutoBalancePacket))]
     public abstract class PacketBase
     {
         public static readonly Type[] PacketTypes =
@@ -18,6 +22,10 @@ namespace SC.SUGMA.HeartNetworking
             typeof(GameStatePacket),
             typeof(PointsPacket),
             typeof(SyncRequestPacket),
+            typeof(ShieldFillRequestPacket),
+            typeof(ProblemReportPacket),
+            typeof(MissingPlayerOverridePacket),
+            typeof(AutoBalancePacket),
         };
 
         /// <summary>

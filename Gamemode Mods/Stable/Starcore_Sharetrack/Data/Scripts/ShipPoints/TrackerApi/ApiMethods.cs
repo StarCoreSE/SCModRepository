@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ShipPoints.ShipTracking;
+using StarCore.ShareTrack.ShipTracking;
 using VRage.Game.ModAPI;
 
-namespace ShipPoints.TrackerApi
+namespace StarCore.ShareTrack.TrackerApi
 {
     internal class ApiMethods
     {
@@ -22,6 +20,11 @@ namespace ShipPoints.TrackerApi
                 ["UnregisterOnTrack"] = new Action<Action<IMyCubeGrid, bool>>(UnregisterOnTrack),
                 ["RegisterOnAliveChanged"] = new Action<Action<IMyCubeGrid, bool>>(RegisterOnAliveChanged),
                 ["UnregisterOnAliveChanged"] = new Action<Action<IMyCubeGrid, bool>>(UnregisterOnAliveChanged),
+                ["AreTrackedGridsLoaded"] = new Func<bool>(AreTrackedGridsLoaded),
+                ["GetGridPoints"] = new Func<IMyCubeGrid, int>(GetGridPoints),
+                ["TrackGrid"] = new Action<IMyCubeGrid, bool>(TrackGrid),
+                ["UnTrackGrid"] = new Action<IMyCubeGrid, bool>(UnTrackGrid),
+                ["SetAutotrack"] = new Action<bool>(value => TrackingManager.I.EnableAutotrack = value),
             };
         }
 
@@ -57,6 +60,32 @@ namespace ShipPoints.TrackerApi
         {
             if (TrackingManager.I != null)
                 TrackingManager.I.OnShipAliveChanged -= action;
+        }
+
+        private bool AreTrackedGridsLoaded()
+        {
+            if (TrackingManager.I == null)
+                return false;
+
+            return TrackingManager.I.GetQueuedGridTracks().Length == 0;
+        }
+
+        private int GetGridPoints(IMyCubeGrid grid)
+        {
+            if (TrackingManager.I == null || !TrackingManager.I.TrackedGrids.ContainsKey(grid))
+                return -1;
+
+            return TrackingManager.I.TrackedGrids[grid].BattlePoints;
+        }
+
+        private void TrackGrid(IMyCubeGrid grid, bool share)
+        {
+            TrackingManager.I?.TrackGrid(grid, share);
+        }
+
+        private void UnTrackGrid(IMyCubeGrid grid, bool share)
+        {
+            TrackingManager.I?.UntrackGrid(grid, share);
         }
     }
 }

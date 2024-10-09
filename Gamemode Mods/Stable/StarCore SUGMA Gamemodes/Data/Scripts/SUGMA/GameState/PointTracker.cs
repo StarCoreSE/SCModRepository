@@ -1,19 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Sandbox.Game.Multiplayer;
 using Sandbox.ModAPI;
 using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
+using SC.SUGMA.Utilities;
 using VRage.Game.ModAPI;
 
 namespace SC.SUGMA.GameState
 {
     internal class PointTracker : ComponentBase
     {
-        public int VictoryPoints = 3;
+        private bool _pointsUpdated;
         public int StartingPoints;
+        public int VictoryPoints = 3;
 
         public Dictionary<IMyFaction, int> FactionPoints { get; internal set; } = new Dictionary<IMyFaction, int>();
-        private bool _pointsUpdated = false;
+        public Action<IMyFaction, int> OnPointsUpdated = null;
+
+        private void OnFactionCreated(long factionId)
+        {
+            FactionPoints.Add(MyAPIGateway.Session.Factions.TryGetFactionById(factionId), StartingPoints);
+        }
 
         #region Base Methods
 
@@ -42,11 +52,6 @@ namespace SC.SUGMA.GameState
                 HeartNetwork.I.SendToEveryone(new PointsPacket(this));
                 _pointsUpdated = false;
             }
-
-            foreach (var faction in FactionPoints)
-            {
-                //MyAPIGateway.Utilities.ShowNotification($"{faction.Key.Tag}: {faction.Value}", 1000/60);
-            }
         }
 
         #endregion
@@ -67,11 +72,12 @@ namespace SC.SUGMA.GameState
 
         public void SetFactionPoints(IMyFaction faction, int value)
         {
-            if (!FactionPoints.ContainsKey(faction))
+            if (!MyAPIGateway.Session.IsServer || !FactionPoints.ContainsKey(faction))
                 return;
 
             FactionPoints[faction] = value;
 
+            OnPointsUpdated?.Invoke(faction, FactionPoints[faction]);
             if (VictoryPoints > StartingPoints ? value >= VictoryPoints : value <= VictoryPoints)
                 OnFactionWin?.Invoke(faction);
             _pointsUpdated = true;
@@ -84,11 +90,12 @@ namespace SC.SUGMA.GameState
 
         public void AddFactionPoints(IMyFaction faction, int value)
         {
-            if (!FactionPoints.ContainsKey(faction))
+            if (!MyAPIGateway.Session.IsServer || !FactionPoints.ContainsKey(faction))
                 return;
 
             FactionPoints[faction] += value;
 
+            OnPointsUpdated?.Invoke(faction, FactionPoints[faction]);
             if (VictoryPoints > StartingPoints
                     ? FactionPoints[faction] >= VictoryPoints
                     : FactionPoints[faction] <= VictoryPoints)
@@ -103,6 +110,12 @@ namespace SC.SUGMA.GameState
 
         public void UpdateFromPacket(PointsPacket packet)
         {
+            int bufferPoints;
+            foreach (var factionPts in packet.FactionPoints)
+            {
+                if (!FactionPoints.TryGetValue(factionPts.Key, out bufferPoints) || factionPts.Value != bufferPoints)
+                    OnPointsUpdated?.Invoke(factionPts.Key, factionPts.Value);
+            }
             FactionPoints = packet.FactionPoints;
 
             //string data = "";
@@ -115,9 +128,14 @@ namespace SC.SUGMA.GameState
 
         #endregion
 
-        private void OnFactionCreated(long factionId)
+        public override string ToString()
         {
-            FactionPoints.Add(MyAPIGateway.Session.Factions.TryGetFactionById(factionId), StartingPoints);
+            IEnumerable<IMyFaction> playerFactions = PlayerTracker.I.GetPlayerFactions();
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var faction in FactionPoints.Where(k => playerFactions.Contains(k.Key)))
+                sb.Append($"{faction.Key.Name}: {faction.Value}pts\n");
+            return sb.ToString();
         }
     }
 }
