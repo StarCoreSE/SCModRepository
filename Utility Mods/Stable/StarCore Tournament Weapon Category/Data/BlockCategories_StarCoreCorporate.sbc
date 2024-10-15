@@ -8,8 +8,8 @@
       <Id>
         <TypeId>GuiBlockCategoryDefinition</TypeId>
       </Id>
-      <DisplayName>.[All Access]</DisplayName>
-      <Name>.[All Access]</Name>
+      <DisplayName>SC [All Access]</DisplayName>
+      <Name>.SC_.[All Access]</Name>
       <StrictSearch>true</StrictSearch>
       <ItemIds>
 
@@ -94,8 +94,8 @@
         <TypeId>GuiBlockCategoryDefinition</TypeId>
         <SubtypeId>SC_40K_BlockCategory</SubtypeId>
       </Id>
-      <DisplayName>[40K]</DisplayName>
-      <Name>[40K]</Name>
+      <DisplayName>  [40K]</DisplayName>
+      <Name>.SC_[40K]</Name>
       <ItemIds>
 
         <!--[40K]-->
@@ -120,8 +120,8 @@
         <TypeId>GuiBlockCategoryDefinition</TypeId>
 
       </Id>
-      <DisplayName>[MID]</DisplayName>
-      <Name>[MID]</Name>
+      <DisplayName>  [MID]</DisplayName>
+      <Name>.SC_[MID]</Name>
       <StrictSearch>true</StrictSearch>
       <ItemIds>
 
@@ -151,8 +151,8 @@
         <TypeId>GuiBlockCategoryDefinition</TypeId>
 
       </Id>
-      <DisplayName>[FLAW]</DisplayName>
-      <Name>[FLAW]</Name>
+      <DisplayName>  [FLAW]</DisplayName>
+      <Name>.SC_[FLAW]</Name>
       <StrictSearch>true</StrictSearch>
       <ItemIds>
 
@@ -177,8 +177,8 @@
         <TypeId>GuiBlockCategoryDefinition</TypeId>
 
       </Id>
-      <DisplayName>[MA]</DisplayName>
-      <Name>[MA]</Name>
+      <DisplayName>  [MA]</DisplayName>
+      <Name>.SC_[MA]</Name>
       <StrictSearch>true</StrictSearch>
       <ItemIds>
 
@@ -204,8 +204,8 @@
         <TypeId>GuiBlockCategoryDefinition</TypeId>
 
       </Id>
-      <DisplayName>[NHI]</DisplayName>
-      <Name>[NHI]</Name>
+      <DisplayName>  [NHI]</DisplayName>
+      <Name>.SC_[NHI]</Name>
       <StrictSearch>true</StrictSearch>
       <ItemIds>
 
@@ -232,8 +232,8 @@
       <Id>
         <TypeId>GuiBlockCategoryDefinition</TypeId>
       </Id>
-      <DisplayName>[ONYX]</DisplayName>
-      <Name>[ONYX]</Name>
+      <DisplayName>  [ONYX]</DisplayName>
+      <Name>.SC_[ONYX]</Name>
       <StrictSearch>true</StrictSearch>
       <ItemIds>
 
@@ -257,8 +257,8 @@
         <TypeId>GuiBlockCategoryDefinition</TypeId>
 
       </Id>
-      <DisplayName>[SA]</DisplayName>
-      <Name>[SA]</Name>
+      <DisplayName>  [SA]</DisplayName>
+      <Name>.SC_[SA]</Name>
       <StrictSearch>true</StrictSearch>
       <ItemIds>
 
@@ -281,8 +281,8 @@
         <TypeId>GuiBlockCategoryDefinition</TypeId>
 
       </Id>
-      <DisplayName>[HAS]</DisplayName>
-      <Name>[HAS]</Name>
+      <DisplayName>  [HAS]</DisplayName>
+      <Name>.SC_[HAS]</Name>
       <StrictSearch>true</StrictSearch>
       <ItemIds>
 
@@ -305,8 +305,8 @@
         <TypeId>GuiBlockCategoryDefinition</TypeId>
 
       </Id>
-      <DisplayName>[EXO]</DisplayName>
-      <Name>[EXO]</Name>
+      <DisplayName>  [EXO]</DisplayName>
+      <Name>.SC_[EXO]</Name>
       <StrictSearch>true</StrictSearch>
       <ItemIds>
 
@@ -328,8 +328,8 @@
         <TypeId>GuiBlockCategoryDefinition</TypeId>
 
       </Id>
-      <DisplayName>[BTI]</DisplayName>
-      <Name>[BTI]</Name>
+      <DisplayName>  [BTI]</DisplayName>
+      <Name>.SC_[BTI]</Name>
       <StrictSearch>true</StrictSearch>
       <ItemIds>
         <!-- [BTI] -->
@@ -358,8 +358,8 @@
         <TypeId>GuiBlockCategoryDefinition</TypeId>
         <SubtypeId>Solaris Hypernautics</SubtypeId>
       </Id>
-      <DisplayName>[SOL]</DisplayName>
-      <Name>[SOL]</Name>
+      <DisplayName>  [SOL]</DisplayName>
+      <Name>.SC_[SOL]</Name>
       <ItemIds>
         <!-- [SOL] -->
         <string>MagnaPulse_Gen</string>
@@ -379,8 +379,8 @@
         <TypeId>GuiBlockCategoryDefinition</TypeId>
         <SubtypeId/>
       </Id>
-      <DisplayName>[FAS]</DisplayName>
-      <Name>[FAS]</Name>
+      <DisplayName>  [FAS]</DisplayName>
+      <Name>.SC_[FAS]</Name>
       <IsBlockCategory>true</IsBlockCategory>
       <ItemIds>
         <!--[FAS]-->
@@ -411,8 +411,8 @@
         <TypeId>GuiBlockCategoryDefinition</TypeId>
         <SubtypeId/>
       </Id>
-      <DisplayName>[CHP]</DisplayName>
-      <Name>[CHP]</Name>
+      <DisplayName>  [CHP]</DisplayName>
+      <Name>.SC_[CHP]</Name>
       <IsBlockCategory>true</IsBlockCategory>
       <ItemIds>
         <!--[CHP]-->
