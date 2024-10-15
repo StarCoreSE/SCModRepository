@@ -29,6 +29,7 @@ namespace SC.SUGMA
             ["HeartNetwork"] = new HeartNetwork(),
             ["PlayerTracker"] = new PlayerTracker(),
             ["DisconnectHandler"] = new DisconnectHandler(),
+            ["BounceZone"] = new BounceZone(10000),
             ["elm"] = new EliminationGamemode(),
             ["dom"] = new DominationGamemode(),
             ["tdm"] = new TeamDeathmatchGamemode(),
