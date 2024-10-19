@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <CubeBlocks>
+
+        <Definition xsi:type="MyObjectBuilder_DecoyDefinition">
+            <Id>
+                <TypeId>Decoy</TypeId>
+                <SubtypeId>LargeDecoy_MetalFoam</SubtypeId>
+            </Id>
+            <DisplayName>Metal Foam Decoy</DisplayName>
+            <Icon>Textures\GUI\Icons\Cubes\metalfoam.png</Icon>
+            <Description>Extremely densely stored material. When activated, spills out fill in the space around it with Metal Foam (light armor). Activates when damaged below functional.</Description>
+            <CubeSize>Large</CubeSize>
+            <BlockTopology>TriangleMesh</BlockTopology>
+            <Size x="1" y="1" z="1" />
+            <ModelOffset x="0" y="0" z="0" />
+			<Model>Models\LargeDecoy_MetalFoam.mwm</Model>
+            <Components>
+                <Component Subtype="SteelPlate" Count="5775" />
+                <Component Subtype="Construction" Count="10" />
+                <Component Subtype="Computer" Count="10" />
+                <Component Subtype="LargeTube" Count="2" />
+              <Component Subtype="RadioCommunication" Count="1" />
+                <Component Subtype="SteelPlate" Count="125" />
+            </Components>
+            <CriticalComponent Subtype="RadioCommunication" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="1.00" EndY="0.20"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="1.00" EndY="0.20"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="1.00" EndY="0.20"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="1.00" EndY="0.20"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
+			</MountPoints>
+            <Public>true</Public>
+            <BlockPairName>LargeDecoy_MetalFoam</BlockPairName>
+            <EdgeType>Light</EdgeType>
+            <BuildTimeSeconds>16</BuildTimeSeconds>
+            <!--<UseModelIntersection>true</UseModelIntersection>-->
+            <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+            <DamagedSound>ParticleElectrical</DamagedSound>
+            <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+            <DestroySound>WepSmallWarheadExpl</DestroySound>
+            <EmissiveColorPreset>Default</EmissiveColorPreset>
+            <PCU>50</PCU>
+            <MirroringY>Z</MirroringY>
+            <MirroringZ>Y</MirroringZ>
+            <IsAirTight>false</IsAirTight>
+            <TargetingGroups>
+                <string>Weapons</string>
+                <string>Propulsion</string>
+                <string>PowerSystems</string>
+            </TargetingGroups>
+            <PriorityModifier>10</PriorityModifier>
+            <NotWorkingPriorityMultiplier>0</NotWorkingPriorityMultiplier>
+        </Definition>
+
+
+    </CubeBlocks>
+</Definitions>
