@@ -102,25 +102,6 @@
       <AmmoDefinitionId Subtype="37mmClip" />
     </AmmoMagazine>
 	
-    <AmmoMagazine>
-      <Id>
-        <TypeId>AmmoMagazine</TypeId>
-        <SubtypeId>128mmShell</SubtypeId>
-      </Id>
-      <DisplayName>12.8 cm P.Spr.Gr.</DisplayName>
-      <Description>12.8cm P.Spr.Gr.</Description>
-      <Icon>Textures\GUI\Icons\ammo\128mmShell.dds</Icon>
-      <Size>
-        <X>1</X>
-        <Y>1</Y>
-        <Z>1</Z>
-      </Size>
-      <Mass>25</Mass>
-      <Volume>1</Volume>
-      <Model></Model>
-      <Capacity>1</Capacity>
-      <AmmoDefinitionId Subtype="128mmShell" />
-    </AmmoMagazine>
 	
     <AmmoMagazine>
       <Id>
@@ -142,126 +123,10 @@
       <AmmoDefinitionId Subtype="5InchShell" />
     </AmmoMagazine>
 
-   <AmmoMagazine>
-      <Id>
-        <TypeId>AmmoMagazine</TypeId>
-        <SubtypeId>6InchShell</SubtypeId>
-      </Id>
-      <DisplayName>6" HC Mark 34 Shell</DisplayName>
-      <Description>6" HC Mark 34 Shell</Description>
-      <Icon>Textures\GUI\Icons\ammo\6InchShell.dds</Icon>
-      <Size>
-        <X>1</X>
-        <Y>1</Y>
-        <Z>1</Z>
-      </Size>
-      <Mass>35</Mass>
-      <Volume>1</Volume>
-      <Model>Models\6InchShell_Small.mwm</Model>
-      <Capacity>1</Capacity>
-      <AmmoDefinitionId Subtype="6InchShell" />
-    </AmmoMagazine>
-	
-   <AmmoMagazine>
-      <Id>
-        <TypeId>AmmoMagazine</TypeId>
-        <SubtypeId>16InchShell</SubtypeId>
-      </Id>
-      <DisplayName>16"/50 AP Mark 3 Shell</DisplayName>
-      <Description>16"/50 AP Mark 3 Shell</Description>
-      <Icon>Textures\GUI\Icons\ammo\16InchShell.dds</Icon>
-      <Size>
-        <X>1</X>
-        <Y>1</Y>
-        <Z>1</Z>
-      </Size>
-      <Mass>105</Mass>
-      <Volume>10</Volume>
-      <Model>Models\16InchShell_Small.mwm</Model>
-      <Capacity>1</Capacity>
-      <AmmoDefinitionId Subtype="16InchShell" />
-    </AmmoMagazine>
-	
-   <AmmoMagazine>
-      <Id>
-        <TypeId>AmmoMagazine</TypeId>
-        <SubtypeId>381mmShell</SubtypeId>
-      </Id>
-      <DisplayName>38.1 cm Psgr L/4.4 BdZ</DisplayName>
-      <Description>38.1 cm Psgr L/4.4 BdZ</Description>
-      <Icon>Textures\GUI\Icons\ammo\381mmShell.dds</Icon>
-      <Size>
-        <X>1</X>
-        <Y>1</Y>
-        <Z>1</Z>
-      </Size>
-      <Mass>105</Mass>
-      <Volume>10</Volume>
-      <Model>Models\381mmShell_Small.mwm</Model>
-      <Capacity>1</Capacity>
-      <AmmoDefinitionId Subtype="381mmShell" />
-    </AmmoMagazine>
-	
-   <AmmoMagazine>
-      <Id>
-        <TypeId>AmmoMagazine</TypeId>
-        <SubtypeId>105mmSAP</SubtypeId>
-      </Id>
-      <DisplayName>105mm SAP Shell</DisplayName>
-      <Description>105mm Semi-Armor Piercing Shell</Description>
-      <Icon>Textures\GUI\Icons\ammo\10cmRound_Icon.dds</Icon>
-      <Size>
-        <X>1</X>
-        <Y>1</Y>
-        <Z>1</Z>
-      </Size>
-      <Mass>23</Mass>
-      <Volume>6</Volume>
-      <Model>Models\105mmShell_Small.mwm</Model>
-      <Capacity>1</Capacity>
-      <AmmoDefinitionId Subtype="105mmSAP" />
-    </AmmoMagazine>
 
-   <AmmoMagazine>
-      <Id>
-        <TypeId>AmmoMagazine</TypeId>
-        <SubtypeId>15cmShell</SubtypeId>
-      </Id>
-      <DisplayName>15 cm Sprgr L/4.6 KZ m Hb</DisplayName>
-      <Description>15 cm Sprgr L/4.6 KZ m Hb</Description>
-      <Icon>Textures\GUI\Icons\ammo\15cmShell.dds</Icon>
-      <Size>
-        <X>1</X>
-        <Y>1</Y>
-        <Z>1</Z>
-      </Size>
-      <Mass>68.2</Mass>
-      <Volume>1</Volume>
-      <Model>Models\15cmShell_Small.mwm</Model>
-      <Capacity>1</Capacity>
-      <AmmoDefinitionId Subtype="15cmRound" />
-    </AmmoMagazine>
-	
-	<AmmoMagazine>
-      <Id>
-        <TypeId>AmmoMagazine</TypeId>
-        <SubtypeId>127mmHVAR</SubtypeId>
-      </Id>
-      <DisplayName>127mm HVAR Rocket</DisplayName>
-      <Description>127mm HVAR Rocket</Description>
-      <Icon>Textures\GUI\Icons\ammo\127mmHVAR.dds</Icon>
-      <Size>
-        <X>1</X>
-        <Y>1</Y>
-        <Z>1</Z>
-      </Size>
-      <Mass>45</Mass>
-      <Volume>1</Volume>
-      <Model></Model>
-      <Capacity>1</Capacity>
-      <AmmoDefinitionId Subtype="127mmHVAR" />
-    </AmmoMagazine>
 
+	
+  
 	    <AmmoMagazine>
       <Id>
         <TypeId>AmmoMagazine</TypeId>
@@ -323,26 +188,7 @@
       <AmmoDefinitionId Subtype="37mmMLE1933AAR" />
     </AmmoMagazine>
 	
-	   <AmmoMagazine>
-      <Id>
-        <TypeId>AmmoMagazine</TypeId>
-        <SubtypeId>100mmMLE1931Shell</SubtypeId>
-      </Id>
-      <DisplayName>Coque anti-aérienne 100mm</DisplayName>
-      <Description>Ordonnance anti-aérienne de 100mm</Description>
-      <Icon>Textures\GUI\Icons\ammo\100mmMLE1931Ammo_icon.dds</Icon>
-      <Size>
-        <X>1</X>
-        <Y>1</Y>
-        <Z>1</Z>
-      </Size>
-      <Mass>22.6</Mass>
-      <Volume>1</Volume>
-      <Model>Models\100mmMLEShellAmmo_Small.mwm</Model>
-      <Capacity>1</Capacity>
-      <AmmoDefinitionId Subtype="100mmMLE1931AAShell" />
-    </AmmoMagazine>
-	
+	   
    <AmmoMagazine>
       <Id>
         <TypeId>AmmoMagazine</TypeId>
@@ -363,25 +209,7 @@
       <AmmoDefinitionId Subtype="380mmHEShellAmmo" />
     </AmmoMagazine>
 	
-	   <AmmoMagazine>
-      <Id>
-        <TypeId>AmmoMagazine</TypeId>
-        <SubtypeId>139mmHEShell</SubtypeId>
-      </Id>
-      <DisplayName>139 x 900mm 40kg OEA Mle 1929</DisplayName>
-      <Description>bus d'artillerie explosif de 139 mm</Description>
-      <Icon>Textures\GUI\Icons\ammo\139mm_Icon.dds</Icon>
-      <Size>
-        <X>1</X>
-        <Y>1</Y>
-        <Z>1</Z>
-      </Size>
-      <Mass>40.2</Mass>
-      <Volume>1</Volume>
-      <Model></Model>
-      <Capacity>1</Capacity>
-      <AmmoDefinitionId Subtype="139mmAmmo" />
-    </AmmoMagazine>
+	  
 	
 	   <AmmoMagazine>
       <Id>
@@ -423,25 +251,7 @@
       <AmmoDefinitionId Subtype="5InchShellSap" />
     </AmmoMagazine>
 
-	  <AmmoMagazine>
-		  <Id>
-			  <TypeId>AmmoMagazine</TypeId>
-			  <SubtypeId>5InchHealShell</SubtypeId>
-		  </Id>
-		  <DisplayName>5" AAC Mark 49 Shell</DisplayName>
-		  <Description>5" AAC Mark 49 Round</Description>
-		  <Icon>Textures\GUI\Icons\ammo\5InchShell.dds</Icon>
-		  <Size>
-			  <X>1</X>
-			  <Y>1</Y>
-			  <Z>1</Z>
-		  </Size>
-		  <Mass>25</Mass>
-		  <Volume>2</Volume>
-		  <Model>Models\5InchShell_Small.mwm</Model>
-		  <Capacity>1</Capacity>
-		  <AmmoDefinitionId Subtype="5InchHealShell" />
-	  </AmmoMagazine>
+	
 
 	  <AmmoMagazine>
 		  <Id>
@@ -523,26 +333,7 @@
 		  <AmmoDefinitionId Subtype="8InchAPShell" />
 	  </AmmoMagazine>
 
-	  <AmmoMagazine>
-		  <Id>
-			  <TypeId>AmmoMagazine</TypeId>
-			  <SubtypeId>105mmHE</SubtypeId>
-		  </Id>
-		  <DisplayName>105mm HE Shell</DisplayName>
-		  <Description>105mm High Explosive Shell</Description>
-		  <Icon>Textures\GUI\Icons\ammo\10cmRound_Icon.dds</Icon>
-		  <Size>
-			  <X>1</X>
-			  <Y>1</Y>
-			  <Z>1</Z>
-		  </Size>
-		  <Mass>23</Mass>
-		  <Volume>6</Volume>
-		  <Model>Models\105mmShell_Small.mwm</Model>
-		  <Capacity>1</Capacity>
-		  <AmmoDefinitionId Subtype="105mmHE" />
-	  </AmmoMagazine>
-
+	 
 
 	  <AmmoMagazine>
 		  <Id>
@@ -564,26 +355,6 @@
 		  <AmmoDefinitionId Subtype="105mmHE" />
 	  </AmmoMagazine>
 
-
-	  <AmmoMagazine>
-		  <Id>
-			  <TypeId>AmmoMagazine</TypeId>
-			  <SubtypeId>508SAP</SubtypeId>
-		  </Id>
-		  <DisplayName>DEV</DisplayName>
-		  <Description>DEV</Description>
-		  <Icon>Textures\GUI\Icons\ammo\10cmRound_Icon.dds</Icon>
-		  <Size>
-			  <X>1</X>
-			  <Y>1</Y>
-			  <Z>1</Z>
-		  </Size>
-		  <Mass>1</Mass>
-		  <Volume>6</Volume>
-		  <Model>Models\105mmShell_Small.mwm</Model>
-		  <Capacity>1</Capacity>
-		  <AmmoDefinitionId Subtype="105mmHE" />
-	  </AmmoMagazine>
 
 	  <AmmoMagazine>
 		  <Id>
