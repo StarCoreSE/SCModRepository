@@ -923,7 +923,7 @@
       <EmissiveColorPreset>Default</EmissiveColorPreset>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_DoorDefinition">
+    <Definition>
 
       <Id>
         <TypeId>CubeBlock</TypeId>
@@ -980,7 +980,7 @@
       <PCU>115</PCU>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_DoorDefinition">
+    <Definition>
 
       <Id>
         <TypeId>CubeBlock</TypeId>
@@ -1037,7 +1037,7 @@
       <PCU>115</PCU>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_DoorDefinition">
+    <Definition>
       <Id>
         <TypeId>CubeBlock</TypeId>
         <SubtypeId>SmallDoor</SubtypeId>
@@ -1092,7 +1092,7 @@
       <PCU>115</PCU>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_DoorDefinition">
+    <Definition>
       <Id>
         <TypeId>CubeBlock</TypeId>
         <SubtypeId>LargeBlockGate</SubtypeId>
@@ -1158,7 +1158,7 @@
       <DLC>Frostbite</DLC>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_DoorDefinition">
+    <Definition>
       <Id>
         <TypeId>CubeBlock</TypeId>
         <SubtypeId>LargeBlockOffsetDoor</SubtypeId>
@@ -1215,7 +1215,7 @@
       <DLC>Frostbite</DLC>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_AirtightHangarDoorDefinition">
+    <Definition>
       <Id>
         <TypeId>CubeBlock</TypeId>
         <SubtypeId />
@@ -1272,7 +1272,7 @@
       <PCU>115</PCU>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_AirtightHangarDoorDefinition">
+    <Definition>
       <Id>
         <TypeId>TerminalBlock</TypeId>
         <SubtypeId>AirtightHangarDoorWarfare2A</SubtypeId>
@@ -1331,7 +1331,7 @@
       <DLC>Warfare2</DLC>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_AirtightHangarDoorDefinition">
+    <Definition>
       <Id>
         <TypeId>TerminalBlock</TypeId>
         <SubtypeId>AirtightHangarDoorWarfare2B</SubtypeId>
@@ -1390,7 +1390,7 @@
       <DLC>Warfare2</DLC>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_AirtightHangarDoorDefinition">
+    <Definition>
       <Id>
         <TypeId>TerminalBlock</TypeId>
         <SubtypeId>AirtightHangarDoorWarfare2C</SubtypeId>
@@ -1451,7 +1451,7 @@
 
 
 
-    <Definition xsi:type="MyObjectBuilder_DoorDefinition">
+    <Definition>
       <Id>
         <TypeId>CubeBlock</TypeId>
         <SubtypeId>SlidingHatchDoor</SubtypeId>
@@ -1518,7 +1518,7 @@
       <DLC>Warfare2</DLC>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_DoorDefinition">
+    <Definition>
       <Id>
         <TypeId>CubeBlock</TypeId>
         <SubtypeId>SlidingHatchDoorHalf</SubtypeId>
