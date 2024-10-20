@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <CubeBlocks>
+  <TerminalBlocks>
     <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeFakeBlockSlideDoor</SubtypeId>
       </Id>
       <DisplayName>Fake Door Slider</DisplayName>
@@ -35,7 +35,7 @@
     </Definition>
     <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeBlockInteriorWall</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_InteriorWall</DisplayName>
@@ -82,7 +82,7 @@
 
     <Definition xsi:type="MyObjectBuilder_RadioAntennaDefinition">
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeFakeBlockRadioAntenna</SubtypeId>
       </Id>
       <DisplayName>Fake Greeble Antenna</DisplayName>
@@ -126,7 +126,7 @@
 
     <Definition xsi:type="MyObjectBuilder_RefineryDefinition">
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeRefineryIndustrial</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_RefineryIndustrial</DisplayName>
@@ -219,7 +219,7 @@
 
     <Definition xsi:type="MyObjectBuilder_OxygenGeneratorDefinition">
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>OxygenGenerator</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_OxygenGenerator</DisplayName>
@@ -313,7 +313,7 @@
 
     <Definition xsi:type="MyObjectBuilder_OxygenFarmDefinition">
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeBlockOxygenFarm</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_OxygenFarm</DisplayName>
@@ -378,7 +378,7 @@
 
     <Definition xsi:type="MyObjectBuilder_UpgradeModuleDefinition">
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeProductivityModule</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_ProductivityModule</DisplayName>
@@ -432,7 +432,7 @@
     </Definition>
     <Definition xsi:type="MyObjectBuilder_UpgradeModuleDefinition">
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeEffectivenessModule</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_EffectivenessModule</DisplayName>
@@ -488,7 +488,7 @@
     </Definition>
     <Definition xsi:type="MyObjectBuilder_UpgradeModuleDefinition">
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeEnergyModule</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_PowerEfficiencyModule</DisplayName>
@@ -545,7 +545,7 @@
 
     <Definition xsi:type="MyObjectBuilder_GasTankDefinition">
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>OxygenTank</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_OxygenTank</DisplayName>
@@ -625,7 +625,7 @@
     </Definition>
     <Definition xsi:type="MyObjectBuilder_CockpitDefinition">
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>PassengerSeatLarge</SubtypeId>
         <!-- Large block passenger seat -->
       </Id>
@@ -684,7 +684,7 @@
     </Definition>
     <Definition xsi:type="MyObjectBuilder_TargetDummyBlockDefinition">
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>TargetDummy</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_TargetDummy</DisplayName>
@@ -759,7 +759,7 @@
     </Definition>
     <Definition xsi:type="MyObjectBuilder_VendingMachineDefinition">
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>VendingMachine</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_VendingMachine</DisplayName>
@@ -817,7 +817,7 @@
 
     <Definition xsi:type="MyObjectBuilder_StoreBlockDefinition">
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>AtmBlock</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_ATM</DisplayName>
@@ -869,7 +869,7 @@
 
     <Definition xsi:type="MyObjectBuilder_StoreBlockDefinition">
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>StoreBlock</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_Store</DisplayName>
@@ -926,7 +926,7 @@
     <Definition>
 
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId />
       </Id>
       <DisplayName>DisplayName_Block_Door</DisplayName>
@@ -983,7 +983,7 @@
     <Definition>
 
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>ReetDoor</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_Door</DisplayName>
@@ -1039,7 +1039,7 @@
 
     <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>SmallDoor</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_Door</DisplayName>
@@ -1094,7 +1094,7 @@
 
     <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeBlockGate</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_Gate</DisplayName>
@@ -1160,7 +1160,7 @@
 
     <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeBlockOffsetDoor</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_OffsetDoor</DisplayName>
@@ -1217,7 +1217,7 @@
 
     <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId />
       </Id>
       <DisplayName>DisplayName_Block_AirtightHangarDoor</DisplayName>
@@ -1453,7 +1453,7 @@
 
     <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>SlidingHatchDoor</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_SlidingHatchDoor</DisplayName>
@@ -1520,7 +1520,7 @@
 
     <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>SlidingHatchDoorHalf</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_SlidingHatchDoorHalf</DisplayName>
@@ -1830,5 +1830,5 @@
             </TieredUpdateTimes>
         </Definition>
         
-    </CubeBlocks>
+    </TerminalBlocks>
 </Definitions>
