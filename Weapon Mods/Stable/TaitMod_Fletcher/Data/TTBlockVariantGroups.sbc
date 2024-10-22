@@ -12,6 +12,60 @@
                 <Block Type="MyObjectBuilder_Conveyor" Subtype="Barbette1x1" />
         </Blocks>
     </BlockVariantGroup>
+
+
+	  
+
+	  <BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="FAS_5_Inch_set" />
+        <Icon>Textures\GUI\Icons\5InchDualGun.dds</Icon>
+        <DisplayName>5 Inch gun set</DisplayName>
+        <Description>Fletcher 5 inch gun group</Description>
+        <Blocks>
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="127mmMk32" />
+		  <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="127mmMk56" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="127mmMk24" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="127mmMk12" />
+		  <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="6InchTriple" />
+        </Blocks>
+      </BlockVariantGroup>
+  
+	
+		<BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="FAS_heavy_set" />
+        <Icon>Textures\GUI\Icons\381mmR.dds</Icon>
+        <DisplayName>Heavy guns</DisplayName>
+        <Description>Fletcher heavy gun group</Description>
+        <Blocks>
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="381mmDualR" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="381mmDualNR" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="16InchTriple" />
+		  <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="380mmMLE1935" />
+        </Blocks>
+      </BlockVariantGroup>
+
+    <BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="FAS_8_inch_set" />
+        <Icon>Textures\GUI\Icons\Ger203mm.dds</Icon>
+        <DisplayName>8 inch guns</DisplayName>
+        <Description>Fletcher 8 inch gun group</Description>
+        <Blocks>
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="203mmTwin" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="203mmTriple" />
+        </Blocks>
+      </BlockVariantGroup>
+
+
+	  <BlockVariantGroup>
+		  <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="FAS_Super_Heavy_set" />
+		  <Icon>Textures\GUI\Icons\18Inch48.dds</Icon>
+		  <DisplayName>20 inch guns</DisplayName>
+		  <Description>20 inch gun group</Description>
+		  <Blocks>
+			  <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="20InchTwin" />
+		  </Blocks>
+	  </BlockVariantGroup>
+
   </BlockVariantGroups>
   <BlockPositions>
    <BlockPosition>

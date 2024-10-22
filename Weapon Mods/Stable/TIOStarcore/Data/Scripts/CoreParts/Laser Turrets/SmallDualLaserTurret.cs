@@ -53,10 +53,10 @@ namespace Scripts {
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
                 MaxTargetDistance = 3000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
                 MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
-                TopTargets = 6, // Maximum number of targets to randomize between; 0 = unlimited.
-                CycleTargets = 2, // Number of targets to "cycle" per acquire attempt.
-                TopBlocks = 16, // Maximum number of blocks to randomize between; 0 = unlimited.
-                CycleBlocks = 4, 
+                TopTargets = 4, // Maximum number of targets to randomize between; 0 = unlimited.
+
+                TopBlocks = 12, // Maximum number of blocks to randomize between; 0 = unlimited.
+
                 StopTrackingSpeed = 0, // Do not track threats traveling faster than this speed; 0 = unlimited.
             },
             HardPoint = new HardPointDef
@@ -187,7 +187,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                SmallDualLaserTurretAmmo, 
+                SmallDualLaserTurretAmmo, SmallDualLaserTurretAmmoFake,
                  // Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = CoilgunAnim,

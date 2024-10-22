@@ -6,7 +6,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>Mk25Rangefinder</SubtypeId>
 			</Id>
-			<DisplayName>[FAS] Mk25 Rangefinder</DisplayName>
+			<DisplayName>Mk25 Rangefinder</DisplayName>
 			<Description>
 				Mark 25 Rangefinder
 				Can be used for camera targetting

@@ -686,7 +686,7 @@ namespace ShipPoints
             ["127mmMk12"] = 150,
             ["127mmMk24"] = 150,
             ["127mmMk32"] = 150,
-            ["127mmMk56"] = 350,
+            ["127mmMk56"] = 150,
             ["105mmTwin"] = 100,
             ["PomPomMain"] = 75,
             ["150mmCasemate"] = 150,
@@ -698,8 +698,8 @@ namespace ShipPoints
             ["16InchTriple"] = 350,
             ["15cmTbtsKC36T"] = 150,
             ["15cmTbtsKC36"] = 150,
-            ["203mmTwin"] = 200,
-            ["203mmTriple"] = 200,
+            ["203mmTwin"] = 225,
+            ["203mmTriple"] = 225,
             ["TorpBarbette"] = 500,
             ["406alternate"] = 350,
             ["Mk25Rangefinder"] = 10,
@@ -757,7 +757,7 @@ namespace ShipPoints
             ["Caster_Accelerator_0"] = 10,
             ["Caster_Accelerator_90"] = 40,
             ["Caster_Feeder"] = 10,
-            ["Caster_FocusLens"] = 50,
+            ["Caster_FocusLens"] = 350,
             ["Caster_Reactor"] = 125,
             ["Heat_Heatsink"] = 10,
             ["Heat_FlatRadiator"] = 10,
@@ -948,6 +948,7 @@ namespace ShipPoints
                     blockDisplayName = "Defensive Generator";
                     costMultiplier = 50.00f;
                     break;
+
                 case "[FAS] Neptune Torpedo":
                     blockDisplayName = "[FAS] Neptune Torpedo";
                     costMultiplier = 0.25f;
