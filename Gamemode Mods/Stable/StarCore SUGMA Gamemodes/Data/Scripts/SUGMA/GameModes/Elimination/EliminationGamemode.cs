@@ -226,13 +226,21 @@ namespace SC.SUGMA.GameModes.Elimination
 
         internal override void DisplayWinMessage()
         {
-            if (_winningFaction == null)
+            try
             {
-                MyAPIGateway.Utilities.ShowNotification("YOU ARE ALL LOSERS.", 10000, "Red");
-                return;
+            
+                if (_winningFaction == null)
+                {
+                    MyAPIGateway.Utilities.ShowNotification("YOU ARE ALL LOSERS.", 10000, "Red");
+                    return;
+                }
+        
+                MyAPIGateway.Utilities.ShowNotification($"A WINNER IS [{_winningFaction?.Name}]!", 10000);
             }
-
-            MyAPIGateway.Utilities.ShowNotification($"A WINNER IS [{_winningFaction?.Name}]!", 10000);
+            catch(Exception ex)
+            {
+                Log.Exception(ex, typeof(GamemodeBase), "EliminationGamemode");
+            }
         }
 
 
