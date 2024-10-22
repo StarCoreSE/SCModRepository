@@ -25,6 +25,7 @@ namespace StarCore.ShareTrack
         public static AllGridsList I;
 
         public static Dictionary<string, int> PointValues = new Dictionary<string, int>();
+        public static string[][] CrossedClimbingCostGroups = Array.Empty<string[]>();
 
 
         private static readonly Dictionary<long, IMyPlayer> AllPlayers = new Dictionary<long, IMyPlayer>();
@@ -102,6 +103,14 @@ namespace StarCore.ShareTrack
                 if (climbCostFunc != null)
                 {
                     _climbingCostFunction = climbCostFunc;
+                    return;
+                }
+
+                var crossedGroups = message as string[][];
+                if (crossedGroups != null)
+                {
+                    CrossedClimbingCostGroups = crossedGroups;
+                    return;
                 }
             }
             catch (Exception ex)

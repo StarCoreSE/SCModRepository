@@ -943,12 +943,14 @@ namespace ShipPoints
                     break;
                 case "Shield Controller":
                 case "Shield Controller Table":
+                    blockDisplayName = "Shield Controller";
+                    costMultiplier = 50.00f;
+                    break;
                 case "Structural Integrity Field Generator":
-		case "Structural Integrity Generator Core":
+		        case "[S.I] Generator Core":
                     blockDisplayName = "Defensive Generator";
                     costMultiplier = 50.00f;
                     break;
-
                 case "[FAS] Neptune Torpedo":
                     blockDisplayName = "[FAS] Neptune Torpedo";
                     costMultiplier = 0.25f;
@@ -958,10 +960,22 @@ namespace ShipPoints
             return new MyTuple<string, float>(blockDisplayName, costMultiplier);
         }
 
+        /// <summary>
+        /// Groups listed here will not have climbing cost applied within their group, but will have it applied to other groups in the same category.
+        /// </summary>
+        private readonly string[][] _crossedClimbingCostGroups = {
+            new[]
+            {
+                "Shield Controller",
+                "Defensive Generator"
+            }
+        };
+
         public override void Init(MyObjectBuilder_SessionComponent sessionComponent)
         {
             MyAPIGateway.Utilities.SendModMessage(2546247, PointValues);
             MyAPIGateway.Utilities.SendModMessage(2546247, _climbingCostRename);
+            MyAPIGateway.Utilities.SendModMessage(2546247, _crossedClimbingCostGroups);
         }
     }
 }

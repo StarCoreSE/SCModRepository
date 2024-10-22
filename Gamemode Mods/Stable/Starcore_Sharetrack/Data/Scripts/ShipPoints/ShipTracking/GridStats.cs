@@ -271,7 +271,13 @@ namespace StarCore.ShareTrack.ShipTracking
             if (!BlockCounts.ContainsKey(blockDisplayName))
                 BlockCounts.Add(blockDisplayName, 0);
 
-            var thisSpecialBlocksCount = BlockCounts[blockDisplayName]++;
+            int thisSpecialBlocksCount = BlockCounts[blockDisplayName]++;
+
+            string[] crossedGroup = AllGridsList.CrossedClimbingCostGroups.FirstOrDefault(l => l.Contains(blockDisplayName));
+            if (crossedGroup != null)
+            {
+                thisSpecialBlocksCount = crossedGroup.Where(g => g != blockDisplayName).Sum(groupName => BlockCounts.GetValueOrDefault(groupName, 0));
+            }
 
             if (thisClimbingCostMult > 0)
                 blockPoints += (int)(blockPoints * thisSpecialBlocksCount * thisClimbingCostMult);
