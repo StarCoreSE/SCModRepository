@@ -38,13 +38,15 @@ namespace SC.SUGMA.HeartNetworking
         {
             try
             {
-                MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(NetworkId, ReceiveMessage);
-                MyLog.Default.WriteLineAndConsole("[NetworkTimeSync] De-registered network message handler.");
+                if (MyAPIGateway.Multiplayer != null)
+                {
+                    MyAPIGateway.Multiplayer.UnregisterSecureMessageHandler(NetworkId, ReceiveMessage);
+                    MyLog.Default.WriteLineAndConsole("[NetworkTimeSync] De-registered network message handler.");
+                }
             }
             catch (Exception ex)
             {
-                Log.Exception(ex, typeof(NetworkTimeSync));
-                throw ex;
+                Log.Exception(ex, typeof(NetworkTimeSync), "Error unloading NetworkTimeSync");
             }
         }
 
@@ -75,13 +77,28 @@ namespace SC.SUGMA.HeartNetworking
         private void ReceiveMessage(ushort networkId, byte[] serialized, ulong sender, bool isFromServer)
         {
             if (serialized == null || serialized.Length == 0)
+            {
+                Log.Info("Received empty or null time sync packet.");
                 return;
-            var packet = MyAPIGateway.Utilities.SerializeFromBinary<TimeSyncPacket>(serialized);
-            if (packet == null)
-                return;
+            }
 
-            packet.Received(sender);
+            try
+            {
+                var packet = MyAPIGateway.Utilities.SerializeFromBinary<TimeSyncPacket>(serialized);
+                if (packet == null)
+                {
+                    Log.Info("Failed to deserialize time sync packet.");
+                    return;
+                }
+
+                packet.Received(sender);
+            }
+            catch (Exception ex)
+            {
+                Log.Exception(ex, typeof(NetworkTimeSync), "Error processing time sync packet");
+            }
         }
+
     }
 
     [ProtoContract]
@@ -92,26 +109,34 @@ namespace SC.SUGMA.HeartNetworking
 
         public void Received(ulong senderSteamId)
         {
-            if (MyAPIGateway.Session.IsServer)
+            try
             {
-                MyAPIGateway.Multiplayer.SendMessageTo(
-                    NetworkTimeSync.NetworkId,
-                    MyAPIGateway.Utilities.SerializeToBinary(new TimeSyncPacket
+                if (MyAPIGateway.Session.IsServer)
+                {
+                    var response = new TimeSyncPacket
                     {
                         IncomingTimestamp = OutgoingTimestamp,
                         OutgoingTimestamp = DateTime.UtcNow.TimeOfDay.TotalMilliseconds
-                    }),
-                    senderSteamId);
+                    };
+                    byte[] serialized = MyAPIGateway.Utilities.SerializeToBinary(response);
+                    if (serialized != null)
+                    {
+                        MyAPIGateway.Multiplayer.SendMessageTo(NetworkTimeSync.NetworkId, serialized, senderSteamId);
+                    }
+                    else
+                    {
+                        Log.Info("Failed to serialize TimeSyncPacket response.");
+                    }
+                }
+                else
+                {
+                    NetworkTimeSync.ThisPlayerPing = DateTime.UtcNow.TimeOfDay.TotalMilliseconds - NetworkTimeSync.MessageSendTimestamp;
+                    NetworkTimeSync.ServerTimeOffset = OutgoingTimestamp - IncomingTimestamp - NetworkTimeSync.ThisPlayerPing;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                NetworkTimeSync.ThisPlayerPing =
-                    DateTime.UtcNow.TimeOfDay.TotalMilliseconds - NetworkTimeSync.MessageSendTimestamp;
-                NetworkTimeSync.ServerTimeOffset =
-                    OutgoingTimestamp - IncomingTimestamp - NetworkTimeSync.ThisPlayerPing;
-                //Log.Info("\nOutgoing Timestamp: " + OutgoingTimestamp + "\nIncoming Timestamp: " + IncomingTimestamp);
-                //Log.Info("ThisPlayerPing: " + NetworkTimeSync.ThisPlayerPing);
-                //Log.Info("ServerTimeOffset: " + NetworkTimeSync.ServerTimeOffset);
+                Log.Exception(ex, typeof(TimeSyncPacket), "Error processing TimeSyncPacket");
             }
         }
     }
