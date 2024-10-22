@@ -232,7 +232,8 @@ namespace SC.SUGMA.GameModes.Elimination
                 return;
             }
 
-            MyAPIGateway.Utilities.ShowNotification($"A WINNER IS [{_winningFaction?.Name}]!", 10000);
+            var factionName = _winningFaction?.Name ?? "UNKNOWN";
+            MyAPIGateway.Utilities.ShowNotification($"A WINNER IS [{factionName}]!", 10000);
         }
 
 
