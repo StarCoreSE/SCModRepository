@@ -358,7 +358,7 @@ namespace StarCore.ShareTrack.ShipTracking
                                  30 / Math.Max(maxAngle, angle * angle * angle);
                 _nametag.Origin = new Vector2D(targetHudPos.X,
                     targetHudPos.Y + MathHelper.Clamp(-0.000125 * distance + 0.25, 0.05, 0.25));
-                _nametag.Visible = visible && AllGridsList.NametagViewState != NametagSettings.None;
+                _nametag.Visible = visible && AllGridsList.NametagViewState != NametagSettings.None && (MyAPIGateway.Session?.Player?.Controller?.ControlledEntity?.Entity as IMyCockpit)?.CubeGrid != Grid;
 
                 _nametag.Message.Clear();
 
