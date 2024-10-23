@@ -91,7 +91,7 @@ namespace Scripts
             Pattern = new PatternDef
             {
                 Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo. Every 16th shot is high damage. 
-                    "MA_Laser_T3_Ammo",
+                    
                     "MA_Laser_T3_Ammo_Fake",
                     "MA_Laser_T3_Ammo_Fake",
                     "MA_Laser_T3_Ammo_Fake",
@@ -636,7 +636,7 @@ namespace Scripts
             Pattern = new PatternDef
             {
                 Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo. Every 16th shot is high damage. 
-                    "MA_Laser_Gladius_Ammo",
+                
                     "MA_Laser_Gladius_Ammo_Fake",
                     "MA_Laser_Gladius_Ammo_Fake",
                     "MA_Laser_Gladius_Ammo_Fake",
@@ -1421,9 +1421,9 @@ namespace Scripts
                         {
                             Restart = false,
                             MaxDistance = 1000,
-                            MaxDuration = 10,
+                            MaxDuration = 0.5f,
                             Scale = 1,
-                            HitPlayChance = 1f,
+                            HitPlayChance = 0.125f,
                         },
                     },
                     Eject = new ParticleDef
