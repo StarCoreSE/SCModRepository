@@ -194,7 +194,7 @@ namespace StarCore.ShareTrack.ShipTracking
             var shieldController = ShieldApi.GetShieldBlock(Grid);
             if (shieldController == null)
                 OriginalMaxShieldHealth = -1;
-            if (OriginalMaxShieldHealth == -1 && !ShieldApi.IsFortified(shieldController))
+            if (!ShieldApi.IsFortified(shieldController))
                 OriginalMaxShieldHealth = MaxShieldHealth;
 
             // TODO: Update pilots
