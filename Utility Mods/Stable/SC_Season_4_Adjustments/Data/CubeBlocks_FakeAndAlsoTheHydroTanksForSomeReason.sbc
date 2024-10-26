@@ -82,7 +82,7 @@
 
     <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeFakeBlockRadioAntenna</SubtypeId>
       </Id>
       <DisplayName>Fake Greeble Antenna</DisplayName>
