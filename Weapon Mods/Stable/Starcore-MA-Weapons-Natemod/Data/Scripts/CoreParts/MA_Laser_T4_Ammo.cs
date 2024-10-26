@@ -38,8 +38,8 @@ namespace Scripts
             AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
             AmmoRound = "MA_Laser_T4_Ammo", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
-            EnergyCost = 0.23125f, //750MW Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 640f, // Direct damage; one steel plate is worth 100.
+            EnergyCost = 0.023125f, //750MW Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
+            BaseDamage = 6400f, // Direct damage; one steel plate is worth 100.
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
@@ -98,16 +98,25 @@ namespace Scripts
             },
             Pattern = new PatternDef
             {
-                Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
-                    "MA_Laser_T4_Ammo_Decal",	
+                Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo. Every 16th shot is high damage. 
+                    "MA_Laser_T4_Ammo", 
+                    "MA_Laser_T4_Ammo_Fake",
+                    "MA_Laser_T4_Ammo_Fake",
+                    "MA_Laser_T4_Ammo_Fake", 
+                    "MA_Laser_T4_Ammo_Fake", 
+                    "MA_Laser_T4_Ammo_Fake",
+                    "MA_Laser_T4_Ammo_Fake", 
+                    "MA_Laser_T4_Ammo_Fake", 
+                    "MA_Laser_T4_Ammo_Fake", 
+                    "MA_Laser_T4_Ammo_Fake",
                 },
-                Mode = Weapon,
-                TriggerChance = 1f,
-                Random = false,
+                Mode = Weapon, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
+                TriggerChance = 1f, // This is %
+                Random = false, // This randomizes the number spawned at once, NOT the list order.
                 RandomMin = 1,
                 RandomMax = 1,
-                SkipParent = false,
-                PatternSteps = 2, // Number of Ammos activated per round, will progress in order and loop.  Ignored if Random = true.				
+                SkipParent = false, // Skip the Ammo itself, in the list
+                PatternSteps = 1, // Number of Ammos activated per round, will progress in order and loop. Ignored if Random = true.
             },
             DamageScales = new DamageScaleDef
             {
@@ -130,10 +139,10 @@ namespace Scripts
                 },
                 Armor = new ArmorDef
                 {
-                    Armor = -1f,
+                    Armor = 0.8f,
                     Light = -1f,
                     Heavy = -1f,
-                    NonArmor = -1f,
+                    NonArmor = 0.8f,
                 },
                 Shields = new ShieldDef
                 {
@@ -458,6 +467,226 @@ namespace Scripts
                     ItemLifeTime = 0, // how long item should exist in world
                     Delay = 0, // delay in ticks after shot before ejected
                 }
+            }, // Don't edit below this line
+        };
+
+        private AmmoDef MA_Laser_T4_Ammo_Fake => new AmmoDef  //T4 continuous beam (using pattern to reduce partcles and decals, any damage tweaks do to both)
+        {
+            AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
+            AmmoRound = "MA_Laser_T4_Ammo_Fake", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
+            HybridRound = false, // Use both a physical ammo magazine and energy per shot.
+            EnergyCost = 0f, //750MW Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
+            BaseDamage = 0, // Direct damage; one steel plate is worth 100.
+            Mass = 0f, // In kilograms; how much force the impact will apply to the target.
+            Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
+            DecayPerShot = 0f, // Damage to the firing weapon itself. 
+                               //float.MaxValue will drop the weapon to the first build state and destroy all components used for construction
+                               //If greater than cube integrity it will remove the cube upon firing, without causing deformation (makes it look like the whole "block" flew away)
+            HardPointUsable = false, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
+            EnergyMagazineSize = 1200, // For energy weapons, how many shots to fire before reloading.
+            IgnoreWater = false, // Whether the projectile should be able to penetrate water when using WaterMod.
+            IgnoreVoxels = false, // Whether the projectile should be able to penetrate voxels.
+            HeatModifier = -1f, // Allows this ammo to modify the amount of heat the weapon produces per shot.
+            NpcSafe = true, // This is you tell npc moders that your ammo was designed with them in mind, if they tell you otherwise set this to false.
+            Sync = new SynchronizeDef
+            {
+                Full = false, // Be careful, do not use on high fire rate weapons or ammos with many simultaneous fragments. This will send position updates twice per second per projectile/fragment and sync target (grid/block) changes.
+                PointDefense = false, // Server will inform clients of what projectiles have died by PD defense and will trigger destruction.
+                OnHitDeath = false, // Server will inform clients when projectiles die due to them hitting something and will trigger destruction.
+            },
+            Shape = new ShapeDef // Defines the collision shape of the projectile, defaults to LineShape and uses the visual Line Length if set to 0.
+            {
+                Shape = LineShape, // LineShape or SphereShape. Do not use SphereShape for fast moving projectiles if you care about precision.
+                Diameter = .5f, // Diameter is minimum length of LineShape or minimum diameter of SphereShape.
+            },
+            ObjectsHit = new ObjectsHitDef
+            {
+                MaxObjectsHit = 0, // Limits the number of entities (grids, players, projectiles) the projectile can penetrate; 0 = unlimited.
+                CountBlocks = false, // Counts individual blocks, not just entities hit.
+            },
+            Beams = new BeamDef
+            {
+                Enable = true, // Enable beam behaviour.
+                VirtualBeams = false, // Only one damaging beam, but with the effectiveness of the visual beams combined (better performance).
+                ConvergeBeams = false, // When using virtual beams, converge the visual beams to the location of the real beam.
+                RotateRealBeam = true, // The real beam is rotated between all visual beams, instead of centered between them.
+                OneParticle = true, // Only spawn one particle hit per beam weapon.
+                FakeVoxelHitTicks = 60, // If this beam hits/misses a voxel it assumes it will continue to do so for this many ticks at the same hit length and not extend further within this window.  This can save up to n times worth of cpu.
+            },
+            Trajectory = new TrajectoryDef
+            {
+                Guidance = None, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
+                TargetLossDegree = 80f, // Degrees, Is pointed forward
+                TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                MaxLifeTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
+                AccelPerSec = 0f, // Acceleration in Meters Per Second. Projectile starts on tick 0 at its parents (weapon/other projectiles) travel velocity.
+                DesiredSpeed = 30000, // voxel phasing if you go above 5100
+                MaxTrajectory = 4500f, // Max Distance the projectile or beam can Travel.
+                DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
+                GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
+                SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
+                RangeVariance = Random(start: 0, end: 0), // subtracts value from MaxTrajectory
+                MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
+                TotalAcceleration = 1234.5, // 0 means no limit, something to do due with a thing called delta and something called v.
+                Smarts = new SmartsDef
+                {
+                    SteeringLimit = 0, // 0 means no limit, value is in degrees, good starting is 150.  This enable advanced smart "control", cost of 3 on a scale of 1-5, 0 being basic smart.
+                    Inaccuracy = 0f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
+                    Aggressiveness = 1f, // controls how responsive tracking is, recommended value 3-5.
+                    MaxLateralThrust = 0.75, // controls how sharp the projectile may turn, this is the cheaper but less realistic version of SteeringLimit, cost of 2 on a scale of 1-5, 0 being basic smart.
+                    NavAcceleration = 0, // helps influence how the projectile steers, 0 defaults to 1/2 Aggressiveness value or 0 if its 0, a value less than 0 disables this feature. 
+                    TrackingDelay = 0, // Measured in Shape diameter units traveled.
+                    AccelClearance = false, // Setting this to true will prevent smart acceleration until it is clear of the grid and tracking delay has been met (free fall).
+                    MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    OverideTarget = true, // when set to true ammo picks its own target, does not use hardpoint's.
+                    CheckFutureIntersection = false, // Utilize obstacle avoidance for drones/smarts
+                    FutureIntersectionRange = 0, // Range in front of the projectile at which it will detect obstacle.  If set to zero it defaults to DesiredSpeed + Shape Diameter
+                    MaxTargets = 0, // Number of targets allowed before ending, 0 = unlimited
+                    NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
+                    Roam = false, // Roam current area after target loss
+                    KeepAliveAfterTargetLoss = false, // Whether to stop early death of projectile on target loss
+                    OffsetRatio = 0.05f, // The ratio to offset the random direction (0 to 1) 
+                    OffsetTime = 60, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
+                    OffsetMinRange = 0, // The range from target at which offsets are no longer active
+                    FocusOnly = false, // only target the constructs Ai's focus target
+                    FocusEviction = false, // If FocusOnly and this to true will force smarts to lose target when there is no focus target
+                    ScanRange = 0, // 0 disables projectile screening, the max range that this projectile will be seen at by defending grids (adds this projectile to defenders lookup database). 
+                    NoSteering = false, // this disables target follow and instead travel straight ahead (but will respect offsets).
+                    MinTurnSpeed = 0, // set this to a reasonable value to avoid projectiles from spinning in place or being too aggressive turing at slow speeds 
+                },
+
+            },
+            AmmoGraphics = new GraphicDef
+            {
+                ModelName = "",
+                VisualProbability = 1f,
+                ShieldHitDraw = false,
+                //                Decals = new DecalDef
+                //                {
+                //                   MaxAge = 3600,
+                //                   Map = new[]
+                //                    {
+                //                        new TextureMapDef
+                //                        {
+                //                            HitMaterial = "Metal",
+                //                            DecalMaterial = "GunBullet",
+                //                        },
+                //                        new TextureMapDef
+                //                        {
+                //                            HitMaterial = "Glass",
+                //                            DecalMaterial = "GunBullet",
+                //                        },
+                //                    },
+                //                },
+                Particles = new AmmoParticleDef
+                {
+                    Ammo = new ParticleDef
+                    {
+                        Name = "", //ShipWelderArc
+                        Offset = Vector(x: 0, y: 0, z: 0),
+                        DisableCameraCulling = true,// If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
+                        Extras = new ParticleOptionDef
+                        {
+                            Scale = 1,
+                        },
+                    },
+                    Hit = new ParticleDef
+                    {
+                        Name = "",
+                        ApplyToShield = true,
+                        Offset = Vector(x: 0, y: 0, z: 0),
+                        DisableCameraCulling = true, // If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
+                        Extras = new ParticleOptionDef
+                        {
+                            Scale = 1,
+                            HitPlayChance = 1f,
+                        },
+                    },
+                    Eject = new ParticleDef
+                    {
+                        Name = "",
+                        ApplyToShield = true,
+                        Offset = Vector(x: 0, y: 0, z: 0),
+                        DisableCameraCulling = true, // If not true will not cull when not in view of camera, be careful with this and only use if you know you need it
+                        Extras = new ParticleOptionDef
+                        {
+                            Scale = 1,
+                            HitPlayChance = 1f,
+                        },
+                    },
+                },
+                Lines = new LineDef
+                {
+                    ColorVariance = Random(start: 0.8f, end: 1f), // multiply the color by random values within range.
+                    WidthVariance = Random(start: -.05f, end: 0f), // adds random value to default width (negatives shrinks width)
+                    DropParentVelocity = false, // If set to true will not take on the parents (grid/player) initial velocity when rendering.
+
+                    Tracer = new TracerBaseDef
+                    {
+                        Enable = true,
+                        Length = 1f,
+                        Width = 1.5f,
+                        Color = Color(red: 12, green: 8, blue: 4, alpha: .9f),
+                        FactionColor = DontUse, // DontUse, Foreground, Background.
+                        VisualFadeStart = 200, // Number of ticks the weapon has been firing before projectiles begin to fade their color
+                        VisualFadeEnd = 240, // How many ticks after fade began before it will be invisible.
+                        AlwaysDraw = false, // Prevents this tracer from being culled.  Only use if you have a reason too (very long tracers/trails).
+                        Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
+                            "WeaponLaser",
+                        },
+                        TextureMode = Normal, // Normal, Cycle, Chaos, Wave
+                        Segmentation = new SegmentDef
+                        {
+                            Enable = false, // If true Tracer TextureMode is ignored
+                            Textures = new[] {
+                                "WeaponLaser",
+                            },
+                            SegmentLength = 600f, // Uses the values below.
+                            SegmentGap = 150f, // Uses Tracer textures and values
+                            Speed = 800f, // meters per second
+                            Color = Color(red: 15, green: 8, blue: 3f, alpha: .9f),
+                            FactionColor = DontUse, // DontUse, Foreground, Background.
+                            WidthMultiplier = 1f,
+                            Reverse = false,
+                            UseLineVariance = true,
+                            WidthVariance = Random(start: 0f, end: 0.2f),
+                            ColorVariance = Random(start: 0.6f, end: 1.1f)
+                        }
+                    },
+                    Trail = new TrailDef
+                    {
+                        Enable = false,
+                        Textures = new[] {
+                            "",
+                        },
+                        TextureMode = Normal,
+                        DecayTime = 128,
+                        Color = Color(red: 0, green: 0, blue: 1, alpha: 1),
+                        FactionColor = DontUse, // DontUse, Foreground, Background.
+                        Back = false,
+                        CustomWidth = 0,
+                        UseWidthVariance = false,
+                        UseColorFade = true,
+                    },
+                    OffsetEffect = new OffsetEffectDef
+                    {
+                        MaxOffset = 0,// 0 offset value disables this effect
+                        MinLength = 0.2f,
+                        MaxLength = 3,
+                    },
+                },
+            },
+            AmmoAudio = new AmmoAudioDef
+            {
+                TravelSound = "",
+                HitSound = "",
+                ShieldHitSound = "",
+                PlayerHitSound = "",
+                VoxelHitSound = "",
+                FloatingHitSound = "",
+                HitPlayChance = 0.5f,
+                HitPlayShield = true,
             }, // Don't edit below this line
         };
 

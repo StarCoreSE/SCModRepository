@@ -60,12 +60,19 @@ namespace SC.SUGMA
 
         public virtual void StopRound()
         {
-            DisplayWinMessage();
-            IsStarted = false;
-            SUGMA_SessionComponent.I.StopGamemode();
-            SUtils.SetWorldPermissionsForMatch(false);
-            DisconnectHandler.I.Deactivate();
-            SUGMA_SessionComponent.I.ShareTrackApi.SetAutotrack(true);
+            try
+            {
+                DisplayWinMessage();
+                IsStarted = false;
+                SUGMA_SessionComponent.I.StopGamemode();
+                SUtils.SetWorldPermissionsForMatch(false);
+                DisconnectHandler.I.Deactivate();
+                SUGMA_SessionComponent.I.ShareTrackApi.SetAutotrack(true);
+            }
+            catch (Exception ex)
+            {
+                Log.Exception(ex, typeof(GamemodeBase), ReadableName);
+            }
         }
 
         internal virtual void DisplayStartMessage()

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <CubeBlocks>
+	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>NC_LG_GUN_Assault-Rifle</SubtypeId>
+			</Id>
+			<DisplayName>BattleRifle</DisplayName>
+			<Description>ITS A MACHINEGUN</Description>
+			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<GuiVisible>true</GuiVisible>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="12" y="3" z="2"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\NC_LG_GUN_Assault-Rifle.mwm</Model>
+		    <Components>
+			  <Component Subtype="Construction" Count="2000" />
+			  <Component Subtype="GravityGenerator" Count="40" />			  
+			  <Component Subtype="SmallTube" Count="1060" />
+			  <Component Subtype="Motor" Count="1080" />
+			  <Component Subtype="LargeTube" Count="1200" />
+			  <Component Subtype="Computer" Count="120" />
+			  <Component Subtype="MetalGrid" Count="650" />
+			  <Component Subtype="Construction" Count="4000" />
+			  <Component Subtype="SteelPlate" Count="1000" />
+		    </Components>
+		        <CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="12.00" EndY="3.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="12.00" EndY="3.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="2.00" EndY="3.00" Enabled="false"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="2.00" EndY="3.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="12.00" EndY="2.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="12.00" EndY="2.00"/>
+			</MountPoints>
+			<BlockPairName>NC_LG_GUN_Assault-Rifle</BlockPairName>
+			<MirroringX>Y</MirroringX>
+			<MirroringY>X</MirroringY>
+			<BuildTimeSeconds>180</BuildTimeSeconds>
+		    <ResourceSinkGroup>Defense</ResourceSinkGroup>
+		    <InventoryMaxVolume>100</InventoryMaxVolume>
+		    <IdleRotation>false</IdleRotation>
+		    <AiEnabled>false</AiEnabled>
+		    <MaxRangeMeters>10000</MaxRangeMeters>
+            <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+            <DamagedSound>ParticleWeapExpl</DamagedSound>
+            <EmissiveColorPreset>Default</EmissiveColorPreset>
+            <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+            <DestroySound>WepSmallWarheadExpl</DestroySound>
+            <PCU>600</PCU>
+            <IsAirTight>false</IsAirTight>
+            <EmissiveColorPreset>Default</EmissiveColorPreset>
+
+
+		</Definition>
+	</CubeBlocks>
+</Definitions>

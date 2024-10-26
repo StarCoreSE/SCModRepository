@@ -4,22 +4,18 @@ using System.Linq;
 using System.Collections.Generic;
 using Sandbox.ModAPI;
 using Sandbox.Common.ObjectBuilders;
-using Sandbox.Game.Entities;
 using Sandbox.Game.EntityComponents;
 using ProtoBuf;
-using VRage.Utils;
 using VRage.Game;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRage.Game.ModAPI.Network;
-using VRage.Game.ObjectBuilders.ComponentSystem;
 using VRage.Sync;
 using VRage.Network;
 using VRage.Game.Components;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRageMath;
-using VRageRender.Models;
 
 using Starcore.FieldGenerator.Networking.Custom;
 
@@ -58,8 +54,8 @@ namespace Starcore.FieldGenerator
         private float _stabilityChange = 0;
         private int _resetCounter = 0;
 
-        private int initUpgradeDelayTicks = 60; // 1 second delay (60 ticks)
-        private bool upgradesInitialized = false;
+        private int initValueDelayTicks = 60; // 1 second delay (60 ticks)
+        private bool valuesInitialized = false;
 
         #region Sync Properties
         public bool SiegeMode
@@ -70,7 +66,7 @@ namespace Starcore.FieldGenerator
                 if (_siegeMode != value)
                 {
                     _siegeMode = value;
-                    OnBoolPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<bool>(nameof(SiegeMode), _siegeMode));
+                    BoolSyncPacket.SyncBoolProperty(Block.EntityId, nameof(SiegeMode), _siegeMode);
                 }
             }
         }
@@ -84,12 +80,11 @@ namespace Starcore.FieldGenerator
                 if (_siegeCooldownActive != value)
                 {
                     _siegeCooldownActive = value;
-                    OnBoolPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<bool>(nameof(SiegeCooldownActive), _siegeCooldownActive));
+                    BoolSyncPacket.SyncBoolProperty(Block.EntityId, nameof(SiegeCooldownActive), _siegeCooldownActive);
                 }
             }
         }
         public bool _siegeCooldownActive;
-        public event PropertyChangedEventHandler<bool> OnBoolPropertyChanged;
 
         public int SiegeElapsedTime
         {
@@ -99,7 +94,7 @@ namespace Starcore.FieldGenerator
                 if (_siegeElapsedTime != value)
                 {
                     _siegeElapsedTime = value;
-                    OnIntPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<int>(nameof(SiegeElapsedTime), _siegeElapsedTime));
+                    IntSyncPacket.SyncIntProperty(Block.EntityId, nameof(SiegeElapsedTime), _siegeElapsedTime);
                 }
             }
         }
@@ -113,12 +108,11 @@ namespace Starcore.FieldGenerator
                 if (_siegeCooldownTime != value)
                 {
                     _siegeCooldownTime = value;
-                    OnIntPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<int>(nameof(SiegeCooldownTime), _siegeCooldownTime));
+                    IntSyncPacket.SyncIntProperty(Block.EntityId, nameof(SiegeCooldownTime), _siegeCooldownTime);
                 }
             }
         }
         public int _siegeCooldownTime;
-        public event PropertyChangedEventHandler<int> OnIntPropertyChanged;
 
         public float FieldPower
         {
@@ -128,7 +122,7 @@ namespace Starcore.FieldGenerator
                 if (_fieldPower != value)
                 {               
                     _fieldPower = MathHelper.Clamp(value, MinFieldPower, MaxFieldPower);
-                    OnFloatPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<float>(nameof(FieldPower), _fieldPower));
+                    FloatSyncPacket.SyncFloatProperty(Block.EntityId, nameof(FieldPower), _fieldPower);
                 }
             }
         }
@@ -142,7 +136,7 @@ namespace Starcore.FieldGenerator
                 if (_maxFieldPower != value)
                 {
                     _maxFieldPower = value;
-                    OnFloatPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<float>(nameof(MaxFieldPower), _maxFieldPower));
+                    FloatSyncPacket.SyncFloatProperty(Block.EntityId, nameof(MaxFieldPower), _maxFieldPower);
                 }
             }
         }
@@ -156,7 +150,7 @@ namespace Starcore.FieldGenerator
                 if (_minFieldPower != value)
                 {
                     _minFieldPower = value;
-                    OnFloatPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<float>(nameof(MinFieldPower), _minFieldPower));
+                    FloatSyncPacket.SyncFloatProperty(Block.EntityId, nameof(MinFieldPower), _minFieldPower);
                 }
             }
         }
@@ -170,7 +164,7 @@ namespace Starcore.FieldGenerator
                 if (_sizeModifier != value)
                 {
                     _sizeModifier = value;
-                    OnFloatPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<float>(nameof(SizeModifier), _sizeModifier));
+                    FloatSyncPacket.SyncFloatProperty(Block.EntityId, nameof(SizeModifier), _sizeModifier);
                 }
             }
         }
@@ -184,12 +178,11 @@ namespace Starcore.FieldGenerator
                 if (_stability != value)
                 {
                     _stability = value;
-                    OnFloatPropertyChanged?.Invoke(this, new PropertyChangedEventArgs<float>(nameof(Stability), _stability));
+                    FloatSyncPacket.SyncFloatProperty(Block.EntityId, nameof(Stability), _stability);
                 }
             }
         }
         public float _stability;
-        public event PropertyChangedEventHandler<float> OnFloatPropertyChanged;
         #endregion
 
         private Dictionary<string, IMyModelDummy> _coreDummies = new Dictionary<string, IMyModelDummy>();
@@ -228,17 +221,9 @@ namespace Starcore.FieldGenerator
             Sink = Block.Components.Get<MyResourceSinkComponent>();
             Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, CalculatePowerDraw);
 
-            OnBoolPropertyChanged += HandleBoolPacket;
-            OnIntPropertyChanged += HandleIntPacket;
-            OnFloatPropertyChanged += HandleFloatPacket;
-
             if (IsServer)
             {
-                Block.Model.GetDummies(_coreDummies);
-
-                Stability = 100;
-                MinFieldPower = 0;
-                FieldPower = MinFieldPower;
+                Block.Model.GetDummies(_coreDummies);                         
 
                 Block.CubeGrid.GetBlocks(_gridBlocks);
                 _gridBlockCount = _gridBlocks.Count;
@@ -257,22 +242,21 @@ namespace Starcore.FieldGenerator
             NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
         }
 
-
         public override void UpdateAfterSimulation()
         {
             base.UpdateAfterSimulation();
 
-            if (!upgradesInitialized)
+            if (IsServer && !valuesInitialized)
             {
-                // Delay InitExistingUpgrades by 60 ticks (1 second)
-                if (initUpgradeDelayTicks > 0)
+                if (initValueDelayTicks > 0)
                 {
-                    initUpgradeDelayTicks--; // Decrease the timer
+                    initValueDelayTicks--;
                 }
                 else
                 {
-                    InitExistingUpgrades(); // Call InitExistingUpgrades after the delay
-                    upgradesInitialized = true; // Ensure it only happens once
+                    Stability = 100;
+                    InitExistingUpgrades();                
+                    valuesInitialized = true;
                 }
             }
 
@@ -285,7 +269,7 @@ namespace Starcore.FieldGenerator
                 {
                     Sink.Update();
 
-                    UpdateSiegeState();
+                    UpdateSiegeState();             
 
                     if (!Config.SimplifiedMode)
                     {
@@ -313,15 +297,18 @@ namespace Starcore.FieldGenerator
                             _damageEventCounter = 0;
                             return;
                         }
-                    }
+                    }                  
                 }
                 else if (!Block.IsWorking)
                 {
                     if (FieldPower > 0)
                         FieldPower = 0;
-
+                    
                     if (SiegeMode)
-                        SiegeMode = false;
+                    {
+                        CancelSiegeMode();
+                        SiegeMode = false;                 
+                    }                                         
                 }
             }
         }
@@ -343,7 +330,8 @@ namespace Starcore.FieldGenerator
 
                 if (!Block.IsWorking)
                 {
-                    SetPowerNotification($"<S.I> Generator Core is Offline! | Insufficient Power?", 600, "Red");
+                    string reason = Block.IsFunctional ? "Insufficient Power?" : "Block Damaged!";
+                    SetPowerNotification($"<S.I> Generator Core is Offline! | {reason}", 600, "Red");
                 }
             }
             else
@@ -354,10 +342,6 @@ namespace Starcore.FieldGenerator
         {
             base.Close();
 
-            OnBoolPropertyChanged -= HandleBoolPacket;
-            OnIntPropertyChanged -= HandleIntPacket;
-            OnFloatPropertyChanged -= HandleFloatPacket;
-
             if (IsServer)
             {
                 Block.CubeGrid.OnBlockAdded -= OnBlockAdded;
@@ -367,7 +351,7 @@ namespace Starcore.FieldGenerator
             if (!IsServer)
             {
                 GridStopped.ValueChanged -= OnGridStopValueChange;
-            }
+            }              
 
             Block = null;
         }
@@ -386,7 +370,7 @@ namespace Starcore.FieldGenerator
 
             if (block.FatBlock != null && block.FatBlock.BlockDefinition.SubtypeId == "FieldGen_Capacity_Upgrade")
             {
-                if (IsNeighbour(block) && IsModuleValid(block))
+                if (IsNeighbour(block)/* && IsModuleValid(block)*/)
                 {
                     long entityId = block.FatBlock.EntityId;
 
@@ -436,25 +420,23 @@ namespace Starcore.FieldGenerator
             {
                 IMyCubeGrid targetGrid = targetBlock.CubeGrid;
 
-                if (Block != null && targetGrid.EntityId == Block.CubeGrid.EntityId)
-                {
-                    if (SiegeMode)
-                    {
-                        info.Amount *= 0.1f;
-                        return;
-                    }
-                    else
-                    {
-                        if (!Config.SimplifiedMode)
-                        {
-                            _damageEventCounter++;
-                        }                   
+                if (targetGrid.EntityId != Block.CubeGrid.EntityId)
+                    return;
 
-                        float roundedModifier = (float)Math.Round(1 - ((double)FieldPower / 100), 3);
-                        info.Amount *= roundedModifier;
-                        return;
-                    }
-                }                          
+                if (SiegeMode)
+                {
+                    info.Amount *= 0.1f;
+                    return;
+                }
+
+                if (!Config.SimplifiedMode)
+                {
+                    _damageEventCounter++;
+                }
+
+                float roundedModifier = (float)Math.Round(1 - ((double)FieldPower / 100), 3);
+                info.Amount *= roundedModifier;
+                return;
             }
         }
 
@@ -462,23 +444,6 @@ namespace Starcore.FieldGenerator
         {
             if (obj?.Value ?? false)
                 Block.CubeGrid.Physics.LinearVelocity = Vector3.Zero;
-        }
-        #endregion
-
-        #region Terminal Control Packet Handlers
-        private void HandleBoolPacket(object sender, PropertyChangedEventArgs<bool> e)
-        {
-            BoolSyncPacket.SyncBoolProperty(Block.EntityId, e.PropertyName, e.NewValue);
-        }
-
-        private void HandleIntPacket(object sender, PropertyChangedEventArgs<int> e)
-        {
-            IntSyncPacket.SyncIntProperty(Block.EntityId, e.PropertyName, e.NewValue);
-        }
-
-        private void HandleFloatPacket(object sender, PropertyChangedEventArgs<float> e)
-        {
-            FloatSyncPacket.SyncFloatProperty(Block.EntityId, e.PropertyName, e.NewValue);
         }
         #endregion
 
@@ -526,6 +491,30 @@ namespace Starcore.FieldGenerator
             }
         }
 
+        private void SiegeBlockEnabler(List<IMySlimBlock> allTerminalBlocks, bool enabled)
+        {
+            foreach (var block in allTerminalBlocks)
+            {
+                if (block.FatBlock != null && block.FatBlock.BlockDefinition.SubtypeId != "FieldGen_Core")
+                {
+                    var entBlock = block as MyEntity;
+                    if (entBlock != null && FieldGeneratorSession.CoreSysAPI.HasCoreWeapon(entBlock))
+                    {
+                        FieldGeneratorSession.CoreSysAPI.SetFiringAllowed(entBlock, enabled);
+
+                        var functionalBlock = block.FatBlock as IMyFunctionalBlock;
+                        if (functionalBlock != null)
+                        {
+                            functionalBlock.Enabled = enabled;
+
+                        }
+                    }
+                }
+                else
+                    continue;
+            }
+        }
+
         private void EndSiegeMode()
         {
             if (IsServer && GridStopped.Value)
@@ -536,6 +525,17 @@ namespace Starcore.FieldGenerator
             SiegeCooldownTime = (SiegeElapsedTime > 5) ? (SiegeElapsedTime * 2) : 5;
             SiegeElapsedTime = 0;
             SiegeCooldownActive = true;
+        }
+
+        private void CancelSiegeMode()
+        {
+            if (IsServer && GridStopped.Value)
+                GridStopped.Value = false;
+
+            SiegeBlockEnabler(_gridBlocks, true);
+
+            SiegeCooldownTime = 0;
+            SiegeElapsedTime = 0;
         }
         #endregion
 
@@ -567,13 +567,32 @@ namespace Starcore.FieldGenerator
 
         private void InitExistingUpgrades()
         {
+            List<long> validUpgradeModules = new List<long>();
             List<IMySlimBlock> neighbours = new List<IMySlimBlock>();
             Block.SlimBlock.GetNeighbours(neighbours);
 
             foreach (var n in neighbours)
             {
-                OnBlockAdded(n);
+                if (n?.FatBlock == null)
+                {
+                    continue;
+                }
+                else if (n.FatBlock.BlockDefinition.SubtypeId == "FieldGen_Capacity_Upgrade" && IsModuleValid(n))
+                {
+                    validUpgradeModules.Add(n.FatBlock.EntityId);
+                }
             }
+
+            foreach (var entityId in validUpgradeModules)
+            {
+                if (!_attachedModuleIds.Contains(entityId) && _moduleCount < Config.MaxModuleCount)
+                {
+                    _attachedModuleIds.Add(entityId);
+                    _moduleCount++;
+                }
+            }
+
+            CalculateUpgradeAmounts();
         }
 
         private bool IsNeighbour(IMySlimBlock block)
@@ -642,9 +661,7 @@ namespace Starcore.FieldGenerator
         {
             if (Block != null)
             {
-                var cockpits = Block.CubeGrid.GetFatBlocks<IMyCockpit>();
-
-                foreach (var cockpit in cockpits)
+                foreach (var cockpit in Block.CubeGrid.GetFatBlocks<IMyCockpit>())
                 {
                     if (cockpit.Pilot != null && cockpit.Pilot.EntityId == MyAPIGateway.Session?.Player?.Character?.EntityId)
                     {
@@ -676,31 +693,7 @@ namespace Starcore.FieldGenerator
             }                          
 
             return false;
-        }
-
-        private void SiegeBlockEnabler(List<IMySlimBlock> allTerminalBlocks, bool enabled)
-        {
-            foreach (var block in allTerminalBlocks)
-            {
-                if (block.FatBlock != null && block.FatBlock.BlockDefinition.SubtypeId != "FieldGen_Core")
-                {
-                    var entBlock = block as MyEntity;
-                    if (entBlock != null && FieldGeneratorSession.CoreSysAPI.HasCoreWeapon(entBlock))
-                    {
-                        FieldGeneratorSession.CoreSysAPI.SetFiringAllowed(entBlock, enabled);
-
-                        var functionalBlock = block.FatBlock as IMyFunctionalBlock;
-                        if (functionalBlock != null)
-                        {
-                            functionalBlock.Enabled = enabled;
-
-                        }
-                    }
-                }
-                else
-                    continue;             
-            }
-        }
+        }       
         #endregion
 
         #region Notifs
@@ -728,19 +721,5 @@ namespace Starcore.FieldGenerator
             notifPower.Show();
         }
         #endregion
-    }
-
-    public delegate void PropertyChangedEventHandler<T>(object sender, PropertyChangedEventArgs<T> e);
-
-    public class PropertyChangedEventArgs<T> : EventArgs
-    {
-        public string PropertyName { get; }
-        public T NewValue { get; }
-
-        public PropertyChangedEventArgs(string propertyName, T newValue)
-        {
-            PropertyName = propertyName;
-            NewValue = newValue;
-        }
     }
 }

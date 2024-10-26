@@ -11,6 +11,19 @@ namespace ShipPoints
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     internal class PointAdditions : MySessionComponentBase
     {
+		/* Hey, modder!
+		 *
+		 * To assign a block points, add a new line to the below Dictionary in the following format:
+		 * ["subtypeid"] = numPoints,
+		 *
+		 * To assign a block a climbing cost, add to the ClimbingCostRename function towards the bottom of the file in the following format:
+		 * case "BlockDisplayName1":
+		 * case "BlockDisplayName2":
+		 *     blockDisplayName = "groupDisplayName";
+		 *     costMultiplier = costMultiplerPercent;
+		 * 	   break;
+		 */
+		
         readonly Dictionary<string, int> PointValues = new Dictionary<string, int>
         {
             ["LargeBlockBatteryBlock"] = 14,
@@ -151,7 +164,9 @@ namespace ShipPoints
             ["Nariman_Dart_Turret"] = 225,
             ["Counter_Battery"] = 250,
             ["SolHyp_ArcStrike_Torp"] = 275,
+            ["MagnaPulse_Gen"] = 400,
             ["SolHyp_Magnetic_Coilgun"] = 450,
+
 
 
             ["LargeHydrogenTank"] = 30,
@@ -671,7 +686,7 @@ namespace ShipPoints
             ["127mmMk12"] = 150,
             ["127mmMk24"] = 150,
             ["127mmMk32"] = 150,
-            ["127mmMk56"] = 350,
+            ["127mmMk56"] = 150,
             ["105mmTwin"] = 100,
             ["PomPomMain"] = 75,
             ["150mmCasemate"] = 150,
@@ -683,8 +698,8 @@ namespace ShipPoints
             ["16InchTriple"] = 350,
             ["15cmTbtsKC36T"] = 150,
             ["15cmTbtsKC36"] = 150,
-            ["203mmTwin"] = 200,
-            ["203mmTriple"] = 200,
+            ["203mmTwin"] = 225,
+            ["203mmTriple"] = 225,
             ["TorpBarbette"] = 500,
             ["406alternate"] = 350,
             ["Mk25Rangefinder"] = 10,
@@ -742,7 +757,7 @@ namespace ShipPoints
             ["Caster_Accelerator_0"] = 10,
             ["Caster_Accelerator_90"] = 40,
             ["Caster_Feeder"] = 10,
-            ["Caster_FocusLens"] = 50,
+            ["Caster_FocusLens"] = 350,
             ["Caster_Reactor"] = 125,
             ["Heat_Heatsink"] = 10,
             ["Heat_FlatRadiator"] = 10,
@@ -928,8 +943,11 @@ namespace ShipPoints
                     break;
                 case "Shield Controller":
                 case "Shield Controller Table":
+                    blockDisplayName = "Shield Controller";
+                    costMultiplier = 50.00f;
+                    break;
                 case "Structural Integrity Field Generator":
-		case "Structural Integrity Generator Core":
+		        case "[S.I] Generator Core":
                     blockDisplayName = "Defensive Generator";
                     costMultiplier = 50.00f;
                     break;
@@ -942,10 +960,22 @@ namespace ShipPoints
             return new MyTuple<string, float>(blockDisplayName, costMultiplier);
         }
 
+        /// <summary>
+        /// Groups listed here will not have climbing cost applied within their group, but will have it applied to other groups in the same category.
+        /// </summary>
+        private readonly string[][] _crossedClimbingCostGroups = {
+            new[]
+            {
+                "Shield Controller",
+                "Defensive Generator"
+            }
+        };
+
         public override void Init(MyObjectBuilder_SessionComponent sessionComponent)
         {
             MyAPIGateway.Utilities.SendModMessage(2546247, PointValues);
             MyAPIGateway.Utilities.SendModMessage(2546247, _climbingCostRename);
+            MyAPIGateway.Utilities.SendModMessage(2546247, _crossedClimbingCostGroups);
         }
     }
 }

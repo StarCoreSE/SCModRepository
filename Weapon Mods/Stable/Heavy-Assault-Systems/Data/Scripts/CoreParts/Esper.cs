@@ -123,7 +123,7 @@ namespace Scripts {
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
                     ReloadTime = 600, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
-                    DelayUntilFire = 0, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    DelayUntilFire = 30, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     HeatPerShot = 0, // Heat generated per shot.
                     MaxHeat = 100, // Max heat before weapon enters cooldown (70% of max heat).
                     Cooldown = .10f, // Percentage of max heat to be under to start firing again after overheat; accepts 0 - 0.95
@@ -131,30 +131,30 @@ namespace Scripts {
                     DegradeRof = false, // Progressively lower rate of fire when over 80% heat threshold (80% of max heat).
                     ShotsInBurst = 3, // Use this if you don't want the weapon to fire an entire physical magazine in one go. Should not be more than your magazine capacity.
                     DelayAfterBurst = 0, // How long to spend "reloading" after each burst. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    FireFull = false, // Whether the weapon should fire the full magazine (or the full burst instead if ShotsInBurst > 0), even if the target is lost or the player stops firing prematurely.
+                    FireFull = true, // Whether the weapon should fire the full magazine (or the full burst instead if ShotsInBurst > 0), even if the target is lost or the player stops firing prematurely.
                     GiveUpAfter = false, // Whether the weapon should drop its current target and reacquire a new target after finishing its magazine or burst.
                     BarrelSpinRate = 0, // Visual only, 0 disables and uses RateOfFire.
                     DeterministicSpin = false, // Spin barrel position will always be relative to initial / starting positions (spin will not be as smooth).
-                    SpinFree = false, // Spin barrel while not firing.
+                    SpinFree = true, // Spin barrel while not firing.
                     StayCharged = true, // Will start recharging whenever power cap is not full.
                 },
                 Audio = new HardPointAudioDef
                 {
                     PreFiringSound = "", // Audio for warmup effect.
-                    FiringSound = "HAS_TwinFire", // Audio for firing.
-                    FiringSoundPerShot = true, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
-                    ReloadSound = "HAS_ThanatosReload", // Sound SubtypeID, for when your Weapon is in a reloading state
+                    FiringSound = "HAS_TigtoneFire", // Audio for firing.
+                    FiringSoundPerShot = false, // Whether to replay the sound for each shot, or just loop over the entire track while firing.
+                    ReloadSound = "HAS_Tigtone_Reload", // Sound SubtypeID, for when your Weapon is in a reloading state
                     NoAmmoSound = "",
                     HardPointRotationSound = "", // Audio played when turret is moving.
                     BarrelRotationSound = "",
-                    FireSoundEndDelay = 0, // How long the firing audio should keep playing after firing stops. Measured in game ticks(6 = 100ms, 60 = 1 seconds, etc..).
-                    FireSoundNoBurst = true,
+                    FireSoundEndDelay = 120, // How long the firing audio should keep playing after firing stops. Measured in game ticks(6 = 100ms, 60 = 1 seconds, etc..).
+                    FireSoundNoBurst = false,
                 },
                 Graphics = new HardPointParticleDef
                 {
                     Effect1 = new ParticleDef
                     {
-                        Name = "Vulcan_Muzzleflash2", // SubtypeId of muzzle particle effect.
+                        Name = "EsperFire5", // SubtypeId of muzzle particle effect.
                         Color = Color(red: 1, green: 1, blue: 1, alpha: 1), // Deprecated, set color in particle sbc.
                         Offset = Vector(x: 0, y: 0, z: 0), // Offsets the effect from the muzzle empty.
 
@@ -162,7 +162,7 @@ namespace Scripts {
                         {
                             Loop = false, // Set this to the same as in the particle sbc!
                             Restart = false, // Whether to end a looping effect instantly when firing stops.
-                            MaxDistance = 1500, // Max distance at which this effect should be visible. NOTE: This will use whichever MaxDistance value is higher across Effect1 and Effect2!
+                            MaxDistance = 6000, // Max distance at which this effect should be visible. NOTE: This will use whichever MaxDistance value is higher across Effect1 and Effect2!
                             MaxDuration = 0, // Deprecated.
                             Scale = 1f, // Scale of effect.
                         },

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Sandbox.ModAPI;
 using StarCore.ShareTrack.API;
@@ -24,14 +25,13 @@ namespace StarCore.ShareTrack
         public static AllGridsList I;
 
         public static Dictionary<string, int> PointValues = new Dictionary<string, int>();
+        public static string[][] CrossedClimbingCostGroups = Array.Empty<string[]>();
 
 
         private static readonly Dictionary<long, IMyPlayer> AllPlayers = new Dictionary<long, IMyPlayer>();
 
         public static HudAPIv2.HUDMessage
-            IntegretyMessage,
-            TimerMessage,
-            Ticketmessage;
+            IntegretyMessage;
 
         public static ShipTracker.NametagSettings NametagViewState = ShipTracker.NametagSettings.PlayerName;
 
@@ -55,13 +55,6 @@ namespace StarCore.ShareTrack
                 IntegretyMessage.Visible = !IntegretyMessage.Visible;
                 MyAPIGateway.Utilities.ShowNotification("ShipTracker: Hud visibility set to " +
                                                         IntegretyMessage.Visible);
-            },
-            [MyKeys.B] = () =>
-            {
-                TimerMessage.Visible = !TimerMessage.Visible;
-                Ticketmessage.Visible = !Ticketmessage.Visible;
-                MyAPIGateway.Utilities.ShowNotification(
-                    "ShipTracker: Timer visibility set to " + TimerMessage.Visible);
             },
             [MyKeys.J] = () =>
             {
@@ -93,6 +86,8 @@ namespace StarCore.ShareTrack
         private bool _awaitingTrackRequest = true;
         private Func<string, MyTuple<string, float>> _climbingCostFunction;
 
+        public string[] WeaponSubtytes = Array.Empty<string>();
+
         private void ParsePointsDict(object message)
         {
             try
@@ -108,6 +103,14 @@ namespace StarCore.ShareTrack
                 if (climbCostFunc != null)
                 {
                     _climbingCostFunction = climbCostFunc;
+                    return;
+                }
+
+                var crossedGroups = message as string[][];
+                if (crossedGroups != null)
+                {
+                    CrossedClimbingCostGroups = crossedGroups;
+                    return;
                 }
             }
             catch (Exception ex)
@@ -128,18 +131,6 @@ namespace StarCore.ShareTrack
                 blend: BlendTypeEnum.PostPP)
             {
                 Visible = true
-            };
-            TimerMessage = new HudAPIv2.HUDMessage(scale: 1.2f, font: "BI_SEOutlined", Message: new StringBuilder(""),
-                origin: new Vector2D(0.35, .99), hideHud: false, shadowing: true, blend: BlendTypeEnum.PostPP)
-            {
-                Visible = false, //defaulted off?
-                InitialColor = Color.White
-            };
-            Ticketmessage = new HudAPIv2.HUDMessage(scale: 1f, font: "BI_SEOutlined", Message: new StringBuilder(""),
-                origin: new Vector2D(0.51, .99), hideHud: false, shadowing: true, blend: BlendTypeEnum.PostPP)
-            {
-                Visible = false, //defaulted off?
-                InitialColor = Color.White
             };
         }
 
@@ -193,52 +184,52 @@ namespace StarCore.ShareTrack
         }
 
 
-        private void MainTrackerUpdate(Dictionary<string, List<string>> ts, Dictionary<string, double> m,
-            Dictionary<string, int> bp, Dictionary<string, int> mbp, Dictionary<string, int> pbp,
-            Dictionary<string, int> obp, Dictionary<string, int> mobp)
+        private void MainTrackerUpdate(Dictionary<string, List<string>> teamShipStrings, Dictionary<string, double> massDict,
+            Dictionary<string, int> battlepointsDict, Dictionary<string, int> miscBattlepointsDict, Dictionary<string, int> powerPointsDict,
+            Dictionary<string, int> offensiveBattlepointsDict, Dictionary<string, int> movementBattlepointsDict)
         {
             foreach (var shipTracker in TrackingManager.I.TrackedGrids.Values)
             {
-                var fn = shipTracker.FactionName.Length > 6 ? shipTracker.FactionName.Substring(0, 6) : shipTracker.FactionName;
-                var o = shipTracker.OwnerName;
-                var nd = shipTracker.IsFunctional;
+                var factionName = shipTracker.FactionTag.Length > 6 ? shipTracker.FactionTag.Substring(0, 6) : shipTracker.FactionTag;
+                var ownerName = shipTracker.OwnerName;
+                var isFunctional = shipTracker.IsFunctional;
 
-                if (!ts.ContainsKey(fn))
+                if (!teamShipStrings.ContainsKey(factionName))
                 {
-                    ts.Add(fn, new List<string>());
-                    m[fn] = 0;
-                    bp[fn] = 0;
-                    mbp[fn] = 0;
-                    pbp[fn] = 0;
-                    obp[fn] = 0;
-                    mobp[fn] = 0;
+                    teamShipStrings.Add(factionName, new List<string>());
+                    massDict[factionName] = 0;
+                    battlepointsDict[factionName] = 0;
+                    miscBattlepointsDict[factionName] = 0;
+                    powerPointsDict[factionName] = 0;
+                    offensiveBattlepointsDict[factionName] = 0;
+                    movementBattlepointsDict[factionName] = 0;
                 }
 
-                if (nd)
+                if (isFunctional)
                 {
-                    m[fn] += shipTracker.Mass;
-                    bp[fn] += shipTracker.BattlePoints;
+                    massDict[factionName] += shipTracker.Mass;
+                    battlepointsDict[factionName] += shipTracker.BattlePoints;
                 }
                 else
                 {
                     continue;
                 }
 
-                mbp[fn] += shipTracker.RemainingPoints;
-                pbp[fn] += shipTracker.PowerPoints;
-                obp[fn] += shipTracker.OffensivePoints;
-                mobp[fn] += shipTracker.MovementPoints;
+                miscBattlepointsDict[factionName] += shipTracker.RemainingPoints;
+                powerPointsDict[factionName] += shipTracker.PowerPoints;
+                offensiveBattlepointsDict[factionName] += shipTracker.OffensivePoints;
+                movementBattlepointsDict[factionName] += shipTracker.MovementPoints;
 
-                var wep = 0;
+                var weaponCount = 0;
                 foreach (var kvp in shipTracker.WeaponCounts)
                 {
-                    wep += kvp.Value;
+                    weaponCount += kvp.Value;
                 }
 
-                var pwr = FormatPower(Math.Round(shipTracker.TotalPower, 1));
-                var ts2 = FormatThrust(Math.Round(shipTracker.TotalThrust, 2));
+                var powerString = FormatPower(Math.Round(shipTracker.TotalPower, 1));
+                var thrustString = FormatThrust(Math.Round(shipTracker.TotalThrust, 2));
 
-                ts[fn].Add(CreateDisplayString(o, shipTracker, wep, pwr, ts2));
+                teamShipStrings[factionName].Add(CreateDisplayString(ownerName, shipTracker, weaponCount, powerString, thrustString));
             }
         }
 
@@ -353,11 +344,23 @@ namespace StarCore.ShareTrack
             // Check if the current instance is not a dedicated server
             if (MyAPIGateway.Utilities.IsDedicated)
                 TrackingManager.Init();
+        }
 
-            // Initialize the WC_api and load it if it's not null
-
+        /// <summary>
+        /// This has to come late in startup, as WeaponCore can receive its weapon definitions late into loading.
+        /// </summary>
+        public void InitApi()
+        {
             WcApi = new WcApi();
-            WcApi?.Load();
+            WcApi?.Load(() =>
+            {
+                List<string> subtypes = new List<string>();
+
+                foreach (var definition in WcApi.WeaponDefinitions)
+                    subtypes.AddRange(definition.Assignments.MountPoints.Select(m => m.SubtypeId));
+
+                WeaponSubtytes = subtypes.ToArray();
+            }, true);
 
             // Initialize the SH_api and load it if it's not null
             ShieldApi = new ShieldApi();

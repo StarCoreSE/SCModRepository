@@ -3,7 +3,7 @@
   <CubeBlocks>
     <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeFakeBlockSlideDoor</SubtypeId>
       </Id>
       <DisplayName>Fake Door Slider</DisplayName>
@@ -35,7 +35,7 @@
     </Definition>
     <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeBlockInteriorWall</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_InteriorWall</DisplayName>
@@ -80,9 +80,9 @@
 
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_RadioAntennaDefinition">
+    <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeFakeBlockRadioAntenna</SubtypeId>
       </Id>
       <DisplayName>Fake Greeble Antenna</DisplayName>
@@ -124,9 +124,9 @@
       <IsAirTight>false</IsAirTight>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_RefineryDefinition">
+    <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeRefineryIndustrial</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_RefineryIndustrial</DisplayName>
@@ -217,9 +217,9 @@
       <DLC>HeavyIndustry</DLC>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_OxygenGeneratorDefinition">
+    <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>OxygenGenerator</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_OxygenGenerator</DisplayName>
@@ -311,9 +311,9 @@
       </TieredUpdateTimes>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_OxygenFarmDefinition">
+    <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeBlockOxygenFarm</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_OxygenFarm</DisplayName>
@@ -376,9 +376,9 @@
       <PCU>25</PCU>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_UpgradeModuleDefinition">
+    <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeProductivityModule</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_ProductivityModule</DisplayName>
@@ -430,9 +430,9 @@
       <PCU>1</PCU>
       <IsAirTight>false</IsAirTight>
     </Definition>
-    <Definition xsi:type="MyObjectBuilder_UpgradeModuleDefinition">
+    <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeEffectivenessModule</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_EffectivenessModule</DisplayName>
@@ -486,9 +486,9 @@
       <PCU>1</PCU>
       <IsAirTight>false</IsAirTight>
     </Definition>
-    <Definition xsi:type="MyObjectBuilder_UpgradeModuleDefinition">
+    <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeEnergyModule</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_PowerEfficiencyModule</DisplayName>
@@ -543,9 +543,9 @@
       <IsAirTight>false</IsAirTight>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_GasTankDefinition">
+    <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>OxygenTank</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_OxygenTank</DisplayName>
@@ -623,9 +623,9 @@
         <unsignedInt>600</unsignedInt>
       </TieredUpdateTimes>
     </Definition>
-    <Definition xsi:type="MyObjectBuilder_CockpitDefinition">
+    <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>PassengerSeatLarge</SubtypeId>
         <!-- Large block passenger seat -->
       </Id>
@@ -682,9 +682,9 @@
       <PCU>15</PCU>
       <IsAirTight>false</IsAirTight>
     </Definition>
-    <Definition xsi:type="MyObjectBuilder_TargetDummyBlockDefinition">
+    <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>TargetDummy</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_TargetDummy</DisplayName>
@@ -757,9 +757,9 @@
       <MinFillFactor>.2</MinFillFactor>
       <MaxFillFactor>.6</MaxFillFactor>
     </Definition>
-    <Definition xsi:type="MyObjectBuilder_VendingMachineDefinition">
+    <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>VendingMachine</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_VendingMachine</DisplayName>
@@ -815,9 +815,9 @@
       <DLC>Economy</DLC>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_StoreBlockDefinition">
+    <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>AtmBlock</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_ATM</DisplayName>
@@ -867,9 +867,9 @@
       <DLC>Economy</DLC>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_StoreBlockDefinition">
+    <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>StoreBlock</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_Store</DisplayName>
@@ -923,10 +923,10 @@
       <EmissiveColorPreset>Default</EmissiveColorPreset>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_DoorDefinition">
+    <Definition>
 
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId />
       </Id>
       <DisplayName>DisplayName_Block_Door</DisplayName>
@@ -980,10 +980,10 @@
       <PCU>115</PCU>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_DoorDefinition">
+    <Definition>
 
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>ReetDoor</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_Door</DisplayName>
@@ -1037,9 +1037,9 @@
       <PCU>115</PCU>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_DoorDefinition">
+    <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>SmallDoor</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_Door</DisplayName>
@@ -1092,9 +1092,9 @@
       <PCU>115</PCU>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_DoorDefinition">
+    <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeBlockGate</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_Gate</DisplayName>
@@ -1158,9 +1158,9 @@
       <DLC>Frostbite</DLC>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_DoorDefinition">
+    <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeBlockOffsetDoor</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_OffsetDoor</DisplayName>
@@ -1215,9 +1215,9 @@
       <DLC>Frostbite</DLC>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_AirtightHangarDoorDefinition">
+    <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId />
       </Id>
       <DisplayName>DisplayName_Block_AirtightHangarDoor</DisplayName>
@@ -1272,7 +1272,7 @@
       <PCU>115</PCU>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_AirtightHangarDoorDefinition">
+    <Definition>
       <Id>
         <TypeId>TerminalBlock</TypeId>
         <SubtypeId>AirtightHangarDoorWarfare2A</SubtypeId>
@@ -1331,7 +1331,7 @@
       <DLC>Warfare2</DLC>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_AirtightHangarDoorDefinition">
+    <Definition>
       <Id>
         <TypeId>TerminalBlock</TypeId>
         <SubtypeId>AirtightHangarDoorWarfare2B</SubtypeId>
@@ -1390,7 +1390,7 @@
       <DLC>Warfare2</DLC>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_AirtightHangarDoorDefinition">
+    <Definition>
       <Id>
         <TypeId>TerminalBlock</TypeId>
         <SubtypeId>AirtightHangarDoorWarfare2C</SubtypeId>
@@ -1451,9 +1451,9 @@
 
 
 
-    <Definition xsi:type="MyObjectBuilder_DoorDefinition">
+    <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>SlidingHatchDoor</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_SlidingHatchDoor</DisplayName>
@@ -1518,9 +1518,9 @@
       <DLC>Warfare2</DLC>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_DoorDefinition">
+    <Definition>
       <Id>
-        <TypeId>CubeBlock</TypeId>
+        <TypeId>TerminalBlock</TypeId>
         <SubtypeId>SlidingHatchDoorHalf</SubtypeId>
       </Id>
       <DisplayName>DisplayName_Block_SlidingHatchDoorHalf</DisplayName>
@@ -1584,7 +1584,7 @@
       <DLC>Warfare2</DLC>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_GasTankDefinition">
+    <Definition>
       <Id>
         <TypeId>OxygenTank</TypeId>
         <SubtypeId>LargeHydrogenTankIndustrial</SubtypeId>
@@ -1671,7 +1671,7 @@
       <DLC>HeavyIndustry</DLC>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_GasTankDefinition">
+    <Definition>
       <Id>
         <TypeId>OxygenTank</TypeId>
         <SubtypeId>LargeHydrogenTank</SubtypeId>
@@ -1754,7 +1754,7 @@
       </TieredUpdateTimes>
     </Definition>
 	
-    <Definition xsi:type="MyObjectBuilder_GasTankDefinition">
+    <Definition>
             <Id>
                 <TypeId>OxygenTank</TypeId>
                 <SubtypeId>LargeHydrogenTankSmall</SubtypeId>

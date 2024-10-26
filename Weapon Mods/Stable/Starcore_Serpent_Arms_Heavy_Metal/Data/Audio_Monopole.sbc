@@ -15,7 +15,7 @@
       <Volume>2</Volume>
       <DistantSounds>
         <DistantSound DistanceCrossfade="1" Distance="100" Sound="Monopole_Chargeup_Redux" />
-        <DistantSound DistanceCrossfade="10" Distance="3000" Sound="Monopole_Chargeup_Distant" />
+        <DistantSound DistanceCrossfade="10" Distance="1000" Sound="Monopole_Chargeup_Distant" />
 
       </DistantSounds>
     <Loopable>false</Loopable>
@@ -32,7 +32,7 @@
         <SubtypeId>Monopole_Chargeup_Redux</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>3000</MaxDistance>
+      <MaxDistance>1000</MaxDistance>
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>35</DynamicMusicAmount>
@@ -97,7 +97,7 @@
       <MaxDistance>75</MaxDistance>
 		  <DistantSounds>
         <DistantSound DistanceCrossfade="1" Distance="100" Sound="Monopole_Fire_Redux" />
-			  <DistantSound DistanceCrossfade="10" Distance="3000" Sound="Monopole_Fire_Distant" />
+			  <DistantSound DistanceCrossfade="10" Distance="1000" Sound="Monopole_Fire_Distant" />
 		  </DistantSounds>
       <!-- Prevents this sound from having this many active playbacks at once, 0 = infinite. -->
       <SoundLimit>1</SoundLimit>
@@ -118,7 +118,7 @@
         <SubtypeId>Monopole_Fire_Redux</SubtypeId>
       </Id>
       <Category>SHOT</Category>
-      <MaxDistance>3000</MaxDistance>
+      <MaxDistance>1000</MaxDistance>
       <PreventSynchronization>0</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <SoundLimit>1</SoundLimit>

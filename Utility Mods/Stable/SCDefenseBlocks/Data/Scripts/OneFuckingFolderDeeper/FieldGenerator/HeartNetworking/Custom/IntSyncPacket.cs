@@ -7,9 +7,9 @@ namespace Starcore.FieldGenerator.Networking.Custom
     [ProtoContract]
     public class IntSyncPacket : PacketBase
     {
-        [ProtoMember(41)] private string propertyName;
+        [ProtoMember(41)] public string propertyName;
         [ProtoMember(42)] private int value;
-        [ProtoMember(43)] private long entityId;
+        [ProtoMember(43)] public long entityId;
 
         public override void Received(ulong SenderSteamId)
         {
@@ -52,15 +52,9 @@ namespace Starcore.FieldGenerator.Networking.Custom
                     value = value
                 };
 
-                if (!HeartNetwork.CheckRateLimit(entityId))
-                    return;
+                Log.Info($"Int-Type Packet Added to Queue: {propertyName} = {value}");
 
-                Log.Info($"Sending Int Sync: {propertyName} = {value}");
-
-                if (MyAPIGateway.Session.IsServer)
-                    HeartNetwork.I.SendToEveryone(packet);
-                else
-                    HeartNetwork.I.SendToServer(packet);
+                PacketQueueManager.I.EnqueuePacket(packet);
             }
             catch (Exception ex)
             {

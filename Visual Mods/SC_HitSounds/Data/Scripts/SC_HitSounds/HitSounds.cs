@@ -67,7 +67,6 @@ namespace Jnick_SCModRepository.SC_HitSounds.Data.Scripts.SC_HitSounds
             if (!MyAPIGateway.Utilities.IsDedicated)
                 Settings.StoreSettings();
             I = null;
-            //damageHandlerHelper.RegisterForDamage(modId, EventType.Unregister);
         }
 
         public override void BeforeStart()
