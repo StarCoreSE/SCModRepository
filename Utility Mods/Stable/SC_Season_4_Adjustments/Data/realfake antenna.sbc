@@ -1,0 +1,48 @@
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CubeBlocks> 
+ <Definition>
+      <Id>
+        <TypeId>CubeBlock</TypeId>
+        <SubtypeId>LargeFakeBlockRadioAntenna</SubtypeId>
+      </Id>
+      <DisplayName>Fake Greeble Antenna</DisplayName>
+      <Icon>Textures\GUI\Icons\Fake.dds</Icon>
+      <Public>true</Public>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="6" z="2" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\antenna.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="60" />
+        <Component Subtype="LargeTube" Count="40" />
+        <Component Subtype="SmallTube" Count="60" />
+        <Component Subtype="Construction" Count="30" />
+        <Component Subtype="RadioCommunication" Count="40" />
+        <Component Subtype="SteelPlate" Count="20" />
+      </Components>
+      <CriticalComponent Subtype="RadioCommunication" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" ExclusionMask="1" PropertiesMask="2" StartX="0" StartY="0" EndX="1" EndY="2" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="0.33" File="Models\AntennaConstruction_1.mwm" />
+        <Model BuildPercentUpperBound="0.66" File="Models\AntennaConstruction_2.mwm" />
+        <Model BuildPercentUpperBound="1.00" File="Models\AntennaConstruction_3.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>Starcore_FakeAntenna</BlockPairName>
+      <EdgeType>Light</EdgeType>
+      <ResourceSinkGroup>Utility</ResourceSinkGroup>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <DamageEffectName>Damage_Electrical_Damaged_Antenna</DamageEffectName>
+      <DamagedSound>ParticleElectrical</DamagedSound>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>100</PCU>
+      <IsAirTight>false</IsAirTight>
+    </Definition>
+	
+	    </CubeBlocks>
+</Definitions>
