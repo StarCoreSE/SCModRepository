@@ -64,7 +64,12 @@ namespace SC.GyroscopicGunsight
         public Vector3D CalculateDeflection(IMyCubeBlock thisWeapon, IMyCubeGrid targetGrid)
         {
             // TODO
-            return Vector3D.Zero;
+
+            Vector3D targetPos = targetGrid.GetPosition();
+            MatrixD cameraMatrix = MatrixD.Identity; // pretend this is filled out
+            Vector3D offsetVec = new Vector3D(0, 0, 0); // Your offsets here
+
+            return targetPos + Vector3D.Transform(offsetVec, cameraMatrix.GetOrientation());
         }
 
         /// <summary>
