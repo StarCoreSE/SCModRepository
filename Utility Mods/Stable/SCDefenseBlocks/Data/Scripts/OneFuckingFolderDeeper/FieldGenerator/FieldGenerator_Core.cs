@@ -49,7 +49,7 @@ namespace Starcore.FieldGenerator
     {
         private IMyCollector Block;
         private FieldGeneratorSettings Settings;
-        public readonly Guid SettingsGuid = new Guid("YOUR-GUID-HERE");
+        public readonly Guid SettingsGuid = new Guid("59e91d1a-eddc-4f72-ba8d-3951eec82e9e");
 
         private MyResourceSinkComponent Sink = null;
         private readonly bool IsServer = MyAPIGateway.Session.IsServer;
