@@ -16,8 +16,8 @@ using VRage.Game.Components;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRageMath;
-
-using Starcore.FieldGenerator.Networking.Custom;
+using VRage.Utils;
+using Jnick_SCModRepository.SCDefenseBlocks.Data.Scripts.OneFuckingFolderDeeper.MetalFoam;
 
 namespace Starcore.FieldGenerator
 {
@@ -45,174 +45,41 @@ namespace Starcore.FieldGenerator
     }
 
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "FieldGen_Core")]
-    public class FieldGenerator : MyGameLogicComponent, IMyEventProxy
-    {
+    public class FieldGenerator : MyGameLogicComponent {
         private IMyCollector Block;
-        private FieldGeneratorSettings Settings;
+        public FieldGeneratorSettings Settings;
         public readonly Guid SettingsGuid = new Guid("59e91d1a-eddc-4f72-ba8d-3951eec82e9e");
-
         private MyResourceSinkComponent Sink = null;
         private readonly bool IsServer = MyAPIGateway.Session.IsServer;
-        private Dictionary<string, IMyModelDummy> _coreDummies = new Dictionary<string, IMyModelDummy>();
-        private HashSet<long> _attachedModuleIds = new HashSet<long>();
+
+        private Dictionary<string, IMyModelDummy> _coreDummies;
+        private HashSet<long> _attachedModuleIds;
         private int _moduleCount = 0;
-
         private int _damageEventCounter = 0;
-        private float _stabilityChange = 0;
         private int _resetCounter = 0;
-
-        private int initValueDelayTicks = 60; // 1 second delay (60 ticks)
-        private bool valuesInitialized = false;
-
-        public MySync<bool, SyncDirection.BothWays> SiegeModeSync;
-        public MySync<bool, SyncDirection.BothWays> SiegeCooldownActiveSync;
-        public MySync<float, SyncDirection.BothWays> FieldPowerSync;
-        public MySync<float, SyncDirection.BothWays> MaxFieldPowerSync;
-        public MySync<float, SyncDirection.BothWays> MinFieldPowerSync;
-        public MySync<float, SyncDirection.BothWays> StabilitySync;
-        public MySync<int, SyncDirection.BothWays> SiegeElapsedTimeSync;
-        public MySync<int, SyncDirection.BothWays> SiegeCooldownTimeSync;
-
-        #region Sync Properties
-        public bool SiegeMode
-        {
-            get { return _siegeMode; }
-            set
-            {
-                if (_siegeMode != value)
-                {
-                    _siegeMode = value;
-                    BoolSyncPacket.SyncBoolProperty(Block.EntityId, nameof(SiegeMode), _siegeMode);
-                }
-            }
-        }
-        public bool _siegeMode;
-
-        public bool SiegeCooldownActive
-        {
-            get { return _siegeCooldownActive; }
-            set
-            {
-                if (_siegeCooldownActive != value)
-                {
-                    _siegeCooldownActive = value;
-                    BoolSyncPacket.SyncBoolProperty(Block.EntityId, nameof(SiegeCooldownActive), _siegeCooldownActive);
-                }
-            }
-        }
-        public bool _siegeCooldownActive;
-
-        public int SiegeElapsedTime
-        {
-            get { return _siegeElapsedTime; }
-            set
-            {
-                if (_siegeElapsedTime != value)
-                {
-                    _siegeElapsedTime = value;
-                    IntSyncPacket.SyncIntProperty(Block.EntityId, nameof(SiegeElapsedTime), _siegeElapsedTime);
-                }
-            }
-        }
-        public int _siegeElapsedTime;
-
-        public int SiegeCooldownTime
-        {
-            get { return _siegeCooldownTime; }
-            set
-            {
-                if (_siegeCooldownTime != value)
-                {
-                    _siegeCooldownTime = value;
-                    IntSyncPacket.SyncIntProperty(Block.EntityId, nameof(SiegeCooldownTime), _siegeCooldownTime);
-                }
-            }
-        }
-        public int _siegeCooldownTime;
-
-        public float FieldPower
-        {
-            get { return _fieldPower; }
-            set
-            {
-                if (_fieldPower != value)
-                {               
-                    _fieldPower = MathHelper.Clamp(value, MinFieldPower, MaxFieldPower);
-                    FloatSyncPacket.SyncFloatProperty(Block.EntityId, nameof(FieldPower), _fieldPower);
-                }
-            }
-        }
-        public float _fieldPower;
-
-        public float MaxFieldPower
-        {
-            get { return _maxFieldPower; }
-            set
-            {
-                if (_maxFieldPower != value)
-                {
-                    _maxFieldPower = value;
-                    FloatSyncPacket.SyncFloatProperty(Block.EntityId, nameof(MaxFieldPower), _maxFieldPower);
-                }
-            }
-        }
-        public float _maxFieldPower;
-
-        public float MinFieldPower
-        {
-            get { return _minFieldPower; }
-            set
-            {
-                if (_minFieldPower != value)
-                {
-                    _minFieldPower = value;
-                    FloatSyncPacket.SyncFloatProperty(Block.EntityId, nameof(MinFieldPower), _minFieldPower);
-                }
-            }
-        }
-        public float _minFieldPower;
-
-        public float SizeModifier
-        {
-            get { return _sizeModifier; }
-            set
-            {
-                if (_sizeModifier != value)
-                {
-                    _sizeModifier = value;
-                    FloatSyncPacket.SyncFloatProperty(Block.EntityId, nameof(SizeModifier), _sizeModifier);
-                }
-            }
-        }
-        public float _sizeModifier;
-
-        public float Stability
-        {
-            get { return _stability; }
-            set
-            {
-                if (_stability != value)
-                {
-                    _stability = value;
-                    FloatSyncPacket.SyncFloatProperty(Block.EntityId, nameof(Stability), _stability);
-                }
-            }
-        }
-        public float _stability;
-        #endregion
-
-        private List<IMySlimBlock> _gridBlocks = new List<IMySlimBlock>();
-        private int _gridBlockCount;             
-
-        public MySync<bool, SyncDirection.FromServer> GridStopped = null;
-
+        private List<IMySlimBlock> _gridBlocks;
+        private int _gridBlockCount;
         private IMyHudNotification notifSiege = null;
         private IMyHudNotification notifPower = null;
 
-        #region Overrides
+        #region Core Methods
         public override void Init(MyObjectBuilder_EntityBase objectBuilder) {
             base.Init(objectBuilder);
             Block = (IMyCollector)Entity;
+
+            // Initialize all collections before any potential serialization
+            _coreDummies = new Dictionary<string, IMyModelDummy>();
+            _attachedModuleIds = new HashSet<long>();
+            _gridBlocks = new List<IMySlimBlock>();
+            _gridBlockCount = 0;
+
+            // Initialize settings
+            Settings = new FieldGeneratorSettings(this);
+            Settings.MinFieldPower = 0;
+            Settings.MaxFieldPower = Config.PerModuleAmount;
+            Settings.FieldPower = 0;
+            Settings.Stability = 100;
+
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
         }
 
@@ -221,346 +88,213 @@ namespace Starcore.FieldGenerator
             if (Block?.CubeGrid?.Physics == null) return;
 
             FieldGeneratorControls.DoOnce(ModContext);
-            Settings = new FieldGeneratorSettings(this);
 
             if (IsServer) {
-                Block.Model.GetDummies(_coreDummies);
-                InitExistingUpgrades();
+                // Use a separate method to avoid collection modifications during serialization
+                MyAPIGateway.Utilities.InvokeOnGameThread(() => {
+                    Block.Model.GetDummies(_coreDummies);
+                    Block.CubeGrid.OnBlockAdded += OnBlockAdded;
+                    Block.CubeGrid.OnBlockRemoved += OnBlockRemoved;
+                    InitExistingUpgrades();
+                });
             }
+
+            // Load any existing settings
+            LoadSettings();
+            SaveSettings();
 
             Sink = Block.Components.Get<MyResourceSinkComponent>();
             Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, CalculatePowerDraw);
 
-            LoadSettings();
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
             NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
         }
 
-        public override void UpdateAfterSimulation()
-        {
-            base.UpdateAfterSimulation();
+        public override void UpdateAfterSimulation() {
+            if (!IsServer) return;
 
-            if (IsServer && !valuesInitialized)
-            {
-                if (initValueDelayTicks > 0)
-                {
-                    initValueDelayTicks--;
-                }
-                else
-                {
-                    Stability = 100;
-                    InitExistingUpgrades();                
-                    valuesInitialized = true;
-                }
-            }
-
-            if (!IsServer)
-                return;
-
-            if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0)
-            {
-                if (Block.IsWorking)
-                {
+            if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0) {
+                if (Block.IsWorking) {
                     Sink.Update();
+                    UpdateSiegeState();
 
-                    UpdateSiegeState();             
-
-                    if (!Config.SimplifiedMode)
-                    {
-                        SizeModifier = CalculateSizeModifier();
-
-                        if (_damageEventCounter > Config.DamageEventThreshold)
-                        {
-                            _stabilityChange = -((1.6666666666667f * SizeModifier) * (FieldPower / 50));
+                    if (!Config.SimplifiedMode) {
+                        if (_damageEventCounter > Config.DamageEventThreshold) {
+                            Settings.Stability -= (1.6666666666667f * CalculateSizeModifier()) * (Settings.FieldPower / 50);
                         }
-                        else
-                        {
-                            _stabilityChange = 3;
+                        else {
+                            Settings.Stability = MathHelper.Clamp(Settings.Stability + 3, 0, 100);
                         }
 
-                        _stability = MathHelper.Clamp(_stability + _stabilityChange, 0, 100);
-
-                        if (_resetCounter < Config.ResetInterval)
-                        {
+                        if (_resetCounter < Config.ResetInterval) {
                             _resetCounter++;
-                            return;
                         }
-                        else if (_resetCounter >= Config.ResetInterval)
-                        {
+                        else {
                             _resetCounter = 0;
                             _damageEventCounter = 0;
-                            return;
                         }
-                    }                  
+                    }
                 }
-                else if (!Block.IsWorking)
-                {
-                    if (FieldPower > 0)
-                        FieldPower = 0;
-                    
-                    if (SiegeMode)
-                    {
+                else if (!Block.IsWorking) {
+                    if (Settings.FieldPower > 0)
+                        Settings.FieldPower = 0;
+                    if (Settings.SiegeMode) {
                         CancelSiegeMode();
-                        SiegeMode = false;                 
-                    }                                         
+                    }
                 }
             }
         }
 
-        public override void UpdateAfterSimulation10()
-        {
-            base.UpdateAfterSimulation10();
-
-            if (IsClientInShip() || IsClientNearShip())
-            {
-                if (SiegeMode)
-                {
-                    SetSiegeNotification($"<S.I> Siege Mode Active | {SiegeElapsedTime} / {Config.MaxSiegeTime}", 600);
+        public override void UpdateAfterSimulation10() {
+            if (IsClientInShip() || IsClientNearShip()) {
+                if (Settings.SiegeMode) {
+                    SetSiegeNotification($"<S.I> Siege Mode Active | {Settings.SiegeElapsedTime} / {Config.MaxSiegeTime}", 600);
                 }
-                else if (!SiegeMode && SiegeCooldownActive)
-                {
-                    SetSiegeNotification($"<S.I> Siege Mode On Cooldown | {SiegeCooldownTime}", 600, "Red");
+                else if (!Settings.SiegeMode && Settings.SiegeCooldownActive) {
+                    SetSiegeNotification($"<S.I> Siege Mode On Cooldown | {Settings.SiegeCooldownTime}", 600, "Red");
                 }
 
-                if (!Block.IsWorking)
-                {
+                if (!Block.IsWorking) {
                     string reason = Block.IsFunctional ? "Insufficient Power?" : "Block Damaged!";
                     SetPowerNotification($"<S.I> Generator Core is Offline! | {reason}", 600, "Red");
                 }
             }
-            else
-                return;            
         }
 
-        public override void Close()
-        {
-            base.Close();
-
-            if (IsServer)
-            {
+        public override void Close() {
+            if (IsServer) {
                 Block.CubeGrid.OnBlockAdded -= OnBlockAdded;
                 Block.CubeGrid.OnBlockRemoved -= OnBlockRemoved;
             }
-
-            if (!IsServer)
-            {
-                GridStopped.ValueChanged -= OnGridStopValueChange;
-            }              
-
             Block = null;
+            base.Close();
         }
         #endregion
 
-        #region Subscription Event Handlers
-        private void OnBlockAdded(IMySlimBlock block)
-        {
-            if (block == null)
-                return;
+        #region Block Management
+        private void OnBlockAdded(IMySlimBlock block) {
+            if (block == null) return;
 
             _gridBlockCount++;
-
             if (!_gridBlocks.Contains(block))
                 _gridBlocks.Add(block);
 
-            if (block.FatBlock != null && block.FatBlock.BlockDefinition.SubtypeId == "FieldGen_Capacity_Upgrade")
-            {
-                if (IsNeighbour(block)/* && IsModuleValid(block)*/)
-                {
+            if (block.FatBlock != null && block.FatBlock.BlockDefinition.SubtypeId == "FieldGen_Capacity_Upgrade") {
+                if (IsNeighbour(block)) {
                     long entityId = block.FatBlock.EntityId;
-
-                    if (!_attachedModuleIds.Contains(entityId) && _moduleCount < Config.MaxModuleCount)
-                    {
+                    if (!_attachedModuleIds.Contains(entityId) && _moduleCount < Config.MaxModuleCount) {
                         _attachedModuleIds.Add(entityId);
                         _moduleCount++;
-
                         CalculateUpgradeAmounts();
                     }
                 }
             }
         }
 
-        private void OnBlockRemoved(IMySlimBlock block)
-        {
-            if (block == null)
-                return;
+        private void OnBlockRemoved(IMySlimBlock block) {
+            if (block == null) return;
 
             _gridBlockCount--;
-
             if (_gridBlocks.Contains(block))
                 _gridBlocks.Remove(block);
 
-            if (block.FatBlock != null && block.FatBlock.BlockDefinition.SubtypeId == "FieldGen_Capacity_Upgrade")
-            {
+            if (block.FatBlock != null && block.FatBlock.BlockDefinition.SubtypeId == "FieldGen_Capacity_Upgrade") {
                 long entityId = block.FatBlock.EntityId;
-
-                if (_attachedModuleIds.Contains(entityId))
-                {
+                if (_attachedModuleIds.Contains(entityId)) {
                     _attachedModuleIds.Remove(entityId);
                     _moduleCount--;
-
                     CalculateUpgradeAmounts();
                 }
             }
         }
 
-        private void HandleResistence(object target, ref MyDamageInformation info)
-        {
-            if (Block == null || !Block.IsWorking)
-                return;
+        private void HandleResistence(object target, ref MyDamageInformation info) {
+            if (Block == null || !Block.IsWorking) return;
 
             IMySlimBlock targetBlock = target as IMySlimBlock;
+            if (targetBlock?.CubeGrid != null) {
+                if (targetBlock.CubeGrid.EntityId != Block.CubeGrid.EntityId) return;
 
-            if (targetBlock.CubeGrid != null && targetBlock != null)
-            {
-                IMyCubeGrid targetGrid = targetBlock.CubeGrid;
-
-                if (targetGrid.EntityId != Block.CubeGrid.EntityId)
-                    return;
-
-                if (SiegeMode)
-                {
+                if (Settings.SiegeMode) {
                     info.Amount *= 0.1f;
                     return;
                 }
 
-                if (!Config.SimplifiedMode)
-                {
+                if (!Config.SimplifiedMode) {
                     _damageEventCounter++;
                 }
 
-                float roundedModifier = (float)Math.Round(1 - ((double)FieldPower / 100), 3);
+                float roundedModifier = (float)Math.Round(1 - ((double)Settings.FieldPower / 100), 3);
                 info.Amount *= roundedModifier;
-                return;
             }
-        }
-
-        private void OnGridStopValueChange(MySync<bool, SyncDirection.FromServer> obj)
-        {
-            if (obj?.Value ?? false)
-                Block.CubeGrid.Physics.LinearVelocity = Vector3.Zero;
         }
         #endregion
 
         #region Siege Mode
-        private void UpdateSiegeState()
-        {
-            if (SiegeMode && !SiegeCooldownActive)
-            {
-                if (SiegeElapsedTime + 1 <= Config.MaxSiegeTime)
-                {
-                    SiegeElapsedTime++;
+        private void UpdateSiegeState() {
+            if (Settings.SiegeMode && !Settings.SiegeCooldownActive) {
+                if (Settings.SiegeElapsedTime + 1 <= Config.MaxSiegeTime) {
+                    Settings.SiegeElapsedTime++;
                     SiegeBlockEnabler(_gridBlocks, false);
-
-                    if (Block.CubeGrid.Physics.LinearVelocity != Vector3D.Zero)
-                    {
-                        Block.CubeGrid.Physics.LinearVelocity = Vector3.Zero;
-                        if (IsServer && !GridStopped.Value)
-                            GridStopped.Value = true;
-                    }
                 }
-                else
-                {
+                else {
                     EndSiegeMode();
-                    SiegeMode = false;
                     return;
                 }
             }
 
-            if (!SiegeMode && !SiegeCooldownActive && SiegeElapsedTime > 0)
-            {
+            if (!Settings.SiegeMode && !Settings.SiegeCooldownActive && Settings.SiegeElapsedTime > 0) {
                 EndSiegeMode();
                 return;
             }
 
-            if (SiegeCooldownActive)
-            {
-                if (SiegeCooldownTime > 0)
-                {
-                    SiegeCooldownTime--;
+            if (Settings.SiegeCooldownActive) {
+                if (Settings.SiegeCooldownTime > 0) {
+                    Settings.SiegeCooldownTime--;
                 }
-                else
-                {
-                    SiegeCooldownActive = false;
+                else {
+                    Settings.SiegeCooldownActive = false;
                 }
             }
         }
 
-        private void SiegeBlockEnabler(List<IMySlimBlock> allTerminalBlocks, bool enabled)
-        {
-            foreach (var block in allTerminalBlocks)
-            {
-                if (block.FatBlock != null && block.FatBlock.BlockDefinition.SubtypeId != "FieldGen_Core")
-                {
+        private void SiegeBlockEnabler(List<IMySlimBlock> allTerminalBlocks, bool enabled) {
+            foreach (var block in allTerminalBlocks) {
+                if (block.FatBlock != null && block.FatBlock.BlockDefinition.SubtypeId != "FieldGen_Core") {
                     var entBlock = block as MyEntity;
-                    if (entBlock != null && FieldGeneratorSession.CoreSysAPI.HasCoreWeapon(entBlock))
-                    {
+                    if (entBlock != null && FieldGeneratorSession.CoreSysAPI.HasCoreWeapon(entBlock)) {
                         FieldGeneratorSession.CoreSysAPI.SetFiringAllowed(entBlock, enabled);
-
                         var functionalBlock = block.FatBlock as IMyFunctionalBlock;
-                        if (functionalBlock != null)
-                        {
+                        if (functionalBlock != null) {
                             functionalBlock.Enabled = enabled;
-
                         }
                     }
                 }
-                else
-                    continue;
             }
         }
 
-        private void EndSiegeMode()
-        {
-            if (IsServer && GridStopped.Value)
-                GridStopped.Value = false;
-
+        private void EndSiegeMode() {
             SiegeBlockEnabler(_gridBlocks, true);
-
-            SiegeCooldownTime = (SiegeElapsedTime > 5) ? (SiegeElapsedTime * 2) : 5;
-            SiegeElapsedTime = 0;
-            SiegeCooldownActive = true;
+            Settings.SiegeCooldownTime = (Settings.SiegeElapsedTime > 5) ? (Settings.SiegeElapsedTime * 2) : 5;
+            Settings.SiegeElapsedTime = 0;
+            Settings.SiegeCooldownActive = true;
         }
 
-        private void CancelSiegeMode()
-        {
-            if (IsServer && GridStopped.Value)
-                GridStopped.Value = false;
-
+        private void CancelSiegeMode() {
             SiegeBlockEnabler(_gridBlocks, true);
-
-            SiegeCooldownTime = 0;
-            SiegeElapsedTime = 0;
+            Settings.SiegeCooldownTime = 0;
+            Settings.SiegeElapsedTime = 0;
         }
         #endregion
 
-        #region Utility
-        public static T GetLogic<T>(long entityId) where T : MyGameLogicComponent
-        {
-            IMyEntity targetEntity = MyAPIGateway.Entities.GetEntityById(entityId);
-            if (targetEntity == null)
-            {
-                Log.Info("GetLogic failed: Entity not found. Entity ID: " + entityId);
-                return null;
-            }
-
-            IMyTerminalBlock targetBlock = targetEntity as IMyTerminalBlock;
-            if (targetBlock == null)
-            {
-                Log.Info("GetLogic failed: Target entity is not a terminal block. Entity ID: " + entityId);
-                return null;
-            }
-
-            var logic = targetBlock.GameLogic?.GetAs<T>();
-            if (logic == null)
-            {
-                Log.Info("GetLogic failed: Logic component not found. Entity ID: " + entityId);
-            }
-
-            return logic;
-        }
-
+        #region Module Management
         private void InitExistingUpgrades() {
-            List<IMySlimBlock> neighbours = new List<IMySlimBlock>();
+            if (!IsServer) return;
+
+            _attachedModuleIds.Clear();
+            _moduleCount = 0;
+
+            var neighbours = new List<IMySlimBlock>();
             Block.SlimBlock.GetNeighbours(neighbours);
 
             foreach (var n in neighbours) {
@@ -575,11 +309,11 @@ namespace Starcore.FieldGenerator
                     }
                 }
             }
+
             CalculateUpgradeAmounts();
         }
 
-        private bool IsNeighbour(IMySlimBlock block)
-        {
+        private bool IsNeighbour(IMySlimBlock block) {
             List<IMySlimBlock> neighbours = new List<IMySlimBlock>();
             Block.SlimBlock.GetNeighbours(neighbours);
             return neighbours.Contains(block);
@@ -600,55 +334,21 @@ namespace Starcore.FieldGenerator
             return false;
         }
 
-        private void LoadSettings() {
-            if (Block?.Storage == null) return;
-
-            string rawData;
-            if (!Block.Storage.TryGetValue(SettingsGuid, out rawData))
-                return;
-
-            try {
-                var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<FieldGeneratorSettings>(
-                    Convert.FromBase64String(rawData));
-                if (loadedSettings != null) {
-                    Settings.CopyFrom(loadedSettings);
+        private void CalculateUpgradeAmounts() {
+            float newMaxPower = Settings.MinFieldPower + (_moduleCount * Config.PerModuleAmount);
+            if (Math.Abs(Settings.MaxFieldPower - newMaxPower) > 0.001f) {
+                Settings.MaxFieldPower = newMaxPower;
+                if (Settings.FieldPower > Settings.MaxFieldPower) {
+                    Settings.FieldPower = Settings.MaxFieldPower;
                 }
             }
-            catch (Exception e) {
-                Log.Error($"Failed to load field generator settings: {e}");
-            }
         }
+        #endregion
 
-        private void SaveSettings() {
-            try {
-                if (Block?.Storage == null)
-                    Block.Storage = new MyModStorageComponent();
-
-                string rawData = Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(Settings));
-                Block.Storage[SettingsGuid] = rawData;
-            }
-            catch (Exception e) {
-                Log.Error($"Failed to save field generator settings: {e}");
-            }
-        }
-
-        public override bool IsSerialized() {
-            SaveSettings();
-            return base.IsSerialized();
-        }
-
-        private void CalculateUpgradeAmounts() {
-            Settings.MaxFieldPower = Settings.MinFieldPower + (_moduleCount * Config.PerModuleAmount);
-            if (Settings.FieldPower > Settings.MaxFieldPower) {
-                Settings.FieldPower = Settings.MaxFieldPower;
-            }
-        }
-
-        private float CalculateSizeModifier()
-        {
+        #region Utility Methods
+        private float CalculateSizeModifier() {
             int clampedBlockCount = MathHelper.Clamp(_gridBlockCount, Config.MinBlockCount, Config.MaxBlockCount);
             float t = (float)(clampedBlockCount - Config.MinBlockCount) / (Config.MaxBlockCount - Config.MinBlockCount);
-
             return Config.SizeModifierMin + t * (Config.SizeModifierMax - Config.SizeModifierMin);
         }
 
@@ -662,51 +362,92 @@ namespace Starcore.FieldGenerator
             return Config.MinPowerDraw + t * (Config.MaxPowerDraw - Config.MinPowerDraw);
         }
 
-        private bool IsClientInShip()
-        {
-            if (Block != null)
-            {
-                foreach (var cockpit in Block.CubeGrid.GetFatBlocks<IMyCockpit>())
-                {
-                    if (cockpit.Pilot != null && cockpit.Pilot.EntityId == MyAPIGateway.Session?.Player?.Character?.EntityId)
-                    {
+        private bool IsClientInShip() {
+            if (Block != null) {
+                foreach (var cockpit in Block.CubeGrid.GetFatBlocks<IMyCockpit>()) {
+                    if (cockpit.Pilot != null && cockpit.Pilot.EntityId == MyAPIGateway.Session?.Player?.Character?.EntityId) {
                         return true;
                     }
-                    else
-                        continue;
                 }
+            }
+            return false;
+        }
+
+        private bool IsClientNearShip() {
+            if (Block != null) {
+                var bound = new BoundingSphereD(Block.CubeGrid.GetPosition(), 65);
+                List<IMyEntity> nearEntities = MyAPIGateway.Entities.GetEntitiesInSphere(ref bound);
+                foreach (var entity in nearEntities) {
+                    if (entity != null && entity?.EntityId == MyAPIGateway.Session?.Player?.Character?.EntityId) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        #endregion
+
+        #region Settings Management
+        internal bool LoadSettings() {
+            string rawData;
+            if (Block.Storage == null || !Block.Storage.TryGetValue(SettingsGuid, out rawData)) {
+                return false;
+            }
+
+            try {
+                var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<FieldGeneratorSettings>(Convert.FromBase64String(rawData));
+                if (loadedSettings == null)
+                    return false;
+
+                Settings.CopyFrom(loadedSettings);
+                return true;
+            }
+            catch (Exception e) {
+                MyAPIGateway.Utilities.ShowNotification("Failed to load field generator settings! Check the logs for more info.");
+                MyLog.Default.WriteLineAndConsole("Failed to load field generator settings! Exception: " + e);
             }
 
             return false;
         }
 
-        private bool IsClientNearShip()
-        {
-            if (Block != null)
-            {
-                var bound = new BoundingSphereD(Block.CubeGrid.GetPosition(), 65);
-                List<IMyEntity> nearEntities = MyAPIGateway.Entities.GetEntitiesInSphere(ref bound);
+        internal void SaveSettings() {
+            if (Block == null || Settings == null)
+                return;
 
-                foreach (var entity in nearEntities)
-                
-                    if ( entity != null && entity?.EntityId == MyAPIGateway.Session?.Player?.Character?.EntityId)
-                    {
-                        return true;
-                    }
-                    else
-                        continue;
-            }                          
+            if (Block.Storage == null)
+                Block.Storage = new MyModStorageComponent();
 
-            return false;
-        }       
+            string rawData = Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(Settings));
+
+            // Use TryAdd instead of Add to prevent potential exceptions
+            if (Block.Storage.ContainsKey(SettingsGuid))
+                Block.Storage[SettingsGuid] = rawData;
+            else
+                Block.Storage.Add(SettingsGuid, rawData);
+
+            // Optional verification
+            var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<FieldGeneratorSettings>(Convert.FromBase64String(rawData));
+        }
+
+        //public override bool IsSerialized() {
+        //    try {
+        //        if (Block == null || Settings == null) {
+        //            Log.Error("Error in IsSerialized: block or Settings is null.");
+        //            return false;
+        //        }
+        //        SaveSettings();
+        //    }
+        //    catch (Exception e) {
+        //        Log.Error($"Exception in IsSerialized: {e}");
+        //    }
+        //    return base.IsSerialized();
+        //}
         #endregion
 
-        #region Notifs
-        public void SetSiegeNotification(string text, int aliveTime = 300, string font = MyFontEnum.Green)
-        {
+        #region Notifications
+        public void SetSiegeNotification(string text, int aliveTime = 300, string font = MyFontEnum.Green) {
             if (notifSiege == null)
                 notifSiege = MyAPIGateway.Utilities.CreateNotification("", aliveTime, font);
-
             notifSiege.Hide();
             notifSiege.Font = font;
             notifSiege.Text = text;
@@ -714,11 +455,9 @@ namespace Starcore.FieldGenerator
             notifSiege.Show();
         }
 
-        public void SetPowerNotification(string text, int aliveTime = 300, string font = MyFontEnum.Green)
-        {
+        public void SetPowerNotification(string text, int aliveTime = 300, string font = MyFontEnum.Green) {
             if (notifPower == null)
                 notifPower = MyAPIGateway.Utilities.CreateNotification("", aliveTime, font);
-
             notifPower.Hide();
             notifPower.Font = font;
             notifPower.Text = text;

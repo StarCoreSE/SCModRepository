@@ -9,6 +9,7 @@ using VRageMath;
 namespace Starcore.FieldGenerator {
     [ProtoContract]
     public class FieldGeneratorSettings {
+        [ProtoIgnore]           //...including this crashes isserialized???
         private FieldGenerator Owner;
 
         public FieldGeneratorSettings() { }
@@ -31,6 +32,8 @@ namespace Starcore.FieldGenerator {
         private int siegeElapsedTime;
         [ProtoMember(7)]
         private int siegeCooldownTime;
+        [ProtoMember(8)]
+        private float stability;
 
         public bool SiegeMode {
             get { return siegeMode; }
@@ -67,6 +70,11 @@ namespace Starcore.FieldGenerator {
             set { siegeCooldownTime = value; }
         }
 
+        public float Stability {
+            get { return stability; }
+            set { stability = MathHelper.Clamp(value, 0, 100); }
+        }
+
         public void CopyFrom(FieldGeneratorSettings other) {
             siegeMode = other.siegeMode;
             fieldPower = other.fieldPower;
@@ -75,6 +83,7 @@ namespace Starcore.FieldGenerator {
             siegeCooldownActive = other.siegeCooldownActive;
             siegeElapsedTime = other.siegeElapsedTime;
             siegeCooldownTime = other.siegeCooldownTime;
+            stability = other.stability;
         }
     }
 }
