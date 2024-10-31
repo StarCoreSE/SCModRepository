@@ -161,6 +161,9 @@ namespace Starcore.FieldGenerator {
                     if (Math.Abs(logic.Settings.FieldPower - newValue) > 0.01f) {
                         logic.Settings.FieldPower = newValue;
                         logic.SaveSettings();
+                        if (logic.Sink != null) {
+                            logic.Sink.Update();
+                        }
                     }
                 }
             };
@@ -191,6 +194,9 @@ namespace Starcore.FieldGenerator {
                     if (Math.Abs(logic.Settings.FieldPower - newValue) > 0.01f) {
                         logic.Settings.FieldPower = newValue;
                         logic.SaveSettings();
+                        if (logic.Sink != null) {
+                            logic.Sink.Update();
+                        }
                     }
                 }
             };

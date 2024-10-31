@@ -153,8 +153,6 @@ namespace Starcore.FieldGenerator
                 if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0) {
                     if (Block.IsWorking && Block.IsFunctional) {
                         float requiredPower = CalculatePowerDraw();
-
-                        // Update sink and check power before changing any settings
                         Sink?.Update();
                         bool hasPower = Sink != null && Sink.IsPowerAvailable(MyResourceDistributorComponent.ElectricityId, requiredPower);
                         float availablePower = Sink?.CurrentInputByType(MyResourceDistributorComponent.ElectricityId) ?? 0f;
@@ -181,28 +179,11 @@ namespace Starcore.FieldGenerator
                                 }
                             }
                         }
-                        else {
-                            // Calculate sustainable power level
-                            float sustainablePowerPercentage = (availablePower - Config.MinPowerDraw) / (Config.MaxPowerDraw - Config.MinPowerDraw) * 100f;
-                            float targetPower = Math.Max(0, sustainablePowerPercentage - 5f); // Add a small buffer
-
-                            if (Settings.FieldPower > targetPower) {
-                                MyLog.Default.WriteLineAndConsole($"Reducing power to sustainable level: {targetPower:F1}%");
-                                Settings.FieldPower = targetPower;
-                                SaveSettings(); // Ensure the new value is saved
-                            }
-
-                            if (Settings.SiegeMode) {
+                        // Server only disables the block if there's no power, never changes the field power value
+                        else if (!Block.IsWorking) {
+                            if (Settings.SiegeMode)
                                 CancelSiegeMode();
-                            }
                         }
-                    }
-                    else {
-                        // Block not working
-                        if (Settings.FieldPower > 0)
-                            Settings.FieldPower = 0;
-                        if (Settings.SiegeMode)
-                            CancelSiegeMode();
                     }
                 }
             }
