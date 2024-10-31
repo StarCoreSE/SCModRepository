@@ -46,6 +46,15 @@ namespace Starcore.FieldGenerator
 
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "FieldGen_Core")]
     public class FieldGenerator : MyGameLogicComponent {
+        public MySync<bool, SyncDirection.BothWays> SiegeModeSync;
+        public MySync<float, SyncDirection.BothWays> FieldPowerSync;
+        public MySync<float, SyncDirection.BothWays> MaxFieldPowerSync;
+        public MySync<float, SyncDirection.BothWays> MinFieldPowerSync;
+        public MySync<bool, SyncDirection.BothWays> SiegeCooldownActiveSync;
+        public MySync<int, SyncDirection.BothWays> SiegeElapsedTimeSync;
+        public MySync<int, SyncDirection.BothWays> SiegeCooldownTimeSync;
+        public MySync<float, SyncDirection.BothWays> StabilitySync;
+
         private IMyCollector Block;
         public FieldGeneratorSettings Settings;
         public readonly Guid SettingsGuid = new Guid("59e91d1a-eddc-4f72-ba8d-3951eec82e9e");
@@ -429,19 +438,19 @@ namespace Starcore.FieldGenerator
             var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<FieldGeneratorSettings>(Convert.FromBase64String(rawData));
         }
 
-        //public override bool IsSerialized() {
-        //    try {
-        //        if (Block == null || Settings == null) {
-        //            Log.Error("Error in IsSerialized: block or Settings is null.");
-        //            return false;
-        //        }
-        //        SaveSettings();
-        //    }
-        //    catch (Exception e) {
-        //        Log.Error($"Exception in IsSerialized: {e}");
-        //    }
-        //    return base.IsSerialized();
-        //}
+        public override bool IsSerialized() {
+            try {
+                if (Block == null || Settings == null) {
+                    Log.Error("Error in IsSerialized: block or Settings is null.");
+                    return false;
+                }
+                SaveSettings();
+            }
+            catch (Exception e) {
+                Log.Error($"Exception in IsSerialized: {e}");
+            }
+            return base.IsSerialized();
+        }
         #endregion
 
         #region Notifications

@@ -9,14 +9,23 @@ using VRageMath;
 namespace Starcore.FieldGenerator {
     [ProtoContract]
     public class FieldGeneratorSettings {
-        [ProtoIgnore]           //...including this crashes isserialized???
-        private FieldGenerator Owner;
-
         public FieldGeneratorSettings() { }
 
         public FieldGeneratorSettings(FieldGenerator owner) {
             Owner = owner;
+            // Set up all sync handlers
+            Owner.SiegeModeSync.ValueChanged += (obj) => siegeMode = obj.Value;
+            Owner.FieldPowerSync.ValueChanged += (obj) => fieldPower = obj.Value;
+            Owner.MaxFieldPowerSync.ValueChanged += (obj) => maxFieldPower = obj.Value;
+            Owner.MinFieldPowerSync.ValueChanged += (obj) => minFieldPower = obj.Value;
+            Owner.SiegeCooldownActiveSync.ValueChanged += (obj) => siegeCooldownActive = obj.Value;
+            Owner.SiegeElapsedTimeSync.ValueChanged += (obj) => siegeElapsedTime = obj.Value;
+            Owner.SiegeCooldownTimeSync.ValueChanged += (obj) => siegeCooldownTime = obj.Value;
+            Owner.StabilitySync.ValueChanged += (obj) => stability = obj.Value;
         }
+
+        [ProtoIgnore]
+        private FieldGenerator Owner;
 
         [ProtoMember(1)]
         private bool siegeMode;
@@ -37,53 +46,85 @@ namespace Starcore.FieldGenerator {
 
         public bool SiegeMode {
             get { return siegeMode; }
-            set { siegeMode = value; }
+            set
+            {
+                siegeMode = value;
+                if (Owner != null) Owner.SiegeModeSync.Value = value;
+            }
         }
 
         public float FieldPower {
             get { return fieldPower; }
-            set { fieldPower = MathHelper.Clamp(value, MinFieldPower, MaxFieldPower); }
+            set
+            {
+                fieldPower = MathHelper.Clamp(value, MinFieldPower, MaxFieldPower);
+                if (Owner != null) Owner.FieldPowerSync.Value = fieldPower;
+            }
         }
 
         public float MaxFieldPower {
             get { return maxFieldPower; }
-            set { maxFieldPower = value; }
+            set
+            {
+                maxFieldPower = value;
+                if (Owner != null) Owner.MaxFieldPowerSync.Value = value;
+            }
         }
 
         public float MinFieldPower {
             get { return minFieldPower; }
-            set { minFieldPower = value; }
+            set
+            {
+                minFieldPower = value;
+                if (Owner != null) Owner.MinFieldPowerSync.Value = value;
+            }
         }
 
         public bool SiegeCooldownActive {
             get { return siegeCooldownActive; }
-            set { siegeCooldownActive = value; }
+            set
+            {
+                siegeCooldownActive = value;
+                if (Owner != null) Owner.SiegeCooldownActiveSync.Value = value;
+            }
         }
 
         public int SiegeElapsedTime {
             get { return siegeElapsedTime; }
-            set { siegeElapsedTime = value; }
+            set
+            {
+                siegeElapsedTime = value;
+                if (Owner != null) Owner.SiegeElapsedTimeSync.Value = value;
+            }
         }
 
         public int SiegeCooldownTime {
             get { return siegeCooldownTime; }
-            set { siegeCooldownTime = value; }
+            set
+            {
+                siegeCooldownTime = value;
+                if (Owner != null) Owner.SiegeCooldownTimeSync.Value = value;
+            }
         }
 
         public float Stability {
             get { return stability; }
-            set { stability = MathHelper.Clamp(value, 0, 100); }
+            set
+            {
+                stability = MathHelper.Clamp(value, 0, 100);
+                if (Owner != null) Owner.StabilitySync.Value = stability;
+            }
         }
 
         public void CopyFrom(FieldGeneratorSettings other) {
-            siegeMode = other.siegeMode;
-            fieldPower = other.fieldPower;
-            maxFieldPower = other.maxFieldPower;
-            minFieldPower = other.minFieldPower;
-            siegeCooldownActive = other.siegeCooldownActive;
-            siegeElapsedTime = other.siegeElapsedTime;
-            siegeCooldownTime = other.siegeCooldownTime;
-            stability = other.stability;
+            SiegeMode = other.siegeMode;
+            FieldPower = other.fieldPower;
+            MaxFieldPower = other.maxFieldPower;
+            MinFieldPower = other.minFieldPower;
+            SiegeCooldownActive = other.siegeCooldownActive;
+            SiegeElapsedTime = other.siegeElapsedTime;
+            SiegeCooldownTime = other.siegeCooldownTime;
+            Stability = other.stability;
         }
     }
 }
