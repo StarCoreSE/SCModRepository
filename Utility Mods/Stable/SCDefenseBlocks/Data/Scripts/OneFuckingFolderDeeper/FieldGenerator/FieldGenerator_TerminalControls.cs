@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
 using Sandbox.Game.Localization;
 using Sandbox.ModAPI;
@@ -12,11 +11,12 @@ using VRage.ModAPI;
 using VRage.Utils;
 using VRageMath;
 
-namespace Starcore.FieldGenerator
-{
+namespace Starcore.FieldGenerator {
     public static class FieldGeneratorControls {
         const string IdPrefix = "FieldGenerator_";
         static bool Done = false;
+        private static DateTime lastSliderUpdate = DateTime.MinValue;
+        private static float lastSliderValue = 0f;
 
         public static void DoOnce(IMyModContext context) {
             try {
@@ -53,11 +53,12 @@ namespace Starcore.FieldGenerator
             SiegeModeToggle.Visible = IsVisible;
             SiegeModeToggle.Enabled = CooldownEnabler;
             SiegeModeToggle.Getter = (b) => b.GameLogic.GetAs<FieldGenerator>()?.Settings.SiegeMode ?? false;
-            SiegeModeToggle.Setter = (b, v) =>
-            {
+            SiegeModeToggle.Setter = (b, v) => {
                 var logic = b.GameLogic.GetAs<FieldGenerator>();
-                if (logic != null)
+                if (logic != null) {
                     logic.Settings.SiegeMode = v;
+                    logic.SaveSettings();
+                }
             };
             SiegeModeToggle.SupportsMultipleBlocks = true;
             MyAPIGateway.TerminalControls.AddControl<IMyCollector>(SiegeModeToggle);
@@ -65,34 +66,58 @@ namespace Starcore.FieldGenerator
             var FieldPowerSlider = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, IMyCollector>(IdPrefix + "FieldPowerSlider");
             FieldPowerSlider.Title = MyStringId.GetOrCompute("Integrity Field Power");
             FieldPowerSlider.Tooltip = MyStringId.GetOrCompute("Set Damage Absorption Percentage");
-            FieldPowerSlider.SetLimits((b) =>
-            {
+            FieldPowerSlider.SetLimits((b) => {
+                return 0f;
+            }, (b) => {
                 var logic = GetLogic(b);
-                return logic?.Settings.MinFieldPower ?? 0;
-            }, (b) =>
-            {
-                var logic = GetLogic(b);
-                return logic?.Settings.MaxFieldPower ?? 0;
+                return logic?.Settings.MaxFieldPower ?? 100f;
             });
             FieldPowerSlider.Visible = IsVisible;
-            FieldPowerSlider.Enabled = (b) =>
-            {
+            FieldPowerSlider.Enabled = (b) => {
                 var logic = GetLogic(b);
                 return logic != null && !logic.Settings.SiegeMode;
             };
-            FieldPowerSlider.Writer = (b, w) =>
-            {
+            FieldPowerSlider.Writer = (b, w) => {
                 var logic = GetLogic(b);
                 if (logic != null) {
-                    w.Append(Math.Round(logic.Settings.FieldPower, 1, MidpointRounding.ToEven)).Append('%');
+                    w.Append(Math.Round(logic.Settings.FieldPower, 1, MidpointRounding.ToEven))
+                      .Append('%')
+                      .Append(" / ")
+                      .Append(Math.Round(logic.Settings.MaxFieldPower, 1))
+                      .Append('%');
                 }
             };
-            FieldPowerSlider.Getter = (b) => b.GameLogic.GetAs<FieldGenerator>()?.Settings.FieldPower ?? 0;
-            FieldPowerSlider.Setter = (b, v) =>
-            {
+            FieldPowerSlider.Getter = (b) => {
                 var logic = b.GameLogic.GetAs<FieldGenerator>();
-                if (logic != null)
-                    logic.Settings.FieldPower = (float)Math.Round(v, 1);
+                if (logic != null) {
+                    if ((DateTime.Now - lastSliderUpdate).TotalMilliseconds < 100) {
+                        return lastSliderValue;
+                    }
+                    return logic.Settings.FieldPower;
+                }
+                return 0f;
+            };
+            FieldPowerSlider.Setter = (b, v) => {
+                var logic = b.GameLogic.GetAs<FieldGenerator>();
+                if (logic != null) {
+                    lastSliderUpdate = DateTime.Now;
+                    lastSliderValue = v;
+
+                    float newValue = MathHelper.Clamp(
+                        (float)Math.Round(v, 1),
+                        0f,
+                        logic.Settings.MaxFieldPower
+                    );
+
+                    if (Math.Abs(logic.Settings.FieldPower - newValue) > 0.01f) {
+                        logic.Settings.FieldPower = newValue;
+                        logic.SaveSettings();
+
+                        if (logic.Sink != null) {
+                            logic.Sink.Update();
+                        }
+                    }
+                }
             };
             FieldPowerSlider.SupportsMultipleBlocks = true;
             MyAPIGateway.TerminalControls.AddControl<IMyCollector>(FieldPowerSlider);
@@ -103,26 +128,25 @@ namespace Starcore.FieldGenerator
             SiegeToggleAction.Name = new StringBuilder("Siege Mode");
             SiegeToggleAction.ValidForGroups = false;
             SiegeToggleAction.Icon = @"Textures\GUI\Icons\Actions\StationToggle.dds";
-            SiegeToggleAction.Action = (b) =>
-            {
+            SiegeToggleAction.Action = (b) => {
                 var logic = GetLogic(b);
-                if (logic != null)
+                if (logic != null) {
                     logic.Settings.SiegeMode = !logic.Settings.SiegeMode;
+                    logic.SaveSettings();
+                }
             };
-            SiegeToggleAction.Writer = (b, sb) =>
-            {
+            SiegeToggleAction.Writer = (b, sb) => {
                 var logic = GetLogic(b);
                 if (logic != null) {
                     string boolState = logic.Settings.SiegeMode ? "Active" : "Inactive";
                     sb.Append(boolState);
                 }
             };
-            SiegeToggleAction.InvalidToolbarTypes = new List<MyToolbarType>()
-            {
-            MyToolbarType.ButtonPanel,
-            MyToolbarType.Character,
-            MyToolbarType.Seat
-        };
+            SiegeToggleAction.InvalidToolbarTypes = new List<MyToolbarType>() {
+                MyToolbarType.ButtonPanel,
+                MyToolbarType.Character,
+                MyToolbarType.Seat
+            };
             SiegeToggleAction.Enabled = CooldownEnabler;
             MyAPIGateway.TerminalControls.AddAction<IMyCollector>(SiegeToggleAction);
 
@@ -130,26 +154,27 @@ namespace Starcore.FieldGenerator
             IncreasePowerAction.Name = new StringBuilder("Increase Field Power");
             IncreasePowerAction.ValidForGroups = false;
             IncreasePowerAction.Icon = @"Textures\GUI\Icons\Actions\StationToggle.dds";
-            IncreasePowerAction.Action = (b) =>
-            {
+            IncreasePowerAction.Action = (b) => {
+                var logic = GetLogic(b);
+                if (logic != null) {
+                    float newValue = Math.Min(logic.Settings.FieldPower + 2.5f, logic.Settings.MaxFieldPower);
+                    if (Math.Abs(logic.Settings.FieldPower - newValue) > 0.01f) {
+                        logic.Settings.FieldPower = newValue;
+                        logic.SaveSettings();
+                    }
+                }
+            };
+            IncreasePowerAction.Writer = (b, sb) => {
                 var logic = GetLogic(b);
                 if (logic != null)
-                    logic.Settings.FieldPower += 2.5f;
+                    sb.Append($"{logic.Settings.FieldPower:F1}% / {logic.Settings.MaxFieldPower:F1}%");
             };
-            IncreasePowerAction.Writer = (b, sb) =>
-            {
-                var logic = GetLogic(b);
-                if (logic != null)
-                    sb.Append($"{logic.Settings.FieldPower}%");
+            IncreasePowerAction.InvalidToolbarTypes = new List<MyToolbarType>() {
+                MyToolbarType.ButtonPanel,
+                MyToolbarType.Character,
+                MyToolbarType.Seat
             };
-            IncreasePowerAction.InvalidToolbarTypes = new List<MyToolbarType>()
-            {
-            MyToolbarType.ButtonPanel,
-            MyToolbarType.Character,
-            MyToolbarType.Seat
-        };
-            IncreasePowerAction.Enabled = (b) =>
-            {
+            IncreasePowerAction.Enabled = (b) => {
                 var logic = GetLogic(b);
                 return logic != null && !logic.Settings.SiegeMode;
             };
@@ -159,26 +184,27 @@ namespace Starcore.FieldGenerator
             DecreasePowerAction.Name = new StringBuilder("Decrease Field Power");
             DecreasePowerAction.ValidForGroups = false;
             DecreasePowerAction.Icon = @"Textures\GUI\Icons\Actions\StationToggle.dds";
-            DecreasePowerAction.Action = (b) =>
-            {
+            DecreasePowerAction.Action = (b) => {
+                var logic = GetLogic(b);
+                if (logic != null) {
+                    float newValue = Math.Max(0f, logic.Settings.FieldPower - 2.5f);
+                    if (Math.Abs(logic.Settings.FieldPower - newValue) > 0.01f) {
+                        logic.Settings.FieldPower = newValue;
+                        logic.SaveSettings();
+                    }
+                }
+            };
+            DecreasePowerAction.Writer = (b, sb) => {
                 var logic = GetLogic(b);
                 if (logic != null)
-                    logic.Settings.FieldPower -= 2.5f;
+                    sb.Append($"{logic.Settings.FieldPower:F1}% / {logic.Settings.MaxFieldPower:F1}%");
             };
-            DecreasePowerAction.Writer = (b, sb) =>
-            {
-                var logic = GetLogic(b);
-                if (logic != null)
-                    sb.Append($"{logic.Settings.FieldPower}%");
+            DecreasePowerAction.InvalidToolbarTypes = new List<MyToolbarType>() {
+                MyToolbarType.ButtonPanel,
+                MyToolbarType.Character,
+                MyToolbarType.Seat
             };
-            DecreasePowerAction.InvalidToolbarTypes = new List<MyToolbarType>()
-            {
-            MyToolbarType.ButtonPanel,
-            MyToolbarType.Character,
-            MyToolbarType.Seat
-        };
-            DecreasePowerAction.Enabled = (b) =>
-            {
+            DecreasePowerAction.Enabled = (b) => {
                 var logic = GetLogic(b);
                 return logic != null && !logic.Settings.SiegeMode;
             };
