@@ -94,28 +94,34 @@ namespace Starcore.FieldGenerator
 
         public override void UpdateOnceBeforeFrame() {
             base.UpdateOnceBeforeFrame();
-            if (Block?.CubeGrid?.Physics == null) return;
+            if (Block?.CubeGrid?.Physics == null)
+                return;
 
             FieldGeneratorControls.DoOnce(ModContext);
 
             if (IsServer) {
-                // Use a separate method to avoid collection modifications during serialization
-                MyAPIGateway.Utilities.InvokeOnGameThread(() => {
+                MyAPIGateway.Utilities.InvokeOnGameThread(() =>
+                {
                     Block.Model.GetDummies(_coreDummies);
                     Block.CubeGrid.OnBlockAdded += OnBlockAdded;
                     Block.CubeGrid.OnBlockRemoved += OnBlockRemoved;
+
+                    // First initialize upgrades to calculate proper max power
                     InitExistingUpgrades();
+
+                    // Then load saved settings
+                    LoadSettings();
+
+                    // Ensure field power doesn't exceed new maximum
+                    Settings.FieldPower = Math.Min(Settings.FieldPower, Settings.MaxFieldPower);
+
+                    // Save the validated settings
+                    SaveSettings();
                 });
             }
 
-            // Load any existing settings
-            LoadSettings();
-            SaveSettings();
-
             Sink = Block.Components.Get<MyResourceSinkComponent>();
             Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, CalculatePowerDraw);
-
-            MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(100, HandleResistence);
 
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
             NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
