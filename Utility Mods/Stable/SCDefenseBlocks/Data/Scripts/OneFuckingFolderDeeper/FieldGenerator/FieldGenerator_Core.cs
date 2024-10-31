@@ -145,6 +145,7 @@ namespace Starcore.FieldGenerator
 
                 NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
                 NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
+                NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME; 
             }
             catch (Exception e) {
                 MyLog.Default.WriteLineAndConsole($"FieldGenerator.UpdateOnceBeforeFrame: {e}");
@@ -218,6 +219,22 @@ namespace Starcore.FieldGenerator
             }
             catch (Exception e) {
                 MyLog.Default.WriteLineAndConsole($"FieldGenerator.UpdateAfterSimulation10: {e}");
+            }
+        }
+
+        public override void UpdateAfterSimulation100() {
+            try {
+                if (Block?.IsWorking != true || Sink == null)
+                    return;
+
+                // this is shit but the power calc just slips through on a repaste without it so whatever
+                float currentDraw = CalculatePowerDraw();
+                Sink.Update();
+
+                MyLog.Default.WriteLineAndConsole($"Power Update - Field Power: {Settings.FieldPower}%, Draw: {currentDraw:F2} MW");
+            }
+            catch (Exception e) {
+                MyLog.Default.WriteLineAndConsole($"FieldGenerator.UpdateAfterSimulation100: {e}");
             }
         }
 
