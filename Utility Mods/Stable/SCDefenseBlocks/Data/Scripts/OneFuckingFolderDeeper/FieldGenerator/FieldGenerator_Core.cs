@@ -105,6 +105,10 @@ namespace Starcore.FieldGenerator
 
                 FieldGeneratorControls.DoOnce(ModContext);
 
+                // Initialize power system first
+                Sink = Block.Components.Get<MyResourceSinkComponent>();
+
+                // Initialize settings and upgrades before power system setup
                 if (IsServer) {
                     MyAPIGateway.Utilities.InvokeOnGameThread(() =>
                     {
@@ -112,35 +116,34 @@ namespace Starcore.FieldGenerator
                         Block.CubeGrid.OnBlockAdded += OnBlockAdded;
                         Block.CubeGrid.OnBlockRemoved += OnBlockRemoved;
 
-                        // Initialize upgrades first
                         InitExistingUpgrades();
                         MyLog.Default.WriteLineAndConsole($"After upgrade init - Module count: {_moduleCount}, Max Power: {Settings.MaxFieldPower}%");
 
-                        // Then load settings
                         LoadSettings();
-
-                        // Make sure field power doesn't exceed new maximum
                         Settings.FieldPower = Math.Min(Settings.FieldPower, Settings.MaxFieldPower);
                         SaveSettings();
 
                         MyLog.Default.WriteLineAndConsole($"Final initialization - Field Power: {Settings.FieldPower}%, Max Power: {Settings.MaxFieldPower}%");
-
-                        // Register damage handler
                         MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0, HandleResistence);
                     });
                 }
 
-                // Initialize power system for both client and server
-                Sink = Block.Components.Get<MyResourceSinkComponent>();
+                // Set up power system after settings are loaded
                 if (Sink != null) {
+                    // Calculate initial power requirement
+                    float initialPowerDraw = CalculatePowerDraw();
+
                     var powerReq = new MyResourceSinkInfo() {
                         ResourceTypeId = MyResourceDistributorComponent.ElectricityId,
                         MaxRequiredInput = Config.MaxPowerDraw,
                         RequiredInputFunc = CalculatePowerDraw
                     };
+
                     Sink.AddType(ref powerReq);
                     Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, CalculatePowerDraw);
                     Sink.Update();
+
+                    MyLog.Default.WriteLineAndConsole($"Power system initialized - Initial Draw: {initialPowerDraw:F2} MW, Field Power: {Settings.FieldPower}%");
                 }
 
                 NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
@@ -162,7 +165,7 @@ namespace Starcore.FieldGenerator
                         bool hasPower = Sink != null && Sink.IsPowerAvailable(MyResourceDistributorComponent.ElectricityId, requiredPower);
                         float availablePower = Sink?.CurrentInputByType(MyResourceDistributorComponent.ElectricityId) ?? 0f;
 
-                        MyLog.Default.WriteLineAndConsole($"Power Status - Required: {requiredPower:F2} MW, Available: {availablePower:F2} MW, Current Field: {Settings.FieldPower:F1}%");
+                        //MyLog.Default.WriteLineAndConsole($"Power Status - Required: {requiredPower:F2} MW, Available: {availablePower:F2} MW, Current Field: {Settings.FieldPower:F1}%");
 
                         if (hasPower) {
                             UpdateSiegeState();
@@ -436,11 +439,12 @@ namespace Starcore.FieldGenerator
                 if (Settings.SiegeMode)
                     return Config.SiegePowerDraw;
 
-                // Calculate power draw based on field power percentage
+                // Calculate power based on field power percentage
                 float fieldPowerPercentage = Settings.FieldPower / 100f;
-                float powerDraw = Config.MinPowerDraw + (fieldPowerPercentage * (Config.MaxPowerDraw - Config.MinPowerDraw));
+                float powerRange = Config.MaxPowerDraw - Config.MinPowerDraw;
+                float powerDraw = Config.MinPowerDraw + (fieldPowerPercentage * powerRange);
 
-                MyLog.Default.WriteLineAndConsole($"FieldGenerator Power Draw: {powerDraw:F2} MW (Field Power: {Settings.FieldPower:F1}%, Min: {Config.MinPowerDraw}, Max: {Config.MaxPowerDraw})");
+                //MyLog.Default.WriteLineAndConsole($"Power Draw Calculation: Field Power: {Settings.FieldPower:F1}% -> {powerDraw:F2} MW");
                 return powerDraw;
             }
             catch (Exception e) {
