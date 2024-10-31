@@ -115,6 +115,8 @@ namespace Starcore.FieldGenerator
             Sink = Block.Components.Get<MyResourceSinkComponent>();
             Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, CalculatePowerDraw);
 
+            MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(100, HandleResistence);
+
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
             NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
         }
