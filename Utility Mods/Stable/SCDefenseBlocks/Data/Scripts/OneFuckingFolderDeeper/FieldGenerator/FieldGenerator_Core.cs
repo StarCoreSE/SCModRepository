@@ -21,27 +21,29 @@ using Jnick_SCModRepository.SCDefenseBlocks.Data.Scripts.OneFuckingFolderDeeper.
 
 namespace Starcore.FieldGenerator
 {
-    public class Config
-    {
+    public class Config {
+        // Power-related constants that should match FieldGeneratorSettings
+        public const float MaxPowerDraw = 500.00f;  // Power consumption at max field power
+        public const float MinPowerDraw = 50.00f;   // Power consumption at min field power
+
+        // Field Power related constants
+        public const float PerModuleAmount = 12.5f;  // Power increase per module
+        public const int MaxModuleCount = 4;         // Maximum number of modules
+
+        // These effectively define the field power range
+        // MaxFieldPower would be PerModuleAmount * MaxModuleCount = 50%
+        // MinFieldPower would be 0%
+
+        // Other configs not related to power/field settings
         public const bool SimplifiedMode = true;
-
-        public const float PerModuleAmount = 12.5f;
-        public const int MaxModuleCount = 4;
-
         public const int MaxSiegeTime = 150;
         public const int SiegePowerDraw = 900;
-
         public const int DamageEventThreshold = 6;
         public const int ResetInterval = 3;
-
         public const float SizeModifierMax = 0.8f;
         public const int MaxBlockCount = 35000;
-
         public const float SizeModifierMin = 1.2f;
         public const int MinBlockCount = 2500;
-
-        public const float MaxPowerDraw = 500.00f;
-        public const float MinPowerDraw = 50.00f;
     }
 
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "FieldGen_Core")]
@@ -130,20 +132,15 @@ namespace Starcore.FieldGenerator
 
                 // Set up power system after settings are loaded
                 if (Sink != null) {
-                    // Calculate initial power requirement
                     float initialPowerDraw = CalculatePowerDraw();
-
                     var powerReq = new MyResourceSinkInfo() {
                         ResourceTypeId = MyResourceDistributorComponent.ElectricityId,
                         MaxRequiredInput = Config.MaxPowerDraw,
                         RequiredInputFunc = CalculatePowerDraw
                     };
-
                     Sink.AddType(ref powerReq);
                     Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, CalculatePowerDraw);
-                    Sink.Update();
-
-                    MyLog.Default.WriteLineAndConsole($"Power system initialized - Initial Draw: {initialPowerDraw:F2} MW, Field Power: {Settings.FieldPower}%");
+                    Sink.Update();  // Ensure power requirements are updated
                 }
 
                 NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
@@ -390,14 +387,18 @@ namespace Starcore.FieldGenerator
         }
 
         private void CalculateUpgradeAmounts() {
+            // Calculate new max power based on module count
             float newMaxPower = Settings.MinFieldPower + (_moduleCount * Config.PerModuleAmount);
+
             MyLog.Default.WriteLineAndConsole($"Calculating upgrades - Modules: {_moduleCount}, New Max Power: {newMaxPower}%");
 
             if (Math.Abs(Settings.MaxFieldPower - newMaxPower) > 0.001f) {
                 Settings.MaxFieldPower = newMaxPower;
+                // Ensure current field power doesn't exceed new maximum
                 if (Settings.FieldPower > Settings.MaxFieldPower) {
                     Settings.FieldPower = Settings.MaxFieldPower;
                 }
+
                 MyLog.Default.WriteLineAndConsole($"Updated power settings - Max: {Settings.MaxFieldPower}%, Current: {Settings.FieldPower}%");
             }
         }
@@ -439,12 +440,11 @@ namespace Starcore.FieldGenerator
                 if (Settings.SiegeMode)
                     return Config.SiegePowerDraw;
 
-                // Calculate power based on field power percentage
+                // Calculate power draw based on field power percentage
                 float fieldPowerPercentage = Settings.FieldPower / 100f;
                 float powerRange = Config.MaxPowerDraw - Config.MinPowerDraw;
                 float powerDraw = Config.MinPowerDraw + (fieldPowerPercentage * powerRange);
 
-                //MyLog.Default.WriteLineAndConsole($"Power Draw Calculation: Field Power: {Settings.FieldPower:F1}% -> {powerDraw:F2} MW");
                 return powerDraw;
             }
             catch (Exception e) {
@@ -494,13 +494,19 @@ namespace Starcore.FieldGenerator
                 }
 
                 Settings.CopyFrom(loadedSettings);
+
+                // Update power requirements after loading settings
+                if (Sink != null) {
+                    float powerDraw = CalculatePowerDraw();
+                    Sink.Update();
+                }
+
                 MyLog.Default.WriteLineAndConsole($"Settings loaded - Field Power: {Settings.FieldPower}%, Max: {Settings.MaxFieldPower}%");
                 return true;
             }
             catch (Exception e) {
                 MyLog.Default.WriteLineAndConsole($"Failed to load field generator settings: {e}");
             }
-
             return false;
         }
 
@@ -511,16 +517,19 @@ namespace Starcore.FieldGenerator
             if (Block.Storage == null)
                 Block.Storage = new MyModStorageComponent();
 
+            // Save the current power draw state along with other settings
             string rawData = Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(Settings));
 
-            // Use TryAdd instead of Add to prevent potential exceptions
             if (Block.Storage.ContainsKey(SettingsGuid))
                 Block.Storage[SettingsGuid] = rawData;
             else
                 Block.Storage.Add(SettingsGuid, rawData);
 
-            // Optional verification
-            var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<FieldGeneratorSettings>(Convert.FromBase64String(rawData));
+            // Update the power sink with current settings
+            if (Sink != null) {
+                float powerDraw = CalculatePowerDraw();
+                Sink.Update();
+            }
         }
 
         public override bool IsSerialized() {

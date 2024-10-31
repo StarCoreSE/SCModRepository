@@ -55,28 +55,29 @@ namespace Starcore.FieldGenerator {
 
         public float FieldPower {
             get { return fieldPower; }
-            set
-            {
+            set {
                 fieldPower = MathHelper.Clamp(value, MinFieldPower, MaxFieldPower);
-                if (Owner != null) Owner.FieldPowerSync.Value = fieldPower;
+                if (Owner != null)
+                    Owner.FieldPowerSync.Value = fieldPower;
             }
         }
 
         public float MaxFieldPower {
             get { return maxFieldPower; }
-            set
-            {
-                maxFieldPower = value;
-                if (Owner != null) Owner.MaxFieldPowerSync.Value = value;
+            set {
+                // Ensure MaxFieldPower doesn't exceed what's possible with max modules
+                maxFieldPower = MathHelper.Clamp(value, 0, Config.PerModuleAmount * Config.MaxModuleCount);
+                if (Owner != null)
+                    Owner.MaxFieldPowerSync.Value = maxFieldPower;
             }
         }
 
         public float MinFieldPower {
             get { return minFieldPower; }
-            set
-            {
-                minFieldPower = value;
-                if (Owner != null) Owner.MinFieldPowerSync.Value = value;
+            set {
+                minFieldPower = MathHelper.Clamp(value, 0, MaxFieldPower);
+                if (Owner != null)
+                    Owner.MinFieldPowerSync.Value = minFieldPower;
             }
         }
 
