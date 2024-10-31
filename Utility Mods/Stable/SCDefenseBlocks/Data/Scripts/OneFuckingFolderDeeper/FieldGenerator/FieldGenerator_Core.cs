@@ -58,7 +58,7 @@ namespace Starcore.FieldGenerator
         private IMyCollector Block;
         public FieldGeneratorSettings Settings;
         public readonly Guid SettingsGuid = new Guid("59e91d1a-eddc-4f72-ba8d-3951eec82e9e");
-        private MyResourceSinkComponent Sink = null;
+        public MyResourceSinkComponent Sink = null;
         private readonly bool IsServer = MyAPIGateway.Session.IsServer;
 
         private Dictionary<string, IMyModelDummy> _coreDummies;
@@ -73,118 +73,172 @@ namespace Starcore.FieldGenerator
 
         #region Core Methods
         public override void Init(MyObjectBuilder_EntityBase objectBuilder) {
-            base.Init(objectBuilder);
-            Block = (IMyCollector)Entity;
+            try {
+                base.Init(objectBuilder);
+                Block = (IMyCollector)Entity;
 
-            // Initialize all collections before any potential serialization
-            _coreDummies = new Dictionary<string, IMyModelDummy>();
-            _attachedModuleIds = new HashSet<long>();
-            _gridBlocks = new List<IMySlimBlock>();
-            _gridBlockCount = 0;
+                // Initialize all collections before any potential serialization
+                _coreDummies = new Dictionary<string, IMyModelDummy>();
+                _attachedModuleIds = new HashSet<long>();
+                _gridBlocks = new List<IMySlimBlock>();
+                _gridBlockCount = 0;
 
-            // Initialize settings
-            Settings = new FieldGeneratorSettings(this);
-            Settings.MinFieldPower = 0;
-            Settings.MaxFieldPower = Config.PerModuleAmount;
-            Settings.FieldPower = 0;
-            Settings.Stability = 100;
+                // Initialize settings
+                Settings = new FieldGeneratorSettings(this);
+                Settings.MinFieldPower = 0;
+                Settings.MaxFieldPower = Config.PerModuleAmount;
+                Settings.FieldPower = 0;
+                Settings.Stability = 100;
 
-            NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
+                NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
+            }
+            catch (Exception e) {
+                MyLog.Default.WriteLineAndConsole($"FieldGenerator.Init: {e}");
+            }
         }
 
         public override void UpdateOnceBeforeFrame() {
-            base.UpdateOnceBeforeFrame();
-            if (Block?.CubeGrid?.Physics == null)
-                return;
+            try {
+                base.UpdateOnceBeforeFrame();
+                if (Block?.CubeGrid?.Physics == null)
+                    return;
 
-            FieldGeneratorControls.DoOnce(ModContext);
+                FieldGeneratorControls.DoOnce(ModContext);
 
-            if (IsServer) {
-                MyAPIGateway.Utilities.InvokeOnGameThread(() =>
-                {
-                    Block.Model.GetDummies(_coreDummies);
-                    Block.CubeGrid.OnBlockAdded += OnBlockAdded;
-                    Block.CubeGrid.OnBlockRemoved += OnBlockRemoved;
+                // Initialize power system first
+                Sink = Block.Components.Get<MyResourceSinkComponent>();
 
-                    // First initialize upgrades to calculate proper max power
-                    InitExistingUpgrades();
+                // Initialize settings and upgrades before power system setup
+                if (IsServer) {
+                    MyAPIGateway.Utilities.InvokeOnGameThread(() =>
+                    {
+                        Block.Model.GetDummies(_coreDummies);
+                        Block.CubeGrid.OnBlockAdded += OnBlockAdded;
+                        Block.CubeGrid.OnBlockRemoved += OnBlockRemoved;
 
-                    // Then load saved settings
-                    LoadSettings();
+                        InitExistingUpgrades();
+                        MyLog.Default.WriteLineAndConsole($"After upgrade init - Module count: {_moduleCount}, Max Power: {Settings.MaxFieldPower}%");
 
-                    // Ensure field power doesn't exceed new maximum
-                    Settings.FieldPower = Math.Min(Settings.FieldPower, Settings.MaxFieldPower);
+                        LoadSettings();
+                        Settings.FieldPower = Math.Min(Settings.FieldPower, Settings.MaxFieldPower);
+                        SaveSettings();
 
-                    // Save the validated settings
-                    SaveSettings();
-                });
+                        MyLog.Default.WriteLineAndConsole($"Final initialization - Field Power: {Settings.FieldPower}%, Max Power: {Settings.MaxFieldPower}%");
+                        MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0, HandleResistence);
+                    });
+                }
+
+                // Set up power system after settings are loaded
+                if (Sink != null) {
+                    // Calculate initial power requirement
+                    float initialPowerDraw = CalculatePowerDraw();
+
+                    var powerReq = new MyResourceSinkInfo() {
+                        ResourceTypeId = MyResourceDistributorComponent.ElectricityId,
+                        MaxRequiredInput = Config.MaxPowerDraw,
+                        RequiredInputFunc = CalculatePowerDraw
+                    };
+
+                    Sink.AddType(ref powerReq);
+                    Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, CalculatePowerDraw);
+                    Sink.Update();
+
+                    MyLog.Default.WriteLineAndConsole($"Power system initialized - Initial Draw: {initialPowerDraw:F2} MW, Field Power: {Settings.FieldPower}%");
+                }
+
+                NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
+                NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
             }
-
-            Sink = Block.Components.Get<MyResourceSinkComponent>();
-            MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0, HandleResistence);
-            Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, CalculatePowerDraw);
-
-            NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
-            NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
+            catch (Exception e) {
+                MyLog.Default.WriteLineAndConsole($"FieldGenerator.UpdateOnceBeforeFrame: {e}");
+            }
         }
 
         public override void UpdateAfterSimulation() {
-            if (!IsServer) return;
+            try {
+                if (!IsServer) return;
 
-            if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0) {
-                if (Block.IsWorking) {
-                    Sink.Update();
-                    UpdateSiegeState();
+                if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0) {
+                    if (Block.IsWorking && Block.IsFunctional) {
+                        float requiredPower = CalculatePowerDraw();
+                        Sink?.Update();
+                        bool hasPower = Sink != null && Sink.IsPowerAvailable(MyResourceDistributorComponent.ElectricityId, requiredPower);
+                        float availablePower = Sink?.CurrentInputByType(MyResourceDistributorComponent.ElectricityId) ?? 0f;
 
-                    if (!Config.SimplifiedMode) {
-                        if (_damageEventCounter > Config.DamageEventThreshold) {
-                            Settings.Stability -= (1.6666666666667f * CalculateSizeModifier()) * (Settings.FieldPower / 50);
-                        }
-                        else {
-                            Settings.Stability = MathHelper.Clamp(Settings.Stability + 3, 0, 100);
-                        }
+                        //MyLog.Default.WriteLineAndConsole($"Power Status - Required: {requiredPower:F2} MW, Available: {availablePower:F2} MW, Current Field: {Settings.FieldPower:F1}%");
 
-                        if (_resetCounter < Config.ResetInterval) {
-                            _resetCounter++;
+                        if (hasPower) {
+                            UpdateSiegeState();
+
+                            if (!Config.SimplifiedMode) {
+                                if (_damageEventCounter > Config.DamageEventThreshold) {
+                                    Settings.Stability -= (1.6666666666667f * CalculateSizeModifier()) * (Settings.FieldPower / 50);
+                                }
+                                else {
+                                    Settings.Stability = MathHelper.Clamp(Settings.Stability + 3, 0, 100);
+                                }
+
+                                if (_resetCounter < Config.ResetInterval) {
+                                    _resetCounter++;
+                                }
+                                else {
+                                    _resetCounter = 0;
+                                    _damageEventCounter = 0;
+                                }
+                            }
                         }
-                        else {
-                            _resetCounter = 0;
-                            _damageEventCounter = 0;
+                        // Server only disables the block if there's no power, never changes the field power value
+                        else if (!Block.IsWorking) {
+                            if (Settings.SiegeMode)
+                                CancelSiegeMode();
                         }
                     }
                 }
-                else if (!Block.IsWorking) {
-                    if (Settings.FieldPower > 0)
-                        Settings.FieldPower = 0;
-                    if (Settings.SiegeMode) {
-                        CancelSiegeMode();
-                    }
-                }
+            }
+            catch (Exception e) {
+                MyLog.Default.WriteLineAndConsole($"FieldGenerator.UpdateAfterSimulation: {e}");
             }
         }
 
         public override void UpdateAfterSimulation10() {
-            if (IsClientInShip() || IsClientNearShip()) {
-                if (Settings.SiegeMode) {
-                    SetSiegeNotification($"<S.I> Siege Mode Active | {Settings.SiegeElapsedTime} / {Config.MaxSiegeTime}", 600);
-                }
-                else if (!Settings.SiegeMode && Settings.SiegeCooldownActive) {
-                    SetSiegeNotification($"<S.I> Siege Mode On Cooldown | {Settings.SiegeCooldownTime}", 600, "Red");
-                }
+            try {
+                if (IsClientInShip() || IsClientNearShip()) {
+                    if (Settings.SiegeMode) {
+                        SetSiegeNotification($"<S.I> Siege Mode Active | {Settings.SiegeElapsedTime} / {Config.MaxSiegeTime}", 600);
+                    }
+                    else if (!Settings.SiegeMode && Settings.SiegeCooldownActive) {
+                        SetSiegeNotification($"<S.I> Siege Mode On Cooldown | {Settings.SiegeCooldownTime}", 600, "Red");
+                    }
 
-                if (!Block.IsWorking) {
-                    string reason = Block.IsFunctional ? "Insufficient Power?" : "Block Damaged!";
-                    SetPowerNotification($"<S.I> Generator Core is Offline! | {reason}", 600, "Red");
+                    if (!Block.IsWorking) {
+                        string reason = Block.IsFunctional ?
+                            (Sink != null && !Sink.IsPowerAvailable(MyResourceDistributorComponent.ElectricityId, CalculatePowerDraw()) ?
+                                "Insufficient Power" : "Power System Error") :
+                            "Block Damaged!";
+                        SetPowerNotification($"<S.I> Generator Core is Offline! | {reason}", 600, "Red");
+                    }
                 }
+            }
+            catch (Exception e) {
+                MyLog.Default.WriteLineAndConsole($"FieldGenerator.UpdateAfterSimulation10: {e}");
             }
         }
 
         public override void Close() {
-            if (IsServer) {
-                Block.CubeGrid.OnBlockAdded -= OnBlockAdded;
-                Block.CubeGrid.OnBlockRemoved -= OnBlockRemoved;
+            try {
+                if (IsServer) {
+                    if (Block?.CubeGrid != null) {
+                        Block.CubeGrid.OnBlockAdded -= OnBlockAdded;
+                        Block.CubeGrid.OnBlockRemoved -= OnBlockRemoved;
+                    }
+                }
+
+                Sink = null;
+                Block = null;
             }
-            Block = null;
+            catch (Exception e) {
+                MyLog.Default.WriteLineAndConsole($"FieldGenerator.Close: {e}");
+            }
             base.Close();
         }
         #endregion
@@ -309,6 +363,8 @@ namespace Starcore.FieldGenerator
         private void InitExistingUpgrades() {
             if (!IsServer) return;
 
+            MyLog.Default.WriteLineAndConsole("Starting upgrade initialization...");
+
             _attachedModuleIds.Clear();
             _moduleCount = 0;
 
@@ -324,11 +380,26 @@ namespace Starcore.FieldGenerator
                     if (!_attachedModuleIds.Contains(entityId)) {
                         _attachedModuleIds.Add(entityId);
                         _moduleCount++;
+                        MyLog.Default.WriteLineAndConsole($"Found valid upgrade module. Total count: {_moduleCount}");
                     }
                 }
             }
 
             CalculateUpgradeAmounts();
+            MyLog.Default.WriteLineAndConsole($"Upgrade initialization complete. Module count: {_moduleCount}, Max Power: {Settings.MaxFieldPower}%");
+        }
+
+        private void CalculateUpgradeAmounts() {
+            float newMaxPower = Settings.MinFieldPower + (_moduleCount * Config.PerModuleAmount);
+            MyLog.Default.WriteLineAndConsole($"Calculating upgrades - Modules: {_moduleCount}, New Max Power: {newMaxPower}%");
+
+            if (Math.Abs(Settings.MaxFieldPower - newMaxPower) > 0.001f) {
+                Settings.MaxFieldPower = newMaxPower;
+                if (Settings.FieldPower > Settings.MaxFieldPower) {
+                    Settings.FieldPower = Settings.MaxFieldPower;
+                }
+                MyLog.Default.WriteLineAndConsole($"Updated power settings - Max: {Settings.MaxFieldPower}%, Current: {Settings.FieldPower}%");
+            }
         }
 
         private bool IsNeighbour(IMySlimBlock block) {
@@ -351,16 +422,6 @@ namespace Starcore.FieldGenerator
             }
             return false;
         }
-
-        private void CalculateUpgradeAmounts() {
-            float newMaxPower = Settings.MinFieldPower + (_moduleCount * Config.PerModuleAmount);
-            if (Math.Abs(Settings.MaxFieldPower - newMaxPower) > 0.001f) {
-                Settings.MaxFieldPower = newMaxPower;
-                if (Settings.FieldPower > Settings.MaxFieldPower) {
-                    Settings.FieldPower = Settings.MaxFieldPower;
-                }
-            }
-        }
         #endregion
 
         #region Utility Methods
@@ -371,13 +432,25 @@ namespace Starcore.FieldGenerator
         }
 
         private float CalculatePowerDraw() {
-            if (Settings.SiegeMode)
-                return Config.SiegePowerDraw;
+            try {
+                if (!Block.IsWorking || !Block.IsFunctional)
+                    return 0f;
 
-            float maxPossibleFieldPower = Config.PerModuleAmount * Config.MaxModuleCount;
-            float clampedFieldPower = MathHelper.Clamp(Settings.FieldPower, 0, maxPossibleFieldPower);
-            float t = clampedFieldPower / maxPossibleFieldPower;
-            return Config.MinPowerDraw + t * (Config.MaxPowerDraw - Config.MinPowerDraw);
+                if (Settings.SiegeMode)
+                    return Config.SiegePowerDraw;
+
+                // Calculate power based on field power percentage
+                float fieldPowerPercentage = Settings.FieldPower / 100f;
+                float powerRange = Config.MaxPowerDraw - Config.MinPowerDraw;
+                float powerDraw = Config.MinPowerDraw + (fieldPowerPercentage * powerRange);
+
+                //MyLog.Default.WriteLineAndConsole($"Power Draw Calculation: Field Power: {Settings.FieldPower:F1}% -> {powerDraw:F2} MW");
+                return powerDraw;
+            }
+            catch (Exception e) {
+                MyLog.Default.WriteLineAndConsole($"FieldGenerator.CalculatePowerDraw: {e}");
+                return Config.MinPowerDraw;
+            }
         }
 
         private bool IsClientInShip() {
@@ -409,20 +482,23 @@ namespace Starcore.FieldGenerator
         internal bool LoadSettings() {
             string rawData;
             if (Block.Storage == null || !Block.Storage.TryGetValue(SettingsGuid, out rawData)) {
+                MyLog.Default.WriteLineAndConsole("No settings found to load.");
                 return false;
             }
 
             try {
                 var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<FieldGeneratorSettings>(Convert.FromBase64String(rawData));
-                if (loadedSettings == null)
+                if (loadedSettings == null) {
+                    MyLog.Default.WriteLineAndConsole("Failed to deserialize settings.");
                     return false;
+                }
 
                 Settings.CopyFrom(loadedSettings);
+                MyLog.Default.WriteLineAndConsole($"Settings loaded - Field Power: {Settings.FieldPower}%, Max: {Settings.MaxFieldPower}%");
                 return true;
             }
             catch (Exception e) {
-                MyAPIGateway.Utilities.ShowNotification("Failed to load field generator settings! Check the logs for more info.");
-                MyLog.Default.WriteLineAndConsole("Failed to load field generator settings! Exception: " + e);
+                MyLog.Default.WriteLineAndConsole($"Failed to load field generator settings: {e}");
             }
 
             return false;
