@@ -248,6 +248,5 @@
 			  <MissileExplosionDamage>400</MissileExplosionDamage>
 		  </MissileProperties>
 	  </Ammo>
-
   </Ammos>
 </Definitions>
