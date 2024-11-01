@@ -31,6 +31,16 @@ namespace SC.SUGMA.Commands
                 "Ends the current match.",
                 CommandMethods.End
             ),
+            ["pause"] = new Command(
+                "SUGMA.Match",
+                "Locks all grids in place and disables weapons.",
+                CommandMethods.Pause
+            ),
+            ["clearboard"] = new Command(
+                "SUGMA.Match",
+                "Ends the current match, deletes all grids, and returns players to the respawn screen.",
+                CommandMethods.ClearBoard
+            ),
 
             #endregion
 
