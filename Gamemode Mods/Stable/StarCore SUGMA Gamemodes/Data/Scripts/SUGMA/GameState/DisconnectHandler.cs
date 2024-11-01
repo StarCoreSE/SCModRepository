@@ -88,9 +88,9 @@ namespace SC.SUGMA.GameState
             UnfreezeGrids();
         }
 
-        private void UnfreezeGrids()
+        public void UnfreezeGrids(bool unfreezeAll = false)
         {
-            if (FreezeAllGrids)
+            if (FreezeAllGrids || unfreezeAll)
             {
                 foreach (var grid in _frozenGrids)
                 {
@@ -134,7 +134,7 @@ namespace SC.SUGMA.GameState
             return true;
         }
 
-        private bool FreezeGrids(IMyEntity entity)
+        public bool FreezeGrids(IMyEntity entity)
         {
             var grid = entity as Sandbox.Game.Entities.MyCubeGrid;
             if (grid == null || !_frozenGrids.Add(grid) || grid.Physics == null)
