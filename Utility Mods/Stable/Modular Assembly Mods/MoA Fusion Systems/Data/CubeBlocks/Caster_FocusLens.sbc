@@ -23,7 +23,7 @@
 				<Component Subtype="Construction" Count="150" />
 				<Component Subtype="MetalGrid" Count="250" />
 				<Component Subtype="Construction" Count="30" />
-				<Component Subtype="SteelPlate" Count="50" />
+				<Component Subtype="SteelPlate" Count="200" />
 			</Components>
 			<CriticalComponent Subtype="LargeTube" Index="0" />
 			<MountPoints>
