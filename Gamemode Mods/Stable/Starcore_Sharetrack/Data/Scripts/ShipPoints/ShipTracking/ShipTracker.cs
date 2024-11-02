@@ -205,7 +205,7 @@ namespace StarCore.ShareTrack.ShipTracking
             }
 
             bool bufferIsFunctional = IsFunctional;
-            IsFunctional = TotalPower > 0 && TotalTorque > 0 && CockpitCount > 0;
+            IsFunctional = TotalPowerBlocks > 0 && TotalTorque > 0 && CockpitCount > 0;
             if (bufferIsFunctional != IsFunctional)
             {
                 TrackingManager.I.OnShipAliveChanged?.Invoke(Grid, IsFunctional);
@@ -485,6 +485,17 @@ namespace StarCore.ShareTrack.ShipTracking
         }
 
         public float TotalPower => Grid?.ResourceDistributor?.MaxAvailableResourceByType(MyResourceDistributorComponent.ElectricityId) ?? 0;
+
+        public int TotalPowerBlocks
+        {
+            get
+            {
+                int total = 0;
+                foreach (var stats in _gridStats.Values)
+                    total += stats.TotalPowerBlocks;
+                return total;
+            }
+        }
 
         public Dictionary<string, int> SpecialBlockCounts
         {
