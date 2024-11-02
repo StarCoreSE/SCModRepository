@@ -14,7 +14,7 @@
 			<Icon>Textures\GUI\Icons\Cubes\Caster_FocusLens.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
-			<Size x="3" y="3" z="3"/>
+			<Size x="3" y="3" z="2"/>
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Caster_FocusLens.mwm</Model>
 			<Components>
@@ -28,6 +28,10 @@
 			<CriticalComponent Subtype="LargeTube" Index="0" />
 			<MountPoints>
 				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="1.00" EndX="2.00" EndY="2.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="1.00" EndX="2.00" EndY="2.00"/>
+				<MountPoint Side="Top" StartX="1.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+				<MountPoint Side="Bottom" StartX="1.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
 			</MountPoints>
 			<BlockPairName>Caster_FocusLens</BlockPairName>
 			<ResourceSinkGroup>Thrust</ResourceSinkGroup>
@@ -55,6 +59,7 @@
 			<FlameVisibilityDistance>5000</FlameVisibilityDistance>
 			<FlameGlareQuerySize>0.1</FlameGlareQuerySize>
 			<PrimarySound>Fusion_Thruster_Sound</PrimarySound>
+			<MirroringZ>Y</MirroringZ>
 		</Definition>
 	</CubeBlocks>
 </Definitions>
