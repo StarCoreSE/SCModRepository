@@ -92,10 +92,6 @@ namespace SC.GyroscopicGunsight
             }
         }
 
-        
-        public static Vector3 GetShipAngularVelocity(IMyCubeGrid ship) => ship?.Physics?.AngularVelocity ?? Vector3.Zero;
-
-
         /// <summary>
         /// Squid's fancy leading math
         /// </summary>
