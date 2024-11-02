@@ -114,8 +114,6 @@ namespace SC.GyroscopicGunsight
             deflectionX = (range / muzzleVelocity) * weaponAngularVelocity.X;
             deflectionY = (range / muzzleVelocity) * weaponAngularVelocity.Y;
 
-            MatrixD cameraMatrix = MatrixD.Identity; // pretend this is filled out
-
             Vector3D offsetVec = new Vector3D(deflectionX, deflectionY, 0); // Full trailing reticle
 
             return Vector3D.Transform(offsetVec, thisWeapon.WorldMatrix) + thisWeapon.WorldMatrix.Forward * range;
