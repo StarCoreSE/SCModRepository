@@ -104,21 +104,26 @@ namespace SC.GyroscopicGunsight
 
             // It shouldn't matter if an NRE gets thrown here, it's caught elsewhere, and it would be an Actual Problem:tm:
             //var shipAngularVelocity = thisWeapon.CubeGrid.Physics.AngularVelocity;
-            var weaponAngularVelocity = thisWeapon.CubeGrid.Physics.GetVelocityAtPoint(thisWeapon.WorldMatrix.Translation) - thisWeapon.CubeGrid.LinearVelocity;
+
+            // no
+            //var weaponAngularVelocity = Vector3D.Transform(thisWeapon.CubeGrid.Physics.GetVelocityAtPoint(thisWeapon.WorldMatrix.Translation) - thisWeapon.CubeGrid.LinearVelocity, thisWeapon.CubeGrid.WorldMatrix.GetOrientation());
+            var weaponAngularVelocity = thisWeapon.CubeGrid.Physics.AngularVelocityLocal; // ?
+            //var weaponPos = thisWeapon.WorldMatrix.Translation;
+            //thisWeapon.CubeGrid.Physics.GetVelocityAtPointLocal(ref weaponPos, out weaponAngularVelocity);
+            
             Vector3D targetPos = targetGrid.GetPosition();
             Vector3D myPos = thisWeapon.CubeGrid.GetPosition();
 
-
             range = Vector3.Distance(myPos, targetPos);
 
-            deflectionX = (range / muzzleVelocity) * weaponAngularVelocity.X;
-            deflectionY = (range / muzzleVelocity) * weaponAngularVelocity.Y;
+            // it's yo-hover
+            deflectionX = (range / muzzleVelocity) * Math.Tan(weaponAngularVelocity.X) * range;
+            deflectionY = (range / muzzleVelocity) * Math.Tan(weaponAngularVelocity.Y) * range;
+            var deflectionZ = (range / muzzleVelocity) * Math.Tan(weaponAngularVelocity.Z) * range;
 
-            MatrixD cameraMatrix = MatrixD.Identity; // pretend this is filled out
+            Vector3D offsetVec = new Vector3D(deflectionX, deflectionY, deflectionZ); // Full trailing reticle
 
-            Vector3D offsetVec = new Vector3D(deflectionX, deflectionY, 0); // Full trailing reticle
-
-            return Vector3D.Transform(offsetVec, thisWeapon.WorldMatrix) + thisWeapon.WorldMatrix.Forward * range;
+            return Vector3.Transform(offsetVec, thisWeapon.CubeGrid.WorldMatrix) + thisWeapon.WorldMatrix.Forward * range; // TODO add offset from gun to grid
         }
 
         /// <summary>
