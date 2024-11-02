@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using VRage.Game;
 using VRage.Game.ModAPI;
+using VRage.ModAPI;
 using VRage.Utils;
 using VRageMath;
 
@@ -76,6 +77,57 @@ namespace SC.SUGMA.Utilities
                 new ProblemReportPacket(false).Received(0);
             else
                 HeartNetwork.I.SendToServer(new ProblemReportPacket(false));
+        }
+
+        public static bool IsPaused { get; private set; } = false;
+        public static void Pause()
+        {
+            if (IsPaused)
+            {
+                DisconnectHandler.I.UnfreezeGrids(true);
+                MyAPIGateway.Utilities.SendMessage("Paused the game!");
+                IsPaused = false;
+            }
+            else
+            {
+                MyAPIGateway.Entities.GetEntities(null, DisconnectHandler.I.FreezeGrids);
+                MyAPIGateway.Utilities.SendMessage("Unpaused the game!");
+                IsPaused = true;
+            }
+        }
+
+        /// <summary>
+        /// Kills all players, ends the match, and deletes all player grids.
+        /// </summary>
+        public static void ClearBoard()
+        {
+            if (!MyAPIGateway.Session.IsServer)
+                return;
+
+            var playerIds = new List<long>();
+
+            foreach (var faction in PlayerTracker.I.GetPlayerFactions())
+                playerIds.AddRange(faction.Members.Values.Select(player => player.PlayerId));
+
+            foreach (var player in PlayerTracker.I.AllPlayers.Where(p => playerIds.Contains(p.Key)))
+                player.Value.Character?.Kill();
+
+            SUGMA_SessionComponent.I.StopGamemode(true);
+
+            MyAPIGateway.Entities.GetEntities(null, g =>
+            {
+                IMyCubeGrid grid = g as IMyCubeGrid;
+                if (grid == null)
+                    return false;
+
+                // If this ever becomes an issue with deleting existing subgrids, change it to a GridGroup check.
+                if (!grid.IsStatic)
+                    grid.Close();
+
+                return false;
+            });
+
+            MyAPIGateway.Utilities.SendMessage("Board cleared.");
         }
 
         public static void ShieldCharge()
