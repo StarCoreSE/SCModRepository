@@ -106,15 +106,16 @@ namespace SC.GyroscopicGunsight
             }
 
             // It shouldn't matter if an NRE gets thrown here, it's caught elsewhere, and it would be an Actual Problem:tm:
-            var shipAngularVelocity = thisWeapon.CubeGrid.Physics.AngularVelocity;
+            //var shipAngularVelocity = thisWeapon.CubeGrid.Physics.AngularVelocity;
+            var weaponAngularVelocity = thisWeapon.CubeGrid.Physics.GetVelocityAtPoint(thisWeapon.WorldMatrix.Translation) - thisWeapon.CubeGrid.LinearVelocity;
             Vector3D targetPos = targetGrid.GetPosition();
             Vector3D myPos = thisWeapon.CubeGrid.GetPosition();
 
 
             range = Vector3.Distance(myPos, targetPos);
 
-            deflectionX = (range / muzzleVelocity) * shipAngularVelocity.X;
-            deflectionY = (range / muzzleVelocity) * shipAngularVelocity.Y;
+            deflectionX = (range / muzzleVelocity) * weaponAngularVelocity.X;
+            deflectionY = (range / muzzleVelocity) * weaponAngularVelocity.Y;
 
 
             MatrixD cameraMatrix = MatrixD.Identity; // pretend this is filled out
