@@ -70,17 +70,14 @@ namespace SC.GyroscopicGunsight
                 }
 
                 // Grab fixed guns
+                // Looks for WC guns with a lead group assigned
                 var fixedWeapons = currentGrid.GetFatBlocks<IMyConveyorSorter>().Where(b => WcApi.HasCoreWeapon((MyEntity) b) && (b.GetProperty("Target Group")?.AsFloat()?.GetValue(b) ?? 0) != 0);
                 MyAPIGateway.Utilities.ShowNotification("Fixed Guns: " + fixedWeapons.Count(), 1000/60);
 
 
                 // actual calculations
-                HashSet<string> drawnSubtypes = new HashSet<string>();
                 foreach (var weapon in fixedWeapons)
                 {
-                    if (!drawnSubtypes.Add(weapon.BlockDefinition.SubtypeId))
-                        continue;
-
                     Vector3D dynamicPosition = CalculateDeflection(weapon, target as IMyCubeGrid);
                     DrawGunsight(dynamicPosition);
                 }
@@ -117,13 +114,11 @@ namespace SC.GyroscopicGunsight
             deflectionX = (range / muzzleVelocity) * weaponAngularVelocity.X;
             deflectionY = (range / muzzleVelocity) * weaponAngularVelocity.Y;
 
-
             MatrixD cameraMatrix = MatrixD.Identity; // pretend this is filled out
-
 
             Vector3D offsetVec = new Vector3D(deflectionX, deflectionY, 0); // Full trailing reticle
 
-            return targetPos + Vector3D.Transform(offsetVec, cameraMatrix.GetOrientation());
+            return Vector3D.Transform(offsetVec, thisWeapon.WorldMatrix) + thisWeapon.WorldMatrix.Forward * range;
         }
 
         /// <summary>
