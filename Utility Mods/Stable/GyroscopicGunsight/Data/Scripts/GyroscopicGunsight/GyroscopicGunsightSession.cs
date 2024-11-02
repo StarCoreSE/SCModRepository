@@ -1,16 +1,15 @@
 ﻿using System;
-using Sandbox.Graphics.GUI;
-using System.Drawing;
+using System.Collections.Generic;
+using System.Linq;
 using Sandbox.ModAPI;
+using Sandbox.ModAPI.Interfaces;
 using SC.GyroscopicGunsight.API.CoreSystems;
 using VRage.Game;
 using VRage.Game.Components;
+using VRage.Game.Entity;
 using VRage.Game.ModAPI;
-using VRage.Render.Scene;
 using VRage.Utils;
 using VRageMath;
-using VRageRender;
-using VRage.Game.ModAPI.Ingame;
 
 namespace SC.GyroscopicGunsight
 {
@@ -26,8 +25,6 @@ namespace SC.GyroscopicGunsight
         public double distanceToTarget;
         Vector3D prevPosition;
         Vector3D velocity;
-        public Vector3D targetPos = Vector3D.Zero;
-        public Vector3D targetVelocity = Vector3D.Zero;
 
         public double deflectionX;
         public double deflectionY;
@@ -60,10 +57,31 @@ namespace SC.GyroscopicGunsight
 
             try
             {
-                // You'll need to find the weapon and target yourself, those aren't too terribly bad though
-                // The exact contents of the CalculateDeflection method aren't important to how this is set up, do whatever you need to
-                Vector3D dynamicPosition = CalculateDeflection(null, null);
-                DrawGunsight(dynamicPosition);
+                // Look for the grid the player is in
+                var currentGrid = (MyAPIGateway.Session.Player.Controller.ControlledEntity as IMyCockpit)?.CubeGrid;
+                if (currentGrid == null)
+                    return;
+
+                var target = WcApi.GetAiFocus((MyEntity) currentGrid);
+                if (target == null)
+                {
+                    MyAPIGateway.Utilities.ShowNotification("No Target!", 1000/60);
+                    return;
+                }
+
+                // Grab fixed guns
+                // Looks for WC guns with a lead group assigned
+                var fixedWeapons = currentGrid.GetFatBlocks<IMyConveyorSorter>().Where(b => WcApi.HasCoreWeapon((MyEntity) b) && (b.GetProperty("Target Group")?.AsFloat()?.GetValue(b) ?? 0) != 0);
+                MyAPIGateway.Utilities.ShowNotification("Fixed Guns: " + fixedWeapons.Count(), 1000/60);
+
+
+                // actual calculations
+                foreach (var weapon in fixedWeapons)
+                {
+                    Vector3D dynamicPosition = CalculateDeflection(weapon, target as IMyCubeGrid);
+                    DrawGunsight(dynamicPosition);
+                }
+                
             }
             catch (Exception ex)
             {
@@ -76,18 +94,7 @@ namespace SC.GyroscopicGunsight
         /// </summary>
         /// <param name="thisWeapon"></param>
         /// <param name="targetGrid"></param>
-        /// <returns></returns>
-        /// 
-
-        public Vector3 GetShipAngularVelocity(IMyEntity ship)
-        {
-
-            var physics = ship?.Physics;
-            if (physics == null) return Vector3.Zero;
-
-
-        }
-        public Vector3D CalculateDeflection(VRage.Game.ModAPI.IMyCubeBlock thisWeapon, VRage.Game.ModAPI.IMyCubeGrid targetGrid)
+        public Vector3D CalculateDeflection(IMyCubeBlock thisWeapon, IMyCubeGrid targetGrid)
         {
             if (thisWeapon == null || targetGrid == null)
             {
@@ -95,24 +102,23 @@ namespace SC.GyroscopicGunsight
                 return Vector3D.Zero; // Return a default value to avoid breaking
             }
 
-            xRate = GetShipAngularVelocity(thisWeapon.CubeGrid).X;
-            yRate = GetShipAngularVelocity(thisWeapon.CubeGrid).Y;
+            // It shouldn't matter if an NRE gets thrown here, it's caught elsewhere, and it would be an Actual Problem:tm:
+            //var shipAngularVelocity = thisWeapon.CubeGrid.Physics.AngularVelocity;
+            var weaponAngularVelocity = thisWeapon.CubeGrid.Physics.GetVelocityAtPoint(thisWeapon.WorldMatrix.Translation) - thisWeapon.CubeGrid.LinearVelocity;
             Vector3D targetPos = targetGrid.GetPosition();
             Vector3D myPos = thisWeapon.CubeGrid.GetPosition();
 
 
             range = Vector3.Distance(myPos, targetPos);
 
-            deflectionX = (range / muzzleVelocity) * xRate;
-            deflectionY = (range / muzzleVelocity) * yRate;
-
+            deflectionX = (range / muzzleVelocity) * weaponAngularVelocity.X;
+            deflectionY = (range / muzzleVelocity) * weaponAngularVelocity.Y;
 
             MatrixD cameraMatrix = MatrixD.Identity; // pretend this is filled out
 
-
             Vector3D offsetVec = new Vector3D(deflectionX, deflectionY, 0); // Full trailing reticle
 
-            return targetPos + Vector3D.Transform(offsetVec, cameraMatrix.GetOrientation());
+            return Vector3D.Transform(offsetVec, thisWeapon.WorldMatrix) + thisWeapon.WorldMatrix.Forward * range;
         }
 
         /// <summary>
