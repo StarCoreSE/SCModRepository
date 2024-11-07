@@ -377,6 +377,7 @@ namespace StarCore.ShareTrack
 
             WcApi?.Unload();
             ShieldApi?.Unload();
+            RtsApi?.Unload();
             if (PointValues != null)
             {
                 PointValues.Clear();
