@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Sandbox.ModAPI;
+using SC.SUGMA.Utilities;
 
 namespace SC.SUGMA.Commands
 {
@@ -70,7 +71,12 @@ namespace SC.SUGMA.Commands
                 "SUGMA.Utils",
                 "Automatically balance tracked grids",
                 CommandMethods.AutoBalance
-            )
+            ),
+            ["clearlcd"] = new Command(
+                "SUGMA.Utils",
+                "Clear all image lcds.",
+                args => SUtils.ClearImageLcds()
+                )
 
             #endregion
         };

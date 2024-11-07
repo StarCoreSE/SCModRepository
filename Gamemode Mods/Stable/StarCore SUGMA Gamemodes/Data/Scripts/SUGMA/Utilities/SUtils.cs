@@ -7,6 +7,8 @@ using SC.SUGMA.HeartNetworking.Custom;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using Sandbox.Game.Entities.Blocks;
 using VRage.Game;
 using VRage.Game.ModAPI;
 using VRage.ModAPI;
@@ -45,6 +47,9 @@ namespace SC.SUGMA.Utilities
 
             MySessionComponentSafeZones.AllowedActions = CastProhibit(MySessionComponentSafeZones.AllowedActions,
                 matchActive ? MatchPermsInt : FullPermsInt);
+
+            if (matchActive && MyAPIGateway.Session.IsServer)
+                ClearImageLcds();
         }
 
         public static IMyFaction GetFaction(this IMyCubeGrid grid)
@@ -179,6 +184,41 @@ namespace SC.SUGMA.Utilities
             }
 
             return factionSpawns;
+        }
+
+        /// <summary>
+        /// Text-image LCDs are *bad for performance*. This clears all text larger than 1000 chars from all LCDs in the world.
+        /// </summary>
+        public static void ClearImageLcds()
+        {
+            HashSet<IMyEntity> entities = new HashSet<IMyEntity>();
+            MyAPIGateway.Entities.GetEntities(entities, e => e is IMyCubeGrid);
+
+            int lcdCount = 0;
+            StringBuilder text = new StringBuilder();
+            foreach (var ent in entities)
+            {
+                IMyCubeGrid grid = ent as IMyCubeGrid;
+                if (grid == null)
+                    continue;
+
+                foreach (var lcd in grid.GetFatBlocks<IMyTextPanel>())
+                {
+                    lcd.ReadText(text);
+                    if (text.Length > 1000)
+                    {
+                        lcd.WriteText("");
+                        lcdCount++;
+                    }
+                }
+            }
+
+            if (lcdCount == 0)
+                return;
+
+            MyAPIGateway.Utilities.ShowMessage("", $"{lcdCount} LCD(s) Cleared.");
+            if (MyAPIGateway.Session.IsServer)
+                MyAPIGateway.Utilities.SendMessage($"{lcdCount} LCD(s) Cleared.");
         }
     }
 }
