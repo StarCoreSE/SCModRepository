@@ -190,7 +190,7 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 0.25f,
-                    CustomParticle = "", // Particle SubtypeID, from your Particle SBC
+                    CustomParticle = "Exp_Spark_large", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "K_SA_Gauss_Hit_A", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
@@ -375,7 +375,7 @@ namespace Scripts
                         },
                         TextureMode = Normal,
                         DecayTime = 1, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 3f, green: 11f, blue: 2f, alpha: 1f),
+                        Color = Color(red: 2.5f, green: 7f, blue: 1f, alpha: 1f),
                         Back = false,
                         CustomWidth = 0,
                         UseWidthVariance = false,
