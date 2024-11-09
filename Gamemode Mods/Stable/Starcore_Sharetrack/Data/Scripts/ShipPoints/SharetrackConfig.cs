@@ -41,7 +41,7 @@ namespace StarCore.ShareTrack
             try
             {
                 AllowGridTracking = ini.Get("sharetrack", "allowGridTracking").ToBoolean();
-                AllowGridTracking = ini.Get("sharetrack", "autoTrack").ToBoolean();
+                AutoTrack = ini.Get("sharetrack", "autoTrack").ToBoolean();
             }
             catch (Exception ex)
             {
