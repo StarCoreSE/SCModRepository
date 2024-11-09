@@ -72,6 +72,7 @@ namespace StarCore.ShareTrack
         private void LoadDefaults()
         {
             AllowGridTracking = true;
+            AutoTrack = true;
         }
 
         private static string ReadFileSafe(string fileName)
