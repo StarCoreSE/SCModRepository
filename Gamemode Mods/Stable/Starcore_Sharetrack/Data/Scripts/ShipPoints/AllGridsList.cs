@@ -41,6 +41,9 @@ namespace StarCore.ShareTrack
         {
             [MyKeys.M] = () =>
             {
+                if (!MasterSession.Config.AllowGridTracking)
+                    return;
+
                 var castGrid = RaycastGridFromCamera();
                 if (castGrid == null)
                     return;
