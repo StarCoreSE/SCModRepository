@@ -11,7 +11,7 @@
 				Allows the attached Fusion System assembly to draw hydrogen from tanks.
 				Required in survival, optional in creative.
 			</Description>
-			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+			<Icon>Textures\GUI\Icons\Cubes\Cubes\Caster_ConveyorCap.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="1" y="1" z="1"/>
@@ -40,7 +40,7 @@
 			<ResourceSinkGroup>Factory</ResourceSinkGroup>
 			<OperationalPowerConsumption>0.001</OperationalPowerConsumption>
 			<StandbyPowerConsumption>0.000001</StandbyPowerConsumption>
-			<Capacity>500000</Capacity>
+			<Capacity>250000</Capacity>
 			<InventoryMaxVolume>0.75</InventoryMaxVolume>
 			<InventorySize>
 				<X>2</X>
@@ -63,8 +63,8 @@
 			<PCU>25</PCU>
 			<LeakPercent>0.005</LeakPercent>
 			<GasExplosionMaxRadius>5</GasExplosionMaxRadius>
-			<GasExplosionNeededVolumeToReachMaxRadius>500000</GasExplosionNeededVolumeToReachMaxRadius>
-			<GasExplosionDamageMultiplier>0.00015</GasExplosionDamageMultiplier>
+			<GasExplosionNeededVolumeToReachMaxRadius>250000</GasExplosionNeededVolumeToReachMaxRadius>
+			<GasExplosionDamageMultiplier>0.000075</GasExplosionDamageMultiplier>
 			<GasExplosionSound>WepSmallWarheadExpl</GasExplosionSound>
 			<GasExplosionEffect>Explosion_Warhead_02</GasExplosionEffect>
 			<TieredUpdateTimes>
