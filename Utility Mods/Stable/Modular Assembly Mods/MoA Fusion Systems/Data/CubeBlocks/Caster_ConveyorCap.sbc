@@ -20,10 +20,8 @@
 			<Components>
 				<Component Subtype="SteelPlate" Count="100" />
 				<Component Subtype="Construction" Count="40" />
-				<Component Subtype="MetalGrid" Count="4" />
-				<Component Subtype="LargeTube" Count="8" />
-				<Component Subtype="Reactor" Count="100" />
-				<Component Subtype="Motor" Count="6" />
+				<Component Subtype="LargeTube" Count="20" />
+				<Component Subtype="Motor" Count="15" />
 				<Component Subtype="SteelPlate" Count="60" />
 			</Components>
 			<CriticalComponent Subtype="SteelPlate" Index="0"/>
