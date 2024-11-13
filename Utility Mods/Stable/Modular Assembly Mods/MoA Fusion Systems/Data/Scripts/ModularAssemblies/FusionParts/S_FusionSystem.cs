@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
 using StarCore.FusionSystems.Communication;
 using StarCore.FusionSystems.FusionParts.FusionReactor;
@@ -39,6 +40,7 @@ namespace StarCore.FusionSystems.
 
         public readonly List<FusionReactorLogic> Reactors = new List<FusionReactorLogic>();
         public readonly List<FusionThrusterLogic> Thrusters = new List<FusionThrusterLogic>();
+        public readonly List<IMyGasTank> Tanks = new List<IMyGasTank>();
 
         public SFusionSystem(int physicalAssemblyId)
         {
@@ -134,6 +136,11 @@ namespace StarCore.FusionSystems.
                 }
             }
 
+            if (newPart is IMyGasTank)
+            {
+                Tanks.Add(newPart as IMyGasTank);
+            }
+
             UpdatePower();
         }
 
@@ -156,6 +163,11 @@ namespace StarCore.FusionSystems.
                 var logic = part.GameLogic.GetAs<FusionReactorLogic>();
                 logic.MemberSystem = null;
                 Reactors.Remove(logic);
+            }
+
+            if (part is IMyGasTank)
+            {
+                Tanks.Remove(part as IMyGasTank);
             }
 
             foreach (var arm in Arms.ToList())
@@ -206,9 +218,36 @@ namespace StarCore.FusionSystems.
             PowerGeneration = powerGeneration;
             MaxPowerStored = powerCapacity;
             PowerConsumption = totalPowerUsage;
-            PowerGeneration -= totalPowerUsage;
+
+            // Net PowerGeneration for h2 usage calcs
+            if (PowerStored + PowerGeneration > MaxPowerStored + PowerConsumption)
+                PowerGeneration = MaxPowerStored - PowerStored + PowerConsumption;
+
+            if (!MyAPIGateway.Session.CreativeMode)
+            {
+                double availableGas = Tanks.Sum(t => t.FilledRatio * t.Capacity);
+                double gasNeeded = PowerGeneration * 25;
+
+                if (Tanks.Count == 0 || availableGas <= gasNeeded)
+                {
+                    PowerGeneration = 0;
+                }
+                else if (MyAPIGateway.Session.IsServer)
+                {
+                    foreach (var tank in Tanks)
+                    {
+                        double tankConsumption = gasNeeded < tank.FilledRatio * tank.Capacity ? gasNeeded : tank.FilledRatio * tank.Capacity;
+                        tank.ChangeFilledRatio(tank.FilledRatio - tankConsumption / tank.Capacity, true);
+                        gasNeeded -= tankConsumption;
+
+                        if (gasNeeded <= 0)
+                            break;
+                    }
+                }
+            }
 
             // Update PowerStored
+            PowerStored -= PowerConsumption;
             PowerStored += PowerGeneration;
             if (PowerStored > MaxPowerStored) PowerStored = MaxPowerStored;
             ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "HeatGeneration",
