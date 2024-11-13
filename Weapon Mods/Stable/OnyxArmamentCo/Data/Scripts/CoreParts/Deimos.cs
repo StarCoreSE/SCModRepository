@@ -1,4 +1,4 @@
-﻿using static Scripts.Structure;
+using static Scripts.Structure;
 using static Scripts.Structure.WeaponDefinition;
 using static Scripts.Structure.WeaponDefinition.ModelAssignmentsDef;
 using static Scripts.Structure.WeaponDefinition.HardPointDef;
@@ -188,10 +188,8 @@ namespace Scripts {
             },
             Ammos = new[] {
 
-
-                DeimosPhobosAmmo_Mag,
-                DeimosPhobosAmmoFrag_Mag,
-                DeimosPhobosAmmo_Mag_Ping,
+                DeimosPhobosAmmo,
+                DeimosPhobosAmmoFrag,
                 
                 // Must list all primary, shrapnel, and pattern ammos.
             },
