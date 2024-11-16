@@ -1,22 +1,26 @@
 ﻿using System;
-using System.Text;
 using System.Linq;
+using System.Text;
 using System.Collections.Generic;
-using Sandbox.ModAPI;
+using ProtoBuf;
 using Sandbox.Common.ObjectBuilders;
 using Sandbox.Game;
 using Sandbox.Game.EntityComponents;
-using ProtoBuf;
+using Sandbox.ModAPI;
 using VRage.Game;
+using VRage.Game.Components;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRage.Game.ModAPI.Network;
-using VRage.Sync;
-using VRage.Network;
-using VRage.Game.Components;
 using VRage.ModAPI;
+using VRage.Network;
 using VRage.ObjectBuilders;
+using VRage.Sync;
 using VRageMath;
+using static Draygo.API.HudAPIv2;
+using static VRageRender.MyBillboard;
+using Sandbox.Game.Gui;
+using Draygo.API;
 
 namespace Starcore.FieldGenerator
 {
@@ -83,9 +87,8 @@ namespace Starcore.FieldGenerator
 
         private MyResourceSinkComponent Sink = null;
 
-        private IMyHudNotification notifSiege = null;
-        private IMyHudNotification notifPower = null;
-        private IMyHudNotification notifStability = null;
+        HUDMessage GeneratorHUD;
+        StringBuilder GeneratorHUDContent;
 
         #region Overrides
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
@@ -233,6 +236,8 @@ namespace Starcore.FieldGenerator
                             CancelSiegeMode();
                             SiegeMode.Value = false;
                         }
+
+                       HandleResistence();
                     }
                     else
                         Sink.Update();                   
@@ -246,28 +251,10 @@ namespace Starcore.FieldGenerator
 
             if (IsClientInShip() || IsClientNearShip())
             {
-                if (SiegeMode.Value)
-                {
-                    SetSiegeNotification($"<S.I> Siege Mode Active | {SiegeElapsedTime.Value} / {Config.MaxSiegeTime}", 600);
-                }
-                else if (!SiegeMode.Value && SiegeCooldownActive.Value)
-                {
-                    SetSiegeNotification($"<S.I> Siege Mode On Cooldown | {SiegeCooldownTime.Value}", 600, "Red");
-                }
-
-                if (!Block.IsWorking)
-                {
-                    string reason = Block.IsFunctional ? "Insufficient Power?" : "Block Damaged!";
-                    SetPowerNotification($"<S.I> Generator Core is Offline! | {reason}", 600, "Red");
-                }
-
-                if (!Config.SimplifiedMode)
-                {
-                    SetStabilityNotification($"[Generator Stability: {Stability.Value}]", 600, "Red");
-                }
+                UpdateHUD();
             }
             else
-                return;            
+                PurgeHUDMessage();    
         }
 
         public override bool IsSerialized()
@@ -284,6 +271,8 @@ namespace Starcore.FieldGenerator
         {
             base.Close();
 
+            PurgeHUDMessage();
+           
             if (IsServer)
             {
                 Block.CubeGrid.OnBlockAdded -= OnBlockAdded;
@@ -383,8 +372,14 @@ namespace Starcore.FieldGenerator
 
         private void HandleResistence()
         {
-            if (Block == null || !Block.IsWorking)
+            if (Block == null)
                 return;
+
+            if (!Block.IsWorking)
+            {
+                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(Block.CubeGrid.Name, 1);
+                return;
+            }
 
             if (SiegeMode.Value)
             {
@@ -397,7 +392,7 @@ namespace Starcore.FieldGenerator
 
         private void HandleZeroStability()
         {
-            if (Block == null || !Block.IsWorking)
+            if (Block == null || !Block.IsWorking || Stability.Value != 0)
                 return;
 
             FieldPower.Value = 10;
@@ -776,41 +771,77 @@ namespace Starcore.FieldGenerator
         }
         #endregion
 
-        #region Notifs
-        public void SetSiegeNotification(string text, int aliveTime = 300, string font = MyFontEnum.Green)
+        #region HUD
+        private void UpdateHUD()
         {
-            if (notifSiege == null)
-                notifSiege = MyAPIGateway.Utilities.CreateNotification("", aliveTime, font);
+            if (GeneratorHUDContent == null)
+            {
+                GeneratorHUDContent = new StringBuilder();
+            }
+            GeneratorHUDContent.Clear();
 
-            notifSiege.Hide();
-            notifSiege.Font = font;
-            notifSiege.Text = text;
-            notifSiege.AliveTime = aliveTime;
-            notifSiege.Show();
+            var fieldPower = SiegeMode.Value ? 90 : FieldPower.Value;
+            GeneratorHUDContent.Append(GenerateBar("Field Power:", fieldPower, MaxFieldPower.Value, false));
+
+            if (!Config.SimplifiedMode)
+            {
+                GeneratorHUDContent.Append(GenerateBar("Stability:", Stability.Value, 100, true));
+            }
+
+            if (SiegeMode.Value)
+            {
+                GeneratorHUDContent.Append($"\nSiege Mode Active | {SiegeElapsedTime.Value} / {Config.MaxSiegeTime}");
+            }
+            else if (!SiegeMode.Value && SiegeCooldownActive.Value)
+            {
+                GeneratorHUDContent.Append($"\nSiege Mode On Cooldown | {SiegeCooldownTime.Value}");
+            }
+
+            if (!Block.IsWorking)
+            {
+                string reason = Block.IsFunctional ? "Insufficient Power?" : "Block Damaged!";
+                GeneratorHUDContent.Append($"\nGenerator Core is Offline! | {reason}");
+            }    
+
+            if (GeneratorHUD == null && FieldGeneratorSession.HudAPI.Heartbeat)
+            {
+                GeneratorHUD = new HUDMessage
+                (
+                    Message: GeneratorHUDContent,
+                    Origin: new Vector2D(-1.2, -0.525),              
+                    TimeToLive: -1,
+                    Scale: 0.7f,
+                    HideHud: false,
+                    Blend: BlendTypeEnum.PostPP,
+                    Font: "monospace"
+                );
+
+                GeneratorHUD.Offset = GeneratorHUD.GetTextLength() / 2;
+                GeneratorHUD.Visible = true;
+            }
         }
 
-        public void SetPowerNotification(string text, int aliveTime = 300, string font = MyFontEnum.Green)
+        private string GenerateBar(string label, float value, float maxValue, bool Stability)
         {
-            if (notifPower == null)
-                notifPower = MyAPIGateway.Utilities.CreateNotification("", aliveTime, font);
+            var percentage = MathHelper.Clamp(value / maxValue, 0, 1);
+            var percentageReal = (int)Math.Round(percentage * 40);
 
-            notifPower.Hide();
-            notifPower.Font = font;
-            notifPower.Text = text;
-            notifPower.AliveTime = aliveTime;
-            notifPower.Show();
+            string filledBar = new string('|', percentageReal);
+            string emptyBar = new string(' ', 40 - percentageReal);
+
+            var maxPercentage = Stability ? Math.Round(percentage * 100) : FieldPower.Value;
+
+            return $"{label}\n[{filledBar}{emptyBar}] {maxPercentage}%\n";
         }
 
-        public void SetStabilityNotification(string text, int aliveTime = 300, string font = MyFontEnum.Green)
+        private void PurgeHUDMessage()
         {
-            if (notifStability == null)
-                notifStability = MyAPIGateway.Utilities.CreateNotification("", aliveTime, font);
-
-            notifStability.Hide();
-            notifStability.Font = font;
-            notifStability.Text = text;
-            notifStability.AliveTime = aliveTime;
-            notifStability.Show();
+            if (GeneratorHUD != null)
+            {
+                GeneratorHUD.Visible = false;
+                GeneratorHUD.DeleteMessage();
+                GeneratorHUD = null;
+            }
         }
         #endregion
     }
