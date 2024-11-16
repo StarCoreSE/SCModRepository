@@ -63,8 +63,8 @@ namespace Starcore.FieldGenerator
             SiegeModeToggle.OffText = MyStringId.GetOrCompute("Off");
             SiegeModeToggle.Visible = IsVisible;
             SiegeModeToggle.Enabled = CooldownEnabler;
-            SiegeModeToggle.Getter = (b) => b.GameLogic.GetAs<FieldGenerator>().SiegeMode;
-            SiegeModeToggle.Setter = (b, v) => b.GameLogic.GetAs<FieldGenerator>().SiegeMode = v;
+            SiegeModeToggle.Getter = (b) => b.GameLogic.GetAs<FieldGenerator>().SiegeMode.Value;
+            SiegeModeToggle.Setter = (b, v) => b.GameLogic.GetAs<FieldGenerator>().SiegeMode.Value = v;
             SiegeModeToggle.SupportsMultipleBlocks = true;
             MyAPIGateway.TerminalControls.AddControl<IMyCollector>(SiegeModeToggle);
             #endregion
@@ -84,7 +84,7 @@ namespace Starcore.FieldGenerator
                 var logic = GetLogic(b);
                 if (logic != null)
                 {
-                    return !logic.SiegeMode;
+                    return !logic.SiegeMode.Value;
                 }
                 else
                     return true;
@@ -94,12 +94,12 @@ namespace Starcore.FieldGenerator
                 var logic = GetLogic(b);
                 if (logic != null)
                 {
-                    float value = logic.FieldPower;
+                    float value = logic.FieldPower.Value;
                     w.Append(Math.Round(value, 1, MidpointRounding.ToEven)).Append('%');
                 }
             };
-            FieldPowerSlider.Getter = (b) => b.GameLogic.GetAs<FieldGenerator>().FieldPower;
-            FieldPowerSlider.Setter = (b, v) => b.GameLogic.GetAs<FieldGenerator>().FieldPower = (int)Math.Round(v, 1);
+            FieldPowerSlider.Getter = (b) => b.GameLogic.GetAs<FieldGenerator>().FieldPower.Value;
+            FieldPowerSlider.Setter = (b, v) => b.GameLogic.GetAs<FieldGenerator>().FieldPower.Value = (int)Math.Round(v, 1);
             FieldPowerSlider.SupportsMultipleBlocks = true;
             MyAPIGateway.TerminalControls.AddControl<IMyCollector>(FieldPowerSlider);
             #endregion
@@ -117,7 +117,7 @@ namespace Starcore.FieldGenerator
                 var logic = GetLogic(b);
                 if (logic != null)
                 {
-                    logic.SiegeMode = !logic.SiegeMode;
+                    logic.SiegeMode.Value = !logic.SiegeMode.Value;
                 }
             };
             SiegeToggleAction.Writer = (b, sb) =>
@@ -125,7 +125,7 @@ namespace Starcore.FieldGenerator
                 var logic = GetLogic(b);
                 if (logic != null)
                 {
-                    string boolState = logic.SiegeMode ? "Active" : "Inactive";
+                    string boolState = logic.SiegeMode.Value ? "Active" : "Inactive";
                     sb.Append(boolState);
                 }
             };
@@ -149,7 +149,7 @@ namespace Starcore.FieldGenerator
                 var logic = GetLogic(b);
                 if (logic != null)
                 {
-                    logic.FieldPower += 2.5f;                
+                    logic.FieldPower.Value += 2.5f;                
                 }
             };
             IncreasePowerAction.Writer = (b, sb) =>
@@ -157,7 +157,7 @@ namespace Starcore.FieldGenerator
                 var logic = GetLogic(b);
                 if (logic != null)
                 {
-                    sb.Append($"{logic.FieldPower}%");
+                    sb.Append($"{logic.FieldPower.Value}%");
                 }
             };
             IncreasePowerAction.InvalidToolbarTypes = new List<MyToolbarType>()
@@ -171,7 +171,7 @@ namespace Starcore.FieldGenerator
                 var logic = GetLogic(b);
                 if (logic != null)
                 {
-                    return !logic.SiegeMode;
+                    return !logic.SiegeMode.Value;
                 }
                 else
                     return true;
@@ -189,7 +189,7 @@ namespace Starcore.FieldGenerator
                 var logic = GetLogic(b);
                 if (logic != null)
                 { 
-                    logic.FieldPower -= 2.5f;
+                    logic.FieldPower.Value -= 2.5f;
                 }
             };
             DecreasePowerAction.Writer = (b, sb) =>
@@ -197,7 +197,7 @@ namespace Starcore.FieldGenerator
                 var logic = GetLogic(b);
                 if (logic != null)
                 {
-                    sb.Append($"{logic.FieldPower}%");
+                    sb.Append($"{logic.FieldPower.Value}%");
                 }
             };
             DecreasePowerAction.InvalidToolbarTypes = new List<MyToolbarType>()
@@ -211,7 +211,7 @@ namespace Starcore.FieldGenerator
                 var logic = GetLogic(b);
                 if (logic != null)
                 {
-                    return !logic.SiegeMode;
+                    return !logic.SiegeMode.Value;
                 }
                 else
                     return true;
@@ -227,7 +227,7 @@ namespace Starcore.FieldGenerator
             var logic = GetLogic(block);
             if (logic != null)
             {
-                return logic.MinFieldPower;
+                return logic.MinFieldPower.Value;
             }
             return 0;
         }
@@ -237,7 +237,7 @@ namespace Starcore.FieldGenerator
             var logic = GetLogic(block);
             if (logic != null)
             {
-                return logic.MaxFieldPower;
+                return logic.MaxFieldPower.Value;
             }
             return 0;
         }

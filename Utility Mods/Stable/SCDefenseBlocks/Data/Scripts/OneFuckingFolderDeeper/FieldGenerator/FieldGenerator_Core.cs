@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Sandbox.ModAPI;
 using Sandbox.Common.ObjectBuilders;
+using Sandbox.Game;
 using Sandbox.Game.EntityComponents;
 using ProtoBuf;
 using VRage.Game;
@@ -17,8 +18,6 @@ using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRageMath;
 
-using Starcore.FieldGenerator.Networking.Custom;
-
 namespace Starcore.FieldGenerator
 {
     public class Config
@@ -30,6 +29,7 @@ namespace Starcore.FieldGenerator
 
         public const int MaxSiegeTime = 150;
         public const int SiegePowerDraw = 900;
+        public const float SiegeModeResistence = 0.9f;
 
         public const int DamageEventThreshold = 6;
         public const int ResetInterval = 3;
@@ -49,140 +49,29 @@ namespace Starcore.FieldGenerator
     {
         private IMyCubeBlock Block;
         private readonly bool IsServer = MyAPIGateway.Session.IsServer;
+        public readonly Guid SettingsID = new Guid("7A7AC398-FAE3-44E5-ABD5-8AE49434DDF6");
 
         private int _damageEventCounter = 0;
         private float _stabilityChange = 0;
         private int _resetCounter = 0;
+        private bool _lowStability = false;
 
         private int initValueDelayTicks = 60; // 1 second delay (60 ticks)
         private bool valuesInitialized = false;
 
         #region Sync Properties
-        public bool SiegeMode
-        {
-            get { return _siegeMode; }
-            set
-            {
-                if (_siegeMode != value)
-                {
-                    _siegeMode = value;
-                    BoolSyncPacket.SyncBoolProperty(Block.EntityId, nameof(SiegeMode), _siegeMode);
-                }
-            }
-        }
-        public bool _siegeMode;
+        public MySync<bool, SyncDirection.BothWays> SiegeMode;
+        public MySync<bool, SyncDirection.BothWays> SiegeCooldownActive;
+        public MySync<bool, SyncDirection.FromServer> GridStopped = null;
 
-        public bool SiegeCooldownActive
-        {
-            get { return _siegeCooldownActive; }
-            set
-            {
-                if (_siegeCooldownActive != value)
-                {
-                    _siegeCooldownActive = value;
-                    BoolSyncPacket.SyncBoolProperty(Block.EntityId, nameof(SiegeCooldownActive), _siegeCooldownActive);
-                }
-            }
-        }
-        public bool _siegeCooldownActive;
+        public MySync<int, SyncDirection.BothWays> SiegeElapsedTime;
+        public MySync<int, SyncDirection.BothWays> SiegeCooldownTime;
 
-        public int SiegeElapsedTime
-        {
-            get { return _siegeElapsedTime; }
-            set
-            {
-                if (_siegeElapsedTime != value)
-                {
-                    _siegeElapsedTime = value;
-                    IntSyncPacket.SyncIntProperty(Block.EntityId, nameof(SiegeElapsedTime), _siegeElapsedTime);
-                }
-            }
-        }
-        public int _siegeElapsedTime;
-
-        public int SiegeCooldownTime
-        {
-            get { return _siegeCooldownTime; }
-            set
-            {
-                if (_siegeCooldownTime != value)
-                {
-                    _siegeCooldownTime = value;
-                    IntSyncPacket.SyncIntProperty(Block.EntityId, nameof(SiegeCooldownTime), _siegeCooldownTime);
-                }
-            }
-        }
-        public int _siegeCooldownTime;
-
-        public float FieldPower
-        {
-            get { return _fieldPower; }
-            set
-            {
-                if (_fieldPower != value)
-                {               
-                    _fieldPower = MathHelper.Clamp(value, MinFieldPower, MaxFieldPower);
-                    FloatSyncPacket.SyncFloatProperty(Block.EntityId, nameof(FieldPower), _fieldPower);
-                }
-            }
-        }
-        public float _fieldPower;
-
-        public float MaxFieldPower
-        {
-            get { return _maxFieldPower; }
-            set
-            {
-                if (_maxFieldPower != value)
-                {
-                    _maxFieldPower = value;
-                    FloatSyncPacket.SyncFloatProperty(Block.EntityId, nameof(MaxFieldPower), _maxFieldPower);
-                }
-            }
-        }
-        public float _maxFieldPower;
-
-        public float MinFieldPower
-        {
-            get { return _minFieldPower; }
-            set
-            {
-                if (_minFieldPower != value)
-                {
-                    _minFieldPower = value;
-                    FloatSyncPacket.SyncFloatProperty(Block.EntityId, nameof(MinFieldPower), _minFieldPower);
-                }
-            }
-        }
-        public float _minFieldPower;
-
-        public float SizeModifier
-        {
-            get { return _sizeModifier; }
-            set
-            {
-                if (_sizeModifier != value)
-                {
-                    _sizeModifier = value;
-                    FloatSyncPacket.SyncFloatProperty(Block.EntityId, nameof(SizeModifier), _sizeModifier);
-                }
-            }
-        }
-        public float _sizeModifier;
-
-        public float Stability
-        {
-            get { return _stability; }
-            set
-            {
-                if (_stability != value)
-                {
-                    _stability = value;
-                    FloatSyncPacket.SyncFloatProperty(Block.EntityId, nameof(Stability), _stability);
-                }
-            }
-        }
-        public float _stability;
+        public MySync<float, SyncDirection.BothWays> FieldPower; // add on value change hook for Serverside Resistence
+        public MySync<float, SyncDirection.BothWays> MaxFieldPower;
+        public MySync<float, SyncDirection.BothWays> MinFieldPower;
+        public MySync<float, SyncDirection.BothWays> SizeModifier;
+        public MySync<float, SyncDirection.BothWays> Stability; // add on value change for handling zero stability if (IsServer && _stability == 0) HandleZeroStability();
         #endregion
 
         private Dictionary<string, IMyModelDummy> _coreDummies = new Dictionary<string, IMyModelDummy>();
@@ -192,19 +81,18 @@ namespace Starcore.FieldGenerator
         private List<IMySlimBlock> _gridBlocks = new List<IMySlimBlock>();
         private int _gridBlockCount;             
 
-        public MySync<bool, SyncDirection.FromServer> GridStopped = null;
-
         private MyResourceSinkComponent Sink = null;
 
         private IMyHudNotification notifSiege = null;
         private IMyHudNotification notifPower = null;
+        private IMyHudNotification notifStability = null;
 
         #region Overrides
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             base.Init(objectBuilder);
 
-            Block = (IMyCubeBlock)Entity;
+            Block = (IMyFunctionalBlock)Entity;
 
             NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
         }
@@ -216,21 +104,41 @@ namespace Starcore.FieldGenerator
             if (Block?.CubeGrid?.Physics == null)
                 return;
 
-            FieldGeneratorControls.DoOnce(ModContext);
+            FieldGeneratorControls.DoOnce(ModContext);        
 
             Sink = Block.Components.Get<MyResourceSinkComponent>();
-            Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, CalculatePowerDraw);
+            if (Sink != null)
+            {
+                Sink.SetRequiredInputFuncByType(MyResourceDistributorComponent.ElectricityId, CalculatePowerDraw);
+                Sink.Update();
+            }        
 
             if (IsServer)
             {
                 Block.Model.GetDummies(_coreDummies);                         
-
                 Block.CubeGrid.GetBlocks(_gridBlocks);
                 _gridBlockCount = _gridBlocks.Count;
 
-                MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0, HandleResistence);
+                LoadSettings();
+
+                if (!Config.SimplifiedMode)
+                {
+                    MyAPIGateway.Session.DamageSystem.RegisterBeforeDamageHandler(0, HandleDamageEvents);
+                }          
+
                 Block.CubeGrid.OnBlockAdded += OnBlockAdded;
                 Block.CubeGrid.OnBlockRemoved += OnBlockRemoved;
+                
+                SiegeCooldownActive.ValueChanged += (obj) => SaveSettings();
+                SiegeElapsedTime.ValueChanged += (obj) => SaveSettings();
+                SiegeCooldownTime.ValueChanged += (obj) => SaveSettings();
+                MaxFieldPower.ValueChanged += (obj) => SaveSettings();
+                MinFieldPower.ValueChanged += (obj) => SaveSettings();
+                SizeModifier.ValueChanged += (obj) => SaveSettings();
+
+                SiegeMode.ValueChanged += SiegeMode_ValueChanged;
+                FieldPower.ValueChanged += FieldPower_ValueChanged;
+                Stability.ValueChanged += Stability_ValueChanged;
             }
 
             if (!IsServer)
@@ -240,77 +148,96 @@ namespace Starcore.FieldGenerator
 
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
             NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
-        }
+        }  
 
         public override void UpdateAfterSimulation()
         {
             base.UpdateAfterSimulation();
 
-            if (IsServer && !valuesInitialized)
+            if (IsServer)
             {
-                if (initValueDelayTicks > 0)
+                if (!valuesInitialized)
                 {
-                    initValueDelayTicks--;
-                }
-                else
-                {
-                    Stability = 100;
-                    InitExistingUpgrades();                
-                    valuesInitialized = true;
+                    if (initValueDelayTicks > 0)
+                    {
+                        initValueDelayTicks--;
+                    }
+                    else
+                    {
+                        Stability.Value = 100;
+                        InitExistingUpgrades();
+                        valuesInitialized = true;
+                    }
                 }
             }
-
-            if (!IsServer)
-                return;
 
             if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0)
             {
                 if (Block.IsWorking)
                 {
-                    Sink.Update();
-
-                    UpdateSiegeState();             
-
-                    if (!Config.SimplifiedMode)
+                    if (IsServer)
                     {
-                        SizeModifier = CalculateSizeModifier();
+                        UpdateSiegeState();
 
-                        if (_damageEventCounter > Config.DamageEventThreshold)
+                        if (!Config.SimplifiedMode)
                         {
-                            _stabilityChange = -((1.6666666666667f * SizeModifier) * (FieldPower / 50));
-                        }
-                        else
-                        {
-                            _stabilityChange = 3;
-                        }
+                            if (_lowStability && Stability.Value < 100)
+                            {
+                                Stability.Value = MathHelper.Clamp(Stability + 3, 0, 100);
+                                HandleZeroStability();
+                                if (Stability.Value == 100)
+                                {
+                                    _lowStability = false;
+                                }
+                                return;
+                            }
 
-                        _stability = MathHelper.Clamp(_stability + _stabilityChange, 0, 100);
+                            SizeModifier.Value = CalculateSizeModifier();
 
-                        if (_resetCounter < Config.ResetInterval)
-                        {
-                            _resetCounter++;
-                            return;
+                            if (_damageEventCounter > Config.DamageEventThreshold)
+                            {
+                                _stabilityChange = -((1.6666666666667f * SizeModifier.Value) * (FieldPower.Value / 50));
+                            }
+                            else
+                            {
+                                _stabilityChange = 3;
+                            }
+
+                            Stability.Value = MathHelper.Clamp(Stability + _stabilityChange, 0, 100);
+
+                            if (_resetCounter < Config.ResetInterval)
+                            {
+                                _resetCounter++;
+                                return;
+                            }
+                            else if (_resetCounter >= Config.ResetInterval)
+                            {
+                                _resetCounter = 0;
+                                _damageEventCounter = 0;
+                                return;
+                            }
                         }
-                        else if (_resetCounter >= Config.ResetInterval)
-                        {
-                            _resetCounter = 0;
-                            _damageEventCounter = 0;
-                            return;
-                        }
-                    }                  
+                    }
+                    else
+                        Sink.Update();
                 }
                 else if (!Block.IsWorking)
                 {
-                    if (FieldPower > 0)
-                        FieldPower = 0;
-                    
-                    if (SiegeMode)
+                    if (IsServer)
                     {
-                        CancelSiegeMode();
-                        SiegeMode = false;                 
-                    }                                         
+                        if (FieldPower.Value > 0)
+                            FieldPower.Value = 0;
+
+                        if (SiegeMode.Value)
+                        {
+                            CancelSiegeMode();
+                            SiegeMode.Value = false;
+                        }
+                    }
+                    else
+                        Sink.Update();                   
                 }
-            }
+            }  
         }
 
         public override void UpdateAfterSimulation10()
@@ -319,13 +246,13 @@ namespace Starcore.FieldGenerator
 
             if (IsClientInShip() || IsClientNearShip())
             {
-                if (SiegeMode)
+                if (SiegeMode.Value)
                 {
-                    SetSiegeNotification($"<S.I> Siege Mode Active | {SiegeElapsedTime} / {Config.MaxSiegeTime}", 600);
+                    SetSiegeNotification($"<S.I> Siege Mode Active | {SiegeElapsedTime.Value} / {Config.MaxSiegeTime}", 600);
                 }
-                else if (!SiegeMode && SiegeCooldownActive)
+                else if (!SiegeMode.Value && SiegeCooldownActive.Value)
                 {
-                    SetSiegeNotification($"<S.I> Siege Mode On Cooldown | {SiegeCooldownTime}", 600, "Red");
+                    SetSiegeNotification($"<S.I> Siege Mode On Cooldown | {SiegeCooldownTime.Value}", 600, "Red");
                 }
 
                 if (!Block.IsWorking)
@@ -333,9 +260,24 @@ namespace Starcore.FieldGenerator
                     string reason = Block.IsFunctional ? "Insufficient Power?" : "Block Damaged!";
                     SetPowerNotification($"<S.I> Generator Core is Offline! | {reason}", 600, "Red");
                 }
+
+                if (!Config.SimplifiedMode)
+                {
+                    SetStabilityNotification($"[Generator Stability: {Stability.Value}]", 600, "Red");
+                }
             }
             else
                 return;            
+        }
+
+        public override bool IsSerialized()
+        {
+            if (Block == null )
+                return false;
+
+            SaveSettings();
+
+            return base.IsSerialized();
         }
 
         public override void Close()
@@ -346,6 +288,17 @@ namespace Starcore.FieldGenerator
             {
                 Block.CubeGrid.OnBlockAdded -= OnBlockAdded;
                 Block.CubeGrid.OnBlockRemoved -= OnBlockRemoved;
+
+                SiegeCooldownActive.ValueChanged -= (obj) => SaveSettings();
+                SiegeElapsedTime.ValueChanged -= (obj) => SaveSettings();
+                SiegeCooldownTime.ValueChanged -= (obj) => SaveSettings();
+                MaxFieldPower.ValueChanged -= (obj) => SaveSettings();
+                MinFieldPower.ValueChanged -= (obj) => SaveSettings();
+                SizeModifier.ValueChanged -= (obj) => SaveSettings();
+
+                SiegeMode.ValueChanged += SiegeMode_ValueChanged;
+                FieldPower.ValueChanged -= FieldPower_ValueChanged;
+                Stability.ValueChanged -= Stability_ValueChanged;
             }
 
             if (!IsServer)
@@ -357,7 +310,7 @@ namespace Starcore.FieldGenerator
         }
         #endregion
 
-        #region Subscription Event Handlers
+        #region Event Handlers
         private void OnBlockAdded(IMySlimBlock block)
         {
             if (block == null)
@@ -370,7 +323,7 @@ namespace Starcore.FieldGenerator
 
             if (block.FatBlock != null && block.FatBlock.BlockDefinition.SubtypeId == "FieldGen_Capacity_Upgrade")
             {
-                if (IsNeighbour(block)/* && IsModuleValid(block)*/)
+                if (IsNeighbour(block) && IsModuleValid(block))
                 {
                     long entityId = block.FatBlock.EntityId;
 
@@ -409,7 +362,7 @@ namespace Starcore.FieldGenerator
             }
         }
 
-        private void HandleResistence(object target, ref MyDamageInformation info)
+        private void HandleDamageEvents(object target, ref MyDamageInformation info)
         {
             if (Block == null || !Block.IsWorking)
                 return;
@@ -423,21 +376,59 @@ namespace Starcore.FieldGenerator
                 if (targetGrid.EntityId != Block.CubeGrid.EntityId)
                     return;
 
-                if (SiegeMode)
-                {
-                    info.Amount *= 0.1f;
-                    return;
-                }
-
-                if (!Config.SimplifiedMode)
-                {
-                    _damageEventCounter++;
-                }
-
-                float roundedModifier = (float)Math.Round(1 - ((double)FieldPower / 100), 3);
-                info.Amount *= roundedModifier;
+                _damageEventCounter++;
                 return;
             }
+        }
+
+        private void HandleResistence()
+        {
+            if (Block == null || !Block.IsWorking)
+                return;
+
+            if (SiegeMode.Value)
+            {
+                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(Block.CubeGrid.Name, (1 - Config.SiegeModeResistence));
+                return;
+            }
+            else
+                MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(Block.CubeGrid.Name, (float)Math.Round(1 - ((double)FieldPower.Value / 100), 3));
+        }
+
+        private void HandleZeroStability()
+        {
+            if (Block == null || !Block.IsWorking)
+                return;
+
+            FieldPower.Value = 10;
+            _lowStability = true;
+        }
+
+        private void SiegeMode_ValueChanged(MySync<bool, SyncDirection.BothWays> obj)
+        {
+            SaveSettings();
+            Sink.Update();
+
+            if (IsServer)
+                HandleResistence();
+        }
+
+        private void FieldPower_ValueChanged(MySync<float, SyncDirection.BothWays> obj)
+        {
+            FieldPower.Value = MathHelper.Clamp(obj.Value, MinFieldPower.Value, MaxFieldPower.Value);
+            SaveSettings();
+            Sink.Update();
+
+            if (IsServer)   
+                HandleResistence();
+        }
+
+        private void Stability_ValueChanged(MySync<float, SyncDirection.BothWays> obj)
+        {
+            SaveSettings();
+
+            if (IsServer)
+                HandleZeroStability();
         }
 
         private void OnGridStopValueChange(MySync<bool, SyncDirection.FromServer> obj)
@@ -450,12 +441,12 @@ namespace Starcore.FieldGenerator
         #region Siege Mode
         private void UpdateSiegeState()
         {
-            if (SiegeMode && !SiegeCooldownActive)
+            if (SiegeMode.Value && !SiegeCooldownActive.Value)
             {
-                if (SiegeElapsedTime + 1 <= Config.MaxSiegeTime)
-                {
-                    SiegeElapsedTime++;
-                    SiegeBlockEnabler(_gridBlocks, false);
+                if (SiegeElapsedTime.Value + 1 <= Config.MaxSiegeTime)
+                {                
+                    SiegeElapsedTime.Value++;                 
+                    SiegeBlockEnabler(_gridBlocks, false);                   
 
                     if (Block.CubeGrid.Physics.LinearVelocity != Vector3D.Zero)
                     {
@@ -467,26 +458,26 @@ namespace Starcore.FieldGenerator
                 else
                 {
                     EndSiegeMode();
-                    SiegeMode = false;
+                    SiegeMode.Value = false;
                     return;
                 }
             }
 
-            if (!SiegeMode && !SiegeCooldownActive && SiegeElapsedTime > 0)
+            if (!SiegeMode.Value && !SiegeCooldownActive.Value && SiegeElapsedTime.Value > 0)
             {
                 EndSiegeMode();
                 return;
             }
 
-            if (SiegeCooldownActive)
+            if (SiegeCooldownActive.Value)
             {
-                if (SiegeCooldownTime > 0)
+                if (SiegeCooldownTime.Value > 0)
                 {
-                    SiegeCooldownTime--;
+                    SiegeCooldownTime.Value--;
                 }
                 else
                 {
-                    SiegeCooldownActive = false;
+                    SiegeCooldownActive.Value = false;
                 }
             }
         }
@@ -522,9 +513,9 @@ namespace Starcore.FieldGenerator
 
             SiegeBlockEnabler(_gridBlocks, true);
 
-            SiegeCooldownTime = (SiegeElapsedTime > 5) ? (SiegeElapsedTime * 2) : 5;
-            SiegeElapsedTime = 0;
-            SiegeCooldownActive = true;
+            SiegeCooldownTime.Value = (SiegeElapsedTime.Value > 5) ? (SiegeElapsedTime.Value * 2) : 5;
+            SiegeElapsedTime.Value = 0;
+            SiegeCooldownActive.Value = true;
         }
 
         private void CancelSiegeMode()
@@ -534,8 +525,8 @@ namespace Starcore.FieldGenerator
 
             SiegeBlockEnabler(_gridBlocks, true);
 
-            SiegeCooldownTime = 0;
-            SiegeElapsedTime = 0;
+            SiegeCooldownTime.Value = 0;
+            SiegeElapsedTime.Value = 0;
         }
         #endregion
 
@@ -627,11 +618,11 @@ namespace Starcore.FieldGenerator
 
         private void CalculateUpgradeAmounts()
         {
-            MaxFieldPower = MinFieldPower + (_moduleCount * Config.PerModuleAmount);
+            MaxFieldPower.Value = MinFieldPower.Value + (_moduleCount * Config.PerModuleAmount);
 
-            if (FieldPower > MaxFieldPower)
+            if (FieldPower.Value > MaxFieldPower.Value)
             {
-                FieldPower = MaxFieldPower;
+                FieldPower.Value = MaxFieldPower.Value;
             }
         }
 
@@ -645,13 +636,13 @@ namespace Starcore.FieldGenerator
 
         private float CalculatePowerDraw()
         {
-            if (SiegeMode)
+            if (SiegeMode.Value)
             {
                 return Config.SiegePowerDraw;
             }
 
             float maxPossibleFieldPower = Config.PerModuleAmount * Config.MaxModuleCount;
-            float clampedFieldPower = MathHelper.Clamp(FieldPower, 0, maxPossibleFieldPower);
+            float clampedFieldPower = MathHelper.Clamp(FieldPower.Value, 0, maxPossibleFieldPower);
             float t = clampedFieldPower / maxPossibleFieldPower;
 
             return Config.MinPowerDraw + t * (Config.MaxPowerDraw - Config.MinPowerDraw);
@@ -693,7 +684,96 @@ namespace Starcore.FieldGenerator
             }                          
 
             return false;
-        }       
+        }
+        #endregion
+
+        #region Settings
+        bool LoadSettings()
+        {
+            if (Block.Storage == null)
+            {
+                Log.Info($"LoadSettings: Block storage is null for {Block.EntityId}");
+                return false;
+            }
+
+            string rawData;
+            if (!Block.Storage.TryGetValue(SettingsID, out rawData))
+            {
+                Log.Info($"LoadSettings: No data found for {Block.EntityId}");
+                return false;
+            }
+
+            try
+            {
+                var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<FieldGenSettings>(Convert.FromBase64String(rawData));
+
+                if (loadedSettings != null)
+                {
+                    Log.Info($"LoadSettings: Successfully loaded settings for {Block.EntityId}");
+
+                    SiegeMode.Value = loadedSettings.Saved_SiegeMode;
+                    SiegeCooldownActive.Value = loadedSettings.Saved_SiegeCooldownActive;
+                    SiegeElapsedTime.Value = loadedSettings.Saved_SiegeElapsedTime;
+                    SiegeCooldownTime.Value = loadedSettings.Saved_SiegeCooldownTime;
+                    FieldPower.Value = loadedSettings.Saved_FieldPower;
+                    MaxFieldPower.Value = loadedSettings.Saved_MaxFieldPower;
+                    MinFieldPower.Value = loadedSettings.Saved_MinFieldPower;
+                    SizeModifier.Value = loadedSettings.Saved_SizeModifier;
+                    Stability.Value = loadedSettings.Saved_Stability;
+
+
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error loading settings for {Block.EntityId}!\n{e}");
+            }
+
+            return false;
+        }
+
+        void SaveSettings()
+        {
+            if (Block == null)
+            {
+                Log.Info("SaveSettings called but Block is null.");
+                return;
+            }
+
+            try
+            {
+                if (MyAPIGateway.Utilities == null)
+                    throw new NullReferenceException($"MyAPIGateway.Utilities == null; entId={Entity?.EntityId};");
+
+                if (Block.Storage == null)
+                {
+                    Log.Info($"Creating new storage for {Block.EntityId}");
+                    Block.Storage = new MyModStorageComponent();
+                }
+
+                var settings = new FieldGenSettings
+                {
+                    Saved_SiegeMode = SiegeMode.Value,
+                    Saved_SiegeCooldownActive = SiegeCooldownActive.Value,
+                    Saved_SiegeElapsedTime = SiegeElapsedTime.Value,
+                    Saved_SiegeCooldownTime = SiegeCooldownTime.Value,
+                    Saved_FieldPower = FieldPower.Value,
+                    Saved_MaxFieldPower = MaxFieldPower.Value,
+                    Saved_MinFieldPower = MinFieldPower.Value,
+                    Saved_SizeModifier = SizeModifier.Value,
+                    Saved_Stability = Stability.Value,
+                };
+
+                string serializedData = Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(settings));
+                Block.Storage.SetValue(SettingsID, serializedData);
+                Log.Info($"SaveSettings: Successfully saved settings for {Block.EntityId}");
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error saving settings for {Block.EntityId}!\n{e}");
+            }
+        }
         #endregion
 
         #region Notifs
@@ -720,6 +800,49 @@ namespace Starcore.FieldGenerator
             notifPower.AliveTime = aliveTime;
             notifPower.Show();
         }
+
+        public void SetStabilityNotification(string text, int aliveTime = 300, string font = MyFontEnum.Green)
+        {
+            if (notifStability == null)
+                notifStability = MyAPIGateway.Utilities.CreateNotification("", aliveTime, font);
+
+            notifStability.Hide();
+            notifStability.Font = font;
+            notifStability.Text = text;
+            notifStability.AliveTime = aliveTime;
+            notifStability.Show();
+        }
         #endregion
+    }
+
+    [ProtoContract]
+    public class FieldGenSettings
+    {
+        [ProtoMember(41)]
+        public bool Saved_SiegeMode;
+
+        [ProtoMember(42)]
+        public bool Saved_SiegeCooldownActive;
+
+        [ProtoMember(43)]
+        public int Saved_SiegeElapsedTime;
+
+        [ProtoMember(44)]
+        public int Saved_SiegeCooldownTime;
+
+        [ProtoMember(45)]
+        public float Saved_FieldPower;
+        
+        [ProtoMember(46)]
+        public float Saved_MaxFieldPower;
+        
+        [ProtoMember(47)]
+        public float Saved_MinFieldPower;
+        
+        [ProtoMember(48)]
+        public float Saved_SizeModifier;
+        
+        [ProtoMember(49)]
+        public float Saved_Stability;
     }
 }
