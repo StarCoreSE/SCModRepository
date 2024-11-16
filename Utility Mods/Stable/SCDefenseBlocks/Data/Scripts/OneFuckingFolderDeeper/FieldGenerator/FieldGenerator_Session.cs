@@ -10,22 +10,17 @@ using Sandbox.ModAPI;
 namespace Starcore.FieldGenerator
 {
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
-    public class FieldGeneratorSession : MySessionComponentBase
-    {
+    public class FieldGeneratorSession : MySessionComponentBase {
         public static WcApi CoreSysAPI;
 
-        public override void LoadData()
-        {
+        public override void LoadData() {
             base.LoadData();
-
             CoreSysAPI = new WcApi();
             CoreSysAPI.Load();
         }
 
-        protected override void UnloadData()
-        {
-            if (CoreSysAPI.IsReady)
-            {
+        protected override void UnloadData() {
+            if (CoreSysAPI?.IsReady == true) {
                 CoreSysAPI.Unload();
                 CoreSysAPI = null;
             }

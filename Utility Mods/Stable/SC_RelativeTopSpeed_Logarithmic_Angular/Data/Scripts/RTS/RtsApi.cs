@@ -28,9 +28,12 @@ namespace RelativeTopSpeedGV
 
         public void Unload()
         {
-            MyAPIGateway.Utilities.UnregisterMessageHandler(ChannelId, HandleMessage);
-            IsReady = false;
-            isRegistered = false;
+            if (isRegistered)
+            {
+                MyAPIGateway.Utilities.UnregisterMessageHandler(ChannelId, HandleMessage);
+                IsReady = false;
+                isRegistered = false;
+            }
         }
 
         private void HandleMessage(object obj)

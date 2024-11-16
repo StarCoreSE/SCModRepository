@@ -59,6 +59,22 @@ namespace SC.SUGMA.Commands
             MyAPIGateway.Utilities.ShowMessage("SUGMA", "Match ended.");
         }
 
+        public static void Pause(string[] args)
+        {
+            if (MyAPIGateway.Session.IsServer)
+                new PauseRequestPacket().Received(0);
+            else
+                HeartNetwork.I.SendToServer(new PauseRequestPacket());
+        }
+
+        public static void ClearBoard(string[] args)
+        {
+            if (MyAPIGateway.Session.IsServer)
+                new ClearBoardRequestPacket().Received(0);
+            else
+                HeartNetwork.I.SendToServer(new ClearBoardRequestPacket());
+        }
+
         #endregion
 
         //public static void SetMatchTime(string[] args)

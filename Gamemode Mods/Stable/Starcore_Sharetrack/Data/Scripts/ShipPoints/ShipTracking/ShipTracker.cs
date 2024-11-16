@@ -194,7 +194,7 @@ namespace StarCore.ShareTrack.ShipTracking
             var shieldController = ShieldApi.GetShieldBlock(Grid);
             if (shieldController == null)
                 OriginalMaxShieldHealth = -1;
-            if (OriginalMaxShieldHealth == -1 && !ShieldApi.IsFortified(shieldController))
+            if (!ShieldApi.IsFortified(shieldController))
                 OriginalMaxShieldHealth = MaxShieldHealth;
 
             // TODO: Update pilots
@@ -205,7 +205,7 @@ namespace StarCore.ShareTrack.ShipTracking
             }
 
             bool bufferIsFunctional = IsFunctional;
-            IsFunctional = TotalPower > 0 && TotalTorque > 0 && CockpitCount > 0;
+            IsFunctional = TotalPowerBlocks > 0 && TotalTorque > 0 && CockpitCount > 0;
             if (bufferIsFunctional != IsFunctional)
             {
                 TrackingManager.I.OnShipAliveChanged?.Invoke(Grid, IsFunctional);
@@ -358,7 +358,7 @@ namespace StarCore.ShareTrack.ShipTracking
                                  30 / Math.Max(maxAngle, angle * angle * angle);
                 _nametag.Origin = new Vector2D(targetHudPos.X,
                     targetHudPos.Y + MathHelper.Clamp(-0.000125 * distance + 0.25, 0.05, 0.25));
-                _nametag.Visible = visible && AllGridsList.NametagViewState != NametagSettings.None;
+                _nametag.Visible = visible && AllGridsList.NametagViewState != NametagSettings.None && (MyAPIGateway.Session?.Player?.Controller?.ControlledEntity?.Entity as IMyCockpit)?.CubeGrid != Grid;
 
                 _nametag.Message.Clear();
 
@@ -485,6 +485,17 @@ namespace StarCore.ShareTrack.ShipTracking
         }
 
         public float TotalPower => Grid?.ResourceDistributor?.MaxAvailableResourceByType(MyResourceDistributorComponent.ElectricityId) ?? 0;
+
+        public int TotalPowerBlocks
+        {
+            get
+            {
+                int total = 0;
+                foreach (var stats in _gridStats.Values)
+                    total += stats.TotalPowerBlocks;
+                return total;
+            }
+        }
 
         public Dictionary<string, int> SpecialBlockCounts
         {

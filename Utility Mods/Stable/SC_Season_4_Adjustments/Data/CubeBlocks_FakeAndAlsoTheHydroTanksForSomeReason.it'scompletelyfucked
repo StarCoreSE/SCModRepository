@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <TerminalBlocks>
+  <CubeBlocks>
     <Definition>
       <Id>
         <TypeId>TerminalBlock</TypeId>
@@ -80,9 +80,9 @@
 
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_RadioAntennaDefinition">
+    <Definition>
       <Id>
-        <TypeId>TerminalBlock</TypeId>
+        <TypeId>CubeBlock</TypeId>
         <SubtypeId>LargeFakeBlockRadioAntenna</SubtypeId>
       </Id>
       <DisplayName>Fake Greeble Antenna</DisplayName>
@@ -124,7 +124,7 @@
       <IsAirTight>false</IsAirTight>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_RefineryDefinition">
+    <Definition>
       <Id>
         <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeRefineryIndustrial</SubtypeId>
@@ -217,7 +217,7 @@
       <DLC>HeavyIndustry</DLC>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_OxygenGeneratorDefinition">
+    <Definition>
       <Id>
         <TypeId>TerminalBlock</TypeId>
         <SubtypeId>OxygenGenerator</SubtypeId>
@@ -311,7 +311,7 @@
       </TieredUpdateTimes>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_OxygenFarmDefinition">
+    <Definition>
       <Id>
         <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeBlockOxygenFarm</SubtypeId>
@@ -376,7 +376,7 @@
       <PCU>25</PCU>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_UpgradeModuleDefinition">
+    <Definition>
       <Id>
         <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeProductivityModule</SubtypeId>
@@ -430,7 +430,7 @@
       <PCU>1</PCU>
       <IsAirTight>false</IsAirTight>
     </Definition>
-    <Definition xsi:type="MyObjectBuilder_UpgradeModuleDefinition">
+    <Definition>
       <Id>
         <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeEffectivenessModule</SubtypeId>
@@ -486,7 +486,7 @@
       <PCU>1</PCU>
       <IsAirTight>false</IsAirTight>
     </Definition>
-    <Definition xsi:type="MyObjectBuilder_UpgradeModuleDefinition">
+    <Definition>
       <Id>
         <TypeId>TerminalBlock</TypeId>
         <SubtypeId>LargeEnergyModule</SubtypeId>
@@ -543,7 +543,7 @@
       <IsAirTight>false</IsAirTight>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_GasTankDefinition">
+    <Definition>
       <Id>
         <TypeId>TerminalBlock</TypeId>
         <SubtypeId>OxygenTank</SubtypeId>
@@ -623,7 +623,7 @@
         <unsignedInt>600</unsignedInt>
       </TieredUpdateTimes>
     </Definition>
-    <Definition xsi:type="MyObjectBuilder_CockpitDefinition">
+    <Definition>
       <Id>
         <TypeId>TerminalBlock</TypeId>
         <SubtypeId>PassengerSeatLarge</SubtypeId>
@@ -682,7 +682,7 @@
       <PCU>15</PCU>
       <IsAirTight>false</IsAirTight>
     </Definition>
-    <Definition xsi:type="MyObjectBuilder_TargetDummyBlockDefinition">
+    <Definition>
       <Id>
         <TypeId>TerminalBlock</TypeId>
         <SubtypeId>TargetDummy</SubtypeId>
@@ -757,7 +757,7 @@
       <MinFillFactor>.2</MinFillFactor>
       <MaxFillFactor>.6</MaxFillFactor>
     </Definition>
-    <Definition xsi:type="MyObjectBuilder_VendingMachineDefinition">
+    <Definition>
       <Id>
         <TypeId>TerminalBlock</TypeId>
         <SubtypeId>VendingMachine</SubtypeId>
@@ -815,7 +815,7 @@
       <DLC>Economy</DLC>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_StoreBlockDefinition">
+    <Definition>
       <Id>
         <TypeId>TerminalBlock</TypeId>
         <SubtypeId>AtmBlock</SubtypeId>
@@ -867,7 +867,7 @@
       <DLC>Economy</DLC>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_StoreBlockDefinition">
+    <Definition>
       <Id>
         <TypeId>TerminalBlock</TypeId>
         <SubtypeId>StoreBlock</SubtypeId>
@@ -1584,7 +1584,7 @@
       <DLC>Warfare2</DLC>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_GasTankDefinition">
+    <Definition>
       <Id>
         <TypeId>OxygenTank</TypeId>
         <SubtypeId>LargeHydrogenTankIndustrial</SubtypeId>
@@ -1671,7 +1671,7 @@
       <DLC>HeavyIndustry</DLC>
     </Definition>
 
-    <Definition xsi:type="MyObjectBuilder_GasTankDefinition">
+    <Definition>
       <Id>
         <TypeId>OxygenTank</TypeId>
         <SubtypeId>LargeHydrogenTank</SubtypeId>
@@ -1754,7 +1754,7 @@
       </TieredUpdateTimes>
     </Definition>
 	
-    <Definition xsi:type="MyObjectBuilder_GasTankDefinition">
+    <Definition>
             <Id>
                 <TypeId>OxygenTank</TypeId>
                 <SubtypeId>LargeHydrogenTankSmall</SubtypeId>
@@ -1830,5 +1830,5 @@
             </TieredUpdateTimes>
         </Definition>
         
-    </TerminalBlocks>
+    </CubeBlocks>
 </Definitions>

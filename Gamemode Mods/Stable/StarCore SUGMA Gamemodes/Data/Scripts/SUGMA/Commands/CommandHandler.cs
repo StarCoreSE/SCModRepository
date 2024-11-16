@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Sandbox.ModAPI;
+using SC.SUGMA.Utilities;
 
 namespace SC.SUGMA.Commands
 {
@@ -30,6 +31,16 @@ namespace SC.SUGMA.Commands
                 "SUGMA.Match",
                 "Ends the current match.",
                 CommandMethods.End
+            ),
+            ["pause"] = new Command(
+                "SUGMA.Match",
+                "Locks all grids in place and disables weapons.",
+                CommandMethods.Pause
+            ),
+            ["clearboard"] = new Command(
+                "SUGMA.Match",
+                "Ends the current match, deletes all grids, and returns players to the respawn screen.",
+                CommandMethods.ClearBoard
             ),
 
             #endregion
@@ -60,7 +71,12 @@ namespace SC.SUGMA.Commands
                 "SUGMA.Utils",
                 "Automatically balance tracked grids",
                 CommandMethods.AutoBalance
-            )
+            ),
+            ["clearlcd"] = new Command(
+                "SUGMA.Utils",
+                "Clear all image lcds.",
+                args => SUtils.ClearImageLcds()
+                )
 
             #endregion
         };

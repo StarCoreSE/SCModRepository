@@ -7,8 +7,11 @@ using SC.SUGMA.HeartNetworking.Custom;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using Sandbox.Game.Entities.Blocks;
 using VRage.Game;
 using VRage.Game.ModAPI;
+using VRage.ModAPI;
 using VRage.Utils;
 using VRageMath;
 
@@ -44,6 +47,9 @@ namespace SC.SUGMA.Utilities
 
             MySessionComponentSafeZones.AllowedActions = CastProhibit(MySessionComponentSafeZones.AllowedActions,
                 matchActive ? MatchPermsInt : FullPermsInt);
+
+            if (matchActive && MyAPIGateway.Session.IsServer)
+                ClearImageLcds();
         }
 
         public static IMyFaction GetFaction(this IMyCubeGrid grid)
@@ -76,6 +82,57 @@ namespace SC.SUGMA.Utilities
                 new ProblemReportPacket(false).Received(0);
             else
                 HeartNetwork.I.SendToServer(new ProblemReportPacket(false));
+        }
+
+        public static bool IsPaused { get; private set; } = false;
+        public static void Pause()
+        {
+            if (IsPaused)
+            {
+                DisconnectHandler.I.UnfreezeGrids(true);
+                MyAPIGateway.Utilities.SendMessage("Paused the game!");
+                IsPaused = false;
+            }
+            else
+            {
+                MyAPIGateway.Entities.GetEntities(null, DisconnectHandler.I.FreezeGrids);
+                MyAPIGateway.Utilities.SendMessage("Unpaused the game!");
+                IsPaused = true;
+            }
+        }
+
+        /// <summary>
+        /// Kills all players, ends the match, and deletes all player grids.
+        /// </summary>
+        public static void ClearBoard()
+        {
+            if (!MyAPIGateway.Session.IsServer)
+                return;
+
+            var playerIds = new List<long>();
+
+            foreach (var faction in PlayerTracker.I.GetPlayerFactions())
+                playerIds.AddRange(faction.Members.Values.Select(player => player.PlayerId));
+
+            foreach (var player in PlayerTracker.I.AllPlayers.Where(p => playerIds.Contains(p.Key)))
+                player.Value.Character?.Kill();
+
+            SUGMA_SessionComponent.I.StopGamemode(true);
+
+            MyAPIGateway.Entities.GetEntities(null, g =>
+            {
+                IMyCubeGrid grid = g as IMyCubeGrid;
+                if (grid == null)
+                    return false;
+
+                // If this ever becomes an issue with deleting existing subgrids, change it to a GridGroup check.
+                if (!grid.IsStatic)
+                    grid.Close();
+
+                return false;
+            });
+
+            MyAPIGateway.Utilities.SendMessage("Board cleared.");
         }
 
         public static void ShieldCharge()
@@ -127,6 +184,41 @@ namespace SC.SUGMA.Utilities
             }
 
             return factionSpawns;
+        }
+
+        /// <summary>
+        /// Text-image LCDs are *bad for performance*. This clears all text larger than 1000 chars from all LCDs in the world.
+        /// </summary>
+        public static void ClearImageLcds()
+        {
+            HashSet<IMyEntity> entities = new HashSet<IMyEntity>();
+            MyAPIGateway.Entities.GetEntities(entities, e => e is IMyCubeGrid);
+
+            int lcdCount = 0;
+            StringBuilder text = new StringBuilder();
+            foreach (var ent in entities)
+            {
+                IMyCubeGrid grid = ent as IMyCubeGrid;
+                if (grid == null)
+                    continue;
+
+                foreach (var lcd in grid.GetFatBlocks<IMyTextPanel>())
+                {
+                    lcd.ReadText(text);
+                    if (text.Length > 1000)
+                    {
+                        lcd.WriteText("");
+                        lcdCount++;
+                    }
+                }
+            }
+
+            if (lcdCount == 0)
+                return;
+
+            MyAPIGateway.Utilities.ShowMessage("", $"{lcdCount} LCD(s) Cleared.");
+            if (MyAPIGateway.Session.IsServer)
+                MyAPIGateway.Utilities.SendMessage($"{lcdCount} LCD(s) Cleared.");
         }
     }
 }

@@ -43,7 +43,8 @@ namespace StarCore.FusionSystems
                 "Caster_CentralPipe_T",
                 "Caster_Feeder",
                 //"Caster_Controller",
-                "Caster_Reactor"
+                "Caster_Reactor",
+                "Caster_ConveyorCap",
             },
 
             // Allowed connection directions & whitelists, measured in blocks.
@@ -65,7 +66,8 @@ namespace StarCore.FusionSystems
                                 "Caster_Feeder",
                                 "Caster_Reactor",
                                 "Caster_Controller",
-                                "Caster_FocusLens"
+                                "Caster_FocusLens",
+                                "Caster_ConveyorCap"
                             }
                         },
                         {
@@ -77,7 +79,8 @@ namespace StarCore.FusionSystems
                                 "Caster_Feeder",
                                 "Caster_Reactor",
                                 "Caster_Controller",
-                                "Caster_FocusLens"
+                                "Caster_FocusLens",
+                                "Caster_ConveyorCap"
                             }
                         },
                         {
@@ -89,7 +92,8 @@ namespace StarCore.FusionSystems
                                 "Caster_Feeder",
                                 "Caster_Reactor",
                                 "Caster_Controller",
-                                "Caster_FocusLens"
+                                "Caster_FocusLens",
+                                "Caster_ConveyorCap"
                             }
                         },
                         {
@@ -101,7 +105,8 @@ namespace StarCore.FusionSystems
                                 "Caster_Feeder",
                                 "Caster_Reactor",
                                 "Caster_Controller",
-                                "Caster_FocusLens"
+                                "Caster_FocusLens",
+                                "Caster_ConveyorCap"
                             }
                         }
                     }
@@ -118,7 +123,8 @@ namespace StarCore.FusionSystems
                                 "Caster_Feeder",
                                 "Caster_FocusLens",
                                 //"Caster_Controller",
-                                "Caster_Reactor"
+                                "Caster_Reactor",
+                                "Caster_ConveyorCap"
                             }
                         },
                         {
@@ -130,7 +136,8 @@ namespace StarCore.FusionSystems
                                 "Caster_Feeder",
                                 "Caster_FocusLens",
                                 //"Caster_Controller",
-                                "Caster_Reactor"
+                                "Caster_Reactor",
+                                "Caster_ConveyorCap"
                             }
                         }
                     }
@@ -189,7 +196,8 @@ namespace StarCore.FusionSystems
                                 "Caster_Feeder",
                                 //"Caster_Controller",
                                 "Caster_FocusLens",
-                                "Caster_Reactor"
+                                "Caster_Reactor",
+                                "Caster_ConveyorCap"
                             }
                         },
                         {
@@ -201,7 +209,8 @@ namespace StarCore.FusionSystems
                                 "Caster_Feeder",
                                 //"Caster_Controller",
                                 "Caster_FocusLens",
-                                "Caster_Reactor"
+                                "Caster_Reactor",
+                                "Caster_ConveyorCap"
                             }
                         }
                     }
@@ -218,7 +227,8 @@ namespace StarCore.FusionSystems
                                 "Caster_Feeder",
                                 //"Caster_Controller",
                                 "Caster_FocusLens",
-                                "Caster_Reactor"
+                                "Caster_Reactor",
+                                "Caster_ConveyorCap"
                             }
                         },
                         {
@@ -230,7 +240,8 @@ namespace StarCore.FusionSystems
                                 "Caster_Feeder",
                                 //"Caster_Controller",
                                 "Caster_FocusLens",
-                                "Caster_Reactor"
+                                "Caster_Reactor",
+                                "Caster_ConveyorCap"
                             }
                         }
                     }
@@ -247,7 +258,8 @@ namespace StarCore.FusionSystems
                                 "Caster_Feeder",
                                 //"Caster_Controller",
                                 "Caster_FocusLens",
-                                "Caster_Reactor"
+                                "Caster_Reactor",
+                                "Caster_ConveyorCap"
                             }
                         },
                         {
@@ -259,7 +271,8 @@ namespace StarCore.FusionSystems
                                 "Caster_Feeder",
                                 //"Caster_Controller",
                                 "Caster_FocusLens",
-                                "Caster_Reactor"
+                                "Caster_Reactor",
+                                "Caster_ConveyorCap"
                             }
                         },
                         {
@@ -271,7 +284,8 @@ namespace StarCore.FusionSystems
                                 "Caster_Feeder",
                                 //"Caster_Controller",
                                 "Caster_FocusLens",
-                                "Caster_Reactor"
+                                "Caster_Reactor",
+                                "Caster_ConveyorCap"
                             }
                         }
                     }
@@ -288,7 +302,8 @@ namespace StarCore.FusionSystems
                                 "Caster_Feeder",
                                 //"Caster_Controller",
                                 "Caster_FocusLens",
-                                "Caster_Reactor"
+                                "Caster_Reactor",
+                                "Caster_ConveyorCap"
                             }
                         },
                         {
@@ -300,7 +315,8 @@ namespace StarCore.FusionSystems
                                 "Caster_Feeder",
                                 //"Caster_Controller",
                                 "Caster_FocusLens",
-                                "Caster_Reactor"
+                                "Caster_Reactor",
+                                "Caster_ConveyorCap"
                             }
                         },
 
@@ -321,7 +337,7 @@ namespace StarCore.FusionSystems
                             }
                         }
                     }
-                }
+                },
                 //{
                 //    "Caster_Controller", new Dictionary<Vector3I, string[]>
                 //    {
@@ -337,6 +353,22 @@ namespace StarCore.FusionSystems
                 //        }
                 //    }
                 //}
+                {
+                    "Caster_ConveyorCap", new Dictionary<Vector3I, string[]>
+                    {
+                        {
+                            Vector3I.Backward, new[]
+                            {
+                                "Caster_CentralPipe_0",
+                                "Caster_CentralPipe_90",
+                                "Caster_CentralPipe_T",
+                                "Caster_Feeder",
+                                "Caster_Reactor",
+                                "Caster_FocusLens",
+                            }
+                        }
+                    }
+                }
             }
         };
     }
