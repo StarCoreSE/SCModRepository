@@ -71,11 +71,11 @@ namespace Starcore.FieldGenerator
         public MySync<int, SyncDirection.BothWays> SiegeElapsedTime;
         public MySync<int, SyncDirection.BothWays> SiegeCooldownTime;
 
-        public MySync<float, SyncDirection.BothWays> FieldPower; // add on value change hook for Serverside Resistence
+        public MySync<float, SyncDirection.BothWays> FieldPower;
         public MySync<float, SyncDirection.BothWays> MaxFieldPower;
         public MySync<float, SyncDirection.BothWays> MinFieldPower;
         public MySync<float, SyncDirection.BothWays> SizeModifier;
-        public MySync<float, SyncDirection.BothWays> Stability; // add on value change for handling zero stability if (IsServer && _stability == 0) HandleZeroStability();
+        public MySync<float, SyncDirection.BothWays> Stability;
         #endregion
 
         private Dictionary<string, IMyModelDummy> _coreDummies = new Dictionary<string, IMyModelDummy>();
@@ -131,13 +131,6 @@ namespace Starcore.FieldGenerator
 
                 Block.CubeGrid.OnBlockAdded += OnBlockAdded;
                 Block.CubeGrid.OnBlockRemoved += OnBlockRemoved;
-                
-                SiegeCooldownActive.ValueChanged += (obj) => SaveSettings();
-                SiegeElapsedTime.ValueChanged += (obj) => SaveSettings();
-                SiegeCooldownTime.ValueChanged += (obj) => SaveSettings();
-                MaxFieldPower.ValueChanged += (obj) => SaveSettings();
-                MinFieldPower.ValueChanged += (obj) => SaveSettings();
-                SizeModifier.ValueChanged += (obj) => SaveSettings();
 
                 SiegeMode.ValueChanged += SiegeMode_ValueChanged;
                 FieldPower.ValueChanged += FieldPower_ValueChanged;
@@ -277,13 +270,6 @@ namespace Starcore.FieldGenerator
             {
                 Block.CubeGrid.OnBlockAdded -= OnBlockAdded;
                 Block.CubeGrid.OnBlockRemoved -= OnBlockRemoved;
-
-                SiegeCooldownActive.ValueChanged -= (obj) => SaveSettings();
-                SiegeElapsedTime.ValueChanged -= (obj) => SaveSettings();
-                SiegeCooldownTime.ValueChanged -= (obj) => SaveSettings();
-                MaxFieldPower.ValueChanged -= (obj) => SaveSettings();
-                MinFieldPower.ValueChanged -= (obj) => SaveSettings();
-                SizeModifier.ValueChanged -= (obj) => SaveSettings();
 
                 SiegeMode.ValueChanged += SiegeMode_ValueChanged;
                 FieldPower.ValueChanged -= FieldPower_ValueChanged;
