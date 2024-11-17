@@ -123,6 +123,7 @@ namespace Starcore.FieldGenerator
                 _gridBlockCount = _gridBlocks.Count;
 
                 LoadSettings();
+                SaveSettings();
 
                 if (!Config.SimplifiedMode)
                 {
