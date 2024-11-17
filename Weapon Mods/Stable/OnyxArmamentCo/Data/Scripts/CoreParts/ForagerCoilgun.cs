@@ -1,4 +1,4 @@
-﻿using static Scripts.Structure;
+using static Scripts.Structure;
 using static Scripts.Structure.WeaponDefinition;
 using static Scripts.Structure.WeaponDefinition.ModelAssignmentsDef;
 using static Scripts.Structure.WeaponDefinition.HardPointDef;
@@ -181,7 +181,6 @@ namespace Scripts {
                 ForagerLightCoilgunAmmoShrapWC,
                 ForagerLightCoilgunAmmoWC_L,
                 ForagerTelegraph,
-                ForagerPullAmmo,
             },
             //Animations = Weapon75_Animation,
             //Upgrades = UpgradeModules,
