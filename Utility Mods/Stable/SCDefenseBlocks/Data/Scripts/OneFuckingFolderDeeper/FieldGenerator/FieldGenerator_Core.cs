@@ -809,8 +809,11 @@ namespace Starcore.FieldGenerator
 
         private string GenerateBar(string label, float value, float maxValue, bool Stability)
         {
+            if (maxValue <= 0)
+                maxValue = 1;
+
             var percentage = MathHelper.Clamp(value / maxValue, 0, 1);
-            var percentageReal = (int)Math.Round(percentage * 40);
+            var percentageReal = Math.Max(0, (int)Math.Round(percentage * 40));
 
             string filledBar = new string('|', percentageReal);
             string emptyBar = new string(' ', 40 - percentageReal);
