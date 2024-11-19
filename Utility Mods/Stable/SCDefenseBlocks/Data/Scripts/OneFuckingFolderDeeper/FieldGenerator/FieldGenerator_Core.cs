@@ -28,10 +28,10 @@ namespace Starcore.FieldGenerator
     {
         public const bool SimplifiedMode = true;
 
-        public const float PerModuleAmount = 12.5f;
+        public const float PerModuleAmount = 10f;
         public const int MaxModuleCount = 4;
 
-        public const int MaxSiegeTime = 150;
+        public const int MaxSiegeTime = 60;
         public const int SiegePowerDraw = 900;
         public const float SiegeModeResistence = 0.9f;
 
