@@ -568,7 +568,7 @@ namespace Scripts
                 {
                     Enable = true,  //with 30,000 aoe on linear, expect 132,000 total aoe damage per missile.
                     Radius = 8f, // Meters
-                    Damage = 50000, //nerfed from 60,000 cause lol lmao maybe i shouldnt listen to muzzled.  Probably need to convert this into pooled damage soon.
+                    Damage = 60000, //nerfed from 60,000 cause lol lmao maybe i shouldnt listen to muzzled.  Probably need to convert this into pooled damage soon.
                     Depth = 4f,
                     MaxAbsorb = 0f,
                     Falloff = Linear, //.NoFalloff applies the same damage to all blocks in radius
