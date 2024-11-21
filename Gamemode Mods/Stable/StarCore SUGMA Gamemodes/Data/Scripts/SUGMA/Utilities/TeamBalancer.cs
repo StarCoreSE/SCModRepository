@@ -16,7 +16,7 @@ namespace SC.SUGMA.Utilities
         public const float MassWeightModifier = 20/1000000f;
         private static ShareTrackApi ShareTrackApi => SUGMA_SessionComponent.I.ShareTrackApi;
 
-        public static void PerformBalancing()
+        public static void PerformBalancing(float randomOffset = 0.1f)
         {
             if (!ShareTrackApi.AreTrackedGridsLoaded())
                 throw new Exception("Not all tracked grids are loaded!");
@@ -32,7 +32,7 @@ namespace SC.SUGMA.Utilities
 
             SUtils.SetDamageEnabled(false);
 
-            foreach (var factionKvp in AssignTeams(ShareTrackApi.GetTrackedGrids()))
+            foreach (var factionKvp in AssignTeams(ShareTrackApi.GetTrackedGrids(), randomOffset))
             {
                 IMyCubeGrid spawnGrid;
                 if (!factionSpawns.TryGetValue(factionKvp.Key, out spawnGrid))
@@ -55,7 +55,7 @@ namespace SC.SUGMA.Utilities
             MyAPIGateway.Utilities.SendMessage($"Autobalance completed.");
         }
 
-        private static Dictionary<IMyFaction, List<IMyCubeGrid>> AssignTeams(IMyCubeGrid[] grids)
+        private static Dictionary<IMyFaction, List<IMyCubeGrid>> AssignTeams(IMyCubeGrid[] grids, float randomOffset)
         {
             // Sort grids by BP
             // Highest BP grid goes into lowest BP faction
@@ -77,7 +77,12 @@ namespace SC.SUGMA.Utilities
             for (int i = 0; i < grids.Length; i++)
             {
                 IMyFaction lowestFaction = factionPoints.MinBy(a => a.Value).Key;
-                factionPoints[lowestFaction] += ShareTrackApi.GetGridPoints(grids[i]) + (int)((grids[i].Physics?.Mass ?? 0) * MassWeightModifier);
+
+                int gridPoints = ShareTrackApi.GetGridPoints(grids[i]) +
+                                 (int)((grids[i].Physics?.Mass ?? 0) * MassWeightModifier);
+                gridPoints += (int)(gridPoints * SUtils.Random.NextDouble() * randomOffset);
+
+                factionPoints[lowestFaction] += gridPoints;
 
                 if (grids[i].BigOwners.Count < 1)
                 {
