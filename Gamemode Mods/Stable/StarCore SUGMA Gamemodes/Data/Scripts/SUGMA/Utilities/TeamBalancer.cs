@@ -73,16 +73,20 @@ namespace SC.SUGMA.Utilities
                 factionGrids.Add(faction, new List<IMyCubeGrid>());
             }
 
-            Array.Sort(grids, (a, b) => ShareTrackApi.GetGridPoints(b) - ShareTrackApi.GetGridPoints(a));
+            Dictionary<IMyCubeGrid, int> gridPoints = new Dictionary<IMyCubeGrid, int>(grids.Length);
+            foreach (var grid in grids)
+            {
+                gridPoints[grid] = ShareTrackApi.GetGridPoints(grid) +
+                                       (int)((grid.Physics?.Mass ?? 0) * MassWeightModifier);
+                gridPoints[grid] += (int)(gridPoints[grid] * SUtils.Random.NextDouble() * randomOffset);
+            }
+
+            Array.Sort(grids, (a, b) => gridPoints[b] - gridPoints[a]);
             for (int i = 0; i < grids.Length; i++)
             {
                 IMyFaction lowestFaction = factionPoints.MinBy(a => a.Value).Key;
 
-                int gridPoints = ShareTrackApi.GetGridPoints(grids[i]) +
-                                 (int)((grids[i].Physics?.Mass ?? 0) * MassWeightModifier);
-                gridPoints += (int)(gridPoints * SUtils.Random.NextDouble() * randomOffset);
-
-                factionPoints[lowestFaction] += gridPoints;
+                factionPoints[lowestFaction] += gridPoints[grids[i]];
 
                 if (grids[i].BigOwners.Count < 1)
                 {
@@ -92,6 +96,7 @@ namespace SC.SUGMA.Utilities
 
                 MyVisualScriptLogicProvider.SetPlayersFaction(grids[i].BigOwners[0], lowestFaction.Tag);
                 factionGrids[lowestFaction].Add(grids[i]);
+                MyAPIGateway.Utilities.SendMessage($"[{lowestFaction.Tag}] +{gridPoints[grids[i]]}pts: {grids[i].CustomName}");
             }
 
             return factionGrids;
