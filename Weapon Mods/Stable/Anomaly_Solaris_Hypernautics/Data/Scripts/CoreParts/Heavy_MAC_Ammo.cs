@@ -428,7 +428,7 @@ namespace Scripts
             AmmoRound = "SolHyp_HeavyMAC_Shrap", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 33750f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 10050f, // Direct damage; one steel plate is worth 100.
             Mass = 10f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
@@ -453,7 +453,7 @@ namespace Scripts
             {
                 AmmoRound = "", // AmmoRound field of the ammo to spawn.
                 Fragments = 36, // Number of projectiles to spawn.
-                Degrees = 6, // Cone in which to randomize direction of spawned projectiles.
+                Degrees = 4, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = true, // fragments will not inherit velocity from parent.
                 Offset = 0f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards), value is read from parent ammo type.
