@@ -96,7 +96,7 @@ namespace SC.SUGMA.Utilities
 
                 MyVisualScriptLogicProvider.SetPlayersFaction(grids[i].BigOwners[0], lowestFaction.Tag);
                 factionGrids[lowestFaction].Add(grids[i]);
-                MyAPIGateway.Utilities.SendMessage($"[{lowestFaction.Tag}] +{gridPoints[grids[i]]}pts: {grids[i].CustomName}");
+                MyAPIGateway.Utilities.SendMessage($"[{lowestFaction.Tag}] +{gridPoints[grids[i]]/1000f:N1}pts: {grids[i].CustomName}");
             }
 
             return factionGrids;
