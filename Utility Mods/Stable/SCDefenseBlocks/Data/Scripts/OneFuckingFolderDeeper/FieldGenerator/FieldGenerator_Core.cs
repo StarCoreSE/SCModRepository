@@ -258,16 +258,6 @@ namespace Starcore.FieldGenerator
                 PurgeHUDMessage();    
         }
 
-        public override bool IsSerialized()
-        {
-            if (Block == null )
-                return false;
-
-            SaveSettings();
-
-            return base.IsSerialized();
-        }
-
         public override void Close()
         {
             base.Close();

@@ -40,7 +40,7 @@ namespace Scripts
             AmmoRound = "Heavy MAC Slug", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.0645f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 75000f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 10500f, // Direct damage; one steel plate is worth 100.
             Mass = 10f, // In kilograms; how much force the impact will apply to the target.
             Health = 200, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 500000f, // Recoil. This is applied to the Parent Grid.
@@ -124,8 +124,8 @@ namespace Scripts
                 {
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
                     Light = -1f, // Multiplier for damage against light armor.
-                    Heavy = -1f, // Multiplier for damage against heavy armor.
-                    NonArmor = 0.75f, // Multiplier for damage against every else.
+                    Heavy = 0.5f, // Multiplier for damage against heavy armor.
+                    NonArmor = 0.25f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
@@ -268,7 +268,7 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 2400, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 3400, // voxel phasing if you go above 5100
+                DesiredSpeed = 2200, // voxel phasing if you go above 5100
                 MaxTrajectory = 10000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 25f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
@@ -428,7 +428,7 @@ namespace Scripts
             AmmoRound = "SolHyp_HeavyMAC_Shrap", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 10050f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 5050f, // Direct damage; one steel plate is worth 100.
             Mass = 10f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
@@ -470,7 +470,7 @@ namespace Scripts
                     Proximity = 800, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
                     ParentDies = true, // Parent dies once after it spawns its last child.
                     PointAtTarget = true, // Start fragment direction pointing at Target
-                    PointType = Lead, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
+                    PointType = Predict, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
                     DirectAimCone = 6f, //Aim cone used for Direct fire, in degrees
                     GroupSize = 1, // Number of spawns in each group
                     GroupDelay = 1, // Delay between each group.
@@ -512,8 +512,8 @@ namespace Scripts
                 {
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
                     Light = -1f, // Multiplier for damage against light armor.
-                    Heavy = -1f, // Multiplier for damage against heavy armor.
-                    NonArmor = -1f, // Multiplier for damage against every else.
+                    Heavy = 0.5f, // Multiplier for damage against heavy armor.
+                    NonArmor = 0.25f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
@@ -656,10 +656,10 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 280, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 2800, // voxel phasing if you go above 5100
-                MaxTrajectory = 6750f, // Max Distance the projectile or beam can Travel.
+                DesiredSpeed = 1600, // voxel phasing if you go above 5100
+                MaxTrajectory = 1150f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
-                GravityMultiplier = 25f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
+                GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
                 RangeVariance = Random(start: 0, end: 200), // subtracts value from MaxTrajectory
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
@@ -1060,7 +1060,7 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 2400, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 3400, // voxel phasing if you go above 5100
+                DesiredSpeed = 2200, // voxel phasing if you go above 5100
                 MaxTrajectory = 10000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 20f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
@@ -1450,7 +1450,7 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 2400, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 3400, // voxel phasing if you go above 5100
+                DesiredSpeed = 2200, // voxel phasing if you go above 5100
                 MaxTrajectory = 10000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 20f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
@@ -1840,7 +1840,7 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 2400, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 3400, // voxel phasing if you go above 5100
+                DesiredSpeed = 2200, // voxel phasing if you go above 5100
                 MaxTrajectory = 10000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 20f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
