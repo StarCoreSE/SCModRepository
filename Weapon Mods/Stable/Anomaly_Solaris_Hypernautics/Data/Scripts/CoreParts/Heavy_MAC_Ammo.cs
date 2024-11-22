@@ -40,7 +40,7 @@ namespace Scripts
             AmmoRound = "Heavy MAC Slug", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.0645f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 10500f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 75000f, // Direct damage; one steel plate is worth 100.
             Mass = 10f, // In kilograms; how much force the impact will apply to the target.
             Health = 200, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 500000f, // Recoil. This is applied to the Parent Grid.
@@ -64,8 +64,8 @@ namespace Scripts
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
                 AmmoRound = "SolHyp_HeavyMAC_Shrap", // AmmoRound field of the ammo to spawn.
-                Fragments = 30, // Number of projectiles to spawn.
-                Degrees = 5, // Cone in which to randomize direction of spawned projectiles.
+                Fragments = 10, // Number of projectiles to spawn.
+                Degrees = 4, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = true, // fragments will not inherit velocity from parent.
                 Offset = 0f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards), value is read from parent ammo type.
@@ -79,11 +79,11 @@ namespace Scripts
                     Interval = 0, // Time between spawning fragments, in ticks, 0 means every tick, 1 means every other
                     StartTime = 15, // Time delay to start spawning fragments, in ticks, of total projectile life
                     MaxSpawns = 1, // Max number of fragment children to spawn
-                    Proximity = 800, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
+                    Proximity = 1000, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
                     ParentDies = true, // Parent dies once after it spawns its last child.
                     PointAtTarget = true, // Start fragment direction pointing at Target
                     PointType = Lead, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
-                    DirectAimCone = 6f, //Aim cone used for Direct fire, in degrees
+                    DirectAimCone = 8f, //Aim cone used for Direct fire, in degrees
                     GroupSize = 1, // Number of spawns in each group
                     GroupDelay = 1, // Delay between each group.
                 },
@@ -124,8 +124,8 @@ namespace Scripts
                 {
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
                     Light = -1f, // Multiplier for damage against light armor.
-                    Heavy = 0.5f, // Multiplier for damage against heavy armor.
-                    NonArmor = 0.25f, // Multiplier for damage against every else.
+                    Heavy = -1f, // Multiplier for damage against heavy armor.
+                    NonArmor = 0.75f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
@@ -428,7 +428,7 @@ namespace Scripts
             AmmoRound = "SolHyp_HeavyMAC_Shrap", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 5050f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 10050f, // Direct damage; one steel plate is worth 100.
             Mass = 10f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
@@ -471,7 +471,7 @@ namespace Scripts
                     ParentDies = true, // Parent dies once after it spawns its last child.
                     PointAtTarget = true, // Start fragment direction pointing at Target
                     PointType = Predict, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
-                    DirectAimCone = 6f, //Aim cone used for Direct fire, in degrees
+                    DirectAimCone = 8f, //Aim cone used for Direct fire, in degrees
                     GroupSize = 1, // Number of spawns in each group
                     GroupDelay = 1, // Delay between each group.
                 },
@@ -512,8 +512,8 @@ namespace Scripts
                 {
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
                     Light = -1f, // Multiplier for damage against light armor.
-                    Heavy = 0.5f, // Multiplier for damage against heavy armor.
-                    NonArmor = 0.25f, // Multiplier for damage against every else.
+                    Heavy = 0.8f, // Multiplier for damage against heavy armor.
+                    NonArmor = 0.6f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
@@ -568,7 +568,7 @@ namespace Scripts
                 {
                     Enable = false,
                     Radius = 3f, // Radius of AOE effect, in meters.
-                    Damage = 5f,
+                    Damage = 500f,
                     Depth = 3f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
                     Falloff = NoFalloff, //.NoFalloff applies the same damage to all blocks in radius
@@ -832,13 +832,13 @@ namespace Scripts
             AmmoRound = "HG_VFX1", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 4f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 75000f, // Direct damage; one steel plate is worth 100.
             Mass = 10f, // In kilograms; how much force the impact will apply to the target.
-            Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
-            BackKickForce = 5000000f, // Recoil. This is applied to the Parent Grid.
+            Health = 200, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            BackKickForce = 500000f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
-            HardPointUsable = false, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
-            EnergyMagazineSize = 0, // For energy weapons, how many shots to fire before reloading.
+            HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
+            EnergyMagazineSize = 3, // For energy weapons, how many shots to fire before reloading.
             IgnoreWater = false, // Whether the projectile should be able to penetrate water when using WaterMod.
             IgnoreVoxels = false, // Whether the projectile should be able to penetrate voxels.
             Synchronize = false, // For future use
@@ -850,34 +850,34 @@ namespace Scripts
             },
             ObjectsHit = new ObjectsHitDef
             {
-                MaxObjectsHit = 2, // Limits the number of entities (grids, players, projectiles) the projectile can penetrate; 0 = unlimited.
-                CountBlocks = true, // Counts individual blocks, not just entities hit.
+                MaxObjectsHit = 0, // Limits the number of entities (grids, players, projectiles) the projectile can penetrate; 0 = unlimited.
+                CountBlocks = false, // Counts individual blocks, not just entities hit.
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
-                AmmoRound = "", // AmmoRound field of the ammo to spawn.
-                Fragments = 0, // Number of projectiles to spawn.
-                Degrees = 1, // Cone in which to randomize direction of spawned projectiles.
+                AmmoRound = "SolHyp_HeavyMAC_Shrap", // AmmoRound field of the ammo to spawn.
+                Fragments = 10, // Number of projectiles to spawn.
+                Degrees = 4, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
-                DropVelocity = false, // fragments will not inherit velocity from parent.
+                DropVelocity = true, // fragments will not inherit velocity from parent.
                 Offset = 0f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards), value is read from parent ammo type.
                 Radial = 0f, // Determines starting angle for Degrees of spread above.  IE, 0 degrees and 90 radial goes perpendicular to travel path
                 MaxChildren = 0, // number of maximum branches for fragments from the roots point of view, 0 is unlimited
-                IgnoreArming = true, // If true, ignore ArmOnHit or MinArmingTime in EndOfLife definitions
+                IgnoreArming = false, // If true, ignore ArmOnHit or MinArmingTime in EndOfLife definitions
                 AdvOffset = Vector(x: 0, y: 0, z: 0), // advanced offsets the fragment by xyz coordinates relative to parent, value is read from fragment ammo type.
                 TimedSpawns = new TimedSpawnDef // disables FragOnEnd in favor of info specified below
                 {
-                    Enable = false, // Enables TimedSpawns mechanism
+                    Enable = true, // Enables TimedSpawns mechanism
                     Interval = 0, // Time between spawning fragments, in ticks, 0 means every tick, 1 means every other
-                    StartTime = 0, // Time delay to start spawning fragments, in ticks, of total projectile life
+                    StartTime = 15, // Time delay to start spawning fragments, in ticks, of total projectile life
                     MaxSpawns = 1, // Max number of fragment children to spawn
-                    Proximity = 1000, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
+                    Proximity = 750, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
                     ParentDies = true, // Parent dies once after it spawns its last child.
                     PointAtTarget = true, // Start fragment direction pointing at Target
-                    PointType = Predict, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
-                    DirectAimCone = 0f, //Aim cone used for Direct fire, in degrees
-                    GroupSize = 5, // Number of spawns in each group
-                    GroupDelay = 120, // Delay between each group.
+                    PointType = Lead, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
+                    DirectAimCone = 8f, //Aim cone used for Direct fire, in degrees
+                    GroupSize = 1, // Number of spawns in each group
+                    GroupDelay = 1, // Delay between each group.
                 },
             },
             Pattern = new PatternDef
@@ -970,12 +970,12 @@ namespace Scripts
                 },
                 EndOfLife = new EndOfLifeDef
                 {
-                    Enable = false,
-                    Radius = 0f, // Radius of AOE effect, in meters.
-                    Damage = 0f,
-                    Depth = 20f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
+                    Enable = true,
+                    Radius = 8f, // Radius of AOE effect, in meters.
+                    Damage = 85000f,
+                    Depth = 8f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
-                    Falloff = Curve, //.NoFalloff applies the same damage to all blocks in radius
+                    Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
                     //.Curve drops off damage sharply as it approaches the max radius
                     //.InvCurve drops off sharply from the middle and tapers to max radius
@@ -986,10 +986,10 @@ namespace Scripts
                     MinArmingTime = 0, // In ticks, before the Ammo is allowed to explode, detonate or similar; This affects shrapnel spawning.
                     NoVisuals = false,
                     NoSound = false,
-                    ParticleScale = 1,
-                    CustomParticle = "Exp_Spark_large", // Particle SubtypeID, from your Particle SBC
+                    ParticleScale = 2,
+                    CustomParticle = "Definitive_Explosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "", // SubtypeID from your Audio SBC, not a filename
-                    Shape = Round, // Round or Diamond shape.  Diamond is more performance friendly.
+                    Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
             },
             Ewar = new EwarDef
@@ -1055,33 +1055,34 @@ namespace Scripts
             },
             Trajectory = new TrajectoryDef
             {
-                Guidance = None, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
-                TargetLossDegree = 80f, // Degrees, Is pointed forward
+                Guidance = Smart, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
+                TargetLossDegree = 0f, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 2400, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 2200, // voxel phasing if you go above 5100
                 MaxTrajectory = 10000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
-                GravityMultiplier = 20f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
+                GravityMultiplier = 25f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
-                RangeVariance = Random(start: 0, end: 0), // subtracts value from MaxTrajectory
+                RangeVariance = Random(start: 0, end: 200), // subtracts value from MaxTrajectory
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 Smarts = new SmartsDef
                 {
                     Inaccuracy = 0f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
-                    Aggressiveness = 1f, // controls how responsive tracking is.
-                    MaxLateralThrust = 0.5, // controls how sharp the trajectile may turn
+                    Aggressiveness = 0.01f, // controls how responsive tracking is.
+                    MaxLateralThrust = 0.01f, // controls how sharp the trajectile may turn
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
                     MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    OverideTarget = true, // when set to true ammo picks its own target, does not use hardpoint's.
+                    OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
                     CheckFutureIntersection = false, // Utilize obstacle avoidance?
                     MaxTargets = 0, // Number of targets allowed before ending, 0 = unlimited
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
                     Roam = false, // Roam current area after target loss
                     KeepAliveAfterTargetLoss = false, // Whether to stop early death of projectile on target loss
-                    OffsetRatio = 0.05f, // The ratio to offset the random direction (0 to 1) 
-                    OffsetTime = 60, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
+                    OffsetRatio = 0f, // The ratio to offset the random direction (0 to 1) 
+                    OffsetTime = 0, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
+                    NoSteering = true, // this disables target follow and instead travel straight ahead (but will respect offsets)
                 },
                 Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
                 {
@@ -1222,13 +1223,13 @@ namespace Scripts
             AmmoRound = "HG_VFX2", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 0.001f, // Direct damage; one steel plate is worth 100.
-            Mass = 1f, // In kilograms; how much force the impact will apply to the target.
-            Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
-            BackKickForce = 5000000f, // Recoil. This is applied to the Parent Grid.
+            BaseDamage = 75000f, // Direct damage; one steel plate is worth 100.
+            Mass = 10f, // In kilograms; how much force the impact will apply to the target.
+            Health = 200, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            BackKickForce = 500000f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
-            HardPointUsable = false, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
-            EnergyMagazineSize = 0, // For energy weapons, how many shots to fire before reloading.
+            HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
+            EnergyMagazineSize = 3, // For energy weapons, how many shots to fire before reloading.
             IgnoreWater = false, // Whether the projectile should be able to penetrate water when using WaterMod.
             IgnoreVoxels = false, // Whether the projectile should be able to penetrate voxels.
             Synchronize = false, // For future use
@@ -1245,29 +1246,29 @@ namespace Scripts
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
-                AmmoRound = "", // AmmoRound field of the ammo to spawn.
-                Fragments = 0, // Number of projectiles to spawn.
-                Degrees = 1, // Cone in which to randomize direction of spawned projectiles.
+                AmmoRound = "SolHyp_HeavyMAC_Shrap", // AmmoRound field of the ammo to spawn.
+                Fragments = 10, // Number of projectiles to spawn.
+                Degrees = 4, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
-                DropVelocity = false, // fragments will not inherit velocity from parent.
+                DropVelocity = true, // fragments will not inherit velocity from parent.
                 Offset = 0f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards), value is read from parent ammo type.
                 Radial = 0f, // Determines starting angle for Degrees of spread above.  IE, 0 degrees and 90 radial goes perpendicular to travel path
                 MaxChildren = 0, // number of maximum branches for fragments from the roots point of view, 0 is unlimited
-                IgnoreArming = true, // If true, ignore ArmOnHit or MinArmingTime in EndOfLife definitions
+                IgnoreArming = false, // If true, ignore ArmOnHit or MinArmingTime in EndOfLife definitions
                 AdvOffset = Vector(x: 0, y: 0, z: 0), // advanced offsets the fragment by xyz coordinates relative to parent, value is read from fragment ammo type.
                 TimedSpawns = new TimedSpawnDef // disables FragOnEnd in favor of info specified below
                 {
-                    Enable = false, // Enables TimedSpawns mechanism
+                    Enable = true, // Enables TimedSpawns mechanism
                     Interval = 0, // Time between spawning fragments, in ticks, 0 means every tick, 1 means every other
-                    StartTime = 0, // Time delay to start spawning fragments, in ticks, of total projectile life
+                    StartTime = 15, // Time delay to start spawning fragments, in ticks, of total projectile life
                     MaxSpawns = 1, // Max number of fragment children to spawn
-                    Proximity = 1000, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
+                    Proximity = 500, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
                     ParentDies = true, // Parent dies once after it spawns its last child.
                     PointAtTarget = true, // Start fragment direction pointing at Target
-                    PointType = Predict, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
-                    DirectAimCone = 0f, //Aim cone used for Direct fire, in degrees
-                    GroupSize = 5, // Number of spawns in each group
-                    GroupDelay = 120, // Delay between each group.
+                    PointType = Lead, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
+                    DirectAimCone = 8f, //Aim cone used for Direct fire, in degrees
+                    GroupSize = 1, // Number of spawns in each group
+                    GroupDelay = 1, // Delay between each group.
                 },
             },
             Pattern = new PatternDef
@@ -1360,12 +1361,12 @@ namespace Scripts
                 },
                 EndOfLife = new EndOfLifeDef
                 {
-                    Enable = false,
-                    Radius = 0f, // Radius of AOE effect, in meters.
-                    Damage = 0f,
-                    Depth = 20f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
+                    Enable = true,
+                    Radius = 8f, // Radius of AOE effect, in meters.
+                    Damage = 85000f,
+                    Depth = 8f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
-                    Falloff = Curve, //.NoFalloff applies the same damage to all blocks in radius
+                    Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
                     //.Curve drops off damage sharply as it approaches the max radius
                     //.InvCurve drops off sharply from the middle and tapers to max radius
@@ -1376,10 +1377,10 @@ namespace Scripts
                     MinArmingTime = 0, // In ticks, before the Ammo is allowed to explode, detonate or similar; This affects shrapnel spawning.
                     NoVisuals = false,
                     NoSound = false,
-                    ParticleScale = 1,
-                    CustomParticle = "Exp_Spark_large", // Particle SubtypeID, from your Particle SBC
+                    ParticleScale = 2,
+                    CustomParticle = "Definitive_Explosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "", // SubtypeID from your Audio SBC, not a filename
-                    Shape = Round, // Round or Diamond shape.  Diamond is more performance friendly.
+                    Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
             },
             Ewar = new EwarDef
@@ -1445,33 +1446,34 @@ namespace Scripts
             },
             Trajectory = new TrajectoryDef
             {
-                Guidance = None, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
-                TargetLossDegree = 80f, // Degrees, Is pointed forward
+                Guidance = Smart, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
+                TargetLossDegree = 0f, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 2400, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 2200, // voxel phasing if you go above 5100
                 MaxTrajectory = 10000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
-                GravityMultiplier = 20f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
+                GravityMultiplier = 25f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
-                RangeVariance = Random(start: 0, end: 0), // subtracts value from MaxTrajectory
+                RangeVariance = Random(start: 0, end: 200), // subtracts value from MaxTrajectory
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 Smarts = new SmartsDef
                 {
                     Inaccuracy = 0f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
-                    Aggressiveness = 1f, // controls how responsive tracking is.
-                    MaxLateralThrust = 0.5, // controls how sharp the trajectile may turn
+                    Aggressiveness = 0.01f, // controls how responsive tracking is.
+                    MaxLateralThrust = 0.01f, // controls how sharp the trajectile may turn
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
                     MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    OverideTarget = true, // when set to true ammo picks its own target, does not use hardpoint's.
+                    OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
                     CheckFutureIntersection = false, // Utilize obstacle avoidance?
                     MaxTargets = 0, // Number of targets allowed before ending, 0 = unlimited
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
                     Roam = false, // Roam current area after target loss
                     KeepAliveAfterTargetLoss = false, // Whether to stop early death of projectile on target loss
-                    OffsetRatio = 0.05f, // The ratio to offset the random direction (0 to 1) 
-                    OffsetTime = 60, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
+                    OffsetRatio = 0f, // The ratio to offset the random direction (0 to 1) 
+                    OffsetTime = 0, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
+                    NoSteering = true, // this disables target follow and instead travel straight ahead (but will respect offsets)
                 },
                 Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
                 {
@@ -1612,13 +1614,13 @@ namespace Scripts
             AmmoRound = "HG_VFX3", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.1f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 0.001f, // Direct damage; one steel plate is worth 100.
-            Mass = 1f, // In kilograms; how much force the impact will apply to the target.
-            Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
-            BackKickForce = 5000000f, // Recoil. This is applied to the Parent Grid.
+            BaseDamage = 75000f, // Direct damage; one steel plate is worth 100.
+            Mass = 10f, // In kilograms; how much force the impact will apply to the target.
+            Health = 200, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            BackKickForce = 500000f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
-            HardPointUsable = false, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
-            EnergyMagazineSize = 0, // For energy weapons, how many shots to fire before reloading.
+            HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
+            EnergyMagazineSize = 3, // For energy weapons, how many shots to fire before reloading.
             IgnoreWater = false, // Whether the projectile should be able to penetrate water when using WaterMod.
             IgnoreVoxels = false, // Whether the projectile should be able to penetrate voxels.
             Synchronize = false, // For future use
@@ -1635,29 +1637,29 @@ namespace Scripts
             },
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
-                AmmoRound = "", // AmmoRound field of the ammo to spawn.
-                Fragments = 0, // Number of projectiles to spawn.
-                Degrees = 1, // Cone in which to randomize direction of spawned projectiles.
+                AmmoRound = "SolHyp_HeavyMAC_Shrap", // AmmoRound field of the ammo to spawn.
+                Fragments = 10, // Number of projectiles to spawn.
+                Degrees = 4, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
-                DropVelocity = false, // fragments will not inherit velocity from parent.
+                DropVelocity = true, // fragments will not inherit velocity from parent.
                 Offset = 0f, // Offsets the fragment spawn by this amount, in meters (positive forward, negative for backwards), value is read from parent ammo type.
                 Radial = 0f, // Determines starting angle for Degrees of spread above.  IE, 0 degrees and 90 radial goes perpendicular to travel path
                 MaxChildren = 0, // number of maximum branches for fragments from the roots point of view, 0 is unlimited
-                IgnoreArming = true, // If true, ignore ArmOnHit or MinArmingTime in EndOfLife definitions
+                IgnoreArming = false, // If true, ignore ArmOnHit or MinArmingTime in EndOfLife definitions
                 AdvOffset = Vector(x: 0, y: 0, z: 0), // advanced offsets the fragment by xyz coordinates relative to parent, value is read from fragment ammo type.
                 TimedSpawns = new TimedSpawnDef // disables FragOnEnd in favor of info specified below
                 {
-                    Enable = false, // Enables TimedSpawns mechanism
+                    Enable = true, // Enables TimedSpawns mechanism
                     Interval = 0, // Time between spawning fragments, in ticks, 0 means every tick, 1 means every other
-                    StartTime = 0, // Time delay to start spawning fragments, in ticks, of total projectile life
+                    StartTime = 15, // Time delay to start spawning fragments, in ticks, of total projectile life
                     MaxSpawns = 1, // Max number of fragment children to spawn
-                    Proximity = 1000, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
+                    Proximity = 250, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
                     ParentDies = true, // Parent dies once after it spawns its last child.
                     PointAtTarget = true, // Start fragment direction pointing at Target
-                    PointType = Predict, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
-                    DirectAimCone = 0f, //Aim cone used for Direct fire, in degrees
-                    GroupSize = 5, // Number of spawns in each group
-                    GroupDelay = 120, // Delay between each group.
+                    PointType = Lead, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
+                    DirectAimCone = 8f, //Aim cone used for Direct fire, in degrees
+                    GroupSize = 1, // Number of spawns in each group
+                    GroupDelay = 1, // Delay between each group.
                 },
             },
             Pattern = new PatternDef
@@ -1750,12 +1752,12 @@ namespace Scripts
                 },
                 EndOfLife = new EndOfLifeDef
                 {
-                    Enable = false,
-                    Radius = 0f, // Radius of AOE effect, in meters.
-                    Damage = 0f,
-                    Depth = 20f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
+                    Enable = true,
+                    Radius = 8f, // Radius of AOE effect, in meters.
+                    Damage = 85000f,
+                    Depth = 8f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
-                    Falloff = Curve, //.NoFalloff applies the same damage to all blocks in radius
+                    Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
                     //.Curve drops off damage sharply as it approaches the max radius
                     //.InvCurve drops off sharply from the middle and tapers to max radius
@@ -1766,10 +1768,10 @@ namespace Scripts
                     MinArmingTime = 0, // In ticks, before the Ammo is allowed to explode, detonate or similar; This affects shrapnel spawning.
                     NoVisuals = false,
                     NoSound = false,
-                    ParticleScale = 1,
-                    CustomParticle = "Exp_Spark_large", // Particle SubtypeID, from your Particle SBC
+                    ParticleScale = 2,
+                    CustomParticle = "Definitive_Explosion", // Particle SubtypeID, from your Particle SBC
                     CustomSound = "", // SubtypeID from your Audio SBC, not a filename
-                    Shape = Round, // Round or Diamond shape.  Diamond is more performance friendly.
+                    Shape = Diamond, // Round or Diamond shape.  Diamond is more performance friendly.
                 },
             },
             Ewar = new EwarDef
@@ -1835,33 +1837,34 @@ namespace Scripts
             },
             Trajectory = new TrajectoryDef
             {
-                Guidance = None, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
-                TargetLossDegree = 80f, // Degrees, Is pointed forward
+                Guidance = Smart, // None, Remote, TravelTo, Smart, DetectTravelTo, DetectSmart, DetectFixed
+                TargetLossDegree = 0f, // Degrees, Is pointed forward
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 2400, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
                 DesiredSpeed = 2200, // voxel phasing if you go above 5100
                 MaxTrajectory = 10000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
-                GravityMultiplier = 20f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
+                GravityMultiplier = 25f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
-                RangeVariance = Random(start: 0, end: 0), // subtracts value from MaxTrajectory
+                RangeVariance = Random(start: 0, end: 200), // subtracts value from MaxTrajectory
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 Smarts = new SmartsDef
                 {
                     Inaccuracy = 0f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
-                    Aggressiveness = 1f, // controls how responsive tracking is.
-                    MaxLateralThrust = 0.5, // controls how sharp the trajectile may turn
+                    Aggressiveness = 0.01f, // controls how responsive tracking is.
+                    MaxLateralThrust = 0.01f, // controls how sharp the trajectile may turn
                     TrackingDelay = 0, // Measured in Shape diameter units traveled.
                     MaxChaseTime = 0, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
-                    OverideTarget = true, // when set to true ammo picks its own target, does not use hardpoint's.
+                    OverideTarget = false, // when set to true ammo picks its own target, does not use hardpoint's.
                     CheckFutureIntersection = false, // Utilize obstacle avoidance?
                     MaxTargets = 0, // Number of targets allowed before ending, 0 = unlimited
                     NoTargetExpire = false, // Expire without ever having a target at TargetLossTime
                     Roam = false, // Roam current area after target loss
                     KeepAliveAfterTargetLoss = false, // Whether to stop early death of projectile on target loss
-                    OffsetRatio = 0.05f, // The ratio to offset the random direction (0 to 1) 
-                    OffsetTime = 60, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
+                    OffsetRatio = 0f, // The ratio to offset the random direction (0 to 1) 
+                    OffsetTime = 0, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
+                    NoSteering = true, // this disables target follow and instead travel straight ahead (but will respect offsets)
                 },
                 Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
                 {
