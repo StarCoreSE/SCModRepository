@@ -111,6 +111,7 @@ namespace StarCore.FusionSystems.HudHelpers
             float totalFusionGeneration = 0;
             float totalFusionStored = 0;
             float reactorIntegrity = 0;
+            int reactorCount = 0;
 
             foreach (var system in SFusionManager.I.FusionSystems)
             {
@@ -123,10 +124,11 @@ namespace StarCore.FusionSystems.HudHelpers
                 foreach (var reactor in system.Value.Reactors)
                 {
                     reactorIntegrity += reactor.Block.SlimBlock.Integrity/reactor.Block.SlimBlock.MaxIntegrity;
+                    reactorCount++;
                 }
 
-                reactorIntegrity /= system.Value.Reactors.Count;
             }
+            reactorIntegrity /= reactorCount;
 
             // Hide HUD element if the grid has no fusion systems (capacity is always >0 for a fusion system)
             if (totalFusionCapacity == 0)
