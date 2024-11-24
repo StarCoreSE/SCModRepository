@@ -87,7 +87,7 @@ namespace Scripts
             Pattern = new PatternDef
             {
                 Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
-                    "20mm High Velocity","20mm High Velocity","PDC_Bullet_AOE"
+                    "20mm High Velocity","PDC_Bullet_AOE","PDC_Bullet_AOE"
                 },
                 Mode = Weapon, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
                 TriggerChance = 1f, // This is %
@@ -341,10 +341,10 @@ namespace Scripts
                     WidthVariance = Random(start: 0f, end: 0f), // adds random value to default width (negatives shrinks width)
                     Tracer = new TracerBaseDef
                     {
-                        Enable = false,
-                        Length = 10f, //
-                        Width = 0.2f, //
-                        Color = Color(red: 22f, green: 11f, blue: 0f, alpha: 0.9f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
+                        Enable = true,
+                        Length = 3f, //
+                        Width = 0.5f, //
+                        Color = Color(red: 40f, green: 22f, blue: 0f, alpha: 1f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
@@ -370,23 +370,23 @@ namespace Scripts
                     },
                     Trail = new TrailDef
                     {
-                        Enable = false,
+                        Enable = true,
                         Textures = new[] {
                             "ProjectileTrailLine", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
                         DecayTime = 1, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 0f, green: 0f, blue: 1f, alpha: 1),
+                        Color = Color(red: 4f, green: 1f, blue: 0f, alpha: 0.7f),
                         Back = false,
-                        CustomWidth = 0.25f,
+                        CustomWidth = 0.35f,
                         UseWidthVariance = false,
                         UseColorFade = true,
                     },
                     OffsetEffect = new OffsetEffectDef
                     {
                         MaxOffset = 0,// 0 offset value disables this effect
-                        MinLength = 0.01f,
-                        MaxLength = 0.01,
+                        MinLength = 0.2f,
+                        MaxLength = 3,
                     },
                 },
             },
@@ -706,7 +706,7 @@ namespace Scripts
                     WidthVariance = Random(start: 0f, end: 0f), // adds random value to default width (negatives shrinks width)
                     Tracer = new TracerBaseDef
                     {
-                        Enable = true,
+                        Enable = false,
                         Length = 3f, //
                         Width = 0.5f, //
                         Color = Color(red: 40f, green: 22f, blue: 0f, alpha: 1f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
@@ -735,7 +735,7 @@ namespace Scripts
                     },
                     Trail = new TrailDef
                     {
-                        Enable = true,
+                        Enable = false,
                         Textures = new[] {
                             "ProjectileTrailLine", // Please always have this Line set, if this Section is enabled.
                         },

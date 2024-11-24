@@ -431,8 +431,8 @@ namespace Starcore.FieldGenerator
             {
                 if (SiegeElapsedTime.Value + 1 <= Config.MaxSiegeTime)
                 {                
-                    SiegeElapsedTime.Value++;                 
-                    SiegeBlockEnabler(_gridBlocks, false);                   
+                    SiegeElapsedTime.Value++;                   ;
+                    SiegeBlockEnabler(Block.CubeGrid.GetFatBlocks<IMyFunctionalBlock>(), false);                   
 
                     if (Block.CubeGrid.Physics.LinearVelocity != Vector3D.Zero)
                     {
@@ -468,23 +468,17 @@ namespace Starcore.FieldGenerator
             }
         }
 
-        private void SiegeBlockEnabler(List<IMySlimBlock> allTerminalBlocks, bool enabled)
+        private void SiegeBlockEnabler(IEnumerable<IMyFunctionalBlock> allFunctionalBlocks, bool enabled)
         {
-            foreach (var block in allTerminalBlocks)
+            foreach (var block in allFunctionalBlocks)
             {
-                if (block.FatBlock != null && block.FatBlock.BlockDefinition.SubtypeId != "FieldGen_Core")
+                if (block != null && block.BlockDefinition.SubtypeId != "FieldGen_Core")
                 {
                     var entBlock = block as MyEntity;
                     if (entBlock != null && FieldGeneratorSession.CoreSysAPI.HasCoreWeapon(entBlock))
                     {
                         FieldGeneratorSession.CoreSysAPI.SetFiringAllowed(entBlock, enabled);
-
-                        var functionalBlock = block.FatBlock as IMyFunctionalBlock;
-                        if (functionalBlock != null)
-                        {
-                            functionalBlock.Enabled = enabled;
-
-                        }
+                        block.Enabled = enabled;
                     }
                 }
                 else
@@ -497,7 +491,7 @@ namespace Starcore.FieldGenerator
             if (IsServer && GridStopped.Value)
                 GridStopped.Value = false;
 
-            SiegeBlockEnabler(_gridBlocks, true);
+            SiegeBlockEnabler(Block.CubeGrid.GetFatBlocks<IMyFunctionalBlock>(), true);
 
             SiegeCooldownTime.Value = (SiegeElapsedTime.Value > 5) ? (SiegeElapsedTime.Value * 2) : 5;
             SiegeElapsedTime.Value = 0;
@@ -509,7 +503,7 @@ namespace Starcore.FieldGenerator
             if (IsServer && GridStopped.Value)
                 GridStopped.Value = false;
 
-            SiegeBlockEnabler(_gridBlocks, true);
+            SiegeBlockEnabler(Block.CubeGrid.GetFatBlocks<IMyFunctionalBlock>(), true);
 
             SiegeCooldownTime.Value = 0;
             SiegeElapsedTime.Value = 0;
