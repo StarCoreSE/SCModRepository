@@ -11,8 +11,10 @@ using static Scripts.Structure.WeaponDefinition.TargetingDef.CommunicationDef.Se
 using static Scripts.Structure.WeaponDefinition.HardPointDef.HardwareDef;
 using static Scripts.Structure.WeaponDefinition.HardPointDef.HardwareDef.HardwareType;
 
-namespace Scripts {   
-    partial class Parts {
+namespace Scripts
+{
+    partial class Parts
+    {
         // Don't edit above this line
         WeaponDefinition twin508 => new WeaponDefinition
         {
@@ -28,7 +30,7 @@ namespace Scripts {
                         DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
-                    
+
                  },
                 Muzzles = new[] {
                     "muzzle_missile_1",
@@ -42,7 +44,7 @@ namespace Scripts {
             Targeting = new TargetingDef
             {
                 Threats = new[] {
-                    Grids, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
+                    Grids,Projectiles, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
                 },
                 SubSystems = new[] {
                     Thrust, Utility, Offense, Power, Production, Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
@@ -157,14 +159,17 @@ namespace Scripts {
                     FireSoundEndDelay = 120, // How long the firing audio should keep playing after firing stops. Measured in game ticks(6 = 100ms, 60 = 1 seconds, etc..).
                     FireSoundNoBurst = true, // Don't stop firing sound from looping when delaying after burst.
                 },
-                Graphics = new HardPointParticleDef {
+                Graphics = new HardPointParticleDef
+                {
 
-                    Effect1 = new ParticleDef {
+                    Effect1 = new ParticleDef
+                    {
                         Name = "Tait_Big_Gun_Go_Boom", // Smoke_LargeGunShot
                         Color = Color(red: 1, green: 1, blue: 1, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: 0),
 
-                        Extras = new ParticleOptionDef {
+                        Extras = new ParticleOptionDef
+                        {
                             Loop = false,
                             Restart = false,
                             MaxDistance = 1500,
@@ -172,12 +177,14 @@ namespace Scripts {
                             Scale = 1.0f,
                         },
                     },
-                    Effect2 = new ParticleDef {
+                    Effect2 = new ParticleDef
+                    {
                         Name = "",//Muzzle_Flash_Large
                         Color = Color(red: 10, green: 0, blue: 0, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: 0),
 
-                        Extras = new ParticleOptionDef {
+                        Extras = new ParticleOptionDef
+                        {
                             Loop = false,
                             Restart = false,
                             MaxDistance = 350,
@@ -188,7 +195,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                Shell508AP,Shell508HE  // Must list all primary, shrapnel, and pattern ammos.
+                Shell508AP,Shell508HE,ShellType3AA,Type3Shrap  // Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = FA16InchRecoil,
             //Upgrades = UpgradeModules,

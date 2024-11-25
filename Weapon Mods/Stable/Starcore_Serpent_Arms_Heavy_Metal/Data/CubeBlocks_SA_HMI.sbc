@@ -94,6 +94,7 @@ Ammunition: [2000m/s,] [Kinetic]</Description>
        <Component Subtype="SteelPlate" Count="800" />
         <Component Subtype="Superconductor" Count="150" />
         <Component Subtype="Construction" Count="340" />
+		<Component Subtype="GravityGenerator" Count="125" />
 		<Component Subtype="Motor" Count="120" />
 		<Component Subtype="Reactor" Count="30" />
 		<Component Subtype="Detector" Count="45" />

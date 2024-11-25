@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_GasTankDefinition">
+			<Id>
+				<TypeId>OxygenTank</TypeId>
+				<SubtypeId>Caster_ConveyorCap</SubtypeId>
+			</Id>
+			<DisplayName>Fusion Conveyor Port</DisplayName>
+			<Description>
+				Allows the attached Fusion System assembly to draw hydrogen from tanks.
+				Required in survival, optional in creative.
+			</Description>
+			<Icon>Textures\GUI\Icons\Cubes\Cubes\Caster_ConveyorCap.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Caster_ConveyorCap.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="100" />
+				<Component Subtype="Construction" Count="40" />
+				<Component Subtype="LargeTube" Count="20" />
+				<Component Subtype="Motor" Count="15" />
+				<Component Subtype="SteelPlate" Count="60" />
+			</Components>
+			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="0.50" EndY="1.00"/>
+				<MountPoint Side="Right" StartX="0.50" StartY="0.00" EndX="1.00" EndY="1.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.50" EndX="1.00" EndY="1.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="1.00" EndY="0.50"/>
+			</MountPoints>
+			<BlockPairName>Caster_ConveyorCap</BlockPairName>
+			<ResourceSourceGroup>Reactors</ResourceSourceGroup>
+			<ResourceSinkGroup>Factory</ResourceSinkGroup>
+			<OperationalPowerConsumption>0.001</OperationalPowerConsumption>
+			<StandbyPowerConsumption>0.000001</StandbyPowerConsumption>
+			<Capacity>250000</Capacity>
+			<InventoryMaxVolume>0.75</InventoryMaxVolume>
+			<InventorySize>
+				<X>2</X>
+				<Y>2</Y>
+				<Z>2</Z>
+			</InventorySize>
+			<StoredGasId>
+				<TypeId>GasProperties</TypeId>
+				<SubtypeId>Hydrogen</SubtypeId>
+			</StoredGasId>
+			<BlueprintClasses>
+				<Class>HydrogenBottles</Class>
+			</BlueprintClasses>
+			<BuildTimeSeconds>30</BuildTimeSeconds>
+			<DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+			<DamagedSound>ParticleWeapExpl</DamagedSound>
+			<EmissiveColorPreset>Extended</EmissiveColorPreset>
+			<DestroyEffect>Explosion_Warhead_02</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
+			<PCU>25</PCU>
+			<LeakPercent>0.005</LeakPercent>
+			<GasExplosionMaxRadius>5</GasExplosionMaxRadius>
+			<GasExplosionNeededVolumeToReachMaxRadius>250000</GasExplosionNeededVolumeToReachMaxRadius>
+			<GasExplosionDamageMultiplier>0.000075</GasExplosionDamageMultiplier>
+			<GasExplosionSound>WepSmallWarheadExpl</GasExplosionSound>
+			<GasExplosionEffect>Explosion_Warhead_02</GasExplosionEffect>
+			<TieredUpdateTimes>
+				<unsignedInt>100</unsignedInt>
+				<unsignedInt>300</unsignedInt>
+				<unsignedInt>600</unsignedInt>
+			</TieredUpdateTimes>
+			<MirroringZ>Y</MirroringZ>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

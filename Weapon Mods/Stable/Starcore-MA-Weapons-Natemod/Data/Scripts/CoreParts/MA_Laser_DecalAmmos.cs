@@ -149,7 +149,7 @@ namespace Scripts
                 },
                 Deform = new DeformDef
                 {
-                    DeformType = AllDamagedBlocks,
+                    DeformType = NoDeform,
                     DeformDelay = 30,
                 },
                 Custom = new CustomScalesDef

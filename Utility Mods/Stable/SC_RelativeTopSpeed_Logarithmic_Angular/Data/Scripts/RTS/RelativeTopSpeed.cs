@@ -102,7 +102,14 @@ namespace RelativeTopSpeedGV
             MyAPIGateway.Entities.OnEntityAdd -= AddGrid;
             MyAPIGateway.Entities.OnEntityRemove -= RemoveGrid;
 
-            RtsApiBackend.Close();
+            RtsApiBackend.Close();  // Ensure the API is closed
+
+            if (MyAPIGateway.Session != null)
+            {
+                // Unload the RTS API
+                var rtsApi = new RtsApi();
+                rtsApi.Unload();
+            }
         }
 
         private void AddGrid(IMyEntity ent)

@@ -136,6 +136,7 @@ namespace StarCore.ShareTrack.ShipTracking
         public Vector3 Position => Grid.Physics.CenterOfMassWorld;
         public IMyFaction OwnerFaction => MyAPIGateway.Session?.Factions?.TryGetPlayerFaction(OwnerId);
         public string FactionName => OwnerFaction?.Name ?? "None";
+        public string FactionTag => OwnerFaction?.Tag ?? "N/A";
         public Vector3 FactionColor => ColorMaskToRgb(OwnerFaction?.CustomColor ?? Vector3.Zero);
         public string OwnerName => Owner?.DisplayName ?? GridName;
 
@@ -193,7 +194,7 @@ namespace StarCore.ShareTrack.ShipTracking
             var shieldController = ShieldApi.GetShieldBlock(Grid);
             if (shieldController == null)
                 OriginalMaxShieldHealth = -1;
-            if (OriginalMaxShieldHealth == -1 && !ShieldApi.IsFortified(shieldController))
+            if (!ShieldApi.IsFortified(shieldController))
                 OriginalMaxShieldHealth = MaxShieldHealth;
 
             // TODO: Update pilots
@@ -204,7 +205,7 @@ namespace StarCore.ShareTrack.ShipTracking
             }
 
             bool bufferIsFunctional = IsFunctional;
-            IsFunctional = TotalPower > 0 && TotalTorque > 0 && CockpitCount > 0;
+            IsFunctional = TotalPowerBlocks > 0 && TotalTorque > 0 && CockpitCount > 0;
             if (bufferIsFunctional != IsFunctional)
             {
                 TrackingManager.I.OnShipAliveChanged?.Invoke(Grid, IsFunctional);
@@ -357,7 +358,7 @@ namespace StarCore.ShareTrack.ShipTracking
                                  30 / Math.Max(maxAngle, angle * angle * angle);
                 _nametag.Origin = new Vector2D(targetHudPos.X,
                     targetHudPos.Y + MathHelper.Clamp(-0.000125 * distance + 0.25, 0.05, 0.25));
-                _nametag.Visible = visible && AllGridsList.NametagViewState != NametagSettings.None;
+                _nametag.Visible = visible && AllGridsList.NametagViewState != NametagSettings.None && (MyAPIGateway.Session?.Player?.Controller?.ControlledEntity?.Entity as IMyCockpit)?.CubeGrid != Grid;
 
                 _nametag.Message.Clear();
 
@@ -485,6 +486,17 @@ namespace StarCore.ShareTrack.ShipTracking
 
         public float TotalPower => Grid?.ResourceDistributor?.MaxAvailableResourceByType(MyResourceDistributorComponent.ElectricityId) ?? 0;
 
+        public int TotalPowerBlocks
+        {
+            get
+            {
+                int total = 0;
+                foreach (var stats in _gridStats.Values)
+                    total += stats.TotalPowerBlocks;
+                return total;
+            }
+        }
+
         public Dictionary<string, int> SpecialBlockCounts
         {
             get
@@ -599,7 +611,7 @@ namespace StarCore.ShareTrack.ShipTracking
                 var shieldController = ShieldApi.GetShieldBlock(Grid);
                 if (shieldController == null)
                     return -1;
-                return ShieldApi.GetShieldPercent(shieldController);
+                return ShieldApi.GetShieldPercent(shieldController) * (OriginalMaxShieldHealth == -1 ? 1 : ShieldApi.GetMaxHpCap(shieldController)/OriginalMaxShieldHealth);
             }
         }
 
@@ -610,6 +622,7 @@ namespace StarCore.ShareTrack.ShipTracking
                 var shieldController = ShieldApi.GetShieldBlock(Grid);
                 if (shieldController == null)
                     return -1;
+                
                 return ShieldApi.GetShieldHeat(shieldController);
             }
         }
@@ -623,12 +636,15 @@ namespace StarCore.ShareTrack.ShipTracking
             get
             {
                 var blockCounts = new Dictionary<string, int>();
+
                 foreach (var stats in _gridStats.Values)
-                foreach (var kvp in stats.WeaponCounts)
                 {
-                    if (!blockCounts.ContainsKey(kvp.Key))
-                        blockCounts.Add(kvp.Key, 0);
-                    blockCounts[kvp.Key] += kvp.Value;
+                    foreach (var kvp in stats.WeaponCounts)
+                    {
+                        if (!blockCounts.ContainsKey(kvp.Key))
+                            blockCounts.Add(kvp.Key, 0);
+                        blockCounts[kvp.Key] += kvp.Value;
+                    }
                 }
 
                 return blockCounts;

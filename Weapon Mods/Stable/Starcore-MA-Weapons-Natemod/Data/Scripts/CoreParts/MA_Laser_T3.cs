@@ -61,12 +61,12 @@ namespace Scripts {
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
                 MaxTargetDistance = 3500, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
                 MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
-                TopTargets = 14, // Maximum number of targets to randomize between; 0 = unlimited.
-                CycleTargets = 1, // Number of targets to "cycle" per acquire attempt.
-                TopBlocks = 18, // Maximum number of blocks to randomize between; 0 = unlimited.
-                CycleBlocks = 2, // Number of blocks to "cycle" per acquire attempt.
+                TopTargets = 0, // Maximum number of targets to randomize between; 0 = unlimited.
+                CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
+                TopBlocks = 0, // Maximum number of blocks to randomize between; 0 = unlimited.
+                CycleBlocks = 0, // Number of blocks to "cycle" per acquire attempt.
                 StopTrackingSpeed = 0, // do not track target threats traveling faster than this speed
-                MaxTrackingTime = 35, // After this time has been reached the weapon will stop tracking existing target and scan for a new one, only applies to turreted weapons
+                MaxTrackingTime = 0, // After this time has been reached the weapon will stop tracking existing target and scan for a new one, only applies to turreted weapons
             },
             HardPoint = new HardPointDef
             {
@@ -199,6 +199,7 @@ namespace Scripts {
             },
             Ammos = new[] {
                 MA_Laser_T3, // Must list all primary, shrapnel, and pattern ammos.
+                MA_Laser_T3_Fake, // Must list all primary, shrapnel, and pattern ammos.
                 MA_Laser_T3_Ammo_Decal, // Must list all primary, shrapnel, and pattern ammos.
             },
             Animations = Fixed_T3_Animations,
@@ -231,7 +232,7 @@ namespace Scripts {
             Targeting = new TargetingDef
             {
                 Threats = new[] {
-                    Grids, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
+                    Grids, Neutrals, // Types of threat to engage: Grids, Projectiles, Characters, Meteors, Neutrals
                 },
                 SubSystems = new[] {
                     Offense, Thrust, Utility, Power, Production, Any, // Subsystem targeting priority: Offense, Utility, Power, Production, Thrust, Jumping, Steering, Any
@@ -243,8 +244,8 @@ namespace Scripts {
                 MaximumDiameter = 0, // Maximum radius of threat to engage; 0 = unlimited.
                 MaxTargetDistance = 4000, // Maximum distance at which targets will be automatically shot at; 0 = unlimited.
                 MinTargetDistance = 0, // Minimum distance at which targets will be automatically shot at.
-                TopTargets = 20, // Maximum number of targets to randomize between; 0 = unlimited.
-                TopBlocks = 5, // Maximum number of blocks to randomize between; 0 = unlimited.
+                TopTargets = 0, // Maximum number of targets to randomize between; 0 = unlimited.
+                TopBlocks = 0, // Maximum number of blocks to randomize between; 0 = unlimited.
                 StopTrackingSpeed = 0, // Do not track threats traveling faster than this speed; 0 = unlimited.
             },
             HardPoint = new HardPointDef
@@ -378,6 +379,7 @@ namespace Scripts {
             },
             Ammos = new[] {
                 MA_Laser_Gladius_Ammo, // Must list all primary, shrapnel, and pattern ammos.
+                MA_Laser_Gladius_Ammo_Fake, // Must list all primary, shrapnel, and pattern ammos.
                 MA_Laser_T3_Ammo_Decal, // Must list all primary, shrapnel, and pattern ammos.
             },
             Animations = MA_Gladius_Laser_Animations,

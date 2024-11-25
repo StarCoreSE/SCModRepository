@@ -210,6 +210,7 @@ namespace Scripts {
             Ammos = new[] {
                 MA_Laser_T2_Ammo, // Must list all primary, shrapnel, and pattern ammos.
                 MA_Laser_T2_Ammo_Decal, // Must list all primary, shrapnel, and pattern ammos.
+                MA_Laser_T2_Ammo_Fake, // Must list all primary, shrapnel, and pattern ammos.
             },
             Animations = PDX_Animations,
             //Upgrades = UpgradeModules,
@@ -418,6 +419,7 @@ namespace Scripts {
             Ammos = new[] {
                 MA_Laser_T2_Ammo, // Must list all primary, shrapnel, and pattern ammos.
                 MA_Laser_T2_Ammo_Decal, // Must list all primary, shrapnel, and pattern ammos.
+                MA_Laser_T2_Ammo_Fake, // Must list all primary, shrapnel, and pattern ammos.
             },
             Animations = Fixed_T2_Animations,
             //Upgrades = UpgradeModules,
@@ -636,6 +638,7 @@ namespace Scripts {
             Ammos = new[] {
                 MA_Laser_T2_Ammo, // Must list all primary, shrapnel, and pattern ammos.
                 MA_Laser_T2_Ammo_Decal, // Must list all primary, shrapnel, and pattern ammos.
+                MA_Laser_T2_Ammo_Fake, // Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = PDX_Animations,
             //Upgrades = UpgradeModules,

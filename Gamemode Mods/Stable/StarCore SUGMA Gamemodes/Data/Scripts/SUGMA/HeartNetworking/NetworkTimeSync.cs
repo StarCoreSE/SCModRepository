@@ -70,6 +70,10 @@ namespace SC.SUGMA.HeartNetworking
                     NetworkId,
                     MyAPIGateway.Utilities.SerializeToBinary(new TimeSyncPacket
                         { OutgoingTimestamp = MessageSendTimestamp }));
+
+            // Failsafe
+            if (ServerTimeOffset > 10000 || ServerTimeOffset < -10000)
+                ServerTimeOffset = 0;
         }
 
         private void ReceiveMessage(ushort networkId, byte[] serialized, ulong sender, bool isFromServer)
@@ -112,6 +116,12 @@ namespace SC.SUGMA.HeartNetworking
                 //Log.Info("\nOutgoing Timestamp: " + OutgoingTimestamp + "\nIncoming Timestamp: " + IncomingTimestamp);
                 //Log.Info("ThisPlayerPing: " + NetworkTimeSync.ThisPlayerPing);
                 //Log.Info("ServerTimeOffset: " + NetworkTimeSync.ServerTimeOffset);
+
+                // Failsafe
+                if (NetworkTimeSync.ThisPlayerPing > 10000 || NetworkTimeSync.ThisPlayerPing < -10000)
+                    NetworkTimeSync.ThisPlayerPing = 0;
+                if (NetworkTimeSync.ServerTimeOffset > 10000 || NetworkTimeSync.ServerTimeOffset < -10000)
+                    NetworkTimeSync.ServerTimeOffset = 0;
             }
         }
     }

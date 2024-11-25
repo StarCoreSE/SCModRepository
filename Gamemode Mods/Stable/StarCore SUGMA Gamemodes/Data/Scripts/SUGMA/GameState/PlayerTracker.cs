@@ -15,6 +15,8 @@ namespace SC.SUGMA.GameState
             "SPRT",
             "OUT",
             "ADM",
+            "UNKN",
+            "FCTM",
         };
 
         #region Public Methods

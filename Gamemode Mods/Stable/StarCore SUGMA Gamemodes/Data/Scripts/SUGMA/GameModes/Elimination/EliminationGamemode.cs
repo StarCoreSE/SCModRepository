@@ -231,7 +231,7 @@ namespace SC.SUGMA.GameModes.Elimination
                 MyAPIGateway.Utilities.ShowNotification("YOU ARE ALL LOSERS.", 10000, "Red");
                 return;
             }
-
+        
             MyAPIGateway.Utilities.ShowNotification($"A WINNER IS [{_winningFaction?.Name}]!", 10000);
         }
 

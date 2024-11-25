@@ -13,6 +13,8 @@ namespace SC.SUGMA.HeartNetworking
     [ProtoInclude(96, typeof(ProblemReportPacket))]
     [ProtoInclude(97, typeof(MissingPlayerOverridePacket))]
     [ProtoInclude(98, typeof(AutoBalancePacket))]
+    [ProtoInclude(99, typeof(PauseRequestPacket))]
+    [ProtoInclude(100, typeof(ClearBoardRequestPacket))]
     public abstract class PacketBase
     {
         public static readonly Type[] PacketTypes =
@@ -26,6 +28,8 @@ namespace SC.SUGMA.HeartNetworking
             typeof(ProblemReportPacket),
             typeof(MissingPlayerOverridePacket),
             typeof(AutoBalancePacket),
+            typeof(PauseRequestPacket),
+            typeof(ClearBoardRequestPacket),
         };
 
         /// <summary>

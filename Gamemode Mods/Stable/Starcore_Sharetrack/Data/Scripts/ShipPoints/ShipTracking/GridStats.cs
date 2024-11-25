@@ -16,7 +16,6 @@ namespace StarCore.ShareTrack.ShipTracking
         private readonly HashSet<IMyCubeBlock> _fatBlocks = new HashSet<IMyCubeBlock>();
 
         private readonly HashSet<IMySlimBlock> _slimBlocks;
-        private ShieldApi ShieldApi => AllGridsList.I.ShieldApi;
         private WcApi WcApi => AllGridsList.I.WcApi;
 
         public bool NeedsUpdate { get; private set; } = true;
@@ -128,6 +127,7 @@ namespace StarCore.ShareTrack.ShipTracking
         public readonly Dictionary<string, int> SpecialBlockCounts = new Dictionary<string, int>();
         public float TotalThrust { get; private set; }
         public float TotalTorque { get; private set; }
+        public int TotalPowerBlocks { get; private set; }
 
         public float GridIntegrity { get; private set; }
         public float OriginalGridIntegrity { get; private set; }
@@ -189,25 +189,29 @@ namespace StarCore.ShareTrack.ShipTracking
 
             TotalThrust = 0;
             TotalTorque = 0;
+            TotalPowerBlocks = 0;
 
             foreach (var block in _fatBlocks)
             {
-                if (block is IMyCockpit && block.IsFunctional)
+                // Does not check for functionality of blocks because they can be welded.
+                if (block is IMyCockpit)
                     CockpitCount++;
-
-                if (block is IMyThrust && block.IsFunctional)
+                else if (block is IMyThrust)
                 {
                     TotalThrust += ((IMyThrust)block).MaxEffectiveThrust;
                 }
-
-                else if (block is IMyGyro && block.IsFunctional)
+                else if (block is IMyGyro)
                 {
                     TotalTorque +=
                         ((MyGyroDefinition)MyDefinitionManager.Static.GetDefinition((block as IMyGyro).BlockDefinition))
                         .ForceMagnitude * (block as IMyGyro).GyroStrengthMultiplier;
                 }
+                else if (block is IMyPowerProducer)
+                {
+                    TotalPowerBlocks++;
+                }
 
-                if (!(block is IMyConveyorSorter) || !WcApi.HasCoreWeapon((MyEntity)block))
+                if (!AllGridsList.I.WeaponSubtytes.Contains(block.BlockDefinition.SubtypeId))
                 {
                     var blockDisplayName = block.DefinitionDisplayNameText;
                     if (blockDisplayName
@@ -242,14 +246,10 @@ namespace StarCore.ShareTrack.ShipTracking
         private void UpdateWeaponStats()
         {
             WeaponCounts.Clear();
-            foreach (var weaponBlock in _fatBlocks)
+            // Check that the block has points and is a weapon
+            foreach (var weaponBlock in _fatBlocks.Where(b => AllGridsList.I.WeaponSubtytes.Contains(b.BlockDefinition.SubtypeId)))
             {
-                // Check that the block has points and is a weapon
-                int weaponPoints;
                 var weaponDisplayName = weaponBlock.DefinitionDisplayNameText;
-                if (!AllGridsList.PointValues.TryGetValue(weaponBlock.BlockDefinition.SubtypeName, out weaponPoints) ||
-                    !WcApi.HasCoreWeapon((MyEntity)weaponBlock))
-                    continue;
 
                 float thisClimbingCostMult = 0;
 
@@ -275,7 +275,13 @@ namespace StarCore.ShareTrack.ShipTracking
             if (!BlockCounts.ContainsKey(blockDisplayName))
                 BlockCounts.Add(blockDisplayName, 0);
 
-            var thisSpecialBlocksCount = BlockCounts[blockDisplayName]++;
+            int thisSpecialBlocksCount = BlockCounts[blockDisplayName]++;
+
+            string[] crossedGroup = AllGridsList.CrossedClimbingCostGroups.FirstOrDefault(l => l.Contains(blockDisplayName));
+            if (crossedGroup != null)
+            {
+                thisSpecialBlocksCount = crossedGroup.Where(g => g != blockDisplayName).Sum(groupName => BlockCounts.GetValueOrDefault(groupName, 0));
+            }
 
             if (thisClimbingCostMult > 0)
                 blockPoints += (int)(blockPoints * thisSpecialBlocksCount * thisClimbingCostMult);
@@ -284,7 +290,7 @@ namespace StarCore.ShareTrack.ShipTracking
                 MovementPoints += blockPoints;
             if (block is IMyPowerProducer)
                 PowerPoints += blockPoints;
-            if (WcApi.HasCoreWeapon((MyEntity)block))
+            if (AllGridsList.I.WeaponSubtytes.Contains(block.BlockDefinition.SubtypeId))
             {
                 // Weapons on subgrids have an extra 20% cost applied
                 //if (!IsPrimaryGrid)

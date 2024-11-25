@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VRage.Game.Components;
 using CoreSystems.Api;
-using Starcore.FieldGenerator.Networking;
+using Draygo.API;
 
 namespace Starcore.FieldGenerator
 {
@@ -13,13 +13,11 @@ namespace Starcore.FieldGenerator
     public class FieldGeneratorSession : MySessionComponentBase
     {
         public static WcApi CoreSysAPI;
-        public static HeartNetwork Networking = new HeartNetwork();
+        public static HudAPIv2 HudAPI;
 
         public override void LoadData()
         {
-            base.LoadData();
-
-            Networking.Init("FieldGeneratorNetwork");
+            HudAPI = new HudAPIv2();
 
             CoreSysAPI = new WcApi();
             CoreSysAPI.Load();
@@ -27,7 +25,11 @@ namespace Starcore.FieldGenerator
 
         protected override void UnloadData()
         {
-            Networking.Close();
+            if (HudAPI.Heartbeat)
+            { 
+                HudAPI.Unload();
+                HudAPI = null;
+            }
 
             if (CoreSysAPI.IsReady)
             {
