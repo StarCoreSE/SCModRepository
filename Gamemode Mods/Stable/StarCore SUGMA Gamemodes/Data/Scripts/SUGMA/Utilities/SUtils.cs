@@ -135,7 +135,7 @@ namespace SC.SUGMA.Utilities
 
             if (resetFactions)
             {
-                IMyFaction neutralFaction = PlayerTracker.I.GetPlayerFactions().FirstOrDefault(f => f.Tag == "NEU") ?? PlayerTracker.I.GetPlayerFactions().First();
+                IMyFaction neutralFaction = MyAPIGateway.Session.Factions.Factions.Values.FirstOrDefault(f => f.Tag == "NEU") ?? PlayerTracker.I.GetPlayerFactions().First();
                 foreach (var player in PlayerTracker.I.AllPlayers)
                 {
                     MyVisualScriptLogicProvider.SetPlayersFaction(player.Key, neutralFaction.Tag);
