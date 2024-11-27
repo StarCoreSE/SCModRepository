@@ -10,7 +10,7 @@ namespace SC.SUGMA.GameModes.TeamDeathmatch
 {
     internal class TeamDeathmatchGamemode : GamemodeBase
     {
-        public static double MatchDuration = 15;
+        public static double MatchDuration = 10;
         public static int VictoryPoints = -1;
         public static double RespawnTimeSeconds = 10;
 
