@@ -349,6 +349,7 @@ namespace ShipPoints
 
             ["LargeBlockRadioAntenna"] = 5,
             ["LargeBlockCompactRadioAntenna"] = 5,
+            ["LargeBlockCompactRadioAntennaReskin"] = 5,
             ["LargeBlockRadioAntennaDish"] = 5,
             ["SC1x1Antenna"] = 5,
             ["C500mmTurret"] = 300,
