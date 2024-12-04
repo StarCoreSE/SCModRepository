@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Xml;
 using Sandbox.ModAPI;
@@ -358,7 +358,7 @@ namespace ShipPoints
             ["C400mmTurret"] = 300,
 
             ["ARYXRailgunTurret"] = 350,
-            ["SC_AR_Deimos"] = 400,
+            ["SC_AR_Deimos"] = 600,
             ["MCRNRailgunLB"] = 1250,
 
             ["Cat_BigRotorStators"] = 16,
