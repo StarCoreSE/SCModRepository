@@ -35,7 +35,7 @@ using static Scripts.Structure.WeaponDefinition.AmmoDef.GraphicDef.DecalDef;
 using static Scripts.Structure.WeaponDefinition.AmmoDef.DamageScaleDef.DamageTypes.Damage;
 
 namespace Scripts
-{ // Don't edit above this line // hellow wurld uwu
+{ // Don't edit above this line // hellow wurld uwu //OwO
     partial class Parts
     {
 
