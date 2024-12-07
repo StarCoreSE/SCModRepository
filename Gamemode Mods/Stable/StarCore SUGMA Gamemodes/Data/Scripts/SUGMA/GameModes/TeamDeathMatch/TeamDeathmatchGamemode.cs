@@ -60,7 +60,7 @@ namespace SC.SUGMA.GameModes.TeamDeathmatch
             //if (PointTracker == null || MatchTimer == null ||
             //    TrackedFactions == null) // ten billion nullchecks of aristeas
             //    return;
-            if (MatchTimer.IsMatchEnded)
+            if (MatchTimer.IsMatchEnded && MyAPIGateway.Session.IsServer)
                 StopRound();
         }
 
