@@ -406,38 +406,5 @@
       </ItemIds>
     </Category>
 
-    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
-      <Id>
-        <TypeId>GuiBlockCategoryDefinition</TypeId>
-        <SubtypeId/>
-      </Id>
-      <DisplayName>  [CHP]</DisplayName>
-      <Name>.SC_[CHP]</Name>
-      <IsBlockCategory>true</IsBlockCategory>
-      <ItemIds>
-        <!--[CHP]-->
-        <string>CHP_MediumKineticTurret</string>
-        <string>CHP_MediumMassDriverTurret</string>
-        <string>CHP_MediumMassDriverSingleTurret</string>
-        <string>CHP_ArbiterKineticBurstCannon</string>
-        <string>CHP_HeavyMassDriverTurret</string>
-        <string>CHP_KineticAutogunPDC</string>
-        <string>CHP_FlakTurret</string>
-        <string>CHP_MediumIonTurret</string>
-        <string>CHP_IonTurret</string>
-        <string>CHP_IonCannonFixed</string>
-        <string>CHP_HeavyTorpedoLauncher</string>
-        <string>CHP_DroneHangarHiigara</string>
-        <string>CHP_DroneBomberHangarHiigara</string>
-        <string>CHP_DroneHangarHiigara_Rail</string>
-        <string>CHP_DroneBomberHangarHiigara_Rail</string>
-        <string>CHP_DroneHangarHiigara_Tall</string>
-        <string>CHP_DroneHangarHiigara_TallFlat</string>
-        <string>CHP_DroneBomberHangarHiigara_Tall</string>
-        <string>CHP_DroneBomberHangarHiigara_TallFlat</string>
-      </ItemIds>
-    </Category>
-
-
   </CategoryClasses>
 </Definitions>
