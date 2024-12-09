@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Sandbox.Game;
 using Sandbox.Game.Entities.Blocks;
 using VRage.Game;
 using VRage.Game.ModAPI;
@@ -104,7 +105,7 @@ namespace SC.SUGMA.Utilities
         /// <summary>
         /// Kills all players, ends the match, and deletes all player grids.
         /// </summary>
-        public static void ClearBoard()
+        public static void ClearBoard(bool resetFactions)
         {
             if (!MyAPIGateway.Session.IsServer)
                 return;
@@ -131,6 +132,15 @@ namespace SC.SUGMA.Utilities
 
                 return false;
             });
+
+            if (resetFactions)
+            {
+                IMyFaction neutralFaction = MyAPIGateway.Session.Factions.Factions.Values.FirstOrDefault(f => f.Tag == "NEU") ?? PlayerTracker.I.GetPlayerFactions().First();
+                foreach (var player in PlayerTracker.I.AllPlayers)
+                {
+                    MyVisualScriptLogicProvider.SetPlayersFaction(player.Key, neutralFaction.Tag);
+                }
+            }
 
             MyAPIGateway.Utilities.SendMessage("Board cleared.");
         }

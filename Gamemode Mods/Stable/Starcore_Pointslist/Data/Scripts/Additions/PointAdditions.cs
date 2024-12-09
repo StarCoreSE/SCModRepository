@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Xml;
 using Sandbox.ModAPI;
@@ -349,6 +349,7 @@ namespace ShipPoints
 
             ["LargeBlockRadioAntenna"] = 5,
             ["LargeBlockCompactRadioAntenna"] = 5,
+            ["LargeBlockCompactRadioAntennaReskin"] = 5,
             ["LargeBlockRadioAntennaDish"] = 5,
             ["SC1x1Antenna"] = 5,
             ["C500mmTurret"] = 300,
@@ -357,7 +358,7 @@ namespace ShipPoints
             ["C400mmTurret"] = 300,
 
             ["ARYXRailgunTurret"] = 350,
-            ["SC_AR_Deimos"] = 400,
+            ["SC_AR_Deimos"] = 600,
             ["MCRNRailgunLB"] = 1250,
 
             ["Cat_BigRotorStators"] = 16,

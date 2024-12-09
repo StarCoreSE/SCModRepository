@@ -113,7 +113,7 @@ namespace StarCore.ShareTrack.ShipTracking
 
         private bool CheckAutotrack(IMyCubeGrid grid)
         {
-            if (!EnableAutotrack || !MasterSession.Config.AutoTrack)
+            if (!EnableAutotrack /*|| !MasterSession.Config.AutoTrack*/)
                 return false;
 
             foreach (var block in grid.GetFatBlocks<IMyCubeBlock>())

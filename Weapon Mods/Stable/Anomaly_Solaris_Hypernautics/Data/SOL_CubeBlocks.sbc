@@ -442,11 +442,9 @@
 			<MountPoints>
 				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
 			</MountPoints>
-			<BuildProgressModels>
-			<Model BuildPercentUpperBound="0.10" File="Models\SA_GaussAP_Large_Constr1.mwm" />
-			<Model BuildPercentUpperBound="0.5" File="Models\SA_GaussAP_Large_Constr2.mwm" />
-			<Model BuildPercentUpperBound="0.90" File="Models\SA_GaussAP_Large_Constr3.mwm" />
-		</BuildProgressModels>
+
+
+			
 			<VoxelPlacement>
 				<StaticMode>
 					<PlacementMode>OutsideVoxel</PlacementMode>

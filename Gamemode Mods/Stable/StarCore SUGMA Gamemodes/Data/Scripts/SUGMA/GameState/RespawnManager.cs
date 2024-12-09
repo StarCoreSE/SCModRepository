@@ -23,7 +23,7 @@ namespace SC.SUGMA.GameState
 
         public double RespawnTimeSeconds;
         private readonly Dictionary<IMyCubeGrid, MyObjectBuilder_CubeGrid> _respawnBuffer = new Dictionary<IMyCubeGrid, MyObjectBuilder_CubeGrid>();
-        private readonly Queue<MyTuple<int, IMyCubeGrid, IMyCubeGrid>> _respawnTimeBuffer = new Queue<MyTuple<int, IMyCubeGrid, IMyCubeGrid>>();
+        private readonly Queue<MyTuple<int, IMyCubeGrid, IMyCubeGrid, MyObjectBuilder_CubeGrid>> _respawnTimeBuffer = new Queue<MyTuple<int, IMyCubeGrid, IMyCubeGrid, MyObjectBuilder_CubeGrid>>();
 
         public RespawnManager(double respawnTimeSeconds = 0)
         {
@@ -71,6 +71,7 @@ namespace SC.SUGMA.GameState
                 var tuple = _respawnTimeBuffer.Dequeue();
                 ShareTrackApi.UnTrackGrid(tuple.Item3);
                 ActivateGrid(tuple.Item2);
+                _respawnBuffer[tuple.Item2] = tuple.Item4;
             }
         }
 
@@ -116,12 +117,12 @@ namespace SC.SUGMA.GameState
                 return;
 
             IMyCubeGrid newGrid = (IMyCubeGrid)MyAPIGateway.Entities.CreateFromObjectBuilderParallel(_respawnBuffer[grid], false, SetupBufferGrid);
-            _respawnBuffer.Remove(grid);
 
             foreach (var powerProducer in grid.GetFatBlocks<IMyPowerProducer>())
                 powerProducer.Close();
 
-            _respawnTimeBuffer.Enqueue(new MyTuple<int, IMyCubeGrid, IMyCubeGrid>(_ticks + (int)(60 * RespawnTimeSeconds), newGrid, grid));
+            _respawnTimeBuffer.Enqueue(new MyTuple<int, IMyCubeGrid, IMyCubeGrid, MyObjectBuilder_CubeGrid>(_ticks + (int)(60 * RespawnTimeSeconds), newGrid, grid, _respawnBuffer[grid]));
+            _respawnBuffer.Remove(grid);
         }
 
         private void SetupBufferGrid(IMyEntity gridEnt)

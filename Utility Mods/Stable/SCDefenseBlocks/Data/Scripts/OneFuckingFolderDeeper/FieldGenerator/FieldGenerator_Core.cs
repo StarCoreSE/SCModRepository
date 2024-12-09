@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Text;
 using System.Collections.Generic;
@@ -258,16 +258,6 @@ namespace Starcore.FieldGenerator
                 PurgeHUDMessage();    
         }
 
-        public override bool IsSerialized()
-        {
-            if (Block == null )
-                return false;
-
-            SaveSettings();
-
-            return base.IsSerialized();
-        }
-
         public override void Close()
         {
             base.Close();
@@ -286,7 +276,7 @@ namespace Starcore.FieldGenerator
                 MinFieldPower.ValueChanged -= (obj) => SaveSettings();
                 SizeModifier.ValueChanged -= (obj) => SaveSettings();
 
-                SiegeMode.ValueChanged += SiegeMode_ValueChanged;
+                SiegeMode.ValueChanged -= SiegeMode_ValueChanged;
                 FieldPower.ValueChanged -= FieldPower_ValueChanged;
                 Stability.ValueChanged -= Stability_ValueChanged;
             }
