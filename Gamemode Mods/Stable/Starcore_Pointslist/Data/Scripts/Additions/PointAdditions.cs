@@ -948,7 +948,7 @@ namespace ShipPoints
                     costMultiplier = 50.00f;
                     break;
                 case "Structural Integrity Field Generator":
-		        case "[S.I] Generator Core":
+		case "[SI] Generator Core":
                     blockDisplayName = "Defensive Generator";
                     costMultiplier = 50.00f;
                     break;
