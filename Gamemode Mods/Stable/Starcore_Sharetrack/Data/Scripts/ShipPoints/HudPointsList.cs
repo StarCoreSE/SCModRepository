@@ -105,7 +105,9 @@ namespace StarCore.ShareTrack
                 return;
             var stopwatch = new System.Diagnostics.Stopwatch();
             stopwatch.Start();
-            if (_shipTracker?.Grid?.GetGridGroup(GridLinkTypeEnum.Physical) != focusedGrid.GetGridGroup(GridLinkTypeEnum.Physical) && !TrackingManager.I.TrackedGrids.TryGetValue(focusedGrid, out _shipTracker))
+            
+            _shipTracker = TrackingManager.I.TryGetTracker(focusedGrid);
+            if (_shipTracker == null)
             {
                 _shipTracker = new ShipTracker(focusedGrid, false);
                 Log.Info($"ShiftTCalcs Tracked grid {focusedGrid.DisplayName}. Visible: false");

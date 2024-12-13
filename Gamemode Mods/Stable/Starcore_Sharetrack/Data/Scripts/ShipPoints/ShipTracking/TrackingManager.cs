@@ -286,6 +286,15 @@ namespace StarCore.ShareTrack.ShipTracking
             return false;
         }
 
+        public ShipTracker TryGetTracker(IMyCubeGrid grid)
+        {
+            var allAttachedGrids = new List<IMyCubeGrid>();
+            grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(allAttachedGrids);
+            foreach (var attachedGrid in allAttachedGrids.Where(attachedGrid => TrackedGrids.ContainsKey(attachedGrid)))
+                return TrackedGrids[attachedGrid];
+            return null;
+        }
+
         public void ServerDoSync()
         {
             var packet = new TrackingSyncPacket(GetGridIds());
