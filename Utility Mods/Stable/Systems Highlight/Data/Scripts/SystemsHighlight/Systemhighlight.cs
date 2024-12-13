@@ -80,7 +80,7 @@ namespace StarCore.SystemHighlight
         public override void LoadData()
         {
             // Return if Server-Side | Only Runs on Client
-            if (MyAPIGateway.Session.IsServer && MyAPIGateway.Utilities.IsDedicated)
+            if (MyAPIGateway.Session.IsServer)
                 return;
 
             List<MyObjectBuilder_Checkpoint.ModItem> loadedMods = MyAPIGateway.Session.Mods;            
@@ -199,52 +199,46 @@ namespace StarCore.SystemHighlight
             {
                 foreach (IMyCubeGrid grid in ActiveGrids.Values)
                 {
-                    if (grid != null && gridDrawLists.ContainsKey(grid))
+                    if (grid == null || grid.MarkedForClose || !gridDrawLists.ContainsKey(grid))
+                        continue;
+
+                    Dictionary<IMySlimBlock, HighlightFilterType> slimBlockDict = gridDrawLists[grid];
+
+                    foreach (var entry in slimBlockDict.ToList()) // Use ToList to avoid collection modification issues
                     {
-                        Dictionary<IMySlimBlock, HighlightFilterType> slimBlockDict = gridDrawLists[grid];
+                        IMySlimBlock slimBlock = entry.Key;
 
-                        foreach (KeyValuePair<IMySlimBlock, HighlightFilterType> entry in slimBlockDict)
+                        if (slimBlock == null || slimBlock.CubeGrid == null || slimBlock.CubeGrid.MarkedForClose)
                         {
-                            IMySlimBlock slimBlock = entry.Key;
-                            HighlightFilterType filterType = entry.Value;
-
-                            if (slimBlock.Dithering != 1.0f)
-                            {
-                                slimBlock.Dithering = 1.0f;
-                            }
-
-                            Vector3D blockPosition;
-                            Matrix blockRotation;
-
-                            slimBlock.ComputeWorldCenter(out blockPosition);
-                            slimBlock.Orientation.GetMatrix(out blockRotation);
-
-                            MatrixD gridRotationMatrix = slimBlock.CubeGrid.WorldMatrix;
-                            gridRotationMatrix.Translation = Vector3D.Zero;
-                            blockRotation *= gridRotationMatrix;
-                            MatrixD blockWorldMatrix = MatrixD.CreateWorld(blockPosition, blockRotation.Forward, blockRotation.Up);
-
-                            float unit = slimBlock.CubeGrid.GridSize * 0.5f;
-                            Vector3 halfExtents = new Vector3((float)unit, (float)unit, (float)unit);
-                            BoundingBoxD box = new BoundingBoxD(-halfExtents, halfExtents);
-                            Color c = Color.White;
-
-                            if (filterType == HighlightFilterType.LightArmor)
-                            {
-                                c = Color.Lime;
-                            }
-                            else if (filterType == HighlightFilterType.HeavyArmor)
-                            {
-                                c = Color.MediumVioletRed * 2f;
-                            }
-
-                            MySimpleObjectDraw.DrawTransparentBox(ref blockWorldMatrix, ref box, ref c, MySimpleObjectRasterizer.Solid, 1, 0.001f, null, null, true, -1, BlendTypeEnum.AdditiveTop, 1000f);
+                            slimBlockDict.Remove(slimBlock);
+                            continue;
                         }
+
+                        HighlightFilterType filterType = entry.Value;
+
+                        if (slimBlock.Dithering != 1.0f)
+                            slimBlock.Dithering = 1.0f;
+
+                        Vector3D blockPosition;
+                        Matrix blockRotation;
+
+                        slimBlock.ComputeWorldCenter(out blockPosition);
+                        slimBlock.Orientation.GetMatrix(out blockRotation);
+
+                        MatrixD gridRotationMatrix = slimBlock.CubeGrid.WorldMatrix;
+                        gridRotationMatrix.Translation = Vector3D.Zero;
+                        blockRotation *= gridRotationMatrix;
+                        MatrixD blockWorldMatrix = MatrixD.CreateWorld(blockPosition, blockRotation.Forward, blockRotation.Up);
+
+                        float unit = slimBlock.CubeGrid.GridSize * 0.5f;
+                        Vector3 halfExtents = new Vector3((float)unit, (float)unit, (float)unit);
+                        BoundingBoxD box = new BoundingBoxD(-halfExtents, halfExtents);
+                        Color c = filterType == HighlightFilterType.LightArmor ? Color.Lime : Color.MediumVioletRed * 2f;
+
+                        MySimpleObjectDraw.DrawTransparentBox(ref blockWorldMatrix, ref box, ref c, MySimpleObjectRasterizer.Solid, 1, 0.001f, null, null, true, -1, BlendTypeEnum.AdditiveTop, 1000f);
                     }
                 }
             }
-            else
-                return;
         }
         #endregion
 
@@ -507,6 +501,7 @@ namespace StarCore.SystemHighlight
             if (!ActiveGrids.Keys.Contains(cubeGridID) && !ActiveGrids.Values.Contains(cubeGrid))
             {
                 cubeGrid.OnGridSplit += HandleGridSplit;
+                cubeGrid.OnMarkForClose += HandleGridClose;
                 ActiveGrids.Add(cubeGridID, cubeGrid);
             }
 
@@ -810,6 +805,26 @@ namespace StarCore.SystemHighlight
                     ClearHighlight(originalGridBlocks, originalGrid);
                     ClearHighlight(newGridBlocks, newGrid);
                 }
+            }
+        }
+
+        private void HandleGridClose(IMyEntity entity) 
+        { 
+            var grid = entity as IMyCubeGrid;
+            if (grid == null)
+                return;
+
+            if (ActiveGrids.ContainsKey(grid.EntityId))
+            {
+                List<IMySlimBlock> blocks = new List<IMySlimBlock>();
+                grid.GetBlocks(blocks);
+                ClearHighlight(blocks, grid);
+
+                ActiveGrids.Remove(grid.EntityId);
+                highlightedEntitiesPerGrid.Remove(grid);
+                gridDrawLists.Remove(grid);
+
+                grid.OnMarkForClose -= HandleGridClose;
             }
         }
 
