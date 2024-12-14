@@ -2760,7 +2760,7 @@
 
       <Definition xsi:type="MyObjectBuilder_CryoChamberDefinition">
         <Id>
-          <TypeId>CryoChamber</TypeId>
+          <TypeId>CubeBlock</TypeId>
           <SubtypeId>LargeBlockCryoRoom</SubtypeId>
         </Id>
         <DisplayName>DisplayName_Block_CryoRoom</DisplayName>
