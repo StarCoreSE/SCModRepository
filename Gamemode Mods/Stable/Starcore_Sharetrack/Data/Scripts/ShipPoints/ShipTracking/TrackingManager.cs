@@ -128,7 +128,7 @@ namespace StarCore.ShareTrack.ShipTracking
             return false;
         }
 
-        private static readonly Dictionary<string, long> ShipNamesToLeaderIds = new Dictionary<string, long>
+        private static readonly Dictionary<string, ulong> ShipNamesToLeaderIds = new Dictionary<string, ulong>
         {
             // ASQ - Demonfox
             ["ASQ Fulma Natrii"] = 76561198006916493,
@@ -150,7 +150,7 @@ namespace StarCore.ShareTrack.ShipTracking
             ["GT4 - MCE Beekeeper"] = 76561198256358015,
             ["GT4 30 Ramstick ARRAY"] = 76561198256358015,
             ["MCE Sonnenblume GT4 Fusion"] = 76561198256358015,
-            ["[MCE] Dancing in Starlight GT4"] = 76561198256358015,
+            ["[MCE] Dancing in Starlight GT4"] = 76561198274566684,
 
             // RKD - Anomaly
             ["Fire Hawk MK3 v7"] = 76561198049738491,
@@ -179,13 +179,14 @@ namespace StarCore.ShareTrack.ShipTracking
             if (!MyAPIGateway.Session.IsServer || !ShipNamesToLeaderIds.ContainsKey(grid.DisplayName))
                 return;
 
-            long playerId = ShipNamesToLeaderIds[grid.DisplayName];
+            long playerId = MyAPIGateway.Players.TryGetIdentityId(ShipNamesToLeaderIds[grid.DisplayName]);
 
             List<IMyCubeGrid> attachedGrids = new List<IMyCubeGrid>();
             grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(attachedGrids);
 
             foreach (var aGrid in attachedGrids)
                 aGrid.ChangeGridOwnership(playerId, MyOwnershipShareModeEnum.Faction);
+            MyAPIGateway.Utilities.ShowMessage("", "Transferred grid to " + playerId);
         }
 
         #region Public Methods
