@@ -160,7 +160,7 @@ namespace StarCore.ShareTrack.ShipTracking
             // TEC - Darth411
             ["TEC Challenger T48G-2 [BANSHEE] GT4"] = 76561198013723549,
             ["TEC Coyote Mk4 GT4"] = 76561198013723549,
-            ["TEC Heavy Frigate - GT4"] = 76561198013723549,
+            [" TEC Heavy Frigate - GT4"] = 76561198013723549,
             ["TEC Stolen Identity (GT4)"] = 76561198013723549,
 
             // UOD - Bryce_Craft
