@@ -176,17 +176,16 @@ namespace StarCore.ShareTrack.ShipTracking
         /// <param name="grid"></param>
         private void TransferGridOwnership(IMyCubeGrid grid)
         {
-            if (!MyAPIGateway.Session.IsServer || !ShipNamesToLeaderIds.ContainsKey(grid.DisplayName))
+            if (!MyAPIGateway.Session.IsServer || !ShipNamesToLeaderIds.ContainsKey(grid.DisplayName.Replace("\"", "")))
                 return;
 
-            long playerId = MyAPIGateway.Players.TryGetIdentityId(ShipNamesToLeaderIds[grid.DisplayName]);
+            long playerId = MyAPIGateway.Players.TryGetIdentityId(ShipNamesToLeaderIds[grid.DisplayName.Replace("\"", "")]);
 
             List<IMyCubeGrid> attachedGrids = new List<IMyCubeGrid>();
             grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(attachedGrids);
 
             foreach (var aGrid in attachedGrids)
                 aGrid.ChangeGridOwnership(playerId, MyOwnershipShareModeEnum.Faction);
-            MyAPIGateway.Utilities.ShowMessage("", "Transferred grid to " + playerId);
         }
 
         #region Public Methods
