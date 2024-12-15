@@ -115,8 +115,14 @@ namespace SC.SUGMA.Utilities
             foreach (var faction in PlayerTracker.I.GetPlayerFactions())
                 playerIds.AddRange(faction.Members.Values.Select(player => player.PlayerId));
 
+            var greenSpawn = GetFactionSpawns().FirstOrDefault(b => b.Key.Tag == "NEU").Value;
             foreach (var player in PlayerTracker.I.AllPlayers.Where(p => playerIds.Contains(p.Key)))
-                player.Value.Character?.Kill();
+            {
+                if (greenSpawn != null)
+                    player.Value.Character?.SetWorldMatrix(greenSpawn.WorldMatrix);
+                else
+                    player.Value.Character?.Kill();
+            }
 
             SUGMA_SessionComponent.I.StopGamemode(true);
 

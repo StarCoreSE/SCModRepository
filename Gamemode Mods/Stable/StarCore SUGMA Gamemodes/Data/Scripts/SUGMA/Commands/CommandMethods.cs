@@ -70,9 +70,9 @@ namespace SC.SUGMA.Commands
         public static void ClearBoard(string[] args)
         {
             if (MyAPIGateway.Session.IsServer)
-                new ClearBoardRequestPacket(args.Contains("-s")).Received(0);
+                new ClearBoardRequestPacket(true).Received(0);
             else
-                HeartNetwork.I.SendToServer(new ClearBoardRequestPacket(args.Contains("-s")));
+                HeartNetwork.I.SendToServer(new ClearBoardRequestPacket(true));
         }
 
         #endregion
