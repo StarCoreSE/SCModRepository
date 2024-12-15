@@ -121,7 +121,7 @@ namespace StarCore.ShareTrack.ShipTracking
             {
                 if (!(block is IMyCockpit) && !AutoTrackSubtypes.Contains(block.BlockDefinition.SubtypeName))
                     continue;
-                TransferGridOwnership(grid);
+                //TransferGridOwnership(grid);
                 return true;
             }
 
