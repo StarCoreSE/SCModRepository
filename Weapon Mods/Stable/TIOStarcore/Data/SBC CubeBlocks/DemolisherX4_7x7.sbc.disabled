@@ -18,7 +18,7 @@
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="7" y="3" z="7"/>
 			<ModelOffset x="0" y="2.5" z="0"/>
-			<Model>Models\Cubes\large\PrototypeSiegeArtillery.mwm</Model>
+			<Model></Model>
 			<Components>
 				<Component Subtype="TurretBaseComponent" Count="25" />
 				<Component Subtype="TurretRotorComponent" Count="1" />

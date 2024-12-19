@@ -69,7 +69,7 @@
 			<DestroySound>WepSmallWarheadExpl</DestroySound>
       <PCU>150</PCU>
 		</Definition>
-
+<!-- 
     <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
             <Id>
                 <TypeId>ConveyorSorter</TypeId>
@@ -172,7 +172,7 @@
             <PCU>150</PCU>
             <IsAirTight>false</IsAirTight>
     </Definition>
-
+-->
 
 
     </CubeBlocks>
