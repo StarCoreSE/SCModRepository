@@ -1953,14 +1953,14 @@ namespace Scripts
                     Enable = true, // Enables TimedSpawns mechanism
                     Interval = 0, // Time between spawning fragments, in ticks, 0 means every tick, 1 means every other
                     StartTime = 0, // Time delay to start spawning fragments, in ticks, of total projectile life
-                    MaxSpawns = 4, // Max number of fragment children to spawn
-                    Proximity = 400, //400 Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
+                    MaxSpawns = 4, // Max number of fragment GROUPSIZES to spawn
+                    Proximity = 400, //Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
                     ParentDies = true, // Parent dies once after it spawns its last child.
-                    PointAtTarget = false, // Start fragment direction pointing at Target
-                    PointType = Lead, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
+                    PointAtTarget = false, //(cancer causing to gameplay lol) Start fragment direction pointing at Target
+                    PointType = Lead, //doesnt matter if false, use lead or direct. //Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
                     DirectAimCone = 15f, //Aim cone used for Direct fire, in degrees
-                    GroupSize = 4, // Number of spawns in each group
-                    GroupDelay = 4, //5 Delay between each group.
+                    GroupSize = 4, // Number of spawns in each group. multiply this by max spawns, = 16 in our case.
+                    GroupDelay = 4, // Delay in ticks between each group. in this case would take a quarter second to spawn all fragments.
                 },
             },
             Pattern = new PatternDef
