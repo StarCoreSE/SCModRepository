@@ -63,6 +63,9 @@ namespace SC.SUGMA.GameModes.Elimination
                     if (OnFactionKilled(factionKvp))
                         return;
 
+            if (_matchTimer.IsMatchEnded && MyAPIGateway.Session.IsServer)
+                StopRound();
+
             //double matchRatio = 1 - currentPoints / basePoints;
             //
             //if (matchRatio <= 0.76) // If within 12 seconds of 15:00 matchtime (assuming 20:00 total)

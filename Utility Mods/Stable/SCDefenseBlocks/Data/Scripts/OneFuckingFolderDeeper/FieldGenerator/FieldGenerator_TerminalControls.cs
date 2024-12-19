@@ -174,7 +174,7 @@ namespace Starcore.FieldGenerator
                     return !logic.SiegeMode.Value;
                 }
                 else
-                    return true;
+                    return false;
             };
             MyAPIGateway.TerminalControls.AddAction<IMyCollector>(IncreasePowerAction);
             #endregion
@@ -214,7 +214,7 @@ namespace Starcore.FieldGenerator
                     return !logic.SiegeMode.Value;
                 }
                 else
-                    return true;
+                    return false;
             };
             MyAPIGateway.TerminalControls.AddAction<IMyCollector>(DecreasePowerAction);
             #endregion

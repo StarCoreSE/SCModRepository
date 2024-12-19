@@ -62,7 +62,7 @@
           <TypeId>Collector</TypeId>
           <SubtypeId>FieldGen_Capacity_Upgrade</SubtypeId>
         </Id>
-        <DisplayName>[S.I] Generator Capacity Upgrade</DisplayName>
+        <DisplayName>[SI] Generator Capacity Upgrade</DisplayName>
         <Icon>Textures\GUI\Icons\Cubes\Upgrade_Icon.dds</Icon>
         <Description>
 			Capacity Upgrade for the Generator Core.
@@ -120,7 +120,7 @@
           <TypeId>Collector</TypeId>
           <SubtypeId>FieldGen_Core</SubtypeId>
         </Id>
-        <DisplayName>[S.I] Generator Core</DisplayName>
+        <DisplayName>[SI] Generator Core</DisplayName>
         <Icon>Textures\GUI\Icons\Cubes\Core_Icon.dds</Icon>
         <Description>
 			This Block Consumes 0-500 MW of Power, in exchange for a 0-50% Incoming Damage Reduction.
