@@ -20,7 +20,7 @@ namespace Scripts {
             {
                 MountPoints = new[] {
                     new MountPointDef {
-                        SubtypeId = "DualSnubLaserTurret", // Block Subtypeid. Your Cubeblocks contain this information
+                        SubtypeId = "", // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "", // For weapons with a spinning barrel such as Gatling Guns. Subpart_Boomsticks must be written as Boomsticks.
                         MuzzlePartId = "MissileTurretBarrels", // The subpart where your muzzle empties are located. This is often the elevation subpart. Subpart_Boomsticks must be written as Boomsticks.
                         AzimuthPartId = "MissileTurretBase1", // Your Rotating Subpart, the bit that moves sideways.

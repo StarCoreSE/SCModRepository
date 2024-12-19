@@ -20,11 +20,11 @@ namespace Scripts {
             {
                 MountPoints = new[] {
                     new MountPointDef {
-                        SubtypeId = "X4_7x7_HeavyTurret", // Block Subtypeid. Your Cubeblocks contain this information
+                        SubtypeId = "", // Block Subtypeid. Your Cubeblocks contain this information
                         SpinPartId = "", // For weapons with a spinning barrel such as Gatling Guns. Subpart_Boomsticks must be written as Boomsticks.
-                        MuzzlePartId = "siegeelev", // The subpart where your muzzle empties are located. This is often the elevation subpart. Subpart_Boomsticks must be written as Boomsticks.
-                        AzimuthPartId = "siegeazim", // Your Rotating Subpart, the bit that moves sideways.
-                        ElevationPartId = "siegeelev",// Your Elevating Subpart, that bit that moves up.
+                        MuzzlePartId = "", // The subpart where your muzzle empties are located. This is often the elevation subpart. Subpart_Boomsticks must be written as Boomsticks.
+                        AzimuthPartId = "", // Your Rotating Subpart, the bit that moves sideways.
+                        ElevationPartId = "",// Your Elevating Subpart, that bit that moves up.
                         DurabilityMod = 0.25f, // GeneralDamageMultiplier, 0.25f = 25% damage taken.
                         IconName = "TestIcon.dds" // Overlay for block inventory slots, like reactors, refineries, etc.
                     },
