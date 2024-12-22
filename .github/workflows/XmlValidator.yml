@@ -1,7 +1,5 @@
 name: XML Validation
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
@@ -20,7 +18,7 @@ jobs:
           errors=0
           
           while IFS= read -r -d '' file; do
-            echo "Validating $file"
+            # echo "Validating $file"
             if ! xmllint --noout "$file"; then
               echo "Error in $file"
               errors=$((errors + 1))
