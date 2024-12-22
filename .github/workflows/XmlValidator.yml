@@ -19,14 +19,13 @@ jobs:
         run: |
           errors=0
           
-          # Use a while loop to process each file found by find
-          find . -name "*.sbc" -print0 | while IFS= read -r -d '' file; do
+          while IFS= read -r -d '' file; do
             echo "Validating $file"
             if ! xmllint --noout "$file"; then
               echo "Error in $file"
               errors=$((errors + 1))
             fi
-          done
+          done < <(find . -name "*.sbc" -print0)
           
           if [ "$errors" -ne 0 ]; then
             echo "$errors SBC files failed validation"
