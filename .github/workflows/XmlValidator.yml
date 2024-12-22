@@ -20,7 +20,7 @@ jobs:
           errors=0
           for file in $(find . -name "*.sbc"); do
             echo "Validating $file"
-            if ! xmllint --noout --valid "$file"; then
+            if ! xmllint --noout --noent --valid "$file"; then
               echo "Error in $file"
               errors=$((errors + 1))
             fi
