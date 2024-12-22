@@ -18,6 +18,7 @@ jobs:
       - name: Validate XML against XSD
         run: |
           errors=0
+          IFS=":"
           for file in $(find . -name "*.sbc"); do
             echo "Validating $file"
             if ! xmllint --noout --noent --valid "$file"; then
