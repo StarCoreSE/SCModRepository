@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using StarCore.FusionSystems.Communication;
+using Epstein_Fusion_DS.Communication;
+using Epstein_Fusion_DS.HudHelpers;
 using VRage.Game.ModAPI;
 using VRageMath;
 
-namespace StarCore.FusionSystems.
+namespace Epstein_Fusion_DS.
     FusionParts
 {
     /// <summary>
@@ -18,7 +19,7 @@ namespace StarCore.FusionSystems.
         private const float BlockPowerStorage = 32f;
         private const float SharedPropertyModifier = 0.05f;
 
-        private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
+        private static ModularDefinitionApi ModularApi => Epstein_Fusion_DS.ModularDefinition.ModularApi;
 
         public readonly bool IsValid;
 
@@ -75,7 +76,7 @@ namespace StarCore.FusionSystems.
         private static bool PerformScan(IMyCubeBlock blockEntity, ref HashSet<IMyCubeBlock> parts, string stopAtSubtype)
         {
             if (ModularApi.IsDebug())
-                DebugDraw.DebugDraw.AddGridPoint(blockEntity.Position,
+                DebugDraw.AddGridPoint(blockEntity.Position,
                     blockEntity.CubeGrid, Color.Blue, 2);
 
             var connectedBlocks = ModularApi.GetConnectedBlocks(blockEntity, "Modular_Fusion", false);

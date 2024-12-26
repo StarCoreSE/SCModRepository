@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using StarCore.FusionSystems.FusionParts;
-using StarCore.FusionSystems.HeatParts;
+using Epstein_Fusion_DS.FusionParts;
+using Epstein_Fusion_DS.HeatParts;
 using VRageMath;
-using static StarCore.FusionSystems.Communication.DefinitionDefs;
+using static Epstein_Fusion_DS.Communication.DefinitionDefs;
 
-namespace StarCore.FusionSystems
+namespace Epstein_Fusion_DS
 {
     internal partial class ModularDefinition
     {
@@ -35,7 +35,10 @@ namespace StarCore.FusionSystems
             AllowedBlockSubtypes = new[]
             {
                 "Heat_Heatsink",
-                "Heat_FlatRadiator"
+                "Heat_FlatRadiator",
+                "RadiatorPanel",
+                "ExtendableRadiatorBase",
+                "ActiveRadiator",
             },
 
             // Allowed connection directions & whitelists, measured in blocks.
@@ -53,23 +56,23 @@ namespace StarCore.FusionSystems
                 ["Heat_FlatRadiator"] = new Dictionary<Vector3I, string[]>
                 {
                     [Vector3I.Forward] = Array.Empty<string>(),
+                    [Vector3I.Up] = Array.Empty<string>(),
+                    [Vector3I.Down] = Array.Empty<string>(),
+                    [Vector3I.Left] = Array.Empty<string>(),
+                    [Vector3I.Right] = Array.Empty<string>(),
+                },
+                ["RadiatorPanel"] = new Dictionary<Vector3I, string[]>
+                {
+                    [Vector3I.Down] = Array.Empty<string>(),
+                    [Vector3I.Up] = Array.Empty<string>(),
+                },
+                ["ExtendableRadiatorBase"] = new Dictionary<Vector3I, string[]>
+                {
                     [Vector3I.Up] = new[]
                     {
-                        "Heat_FlatRadiator"
+                        "RadiatorPanel"
                     },
-                    [Vector3I.Down] = new[]
-                    {
-                        "Heat_FlatRadiator"
-                    },
-                    [Vector3I.Left] = new[]
-                    {
-                        "Heat_FlatRadiator"
-                    },
-                    [Vector3I.Right] = new[]
-                    {
-                        "Heat_FlatRadiator"
-                    }
-                }
+                },
             }
         };
     }

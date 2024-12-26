@@ -5,7 +5,7 @@ using VRage.Game.Components;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
 
-namespace StarCore.FusionSystems.FusionParts.FusionReactor
+namespace Epstein_Fusion_DS.FusionParts.FusionReactor
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Reactor), false, "Caster_Reactor")]
     public class FusionReactorLogic : FusionPart<IMyReactor>
@@ -14,7 +14,7 @@ namespace StarCore.FusionSystems.FusionParts.FusionReactor
         private float _bufferReactorOutput;
 
 
-        internal override string BlockSubtype => "Caster_Reactor";
+        internal override string[] BlockSubtypes => new[] { "Caster_Reactor" };
         internal override string ReadableName => "Reactor";
 
 

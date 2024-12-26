@@ -5,7 +5,7 @@ using Sandbox.ModAPI;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
 
-namespace StarCore.FusionSystems
+namespace Epstein_Fusion_DS
 {
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     public class SyncMultipliers : MySessionComponentBase
@@ -92,6 +92,9 @@ namespace StarCore.FusionSystems
 
         public static void ReactorOutput(IMyReactor reactor, float output)
         {
+            if (reactor == null || _i == null)
+                return;
+
             if (Math.Abs(reactor.MaxOutput - output) < 0.1f || !_i._updateLimiter.Add(reactor))
                 return;
 
@@ -115,6 +118,9 @@ namespace StarCore.FusionSystems
 
         public static void ThrusterOutput(IMyThrust thrust, float output)
         {
+            if (thrust == null || _i == null)
+                return;
+
             if (Math.Abs(thrust.MaxThrust - output) < 1.0f || !_i._updateLimiter.Add(thrust))
                 return;
 

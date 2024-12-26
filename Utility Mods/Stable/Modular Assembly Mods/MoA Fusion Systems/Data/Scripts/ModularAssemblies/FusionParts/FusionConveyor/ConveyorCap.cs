@@ -1,14 +1,13 @@
 ﻿using System;
-using Sandbox.ModAPI.Interfaces.Terminal;
-using Sandbox.ModAPI;
 using System.Collections.Generic;
 using Sandbox.Common.ObjectBuilders;
+using Sandbox.ModAPI;
+using Sandbox.ModAPI.Interfaces.Terminal;
+using VRage.Game.Components;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
-using VRageMath;
-using VRage.Game.Components;
 
-namespace StarCore.FusionSystems.FusionParts.FusionConveyor
+namespace Epstein_Fusion_DS.FusionParts.FusionConveyor
 {
     /// <summary>
     /// Forces stockpile on and prevents players from disabling it on caster conveyor tanks.

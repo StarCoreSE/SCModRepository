@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Linq;
+using Epstein_Fusion_DS.Communication;
+using Epstein_Fusion_DS.FusionParts;
+using Epstein_Fusion_DS.HeatParts;
+using Epstein_Fusion_DS.HudHelpers;
 using RichHudFramework.Client;
 using RichHudFramework.UI.Client;
 using Sandbox.Game;
-using StarCore.FusionSystems.Communication;
-using StarCore.FusionSystems.FusionParts;
-using StarCore.FusionSystems.HeatParts;
-using StarCore.FusionSystems.HudHelpers;
 using VRage.Game.Components;
 using VRage.Utils;
 
-namespace StarCore.FusionSystems
+namespace Epstein_Fusion_DS
 {
     /// <summary>
     ///     Semi-independent script for managing the player HUD.
@@ -22,7 +22,7 @@ namespace StarCore.FusionSystems
         private int _ticks;
 
         private ConsumptionBar _consumptionBar;
-        private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
+        private static ModularDefinitionApi ModularApi => Epstein_Fusion_DS.ModularDefinition.ModularApi;
         private static SFusionManager FusionManager => SFusionManager.I;
         private static HeatManager HeatManager => HeatManager.I;
 
@@ -76,7 +76,8 @@ namespace StarCore.FusionSystems
                             continue;
 
                         MyVisualScriptLogicProvider.AddQuestlogDetailLocal(
-                            $"[{system.PhysicalAssemblyId}] Power: {Math.Round(system.PowerStored / system.MaxPowerStored * 100f)}% ({Math.Round(system.MaxPowerStored)} @ {Math.Round(system.PowerGeneration * 60, 1)}/s) | Loops: {system.Arms.Count} | Heat: -{HeatManager.I.GetGridHeatDissipation(system.Grid):N0} +{HeatManager.I.GetGridHeatGeneration(system.Grid):N0} ({HeatManager.I.GetGridHeatLevel(system.Grid)*100:F1}%)",
+                            $"[({system.PhysicalAssemblyId})] Thrusters: {system.Thrusters.Count} | Reactors: {system.Reactors.Count} | Loops: {system.Arms.Count} | Heat: -{HeatManager.I.GetGridHeatDissipation(system.Grid):N0} +{HeatManager.I.GetGridHeatGeneration(system.Grid):N0} ({HeatManager.I.GetGridHeatLevel(system.Grid)*100:F1}%)\n" + 
+                            $"    Stored: {system.PowerStored:N0}/{system.MaxPowerStored:N0} | Generation: {system.PowerGeneration:N1}/{system.MaxPowerGeneration:N1}",
                             false, false);
                         displayedCount++;
                     }

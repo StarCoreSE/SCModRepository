@@ -17,7 +17,7 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Heat_FlatRadiator.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="10"/>
+				<Component Subtype="SteelPlate" Count="50"/>
 			</Components>
 			<CriticalComponent Subtype="SteelPlate" Index="0"/>
 			<MountPoints>
