@@ -8,11 +8,9 @@ using VRage.Game.Components;
 using VRage.Game.ModAPI;
 using VRage.Utils;
 using VRageMath;
-using VRageRender;
 using static VRageRender.MyBillboard;
 
-namespace StarCore.FusionSystems.
-    DebugDraw
+namespace Epstein_Fusion_DS.HudHelpers
 {
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     public class DebugDraw : MySessionComponentBase

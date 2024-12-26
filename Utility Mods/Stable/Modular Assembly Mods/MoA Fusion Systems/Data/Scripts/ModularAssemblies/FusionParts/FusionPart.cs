@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Epstein_Fusion_DS.Communication;
+using Epstein_Fusion_DS.HeatParts;
 using ProtoBuf;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
 using Sandbox.ModAPI.Interfaces.Terminal;
-using StarCore.FusionSystems.Communication;
-using StarCore.FusionSystems.HeatParts;
 using VRage.Game;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
@@ -17,7 +17,7 @@ using VRage.ObjectBuilders;
 using VRage.Sync;
 using VRage.Utils;
 
-namespace StarCore.FusionSystems.FusionParts
+namespace Epstein_Fusion_DS.FusionParts
 {
     public abstract class FusionPart<T> : MyGameLogicComponent, IMyEventProxy
         where T : IMyCubeBlock
@@ -46,17 +46,20 @@ namespace StarCore.FusionSystems.FusionParts
 
         public MySync<float, SyncDirection.BothWays> PowerUsageSync;
         internal FusionPartSettings Settings;
-        internal static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
+        internal static ModularDefinitionApi ModularApi => Epstein_Fusion_DS.ModularDefinition.ModularApi;
 
         /// <summary>
         ///     Block subtypes allowed.
         /// </summary>
-        internal abstract string BlockSubtype { get; }
+        internal abstract string[] BlockSubtypes { get; }
 
         /// <summary>
         ///     Human-readable name for this part type.
         /// </summary>
         internal abstract string ReadableName { get; }
+
+        internal virtual Func<IMyTerminalBlock, float> MinOverrideLimit { get; } = b => 0.01f;
+        internal virtual Func<IMyTerminalBlock, float> MaxOverrideLimit { get; } = b => 4;
 
         #region Controls
 
@@ -83,7 +86,7 @@ namespace StarCore.FusionSystems.FusionParts
                 boostPowerToggle.OnText = MyStringId.GetOrCompute("On");
                 boostPowerToggle.OffText = MyStringId.GetOrCompute("Off");
 
-                boostPowerToggle.Visible = block => block.BlockDefinition.SubtypeName == BlockSubtype;
+                boostPowerToggle.Visible = block => BlockSubtypes.Contains(block.BlockDefinition.SubtypeName);
                 boostPowerToggle.SupportsMultipleBlocks = true;
                 boostPowerToggle.Enabled = block => true;
 
@@ -106,7 +109,7 @@ namespace StarCore.FusionSystems.FusionParts
                     builder?.Append(Math.Round(block.GameLogic.GetAs<FusionPart<T>>()?.PowerUsageSync.Value * 100 ?? 0))
                         .Append('%');
 
-                powerUsageSlider.Visible = block => block.BlockDefinition.SubtypeName == BlockSubtype;
+                powerUsageSlider.Visible = block => BlockSubtypes.Contains(block.BlockDefinition.SubtypeName);
                 powerUsageSlider.SupportsMultipleBlocks = true;
                 powerUsageSlider.Enabled = block => true;
 
@@ -120,7 +123,7 @@ namespace StarCore.FusionSystems.FusionParts
                 boostPowerUsageSlider.Tooltip =
                     MyStringId.GetOrCompute(
                         $"Fusion Power generation this {ReadableName} should use when Override is enabled.");
-                boostPowerUsageSlider.SetLimits(0.01f, 4.0f);
+                boostPowerUsageSlider.SetLimits(MinOverrideLimit, MaxOverrideLimit);
                 boostPowerUsageSlider.Getter = block =>
                     block.GameLogic.GetAs<FusionPart<T>>()?.OverridePowerUsageSync.Value ?? 0;
                 boostPowerUsageSlider.Setter = (block, value) =>
@@ -131,7 +134,7 @@ namespace StarCore.FusionSystems.FusionParts
                             Math.Round(block.GameLogic.GetAs<FusionPart<T>>()?.OverridePowerUsageSync.Value * 100 ?? 0))
                         .Append('%');
 
-                boostPowerUsageSlider.Visible = block => block.BlockDefinition.SubtypeName == BlockSubtype;
+                boostPowerUsageSlider.Visible = block => BlockSubtypes.Contains(block.BlockDefinition.SubtypeName);
                 boostPowerUsageSlider.SupportsMultipleBlocks = true;
                 boostPowerUsageSlider.Enabled = block => true;
 
@@ -157,7 +160,7 @@ namespace StarCore.FusionSystems.FusionParts
                     if (logic != null) sb.Append(logic.OverrideEnabled.Value ? "OVR   On" : "OVR  Off");
                 };
                 boostPowerAction.Icon = @"Textures\GUI\Icons\Actions\Toggle.dds";
-                boostPowerAction.Enabled = block => block.BlockDefinition.SubtypeName == BlockSubtype;
+                boostPowerAction.Enabled = block => BlockSubtypes.Contains(block.BlockDefinition.SubtypeName);
                 MyAPIGateway.TerminalControls.AddAction<T>(boostPowerAction);
             }
 
@@ -168,7 +171,7 @@ namespace StarCore.FusionSystems.FusionParts
 
         private void AssignDetailedInfoGetter(IMyTerminalBlock block, List<IMyTerminalControl> controls)
         {
-            if (block?.BlockDefinition.SubtypeName != BlockSubtype)
+            if (!BlockSubtypes.Contains(block.BlockDefinition.SubtypeName))
                 return;
             block.RefreshCustomInfo();
             block.SetDetailedInfoDirty();

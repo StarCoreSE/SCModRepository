@@ -3,7 +3,7 @@ using Sandbox.ModAPI;
 using VRage.Game.ModAPI;
 using VRage.ModAPI;
 
-namespace StarCore.FusionSystems.HeatParts
+namespace Epstein_Fusion_DS.HeatParts
 {
     internal class HeatManager
     {

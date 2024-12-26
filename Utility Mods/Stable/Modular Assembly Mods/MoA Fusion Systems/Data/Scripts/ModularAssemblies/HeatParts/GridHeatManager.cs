@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
+using Epstein_Fusion_DS.Communication;
 using Sandbox.Game.Entities;
-using StarCore.FusionSystems.Communication;
 using VRage.Game.ModAPI;
 using VRageMath;
 
-namespace StarCore.FusionSystems.HeatParts
+namespace Epstein_Fusion_DS.HeatParts
 {
     internal class GridHeatManager
     {
@@ -30,7 +30,7 @@ namespace StarCore.FusionSystems.HeatParts
             Grid = (MyCubeGrid)grid;
         }
 
-        private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
+        private static ModularDefinitionApi ModularApi => Epstein_Fusion_DS.ModularDefinition.ModularApi;
 
         public MyCubeGrid Grid { get; }
 
@@ -88,7 +88,10 @@ namespace StarCore.FusionSystems.HeatParts
 
         public void OnPartRemove(int assemblyId, IMyCubeBlock block, bool isBaseBlock)
         {
-            var system = _heatSystems[assemblyId];
+            var system = _heatSystems.GetValueOrDefault(assemblyId, null);
+            if (system == null)
+                return;
+
             system.OnPartRemove(block);
 
             if (system.BlockCount <= 0)

@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sandbox.Game.EntityComponents;
+using Epstein_Fusion_DS.Communication;
+using Epstein_Fusion_DS.FusionParts.FusionReactor;
+using Epstein_Fusion_DS.FusionParts.FusionThruster;
 using Sandbox.ModAPI;
-using StarCore.FusionSystems.Communication;
-using StarCore.FusionSystems.FusionParts.FusionReactor;
-using StarCore.FusionSystems.FusionParts.FusionThruster;
-using StarCore.FusionSystems.HeatParts;
 using VRage.Game.ModAPI;
 
-namespace StarCore.FusionSystems.
+namespace Epstein_Fusion_DS.
     FusionParts
 {
     internal class SFusionSystem
     {
-        public const float MegawattsPerFusionPower = 32;
-        public const float NewtonsPerFusionPower = 12800000;
+        public const float MegawattsPerFusionPower = 16;
+        public const float NewtonsPerFusionPower = 1500000;
+        public const float HydrogenPerFusionPower = 42;
         public readonly IMyCubeGrid Grid;
 
         public readonly List<SFusionArm> Arms = new List<SFusionArm>();
@@ -38,6 +37,8 @@ namespace StarCore.FusionSystems.
         /// </summary>
         public float PowerGeneration;
 
+        public float MaxPowerGeneration;
+
         public readonly List<FusionReactorLogic> Reactors = new List<FusionReactorLogic>();
         public readonly List<FusionThrusterLogic> Thrusters = new List<FusionThrusterLogic>();
         public readonly List<IMyGasTank> Tanks = new List<IMyGasTank>();
@@ -57,7 +58,7 @@ namespace StarCore.FusionSystems.
             set { ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "PowerStored", value); }
         }
 
-        private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
+        private static ModularDefinitionApi ModularApi => Epstein_Fusion_DS.ModularDefinition.ModularApi;
 
         public void AddPart(IMyCubeBlock newPart)
         {
@@ -156,6 +157,7 @@ namespace StarCore.FusionSystems.
                 var logic = part.GameLogic.GetAs<FusionThrusterLogic>();
                 logic.MemberSystem = null;
                 Thrusters.Remove(logic);
+                logic.UpdatePower(PowerGeneration, NewtonsPerFusionPower, Thrusters.Count);
             }
 
             if (part is IMyReactor)
@@ -163,6 +165,7 @@ namespace StarCore.FusionSystems.
                 var logic = part.GameLogic.GetAs<FusionReactorLogic>();
                 logic.MemberSystem = null;
                 Reactors.Remove(logic);
+                logic.UpdatePower(PowerGeneration, NewtonsPerFusionPower, Thrusters.Count);
             }
 
             if (part is IMyGasTank)
@@ -185,7 +188,6 @@ namespace StarCore.FusionSystems.
 
         private void UpdatePower(bool updateReactors = false)
         {
-            //var generationModifier = 1 / (HeatManager.I.GetGridHeatLevel(Grid) + 0.5f);
             var generationModifier = 1;
             var powerGeneration = float.Epsilon;
             var powerCapacity = float.Epsilon;
@@ -216,6 +218,7 @@ namespace StarCore.FusionSystems.
 
             // Subtract power usage afterwards so that all reactors have the same stats.
             PowerGeneration = powerGeneration;
+            MaxPowerGeneration = PowerGeneration;
             MaxPowerStored = powerCapacity;
             PowerConsumption = totalPowerUsage;
 
@@ -226,7 +229,7 @@ namespace StarCore.FusionSystems.
             if (!MyAPIGateway.Session.CreativeMode)
             {
                 double availableGas = Tanks.Sum(t => t.FilledRatio * t.Capacity);
-                double gasNeeded = PowerGeneration * 25;
+                double gasNeeded = PowerGeneration * HydrogenPerFusionPower;
 
                 if (Tanks.Count == 0 || availableGas <= gasNeeded)
                 {
@@ -251,7 +254,7 @@ namespace StarCore.FusionSystems.
             PowerStored += PowerGeneration;
             if (PowerStored > MaxPowerStored) PowerStored = MaxPowerStored;
             ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "HeatGeneration",
-                PowerConsumption * MegawattsPerFusionPower);
+                PowerConsumption * MegawattsPerFusionPower * 3);
         }
 
         public void UpdateTick()
