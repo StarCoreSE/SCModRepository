@@ -12,7 +12,7 @@ namespace Epstein_Fusion_DS.
 {
     internal class SFusionSystem
     {
-        public const float MegawattsPerFusionPower = 16;
+        public const float MegawattsPerFusionPower = 32;
         public const float NewtonsPerFusionPower = 1500000;
         public const float HydrogenPerFusionPower = 42;
         public readonly IMyCubeGrid Grid;
