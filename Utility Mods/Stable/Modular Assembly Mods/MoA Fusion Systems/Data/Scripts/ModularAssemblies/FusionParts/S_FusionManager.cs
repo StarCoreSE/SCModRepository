@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using StarCore.FusionSystems.Communication;
+using Epstein_Fusion_DS.Communication;
 using VRage.Game.ModAPI;
 
-namespace StarCore.FusionSystems.FusionParts
+namespace Epstein_Fusion_DS.FusionParts
 {
     internal class SFusionManager
     {
@@ -15,7 +15,7 @@ namespace StarCore.FusionSystems.FusionParts
         public ModularDefinition FusionDefinition;
         public Dictionary<int, SFusionSystem> FusionSystems = new Dictionary<int, SFusionSystem>();
         public ModularDefinition HeatDefinition;
-        private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
+        private static ModularDefinitionApi ModularApi => Epstein_Fusion_DS.ModularDefinition.ModularApi;
 
         public void Load()
         {

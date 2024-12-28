@@ -18,6 +18,8 @@
 	    <string>Caster_FocusLens</string>
 	    <string>Caster_Reactor</string>
 	    <string>Heat_Heatsink</string>
+	    <string>Heat_FlatRadiator</string>
+	    <string>Caster_ConveyorCap</string>
       </ItemIds>
     </Category>
   </CategoryClasses>

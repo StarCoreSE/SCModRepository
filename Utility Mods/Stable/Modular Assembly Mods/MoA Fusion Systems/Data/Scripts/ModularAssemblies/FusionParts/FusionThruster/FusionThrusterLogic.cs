@@ -1,49 +1,66 @@
 ﻿using System;
+using System.Collections.Generic;
 using Sandbox.Common.ObjectBuilders;
 using Sandbox.ModAPI;
 using VRage.Game.Components;
 using VRage.ModAPI;
 using VRage.ObjectBuilders;
-using VRageMath;
 
-namespace StarCore.FusionSystems.FusionParts.FusionThruster
+namespace Epstein_Fusion_DS.FusionParts.FusionThruster
 {
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Thrust), false, "Caster_FocusLens")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Thrust), false, 
+        "Caster_FocusLens"
+        )]
     public class FusionThrusterLogic : FusionPart<IMyThrust>
     {
         private int _bufferBlockCount = 1;
         private float _bufferThrustOutput;
 
 
-        internal override string BlockSubtype => "Caster_FocusLens";
+        internal override string[] BlockSubtypes => new[]
+        {
+            "Caster_FocusLens",
+        };
+
         internal override string ReadableName => "Thruster";
+
+        internal override Func<IMyTerminalBlock, float> MinOverrideLimit =>
+            b => 1;
+        internal override Func<IMyTerminalBlock, float> MaxOverrideLimit =>
+            b => DriveSettings[b.BlockDefinition.SubtypeId].MaxOverclock;
+
+        internal static readonly Dictionary<string, DriveSetting> DriveSettings = new Dictionary<string, DriveSetting>
+        {
+            ["Caster_FocusLens"] = new DriveSetting(4.00f, 1.5f, 34.56f*2*1000000),
+        };
 
         public override void UpdatePower(float powerGeneration, float newtonsPerFusionPower, int numberThrusters)
         {
             BufferPowerGeneration = powerGeneration;
             _bufferBlockCount = numberThrusters;
 
-            var consumptionMultiplier =
-                OverrideEnabled.Value
-                    ? OverridePowerUsageSync
-                    : PowerUsageSync.Value; // This is ugly, let's make it better.
-            consumptionMultiplier /= numberThrusters;
+            var overrideModifier = (OverrideEnabled ? OverridePowerUsageSync : PowerUsageSync).Value;
+
+            var thrustOutput = Block.CurrentThrust;
+            var maxThrustOutput = DriveSettings[Block.BlockDefinition.SubtypeId].BaseThrust * overrideModifier;
+            // This formula is very dumb but it just about does the trick. Approaches 200% efficiency at zero usage, and 0% at 2x usage.
+            var efficiencyMultiplier = DriveSettings[Block.BlockDefinition.SubtypeId].EfficiencyModifier
+                                       *
+                                       (2 - 1/(DriveSettings[Block.BlockDefinition.SubtypeId].BaseThrust/maxThrustOutput));
 
             // Power generation consumed (per second)
-            var powerConsumption = powerGeneration * 60 * consumptionMultiplier;
-
-            var efficiencyMultiplier = 1 / (0.489f + consumptionMultiplier);
+            var powerConsumption = thrustOutput / newtonsPerFusionPower / efficiencyMultiplier;
 
             // Power generated (per second)
-            var thrustOutput = efficiencyMultiplier * powerConsumption * newtonsPerFusionPower;
-            _bufferThrustOutput = thrustOutput;
+            //var thrustOutput = efficiencyMultiplier * powerConsumption * newtonsPerFusionPower;
+            _bufferThrustOutput = maxThrustOutput;
             MaxPowerConsumption = powerConsumption / 60;
 
             InfoText.Clear();
             InfoText.AppendLine(
-                $"\nOutput: {Math.Round(thrustOutput, 1)}/{Math.Round(powerGeneration * 60 * newtonsPerFusionPower, 1)}");
-            InfoText.AppendLine($"Input: {Math.Round(powerConsumption, 1)}/{Math.Round(powerGeneration * 60, 1)}");
-            InfoText.AppendLine($"Efficiency: {Math.Round(efficiencyMultiplier * 100)}%");
+                $"\nOutput: {thrustOutput/1000000:F1}/{maxThrustOutput/1000000:F1} MN");
+            InfoText.AppendLine($"Input: {powerConsumption:F1}/{powerGeneration * 60:F1}");
+            InfoText.AppendLine($"Efficiency: {efficiencyMultiplier * 100:F1}%");
 
             // Convert back into power per tick
             if (!IsShutdown)
@@ -120,5 +137,30 @@ namespace StarCore.FusionSystems.FusionParts.FusionThruster
         }
 
         #endregion
+
+        public struct DriveSetting
+        {
+            /// <summary>
+            /// Efficiency modifier for converting fusing rate into power.
+            /// </summary>
+            public float EfficiencyModifier;
+
+            /// <summary>
+            /// Maximum overclock, in percent.
+            /// </summary>
+            public float MaxOverclock;
+
+            /// <summary>
+            /// Default thrust output.
+            /// </summary>
+            public float BaseThrust;
+
+            public DriveSetting(float efficiencyModifier, float maxOverclock, float baseThrust)
+            {
+                EfficiencyModifier = efficiencyModifier;
+                MaxOverclock = maxOverclock;
+                BaseThrust = baseThrust;
+            }
+        }
     }
 }

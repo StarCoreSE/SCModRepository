@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Sandbox.ModAPI;
 using SC.SUGMA.GameModes.Elimination;
 using SC.SUGMA.GameState;
+using SC.SUGMA.Utilities;
 using VRage.Game.ModAPI;
 using VRageMath;
 
 namespace SC.SUGMA.GameModes.Domination
 {
-    internal class DominationGamemode : EliminationGamemode
+    internal partial class DominationGamemode : EliminationGamemode
     {
         /// <summary>
         ///     The number of seconds to drain one ticket per captured zone.
@@ -15,43 +17,24 @@ namespace SC.SUGMA.GameModes.Domination
         public const float ZoneTicketDrainRate = 1.5f;
 
         private PointTracker _zonePointTracker;
+        internal ZoneDef[] ZonePositions = ZonePositionDefs["diagonal"];
         public List<FactionSphereZone> FactionZones = new List<FactionSphereZone>();
-        public int RandomZoneCount = 3;
-        public bool DoRandomZones = false;
+        //public bool DoRandomZones = false;
 
         public override string ReadableName { get; internal set; } = "Team Domination";
 
         public override string Description { get; internal set; } =
             "Factions fight until tickets run out. Kill enemy players or capture zones to remove tickets.";
 
-        internal ZoneDef[] FixedZonePositions = {
-            new ZoneDef
-            {
-                Position = Vector3D.Zero,
-                Radius = 1000,
-                CaptureTime = 20,
-            },
-            new ZoneDef
-            {
-                Position = new Vector3D(0, 0, 4000),
-                Radius = 500,
-                CaptureTime = 15,
-            },
-            new ZoneDef
-            {
-                Position = new Vector3D(0, 0, -4000),
-                Radius = 500,
-                CaptureTime = 15,
-            },
-        };
-
-        //public TDMZonesGamemode()
-        //{
-        //    ArgumentParser += new ArgumentParser(
-        //        new ArgumentParser.ArgumentDefinition(text => int.TryParse(text, out RandomZoneCount), "zc", "zone-count", "The number of zones in the arena. Only applies if randomization is enabled."),
-        //        new ArgumentParser.ArgumentDefinition(text => DoRandomZones = true, "rz", "random-zones", "Enables randomly-placed zones.")
-        //        );
-        //}
+        public DominationGamemode()
+        {
+            ArgumentParser += new ArgumentParser(
+                new ArgumentParser.ArgumentDefinition(
+                    text => ZonePositions = ZonePositionDefs.GetValueOrDefault(text, ZonePositions), "zc", "zone-config", $"The arrangement of zones in the arena.\nAvailable configs:\n|    {string.Join("\n|    ", ZonePositionDefs.Keys)}")
+                //new ArgumentParser.ArgumentDefinition(
+                //    text => DoRandomZones = true, "rz", "random-zones", "Enables randomly-placed zones.")
+                );
+        }
 
         public override void StartRound(string[] arguments = null)
         {
@@ -72,7 +55,7 @@ namespace SC.SUGMA.GameModes.Domination
             //}
             //else
             //{
-                foreach (var zone in FixedZonePositions)
+                foreach (var zone in ZonePositions)
                     FactionZones.Add(new FactionSphereZone(zone.Position, zone.Radius, zone.CaptureTime));
             //}
 

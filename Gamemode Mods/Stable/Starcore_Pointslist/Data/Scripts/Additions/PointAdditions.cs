@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Xml;
 using Sandbox.ModAPI;
@@ -349,6 +349,7 @@ namespace ShipPoints
 
             ["LargeBlockRadioAntenna"] = 5,
             ["LargeBlockCompactRadioAntenna"] = 5,
+            ["LargeBlockCompactRadioAntennaReskin"] = 5,
             ["LargeBlockRadioAntennaDish"] = 5,
             ["SC1x1Antenna"] = 5,
             ["C500mmTurret"] = 300,
@@ -357,7 +358,7 @@ namespace ShipPoints
             ["C400mmTurret"] = 300,
 
             ["ARYXRailgunTurret"] = 350,
-            ["SC_AR_Deimos"] = 400,
+            ["SC_AR_Deimos"] = 600,
             ["MCRNRailgunLB"] = 1250,
 
             ["Cat_BigRotorStators"] = 16,
@@ -557,9 +558,9 @@ namespace ShipPoints
             ["Cat_StarcoreUlitity"] = 21,
             ["LargeBlockRemoteControl"] = 100,
             ["SmallBlockRemoteControl"] = 50,
-            ["LargeProgrammableBlock"] = 100,
-            ["LargeProgrammableBlockReskin"] = 100,
-            ["6SidePB"] = 100,
+            ["LargeProgrammableBlock"] = 50,
+            ["LargeProgrammableBlockReskin"] = 50,
+            ["6SidePB"] = 50,
             ["SmallProgrammableBlock"] = 50,
             ["LargeTurretControlBlock"] = 10,
             ["EventControllerLarge"] = 5,
@@ -757,7 +758,7 @@ namespace ShipPoints
             ["Caster_Accelerator_0"] = 10,
             ["Caster_Accelerator_90"] = 40,
             ["Caster_Feeder"] = 10,
-            ["Caster_FocusLens"] = 350,
+            ["Caster_FocusLens"] = 250,
             ["Caster_Reactor"] = 125,
             ["Heat_Heatsink"] = 10,
             ["Heat_FlatRadiator"] = 10,
@@ -947,7 +948,7 @@ namespace ShipPoints
                     costMultiplier = 50.00f;
                     break;
                 case "Structural Integrity Field Generator":
-		        case "[S.I] Generator Core":
+		case "[SI] Generator Core":
                     blockDisplayName = "Defensive Generator";
                     costMultiplier = 50.00f;
                     break;

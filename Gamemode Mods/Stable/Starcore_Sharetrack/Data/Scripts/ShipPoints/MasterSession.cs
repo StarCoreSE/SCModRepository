@@ -18,6 +18,7 @@ namespace StarCore.ShareTrack
         public static readonly Vector2I ModVersion = new Vector2I(3, 2);
 
         public static MasterSession I;
+        public static SharetrackConfig Config;
 
         public HudAPIv2 TextHudApi;
         public Action HudRegistered = () => { };
@@ -37,6 +38,7 @@ namespace StarCore.ShareTrack
 
             try
             {
+                Config = new SharetrackConfig();
                 HeartNetwork.I = new HeartNetwork();
                 HeartNetwork.I.LoadData(42521);
                 _allGridsList.Init();
@@ -71,6 +73,7 @@ namespace StarCore.ShareTrack
         {
             try
             {
+                Config.StoreSettings();
                 TextHudApi?.Unload();
                 _apiProvider.Unload();
                 _allGridsList.Close();

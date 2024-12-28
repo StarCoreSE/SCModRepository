@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using StarCore.FusionSystems.FusionParts;
+using Epstein_Fusion_DS.FusionParts;
 using VRageMath;
-using static StarCore.FusionSystems.Communication.DefinitionDefs;
+using static Epstein_Fusion_DS.Communication.DefinitionDefs;
 
-namespace StarCore.FusionSystems
+namespace Epstein_Fusion_DS
 {
     internal partial class ModularDefinition
     {
@@ -36,6 +36,7 @@ namespace StarCore.FusionSystems
             AllowedBlockSubtypes = new[]
             {
                 "Caster_FocusLens",
+
                 "Caster_Accelerator_0",
                 "Caster_Accelerator_90",
                 "Caster_CentralPipe_0",
@@ -43,7 +44,8 @@ namespace StarCore.FusionSystems
                 "Caster_CentralPipe_T",
                 "Caster_Feeder",
                 //"Caster_Controller",
-                "Caster_Reactor"
+                "Caster_Reactor",
+                "Caster_ConveyorCap",
             },
 
             // Allowed connection directions & whitelists, measured in blocks.
@@ -51,88 +53,27 @@ namespace StarCore.FusionSystems
             // If the connection type whitelist is empty, all allowed subtypes may connect on that side.
             AllowedConnections = new Dictionary<string, Dictionary<Vector3I, string[]>>
             {
+                // Note - Offsets line up with BuildInfo block orientation.
+                // Note - Offsets are measured from the center of the block; in this case, the Caster_FocusLens is a 3x3 that has connections on the back in a plus shape.
+                #region Drives
+
                 {
-                    // Note - Offsets line up with BuildInfo block orientation.
-                    // Note - Offsets are measured from the center of the block; in this case, the Caster_FocusLens is a 3x3 that has connections on the back in a plus shape.
                     "Caster_FocusLens", new Dictionary<Vector3I, string[]>
                     {
-                        {
-                            new Vector3I(1, 0, 2), new[]
-                            {
-                                "Caster_CentralPipe_0",
-                                "Caster_CentralPipe_90",
-                                "Caster_CentralPipe_T",
-                                "Caster_Feeder",
-                                "Caster_Reactor",
-                                "Caster_Controller",
-                                "Caster_FocusLens"
-                            }
-                        },
-                        {
-                            new Vector3I(-1, 0, 2), new[]
-                            {
-                                "Caster_CentralPipe_0",
-                                "Caster_CentralPipe_90",
-                                "Caster_CentralPipe_T",
-                                "Caster_Feeder",
-                                "Caster_Reactor",
-                                "Caster_Controller",
-                                "Caster_FocusLens"
-                            }
-                        },
-                        {
-                            new Vector3I(0, 1, 2), new[]
-                            {
-                                "Caster_CentralPipe_0",
-                                "Caster_CentralPipe_90",
-                                "Caster_CentralPipe_T",
-                                "Caster_Feeder",
-                                "Caster_Reactor",
-                                "Caster_Controller",
-                                "Caster_FocusLens"
-                            }
-                        },
-                        {
-                            new Vector3I(0, -1, 2), new[]
-                            {
-                                "Caster_CentralPipe_0",
-                                "Caster_CentralPipe_90",
-                                "Caster_CentralPipe_T",
-                                "Caster_Feeder",
-                                "Caster_Reactor",
-                                "Caster_Controller",
-                                "Caster_FocusLens"
-                            }
-                        }
+                        [new Vector3I(1, 0, 2)] = AllowedPipeConnections,
+                        [new Vector3I(-1, 0, 2)] = AllowedPipeConnections,
+                        [new Vector3I(0, 1, 2)] = AllowedPipeConnections,
+                        [new Vector3I(0, -1, 2)] = AllowedPipeConnections,
                     }
                 },
+
+                #endregion
+
                 {
                     "Caster_Reactor", new Dictionary<Vector3I, string[]>
                     {
-                        {
-                            new Vector3I(0, 2, 0), new[]
-                            {
-                                "Caster_CentralPipe_0",
-                                "Caster_CentralPipe_90",
-                                "Caster_CentralPipe_T",
-                                "Caster_Feeder",
-                                "Caster_FocusLens",
-                                //"Caster_Controller",
-                                "Caster_Reactor"
-                            }
-                        },
-                        {
-                            new Vector3I(0, -2, 0), new[]
-                            {
-                                "Caster_CentralPipe_0",
-                                "Caster_CentralPipe_90",
-                                "Caster_CentralPipe_T",
-                                "Caster_Feeder",
-                                "Caster_FocusLens",
-                                //"Caster_Controller",
-                                "Caster_Reactor"
-                            }
-                        }
+                        [new Vector3I(0, 2, 0)] = AllowedPipeConnections,
+                        [new Vector3I(0, -2, 0)] = AllowedPipeConnections,
                     }
                 },
                 {
@@ -180,128 +121,33 @@ namespace StarCore.FusionSystems
                 {
                     "Caster_CentralPipe_0", new Dictionary<Vector3I, string[]>
                     {
-                        {
-                            Vector3I.Forward, new[]
-                            {
-                                "Caster_CentralPipe_0",
-                                "Caster_CentralPipe_90",
-                                "Caster_CentralPipe_T",
-                                "Caster_Feeder",
-                                //"Caster_Controller",
-                                "Caster_FocusLens",
-                                "Caster_Reactor"
-                            }
-                        },
-                        {
-                            Vector3I.Backward, new[]
-                            {
-                                "Caster_CentralPipe_0",
-                                "Caster_CentralPipe_90",
-                                "Caster_CentralPipe_T",
-                                "Caster_Feeder",
-                                //"Caster_Controller",
-                                "Caster_FocusLens",
-                                "Caster_Reactor"
-                            }
-                        }
+                        [Vector3I.Forward] = AllowedPipeConnections,
+                        [Vector3I.Backward] = AllowedPipeConnections,
                     }
                 },
                 {
                     "Caster_CentralPipe_90", new Dictionary<Vector3I, string[]>
                     {
-                        {
-                            Vector3I.Forward, new[]
-                            {
-                                "Caster_CentralPipe_0",
-                                "Caster_CentralPipe_90",
-                                "Caster_CentralPipe_T",
-                                "Caster_Feeder",
-                                //"Caster_Controller",
-                                "Caster_FocusLens",
-                                "Caster_Reactor"
-                            }
-                        },
-                        {
-                            Vector3I.Right, new[]
-                            {
-                                "Caster_CentralPipe_0",
-                                "Caster_CentralPipe_90",
-                                "Caster_CentralPipe_T",
-                                "Caster_Feeder",
-                                //"Caster_Controller",
-                                "Caster_FocusLens",
-                                "Caster_Reactor"
-                            }
-                        }
+                        [Vector3I.Forward] = AllowedPipeConnections,
+                        [Vector3I.Right] = AllowedPipeConnections,
                     }
                 },
                 {
                     "Caster_CentralPipe_T", new Dictionary<Vector3I, string[]>
                     {
-                        {
-                            Vector3I.Forward, new[]
-                            {
-                                "Caster_CentralPipe_0",
-                                "Caster_CentralPipe_90",
-                                "Caster_CentralPipe_T",
-                                "Caster_Feeder",
-                                //"Caster_Controller",
-                                "Caster_FocusLens",
-                                "Caster_Reactor"
-                            }
-                        },
-                        {
-                            Vector3I.Right, new[]
-                            {
-                                "Caster_CentralPipe_0",
-                                "Caster_CentralPipe_90",
-                                "Caster_CentralPipe_T",
-                                "Caster_Feeder",
-                                //"Caster_Controller",
-                                "Caster_FocusLens",
-                                "Caster_Reactor"
-                            }
-                        },
-                        {
-                            Vector3I.Backward, new[]
-                            {
-                                "Caster_CentralPipe_0",
-                                "Caster_CentralPipe_90",
-                                "Caster_CentralPipe_T",
-                                "Caster_Feeder",
-                                //"Caster_Controller",
-                                "Caster_FocusLens",
-                                "Caster_Reactor"
-                            }
-                        }
+                        [Vector3I.Forward] = AllowedPipeConnections,
+                        [Vector3I.Right] = AllowedPipeConnections,
+                        [Vector3I.Backward] = AllowedPipeConnections,
                     }
                 },
                 {
                     "Caster_Feeder", new Dictionary<Vector3I, string[]>
                     {
                         {
-                            Vector3I.Forward, new[]
-                            {
-                                "Caster_CentralPipe_0",
-                                "Caster_CentralPipe_90",
-                                "Caster_CentralPipe_T",
-                                "Caster_Feeder",
-                                //"Caster_Controller",
-                                "Caster_FocusLens",
-                                "Caster_Reactor"
-                            }
+                            Vector3I.Forward, AllowedPipeConnections
                         },
                         {
-                            Vector3I.Backward, new[]
-                            {
-                                "Caster_CentralPipe_0",
-                                "Caster_CentralPipe_90",
-                                "Caster_CentralPipe_T",
-                                "Caster_Feeder",
-                                //"Caster_Controller",
-                                "Caster_FocusLens",
-                                "Caster_Reactor"
-                            }
+                            Vector3I.Backward, AllowedPipeConnections
                         },
 
                         {
@@ -321,23 +167,29 @@ namespace StarCore.FusionSystems
                             }
                         }
                     }
+                },
+                {
+                    "Caster_ConveyorCap", new Dictionary<Vector3I, string[]>
+                    {
+                        {
+                            Vector3I.Backward, AllowedPipeConnections
+                        }
+                    }
                 }
-                //{
-                //    "Caster_Controller", new Dictionary<Vector3I, string[]>
-                //    {
-                //        {
-                //            Vector3I.Backward, new[]
-                //            {
-                //                "Caster_CentralPipe_0",
-                //                "Caster_CentralPipe_90",
-                //                "Caster_CentralPipe_T",
-                //                "Caster_Feeder",
-                //                "Caster_Reactor"
-                //            }
-                //        }
-                //    }
-                //}
             }
+        };
+
+        private static readonly string[] AllowedPipeConnections =
+        {
+            "Caster_FocusLens",
+
+            "Caster_CentralPipe_0",
+            "Caster_CentralPipe_90",
+            "Caster_CentralPipe_T",
+            "Caster_Feeder",
+            //"Caster_Controller",
+            "Caster_Reactor",
+            "Caster_ConveyorCap"
         };
     }
 }

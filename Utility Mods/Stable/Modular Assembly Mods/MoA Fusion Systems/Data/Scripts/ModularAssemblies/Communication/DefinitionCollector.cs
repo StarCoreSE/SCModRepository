@@ -1,8 +1,8 @@
-﻿using StarCore.FusionSystems.Communication;
-using static StarCore.FusionSystems.Communication.DefinitionDefs;
+﻿using Epstein_Fusion_DS.Communication;
+using static Epstein_Fusion_DS.Communication.DefinitionDefs;
 
 // ReSharper disable once CheckNamespace
-namespace StarCore.FusionSystems
+namespace Epstein_Fusion_DS
 {
     internal partial class ModularDefinition
     {
@@ -20,7 +20,7 @@ namespace StarCore.FusionSystems
         /// <param name="baseDefs"></param>
         internal static ModularDefinitionContainer GetBaseDefinitions()
         {
-            return new StarCore.FusionSystems.ModularDefinition().Container;
+            return new Epstein_Fusion_DS.ModularDefinition().Container;
         }
     }
 }

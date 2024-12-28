@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
 using StarCore.ShareTrack.HeartNetworking;
 using StarCore.ShareTrack.HeartNetworking.Custom;
+using VRage.Game;
 using VRage.Game.ModAPI;
 using VRage.ModAPI;
 
@@ -113,17 +114,78 @@ namespace StarCore.ShareTrack.ShipTracking
 
         private bool CheckAutotrack(IMyCubeGrid grid)
         {
-            if (!EnableAutotrack)
+            if (!EnableAutotrack /*|| !MasterSession.Config.AutoTrack*/)
                 return false;
 
             foreach (var block in grid.GetFatBlocks<IMyCubeBlock>())
             {
                 if (!(block is IMyCockpit) && !AutoTrackSubtypes.Contains(block.BlockDefinition.SubtypeName))
                     continue;
+                //TransferGridOwnership(grid);
                 return true;
             }
 
             return false;
+        }
+
+        private static readonly Dictionary<string, ulong> ShipNamesToLeaderIds = new Dictionary<string, ulong>
+        {
+            // ASQ - Demonfox
+            ["ASQ Fulma Natrii"] = 76561198006916493,
+            ["Birdsy is Hungy"] = 76561198006916493,
+
+            // HAC - Spartan
+            ["HAC Asesino"] = 76561198084063571,
+            ["H.A.C. - Charybdis"] = 76561198084063571,
+            ["Imanis' Shadow Mk_7"] = 76561198084063571,
+            ["H.A.C. - IONA"] = 76561198084063571,
+
+            // ICE - RyO
+            ["ICE Gorilla Destroyer Death Star"] = 76561198133050445,
+            ["ICE TIE Abel"] = 76561198133050445,
+            ["ICE TIE Cain X"] = 76561198133050445,
+            ["ICE Wraith Star Destroyer X"] = 76561198133050445,
+
+            // MCE - Max
+            ["GT4 - MCE Beekeeper"] = 76561198256358015,
+            ["GT4 30 Ramstick ARRAY"] = 76561198256358015,
+            ["MCE Sonnenblume GT4 Fusion"] = 76561198256358015,
+            ["[MCE] Dancing in Starlight GT4"] = 76561198274566684,
+
+            // RKD - Anomaly
+            ["Fire Hawk MK3 v7"] = 76561198049738491,
+            ["Hyperion Class Battlecruiser"] = 76561198049738491,
+            ["[RKD] Subcritical Photon"] = 76561198049738491,
+
+            // TEC - Darth411
+            ["TEC Challenger T48G-2 [BANSHEE] GT4"] = 76561198013723549,
+            ["TEC Coyote Mk4 GT4"] = 76561198013723549,
+            [" TEC Heavy Frigate - GT4"] = 76561198013723549,
+            ["TEC Stolen Identity (GT4)"] = 76561198013723549,
+
+            // UOD - Bryce_Craft
+            ["UOD Doomsday GT 4"] = 76561198330424595,
+            ["UOD Eternity GT4"] = 76561198330424595,
+            ["UOD Serenity GT 4"] = 76561198330424595,
+            ["UOD Valhalla GT4"] = 76561198330424595,
+        };
+
+        /// <summary>
+        /// Temporary autotransfer method for Grand Tournament 4.
+        /// </summary>
+        /// <param name="grid"></param>
+        private void TransferGridOwnership(IMyCubeGrid grid)
+        {
+            if (!MyAPIGateway.Session.IsServer || !ShipNamesToLeaderIds.ContainsKey(grid.DisplayName.Replace("\"", "")))
+                return;
+
+            long playerId = MyAPIGateway.Players.TryGetIdentityId(ShipNamesToLeaderIds[grid.DisplayName.Replace("\"", "")]);
+
+            List<IMyCubeGrid> attachedGrids = new List<IMyCubeGrid>();
+            grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(attachedGrids);
+
+            foreach (var aGrid in attachedGrids)
+                aGrid.ChangeGridOwnership(playerId, MyOwnershipShareModeEnum.Faction);
         }
 
         #region Public Methods
@@ -284,6 +346,15 @@ namespace StarCore.ShareTrack.ShipTracking
             foreach (var attachedGrid in allAttachedGrids.Where(attachedGrid => TrackedGrids.ContainsKey(attachedGrid)))
                 return true;
             return false;
+        }
+
+        public ShipTracker TryGetTracker(IMyCubeGrid grid)
+        {
+            var allAttachedGrids = new List<IMyCubeGrid>();
+            grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(allAttachedGrids);
+            foreach (var attachedGrid in allAttachedGrids.Where(attachedGrid => TrackedGrids.ContainsKey(attachedGrid)))
+                return TrackedGrids[attachedGrid];
+            return null;
         }
 
         public void ServerDoSync()

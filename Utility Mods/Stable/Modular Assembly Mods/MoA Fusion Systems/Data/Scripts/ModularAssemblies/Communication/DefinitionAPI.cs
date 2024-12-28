@@ -7,8 +7,7 @@ using VRage.Game.ModAPI;
 using VRage.Utils;
 using VRageMath;
 
-namespace StarCore.FusionSystems.
-    Communication
+namespace Epstein_Fusion_DS.Communication
 {
     /// <summary>
     ///     Class used to communicate with the Modular Assemblies Framework mod. <br /><br />

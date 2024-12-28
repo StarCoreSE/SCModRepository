@@ -41,6 +41,9 @@ namespace StarCore.ShareTrack
         {
             [MyKeys.M] = () =>
             {
+                if (!MasterSession.Config.AllowGridTracking)
+                    return;
+
                 var castGrid = RaycastGridFromCamera();
                 if (castGrid == null)
                     return;
@@ -377,6 +380,7 @@ namespace StarCore.ShareTrack
 
             WcApi?.Unload();
             ShieldApi?.Unload();
+            RtsApi?.Unload();
             if (PointValues != null)
             {
                 PointValues.Clear();

@@ -1,21 +1,16 @@
 ﻿using System;
-using RichHudFramework;
-using RichHudFramework.Internal;
+using Epstein_Fusion_DS.Communication;
+using Epstein_Fusion_DS.FusionParts;
+using Epstein_Fusion_DS.HeatParts;
 using RichHudFramework.UI;
 using RichHudFramework.UI.Client;
 using RichHudFramework.UI.Rendering;
-using Sandbox.Game;
 using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
-using StarCore.FusionSystems.Communication;
-using StarCore.FusionSystems.FusionParts;
-using StarCore.FusionSystems.HeatParts;
-using VRage.Audio;
 using VRage.Game.Entity;
-using VRage.Input;
 using VRageMath;
 
-namespace StarCore.FusionSystems.HudHelpers
+namespace Epstein_Fusion_DS.HudHelpers
 {
     internal class ConsumptionBar : WindowBase
     {
@@ -73,7 +68,7 @@ namespace StarCore.FusionSystems.HudHelpers
                 0); // Relative to 1920x1080
         }
 
-        private static ModularDefinitionApi ModularApi => ModularDefinition.ModularApi;
+        private static ModularDefinitionApi ModularApi => Epstein_Fusion_DS.ModularDefinition.ModularApi;
 
         protected override void Layout()
         {
@@ -111,6 +106,7 @@ namespace StarCore.FusionSystems.HudHelpers
             float totalFusionGeneration = 0;
             float totalFusionStored = 0;
             float reactorIntegrity = 0;
+            int reactorCount = 0;
 
             foreach (var system in SFusionManager.I.FusionSystems)
             {
@@ -123,10 +119,15 @@ namespace StarCore.FusionSystems.HudHelpers
                 foreach (var reactor in system.Value.Reactors)
                 {
                     reactorIntegrity += reactor.Block.SlimBlock.Integrity/reactor.Block.SlimBlock.MaxIntegrity;
+                    reactorCount++;
                 }
-
-                reactorIntegrity /= system.Value.Reactors.Count;
+                foreach (var thruster in system.Value.Thrusters)
+                {
+                    reactorIntegrity += thruster.Block.SlimBlock.Integrity/thruster.Block.SlimBlock.MaxIntegrity;
+                    reactorCount++;
+                }
             }
+            reactorIntegrity /= reactorCount;
 
             // Hide HUD element if the grid has no fusion systems (capacity is always >0 for a fusion system)
             if (totalFusionCapacity == 0)
@@ -148,16 +149,21 @@ namespace StarCore.FusionSystems.HudHelpers
             else
                 timeToCharge = 0;
 
-            HeaderText = $"Fusion | {(totalFusionGeneration > 0 ? "+" : "-")}{Math.Round(timeToCharge)}s";
+            //if (timeToCharge > 0)
+            //    HeaderText = $"Fusion | {(totalFusionGeneration > 0 ? "+" : "-")}{Math.Round(timeToCharge)}s";
+            //else
+            //    HeaderText = $"Fusion | {totalFusionGeneration:N0}/s";
+            HeaderText = $"Fusion | {totalFusionStored/totalFusionCapacity * 100:N0}%";
+
             _noticeLabel.Text = new RichText
             {
-                {"Reactor Integrity: ", GlyphFormat.White},
+                {"Integrity: ", GlyphFormat.White},
                 {(reactorIntegrity*100).ToString("N0") + "%", GlyphFormat.White.WithColor(reactorIntegrity > 0.52 ? Color.White : Color.Red)}
             };
 
             if (HeatManager.I.GetGridHeatLevel(playerGrid) > 0.8f)
             {
-                _noticeLabel.TextBoard.Append("\nTAKING THERMAL DAMAGE", GlyphFormat.White.WithColor(Color.Red));
+                _noticeLabel.TextBoard.Append("\nTHERMAL DAMAGE", GlyphFormat.White.WithColor(Color.Red));
 
                 if (_soundEmitter == null)
                 {

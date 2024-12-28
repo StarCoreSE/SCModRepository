@@ -127,6 +127,7 @@ namespace StarCore.ShareTrack.ShipTracking
         public readonly Dictionary<string, int> SpecialBlockCounts = new Dictionary<string, int>();
         public float TotalThrust { get; private set; }
         public float TotalTorque { get; private set; }
+        public int TotalPowerBlocks { get; private set; }
 
         public float GridIntegrity { get; private set; }
         public float OriginalGridIntegrity { get; private set; }
@@ -188,23 +189,26 @@ namespace StarCore.ShareTrack.ShipTracking
 
             TotalThrust = 0;
             TotalTorque = 0;
+            TotalPowerBlocks = 0;
 
             foreach (var block in _fatBlocks)
             {
-                if (block.IsFunctional)
+                // Does not check for functionality of blocks because they can be welded.
+                if (block is IMyCockpit)
+                    CockpitCount++;
+                else if (block is IMyThrust)
                 {
-                    if (block is IMyCockpit)
-                        CockpitCount++;
-                    else if (block is IMyThrust)
-                    {
-                        TotalThrust += ((IMyThrust)block).MaxEffectiveThrust;
-                    }
-                    else if (block is IMyGyro)
-                    {
-                        TotalTorque +=
-                            ((MyGyroDefinition)MyDefinitionManager.Static.GetDefinition((block as IMyGyro).BlockDefinition))
-                            .ForceMagnitude * (block as IMyGyro).GyroStrengthMultiplier;
-                    }
+                    TotalThrust += ((IMyThrust)block).MaxEffectiveThrust;
+                }
+                else if (block is IMyGyro)
+                {
+                    TotalTorque +=
+                        ((MyGyroDefinition)MyDefinitionManager.Static.GetDefinition((block as IMyGyro).BlockDefinition))
+                        .ForceMagnitude * (block as IMyGyro).GyroStrengthMultiplier;
+                }
+                else if (block is IMyPowerProducer)
+                {
+                    TotalPowerBlocks++;
                 }
 
                 if (!AllGridsList.I.WeaponSubtytes.Contains(block.BlockDefinition.SubtypeId))
