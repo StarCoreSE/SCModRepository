@@ -5,7 +5,7 @@
       <!-- PD Turret Variants-->
       <BlockVariantGroup>
         <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="FieldGen_Variants" />
-        <Icon>Textures\GUI\Icons\MyGat.dds</Icon>
+        <Icon>Textures\GUI\Icons\Cubes\Core_Icon.dds</Icon>
         <DisplayName>[SI] Field Generator</DisplayName>
         <Description></Description>
         <Blocks>
