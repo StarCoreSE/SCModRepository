@@ -614,7 +614,7 @@ namespace Starcore.FieldGenerator
             return Config.SizeModifierMin + t * (Config.SizeModifierMax - Config.SizeModifierMin);
         }
 
-        private float CalculatePowerDraw()
+        public float CalculatePowerDraw()
         {
             if (SiegeMode.Value)
             {
