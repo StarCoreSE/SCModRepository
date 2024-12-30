@@ -371,6 +371,8 @@ namespace StarCore.ShareTrack.ShipTracking
                     nameTagText += "\n" + GridName;
                 if (!IsFunctional)
                     nameTagText += "<color=white>:[Dead]";
+                if (FieldGenerator != null)
+                    nameTagText += IsSiegeActive ? " <color=yellow>[SIEGED]" : "";            
 
                 _nametag.Message.Append(nameTagText.TrimStart('\n'));
                 _nametag.Offset = -_nametag.GetTextLength() / 2;
