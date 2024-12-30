@@ -264,8 +264,18 @@ namespace StarCore.ShareTrack
             var functionalColor = tracker.IsFunctional ? "white" : "red";
             var integrityColor = integrityPercent >= 75 ? "White" : integrityPercent >= 50 ? "LightCoral" : integrityPercent >= 25 ? "IndianRed" : "FireBrick";
 
+            var siegeColor = "white";
+            string siegeDisplay = "";
+            if (tracker.FieldGenerator != null)
+            {
+                siegeDisplay = tracker.IsSiegeActive ? "[SIEGED] " : "";
+                siegeColor = tracker.IsSiegeActive ? tracker.GeneratorDisplayBlink == 1 ? "red" : "yellow" : "white";
+
+                tracker.GeneratorDisplayBlink = 1 - tracker.GeneratorDisplayBlink;
+            }
+
             return
-                $"<color={functionalColor}>{ownerDisplay,-8}<color={integrityColor}>{integrityPercent,3}%<color={functionalColor}> P:<color=orange>{power,3}<color={functionalColor}> T:<color=orange>{thrust,3}<color={functionalColor}> W:<color={weaponColor}>{wep}<color={functionalColor}> S:<color={shieldColor}>{shieldPercent,3}%<color=white>";
+                $"<color={siegeColor}>{siegeDisplay}<color={functionalColor}>{ownerDisplay,-8}<color={integrityColor}>{integrityPercent,3}%<color={functionalColor}> P:<color=orange>{power,3}<color={functionalColor}> T:<color=orange>{thrust,3}<color={functionalColor}> W:<color={weaponColor}>{wep}<color={functionalColor}> S:<color={shieldColor}>{shieldPercent,3}%<color=white>";
         }
 
 
@@ -322,6 +332,7 @@ namespace StarCore.ShareTrack
         public WcApi WcApi { get; private set; }
         public ShieldApi ShieldApi { get; private set; }
         public RtsApi RtsApi { get; private set; }
+        public FieldGeneratorAPI FieldGeneratorAPI { get; private set; }
 
         private HudPointsList _hudPointsList;
 
@@ -372,6 +383,9 @@ namespace StarCore.ShareTrack
             // Initialize the RTS_api and load it if it's not null
             RtsApi = new RtsApi();
             RtsApi?.Load();
+
+            FieldGeneratorAPI = new FieldGeneratorAPI();
+            FieldGeneratorAPI?.LoadAPI();
         }
 
         public void Close()
@@ -381,6 +395,7 @@ namespace StarCore.ShareTrack
             WcApi?.Unload();
             ShieldApi?.Unload();
             RtsApi?.Unload();
+            FieldGeneratorAPI?.UnloadAPI();
             if (PointValues != null)
             {
                 PointValues.Clear();

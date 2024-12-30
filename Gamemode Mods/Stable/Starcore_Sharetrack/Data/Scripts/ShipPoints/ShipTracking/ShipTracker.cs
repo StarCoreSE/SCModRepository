@@ -124,6 +124,7 @@ namespace StarCore.ShareTrack.ShipTracking
         }
 
         private ShieldApi ShieldApi => AllGridsList.I.ShieldApi;
+        private FieldGeneratorAPI FieldGeneratorAPI => AllGridsList.I.FieldGeneratorAPI;
 
 
         public IMyCubeGrid Grid { get; private set; }
@@ -655,6 +656,33 @@ namespace StarCore.ShareTrack.ShipTracking
 
         #endregion
 
+        #region Field Generator Stats
+        public IMyFunctionalBlock FieldGenerator => FieldGeneratorAPI.GetFirstFieldGeneratorOnGrid(Grid.EntityId);
+
+        public bool IsSiegeActive
+        {
+            get
+            {
+                var fieldGenerator = FieldGeneratorAPI.GetFirstFieldGeneratorOnGrid(Grid.EntityId);
+                if (fieldGenerator == null) 
+                    return false;
+                return FieldGeneratorAPI.IsSiegeActive(fieldGenerator);
+            }
+        }
+
+        public float CurrentFieldPower
+        {
+            get
+            {
+                var fieldGenerator = FieldGeneratorAPI.GetFirstFieldGeneratorOnGrid(Grid.EntityId);
+                if (fieldGenerator == null)
+                    return 0;
+                return FieldGeneratorAPI.GetFieldPower(fieldGenerator);
+            }
+        }
+
+        public int GeneratorDisplayBlink;
+        #endregion
         #endregion
     }
 }
