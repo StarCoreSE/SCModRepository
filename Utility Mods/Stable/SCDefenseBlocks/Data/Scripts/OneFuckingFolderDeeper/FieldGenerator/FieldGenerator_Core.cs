@@ -24,36 +24,14 @@ using Draygo.API;
 
 namespace Starcore.FieldGenerator
 {
-    public class Config
-    {
-        public const bool SimplifiedMode = true;
-
-        public const float PerModuleAmount = 10f;
-        public const int MaxModuleCount = 4;
-
-        public const int MaxSiegeTime = 60;
-        public const int SiegePowerDraw = 900;
-        public const float SiegeModeResistence = 0.9f;
-
-        public const int DamageEventThreshold = 6;
-        public const int ResetInterval = 3;
-
-        public const float SizeModifierMax = 0.8f;
-        public const int MaxBlockCount = 35000;
-
-        public const float SizeModifierMin = 1.2f;
-        public const int MinBlockCount = 2500;
-
-        public const float MaxPowerDraw = 500.00f;
-        public const float MinPowerDraw = 50.00f;
-    }
-
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Collector), false, "FieldGen_Core")]
     public class FieldGenerator : MyGameLogicComponent, IMyEventProxy
     {
         private IMyCubeBlock Block;
         private readonly bool IsServer = MyAPIGateway.Session.IsServer;
         public readonly Guid SettingsID = new Guid("7A7AC398-FAE3-44E5-ABD5-8AE49434DDF6");
+
+        private Generator_Settings Config = FieldGenerator_Config.Config;
 
         private int _damageEventCounter = 0;
         private float _stabilityChange = 0;
