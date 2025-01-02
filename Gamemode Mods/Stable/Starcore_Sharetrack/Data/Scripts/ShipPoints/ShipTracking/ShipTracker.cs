@@ -659,7 +659,7 @@ namespace StarCore.ShareTrack.ShipTracking
         #endregion
 
         #region Field Generator Stats
-        public IMyFunctionalBlock FieldGenerator => FieldGeneratorAPI.GetFirstFieldGeneratorOnGrid(Grid.EntityId);
+        public IMyFunctionalBlock FieldGenerator => FieldGeneratorAPI.IsReady ? FieldGeneratorAPI.GetFirstFieldGeneratorOnGrid(Grid.EntityId) : null;
 
         public bool IsSiegeActive
         {
