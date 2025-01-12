@@ -26,6 +26,19 @@
 	     </Blocks>
 	  </BlockVariantGroup>
 
+	  <BlockVariantGroup>
+	    <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="FusionRadiatorBlockVariantGroup" />
+	    <Icon>Textures\GUI\Icons\Cubes\RadiatorPanel.dds</Icon>
+	    <DisplayName>Fusion Radiators</DisplayName>
+	    <Description>Fusion Radiator Components</Description>
+	    <Blocks>
+		    <Block Type="MyObjectBuilder_CubeBlock" Subtype="RadiatorPanel" />
+		    <Block Type="MyObjectBuilder_TerminalBlock" Subtype="ExtendableRadiatorBase" />
+		    <Block Type="MyObjectBuilder_CubeBlock" Subtype="Heat_FlatRadiator" />
+		    <Block Type="MyObjectBuilder_CubeBlock" Subtype="MDA_Radiator_1x2" />
+		    <Block Type="MyObjectBuilder_TerminalBlock" Subtype="ActiveRadiator" />
+	    </Blocks>
+	  </BlockVariantGroup>
 
     </BlockVariantGroups>
 </Definitions>
