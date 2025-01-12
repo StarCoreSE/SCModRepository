@@ -9,8 +9,6 @@ namespace Epstein_Fusion_DS.FusionParts
     {
         public static SFusionManager I = new SFusionManager();
 
-        private bool _didRegisterAssemblyClose;
-
         private int _ticks;
         public ModularDefinition FusionDefinition;
         public Dictionary<int, SFusionSystem> FusionSystems = new Dictionary<int, SFusionSystem>();
@@ -29,12 +27,6 @@ namespace Epstein_Fusion_DS.FusionParts
 
         public void UpdateTick()
         {
-            if (!_didRegisterAssemblyClose && (ModularApi?.IsReady ?? false))
-            {
-                ModularApi.AddOnAssemblyClose(assemblyId => FusionSystems.Remove(assemblyId));
-                _didRegisterAssemblyClose = true;
-            }
-
             foreach (var fusionSystem in FusionSystems.Values)
                 fusionSystem.UpdateTick();
 

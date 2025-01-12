@@ -28,6 +28,11 @@ namespace Epstein_Fusion_DS
             // Triggers whenever a part is destroyed, simultaneously with OnPartRemove
             OnPartDestroy = null,
 
+            OnAssemblyClose = assemblyId =>
+            {
+                HeatManager.I.RemoveAssembly(assemblyId);
+            },
+
             // The most important block in an assembly. Connection checking starts here.
             BaseBlockSubtype = null,
 

@@ -58,6 +58,11 @@ namespace Epstein_Fusion_DS.HeatParts
             HeatRatio = HeatStored / (HeatCapacity + BaseHeatCapacity);
         }
 
+        public void RemoveAssembly(int assemblyId)
+        {
+            _heatSystems.Remove(assemblyId);
+        }
+
         private void Update15Tick()
         {
             var gridSize = (Grid.Max - Grid.Min + Vector3I.One) * Grid.GridSize;

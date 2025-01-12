@@ -29,6 +29,11 @@ namespace Epstein_Fusion_DS
                 // You can remove this function, and any others if need be.
             },
 
+            OnAssemblyClose = assemblyId =>
+            {
+                SFusionManager.I.FusionSystems.Remove(assemblyId);
+            },
+
             // The most important block in an assembly. Connection checking starts here.
             BaseBlockSubtype = null,
 
