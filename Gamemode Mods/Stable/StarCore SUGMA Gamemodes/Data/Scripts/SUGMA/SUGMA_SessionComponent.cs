@@ -36,7 +36,7 @@ namespace SC.SUGMA
         };
 
         /// <summary>
-        ///     How many ticks to wait after joining before requesting sync
+        ///     How many ticks to wait after joining before requesting sync.
         /// </summary>
         private int _pollTimer = 300;
 
