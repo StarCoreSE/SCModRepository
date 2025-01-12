@@ -21,7 +21,7 @@ namespace SC.SUGMA
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     internal class SUGMA_SessionComponent : MySessionComponentBase
     {
-        public const float ModVersion = 0.0f;a
+        public const float ModVersion = 0.0f;
 
         private readonly Dictionary<string, ComponentBase> _components = new Dictionary<string, ComponentBase>
         {
