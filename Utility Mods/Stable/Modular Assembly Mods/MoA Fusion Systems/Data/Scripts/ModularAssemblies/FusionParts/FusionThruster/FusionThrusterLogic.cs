@@ -106,7 +106,9 @@ namespace Epstein_Fusion_DS.FusionParts.FusionThruster
         public override void UpdateAfterSimulation()
         {
             base.UpdateAfterSimulation();
-            var storagePct = MemberSystem?.PowerStored / MemberSystem?.MaxPowerStored ?? 0;
+            var storagePct = (MemberSystem?.PowerStored / MemberSystem?.MaxPowerStored) ?? 0;
+            if (float.IsNaN(storagePct) || float.IsInfinity(storagePct))
+                storagePct = 0;
 
             if (storagePct <= 0.05f)
             {
