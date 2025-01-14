@@ -29,6 +29,6 @@ jobs:
       #    done
       - id: test_SEWT
         run: |
-          & "C:\actions-runner\externals\SC_NewUniversalUpload.exe" --repo "${{ github.workspace }}" --changes "${{ steps.changed-files.outputs.all_changed_and_modified_files }}" --changelog "${{ github.event.head_commit.message }}"
+          & "C:\Program Files\SCUniversalUpload\SC_NewUniversalUpload.exe" --repo "${{ github.workspace }}" --changes "${{ steps.changed-files.outputs.all_changed_and_modified_files }}" --changelog "${{ github.event.head_commit.message }}"
           
       - uses: EndBug/add-and-commit@v9
