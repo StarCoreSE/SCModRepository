@@ -1,0 +1,1563 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CubeBlocks>	
+    <Definition> 
+      <Id>
+        <TypeId>CubeBlock</TypeId>
+        <SubtypeId>GunCoverCurve</SubtypeId>
+      </Id>
+      <DisplayName>Gun Cover Wall Curved</DisplayName>
+      <Icon>Textures\GUI\Icons\Guncover.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\large\Guncover.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="4" />
+        <Component Subtype="Construction" Count="10" />
+      </Components>
+      <CriticalComponent Subtype="Construction" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+      </MountPoints>
+      <BuildProgressModels>
+	    <Model BuildPercentUpperBound="0.50" File="Models\Cubes\large\Guncover_BS1.mwm" />
+        <Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\Guncover.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>GunCoverCurve</BlockPairName>
+      <BlockVariants>
+        <BlockVariant>
+          <TypeId>CubeBlock</TypeId>
+          <SubtypeId>GunCoverDiag</SubtypeId>
+        </BlockVariant>
+		
+        <BlockVariant>
+          <TypeId>CubeBlock</TypeId>
+          <SubtypeId>ShipRailStraight</SubtypeId>
+        </BlockVariant>
+        <BlockVariant>
+          <TypeId>CubeBlock</TypeId>
+		  <SubtypeId>ShipRailStraightHalf</SubtypeId>
+        </BlockVariant>
+		
+		<BlockVariant>
+          <TypeId>CubeBlock</TypeId>
+		  <SubtypeId>GunCoverStraight</SubtypeId>
+        </BlockVariant>
+      </BlockVariants>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>8</BuildTimeSeconds>
+    </Definition>
+	
+	
+	
+    <Definition> 
+      <Id>
+        <TypeId>CubeBlock</TypeId>
+        <SubtypeId>GunCoverDiag</SubtypeId>
+      </Id>
+      <DisplayName>Gun Cover Wall Diaganol</DisplayName>
+      <Icon>Textures\GUI\Icons\GuncoverDiagononal.dds</Icon>
+      <GuiVisible>false</GuiVisible>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\large\GuncoverDiag.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="4" />
+        <Component Subtype="Construction" Count="10" />
+      </Components>
+      <CriticalComponent Subtype="Construction" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+      </MountPoints>
+     <BuildProgressModels>
+        <Model BuildPercentUpperBound="0.50" File="Models\Cubes\large\GuncoverDiag_BS1.mwm" />
+        <Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\GuncoverDiag.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>GunCoverDiag</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>8</BuildTimeSeconds>
+    </Definition>
+	
+	
+	
+	<Definition> 
+      <Id>
+        <TypeId>CubeBlock</TypeId>
+        <SubtypeId>GunCoverStraight</SubtypeId>
+      </Id>
+      <DisplayName>Gun Cover Wall Straight</DisplayName>
+      <Icon>Textures\GUI\Icons\GunCoverStraight.dds</Icon>
+      <GuiVisible>false</GuiVisible>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\large\GunCoverStraight.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="4" />
+        <Component Subtype="Construction" Count="10" />
+      </Components>
+      <CriticalComponent Subtype="Construction" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+      </MountPoints>
+      <BuildProgressModels>
+	    <Model BuildPercentUpperBound="0.50" File="Models\Cubes\large\GunCoverStraight_BS1.mwm" />
+        <Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\GunCoverStraight.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>GunCoverStraight</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>8</BuildTimeSeconds>
+    </Definition>
+	
+    <Definition> 
+      <Id>
+        <TypeId>CubeBlock</TypeId>
+        <SubtypeId>ShipRailStraight</SubtypeId>
+      </Id>
+      <DisplayName>Ship Railing Straight</DisplayName>
+      <Icon>Textures\GUI\Icons\ShipRailStraight.dds</Icon>
+      <GuiVisible>true</GuiVisible>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\BarrierWallStraight_Large.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="4" />
+        <Component Subtype="Construction" Count="10" />
+      </Components>
+      <CriticalComponent Subtype="Construction" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="1.00" File="Models\BarrierWallStraight_Large.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>ShilRailStraight</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>8</BuildTimeSeconds>
+    </Definition>
+
+    <Definition> 
+      <Id>
+        <TypeId>CubeBlock</TypeId>
+        <SubtypeId>ShipRailStraightHalf</SubtypeId>
+      </Id>
+      <DisplayName>Ship Railing Straight (Half)</DisplayName>
+      <Icon>Textures\GUI\Icons\ShipRailStraight.dds</Icon>
+      <GuiVisible>true</GuiVisible>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\BarrierWallStraightHalf_Large.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="4" />
+        <Component Subtype="Construction" Count="10" />
+      </Components>
+      <CriticalComponent Subtype="Construction" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="1.00" File="Models\BarrierWallStraightHalf_Large.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>ShilRailStraightHalf</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>8</BuildTimeSeconds>
+    </Definition>	
+	
+	
+	<!-- Platforms -->
+	
+    <Definition> 
+      <Id>
+        <TypeId>CubeBlock</TypeId>
+        <SubtypeId>ShipPlatformEFCat</SubtypeId>
+      </Id>
+      <DisplayName>Ship Platform Straight</DisplayName>
+      <Icon>Textures\GUI\Icons\Platform_Icon.dds</Icon>
+      <CubeSize>Large</CubeSize>
+	  <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Platform_Railing1_Large.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="4" />
+        <Component Subtype="Construction" Count="10" />
+      </Components>
+      <CriticalComponent Subtype="Construction" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+        <MountPoint Side="Top" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="1.00" File="Models\Platform_Railing1_Large.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>ShipPlatformEFStraight</BlockPairName>
+      <BlockVariants>
+        <BlockVariant>
+          <TypeId>CubeBlock</TypeId>
+          <SubtypeId>ShipPlatformEFCorner</SubtypeId>
+        </BlockVariant>
+        <BlockVariant>
+          <TypeId>CubeBlock</TypeId>
+          <SubtypeId>ShipPlatformEFSupport</SubtypeId>
+        </BlockVariant>
+        <BlockVariant>
+          <TypeId>CubeBlock</TypeId>
+		  <SubtypeId>ShipPlatformEFTurret</SubtypeId>
+        </BlockVariant>
+        <BlockVariant>
+          <TypeId>CubeBlock</TypeId>
+		  <SubtypeId>ShipPlatformEFWedgeL</SubtypeId>
+        </BlockVariant>
+        <BlockVariant>
+          <TypeId>CubeBlock</TypeId>
+		  <SubtypeId>ShipPlatformEFWedgeR</SubtypeId>
+        </BlockVariant>
+        <BlockVariant>
+          <TypeId>CubeBlock</TypeId>
+		  <SubtypeId>ShipPlatformLadderR</SubtypeId>
+        </BlockVariant>
+        <BlockVariant>
+          <TypeId>CubeBlock</TypeId>
+		  <SubtypeId>ShipPlatformLadderL</SubtypeId>
+        </BlockVariant>
+        <BlockVariant>
+          <TypeId>CubeBlock</TypeId>
+		  <SubtypeId>ShipPlatformStraight2</SubtypeId>
+        </BlockVariant>
+        <BlockVariant>
+          <TypeId>CubeBlock</TypeId>
+          <SubtypeId>ShipPlatformEFCurve</SubtypeId>
+        </BlockVariant>
+        <BlockVariant>
+          <TypeId>CubeBlock</TypeId>
+          <SubtypeId>ShipPlatformEFSlant</SubtypeId>
+        </BlockVariant>
+        <BlockVariant>
+          <TypeId>CubeBlock</TypeId>
+		  <SubtypeId>ShipPlatformStraight3</SubtypeId>
+        </BlockVariant>
+        <BlockVariant>
+          <TypeId>CubeBlock</TypeId>
+		  <SubtypeId>Platform_NR</SubtypeId>
+        </BlockVariant>
+        <BlockVariant>
+          <TypeId>CubeBlock</TypeId>
+		  <SubtypeId>Platform_Turret_NR</SubtypeId>
+        </BlockVariant>
+      </BlockVariants>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>8</BuildTimeSeconds>
+    </Definition>
+	
+    <Definition> 
+      <Id>
+        <TypeId>CubeBlock</TypeId>
+        <SubtypeId>ShipPlatformEFCorner</SubtypeId>
+      </Id>
+      <DisplayName>Ship Platform Corner</DisplayName>
+      <Icon>Textures\GUI\Icons\Platform_Icon.dds</Icon>
+      <GuiVisible>true</GuiVisible>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Platform_Railing_Corner_Large.mwm</Model>
+      <Components>
+        <Component Subtype="InteriorPlate" Count="15" />
+        <Component Subtype="Construction" Count="15" />
+        <Component Subtype="SmallTube" Count="10" />
+        <Component Subtype="SteelPlate" Count="20" />
+      </Components>
+      <CriticalComponent Subtype="Construction" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+        <MountPoint Side="Top" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="1.00" File="Models\Platform_Railing_Corner_Large.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>ShipPlatformEFCorner</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>8</BuildTimeSeconds>
+    </Definition>
+	
+    <Definition> 
+      <Id>
+        <TypeId>CubeBlock</TypeId>
+        <SubtypeId>ShipPlatformStraight2</SubtypeId>
+      </Id>
+      <DisplayName>Ship Platform Straight 2</DisplayName>
+      <Icon>Textures\GUI\Icons\Platform_Icon.dds</Icon>
+      <GuiVisible>true</GuiVisible>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Platform_Railing2_Large.mwm</Model>
+      <Components>
+        <Component Subtype="InteriorPlate" Count="15" />
+        <Component Subtype="Construction" Count="15" />
+        <Component Subtype="SmallTube" Count="10" />
+        <Component Subtype="SteelPlate" Count="20" />
+      </Components>
+      <CriticalComponent Subtype="Construction" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+        <MountPoint Side="Top" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="1.00" File="Models\Platform_Railing2_Large.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>ShipPlatformStraight2</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>8</BuildTimeSeconds>
+    </Definition>
+	
+    <Definition> 
+      <Id>
+        <TypeId>CubeBlock</TypeId>
+        <SubtypeId>ShipPlatformEFTurret</SubtypeId>
+      </Id>
+      <DisplayName>Ship Platform Turret</DisplayName>
+      <Icon>Textures\GUI\Icons\Platform_Icon.dds</Icon>
+      <GuiVisible>true</GuiVisible>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Platform_Turret_Large.mwm</Model>
+      <Components>
+        <Component Subtype="InteriorPlate" Count="15" />
+        <Component Subtype="Construction" Count="15" />
+        <Component Subtype="SmallTube" Count="10" />
+        <Component Subtype="SteelPlate" Count="20" />
+      </Components>
+      <CriticalComponent Subtype="Construction" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+        <MountPoint Side="Top" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="1.00" File="Models\Platform_Turret_Large.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>ShipPlatformEFTurret</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>8</BuildTimeSeconds>
+    </Definition>
+	
+    <Definition> 
+      <Id>
+        <TypeId>CubeBlock</TypeId>
+        <SubtypeId>ShipPlatformEFSupport</SubtypeId>
+      </Id>
+      <DisplayName>Ship Platform Supports</DisplayName>
+      <Icon>Textures\GUI\Icons\Platform_Icon.dds</Icon>
+      <GuiVisible>true</GuiVisible>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Platform_Supports_Large.mwm</Model>
+      <Components>
+        <Component Subtype="InteriorPlate" Count="15" />
+        <Component Subtype="Construction" Count="15" />
+        <Component Subtype="SmallTube" Count="10" />
+        <Component Subtype="SteelPlate" Count="20" />
+      </Components>
+      <CriticalComponent Subtype="Construction" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+        <MountPoint Side="Top" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="1.00" File="Models\Platform_Supports_Large.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>ShipPlatformEFSupport</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>8</BuildTimeSeconds>
+    </Definition>	
+	
+    <Definition> 
+      <Id>
+        <TypeId>CubeBlock</TypeId>
+        <SubtypeId>ShipPlatformEFWedgeL</SubtypeId>
+      </Id>
+      <DisplayName>Ship Platform Wedge L</DisplayName>
+      <Icon>Textures\GUI\Icons\Platform_Icon.dds</Icon>
+      <GuiVisible>true</GuiVisible>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Ledge_WedgeL_Large.mwm</Model>
+      <Components>
+        <Component Subtype="InteriorPlate" Count="15" />
+        <Component Subtype="Construction" Count="15" />
+        <Component Subtype="SmallTube" Count="10" />
+        <Component Subtype="SteelPlate" Count="20" />
+      </Components>
+      <CriticalComponent Subtype="Construction" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+        <MountPoint Side="Top" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="1.00" File="Models\Ledge_WedgeL_Large.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>ShipPlatformEFWedgeL</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>8</BuildTimeSeconds>
+    </Definition>	
+
+    <Definition> 
+      <Id>
+        <TypeId>CubeBlock</TypeId>
+        <SubtypeId>ShipPlatformEFWedgeR</SubtypeId>
+      </Id>
+      <DisplayName>Ship Platform Wedge R</DisplayName>
+      <Icon>Textures\GUI\Icons\Platform_Icon.dds</Icon>
+      <GuiVisible>true</GuiVisible>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Ledge_WedgeR_Large.mwm</Model>
+      <Components>
+        <Component Subtype="InteriorPlate" Count="15" />
+        <Component Subtype="Construction" Count="15" />
+        <Component Subtype="SmallTube" Count="10" />
+        <Component Subtype="SteelPlate" Count="20" />
+      </Components>
+      <CriticalComponent Subtype="Construction" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+        <MountPoint Side="Top" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="1.00" File="Models\Ledge_WedgeR_Large.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>ShipPlatformEFWedgeR</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>8</BuildTimeSeconds>
+    </Definition>	
+	
+    <Definition> 
+      <Id>
+        <TypeId>CubeBlock</TypeId>
+        <SubtypeId>ShipPlatformLadderR</SubtypeId>
+      </Id>
+      <DisplayName>Ship Platform Ladder R</DisplayName>
+      <Icon>Textures\GUI\Icons\Platform_Icon.dds</Icon>
+      <GuiVisible>true</GuiVisible>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Ladder_R_Large.mwm</Model>
+      <Components>
+        <Component Subtype="InteriorPlate" Count="15" />
+        <Component Subtype="Construction" Count="15" />
+        <Component Subtype="SmallTube" Count="10" />
+        <Component Subtype="SteelPlate" Count="20" />
+      </Components>
+      <CriticalComponent Subtype="Construction" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+        <MountPoint Side="Top" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="1.00" File="Models\Ladder_R_Large.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>ShipPlatformLadderR</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>8</BuildTimeSeconds>
+    </Definition>	
+	
+	    <Definition> 
+      <Id>
+        <TypeId>CubeBlock</TypeId>
+        <SubtypeId>ShipPlatformLadderL</SubtypeId>
+      </Id>
+      <DisplayName>Ship Platform Ladder L</DisplayName>
+      <Icon>Textures\GUI\Icons\Platform_Icon.dds</Icon>
+      <GuiVisible>true</GuiVisible>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Ladder_L_Large.mwm</Model>
+      <Components>
+        <Component Subtype="InteriorPlate" Count="15" />
+        <Component Subtype="Construction" Count="15" />
+        <Component Subtype="SmallTube" Count="10" />
+        <Component Subtype="SteelPlate" Count="20" />
+      </Components>
+      <CriticalComponent Subtype="Construction" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+        <MountPoint Side="Top" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="1.00" File="Models\Ladder_L_Large.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>ShipPlatformLadderL</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>8</BuildTimeSeconds>
+    </Definition>	
+	
+    <Definition> 
+      <Id>
+        <TypeId>CubeBlock</TypeId>
+        <SubtypeId>ShipPlatformEFCurve</SubtypeId>
+      </Id>
+      <DisplayName>Ship Platform Curve</DisplayName>
+      <Icon>Textures\GUI\Icons\Platform_Icon.dds</Icon>
+      <GuiVisible>true</GuiVisible>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\PlatformRound1_Large.mwm</Model>
+      <Components>
+        <Component Subtype="InteriorPlate" Count="15" />
+        <Component Subtype="Construction" Count="15" />
+        <Component Subtype="SmallTube" Count="10" />
+        <Component Subtype="SteelPlate" Count="20" />
+      </Components>
+      <CriticalComponent Subtype="Construction" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+        <MountPoint Side="Top" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="1.00" File="Models\PlatformRound1_Large.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>ShipPlatformEFCurve</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>8</BuildTimeSeconds>
+    </Definition>
+	
+    <Definition> 
+      <Id>
+        <TypeId>CubeBlock</TypeId>
+        <SubtypeId>ShipPlatformEFSlant</SubtypeId>
+      </Id>
+      <DisplayName>Ship Platform Half Corner</DisplayName>
+      <Icon>Textures\GUI\Icons\Platform_Icon.dds</Icon>
+      <GuiVisible>true</GuiVisible>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Platform_Railing_Diag_Large.mwm</Model>
+      <Components>
+        <Component Subtype="InteriorPlate" Count="15" />
+        <Component Subtype="Construction" Count="15" />
+        <Component Subtype="SmallTube" Count="10" />
+        <Component Subtype="SteelPlate" Count="20" />
+      </Components>
+      <CriticalComponent Subtype="Construction" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+        <MountPoint Side="Top" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="1.00" File="Models\Platform_Railing_Diag_Large.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>ShipPlatformEFSlant</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>8</BuildTimeSeconds>
+    </Definition>
+	
+    <Definition> 
+      <Id>
+        <TypeId>CubeBlock</TypeId>
+        <SubtypeId>ShipPlatformStraight3</SubtypeId>
+      </Id>
+      <DisplayName>Ship Platform Straight 3</DisplayName>
+      <Icon>Textures\GUI\Icons\Platform_Icon.dds</Icon>
+      <GuiVisible>true</GuiVisible>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Platform_Railing_3_Large.mwm</Model>
+      <Components>
+        <Component Subtype="InteriorPlate" Count="15" />
+        <Component Subtype="Construction" Count="15" />
+        <Component Subtype="SmallTube" Count="10" />
+        <Component Subtype="SteelPlate" Count="20" />
+      </Components>
+      <CriticalComponent Subtype="Construction" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+        <MountPoint Side="Top" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="1.00" File="Models\Platform_Railing_3_Large.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>ShipPlatformStraight3</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>8</BuildTimeSeconds>
+    </Definition>
+
+    <Definition> 
+      <Id>
+        <TypeId>CubeBlock</TypeId>
+        <SubtypeId>Platform_Turret_NR</SubtypeId>
+      </Id>
+      <DisplayName>Ship Platform Turret No-Railing</DisplayName>
+      <Icon>Textures\GUI\Icons\Platform_Icon.dds</Icon>
+      <GuiVisible>true</GuiVisible>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Platform_Turret_NR_Large.mwm</Model>
+      <Components>
+        <Component Subtype="InteriorPlate" Count="15" />
+        <Component Subtype="Construction" Count="15" />
+        <Component Subtype="SmallTube" Count="10" />
+        <Component Subtype="SteelPlate" Count="20" />
+      </Components>
+      <CriticalComponent Subtype="Construction" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+        <MountPoint Side="Top" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="1.00" File="Models\Platform_Turret_NR_Large.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>Platform_Turret_NR</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>8</BuildTimeSeconds>
+    </Definition>
+	
+    <Definition> 
+      <Id>
+        <TypeId>CubeBlock</TypeId>
+        <SubtypeId>Platform_NR</SubtypeId>
+      </Id>
+      <DisplayName>Ship Platform No Railing</DisplayName>
+      <Icon>Textures\GUI\Icons\Platform_Icon.dds</Icon>
+      <GuiVisible>true</GuiVisible>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Platform_NR_Large.mwm</Model>
+      <Components>
+        <Component Subtype="InteriorPlate" Count="15" />
+        <Component Subtype="Construction" Count="15" />
+        <Component Subtype="SmallTube" Count="10" />
+        <Component Subtype="SteelPlate" Count="20" />
+      </Components>
+      <CriticalComponent Subtype="Construction" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+        <MountPoint Side="Top" StartX="0.01" StartY="0.01" EndX="0.99" EndY="0.99" Default="true" />
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="1.00" File="Models\Platform_NR_Large.mwm" />
+      </BuildProgressModels>
+      <BlockPairName>Platform_NR</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>8</BuildTimeSeconds>
+    </Definition>	
+	
+	<!-- Guns -->
+    
+
+
+
+	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>127mmMk32</SubtypeId>
+      </Id>	
+      <DisplayName>[FAS] Atlanta</DisplayName>
+	<Description>
+		[Turret Range: 4000]
+        [Reload: 1.5 Seconds/Barrel]
+
+        [Ammo Types: HE | SAP]
+        [Shell Range: 5km]
+        [Shell Speed: 850m/s | 1500m/s]
+        [Damage Types: Energy | Kinetic]
+		[AMS capable: 50]
+		
+		127mm Twin gun or 5 inch turret, Used quite extensivly as a mixed purpose gun by the US Navy during WW2 and into the cold war
+		Medium/short range artillery capable of acting as AA and anti-ship
+	</Description>
+      <Icon>Textures\GUI\Icons\5InchDualGun.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="2" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\127mm mk32\5Inch38Twin.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="MetalGrid" Count="100" />
+        <Component Subtype="LargeTube" Count="200" />
+        <Component Subtype="Motor" Count="100" />
+        <Component Subtype="Computer" Count="100" />
+        <Component Subtype="Construction" Count="200" />
+		<Component Subtype="MetalGrid" Count="200" />
+        <Component Subtype="SteelPlate" Count="1600" />
+      </Components>
+      <CriticalComponent Subtype="Motor" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
+      </MountPoints>
+      <VoxelPlacement>
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>127mmMk32</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\HUD\USAASight.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="127mmMk32" />
+      <InventoryMaxVolume>300</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees>
+      <MaxElevationDegrees>75</MaxElevationDegrees>
+      <MinAzimuthDegrees>-170</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>170</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>12000</MaxRangeMeters>
+      <RotationSpeed>0.002</RotationSpeed>
+      <ElevationSpeed>0.001</ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+    </Definition>
+
+
+	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>127mmMk12</SubtypeId>
+      </Id>	
+      <DisplayName>[FAS] Benson</DisplayName>
+	<Description>
+		[Turret Range: 4000]
+        [Reload: 1.5 Seconds/Barrel]
+
+        [Ammo Types: HE | SAP]
+        [Shell Range: 5km]
+        [Shell Speed: 850m/s | 1500m/s]
+        [Damage Types: Energy | Kinetic]
+		[AMS capable: 50]
+		
+		127mm single gun or 5 inch turret, Used quite extensivly as a mixed purpose gun by the US Navy during WW2 and into the cold war
+		Medium/short range artillery capable of acting as AA and anti-ship
+	</Description>
+      <Icon>Textures\GUI\Icons\127mmMk12_Icon.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="2" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\127mm mk12\5InchMk30Main.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+    <Components>
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="MetalGrid" Count="100" />
+        <Component Subtype="LargeTube" Count="200" />
+        <Component Subtype="Motor" Count="100" />
+        <Component Subtype="Computer" Count="100" />
+        <Component Subtype="Construction" Count="200" />
+		<Component Subtype="MetalGrid" Count="200" />
+        <Component Subtype="SteelPlate" Count="1600" />
+      </Components>
+      <CriticalComponent Subtype="Motor" Index="0" />
+      <MountPoints>
+		  <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
+      </MountPoints>
+      <VoxelPlacement>
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>127mmMk12</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\HUD\USAASight.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="127mmMk12" />
+      <InventoryMaxVolume>200</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-12</MinElevationDegrees>
+      <MaxElevationDegrees>82</MaxElevationDegrees>
+      <MinAzimuthDegrees>-170</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>170</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>10000</MaxRangeMeters>
+      <RotationSpeed>0.0025</RotationSpeed>
+      <ElevationSpeed>0.002</ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.05</MaxFov>
+    </Definition>
+
+	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>127mmMk24</SubtypeId>
+      </Id>	
+      <DisplayName>[FAS] Fletcher</DisplayName>
+	<Description>
+		[Turret Range: 4000]
+        [Reload: 1.5 Seconds/Barrel]
+
+        [Ammo Types: HE | SAP]
+        [Shell Range: 5km]
+        [Shell Speed: 850m/s | 1500m/s]
+        [Damage Types: Energy | Kinetic]
+		[AMS capable: 50]
+		
+		
+		127mm single gun or 5 inch turret, Used quite extensivly as a mixed purpose gun by the US Navy during WW2 and into the cold war
+		Medium/short range artillery capable of acting as AA and anti-ship
+	</Description>
+      <Icon>Textures\GUI\Icons\127mmMk24.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="1" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\127mm mk24\5InchSingleMain.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="MetalGrid" Count="100" />
+        <Component Subtype="LargeTube" Count="200" />
+        <Component Subtype="Motor" Count="100" />
+        <Component Subtype="Computer" Count="100" />
+        <Component Subtype="Construction" Count="200" />
+		<Component Subtype="MetalGrid" Count="200" />
+        <Component Subtype="SteelPlate" Count="1600" />
+      </Components>
+      <CriticalComponent Subtype="Motor" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="1" EndY="1" />
+      </MountPoints>
+      <BuildProgressModels>
+		<Model BuildPercentUpperBound="0.50" File="Models\127mmSingleBuild50_Large.mwm" />
+		<Model BuildPercentUpperBound="0.99" File="Models\127mmSingleBuild50_Large.mwm" />
+        <Model BuildPercentUpperBound="1.00" File="Models\127mmBase_Large.mwm" />
+      </BuildProgressModels>
+      <VoxelPlacement>
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>127mmMk24</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>30</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\HUD\USAASight.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="127mmMk24" />
+      <InventoryMaxVolume>120</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees>
+      <MaxElevationDegrees>50</MaxElevationDegrees>
+      <MinAzimuthDegrees>-170</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>170</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>4000</MaxRangeMeters>
+      <RotationSpeed>0.003</RotationSpeed>
+      <ElevationSpeed>0.0015</ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+    </Definition>
+
+
+
+	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>6InchTriple</SubtypeId>
+      </Id>	
+      <DisplayName>[FAS] Helena</DisplayName>
+		  <Description>
+			  [Turret Range: 4000]
+			  [Reload: 1.5 Seconds/Barrel]
+
+			  [Ammo Types: HE | SAP]
+			  [Shell Range: 5km]
+			  [Shell Speed: 850m/s | 1500m/s]
+			  [Damage Types: Energy | Kinetic]
+			  [AMS capable: 50]
+
+
+			  152mm Triple turret, commonly found on US navy light cruisers during WW2, limited dual purpose capacity when comapred to the 5 inch guns
+		  </Description>
+      <Icon>Textures\GUI\Icons\6InchTripleGun.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="1" z="3" />
+      <ModelOffset x="0" y= "0.95" z="0" />
+      <Model>Models\152mm triple\6InchMain.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+		  <Components>
+			  <Component Subtype="SteelPlate" Count="100" />
+			  <Component Subtype="MetalGrid" Count="100" />
+			  <Component Subtype="LargeTube" Count="200" />
+			  <Component Subtype="Motor" Count="100" />
+			  <Component Subtype="Computer" Count="100" />
+			  <Component Subtype="Construction" Count="200" />
+			  <Component Subtype="MetalGrid" Count="200" />
+			  <Component Subtype="SteelPlate" Count="1600" />
+		  </Components>
+      <CriticalComponent Subtype="Motor" Index="0" />
+      <MountPoints>
+		  <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
+      </MountPoints>
+      <VoxelPlacement>
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>6InchTriple</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\HUD\USGunsight.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="6InchTriple" />
+      <InventoryMaxVolume>100</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees>
+      <MaxElevationDegrees>35</MaxElevationDegrees>
+      <MinAzimuthDegrees>-150</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>150</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>18000</MaxRangeMeters>
+      <RotationSpeed>0.0015</RotationSpeed>
+      <ElevationSpeed>0.0005</ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+    </Definition>
+
+
+	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>16InchTriple</SubtypeId>
+      </Id>	
+      <DisplayName>[FAS] Iowa</DisplayName>
+	<Description>
+		[Turret Range: 7000]
+        [Reload: 3 Seconds/Barrel]
+
+        [Ammo Types: HE | AP]
+        [Shell Range: 10km]
+        [Shell Speed: 1200m/s | 1300m/s]
+        [Damage Types: Energy | Kinetic]
+		
+		16 Inch Triple Gun Used by the US Navy from the interwar periods to the late 1900s
+		Long Range heavy artillery, found aboard ships like the Iowa Class, with variations of the turret seeing use on other ships of the US Navy.
+	</Description>
+      <Icon>Textures\GUI\Icons\16InchTripleGun.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="7" y="2" z="7" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\406mm triple\16InchGun.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+            <Component Subtype="SteelPlate" Count="200" />
+			<Component Subtype="MetalGrid" Count="300" />
+			<Component Subtype="LargeTube" Count="250" />
+			<Component Subtype="GravityGenerator" Count="600" />
+			<Component Subtype="Motor" Count="400" />
+			<Component Subtype="Computer" Count="100" />
+		    <Component Subtype="Construction" Count="1000" />
+			<Component Subtype="MetalGrid" Count="600" />
+			<Component Subtype="SteelPlate" Count="2000" />
+      </Components>
+      <CriticalComponent Subtype="Motor" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="6" EndY="6" />
+      </MountPoints>
+      <VoxelPlacement>
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>16InchTriple</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>120</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\HUD\USGunsight.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="16InchTriple" />
+      <InventoryMaxVolume>100</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees>
+      <MaxElevationDegrees>25</MaxElevationDegrees>
+      <MinAzimuthDegrees>-150</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>150</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>25000</MaxRangeMeters>
+      <RotationSpeed>0.00015</RotationSpeed>
+      <ElevationSpeed>0.00015</ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+    </Definition>
+	
+	
+<!-- Break -->
+
+	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>381mmDualR</SubtypeId>
+      </Id>	
+      <DisplayName>[FAS] Tirpitz</DisplayName>
+	<Description>
+		[Turret Range: 7000]
+        [Reload: 3 Seconds/Barrel]
+
+        [Ammo Types: HE | AP]
+        [Shell Range: 10km]
+        [Shell Speed: 1200m/s | 1300m/s]
+        [Damage Types: Energy | Kinetic]
+		
+		15 Inch Twin naval gun, used heavily by the Kriegsmarine of the German ww2 era.
+		Long range Naval artillery, Found on ships like the Bismarck and Tirpitz, almost seeing fitting out on the Scharnhorst.
+	</Description>
+      <Icon>Textures\GUI\Icons\381mmR.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="5" y="2" z="5" />
+		  <ModelOffset x="0" y= "0.95" z="0" />
+      <Model>Models\381mm mk24\38cmSk34.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+       <Components>
+            <Component Subtype="SteelPlate" Count="200" />
+			<Component Subtype="MetalGrid" Count="300" />
+			<Component Subtype="LargeTube" Count="250" />
+			<Component Subtype="GravityGenerator" Count="600" />
+			<Component Subtype="Motor" Count="400" />
+			<Component Subtype="Computer" Count="100" />
+		    <Component Subtype="Construction" Count="1000" />
+			<Component Subtype="MetalGrid" Count="600" />
+			<Component Subtype="SteelPlate" Count="3000" />
+      </Components>
+      <CriticalComponent Subtype="Motor" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="5" />
+      </MountPoints>
+      <BlockVariants>
+        <BlockVariant>
+			<TypeId>ConveyorSorter</TypeId>
+          <SubtypeId>381mmDualNR</SubtypeId>
+        </BlockVariant>
+      </BlockVariants>
+      <VoxelPlacement>
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>381mmDualR</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>120</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\HUD\GermanTankSight.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="381mmDualR" />
+      <InventoryMaxVolume>100</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees>
+      <MaxElevationDegrees>20</MaxElevationDegrees>
+      <MinAzimuthDegrees>-150</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>150</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>25000</MaxRangeMeters>
+      <RotationSpeed>0.00015</RotationSpeed>
+      <ElevationSpeed>0.00015</ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+    </Definition>
+
+	  <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>381mmDualNR</SubtypeId>
+      </Id>	
+      <DisplayName>[FAS] Tirpitz</DisplayName>
+	<Description>
+		[Turret Range: 7000]
+        [Reload: 3 Seconds/Barrel]
+
+        [Ammo Types: HE | AP]
+        [Shell Range: 10km]
+        [Shell Speed: 1200m/s | 1300m/s]
+        [Damage Types: Energy | Kinetic]
+		
+		15 Inch Twin naval gun, used heavily by the Kriegsmarine of the German ww2 era.
+		Long range Naval artillery, Found on ships like the Bismarck and Tirpitz, almost seeing fitting out on the Scharnhorst.
+	</Description>
+      <Icon>Textures\GUI\Icons\381mmNR.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <GuiVisible>false</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="5" y="2" z="5" />
+		  <ModelOffset x="0" y= "0.95" z="0" />
+      <Model>Models\381mm mk24\38cmSk34NR.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+            <Component Subtype="SteelPlate" Count="200" />
+			<Component Subtype="MetalGrid" Count="300" />
+			<Component Subtype="LargeTube" Count="250" />
+			<Component Subtype="GravityGenerator" Count="600" />
+			<Component Subtype="Motor" Count="400" />
+			<Component Subtype="Computer" Count="100" />
+		    <Component Subtype="Construction" Count="1000" />
+			<Component Subtype="MetalGrid" Count="600" />
+			<Component Subtype="SteelPlate" Count="3000" />
+      </Components>
+      <CriticalComponent Subtype="Motor" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="5" />
+      </MountPoints>
+      <VoxelPlacement>
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>381mmDualNR</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>120</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\HUD\GermanTankSight.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="381mmDualNR" />
+      <InventoryMaxVolume>100</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees>
+      <MaxElevationDegrees>20</MaxElevationDegrees>
+      <MinAzimuthDegrees>-150</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>150</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>25000</MaxRangeMeters>
+      <RotationSpeed>0.00015</RotationSpeed>
+      <ElevationSpeed>0.00015</ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+    </Definition>
+
+
+
+
+	 <!-- <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>15cmSKC28R</SubtypeId>
+      </Id>	
+      <DisplayName>[FAS] Elbing</DisplayName>
+	    <Description>
+			150mm Twin gun
+			5km AI range
+			Fires HE shell
+		</Description>
+      <Icon>Textures\GUI\Icons\15cmR.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="2" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\150mm twins\15cmSk28.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="MetalGrid" Count="100" />
+        <Component Subtype="LargeTube" Count="200" />
+        <Component Subtype="Motor" Count="150" />
+        <Component Subtype="Computer" Count="100" />
+        <Component Subtype="Construction" Count="200" />
+		<Component Subtype="MetalGrid" Count="300" />
+        <Component Subtype="SteelPlate" Count="1250" />
+      </Components>
+      <CriticalComponent Subtype="Motor" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="2" EndY="2" />
+      </MountPoints>
+	  <BlockVariants>
+        <BlockVariant>
+			<TypeId>ConveyorSorter</TypeId>
+          <SubtypeId>15cmSKC28NR</SubtypeId>
+        </BlockVariant>
+      </BlockVariants>
+      <VoxelPlacement>
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>15cmSKC28R</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\HUD\GermanTankSight.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="15cmSKC28" />
+      <InventoryMaxVolume>100</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees>
+      <MaxElevationDegrees>40</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>16000</MaxRangeMeters>
+      <RotationSpeed>0.0015</RotationSpeed>
+      <ElevationSpeed>0.0005</ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+    </Definition> -->
+
+	  <!--<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>15cmSKC28NR</SubtypeId>
+      </Id>	
+      <DisplayName>[FAS] Elbing</DisplayName>
+	<Description>
+		150mm Twin gun
+		5km AI range
+		Fires HE shell
+	</Description>
+      <Icon>Textures\GUI\Icons\15cmNR.dds</Icon>
+      <GuiVisible>false</GuiVisible>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="2" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\150mm twins\15cmSk28NRF.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="MetalGrid" Count="100" />
+        <Component Subtype="LargeTube" Count="200" />
+        <Component Subtype="Motor" Count="105" />
+        <Component Subtype="Computer" Count="100" />
+        <Component Subtype="Construction" Count="200" />
+		<Component Subtype="MetalGrid" Count="300" />
+        <Component Subtype="SteelPlate" Count="1250" />
+      </Components>
+      <CriticalComponent Subtype="Motor" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="2" EndY="2" />
+      </MountPoints>
+      <VoxelPlacement>
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>15cmSKC28NR</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\HUD\GermanTankSight.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="15cmSKC28" />
+      <InventoryMaxVolume>100</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees>
+      <MaxElevationDegrees>40</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>16000</MaxRangeMeters>
+      <RotationSpeed>0.0015</RotationSpeed>
+      <ElevationSpeed>0.0005</ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+    </Definition> -->
+
+	<!-- French Guns -->
+
+      
+	
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+		  <Id>
+			  <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>380mmMLE1935</SubtypeId>
+      </Id>	
+      <DisplayName>[FAS] Jean Bart</DisplayName>
+	<Description>
+		[Turret Range: 7000]
+        [Reload: 3 Seconds/Barrel]
+
+        [Ammo Types: HE | AP]
+        [Shell Range: 10km]
+        [Shell Speed: 1200m/s | 1300m/s]
+        [Damage Types: Energy | Kinetic]
+		15 Inch Quad naval gun used by the French navy of ww2
+		Long range artillery found on ships like Richeleu and Jean Bart
+	</Description>
+      <Icon>Textures\GUI\Icons\380mmMLE1935_Icon.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="5" y="2" z="5" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\380mm quad\380mm45MLE.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+       <Components>
+            <Component Subtype="SteelPlate" Count="200" />
+			<Component Subtype="MetalGrid" Count="300" />
+			<Component Subtype="LargeTube" Count="250" />
+			<Component Subtype="GravityGenerator" Count="600" />
+			<Component Subtype="Motor" Count="400" />
+			<Component Subtype="Computer" Count="100" />
+		    <Component Subtype="Construction" Count="1000" />
+			<Component Subtype="MetalGrid" Count="600" />
+			<Component Subtype="SteelPlate" Count="3000" />
+      </Components>
+      <CriticalComponent Subtype="Motor" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="5" />
+      </MountPoints>
+      <VoxelPlacement>
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>380mmMLE1935</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>120</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\HUD\GermanTankSight.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="380mmMLE1935" />
+      <InventoryMaxVolume>100</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees>
+      <MaxElevationDegrees>35</MaxElevationDegrees>
+      <MinAzimuthDegrees>-150</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>150</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>25000</MaxRangeMeters>
+      <RotationSpeed>0.00015</RotationSpeed>
+      <ElevationSpeed>0.00015</ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+    </Definition>
+
+
+	  <!--<Definition xsi:type="MyObjectBuilder_LargeTurretBaseDefinition">
+      <Id>
+        <TypeId>LargeMissileTurret</TypeId>
+        <SubtypeId>127mmMk56</SubtypeId>
+      </Id>	
+      <DisplayName>5"/38 Mk32 QRF</DisplayName>
+		<Description>
+			127mm Twin Rapid Fire gun
+			4.5km AI range
+			Fires HE, SAP shell
+			Temp BP: 350
+		</Description>
+      <Icon>Textures\GUI\Icons\5InchDualGun.dds</Icon>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="2" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Twin5InchGunsBase_Large.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+        <Component Subtype="SteelPlate" Count="100" />
+        <Component Subtype="MetalGrid" Count="100" />
+        <Component Subtype="LargeTube" Count="200" />
+        <Component Subtype="Motor" Count="100" />
+        <Component Subtype="Computer" Count="100" />
+        <Component Subtype="Construction" Count="200" />
+		<Component Subtype="MetalGrid" Count="200" />
+        <Component Subtype="SteelPlate" Count="1600" />
+      </Components>
+      <CriticalComponent Subtype="Motor" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="2" EndY="2" />
+      </MountPoints>
+      <BuildProgressModels>
+		<Model BuildPercentUpperBound="0.50" File="Models\Twin5InchBuild0_Large.mwm" />
+		<Model BuildPercentUpperBound="0.99" File="Models\Twin5InchBuild50_Large.mwm" />
+        <Model BuildPercentUpperBound="1.00" File="Models\Twin5InchGunsBase_Large.mwm" />
+      </BuildProgressModels>
+      <VoxelPlacement>
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>127mmMk56</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\HUD\USAASight.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="127mmMk56" />
+      <InventoryMaxVolume>300</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees>
+      <MaxElevationDegrees>75</MaxElevationDegrees>
+      <MinAzimuthDegrees>-170</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>170</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>12000</MaxRangeMeters>
+      <RotationSpeed>0.01</RotationSpeed>
+      <ElevationSpeed>0.001</ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+    </Definition> -->
+	  
+	</CubeBlocks>
+</Definitions>

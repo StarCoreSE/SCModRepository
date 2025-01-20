@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <BlockVariantGroups>
+
+      <BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="FusionAcceleratorBlockVariantGroup" />
+        <Icon>Textures\GUI\Icons\Cubes\Caster_Accelerator_0.dds</Icon>
+        <DisplayName>Fusion Accelerators</DisplayName>
+        <Description>Fusion Accelerator Components</Description>
+        <Blocks>
+          <Block Type="MyObjectBuilder_CubeBlock" Subtype="Caster_Accelerator_0" />
+          <Block Type="MyObjectBuilder_CubeBlock" Subtype="Caster_Accelerator_90" />
+          <Block Type="MyObjectBuilder_CubeBlock" Subtype="Caster_Feeder" />
+        </Blocks>
+      </BlockVariantGroup>     
+
+	  <BlockVariantGroup>
+	     <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="FusionPipeBlockVariantGroup" />
+	     <Icon>Textures\GUI\Icons\Cubes\Caster_CentralPipe_0.dds</Icon>
+	     <DisplayName>Fusion Pipes</DisplayName>
+	     <Description>Fusion Pipe Components</Description>
+	     <Blocks>
+	 	    <Block Type="MyObjectBuilder_CubeBlock" Subtype="Caster_CentralPipe_0" />
+	 	    <Block Type="MyObjectBuilder_CubeBlock" Subtype="Caster_CentralPipe_90" />
+	 	    <Block Type="MyObjectBuilder_CubeBlock" Subtype="Caster_CentralPipe_T" />
+	     </Blocks>
+	  </BlockVariantGroup>
+
+	  <BlockVariantGroup>
+	    <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="FusionRadiatorBlockVariantGroup" />
+	    <Icon>Textures\GUI\Icons\Cubes\RadiatorPanel.dds</Icon>
+	    <DisplayName>Fusion Radiators</DisplayName>
+	    <Description>Fusion Radiator Components</Description>
+	    <Blocks>
+		    <Block Type="MyObjectBuilder_CubeBlock" Subtype="RadiatorPanel" />
+		    <Block Type="MyObjectBuilder_TerminalBlock" Subtype="ExtendableRadiatorBase" />
+		    <Block Type="MyObjectBuilder_CubeBlock" Subtype="Heat_FlatRadiator" />
+		    <Block Type="MyObjectBuilder_CubeBlock" Subtype="MDA_Radiator_1x2" />
+		    <Block Type="MyObjectBuilder_TerminalBlock" Subtype="ActiveRadiator" />
+	    </Blocks>
+	  </BlockVariantGroup>
+
+    </BlockVariantGroups>
+</Definitions>

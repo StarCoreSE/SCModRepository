@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CubeBlocks>
+    <Definition xsi:type="MyObjectBuilder_PoweredCargoContainerDefinition">
+      <Id>
+        <TypeId>Collector</TypeId>
+        <SubtypeId>BlinkDriveLarge</SubtypeId>
+      </Id>
+      <DisplayName>Standard Blink Drive</DisplayName>
+      <Icon>Textures\GUI\Icons\BlinkDriveIcon.dds</Icon>
+      <Description>1Km teleport. Holds 3 charges. Each charge takes 100MW and 60s to recharge.</Description>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="3" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\Cubes\Large\Prototech_JumpDrive.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="20" />
+        <Component Subtype="LargeTube" Count="10" />
+        <Component Subtype="GravityGenerator" Count="20" />
+        <Component Subtype="Detector" Count="20" />
+        <Component Subtype="PowerCell" Count="50" />
+        <Component Subtype="Superconductor" Count="500" />
+        <Component Subtype="Motor" Count="8" />
+        <Component Subtype="Computer" Count="100" />
+        <Component Subtype="Construction" Count="40" />
+        <Component Subtype="SteelPlate" Count="80" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+      </MountPoints>
+      <BuildProgressModels>
+        <Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\BlinkDrive_Base_Large_Constr1.mwm" />
+        <Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\BlinkDrive_Base_Large_Constr2.mwm" />
+        <Model BuildPercentUpperBound="1.0" File="Models\Cubes\Large\BlinkDrive_Base_Large_Constr3.mwm" />
+      </BuildProgressModels>
+      <BuildTimeSeconds>120</BuildTimeSeconds>
+      <BlockPairName>BlinkDriveCustomLarge</BlockPairName>
+      <MirroringX>Z</MirroringX>
+      <MirroringZ>X</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <Upgrades>
+      </Upgrades>
+      <PrimarySound>BlockModuleProductivity</PrimarySound>
+      <DamageEffectName>Damage_Electrical_Damaged</DamageEffectName>
+      <DamagedSound>ParticleElectrical</DamagedSound>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <IsAirTight>false</IsAirTight>
+    </Definition>
+  </CubeBlocks>
+</Definitions>

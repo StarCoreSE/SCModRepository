@@ -1,0 +1,30 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CategoryClasses>
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+        <SubtypeId/>
+      </Id>
+      <DisplayName>Fusion Systems</DisplayName>
+      <Name>FusionSystems</Name>
+      <ItemIds>
+	    <string>Caster_Accelerator_0</string>
+	    <string>Caster_Accelerator_90</string>
+	    <string>Caster_Feeder</string>
+	    <string>Caster_CentralPipe_0</string>
+	    <string>Caster_CentralPipe_90</string>
+	    <string>Caster_CentralPipe_T</string>
+	    <string>Caster_FocusLens</string>
+	    <string>Caster_Reactor</string>
+	    <string>Heat_Heatsink</string>
+	    <string>Heat_FlatRadiator</string>
+	    <string>Caster_ConveyorCap</string>
+	    <string>RadiatorPanel</string>
+	    <string>ExtendableRadiatorBase</string>
+	    <string>Heat_FlatRadiator</string>
+	    <string>ActiveRadiator</string>
+      </ItemIds>
+    </Category>
+  </CategoryClasses>
+</Definitions>

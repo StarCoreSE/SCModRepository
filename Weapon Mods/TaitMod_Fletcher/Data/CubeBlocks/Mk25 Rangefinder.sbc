@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>Mk25Rangefinder</SubtypeId>
+			</Id>
+			<DisplayName>Mk25 Rangefinder</DisplayName>
+			<Description>
+				Mark 25 Rangefinder
+				Can be used for camera targetting
+				Also extends lock range to 15km
+				10BP
+			</Description>
+			<Icon>Textures\GUI\Icons\Rangefinder.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="1" z="3"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Rangefinder\Mk25 Rangefinder.mwm</Model>
+			<UseModelIntersection>true</UseModelIntersection>
+			<Components>
+        <Component Subtype="SteelPlate" Count="25" />
+        <Component Subtype="Construction" Count="20" />
+        <Component Subtype="Detector" Count="10" />
+        <Component Subtype="LargeTube" Count="5" />
+        <Component Subtype="Computer" Count="40" />
+        <Component Subtype="SteelPlate" Count="25" />
+			</Components>
+			<CriticalComponent Subtype="Motor" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
+			</MountPoints>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

@@ -1,0 +1,32 @@
+name: Aristeas BuildScripts
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+      - stable
+
+jobs:
+  BuildMods:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4.1.4
+        with:
+          fetch-depth: 0
+        
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v44
+        with:
+            separator: ','
+      
+      #- name: List all changed files
+      #  env:
+      #    ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+      #  run: |
+      #    for file in ${ALL_CHANGED_FILES}; do
+      #      echo "$file was changed"
+      #    done
+      - id: build-mods
+        run: |
+          & "C:\Program Files\SCUniversalUpload\SC_NewUniversalUpload.exe" "build" --repo "${{ github.workspace }}" --changes "${{ steps.changed-files.outputs.all_changed_and_modified_files }}"

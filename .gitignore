@@ -410,3 +410,4 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 /.idea
+/Utility Mods/Stable/GyroscopicGunsight/Properties

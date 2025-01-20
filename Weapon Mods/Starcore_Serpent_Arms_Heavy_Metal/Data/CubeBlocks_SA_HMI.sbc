@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <CubeBlocks>
+
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> <!-- Hydra --> 
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>K_SA_LoW_CapitalSpinalA</SubtypeId>
+      </Id>
+      <DisplayName>[SA] Hydra 12-G Mount Spinal</DisplayName>
+<Description>Long Ranged Fixed: [7km] 
+Magazine Capacity: [5 to overheat]
+Reload Speed: [27 second cooldown]
+Ammunition: [5000m/s,] [Kinetic, 95% Shieldpen] </Description>
+     <Icon>Textures\GUI\Icons\Hydra.dds</Icon>
+      <CubeSize>Large</CubeSize>
+	  <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+       <Size x="3" y="3" z="23" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\SerpentArms\SA_CSG_A_Large.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+              <Component Subtype="Construction" Count="2000" />
+              <Component Subtype="GravityGenerator" Count="186" />              
+              <Component Subtype="Computer" Count="666" />
+              <Component Subtype="SmallTube" Count="1200" />
+              <Component Subtype="Motor" Count="1070" />
+              <Component Subtype="LargeTube" Count="1200" />
+              <Component Subtype="MetalGrid" Count="660" />
+              <Component Subtype="Construction" Count="2000" />
+              <Component Subtype="SteelPlate" Count="3500" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+
+       <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>K_SA_LoW_CapitalSpinalA</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>300</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_HSR_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+	   <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees> 
+      <MaxElevationDegrees>100</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>3500</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
+		
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> <!-- Asterius -->
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>K_SA_HeavyMetal_Gauss_A</SubtypeId>
+      </Id>
+      <DisplayName>[SA] Asterius Gauss Turret</DisplayName>
+<Description>Medium Ranged Turret: [5km] 
+Magazine Capacity: [1] 
+Rate of Fire: [200] 
+Reload Speed: [0.5 seconds] 
+Ammunition: [2000m/s,] [Kinetic]</Description>
+      <Icon>Textures\GUI\Icons\Asterius.dds</Icon>
+      <CubeSize>Large</CubeSize>
+	  <GuiVisible>false</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+       <Size x="3" y="4" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\SerpentArms\SA_GaussAPIIC_Large.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+       <Component Subtype="SteelPlate" Count="800" />
+        <Component Subtype="Superconductor" Count="150" />
+        <Component Subtype="Construction" Count="340" />
+		<Component Subtype="GravityGenerator" Count="125" />
+		<Component Subtype="Motor" Count="120" />
+		<Component Subtype="Reactor" Count="30" />
+		<Component Subtype="Detector" Count="45" />
+        <Component Subtype="Computer" Count="200" />
+        <Component Subtype="MetalGrid" Count="450" />
+        <Component Subtype="SteelPlate" Count="1150" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
+		 <MountPoint Side="Left" StartX="0" StartY="0" EndX="3" EndY="4" />
+		  <MountPoint Side="Right" StartX="0" StartY="0" EndX="3" EndY="4" />
+		   <MountPoint Side="Front" StartX="0" StartY="0" EndX="3" EndY="4" />
+		    <MountPoint Side="Back" StartX="0" StartY="0" EndX="3" EndY="4" />
+      </MountPoints>
+       <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>K_SA_HeavyMetal_Gauss_A</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>120</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_SA_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+	   <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees> 
+      <MaxElevationDegrees>100</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>3500</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
+		
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> <!-- Cerberus Gauss Turret -->
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>K_SA_HeavyMetal_Gauss_ERII</SubtypeId>
+      </Id>
+      <DisplayName>[SA] Cerberus Gauss Turret</DisplayName>
+<Description>Long Range Turret: [7km] 
+Idle Power: 150 MW (50 MW per Barrel)
+Reload Power: ~600 MW (~200 MW per Barrel)
+Reload Speed: [8 seconds] 
+Ammunition: [Kinetic] </Description>
+      <Icon>Textures\GUI\Icons\Cerberus.dds</Icon>
+      <CubeSize>Large</CubeSize>
+	  <GuiVisible>false</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="3" y="4" z="5" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\SerpentArms\SA_GaussERII_Large.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+        <Component Subtype="SteelPlate" Count="2500" />
+        <Component Subtype="Superconductor" Count="500" />
+        <Component Subtype="Construction" Count="500" />
+		    <Component Subtype="Motor" Count="250" />
+		    <Component Subtype="Reactor" Count="100" />
+		    <Component Subtype="Detector" Count="100" />
+        <Component Subtype="Computer" Count="500" />
+        <Component Subtype="MetalGrid" Count="500" />
+        <Component Subtype="SteelPlate" Count="2500" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
+		 <MountPoint Side="Back" StartX="0" StartY="0" EndX="3" EndY="3" />
+		  <MountPoint Side="Front" StartX="0" StartY="0" EndX="3" EndY="3" />
+		  <MountPoint Side="Left" StartX="0" StartY="0" EndX="3" EndY="5" />
+		   <MountPoint Side="Right" StartX="0" StartY="0" EndX="3" EndY="5" />
+      </MountPoints>
+       <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>K_SA_HeavyMetal_Gauss_ERII</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>300</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_SA_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+	   <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees> 
+      <MaxElevationDegrees>100</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>3500</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
+
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> <!-- Charon PGBC -->
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>K_SA_HeavyMetal_Gauss_PGBC</SubtypeId>
+      </Id>
+      <DisplayName>[SA] Charon</DisplayName>
+<Description>Short Range Turret: [2.75km] 
+Idle Power: [150 MW]
+Reload Power: [~600 MW] 
+Reload Speed: [7 seconds] 
+Ammunition: [Kinetic] </Description>
+      <Icon>Textures\GUI\Icons\Charon.dds</Icon>
+      <CubeSize>Large</CubeSize>
+	  <GuiVisible>false</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="5" y="4" z="5" />
+      <ModelOffset x="0" y="-1.5" z="0" />
+      <Model>Models\SerpentArms\SA_GaussBlitz_Large.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+		<Component Subtype="SteelPlate" Count="1000" />
+		<Component Subtype="GravityGenerator" Count="300" />
+		<Component Subtype="Superconductor" Count="225" />
+		<Component Subtype="Construction" Count="240" />
+		<Component Subtype="Motor" Count="120" />
+		<Component Subtype="Reactor" Count="45" />
+		<Component Subtype="Detector" Count="60" />
+		<Component Subtype="Computer" Count="250" />
+		<Component Subtype="MetalGrid" Count="250" />
+		<Component Subtype="SteelPlate" Count="3200" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="5" />
+		 <MountPoint Side="Back" StartX="0" StartY="0" EndX="5" EndY="3" />
+		  <MountPoint Side="Front" StartX="0" StartY="0" EndX="5" EndY="3" />
+		  <MountPoint Side="Left" StartX="0" StartY="0" EndX="5" EndY="3" />
+		   <MountPoint Side="Right" StartX="0" StartY="0" EndX="5" EndY="3" />
+      </MountPoints>
+       <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>K_SA_HeavyMetal_Gauss_PGBC</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>200</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_SA_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+	   <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees> 
+      <MaxElevationDegrees>100</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>3500</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
+		
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> <!-- Somnus Fixed Gauss -->
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>K_SA_HeavyMetal_Gauss_ERFM</SubtypeId>
+      </Id>
+      <DisplayName>[SA] Somnus Fixed Gauss</DisplayName>
+<Description>Medium Ranged Fixed: [7km] 
+Magazine Capacity: [1] 
+Rate of Fire: [15] 
+Reload Speed: [8 seconds] 
+Ammunition: [5000m/s,] [Kinetic] </Description>
+      <Icon>Textures\GUI\Icons\Somnus.dds</Icon>
+      <CubeSize>Large</CubeSize>
+	  <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="1" z="3" />
+      <ModelOffset x="0" y="0" z="1" />
+      <Model>Models\SerpentArms\SA_ERFM_Large.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+       <Component Subtype="SteelPlate" Count="50" />
+        <Component Subtype="Superconductor" Count="205" />
+        <Component Subtype="Construction" Count="100" />
+		<Component Subtype="Motor" Count="100" />
+		<Component Subtype="Reactor" Count="35" />
+		<Component Subtype="Detector" Count="25" />
+        <Component Subtype="Computer" Count="90" />
+        <Component Subtype="MetalGrid" Count="105" />
+        <Component Subtype="SteelPlate" Count="600" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+        <MountPoints>
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="1" EndY="3" />
+         <MountPoint Side="Left" StartX="0" StartY="0" EndX="3" EndY="1" />
+          <MountPoint Side="Right" StartX="0" StartY="0" EndX="3" EndY="1" />
+            <MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="1" />
+            <MountPoint Side="Top" StartX="0" StartY="0" EndX="1" EndY="2" />
+      </MountPoints>
+       <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>K_SA_HeavyMetal_Gauss_ERFM</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>60</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_SA_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+	   <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees> 
+      <MaxElevationDegrees>100</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>3500</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
+	 
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> <!-- Rotary -->
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>K_SA_HeavyMetal_Spinal_Rotary</SubtypeId>
+      </Id>
+      <DisplayName>[SA] Magnetic Monopole Compression Cannon</DisplayName>
+<Description>Long Ranged Fixed: [7km] 
+Idle Power: [0 MW]
+Firing Power: [~300 MW]
+Ammunition: [Kinetic] </Description>
+      <Icon>Textures\GUI\Icons\MMCC.dds</Icon>
+      <CubeSize>Large</CubeSize>
+	  <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="5" y="5" z="40" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\SerpentArms\Starcore_RotaryBastard_Large.mwm</Model>
+      <UseModelIntersection>false</UseModelIntersection>
+  <Components>
+        <Component Subtype="SteelPlate" Count="2000" />        
+        <Component Subtype="Construction" Count="9000" />
+        <Component Subtype="GravityGenerator" Count="550" />
+        <Component Subtype="Superconductor" Count="4000" />
+        <Component Subtype="Reactor" Count="1800" />
+        <Component Subtype="Thrust" Count="900" />
+        <Component Subtype="Motor" Count="1500" />
+        <Component Subtype="Computer" Count="1000" />
+        <Component Subtype="PowerCell" Count="3600"/>
+        <Component Subtype="LargeTube" Count="2700" />
+        <Component Subtype="Construction" Count="2400" />                
+        <Component Subtype="SteelPlate" Count="6000" />
+            </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+	    <MountPoints>
+        <MountPoint Side="Top" StartX="0" StartY="0" EndX="5" EndY="1" />
+        <MountPoint Side="Bottom" StartX="0" StartY="40" EndX="5" EndY="39" />
+		<MountPoint Side="Left" StartX="40" StartY="0" EndX="39" EndY="5" />
+		  <MountPoint Side="Right" StartX="0" StartY="0" EndX="1" EndY="5" />
+		    <MountPoint Side="Back" StartX="0" StartY="0" EndX="5" EndY="5" />
+      </MountPoints>
+       <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>K_SA_HeavyMetal_Spinal_Rotary</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>600</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_SA_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+	    <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees> 
+      <MaxElevationDegrees>100</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>3500</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
+
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+    <!-- Rotary -->
+    <Id>
+     <TypeId>ConveyorSorter</TypeId>
+     <SubtypeId>K_SA_HeavyMetal_Spinal_Rotary_Reskin</SubtypeId>
+    </Id>
+    <DisplayName>[SA] Magnetic Monopole Compression Cannon</DisplayName>
+    <Description>
+		[Skin 2]
+		Long Ranged Fixed: [7km]
+		Idle Power: [0 MW]
+		Firing Power: [~300 MW]
+		Ammunition: [Kinetic]
+	</Description>
+    <Icon>Textures\GUI\Icons\Cubes\MonopoleReskin.dds</Icon>
+    <CubeSize>Large</CubeSize>
+    <GuiVisible>true</GuiVisible>
+    <BlockTopology>TriangleMesh</BlockTopology>
+    <Size x="5" y="5" z="40" />
+    <ModelOffset x="0" y="0" z="0" />
+    <Model>Models\MonopoleReskin.mwm</Model>
+    <UseModelIntersection>false</UseModelIntersection>
+    <Components>
+     <Component Subtype="SteelPlate" Count="2000" />
+     <Component Subtype="Construction" Count="9000" />
+     <Component Subtype="GravityGenerator" Count="550" />
+     <Component Subtype="Superconductor" Count="4000" />
+     <Component Subtype="Reactor" Count="1800" />
+     <Component Subtype="Thrust" Count="900" />
+     <Component Subtype="Motor" Count="1500" />
+     <Component Subtype="Computer" Count="1000" />
+     <Component Subtype="PowerCell" Count="3600"/>
+     <Component Subtype="LargeTube" Count="2700" />
+     <Component Subtype="Construction" Count="2400" />
+     <Component Subtype="SteelPlate" Count="6000" />
+    </Components>
+    <CriticalComponent Subtype="Computer" Index="0" />
+    <MountPoints>
+     <MountPoint Side="Top" StartX="0" StartY="0" EndX="5" EndY="1" />
+     <MountPoint Side="Bottom" StartX="0" StartY="40" EndX="5" EndY="39" />
+     <MountPoint Side="Left" StartX="40" StartY="0" EndX="39" EndY="5" />
+     <MountPoint Side="Right" StartX="0" StartY="0" EndX="1" EndY="5" />
+     <MountPoint Side="Back" StartX="0" StartY="0" EndX="5" EndY="5" />
+    </MountPoints>
+    <VoxelPlacement>
+     <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+     <StaticMode>
+    	 <PlacementMode>OutsideVoxel</PlacementMode>
+    	 <MaxAllowed>0.2</MaxAllowed>
+    	 <MinAllowed>0</MinAllowed>
+     </StaticMode>
+     <DynamicMode>
+    	 <PlacementMode>OutsideVoxel</PlacementMode>
+    	 <MaxAllowed>0.2</MaxAllowed>
+    	 <MinAllowed>0.01</MinAllowed>
+     </DynamicMode>
+    </VoxelPlacement>
+    <BlockPairName>K_SA_HeavyMetal_Spinal_Rotary_Reskin</BlockPairName>
+    <MirroringY>Z</MirroringY>
+    <MirroringZ>Y</MirroringZ>
+    <EdgeType>Light</EdgeType>
+    <BuildTimeSeconds>600</BuildTimeSeconds>
+    <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+    <WeaponDefinitionId Subtype="K_SA_Gun"/>
+    <InventoryMaxVolume>1</InventoryMaxVolume>
+    <DamageEffectId>213</DamageEffectId>
+    <AiEnabled>false</AiEnabled>
+    <DamagedSound>ParticleWeapExpl</DamagedSound>
+    <ResourceSinkGroup>Defense</ResourceSinkGroup>
+    <MinElevationDegrees>-5</MinElevationDegrees>
+    <MaxElevationDegrees>100</MaxElevationDegrees>
+    <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+    <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+    <RotationSpeed>0.0001</RotationSpeed>
+    <ElevationSpeed>0.0001 </ElevationSpeed>
+    <IdleRotation>false</IdleRotation>
+    <MaxRangeMeters>3500</MaxRangeMeters>
+    <MinFov>0.0001</MinFov>
+    <MaxFov>2</MaxFov>
+    <EmissiveColorPreset>Default</EmissiveColorPreset>
+</Definition>
+
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> <!-- Grimlock II Launcher -->
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>K_SA_Launcher_FixedMountv2</SubtypeId>
+      </Id>
+      <DisplayName>SA  Grimlock-II Launcher</DisplayName>
+	  <Description>
+	  </Description>
+     <Icon>Textures\GUI\Icons\grimII.dds</Icon>
+      <CubeSize>Large</CubeSize>
+	  <GuiVisible>false</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+       <Size x="1" y="1" z="4" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\SerpentArms\SA_Launcherv2_Large.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+       <Component Subtype="SteelPlate" Count="150" />
+        <Component Subtype="Superconductor" Count="245" />
+        <Component Subtype="Construction" Count="240" />
+		<Component Subtype="Motor" Count="20" />
+		<Component Subtype="Reactor" Count="30" />
+		<Component Subtype="Detector" Count="65" />
+        <Component Subtype="Computer" Count="200" />
+        <Component Subtype="MetalGrid" Count="90" />
+        <Component Subtype="SteelPlate" Count="600" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+
+       <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>K_SA_Launcher_FixedMountv2</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>60</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_SA_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+	   <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees> 
+      <MaxElevationDegrees>100</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>3500</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
+
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">  <!-- Erebos -->
+     <Id> 
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>SA_HMI_Erebos</SubtypeId>
+     </Id>
+     <DisplayName>[SA] Erebos</DisplayName>
+<Description>Medium Ranged Turret: [4km] 
+Magazine Capacity: [1] 
+Rate of Fire: [90] 
+Reload Speed: [0.07 seconds] 
+Ammunition: [5000m/s,] [Energy] </Description>
+     <Icon>Textures\GUI\Icons\erebos.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>false</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="3" y="3" z="3" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\SerpentArms\SA_GaussAMSIIC_Large.mwm</Model>
+     <UseModelIntersection>true</UseModelIntersection>
+	<Components>
+		<Component Subtype="SteelPlate" Count="50" />
+		<Component Subtype="Superconductor" Count="110" />
+		<Component Subtype="Construction" Count="180" />
+		<Component Subtype="Motor" Count="90" />
+		<Component Subtype="Reactor" Count="35" />
+		<Component Subtype="Detector" Count="55" />
+		<Component Subtype="Computer" Count="275" />
+		<Component Subtype="MetalGrid" Count="140" />
+		<Component Subtype="SteelPlate" Count="750" />
+	</Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <MountPoints>
+       <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
+     </MountPoints>
+     <VoxelPlacement>
+       <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+       <StaticMode>
+         <PlacementMode>OutsideVoxel</PlacementMode>
+         <MaxAllowed>0.2</MaxAllowed>
+         <MinAllowed>0</MinAllowed>
+       </StaticMode>
+       <DynamicMode>
+         <PlacementMode>OutsideVoxel</PlacementMode>
+         <MaxAllowed>0.2</MaxAllowed>
+         <MinAllowed>0.01</MinAllowed>
+       </DynamicMode>
+     </VoxelPlacement>
+     <BlockPairName>K_SA_Gauss_AMSIIC</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>30</BuildTimeSeconds>
+     <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+     <WeaponDefinitionId Subtype="K_SA_Gun"/>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <DamageEffectId>213</DamageEffectId>
+     <AiEnabled>false</AiEnabled>
+     <DamagedSound>ParticleWeapExpl</DamagedSound>
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <MinElevationDegrees>-5</MinElevationDegrees>
+     <MaxElevationDegrees>100</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <RotationSpeed>0.0001</RotationSpeed>
+     <ElevationSpeed>0.0001 </ElevationSpeed>
+     <IdleRotation>false</IdleRotation>
+     <MaxRangeMeters>3500</MaxRangeMeters>
+     <MinFov>0.0001</MinFov>
+     <MaxFov>2</MaxFov>
+     <EmissiveColorPreset>Default</EmissiveColorPreset>
+   </Definition>
+   
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> <!-- Ceis Anti Armour -->
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>K_SA_Gauss_APC</SubtypeId>
+      </Id>
+      <DisplayName>SA Ceis Gauss Turret</DisplayName>
+	  <Description>
+	  </Description>
+      <Icon>Textures\GUI\Icons\Ceis.dds</Icon>
+      <CubeSize>Large</CubeSize>
+	  <GuiVisible>false</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+       <Size x="3" y="2" z="3" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\SerpentArms\SA_GaussAP_Large.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+      <Components>
+       <Component Subtype="SteelPlate" Count="50" />
+        <Component Subtype="Superconductor" Count="150" />
+        <Component Subtype="Construction" Count="240" />
+		<Component Subtype="Motor" Count="120" />
+		<Component Subtype="Reactor" Count="30" />
+		<Component Subtype="Detector" Count="45" />
+        <Component Subtype="Computer" Count="200" />
+        <Component Subtype="MetalGrid" Count="125" />
+        <Component Subtype="SteelPlate" Count="750" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
+      </MountPoints>
+	    <!--<BuildProgressModels>
+                <Model BuildPercentUpperBound="0.10" File="Models\SerpentArms\SA_GaussAP_Large_Constr1.mwm" />
+                <Model BuildPercentUpperBound="0.5" File="Models\SerpentArms\SA_GaussAP_Large_Constr2.mwm" />
+                <Model BuildPercentUpperBound="0.90" File="Models\SerpentArms\SA_GaussAP_Large_Constr3.mwm" />
+
+            </BuildProgressModels>-->
+       <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>K_SA_Gauss_APC</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>30</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_SA_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+	   <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees> 
+      <MaxElevationDegrees>100</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>3500</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
+	
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> <!-- Silvius -->
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>K_SA_Gauss_ERC</SubtypeId>
+      </Id>
+      <DisplayName>[SA] Silvius Gauss Turret</DisplayName>
+<Description>Long Range Turret: [7km] 
+Idle Power: [50 MW]
+Reload Power: [~300 MW]
+Reload Speed: [8 seconds] 
+Ammunition: [Kinetic] </Description>
+      <Icon>Textures\GUI\Icons\Silvius.dds</Icon>
+      <CubeSize>Large</CubeSize>
+	  <GuiVisible>false</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+       <Size x="3" y="2" z="5" />
+      <ModelOffset x="0" y="0" z="0" />
+      <Model>Models\SerpentArms\SA_GaussER_Large.mwm</Model>
+      <UseModelIntersection>true</UseModelIntersection>
+	<Components>
+		<Component Subtype="SteelPlate" Count="800" />
+		<Component Subtype="Superconductor" Count="150" />
+		<Component Subtype="Construction" Count="340" />
+		<Component Subtype="Motor" Count="120" />
+		<Component Subtype="Reactor" Count="30" />
+		<Component Subtype="Detector" Count="45" />
+		<Component Subtype="Computer" Count="200" />
+		<Component Subtype="MetalGrid" Count="450" />
+		<Component Subtype="SteelPlate" Count="1150" />
+	</Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+        <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="5" />
+      </MountPoints>
+	    <BuildProgressModels>
+                <!--<Model BuildPercentUpperBound="0.10" File="Models\SerpentArms\SA_GaussER_Large_Constr1.mwm" />-->
+                <!--<Model BuildPercentUpperBound="0.5" File="Models\SerpentArms\SA_GaussER_Large_Constr2.mwm" />-->
+                <!--<Model BuildPercentUpperBound="0.90" File="Models\SerpentArms\SA_GaussER_Large_Constr3.mwm" />-->
+
+            </BuildProgressModels>
+       <VoxelPlacement>
+        <!--Possible settings Both,InVoxel,OutsideVoxel,Volumetric. If volumetric set than MaxAllowed and MinAllowed will be used.-->
+        <StaticMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0</MinAllowed>
+        </StaticMode>
+        <DynamicMode>
+          <PlacementMode>OutsideVoxel</PlacementMode>
+          <MaxAllowed>0.2</MaxAllowed>
+          <MinAllowed>0.01</MinAllowed>
+        </DynamicMode>
+      </VoxelPlacement>
+      <BlockPairName>K_SA_Gauss_ERC</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>120</BuildTimeSeconds>
+      <OverlayTexture>Textures\GUI\Screens\K_camera_overlay_1.dds</OverlayTexture>
+      <WeaponDefinitionId Subtype="K_SA_Gun"/>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectId>213</DamageEffectId>
+	   <AiEnabled>false</AiEnabled>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <MinElevationDegrees>-5</MinElevationDegrees> 
+      <MaxElevationDegrees>100</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <RotationSpeed>0.0001</RotationSpeed>
+      <ElevationSpeed>0.0001 </ElevationSpeed>
+      <IdleRotation>false</IdleRotation>
+      <MaxRangeMeters>3500</MaxRangeMeters>
+      <MinFov>0.0001</MinFov>
+      <MaxFov>2</MaxFov>
+      <EmissiveColorPreset>Default</EmissiveColorPreset>
+    </Definition>
+	
+ </CubeBlocks>
+</Definitions>

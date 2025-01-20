@@ -1,0 +1,952 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http:www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http:www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<!-- Solaris Hypernautics -->
+
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>MagnaPulse_Gen</SubtypeId>
+			</Id>
+			<DisplayName>[SOL] Goncol MagnaPulse</DisplayName>
+			<Description>
+				Refresh your buddy's shields by manually shooting at it.
+				[Range: 4.5km technically]
+				[Heal: 12-20 mill shields (surface area dependent)]
+				[Reload Charge: 755 megaawatt]
+				[Relaod Time: 24 seconds]
+			</Description>
+			<Icon>Textures\GUI\Icons\LargeArcEmitter.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="3" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\ElectroShield3x3.mwm</Model>
+			<Components>
+				<Component Subtype="ASH_FrameComponent" Count="1"/>
+				<Component Subtype="Computer" Count="1"/>
+				<Component Subtype="ASH_PlateComponent" Count="3"/>
+			</Components>
+      <BuildTimeSeconds>60</BuildTimeSeconds>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+				<MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0"/>
+				<MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="1.0" EndY="3.0"/>
+				<MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="1.0" EndY="3.0"/>
+				<MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+			</MountPoints>
+			<BlockPairName>MagnaPulse_Gen</BlockPairName>
+			<MirroringZ>Y</MirroringZ>
+		</Definition>
+
+
+		
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>Flechette_DoubleBarrel</SubtypeId>
+			</Id>
+			<DisplayName>[SOL] Flechette Shotgun</DisplayName>
+			<Description>
+				Two shotguns duct taped together, with two ammo's.
+				Buckshot:
+				[Range: 2km technically]
+				[Damage: Kinetic]
+				[Reload Time: 4 seconds]
+				Smart Flak:
+				[Homing and AMS]
+			</Description>
+			<Icon>Textures\GUI\Icons\FlakShotgun.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="2" y="1" z="6"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\FlakShotgun.mwm</Model>
+			<Components>
+				<Component Subtype="ASH_FrameComponent" Count="1"/>
+				<Component Subtype="Computer" Count="1"/>
+				<Component Subtype="ASH_PlateComponent" Count="1"/>
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="2.00" EndY="1.00" Default="true"/>
+				<MountPoint Side="Left" StartX="4.00" StartY="0.00" EndX="6.00" EndY="1.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="2.00" EndY="1.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="4.00" EndX="2.00" EndY="6.00"/>
+			</MountPoints>
+			<BlockPairName>Flechette_DoubleBarrel</BlockPairName>
+		</Definition>
+
+
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>Impulse_Torch</SubtypeId>
+			</Id>
+			<DisplayName>[SOL] Impulse Torch</DisplayName>
+			<Description>
+				Its a offensive afterburner that gimbals
+				[Range: 600m]
+				[Damage: Energy]
+				[Afterburner and Impulse]
+			</Description>
+			<Icon>Textures\GUI\Icons\ImpulseTorchBase.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="2" z="4"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\FlamethrowerBase.mwm</Model>
+			<Components>
+				<Component Subtype="ASH_FrameComponent" Count="1"/>
+				<Component Subtype="Computer" Count="1"/>
+				<Component Subtype="ASH_FrameComponent" Count="2"/>
+				<Component Subtype="ASH_PlateComponent" Count="1"/>
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0"/>
+			<BlockPairName>Impulse_Torch</BlockPairName>
+
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="1.00" EndY="2.00" Default="true"/>
+				<MountPoint Side="Left" StartX="1.50" StartY="0.00" EndX="4.00" EndY="2.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="2.50" EndY="2.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="1.00" EndY="2.50"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="1.50" EndX="1.00" EndY="4.00"/>
+			</MountPoints>
+
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+		</Definition>
+
+
+
+
+
+
+
+
+
+		<!-- ArcStrike Torpedo -->
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>SolHyp_ArcStrike_Torp</SubtypeId>
+     </Id>
+     <DisplayName>[SOL] ArcStrike CS-LR Torpedo</DisplayName>
+     <Description>
+    Anti Shield Torpedo
+    [14km range]
+    [Energy damage]
+    [no physical damage]
+	[1min reload]
+
+	 </Description>
+     <Icon>Textures\GUI\Icons\OPA-Logo.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="2" y="2" z="4" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\OPA-Launcher.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="120" />
+       <Component Subtype="Construction" Count="160" />
+       <Component Subtype="MetalGrid" Count="45" />
+       <Component Subtype="SmallTube" Count="50" />
+       <Component Subtype="LargeTube" Count="25" />
+       <Component Subtype="Motor" Count="50" />
+       <Component Subtype="Computer" Count="60" />
+       <Component Subtype="Construction" Count="120" />
+       <Component Subtype="SteelPlate" Count="250" />
+     </Components>
+     <CriticalComponent Subtype="Motor" Index="0" />
+     <BlockPairName>SolHyp_ArcStrike_Torp</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+	   <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>65</BuildTimeSeconds>
+      <DisassembleRatio>5</DisassembleRatio>
+      <NavigationDefinition>Default</NavigationDefinition>
+	   <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <MinElevationDegrees>-15</MinElevationDegrees>
+      <MaxElevationDegrees>75</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+	  <AiEnabled>false</AiEnabled>
+      <MaxRangeMeters>7000</MaxRangeMeters>
+      <RotationSpeed>0.0005</RotationSpeed>
+      <ElevationSpeed>0.0002 </ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+  <DestroySound>Betty_Weapon_Destroyed</DestroySound>
+    </Definition>	
+
+<!-- OPA Light -->
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>Counter_Battery</SubtypeId>
+     </Id>
+     <DisplayName>[SOL] SM-3 Counter Battery</DisplayName>
+     <Description>Anti-Missile Torpedo
+	[10km range with 1.5km minimum]
+	[8 mini torps target missiles]
+	[Will heal shields if it impacts]
+	[40 second reload]
+
+     </Description>
+     <Icon>Textures\GUI\missile_defense.png</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="1" z="3" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\OPA_Light_Launcher.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="120" />
+       <Component Subtype="Construction" Count="160" />
+       <Component Subtype="MetalGrid" Count="45" />
+       <Component Subtype="SmallTube" Count="50" />
+       <Component Subtype="LargeTube" Count="25" />
+       <Component Subtype="Motor" Count="50" />
+       <Component Subtype="Computer" Count="60" />
+       <Component Subtype="Construction" Count="120" />
+       <Component Subtype="SteelPlate" Count="100" />
+     </Components>
+     <CriticalComponent Subtype="Motor" Index="0" />
+     <BlockPairName>Counter_Battery</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>65</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>10000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+  <DestroySound>Betty_Weapon_Destroyed</DestroySound>
+   </Definition>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>S_Chem_Laser_Block</SubtypeId>
+     </Id>
+     <DisplayName>[SOL] Saber Guided Laser</DisplayName>
+     <Description>
+       [3km range]
+       [Energy damage]
+       [Homing]
+       [Reload: 10sec]
+       Uses a limited capacity fuel cell to power a powerful laser for 2 seconds before running out and needing 10 seconds to reset for another firing.
+     </Description>
+     <Icon>Textures\Icons\laser icon.png</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="1" z="4" />
+     <ModelOffset x="0" y="0" z= "1.25" />
+     <Model>Models\BT_Beam_Laser.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="165" />
+       <Component Subtype="Construction" Count="115" />
+       <Component Subtype="MetalGrid" Count="145" />
+       <Component Subtype="LargeTube" Count="35" />
+       <Component Subtype="Motor" Count="250" />
+       <Component Subtype="Computer" Count="100" />
+       <Component Subtype="Construction" Count="90" />
+       <Component Subtype="SteelPlate" Count="600" />
+     </Components>
+     <CriticalComponent Subtype="LargeTube" Index="0" />
+     <BlockPairName>S_Chem_Laser_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <MountPoints>
+       <MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="1" />
+       <MountPoint Side="Left" StartX="1" StartY="0" EndX="4" EndY="1" />
+       <MountPoint Side="Top" StartX="0" StartY="0" EndX="1" EndY="3" />
+       <MountPoint Side="Right" StartX="0" StartY="0" EndX="3" EndY="1" />
+       <MountPoint Side="Bottom" StartX="0" StartY="1" EndX="1" EndY="4" />
+     </MountPoints>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>65</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>7000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+     <DestroySound>Betty_Weapon_Destroyed</DestroySound>
+   </Definition>   
+	
+
+
+
+		<!--
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>S_Armored_Laser_Block</SubtypeId>
+     </Id>
+     <DisplayName>[SOL] Saber Armored Chemical Laser</DisplayName>
+     <Description>
+	   Armored Laser
+       [1km range]
+       [Energy damage]
+       [Hitscan]
+       [Reload: 35sec]
+       Uses a limited capacity fuel cell to power a powerful laser for 2 seconds before running out and needing 35 seconds to reset for another firing.
+     </Description>
+     <Icon>Textures\Icons\laser icon.png</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="1" z="4" />
+     <ModelOffset x="0" y="0" z= "0" />
+     <Model>Models\BT_Beam_Laser_Elongated.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="165" />
+       <Component Subtype="Construction" Count="115" />
+       <Component Subtype="MetalGrid" Count="145" />
+       <Component Subtype="LargeTube" Count="35" />
+       <Component Subtype="Motor" Count="250" />
+       <Component Subtype="Computer" Count="100" />
+       <Component Subtype="Construction" Count="90" />
+       <Component Subtype="SteelPlate" Count="1200" />
+     </Components>
+     <CriticalComponent Subtype="LargeTube" Index="0" />
+     <BlockPairName>S_Armored_Laser_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <MountPoints>
+       <MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="1" />
+       <MountPoint Side="Left" StartX="0" StartY="0" EndX="4" EndY="1" />
+       <MountPoint Side="Top" StartX="0" StartY="0" EndX="1" EndY="4" />
+       <MountPoint Side="Right" StartX="0" StartY="0" EndX="4" EndY="1" />
+       <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="1" EndY="4" />
+     </MountPoints>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>65</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+	 <GeneralDamageMultiplier>0.2</GeneralDamageMultiplier>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>7000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+     <DestroySound>Betty_Weapon_Destroyed</DestroySound>
+   </Definition>   
+		-->
+
+
+
+
+
+
+
+
+
+
+
+		
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>Nariman_Dart_Turret</SubtypeId>
+			</Id>
+			<DisplayName>[SOL] Nariman NanoDart Turret</DisplayName>
+			<Description>
+			Dual Ammo, Dual Purpose Turret
+			Smart NanoDart:
+			[Range: 5km]
+			[Velocity: 2.5km/s]
+			[Damage: Energy]
+			[Homing and AMS]
+			Concussion Bolt:
+			[Range: 3.5km]
+			[Velocity: 600m/s]
+			[Damage: Energy]
+			[Homing and AOE]
+			</Description>
+			<Icon>Textures\GUI\Icons\Ceis.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<GuiVisible>false</GuiVisible>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="2" z="3" />
+			<ModelOffset x="0" y="0" z="0" />
+			<Model>Models\SA_GaussAP_Large.mwm</Model>
+			<UseModelIntersection>true</UseModelIntersection>
+			<Components>
+				<Component Subtype="SteelPlate" Count="50" />
+				<Component Subtype="Superconductor" Count="150" />
+				<Component Subtype="Construction" Count="240" />
+				<Component Subtype="Motor" Count="120" />
+				<Component Subtype="Reactor" Count="30" />
+				<Component Subtype="Detector" Count="45" />
+				<Component Subtype="Computer" Count="200" />
+				<Component Subtype="MetalGrid" Count="125" />
+				<Component Subtype="SteelPlate" Count="750" />
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
+			</MountPoints>
+
+
+			
+			<VoxelPlacement>
+				<StaticMode>
+					<PlacementMode>OutsideVoxel</PlacementMode>
+					<MaxAllowed>0.2</MaxAllowed>
+					<MinAllowed>0</MinAllowed>
+				</StaticMode>
+				<DynamicMode>
+					<PlacementMode>OutsideVoxel</PlacementMode>
+					<MaxAllowed>0.2</MaxAllowed>
+					<MinAllowed>0.01</MinAllowed>
+				</DynamicMode>
+			</VoxelPlacement>
+			<BlockPairName>Nariman_Dart_Turret</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>30</BuildTimeSeconds>
+			<InventoryMaxVolume>1</InventoryMaxVolume>
+			<DamageEffectId>213</DamageEffectId>
+			<AiEnabled>false</AiEnabled>
+			<DamagedSound>ParticleWeapExpl</DamagedSound>
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<MinElevationDegrees>-5</MinElevationDegrees>
+			<MaxElevationDegrees>100</MaxElevationDegrees>
+			<MinAzimuthDegrees>-180</MinAzimuthDegrees>
+			<MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+			<RotationSpeed>0.0001</RotationSpeed>
+			<ElevationSpeed>0.0001 </ElevationSpeed>
+			<IdleRotation>false</IdleRotation>
+			<MaxRangeMeters>3500</MaxRangeMeters>
+			<MinFov>0.0001</MinFov>
+			<MaxFov>2</MaxFov>
+			<EmissiveColorPreset>Default</EmissiveColorPreset>
+		</Definition>
+	
+
+
+
+
+
+
+
+
+
+
+
+	
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
+		
+		  <Id>
+			<TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>SolHyp_Magnetic_Coilgun</SubtypeId>
+      </Id>
+      <DisplayName>[SOL] Hercules Magnetic Accelerator Coilgun</DisplayName>
+	  <Description>
+      Hercules MAC
+      [10km range, 5km effective range]
+      [Kinetic damage]
+      [3500 m/s] 
+    Three shot magazine. 8s reload.
+	 </Description>
+     <Icon>Textures\Icons\FixedCoilCannon.dds</Icon>
+      <CubeSize>Large</CubeSize>
+	  <GuiVisible>true</GuiVisible>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="1" y="2" z="15"/>
+      <ModelOffset x="0" y="0" z="0" />
+	   <Model>Models\Starcore\muzzled_coil_odin.mwm</Model>
+       <Components>
+			<Component Subtype="SteelPlate" Count="625" />
+			<Component Subtype="Construction" Count="300" />
+			<Component Subtype="MetalGrid" Count="200" />
+			<Component Subtype="PowerCell" Count="180" />	
+			<Component Subtype="Superconductor" Count="300" />				
+			<Component Subtype="LargeTube" Count="200" />
+			<Component Subtype="Motor" Count="300" />
+			<Component Subtype="Computer" Count="500" />
+			<Component Subtype="MetalGrid" Count="400" />
+			<Component Subtype="SteelPlate" Count="1375" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+     <BuildProgressModels>
+				<Model BuildPercentUpperBound="1.0" File="Models\Starcore\muzzled_coil_odin_BS1_LOD1.mwm"/>
+			</BuildProgressModels>
+      <BlockPairName>SolHyp_Magnetic_Coilgun</BlockPairName>
+       <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+	   <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>65</BuildTimeSeconds>
+      <DisassembleRatio>5</DisassembleRatio>
+      <NavigationDefinition>Default</NavigationDefinition>
+	   <WeaponDefinitionId Subtype="Starcore_FakeWeapon" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <MinElevationDegrees>-15</MinElevationDegrees>
+      <MaxElevationDegrees>75</MaxElevationDegrees>
+      <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+      <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+      <IdleRotation>false</IdleRotation>
+	  <AiEnabled>false</AiEnabled>
+      <MaxRangeMeters>7000</MaxRangeMeters>
+      <RotationSpeed>0.0005</RotationSpeed>
+      <ElevationSpeed>0.0002 </ElevationSpeed>
+      <MinFov>0.1</MinFov>
+      <MaxFov>1.04719755</MaxFov>
+  <DestroySound>Betty_Weapon_Destroyed</DestroySound>
+    </Definition>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>WCSentry_Hangar</SubtypeId>
+      </Id>
+      <DisplayName>[SOL] Sentry Hangar Bay</DisplayName>
+      <Icon>Textures\GUI\Icons\Hangar.dds</Icon>
+      <Description>These drones can be given orders via the hangar's ActionFriend/ActionEnemy options. </Description>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="5" y="2" z="2"/>
+			<ModelOffset x="0" y="0" z="0"/>
+      <Model>Models\Hangar.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="250" />
+        <Component Subtype="Construction" Count="500" />	
+        <Component Subtype="MetalGrid" Count="400" />
+        <Component Subtype="Motor" Count="200" />
+        <Component Subtype="Computer" Count="400" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+		<MountPoints>
+			<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="5.00" EndY="2.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="5.00" EndY="2.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="5.00" EndY="2.00"/>
+		</MountPoints>
+    <BuildProgressModels>
+				<Model BuildPercentUpperBound="0.50" File="Models\Cubes\large\Hangar_BS1.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\Hangar_BS2.mwm"/>
+			</BuildProgressModels>
+      <BlockPairName>SentryHangar</BlockPairName>
+      <MirroringX>Z</MirroringX>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>30</BuildTimeSeconds>
+      <NavigationDefinition>Default</NavigationDefinition>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>500</PCU>
+      <TargetingGroups>
+		<string>Weapons</string>
+      </TargetingGroups>      
+    </Definition>
+
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+      <Id>
+        <TypeId>ConveyorSorter</TypeId>
+        <SubtypeId>WCStrikecraft_Hangar</SubtypeId>
+      </Id>
+      <DisplayName>[SOL] Strikecraft Hangar Bay</DisplayName>
+      <Icon>Textures\GUI\Icons\Hangar.dds</Icon>
+      <Description>These drones can be given orders via the hangar's ActionFriend/ActionEnemy options. </Description>
+      <CubeSize>Large</CubeSize>
+      <BlockTopology>TriangleMesh</BlockTopology>
+      <Size x="5" y="2" z="2"/>
+			<ModelOffset x="0" y="0" z="0"/>
+      <Model>Models\Hangar.mwm</Model>
+      <Components>
+        <Component Subtype="SteelPlate" Count="250" />
+        <Component Subtype="Construction" Count="500" />	
+        <Component Subtype="MetalGrid" Count="400" />
+        <Component Subtype="Motor" Count="200" />
+        <Component Subtype="Computer" Count="400" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+		<MountPoints>
+			<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="5.00" EndY="2.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="2.00" EndY="2.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="5.00" EndY="2.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="5.00" EndY="2.00"/>
+		</MountPoints>
+    <BuildProgressModels>
+				<Model BuildPercentUpperBound="0.50" File="Models\Cubes\large\Hangar_BS1.mwm"/>
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\large\Hangar_BS2.mwm"/>
+			</BuildProgressModels>
+      <BlockPairName>FighterHangar</BlockPairName>
+      <MirroringX>Z</MirroringX>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+      <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>30</BuildTimeSeconds>
+      <NavigationDefinition>Default</NavigationDefinition>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+      <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+      <DestroySound>WepSmallWarheadExpl</DestroySound>
+      <PCU>500</PCU>
+      <TargetingGroups>
+		<string>Weapons</string>
+      </TargetingGroups>      
+    </Definition>
+
+
+
+
+
+
+
+
+
+
+
+
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>     <!-- im sure there is a good reason why its not something simple like a <TypeId>Passage</TypeId> but the reason eludes me-->
+				<SubtypeId>GIGA_BLASTPLATE</SubtypeId>
+			</Id>
+			<DisplayName>7x7 Basedplate</DisplayName>
+			<Description>A massive 7x7 armored plate with the mass and integrity of 100 buster blocks to protect ships from directional damage. Lined with an integrated nanite repair network to slowly but constantly fix the blastplate.</Description>
+			<Icon>Textures\Icons\SH_LG_BPB_Basedplate.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="7" y="7" z="2"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\large\SH_LG_BPB_Basedplate.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="13500" />
+				<Component Subtype="Computer" Count="10" />
+     			<Component Subtype="SmallTube" Count="20" />
+      			<Component Subtype="Construction" Count="10" />
+       		 	<Component Subtype="MetalGrid" Count="5000" />
+        		<Component Subtype="SteelPlate" Count="1500" />
+			</Components>
+			<CriticalComponent Subtype="MetalGrid" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="7.00" EndY="7.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="7.00" EndY="7.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="2.00" EndY="7.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="2.00" EndY="7.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="7.00" EndY="2.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="7.00" EndY="2.00"/>
+			</MountPoints>
+			<BlockPairName>GIGA_BLASTPLATE</BlockPairName>
+			
+      		<EdgeType>Heavy</EdgeType>
+      		<BuildTimeSeconds>1080</BuildTimeSeconds>
+      		<DisassembleRatio>3</DisassembleRatio>
+      		<GeneralDamageMultiplier>0.5</GeneralDamageMultiplier>
+      		<PCU>400</PCU>
+      		<IsAirTight>true</IsAirTight>
+		</Definition>
+
+
+<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>ACTIVE_BLASTPLATE</SubtypeId>
+			</Id>
+			<DisplayName>Active Blastplate</DisplayName>
+			<Description>A 5x5 armor plate with the mass and integrity of 30 buster blocks to protect ships from directional damage. Has a pair of boreholes for weapon's fire to pass through uneffected. Lined with an integrated nanite repair network to slowly but constantly fix the blastplate.</Description>
+			<Icon>Textures\GUI\Icons\ACTIVE_BLASTPLATE_icon.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="5" y="5" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\large\PM_LG_BLASTPLATE_BLASTPLATE.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="6100" />
+       		 	<Component Subtype="MetalGrid" Count="2500" />
+        		<Component Subtype="SteelPlate" Count="800" />
+			</Components>
+			<CriticalComponent Subtype="MetalGrid" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="1.00" EndY="5.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="1.00" EndY="5.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="5.00" EndY="1.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="5.00" EndY="1.00"/>
+			</MountPoints>
+			<BlockPairName>ACTIVE_BLASTPLATE</BlockPairName>
+			
+      		<EdgeType>Heavy</EdgeType>
+      		<BuildTimeSeconds>420</BuildTimeSeconds>
+      		<DisassembleRatio>3</DisassembleRatio>
+      		<GeneralDamageMultiplier>0.5</GeneralDamageMultiplier>
+      		<PCU>300</PCU>
+      		<IsAirTight>true</IsAirTight>
+		</Definition>
+
+
+		<Definition>
+			<Id>
+				<TypeId>TerminalBlock</TypeId>  <!-- im sure there is a good reason why its not something simple like a <TypeId>Passage</TypeId> but the reason eludes me-->
+				<SubtypeId>REINFORCED_BLASTPLATE</SubtypeId>
+			</Id>
+			<DisplayName>Reinforced Blastplate</DisplayName>
+			<Description>A 5x5 reinforced armor with the mass and integrity of 30 buster blocks plate to protect ships from directional damage. Has a pair of boreholes for weapon's fire to pass through uneffected.</Description>
+			<Icon>Textures\GUI\Icons\REINFORCED_BLASTPLATE_icon.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="5" y="5" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\large\PM_LG_BLASTPLATEINERT_BLASTPLATEINERT.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="8100" />
+       		 	<Component Subtype="MetalGrid" Count="3000" />
+        		<Component Subtype="SteelPlate" Count="900" />
+			</Components>
+			<CriticalComponent Subtype="MetalGrid" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="1.00" EndY="5.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="1.00" EndY="5.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="5.00" EndY="1.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="5.00" EndY="1.00"/>
+			</MountPoints>
+			<BlockPairName>REINFORCED_BLASTPLATE</BlockPairName>
+
+      		<EdgeType>Heavy</EdgeType>
+      		<BuildTimeSeconds>420</BuildTimeSeconds>
+      		<DisassembleRatio>3</DisassembleRatio>
+      		<GeneralDamageMultiplier>0.5</GeneralDamageMultiplier>
+      		<PCU>300</PCU>
+      		<IsAirTight>true</IsAirTight>
+
+		</Definition>
+
+
+
+
+		<Definition>
+			<Id>
+				<TypeId>TerminalBlock</TypeId>
+				<SubtypeId>3x3_Blastplate_C</SubtypeId>
+			</Id>
+			<DisplayName>Standard Blastplate C</DisplayName>
+			<Description>A 3x3 armored plate with the mass and integrity of 10 buster blocks to protect ships from directional damage. Has four boreholes in an X shape for weapon's fire to pass through uneffected.
+			
+			</Description>
+			<Icon>Textures\Icons\SH_LG_BP33C_3x3_Blast_Plate_C.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="3" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\large\SH_LG_BP33C_3x3_Blast_Plate_C.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="1650" />
+       		 	<Component Subtype="MetalGrid" Count="600" />
+        		<Component Subtype="SteelPlate" Count="200" />
+			</Components>
+			<CriticalComponent Subtype="MetalGrid" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="1.00" EndY="3.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="1.00" EndY="3.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="3.00" EndY="1.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="1.00"/>
+			</MountPoints>
+			<BlockPairName>3x3_Blastplate_C</BlockPairName>
+      		<GeneralDamageMultiplier>0.5</GeneralDamageMultiplier>
+      		<EdgeType>Heavy</EdgeType>
+      		<BuildTimeSeconds>180</BuildTimeSeconds>
+      		<DisassembleRatio>3</DisassembleRatio>
+      		<PCU>100</PCU>
+      		<IsAirTight>true</IsAirTight>
+
+		</Definition>
+		
+
+		<Definition>
+			<Id>
+				<TypeId>TerminalBlock</TypeId>
+				<SubtypeId>3x3_Blastplate_B</SubtypeId>
+			</Id>
+			<DisplayName>Standard Blastplate B</DisplayName>
+			<Description>A 3x3 armored plate with the mass and integrity of 10 buster blocks to protect ships from directional damage. Has four boreholes for weapon's fire to pass through uneffected.
+			
+			</Description>
+			<Icon>Textures\Icons\SH_LG_BP33B_3x3_Blastplate.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="3" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\large\SH_LG_BP33B_3x3_Blastplate.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="1650" />
+       		 	<Component Subtype="MetalGrid" Count="600" />
+        		<Component Subtype="SteelPlate" Count="200" />
+			</Components>
+			<CriticalComponent Subtype="MetalGrid" Index="0"/>
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="3.00" EndY="3.00"/>
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="1.00" EndY="3.00"/>
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="1.00" EndY="3.00"/>
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="3.00" EndY="1.00"/>
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="3.00" EndY="1.00"/>
+			</MountPoints>
+			<BlockPairName>3x3_Blastplate_B</BlockPairName>
+      		<GeneralDamageMultiplier>0.5</GeneralDamageMultiplier>
+      		<EdgeType>Heavy</EdgeType>
+      		<BuildTimeSeconds>180</BuildTimeSeconds>
+      		<DisassembleRatio>3</DisassembleRatio>
+      		<PCU>100</PCU>
+      		<IsAirTight>true</IsAirTight>
+
+		</Definition>
+
+		<Definition>
+			<Id>
+				<TypeId>TerminalBlock</TypeId>
+				<SubtypeId>3x3_Blastplate_A</SubtypeId>
+			</Id>
+			<DisplayName>Standard Blastplate A</DisplayName>
+			<Description>A 3x3 armored plate with the mass and integrity of 10 buster blocks to protect ships from directional damage. Has a pair of boreholes for weapon's fire to pass through uneffected.
+			
+			</Description>
+			<Icon>Textures\Icons\SH_LG_BP33A_3x3_Blastplate.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="3" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\large\SH_LG_BP33A_3x3_Blastplate.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="1650" />
+       		 	<Component Subtype="MetalGrid" Count="600" />
+        		<Component Subtype="SteelPlate" Count="200" />
+			</Components>
+			<CriticalComponent Subtype="MetalGrid" Index="0"/>
+			<BlockPairName>3x3_Blastplate_A</BlockPairName>
+
+      		<GeneralDamageMultiplier>0.5</GeneralDamageMultiplier>
+      		<EdgeType>Heavy</EdgeType>
+      		<BuildTimeSeconds>180</BuildTimeSeconds>
+      		<DisassembleRatio>3</DisassembleRatio>
+      		<PCU>100</PCU>
+      		<IsAirTight>true</IsAirTight>
+
+
+		</Definition>
+
+
+				<Definition>
+			<Id>
+				<TypeId>TerminalBlock</TypeId>
+				<SubtypeId>2x4_Blastplate</SubtypeId>
+			</Id>
+			<DisplayName>Elongated Blastplate</DisplayName>
+			<Description>An elongated 2x4 armored plate with the mass and integrity of 10 buster blocks to protect ships from directional damage. Has a single central borehole for weapon's fire to pass through uneffected.
+			
+			</Description>
+			<Icon>Textures\Icons\SH_LG_BP24_2x4_Blastplate.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="2" z="4"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\large\SH_LG_BP24_2x4_Blastplate.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="1650" />
+       		 	<Component Subtype="MetalGrid" Count="600" />
+        		<Component Subtype="SteelPlate" Count="200" />
+			</Components>
+			<CriticalComponent Subtype="MetalGrid" Index="0"/>
+			<BlockPairName>2x4_Blastplate</BlockPairName>
+      		<GeneralDamageMultiplier>0.5</GeneralDamageMultiplier>			
+      		<EdgeType>Heavy</EdgeType>
+      		<BuildTimeSeconds>180</BuildTimeSeconds>
+      		<DisassembleRatio>3</DisassembleRatio>
+      		<PCU>100</PCU>
+      		<IsAirTight>true</IsAirTight>
+
+		</Definition>
+
+
+	</CubeBlocks>
+</Definitions>

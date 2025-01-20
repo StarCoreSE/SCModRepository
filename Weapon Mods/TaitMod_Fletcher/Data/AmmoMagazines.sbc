@@ -1,0 +1,442 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AmmoMagazines>
+	<!-- Small Iron Charge -->
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>40mmClip</SubtypeId>
+      </Id>
+      <DisplayName>L/60 40×311mmR Rounds Case</DisplayName>
+      <Description>16 x L/60 40×311mmR Rounds</Description>
+      <Icon>Textures\GUI\Icons\ammo\40mmCan.dds</Icon>
+      <Size>
+        <X>2</X>
+        <Y>1</Y>
+        <Z>1</Z>
+      </Size>
+      <Mass>60</Mass>
+      <Volume>10</Volume>
+      <Model>Models\40mmClip_Small.mwm</Model>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="40mmClip" />
+    </AmmoMagazine>
+	
+	<AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>40mmShellCaseEmpty</SubtypeId>
+      </Id>
+      <DisplayName>40mmShellCase</DisplayName>
+      <Description></Description>
+      <Icon>Textures\GUI\Icons\ammo\40mmCan.dds</Icon>
+      <Size>
+        <X>2</X>
+        <Y>1</Y>
+        <Z>1</Z>
+      </Size>
+      <Mass>60</Mass>
+      <Volume>10</Volume>
+      <Model>Models\Cubes\large\40mmShellCasing.mwm</Model>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="40mmEmpty" />
+    </AmmoMagazine>
+	
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>20mmDrum</SubtypeId>
+      </Id>
+      <DisplayName>L70: 20×110mm RB Ammo Drum</DisplayName>
+      <Description>60 Rounds of L70: 20×110mm RB AA Munitions</Description>
+      <Icon>Textures\GUI\Icons\ammo\20mmDrum.dds</Icon>
+      <Size>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+      </Size>
+      <Mass>15</Mass>
+      <Volume>1</Volume>
+      <Model></Model>
+      <Capacity>60</Capacity>
+      <AmmoDefinitionId Subtype="20mmDrum" />
+    </AmmoMagazine>
+	
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>2cmClip</SubtypeId>
+      </Id>
+      <DisplayName>2 × 13.8 cm Sprenggranatpatrone L'spur mit Zerleger</DisplayName>
+      <Description>20 Runden von 2 cm Munition</Description>
+      <Icon>Textures\GUI\Icons\ammo\2cmClip.dds</Icon>
+      <Size>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+      </Size>
+      <Mass>15</Mass>
+      <Volume>3</Volume>
+      <Model></Model>
+      <Capacity>20</Capacity>
+      <AmmoDefinitionId Subtype="2cmClip" />
+    </AmmoMagazine>
+	
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>37mmClip</SubtypeId>
+      </Id>
+      <DisplayName>3.7 × 26.3 cm. B Munitionsklammer</DisplayName>
+      <Description>8 Runden von 37 × 263 mm. B Flugabwehrrunden</Description>
+      <Icon>Textures\GUI\Icons\ammo\37mmClip.dds</Icon>
+      <Size>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+      </Size>
+      <Mass>15</Mass>
+      <Volume>3</Volume>
+      <Model></Model>
+      <Capacity>8</Capacity>
+      <AmmoDefinitionId Subtype="37mmClip" />
+    </AmmoMagazine>
+	
+	
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>5InchShell</SubtypeId>
+      </Id>
+      <DisplayName>5" AAC Mark 49 Shell</DisplayName>
+      <Description>5" AAC Mark 49 Round</Description>
+      <Icon>Textures\GUI\Icons\ammo\5InchShell.dds</Icon>
+      <Size>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+      </Size>
+      <Mass>25</Mass>
+      <Volume>2</Volume>
+      <Model>Models\5InchShell_Small.mwm</Model>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="5InchShell" />
+    </AmmoMagazine>
+
+
+
+	
+  
+	    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>12mmAmmoBox</SubtypeId>
+      </Id>
+      <DisplayName>12.7x108mm NATO 100rd</DisplayName>
+      <Description>100 Rounds of 12.7x108mm Machine Gun Ammunition</Description>
+      <Icon>Textures\GUI\Icons\ammo\12.7mmAmmoCan_Icon.dds</Icon>
+      <Size>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+      </Size>
+      <Mass>1.25</Mass>
+      <Volume>1</Volume>
+      <Model></Model>
+      <Capacity>100</Capacity>
+      <AmmoDefinitionId Subtype="12mmAmmo" />
+    </AmmoMagazine>
+
+
+	   <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>13mmAmmoBox</SubtypeId>
+      </Id>
+      <DisplayName>13.2 x 9mm 40rd</DisplayName>
+      <Description>40 Rounds of 13.2x99mm Ammunition</Description>
+      <Icon>Textures\GUI\Icons\ammo\13mmClip_icon.dds</Icon>
+      <Size>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+      </Size>
+      <Mass>1.5</Mass>
+      <Volume>1</Volume>
+      <Model></Model>
+      <Capacity>40</Capacity>
+      <AmmoDefinitionId Subtype="13mmAntiAircraftRound" />
+    </AmmoMagazine>
+	
+	   <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>37mmMLE1933Shell</SubtypeId>
+      </Id>
+      <DisplayName>37 x 278mm Incendiaire MLE 1924</DisplayName>
+      <Description>Ordonnance anti-aérienne de 37mm</Description>
+      <Icon>Textures\GUI\Icons\ammo\37mmMLE1933Round_icon.dds</Icon>
+      <Size>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+      </Size>
+      <Mass>0.725</Mass>
+      <Volume>0.5</Volume>
+      <Model></Model>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="37mmMLE1933AAR" />
+    </AmmoMagazine>
+	
+	   
+   <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>380mmHEShell</SubtypeId>
+      </Id>
+      <DisplayName>380mm OEA Mle 1949</DisplayName>
+      <Description>Obus d'artillerie explosif de 380mm</Description>
+      <Icon>Textures\GUI\Icons\ammo\380mmShell_Icon.dds</Icon>
+      <Size>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+      </Size>
+      <Mass>105</Mass>
+      <Volume>10</Volume>
+      <Model>Models\380mmShell_Small.mwm</Model>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="380mmHEShellAmmo" />
+    </AmmoMagazine>
+	
+	  
+	
+	   <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>QF4PomPomMag</SubtypeId>
+      </Id>
+      <DisplayName>40 x 158R 14rd</DisplayName>
+      <Description>14 rounds of 2lb Ammunition</Description>
+      <Icon>Textures\GUI\Icons\ammo\QF4BoxMag_icon.dds</Icon>
+      <Size>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+      </Size>
+      <Mass>11.4</Mass>
+      <Volume>1</Volume>
+      <Model>Models\QF4_14xAmmo_Small.mwm</Model>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="2lbAmmunition" />
+    </AmmoMagazine>
+	
+	<AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>5InchShellSap</SubtypeId>
+      </Id>
+      <DisplayName>5" AAC Mark 49 Shell</DisplayName>
+      <Description>5" AAC Mark 49 Round</Description>
+      <Icon>Textures\GUI\Icons\ammo\5InchShell.dds</Icon>
+      <Size>
+        <X>1</X>
+        <Y>1</Y>
+        <Z>1</Z>
+      </Size>
+      <Mass>25</Mass>
+      <Volume>2</Volume>
+      <Model>Models\5InchShell_Small.mwm</Model>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="5InchShellSap" />
+    </AmmoMagazine>
+
+	
+
+	  <AmmoMagazine>
+		  <Id>
+			  <TypeId>AmmoMagazine</TypeId>
+			  <SubtypeId>635mmTorpedo</SubtypeId>
+		  </Id>
+		  <DisplayName>25" Torpedo Tester</DisplayName>
+		  <Description>Temp Torpedo</Description>
+		  <Icon>Textures\GUI\Icons\ammo\5InchShell.dds</Icon>
+		  <Size>
+			  <X>1</X>
+			  <Y>1</Y>
+			  <Z>1</Z>
+		  </Size>
+		  <Mass>25</Mass>
+		  <Volume>2</Volume>
+		  <Model>Models\5InchShell_Small.mwm</Model>
+		  <Capacity>1</Capacity>
+		  <AmmoDefinitionId Subtype="635mmTorpedo" />
+	  </AmmoMagazine>
+
+	  <AmmoMagazine>
+		  <Id>
+			  <TypeId>AmmoMagazine</TypeId>
+			  <SubtypeId>635mmTorpedoPartialGuided</SubtypeId>
+		  </Id>
+		  <DisplayName>25" Torpedo Partial Guided</DisplayName>
+		  <Description>Temp Torpedo</Description>
+		  <Icon>Textures\GUI\Icons\ammo\5InchShell.dds</Icon>
+		  <Size>
+			  <X>1</X>
+			  <Y>1</Y>
+			  <Z>1</Z>
+		  </Size>
+		  <Mass>25</Mass>
+		  <Volume>2</Volume>
+		  <Model>Models\5InchShell_Small.mwm</Model>
+		  <Capacity>1</Capacity>
+		  <AmmoDefinitionId Subtype="635mmTorpedoPartialGuided" />
+	  </AmmoMagazine>
+
+	  <AmmoMagazine>
+		  <Id>
+			  <TypeId>AmmoMagazine</TypeId>
+			  <SubtypeId>8HEInchShell</SubtypeId>
+		  </Id>
+		  <DisplayName>25" Torpedo Partial Guided</DisplayName>
+		  <Description>Temp Torpedo</Description>
+		  <Icon>Textures\GUI\Icons\ammo\5InchShell.dds</Icon>
+		  <Size>
+			  <X>1</X>
+			  <Y>1</Y>
+			  <Z>1</Z>
+		  </Size>
+		  <Mass>25</Mass>
+		  <Volume>2</Volume>
+		  <Model>Models\5InchShell_Small.mwm</Model>
+		  <Capacity>1</Capacity>
+		  <AmmoDefinitionId Subtype="8HEInchShell" />
+	  </AmmoMagazine>
+
+	  <AmmoMagazine>
+		  <Id>
+			  <TypeId>AmmoMagazine</TypeId>
+			  <SubtypeId>8InchAPShell</SubtypeId>
+		  </Id>
+		  <DisplayName>25" Torpedo Partial Guided</DisplayName>
+		  <Description>Temp Torpedo</Description>
+		  <Icon>Textures\GUI\Icons\ammo\5InchShell.dds</Icon>
+		  <Size>
+			  <X>1</X>
+			  <Y>1</Y>
+			  <Z>1</Z>
+		  </Size>
+		  <Mass>25</Mass>
+		  <Volume>2</Volume>
+		  <Model>Models\5InchShell_Small.mwm</Model>
+		  <Capacity>1</Capacity>
+		  <AmmoDefinitionId Subtype="8InchAPShell" />
+	  </AmmoMagazine>
+
+	 
+
+	  <AmmoMagazine>
+		  <Id>
+			  <TypeId>AmmoMagazine</TypeId>
+			  <SubtypeId>RFLAmmo</SubtypeId>
+		  </Id>
+		  <DisplayName>DEV</DisplayName>
+		  <Description>DEV</Description>
+		  <Icon>Textures\GUI\Icons\ammo\10cmRound_Icon.dds</Icon>
+		  <Size>
+			  <X>1</X>
+			  <Y>1</Y>
+			  <Z>1</Z>
+		  </Size>
+		  <Mass>1</Mass>
+		  <Volume>6</Volume>
+		  <Model>Models\105mmShell_Small.mwm</Model>
+		  <Capacity>1</Capacity>
+		  <AmmoDefinitionId Subtype="105mmHE" />
+	  </AmmoMagazine>
+
+
+	  <AmmoMagazine>
+		  <Id>
+			  <TypeId>AmmoMagazine</TypeId>
+			  <SubtypeId>508AP</SubtypeId>
+		  </Id>
+		  <DisplayName>DEV</DisplayName>
+		  <Description>DEV</Description>
+		  <Icon>Textures\GUI\Icons\ammo\10cmRound_Icon.dds</Icon>
+		  <Size>
+			  <X>1</X>
+			  <Y>1</Y>
+			  <Z>1</Z>
+		  </Size>
+		  <Mass>1</Mass>
+		  <Volume>6</Volume>
+		  <Model>Models\105mmShell_Small.mwm</Model>
+		  <Capacity>1</Capacity>
+		  <AmmoDefinitionId Subtype="105mmHE" />
+	  </AmmoMagazine>
+
+	  <AmmoMagazine>
+		  <Id>
+			  <TypeId>AmmoMagazine</TypeId>
+			  <SubtypeId>508HE</SubtypeId>
+		  </Id>
+		  <DisplayName>DEV</DisplayName>
+		  <Description>DEV</Description>
+		  <Icon>Textures\GUI\Icons\ammo\10cmRound_Icon.dds</Icon>
+		  <Size>
+			  <X>1</X>
+			  <Y>1</Y>
+			  <Z>1</Z>
+		  </Size>
+		  <Mass>1</Mass>
+		  <Volume>6</Volume>
+		  <Model>Models\105mmShell_Small.mwm</Model>
+		  <Capacity>1</Capacity>
+		  <AmmoDefinitionId Subtype="105mmHE" />
+	  </AmmoMagazine>
+
+
+
+	  <AmmoMagazine>
+		  <Id>
+			  <TypeId>AmmoMagazine</TypeId>
+			  <SubtypeId>M2BrowningAmmoBox</SubtypeId>
+		  </Id>
+		  <DisplayName>12.7mm Ammo Box</DisplayName>
+		  <Description></Description>
+		  <Icon>Textures\GUI\Icons\ammo\10cmRound_Icon.dds</Icon>
+		  <Size>
+			  <X>1</X>
+			  <Y>1</Y>
+			  <Z>1</Z>
+		  </Size>
+		  <Mass>15</Mass>
+		  <Volume>1</Volume>
+		  <Model>Models\105mmShell_Small.mwm</Model>
+		  <Capacity>100</Capacity>
+		  <AmmoDefinitionId Subtype="M2BrowningAmmoBox" />
+	  </AmmoMagazine>
+  
+
+        <AmmoMagazine>
+		  <Id>
+			  <TypeId>AmmoMagazine</TypeId>
+			  <SubtypeId>Type3AA</SubtypeId>
+		  </Id>
+		  <DisplayName>DEV</DisplayName>
+		  <Description>DEV</Description>
+		  <Icon>Textures\GUI\Icons\ammo\10cmRound_Icon.dds</Icon>
+		  <Size>
+			  <X>1</X>
+			  <Y>1</Y>
+			  <Z>1</Z>
+		  </Size>
+		  <Mass>1</Mass>
+		  <Volume>6</Volume>
+		  <Model>Models\105mmShell_Small.mwm</Model>
+		  <Capacity>1</Capacity>
+		  <AmmoDefinitionId Subtype="105mmHE" />
+	  </AmmoMagazine>
+  </AmmoMagazines>
+</Definitions>

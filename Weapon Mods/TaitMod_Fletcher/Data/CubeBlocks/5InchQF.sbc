@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>127mmMk56</SubtypeId>
+			</Id>
+			<DisplayName>[FAS] Montana </DisplayName>
+			<Description>
+				[Turret Range: 4000]
+				[Reload: 1.5 Seconds/Barrel]
+
+				[Ammo Types: HE | SAP]
+				[Shell Range: 5km]
+				[Shell Speed: 850m/s | 1500m/s]
+				[Damage Types: Energy | Kinetic]
+				[AMS capable: 50]
+				5 inch twin, dual purpose turret, originally concieved as a turret to be mounted on the non-completed Montana class, claiming its name from that
+			</Description>
+			<Icon>Textures\GUI\Icons\5InQF.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="2" z="3"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\5InchQF\5Inch41Twin.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="100" />
+				<Component Subtype="MetalGrid" Count="100" />
+				<Component Subtype="LargeTube" Count="200" />
+				<Component Subtype="Motor" Count="100" />
+				<Component Subtype="Computer" Count="100" />
+				<Component Subtype="Construction" Count="200" />
+				<Component Subtype="MetalGrid" Count="200" />
+				<Component Subtype="SteelPlate" Count="1600" />
+			</Components>
+			<CriticalComponent Subtype="Motor" Index="0" />
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="3" />
+			</MountPoints>
+			<BlockPairName>127mmMk56</BlockPairName>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

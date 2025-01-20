@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <BlockVariantGroups>
+
+      <!-- PD Turret Variants-->
+      <BlockVariantGroup>
+        <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="FieldGen_Variants" />
+        <Icon>Textures\GUI\Icons\Cubes\Core_Icon.dds</Icon>
+        <DisplayName>[SI] Field Generator</DisplayName>
+        <Description></Description>
+        <Blocks>
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="FieldGen_Core" />
+          <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="FieldGen_Capacity_Upgrade" />
+        </Blocks>
+      </BlockVariantGroup>
+	
+    </BlockVariantGroups>
+</Definitions>
