@@ -10,7 +10,7 @@ rem	2. Edit this variable if applicable (do not add quotes or end with backslash
 set STEAM_PATH=C:\Program Files (x86)\Steam
 
 rem	3. Edit this with your mod's workshop id.
-set WORKSHOP_ID=3130656484
+set WORKSHOP_ID=3365316959
 
 rem	Now you can run it every time you want to update the mod on DS and client.
 
@@ -27,5 +27,3 @@ rmdir "%DS_PATH%" /S /Q
 
 robocopy.exe .\ "%DS_PATH%"  *.* /S /xd .git bin obj .vs ignored /xf *.lnk *.git* *.bat *.zip *.7z *.blend* *.md *.log *.sln *.csproj *.csproj.user *.ruleset modinfo.sbmi
 robocopy.exe "%DS_PATH%" "%CLIENT_PATH%" *.* /S
-
-pause

@@ -1,18 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using Epstein_Fusion_DS.HudHelpers;
-using Sandbox.Engine.Physics;
 using Sandbox.Game.Entities;
-using Sandbox.ModAPI;
-using VRage.Game.Components;
 using VRage.Game.Entity;
-using VRage.Game.ModAPI;
 using VRage.ModAPI;
-using VRage.ObjectBuilders;
 using VRageMath;
-using CollisionLayers = Sandbox.Engine.Physics.MyPhysics.CollisionLayers;
-using Color = VRageMath.Color;
 
 namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
 {
