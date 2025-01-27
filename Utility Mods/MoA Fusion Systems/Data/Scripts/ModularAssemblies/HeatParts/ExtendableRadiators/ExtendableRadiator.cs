@@ -217,7 +217,7 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
             while (GetNextPanel(idx, out nextBlock))
             {
                 if (nextBlock.Visible)
-                    return;
+                    break;
                 nextBlock.Visible = true;
                 idx++;
             }
