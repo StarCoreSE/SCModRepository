@@ -75,6 +75,58 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
 
                 MyAPIGateway.TerminalControls.AddAction<IMyTerminalBlock>(a);
             }
+
+            {
+                var a = MyAPIGateway.TerminalControls.CreateAction<IMyTerminalBlock>("Radiator_SetExtendedTrue");
+                a.Name = new StringBuilder("Extend Radiator");
+                a.ValidForGroups = true;
+
+                a.Enabled = CustomVisibleCondition;
+
+                a.Writer = (block, builder) =>
+                {
+                    builder.Clear();
+                    if (block?.GameLogic?.GetAs<ExtendableRadiator>()?.IsExtended ?? false)
+                        builder.Append("Extended");
+                    else
+                        builder.Append("Retracted");
+                };
+
+                a.Action = (block) =>
+                {
+                    var logic = block?.GameLogic?.GetAs<ExtendableRadiator>();
+                    if (logic != null && !logic.IsExtended)
+                        logic.IsExtended = true;
+                };
+
+                MyAPIGateway.TerminalControls.AddAction<IMyTerminalBlock>(a);
+            }
+
+            {
+                var a = MyAPIGateway.TerminalControls.CreateAction<IMyTerminalBlock>("Radiator_SetExtendedFalse");
+                a.Name = new StringBuilder("Retract Radiator");
+                a.ValidForGroups = true;
+
+                a.Enabled = CustomVisibleCondition;
+
+                a.Writer = (block, builder) =>
+                {
+                    builder.Clear();
+                    if (block?.GameLogic?.GetAs<ExtendableRadiator>()?.IsExtended ?? false)
+                        builder.Append("Extended");
+                    else
+                        builder.Append("Retracted");
+                };
+
+                a.Action = (block) =>
+                {
+                    var logic = block?.GameLogic?.GetAs<ExtendableRadiator>();
+                    if (logic != null && logic.IsExtended)
+                        logic.IsExtended = false;
+                };
+
+                MyAPIGateway.TerminalControls.AddAction<IMyTerminalBlock>(a);
+            }
         }
     }
 }
