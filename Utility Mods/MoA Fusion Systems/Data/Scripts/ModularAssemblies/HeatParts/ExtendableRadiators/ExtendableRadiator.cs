@@ -90,6 +90,8 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
             // This is stupid, but prevents the mod profiler cost from being incurred every tick per block when inactive
             if (Animation.IsActive)
                 Animation.UpdateTick();
+            else
+                MakePanelsVisible();
         }
 
         public override bool IsSerialized()
@@ -214,6 +216,8 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
 
             while (GetNextPanel(idx, out nextBlock))
             {
+                if (nextBlock.Visible)
+                    return;
                 nextBlock.Visible = true;
                 idx++;
             }
