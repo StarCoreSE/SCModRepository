@@ -91,7 +91,7 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
             if (Animation.IsActive)
                 Animation.UpdateTick();
             else
-                MakePanelsVisible();
+                MakePanelsVisible(false);
         }
 
         public override bool IsSerialized()
@@ -209,7 +209,7 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
         /// <summary>
         /// Panels start invisible for the animation to play. This makes them visible again.
         /// </summary>
-        public void MakePanelsVisible()
+        public void MakePanelsVisible(bool clearStored = true)
         {
             IMyCubeBlock nextBlock;
             int idx = 1;
@@ -222,7 +222,8 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
                 idx++;
             }
 
-            StoredRadiators = Array.Empty<StoredRadiator>();
+            if (clearStored)
+                StoredRadiators = Array.Empty<StoredRadiator>();
         }
 
         public void RetractPanels()
