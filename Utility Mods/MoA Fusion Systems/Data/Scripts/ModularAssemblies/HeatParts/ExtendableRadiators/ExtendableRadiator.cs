@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using Epstein_Fusion_DS.Communication;
 using Epstein_Fusion_DS.HudHelpers;
+using Epstein_Fusion_DS.Networking;
 using ProtoBuf;
-using Sandbox.Game.Entities;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
 using VRage.Game;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
+using VRage.Game.ModAPI.Network;
 using VRage.ModAPI;
+using VRage.Network;
 using VRage.ObjectBuilders;
+using VRage.Sync;
 using VRageMath;
 
 namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_TerminalBlock), false, "ExtendableRadiatorBase")]
-    internal class ExtendableRadiator : MyGameLogicComponent
+    internal class ExtendableRadiator : MyGameLogicComponent, IMyEventProxy
     {
         public static readonly Guid RadiatorGuid = new Guid("e6b87818-5fd8-47a6-a480-3365e20214e1");
         public static readonly string[] ValidPanelSubtypes =
@@ -30,7 +31,7 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
         internal StoredRadiator[] StoredRadiators = Array.Empty<StoredRadiator>();
         internal RadiatorAnimation Animation;
 
-        private bool _isExtended = true;
+        private MySync<bool, SyncDirection.BothWays> _isExtended;
         public bool IsExtended
         {
             get
@@ -42,11 +43,7 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
                 if (Animation.IsActive)
                     return;
 
-                if (value)
-                    ExtendPanels();
-                else
-                    RetractPanels();
-                _isExtended = value;
+                _isExtended.Value = value;
             }
         }
 
@@ -67,6 +64,9 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
             if (Block?.CubeGrid?.Physics == null)
                 return;
 
+            if (MyAPIGateway.Session.IsServer)
+                _isExtended.Value = true;
+
             LoadSettings();
 
             try
@@ -81,6 +81,13 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
             Animation = new RadiatorAnimation(this);
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
             //NeedsUpdate |= MyEntityUpdateEnum.EACH_100TH_FRAME;
+
+            _isExtended.ValueChanged += SyncValueChanged;
+        }
+
+        public override void MarkForClose()
+        {
+            _isExtended.ValueChanged -= SyncValueChanged;
         }
 
         public override void UpdateAfterSimulation()
@@ -90,8 +97,6 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
             // This is stupid, but prevents the mod profiler cost from being incurred every tick per block when inactive
             if (Animation.IsActive)
                 Animation.UpdateTick();
-            else
-                MakePanelsVisible(false);
         }
 
         public override bool IsSerialized()
@@ -106,6 +111,17 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
             }
 
             return base.IsSerialized();
+        }
+
+        private void SyncValueChanged(MySync<bool, SyncDirection.BothWays> sync)
+        {
+            if (Animation.IsActive)
+                return;
+
+            if (sync.Value)
+                ExtendPanels();
+            else
+                RetractPanels();
         }
 
         internal void SaveSettings()
@@ -139,7 +155,11 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
                 var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<StoredRadiator[]>(Convert.FromBase64String(rawData)) ?? Array.Empty<StoredRadiator>();
 
                 StoredRadiators = loadedSettings;
-                _isExtended = StoredRadiators.Length == 0;
+                if (MyAPIGateway.Session.IsServer)
+                {
+                    _isExtended.Value = StoredRadiators.Length == 0;
+                    HeartNetwork.SendToEveryoneInSync(new BlockPacket(StoredRadiators, Block.CubeGrid, Block, null), Block.GetPosition());
+                }
 
                 for (int i = 0; i < StoredRadiators.Length; i++)
                 {
@@ -166,7 +186,7 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
 
         public void ExtendPanels()
         {
-            if (_isExtended || Animation.IsActive)
+            if (Animation.IsActive || !MyAPIGateway.Session.IsServer)
                 return;
 
             Vector3I nextPosition = Block.Position;
@@ -182,10 +202,12 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
                     {
                         MyAPIGateway.Utilities.ShowNotification("Block already exists at position!");
                         DebugDraw.AddGridPoint(nextPosition, Block.CubeGrid, Color.Red, 4);
-                        _isExtended = false;
+                        _isExtended.Value = false;
                         return;
                     }
                 }
+
+                HeartNetwork.SendToEveryoneInSync(new BlockPacket(StoredRadiators, Block.CubeGrid, Block, true), Block.GetPosition());
 
                 for (int i = 0; i < StoredRadiators.Length; i++)
                 {
@@ -209,7 +231,7 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
         /// <summary>
         /// Panels start invisible for the animation to play. This makes them visible again.
         /// </summary>
-        public void MakePanelsVisible(bool clearStored = true)
+        public void MakePanelsVisible()
         {
             IMyCubeBlock nextBlock;
             int idx = 1;
@@ -222,13 +244,13 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
                 idx++;
             }
 
-            if (clearStored)
-                StoredRadiators = Array.Empty<StoredRadiator>();
+            StoredRadiators = Array.Empty<StoredRadiator>();
+            HeartNetwork.SendToEveryoneInSync(new BlockPacket(StoredRadiators, Block.CubeGrid, Block, null), Block.GetPosition());
         }
 
         public void RetractPanels()
         {
-            if (!_isExtended)
+            if (Animation.IsActive || !MyAPIGateway.Session.IsServer)
                 return;
 
             IMyCubeBlock nextBlock;
@@ -237,18 +259,15 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
 
             while (GetNextPanel(idx, out nextBlock))
             {
-                var builder = nextBlock.GetObjectBuilderCubeBlock(true);
-
-                builder.BlockOrientation = nextBlock.Orientation;
-
-                Matrix matrix;
-                builders.Add(new StoredRadiator(builder, nextBlock.LocalMatrix, nextBlock.CalculateCurrentModel(out matrix), Block.LocalMatrix));
+                var storedRad = new StoredRadiator(nextBlock, Block);
+                builders.Add(storedRad);
 
                 nextBlock.CubeGrid.RemoveBlock(nextBlock.SlimBlock, true);
                 idx++;
             }
 
             StoredRadiators = builders.ToArray();
+            HeartNetwork.SendToEveryoneInSync(new BlockPacket(StoredRadiators, Block.CubeGrid, Block, false), Block.GetPosition());
 
             Animation.StartRetraction();
         }
@@ -281,6 +300,19 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
                 LocalMatrix = localMatrix;
                 Model = model;
                 BaseLocalMatrix = baseLocalMatrix;
+            }
+
+            public StoredRadiator(IMyCubeBlock block, IMyCubeBlock referenceBlock)
+            {
+                var builder = block.GetObjectBuilderCubeBlock(true);
+
+                builder.BlockOrientation = block.Orientation;
+
+                Matrix matrix;
+                ObjectBuilder = builder;
+                LocalMatrix = block.LocalMatrix;
+                Model = block.CalculateCurrentModel(out matrix);
+                BaseLocalMatrix = referenceBlock.LocalMatrix;
             }
         }
     }
