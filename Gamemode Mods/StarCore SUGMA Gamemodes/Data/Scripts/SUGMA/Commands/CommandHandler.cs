@@ -74,7 +74,7 @@ namespace SC.SUGMA.Commands
             ),
             ["clearlcd"] = new Command(
                 "SUGMA.Utils",
-                "Clear all image lcds.",
+                "Manually clear all image lcds.",
                 args => SUtils.ClearImageLcds()
                 )
 
