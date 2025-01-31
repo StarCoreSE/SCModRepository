@@ -39,14 +39,14 @@ namespace Epstein_Fusion_DS.HeatParts.Definitions
             {
                 SubtypeId = "Heat_FlatRadiator",
                 HeatCapacity = 0,
-                HeatDissipation = 2,
+                HeatDissipation = 5,
                 LoSCheck = radiatorBlock => CheckGridIntersect(radiatorBlock, Vector3I.Zero, Vector3I.Backward) ? 0 : 1
             },
             new HeatPartDefinition
             {
                 SubtypeId = "MDA_Radiator_1x2",
                 HeatCapacity = 0,
-                HeatDissipation = 4,
+                HeatDissipation = 10,
                 LoSCheck = radiatorBlock =>
                 {
                     float occlusionModifier = 0;
@@ -73,7 +73,7 @@ namespace Epstein_Fusion_DS.HeatParts.Definitions
             {
                 SubtypeId = "RadiatorPanel",
                 HeatCapacity = 0,
-                HeatDissipation = 2,
+                HeatDissipation = 10f,
                 LoSCheck = radiatorBlock =>
                 {
                     float occlusionModifier = 0;
@@ -90,7 +90,7 @@ namespace Epstein_Fusion_DS.HeatParts.Definitions
             {
                 SubtypeId = "ActiveRadiator",
                 HeatCapacity = 60,
-                HeatDissipation = 50,
+                HeatDissipation = 150,
                 LoSCheck = radiatorBlock =>
                 {
                     float occlusionModifier = 0;
