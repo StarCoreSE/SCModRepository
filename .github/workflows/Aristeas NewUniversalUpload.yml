@@ -8,6 +8,7 @@ on:
 
 jobs:
   UploadMods:
+    if: github.repository_owner == 'StarCoreSE' || github.repository_owner == 'ari-steas'
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4.1.4
