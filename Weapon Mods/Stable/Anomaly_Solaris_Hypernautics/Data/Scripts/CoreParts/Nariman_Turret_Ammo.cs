@@ -36,9 +36,10 @@ namespace Scripts
             AmmoRound = "Smart NanoDart", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.04f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 7500f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 9500f, // Direct damage; one steel plate is worth 100.
             Mass = 40f, // In kilograms; how much force the impact will apply to the target.
-            Health = 4, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+            Health = 40, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
+
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
             DecayPerShot = 0f, // Damage to the firing weapon itself.
             HardPointUsable = true, // Whether this is a primary ammo type fired directly by the turret. Set to false if this is a shrapnel ammoType and you don't want the turret to be able to select it directly.
@@ -60,7 +61,7 @@ namespace Scripts
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
                 AmmoRound = "", // AmmoRound field of the ammo to spawn.
-                Fragments = 100, // Number of projectiles to spawn.
+                Fragments = 1, // Number of projectiles to spawn.
                 Degrees = 15, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = false, // fragments will not inherit velocity from parent.
@@ -100,7 +101,7 @@ namespace Scripts
                 MaxIntegrity = 0f, // Blocks with integrity higher than this value will be immune to damage from this projectile; 0 = disabled.
                 DamageVoxels = false, // Whether to damage voxels.
                 SelfDamage = false, // Whether to damage the weapon's own grid.
-                HealthHitModifier = 14.5, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
+                HealthHitModifier = 24, // How much Health to subtract from another projectile on hit; defaults to 1 if zero or less.
                 VoxelHitModifier = 1, // Voxel damage multiplier; defaults to 1 if zero or less.
                 Characters = -1f, // Character damage multiplier; defaults to 1 if zero or less.
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
@@ -117,13 +118,13 @@ namespace Scripts
                 Armor = new ArmorDef
                 {
                     Armor = -1f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
-                    Light = 1.95f, // Multiplier for damage against light armor.
-                    Heavy = 1.55f, // Multiplier for damage against heavy armor.
-                    NonArmor = 0.35f, // Multiplier for damage against every else.
+                    Light = 1.65f, // Multiplier for damage against light armor.
+                    Heavy = 0.95f, // Multiplier for damage against heavy armor.
+                    NonArmor = 0.55f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
-                    Modifier = 1f, // Multiplier for damage against shields.
+                    Modifier = 1.4f, // Multiplier for damage against shields.
                     Type = Default, // Damage vs healing against shields; Default, Heal
                     BypassModifier = -1f, // If greater than zero, the percentage of damage that will penetrate the shield.
                 },
@@ -174,7 +175,7 @@ namespace Scripts
                 {
                     Enable = true,
                     Radius = 1f, // Meters
-                    Damage = 1f,
+                    Damage = 15000f,
                     Depth = 1f,
                     MaxAbsorb = 0f,
                     Falloff = NoFalloff, //.NoFalloff applies the same damage to all blocks in radius
@@ -189,8 +190,8 @@ namespace Scripts
                     NoVisuals = false,
                     NoSound = false,
                     ParticleScale = 0.25f,
-                    CustomParticle = "", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "K_SA_Gauss_Hit_A", // SubtypeID from your Audio SBC, not a filename
+                    CustomParticle = "Exp_Spark_large", // Particle SubtypeID, from your Particle SBC
+                    CustomSound = "MissileHitRandom", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
             },
@@ -262,7 +263,7 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 900, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 1500, // voxel phasing if you go above 5100
+                DesiredSpeed = 1700, // voxel phasing if you go above 5100
                 MaxTrajectory = 5000f, // Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest, spawn a field and remain for a time (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
@@ -271,6 +272,7 @@ namespace Scripts
                 MaxTrajectoryTime = 0, // How long the weapon must fire before it reaches MaxTrajectory.
                 Smarts = new SmartsDef
                 {
+                    SteeringLimit = 30, // 0 means no limit, value is in degrees, good starting is 150.  This enable advanced smart "control", cost of 3 on a scale of 1-5, 0 being basic smart.
                     Inaccuracy = 0.5f, // 0 is perfect, hit accuracy will be a random num of meters between 0 and this value.
                     Aggressiveness = 2f, // controls how responsive tracking is.
                     MaxLateralThrust = 0.15, // controls how sharp the trajectile may turn
@@ -306,12 +308,12 @@ namespace Scripts
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
-                            Scale = 1,
+                            Scale = 0.25f,
                         },
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "Exp_Spark_FCC",
+                        Name = "",
                         ApplyToShield = true,
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
@@ -372,25 +374,25 @@ namespace Scripts
                             "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
-                        DecayTime = 1, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
-                        Color = Color(red: 3f, green: 11f, blue: 2f, alpha: 1f),
+                        DecayTime = 10, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
+                        Color = Color(red: 2.5f, green: 7f, blue: 1f, alpha: 1f),
                         Back = false,
-                        CustomWidth = 0,
+                        CustomWidth = 0.25f,
                         UseWidthVariance = false,
                         UseColorFade = true,
                     },
                     OffsetEffect = new OffsetEffectDef
                     {
-                        MaxOffset = 1,// 0 offset value disables this effect
-                        MinLength = 1.2f,
-                        MaxLength = 7,
+                        MaxOffset = 0,// 0 offset value disables this effect
+                        MinLength = 0.2f,
+                        MaxLength = 2,
                     },
                 },
             },
             AmmoAudio = new AmmoAudioDef
             {
-                TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "",
+                TravelSound = "DRONEFLYBY", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
+                HitSound = "PPCImpact",
                 
                 ShieldHitSound = "",
                 PlayerHitSound = "",
@@ -413,6 +415,18 @@ namespace Scripts
             }, // Don't edit below this line
         };
 
+
+
+
+
+
+
+
+
+
+
+
+        /*
         private AmmoDef Nariman_EWAR_Round => new AmmoDef // Your ID, for slotting into the Weapon CS
         {
             AmmoMagazine = "Energy", // SubtypeId of physical ammo magazine. Use "Energy" for weapons without physical ammo.
@@ -590,20 +604,20 @@ namespace Scripts
                 Depletable = true,
                 MaxStacks = 1, // Max Debuffs at once
                 NoHitParticle = false,
-                /*
-                EnergySink : Targets & Shutdowns Power Supplies, such as Batteries & Reactor
-                Emp : Targets & Shutdown any Block capable of being powered
-                Offense : Targets & Shutdowns Weaponry
-                Nav : Targets & Shutdown Gyros or Locks them down
-                Dot : Deals Damage to Blocks in radius
-                AntiSmart : Effects & Scrambles the Targeting List of Affected Missiles
-                JumpNull : Shutdown & Stops any Active Jumps, or JumpDrive Units in radius
-                Tractor : Affects target with Physics
-                Pull : Affects target with Physics
-                Push : Affects target with Physics
-                Anchor : Targets & Shutdowns Thrusters
                 
-                */
+                //EnergySink : Targets & Shutdowns Power Supplies, such as Batteries & Reactor
+                //Emp : Targets & Shutdown any Block capable of being powered
+                //Offense : Targets & Shutdowns Weaponry
+                //Nav : Targets & Shutdown Gyros or Locks them down
+                //Dot : Deals Damage to Blocks in radius
+                //AntiSmart : Effects & Scrambles the Targeting List of Affected Missiles
+                //JumpNull : Shutdown & Stops any Active Jumps, or JumpDrive Units in radius
+                //Tractor : Affects target with Physics
+                //Pull : Affects target with Physics
+                //Push : Affects target with Physics
+                //Anchor : Targets & Shutdowns Thrusters
+                
+                
                 Force = new PushPullDef
                 {
                     ForceFrom = HitPosition, // ProjectileLastPosition, ProjectileOrigin, HitPosition, TargetCenter, TargetCenterOfMass
@@ -805,6 +819,8 @@ namespace Scripts
             }, // Don't edit below this line
         };
 
+
+        */
     }
 }
 
