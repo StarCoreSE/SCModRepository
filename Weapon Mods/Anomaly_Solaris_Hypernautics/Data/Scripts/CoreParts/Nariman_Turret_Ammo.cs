@@ -36,7 +36,7 @@ namespace Scripts
             AmmoRound = "Smart NanoDart", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.04f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 7500f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 9500f, // Direct damage; one steel plate is worth 100.
             Mass = 40f, // In kilograms; how much force the impact will apply to the target.
             Health = 40, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
 
@@ -175,7 +175,7 @@ namespace Scripts
                 {
                     Enable = true,
                     Radius = 1f, // Meters
-                    Damage = 1f,
+                    Damage = 15000f,
                     Depth = 1f,
                     MaxAbsorb = 0f,
                     Falloff = NoFalloff, //.NoFalloff applies the same damage to all blocks in radius
@@ -191,7 +191,7 @@ namespace Scripts
                     NoSound = false,
                     ParticleScale = 0.25f,
                     CustomParticle = "Exp_Spark_large", // Particle SubtypeID, from your Particle SBC
-                    CustomSound = "K_SA_Gauss_Hit_A", // SubtypeID from your Audio SBC, not a filename
+                    CustomSound = "MissileHitRandom", // SubtypeID from your Audio SBC, not a filename
                     Shape = Diamond, // Round or Diamond
                 },
             },
@@ -308,12 +308,12 @@ namespace Scripts
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
-                            Scale = 1,
+                            Scale = 0.25f,
                         },
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "Exp_Spark_FCC",
+                        Name = "",
                         ApplyToShield = true,
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
@@ -374,25 +374,25 @@ namespace Scripts
                             "WeaponLaser", // Please always have this Line set, if this Section is enabled.
                         },
                         TextureMode = Normal,
-                        DecayTime = 1, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
+                        DecayTime = 10, // In Ticks. 1 = 1 Additional Tracer generated per motion, 33 is 33 lines drawn per projectile. Keep this number low.
                         Color = Color(red: 2.5f, green: 7f, blue: 1f, alpha: 1f),
                         Back = false,
-                        CustomWidth = 0,
+                        CustomWidth = 0.25f,
                         UseWidthVariance = false,
                         UseColorFade = true,
                     },
                     OffsetEffect = new OffsetEffectDef
                     {
-                        MaxOffset = 1,// 0 offset value disables this effect
-                        MinLength = 1.2f,
-                        MaxLength = 7,
+                        MaxOffset = 0,// 0 offset value disables this effect
+                        MinLength = 0.2f,
+                        MaxLength = 2,
                     },
                 },
             },
             AmmoAudio = new AmmoAudioDef
             {
-                TravelSound = "", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
-                HitSound = "",
+                TravelSound = "DRONEFLYBY", // SubtypeID for your Sound File. Travel, is sound generated around your Projectile in flight
+                HitSound = "PPCImpact",
                 
                 ShieldHitSound = "",
                 PlayerHitSound = "",

@@ -1,0 +1,652 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Sounds>
+    
+    <!-- Engine Sounds -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Ship_Engine</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>true</Loopable>
+      <PreventSynchronization>1</PreventSynchronization>
+      <MaxSounds>3</MaxSounds>
+      <PitchVariation>25</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="20" Distance="1200" Sound="Ship_Engine_Distant" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Loop>Audio\Dreadnaught_Engine_Idle.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Ship_Engine_Distant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <Volume>0.75</Volume>
+      <Loopable>true</Loopable>
+      <PreventSynchronization>1</PreventSynchronization>
+      <MaxSounds>3</MaxSounds>
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Loop>Audio\Dreadnaught_Engine_Distant.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <!-- Weapon Sounds -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Turbolaser_Impact</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1200</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>14</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Explosion01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Explosion02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Explosion03.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Explosion04.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Turboion_Impact</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1200</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>50</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Turboion_Impact.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Light_Turbolaser_Shot</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>true</Loopable>
+      <PitchVariation>15</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="20" Distance="1250" Sound="Light_Turbolaser_Shot" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\RB_Turbolaser_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\RB_Turbolaser_02.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Light_Turbolaser_Shot_Dist</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <Volume>0.75</Volume>
+      <Loopable>true</Loopable>
+
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Loop>Audio\RB_Turbolaser_01.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Light_Turboion_Shot</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>10</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\LR_Ion_Cannon.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Concussion_Missile_Shot</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>10</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Concussion_Missile.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <!-- Dreadnaught Sounds-->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Dreadnaught_Arrival</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1500</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>1</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-03.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-04.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-05.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Dreadnaught_Stage_01</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>true</Loopable>
+      <PreventSynchronization>1</PreventSynchronization>
+      <MaxSounds>3</MaxSounds>
+      <PitchVariation>25</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="20" Distance="1200" Sound="Dreadnaught_Stage_01_Distant" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-06.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Idle.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-07.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Idle.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-08.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Idle.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Dreadnaught_Stage_01_Distant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>true</Loopable>
+      <PreventSynchronization>1</PreventSynchronization>
+      <MaxSounds>3</MaxSounds>
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-06.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Distant.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-07.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Distant.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-08.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Distant.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Dreadnaught_Stage_02</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>true</Loopable>
+      <PreventSynchronization>1</PreventSynchronization>
+      <MaxSounds>3</MaxSounds>
+      <PitchVariation>25</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="20" Distance="1200" Sound="Dreadnaught_Stage_02_Distant" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-09.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Idle.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-10.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Idle.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-11.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Idle.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Dreadnaught_Stage_02_Distant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>true</Loopable>
+      <PreventSynchronization>1</PreventSynchronization>
+      <MaxSounds>3</MaxSounds>
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-09.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Distant.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-10.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Distant.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-11.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Distant.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Dreadnaught_Stage_03</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>true</Loopable>
+      <PreventSynchronization>1</PreventSynchronization>
+      <MaxSounds>3</MaxSounds>
+      <PitchVariation>25</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="20" Distance="1200" Sound="Dreadnaught_Stage_03_Distant" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-12.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Idle.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-13.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Idle.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-14.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Idle.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Dreadnaught_Stage_03_Distant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>true</Loopable>
+      <PreventSynchronization>1</PreventSynchronization>
+      <MaxSounds>3</MaxSounds>
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-12.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Distant.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-13.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Distant.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-14.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Distant.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Dreadnaught_Death</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <MaxSounds>3</MaxSounds>
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-15.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-16.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Dreadnaught_Status-17.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <!-- Dreadnaught Sounds-->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>NebulonB_Arrival</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1500</MaxDistance>
+      <Volume>4</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>1</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-02.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-03.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-04.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-05.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>NebulonB_Stage_01</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>true</Loopable>
+      <PreventSynchronization>1</PreventSynchronization>
+      <MaxSounds>3</MaxSounds>
+      <PitchVariation>25</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="20" Distance="1200" Sound="NebulonB_Stage_01_Distant" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-06.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Idle.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-07.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Idle.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-08.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Idle.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>NebulonB_Stage_01_Distant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>true</Loopable>
+      <PreventSynchronization>1</PreventSynchronization>
+      <MaxSounds>3</MaxSounds>
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-06.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Distant.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-07.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Distant.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-08.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Distant.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>NebulonB_Stage_02</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>true</Loopable>
+      <PreventSynchronization>1</PreventSynchronization>
+      <MaxSounds>3</MaxSounds>
+      <PitchVariation>25</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="20" Distance="1200" Sound="NebulonB_Stage_02_Distant" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-09.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Idle.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-10.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Idle.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-11.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Idle.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>NebulonB_Stage_02_Distant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>true</Loopable>
+      <PreventSynchronization>1</PreventSynchronization>
+      <MaxSounds>3</MaxSounds>
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-09.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Distant.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-10.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Distant.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-11.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Distant.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>NebulonB_Stage_03</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>true</Loopable>
+      <PreventSynchronization>1</PreventSynchronization>
+      <MaxSounds>3</MaxSounds>
+      <PitchVariation>25</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="20" Distance="1200" Sound="NebulonB_Stage_03_Distant" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-12.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Idle.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-13.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Idle.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-14.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Idle.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>NebulonB_Stage_03_Distant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>true</Loopable>
+      <PreventSynchronization>1</PreventSynchronization>
+      <MaxSounds>3</MaxSounds>
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-12.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Distant.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-13.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Distant.wav</Loop>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-14.wav</Start>
+          <Loop>Audio\Dreadnaught_Engine_Distant.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>NebulonB_Death</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <MaxSounds>3</MaxSounds>
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-15.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-16.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\NebulonB_Status-17.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <!-- Misc. Sounds-->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Hyperspace_Exit</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1200</MaxDistance>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>25</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Hyperspace_Exit_01.wav</Start>
+        </Wave>
+        <Wave Type="D3">
+          <Start>Audio\Hyperspace_Exit_02.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+   
+    
+  </Sounds>
+</Definitions>
+
