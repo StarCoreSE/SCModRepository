@@ -161,11 +161,14 @@ namespace ShipPoints
             ["S_Chem_Laser_Block"] = 120,
             ["Impulse_Torch"] = 175,
             ["Flechette_DoubleBarrel"] = 200,
-            ["Nariman_Dart_Turret"] = 225,
+            ["Nariman_Dart_Turret"] = 245,
             ["Counter_Battery"] = 250,
-            ["SolHyp_ArcStrike_Torp"] = 275,
+            ["ArcStrike_Torp_Launcher"] = 275,
+            ["Meson3_Turret"] = 300,
+            ["Meson5_Turret"] = 600,
             ["MagnaPulse_Gen"] = 400,
             ["SolHyp_Magnetic_Coilgun"] = 450,
+            ["WCSentry_Hangar"] = 1000,
 
 
 
