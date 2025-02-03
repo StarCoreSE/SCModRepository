@@ -162,7 +162,7 @@
        <Component Subtype="SteelPlate" Count="250" />
      </Components>
      <CriticalComponent Subtype="Motor" Index="0" />
-     <BlockPairName>SolHyp_ArcStrike_Torp</BlockPairName>
+     <BlockPairName>ArcStrike_Torp_Launcher</BlockPairName>
      <MirroringY>Z</MirroringY>
      <MirroringZ>Y</MirroringZ>
 	   <EdgeType>Light</EdgeType>
