@@ -110,31 +110,42 @@ namespace SC.SUGMA.Utilities
             if (!MyAPIGateway.Session.IsServer)
                 return;
 
-            var playerIds = new List<long>();
+            var playerIds = new List<long>(); // All players that aren't spectators.
 
             foreach (var faction in PlayerTracker.I.GetPlayerFactions())
                 playerIds.AddRange(faction.Members.Values.Select(player => player.PlayerId));
 
-            var greenSpawn = GetFactionSpawns().FirstOrDefault(b => b.Key.Tag == "NEU").Value;
-            foreach (var player in PlayerTracker.I.AllPlayers.Where(p => playerIds.Contains(p.Key)))
+            var factionSpawns = GetFactionSpawns();
+            if (factionSpawns.Any(b => b.Key.Tag == "NEU"))
             {
-                if (greenSpawn != null)
-                    player.Value.Character?.SetWorldMatrix(greenSpawn.WorldMatrix);
-                else
+                var spawnPos = GetFactionSpawns().First(b => b.Key.Tag == "NEU").Value.WorldMatrix.Translation;
+                spawnPos -= spawnPos.Normalized() * 100;
+
+                foreach (var player in PlayerTracker.I.AllPlayers)
+                {
+                    (player.Value.Controller.ControlledEntity as IMyCockpit)?.RemovePilot();
+                    player.Value.Character?.SetPosition(spawnPos + RandVector(-50, 50) * Vector3D.Right);
+                }
+            }
+            else
+            {
+                foreach (var player in PlayerTracker.I.AllPlayers.Where(p => playerIds.Contains(p.Key)))
                     player.Value.Character?.Kill();
             }
-
+            
             SUGMA_SessionComponent.I.StopGamemode(true);
 
+            List<IMyCubeGrid> bufferGroupGrids = new List<IMyCubeGrid>();
             MyAPIGateway.Entities.GetEntities(null, g =>
             {
                 IMyCubeGrid grid = g as IMyCubeGrid;
                 if (grid == null)
                     return false;
 
-                // If this ever becomes an issue with deleting existing subgrids, change it to a GridGroup check.
-                if (!grid.IsStatic)
+                grid.GetGridGroup(GridLinkTypeEnum.Physical).GetGrids(bufferGroupGrids); // Ignore the spawn stations, blockers, and any grids attached to them.
+                if (!bufferGroupGrids.Any(attachedGrid => attachedGrid.IsStatic))
                     grid.Close();
+                bufferGroupGrids.Clear();
 
                 return false;
             });
