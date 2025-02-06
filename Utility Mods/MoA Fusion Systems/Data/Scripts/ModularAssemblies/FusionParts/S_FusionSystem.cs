@@ -254,7 +254,7 @@ namespace Epstein_Fusion_DS.
             PowerStored += PowerGeneration;
             if (PowerStored > MaxPowerStored) PowerStored = MaxPowerStored;
             ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "HeatGeneration",
-                PowerConsumption * MegawattsPerFusionPower * 3);
+                PowerConsumption * MegawattsPerFusionPower);
         }
 
         public void UpdateTick()
