@@ -59,7 +59,8 @@ namespace SC.SUGMA.GameModes.Elimination
         private bool _matchEnded;
         private readonly MatchTimer _timer;
 
-        private readonly LabelBox _timerLabel;
+        internal readonly LabelBox _timerLabel;
+        internal LabelBox _winnerLabel;
         public EliminationHud_TeamBanner[] Banners;
 
         public elmHud_Window(HudParentBase parent, EliminationGamemode gamemode) : base(parent)
@@ -136,7 +137,7 @@ namespace SC.SUGMA.GameModes.Elimination
             if (_timerLabel == null)
                 return;
 
-            var winnerLabel = new LabelBox(_timerLabel)
+            _winnerLabel = new LabelBox(_timerLabel)
             {
                 Text = winner != null
                     ? $"A WINNER IS {winner.Name}. {winnerPoints} tickets remaining."
@@ -147,7 +148,7 @@ namespace SC.SUGMA.GameModes.Elimination
                 Color = HudConstants.HudBackgroundColor
             };
 
-            winnerLabel.TextBoard.SetFormatting(GlyphFormat.White.WithColor(Color.Red).WithSize(3)
+            _winnerLabel.TextBoard.SetFormatting(GlyphFormat.White.WithColor(Color.Red).WithSize(3)
                 .WithAlignment(TextAlignment.Center));
         }
     }
