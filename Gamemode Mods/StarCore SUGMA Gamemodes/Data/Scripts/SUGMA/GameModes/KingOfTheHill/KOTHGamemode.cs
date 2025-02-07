@@ -58,6 +58,7 @@ namespace SC.SUGMA.GameModes.KOTH
 
         public override void StopRound()
         {
+            _winningFaction = ControlPoint._zoneOwner;
             base.StopRound();
             if (!_setWinnerFromArgs)
                 _winningFaction = ControlPoint._zoneOwner;
