@@ -122,6 +122,7 @@ namespace SC.SUGMA.GameModes.Elimination
 
         public void MatchEnded(IMyFaction winner)
         {
+            Log.Info("EliminationHud.cs:125 MatchEnded (" + winner?.Name + ")");
             _matchEnded = true;
             var winnerPoints = 0;
             foreach (var banner in Banners)
