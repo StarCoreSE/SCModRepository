@@ -58,7 +58,7 @@ namespace SC.SUGMA.GameModes.KOTH
 
         public override void StopRound()
         {
-            _winningFaction = ControlPoint._zoneOwner;
+            _winningFaction = ControlPoint?._zoneOwner;
             base.StopRound();
 
             SUGMA_SessionComponent.I.GetComponent<KOTHHud>("KOTHHud")?.MatchEnded(_winningFaction);
