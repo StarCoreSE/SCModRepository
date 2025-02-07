@@ -24,7 +24,7 @@ namespace SC.SUGMA.GameModes.KOTH
         public override string ReadableName { get; internal set; } = "King Of The Hill";
 
         public override string Description { get; internal set; } =
-            "Factions fight over a Central Capture Point. Either spend 2 minutes uncontested in the center zone, or eliminate the enemy team to win.";
+            "Fight to Control the Capture Point. Either hold it uncontested, or eliminate the enemy team to win.";
 
         public KOTHGamemode()
         {

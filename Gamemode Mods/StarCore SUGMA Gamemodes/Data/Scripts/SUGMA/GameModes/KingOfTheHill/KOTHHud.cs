@@ -72,15 +72,15 @@ namespace SC.SUGMA.GameModes.KOTH
             {
                 Material = _circleMaterial,
                 ParentAlignment = ParentAlignments.Bottom | ParentAlignments.Center,
-                Size = Vector2.One * 64,
-                Offset = new Vector2(0, -15), 
+                Size = Vector2.One * 32,
+                Offset = new Vector2(0, -10), 
                 ZOffset = sbyte.MaxValue
             };
 
             _captureLabel = new Label(_captureIndicator)
             {
                 ParentAlignment = ParentAlignments.Center,
-                Offset = new Vector2(0, -55),
+                Offset = new Vector2(0, -35),
                 Text = "Initializing KOTH..."
             };
 
