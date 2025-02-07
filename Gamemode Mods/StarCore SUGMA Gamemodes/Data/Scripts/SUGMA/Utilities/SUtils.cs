@@ -49,7 +49,7 @@ namespace SC.SUGMA.Utilities
             MySessionComponentSafeZones.AllowedActions = CastProhibit(MySessionComponentSafeZones.AllowedActions,
                 matchActive ? MatchPermsInt : FullPermsInt);
 
-            if (matchActive && MyAPIGateway.Session.IsServer)
+            if (matchActive && (MyAPIGateway.Session?.IsServer ?? false))
                 ClearImageLcds();
         }
 
