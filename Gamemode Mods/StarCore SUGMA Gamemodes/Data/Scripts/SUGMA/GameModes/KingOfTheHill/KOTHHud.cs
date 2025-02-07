@@ -130,6 +130,7 @@ namespace SC.SUGMA.GameModes.KOTH
 
         public void MatchEnded(IMyFaction winner)
         {
+            Log.Info("KOTHHud.cs:133 MatchEnded (" + winner?.Name + ")");
             _captureIndicator.Visible = false;
             _captureLabel.Visible = false;
 
