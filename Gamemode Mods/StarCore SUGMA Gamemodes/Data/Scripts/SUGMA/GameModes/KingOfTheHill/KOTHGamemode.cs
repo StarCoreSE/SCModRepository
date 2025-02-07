@@ -60,8 +60,6 @@ namespace SC.SUGMA.GameModes.KOTH
         {
             _winningFaction = ControlPoint._zoneOwner;
             base.StopRound();
-            if (!_setWinnerFromArgs)
-                _winningFaction = ControlPoint._zoneOwner;
 
             SUGMA_SessionComponent.I.GetComponent<KOTHHud>("KOTHHud")?.MatchEnded(_winningFaction);
             SUGMA_SessionComponent.I.UnregisterComponent("KOTHHud");
