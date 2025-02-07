@@ -182,9 +182,10 @@ namespace SC.SUGMA.GameModes.Elimination
                      "\n- Tracked grids:" + trackedGrids);
         }
 
+        protected bool _setWinnerFromArgs = false;
         public override void StopRound()
         {
-            bool setWinnerFromArgs = false;
+            _setWinnerFromArgs = false;
             foreach (var arg in Arguments)
             {
                 if (arg.StartsWith("win"))
@@ -199,7 +200,7 @@ namespace SC.SUGMA.GameModes.Elimination
                 }
             }
 
-            if (!setWinnerFromArgs && MyAPIGateway.Session.IsServer)
+            if (!_setWinnerFromArgs && MyAPIGateway.Session.IsServer)
             {
                 Arguments = Arguments.Concat(new[] { $"win{_winningFaction?.FactionId ?? -1}" }).ToArray();
             }
