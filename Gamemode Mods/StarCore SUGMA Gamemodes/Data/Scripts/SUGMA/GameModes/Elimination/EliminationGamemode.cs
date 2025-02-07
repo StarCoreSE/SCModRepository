@@ -190,12 +190,12 @@ namespace SC.SUGMA.GameModes.Elimination
             {
                 if (arg.StartsWith("win"))
                 {
-                    Log.Info("Winner in arguments found: " + arg);
                     long factionId;
                     long.TryParse(arg.Remove(0, 3), out factionId);
 
                     _winningFaction = MyAPIGateway.Session.Factions.TryGetFactionById(factionId);
-                    _setWinnerFromArgs = true;
+                    setWinnerFromArgs = true;
+                    Log.Info($"Winner in arguments found: {factionId} ({_winningFaction?.Name})");
                     break;
                 }
             }

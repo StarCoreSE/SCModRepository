@@ -72,13 +72,13 @@ namespace SC.SUGMA.GameModes.KOTH
 
         internal override void DisplayWinMessage()
         {
-            if (ControlPoint._zoneOwner == null)
+            if (_winningFaction == null)
             {
                 MyAPIGateway.Utilities.ShowNotification("YOU ARE ALL LOSERS.", 10000, "Red");
                 return;
             }
 
-            MyAPIGateway.Utilities.ShowNotification($"A WINNER IS [{ControlPoint._zoneOwner?.Name}]!", 10000);
+            MyAPIGateway.Utilities.ShowNotification($"A WINNER IS [{_winningFaction?.Name}]!", 10000);
         }
 
         public override void UpdateActive()
