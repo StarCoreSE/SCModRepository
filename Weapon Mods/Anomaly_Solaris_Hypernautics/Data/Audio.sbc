@@ -30,7 +30,7 @@
       <DynamicMusicAmount>15</DynamicMusicAmount>
       <Loopable>false</Loopable>
       <SoundLimit>32</SoundLimit>
-      <Volume>1.2</Volume>
+      <Volume>0.7</Volume>
       <PitchVariation>5</PitchVariation>
       <Waves>
         <Wave Type="D3">
@@ -53,7 +53,7 @@
       <DynamicMusicAmount>15</DynamicMusicAmount>
       <Loopable>false</Loopable>
       <SoundLimit>32</SoundLimit>
-      <Volume>1.2</Volume>
+      <Volume>0.7</Volume>
       <PitchVariation>5</PitchVariation>
       <Waves>
         <Wave Type="D3">
@@ -76,7 +76,7 @@
       <DynamicMusicAmount>15</DynamicMusicAmount>
       <Loopable>false</Loopable>
       <SoundLimit>32</SoundLimit>
-      <Volume>1</Volume>
+      <Volume>0.7</Volume>
       <PitchVariation>5</PitchVariation>
       <Waves>
         <Wave Type="D3">
@@ -99,7 +99,7 @@
       <DynamicMusicAmount>3</DynamicMusicAmount>
       <Loopable>true</Loopable>
       <SoundLimit>5</SoundLimit>
-      <Volume>1.2</Volume>
+      <Volume>0.7</Volume>
       <PitchVariation>5</PitchVariation>
       <Waves>
         <Wave Type="D3">
@@ -122,7 +122,7 @@
       <DynamicMusicAmount>1</DynamicMusicAmount>
       <Loopable>true</Loopable>
       <SoundLimit>1</SoundLimit>
-      <Volume>1.2</Volume>
+      <Volume>0.7</Volume>
       <PitchVariation>5</PitchVariation>
       <Waves>
         <Wave Type="D3">
@@ -145,7 +145,7 @@
       <DynamicMusicAmount>15</DynamicMusicAmount>
       <Loopable>false</Loopable>
       <SoundLimit>32</SoundLimit>
-      <Volume>1.2</Volume>
+      <Volume>0.7</Volume>
       <PitchVariation>5</PitchVariation>
       <Waves>
         <Wave Type="D3">
