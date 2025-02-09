@@ -148,9 +148,9 @@
             <AmmoDefinitionId Subtype="TestAmmoB8T" />
 
             <MinimumOfferAmount>1</MinimumOfferAmount>
-            <MaximumOfferAmount>12</MaximumOfferAmount>
+            <MaximumOfferAmount>1</MaximumOfferAmount>
             <MinimumOrderAmount>1</MinimumOrderAmount>
-            <MaximumOrderAmount>12</MaximumOrderAmount>
+            <MaximumOrderAmount>1</MaximumOrderAmount>
             <CanPlayerOrder>true</CanPlayerOrder>
         </AmmoMagazine>
 
@@ -174,10 +174,10 @@
             <Capacity>1</Capacity>
             <AmmoDefinitionId Subtype="TestAmmoB8T" />
 
-            <MinimumOfferAmount>6</MinimumOfferAmount>
-            <MaximumOfferAmount>12</MaximumOfferAmount>
-            <MinimumOrderAmount>3</MinimumOrderAmount>
-            <MaximumOrderAmount>24</MaximumOrderAmount>
+            <MinimumOfferAmount>1</MinimumOfferAmount>
+            <MaximumOfferAmount>1</MaximumOfferAmount>
+            <MinimumOrderAmount>1</MinimumOrderAmount>
+            <MaximumOrderAmount>1</MaximumOrderAmount>
             <CanPlayerOrder>true</CanPlayerOrder>
         </AmmoMagazine>		    
 
@@ -201,10 +201,10 @@
             <Capacity>1</Capacity>
             <AmmoDefinitionId Subtype="TestAmmoB8T" />
 
-            <MinimumOfferAmount>6</MinimumOfferAmount>
-            <MaximumOfferAmount>12</MaximumOfferAmount>
-            <MinimumOrderAmount>3</MinimumOrderAmount>
-            <MaximumOrderAmount>24</MaximumOrderAmount>
+            <MinimumOfferAmount>1</MinimumOfferAmount>
+            <MaximumOfferAmount>1</MaximumOfferAmount>
+            <MinimumOrderAmount>1</MinimumOrderAmount>
+            <MaximumOrderAmount>1</MaximumOrderAmount>
             <CanPlayerOrder>true</CanPlayerOrder>
         </AmmoMagazine>		    
 
