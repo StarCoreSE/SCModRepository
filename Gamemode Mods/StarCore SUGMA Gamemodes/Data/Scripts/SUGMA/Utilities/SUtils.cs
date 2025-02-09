@@ -49,7 +49,7 @@ namespace SC.SUGMA.Utilities
             MySessionComponentSafeZones.AllowedActions = CastProhibit(MySessionComponentSafeZones.AllowedActions,
                 matchActive ? MatchPermsInt : FullPermsInt);
 
-            if (matchActive && MyAPIGateway.Session.IsServer)
+            if (matchActive && (MyAPIGateway.Session?.IsServer ?? false))
                 ClearImageLcds();
         }
 
@@ -124,7 +124,7 @@ namespace SC.SUGMA.Utilities
                 foreach (var player in PlayerTracker.I.AllPlayers)
                 {
                     (player.Value.Controller.ControlledEntity as IMyCockpit)?.RemovePilot();
-                    player.Value.Character?.SetPosition(spawnPos + RandVector(-50, 50) * Vector3D.Right);
+                    player.Value.Character?.Teleport(MatrixD.CreateWorld(spawnPos + RandVector(-50, 50) * Vector3D.Right));
                 }
             }
             else

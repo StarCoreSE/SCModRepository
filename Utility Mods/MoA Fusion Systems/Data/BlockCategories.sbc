@@ -7,7 +7,7 @@
         <SubtypeId/>
       </Id>
       <DisplayName>Fusion Systems</DisplayName>
-      <Name>FusionSystems</Name>
+      <Name>Fusion Systems</Name>
       <ItemIds>
 	    <string>Caster_Accelerator_0</string>
 	    <string>Caster_Accelerator_90</string>
