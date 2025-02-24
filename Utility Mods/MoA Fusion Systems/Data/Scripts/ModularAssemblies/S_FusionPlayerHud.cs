@@ -21,7 +21,7 @@ namespace Epstein_Fusion_DS
         public static SFusionPlayerHud I;
         private int _ticks;
 
-        private ConsumptionBar _consumptionBar;
+        private FusionWindow _fusionHud;
         private static ModularDefinitionApi ModularApi => Epstein_Fusion_DS.ModularDefinition.ModularApi;
         private static SFusionManager FusionManager => SFusionManager.I;
         private static HeatManager HeatManager => HeatManager.I;
@@ -53,15 +53,17 @@ namespace Epstein_Fusion_DS
             _ticks++;
             try
             {
-                if (_consumptionBar == null && RichHudClient.Registered)
-                    _consumptionBar = new ConsumptionBar(HudMain.HighDpiRoot)
+                if (_fusionHud == null && RichHudClient.Registered)
+                {
+                    _fusionHud = new FusionWindow(HudMain.HighDpiRoot)
                     {
                         Visible = true
                     };
+                }
 
                 HeatManager.UpdateTick();
                 FusionManager.UpdateTick();
-                _consumptionBar?.Update();
+                _fusionHud?.Update();
 
                 if (ModularApi.IsDebug())
                 {
