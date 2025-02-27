@@ -1,9 +1,12 @@
-﻿using VRageMath;
+﻿using System;
+using VRageMath;
 
 namespace Epstein_Fusion_DS
 {
     public static class Utils
     {
+        public static Random Random = new Random();
+
         // TODO make this less inefficient.
         public static Matrix RotateMatrixAroundPoint(Matrix matrix, Vector3D point, Vector3D axis, double angleRadians)
         {
