@@ -22,11 +22,14 @@ namespace Epstein_Fusion_DS.HudHelpers
         private readonly TexturedBox _backgroundBox, _foregroundBox, _heatBox, _storBox;
         private readonly Label _heatLabel, _storageLabel, _infoLabelLeft;
 
-        private readonly GlyphFormat _stdTextFormat = new GlyphFormat(color: HudConstants.HudTextColor, alignment: TextAlignment.Center, font: FontManager.GetFont("BI_Monospace"));
-        private readonly GlyphFormat _stdTextFormatInfo = new GlyphFormat(color: HudConstants.HudTextColor, textSize: 0.85f, alignment: TextAlignment.Left, font: FontManager.GetFont("BI_Monospace"));
+        private readonly GlyphFormat _stdTextFormat = new GlyphFormat(color: HudConstants.HudTextColor, alignment: TextAlignment.Center, font: FontManager.GetFont("Monospace"));
+        private readonly GlyphFormat _stdTextFormatInfo = new GlyphFormat(color: HudConstants.HudTextColor, textSize: 0.6f, alignment: TextAlignment.Left, font: FontManager.GetFont("Monospace"));
 
         public FusionWindow(HudParentBase parent) : base(parent)
         {
+            foreach (var font in FontManager.Fonts)
+                MyAPIGateway.Utilities.ShowMessage("FUS", font.Name);
+
             RotationAxis = new Vector3(0, 1, 0);
             RotationAngle = 0.25f;
             TransformOffset = new Vector3D(-0.0675, -0.04, -0.05);
@@ -169,7 +172,7 @@ namespace Epstein_Fusion_DS.HudHelpers
             _infoLabelLeft.Text = new RichText
             {
                 {(reactorIntegrity*100).ToString("N0") + "%", _stdTextFormatInfo.WithColor(reactorIntegrity > 0.6 ? Color.White : Color.Red)},
-                {" INTEGRITY  -  ", _stdTextFormatInfo},
+                {" INTEGRITY - ", _stdTextFormatInfo},
                 {GetNoticeText(heatPct, reactorIntegrity), GetNoticeFormat(heatPct, reactorIntegrity)},
             };
 
@@ -197,23 +200,63 @@ namespace Epstein_Fusion_DS.HudHelpers
             }
         }
 
+        private int _errRemainingTicks = 0;
+        private float _lastIntegrityPct = 1;
+        private string _lastErrText = "";
         private string GetNoticeText(float heatPct, float integrityPct)
         {
+            if (integrityPct < _lastIntegrityPct && _errRemainingTicks == 0)
+                _errRemainingTicks = Utils.Random.Next(60, 120);
+            //_lastIntegrityPct = integrityPct;
+
+            string baseText = "ALL SYSTEMS NOMINAL";
+            char[] errArray = new[]
+            {
+                '?',
+                '░',
+                '▒',
+                '▓',
+                '█',
+                '*',
+                '%',
+                '@',
+            };
+
             if (integrityPct < 0.1)
-                return "I DON'T WANT TO DIE.";
-            if (integrityPct < 0.5)
-                return "-!- REACTOR FAILURE -!-";
-            if (integrityPct < 0.6)
-                return "-!- SHUTDOWN IMMINENT -!-";
-            if (heatPct > 0.8)
-                return "! THERMAL DAMAGE !";
-            return "ALL SYSTEMS NOMINAL";
+                baseText = "  I DON'T WANT TO DIE. ";
+            else if (integrityPct < 0.5)
+                baseText = " -! REACTOR FAILURE !- ";
+            else if (integrityPct < 0.6)
+                baseText = "-! SHUTDOWN IMMINENT !-";
+            else if (heatPct > 0.8)
+                baseText = "  ! THERMAL DAMAGE !   ";
+            
+            if (_errRemainingTicks > 0 || integrityPct < 0.6)
+            {
+                if (_errRemainingTicks % 4 == 0)
+                {
+                    var chars = baseText.ToCharArray();
+                    for (int i = Utils.Random.Next(0, baseText.Length/4); i < baseText.Length; i += Utils.Random.Next(1, baseText.Length/2))
+                        chars[i] = errArray[Utils.Random.Next(0, errArray.Length - 1)];
+                    baseText = new string(chars);
+                    _lastErrText = baseText;
+                }
+                else
+                {
+                    baseText = _lastErrText;
+                }
+                _errRemainingTicks--;
+            }
+
+            return baseText;
         }
 
         private GlyphFormat GetNoticeFormat(float heatPct, float integrityPct)
         {
             if (integrityPct < 0.6 || heatPct > 0.8)
                 return _stdTextFormatInfo.WithColor(Color.Red);
+            else if (_errRemainingTicks > 0)
+                return _stdTextFormatInfo.WithColor(Color.Yellow);
             return _stdTextFormatInfo;
         }
     }
