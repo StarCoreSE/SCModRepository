@@ -27,9 +27,6 @@ namespace Epstein_Fusion_DS.HudHelpers
 
         public FusionWindow(HudParentBase parent) : base(parent)
         {
-            foreach (var font in FontManager.Fonts)
-                MyAPIGateway.Utilities.ShowMessage("FUS", font.Name);
-
             RotationAxis = new Vector3(0, 1, 0);
             RotationAngle = 0.25f;
             TransformOffset = new Vector3D(-0.0675, -0.04, -0.05);
