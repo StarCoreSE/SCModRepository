@@ -224,9 +224,11 @@ namespace KlimeDraygoMath.CastSpectator
                                 {
                                     Clear();
                                 }
-
+                                // Keep current position, just look at target
+                                Vector3D targetPos = tempHIt.HitEntity.WorldVolume.Center;
+                                m_specCam.SetTarget(targetPos, m_specCam.Orientation.Up); // Use current Up vector
                                 SetTarget(tempHIt.HitEntity);
-                                SetMode(1);
+                                ObsCameraState.lockmode = CameraMode.Follow; // Default to Follow
                             }
                         }
                     }
@@ -696,7 +698,7 @@ namespace KlimeDraygoMath.CastSpectator
 
             if (m_FindAndMoveState == FindAndMoveState.GoToMove)
             {
-                Clear();
+                // Don’t Clear() immediately to preserve mode state until animation ends
                 origStart = m_specCam.Position;
                 origFor = m_specCam.Orientation.Forward;
                 origUp = m_specCam.Orientation.Up;
@@ -714,7 +716,6 @@ namespace KlimeDraygoMath.CastSpectator
             if (m_FindAndMoveState == FindAndMoveState.InMove)
             {
                 bool complete = false;
-
                 if (moveGrid == null || moveGrid.Physics == null || MyAPIGateway.Session.IsCameraControlledObject)
                 {
                     m_FindAndMoveState = FindAndMoveState.GoToIdle;
@@ -724,9 +725,7 @@ namespace KlimeDraygoMath.CastSpectator
                 Vector3D currentStartPosition = m_specCam.Position;
                 Vector3D focusCentralPosition = moveGrid.WorldAABB.Center;
                 Vector3D direction = Vector3D.Normalize(focusCentralPosition - currentStartPosition);
-                double pullbackDist = moveGrid.PositionComp.WorldVolume.Radius;
-                pullbackDist *= 1.5;
-
+                double pullbackDist = moveGrid.PositionComp.WorldVolume.Radius * 1.5;
                 double travelDist = (focusCentralPosition - currentStartPosition).Length() - pullbackDist;
                 Vector3D endPosition = currentStartPosition + (direction * travelDist);
 
@@ -740,6 +739,7 @@ namespace KlimeDraygoMath.CastSpectator
                     var realRatio = (double)viewAnimFrame / maxViewAnimFrame;
                     var easingRatio = OutQuint((float)realRatio);
                     m_specCam.Position = Vector3D.Lerp(origStart, endPosition, easingRatio);
+                    m_specCam.SetTarget(focusCentralPosition, m_specCam.Orientation.Up);
                     viewAnimFrame += 1;
                 }
                 else
@@ -749,11 +749,39 @@ namespace KlimeDraygoMath.CastSpectator
 
                 if (complete)
                 {
+                    // Set final animation position and orientation
+                    m_specCam.Position = endPosition;
+                    Vector3D targetPos = moveGrid.WorldVolume.Center;
+                    m_specCam.SetTarget(targetPos, m_specCam.Orientation.Up);
+
+                    // Lock onto the grid
+                    if (ObsCameraState.lockEntity != null)
+                    {
+                        Clear(); // Clear previous lock
+                    }
                     SetTarget(moveGrid);
+                    ObsCameraState.islocked = true;
+
+                    // Update mode-specific state to match final position/orientation
+                    switch (ObsCameraState.lockmode)
+                    {
+                        case CameraMode.Free:
+                            freeModeMatrix = m_specCam.Orientation;
+                            freeModeMatrix.Translation = m_specCam.Position - moveGrid.WorldVolume.Center;
+                            freeModeInitialized = true;
+                            break;
+                        case CameraMode.Follow:
+                        case CameraMode.Orbit:
+                        case CameraMode.Track:
+                            MatrixD worldMatrix = m_specCam.Orientation;
+                            worldMatrix.Translation = m_specCam.Position;
+                            ObsCameraState.localMatrix = WorldToLocalNI(worldMatrix, moveGrid.WorldMatrixNormalizedInv);
+                            break;
+                    }
+
                     m_FindAndMoveState = FindAndMoveState.GoToIdle;
                 }
             }
-
             if (m_FindAndMoveState == FindAndMoveState.InMoveLookback)
             {
                 bool complete = false;
@@ -809,10 +837,9 @@ namespace KlimeDraygoMath.CastSpectator
 
             if (m_FindAndMoveState == FindAndMoveState.GoToIdle)
             {
-                moveGrid = null;
+                moveGrid = null; // Clear animation state
                 viewAnimFrame = 0;
                 rotationAnimFrame = 0;
-
                 origStart = Vector3D.Zero;
                 origFor = Vector3D.Zero;
                 origUp = Vector3D.Zero;
@@ -851,9 +878,10 @@ namespace KlimeDraygoMath.CastSpectator
             ObsCameraState.lockEntity = lockEntity;
             ObsCameraState.islocked = true;
 
+            // Only set a default mode if none exists
             if (ObsCameraState.lockmode == CameraMode.None)
             {
-                SetMode(1);
+                ObsCameraState.lockmode = CameraMode.Follow; // Default to Follow only if no mode is set
             }
 
             if (ObsCameraState.lockmode == CameraMode.Track)
@@ -863,6 +891,7 @@ namespace KlimeDraygoMath.CastSpectator
 
             if (ObsCameraState.lockEntity != null && m_specCam != null)
             {
+                // Use current spectator camera state
                 var reconstruct = m_specCam.Orientation;
                 reconstruct.Translation = m_specCam.Position;
                 ObsCameraState.localMatrix = WorldToLocalNI(reconstruct, ObsCameraState.lockEntity.WorldMatrixNormalizedInv);
@@ -961,31 +990,34 @@ namespace KlimeDraygoMath.CastSpectator
 
         private void UpdateMenu()
         {
-            LockTargetInput.Text = "Lock Target - " + m_Pref.ToggleLock.ToString();
-            NextModeInput.Text = "Next Mode - " + m_Pref.SwitchMode.ToString();
-            FindAndMoveInput.Text = "Find and Move - " + m_Pref.FindAndMove.ToString();
-            FindAndMoveSpinInput.Text = "Find and Move Spin - " + m_Pref.FindAndMoveSpin.ToString();
-            ModeFreeInput.Text = "Mode Free - " + m_Pref.FreeMode.ToString();
-            ModeFollowInput.Text = "Mode Follow - " + m_Pref.FollowMode.ToString();
-            ModeOrbitInput.Text = "Mode Orbit - " + m_Pref.OrbitMode.ToString();
-            ModeTrackInput.Text = "Mode Track - " + m_Pref.TrackMode.ToString();
+            if (TextHUD == null || !m_init) return; // Skip if HUD isn’t initialized
 
-            CameraSmoothKeybind.Text = "Toggle Smooth Camera - " + m_Pref.ToggleSmoothCamera.ToString();
-            CameraSmoothOnOff.Text = m_SmoothCamera ? "Smooth Camera On" : "Smooth Camera Off";
-            CameraSmoothRate.Text = string.Format("Camera Smooth Rate {0:N0}", SmoothSenseToValue(m_Pref.SmoothCameraLERP).ToString());
+            if (LockTargetInput != null) LockTargetInput.Text = "Lock Target - " + m_Pref.ToggleLock.ToString();
+            if (NextModeInput != null) NextModeInput.Text = "Next Mode - " + m_Pref.SwitchMode.ToString();
+            if (FindAndMoveInput != null) FindAndMoveInput.Text = "Find and Move - " + m_Pref.FindAndMove.ToString();
+            if (FindAndMoveSpinInput != null) FindAndMoveSpinInput.Text = "Find and Move Spin - " + m_Pref.FindAndMoveSpin.ToString();
+            if (ModeFreeInput != null) ModeFreeInput.Text = "Mode Free - " + m_Pref.FreeMode.ToString();
+            if (ModeFollowInput != null) ModeFollowInput.Text = "Mode Follow - " + m_Pref.FollowMode.ToString();
+            if (ModeOrbitInput != null) ModeOrbitInput.Text = "Mode Orbit - " + m_Pref.OrbitMode.ToString();
+            if (ModeTrackInput != null) ModeTrackInput.Text = "Mode Track - " + m_Pref.TrackMode.ToString();
 
-            CameraSmoothRate.InitialPercent = m_Pref.SmoothCameraLERP;
+            if (CameraSmoothKeybind != null) CameraSmoothKeybind.Text = "Toggle Smooth Camera - " + m_Pref.ToggleSmoothCamera.ToString();
+            if (CameraSmoothOnOff != null) CameraSmoothOnOff.Text = m_SmoothCamera ? "Smooth Camera On" : "Smooth Camera Off";
+            if (CameraSmoothRate != null)
+            {
+                CameraSmoothRate.Text = string.Format("Camera Smooth Rate {0:N0}", SmoothSenseToValue(m_Pref.SmoothCameraLERP));
+                CameraSmoothRate.InitialPercent = m_Pref.SmoothCameraLERP;
+            }
 
-            // Remove updates for Cycle Player Up and Cycle Player Down
-            // CyclePlayerUp.Text = "Cycle Player Up - " + m_Pref.CyclePlayerUp.ToString();
-            // CyclePlayerDown.Text = "Cycle Player Down - " + m_Pref.CyclePlayerDown.ToString();
+            if (PeriodicSwitchInput != null) PeriodicSwitchInput.Text = "Periodic Switch - " + m_Pref.PeriodicSwitch.ToString();
+            if (PeriodicSwitchIntervalSlider != null)
+            {
+                PeriodicSwitchIntervalSlider.Text = "Switch Interval: " + m_PeriodicSwitchInterval + "s";
+                PeriodicSwitchIntervalSlider.InitialPercent = m_PeriodicSwitchInterval / 30f;
+            }
+            if (PeriodicSwitchRandomToggle != null) PeriodicSwitchRandomToggle.Text = m_PeriodicSwitchRandom ? "Random Switch: On" : "Random Switch: Off";
 
-            PeriodicSwitchInput.Text = "Periodic Switch - " + m_Pref.PeriodicSwitch.ToString();
-            PeriodicSwitchIntervalSlider.Text = "Switch Interval: " + m_PeriodicSwitchInterval + "s";
-            PeriodicSwitchIntervalSlider.InitialPercent = m_PeriodicSwitchInterval / 30f;
-            PeriodicSwitchRandomToggle.Text = m_PeriodicSwitchRandom ? "Random Switch: On" : "Random Switch: Off";
-
-            HideHudOnOff.Text = m_Pref.HideHud ? "Hud Hidden" : "HUD Always Visible";
+            if (HideHudOnOff != null) HideHudOnOff.Text = m_Pref.HideHud ? "Hud Hidden" : "HUD Always Visible";
         }
 
         private void ToggleHideHud()
