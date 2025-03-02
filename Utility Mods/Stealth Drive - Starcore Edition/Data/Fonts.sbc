@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Fonts>
+
+        <Font>
+            <Id>
+                <TypeId>FontDefinition</TypeId>
+                <SubtypeId>StealthOrange</SubtypeId>
+            </Id>
+            <ColorMask>
+                <X>227</X>
+                <Y>69</Y>
+                <Z>0</Z>
+            </ColorMask>
+            <Resources>
+                <Resource Path="Fonts\white_shadow\FontDataPA.xml"/>
+            </Resources>
+            <LanguageSpecificDefinitions>
+                <LanguageDefinition Language="ChineseChina">
+                    <Resources>
+                        <Resource Path="Fonts\white_shadow\FontDataCH.xml"/>
+                    </Resources>
+                </LanguageDefinition>
+
+                <LanguageDefinition Language="Japanese">
+                    <Resources>
+                        <Resource Path="Fonts\white_shadow\FontDataJP.xml"/>
+                    </Resources>
+                </LanguageDefinition>
+            </LanguageSpecificDefinitions>
+        </Font>
+
+    </Fonts>
+</Definitions>
