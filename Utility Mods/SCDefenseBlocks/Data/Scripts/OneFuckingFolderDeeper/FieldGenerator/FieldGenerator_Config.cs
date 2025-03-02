@@ -34,6 +34,7 @@ namespace Starcore.FieldGenerator
         public float MinPowerDraw = 50.00f;
 
         public int MaxSiegeTime = 60;
+        public int MinSiegeTime = 15;
         public int SiegePowerDraw = 900;
         public float SiegeModeResistence = 0.9f;      
   
@@ -56,6 +57,7 @@ namespace Starcore.FieldGenerator
             MinPowerDraw = iniParser.Get(IniSection, nameof(MinPowerDraw)).ToSingle(MinPowerDraw);
 
             MaxSiegeTime = iniParser.Get(IniSection, nameof(MaxSiegeTime)).ToInt32(MaxSiegeTime);
+            MinSiegeTime = iniParser.Get(IniSection, nameof(MinSiegeTime)).ToInt32(MinSiegeTime);
             SiegePowerDraw = iniParser.Get(IniSection, nameof(SiegePowerDraw)).ToInt32(SiegePowerDraw);
             SiegeModeResistence = iniParser.Get(IniSection, nameof(SiegeModeResistence)).ToSingle(SiegeModeResistence);
 
