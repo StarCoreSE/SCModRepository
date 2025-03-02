@@ -800,7 +800,7 @@ namespace KlimeDraygoMath.CastSpectator
                     var moveRatio = (double)viewAnimFrame / maxViewAnimFrame;
                     var moveEaseRatio = OutQuint((float)moveRatio);
 
-                    var rotateRatio = (double)rotationAnimFrame/ maxRotationAnimFrame;
+                    var rotateRatio = (double)rotationAnimFrame / maxRotationAnimFrame;
                     var rotateEaseRatio = OutQuint((float)rotateRatio);
 
                     if (viewAnimFrame < maxViewAnimFrame + 1)
@@ -830,11 +830,41 @@ namespace KlimeDraygoMath.CastSpectator
 
                 if (complete)
                 {
+                    // Set final position and orientation
+                    m_specCam.Position = endPosition;
+                    var lerpedRotation = Math.PI; // Final rotation value
+                    MatrixD rotMat = MatrixD.CreateFromAxisAngle(origUp, lerpedRotation);
+                    var finalFor = Vector3D.Rotate(origFor, rotMat);
+                    m_specCam.SetTarget(m_specCam.Position + finalFor, m_specCam.Orientation.Up);
+
+                    // Lock onto the grid, preserving current mode
+                    if (ObsCameraState.lockEntity != null)
+                    {
+                        Clear(); // Clear previous lock
+                    }
                     SetTarget(moveGrid);
+                    ObsCameraState.islocked = true;
+
+                    // Update mode-specific state to match final position/orientation
+                    switch (ObsCameraState.lockmode)
+                    {
+                        case CameraMode.Free:
+                            freeModeMatrix = m_specCam.Orientation;
+                            freeModeMatrix.Translation = m_specCam.Position - moveGrid.WorldVolume.Center;
+                            freeModeInitialized = true;
+                            break;
+                        case CameraMode.Follow:
+                        case CameraMode.Orbit:
+                        case CameraMode.Track:
+                            MatrixD worldMatrix = m_specCam.Orientation;
+                            worldMatrix.Translation = m_specCam.Position;
+                            ObsCameraState.localMatrix = WorldToLocalNI(worldMatrix, moveGrid.WorldMatrixNormalizedInv);
+                            break;
+                    }
+
                     m_FindAndMoveState = FindAndMoveState.GoToIdle;
                 }
             }
-
             if (m_FindAndMoveState == FindAndMoveState.GoToIdle)
             {
                 moveGrid = null; // Clear animation state
