@@ -245,6 +245,7 @@ namespace KlimeDraygoMath.CastSpectator
                     {
                         case CameraMode.Free:
                             ObsCameraState.lockmode = CameraMode.Follow;
+                            InitializeFollowFromFree(); // Preserve Free mode state
                             break;
                         case CameraMode.Follow:
                             ObsCameraState.lockmode = CameraMode.Orbit;
@@ -255,6 +256,7 @@ namespace KlimeDraygoMath.CastSpectator
                             break;
                         case CameraMode.Track:
                             ObsCameraState.lockmode = CameraMode.Free;
+                            InitializeFreeMode();
                             break;
                     }
                 }
@@ -267,21 +269,15 @@ namespace KlimeDraygoMath.CastSpectator
                 if (m_Pref.FreeMode.IsKeybindPressed())
                 {
                     ObsCameraState.lockmode = CameraMode.Free;
-                    if (ObsCameraState.lockEntity != null)
-                    {
-                        Vector3D targetPos = ObsCameraState.lockEntity.WorldVolume.Center;
-                        // Compute the offset from the target.
-                        Vector3D offset = m_specCam.Position - targetPos;
-                        // Use the current camera orientation, but zero out its translation.
-                        MatrixD currentOrientation = m_specCam.Orientation;
-                        currentOrientation.Translation = offset;
-                        freeModeMatrix = currentOrientation;
-                        freeModeInitialized = true;
-                    }
+                    InitializeFreeMode();
                 }
 
                 if (m_Pref.FollowMode.IsKeybindPressed())
                 {
+                    if (ObsCameraState.lockmode == CameraMode.Free)
+                    {
+                        InitializeFollowFromFree();
+                    }
                     ObsCameraState.lockmode = CameraMode.Follow;
                 }
 
@@ -548,24 +544,18 @@ namespace KlimeDraygoMath.CastSpectator
                 {
                     case CameraMode.Free:
                     {
-                        if (!freeModeInitialized && ObsCameraState.lockEntity != null)
+                        if (!freeModeInitialized)
                         {
-                            // Fallback initialization if needed:
-                            Vector3D targetPos = ObsCameraState.lockEntity.WorldVolume.Center;
-                            Vector3D offset = m_specCam.Position - targetPos;
-                            MatrixD currentOrientation = m_specCam.Orientation;
-                            currentOrientation.Translation = offset;
-                            freeModeMatrix = currentOrientation;
-                            freeModeInitialized = true;
+                            InitializeFreeMode();
                         }
 
-                        // Update freeModeMatrix translation with smoothed movement:
+                        // Apply smoothed movement
                         Vector3D freeMovement = mi.X * freeModeMatrix.Right
                                                 + mi.Y * freeModeMatrix.Up
                                                 + mi.Z * freeModeMatrix.Backward;
                         freeModeMatrix.Translation += freeMovement;
 
-                        // Update freeModeMatrix rotation with smoothed mouse input:
+                        // Apply smoothed rotation
                         if (mouse.Y != 0)
                         {
                             Vector3D newRight, newForward;
@@ -588,25 +578,34 @@ namespace KlimeDraygoMath.CastSpectator
                             freeModeMatrix.Right = newRight;
                         }
 
-                        // Compute camera position as target's center + stored free-mode offset.
-                        Vector3D targetCenter = ObsCameraState.lockEntity.WorldVolume.Center;
-                        m_specCam.Position = targetCenter + freeModeMatrix.Translation;
-                        // Use freeModeMatrix rotation for the view.
+                        // Set camera position and orientation
+                        Vector3D basePos = ObsCameraState.lockEntity?.WorldVolume.Center ?? Vector3D.Zero;
+                        m_specCam.Position = basePos + freeModeMatrix.Translation;
                         m_specCam.SetTarget(m_specCam.Position + freeModeMatrix.Forward, freeModeMatrix.Up);
                     }
                         break;
 
                     case CameraMode.Follow:
-                        Vector3D WorldMoveFollow = mi.X * ObsCameraState.localMatrix.Right
-                            + mi.Y * ObsCameraState.localMatrix.Up
-                            + mi.Z * ObsCameraState.localMatrix.Backward;
-                        var move = ObsCameraState.localMatrix.Translation + WorldMoveFollow;
-                        ObsCameraState.localMatrix.Translation = move;
-                        var fworldmatrix = ObsCameraState.lockEntity.WorldMatrix;
-                        var targetm = LocalToWorld(ObsCameraState.localMatrix, fworldmatrix);
-                        m_specCam.Position = targetm.Translation;
-                        m_specCam.SetTarget(m_specCam.Position + targetm.Forward, targetm.Up);
+                        {
+                            if (ObsCameraState.localMatrix == MatrixD.Identity && ObsCameraState.lockEntity != null)
+                            {
+                                // Fallback initialization if localMatrix wasn’t set (e.g., no prior mode)
+                                Vector3D offset = m_specCam.Position - ObsCameraState.lockEntity.WorldVolume.Center;
+                                MatrixD worldMatrix = m_specCam.Orientation;
+                                worldMatrix.Translation = offset;
+                                ObsCameraState.localMatrix = WorldToLocalNI(worldMatrix, ObsCameraState.lockEntity.WorldMatrixNormalizedInv);
+                            }
 
+                            Vector3D WorldMoveFollow = mi.X * ObsCameraState.localMatrix.Right
+                                + mi.Y * ObsCameraState.localMatrix.Up
+                                + mi.Z * ObsCameraState.localMatrix.Backward;
+                            var move = ObsCameraState.localMatrix.Translation + WorldMoveFollow;
+                            ObsCameraState.localMatrix.Translation = move;
+                            var fworldmatrix = ObsCameraState.lockEntity.WorldMatrix;
+                            var targetm = LocalToWorld(ObsCameraState.localMatrix, fworldmatrix);
+                            m_specCam.Position = targetm.Translation;
+                            m_specCam.SetTarget(m_specCam.Position + targetm.Forward, targetm.Up);
+                        }
                         break;
                     case CameraMode.Orbit:
                         var lookAt = ObsCameraState.lockEntity.WorldVolume.Center;
@@ -1205,18 +1204,37 @@ namespace KlimeDraygoMath.CastSpectator
             return local * worldMatrix;
         }
 
-        private void InitFreeMode()
+        private void InitializeFreeMode()
         {
-            if (m_playerCamera != null && ObsCameraState.lockEntity != null)
+            if (m_specCam != null)
             {
-                // Capture the current camera orientation (without translation)
-                MatrixD currentOrientation = m_specCam.Orientation;
-                currentOrientation.Translation = Vector3D.Zero;
-                // Calculate the offset from the target's center
-                Vector3D offset = m_specCam.Position - ObsCameraState.lockEntity.WorldVolume.Center;
-                // Set the free mode state to start from the current camera state
-                ObsCameraState.localMatrix = currentOrientation;
-                ObsCameraState.localMatrix.Translation = offset;
+                // Capture current orientation (rotation only)
+                freeModeMatrix = m_specCam.Orientation;
+                // Set translation as offset from target (if locked) or absolute position
+                if (ObsCameraState.lockEntity != null)
+                {
+                    Vector3D targetPos = ObsCameraState.lockEntity.WorldVolume.Center;
+                    freeModeMatrix.Translation = m_specCam.Position - targetPos;
+                }
+                else
+                {
+                    freeModeMatrix.Translation = m_specCam.Position; // Absolute position if no target
+                }
+                freeModeInitialized = true;
+            }
+        }
+
+        private void InitializeFollowFromFree()
+        {
+            if (m_specCam != null && ObsCameraState.lockEntity != null)
+            {
+                // Convert freeModeMatrix (world relative to target) to localMatrix (relative to entity's world matrix)
+                Vector3D worldPosition = ObsCameraState.lockEntity.WorldVolume.Center + freeModeMatrix.Translation;
+                MatrixD worldMatrix = freeModeMatrix;
+                worldMatrix.Translation = worldPosition;
+                ObsCameraState.localMatrix = WorldToLocalNI(worldMatrix, ObsCameraState.lockEntity.WorldMatrixNormalizedInv);
+                // Reset free mode state
+                freeModeInitialized = false;
             }
         }
 
