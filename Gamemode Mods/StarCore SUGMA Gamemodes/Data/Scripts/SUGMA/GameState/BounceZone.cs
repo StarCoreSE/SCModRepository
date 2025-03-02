@@ -20,7 +20,6 @@ namespace SC.SUGMA.GameState
         private int _ticks;
         private int _fastStart;
 
-        private readonly HashSet<Type> _skipEntityTypes = new HashSet<Type> { /* Add pre-ignored Types Here */ };
         private readonly List <MyEntity> _managedEntities = new List<MyEntity>(1000);
 
         private readonly BoxDrawing _sphereDraw;
@@ -81,17 +80,13 @@ namespace SC.SUGMA.GameState
             Type entType = ent.GetType();
 
             // Fast check against cache
-            if (_skipEntityTypes.Contains(entType) || ent.MarkedForClose || ent.IsPreview || ent.Physics == null || ent.Physics.IsPhantom || !ent.InScene)
-            {
+            if (ent.MarkedForClose || ent.IsPreview || ent.Physics == null || ent.Physics.IsPhantom || !ent.InScene)
                 return false;
-            }
 
             var grid = ent as MyCubeGrid;
             var player = ent as IMyCharacter;
             if (grid == null && player == null)
             {
-                // Cache this type for future fast checks
-                _skipEntityTypes.Add(entType);
                 return false;
             }
 
