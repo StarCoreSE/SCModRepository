@@ -471,7 +471,7 @@ namespace Starcore.FieldGenerator
 
             SiegeBlockEnabler(Block.CubeGrid.GetFatBlocks<IMyFunctionalBlock>(), true);
 
-            SiegeCooldownTime.Value = (SiegeElapsedTime.Value > 5) ? (SiegeElapsedTime.Value * 2) : 5;
+            SiegeCooldownTime.Value = (SiegeElapsedTime.Value > Config.MinSiegeTime) ? (SiegeElapsedTime.Value * 2) : Config.MinSiegeTime;
             SiegeElapsedTime.Value = 0;
             SiegeCooldownActive.Value = true;
         }
