@@ -739,7 +739,7 @@ namespace KlimeDraygoMath.CastSpectator
                     var realRatio = (double)viewAnimFrame / maxViewAnimFrame;
                     var easingRatio = OutQuint((float)realRatio);
                     m_specCam.Position = Vector3D.Lerp(origStart, endPosition, easingRatio);
-                    m_specCam.SetTarget(focusCentralPosition, m_specCam.Orientation.Up);
+                    // Remove SetTarget during animation to preserve orientation
                     viewAnimFrame += 1;
                 }
                 else
@@ -749,12 +749,10 @@ namespace KlimeDraygoMath.CastSpectator
 
                 if (complete)
                 {
-                    // Set final animation position and orientation
+                    // Set final animation position, keep existing orientation
                     m_specCam.Position = endPosition;
-                    Vector3D targetPos = moveGrid.WorldVolume.Center;
-                    m_specCam.SetTarget(targetPos, m_specCam.Orientation.Up);
 
-                    // Lock onto the grid
+                    // Lock onto the grid, preserving current mode and orientation
                     if (ObsCameraState.lockEntity != null)
                     {
                         Clear(); // Clear previous lock
@@ -762,18 +760,18 @@ namespace KlimeDraygoMath.CastSpectator
                     SetTarget(moveGrid);
                     ObsCameraState.islocked = true;
 
-                    // Update mode-specific state to match final position/orientation
+                    // Update mode-specific state with current orientation
                     switch (ObsCameraState.lockmode)
                     {
                         case CameraMode.Free:
-                            freeModeMatrix = m_specCam.Orientation;
+                            freeModeMatrix = m_specCam.Orientation; // Use current orientation
                             freeModeMatrix.Translation = m_specCam.Position - moveGrid.WorldVolume.Center;
                             freeModeInitialized = true;
                             break;
                         case CameraMode.Follow:
                         case CameraMode.Orbit:
                         case CameraMode.Track:
-                            MatrixD worldMatrix = m_specCam.Orientation;
+                            MatrixD worldMatrix = m_specCam.Orientation; // Preserve current orientation
                             worldMatrix.Translation = m_specCam.Position;
                             ObsCameraState.localMatrix = WorldToLocalNI(worldMatrix, moveGrid.WorldMatrixNormalizedInv);
                             break;
@@ -813,7 +811,7 @@ namespace KlimeDraygoMath.CastSpectator
                         var lerpedRotation = MathHelper.Lerp(0, Math.PI, rotateEaseRatio);
                         MatrixD rotMat = MatrixD.CreateFromAxisAngle(origUp, lerpedRotation);
                         var finalFor = Vector3D.Rotate(origFor, rotMat);
-                        m_specCam.SetTarget(m_specCam.Position + finalFor, m_specCam.Orientation.Up);
+                        m_specCam.SetTarget(m_specCam.Position + finalFor, m_specCam.Orientation.Up); // Keep spin animation
                     }
 
                     if (moveRatio > 0.1)
@@ -830,14 +828,10 @@ namespace KlimeDraygoMath.CastSpectator
 
                 if (complete)
                 {
-                    // Set final position and orientation
+                    // Set final position, preserve orientation with spin applied
                     m_specCam.Position = endPosition;
-                    var lerpedRotation = Math.PI; // Final rotation value
-                    MatrixD rotMat = MatrixD.CreateFromAxisAngle(origUp, lerpedRotation);
-                    var finalFor = Vector3D.Rotate(origFor, rotMat);
-                    m_specCam.SetTarget(m_specCam.Position + finalFor, m_specCam.Orientation.Up);
 
-                    // Lock onto the grid, preserving current mode
+                    // Lock onto the grid, preserving current mode and orientation
                     if (ObsCameraState.lockEntity != null)
                     {
                         Clear(); // Clear previous lock
@@ -845,18 +839,18 @@ namespace KlimeDraygoMath.CastSpectator
                     SetTarget(moveGrid);
                     ObsCameraState.islocked = true;
 
-                    // Update mode-specific state to match final position/orientation
+                    // Update mode-specific state with current orientation
                     switch (ObsCameraState.lockmode)
                     {
                         case CameraMode.Free:
-                            freeModeMatrix = m_specCam.Orientation;
+                            freeModeMatrix = m_specCam.Orientation; // Use current orientation (post-spin)
                             freeModeMatrix.Translation = m_specCam.Position - moveGrid.WorldVolume.Center;
                             freeModeInitialized = true;
                             break;
                         case CameraMode.Follow:
                         case CameraMode.Orbit:
                         case CameraMode.Track:
-                            MatrixD worldMatrix = m_specCam.Orientation;
+                            MatrixD worldMatrix = m_specCam.Orientation; // Preserve current orientation (post-spin)
                             worldMatrix.Translation = m_specCam.Position;
                             ObsCameraState.localMatrix = WorldToLocalNI(worldMatrix, moveGrid.WorldMatrixNormalizedInv);
                             break;
