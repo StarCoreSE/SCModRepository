@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <!--
+  Usage:
+  
+  All entity component definitions (not components used in assemblers in game) have base class MyComponentDefinitionBase.
+  
+  You can define default definition for all components of same type, if you ommit the SubtypeId:
+  
+  <EntityComponents>
+    <EntityComponent xsi:type="MyObjectBuilder_CraftingComponentBlockDefinition">
+      <Id>
+        <TypeId>MyObjectBuilder_CraftingComponentBlock</TypeId>        
+      </Id>      
+    </EntityComponent>
+  </EntityComponents>
+  
+  You need to define type of the definition for deserializer - xsi:type="MyObjectBuilder_CraftingComponentBlockDefinition"
+  
+  When container on init of the components will look for component definition, it will first look for the same SubtypeId,
+  when it's not found, it will look for the definition with empty SubtypeId, if it doesn't find either, it will not call 
+  Init(MyComponentDefinitionBase definition) on component. If definition is found, it will pass the definition and call that method.
+  
+  See EntityContainers.sbc for defining default components in containers.
+
+  To enable the MyModStorageComponent and allow mods to save custom data to entities, add a entry like the following
+  and list all the custom GUIDs the mod uses for the dictionary keys.
+
+  <EntityComponents>
+    <EntityComponent xsi:type="MyObjectBuilder_ModStorageComponentDefinition">
+      <Id>
+        <TypeId>ModStorageComponent</TypeId>
+        <SubtypeId>ModName</SubtypeId>
+      </Id>
+      <RegisteredStorageGuids>
+        <guid>00000000-0000-0000-0000-000000000000</guid>
+      </RegisteredStorageGuids>
+    </EntityComponent>
+  </EntityComponents>
+
+  -->
+    <EntityComponents>
+		<EntityComponent xsi:type="MyObjectBuilder_BasicMissionFollowHomeDefinition">
+            <Id>
+                <TypeId>BasicMissionFollowHome</TypeId>
+                <SubtypeId>BasicMissionBlock</SubtypeId>
+            </Id>
+            <UniqueSelectionId>2</UniqueSelectionId>
+            <MinimalMinRange>0</MinimalMinRange>
+            <MaximalMinRange>19990</MaximalMinRange>
+            <DefaultMinRange>0</DefaultMinRange>
+            <MinimalMaxRange>1</MinimalMaxRange>
+            <MaximalMaxRange>20000</MaximalMaxRange> 
+            <DefaultMaxRange>1000</DefaultMaxRange>
+        </EntityComponent>
+        <EntityComponent xsi:type="MyObjectBuilder_EventDistanceToLockedTargetDefinition">
+            <Id>
+                <TypeId>EventDistanceToLockedTarget</TypeId>
+                <Subtypeid>EventControllerBlockComponent</Subtypeid>
+            </Id>
+            <UniqueSelectionId>22</UniqueSelectionId>
+            <MaxDistance>25000</MaxDistance>
+            <DefaultDistance>25000</DefaultDistance>
+        </EntityComponent>
+
+        <EntityComponent xsi:type="MyObjectBuilder_OffensiveCombatCircleOrbitDefinition">
+            <Id>
+                <TypeId>OffensiveCombatCircleOrbit</TypeId>
+                <SubtypeId>OffensiveCombatBlock</SubtypeId>
+            </Id>
+            <UniqueSelectionId>0</UniqueSelectionId>
+            <MinimalCircleOrbitDistance>100</MinimalCircleOrbitDistance>
+            <MaximalCircleOrbitDistance>20000</MaximalCircleOrbitDistance>
+            <AngleAllowedToShoot>2</AngleAllowedToShoot>
+        </EntityComponent>
+        <EntityComponent xsi:type="MyObjectBuilder_OffensiveCombatHitAndRunDefinition">
+            <Id>
+                <TypeId>OffensiveCombatHitAndRun</TypeId>
+                <SubtypeId>OffensiveCombatBlock</SubtypeId>
+            </Id>
+            <DefaultBreakOffDistance>5000</DefaultBreakOffDistance>
+            <DefaultRetreatDistance>10000</DefaultRetreatDistance>
+            <AngleAllowedToShoot>2</AngleAllowedToShoot>
+            <DefaultRetreatAngle>90</DefaultRetreatAngle>
+            <UniqueSelectionId>2</UniqueSelectionId>
+        </EntityComponent>
+        <EntityComponent xsi:type="MyObjectBuilder_OffensiveCombatInterceptDefinition">
+            <Id>
+                <TypeId>OffensiveCombatIntercept</TypeId>
+                <SubtypeId>OffensiveCombatBlock</SubtypeId>
+            </Id>
+            <UniqueSelectionId>3</UniqueSelectionId>
+        </EntityComponent>
+        <EntityComponent xsi:type="MyObjectBuilder_OffensiveCombatStayAtRangeDefinition">
+            <Id>
+                <TypeId>OffensiveCombatStayAtRange</TypeId>
+                <SubtypeId>OffensiveCombatBlock</SubtypeId>
+            </Id>
+            <AngleAllowedToShoot>2</AngleAllowedToShoot>
+            <UniqueSelectionId>1</UniqueSelectionId>
+        </EntityComponent>
+
+        <EntityComponent xsi:type="MyObjectBuilder_SearchEnemyComponentDefinition">
+            <Id>
+                <TypeId>SearchEnemyComponent</TypeId>
+                <SubtypeId>DefaultEnemySearch</SubtypeId>
+            </Id>
+            <SearchRadius>20000</SearchRadius>
+        </EntityComponent>
+    </EntityComponents>
+</Definitions>
