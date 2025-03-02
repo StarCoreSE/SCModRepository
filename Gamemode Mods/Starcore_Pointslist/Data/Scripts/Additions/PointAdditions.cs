@@ -159,13 +159,18 @@ namespace ShipPoints
 
             ["S_Armored_Laser_Block"] = 120,
             ["S_Chem_Laser_Block"] = 120,
+            ["ScathisM77"] = 150,
             ["Impulse_Torch"] = 175,
             ["Flechette_DoubleBarrel"] = 200,
-            ["Nariman_Dart_Turret"] = 225,
+            ["Nariman_Dart_Turret"] = 245,
             ["Counter_Battery"] = 250,
-            ["SolHyp_ArcStrike_Torp"] = 275,
+            ["ArcStrike_Torp_Launcher"] = 275,
+            ["Meson3_Turret"] = 300,
+            ["Meson5_Turret"] = 600,
+            ["PSP"] = 500,
             ["MagnaPulse_Gen"] = 400,
             ["SolHyp_Magnetic_Coilgun"] = 450,
+            ["WCSentry_Hangar"] = 1000,
 
 
 
@@ -762,6 +767,9 @@ namespace ShipPoints
             ["Caster_Reactor"] = 125,
             ["Heat_Heatsink"] = 10,
             ["Heat_FlatRadiator"] = 10,
+			["ActiveRadiator"] = 250,
+			["RadiatorPanel"] = 5,
+			["ExtendableRadiatorBase"] = 5,
             #endregion
         };
 

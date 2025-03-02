@@ -14,7 +14,7 @@ using IMySlimBlock = VRage.Game.ModAPI.IMySlimBlock;
 
 namespace TIOSelfRepair 
 {
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_ConveyorSorter), false, "ACTIVE_BLASTPLATE", "GIGA_BLASTPLATE" )]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_ConveyorSorter), false, "ACTIVE_BLASTPLATE", "Nariman_Dart_Turret", "GIGA_BLASTPLATE" )]
     public class TIOSelfRepair : MyGameLogicComponent
     {
         private IMyConveyorSorter artilleryBlock; //gosh i hope this doesnt conflict with the script in TIO
