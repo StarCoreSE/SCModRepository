@@ -542,7 +542,7 @@
 			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
 			<EdgeType>Light</EdgeType>
-			<BuildTimeSeconds>30</BuildTimeSeconds>
+			<BuildTimeSeconds>240</BuildTimeSeconds>
 			<InventoryMaxVolume>1</InventoryMaxVolume>
 			<DamageEffectId>213</DamageEffectId>
 			<AiEnabled>false</AiEnabled>
