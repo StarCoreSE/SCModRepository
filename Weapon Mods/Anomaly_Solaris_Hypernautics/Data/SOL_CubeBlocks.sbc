@@ -47,15 +47,17 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>Flechette_DoubleBarrel</SubtypeId>
 			</Id>
-			<DisplayName>[SOL] Flechette Shotgun</DisplayName>
+			<DisplayName>[SOL] Gewehr Flechette Shotgun</DisplayName>
 			<Description>
-				Two shotguns duct taped together, with two ammo's.
-				Buckshot:
-				[Range: 2km technically]
+				Dual shotgun with two flechette ammos.
+				[Range: 3.5km]
 				[Damage: Kinetic]
 				[Reload Time: 4 seconds]
+				Proximity Scattershot:
+				[MinRange: 1km]
+				[ProxRange: 0.5km]
 				Smart Flak:
-				[Homing and AMS]
+				[Homing]
 			</Description>
 			<Icon>Textures\GUI\Icons\FlakShotgun.dds</Icon>
 			<CubeSize>Large</CubeSize>
@@ -540,7 +542,7 @@
 			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
 			<EdgeType>Light</EdgeType>
-			<BuildTimeSeconds>30</BuildTimeSeconds>
+			<BuildTimeSeconds>240</BuildTimeSeconds>
 			<InventoryMaxVolume>1</InventoryMaxVolume>
 			<DamageEffectId>213</DamageEffectId>
 			<AiEnabled>false</AiEnabled>

@@ -88,7 +88,7 @@ namespace Scripts {
                     MinElevation = 0,
                     MaxElevation = 0,
                     HomeAzimuth = 0, // Default resting rotation angle
-                    HomeElevation = 15, // Default resting elevation
+                    HomeElevation = 0, // Default resting elevation
                     InventorySize = 1f, // Inventory capacity in kL.
                     IdlePower = 0.25f, // Constant base power draw in MW.
                     FixedOffset = false, // Deprecated.
