@@ -311,7 +311,7 @@ namespace Scripts
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
-                            Scale = 0.25f,
+                            Scale = 0.15f,
                         },
                     },
                     Hit = new ParticleDef
@@ -319,7 +319,7 @@ namespace Scripts
                         Name = "",//ARROWFLAREDEATH   ARROWNUKE
                         ApplyToShield = true,
 
-                        Color = Color(red: 3, green: 1f, blue: 1.9f, alpha: 1),
+                        Color = Color(red: 3, green: 1f, blue: 1.9f, alpha: 0.4f),
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
