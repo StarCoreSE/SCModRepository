@@ -351,6 +351,14 @@ namespace StarCore.ShareTrack.ShipTracking
                     camera.WorldMatrix.Forward);
 
                 var stealthed = ((uint)Grid.Flags & 0x1000000) > 0;
+
+                if (MasterSession.I.StealthApi?.IsReady ?? false)
+                {
+                    var mainStealthDrive = MasterSession.I.StealthApi.GetMainDrive(Grid);
+                    if (mainStealthDrive != null)
+                        stealthed |= MasterSession.I.StealthApi.GetStatus(mainStealthDrive) == 1;
+                }
+
                 var visible = !(newOrigin.X > 1 || newOrigin.X < -1 || newOrigin.Y > 1 || newOrigin.Y < -1) &&
                               angle <= fov && !stealthed;
 
