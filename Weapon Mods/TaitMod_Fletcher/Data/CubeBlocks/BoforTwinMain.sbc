@@ -28,6 +28,7 @@
 				<Component Subtype="SteelPlate" Count="15" />
 			</Components>
 			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<BuildTimeSeconds>15</BuildTimeSeconds>
 			<MountPoints>
 				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" Enabled="false"/>
 				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" Enabled="false"/>
