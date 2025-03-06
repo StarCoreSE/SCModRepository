@@ -10,6 +10,7 @@ using SC.SUGMA.Commands;
 using SC.SUGMA.GameModes.Domination;
 using SC.SUGMA.GameModes.Elimination;
 using SC.SUGMA.GameModes.TeamDeathmatch;
+using SC.SUGMA.GameModes.KOTH;
 using SC.SUGMA.GameState;
 using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
@@ -33,6 +34,7 @@ namespace SC.SUGMA
             ["elm"] = new EliminationGamemode(),
             ["dom"] = new DominationGamemode(),
             ["tdm"] = new TeamDeathmatchGamemode(),
+            ["koth"] = new KOTHGamemode(),
         };
 
         /// <summary>

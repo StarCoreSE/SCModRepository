@@ -13,6 +13,11 @@ namespace StarCore.ShareTrack.ShipTracking
 {
     internal class GridStats // TODO convert this to be event-driven. OnBlockPlace, etc. Keep a queue.
     {
+		private readonly string[] _ignoredIntegrityBlocks = new[]
+		{
+			"SC_SRB"
+		};
+		
         private readonly HashSet<IMyCubeBlock> _fatBlocks = new HashSet<IMyCubeBlock>();
 
         private readonly HashSet<IMySlimBlock> _slimBlocks;
@@ -38,7 +43,7 @@ namespace StarCore.ShareTrack.ShipTracking
 
             foreach (var block in _slimBlocks)
             {
-                if (block?.FatBlock != null)
+                if (block?.FatBlock != null && !_ignoredIntegrityBlocks.Contains(block.BlockDefinition.Id.SubtypeName))
                 {
                     _fatBlocks.Add(block.FatBlock);
                     GridIntegrity += block.Integrity;
@@ -72,11 +77,11 @@ namespace StarCore.ShareTrack.ShipTracking
                 {
                     float tempGridInteg = 0;
 
-                    foreach (var block in _slimBlocks)
+                    foreach (var block in _fatBlocks)
                     {
-                        if (block.FatBlock != null) // Remove To Count All Blocks
+                        if (block != null && !_ignoredIntegrityBlocks.Contains(block.BlockDefinition.SubtypeName)) // Remove To Count All Blocks
                         {
-                            tempGridInteg += block.Integrity;
+                            tempGridInteg += block.SlimBlock.Integrity;
                         }
                     }
 

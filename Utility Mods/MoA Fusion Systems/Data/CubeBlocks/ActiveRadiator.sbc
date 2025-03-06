@@ -35,6 +35,7 @@
 				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
 				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="5.00" EndY="5.00"/>
 			</MountPoints>
+			<MirroringY>X</MirroringY>
 		</Definition>
 	</CubeBlocks>
 </Definitions>
