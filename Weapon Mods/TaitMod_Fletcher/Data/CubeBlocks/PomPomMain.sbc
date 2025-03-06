@@ -31,6 +31,7 @@
 			<MountPoints>
 				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" Default="true"/>
 			</MountPoints>
+			<BuildTimeSeconds>15</BuildTimeSeconds>
 			<BlockPairName>PomPomMain</BlockPairName>
 			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>

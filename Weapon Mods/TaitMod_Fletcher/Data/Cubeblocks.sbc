@@ -774,7 +774,7 @@
       <MirroringY>Z</MirroringY>
       <MirroringZ>Y</MirroringZ>
       <EdgeType>Light</EdgeType>
-      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <BuildTimeSeconds>150</BuildTimeSeconds>
       <OverlayTexture>Textures\GUI\HUD\USAASight.dds</OverlayTexture>
       <WeaponDefinitionId Subtype="127mmMk32" />
       <InventoryMaxVolume>300</InventoryMaxVolume>
@@ -827,7 +827,7 @@
         <Component Subtype="Motor" Count="100" />
         <Component Subtype="Computer" Count="100" />
         <Component Subtype="Construction" Count="200" />
-		<Component Subtype="MetalGrid" Count="200" />
+		    <Component Subtype="MetalGrid" Count="200" />
         <Component Subtype="SteelPlate" Count="1600" />
       </Components>
       <CriticalComponent Subtype="Motor" Index="0" />
@@ -850,7 +850,7 @@
       <MirroringY>Z</MirroringY>
       <MirroringZ>Y</MirroringZ>
       <EdgeType>Light</EdgeType>
-      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <BuildTimeSeconds>150</BuildTimeSeconds>
       <OverlayTexture>Textures\GUI\HUD\USAASight.dds</OverlayTexture>
       <WeaponDefinitionId Subtype="127mmMk12" />
       <InventoryMaxVolume>200</InventoryMaxVolume>
@@ -931,7 +931,7 @@
       <MirroringY>Z</MirroringY>
       <MirroringZ>Y</MirroringZ>
       <EdgeType>Light</EdgeType>
-      <BuildTimeSeconds>30</BuildTimeSeconds>
+      <BuildTimeSeconds>150</BuildTimeSeconds>
       <OverlayTexture>Textures\GUI\HUD\USAASight.dds</OverlayTexture>
       <WeaponDefinitionId Subtype="127mmMk24" />
       <InventoryMaxVolume>120</InventoryMaxVolume>
@@ -1008,7 +1008,7 @@
       <MirroringY>Z</MirroringY>
       <MirroringZ>Y</MirroringZ>
       <EdgeType>Light</EdgeType>
-      <BuildTimeSeconds>40</BuildTimeSeconds>
+      <BuildTimeSeconds>150</BuildTimeSeconds>
       <OverlayTexture>Textures\GUI\HUD\USGunsight.dds</OverlayTexture>
       <WeaponDefinitionId Subtype="6InchTriple" />
       <InventoryMaxVolume>100</InventoryMaxVolume>
@@ -1084,7 +1084,7 @@
       <MirroringY>Z</MirroringY>
       <MirroringZ>Y</MirroringZ>
       <EdgeType>Light</EdgeType>
-      <BuildTimeSeconds>120</BuildTimeSeconds>
+      <BuildTimeSeconds>250</BuildTimeSeconds>
       <OverlayTexture>Textures\GUI\HUD\USGunsight.dds</OverlayTexture>
       <WeaponDefinitionId Subtype="16InchTriple" />
       <InventoryMaxVolume>100</InventoryMaxVolume>
@@ -1168,7 +1168,7 @@
       <MirroringY>Z</MirroringY>
       <MirroringZ>Y</MirroringZ>
       <EdgeType>Light</EdgeType>
-      <BuildTimeSeconds>120</BuildTimeSeconds>
+      <BuildTimeSeconds>250</BuildTimeSeconds>
       <OverlayTexture>Textures\GUI\HUD\GermanTankSight.dds</OverlayTexture>
       <WeaponDefinitionId Subtype="381mmDualR" />
       <InventoryMaxVolume>100</InventoryMaxVolume>
@@ -1244,7 +1244,7 @@
       <MirroringY>Z</MirroringY>
       <MirroringZ>Y</MirroringZ>
       <EdgeType>Light</EdgeType>
-      <BuildTimeSeconds>120</BuildTimeSeconds>
+      <BuildTimeSeconds>250</BuildTimeSeconds>
       <OverlayTexture>Textures\GUI\HUD\GermanTankSight.dds</OverlayTexture>
       <WeaponDefinitionId Subtype="381mmDualNR" />
       <InventoryMaxVolume>100</InventoryMaxVolume>
@@ -1466,7 +1466,7 @@
       <MirroringY>Z</MirroringY>
       <MirroringZ>Y</MirroringZ>
       <EdgeType>Light</EdgeType>
-      <BuildTimeSeconds>120</BuildTimeSeconds>
+      <BuildTimeSeconds>250</BuildTimeSeconds>
       <OverlayTexture>Textures\GUI\HUD\GermanTankSight.dds</OverlayTexture>
       <WeaponDefinitionId Subtype="380mmMLE1935" />
       <InventoryMaxVolume>100</InventoryMaxVolume>

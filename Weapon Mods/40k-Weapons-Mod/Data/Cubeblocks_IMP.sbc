@@ -157,7 +157,7 @@
       </BuildProgressModels>
       <BlockPairName>Macro</BlockPairName>
       <EdgeType>Light</EdgeType>
-      <BuildTimeSeconds>120</BuildTimeSeconds>
+      <BuildTimeSeconds>150</BuildTimeSeconds>
       <WeaponDefinitionId Subtype="HeavyBolterLargeSponson" />
       <MountPoints>
         <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0" PropertiesMask="2" />
@@ -216,7 +216,7 @@
       </BuildProgressModels>
       <BlockPairName>HeavyMacro</BlockPairName>
       <EdgeType>Light</EdgeType>
-      <BuildTimeSeconds>180</BuildTimeSeconds>
+      <BuildTimeSeconds>240</BuildTimeSeconds>
       <WeaponDefinitionId Subtype="HeavyBolterLargeSponson" />
       <MountPoints>
         <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="5.0" EndY="5.0" PropertiesMask="2" />
@@ -331,7 +331,7 @@
       </BuildProgressModels>
       <BlockPairName>Lance</BlockPairName>
       <EdgeType>Light</EdgeType>
-      <BuildTimeSeconds>120</BuildTimeSeconds>
+      <BuildTimeSeconds>210</BuildTimeSeconds>
       <WeaponDefinitionId Subtype="HeavyBolterLargeSponson" />
       <MountPoints>
         <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="5.0" EndY="1.0" PropertiesMask="2" />
@@ -387,7 +387,7 @@
       </BuildProgressModels>
       <BlockPairName>LightLance</BlockPairName>
       <EdgeType>Light</EdgeType>
-      <BuildTimeSeconds>100</BuildTimeSeconds>
+      <BuildTimeSeconds>180</BuildTimeSeconds>
       <WeaponDefinitionId Subtype="HeavyBolterLargeSponson" />
       <MountPoints>
         <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0" PropertiesMask="2" />
@@ -443,7 +443,7 @@
       </BuildProgressModels>
       <BlockPairName>HeavyLance</BlockPairName>
       <EdgeType>Light</EdgeType>
-      <BuildTimeSeconds>140</BuildTimeSeconds>
+      <BuildTimeSeconds>300</BuildTimeSeconds>
       <WeaponDefinitionId Subtype="HeavyBolterLargeSponson" />
       <MountPoints>
         <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="7.0" EndY="1.0" PropertiesMask="2" />
@@ -669,7 +669,7 @@
       </BuildProgressModels>
       <BlockPairName>Aegis</BlockPairName>
       <EdgeType>Light</EdgeType>
-      <BuildTimeSeconds>30</BuildTimeSeconds>
+      <BuildTimeSeconds>40</BuildTimeSeconds>
       <WeaponDefinitionId Subtype="HeavyBolterLargeSponson" />
       <MountPoints>
         <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0" PropertiesMask="2" />
