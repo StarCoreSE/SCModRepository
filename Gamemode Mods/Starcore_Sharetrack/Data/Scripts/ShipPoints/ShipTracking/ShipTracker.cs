@@ -350,7 +350,7 @@ namespace StarCore.ShareTrack.ShipTracking
                 var angle = GetAngleBetweenDegree(gridPosition - camera.WorldMatrix.Translation,
                     camera.WorldMatrix.Forward);
 
-                var stealthed = ((uint)Grid.Flags & 0x1000000) > 0;
+                var stealthed = ((uint)Grid.Flags & 0x1000000) > 0 || !Grid.Visible;
                 var visible = !(newOrigin.X > 1 || newOrigin.X < -1 || newOrigin.Y > 1 || newOrigin.Y < -1) &&
                               angle <= fov && !stealthed;
 
