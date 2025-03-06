@@ -16,10 +16,10 @@
 				[Shell Speed: 1000m/s | 1100m/s]
 				[Damage Types: Energy | Kinetic]
 				
-				Triple barreled 203mm/8 Inch used commonly by the Us navy during ww2 and into the cold war period
-				Medium to long range artillery turret, used heavily on heavy cruisers likt eh Des Moines.
+				Triple barreled 203mm/8 Inch used commonly by the USN during WW2 and into the cold war period.
+				Medium to long range artillery turret, used heavily on heavy cruisers like Des Moines.
 			</Description>
-			<Icon>Textures\GUI\Icons\8Inch55RF.dds</Icon>
+			<Icon>Textures\GUI\Icons\8Inch55Main.dds</Icon>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="3" y="2" z="3"/>
@@ -42,7 +42,7 @@
 			</MountPoints>
 			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
-			<BuildTimeSeconds>30</BuildTimeSeconds>
+			<BuildTimeSeconds>180</BuildTimeSeconds>
 			<BlockPairName>203mmQuad</BlockPairName>
 		</Definition>
 	</CubeBlocks>

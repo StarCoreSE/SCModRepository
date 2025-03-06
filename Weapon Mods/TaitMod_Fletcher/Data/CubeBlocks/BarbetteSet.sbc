@@ -35,7 +35,7 @@
 			</BuildProgressModels>
 			<BlockPairName>Barbette5x5</BlockPairName>
 			<EdgeType>Light</EdgeType>
-			<BuildTimeSeconds>15</BuildTimeSeconds>
+			<BuildTimeSeconds>420</BuildTimeSeconds>
 			<EmissiveColorPreset>Default</EmissiveColorPreset>
 			<DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
 			<DamagedSound>ParticleHeavyMech</DamagedSound>
@@ -80,7 +80,7 @@
 			<BlockPairName>Barbette3x3</BlockPairName>
 			<MirroringY>X</MirroringY>
 			<EdgeType>Light</EdgeType>
-			<BuildTimeSeconds>10</BuildTimeSeconds>
+			<BuildTimeSeconds>270</BuildTimeSeconds>
 			<EmissiveColorPreset>Default</EmissiveColorPreset>
 			<DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
 			<DamagedSound>ParticleHeavyMech</DamagedSound>
@@ -125,7 +125,7 @@
 			<BlockPairName>Barbette1x1</BlockPairName>
 			<MirroringY>X</MirroringY>
 			<EdgeType>Light</EdgeType>
-			<BuildTimeSeconds>5</BuildTimeSeconds>
+			<BuildTimeSeconds>30</BuildTimeSeconds>
 			<EmissiveColorPreset>Default</EmissiveColorPreset>
 			<DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
 			<DamagedSound>ParticleHeavyMech</DamagedSound>

@@ -28,6 +28,7 @@
 				<Component Subtype="SteelPlate" Count="200" />
 			</Components>
 			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<BuildTimeSeconds>15</BuildTimeSeconds>
 			<BlockPairName>OerlikonDual</BlockPairName>
 			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
