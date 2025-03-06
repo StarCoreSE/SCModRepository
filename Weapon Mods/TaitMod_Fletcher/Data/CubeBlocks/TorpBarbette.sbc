@@ -35,6 +35,7 @@
 				<Component Subtype="SteelPlate" Count="3200" />
 			</Components>
 			<CriticalComponent Subtype="Motor" Index="0" />
+			<BuildTimeSeconds>540</BuildTimeSeconds>
 			<MountPoints>
 				<MountPoint Side="Bottom" StartX="1" StartY="1" EndX="2" EndY="2" />
 			</MountPoints>

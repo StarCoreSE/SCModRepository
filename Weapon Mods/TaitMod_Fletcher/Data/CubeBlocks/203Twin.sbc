@@ -41,6 +41,7 @@
 			</MountPoints>
 			 <MirroringY>Z</MirroringY>
 			 <MirroringZ>Y</MirroringZ>
+			 <BuildTimeSeconds>180</BuildTimeSeconds>
 			<BlockPairName>203mmTwin</BlockPairName>
 		</Definition>
 	</CubeBlocks>
