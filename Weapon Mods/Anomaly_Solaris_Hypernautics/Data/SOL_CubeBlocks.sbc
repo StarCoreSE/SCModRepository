@@ -200,6 +200,7 @@
 	[8 mini torps target missiles]
 	[Will heal shields if it impacts]
 	[40 second reload]
+	Caution, give it decent line of sight for better results
 
      </Description>
      <Icon>Textures\GUI\missile_defense.png</Icon>
