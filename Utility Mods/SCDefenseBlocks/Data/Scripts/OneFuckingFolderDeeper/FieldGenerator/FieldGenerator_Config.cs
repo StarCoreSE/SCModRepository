@@ -33,8 +33,8 @@ namespace Starcore.FieldGenerator
         public float MaxPowerDraw = 500.00f;
         public float MinPowerDraw = 50.00f;
 
-        public int MaxSiegeTime = 60;
-        public int MinSiegeTime = 15;
+        public int MaxSiegeTime = 60; // this refers to max time spent you are able to be in siege mode.
+        public int MinSiegeTime = 10; // this refers to min time spent sieging in the cooldown formula, any time spent in siege below this number will count as this value for the cooldown formula. thus the minimum cooldown time is this number * 2.
         public int SiegePowerDraw = 900;
         public float SiegeModeResistence = 0.9f;      
   
