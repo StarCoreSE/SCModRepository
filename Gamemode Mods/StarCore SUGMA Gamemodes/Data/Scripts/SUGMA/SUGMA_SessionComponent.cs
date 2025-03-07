@@ -102,7 +102,7 @@ namespace SC.SUGMA
             CurrentGamemode = (GamemodeBase)_components[id];
             CurrentGamemode.StartRound(arguments);
 
-            if (!CurrentGamemode.IsStarted)
+            if (!(CurrentGamemode?.IsStarted ?? false))
             {
                 CurrentGamemode = null;
                 return false;
