@@ -16,6 +16,9 @@ using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
 using SC.SUGMA.Utilities;
 using VRage.Game.Components;
+using VRage.Scripting;
+using Sandbox.Game;
+using VRageMath;
 
 namespace SC.SUGMA
 {
@@ -134,18 +137,15 @@ namespace SC.SUGMA
             return true;
         }
 
-        public static string ListGamemodes()
+        public static void ListGamemodes()
         {
             var availableGamemodes = new StringBuilder();
 
             foreach (var gamemode in I.GetGamemodes())
             {
                 var gamemodeObject = I.GetComponent<GamemodeBase>(gamemode);
-                availableGamemodes.Append(
-                    $"\n-  {gamemode} ({gamemodeObject.ReadableName})\n  *  {gamemodeObject.ArgumentParser.HelpText.Replace("\n", "\n  *  ")}");
+                MyVisualScriptLogicProvider.SendChatMessageColored($"\n-  {gamemodeObject.ArgumentParser.HelpText.Replace("\n", "\n-  ")}", Color.Green, $"{gamemode} ({gamemodeObject.ReadableName})");
             }
-
-            return availableGamemodes.ToString();
         }
 
         #region Base Methods

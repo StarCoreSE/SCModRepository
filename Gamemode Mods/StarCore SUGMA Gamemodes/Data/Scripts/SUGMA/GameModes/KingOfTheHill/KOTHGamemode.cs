@@ -71,10 +71,8 @@ namespace SC.SUGMA.GameModes.KOTH
         {
             if (ControlPoint != null)
                 _winningFaction = ControlPoint._zoneOwner;
-            Log.Info($"KOTHGamemode.cs::74 Invoke StopRound, winner = {_winningFaction?.Name ?? "NULL"}");
             base.StopRound();
 
-            Log.Info($"KOTHGamemode.cs::77 Invoke KOTHHud.MatchEnded, winner = {_winningFaction?.Name ?? "NULL"}");
             SUGMA_SessionComponent.I.GetComponent<KOTHHud>("KOTHHud")?.MatchEnded(_winningFaction);
             SUGMA_SessionComponent.I.UnregisterComponent("KOTHHud");
 
