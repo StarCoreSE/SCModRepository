@@ -17,7 +17,8 @@ namespace SC.SUGMA.Commands
             if (args.Length < 2)
             {
                 MyAPIGateway.Utilities.ShowMessage("SUGMA",
-                    $"Unrecognized gamemode \"null\". Available gamemodes:{SUGMA_SessionComponent.ListGamemodes()}");
+                    $"Unrecognized gamemode \"null\". Available gamemodes:");
+                SUGMA_SessionComponent.ListGamemodes();
                 return;
             }
 
@@ -33,7 +34,8 @@ namespace SC.SUGMA.Commands
             if (!SUGMA_SessionComponent.I.StartGamemode(args[1].ToLower(), startArgs, true))
             {
                 MyAPIGateway.Utilities.ShowMessage("SUGMA",
-                    $"Unrecognized gamemode \"{args[1].ToLower()}\". Available gamemodes:{SUGMA_SessionComponent.ListGamemodes()}");
+                    $"Unrecognized gamemode \"{args[1].ToLower()}\". Available gamemodes:");
+                SUGMA_SessionComponent.ListGamemodes();
                 return;
             }
 
