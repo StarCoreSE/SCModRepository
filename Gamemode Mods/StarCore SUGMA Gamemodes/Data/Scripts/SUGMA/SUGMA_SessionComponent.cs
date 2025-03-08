@@ -144,7 +144,7 @@ namespace SC.SUGMA
             foreach (var gamemode in I.GetGamemodes())
             {
                 var gamemodeObject = I.GetComponent<GamemodeBase>(gamemode);
-                MyVisualScriptLogicProvider.SendChatMessageColored($"\n-  {gamemodeObject.ArgumentParser.HelpText.Replace("\n", "\n-  ")}", Color.Green, $"{gamemode} ({gamemodeObject.ReadableName})");
+                MyAPIGateway.Utilities.ShowMessage($"{gamemode} ({gamemodeObject.ReadableName})", $"\n-  {gamemodeObject.ArgumentParser.HelpText.Replace("\n", "\n-  ")}");
             }
         }
 
