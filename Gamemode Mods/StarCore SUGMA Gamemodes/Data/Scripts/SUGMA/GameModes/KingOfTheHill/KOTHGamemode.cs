@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sandbox.ModAPI;
 using SC.SUGMA.GameModes.Elimination;
 using SC.SUGMA.GameState;
@@ -49,6 +50,16 @@ namespace SC.SUGMA.GameModes.KOTH
             if (TrackedFactions.Count <= 1)
                 return;
 
+            foreach (var faction in TrackedFactions.Keys.ToArray())
+                TrackedFactions[faction] = 0;
+
+            foreach (var grid in ShareTrackApi.GetTrackedGrids())
+            {
+                var faction = grid.GetFaction();
+                if (TrackedFactions.ContainsKey(faction))
+                    TrackedFactions[faction]++;
+            }
+
             ActivationTimeCounter = ActivationTime;
             ControlPoint = null;
 
@@ -58,7 +69,8 @@ namespace SC.SUGMA.GameModes.KOTH
 
         public override void StopRound()
         {
-            _winningFaction = ControlPoint?._zoneOwner;
+            if (ControlPoint != null)
+                _winningFaction = ControlPoint._zoneOwner;
             base.StopRound();
 
             SUGMA_SessionComponent.I.GetComponent<KOTHHud>("KOTHHud")?.MatchEnded(_winningFaction);
@@ -101,6 +113,50 @@ namespace SC.SUGMA.GameModes.KOTH
             if (ControlPoint.IsCaptured)
             {
                 StopRound();
+            }
+        }
+
+        internal override void OnGridTrackChanged(IMyCubeGrid grid, bool isTracked)
+        {
+            if (!isTracked)
+                OnAliveChanged(grid, false);
+        }
+
+        internal override void OnAliveChanged(IMyCubeGrid grid, bool isAlive)
+        {
+            var gridFaction = PlayerTracker.I.GetGridFaction(grid);
+            if (gridFaction == null || !TrackedFactions.ContainsKey(gridFaction))
+                return;
+            if (!isAlive)
+            {
+                TrackedFactions[gridFaction]--;
+                if (TrackedFactions[gridFaction] <= 0)
+                {
+                    IMyFaction winningFaction = null;
+                    foreach (var factionKvp in TrackedFactions)
+                    {
+                        if (factionKvp.Value <= 0)
+                            continue;
+                        if (winningFaction != null)
+                        {
+                            winningFaction = null;
+                            break;
+                        }
+                        winningFaction = factionKvp.Key;
+                    }
+
+                    if (winningFaction != null)
+                    {
+                        if (ControlPoint != null)
+                            ControlPoint._zoneOwner = winningFaction;
+                        _winningFaction = winningFaction;
+                        StopRound();
+                    }
+                }
+            }
+            else
+            {
+                TrackedFactions[gridFaction]++;
             }
         }
     }

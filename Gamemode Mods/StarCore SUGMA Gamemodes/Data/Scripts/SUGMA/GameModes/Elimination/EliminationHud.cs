@@ -14,7 +14,7 @@ namespace SC.SUGMA.GameModes.Elimination
         private int _closeTime = -1;
         private readonly EliminationGamemode _gamemode;
 
-        public elmHud_Window Window;
+        public ElmHud_Window Window;
 
         public EliminationHud(EliminationGamemode gamemode)
         {
@@ -28,7 +28,7 @@ namespace SC.SUGMA.GameModes.Elimination
             if (!RichHudClient.Registered)
                 throw new Exception("RichHudAPI was not initialized in time!");
 
-            Window = new elmHud_Window(HudMain.HighDpiRoot, _gamemode);
+            Window = new ElmHud_Window(HudMain.HighDpiRoot, _gamemode);
         }
 
         public override void Close()
@@ -52,7 +52,7 @@ namespace SC.SUGMA.GameModes.Elimination
         }
     }
 
-    internal class elmHud_Window : HudElementBase
+    internal class ElmHud_Window : HudElementBase
     {
         private readonly EliminationGamemode _gamemode;
 
@@ -63,7 +63,7 @@ namespace SC.SUGMA.GameModes.Elimination
         internal LabelBox _winnerLabel;
         public EliminationHud_TeamBanner[] Banners;
 
-        public elmHud_Window(HudParentBase parent, EliminationGamemode gamemode) : base(parent)
+        public ElmHud_Window(HudParentBase parent, EliminationGamemode gamemode) : base(parent)
         {
             _gamemode = gamemode;
             _timer = gamemode._matchTimer;

@@ -122,6 +122,7 @@ namespace SC.SUGMA.GameModes.Elimination
 
         public override void StartRound(string[] arguments = null)
         {
+            _winningFaction = null;
             PointTracker = new PointTracker(3, 0);
             SUGMA_SessionComponent.I.UnregisterComponent("ELMPointTracker");
             if (!MyAPIGateway.Utilities.IsDedicated)
@@ -222,7 +223,6 @@ namespace SC.SUGMA.GameModes.Elimination
             ShareTrackApi.UnregisterOnTrack(OnGridTrackChanged);
 
             base.StopRound();
-            _winningFaction = null;
             TrackedFactions.Clear();
             PointTracker = null;
         }
