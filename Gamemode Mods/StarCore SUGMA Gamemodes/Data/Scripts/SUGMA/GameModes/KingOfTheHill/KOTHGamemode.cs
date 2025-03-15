@@ -93,6 +93,9 @@ namespace SC.SUGMA.GameModes.KOTH
 
         public override void UpdateActive()
         {
+            foreach (var faction in TrackedFactions)
+                MyAPIGateway.Utilities.ShowNotification($"{faction.Key.Tag}: {faction.Value}", 1000/60);
+
             if (ActivationTimeCounter > 0)
             {
                 if (_matchTimer.Ticks % 60 == 0)
