@@ -20,6 +20,7 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Rangefinder\Mk25 Rangefinder.mwm</Model>
 			<UseModelIntersection>true</UseModelIntersection>
+			<BuildTimeSeconds>15</BuildTimeSeconds>
 			<Components>
         <Component Subtype="SteelPlate" Count="25" />
         <Component Subtype="Construction" Count="20" />
