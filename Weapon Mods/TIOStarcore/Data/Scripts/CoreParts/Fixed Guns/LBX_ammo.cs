@@ -1939,7 +1939,7 @@ namespace Scripts
             Fragment = new FragmentDef // Formerly known as Shrapnel. Spawns specified ammo fragments on projectile death (via hit or detonation).
             {
                 AmmoRound = "LBXCluster_Fragment", // AmmoRound field of the ammo to spawn.
-                Fragments = 4, // Number of projectiles to spawn.
+                Fragments = 6, // Number of projectiles to spawn.
                 Degrees = 9f, // Cone in which to randomize direction of spawned projectiles.
                 Reverse = false, // Spawn projectiles backward instead of forward.
                 DropVelocity = true, // fragments will not inherit velocity from parent.
@@ -1959,8 +1959,8 @@ namespace Scripts
                     PointAtTarget = false, // Start fragment direction pointing at Target
                     PointType = Lead, // Point accuracy, Direct (straight forward), Lead (always fire), Predict (only fire if it can hit)
                     DirectAimCone = 15f, //Aim cone used for Direct fire, in degrees
-                    GroupSize = 4, // Number of spawns in each group
-                    GroupDelay = 4, //5 Delay between each group.
+                    GroupSize = 6, // Number of spawns in each group
+                    GroupDelay = 3, //5 Delay between each group.
                 },
             },
             Pattern = new PatternDef
