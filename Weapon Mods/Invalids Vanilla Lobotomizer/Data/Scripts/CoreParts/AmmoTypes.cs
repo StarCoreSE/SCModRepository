@@ -2294,7 +2294,7 @@ namespace Scripts
             AmmoRound = "Large Railgun Slug", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.2858f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 126000f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 126000f, //holy number, not to be changed //Direct damage; one steel plate is worth 100.
             Mass = 277f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid. 21777000f
@@ -2358,7 +2358,7 @@ namespace Scripts
                 // For the following modifier values: -1 = disabled (higher performance), 0 = no damage, 0.01f = 1% damage, 2 = 200% damage.
                 FallOff = new FallOffDef
                 {
-                    Distance = 6000f, // Distance at which damage begins falling off.
+                    Distance = 10000f, // Distance at which damage begins falling off.
                     MinMultipler = 0.75f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
                 },
                 Grids = new GridSizeDef
@@ -2409,10 +2409,10 @@ namespace Scripts
                 ByBlockHit = new ByBlockHitDef
                 {
                     Enable = true,
-                    Radius = 3f, // Meters
-                    Damage = 10000f, // Damages 4 blocks
-                    Depth = 1f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
-                    MaxAbsorb = 2500f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
+                    Radius = 4f, // Meters
+                    Damage = 20000f, // Damages 4 blocks
+                    Depth = 2f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
+                    MaxAbsorb = 5000f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
                     //.Curve drops off damage sharply as it approaches the max radius
@@ -2514,8 +2514,8 @@ namespace Scripts
                 TargetLossTime = 0, // 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                 MaxLifeTime = 120, //120 is required for sound. 0 is disabled, Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..). time begins at 0 and time must EXCEED this value to trigger "time > maxValue". Please have a value for this, It stops Bad things.
                 AccelPerSec = 0f, // Meters Per Second. This is the spawning Speed of the Projectile, and used by turning.
-                DesiredSpeed = 5000, // voxel phasing if you go above 5100
-                MaxTrajectory = 10000f, //**MUST** be double of speed for sound to work good.// Max Distance the projectile or beam can Travel.
+                DesiredSpeed = 6000, // voxel phasing if you go above 5100
+                MaxTrajectory = 12500f, //**MUST** be double of speed for sound to work good.// Max Distance the projectile or beam can Travel.
                 DeaccelTime = 0, // 0 is disabled, a value causes the projectile to come to rest overtime, (Measured in game ticks, 60 = 1 second)
                 GravityMultiplier = 0f, // Gravity multiplier, influences the trajectory of the projectile, value greater than 0 to enable. Natural Gravity Only.
                 SpeedVariance = Random(start: 0, end: 0), // subtracts value from DesiredSpeed. Be warned, you can make your projectile go backwards.
