@@ -545,9 +545,9 @@
       <DisplayName>[FLAW] Railgun 2.0</DisplayName>
       <Icon>Textures\GUI\Icons\Cubes\RailGun.dds</Icon>
       <Description>
-        10km range Railgun. 5000m/s velocity
+        11km range Railgun. 6000m/s velocity
         24Mw Passive Draw, 300Mw Recharge
-        Falloff After 6km.
+        Falloff After 10km.
         Deals Kinetic Damage.
       </Description>
       <CubeSize>Large</CubeSize>
