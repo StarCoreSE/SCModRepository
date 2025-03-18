@@ -10,6 +10,7 @@ using VRageMath;
 
 namespace CameraInfoApi
 {
+    [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     internal class ServerMain : MySessionComponentBase
     {
         public Dictionary<MyCubeGrid, MyTuple<MatrixD, float>> CameraInfos = new Dictionary<MyCubeGrid, MyTuple<MatrixD, float>>();
