@@ -1,19 +1,3 @@
-# SCModRepository
-
-<p align="center">
-    <img src="https://github.com/StarCoreSE/SCModRepository/assets/51190031/c413613b-08e1-48de-a763-2adfe7fa871f" width="480">
-</p>
-
-
-**Starcore** is a community built around modding space engineers, usually for PVP scenarios.
-
-In StarCore, teams build their own ships and battle for the spot of champion in a StarCore Tournament. They normally take place on Saturdays and are streamed live by one of several streamers over on Twitch (See #content-announcements in the StarCore Discord for more information).  It's time to join the arena!
-
-***
-
-## Contribution guide
-
-
 ### Prerequsites:
 - (extremely recommended) github Desktop, GitExtentions, or something similar
 - knowing the layout of SE mod files
