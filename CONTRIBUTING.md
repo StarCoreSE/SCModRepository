@@ -1,4 +1,3 @@
-
 ### Prerequsites:
 - (extremely recommended) github Desktop, GitExtentions, or something similar
 - knowing the layout of SE mod files
@@ -21,3 +20,16 @@
 - You can merge your PR yourself if you're confident, or ask for review. Once merged, the development version of the mod will automatically be updated.
 
 Note - the `Main` branch is for the ModDev world, and `Stable` is for the primary combat and build worlds. `Stable` pushes are done in bulk after Test Tournaments.
+
+
+***
+
+
+## How does this work?
+The repository contains a .github folder, Space Engineers mod folders, and a .gitignore file.
+### .github folder:
+- contains the instructions to the bot what to do after a "push", currently set to upload to the steam workshop after [SCUniversalUpload](https://github.com/StarCoreSE/SCModRepository/blob/main/.github/workflows/Aristeas%20NewUniversalUpload.yml) detects a change in a folder with a `modinfo_BRANCHNAME.sbmi` file.
+### SE Mod folders:
+- contains all the data that would load normally as an SE mod
+### .gitignore file
+- tells git what to exclude during a push (like .sln files in visual studio)
