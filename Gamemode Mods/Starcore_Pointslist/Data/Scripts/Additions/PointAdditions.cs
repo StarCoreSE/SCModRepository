@@ -768,7 +768,7 @@ namespace ShipPoints
             ["Heat_Heatsink"] = 10,
             ["Heat_FlatRadiator"] = 10,
 			["ActiveRadiator"] = 250,
-			["RadiatorPanel"] = 5,
+			["RadiatorPanel"] = 10,
 			["ExtendableRadiatorBase"] = 5,
             #endregion
         };
