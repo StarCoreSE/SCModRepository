@@ -33,8 +33,8 @@ namespace Starcore.FieldGenerator
         public float MaxPowerDraw = 500.00f;
         public float MinPowerDraw = 50.00f;
 
-        public int MaxSiegeTime = 60;
-        public int MinSiegeTime = 15;
+        public int MaxSiegeTime = 60; 
+        public int MinSiegeTime = 15; 
         public int SiegePowerDraw = 900;
         public float SiegeModeResistence = 0.9f;      
   

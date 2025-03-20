@@ -4,6 +4,7 @@ using StarCore.ShareTrack.API;
 using StarCore.ShareTrack.HeartNetworking;
 using StarCore.ShareTrack.ShipTracking;
 using StarCore.ShareTrack.TrackerApi;
+using StealthSystem;
 using VRage.Game.Components;
 using VRageMath;
 
@@ -20,6 +21,7 @@ namespace StarCore.ShareTrack
         public static MasterSession I;
         public static SharetrackConfig Config;
 
+        public StealthAPI StealthApi = new StealthAPI();
         public HudAPIv2 TextHudApi;
         public Action HudRegistered = () => { };
 
@@ -45,6 +47,8 @@ namespace StarCore.ShareTrack
                 _apiProvider = new ApiProvider();
                 _buildingBlockPoints = new BuildingBlockPoints();
                 TrackingManager.Init(); // Initialize TrackingManager, but don't start tracking yet
+
+                StealthApi.Load();
 
                 if (!MyAPIGateway.Utilities.IsDedicated)
                     // Initialize the sphere entities
