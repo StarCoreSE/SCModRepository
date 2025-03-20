@@ -9,12 +9,15 @@ using VRageMath;
 
 namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
 {
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_TerminalBlock), false, "ActiveRadiator")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_TerminalBlock), false, "ActiveRadiator", "ActiveRadiatorFake")]
     internal class ActiveRadiatorAnimation : MyGameLogicComponent
     {
         private IMyCubeBlock Block;
         private MyEntitySubpart FanPart;
         private MyParticleEffect Particle;
+        private readonly MyDefinitionId ElectricityId = MyDefinitionId.Parse("GasProperties/Electricity");
+
+        private float UsedPowerPct => Block.CubeGrid.ResourceDistributor.TotalRequiredInputByType(ElectricityId, Block.CubeGrid) / Block.CubeGrid.ResourceDistributor.MaxAvailableResourceByType(ElectricityId);
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
@@ -41,7 +44,9 @@ namespace Epstein_Fusion_DS.HeatParts.ExtendableRadiators
 
         public override void UpdateAfterSimulation()
         {
-            float heatLevel = HeatManager.I.GetGridHeatLevel(Block.CubeGrid);
+            float heatLevel = Block.BlockDefinition.SubtypeName == "ActiveRadiatorFake" ? UsedPowerPct : HeatManager.I.GetGridHeatLevel(Block.CubeGrid);
+            if (!Block.IsWorking)
+                heatLevel = 0;
 
             Matrix refMatrix = MatrixD.CreateFromAxisAngle(Vector3D.Up, -0.1 * heatLevel) * FanPart.PositionComp.LocalMatrixRef;
             refMatrix.Translation = FanPart.PositionComp.LocalMatrixRef.Translation;
