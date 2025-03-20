@@ -24,6 +24,7 @@
 	    <string>ExtendableRadiatorBase</string>
 	    <string>Heat_FlatRadiator</string>
 	    <string>ActiveRadiator</string>
+		<string>ActiveRadiatorFake</string>
       </ItemIds>
     </Category>
   </CategoryClasses>
