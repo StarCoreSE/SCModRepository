@@ -560,7 +560,7 @@ namespace ShipPoints
             ["Hellfire_Laser_Block"] = 666,
 
 
-            ["Cat_StarcoreUlitity"] = 21,
+        ["Cat_StarcoreUlitity"] = 21,
             ["LargeBlockRemoteControl"] = 100,
             ["SmallBlockRemoteControl"] = 50,
             ["LargeProgrammableBlock"] = 50,
@@ -591,7 +591,7 @@ namespace ShipPoints
             ["Starcore_RWR_Projectiles"] = 5,
             ["SC_Flare"] = 50,
             ["SI_Field_Gen"] = 50,
-	    ["FieldGen_Core"] = 50,
+	        ["FieldGen_Core"] = 50,
     	    ["FieldGen_Capacity_Upgrade"] = 50,
             ["SELtdLargeNanobotBuildAndRepairSystem"] = 50,
             ["PM_LG_BLASTPLATE_BLASTPLATE"] = 100,
@@ -612,9 +612,9 @@ namespace ShipPoints
             ["BlinkDriveLarge"] = 500,
             ["SCSmallJumpDrive"] = 250,
 
-            ["Cat_BadModder"] = 22,
+        ["Cat_BadModder"] = 22,
             ["APE_Strong"] = 200,
-            ["GoalieCasemate"] = 175,
+            ["GoalieCasemate"] = 100,
             ["Reaver_Coilgun"] = 115,
             ["Assault_Coil_Turret"] = 115,
             ["Priest_Block"] = 100,
@@ -646,7 +646,7 @@ namespace ShipPoints
             ["Thagomizer_Angled"] = 635,
             ["Thagomizer_Angled_Flipped"] = 635,
 
-            ["Cat_Strikecraft"] = 23,
+        ["Cat_Strikecraft"] = 23,
             ["HeavyFighterBay"] = 230,
             ["longsword"] = 625,
             ["TaiidanSingleHangar"] = 100,
@@ -948,7 +948,7 @@ namespace ShipPoints
                     break;
                 case "[FLAW] Goalkeeper Casemate Flak Battery":
                     blockDisplayName = "[FLAW] Goalkeeper Flakwall";
-                    costMultiplier = 0.119f;
+                    costMultiplier = 0f;
                     break;
                 case "Shield Controller":
                 case "Shield Controller Table":

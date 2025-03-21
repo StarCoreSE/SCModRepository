@@ -9,8 +9,8 @@
 			</Id>
 			<DisplayName>[FLAW] Goalkeeper Casemate Flak Battery</DisplayName>
 			<Description>
-              [1600 Targeting Range]
-			  [1200 Flak Range]
+              [2000m Targeting Range]
+			  [1200m Flak Range]
               [Clouds of small pre-cast fragments are lethal to missiles, biologicals, below average sized meteors, and small grids.]
               [Targets Missiles, deals 160 AMS Damage Per Second]
 
@@ -19,8 +19,8 @@
 			<CubeSize>Large</CubeSize>
 			<GuiVisible>true</GuiVisible>
 			<BlockTopology>TriangleMesh</BlockTopology>
-			<Size x="5" y="3" z="5" />
-			<ModelOffset x="0" y="0" z="0" />
+			<Size x="5" y="3" z="3" />
+			<ModelOffset x="0" y="0" z="-2.5" />
 			<Model>Models\HSR\K_HSR_Damnation_Large.mwm</Model>
 			<Components>
 				<Component Subtype="SteelPlate" Count="1000" />
