@@ -193,7 +193,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                APShell203, HEShell203 // Must list all primary, shrapnel, and pattern ammos.
+                APShell203, HEShell203, // Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = Weapon75_Animation,
             //Upgrades = UpgradeModules,

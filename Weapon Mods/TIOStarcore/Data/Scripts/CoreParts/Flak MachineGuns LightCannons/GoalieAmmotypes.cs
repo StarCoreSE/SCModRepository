@@ -239,7 +239,7 @@ namespace Scripts
                     WidthVariance = Random(start: 0f, end: 0f), // adds random value to default width (negatives shrinks width)
                     Tracer = new TracerBaseDef
                     {
-                        Enable = false, //doesn't need to be true I think. thanks darth for the tip.
+                        Enable = true, //doesn't need to be true I think. thanks darth for the tip.
                         Length = 10f, //
                         Width = 1f, //
                         Color = Color(red: 0f, green: 0f, blue: 0f, alpha: 0f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
@@ -489,7 +489,7 @@ namespace Scripts
                     WidthVariance = Random(start: 0f, end: 0f), // adds random value to default width (negatives shrinks width)
                     Tracer = new TracerBaseDef
                     {
-                        Enable = false,
+                        Enable = true,
                         Length = 10f, //
                         Width = 1f, //
                         Color = Color(red: 0f, green: 0f, blue: 0f, alpha: 0f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
@@ -723,7 +723,7 @@ namespace Scripts
                     WidthVariance = Random(start: 0f, end: 0f), // adds random value to default width (negatives shrinks width)
                     Tracer = new TracerBaseDef
                     {
-                        Enable = false,
+                        Enable = true,
                         Length = 10f, //
                         Width = 1f, //
                         Color = Color(red: 0f, green: 0f, blue: 0f, alpha: 0f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
@@ -971,7 +971,7 @@ namespace Scripts
                     WidthVariance = Random(start: 0f, end: 0f), // adds random value to default width (negatives shrinks width)
                     Tracer = new TracerBaseDef
                     {
-                        Enable = false,
+                        Enable = true,
                         Length = 10f, //
                         Width = 1f, //
                         Color = Color(red: 0f, green: 0f, blue: 0f, alpha: 0f), // RBG 255 is Neon Glowing, 100 is Quite Bright.
@@ -1163,7 +1163,7 @@ namespace Scripts
                     WidthVariance = Random(start: 0f, end: 0f), // adds random value to default width (negatives shrinks width)
                     Tracer = new TracerBaseDef
                     {
-                        Enable = false,
+                        Enable = true,
                         Length = 0.001f, //
                         Width = 1f, //
                         Color = Color(red: 1f, green: 1f, blue: 0f, alpha: 0f), // RBG 255 is Neon Glowing, 100 is Quite Bright.

@@ -187,7 +187,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                FA380mmShell,FA380mmAPShell,// Must list all primary, shrapnel, and pattern ammos.
+                FA380mmShell, FA380mmAPShell, // Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = Weapon75_Animation,
             //Upgrades = UpgradeModules,

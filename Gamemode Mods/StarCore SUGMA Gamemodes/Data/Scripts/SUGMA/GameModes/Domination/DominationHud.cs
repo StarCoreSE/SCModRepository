@@ -66,7 +66,7 @@ namespace SC.SUGMA.GameModes.Domination
         private readonly TexturedBox[] _captureIndicators;
 
         private readonly DominationGamemode _gamemode;
-        private readonly elmHud_Window _windowBase;
+        private readonly ElmHud_Window _windowBase;
 
         public DominationHud_Window(HudParentBase parent, DominationGamemode gamemode) : base(parent)
         {
