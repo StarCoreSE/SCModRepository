@@ -23,4 +23,4 @@ jobs:
       #    done
       - id: build-mods
         run: |
-          & "C:\Program Files\SCUniversalUpload\SC_NewUniversalUpload.exe" "build" --repo "${{ github.workspace }}" --changes "${{ steps.changed-files.outputs.all_changed_and_modified_files }}"
+          & "C:\Program Files\SCUniversalUpload\SC_NewUniversalUpload.exe" "build" --repo "${{ github.workspace }}"
