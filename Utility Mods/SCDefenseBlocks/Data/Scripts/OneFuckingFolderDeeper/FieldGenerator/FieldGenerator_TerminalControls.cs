@@ -48,7 +48,7 @@ namespace Starcore.FieldGenerator
             var logic = GetLogic(b);
             if (logic != null)
             {
-                return !logic.SiegeCooldownActive;
+                return !logic.SiegeCooldownActive && !logic.SlowdownActive;
             }
             return false;
         }
@@ -149,6 +149,9 @@ namespace Starcore.FieldGenerator
                 var logic = GetLogic(b);
                 if (logic != null)
                 {
+                    if (logic.CheckPowerDraw(logic.FieldPower.Value + 2.5f) > logic.CheckPowerGeneration())
+                        return;
+
                     logic.FieldPower.Value += 2.5f;                
                 }
             };
