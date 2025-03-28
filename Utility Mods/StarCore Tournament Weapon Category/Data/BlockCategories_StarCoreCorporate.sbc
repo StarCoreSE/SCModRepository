@@ -257,6 +257,7 @@
         <string>NHI_Mk2_Cannon_Turret</string>
         <string>SC_Coil_Cannon</string>
 		<string>NHI_Mk3_Cannon_Turret</string>
+		<string>NHI_Fixed_Autocannon</string>
 
       </ItemIds>
     </Category>
