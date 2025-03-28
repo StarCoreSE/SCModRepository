@@ -39,7 +39,7 @@ namespace Invalid.BlinkDrive
         private const int RechargeTimeSeconds = 60;
         private const int MaxCharges = 3;
 
-        private float GetPowerDraw => JumpTimerSync > 0 ? 100 : 0.25f;
+        private float GetPowerDraw => JumpTimerSync > 0 ? 300 : 0.25f;
         private bool CanJump => Block.IsWorking && Block.IsFunctional && MaxCharges > 0;
 
         static bool controlsCreated = false;

@@ -71,14 +71,14 @@ namespace Scripts
                 TimedSpawns = new TimedSpawnDef // disables FragOnEnd in favor of info specified below
                 {
                     Enable = true, // Enables TimedSpawns mechanism
-                    Interval = 60, // Time between spawning fragments, in ticks
+                    Interval = 460, // Time between spawning fragments, in ticks
                     StartTime = 0, // Time delay to start spawning fragments, in ticks, of total projectile life
                     MaxSpawns = 10, // Max number of fragment children to spawn
                     Proximity = 4000, // Starting distance from target bounding sphere to start spawning fragments, 0 disables this feature.  No spawning outside this distance
                     ParentDies = false, // Parent dies once after it spawns its last child.
                     PointAtTarget = false, // Start fragment direction pointing at Target
                     PointType = Predict, // Point accuracy, Direct, Lead (always fire), Predict (only fire if it can hit)
-                    GroupSize = 2, // Number of spawns in each group
+                    GroupSize = 1, // Number of spawns in each group
                     GroupDelay = 60, // Delay between each group.
                     DirectAimCone = 45, //Angle cone in which the drone will open fire.
                 },

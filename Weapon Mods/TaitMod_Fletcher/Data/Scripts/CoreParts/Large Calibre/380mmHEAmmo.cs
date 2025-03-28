@@ -333,13 +333,13 @@ namespace Scripts
                 Lines = new LineDef
                 {
                     TracerMaterial = "ProjectileTrailLine", // WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
-                    ColorVariance = Random(start: 1.0f, end: 1.3f), // multiply the color by random values within range.
+                    ColorVariance = Random(start: 0f, end: 0f), // multiply the color by random values within range.
                     WidthVariance = Random(start: 0f, end: 0.1f), // adds random value to default width (negatives shrinks width)
                     Tracer = new TracerBaseDef
                     {
                         Enable = true,
-                        Length = 10f,
-                        Width = 0.1f,
+                        Length = 20f,
+                        Width = 0.25f,
                         Color = Color(red: 40.80f, green: 8.20f, blue: 1.6f, alpha: 0.1f),
                     },
                     Trail = new TrailDef

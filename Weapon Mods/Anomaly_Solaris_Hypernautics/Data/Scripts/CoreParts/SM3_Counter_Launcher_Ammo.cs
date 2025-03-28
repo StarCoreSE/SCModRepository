@@ -287,6 +287,7 @@ namespace Scripts
                     KeepAliveAfterTargetLoss = true, // Whether to stop early death of projectile on target loss
                     OffsetRatio = 0.25f, // The ratio to offset the random direction (0 to 1) 
                     OffsetTime = 35, // how often to offset degree, measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..)
+                    //UniqueTargetPerWeapon = true, // only applies to multi-weapon blocks 
                 },
                 Mines = new MinesDef  // Note: This is being investigated. Please report to Github, any issues.
                 {

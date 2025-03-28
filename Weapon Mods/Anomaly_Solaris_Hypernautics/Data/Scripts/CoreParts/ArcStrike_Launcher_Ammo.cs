@@ -313,11 +313,11 @@ namespace Scripts
                 {
                     Ammo = new ParticleDef
                     {
-                        Name = "", //ShipWelderArc
+                        Name = "ARROWTRAIL", //ShipWelderArc
                         Offset = Vector(x: 0, y: 0, z: -0.21f),
                         Extras = new ParticleOptionDef
                         {
-                            Scale = 1f,
+                            Scale = 0.3f,
                         },
                     },
                     Hit = new ParticleDef
@@ -699,7 +699,7 @@ namespace Scripts
                         Name = "",
                         ApplyToShield = true,
 
-                        Color = Color(red: 3, green: 1.9f, blue: 1f, alpha: 1),
+                        Color = Color(red: 3, green: 0.5f, blue: 0.5f, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -715,7 +715,7 @@ namespace Scripts
                         Name = "",
                         ApplyToShield = true,
 
-                        Color = Color(red: 3, green: 1.9f, blue: 1f, alpha: 1),
+                        Color = Color(red: 3, green: 0.5f, blue: 0.5f, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -737,7 +737,7 @@ namespace Scripts
                         Enable = true,
                         Length = 8f,
                         Width = 2f,
-                        Color = Color(red: 40f, green: 25, blue: 40f, alpha: 1),
+                        Color = Color(red: 40f, green: 15, blue: 15f, alpha: 1),
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
@@ -769,7 +769,7 @@ namespace Scripts
                         },
                         TextureMode = Normal,
                         DecayTime = 90,
-                        Color = Color(red: 40f, green: 25f, blue: 40f, alpha: 1),
+                        Color = Color(red: 40f, green: 10f, blue: 10f, alpha: 1),
                         Back = false,
                         CustomWidth = 0.2f,
                         UseWidthVariance = false,
@@ -1081,7 +1081,7 @@ namespace Scripts
                         Name = "",
                         ApplyToShield = true,
 
-                        Color = Color(red: 3, green: 1.9f, blue: 1f, alpha: 1),
+                        Color = Color(red: 3, green: 0.5f, blue: 0.5f, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -1097,7 +1097,7 @@ namespace Scripts
                         Name = "",
                         ApplyToShield = true,
 
-                        Color = Color(red: 3, green: 1.9f, blue: 1f, alpha: 1),
+                        Color = Color(red: 3, green: 0.5f, blue: 0.5f, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -1118,7 +1118,7 @@ namespace Scripts
                         Enable = true,
                         Length = 8f,
                         Width = 1f,
-                        Color = Color(red: 40f, green: 25f, blue: 40f, alpha: 1),
+                        Color = Color(red: 40f, green: 10f, blue: 10f, alpha: 1),
                         VisualFadeStart = 0, // Number of ticks the weapon has been firing before projectiles begin to fade their color
                         VisualFadeEnd = 0, // How many ticks after fade began before it will be invisible.
                         Textures = new[] {// WeaponLaser, ProjectileTrailLine, WarpBubble, etc..
@@ -1194,7 +1194,7 @@ namespace Scripts
             AmmoRound = "ArcStrike Torp Frag", // Name of ammo in terminal, should be different for each ammo type used by the same weapon.
             HybridRound = false, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.01f, // Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 12500f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 45000f, // Direct damage; one steel plate is worth 100.
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 360, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil.
@@ -1459,7 +1459,7 @@ namespace Scripts
                         Name = "",
                         ApplyToShield = true,
 
-                        Color = Color(red: 3, green: 1.9f, blue: 1f, alpha: 1),
+                        Color = Color(red: 3, green: 0.5f, blue: 0.5f, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {
@@ -1474,7 +1474,7 @@ namespace Scripts
                     {
                         Name = "",
                         ApplyToShield = true,
-                        Color = Color(red: 3, green: 1.9f, blue: 1f, alpha: 1),
+                        Color = Color(red: 3, green: 0.5f, blue: 0.5f, alpha: 1),
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
                         {

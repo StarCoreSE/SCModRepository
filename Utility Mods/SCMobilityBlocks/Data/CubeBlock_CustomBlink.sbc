@@ -8,7 +8,7 @@
       </Id>
       <DisplayName>Standard Blink Drive</DisplayName>
       <Icon>Textures\GUI\Icons\BlinkDriveIcon.dds</Icon>
-      <Description>1Km teleport. Holds 3 charges. Each charge takes 100MW and 60s to recharge.</Description>
+      <Description>1Km teleport. Holds 3 charges. Each charge takes 300MW and 60s to recharge.</Description>
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="3" y="3" z="3" />

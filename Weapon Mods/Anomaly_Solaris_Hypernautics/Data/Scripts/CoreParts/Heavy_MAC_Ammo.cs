@@ -517,6 +517,7 @@ namespace Scripts
                     Light = -1f, // Multiplier for damage against light armor.
                     Heavy = -1f, // Multiplier for damage against heavy armor.
                     NonArmor = 1.5f, // Multiplier for damage against every else.
+
                 },
                 Shields = new ShieldDef
                 {

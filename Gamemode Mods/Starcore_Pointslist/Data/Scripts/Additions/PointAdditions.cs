@@ -159,13 +159,18 @@ namespace ShipPoints
 
             ["S_Armored_Laser_Block"] = 120,
             ["S_Chem_Laser_Block"] = 120,
+            ["ScathisM77"] = 150,
             ["Impulse_Torch"] = 175,
             ["Flechette_DoubleBarrel"] = 200,
-            ["Nariman_Dart_Turret"] = 225,
+            ["Nariman_Dart_Turret"] = 245,
             ["Counter_Battery"] = 250,
-            ["SolHyp_ArcStrike_Torp"] = 275,
+            ["ArcStrike_Torp_Launcher"] = 275,
+            ["Meson3_Turret"] = 300,
+            ["Meson5_Turret"] = 600,
+            ["PSP"] = 500,
             ["MagnaPulse_Gen"] = 400,
             ["SolHyp_Magnetic_Coilgun"] = 450,
+            ["WCSentry_Hangar"] = 1000,
 
 
 
@@ -177,25 +182,25 @@ namespace ShipPoints
             ["AQD_LG_HydroThrusterL_ArmoredSlope"] = 50,
             ["AQD_LG_HydroThrusterL_Armored"] = 50,
             ["LargeBlockLargeHydrogenThrustIndustrial"] = 50,
-            ["LargeBlockSmallHydrogenThrust"] = 15,
-            ["AQD_LG_HydroThrusterS_ArmoredSlope"] = 15,
-            ["AQD_LG_HydroThrusterS_Armored"] = 15,
-            ["LargeBlockSmallHydrogenThrustIndustrial"] = 15,
+            ["LargeBlockSmallHydrogenThrust"] = 10,
+            ["AQD_LG_HydroThrusterS_ArmoredSlope"] = 10,
+            ["AQD_LG_HydroThrusterS_Armored"] = 10,
+            ["LargeBlockSmallHydrogenThrustIndustrial"] = 10,
             ["HugeHydrogenThruster"] = 200,
 
-            ["LargeBlockLargeThrust"] = 20,
-            ["AQD_LG_IonThrusterL_ArmoredSlope"] = 20,
-            ["AQD_LG_IonThrusterL_Armored"] = 20,
-            ["LargeBlockLargeThrustSciFi"] = 20,
-            ["LargeBlockLargeModularThruster"] = 20,
-            ["LargeBlockSmallThrust"] = 4,
-            ["AQD_LG_IonThrusterS_Armored"] = 4,
-            ["AQD_LG_IonThrusterS_ArmoredSlope"] = 4,
-            ["LargeBlockSmallThrustSciFi"] = 4,
-            ["SmallThrustSciFi"] = 4,
-            ["LargeBlockSmallModularThruster"] = 4,
-            ["AWGFocusDrive"] = 100,
-            ["IonHeavyCovered"] = 100,
+            ["LargeBlockLargeThrust"] = 10,
+            ["AQD_LG_IonThrusterL_ArmoredSlope"] = 10,
+            ["AQD_LG_IonThrusterL_Armored"] = 10,
+            ["LargeBlockLargeThrustSciFi"] = 10,
+            ["LargeBlockLargeModularThruster"] = 10,
+            ["LargeBlockSmallThrust"] = 2,
+            ["AQD_LG_IonThrusterS_Armored"] = 2,
+            ["AQD_LG_IonThrusterS_ArmoredSlope"] = 2,
+            ["LargeBlockSmallThrustSciFi"] = 2,
+            ["SmallThrustSciFi"] = 2,
+            ["LargeBlockSmallModularThruster"] = 2,
+            ["AWGFocusDrive"] = 50,
+            ["IonHeavyCovered"] = 50,
             ["AWGGG"] = 150,
 
             ["AQD_LG_AtmoThrusterS_ArmoredSlopeRev"] = 3,
@@ -555,7 +560,7 @@ namespace ShipPoints
             ["Hellfire_Laser_Block"] = 666,
 
 
-            ["Cat_StarcoreUlitity"] = 21,
+        ["Cat_StarcoreUlitity"] = 21,
             ["LargeBlockRemoteControl"] = 100,
             ["SmallBlockRemoteControl"] = 50,
             ["LargeProgrammableBlock"] = 50,
@@ -586,7 +591,7 @@ namespace ShipPoints
             ["Starcore_RWR_Projectiles"] = 5,
             ["SC_Flare"] = 50,
             ["SI_Field_Gen"] = 50,
-	    ["FieldGen_Core"] = 50,
+	        ["FieldGen_Core"] = 50,
     	    ["FieldGen_Capacity_Upgrade"] = 50,
             ["SELtdLargeNanobotBuildAndRepairSystem"] = 50,
             ["PM_LG_BLASTPLATE_BLASTPLATE"] = 100,
@@ -607,9 +612,9 @@ namespace ShipPoints
             ["BlinkDriveLarge"] = 500,
             ["SCSmallJumpDrive"] = 250,
 
-            ["Cat_BadModder"] = 22,
+        ["Cat_BadModder"] = 22,
             ["APE_Strong"] = 200,
-            ["GoalieCasemate"] = 175,
+            ["GoalieCasemate"] = 100,
             ["Reaver_Coilgun"] = 115,
             ["Assault_Coil_Turret"] = 115,
             ["Priest_Block"] = 100,
@@ -641,7 +646,7 @@ namespace ShipPoints
             ["Thagomizer_Angled"] = 635,
             ["Thagomizer_Angled_Flipped"] = 635,
 
-            ["Cat_Strikecraft"] = 23,
+        ["Cat_Strikecraft"] = 23,
             ["HeavyFighterBay"] = 230,
             ["longsword"] = 625,
             ["TaiidanSingleHangar"] = 100,
@@ -943,7 +948,7 @@ namespace ShipPoints
                     break;
                 case "[FLAW] Goalkeeper Casemate Flak Battery":
                     blockDisplayName = "[FLAW] Goalkeeper Flakwall";
-                    costMultiplier = 0.119f;
+                    costMultiplier = 0f;
                     break;
                 case "Shield Controller":
                 case "Shield Controller Table":

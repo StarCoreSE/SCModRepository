@@ -14,7 +14,7 @@ using IMySlimBlock = VRage.Game.ModAPI.IMySlimBlock;
 
 namespace TIOSelfRepair 
 {
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_ConveyorSorter), false, "ACTIVE_BLASTPLATE", "GIGA_BLASTPLATE" )]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_ConveyorSorter), false, "ACTIVE_BLASTPLATE", "Nariman_Dart_Turret", "GIGA_BLASTPLATE" )]
     public class TIOSelfRepair : MyGameLogicComponent
     {
         private IMyConveyorSorter artilleryBlock; //gosh i hope this doesnt conflict with the script in TIO
@@ -68,7 +68,7 @@ namespace TIOSelfRepair
 
             // If the grid has an owner, proceed with repair and ownership change.
 
-            float repairAmount = 14; //about 1% per triggertick, tested in game.
+            float repairAmount = 8; //about 3.5% per triggertick at 14, 2% per trigger at 8, tested in game.
             slimBlock.IncreaseMountLevel(repairAmount, 0L, null, 0f, false, MyOwnershipShareModeEnum.Faction);
 
             // Try casting to MyCubeBlock and change the owner.
