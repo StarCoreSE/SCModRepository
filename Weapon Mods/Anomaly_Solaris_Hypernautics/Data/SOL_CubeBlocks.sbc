@@ -200,7 +200,6 @@
 	[8 mini torps target missiles]
 	[Will heal shields if it impacts]
 	[40 second reload]
-	Caution, give it decent line of sight for better results
 
      </Description>
      <Icon>Textures\GUI\missile_defense.png</Icon>
@@ -543,7 +542,7 @@
 			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
 			<EdgeType>Light</EdgeType>
-			<BuildTimeSeconds>240</BuildTimeSeconds>
+			<BuildTimeSeconds>30</BuildTimeSeconds>
 			<InventoryMaxVolume>1</InventoryMaxVolume>
 			<DamageEffectId>213</DamageEffectId>
 			<AiEnabled>false</AiEnabled>
