@@ -9,6 +9,7 @@ using Sandbox.Game.EntityComponents;
 using ProtoBuf;
 using VRage.Utils;
 using VRage.Game;
+using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRage.Game.ModAPI.Network;
 using VRage.Sync;
@@ -18,6 +19,7 @@ using VRage.ModAPI;
 using VRage.ObjectBuilders;
 using VRageMath;
 using StarCore.RepairModule.Networking.Custom;
+using StarCore.RepairModule.Session;
 
 namespace StarCore.RepairModule
 {
@@ -647,7 +649,7 @@ namespace StarCore.RepairModule
             switch (subsystemPriority)
             {
                 case RepairPriority.Offense:
-                    return block.FatBlock is IMyConveyorSorter ||
+                    return (block.FatBlock is IMyConveyorSorter && RepairModuleSession.CoreSysAPI.HasCoreWeapon(block.FatBlock as MyEntity)) ||
                            block.FatBlock is IMyLargeTurretBase ||
                            block.FatBlock is IMySmallMissileLauncher ||
                            block.FatBlock is IMySmallMissileLauncherReload ||
