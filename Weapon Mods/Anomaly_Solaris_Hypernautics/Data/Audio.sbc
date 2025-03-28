@@ -7,6 +7,308 @@
 
 
 
+
+
+
+
+
+
+
+
+
+    <!-- Auger 3 Reload -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Auger3Reload</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <VolumeVariation>0.1</VolumeVariation>
+      <MaxDistance>2100</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>15</DynamicMusicAmount>
+      <Loopable>false</Loopable>
+      <SoundLimit>32</SoundLimit>
+      <Volume>0.7</Volume>
+      <PitchVariation>5</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Auger\Auger2Reload.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <!-- Auger 5 Reload -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Auger5Reload</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <VolumeVariation>0.1</VolumeVariation>
+      <MaxDistance>2100</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>15</DynamicMusicAmount>
+      <Loopable>false</Loopable>
+      <SoundLimit>32</SoundLimit>
+      <Volume>0.7</Volume>
+      <PitchVariation>5</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Auger\Auger2ReloadLong.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <!-- Auger 3 Fire -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Auger3Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <VolumeVariation>0.1</VolumeVariation>
+      <MaxDistance>2100</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>15</DynamicMusicAmount>
+      <Loopable>false</Loopable>
+      <SoundLimit>32</SoundLimit>
+      <Volume>0.7</Volume>
+      <PitchVariation>5</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Auger\Auger2PulseFire.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <!-- Auger 5 Fire -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Auger5Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <VolumeVariation>0.1</VolumeVariation>
+      <MaxDistance>2100</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Loopable>true</Loopable>
+      <SoundLimit>5</SoundLimit>
+      <Volume>0.7</Volume>
+      <PitchVariation>5</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Auger\Auger2BeamFire.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <!-- Auger Gear Loop -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>AugerGears</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <VolumeVariation>0.1</VolumeVariation>
+      <MaxDistance>500</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>1</DynamicMusicAmount>
+      <Loopable>true</Loopable>
+      <SoundLimit>1</SoundLimit>
+      <Volume>0.7</Volume>
+      <PitchVariation>5</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Auger\Goliath2GearLoopB.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <!-- Auger Shield Hit -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>AugerHitA</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <VolumeVariation>0.1</VolumeVariation>
+      <MaxDistance>2100</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>15</DynamicMusicAmount>
+      <Loopable>false</Loopable>
+      <SoundLimit>32</SoundLimit>
+      <Volume>0.7</Volume>
+      <PitchVariation>5</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Auger\Auger2HitA.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+    <!-- Auger Gear Loop -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>RadioGlitchLoop</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <VolumeVariation>0.1</VolumeVariation>
+      <MaxDistance>3000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>4</DynamicMusicAmount>
+      <Loopable>true</Loopable>
+      <SoundLimit>4</SoundLimit>
+      <Volume>0.7</Volume>
+      <PitchVariation>5</PitchVariation>
+      <MaxSounds>3</MaxSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Auger\RadioLoop2MIN.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Metalstorm -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>metalstorm</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <VolumeVariation>0.1</VolumeVariation>
+      <MaxDistance>2100</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="10" Distance="1000" Sound="metalstormdistant" />
+      </DistantSounds>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>15</DynamicMusicAmount>
+      <Loopable>false</Loopable>
+      <SoundLimit>32</SoundLimit>
+      <Volume>0.1</Volume>
+      <PitchVariation>5</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Arcade\metalstorm.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <!-- Metalstorm Distant-->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>metalstormdistant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <VolumeVariation>0.1</VolumeVariation>
+      <MaxDistance>2100</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>15</DynamicMusicAmount>
+      <Loopable>false</Loopable>
+      <SoundLimit>32</SoundLimit>
+      <Volume>0.1</Volume>
+      <PitchVariation>5</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Arcade\metalstorm.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <!-- Metalstorm Hit -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>cbar</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <VolumeVariation>0.1</VolumeVariation>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>15</DynamicMusicAmount>
+      <Loopable>false</Loopable>
+      <Volume>0.1</Volume>
+      <PitchVariation>5</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Arcade\cbar_hit1A.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <!-- Metalstorm Shield Hit -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>shit</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <VolumeVariation>0.1</VolumeVariation>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>15</DynamicMusicAmount>
+      <Loopable>false</Loopable>
+      <Volume>0.1</Volume>
+      <PitchVariation>5</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Arcade\shieldhit1.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <!-- Metalstorm Reload-->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>metalstormreload</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <VolumeVariation>0.1</VolumeVariation>
+      <MaxDistance>250</MaxDistance>
+      <SoundLimit>10</SoundLimit>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>15</DynamicMusicAmount>
+      <Loopable>false</Loopable>
+      <Volume>1</Volume>
+      <PitchVariation>5</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Arcade\metalstormreload.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
     <!-- Shotgun fires Sounds -->
     <Sound>
       <Id>
@@ -238,6 +540,35 @@
 			  </Wave>
 		  </Waves>
 	  </Sound>   
+
+     <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>MedLaserLoop</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>1200</MaxDistance>
+		  <PreventSynchronization>0</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>3</DynamicMusicAmount>
+		  <Volume>0.4</Volume>
+       <PitchVariation>25</PitchVariation>
+       <SoundLimit>5</SoundLimit>
+		  <Loopable>true</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\MW4 Laser MediumLoop.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>   
+
+
+
+
+
+
+
+    
      <Sound>
 		  <Id>
 			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
@@ -378,6 +709,121 @@
 		  </Waves>
 	  </Sound>
     
+
+
+
+  <!-- !!CAUTION!! -->
+  <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>caution</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>15</DynamicMusicAmount>
+      <Loopable>false</Loopable>
+      <Volume>1</Volume>
+      <PitchVariation>5</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Magic\hexcannoncharge.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+  <!-- suntravelloop -->
+  <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>suntravelloop</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>15</DynamicMusicAmount>
+      <Loopable>true</Loopable>
+      <Volume>5</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Magic\suntravelloop.wav</Start>
+          <Loop>Audio\Magic\suntravelloop.wav</Loop>
+          <End>Audio\Magic\suntravelloop.wav</End>
+        </Wave>
+      </Waves>
+    </Sound>
+
+  <!-- sunloop -->
+  <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>sunloop</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>15</DynamicMusicAmount>
+      <Loopable>true</Loopable>
+      <Volume>1</Volume>
+      <Waves>
+        <Wave Type="D3">
+          <Loop>Audio\Magic\sunloop.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+
+  <!-- sunprojhit -->
+  <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>sunprojhit</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>500</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DistantSounds>
+      </DistantSounds>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>15</DynamicMusicAmount>
+      <Loopable>false</Loopable>
+      <Volume>1</Volume>
+      <PitchVariation>5</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Magic\sunprojhit.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+  <!-- gapsfx -->
+  <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>gapsfx</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DistantSounds>
+      </DistantSounds>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>15</DynamicMusicAmount>
+      <Loopable>false</Loopable>
+      <Volume>1</Volume>
+      <PitchVariation>5</PitchVariation>
+     <SoundLimit>5</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Magic\gapsfx.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+
     <Sound>
       <Id>
         <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
