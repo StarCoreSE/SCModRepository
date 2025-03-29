@@ -948,12 +948,12 @@ namespace ShipPoints
                 case "Shield Controller":
                 case "Shield Controller Table":
                     blockDisplayName = "Shield Controller";
-                    costMultiplier = 50.00f;
+                    costMultiplier = 9999999f;
                     break;
                 case "Structural Integrity Field Generator":
 		case "[SI] Generator Core":
                     blockDisplayName = "Defensive Generator";
-                    costMultiplier = 50.00f;
+                    costMultiplier = 9999999f;
                     break;
                 case "[FAS] Neptune Torpedo":
                     blockDisplayName = "[FAS] Neptune Torpedo";
