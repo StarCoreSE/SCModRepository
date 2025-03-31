@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using ProtoBuf;
 using Sandbox.Common.ObjectBuilders;
 using Sandbox.Game;
+using Sandbox.Game.Entities;
 using Sandbox.Game.EntityComponents;
 using Sandbox.ModAPI;
-using VRage.Game;
 using VRage.Game.Components;
 using VRage.Game.Entity;
 using VRage.Game.ModAPI;
@@ -16,11 +16,11 @@ using VRage.ModAPI;
 using VRage.Network;
 using VRage.ObjectBuilders;
 using VRage.Sync;
+using VRage.Utils;
 using VRageMath;
 using static Draygo.API.HudAPIv2;
 using static VRageRender.MyBillboard;
-using Sandbox.Game.Gui;
-using Draygo.API;
+
 
 namespace Starcore.FieldGenerator
 {
@@ -29,6 +29,7 @@ namespace Starcore.FieldGenerator
     {
         private IMyCubeBlock Block;
         private readonly bool IsServer = MyAPIGateway.Session.IsServer;
+        private readonly bool IsDedicated = MyAPIGateway.Utilities.IsDedicated;
         public readonly Guid SettingsID = new Guid("7A7AC398-FAE3-44E5-ABD5-8AE49434DDF6");
 
         private Generator_Settings Config = FieldGenerator_Config.Config;
@@ -36,7 +37,15 @@ namespace Starcore.FieldGenerator
         private int _damageEventCounter = 0;
         private float _stabilityChange = 0;
         private int _resetCounter = 0;
-        private bool _lowStability = false;
+        private bool _lowStability = false;       
+
+        internal int _stopTickCounter = -1;
+        internal Vector3? angularAxis1 = null;
+        internal Vector3? angularAxis2 = null;
+
+        internal bool _cachedState;
+        internal MyEntity3DSoundEmitter BlockSoundEmitter;
+        internal MySoundPair BlockSoundPair;
 
         private int initValueDelayTicks = 60; // 1 second delay (60 ticks)
         private bool valuesInitialized = false;
@@ -44,7 +53,8 @@ namespace Starcore.FieldGenerator
         #region Sync Properties
         public MySync<bool, SyncDirection.BothWays> SiegeMode;
         public MySync<bool, SyncDirection.BothWays> SiegeCooldownActive;
-        public MySync<bool, SyncDirection.FromServer> GridStopped = null;
+        public MySync<bool, SyncDirection.BothWays> SlowdownActive;
+        public MySync<bool, SyncDirection.FromServer> GridStopped;
 
         public MySync<int, SyncDirection.BothWays> SiegeElapsedTime;
         public MySync<int, SyncDirection.BothWays> SiegeCooldownTime;
@@ -85,6 +95,7 @@ namespace Starcore.FieldGenerator
             if (Block?.CubeGrid?.Physics == null)
                 return;
 
+            BlockSoundEmitter = new MyEntity3DSoundEmitter((MyEntity)MyAPIGateway.Entities.GetEntityById(Block.EntityId));
             FieldGeneratorControls.DoOnce(ModContext);        
 
             Sink = Block.Components.Get<MyResourceSinkComponent>();
@@ -123,14 +134,15 @@ namespace Starcore.FieldGenerator
                 Stability.ValueChanged += Stability_ValueChanged;
             }
 
-            if (!IsServer)
+            if (!IsDedicated)
             {
                 GridStopped.ValueChanged += OnGridStopValueChange;
+                Block.IsWorkingChanged += Block_IsWorkingChanged;
             }
 
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
             NeedsUpdate |= MyEntityUpdateEnum.EACH_10TH_FRAME;
-        }  
+        }
 
         public override void UpdateAfterSimulation()
         {
@@ -146,11 +158,32 @@ namespace Starcore.FieldGenerator
                     }
                     else
                     {
+                        _cachedState = Block.IsWorking;
                         Stability.Value = 100;
                         InitExistingUpgrades();
                         valuesInitialized = true;
                     }
                 }
+
+                if (SiegeMode.Value && !GridStopped.Value)
+                {
+                    if (Block.CubeGrid.Physics.LinearVelocity != Vector3D.Zero)
+                    {
+                        SiegeEmergencyStop();
+                        _stopTickCounter++;
+                    }
+                }
+            }
+
+            if (!IsDedicated)
+            {
+                if (SiegeMode.Value && !GridStopped.Value && !SlowdownActive.Value && IsClientInShip())
+                {
+                    BlockSoundPair = new MySoundPair("FieldGen_Brake");
+                    BlockSoundEmitter.SetPosition(Block.Position);
+                    BlockSoundEmitter?.PlaySound(BlockSoundPair, false, false, true, true, false, null, true);
+                    SlowdownActive.Value = true;
+                }                    
             }
 
             if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0)
@@ -159,7 +192,10 @@ namespace Starcore.FieldGenerator
                 {
                     if (IsServer)
                     {
-                        UpdateSiegeState();
+                        if (GridStopped.Value || SiegeCooldownActive.Value)
+                        {
+                            UpdateSiegeState();
+                        }                      
 
                         if (!Config.SimplifiedMode)
                         {
@@ -259,10 +295,11 @@ namespace Starcore.FieldGenerator
                 Stability.ValueChanged -= Stability_ValueChanged;
             }
 
-            if (!IsServer)
+            if (!IsDedicated)
             {
                 GridStopped.ValueChanged -= OnGridStopValueChange;
-            }              
+                Block.IsWorkingChanged -= Block_IsWorkingChanged;
+            }
 
             Block = null;
         }
@@ -350,7 +387,7 @@ namespace Starcore.FieldGenerator
                 return;
             }
 
-            if (SiegeMode.Value)
+            if (SiegeMode.Value && GridStopped.Value)
             {
                 MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(Block.CubeGrid.Name, (1 - Config.SiegeModeResistence));
                 return;
@@ -399,6 +436,27 @@ namespace Starcore.FieldGenerator
         {
             if (obj?.Value ?? false)
                 Block.CubeGrid.Physics.LinearVelocity = Vector3.Zero;
+        }
+
+        private void Block_IsWorkingChanged(IMyCubeBlock block)
+        {
+            if (IsClientInShip())
+            {
+                if (!block.IsWorking)
+                {
+                    BlockSoundPair = block.IsFunctional ? BlockSoundPair = new MySoundPair("FieldGen_Offline") : BlockSoundPair = new MySoundPair("FieldGen_Damaged");
+                    BlockSoundEmitter.SetPosition(Block.Position);
+                    BlockSoundEmitter?.PlaySound(BlockSoundPair, false, false, true, true, false, null, true);
+                }
+                else
+                {
+                    BlockSoundPair = block.SlimBlock.IsFullIntegrity ? BlockSoundPair = new MySoundPair("FieldGen_PowerRestored") : BlockSoundPair = new MySoundPair("FieldGen_DamagedRepaired");
+                    BlockSoundEmitter.SetPosition(block.Position);
+                    BlockSoundEmitter?.PlaySound(BlockSoundPair, false, false, true, true, false, null, true);
+                }          
+            }
+            else
+                return;           
         }
         #endregion
 
@@ -458,10 +516,73 @@ namespace Starcore.FieldGenerator
                         FieldGeneratorSession.CoreSysAPI.SetFiringAllowed(entBlock, enabled);
                         block.Enabled = enabled;
                     }
+                    else if (block is IMyThrust || block is IMyGyro)
+                    {
+                        block.Enabled = enabled;
+                    }
                 }
                 else
                     continue;
             }
+        }
+
+        private void SiegeEmergencyStop()
+        {
+            if (Block.CubeGrid.Physics == null) 
+                return;
+
+            // Linear Drag
+            float elapsed = _stopTickCounter / 60f;
+            float timeScale = MathHelper.Clamp(elapsed / 10f, 0f, 1f);
+            float forceMagnitude = MathHelper.Lerp(1000000f, 120000000f, timeScale);
+
+            Vector3 direction = Vector3.Normalize(Block.CubeGrid.Physics.LinearVelocity);
+            Vector3 linearDrag = -direction * forceMagnitude;
+
+            Block.CubeGrid.Physics.AddForce(MyPhysicsForceType.APPLY_WORLD_FORCE, linearDrag, null, null);
+
+            // Angular Drag
+            if (angularAxis1 == null)
+            {
+                angularAxis1 = GetRandomUnitVector();
+
+                Vector3 candidate;
+                do
+                {
+                    candidate = GetRandomUnitVector();
+                }
+                while (Math.Abs(Vector3D.Dot(candidate, angularAxis1.Value)) > 0.99f);
+
+                angularAxis2 = candidate;
+            }
+
+            Vector3 torqueDirection = new Vector3(0, 0, 0);
+            torqueDirection += angularAxis1.Value;
+            torqueDirection += angularAxis2.Value;
+
+            Block.CubeGrid.Physics.AngularVelocity += torqueDirection * 0.1f / 60f;
+
+            // Finish if under 5m/s
+            if (Block.CubeGrid.Physics.LinearVelocity.LengthSquared() < 25f || elapsed >= 10f) // 5 m/s squared = 25
+            {
+                Block.CubeGrid.Physics.LinearVelocity = Vector3D.Zero;
+                GridStopped.Value = true;
+                SlowdownActive.Value = false;
+                _stopTickCounter = -1;
+                angularAxis1 = null;
+                angularAxis2 = null;
+                return;
+            }         
+        }
+
+        Vector3 GetRandomUnitVector()
+        {
+            Vector3 v = new Vector3(
+                MyUtils.GetRandomFloat(-1f, 1f),
+                MyUtils.GetRandomFloat(-1f, 1f),
+                MyUtils.GetRandomFloat(-1f, 1f)
+            );
+            return Vector3.Normalize(v);
         }
 
         private void EndSiegeMode()
@@ -604,6 +725,20 @@ namespace Starcore.FieldGenerator
             float t = clampedFieldPower / maxPossibleFieldPower;
 
             return Config.MinPowerDraw + t * (Config.MaxPowerDraw - Config.MinPowerDraw);
+        }
+
+        public float CheckPowerDraw(float fieldValue)
+        {
+            float maxPossibleFieldPower = Config.PerModuleAmount * Config.MaxModuleCount;
+            float clampedFieldPower = MathHelper.Clamp(fieldValue, 0, maxPossibleFieldPower);
+            float t = clampedFieldPower / maxPossibleFieldPower;
+
+            return Config.MinPowerDraw + t * (Config.MaxPowerDraw - Config.MinPowerDraw);
+        }
+
+        public float CheckPowerGeneration()
+        {
+            return Block.CubeGrid.ResourceDistributor.MaxAvailableResourceByType(MyResourceDistributorComponent.ElectricityId);
         }
 
         private bool IsClientInShip()
@@ -751,7 +886,11 @@ namespace Starcore.FieldGenerator
                 GeneratorHUDContent.Append(GenerateBar("Stability:", Stability.Value, 100, true));
             }
 
-            if (SiegeMode.Value)
+            if (SiegeMode.Value && !GridStopped.Value)
+            {
+                GeneratorHUDContent.Append($"\nSiege Mode Actived | Emergency Braking Applied");
+            }
+            else if (SiegeMode.Value)
             {
                 GeneratorHUDContent.Append($"\nSiege Mode Active | {SiegeElapsedTime.Value} / {Config.MaxSiegeTime}");
             }

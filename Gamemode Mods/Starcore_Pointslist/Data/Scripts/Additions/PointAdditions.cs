@@ -161,7 +161,7 @@ namespace ShipPoints
             ["S_Chem_Laser_Block"] = 120,
             ["Impulse_Torch"] = 175,
             ["Flechette_DoubleBarrel"] = 200,
-            ["Nariman_Dart_Turret"] = 225,
+            ["Nariman_Dart_Turret"] = 245,
             ["Counter_Battery"] = 250,
             ["SolHyp_ArcStrike_Torp"] = 275,
             ["MagnaPulse_Gen"] = 400,
@@ -948,12 +948,12 @@ namespace ShipPoints
                 case "Shield Controller":
                 case "Shield Controller Table":
                     blockDisplayName = "Shield Controller";
-                    costMultiplier = 50.00f;
+                    costMultiplier = 9999999f;
                     break;
                 case "Structural Integrity Field Generator":
 		case "[SI] Generator Core":
                     blockDisplayName = "Defensive Generator";
-                    costMultiplier = 50.00f;
+                    costMultiplier = 9999999f;
                     break;
                 case "[FAS] Neptune Torpedo":
                     blockDisplayName = "[FAS] Neptune Torpedo";
