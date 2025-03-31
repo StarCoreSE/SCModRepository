@@ -314,6 +314,7 @@
         <string>K_SA_Launcher_VIV</string>
         <string>HAS_Avenger</string>
         <string>HAS_Esper</string>
+	<string>HAS_Nyx</string>
 
       </ItemIds>
     </Category>
