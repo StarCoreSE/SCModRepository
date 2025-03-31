@@ -31,7 +31,7 @@ namespace Epstein_Fusion_DS.HeatParts.Definitions
             new HeatPartDefinition
             {
                 SubtypeId = "Heat_Heatsink",
-                HeatCapacity = 60,
+                HeatCapacity = 180,
                 HeatDissipation = 0,
                 LoSCheck = null
             },
@@ -89,7 +89,7 @@ namespace Epstein_Fusion_DS.HeatParts.Definitions
             new HeatPartDefinition
             {
                 SubtypeId = "ActiveRadiator",
-                HeatCapacity = 60,
+                HeatCapacity = 180,
                 HeatDissipation = 150,
                 LoSCheck = radiatorBlock =>
                 {
