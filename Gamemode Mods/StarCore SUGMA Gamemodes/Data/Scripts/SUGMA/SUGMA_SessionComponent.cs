@@ -11,14 +11,11 @@ using SC.SUGMA.GameModes.Domination;
 using SC.SUGMA.GameModes.Elimination;
 using SC.SUGMA.GameModes.TeamDeathmatch;
 using SC.SUGMA.GameModes.KOTH;
+using SC.SUGMA.GameModes.RocketCore;
 using SC.SUGMA.GameState;
 using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
-using SC.SUGMA.Utilities;
 using VRage.Game.Components;
-using VRage.Scripting;
-using Sandbox.Game;
-using VRageMath;
 
 namespace SC.SUGMA
 {
@@ -38,6 +35,7 @@ namespace SC.SUGMA
             ["dom"] = new DominationGamemode(),
             ["tdm"] = new TeamDeathmatchGamemode(),
             ["koth"] = new KOTHGamemode(),
+            ["roc"] = new RocketCoreGamemode(),
         };
 
         /// <summary>
