@@ -139,7 +139,7 @@ namespace SC.SUGMA.GameModes.TeamDeathmatch
             if (!setWinnerFromArgs && MyAPIGateway.Session.IsServer)
             {
                 if (WinningFaction == null)
-                    WinningFaction = PointTracker.FactionPoints.MaxBy(f => f.Value).Key;
+                    WinningFaction = PointTracker.GetHighestPoints();
 
                 Arguments = Arguments.Concat(new[] { $"win{WinningFaction?.FactionId ?? -1}" }).ToArray();
             }
