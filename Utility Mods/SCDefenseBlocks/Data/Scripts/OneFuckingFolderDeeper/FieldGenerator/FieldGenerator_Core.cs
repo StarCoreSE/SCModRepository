@@ -387,7 +387,7 @@ namespace Starcore.FieldGenerator
                 return;
             }
 
-            if (SiegeMode.Value && GridStopped.Value)
+            if (SiegeMode.Value/* && GridStopped.Value*/)
             {
                 MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(Block.CubeGrid.Name, (1 - Config.SiegeModeResistence));
                 return;
