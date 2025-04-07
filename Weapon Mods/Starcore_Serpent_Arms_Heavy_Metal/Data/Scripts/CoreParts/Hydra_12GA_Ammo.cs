@@ -736,7 +736,7 @@ namespace Scripts
                     WidthVariance = Random(start: 0f, end: 0f), // adds random value to default width (negatives shrinks width)
                     Tracer = new TracerBaseDef
                     {
-                        Enable = false,
+                        Enable = true,
                         Length = 300f, //
                         Width = 0.8f, //
                         Color = Color(red: 60f, green: 3.25f, blue: 0f, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
@@ -765,7 +765,7 @@ namespace Scripts
                     },
                     Trail = new TrailDef
                     {
-                        Enable = false,
+                        Enable = true,
                         Textures = new[] {
                             "ProjectileTrailLine", // Please always have this Line set, if this Section is enabled.
                         },
