@@ -693,7 +693,7 @@ namespace Scripts
             },
             AmmoGraphics = new GraphicDef
             {
-                ModelName = "K_SA_GaussProjectile", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
+                ModelName = "", // Model Path goes here.  "\\Models\\Ammo\\Starcore_Arrow_Missile_Large"
                 VisualProbability = 1f, // %
                 ShieldHitDraw = false,
                 Particles = new AmmoParticleDef
@@ -709,7 +709,7 @@ namespace Scripts
                     },
                     Hit = new ParticleDef
                     {
-                        Name = "K_SA_GaussFire",
+                        Name = "",
                         ApplyToShield = true,
                         Offset = Vector(x: 0, y: 0, z: 0),
                         Extras = new ParticleOptionDef
@@ -736,7 +736,7 @@ namespace Scripts
                     WidthVariance = Random(start: 0f, end: 0f), // adds random value to default width (negatives shrinks width)
                     Tracer = new TracerBaseDef
                     {
-                        Enable = true,
+                        Enable = false,
                         Length = 300f, //
                         Width = 0.8f, //
                         Color = Color(red: 60f, green: 3.25f, blue: 0f, alpha: 1), // RBG 255 is Neon Glowing, 100 is Quite Bright.
@@ -765,7 +765,7 @@ namespace Scripts
                     },
                     Trail = new TrailDef
                     {
-                        Enable = true,
+                        Enable = false,
                         Textures = new[] {
                             "ProjectileTrailLine", // Please always have this Line set, if this Section is enabled.
                         },
