@@ -2,6 +2,7 @@
 using Sandbox.Game.Gui;
 using Sandbox.ModAPI;
 using StarCore.ShareTrack.API;
+using VRage.Input;
 using VRageMath;
 using VRageRender;
 
@@ -19,13 +20,25 @@ namespace StarCore.ShareTrack
                 _pointsMessage = new HudAPIv2.HUDMessage(scale: 1f, font: "BI_SEOutlined", Message: new StringBuilder(""),
                     origin: new Vector2D(-0.969, 0.57), blend: MyBillboard.BlendTypeEnum.PostPP);
             };
+
+            
         }
 
         private int _ticks;
         public void Update()
         {
+            if (MyAPIGateway.Input.WasKeyPress(MyKeys.D0))
+                UpdateHud(null);
+
             if (_ticks++ % 10 != 0)
                 return;
+
+            if (MyAPIGateway.Session.ControlledObject is IMyShipController)
+            {
+                UpdateHud(null);
+                LastHeldSubtype = null;
+                return;
+            }
 
             if (LastHeldSubtype != MyHud.BlockInfo?.DefinitionId.SubtypeName)
             {
