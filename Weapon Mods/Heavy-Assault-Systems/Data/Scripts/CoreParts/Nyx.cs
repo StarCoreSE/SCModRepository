@@ -185,7 +185,7 @@ namespace Scripts {
                 },
             },
             Ammos = new[] {
-                HAS_Nyx_Ammo,  // Must list all primary, shrapnel, and pattern ammos.
+                HAS_Nyx_Ammo, HAS_Nyx_Ammo_Fake, // Must list all primary, shrapnel, and pattern ammos.
             },
             //Animations = SA_HMI_ERGaussRF_Animation,
             //Upgrades = UpgradeModules,
