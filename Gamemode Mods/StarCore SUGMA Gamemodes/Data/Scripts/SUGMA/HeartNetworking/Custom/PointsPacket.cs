@@ -17,11 +17,11 @@ namespace SC.SUGMA.HeartNetworking.Custom
         {
         }
 
-        public PointsPacket(PointTracker pointTracker)
+        public PointsPacket(string componentId, Dictionary<IMyFaction, int> points)
         {
-            _senderObjectId = pointTracker.ComponentId;
+            _senderObjectId = componentId;
             _points = new Dictionary<long, int>();
-            foreach (var factionKvp in pointTracker.FactionPoints)
+            foreach (var factionKvp in points)
                 _points.Add(factionKvp.Key.FactionId, factionKvp.Value);
 
             //string data = "";

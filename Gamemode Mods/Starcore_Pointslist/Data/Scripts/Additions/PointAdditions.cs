@@ -763,7 +763,7 @@ namespace ShipPoints
             ["Caster_Accelerator_0"] = 10,
             ["Caster_Accelerator_90"] = 40,
             ["Caster_Feeder"] = 10,
-            ["Caster_FocusLens"] = 250,
+            ["Caster_FocusLens"] = 50,
             ["Caster_Reactor"] = 125,
             ["Heat_Heatsink"] = 10,
             ["Heat_FlatRadiator"] = 10,

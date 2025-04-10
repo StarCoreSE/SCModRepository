@@ -172,6 +172,8 @@ namespace Starcore.FieldGenerator
                         SiegeEmergencyStop();
                         _stopTickCounter++;
                     }
+                    else
+                        GridStopped.Value = true;
                 }
             }
 
