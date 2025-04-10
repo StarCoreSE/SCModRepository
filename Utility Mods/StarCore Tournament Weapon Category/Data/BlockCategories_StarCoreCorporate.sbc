@@ -257,6 +257,7 @@
         <string>NHI_Mk2_Cannon_Turret</string>
         <string>SC_Coil_Cannon</string>
 		<string>NHI_Mk3_Cannon_Turret</string>
+		<string>NHI_Fixed_Autocannon</string>
 
       </ItemIds>
     </Category>
@@ -313,6 +314,7 @@
         <string>K_SA_Launcher_VIV</string>
         <string>HAS_Avenger</string>
         <string>HAS_Esper</string>
+	<string>HAS_Nyx</string>
 
       </ItemIds>
     </Category>
