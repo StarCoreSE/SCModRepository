@@ -56,7 +56,7 @@ namespace Scripts {
                 TopTargets = 8, // Maximum number of targets to randomize between; 0 = unlimited.
                 CycleTargets = 0, // Number of targets to "cycle" per acquire attempt.
                 TopBlocks = 8, // Maximum number of blocks to randomize between; 0 = unlimited.
-                CycleBlocks = 3, // Number of blocks to "cycle" per acquire attempt.
+                CycleBlocks = 0, // Number of blocks to "cycle" per acquire attempt.
                 StopTrackingSpeed = 0, // Do not track threats traveling faster than this speed; 0 = unlimited.
             },
             HardPoint = new HardPointDef
