@@ -29,6 +29,7 @@ namespace Starcore.FieldGenerator
     {
         private IMyCubeBlock Block;
         private readonly bool IsServer = MyAPIGateway.Session.IsServer;
+        private readonly bool IsDedicated = MyAPIGateway.Utilities.IsDedicated;
         public readonly Guid SettingsID = new Guid("7A7AC398-FAE3-44E5-ABD5-8AE49434DDF6");
 
         private Generator_Settings Config = FieldGenerator_Config.Config;
@@ -133,9 +134,10 @@ namespace Starcore.FieldGenerator
                 Stability.ValueChanged += Stability_ValueChanged;
             }
 
-            if (!IsServer)
+            if (!IsDedicated)
             {
                 GridStopped.ValueChanged += OnGridStopValueChange;
+                Block.IsWorkingChanged += Block_IsWorkingChanged;
             }
 
             NeedsUpdate |= MyEntityUpdateEnum.EACH_FRAME;
@@ -170,23 +172,20 @@ namespace Starcore.FieldGenerator
                         SiegeEmergencyStop();
                         _stopTickCounter++;
                     }
+                    else
+                        GridStopped.Value = true;
                 }
             }
 
-            if (SiegeMode.Value && !GridStopped.Value)
+            if (!IsDedicated)
             {
-                if (!SlowdownActive.Value)
+                if (SiegeMode.Value && !GridStopped.Value && !SlowdownActive.Value && IsClientInShip())
                 {
                     BlockSoundPair = new MySoundPair("FieldGen_Brake");
+                    BlockSoundEmitter.SetPosition(Block.Position);
                     BlockSoundEmitter?.PlaySound(BlockSoundPair, false, false, true, true, false, null, true);
                     SlowdownActive.Value = true;
                 }                    
-            }
-
-            if (_cachedState != Block.IsWorking)
-            {
-                _cachedState = Block.IsWorking;
-                Block_IsWorkingChanged();
             }
 
             if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0)
@@ -298,10 +297,11 @@ namespace Starcore.FieldGenerator
                 Stability.ValueChanged -= Stability_ValueChanged;
             }
 
-            if (!IsServer)
+            if (!IsDedicated)
             {
                 GridStopped.ValueChanged -= OnGridStopValueChange;
-            }              
+                Block.IsWorkingChanged -= Block_IsWorkingChanged;
+            }
 
             Block = null;
         }
@@ -440,18 +440,25 @@ namespace Starcore.FieldGenerator
                 Block.CubeGrid.Physics.LinearVelocity = Vector3.Zero;
         }
 
-        private void Block_IsWorkingChanged()
-        {     
-            if (!Block.IsWorking)
+        private void Block_IsWorkingChanged(IMyCubeBlock block)
+        {
+            if (IsClientInShip())
             {
-                BlockSoundPair = Block.IsFunctional ? BlockSoundPair = new MySoundPair("FieldGen_Offline") : BlockSoundPair = new MySoundPair("FieldGen_Damaged");
-                BlockSoundEmitter?.PlaySound(BlockSoundPair, false, false, true, true, false, null, true);
+                if (!block.IsWorking)
+                {
+                    BlockSoundPair = block.IsFunctional ? BlockSoundPair = new MySoundPair("FieldGen_Offline") : BlockSoundPair = new MySoundPair("FieldGen_Damaged");
+                    BlockSoundEmitter.SetPosition(Block.Position);
+                    BlockSoundEmitter?.PlaySound(BlockSoundPair, false, false, true, true, false, null, true);
+                }
+                else
+                {
+                    BlockSoundPair = block.SlimBlock.IsFullIntegrity ? BlockSoundPair = new MySoundPair("FieldGen_PowerRestored") : BlockSoundPair = new MySoundPair("FieldGen_DamagedRepaired");
+                    BlockSoundEmitter.SetPosition(block.Position);
+                    BlockSoundEmitter?.PlaySound(BlockSoundPair, false, false, true, true, false, null, true);
+                }          
             }
             else
-            {
-                BlockSoundPair = Block.SlimBlock.IsFullIntegrity ? BlockSoundPair = new MySoundPair("FieldGen_PowerRestored") : BlockSoundPair = new MySoundPair("FieldGen_DamagedRepaired");
-                BlockSoundEmitter?.PlaySound(BlockSoundPair, false, false, true, true, false, null, true);
-            }
+                return;           
         }
         #endregion
 
@@ -526,32 +533,17 @@ namespace Starcore.FieldGenerator
             if (Block.CubeGrid.Physics == null) 
                 return;
 
+            // Linear Drag
             float elapsed = _stopTickCounter / 60f;
-            float maxTime = 10f;
-
-            float minForce = 1000000f;
-            float maxForce = 120000000f;
-
-            float timeScale = MathHelper.Clamp(elapsed / maxTime, 0f, 1f);
-            float forceMagnitude = MathHelper.Lerp(minForce, maxForce, timeScale);
+            float timeScale = MathHelper.Clamp(elapsed / 10f, 0f, 1f);
+            float forceMagnitude = MathHelper.Lerp(1000000f, 120000000f, timeScale);
 
             Vector3 direction = Vector3.Normalize(Block.CubeGrid.Physics.LinearVelocity);
             Vector3 linearDrag = -direction * forceMagnitude;
 
             Block.CubeGrid.Physics.AddForce(MyPhysicsForceType.APPLY_WORLD_FORCE, linearDrag, null, null);
 
-            if (Block.CubeGrid.Physics.LinearVelocity.LengthSquared() < 25f || elapsed >= maxTime) // 5 m/s squared = 25
-            {
-                Block.CubeGrid.Physics.LinearVelocity = Vector3D.Zero;
-                GridStopped.Value = true;
-                SlowdownActive.Value = false;
-                _stopTickCounter = -1;
-                angularAxis1 = null;
-                angularAxis2 = null;
-                return;
-            }
-
-            // ----- ANGULAR DRAG -----
+            // Angular Drag
             if (angularAxis1 == null)
             {
                 angularAxis1 = GetRandomUnitVector();
@@ -566,15 +558,23 @@ namespace Starcore.FieldGenerator
                 angularAxis2 = candidate;
             }
 
-            float targetAngularAccel = 0.1f;
-            Vector3 torqueDirection = new Vector3(0,0,0);
-
+            Vector3 torqueDirection = new Vector3(0, 0, 0);
             torqueDirection += angularAxis1.Value;
             torqueDirection += angularAxis2.Value;
 
-            Vector3 angularImpulse = torqueDirection * targetAngularAccel / 60f;
+            Block.CubeGrid.Physics.AngularVelocity += torqueDirection * 0.1f / 60f;
 
-            Block.CubeGrid.Physics.AngularVelocity += angularImpulse;
+            // Finish if under 5m/s
+            if (Block.CubeGrid.Physics.LinearVelocity.LengthSquared() < 25f || elapsed >= 10f) // 5 m/s squared = 25
+            {
+                Block.CubeGrid.Physics.LinearVelocity = Vector3D.Zero;
+                GridStopped.Value = true;
+                SlowdownActive.Value = false;
+                _stopTickCounter = -1;
+                angularAxis1 = null;
+                angularAxis2 = null;
+                return;
+            }         
         }
 
         Vector3 GetRandomUnitVector()
@@ -731,11 +731,11 @@ namespace Starcore.FieldGenerator
 
         public float CheckPowerDraw(float fieldValue)
         {
-            float maxPossibleFieldPowerV = Config.PerModuleAmount * Config.MaxModuleCount;
-            float clampedFieldPowerV = MathHelper.Clamp(fieldValue, 0, maxPossibleFieldPowerV);
-            float tV = clampedFieldPowerV / maxPossibleFieldPowerV;
+            float maxPossibleFieldPower = Config.PerModuleAmount * Config.MaxModuleCount;
+            float clampedFieldPower = MathHelper.Clamp(fieldValue, 0, maxPossibleFieldPower);
+            float t = clampedFieldPower / maxPossibleFieldPower;
 
-            return Config.MinPowerDraw + tV * (Config.MaxPowerDraw - Config.MinPowerDraw);
+            return Config.MinPowerDraw + t * (Config.MaxPowerDraw - Config.MinPowerDraw);
         }
 
         public float CheckPowerGeneration()

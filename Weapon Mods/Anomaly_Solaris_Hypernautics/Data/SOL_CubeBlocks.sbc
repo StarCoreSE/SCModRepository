@@ -662,9 +662,9 @@
 	  <Description>
       Hercules MAC
       [10km range, 5km effective range]
-      [Kinetic damage]
-      [3500 m/s] 
-    Three shot magazine. 8s reload.
+      [Pen Kinetic damage]
+      [3600 m/s] 
+    Three shot magazine. 24s reload.
 	 </Description>
      <Icon>Textures\Icons\FixedCoilCannon.dds</Icon>
       <CubeSize>Large</CubeSize>

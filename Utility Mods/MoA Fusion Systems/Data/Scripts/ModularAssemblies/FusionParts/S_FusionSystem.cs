@@ -13,7 +13,7 @@ namespace Epstein_Fusion_DS.
     internal class SFusionSystem
     {
         public const float MegawattsPerFusionPower = 32;
-        public const float NewtonsPerFusionPower = 1500000;
+        public const float NewtonsPerFusionPower = 24000000;
         public const float HydrogenPerFusionPower = 42;
         public readonly IMyCubeGrid Grid;
 
@@ -253,8 +253,10 @@ namespace Epstein_Fusion_DS.
             PowerStored -= PowerConsumption;
             PowerStored += PowerGeneration;
             if (PowerStored > MaxPowerStored) PowerStored = MaxPowerStored;
+            if (float.IsNaN(PowerStored) || float.IsInfinity(PowerStored))
+                PowerStored = 0;
             ModularApi.SetAssemblyProperty(PhysicalAssemblyId, "HeatGeneration",
-                PowerConsumption * MegawattsPerFusionPower);
+                PowerConsumption * MegawattsPerFusionPower * 2);
         }
 
         public void UpdateTick()

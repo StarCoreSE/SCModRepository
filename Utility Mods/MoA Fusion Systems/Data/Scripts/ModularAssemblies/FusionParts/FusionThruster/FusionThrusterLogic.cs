@@ -31,7 +31,7 @@ namespace Epstein_Fusion_DS.FusionParts.FusionThruster
 
         internal static readonly Dictionary<string, DriveSetting> DriveSettings = new Dictionary<string, DriveSetting>
         {
-            ["Caster_FocusLens"] = new DriveSetting(4.00f, 1.5f, 34.56f*2*1000000),
+            ["Caster_FocusLens"] = new DriveSetting(1.00f, 1.5f, 144000000),
         };
 
         public override void UpdatePower(float powerGeneration, float newtonsPerFusionPower, int numberThrusters)
