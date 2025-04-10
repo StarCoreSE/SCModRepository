@@ -516,7 +516,7 @@ namespace Scripts
                     Armor = 2.5f, // Multiplier for damage against all armor. This is multiplied with the specific armor type multiplier (light, heavy).
                     Light = -1f, // Multiplier for damage against light armor.
                     Heavy = -1f, // Multiplier for damage against heavy armor.
-                    NonArmor = -1.5f, // Multiplier for damage against every else.
+                    NonArmor = 1.5f, // Multiplier for damage against every else.
                 },
                 Shields = new ShieldDef
                 {
@@ -571,7 +571,7 @@ namespace Scripts
                 {
                     Enable = true,
                     Radius = 1f, // Radius of AOE effect, in meters.
-                    Damage = 1f,
+                    Damage = 100f,
                     Depth = 1f, // Max depth of AOE effect, in meters. 0=disabled, and AOE effect will reach to a depth of the radius value
                     MaxAbsorb = 0f, // Soft cutoff for damage, except for pooled falloff.  If pooled falloff, limits max damage per block.
                     Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius

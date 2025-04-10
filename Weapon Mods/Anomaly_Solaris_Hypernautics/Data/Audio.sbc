@@ -662,7 +662,7 @@
       <PreventSynchronization>10</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>2</Volume>
+      <Volume>1</Volume>
       <Loopable>false</Loopable>
       <Waves>
         <Wave Type="D3">

@@ -297,7 +297,7 @@ namespace Scripts
             },
             AmmoGraphics = new GraphicDef
             {
-                ModelName = "\\Models\\Ammo\\Expanse-Torpedo",
+                ModelName = "\\Models\\Ammo\\Expanse-Torpedo-Smol",
                 VisualProbability = 1f,
                 ShieldHitDraw = false,
                 Particles = new AmmoParticleDef
