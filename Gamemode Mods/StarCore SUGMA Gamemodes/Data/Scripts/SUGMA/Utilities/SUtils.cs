@@ -43,6 +43,9 @@ namespace SC.SUGMA.Utilities
 
         public static void SetWorldPermissionsForMatch(bool matchActive)
         {
+            if (MyAPIGateway.Session == null)
+                return;
+
             MyAPIGateway.Utilities.ShowMessage("SUGMA",
                 $"Match global permissions {(matchActive ? "enabled" : "disabled")}.");
 
