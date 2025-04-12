@@ -20,6 +20,7 @@ using VRage.Utils;
 using VRageMath;
 using static Draygo.API.HudAPIv2;
 using static VRageRender.MyBillboard;
+using static VRage.Game.MyObjectBuilder_BehaviorTreeDecoratorNode;
 
 
 namespace Starcore.FieldGenerator
@@ -53,8 +54,7 @@ namespace Starcore.FieldGenerator
         #region Sync Properties
         public MySync<bool, SyncDirection.BothWays> SiegeMode;
         public MySync<bool, SyncDirection.BothWays> SiegeCooldownActive;
-        public MySync<bool, SyncDirection.BothWays> SlowdownActive;
-        public MySync<bool, SyncDirection.FromServer> GridStopped;
+        public MySync<bool, SyncDirection.FromServer> _slowdownComplete;
 
         public MySync<int, SyncDirection.BothWays> SiegeElapsedTime;
         public MySync<int, SyncDirection.BothWays> SiegeCooldownTime;
@@ -136,7 +136,6 @@ namespace Starcore.FieldGenerator
 
             if (!IsDedicated)
             {
-                GridStopped.ValueChanged += OnGridStopValueChange;
                 Block.IsWorkingChanged += Block_IsWorkingChanged;
             }
 
@@ -165,38 +164,26 @@ namespace Starcore.FieldGenerator
                     }
                 }
 
-                if (SiegeMode.Value && !GridStopped.Value)
+                if (Block.IsWorking)
                 {
-                    if (Block.CubeGrid.Physics.LinearVelocity != Vector3D.Zero)
+                    UpdateSiegeState();
+                }
+                else if (!Block.IsWorking)
+                {
+                    if (SiegeMode.Value)
                     {
-                        SiegeEmergencyStop();
-                        _stopTickCounter++;
+                        EndSiegeState(true);
+                        SiegeMode.Value = false;
                     }
                 }
-            }
-
-            if (!IsDedicated)
-            {
-                if (SiegeMode.Value && !GridStopped.Value && !SlowdownActive.Value && IsClientInShip())
-                {
-                    BlockSoundPair = new MySoundPair("FieldGen_Brake");
-                    BlockSoundEmitter.SetPosition(Block.Position);
-                    BlockSoundEmitter?.PlaySound(BlockSoundPair, false, false, true, true, false, null, true);
-                    SlowdownActive.Value = true;
-                }                    
-            }
+            }        
 
             if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0)
             {
                 if (Block.IsWorking)
                 {
                     if (IsServer)
-                    {
-                        if (GridStopped.Value || SiegeCooldownActive.Value)
-                        {
-                            UpdateSiegeState();
-                        }                      
-
+                    {                                   
                         if (!Config.SimplifiedMode)
                         {
                             if (_lowStability && Stability.Value < 100)
@@ -245,13 +232,7 @@ namespace Starcore.FieldGenerator
                     {
                         if (FieldPower.Value > 0)
                             FieldPower.Value = 0;
-
-                        if (SiegeMode.Value)
-                        {
-                            CancelSiegeMode();
-                            SiegeMode.Value = false;
-                        }
-
+             
                        HandleResistence();
                     }
                     else
@@ -297,7 +278,6 @@ namespace Starcore.FieldGenerator
 
             if (!IsDedicated)
             {
-                GridStopped.ValueChanged -= OnGridStopValueChange;
                 Block.IsWorkingChanged -= Block_IsWorkingChanged;
             }
 
@@ -387,7 +367,7 @@ namespace Starcore.FieldGenerator
                 return;
             }
 
-            if (SiegeMode.Value && GridStopped.Value)
+            if (SiegeMode.Value)
             {
                 MyVisualScriptLogicProvider.SetGridGeneralDamageModifier(Block.CubeGrid.Name, (1 - Config.SiegeModeResistence));
                 return;
@@ -412,6 +392,13 @@ namespace Starcore.FieldGenerator
 
             if (IsServer)
                 HandleResistence();
+
+            if (!IsDedicated && obj.Value && IsClientInShip())
+            {
+                BlockSoundPair = new MySoundPair("FieldGen_Brake");
+                BlockSoundEmitter.SetPosition(Block.Position);
+                BlockSoundEmitter?.PlaySound(BlockSoundPair, false, false, true, true, false, null, true);
+            }
         }
 
         private void FieldPower_ValueChanged(MySync<float, SyncDirection.BothWays> obj)
@@ -431,13 +418,7 @@ namespace Starcore.FieldGenerator
             if (IsServer)
                 HandleZeroStability();
         }
-
-        private void OnGridStopValueChange(MySync<bool, SyncDirection.FromServer> obj)
-        {
-            if (obj?.Value ?? false)
-                Block.CubeGrid.Physics.LinearVelocity = Vector3.Zero;
-        }
-
+        
         private void Block_IsWorkingChanged(IMyCubeBlock block)
         {
             if (IsClientInShip())
@@ -465,43 +446,56 @@ namespace Starcore.FieldGenerator
         {
             if (SiegeMode.Value && !SiegeCooldownActive.Value)
             {
-                if (SiegeElapsedTime.Value + 1 <= Config.MaxSiegeTime)
-                {                
-                    SiegeElapsedTime.Value++;                   ;
-                    SiegeBlockEnabler(Block.CubeGrid.GetFatBlocks<IMyFunctionalBlock>(), false);                   
-
+                if (!_slowdownComplete.Value)
+                {
+                    SiegeSlowdown();
+                    _stopTickCounter++;
+                    return;
+                }
+                else if (_slowdownComplete.Value)
+                {
                     if (Block.CubeGrid.Physics.LinearVelocity != Vector3D.Zero)
                     {
                         Block.CubeGrid.Physics.LinearVelocity = Vector3.Zero;
-                        if (IsServer && !GridStopped.Value)
-                            GridStopped.Value = true;
                     }
-                }
-                else
+                }          
+            }
+
+            if (MyAPIGateway.Session.GameplayFrameCounter % 60 == 0)
+            {
+                if (SiegeMode.Value && !SiegeCooldownActive.Value)
+                {             
+                    if (SiegeElapsedTime.Value + 1 <= Config.MaxSiegeTime)
+                    {
+                        SiegeElapsedTime.Value++; ;
+                        SiegeBlockEnabler(Block.CubeGrid.GetFatBlocks<IMyFunctionalBlock>(), false);                   
+                    }
+                    else
+                    {
+                        EndSiegeState();
+                        SiegeMode.Value = false;
+                        return;
+                    }
+                }              
+
+                if (!SiegeMode.Value && !SiegeCooldownActive.Value && SiegeElapsedTime.Value > 0)
                 {
-                    EndSiegeMode();
-                    SiegeMode.Value = false;
+                    EndSiegeState();
                     return;
                 }
-            }
 
-            if (!SiegeMode.Value && !SiegeCooldownActive.Value && SiegeElapsedTime.Value > 0)
-            {
-                EndSiegeMode();
-                return;
-            }
-
-            if (SiegeCooldownActive.Value)
-            {
-                if (SiegeCooldownTime.Value > 0)
+                if (SiegeCooldownActive.Value)
                 {
-                    SiegeCooldownTime.Value--;
+                    if (SiegeCooldownTime.Value > 0)
+                    {
+                        SiegeCooldownTime.Value--;
+                    }
+                    else
+                    {
+                        SiegeCooldownActive.Value = false;
+                    }
                 }
-                else
-                {
-                    SiegeCooldownActive.Value = false;
-                }
-            }
+            }        
         }
 
         private void SiegeBlockEnabler(IEnumerable<IMyFunctionalBlock> allFunctionalBlocks, bool enabled)
@@ -526,7 +520,7 @@ namespace Starcore.FieldGenerator
             }
         }
 
-        private void SiegeEmergencyStop()
+        private void SiegeSlowdown()
         {
             if (Block.CubeGrid.Physics == null) 
                 return;
@@ -566,11 +560,10 @@ namespace Starcore.FieldGenerator
             if (Block.CubeGrid.Physics.LinearVelocity.LengthSquared() < 25f || elapsed >= 10f) // 5 m/s squared = 25
             {
                 Block.CubeGrid.Physics.LinearVelocity = Vector3D.Zero;
-                GridStopped.Value = true;
-                SlowdownActive.Value = false;
+                _slowdownComplete.Value = true;
                 _stopTickCounter = -1;
                 angularAxis1 = null;
-                angularAxis2 = null;
+                angularAxis2 = null;          
                 return;
             }         
         }
@@ -585,27 +578,13 @@ namespace Starcore.FieldGenerator
             return Vector3.Normalize(v);
         }
 
-        private void EndSiegeMode()
+        private void EndSiegeState(bool cancel = false)
         {
-            if (IsServer && GridStopped.Value)
-                GridStopped.Value = false;
-
             SiegeBlockEnabler(Block.CubeGrid.GetFatBlocks<IMyFunctionalBlock>(), true);
 
-            SiegeCooldownTime.Value = Math.Max(SiegeElapsedTime.Value * 2, Config.MinSiegeTime);
+            SiegeCooldownTime.Value = cancel ? 0 : Math.Max(SiegeElapsedTime.Value * 2, Config.MinSiegeTime);
             SiegeElapsedTime.Value = 0;
-            SiegeCooldownActive.Value = true;
-        }
-
-        private void CancelSiegeMode()
-        {
-            if (IsServer && GridStopped.Value)
-                GridStopped.Value = false;
-
-            SiegeBlockEnabler(Block.CubeGrid.GetFatBlocks<IMyFunctionalBlock>(), true);
-
-            SiegeCooldownTime.Value = 0;
-            SiegeElapsedTime.Value = 0;
+            SiegeCooldownActive.Value = cancel ? false : true;
         }
         #endregion
 
@@ -886,7 +865,7 @@ namespace Starcore.FieldGenerator
                 GeneratorHUDContent.Append(GenerateBar("Stability:", Stability.Value, 100, true));
             }
 
-            if (SiegeMode.Value && !GridStopped.Value)
+            if (SiegeMode.Value && !_slowdownComplete.Value)
             {
                 GeneratorHUDContent.Append($"\nSiege Mode Actived | Emergency Braking Applied");
             }
