@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Sandbox.Game.Multiplayer;
 using Sandbox.ModAPI;
 using SC.SUGMA.HeartNetworking;
 using SC.SUGMA.HeartNetworking.Custom;
-using SC.SUGMA.Utilities;
 using VRage.Game.ModAPI;
 
 namespace SC.SUGMA.GameState
@@ -14,10 +12,10 @@ namespace SC.SUGMA.GameState
     internal class PointTracker : ComponentBase
     {
         private bool _pointsUpdated;
-        public int StartingPoints;
-        public int VictoryPoints = 3;
+        public readonly int StartingPoints;
+        public readonly int VictoryPoints;
 
-        public Dictionary<IMyFaction, int> FactionPoints { get; internal set; } = new Dictionary<IMyFaction, int>();
+        protected Dictionary<IMyFaction, int> FactionPoints = new Dictionary<IMyFaction, int>();
         public Action<IMyFaction, int> OnPointsUpdated = null;
 
         private void OnFactionCreated(long factionId)
@@ -49,7 +47,7 @@ namespace SC.SUGMA.GameState
         {
             if (_pointsUpdated && MyAPIGateway.Session.IsServer)
             {
-                HeartNetwork.I.SendToEveryone(new PointsPacket(this));
+                HeartNetwork.I.SendToEveryone((PointsPacket) this);
                 _pointsUpdated = false;
             }
         }
@@ -68,6 +66,11 @@ namespace SC.SUGMA.GameState
         public int GetFactionPoints(long factionId)
         {
             return GetFactionPoints(MyAPIGateway.Session.Factions.TryGetFactionById(factionId));
+        }
+
+        public IMyFaction GetHighestPoints()
+        {
+            return FactionPoints.MaxBy(f => f.Value).Key;
         }
 
         public void SetFactionPoints(IMyFaction faction, int value)
@@ -137,5 +140,7 @@ namespace SC.SUGMA.GameState
                 sb.Append($"{faction.Key.Name}: {faction.Value}pts\n");
             return sb.ToString();
         }
+
+        public static explicit operator PointsPacket(PointTracker tracker) => new PointsPacket(tracker.ComponentId, tracker.FactionPoints);
     }
 }
