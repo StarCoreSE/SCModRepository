@@ -175,8 +175,6 @@ namespace Starcore.FieldGenerator
                         EndSiegeState(true);
                         SiegeMode.Value = false;
                     }
-                    else
-                        GridStopped.Value = true;
                 }
             }        
 
