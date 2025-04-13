@@ -48,7 +48,7 @@ namespace Starcore.FieldGenerator
             var logic = GetLogic(b);
             if (logic != null)
             {
-                return !logic.SiegeCooldownActive && !logic.SlowdownActive;
+                return logic.SiegeMode.Value ? logic._slowdownComplete.Value : !logic.SiegeCooldownActive.Value;
             }
             return false;
         }
