@@ -114,11 +114,6 @@ namespace Epstein_Fusion_DS.HeatParts.Definitions
                         if (!CheckGridIntersect(radiatorBlock, pos, Vector3I.Up))
                             occlusionModifier += 1f / checkPositions.Length;
 
-                    if (!CheckGridIntersect(radiatorBlock, Vector3I.Zero, Vector3I.Up))
-                        occlusionModifier += 1 / 2f;
-                    if (!CheckGridIntersect(radiatorBlock, Vector3I.Right, Vector3I.Up))
-                        occlusionModifier += 1 / 2f;
-
                     return occlusionModifier;
                 }
             }

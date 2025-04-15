@@ -68,7 +68,7 @@ namespace TIOSelfRepair
 
             // If the grid has an owner, proceed with repair and ownership change.
 
-            float repairAmount = 8; //about 3.5% per triggertick at 14, 2% per trigger at 8, tested in game.
+            float repairAmount = 14; //about 3.5% per triggertick at 14, 2% per trigger at 8, tested in game.
             slimBlock.IncreaseMountLevel(repairAmount, 0L, null, 0f, false, MyOwnershipShareModeEnum.Faction);
 
             // Try casting to MyCubeBlock and change the owner.

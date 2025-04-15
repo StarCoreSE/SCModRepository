@@ -205,16 +205,16 @@
         <SubtypeId>ERPPCImpact</SubtypeId>
       </Id>
       <Category>WEP_EXPL</Category>
-      <MaxDistance>5000</MaxDistance>
+      <MaxDistance>4000</MaxDistance>
 		  <DistantSounds>
-			  <DistantSound DistanceCrossfade="0" Distance="800" Sound="ERPPCImpactDist1" />
-			  <DistantSound DistanceCrossfade="0" Distance="1600" Sound="ERPPCImpactDist2" />
-			  <DistantSound DistanceCrossfade="0" Distance="3200" Sound="ERPPCImpactDist3" />        
+			  <DistantSound DistanceCrossfade="0" Distance="500" Sound="ERPPCImpactDist1" />
+			  <DistantSound DistanceCrossfade="0" Distance="1000" Sound="ERPPCImpactDist2" />
+			  <DistantSound DistanceCrossfade="0" Distance="2000" Sound="ERPPCImpactDist3" />        
 		  </DistantSounds>
       <PreventSynchronization>1</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>1.5</Volume>
+      <Volume>1</Volume>
 	  <Loopable>false</Loopable>     
       <SoundLimit>10</SoundLimit>
       <Waves>
@@ -230,11 +230,11 @@
         <SubtypeId>ERPPCImpactDist1</SubtypeId>
       </Id>
       <Category>WEP_EXPL</Category>
-      <MaxDistance>5000</MaxDistance>
+      <MaxDistance>4000</MaxDistance>
       <PreventSynchronization>10</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>2</Volume>
+      <Volume>1</Volume>
       <Loopable>false</Loopable>
       <PitchVariation>50</PitchVariation>
       <Waves>
@@ -249,11 +249,11 @@
         <SubtypeId>ERPPCImpactDist2</SubtypeId>
       </Id>
       <Category>WEP_EXPL</Category>
-      <MaxDistance>5000</MaxDistance>
+      <MaxDistance>4000</MaxDistance>
       <PreventSynchronization>10</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>2</Volume>
+      <Volume>1</Volume>
       <Loopable>false</Loopable>
       <PitchVariation>50</PitchVariation>
       <Waves>
@@ -268,11 +268,11 @@
         <SubtypeId>ERPPCImpactDist3</SubtypeId>
       </Id>
       <Category>WEP_EXPL</Category>
-      <MaxDistance>5000</MaxDistance>
+      <MaxDistance>4000</MaxDistance>
       <PreventSynchronization>10</PreventSynchronization>
       <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
       <DynamicMusicAmount>3</DynamicMusicAmount>
-      <Volume>1.5</Volume>
+      <Volume>1</Volume>
       <Loopable>false</Loopable>
       <PitchVariation>50</PitchVariation>
       <Waves>

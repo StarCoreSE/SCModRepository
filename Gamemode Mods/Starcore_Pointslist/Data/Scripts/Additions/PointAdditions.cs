@@ -11,19 +11,19 @@ namespace ShipPoints
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     internal class PointAdditions : MySessionComponentBase
     {
-		/* Hey, modder!
-		 *
-		 * To assign a block points, add a new line to the below Dictionary in the following format:
-		 * ["subtypeid"] = numPoints,
-		 *
-		 * To assign a block a climbing cost, add to the ClimbingCostRename function towards the bottom of the file in the following format:
-		 * case "BlockDisplayName1":
-		 * case "BlockDisplayName2":
-		 *     blockDisplayName = "groupDisplayName";
-		 *     costMultiplier = costMultiplerPercent;
-		 * 	   break;
-		 */
-		
+        /* Hey, modder!
+         *
+         * To assign a block points, add a new line to the below Dictionary in the following format:
+         * ["subtypeid"] = numPoints,
+         *
+         * To assign a block a climbing cost, add to the ClimbingCostRename function towards the bottom of the file in the following format:
+         * case "BlockDisplayName1":
+         * case "BlockDisplayName2":
+         *     blockDisplayName = "groupDisplayName";
+         *     costMultiplier = costMultiplerPercent;
+         *        break;
+         */
+        
         readonly Dictionary<string, int> PointValues = new Dictionary<string, int>
         {
             ["LargeBlockBatteryBlock"] = 14,
@@ -177,10 +177,10 @@ namespace ShipPoints
             ["AQD_LG_HydroThrusterL_ArmoredSlope"] = 50,
             ["AQD_LG_HydroThrusterL_Armored"] = 50,
             ["LargeBlockLargeHydrogenThrustIndustrial"] = 50,
-            ["LargeBlockSmallHydrogenThrust"] = 15,
-            ["AQD_LG_HydroThrusterS_ArmoredSlope"] = 15,
-            ["AQD_LG_HydroThrusterS_Armored"] = 15,
-            ["LargeBlockSmallHydrogenThrustIndustrial"] = 15,
+            ["LargeBlockSmallHydrogenThrust"] = 10,
+            ["AQD_LG_HydroThrusterS_ArmoredSlope"] = 10,
+            ["AQD_LG_HydroThrusterS_Armored"] = 10,
+            ["LargeBlockSmallHydrogenThrustIndustrial"] = 10,
             ["HugeHydrogenThruster"] = 200,
 
             ["LargeBlockLargeThrust"] = 20,
@@ -555,7 +555,7 @@ namespace ShipPoints
             ["Hellfire_Laser_Block"] = 666,
 
 
-            ["Cat_StarcoreUlitity"] = 21,
+        ["Cat_StarcoreUlitity"] = 21,
             ["LargeBlockRemoteControl"] = 100,
             ["SmallBlockRemoteControl"] = 50,
             ["LargeProgrammableBlock"] = 50,
@@ -586,8 +586,8 @@ namespace ShipPoints
             ["Starcore_RWR_Projectiles"] = 5,
             ["SC_Flare"] = 50,
             ["SI_Field_Gen"] = 50,
-	    ["FieldGen_Core"] = 50,
-    	    ["FieldGen_Capacity_Upgrade"] = 50,
+            ["FieldGen_Core"] = 50,
+            ["FieldGen_Capacity_Upgrade"] = 50,
             ["SELtdLargeNanobotBuildAndRepairSystem"] = 50,
             ["PM_LG_BLASTPLATE_BLASTPLATE"] = 100,
             ["REINFORCED_BLASTPLATE"] = 105,
@@ -607,9 +607,9 @@ namespace ShipPoints
             ["BlinkDriveLarge"] = 500,
             ["SCSmallJumpDrive"] = 250,
 
-            ["Cat_BadModder"] = 22,
+        ["Cat_BadModder"] = 22,
             ["APE_Strong"] = 200,
-            ["GoalieCasemate"] = 175,
+            ["GoalieCasemate"] = 100,
             ["Reaver_Coilgun"] = 115,
             ["Assault_Coil_Turret"] = 115,
             ["Priest_Block"] = 100,
@@ -641,7 +641,7 @@ namespace ShipPoints
             ["Thagomizer_Angled"] = 635,
             ["Thagomizer_Angled_Flipped"] = 635,
 
-            ["Cat_Strikecraft"] = 23,
+        ["Cat_Strikecraft"] = 23,
             ["HeavyFighterBay"] = 230,
             ["longsword"] = 625,
             ["TaiidanSingleHangar"] = 100,
@@ -709,9 +709,9 @@ namespace ShipPoints
             ["Barbette1x1"] = 4,
             ["Barbette3x3"] = 36,
             ["Barbette5x5"] = 100,
-			["FAM2BrowningTurret"] = 35,
-			["OerlikonDual"] = 35,
-			["OerlikonMain"] = 35,
+            ["FAM2BrowningTurret"] = 35,
+            ["OerlikonDual"] = 35,
+            ["OerlikonMain"] = 35,
 
 
 
@@ -758,7 +758,7 @@ namespace ShipPoints
             ["Caster_Accelerator_0"] = 10,
             ["Caster_Accelerator_90"] = 40,
             ["Caster_Feeder"] = 10,
-            ["Caster_FocusLens"] = 250,
+            ["Caster_FocusLens"] = 50,
             ["Caster_Reactor"] = 125,
             ["Heat_Heatsink"] = 10,
             ["Heat_FlatRadiator"] = 10,
@@ -943,7 +943,7 @@ namespace ShipPoints
                     break;
                 case "[FLAW] Goalkeeper Casemate Flak Battery":
                     blockDisplayName = "[FLAW] Goalkeeper Flakwall";
-                    costMultiplier = 0.119f;
+                    costMultiplier = 0f;
                     break;
                 case "Shield Controller":
                 case "Shield Controller Table":
@@ -951,7 +951,7 @@ namespace ShipPoints
                     costMultiplier = 9999999f;
                     break;
                 case "Structural Integrity Field Generator":
-		case "[SI] Generator Core":
+        case "[SI] Generator Core":
                     blockDisplayName = "Defensive Generator";
                     costMultiplier = 9999999f;
                     break;
