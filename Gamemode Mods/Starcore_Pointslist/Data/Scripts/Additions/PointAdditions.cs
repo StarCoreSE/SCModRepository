@@ -11,7 +11,6 @@ namespace ShipPoints
     [MySessionComponentDescriptor(MyUpdateOrder.NoUpdate)]
     internal class PointAdditions : MySessionComponentBase
     {
-		/* Hey, modder!
         /* Hey, modder!
          *
          * To assign a block points, add a new line to the below Dictionary in the following format:
