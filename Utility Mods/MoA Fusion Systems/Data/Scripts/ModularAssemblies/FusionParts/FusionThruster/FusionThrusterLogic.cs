@@ -13,20 +13,21 @@ namespace Epstein_Fusion_DS.FusionParts.FusionThruster
         )]
     public class FusionThrusterLogic : FusionPart<IMyThrust>
     {
-        private int _bufferBlockCount = 1;
         private float _bufferThrustOutput;
 
 
-        internal override string[] BlockSubtypes => new[]
+        protected override string[] BlockSubtypes => new[]
         {
             "Caster_FocusLens",
         };
 
-        internal override string ReadableName => "Thruster";
+        protected override string ReadableName => "Thruster";
+        protected override float ProductionPerFusionPower => SFusionSystem.NewtonsPerFusionPower;
 
-        internal override Func<IMyTerminalBlock, float> MinOverrideLimit =>
+        protected override Func<IMyTerminalBlock, float> MinOverrideLimit =>
             b => 1;
-        internal override Func<IMyTerminalBlock, float> MaxOverrideLimit =>
+
+        protected override Func<IMyTerminalBlock, float> MaxOverrideLimit =>
             b => DriveSettings[b.BlockDefinition.SubtypeId].MaxOverclock;
 
         internal static readonly Dictionary<string, DriveSetting> DriveSettings = new Dictionary<string, DriveSetting>
@@ -34,10 +35,10 @@ namespace Epstein_Fusion_DS.FusionParts.FusionThruster
             ["Caster_FocusLens"] = new DriveSetting(1.00f, 1.5f, 144000000),
         };
 
-        public override void UpdatePower(float powerGeneration, float newtonsPerFusionPower, int numberThrusters)
+        public override void UpdatePower(float powerGeneration, int numberThrusters)
         {
             BufferPowerGeneration = powerGeneration;
-            _bufferBlockCount = numberThrusters;
+            bufferBlockCount = numberThrusters;
 
             var overrideModifier = (OverrideEnabled ? OverridePowerUsageSync : PowerUsageSync).Value;
 
@@ -49,7 +50,7 @@ namespace Epstein_Fusion_DS.FusionParts.FusionThruster
                                        (2 - 1/(DriveSettings[Block.BlockDefinition.SubtypeId].BaseThrust/maxThrustOutput));
 
             // Power generation consumed (per second)
-            var powerConsumption = thrustOutput / newtonsPerFusionPower / efficiencyMultiplier;
+            var powerConsumption = thrustOutput / ProductionPerFusionPower / efficiencyMultiplier;
 
             // Power generated (per second)
             //var thrustOutput = efficiencyMultiplier * powerConsumption * newtonsPerFusionPower;
@@ -67,41 +68,7 @@ namespace Epstein_Fusion_DS.FusionParts.FusionThruster
                 SyncMultipliers.ThrusterOutput(Block, _bufferThrustOutput);
         }
 
-        public void SetPowerBoost(bool value)
-        {
-            if (OverrideEnabled.Value == value)
-                return;
-
-            OverrideEnabled.Value = value;
-            UpdatePower(BufferPowerGeneration, SFusionSystem.NewtonsPerFusionPower, _bufferBlockCount);
-        }
-
         #region Base Methods
-
-        public override void Init(MyObjectBuilder_EntityBase definition)
-        {
-            base.Init(definition);
-            Block = (IMyThrust)Entity;
-            NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
-
-            // Trigger power update is only needed when OverrideEnabled is false
-            PowerUsageSync.ValueChanged += value =>
-            {
-                if (!OverrideEnabled.Value)
-                    UpdatePower(BufferPowerGeneration, SFusionSystem.NewtonsPerFusionPower, _bufferBlockCount);
-            };
-
-            // Trigger power update is only needed when OverrideEnabled is true
-            OverridePowerUsageSync.ValueChanged += value =>
-            {
-                if (OverrideEnabled.Value)
-                    UpdatePower(BufferPowerGeneration, SFusionSystem.NewtonsPerFusionPower, _bufferBlockCount);
-            };
-
-            // Trigger power update if boostEnabled is changed
-            OverrideEnabled.ValueChanged += value =>
-                UpdatePower(BufferPowerGeneration, SFusionSystem.NewtonsPerFusionPower, _bufferBlockCount);
-        }
 
         public override void UpdateAfterSimulation()
         {

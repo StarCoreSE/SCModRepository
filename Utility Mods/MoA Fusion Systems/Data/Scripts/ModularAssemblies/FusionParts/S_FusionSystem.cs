@@ -122,7 +122,7 @@ namespace Epstein_Fusion_DS.
                 {
                     Thrusters.Add(logic);
                     logic.MemberSystem = this;
-                    logic.UpdatePower(PowerGeneration, NewtonsPerFusionPower, Thrusters.Count);
+                    logic.UpdatePower(PowerGeneration, Thrusters.Count);
                 }
             }
 
@@ -133,7 +133,7 @@ namespace Epstein_Fusion_DS.
                 {
                     Reactors.Add(logic);
                     logic.MemberSystem = this;
-                    logic.UpdatePower(PowerGeneration, MegawattsPerFusionPower, Reactors.Count);
+                    logic.UpdatePower(PowerGeneration, Reactors.Count);
                 }
             }
 
@@ -157,7 +157,7 @@ namespace Epstein_Fusion_DS.
                 var logic = part.GameLogic.GetAs<FusionThrusterLogic>();
                 logic.MemberSystem = null;
                 Thrusters.Remove(logic);
-                logic.UpdatePower(PowerGeneration, NewtonsPerFusionPower, Thrusters.Count);
+                logic.UpdatePower(PowerGeneration, Thrusters.Count);
             }
 
             if (part is IMyReactor)
@@ -165,7 +165,7 @@ namespace Epstein_Fusion_DS.
                 var logic = part.GameLogic.GetAs<FusionReactorLogic>();
                 logic.MemberSystem = null;
                 Reactors.Remove(logic);
-                logic.UpdatePower(PowerGeneration, NewtonsPerFusionPower, Thrusters.Count);
+                logic.UpdatePower(PowerGeneration, Reactors.Count);
             }
 
             if (part is IMyGasTank)
@@ -188,7 +188,6 @@ namespace Epstein_Fusion_DS.
 
         private void UpdatePower(bool updateReactors = false)
         {
-            var generationModifier = 1;
             var powerGeneration = float.Epsilon;
             var powerCapacity = float.Epsilon;
             var totalPowerUsage = 0f;
@@ -205,7 +204,7 @@ namespace Epstein_Fusion_DS.
                 totalPowerUsage += reactor?.PowerConsumption ?? 0;
 
                 if (updateReactors)
-                    reactor?.UpdatePower(powerGeneration, MegawattsPerFusionPower * generationModifier, Reactors.Count);
+                    reactor?.UpdatePower(powerGeneration, Reactors.Count);
             }
 
             foreach (var thruster in Thrusters)
@@ -213,7 +212,7 @@ namespace Epstein_Fusion_DS.
                 totalPowerUsage += thruster?.PowerConsumption ?? 0;
 
                 if (updateReactors)
-                    thruster?.UpdatePower(powerGeneration, NewtonsPerFusionPower * generationModifier, Thrusters.Count);
+                    thruster?.UpdatePower(powerGeneration, Thrusters.Count);
             }
 
             // Subtract power usage afterwards so that all reactors have the same stats.
