@@ -45,21 +45,24 @@ namespace Epstein_Fusion_DS.FusionParts
         public float PowerConsumption;
 
         public MySync<float, SyncDirection.BothWays> PowerUsageSync;
-        internal FusionPartSettings Settings;
-        internal static ModularDefinitionApi ModularApi => Epstein_Fusion_DS.ModularDefinition.ModularApi;
+        private FusionPartSettings Settings;
+        protected static ModularDefinitionApi ModularApi => Epstein_Fusion_DS.ModularDefinition.ModularApi;
 
         /// <summary>
         ///     Block subtypes allowed.
         /// </summary>
-        internal abstract string[] BlockSubtypes { get; }
+        protected abstract string[] BlockSubtypes { get; }
 
         /// <summary>
         ///     Human-readable name for this part type.
         /// </summary>
-        internal abstract string ReadableName { get; }
+        protected abstract string ReadableName { get; }
 
-        internal virtual Func<IMyTerminalBlock, float> MinOverrideLimit { get; } = b => 0.01f;
-        internal virtual Func<IMyTerminalBlock, float> MaxOverrideLimit { get; } = b => 4;
+        protected virtual Func<IMyTerminalBlock, float> MinOverrideLimit { get; } = b => 0.01f;
+        protected virtual Func<IMyTerminalBlock, float> MaxOverrideLimit { get; } = b => 4;
+        protected abstract float ProductionPerFusionPower { get; }
+
+        protected int bufferBlockCount = 1;
 
         #region Controls
 
@@ -182,7 +185,7 @@ namespace Epstein_Fusion_DS.FusionParts
             stringBuilder.Insert(0, InfoText.ToString());
         }
 
-        public abstract void UpdatePower(float powerGeneration, float outputPerFusionPower, int numberParts);
+        public abstract void UpdatePower(float powerGeneration, int numberParts);
 
         #endregion
 
@@ -191,7 +194,8 @@ namespace Epstein_Fusion_DS.FusionParts
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             base.Init(objectBuilder);
-            NeedsUpdate = MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
+            Block = (T)Entity;
+            NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
         }
 
         public override void UpdateOnceBeforeFrame()
@@ -204,13 +208,29 @@ namespace Epstein_Fusion_DS.FusionParts
 
             LoadSettings();
             PowerUsageSync.Value = Settings.PowerUsage;
-            PowerUsageSync.ValueChanged += value =>
-                Settings.PowerUsage = value.Value;
-
             OverridePowerUsageSync.Value = Settings.OverridePowerUsage;
-            OverridePowerUsageSync.ValueChanged += value =>
-                Settings.OverridePowerUsage = value.Value;
             SaveSettings();
+
+            // Trigger power update is only needed when OverrideEnabled is false
+            PowerUsageSync.ValueChanged += value =>
+            {
+                Settings.PowerUsage = value.Value;
+                if (!OverrideEnabled.Value)
+                    UpdatePower(BufferPowerGeneration, bufferBlockCount);
+                SaveSettings();
+            };
+
+            // Trigger power update is only needed when OverrideEnabled is true
+            OverridePowerUsageSync.ValueChanged += value =>
+            {
+                Settings.OverridePowerUsage = value.Value;
+                if (OverrideEnabled.Value)
+                    UpdatePower(BufferPowerGeneration, bufferBlockCount);
+                SaveSettings();
+            };
+
+            // Trigger power update if boostEnabled is changed
+            OverrideEnabled.ValueChanged += value => UpdatePower(BufferPowerGeneration, bufferBlockCount);
 
             if (!HaveControlsInited.Contains(ReadableName))
                 CreateControls();
@@ -243,6 +263,15 @@ namespace Epstein_Fusion_DS.FusionParts
             }
         }
 
+        protected void SetPowerBoost(bool value)
+        {
+            if (OverrideEnabled.Value == value)
+                return;
+
+            OverrideEnabled.Value = value;
+            UpdatePower(BufferPowerGeneration, bufferBlockCount);
+        }
+
         #endregion
 
         #region Settings
@@ -250,7 +279,10 @@ namespace Epstein_Fusion_DS.FusionParts
         internal void SaveSettings()
         {
             if (Block == null || Settings == null)
+            {
+                ModularApi.Log($"save block null or settings null for {typeof(T).Name}");
                 return; // called too soon or after it was already closed, ignore
+            }
 
             if (MyAPIGateway.Utilities == null)
                 throw new NullReferenceException(
@@ -270,9 +302,6 @@ namespace Epstein_Fusion_DS.FusionParts
 
             Settings.PowerUsage = 1.0f;
             Settings.OverridePowerUsage = 1.5f;
-
-            PowerUsageSync.Value = Settings.PowerUsage;
-            OverridePowerUsageSync.Value = Settings.OverridePowerUsage;
         }
 
         internal virtual bool LoadSettings()
@@ -303,9 +332,6 @@ namespace Epstein_Fusion_DS.FusionParts
                     Settings.PowerUsage = loadedSettings.PowerUsage;
                     Settings.OverridePowerUsage = loadedSettings.OverridePowerUsage;
 
-                    PowerUsageSync.Value = loadedSettings.PowerUsage;
-                    OverridePowerUsageSync.Value = loadedSettings.OverridePowerUsage;
-
                     return true;
                 }
             }
@@ -313,27 +339,10 @@ namespace Epstein_Fusion_DS.FusionParts
             {
                 MyLog.Default.WriteLineAndConsole("Exception in loading FusionPart settings: " + e);
                 MyAPIGateway.Utilities.ShowMessage("Fusion Systems", "Exception in loading FusionPart settings: " + e);
+                ModularApi.Log("Exception in loading FusionPart settings: " + e);
             }
 
             return false;
-        }
-
-        public override bool IsSerialized()
-        {
-            if (Block.CubeGrid?.Physics == null)
-                return base.IsSerialized();
-
-            try
-            {
-                SaveSettings();
-            }
-            catch (Exception e)
-            {
-                MyLog.Default.WriteLineAndConsole("Exception in loading FusionPart settings: " + e);
-                MyAPIGateway.Utilities.ShowMessage("Fusion Systems", "Exception in loading FusionPart settings: " + e);
-            }
-
-            return base.IsSerialized();
         }
 
         #endregion
