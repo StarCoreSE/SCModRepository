@@ -43,7 +43,7 @@ namespace SC.SUGMA.Utilities
 
         public static void SetWorldPermissionsForMatch(bool matchActive)
         {
-            if (MyAPIGateway.Session == null)
+            if (SUGMA_SessionComponent.I.IsClosing)
                 return;
 
             MyAPIGateway.Utilities.ShowMessage("SUGMA",

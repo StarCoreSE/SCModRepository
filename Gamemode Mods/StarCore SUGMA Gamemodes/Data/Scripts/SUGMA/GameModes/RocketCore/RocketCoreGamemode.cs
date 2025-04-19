@@ -51,7 +51,8 @@ namespace SC.SUGMA.GameModes.RocketCore
 
         public override void Close()
         {
-            StopRound();
+            if (IsStarted)
+                StopRound();
         }
 
         public override void UpdateActive()
