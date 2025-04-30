@@ -9,22 +9,21 @@
       <DisplayName>Fusion Systems</DisplayName>
       <Name>Fusion Systems</Name>
       <ItemIds>
-	    <string>Caster_Accelerator_0</string>
-	    <string>Caster_Accelerator_90</string>
-	    <string>Caster_Feeder</string>
-	    <string>Caster_CentralPipe_0</string>
-	    <string>Caster_CentralPipe_90</string>
-	    <string>Caster_CentralPipe_T</string>
-	    <string>Caster_FocusLens</string>
-	    <string>Caster_Reactor</string>
-	    <string>Heat_Heatsink</string>
-	    <string>Heat_FlatRadiator</string>
-	    <string>Caster_ConveyorCap</string>
-	    <string>RadiatorPanel</string>
-	    <string>ExtendableRadiatorBase</string>
-	    <string>Heat_FlatRadiator</string>
-	    <string>ActiveRadiator</string>
-		<string>ActiveRadiatorFake</string>
+	    <string>CubeBlock/Caster_Accelerator_0</string>
+	    <string>CubeBlock/Caster_Accelerator_90</string>
+	    <string>CubeBlock/Caster_Feeder</string>
+	    <string>CubeBlock/Caster_CentralPipe_0</string>
+	    <string>CubeBlock/Caster_CentralPipe_90</string>
+	    <string>CubeBlock/Caster_CentralPipe_T</string>
+	    <string>Thrust/Caster_FocusLens</string>
+	    <string>Reactor/Caster_Reactor</string>
+	    <string>CubeBlock/Heat_Heatsink</string>
+	    <string>CubeBlock/Heat_FlatRadiator</string>
+	    <string>OxygenTank/Caster_ConveyorCap</string>
+	    <string>CubeBlock/RadiatorPanel</string>
+	    <string>TerminalBlock/ExtendableRadiatorBase</string>
+	    <string>TerminalBlock/ActiveRadiator</string>
+	    <string>TerminalBlock/ActiveRadiatorFake</string>
       </ItemIds>
     </Category>
   </CategoryClasses>
