@@ -52,28 +52,5 @@
       </MissileProperties>
     </Ammo>
 	
-    <Ammo xsi:type="MyObjectBuilder_ProjectileAmmoDefinition">
-      <Id>
-        <TypeId>AmmoDefinition</TypeId>
-        <SubtypeId>TestAmmoB8T</SubtypeId>
-      </Id>
-      <BasicProperties>
-        <DesiredSpeed>500</DesiredSpeed>
-        <SpeedVariance>0</SpeedVariance>
-        <MaxTrajectory>1400</MaxTrajectory>
-        <BackkickForce>50</BackkickForce>
-        <PhysicalMaterial>GunBullet</PhysicalMaterial>
-      </BasicProperties>
-      <ProjectileProperties>
-        <ProjectileTrailScale>0.2</ProjectileTrailScale>
-        <ProjectileHitImpulse>6</ProjectileHitImpulse>
-        <ProjectileMassDamage>80</ProjectileMassDamage>
-        <ProjectileHealthDamage>50</ProjectileHealthDamage>
-        <HeadShot>true</HeadShot>
-      </ProjectileProperties>
-    </Ammo>	
-	
-
-
   </Ammos>
 </Definitions>

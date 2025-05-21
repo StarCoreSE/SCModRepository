@@ -52,7 +52,8 @@ namespace SC.SUGMA.GameModes.TeamDeathmatch
 
         public override void Close()
         {
-            StopRound();
+            if (IsStarted)
+                StopRound();
         }
 
         public override void UpdateActive()

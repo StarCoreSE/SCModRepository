@@ -10,18 +10,18 @@ namespace Epstein_Fusion_DS.FusionParts.FusionReactor
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Reactor), false, "Caster_Reactor")]
     public class FusionReactorLogic : FusionPart<IMyReactor>
     {
-        private int _bufferBlockCount = 1;
         private float _bufferReactorOutput;
 
 
-        internal override string[] BlockSubtypes => new[] { "Caster_Reactor" };
-        internal override string ReadableName => "Reactor";
+        protected override string[] BlockSubtypes => new[] { "Caster_Reactor" };
+        protected override string ReadableName => "Reactor";
+        protected override float ProductionPerFusionPower => SFusionSystem.MegawattsPerFusionPower;
 
 
-        public override void UpdatePower(float powerGeneration, float megawattsPerFusionPower, int numberReactors)
+        public override void UpdatePower(float powerGeneration, int numberReactors)
         {
             BufferPowerGeneration = powerGeneration;
-            _bufferBlockCount = numberReactors;
+            bufferBlockCount = numberReactors;
 
             var reactorConsumptionMultiplier =
                 OverrideEnabled.Value
@@ -35,14 +35,14 @@ namespace Epstein_Fusion_DS.FusionParts.FusionReactor
             var reactorEfficiencyMultiplier = 1 / (0.489f + reactorConsumptionMultiplier);
 
             // Power generated (per second)
-            var reactorOutput = reactorEfficiencyMultiplier * powerConsumption * megawattsPerFusionPower;
+            var reactorOutput = reactorEfficiencyMultiplier * powerConsumption * ProductionPerFusionPower;
 
             _bufferReactorOutput = reactorOutput;
             MaxPowerConsumption = powerConsumption / 60;
 
             InfoText.Clear();
             InfoText.AppendLine(
-                $"\nOutput: {Math.Round(reactorOutput, 1)}/{Math.Round(powerGeneration * 60 * megawattsPerFusionPower, 1)}");
+                $"\nOutput: {Math.Round(reactorOutput, 1)}/{Math.Round(powerGeneration * 60 * ProductionPerFusionPower, 1)}");
             InfoText.AppendLine($"Input: {Math.Round(powerConsumption, 1)}/{Math.Round(powerGeneration * 60, 1)}");
             InfoText.AppendLine($"Efficiency: {Math.Round(reactorEfficiencyMultiplier * 100)}%");
 
@@ -50,41 +50,7 @@ namespace Epstein_Fusion_DS.FusionParts.FusionReactor
             SyncMultipliers.ReactorOutput(Block, _bufferReactorOutput);
         }
 
-        public void SetPowerBoost(bool value)
-        {
-            if (OverrideEnabled.Value == value)
-                return;
-
-            OverrideEnabled.Value = value;
-            UpdatePower(BufferPowerGeneration, SFusionSystem.MegawattsPerFusionPower, _bufferBlockCount);
-        }
-
         #region Base Methods
-
-        public override void Init(MyObjectBuilder_EntityBase definition)
-        {
-            base.Init(definition);
-            Block = (IMyReactor)Entity;
-            NeedsUpdate |= MyEntityUpdateEnum.BEFORE_NEXT_FRAME;
-
-            // Trigger power update is only needed when OverrideEnabled is false
-            PowerUsageSync.ValueChanged += value =>
-            {
-                if (!OverrideEnabled.Value)
-                    UpdatePower(BufferPowerGeneration, SFusionSystem.MegawattsPerFusionPower, _bufferBlockCount);
-            };
-
-            // Trigger power update is only needed when OverrideEnabled is true
-            OverridePowerUsageSync.ValueChanged += value =>
-            {
-                if (OverrideEnabled.Value)
-                    UpdatePower(BufferPowerGeneration, SFusionSystem.MegawattsPerFusionPower, _bufferBlockCount);
-            };
-
-            // Trigger power update if boostEnabled is changed
-            OverrideEnabled.ValueChanged += value =>
-                UpdatePower(BufferPowerGeneration, SFusionSystem.MegawattsPerFusionPower, _bufferBlockCount);
-        }
 
         public override void UpdateAfterSimulation()
         {

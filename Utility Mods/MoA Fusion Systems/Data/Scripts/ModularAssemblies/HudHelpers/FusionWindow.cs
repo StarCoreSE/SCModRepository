@@ -6,13 +6,8 @@ using RichHudFramework.UI.Rendering;
 using RichHudFramework.UI.Rendering.Client;
 using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RichHudFramework.UI.Client;
 using VRage.Game.Entity;
-using VRage.Game.ModAPI;
 using VRageMath;
 
 namespace Epstein_Fusion_DS.HudHelpers
@@ -25,11 +20,23 @@ namespace Epstein_Fusion_DS.HudHelpers
         private readonly GlyphFormat _stdTextFormat = new GlyphFormat(color: HudConstants.HudTextColor, alignment: TextAlignment.Center, font: FontManager.GetFont("Monospace"));
         private readonly GlyphFormat _stdTextFormatInfo = new GlyphFormat(color: HudConstants.HudTextColor, textSize: 0.6f, alignment: TextAlignment.Left, font: FontManager.GetFont("Monospace"));
 
+        private static readonly Vector3D UnitTransformOffset = new Vector3D(-0.759375, -0.8, 0);
+
         public FusionWindow(HudParentBase parent) : base(parent)
         {
             RotationAxis = new Vector3(0, 1, 0);
             RotationAngle = 0.25f;
-            TransformOffset = new Vector3D(-0.0675, -0.04, -0.05);
+
+            //var invert = MatrixD.CreatePerspectiveFieldOfView(MathHelper.ToRadians(90), 16 / 9d,
+            //    MyAPIGateway.Session.Camera.NearPlaneDistance, MyAPIGateway.Session.Camera.FarPlaneDistance);
+            //ModularApi.Log(Vector3D.Transform(new Vector3D(-0.0675, -0.04, -0.05), invert).ToString());
+
+            var fovMatrix = MatrixD.Invert(MatrixD.CreatePerspectiveFieldOfView(
+                MathHelper.ToRadians(MyAPIGateway.Session.Camera.FieldOfViewAngle), HudMain.AspectRatio,
+                MyAPIGateway.Session.Camera.NearPlaneDistance, MyAPIGateway.Session.Camera.FarPlaneDistance));
+
+            TransformOffset = Vector3D.Transform(UnitTransformOffset, fovMatrix);
+
 
             _backgroundBox = new TexturedBox(this)
             {

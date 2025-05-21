@@ -20,43 +20,62 @@ namespace Epstein_Fusion_DS.HudHelpers
         private const float DepthRatioF = 0.01f;
         // i'm gonna kiss digi on the 
 
-        private static DebugDraw _instance;
-        protected static readonly MyStringId MaterialDot = MyStringId.GetOrCompute("WhiteDot");
-        protected static readonly MyStringId MaterialSquare = MyStringId.GetOrCompute("Square");
+        public static DebugDraw I;
+        public static readonly MyStringId MaterialDot = MyStringId.GetOrCompute("WhiteDot");
+        public static readonly MyStringId MaterialSquare = MyStringId.GetOrCompute("Square");
 
-        private readonly Dictionary<Vector3I, MyTuple<long, Color, IMyCubeGrid>> _queuedGridPoints =
-            new Dictionary<Vector3I, MyTuple<long, Color, IMyCubeGrid>>();
+        private readonly List<GridDrawPoint> _queuedGridPoints = new List<GridDrawPoint>();
+        private readonly List<LineDrawPoint> _queuedLinePoints = new List<LineDrawPoint>();
+        private readonly List<DrawPoint> _queuedPoints = new List<DrawPoint>();
 
-        private readonly Dictionary<MyTuple<Vector3D, Vector3D>, MyTuple<long, Color>> _queuedLinePoints =
-            new Dictionary<MyTuple<Vector3D, Vector3D>, MyTuple<long, Color>>();
+        private struct GridDrawPoint
+        {
+            public Vector3I Position;
+            public long EndOfLife;
+            public Color Color;
+            public IMyCubeGrid Grid;
+        }
 
-        private readonly Dictionary<Vector3D, MyTuple<long, Color>> _queuedPoints =
-            new Dictionary<Vector3D, MyTuple<long, Color>>();
+        private struct LineDrawPoint
+        {
+            public Vector3D Start;
+            public Vector3D End;
+            public long EndOfLife;
+            public Color Color;
+        }
+
+        private struct DrawPoint
+        {
+            public Vector3D Position;
+            public long EndOfLife;
+            public Color Color;
+        }
 
         public override void LoadData()
         {
             if (!MyAPIGateway.Utilities.IsDedicated)
-                _instance = this;
+                I = this;
         }
 
         protected override void UnloadData()
         {
-            _instance = null;
+            I = null;
         }
 
         public static void AddPoint(Vector3D globalPos, Color color, float duration)
         {
-            if (_instance == null)
+            if (I == null)
                 return;
 
-
-            if (_instance._queuedPoints.ContainsKey(globalPos))
-                _instance._queuedPoints[globalPos] =
-                    new MyTuple<long, Color>(DateTime.UtcNow.Ticks + (long)(duration * TimeSpan.TicksPerSecond), color);
-            else
-                _instance._queuedPoints.Add(globalPos,
-                    new MyTuple<long, Color>(DateTime.UtcNow.Ticks + (long)(duration * TimeSpan.TicksPerSecond),
-                        color));
+            lock (I._queuedGridPoints)
+            {
+                I._queuedPoints.Add(new DrawPoint
+                {
+                    Position = globalPos,
+                    Color = color,
+                    EndOfLife = DateTime.UtcNow.Ticks + (long)(duration * TimeSpan.TicksPerSecond)
+                });
+            }
         }
 
         public static void AddGps(string name, Vector3D position, float duration)
@@ -74,66 +93,77 @@ namespace Epstein_Fusion_DS.HudHelpers
 
         public static void AddGridPoint(Vector3I blockPos, IMyCubeGrid grid, Color color, float duration)
         {
-            if (_instance == null)
+            if (I == null)
                 return;
 
-            if (_instance._queuedGridPoints.ContainsKey(blockPos))
-                _instance._queuedGridPoints[blockPos] =
-                    new MyTuple<long, Color, IMyCubeGrid>(
-                        DateTime.UtcNow.Ticks + (long)(duration * TimeSpan.TicksPerSecond), color, grid);
-            else
-                _instance._queuedGridPoints.Add(blockPos,
-                    new MyTuple<long, Color, IMyCubeGrid>(
-                        DateTime.UtcNow.Ticks + (long)(duration * TimeSpan.TicksPerSecond), color, grid));
+            lock (I._queuedGridPoints)
+            {
+                I._queuedGridPoints.Add(new GridDrawPoint
+                {
+                    Position = blockPos,
+                    EndOfLife = DateTime.UtcNow.Ticks + (long)(duration * TimeSpan.TicksPerSecond),
+                    Color = color,
+                    Grid = grid
+                });
+            }
         }
 
         public static void AddLine(Vector3D origin, Vector3D destination, Color color, float duration)
         {
-            if (_instance == null)
+            if (I == null)
                 return;
 
-
-            var key = new MyTuple<Vector3D, Vector3D>(origin, destination);
-            if (_instance._queuedLinePoints.ContainsKey(key))
-                _instance._queuedLinePoints[key] =
-                    new MyTuple<long, Color>(DateTime.UtcNow.Ticks + (long)(duration * TimeSpan.TicksPerSecond), color);
-            else
-                _instance._queuedLinePoints.Add(key,
-                    new MyTuple<long, Color>(DateTime.UtcNow.Ticks + (long)(duration * TimeSpan.TicksPerSecond),
-                        color));
+            lock (I._queuedLinePoints)
+            {
+                I._queuedLinePoints.Add(new LineDrawPoint
+                {
+                    Start = origin,
+                    End = destination,
+                    EndOfLife = DateTime.UtcNow.Ticks + (long)(duration * TimeSpan.TicksPerSecond),
+                    Color = color,
+                });
+            }
         }
 
         public override void Draw()
         {
-            try
+            long nowTicks = DateTime.UtcNow.Ticks;
+
+            lock (_queuedPoints)
             {
-                foreach (var key in _queuedPoints.Keys.ToList())
+                for (var i = _queuedPoints.Count - 1; i >= 0; i--)
                 {
-                    DrawPoint0(key, _queuedPoints[key].Item2);
+                    var point = _queuedPoints[i];
+                    DrawPoint0(point.Position, point.Color);
 
-                    if (DateTime.UtcNow.Ticks > _queuedPoints[key].Item1)
-                        _queuedPoints.Remove(key);
-                }
-
-                foreach (var key in _queuedGridPoints.Keys.ToList())
-                {
-                    DrawGridPoint0(key, _queuedGridPoints[key].Item3, _queuedGridPoints[key].Item2);
-
-                    if (DateTime.UtcNow.Ticks > _queuedGridPoints[key].Item1)
-                        _queuedGridPoints.Remove(key);
-                }
-
-                foreach (var key in _queuedLinePoints.Keys.ToList())
-                {
-                    DrawLine0(key.Item1, key.Item2, _queuedLinePoints[key].Item2);
-
-                    if (DateTime.UtcNow.Ticks > _queuedLinePoints[key].Item1)
-                        _queuedLinePoints.Remove(key);
+                    if (nowTicks > point.EndOfLife)
+                        _queuedPoints.RemoveAt(i);
                 }
             }
-            catch
+
+            lock (_queuedGridPoints)
             {
-            } // Icky no error logging
+                for (var i = _queuedGridPoints.Count - 1; i >= 0; i--)
+                {
+                    var gridPoint = _queuedGridPoints[i];
+                    DrawGridPoint0(gridPoint.Position, gridPoint.Grid, gridPoint.Color);
+
+                    if (nowTicks > gridPoint.EndOfLife)
+                        _queuedGridPoints.RemoveAt(i);
+                }
+            }
+
+            lock (_queuedLinePoints)
+            {
+                for (var i = _queuedLinePoints.Count - 1; i >= 0; i--)
+                {
+                    var linePoint = _queuedLinePoints[i];
+                    DrawLine0(linePoint.Start, linePoint.End, linePoint.Color);
+
+                    if (nowTicks > linePoint.EndOfLife)
+                        _queuedLinePoints.RemoveAt(i);
+                }
+            }
         }
 
         private void DrawPoint0(Vector3D globalPos, Color color)
@@ -155,21 +185,21 @@ namespace Epstein_Fusion_DS.HudHelpers
             var length = (float)(destination - origin).Length();
             var direction = (destination - origin) / length;
 
-            MyTransparentGeometry.AddLineBillboard(MaterialSquare, color, origin, direction, length, 0.35f);
+            MyTransparentGeometry.AddLineBillboard(MaterialSquare, color, origin, direction, length, 0.15f);
 
             var depthScale = ToAlwaysOnTop(ref origin);
             direction *= depthScale;
 
             MyTransparentGeometry.AddLineBillboard(MaterialSquare, color * OnTopColorMul, origin, direction, length,
-                0.5f * depthScale);
+                0.15f * depthScale);
         }
 
-        public static Vector3D GridToGlobal(Vector3I position, IMyCubeGrid grid)
+        private static Vector3D GridToGlobal(Vector3I position, IMyCubeGrid grid)
         {
             return Vector3D.Rotate((Vector3D)position * 2.5f, grid.WorldMatrix) + grid.GetPosition();
         }
 
-        protected static float ToAlwaysOnTop(ref Vector3D position)
+        private static float ToAlwaysOnTop(ref Vector3D position)
         {
             var camMatrix = MyAPIGateway.Session.Camera.WorldMatrix;
             position = camMatrix.Translation + (position - camMatrix.Translation) * DepthRatioF;

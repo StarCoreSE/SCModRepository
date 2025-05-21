@@ -11,6 +11,7 @@ using Sandbox.Game.Entities;
 using Sandbox.Game;
 using VRageMath;
 using VRage.ModAPI;
+using static SC.SUGMA.GameModes.Domination.DominationGamemode;
 
 namespace SC.SUGMA.GameModes.RocketCore
 {
@@ -51,7 +52,8 @@ namespace SC.SUGMA.GameModes.RocketCore
 
         public override void Close()
         {
-            StopRound();
+            if (IsStarted)
+                StopRound();
         }
 
         public override void UpdateActive()
@@ -72,7 +74,6 @@ namespace SC.SUGMA.GameModes.RocketCore
                     continue;
                 // Goal was made
                 PointTracker.AddFactionPoints(zoneSet.Key, -1);
-                SUGMA_SessionComponent.I.GetComponent<RocketCoreHud>("rocHud")?.GoalScored(zoneSet.Key);
 
                 if (_winningFaction != null)
                     break;
@@ -159,6 +160,10 @@ namespace SC.SUGMA.GameModes.RocketCore
             if (!MyAPIGateway.Utilities.IsDedicated)
                 SUGMA_SessionComponent.I.RegisterComponent("rocHud", new RocketCoreHud(this));
 
+            PointTracker.OnPointsUpdated += (faction, points) =>
+            {
+                SUGMA_SessionComponent.I.GetComponent<RocketCoreHud>("rocHud")?.GoalScored(faction);
+            };
             SpawnBall();
 
             Log.Info("Started a ROC match." +
