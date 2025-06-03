@@ -89,7 +89,7 @@ namespace Scripts
                 Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
                     "Nyx Beam Fake", "Nyx Beam Fake", "Nyx Beam Fake", "Nyx Beam Fake", "Nyx Beam Fake", "Nyx Beam Fake", "Nyx Beam Fake", "Nyx Beam Fake", "Nyx Beam Fake",
                 },
-                Mode = Never, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
+                Mode = Weapon, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
                 TriggerChance = 1f, // This is %
                 Random = false, // This randomizes the number spawned at once, NOT the list order.
                 RandomMin = 1, 
