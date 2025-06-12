@@ -512,10 +512,6 @@ namespace Scripts
                     [ProtoMember(22)] internal int MaxReloads;
                     [ProtoMember(23)] internal bool GoHomeToReload;
                     [ProtoMember(24)] internal bool DropTargetUntilLoaded;
-                    [ProtoMember(25)] internal bool ProhibitCoolingWhenOff;
-                    [ProtoMember(26)] internal float InventoryFillAmount;
-                    [ProtoMember(27)] internal float InventoryLowAmount;
-                    [ProtoMember(28)] internal bool UseWorldInventoryVolumeMultiplier;
                 }
 
 
@@ -529,9 +525,6 @@ namespace Scripts
                     [ProtoMember(5)] internal bool AlternateUi;
                     [ProtoMember(6)] internal bool DisableStatus;
                     [ProtoMember(7)] internal float RateOfFireMin;
-                    [ProtoMember(8)] internal bool DisableSupportingPD;
-                    [ProtoMember(9)] internal bool ProhibitShotDelay;
-                    [ProtoMember(10)] internal bool ProhibitBurstCount;
                 }
 
 
@@ -547,7 +540,6 @@ namespace Scripts
                     [ProtoMember(7)] internal bool OverrideLeads;
                     [ProtoMember(8)] internal int DefaultLeadGroup;
                     [ProtoMember(9)] internal bool TargetGridCenter;
-                    [ProtoMember(10)] internal bool PainterUseMaxTargeting;
                 }
 
                 [ProtoContract]
@@ -658,8 +650,6 @@ namespace Scripts
                 [ProtoMember(29)] internal bool NpcSafe;
                 [ProtoMember(30)] internal SynchronizeDef Sync;
                 [ProtoMember(31)] internal bool NoGridOrArmorScaling;
-                [ProtoMember(32)] internal string TerminalName;
-                [ProtoMember(33)] internal float BaseDamageCutoff;
 
                 [ProtoContract]
                 public struct SynchronizeDef
@@ -791,7 +781,6 @@ namespace Scripts
                 {
                     [ProtoMember(1)] internal int MaxObjectsHit;
                     [ProtoMember(2)] internal bool CountBlocks;
-                    [ProtoMember(3)] internal bool SkipBlocksForAOE;
                 }
 
 
@@ -818,7 +807,6 @@ namespace Scripts
                         [ProtoMember(1)] internal ParticleDef Ammo;
                         [ProtoMember(2)] internal ParticleDef Hit;
                         [ProtoMember(3)] internal ParticleDef Eject;
-                        [ProtoMember(4)] internal ParticleDef WeaponEffect1Override;
                     }
 
                     [ProtoContract]
@@ -1011,10 +999,6 @@ namespace Scripts
                     [ProtoMember(2)] internal float SpawnChance;
                     [ProtoMember(3)] internal SpawnType Type;
                     [ProtoMember(4)] internal ComponentDef CompDef;
-                    [ProtoMember(5)] internal Randomize SpeedVariance;
-                    [ProtoMember(6)] internal Randomize DirectionVariance;
-                    [ProtoMember(7)] internal Vector3D Rotation;
-                    [ProtoMember(8)] internal Randomize RotationVariance;
 
                     [ProtoContract]
                     public struct ComponentDef
@@ -1096,7 +1080,6 @@ namespace Scripts
                         Push,
                         Pull,
                         Tractor,
-                        AntiSmartv2
                     }
 
                     public enum EwarMode
@@ -1303,7 +1286,6 @@ namespace Scripts
                     [ProtoMember(15)] internal ApproachDef[] Approaches;
                     [ProtoMember(16)] internal double TotalAcceleration;
                     [ProtoMember(17)] internal OnHitDef OnHit;
-                    [ProtoMember(18)] internal float DragPerSecond;
 
                     [ProtoContract]
                     public struct SmartsDef

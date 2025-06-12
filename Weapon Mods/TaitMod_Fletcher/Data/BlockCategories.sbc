@@ -23,9 +23,12 @@
 				<string>ConveyorSorter/Mk25Rangefinder</string>
 				<string>ConveyorSorter/20InchTwin</string>
 				<string>ConveyorSorter/203mmTwin</string>
+				<string>ConveyorSorter/15cm45Casemate</string>
+				<string>ConveyorSorter/15Cm55TwinCasemate</string>
 				<string>ConveyorSorter/FAM2BrowningTurret</string>
 				<string>ConveyorSorter/OerlikonDual</string>
 				<string>ConveyorSorter/OerlikonMain</string>
+				<string>ConveyorSorter/4_5Inch45</string>
 			</ItemIds>
 		</Category>
 	</CategoryClasses>
