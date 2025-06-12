@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Sounds>
+    <!--IHarpo, a glorious man. Damnable Keen file structure.-->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ERPPCFire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>6000</MaxDistance>
+		  <DistantSounds>
+			  <DistantSound DistanceCrossfade="0" Distance="50" Sound="ERPPCFireDist1" />
+			  <DistantSound DistanceCrossfade="0" Distance="600" Sound="ERPPCFireDist2" />
+			  <DistantSound DistanceCrossfade="0" Distance="1100" Sound="ERPPCFireDist3" />        
+        <DistantSound DistanceCrossfade="0" Distance="2200" Sound="ERPPCFireDist4" />
+        <DistantSound DistanceCrossfade="0" Distance="3300" Sound="ERPPCFireDist5" />
+		  </DistantSounds>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1.5</Volume>
+	  <Loopable>false</Loopable>
+      <PitchVariation>50</PitchVariation>
+      <SoundLimit>10</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\PPC\ERPPCShot1D0.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ERPPCFireDist1</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>6000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1.5</Volume>
+	  <Loopable>false</Loopable>
+      <PitchVariation>50</PitchVariation>
+      <SoundLimit>10</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\PPC\ERPPCShot1D1.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ERPPCFireDist2</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>6000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1.25</Volume>
+	  <Loopable>false</Loopable>
+      <PitchVariation>50</PitchVariation>
+      <SoundLimit>10</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\PPC\ERPPCShot1D2.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ERPPCFireDist3</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>6000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <Loopable>false</Loopable>
+      <PitchVariation>50</PitchVariation>
+      <SoundLimit>10</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\PPC\ERPPCShot1D3.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ERPPCFireDist4</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>6000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <Loopable>false</Loopable>
+      <PitchVariation>50</PitchVariation>
+      <SoundLimit>10</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\PPC\ERPPCShot1D4.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ERPPCFireDist5</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>6000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <Loopable>false</Loopable>
+      <PitchVariation>50</PitchVariation>
+      <SoundLimit>10</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\PPC\ERPPCShot1D5.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+
+
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ERPPCRecharge</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1500</MaxDistance>
+      <DistantSounds>
+			  <DistantSound DistanceCrossfade="0" Distance="100" Sound="ERPPCRechargeDist1" />
+			  <DistantSound DistanceCrossfade="0" Distance="600" Sound="ERPPCRechargeDist2" />
+		  </DistantSounds>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.4</Volume>
+	  <Loopable>false</Loopable>
+      <PitchVariation>0</PitchVariation>
+      <SoundLimit>10</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\PPC\ERPPCReload8.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ERPPCRechargeDist1</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1500</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.6</Volume>
+	  <Loopable>false</Loopable>
+      <PitchVariation>0</PitchVariation>
+      <SoundLimit>10</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\PPC\ERPPCReload8D.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ERPPCRechargeDist2</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1500</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <Loopable>false</Loopable>
+      <PitchVariation>0</PitchVariation>
+      <SoundLimit>10</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\PPC\ERPPCReload8Dd.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ERPPCImpact</SubtypeId>
+      </Id>
+      <Category>WEP_EXPL</Category>
+      <MaxDistance>4000</MaxDistance>
+		  <DistantSounds>
+			  <DistantSound DistanceCrossfade="0" Distance="500" Sound="ERPPCImpactDist1" />
+			  <DistantSound DistanceCrossfade="0" Distance="1000" Sound="ERPPCImpactDist2" />
+			  <DistantSound DistanceCrossfade="0" Distance="2000" Sound="ERPPCImpactDist3" />        
+		  </DistantSounds>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <Loopable>false</Loopable>     
+      <SoundLimit>10</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\PPC\ERPPC_ImpactD0.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ERPPCImpactDist1</SubtypeId>
+      </Id>
+      <Category>WEP_EXPL</Category>
+      <MaxDistance>4000</MaxDistance>
+      <PreventSynchronization>10</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>50</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\PPC\ERPPC_ImpactD1.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ERPPCImpactDist2</SubtypeId>
+      </Id>
+      <Category>WEP_EXPL</Category>
+      <MaxDistance>4000</MaxDistance>
+      <PreventSynchronization>10</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>50</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\PPC\ERPPC_ImpactD2.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ERPPCImpactDist3</SubtypeId>
+      </Id>
+      <Category>WEP_EXPL</Category>
+      <MaxDistance>4000</MaxDistance>
+      <PreventSynchronization>10</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>50</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\PPC\ERPPC_ImpactD3.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+
+
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ERPPCNoAmmo</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>1</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <PitchVariation>100</PitchVariation>
+      <SoundLimit>10</SoundLimit>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\PPC\ERPPC_noammo.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ERPPCFlyby</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>400</MaxDistance>
+      <PreventSynchronization>25</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\PPC\ERPPC_Flyby.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+  </Sounds>
+</Definitions>

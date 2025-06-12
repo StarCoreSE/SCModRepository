@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <BlockVariantGroups>
+        <!-- Armor -->
+        <BlockVariantGroup>
+            <Id Type="MyObjectBuilder_BlockVariantGroup" Subtype="StealthGroup" />
+            <Icon>Textures\GUI\Icons\Cubes\Aryx_AWE_TacticalModule.dds</Icon>
+            <DisplayName>Stealth Drive</DisplayName>
+            <Description>Allows a ship to enter stealth, becoming almost invisible as well as undetectable by weapon systems.</Description>
+            <Blocks>
+                <Block Type="MyObjectBuilder_UpgradeModule" Subtype="StealthDrive" />
+                <Block Type="MyObjectBuilder_UpgradeModule" Subtype="StealthDriveSmall" />
+                <Block Type="MyObjectBuilder_UpgradeModule" Subtype="StealthDrive1x1" />
+                <Block Type="MyObjectBuilder_UpgradeModule" Subtype="StealthHeatSink" />
+                <Block Type="MyObjectBuilder_UpgradeModule" Subtype="StealthHeatSinkSmall" />
+            </Blocks>
+        </BlockVariantGroup>
+    </BlockVariantGroups>
+
+    <BlockPositions>
+        <!-- Region Row 0-->
+        <BlockPosition>
+            <Name>StealthDrive</Name>
+            <Position>
+                <X>6</X>
+                <Y>18</Y>
+            </Position>
+        </BlockPosition>
+    </BlockPositions>
+
+</Definitions>

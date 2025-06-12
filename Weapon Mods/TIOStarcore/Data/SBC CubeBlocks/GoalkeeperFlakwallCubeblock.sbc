@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+			<!-- Salvo Broadside Array -->
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>GoalieCasemate</SubtypeId>
+			</Id>
+			<DisplayName>[FLAW] Goalkeeper Casemate Flak Battery</DisplayName>
+			<Description>
+              [2000m Targeting Range]
+			  [1200m Flak Range]
+              [Clouds of small pre-cast fragments are lethal to missiles, biologicals, below average sized meteors, and small grids.]
+              [Targets Missiles, deals 160 AMS Damage Per Second]
+
+			</Description>
+			<Icon>Textures\GUI\Icons\HSR\HSR_Damnation.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<GuiVisible>true</GuiVisible>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="5" y="3" z="3" />
+			<ModelOffset x="0" y="0" z="-2.5" />
+			<Model>Models\HSR\K_HSR_Damnation_Large.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="1000" />
+				<Component Subtype="Construction" Count="1000" />
+				<Component Subtype="Computer" Count="200" />
+				<Component Subtype="MetalGrid" Count="130" />
+				<Component Subtype="SmallTube" Count="45" />
+				<Component Subtype="LargeTube" Count="90" />
+				<Component Subtype="Motor" Count="135" />
+				<Component Subtype="Construction" Count="750" />
+				<Component Subtype="SteelPlate" Count="600" />
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Back" StartX="0" StartY="0" EndX="5" EndY="5" />
+				<MountPoint Side="Top" StartX="0" StartY="0" EndX="5" EndY="5" />
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="5" />
+				<MountPoint Side="Left" StartX="0" StartY="0" EndX="5" EndY="5" />
+				<MountPoint Side="Right" StartX="0" StartY="0" EndX="5" EndY="5" />
+			</MountPoints>
+			<BlockPairName>K_HS_Damnation</BlockPairName>
+			<EdgeType>Light</EdgeType>
+			<BuildTimeSeconds>75</BuildTimeSeconds>
+			<DisassembleRatio>5</DisassembleRatio>
+			<MirroringY>Z</MirroringY>
+      		<MirroringZ>Y</MirroringZ>
+			<NavigationDefinition>Default</NavigationDefinition>
+			<WeaponDefinitionId Subtype="ShootMissileGooder" />
+			<ResourceSinkGroup>Defense</ResourceSinkGroup>
+			<InventoryMaxVolume>3</InventoryMaxVolume>
+			<IdleRotation>false</IdleRotation>
+			<AiEnabled>false</AiEnabled>
+			<MaxRangeMeters>3000</MaxRangeMeters>
+		</Definition>
+
+
+    </CubeBlocks>
+</Definitions>

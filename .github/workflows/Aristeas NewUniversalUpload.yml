@@ -8,17 +8,12 @@ on:
 
 jobs:
   UploadMods:
+    if: github.repository_owner == 'StarCoreSE' || github.repository_owner == 'ari-steas'
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4.1.4
         with:
           fetch-depth: 0
-        
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v44
-        with:
-            separator: ','
       
       #- name: List all changed files
       #  env:
@@ -29,6 +24,6 @@ jobs:
       #    done
       - id: test_SEWT
         run: |
-          & "C:\actions-runner\externals\SC_NewUniversalUpload.exe" "${{ steps.changed-files.outputs.all_changed_files }}" "${{ github.event.head_commit.message }}"
+          & "C:\Program Files\SCUniversalUpload\SC_NewUniversalUpload.exe" --repo "${{ github.workspace }}" --changelog "${{ github.event.head_commit.message }}"
           
       - uses: EndBug/add-and-commit@v9

@@ -1,0 +1,35 @@
+name: XML Validation
+on:
+  pull_request:
+    branches:
+      - main
+      - stable
+  workflow_dispatch:
+jobs:
+  validate-xml:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+                
+      - name: Install xmllint
+        run: sudo apt-get update && sudo apt-get install -y libxml2-utils
+
+      - name: Validate XML against XSD
+        run: |
+          errors=0
+          
+          while IFS= read -r -d '' file; do
+            # echo "Validating $file"
+            if ! xmllint --noout "$file"; then
+              echo "Error in $file"
+              errors=$((errors + 1))
+            fi
+          done < <(find . -name "*.sbc" -print0)
+          
+          if [ "$errors" -ne 0 ]; then
+            echo "$errors SBC files failed validation"
+            exit 1
+          else
+            echo "All SBC files validated successfully"
+          fi

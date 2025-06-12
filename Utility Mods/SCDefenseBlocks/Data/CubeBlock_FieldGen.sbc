@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <CubeBlocks>
+        <Definition xsi:type="MyObjectBuilder_PoweredCargoContainerDefinition">
+            <Id>
+                <TypeId>Collector</TypeId>
+                <SubtypeId>SI_Field_Gen</SubtypeId>
+            </Id>
+            <DisplayName>Structural Integrity Field Generator</DisplayName>
+            <Icon>Textures\GUI\Icons\Cubes\SI_Field_Gen.dds</Icon>
+            <Description>Divert Power to this block for a Damage Reduction. Damage Reduction is equivlent to Power Diverted [Ex. 30% Power Diverted, 30% Damage Reduction]
+			Also has a time limited Siege Mode that provides a 90% Reduction in exchange for immobilizing your grid and shutting off all non-essential systems</Description>
+            <CubeSize>Large</CubeSize>
+            <BlockTopology>TriangleMesh</BlockTopology>
+            <Size x="3" y="3" z="2" />
+            <ModelOffset x="0" y="0" z="0" />
+            <Model>Models\Cubes\Large\SI_Field_Gen.mwm</Model>
+            <Components>
+                <Component Subtype="SteelPlate" Count="1500" />
+                <Component Subtype="Construction" Count="500" />
+                <Component Subtype="SmallTube" Count="120" />
+                <Component Subtype="Motor" Count="80" />
+                <Component Subtype="Display" Count="40" />
+                <Component Subtype="Computer" Count="100" />
+                <Component Subtype="SteelPlate" Count="1500" />
+            </Components>
+            <CriticalComponent Subtype="Computer" Index="0" />
+            <BuildProgressModels>
+            </BuildProgressModels>
+            <BlockPairName>SI_Field_Gen_Block</BlockPairName>
+            <EdgeType>Light</EdgeType>
+            <BuildTimeSeconds>25</BuildTimeSeconds>
+            <ResourceSinkGroup>Defense</ResourceSinkGroup>
+            <RequiredPowerInput>0.002</RequiredPowerInput>
+            <InventorySize>
+                <X>2.5</X>
+                <Y>2.5</Y>
+                <Z>1</Z>
+            </InventorySize>
+            <MountPoints>
+                <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="2" />
+                <MountPoint Side="Top" StartX="0" StartY="0" EndX="3" EndY="2" />
+                <MountPoint Side="Back" StartX="0" StartY="0" EndX="3" EndY="3" />
+                <MountPoint Side="Left" StartX="0" StartY="0" EndX="2" EndY="3" />
+                <MountPoint Side="Right" StartX="0" StartY="0" EndX="2" EndY="3" />
+		<MountPoint Side="Front" StartX="0" StartY="0" EndX="3" EndY="3" />
+            </MountPoints>
+            <MirroringY>Z</MirroringY>
+            <MirroringZ>Y</MirroringZ>
+            <DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
+            <DamagedSound>ParticleHeavyMech</DamagedSound>
+            <ActionSound>BlockCollect</ActionSound>
+            <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+            <DestroySound>WepSmallWarheadExpl</DestroySound>
+            <PCU>25</PCU>
+            <IsAirTight>true</IsAirTight>
+            <Public>false</Public>
+        </Definition>
+
+        <Definition xsi:type="MyObjectBuilder_PoweredCargoContainerDefinition">
+        <Id>
+          <TypeId>Collector</TypeId>
+          <SubtypeId>FieldGen_Capacity_Upgrade</SubtypeId>
+        </Id>
+        <DisplayName>[SI] Generator Capacity Upgrade</DisplayName>
+        <Icon>Textures\GUI\Icons\Cubes\Upgrade_Icon.dds</Icon>
+        <Description>
+			Capacity Upgrade for the Generator Core.
+			Each Upgrade adds 12.5% Additional Damage Reduction for a Maximum of 50%
+		</Description>
+        <CubeSize>Large</CubeSize>
+        <BlockTopology>TriangleMesh</BlockTopology>
+        <Size x="1" y="1" z="2" />
+        <ModelOffset x="0" y="0" z="0" />
+        <Model>Models\Cubes\Large\Field_Gen_Upgrade.mwm</Model>
+        <Components>
+          <Component Subtype="SteelPlate" Count="30" />
+          <Component Subtype="Construction" Count="50" />
+          <Component Subtype="SmallTube" Count="12" />
+          <Component Subtype="Motor" Count="8" />
+          <Component Subtype="Display" Count="4" />
+          <Component Subtype="Computer" Count="10" />
+          <Component Subtype="SteelPlate" Count="15" />
+        </Components>
+        <CriticalComponent Subtype="Computer" Index="0" />
+        <BuildProgressModels>
+
+        </BuildProgressModels>
+        <BlockPairName>FieldGen_Capacity_Upgrade_Block</BlockPairName>
+        <EdgeType>Light</EdgeType>
+        <BuildTimeSeconds>25</BuildTimeSeconds>
+        <ResourceSinkGroup>Conveyors</ResourceSinkGroup>
+        <RequiredPowerInput>0.002</RequiredPowerInput>
+        <InventorySize>
+          <X>2.5</X>
+          <Y>2.5</Y>
+          <Z>1</Z>
+        </InventorySize>
+        <MountPoints>
+          <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="1" EndY="2" />
+          <MountPoint Side="Top" StartX="0" StartY="0" EndX="1" EndY="2" />
+          <MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="1" />
+          <MountPoint Side="Left" StartX="0" StartY="0" EndX="2" EndY="1" />
+          <MountPoint Side="Right" StartX="0" StartY="0" EndX="2" EndY="1" />
+          <MountPoint Side="Front" StartX="0" StartY="0" EndX="1" EndY="1" />
+        </MountPoints>
+        <MirroringY>Z</MirroringY>
+        <MirroringZ>Y</MirroringZ>
+        <DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
+        <DamagedSound>ParticleHeavyMech</DamagedSound>
+        <ActionSound>BlockCollect</ActionSound>
+        <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+        <DestroySound>WepSmallWarheadExpl</DestroySound>
+        <PCU>25</PCU>
+        <IsAirTight>true</IsAirTight>
+      </Definition>
+
+        <Definition xsi:type="MyObjectBuilder_PoweredCargoContainerDefinition">
+        <Id>
+          <TypeId>Collector</TypeId>
+          <SubtypeId>FieldGen_Core</SubtypeId>
+        </Id>
+        <DisplayName>[SI] Generator Core</DisplayName>
+        <Icon>Textures\GUI\Icons\Cubes\Core_Icon.dds</Icon>
+        <Description>
+			This Block Consumes 0-500 MW of Power, in exchange for a 0-50% Incoming Damage Reduction.
+			Capacity Upgrades are required for this Function.
+
+			This Block has an Additional 'Siege Mode' which provides a 90% Damage Reduction in exchange for 900MW of Power Draw, No Movement, and Disabled Weapons.
+		</Description>
+        <CubeSize>Large</CubeSize>
+        <BlockTopology>TriangleMesh</BlockTopology>
+        <Size x="1" y="1" z="4" />
+        <ModelOffset x="0" y="0" z="0" />
+        <Model>Models\Cubes\Large\Field_Gen_Core.mwm</Model>
+        <Components>
+            <Component Subtype="SteelPlate" Count="750" />
+            <Component Subtype="Construction" Count="250" />
+            <Component Subtype="SmallTube" Count="60" />
+            <Component Subtype="Motor" Count="40" />
+            <Component Subtype="Display" Count="20" />
+            <Component Subtype="Computer" Count="50" />
+            <Component Subtype="SteelPlate" Count="750" />
+        </Components>
+        <CriticalComponent Subtype="Computer" Index="0" />
+        <BuildProgressModels>
+
+        </BuildProgressModels>
+        <BlockPairName>FieldGen_Core_Block</BlockPairName>
+        <EdgeType>Light</EdgeType>
+        <BuildTimeSeconds>25</BuildTimeSeconds>
+        <ResourceSinkGroup>Conveyors</ResourceSinkGroup>
+        <RequiredPowerInput>0.002</RequiredPowerInput>
+        <InventorySize>
+          <X>2.5</X>
+          <Y>2.5</Y>
+          <Z>1</Z>
+        </InventorySize>
+        <MountPoints>
+          <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="1" EndY="4" />
+          <MountPoint Side="Top" StartX="0" StartY="0" EndX="1" EndY="4" />
+          <MountPoint Side="Back" StartX="0" StartY="0" EndX="1" EndY="1" />
+          <MountPoint Side="Left" StartX="0" StartY="0" EndX="4" EndY="1" />
+          <MountPoint Side="Right" StartX="0" StartY="0" EndX="4" EndY="1" />
+          <MountPoint Side="Front" StartX="0" StartY="0" EndX="1" EndY="1" />
+        </MountPoints>
+        <MirroringY>Z</MirroringY>
+        <MirroringZ>Y</MirroringZ>
+        <DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
+        <DamagedSound>ParticleHeavyMech</DamagedSound>
+        <ActionSound>BlockCollect</ActionSound>
+        <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+        <DestroySound>WepSmallWarheadExpl</DestroySound>
+        <PCU>25</PCU>
+        <IsAirTight>true</IsAirTight>
+      </Definition>
+      
+        <!-- End Region Conveyor system -->
+    </CubeBlocks>
+</Definitions>

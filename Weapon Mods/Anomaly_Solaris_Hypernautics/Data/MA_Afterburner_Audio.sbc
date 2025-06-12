@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Sounds>
+
+	<Sound>
+      <Id>
+        <TypeId>AudioDefinition</TypeId>
+        <SubtypeId>MA_Afterburner_Large</SubtypeId>
+      </Id>
+      <Category>WEP_SHIP</Category>
+      <MaxDistance>800</MaxDistance>
+      <Volume>3</Volume>
+	  <PreventSynchronization>1</PreventSynchronization>
+      <SoundLimit>6</SoundLimit>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\EMP_Fire_Start.wav</Start>
+          <Loop>Audio\EMP_Fire_Loop.wav</Loop>
+          <End>Audio\EMP_Fire_Stop.wav</End>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>AudioDefinition</TypeId>
+        <SubtypeId>MA_Afterburner_Large_Fug</SubtypeId>
+      </Id>
+      <Category>WEP_SHIP</Category>
+      <MaxDistance>800</MaxDistance>
+      <Volume>2</Volume>
+      <PreventSynchronization>1</PreventSynchronization>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Loop>Audio\EMP_Fire_Loop.wav</Loop>
+        </Wave>
+      </Waves>
+    </Sound>
+	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>EMPFiringSoundDistant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>800</MaxDistance>
+      <PitchVariation>100</PitchVariation>
+      <Volume>3</Volume>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\EMP_Fire_Start_Dist.wav</Start>
+          <Loop>Audio\EMP_Fire_Loop_Dist.wav</Loop>
+          <End>Audio\EMP_Fire_Stop_Dist.wav</End>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ABWarning</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>800</MaxDistance>
+      <PitchVariation>100</PitchVariation>
+      <Volume>3</Volume>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\abwarning.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>
+	
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>SRBstart</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>800</MaxDistance>
+      <PitchVariation>100</PitchVariation>
+      <Volume>0.1</Volume>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\SRBstart.wav</Start>
+          <Loop></Loop>
+          <End></End>
+        </Wave>
+      </Waves>
+    </Sound>	
+	
+	<Sound>
+      <Id>
+        <TypeId>AudioDefinition</TypeId>
+        <SubtypeId>SRBloop</SubtypeId>
+      </Id>
+      <Category>WEP_SHIP</Category>
+      <MaxDistance>800</MaxDistance>
+      <Volume>0.1</Volume>
+	  <PreventSynchronization>1</PreventSynchronization>
+      <SoundLimit>6</SoundLimit>
+      <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\SRBloop_start.wav</Start>
+          <Loop>Audio\SRBloop.wav</Loop>
+          <End>Audio\EMP_Fire_Stop.wav</End>
+        </Wave>
+      </Waves>
+    </Sound>	
+	
+  <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>gravgun</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DistantSounds>
+      </DistantSounds>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>15</DynamicMusicAmount>
+      <Loopable>false</Loopable>
+      <Volume>1</Volume>
+      <PitchVariation>5</PitchVariation>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\gravgun.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>	
+	
+	
+	
+	
+
+  </Sounds>
+</Definitions>

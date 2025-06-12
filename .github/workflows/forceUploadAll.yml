@@ -12,6 +12,6 @@ jobs:
     
       - id: local_forceUpload
         run: |
-          & "C:\actions-runner\externals\SC_NewUniversalUpload.exe" "uploadall"
+          & "C:\Program Files\SCUniversalUpload\SC_NewUniversalUpload.exe" "uploadall" --repo "${{ github.workspace }}"
 
       - uses: EndBug/add-and-commit@v9

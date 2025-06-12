@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition>
+			<Id>
+				<TypeId>CubeBlock</TypeId>
+				<SubtypeId>RadiatorPanel</SubtypeId>
+			</Id>
+			<DisplayName>Retractable Radiator Panel</DisplayName>
+			<Description>
+				A simple radiator panel. Can be retracted when attached to a base, but still functions as a radiator when standalone.
+			</Description>
+			<Icon>Textures\GUI\Icons\Cubes\RadiatorPanel.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\RadiatorPanel.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="25"/>
+			</Components>
+			<CriticalComponent Subtype="SteelPlate" Index="0"/>
+			<BlockPairName>RadiatorPanel</BlockPairName>
+			<MountPoints>
+				<MountPoint Side="Top" StartX="0.25" StartY="0.05" EndX="0.35" EndY="0.15"/>
+				<MountPoint Side="Top" StartX="0.25" StartY="0.85" EndX="0.35" EndY="0.95"/>
+				<MountPoint Side="Bottom" StartX="0.65" StartY="0.85" EndX="0.75" EndY="0.95"/>
+				<MountPoint Side="Bottom" StartX="0.65" StartY="0.05" EndX="0.75" EndY="0.15"/>
+			</MountPoints>
+			<MirroringX>Y</MirroringX>
+			<MirroringY>X</MirroringY>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

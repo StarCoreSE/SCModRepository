@@ -1,0 +1,756 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Sounds>
+    <!--IHarpo, a glorious man. Damnable Keen file structure.-->
+    
+	
+	
+	<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_Gauss_AMS</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>3000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\HSR_Shot_Alpha.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+	
+	
+	<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_Gauss_Heavy</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1.45</Volume>
+	  <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\HSR_Shot_Alpha.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+	
+	
+  <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_RotaryGauss</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>4000</MaxDistance>
+    <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+    <PitchVariation>50</PitchVariation>
+    <DistantSounds>
+        <DistantSound DistanceCrossfade="10" Distance="1750" Sound="K_SA_RotaryGauss_Distant" />
+      </DistantSounds>
+	  <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\General\RotaryGauss.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_RotaryGauss_Distant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>4000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      
+    <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Pitch>-5</Pitch>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\General\RotaryGauss_Distant.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+  
+  
+  
+  
+		<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_Gauss_HeavyCharon</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>7000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>0.65</Volume>
+      <PitchVariation>20</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="10" Distance="1750" Sound="K_SA_Gauss_HeavyCharon_Distant" />
+      </DistantSounds>
+	  <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\HSR_Shot_Alpha.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_Gauss_HeavyCharon_Distant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>7000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <PitchVariation>20</PitchVariation>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\HSR_Shot_B.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Charon_Charge_Distant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>7000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>3</Volume>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\Charon_Charge_Distant.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Monopole_Charge_Distant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>7000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>3</Volume>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\Monopole_Charge_Distant.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Charon_Charge</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>7000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="10" Distance="1750" Sound="Charon_Charge_Distant" />
+      </DistantSounds>
+	  <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\Charon_Charge.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+	
+  	<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Charon_Barrel_Spin</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>10</Volume>
+	  <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\Charon_Barrel.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Monopole_Charge</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>7000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="10" Distance="1750" Sound="Monopole_Charge_Distant" />
+      </DistantSounds>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\Monopole_Charge.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+	<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_Gauss_ER</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\HSR_Shot_Alpha.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_Gauss_Cerberus</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>7000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount> 
+      <Volume>1</Volume>
+      <Pitch>-1</Pitch>
+      <Loopable>false</Loopable>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="1" Distance="2000" Sound="K_SA_Gauss_Cerberus_Distant" />
+      </DistantSounds>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\HSR_Shot_Alpha.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_Gauss_Cerberus_Distant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>7000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>4</Volume>
+      <Pitch>1</Pitch>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\HSR_Shot_B.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_Gauss_Cerberus_Impact</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>400</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>2</Volume>
+      <PitchVariation>50</PitchVariation>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\HSR_Shot_D.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+	
+	<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_Launch</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>8000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <SoundLimit>1</SoundLimit>
+      <VolumeVariation>0.1</VolumeVariation>
+      <PitchVariation>0.1</PitchVariation>
+	  <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\HSR_Missile_Launch_A.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+	
+	
+	<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_GrimFlight</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <Loopable>true</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\Audio_MissileTravelLoop_Dark.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+	
+	
+		<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_Reload_Gauss</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>50</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\General\SA_Reload_1.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+	
+		<Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_AmmoEmpty</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>50</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+	  <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\General\SA_Error_AmmoEmpty.wav</Start>
+        </Wave>
+        </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_Charon_Impact</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1300</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\HSR_Shot_D.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>K_SA_Gauss_Asterius</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1000</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Loopable>false</Loopable>
+      <SoundLimit>30</SoundLimit>
+      <VolumeVariation>0.1</VolumeVariation>
+      <PitchVariation>100</PitchVariation>
+      <PreventSynchronization>0</PreventSynchronization>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\HSR_Shot_Alpha.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Satisfaction</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1500</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <PitchVariation>100</PitchVariation>
+      <PreventSynchronization>10</PreventSynchronization>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\Satisfaction.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Somnus_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <PitchVariation>50</PitchVariation>
+      <PreventSynchronization>10</PreventSynchronization>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\Somnus_Heavy.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+        <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Somnus_Hit</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1500</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+          <Pitch>-2</Pitch>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\Somnus_Heavy_Reverse_Impact.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Somnus_Shield_Hit</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1500</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <Pitch>-5</Pitch>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\Somnus_Shield_Hit.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+        <Sound>
+		  <Id>
+			  <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+			  <SubtypeId>SomnusFlyby</SubtypeId>
+		  </Id>
+		  <Category>SHOT</Category>
+		  <MaxDistance>1500</MaxDistance>
+		  <PreventSynchronization>25</PreventSynchronization>
+		  <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+		  <DynamicMusicAmount>3</DynamicMusicAmount>
+		  <Volume>3</Volume>
+          <Pitch>-1</Pitch>
+          <PitchVariation>40</PitchVariation>
+		  <Loopable>true</Loopable>
+		  <Waves>
+			  <Wave Type="D3">
+				  <Start>Audio\Gauss\Somnus_Flyby.wav</Start>
+			  </Wave>
+		  </Waves>
+	  </Sound>
+    
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Silvius_Charge</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>8500</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>4</Volume>
+      <Loopable>false</Loopable>
+      <PreventSynchronization>0</PreventSynchronization>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\Charge_up.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Silvius_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>8500</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>4</Volume>
+      <Loopable>false</Loopable>
+      <PreventSynchronization>0</PreventSynchronization>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\Reverb_Cannon.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Hydra_Reload</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>500</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.8</Volume>
+      <Loopable>false</Loopable>
+      <PreventSynchronization>0</PreventSynchronization>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\shotgun\Dopamine_Device_Hydra_LoadingV2.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+        <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>AutoCoilReload</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>500</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.5</Volume>
+      <Loopable>false</Loopable>
+      <PreventSynchronization>0</PreventSynchronization>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\AutoCoilReload.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Hydra_Fire_Distant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>7000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>0.8</Volume>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\shotgun\Dopamine_Device_Hydra_Firing_Distant.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Hydra_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>7000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>0.8</Volume>
+      <PitchVariation>20</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="10" Distance="1750" Sound="Hydra_Fire_Distant" />
+      </DistantSounds>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\shotgun\Chungus_Boom_Hydra_Firing.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+
+
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Rotary_Gauss_Fire</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <PitchVariation>20</PitchVariation>
+      <DistantSounds>
+        <DistantSound DistanceCrossfade="10" Distance="1750" Sound="Rotary_Gauss_Fire_Distant" />
+      </DistantSounds>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\General\RotaryGauss.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Rotary_Gauss_Fire_Distant</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>5000</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>1</Volume>
+      <PitchVariation>20</PitchVariation>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\General\RotaryGauss_Distant.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Pulse_Flak</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>1200</MaxDistance>
+      <PreventSynchronization>5</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>0.1</Volume>
+      <PitchVariation>90</PitchVariation>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\Gauss\Pulse Flak.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>Pulse_Flak_placeholder</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>800</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>35</DynamicMusicAmount>
+      <Volume>0.5</Volume>
+      <PitchVariation>50</PitchVariation>
+      <Loopable>false</Loopable>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\General\FixedHardLaser.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+    
+    
+    
+
+
+  </Sounds>
+</Definitions>

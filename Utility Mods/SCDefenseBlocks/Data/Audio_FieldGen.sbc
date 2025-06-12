@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Sounds>
+
+		<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>FieldGen_Brake</SubtypeId>
+			</Id>
+			<Category>HUD</Category>
+			<DisablePitchEffects>true</DisablePitchEffects>
+			<Loopable>false</Loopable>
+			<MaxDistance>50</MaxDistance>
+			<ModifiableByHelmetFilters>false</ModifiableByHelmetFilters>
+			<PreventSynchronization>4</PreventSynchronization>
+			<Volume>0.75</Volume>	
+			<Waves>
+				<Wave Type="D2">
+					<Start>Audio\Brake_Applied.wav</Start>
+				</Wave>
+			</Waves>
+		</Sound>
+
+		<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>FieldGen_Damaged</SubtypeId>
+			</Id>
+			<Category>HUD</Category>
+			<DisablePitchEffects>true</DisablePitchEffects>
+			<Loopable>false</Loopable>
+			<MaxDistance>50</MaxDistance>
+			<ModifiableByHelmetFilters>false</ModifiableByHelmetFilters>
+			<PreventSynchronization>4</PreventSynchronization>
+			<Volume>0.75</Volume>
+			<Waves>
+				<Wave Type="D2">
+					<Start>Audio\Warning_Damaged.wav</Start>
+					<Start>Audio\Alert_Damaged.wav</Start>
+				</Wave>
+			</Waves>
+		</Sound>
+
+		<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>FieldGen_Offline</SubtypeId>
+			</Id>
+			<Category>HUD</Category>
+			<DisablePitchEffects>true</DisablePitchEffects>
+			<Loopable>false</Loopable>
+			<MaxDistance>50</MaxDistance>
+			<ModifiableByHelmetFilters>false</ModifiableByHelmetFilters>
+			<PreventSynchronization>4</PreventSynchronization>
+			<Volume>0.75</Volume>
+			<Waves>
+				<Wave Type="D2">
+					<Start>Audio\Warning_Offline.wav</Start>
+					<Start>Audio\Alert_Offline.wav</Start>					
+				</Wave>
+			</Waves>
+		</Sound>
+
+		<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>FieldGen_PowerRestored</SubtypeId>
+			</Id>
+			<Category>HUD</Category>
+			<DisablePitchEffects>true</DisablePitchEffects>
+			<Loopable>false</Loopable>
+			<MaxDistance>50</MaxDistance>
+			<ModifiableByHelmetFilters>false</ModifiableByHelmetFilters>
+			<PreventSynchronization>4</PreventSynchronization>
+			<Volume>0.75</Volume>
+			<Waves>
+				<Wave Type="D2">
+					<Start>Audio\PowerRestored.wav</Start>
+				</Wave>
+			</Waves>
+		</Sound>
+
+		<Sound>
+			<Id>
+				<TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+				<SubtypeId>FieldGen_DamagedRepaired</SubtypeId>
+			</Id>
+			<Category>HUD</Category>
+			<DisablePitchEffects>true</DisablePitchEffects>
+			<Loopable>false</Loopable>
+			<MaxDistance>50</MaxDistance>
+			<ModifiableByHelmetFilters>false</ModifiableByHelmetFilters>
+			<PreventSynchronization>4</PreventSynchronization>
+			<Volume>0.75</Volume>
+			<Waves>
+				<Wave Type="D2">
+					<Start>Audio\DamageRepaired.wav</Start>
+				</Wave>
+			</Waves>
+		</Sound>
+	</Sounds>
+</Definitions>

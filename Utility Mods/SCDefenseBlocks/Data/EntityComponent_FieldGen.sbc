@@ -1,0 +1,13 @@
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EntityComponents>
+	  <EntityComponent xsi:type="MyObjectBuilder_ModStorageComponentDefinition">
+		  <Id>
+			  <TypeId>ModStorageComponent</TypeId>
+			  <SubtypeId>FieldGenerator</SubtypeId>
+		  </Id>
+		  <RegisteredStorageGuids>
+			  <guid>7A7AC398-FAE3-44E5-ABD5-8AE49434DDF6</guid>
+		  </RegisteredStorageGuids>
+	  </EntityComponent>
+  </EntityComponents>
+</Definitions>

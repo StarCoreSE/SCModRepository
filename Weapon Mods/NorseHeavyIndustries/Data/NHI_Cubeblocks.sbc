@@ -1,0 +1,2045 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <CubeBlocks>
+ 
+   
+<!-- All Finished Turrets-->
+   
+<!-- Point Defense Cannon -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
+		 <Id>
+			 <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_PD_Turret</SubtypeId>
+     </Id>
+     <DisplayName>[NHI] 'Heimdallr' Point-Defense Cannon</DisplayName>
+	   <Description>
+[Turret Range: MAX 3000m | MIN 100m]
+[Reload: 1 Second]
+[Power Draw: None]
+
+[Ammo Types: CRAM]
+[Shell Range: 3100m]
+[Shell Speed: 1800m/s]
+[Damage Types: Kinetic]
+[Damage Falloffs: None]
+
+The 'Heimdallr' is a 20mm Point-Defense Cannon with a Mid-Tier Range of 3000 Meters. 
+Most Effective against Missiles, Rockets, and other Similar Guided Munitions, but Also Decently Effective against Small Grids.
+     </Description>
+     <Icon>Textures\GUI\Icons\MyGat.dds</Icon>
+     <CubeSize>Large</CubeSize>
+	   <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="1" z="1" />
+     <ModelOffset x="0" y="0" z="0" />
+	   <Model>Models\Large\MyGat.mwm</Model>
+     <Components>
+        <Component Subtype="SteelPlate" Count="50" />
+        <Component Subtype="Construction" Count="80" />
+        <Component Subtype="MetalGrid" Count="40" />
+        <Component Subtype="LargeTube" Count="30" />
+        <Component Subtype="Motor" Count="125" />
+        <Component Subtype="Computer" Count="120" />
+        <Component Subtype="Construction" Count="120" />
+        <Component Subtype="SteelPlate" Count="100" />
+      </Components>
+      <CriticalComponent Subtype="Computer" Index="0" />
+      <MountPoints>
+         <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+         <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+         <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+         <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+         <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+      </MountPoints>
+      <BlockPairName>NHI_PD_Turret_Block</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+	    <EdgeType>Light</EdgeType>
+      <BuildTimeSeconds>25</BuildTimeSeconds>
+      <DisassembleRatio>5</DisassembleRatio>
+      <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+        <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <NavigationDefinition>Default</NavigationDefinition>
+	    <WeaponDefinitionId Subtype="NHI_Weapon"/>
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+    </Definition>
+
+<!-- Point Defense Cannon Half Block -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_PD_Turret_Half</SubtypeId>
+     </Id>
+     <DisplayName>[NHI] 'Heimdallr' Point-Defense Cannon Half Block</DisplayName>
+     <Description>
+[Turret Range: MAX 3000m | MIN 100m]
+[Reload: 1 Second]
+[Power Draw: None]
+
+[Ammo Types: CRAM]
+[Shell Range: 3100m]
+[Shell Speed: 1800m/s]
+[Damage Types: Kinetic]
+[Damage Falloffs: None]
+
+The 'Heimdallr' is a 20mm Point-Defense Cannon with a Mid-Tier Range of 3000 Meters. 
+Most Effective against Missiles, Rockets, and other Similar Guided Munitions, but Also Decently Effective against Small Grids.
+     </Description>
+     <Icon>Textures\GUI\Icons\Odin_PDC_Half_Block.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="1" z="1" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Odin_PDC_Half_Block.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="50" />
+       <Component Subtype="Construction" Count="80" />
+       <Component Subtype="MetalGrid" Count="40" />
+       <Component Subtype="LargeTube" Count="30" />
+       <Component Subtype="Motor" Count="125" />
+       <Component Subtype="Computer" Count="120" />
+       <Component Subtype="Construction" Count="120" />
+       <Component Subtype="SteelPlate" Count="100" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <MountPoints>
+       <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+       <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+       <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+       <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+       <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+     </MountPoints>
+     <BlockPairName>NHI_PD_Turret_Half_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>25</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <DamagedSound>ParticleWeapExpl</DamagedSound>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon"/>
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+   </Definition>
+
+<!-- Point Defense Cannon Half Slope Top -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_PD_Turret_Half_Slope_Top</SubtypeId>
+     </Id>
+     <DisplayName>[NHI] 'Heimdallr' Point-Defense Cannon 1x2 Slope Top</DisplayName>
+     <Description>
+[Turret Range: MAX 3000m | MIN 100m]
+[Reload: 1 Second]
+[Power Draw: None]
+
+[Ammo Types: CRAM]
+[Shell Range: 3100m]
+[Shell Speed: 1800m/s]
+[Damage Types: Kinetic]
+[Damage Falloffs: None]
+
+The 'Heimdallr' is a 20mm Point-Defense Cannon with a Mid-Tier Range of 3000 Meters. 
+Most Effective against Missiles, Rockets, and other Similar Guided Munitions, but Also Decently Effective against Small Grids.
+     </Description>
+     <Icon>Textures\GUI\Icons\Odin_PDC_Half_Slope_Top.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="1" z="1" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Odin_PDC_Half_Slope_Top.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="50" />
+       <Component Subtype="Construction" Count="80" />
+       <Component Subtype="MetalGrid" Count="40" />
+       <Component Subtype="LargeTube" Count="30" />
+       <Component Subtype="Motor" Count="125" />
+       <Component Subtype="Computer" Count="120" />
+       <Component Subtype="Construction" Count="120" />
+       <Component Subtype="SteelPlate" Count="100" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <MountPoints>
+       <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+       <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+       <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+       <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+       <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+     </MountPoints>
+     <BlockPairName>NHI_PD_Turret_Half_Slope_Top_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>25</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <DamagedSound>ParticleWeapExpl</DamagedSound>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon"/>
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+   </Definition>
+
+<!-- Point Defense Cannon Half Slope Tip -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_PD_Turret_Half_Slope_Tip</SubtypeId>
+     </Id>
+     <DisplayName>[NHI] 'Heimdallr' Point-Defense Cannon 1x2 Slope Tip</DisplayName>
+     <Description>
+[Turret Range: MAX 3000m | MIN 100m]
+[Reload: 1 Second]
+[Power Draw: None]
+
+[Ammo Types: CRAM]
+[Shell Range: 3100m]
+[Shell Speed: 1800m/s]
+[Damage Types: Kinetic]
+[Damage Falloffs: None]
+
+The 'Heimdallr' is a 20mm Point-Defense Cannon with a Mid-Tier Range of 3000 Meters. 
+Most Effective against Missiles, Rockets, and other Similar Guided Munitions, but Also Decently Effective against Small Grids.
+     </Description>
+     <Icon>Textures\GUI\Icons\Odin_PDC_Half_Slope_Tip.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="1" z="1" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Odin_PDC_Half_Slope_Tip.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="50" />
+       <Component Subtype="Construction" Count="80" />
+       <Component Subtype="MetalGrid" Count="40" />
+       <Component Subtype="LargeTube" Count="30" />
+       <Component Subtype="Motor" Count="125" />
+       <Component Subtype="Computer" Count="120" />
+       <Component Subtype="Construction" Count="120" />
+       <Component Subtype="SteelPlate" Count="100" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <MountPoints>
+       <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+       <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+       <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+       <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+       <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+     </MountPoints>
+     <BlockPairName>NHI_PD_Turret_Half_Slope_Tip_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>25</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <DamagedSound>ParticleWeapExpl</DamagedSound>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon"/>
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+   </Definition>
+
+<!-- Point Defense Cannon 45 Angle -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_PD_Turret_45_Slope</SubtypeId>
+     </Id>
+     <DisplayName>[NHI] 'Heimdallr' Point-Defense Cannon 45 Slope</DisplayName>
+     <Description>
+[Turret Range: MAX 3000m | MIN 100m]
+[Reload: 1 Second]
+[Power Draw: None]
+
+[Ammo Types: CRAM]
+[Shell Range: 3100m]
+[Shell Speed: 1800m/s]
+[Damage Types: Kinetic]
+[Damage Falloffs: None]
+
+The 'Heimdallr' is a 20mm Point-Defense Cannon with a Mid-Tier Range of 3000 Meters. 
+Most Effective against Missiles, Rockets, and other Similar Guided Munitions, but Also Decently Effective against Small Grids.
+     </Description>
+     <Icon>Textures\GUI\Icons\Odin_PDC_45_Slope.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="1" z="1" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Odin_PDC_45_Slope.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="50" />
+       <Component Subtype="Construction" Count="80" />
+       <Component Subtype="MetalGrid" Count="40" />
+       <Component Subtype="LargeTube" Count="30" />
+       <Component Subtype="Motor" Count="125" />
+       <Component Subtype="Computer" Count="120" />
+       <Component Subtype="Construction" Count="120" />
+       <Component Subtype="SteelPlate" Count="100" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <MountPoints>
+       <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+       <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+       <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+       <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="1.0" EndY="0.5"/>
+       <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+     </MountPoints>
+     <BlockPairName>NHI_PD_Turret_45_Slope_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>25</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <DamagedSound>ParticleWeapExpl</DamagedSound>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon"/>
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+   </Definition>
+
+<!-- Light Autocannon-->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Light_Autocannon_Turret</SubtypeId>
+     </Id>
+     <DisplayName>[NHI] 'Vanir' Light Autocannon</DisplayName>
+     <Description>
+[Turret Range: 3500m]
+[Reload: 8 Seconds]
+[Power Draw: 12MW]
+
+[Ammo Types: APHE]
+[Shell Range: 3500m]
+[Shell Speed: 1250m/s]
+[Damage Types: Energy]
+[Damage Falloffs: None]
+
+Light Autocannon that fires an APHE Round.
+     </Description>
+     <Icon>Textures\GUI\Icons\Odin_Defense_Cannon_1x1x2.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="2" z="1" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Odin_Defense_Cannon_1x1x2.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="150" />
+       <Component Subtype="Construction" Count="40" />
+       <Component Subtype="MetalGrid" Count="45" />
+       <Component Subtype="SmallTube" Count="50" />
+	   <Component Subtype="Computer" Count="90" />		 
+       <Component Subtype="Motor" Count="260" />
+       <Component Subtype="Construction" Count="60" />
+       <Component Subtype="SteelPlate" Count="110" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <MountPoints>
+      <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+      <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+      <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+      <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+       <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+     </MountPoints>
+     <BlockPairName>NHI_Light_Autocannon_Turret_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>30</BuildTimeSeconds>
+     <DisassembleRatio>1</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon"/>
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+   </Definition>
+
+<!-- AutoCannon -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition"> 
+		 <Id>
+			 <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Autocannon_Turret</SubtypeId>
+     </Id>
+     <DisplayName>[NHI] 'Aesir' Autocannon</DisplayName>
+	   <Description>
+[Range: 5000m]
+[Reload: 10 Seconds]
+[Power Draw: None]
+
+[Ammo Types: APHE]
+[Shell Range: 5000m]
+[Shell Speed: 1500m/s]
+[Damage Types: Energy]
+[Damage Falloffs: None]
+       
+General Purpose Autocannon. Uses an APHE round with no specific or special damage capabilities.
+
+None
+     </Description>
+     <Icon>Textures\GUI\Icons\New_Autocannon_3x3_2.dds</Icon>
+     <CubeSize>Large</CubeSize>
+	   <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="3" y="2" z="3" />
+     <ModelOffset x="0" y="0" z="0" />
+	   <Model>Models\Large\New_Autocannon_3x3_2_R.mwm</Model>
+     <Components>
+        <Component Subtype="SteelPlate" Count="500" />
+		    <Component Subtype="Construction" Count="500" />
+		    <Component Subtype="Computer" Count="180" />		   
+        <Component Subtype="MetalGrid" Count="350" />
+        <Component Subtype="SmallTube" Count="250" />
+        <Component Subtype="LargeTube" Count="35" />
+        <Component Subtype="Motor" Count="100" />
+        <Component Subtype="Construction" Count="125" />
+        <Component Subtype="SteelPlate" Count="150" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <MountPoints>
+        <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+        <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+        <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+        <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0"/>
+     </MountPoints>
+     <BlockPairName>NHI_Autocannon_Turret_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+	   <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>70</BuildTimeSeconds>
+     <DisassembleRatio>1</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+       <DamagedSound>ParticleWeapExpl</DamagedSound>
+     <NavigationDefinition>Default</NavigationDefinition>
+	   <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+   </Definition>
+   
+<!-- Gatling Laser-->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Gatling_Laser_Turret</SubtypeId>
+     </Id>
+     <DisplayName>[NHI] 'Surtr' Rotary Laser Cannon</DisplayName>
+     <Description>
+[Turret Range: 3500m]
+[Reload: 11 Seconds]
+[Power Draw: 225MW]
+
+[Ammo Types: Pulse Laser]
+[Shell Range: 3650m]
+[Shell Speed: 5000m/s]
+[Damage Types: Energy]
+[Damage Falloffs: None]
+
+Turreted Rotary Laser Cannon. Fires a Laser Pulse that Excels at Light Armor and Component Damage.
+     </Description>
+     <Icon>Textures\GUI\Icons\NHI_Gatling_Laser_Turret_U.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="3" y="4" z="3" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\NHI_Gatling_Laser_Turret_U.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="200" />
+       <Component Subtype="Construction" Count="500" />
+       <Component Subtype="PowerCell" Count="100" />
+       <Component Subtype="Computer" Count="125" />
+       <Component Subtype="MetalGrid" Count="125" />
+       <Component Subtype="LargeTube" Count="50" />
+       <Component Subtype="Motor" Count="250" />
+       <Component Subtype="Superconductor" Count="20" />
+       <Component Subtype="SmallTube" Count="180" />
+       <Component Subtype="Construction" Count="750" />
+       <Component Subtype="SteelPlate" Count="350" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <MountPoints>
+       <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+       <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+       <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+       <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+       <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0"/>
+     </MountPoints>
+     <BlockPairName>NHI_Gatling_Laser_Turret_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>80</BuildTimeSeconds>
+     <DisassembleRatio>2</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon"/>
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>7000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+   </Definition>
+   
+<!-- Light Railgun -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Light_Railgun_Turret</SubtypeId>
+     </Id>
+     <DisplayName>[NHI] 'Skadi' Light Railgun</DisplayName>
+     <Description>
+[Turret Range: 4500m]
+[Reload: 15 Seconds]
+[Power Draw: 192MW]
+
+[Ammo Types: Kinetic Slug]
+[Shell Range: 7000m]
+[Shell Speed: 3000m/s]
+[Damage Types: Kinetic]
+[Damage Falloffs: None]
+
+Light Railgun Turret that fires a 3 Slug Burst
+     </Description>
+     <Icon>Textures\GUI\Icons\Odin_Railgun_3x3.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="3" y="2" z="3" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Odin_Railgun_3x3.mwm</Model>
+  <Components>
+    <Component Subtype="SteelPlate" Count="400" />
+	  <Component Subtype="Construction" Count="800" />
+	  <Component Subtype="PowerCell" Count="200"/>
+	  <Component Subtype="Computer" Count="100" />	  
+    <Component Subtype="SmallTube" Count="300" />
+    <Component Subtype="LargeTube" Count="30" />
+    <Component Subtype="Motor" Count="16" />
+  	<Component Subtype="Superconductor" Count="100" />	  
+	  <Component Subtype="MetalGrid" Count="350" />	  
+    <Component Subtype="Construction" Count="180" />
+    <Component Subtype="SteelPlate" Count="200" />
+  </Components>
+  <CriticalComponent Subtype="Computer" Index="0" />
+       <MountPoints>
+           <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+           <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+           <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+           <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+           <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0"/>
+        </MountPoints>
+     <BlockPairName>NHI_Light_Railgun_Turret_Block</BlockPairName>
+      <MirroringY>Z</MirroringY>
+      <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>80</BuildTimeSeconds>
+     <DisassembleRatio>1</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+   </Definition>
+
+<!-- Heavy Railgun -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Heavy_Railgun_Turret</SubtypeId>
+     </Id>
+     <DisplayName>'Odin's Eye' Heavy Railgun</DisplayName>
+     <Description>
+Heavy Railgun Turret that fires a single slug every 10 Seconds
+[Range: 5000]
+[Shell Speed: 2500m/s]
+[Damage Type: KIN]
+     </Description>
+     <Icon>Textures\GUI\Icons\OdinsEye.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="5" y="5" z="5" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\5x5_Railgun_New.mwm</Model>
+  <Components>
+    <Component Subtype="SteelPlate" Count="290" />
+	  <Component Subtype="Construction" Count="4000" />	  
+	  <Component Subtype="Computer" Count="120" />	  
+	  <Component Subtype="PowerCell" Count="600"/>
+	  <Component Subtype="LargeTube" Count="240" />	  
+    <Component Subtype="Motor" Count="180" />
+    <Component Subtype="SmallTube" Count="600" />
+    <Component Subtype="Superconductor" Count="300" />
+    <Component Subtype="MetalGrid" Count="650" />	  
+    <Component Subtype="Construction" Count="4000" />
+    <Component Subtype="SteelPlate" Count="500" />
+  </Components>
+    <CriticalComponent Subtype="Computer" Index="0" />
+  <MountPoints>
+    <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="5.0" EndY="3.0"/>
+    <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="5.0" EndY="3.0"/>
+    <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="5.0" EndY="3.0"/>
+    <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="5.0" EndY="3.0"/>
+    <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="5.0" EndY="5.0"/>
+  </MountPoints>
+     <BlockPairName>NHI_Heavy_Railgun_Turret_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>120</BuildTimeSeconds>
+     <DisassembleRatio>2</DisassembleRatio>
+      <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+      <DamagedSound>ParticleWeapExpl</DamagedSound>
+      <NavigationDefinition>Default</NavigationDefinition>
+	   <WeaponDefinitionId Subtype="NHI_Weapon" />
+      <ResourceSinkGroup>Defense</ResourceSinkGroup>
+      <InventoryMaxVolume>1</InventoryMaxVolume>
+    </Definition>
+   
+<!-- Thumper Cannon -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Heavy_Gun_Turret</SubtypeId>
+     </Id>
+     <DisplayName>[NHI] 27-Inch 'Gugnir' Heavy Gun Turret</DisplayName>
+     <Description>       
+[Turret Range: 6000m]
+[Reload: 12 Seconds]
+[Power Draw: None]
+
+[Ammo Types: Canister Shot | Flare Shot]
+[Shell Range: 6500m | 4000m]
+[Shell Speed: 1400m/s | 400m/s]
+[Damage Types: Kinetic | None]
+[Damage Falloffs: None]
+
+27-Inch Heavy Gun Turret that fires a Canister Shot Shell or a Flare Shell that distract enemy PD.
+     </Description>
+     <Icon>Textures\GUI\Icons\Gungir_Thumper.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="5" y="6" z="5" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\5x5_Thumper_Cannon.mwm</Model>
+    <Components>
+       <Component Subtype="SteelPlate" Count="100" />
+	     <Component Subtype="Construction" Count="5000" />
+	     <Component Subtype="Computer" Count="120" />		 
+       <Component Subtype="SmallTube" Count="240" />
+       <Component Subtype="Motor" Count="180" />
+       <Component Subtype="LargeTube" Count="160" />
+       <Component Subtype="MetalGrid" Count="650" />		 
+       <Component Subtype="Construction" Count="5000" />
+       <Component Subtype="SteelPlate" Count="500" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+  <MountPoints>
+    <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="5.0" EndY="3.0"/>
+    <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="5.0" EndY="3.0"/>
+    <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="5.0" EndY="3.0"/>
+    <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="5.0" EndY="3.0"/>
+    <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="5.0" EndY="5.0"/>
+  </MountPoints>
+     <BlockPairName>NHI_Heavy_Gun_Turret_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>110</BuildTimeSeconds>
+     <DisassembleRatio>2</DisassembleRatio>
+  <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+   </Definition> 
+
+<!-- Mk3 Battleship Cannon-->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Mk3_Cannon_Turret</SubtypeId>
+     </Id>
+     <DisplayName>[NHI] Mk3 Battleship Cannon</DisplayName>
+     <Description>
+[Turret Range: 7000m]
+[Reload: 13 Seconds]
+[Power Draw: None]
+
+[Ammo Types: HE | HVAP]
+[Shell Range: 8200m | 5200m]
+[Shell Speed: 1800m/s | 3200m/s]
+[Damage Types: Energy | Kinetic]
+[Damage Falloffs: None]
+
+A Heavy Battleship Cannon. Fires an HE Shell or an HVAP Shell.
+     </Description>
+     <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk3.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="7" y="6" z="7" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Battleship_Cannon_Mk3.mwm</Model>
+
+     <Components>
+
+				<Component Subtype="Construction" Count="2750" />
+				<Component Subtype="GravityGenerator" Count="300" />
+				<Component Subtype="Computer" Count="180" />
+				<Component Subtype="SmallTube" Count="260" />
+				<Component Subtype="Motor" Count="180" />
+				<Component Subtype="LargeTube" Count="360" />
+				<Component Subtype="MetalGrid" Count="650" />
+				<Component Subtype="Construction" Count="3750" />
+				<Component Subtype="SteelPlate" Count="1000" />
+
+	<!-- 
+        <Component Subtype="SteelPlate" Count="1100" />
+	      <Component Subtype="Construction" Count="3750" />
+	      <Component Subtype="Computer" Count="180" />		 
+        <Component Subtype="SmallTube" Count="260" />
+        <Component Subtype="Motor" Count="180" />
+        <Component Subtype="LargeTube" Count="360" />
+        <Component Subtype="MetalGrid" Count="650" />		 
+        <Component Subtype="Construction" Count="3750" />
+        <Component Subtype="SteelPlate" Count="1000" />-->
+
+     </Components>
+
+     <CriticalComponent Subtype="Motor" Index="0" />
+
+     <MountPoints>
+        <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="7.0" EndY="2.0"/>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="7.0" EndY="2.0"/>
+        <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="7.0" EndY="2.0"/>
+        <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="7.0" EndY="2.0"/>
+        <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="7.0" EndY="7.0"/>
+     </MountPoints>
+     <BlockPairName>NHI_Mk3_Cannon_Turret_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>220</BuildTimeSeconds>
+     <DisassembleRatio>2</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+   </Definition>
+
+<!-- Mk3 Battleship Cannon Surface-->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Mk3_Cannon_Surface_Turret</SubtypeId>
+     </Id>
+     <DisplayName>[NHI] Mk3 Battleship Cannon</DisplayName>
+     <Description>
+[Turret Range: 7000m]
+[Reload: 13 Seconds]
+[Power Draw: None]
+
+[Ammo Types: HE | HVAP]
+[Shell Range: 8200m | 5200m]
+[Shell Speed: 1800m/s | 3200m/s]
+[Damage Types: Energy | Kinetic]
+[Damage Falloffs: None]
+
+A Heavy Battleship Cannon. Fires an HE Shell or an HVAP Shell.
+     </Description>
+     <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk3.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>false</GuiVisible>
+     <IsPublic>false</IsPublic>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="7" y="4" z="7" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Battleship_Cannon_Mk3_Surface.mwm</Model>
+
+     <Components>
+
+				<Component Subtype="Construction" Count="2750" />
+				<Component Subtype="GravityGenerator" Count="300" />
+				<Component Subtype="Computer" Count="180" />
+				<Component Subtype="SmallTube" Count="260" />
+				<Component Subtype="Motor" Count="180" />
+				<Component Subtype="LargeTube" Count="360" />
+				<Component Subtype="MetalGrid" Count="650" />
+				<Component Subtype="Construction" Count="3750" />
+				<Component Subtype="SteelPlate" Count="1000" />
+
+	<!-- 
+        <Component Subtype="SteelPlate" Count="1100" />
+	      <Component Subtype="Construction" Count="3750" />
+	      <Component Subtype="Computer" Count="180" />		 
+        <Component Subtype="SmallTube" Count="260" />
+        <Component Subtype="Motor" Count="180" />
+        <Component Subtype="LargeTube" Count="360" />
+        <Component Subtype="MetalGrid" Count="650" />		 
+        <Component Subtype="Construction" Count="3750" />
+        <Component Subtype="SteelPlate" Count="1000" />-->
+
+     </Components>
+
+     <CriticalComponent Subtype="Motor" Index="0" />
+
+     <MountPoints>
+       <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="7.0" EndY="2.0"/>
+       <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="7.0" EndY="2.0"/>
+       <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="7.0" EndY="2.0"/>
+       <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="7.0" EndY="2.0"/>
+       <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="7.0" EndY="7.0"/>
+     </MountPoints>
+     <BlockPairName>NHI_Mk3_Cannon_Surface_Turret_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>220</BuildTimeSeconds>
+     <DisassembleRatio>2</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+   </Definition>   
+   
+<!-- Mk2 Battleship Cannon-->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Mk2_Cannon_Turret</SubtypeId>
+     </Id>
+     <DisplayName>[NHI] Mk2 Battleship Cannon</DisplayName>
+     <Description>
+[Turret Range: 6000m]
+[Reload: 9 Seconds]
+[Power Draw: None]
+
+[Ammo Types: HE | HVAP]
+[Shell Range: 7200m | 7200m]
+[Shell Speed: 1100m/s | 2200m/s]
+[Damage Types: Energy | Kinetic]
+[Damage Falloffs: None]
+
+A Medium Battleship Cannon. Fires an HE Shell or an HVAP Shell.
+     </Description>
+     <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk2.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>false</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="5" y="3" z="5" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Mk2_Battleship_Cannon_Refresh.mwm</Model>
+
+     <Components>
+
+		<Component Subtype="SteelPlate" Count="150" />
+		<Component Subtype="Construction" Count="200" />
+		<Component Subtype="GravityGenerator" Count="178" />
+		<Component Subtype="Computer" Count="100" />
+		<Component Subtype="SmallTube" Count="200" />
+		<Component Subtype="Motor" Count="100" />
+		<Component Subtype="LargeTube" Count="200" />
+		<Component Subtype="MetalGrid" Count="300" />
+		<Component Subtype="Construction" Count="1200" />
+		<Component Subtype="SteelPlate" Count="700" />
+
+	<!--
+        <Component Subtype="SteelPlate" Count="550" />
+        <Component Subtype="Construction" Count="1875" />
+        <Component Subtype="Computer" Count="90" />
+        <Component Subtype="SmallTube" Count="130" />
+        <Component Subtype="Motor" Count="90" />
+        <Component Subtype="LargeTube" Count="180" />
+        <Component Subtype="MetalGrid" Count="325" />
+        <Component Subtype="Construction" Count="1875" />
+        <Component Subtype="SteelPlate" Count="500" />-->
+
+     </Components>
+
+     <CriticalComponent Subtype="Motor" Index="0" />
+
+     <MountPoints>
+        <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="5.0" EndY="1.0"/>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="5.0" EndY="1.0"/>
+        <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="5.0" EndY="1.0"/>
+        <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="5.0" EndY="1.0"/>
+        <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="5.0" EndY="5.0"/>
+     </MountPoints>
+     <BlockPairName>NHI_Mk2_Cannon_Turret_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>180</BuildTimeSeconds>
+     <DisassembleRatio>2</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+   </Definition>
+
+<!-- Mk2 Battleship Cannon Surface-->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Mk2_Cannon_Surface_Turret</SubtypeId>
+     </Id>
+     <DisplayName>[NHI] Mk2 Battleship Cannon</DisplayName>
+     <Description>
+[Turret Range: 6000m]
+[Reload: 9 Seconds]
+[Power Draw: None]
+
+[Ammo Types: HE | HVAP]
+[Shell Range: 7200m | 7200m]
+[Shell Speed: 1100m/s | 2200m/s]
+[Damage Types: Energy | Kinetic]
+[Damage Falloffs: None]
+
+A Medium Battleship Cannon. Fires an HE Shell or an HVAP Shell.
+     </Description>
+     <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk2.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>false</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="5" y="2" z="5" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Mk2_Battleship_Cannon_Refresh_Surface.mwm</Model>
+
+     <Components>
+
+		<Component Subtype="SteelPlate" Count="150" />
+		<Component Subtype="Construction" Count="200" />
+		<Component Subtype="GravityGenerator" Count="178" />
+		<Component Subtype="Computer" Count="100" />
+		<Component Subtype="SmallTube" Count="200" />
+		<Component Subtype="Motor" Count="100" />
+		<Component Subtype="LargeTube" Count="200" />
+		<Component Subtype="MetalGrid" Count="300" />
+		<Component Subtype="Construction" Count="1200" />
+		<Component Subtype="SteelPlate" Count="700" />
+
+	<!--
+        <Component Subtype="SteelPlate" Count="550" />
+        <Component Subtype="Construction" Count="1875" />
+        <Component Subtype="Computer" Count="90" />
+        <Component Subtype="SmallTube" Count="130" />
+        <Component Subtype="Motor" Count="90" />
+        <Component Subtype="LargeTube" Count="180" />
+        <Component Subtype="MetalGrid" Count="325" />
+        <Component Subtype="Construction" Count="1875" />
+        <Component Subtype="SteelPlate" Count="500" />-->
+
+     </Components>
+
+     <CriticalComponent Subtype="Motor" Index="0" />
+
+     <MountPoints>
+       <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="5.0" EndY="1.0"/>
+       <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="5.0" EndY="1.0"/>
+       <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="5.0" EndY="1.0"/>
+       <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="5.0" EndY="1.0"/>
+       <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="5.0" EndY="5.0"/>
+     </MountPoints>
+     <BlockPairName>NHI_Mk2_Cannon_Surface_Turret_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>180</BuildTimeSeconds>
+     <DisassembleRatio>2</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+   </Definition>
+
+<!-- Mk1 Battleship Cannon-->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Mk1_Cannon_Turret</SubtypeId>
+     </Id>
+     <DisplayName>[NHI] Mk1 Battleship Cannon</DisplayName>
+     <Description>
+[Turret Range: 5000m]
+[Reload: 4.5 Seconds]
+[Power Draw: None]
+
+[Ammo Types: HE | HVAP]
+[Shell Range: 6200m | 6200m]
+[Shell Speed: 1100m/s | 2200m/s]
+[Damage Types: Energy | Kinetic]
+[Damage Falloffs: None]
+
+A Light Battleship Cannon. Fires an HE Shell or an HVAP Shell.
+     </Description>
+     <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk1.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>false</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="3" y="3" z="3" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Battleship_Cannon_Mk1.mwm</Model>
+     <Components>
+        <Component Subtype="SteelPlate" Count="550" />
+        <Component Subtype="Construction" Count="935" />
+        <Component Subtype="Computer" Count="90" />
+        <Component Subtype="SmallTube" Count="80" />
+        <Component Subtype="LargeTube" Count="100" />
+        <Component Subtype="Motor" Count="90" />
+        <Component Subtype="MetalGrid" Count="325" />
+        <Component Subtype="Construction" Count="935" />
+        <Component Subtype="SteelPlate" Count="500" />
+     </Components>
+     <CriticalComponent Subtype="Motor" Index="0" />
+     <MountPoints>
+        <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+        <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+        <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+        <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+        <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0"/>
+     </MountPoints>
+     <BlockPairName>NHI_Mk1_Cannon_Turret_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>160</BuildTimeSeconds>
+     <DisassembleRatio>2</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+   </Definition>
+
+<!-- Mk1 Battleship Cannon Surface-->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Mk1_Cannon_Surface_Turret</SubtypeId>
+     </Id>
+     <DisplayName>[NHI] Mk1 Battleship Cannon</DisplayName>
+     <Description>
+[Turret Range: 5000m]
+[Reload: 4.5 Seconds]
+[Power Draw: None]
+
+[Ammo Types: HE | HVAP]
+[Shell Range: 6200m | 6200m]
+[Shell Speed: 1100m/s | 2200m/s]
+[Damage Types: Energy | Kinetic]
+[Damage Falloffs: None]
+
+A Light Battleship Cannon. Fires an HE Shell or an HVAP Shell.
+     </Description>
+     <Icon>Textures\GUI\Icons\Battleship_Cannon_Mk1.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>false</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="3" y="2" z="3" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Battleship_Cannon_Mk1_Surface.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="550" />
+       <Component Subtype="Construction" Count="935" />
+       <Component Subtype="Computer" Count="90" />
+       <Component Subtype="SmallTube" Count="80" />
+       <Component Subtype="LargeTube" Count="100" />
+       <Component Subtype="Motor" Count="90" />
+       <Component Subtype="MetalGrid" Count="325" />
+       <Component Subtype="Construction" Count="935" />
+       <Component Subtype="SteelPlate" Count="500" />
+     </Components>
+     <CriticalComponent Subtype="Motor" Index="0" />
+     <MountPoints>
+       <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="0.0" EndY="0.0"/>
+       <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="0.0" EndY="0.0"/>
+       <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="0.0" EndY="0.0"/>
+       <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="0.0" EndY="0.0"/>
+       <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0"/>
+     </MountPoints>
+     <BlockPairName>NHI_Mk1_Cannon_Surface_Turret_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>160</BuildTimeSeconds>
+     <DisassembleRatio>2</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+   </Definition>  
+   
+   
+   
+   
+<!-- Fixed Guns and Launchers-->
+   
+<!-- Torpedo Launcher -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Fixed_Torpedo_Launcher</SubtypeId>
+     </Id>
+     <DisplayName>'Horizon' Guided Torpedo Launcher</DisplayName>
+     <Description>
+       The 'Horizon' is a Semi-Guided Torpedo Launcher with a Range of 10000. You must lead your shots for this to land
+       Max Reloads: 4
+     </Description>
+     <Icon>Textures\GUI\Icons\Odin_Torpedo_Launcher_Inverted.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="1" z="3" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Odin_Torpedo_Launcher_Inverted.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="200" />
+       <Component Subtype="Construction" Count="115" />
+       <Component Subtype="MetalGrid" Count="65" />
+       <Component Subtype="LargeTube" Count="45" />
+       <Component Subtype="Motor" Count="125" />
+       <Component Subtype="Computer" Count="200" />
+       <Component Subtype="Construction" Count="125" />
+       <Component Subtype="SteelPlate" Count="100" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <BlockPairName>NHI_Fixed_Torpedo_Launcher_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>25</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>10000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+   </Definition>
+
+<!-- Utility Launcher -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Fixed_Utility_Launcher</SubtypeId>
+     </Id>
+     <DisplayName>Utility Launcher</DisplayName>
+     <Description>
+       Testing Description overlap
+     </Description>
+     <Icon>Textures\GUI\Icons\Odin_Torpedo_Launcher_Inverted.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="1" z="3" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Utility_Torpedo_Launcher.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="200" />
+       <Component Subtype="Construction" Count="115" />
+       <Component Subtype="MetalGrid" Count="65" />
+       <Component Subtype="LargeTube" Count="45" />
+       <Component Subtype="Motor" Count="125" />
+       <Component Subtype="Computer" Count="200" />
+       <Component Subtype="Construction" Count="125" />
+       <Component Subtype="SteelPlate" Count="100" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <BlockPairName>NHI_Fixed_Utility_Launcher_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>25</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>10000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+   </Definition>
+
+<!-- Missile Battery -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Fixed_Missile_Battery</SubtypeId>
+     </Id>
+     <DisplayName>'Thors Wrath' EWAR Missile System</DisplayName>
+     <Description>
+       The 'Thors Wratch' is a 200mm Missile Launch System, with a Range of 8000 Meters. 800 Meters from Target, the Missile releases an Energy Pulse that fries Navigation Systems
+       Max Reloads: 4
+     </Description>
+     <Icon>Textures\GUI\Icons\New_Missile_Battery_Mk2.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="3" y="2" z="5" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\New_Missile_Battery.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="120" />
+       <Component Subtype="Construction" Count="160" />
+       <Component Subtype="MetalGrid" Count="45" />
+       <Component Subtype="SmallTube" Count="50" />
+       <Component Subtype="LargeTube" Count="25" />
+       <Component Subtype="Motor" Count="50" />
+       <Component Subtype="Computer" Count="60" />
+       <Component Subtype="Construction" Count="120" />
+       <Component Subtype="SteelPlate" Count="200" />
+     </Components>
+     <CriticalComponent Subtype="Motor" Index="0" />
+     <BlockPairName>NHI_Fixed_Missile_Battery_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>25</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>10000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+   </Definition>
+   
+<!-- Spinal Ion Beam -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>EXP_Spinal_Ion_Cannon</SubtypeId>
+     </Id>
+     <DisplayName>Spinal Ion Cannon</DisplayName>
+     <Description>
+       L
+     </Description>
+     <Icon>Textures\GUI\Icons\New_Missile_Battery_Mk2.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="3" y="2" z="8" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Fixed_Spinal_Ion_Cannon.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="120" />
+       <Component Subtype="Construction" Count="160" />
+       <Component Subtype="MetalGrid" Count="45" />
+       <Component Subtype="SmallTube" Count="50" />
+       <Component Subtype="LargeTube" Count="25" />
+       <Component Subtype="Motor" Count="50" />
+       <Component Subtype="Computer" Count="60" />
+       <Component Subtype="Construction" Count="120" />
+       <Component Subtype="SteelPlate" Count="200" />
+     </Components>
+     <CriticalComponent Subtype="Motor" Index="0" />
+     <BlockPairName>EXP_Spinal_Ion_Cannon_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>25</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>10000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+   </Definition>
+
+<!-- Fixed Autocannon -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Fixed_Autocannon</SubtypeId>
+     </Id>
+     <DisplayName>[NHI] 'Fenrir' Fixed Autocannon</DisplayName>
+     <Description>
+[Turret Range: 5000m]
+[Reload: None]
+[Power Draw: None]
+
+[Ammo Types: HE | AP]
+[Shell Range: 5000m | 5000m]
+[Shell Speed: 1500m/s | 15000m/s]
+[Damage Types: Energy | Kinetic]
+[Damage Falloffs: None]
+
+Fixed Rotary Autocannon, Fires either HE or AP Rounds, which prioritise either Shield/Comp or Armor Damage Respectively.
+     </Description>
+     <Icon>Textures\GUI\Icons\Fixed_Heavy_Autocannon.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="2" z="5" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Fixed_Heavy_Autocannon.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="165" />
+       <Component Subtype="Construction" Count="315" />
+	     <Component Subtype="Computer" Count="100" />		 
+       <Component Subtype="MetalGrid" Count="140" />
+       <Component Subtype="LargeTube" Count="65" />
+       <Component Subtype="Motor" Count="250" />
+       <Component Subtype="Construction" Count="660" />
+       <Component Subtype="SteelPlate" Count="300" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <BlockPairName>NHI_Fixed_Autocannon_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <MountPoints>
+       <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1" EndY="2"/>
+       <MountPoint Side="Left" StartX="0" StartY="0.0" EndX="5" EndY="2"/>
+       <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="5" EndY="2"/>
+       <MountPoint Side="Bottom" StartX="0.0" StartY="1" EndX="1" EndY="5"/>
+       <MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="1" EndY="5"/>
+     </MountPoints>     
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>25</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+  <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+   </Definition>
+
+<!-- Fixed Light Autocannon -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Fixed_Light_Autocannon</SubtypeId>
+     </Id>
+     <DisplayName>'Skoll' Fixed Light Autocannon</DisplayName>
+     <Description>
+Fixed Rotary Autocannon, Fires either HE or AP Rounds, which prioritise either Component or Armor Damage Respectively.
+Cheaper and Smaller Version of the Fenrir, with a Burst Fire Pattern. Unlike the Fenrir, it has a fixed magazine size and must Reload.
+[Range: 3500]
+[Shell Speed: 1250m/s]
+[Damage Type: EN/KIN]
+     </Description>
+     <Icon>Textures\GUI\Icons\Fixed_Light_Autocannon.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="1" z="5" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Fixed_Light_Autocannon.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="145" />
+       <Component Subtype="Construction" Count="265" />
+       <Component Subtype="Computer" Count="80" />
+       <Component Subtype="MetalGrid" Count="110" />
+       <Component Subtype="LargeTube" Count="45" />
+       <Component Subtype="Motor" Count="150" />
+       <Component Subtype="Construction" Count="450" />
+       <Component Subtype="SteelPlate" Count="250" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <MountPoints>
+       <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="0.0" EndY="0.0"/>
+       <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1.0" EndY="1.0"/>
+       <MountPoint Side="Left" StartX="5" StartY="1.0" EndX="2.5" EndY="0.0"/>
+       <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="2.5" EndY="1.0"/>
+       <MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="1.0" EndY="2.5"/>
+       <MountPoint Side="Bottom" StartX="1.0" StartY="5" EndX="0" EndY="2.5"/>
+     </MountPoints>
+     <BlockPairName>NHI_Fixed_Light_Autocannon_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>25</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+   </Definition>
+   
+<!-- Fixed Laser -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Fixed_Gatling_Laser</SubtypeId>
+     </Id>
+     <DisplayName>[NHI] 'Jotunn' Fixed Gatling Laser</DisplayName>
+  <Description>
+[Turret Range: 5000m]
+[Reload: None]
+[Power Draw: 45MW]
+
+[Ammo Types: Pulse Laser | Pulse Heal]
+[Shell Range: 5000m | 2000m]
+[Shell Speed: Hitscan | Hitscan]
+[Damage Types: Energy | Heal]
+[Damage Falloffs: None]
+
+Fixed Gatling Laser. Can fire either a Laser Pulse, or a Shield Healing Pulse.
+  </Description>
+     <Icon>Textures\GUI\Icons\Fixed_Heavy_Laser.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="2" z="5" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\NHI_Fixed_Heavy_Laser.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="150" />
+       <Component Subtype="Construction" Count="250" />
+       <Component Subtype="MetalGrid" Count="150" />
+	     <Component Subtype="Computer" Count="250" />		 
+	     <Component Subtype="PowerCell" Count="300" />
+       <Component Subtype="LargeTube" Count="50" />
+       <Component Subtype="Motor" Count="250" />
+	     <Component Subtype="Superconductor" Count="50" />
+       <Component Subtype="Construction" Count="250" />
+       <Component Subtype="SteelPlate" Count="300" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <BlockPairName>NHI_Fixed_Gatling_Laser_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <MountPoints>
+       <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="1" EndY="2"/>
+       <MountPoint Side="Left" StartX="0" StartY="0.0" EndX="5" EndY="2"/>
+       <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="5" EndY="2"/>
+       <MountPoint Side="Bottom" StartX="0.0" StartY="1" EndX="1" EndY="5"/>
+       <MountPoint Side="Top" StartX="0.0" StartY="0.0" EndX="1" EndY="5"/>
+     </MountPoints>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>25</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+  <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>10000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+   </Definition>
+
+<!-- Fixed Light Laser -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Fixed_Light_Gatling_Laser</SubtypeId>
+     </Id>
+     <DisplayName>'Brandr' Fixed Light Gatling Laser</DisplayName>
+     <Description>
+Fixed Gatling Laser. Slower, Cheaper and Less Powerful Variant of the Jotunn
+Lacks the Ability to Heal Shields and and Must Completely cool down after reaching Maximum Heat
+[Range: 3500]
+[Shell Speed: 5000m/s]
+[Damage Type: EN]
+     </Description>
+     <Icon>Textures\GUI\Icons\Fixed_Light_Laser.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="1" z="5" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Fixed_Light_Laser.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="150" />
+       <Component Subtype="Construction" Count="250" />
+       <Component Subtype="MetalGrid" Count="150" />
+       <Component Subtype="Computer" Count="250" />
+       <Component Subtype="PowerCell" Count="300" />
+       <Component Subtype="LargeTube" Count="50" />
+       <Component Subtype="Motor" Count="250" />
+       <Component Subtype="Superconductor" Count="50" />
+       <Component Subtype="Construction" Count="250" />
+       <Component Subtype="SteelPlate" Count="300" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <BlockPairName>NHI_Fixed_Light_Gatling_Laser_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>25</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>10000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+   </Definition>
+
+<!-- Fixed Small Railgun -->
+   <!--<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Fixed_Light_Railgun</SubtypeId>
+     </Id>
+     <DisplayName>Fixed Light Railgun</DisplayName>
+     <Description>
+       Fixed Light Railgun
+     </Description>
+     <Icon>Textures\GUI\Icons\Cubes\warhead.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>false</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="1" z="3" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Odin_Railgun_Fixed_Small.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="65" />
+       <Component Subtype="Construction" Count="115" />
+       <Component Subtype="MetalGrid" Count="45" />
+       <Component Subtype="LargeTube" Count="35" />
+       <Component Subtype="Motor" Count="250" />
+       <Component Subtype="Computer" Count="100" />
+       <Component Subtype="Construction" Count="90" />
+       <Component Subtype="SteelPlate" Count="100" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <BlockPairName>NHI_Fixed_Light_Railgun_Block</BlockPairName>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>25</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>10000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+   </Definition> -->
+
+<!-- Fixed Large Railgun -->
+   <!--<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Fixed_Heavy_Railgun</SubtypeId>
+     </Id>
+     <DisplayName>Fixed Heavy Railgun</DisplayName>
+     <Description>
+       Fixed Heavy Railgun
+     </Description>
+     <Icon>Textures\GUI\Icons\Cubes\warhead.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>false</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="1" y="1" z="3" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Odin_Railgun_Fixed_Large.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="65" />
+       <Component Subtype="Construction" Count="115" />
+       <Component Subtype="MetalGrid" Count="45" />
+       <Component Subtype="LargeTube" Count="35" />
+       <Component Subtype="Motor" Count="250" />
+       <Component Subtype="Computer" Count="100" />
+       <Component Subtype="Construction" Count="90" />
+       <Component Subtype="SteelPlate" Count="100" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <BlockPairName>NHI_Fixed_Heavy_Railgun_Block</BlockPairName>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>25</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>10000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+   </Definition> -->
+
+   
+   
+   
+<!-- Experimental/Unfinished Weapons-->
+   
+<!-- Flak Cannon -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Flak_Cannon_Turret</SubtypeId>
+     </Id>
+     <DisplayName>150mm 'Norn' Flak Cannon</DisplayName>
+     <Description>
+       The '' is a 150mm Flak Cannon with a Range of 4500 Meters. Fires either Flak Shells or HE Shells, The Former for targetting Projectiles, the Laser for Close Quarters Engagements
+     </Description>
+     <Icon>Textures\GUI\Icons\New-3x3x2-Flak-Cannon.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>false</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="3" y="3" z="3" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\New-3x3x2-Flak-Cannon.mwm</Model>
+  <Components>
+    <Component Subtype="SteelPlate" Count="550" />
+    <Component Subtype="MetalGrid" Count="320" />
+    <Component Subtype="SmallTube" Count="150" />
+    <Component Subtype="LargeTube" Count="30" />
+    <Component Subtype="Motor" Count="16" />
+    <Component Subtype="Computer" Count="10" />
+    <Component Subtype="Construction" Count="80" />
+    <Component Subtype="SteelPlate" Count="220" />
+  </Components>
+  <CriticalComponent Subtype="Motor" Index="0" />
+     <MountPoints>
+       <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+       <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+       <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+       <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="3.0" EndY="1.0"/>
+       <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0"/>
+     </MountPoints>
+     <BlockPairName>NHI_Flak_Cannon_Turret_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>25</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+     <DamagedSound>ParticleWeapExpl</DamagedSound>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>7000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+   </Definition>
+   
+<!-- Plasma Cannon -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Plasma_Turret</SubtypeId>
+     </Id>
+     <DisplayName>'Hela's Gaze' Heavy Plasma Cannon</DisplayName>
+     <Description>
+       The 'Hela's Gaze' Heavy Plasma Cannon fires a continues beam of Plasma that increases in damage the longer its turned on, due to heat buildup within the system. This also effects the color of the Plasma over time.
+     </Description>
+     <Icon>Textures\GUI\Icons\New_Autocannon_3x3_2.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="3" y="4" z="3" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\NHI_Lazcannon.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="1000" />
+       <Component Subtype="Construction" Count="750" />
+       <Component Subtype="Computer" Count="280" />
+       <Component Subtype="MetalGrid" Count="450" />
+       <Component Subtype="SmallTube" Count="350" />
+       <Component Subtype="LargeTube" Count="135" />
+       <Component Subtype="Motor" Count="175" />
+       <Component Subtype="Construction" Count="455" />
+       <Component Subtype="SteelPlate" Count="550" />
+     </Components>
+     <CriticalComponent Subtype="Motor" Index="0" />
+     <MountPoints>
+       <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="3.0" EndY="2.0"/>
+       <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="2.0"/>
+       <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="3.0" EndY="2.0"/>
+       <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="3.0" EndY="2.0"/>
+       <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0"/>
+     </MountPoints>
+     <BlockPairName>NHI_Plasma_Turret_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>140</BuildTimeSeconds>
+     <DisassembleRatio>1</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+     <DamagedSound>ParticleWeapExpl</DamagedSound>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>7000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+   </Definition>   
+
+<!-- Fission Beam Cannon -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>EXP_Fission_Beam_Turret</SubtypeId>
+     </Id>
+     <DisplayName>X3-M2 Fission Beam Cannon</DisplayName>
+     <Description>
+       The X3-M2 is a Repurposed Asteroid Defense System Turret with a Range of 3500, Refit for Military Use. It fires a Beam that penetrates Light Armor, then induces a Fission Reaction Below the Surface.
+     </Description>
+     <Icon>Textures\GUI\Icons\Cubes\warhead.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>false</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="3" y="5" z="3" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Fission_Beam_Mk1.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="115" />
+       <Component Subtype="Construction" Count="150" />
+       <Component Subtype="MetalGrid" Count="100" />
+       <Component Subtype="LargeTube" Count="58" />
+       <Component Subtype="Motor" Count="200" />
+       <Component Subtype="Computer" Count="150" />
+       <Component Subtype="Construction" Count="120" />
+       <Component Subtype="SteelPlate" Count="200" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <MountPoints>
+       <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0"/>
+       <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0"/>
+       <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0"/>
+       <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0"/>
+       <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="3.0" EndY="3.0"/>
+     </MountPoints>
+     <BlockPairName>EXP_Fission_Beam_Turret_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>25</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+     <DamagedSound>ParticleWeapExpl</DamagedSound>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>7000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+   </Definition>
+   
+<!-- Test Cannon -->   
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>EXP_BFG_Ammo_Cannon</SubtypeId>
+     </Id>
+     <DisplayName>Cannon</DisplayName>
+     <Description>
+       Big gun
+     </Description>
+     <Icon>Textures\GUI\Icons\Cubes\warhead.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>false</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="13" y="3" z="3" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\BFG_Cannon_New.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="65" />
+       <Component Subtype="Construction" Count="115" />
+       <Component Subtype="MetalGrid" Count="45" />
+       <Component Subtype="LargeTube" Count="35" />
+       <Component Subtype="Motor" Count="250" />
+       <Component Subtype="Computer" Count="100" />
+       <Component Subtype="Construction" Count="90" />
+       <Component Subtype="SteelPlate" Count="100" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <BlockPairName>EXP_BFG_Ammo_Cannon_Block</BlockPairName>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>25</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>10000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+   </Definition>
+
+<!-- Horizon Mine Launcher -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>EXP_Horizon_Mine_Launcher</SubtypeId>
+     </Id>
+     <DisplayName>Experimental Mine Launcher</DisplayName>
+     <Description>
+       TEST
+     </Description>
+     <Icon>Textures\GUI\Icons\Emergency_Thruster.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>true</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="2" y="1" z="3" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\Horizon_Mine_Launcher.mwm</Model>
+     <Components>
+       <Component Subtype="SteelPlate" Count="200" />
+       <Component Subtype="Construction" Count="115" />
+       <Component Subtype="MetalGrid" Count="65" />
+       <Component Subtype="LargeTube" Count="45" />
+       <Component Subtype="Motor" Count="125" />
+       <Component Subtype="Computer" Count="200" />
+       <Component Subtype="Construction" Count="125" />
+       <Component Subtype="SteelPlate" Count="100" />
+     </Components>
+     <CriticalComponent Subtype="Computer" Index="0" />
+     <BlockPairName>EXP_Horizon_Mine_Launcher_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>25</BuildTimeSeconds>
+     <DisassembleRatio>5</DisassembleRatio>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+     <MinElevationDegrees>-15</MinElevationDegrees>
+     <MaxElevationDegrees>75</MaxElevationDegrees>
+     <MinAzimuthDegrees>-180</MinAzimuthDegrees>
+     <MaxAzimuthDegrees>180</MaxAzimuthDegrees>
+     <IdleRotation>false</IdleRotation>
+     <AiEnabled>false</AiEnabled>
+     <MaxRangeMeters>10000</MaxRangeMeters>
+     <RotationSpeed>0.0005</RotationSpeed>
+     <ElevationSpeed>0.0002 </ElevationSpeed>
+     <MinFov>0.1</MinFov>
+     <MaxFov>1.04719755</MaxFov>
+   </Definition>
+
+<!-- Fixed Autocannon -->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+   <Id>
+     <TypeId>ConveyorSorter</TypeId>
+     <SubtypeId>EXP_Fixed_Scattergun</SubtypeId>
+   </Id>
+   <DisplayName>Experimental Scattergun</DisplayName>
+   <Description>
+   L Bozo, Cope.
+   </Description>
+   <Icon>Textures\GUI\Icons\Fixed_Light_Laser.dds</Icon>
+   <CubeSize>Large</CubeSize>
+   <GuiVisible>true</GuiVisible>
+   <BlockTopology>TriangleMesh</BlockTopology>
+   <Size x="1" y="1" z="4" />
+   <ModelOffset x="0" y="0" z="0" />
+   <Model>Models\Large\Scattergun_Exp.mwm</Model>
+   <Components>
+     <Component Subtype="SteelPlate" Count="165" />
+     <Component Subtype="Construction" Count="315" />
+     <Component Subtype="Computer" Count="100" />
+     <Component Subtype="MetalGrid" Count="140" />
+     <Component Subtype="LargeTube" Count="65" />
+     <Component Subtype="Motor" Count="250" />
+     <Component Subtype="Construction" Count="660" />
+     <Component Subtype="SteelPlate" Count="300" />
+   </Components>
+   <CriticalComponent Subtype="Computer" Index="0" />
+   <BlockPairName>EXP_Fixed_Scattergun_Block</BlockPairName>
+   <MirroringY>Z</MirroringY>
+   <MirroringZ>Y</MirroringZ>
+   <EdgeType>Light</EdgeType>
+   <BuildTimeSeconds>25</BuildTimeSeconds>
+   <DisassembleRatio>5</DisassembleRatio>
+   <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+   <NavigationDefinition>Default</NavigationDefinition>
+   <WeaponDefinitionId Subtype="NHI_Weapon" />
+   <ResourceSinkGroup>Defense</ResourceSinkGroup>
+   <InventoryMaxVolume>1</InventoryMaxVolume>
+ </Definition>
+
+<!-- Hurricane Naval Gun-->
+   <Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+     <Id>
+       <TypeId>ConveyorSorter</TypeId>
+       <SubtypeId>NHI_Kinetic_Cannon_Turret</SubtypeId>
+     </Id>
+     <DisplayName>[NHI] 'Hurricane' Naval Gun</DisplayName>
+     <Description>
+[Turret Range: 5000m]
+[Reload: 5 Seconds]
+[Power Draw: None]
+
+[Ammo Types: APCBC]
+[Shell Range: 5400m]
+[Shell Speed: 1300m/s]
+[Damage Types: Kinetic]
+[Damage Falloffs: None]
+
+A Heavy Naval Cannon, Fires an APCBC Shell
+     </Description>
+     <Icon>Textures\GUI\Icons\NHI_Kinetic_Turret.dds</Icon>
+     <CubeSize>Large</CubeSize>
+     <GuiVisible>false</GuiVisible>
+     <BlockTopology>TriangleMesh</BlockTopology>
+     <Size x="3" y="2" z="4" />
+     <ModelOffset x="0" y="0" z="0" />
+     <Model>Models\Large\NHI_Hurricane_Mk2_Base.mwm</Model>
+     <Components>
+		<Component Subtype="SteelPlate" Count="150" />
+		<Component Subtype="Construction" Count="200" />
+		<Component Subtype="GravityGenerator" Count="150" />
+		<Component Subtype="Computer" Count="100" />
+		<Component Subtype="SmallTube" Count="200" />
+		<Component Subtype="Motor" Count="100" />
+		<Component Subtype="LargeTube" Count="200" />
+		<Component Subtype="MetalGrid" Count="300" />
+		<Component Subtype="Construction" Count="1200" />
+		<Component Subtype="SteelPlate" Count="1000" />
+	<!-- 
+       <Component Subtype="SteelPlate" Count="550" />
+       <Component Subtype="Construction" Count="1875" />
+       <Component Subtype="Computer" Count="90" />
+       <Component Subtype="SmallTube" Count="130" />
+       <Component Subtype="Motor" Count="90" />
+       <Component Subtype="LargeTube" Count="180" />
+       <Component Subtype="MetalGrid" Count="325" />
+       <Component Subtype="Construction" Count="1875" />
+       <Component Subtype="SteelPlate" Count="500" />-->
+     </Components>
+     <CriticalComponent Subtype="Motor" Index="0" />
+     <MountPoints>
+       <MountPoint Side="Front" StartX="0.0" StartY="0.0" EndX="0.0" EndY="0.0"/>
+       <MountPoint Side="Back" StartX="0.0" StartY="0.0" EndX="0.0" EndY="0.0"/>
+       <MountPoint Side="Left" StartX="0.0" StartY="0.0" EndX="0.0" EndY="0.0"/>
+       <MountPoint Side="Right" StartX="0.0" StartY="0.0" EndX="0.0" EndY="0.0"/>
+       <MountPoint Side="Bottom" StartX="0.0" StartY="0.0" EndX="3.0" EndY="4.0"/>
+     </MountPoints>
+     <BlockPairName>NHI_Kinetic_Cannon_Turret_Block</BlockPairName>
+     <MirroringY>Z</MirroringY>
+     <MirroringZ>Y</MirroringZ>
+     <EdgeType>Light</EdgeType>
+     <BuildTimeSeconds>160</BuildTimeSeconds>
+     <DisassembleRatio>2</DisassembleRatio>
+     <DamageEffectName>Damage_WeapExpl_Damaged_Lite</DamageEffectName>
+     <NavigationDefinition>Default</NavigationDefinition>
+     <WeaponDefinitionId Subtype="NHI_Weapon" />
+     <ResourceSinkGroup>Defense</ResourceSinkGroup>
+     <InventoryMaxVolume>1</InventoryMaxVolume>
+   </Definition>
+
+ </CubeBlocks>
+</Definitions>

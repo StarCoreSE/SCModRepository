@@ -1,0 +1,414 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!--MAKE SURE TO CHANGE SECLEANMODCATEGORIES TOO IF YOU'RE ADDING A NEW CATEGORY-->
+  <CategoryClasses>
+    <!--not pointless-->
+
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+      </Id>
+      <DisplayName>SC [All Access] Utility</DisplayName>
+      <Name>.SC_.[ALL]_A</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+		<string>GravityGenerator</string>
+		<string>Door</string>
+		<string>AirtightHangarDoor</string>
+		<string>SurvivalKitLarge</string>
+		<string>SmallLight</string>
+		<string>LargeBlockFrontLight</string>
+
+        <string>SC_PowerControlSystem_L</string>
+        <string>SC_RCS_Computer</string>
+
+        <string>LargeBlockConveyorPipeJunction</string>
+        <string>LargeBlockConveyor</string>
+        <string>ConveyorTube</string>
+        <string>ConveyorTubeDuct</string>
+
+        <string>MA_Buster_ArmorBlock</string>
+
+        <string>LargeDecoy</string>
+        <string>LargeBlockRadioAntenna</string>
+        <string>LargeFlightMovement</string>
+
+        <string>LargeTurretControlBlock</string>
+
+        <string>SELtdLargeNanobotBuildAndRepairSystem</string>
+
+		<string>LargeProgrammableBlock</string>
+		<string>6SidePB</string>
+		<string>LargeBlockRemoteControl</string>
+
+        <string>DampeningEnhancer_x2_Large</string>
+        <string>LargeStator</string>
+        <string>WorklightSmall</string>
+
+      </ItemIds>
+    </Category>
+
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+      </Id>
+      <DisplayName>  [ALL] Mobility</DisplayName>
+      <Name>.SC_.[ALL]_B</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+
+        <!--INVALID-->
+        <string>SC_SRB</string>
+        <string>DETPAK</string>
+        <string>MA_Afterburner_Large_5x</string>
+        <string>AncientAfterburnerT40</string>
+
+        <string>BlinkDriveLarge</string>
+
+        <string>LargeBlockGyro</string>
+        <string>AQD_LG_GyroBooster</string>
+        <string>AQD_LG_LargeGyro</string>
+        <string>AQD_LG_GyroUpgrade</string>
+
+		<string>LargeBlockLargeThrust</string>
+        <string>HugeHydrogenThruster</string>
+        <string>AWGFocusDrive</string>
+        <string>IonHeavyCovered</string>
+
+		<!-- Fusion Thruster -->
+        <string>Caster_FocusLens</string>
+
+        <string>LargeHydrogenTank</string>
+        <string>LargeHydrogenTankSmall</string>
+
+      </ItemIds>
+    </Category>
+
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+      </Id>
+      <DisplayName>  [ALL] Defense</DisplayName>
+      <Name>.SC_.[ALL]_C</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+		<!-- S.I -->
+        <string>FieldGen_Core</string>
+        <string>FieldGen_Capacity_Upgrade</string>
+
+        <!--MUZZ-->
+        <string>Starcore_RWR_Projectiles</string>
+        <string>SC_Radome</string>
+
+        <string>Mk25Rangefinder</string>
+
+        <string>3x3_Blastplate_A</string>
+        <string>3x3_Blastplate_B</string>
+        <string>3x3_Blastplate_C</string>
+        <string>ACTIVE_BLASTPLATE</string>
+
+        <string>SC_Flare</string>
+		<string>LargeDecoy_MetalFoam</string>
+
+		<string>DSControlLarge</string>
+		<string>EmitterL</string>
+		<string>LargeShieldModulator</string>
+		<string>LargeEnhancer</string>
+
+		<string>Barbette5x5</string>
+
+      </ItemIds>
+    </Category>
+
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+      </Id>
+      <DisplayName>  [ALL] Power</DisplayName>
+      <Name>.SC_.[ALL]_D</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+        <string>LargeBlockSolarPanel</string>
+        <string>LargeBlockBatteryBlock</string>
+        <string>LargeBlockSmallGenerator</string>
+        <string>SmallLargeBlockUpgrade</string>
+        <string>LargeBlockLargeGenerator</string>
+        <string>LargeLargeBlockUpgrade</string>
+
+		<!--FUSION-->
+        <string>Caster_Accelerator_0</string>
+        <string>Caster_CentralPipe_0</string>
+        <string>Caster_Reactor</string>
+        <string>RadiatorPanel</string>
+        <string>Heat_Heatsink</string>
+
+      </ItemIds>
+    </Category>
+
+
+
+
+
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+        <SubtypeId>SC_40K_BlockCategory</SubtypeId>
+      </Id>
+      <DisplayName>  [40K]</DisplayName>
+      <Name>.SC_[40K]</Name>
+      <ItemIds>
+
+        <!--[40K]-->
+        <string>AegisFlakTurret</string>
+		<string>MacroCannon</string>
+        <string>HeavyMacroCannon</string>
+        <string>LanceBattery</string>
+        <string>NovaCannon</string>
+
+      </ItemIds>
+    </Category>
+
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+
+      </Id>
+      <DisplayName>  [MID]</DisplayName>
+      <Name>.SC_[MID]</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+        <!--[MID]-->
+		<string>Priest_Block</string>
+		<string>PriestReskin_Block</string>
+		<string>Reaver_Coilgun</string>
+		<string>Assault_Coil_Turret</string>
+        <string>DualSnubLaserTurret</string>
+        <string>DualPulseLaserTurret</string>
+		<string>APE_Strong</string>
+		<string>Type18_Artillery</string>
+		<string>Devastator_Torp</string>
+
+      </ItemIds>
+    </Category>
+
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+
+      </Id>
+      <DisplayName>  [FLW]</DisplayName>
+      <Name>.SC_[FLW]</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+        <!--[FLW]-->
+        <string>LargeRailgun_SC</string>
+        <string>GoalieCasemate</string>
+		<string>X4_7x7_HeavyTurret</string>
+		<string>HeavyCarronade_5x5_Turret</string>
+		<string>JN_175Fixed</string>
+
+      </ItemIds>
+    </Category>
+
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+
+      </Id>
+      <DisplayName>  [MA]</DisplayName>
+      <Name>.SC_[MA]</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+        <!--[MA]-->
+		<string>MA_PDX</string>
+		<string>MA_Gimbal_Laser</string>
+        <string>UNN_Heavy_Torpedo</string>
+        <string>MA_AC150</string>
+        <string>MA_Gimbal_Laser_T2</string>
+        <string>MA_T2PDX</string>
+        <string>MA_Derecho</string>
+        <string>MA_Gladius</string>
+
+      </ItemIds>
+    </Category>
+
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+
+      </Id>
+      <DisplayName>  [NHI]</DisplayName>
+      <Name>.SC_[NHI]</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+        <!--[NHI]-->
+        <string>NHI_PD_Turret</string>
+        <string>NHI_Gatling_Laser_Turret</string>
+		<string>NHI_Autocannon_Turret</string>
+        <string>NHI_Kinetic_Cannon_Turret</string>
+        <string>NHI_Mk2_Cannon_Turret</string>
+        <string>SC_Coil_Cannon</string>
+		<string>NHI_Mk3_Cannon_Turret</string>
+		<string>NHI_Fixed_Autocannon</string>
+
+      </ItemIds>
+    </Category>
+
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+      </Id>
+      <DisplayName>  [ONYX]</DisplayName>
+      <Name>.SC_[ONYX]</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+        <!--[ONYX]-->
+        <string>SC_AR_Tumult</string>
+        <string>SC_AR_Deimos</string>
+        <string>SC_AR_Forager</string>
+        <string>SC_AR_Eris</string>
+
+      </ItemIds>
+    </Category>
+
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+
+      </Id>
+      <DisplayName>  [SA]</DisplayName>
+      <Name>.SC_[SA]</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+        <!--[SA]-->
+        <string>SA_HMI_Erebos</string>
+        <string>K_SA_HeavyMetal_Gauss_A</string>
+        <string>K_SA_HeavyMetal_Gauss_ERFM</string>
+        <string>K_SA_HeavyMetal_Gauss_PGBC</string>
+
+	</ItemIds>
+    </Category>
+
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+
+      </Id>
+      <DisplayName>  [HAS]</DisplayName>
+      <Name>.SC_[HAS]</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+        <!--[HAS]-->
+        <string>K_SA_Launcher_VI</string>
+        <string>K_SA_Launcher_VIV</string>
+        <string>HAS_Avenger</string>
+        <string>HAS_Esper</string>
+	<string>HAS_Nyx</string>
+
+      </ItemIds>
+    </Category>
+
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+
+      </Id>
+      <DisplayName>  [EXO]</DisplayName>
+      <Name>.SC_[EXO]</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+        <!-- [EXO] -->
+        <string>Hexcannon</string>
+        <string>MetalStorm</string>
+
+      </ItemIds>
+    </Category>
+
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+
+      </Id>
+      <DisplayName>  [BTI]</DisplayName>
+      <Name>.SC_[BTI]</Name>
+      <StrictSearch>true</StrictSearch>
+      <ItemIds>
+
+        <!-- [BTI] -->
+	<string>ModularLRM5</string>
+        <string>ModularLRM5Angled</string>
+        <string>ModularLRM5AngledReversed</string>
+		<string>ModularMiddleLRM5</string>
+		<string>Starcore_Arrow_Block_Single</string>
+		<string>ModularMRM10</string>
+        <string>ModularMRM10Angled</string>
+        <string>ModularMRM10AngledReversed</string>
+        <string>ModularMiddleMRM10</string>
+		<string>Starcore_AMS_I_Block</string>
+        <string>Starcore_AMS_II_Block</string>
+		<string>Starcore_Arrow_Block</string>
+        <string>ERPPC</string>
+
+      </ItemIds>
+    </Category>
+
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+        <SubtypeId>Solaris Hypernautics</SubtypeId>
+      </Id>
+      <DisplayName>  [SOL]</DisplayName>
+      <Name>.SC_[SOL]</Name>
+      <ItemIds>
+        <!-- [SOL] -->
+        <string>MagnaPulse_Gen</string>
+        <!-- <string>Flechette_DoubleBarrel</string> -->
+        <!-- <string>Impulse_Torch</string> -->
+        <!-- <string>SolHyp_ArcStrike_Torp</string> -->
+        <string>Counter_Battery</string>
+        <!-- <string>S_Chem_Laser_Block</string> -->
+        <!-- <string>S_Armored_Laser_Block</string> -->
+        <string>Nariman_Dart_Turret</string>
+        <string>SolHyp_Magnetic_Coilgun</string>
+      </ItemIds>
+    </Category>
+
+    <Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+      <Id>
+        <TypeId>GuiBlockCategoryDefinition</TypeId>
+        <SubtypeId/>
+      </Id>
+      <DisplayName>  [FAS]</DisplayName>
+      <Name>.SC_[FAS]</Name>
+      <IsBlockCategory>true</IsBlockCategory>
+      <ItemIds>
+
+        <!--[FAS]-->
+        <string>BoforTwinRemodel</string>
+        <string>QuadBofor</string>
+        <string>PomPomMain</string>
+        <string>127mmMk32</string>
+        <string>127mmMk12</string>
+        <string>127mmMk24</string>
+		<string>203mmTwin</string>
+        <string>380mmMLE1935</string>
+        <string>381mmDualR</string>
+        <string>16InchTriple</string>
+
+      </ItemIds>
+    </Category>
+
+  </CategoryClasses>
+</Definitions>

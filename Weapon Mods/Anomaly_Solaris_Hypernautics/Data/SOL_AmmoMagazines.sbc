@@ -1,0 +1,346 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AmmoMagazines>
+
+
+    <AmmoMagazine>
+          <Id>
+            <TypeId>AmmoMagazine</TypeId>
+            <SubtypeId>ImpulseTorch_Magazine</SubtypeId>
+          </Id>
+          <DisplayName>ImpulseTorch Fuel Cartridge</DisplayName>
+          <Icon>Textures\GUI\Icons\ImpulseTorch_Magazine.dds</Icon>
+          <Size>
+            <X>0.25</X>
+            <Y>0.2</Y>
+            <Z>0.2</Z>
+          </Size>
+          <Mass>1000</Mass>
+          <Volume>10</Volume>
+          <Model>Models\Ammos\ImpulseTorch_Magazine.mwm</Model>
+          <Capacity>15</Capacity>
+          <AmmoDefinitionId Subtype="ImpulseTorch_Mag" />
+	      </AmmoMagazine>
+
+		<AmmoMagazine>
+			<Id>
+				<TypeId>AmmoMagazine</TypeId>
+				<SubtypeId>FlakShotgun_Magazine</SubtypeId>
+			</Id>
+			<DisplayName>Shotgun Shell</DisplayName>
+			<Icon>Textures\GUI\Icons\ImpulseTorch_Magazine.dds</Icon>
+			<Size>
+				<X>0.25</X>
+				<Y>0.2</Y>
+				<Z>0.2</Z>
+			</Size>
+			<Mass>1000</Mass>
+			<Volume>10</Volume>
+			<Model>Models\Ammos\LBX5_AmmoShellShotgun.mwm</Model>
+			<Capacity>1</Capacity>
+			<AmmoDefinitionId Subtype="FlakShotgun_Mag" />
+		</AmmoMagazine>
+
+
+
+
+
+
+
+
+        <AmmoMagazine>
+            <Id>
+                <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>DragonyosBomber</SubtypeId>
+            </Id>
+            <DisplayName>Dragonyos Torpedo Bomber</DisplayName>
+            <Icon>Textures\GUI\Icons\Manticore.dds</Icon>
+            <Size>
+                <X>1</X>
+                <Y>2</Y>
+                <Z>0.5</Z>
+            </Size>
+            <Mass>300</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Drones\Manticore.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>1</Capacity>
+            <AmmoDefinitionId Subtype="TestAmmoB8T" />
+
+            <MinimumOfferAmount>6</MinimumOfferAmount>
+            <MaximumOfferAmount>12</MaximumOfferAmount>
+            <MinimumOrderAmount>3</MinimumOrderAmount>
+            <MaximumOrderAmount>24</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+        </AmmoMagazine>
+
+
+        <AmmoMagazine>
+            <Id>
+                <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>HarcosFighter</SubtypeId>
+            </Id>
+            <DisplayName>Harcos Laser Fighter</DisplayName>
+            <Icon>Textures\GUI\Icons\Fighter_drone.dds</Icon>
+            <Size>
+                <X>1</X>
+                <Y>2</Y>
+                <Z>0.5</Z>
+            </Size>
+            <Mass>300</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Drones\Fighter_drone.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>1</Capacity>
+            <AmmoDefinitionId Subtype="TestAmmoB8T" />
+
+            <MinimumOfferAmount>6</MinimumOfferAmount>
+            <MaximumOfferAmount>12</MaximumOfferAmount>
+            <MinimumOrderAmount>3</MinimumOrderAmount>
+            <MaximumOrderAmount>24</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+        </AmmoMagazine>
+
+
+        <AmmoMagazine>
+            <Id>
+               <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>TesterLauncherStage</SubtypeId>
+            </Id>
+            <DisplayName>Tester Sentry</DisplayName>
+            <Icon>Textures\GUI\Icons\Artillery_drone.dds</Icon>
+            <Size>
+                <X>1</X>
+                <Y>2</Y>
+                <Z>0.5</Z>
+            </Size>
+            <Mass>350</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Drones\Artillery_drone.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>1</Capacity>
+            <AmmoDefinitionId Subtype="TestAmmoB8T" />
+
+            <MinimumOfferAmount>1</MinimumOfferAmount>
+            <MaximumOfferAmount>12</MaximumOfferAmount>
+            <MinimumOrderAmount>1</MinimumOrderAmount>
+            <MaximumOrderAmount>12</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+        </AmmoMagazine>
+        
+        <AmmoMagazine>
+            <Id>
+               <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>FegyverLauncherStage</SubtypeId>
+            </Id>
+            <DisplayName>Fegyver Light Sentry</DisplayName>
+            <Icon>Textures\GUI\Icons\Artillery_drone.dds</Icon>
+            <Size>
+                <X>1</X>
+                <Y>2</Y>
+                <Z>0.5</Z>
+            </Size>
+            <Mass>350</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Drones\Artillery_drone.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>1</Capacity>
+            <AmmoDefinitionId Subtype="TestAmmoB8T" />
+
+            <MinimumOfferAmount>1</MinimumOfferAmount>
+            <MaximumOfferAmount>1</MaximumOfferAmount>
+            <MinimumOrderAmount>1</MinimumOrderAmount>
+            <MaximumOrderAmount>1</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+        </AmmoMagazine>
+
+        
+        <AmmoMagazine>
+            <Id>
+                <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>AgyuLauncherStage</SubtypeId>
+            </Id>
+            <DisplayName>Agyu Heavy Sentry</DisplayName>
+            <Icon>Textures\GUI\Icons\Artillery_drone.dds</Icon>
+            <Size>
+                <X>1</X>
+                <Y>2</Y>
+                <Z>0.5</Z>
+            </Size>
+            <Mass>290</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Drones\Artillery_drone.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>1</Capacity>
+            <AmmoDefinitionId Subtype="TestAmmoB8T" />
+
+            <MinimumOfferAmount>1</MinimumOfferAmount>
+            <MaximumOfferAmount>1</MaximumOfferAmount>
+            <MinimumOrderAmount>1</MinimumOrderAmount>
+            <MaximumOrderAmount>1</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+        </AmmoMagazine>		    
+
+        
+        <AmmoMagazine>
+            <Id>
+                <TypeId>AmmoMagazine</TypeId>
+                <SubtypeId>OrszemLauncherStage</SubtypeId>
+            </Id>
+            <DisplayName>Orszem Sentinel</DisplayName>
+            <Icon>Textures\GUI\Icons\Artillery_drone.dds</Icon>
+            <Size>
+                <X>1</X>
+                <Y>2</Y>
+                <Z>0.5</Z>
+            </Size>
+            <Mass>290</Mass>
+            <Volume>500</Volume>
+            <Model>Models\Drones\Artillery_drone.mwm</Model>
+            <PhysicalMaterial>Ammo</PhysicalMaterial>
+            <Capacity>1</Capacity>
+            <AmmoDefinitionId Subtype="TestAmmoB8T" />
+
+            <MinimumOfferAmount>1</MinimumOfferAmount>
+            <MaximumOfferAmount>1</MaximumOfferAmount>
+            <MinimumOrderAmount>1</MinimumOrderAmount>
+            <MaximumOrderAmount>1</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+        </AmmoMagazine>		    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>MACmag</SubtypeId>
+      </Id>
+      <DisplayName>MACammo</DisplayName>
+      <Icon>Textures\Icons\srm8l.dds</Icon>
+      <ExtraInventoryTooltipLine>pewpewpew</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.25</X>
+        <Y>0.2</Y>
+        <Z>0.2</Z>
+      </Size>
+      <Mass>103.5</Mass>
+      <Volume>138</Volume>
+      <Model>Models\Ammo\Starcore_LRM_Missile_Large.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="K_HSR_FakeMissile" />
+    </AmmoMagazine>
+    
+
+
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>SubterraneanSun</SubtypeId>
+      </Id>
+      <DisplayName>no one reads this</DisplayName>
+      <Icon></Icon>
+      <ExtraInventoryTooltipLine>pain</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>150</Mass>
+      <Volume>1</Volume>
+      <Model></Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>1</Capacity>
+      <AmmoDefinitionId Subtype="THE POWER OF THE SUN" />
+    </AmmoMagazine>
+
+
+
+
+
+
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>ScathisProj1</SubtypeId>
+      </Id>
+      <DisplayName>Scathis Electric Bullet </DisplayName>
+      <Icon></Icon>
+	  <ExtraInventoryTooltipLine>pain</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>150</Mass>
+      <Volume>1</Volume>
+      <Model></Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>32</Capacity>
+      <AmmoDefinitionId Subtype="what" />
+    </AmmoMagazine>  
+	
+	
+
+
+
+
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>ARCSTRIKEMAG</SubtypeId>
+      </Id>
+      <DisplayName>ArcStrike Long Range Anti-Shield Missile</DisplayName>
+      <Icon>Textures\Icons\arrowiv.dds</Icon>
+      <ExtraInventoryTooltipLine>I'M HERE TO EAT ASS AND KICK BUBBLEGUM.</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>30</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Ammo\Starcore_Arrow_Missile_Large.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>4</Capacity>
+      <AmmoDefinitionId Subtype="K_HSR_FakeMissile" />
+    </AmmoMagazine>
+
+    <AmmoMagazine>
+      <Id>
+        <TypeId>AmmoMagazine</TypeId>
+        <SubtypeId>SM3MAG</SubtypeId>
+      </Id>
+      <DisplayName>SM-3 Counter Missile</DisplayName>
+      <Icon>Textures\Icons\arrowiv.dds</Icon>
+	  <ExtraInventoryTooltipLine>I'M HERE TO EAT ASS AND KICK BUBBLEGUM.</ExtraInventoryTooltipLine>
+      <Size>
+        <X>0.1</X>
+        <Y>0.1</Y>
+        <Z>0.1</Z>
+      </Size>
+      <Mass>30</Mass>
+      <Volume>1</Volume>
+      <Model>Models\Ammo\Starcore_Arrow_Missile_Large.mwm</Model>
+      <PhysicalMaterial>Ammo</PhysicalMaterial>
+      <Capacity>8</Capacity>
+      <AmmoDefinitionId Subtype="K_HSR_FakeMissile" />
+    </AmmoMagazine>
+    
+    
+  </AmmoMagazines>
+</Definitions>

@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition>
+			<Id>
+				<TypeId>TerminalBlock</TypeId>
+				<SubtypeId>ExtendableRadiatorBase</SubtypeId>
+			</Id>
+			<DisplayName>Retractable Radiator Base</DisplayName>
+			<Description>
+				Allows attached radiator panels to be retracted and extended.
+			</Description>
+			<Icon>Textures\GUI\Icons\Cubes\ExtendableRadiatorBase.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\ExtendableRadiatorBase.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="10" />
+				<Component Subtype="Construction" Count="10" />
+				<Component Subtype="LargeTube" Count="4" />
+				<Component Subtype="Motor" Count="4" />
+				<Component Subtype="Computer" Count="2" />
+				<Component Subtype="SteelPlate" Count="5" />
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0" />
+			<BlockPairName>ExtendableRadiatorBase</BlockPairName>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

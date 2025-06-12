@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition>
+			<Id>
+				<TypeId>CubeBlock</TypeId>
+				<SubtypeId>Heat_Heatsink</SubtypeId>
+			</Id>
+			<DisplayName>Fusion Heatsink</DisplayName>
+			<Description>
+				Stores built-up heat from fusion systems.
+			</Description>
+			<Icon>Textures\GUI\Icons\Cubes\Heat_Heatsink.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="3"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Heat_Heatsink.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="60" />
+				<Component Subtype="Construction" Count="40" />
+				<Component Subtype="MetalGrid" Count="40" />
+				<Component Subtype="LargeTube" Count="8" />
+				<Component Subtype="SteelPlate" Count="200" />
+			</Components>
+			<CriticalComponent Subtype="Construction" Index="0" />
+			<BlockPairName>Heat_Heatsink</BlockPairName>
+			<IsAirTight>true</IsAirTight>
+		</Definition>
+	</CubeBlocks>
+</Definitions>
