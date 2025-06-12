@@ -27,6 +27,7 @@
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="127mmMk24" />
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="127mmMk12" />
 		  <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="6InchTriple" />
+			<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="4_5Inch45" />
         </Blocks>
       </BlockVariantGroup>
   
@@ -40,7 +41,9 @@
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="381mmDualR" />
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="381mmDualNR" />
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="16InchTriple" />
-		  <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="380mmMLE1935" />
+			<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="380mmMLE1935"/>
+		   <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="OTO381mm" />
+		   <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="UK16Inch45Mark1" />
         </Blocks>
       </BlockVariantGroup>
 
@@ -52,6 +55,8 @@
         <Blocks>
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="203mmTwin" />
           <Block Type="MyObjectBuilder_ConveyorSorter" Subtype="203mmTriple" />
+			<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="15cm45Casemate" />
+			<Block Type="MyObjectBuilder_ConveyorSorter" Subtype="15Cm55TwinCasemate" />
         </Blocks>
       </BlockVariantGroup>
 
