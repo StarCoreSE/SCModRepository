@@ -685,6 +685,8 @@ namespace ShipPoints
             ["381mmDualR"] = 350,
             ["381mmDualNR"] = 350,
             ["380mmMLE1935"] = 350,
+			["OTO381mm"] = 350,
+			["UK16Inch45Mark1"] = 350,
             ["15cmSKC28R"] = 175,
             ["15cmSKC28NR"] = 175,
             ["128mmL45"] = 200,
@@ -693,6 +695,7 @@ namespace ShipPoints
             ["127mmMk24"] = 150,
             ["127mmMk32"] = 150,
             ["127mmMk56"] = 150,
+			["4_5Inch45"] = 150,
             ["105mmTwin"] = 100,
             ["PomPomMain"] = 75,
             ["150mmCasemate"] = 150,
@@ -709,7 +712,7 @@ namespace ShipPoints
             ["TorpBarbette"] = 500,
             ["406alternate"] = 350,
             ["Mk25Rangefinder"] = 10,
-            ["6InchTriple"] = 200,
+            ["6InchTriple"] = 150,
             ["20InchTwin"] = 600,
             ["Barbette1x1"] = 4,
             ["Barbette3x3"] = 36,
@@ -959,10 +962,6 @@ namespace ShipPoints
         case "[SI] Generator Core":
                     blockDisplayName = "Defensive Generator";
                     costMultiplier = 9999999f;
-                    break;
-                case "[FAS] Neptune Torpedo":
-                    blockDisplayName = "[FAS] Neptune Torpedo";
-                    costMultiplier = 0.25f;
                     break;
             }
 
