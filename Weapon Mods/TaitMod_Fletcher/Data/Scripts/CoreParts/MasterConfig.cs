@@ -23,8 +23,8 @@ namespace Scripts
 			FA16InchGun,
 			FA380mmMLE,
             RangeFinderMK24,
-
-
+            FA381mmOTO,
+            FA16Inch45Mark1,
             FaBoforSingleRemodel,
 			FaBoforTwinRemodel,
 			FaBoforQuadRemodel,
@@ -35,10 +35,12 @@ namespace Scripts
             QuinTorpLauncher,
             twin508,
             FaM2Turret,
-
+            FA4InchMk2,
             FaOerlikon20mmRemodel,
-            FaOerlikon20mmDualRemodel
+            FaOerlikon20mmDualRemodel,
 
+            FA15Cm45Casemate,
+            FA15Cm55TwinCasemate
             );
           
         }

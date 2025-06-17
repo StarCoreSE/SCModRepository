@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_ConveyorSorterDefinition">
+			<Id>
+				<TypeId>ConveyorSorter</TypeId>
+				<SubtypeId>UK16Inch45Mark1</SubtypeId>
+			</Id>
+			<DisplayName>[FAS] Nelson</DisplayName>
+			<Description>
+				[Turret Range: 7000]
+				[Reload: 3 Seconds/Barrel]
+
+				[Ammo Types: HE | AP]
+				[Shell Range: 10km]
+				[Shell Speed: 1200m/s | 1300m/s]
+				[Damage Types: Energy | Kinetic]
+			</Description>
+			<Icon>Textures\GUI\Icons\UK16Inch45Mark1.dds</Icon>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="5" y="2" z="5"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\16InchBrit\UK16Inch45Mark1.mwm</Model>
+			<DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+			<Components>
+				<Component Subtype="SteelPlate" Count="200" />
+				<Component Subtype="MetalGrid" Count="300" />
+				<Component Subtype="LargeTube" Count="250" />
+				<Component Subtype="GravityGenerator" Count="600" />
+				<Component Subtype="Motor" Count="400" />
+				<Component Subtype="Computer" Count="100" />
+				<Component Subtype="Construction" Count="1000" />
+				<Component Subtype="MetalGrid" Count="600" />
+				<Component Subtype="SteelPlate" Count="3000" />
+			</Components>
+			<CriticalComponent Subtype="Motor" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Bottom" StartX="0" StartY="0" EndX="5" EndY="5" />
+			</MountPoints>
+			<BlockPairName>UK16Inch45Mark1</BlockPairName>
+			<MirroringY>Z</MirroringY>
+			<MirroringZ>Y</MirroringZ>
+			<PCU>225</PCU>
+		</Definition>
+	</CubeBlocks>
+</Definitions>
