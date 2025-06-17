@@ -726,7 +726,7 @@
       <DisplayName>[FAS] Atlanta</DisplayName>
 	<Description>
 		[Turret Range: 4000]
-        [Reload: 1.5 Seconds/Barrel]
+        [Reload: 1 Seconds/Barrel]
 
         [Ammo Types: HE | SAP]
         [Shell Range: 5km]
@@ -802,7 +802,7 @@
       <DisplayName>[FAS] Benson</DisplayName>
 	<Description>
 		[Turret Range: 4000]
-        [Reload: 1.5 Seconds/Barrel]
+        [Reload: 1 Seconds/Barrel]
 
         [Ammo Types: HE | SAP]
         [Shell Range: 5km]
@@ -877,7 +877,7 @@
       <DisplayName>[FAS] Fletcher</DisplayName>
 	<Description>
 		[Turret Range: 4000]
-        [Reload: 1.5 Seconds/Barrel]
+        [Reload: 1 Seconds/Barrel]
 
         [Ammo Types: HE | SAP]
         [Shell Range: 5km]
@@ -960,7 +960,7 @@
       <DisplayName>[FAS] Helena</DisplayName>
 		  <Description>
 			  [Turret Range: 4000]
-			  [Reload: 1.5 Seconds/Barrel]
+			  [Reload: 1 Seconds/Barrel]
 
 			  [Ammo Types: HE | SAP]
 			  [Shell Range: 5km]
