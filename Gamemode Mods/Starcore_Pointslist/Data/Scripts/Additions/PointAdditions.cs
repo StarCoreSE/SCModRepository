@@ -164,13 +164,13 @@ namespace ShipPoints
             ["Flechette_DoubleBarrel"] = 200,
             ["Nariman_Dart_Turret"] = 245,
             ["Counter_Battery"] = 250,
-            ["ArcStrike_Torp_Launcher"] = 275,
+            ["SolHyp_ArcStrike_Torp"] = 275,
             ["Meson3_Turret"] = 300,
             ["Meson5_Turret"] = 600,
             ["PSP"] = 500,
             ["MagnaPulse_Gen"] = 400,
             ["SolHyp_Magnetic_Coilgun"] = 450,
-            ["WCSentry_Hangar"] = 1000,
+            ["WCSentry_Hangar"] = 650,
 
 
 
@@ -461,7 +461,7 @@ namespace ShipPoints
             ["HAS_Alecto"] = 400,
             ["HAS_Assault"] = 250,
             ["HAS_Nyx"] = 200,
-            ["HAS_Mammon"] = 400,
+            ["HAS_MammonMK2"] = 400,
 
             ["K_SA_Launcher_VIV"] = 350,
             ["K_SA_Launcher_VI"] = 350,
