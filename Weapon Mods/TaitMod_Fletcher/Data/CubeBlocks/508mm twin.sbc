@@ -6,7 +6,7 @@
 				<TypeId>ConveyorSorter</TypeId>
 				<SubtypeId>20InchTwin</SubtypeId>
 			</Id>
-			<DisplayName>[FAS] Sovreign</DisplayName>
+			<DisplayName>[FAS] Sovereign</DisplayName>
 			<Description>
 				[Turret Range: 7000]
 				[Reload: 8 Seconds/Barrel]
