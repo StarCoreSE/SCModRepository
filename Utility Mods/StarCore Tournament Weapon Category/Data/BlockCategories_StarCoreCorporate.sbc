@@ -105,10 +105,17 @@
 
         <string>Mk25Rangefinder</string>
 
+        <!--Plates-->
         <string>3x3_Blastplate_A</string>
         <string>3x3_Blastplate_B</string>
         <string>3x3_Blastplate_C</string>
         <string>ACTIVE_BLASTPLATE</string>
+        <string>REINFORCED_BLASTPLATE</string>
+        <string>GIGA_BLASTPLATE</string>
+
+        <!--Stealth-->
+        <string>StealthDrive</string>
+        <string>StealthHeatSink</string>
 
         <string>SC_Flare</string>
 		<string>LargeDecoy_MetalFoam</string>
@@ -260,12 +267,16 @@
         <!--[NHI]-->
         <string>NHI_PD_Turret</string>
         <string>NHI_Gatling_Laser_Turret</string>
-		<string>NHI_Autocannon_Turret</string>
+        <string>NHI_Light_Autocannon_Turret</string>
+		    <string>NHI_Autocannon_Turret</string>
         <string>NHI_Kinetic_Cannon_Turret</string>
         <string>NHI_Mk2_Cannon_Turret</string>
         <string>SC_Coil_Cannon</string>
-		<string>NHI_Mk3_Cannon_Turret</string>
-		<string>NHI_Fixed_Autocannon</string>
+        <string>NHI_Heavy_Gun_Turret</string>
+		    <string>NHI_Mk3_Cannon_Turret</string>
+        <string>NHI_Fixed_Gatling_Laser</string>
+		    <string>NHI_Fixed_Autocannon</string>
+        <string>NHI_Fixed_Missile_Battery</string>
 
       </ItemIds>
     </Category>
@@ -434,6 +445,8 @@
         <string>380mmMLE1935</string>
         <string>381mmDualR</string>
         <string>16InchTriple</string>
+        <string>TorpBarbette</string>
+        <string>20InchTwin</string>
 
       </ItemIds>
     </Category>
