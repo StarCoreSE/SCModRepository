@@ -374,11 +374,11 @@
       <ItemIds>
         <!-- [SOL] -->
         <string>MagnaPulse_Gen</string>
-        <!-- <string>Flechette_DoubleBarrel</string> -->
+        <string>Flechette_DoubleBarrel</string>
         <!-- <string>Impulse_Torch</string> -->
-        <!-- <string>SolHyp_ArcStrike_Torp</string> -->
+        <string>SolHyp_ArcStrike_Torp</string>
         <string>Counter_Battery</string>
-        <!-- <string>S_Chem_Laser_Block</string> -->
+        <string>S_Chem_Laser_Block</string>
         <!-- <string>S_Armored_Laser_Block</string> -->
         <string>Nariman_Dart_Turret</string>
         <string>SolHyp_Magnetic_Coilgun</string>
