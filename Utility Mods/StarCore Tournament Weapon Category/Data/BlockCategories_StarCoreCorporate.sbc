@@ -164,10 +164,12 @@
 
         <!--[40K]-->
         <string>AegisFlakTurret</string>
-		<string>MacroCannon</string>
+		    <string>MacroCannon</string>
         <string>HeavyMacroCannon</string>
+        <string>MacroHeavyTurret</string>
         <string>LanceBattery</string>
         <string>NovaCannon</string>
+        <string>GothicTorp</string>
 
       </ItemIds>
     </Category>
@@ -191,6 +193,11 @@
         <string>DualPulseLaserTurret</string>
 		<string>APE_Strong</string>
 		<string>Type18_Artillery</string>
+    <string>Type21_Artillery</string>
+    <string>Type24_Artillery</string>
+		<string>Type19_Driver</string>
+    <string>Type22_Driver</string>
+    <string>Type25_Driver</string>
 		<string>Devastator_Torp</string>
 
       </ItemIds>
@@ -233,6 +240,7 @@
         <string>MA_AC150</string>
         <string>MA_Gimbal_Laser_T2</string>
         <string>MA_T2PDX</string>
+        <string>MA_Fixed_T3</string>
         <string>MA_Derecho</string>
         <string>MA_Gladius</string>
 
@@ -273,7 +281,12 @@
 
         <!--[ONYX]-->
         <string>SC_AR_Tumult</string>
+        <string>SC_AR_Heliod</string>
+        <string>SC_AR_Afflictor</string>
+              <string>SC_AR_Afflictor_Slanted</string>
         <string>SC_AR_Deimos</string>
+        <string>SC_AR_Phobos</string>
+        <string>SC_AR_FocusedBeam</string>
         <string>SC_AR_Forager</string>
         <string>SC_AR_Eris</string>
 
@@ -295,6 +308,10 @@
         <string>K_SA_HeavyMetal_Gauss_A</string>
         <string>K_SA_HeavyMetal_Gauss_ERFM</string>
         <string>K_SA_HeavyMetal_Gauss_PGBC</string>
+        <string>K_SA_Gauss_ERC</string>
+        <string>K_SA_HeavyMetal_Gauss_ERII</string>
+        <string>Hellfire_Laser_Block</string>
+        <string>65_Launcher_FixedMount</string>
 
 	</ItemIds>
     </Category>
@@ -312,9 +329,14 @@
         <!--[HAS]-->
         <string>K_SA_Launcher_VI</string>
         <string>K_SA_Launcher_VIV</string>
+        <string>HAS_Crossfield</string>
         <string>HAS_Avenger</string>
         <string>HAS_Esper</string>
-	<string>HAS_Nyx</string>
+        <string>HAS_Thanatos</string>
+	      <string>HAS_Nyx</string>
+        <string>HAS_MammonMK2</string>
+  
+        
 
       </ItemIds>
     </Category>
@@ -331,7 +353,9 @@
 
         <!-- [EXO] -->
         <string>Hexcannon</string>
-        <string>MetalStorm</string>
+        <!--<string>MetalStorm</string> -->
+        <string>SLAM</string>
+        <string>banshee</string>
 
       </ItemIds>
     </Category>
@@ -373,15 +397,19 @@
       <Name>.SC_[SOL]</Name>
       <ItemIds>
         <!-- [SOL] -->
+        
         <string>MagnaPulse_Gen</string>
+        <string>S_Chem_Laser_Block</string>
         <string>Flechette_DoubleBarrel</string>
         <!-- <string>Impulse_Torch</string> -->
+        <string>Nariman_Dart_Turret</string>
+        <string>Meson3_Turret</string>
+        <string>Meson5_Turret</string>
+        <string>SolHyp_Magnetic_Coilgun</string>
+        <!-- <string>S_Armored_Laser_Block</string> -->
         <string>SolHyp_ArcStrike_Torp</string>
         <string>Counter_Battery</string>
-        <string>S_Chem_Laser_Block</string>
-        <!-- <string>S_Armored_Laser_Block</string> -->
-        <string>Nariman_Dart_Turret</string>
-        <string>SolHyp_Magnetic_Coilgun</string>
+        <string>WCSentry_Hangar</string>
       </ItemIds>
     </Category>
 

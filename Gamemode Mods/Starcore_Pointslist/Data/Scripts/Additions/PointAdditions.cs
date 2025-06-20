@@ -656,7 +656,7 @@ namespace ShipPoints
             ["TaiidanHangarBomber"] = 800,
             ["TaiidanHangarBomberMedium"] = 800,
             ["SLAM"] = 800,
-            ["banshee"] = 500,
+            //["banshee"] = 500,
             ["banshee"] = 300,
             ["TaiidanHangarHuge"] = 1000,
             ["TaiidanHangar"] = 750,
