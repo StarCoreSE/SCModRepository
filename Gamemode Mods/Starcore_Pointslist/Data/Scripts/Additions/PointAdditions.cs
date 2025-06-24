@@ -560,7 +560,7 @@ namespace ShipPoints
             ["Hellfire_Laser_Block"] = 666,
 
 
-        ["Cat_StarcoreUlitity"] = 21,
+            ["Cat_StarcoreUlitity"] = 21,
             ["LargeBlockRemoteControl"] = 100,
             ["SmallBlockRemoteControl"] = 50,
             ["LargeProgrammableBlock"] = 50,
@@ -612,7 +612,7 @@ namespace ShipPoints
             ["BlinkDriveLarge"] = 500,
             ["SCSmallJumpDrive"] = 250,
 
-        ["Cat_BadModder"] = 22,
+            ["Cat_BadModder"] = 22,
             ["APE_Strong"] = 200,
             ["GoalieCasemate"] = 100,
             ["Reaver_Coilgun"] = 115,
@@ -646,7 +646,7 @@ namespace ShipPoints
             ["Thagomizer_Angled"] = 635,
             ["Thagomizer_Angled_Flipped"] = 635,
 
-        ["Cat_Strikecraft"] = 23,
+            ["Cat_Strikecraft"] = 23,
             ["HeavyFighterBay"] = 230,
             ["longsword"] = 625,
             ["TaiidanSingleHangar"] = 100,
@@ -657,7 +657,7 @@ namespace ShipPoints
             ["TaiidanHangarBomberMedium"] = 800,
             ["SLAM"] = 800,
             //["banshee"] = 500,
-            ["banshee"] = 300,
+            ["banshee"] = 400,
             ["TaiidanHangarHuge"] = 1000,
             ["TaiidanHangar"] = 750,
             ["TaiidanHangarCompact"] = 500,
@@ -899,6 +899,7 @@ namespace ShipPoints
                     blockDisplayName = "Blastplate";
                     costMultiplier = 0f;
                     break;
+                case "Banshee Hangar Bay":
                 case "[EXO] Taiidan":
                 case "[EXO] Taiidan Fighter Launch Rail":
                 case "[EXO] Taiidan Bomber Launch Rail":
@@ -919,6 +920,10 @@ namespace ShipPoints
                 case "[40K] Gothic Torpedo Launcher":
                     blockDisplayName = "[40k] Gothic Torpedo Launcher";
                     costMultiplier = 0.1f;
+                    break;
+                case "[SOL] Gewehr Flechette Shotgun":
+                    blockDisplayName = "[SOL] Gewehr Flechette Shotgun";
+                    costMultiplier = 0.25f;
                     break;
                 case "[MID] AX 'Spitfire' Light Rocket Turret":
                     blockDisplayName = "[MID] Spitfire Turret";
