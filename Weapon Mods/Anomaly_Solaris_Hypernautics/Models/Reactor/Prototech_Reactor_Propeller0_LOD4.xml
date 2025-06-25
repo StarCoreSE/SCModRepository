@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<Model Name="Default">
-  <Parameter Name="RescaleFactor">0.01</Parameter>
-  <Parameter Name="NoDiffuseTexture">true</Parameter>
-  <MaterialRef Name="Metal_Dull" />
-</Model>
