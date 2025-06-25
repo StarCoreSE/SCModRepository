@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<Model Name="Default">
+  <Parameter Name="RescaleFactor">0.01</Parameter>
+  <Parameter Name="NoDiffuseTexture">true</Parameter>
+  <Material Name="DefaultMaterial">
+    <Parameter Name="Technique">MESH</Parameter>
+  </Material>
+  <MaterialRef Name="Construction" />
+  <MaterialRef Name="Chrome" />
+  <MaterialRef Name="Atlas4_Chrome" />
+  <LOD Distance="8">
+    <Model>Models\Cubes\large\Prototech_Reactor_Construction_1_LOD1</Model>
+  </LOD>
+  <LOD Distance="45">
+    <Model>Models\Cubes\large\Prototech_Reactor_Construction_1_LOD2</Model>
+  </LOD>
+  <LOD Distance="90">
+    <Model>Models\Cubes\large\Prototech_Reactor_Construction_1_LOD3</Model>
+  </LOD>
+  <LOD Distance="120">
+    <Model>Models\Cubes\large\Prototech_Reactor_Construction_1_LOD4</Model>
+  </LOD>
+</Model>

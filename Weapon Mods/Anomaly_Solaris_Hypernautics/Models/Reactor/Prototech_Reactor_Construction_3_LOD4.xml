@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Model Name="Default">
+  <Parameter Name="RescaleFactor">0.01</Parameter>
+  <Parameter Name="NoDiffuseTexture">true</Parameter>
+  <MaterialRef Name="Construction" />
+  <MaterialRef Name="Metal_Dull" />
+  <MaterialRef Name="Chrome" />
+  <MaterialRef Name="Metal_Shiny" />
+  <MaterialRef Name="Prototech" />
+  <MaterialRef Name="Emissive2" />
+  <MaterialRef Name="Terminal" />
+</Model>

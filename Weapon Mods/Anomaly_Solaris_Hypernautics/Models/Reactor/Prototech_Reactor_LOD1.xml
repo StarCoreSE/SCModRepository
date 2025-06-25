@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<Model Name="Default">
+  <Parameter Name="RescaleFactor">0.01</Parameter>
+  <Parameter Name="NoDiffuseTexture">true</Parameter>
+  <Material Name="Large_cockpit">
+    <Parameter Name="Technique">MESH</Parameter>
+  </Material>
+  <Material Name="Metal_Dull.002">
+    <Parameter Name="Technique">MESH</Parameter>
+  </Material>
+  <Material Name="DefaultMaterial">
+    <Parameter Name="Technique">MESH</Parameter>
+  </Material>
+  <MaterialRef Name="PaintedMetal_Colorable" />
+  <MaterialRef Name="PaintedMetal_VeryDark" />
+  <MaterialRef Name="PaintedMetal_Darker" />
+  <MaterialRef Name="PaintedMetal_Yellow" />
+  <MaterialRef Name="Prototech" />
+  <MaterialRef Name="ButtonsAtlas_Darker" />
+  <MaterialRef Name="PaintedMetalScratched_Yellow" />
+  <MaterialRef Name="Metal_Dull" />
+  <MaterialRef Name="Conveyor" />
+  <MaterialRef Name="Metal_Shiny" />
+  <MaterialRef Name="Chrome" />
+  <MaterialRef Name="GlassOutside" />
+  <MaterialRef Name="Atlas2" />
+  <MaterialRef Name="Atlas3_Darker" />
+  <MaterialRef Name="Atlas3_Chrome" />
+  <MaterialRef Name="Rubber" />
+  <MaterialRef Name="Prototech_Clean" />
+  <MaterialRef Name="Prototech_Atlas" />
+  <MaterialRef Name="Atlas1" />
+  <MaterialRef Name="Atlas4_Darker" />
+  <MaterialRef Name="Emissive" />
+  <MaterialRef Name="Terminal" />
+  <MaterialRef Name="BlackMattePlastic" />
+  <MaterialRef Name="Atlas4_Colorable" />
+  <MaterialRef Name="ButtonsAtlas_Colorable" />
+  <MaterialRef Name="Atlas3_Colorable" />
+  <MaterialRef Name="Atlas4_Chrome" />
+  <MaterialRef Name="Atlas1Colorable" />
+  <MaterialRef Name="Decals" />
+  <MaterialRef Name="Emissive2" />
+  <MaterialRef Name="CockpitLarge" />
+</Model>
