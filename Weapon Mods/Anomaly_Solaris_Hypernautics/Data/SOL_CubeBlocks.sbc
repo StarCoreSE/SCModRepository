@@ -1452,41 +1452,44 @@
                 <TypeId>Reactor</TypeId>
                 <SubtypeId>LargeBlockFusionGenerator</SubtypeId>
             </Id>
-            <DisplayName>Prototech Fusion Reactor</DisplayName>
+            <DisplayName>Heavy Molten Salt Reactor</DisplayName>
             <Icon>Textures\Icons\Prototech_Reactor.dds</Icon>
-            <Description>Description_Reactor</Description>
+            <Description>Large reactor using molten salt technology in a more compact and elongated design.
+			940mw power
+			700bp cost
+			700k integrity
+			
+			</Description>
             <CubeSize>Large</CubeSize>
             <GuiVisible>false</GuiVisible>
             <BlockTopology>TriangleMesh</BlockTopology>
-            <Size x="3" y="3" z="3" />
+            <Size x="3" y="2" z="2" />
             <ModelOffset x="0" y="0" z="0" />
             <Model>Models\Reactor\Prototech_Reactor.mwm</Model>
             <Components>
-                <Component Subtype="SteelPlate" Count="800" />
-                <Component Subtype="Construction" Count="70" />
-                <Component Subtype="MetalGrid" Count="40" />
-                <Component Subtype="LargeTube" Count="40" />
-                <Component Subtype="Superconductor" Count="100" />
-                <Component Subtype="Reactor" Count="2000" />
-                <Component Subtype="Motor" Count="20" />
-                <Component Subtype="Computer" Count="75" />
-                <Component Subtype="SteelPlate" Count="200" />
+                <Component Subtype="SteelPlate" Count="4000" />
+				<Component Subtype="Computer" Count="500" />
+                <Component Subtype="Construction" Count="150" />
+                <Component Subtype="MetalGrid" Count="120" />
+                <Component Subtype="LargeTube" Count="120" />
+                <Component Subtype="Superconductor" Count="300" />
+                <Component Subtype="Reactor" Count="20000" />
+                <Component Subtype="Motor" Count="50" />
+                <Component Subtype="SteelPlate" Count="6000" />
             </Components>
             <CriticalComponent Subtype="Computer" Index="0" />
             <MountPoints>
-                <MountPoint Side="Right" StartX="1" StartY="1" EndX="2" EndY="2" />
-                <MountPoint Side="Left" StartX="1" StartY="1" EndX="2" EndY="2" />
-                <MountPoint Side="Top" StartX="1" StartY="1" EndX="2" EndY="2" />
-                <MountPoint Side="Bottom" StartX="1" StartY="1" EndX="2" EndY="2" Default="true" />
-                <MountPoint Side="Front" StartX="1" StartY="1" EndX="2" EndY="2" />
-                <MountPoint Side="Back" StartX="1" StartY="1" EndX="2" EndY="2" />
+                <MountPoint Side="Right" StartX="0" StartY="0" EndX="2" EndY="1.5" />
+                <MountPoint Side="Left" StartX="0" StartY="0" EndX="2" EndY="1.5" />
+                <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="2" Default="true" />
+                <MountPoint Side="Back" StartX="0" StartY="0" EndX="3" EndY="1.5" />
             </MountPoints>
             <BuildProgressModels>
                 <Model BuildPercentUpperBound="0.25" File="Models\Reactor\Prototech_Reactor_Construction_1.mwm" />
                 <Model BuildPercentUpperBound="0.50" File="Models\Reactor\Prototech_Reactor_Construction_2.mwm" />
                 <Model BuildPercentUpperBound="0.75" File="Models\Reactor\Prototech_Reactor_Construction_3.mwm" />
             </BuildProgressModels>
-            <BlockPairName>LargeReactor</BlockPairName>
+            <BlockPairName>LargeBlockFusionGenerator</BlockPairName>
             <MirroringY>Z</MirroringY>
             <MirroringZ>Y</MirroringZ>
             <EdgeType>Light</EdgeType>
