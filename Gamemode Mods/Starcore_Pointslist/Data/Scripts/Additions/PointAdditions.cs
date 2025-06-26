@@ -34,6 +34,7 @@ namespace ShipPoints
             ["LargeLargeBlockUpgrade"] = 100,
             ["LargeBlockLargeGenerator"] = 300,
             ["LargeBlockLargeGeneratorWarfare2"] = 300,
+            ["LargeBlockFusionGenerator"] = 750,
 
 
             ["SmallHydrogenEngine"] = 1,
