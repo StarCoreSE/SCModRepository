@@ -1465,7 +1465,7 @@
             <BlockTopology>TriangleMesh</BlockTopology>
             <Size x="3" y="2" z="2" />
             <ModelOffset x="0" y="0" z="0" />
-            <Model>Models\Reactor\Prototech_Reactor.mwm</Model>
+            <Model>Models\Cubes\Large\Prototech_Reactor.mwm</Model>
             <Components>
                 <Component Subtype="SteelPlate" Count="4000" />
 				<Component Subtype="Computer" Count="500" />
