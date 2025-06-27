@@ -1444,5 +1444,104 @@
 		</Definition>
 
 
+
+
+
+        <Definition xsi:type="MyObjectBuilder_ReactorDefinition">
+            <Id>
+                <TypeId>Reactor</TypeId>
+                <SubtypeId>LargeBlockFusionGenerator</SubtypeId>
+            </Id>
+            <DisplayName>Heavy Molten Salt Reactor</DisplayName>
+            <Icon>Textures\GUI\Icons\Cubes\Prototech_Reactor.dds</Icon>
+            <Description>Large reactor using molten salt technology in a more compact and elongated design.
+			940mw power
+			700bp cost
+			700k integrity
+			
+			</Description>
+            <CubeSize>Large</CubeSize>
+            <GuiVisible>false</GuiVisible>
+            <BlockTopology>TriangleMesh</BlockTopology>
+            <Size x="3" y="2" z="2" />
+            <ModelOffset x="0" y="0" z="0" />
+            <Model>Models\Cubes\Large\Prototech_Reactor.mwm</Model>
+            <Components>
+                <Component Subtype="SteelPlate" Count="4000" />
+				<Component Subtype="Computer" Count="500" />
+                <Component Subtype="Construction" Count="150" />
+                <Component Subtype="MetalGrid" Count="120" />
+                <Component Subtype="LargeTube" Count="120" />
+                <Component Subtype="Superconductor" Count="300" />
+                <Component Subtype="Reactor" Count="20000" />
+                <Component Subtype="Motor" Count="50" />
+                <Component Subtype="SteelPlate" Count="6000" />
+            </Components>
+            <CriticalComponent Subtype="Computer" Index="0" />
+            <MountPoints>
+                <MountPoint Side="Right" StartX="0" StartY="0" EndX="2" EndY="1.5" />
+                <MountPoint Side="Left" StartX="0" StartY="0" EndX="2" EndY="1.5" />
+                <MountPoint Side="Bottom" StartX="0" StartY="0" EndX="3" EndY="2" Default="true" />
+                <MountPoint Side="Back" StartX="0" StartY="0" EndX="3" EndY="1.5" />
+            </MountPoints>
+            <BuildProgressModels>
+                <Model BuildPercentUpperBound="0.25" File="Models\Reactor\Prototech_Reactor_Construction_1.mwm" />
+                <Model BuildPercentUpperBound="0.50" File="Models\Reactor\Prototech_Reactor_Construction_2.mwm" />
+                <Model BuildPercentUpperBound="0.75" File="Models\Reactor\Prototech_Reactor_Construction_3.mwm" />
+            </BuildProgressModels>
+            <BlockPairName>LargeBlockFusionGenerator</BlockPairName>
+            <MirroringY>Z</MirroringY>
+            <MirroringZ>Y</MirroringZ>
+            <EdgeType>Light</EdgeType>
+            <BuildTimeSeconds>100</BuildTimeSeconds>
+            <ResourceSourceGroup>Reactors</ResourceSourceGroup>
+            <MaxPowerOutput>940</MaxPowerOutput>
+            <InventorySize>
+                <X>2</X>
+                <Y>2</Y>
+                <Z>2</Z>
+            </InventorySize>
+
+            <!-- 
+                Values are volume fill ratio, means how much fuel reactor pulls from conveyor system to the inventory.
+                If volume fill ratio is bellow minimum, reactor starts pulling fuel up to maximum value.
+                Warning: Changing these values will affect performance.
+            -->
+            <InventoryFillFactorMin>0.001</InventoryFillFactorMin>
+            <InventoryFillFactorMax>0.002</InventoryFillFactorMax>
+
+            <!-- 
+                This is how much of fuel is pulled from conveyor system in one tick.
+                It's in minutes, means that it will pull X minutes of fuel in one tick.
+                Warning: Changing this value will affect performance.
+            -->
+            <FuelPullAmountFromConveyorInMinutes>10.0</FuelPullAmountFromConveyorInMinutes>
+
+            <FuelInfos>
+                <FuelInfo>
+                    <Id>
+                        <TypeId>Ingot</TypeId>
+                        <SubtypeId>Uranium</SubtypeId>
+                    </Id>
+                </FuelInfo>
+            </FuelInfos>
+            <PrimarySound>ShipLrgNuclearLrg</PrimarySound>
+            <DamageEffectName>Damage_Reactor_Damaged</DamageEffectName>
+            <DamagedSound>ParticleReactor</DamagedSound>
+            <EmissiveColorPreset>Default</EmissiveColorPreset>
+            <DestroyEffect>Explosion_Warhead_30</DestroyEffect>
+            <DestroySound>WepLrgWarheadExpl</DestroySound>
+            <PCU>25</PCU>
+            <IsAirTight>false</IsAirTight>
+            <TieredUpdateTimes>
+                <unsignedInt>900</unsignedInt>
+                <unsignedInt>1800</unsignedInt>
+                <unsignedInt>3600</unsignedInt>
+            </TieredUpdateTimes>
+            <TargetingGroups>
+                <string>PowerSystems</string>
+            </TargetingGroups>
+        </Definition>
+
 	</CubeBlocks>
 </Definitions>

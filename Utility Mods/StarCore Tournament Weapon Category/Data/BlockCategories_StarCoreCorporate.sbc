@@ -145,6 +145,7 @@
         <string>SmallLargeBlockUpgrade</string>
         <string>LargeBlockLargeGenerator</string>
         <string>LargeLargeBlockUpgrade</string>
+        <string>LargeBlockFusionGenerator</string>
 
 		<!--FUSION-->
         <string>Caster_Accelerator_0</string>
