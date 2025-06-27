@@ -1453,7 +1453,7 @@
                 <SubtypeId>LargeBlockFusionGenerator</SubtypeId>
             </Id>
             <DisplayName>Heavy Molten Salt Reactor</DisplayName>
-            <Icon>Textures\Icons\Prototech_Reactor.dds</Icon>
+            <Icon>Textures\GUI\Icons\Cubes\Prototech_Reactor.dds</Icon>
             <Description>Large reactor using molten salt technology in a more compact and elongated design.
 			940mw power
 			700bp cost
