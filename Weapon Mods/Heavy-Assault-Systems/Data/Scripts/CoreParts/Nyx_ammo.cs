@@ -37,7 +37,7 @@ namespace Scripts
             AmmoRound = "Nyx Beam", // Name of ammo in terminal, should be different for each ammo type used by the same weapon. Is used by Shrapnel.
             HybridRound = true, // Use both a physical ammo magazine and energy per shot.
             EnergyCost = 0.0125f, //100MW Scaler for energy per shot (EnergyCost * BaseDamage * (RateOfFire / 3600) * BarrelsPerShot * TrajectilesPerBarrel). Uses EffectStrength instead of BaseDamage if EWAR.
-            BaseDamage = 16000f, // Direct damage; one steel plate is worth 100.
+            BaseDamage = 1600f, // Direct damage; one steel plate is worth 100.
             Mass = 0f, // In kilograms; how much force the impact will apply to the target.
             Health = 0, // How much damage the projectile can take from other projectiles (base of 1 per hit) before dying; 0 disables this and makes the projectile untargetable.
             BackKickForce = 0f, // Recoil. This is applied to the Parent Grid.
@@ -89,7 +89,7 @@ namespace Scripts
                 Patterns = new[] { // If enabled, set of multiple ammos to fire in order instead of the main ammo.
                     "Nyx Beam Fake", "Nyx Beam Fake", "Nyx Beam Fake", "Nyx Beam Fake", "Nyx Beam Fake", "Nyx Beam Fake", "Nyx Beam Fake", "Nyx Beam Fake", "Nyx Beam Fake",
                 },
-                Mode = Never, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
+                Mode = Weapon, // Select when to activate this pattern, options: Never, Weapon, Fragment, Both 
                 TriggerChance = 1f, // This is %
                 Random = false, // This randomizes the number spawned at once, NOT the list order.
                 RandomMin = 1, 
