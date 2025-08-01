@@ -46,6 +46,7 @@ namespace SC.SUGMA
         public GamemodeBase CurrentGamemode;
 
         public bool HasInited;
+        public bool IsClosing { get; private set; } = false;
 
         public ShareTrackApi ShareTrackApi = new ShareTrackApi();
         public ShieldApi ShieldApi = new ShieldApi();
@@ -209,6 +210,7 @@ namespace SC.SUGMA
 
         protected override void UnloadData()
         {
+            IsClosing = true;
             try
             {
                 foreach (var component in _components.Values.ToArray())
