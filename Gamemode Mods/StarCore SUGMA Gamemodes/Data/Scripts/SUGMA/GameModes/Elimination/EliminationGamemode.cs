@@ -48,7 +48,8 @@ namespace SC.SUGMA.GameModes.Elimination
 
         public override void Close()
         {
-            StopRound();
+            if (IsStarted)
+                StopRound();
         }
 
         public override void UpdateActive()
