@@ -248,6 +248,8 @@
         <string>MA_AC150</string>
         <string>MA_Gimbal_Laser_T2</string>
         <string>MA_T2PDX</string>
+        <string>MA_Tiger</string>
+        <string>MA_Crouching_Tiger</string>
         <string>MA_Fixed_T3</string>
         <string>MA_Derecho</string>
         <string>MA_Gladius</string>
@@ -322,6 +324,7 @@
         <string>K_SA_HeavyMetal_Gauss_PGBC</string>
         <string>K_SA_Gauss_ERC</string>
         <string>K_SA_HeavyMetal_Gauss_ERII</string>
+        <string>K_SA_LoW_CapitalSpinalA</string>
         <string>Hellfire_Laser_Block</string>
         <string>65_Launcher_FixedMount</string>
 
