@@ -350,6 +350,54 @@
     </Sound>
 
 
+
+
+    <!-- arcstrike torp launching -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>ArcLaunch</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>8000</MaxDistance>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.8</Volume>
+      <Loopable>false</Loopable>
+      <VolumeVariation>0.2</VolumeVariation>
+      <PitchVariation>100</PitchVariation>
+      <PreventSynchronization>10</PreventSynchronization>
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\ion_cannon_firing.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
+
+    <!-- arcstrike seismic charge -->
+    <Sound>
+      <Id>
+        <TypeId>MyObjectBuilder_AudioDefinition</TypeId>
+        <SubtypeId>SeismicCharge</SubtypeId>
+      </Id>
+      <Category>SHOT</Category>
+      <MaxDistance>2500</MaxDistance>
+      <PreventSynchronization>0</PreventSynchronization>
+      <DynamicMusicCategory>HeavyFight</DynamicMusicCategory>
+      <DynamicMusicAmount>3</DynamicMusicAmount>
+      <Volume>0.7</Volume>
+      <Loopable>false</Loopable>
+      <VolumeVariation>0.12</VolumeVariation>
+      <PitchVariation>75</PitchVariation>
+      <!--<SoundLimit>20</SoundLimit>-->
+      <Waves>
+        <Wave Type="D3">
+          <Start>Audio\seismic_charge.wav</Start>
+        </Wave>
+      </Waves>
+    </Sound>
+
     <!-- shield thing Sounds -->
     <Sound>
       <Id>
