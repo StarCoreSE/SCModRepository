@@ -171,7 +171,7 @@ namespace ShipPoints
             ["PSP"] = 500,
             ["MagnaPulse_Gen"] = 400,
             ["SolHyp_Magnetic_Coilgun"] = 450,
-            ["WCSentry_Hangar"] = 650,
+            ["WCSentry_Hangar"] = 350,
 
 
 
@@ -648,8 +648,8 @@ namespace ShipPoints
             ["Thagomizer_Angled_Flipped"] = 635,
 
             ["Cat_Strikecraft"] = 23,
-            ["HeavyFighterBay"] = 230,
-            ["longsword"] = 625,
+            ["HeavyFighterBay"] = 250,
+            ["longsword"] = 600,
             ["TaiidanSingleHangar"] = 100,
             ["TaiidanRailFighter"] = 700,
             ["TaiidanHangarFighter"] = 800,
@@ -939,14 +939,14 @@ namespace ShipPoints
                     blockDisplayName = "[MID] Bonfire Turret";
                     costMultiplier = 0.2f;
                     break;
-                case "[FLAW] Warp Beacon - Longsword":
-                    blockDisplayName = "[FLAW] Longsword Bomber";
-                    costMultiplier = 0.2f;
-                    break;
-                case "[FLAW] Phoenix Snubfighter Launch Bay":
-                    blockDisplayName = "[FLAW] Snubfighters";
-                    costMultiplier = 0.1f;
-                    break;
+                //case "[FLAW] Warp Beacon - Longsword":
+                //    blockDisplayName = "[FLAW] Longsword Bomber";
+                //    costMultiplier = 0.2f;
+                //    break;
+                //case "[FLAW] Phoenix Snubfighter Launch Bay":
+                //    blockDisplayName = "[FLAW] Snubfighters";
+                //    costMultiplier = 0.1f;
+                //    break;
                 case "[FLAW] Hadean Superheavy Plasma Blastguns":
                     blockDisplayName = "[FLAW] Plasma Blastgun";
                     costMultiplier = 0.121f;
