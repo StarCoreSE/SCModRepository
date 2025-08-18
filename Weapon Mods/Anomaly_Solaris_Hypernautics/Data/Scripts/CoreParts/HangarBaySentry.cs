@@ -201,10 +201,10 @@ namespace Scripts
                 AgyuSentry,
                 HeavyArtillery,
 
-
-                OrszemLauncher,
-                OrszemSentry,
-                PointDroneShot,
+                // Sentry Drone - Temp Depreciated
+                //OrszemLauncher,
+                //OrszemSentry,
+                //PointDroneShot,
 
                 
             },

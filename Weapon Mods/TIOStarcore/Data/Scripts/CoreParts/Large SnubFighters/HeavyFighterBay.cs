@@ -143,7 +143,7 @@ namespace Scripts {
                     DisableLosCheck = false, // Do not perform LOS checks at all... not advised for self tracking weapons
                     NoVoxelLosCheck = false, // If set to true this ignores voxels for LOS checking.. which means weapons will fire at targets behind voxels.  However, this can save cpu in some situations, use with caution. 
                     Debug = false, // Force enables debug mode.
-                    RestrictionRadius = 3, // Prevents other blocks of this type from being placed within this distance of the centre of the block.
+                    RestrictionRadius = 1, // Prevents other blocks of this type from being placed within this distance of the centre of the block.
                     CheckInflatedBox = true, // If true, the above distance check is performed from the edge of the block instead of the centre.
                     CheckForAnyWeapon = false, // If true, the check will fail if ANY weapon is present, not just weapons of the same subtype.
                 },

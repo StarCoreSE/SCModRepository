@@ -23,7 +23,7 @@
 			<ModelOffset x="0" y="0" z="0"/>
 			<Model>Models\Strike_Craft\HeavyFighterPad.mwm</Model>
 			<Components>
-				<Component Subtype="SteelPlate" Count="2000" />
+				<Component Subtype="SteelPlate" Count="17500" />
                 <Component Subtype="Construction" Count="400" />
 				<Component Subtype="SmallTube" Count="80" />
                 <Component Subtype="Motor" Count="150" />
@@ -31,7 +31,7 @@
                 <Component Subtype="Computer" Count="60" />
                 <Component Subtype="InteriorPlate" Count="120" />
                 <Component Subtype="Construction" Count="140" />
-                <Component Subtype="SteelPlate" Count="600" />
+                <Component Subtype="SteelPlate" Count="5000" />
 			</Components>
 			<CriticalComponent Index="0" Subtype="Computer"/>
 			<MountPoints>
