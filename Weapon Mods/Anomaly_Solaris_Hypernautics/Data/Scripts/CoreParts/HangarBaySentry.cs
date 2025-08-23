@@ -130,7 +130,7 @@ namespace Scripts
                     BarrelsPerShot = 1, // How many muzzles will fire a projectile per fire event.
                     TrajectilesPerBarrel = 1, // Number of projectiles per muzzle per fire event.
                     SkipBarrels = 0, // Number of muzzles to skip after each fire event.
-                    ReloadTime = 7200, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
+                    ReloadTime = 3600, // Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     MagsToLoad = 1, // Number of physical magazines to consume on reload.
                     DelayUntilFire = 120, // How long the weapon waits before shooting after being told to fire. Measured in game ticks (6 = 100ms, 60 = 1 seconds, etc..).
                     HeatPerShot = 0, // Heat generated per shot.
@@ -201,7 +201,7 @@ namespace Scripts
                 AgyuSentry,
                 HeavyArtillery,
 
-                // Sentry Drone - Temp Depreciated
+                // Depreciated Ammo - For Fleetcore
                 //OrszemLauncher,
                 //OrszemSentry,
                 //PointDroneShot,
