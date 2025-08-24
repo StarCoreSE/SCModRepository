@@ -985,7 +985,8 @@
       <DisplayName>[SOL] Sentry Hangar Bay</DisplayName>
       <Icon>Textures\GUI\Icons\Hangar.dds</Icon>
       <Description>
-		2 Minute Sentry Reload
+		2 Minute Sentry Duration
+		1 Minute Sentry Reload
 		1 km Deployment Distance
 
 		[Fegyver Medium Sentry]
@@ -994,10 +995,12 @@
 		[Agyu Heavy Sentry]
 		8km Coilgun
 		4 Shots
-	  	[Orszem Sentinel]
-		1.5km EMP Laser
 
-		These drones can be given orders via the hangar's ActionFriend/ActionEnemy options. </Description>
+	
+		These drones can be given orders via the hangar's ActionFriend/ActionEnemy options.
+		</Description>
+		<!-- [Orszem Sentinel]
+		1.5km EMP Laser -->
       <CubeSize>Large</CubeSize>
       <BlockTopology>TriangleMesh</BlockTopology>
       <Size x="5" y="2" z="2"/>
