@@ -639,16 +639,6 @@ namespace CoreSystems.Api
             AssignMethod(delegates, "IsTargetValidBase", ref _isTargetValid);
             AssignMethod(delegates, "GetWeaponScopeBase", ref _getWeaponScope);
 
-            //Phantom methods
-            AssignMethod(delegates, "GetTargetAssessment", ref _getTargetAssessment);
-            //AssignMethod(delegates, "GetPhantomInfo", ref _getPhantomInfo);
-            AssignMethod(delegates, "SetTriggerState", ref _setTriggerState);
-            AssignMethod(delegates, "AddMagazines", ref _addMagazines);
-            AssignMethod(delegates, "SetAmmo", ref _setAmmo);
-            AssignMethod(delegates, "ClosePhantom", ref _closePhantom);
-            AssignMethod(delegates, "SpawnPhantom", ref _spawnPhantom);
-            AssignMethod(delegates, "SetFocusTarget", ref _setPhantomFocusTarget);
-
             //ANPaL Compatibility
             AssignMethod(delegates, "IsWeaponShootingBase", ref _isWeaponShooting);
             AssignMethod(delegates, "GetShotsFiredBase", ref _getShotsFired);
