@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Text;
+using Sandbox.Game.Entities;
 using Sandbox.ModAPI;
 using VRage;
-using VRage.Utils;
 using VRage.Collections;
 using VRage.Game;
 using VRage.Game.Entity;
@@ -14,7 +12,7 @@ using VRageMath;
 namespace CoreSystems.Api
 {
     /// <summary>
-    /// https://github.com/sstixrud/CoreSystems/blob/master/BaseData/Scripts/CoreSystems/Api/CoreSystemsApiBase.cs
+    /// https://github.com/Ash-LikeSnow/WeaponCore/blob/master/Data/Scripts/CoreSystems/Api/CoreSystemsApiBase.cs
     /// </summary>
     public partial class WcApi
     {
@@ -60,6 +58,8 @@ namespace CoreSystems.Api
         private Func<MyEntity, long> _getPlayerController;
         private Func<MyEntity, MyTuple<bool, int, int>> _getProjectilesLockedOn;
         private Action<MyEntity, ICollection<Vector3D>> _getProjectilesLockedOnPos;
+        private Action<ICollection<MyTuple<ulong, Vector3D, int, long>>> _getAllSmartProjectiles;
+
         private Func<MyDefinitionId, float> _getMaxPower;
 
         private Func<MyEntity, float> _getOptimalDps;
@@ -90,112 +90,17 @@ namespace CoreSystems.Api
         private Func<MyEntity, int, bool> _isWeaponShooting;
         private Func<MyEntity, int, int> _getShotsFired;
         private Action<MyEntity, int, List<MyTuple<Vector3D, Vector3D, Vector3D, Vector3D, MatrixD, MatrixD>>> _getMuzzleInfo;
+        private Action<MyEntity, int, List<MyTuple<MyEntity, MatrixD>>> _getMuzzleParentEntity;
         private Func<MyEntity, int, MyTuple<Vector3D, Vector3D>> _getWeaponScope;
         private Func<MyEntity, int, MyTuple<MyDefinitionId, string, string, bool>> _getMagazineMap;
         private Func<MyEntity, int, MyDefinitionId, bool, bool> _setMagazine;
         private Func<MyEntity, int, bool> _forceReload;
-
-        private Action<MyEntity, float> _setRofMultiplier;
-        private Action<MyEntity, float> _setBaseDmgMultiplier;
-        private Action<MyEntity, float> _setAreaDmgMultiplier;
-        private Action<MyEntity, float> _setAreaRadiusMultiplier;
-        private Action<MyEntity, float> _setVelocityMultiplier;
-        private Action<MyEntity, bool> _setFiringAllowed;
-
-        private Func<MyEntity, float> _getRofMultiplier;
-        private Func<MyEntity, float> _getBaseDmgMultiplier;
-        private Func<MyEntity, float> _getAreaDmgMultiplier;
-        private Func<MyEntity, float> _getAreaRadiusMultiplier;
-        private Func<MyEntity, float> _getVelocityMultiplier;
-        private Func<MyEntity, bool> _getFiringAllowed;
-
-
-        /// <summary>
-        /// Multiplier for <paramref name="block"/>'s base Rate of Fire.
-        /// </summary>
-        /// <param name="block"></param>
-        /// <param name="rof"></param>
-        public void SetRofMultiplier(MyEntity block, float rof) =>
-            _setRofMultiplier?.Invoke(block, rof);
-
-        /// <summary>
-        /// BaseDamage multiplier for all projectiles from <paramref name="block"/>.
-        /// </summary>
-        /// <param name="block"></param>
-        /// <param name="multiplier"></param>
-        public void SetBaseDmgMultiplier(MyEntity block, float multiplier) => _setBaseDmgMultiplier?.Invoke(block, multiplier);
-
-        /// <summary>
-        /// AreaDamage multiplier for all projectiles from <paramref name="block"/>.
-        /// </summary>
-        /// <param name="block"></param>
-        /// <param name="multiplier"></param>
-        public void SetAreaDmgMultiplier(MyEntity block, float multiplier) => _setAreaDmgMultiplier?.Invoke(block, multiplier);
-
-        /// <summary>
-        /// AreaRadius multiplier for all projectiles from <paramref name="block"/>.
-        /// </summary>
-        /// <param name="block"></param>
-        /// <param name="multiplier"></param>
-        public void SetAreaRadiusMultiplier(MyEntity block, float multiplier) => _setAreaRadiusMultiplier?.Invoke(block, multiplier);
-
-        /// <summary>
-        /// Velocity multiplier for all projectiles from <paramref name="block"/>. Avoid setting this to zero.
-        /// </summary>
-        /// <param name="block"></param>
-        /// <param name="multiplier"></param>
-        public void SetVelocityMultiplier(MyEntity block, float multiplier) => _setVelocityMultiplier?.Invoke(block, multiplier);
-
-        /// <summary>
-        /// Toggles whether <paramref name="block"/> is allowed to shoot.
-        /// </summary>
-        /// <param name="block"></param>
-        /// <param name="multiplier"></param>
-        public void SetFiringAllowed(MyEntity block, bool isAllowed) => _setFiringAllowed?.Invoke(block, isAllowed);
+        private Action<Action<MyCubeGrid, BoundingSphereD, List<MyEntity>>> _addScanTargetsAction;
+        private Action<Action<MyCubeGrid, BoundingSphereD, List<MyEntity>>> _removeScanTargetsAction;
+        private Action<Func<IMyTerminalBlock, int, MyEntity, bool>> _setValidateWeaponTargetFunc;
 
         public void SetWeaponTarget(MyEntity weapon, MyEntity target, int weaponId = 0) =>
             _setWeaponTarget?.Invoke(weapon, target, weaponId);
-
-        /// <summary>
-        /// Multiplier for <paramref name="block"/>'s base Rate of Fire.
-        /// </summary>
-        /// <param name="block"></param>
-        public float GetRofMultiplier(MyEntity block) => _getRofMultiplier?.Invoke(block) ?? -2;
-
-        /// <summary>
-        /// BaseDamage multiplier for all projectiles from <paramref name="block"/>.
-        /// </summary>
-        /// <param name="block"></param>
-        /// <param name="multiplier"></param>
-        public float GetBaseDmgMultiplier(MyEntity block) => _getBaseDmgMultiplier?.Invoke(block) ?? -2;
-
-        /// <summary>
-        /// AreaDamage multiplier for all projectiles from <paramref name="block"/>.
-        /// </summary>
-        /// <param name="block"></param>
-        /// <param name="multiplier"></param>
-        public float GetAreaDmgMultiplier(MyEntity block) => _getAreaDmgMultiplier?.Invoke(block) ?? -2;
-
-        /// <summary>
-        /// AreaDamage multiplier for all projectiles from <paramref name="block"/>.
-        /// </summary>
-        /// <param name="block"></param>
-        /// <param name="multiplier"></param>
-        public float GetAreaRadiusMultiplier(MyEntity block) => _getAreaRadiusMultiplier?.Invoke(block) ?? -2;
-
-        /// <summary>
-        /// Velocity multiplier for all projectiles from <paramref name="block"/>. Avoid setting this to zero.
-        /// </summary>
-        /// <param name="block"></param>
-        /// <param name="multiplier"></param>
-        public float GetVelocityMultiplier(MyEntity block) => _getVelocityMultiplier?.Invoke(block) ?? -2;
-
-        /// <summary>
-        /// Toggles whether <paramref name="block"/> is allowed to shoot.
-        /// </summary>
-        /// <param name="block"></param>
-        /// <param name="multiplier"></param>
-        public bool GetFiringAllowed(MyEntity block) => _getFiringAllowed?.Invoke(block) ?? false;
 
         public void FireWeaponOnce(MyEntity weapon, bool allWeapons = true, int weaponId = 0) =>
             _fireWeaponOnce?.Invoke(weapon, allWeapons, weaponId);
@@ -266,10 +171,21 @@ namespace CoreSystems.Api
         public void GetAllCoreRifles(ICollection<MyDefinitionId> collection) => _getCoreRifles?.Invoke(collection);
         public void GetAllCoreArmors(IList<byte[]> collection) => _getCoreArmors?.Invoke(collection);
 
+        /// <summary>
+        /// Gets count of all projectiles that are targeting the MyEntity
+        /// </summary>
         public MyTuple<bool, int, int> GetProjectilesLockedOn(MyEntity victim) =>
             _getProjectilesLockedOn?.Invoke(victim) ?? new MyTuple<bool, int, int>();
+        /// <summary>
+        /// Gets positional information on projectiles that are actively locked on to the MyEntity
+        /// </summary>
         public void GetProjectilesLockedOnPos(MyEntity victim, ICollection<Vector3D> collection) =>
-           _getProjectilesLockedOnPos?.Invoke(victim, collection);
+            _getProjectilesLockedOnPos?.Invoke(victim, collection);
+        /// <summary>
+        /// Returns a collection of all smart projectiles with ID, position, age, and faction ID
+        /// </summary>
+        public void GetAllSmartProjectiles(ICollection<MyTuple<ulong, Vector3D, int, long>> collection) =>
+            _getAllSmartProjectiles?.Invoke(collection);
         public void GetSortedThreats(MyEntity shooter, ICollection<MyTuple<MyEntity, float>> collection) =>
             _getSortedThreats?.Invoke(shooter, collection);
         public void GetObstructions(MyEntity shooter, ICollection<MyEntity> collection) =>
@@ -315,7 +231,7 @@ namespace CoreSystems.Api
             _setProjectileState?.Invoke(projectileId, values);
 
         /// <summary>
-        /// Gets whether the weapon is shooting, used by Hakerman's Beam Logic
+        /// Gets whether the weapon is shooting, used by ANPaL Beam Logic
         /// Unexpected behavior may occur when using this method
         /// </summary>
         /// <param name="weaponBlock"></param>
@@ -324,7 +240,7 @@ namespace CoreSystems.Api
         internal bool IsWeaponShooting(MyEntity weaponBlock, int weaponId) => _isWeaponShooting?.Invoke(weaponBlock, weaponId) ?? false;
 
         /// <summary>
-        /// Gets how many shots the weapon fired, used by Hakerman's Beam Logic
+        /// Gets how many shots the weapon fired, used by ANPaL Beam Logic
         /// Unexpected behavior may occur when using this method
         /// </summary>
         /// <param name="weaponBlock"></param>
@@ -333,7 +249,7 @@ namespace CoreSystems.Api
         internal int GetShotsFired(MyEntity weaponBlock, int weaponId) => _getShotsFired?.Invoke(weaponBlock, weaponId) ?? -1;
 
         /// <summary>
-        /// Gets the info of the weapon's all muzzles, used by Hakerman's Beam Logic
+        /// Gets the info of weapon's all muzzles, used by ANPaL Beam Logic
         /// returns: A list that contains every muzzle's Position, LocalPosition, Direction, UpDirection, ParentMatrix, DummyMatrix
         /// Unexpected behavior may occur when using this method
         /// </summary>
@@ -342,6 +258,18 @@ namespace CoreSystems.Api
         /// <returns></returns>
         internal void GetMuzzleInfo(MyEntity weaponBlock, int weaponId, List<MyTuple<Vector3D, Vector3D, Vector3D, Vector3D, MatrixD, MatrixD>> output) =>
             _getMuzzleInfo?.Invoke(weaponBlock, weaponId, output);
+
+
+        /// <summary>
+        /// Gets parent subpart for weapon's all muzzles, used by ANPaL Beam Logic
+        /// returns: A list contains every muzzle's parent subpart and dummy offset
+        /// Unexpected behavior may occur when using this method
+        /// </summary>
+        /// <param name="weaponBlock"></param>
+        /// <param name="weaponId"></param>
+        /// <returns></returns>
+        internal void GetMuzzleParentEntity(MyEntity weaponBlock, int weaponId, List<MyTuple<MyEntity, MatrixD>> output) =>
+            _getMuzzleParentEntity?.Invoke(weaponBlock, weaponId, output);
 
         /// <summary>
         /// Entity can be a weapon or a grid/player (enables on all subgrids as well)
@@ -563,6 +491,25 @@ namespace CoreSystems.Api
 
         }
 
+        /// <summary>
+        /// Registers an action that tells a given grid's AI available target entities in a given sphere. NOT NETWORKED - make sure this is synced in your mod.
+        /// </summary>
+        /// <param name="action"></param>
+        public void AddScanTargetsAction(Action<MyCubeGrid, BoundingSphereD, List<MyEntity>> action) => _addScanTargetsAction?.Invoke(action);
+
+        /// <summary>
+        /// Unregisters an action that tells a given grid's AI available target entities in a given sphere. NOT NETWORKED - make sure this is synced in your mod.
+        /// </summary>
+        /// <param name="action"></param>
+        public void RemoveScanTargetsAction(Action<MyCubeGrid, BoundingSphereD, List<MyEntity>> action) => _removeScanTargetsAction?.Invoke(action);
+
+        /// <summary>
+        /// Assigns a function that determines if a given weapon can target a given entity. NOT NETWORKED - make sure this is synced in your mod.
+        /// </summary>
+        /// <param name="func">Block, PartId, target</param>
+        public void SetValidateWeaponTargetFunc(Func<IMyTerminalBlock, int, MyEntity, bool> func) =>
+            _setValidateWeaponTargetFunc?.Invoke(func);
+
         private const long Channel = 67549756549;
         private bool _getWeaponDefinitions;
         private bool _isRegistered;
@@ -628,27 +575,6 @@ namespace CoreSystems.Api
         {
             _apiInit = (delegates != null);
             /// base methods
-            try
-            {
-                AssignMethod(delegates, "SetRofMultiplier", ref _setRofMultiplier);
-                AssignMethod(delegates, "SetBaseDmgMultiplier", ref _setBaseDmgMultiplier);
-                AssignMethod(delegates, "SetAreaDmgMultiplier", ref _setAreaDmgMultiplier);
-                AssignMethod(delegates, "SetAreaRadiusMultiplier", ref _setAreaRadiusMultiplier);
-                AssignMethod(delegates, "SetVelocityMultiplier", ref _setVelocityMultiplier);
-                AssignMethod(delegates, "SetFiringAllowed", ref _setFiringAllowed);
-
-                AssignMethod(delegates, "GetRofMultiplier", ref _getRofMultiplier);
-                AssignMethod(delegates, "GetBaseDmgMultiplier", ref _getBaseDmgMultiplier);
-                AssignMethod(delegates, "GetAreaDmgMultiplier", ref _getAreaDmgMultiplier);
-                AssignMethod(delegates, "GetAreaRadiusMultiplier", ref _getAreaRadiusMultiplier);
-                AssignMethod(delegates, "GetVelocityMultiplier", ref _getVelocityMultiplier);
-                AssignMethod(delegates, "GetFiringAllowed", ref _getFiringAllowed);
-            }
-            catch (Exception e)
-            {
-                MyLog.Default.WriteLineAndConsole($"{e}"); // write to game's log
-            }
-
             AssignMethod(delegates, "GetAllWeaponDefinitions", ref _getAllWeaponDefinitions);
             AssignMethod(delegates, "GetCoreWeapons", ref _getCoreWeapons);
             AssignMethod(delegates, "GetNpcSafeWeapons", ref _getNpcSafeWeapons);
@@ -668,6 +594,7 @@ namespace CoreSystems.Api
             AssignMethod(delegates, "GetMaxPower", ref _getMaxPower);
             AssignMethod(delegates, "GetProjectilesLockedOnBase", ref _getProjectilesLockedOn);
             AssignMethod(delegates, "GetProjectilesLockedOnPos", ref _getProjectilesLockedOnPos);
+            AssignMethod(delegates, "GetAllSmartProjectiles", ref _getAllSmartProjectiles);
             AssignMethod(delegates, "GetAiFocusBase", ref _getAiFocus);
             AssignMethod(delegates, "SetAiFocusBase", ref _setAiFocus);
             AssignMethod(delegates, "ReleaseAiFocusBase", ref _releaseAiFocus);
@@ -712,10 +639,22 @@ namespace CoreSystems.Api
             AssignMethod(delegates, "IsTargetValidBase", ref _isTargetValid);
             AssignMethod(delegates, "GetWeaponScopeBase", ref _getWeaponScope);
 
-            //Hakerman's Beam Logic
+            //Phantom methods
+            AssignMethod(delegates, "GetTargetAssessment", ref _getTargetAssessment);
+            //AssignMethod(delegates, "GetPhantomInfo", ref _getPhantomInfo);
+            AssignMethod(delegates, "SetTriggerState", ref _setTriggerState);
+            AssignMethod(delegates, "AddMagazines", ref _addMagazines);
+            AssignMethod(delegates, "SetAmmo", ref _setAmmo);
+            AssignMethod(delegates, "ClosePhantom", ref _closePhantom);
+            AssignMethod(delegates, "SpawnPhantom", ref _spawnPhantom);
+            AssignMethod(delegates, "SetFocusTarget", ref _setPhantomFocusTarget);
+
+            //ANPaL Compatibility
             AssignMethod(delegates, "IsWeaponShootingBase", ref _isWeaponShooting);
             AssignMethod(delegates, "GetShotsFiredBase", ref _getShotsFired);
             AssignMethod(delegates, "GetMuzzleInfoBase", ref _getMuzzleInfo);
+            AssignMethod(delegates, "GetMuzzleParentEntityBase", ref _getMuzzleParentEntity);
+
             AssignMethod(delegates, "ToggleInfiniteAmmoBase", ref _toggoleInfiniteResources);
             AssignMethod(delegates, "RegisterEventMonitor", ref _monitorEvents);
             AssignMethod(delegates, "UnRegisterEventMonitor", ref _unmonitorEvents);
@@ -723,6 +662,10 @@ namespace CoreSystems.Api
 
             AssignMethod(delegates, "SetMagazine", ref _setMagazine);
             AssignMethod(delegates, "ForceReload", ref _forceReload);
+
+            AssignMethod(delegates, "AddScanTargetsAction", ref _addScanTargetsAction);
+            AssignMethod(delegates, "RemoveScanTargetsAction", ref _removeScanTargetsAction);
+            AssignMethod(delegates, "SetValidateWeaponTargetFunc", ref _setValidateWeaponTargetFunc);
 
             // Damage handler
             AssignMethod(delegates, "DamageHandler", ref _registerDamageEvent);
@@ -774,7 +717,7 @@ namespace CoreSystems.Api
             /// Don't touch anything below this line
             public void RegisterForDamage(long modId, EventType type)
             {
-                _wcApi.RegisterDamageEvent(modId, (int)type, DefaultCallBack);
+                _wcApi.RegisterDamageEvent(modId, (int) type, DefaultCallBack);
             }
 
             private void DefaultCallBack(ListReader<MyTuple<ulong, long, int, MyEntity, MyEntity, ListReader<MyTuple<Vector3D, object, float>>>> listReader)
