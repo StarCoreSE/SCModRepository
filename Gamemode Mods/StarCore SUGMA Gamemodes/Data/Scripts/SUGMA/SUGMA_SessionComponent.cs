@@ -159,6 +159,7 @@ namespace SC.SUGMA
                 ShareTrackApi.Init(ModContext, FinishInit);
                 RichHudClient.Init(DebugName, () => { Log.Info("RichHudClient registered."); }, null);
                 ShieldApi.Load();
+                FactionIconApi.Init();
             }
             catch (Exception ex)
             {
@@ -226,6 +227,7 @@ namespace SC.SUGMA
                 CommandHandler.Close();
                 ShareTrackApi.UnloadData();
                 ShieldApi.Unload();
+                FactionIconApi.Unload();
             }
             catch (Exception ex)
             {
