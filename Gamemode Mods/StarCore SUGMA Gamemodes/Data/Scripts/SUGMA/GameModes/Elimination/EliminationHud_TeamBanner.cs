@@ -1,4 +1,5 @@
 ﻿using RichHudFramework.UI;
+using SC.SUGMA.GameState;
 using SC.SUGMA.Utilities;
 using VRage.Game.ModAPI;
 using VRageMath;
@@ -13,6 +14,7 @@ namespace SC.SUGMA.GameModes.Elimination
         private readonly LabelBox _factionLabel;
         private readonly TexturedBox[] _ticketDividers;
         private LabelBox _ticketsLabel;
+        private readonly FactionIcon _factionIcon;
 
         public IMyFaction Faction;
         public int StartShipCount;
@@ -57,6 +59,13 @@ namespace SC.SUGMA.GameModes.Elimination
                 //AutoResize = false,
                 FitToTextElement = false,
                 Format = new GlyphFormat(Color.White, TextAlignment.Center)
+            };
+            _factionIcon = new FactionIcon(faction, this, true)
+            {
+                DimAlignment = DimAlignments.Height,
+                ParentAlignment = (isLeftAligned ? ParentAlignments.Left : ParentAlignments.Right),
+                Size = new Vector2(BaseHeight, BaseHeight),
+                Padding = new Vector2(4, 0)
             };
             //_ticketsLabel = new LabelBox(this)
             //{
