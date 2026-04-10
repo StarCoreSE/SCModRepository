@@ -13,6 +13,9 @@ namespace SC.SUGMA.GameState
     {
         public FactionIcon(IMyFaction faction, HudParentBase parent, bool small) : base(parent)
         {
+            if (faction == null)
+                return;
+
             if (!faction.FactionIcon.HasValue)
                 throw new Exception("Invalid faction icon!");
 
