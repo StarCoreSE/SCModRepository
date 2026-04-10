@@ -149,6 +149,13 @@ namespace SC.SUGMA.GameModes.Elimination
                 Color = HudConstants.HudBackgroundColor
             };
 
+            var discard = new FactionIcon(winner, _winnerLabel, false)
+            {
+                ParentAlignment = ParentAlignments.Bottom,
+                Size = new Vector2(64, 64),
+                Padding = new Vector2(4, 0)
+            };
+
             _winnerLabel.TextBoard.SetFormatting(GlyphFormat.White.WithColor(Color.Red).WithSize(3)
                 .WithAlignment(TextAlignment.Center));
         }
