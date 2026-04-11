@@ -1,2 +1,8 @@
 TstIcon
 TstIcon_small
+MCEIcon
+MCEIcon_small
+MCEIcon
+MCEIcon_small
+MCEIcon
+MCEIcon_small
