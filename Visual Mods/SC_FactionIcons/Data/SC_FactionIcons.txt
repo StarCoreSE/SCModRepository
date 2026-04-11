@@ -8,3 +8,5 @@ MCEIcon
 MCEIcon_small
 MCEIcon
 MCEIcon_small
+MCEIcon
+MCEIcon_small
