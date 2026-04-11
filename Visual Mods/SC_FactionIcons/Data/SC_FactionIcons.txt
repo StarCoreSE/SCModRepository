@@ -1,2 +1,5 @@
 TstIcon
 TstIcon_small
+
+TE0Icon
+TE0Icon_small
