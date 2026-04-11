@@ -2,3 +2,5 @@ TstIcon
 TstIcon_small
 MCEIcon
 MCEIcon_small
+TS4Icon
+TS4Icon_small
