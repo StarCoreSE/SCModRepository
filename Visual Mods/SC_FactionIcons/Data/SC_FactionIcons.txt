@@ -1,8 +1,2 @@
 TstIcon
 TstIcon_small
-MCEIcon
-MCEIcon_small
-TS5Icon
-TS5Icon_small
-TS4Icon
-TS4Icon_small
