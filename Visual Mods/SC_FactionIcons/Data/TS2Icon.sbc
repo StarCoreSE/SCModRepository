@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<TransparentMaterials>
+    
+		<TransparentMaterial>
+			<Id>
+				<TypeId>TransparentMaterialDefinition</TypeId>
+				<SubtypeId>TS2Icon</SubtypeId>
+			</Id>
+			<AlphaMistingEnable>false</AlphaMistingEnable>
+			<AlphaSaturation>1</AlphaSaturation>
+			<CanBeAffectedByOtherLights>false</CanBeAffectedByOtherLights>
+			<IgnoreDepth>false</IgnoreDepth>
+			<SoftParticleDistanceScale>0.1</SoftParticleDistanceScale>
+			<Texture>Textures\TS2Icon.DDS</Texture>
+		</TransparentMaterial>
+    
+		<TransparentMaterial>
+			<Id>
+				<TypeId>TransparentMaterialDefinition</TypeId>
+				<SubtypeId>TS2Icon_small</SubtypeId>
+			</Id>
+			<AlphaMistingEnable>false</AlphaMistingEnable>
+			<AlphaSaturation>1</AlphaSaturation>
+			<CanBeAffectedByOtherLights>false</CanBeAffectedByOtherLights>
+			<IgnoreDepth>false</IgnoreDepth>
+			<SoftParticleDistanceScale>0.1</SoftParticleDistanceScale>
+			<Texture>Textures\TS2Icon_small.DDS</Texture>
+		</TransparentMaterial>
+    
+	</TransparentMaterials>
+</Definitions>
