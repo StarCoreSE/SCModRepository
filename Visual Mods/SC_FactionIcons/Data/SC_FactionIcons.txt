@@ -3,3 +3,6 @@ TstIcon_small
 MCEIcon
 MCEIcon_smallTS2Icon
 TS2Icon_small
+
+TS3Icon
+TS3Icon_small
