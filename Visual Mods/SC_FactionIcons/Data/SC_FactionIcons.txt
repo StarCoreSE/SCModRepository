@@ -5,3 +5,5 @@ TE0Icon
 TE0Icon_small
 MCEIcon
 MCEIcon_small
+SIIIcon
+SIIIcon_small
