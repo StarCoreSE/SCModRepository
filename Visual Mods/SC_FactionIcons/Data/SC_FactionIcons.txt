@@ -7,3 +7,5 @@ MCEIcon
 MCEIcon_small
 SIIIcon
 SIIIcon_small
+TECIcon
+TECIcon_small
