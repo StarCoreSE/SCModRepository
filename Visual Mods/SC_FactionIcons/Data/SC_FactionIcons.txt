@@ -9,3 +9,5 @@ SIIIcon
 SIIIcon_small
 TECIcon
 TECIcon_small
+MACIcon
+MACIcon_small
