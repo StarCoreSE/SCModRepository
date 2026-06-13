@@ -58,6 +58,7 @@ namespace SC.SUGMA.GameModes.KOTH
 
         private readonly KOTHGamemode _gamemode;
         private readonly ElmHud_Window _windowBase;
+        private readonly FactionIcon[] _icons;
 
         private TexturedBox _captureIndicator;
 
@@ -87,6 +88,23 @@ namespace SC.SUGMA.GameModes.KOTH
             foreach (var banner in _windowBase.Banners)
             {
                 banner.Visible = false;
+            }
+
+            _icons = new FactionIcon[gamemode.TrackedFactions.Count];
+            int idx = 0;
+            foreach (var fac in gamemode.TrackedFactions.Keys)
+            {
+                var newBanner = new FactionIcon(fac, _windowBase, true)
+                {
+                    ParentAlignment =
+                        ParentAlignments.Inner |
+                        (idx % 2 == 0 ? ParentAlignments.Left : ParentAlignments.Right) |
+                        ParentAlignments.Top,
+
+                    Offset = new Vector2(0, (int)-Math.Floor(idx / 2f) * (EliminationHud_TeamBanner.BaseHeight + 5))
+                };
+                _icons[idx] = newBanner;
+                idx++;
             }
         }
 
@@ -132,6 +150,9 @@ namespace SC.SUGMA.GameModes.KOTH
         {
             _captureIndicator.Visible = false;
             _captureLabel.Visible = false;
+
+            foreach (var icon in _icons)
+                icon.Unregister();
 
             _windowBase._winnerLabel.Visible = false;
             _windowBase._winnerLabel = new LabelBox(_windowBase._timerLabel)
