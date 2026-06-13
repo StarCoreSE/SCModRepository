@@ -20,23 +20,13 @@ namespace Epstein_Fusion_DS.HudHelpers
         private readonly GlyphFormat _stdTextFormat = new GlyphFormat(color: HudConstants.HudTextColor, alignment: TextAlignment.Center, font: FontManager.GetFont("Monospace"));
         private readonly GlyphFormat _stdTextFormatInfo = new GlyphFormat(color: HudConstants.HudTextColor, textSize: 0.6f, alignment: TextAlignment.Left, font: FontManager.GetFont("Monospace"));
 
-        private static readonly Vector3D UnitTransformOffset = new Vector3D(-0.759375, -0.8, 0);
+        private static readonly Vector3D DefaultUnitTransformOffset = new Vector3D(-0.759375, -0.8, 0);
 
         public FusionWindow(HudParentBase parent) : base(parent)
         {
             RotationAxis = new Vector3(0, 1, 0);
             RotationAngle = 0.25f;
-
-            //var invert = MatrixD.CreatePerspectiveFieldOfView(MathHelper.ToRadians(90), 16 / 9d,
-            //    MyAPIGateway.Session.Camera.NearPlaneDistance, MyAPIGateway.Session.Camera.FarPlaneDistance);
-            //ModularApi.Log(Vector3D.Transform(new Vector3D(-0.0675, -0.04, -0.05), invert).ToString());
-
-            var fovMatrix = MatrixD.Invert(MatrixD.CreatePerspectiveFieldOfView(
-                MathHelper.ToRadians(MyAPIGateway.Session.Camera.FieldOfViewAngle), HudMain.AspectRatio,
-                MyAPIGateway.Session.Camera.NearPlaneDistance, MyAPIGateway.Session.Camera.FarPlaneDistance));
-
-            TransformOffset = Vector3D.Transform(UnitTransformOffset, fovMatrix);
-
+            UpdateTransformOffset();
 
             _backgroundBox = new TexturedBox(this)
             {
@@ -108,6 +98,7 @@ namespace Epstein_Fusion_DS.HudHelpers
         public void Update()
         {
             _ticks++;
+            UpdateTransformOffset();
             var playerCockpit = MyAPIGateway.Session?.Player?.Controller?.ControlledEntity?.Entity as IMyShipController;
 
             // Pulling the current HudState is SLOOOOWWWW, so we only pull it when tab is just pressed.
@@ -115,7 +106,7 @@ namespace Epstein_Fusion_DS.HudHelpers
             //    _shouldHide = MyAPIGateway.Session?.Config?.HudState != 1;
 
             // Hide HUD element if the player isn't in a cockpit
-            if (playerCockpit == null || _shouldHide)
+            if (playerCockpit == null || _shouldHide || !HeatManager.I.HeatHudVisible)
             {
                 if (Visible) Visible = false;
 
@@ -154,10 +145,12 @@ namespace Epstein_Fusion_DS.HudHelpers
                     reactorCount++;
                 }
             }
-            reactorIntegrity /= reactorCount;
+            reactorIntegrity = reactorCount > 0 ? reactorIntegrity / reactorCount : 1;
+            var hasFusion = totalFusionCapacity > 0;
+            var hasApiHeat = HeatManager.I.HasGridHeat(playerGrid);
 
-            // Hide HUD element if the grid has no fusion systems (capacity is always >0 for a fusion system)
-            if (totalFusionCapacity == 0)
+            // Hide HUD element if the grid has no fusion systems and no API-managed heat.
+            if (!hasFusion && !hasApiHeat)
             {
                 if (Visible) Visible = false;
                 return;
@@ -171,17 +164,30 @@ namespace Epstein_Fusion_DS.HudHelpers
             _heatBox.Width = 384 * HudConstants.HudSizeRatio.X * heatPct;
             _heatBox.Color = new Color(heatPct, 1-heatPct, 0, 0.75f);
 
-            _storBox.Width = 384 * HudConstants.HudSizeRatio.X * (totalFusionStored / totalFusionCapacity);
-
-            _infoLabelLeft.Text = new RichText
+            if (hasFusion)
             {
-                {(reactorIntegrity*100).ToString("N0") + "%", _stdTextFormatInfo.WithColor(reactorIntegrity > 0.6 ? Color.White : Color.Red)},
-                {" INTEGRITY - ", _stdTextFormatInfo},
-                {GetNoticeText(heatPct, reactorIntegrity), GetNoticeFormat(heatPct, reactorIntegrity)},
-            };
+                _storBox.Width = 384 * HudConstants.HudSizeRatio.X * (totalFusionStored / totalFusionCapacity);
+
+                _infoLabelLeft.Text = new RichText
+                {
+                    {(reactorIntegrity*100).ToString("N0") + "%", _stdTextFormatInfo.WithColor(reactorIntegrity > 0.6 ? Color.White : Color.Red)},
+                    {" INTEGRITY - ", _stdTextFormatInfo},
+                    {GetNoticeText(heatPct, reactorIntegrity), GetNoticeFormat(heatPct, reactorIntegrity)},
+                };
+
+                _storageLabel.Text = $"{(totalFusionStored / totalFusionCapacity) * 100:N0}% STOR";
+            }
+            else
+            {
+                _storBox.Width = 0;
+                _infoLabelLeft.Text = new RichText
+                {
+                    {"GRID HEAT API", _stdTextFormatInfo.WithColor(heatPct > 0.8f ? Color.Red : Color.White)},
+                };
+                _storageLabel.Text = "GRID HEAT";
+            }
 
             _heatLabel.Text = $"{heatPct*100:N0}% HEAT";
-            _storageLabel.Text = $"{(totalFusionStored / totalFusionCapacity) * 100:N0}% STOR";
 
             if (heatPct > 0.8f)
             {
@@ -202,6 +208,16 @@ namespace Epstein_Fusion_DS.HudHelpers
                     _soundEmitter = null;
                 }
             }
+        }
+
+        private void UpdateTransformOffset()
+        {
+            var fovMatrix = MatrixD.Invert(MatrixD.CreatePerspectiveFieldOfView(
+                MathHelper.ToRadians(MyAPIGateway.Session.Camera.FieldOfViewAngle), HudMain.AspectRatio,
+                MyAPIGateway.Session.Camera.NearPlaneDistance, MyAPIGateway.Session.Camera.FarPlaneDistance));
+
+            var offset = HeatManager.I?.HeatHudOffset ?? DefaultUnitTransformOffset;
+            TransformOffset = Vector3D.Transform(offset, fovMatrix);
         }
 
         private int _errRemainingTicks = 0;
