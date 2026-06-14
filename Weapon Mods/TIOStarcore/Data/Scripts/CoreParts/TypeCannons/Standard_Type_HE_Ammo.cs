@@ -184,7 +184,7 @@ namespace Scripts
                 {
                     Enable = true,
                     Radius = 11.25f, // Meters
-                    Damage = 12500f,
+                    Damage = 10000f,
                     Depth = 3.1f,
                     MaxAbsorb = 0f,
                     Falloff = Curve, //.NoFalloff applies the same damage to all blocks in radius
@@ -437,4 +437,5 @@ namespace Scripts
 
     }
 }
+
 
