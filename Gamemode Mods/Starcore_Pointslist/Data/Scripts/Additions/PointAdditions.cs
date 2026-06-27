@@ -627,9 +627,9 @@ namespace ShipPoints
             ["Type18_Artillery"] = 270,
             ["Type21_Artillery"] = 540,
             ["Type24_Artillery"] = 770,
-            ["Type19_Driver"] = 350,
-            ["Type22_Driver"] = 675,
-            ["Type25_Driver"] = 1000,
+            ["Type19_Driver"] = 300,
+            ["Type22_Driver"] = 600,
+            ["Type25_Driver"] = 900,
 
             ["UnguidedRocketTurret"] = 75,
             ["DrunkRocketTurret"] = 300,
