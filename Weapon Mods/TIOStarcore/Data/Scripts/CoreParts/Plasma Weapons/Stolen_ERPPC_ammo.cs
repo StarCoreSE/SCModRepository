@@ -114,7 +114,7 @@ namespace Scripts
                 FallOff = new FallOffDef
                 {
                     Distance = 3000f, // Distance at which damage begins falling off.
-                    MinMultipler = 0.6f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
+                    MinMultipler = 1f, // Value from 0.0001f to 1f where 0.1f would be a min damage of 10% of base damage.
                 },
                 Grids = new GridSizeDef
                 {
@@ -183,7 +183,7 @@ namespace Scripts
                     Damage = 20000f,
                     Depth = 4f,
                     MaxAbsorb = 0f,
-                    Falloff = Linear, //.NoFalloff applies the same damage to all blocks in radius
+                    Falloff = Pooled, //.NoFalloff applies the same damage to all blocks in radius
                     //.Linear drops evenly by distance from center out to max radius
                     //.Curve drops off damage sharply as it approaches the max radius
                     //.InvCurve drops off sharply from the middle and tapers to max radius
