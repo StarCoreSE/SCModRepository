@@ -21,6 +21,12 @@ namespace Epstein_Fusion_DS.HeatParts
 
         public float HeatGeneration;
 
+        public float ApiHeatCapacity;
+
+        public float ApiHeatDissipation;
+
+        public float ApiHeatGeneration;
+
         public float HeatRatio = float.Epsilon;
 
         public float HeatStored;
@@ -34,7 +40,12 @@ namespace Epstein_Fusion_DS.HeatParts
 
         public MyCubeGrid Grid { get; }
 
-        public float GrossHeatDissipation => (HeatDissipation + BaseHeatDissipation) * HeatRatio;
+        public float TotalHeatCapacity => HeatCapacity + BaseHeatCapacity + ApiHeatCapacity;
+
+        public float GrossHeatDissipation => (HeatDissipation + BaseHeatDissipation + ApiHeatDissipation) * HeatRatio;
+
+        public bool HasApiHeat =>
+            ApiHeatCapacity > 0 || ApiHeatDissipation > 0 || ApiHeatGeneration != 0 || HeatStored > 0;
 
         public void UpdateTick()
         {
@@ -42,7 +53,7 @@ namespace Epstein_Fusion_DS.HeatParts
                 Update15Tick();
             _ticks++;
 
-            if (HeatCapacity + BaseHeatCapacity == 0)
+            if (TotalHeatCapacity == 0)
             {
                 HeatRatio = 1;
                 HeatStored = 0;
@@ -52,10 +63,28 @@ namespace Epstein_Fusion_DS.HeatParts
             HeatStored += (HeatGeneration - GrossHeatDissipation) / 60;
             if (HeatStored < 0)
                 HeatStored = 0;
-            else if (HeatStored > HeatCapacity + BaseHeatCapacity)
-                HeatStored = HeatCapacity + BaseHeatCapacity;
+            else if (HeatStored > TotalHeatCapacity)
+                HeatStored = TotalHeatCapacity;
 
-            HeatRatio = HeatStored / (HeatCapacity + BaseHeatCapacity);
+            HeatRatio = HeatStored / TotalHeatCapacity;
+        }
+
+        public float AddHeat(float heat)
+        {
+            return SetHeat(HeatStored + heat);
+        }
+
+        public float SetHeat(float heat)
+        {
+            if (heat < 0)
+                heat = 0;
+
+            if (TotalHeatCapacity > 0 && heat > TotalHeatCapacity)
+                heat = TotalHeatCapacity;
+
+            HeatStored = heat;
+            HeatRatio = TotalHeatCapacity > 0 ? HeatStored / TotalHeatCapacity : HeatStored > 0 ? 1 : float.Epsilon;
+            return HeatStored;
         }
 
         public void RemoveAssembly(int assemblyId)
@@ -71,7 +100,7 @@ namespace Epstein_Fusion_DS.HeatParts
             BaseHeatDissipation = 2 * (gridSize.X * gridSize.Y + gridSize.Y * gridSize.Z + gridSize.Z * gridSize.X) *
                                   BaseHeatDissipationModifier;
 
-            HeatGeneration = 0;
+            HeatGeneration = ApiHeatGeneration;
             foreach (var assemblyId in ModularApi.GetGridAssemblies(Grid))
                 HeatGeneration +=
                     ModularApi.GetAssemblyProperty<float>(assemblyId,
