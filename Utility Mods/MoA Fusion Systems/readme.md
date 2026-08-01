@@ -1,28 +1,21 @@
-﻿Modular Assemblies Definitions
-============================
+﻿# Modular-Assemblies-Client-Mod-Template
+
+# THIS IS A TEMPLATE. [FOLLOW THE GUIDE.](https://github.com/StarCoreSE/Modular-Assemblies/wiki/Client-Mod-Template)
 
 Hey modders!
 
-This is a bit of a mess, so please bear with me. Ping [@aristeas.] on discord if you have any questions, comments, or concerns.
-https://discord.com/invite/kssCqSmbYZ
+Modular Assemblies is a mod framework designed to put the 'Engineer' back into 'Space Engineers'. It provides a simpler method of creating multiblock structures that provide added functionality, without killing performance or using esoteric vanilla tools.
 
-This mod behaves kind of like Assemblycore. Kind of. Definitions are declared in a similar manner, with an example below.
-What makes this mod unique (other than the modular stuff) is that you're supposed to run code in it. It will not function well otherwise.
+This is a client mod, and must reference the original framework to function. [Check out the wiki](https://github.com/StarCoreSE/Modular-Assemblies/wiki) for more information and guides, and feel free to message [@aristeas.] [on the StarCore discord](https://discord.gg/starcore) if you have any questions or comments.
 
-I tried my best to document stuff, most of it will be in DefinitionAPI.cs
-  - You can also hover over variables in most IDEs for a description.
-You have access to ModularApi, DebugDrawManager, and WcAPI; ModularApi handles stuff like GetMemberParts for modular assemblies, whereas WcAPI is your bog-standard Assemblycore ModAPI. DebugDrawManager is useful for debugging, and can be accessed statically.
-If you need logic to run in a MySessionComponent, you can init the ModularApi via LoadData() and UnloadData().
+By [[@Aristeas](https://github.com/ari-steas)], with help from [@Invalid](https://github.com/InvalidArgument3).
 
-Modular Definitions can be found in Data\Scripts\ILOVEKEEN\ModularAssemblies\. Don't forget to make a Assemblycore gun! It doesn't have to be part of the same mod, but it is in this example.
-As for file structure, DON'T TOUCH ANYTHING IN Scripts\ILOVEKEEN\ModularAssemblies OTHER THAN DEFINITIONS. It is all important.
+---
 
-Good luck, and happy modularizing!
+# USAGE
 
+This template is a functional mod on its own. It can be copied into your mods folder and edited as needed, or copied into an existing mod.
 
+Replace "YourMod" with the name of your mod, and edit `Data/Scripts/YourMod/ModularAssemblies/ExampleDefinition.cs` and `MasterDefinition.cs` to create your own assembly definitions.
 
-
-
-By [@aristeas.], with help from [@validpoint].
-Debug drawing referenced from [@m_digi]'s "(DevTool) Programmable Block Debug API"
-ModAPI, WcAPI, and included assembly mod referenced from [@darkstar0818]'s "AssemblyCore - 2.4"
+A sample sessioncomponent assembly manager, `Data/Scripts/YourMod/AssemblyManager.cs` (and the other scripts in its folder), has been provided as an example for more complex assemblies. They are not required for your mod to function, and may (should) be edited to your heart's content.
